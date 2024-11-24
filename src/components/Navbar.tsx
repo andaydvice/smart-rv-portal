@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Navigation, Shield, Battery, Tv, Music, Wifi } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   NavigationMenu,
@@ -48,17 +48,26 @@ const Navbar = () => {
                           <ul className="space-y-2 text-sm">
                             <li className="hover:text-primary transition-colors">
                               <NavigationMenuLink className="block p-2 rounded hover:bg-secondary/50">
-                                Navigation System
+                                <span className="flex items-center gap-2">
+                                  <Navigation className="h-4 w-4" />
+                                  Navigation System
+                                </span>
                               </NavigationMenuLink>
                             </li>
                             <li className="hover:text-primary transition-colors">
                               <NavigationMenuLink className="block p-2 rounded hover:bg-secondary/50">
-                                Security System
+                                <span className="flex items-center gap-2">
+                                  <Shield className="h-4 w-4" />
+                                  Security System
+                                </span>
                               </NavigationMenuLink>
                             </li>
                             <li className="hover:text-primary transition-colors">
                               <NavigationMenuLink className="block p-2 rounded hover:bg-secondary/50">
-                                Power Management
+                                <span className="flex items-center gap-2">
+                                  <Battery className="h-4 w-4" />
+                                  Power Management
+                                </span>
                               </NavigationMenuLink>
                             </li>
                           </ul>
@@ -68,17 +77,26 @@ const Navbar = () => {
                           <ul className="space-y-2 text-sm">
                             <li className="hover:text-primary transition-colors">
                               <NavigationMenuLink className="block p-2 rounded hover:bg-secondary/50">
-                                Smart TV
+                                <span className="flex items-center gap-2">
+                                  <Tv className="h-4 w-4" />
+                                  Smart TV
+                                </span>
                               </NavigationMenuLink>
                             </li>
                             <li className="hover:text-primary transition-colors">
                               <NavigationMenuLink className="block p-2 rounded hover:bg-secondary/50">
-                                Audio System
+                                <span className="flex items-center gap-2">
+                                  <Music className="h-4 w-4" />
+                                  Audio System
+                                </span>
                               </NavigationMenuLink>
                             </li>
                             <li className="hover:text-primary transition-colors">
                               <NavigationMenuLink className="block p-2 rounded hover:bg-secondary/50">
-                                Internet Connectivity
+                                <span className="flex items-center gap-2">
+                                  <Wifi className="h-4 w-4" />
+                                  Internet Connectivity
+                                </span>
                               </NavigationMenuLink>
                             </li>
                           </ul>
