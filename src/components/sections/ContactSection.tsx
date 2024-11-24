@@ -5,8 +5,8 @@ export const ContactSection = () => (
   <section className="relative py-32 px-4 overflow-hidden">
     <div className="absolute inset-0">
       <img
-        src="/lovable-uploads/smart-rv-interior.jpg"
-        alt="Luxurious Smart RV interior with modern technology"
+        src="/lovable-uploads/1c1bb4c0-13a3-42f8-9b4d-f0aa74e2adb3.png"
+        alt="Modern Smart RV exterior with tablet displaying website"
         className="w-full h-full object-cover"
         loading="eager"
       />
