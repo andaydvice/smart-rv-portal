@@ -29,8 +29,12 @@ const sustainability = [
 ];
 
 export const SustainabilitySection = () => (
-  <section className="py-24 px-4 bg-gradient-to-b from-white to-gray-50">
-    <div className="max-w-6xl mx-auto">
+  <section className="py-24 px-4 bg-gradient-to-b from-[#1E453E] to-[#0A261F] relative overflow-hidden">
+    <div className="absolute inset-0">
+      <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1542601906990-b4d3fb778b09')] opacity-10 bg-cover bg-fixed" />
+      <div className="absolute inset-0 bg-gradient-to-r from-[#1E453E]/80 to-[#0A261F]/80" />
+    </div>
+    <div className="max-w-6xl mx-auto relative z-10">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -38,11 +42,11 @@ export const SustainabilitySection = () => (
         transition={{ duration: 0.6 }}
         className="text-center mb-16"
       >
-        <span className="inline-block px-3 py-1 mb-4 text-sm font-medium bg-secondary rounded-full">
+        <span className="inline-block px-3 py-1 mb-4 text-sm font-medium bg-emerald-400/10 text-emerald-300 rounded-full">
           Eco-Friendly
         </span>
-        <h2 className="text-4xl font-bold mb-4">Sustainable Innovation</h2>
-        <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+        <h2 className="text-4xl font-bold mb-4 text-white">Sustainable Innovation</h2>
+        <p className="text-lg text-emerald-100/80 max-w-2xl mx-auto">
           Leading the way in eco-friendly RV technology
         </p>
       </motion.div>
@@ -55,12 +59,14 @@ export const SustainabilitySection = () => (
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: index * 0.2 }}
-            className="group relative overflow-hidden rounded-xl bg-white p-8 shadow-lg hover:shadow-xl transition-all duration-300"
+            className="group relative overflow-hidden rounded-xl bg-white/5 backdrop-blur-sm border border-emerald-400/10 hover:border-emerald-400/20 transition-all duration-300"
           >
-            <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-            <item.icon className="w-12 h-12 mb-4 text-primary" />
-            <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
-            <p className="text-gray-600">{item.description}</p>
+            <div className="absolute inset-0 bg-gradient-to-br from-emerald-400/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            <div className="p-8">
+              <item.icon className="w-12 h-12 mb-4 text-emerald-400" />
+              <h3 className="text-xl font-bold mb-2 text-white">{item.title}</h3>
+              <p className="text-emerald-100/80">{item.description}</p>
+            </div>
           </motion.div>
         ))}
       </div>
