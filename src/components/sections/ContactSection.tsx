@@ -7,7 +7,9 @@ export const ContactSection = () => (
       <img
         src="/lovable-uploads/b6a46bec-1ca8-4f7b-89fa-37bb5415d9fa.png"
         alt="Scenic mountain landscape"
-        className="w-full h-full object-cover"
+        className="w-full h-full object-cover object-center bg-no-repeat"
+        loading="eager"
+        style={{ imageRendering: 'crisp-edges' }}
       />
       <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/80 to-black/90 backdrop-blur-sm" />
     </div>
