@@ -41,31 +41,31 @@ const Navbar = () => {
                 <NavigationMenuItem>
                   <NavigationMenuTrigger className="bg-white/20 hover:bg-blue-400/80 text-white hover:text-white">Features</NavigationMenuTrigger>
                   <NavigationMenuContent>
-                    <div className="w-[400px] md:w-[500px] lg:w-[600px] bg-white rounded-lg shadow-lg border border-gray-200">
+                    <div className="w-[400px] md:w-[500px] lg:w-[600px] bg-gray-900/95 rounded-lg shadow-lg border border-gray-700">
                       <div className="grid grid-cols-2 gap-4 p-6">
                         <div className="space-y-4">
-                          <h4 className="font-semibold text-primary">Smart Features</h4>
+                          <h4 className="font-semibold text-white">Smart Features</h4>
                           <ul className="space-y-2 text-sm">
-                            <li className="hover:text-primary transition-colors">
-                              <NavigationMenuLink className="block p-2 rounded hover:bg-secondary/50">
+                            <li className="hover:text-blue-400 transition-colors text-gray-300">
+                              <NavigationMenuLink className="block p-2 rounded hover:bg-gray-800/50">
                                 <span className="flex items-center gap-2">
-                                  <Navigation className="h-4 w-4" />
+                                  <Navigation className="h-4 w-4 text-blue-400" />
                                   Navigation System
                                 </span>
                               </NavigationMenuLink>
                             </li>
-                            <li className="hover:text-primary transition-colors">
-                              <NavigationMenuLink className="block p-2 rounded hover:bg-secondary/50">
+                            <li className="hover:text-blue-400 transition-colors text-gray-300">
+                              <NavigationMenuLink className="block p-2 rounded hover:bg-gray-800/50">
                                 <span className="flex items-center gap-2">
-                                  <Shield className="h-4 w-4" />
+                                  <Shield className="h-4 w-4 text-green-400" />
                                   Security System
                                 </span>
                               </NavigationMenuLink>
                             </li>
-                            <li className="hover:text-primary transition-colors">
-                              <NavigationMenuLink className="block p-2 rounded hover:bg-secondary/50">
+                            <li className="hover:text-blue-400 transition-colors text-gray-300">
+                              <NavigationMenuLink className="block p-2 rounded hover:bg-gray-800/50">
                                 <span className="flex items-center gap-2">
-                                  <Battery className="h-4 w-4" />
+                                  <Battery className="h-4 w-4 text-yellow-400" />
                                   Power Management
                                 </span>
                               </NavigationMenuLink>
@@ -73,28 +73,28 @@ const Navbar = () => {
                           </ul>
                         </div>
                         <div className="space-y-4">
-                          <h4 className="font-semibold text-primary">Entertainment</h4>
+                          <h4 className="font-semibold text-white">Entertainment</h4>
                           <ul className="space-y-2 text-sm">
-                            <li className="hover:text-primary transition-colors">
-                              <NavigationMenuLink className="block p-2 rounded hover:bg-secondary/50">
+                            <li className="hover:text-blue-400 transition-colors text-gray-300">
+                              <NavigationMenuLink className="block p-2 rounded hover:bg-gray-800/50">
                                 <span className="flex items-center gap-2">
-                                  <Tv className="h-4 w-4" />
+                                  <Tv className="h-4 w-4 text-purple-400" />
                                   Smart TV
                                 </span>
                               </NavigationMenuLink>
                             </li>
-                            <li className="hover:text-primary transition-colors">
-                              <NavigationMenuLink className="block p-2 rounded hover:bg-secondary/50">
+                            <li className="hover:text-blue-400 transition-colors text-gray-300">
+                              <NavigationMenuLink className="block p-2 rounded hover:bg-gray-800/50">
                                 <span className="flex items-center gap-2">
-                                  <Music className="h-4 w-4" />
+                                  <Music className="h-4 w-4 text-pink-400" />
                                   Audio System
                                 </span>
                               </NavigationMenuLink>
                             </li>
-                            <li className="hover:text-primary transition-colors">
-                              <NavigationMenuLink className="block p-2 rounded hover:bg-secondary/50">
+                            <li className="hover:text-blue-400 transition-colors text-gray-300">
+                              <NavigationMenuLink className="block p-2 rounded hover:bg-gray-800/50">
                                 <span className="flex items-center gap-2">
-                                  <Wifi className="h-4 w-4" />
+                                  <Wifi className="h-4 w-4 text-cyan-400" />
                                   Internet Connectivity
                                 </span>
                               </NavigationMenuLink>
