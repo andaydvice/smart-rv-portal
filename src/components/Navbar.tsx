@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Menu, X, Navigation, Shield, Battery, Tv, Music, Wifi } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link, useNavigate } from "react-router-dom";
 import {
@@ -9,6 +9,7 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
+import { SmartFeatureLinks, EntertainmentLinks } from "./NavbarLinks";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -49,64 +50,8 @@ const Navbar = () => {
                   <NavigationMenuContent>
                     <div className="w-[400px] md:w-[500px] lg:w-[600px] bg-gray-900/95 rounded-lg shadow-lg border border-gray-700">
                       <div className="grid grid-cols-2 gap-4 p-6">
-                        <div className="space-y-4">
-                          <h4 className="font-semibold text-white">Smart Features</h4>
-                          <ul className="space-y-2 text-sm">
-                            <li className="hover:text-blue-400 transition-colors text-gray-300">
-                              <Link to="/features/navigation" className="block p-2 rounded hover:bg-gray-800/50">
-                                <span className="flex items-center gap-2">
-                                  <Navigation className="h-4 w-4 text-blue-500" />
-                                  Navigation System
-                                </span>
-                              </Link>
-                            </li>
-                            <li className="hover:text-blue-400 transition-colors text-gray-300">
-                              <Link to="/features/security" className="block p-2 rounded hover:bg-gray-800/50">
-                                <span className="flex items-center gap-2">
-                                  <Shield className="h-4 w-4 text-emerald-500" />
-                                  Security System
-                                </span>
-                              </Link>
-                            </li>
-                            <li className="hover:text-blue-400 transition-colors text-gray-300">
-                              <Link to="/features/power" className="block p-2 rounded hover:bg-gray-800/50">
-                                <span className="flex items-center gap-2">
-                                  <Battery className="h-4 w-4 text-yellow-500" />
-                                  Power Management
-                                </span>
-                              </Link>
-                            </li>
-                          </ul>
-                        </div>
-                        <div className="space-y-4">
-                          <h4 className="font-semibold text-white">Entertainment</h4>
-                          <ul className="space-y-2 text-sm">
-                            <li className="hover:text-blue-400 transition-colors text-gray-300">
-                              <Link to="/features" className="block p-2 rounded hover:bg-gray-800/50">
-                                <span className="flex items-center gap-2">
-                                  <Tv className="h-4 w-4 text-purple-500" />
-                                  Smart TV
-                                </span>
-                              </Link>
-                            </li>
-                            <li className="hover:text-blue-400 transition-colors text-gray-300">
-                              <Link to="/features" className="block p-2 rounded hover:bg-gray-800/50">
-                                <span className="flex items-center gap-2">
-                                  <Music className="h-4 w-4 text-pink-500" />
-                                  Audio System
-                                </span>
-                              </Link>
-                            </li>
-                            <li className="hover:text-blue-400 transition-colors text-gray-300">
-                              <Link to="/features" className="block p-2 rounded hover:bg-gray-800/50">
-                                <span className="flex items-center gap-2">
-                                  <Wifi className="h-4 w-4 text-cyan-500" />
-                                  Internet Connectivity
-                                </span>
-                              </Link>
-                            </li>
-                          </ul>
-                        </div>
+                        <SmartFeatureLinks />
+                        <EntertainmentLinks />
                       </div>
                     </div>
                   </NavigationMenuContent>
