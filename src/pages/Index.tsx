@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { 
   Car, Shield, Wifi, Battery, Navigation, 
-  Tv, Kitchen, Lock, Phone, Mic, 
+  Tv, Utensils, Lock, Phone, Mic, 
   Sun, Leaf, MapPin, HeartHandshake
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -252,7 +252,7 @@ const systems = [
     description: "Hands-free control with virtual assistant integration",
   },
   {
-    icon: Kitchen,
+    icon: Utensils,
     name: "Smart Kitchen",
     description: "Connected appliances with remote monitoring",
   },
