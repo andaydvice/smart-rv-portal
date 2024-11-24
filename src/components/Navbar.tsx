@@ -39,7 +39,7 @@ const Navbar = () => {
             <NavigationMenu>
               <NavigationMenuList className="gap-2">
                 <NavigationMenuItem>
-                  <NavigationMenuTrigger className="bg-white/20 hover:bg-blue-400/80 text-white hover:text-white">Features</NavigationMenuTrigger>
+                  <NavigationMenuTrigger className="bg-transparent hover:bg-blue-400/80 text-white hover:text-white">Features</NavigationMenuTrigger>
                   <NavigationMenuContent>
                     <div className="w-[400px] md:w-[500px] lg:w-[600px] bg-gray-900/95 rounded-lg shadow-lg border border-gray-700">
                       <div className="grid grid-cols-2 gap-4 p-6">
@@ -49,7 +49,7 @@ const Navbar = () => {
                             <li className="hover:text-blue-400 transition-colors text-gray-300">
                               <NavigationMenuLink className="block p-2 rounded hover:bg-gray-800/50">
                                 <span className="flex items-center gap-2">
-                                  <Navigation className="h-4 w-4 text-blue-400" />
+                                  <Navigation className="h-4 w-4 text-blue-500" />
                                   Navigation System
                                 </span>
                               </NavigationMenuLink>
@@ -57,7 +57,7 @@ const Navbar = () => {
                             <li className="hover:text-blue-400 transition-colors text-gray-300">
                               <NavigationMenuLink className="block p-2 rounded hover:bg-gray-800/50">
                                 <span className="flex items-center gap-2">
-                                  <Shield className="h-4 w-4 text-green-400" />
+                                  <Shield className="h-4 w-4 text-emerald-500" />
                                   Security System
                                 </span>
                               </NavigationMenuLink>
@@ -65,7 +65,7 @@ const Navbar = () => {
                             <li className="hover:text-blue-400 transition-colors text-gray-300">
                               <NavigationMenuLink className="block p-2 rounded hover:bg-gray-800/50">
                                 <span className="flex items-center gap-2">
-                                  <Battery className="h-4 w-4 text-yellow-400" />
+                                  <Battery className="h-4 w-4 text-yellow-500" />
                                   Power Management
                                 </span>
                               </NavigationMenuLink>
@@ -78,7 +78,7 @@ const Navbar = () => {
                             <li className="hover:text-blue-400 transition-colors text-gray-300">
                               <NavigationMenuLink className="block p-2 rounded hover:bg-gray-800/50">
                                 <span className="flex items-center gap-2">
-                                  <Tv className="h-4 w-4 text-purple-400" />
+                                  <Tv className="h-4 w-4 text-purple-500" />
                                   Smart TV
                                 </span>
                               </NavigationMenuLink>
@@ -86,7 +86,7 @@ const Navbar = () => {
                             <li className="hover:text-blue-400 transition-colors text-gray-300">
                               <NavigationMenuLink className="block p-2 rounded hover:bg-gray-800/50">
                                 <span className="flex items-center gap-2">
-                                  <Music className="h-4 w-4 text-pink-400" />
+                                  <Music className="h-4 w-4 text-pink-500" />
                                   Audio System
                                 </span>
                               </NavigationMenuLink>
@@ -94,7 +94,7 @@ const Navbar = () => {
                             <li className="hover:text-blue-400 transition-colors text-gray-300">
                               <NavigationMenuLink className="block p-2 rounded hover:bg-gray-800/50">
                                 <span className="flex items-center gap-2">
-                                  <Wifi className="h-4 w-4 text-cyan-400" />
+                                  <Wifi className="h-4 w-4 text-cyan-500" />
                                   Internet Connectivity
                                 </span>
                               </NavigationMenuLink>
@@ -106,16 +106,16 @@ const Navbar = () => {
                   </NavigationMenuContent>
                 </NavigationMenuItem>
                 <NavigationMenuItem>
-                  <Button variant="ghost" className="text-base bg-white/20 hover:bg-blue-400/80 text-white hover:text-white">Models</Button>
+                  <Button variant="ghost" className="text-base bg-transparent hover:bg-blue-400/80 text-white hover:text-white">Models</Button>
                 </NavigationMenuItem>
                 <NavigationMenuItem>
-                  <Button variant="ghost" className="text-base bg-white/20 hover:bg-blue-400/80 text-white hover:text-white">Technology</Button>
+                  <Button variant="ghost" className="text-base bg-transparent hover:bg-blue-400/80 text-white hover:text-white">Technology</Button>
                 </NavigationMenuItem>
                 <NavigationMenuItem>
-                  <Button variant="ghost" className="text-base bg-white/20 hover:bg-blue-400/80 text-white hover:text-white">Sustainability</Button>
+                  <Button variant="ghost" className="text-base bg-transparent hover:bg-blue-400/80 text-white hover:text-white">Sustainability</Button>
                 </NavigationMenuItem>
                 <NavigationMenuItem>
-                  <Button variant="ghost" className="text-base bg-white/20 hover:bg-blue-400/80 text-white hover:text-white">Contact</Button>
+                  <Button variant="ghost" className="text-base bg-transparent hover:bg-blue-400/80 text-white hover:text-white">Contact</Button>
                 </NavigationMenuItem>
               </NavigationMenuList>
             </NavigationMenu>
@@ -127,7 +127,7 @@ const Navbar = () => {
               variant="ghost"
               size="icon"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="bg-white/20 hover:bg-white/50 text-white"
+              className="bg-transparent hover:bg-white/50 text-white"
             >
               {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </Button>
@@ -137,7 +137,7 @@ const Navbar = () => {
         {/* Mobile menu */}
         {isMobileMenuOpen && (
           <div className="md:hidden">
-            <div className="px-2 pt-2 pb-3 space-y-1 bg-white/10 backdrop-blur-lg rounded-lg mt-2">
+            <div className="px-2 pt-2 pb-3 space-y-1 bg-gray-900/95 backdrop-blur-lg rounded-lg mt-2">
               <Button variant="ghost" className="w-full text-left justify-start text-white hover:bg-blue-400/80 hover:text-white">Features</Button>
               <Button variant="ghost" className="w-full text-left justify-start text-white hover:bg-blue-400/80 hover:text-white">Models</Button>
               <Button variant="ghost" className="w-full text-left justify-start text-white hover:bg-blue-400/80 hover:text-white">Technology</Button>
