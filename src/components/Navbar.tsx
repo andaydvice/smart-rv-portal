@@ -1,153 +1,85 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 import { Menu, X } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Link, useNavigate } from "react-router-dom";
-import {
-  NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuItem,
-  NavigationMenuList,
-  NavigationMenuTrigger,
-} from "@/components/ui/navigation-menu";
+import { Logo } from "./Logo";
 import { SmartFeatureLinks, EntertainmentLinks } from "./NavbarLinks";
 
 const Navbar = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav
-      className={`fixed w-full z-50 transition-all duration-300 ${
-        isScrolled ? "bg-white/95 backdrop-blur-lg shadow-md" : "bg-black/40 backdrop-blur-sm"
-      }`}
-    >
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-gray-900/95 backdrop-blur-sm border-b border-gray-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
-          <div className="flex-shrink-0">
-            <Link to="/" className="text-2xl font-bold text-white">Smart RV</Link>
-          </div>
-
-          {/* Desktop Navigation */}
-          <div className="hidden md:block">
-            <NavigationMenu>
-              <NavigationMenuList className="gap-2">
-                <NavigationMenuItem>
-                  <NavigationMenuTrigger 
-                    className="bg-transparent hover:bg-blue-400/80 text-white hover:text-white"
-                    onClick={() => navigate('/features')}
-                  >
-                    Features
-                  </NavigationMenuTrigger>
-                  <NavigationMenuContent>
-                    <div className="w-[400px] md:w-[500px] lg:w-[600px] bg-gray-900/95 rounded-lg shadow-lg border border-gray-700">
-                      <div className="grid grid-cols-2 gap-4 p-6">
-                        <SmartFeatureLinks />
-                        <EntertainmentLinks />
-                      </div>
-                    </div>
-                  </NavigationMenuContent>
-                </NavigationMenuItem>
-                <NavigationMenuItem>
-                  <Button 
-                    variant="ghost" 
-                    className="text-base bg-transparent hover:bg-blue-400/80 text-white hover:text-white"
-                    onClick={() => navigate('/models')}
-                  >
-                    Models
-                  </Button>
-                </NavigationMenuItem>
-                <NavigationMenuItem>
-                  <Button 
-                    variant="ghost" 
-                    className="text-base bg-transparent hover:bg-blue-400/80 text-white hover:text-white"
-                    onClick={() => navigate('/technology')}
-                  >
-                    Technology
-                  </Button>
-                </NavigationMenuItem>
-                <NavigationMenuItem>
-                  <Button 
-                    variant="ghost" 
-                    className="text-base bg-transparent hover:bg-blue-400/80 text-white hover:text-white"
-                    onClick={() => navigate('/contact')}
-                  >
-                    Contact
-                  </Button>
-                </NavigationMenuItem>
-              </NavigationMenuList>
-            </NavigationMenu>
-          </div>
-
+        <div className="flex items-center justify-between h-16">
+          <Link to="/" className="hover-scale">
+            <Logo />
+          </Link>
+          
           {/* Mobile menu button */}
-          <div className="md:hidden">
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="bg-transparent hover:bg-white/50 text-white"
-            >
-              {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-            </Button>
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="md:hidden text-gray-300 hover:text-white"
+          >
+            {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          </button>
+
+          {/* Desktop menu */}
+          <div className="hidden md:flex md:items-center md:space-x-8">
+            <Link to="/models" className="text-gray-300 hover:text-white transition-colors">
+              Models
+            </Link>
+            <Link to="/features" className="text-gray-300 hover:text-white transition-colors">
+              Features
+            </Link>
+            <Link to="/technology" className="text-gray-300 hover:text-white transition-colors">
+              Technology
+            </Link>
+            <Link to="/contact" className="text-gray-300 hover:text-white transition-colors">
+              Contact
+            </Link>
           </div>
         </div>
-
-        {/* Mobile menu */}
-        {isMobileMenuOpen && (
-          <div className="md:hidden">
-            <div className="px-2 pt-2 pb-3 space-y-1 bg-gray-900/95 backdrop-blur-lg rounded-lg mt-2">
-              <Button 
-                variant="ghost" 
-                className="w-full text-left justify-start text-white hover:bg-blue-400/80 hover:text-white"
-                onClick={() => {
-                  navigate('/features');
-                  setIsMobileMenuOpen(false);
-                }}
-              >
-                Features
-              </Button>
-              <Button 
-                variant="ghost" 
-                className="w-full text-left justify-start text-white hover:bg-blue-400/80 hover:text-white"
-                onClick={() => {
-                  navigate('/models');
-                  setIsMobileMenuOpen(false);
-                }}
-              >
-                Models
-              </Button>
-              <Button 
-                variant="ghost" 
-                className="w-full text-left justify-start text-white hover:bg-blue-400/80 hover:text-white"
-                onClick={() => {
-                  navigate('/technology');
-                  setIsMobileMenuOpen(false);
-                }}
-              >
-                Technology
-              </Button>
-              <Button 
-                variant="ghost" 
-                className="w-full text-left justify-start text-white hover:bg-blue-400/80 hover:text-white"
-                onClick={() => {
-                  navigate('/contact');
-                  setIsMobileMenuOpen(false);
-                }}
-              >
-                Contact
-              </Button>
-            </div>
-          </div>
-        )}
       </div>
+
+      {/* Mobile menu */}
+      {isOpen && (
+        <div className="md:hidden bg-gray-900/95 backdrop-blur-sm border-b border-gray-800">
+          <div className="px-2 pt-2 pb-3 space-y-1">
+            <Link
+              to="/models"
+              className="block px-3 py-2 text-gray-300 hover:text-white transition-colors"
+              onClick={() => setIsOpen(false)}
+            >
+              Models
+            </Link>
+            <Link
+              to="/features"
+              className="block px-3 py-2 text-gray-300 hover:text-white transition-colors"
+              onClick={() => setIsOpen(false)}
+            >
+              Features
+            </Link>
+            <Link
+              to="/technology"
+              className="block px-3 py-2 text-gray-300 hover:text-white transition-colors"
+              onClick={() => setIsOpen(false)}
+            >
+              Technology
+            </Link>
+            <Link
+              to="/contact"
+              className="block px-3 py-2 text-gray-300 hover:text-white transition-colors"
+              onClick={() => setIsOpen(false)}
+            >
+              Contact
+            </Link>
+          </div>
+          <div className="px-4 py-6 space-y-6 bg-gray-800/50">
+            <SmartFeatureLinks />
+            <EntertainmentLinks />
+          </div>
+        </div>
+      )}
     </nav>
   );
 };
