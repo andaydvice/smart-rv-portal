@@ -25,21 +25,21 @@ const Navbar = () => {
   return (
     <nav
       className={`fixed w-full z-50 transition-all duration-300 ${
-        isScrolled ? "bg-white/80 backdrop-blur-lg shadow-md" : "bg-transparent"
+        isScrolled ? "bg-white/95 backdrop-blur-lg shadow-md" : "bg-black/40 backdrop-blur-sm"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <div className="flex-shrink-0">
-            <span className="text-2xl font-bold text-primary">Smart RV</span>
+            <span className="text-2xl font-bold text-white">Smart RV</span>
           </div>
 
           {/* Desktop Navigation */}
           <div className="hidden md:block">
             <NavigationMenu>
-              <NavigationMenuList>
+              <NavigationMenuList className="gap-2">
                 <NavigationMenuItem>
-                  <NavigationMenuTrigger className="bg-white/95 hover:bg-white">Features</NavigationMenuTrigger>
+                  <NavigationMenuTrigger className="bg-white/20 hover:bg-white/30 text-white">Features</NavigationMenuTrigger>
                   <NavigationMenuContent>
                     <div className="w-[400px] md:w-[500px] lg:w-[600px] bg-white rounded-lg shadow-lg border border-gray-200">
                       <div className="grid grid-cols-2 gap-4 p-6">
@@ -88,16 +88,16 @@ const Navbar = () => {
                   </NavigationMenuContent>
                 </NavigationMenuItem>
                 <NavigationMenuItem>
-                  <Button variant="ghost" className="text-base bg-white/95 hover:bg-white">Models</Button>
+                  <Button variant="ghost" className="text-base bg-white/20 hover:bg-white/30 text-white">Models</Button>
                 </NavigationMenuItem>
                 <NavigationMenuItem>
-                  <Button variant="ghost" className="text-base bg-white/95 hover:bg-white">Technology</Button>
+                  <Button variant="ghost" className="text-base bg-white/20 hover:bg-white/30 text-white">Technology</Button>
                 </NavigationMenuItem>
                 <NavigationMenuItem>
-                  <Button variant="ghost" className="text-base bg-white/95 hover:bg-white">Sustainability</Button>
+                  <Button variant="ghost" className="text-base bg-white/20 hover:bg-white/30 text-white">Sustainability</Button>
                 </NavigationMenuItem>
                 <NavigationMenuItem>
-                  <Button variant="ghost" className="text-base bg-white/95 hover:bg-white">Contact</Button>
+                  <Button variant="ghost" className="text-base bg-white/20 hover:bg-white/30 text-white">Contact</Button>
                 </NavigationMenuItem>
               </NavigationMenuList>
             </NavigationMenu>
@@ -109,7 +109,7 @@ const Navbar = () => {
               variant="ghost"
               size="icon"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="bg-white/95 hover:bg-white"
+              className="bg-white/20 hover:bg-white/30 text-white"
             >
               {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </Button>
@@ -119,12 +119,12 @@ const Navbar = () => {
         {/* Mobile menu */}
         {isMobileMenuOpen && (
           <div className="md:hidden">
-            <div className="px-2 pt-2 pb-3 space-y-1 bg-white shadow-lg rounded-lg mt-2">
-              <Button variant="ghost" className="w-full text-left justify-start hover:bg-secondary/50">Features</Button>
-              <Button variant="ghost" className="w-full text-left justify-start hover:bg-secondary/50">Models</Button>
-              <Button variant="ghost" className="w-full text-left justify-start hover:bg-secondary/50">Technology</Button>
-              <Button variant="ghost" className="w-full text-left justify-start hover:bg-secondary/50">Sustainability</Button>
-              <Button variant="ghost" className="w-full text-left justify-start hover:bg-secondary/50">Contact</Button>
+            <div className="px-2 pt-2 pb-3 space-y-1 bg-white/10 backdrop-blur-lg rounded-lg mt-2">
+              <Button variant="ghost" className="w-full text-left justify-start text-white hover:bg-white/20">Features</Button>
+              <Button variant="ghost" className="w-full text-left justify-start text-white hover:bg-white/20">Models</Button>
+              <Button variant="ghost" className="w-full text-left justify-start text-white hover:bg-white/20">Technology</Button>
+              <Button variant="ghost" className="w-full text-left justify-start text-white hover:bg-white/20">Sustainability</Button>
+              <Button variant="ghost" className="w-full text-left justify-start text-white hover:bg-white/20">Contact</Button>
             </div>
           </div>
         )}
