@@ -69,11 +69,14 @@ const Index = () => {
                 </DialogHeader>
                 <div className="p-4">
                   <p>Contact our team to schedule a personalized demo of our Smart RV features.</p>
-                  {/* Add form here later */}
                 </div>
               </DialogContent>
             </Dialog>
-            <Button variant="outline" size="lg" className="border-white text-white hover:bg-white/10">
+            <Button 
+              variant="outline" 
+              size="lg" 
+              className="border-white text-white bg-black/40 hover:bg-white/10"
+            >
               Explore Models
             </Button>
           </div>
