@@ -1,6 +1,12 @@
 import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
-import { Car, Shield, Wifi, Battery, Navigation } from "lucide-react";
+import { 
+  Car, Shield, Wifi, Battery, Navigation, 
+  Tv, Kitchen, Lock, Phone, Mic, 
+  Sun, Leaf, MapPin, HeartHandshake
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 
 const Index = () => {
   const observerRef = useRef<IntersectionObserver | null>(null);
@@ -27,8 +33,8 @@ const Index = () => {
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
           <img
-            src="https://images.unsplash.com/photo-1721322800607-8c38375eef04"
-            alt="Luxury RV Interior"
+            src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d"
+            alt="Smart RV Technology"
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-black/40" />
@@ -40,32 +46,50 @@ const Index = () => {
           className="relative text-center text-white px-4"
         >
           <span className="inline-block px-3 py-1 mb-4 text-sm font-medium bg-white/10 backdrop-blur-sm rounded-full">
-            Introducing Smart RV
+            Welcome to Smart RV
           </span>
           <h1 className="text-5xl md:text-7xl font-bold mb-6">
             The Future of Travel
           </h1>
           <p className="text-xl md:text-2xl mb-8 max-w-2xl mx-auto">
-            Experience luxury and innovation in every journey
+            Experience luxury and innovation with cutting-edge technology
           </p>
-          <button className="px-8 py-4 bg-white text-black rounded-full font-medium hover-scale">
-            Explore Models
-          </button>
+          <div className="flex gap-4 justify-center">
+            <Dialog>
+              <DialogTrigger asChild>
+                <Button variant="default" size="lg" className="bg-white text-black hover:bg-white/90">
+                  Schedule Demo
+                </Button>
+              </DialogTrigger>
+              <DialogContent>
+                <DialogHeader>
+                  <DialogTitle>Schedule a Demo</DialogTitle>
+                </DialogHeader>
+                <div className="p-4">
+                  <p>Contact our team to schedule a personalized demo of our Smart RV features.</p>
+                  {/* Add form here later */}
+                </div>
+              </DialogContent>
+            </Dialog>
+            <Button variant="outline" size="lg" className="border-white text-white hover:bg-white/10">
+              Explore Models
+            </Button>
+          </div>
         </motion.div>
       </section>
 
-      {/* Features Section */}
+      {/* Features Overview */}
       <section className="py-24 px-4 bg-white">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16 fade-in-section">
             <span className="inline-block px-3 py-1 mb-4 text-sm font-medium bg-secondary rounded-full">
-              Features
+              Smart Features
             </span>
             <h2 className="text-4xl font-bold mb-4">
               Intelligent Living on Wheels
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Every detail designed for the modern traveler
+              Experience the perfect blend of comfort and innovation
             </p>
           </div>
 
@@ -87,43 +111,65 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Models Section */}
+      {/* Technology Showcase */}
       <section className="py-24 px-4 bg-secondary">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16 fade-in-section">
             <span className="inline-block px-3 py-1 mb-4 text-sm font-medium bg-white rounded-full">
-              Models
+              Smart Systems
             </span>
-            <h2 className="text-4xl font-bold mb-4">Choose Your Journey</h2>
+            <h2 className="text-4xl font-bold mb-4">Cutting-Edge Technology</h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Discover the perfect Smart RV for your adventures
+              Advanced systems for a smarter, more comfortable journey
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {models.map((model, index) => (
+            {systems.map((system, index) => (
               <motion.div
-                key={model.name}
+                key={system.name}
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: index * 0.2 }}
-                className="relative group cursor-pointer"
+                className="relative group cursor-pointer overflow-hidden rounded-lg bg-white p-6"
               >
-                <div className="relative overflow-hidden rounded-lg">
-                  <img
-                    src={model.image}
-                    alt={model.name}
-                    className="w-full aspect-video object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                </div>
-                <div className="absolute bottom-0 left-0 right-0 p-6 text-white transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
-                  <h3 className="text-2xl font-bold mb-2">{model.name}</h3>
-                  <p className="text-sm mb-4">{model.description}</p>
-                  <button className="px-6 py-2 bg-white text-black rounded-full text-sm font-medium hover:bg-opacity-90 transition-colors">
-                    Learn More
-                  </button>
-                </div>
+                <system.icon className="w-16 h-16 mb-4 text-primary" />
+                <h3 className="text-2xl font-bold mb-2">{system.name}</h3>
+                <p className="text-gray-600 mb-4">{system.description}</p>
+                <Button variant="outline" className="group-hover:bg-primary group-hover:text-white transition-colors">
+                  Learn More
+                </Button>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Sustainability Section */}
+      <section className="py-24 px-4 bg-white">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-16 fade-in-section">
+            <span className="inline-block px-3 py-1 mb-4 text-sm font-medium bg-secondary rounded-full">
+              Eco-Friendly
+            </span>
+            <h2 className="text-4xl font-bold mb-4">Sustainable Innovation</h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              Leading the way in eco-friendly RV technology
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {sustainability.map((item, index) => (
+              <motion.div
+                key={item.title}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.2 }}
+                className="bg-secondary/50 p-6 rounded-lg"
+              >
+                <item.icon className="w-12 h-12 mb-4 text-primary" />
+                <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
+                <p className="text-gray-600">{item.description}</p>
               </motion.div>
             ))}
           </div>
@@ -135,15 +181,20 @@ const Index = () => {
         <div className="max-w-4xl mx-auto text-center">
           <div className="fade-in-section">
             <span className="inline-block px-3 py-1 mb-4 text-sm font-medium bg-white/10 backdrop-blur-sm rounded-full">
-              Contact
+              Get Started
             </span>
-            <h2 className="text-4xl font-bold mb-4">Ready to Begin?</h2>
+            <h2 className="text-4xl font-bold mb-4">Ready to Transform Your Journey?</h2>
             <p className="text-lg mb-8 opacity-80">
-              Let's start your journey towards smarter travel
+              Connect with our team to learn more about Smart RV technology
             </p>
-            <button className="px-8 py-4 bg-white text-primary rounded-full font-medium hover-scale">
-              Schedule a Demo
-            </button>
+            <div className="flex gap-4 justify-center">
+              <Button variant="default" size="lg" className="bg-white text-primary hover:bg-white/90">
+                Contact Sales
+              </Button>
+              <Button variant="outline" size="lg" className="border-white text-white hover:bg-white/10">
+                View Brochure
+              </Button>
+            </div>
           </div>
         </div>
       </section>
@@ -177,18 +228,56 @@ const features = [
     title: "Autopilot Ready",
     description: "Advanced driver assistance for safer journeys",
   },
+  {
+    icon: Tv,
+    title: "Entertainment Suite",
+    description: "Smart TV and premium audio systems",
+  },
 ];
 
-const models = [
+const systems = [
   {
-    name: "Horizon Elite",
-    description: "Luxury meets innovation in our flagship model",
-    image: "https://images.unsplash.com/photo-1721322800607-8c38375eef04",
+    icon: Lock,
+    name: "Smart Security",
+    description: "Advanced security systems with remote monitoring and smart locks",
   },
   {
-    name: "Voyager Pro",
-    description: "Perfect balance of comfort and technology",
-    image: "https://images.unsplash.com/photo-1434494878577-86c23bcb06b9",
+    icon: Phone,
+    name: "Remote Control",
+    description: "Control all RV systems from your smartphone",
+  },
+  {
+    icon: Mic,
+    name: "Voice Control",
+    description: "Hands-free control with virtual assistant integration",
+  },
+  {
+    icon: Kitchen,
+    name: "Smart Kitchen",
+    description: "Connected appliances with remote monitoring",
+  },
+];
+
+const sustainability = [
+  {
+    icon: Sun,
+    title: "Solar Power",
+    description: "Integrated solar panels for sustainable energy",
+  },
+  {
+    icon: Leaf,
+    title: "Eco-Materials",
+    description: "Sustainable materials and manufacturing processes",
+  },
+  {
+    icon: MapPin,
+    title: "Green Routes",
+    description: "Eco-friendly route planning and charging stations",
+  },
+  {
+    icon: HeartHandshake,
+    title: "Carbon Neutral",
+    description: "Commitment to reducing environmental impact",
   },
 ];
 
