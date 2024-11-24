@@ -6,8 +6,8 @@ export const HeroSection = () => (
   <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
     <div className="absolute inset-0">
       <img
-        src="https://images.unsplash.com/photo-1504893524553-b855bce32c67"
-        alt="Scenic mountain landscape with river"
+        src="/lovable-uploads/7b0008af-4737-468b-820b-1f3d6b92a458.png"
+        alt="Luxury RV in scenic mountain landscape with pink sunset clouds"
         className="w-full h-full object-cover"
       />
       <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent" />
