@@ -31,7 +31,7 @@ const sustainability = [
 export const SustainabilitySection = () => (
   <section className="py-24 px-4 bg-gradient-to-b from-[#1E453E] to-[#0A261F] relative overflow-hidden">
     <div className="absolute inset-0">
-      <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1542601906990-b4d3fb778b09')] opacity-10 bg-cover bg-fixed" />
+      <div className="absolute inset-0 bg-[url('/lovable-uploads/b6a46bec-1ca8-4f7b-89fa-37bb5415d9fa.png')] opacity-10 bg-cover bg-fixed" />
       <div className="absolute inset-0 bg-gradient-to-r from-[#1E453E]/80 to-[#0A261F]/80" />
     </div>
     <div className="max-w-6xl mx-auto relative z-10">
