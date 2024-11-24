@@ -88,16 +88,16 @@ const Navbar = () => {
                   </NavigationMenuContent>
                 </NavigationMenuItem>
                 <NavigationMenuItem>
-                  <Button variant="ghost" className="text-base bg-white/20 hover:bg-white/30 text-white">Models</Button>
+                  <Button variant="ghost" className="text-base bg-black/40 hover:bg-white/30 text-white">Models</Button>
                 </NavigationMenuItem>
                 <NavigationMenuItem>
-                  <Button variant="ghost" className="text-base bg-white/20 hover:bg-white/30 text-white">Technology</Button>
+                  <Button variant="ghost" className="text-base bg-black/40 hover:bg-white/30 text-white">Technology</Button>
                 </NavigationMenuItem>
                 <NavigationMenuItem>
-                  <Button variant="ghost" className="text-base bg-white/20 hover:bg-white/30 text-white">Sustainability</Button>
+                  <Button variant="ghost" className="text-base bg-black/40 hover:bg-white/30 text-white">Sustainability</Button>
                 </NavigationMenuItem>
                 <NavigationMenuItem>
-                  <Button variant="ghost" className="text-base bg-white/20 hover:bg-white/30 text-white">Contact</Button>
+                  <Button variant="ghost" className="text-base bg-black/40 hover:bg-white/30 text-white">Contact</Button>
                 </NavigationMenuItem>
               </NavigationMenuList>
             </NavigationMenu>
@@ -109,7 +109,7 @@ const Navbar = () => {
               variant="ghost"
               size="icon"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="bg-white/20 hover:bg-white/30 text-white"
+              className="bg-black/40 hover:bg-white/30 text-white"
             >
               {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </Button>
@@ -119,7 +119,7 @@ const Navbar = () => {
         {/* Mobile menu */}
         {isMobileMenuOpen && (
           <div className="md:hidden">
-            <div className="px-2 pt-2 pb-3 space-y-1 bg-white/10 backdrop-blur-lg rounded-lg mt-2">
+            <div className="px-2 pt-2 pb-3 space-y-1 bg-black/40 backdrop-blur-lg rounded-lg mt-2">
               <Button variant="ghost" className="w-full text-left justify-start text-white hover:bg-white/20">Features</Button>
               <Button variant="ghost" className="w-full text-left justify-start text-white hover:bg-white/20">Models</Button>
               <Button variant="ghost" className="w-full text-left justify-start text-white hover:bg-white/20">Technology</Button>
