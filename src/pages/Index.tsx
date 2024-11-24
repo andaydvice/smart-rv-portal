@@ -35,8 +35,8 @@ const Index = () => {
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
           <img
-            src="https://images.unsplash.com/photo-1523987355523-c7b5b0dd90a7"
-            alt="Modern RV in mountain landscape"
+            src="https://images.unsplash.com/photo-1543395136-75b39bc00e0e"
+            alt="Luxury RV parked in scenic mountain landscape"
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-black/40" />
