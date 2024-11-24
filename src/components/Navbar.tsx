@@ -39,24 +39,48 @@ const Navbar = () => {
             <NavigationMenu>
               <NavigationMenuList>
                 <NavigationMenuItem>
-                  <NavigationMenuTrigger>Features</NavigationMenuTrigger>
+                  <NavigationMenuTrigger className="bg-white/95 hover:bg-white">Features</NavigationMenuTrigger>
                   <NavigationMenuContent>
-                    <div className="grid gap-3 p-6 w-[400px] md:w-[500px] lg:w-[600px]">
-                      <div className="grid grid-cols-2 gap-4">
-                        <div>
-                          <h4 className="text-sm font-medium leading-none mb-2">Smart Features</h4>
-                          <ul className="space-y-2">
-                            <li>Navigation System</li>
-                            <li>Security System</li>
-                            <li>Power Management</li>
+                    <div className="w-[400px] md:w-[500px] lg:w-[600px] bg-white rounded-lg shadow-lg border border-gray-200">
+                      <div className="grid grid-cols-2 gap-4 p-6">
+                        <div className="space-y-4">
+                          <h4 className="font-semibold text-primary">Smart Features</h4>
+                          <ul className="space-y-2 text-sm">
+                            <li className="hover:text-primary transition-colors">
+                              <NavigationMenuLink className="block p-2 rounded hover:bg-secondary/50">
+                                Navigation System
+                              </NavigationMenuLink>
+                            </li>
+                            <li className="hover:text-primary transition-colors">
+                              <NavigationMenuLink className="block p-2 rounded hover:bg-secondary/50">
+                                Security System
+                              </NavigationMenuLink>
+                            </li>
+                            <li className="hover:text-primary transition-colors">
+                              <NavigationMenuLink className="block p-2 rounded hover:bg-secondary/50">
+                                Power Management
+                              </NavigationMenuLink>
+                            </li>
                           </ul>
                         </div>
-                        <div>
-                          <h4 className="text-sm font-medium leading-none mb-2">Entertainment</h4>
-                          <ul className="space-y-2">
-                            <li>Smart TV</li>
-                            <li>Audio System</li>
-                            <li>Internet Connectivity</li>
+                        <div className="space-y-4">
+                          <h4 className="font-semibold text-primary">Entertainment</h4>
+                          <ul className="space-y-2 text-sm">
+                            <li className="hover:text-primary transition-colors">
+                              <NavigationMenuLink className="block p-2 rounded hover:bg-secondary/50">
+                                Smart TV
+                              </NavigationMenuLink>
+                            </li>
+                            <li className="hover:text-primary transition-colors">
+                              <NavigationMenuLink className="block p-2 rounded hover:bg-secondary/50">
+                                Audio System
+                              </NavigationMenuLink>
+                            </li>
+                            <li className="hover:text-primary transition-colors">
+                              <NavigationMenuLink className="block p-2 rounded hover:bg-secondary/50">
+                                Internet Connectivity
+                              </NavigationMenuLink>
+                            </li>
                           </ul>
                         </div>
                       </div>
@@ -64,16 +88,16 @@ const Navbar = () => {
                   </NavigationMenuContent>
                 </NavigationMenuItem>
                 <NavigationMenuItem>
-                  <Button variant="ghost" className="text-base">Models</Button>
+                  <Button variant="ghost" className="text-base bg-white/95 hover:bg-white">Models</Button>
                 </NavigationMenuItem>
                 <NavigationMenuItem>
-                  <Button variant="ghost" className="text-base">Technology</Button>
+                  <Button variant="ghost" className="text-base bg-white/95 hover:bg-white">Technology</Button>
                 </NavigationMenuItem>
                 <NavigationMenuItem>
-                  <Button variant="ghost" className="text-base">Sustainability</Button>
+                  <Button variant="ghost" className="text-base bg-white/95 hover:bg-white">Sustainability</Button>
                 </NavigationMenuItem>
                 <NavigationMenuItem>
-                  <Button variant="ghost" className="text-base">Contact</Button>
+                  <Button variant="ghost" className="text-base bg-white/95 hover:bg-white">Contact</Button>
                 </NavigationMenuItem>
               </NavigationMenuList>
             </NavigationMenu>
@@ -85,6 +109,7 @@ const Navbar = () => {
               variant="ghost"
               size="icon"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="bg-white/95 hover:bg-white"
             >
               {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </Button>
@@ -94,12 +119,12 @@ const Navbar = () => {
         {/* Mobile menu */}
         {isMobileMenuOpen && (
           <div className="md:hidden">
-            <div className="px-2 pt-2 pb-3 space-y-1 bg-white/80 backdrop-blur-lg rounded-lg mt-2">
-              <Button variant="ghost" className="w-full text-left justify-start">Features</Button>
-              <Button variant="ghost" className="w-full text-left justify-start">Models</Button>
-              <Button variant="ghost" className="w-full text-left justify-start">Technology</Button>
-              <Button variant="ghost" className="w-full text-left justify-start">Sustainability</Button>
-              <Button variant="ghost" className="w-full text-left justify-start">Contact</Button>
+            <div className="px-2 pt-2 pb-3 space-y-1 bg-white shadow-lg rounded-lg mt-2">
+              <Button variant="ghost" className="w-full text-left justify-start hover:bg-secondary/50">Features</Button>
+              <Button variant="ghost" className="w-full text-left justify-start hover:bg-secondary/50">Models</Button>
+              <Button variant="ghost" className="w-full text-left justify-start hover:bg-secondary/50">Technology</Button>
+              <Button variant="ghost" className="w-full text-left justify-start hover:bg-secondary/50">Sustainability</Button>
+              <Button variant="ghost" className="w-full text-left justify-start hover:bg-secondary/50">Contact</Button>
             </div>
           </div>
         )}
