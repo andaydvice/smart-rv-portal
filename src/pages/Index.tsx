@@ -4,17 +4,23 @@ import { FeaturesSection } from "@/components/sections/FeaturesSection";
 import { TechnologySection } from "@/components/sections/TechnologySection";
 import { SustainabilitySection } from "@/components/sections/SustainabilitySection";
 import { ContactSection } from "@/components/sections/ContactSection";
+import { motion } from "framer-motion";
 
 const Index = () => {
   return (
-    <div className="min-h-screen">
+    <motion.div 
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.6 }}
+      className="min-h-screen bg-gradient-to-b from-gray-50 to-white"
+    >
       <Navbar />
       <HeroSection />
       <FeaturesSection />
       <TechnologySection />
       <SustainabilitySection />
       <ContactSection />
-    </div>
+    </motion.div>
   );
 };
 

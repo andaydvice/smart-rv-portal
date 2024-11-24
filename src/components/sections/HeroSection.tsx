@@ -3,54 +3,83 @@ import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 
 export const HeroSection = () => (
-  <section className="relative h-screen flex items-center justify-center overflow-hidden">
+  <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
     <div className="absolute inset-0">
       <img
-        src="/lovable-uploads/b6a46bec-1ca8-4f7b-89fa-37bb5415d9fa.png"
-        alt="Modern luxury RV parked by a lake with mountains and sunset"
+        src="https://images.unsplash.com/photo-1504893524553-b855bce32c67"
+        alt="Scenic mountain landscape with river"
         className="w-full h-full object-cover"
       />
-      <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-black/40" />
+      <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent" />
     </div>
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8 }}
-      className="relative text-center text-white px-4"
+      transition={{ duration: 0.8, delay: 0.2 }}
+      className="relative text-center text-white px-4 max-w-5xl mx-auto"
     >
-      <span className="inline-block px-3 py-1 mb-4 text-sm font-medium bg-white/10 backdrop-blur-sm rounded-full">
+      <motion.span 
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.4 }}
+        className="inline-block px-4 py-2 mb-6 text-sm font-medium bg-white/10 backdrop-blur-sm rounded-full border border-white/20"
+      >
         Welcome to Smart RV
-      </span>
-      <h1 className="text-5xl md:text-7xl font-bold mb-6">
-        The Future of Travel
-      </h1>
-      <p className="text-xl md:text-2xl mb-8 max-w-2xl mx-auto">
-        Experience luxury and innovation with cutting-edge technology
-      </p>
-      <div className="flex gap-4 justify-center">
+      </motion.span>
+      <motion.h1 
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.6 }}
+        className="text-6xl md:text-7xl font-bold mb-8 leading-tight"
+      >
+        The Future of <br />
+        <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-emerald-400">
+          Luxury Travel
+        </span>
+      </motion.h1>
+      <motion.p 
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.8 }}
+        className="text-xl md:text-2xl mb-12 max-w-2xl mx-auto text-gray-200"
+      >
+        Experience unparalleled luxury and innovation with cutting-edge smart technology
+      </motion.p>
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 1 }}
+        className="flex flex-col sm:flex-row gap-6 justify-center items-center"
+      >
         <Dialog>
           <DialogTrigger asChild>
-            <Button variant="default" size="lg" className="bg-white text-black hover:bg-white/90">
+            <Button 
+              size="lg" 
+              className="bg-white text-black hover:bg-white/90 text-lg px-8 py-6 rounded-full transition-all duration-300 transform hover:scale-105"
+            >
               Schedule Demo
             </Button>
           </DialogTrigger>
-          <DialogContent>
+          <DialogContent className="sm:max-w-[425px]">
             <DialogHeader>
               <DialogTitle>Schedule a Demo</DialogTitle>
             </DialogHeader>
-            <div className="p-4">
-              <p>Contact our team to schedule a personalized demo of our Smart RV features.</p>
+            <div className="grid gap-4 py-4">
+              <p className="text-gray-600">
+                Contact our team to schedule a personalized demo of our Smart RV features.
+              </p>
             </div>
           </DialogContent>
         </Dialog>
         <Button 
           variant="outline" 
           size="lg" 
-          className="border-white text-white bg-black/40 hover:bg-white/10"
+          className="border-2 border-white text-white bg-transparent hover:bg-white/10 text-lg px-8 py-6 rounded-full transition-all duration-300 transform hover:scale-105"
         >
           Explore Models
         </Button>
-      </div>
+      </motion.div>
     </motion.div>
+    <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black/50 to-transparent" />
   </section>
 );
