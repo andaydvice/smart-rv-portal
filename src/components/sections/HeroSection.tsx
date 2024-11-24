@@ -74,7 +74,7 @@ export const HeroSection = () => (
         <Button 
           variant="outline" 
           size="lg" 
-          className="border-2 border-white text-white bg-transparent hover:bg-blue-500 hover:border-blue-500 text-lg px-8 py-6 rounded-full transition-all duration-300 transform hover:scale-105"
+          className="border-2 border-white text-white bg-transparent hover:bg-blue-500 hover:border-blue-500 hover:text-white text-lg px-8 py-6 rounded-full transition-all duration-300 transform hover:scale-105"
         >
           Explore Models
         </Button>
