@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
-import { Tv } from "lucide-react";
+import { Tv, Cast, Smartphone, Gamepad } from "lucide-react";
 
 const SmartTV = () => {
   return (
@@ -17,18 +17,55 @@ const SmartTV = () => {
             <Tv className="h-8 w-8 text-purple-500" />
             <h1 className="text-4xl font-bold text-white">Smart TV System</h1>
           </div>
-          <div className="bg-gray-800/50 p-8 rounded-lg border border-gray-700">
-            <h2 className="text-2xl font-semibold text-purple-400 mb-4">Entertainment Hub</h2>
-            <p className="text-gray-300 mb-6">
-              Our integrated Smart TV system brings entertainment to your RV with:
-            </p>
-            <ul className="list-disc list-inside space-y-3 text-gray-300">
-              <li>4K Ultra HD Display</li>
-              <li>Streaming service integration</li>
-              <li>Voice control capabilities</li>
-              <li>Multi-room viewing support</li>
-              <li>Mobile device casting</li>
-            </ul>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+            <div className="bg-gray-800/50 p-8 rounded-lg border border-gray-700">
+              <h2 className="text-2xl font-semibold text-purple-400 mb-4">Entertainment Hub</h2>
+              <p className="text-gray-300 mb-6">
+                Experience cinema-quality entertainment in your RV with our advanced Smart TV system. 
+                Featuring a 4K OLED display with HDR support, our system delivers stunning visuals 
+                and immersive entertainment wherever your journey takes you.
+              </p>
+              <img 
+                src="https://images.unsplash.com/photo-1593784991095-a205069470b6" 
+                alt="Luxury TV Setup" 
+                className="w-full h-64 object-cover rounded-lg mb-6"
+              />
+              <ul className="list-disc list-inside space-y-3 text-gray-300">
+                <li>4K Ultra HD Display with HDR Support</li>
+                <li>Smart Voice Control Integration</li>
+                <li>Multi-room Viewing Support</li>
+                <li>Mobile Device Casting</li>
+                <li>Gaming Mode with Low Latency</li>
+              </ul>
+            </div>
+
+            <div className="space-y-6">
+              <div className="bg-gray-800/50 p-6 rounded-lg border border-gray-700">
+                <Cast className="h-6 w-6 text-blue-400 mb-4" />
+                <h3 className="text-xl font-semibold text-white mb-2">Seamless Streaming</h3>
+                <p className="text-gray-300">
+                  Access all your favorite streaming services with built-in apps and 
+                  lightning-fast connectivity.
+                </p>
+              </div>
+
+              <div className="bg-gray-800/50 p-6 rounded-lg border border-gray-700">
+                <Smartphone className="h-6 w-6 text-green-400 mb-4" />
+                <h3 className="text-xl font-semibold text-white mb-2">Smart Control</h3>
+                <p className="text-gray-300">
+                  Control your TV from anywhere in your RV using our mobile app or voice commands.
+                </p>
+              </div>
+
+              <div className="bg-gray-800/50 p-6 rounded-lg border border-gray-700">
+                <Gamepad className="h-6 w-6 text-pink-400 mb-4" />
+                <h3 className="text-xl font-semibold text-white mb-2">Gaming Ready</h3>
+                <p className="text-gray-300">
+                  Enhanced gaming mode with reduced input lag and adaptive refresh rate technology.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </motion.div>
