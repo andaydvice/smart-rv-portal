@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import { Button } from "@/components/ui/button";
-import { Cpu, Wifi, Battery, Shield, Smartphone, Robot } from "lucide-react";
+import { Cpu, Wifi, Battery, Shield, Smartphone, Bot, ArrowRight } from "lucide-react";
 
 const technologies = [
   {
@@ -35,7 +35,7 @@ const technologies = [
     color: "text-pink-400"
   },
   {
-    icon: Robot,
+    icon: Bot,
     title: "Automation",
     description: "Smart automation for climate, lighting, and entertainment systems",
     color: "text-orange-400"
