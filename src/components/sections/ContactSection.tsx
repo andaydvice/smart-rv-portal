@@ -7,11 +7,15 @@ export const ContactSection = () => (
       <img
         src="/lovable-uploads/b6a46bec-1ca8-4f7b-89fa-37bb5415d9fa.png"
         alt="Scenic mountain landscape"
-        className="w-full h-full object-cover object-center bg-no-repeat"
+        className="w-full h-full object-cover object-center bg-no-repeat will-change-transform"
         loading="eager"
-        style={{ imageRendering: 'crisp-edges' }}
+        style={{
+          imageRendering: '-webkit-optimize-contrast',
+          transform: 'translateZ(0)',
+          backfaceVisibility: 'hidden',
+        }}
       />
-      <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/80 to-black/90 backdrop-blur-sm" />
+      <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/80 to-black/90 backdrop-blur-[2px]" />
     </div>
     <div className="relative max-w-4xl mx-auto text-center">
       <motion.div
