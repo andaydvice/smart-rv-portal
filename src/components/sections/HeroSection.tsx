@@ -43,7 +43,7 @@ export const HeroSection = () => (
         transition={{ duration: 0.6, delay: 0.8 }}
         className="text-xl md:text-2xl mb-12 max-w-2xl mx-auto text-gray-200"
       >
-        Experience unparalleled luxury and innovation with cutting-edge smart technology
+        Experience unparalleled luxury and innovation with cutting edge smart technology
       </motion.p>
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
