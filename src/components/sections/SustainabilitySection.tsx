@@ -61,7 +61,7 @@ export const SustainabilitySection = () => (
             transition={{ delay: index * 0.2 }}
             className="group relative overflow-hidden rounded-xl bg-white/5 backdrop-blur-sm border border-emerald-400/10 hover:border-emerald-400/20 transition-all duration-300"
           >
-            <div className="absolute inset-0 bg-gradient-to-br from-emerald-400/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            <div className="absolute inset-0 bg-gradient-to-br fromemerald-400/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             <div className="p-8">
               <item.icon className="w-12 h-12 mb-4 text-emerald-400" />
               <h3 className="text-xl font-bold mb-2 text-white">{item.title}</h3>
