@@ -31,33 +31,19 @@ const Navbar = () => {
           </button>
 
           {/* Desktop menu */}
-          <div className="hidden md:flex md:items-center md:justify-between md:flex-1 md:ml-8">
-            <NavigationMenu>
-              <NavigationMenuList>
-                <NavigationMenuItem>
-                  <NavigationMenuTrigger className="text-gray-300 hover:text-white transition-colors !bg-transparent text-base">
-                    Features
-                  </NavigationMenuTrigger>
-                  <NavigationMenuContent>
-                    <div className="grid gap-3 p-6 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr] bg-gray-900/95 backdrop-blur-sm">
-                      <SmartFeatureLinks />
-                      <EntertainmentLinks />
-                    </div>
-                  </NavigationMenuContent>
-                </NavigationMenuItem>
-              </NavigationMenuList>
-            </NavigationMenu>
-            <div className="flex items-center space-x-8">
-              <Link to="/models" className="text-gray-300 hover:text-white transition-colors text-base">
-                Models
-              </Link>
-              <Link to="/technology" className="text-gray-300 hover:text-white transition-colors text-base">
-                Technology
-              </Link>
-              <Link to="/contact" className="text-gray-300 hover:text-white transition-colors text-base">
-                Contact
-              </Link>
-            </div>
+          <div className="hidden md:flex md:items-center md:space-x-8 md:ml-auto">
+            <NavigationMenuTrigger className="text-gray-300 hover:text-white transition-colors !bg-transparent text-base">
+              Features
+            </NavigationMenuTrigger>
+            <Link to="/models" className="text-gray-300 hover:text-white transition-colors text-base">
+              Models
+            </Link>
+            <Link to="/technology" className="text-gray-300 hover:text-white transition-colors text-base">
+              Technology
+            </Link>
+            <Link to="/contact" className="text-gray-300 hover:text-white transition-colors text-base">
+              Contact
+            </Link>
           </div>
         </div>
       </div>
