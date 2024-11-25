@@ -18,10 +18,33 @@ const Navbar = () => {
     <nav className="fixed top-0 left-0 right-0 z-50 bg-gray-900/95 backdrop-blur-sm border-b border-gray-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          <Link to="/" className="hover-scale">
-            <Logo />
-          </Link>
-          
+          <div className="flex items-center">
+            <Link to="/" className="hover-scale">
+              <Logo />
+            </Link>
+            
+            {/* Desktop menu */}
+            <div className="hidden md:flex md:items-center md:ml-8">
+              <NavigationMenu>
+                <NavigationMenuList>
+                  <NavigationMenuItem>
+                    <NavigationMenuTrigger className="text-gray-300 hover:text-white transition-colors !bg-transparent text-base">
+                      Features
+                    </NavigationMenuTrigger>
+                    <NavigationMenuContent>
+                      <div className="w-[400px] lg:w-[500px] bg-gray-900/95 backdrop-blur-sm rounded-lg border border-gray-800 shadow-lg p-6">
+                        <div className="grid gap-6 lg:grid-cols-[.75fr_1fr]">
+                          <SmartFeatureLinks />
+                          <EntertainmentLinks />
+                        </div>
+                      </div>
+                    </NavigationMenuContent>
+                  </NavigationMenuItem>
+                </NavigationMenuList>
+              </NavigationMenu>
+            </div>
+          </div>
+
           {/* Mobile menu button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
@@ -30,36 +53,17 @@ const Navbar = () => {
             {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </button>
 
-          {/* Desktop menu */}
+          {/* Right side links */}
           <div className="hidden md:flex md:items-center md:space-x-8">
-            <NavigationMenu>
-              <NavigationMenuList>
-                <NavigationMenuItem>
-                  <NavigationMenuTrigger className="text-gray-300 hover:text-white transition-colors !bg-transparent text-base">
-                    Features
-                  </NavigationMenuTrigger>
-                  <NavigationMenuContent>
-                    <div className="fixed w-[400px] lg:w-[500px] bg-gray-900/95 backdrop-blur-sm rounded-lg border border-gray-800 shadow-lg p-6 left-0 transform-none">
-                      <div className="grid gap-6 lg:grid-cols-[.75fr_1fr]">
-                        <SmartFeatureLinks />
-                        <EntertainmentLinks />
-                      </div>
-                    </div>
-                  </NavigationMenuContent>
-                </NavigationMenuItem>
-              </NavigationMenuList>
-            </NavigationMenu>
-            <div className="flex items-center space-x-8">
-              <Link to="/models" className="text-gray-300 hover:text-white transition-colors text-base">
-                Models
-              </Link>
-              <Link to="/technology" className="text-gray-300 hover:text-white transition-colors text-base">
-                Technology
-              </Link>
-              <Link to="/contact" className="text-gray-300 hover:text-white transition-colors text-base">
-                Contact
-              </Link>
-            </div>
+            <Link to="/models" className="text-gray-300 hover:text-white transition-colors text-base">
+              Models
+            </Link>
+            <Link to="/technology" className="text-gray-300 hover:text-white transition-colors text-base">
+              Technology
+            </Link>
+            <Link to="/contact" className="text-gray-300 hover:text-white transition-colors text-base">
+              Contact
+            </Link>
           </div>
         </div>
       </div>
