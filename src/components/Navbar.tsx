@@ -31,11 +31,11 @@ const Navbar = () => {
           </button>
 
           {/* Desktop menu */}
-          <div className="hidden md:flex md:items-center md:space-x-8">
+          <div className="hidden md:flex md:items-center md:justify-between md:flex-1 md:ml-8">
             <NavigationMenu>
               <NavigationMenuList>
                 <NavigationMenuItem>
-                  <NavigationMenuTrigger className="text-gray-300 hover:text-white transition-colors !bg-transparent">
+                  <NavigationMenuTrigger className="text-gray-300 hover:text-white transition-colors !bg-transparent text-base">
                     Features
                   </NavigationMenuTrigger>
                   <NavigationMenuContent>
@@ -47,15 +47,17 @@ const Navbar = () => {
                 </NavigationMenuItem>
               </NavigationMenuList>
             </NavigationMenu>
-            <Link to="/models" className="text-gray-300 hover:text-white transition-colors">
-              Models
-            </Link>
-            <Link to="/technology" className="text-gray-300 hover:text-white transition-colors">
-              Technology
-            </Link>
-            <Link to="/contact" className="text-gray-300 hover:text-white transition-colors">
-              Contact
-            </Link>
+            <div className="flex items-center space-x-8">
+              <Link to="/models" className="text-gray-300 hover:text-white transition-colors text-base">
+                Models
+              </Link>
+              <Link to="/technology" className="text-gray-300 hover:text-white transition-colors text-base">
+                Technology
+              </Link>
+              <Link to="/contact" className="text-gray-300 hover:text-white transition-colors text-base">
+                Contact
+              </Link>
+            </div>
           </div>
         </div>
       </div>
