@@ -49,17 +49,15 @@ const Navbar = () => {
                 </NavigationMenuItem>
               </NavigationMenuList>
             </NavigationMenu>
-            <div className="flex items-center space-x-8">
-              <Link to="/models" className="text-gray-300 hover:text-white transition-colors text-base">
-                Models
-              </Link>
-              <Link to="/technology" className="text-gray-300 hover:text-white transition-colors text-base">
-                Technology
-              </Link>
-              <Link to="/contact" className="text-gray-300 hover:text-white transition-colors text-base">
-                Contact
-              </Link>
-            </div>
+            <Link to="/models" className="text-gray-300 hover:text-white transition-colors text-base">
+              Models
+            </Link>
+            <Link to="/technology" className="text-gray-300 hover:text-white transition-colors text-base">
+              Technology
+            </Link>
+            <Link to="/contact" className="text-gray-300 hover:text-white transition-colors text-base">
+              Contact
+            </Link>
           </div>
         </div>
       </div>
