@@ -32,9 +32,6 @@ const Navbar = () => {
 
           {/* Desktop menu */}
           <div className="hidden md:flex md:items-center md:space-x-8">
-            <Link to="/models" className="text-gray-300 hover:text-white transition-colors">
-              Models
-            </Link>
             <NavigationMenu>
               <NavigationMenuList>
                 <NavigationMenuItem>
@@ -50,6 +47,9 @@ const Navbar = () => {
                 </NavigationMenuItem>
               </NavigationMenuList>
             </NavigationMenu>
+            <Link to="/models" className="text-gray-300 hover:text-white transition-colors">
+              Models
+            </Link>
             <Link to="/technology" className="text-gray-300 hover:text-white transition-colors">
               Technology
             </Link>
@@ -61,44 +61,42 @@ const Navbar = () => {
       </div>
 
       {/* Mobile menu */}
-      {isOpen && (
-        <div className="md:hidden bg-gray-900/95 backdrop-blur-sm border-b border-gray-800">
-          <div className="px-2 pt-2 pb-3 space-y-1">
-            <Link
-              to="/models"
-              className="block px-3 py-2 text-gray-300 hover:text-white transition-colors"
-              onClick={() => setIsOpen(false)}
-            >
-              Models
-            </Link>
-            <Link
-              to="/features"
-              className="block px-3 py-2 text-gray-300 hover:text-white transition-colors"
-              onClick={() => setIsOpen(false)}
-            >
-              Features
-            </Link>
-            <Link
-              to="/technology"
-              className="block px-3 py-2 text-gray-300 hover:text-white transition-colors"
-              onClick={() => setIsOpen(false)}
-            >
-              Technology
-            </Link>
-            <Link
-              to="/contact"
-              className="block px-3 py-2 text-gray-300 hover:text-white transition-colors"
-              onClick={() => setIsOpen(false)}
-            >
-              Contact
-            </Link>
-          </div>
-          <div className="px-4 py-6 space-y-6 bg-gray-800/50">
-            <SmartFeatureLinks />
-            <EntertainmentLinks />
-          </div>
+      <div className={`md:hidden bg-gray-900/95 backdrop-blur-sm border-b border-gray-800 ${isOpen ? 'block' : 'hidden'}`}>
+        <div className="px-2 pt-2 pb-3 space-y-1">
+          <Link
+            to="/features"
+            className="block px-3 py-2 text-gray-300 hover:text-white transition-colors"
+            onClick={() => setIsOpen(false)}
+          >
+            Features
+          </Link>
+          <Link
+            to="/models"
+            className="block px-3 py-2 text-gray-300 hover:text-white transition-colors"
+            onClick={() => setIsOpen(false)}
+          >
+            Models
+          </Link>
+          <Link
+            to="/technology"
+            className="block px-3 py-2 text-gray-300 hover:text-white transition-colors"
+            onClick={() => setIsOpen(false)}
+          >
+            Technology
+          </Link>
+          <Link
+            to="/contact"
+            className="block px-3 py-2 text-gray-300 hover:text-white transition-colors"
+            onClick={() => setIsOpen(false)}
+          >
+            Contact
+          </Link>
         </div>
-      )}
+        <div className="px-4 py-6 space-y-6 bg-gray-800/50">
+          <SmartFeatureLinks />
+          <EntertainmentLinks />
+        </div>
+      </div>
     </nav>
   );
 };
