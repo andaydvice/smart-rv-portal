@@ -47,3 +47,12 @@
   opacity: 1;
   transform: translateY(0);
 }
+
+/* Navigation Menu Styles */
+[data-radix-navigation-menu-content] {
+  position: absolute !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  min-width: max-content !important;
+  z-index: 100 !important;
+}

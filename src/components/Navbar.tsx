@@ -38,10 +38,12 @@ const Navbar = () => {
                   <NavigationMenuTrigger className="text-gray-300 hover:text-white transition-colors !bg-transparent text-base">
                     Features
                   </NavigationMenuTrigger>
-                  <NavigationMenuContent className="absolute top-full left-0 z-[100]">
-                    <div className="grid gap-3 p-6 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr] bg-gray-900/95 backdrop-blur-sm rounded-lg mt-2 border border-gray-800">
-                      <SmartFeatureLinks />
-                      <EntertainmentLinks />
+                  <NavigationMenuContent>
+                    <div className="fixed w-[400px] lg:w-[500px] bg-gray-900/95 backdrop-blur-sm rounded-lg border border-gray-800 shadow-lg p-6">
+                      <div className="grid gap-6 lg:grid-cols-[.75fr_1fr]">
+                        <SmartFeatureLinks />
+                        <EntertainmentLinks />
+                      </div>
                     </div>
                   </NavigationMenuContent>
                 </NavigationMenuItem>
