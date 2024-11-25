@@ -51,8 +51,8 @@
 /* Navigation Menu Styles */
 [data-radix-navigation-menu-content] {
   position: absolute !important;
-  left: 50% !important;
-  transform: translateX(-50%) !important;
+  left: 0 !important;
+  transform: none !important;
   min-width: max-content !important;
   z-index: 100 !important;
 }

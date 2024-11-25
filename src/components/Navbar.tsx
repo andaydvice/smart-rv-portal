@@ -31,7 +31,7 @@ const Navbar = () => {
           </button>
 
           {/* Desktop menu */}
-          <div className="hidden md:flex md:items-center md:space-x-8 md:ml-auto">
+          <div className="hidden md:flex md:items-center md:space-x-8">
             <NavigationMenu>
               <NavigationMenuList>
                 <NavigationMenuItem>
@@ -39,7 +39,7 @@ const Navbar = () => {
                     Features
                   </NavigationMenuTrigger>
                   <NavigationMenuContent>
-                    <div className="fixed w-[400px] lg:w-[500px] bg-gray-900/95 backdrop-blur-sm rounded-lg border border-gray-800 shadow-lg p-6">
+                    <div className="fixed w-[400px] lg:w-[500px] bg-gray-900/95 backdrop-blur-sm rounded-lg border border-gray-800 shadow-lg p-6 left-0 transform-none">
                       <div className="grid gap-6 lg:grid-cols-[.75fr_1fr]">
                         <SmartFeatureLinks />
                         <EntertainmentLinks />
@@ -49,15 +49,17 @@ const Navbar = () => {
                 </NavigationMenuItem>
               </NavigationMenuList>
             </NavigationMenu>
-            <Link to="/models" className="text-gray-300 hover:text-white transition-colors text-base">
-              Models
-            </Link>
-            <Link to="/technology" className="text-gray-300 hover:text-white transition-colors text-base">
-              Technology
-            </Link>
-            <Link to="/contact" className="text-gray-300 hover:text-white transition-colors text-base">
-              Contact
-            </Link>
+            <div className="flex items-center space-x-8">
+              <Link to="/models" className="text-gray-300 hover:text-white transition-colors text-base">
+                Models
+              </Link>
+              <Link to="/technology" className="text-gray-300 hover:text-white transition-colors text-base">
+                Technology
+              </Link>
+              <Link to="/contact" className="text-gray-300 hover:text-white transition-colors text-base">
+                Contact
+              </Link>
+            </div>
           </div>
         </div>
       </div>
