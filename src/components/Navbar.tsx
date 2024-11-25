@@ -39,7 +39,7 @@ const Navbar = () => {
                     Features
                   </NavigationMenuTrigger>
                   <NavigationMenuContent className="absolute top-full left-0 z-[100]">
-                    <div className="grid gap-3 p-6 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr] bg-gray-900/95 backdrop-blur-sm rounded-lg mt-2">
+                    <div className="grid gap-3 p-6 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr] bg-gray-900/95 backdrop-blur-sm rounded-lg mt-2 border border-gray-800">
                       <SmartFeatureLinks />
                       <EntertainmentLinks />
                     </div>
