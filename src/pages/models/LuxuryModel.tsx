@@ -12,7 +12,7 @@ const LuxuryModel = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6 }}
-        className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 pt-16"
+        className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 pt-24"
       >
         <div className="container mx-auto px-4 py-8">
           <Link to="/models">
