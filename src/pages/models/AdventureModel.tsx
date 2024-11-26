@@ -12,9 +12,9 @@ const AdventureModel = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6 }}
-        className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 pt-24"
+        className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800"
       >
-        <div className="container mx-auto px-4 py-8">
+        <div className="container mx-auto px-4 pt-24">
           <Link to="/models">
             <Button variant="outline" className="mb-8">
               <ArrowLeft className="w-4 h-4 mr-2" /> Back to Models
