@@ -8,7 +8,7 @@ import { useToast } from "@/hooks/use-toast";
 const models = [
   {
     name: "Luxury Class",
-    image: "https://images.unsplash.com/photo-1543968996-ee822b8176ba?auto=format&fit=crop&w=800",
+    image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=800",
     price: "Starting at $150,000",
     description: "Experience unparalleled luxury with our flagship model, featuring advanced automation and premium finishes.",
     features: [
@@ -21,7 +21,7 @@ const models = [
   },
   {
     name: "Adventure Class",
-    image: "https://images.unsplash.com/photo-1523987355523-c7b5b0dd90a7?auto=format&fit=crop&w=800",
+    image: "https://images.unsplash.com/photo-1518005020951-eccb494ad742?auto=format&fit=crop&w=800",
     price: "Starting at $120,000",
     description: "Built for the modern explorer, combining durability with smart technology for off-grid adventures.",
     features: [
@@ -34,7 +34,7 @@ const models = [
   },
   {
     name: "Compact Smart",
-    image: "https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&w=800",
+    image: "https://images.unsplash.com/photo-1605810230434-7631ac76ec81?auto=format&fit=crop&w=800",
     price: "Starting at $90,000",
     description: "Perfect for weekend getaways, packed with smart features in an efficient, easy-to-maneuver package.",
     features: [
