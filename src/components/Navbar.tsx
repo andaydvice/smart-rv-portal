@@ -14,6 +14,10 @@ import {
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
+
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-gray-900/95 backdrop-blur-sm border-b border-gray-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -24,7 +28,7 @@ const Navbar = () => {
           
           {/* Mobile menu button */}
           <button
-            onClick={() => setIsOpen(!isOpen)}
+            onClick={toggleMenu}
             className="md:hidden text-gray-300 hover:text-white"
           >
             {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -68,28 +72,27 @@ const Navbar = () => {
           <Link
             to="/features"
             className="block px-3 py-2 text-gray-300 hover:text-white transition-colors"
-            onClick={() => setIsOpen(false)}
           >
             Features
           </Link>
           <Link
             to="/models"
             className="block px-3 py-2 text-gray-300 hover:text-white transition-colors"
-            onClick={() => setIsOpen(false)}
+            onClick={toggleMenu}
           >
             Models
           </Link>
           <Link
             to="/technology"
             className="block px-3 py-2 text-gray-300 hover:text-white transition-colors"
-            onClick={() => setIsOpen(false)}
+            onClick={toggleMenu}
           >
             Technology
           </Link>
           <Link
             to="/contact"
             className="block px-3 py-2 text-gray-300 hover:text-white transition-colors"
-            onClick={() => setIsOpen(false)}
+            onClick={toggleMenu}
           >
             Contact
           </Link>
