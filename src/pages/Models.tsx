@@ -1,12 +1,14 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Battery, Navigation, Shield, Wifi } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 
 const models = [
   {
     name: "Luxury Class",
-    image: "https://images.unsplash.com/photo-1518770660439-4636190af475",
+    image: "https://images.unsplash.com/photo-1545545796-b1a724143d6a",
     price: "Starting at $150,000",
     description: "Experience unparalleled luxury with our flagship model, featuring advanced automation and premium finishes.",
     features: [
@@ -15,10 +17,11 @@ const models = [
       { icon: Battery, text: "Extended Range Power System", color: "text-yellow-400" },
       { icon: Wifi, text: "High-Speed Internet", color: "text-purple-400" },
     ],
+    learnMoreLink: "/models/luxury"
   },
   {
     name: "Adventure Class",
-    image: "https://images.unsplash.com/photo-1523987355523-c7b5b0dd90a7",
+    image: "https://images.unsplash.com/photo-1545155015-8c5e6042e8c0",
     price: "Starting at $120,000",
     description: "Built for the modern explorer, combining durability with smart technology for off-grid adventures.",
     features: [
@@ -27,10 +30,11 @@ const models = [
       { icon: Navigation, text: "Off-Road Navigation", color: "text-blue-400" },
       { icon: Wifi, text: "Satellite Connectivity", color: "text-purple-400" },
     ],
+    learnMoreLink: "/models/adventure"
   },
   {
     name: "Compact Smart",
-    image: "https://images.unsplash.com/photo-1533591380348-14193f1de18f",
+    image: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957",
     price: "Starting at $90,000",
     description: "Perfect for weekend getaways, packed with smart features in an efficient, easy-to-maneuver package.",
     features: [
@@ -39,10 +43,21 @@ const models = [
       { icon: Shield, text: "Smart Security System", color: "text-emerald-400" },
       { icon: Wifi, text: "4G/5G Connectivity", color: "text-purple-400" },
     ],
+    learnMoreLink: "/models/compact"
   }
 ];
 
 const Models = () => {
+  const { toast } = useToast();
+
+  const handleCompareModels = () => {
+    toast({
+      title: "Coming Soon",
+      description: "The model comparison feature will be available in the next update.",
+      duration: 3000,
+    });
+  };
+
   return (
     <>
       <Navbar />
@@ -94,9 +109,11 @@ const Models = () => {
                       </div>
                     ))}
                   </div>
-                  <Button className="w-full bg-blue-500 hover:bg-blue-600">
-                    Learn More <ArrowRight className="w-4 h-4 ml-2" />
-                  </Button>
+                  <Link to={model.learnMoreLink}>
+                    <Button className="w-full bg-blue-500 hover:bg-blue-600">
+                      Learn More <ArrowRight className="w-4 h-4 ml-2" />
+                    </Button>
+                  </Link>
                 </div>
               </motion.div>
             ))}
@@ -108,7 +125,11 @@ const Models = () => {
             transition={{ delay: 0.8 }}
             className="text-center mt-16"
           >
-            <Button variant="outline" className="bg-transparent border-white text-white hover:bg-white hover:text-gray-900">
+            <Button 
+              variant="outline" 
+              onClick={handleCompareModels}
+              className="bg-transparent border-white text-white hover:bg-white hover:text-gray-900"
+            >
               Compare All Models <ArrowRight className="w-4 h-4 ml-2" />
             </Button>
           </motion.div>
