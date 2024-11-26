@@ -18,6 +18,10 @@ const Navbar = () => {
     setIsOpen(!isOpen);
   };
 
+  const closeMenu = () => {
+    setIsOpen(false);
+  };
+
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-gray-900/95 backdrop-blur-sm border-b border-gray-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -26,7 +30,6 @@ const Navbar = () => {
             <Logo />
           </Link>
           
-          {/* Mobile menu button */}
           <button
             onClick={toggleMenu}
             className="md:hidden text-gray-300 hover:text-white"
@@ -34,7 +37,6 @@ const Navbar = () => {
             {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </button>
 
-          {/* Desktop menu */}
           <div className="hidden md:flex md:items-center md:space-x-8">
             <NavigationMenu>
               <NavigationMenuList>
@@ -53,13 +55,13 @@ const Navbar = () => {
                 </NavigationMenuItem>
               </NavigationMenuList>
             </NavigationMenu>
-            <Link to="/models" className="text-gray-300 hover:text-white transition-colors text-base">
+            <Link to="/models" className="text-gray-300 hover:text-white transition-colors text-base" onClick={closeMenu}>
               Models
             </Link>
-            <Link to="/technology" className="text-gray-300 hover:text-white transition-colors text-base">
+            <Link to="/technology" className="text-gray-300 hover:text-white transition-colors text-base" onClick={closeMenu}>
               Technology
             </Link>
-            <Link to="/contact" className="text-gray-300 hover:text-white transition-colors text-base">
+            <Link to="/contact" className="text-gray-300 hover:text-white transition-colors text-base" onClick={closeMenu}>
               Contact
             </Link>
           </div>
@@ -69,30 +71,27 @@ const Navbar = () => {
       {/* Mobile menu */}
       <div className={`md:hidden bg-gray-900/95 backdrop-blur-sm border-b border-gray-800 ${isOpen ? 'block' : 'hidden'}`}>
         <div className="px-2 pt-2 pb-3 space-y-1">
-          <Link
-            to="/features"
-            className="block px-3 py-2 text-gray-300 hover:text-white transition-colors"
-          >
+          <div className="block px-3 py-2 text-gray-300 hover:text-white transition-colors">
             Features
-          </Link>
+          </div>
           <Link
             to="/models"
             className="block px-3 py-2 text-gray-300 hover:text-white transition-colors"
-            onClick={toggleMenu}
+            onClick={closeMenu}
           >
             Models
           </Link>
           <Link
             to="/technology"
             className="block px-3 py-2 text-gray-300 hover:text-white transition-colors"
-            onClick={toggleMenu}
+            onClick={closeMenu}
           >
             Technology
           </Link>
           <Link
             to="/contact"
             className="block px-3 py-2 text-gray-300 hover:text-white transition-colors"
-            onClick={toggleMenu}
+            onClick={closeMenu}
           >
             Contact
           </Link>
