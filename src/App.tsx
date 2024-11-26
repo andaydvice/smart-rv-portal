@@ -15,6 +15,9 @@ import PowerManagement from "./pages/features/PowerManagement";
 import SmartTV from "./pages/features/SmartTV";
 import AudioSystem from "./pages/features/AudioSystem";
 import InternetConnectivity from "./pages/features/InternetConnectivity";
+import LuxuryModel from "./pages/models/LuxuryModel";
+import AdventureModel from "./pages/models/AdventureModel";
+import CompactModel from "./pages/models/CompactModel";
 
 const queryClient = new QueryClient();
 
@@ -36,6 +39,9 @@ const App = () => (
               <Route path="/features/audio" element={<AudioSystem />} />
               <Route path="/features/internet" element={<InternetConnectivity />} />
               <Route path="/models" element={<Models />} />
+              <Route path="/models/luxury" element={<LuxuryModel />} />
+              <Route path="/models/adventure" element={<AdventureModel />} />
+              <Route path="/models/compact" element={<CompactModel />} />
               <Route path="/technology" element={<Technology />} />
               <Route path="/contact" element={<Contact />} />
             </Routes>
