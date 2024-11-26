@@ -13,23 +13,19 @@ import {
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [showFeatures, setShowFeatures] = useState(false);
+  const [mobileFeatures, setMobileFeatures] = useState(false);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
-    if (!isOpen) {
-      setShowFeatures(false);
-    }
   };
 
-  const toggleFeatures = (e: React.MouseEvent) => {
-    e.preventDefault();
-    setShowFeatures(!showFeatures);
+  const toggleMobileFeatures = () => {
+    setMobileFeatures(!mobileFeatures);
   };
 
   const closeMenu = () => {
     setIsOpen(false);
-    setShowFeatures(false);
+    setMobileFeatures(false);
   };
 
   return (
@@ -79,43 +75,47 @@ const Navbar = () => {
       </div>
 
       {/* Mobile menu */}
-      <div className={`md:hidden bg-gray-900/95 backdrop-blur-sm border-b border-gray-800 ${isOpen ? 'block' : 'hidden'}`}>
-        <div className="px-2 pt-2 pb-3 space-y-1">
-          <button
-            onClick={toggleFeatures}
-            className="w-full text-left px-3 py-2 text-gray-300 hover:text-white transition-colors"
-          >
-            Features
-          </button>
-          <Link
-            to="/models"
-            className="block px-3 py-2 text-gray-300 hover:text-white transition-colors"
-            onClick={closeMenu}
-          >
-            Models
-          </Link>
-          <Link
-            to="/technology"
-            className="block px-3 py-2 text-gray-300 hover:text-white transition-colors"
-            onClick={closeMenu}
-          >
-            Technology
-          </Link>
-          <Link
-            to="/contact"
-            className="block px-3 py-2 text-gray-300 hover:text-white transition-colors"
-            onClick={closeMenu}
-          >
-            Contact
-          </Link>
-        </div>
-        {showFeatures && (
-          <div className="px-4 py-6 space-y-6 bg-gray-800/50">
-            <SmartFeatureLinks />
-            <EntertainmentLinks />
+      {isOpen && (
+        <div className="md:hidden bg-gray-900/95 backdrop-blur-sm border-b border-gray-800">
+          <div className="px-2 pt-2 pb-3 space-y-1">
+            <button
+              onClick={toggleMobileFeatures}
+              className="w-full text-left px-3 py-2 text-gray-300 hover:text-white transition-colors"
+            >
+              Features {mobileFeatures ? '▼' : '▶'}
+            </button>
+            
+            {mobileFeatures && (
+              <div className="ml-4 space-y-6 bg-gray-800/50 p-4 rounded-lg">
+                <SmartFeatureLinks />
+                <EntertainmentLinks />
+              </div>
+            )}
+            
+            <Link
+              to="/models"
+              className="block px-3 py-2 text-gray-300 hover:text-white transition-colors"
+              onClick={closeMenu}
+            >
+              Models
+            </Link>
+            <Link
+              to="/technology"
+              className="block px-3 py-2 text-gray-300 hover:text-white transition-colors"
+              onClick={closeMenu}
+            >
+              Technology
+            </Link>
+            <Link
+              to="/contact"
+              className="block px-3 py-2 text-gray-300 hover:text-white transition-colors"
+              onClick={closeMenu}
+            >
+              Contact
+            </Link>
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </nav>
   );
 };
