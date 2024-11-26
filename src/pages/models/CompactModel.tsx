@@ -8,12 +8,7 @@ const CompactModel = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800">
       <Navbar />
-      <motion.main 
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.6 }}
-        className="container mx-auto px-4 pt-28 pb-16"
-      >
+      <div className="container mx-auto px-4 pt-28 pb-16">
         <Link to="/models">
           <Button variant="outline" className="mb-8">
             <ArrowLeft className="w-4 h-4 mr-2" /> Back to Models
@@ -58,7 +53,7 @@ const CompactModel = () => {
             </div>
           </div>
         </div>
-      </motion.main>
+      </div>
     </div>
   );
 };

@@ -8,12 +8,7 @@ const LuxuryModel = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800">
       <Navbar />
-      <motion.main 
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.6 }}
-        className="container mx-auto px-4 pt-28 pb-16"
-      >
+      <div className="container mx-auto px-4 pt-28 pb-16">
         <Link to="/models">
           <Button variant="outline" className="mb-8">
             <ArrowLeft className="w-4 h-4 mr-2" /> Back to Models
@@ -32,7 +27,7 @@ const LuxuryModel = () => {
             <h1 className="text-4xl font-bold text-white mb-4">Luxury Class</h1>
             <p className="text-blue-400 text-xl mb-4">Starting at $150,000</p>
             <p className="text-gray-300 mb-8">
-              Experience unparalleled luxury with our flagship model, featuring advanced automation and premium finishes. 
+              Experience unparalleled luxury with our flagship model, featuring advanced automation and premium finishes.
               The Luxury Class RV sets new standards in mobile living with its state-of-the-art technology and comfort features.
             </p>
             <div className="space-y-4 text-gray-300">
@@ -58,7 +53,7 @@ const LuxuryModel = () => {
             </div>
           </div>
         </div>
-      </motion.main>
+      </div>
     </div>
   );
 };
