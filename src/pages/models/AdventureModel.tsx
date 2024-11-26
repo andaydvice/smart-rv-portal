@@ -6,15 +6,15 @@ import { ArrowLeft, Navigation, Shield, Battery, Wifi } from "lucide-react";
 
 const AdventureModel = () => {
   return (
-    <>
+    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800">
       <Navbar />
       <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6 }}
-        className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 pt-24"
+        className="pt-24 px-4 pb-12"
       >
-        <div className="max-w-7xl mx-auto px-4 py-8">
+        <div className="max-w-7xl mx-auto">
           <Link to="/models">
             <Button variant="outline" className="mb-8">
               <ArrowLeft className="w-4 h-4 mr-2" /> Back to Models
@@ -61,7 +61,7 @@ const AdventureModel = () => {
           </div>
         </div>
       </motion.div>
-    </>
+    </div>
   );
 };
 
