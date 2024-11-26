@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Navigation, Shield, Battery, Wifi } from "lucide-react";
 
 const LuxuryModel = () => {
   return (
@@ -12,9 +12,9 @@ const LuxuryModel = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6 }}
-        className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 pt-16"
+        className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 pt-24"
       >
-        <div className="max-w-7xl mx-auto px-4 py-20">
+        <div className="max-w-7xl mx-auto px-4 py-8">
           <Link to="/models">
             <Button variant="outline" className="mb-8">
               <ArrowLeft className="w-4 h-4 mr-2" /> Back to Models
@@ -24,9 +24,9 @@ const LuxuryModel = () => {
           <div className="grid md:grid-cols-2 gap-8">
             <div>
               <img
-                src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=800"
+                src="https://images.unsplash.com/photo-1543465077-db45d34b88a5?auto=format&fit=crop&w=800"
                 alt="Luxury Class RV"
-                className="rounded-lg shadow-xl"
+                className="rounded-lg shadow-xl w-full h-[400px] object-cover"
               />
             </div>
             <div>
@@ -38,15 +38,23 @@ const LuxuryModel = () => {
               </p>
               <div className="space-y-4 text-gray-300">
                 <h2 className="text-2xl font-semibold text-white mb-4">Key Features</h2>
-                <ul className="list-disc list-inside space-y-2">
-                  <li>Advanced Navigation System with real-time traffic updates</li>
-                  <li>Premium Security Suite with 360° surveillance</li>
-                  <li>Extended Range Power System with smart energy management</li>
-                  <li>High-Speed Internet connectivity with satellite backup</li>
-                  <li>Luxury interior with premium materials and finishes</li>
-                  <li>Smart climate control with zone management</li>
-                  <li>Automated parking assistance</li>
-                  <li>Premium entertainment system</li>
+                <ul className="space-y-4">
+                  <li className="flex items-center gap-2">
+                    <Navigation className="w-5 h-5 text-blue-400" />
+                    Advanced Navigation System with real-time traffic updates
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <Shield className="w-5 h-5 text-emerald-400" />
+                    Premium Security Suite with 360° surveillance
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <Battery className="w-5 h-5 text-yellow-400" />
+                    Extended Range Power System with smart energy management
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <Wifi className="w-5 h-5 text-purple-400" />
+                    High-Speed Internet connectivity with satellite backup
+                  </li>
                 </ul>
               </div>
             </div>

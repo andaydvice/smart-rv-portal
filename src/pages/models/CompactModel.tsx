@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Navigation, Shield, Battery, Wifi } from "lucide-react";
 
 const CompactModel = () => {
   return (
@@ -12,9 +12,9 @@ const CompactModel = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6 }}
-        className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 pt-16"
+        className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 pt-24"
       >
-        <div className="max-w-7xl mx-auto px-4 py-20">
+        <div className="max-w-7xl mx-auto px-4 py-8">
           <Link to="/models">
             <Button variant="outline" className="mb-8">
               <ArrowLeft className="w-4 h-4 mr-2" /> Back to Models
@@ -24,9 +24,9 @@ const CompactModel = () => {
           <div className="grid md:grid-cols-2 gap-8">
             <div>
               <img
-                src="https://images.unsplash.com/photo-1605810230434-7631ac76ec81?auto=format&fit=crop&w=800"
+                src="https://images.unsplash.com/photo-1523987355523-c7b5b0dd90a7?auto=format&fit=crop&w=800"
                 alt="Compact Smart RV"
-                className="rounded-lg shadow-xl"
+                className="rounded-lg shadow-xl w-full h-[400px] object-cover"
               />
             </div>
             <div>
@@ -38,15 +38,23 @@ const CompactModel = () => {
               </p>
               <div className="space-y-4 text-gray-300">
                 <h2 className="text-2xl font-semibold text-white mb-4">Key Features</h2>
-                <ul className="list-disc list-inside space-y-2">
-                  <li>City-Optimized Navigation System</li>
-                  <li>Efficient Power Management</li>
-                  <li>Smart Security System</li>
-                  <li>4G/5G Connectivity</li>
-                  <li>Compact parking assistance</li>
-                  <li>Smart space optimization</li>
-                  <li>Energy-efficient appliances</li>
-                  <li>Integrated smart home controls</li>
+                <ul className="space-y-4">
+                  <li className="flex items-center gap-2">
+                    <Navigation className="w-5 h-5 text-blue-400" />
+                    City-Optimized Navigation System
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <Battery className="w-5 h-5 text-yellow-400" />
+                    Efficient Power Management
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <Shield className="w-5 h-5 text-emerald-400" />
+                    Smart Security System
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <Wifi className="w-5 h-5 text-purple-400" />
+                    4G/5G Connectivity
+                  </li>
                 </ul>
               </div>
             </div>
