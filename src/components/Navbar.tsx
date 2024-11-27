@@ -17,14 +17,13 @@ const Navbar = () => {
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
-    // Close features menu when closing main menu
     if (!isOpen === false) {
       setIsMobileFeaturesOpen(false);
     }
   };
 
   const toggleMobileFeatures = (e: React.MouseEvent) => {
-    e.stopPropagation(); // Prevent event bubbling
+    e.stopPropagation();
     setIsMobileFeaturesOpen(!isMobileFeaturesOpen);
   };
 
@@ -54,7 +53,7 @@ const Navbar = () => {
             <NavigationMenu>
               <NavigationMenuList>
                 <NavigationMenuItem>
-                  <NavigationMenuTrigger className="text-gray-300 hover:text-white transition-colors !bg-transparent text-base">
+                  <NavigationMenuTrigger className="text-gray-300 hover:text-white transition-colors data-[state=open]:text-white !bg-transparent text-base">
                     Features
                   </NavigationMenuTrigger>
                   <NavigationMenuContent>
