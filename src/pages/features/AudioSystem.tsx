@@ -21,18 +21,17 @@ const AudioSystem = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
             <div className="bg-gray-800/50 p-8 rounded-lg border border-gray-700">
               <h2 className="text-2xl font-semibold text-pink-400 mb-4">Premium Sound Experience</h2>
-              <p className="text-gray-300 mb-6">
-                Immerse yourself in crystal-clear audio with our premium sound system. 
-                Featuring high-fidelity speakers and advanced acoustic tuning, experience 
-                music like never before in your mobile sanctuary.
-              </p>
+              <div className="space-y-4 text-gray-300">
+                <p>Immerse yourself in crystal clear audio with our premium sound system.</p>
+                <p>Featuring high fidelity speakers and advanced acoustic tuning, experience music like never before in your mobile sanctuary.</p>
+              </div>
               <img 
                 src="https://images.unsplash.com/photo-1545454675-3531b543be5d" 
                 alt="Premium Audio System" 
-                className="w-full h-64 object-cover rounded-lg mb-6"
+                className="w-full h-64 object-cover rounded-lg my-6"
               />
               <ul className="list-disc list-inside space-y-3 text-gray-300">
-                <li>Multi-zone audio control</li>
+                <li>Multi zone audio control</li>
                 <li>Wireless speaker integration</li>
                 <li>Bluetooth connectivity</li>
                 <li>Surround sound capability</li>
@@ -51,7 +50,7 @@ const AudioSystem = () => {
 
               <div className="bg-gray-800/50 p-6 rounded-lg border border-gray-700">
                 <Radio className="h-6 w-6 text-green-400 mb-4" />
-                <h3 className="text-xl font-semibold text-white mb-2">Multi-Source Input</h3>
+                <h3 className="text-xl font-semibold text-white mb-2">Multi Source Input</h3>
                 <p className="text-gray-300">
                   Connect multiple audio sources simultaneously and switch seamlessly between them.
                 </p>
@@ -61,7 +60,7 @@ const AudioSystem = () => {
                 <Mic2 className="h-6 w-6 text-yellow-400 mb-4" />
                 <h3 className="text-xl font-semibold text-white mb-2">Voice Control</h3>
                 <p className="text-gray-300">
-                  Control your audio system with simple voice commands for hands-free operation.
+                  Control your audio system with simple voice commands for hands free operation.
                 </p>
               </div>
             </div>
