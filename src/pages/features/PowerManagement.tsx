@@ -27,7 +27,7 @@ const PowerManagement = () => {
                 smart monitoring, you'll always have the power you need.
               </p>
               <img 
-                src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158"
+                src="/lovable-uploads/078abbd1-5852-4d5a-a457-154a7421c673.png"
                 alt="Power Management System" 
                 className="w-full h-64 object-cover rounded-lg mb-6"
               />
