@@ -21,11 +21,15 @@ const PowerManagement = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
             <div className="bg-gray-800/50 p-8 rounded-lg border border-gray-700">
               <h2 className="text-2xl font-semibold text-yellow-400 mb-4">Smart Power Features</h2>
-              <p className="text-gray-300 mb-6">
-                Our intelligent power management system optimizes energy usage and ensures 
-                efficient power distribution throughout your RV. With solar integration and 
-                smart monitoring, you'll always have the power you need.
-              </p>
+              <div className="space-y-4 text-gray-300 mb-6">
+                <p>
+                  Our intelligent power management system optimizes energy usage and ensures 
+                  efficient power distribution throughout your RV.
+                </p>
+                <p>
+                  With solar integration and smart monitoring, you'll always have the power you need.
+                </p>
+              </div>
               <img 
                 src="/lovable-uploads/078abbd1-5852-4d5a-a457-154a7421c673.png"
                 alt="Power Management System" 
