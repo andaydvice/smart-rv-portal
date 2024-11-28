@@ -29,9 +29,9 @@ const Contact = () => {
           <img
             src="/lovable-uploads/7d42772e-e96c-45cd-9a40-5e59be1c0a60.png"
             alt="Luxury RV in mountain landscape"
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover filter brightness-75"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/50 to-black/80" />
+          <div className="absolute inset-0 bg-gradient-to-br from-black/90 via-black/50 to-black/80 backdrop-blur-[2px]" />
         </div>
         
         <div className="relative z-10 max-w-3xl mx-auto px-4">
@@ -48,13 +48,13 @@ const Contact = () => {
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.3, duration: 0.5 }}
             onSubmit={handleSubmit} 
-            className="space-y-6 bg-black/20 backdrop-blur-sm p-8 rounded-xl border border-white/5 shadow-2xl"
+            className="space-y-6 bg-black/10 backdrop-blur-md p-8 rounded-xl border border-white/10 shadow-2xl"
           >
             <div className="space-y-4">
               <label htmlFor="name" className="block text-sm font-medium text-white/90 mb-1">Name</label>
               <Input 
                 id="name" 
-                className="bg-white/5 border-white/10 text-white placeholder-white/30 focus:border-white/30 transition-colors" 
+                className="bg-white/10 border-white/20 text-white placeholder-white/40 focus:border-white/40 focus:bg-white/15 transition-all" 
                 required 
               />
             </div>
@@ -63,7 +63,7 @@ const Contact = () => {
               <Input 
                 id="email" 
                 type="email" 
-                className="bg-white/5 border-white/10 text-white placeholder-white/30 focus:border-white/30 transition-colors" 
+                className="bg-white/10 border-white/20 text-white placeholder-white/40 focus:border-white/40 focus:bg-white/15 transition-all" 
                 required 
               />
             </div>
@@ -71,13 +71,13 @@ const Contact = () => {
               <label htmlFor="message" className="block text-sm font-medium text-white/90 mb-1">Message</label>
               <Textarea 
                 id="message" 
-                className="bg-white/5 border-white/10 text-white min-h-[150px] placeholder-white/30 focus:border-white/30 transition-colors" 
+                className="bg-white/10 border-white/20 text-white min-h-[150px] placeholder-white/40 focus:border-white/40 focus:bg-white/15 transition-all" 
                 required 
               />
             </div>
             <Button 
               type="submit" 
-              className="w-full bg-white text-black hover:bg-white/90 transition-colors duration-300"
+              className="w-full bg-white/90 text-black hover:bg-white transition-all duration-300 shadow-lg"
             >
               Send Message
             </Button>
