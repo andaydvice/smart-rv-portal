@@ -27,8 +27,8 @@ const NavigationSystem = () => {
                 to ensure the safest and most efficient route to your destination.
               </p>
               <img 
-                src="https://images.unsplash.com/photo-1488590528505-98d2b5aba04b"
-                alt="Navigation System Interface" 
+                src="/lovable-uploads/9b875f9e-6d50-4ecf-b12a-caafbb8ea530.png"
+                alt="RV Navigation System Interface" 
                 className="w-full h-64 object-cover rounded-lg mb-6"
               />
               <ul className="list-disc list-inside space-y-3 text-gray-300">
