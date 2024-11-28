@@ -36,18 +36,18 @@ const Contact = () => {
         
         <div className="relative z-10 max-w-3xl mx-auto px-4">
           <h1 className="text-4xl font-bold text-white mb-8">Contact Us</h1>
-          <form onSubmit={handleSubmit} className="space-y-6 glass-card p-8 rounded-lg">
+          <form onSubmit={handleSubmit} className="space-y-6 bg-black/30 backdrop-blur-sm p-8 rounded-lg border border-white/10">
             <div>
               <label htmlFor="name" className="block text-sm font-medium text-white mb-2">Name</label>
-              <Input id="name" className="bg-white/10 border-white/20 text-white placeholder-white/50" required />
+              <Input id="name" className="bg-white/5 border-white/10 text-white placeholder-white/50" required />
             </div>
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-white mb-2">Email</label>
-              <Input id="email" type="email" className="bg-white/10 border-white/20 text-white placeholder-white/50" required />
+              <Input id="email" type="email" className="bg-white/5 border-white/10 text-white placeholder-white/50" required />
             </div>
             <div>
               <label htmlFor="message" className="block text-sm font-medium text-white mb-2">Message</label>
-              <Textarea id="message" className="bg-white/10 border-white/20 text-white min-h-[150px] placeholder-white/50" required />
+              <Textarea id="message" className="bg-white/5 border-white/10 text-white min-h-[150px] placeholder-white/50" required />
             </div>
             <Button 
               type="submit" 
