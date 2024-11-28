@@ -26,7 +26,7 @@ const AudioSystem = () => {
                 <p>Featuring high fidelity speakers and advanced acoustic tuning, experience music like never before in your mobile sanctuary.</p>
               </div>
               <img 
-                src="https://images.unsplash.com/photo-1545454675-3531b543be5d" 
+                src="/lovable-uploads/9e2c5b7f-c03c-4d99-9997-0d3de18f61e1.png" 
                 alt="Premium Audio System" 
                 className="w-full h-64 object-cover rounded-lg my-6"
               />
