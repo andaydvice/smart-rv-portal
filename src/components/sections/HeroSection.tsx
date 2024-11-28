@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Link } from "react-router-dom";
 
 export const HeroSection = () => (
   <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
@@ -51,33 +51,23 @@ export const HeroSection = () => (
         transition={{ duration: 0.6, delay: 1 }}
         className="flex flex-col sm:flex-row gap-6 justify-center items-center"
       >
-        <Dialog>
-          <DialogTrigger asChild>
-            <Button 
-              size="lg" 
-              className="bg-white text-black hover:bg-white/90 text-lg px-8 py-6 rounded-full transition-all duration-300 transform hover:scale-105"
-            >
-              Schedule Demo
-            </Button>
-          </DialogTrigger>
-          <DialogContent className="sm:max-w-[425px]">
-            <DialogHeader>
-              <DialogTitle>Schedule a Demo</DialogTitle>
-            </DialogHeader>
-            <div className="grid gap-4 py-4">
-              <p className="text-gray-600">
-                Contact our team to schedule a personalized demo of our Smart RV features.
-              </p>
-            </div>
-          </DialogContent>
-        </Dialog>
-        <Button 
-          variant="outline" 
-          size="lg" 
-          className="border-2 border-white text-white bg-transparent hover:bg-blue-500 hover:border-blue-500 hover:text-white text-lg px-8 py-6 rounded-full transition-all duration-300 transform hover:scale-105"
-        >
-          Explore Models
-        </Button>
+        <Link to="/schedule-demo">
+          <Button 
+            size="lg" 
+            className="bg-white text-black hover:bg-white/90 text-lg px-8 py-6 rounded-full transition-all duration-300 transform hover:scale-105"
+          >
+            Schedule Demo
+          </Button>
+        </Link>
+        <Link to="/models">
+          <Button 
+            variant="outline" 
+            size="lg" 
+            className="border-2 border-white text-white bg-transparent hover:bg-blue-500 hover:border-blue-500 hover:text-white text-lg px-8 py-6 rounded-full transition-all duration-300 transform hover:scale-105"
+          >
+            Explore Models
+          </Button>
+        </Link>
       </motion.div>
     </motion.div>
     <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black/50 to-transparent" />

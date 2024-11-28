@@ -9,6 +9,7 @@ import Features from "./pages/Features";
 import Models from "./pages/Models";
 import Technology from "./pages/Technology";
 import Contact from "./pages/Contact";
+import ScheduleDemo from "./pages/ScheduleDemo";
 import NavigationSystem from "./pages/features/NavigationSystem";
 import SecuritySystem from "./pages/features/SecuritySystem";
 import PowerManagement from "./pages/features/PowerManagement";
@@ -46,6 +47,7 @@ const App = () => (
               <Route path="/models/compare" element={<CompareModels />} />
               <Route path="/technology" element={<Technology />} />
               <Route path="/contact" element={<Contact />} />
+              <Route path="/schedule-demo" element={<ScheduleDemo />} />
             </Routes>
           </div>
           <Footer />
