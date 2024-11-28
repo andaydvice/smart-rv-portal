@@ -51,6 +51,14 @@ const CompareModels = () => {
               transition={{ duration: 0.6 }}
               className="text-center mb-12"
             >
+              <div className="relative w-full h-[300px] mb-8 rounded-xl overflow-hidden">
+                <img 
+                  src="/lovable-uploads/58df06da-2491-453e-9f4d-11154ddb1104.png"
+                  alt="RV Models Comparison"
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-black/40"></div>
+              </div>
               <h1 className="text-4xl font-bold text-white mb-4">Compare Models</h1>
               <p className="text-gray-300 max-w-2xl mx-auto">
                 Find the perfect smart RV that matches your lifestyle. Compare features and specifications across our range of models.
