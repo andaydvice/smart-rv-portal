@@ -51,7 +51,7 @@ const CompareModels = () => {
               transition={{ duration: 0.6 }}
               className="text-center mb-12"
             >
-              <div className="relative w-full h-[300px] mb-8 rounded-xl overflow-hidden">
+              <div className="relative w-full h-[400px] mb-8 rounded-xl overflow-hidden">
                 <img 
                   src="/lovable-uploads/58df06da-2491-453e-9f4d-11154ddb1104.png"
                   alt="RV Models Comparison"
