@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
-import Navbar from "@/components/Navbar";
 import { Button } from "@/components/ui/button";
 import { Cpu, Wifi, Battery, Shield, Smartphone, Bot, ArrowRight } from "lucide-react";
+import Navbar from "@/components/Navbar";
 
 const technologies = [
   {
@@ -88,7 +88,7 @@ const Technology = () => {
             className="relative rounded-2xl overflow-hidden"
           >
             <img
-              src="https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7"
+              src="/lovable-uploads/db5f9104-32a0-458f-a2ca-5ecb38415ec9.png"
               alt="Technology Overview"
               className="w-full h-96 object-cover"
             />
