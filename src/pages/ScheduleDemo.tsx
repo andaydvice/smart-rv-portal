@@ -41,8 +41,8 @@ const ScheduleDemo = () => {
       <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800">
         <div className="relative">
           <img
-            src="https://images.unsplash.com/photo-1649972904349-6e44c42644a7"
-            alt="Luxury RV Interior"
+            src="/lovable-uploads/5ad3c360-419f-4662-8c19-3d5a3cffe23f.png"
+            alt="Luxury Smart RV on mountain road"
             className="w-full h-[500px] object-cover opacity-20"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-transparent to-gray-900" />
