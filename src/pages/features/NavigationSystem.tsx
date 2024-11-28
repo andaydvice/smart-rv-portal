@@ -34,11 +34,11 @@ const NavigationSystem = () => {
                 className="w-full h-64 object-cover rounded-lg mb-6"
               />
               <ul className="list-disc list-inside space-y-3 text-gray-300">
-                <li>Real-time traffic updates and route optimization</li>
-                <li>RV-specific route planning considering vehicle height and weight</li>
+                <li>Real time traffic updates and route optimization</li>
+                <li>RV specific route planning considering vehicle height and weight</li>
                 <li>Offline maps for remote areas</li>
                 <li>Integration with campground databases</li>
-                <li>Voice-guided navigation with customizable alerts</li>
+                <li>Voice guided navigation with customizable alerts</li>
               </ul>
             </div>
 
@@ -61,7 +61,7 @@ const NavigationSystem = () => {
 
               <div className="bg-gray-800/50 p-6 rounded-lg border border-gray-700">
                 <Radar className="h-6 w-6 text-pink-400 mb-4" />
-                <h3 className="text-xl font-semibold text-white mb-2">Real-Time Updates</h3>
+                <h3 className="text-xl font-semibold text-white mb-2">Real Time Updates</h3>
                 <p className="text-gray-300">
                   Live traffic updates, weather alerts, and road condition information for safer travel.
                 </p>
