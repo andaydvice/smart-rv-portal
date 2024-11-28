@@ -21,11 +21,15 @@ const SmartTV = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
             <div className="bg-gray-800/50 p-8 rounded-lg border border-gray-700">
               <h2 className="text-2xl font-semibold text-purple-400 mb-4">Entertainment Hub</h2>
-              <p className="text-gray-300 mb-6">
-                Experience cinema-quality entertainment in your RV with our advanced Smart TV system. 
-                Featuring a 4K OLED display with HDR support, our system delivers stunning visuals 
-                and immersive entertainment wherever your journey takes you.
-              </p>
+              <div className="space-y-4 text-gray-300 mb-6">
+                <p>
+                  Experience cinema-quality entertainment in your RV with our advanced Smart TV system.
+                </p>
+                <p>
+                  Featuring a 4K OLED display with HDR support, our system delivers stunning visuals 
+                  and immersive entertainment wherever your journey takes you.
+                </p>
+              </div>
               <img 
                 src="https://images.unsplash.com/photo-1593784991095-a205069470b6" 
                 alt="Luxury TV Setup" 
