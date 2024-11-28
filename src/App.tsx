@@ -18,6 +18,7 @@ import InternetConnectivity from "./pages/features/InternetConnectivity";
 import LuxuryModel from "./pages/models/LuxuryModel";
 import AdventureModel from "./pages/models/AdventureModel";
 import CompactModel from "./pages/models/CompactModel";
+import CompareModels from "./pages/models/CompareModels";
 
 const queryClient = new QueryClient();
 
@@ -42,6 +43,7 @@ const App = () => (
               <Route path="/models/luxury" element={<LuxuryModel />} />
               <Route path="/models/adventure" element={<AdventureModel />} />
               <Route path="/models/compact" element={<CompactModel />} />
+              <Route path="/models/compare" element={<CompareModels />} />
               <Route path="/technology" element={<Technology />} />
               <Route path="/contact" element={<Contact />} />
             </Routes>

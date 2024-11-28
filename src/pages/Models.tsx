@@ -51,11 +51,7 @@ const Models = () => {
   const { toast } = useToast();
 
   const handleCompareModels = () => {
-    toast({
-      title: "Coming Soon",
-      description: "The model comparison feature will be available in the next update.",
-      duration: 3000,
-    });
+    window.location.href = '/models/compare';
   };
 
   return (
@@ -125,13 +121,14 @@ const Models = () => {
             transition={{ delay: 0.8 }}
             className="text-center mt-16"
           >
-            <Button 
-              variant="outline" 
-              onClick={handleCompareModels}
-              className="bg-transparent border-white text-white hover:bg-white hover:text-gray-900"
-            >
-              Compare All Models <ArrowRight className="w-4 h-4 ml-2" />
-            </Button>
+            <Link to="/models/compare">
+              <Button 
+                variant="outline" 
+                className="bg-transparent border-white text-white hover:bg-white/10"
+              >
+                Compare All Models <ArrowRight className="w-4 h-4 ml-2" />
+              </Button>
+            </Link>
           </motion.div>
         </div>
       </motion.div>
