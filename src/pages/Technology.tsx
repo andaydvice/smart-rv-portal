@@ -96,7 +96,7 @@ const Technology = () => {
               <div className="text-center p-8">
                 <h2 className="text-3xl font-bold text-white mb-4">Experience the Future Today</h2>
                 <p className="text-xl text-gray-300 mb-8 max-w-2xl">
-                  Our smart RVs combine cutting-edge technology with luxurious comfort to create the ultimate travel experience
+                  Our smart RVs combine cutting edge technology with luxurious comfort to create the ultimate travel experience
                 </p>
                 <Button className="bg-blue-500 hover:bg-blue-600">
                   Schedule a Demo <ArrowRight className="w-4 h-4 ml-2" />
