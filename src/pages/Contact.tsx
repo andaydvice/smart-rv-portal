@@ -23,24 +23,38 @@ const Contact = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6 }}
-        className="min-h-screen pt-20 px-4 bg-gradient-to-b from-gray-900 to-gray-800"
+        className="min-h-screen pt-20 relative"
       >
-        <div className="max-w-3xl mx-auto">
+        <div className="absolute inset-0 z-0">
+          <img
+            src="/lovable-uploads/7d42772e-e96c-45cd-9a40-5e59be1c0a60.png"
+            alt="Luxury RV in mountain landscape"
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-black/70" />
+        </div>
+        
+        <div className="relative z-10 max-w-3xl mx-auto px-4">
           <h1 className="text-4xl font-bold text-white mb-8">Contact Us</h1>
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <form onSubmit={handleSubmit} className="space-y-6 glass-card p-8 rounded-lg">
             <div>
-              <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">Name</label>
-              <Input id="name" className="bg-gray-800 border-gray-700 text-white" required />
+              <label htmlFor="name" className="block text-sm font-medium text-white mb-2">Name</label>
+              <Input id="name" className="bg-white/10 border-white/20 text-white placeholder-white/50" required />
             </div>
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">Email</label>
-              <Input id="email" type="email" className="bg-gray-800 border-gray-700 text-white" required />
+              <label htmlFor="email" className="block text-sm font-medium text-white mb-2">Email</label>
+              <Input id="email" type="email" className="bg-white/10 border-white/20 text-white placeholder-white/50" required />
             </div>
             <div>
-              <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-2">Message</label>
-              <Textarea id="message" className="bg-gray-800 border-gray-700 text-white min-h-[150px]" required />
+              <label htmlFor="message" className="block text-sm font-medium text-white mb-2">Message</label>
+              <Textarea id="message" className="bg-white/10 border-white/20 text-white min-h-[150px] placeholder-white/50" required />
             </div>
-            <Button type="submit" className="w-full">Send Message</Button>
+            <Button 
+              type="submit" 
+              className="w-full bg-white text-black hover:bg-white/90"
+            >
+              Send Message
+            </Button>
           </form>
         </div>
       </motion.div>
