@@ -2,7 +2,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route, ScrollRestoration } from "react-router-dom";
+import { createBrowserRouter, RouterProvider, ScrollRestoration, Outlet } from "react-router-dom";
 import Footer from "./components/Footer";
 import Index from "./pages/Index";
 import Features from "./pages/Features";
@@ -23,36 +23,47 @@ import CompareModels from "./pages/models/CompareModels";
 
 const queryClient = new QueryClient();
 
+const Layout = () => (
+  <div className="min-h-screen flex flex-col">
+    <ScrollRestoration />
+    <div className="flex-grow">
+      <Outlet />
+    </div>
+    <Footer />
+  </div>
+);
+
+const router = createBrowserRouter([
+  {
+    element: <Layout />,
+    children: [
+      { path: "/", element: <Index /> },
+      { path: "/features", element: <Features /> },
+      { path: "/features/navigation", element: <NavigationSystem /> },
+      { path: "/features/security", element: <SecuritySystem /> },
+      { path: "/features/power", element: <PowerManagement /> },
+      { path: "/features/tv", element: <SmartTV /> },
+      { path: "/features/audio", element: <AudioSystem /> },
+      { path: "/features/internet", element: <InternetConnectivity /> },
+      { path: "/models", element: <Models /> },
+      { path: "/models/luxury", element: <LuxuryModel /> },
+      { path: "/models/adventure", element: <AdventureModel /> },
+      { path: "/models/compact", element: <CompactModel /> },
+      { path: "/models/compare", element: <CompareModels /> },
+      { path: "/technology", element: <Technology /> },
+      { path: "/contact", element: <Contact /> },
+      { path: "/schedule-demo", element: <ScheduleDemo /> },
+    ],
+  },
+]);
+
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
-      <div className="min-h-screen flex flex-col">
+      <div>
         <Toaster />
         <Sonner />
-        <BrowserRouter>
-          <ScrollRestoration />
-          <div className="flex-grow">
-            <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="/features" element={<Features />} />
-              <Route path="/features/navigation" element={<NavigationSystem />} />
-              <Route path="/features/security" element={<SecuritySystem />} />
-              <Route path="/features/power" element={<PowerManagement />} />
-              <Route path="/features/tv" element={<SmartTV />} />
-              <Route path="/features/audio" element={<AudioSystem />} />
-              <Route path="/features/internet" element={<InternetConnectivity />} />
-              <Route path="/models" element={<Models />} />
-              <Route path="/models/luxury" element={<LuxuryModel />} />
-              <Route path="/models/adventure" element={<AdventureModel />} />
-              <Route path="/models/compact" element={<CompactModel />} />
-              <Route path="/models/compare" element={<CompareModels />} />
-              <Route path="/technology" element={<Technology />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="/schedule-demo" element={<ScheduleDemo />} />
-            </Routes>
-          </div>
-          <Footer />
-        </BrowserRouter>
+        <RouterProvider router={router} />
       </div>
     </TooltipProvider>
   </QueryClientProvider>
