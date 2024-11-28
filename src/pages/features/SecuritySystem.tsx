@@ -21,11 +21,17 @@ const SecuritySystem = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
             <div className="bg-gray-800/50 p-8 rounded-lg border border-gray-700">
               <h2 className="text-2xl font-semibold text-emerald-400 mb-4">Advanced Security Features</h2>
-              <p className="text-gray-300 mb-6">
-                Our comprehensive security system provides peace of mind with state of the art 
-                technology and round the clock monitoring. From smart locks to motion detection, 
-                your RV is protected wherever your journey takes you.
-              </p>
+              <div className="text-gray-300 mb-6 space-y-4">
+                <p>
+                  Our comprehensive security system provides peace of mind with state of the art technology.
+                </p>
+                <p>
+                  Round the clock monitoring ensures constant protection.
+                </p>
+                <p>
+                  From smart locks to motion detection, your RV is protected wherever your journey takes you.
+                </p>
+              </div>
               <img 
                 src="/lovable-uploads/24586e9a-422f-45ee-aaaa-2ffa5f0e2274.png"
                 alt="RV Security System Interface" 
