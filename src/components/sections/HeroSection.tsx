@@ -18,14 +18,6 @@ export const HeroSection = () => (
       transition={{ duration: 0.8, delay: 0.2 }}
       className="relative text-center text-white px-4 max-w-5xl mx-auto"
     >
-      <motion.span 
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.4 }}
-        className="inline-block px-4 py-2 mb-6 text-sm font-medium bg-white/10 backdrop-blur-sm rounded-full border border-white/20"
-      >
-        Welcome to Smart RV
-      </motion.span>
       <motion.h1 
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
