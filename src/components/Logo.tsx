@@ -8,7 +8,10 @@ export const Logo = () => {
           <Bus className="w-16 h-8 text-blue-500" strokeWidth={1.2} />
         </div>
       </div>
-      <span className="text-xl font-semibold text-white">Smart RV</span>
+      <div className="flex flex-col">
+        <span className="text-xl font-semibold text-white">Smart RV</span>
+        <span className="text-sm text-white/80">Intelligence Drives Freedom</span>
+      </div>
     </div>
   );
 };
