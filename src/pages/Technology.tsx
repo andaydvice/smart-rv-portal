@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Cpu, Wifi, Battery, Shield, Smartphone, Bot, ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 
 const technologies = [
@@ -98,9 +99,11 @@ const Technology = () => {
                 <p className="text-xl text-gray-300 mb-8 max-w-2xl">
                   Our smart RVs combine cutting edge technology with luxurious comfort to create the ultimate travel experience
                 </p>
-                <Button className="bg-blue-500 hover:bg-blue-600">
-                  Schedule a Demo <ArrowRight className="w-4 h-4 ml-2" />
-                </Button>
+                <Link to="/schedule-demo">
+                  <Button className="bg-blue-500 hover:bg-blue-600">
+                    Schedule a Demo <ArrowRight className="w-4 h-4 ml-2" />
+                  </Button>
+                </Link>
               </div>
             </div>
           </motion.div>
