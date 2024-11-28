@@ -31,8 +31,8 @@ const SmartTV = () => {
                 </p>
               </div>
               <img 
-                src="https://images.unsplash.com/photo-1593784991095-a205069470b6" 
-                alt="Luxury TV Setup" 
+                src="/lovable-uploads/831c3ac9-7ade-4fe3-a460-affbfc4123f7.png" 
+                alt="Luxury RV Smart TV Setup" 
                 className="w-full h-64 object-cover rounded-lg mb-6"
               />
               <ul className="list-disc list-inside space-y-3 text-gray-300">
