@@ -1,8 +1,9 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, Battery, Navigation, Shield, Wifi, Check, Minus } from "lucide-react";
+import { ArrowLeft, Check, Minus } from "lucide-react";
 import {
   Table,
   TableBody,
@@ -34,6 +35,10 @@ const features = [
 ];
 
 const CompareModels = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <>
       <Navbar />
