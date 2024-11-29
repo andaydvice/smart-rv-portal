@@ -21,17 +21,19 @@ const AutomatedDriving = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-            <div className="bg-gray-800/50 p-8 rounded-lg border border-gray-700">
-              <h2 className="text-2xl font-semibold text-blue-400 mb-4">Advanced Driver Assistance Systems (ADAS)</h2>
-              <div className="flex items-center gap-3 mb-6">
-                <Shield className="h-6 w-6 text-emerald-400" />
-                <span className="text-white">Safety Features</span>
+            <div className="bg-gray-800/50 p-8 rounded-lg border border-gray-700 flex flex-col">
+              <div className="h-[72px]">
+                <h2 className="text-2xl font-semibold text-blue-400 mb-4">Advanced Driver Assistance Systems (ADAS)</h2>
+                <div className="flex items-center gap-3">
+                  <Shield className="h-6 w-6 text-emerald-400" />
+                  <span className="text-white">Safety Features</span>
+                </div>
               </div>
-              <div className="relative aspect-video mb-6 bg-gray-900/50 rounded-lg overflow-hidden">
+              <div className="relative aspect-video mb-6">
                 <img 
                   src="/lovable-uploads/23827d7d-a275-4073-9c09-3b69d2d10348.png"
                   alt="ADAS Interface"
-                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                  className="absolute inset-0 w-full h-full object-cover rounded-lg"
                 />
               </div>
               <ul className="list-disc list-inside space-y-3 text-gray-300">
@@ -43,17 +45,19 @@ const AutomatedDriving = () => {
               </ul>
             </div>
 
-            <div className="bg-gray-800/50 p-8 rounded-lg border border-gray-700">
-              <h2 className="text-2xl font-semibold text-blue-400 mb-4">GPS and Navigation Integration</h2>
-              <div className="flex items-center gap-3 mb-6">
-                <Navigation className="h-6 w-6 text-purple-400" />
-                <span className="text-white">Smart Navigation</span>
+            <div className="bg-gray-800/50 p-8 rounded-lg border border-gray-700 flex flex-col">
+              <div className="h-[72px]">
+                <h2 className="text-2xl font-semibold text-blue-400 mb-4">GPS and Navigation Integration</h2>
+                <div className="flex items-center gap-3">
+                  <Navigation className="h-6 w-6 text-purple-400" />
+                  <span className="text-white">Smart Navigation</span>
+                </div>
               </div>
-              <div className="relative aspect-video mb-6 bg-gray-900/50 rounded-lg overflow-hidden">
+              <div className="relative aspect-video mb-6">
                 <img 
                   src="/lovable-uploads/f72886c3-3677-4dfe-8d56-5a784197eda2.png"
                   alt="Navigation System"
-                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                  className="absolute inset-0 w-full h-full object-cover rounded-lg"
                 />
               </div>
               <ul className="list-disc list-inside space-y-3 text-gray-300">
