@@ -26,7 +26,7 @@ const technologies = [
   {
     icon: Shield,
     title: "Security Suite",
-    description: "State-of-the-art security systems with biometric access and 24/7 monitoring",
+    description: "State of the art security systems with biometric access and 24/7 monitoring",
     color: "text-purple-400"
   },
   {
@@ -62,7 +62,7 @@ const Technology = () => {
           >
             <h1 className="text-5xl font-bold text-white mb-6">Our Technology</h1>
             <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-              Discover the cutting-edge technologies that power our smart RVs
+              Discover the cutting edge technologies that power our smart RVs
             </p>
           </motion.div>
 
