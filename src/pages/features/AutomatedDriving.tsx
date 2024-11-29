@@ -27,11 +27,13 @@ const AutomatedDriving = () => {
                 <Shield className="h-6 w-6 text-emerald-400" />
                 <span className="text-white">Safety Features</span>
               </div>
-              <img 
-                src="/lovable-uploads/23827d7d-a275-4073-9c09-3b69d2d10348.png"
-                alt="ADAS Interface"
-                className="w-full h-80 object-contain rounded-lg mb-6 bg-gray-900/50 p-4 hover:scale-105 transition-transform duration-300"
-              />
+              <div className="relative aspect-video mb-6 bg-gray-900/50 rounded-lg overflow-hidden">
+                <img 
+                  src="/lovable-uploads/23827d7d-a275-4073-9c09-3b69d2d10348.png"
+                  alt="ADAS Interface"
+                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                />
+              </div>
               <ul className="list-disc list-inside space-y-3 text-gray-300">
                 <li>Adaptive cruise control for maintaining safe distances</li>
                 <li>Lane keeping assist with haptic feedback</li>
@@ -47,11 +49,13 @@ const AutomatedDriving = () => {
                 <Navigation className="h-6 w-6 text-purple-400" />
                 <span className="text-white">Smart Navigation</span>
               </div>
-              <img 
-                src="/lovable-uploads/f72886c3-3677-4dfe-8d56-5a784197eda2.png"
-                alt="Navigation System"
-                className="w-full h-64 object-cover rounded-lg mb-6"
-              />
+              <div className="relative aspect-video mb-6 bg-gray-900/50 rounded-lg overflow-hidden">
+                <img 
+                  src="/lovable-uploads/f72886c3-3677-4dfe-8d56-5a784197eda2.png"
+                  alt="Navigation System"
+                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                />
+              </div>
               <ul className="list-disc list-inside space-y-3 text-gray-300">
                 <li>Real time traffic updates and route optimization</li>
                 <li>RV specific route planning considering vehicle dimensions</li>
