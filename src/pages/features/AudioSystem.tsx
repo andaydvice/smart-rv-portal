@@ -19,9 +19,9 @@ const AudioSystem = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-            <div className="bg-gray-800/50 p-8 rounded-lg border border-gray-700">
+            <div className="bg-gray800/50 p-8 rounded-lg border border-gray700">
               <h2 className="text-2xl font-semibold text-pink-400 mb-4">Premium Sound Experience</h2>
-              <div className="space-y-4 text-gray-300">
+              <div className="space-y-4 text-gray300">
                 <p>Immerse yourself in crystal clear audio with our premium sound system.</p>
                 <p>Featuring high fidelity speakers and advanced acoustic tuning, experience music like never before in your mobile sanctuary.</p>
               </div>
@@ -30,7 +30,7 @@ const AudioSystem = () => {
                 alt="Premium Audio System" 
                 className="w-full h-64 object-cover rounded-lg my-6"
               />
-              <ul className="list-disc list-inside space-y-3 text-gray-300">
+              <ul className="list-disc list-inside space-y-3 text-gray300">
                 <li>Multi zone audio control</li>
                 <li>Wireless speaker integration</li>
                 <li>Bluetooth connectivity</li>
@@ -40,26 +40,26 @@ const AudioSystem = () => {
             </div>
 
             <div className="space-y-6">
-              <div className="bg-gray-800/50 p-6 rounded-lg border border-gray-700">
-                <Volume2 className="h-6 w-6 text-blue-400 mb-4" />
+              <div className="bg-gray800/50 p-6 rounded-lg border border-gray700">
+                <Volume2 className="h-6 w-6 text-blue400 mb-4" />
                 <h3 className="text-xl font-semibold text-white mb-2">Smart Volume Control</h3>
-                <p className="text-gray-300">
+                <p className="text-gray300">
                   Intelligent volume adjustment based on ambient noise and time of day.
                 </p>
               </div>
 
-              <div className="bg-gray-800/50 p-6 rounded-lg border border-gray-700">
-                <Radio className="h-6 w-6 text-green-400 mb-4" />
+              <div className="bg-gray800/50 p-6 rounded-lg border border-gray700">
+                <Radio className="h-6 w-6 text-green400 mb-4" />
                 <h3 className="text-xl font-semibold text-white mb-2">Multi Source Input</h3>
-                <p className="text-gray-300">
+                <p className="text-gray300">
                   Connect multiple audio sources simultaneously and switch seamlessly between them.
                 </p>
               </div>
 
-              <div className="bg-gray-800/50 p-6 rounded-lg border border-gray-700">
-                <Mic2 className="h-6 w-6 text-yellow-400 mb-4" />
+              <div className="bg-gray800/50 p-6 rounded-lg border border-gray700">
+                <Mic2 className="h-6 w-6 text-yellow400 mb-4" />
                 <h3 className="text-xl font-semibold text-white mb-2">Voice Control</h3>
-                <p className="text-gray-300">
+                <p className="text-gray300">
                   Control your audio system with simple voice commands for hands free operation.
                 </p>
               </div>
