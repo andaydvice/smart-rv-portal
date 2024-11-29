@@ -29,7 +29,7 @@ const InternetConnectivity = () => {
                 Never lose touch with what matters most.
               </p>
               <img 
-                src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8" 
+                src="/lovable-uploads/15afbf27-62c7-496b-8042-b625eb5543e5.png" 
                 alt="Mobile Internet Connectivity" 
                 className="w-full h-64 object-cover rounded-lg mb-6"
               />
