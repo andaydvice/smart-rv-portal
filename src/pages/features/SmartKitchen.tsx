@@ -44,7 +44,7 @@ const SmartKitchen = () => {
                 <span className="text-white">Smart Water Solutions</span>
               </div>
               <img 
-                src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800"
+                src="/lovable-uploads/3af8fc31-188d-477e-8ab5-b94bd8c4ec77.png"
                 alt="Water Management System"
                 className="w-full h-64 object-cover rounded-lg mb-6"
               />
