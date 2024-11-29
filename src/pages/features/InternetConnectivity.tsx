@@ -22,9 +22,11 @@ const InternetConnectivity = () => {
             <div className="bg-gray-800/50 p-8 rounded-lg border border-gray-700">
               <h2 className="text-2xl font-semibold text-cyan-400 mb-4">Always Connected</h2>
               <p className="text-gray-300 mb-6">
-                Stay connected wherever your journey takes you with our advanced internet 
-                connectivity solutions. Featuring high speed 5G capabilities and reliable 
-                satellite backup, never lose touch with what matters most.
+                Stay connected wherever your journey takes you with our advanced internet connectivity solutions.
+                <br /><br />
+                Featuring high speed 5G capabilities and reliable satellite backup.
+                <br /><br />
+                Never lose touch with what matters most.
               </p>
               <img 
                 src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8" 
