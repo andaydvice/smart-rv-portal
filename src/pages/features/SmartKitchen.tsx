@@ -22,7 +22,9 @@ const SmartKitchen = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
             <div className="bg-gray-800/50 p-8 rounded-lg border border-gray-700 flex flex-col">
-              <h2 className="text-2xl font-semibold text-blue-400 mb-4">Connected Refrigerators and Cooking Appliances</h2>
+              <div className="h-[72px]">
+                <h2 className="text-2xl font-semibold text-blue-400">Connected Refrigerators and Cooking Appliances</h2>
+              </div>
               <div className="relative aspect-video mb-6">
                 <img 
                   src="/lovable-uploads/28815e7c-77df-4758-b609-d84355448eea.png"
@@ -40,10 +42,12 @@ const SmartKitchen = () => {
             </div>
 
             <div className="bg-gray-800/50 p-8 rounded-lg border border-gray-700 flex flex-col">
-              <h2 className="text-2xl font-semibold text-blue-400 mb-4">Water Management Systems</h2>
-              <div className="flex items-center gap-3 mb-6">
-                <Droplet className="h-6 w-6 text-cyan-400" />
-                <span className="text-white">Smart Water Solutions</span>
+              <div className="h-[72px]">
+                <h2 className="text-2xl font-semibold text-blue-400">Water Management Systems</h2>
+                <div className="flex items-center gap-3 mt-2">
+                  <Droplet className="h-6 w-6 text-cyan-400" />
+                  <span className="text-white">Smart Water Solutions</span>
+                </div>
               </div>
               <div className="relative aspect-video mb-6">
                 <img 
