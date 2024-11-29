@@ -48,7 +48,7 @@ const AutomatedDriving = () => {
                 <span className="text-white">Smart Navigation</span>
               </div>
               <img 
-                src="https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?auto=format&fit=crop&w=800"
+                src="/lovable-uploads/f72886c3-3677-4dfe-8d56-5a784197eda2.png"
                 alt="Navigation System"
                 className="w-full h-64 object-cover rounded-lg mb-6"
               />
