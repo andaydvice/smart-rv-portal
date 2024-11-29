@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Navigation, Shield, Battery, Tv, Music, Wifi } from "lucide-react";
+import { Navigation, Shield, Battery, Tv, Music, Wifi, Refrigerator, Car } from "lucide-react";
 
 export const SmartFeatureLinks = () => (
   <div className="space-y-4">
@@ -26,6 +26,22 @@ export const SmartFeatureLinks = () => (
           <span className="flex items-center gap-2">
             <Battery className="h-4 w-4 text-yellow-500" />
             Power Management
+          </span>
+        </Link>
+      </li>
+      <li className="hover:text-blue-400 transition-colors text-gray-300">
+        <Link to="/features/smart-kitchen" className="block p-2 rounded hover:bg-gray-800/50">
+          <span className="flex items-center gap-2">
+            <Refrigerator className="h-4 w-4 text-cyan-500" />
+            Smart Kitchen
+          </span>
+        </Link>
+      </li>
+      <li className="hover:text-blue-400 transition-colors text-gray-300">
+        <Link to="/features/automated-driving" className="block p-2 rounded hover:bg-gray-800/50">
+          <span className="flex items-center gap-2">
+            <Car className="h-4 w-4 text-purple-500" />
+            Automated Driving
           </span>
         </Link>
       </li>

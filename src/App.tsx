@@ -16,6 +16,8 @@ import PowerManagement from "./pages/features/PowerManagement";
 import SmartTV from "./pages/features/SmartTV";
 import AudioSystem from "./pages/features/AudioSystem";
 import InternetConnectivity from "./pages/features/InternetConnectivity";
+import SmartKitchen from "./pages/features/SmartKitchen";
+import AutomatedDriving from "./pages/features/AutomatedDriving";
 import LuxuryModel from "./pages/models/LuxuryModel";
 import AdventureModel from "./pages/models/AdventureModel";
 import CompactModel from "./pages/models/CompactModel";
@@ -45,6 +47,8 @@ const router = createBrowserRouter([
       { path: "/features/tv", element: <SmartTV /> },
       { path: "/features/audio", element: <AudioSystem /> },
       { path: "/features/internet", element: <InternetConnectivity /> },
+      { path: "/features/smart-kitchen", element: <SmartKitchen /> },
+      { path: "/features/automated-driving", element: <AutomatedDriving /> },
       { path: "/models", element: <Models /> },
       { path: "/models/luxury", element: <LuxuryModel /> },
       { path: "/models/adventure", element: <AdventureModel /> },

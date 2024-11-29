@@ -1,0 +1,74 @@
+import { motion } from "framer-motion";
+import Navbar from "@/components/Navbar";
+import { Refrigerator, Droplet } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
+
+const SmartKitchen = () => {
+  return (
+    <>
+      <Navbar />
+      <motion.div 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.6 }}
+        className="min-h-screen pt-24 px-4 bg-gradient-to-b from-gray-900 to-gray-800"
+      >
+        <div className="max-w-7xl mx-auto">
+          <div className="flex items-center gap-4 mb-8">
+            <Refrigerator className="h-8 w-8 text-blue-400" />
+            <h1 className="text-4xl font-bold text-white">Smart Kitchen and Appliances</h1>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+            <div className="bg-gray-800/50 p-8 rounded-lg border border-gray-700">
+              <h2 className="text-2xl font-semibold text-blue-400 mb-4">Connected Refrigerators and Cooking Appliances</h2>
+              <img 
+                src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=800"
+                alt="Smart Kitchen Appliances"
+                className="w-full h-64 object-cover rounded-lg mb-6"
+              />
+              <ul className="list-disc list-inside space-y-3 text-gray-300">
+                <li>Remote monitoring and control of appliances</li>
+                <li>Smart temperature and freshness management</li>
+                <li>Automated grocery tracking and ordering</li>
+                <li>Recipe suggestions based on available ingredients</li>
+                <li>Energy usage optimization</li>
+              </ul>
+            </div>
+
+            <div className="bg-gray-800/50 p-8 rounded-lg border border-gray-700">
+              <h2 className="text-2xl font-semibold text-blue-400 mb-4">Water Management Systems</h2>
+              <div className="flex items-center gap-3 mb-6">
+                <Droplet className="h-6 w-6 text-cyan-400" />
+                <span className="text-white">Smart Water Solutions</span>
+              </div>
+              <img 
+                src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800"
+                alt="Water Management System"
+                className="w-full h-64 object-cover rounded-lg mb-6"
+              />
+              <ul className="list-disc list-inside space-y-3 text-gray-300">
+                <li>Real time water usage monitoring</li>
+                <li>Advanced water purification systems</li>
+                <li>Automatic leak detection and alerts</li>
+                <li>Water pressure optimization</li>
+                <li>Conservation recommendations</li>
+              </ul>
+            </div>
+          </div>
+
+          <div className="text-center">
+            <Link to="/schedule-demo">
+              <Button className="bg-blue-500 hover:bg-blue-600">
+                Schedule a Demo
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </motion.div>
+    </>
+  );
+};
+
+export default SmartKitchen;
