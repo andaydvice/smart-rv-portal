@@ -21,13 +21,15 @@ const SmartKitchen = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-            <div className="bg-gray-800/50 p-8 rounded-lg border border-gray-700">
+            <div className="bg-gray-800/50 p-8 rounded-lg border border-gray-700 flex flex-col">
               <h2 className="text-2xl font-semibold text-blue-400 mb-4">Connected Refrigerators and Cooking Appliances</h2>
-              <img 
-                src="/lovable-uploads/28815e7c-77df-4758-b609-d84355448eea.png"
-                alt="Smart Kitchen Appliances"
-                className="w-full h-64 object-cover rounded-lg mb-6"
-              />
+              <div className="relative aspect-video mb-6">
+                <img 
+                  src="/lovable-uploads/28815e7c-77df-4758-b609-d84355448eea.png"
+                  alt="Smart Kitchen Appliances"
+                  className="absolute inset-0 w-full h-full object-cover rounded-lg"
+                />
+              </div>
               <ul className="list-disc list-inside space-y-3 text-gray-300">
                 <li>Remote monitoring and control of appliances</li>
                 <li>Smart temperature and freshness management</li>
@@ -37,17 +39,19 @@ const SmartKitchen = () => {
               </ul>
             </div>
 
-            <div className="bg-gray-800/50 p-8 rounded-lg border border-gray-700">
+            <div className="bg-gray-800/50 p-8 rounded-lg border border-gray-700 flex flex-col">
               <h2 className="text-2xl font-semibold text-blue-400 mb-4">Water Management Systems</h2>
               <div className="flex items-center gap-3 mb-6">
                 <Droplet className="h-6 w-6 text-cyan-400" />
                 <span className="text-white">Smart Water Solutions</span>
               </div>
-              <img 
-                src="/lovable-uploads/3af8fc31-188d-477e-8ab5-b94bd8c4ec77.png"
-                alt="Water Management System"
-                className="w-full h-64 object-cover rounded-lg mb-6"
-              />
+              <div className="relative aspect-video mb-6">
+                <img 
+                  src="/lovable-uploads/3af8fc31-188d-477e-8ab5-b94bd8c4ec77.png"
+                  alt="Water Management System"
+                  className="absolute inset-0 w-full h-full object-cover rounded-lg"
+                />
+              </div>
               <ul className="list-disc list-inside space-y-3 text-gray-300">
                 <li>Real time water usage monitoring</li>
                 <li>Advanced water purification systems</li>
