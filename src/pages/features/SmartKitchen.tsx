@@ -24,7 +24,7 @@ const SmartKitchen = () => {
             <div className="bg-gray-800/50 p-8 rounded-lg border border-gray-700">
               <h2 className="text-2xl font-semibold text-blue-400 mb-4">Connected Refrigerators and Cooking Appliances</h2>
               <img 
-                src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=800"
+                src="/lovable-uploads/28815e7c-77df-4758-b609-d84355448eea.png"
                 alt="Smart Kitchen Appliances"
                 className="w-full h-64 object-cover rounded-lg mb-6"
               />
