@@ -30,7 +30,7 @@ const AutomatedDriving = () => {
               <img 
                 src="/lovable-uploads/83016e8b-ff85-42b1-910f-4f4781ac341b.png"
                 alt="ADAS Interface"
-                className="w-full h-64 object-cover rounded-lg mb-6"
+                className="w-full h-80 object-contain rounded-lg mb-6 bg-gray-900/50 p-4 hover:scale-105 transition-transform duration-300"
               />
               <ul className="list-disc list-inside space-y-3 text-gray-300">
                 <li>Adaptive cruise control for maintaining safe distances</li>
