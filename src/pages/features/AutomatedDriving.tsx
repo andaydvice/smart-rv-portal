@@ -28,7 +28,7 @@ const AutomatedDriving = () => {
                 <span className="text-white">Safety Features</span>
               </div>
               <img 
-                src="/lovable-uploads/ee026535-e835-46ae-b779-be457eb8ff04.png"
+                src="/lovable-uploads/83016e8b-ff85-42b1-910f-4f4781ac341b.png"
                 alt="ADAS Interface"
                 className="w-full h-64 object-cover rounded-lg mb-6"
               />
