@@ -1,12 +1,8 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
+import { Card } from "@/components/ui/card";
+import { ArrowRight, Wifi, Settings, BookOpen } from "lucide-react";
 
 const Troubleshooting = () => {
   return (
@@ -24,92 +20,78 @@ const Troubleshooting = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="text-center"
+            className="text-center px-4"
           >
             <h1 className="text-4xl md:text-5xl font-bold mb-6 text-white">
-              Smart RV Troubleshooting Guide
+              Troubleshooting Guides
             </h1>
-            <p className="text-xl text-gray-200 mb-8">
-              Quick solutions to common issues for your Smart RV experience
-            </p>
           </motion.div>
         </div>
       </section>
 
-      {/* FAQ Section */}
+      {/* Main Content */}
       <section className="py-16 container mx-auto px-4">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="max-w-3xl mx-auto"
-        >
-          <Accordion type="single" collapsible className="space-y-4">
-            <AccordionItem value="power">
-              <AccordionTrigger className="text-lg font-semibold">
-                Power System Issues
-              </AccordionTrigger>
-              <AccordionContent className="text-gray-600 space-y-4">
-                <p>Common power system troubleshooting steps:</p>
-                <ul className="list-disc pl-6 space-y-2">
-                  <li>Check battery charge levels in the Smart RV app</li>
-                  <li>Verify shore power connection is secure</li>
-                  <li>Inspect solar panel connections if equipped</li>
-                  <li>Reset power management system through main control panel</li>
-                </ul>
-              </AccordionContent>
-            </AccordionItem>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+          {/* Smart System Integration */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
+            <Card className="p-8 h-full bg-white/90 backdrop-blur-sm border border-gray-200 shadow-lg hover:shadow-xl transition-shadow">
+              <div className="flex items-center gap-4 mb-6">
+                <Settings className="h-8 w-8 text-blue-500" />
+                <h2 className="text-2xl font-bold text-gray-900">Smart System Integration</h2>
+              </div>
+              <div className="space-y-4 text-gray-600">
+                <div className="flex items-start gap-3">
+                  <ArrowRight className="h-5 w-5 text-blue-500 mt-1 flex-shrink-0" />
+                  <p>Step-by-step tutorials for setting up and integrating various smart RV systems</p>
+                </div>
+                <div className="flex items-start gap-3">
+                  <ArrowRight className="h-5 w-5 text-blue-500 mt-1 flex-shrink-0" />
+                  <p>Compatibility charts for different smart devices and RV models</p>
+                </div>
+                <div className="flex items-start gap-3">
+                  <ArrowRight className="h-5 w-5 text-blue-500 mt-1 flex-shrink-0" />
+                  <p>Troubleshooting flowcharts for common integration issues</p>
+                </div>
+              </div>
+            </Card>
+          </motion.div>
 
-            <AccordionItem value="connectivity">
-              <AccordionTrigger className="text-lg font-semibold">
-                Internet Connectivity Problems
-              </AccordionTrigger>
-              <AccordionContent className="text-gray-600 space-y-4">
-                <p>If experiencing connectivity issues:</p>
-                <ul className="list-disc pl-6 space-y-2">
-                  <li>Check signal strength in your current location</li>
-                  <li>Restart the onboard Wi-Fi router</li>
-                  <li>Verify data plan status</li>
-                  <li>Update router firmware if available</li>
-                </ul>
-              </AccordionContent>
-            </AccordionItem>
-
-            <AccordionItem value="climate">
-              <AccordionTrigger className="text-lg font-semibold">
-                Climate Control System
-              </AccordionTrigger>
-              <AccordionContent className="text-gray-600 space-y-4">
-                <p>For temperature control issues:</p>
-                <ul className="list-disc pl-6 space-y-2">
-                  <li>Clean or replace air filters</li>
-                  <li>Check zone settings in climate control app</li>
-                  <li>Verify temperature sensors are unobstructed</li>
-                  <li>Ensure all vents are open and unblocked</li>
-                </ul>
-              </AccordionContent>
-            </AccordionItem>
-
-            <AccordionItem value="appliances">
-              <AccordionTrigger className="text-lg font-semibold">
-                Smart Appliance Troubleshooting
-              </AccordionTrigger>
-              <AccordionContent className="text-gray-600 space-y-4">
-                <p>For appliance-related issues:</p>
-                <ul className="list-disc pl-6 space-y-2">
-                  <li>Verify appliance is connected to RV network</li>
-                  <li>Check for software updates</li>
-                  <li>Reset appliance through smart home interface</li>
-                  <li>Ensure proper power supply to appliance</li>
-                </ul>
-              </AccordionContent>
-            </AccordionItem>
-          </Accordion>
-        </motion.div>
+          {/* Connectivity Solutions */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+          >
+            <Card className="p-8 h-full bg-white/90 backdrop-blur-sm border border-gray-200 shadow-lg hover:shadow-xl transition-shadow">
+              <div className="flex items-center gap-4 mb-6">
+                <Wifi className="h-8 w-8 text-green-500" />
+                <h2 className="text-2xl font-bold text-gray-900">Connectivity Solutions</h2>
+              </div>
+              <div className="space-y-4 text-gray-600">
+                <div className="flex items-start gap-3">
+                  <ArrowRight className="h-5 w-5 text-green-500 mt-1 flex-shrink-0" />
+                  <p>Guide to boosting internet and cellular signals in remote areas</p>
+                </div>
+                <div className="flex items-start gap-3">
+                  <ArrowRight className="h-5 w-5 text-green-500 mt-1 flex-shrink-0" />
+                  <p>Reviews and comparisons of mobile hotspots and signal boosters</p>
+                </div>
+                <div className="flex items-start gap-3">
+                  <ArrowRight className="h-5 w-5 text-green-500 mt-1 flex-shrink-0" />
+                  <p>Tips for creating a reliable mobile office setup</p>
+                </div>
+              </div>
+            </Card>
+          </motion.div>
+        </div>
 
         <div className="text-center mt-12">
           <p className="text-gray-600 mb-6">
-            Still having issues? Our support team is here to help.
+            Need personalized assistance? Our support team is ready to help.
           </p>
           <Link to="/contact">
             <Button size="lg" className="bg-blue-500 hover:bg-blue-600">
