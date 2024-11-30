@@ -14,7 +14,7 @@ const Troubleshooting = () => {
       {/* Hero Section */}
       <section className="relative">
         <img 
-          src="/lovable-uploads/0a0224b4-f5cb-4f90-9f84-dd5ad3e2c21c.png" 
+          src="/lovable-uploads/69d5ac06-d442-462c-8114-0761265710bd.png" 
           alt="Smart RV Troubleshooting Guide"
           className="w-full h-[60vh] object-cover"
         />
