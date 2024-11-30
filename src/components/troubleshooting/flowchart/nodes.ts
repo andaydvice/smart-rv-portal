@@ -1,7 +1,7 @@
 import { Node } from 'reactflow';
 
 const baseNodeStyle = "p-4 rounded-lg text-white font-semibold shadow-lg text-center whitespace-pre-line min-w-[300px]";
-const mainNodeStyle = "p-6 rounded-lg text-white font-bold shadow-lg text-center whitespace-pre-line min-w-[350px] text-3xl";
+const topNodeStyle = "p-4 rounded-lg text-white font-bold shadow-lg text-center whitespace-pre-line min-w-[300px] text-3xl";
 
 export const nodes: Node[] = [
   {
@@ -22,7 +22,7 @@ export const nodes: Node[] = [
       label: 'Power System Diagnostics' 
     },
     position: { x: -400, y: 100 },
-    className: `${mainNodeStyle} bg-gradient-to-br from-purple-500 to-purple-600`
+    className: `${baseNodeStyle} bg-gradient-to-br from-purple-500 to-purple-600`
   },
   {
     id: 'battery',
@@ -69,7 +69,7 @@ export const nodes: Node[] = [
       label: 'Network Infrastructure Analysis' 
     },
     position: { x: 0, y: 100 },
-    className: `${mainNodeStyle} bg-gradient-to-br from-cyan-500 to-cyan-600`
+    className: `${baseNodeStyle} bg-gradient-to-br from-cyan-500 to-cyan-600`
   },
   {
     id: 'wifi',
@@ -107,7 +107,7 @@ export const nodes: Node[] = [
       label: 'System Software Verification' 
     },
     position: { x: 400, y: 100 },
-    className: `${mainNodeStyle} bg-gradient-to-br from-indigo-500 to-indigo-600`
+    className: `${baseNodeStyle} bg-gradient-to-br from-indigo-500 to-indigo-600`
   },
   {
     id: 'version',
@@ -144,5 +144,34 @@ export const nodes: Node[] = [
     },
     position: { x: 0, y: 900 },
     className: `${baseNodeStyle} bg-gradient-to-br from-red-500 to-red-600`
+  },
+  
+  // Top row nodes with larger text
+  {
+    id: 'power-analysis',
+    type: 'default',
+    data: { 
+      label: 'Power Analysis' 
+    },
+    position: { x: -400, y: 50 },
+    className: `${topNodeStyle} bg-transparent`
+  },
+  {
+    id: 'network-subsystem',
+    type: 'default',
+    data: { 
+      label: 'Network Subsystem' 
+    },
+    position: { x: 0, y: 50 },
+    className: `${topNodeStyle} bg-transparent`
+  },
+  {
+    id: 'software-subsystem',
+    type: 'default',
+    data: { 
+      label: 'Software Subsystem' 
+    },
+    position: { x: 400, y: 50 },
+    className: `${topNodeStyle} bg-transparent`
   }
 ];
