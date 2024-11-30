@@ -8,60 +8,42 @@ const baseEdgeStyle = {
 };
 
 export const edges: Edge[] = [
-  // Start to main branches
   {
     id: 'start-power',
     source: 'start',
     target: 'power',
+    label: 'Power Analysis',
     ...baseEdgeStyle
   },
   {
     id: 'start-network',
     source: 'start',
     target: 'network',
+    label: 'Network Subsystem',
     ...baseEdgeStyle
   },
   {
     id: 'start-software',
     source: 'start',
     target: 'software',
+    label: 'Software Subsystem',
     ...baseEdgeStyle
   },
-  // Main branches to second level
   {
-    id: 'power-battery',
+    id: 'power-resolved',
     source: 'power',
-    target: 'battery',
+    target: 'resolved',
     ...baseEdgeStyle
   },
   {
-    id: 'network-wifi',
+    id: 'network-resolved',
     source: 'network',
-    target: 'wifi',
+    target: 'resolved',
     ...baseEdgeStyle
   },
   {
-    id: 'software-update',
+    id: 'software-resolved',
     source: 'software',
-    target: 'update',
-    ...baseEdgeStyle
-  },
-  // Second level to resolution
-  {
-    id: 'battery-resolved',
-    source: 'battery',
-    target: 'resolved',
-    ...baseEdgeStyle
-  },
-  {
-    id: 'wifi-resolved',
-    source: 'wifi',
-    target: 'resolved',
-    ...baseEdgeStyle
-  },
-  {
-    id: 'update-resolved',
-    source: 'update',
     target: 'resolved',
     ...baseEdgeStyle
   }
