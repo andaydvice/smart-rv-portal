@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import { Wifi, Globe, Shield, Zap } from "lucide-react";
+import ConnectivityGuide from "@/components/connectivity/ConnectivityGuide";
 
 const InternetConnectivity = () => {
   return (
@@ -71,6 +72,8 @@ const InternetConnectivity = () => {
               </div>
             </div>
           </div>
+
+          <ConnectivityGuide />
         </div>
       </motion.div>
     </>
