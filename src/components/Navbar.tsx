@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Menu, X } from "lucide-react";
+import { Menu, X, HelpCircle } from "lucide-react";
 import { Logo } from "./Logo";
 import { SmartFeatureLinks, EntertainmentLinks } from "./NavbarLinks";
 import {
@@ -10,6 +10,13 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -76,6 +83,20 @@ const Navbar = () => {
             <Link to="/contact" className="text-gray-300 hover:text-white transition-colors text-base" onClick={handleLinkClick}>
               Contact
             </Link>
+            <DropdownMenu>
+              <DropdownMenuTrigger className="text-gray-300 hover:text-white transition-colors text-base">
+                <HelpCircle className="h-5 w-5" />
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="bg-gray-900/95 backdrop-blur-sm border-gray-800">
+                <DropdownMenuGroup>
+                  <DropdownMenuItem>
+                    <Link to="/troubleshooting" className="text-gray-300 hover:text-white transition-colors">
+                      Troubleshooting Guide
+                    </Link>
+                  </DropdownMenuItem>
+                </DropdownMenuGroup>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
         </div>
       </div>
@@ -120,6 +141,13 @@ const Navbar = () => {
             onClick={handleLinkClick}
           >
             Contact
+          </Link>
+          <Link
+            to="/troubleshooting"
+            className="block px-3 py-2 text-gray-300 hover:text-white transition-colors"
+            onClick={handleLinkClick}
+          >
+            Troubleshooting
           </Link>
         </div>
       </div>
