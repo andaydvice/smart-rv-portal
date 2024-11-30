@@ -18,7 +18,7 @@ export const nodes: Node[] = [
       label: 'Power System Diagnostics' 
     },
     position: { x: 150, y: 150 },
-    className: 'bg-gradient-to-br from-purple-500 to-purple-600 p-4 rounded-lg text-white shadow-lg min-w-[250px] text-center'
+    className: 'bg-gradient-to-br from-purple-500 to-purple-600 p-4 rounded-lg text-white font-semibold shadow-lg min-w-[250px] text-center'
   },
   {
     id: 'battery',
@@ -27,7 +27,7 @@ export const nodes: Node[] = [
       label: 'Battery Voltage Analysis\n(Threshold: 12.2V DC)' 
     },
     position: { x: 150, y: 300 },
-    className: 'bg-gradient-to-br from-purple-400 to-purple-500 p-4 rounded-lg text-white min-w-[250px] text-center'
+    className: 'bg-gradient-to-br from-purple-400 to-purple-500 p-4 rounded-lg text-white font-semibold min-w-[250px] text-center'
   },
   {
     id: 'charge',
@@ -36,7 +36,7 @@ export const nodes: Node[] = [
       label: 'Power System Recovery Protocol:\n• Initialize Shore Power Connection\n• Monitor Charging Parameters\n• Verify Power Stability' 
     },
     position: { x: 150, y: 450 },
-    className: 'bg-gradient-to-br from-purple-400 to-purple-500 p-4 rounded-lg text-white min-w-[300px] text-center whitespace-pre-line'
+    className: 'bg-gradient-to-br from-purple-400 to-purple-500 p-4 rounded-lg text-white font-semibold min-w-[300px] text-center whitespace-pre-line'
   },
   // Network Branch - Cyan Theme
   {
@@ -46,7 +46,7 @@ export const nodes: Node[] = [
       label: 'Network Infrastructure Analysis' 
     },
     position: { x: 500, y: 150 },
-    className: 'bg-gradient-to-br from-cyan-500 to-cyan-600 p-4 rounded-lg text-white shadow-lg min-w-[250px] text-center'
+    className: 'bg-gradient-to-br from-cyan-500 to-cyan-600 p-4 rounded-lg text-white font-semibold shadow-lg min-w-[250px] text-center'
   },
   {
     id: 'wifi',
@@ -55,7 +55,7 @@ export const nodes: Node[] = [
       label: 'Signal Quality Metrics:\n• RSSI Threshold: -70dBm\n• SNR Threshold: 20dB\n• Connection Stability Check' 
     },
     position: { x: 500, y: 300 },
-    className: 'bg-gradient-to-br from-cyan-400 to-cyan-500 p-4 rounded-lg text-white min-w-[300px] text-center whitespace-pre-line'
+    className: 'bg-gradient-to-br from-cyan-400 to-cyan-500 p-4 rounded-lg text-white font-semibold min-w-[300px] text-center whitespace-pre-line'
   },
   {
     id: 'boost',
@@ -64,7 +64,7 @@ export const nodes: Node[] = [
       label: 'Signal Enhancement Protocol:\n• Deploy Signal Amplification\n• Optimize Antenna Configuration\n• Verify Signal Improvement' 
     },
     position: { x: 500, y: 450 },
-    className: 'bg-gradient-to-br from-cyan-400 to-cyan-500 p-4 rounded-lg text-white min-w-[300px] text-center whitespace-pre-line'
+    className: 'bg-gradient-to-br from-cyan-400 to-cyan-500 p-4 rounded-lg text-white font-semibold min-w-[300px] text-center whitespace-pre-line'
   },
   // Software Branch - Indigo Theme
   {
@@ -74,7 +74,7 @@ export const nodes: Node[] = [
       label: 'System Software Verification' 
     },
     position: { x: 850, y: 150 },
-    className: 'bg-gradient-to-br from-indigo-500 to-indigo-600 p-4 rounded-lg text-white shadow-lg min-w-[250px] text-center'
+    className: 'bg-gradient-to-br from-indigo-500 to-indigo-600 p-4 rounded-lg text-white font-semibold shadow-lg min-w-[250px] text-center'
   },
   {
     id: 'version',
@@ -83,7 +83,7 @@ export const nodes: Node[] = [
       label: 'Firmware Version Analysis:\n• Current Version: v2.1.4\n• Latest Release: v2.1.4\n• Compatibility Check' 
     },
     position: { x: 850, y: 300 },
-    className: 'bg-gradient-to-br from-indigo-400 to-indigo-500 p-4 rounded-lg text-white min-w-[300px] text-center whitespace-pre-line'
+    className: 'bg-gradient-to-br from-indigo-400 to-indigo-500 p-4 rounded-lg text-white font-semibold min-w-[300px] text-center whitespace-pre-line'
   },
   {
     id: 'update',
@@ -92,7 +92,7 @@ export const nodes: Node[] = [
       label: 'System Update Protocol:\n• Download Firmware Package\n• Verify Digital Signatures\n• Execute Update Sequence' 
     },
     position: { x: 850, y: 450 },
-    className: 'bg-gradient-to-br from-indigo-400 to-indigo-500 p-4 rounded-lg text-white min-w-[300px] text-center whitespace-pre-line'
+    className: 'bg-gradient-to-br from-indigo-400 to-indigo-500 p-4 rounded-lg text-white font-semibold min-w-[300px] text-center whitespace-pre-line'
   },
   // Resolution Nodes
   {
@@ -102,7 +102,7 @@ export const nodes: Node[] = [
       label: 'System Status Verification:\nDiagnostic Completion Check' 
     },
     position: { x: 500, y: 600 },
-    className: 'bg-gradient-to-br from-emerald-500 to-emerald-600 p-4 rounded-lg text-white shadow-lg min-w-[300px] text-center whitespace-pre-line'
+    className: 'bg-gradient-to-br from-emerald-500 to-emerald-600 p-4 rounded-lg text-white font-semibold shadow-lg min-w-[300px] text-center whitespace-pre-line'
   },
   {
     id: 'support',
@@ -111,6 +111,6 @@ export const nodes: Node[] = [
       label: 'Technical Support Escalation:\n• Generate System Diagnostics\n• Schedule Technical Consultation\n• Prepare Support Documentation' 
     },
     position: { x: 500, y: 750 },
-    className: 'bg-gradient-to-br from-red-500 to-red-600 p-4 rounded-lg text-white shadow-lg min-w-[300px] text-center whitespace-pre-line'
+    className: 'bg-gradient-to-br from-red-500 to-red-600 p-4 rounded-lg text-white font-semibold shadow-lg min-w-[300px] text-center whitespace-pre-line'
   }
 ];
