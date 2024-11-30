@@ -12,7 +12,7 @@ const SmartKitchen = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6 }}
-        className="min-h-screen pt-24 px-4 bg-gradient-to-b from-gray-900 to-gray-800"
+        className="min-h-screen pt-24 pb-24 px-4 bg-gradient-to-b from-gray-900 to-gray-800"
       >
         <div className="max-w-7xl mx-auto">
           <div className="flex items-center gap-4 mb-8">
@@ -66,9 +66,9 @@ const SmartKitchen = () => {
             </div>
           </div>
 
-          <div className="text-center mb-12">
+          <div className="text-center mb-12 mt-8">
             <Link to="/schedule-demo">
-              <Button className="bg-blue-500 hover:bg-blue-600">
+              <Button className="bg-blue-500 hover:bg-blue-600 text-lg py-6 px-8">
                 Schedule a Demo
               </Button>
             </Link>
