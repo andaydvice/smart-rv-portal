@@ -17,7 +17,7 @@ export const nodes: Node[] = [
     data: { 
       label: 'Power System Diagnostics' 
     },
-    position: { x: 150, y: 150 },
+    position: { x: 100, y: 150 },
     className: 'bg-gradient-to-br from-purple-500 to-purple-600 p-4 rounded-lg text-white font-semibold shadow-lg min-w-[250px] text-center'
   },
   {
@@ -26,7 +26,7 @@ export const nodes: Node[] = [
     data: { 
       label: 'Battery Voltage Analysis\n(Threshold: 12.2V DC)' 
     },
-    position: { x: 150, y: 300 },
+    position: { x: 100, y: 300 },
     className: 'bg-gradient-to-br from-purple-400 to-purple-500 p-4 rounded-lg text-white font-semibold min-w-[250px] text-center'
   },
   {
@@ -35,7 +35,7 @@ export const nodes: Node[] = [
     data: { 
       label: 'Battery System Diagnostics:\n• Cell Balance Check\n• Temperature Monitoring\n• Charging Efficiency Test' 
     },
-    position: { x: -100, y: 450 },
+    position: { x: -200, y: 450 },
     className: 'bg-gradient-to-br from-purple-400 to-purple-500 p-4 rounded-lg text-white font-semibold min-w-[300px] text-center whitespace-pre-line'
   },
   {
@@ -44,7 +44,7 @@ export const nodes: Node[] = [
     data: { 
       label: 'Solar Integration Check:\n• Panel Performance\n• Charge Controller Status\n• Power Output Analysis' 
     },
-    position: { x: 150, y: 450 },
+    position: { x: 100, y: 450 },
     className: 'bg-gradient-to-br from-purple-400 to-purple-500 p-4 rounded-lg text-white font-semibold min-w-[300px] text-center whitespace-pre-line'
   },
   {
@@ -100,7 +100,7 @@ export const nodes: Node[] = [
     data: { 
       label: 'System Software Verification' 
     },
-    position: { x: 850, y: 150 },
+    position: { x: 900, y: 150 },
     className: 'bg-gradient-to-br from-indigo-500 to-indigo-600 p-4 rounded-lg text-white font-semibold shadow-lg min-w-[250px] text-center'
   },
   {
@@ -109,7 +109,7 @@ export const nodes: Node[] = [
     data: { 
       label: 'Firmware Version Analysis:\n• Current Version: v2.1.4\n• Latest Release: v2.1.4\n• Compatibility Check' 
     },
-    position: { x: 850, y: 300 },
+    position: { x: 900, y: 300 },
     className: 'bg-gradient-to-br from-indigo-400 to-indigo-500 p-4 rounded-lg text-white font-semibold min-w-[300px] text-center whitespace-pre-line'
   },
   {
@@ -118,7 +118,7 @@ export const nodes: Node[] = [
     data: { 
       label: 'System Update Protocol:\n• Download Firmware Package\n• Verify Digital Signatures\n• Execute Update Sequence' 
     },
-    position: { x: 850, y: 450 },
+    position: { x: 900, y: 450 },
     className: 'bg-gradient-to-br from-indigo-400 to-indigo-500 p-4 rounded-lg text-white font-semibold min-w-[300px] text-center whitespace-pre-line'
   },
   // Resolution Nodes
