@@ -1,7 +1,7 @@
 import { Node } from 'reactflow';
 
 const baseNodeStyle = "p-4 rounded-lg text-white font-semibold shadow-lg text-center whitespace-pre-line min-w-[300px]";
-const mainNodeStyle = "p-4 rounded-lg text-white font-bold shadow-lg text-center whitespace-pre-line min-w-[300px] text-xl";
+const mainNodeStyle = "p-6 rounded-lg text-white font-bold shadow-lg text-center whitespace-pre-line min-w-[350px] text-2xl";
 
 export const nodes: Node[] = [
   {
