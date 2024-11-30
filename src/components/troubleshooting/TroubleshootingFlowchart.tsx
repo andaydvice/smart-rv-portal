@@ -22,13 +22,17 @@ const TroubleshootingFlowchart = () => {
           edges={edges}
           fitView
           className="bg-transparent"
-          minZoom={0.25}
+          minZoom={0.15}
           maxZoom={1.5}
-          defaultViewport={{ x: 0, y: 0, zoom: 0.4 }}
+          defaultViewport={{ x: 0, y: 0, zoom: 0.25 }}
           proOptions={proOptions}
         >
           <Background color="#6366f1" gap={16} size={1} />
-          <Controls className="bg-gray-800 border-gray-700 text-white" />
+          <Controls 
+            className="bg-gray-800 border-gray-700 text-white flex flex-col" 
+            showInteractive={false}
+            position="bottom-right"
+          />
         </ReactFlow>
       </div>
     </Card>

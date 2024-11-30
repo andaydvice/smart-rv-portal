@@ -18,7 +18,7 @@ export const nodes: Node[] = [
     data: { 
       label: 'Power System Diagnostics' 
     },
-    position: { x: -200, y: 150 },
+    position: { x: -400, y: 150 },
     className: 'bg-gradient-to-br from-purple-500 to-purple-600 p-4 rounded-lg text-white font-semibold shadow-lg min-w-[250px] text-center'
   },
   {
@@ -27,7 +27,7 @@ export const nodes: Node[] = [
     data: { 
       label: 'Battery Voltage Analysis\n(Threshold: 12.2V DC)' 
     },
-    position: { x: -200, y: 300 },
+    position: { x: -400, y: 300 },
     className: 'bg-gradient-to-br from-purple-400 to-purple-500 p-4 rounded-lg text-white font-semibold min-w-[250px] text-center'
   },
   {
@@ -36,8 +36,8 @@ export const nodes: Node[] = [
     data: { 
       label: 'Battery System Diagnostics:\n• Cell Balance Check\n• Temperature Monitoring\n• Charging Efficiency Test' 
     },
-    position: { x: -500, y: 450 },
-    className: 'bg-gradient-to-br from-purple-400 to-purple-500 p-4 rounded-lg text-white font-semibold min-w-[350px] text-center whitespace-pre-line'
+    position: { x: -800, y: 450 },
+    className: 'bg-gradient-to-br from-purple-400 to-purple-500 p-4 rounded-lg text-white font-semibold min-w-[400px] text-center whitespace-pre-line'
   },
   {
     id: 'solar-system',
@@ -45,8 +45,8 @@ export const nodes: Node[] = [
     data: { 
       label: 'Solar Integration Check:\n• Panel Performance\n• Charge Controller Status\n• Power Output Analysis' 
     },
-    position: { x: -200, y: 450 },
-    className: 'bg-gradient-to-br from-purple-400 to-purple-500 p-4 rounded-lg text-white font-semibold min-w-[350px] text-center whitespace-pre-line'
+    position: { x: -400, y: 450 },
+    className: 'bg-gradient-to-br from-purple-400 to-purple-500 p-4 rounded-lg text-white font-semibold min-w-[400px] text-center whitespace-pre-line'
   },
   {
     id: 'charge',
@@ -54,8 +54,8 @@ export const nodes: Node[] = [
     data: { 
       label: 'Power System Recovery Protocol:\n• Initialize Shore Power Connection\n• Monitor Charging Parameters\n• Verify Power Stability' 
     },
-    position: { x: 100, y: 450 },
-    className: 'bg-gradient-to-br from-purple-400 to-purple-500 p-4 rounded-lg text-white font-semibold min-w-[350px] text-center whitespace-pre-line'
+    position: { x: 0, y: 450 },
+    className: 'bg-gradient-to-br from-purple-400 to-purple-500 p-4 rounded-lg text-white font-semibold min-w-[400px] text-center whitespace-pre-line'
   },
   {
     id: 'network',
@@ -73,7 +73,7 @@ export const nodes: Node[] = [
       label: 'Signal Quality Metrics:\n• RSSI Threshold: -70dBm\n• SNR Threshold: 20dB\n• Connection Stability Check' 
     },
     position: { x: 500, y: 300 },
-    className: 'bg-gradient-to-br from-cyan-400 to-cyan-500 p-4 rounded-lg text-white font-semibold min-w-[300px] text-center whitespace-pre-line'
+    className: 'bg-gradient-to-br from-cyan-400 to-cyan-500 p-4 rounded-lg text-white font-semibold min-w-[400px] text-center whitespace-pre-line'
   },
   {
     id: 'smart-devices',
@@ -82,7 +82,7 @@ export const nodes: Node[] = [
       label: 'Smart Device Connectivity:\n• Device Discovery Scan\n• Protocol Compatibility\n• Connection Quality Test' 
     },
     position: { x: 500, y: 450 },
-    className: 'bg-gradient-to-br from-cyan-400 to-cyan-500 p-4 rounded-lg text-white font-semibold min-w-[300px] text-center whitespace-pre-line'
+    className: 'bg-gradient-to-br from-cyan-400 to-cyan-500 p-4 rounded-lg text-white font-semibold min-w-[400px] text-center whitespace-pre-line'
   },
   {
     id: 'boost',
@@ -91,7 +91,7 @@ export const nodes: Node[] = [
       label: 'Signal Enhancement Protocol:\n• Deploy Signal Amplification\n• Optimize Antenna Configuration\n• Verify Signal Improvement' 
     },
     position: { x: 500, y: 600 },
-    className: 'bg-gradient-to-br from-cyan-400 to-cyan-500 p-4 rounded-lg text-white font-semibold min-w-[300px] text-center whitespace-pre-line'
+    className: 'bg-gradient-to-br from-cyan-400 to-cyan-500 p-4 rounded-lg text-white font-semibold min-w-[400px] text-center whitespace-pre-line'
   },
   {
     id: 'software',
@@ -99,7 +99,7 @@ export const nodes: Node[] = [
     data: { 
       label: 'System Software Verification' 
     },
-    position: { x: 950, y: 150 },
+    position: { x: 1400, y: 150 },
     className: 'bg-gradient-to-br from-indigo-500 to-indigo-600 p-4 rounded-lg text-white font-semibold shadow-lg min-w-[250px] text-center'
   },
   {
@@ -108,8 +108,8 @@ export const nodes: Node[] = [
     data: { 
       label: 'Firmware Version Analysis:\n• Current Version: v2.1.4\n• Latest Release: v2.1.4\n• Compatibility Check' 
     },
-    position: { x: 950, y: 300 },
-    className: 'bg-gradient-to-br from-indigo-400 to-indigo-500 p-4 rounded-lg text-white font-semibold min-w-[300px] text-center whitespace-pre-line'
+    position: { x: 1400, y: 300 },
+    className: 'bg-gradient-to-br from-indigo-400 to-indigo-500 p-4 rounded-lg text-white font-semibold min-w-[400px] text-center whitespace-pre-line'
   },
   {
     id: 'update',
@@ -117,10 +117,9 @@ export const nodes: Node[] = [
     data: { 
       label: 'System Update Protocol:\n• Download Firmware Package\n• Verify Digital Signatures\n• Execute Update Sequence' 
     },
-    position: { x: 950, y: 450 },
-    className: 'bg-gradient-to-br from-indigo-400 to-indigo-500 p-4 rounded-lg text-white font-semibold min-w-[300px] text-center whitespace-pre-line'
+    position: { x: 1400, y: 450 },
+    className: 'bg-gradient-to-br from-indigo-400 to-indigo-500 p-4 rounded-lg text-white font-semibold min-w-[400px] text-center whitespace-pre-line'
   },
-  // Resolution Nodes
   {
     id: 'resolved',
     type: 'default',
@@ -128,7 +127,7 @@ export const nodes: Node[] = [
       label: 'System Status Verification:\nDiagnostic Completion Check' 
     },
     position: { x: 500, y: 750 },
-    className: 'bg-gradient-to-br from-emerald-500 to-emerald-600 p-4 rounded-lg text-white font-semibold shadow-lg min-w-[300px] text-center whitespace-pre-line'
+    className: 'bg-gradient-to-br from-emerald-500 to-emerald-600 p-4 rounded-lg text-white font-semibold shadow-lg min-w-[400px] text-center whitespace-pre-line'
   },
   {
     id: 'support',
@@ -137,6 +136,6 @@ export const nodes: Node[] = [
       label: 'Technical Support Escalation:\n• Generate System Diagnostics\n• Schedule Technical Consultation\n• Prepare Support Documentation' 
     },
     position: { x: 500, y: 900 },
-    className: 'bg-gradient-to-br from-red-500 to-red-600 p-4 rounded-lg text-white font-semibold shadow-lg min-w-[300px] text-center whitespace-pre-line'
+    className: 'bg-gradient-to-br from-red-500 to-red-600 p-4 rounded-lg text-white font-semibold shadow-lg min-w-[400px] text-center whitespace-pre-line'
   }
 ];
