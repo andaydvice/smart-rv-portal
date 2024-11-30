@@ -10,6 +10,7 @@ export const nodes: Node[] = [
     position: { x: 500, y: 0 },
     className: 'bg-gradient-to-br from-blue-500 to-blue-600 p-4 rounded-lg border-2 border-blue-400 text-white font-semibold shadow-lg min-w-[250px] text-center'
   },
+  
   // Power Branch - Purple Theme
   {
     id: 'power-check',
@@ -17,7 +18,7 @@ export const nodes: Node[] = [
     data: { 
       label: 'Power System Diagnostics' 
     },
-    position: { x: 50, y: 150 },
+    position: { x: -200, y: 150 },
     className: 'bg-gradient-to-br from-purple-500 to-purple-600 p-4 rounded-lg text-white font-semibold shadow-lg min-w-[250px] text-center'
   },
   {
@@ -26,7 +27,7 @@ export const nodes: Node[] = [
     data: { 
       label: 'Battery Voltage Analysis\n(Threshold: 12.2V DC)' 
     },
-    position: { x: 50, y: 300 },
+    position: { x: -200, y: 300 },
     className: 'bg-gradient-to-br from-purple-400 to-purple-500 p-4 rounded-lg text-white font-semibold min-w-[250px] text-center'
   },
   {
@@ -35,8 +36,8 @@ export const nodes: Node[] = [
     data: { 
       label: 'Battery System Diagnostics:\n• Cell Balance Check\n• Temperature Monitoring\n• Charging Efficiency Test' 
     },
-    position: { x: -250, y: 450 },
-    className: 'bg-gradient-to-br from-purple-400 to-purple-500 p-4 rounded-lg text-white font-semibold min-w-[300px] text-center whitespace-pre-line'
+    position: { x: -500, y: 450 },
+    className: 'bg-gradient-to-br from-purple-400 to-purple-500 p-4 rounded-lg text-white font-semibold min-w-[350px] text-center whitespace-pre-line'
   },
   {
     id: 'solar-system',
@@ -44,8 +45,8 @@ export const nodes: Node[] = [
     data: { 
       label: 'Solar Integration Check:\n• Panel Performance\n• Charge Controller Status\n• Power Output Analysis' 
     },
-    position: { x: 50, y: 450 },
-    className: 'bg-gradient-to-br from-purple-400 to-purple-500 p-4 rounded-lg text-white font-semibold min-w-[300px] text-center whitespace-pre-line'
+    position: { x: -200, y: 450 },
+    className: 'bg-gradient-to-br from-purple-400 to-purple-500 p-4 rounded-lg text-white font-semibold min-w-[350px] text-center whitespace-pre-line'
   },
   {
     id: 'charge',
@@ -53,10 +54,9 @@ export const nodes: Node[] = [
     data: { 
       label: 'Power System Recovery Protocol:\n• Initialize Shore Power Connection\n• Monitor Charging Parameters\n• Verify Power Stability' 
     },
-    position: { x: 350, y: 450 },
-    className: 'bg-gradient-to-br from-purple-400 to-purple-500 p-4 rounded-lg text-white font-semibold min-w-[300px] text-center whitespace-pre-line'
+    position: { x: 100, y: 450 },
+    className: 'bg-gradient-to-br from-purple-400 to-purple-500 p-4 rounded-lg text-white font-semibold min-w-[350px] text-center whitespace-pre-line'
   },
-  // Network Branch - Cyan Theme
   {
     id: 'network',
     type: 'default',
@@ -93,7 +93,6 @@ export const nodes: Node[] = [
     position: { x: 500, y: 600 },
     className: 'bg-gradient-to-br from-cyan-400 to-cyan-500 p-4 rounded-lg text-white font-semibold min-w-[300px] text-center whitespace-pre-line'
   },
-  // Software Branch - Indigo Theme
   {
     id: 'software',
     type: 'default',

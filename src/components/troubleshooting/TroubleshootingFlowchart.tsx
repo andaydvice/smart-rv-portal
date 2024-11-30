@@ -22,9 +22,9 @@ const TroubleshootingFlowchart = () => {
           edges={edges}
           fitView
           className="bg-transparent"
-          minZoom={0.35}
+          minZoom={0.25}
           maxZoom={1.5}
-          defaultViewport={{ x: 0, y: 0, zoom: 0.5 }}
+          defaultViewport={{ x: 0, y: 0, zoom: 0.4 }}
           proOptions={proOptions}
         >
           <Background color="#6366f1" gap={16} size={1} />
