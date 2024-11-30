@@ -75,7 +75,7 @@ export const nodes: Node[] = [
     data: { 
       label: 'Signal Quality Metrics:\n• RSSI Threshold: -70dBm\n• SNR Threshold: 20dB\n• Connection Stability Check' 
     },
-    position: { x: 0, y: 200 },
+    position: { x: 0, y: 250 },
     className: `${baseNodeStyle} bg-gradient-to-br from-cyan-400 to-cyan-500`
   },
   {
@@ -84,7 +84,7 @@ export const nodes: Node[] = [
     data: { 
       label: 'Smart Device Connectivity:\n• Device Discovery Scan\n• Protocol Compatibility\n• Connection Quality Test' 
     },
-    position: { x: 0, y: 300 },
+    position: { x: 0, y: 400 },
     className: `${baseNodeStyle} bg-gradient-to-br from-cyan-400 to-cyan-500`
   },
   {
@@ -93,7 +93,7 @@ export const nodes: Node[] = [
     data: { 
       label: 'Signal Enhancement Protocol:\n• Deploy Signal Amplification\n• Optimize Antenna Configuration\n• Verify Signal Improvement' 
     },
-    position: { x: 0, y: 400 },
+    position: { x: 0, y: 550 },
     className: `${baseNodeStyle} bg-gradient-to-br from-cyan-400 to-cyan-500`
   },
   // Software Branch - Indigo Theme
@@ -112,7 +112,7 @@ export const nodes: Node[] = [
     data: { 
       label: 'Firmware Version Analysis:\n• Current Version: v2.1.4\n• Latest Release: v2.1.4\n• Compatibility Check' 
     },
-    position: { x: 400, y: 200 },
+    position: { x: 400, y: 250 },
     className: `${baseNodeStyle} bg-gradient-to-br from-indigo-400 to-indigo-500`
   },
   {
@@ -121,7 +121,7 @@ export const nodes: Node[] = [
     data: { 
       label: 'System Update Protocol:\n• Download Firmware Package\n• Verify Digital Signatures\n• Execute Update Sequence' 
     },
-    position: { x: 400, y: 300 },
+    position: { x: 400, y: 400 },
     className: `${baseNodeStyle} bg-gradient-to-br from-indigo-400 to-indigo-500`
   },
   {
