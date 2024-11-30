@@ -7,6 +7,7 @@ export const edges: Edge[] = [
     source: 'start', 
     target: 'power-check',
     animated: true,
+    label: 'Power subsystem',
     style: { stroke: '#6366f1' },
     markerEnd: { type: MarkerType.ArrowClosed }
   },
@@ -15,6 +16,7 @@ export const edges: Edge[] = [
     source: 'start', 
     target: 'network',
     animated: true,
+    label: 'Network subsystem',
     style: { stroke: '#6366f1' },
     markerEnd: { type: MarkerType.ArrowClosed }
   },
@@ -23,6 +25,7 @@ export const edges: Edge[] = [
     source: 'start', 
     target: 'software',
     animated: true,
+    label: 'Software subsystem',
     style: { stroke: '#6366f1' },
     markerEnd: { type: MarkerType.ArrowClosed }
   },
@@ -31,6 +34,7 @@ export const edges: Edge[] = [
     id: 'e-power-battery', 
     source: 'power-check', 
     target: 'battery',
+    label: 'Check voltage',
     style: { stroke: '#818cf8' },
     markerEnd: { type: MarkerType.ArrowClosed }
   },
@@ -38,7 +42,7 @@ export const edges: Edge[] = [
     id: 'e-battery-charge', 
     source: 'battery', 
     target: 'charge',
-    label: 'Yes',
+    label: 'Voltage critical',
     style: { stroke: '#818cf8' },
     markerEnd: { type: MarkerType.ArrowClosed }
   },
@@ -47,6 +51,7 @@ export const edges: Edge[] = [
     id: 'e-network-wifi', 
     source: 'network', 
     target: 'wifi',
+    label: 'Signal analysis',
     style: { stroke: '#818cf8' },
     markerEnd: { type: MarkerType.ArrowClosed }
   },
@@ -54,7 +59,7 @@ export const edges: Edge[] = [
     id: 'e-wifi-boost', 
     source: 'wifi', 
     target: 'boost',
-    label: 'No',
+    label: 'Signal insufficient',
     style: { stroke: '#818cf8' },
     markerEnd: { type: MarkerType.ArrowClosed }
   },
@@ -63,6 +68,7 @@ export const edges: Edge[] = [
     id: 'e-software-version', 
     source: 'software', 
     target: 'version',
+    label: 'Version check',
     style: { stroke: '#818cf8' },
     markerEnd: { type: MarkerType.ArrowClosed }
   },
@@ -70,7 +76,7 @@ export const edges: Edge[] = [
     id: 'e-version-update', 
     source: 'version', 
     target: 'update',
-    label: 'No',
+    label: 'Update required',
     style: { stroke: '#818cf8' },
     markerEnd: { type: MarkerType.ArrowClosed }
   },
@@ -79,6 +85,7 @@ export const edges: Edge[] = [
     id: 'e-charge-resolved', 
     source: 'charge', 
     target: 'resolved',
+    label: 'Verify charge',
     style: { stroke: '#818cf8' },
     markerEnd: { type: MarkerType.ArrowClosed }
   },
@@ -86,6 +93,7 @@ export const edges: Edge[] = [
     id: 'e-boost-resolved', 
     source: 'boost', 
     target: 'resolved',
+    label: 'Verify signal',
     style: { stroke: '#818cf8' },
     markerEnd: { type: MarkerType.ArrowClosed }
   },
@@ -93,6 +101,7 @@ export const edges: Edge[] = [
     id: 'e-update-resolved', 
     source: 'update', 
     target: 'resolved',
+    label: 'Verify update',
     style: { stroke: '#818cf8' },
     markerEnd: { type: MarkerType.ArrowClosed }
   },
@@ -101,7 +110,7 @@ export const edges: Edge[] = [
     id: 'e-resolved-support', 
     source: 'resolved', 
     target: 'support',
-    label: 'No',
+    label: 'Issues persist',
     style: { stroke: '#ef4444' },
     animated: true,
     markerEnd: { type: MarkerType.ArrowClosed }
