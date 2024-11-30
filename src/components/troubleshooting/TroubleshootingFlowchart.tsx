@@ -9,6 +9,8 @@ import { Card } from "@/components/ui/card";
 import { nodes } from './flowchart/nodes';
 import { edges } from './flowchart/edges';
 
+const proOptions = { hideAttribution: true };
+
 const TroubleshootingFlowchart = () => {
   return (
     <Card className="p-6 my-8 bg-gradient-to-br from-gray-900 to-gray-800 border-gray-700">
@@ -23,6 +25,7 @@ const TroubleshootingFlowchart = () => {
           minZoom={0.5}
           maxZoom={1.5}
           defaultViewport={{ x: 0, y: 0, zoom: 0.7 }}
+          proOptions={proOptions}
         >
           <Background color="#6366f1" gap={16} size={1} />
           <Controls className="bg-gray-800 border-gray-700 text-white" />
