@@ -29,7 +29,7 @@ export const nodes: Node[] = [
     data: { 
       label: 'Battery Voltage Analysis\n(Threshold: 12.2V DC)' 
     },
-    position: { x: -400, y: 200 },
+    position: { x: -400, y: 250 },
     className: `${baseNodeStyle} bg-gradient-to-br from-purple-400 to-purple-500`
   },
   {
@@ -38,7 +38,7 @@ export const nodes: Node[] = [
     data: { 
       label: 'Battery System Diagnostics:\n• Cell Balance Check\n• Temperature Monitoring\n• Charging Efficiency Test' 
     },
-    position: { x: -400, y: 300 },
+    position: { x: -400, y: 400 },
     className: `${baseNodeStyle} bg-gradient-to-br from-purple-400 to-purple-500`
   },
   {
@@ -47,7 +47,7 @@ export const nodes: Node[] = [
     data: { 
       label: 'Solar Integration Check:\n• Panel Performance\n• Charge Controller Status\n• Power Output Analysis' 
     },
-    position: { x: -400, y: 400 },
+    position: { x: -400, y: 550 },
     className: `${baseNodeStyle} bg-gradient-to-br from-purple-400 to-purple-500`
   },
   {
@@ -56,7 +56,7 @@ export const nodes: Node[] = [
     data: { 
       label: 'Power System Recovery Protocol:\n• Initialize Shore Power Connection\n• Monitor Charging Parameters\n• Verify Power Stability' 
     },
-    position: { x: -400, y: 500 },
+    position: { x: -400, y: 700 },
     className: `${baseNodeStyle} bg-gradient-to-br from-purple-400 to-purple-500`
   },
   // Network Branch - Cyan Theme
@@ -130,7 +130,7 @@ export const nodes: Node[] = [
     data: { 
       label: 'System Status Verification:\nDiagnostic Completion Check' 
     },
-    position: { x: 0, y: 600 },
+    position: { x: 0, y: 800 },
     className: `${baseNodeStyle} bg-gradient-to-br from-emerald-500 to-emerald-600`
   },
   {
@@ -139,7 +139,7 @@ export const nodes: Node[] = [
     data: { 
       label: 'Technical Support Escalation:\n• Generate System Diagnostics\n• Schedule Technical Consultation\n• Prepare Support Documentation' 
     },
-    position: { x: 0, y: 700 },
+    position: { x: 0, y: 900 },
     className: `${baseNodeStyle} bg-gradient-to-br from-red-500 to-red-600`
   }
 ];
