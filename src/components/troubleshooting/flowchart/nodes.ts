@@ -27,7 +27,7 @@ export const nodes: Node[] = [
       label: 'Battery Voltage Analysis\n(Threshold: 12.2V DC)' 
     },
     position: { x: 150, y: 300 },
-    className: 'bg-purple-100 p-4 rounded-lg border border-purple-300 min-w-[250px] text-center'
+    className: 'bg-gradient-to-br from-purple-400 to-purple-500 p-4 rounded-lg text-white min-w-[250px] text-center'
   },
   {
     id: 'charge',
@@ -36,7 +36,7 @@ export const nodes: Node[] = [
       label: 'Power System Recovery Protocol:\n• Initialize Shore Power Connection\n• Monitor Charging Parameters\n• Verify Power Stability' 
     },
     position: { x: 150, y: 450 },
-    className: 'bg-purple-100 p-4 rounded-lg border border-purple-300 min-w-[300px] text-center whitespace-pre-line'
+    className: 'bg-gradient-to-br from-purple-400 to-purple-500 p-4 rounded-lg text-white min-w-[300px] text-center whitespace-pre-line'
   },
   // Network Branch - Cyan Theme
   {
@@ -55,7 +55,7 @@ export const nodes: Node[] = [
       label: 'Signal Quality Metrics:\n• RSSI Threshold: -70dBm\n• SNR Threshold: 20dB\n• Connection Stability Check' 
     },
     position: { x: 500, y: 300 },
-    className: 'bg-cyan-100 p-4 rounded-lg border border-cyan-300 min-w-[300px] text-center whitespace-pre-line'
+    className: 'bg-gradient-to-br from-cyan-400 to-cyan-500 p-4 rounded-lg text-white min-w-[300px] text-center whitespace-pre-line'
   },
   {
     id: 'boost',
@@ -64,7 +64,7 @@ export const nodes: Node[] = [
       label: 'Signal Enhancement Protocol:\n• Deploy Signal Amplification\n• Optimize Antenna Configuration\n• Verify Signal Improvement' 
     },
     position: { x: 500, y: 450 },
-    className: 'bg-cyan-100 p-4 rounded-lg border border-cyan-300 min-w-[300px] text-center whitespace-pre-line'
+    className: 'bg-gradient-to-br from-cyan-400 to-cyan-500 p-4 rounded-lg text-white min-w-[300px] text-center whitespace-pre-line'
   },
   // Software Branch - Indigo Theme
   {
@@ -83,7 +83,7 @@ export const nodes: Node[] = [
       label: 'Firmware Version Analysis:\n• Current Version: v2.1.4\n• Latest Release: v2.1.4\n• Compatibility Check' 
     },
     position: { x: 850, y: 300 },
-    className: 'bg-indigo-100 p-4 rounded-lg border border-indigo-300 min-w-[300px] text-center whitespace-pre-line'
+    className: 'bg-gradient-to-br from-indigo-400 to-indigo-500 p-4 rounded-lg text-white min-w-[300px] text-center whitespace-pre-line'
   },
   {
     id: 'update',
@@ -92,7 +92,7 @@ export const nodes: Node[] = [
       label: 'System Update Protocol:\n• Download Firmware Package\n• Verify Digital Signatures\n• Execute Update Sequence' 
     },
     position: { x: 850, y: 450 },
-    className: 'bg-indigo-100 p-4 rounded-lg border border-indigo-300 min-w-[300px] text-center whitespace-pre-line'
+    className: 'bg-gradient-to-br from-indigo-400 to-indigo-500 p-4 rounded-lg text-white min-w-[300px] text-center whitespace-pre-line'
   },
   // Resolution Nodes
   {
