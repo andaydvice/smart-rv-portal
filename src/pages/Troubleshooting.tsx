@@ -12,19 +12,24 @@ const Troubleshooting = () => {
   return (
     <div className="min-h-screen bg-background">
       {/* Hero Section */}
-      <section className="relative py-20 bg-gray-900 text-white">
-        <div className="absolute inset-0 bg-gradient-to-r from-black/80 to-transparent" />
-        <div className="relative container mx-auto px-4">
+      <section className="relative">
+        <img 
+          src="/lovable-uploads/0a0224b4-f5cb-4f90-9f84-dd5ad3e2c21c.png" 
+          alt="Smart RV Troubleshooting Guide"
+          className="w-full h-[60vh] object-cover"
+        />
+        <div className="absolute inset-0 bg-black/50" />
+        <div className="absolute inset-0 flex items-center justify-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="max-w-3xl mx-auto text-center"
+            className="text-center"
           >
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">
+            <h1 className="text-4xl md:text-5xl font-bold mb-6 text-white">
               Smart RV Troubleshooting Guide
             </h1>
-            <p className="text-xl text-gray-300 mb-8">
+            <p className="text-xl text-gray-200 mb-8">
               Quick solutions to common issues for your Smart RV experience
             </p>
           </motion.div>
