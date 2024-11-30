@@ -10,7 +10,7 @@ export const nodes: Node[] = [
     position: { x: 500, y: 0 },
     className: 'bg-gradient-to-br from-blue-500 to-blue-600 p-4 rounded-lg border-2 border-blue-400 text-white font-semibold shadow-lg min-w-[250px] text-center'
   },
-  // Power Branch
+  // Power Branch - Purple Theme
   {
     id: 'power-check',
     type: 'default',
@@ -27,7 +27,7 @@ export const nodes: Node[] = [
       label: 'Battery Voltage Analysis\n(Threshold: 12.2V DC)' 
     },
     position: { x: 150, y: 300 },
-    className: 'bg-yellow-100 p-4 rounded-lg border border-yellow-300 min-w-[250px] text-center'
+    className: 'bg-purple-100 p-4 rounded-lg border border-purple-300 min-w-[250px] text-center'
   },
   {
     id: 'charge',
@@ -36,9 +36,9 @@ export const nodes: Node[] = [
       label: 'Power System Recovery Protocol:\n• Initialize Shore Power Connection\n• Monitor Charging Parameters\n• Verify Power Stability' 
     },
     position: { x: 150, y: 450 },
-    className: 'bg-green-100 p-4 rounded-lg border border-green-300 min-w-[300px] text-center whitespace-pre-line'
+    className: 'bg-purple-100 p-4 rounded-lg border border-purple-300 min-w-[300px] text-center whitespace-pre-line'
   },
-  // Network Branch
+  // Network Branch - Cyan Theme
   {
     id: 'network',
     type: 'default',
@@ -55,7 +55,7 @@ export const nodes: Node[] = [
       label: 'Signal Quality Metrics:\n• RSSI Threshold: -70dBm\n• SNR Threshold: 20dB\n• Connection Stability Check' 
     },
     position: { x: 500, y: 300 },
-    className: 'bg-blue-100 p-4 rounded-lg border border-blue-300 min-w-[300px] text-center whitespace-pre-line'
+    className: 'bg-cyan-100 p-4 rounded-lg border border-cyan-300 min-w-[300px] text-center whitespace-pre-line'
   },
   {
     id: 'boost',
@@ -64,9 +64,9 @@ export const nodes: Node[] = [
       label: 'Signal Enhancement Protocol:\n• Deploy Signal Amplification\n• Optimize Antenna Configuration\n• Verify Signal Improvement' 
     },
     position: { x: 500, y: 450 },
-    className: 'bg-green-100 p-4 rounded-lg border border-green-300 min-w-[300px] text-center whitespace-pre-line'
+    className: 'bg-cyan-100 p-4 rounded-lg border border-cyan-300 min-w-[300px] text-center whitespace-pre-line'
   },
-  // Software Branch
+  // Software Branch - Indigo Theme
   {
     id: 'software',
     type: 'default',
@@ -83,7 +83,7 @@ export const nodes: Node[] = [
       label: 'Firmware Version Analysis:\n• Current Version: v2.1.4\n• Latest Release: v2.1.4\n• Compatibility Check' 
     },
     position: { x: 850, y: 300 },
-    className: 'bg-violet-100 p-4 rounded-lg border border-violet-300 min-w-[300px] text-center whitespace-pre-line'
+    className: 'bg-indigo-100 p-4 rounded-lg border border-indigo-300 min-w-[300px] text-center whitespace-pre-line'
   },
   {
     id: 'update',
@@ -92,9 +92,9 @@ export const nodes: Node[] = [
       label: 'System Update Protocol:\n• Download Firmware Package\n• Verify Digital Signatures\n• Execute Update Sequence' 
     },
     position: { x: 850, y: 450 },
-    className: 'bg-green-100 p-4 rounded-lg border border-green-300 min-w-[300px] text-center whitespace-pre-line'
+    className: 'bg-indigo-100 p-4 rounded-lg border border-indigo-300 min-w-[300px] text-center whitespace-pre-line'
   },
-  // Resolution Path
+  // Resolution Nodes
   {
     id: 'resolved',
     type: 'default',
