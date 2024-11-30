@@ -66,7 +66,7 @@ const SmartKitchen = () => {
             </div>
           </div>
 
-          <div className="text-center pb-32">
+          <div className="text-center mb-32">
             <Link to="/schedule-demo">
               <Button size="lg" className="bg-blue-500 hover:bg-blue-600 text-lg py-8 px-12">
                 Schedule a Demo
