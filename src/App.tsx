@@ -10,6 +10,7 @@ import Models from "./pages/Models";
 import Technology from "./pages/Technology";
 import Contact from "./pages/Contact";
 import ScheduleDemo from "./pages/ScheduleDemo";
+import Troubleshooting from "./pages/Troubleshooting";
 import NavigationSystem from "./pages/features/NavigationSystem";
 import SecuritySystem from "./pages/features/SecuritySystem";
 import PowerManagement from "./pages/features/PowerManagement";
@@ -57,6 +58,7 @@ const router = createBrowserRouter([
       { path: "/technology", element: <Technology /> },
       { path: "/contact", element: <Contact /> },
       { path: "/schedule-demo", element: <ScheduleDemo /> },
+      { path: "/troubleshooting", element: <Troubleshooting /> },
     ],
   },
 ]);
