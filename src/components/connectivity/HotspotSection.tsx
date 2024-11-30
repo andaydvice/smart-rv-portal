@@ -1,62 +1,49 @@
-import { Router } from "lucide-react";
+import { Signal } from "lucide-react";
 import { AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 
 export const HotspotSection = () => {
   return (
     <AccordionItem value="hotspots" className="border-gray-700">
       <AccordionTrigger className="text-blue-300 hover:text-blue-400">
         <div className="flex items-center gap-2">
-          <Router className="h-5 w-5" />
-          Mobile Gateway Solutions
+          <Signal className="h-5 w-5" />
+          Mobile Hotspot Comparison
         </div>
       </AccordionTrigger>
       <AccordionContent className="text-gray-300">
-        <div className="bg-gray-800/50 p-4 rounded-lg">
-          <Table>
-            <TableHeader>
-              <TableRow className="border-gray-700">
-                <TableHead className="text-blue-300">Device</TableHead>
-                <TableHead className="text-blue-300">Key Features</TableHead>
-                <TableHead className="text-blue-300">Best For</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              <TableRow className="border-gray-700">
-                <TableCell className="font-medium">Netgear Nighthawk M6</TableCell>
-                <TableCell>
-                  <ul className="list-disc list-inside text-sm">
-                    <li>5G capability</li>
-                    <li>Long battery life</li>
-                    <li>2.5Gbps ethernet port</li>
-                  </ul>
-                </TableCell>
-                <TableCell>High-speed needs, frequent travelers</TableCell>
-              </TableRow>
-              <TableRow className="border-gray-700">
-                <TableCell className="font-medium">GL.iNet Beryl</TableCell>
-                <TableCell>
-                  <ul className="list-disc list-inside text-sm">
-                    <li>VPN support</li>
-                    <li>Open-source firmware</li>
-                    <li>Tor network support</li>
-                  </ul>
-                </TableCell>
-                <TableCell>Privacy-focused users, tech enthusiasts</TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell className="font-medium">MoFi 5500</TableCell>
-                <TableCell>
-                  <ul className="list-disc list-inside text-sm">
-                    <li>External antenna ports</li>
-                    <li>Rugged design</li>
-                    <li>Advanced band selection</li>
-                  </ul>
-                </TableCell>
-                <TableCell>Rural areas, signal-challenged locations</TableCell>
-              </TableRow>
-            </TableBody>
-          </Table>
+        <div className="space-y-6">
+          <div className="bg-gray-800/50 p-4 rounded-lg">
+            <h4 className="text-lg font-medium text-blue-200 mb-2">Netgear Nighthawk M6</h4>
+            <p className="text-sm mb-3">Best For: High-speed needs, frequent travelers</p>
+            <ul className="space-y-2 text-sm list-disc list-inside">
+              <li>5G capability with exceptional speeds</li>
+              <li>Extended battery life for all-day use</li>
+              <li>2.5Gbps ethernet port for wired connections</li>
+              <li>Best overall performance</li>
+            </ul>
+          </div>
+
+          <div className="bg-gray-800/50 p-4 rounded-lg">
+            <h4 className="text-lg font-medium text-blue-200 mb-2">GL.iNet Beryl</h4>
+            <p className="text-sm mb-3">Best For: Privacy-focused users, tech enthusiasts</p>
+            <ul className="space-y-2 text-sm list-disc list-inside">
+              <li>Built-in VPN support</li>
+              <li>Open-source firmware for customization</li>
+              <li>Tor network compatibility</li>
+              <li>Advanced security features</li>
+            </ul>
+          </div>
+
+          <div className="bg-gray-800/50 p-4 rounded-lg">
+            <h4 className="text-lg font-medium text-blue-200 mb-2">MoFi 5500</h4>
+            <p className="text-sm mb-3">Best For: Rural areas, signal-challenged locations</p>
+            <ul className="space-y-2 text-sm list-disc list-inside">
+              <li>Multiple external antenna ports</li>
+              <li>Rugged design for durability</li>
+              <li>Advanced band selection capabilities</li>
+              <li>Optimized for challenging environments</li>
+            </ul>
+          </div>
         </div>
       </AccordionContent>
     </AccordionItem>

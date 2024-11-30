@@ -21,9 +21,9 @@ const ConnectivityGuide = () => {
     >
       <Card className="bg-gradient-to-br from-gray-900 to-gray-800 text-white border-gray-700">
         <CardHeader>
-          <CardTitle className="text-2xl text-blue-400">Professional RV Connectivity Solutions</CardTitle>
+          <CardTitle className="text-2xl text-blue-400">Connectivity Solutions</CardTitle>
           <CardDescription className="text-gray-300">
-            Enterprise-grade connectivity solutions for the modern mobile workspace
+            Comprehensive guide to maintaining strong internet connectivity on the road
           </CardDescription>
         </CardHeader>
         <CardContent>
