@@ -6,13 +6,13 @@ import { Link } from "react-router-dom";
 
 const SmartKitchen = () => {
   return (
-    <>
+    <div className="min-h-screen flex flex-col">
       <Navbar />
       <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6 }}
-        className="min-h-screen pt-24 pb-24 px-4 bg-gradient-to-b from-gray-900 to-gray-800"
+        className="flex-grow pt-24 pb-32 px-4 bg-gradient-to-b from-gray-900 to-gray-800"
       >
         <div className="max-w-7xl mx-auto">
           <div className="flex items-center gap-4 mb-8">
@@ -20,7 +20,7 @@ const SmartKitchen = () => {
             <h1 className="text-4xl font-bold text-white">Smart Kitchen and Appliances</h1>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
             <div className="bg-gray-800/50 p-8 rounded-lg border border-gray-700 flex flex-col">
               <div className="h-[72px]">
                 <h2 className="text-2xl font-semibold text-blue-400">Connected Refrigerators and Cooking Appliances</h2>
@@ -66,16 +66,16 @@ const SmartKitchen = () => {
             </div>
           </div>
 
-          <div className="text-center mb-12 mt-8">
+          <div className="text-center mt-8 mb-16">
             <Link to="/schedule-demo">
-              <Button className="bg-blue-500 hover:bg-blue-600 text-lg py-6 px-8">
+              <Button size="lg" className="bg-blue-500 hover:bg-blue-600 text-lg py-8 px-12">
                 Schedule a Demo
               </Button>
             </Link>
           </div>
         </div>
       </motion.div>
-    </>
+    </div>
   );
 };
 
