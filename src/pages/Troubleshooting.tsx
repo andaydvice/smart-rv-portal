@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import SmartSystemGuide from "@/components/troubleshooting/SmartSystemGuide";
 import ConnectivityGuide from "@/components/troubleshooting/ConnectivityGuide";
+import TroubleshootingFlowchart from "@/components/troubleshooting/TroubleshootingFlowchart";
 
 const Troubleshooting = () => {
   return (
@@ -49,13 +50,21 @@ const Troubleshooting = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
           >
-            <ConnectivityGuide />
+            <TroubleshootingFlowchart />
           </motion.div>
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
+          >
+            <ConnectivityGuide />
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5 }}
             className="text-center mt-16"
           >
             <Link to="/contact">
