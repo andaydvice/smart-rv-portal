@@ -1,68 +1,184 @@
 import { Edge, MarkerType } from 'reactflow';
 
-const baseEdgeStyle = {
-  type: 'smoothstep',
-  animated: true,
-  style: { stroke: '#6366f1' },
-  markerEnd: { type: MarkerType.ArrowClosed }
-};
-
 export const edges: Edge[] = [
   // Start to main branches
   {
     id: 'start-power',
     source: 'start',
-    target: 'power',
-    ...baseEdgeStyle
+    target: 'power-check',
+    label: 'Power Analysis',
+    labelBgPadding: [8, 4],
+    labelBgStyle: { fill: '#1e293b' },
+    labelStyle: { fill: '#fff', fontSize: 12 },
+    type: 'smoothstep',
+    markerEnd: { type: MarkerType.ArrowClosed },
+    animated: true,
+    style: { stroke: '#6366f1' },
   },
   {
     id: 'start-network',
     source: 'start',
     target: 'network',
-    ...baseEdgeStyle
+    label: 'Network Subsystem',
+    labelBgPadding: [8, 4],
+    labelBgStyle: { fill: '#1e293b' },
+    labelStyle: { fill: '#fff', fontSize: 12 },
+    type: 'smoothstep',
+    markerEnd: { type: MarkerType.ArrowClosed },
+    animated: true,
+    style: { stroke: '#6366f1' },
   },
   {
     id: 'start-software',
     source: 'start',
     target: 'software',
-    ...baseEdgeStyle
+    label: 'Software Subsystem',
+    labelBgPadding: [8, 4],
+    labelBgStyle: { fill: '#1e293b' },
+    labelStyle: { fill: '#fff', fontSize: 12 },
+    type: 'smoothstep',
+    markerEnd: { type: MarkerType.ArrowClosed },
+    animated: true,
+    style: { stroke: '#6366f1' },
   },
-  // Main branches to second level
+  // Power branch connections
   {
     id: 'power-battery',
-    source: 'power',
+    source: 'power-check',
     target: 'battery',
-    ...baseEdgeStyle
+    type: 'smoothstep',
+    markerEnd: { type: MarkerType.ArrowClosed },
+    animated: true,
+    style: { stroke: '#6366f1' },
   },
+  {
+    id: 'battery-battery-system',
+    source: 'battery',
+    target: 'battery-system',
+    type: 'smoothstep',
+    markerEnd: { type: MarkerType.ArrowClosed },
+    animated: true,
+    style: { stroke: '#6366f1' },
+  },
+  {
+    id: 'battery-solar-system',
+    source: 'battery',
+    target: 'solar-system',
+    type: 'smoothstep',
+    markerEnd: { type: MarkerType.ArrowClosed },
+    animated: true,
+    style: { stroke: '#6366f1' },
+  },
+  {
+    id: 'battery-charge',
+    source: 'battery',
+    target: 'charge',
+    type: 'smoothstep',
+    markerEnd: { type: MarkerType.ArrowClosed },
+    animated: true,
+    style: { stroke: '#6366f1' },
+  },
+  // Network branch connections
   {
     id: 'network-wifi',
     source: 'network',
     target: 'wifi',
-    ...baseEdgeStyle
+    type: 'smoothstep',
+    markerEnd: { type: MarkerType.ArrowClosed },
+    animated: true,
+    style: { stroke: '#6366f1' },
   },
   {
-    id: 'software-update',
-    source: 'software',
-    target: 'update',
-    ...baseEdgeStyle
-  },
-  // Second level to resolution
-  {
-    id: 'battery-resolved',
-    source: 'battery',
-    target: 'resolved',
-    ...baseEdgeStyle
-  },
-  {
-    id: 'wifi-resolved',
+    id: 'wifi-smart-devices',
     source: 'wifi',
+    target: 'smart-devices',
+    type: 'smoothstep',
+    markerEnd: { type: MarkerType.ArrowClosed },
+    animated: true,
+    style: { stroke: '#6366f1' },
+  },
+  {
+    id: 'smart-devices-boost',
+    source: 'smart-devices',
+    target: 'boost',
+    type: 'smoothstep',
+    markerEnd: { type: MarkerType.ArrowClosed },
+    animated: true,
+    style: { stroke: '#6366f1' },
+  },
+  // Software branch connections
+  {
+    id: 'software-version',
+    source: 'software',
+    target: 'version',
+    type: 'smoothstep',
+    markerEnd: { type: MarkerType.ArrowClosed },
+    animated: true,
+    style: { stroke: '#6366f1' },
+  },
+  {
+    id: 'version-update',
+    source: 'version',
+    target: 'update',
+    type: 'smoothstep',
+    markerEnd: { type: MarkerType.ArrowClosed },
+    animated: true,
+    style: { stroke: '#6366f1' },
+  },
+  // Resolution path connections
+  {
+    id: 'battery-system-resolved',
+    source: 'battery-system',
     target: 'resolved',
-    ...baseEdgeStyle
+    type: 'smoothstep',
+    markerEnd: { type: MarkerType.ArrowClosed },
+    animated: true,
+    style: { stroke: '#6366f1' },
+  },
+  {
+    id: 'solar-system-resolved',
+    source: 'solar-system',
+    target: 'resolved',
+    type: 'smoothstep',
+    markerEnd: { type: MarkerType.ArrowClosed },
+    animated: true,
+    style: { stroke: '#6366f1' },
+  },
+  {
+    id: 'charge-resolved',
+    source: 'charge',
+    target: 'resolved',
+    type: 'smoothstep',
+    markerEnd: { type: MarkerType.ArrowClosed },
+    animated: true,
+    style: { stroke: '#6366f1' },
+  },
+  {
+    id: 'boost-resolved',
+    source: 'boost',
+    target: 'resolved',
+    type: 'smoothstep',
+    markerEnd: { type: MarkerType.ArrowClosed },
+    animated: true,
+    style: { stroke: '#6366f1' },
   },
   {
     id: 'update-resolved',
     source: 'update',
     target: 'resolved',
-    ...baseEdgeStyle
-  }
+    type: 'smoothstep',
+    markerEnd: { type: MarkerType.ArrowClosed },
+    animated: true,
+    style: { stroke: '#6366f1' },
+  },
+  // Final resolution path
+  {
+    id: 'resolved-support',
+    source: 'resolved',
+    target: 'support',
+    type: 'smoothstep',
+    markerEnd: { type: MarkerType.ArrowClosed },
+    animated: true,
+    style: { stroke: '#6366f1' },
+  },
 ];
