@@ -1,177 +1,137 @@
 import { Node } from 'reactflow';
 
+// Base styles for nodes
 const baseNodeStyle = "p-4 rounded-lg text-white font-semibold shadow-lg text-center whitespace-pre-line min-w-[300px]";
 const topNodeStyle = "p-4 rounded-lg text-white font-bold shadow-lg text-center whitespace-pre-line min-w-[300px] text-3xl";
 
+// Helper function to create nodes with consistent styling
+const createNode = (id: string, label: string, position: { x: number, y: number }, style: string) => ({
+  id,
+  type: 'default',
+  data: { label },
+  position,
+  className: style
+});
+
+// Create the nodes array
 export const nodes: Node[] = [
-  {
-    id: 'start',
-    type: 'default',
-    data: { 
-      label: 'System Diagnostics Entry Point' 
-    },
-    position: { x: 0, y: 0 },
-    className: `${baseNodeStyle} bg-gradient-to-br from-blue-500 to-blue-600 border-2 border-blue-400`
-  },
+  // Entry point
+  createNode(
+    'start',
+    'System Diagnostics Entry Point',
+    { x: 0, y: 0 },
+    `${baseNodeStyle} bg-gradient-to-br from-blue-500 to-blue-600 border-2 border-blue-400`
+  ),
   
-  // Power Branch - Purple Theme
-  {
-    id: 'power-check',
-    type: 'default',
-    data: { 
-      label: 'Power System Diagnostics' 
-    },
-    position: { x: -400, y: 100 },
-    className: `${baseNodeStyle} bg-gradient-to-br from-purple-500 to-purple-600`
-  },
-  {
-    id: 'battery',
-    type: 'default',
-    data: { 
-      label: 'Battery Voltage Analysis\n(Threshold: 12.2V DC)' 
-    },
-    position: { x: -400, y: 250 },
-    className: `${baseNodeStyle} bg-gradient-to-br from-purple-400 to-purple-500`
-  },
-  {
-    id: 'battery-system',
-    type: 'default',
-    data: { 
-      label: 'Battery System Diagnostics:\n• Cell Balance Check\n• Temperature Monitoring\n• Charging Efficiency Test' 
-    },
-    position: { x: -400, y: 400 },
-    className: `${baseNodeStyle} bg-gradient-to-br from-purple-400 to-purple-500`
-  },
-  {
-    id: 'solar-system',
-    type: 'default',
-    data: { 
-      label: 'Solar Integration Check:\n• Panel Performance\n• Charge Controller Status\n• Power Output Analysis' 
-    },
-    position: { x: -400, y: 550 },
-    className: `${baseNodeStyle} bg-gradient-to-br from-purple-400 to-purple-500`
-  },
-  {
-    id: 'charge',
-    type: 'default',
-    data: { 
-      label: 'Power System Recovery Protocol:\n• Initialize Shore Power Connection\n• Monitor Charging Parameters\n• Verify Power Stability' 
-    },
-    position: { x: -400, y: 700 },
-    className: `${baseNodeStyle} bg-gradient-to-br from-purple-400 to-purple-500`
-  },
+  // Top row titles
+  createNode(
+    'power-analysis',
+    'Power Analysis',
+    { x: -400, y: 50 },
+    `${topNodeStyle} bg-transparent`
+  ),
+  createNode(
+    'network-subsystem',
+    'Network Subsystem',
+    { x: 0, y: 50 },
+    `${topNodeStyle} bg-transparent`
+  ),
+  createNode(
+    'software-subsystem',
+    'Software Subsystem',
+    { x: 400, y: 50 },
+    `${topNodeStyle} bg-transparent`
+  ),
   
-  // Network Branch - Cyan Theme
-  {
-    id: 'network',
-    type: 'default',
-    data: { 
-      label: 'Network Infrastructure Analysis' 
-    },
-    position: { x: 0, y: 100 },
-    className: `${baseNodeStyle} bg-gradient-to-br from-cyan-500 to-cyan-600`
-  },
-  {
-    id: 'wifi',
-    type: 'default',
-    data: { 
-      label: 'Signal Quality Metrics:\n• RSSI Threshold: -70dBm\n• SNR Threshold: 20dB\n• Connection Stability Check' 
-    },
-    position: { x: 0, y: 250 },
-    className: `${baseNodeStyle} bg-gradient-to-br from-cyan-400 to-cyan-500`
-  },
-  {
-    id: 'smart-devices',
-    type: 'default',
-    data: { 
-      label: 'Smart Device Connectivity:\n• Device Discovery Scan\n• Protocol Compatibility\n• Connection Quality Test' 
-    },
-    position: { x: 0, y: 400 },
-    className: `${baseNodeStyle} bg-gradient-to-br from-cyan-400 to-cyan-500`
-  },
-  {
-    id: 'boost',
-    type: 'default',
-    data: { 
-      label: 'Signal Enhancement Protocol:\n• Deploy Signal Amplification\n• Optimize Antenna Configuration\n• Verify Signal Improvement' 
-    },
-    position: { x: 0, y: 550 },
-    className: `${baseNodeStyle} bg-gradient-to-br from-cyan-400 to-cyan-500`
-  },
+  // Power branch nodes
+  createNode(
+    'power-check',
+    'Power System Diagnostics',
+    { x: -400, y: 100 },
+    `${baseNodeStyle} bg-gradient-to-br from-purple-500 to-purple-600`
+  ),
+  createNode(
+    'battery',
+    'Battery Voltage Analysis\n(Threshold: 12.2V DC)',
+    { x: -400, y: 250 },
+    `${baseNodeStyle} bg-gradient-to-br from-purple-400 to-purple-500`
+  ),
+  createNode(
+    'battery-system',
+    'Battery System Diagnostics:\n• Cell Balance Check\n• Temperature Monitoring\n• Charging Efficiency Test',
+    { x: -400, y: 400 },
+    `${baseNodeStyle} bg-gradient-to-br from-purple-400 to-purple-500`
+  ),
+  createNode(
+    'solar-system',
+    'Solar Integration Check:\n• Panel Performance\n• Charge Controller Status\n• Power Output Analysis',
+    { x: -400, y: 550 },
+    `${baseNodeStyle} bg-gradient-to-br from-purple-400 to-purple-500`
+  ),
+  createNode(
+    'charge',
+    'Power System Recovery Protocol:\n• Initialize Shore Power Connection\n• Monitor Charging Parameters\n• Verify Power Stability',
+    { x: -400, y: 700 },
+    `${baseNodeStyle} bg-gradient-to-br from-purple-400 to-purple-500`
+  ),
   
-  // Software Branch - Indigo Theme
-  {
-    id: 'software',
-    type: 'default',
-    data: { 
-      label: 'System Software Verification' 
-    },
-    position: { x: 400, y: 100 },
-    className: `${baseNodeStyle} bg-gradient-to-br from-indigo-500 to-indigo-600`
-  },
-  {
-    id: 'version',
-    type: 'default',
-    data: { 
-      label: 'Firmware Version Analysis:\n• Current Version: v2.1.4\n• Latest Release: v2.1.4\n• Compatibility Check' 
-    },
-    position: { x: 400, y: 250 },
-    className: `${baseNodeStyle} bg-gradient-to-br from-indigo-400 to-indigo-500`
-  },
-  {
-    id: 'update',
-    type: 'default',
-    data: { 
-      label: 'System Update Protocol:\n• Download Firmware Package\n• Verify Digital Signatures\n• Execute Update Sequence' 
-    },
-    position: { x: 400, y: 400 },
-    className: `${baseNodeStyle} bg-gradient-to-br from-indigo-400 to-indigo-500`
-  },
-  {
-    id: 'resolved',
-    type: 'default',
-    data: { 
-      label: 'System Status Verification:\nDiagnostic Completion Check' 
-    },
-    position: { x: 0, y: 800 },
-    className: `${baseNodeStyle} bg-gradient-to-br from-emerald-500 to-emerald-600`
-  },
-  {
-    id: 'support',
-    type: 'default',
-    data: { 
-      label: 'Technical Support Escalation:\n• Generate System Diagnostics\n• Schedule Technical Consultation\n• Prepare Support Documentation' 
-    },
-    position: { x: 0, y: 900 },
-    className: `${baseNodeStyle} bg-gradient-to-br from-red-500 to-red-600`
-  },
+  // Network branch nodes
+  createNode(
+    'network',
+    'Network Infrastructure Analysis',
+    { x: 0, y: 100 },
+    `${baseNodeStyle} bg-gradient-to-br from-cyan-500 to-cyan-600`
+  ),
+  createNode(
+    'wifi',
+    'Signal Quality Metrics:\n• RSSI Threshold: -70dBm\n• SNR Threshold: 20dB\n• Connection Stability Check',
+    { x: 0, y: 250 },
+    `${baseNodeStyle} bg-gradient-to-br from-cyan-400 to-cyan-500`
+  ),
+  createNode(
+    'smart-devices',
+    'Smart Device Connectivity:\n• Device Discovery Scan\n• Protocol Compatibility\n• Connection Quality Test',
+    { x: 0, y: 400 },
+    `${baseNodeStyle} bg-gradient-to-br from-cyan-400 to-cyan-500`
+  ),
+  createNode(
+    'boost',
+    'Signal Enhancement Protocol:\n• Deploy Signal Amplification\n• Optimize Antenna Configuration\n• Verify Signal Improvement',
+    { x: 0, y: 550 },
+    `${baseNodeStyle} bg-gradient-to-br from-cyan-400 to-cyan-500`
+  ),
   
-  // Top row nodes with larger text
-  {
-    id: 'power-analysis',
-    type: 'default',
-    data: { 
-      label: 'Power Analysis' 
-    },
-    position: { x: -400, y: 50 },
-    className: `${topNodeStyle} bg-transparent`
-  },
-  {
-    id: 'network-subsystem',
-    type: 'default',
-    data: { 
-      label: 'Network Subsystem' 
-    },
-    position: { x: 0, y: 50 },
-    className: `${topNodeStyle} bg-transparent`
-  },
-  {
-    id: 'software-subsystem',
-    type: 'default',
-    data: { 
-      label: 'Software Subsystem' 
-    },
-    position: { x: 400, y: 50 },
-    className: `${topNodeStyle} bg-transparent`
-  }
+  // Software branch nodes
+  createNode(
+    'software',
+    'System Software Verification',
+    { x: 400, y: 100 },
+    `${baseNodeStyle} bg-gradient-to-br from-indigo-500 to-indigo-600`
+  ),
+  createNode(
+    'version',
+    'Firmware Version Analysis:\n• Current Version: v2.1.4\n• Latest Release: v2.1.4\n• Compatibility Check',
+    { x: 400, y: 250 },
+    `${baseNodeStyle} bg-gradient-to-br from-indigo-400 to-indigo-500`
+  ),
+  createNode(
+    'update',
+    'System Update Protocol:\n• Download Firmware Package\n• Verify Digital Signatures\n• Execute Update Sequence',
+    { x: 400, y: 400 },
+    `${baseNodeStyle} bg-gradient-to-br from-indigo-400 to-indigo-500`
+  ),
+  
+  // Resolution nodes
+  createNode(
+    'resolved',
+    'System Status Verification:\nDiagnostic Completion Check',
+    { x: 0, y: 800 },
+    `${baseNodeStyle} bg-gradient-to-br from-emerald-500 to-emerald-600`
+  ),
+  createNode(
+    'support',
+    'Technical Support Escalation:\n• Generate System Diagnostics\n• Schedule Technical Consultation\n• Prepare Support Documentation',
+    { x: 0, y: 900 },
+    `${baseNodeStyle} bg-gradient-to-br from-red-500 to-red-600`
+  )
 ];
