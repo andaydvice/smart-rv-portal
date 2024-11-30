@@ -7,110 +7,110 @@ export const nodes: Node[] = [
     data: { 
       label: 'System Diagnostics Entry Point' 
     },
-    position: { x: 400, y: 0 },
-    className: 'bg-gradient-to-br from-blue-500 to-blue-600 p-4 rounded-lg border-2 border-blue-400 text-white font-semibold shadow-lg'
+    position: { x: 500, y: 0 },
+    className: 'bg-gradient-to-br from-blue-500 to-blue-600 p-4 rounded-lg border-2 border-blue-400 text-white font-semibold shadow-lg min-w-[250px] text-center'
   },
-  // Power Issues Branch
+  // Power Branch
   {
     id: 'power-check',
     type: 'default',
     data: { 
-      label: 'Perform Power System Diagnostics' 
+      label: 'Power System Diagnostics' 
     },
-    position: { x: 200, y: 100 },
-    className: 'bg-gradient-to-br from-purple-500 to-purple-600 p-4 rounded-lg text-white shadow-lg'
+    position: { x: 150, y: 150 },
+    className: 'bg-gradient-to-br from-purple-500 to-purple-600 p-4 rounded-lg text-white shadow-lg min-w-[250px] text-center'
   },
   {
     id: 'battery',
     type: 'default',
     data: { 
-      label: 'Battery Voltage Below 12.2V DC?' 
+      label: 'Battery Voltage Analysis\n(Threshold: 12.2V DC)' 
     },
-    position: { x: 200, y: 200 },
-    className: 'bg-yellow-100 p-4 rounded-lg border border-yellow-300'
+    position: { x: 150, y: 300 },
+    className: 'bg-yellow-100 p-4 rounded-lg border border-yellow-300 min-w-[250px] text-center'
   },
   {
     id: 'charge',
     type: 'default',
     data: { 
-      label: 'Initiate Battery Charging Protocol\n- Connect Shore Power\n- Verify Charging Current' 
+      label: 'Power System Recovery Protocol:\n• Initialize Shore Power Connection\n• Monitor Charging Parameters\n• Verify Power Stability' 
     },
-    position: { x: 50, y: 300 },
-    className: 'bg-green-100 p-4 rounded-lg border border-green-300'
+    position: { x: 150, y: 450 },
+    className: 'bg-green-100 p-4 rounded-lg border border-green-300 min-w-[300px] text-center whitespace-pre-line'
   },
-  // Network Issues Branch
+  // Network Branch
   {
     id: 'network',
     type: 'default',
     data: { 
       label: 'Network Infrastructure Analysis' 
     },
-    position: { x: 400, y: 100 },
-    className: 'bg-gradient-to-br from-cyan-500 to-cyan-600 p-4 rounded-lg text-white shadow-lg'
+    position: { x: 500, y: 150 },
+    className: 'bg-gradient-to-br from-cyan-500 to-cyan-600 p-4 rounded-lg text-white shadow-lg min-w-[250px] text-center'
   },
   {
     id: 'wifi',
     type: 'default',
     data: { 
-      label: 'Signal Strength Analysis:\n- RSSI > -70dBm?\n- SNR > 20dB?' 
+      label: 'Signal Quality Metrics:\n• RSSI Threshold: -70dBm\n• SNR Threshold: 20dB\n• Connection Stability Check' 
     },
-    position: { x: 400, y: 200 },
-    className: 'bg-blue-100 p-4 rounded-lg border border-blue-300'
+    position: { x: 500, y: 300 },
+    className: 'bg-blue-100 p-4 rounded-lg border border-blue-300 min-w-[300px] text-center whitespace-pre-line'
   },
   {
     id: 'boost',
     type: 'default',
     data: { 
-      label: 'Deploy Signal Enhancement:\n- Activate Signal Booster\n- Adjust Antenna Orientation' 
+      label: 'Signal Enhancement Protocol:\n• Deploy Signal Amplification\n• Optimize Antenna Configuration\n• Verify Signal Improvement' 
     },
-    position: { x: 400, y: 300 },
-    className: 'bg-green-100 p-4 rounded-lg border border-green-300'
+    position: { x: 500, y: 450 },
+    className: 'bg-green-100 p-4 rounded-lg border border-green-300 min-w-[300px] text-center whitespace-pre-line'
   },
-  // Software Issues Branch
+  // Software Branch
   {
     id: 'software',
     type: 'default',
     data: { 
       label: 'System Software Verification' 
     },
-    position: { x: 600, y: 100 },
-    className: 'bg-gradient-to-br from-indigo-500 to-indigo-600 p-4 rounded-lg text-white shadow-lg'
+    position: { x: 850, y: 150 },
+    className: 'bg-gradient-to-br from-indigo-500 to-indigo-600 p-4 rounded-lg text-white shadow-lg min-w-[250px] text-center'
   },
   {
     id: 'version',
     type: 'default',
     data: { 
-      label: 'Firmware Version Check:\n- Current Version: v2.1.4\n- Latest Version: v2.1.4?' 
+      label: 'Firmware Version Analysis:\n• Current Version: v2.1.4\n• Latest Release: v2.1.4\n• Compatibility Check' 
     },
-    position: { x: 600, y: 200 },
-    className: 'bg-violet-100 p-4 rounded-lg border border-violet-300'
+    position: { x: 850, y: 300 },
+    className: 'bg-violet-100 p-4 rounded-lg border border-violet-300 min-w-[300px] text-center whitespace-pre-line'
   },
   {
     id: 'update',
     type: 'default',
     data: { 
-      label: 'Execute System Update:\n- Download Latest Firmware\n- Verify Checksum\n- Install Updates' 
+      label: 'System Update Protocol:\n• Download Firmware Package\n• Verify Digital Signatures\n• Execute Update Sequence' 
     },
-    position: { x: 750, y: 300 },
-    className: 'bg-green-100 p-4 rounded-lg border border-green-300'
+    position: { x: 850, y: 450 },
+    className: 'bg-green-100 p-4 rounded-lg border border-green-300 min-w-[300px] text-center whitespace-pre-line'
   },
-  // Resolution or Support
+  // Resolution Path
   {
     id: 'resolved',
     type: 'default',
     data: { 
-      label: 'System Status Verification:\nAll Diagnostics Passed?' 
+      label: 'System Status Verification:\nDiagnostic Completion Check' 
     },
-    position: { x: 400, y: 400 },
-    className: 'bg-gradient-to-br from-emerald-500 to-emerald-600 p-4 rounded-lg text-white shadow-lg'
+    position: { x: 500, y: 600 },
+    className: 'bg-gradient-to-br from-emerald-500 to-emerald-600 p-4 rounded-lg text-white shadow-lg min-w-[300px] text-center whitespace-pre-line'
   },
   {
     id: 'support',
     type: 'default',
     data: { 
-      label: 'Escalate to Technical Support:\n- Generate Diagnostic Report\n- Schedule Remote Session' 
+      label: 'Technical Support Escalation:\n• Generate System Diagnostics\n• Schedule Technical Consultation\n• Prepare Support Documentation' 
     },
-    position: { x: 400, y: 500 },
-    className: 'bg-gradient-to-br from-red-500 to-red-600 p-4 rounded-lg text-white shadow-lg'
+    position: { x: 500, y: 750 },
+    className: 'bg-gradient-to-br from-red-500 to-red-600 p-4 rounded-lg text-white shadow-lg min-w-[300px] text-center whitespace-pre-line'
   }
 ];

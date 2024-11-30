@@ -12,9 +12,9 @@ import { edges } from './flowchart/edges';
 const TroubleshootingFlowchart = () => {
   return (
     <Card className="p-6 my-8 bg-gradient-to-br from-gray-900 to-gray-800 border-gray-700">
-      <h3 className="text-2xl font-semibold mb-6 text-white">Interactive Troubleshooting Guide</h3>
-      <p className="text-gray-300 mb-6">Follow this interactive flowchart to diagnose and resolve common smart system integration issues.</p>
-      <div className="h-[800px] bg-gradient-to-br from-gray-800 to-gray-900 rounded-lg border border-gray-700 shadow-xl">
+      <h3 className="text-2xl font-semibold mb-6 text-white">System Diagnostics Flowchart</h3>
+      <p className="text-gray-300 mb-6">Interactive diagnostic flowchart for systematic troubleshooting of smart system integration issues.</p>
+      <div className="h-[900px] bg-gradient-to-br from-gray-800 to-gray-900 rounded-lg border border-gray-700 shadow-xl">
         <ReactFlow
           nodes={nodes}
           edges={edges}
@@ -22,7 +22,7 @@ const TroubleshootingFlowchart = () => {
           className="bg-transparent"
           minZoom={0.5}
           maxZoom={1.5}
-          defaultViewport={{ x: 0, y: 0, zoom: 0.8 }}
+          defaultViewport={{ x: 0, y: 0, zoom: 0.7 }}
         >
           <Background color="#6366f1" gap={16} size={1} />
           <Controls className="bg-gray-800 border-gray-700 text-white" />

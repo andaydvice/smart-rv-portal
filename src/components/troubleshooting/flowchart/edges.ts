@@ -7,8 +7,9 @@ export const edges: Edge[] = [
     source: 'start', 
     target: 'power-check',
     animated: true,
-    label: 'Power subsystem',
-    style: { stroke: '#6366f1' },
+    label: 'Power Subsystem',
+    labelStyle: { fill: '#94a3b8', fontWeight: 500 },
+    style: { stroke: '#6366f1', strokeWidth: 2 },
     markerEnd: { type: MarkerType.ArrowClosed }
   },
   { 
@@ -16,8 +17,9 @@ export const edges: Edge[] = [
     source: 'start', 
     target: 'network',
     animated: true,
-    label: 'Network subsystem',
-    style: { stroke: '#6366f1' },
+    label: 'Network Subsystem',
+    labelStyle: { fill: '#94a3b8', fontWeight: 500 },
+    style: { stroke: '#6366f1', strokeWidth: 2 },
     markerEnd: { type: MarkerType.ArrowClosed }
   },
   { 
@@ -25,8 +27,9 @@ export const edges: Edge[] = [
     source: 'start', 
     target: 'software',
     animated: true,
-    label: 'Software subsystem',
-    style: { stroke: '#6366f1' },
+    label: 'Software Subsystem',
+    labelStyle: { fill: '#94a3b8', fontWeight: 500 },
+    style: { stroke: '#6366f1', strokeWidth: 2 },
     markerEnd: { type: MarkerType.ArrowClosed }
   },
   // Power branch
@@ -34,16 +37,18 @@ export const edges: Edge[] = [
     id: 'e-power-battery', 
     source: 'power-check', 
     target: 'battery',
-    label: 'Check voltage',
-    style: { stroke: '#818cf8' },
+    label: 'Voltage Analysis',
+    labelStyle: { fill: '#94a3b8', fontWeight: 500 },
+    style: { stroke: '#818cf8', strokeWidth: 2 },
     markerEnd: { type: MarkerType.ArrowClosed }
   },
   { 
     id: 'e-battery-charge', 
     source: 'battery', 
     target: 'charge',
-    label: 'Voltage critical',
-    style: { stroke: '#818cf8' },
+    label: 'Below Threshold',
+    labelStyle: { fill: '#94a3b8', fontWeight: 500 },
+    style: { stroke: '#818cf8', strokeWidth: 2 },
     markerEnd: { type: MarkerType.ArrowClosed }
   },
   // Network branch
@@ -51,16 +56,18 @@ export const edges: Edge[] = [
     id: 'e-network-wifi', 
     source: 'network', 
     target: 'wifi',
-    label: 'Signal analysis',
-    style: { stroke: '#818cf8' },
+    label: 'Signal Analysis',
+    labelStyle: { fill: '#94a3b8', fontWeight: 500 },
+    style: { stroke: '#818cf8', strokeWidth: 2 },
     markerEnd: { type: MarkerType.ArrowClosed }
   },
   { 
     id: 'e-wifi-boost', 
     source: 'wifi', 
     target: 'boost',
-    label: 'Signal insufficient',
-    style: { stroke: '#818cf8' },
+    label: 'Signal Enhancement',
+    labelStyle: { fill: '#94a3b8', fontWeight: 500 },
+    style: { stroke: '#818cf8', strokeWidth: 2 },
     markerEnd: { type: MarkerType.ArrowClosed }
   },
   // Software branch
@@ -68,16 +75,18 @@ export const edges: Edge[] = [
     id: 'e-software-version', 
     source: 'software', 
     target: 'version',
-    label: 'Version check',
-    style: { stroke: '#818cf8' },
+    label: 'Version Analysis',
+    labelStyle: { fill: '#94a3b8', fontWeight: 500 },
+    style: { stroke: '#818cf8', strokeWidth: 2 },
     markerEnd: { type: MarkerType.ArrowClosed }
   },
   { 
     id: 'e-version-update', 
     source: 'version', 
     target: 'update',
-    label: 'Update required',
-    style: { stroke: '#818cf8' },
+    label: 'Update Required',
+    labelStyle: { fill: '#94a3b8', fontWeight: 500 },
+    style: { stroke: '#818cf8', strokeWidth: 2 },
     markerEnd: { type: MarkerType.ArrowClosed }
   },
   // Resolution paths
@@ -85,33 +94,37 @@ export const edges: Edge[] = [
     id: 'e-charge-resolved', 
     source: 'charge', 
     target: 'resolved',
-    label: 'Verify charge',
-    style: { stroke: '#818cf8' },
+    label: 'Verification',
+    labelStyle: { fill: '#94a3b8', fontWeight: 500 },
+    style: { stroke: '#818cf8', strokeWidth: 2 },
     markerEnd: { type: MarkerType.ArrowClosed }
   },
   { 
     id: 'e-boost-resolved', 
     source: 'boost', 
     target: 'resolved',
-    label: 'Verify signal',
-    style: { stroke: '#818cf8' },
+    label: 'Verification',
+    labelStyle: { fill: '#94a3b8', fontWeight: 500 },
+    style: { stroke: '#818cf8', strokeWidth: 2 },
     markerEnd: { type: MarkerType.ArrowClosed }
   },
   { 
     id: 'e-update-resolved', 
     source: 'update', 
     target: 'resolved',
-    label: 'Verify update',
-    style: { stroke: '#818cf8' },
+    label: 'Verification',
+    labelStyle: { fill: '#94a3b8', fontWeight: 500 },
+    style: { stroke: '#818cf8', strokeWidth: 2 },
     markerEnd: { type: MarkerType.ArrowClosed }
   },
-  // Final support option
+  // Support escalation
   { 
     id: 'e-resolved-support', 
     source: 'resolved', 
     target: 'support',
-    label: 'Issues persist',
-    style: { stroke: '#ef4444' },
+    label: 'Issues Persist',
+    labelStyle: { fill: '#94a3b8', fontWeight: 500 },
+    style: { stroke: '#ef4444', strokeWidth: 2 },
     animated: true,
     markerEnd: { type: MarkerType.ArrowClosed }
   },
