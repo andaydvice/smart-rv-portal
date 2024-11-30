@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import SmartSystemGuide from "@/components/troubleshooting/SmartSystemGuide";
-import ConnectivityGuide from "@/components/troubleshooting/ConnectivityGuide";
+import ConnectivityGuide from "@/components/connectivity/ConnectivityGuide";
 import TroubleshootingFlowchart from "@/components/troubleshooting/TroubleshootingFlowchart";
 
 const Troubleshooting = () => {
