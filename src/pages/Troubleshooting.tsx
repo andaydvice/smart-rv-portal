@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
+import Navbar from "@/components/Navbar";
 import SmartSystemGuide from "@/components/troubleshooting/SmartSystemGuide";
 import ConnectivityGuide from "@/components/connectivity/ConnectivityGuide";
 import TroubleshootingFlowchart from "@/components/troubleshooting/TroubleshootingFlowchart";
@@ -9,6 +10,7 @@ import TroubleshootingFlowchart from "@/components/troubleshooting/Troubleshooti
 const Troubleshooting = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800">
+      <Navbar />
       {/* Hero Section */}
       <section className="relative">
         <img 
