@@ -55,10 +55,14 @@ const PowerTab = () => {
           <AccordionItem value="important" className="border-gray-700">
             <AccordionTrigger className="text-xl text-rose-300 hover:text-rose-400">Important Things to Know</AccordionTrigger>
             <AccordionContent className="text-lg space-y-4">
-              <p>Running your air conditioner on battery power will drain them quickly – expect about 3 hours of runtime.</p>
-              <p>Charging batteries from shore power takes about 4 hours for a full charge from 20%.</p>
+              <p>Your residential RV refrigerator uses about 2.7 kilowatt-hours per day – the biggest power consumer in most RVs.</p>
+              <p>The air conditioner draws 1,500 watts while running, which is why you get about 3 hours of runtime on battery power.</p>
+              <p>Charging batteries from shore power takes about 4 hours for a full charge from 20%, but only 2 hours from 50%.</p>
               <p>Your generator automatically starts when batteries hit 20% if enabled – this prevents damaging them from getting too low.</p>
               <p>The system prioritizes shore power when available, then solar, then generator power, to minimize fuel use and maximize efficiency.</p>
+              <p>Using solar power on sunny days can fully maintain your refrigerator and basic systems without touching your battery reserves.</p>
+              <p>LED lights throughout your RV use minimal power – typically just 2-3 watts per bulb, so you can leave them on without worry.</p>
+              <p>The system sends clear notifications before power becomes critical: "Battery at 30% - 3 hours of power remaining at current usage."</p>
             </AccordionContent>
           </AccordionItem>
         </Accordion>
