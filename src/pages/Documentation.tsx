@@ -57,9 +57,9 @@ const Documentation = () => {
               <Card className="bg-gray-800/50 border-gray-700">
                 <CardHeader>
                   <CardTitle className="text-blue-400">System Architecture</CardTitle>
-                  <CardDescription className="text-gray-600 font-medium text-base">Understanding the Smart RV's core systems</CardDescription>
+                  <CardDescription className="text-gray-200 font-medium text-base">Understanding the Smart RV's core systems</CardDescription>
                 </CardHeader>
-                <CardContent className="space-y-6 text-gray-300">
+                <CardContent className="space-y-6 text-gray-100">
                   <div>
                     <h3 className="text-xl font-semibold text-white mb-3">Core Components</h3>
                     <p className="mb-4">
