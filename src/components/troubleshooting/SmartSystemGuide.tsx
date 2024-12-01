@@ -1,13 +1,5 @@
 import { motion } from "framer-motion";
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { 
   ChevronRight, 
   Bluetooth,
   BluetoothOff,
@@ -21,7 +13,7 @@ import {
   Cog,
   DollarSign,
   Zap,
-  Tool
+  Wrench
 } from "lucide-react";
 import {
   Accordion,
@@ -29,6 +21,14 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 
 const SmartSystemGuide = () => {
   return (
@@ -60,7 +60,7 @@ const SmartSystemGuide = () => {
                   <span>Power Usage: Very Low (0.5-1W when active)</span>
                 </div>
                 <div className="flex items-center gap-2 text-yellow-200 mb-4">
-                  <Tool className="h-4 w-4" />
+                  <Wrench className="h-4 w-4" />
                   <span>Installation: DIY-friendly, plug-and-play setup</span>
                 </div>
                 <h4 className="font-medium text-blue-200 mb-2">Common Issues</h4>
@@ -101,7 +101,7 @@ const SmartSystemGuide = () => {
                   <span>Power Usage: Varies by device (2-5W average)</span>
                 </div>
                 <div className="flex items-center gap-2 text-yellow-200 mb-4">
-                  <Tool className="h-4 w-4" />
+                  <Wrench className="h-4 w-4" />
                   <span>Installation: DIY for basic updates, Professional for system-wide changes</span>
                 </div>
                 <h4 className="font-medium text-blue-200 mb-2">App Data Management</h4>
@@ -142,7 +142,7 @@ const SmartSystemGuide = () => {
                   <span>Power Usage: System dependent (50-200W peak)</span>
                 </div>
                 <div className="flex items-center gap-2 text-yellow-200 mb-4">
-                  <Tool className="h-4 w-4" />
+                  <Wrench className="h-4 w-4" />
                   <span>Installation: Professional installation recommended</span>
                 </div>
                 <h4 className="font-medium text-blue-200 mb-2">Converter Testing</h4>
@@ -184,7 +184,7 @@ const SmartSystemGuide = () => {
                   <span>Power Usage: 10-30W for signal boosters</span>
                 </div>
                 <div className="flex items-center gap-2 text-yellow-200 mb-4">
-                  <Tool className="h-4 w-4" />
+                  <Wrench className="h-4 w-4" />
                   <span>Installation: Professional recommended for optimal performance</span>
                 </div>
                 <h4 className="font-medium text-blue-200 mb-2">Signal Enhancement</h4>
