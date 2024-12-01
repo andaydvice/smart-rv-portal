@@ -1,4 +1,4 @@
-import { Bluetooth, DollarSign, Zap, Wrench } from "lucide-react";
+import { Bluetooth } from "lucide-react";
 import {
   AccordionContent,
   AccordionItem,
@@ -16,18 +16,6 @@ const BluetoothSection = () => {
       </AccordionTrigger>
       <AccordionContent className="text-gray-300 space-y-4">
         <div className="bg-gray-800/50 p-4 rounded-lg border border-gray-700">
-          <div className="flex items-center gap-2 text-blue-200 mb-3">
-            <DollarSign className="h-4 w-4" />
-            <span>Cost Range: $50-200 for premium adapters and boosters</span>
-          </div>
-          <div className="flex items-center gap-2 text-green-200 mb-3">
-            <Zap className="h-4 w-4" />
-            <span>Power Usage: Very Low (0.5-1W when active)</span>
-          </div>
-          <div className="flex items-center gap-2 text-yellow-200 mb-4">
-            <Wrench className="h-4 w-4" />
-            <span>Installation: DIY-friendly, plug-and-play setup</span>
-          </div>
           <h4 className="font-medium text-blue-200 mb-2">Common Issues</h4>
           <ul className="list-disc list-inside space-y-2">
             <li>Device not appearing in pairing list</li>
