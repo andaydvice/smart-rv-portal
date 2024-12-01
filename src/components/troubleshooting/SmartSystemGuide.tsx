@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { Link } from "react-router-dom";
 import { Accordion } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
 import {
@@ -31,13 +32,15 @@ const SmartSystemGuide = () => {
         </Accordion>
 
         <div className="mt-8">
-          <Button 
-            variant="outline" 
-            className="bg-blue-500/10 text-blue-400 border-blue-400 hover:bg-blue-400/10 hover:text-blue-400"
-          >
-            View Complete System Documentation
-            <ChevronRight className="ml-2 h-4 w-4" />
-          </Button>
+          <Link to="/documentation">
+            <Button 
+              variant="outline" 
+              className="bg-blue-500/10 text-blue-400 border-blue-400 hover:bg-blue-400/10 hover:text-blue-400"
+            >
+              View Complete System Documentation
+              <ChevronRight className="ml-2 h-4 w-4" />
+            </Button>
+          </Link>
         </div>
       </CardContent>
     </Card>
