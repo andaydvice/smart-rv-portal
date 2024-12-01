@@ -12,6 +12,7 @@ import Contact from "./pages/Contact";
 import ScheduleDemo from "./pages/ScheduleDemo";
 import Troubleshooting from "./pages/Troubleshooting";
 import Documentation from "./pages/Documentation";
+import CompleteDocumentation from "./pages/documentation/CompleteDocumentation";
 import NavigationSystem from "./pages/features/NavigationSystem";
 import SecuritySystem from "./pages/features/SecuritySystem";
 import PowerManagement from "./pages/features/PowerManagement";
@@ -61,6 +62,7 @@ const router = createBrowserRouter([
       { path: "/schedule-demo", element: <ScheduleDemo /> },
       { path: "/troubleshooting", element: <Troubleshooting /> },
       { path: "/documentation", element: <Documentation /> },
+      { path: "/documentation/complete", element: <CompleteDocumentation /> },
     ],
   },
 ]);
