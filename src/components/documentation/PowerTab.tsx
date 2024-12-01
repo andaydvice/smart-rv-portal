@@ -5,42 +5,63 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
 const PowerTab = () => {
   return (
     <Card className="bg-gray-800/90 border-gray-700">
       <CardHeader>
-        <CardTitle className="text-rose-400 text-2xl">Power Management</CardTitle>
+        <CardTitle className="text-rose-400 text-2xl">Smart RV Power Management</CardTitle>
         <CardDescription className="text-blue-100 font-medium text-lg">Power system specifications and optimization</CardDescription>
       </CardHeader>
       <CardContent className="space-y-6 text-gray-100">
-        <div className="space-y-6">
-          <h3 className="text-2xl font-semibold text-rose-300 mb-4">Power Sources</h3>
-          <p className="text-lg leading-relaxed mb-6">
-            Solar panel integration provides sustainable energy generation for extended off-grid adventures. Our advanced solar system maximizes power generation while minimizing environmental impact.
-          </p>
-          <p className="text-lg leading-relaxed mb-6">
-            Battery specifications are optimized for long-term reliability and performance. Our battery system delivers consistent power while supporting rapid charging capabilities.
-          </p>
-          <p className="text-lg leading-relaxed mb-6">
-            Shore power requirements are managed through intelligent power distribution systems. This ensures safe and efficient power usage when connected to external power sources.
-          </p>
-          <p className="text-lg leading-relaxed mb-6">
-            Generator compatibility extends your power options with seamless integration of auxiliary power sources. Our system automatically manages generator operation for optimal efficiency.
-          </p>
-        </div>
-        <div className="space-y-6">
-          <h3 className="text-2xl font-semibold text-rose-300 mb-4">Power Management Features</h3>
-          <p className="text-lg leading-relaxed mb-6">
-            Automated load balancing ensures efficient power distribution across all systems. This intelligent feature prevents power overload while maintaining optimal performance.
-          </p>
-          <p className="text-lg leading-relaxed mb-6">
-            Power consumption monitoring provides detailed insights into your energy usage patterns. This information helps optimize your power management strategy for maximum efficiency.
-          </p>
-          <p className="text-lg leading-relaxed">
-            Battery health tracking extends the life of your power system through proactive maintenance alerts. Continuous monitoring ensures optimal battery performance throughout its lifecycle.
-          </p>
-        </div>
+        <Accordion type="single" collapsible className="w-full">
+          <AccordionItem value="sources" className="border-gray-700">
+            <AccordionTrigger className="text-xl text-rose-300 hover:text-rose-400">Understanding Your Power Sources</AccordionTrigger>
+            <AccordionContent className="text-lg space-y-4">
+              <p>Your Smart RV intelligently manages power from four sources to keep you comfortable on the road.</p>
+              <p>The solar panels on your roof automatically generate electricity whenever daylight hits them, even on cloudy days.</p>
+              <p>Your house batteries store this power so you can run appliances when boondocking or overnight.</p>
+              <p>Shore power gives you unlimited electricity when plugged into a campground pedestal.</p>
+              <p>Your generator serves as backup power, automatically starting when needed if you enable this feature.</p>
+            </AccordionContent>
+          </AccordionItem>
+
+          <AccordionItem value="system" className="border-gray-700">
+            <AccordionTrigger className="text-xl text-rose-300 hover:text-rose-400">How Your Smart Power System Works</AccordionTrigger>
+            <AccordionContent className="text-lg space-y-4">
+              <p>The system constantly monitors how much power each appliance uses and shows this on your dashboard in simple terms – like "Coffee Maker: 900 watts for 5 minutes."</p>
+              <p>When multiple appliances run at once, the system prevents blown fuses by managing which ones can operate together.</p>
+              <p>You'll receive clear notifications like "AC and Microwave cannot run together on 30-amp service" to prevent power issues.</p>
+              <p>The battery monitor shows your power level just like a fuel gauge, making it easy to know when to recharge.</p>
+            </AccordionContent>
+          </AccordionItem>
+
+          <AccordionItem value="troubleshooting" className="border-gray-700">
+            <AccordionTrigger className="text-xl text-rose-300 hover:text-rose-400">When Things Aren't Working Right</AccordionTrigger>
+            <AccordionContent className="text-lg space-y-4">
+              <p>If your batteries aren't charging from solar: First check if your panels are dirty – even light dust can reduce power by 30%.</p>
+              <p>If you plug into shore power but have no electricity: Verify your power cord is fully inserted and locked at both ends.</p>
+              <p>When your generator won't start automatically: Check that both the fuel tank is at least quarter full and the generator switch shows "Auto."</p>
+              <p>For unexpectedly high power usage: Look for plugged-in devices you rarely use – even small items like phone chargers consume power continuously.</p>
+            </AccordionContent>
+          </AccordionItem>
+
+          <AccordionItem value="important" className="border-gray-700">
+            <AccordionTrigger className="text-xl text-rose-300 hover:text-rose-400">Important Things to Know</AccordionTrigger>
+            <AccordionContent className="text-lg space-y-4">
+              <p>Running your air conditioner on battery power will drain them quickly – expect about 3 hours of runtime.</p>
+              <p>Charging batteries from shore power takes about 4 hours for a full charge from 20%.</p>
+              <p>Your generator automatically starts when batteries hit 20% if enabled – this prevents damaging them from getting too low.</p>
+              <p>The system prioritizes shore power when available, then solar, then generator power, to minimize fuel use and maximize efficiency.</p>
+            </AccordionContent>
+          </AccordionItem>
+        </Accordion>
       </CardContent>
     </Card>
   );
