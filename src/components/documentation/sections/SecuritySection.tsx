@@ -11,30 +11,48 @@ const SecuritySection = () => {
       <AccordionItem value="security" className="border-gray-700">
         <AccordionTrigger className="text-xl text-blue-300">Security Features</AccordionTrigger>
         <AccordionContent className="text-gray-100 space-y-4">
-          <h3 className="text-lg font-semibold text-blue-200">Overview</h3>
+          <h3 className="text-lg font-semibold text-blue-200">Protecting Your RV's Digital Systems</h3>
           <p className="leading-relaxed">
-            The Smart RV security system employs multiple layers of protection to ensure the safety of both the vehicle and its occupants. From advanced encryption protocols to physical security measures, every aspect has been carefully designed and implemented.
+            Modern RVs include connected systems that require thoughtful security measures. Understanding basic security principles helps protect your privacy and equipment.
+          </p>
+          <p className="leading-relaxed">
+            Each connected device creates potential vulnerabilities, but simple precautions significantly reduce risks.
           </p>
           
-          <h3 className="text-lg font-semibold text-blue-200 mt-6">Key Security Features</h3>
-          <ul className="list-disc pl-6 space-y-2">
-            <li>Multi-factor authentication for system access</li>
-            <li>End-to-end encryption for all data transmission</li>
-            <li>Real-time threat detection and monitoring</li>
-            <li>Automated security updates and patches</li>
-            <li>Physical security sensors and alarms</li>
-            <li>Secure remote access protocols</li>
-          </ul>
+          <h3 className="text-lg font-semibold text-blue-200 mt-6">Essential Security Layers</h3>
+          <div className="space-y-2">
+            <p>Physical security starts with basic door and window sensors, providing alerts when someone attempts unauthorized access.</p>
+            <p>Digital protection requires secure passwords and proper network configuration to keep unwanted visitors out of your systems.</p>
+            <p>Regular security updates patch vulnerabilities that could compromise your RV's connected systems.</p>
+          </div>
 
-          <h3 className="text-lg font-semibold text-blue-200 mt-6">Data Protection</h3>
-          <p className="leading-relaxed">
-            All user data is encrypted at rest and in transit using industry-standard protocols. Regular security audits and penetration testing ensure the system remains resilient against emerging threats. The system includes automated backup features with secure cloud storage integration.
-          </p>
+          <h3 className="text-lg font-semibold text-blue-200 mt-6">Practical Security Steps</h3>
+          <div className="space-y-2">
+            <p>Start by changing default passwords on all devices, including your RV's control panel and WiFi network.</p>
+            <p>Use unique passwords for different systems - if one gets compromised, others remain secure.</p>
+            <p>Enable two factor authentication when available, adding an extra layer of protection beyond passwords.</p>
+          </div>
 
-          <h3 className="text-lg font-semibold text-blue-200 mt-6">Emergency Response</h3>
-          <p className="leading-relaxed">
-            In case of security breaches or suspicious activities, the system can automatically alert authorities and the vehicle owner through multiple communication channels. Emergency protocols can be activated remotely to secure the vehicle and its contents.
-          </p>
+          <h3 className="text-lg font-semibold text-blue-200 mt-6">Data Protection Basics</h3>
+          <div className="space-y-2">
+            <p>Your RV systems collect sensitive information about usage patterns and location - understanding what's stored helps protect your privacy.</p>
+            <p>Local storage keeps your data under your control, while cloud backups provide recovery options if something goes wrong.</p>
+            <p>Learn which systems transmit data externally so you can make informed decisions about connectivity.</p>
+          </div>
+
+          <h3 className="text-lg font-semibold text-blue-200 mt-6">Network Security Tips</h3>
+          <div className="space-y-2">
+            <p>Separate guest networks keep visitors from accessing critical RV systems while still providing internet access.</p>
+            <p>VPNs protect your data when using public campground WiFi, but know when they're necessary versus overkill.</p>
+            <p>Regular network security scans help identify potential vulnerabilities before they become problems.</p>
+          </div>
+
+          <h3 className="text-lg font-semibold text-blue-200 mt-6">Emergency Preparedness</h3>
+          <div className="space-y-2">
+            <p>Document emergency procedures for quick reference when systems act unexpectedly.</p>
+            <p>Keep backup access methods available in case primary security systems fail.</p>
+            <p>Test alert systems periodically to ensure they function when needed.</p>
+          </div>
         </AccordionContent>
       </AccordionItem>
     </Accordion>
