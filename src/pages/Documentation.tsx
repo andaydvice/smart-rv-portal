@@ -10,7 +10,7 @@ import PowerTab from "@/components/documentation/PowerTab";
 const Documentation = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800">
-      <div className="relative w-full h-[400px] mb-12">
+      <div className="relative w-full h-[600px] mb-12">
         <img 
           src="/lovable-uploads/245a19e1-8ec4-41fc-bedd-d6a440d9a381.png"
           alt="RV System Documentation and Diagnostic Tools"
