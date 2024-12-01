@@ -30,14 +30,14 @@ const DocumentationHeader = () => {
         <div className="absolute inset-0 bg-black/40"></div>
       </div>
 
-      <div className="text-center">
+      <div className="text-center mb-12">
         <h1 className="text-4xl font-bold text-white mb-4">System Documentation</h1>
-        <p className="text-gray-300 max-w-2xl mx-auto mb-12">
+        <p className="text-gray-300 max-w-2xl mx-auto">
           Complete documentation and technical specifications for your Smart RV system
         </p>
       </div>
 
-      <div className="text-center">
+      <div className="mt-24 text-center">
         <Link to="/documentation/complete">
           <Button 
             variant="outline" 
