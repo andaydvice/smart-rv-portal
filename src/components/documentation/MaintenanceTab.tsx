@@ -74,7 +74,7 @@ const MaintenanceTab = () => {
               </div>
 
               <div>
-                <h4 className="font-semibold text-amber-300 mb-2">Power-Related Problems</h4>
+                <h4 className="font-semibold text-amber-300 mb-2">Power Related Problems</h4>
                 <div className="space-y-2">
                   <p>First, confirm that your shore power connection is secure and providing consistent power.</p>
                   <p>Examine all battery connections for signs of corrosion or loose fittings.</p>
