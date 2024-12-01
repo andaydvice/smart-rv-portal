@@ -6,6 +6,7 @@ import Navbar from "@/components/Navbar";
 import SystemArchitectureSection from "@/components/documentation/sections/SystemArchitectureSection";
 import NetworkInfrastructureSection from "@/components/documentation/sections/NetworkInfrastructureSection";
 import PowerManagementSection from "@/components/documentation/sections/PowerManagementSection";
+import SecuritySection from "@/components/documentation/sections/SecuritySection";
 
 const CompleteDocumentation = () => {
   return (
@@ -34,7 +35,7 @@ const CompleteDocumentation = () => {
               alt="Smart RV Complete System Documentation"
               className="w-full h-full object-cover object-center"
             />
-            <div className="absolute inset-0 bg-black/30 backdrop-blur-[2px]"></div>
+            <div className="absolute inset-0 bg-black/30"></div>
             <div className="absolute inset-0 flex flex-col justify-center items-center text-center p-8">
               <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">Complete System Documentation</h1>
               <p className="text-lg text-gray-200 max-w-2xl">
@@ -57,6 +58,11 @@ const CompleteDocumentation = () => {
             <div className="bg-gray-800/90 border-gray-700 rounded-lg p-8">
               <h2 className="text-2xl font-semibold text-blue-400 mb-6">Power Management</h2>
               <PowerManagementSection />
+            </div>
+
+            <div className="bg-gray-800/90 border-gray-700 rounded-lg p-8">
+              <h2 className="text-2xl font-semibold text-blue-400 mb-6">Security</h2>
+              <SecuritySection />
             </div>
           </div>
         </motion.div>
