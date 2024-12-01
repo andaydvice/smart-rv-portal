@@ -9,43 +9,43 @@ import PowerTab from "@/components/documentation/PowerTab";
 
 const Documentation = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 pt-20">
+    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 pt-24">
       <div className="container mx-auto px-4 py-8">
         <DocumentationHeader />
         
-        <Tabs defaultValue="overview" className="space-y-4">
-          <TabsList className="bg-gray-800/50">
-            <TabsTrigger value="overview" className="data-[state=active]:bg-blue-500 data-[state=active]:text-white font-semibold text-base">
+        <Tabs defaultValue="overview" className="space-y-8">
+          <TabsList className="bg-gray-800/50 p-2 mb-8">
+            <TabsTrigger value="overview" className="data-[state=active]:bg-blue-500 data-[state=active]:text-white font-semibold text-base px-6 py-3">
               <Book className="mr-2 h-4 w-4" />
               Overview
             </TabsTrigger>
-            <TabsTrigger value="technical" className="data-[state=active]:bg-blue-500 data-[state=active]:text-white font-semibold text-base">
+            <TabsTrigger value="technical" className="data-[state=active]:bg-blue-500 data-[state=active]:text-white font-semibold text-base px-6 py-3">
               <Cpu className="mr-2 h-4 w-4" />
               Technical
             </TabsTrigger>
-            <TabsTrigger value="maintenance" className="data-[state=active]:bg-blue-500 data-[state=active]:text-white font-semibold text-base">
+            <TabsTrigger value="maintenance" className="data-[state=active]:bg-blue-500 data-[state=active]:text-white font-semibold text-base px-6 py-3">
               <Wrench className="mr-2 h-4 w-4" />
               Maintenance
             </TabsTrigger>
-            <TabsTrigger value="power" className="data-[state=active]:bg-blue-500 data-[state=active]:text-white font-semibold text-base">
+            <TabsTrigger value="power" className="data-[state=active]:bg-blue-500 data-[state=active]:text-white font-semibold text-base px-6 py-3">
               <Zap className="mr-2 h-4 w-4" />
               Power Systems
             </TabsTrigger>
           </TabsList>
 
-          <TabsContent value="overview">
+          <TabsContent value="overview" className="mt-6">
             <OverviewTab />
           </TabsContent>
 
-          <TabsContent value="technical" className="space-y-4">
+          <TabsContent value="technical" className="mt-6">
             <TechnicalTab />
           </TabsContent>
 
-          <TabsContent value="maintenance" className="space-y-4">
+          <TabsContent value="maintenance" className="mt-6">
             <MaintenanceTab />
           </TabsContent>
 
-          <TabsContent value="power" className="space-y-4">
+          <TabsContent value="power" className="mt-6">
             <PowerTab />
           </TabsContent>
         </Tabs>
