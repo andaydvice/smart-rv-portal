@@ -1,8 +1,8 @@
 import { motion } from "framer-motion";
-import { ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
+import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import Navbar from "@/components/Navbar";
 import SystemArchitectureSection from "@/components/documentation/sections/SystemArchitectureSection";
 import NetworkInfrastructureSection from "@/components/documentation/sections/NetworkInfrastructureSection";
 import PowerManagementSection from "@/components/documentation/sections/PowerManagementSection";
@@ -10,7 +10,8 @@ import PowerManagementSection from "@/components/documentation/sections/PowerMan
 const CompleteDocumentation = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800">
-      <div className="container mx-auto px-4 py-24">
+      <Navbar />
+      <div className="container mx-auto px-4 pt-24">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -35,32 +36,20 @@ const CompleteDocumentation = () => {
           </div>
 
           <div className="space-y-12">
-            <Card className="bg-gray-800/90 border-gray-700">
-              <CardHeader>
-                <CardTitle className="text-2xl text-blue-400">System Architecture</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <SystemArchitectureSection />
-              </CardContent>
-            </Card>
+            <div className="bg-gray-800/90 border-gray-700 rounded-lg p-8">
+              <h2 className="text-2xl font-semibold text-blue-400 mb-6">System Architecture</h2>
+              <SystemArchitectureSection />
+            </div>
 
-            <Card className="bg-gray-800/90 border-gray-700">
-              <CardHeader>
-                <CardTitle className="text-2xl text-blue-400">Network Infrastructure</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <NetworkInfrastructureSection />
-              </CardContent>
-            </Card>
+            <div className="bg-gray-800/90 border-gray-700 rounded-lg p-8">
+              <h2 className="text-2xl font-semibold text-blue-400 mb-6">Network Infrastructure</h2>
+              <NetworkInfrastructureSection />
+            </div>
 
-            <Card className="bg-gray-800/90 border-gray-700">
-              <CardHeader>
-                <CardTitle className="text-2xl text-blue-400">Power Management</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <PowerManagementSection />
-              </CardContent>
-            </Card>
+            <div className="bg-gray-800/90 border-gray-700 rounded-lg p-8">
+              <h2 className="text-2xl font-semibold text-blue-400 mb-6">Power Management</h2>
+              <PowerManagementSection />
+            </div>
           </div>
         </motion.div>
       </div>
