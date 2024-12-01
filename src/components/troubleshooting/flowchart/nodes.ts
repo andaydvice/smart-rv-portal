@@ -14,6 +14,16 @@ export const nodes: Node[] = [
     className: `${mainNodeStyle} text-2xl bg-gradient-to-br from-blue-500 to-blue-600 border-2 border-blue-400`
   },
   
+  {
+    id: 'quick-check',
+    type: 'default',
+    data: { 
+      label: 'Quick System Check:\n\n• Visual Safety Assessment\n• Power Indicator Verification\n• Basic Network Connectivity\n• System Interface Response' 
+    },
+    position: { x: 0, y: 100 },
+    className: `${mainNodeStyle} bg-gradient-to-br from-blue-400 to-blue-500`
+  },
+  
   // Power Branch - Purple Theme
   {
     id: 'power-check',
@@ -127,6 +137,7 @@ export const nodes: Node[] = [
     position: { x: 400, y: 450 },
     className: `${baseNodeStyle} bg-gradient-to-br from-indigo-400 to-indigo-500`
   },
+  
   {
     id: 'resolved',
     type: 'default',
