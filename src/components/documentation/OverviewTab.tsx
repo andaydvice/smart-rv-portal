@@ -10,12 +10,12 @@ const OverviewTab = () => {
   return (
     <Card className="bg-gray-800/90 border-gray-700">
       <CardHeader className="space-y-4">
-        <CardTitle className="text-blue-400 text-3xl">System Architecture</CardTitle>
+        <CardTitle className="text-purple-400 text-3xl">System Architecture</CardTitle>
         <CardDescription className="text-blue-100 font-medium text-xl">Understanding the Smart RV's core systems</CardDescription>
       </CardHeader>
       <CardContent className="space-y-8 text-gray-100">
         <div className="space-y-6">
-          <h3 className="text-2xl font-semibold text-white mb-4">Core Components</h3>
+          <h3 className="text-2xl font-semibold text-purple-300 mb-4">Core Components</h3>
           <p className="text-lg leading-relaxed mb-6">
             At the heart of our Smart RV lies the Central Control Unit (CCU), a sophisticated system that orchestrates all onboard operations with precision and reliability. This advanced component serves as the brain of your vehicle, ensuring seamless integration of all smart features.
           </p>
@@ -27,7 +27,7 @@ const OverviewTab = () => {
           </p>
         </div>
         <div className="space-y-6">
-          <h3 className="text-2xl font-semibold text-white mb-4">Integration Points</h3>
+          <h3 className="text-2xl font-semibold text-purple-300 mb-4">Integration Points</h3>
           <p className="text-lg leading-relaxed mb-6">
             The Mobile App Connectivity feature transforms your smartphone into a powerful remote control center, offering comprehensive system management from anywhere in the world. Through our intuitive interface, you can monitor and control every aspect of your RV's operation.
           </p>

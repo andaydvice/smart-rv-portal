@@ -10,12 +10,12 @@ const TechnicalTab = () => {
   return (
     <Card className="bg-gray-800/90 border-gray-700">
       <CardHeader>
-        <CardTitle className="text-blue-400 text-2xl">Technical Specifications</CardTitle>
+        <CardTitle className="text-emerald-400 text-2xl">Technical Specifications</CardTitle>
         <CardDescription className="text-blue-100 font-medium text-lg">Detailed system specifications and requirements</CardDescription>
       </CardHeader>
       <CardContent className="space-y-6 text-gray-100">
         <div className="space-y-6">
-          <h3 className="text-2xl font-semibold text-white mb-4">Hardware Requirements</h3>
+          <h3 className="text-2xl font-semibold text-emerald-300 mb-4">Hardware Requirements</h3>
           <p className="text-lg leading-relaxed mb-6">
             The Dual-core ARM processor powers our system with exceptional performance and energy efficiency. This advanced processor ensures smooth operation of all onboard systems while maintaining optimal power consumption.
           </p>
@@ -30,7 +30,7 @@ const TechnicalTab = () => {
           </p>
         </div>
         <div className="space-y-6">
-          <h3 className="text-2xl font-semibold text-white mb-4">Software Stack</h3>
+          <h3 className="text-2xl font-semibold text-emerald-300 mb-4">Software Stack</h3>
           <p className="text-lg leading-relaxed mb-6">
             Our Custom Linux distribution has been specifically engineered for RV operations, providing a stable and secure foundation for all system functions. This specialized operating system optimizes performance while minimizing resource usage.
           </p>

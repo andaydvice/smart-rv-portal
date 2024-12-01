@@ -10,12 +10,12 @@ const PowerTab = () => {
   return (
     <Card className="bg-gray-800/90 border-gray-700">
       <CardHeader>
-        <CardTitle className="text-blue-400 text-2xl">Power Management</CardTitle>
+        <CardTitle className="text-rose-400 text-2xl">Power Management</CardTitle>
         <CardDescription className="text-blue-100 font-medium text-lg">Power system specifications and optimization</CardDescription>
       </CardHeader>
       <CardContent className="space-y-6 text-gray-100">
         <div className="space-y-6">
-          <h3 className="text-2xl font-semibold text-white mb-4">Power Sources</h3>
+          <h3 className="text-2xl font-semibold text-rose-300 mb-4">Power Sources</h3>
           <p className="text-lg leading-relaxed mb-6">
             Solar panel integration provides sustainable energy generation for extended off-grid adventures. Our advanced solar system maximizes power generation while minimizing environmental impact.
           </p>
@@ -30,7 +30,7 @@ const PowerTab = () => {
           </p>
         </div>
         <div className="space-y-6">
-          <h3 className="text-2xl font-semibold text-white mb-4">Power Management Features</h3>
+          <h3 className="text-2xl font-semibold text-rose-300 mb-4">Power Management Features</h3>
           <p className="text-lg leading-relaxed mb-6">
             Automated load balancing ensures efficient power distribution across all systems. This intelligent feature prevents power overload while maintaining optimal performance.
           </p>
