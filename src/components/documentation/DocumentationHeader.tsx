@@ -9,7 +9,7 @@ const DocumentationHeader = () => {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
-      className="space-y-8 mb-12"
+      className="space-y-8 mb-12 pt-24"
     >
       <Link to="/troubleshooting">
         <Button 
