@@ -18,7 +18,10 @@ import {
   AlertCircle,
   CheckCircle,
   ArrowRight,
-  Cog
+  Cog,
+  DollarSign,
+  Zap,
+  Tool
 } from "lucide-react";
 import {
   Accordion,
@@ -48,6 +51,18 @@ const SmartSystemGuide = () => {
             </AccordionTrigger>
             <AccordionContent className="text-gray-300 space-y-4">
               <div className="bg-gray-800/50 p-4 rounded-lg border border-gray-700">
+                <div className="flex items-center gap-2 text-blue-200 mb-3">
+                  <DollarSign className="h-4 w-4" />
+                  <span>Cost Range: $50-200 for premium adapters and boosters</span>
+                </div>
+                <div className="flex items-center gap-2 text-green-200 mb-3">
+                  <Zap className="h-4 w-4" />
+                  <span>Power Usage: Very Low (0.5-1W when active)</span>
+                </div>
+                <div className="flex items-center gap-2 text-yellow-200 mb-4">
+                  <Tool className="h-4 w-4" />
+                  <span>Installation: DIY-friendly, plug-and-play setup</span>
+                </div>
                 <h4 className="font-medium text-blue-200 mb-2">Common Issues</h4>
                 <ul className="list-disc list-inside space-y-2">
                   <li>Device not appearing in pairing list</li>
@@ -77,6 +92,18 @@ const SmartSystemGuide = () => {
             </AccordionTrigger>
             <AccordionContent className="text-gray-300 space-y-4">
               <div className="bg-gray-800/50 p-4 rounded-lg border border-gray-700">
+                <div className="flex items-center gap-2 text-blue-200 mb-3">
+                  <DollarSign className="h-4 w-4" />
+                  <span>Cost Range: Free to $299 for premium software licenses</span>
+                </div>
+                <div className="flex items-center gap-2 text-green-200 mb-3">
+                  <Zap className="h-4 w-4" />
+                  <span>Power Usage: Varies by device (2-5W average)</span>
+                </div>
+                <div className="flex items-center gap-2 text-yellow-200 mb-4">
+                  <Tool className="h-4 w-4" />
+                  <span>Installation: DIY for basic updates, Professional for system-wide changes</span>
+                </div>
                 <h4 className="font-medium text-blue-200 mb-2">App Data Management</h4>
                 <ol className="list-decimal list-inside space-y-2">
                   <li>Clear app cache</li>
@@ -106,6 +133,18 @@ const SmartSystemGuide = () => {
             </AccordionTrigger>
             <AccordionContent className="text-gray-300 space-y-4">
               <div className="bg-gray-800/50 p-4 rounded-lg border border-gray-700">
+                <div className="flex items-center gap-2 text-blue-200 mb-3">
+                  <DollarSign className="h-4 w-4" />
+                  <span>Cost Range: $500-2,500 for power system components</span>
+                </div>
+                <div className="flex items-center gap-2 text-green-200 mb-3">
+                  <Zap className="h-4 w-4" />
+                  <span>Power Usage: System dependent (50-200W peak)</span>
+                </div>
+                <div className="flex items-center gap-2 text-yellow-200 mb-4">
+                  <Tool className="h-4 w-4" />
+                  <span>Installation: Professional installation recommended</span>
+                </div>
                 <h4 className="font-medium text-blue-200 mb-2">Converter Testing</h4>
                 <ol className="list-decimal list-inside space-y-2">
                   <li>Test output voltage (should be 13.6-14.4V DC)</li>
@@ -136,6 +175,18 @@ const SmartSystemGuide = () => {
             </AccordionTrigger>
             <AccordionContent className="text-gray-300 space-y-4">
               <div className="bg-gray-800/50 p-4 rounded-lg border border-gray-700">
+                <div className="flex items-center gap-2 text-blue-200 mb-3">
+                  <DollarSign className="h-4 w-4" />
+                  <span>Cost Range: $300-1,500 for boosters and antennas</span>
+                </div>
+                <div className="flex items-center gap-2 text-green-200 mb-3">
+                  <Zap className="h-4 w-4" />
+                  <span>Power Usage: 10-30W for signal boosters</span>
+                </div>
+                <div className="flex items-center gap-2 text-yellow-200 mb-4">
+                  <Tool className="h-4 w-4" />
+                  <span>Installation: Professional recommended for optimal performance</span>
+                </div>
                 <h4 className="font-medium text-blue-200 mb-2">Signal Enhancement</h4>
                 <ul className="list-disc list-inside space-y-2">
                   <li>Install cellular signal booster</li>
