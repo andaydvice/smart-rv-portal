@@ -35,29 +35,29 @@ const Documentation = () => {
           
           <Tabs defaultValue="overview" className="space-y-4">
             <TabsList className="bg-gray-800/50">
-              <TabsTrigger value="overview" className="data-[state=active]:bg-blue-500">
+              <TabsTrigger value="overview" className="data-[state=active]:bg-blue-500 font-semibold text-base">
                 <Book className="mr-2 h-4 w-4" />
                 Overview
               </TabsTrigger>
-              <TabsTrigger value="technical" className="data-[state=active]:bg-blue-500">
+              <TabsTrigger value="technical" className="data-[state=active]:bg-blue-500 font-semibold text-base">
                 <Cpu className="mr-2 h-4 w-4" />
                 Technical
               </TabsTrigger>
-              <TabsTrigger value="maintenance" className="data-[state=active]:bg-blue-500">
+              <TabsTrigger value="maintenance" className="data-[state=active]:bg-blue-500 font-semibold text-base">
                 <Wrench className="mr-2 h-4 w-4" />
                 Maintenance
               </TabsTrigger>
-              <TabsTrigger value="power" className="data-[state=active]:bg-blue-500">
+              <TabsTrigger value="power" className="data-[state=active]:bg-blue-500 font-semibold text-base">
                 <Zap className="mr-2 h-4 w-4" />
                 Power Systems
               </TabsTrigger>
             </TabsList>
 
-            <TabsContent value="overview" className="space-y-4">
+            <TabsContent value="overview">
               <Card className="bg-gray-800/50 border-gray-700">
                 <CardHeader>
                   <CardTitle className="text-blue-400">System Architecture</CardTitle>
-                  <CardDescription>Understanding the Smart RV's core systems</CardDescription>
+                  <CardDescription className="text-gray-600 font-medium text-base">Understanding the Smart RV's core systems</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-6 text-gray-300">
                   <div>
@@ -201,6 +201,7 @@ const Documentation = () => {
                 </CardContent>
               </Card>
             </TabsContent>
+
           </Tabs>
         </motion.div>
       </div>
