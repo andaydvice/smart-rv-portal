@@ -94,8 +94,8 @@ const CompareModels = () => {
                     <TableCell className="text-center text-blue-400">$120,000</TableCell>
                     <TableCell className="text-center text-blue-400">$90,000</TableCell>
                   </TableRow>
-                  {features.map((featureGroup) => (
-                    <>
+                  {features.map((featureGroup, groupIndex) => (
+                    <React.Fragment key={`group-${groupIndex}`}>
                       <TableRow className="hover:bg-transparent">
                         <TableCell 
                           colSpan={4} 
@@ -111,7 +111,7 @@ const CompareModels = () => {
                           </TableCell>
                           <TableCell className="text-center text-gray-300">
                             {typeof feature.luxury === 'boolean' 
-                              ? (feature.luxury ? <Check className="w-5 h-5 mx-auto text-green-400" 
+                              ? (feature.luxury ? <Check className="w-5 h-5 mx-auto text-green-400" /> 
                                 : <Minus className="w-5 h-5 mx-auto text-gray-500" />)
                               : feature.luxury}
                           </TableCell>
@@ -129,7 +129,7 @@ const CompareModels = () => {
                           </TableCell>
                         </TableRow>
                       ))}
-                    </>
+                    </React.Fragment>
                   ))}
                 </TableBody>
               </Table>
