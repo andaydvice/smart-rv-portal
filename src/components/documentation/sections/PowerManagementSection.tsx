@@ -9,57 +9,68 @@ const PowerManagementSection = () => {
   return (
     <Accordion type="single" collapsible className="space-y-4">
       <AccordionItem value="power-management" className="border-gray-700">
-        <AccordionTrigger className="text-xl text-blue-300">Power That Puts You in Control</AccordionTrigger>
+        <AccordionTrigger className="text-xl text-blue-300">Understanding Your RV's Power System</AccordionTrigger>
         <AccordionContent className="text-gray-100 space-y-4">
-          <h3 className="text-lg font-semibold text-blue-200">Intelligent Multi Source Integration</h3>
           <p className="leading-relaxed">
-            Take command of your energy future with cutting edge power management that seamlessly blends multiple power sources to deliver unmatched reliability.
+            Every RV power system combines multiple energy sources to keep your adventures running smoothly.
           </p>
           <p className="leading-relaxed">
-            Intelligent algorithms constantly analyze your power usage patterns, automatically optimizing distribution between shore power, solar input, and battery reserves.
-          </p>
-
-          <h3 className="text-lg font-semibold text-blue-200">Advanced Power Protection</h3>
-          <p className="leading-relaxed">
-            Sophisticated power conditioning shields your valuable electronics from harmful surges while maintaining steady, clean power delivery.
-          </p>
-          <p className="leading-relaxed">
-            Advanced load management ensures your critical systems never go dark, automatically prioritizing essential operations during high demand.
+            Learning how these systems work together helps you make informed decisions about power management.
           </p>
 
-          <h3 className="text-lg font-semibold text-blue-200">Premium Battery Technology</h3>
+          <h3 className="text-lg font-semibold text-blue-200">Energy Sources Explained</h3>
           <p className="leading-relaxed">
-            Premium lithium iron phosphate batteries form the backbone of your energy storage, offering superior longevity and safety compared to traditional solutions.
+            Shore power provides reliable electricity when connected at campgrounds, but understanding voltage variations prevents damage to sensitive equipment.
           </p>
           <p className="leading-relaxed">
-            Smart charging technology maintains peak battery performance through precision temperature monitoring and adaptive charging profiles.
-          </p>
-
-          <h3 className="text-lg font-semibold text-blue-200">Predictive Maintenance and Monitoring</h3>
-          <p className="leading-relaxed">
-            Continuous health monitoring predicts potential issues before they impact your power availability, while automated maintenance cycles maximize battery lifespan.
+            Solar panels convert sunlight into usable power, with efficiency varying based on panel angle, shade, and weather conditions.
           </p>
           <p className="leading-relaxed">
-            Dedicated emergency power reserves stand ready to support your essential operations when you need them most.
+            Batteries store excess energy for later use, acting as your primary power source when boondocking or during overnight stays.
           </p>
 
-          <h3 className="text-lg font-semibold text-blue-200">Solar Optimization and Forecasting</h3>
+          <h3 className="text-lg font-semibold text-blue-200">Making Smart Power Choices</h3>
           <p className="leading-relaxed">
-            State of the art solar controllers squeeze maximum efficiency from your panels regardless of weather conditions, while sophisticated monitoring catches performance issues early.
+            Monitor your power consumption patterns to understand which appliances draw the most energy.
           </p>
           <p className="leading-relaxed">
-            Intelligent weather forecasting combines with historical data to optimize your power strategy, automatically adjusting consumption based on predicted solar availability.
+            Small adjustments in daily routines can significantly impact your power availability when off grid.
+          </p>
+          <p className="leading-relaxed">
+            Different seasons require different power management strategies as solar input and heating/cooling needs change.
           </p>
 
-          <h3 className="text-lg font-semibold text-blue-200">Complete Power Control</h3>
+          <h3 className="text-lg font-semibold text-blue-200">Battery System Basics</h3>
           <p className="leading-relaxed">
-            This complete power solution delivers the independence and reliability modern users demand, while remaining remarkably simple to manage.
+            Modern lithium batteries offer more usable capacity than traditional lead acid, but require proper charging parameters.
           </p>
           <p className="leading-relaxed">
-            Real time insights put total control at your fingertips, ensuring you are never in the dark about your power status.
+            Temperature affects battery performance and lifespan - extreme conditions need special consideration.
           </p>
           <p className="leading-relaxed">
-            Your energy future starts here with a system that is as intelligent as it is dependable.
+            Understanding charge cycles helps extend battery life and maintain reliable power storage.
+          </p>
+
+          <h3 className="text-lg font-semibold text-blue-200">Solar Power Insights</h3>
+          <p className="leading-relaxed">
+            Panel placement significantly impacts energy generation - learn to optimize your setup for different parking situations.
+          </p>
+          <p className="leading-relaxed">
+            Partial shade affects solar panels more than many realize, making panel positioning crucial for maximum efficiency.
+          </p>
+          <p className="leading-relaxed">
+            Seasonal sun angles change your solar input - adjust your power usage expectations accordingly.
+          </p>
+
+          <h3 className="text-lg font-semibold text-blue-200">Practical Power Management</h3>
+          <p className="leading-relaxed">
+            Start by tracking your actual power usage before making expensive system upgrades.
+          </p>
+          <p className="leading-relaxed">
+            Learn to identify essential versus optional power loads for effective energy prioritization.
+          </p>
+          <p className="leading-relaxed">
+            Develop backup plans for different scenarios to maintain critical systems during unexpected situations.
           </p>
         </AccordionContent>
       </AccordionItem>
