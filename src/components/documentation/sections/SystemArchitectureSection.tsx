@@ -9,30 +9,56 @@ const SystemArchitectureSection = () => {
   return (
     <Accordion type="single" collapsible className="space-y-4">
       <AccordionItem value="central-control" className="border-gray-700">
-        <AccordionTrigger className="text-xl text-blue-300">Central Control Unit (CCU)</AccordionTrigger>
+        <AccordionTrigger className="text-xl text-blue-300">Understanding Your RV's Brain: The Central Control Unit (CCU)</AccordionTrigger>
         <AccordionContent className="text-gray-100 space-y-4">
-          <h3 className="text-lg font-semibold text-blue-200">Overview</h3>
           <p className="leading-relaxed">
-            The Central Control Unit (CCU) is the core processing unit of your Smart RV system. Built on a custom-designed motherboard with ECC memory support, it features redundant power supplies and automated failover systems to ensure continuous operation even in challenging conditions.
+            Modern RVs often come equipped with a Central Control Unit (CCU) that manages various systems throughout your vehicle. Think of it as your RV's command center - monitoring and controlling everything from power management to climate control.
           </p>
+          
+          <h3 className="text-lg font-semibold text-blue-200 mt-6">What Does a CCU Do?</h3>
           <p className="leading-relaxed">
-            The CCU's processor architecture is specifically optimized for real-time monitoring and control applications, with dedicated cores for system management and user interface operations. This separation ensures that critical system functions remain responsive even under heavy load.
+            The CCU coordinates communication between different RV systems, including:
           </p>
-          <h3 className="text-lg font-semibold text-blue-200 mt-6">Technical Specifications</h3>
           <ul className="list-disc pl-6 space-y-2">
-            <li>Processor: Dual-core ARM Cortex-A72 @ 2.0 GHz</li>
-            <li>Memory: 8GB DDR4 ECC RAM</li>
-            <li>Storage: 256GB Industrial Grade SSD</li>
-            <li>Operating Temperature: -20°C to 60°C</li>
-            <li>Power Consumption: 15W typical, 25W peak</li>
-            <li>Backup Battery: 2 hours runtime</li>
+            <li>Power management and battery monitoring</li>
+            <li>Temperature and climate control</li>
+            <li>Tank level sensors</li>
+            <li>Lighting systems</li>
+            <li>Security features</li>
           </ul>
-          <h3 className="text-lg font-semibold text-blue-200 mt-6">Integration Features</h3>
+
+          <h3 className="text-lg font-semibold text-blue-200 mt-6">Technical Features to Look For</h3>
           <p className="leading-relaxed">
-            The CCU interfaces with all subsystems through a proprietary high-speed bus system that supports hot-plugging and automatic device discovery. This allows for seamless integration of new components and ensures reliable communication between all system elements.
+            When evaluating an RV's control system, consider these important specifications:
           </p>
+          <ul className="list-disc pl-6 space-y-2">
+            <li>Processing power to handle multiple systems simultaneously</li>
+            <li>Memory capacity for system operations</li>
+            <li>Storage for system data and updates</li>
+            <li>Operating temperature range for various climates</li>
+            <li>Backup power capabilities</li>
+            <li>Integration capabilities with other RV systems</li>
+          </ul>
+
+          <h3 className="text-lg font-semibold text-blue-200 mt-6">System Integration</h3>
           <p className="leading-relaxed">
-            Advanced error detection and correction mechanisms are implemented at both the hardware and software levels. The system continuously monitors for potential issues and can automatically initiate corrective actions before they impact system operation.
+            Most modern CCUs can connect with various RV components through standardized communication systems. This allows you to monitor and control different aspects of your RV, often through a single interface or mobile app.
+          </p>
+
+          <h3 className="text-lg font-semibold text-blue-200 mt-6">Reliability Considerations</h3>
+          <p className="leading-relaxed">
+            Look for systems with:
+          </p>
+          <ul className="list-disc pl-6 space-y-2">
+            <li>Backup power options</li>
+            <li>Wide operating temperature ranges</li>
+            <li>Error detection capabilities</li>
+            <li>Automatic system monitoring</li>
+            <li>Durable storage components</li>
+          </ul>
+
+          <p className="leading-relaxed mt-4">
+            Understanding these features helps you make informed decisions about RV technology and maintenance. Whether you're shopping for a new RV or upgrading an existing one, knowing how these systems work together can improve your travel experience.
           </p>
         </AccordionContent>
       </AccordionItem>
