@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowLeft, Book, Cpu, Tool, Zap } from "lucide-react";
+import { ArrowLeft, Book, Cpu, Wrench, Zap } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import {
@@ -44,7 +44,7 @@ const Documentation = () => {
                 Technical
               </TabsTrigger>
               <TabsTrigger value="maintenance" className="data-[state=active]:bg-blue-500">
-                <Tool className="mr-2 h-4 w-4" />
+                <Wrench className="mr-2 h-4 w-4" />
                 Maintenance
               </TabsTrigger>
               <TabsTrigger value="power" className="data-[state=active]:bg-blue-500">
