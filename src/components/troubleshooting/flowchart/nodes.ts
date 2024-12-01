@@ -14,16 +14,6 @@ export const nodes: Node[] = [
     className: `${mainNodeStyle} text-2xl bg-gradient-to-br from-blue-500 to-blue-600 border-2 border-blue-400`
   },
   
-  {
-    id: 'quick-check',
-    type: 'default',
-    data: { 
-      label: 'Quick System Check:\n\n• Visual Safety Assessment\n• Power Indicator Verification\n• Basic Network Connectivity\n• System Interface Response' 
-    },
-    position: { x: 0, y: 200 },
-    className: `${mainNodeStyle} bg-gradient-to-br from-blue-400 to-blue-500`
-  },
-  
   // Power Branch - Purple Theme
   {
     id: 'power-check',
@@ -31,7 +21,7 @@ export const nodes: Node[] = [
     data: { 
       label: 'Power System Diagnostics' 
     },
-    position: { x: -400, y: 400 },
+    position: { x: -400, y: 150 },
     className: `${mainNodeStyle} bg-gradient-to-br from-purple-500 to-purple-600`
   },
   {
@@ -40,7 +30,7 @@ export const nodes: Node[] = [
     data: { 
       label: 'Battery Voltage Analysis\n(Threshold: 12.2V DC)' 
     },
-    position: { x: -400, y: 500 },
+    position: { x: -400, y: 275 },
     className: `${baseNodeStyle} bg-gradient-to-br from-purple-400 to-purple-500`
   },
   {
@@ -49,7 +39,7 @@ export const nodes: Node[] = [
     data: { 
       label: 'Battery System Diagnostics:\n• Cell Balance Check\n• Temperature Monitoring\n• Charging Efficiency Test' 
     },
-    position: { x: -400, y: 600 },
+    position: { x: -400, y: 400 },
     className: `${baseNodeStyle} bg-gradient-to-br from-purple-400 to-purple-500`
   },
   {
@@ -58,7 +48,7 @@ export const nodes: Node[] = [
     data: { 
       label: 'Solar Integration Check:\n• Panel Performance\n• Charge Controller Status\n• Power Output Analysis' 
     },
-    position: { x: -400, y: 700 },
+    position: { x: -400, y: 550 },
     className: `${baseNodeStyle} bg-gradient-to-br from-purple-400 to-purple-500`
   },
   {
@@ -67,7 +57,7 @@ export const nodes: Node[] = [
     data: { 
       label: 'Power System Recovery Protocol:\n• Initialize Shore Power Connection\n• Monitor Charging Parameters\n• Verify Power Stability' 
     },
-    position: { x: -400, y: 800 },
+    position: { x: -400, y: 700 },
     className: `${baseNodeStyle} bg-gradient-to-br from-purple-400 to-purple-500`
   },
   
@@ -78,7 +68,7 @@ export const nodes: Node[] = [
     data: { 
       label: 'Network Infrastructure Analysis' 
     },
-    position: { x: 0, y: 400 },
+    position: { x: 0, y: 150 },
     className: `${mainNodeStyle} bg-gradient-to-br from-cyan-500 to-cyan-600`
   },
   {
@@ -87,7 +77,7 @@ export const nodes: Node[] = [
     data: { 
       label: 'Signal Quality Metrics:\n• RSSI Threshold: -70dBm\n• SNR Threshold: 20dB\n• Connection Stability Check' 
     },
-    position: { x: 0, y: 500 },
+    position: { x: 0, y: 300 },
     className: `${baseNodeStyle} bg-gradient-to-br from-cyan-400 to-cyan-500`
   },
   {
@@ -96,7 +86,7 @@ export const nodes: Node[] = [
     data: { 
       label: 'Smart Device Connectivity:\n• Device Discovery Scan\n• Protocol Compatibility\n• Connection Quality Test' 
     },
-    position: { x: 0, y: 600 },
+    position: { x: 0, y: 450 },
     className: `${baseNodeStyle} bg-gradient-to-br from-cyan-400 to-cyan-500`
   },
   {
@@ -105,7 +95,7 @@ export const nodes: Node[] = [
     data: { 
       label: 'Signal Enhancement Protocol:\n• Deploy Signal Amplification\n• Optimize Antenna Configuration\n• Verify Signal Improvement' 
     },
-    position: { x: 0, y: 700 },
+    position: { x: 0, y: 600 },
     className: `${baseNodeStyle} bg-gradient-to-br from-cyan-400 to-cyan-500`
   },
   
@@ -116,7 +106,7 @@ export const nodes: Node[] = [
     data: { 
       label: 'System Software Verification' 
     },
-    position: { x: 400, y: 400 },
+    position: { x: 400, y: 150 },
     className: `${mainNodeStyle} bg-gradient-to-br from-indigo-500 to-indigo-600`
   },
   {
@@ -125,7 +115,7 @@ export const nodes: Node[] = [
     data: { 
       label: 'Firmware Version Analysis:\n• Current Version: v2.1.4\n• Latest Release: v2.1.4\n• Compatibility Check' 
     },
-    position: { x: 400, y: 500 },
+    position: { x: 400, y: 300 },
     className: `${baseNodeStyle} bg-gradient-to-br from-indigo-400 to-indigo-500`
   },
   {
@@ -134,17 +124,16 @@ export const nodes: Node[] = [
     data: { 
       label: 'System Update Protocol:\n• Download Firmware Package\n• Verify Digital Signatures\n• Execute Update Sequence' 
     },
-    position: { x: 400, y: 600 },
+    position: { x: 400, y: 450 },
     className: `${baseNodeStyle} bg-gradient-to-br from-indigo-400 to-indigo-500`
   },
-  
   {
     id: 'resolved',
     type: 'default',
     data: { 
       label: 'System Status Verification:\nDiagnostic Completion Check' 
     },
-    position: { x: 0, y: 900 },
+    position: { x: 0, y: 850 },
     className: `${baseNodeStyle} bg-gradient-to-br from-emerald-500 to-emerald-600`
   },
   {
@@ -153,7 +142,7 @@ export const nodes: Node[] = [
     data: { 
       label: 'Technical Support Escalation:\n• Generate System Diagnostics\n• Schedule Technical Consultation\n• Prepare Support Documentation' 
     },
-    position: { x: 0, y: 1000 },
+    position: { x: 0, y: 950 },
     className: `${baseNodeStyle} bg-gradient-to-br from-red-500 to-red-600`
   }
 ];
