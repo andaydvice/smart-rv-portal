@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const DocumentationHeader = () => {
@@ -30,11 +30,23 @@ const DocumentationHeader = () => {
         <div className="absolute inset-0 bg-black/40"></div>
       </div>
 
-      <div className="text-center">
-        <h1 className="text-4xl font-bold text-white mb-4">System Documentation</h1>
-        <p className="text-gray-300 max-w-2xl mx-auto">
-          Complete documentation and technical specifications for your Smart RV system
-        </p>
+      <div className="text-center space-y-6">
+        <div>
+          <h1 className="text-4xl font-bold text-white mb-4">System Documentation</h1>
+          <p className="text-gray-300 max-w-2xl mx-auto">
+            Complete documentation and technical specifications for your Smart RV system
+          </p>
+        </div>
+        
+        <Link to="/documentation/complete">
+          <Button 
+            variant="outline" 
+            className="bg-blue-500/10 text-blue-400 border-blue-400 hover:bg-blue-400/20 hover:text-blue-300"
+          >
+            View Complete System Documentation
+            <ChevronRight className="ml-2 h-4 w-4" />
+          </Button>
+        </Link>
       </div>
     </motion.div>
   );
