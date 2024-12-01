@@ -9,8 +9,17 @@ import PowerTab from "@/components/documentation/PowerTab";
 
 const Documentation = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 pt-24">
-      <div className="container mx-auto px-4 py-8">
+    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800">
+      <div className="relative w-full h-[400px] mb-12">
+        <img 
+          src="/lovable-uploads/245a19e1-8ec4-41fc-bedd-d6a440d9a381.png"
+          alt="RV System Documentation and Diagnostic Tools"
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-gray-900" />
+      </div>
+      
+      <div className="container mx-auto px-4 py-8 -mt-32 relative z-10">
         <DocumentationHeader />
         
         <Tabs defaultValue="overview" className="space-y-8">
