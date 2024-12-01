@@ -24,7 +24,7 @@ const Documentation = () => {
           <Link to="/troubleshooting">
             <Button 
               variant="outline" 
-              className="mb-6 bg-blue-500/10 text-blue-400 border-blue-400 hover:bg-blue-400/10 hover:text-blue-400"
+              className="mb-6 bg-blue-500/10 text-blue-400 border-blue-400 hover:bg-blue-400/20 hover:text-blue-300 font-bold text-lg"
             >
               <ArrowLeft className="mr-2 h-4 w-4" />
               Back to Troubleshooting
@@ -35,31 +35,31 @@ const Documentation = () => {
           
           <Tabs defaultValue="overview" className="space-y-4">
             <TabsList className="bg-gray-800/50">
-              <TabsTrigger value="overview" className="data-[state=active]:bg-blue-500 font-semibold text-base">
+              <TabsTrigger value="overview" className="data-[state=active]:bg-blue-500 data-[state=active]:text-white font-semibold text-base">
                 <Book className="mr-2 h-4 w-4" />
                 Overview
               </TabsTrigger>
-              <TabsTrigger value="technical" className="data-[state=active]:bg-blue-500 font-semibold text-base">
+              <TabsTrigger value="technical" className="data-[state=active]:bg-blue-500 data-[state=active]:text-white font-semibold text-base">
                 <Cpu className="mr-2 h-4 w-4" />
                 Technical
               </TabsTrigger>
-              <TabsTrigger value="maintenance" className="data-[state=active]:bg-blue-500 font-semibold text-base">
+              <TabsTrigger value="maintenance" className="data-[state=active]:bg-blue-500 data-[state=active]:text-white font-semibold text-base">
                 <Wrench className="mr-2 h-4 w-4" />
                 Maintenance
               </TabsTrigger>
-              <TabsTrigger value="power" className="data-[state=active]:bg-blue-500 font-semibold text-base">
+              <TabsTrigger value="power" className="data-[state=active]:bg-blue-500 data-[state=active]:text-white font-semibold text-base">
                 <Zap className="mr-2 h-4 w-4" />
                 Power Systems
               </TabsTrigger>
             </TabsList>
 
             <TabsContent value="overview">
-              <Card className="bg-gray-800/50 border-gray-700">
+              <Card className="bg-gray-800/90 border-gray-700">
                 <CardHeader>
-                  <CardTitle className="text-blue-400">System Architecture</CardTitle>
-                  <CardDescription className="text-gray-200 font-medium text-base">Understanding the Smart RV's core systems</CardDescription>
+                  <CardTitle className="text-blue-400 text-2xl">System Architecture</CardTitle>
+                  <CardDescription className="text-blue-100 font-medium text-lg">Understanding the Smart RV's core systems</CardDescription>
                 </CardHeader>
-                <CardContent className="space-y-6 text-gray-100">
+                <CardContent className="space-y-6 text-white">
                   <div>
                     <h3 className="text-xl font-semibold text-white mb-3">Core Components</h3>
                     <p className="mb-4">
@@ -89,12 +89,12 @@ const Documentation = () => {
             </TabsContent>
 
             <TabsContent value="technical" className="space-y-4">
-              <Card className="bg-gray-800/50 border-gray-700">
+              <Card className="bg-gray-800/90 border-gray-700">
                 <CardHeader>
-                  <CardTitle className="text-blue-400">Technical Specifications</CardTitle>
-                  <CardDescription>Detailed system specifications and requirements</CardDescription>
+                  <CardTitle className="text-blue-400 text-2xl">Technical Specifications</CardTitle>
+                  <CardDescription className="text-blue-100 font-medium text-lg">Detailed system specifications and requirements</CardDescription>
                 </CardHeader>
-                <CardContent className="space-y-6 text-gray-300">
+                <CardContent className="space-y-6 text-white">
                   <div>
                     <h3 className="text-xl font-semibold text-white mb-3">Hardware Requirements</h3>
                     <p className="mb-4">
@@ -127,12 +127,12 @@ const Documentation = () => {
             </TabsContent>
 
             <TabsContent value="maintenance" className="space-y-4">
-              <Card className="bg-gray-800/50 border-gray-700">
+              <Card className="bg-gray-800/90 border-gray-700">
                 <CardHeader>
-                  <CardTitle className="text-blue-400">Maintenance Procedures</CardTitle>
-                  <CardDescription>Regular maintenance and troubleshooting guides</CardDescription>
+                  <CardTitle className="text-blue-400 text-2xl">Maintenance Procedures</CardTitle>
+                  <CardDescription className="text-blue-100 font-medium text-lg">Regular maintenance and troubleshooting guides</CardDescription>
                 </CardHeader>
-                <CardContent className="space-y-6 text-gray-300">
+                <CardContent className="space-y-6 text-white">
                   <div>
                     <h3 className="text-xl font-semibold text-white mb-3">Regular Maintenance</h3>
                     <p className="mb-4">
@@ -165,12 +165,12 @@ const Documentation = () => {
             </TabsContent>
 
             <TabsContent value="power" className="space-y-4">
-              <Card className="bg-gray-800/50 border-gray-700">
+              <Card className="bg-gray-800/90 border-gray-700">
                 <CardHeader>
-                  <CardTitle className="text-blue-400">Power Management</CardTitle>
-                  <CardDescription>Power system specifications and optimization</CardDescription>
+                  <CardTitle className="text-blue-400 text-2xl">Power Management</CardTitle>
+                  <CardDescription className="text-blue-100 font-medium text-lg">Power system specifications and optimization</CardDescription>
                 </CardHeader>
-                <CardContent className="space-y-6 text-gray-300">
+                <CardContent className="space-y-6 text-white">
                   <div>
                     <h3 className="text-xl font-semibold text-white mb-3">Power Sources</h3>
                     <p className="mb-4">
