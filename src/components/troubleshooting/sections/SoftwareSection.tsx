@@ -4,6 +4,12 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 const SoftwareSection = () => {
   return (
@@ -37,7 +43,16 @@ const SoftwareSection = () => {
                 Clear app data (Note: This will reset all settings)
                 <Clock className="h-4 w-4 text-blue-300" />
                 <span className="text-sm text-blue-300">(5 min)</span>
-                <AlertTriangle className="h-4 w-4 text-yellow-400" title="Backup settings before proceeding" />
+                <TooltipProvider>
+                  <Tooltip>
+                    <TooltipTrigger>
+                      <AlertTriangle className="h-4 w-4 text-yellow-400" />
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      <p>Backup settings before proceeding</p>
+                    </TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
               </div>
             </li>
             <li>
@@ -45,7 +60,16 @@ const SoftwareSection = () => {
                 Reinstall app if issues persist
                 <Clock className="h-4 w-4 text-blue-300" />
                 <span className="text-sm text-blue-300">(10-15 min)</span>
-                <HelpCircle className="h-4 w-4 text-purple-400" title="Contact support if installation fails" />
+                <TooltipProvider>
+                  <Tooltip>
+                    <TooltipTrigger>
+                      <HelpCircle className="h-4 w-4 text-purple-400" />
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      <p>Contact support if installation fails</p>
+                    </TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
               </div>
             </li>
           </ol>
@@ -65,7 +89,16 @@ const SoftwareSection = () => {
                 Check for system updates
                 <Clock className="h-4 w-4 text-blue-300" />
                 <span className="text-sm text-blue-300">(10-30 min)</span>
-                <AlertTriangle className="h-4 w-4 text-yellow-400" title="Ensure stable internet connection" />
+                <TooltipProvider>
+                  <Tooltip>
+                    <TooltipTrigger>
+                      <AlertTriangle className="h-4 w-4 text-yellow-400" />
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      <p>Ensure stable internet connection</p>
+                    </TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
               </div>
             </li>
             <li>
@@ -73,7 +106,16 @@ const SoftwareSection = () => {
                 Factory reset as last resort
                 <Clock className="h-4 w-4 text-blue-300" />
                 <span className="text-sm text-blue-300">(30-45 min)</span>
-                <HelpCircle className="h-4 w-4 text-purple-400" title="Professional assistance recommended" />
+                <TooltipProvider>
+                  <Tooltip>
+                    <TooltipTrigger>
+                      <HelpCircle className="h-4 w-4 text-purple-400" />
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      <p>Professional assistance recommended</p>
+                    </TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
               </div>
             </li>
           </ol>

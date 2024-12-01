@@ -4,6 +4,12 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 const BluetoothSection = () => {
   return (
@@ -30,7 +36,16 @@ const BluetoothSection = () => {
                 Connection drops frequently
                 <Clock className="h-4 w-4 text-blue-300" />
                 <span className="text-sm text-blue-300">(10-15 min)</span>
-                <AlertTriangle className="h-4 w-4 text-yellow-400" title="May indicate interference issues" />
+                <TooltipProvider>
+                  <Tooltip>
+                    <TooltipTrigger>
+                      <AlertTriangle className="h-4 w-4 text-yellow-400" />
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      <p>May indicate interference issues</p>
+                    </TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
               </div>
             </li>
             <li>
@@ -71,7 +86,16 @@ const BluetoothSection = () => {
                 Update device firmware if available
                 <Clock className="h-4 w-4 text-blue-300" />
                 <span className="text-sm text-blue-300">(15-30 min)</span>
-                <HelpCircle className="h-4 w-4 text-purple-400" title="Contact support if firmware update fails" />
+                <TooltipProvider>
+                  <Tooltip>
+                    <TooltipTrigger>
+                      <HelpCircle className="h-4 w-4 text-purple-400" />
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      <p>Contact support if firmware update fails</p>
+                    </TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
               </div>
             </li>
           </ol>
