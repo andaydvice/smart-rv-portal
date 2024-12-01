@@ -9,56 +9,69 @@ const SystemArchitectureSection = () => {
   return (
     <Accordion type="single" collapsible className="space-y-4">
       <AccordionItem value="central-control" className="border-gray-700">
-        <AccordionTrigger className="text-xl text-blue-300">Understanding Your RV's Brain: The Central Control Unit (CCU)</AccordionTrigger>
+        <AccordionTrigger className="text-xl text-blue-300">Understanding Your RV's Control System</AccordionTrigger>
         <AccordionContent className="text-gray-100 space-y-4">
           <p className="leading-relaxed">
-            Modern RVs often come equipped with a Central Control Unit (CCU) that manages various systems throughout your vehicle. Think of it as your RV's command center - monitoring and controlling everything from power management to climate control.
+            Modern RVs use integrated control systems to manage essential functions, but understanding how they work helps you troubleshoot issues and make smarter usage decisions.
           </p>
           
-          <h3 className="text-lg font-semibold text-blue-200 mt-6">What Does a CCU Do?</h3>
           <p className="leading-relaxed">
-            The CCU coordinates communication between different RV systems, including:
-          </p>
-          <ul className="list-disc pl-6 space-y-2">
-            <li>Power management and battery monitoring</li>
-            <li>Temperature and climate control</li>
-            <li>Tank level sensors</li>
-            <li>Lighting systems</li>
-            <li>Security features</li>
-          </ul>
-
-          <h3 className="text-lg font-semibold text-blue-200 mt-6">Technical Features to Look For</h3>
-          <p className="leading-relaxed">
-            When evaluating an RV's control system, consider these important specifications:
-          </p>
-          <ul className="list-disc pl-6 space-y-2">
-            <li>Processing power to handle multiple systems simultaneously</li>
-            <li>Memory capacity for system operations</li>
-            <li>Storage for system data and updates</li>
-            <li>Operating temperature range for various climates</li>
-            <li>Backup power capabilities</li>
-            <li>Integration capabilities with other RV systems</li>
-          </ul>
-
-          <h3 className="text-lg font-semibold text-blue-200 mt-6">System Integration</h3>
-          <p className="leading-relaxed">
-            Most modern CCUs can connect with various RV components through standardized communication systems. This allows you to monitor and control different aspects of your RV, often through a single interface or mobile app.
+            Think of your RV's control system like a conductor coordinating an orchestra - it ensures all parts work together harmoniously.
           </p>
 
-          <h3 className="text-lg font-semibold text-blue-200 mt-6">Reliability Considerations</h3>
+          <h3 className="text-lg font-semibold text-blue-200 mt-6">How Control Systems Work</h3>
           <p className="leading-relaxed">
-            Look for systems with:
+            Your RV's control system monitors various components through a network of sensors and connections, providing real time information about system status.
           </p>
-          <ul className="list-disc pl-6 space-y-2">
-            <li>Backup power options</li>
-            <li>Wide operating temperature ranges</li>
-            <li>Error detection capabilities</li>
-            <li>Automatic system monitoring</li>
-            <li>Durable storage components</li>
-          </ul>
+          <p className="leading-relaxed">
+            Different manufacturers use varying approaches, but most follow similar principles for managing power, climate, and monitoring systems.
+          </p>
+          <p className="leading-relaxed">
+            Each sensor connects to a central processing unit that interprets signals and adjusts system operations accordingly.
+          </p>
 
-          <p className="leading-relaxed mt-4">
-            Understanding these features helps you make informed decisions about RV technology and maintenance. Whether you're shopping for a new RV or upgrading an existing one, knowing how these systems work together can improve your travel experience.
+          <h3 className="text-lg font-semibold text-blue-200 mt-6">Common Control Functions</h3>
+          <p className="leading-relaxed">
+            Temperature management involves more than simply setting a thermostat - your control system balances comfort with power efficiency.
+          </p>
+          <p className="leading-relaxed">
+            Tank monitoring requires calibrated sensors to provide accurate readings, but understanding their limitations helps interpret results correctly.
+          </p>
+          <p className="leading-relaxed">
+            Power distribution happens automatically, but knowing how your system prioritizes different components helps prevent overloads.
+          </p>
+
+          <h3 className="text-lg font-semibold text-blue-200 mt-6">Troubleshooting Basics</h3>
+          <p className="leading-relaxed">
+            Start with simple checks when systems appear unresponsive - often a quick reset resolves communication issues.
+          </p>
+          <p className="leading-relaxed">
+            Learn to identify normal system behaviors versus genuine malfunctions to avoid unnecessary service calls.
+          </p>
+          <p className="leading-relaxed">
+            Document error codes and system responses to help diagnose recurring issues more effectively.
+          </p>
+
+          <h3 className="text-lg font-semibold text-blue-200 mt-6">System Maintenance Tips</h3>
+          <p className="leading-relaxed">
+            Regular software updates keep your control system operating efficiently - learn how to check for and apply updates safely.
+          </p>
+          <p className="leading-relaxed">
+            Sensor calibration affects system accuracy - understanding basic calibration procedures helps maintain reliable monitoring.
+          </p>
+          <p className="leading-relaxed">
+            Battery backup systems need periodic testing to ensure they'll function when needed most.
+          </p>
+
+          <h3 className="text-lg font-semibold text-blue-200 mt-6">Making Smart Upgrades</h3>
+          <p className="leading-relaxed">
+            Consider compatibility when adding new components to your RV's network - not all systems work together seamlessly.
+          </p>
+          <p className="leading-relaxed">
+            Start with understanding your current system's capabilities before investing in expensive upgrades.
+          </p>
+          <p className="leading-relaxed">
+            Focus on improvements that enhance your specific travel style rather than chasing the latest features.
           </p>
         </AccordionContent>
       </AccordionItem>
