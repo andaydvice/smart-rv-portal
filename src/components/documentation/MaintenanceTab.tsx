@@ -21,7 +21,7 @@ const MaintenanceTab = () => {
       </CardHeader>
       <CardContent className="space-y-6 text-gray-100">
         <Accordion type="single" collapsible className="w-full">
-          <AccordionItem value="monthly">
+          <AccordionItem value="monthly" className="border-gray-700">
             <AccordionTrigger className="text-xl text-amber-300 hover:text-amber-400">Monthly Maintenance</AccordionTrigger>
             <AccordionContent className="text-lg space-y-4">
               <p>Your Smart RV system runs automatic diagnostics on the first of each month to protect your investment.</p>
@@ -31,7 +31,7 @@ const MaintenanceTab = () => {
             </AccordionContent>
           </AccordionItem>
 
-          <AccordionItem value="quarterly">
+          <AccordionItem value="quarterly" className="border-gray-700">
             <AccordionTrigger className="text-xl text-amber-300 hover:text-amber-400">Quarterly Tasks</AccordionTrigger>
             <AccordionContent className="text-lg space-y-4">
               <p>Our system will notify you when it's time for the quarterly software update, delivering new features and security enhancements.</p>
@@ -41,7 +41,7 @@ const MaintenanceTab = () => {
             </AccordionContent>
           </AccordionItem>
 
-          <AccordionItem value="yearly">
+          <AccordionItem value="yearly" className="border-gray-700">
             <AccordionTrigger className="text-xl text-amber-300 hover:text-amber-400">Yearly Service Requirements</AccordionTrigger>
             <AccordionContent className="text-lg space-y-4">
               <p>Your annual hardware inspection should be completed by an authorized service center to maintain optimal performance.</p>
@@ -51,7 +51,7 @@ const MaintenanceTab = () => {
             </AccordionContent>
           </AccordionItem>
 
-          <AccordionItem value="troubleshooting">
+          <AccordionItem value="troubleshooting" className="border-gray-700">
             <AccordionTrigger className="text-xl text-amber-300 hover:text-amber-400">Quick Troubleshooting Guide</AccordionTrigger>
             <AccordionContent className="text-lg space-y-6">
               <div>
