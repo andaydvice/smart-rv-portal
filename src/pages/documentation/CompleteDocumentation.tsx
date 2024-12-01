@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Cpu, Network, Zap, Shield } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
 import SystemArchitectureSection from "@/components/documentation/sections/SystemArchitectureSection";
@@ -46,22 +46,34 @@ const CompleteDocumentation = () => {
 
           <div className="space-y-12">
             <div className="bg-gray-800/90 border-gray-700 rounded-lg p-8">
-              <h2 className="text-2xl font-semibold text-blue-400 mb-6">System Architecture</h2>
+              <div className="flex items-center gap-3 mb-6">
+                <Cpu className="h-6 w-6 text-blue-400" />
+                <h2 className="text-2xl font-semibold text-blue-400">System Architecture</h2>
+              </div>
               <SystemArchitectureSection />
             </div>
 
             <div className="bg-gray-800/90 border-gray-700 rounded-lg p-8">
-              <h2 className="text-2xl font-semibold text-blue-400 mb-6">Network Infrastructure</h2>
+              <div className="flex items-center gap-3 mb-6">
+                <Network className="h-6 w-6 text-blue-400" />
+                <h2 className="text-2xl font-semibold text-blue-400">Network Infrastructure</h2>
+              </div>
               <NetworkInfrastructureSection />
             </div>
 
             <div className="bg-gray-800/90 border-gray-700 rounded-lg p-8">
-              <h2 className="text-2xl font-semibold text-blue-400 mb-6">Power Management</h2>
+              <div className="flex items-center gap-3 mb-6">
+                <Zap className="h-6 w-6 text-blue-400" />
+                <h2 className="text-2xl font-semibold text-blue-400">Power Management</h2>
+              </div>
               <PowerManagementSection />
             </div>
 
             <div className="bg-gray-800/90 border-gray-700 rounded-lg p-8">
-              <h2 className="text-2xl font-semibold text-blue-400 mb-6">Security</h2>
+              <div className="flex items-center gap-3 mb-6">
+                <Shield className="h-6 w-6 text-blue-400" />
+                <h2 className="text-2xl font-semibold text-blue-400">Security</h2>
+              </div>
               <SecuritySection />
             </div>
           </div>
