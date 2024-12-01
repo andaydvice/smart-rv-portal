@@ -11,7 +11,7 @@ export const nodes: Node[] = [
       label: 'System Diagnostics Entry Point' 
     },
     position: { x: 0, y: 0 },
-    className: `${baseNodeStyle} bg-gradient-to-br from-blue-500 to-blue-600 border-2 border-blue-400`
+    className: `${mainNodeStyle} text-2xl bg-gradient-to-br from-blue-500 to-blue-600 border-2 border-blue-400`
   },
   
   // Power Branch - Purple Theme
