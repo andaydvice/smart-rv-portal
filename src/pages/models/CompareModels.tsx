@@ -111,7 +111,7 @@ const CompareModels = () => {
                           </TableCell>
                           <TableCell className="text-center text-gray-300">
                             {typeof feature.luxury === 'boolean' 
-                              ? (feature.luxury ? <Check className="w-5 h-5 mx-auto text-green-400" /> 
+                              ? (feature.luxury ? <Check className="w-5 h-5 mx-auto text-green-400" 
                                 : <Minus className="w-5 h-5 mx-auto text-gray-500" />)
                               : feature.luxury}
                           </TableCell>
