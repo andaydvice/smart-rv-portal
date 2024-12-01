@@ -39,7 +39,7 @@ const CompleteDocumentation = () => {
             <div className="absolute inset-0 flex flex-col justify-center items-center text-center p-8">
               <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">Complete System Documentation</h1>
               <p className="text-lg text-gray-200 max-w-2xl">
-                Comprehensive technical documentation covering all aspects of your Smart RV system
+                Comprehensive technical documentation covering all aspects of your<br />Smart RV System
               </p>
             </div>
           </div>
