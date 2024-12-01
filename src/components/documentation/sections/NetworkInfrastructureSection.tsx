@@ -11,28 +11,62 @@ const NetworkInfrastructureSection = () => {
       <AccordionItem value="network-infrastructure" className="border-gray-700">
         <AccordionTrigger className="text-xl text-blue-300">Network Infrastructure</AccordionTrigger>
         <AccordionContent className="text-gray-100 space-y-4">
-          <h3 className="text-lg font-semibold text-blue-200">System Architecture</h3>
+          <h3 className="text-2xl font-semibold text-blue-200 mb-6">Network Infrastructure That Never Lets You Down</h3>
+          
           <p className="leading-relaxed">
-            The network infrastructure utilizes a hybrid mesh topology with self-healing capabilities. Primary connectivity is provided through a dual-band WiFi system (2.4GHz + 5GHz) with MIMO technology, while a 4G LTE module serves as a backup connection. The system automatically switches between available networks based on signal strength and reliability metrics.
+            A revolutionary networking solution adapts to your needs with intelligent self-healing mesh technology that maximizes uptime and performance.
           </p>
+
           <p className="leading-relaxed">
-            For internal communication, the system employs a dedicated control network separate from user traffic. This segregation ensures that critical system functions remain unaffected by high user data consumption.
+            Dual-band WiFi with cutting-edge MIMO technology delivers blazing-fast speeds across both 2.4GHz and 5GHz frequencies, while seamless 4G LTE backup ensures you're always connected.
           </p>
-          <h3 className="text-lg font-semibold text-blue-200 mt-6">Security Implementation</h3>
-          <ul className="list-disc pl-6 space-y-2">
-            <li>WPA3-Enterprise encryption for wireless security</li>
-            <li>Hardware-accelerated firewall with deep packet inspection</li>
-            <li>VPN support with AES-256 encryption</li>
-            <li>Network segmentation with VLAN support</li>
-            <li>Intrusion detection and prevention system</li>
-            <li>Automated security updates and patch management</li>
-          </ul>
-          <h3 className="text-lg font-semibold text-blue-200 mt-6">Performance Optimization</h3>
+
           <p className="leading-relaxed">
-            The network stack implements advanced QoS mechanisms that prioritize traffic based on its criticality. Emergency communications and system control messages receive the highest priority, followed by security camera feeds and sensor data, with entertainment traffic managed at a lower priority level.
+            The system constantly monitors signal strength and network metrics, automatically selecting the optimal connection path for uninterrupted service.
           </p>
+
           <p className="leading-relaxed">
-            The system includes a local cache server that stores frequently accessed data and system updates, reducing external bandwidth requirements and ensuring critical information remains available even during network outages.
+            Your critical operations stay protected through a dedicated control network that keeps system functions separate from regular traffic.
+          </p>
+
+          <h3 className="text-xl font-semibold text-blue-200 mt-8 mb-4">Security Features</h3>
+
+          <p className="leading-relaxed">
+            Enterprise-grade WPA3 encryption and hardware-accelerated firewalls stand guard over your digital assets, while deep packet inspection spots threats before they can impact your network.
+          </p>
+
+          <p className="leading-relaxed">
+            Built-in VPN support with military-grade AES-256 encryption lets you work securely from anywhere.
+          </p>
+
+          <p className="leading-relaxed">
+            Smart network segmentation through VLAN technology keeps sensitive data isolated and secure.
+          </p>
+
+          <p className="leading-relaxed">
+            Advanced intrusion detection works 24/7 to identify and block potential attacks before they can compromise your system.
+          </p>
+
+          <p className="leading-relaxed">
+            Automated security updates and patch management mean your defenses stay current without manual intervention.
+          </p>
+
+          <h3 className="text-xl font-semibold text-blue-200 mt-8 mb-4">Traffic Management</h3>
+
+          <p className="leading-relaxed">
+            Intelligent traffic prioritization ensures emergency communications and critical system messages always get through first.
+          </p>
+
+          <p className="leading-relaxed">
+            Security cameras and sensor data receive priority bandwidth allocation, while entertainment traffic flows smoothly at a managed level.
+          </p>
+
+          <p className="leading-relaxed">
+            A local cache server keeps your most important data and updates readily available, reducing external bandwidth needs and maintaining access even during network outages.
+          </p>
+
+          <p className="leading-relaxed mt-6">
+            This advanced infrastructure delivers the reliability and security modern businesses demand, while remaining simple enough for anyone to manage.
           </p>
         </AccordionContent>
       </AccordionItem>
