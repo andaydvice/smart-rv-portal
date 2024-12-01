@@ -9,64 +9,67 @@ const NetworkInfrastructureSection = () => {
   return (
     <Accordion type="single" collapsible className="space-y-4">
       <AccordionItem value="network-infrastructure" className="border-gray-700">
-        <AccordionTrigger className="text-xl text-blue-300">Network Infrastructure</AccordionTrigger>
+        <AccordionTrigger className="text-xl text-blue-300">RV Network Troubleshooting Guide</AccordionTrigger>
         <AccordionContent className="text-gray-100 space-y-4">
-          <h3 className="text-2xl font-semibold text-blue-200 mb-6">Network Infrastructure That Never Lets You Down</h3>
+          <p className="leading-relaxed">
+            Having internet problems in your RV? Let us explore common networking challenges and practical solutions.
+            Many RVers struggle with weak signals, dropped connections, and confusing network setups.
+          </p>
+
+          <h3 className="text-2xl font-semibold text-blue-200 mb-6">Common RV Network Issues</h3>
           
           <p className="leading-relaxed">
-            A revolutionary networking solution adapts to your needs with intelligent self-healing mesh technology that maximizes uptime and performance.
+            Dead zones in your RV often occur due to metal construction and compact layouts blocking wireless signals.
           </p>
 
           <p className="leading-relaxed">
-            Dual-band WiFi with cutting-edge MIMO technology delivers blazing-fast speeds across both 2.4GHz and 5GHz frequencies, while seamless 4G LTE backup ensures you're always connected.
+            Campground WiFi frequently disappoints because multiple RVs share limited bandwidth through aging equipment.
           </p>
 
           <p className="leading-relaxed">
-            The system constantly monitors signal strength and network metrics, automatically selecting the optimal connection path for uninterrupted service.
+            Cellular boosters do not always perform as expected because location, terrain, and weather affect signal strength.
+          </p>
+
+          <h3 className="text-xl font-semibold text-blue-200 mt-8 mb-4">How RV Networks Work</h3>
+
+          <p className="leading-relaxed">
+            Understanding your RV network infrastructure helps diagnose problems faster and make smarter upgrade decisions.
           </p>
 
           <p className="leading-relaxed">
-            Your critical operations stay protected through a dedicated control network that keeps system functions separate from regular traffic.
-          </p>
-
-          <h3 className="text-xl font-semibold text-blue-200 mt-8 mb-4">Security Features</h3>
-
-          <p className="leading-relaxed">
-            Enterprise-grade WPA3 encryption and hardware-accelerated firewalls stand guard over your digital assets, while deep packet inspection spots threats before they can impact your network.
+            Typical RV setups combine multiple technologies: WiFi for local connections, cellular for backup, and sometimes satellite for remote locations.
           </p>
 
           <p className="leading-relaxed">
-            Built-in VPN support with military-grade AES-256 encryption lets you work securely from anywhere.
+            Network repeaters and mesh systems help distribute signals throughout your RV, but proper placement is crucial.
+          </p>
+
+          <h3 className="text-xl font-semibold text-blue-200 mt-8 mb-4">DIY Network Improvements</h3>
+
+          <p className="leading-relaxed">
+            Testing signal strength in different RV locations helps identify problem areas before making equipment changes.
           </p>
 
           <p className="leading-relaxed">
-            Smart network segmentation through VLAN technology keeps sensitive data isolated and secure.
+            Simple adjustments like router placement and antenna positioning often solve issues without expensive upgrades.
           </p>
 
           <p className="leading-relaxed">
-            Advanced intrusion detection works 24/7 to identify and block potential attacks before they can compromise your system.
+            Cable routing through RV walls requires careful planning to avoid damage while improving coverage.
+          </p>
+
+          <h3 className="text-xl font-semibold text-blue-200 mt-8 mb-4">Understanding Network Security</h3>
+
+          <p className="leading-relaxed">
+            Public campground networks pose security risks for banking, work, and personal data.
           </p>
 
           <p className="leading-relaxed">
-            Automated security updates and patch management mean your defenses stay current without manual intervention.
-          </p>
-
-          <h3 className="text-xl font-semibold text-blue-200 mt-8 mb-4">Traffic Management</h3>
-
-          <p className="leading-relaxed">
-            Intelligent traffic prioritization ensures emergency communications and critical system messages always get through first.
+            Basic network security measures protect your devices without making connections complicated.
           </p>
 
           <p className="leading-relaxed">
-            Security cameras and sensor data receive priority bandwidth allocation, while entertainment traffic flows smoothly at a managed level.
-          </p>
-
-          <p className="leading-relaxed">
-            A local cache server keeps your most important data and updates readily available, reducing external bandwidth needs and maintaining access even during network outages.
-          </p>
-
-          <p className="leading-relaxed mt-6">
-            This advanced infrastructure delivers the reliability and security modern businesses demand, while remaining simple enough for anyone to manage.
+            VPNs add security but can slow connections. Learn when they are worth using.
           </p>
         </AccordionContent>
       </AccordionItem>
