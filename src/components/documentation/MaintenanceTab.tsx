@@ -84,7 +84,7 @@ const MaintenanceTab = () => {
               </div>
 
               <p className="text-blue-200 mt-4">
-                If you've tried these steps and still experience issues, our technical support team is ready to help resolve any persistent problems.
+                If you've tried these steps and still experience issues, contact your SMART RV technical support team.
               </p>
             </AccordionContent>
           </AccordionItem>
