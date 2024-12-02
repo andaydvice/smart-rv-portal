@@ -7,14 +7,14 @@ import { Cpu } from "lucide-react";
 
 const SystemArchitectureSection = () => {
   return (
-    <AccordionItem value="system-architecture" className="border-0">
+    <AccordionItem value="system-architecture" className="pt-8 first:pt-0">
       <div className="flex items-center gap-2 mb-4">
         <Cpu className="w-5 h-5 text-[#60A5FA]" />
         <h2 className="text-[#60A5FA] text-xl font-semibold">System Architecture</h2>
       </div>
       
-      <AccordionTrigger className="hover:no-underline data-[state=open]:text-emerald-400">
-        <div className="rounded-lg border border-gray-700 bg-gradient-to-b from-gray-900 to-gray-800 shadow-lg overflow-hidden w-full">
+      <AccordionTrigger className="hover:no-underline data-[state=open]:text-emerald-400 [&[data-state=open]>div]:border-emerald-400">
+        <div className="rounded-lg border border-gray-700 bg-gradient-to-b from-gray-900 to-gray-800 shadow-lg overflow-hidden w-full transition-colors">
           <div className="px-6 py-4 text-emerald-400 text-base font-medium">
             System Architecture Overview
           </div>
