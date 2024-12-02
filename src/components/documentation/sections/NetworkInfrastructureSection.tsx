@@ -8,19 +8,19 @@ import { Network } from "lucide-react";
 
 const NetworkInfrastructureSection = () => {
   return (
-    <div className="space-y-6">
-      <div className="flex items-center gap-2">
-        <Network className="w-8 h-8 text-[#60A5FA]" />
-        <h2 className="text-[#60A5FA] text-3xl font-bold">Network Infrastructure</h2>
+    <div className="space-y-4 mt-8">
+      <div className="flex items-center gap-2 mb-4">
+        <Network className="w-5 h-5 text-[#60A5FA]" />
+        <h2 className="text-[#60A5FA] text-xl font-semibold">Network Infrastructure</h2>
       </div>
       
-      <div className="rounded-2xl border-2 border-gray-800 bg-[#0F172A] shadow-lg overflow-hidden">
+      <div className="rounded-lg border border-gray-700 bg-[#0F172A]/90 shadow-lg overflow-hidden">
         <Accordion type="single" collapsible>
           <AccordionItem value="network-infrastructure" className="border-0">
-            <AccordionTrigger className="px-8 py-6 text-[#4ADE80] text-2xl font-bold hover:no-underline hover:text-[#4ADE80]/90">
+            <AccordionTrigger className="px-6 py-4 text-emerald-400 text-lg font-semibold hover:no-underline hover:text-emerald-300">
               Network Infrastructure Overview
             </AccordionTrigger>
-            <AccordionContent className="px-8 pb-8 text-gray-200 space-y-6 text-xl leading-relaxed">
+            <AccordionContent className="px-6 pb-6 text-gray-300 space-y-4 text-base leading-relaxed">
               <p>
                 Inside metal RV walls, radio signals struggle to reach all areas effectively. This creates unique challenges for maintaining reliable internet connectivity during your travels.
               </p>
@@ -29,7 +29,7 @@ const NetworkInfrastructureSection = () => {
                 The physical construction of RVs affects wireless signal propagation in ways most home networks never encounter.
               </p>
 
-              <h3 className="text-2xl font-bold text-blue-300 mt-8 mb-4">Signal Distribution Explained</h3>
+              <h3 className="text-lg font-semibold text-blue-300 mt-6 mb-3">Signal Distribution Explained</h3>
               
               <p>
                 Metal walls, appliances, and tight spaces create reflection points and dead zones that fragment your wireless coverage.
@@ -43,7 +43,7 @@ const NetworkInfrastructureSection = () => {
                 Network signals need clear paths between devices, which traditional RV layouts often interrupt.
               </p>
 
-              <h3 className="text-2xl font-bold text-blue-300 mt-8 mb-4">Optimizing Campground Connections</h3>
+              <h3 className="text-lg font-semibold text-blue-300 mt-6 mb-3">Optimizing Campground Connections</h3>
 
               <p>
                 Traditional campground WiFi infrastructure shares limited bandwidth across dozens or hundreds of RVs simultaneously.
@@ -57,7 +57,7 @@ const NetworkInfrastructureSection = () => {
                 Distance from campground access points significantly impacts your connection quality more than most realize.
               </p>
 
-              <h3 className="text-2xl font-bold text-blue-300 mt-8 mb-4">Making Cellular Work Better</h3>
+              <h3 className="text-lg font-semibold text-blue-300 mt-6 mb-3">Making Cellular Work Better</h3>
 
               <p>
                 Cellular signals encounter multiple obstacles in RV environments. Proper antenna placement becomes crucial for reliable connectivity.
@@ -71,7 +71,7 @@ const NetworkInfrastructureSection = () => {
                 Weather conditions affect cellular signals differently than WiFi, requiring flexible approaches to maintain connectivity.
               </p>
 
-              <h3 className="text-2xl font-bold text-blue-300 mt-8 mb-4">Practical Network Planning</h3>
+              <h3 className="text-lg font-semibold text-blue-300 mt-6 mb-3">Practical Network Planning</h3>
 
               <p>
                 Start by mapping your RV signal patterns using free WiFi analyzer apps before investing in expensive equipment.
@@ -85,7 +85,7 @@ const NetworkInfrastructureSection = () => {
                 Document your findings to develop an effective strategy based on your specific layout and usage patterns.
               </p>
 
-              <h3 className="text-2xl font-bold text-blue-300 mt-8 mb-4">DIY Network Enhancement</h3>
+              <h3 className="text-lg font-semibold text-blue-300 mt-6 mb-3">DIY Network Enhancement</h3>
 
               <p>
                 Begin with basic solutions like repositioning existing equipment before considering costly upgrades.
