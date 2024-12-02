@@ -72,7 +72,7 @@ const Troubleshooting = () => {
             <Link to="/contact">
               <Button 
                 variant="outline" 
-                className="bg-transparent border-white text-white hover:bg-white/10"
+                className="bg-transparent border-white text-white hover:bg-blue-600/20 hover:text-white hover:border-blue-400"
               >
                 Need More Help? Contact Support <ArrowRight className="w-4 h-4 ml-2" />
               </Button>
