@@ -39,20 +39,18 @@ const CompleteDocumentation = () => {
             <div className="absolute inset-0 bg-black/50 backdrop-blur-sm"></div>
             <div className="absolute inset-0 flex flex-col justify-center items-center text-center p-8">
               <h1 className="text-3xl font-bold text-white mb-3">Complete System Documentation</h1>
-              <p className="text-base text-gray-200 max-w-2xl">
+              <p className="text-base text-gray-200 max-w-2xl mx-auto">
                 Comprehensive technical documentation covering all aspects of your Smart RV System
               </p>
             </div>
           </div>
 
           <div className="border border-gray-700 rounded-lg p-6 bg-gray-800/50">
-            <Accordion type="single" collapsible>
-              <div className="space-y-8 divide-y divide-gray-700">
-                <SystemArchitectureSection />
-                <NetworkInfrastructureSection />
-                <PowerManagementSection />
-                <SecuritySection />
-              </div>
+            <Accordion type="single" collapsible className="space-y-6">
+              <SystemArchitectureSection />
+              <NetworkInfrastructureSection />
+              <PowerManagementSection />
+              <SecuritySection />
             </Accordion>
           </div>
         </motion.div>

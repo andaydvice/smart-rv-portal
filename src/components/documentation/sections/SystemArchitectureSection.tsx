@@ -7,20 +7,20 @@ import { Cpu } from "lucide-react";
 
 const SystemArchitectureSection = () => {
   return (
-    <AccordionItem value="system-architecture" className="pt-8 first:pt-0">
+    <AccordionItem value="system-architecture" className="border-b border-gray-700 last:border-0">
       <div className="flex items-center gap-2 mb-4">
         <Cpu className="w-5 h-5 text-[#60A5FA]" />
         <h2 className="text-[#60A5FA] text-xl font-semibold">System Architecture</h2>
       </div>
       
-      <AccordionTrigger className="hover:no-underline data-[state=open]:text-emerald-400 [&[data-state=open]>div]:border-emerald-400">
-        <div className="rounded-lg border border-gray-700 bg-gradient-to-b from-gray-900 to-gray-800 shadow-lg overflow-hidden w-full transition-colors">
+      <AccordionTrigger className="hover:no-underline hover:bg-gray-700/30 rounded-lg transition-colors">
+        <div className="rounded-lg border border-gray-700 bg-gradient-to-b from-gray-900 to-gray-800 shadow-lg overflow-hidden w-full">
           <div className="px-6 py-4 text-emerald-400 text-base font-medium">
             System Architecture Overview
           </div>
         </div>
       </AccordionTrigger>
-      <AccordionContent className="px-6 pb-6 text-gray-300 space-y-4 text-base leading-relaxed">
+      <AccordionContent className="px-6 pb-6 pt-4 text-gray-300 space-y-4 text-base leading-relaxed">
               <p>
                 Modern RVs use integrated control systems to manage essential functions, but understanding how they work helps you troubleshoot issues and make smarter usage decisions.
               </p>
