@@ -1,14 +1,9 @@
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
+import { AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Network } from "lucide-react";
 
 const NetworkInfrastructureSection = () => {
   return (
-    <div className="space-y-4 pt-6">
+    <AccordionItem value="network-infrastructure">
       <div className="flex items-center gap-2 mb-4">
         <div className="p-2 rounded-full bg-blue-500/10 border border-blue-500/20">
           <Network className="w-4 h-4 text-blue-400" />
@@ -17,12 +12,10 @@ const NetworkInfrastructureSection = () => {
       </div>
       
       <div className="rounded-lg border border-gray-700 bg-gray-800/50 overflow-hidden">
-        <Accordion type="single" collapsible>
-          <AccordionItem value="network-infrastructure" className="border-0">
-            <AccordionTrigger className="px-6 py-4 text-emerald-400 text-base font-medium hover:no-underline hover:text-emerald-300">
-              Network Infrastructure Overview
-            </AccordionTrigger>
-            <AccordionContent className="px-6 pb-6 text-gray-300 space-y-4 text-sm leading-relaxed">
+        <AccordionTrigger className="px-6 py-4 text-emerald-400 text-base font-medium hover:no-underline hover:text-emerald-300">
+          Network Infrastructure Overview
+        </AccordionTrigger>
+        <AccordionContent className="px-6 pb-6 text-gray-300 space-y-4 text-sm leading-relaxed">
               <p>
                 Inside metal RV walls, radio signals struggle to reach all areas effectively. This creates unique challenges for maintaining reliable internet connectivity during your travels.
               </p>
@@ -100,11 +93,9 @@ const NetworkInfrastructureSection = () => {
               <p>
                 Understand how different materials and mounting options affect signal propagation throughout your RV.
               </p>
-            </AccordionContent>
-          </AccordionItem>
-        </Accordion>
+        </AccordionContent>
       </div>
-    </div>
+    </AccordionItem>
   );
 };
 
