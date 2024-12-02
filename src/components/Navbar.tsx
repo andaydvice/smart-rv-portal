@@ -49,7 +49,7 @@ const Navbar = () => {
           
           <button
             onClick={toggleMenu}
-            className="md:hidden text-gray-300 hover:text-white"
+            className="md:hidden text-gray-300 hover:text-blue-400"
             aria-label="Toggle menu"
           >
             {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -89,7 +89,7 @@ const Navbar = () => {
               </DropdownMenuTrigger>
               <DropdownMenuContent className="bg-gray-900/95 backdrop-blur-sm border-gray-800">
                 <DropdownMenuGroup>
-                  <DropdownMenuItem>
+                  <DropdownMenuItem className="hover:bg-gray-800">
                     <Link to="/troubleshooting" className="text-gray-300 hover:text-blue-400 transition-colors">
                       Troubleshooting Guide
                     </Link>
