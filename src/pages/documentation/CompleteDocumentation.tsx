@@ -41,7 +41,7 @@ const CompleteDocumentation = () => {
                 </p>
               </div>
 
-              <div className="space-y-4 pt-4">
+              <div className="space-y-0 pt-2">
                 <Accordion type="single" collapsible className="space-y-4">
                   <SystemArchitectureSection />
                   <NetworkInfrastructureSection />
