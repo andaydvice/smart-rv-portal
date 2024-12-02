@@ -7,12 +7,13 @@ import {
 
 const NetworkInfrastructureSection = () => {
   return (
-    <Accordion type="single" collapsible className="space-y-4">
-      <AccordionItem value="network-infrastructure" className="border-none">
-        <AccordionTrigger className="text-[1.75rem] font-semibold text-[#60A5FA] hover:text-[#60A5FA] hover:no-underline">
-          Network Infrastructure
-        </AccordionTrigger>
-        <AccordionContent className="text-gray-100 space-y-4">
+    <div className="bg-gray-800/90 border border-gray-700 rounded-lg p-8">
+      <Accordion type="single" collapsible className="space-y-4">
+        <AccordionItem value="network-infrastructure" className="border-none">
+          <AccordionTrigger className="text-2xl font-semibold text-emerald-300">
+            Network Infrastructure
+          </AccordionTrigger>
+          <AccordionContent className="space-y-6 text-gray-100">
           <p className="leading-relaxed">
             Inside metal RV walls, radio signals struggle to reach all areas effectively. This creates unique challenges for maintaining reliable internet connectivity during your travels.
           </p>
@@ -90,9 +91,10 @@ const NetworkInfrastructureSection = () => {
           <p className="leading-relaxed">
             Understand how different materials and mounting options affect signal propagation throughout your RV.
           </p>
-        </AccordionContent>
-      </AccordionItem>
-    </Accordion>
+          </AccordionContent>
+        </AccordionItem>
+      </Accordion>
+    </div>
   );
 };
 
