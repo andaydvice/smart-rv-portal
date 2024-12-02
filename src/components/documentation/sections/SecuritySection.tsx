@@ -8,19 +8,21 @@ import { Shield } from "lucide-react";
 
 const SecuritySection = () => {
   return (
-    <div className="space-y-4 mt-8">
+    <div className="space-y-4 pt-6">
       <div className="flex items-center gap-2 mb-4">
-        <Shield className="w-5 h-5 text-[#60A5FA]" />
-        <h2 className="text-[#60A5FA] text-xl font-semibold">Security</h2>
+        <div className="p-2 rounded-full bg-blue-500/10 border border-blue-500/20">
+          <Shield className="w-4 h-4 text-blue-400" />
+        </div>
+        <h2 className="text-blue-400 text-lg font-medium">Security</h2>
       </div>
       
-      <div className="rounded-lg border border-gray-700 bg-[#0F172A]/90 shadow-lg overflow-hidden">
+      <div className="rounded-lg border border-gray-700 bg-gray-800/50 overflow-hidden">
         <Accordion type="single" collapsible>
           <AccordionItem value="security" className="border-0">
-            <AccordionTrigger className="px-6 py-4 text-emerald-400 text-lg font-semibold hover:no-underline hover:text-emerald-300">
+            <AccordionTrigger className="px-6 py-4 text-emerald-400 text-base font-medium hover:no-underline hover:text-emerald-300">
               Security Overview
             </AccordionTrigger>
-            <AccordionContent className="px-6 pb-6 text-gray-300 space-y-4 text-base leading-relaxed">
+            <AccordionContent className="px-6 pb-6 text-gray-300 space-y-4 text-sm leading-relaxed">
               <h3 className="text-lg font-semibold text-blue-300 mt-6 mb-3">Protecting Your RV's Digital Systems</h3>
               <p>
                 Modern RVs include connected systems that require thoughtful security measures. Understanding basic security principles helps protect your privacy and equipment.

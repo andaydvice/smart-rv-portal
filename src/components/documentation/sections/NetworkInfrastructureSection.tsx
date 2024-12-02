@@ -8,19 +8,21 @@ import { Network } from "lucide-react";
 
 const NetworkInfrastructureSection = () => {
   return (
-    <div className="space-y-4 mt-8">
+    <div className="space-y-4 pt-6">
       <div className="flex items-center gap-2 mb-4">
-        <Network className="w-5 h-5 text-[#60A5FA]" />
-        <h2 className="text-[#60A5FA] text-xl font-semibold">Network Infrastructure</h2>
+        <div className="p-2 rounded-full bg-blue-500/10 border border-blue-500/20">
+          <Network className="w-4 h-4 text-blue-400" />
+        </div>
+        <h2 className="text-blue-400 text-lg font-medium">Network Infrastructure</h2>
       </div>
       
-      <div className="rounded-lg border border-gray-700 bg-[#0F172A]/90 shadow-lg overflow-hidden">
+      <div className="rounded-lg border border-gray-700 bg-gray-800/50 overflow-hidden">
         <Accordion type="single" collapsible>
           <AccordionItem value="network-infrastructure" className="border-0">
-            <AccordionTrigger className="px-6 py-4 text-emerald-400 text-lg font-semibold hover:no-underline hover:text-emerald-300">
+            <AccordionTrigger className="px-6 py-4 text-emerald-400 text-base font-medium hover:no-underline hover:text-emerald-300">
               Network Infrastructure Overview
             </AccordionTrigger>
-            <AccordionContent className="px-6 pb-6 text-gray-300 space-y-4 text-base leading-relaxed">
+            <AccordionContent className="px-6 pb-6 text-gray-300 space-y-4 text-sm leading-relaxed">
               <p>
                 Inside metal RV walls, radio signals struggle to reach all areas effectively. This creates unique challenges for maintaining reliable internet connectivity during your travels.
               </p>

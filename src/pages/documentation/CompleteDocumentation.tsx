@@ -29,26 +29,28 @@ const CompleteDocumentation = () => {
             </Button>
           </Link>
 
-          <div className="relative w-full h-[500px] rounded-xl overflow-hidden mb-12">
+          <div className="relative w-full h-[300px] rounded-xl overflow-hidden mb-12 border border-gray-700">
             <img
               src="/lovable-uploads/846b5be5-043e-4645-a3d9-39614d63342c.png"
               alt="Smart RV Complete System Documentation"
-              className="w-full h-full object-cover object-center"
+              className="w-full h-full object-cover"
             />
-            <div className="absolute inset-0 bg-black/30 backdrop-blur-[2px]"></div>
+            <div className="absolute inset-0 bg-black/50"></div>
             <div className="absolute inset-0 flex flex-col justify-center items-center text-center p-8">
-              <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">Complete System Documentation</h1>
-              <p className="text-lg text-gray-200 max-w-2xl">
+              <h1 className="text-3xl font-bold text-white mb-3">Complete System Documentation</h1>
+              <p className="text-base text-gray-200 max-w-2xl">
                 Comprehensive technical documentation covering all aspects of your Smart RV System
               </p>
             </div>
           </div>
 
-          <div className="space-y-6">
-            <SystemArchitectureSection />
-            <NetworkInfrastructureSection />
-            <PowerManagementSection />
-            <SecuritySection />
+          <div className="space-y-6 border border-gray-700 rounded-lg p-6 bg-gray-800/50">
+            <div className="space-y-6 divide-y divide-gray-700">
+              <SystemArchitectureSection />
+              <NetworkInfrastructureSection />
+              <PowerManagementSection />
+              <SecuritySection />
+            </div>
           </div>
         </motion.div>
       </div>

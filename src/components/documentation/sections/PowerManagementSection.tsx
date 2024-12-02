@@ -8,19 +8,21 @@ import { Zap } from "lucide-react";
 
 const PowerManagementSection = () => {
   return (
-    <div className="space-y-4 mt-8">
+    <div className="space-y-4 pt-6">
       <div className="flex items-center gap-2 mb-4">
-        <Zap className="w-5 h-5 text-[#60A5FA]" />
-        <h2 className="text-[#60A5FA] text-xl font-semibold">Power Management</h2>
+        <div className="p-2 rounded-full bg-blue-500/10 border border-blue-500/20">
+          <Zap className="w-4 h-4 text-blue-400" />
+        </div>
+        <h2 className="text-blue-400 text-lg font-medium">Power Management</h2>
       </div>
       
-      <div className="rounded-lg border border-gray-700 bg-[#0F172A]/90 shadow-lg overflow-hidden">
+      <div className="rounded-lg border border-gray-700 bg-gray-800/50 overflow-hidden">
         <Accordion type="single" collapsible>
           <AccordionItem value="power-management" className="border-0">
-            <AccordionTrigger className="px-6 py-4 text-emerald-400 text-lg font-semibold hover:no-underline hover:text-emerald-300">
+            <AccordionTrigger className="px-6 py-4 text-emerald-400 text-base font-medium hover:no-underline hover:text-emerald-300">
               Power Management Overview
             </AccordionTrigger>
-            <AccordionContent className="px-6 pb-6 text-gray-300 space-y-4 text-base leading-relaxed">
+            <AccordionContent className="px-6 pb-6 text-gray-300 space-y-4 text-sm leading-relaxed">
               <p>
                 Every RV power system combines multiple energy sources to keep your adventures running smoothly.
               </p>
