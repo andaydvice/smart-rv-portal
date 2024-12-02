@@ -4,16 +4,23 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { Network } from "lucide-react";
 
 const NetworkInfrastructureSection = () => {
   return (
-    <div className="bg-gray-800/90 border border-gray-700 rounded-lg p-8">
-      <Accordion type="single" collapsible className="space-y-4">
-        <AccordionItem value="network-infrastructure" className="border-none">
-          <AccordionTrigger className="text-2xl font-semibold text-emerald-300">
-            Network Infrastructure
-          </AccordionTrigger>
-          <AccordionContent className="space-y-6 text-gray-100">
+    <div className="space-y-6">
+      <div className="flex items-center gap-2">
+        <Network className="w-6 h-6 text-[#60A5FA]" />
+        <h2 className="text-[#60A5FA] text-2xl">Network Infrastructure</h2>
+      </div>
+      
+      <div className="rounded-2xl border border-gray-800/50 bg-[#0F172A]/50 overflow-hidden">
+        <Accordion type="single" collapsible>
+          <AccordionItem value="network-infrastructure" className="border-0">
+            <AccordionTrigger className="px-6 py-4 text-[#4ADE80] text-xl hover:no-underline">
+              Network Infrastructure
+            </AccordionTrigger>
+            <AccordionContent className="px-6 pb-6 text-gray-300 space-y-4">
           <p className="leading-relaxed">
             Inside metal RV walls, radio signals struggle to reach all areas effectively. This creates unique challenges for maintaining reliable internet connectivity during your travels.
           </p>
@@ -91,9 +98,10 @@ const NetworkInfrastructureSection = () => {
           <p className="leading-relaxed">
             Understand how different materials and mounting options affect signal propagation throughout your RV.
           </p>
-          </AccordionContent>
-        </AccordionItem>
-      </Accordion>
+            </AccordionContent>
+          </AccordionItem>
+        </Accordion>
+      </div>
     </div>
   );
 };
