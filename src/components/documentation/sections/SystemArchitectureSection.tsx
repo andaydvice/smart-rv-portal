@@ -8,8 +8,10 @@ import {
 const SystemArchitectureSection = () => {
   return (
     <Accordion type="single" collapsible className="space-y-4">
-      <AccordionItem value="central-control" className="border-gray-700">
-        <AccordionTrigger className="text-xl text-blue-300">Understanding Your RV's Control System</AccordionTrigger>
+      <AccordionItem value="central-control" className="border-none">
+        <AccordionTrigger className="text-[1.75rem] font-normal text-[#60A5FA] hover:no-underline hover:text-[#60A5FA]">
+          Smart System Integration Guide
+        </AccordionTrigger>
         <AccordionContent className="text-gray-100 space-y-4">
           <p className="leading-relaxed">
             Modern RVs use integrated control systems to manage essential functions, but understanding how they work helps you troubleshoot issues and make smarter usage decisions.

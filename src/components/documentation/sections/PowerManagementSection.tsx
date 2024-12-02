@@ -8,8 +8,10 @@ import {
 const PowerManagementSection = () => {
   return (
     <Accordion type="single" collapsible className="space-y-4">
-      <AccordionItem value="power-management" className="border-gray-700">
-        <AccordionTrigger className="text-xl text-blue-300">Understanding Your RV's Power System</AccordionTrigger>
+      <AccordionItem value="power-management" className="border-none">
+        <AccordionTrigger className="text-[1.75rem] font-normal text-[#60A5FA] hover:no-underline hover:text-[#60A5FA]">
+          Power System Diagnostics
+        </AccordionTrigger>
         <AccordionContent className="text-gray-100 space-y-4">
           <p className="leading-relaxed">
             Every RV power system combines multiple energy sources to keep your adventures running smoothly.
