@@ -10,92 +10,92 @@ const NetworkInfrastructureSection = () => {
   return (
     <div className="space-y-6">
       <div className="flex items-center gap-2">
-        <Network className="w-6 h-6 text-[#60A5FA]" />
-        <h2 className="text-[#60A5FA] text-2xl font-semibold">Network Infrastructure</h2>
+        <Network className="w-8 h-8 text-[#60A5FA]" />
+        <h2 className="text-[#60A5FA] text-3xl font-bold">Network Infrastructure</h2>
       </div>
       
-      <div className="rounded-2xl border border-gray-800/50 bg-[#0F172A]/50 overflow-hidden">
+      <div className="rounded-2xl border-2 border-gray-800 bg-[#0F172A] shadow-lg overflow-hidden">
         <Accordion type="single" collapsible>
           <AccordionItem value="network-infrastructure" className="border-0">
-            <AccordionTrigger className="px-6 py-4 text-[#4ADE80] text-xl hover:no-underline hover:text-[#4ADE80]/90">
+            <AccordionTrigger className="px-8 py-6 text-[#4ADE80] text-2xl font-bold hover:no-underline hover:text-[#4ADE80]/90">
               Network Infrastructure Overview
             </AccordionTrigger>
-            <AccordionContent className="px-6 pb-6 text-gray-300 space-y-4 text-lg">
-              <p className="leading-relaxed">
+            <AccordionContent className="px-8 pb-8 text-gray-200 space-y-6 text-xl leading-relaxed">
+              <p>
                 Inside metal RV walls, radio signals struggle to reach all areas effectively. This creates unique challenges for maintaining reliable internet connectivity during your travels.
               </p>
 
-              <p className="leading-relaxed">
+              <p>
                 The physical construction of RVs affects wireless signal propagation in ways most home networks never encounter.
               </p>
 
-              <h3 className="text-2xl font-semibold text-blue-200 mb-6">Signal Distribution Explained</h3>
+              <h3 className="text-2xl font-bold text-blue-300 mt-8 mb-4">Signal Distribution Explained</h3>
               
-              <p className="leading-relaxed">
+              <p>
                 Metal walls, appliances, and tight spaces create reflection points and dead zones that fragment your wireless coverage.
               </p>
 
-              <p className="leading-relaxed">
+              <p>
                 Radio waves behave differently in compact metal environments, requiring strategic equipment placement to maintain signal integrity.
               </p>
 
-              <p className="leading-relaxed">
+              <p>
                 Network signals need clear paths between devices, which traditional RV layouts often interrupt.
               </p>
 
-              <h3 className="text-xl font-semibold text-blue-200 mt-8 mb-4">Optimizing Campground Connections</h3>
+              <h3 className="text-2xl font-bold text-blue-300 mt-8 mb-4">Optimizing Campground Connections</h3>
 
-              <p className="leading-relaxed">
+              <p>
                 Traditional campground WiFi infrastructure shares limited bandwidth across dozens or hundreds of RVs simultaneously.
               </p>
 
-              <p className="leading-relaxed">
+              <p>
                 Understanding connection timing helps. Speeds often improve during off peak hours when fewer users compete for bandwidth.
               </p>
 
-              <p className="leading-relaxed">
+              <p>
                 Distance from campground access points significantly impacts your connection quality more than most realize.
               </p>
 
-              <h3 className="text-xl font-semibold text-blue-200 mt-8 mb-4">Making Cellular Work Better</h3>
+              <h3 className="text-2xl font-bold text-blue-300 mt-8 mb-4">Making Cellular Work Better</h3>
 
-              <p className="leading-relaxed">
+              <p>
                 Cellular signals encounter multiple obstacles in RV environments. Proper antenna placement becomes crucial for reliable connectivity.
               </p>
 
-              <p className="leading-relaxed">
+              <p>
                 External antennas need clear line of sight to cell towers, while internal boosters require careful positioning to distribute signal effectively.
               </p>
 
-              <p className="leading-relaxed">
+              <p>
                 Weather conditions affect cellular signals differently than WiFi, requiring flexible approaches to maintain connectivity.
               </p>
 
-              <h3 className="text-xl font-semibold text-blue-200 mt-8 mb-4">Practical Network Planning</h3>
+              <h3 className="text-2xl font-bold text-blue-300 mt-8 mb-4">Practical Network Planning</h3>
 
-              <p className="leading-relaxed">
+              <p>
                 Start by mapping your RV signal patterns using free WiFi analyzer apps before investing in expensive equipment.
               </p>
 
-              <p className="leading-relaxed">
+              <p>
                 Test connections in multiple locations to understand how your RV structure affects signal distribution.
               </p>
 
-              <p className="leading-relaxed">
+              <p>
                 Document your findings to develop an effective strategy based on your specific layout and usage patterns.
               </p>
 
-              <h3 className="text-xl font-semibold text-blue-200 mt-8 mb-4">DIY Network Enhancement</h3>
+              <h3 className="text-2xl font-bold text-blue-300 mt-8 mb-4">DIY Network Enhancement</h3>
 
-              <p className="leading-relaxed">
+              <p>
                 Begin with basic solutions like repositioning existing equipment before considering costly upgrades.
               </p>
 
-              <p className="leading-relaxed">
+              <p>
                 Learn to identify genuine signal issues versus simple configuration problems that you can solve yourself.
               </p>
 
-              <p className="leading-relaxed">
+              <p>
                 Understand how different materials and mounting options affect signal propagation throughout your RV.
               </p>
             </AccordionContent>
