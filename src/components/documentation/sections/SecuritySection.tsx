@@ -3,14 +3,19 @@ import { Shield } from "lucide-react";
 
 const SecuritySection = () => {
   return (
-    <AccordionItem value="security" className="px-4 py-3">
-      <div className="flex items-center gap-3">
-        <Shield className="w-4 h-4 text-[#60A5FA]" />
-        <AccordionTrigger className="text-[#60A5FA] text-base hover:no-underline flex-1">
-          Security
-        </AccordionTrigger>
+    <AccordionItem value="security">
+      <div className="flex items-center gap-2 mb-4">
+        <div className="p-2 rounded-full bg-blue-500/10 border border-blue-500/20">
+          <Shield className="w-4 h-4 text-blue-400" />
+        </div>
+        <h2 className="text-blue-400 text-lg font-medium">Security</h2>
       </div>
-      <AccordionContent className="pt-4 text-gray-300 space-y-4">
+      
+      <div className="rounded-lg border border-gray-700 bg-gray-800/50 overflow-hidden">
+        <AccordionTrigger className="px-6 py-4 text-emerald-400 text-base font-medium hover:no-underline hover:text-emerald-300">
+          Security Overview
+        </AccordionTrigger>
+        <AccordionContent className="px-6 pb-6 text-gray-300 space-y-4 text-sm leading-relaxed">
         <h3 className="text-lg font-semibold text-blue-300 mt-6 mb-3">Protecting Your RV's Digital Systems</h3>
         <p>
           Modern RVs include connected systems that require thoughtful security measures. Understanding basic security principles helps protect your privacy and equipment.
@@ -43,7 +48,8 @@ const SecuritySection = () => {
         <p>Document emergency procedures for quick reference when systems act unexpectedly.</p>
         <p>Keep backup access methods available in case primary security systems fail.</p>
         <p>Test alert systems periodically to ensure they function when needed.</p>
-      </AccordionContent>
+        </AccordionContent>
+      </div>
     </AccordionItem>
   );
 };
