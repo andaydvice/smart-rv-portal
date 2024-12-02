@@ -29,7 +29,7 @@ const CompleteDocumentation = () => {
             </Button>
           </Link>
 
-          <div className="relative w-full h-[300px] rounded-xl overflow-hidden mb-12 border border-gray-700">
+          <div className="relative w-full h-[400px] rounded-xl overflow-hidden mb-12 border border-gray-700">
             <img
               src="/lovable-uploads/846b5be5-043e-4645-a3d9-39614d63342c.png"
               alt="Smart RV Complete System Documentation"
