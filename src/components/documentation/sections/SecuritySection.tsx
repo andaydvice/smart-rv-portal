@@ -7,23 +7,15 @@ import { Shield, ChevronDown } from "lucide-react";
 
 const SecuritySection = () => {
   return (
-    <AccordionItem value="security" className="border-0">
-      <div className="flex items-center gap-2 mb-4">
-        <div className="p-2 rounded-full bg-blue-500/10 border border-blue-500/20">
-          <Shield className="w-4 h-4 text-blue-400" />
-        </div>
-        <h2 className="text-blue-400 text-lg font-medium">Security</h2>
+    <AccordionItem value="security" className="border-b border-gray-800/50 px-4 py-3">
+      <div className="flex items-center gap-3">
+        <Shield className="w-4 h-4 text-[#60A5FA]" />
+        <AccordionTrigger className="text-[#60A5FA] text-base hover:no-underline flex-1">
+          Security
+          <ChevronDown className="h-4 w-4 shrink-0 text-[#4ADE80] transition-transform duration-200" />
+        </AccordionTrigger>
       </div>
-      
-      <AccordionTrigger className="hover:no-underline group w-full">
-        <div className="rounded-lg border border-gray-700 bg-gray-800/50 overflow-hidden w-full flex justify-between items-center">
-          <div className="px-6 py-4 text-emerald-400 text-base font-medium">
-            Security Overview
-          </div>
-          <ChevronDown className="h-4 w-4 shrink-0 text-emerald-400 transition-transform duration-200 mr-4 group-data-[state=open]:rotate-180" />
-        </div>
-      </AccordionTrigger>
-      <AccordionContent className="px-6 pb-6 text-gray-300 space-y-4 text-sm leading-relaxed">
+      <AccordionContent className="text-gray-300 space-y-4 pl-7">
         <h3 className="text-lg font-semibold text-blue-300 mt-6 mb-3">Protecting Your RV's Digital Systems</h3>
         <p>
           Modern RVs include connected systems that require thoughtful security measures. Understanding basic security principles helps protect your privacy and equipment.
