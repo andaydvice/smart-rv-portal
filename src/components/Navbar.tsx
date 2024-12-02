@@ -60,7 +60,7 @@ const Navbar = () => {
             <NavigationMenu>
               <NavigationMenuList>
                 <NavigationMenuItem>
-                  <NavigationMenuTrigger className="text-gray-300 hover:text-white transition-colors !bg-transparent data-[state=open]:!bg-transparent text-base">
+                  <NavigationMenuTrigger className="text-gray-300 hover:text-blue-400 transition-colors !bg-transparent data-[state=open]:!bg-transparent text-base">
                     Features
                   </NavigationMenuTrigger>
                   <NavigationMenuContent>
@@ -74,23 +74,23 @@ const Navbar = () => {
                 </NavigationMenuItem>
               </NavigationMenuList>
             </NavigationMenu>
-            <Link to="/models" className="text-gray-300 hover:text-white transition-colors text-base" onClick={handleLinkClick}>
+            <Link to="/models" className="text-gray-300 hover:text-blue-400 transition-colors text-base" onClick={handleLinkClick}>
               Models
             </Link>
-            <Link to="/technology" className="text-gray-300 hover:text-white transition-colors text-base" onClick={handleLinkClick}>
+            <Link to="/technology" className="text-gray-300 hover:text-blue-400 transition-colors text-base" onClick={handleLinkClick}>
               Technology
             </Link>
-            <Link to="/contact" className="text-gray-300 hover:text-white transition-colors text-base" onClick={handleLinkClick}>
+            <Link to="/contact" className="text-gray-300 hover:text-blue-400 transition-colors text-base" onClick={handleLinkClick}>
               Contact
             </Link>
             <DropdownMenu>
-              <DropdownMenuTrigger className="text-gray-300 hover:text-white transition-colors text-base">
+              <DropdownMenuTrigger className="text-gray-300 hover:text-blue-400 transition-colors text-base">
                 <HelpCircle className="h-5 w-5" />
               </DropdownMenuTrigger>
               <DropdownMenuContent className="bg-gray-900/95 backdrop-blur-sm border-gray-800">
                 <DropdownMenuGroup>
                   <DropdownMenuItem>
-                    <Link to="/troubleshooting" className="text-gray-300 hover:text-white transition-colors">
+                    <Link to="/troubleshooting" className="text-gray-300 hover:text-blue-400 transition-colors">
                       Troubleshooting Guide
                     </Link>
                   </DropdownMenuItem>
@@ -106,7 +106,7 @@ const Navbar = () => {
         <div className="px-2 pt-2 pb-3 space-y-1">
           <button
             onClick={toggleMobileFeatures}
-            className="w-full text-left px-3 py-2 text-gray-300 hover:text-white transition-colors flex items-center justify-between"
+            className="w-full text-left px-3 py-2 text-gray-300 hover:text-blue-400 transition-colors flex items-center justify-between"
             aria-expanded={isMobileFeaturesOpen}
           >
             <span>Features</span>
@@ -123,28 +123,28 @@ const Navbar = () => {
           
           <Link
             to="/models"
-            className="block px-3 py-2 text-gray-300 hover:text-white transition-colors"
+            className="block px-3 py-2 text-gray-300 hover:text-blue-400 transition-colors"
             onClick={handleLinkClick}
           >
             Models
           </Link>
           <Link
             to="/technology"
-            className="block px-3 py-2 text-gray-300 hover:text-white transition-colors"
+            className="block px-3 py-2 text-gray-300 hover:text-blue-400 transition-colors"
             onClick={handleLinkClick}
           >
             Technology
           </Link>
           <Link
             to="/contact"
-            className="block px-3 py-2 text-gray-300 hover:text-white transition-colors"
+            className="block px-3 py-2 text-gray-300 hover:text-blue-400 transition-colors"
             onClick={handleLinkClick}
           >
             Contact
           </Link>
           <Link
             to="/troubleshooting"
-            className="block px-3 py-2 text-gray-300 hover:text-white transition-colors"
+            className="block px-3 py-2 text-gray-300 hover:text-blue-400 transition-colors"
             onClick={handleLinkClick}
           >
             Troubleshooting
