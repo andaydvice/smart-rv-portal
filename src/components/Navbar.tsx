@@ -89,8 +89,8 @@ const Navbar = () => {
               </DropdownMenuTrigger>
               <DropdownMenuContent className="bg-gray-900/95 backdrop-blur-sm border-gray-800">
                 <DropdownMenuGroup>
-                  <DropdownMenuItem className="hover:bg-gray-800">
-                    <Link to="/troubleshooting" className="text-gray-300 hover:text-blue-400 transition-colors">
+                  <DropdownMenuItem className="hover:bg-blue-600/20 focus:bg-blue-600/20">
+                    <Link to="/troubleshooting" className="text-gray-300 hover:text-blue-400 transition-colors w-full">
                       Troubleshooting Guide
                     </Link>
                   </DropdownMenuItem>
