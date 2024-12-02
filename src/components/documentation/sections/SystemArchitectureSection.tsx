@@ -9,8 +9,8 @@ const SystemArchitectureSection = () => {
   return (
     <Accordion type="single" collapsible className="space-y-4">
       <AccordionItem value="central-control" className="border-none">
-        <AccordionTrigger className="text-[1.75rem] font-normal text-[#60A5FA] hover:no-underline hover:text-[#60A5FA]">
-          Smart System Integration Guide
+        <AccordionTrigger className="text-[1.75rem] font-semibold text-[#60A5FA] hover:text-[#60A5FA] hover:no-underline">
+          System Architecture
         </AccordionTrigger>
         <AccordionContent className="text-gray-100 space-y-4">
           <p className="leading-relaxed">

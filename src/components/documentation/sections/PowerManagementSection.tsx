@@ -9,8 +9,8 @@ const PowerManagementSection = () => {
   return (
     <Accordion type="single" collapsible className="space-y-4">
       <AccordionItem value="power-management" className="border-none">
-        <AccordionTrigger className="text-[1.75rem] font-normal text-[#60A5FA] hover:no-underline hover:text-[#60A5FA]">
-          Power System Diagnostics
+        <AccordionTrigger className="text-[1.75rem] font-semibold text-[#60A5FA] hover:text-[#60A5FA] hover:no-underline">
+          Power Management
         </AccordionTrigger>
         <AccordionContent className="text-gray-100 space-y-4">
           <p className="leading-relaxed">

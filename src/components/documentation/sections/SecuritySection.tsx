@@ -9,8 +9,8 @@ const SecuritySection = () => {
   return (
     <Accordion type="single" collapsible className="space-y-4">
       <AccordionItem value="security" className="border-none">
-        <AccordionTrigger className="text-[1.75rem] font-normal text-[#60A5FA] hover:no-underline hover:text-[#60A5FA]">
-          Remote Area Connectivity
+        <AccordionTrigger className="text-[1.75rem] font-semibold text-[#60A5FA] hover:text-[#60A5FA] hover:no-underline">
+          Security
         </AccordionTrigger>
         <AccordionContent className="text-gray-100 space-y-4">
           <h3 className="text-lg font-semibold text-blue-200">Protecting Your RV's Digital Systems</h3>
