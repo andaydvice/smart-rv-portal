@@ -1,5 +1,4 @@
 import {
-  Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
@@ -8,19 +7,20 @@ import { Cpu } from "lucide-react";
 
 const SystemArchitectureSection = () => {
   return (
-    <div className="space-y-4 mt-8">
+    <AccordionItem value="system-architecture" className="border-0">
       <div className="flex items-center gap-2 mb-4">
         <Cpu className="w-5 h-5 text-[#60A5FA]" />
         <h2 className="text-[#60A5FA] text-xl font-semibold">System Architecture</h2>
       </div>
       
-      <div className="rounded-lg border border-gray-700 bg-gradient-to-b from-gray-900 to-gray-800 shadow-lg overflow-hidden">
-        <Accordion type="single" collapsible>
-          <AccordionItem value="system-architecture" className="border-0">
-            <AccordionTrigger className="px-6 py-4 text-emerald-400 text-base font-medium hover:no-underline hover:text-emerald-300">
-              System Architecture Overview
-            </AccordionTrigger>
-            <AccordionContent className="px-6 pb-6 text-gray-300 space-y-4 text-base leading-relaxed">
+      <AccordionTrigger className="hover:no-underline">
+        <div className="rounded-lg border border-gray-700 bg-gradient-to-b from-gray-900 to-gray-800 shadow-lg overflow-hidden w-full">
+          <div className="px-6 py-4 text-emerald-400 text-base font-medium">
+            System Architecture Overview
+          </div>
+        </div>
+      </AccordionTrigger>
+      <AccordionContent className="px-6 pb-6 text-gray-300 space-y-4 text-base leading-relaxed">
               <p>
                 Modern RVs use integrated control systems to manage essential functions, but understanding how they work helps you troubleshoot issues and make smarter usage decisions.
               </p>
@@ -82,11 +82,8 @@ const SystemArchitectureSection = () => {
               <p>
                 Focus on improvements that enhance your specific travel style rather than chasing the latest features.
               </p>
-            </AccordionContent>
-          </AccordionItem>
-        </Accordion>
-      </div>
-    </div>
+      </AccordionContent>
+    </AccordionItem>
   );
 };
 
