@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Accordion } from "@/components/ui/accordion";
 import Navbar from "@/components/Navbar";
 import SystemArchitectureSection from "@/components/documentation/sections/SystemArchitectureSection";
 import NetworkInfrastructureSection from "@/components/documentation/sections/NetworkInfrastructureSection";
@@ -45,12 +46,12 @@ const CompleteDocumentation = () => {
           </div>
 
           <div className="space-y-6 border border-gray-700 rounded-lg p-6 bg-gray-800/50">
-            <div className="space-y-6 divide-y divide-gray-700">
+            <Accordion type="single" collapsible className="space-y-6 divide-y divide-gray-700">
               <SystemArchitectureSection />
               <NetworkInfrastructureSection />
               <PowerManagementSection />
               <SecuritySection />
-            </div>
+            </Accordion>
           </div>
         </motion.div>
       </div>
