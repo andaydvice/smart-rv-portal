@@ -11,16 +11,16 @@ const PowerManagementSection = () => {
     <div className="space-y-6">
       <div className="flex items-center gap-2">
         <Zap className="w-6 h-6 text-[#60A5FA]" />
-        <h2 className="text-[#60A5FA] text-2xl">Power Management</h2>
+        <h2 className="text-[#60A5FA] text-2xl font-semibold">Power Management</h2>
       </div>
       
       <div className="rounded-2xl border border-gray-800/50 bg-[#0F172A]/50 overflow-hidden">
         <Accordion type="single" collapsible>
           <AccordionItem value="power-management" className="border-0">
-            <AccordionTrigger className="px-6 py-4 text-[#4ADE80] text-xl hover:no-underline">
-              Power Management
+            <AccordionTrigger className="px-6 py-4 text-[#4ADE80] text-xl hover:no-underline hover:text-[#4ADE80]/90">
+              Power Management Overview
             </AccordionTrigger>
-            <AccordionContent className="px-6 pb-6 text-gray-300 space-y-4">
+            <AccordionContent className="px-6 pb-6 text-gray-300 space-y-4 text-lg">
               <p className="leading-relaxed">
                 Every RV power system combines multiple energy sources to keep your adventures running smoothly.
               </p>

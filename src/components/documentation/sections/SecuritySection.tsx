@@ -11,16 +11,16 @@ const SecuritySection = () => {
     <div className="space-y-6">
       <div className="flex items-center gap-2">
         <Shield className="w-6 h-6 text-[#60A5FA]" />
-        <h2 className="text-[#60A5FA] text-2xl">Security</h2>
+        <h2 className="text-[#60A5FA] text-2xl font-semibold">Security</h2>
       </div>
       
       <div className="rounded-2xl border border-gray-800/50 bg-[#0F172A]/50 overflow-hidden">
         <Accordion type="single" collapsible>
           <AccordionItem value="security" className="border-0">
-            <AccordionTrigger className="px-6 py-4 text-[#4ADE80] text-xl hover:no-underline">
-              Security
+            <AccordionTrigger className="px-6 py-4 text-[#4ADE80] text-xl hover:no-underline hover:text-[#4ADE80]/90">
+              Security Overview
             </AccordionTrigger>
-            <AccordionContent className="px-6 pb-6 text-gray-300 space-y-4">
+            <AccordionContent className="px-6 pb-6 text-gray-300 space-y-4 text-lg">
               <h3 className="text-lg font-semibold text-blue-200">Protecting Your RV's Digital Systems</h3>
               <p className="leading-relaxed">
                 Modern RVs include connected systems that require thoughtful security measures. Understanding basic security principles helps protect your privacy and equipment.
