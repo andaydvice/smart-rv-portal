@@ -46,11 +46,13 @@ const CompleteDocumentation = () => {
           </div>
 
           <div className="space-y-6 border border-gray-700 rounded-lg p-6 bg-gray-800/50">
-            <Accordion type="single" collapsible className="space-y-6 divide-y divide-gray-700">
-              <SystemArchitectureSection />
-              <NetworkInfrastructureSection />
-              <PowerManagementSection />
-              <SecuritySection />
+            <Accordion type="single" collapsible>
+              <div className="space-y-8">
+                <SystemArchitectureSection />
+                <NetworkInfrastructureSection />
+                <PowerManagementSection />
+                <SecuritySection />
+              </div>
             </Accordion>
           </div>
         </motion.div>

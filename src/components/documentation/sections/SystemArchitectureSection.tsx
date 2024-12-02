@@ -13,7 +13,7 @@ const SystemArchitectureSection = () => {
         <h2 className="text-[#60A5FA] text-xl font-semibold">System Architecture</h2>
       </div>
       
-      <AccordionTrigger className="hover:no-underline">
+      <AccordionTrigger className="hover:no-underline data-[state=open]:text-emerald-400">
         <div className="rounded-lg border border-gray-700 bg-gradient-to-b from-gray-900 to-gray-800 shadow-lg overflow-hidden w-full">
           <div className="px-6 py-4 text-emerald-400 text-base font-medium">
             System Architecture Overview
