@@ -46,7 +46,7 @@ const CompleteDocumentation = () => {
           </div>
 
           <div className="space-y-6 border border-gray-700 rounded-lg p-6 bg-gray-800/50">
-            <Accordion type="single" collapsible className="space-y-6 divide-y divide-gray-700">
+            <Accordion type="single" collapsible>
               <SystemArchitectureSection />
               <NetworkInfrastructureSection />
               <PowerManagementSection />
