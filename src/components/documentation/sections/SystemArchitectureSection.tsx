@@ -14,7 +14,7 @@ const SystemArchitectureSection = () => {
         <h2 className="text-[#60A5FA] text-xl font-semibold">System Architecture</h2>
       </div>
       
-      <div className="rounded-lg border border-gray-700 bg-[#0F172A]/90 shadow-lg overflow-hidden">
+      <div className="rounded-lg border border-gray-700 bg-gradient-to-b from-gray-900 to-gray-800 shadow-lg overflow-hidden">
         <Accordion type="single" collapsible>
           <AccordionItem value="system-architecture" className="border-0">
             <AccordionTrigger className="px-6 py-4 text-emerald-400 text-lg font-semibold hover:no-underline hover:text-emerald-300">
