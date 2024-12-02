@@ -3,7 +3,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { Zap } from "lucide-react";
+import { Zap, ChevronDown } from "lucide-react";
 
 const PowerManagementSection = () => {
   return (
@@ -15,14 +15,15 @@ const PowerManagementSection = () => {
         <h2 className="text-blue-400 text-lg font-medium">Power Management</h2>
       </div>
       
-      <AccordionTrigger className="hover:no-underline">
-        <div className="rounded-lg border border-gray-700 bg-gray-800/50 overflow-hidden w-full">
+      <AccordionTrigger className="hover:no-underline group w-full">
+        <div className="rounded-lg border border-gray-700 bg-gray-800/50 overflow-hidden w-full flex justify-between items-center">
           <div className="px-6 py-4 text-emerald-400 text-base font-medium">
             Power Management Overview
           </div>
+          <ChevronDown className="h-4 w-4 shrink-0 text-emerald-400 transition-transform duration-200 mr-4 group-data-[state=open]:rotate-180" />
         </div>
       </AccordionTrigger>
-      <AccordionContent className="px-6 pb-6 text-gray-300 space-y-4 text-sm leading-relaxed">
+      <AccordionContent className="px-6 pb-6 pt-4 text-gray-300 space-y-4 text-sm leading-relaxed">
         <p>
           Every RV power system combines multiple energy sources to keep your adventures running smoothly.
         </p>

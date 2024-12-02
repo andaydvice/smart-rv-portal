@@ -3,21 +3,22 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { Cpu } from "lucide-react";
+import { Cpu, ChevronDown } from "lucide-react";
 
 const SystemArchitectureSection = () => {
   return (
-    <AccordionItem value="system-architecture" className="border-b border-gray-700 last:border-0">
+    <AccordionItem value="system-architecture" className="border-b border-gray-700">
       <div className="flex items-center gap-2 mb-4">
         <Cpu className="w-5 h-5 text-[#60A5FA]" />
         <h2 className="text-[#60A5FA] text-xl font-semibold">System Architecture</h2>
       </div>
       
-      <AccordionTrigger className="hover:no-underline hover:bg-gray-700/30 rounded-lg transition-colors">
-        <div className="rounded-lg border border-gray-700 bg-gradient-to-b from-gray-900 to-gray-800 shadow-lg overflow-hidden w-full">
+      <AccordionTrigger className="hover:no-underline group w-full">
+        <div className="rounded-lg border border-gray-700 bg-gradient-to-b from-gray-900 to-gray-800 shadow-lg overflow-hidden w-full flex justify-between items-center">
           <div className="px-6 py-4 text-emerald-400 text-base font-medium">
             System Architecture Overview
           </div>
+          <ChevronDown className="h-4 w-4 shrink-0 text-emerald-400 transition-transform duration-200 mr-4 group-data-[state=open]:rotate-180" />
         </div>
       </AccordionTrigger>
       <AccordionContent className="px-6 pb-6 pt-4 text-gray-300 space-y-4 text-base leading-relaxed">
