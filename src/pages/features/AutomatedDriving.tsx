@@ -46,14 +46,14 @@ const AutomatedDriving = () => {
             </div>
 
             <div className="bg-gray-800/50 p-8 rounded-lg border border-gray-700 flex flex-col">
-              <div className="h-[48px]">
+              <div className="h-[48px] mb-6">
                 <h2 className="text-2xl font-semibold text-blue-400">GPS and Navigation Integration</h2>
                 <div className="flex items-center gap-3">
                   <Navigation className="h-6 w-6 text-purple-400" />
                   <span className="text-white">Smart Navigation</span>
                 </div>
               </div>
-              <div className="relative aspect-video mt-4 mb-6">
+              <div className="relative aspect-video mb-6">
                 <img 
                   src="/lovable-uploads/f72886c3-3677-4dfe-8d56-5a784197eda2.png"
                   alt="Navigation System"
