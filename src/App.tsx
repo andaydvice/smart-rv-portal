@@ -2,7 +2,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { createBrowserRouter, RouterProvider, ScrollRestoration, Outlet } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Footer from "./components/Footer";
 import Index from "./pages/Index";
 import Features from "./pages/Features";
@@ -28,44 +28,12 @@ import CompareModels from "./pages/models/CompareModels";
 
 const queryClient = new QueryClient();
 
-const Layout = () => (
+const Layout = ({ children }: { children: React.ReactNode }) => (
   <div className="min-h-screen flex flex-col">
-    <ScrollRestoration />
-    <div className="flex-grow">
-      <Outlet />
-    </div>
+    <div className="flex-grow">{children}</div>
     <Footer />
   </div>
 );
-
-const router = createBrowserRouter([
-  {
-    element: <Layout />,
-    children: [
-      { path: "/", element: <Index /> },
-      { path: "/features", element: <Features /> },
-      { path: "/features/navigation", element: <NavigationSystem /> },
-      { path: "/features/security", element: <SecuritySystem /> },
-      { path: "/features/power", element: <PowerManagement /> },
-      { path: "/features/tv", element: <SmartTV /> },
-      { path: "/features/audio", element: <AudioSystem /> },
-      { path: "/features/internet", element: <InternetConnectivity /> },
-      { path: "/features/smart-kitchen", element: <SmartKitchen /> },
-      { path: "/features/automated-driving", element: <AutomatedDriving /> },
-      { path: "/models", element: <Models /> },
-      { path: "/models/luxury", element: <LuxuryModel /> },
-      { path: "/models/adventure", element: <AdventureModel /> },
-      { path: "/models/compact", element: <CompactModel /> },
-      { path: "/models/compare", element: <CompareModels /> },
-      { path: "/technology", element: <Technology /> },
-      { path: "/contact", element: <Contact /> },
-      { path: "/schedule-demo", element: <ScheduleDemo /> },
-      { path: "/troubleshooting", element: <Troubleshooting /> },
-      { path: "/documentation", element: <Documentation /> },
-      { path: "/documentation/complete", element: <CompleteDocumentation /> },
-    ],
-  },
-]);
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
@@ -73,7 +41,31 @@ const App = () => (
       <div>
         <Toaster />
         <Sonner />
-        <RouterProvider router={router} />
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Layout><Index /></Layout>} />
+            <Route path="/features" element={<Layout><Features /></Layout>} />
+            <Route path="/features/navigation" element={<Layout><NavigationSystem /></Layout>} />
+            <Route path="/features/security" element={<Layout><SecuritySystem /></Layout>} />
+            <Route path="/features/power" element={<Layout><PowerManagement /></Layout>} />
+            <Route path="/features/tv" element={<Layout><SmartTV /></Layout>} />
+            <Route path="/features/audio" element={<Layout><AudioSystem /></Layout>} />
+            <Route path="/features/internet" element={<Layout><InternetConnectivity /></Layout>} />
+            <Route path="/features/smart-kitchen" element={<Layout><SmartKitchen /></Layout>} />
+            <Route path="/features/automated-driving" element={<Layout><AutomatedDriving /></Layout>} />
+            <Route path="/models" element={<Layout><Models /></Layout>} />
+            <Route path="/models/luxury" element={<Layout><LuxuryModel /></Layout>} />
+            <Route path="/models/adventure" element={<Layout><AdventureModel /></Layout>} />
+            <Route path="/models/compact" element={<Layout><CompactModel /></Layout>} />
+            <Route path="/models/compare" element={<Layout><CompareModels /></Layout>} />
+            <Route path="/technology" element={<Layout><Technology /></Layout>} />
+            <Route path="/contact" element={<Layout><Contact /></Layout>} />
+            <Route path="/schedule-demo" element={<Layout><ScheduleDemo /></Layout>} />
+            <Route path="/troubleshooting" element={<Layout><Troubleshooting /></Layout>} />
+            <Route path="/documentation" element={<Layout><Documentation /></Layout>} />
+            <Route path="/documentation/complete" element={<Layout><CompleteDocumentation /></Layout>} />
+          </Routes>
+        </BrowserRouter>
       </div>
     </TooltipProvider>
   </QueryClientProvider>
