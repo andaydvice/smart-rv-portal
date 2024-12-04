@@ -1,8 +1,14 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Menu, X, HelpCircle } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { Logo } from "./Logo";
-import { SmartFeatureLinks, EntertainmentLinks } from "./NavbarLinks";
+import { 
+  CoreSystemsLinks, 
+  SmartFeaturesLinks, 
+  VehicleSelectionLinks,
+  SupportLinks,
+  CustomerSupportLinks
+} from "./NavbarLinks";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -10,33 +16,21 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuGroup,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [isMobileFeaturesOpen, setIsMobileFeaturesOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
     if (!isOpen === false) {
-      setIsMobileFeaturesOpen(false);
+      setIsMobileMenuOpen(false);
     }
-  };
-
-  const toggleMobileFeatures = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    setIsMobileFeaturesOpen(!isMobileFeaturesOpen);
   };
 
   const handleLinkClick = () => {
     setIsOpen(false);
-    setIsMobileFeaturesOpen(false);
+    setIsMobileMenuOpen(false);
   };
 
   return (
@@ -61,42 +55,50 @@ const Navbar = () => {
               <NavigationMenuList>
                 <NavigationMenuItem>
                   <NavigationMenuTrigger className="text-gray-300 hover:text-blue-400 transition-colors !bg-transparent data-[state=open]:!bg-transparent text-base">
-                    Features
+                    RV Systems
                   </NavigationMenuTrigger>
                   <NavigationMenuContent>
-                    <div className="w-[400px] lg:w-[500px] bg-gray-900/95 backdrop-blur-sm rounded-lg border border-gray-800 shadow-lg p-6">
-                      <div className="grid gap-6 lg:grid-cols-[.75fr_1fr]">
-                        <SmartFeatureLinks />
-                        <EntertainmentLinks />
+                    <div className="w-[800px] bg-gray-900/95 backdrop-blur-sm rounded-lg border border-gray-800 shadow-lg p-6">
+                      <div className="grid gap-6 grid-cols-2">
+                        <CoreSystemsLinks />
+                        <SmartFeaturesLinks />
                       </div>
                     </div>
                   </NavigationMenuContent>
                 </NavigationMenuItem>
+
+                <NavigationMenuItem>
+                  <NavigationMenuTrigger className="text-gray-300 hover:text-blue-400 transition-colors !bg-transparent data-[state=open]:!bg-transparent text-base">
+                    Models
+                  </NavigationMenuTrigger>
+                  <NavigationMenuContent>
+                    <div className="w-[400px] bg-gray-900/95 backdrop-blur-sm rounded-lg border border-gray-800 shadow-lg p-6">
+                      <VehicleSelectionLinks />
+                    </div>
+                  </NavigationMenuContent>
+                </NavigationMenuItem>
+
+                <NavigationMenuItem>
+                  <NavigationMenuTrigger className="text-gray-300 hover:text-blue-400 transition-colors !bg-transparent data-[state=open]:!bg-transparent text-base">
+                    Support
+                  </NavigationMenuTrigger>
+                  <NavigationMenuContent>
+                    <div className="w-[600px] bg-gray-900/95 backdrop-blur-sm rounded-lg border border-gray-800 shadow-lg p-6">
+                      <div className="grid gap-6 grid-cols-2">
+                        <SupportLinks />
+                        <CustomerSupportLinks />
+                      </div>
+                    </div>
+                  </NavigationMenuContent>
+                </NavigationMenuItem>
+
+                <NavigationMenuItem>
+                  <Link to="/technology" className="text-gray-300 hover:text-blue-400 transition-colors text-base" onClick={handleLinkClick}>
+                    Technology
+                  </Link>
+                </NavigationMenuItem>
               </NavigationMenuList>
             </NavigationMenu>
-            <Link to="/models" className="text-gray-300 hover:text-blue-400 transition-colors text-base" onClick={handleLinkClick}>
-              Models
-            </Link>
-            <Link to="/technology" className="text-gray-300 hover:text-blue-400 transition-colors text-base" onClick={handleLinkClick}>
-              Technology
-            </Link>
-            <Link to="/contact" className="text-gray-300 hover:text-blue-400 transition-colors text-base" onClick={handleLinkClick}>
-              Contact
-            </Link>
-            <DropdownMenu>
-              <DropdownMenuTrigger className="text-gray-300 hover:text-blue-400 transition-colors text-base">
-                <HelpCircle className="h-5 w-5" />
-              </DropdownMenuTrigger>
-              <DropdownMenuContent className="bg-gray-900/95 backdrop-blur-sm border-gray-800">
-                <DropdownMenuGroup>
-                  <DropdownMenuItem className="hover:bg-blue-600/20 focus:bg-blue-600/20">
-                    <Link to="/troubleshooting" className="text-gray-300 hover:text-blue-400 transition-colors w-full">
-                      Troubleshooting Guide
-                    </Link>
-                  </DropdownMenuItem>
-                </DropdownMenuGroup>
-              </DropdownMenuContent>
-            </DropdownMenu>
           </div>
         </div>
       </div>
@@ -104,51 +106,20 @@ const Navbar = () => {
       {/* Mobile Navigation */}
       <div className={`md:hidden bg-gray-900/95 backdrop-blur-sm border-b border-gray-800 ${isOpen ? 'block' : 'hidden'}`}>
         <div className="px-2 pt-2 pb-3 space-y-1">
-          <button
-            onClick={toggleMobileFeatures}
-            className="w-full text-left px-3 py-2 text-gray-300 hover:text-blue-400 transition-colors flex items-center justify-between"
-            aria-expanded={isMobileFeaturesOpen}
-          >
-            <span>Features</span>
-            <span className="text-sm">{isMobileFeaturesOpen ? '▼' : '▶'}</span>
-          </button>
-          
-          {/* Mobile Features Menu */}
-          <div className={`transition-all duration-200 ${isMobileFeaturesOpen ? 'block' : 'hidden'}`}>
-            <div className="ml-4 space-y-6 bg-gray-800/50 p-4 rounded-lg">
-              <SmartFeatureLinks />
-              <EntertainmentLinks />
-            </div>
+          <div className="space-y-6 p-4">
+            <CoreSystemsLinks />
+            <SmartFeaturesLinks />
+            <VehicleSelectionLinks />
+            <SupportLinks />
+            <CustomerSupportLinks />
+            <Link
+              to="/technology"
+              className="block px-3 py-2 text-gray-300 hover:text-blue-400 transition-colors"
+              onClick={handleLinkClick}
+            >
+              Technology
+            </Link>
           </div>
-          
-          <Link
-            to="/models"
-            className="block px-3 py-2 text-gray-300 hover:text-blue-400 transition-colors"
-            onClick={handleLinkClick}
-          >
-            Models
-          </Link>
-          <Link
-            to="/technology"
-            className="block px-3 py-2 text-gray-300 hover:text-blue-400 transition-colors"
-            onClick={handleLinkClick}
-          >
-            Technology
-          </Link>
-          <Link
-            to="/contact"
-            className="block px-3 py-2 text-gray-300 hover:text-blue-400 transition-colors"
-            onClick={handleLinkClick}
-          >
-            Contact
-          </Link>
-          <Link
-            to="/troubleshooting"
-            className="block px-3 py-2 text-gray-300 hover:text-blue-400 transition-colors"
-            onClick={handleLinkClick}
-          >
-            Troubleshooting
-          </Link>
         </div>
       </div>
     </nav>
