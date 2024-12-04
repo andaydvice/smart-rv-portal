@@ -8,6 +8,8 @@ import {
   Wifi, 
   Refrigerator, 
   Car,
+  CarFront,
+  Caravan,
   Wrench,
   HelpCircle,
   FileText,
@@ -100,22 +102,34 @@ export const VehicleSelectionLinks = () => (
     <ul className="space-y-2 text-sm">
       <li className="hover:text-blue-400 transition-colors text-gray-300">
         <Link to="/models/compare" className="block p-2 rounded hover:bg-gray-800/50">
-          Compare Models
+          <span className="flex items-center gap-2">
+            <Car className="h-4 w-4 text-blue-500" />
+            Compare Models
+          </span>
         </Link>
       </li>
       <li className="hover:text-blue-400 transition-colors text-gray-300">
         <Link to="/models/luxury" className="block p-2 rounded hover:bg-gray-800/50">
-          Luxury Model
+          <span className="flex items-center gap-2">
+            <CarFront className="h-4 w-4 text-purple-500" />
+            Luxury Model
+          </span>
         </Link>
       </li>
       <li className="hover:text-blue-400 transition-colors text-gray-300">
         <Link to="/models/adventure" className="block p-2 rounded hover:bg-gray-800/50">
-          Adventure Model
+          <span className="flex items-center gap-2">
+            <Caravan className="h-4 w-4 text-emerald-500" />
+            Adventure Model
+          </span>
         </Link>
       </li>
       <li className="hover:text-blue-400 transition-colors text-gray-300">
         <Link to="/models/compact" className="block p-2 rounded hover:bg-gray-800/50">
-          Compact Model
+          <span className="flex items-center gap-2">
+            <Car className="h-4 w-4 text-yellow-500" />
+            Compact Model
+          </span>
         </Link>
       </li>
     </ul>
