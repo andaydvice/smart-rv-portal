@@ -27,7 +27,7 @@ const NetworkInfrastructureSection = () => {
         <h2 className="text-blue-400 text-lg font-medium">Network Infrastructure</h2>
       </div>
       
-      <AccordionTrigger onExpandedChange={handleExpand} className="hover:no-underline group w-full">
+      <AccordionTrigger onClick={handleExpand} className="hover:no-underline group w-full">
         <div className="rounded-lg border border-gray-700 bg-gray-800/50 overflow-hidden w-full flex justify-between items-center">
           <div className="px-6 py-4 text-emerald-400 text-base font-medium">
             Network Infrastructure Overview
