@@ -4,8 +4,20 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Network, ChevronDown } from "lucide-react";
+import { useEffect, useRef } from "react";
 
 const NetworkInfrastructureSection = () => {
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  const handleExpand = () => {
+    console.log("Network Infrastructure section expanded");
+    setTimeout(() => {
+      if (contentRef.current) {
+        contentRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }, 100);
+  };
+
   return (
     <AccordionItem value="network-infrastructure" className="border-b border-gray-700">
       <div className="flex items-center gap-2 mb-4">
@@ -15,7 +27,7 @@ const NetworkInfrastructureSection = () => {
         <h2 className="text-blue-400 text-lg font-medium">Network Infrastructure</h2>
       </div>
       
-      <AccordionTrigger className="hover:no-underline group w-full">
+      <AccordionTrigger onExpandedChange={handleExpand} className="hover:no-underline group w-full">
         <div className="rounded-lg border border-gray-700 bg-gray-800/50 overflow-hidden w-full flex justify-between items-center">
           <div className="px-6 py-4 text-emerald-400 text-base font-medium">
             Network Infrastructure Overview
@@ -23,7 +35,7 @@ const NetworkInfrastructureSection = () => {
           <ChevronDown className="h-4 w-4 shrink-0 text-emerald-400 transition-transform duration-200 mr-4 group-data-[state=open]:rotate-180" />
         </div>
       </AccordionTrigger>
-      <AccordionContent className="px-6 pb-6 pt-4 text-gray-300 space-y-4 text-sm leading-relaxed">
+      <AccordionContent ref={contentRef} className="px-6 pb-6 pt-4 text-gray-300 space-y-4 text-sm leading-relaxed">
         <p>
           Inside metal RV walls, radio signals struggle to reach all areas effectively. This creates unique challenges for maintaining reliable internet connectivity during your travels.
         </p>
