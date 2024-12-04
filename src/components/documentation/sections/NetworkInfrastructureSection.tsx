@@ -7,19 +7,19 @@ import { Network, ChevronDown } from "lucide-react";
 import { useEffect, useRef } from "react";
 
 const NetworkInfrastructureSection = () => {
-  const contentRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLDivElement>(null);
 
   const handleExpand = () => {
     console.log("Network Infrastructure section expanded");
     setTimeout(() => {
-      if (contentRef.current) {
-        contentRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+      if (sectionRef.current) {
+        sectionRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
       }
     }, 100);
   };
 
   return (
-    <AccordionItem value="network-infrastructure" className="border-b border-gray-700">
+    <AccordionItem value="network-infrastructure" className="border-b border-gray-700" ref={sectionRef}>
       <div className="flex items-center gap-2 mb-4">
         <div className="p-2 rounded-full bg-blue-500/10 border border-blue-500/20">
           <Network className="w-4 h-4 text-blue-400" />
@@ -35,7 +35,7 @@ const NetworkInfrastructureSection = () => {
           <ChevronDown className="h-4 w-4 shrink-0 text-emerald-400 transition-transform duration-200 mr-4 group-data-[state=open]:rotate-180" />
         </div>
       </AccordionTrigger>
-      <AccordionContent ref={contentRef} className="px-6 pb-6 pt-4 text-gray-300 space-y-4 text-sm leading-relaxed">
+      <AccordionContent className="px-6 pb-6 pt-4 text-gray-300 space-y-4 text-sm leading-relaxed">
         <p>
           Inside metal RV walls, radio signals struggle to reach all areas effectively. This creates unique challenges for maintaining reliable internet connectivity during your travels.
         </p>

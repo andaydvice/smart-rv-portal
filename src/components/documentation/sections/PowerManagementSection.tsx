@@ -4,10 +4,22 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Zap, ChevronDown } from "lucide-react";
+import { useRef } from "react";
 
 const PowerManagementSection = () => {
+  const sectionRef = useRef<HTMLDivElement>(null);
+
+  const handleExpand = () => {
+    console.log("Power Management section expanded");
+    setTimeout(() => {
+      if (sectionRef.current) {
+        sectionRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }, 100);
+  };
+
   return (
-    <AccordionItem value="power-management" className="border-0">
+    <AccordionItem value="power-management" className="border-0" ref={sectionRef}>
       <div className="flex items-center gap-2 mb-4">
         <div className="p-2 rounded-full bg-blue-500/10 border border-blue-500/20">
           <Zap className="w-4 h-4 text-blue-400" />
@@ -15,7 +27,7 @@ const PowerManagementSection = () => {
         <h2 className="text-blue-400 text-lg font-medium">Power Management</h2>
       </div>
       
-      <AccordionTrigger className="hover:no-underline group w-full">
+      <AccordionTrigger onClick={handleExpand} className="hover:no-underline group w-full">
         <div className="rounded-lg border border-gray-700 bg-gray-800/50 overflow-hidden w-full flex justify-between items-center">
           <div className="px-6 py-4 text-emerald-400 text-base font-medium">
             Power Management Overview
