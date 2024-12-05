@@ -54,9 +54,14 @@ const Navbar = () => {
             <NavigationMenu>
               <NavigationMenuList>
                 <NavigationMenuItem>
-                  <Link to="/technology" className="text-gray-300 hover:text-blue-400 transition-colors text-base" onClick={handleLinkClick}>
+                  <NavigationMenuTrigger className="text-gray-300 hover:text-blue-400 transition-colors !bg-transparent data-[state=open]:!bg-transparent text-base">
                     Technology
-                  </Link>
+                  </NavigationMenuTrigger>
+                  <NavigationMenuContent>
+                    <div className="w-[400px] bg-gray-900/95 backdrop-blur-sm rounded-lg border border-gray-800 shadow-lg p-6">
+                      <SmartFeaturesLinks />
+                    </div>
+                  </NavigationMenuContent>
                 </NavigationMenuItem>
 
                 <NavigationMenuItem>
@@ -64,11 +69,8 @@ const Navbar = () => {
                     RV Systems
                   </NavigationMenuTrigger>
                   <NavigationMenuContent>
-                    <div className="w-[800px] bg-gray-900/95 backdrop-blur-sm rounded-lg border border-gray-800 shadow-lg p-6">
-                      <div className="grid gap-6 grid-cols-2">
-                        <CoreSystemsLinks />
-                        <SmartFeaturesLinks />
-                      </div>
+                    <div className="w-[400px] bg-gray-900/95 backdrop-blur-sm rounded-lg border border-gray-800 shadow-lg p-6">
+                      <CoreSystemsLinks />
                     </div>
                   </NavigationMenuContent>
                 </NavigationMenuItem>
@@ -107,15 +109,8 @@ const Navbar = () => {
       <div className={`md:hidden bg-gray-900/95 backdrop-blur-sm border-b border-gray-800 ${isOpen ? 'block' : 'hidden'}`}>
         <div className="px-2 pt-2 pb-3 space-y-1">
           <div className="space-y-6 p-4">
-            <Link
-              to="/technology"
-              className="block px-3 py-2 text-gray-300 hover:text-blue-400 transition-colors"
-              onClick={handleLinkClick}
-            >
-              Technology
-            </Link>
-            <CoreSystemsLinks />
             <SmartFeaturesLinks />
+            <CoreSystemsLinks />
             <VehicleSelectionLinks />
             <SupportLinks />
             <CustomerSupportLinks />
