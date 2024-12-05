@@ -54,6 +54,12 @@ const Navbar = () => {
             <NavigationMenu>
               <NavigationMenuList>
                 <NavigationMenuItem>
+                  <Link to="/technology" className="text-gray-300 hover:text-blue-400 transition-colors text-base" onClick={handleLinkClick}>
+                    Technology
+                  </Link>
+                </NavigationMenuItem>
+
+                <NavigationMenuItem>
                   <NavigationMenuTrigger className="text-gray-300 hover:text-blue-400 transition-colors !bg-transparent data-[state=open]:!bg-transparent text-base">
                     RV Systems
                   </NavigationMenuTrigger>
@@ -91,12 +97,6 @@ const Navbar = () => {
                     </div>
                   </NavigationMenuContent>
                 </NavigationMenuItem>
-
-                <NavigationMenuItem>
-                  <Link to="/technology" className="text-gray-300 hover:text-blue-400 transition-colors text-base" onClick={handleLinkClick}>
-                    Technology
-                  </Link>
-                </NavigationMenuItem>
               </NavigationMenuList>
             </NavigationMenu>
           </div>
@@ -107,11 +107,6 @@ const Navbar = () => {
       <div className={`md:hidden bg-gray-900/95 backdrop-blur-sm border-b border-gray-800 ${isOpen ? 'block' : 'hidden'}`}>
         <div className="px-2 pt-2 pb-3 space-y-1">
           <div className="space-y-6 p-4">
-            <CoreSystemsLinks />
-            <SmartFeaturesLinks />
-            <VehicleSelectionLinks />
-            <SupportLinks />
-            <CustomerSupportLinks />
             <Link
               to="/technology"
               className="block px-3 py-2 text-gray-300 hover:text-blue-400 transition-colors"
@@ -119,6 +114,11 @@ const Navbar = () => {
             >
               Technology
             </Link>
+            <CoreSystemsLinks />
+            <SmartFeaturesLinks />
+            <VehicleSelectionLinks />
+            <SupportLinks />
+            <CustomerSupportLinks />
           </div>
         </div>
       </div>
