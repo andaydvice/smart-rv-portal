@@ -147,17 +147,17 @@ const CompareModels = () => {
               </p>
               <div className="flex flex-wrap justify-center gap-4">
                 <Link to="/models/luxury">
-                  <Button variant="outline" className="bg-white/5 text-white border-white/20 hover:bg-white/10">
+                  <Button variant="outline" className="bg-white/5 text-white border-white/20 hover:bg-white/10 hover:text-white">
                     View Luxury Class
                   </Button>
                 </Link>
                 <Link to="/models/adventure">
-                  <Button variant="outline" className="bg-white/5 text-white border-white/20 hover:bg-white/10">
+                  <Button variant="outline" className="bg-white/5 text-white border-white/20 hover:bg-white/10 hover:text-white">
                     View Adventure Class
                   </Button>
                 </Link>
                 <Link to="/models/compact">
-                  <Button variant="outline" className="bg-white/5 text-white border-white/20 hover:bg-white/10">
+                  <Button variant="outline" className="bg-white/5 text-white border-white/20 hover:bg-white/10 hover:text-white">
                     View Compact Smart
                   </Button>
                 </Link>
