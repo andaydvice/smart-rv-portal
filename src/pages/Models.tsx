@@ -124,7 +124,7 @@ const Models = () => {
             <Link to="/models/compare">
               <Button 
                 variant="outline" 
-                className="bg-transparent border-white text-white hover:bg-white/10"
+                className="bg-transparent border-white text-white hover:bg-white/20"
               >
                 Compare All Models <ArrowRight className="w-4 h-4 ml-2" />
               </Button>
