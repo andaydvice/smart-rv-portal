@@ -44,7 +44,7 @@ export const MobileOfficeSection = () => {
               <h4 className="font-medium text-blue-200">Network Configuration</h4>
             </div>
             <ul className="space-y-2 text-sm list-disc list-inside">
-              <li>Set up a mobile-optimized mesh network inside the RV</li>
+              <li>Set up a mobile optimized mesh network inside the RV</li>
               <li>Configure automatic failover between connections</li>
               <li>Use a router that supports load balancing</li>
               <li>Implement QoS for critical services</li>

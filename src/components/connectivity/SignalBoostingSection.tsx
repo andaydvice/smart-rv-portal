@@ -51,8 +51,8 @@ export const SignalBoostingSection = () => {
             <ul className="space-y-2 text-sm list-disc list-inside">
               <li>Wi-Fi range extender with built-in 4G LTE</li>
               <li>Can switch between Wi-Fi and cellular data automatically</li>
-              <li>Roof-mounted design for optimal signal capture</li>
-              <li>Weather-resistant enclosure</li>
+              <li>Roof mounted design for optimal signal capture</li>
+              <li>Weather resistant enclosure</li>
             </ul>
           </div>
 
@@ -71,9 +71,9 @@ export const SignalBoostingSection = () => {
             </div>
             <h4 className="text-lg font-medium text-blue-200 mb-3">Pepwave MAX Transit Duo</h4>
             <ul className="space-y-2 text-sm list-disc list-inside">
-              <li>Dual-cellular router for load balancing and failover</li>
+              <li>Dual cellular router for load balancing and failover</li>
               <li>Supports multiple carriers simultaneously</li>
-              <li>Enterprise-grade features for advanced users</li>
+              <li>Enterprise grade features for advanced users</li>
               <li>Remote management capabilities</li>
             </ul>
           </div>
