@@ -14,7 +14,7 @@ const DocumentationHeader = () => {
       <Link to="/troubleshooting">
         <Button
           variant="outline"
-          className="bg-white/5 text-white border-white/20 hover:bg-white/10 hover:text-white"
+          className="bg-white/5 text-white border-white/20 hover:bg-white/10 hover:text-white text-sm"
         >
           <ArrowLeft className="w-4 h-4 mr-2" />
           Back to Troubleshooting
@@ -31,8 +31,8 @@ const DocumentationHeader = () => {
       </div>
 
       <div className="text-center mb-12">
-        <h1 className="text-4xl font-bold text-[#8BB4E7] mb-4">System Documentation</h1>
-        <p className="text-xl text-gray-300 max-w-2xl mx-auto">
+        <h1 className="text-[1.75rem] font-medium text-[#60A5FA] mb-4">System Documentation</h1>
+        <p className="text-sm text-gray-300 max-w-2xl mx-auto">
           Complete documentation and technical specifications for your Smart RV system
         </p>
       </div>
@@ -41,7 +41,7 @@ const DocumentationHeader = () => {
         <Link to="/documentation/complete">
           <Button 
             variant="outline" 
-            className="bg-blue-500/10 text-[#8BB4E7] border-blue-400 hover:bg-blue-400/20 hover:text-[#8BB4E7] text-lg"
+            className="bg-transparent border-[#60A5FA] text-[#60A5FA] hover:bg-[#60A5FA]/10 text-sm py-2 px-4"
           >
             View Complete System Documentation
             <ChevronRight className="ml-2 h-4 w-4" />
