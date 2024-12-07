@@ -16,18 +16,18 @@ const OverviewTab = () => {
   return (
     <Card className="bg-gray-800/90 border-gray-700">
       <CardHeader className="space-y-4">
-        <CardTitle className="text-purple-400 text-3xl">Smart RV System Guide</CardTitle>
-        <CardDescription className="text-blue-100 font-medium text-xl">Core Systems Overview</CardDescription>
+        <CardTitle className="text-blue-400 text-3xl">Smart RV System Guide</CardTitle>
+        <CardDescription className="text-gray-300 font-medium text-xl">Core Systems Overview</CardDescription>
       </CardHeader>
-      <CardContent className="space-y-8 text-gray-100">
+      <CardContent className="space-y-8 text-gray-300">
         <Accordion type="single" collapsible className="space-y-4">
           <AccordionItem value="core-systems" className="border-b-gray-700">
-            <AccordionTrigger className="text-2xl font-semibold text-purple-300 hover:text-purple-200">
+            <AccordionTrigger className="text-2xl font-semibold text-blue-300 hover:text-blue-200">
               Core Systems
             </AccordionTrigger>
             <AccordionContent className="space-y-4">
               <p className="text-lg leading-relaxed">
-                The Central Control Unit (CCU) manages your RV's main operations. If you experience system-wide issues, this is the first place to check.
+                The Central Control Unit (CCU) manages your RV's main operations. If you experience system wide issues, this is the first place to check.
               </p>
               <p className="text-lg leading-relaxed">
                 The Power Management System controls your RV's energy distribution. Monitor this through your control panel to prevent power issues.
@@ -39,7 +39,7 @@ const OverviewTab = () => {
           </AccordionItem>
 
           <AccordionItem value="key-features" className="border-b-gray-700">
-            <AccordionTrigger className="text-2xl font-semibold text-purple-300 hover:text-purple-200">
+            <AccordionTrigger className="text-2xl font-semibold text-blue-300 hover:text-blue-200">
               Key Features to Monitor
             </AccordionTrigger>
             <AccordionContent className="space-y-4">
@@ -56,7 +56,7 @@ const OverviewTab = () => {
           </AccordionItem>
 
           <AccordionItem value="system-alerts" className="border-b-gray-700">
-            <AccordionTrigger className="text-2xl font-semibold text-purple-300 hover:text-purple-200">
+            <AccordionTrigger className="text-2xl font-semibold text-blue-300 hover:text-blue-200">
               Common System Alerts
             </AccordionTrigger>
             <AccordionContent className="space-y-4">

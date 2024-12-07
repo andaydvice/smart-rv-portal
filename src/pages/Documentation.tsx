@@ -18,19 +18,31 @@ const Documentation = () => {
           
           <Tabs defaultValue="overview" className="space-y-8">
             <TabsList className="bg-gray-800/50 p-2 mb-8">
-              <TabsTrigger value="overview" className="data-[state=active]:bg-blue-500 data-[state=active]:text-white font-semibold text-base px-6 py-3">
+              <TabsTrigger 
+                value="overview" 
+                className="data-[state=active]:bg-blue-500 data-[state=active]:text-white text-gray-300 hover:text-white font-semibold text-base px-6 py-3"
+              >
                 <Book className="mr-2 h-4 w-4" />
                 Overview
               </TabsTrigger>
-              <TabsTrigger value="technical" className="data-[state=active]:bg-blue-500 data-[state=active]:text-white font-semibold text-base px-6 py-3">
+              <TabsTrigger 
+                value="technical" 
+                className="data-[state=active]:bg-blue-500 data-[state=active]:text-white text-gray-300 hover:text-white font-semibold text-base px-6 py-3"
+              >
                 <Cpu className="mr-2 h-4 w-4" />
                 Technical
               </TabsTrigger>
-              <TabsTrigger value="maintenance" className="data-[state=active]:bg-blue-500 data-[state=active]:text-white font-semibold text-base px-6 py-3">
+              <TabsTrigger 
+                value="maintenance" 
+                className="data-[state=active]:bg-blue-500 data-[state=active]:text-white text-gray-300 hover:text-white font-semibold text-base px-6 py-3"
+              >
                 <Wrench className="mr-2 h-4 w-4" />
                 Maintenance
               </TabsTrigger>
-              <TabsTrigger value="power" className="data-[state=active]:bg-blue-500 data-[state=active]:text-white font-semibold text-base px-6 py-3">
+              <TabsTrigger 
+                value="power" 
+                className="data-[state=active]:bg-blue-500 data-[state=active]:text-white text-gray-300 hover:text-white font-semibold text-base px-6 py-3"
+              >
                 <Zap className="mr-2 h-4 w-4" />
                 Power Systems
               </TabsTrigger>
