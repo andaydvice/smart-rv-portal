@@ -12,10 +12,10 @@ const SmartSystemGuide = () => {
     <div className="bg-[#0B1221] rounded-[32px] border border-gray-800/30 p-8 mt-8">
       <div className="space-y-6">
         <div className="space-y-2">
-          <h2 className="text-[1.75rem] font-medium text-[#60A5FA] leading-tight">
+          <h2 className="text-xl font-medium text-[#60A5FA] leading-tight">
             Smart System Integration Guide
           </h2>
-          <p className="text-gray-300 text-base">
+          <p className="text-gray-300 text-sm">
             Complete setup and troubleshooting guide for your Smart RV systems
           </p>
         </div>
@@ -33,7 +33,7 @@ const SmartSystemGuide = () => {
           <Link to="/documentation">
             <Button 
               variant="outline" 
-              className="bg-transparent border-[#60A5FA] text-[#60A5FA] hover:bg-[#60A5FA]/10 text-sm py-3 px-4"
+              className="bg-transparent border-[#60A5FA] text-[#60A5FA] hover:bg-[#60A5FA]/10 text-sm py-2 px-4"
             >
               View Complete System Documentation
               <ChevronDown className="ml-2 h-4 w-4" />
