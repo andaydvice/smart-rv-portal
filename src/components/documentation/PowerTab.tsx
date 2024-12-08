@@ -16,14 +16,14 @@ const PowerTab = () => {
   return (
     <Card className="bg-gray-800/90 border-gray-700">
       <CardHeader>
-        <CardTitle className="text-rose-400 text-2xl">Smart RV Power Management</CardTitle>
-        <CardDescription className="text-blue-100 font-medium text-lg">Power system specifications and optimization</CardDescription>
+        <CardTitle className="text-xl font-medium text-[#60A5FA]">Smart RV Power Management</CardTitle>
+        <CardDescription className="text-sm text-gray-300">Power system specifications and optimization</CardDescription>
       </CardHeader>
-      <CardContent className="space-y-6 text-gray-100">
+      <CardContent className="space-y-6 text-sm text-gray-300">
         <Accordion type="single" collapsible className="w-full">
           <AccordionItem value="sources" className="border-gray-700">
-            <AccordionTrigger className="text-xl text-rose-300 hover:text-rose-400">Understanding Your Power Sources</AccordionTrigger>
-            <AccordionContent className="text-lg space-y-4">
+            <AccordionTrigger className="text-lg font-medium text-[#60A5FA]">Understanding Your Power Sources</AccordionTrigger>
+            <AccordionContent className="text-sm space-y-4">
               <p>Your Smart RV intelligently manages power from four sources to keep you comfortable on the road.</p>
               <p>The solar panels on your roof automatically generate electricity whenever daylight hits them, even on cloudy days.</p>
               <p>Your house batteries store this power so you can run appliances when boondocking or overnight.</p>
@@ -33,8 +33,8 @@ const PowerTab = () => {
           </AccordionItem>
 
           <AccordionItem value="system" className="border-gray-700">
-            <AccordionTrigger className="text-xl text-rose-300 hover:text-rose-400">How Your Smart Power System Works</AccordionTrigger>
-            <AccordionContent className="text-lg space-y-4">
+            <AccordionTrigger className="text-lg font-medium text-[#60A5FA]">How Your Smart Power System Works</AccordionTrigger>
+            <AccordionContent className="text-sm space-y-4">
               <p>The system constantly monitors how much power each appliance uses and shows this on your dashboard in simple terms – like "Coffee Maker: 900 watts for 5 minutes."</p>
               <p>When multiple appliances run at once, the system prevents blown fuses by managing which ones can operate together.</p>
               <p>You'll receive clear notifications like "AC and Microwave cannot run together on 30-amp service" to prevent power issues.</p>
@@ -43,8 +43,8 @@ const PowerTab = () => {
           </AccordionItem>
 
           <AccordionItem value="troubleshooting" className="border-gray-700">
-            <AccordionTrigger className="text-xl text-rose-300 hover:text-rose-400">When Things Aren't Working Right</AccordionTrigger>
-            <AccordionContent className="text-lg space-y-4">
+            <AccordionTrigger className="text-lg font-medium text-[#60A5FA]">When Things Aren't Working Right</AccordionTrigger>
+            <AccordionContent className="text-sm space-y-4">
               <p>If your batteries aren't charging from solar: First check if your panels are dirty – even light dust can reduce power by 30%.</p>
               <p>If you plug into shore power but have no electricity: Verify your power cord is fully inserted and locked at both ends.</p>
               <p>When your generator won't start automatically: Check that both the fuel tank is at least quarter full and the generator switch shows "Auto."</p>
@@ -53,16 +53,28 @@ const PowerTab = () => {
           </AccordionItem>
 
           <AccordionItem value="important" className="border-gray-700">
-            <AccordionTrigger className="text-xl text-rose-300 hover:text-rose-400">Important Things to Know</AccordionTrigger>
-            <AccordionContent className="text-lg space-y-4">
-              <p>Your residential RV refrigerator uses about 2.7 kilowatt-hours per day – the biggest power consumer in most RVs.</p>
-              <p>The air conditioner draws 1,500 watts while running, which is why you get about 3 hours of runtime on battery power.</p>
-              <p>Charging batteries from shore power takes about 4 hours for a full charge from 20%, but only 2 hours from 50%.</p>
-              <p>Your generator automatically starts when batteries hit 20% if enabled – this prevents damaging them from getting too low.</p>
-              <p>The system prioritizes shore power when available, then solar, then generator power, to minimize fuel use and maximize efficiency.</p>
-              <p>Using solar power on sunny days can fully maintain your refrigerator and basic systems without touching your battery reserves.</p>
-              <p>LED lights throughout your RV use minimal power – typically just 2-3 watts per bulb, so you can leave them on without worry.</p>
-              <p>The system sends clear notifications before power becomes critical: "Battery at 30% - 3 hours of power remaining at current usage."</p>
+            <AccordionTrigger className="text-lg font-medium text-[#60A5FA]">Important Things to Know</AccordionTrigger>
+            <AccordionContent className="text-sm space-y-4">
+              <div className="space-y-2">
+                <div className="flex items-center gap-2 text-blue-200 mb-3">
+                  <span>Power Usage: 2.7 kWh/day</span>
+                </div>
+                <p>Your residential RV refrigerator uses about 2.7 kilowatt-hours per day – the biggest power consumer in most RVs.</p>
+              </div>
+
+              <div className="space-y-2">
+                <div className="flex items-center gap-2 text-blue-200 mb-3">
+                  <span>AC Power Draw: 1,500W</span>
+                </div>
+                <p>The air conditioner draws 1,500 watts while running, which is why you get about 3 hours of runtime on battery power.</p>
+              </div>
+
+              <div className="space-y-2">
+                <div className="flex items-center gap-2 text-blue-200 mb-3">
+                  <span>Charging Time: 2-4 hours</span>
+                </div>
+                <p>Charging batteries from shore power takes about 4 hours for a full charge from 20%, but only 2 hours from 50%.</p>
+              </div>
             </AccordionContent>
           </AccordionItem>
         </Accordion>

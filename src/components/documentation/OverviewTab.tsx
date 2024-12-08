@@ -15,11 +15,11 @@ import {
 const OverviewTab = () => {
   return (
     <Card className="bg-gray-800/90 border-gray-700">
-      <CardHeader className="space-y-4">
+      <CardHeader className="space-y-2">
         <CardTitle className="text-xl font-medium text-[#60A5FA]">Smart RV System Guide</CardTitle>
         <CardDescription className="text-sm text-gray-300">Core Systems Overview</CardDescription>
       </CardHeader>
-      <CardContent className="space-y-8 text-sm text-gray-300">
+      <CardContent className="space-y-4 text-sm text-gray-300">
         <Accordion type="single" collapsible className="space-y-4">
           <AccordionItem value="core-systems" className="border-b-gray-700">
             <AccordionTrigger className="text-lg font-medium text-[#60A5FA]">

@@ -55,7 +55,7 @@ const MaintenanceTab = () => {
             <AccordionTrigger className="text-lg font-medium text-[#60A5FA]">Quick Troubleshooting Guide</AccordionTrigger>
             <AccordionContent className="space-y-4">
               <div>
-                <h4 className="font-semibold text-amber-300 mb-2">If Your System Won't Connect</h4>
+                <h4 className="font-semibold text-blue-200 mb-2">If Your System Won't Connect</h4>
                 <div className="space-y-2">
                   <p>Start by checking if your router has power and you're within range of the WiFi signal.</p>
                   <p>Verify that your network password is entered correctly in the system settings.</p>
@@ -64,7 +64,7 @@ const MaintenanceTab = () => {
               </div>
 
               <div>
-                <h4 className="font-semibold text-amber-300 mb-2">For System Performance Issues</h4>
+                <h4 className="font-semibold text-blue-200 mb-2">For System Performance Issues</h4>
                 <div className="space-y-2">
                   <p>When your system seems slow, first check the available storage space on your dashboard.</p>
                   <p>Review which processes are currently running and using system resources.</p>
@@ -74,7 +74,7 @@ const MaintenanceTab = () => {
               </div>
 
               <div>
-                <h4 className="font-semibold text-amber-300 mb-2">Power Related Problems</h4>
+                <h4 className="font-semibold text-blue-200 mb-2">Power Related Problems</h4>
                 <div className="space-y-2">
                   <p>First, confirm that your shore power connection is secure and providing consistent power.</p>
                   <p>Examine all battery connections for signs of corrosion or loose fittings.</p>
