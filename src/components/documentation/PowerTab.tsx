@@ -16,14 +16,14 @@ const PowerTab = () => {
   return (
     <Card className="bg-gray-800/90 border-gray-700">
       <CardHeader>
-        <CardTitle className="text-xl font-medium text-[#60A5FA]">Smart RV Power Management</CardTitle>
+        <CardTitle className="text-[1.75rem] font-medium text-gray-200">Smart RV Power Management</CardTitle>
         <CardDescription className="text-sm text-gray-300">Power system specifications and optimization</CardDescription>
       </CardHeader>
-      <CardContent className="space-y-6 text-sm text-gray-300">
+      <CardContent className="space-y-6">
         <Accordion type="single" collapsible className="w-full">
           <AccordionItem value="sources" className="border-gray-700">
-            <AccordionTrigger className="text-lg font-medium text-[#60A5FA]">Understanding Your Power Sources</AccordionTrigger>
-            <AccordionContent className="text-sm space-y-4">
+            <AccordionTrigger className="text-lg font-medium text-gray-200">Understanding Your Power Sources</AccordionTrigger>
+            <AccordionContent className="text-sm space-y-4 text-gray-300">
               <p>Your Smart RV intelligently manages power from four sources to keep you comfortable on the road.</p>
               <p>The solar panels on your roof automatically generate electricity whenever daylight hits them, even on cloudy days.</p>
               <p>Your house batteries store this power so you can run appliances when boondocking or overnight.</p>

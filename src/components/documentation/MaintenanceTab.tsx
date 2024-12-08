@@ -16,14 +16,14 @@ const MaintenanceTab = () => {
   return (
     <Card className="bg-gray-800/90 border-gray-700">
       <CardHeader>
-        <CardTitle className="text-xl font-medium text-[#60A5FA]">RV System Maintenance Guide</CardTitle>
+        <CardTitle className="text-[1.75rem] font-medium text-gray-200">RV System Maintenance Guide</CardTitle>
         <CardDescription className="text-sm text-gray-300">Comprehensive maintenance procedures and troubleshooting steps</CardDescription>
       </CardHeader>
-      <CardContent className="space-y-6 text-sm text-gray-300">
+      <CardContent className="space-y-6">
         <Accordion type="single" collapsible className="w-full">
           <AccordionItem value="monthly" className="border-gray-700">
-            <AccordionTrigger className="text-lg font-medium text-[#60A5FA]">Monthly Maintenance</AccordionTrigger>
-            <AccordionContent className="space-y-4">
+            <AccordionTrigger className="text-lg font-medium text-gray-200">Monthly Maintenance</AccordionTrigger>
+            <AccordionContent className="space-y-4 text-sm text-gray-300">
               <p>Your Smart RV system runs automatic diagnostics on the first of each month to protect your investment.</p>
               <p>The comprehensive scan evaluates battery health, monitors storage usage, and verifies network stability.</p>
               <p>The system checks temperature sensor calibration and analyzes error logs to prevent future issues.</p>
@@ -32,8 +32,8 @@ const MaintenanceTab = () => {
           </AccordionItem>
 
           <AccordionItem value="quarterly" className="border-gray-700">
-            <AccordionTrigger className="text-lg font-medium text-[#60A5FA]">Quarterly Tasks</AccordionTrigger>
-            <AccordionContent className="space-y-4">
+            <AccordionTrigger className="text-lg font-medium text-gray-200">Quarterly Tasks</AccordionTrigger>
+            <AccordionContent className="space-y-4 text-sm text-gray-300">
               <p>Our system will notify you when it's time for the quarterly software update, delivering new features and security enhancements.</p>
               <p>These updates are designed to improve your RV experience while maintaining system stability.</p>
               <p>The automated backup utility safeguards your network configurations, dashboard preferences, and travel logs.</p>
@@ -42,8 +42,8 @@ const MaintenanceTab = () => {
           </AccordionItem>
 
           <AccordionItem value="yearly" className="border-gray-700">
-            <AccordionTrigger className="text-lg font-medium text-[#60A5FA]">Yearly Service Requirements</AccordionTrigger>
-            <AccordionContent className="space-y-4">
+            <AccordionTrigger className="text-lg font-medium text-gray-200">Yearly Service Requirements</AccordionTrigger>
+            <AccordionContent className="space-y-4 text-sm text-gray-300">
               <p>Your annual hardware inspection should be completed by an authorized service center to maintain optimal performance.</p>
               <p>Technicians will test all physical connections, verify antenna performance, and assess battery capacity.</p>
               <p>The inspection includes a thorough evaluation of the cooling system and sensor calibration.</p>
@@ -52,10 +52,10 @@ const MaintenanceTab = () => {
           </AccordionItem>
 
           <AccordionItem value="troubleshooting" className="border-gray-700">
-            <AccordionTrigger className="text-lg font-medium text-[#60A5FA]">Quick Troubleshooting Guide</AccordionTrigger>
-            <AccordionContent className="space-y-4">
+            <AccordionTrigger className="text-lg font-medium text-gray-200">Quick Troubleshooting Guide</AccordionTrigger>
+            <AccordionContent className="space-y-4 text-sm text-gray-300">
               <div>
-                <h4 className="font-semibold text-blue-200 mb-2">If Your System Won't Connect</h4>
+                <h4 className="font-semibold text-gray-200 mb-2">If Your System Won't Connect</h4>
                 <div className="space-y-2">
                   <p>Start by checking if your router has power and you're within range of the WiFi signal.</p>
                   <p>Verify that your network password is entered correctly in the system settings.</p>
@@ -64,7 +64,7 @@ const MaintenanceTab = () => {
               </div>
 
               <div>
-                <h4 className="font-semibold text-blue-200 mb-2">For System Performance Issues</h4>
+                <h4 className="font-semibold text-gray-200 mb-2">For System Performance Issues</h4>
                 <div className="space-y-2">
                   <p>When your system seems slow, first check the available storage space on your dashboard.</p>
                   <p>Review which processes are currently running and using system resources.</p>
@@ -74,7 +74,7 @@ const MaintenanceTab = () => {
               </div>
 
               <div>
-                <h4 className="font-semibold text-blue-200 mb-2">Power Related Problems</h4>
+                <h4 className="font-semibold text-gray-200 mb-2">Power Related Problems</h4>
                 <div className="space-y-2">
                   <p>First, confirm that your shore power connection is secure and providing consistent power.</p>
                   <p>Examine all battery connections for signs of corrosion or loose fittings.</p>
@@ -83,7 +83,7 @@ const MaintenanceTab = () => {
                 </div>
               </div>
 
-              <p className="text-blue-200 mt-4">
+              <p className="text-gray-200 mt-4">
                 If you've tried these steps and still experience issues, contact your SMART RV technical support team.
               </p>
             </AccordionContent>
