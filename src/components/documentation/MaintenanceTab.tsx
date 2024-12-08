@@ -16,14 +16,14 @@ const MaintenanceTab = () => {
   return (
     <Card className="bg-gray-800/90 border-gray-700">
       <CardHeader>
-        <CardTitle className="text-amber-400 text-2xl">RV System Maintenance Guide</CardTitle>
-        <CardDescription className="text-blue-100 font-medium text-lg">Comprehensive maintenance procedures and troubleshooting steps</CardDescription>
+        <CardTitle className="text-xl font-medium text-[#60A5FA]">RV System Maintenance Guide</CardTitle>
+        <CardDescription className="text-sm text-gray-300">Comprehensive maintenance procedures and troubleshooting steps</CardDescription>
       </CardHeader>
-      <CardContent className="space-y-6 text-gray-100">
+      <CardContent className="space-y-6 text-sm text-gray-300">
         <Accordion type="single" collapsible className="w-full">
           <AccordionItem value="monthly" className="border-gray-700">
-            <AccordionTrigger className="text-xl text-amber-300 hover:text-amber-400">Monthly Maintenance</AccordionTrigger>
-            <AccordionContent className="text-lg space-y-4">
+            <AccordionTrigger className="text-lg font-medium text-[#60A5FA]">Monthly Maintenance</AccordionTrigger>
+            <AccordionContent className="space-y-4">
               <p>Your Smart RV system runs automatic diagnostics on the first of each month to protect your investment.</p>
               <p>The comprehensive scan evaluates battery health, monitors storage usage, and verifies network stability.</p>
               <p>The system checks temperature sensor calibration and analyzes error logs to prevent future issues.</p>
@@ -32,8 +32,8 @@ const MaintenanceTab = () => {
           </AccordionItem>
 
           <AccordionItem value="quarterly" className="border-gray-700">
-            <AccordionTrigger className="text-xl text-amber-300 hover:text-amber-400">Quarterly Tasks</AccordionTrigger>
-            <AccordionContent className="text-lg space-y-4">
+            <AccordionTrigger className="text-lg font-medium text-[#60A5FA]">Quarterly Tasks</AccordionTrigger>
+            <AccordionContent className="space-y-4">
               <p>Our system will notify you when it's time for the quarterly software update, delivering new features and security enhancements.</p>
               <p>These updates are designed to improve your RV experience while maintaining system stability.</p>
               <p>The automated backup utility safeguards your network configurations, dashboard preferences, and travel logs.</p>
@@ -42,8 +42,8 @@ const MaintenanceTab = () => {
           </AccordionItem>
 
           <AccordionItem value="yearly" className="border-gray-700">
-            <AccordionTrigger className="text-xl text-amber-300 hover:text-amber-400">Yearly Service Requirements</AccordionTrigger>
-            <AccordionContent className="text-lg space-y-4">
+            <AccordionTrigger className="text-lg font-medium text-[#60A5FA]">Yearly Service Requirements</AccordionTrigger>
+            <AccordionContent className="space-y-4">
               <p>Your annual hardware inspection should be completed by an authorized service center to maintain optimal performance.</p>
               <p>Technicians will test all physical connections, verify antenna performance, and assess battery capacity.</p>
               <p>The inspection includes a thorough evaluation of the cooling system and sensor calibration.</p>
@@ -52,8 +52,8 @@ const MaintenanceTab = () => {
           </AccordionItem>
 
           <AccordionItem value="troubleshooting" className="border-gray-700">
-            <AccordionTrigger className="text-xl text-amber-300 hover:text-amber-400">Quick Troubleshooting Guide</AccordionTrigger>
-            <AccordionContent className="text-lg space-y-6">
+            <AccordionTrigger className="text-lg font-medium text-[#60A5FA]">Quick Troubleshooting Guide</AccordionTrigger>
+            <AccordionContent className="space-y-4">
               <div>
                 <h4 className="font-semibold text-amber-300 mb-2">If Your System Won't Connect</h4>
                 <div className="space-y-2">

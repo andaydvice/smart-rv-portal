@@ -16,14 +16,14 @@ const TechnicalTab = () => {
   return (
     <Card className="bg-gray-800/90 border-gray-700">
       <CardHeader>
-        <CardTitle className="text-emerald-400 text-2xl">Smart RV System Specifications</CardTitle>
-        <CardDescription className="text-blue-100 font-medium text-lg">Detailed technical specifications and troubleshooting guide</CardDescription>
+        <CardTitle className="text-xl font-medium text-[#60A5FA]">Smart RV System Specifications</CardTitle>
+        <CardDescription className="text-sm text-gray-300">Detailed technical specifications and troubleshooting guide</CardDescription>
       </CardHeader>
       <CardContent>
         <Accordion type="single" collapsible className="space-y-4">
           <AccordionItem value="core-hardware" className="border-gray-700">
-            <AccordionTrigger className="text-2xl font-semibold text-emerald-300">Core Hardware</AccordionTrigger>
-            <AccordionContent className="space-y-6 text-gray-100">
+            <AccordionTrigger className="text-lg font-medium text-[#60A5FA]">Core Hardware</AccordionTrigger>
+            <AccordionContent className="space-y-4 text-sm text-gray-300">
               <p className="text-lg leading-relaxed">
                 The system is powered by a Dual-core ARM processor running at 2.0 GHz per core, specifically designed for RV operations in extreme temperatures from -20°C to 60°C.
               </p>
@@ -52,8 +52,8 @@ const TechnicalTab = () => {
           </AccordionItem>
 
           <AccordionItem value="software-features" className="border-gray-700">
-            <AccordionTrigger className="text-2xl font-semibold text-emerald-300">Software Features</AccordionTrigger>
-            <AccordionContent className="space-y-6 text-gray-100">
+            <AccordionTrigger className="text-lg font-medium text-[#60A5FA]">Software Features</AccordionTrigger>
+            <AccordionContent className="space-y-4 text-sm text-gray-300">
               <p className="text-lg leading-relaxed">
                 The custom RV operating system is built on a Linux foundation, specifically engineered for RV operations.
               </p>
@@ -76,8 +76,8 @@ const TechnicalTab = () => {
           </AccordionItem>
 
           <AccordionItem value="troubleshooting" className="border-gray-700">
-            <AccordionTrigger className="text-2xl font-semibold text-emerald-300">Common Issues & Troubleshooting</AccordionTrigger>
-            <AccordionContent className="space-y-6 text-gray-100">
+            <AccordionTrigger className="text-lg font-medium text-[#60A5FA]">Common Issues & Troubleshooting</AccordionTrigger>
+            <AccordionContent className="space-y-4 text-sm text-gray-300">
               <p className="text-lg leading-relaxed">
                 If the system isn't connecting to WiFi, first verify that your router is within range and powered on.
               </p>
@@ -97,8 +97,8 @@ const TechnicalTab = () => {
           </AccordionItem>
 
           <AccordionItem value="emergency" className="border-gray-700">
-            <AccordionTrigger className="text-2xl font-semibold text-emerald-300">Emergency Recovery</AccordionTrigger>
-            <AccordionContent className="space-y-6 text-gray-100">
+            <AccordionTrigger className="text-lg font-medium text-[#60A5FA]">Emergency Recovery</AccordionTrigger>
+            <AccordionContent className="space-y-4 text-sm text-gray-300">
               <p className="text-lg leading-relaxed">
                 If the system won't boot, press and hold the recovery button for 10 seconds to enter safe mode.
               </p>
