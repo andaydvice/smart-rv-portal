@@ -14,15 +14,15 @@ import {
 
 const OverviewTab = () => {
   return (
-    <Card className="bg-gray-800/90 border-gray-700">
+    <Card className="bg-gray-800/50 border-gray-700">
       <CardHeader className="space-y-2">
-        <CardTitle className="text-[1.75rem] font-medium text-gray-200">Smart RV System Guide</CardTitle>
+        <CardTitle className="text-[1.75rem] font-medium text-[#60A5FA]">Smart RV System Guide</CardTitle>
         <CardDescription className="text-sm text-gray-300">Core Systems Overview</CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
         <Accordion type="single" collapsible className="space-y-4">
           <AccordionItem value="core-systems" className="border-b-gray-700">
-            <AccordionTrigger className="text-lg font-medium text-gray-200">
+            <AccordionTrigger className="text-lg font-medium text-[#60A5FA]">
               Core Systems
             </AccordionTrigger>
             <AccordionContent className="space-y-4 text-sm text-gray-300">
@@ -39,7 +39,7 @@ const OverviewTab = () => {
           </AccordionItem>
 
           <AccordionItem value="key-features" className="border-b-gray-700">
-            <AccordionTrigger className="text-lg font-medium text-gray-200">
+            <AccordionTrigger className="text-lg font-medium text-[#60A5FA]">
               Key Features to Monitor
             </AccordionTrigger>
             <AccordionContent className="space-y-4 text-sm text-gray-300">
@@ -56,7 +56,7 @@ const OverviewTab = () => {
           </AccordionItem>
 
           <AccordionItem value="system-alerts" className="border-b-gray-700">
-            <AccordionTrigger className="text-lg font-medium text-gray-200">
+            <AccordionTrigger className="text-lg font-medium text-[#60A5FA]">
               Common System Alerts
             </AccordionTrigger>
             <AccordionContent className="space-y-4 text-sm text-gray-300">

@@ -14,9 +14,9 @@ import {
 
 const PowerTab = () => {
   return (
-    <Card className="bg-gray-800/90 border-gray-700">
+    <Card className="bg-gray-800/50 border-gray-700">
       <CardHeader>
-        <CardTitle className="text-[1.75rem] font-medium text-gray-200">Smart RV Power Management</CardTitle>
+        <CardTitle className="text-[1.75rem] font-medium text-[#60A5FA]">Smart RV Power Management</CardTitle>
         <CardDescription className="text-sm text-gray-300">Power system specifications and optimization</CardDescription>
       </CardHeader>
       <CardContent className="space-y-6">
