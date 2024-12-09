@@ -1,4 +1,4 @@
-import { Cpu } from "lucide-react";
+import { Cpu, Server, Code, AlertCircle, Shield } from "lucide-react";
 import {
   Card,
   CardContent,
@@ -28,7 +28,14 @@ const TechnicalTab = () => {
       <CardContent>
         <Accordion type="single" collapsible className="space-y-4">
           <AccordionItem value="core-hardware" className="border-gray-700">
-            <AccordionTrigger className="text-lg font-medium text-[#60A5FA]">Core Hardware</AccordionTrigger>
+            <AccordionTrigger className="hover:no-underline">
+              <div className="flex items-center gap-2">
+                <Server className="w-4 h-4 text-[#60A5FA]" />
+                <span className="text-[16px] leading-[24px] font-medium text-[#60A5FA] font-['Inter']">
+                  Core Hardware
+                </span>
+              </div>
+            </AccordionTrigger>
             <AccordionContent className="space-y-4 text-sm text-gray-300">
               <p>
                 The system is powered by a Dual-core ARM processor running at 2.0 GHz per core, specifically designed for RV operations in extreme temperatures from -20°C to 60°C.
@@ -58,7 +65,14 @@ const TechnicalTab = () => {
           </AccordionItem>
 
           <AccordionItem value="software-features" className="border-gray-700">
-            <AccordionTrigger className="text-lg font-medium text-[#60A5FA]">Software Features</AccordionTrigger>
+            <AccordionTrigger className="hover:no-underline">
+              <div className="flex items-center gap-2">
+                <Code className="w-4 h-4 text-[#60A5FA]" />
+                <span className="text-[16px] leading-[24px] font-medium text-[#60A5FA] font-['Inter']">
+                  Software Features
+                </span>
+              </div>
+            </AccordionTrigger>
             <AccordionContent className="space-y-4 text-sm text-gray-300">
               <p>
                 The custom RV operating system is built on a Linux foundation, specifically engineered for RV operations.
@@ -82,7 +96,14 @@ const TechnicalTab = () => {
           </AccordionItem>
 
           <AccordionItem value="troubleshooting" className="border-gray-700">
-            <AccordionTrigger className="text-lg font-medium text-[#60A5FA]">Common Issues & Troubleshooting</AccordionTrigger>
+            <AccordionTrigger className="hover:no-underline">
+              <div className="flex items-center gap-2">
+                <AlertCircle className="w-4 h-4 text-[#60A5FA]" />
+                <span className="text-[16px] leading-[24px] font-medium text-[#60A5FA] font-['Inter']">
+                  Common Issues & Troubleshooting
+                </span>
+              </div>
+            </AccordionTrigger>
             <AccordionContent className="space-y-4 text-sm text-gray-300">
               <p>
                 If the system isn't connecting to WiFi, first verify that your router is within range and powered on.
@@ -103,7 +124,14 @@ const TechnicalTab = () => {
           </AccordionItem>
 
           <AccordionItem value="emergency" className="border-gray-700">
-            <AccordionTrigger className="text-lg font-medium text-[#60A5FA]">Emergency Recovery</AccordionTrigger>
+            <AccordionTrigger className="hover:no-underline">
+              <div className="flex items-center gap-2">
+                <Shield className="w-4 h-4 text-[#60A5FA]" />
+                <span className="text-[16px] leading-[24px] font-medium text-[#60A5FA] font-['Inter']">
+                  Emergency Recovery
+                </span>
+              </div>
+            </AccordionTrigger>
             <AccordionContent className="space-y-4 text-sm text-gray-300">
               <p>
                 If the system won't boot, press and hold the recovery button for 10 seconds to enter safe mode.

@@ -1,4 +1,4 @@
-import { Zap } from "lucide-react";
+import { Zap, Battery, CircuitBoard, AlertCircle, Info } from "lucide-react";
 import {
   Card,
   CardContent,
@@ -28,7 +28,14 @@ const PowerTab = () => {
       <CardContent className="space-y-6">
         <Accordion type="single" collapsible className="w-full">
           <AccordionItem value="sources" className="border-gray-700">
-            <AccordionTrigger className="text-lg font-medium text-[#60A5FA]">Understanding Your Power Sources</AccordionTrigger>
+            <AccordionTrigger className="hover:no-underline">
+              <div className="flex items-center gap-2">
+                <Battery className="w-4 h-4 text-[#60A5FA]" />
+                <span className="text-[16px] leading-[24px] font-medium text-[#60A5FA] font-['Inter']">
+                  Understanding Your Power Sources
+                </span>
+              </div>
+            </AccordionTrigger>
             <AccordionContent className="text-sm space-y-4 text-gray-300">
               <p>Your Smart RV intelligently manages power from four sources to keep you comfortable on the road.</p>
               <p>The solar panels on your roof automatically generate electricity whenever daylight hits them, even on cloudy days.</p>
@@ -39,7 +46,14 @@ const PowerTab = () => {
           </AccordionItem>
 
           <AccordionItem value="system" className="border-gray-700">
-            <AccordionTrigger className="text-lg font-medium text-[#60A5FA]">How Your Smart Power System Works</AccordionTrigger>
+            <AccordionTrigger className="hover:no-underline">
+              <div className="flex items-center gap-2">
+                <CircuitBoard className="w-4 h-4 text-[#60A5FA]" />
+                <span className="text-[16px] leading-[24px] font-medium text-[#60A5FA] font-['Inter']">
+                  How Your Smart Power System Works
+                </span>
+              </div>
+            </AccordionTrigger>
             <AccordionContent className="text-sm space-y-4">
               <p>The system constantly monitors how much power each appliance uses and shows this on your dashboard in simple terms – like "Coffee Maker: 900 watts for 5 minutes."</p>
               <p>When multiple appliances run at once, the system prevents blown fuses by managing which ones can operate together.</p>
@@ -49,7 +63,14 @@ const PowerTab = () => {
           </AccordionItem>
 
           <AccordionItem value="troubleshooting" className="border-gray-700">
-            <AccordionTrigger className="text-lg font-medium text-[#60A5FA]">When Things Aren't Working Right</AccordionTrigger>
+            <AccordionTrigger className="hover:no-underline">
+              <div className="flex items-center gap-2">
+                <AlertCircle className="w-4 h-4 text-[#60A5FA]" />
+                <span className="text-[16px] leading-[24px] font-medium text-[#60A5FA] font-['Inter']">
+                  When Things Aren't Working Right
+                </span>
+              </div>
+            </AccordionTrigger>
             <AccordionContent className="text-sm space-y-4">
               <p>If your batteries aren't charging from solar: First check if your panels are dirty – even light dust can reduce power by 30%.</p>
               <p>If you plug into shore power but have no electricity: Verify your power cord is fully inserted and locked at both ends.</p>
@@ -59,7 +80,14 @@ const PowerTab = () => {
           </AccordionItem>
 
           <AccordionItem value="important" className="border-gray-700">
-            <AccordionTrigger className="text-lg font-medium text-[#60A5FA]">Important Things to Know</AccordionTrigger>
+            <AccordionTrigger className="hover:no-underline">
+              <div className="flex items-center gap-2">
+                <Info className="w-4 h-4 text-[#60A5FA]" />
+                <span className="text-[16px] leading-[24px] font-medium text-[#60A5FA] font-['Inter']">
+                  Important Things to Know
+                </span>
+              </div>
+            </AccordionTrigger>
             <AccordionContent className="text-sm space-y-4">
               <div className="space-y-2">
                 <div className="flex items-center gap-2 text-blue-200 mb-3">

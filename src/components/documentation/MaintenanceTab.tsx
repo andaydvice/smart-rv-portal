@@ -1,4 +1,4 @@
-import { Wrench } from "lucide-react";
+import { Wrench, Calendar, Repeat, Calendar as CalendarIcon, HelpCircle } from "lucide-react";
 import {
   Card,
   CardContent,
@@ -28,7 +28,14 @@ const MaintenanceTab = () => {
       <CardContent className="space-y-6">
         <Accordion type="single" collapsible className="w-full">
           <AccordionItem value="monthly" className="border-gray-700">
-            <AccordionTrigger className="text-lg font-medium text-[#60A5FA]">Monthly Maintenance</AccordionTrigger>
+            <AccordionTrigger className="hover:no-underline">
+              <div className="flex items-center gap-2">
+                <Calendar className="w-4 h-4 text-[#60A5FA]" />
+                <span className="text-[16px] leading-[24px] font-medium text-[#60A5FA] font-['Inter']">
+                  Monthly Maintenance
+                </span>
+              </div>
+            </AccordionTrigger>
             <AccordionContent className="space-y-4 text-sm text-gray-300">
               <p>Your Smart RV system runs automatic diagnostics on the first of each month to protect your investment.</p>
               <p>The comprehensive scan evaluates battery health, monitors storage usage, and verifies network stability.</p>
@@ -38,7 +45,14 @@ const MaintenanceTab = () => {
           </AccordionItem>
 
           <AccordionItem value="quarterly" className="border-gray-700">
-            <AccordionTrigger className="text-lg font-medium text-[#60A5FA]">Quarterly Tasks</AccordionTrigger>
+            <AccordionTrigger className="hover:no-underline">
+              <div className="flex items-center gap-2">
+                <Repeat className="w-4 h-4 text-[#60A5FA]" />
+                <span className="text-[16px] leading-[24px] font-medium text-[#60A5FA] font-['Inter']">
+                  Quarterly Tasks
+                </span>
+              </div>
+            </AccordionTrigger>
             <AccordionContent className="space-y-4 text-sm text-gray-300">
               <p>Our system will notify you when it's time for the quarterly software update, delivering new features and security enhancements.</p>
               <p>These updates are designed to improve your RV experience while maintaining system stability.</p>
@@ -48,7 +62,14 @@ const MaintenanceTab = () => {
           </AccordionItem>
 
           <AccordionItem value="yearly" className="border-gray-700">
-            <AccordionTrigger className="text-lg font-medium text-[#60A5FA]">Yearly Service Requirements</AccordionTrigger>
+            <AccordionTrigger className="hover:no-underline">
+              <div className="flex items-center gap-2">
+                <CalendarIcon className="w-4 h-4 text-[#60A5FA]" />
+                <span className="text-[16px] leading-[24px] font-medium text-[#60A5FA] font-['Inter']">
+                  Yearly Service Requirements
+                </span>
+              </div>
+            </AccordionTrigger>
             <AccordionContent className="space-y-4 text-sm text-gray-300">
               <p>Your annual hardware inspection should be completed by an authorized service center to maintain optimal performance.</p>
               <p>Technicians will test all physical connections, verify antenna performance, and assess battery capacity.</p>
@@ -58,7 +79,14 @@ const MaintenanceTab = () => {
           </AccordionItem>
 
           <AccordionItem value="troubleshooting" className="border-gray-700">
-            <AccordionTrigger className="text-lg font-medium text-[#60A5FA]">Quick Troubleshooting Guide</AccordionTrigger>
+            <AccordionTrigger className="hover:no-underline">
+              <div className="flex items-center gap-2">
+                <HelpCircle className="w-4 h-4 text-[#60A5FA]" />
+                <span className="text-[16px] leading-[24px] font-medium text-[#60A5FA] font-['Inter']">
+                  Quick Troubleshooting Guide
+                </span>
+              </div>
+            </AccordionTrigger>
             <AccordionContent className="space-y-4 text-sm text-gray-300">
               <div>
                 <h4 className="font-semibold text-gray-200 mb-2">If Your System Won't Connect</h4>
