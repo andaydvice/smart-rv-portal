@@ -22,7 +22,7 @@ const TechnicalTab = () => {
       <CardContent>
         <Accordion type="single" collapsible className="space-y-4">
           <AccordionItem value="core-hardware" className="border-gray-700">
-            <AccordionTrigger className="text-lg font-medium text-gray-200">Core Hardware</AccordionTrigger>
+            <AccordionTrigger className="text-lg font-medium text-[#60A5FA]">Core Hardware</AccordionTrigger>
             <AccordionContent className="space-y-4 text-sm text-gray-300">
               <p>
                 The system is powered by a Dual-core ARM processor running at 2.0 GHz per core, specifically designed for RV operations in extreme temperatures from -20°C to 60°C.
@@ -52,7 +52,7 @@ const TechnicalTab = () => {
           </AccordionItem>
 
           <AccordionItem value="software-features" className="border-gray-700">
-            <AccordionTrigger className="text-lg font-medium text-gray-200">Software Features</AccordionTrigger>
+            <AccordionTrigger className="text-lg font-medium text-[#60A5FA]">Software Features</AccordionTrigger>
             <AccordionContent className="space-y-4 text-sm text-gray-300">
               <p>
                 The custom RV operating system is built on a Linux foundation, specifically engineered for RV operations.
@@ -76,7 +76,7 @@ const TechnicalTab = () => {
           </AccordionItem>
 
           <AccordionItem value="troubleshooting" className="border-gray-700">
-            <AccordionTrigger className="text-lg font-medium text-gray-200">Common Issues & Troubleshooting</AccordionTrigger>
+            <AccordionTrigger className="text-lg font-medium text-[#60A5FA]">Common Issues & Troubleshooting</AccordionTrigger>
             <AccordionContent className="space-y-4 text-sm text-gray-300">
               <p>
                 If the system isn't connecting to WiFi, first verify that your router is within range and powered on.
@@ -97,7 +97,7 @@ const TechnicalTab = () => {
           </AccordionItem>
 
           <AccordionItem value="emergency" className="border-gray-700">
-            <AccordionTrigger className="text-lg font-medium text-gray-200">Emergency Recovery</AccordionTrigger>
+            <AccordionTrigger className="text-lg font-medium text-[#60A5FA]">Emergency Recovery</AccordionTrigger>
             <AccordionContent className="space-y-4 text-sm text-gray-300">
               <p>
                 If the system won't boot, press and hold the recovery button for 10 seconds to enter safe mode.

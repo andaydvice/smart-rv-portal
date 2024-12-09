@@ -22,7 +22,7 @@ const PowerTab = () => {
       <CardContent className="space-y-6">
         <Accordion type="single" collapsible className="w-full">
           <AccordionItem value="sources" className="border-gray-700">
-            <AccordionTrigger className="text-lg font-medium text-gray-200">Understanding Your Power Sources</AccordionTrigger>
+            <AccordionTrigger className="text-lg font-medium text-[#60A5FA]">Understanding Your Power Sources</AccordionTrigger>
             <AccordionContent className="text-sm space-y-4 text-gray-300">
               <p>Your Smart RV intelligently manages power from four sources to keep you comfortable on the road.</p>
               <p>The solar panels on your roof automatically generate electricity whenever daylight hits them, even on cloudy days.</p>

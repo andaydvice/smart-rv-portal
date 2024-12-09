@@ -22,7 +22,7 @@ const MaintenanceTab = () => {
       <CardContent className="space-y-6">
         <Accordion type="single" collapsible className="w-full">
           <AccordionItem value="monthly" className="border-gray-700">
-            <AccordionTrigger className="text-lg font-medium text-gray-200">Monthly Maintenance</AccordionTrigger>
+            <AccordionTrigger className="text-lg font-medium text-[#60A5FA]">Monthly Maintenance</AccordionTrigger>
             <AccordionContent className="space-y-4 text-sm text-gray-300">
               <p>Your Smart RV system runs automatic diagnostics on the first of each month to protect your investment.</p>
               <p>The comprehensive scan evaluates battery health, monitors storage usage, and verifies network stability.</p>
@@ -32,7 +32,7 @@ const MaintenanceTab = () => {
           </AccordionItem>
 
           <AccordionItem value="quarterly" className="border-gray-700">
-            <AccordionTrigger className="text-lg font-medium text-gray-200">Quarterly Tasks</AccordionTrigger>
+            <AccordionTrigger className="text-lg font-medium text-[#60A5FA]">Quarterly Tasks</AccordionTrigger>
             <AccordionContent className="space-y-4 text-sm text-gray-300">
               <p>Our system will notify you when it's time for the quarterly software update, delivering new features and security enhancements.</p>
               <p>These updates are designed to improve your RV experience while maintaining system stability.</p>
@@ -42,7 +42,7 @@ const MaintenanceTab = () => {
           </AccordionItem>
 
           <AccordionItem value="yearly" className="border-gray-700">
-            <AccordionTrigger className="text-lg font-medium text-gray-200">Yearly Service Requirements</AccordionTrigger>
+            <AccordionTrigger className="text-lg font-medium text-[#60A5FA]">Yearly Service Requirements</AccordionTrigger>
             <AccordionContent className="space-y-4 text-sm text-gray-300">
               <p>Your annual hardware inspection should be completed by an authorized service center to maintain optimal performance.</p>
               <p>Technicians will test all physical connections, verify antenna performance, and assess battery capacity.</p>
@@ -52,7 +52,7 @@ const MaintenanceTab = () => {
           </AccordionItem>
 
           <AccordionItem value="troubleshooting" className="border-gray-700">
-            <AccordionTrigger className="text-lg font-medium text-gray-200">Quick Troubleshooting Guide</AccordionTrigger>
+            <AccordionTrigger className="text-lg font-medium text-[#60A5FA]">Quick Troubleshooting Guide</AccordionTrigger>
             <AccordionContent className="space-y-4 text-sm text-gray-300">
               <div>
                 <h4 className="font-semibold text-gray-200 mb-2">If Your System Won't Connect</h4>
