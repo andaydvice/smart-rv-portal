@@ -12,12 +12,12 @@ const Documentation = () => {
   return (
     <>
       <Navbar />
-      <div className="min-h-screen bg-gray-900">
+      <div className="min-h-screen bg-[#131a2a]">
         <div className="container mx-auto px-4 py-8 -mt-32 relative z-10">
           <DocumentationHeader />
           
           <Tabs defaultValue="overview" className="space-y-8">
-            <TabsList className="bg-gray-800/50 p-2 mb-8">
+            <TabsList className="bg-[#091020] p-2 mb-8">
               <TabsTrigger 
                 value="overview" 
                 className="data-[state=active]:bg-[#60A5FA] data-[state=active]:text-white text-gray-300 hover:text-white font-semibold text-base px-6 py-3"

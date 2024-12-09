@@ -1,3 +1,4 @@
+import { Cpu } from "lucide-react";
 import {
   Card,
   CardContent,
@@ -14,9 +15,14 @@ import {
 
 const TechnicalTab = () => {
   return (
-    <Card className="bg-gray-800/50 border-gray-700">
+    <Card className="bg-[#091020] border-gray-700">
       <CardHeader>
-        <CardTitle className="text-[1.75rem] font-medium text-[#60A5FA]">Smart RV System Specifications</CardTitle>
+        <div className="flex items-center gap-2 mb-4">
+          <div className="p-2 rounded-full bg-blue-500/10 border border-blue-500/20">
+            <Cpu className="w-4 h-4 text-[#60A5FA]" />
+          </div>
+          <CardTitle className="text-[1.75rem] font-medium text-[#60A5FA]">Smart RV System Specifications</CardTitle>
+        </div>
         <CardDescription className="text-sm text-gray-300">Detailed technical specifications and troubleshooting guide</CardDescription>
       </CardHeader>
       <CardContent>
