@@ -1,4 +1,4 @@
-import { Book } from "lucide-react";
+import { Book, Server, Eye, Bell } from "lucide-react";
 import {
   Card,
   CardContent,
@@ -28,8 +28,13 @@ const OverviewTab = () => {
       <CardContent className="space-y-4">
         <Accordion type="single" collapsible className="space-y-4">
           <AccordionItem value="core-systems" className="border-b-gray-700">
-            <AccordionTrigger className="text-lg font-medium text-[#60A5FA]">
-              Core Systems
+            <AccordionTrigger className="hover:no-underline">
+              <div className="flex items-center gap-2">
+                <Server className="w-4 h-4 text-[#60A5FA]" />
+                <span className="text-[16px] leading-[24px] font-medium text-[#60A5FA] font-['Inter']">
+                  Core Systems
+                </span>
+              </div>
             </AccordionTrigger>
             <AccordionContent className="space-y-4 text-sm text-gray-300">
               <p>
@@ -45,8 +50,13 @@ const OverviewTab = () => {
           </AccordionItem>
 
           <AccordionItem value="key-features" className="border-b-gray-700">
-            <AccordionTrigger className="text-lg font-medium text-[#60A5FA]">
-              Key Features to Monitor
+            <AccordionTrigger className="hover:no-underline">
+              <div className="flex items-center gap-2">
+                <Eye className="w-4 h-4 text-[#60A5FA]" />
+                <span className="text-[16px] leading-[24px] font-medium text-[#60A5FA] font-['Inter']">
+                  Key Features to Monitor
+                </span>
+              </div>
             </AccordionTrigger>
             <AccordionContent className="space-y-4 text-sm text-gray-300">
               <p>
@@ -62,8 +72,13 @@ const OverviewTab = () => {
           </AccordionItem>
 
           <AccordionItem value="system-alerts" className="border-b-gray-700">
-            <AccordionTrigger className="text-lg font-medium text-[#60A5FA]">
-              Common System Alerts
+            <AccordionTrigger className="hover:no-underline">
+              <div className="flex items-center gap-2">
+                <Bell className="w-4 h-4 text-[#60A5FA]" />
+                <span className="text-[16px] leading-[24px] font-medium text-[#60A5FA] font-['Inter']">
+                  Common System Alerts
+                </span>
+              </div>
             </AccordionTrigger>
             <AccordionContent className="space-y-4 text-sm text-gray-300">
               <p>
