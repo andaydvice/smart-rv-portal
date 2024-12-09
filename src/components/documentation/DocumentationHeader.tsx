@@ -41,7 +41,7 @@ const DocumentationHeader = () => {
         <Link to="/documentation/complete">
           <Button 
             variant="outline" 
-            className="bg-transparent border-gray-300 text-[#60A5FA] hover:bg-gray-200/10 text-sm py-2 px-4"
+            className="bg-transparent border-gray-300 text-[#60A5FA] hover:text-[#60A5FA] hover:bg-gray-200/10 text-sm py-2 px-4"
           >
             View Complete System Documentation
             <ChevronRight className="ml-2 h-4 w-4" />
