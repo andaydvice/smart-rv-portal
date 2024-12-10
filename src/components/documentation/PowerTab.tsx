@@ -36,7 +36,7 @@ const PowerTab = () => {
                 </span>
               </div>
             </AccordionTrigger>
-            <AccordionContent className="text-sm space-y-4 text-gray-300">
+            <AccordionContent className="text-sm space-y-4 text-white">
               <p>Your Smart RV intelligently manages power from four sources to keep you comfortable on the road.</p>
               <p>The solar panels on your roof automatically generate electricity whenever daylight hits them, even on cloudy days.</p>
               <p>Your house batteries store this power so you can run appliances when boondocking or overnight.</p>
@@ -54,7 +54,7 @@ const PowerTab = () => {
                 </span>
               </div>
             </AccordionTrigger>
-            <AccordionContent className="text-sm space-y-4">
+            <AccordionContent className="text-sm space-y-4 text-white">
               <p>The system constantly monitors how much power each appliance uses and shows this on your dashboard in simple terms – like "Coffee Maker: 900 watts for 5 minutes."</p>
               <p>When multiple appliances run at once, the system prevents blown fuses by managing which ones can operate together.</p>
               <p>You'll receive clear notifications like "AC and Microwave cannot run together on 30-amp service" to prevent power issues.</p>
@@ -71,7 +71,7 @@ const PowerTab = () => {
                 </span>
               </div>
             </AccordionTrigger>
-            <AccordionContent className="text-sm space-y-4">
+            <AccordionContent className="text-sm space-y-4 text-white">
               <p>If your batteries aren't charging from solar: First check if your panels are dirty – even light dust can reduce power by 30%.</p>
               <p>If you plug into shore power but have no electricity: Verify your power cord is fully inserted and locked at both ends.</p>
               <p>When your generator won't start automatically: Check that both the fuel tank is at least quarter full and the generator switch shows "Auto."</p>
@@ -88,7 +88,7 @@ const PowerTab = () => {
                 </span>
               </div>
             </AccordionTrigger>
-            <AccordionContent className="text-sm space-y-4">
+            <AccordionContent className="text-sm space-y-4 text-white">
               <div className="space-y-2">
                 <div className="flex items-center gap-2 text-blue-200 mb-3">
                   <span>Power Usage: 2.7 kWh/day</span>
