@@ -23,7 +23,7 @@ const CompleteDocumentation = () => {
           <Link to="/documentation">
             <Button
               variant="outline"
-              className="bg-white/5 text-white border-white/20 hover:bg-white/10"
+              className="bg-white/5 text-white border-white/20 hover:bg-white/10 hover:text-white focus:text-white active:text-white"
             >
               <ArrowLeft className="w-4 h-4 mr-2" />
               Back to Documentation Overview
