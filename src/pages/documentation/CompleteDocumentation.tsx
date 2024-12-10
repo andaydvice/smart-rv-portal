@@ -11,7 +11,7 @@ import SecuritySection from "@/components/documentation/sections/SecuritySection
 
 const CompleteDocumentation = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800">
+    <div className="min-h-screen bg-[#131a2a]">
       <Navbar />
       <div className="container mx-auto px-4 pt-24 pb-16">
         <motion.div
@@ -23,7 +23,7 @@ const CompleteDocumentation = () => {
           <Link to="/documentation">
             <Button
               variant="outline"
-              className="bg-white/5 text-white border-white/20 hover:bg-white/10 hover:text-white focus:text-white active:text-white"
+              className="bg-white/5 text-[#60A5FA] border-white/20 hover:bg-white/10 hover:text-[#60A5FA] focus:text-[#60A5FA] active:text-[#60A5FA]"
             >
               <ArrowLeft className="w-4 h-4 mr-2" />
               Back to Documentation Overview
@@ -38,14 +38,14 @@ const CompleteDocumentation = () => {
             />
             <div className="absolute inset-0 bg-black/50 backdrop-blur-sm"></div>
             <div className="absolute inset-0 flex flex-col justify-center items-center text-center p-8">
-              <h1 className="text-3xl font-bold text-white mb-3">Complete System Documentation</h1>
+              <h1 className="text-3xl font-bold text-[#60A5FA] mb-3">Complete System Documentation</h1>
               <p className="text-base text-gray-200 max-w-2xl mx-auto">
                 Comprehensive technical documentation covering all aspects of your Smart RV System
               </p>
             </div>
           </div>
 
-          <div className="border border-gray-700 rounded-lg p-6 bg-gray-800/50">
+          <div className="border border-gray-700 rounded-lg p-6 bg-[#091020]">
             <Accordion type="single" collapsible className="space-y-6">
               <SystemArchitectureSection />
               <NetworkInfrastructureSection />
