@@ -7,7 +7,7 @@ import { Cpu, ChevronDown } from "lucide-react";
 
 const SystemArchitectureSection = () => {
   return (
-    <AccordionItem value="system-architecture" className="border-b border-gray-700">
+    <AccordionItem value="system-architecture" className="border-none">
       <div className="flex items-center gap-2 mb-4">
         <Cpu className="w-5 h-5 text-[#60A5FA]" />
         <h2 className="text-[#60A5FA] text-xl font-semibold">System Architecture</h2>

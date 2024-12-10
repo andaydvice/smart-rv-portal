@@ -19,7 +19,7 @@ const NetworkInfrastructureSection = () => {
   };
 
   return (
-    <AccordionItem value="network-infrastructure" className="border-b border-gray-700" ref={sectionRef}>
+    <AccordionItem value="network-infrastructure" className="border-none" ref={sectionRef}>
       <div className="flex items-center gap-2 mb-4">
         <div className="p-2 rounded-full bg-blue-500/10 border border-blue-500/20">
           <Network className="w-4 h-4 text-blue-400" />
