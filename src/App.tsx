@@ -13,6 +13,7 @@ import Contact from "./pages/Contact";
 import ScheduleDemo from "./pages/ScheduleDemo";
 import Troubleshooting from "./pages/Troubleshooting";
 import Documentation from "./pages/Documentation";
+import Calculators from "./pages/Calculators";
 import CompleteDocumentation from "./pages/documentation/CompleteDocumentation";
 import NavigationSystem from "./pages/features/NavigationSystem";
 import SecuritySystem from "./pages/features/SecuritySystem";
@@ -77,6 +78,7 @@ const App = () => (
             <Route path="/troubleshooting" element={<Layout><Troubleshooting /></Layout>} />
             <Route path="/documentation" element={<Layout><Documentation /></Layout>} />
             <Route path="/documentation/complete" element={<Layout><CompleteDocumentation /></Layout>} />
+            <Route path="/calculators" element={<Layout><Calculators /></Layout>} />
           </Routes>
         </BrowserRouter>
       </div>
