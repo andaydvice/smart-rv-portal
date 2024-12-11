@@ -2,44 +2,13 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
+import PowerConsumptionCalculator from "@/components/calculators/power/PowerConsumptionCalculator";
+import BatteryCapacityCalculator from "@/components/calculators/power/BatteryCapacityCalculator";
+import SolarPanelCalculator from "@/components/calculators/power/SolarPanelCalculator";
 import { Battery, Fuel, Scale } from "lucide-react";
 
 const Calculators = () => {
   const [activeTab, setActiveTab] = useState("power");
-  
-  // Power & Solar Calculator States
-  const [dailyUsage, setDailyUsage] = useState("");
-  const [sunHours, setSunHours] = useState("");
-  const [batteryCapacity, setBatteryCapacity] = useState("");
-  
-  // Fuel Efficiency Calculator States
-  const [distance, setDistance] = useState("");
-  const [fuelUsed, setFuelUsed] = useState("");
-  
-  // Towing Calculator States
-  const [vehicleWeight, setVehicleWeight] = useState("");
-  const [trailerWeight, setTrailerWeight] = useState("");
-
-  const calculateSolarNeeds = () => {
-    const usage = parseFloat(dailyUsage) || 0;
-    const hours = parseFloat(sunHours) || 0;
-    return usage && hours ? (usage / hours).toFixed(2) : "0";
-  };
-
-  const calculateMPG = () => {
-    const dist = parseFloat(distance) || 0;
-    const fuel = parseFloat(fuelUsed) || 0;
-    return dist && fuel ? (dist / fuel).toFixed(2) : "0";
-  };
-
-  const calculateTowingCapacity = () => {
-    const vehicle = parseFloat(vehicleWeight) || 0;
-    const trailer = parseFloat(trailerWeight) || 0;
-    return vehicle && trailer ? (vehicle - trailer).toFixed(2) : "0";
-  };
 
   return (
     <>
@@ -87,43 +56,10 @@ const Calculators = () => {
               </TabsTrigger>
             </TabsList>
 
-            <TabsContent value="power">
-              <Card className="bg-[#091020] border-gray-700 text-white">
-                <CardHeader>
-                  <CardTitle className="text-2xl text-[#60A5FA]">Power & Solar Calculator</CardTitle>
-                  <CardDescription className="text-gray-400">
-                    Calculate your RV's solar panel requirements based on daily power consumption
-                    and available sunlight hours.
-                  </CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium text-gray-300">Daily Power Usage (Wh)</label>
-                    <Input
-                      type="number"
-                      placeholder="e.g., 3000"
-                      value={dailyUsage}
-                      onChange={(e) => setDailyUsage(e.target.value)}
-                      className="bg-[#131a2a] border-gray-700 text-white"
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium text-gray-300">Peak Sun Hours</label>
-                    <Input
-                      type="number"
-                      placeholder="e.g., 5"
-                      value={sunHours}
-                      onChange={(e) => setSunHours(e.target.value)}
-                      className="bg-[#131a2a] border-gray-700 text-white"
-                    />
-                  </div>
-                  <div className="pt-4">
-                    <p className="text-lg font-semibold text-[#60A5FA]">
-                      Required Solar Panel Capacity: {calculateSolarNeeds()} watts
-                    </p>
-                  </div>
-                </CardContent>
-              </Card>
+            <TabsContent value="power" className="space-y-8">
+              <PowerConsumptionCalculator />
+              <BatteryCapacityCalculator />
+              <SolarPanelCalculator />
             </TabsContent>
 
             <TabsContent value="fuel">
