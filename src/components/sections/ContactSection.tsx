@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 export const ContactSection = () => (
   <section className="relative py-32 px-4 overflow-hidden">
@@ -28,12 +29,14 @@ export const ContactSection = () => (
           Connect with our team to learn more about Smart RV technology and begin your luxury travel experience
         </p>
         <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-          <Button 
-            size="lg"
-            className="bg-white text-black hover:bg-white/90 text-lg px-8 py-6 rounded-full transition-all duration-300 transform hover:scale-105"
-          >
-            Contact Sales
-          </Button>
+          <Link to="/contact">
+            <Button 
+              size="lg"
+              className="bg-white text-black hover:bg-white/90 text-lg px-8 py-6 rounded-full transition-all duration-300 transform hover:scale-105"
+            >
+              Contact Sales
+            </Button>
+          </Link>
           <Button 
             variant="outline" 
             size="lg"
