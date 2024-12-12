@@ -123,49 +123,52 @@ const Calculators = () => {
             </div>
 
             <ScrollArea className="h-[calc(100vh-400px)] pr-4 relative">
-              {/* Scroll hint */}
-              <div className="absolute bottom-0 left-0 right-0 flex justify-center items-center z-10 pointer-events-none">
-                <div className="bg-blue-500/20 text-blue-800 px-4 py-2 rounded-full flex items-center space-x-2 animate-bounce">
+              <div className="pb-16"> {/* Add padding at the bottom to make space for the scroll hint */}
+                <TabsContent value="power" className="space-y-6 mt-0">
+                  <section aria-label="Power Calculators">
+                    <PowerConsumptionCalculator />
+                    <div className="h-6" />
+                    <BatteryCapacityCalculator />
+                    <div className="h-6" />
+                    <SolarPanelCalculator />
+                  </section>
+                </TabsContent>
+
+                <TabsContent value="fuel" className="space-y-6 mt-0">
+                  <section aria-label="Fuel Efficiency Tools">
+                    <GasCalculator />
+                    <div className="h-6" />
+                    <FuelEfficiencyCalculator onAddMPGRecord={handleAddMPGRecord} />
+                    <div className="h-6" />
+                    <TripEfficiencyPlanner />
+                    <div className="h-6" />
+                    <MPGTrackingSystem historicalMPG={historicalMPG} />
+                  </section>
+                </TabsContent>
+
+                <TabsContent value="towing">
+                  <section aria-label="Towing Safety Tools">
+                    <TowingSafetyCalculator />
+                  </section>
+                </TabsContent>
+
+                <TabsContent value="smart-systems" className="space-y-6 mt-0">
+                  <section aria-label="Smart Systems Tools">
+                    <SmartSystemDecoder />
+                    <div className="h-6" />
+                    <SetupGuideCreator />
+                  </section>
+                </TabsContent>
+              </div>
+
+              {/* Scroll hint with improved visibility */}
+              <div className="fixed bottom-4 left-0 right-0 flex justify-center items-center z-10 pointer-events-none">
+                <div className="bg-blue-500/20 backdrop-blur-sm text-blue-800 px-6 py-3 rounded-full flex items-center space-x-2 animate-bounce shadow-lg">
                   <ChevronDown className="w-5 h-5" />
                   <span className="text-sm font-medium">Scroll to view more calculators</span>
                   <ChevronDown className="w-5 h-5" />
                 </div>
               </div>
-              <TabsContent value="power" className="space-y-6 mt-0">
-                <section aria-label="Power Calculators">
-                  <PowerConsumptionCalculator />
-                  <div className="h-6" />
-                  <BatteryCapacityCalculator />
-                  <div className="h-6" />
-                  <SolarPanelCalculator />
-                </section>
-              </TabsContent>
-
-              <TabsContent value="fuel" className="space-y-6 mt-0">
-                <section aria-label="Fuel Efficiency Tools">
-                  <GasCalculator />
-                  <div className="h-6" />
-                  <FuelEfficiencyCalculator onAddMPGRecord={handleAddMPGRecord} />
-                  <div className="h-6" />
-                  <TripEfficiencyPlanner />
-                  <div className="h-6" />
-                  <MPGTrackingSystem historicalMPG={historicalMPG} />
-                </section>
-              </TabsContent>
-
-              <TabsContent value="towing">
-                <section aria-label="Towing Safety Tools">
-                  <TowingSafetyCalculator />
-                </section>
-              </TabsContent>
-
-              <TabsContent value="smart-systems" className="space-y-6 mt-0">
-                <section aria-label="Smart Systems Tools">
-                  <SmartSystemDecoder />
-                  <div className="h-6" />
-                  <SetupGuideCreator />
-                </section>
-              </TabsContent>
             </ScrollArea>
           </Tabs>
         </div>
