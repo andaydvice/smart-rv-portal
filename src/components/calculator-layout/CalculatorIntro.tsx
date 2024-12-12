@@ -8,7 +8,7 @@ const CalculatorIntro = () => {
       </h1>
       <div className="text-lg text-gray-300 max-w-3xl mx-auto">
         <p className="mb-4">Professional tools for smarter RV travel planning</p>
-        <p>Make informed decisions about your power, fuel, and towing needs</p>
+        <p>Master Your RV: Control Power, Fuel & Smart Systems With Confidence</p>
       </div>
     </div>
   );
