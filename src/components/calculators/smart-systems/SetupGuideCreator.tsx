@@ -164,7 +164,7 @@ const SetupGuideCreator = () => {
             variant="outline"
             onClick={handlePrevious}
             disabled={currentStep === 1}
-            className="border-gray-700 text-white hover:bg-[#8B5CF6] hover:border-[#8B5CF6] hover:text-white active:text-white focus:text-white transition-colors"
+            className="!border-gray-700 !text-white hover:!bg-[#8B5CF6] hover:!border-[#8B5CF6] hover:!text-white active:!text-white focus:!text-white disabled:!text-gray-500 transition-colors"
           >
             <ArrowLeft className="w-4 h-4 mr-2" />
             Previous
@@ -172,7 +172,7 @@ const SetupGuideCreator = () => {
           <Button
             onClick={handleNext}
             disabled={currentStep === steps.length}
-            className="bg-[#60A5FA] text-white hover:bg-[#8B5CF6] hover:text-white active:text-white focus:text-white transition-colors"
+            className="!bg-[#60A5FA] !text-white hover:!bg-[#8B5CF6] hover:!text-white active:!text-white focus:!text-white disabled:!text-gray-500 transition-colors"
           >
             {currentStep === steps.length ? (
               <>
