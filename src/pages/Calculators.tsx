@@ -45,14 +45,19 @@ const Calculators = () => {
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#131a2a]" />
-          <div className="absolute inset-0 flex items-center justify-center flex-col text-center px-4">
-            <h1 className="text-4xl md:text-5xl font-bold text-white mb-6 z-10">
+          <div className="absolute inset-0 flex items-center justify-center">
+            <h1 className="text-4xl md:text-5xl font-bold text-white z-10">
               RV Calculator Suite
             </h1>
-            <h2 className="text-3xl md:text-4xl font-bold text-[#60A5FA] mb-6 z-10">
+          </div>
+        </div>
+
+        <div className="container mx-auto px-4 py-12">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-[#60A5FA] mb-6">
               Travel Safer, Spend Smarter, Drive Further
             </h2>
-            <div className="text-lg text-gray-300 max-w-3xl space-y-6 z-10">
+            <div className="text-lg text-gray-300 max-w-3xl mx-auto space-y-6">
               <p>
                 Welcome to your comprehensive RV calculator suite.
               </p>
@@ -61,9 +66,7 @@ const Calculators = () => {
               </p>
             </div>
           </div>
-        </div>
 
-        <div className="container mx-auto px-4 py-8">
           <Tabs 
             defaultValue="power" 
             className="space-y-8"
