@@ -121,12 +121,12 @@ const SetupGuideCreator = () => {
                 {currentStepData.title}
               </h3>
             </div>
-            <p className="text-gray-300 mb-6">{currentStepData.description}</p>
+            <p className="text-gray-100 mb-6">{currentStepData.description}</p>
 
             <div className="flex flex-wrap gap-4">
               <Button
                 variant="outline"
-                className="border-[#60A5FA] text-[#60A5FA] hover:bg-[#60A5FA]/10"
+                className="border-[#60A5FA] text-[#60A5FA] hover:bg-[#8B5CF6] hover:border-[#8B5CF6] hover:text-white transition-colors"
                 onClick={toggleTroubleshooting}
               >
                 {showTroubleshooting ? (
@@ -147,7 +147,7 @@ const SetupGuideCreator = () => {
                   </div>
                   <ul className="space-y-2">
                     {currentStepData.troubleshooting.map((tip, index) => (
-                      <li key={index} className="flex items-start gap-2 text-gray-300">
+                      <li key={index} className="flex items-start gap-2 text-gray-100">
                         <Check className="w-4 h-4 mt-1 text-green-400" />
                         <span>{tip}</span>
                       </li>
@@ -164,7 +164,7 @@ const SetupGuideCreator = () => {
             variant="outline"
             onClick={handlePrevious}
             disabled={currentStep === 1}
-            className="border-gray-700 text-white hover:bg-gray-800"
+            className="border-gray-700 text-white hover:bg-[#8B5CF6] hover:border-[#8B5CF6] transition-colors"
           >
             <ArrowLeft className="w-4 h-4 mr-2" />
             Previous
@@ -172,7 +172,7 @@ const SetupGuideCreator = () => {
           <Button
             onClick={handleNext}
             disabled={currentStep === steps.length}
-            className="bg-[#60A5FA] text-white hover:bg-[#60A5FA]/90"
+            className="bg-[#60A5FA] text-white hover:bg-[#8B5CF6] transition-colors"
           >
             {currentStep === steps.length ? (
               <>
