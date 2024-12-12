@@ -1,32 +1,19 @@
 import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { ScrollArea } from "@/components/ui/scroll-area";
 import { useToast } from "@/components/ui/use-toast";
 import { 
-  Smartphone, 
+  Smartphone,
   Bluetooth, 
-  WifiHigh, 
-  Check, 
-  X, 
-  AlertCircle, 
-  Info, 
-  ArrowRight, 
-  ArrowLeft,
+  WifiHigh,
   Power,
   Settings,
   Shield
 } from "lucide-react";
+import StepIndicator from "./setup-guide/StepIndicator";
+import StepContent from "./setup-guide/StepContent";
+import NavigationButtons from "./setup-guide/NavigationButtons";
 
-interface Step {
-  id: number;
-  title: string;
-  description: string;
-  icon: JSX.Element;
-  troubleshooting: string[];
-}
-
-const steps: Step[] = [
+const steps = [
   {
     id: 1,
     title: "Power Up System",
@@ -157,100 +144,26 @@ const SetupGuideCreator = () => {
         </p>
       </CardHeader>
       <CardContent className="space-y-6">
-        <div className="flex items-center justify-between mb-4">
-          <div className="flex items-center gap-2">
-            {steps.map((step) => (
-              <div
-                key={step.id}
-                className={`w-3 h-3 rounded-full ${
-                  step.id === currentStep
-                    ? "bg-[#60A5FA]"
-                    : step.id < currentStep
-                    ? "bg-green-400"
-                    : "bg-gray-600"
-                }`}
-              />
-            ))}
-          </div>
-          <span className="text-sm text-white">
-            Step {currentStep} of {steps.length}
-          </span>
-        </div>
+        <StepIndicator
+          currentStep={currentStep}
+          totalSteps={steps.length}
+          steps={steps}
+        />
 
         {currentStepData && (
-          <div className="bg-gray-800/50 p-6 rounded-lg">
-            <div className="flex items-center gap-4 mb-4">
-              {currentStepData.icon}
-              <h3 className="text-lg font-semibold text-white">
-                {currentStepData.title}
-              </h3>
-            </div>
-            <p className="text-gray-100 mb-6">{currentStepData.description}</p>
-
-            <div className="flex flex-wrap gap-4">
-              <Button
-                variant="outline"
-                className="bg-[#1E3A8A] !border-blue-400 !text-blue-100 hover:!bg-[#8B5CF6] hover:!border-[#8B5CF6] hover:!text-white active:!bg-[#7C3AED] focus:!ring-2 focus:!ring-purple-400 disabled:!bg-gray-700 disabled:!border-gray-600 disabled:!text-gray-400 transition-all"
-                onClick={toggleTroubleshooting}
-              >
-                {showTroubleshooting ? (
-                  <X className="w-4 h-4 mr-2" />
-                ) : (
-                  <AlertCircle className="w-4 h-4 mr-2" />
-                )}
-                {showTroubleshooting ? "Hide Help" : "Need Help?"}
-              </Button>
-            </div>
-
-            {showTroubleshooting && (
-              <ScrollArea className="h-[200px] mt-4 rounded-md border border-gray-700 p-4">
-                <div className="space-y-4">
-                  <div className="flex items-center gap-2 text-yellow-400">
-                    <Info className="w-4 h-4" />
-                    <h4 className="font-medium">Troubleshooting Tips</h4>
-                  </div>
-                  <ul className="space-y-2">
-                    {currentStepData.troubleshooting.map((tip, index) => (
-                      <li key={index} className="flex items-start gap-2 text-gray-100">
-                        <Check className="w-4 h-4 mt-1 text-green-400" />
-                        <span>{tip}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </ScrollArea>
-            )}
-          </div>
+          <StepContent
+            step={currentStepData}
+            showTroubleshooting={showTroubleshooting}
+            toggleTroubleshooting={toggleTroubleshooting}
+          />
         )}
 
-        <div className="flex justify-between mt-6">
-          <Button
-            variant="outline"
-            onClick={handlePrevious}
-            disabled={currentStep === 1}
-            className="bg-[#1E3A8A] !border-blue-400 !text-blue-100 hover:!bg-[#8B5CF6] hover:!border-[#8B5CF6] hover:!text-white active:!bg-[#7C3AED] focus:!ring-2 focus:!ring-purple-400 disabled:!bg-gray-700 disabled:!border-gray-600 disabled:!text-gray-400 transition-all"
-          >
-            <ArrowLeft className="w-4 h-4 mr-2" />
-            Previous
-          </Button>
-          <Button
-            onClick={handleNext}
-            disabled={currentStep === steps.length}
-            className="!bg-[#60A5FA] !text-white hover:!bg-[#8B5CF6] hover:!text-white active:!bg-[#7C3AED] focus:!ring-2 focus:!ring-purple-400 disabled:!bg-gray-700 disabled:!text-gray-400 transition-all"
-          >
-            {currentStep === steps.length ? (
-              <>
-                <Check className="w-4 h-4 mr-2" />
-                Complete
-              </>
-            ) : (
-              <>
-                Next
-                <ArrowRight className="w-4 h-4 ml-2" />
-              </>
-            )}
-          </Button>
-        </div>
+        <NavigationButtons
+          currentStep={currentStep}
+          totalSteps={steps.length}
+          onPrevious={handlePrevious}
+          onNext={handleNext}
+        />
       </CardContent>
     </Card>
   );
