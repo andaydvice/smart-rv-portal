@@ -46,11 +46,14 @@ const Calculators = () => {
             <h2 className="text-3xl md:text-4xl font-bold text-[#60A5FA] mb-6">
               Travel Safer, Spend Smarter, Drive Further
             </h2>
-<p className="text-lg text-gray-300 max-w-3xl">
-  Welcome to your comprehensive RV calculator suite. 
-
-  Whether you are planning your power needs, tracking fuel efficiency, or ensuring safe towing, our calculators provide accurate, real time results to enhance your RV experience.
-</p>
+            <div className="text-lg text-gray-300 max-w-3xl space-y-6">
+              <p>
+                Welcome to your comprehensive RV calculator suite.
+              </p>
+              <p>
+                Whether you are planning your power needs, tracking fuel efficiency, or ensuring safe towing, our calculators provide accurate, real time results to enhance your RV experience.
+              </p>
+            </div>
           </div>
 
           <Tabs 
