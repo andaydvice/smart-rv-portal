@@ -47,9 +47,9 @@ const Calculators = () => {
               Travel Safer, Spend Smarter, Drive Further
             </h2>
             <p className="text-lg text-gray-300 max-w-3xl">
-              Welcome to your comprehensive RV calculator suite. Whether you're planning your power needs,
-              tracking fuel efficiency, or ensuring safe towing, our calculators provide accurate,
-              real-time results to enhance your RV experience.
+              Welcome to your comprehensive RV calculator suite. 
+
+              Whether you are planning your power needs, tracking fuel efficiency, or ensuring safe towing, our calculators provide accurate, real time results to enhance your RV experience.
             </p>
           </div>
 
