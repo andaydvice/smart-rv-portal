@@ -8,6 +8,8 @@ import PowerConsumptionCalculator from "@/components/calculators/power/PowerCons
 import BatteryCapacityCalculator from "@/components/calculators/power/BatteryCapacityCalculator";
 import SolarPanelCalculator from "@/components/calculators/power/SolarPanelCalculator";
 import { Battery, Fuel, Scale } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { useToast } from "@/hooks/use-toast";
 
 const Calculators = () => {
   const [activeTab, setActiveTab] = useState("power");
@@ -18,6 +20,7 @@ const Calculators = () => {
   const [tripDistance, setTripDistance] = useState("");
   const [avgSpeed, setAvgSpeed] = useState("");
   const [historicalMPG, setHistoricalMPG] = useState<{date: string, mpg: number}[]>([]);
+  const { toast } = useToast();
 
   const calculateMPG = () => {
     const dist = parseFloat(distance);
@@ -32,7 +35,6 @@ const Calculators = () => {
     const dist = parseFloat(tripDistance);
     const speed = parseFloat(avgSpeed);
     if (dist && speed) {
-      // Basic calculation assuming optimal speed is 60mph
       const efficiency = speed > 60 ? (1 - (speed - 60) * 0.02) : 1;
       return (efficiency * 100).toFixed(1);
     }
@@ -49,10 +51,17 @@ const Calculators = () => {
       setDistance("");
       setFuelUsed("");
       console.log("MPG record added:", mpg);
+      toast({
+        title: "MPG Record Added",
+        description: `Added ${mpg.toFixed(2)} MPG to your history.`,
+      });
     } else {
       console.log("Cannot add MPG record: Please enter valid distance and fuel values");
-      // Add toast or alert here to inform user they need to enter valid values
-      alert("Please enter valid distance and fuel values first");
+      toast({
+        title: "Invalid Values",
+        description: "Please enter valid distance and fuel values first",
+        variant: "destructive",
+      });
     }
   };
 
@@ -143,30 +152,38 @@ const Calculators = () => {
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  <div className="space-y-2">
-                    <label className="text-sm font-bold text-white">Distance Traveled (miles)</label>
-                    <Input
-                      type="number"
-                      placeholder="e.g., 300"
-                      value={distance}
-                      onChange={(e) => setDistance(e.target.value)}
-                      className="bg-[#131a2a] border-gray-700 text-white"
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <label className="text-sm font-bold text-white">Fuel Used (gallons)</label>
-                    <Input
-                      type="number"
-                      placeholder="e.g., 20"
-                      value={fuelUsed}
-                      onChange={(e) => setFuelUsed(e.target.value)}
-                      className="bg-[#131a2a] border-gray-700 text-white"
-                    />
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <label className="text-sm font-bold text-white">Distance Traveled (miles)</label>
+                      <Input
+                        type="number"
+                        placeholder="e.g., 300"
+                        value={distance}
+                        onChange={(e) => setDistance(e.target.value)}
+                        className="bg-[#131a2a] border-gray-700 text-white"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <label className="text-sm font-bold text-white">Fuel Used (gallons)</label>
+                      <Input
+                        type="number"
+                        placeholder="e.g., 20"
+                        value={fuelUsed}
+                        onChange={(e) => setFuelUsed(e.target.value)}
+                        className="bg-[#131a2a] border-gray-700 text-white"
+                      />
+                    </div>
                   </div>
                   <div className="pt-4">
                     <p className="text-lg font-semibold text-[#60A5FA]">
                       Miles Per Gallon: {calculateMPG()} MPG
                     </p>
+                    <Button 
+                      onClick={addMPGRecord}
+                      className="mt-4 bg-[#60A5FA] text-white hover:bg-[#4B8FE3]"
+                    >
+                      Add Current MPG to History
+                    </Button>
                   </div>
                 </CardContent>
               </Card>
@@ -218,12 +235,6 @@ const Calculators = () => {
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  <button
-                    onClick={addMPGRecord}
-                    className="bg-[#60A5FA] text-white px-4 py-2 rounded hover:bg-[#4B8FE3] transition-colors"
-                  >
-                    Add Current MPG to History
-                  </button>
                   <div className="mt-4">
                     <h4 className="text-lg font-semibold mb-2">MPG History</h4>
                     <div className="space-y-2">
