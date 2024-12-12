@@ -10,6 +10,7 @@ import MPGTrackingSystem from "@/components/calculators/fuel/MPGTrackingSystem";
 import TowingSafetyCalculator from "@/components/calculators/towing/TowingSafetyCalculator";
 import GasCalculator from "@/components/calculators/fuel/GasCalculator";
 import SmartSystemDecoder from "@/components/calculators/smart-systems/SmartSystemDecoder";
+import SetupGuideCreator from "@/components/calculators/smart-systems/SetupGuideCreator";
 import { Battery, Fuel, Scale, Settings } from "lucide-react";
 import { MPGRecord } from "@/components/calculators/fuel/MPGTrackingSystem";
 import { Helmet } from "react-helmet";
@@ -142,8 +143,9 @@ const Calculators = () => {
             </TabsContent>
 
             <TabsContent value="smart-systems">
-              <section aria-label="Smart Systems Tools">
+              <section aria-label="Smart Systems Tools" className="space-y-8">
                 <SmartSystemDecoder />
+                <SetupGuideCreator />
               </section>
             </TabsContent>
           </Tabs>
