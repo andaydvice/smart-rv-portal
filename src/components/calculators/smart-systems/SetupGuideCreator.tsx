@@ -126,7 +126,7 @@ const SetupGuideCreator = () => {
             <div className="flex flex-wrap gap-4">
               <Button
                 variant="outline"
-                className="border-[#60A5FA] text-[#60A5FA] hover:bg-[#8B5CF6] hover:border-[#8B5CF6] hover:text-white transition-colors"
+                className="bg-[#1E3A8A] !border-blue-400 !text-blue-100 hover:!bg-[#8B5CF6] hover:!border-[#8B5CF6] hover:!text-white active:!bg-[#7C3AED] focus:!ring-2 focus:!ring-purple-400 disabled:!bg-gray-700 disabled:!border-gray-600 disabled:!text-gray-400 transition-all"
                 onClick={toggleTroubleshooting}
               >
                 {showTroubleshooting ? (
@@ -164,7 +164,7 @@ const SetupGuideCreator = () => {
             variant="outline"
             onClick={handlePrevious}
             disabled={currentStep === 1}
-            className="!border-gray-700 !text-white hover:!bg-[#8B5CF6] hover:!border-[#8B5CF6] hover:!text-white active:!text-white focus:!text-white disabled:!text-gray-500 transition-colors"
+            className="bg-[#1E3A8A] !border-blue-400 !text-blue-100 hover:!bg-[#8B5CF6] hover:!border-[#8B5CF6] hover:!text-white active:!bg-[#7C3AED] focus:!ring-2 focus:!ring-purple-400 disabled:!bg-gray-700 disabled:!border-gray-600 disabled:!text-gray-400 transition-all"
           >
             <ArrowLeft className="w-4 h-4 mr-2" />
             Previous
@@ -172,7 +172,7 @@ const SetupGuideCreator = () => {
           <Button
             onClick={handleNext}
             disabled={currentStep === steps.length}
-            className="!bg-[#60A5FA] !text-white hover:!bg-[#8B5CF6] hover:!text-white active:!text-white focus:!text-white disabled:!text-gray-500 transition-colors"
+            className="!bg-[#60A5FA] !text-white hover:!bg-[#8B5CF6] hover:!text-white active:!bg-[#7C3AED] focus:!ring-2 focus:!ring-purple-400 disabled:!bg-gray-700 disabled:!text-gray-400 transition-all"
           >
             {currentStep === steps.length ? (
               <>
