@@ -41,7 +41,7 @@ const Calculators = () => {
         <div className="container mx-auto px-4 py-8 -mt-32 relative z-10">
           <div className="mb-12">
             <h1 className="text-4xl md:text-5xl font-bold text-[#60A5FA] mb-6">
-              RV Calculators Hub
+              RV Calculator Suite: Travel Safer, Spend Smarter, Drive Further
             </h1>
             <p className="text-lg text-gray-300 max-w-3xl">
               Welcome to your comprehensive RV calculator suite. Whether you're planning your power needs,
