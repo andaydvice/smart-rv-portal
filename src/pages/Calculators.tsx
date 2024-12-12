@@ -11,7 +11,7 @@ import TowingSafetyCalculator from "@/components/calculators/towing/TowingSafety
 import GasCalculator from "@/components/calculators/fuel/GasCalculator";
 import SmartSystemDecoder from "@/components/calculators/smart-systems/SmartSystemDecoder";
 import SetupGuideCreator from "@/components/calculators/smart-systems/SetupGuideCreator";
-import { Battery, Fuel, Scale, Settings } from "lucide-react";
+import { Battery, Fuel, Scale, Settings, ChevronDown } from "lucide-react";
 import { MPGRecord } from "@/components/calculators/fuel/MPGTrackingSystem";
 import { Helmet } from "react-helmet";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -122,7 +122,15 @@ const Calculators = () => {
               </TabsList>
             </div>
 
-            <ScrollArea className="h-[calc(100vh-400px)] pr-4">
+            <ScrollArea className="h-[calc(100vh-400px)] pr-4 relative">
+              {/* Scroll hint */}
+              <div className="absolute bottom-0 left-0 right-0 flex justify-center items-center z-10 pointer-events-none">
+                <div className="bg-blue-500/20 text-blue-800 px-4 py-2 rounded-full flex items-center space-x-2 animate-bounce">
+                  <ChevronDown className="w-5 h-5" />
+                  <span className="text-sm font-medium">Scroll to view more calculators</span>
+                  <ChevronDown className="w-5 h-5" />
+                </div>
+              </div>
               <TabsContent value="power" className="space-y-6 mt-0">
                 <section aria-label="Power Calculators">
                   <PowerConsumptionCalculator />
