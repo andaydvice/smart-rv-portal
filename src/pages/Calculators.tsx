@@ -14,6 +14,7 @@ import SetupGuideCreator from "@/components/calculators/smart-systems/SetupGuide
 import { Battery, Fuel, Scale, Settings } from "lucide-react";
 import { MPGRecord } from "@/components/calculators/fuel/MPGTrackingSystem";
 import { Helmet } from "react-helmet";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 const Calculators = () => {
   const [activeTab, setActiveTab] = useState("power");
@@ -57,7 +58,7 @@ const Calculators = () => {
 
       <Navbar />
       <div className="min-h-screen bg-[#131a2a]">
-        <div className="relative h-[400px] w-full overflow-hidden">
+        <div className="relative h-[250px] w-full overflow-hidden">
           <img
             src="/lovable-uploads/53093373-3df3-49cc-b4cc-91b800c53fa9.png"
             alt="RV under starry night sky with ambient lighting"
@@ -71,83 +72,93 @@ const Calculators = () => {
           </div>
         </div>
 
-        <div className="container mx-auto px-4 py-12">
-          <div className="text-center mb-12">
-            <h1 className="text-3xl md:text-4xl font-bold text-[#60A5FA] mb-6">
+        <div className="container mx-auto px-4 py-8">
+          <div className="text-center mb-8">
+            <h1 className="text-3xl md:text-4xl font-bold text-[#60A5FA] mb-4">
               RV Calculator Suite
             </h1>
-            <div className="text-lg text-gray-300 max-w-3xl mx-auto space-y-6">
-              <p>Professional tools for smarter RV travel planning</p>
+            <div className="text-lg text-gray-300 max-w-3xl mx-auto">
+              <p className="mb-4">Professional tools for smarter RV travel planning</p>
               <p>Make informed decisions about your power, fuel, and towing needs</p>
             </div>
           </div>
 
           <Tabs 
             defaultValue="power" 
-            className="space-y-8"
+            className="space-y-6"
             value={activeTab}
             onValueChange={setActiveTab}
           >
-            <TabsList className="bg-[#091020] p-2 mb-8">
-              <TabsTrigger 
-                value="power" 
-                className="data-[state=active]:bg-[#60A5FA] data-[state=active]:text-white text-gray-300 hover:text-white font-semibold text-base px-6 py-3"
-              >
-                <Battery className="mr-2 h-4 w-4" />
-                Power & Solar
-              </TabsTrigger>
-              <TabsTrigger 
-                value="fuel" 
-                className="data-[state=active]:bg-[#60A5FA] data-[state=active]:text-white text-gray-300 hover:text-white font-semibold text-base px-6 py-3"
-              >
-                <Fuel className="mr-2 h-4 w-4" />
-                Fuel Efficiency
-              </TabsTrigger>
-              <TabsTrigger 
-                value="towing" 
-                className="data-[state=active]:bg-[#60A5FA] data-[state=active]:text-white text-gray-300 hover:text-white font-semibold text-base px-6 py-3"
-              >
-                <Scale className="mr-2 h-4 w-4" />
-                Towing Safety
-              </TabsTrigger>
-              <TabsTrigger 
-                value="smart-systems" 
-                className="data-[state=active]:bg-[#60A5FA] data-[state=active]:text-white text-gray-300 hover:text-white font-semibold text-base px-6 py-3"
-              >
-                <Settings className="mr-2 h-4 w-4" />
-                Smart Systems
-              </TabsTrigger>
-            </TabsList>
+            <div className="sticky top-0 z-50 bg-[#091020] py-4 shadow-lg">
+              <TabsList className="bg-[#091020] p-2 w-full flex justify-center">
+                <TabsTrigger 
+                  value="power" 
+                  className="data-[state=active]:bg-[#60A5FA] data-[state=active]:text-white text-gray-300 hover:text-white font-semibold text-base px-6 py-3 flex-1 max-w-[200px]"
+                >
+                  <Battery className="mr-2 h-4 w-4" />
+                  Power & Solar
+                </TabsTrigger>
+                <TabsTrigger 
+                  value="fuel" 
+                  className="data-[state=active]:bg-[#60A5FA] data-[state=active]:text-white text-gray-300 hover:text-white font-semibold text-base px-6 py-3 flex-1 max-w-[200px]"
+                >
+                  <Fuel className="mr-2 h-4 w-4" />
+                  Fuel Efficiency
+                </TabsTrigger>
+                <TabsTrigger 
+                  value="towing" 
+                  className="data-[state=active]:bg-[#60A5FA] data-[state=active]:text-white text-gray-300 hover:text-white font-semibold text-base px-6 py-3 flex-1 max-w-[200px]"
+                >
+                  <Scale className="mr-2 h-4 w-4" />
+                  Towing Safety
+                </TabsTrigger>
+                <TabsTrigger 
+                  value="smart-systems" 
+                  className="data-[state=active]:bg-[#60A5FA] data-[state=active]:text-white text-gray-300 hover:text-white font-semibold text-base px-6 py-3 flex-1 max-w-[200px]"
+                >
+                  <Settings className="mr-2 h-4 w-4" />
+                  Smart Systems
+                </TabsTrigger>
+              </TabsList>
+            </div>
 
-            <TabsContent value="power" className="space-y-8">
-              <section aria-label="Power Calculators">
-                <PowerConsumptionCalculator />
-                <BatteryCapacityCalculator />
-                <SolarPanelCalculator />
-              </section>
-            </TabsContent>
+            <ScrollArea className="h-[calc(100vh-400px)] pr-4">
+              <TabsContent value="power" className="space-y-6 mt-0">
+                <section aria-label="Power Calculators">
+                  <PowerConsumptionCalculator />
+                  <div className="h-6" />
+                  <BatteryCapacityCalculator />
+                  <div className="h-6" />
+                  <SolarPanelCalculator />
+                </section>
+              </TabsContent>
 
-            <TabsContent value="fuel" className="space-y-8">
-              <section aria-label="Fuel Efficiency Tools">
-                <GasCalculator />
-                <FuelEfficiencyCalculator onAddMPGRecord={handleAddMPGRecord} />
-                <TripEfficiencyPlanner />
-                <MPGTrackingSystem historicalMPG={historicalMPG} />
-              </section>
-            </TabsContent>
+              <TabsContent value="fuel" className="space-y-6 mt-0">
+                <section aria-label="Fuel Efficiency Tools">
+                  <GasCalculator />
+                  <div className="h-6" />
+                  <FuelEfficiencyCalculator onAddMPGRecord={handleAddMPGRecord} />
+                  <div className="h-6" />
+                  <TripEfficiencyPlanner />
+                  <div className="h-6" />
+                  <MPGTrackingSystem historicalMPG={historicalMPG} />
+                </section>
+              </TabsContent>
 
-            <TabsContent value="towing">
-              <section aria-label="Towing Safety Tools">
-                <TowingSafetyCalculator />
-              </section>
-            </TabsContent>
+              <TabsContent value="towing">
+                <section aria-label="Towing Safety Tools">
+                  <TowingSafetyCalculator />
+                </section>
+              </TabsContent>
 
-            <TabsContent value="smart-systems">
-              <section aria-label="Smart Systems Tools" className="space-y-8">
-                <SmartSystemDecoder />
-                <SetupGuideCreator />
-              </section>
-            </TabsContent>
+              <TabsContent value="smart-systems" className="space-y-6 mt-0">
+                <section aria-label="Smart Systems Tools">
+                  <SmartSystemDecoder />
+                  <div className="h-6" />
+                  <SetupGuideCreator />
+                </section>
+              </TabsContent>
+            </ScrollArea>
           </Tabs>
         </div>
       </div>
