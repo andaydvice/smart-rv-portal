@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { Check, Info, ChevronDown } from "lucide-react";
 
 interface TroubleshootingTipsProps {
@@ -7,6 +7,22 @@ interface TroubleshootingTipsProps {
 
 const TroubleshootingTips = ({ tips }: TroubleshootingTipsProps) => {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const [showScrollIndicator, setShowScrollIndicator] = useState(false);
+
+  useEffect(() => {
+    const checkIfScrollNeeded = () => {
+      if (scrollContainerRef.current) {
+        const { scrollHeight, clientHeight } = scrollContainerRef.current;
+        console.log('Scroll height:', scrollHeight, 'Client height:', clientHeight);
+        setShowScrollIndicator(scrollHeight > clientHeight);
+      }
+    };
+
+    checkIfScrollNeeded();
+    // Re-check when tips change
+    window.addEventListener('resize', checkIfScrollNeeded);
+    return () => window.removeEventListener('resize', checkIfScrollNeeded);
+  }, [tips]);
 
   const handleArrowClick = () => {
     if (scrollContainerRef.current) {
@@ -38,12 +54,14 @@ const TroubleshootingTips = ({ tips }: TroubleshootingTipsProps) => {
           </ul>
         </div>
       </div>
-      <div 
-        className="absolute bottom-2 left-1/2 transform -translate-x-1/2 text-blue-400 animate-bounce cursor-pointer hover:text-blue-300 transition-colors"
-        onClick={handleArrowClick}
-      >
-        <ChevronDown className="w-5 h-5" />
-      </div>
+      {showScrollIndicator && (
+        <div 
+          className="absolute bottom-2 left-1/2 transform -translate-x-1/2 text-blue-400 animate-bounce cursor-pointer hover:text-blue-300 transition-colors"
+          onClick={handleArrowClick}
+        >
+          <ChevronDown className="w-5 h-5" />
+        </div>
+      )}
     </div>
   );
 };
