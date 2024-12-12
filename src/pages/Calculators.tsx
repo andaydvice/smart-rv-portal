@@ -2,6 +2,8 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
 import PowerConsumptionCalculator from "@/components/calculators/power/PowerConsumptionCalculator";
 import BatteryCapacityCalculator from "@/components/calculators/power/BatteryCapacityCalculator";
 import SolarPanelCalculator from "@/components/calculators/power/SolarPanelCalculator";
@@ -9,6 +11,28 @@ import { Battery, Fuel, Scale } from "lucide-react";
 
 const Calculators = () => {
   const [activeTab, setActiveTab] = useState("power");
+  const [distance, setDistance] = useState("");
+  const [fuelUsed, setFuelUsed] = useState("");
+  const [vehicleWeight, setVehicleWeight] = useState("");
+  const [trailerWeight, setTrailerWeight] = useState("");
+
+  const calculateMPG = () => {
+    const dist = parseFloat(distance);
+    const fuel = parseFloat(fuelUsed);
+    if (dist && fuel && fuel !== 0) {
+      return (dist / fuel).toFixed(2);
+    }
+    return "0.00";
+  };
+
+  const calculateTowingCapacity = () => {
+    const vehicle = parseFloat(vehicleWeight);
+    const trailer = parseFloat(trailerWeight);
+    if (vehicle && trailer) {
+      return (vehicle - trailer).toFixed(0);
+    }
+    return "0";
+  };
 
   return (
     <>
