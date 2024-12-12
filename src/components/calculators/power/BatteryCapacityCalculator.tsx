@@ -27,7 +27,7 @@ const BatteryCapacityCalculator = () => {
       </CardHeader>
       <CardContent className="space-y-4">
         <div className="space-y-2">
-          <label className="text-sm font-medium text-gray-300">Daily Power Usage (Wh)</label>
+          <label className="text-sm font-bold text-white">Daily Power Usage (Wh)</label>
           <Input
             type="number"
             placeholder="e.g., 3000"
@@ -37,7 +37,7 @@ const BatteryCapacityCalculator = () => {
           />
         </div>
         <div className="space-y-2">
-          <label className="text-sm font-medium text-gray-300">Days of Autonomy</label>
+          <label className="text-sm font-bold text-white">Days of Autonomy</label>
           <Input
             type="number"
             placeholder="e.g., 3"
@@ -47,7 +47,7 @@ const BatteryCapacityCalculator = () => {
           />
         </div>
         <div className="space-y-2">
-          <label className="text-sm font-medium text-gray-300">Depth of Discharge (%)</label>
+          <label className="text-sm font-bold text-white">Depth of Discharge (%)</label>
           <Input
             type="number"
             placeholder="e.g., 50"

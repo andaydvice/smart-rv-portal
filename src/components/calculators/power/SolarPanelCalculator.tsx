@@ -27,7 +27,7 @@ const SolarPanelCalculator = () => {
       </CardHeader>
       <CardContent className="space-y-4">
         <div className="space-y-2">
-          <label className="text-sm font-medium text-gray-300">Daily Power Usage (Wh)</label>
+          <label className="text-sm font-bold text-white">Daily Power Usage (Wh)</label>
           <Input
             type="number"
             placeholder="e.g., 3000"
@@ -37,7 +37,7 @@ const SolarPanelCalculator = () => {
           />
         </div>
         <div className="space-y-2">
-          <label className="text-sm font-medium text-gray-300">Peak Sun Hours</label>
+          <label className="text-sm font-bold text-white">Peak Sun Hours</label>
           <Input
             type="number"
             placeholder="e.g., 5"
@@ -47,7 +47,7 @@ const SolarPanelCalculator = () => {
           />
         </div>
         <div className="space-y-2">
-          <label className="text-sm font-medium text-gray-300">System Efficiency (%)</label>
+          <label className="text-sm font-bold text-white">System Efficiency (%)</label>
           <Input
             type="number"
             placeholder="e.g., 80"

@@ -27,7 +27,7 @@ const PowerConsumptionCalculator = () => {
       </CardHeader>
       <CardContent className="space-y-4">
         <div className="space-y-2">
-          <label className="text-sm font-medium text-gray-300">Refrigerator (Watts)</label>
+          <label className="text-sm font-bold text-white">Refrigerator (Watts)</label>
           <Input
             type="number"
             placeholder="e.g., 400"
@@ -37,7 +37,7 @@ const PowerConsumptionCalculator = () => {
           />
         </div>
         <div className="space-y-2">
-          <label className="text-sm font-medium text-gray-300">Air Conditioning (Watts)</label>
+          <label className="text-sm font-bold text-white">Air Conditioning (Watts)</label>
           <Input
             type="number"
             placeholder="e.g., 1500"
@@ -47,7 +47,7 @@ const PowerConsumptionCalculator = () => {
           />
         </div>
         <div className="space-y-2">
-          <label className="text-sm font-medium text-gray-300">Lighting (Watts)</label>
+          <label className="text-sm font-bold text-white">Lighting (Watts)</label>
           <Input
             type="number"
             placeholder="e.g., 100"
@@ -57,7 +57,7 @@ const PowerConsumptionCalculator = () => {
           />
         </div>
         <div className="space-y-2">
-          <label className="text-sm font-medium text-gray-300">Other Appliances (Watts)</label>
+          <label className="text-sm font-bold text-white">Other Appliances (Watts)</label>
           <Input
             type="number"
             placeholder="e.g., 300"
