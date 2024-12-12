@@ -1,18 +1,17 @@
 import React, { useRef } from "react";
 import { Check, Info, ChevronDown } from "lucide-react";
-import { ScrollArea } from "@/components/ui/scroll-area";
 
 interface TroubleshootingTipsProps {
   tips: string[];
 }
 
 const TroubleshootingTips = ({ tips }: TroubleshootingTipsProps) => {
-  const scrollAreaRef = useRef<HTMLDivElement>(null);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   const handleArrowClick = () => {
-    if (scrollAreaRef.current) {
-      scrollAreaRef.current.scrollTo({
-        top: scrollAreaRef.current.scrollHeight,
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollTo({
+        top: scrollContainerRef.current.scrollHeight,
         behavior: 'smooth'
       });
     }
@@ -20,7 +19,10 @@ const TroubleshootingTips = ({ tips }: TroubleshootingTipsProps) => {
 
   return (
     <div className="relative mt-4">
-      <ScrollArea className="h-[200px] rounded-md border border-gray-700 p-4" ref={scrollAreaRef}>
+      <div 
+        ref={scrollContainerRef}
+        className="h-[200px] rounded-md border border-gray-700 p-4 overflow-auto scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-transparent"
+      >
         <div className="space-y-4">
           <div className="flex items-center gap-2 text-yellow-400">
             <Info className="w-4 h-4" />
@@ -35,7 +37,7 @@ const TroubleshootingTips = ({ tips }: TroubleshootingTipsProps) => {
             ))}
           </ul>
         </div>
-      </ScrollArea>
+      </div>
       <div 
         className="absolute bottom-2 left-1/2 transform -translate-x-1/2 text-blue-400 animate-bounce cursor-pointer hover:text-blue-300 transition-colors"
         onClick={handleArrowClick}
