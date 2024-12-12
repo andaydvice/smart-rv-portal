@@ -96,7 +96,7 @@ const Calculators = () => {
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="space-y-2">
-                    <label className="text-sm font-medium text-gray-300">Distance Traveled (miles)</label>
+                    <label className="text-sm font-bold text-white">Distance Traveled (miles)</label>
                     <Input
                       type="number"
                       placeholder="e.g., 300"
@@ -106,7 +106,7 @@ const Calculators = () => {
                     />
                   </div>
                   <div className="space-y-2">
-                    <label className="text-sm font-medium text-gray-300">Fuel Used (gallons)</label>
+                    <label className="text-sm font-bold text-white">Fuel Used (gallons)</label>
                     <Input
                       type="number"
                       placeholder="e.g., 20"
@@ -134,7 +134,7 @@ const Calculators = () => {
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="space-y-2">
-                    <label className="text-sm font-medium text-gray-300">Vehicle Towing Capacity (lbs)</label>
+                    <label className="text-sm font-bold text-white">Vehicle Towing Capacity (lbs)</label>
                     <Input
                       type="number"
                       placeholder="e.g., 7500"
@@ -144,7 +144,7 @@ const Calculators = () => {
                     />
                   </div>
                   <div className="space-y-2">
-                    <label className="text-sm font-medium text-gray-300">Trailer Weight (lbs)</label>
+                    <label className="text-sm font-bold text-white">Trailer Weight (lbs)</label>
                     <Input
                       type="number"
                       placeholder="e.g., 5000"
