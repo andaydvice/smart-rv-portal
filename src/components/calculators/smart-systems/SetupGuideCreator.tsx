@@ -108,7 +108,7 @@ const SetupGuideCreator = () => {
               />
             ))}
           </div>
-          <span className="text-sm text-gray-300">
+          <span className="text-sm text-white">
             Step {currentStep} of {steps.length}
           </span>
         </div>
