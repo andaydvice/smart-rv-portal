@@ -37,8 +37,8 @@ const Calculators = () => {
   return (
     <>
       <Navbar />
-      <div className="min-h-screen bg-[#131a2a]">
-        <div className="container mx-auto px-4 py-8 -mt-32 relative z-10">
+      <div className="min-h-screen bg-[#131a2a] pt-24">
+        <div className="container mx-auto px-4 py-8">
           <div className="mb-12">
             <h1 className="text-4xl md:text-5xl font-bold text-[#60A5FA] mb-6">
               RV Calculator Suite: Travel Safer, Spend Smarter, Drive Further
