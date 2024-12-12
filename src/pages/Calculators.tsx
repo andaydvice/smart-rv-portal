@@ -10,6 +10,7 @@ import MPGTrackingSystem from "@/components/calculators/fuel/MPGTrackingSystem";
 import TowingSafetyCalculator from "@/components/calculators/towing/TowingSafetyCalculator";
 import { Battery, Fuel, Scale } from "lucide-react";
 import { MPGRecord } from "@/components/calculators/fuel/MPGTrackingSystem";
+import { Helmet } from "react-helmet";
 
 const Calculators = () => {
   const [activeTab, setActiveTab] = useState("power");
@@ -21,6 +22,16 @@ const Calculators = () => {
 
   return (
     <>
+      <Helmet>
+        <title>RV Calculator Suite | Power, Fuel & Towing Calculators</title>
+        <meta name="description" content="Free RV calculators for power consumption, fuel efficiency, and towing safety. Plan your trips better with our mobile-friendly MPG tracker and weight distribution tools." />
+        <meta name="keywords" content="RV calculator, MPG tracker, towing calculator, RV power calculator, fuel efficiency calculator, weight distribution calculator, tire pressure calculator" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta property="og:title" content="RV Calculator Suite | Essential Tools for RV Owners" />
+        <meta property="og:description" content="Calculate power needs, track fuel efficiency, and ensure safe towing with our comprehensive RV calculator suite." />
+        <link rel="canonical" href="/calculators" />
+      </Helmet>
+
       <Navbar />
       <div className="min-h-screen bg-[#131a2a]">
         <div className="relative h-[400px] w-full overflow-hidden">
@@ -39,12 +50,12 @@ const Calculators = () => {
 
         <div className="container mx-auto px-4 py-12">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-[#60A5FA] mb-6">
-              Travel Safer, Spend Smarter, Drive Further
-            </h2>
+            <h1 className="text-3xl md:text-4xl font-bold text-[#60A5FA] mb-6">
+              RV Calculator Suite
+            </h1>
             <div className="text-lg text-gray-300 max-w-3xl mx-auto space-y-6">
-              <p>RV Power Tools</p>
-              <p>Smart answers fast. Adventure calls now.</p>
+              <p>Professional tools for smarter RV travel planning</p>
+              <p>Make informed decisions about your power, fuel, and towing needs</p>
             </div>
           </div>
 
@@ -79,19 +90,25 @@ const Calculators = () => {
             </TabsList>
 
             <TabsContent value="power" className="space-y-8">
-              <PowerConsumptionCalculator />
-              <BatteryCapacityCalculator />
-              <SolarPanelCalculator />
+              <section aria-label="Power Calculators">
+                <PowerConsumptionCalculator />
+                <BatteryCapacityCalculator />
+                <SolarPanelCalculator />
+              </section>
             </TabsContent>
 
             <TabsContent value="fuel" className="space-y-8">
-              <FuelEfficiencyCalculator onAddMPGRecord={handleAddMPGRecord} />
-              <TripEfficiencyPlanner />
-              <MPGTrackingSystem historicalMPG={historicalMPG} />
+              <section aria-label="Fuel Efficiency Tools">
+                <FuelEfficiencyCalculator onAddMPGRecord={handleAddMPGRecord} />
+                <TripEfficiencyPlanner />
+                <MPGTrackingSystem historicalMPG={historicalMPG} />
+              </section>
             </TabsContent>
 
             <TabsContent value="towing">
-              <TowingSafetyCalculator />
+              <section aria-label="Towing Safety Tools">
+                <TowingSafetyCalculator />
+              </section>
             </TabsContent>
           </Tabs>
         </div>
