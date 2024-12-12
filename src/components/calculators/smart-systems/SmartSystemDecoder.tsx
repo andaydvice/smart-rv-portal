@@ -99,6 +99,9 @@ const SmartSystemDecoder = () => {
           <Settings className="w-5 h-5 text-[#60A5FA]" />
           <CardTitle className="text-xl text-[#60A5FA]">Smart System Decoder</CardTitle>
         </div>
+        <p className="text-sm text-gray-300 mt-2">
+          Select your RV's smart components from the checklist below to see detailed information about their features and common troubleshooting tips.
+        </p>
       </CardHeader>
       <CardContent className="space-y-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
