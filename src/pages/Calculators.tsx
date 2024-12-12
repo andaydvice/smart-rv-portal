@@ -59,10 +59,10 @@ const Calculators = () => {
             </h2>
             <div className="text-lg text-gray-300 max-w-3xl mx-auto space-y-6">
               <p>
-                Welcome to your comprehensive RV calculator suite.
+                RV Power Tools
               </p>
               <p>
-                Whether you are planning your power needs, tracking fuel efficiency, or ensuring safe towing, our calculators provide accurate, real time results to enhance your RV experience.
+                Smart answers fast. Adventure calls now.
               </p>
             </div>
           </div>
