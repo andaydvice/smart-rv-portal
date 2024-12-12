@@ -11,7 +11,7 @@ const CalculatorHeader = () => {
       <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#131a2a]" />
       <div className="absolute inset-0 flex items-center justify-center">
         <h1 className="text-4xl md:text-5xl font-bold text-white z-10">
-          RV Calculator Suite
+          RV Tools Suite
         </h1>
       </div>
     </div>
