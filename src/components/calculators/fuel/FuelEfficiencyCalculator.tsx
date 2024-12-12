@@ -3,8 +3,13 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
+import { MPGRecord } from "./MPGTrackingSystem";
 
-const FuelEfficiencyCalculator = () => {
+interface FuelEfficiencyCalculatorProps {
+  onAddMPGRecord: (record: MPGRecord) => void;
+}
+
+const FuelEfficiencyCalculator = ({ onAddMPGRecord }: FuelEfficiencyCalculatorProps) => {
   const [distance, setDistance] = useState("");
   const [fuelUsed, setFuelUsed] = useState("");
   const { toast } = useToast();
@@ -21,7 +26,12 @@ const FuelEfficiencyCalculator = () => {
   const addMPGRecord = () => {
     const mpg = parseFloat(calculateMPG());
     if (mpg > 0) {
-      console.log("MPG record added:", mpg);
+      const newRecord = {
+        date: new Date().toLocaleDateString(),
+        mpg: mpg
+      };
+      onAddMPGRecord(newRecord);
+      console.log("MPG record added:", newRecord);
       toast({
         title: "MPG Record Added",
         description: `Added ${mpg.toFixed(2)} MPG to your history.`,

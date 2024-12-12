@@ -9,9 +9,15 @@ import TripEfficiencyPlanner from "@/components/calculators/fuel/TripEfficiencyP
 import MPGTrackingSystem from "@/components/calculators/fuel/MPGTrackingSystem";
 import TowingSafetyCalculator from "@/components/calculators/towing/TowingSafetyCalculator";
 import { Battery, Fuel, Scale } from "lucide-react";
+import { MPGRecord } from "@/components/calculators/fuel/MPGTrackingSystem";
 
 const Calculators = () => {
   const [activeTab, setActiveTab] = useState("power");
+  const [historicalMPG, setHistoricalMPG] = useState<MPGRecord[]>([]);
+
+  const handleAddMPGRecord = (record: MPGRecord) => {
+    setHistoricalMPG(prev => [...prev, record]);
+  };
 
   return (
     <>
@@ -79,9 +85,9 @@ const Calculators = () => {
             </TabsContent>
 
             <TabsContent value="fuel" className="space-y-8">
-              <FuelEfficiencyCalculator />
+              <FuelEfficiencyCalculator onAddMPGRecord={handleAddMPGRecord} />
               <TripEfficiencyPlanner />
-              <MPGTrackingSystem />
+              <MPGTrackingSystem historicalMPG={historicalMPG} />
             </TabsContent>
 
             <TabsContent value="towing">
