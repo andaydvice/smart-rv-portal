@@ -3,7 +3,20 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useToast } from "@/components/ui/use-toast";
-import { Smartphone, Bluetooth, WifiHigh, Check, X, AlertCircle, Info, ArrowRight, ArrowLeft } from "lucide-react";
+import { 
+  Smartphone, 
+  Bluetooth, 
+  WifiHigh, 
+  Check, 
+  X, 
+  AlertCircle, 
+  Info, 
+  ArrowRight, 
+  ArrowLeft,
+  Power,
+  Settings,
+  Shield
+} from "lucide-react";
 
 interface Step {
   id: number;
@@ -16,44 +29,86 @@ interface Step {
 const steps: Step[] = [
   {
     id: 1,
-    title: "Enable Bluetooth",
-    description: "Turn on Bluetooth on your smartphone and ensure your RV's smart system is powered on",
-    icon: <Bluetooth className="w-6 h-6 text-blue-400" />,
+    title: "Power Up System",
+    description: "Ensure your RV's main power system and smart hub are properly powered on",
+    icon: <Power className="w-6 h-6 text-red-400" />,
     troubleshooting: [
-      "Make sure Bluetooth is enabled in your phone settings and restart Bluetooth if needed",
-      "Verify RV system power is on and check the main circuit breaker",
-      "Stay within 30 feet of the RV system and ensure no large metal objects are blocking the signal",
-      "Check if your phone's Bluetooth version is compatible with the RV system (4.0 or higher required)",
-      "Remove any previously paired devices that might interfere with the connection",
-      "If connection fails, try forgetting the device and re-pairing"
+      "Check if the main power switch is in the ON position",
+      "Verify all circuit breakers are properly set",
+      "Ensure battery levels are sufficient for system operation",
+      "Check for any loose power connections",
+      "Verify the smart hub's power indicator light is on",
+      "If using shore power, confirm proper connection"
     ]
   },
   {
     id: 2,
+    title: "Enable Bluetooth",
+    description: "Turn on Bluetooth on your smartphone and ensure your RV's smart system is in pairing mode",
+    icon: <Bluetooth className="w-6 h-6 text-blue-400" />,
+    troubleshooting: [
+      "Make sure Bluetooth is enabled in your phone settings",
+      "Verify RV system power is on and check the main circuit breaker",
+      "Stay within 30 feet of the RV system",
+      "Check if your phone's Bluetooth version is compatible (4.0 or higher required)",
+      "Remove any previously paired devices that might interfere",
+      "Try forgetting the device and re-pairing"
+    ]
+  },
+  {
+    id: 3,
     title: "Connect to WiFi",
     description: "Connect to your RV's WiFi network using the provided network name and password",
     icon: <WifiHigh className="w-6 h-6 text-green-400" />,
     troubleshooting: [
       "Check WiFi password carefully and ensure caps lock is not enabled",
-      "Ensure you are selecting the correct network name (SSID) from the list",
+      "Ensure you are selecting the correct network name (SSID)",
       "Reset RV router by unplugging for 30 seconds if connection fails",
-      "Verify you're within range (usually 100 feet) of the RV's WiFi router",
+      "Verify you're within range (usually 100 feet) of the WiFi router",
       "Check if other devices can connect to verify router functionality",
       "Try forgetting the network and reconnecting with fresh credentials"
     ]
   },
   {
-    id: 3,
-    title: "Pair Device",
-    description: "Open your RV's companion app and follow the pairing instructions",
+    id: 4,
+    title: "Install App",
+    description: "Download and install the official RV companion app from your device's app store",
     icon: <Smartphone className="w-6 h-6 text-purple-400" />,
     troubleshooting: [
-      "Download latest version of RV companion app from official store",
-      "Allow all requested permissions including location services",
-      "Try force closing and reopening the app after clearing cache",
-      "Ensure your phone's operating system meets minimum requirements",
-      "Check internet connectivity as initial setup requires online activation",
-      "If pairing fails repeatedly, try uninstalling and reinstalling the app"
+      "Ensure you're downloading the official app from your device's app store",
+      "Check if your device meets the minimum system requirements",
+      "Clear enough storage space for the app installation",
+      "Update your device's operating system if required",
+      "If installation fails, try clearing app store cache",
+      "Check internet connection stability during download"
+    ]
+  },
+  {
+    id: 5,
+    title: "Initial Configuration",
+    description: "Set up your RV profile and customize system settings according to your preferences",
+    icon: <Settings className="w-6 h-6 text-orange-400" />,
+    troubleshooting: [
+      "Complete all required fields in the profile setup",
+      "Ensure date and time settings are correct",
+      "Configure temperature units (Fahrenheit/Celsius)",
+      "Set up notification preferences",
+      "Verify all connected devices are properly named",
+      "Test basic system controls after configuration"
+    ]
+  },
+  {
+    id: 6,
+    title: "Security Setup",
+    description: "Configure security settings and access controls for your RV's smart system",
+    icon: <Shield className="w-6 h-6 text-emerald-400" />,
+    troubleshooting: [
+      "Create a strong password for system access",
+      "Set up two-factor authentication if available",
+      "Configure guest access settings if needed",
+      "Review and set security notification preferences",
+      "Test emergency shutdown procedures",
+      "Document all security credentials safely"
     ]
   }
 ];
