@@ -37,16 +37,22 @@ const Calculators = () => {
   return (
     <>
       <Navbar />
-      <div className="min-h-screen bg-[#131a2a] pt-24">
-        <div className="container mx-auto px-4 py-8">
-          <div className="mb-12">
-            <h1 className="text-4xl md:text-5xl font-bold text-[#60A5FA] mb-6">
+      <div className="min-h-screen bg-[#131a2a]">
+        <div className="relative h-[400px] w-full overflow-hidden">
+          <img
+            src="/lovable-uploads/53093373-3df3-49cc-b4cc-91b800c53fa9.png"
+            alt="RV under starry night sky with ambient lighting"
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#131a2a]" />
+          <div className="absolute inset-0 flex items-center justify-center flex-col text-center px-4">
+            <h1 className="text-4xl md:text-5xl font-bold text-white mb-6 z-10">
               RV Calculator Suite
             </h1>
-            <h2 className="text-3xl md:text-4xl font-bold text-[#60A5FA] mb-6">
+            <h2 className="text-3xl md:text-4xl font-bold text-[#60A5FA] mb-6 z-10">
               Travel Safer, Spend Smarter, Drive Further
             </h2>
-            <div className="text-lg text-gray-300 max-w-3xl space-y-6">
+            <div className="text-lg text-gray-300 max-w-3xl space-y-6 z-10">
               <p>
                 Welcome to your comprehensive RV calculator suite.
               </p>
@@ -55,7 +61,9 @@ const Calculators = () => {
               </p>
             </div>
           </div>
+        </div>
 
+        <div className="container mx-auto px-4 py-8">
           <Tabs 
             defaultValue="power" 
             className="space-y-8"
