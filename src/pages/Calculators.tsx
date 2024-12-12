@@ -48,6 +48,11 @@ const Calculators = () => {
       }]);
       setDistance("");
       setFuelUsed("");
+      console.log("MPG record added:", mpg);
+    } else {
+      console.log("Cannot add MPG record: Please enter valid distance and fuel values");
+      // Add toast or alert here to inform user they need to enter valid values
+      alert("Please enter valid distance and fuel values first");
     }
   };
 
