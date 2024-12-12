@@ -20,9 +20,12 @@ const steps: Step[] = [
     description: "Turn on Bluetooth on your smartphone and ensure your RV's smart system is powered on",
     icon: <Bluetooth className="w-6 h-6 text-blue-400" />,
     troubleshooting: [
-      "Make sure Bluetooth is enabled in your phone settings",
-      "Verify RV system power is on",
-      "Stay within 30 feet of the RV system"
+      "Make sure Bluetooth is enabled in your phone settings and restart Bluetooth if needed",
+      "Verify RV system power is on and check the main circuit breaker",
+      "Stay within 30 feet of the RV system and ensure no large metal objects are blocking the signal",
+      "Check if your phone's Bluetooth version is compatible with the RV system (4.0 or higher required)",
+      "Remove any previously paired devices that might interfere with the connection",
+      "If connection fails, try forgetting the device and re-pairing"
     ]
   },
   {
@@ -31,9 +34,12 @@ const steps: Step[] = [
     description: "Connect to your RV's WiFi network using the provided network name and password",
     icon: <WifiHigh className="w-6 h-6 text-green-400" />,
     troubleshooting: [
-      "Check WiFi password carefully",
-      "Ensure you are selecting the correct network name",
-      "Reset RV router if connection fails"
+      "Check WiFi password carefully and ensure caps lock is not enabled",
+      "Ensure you are selecting the correct network name (SSID) from the list",
+      "Reset RV router by unplugging for 30 seconds if connection fails",
+      "Verify you're within range (usually 100 feet) of the RV's WiFi router",
+      "Check if other devices can connect to verify router functionality",
+      "Try forgetting the network and reconnecting with fresh credentials"
     ]
   },
   {
@@ -42,9 +48,12 @@ const steps: Step[] = [
     description: "Open your RV's companion app and follow the pairing instructions",
     icon: <Smartphone className="w-6 h-6 text-purple-400" />,
     troubleshooting: [
-      "Download latest version of RV companion app",
-      "Allow all requested permissions",
-      "Try force closing and reopening the app"
+      "Download latest version of RV companion app from official store",
+      "Allow all requested permissions including location services",
+      "Try force closing and reopening the app after clearing cache",
+      "Ensure your phone's operating system meets minimum requirements",
+      "Check internet connectivity as initial setup requires online activation",
+      "If pairing fails repeatedly, try uninstalling and reinstalling the app"
     ]
   }
 ];
