@@ -23,12 +23,32 @@ const Calculators = () => {
   return (
     <>
       <Helmet>
-        <title>RV Calculator Suite | Power, Fuel & Towing Calculators</title>
-        <meta name="description" content="Free RV calculators for power consumption, fuel efficiency, and towing safety. Plan your trips better with our mobile-friendly MPG tracker and weight distribution tools." />
-        <meta name="keywords" content="RV calculator, MPG tracker, towing calculator, RV power calculator, fuel efficiency calculator, weight distribution calculator, tire pressure calculator" />
+        {/* Main title - Keep it under 60 characters for optimal display */}
+        <title>RV Calculator Suite | Essential Tools for RV Life</title>
+        
+        {/* Meta description - Aim for 150-160 characters */}
+        <meta 
+          name="description" 
+          content="Plan your RV journey with our free calculator suite. Calculate power needs, track fuel efficiency, and ensure safe towing. Mobile-friendly tools for smarter RV travel." 
+        />
+        
+        {/* Keywords - Focus on specific calculator functions and user intent */}
+        <meta 
+          name="keywords" 
+          content="RV power calculator, MPG tracker, towing weight calculator, RV fuel efficiency, battery capacity calculator, solar panel calculator, tire pressure calculator, weight distribution" 
+        />
+        
+        {/* Mobile optimization */}
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta property="og:title" content="RV Calculator Suite | Essential Tools for RV Owners" />
-        <meta property="og:description" content="Calculate power needs, track fuel efficiency, and ensure safe towing with our comprehensive RV calculator suite." />
+        
+        {/* OpenGraph tags for social sharing */}
+        <meta property="og:title" content="RV Calculator Suite | Plan Your Journey Better" />
+        <meta 
+          property="og:description" 
+          content="Free RV calculators for power consumption, fuel efficiency, and towing safety. Plan smarter trips with our comprehensive calculator suite." 
+        />
+        
+        {/* Canonical URL to prevent duplicate content issues */}
         <link rel="canonical" href="/calculators" />
       </Helmet>
 
