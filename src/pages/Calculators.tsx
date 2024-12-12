@@ -58,7 +58,7 @@ const Calculators = () => {
 
       <Navbar />
       <div className="min-h-screen bg-[#131a2a]">
-        <div className="relative h-[250px] w-full overflow-hidden">
+        <div className="relative h-[400px] w-full overflow-hidden">
           <img
             src="/lovable-uploads/53093373-3df3-49cc-b4cc-91b800c53fa9.png"
             alt="RV under starry night sky with ambient lighting"
