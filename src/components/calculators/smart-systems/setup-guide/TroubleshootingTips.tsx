@@ -37,7 +37,7 @@ const TroubleshootingTips = ({ tips }: TroubleshootingTipsProps) => {
     <div className="relative mt-4">
       <div 
         ref={scrollContainerRef}
-        className="h-[200px] rounded-md border border-gray-700 p-4 overflow-auto scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-transparent"
+        className="h-[200px] rounded-md border border-gray-700 p-4 pb-12 overflow-auto scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-transparent"
       >
         <div className="space-y-4">
           <div className="flex items-center gap-2 text-yellow-400">
@@ -56,8 +56,12 @@ const TroubleshootingTips = ({ tips }: TroubleshootingTipsProps) => {
       </div>
       {showScrollIndicator && (
         <div 
-          className="absolute bottom-2 left-1/2 transform -translate-x-1/2 text-blue-400 animate-bounce cursor-pointer hover:text-blue-300 transition-colors"
+          className="absolute bottom-4 left-1/2 transform -translate-x-1/2 text-blue-400 animate-bounce cursor-pointer hover:text-blue-300 transition-colors bg-gray-800/50 rounded-full p-1"
           onClick={handleArrowClick}
+          style={{ 
+            bottom: '20px',
+            zIndex: 10
+          }}
         >
           <ChevronDown className="w-5 h-5" />
         </div>
