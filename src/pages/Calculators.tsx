@@ -9,7 +9,8 @@ import TripEfficiencyPlanner from "@/components/calculators/fuel/TripEfficiencyP
 import MPGTrackingSystem from "@/components/calculators/fuel/MPGTrackingSystem";
 import TowingSafetyCalculator from "@/components/calculators/towing/TowingSafetyCalculator";
 import GasCalculator from "@/components/calculators/fuel/GasCalculator";
-import { Battery, Fuel, Scale } from "lucide-react";
+import SmartSystemDecoder from "@/components/calculators/smart-systems/SmartSystemDecoder";
+import { Battery, Fuel, Scale, Settings } from "lucide-react";
 import { MPGRecord } from "@/components/calculators/fuel/MPGTrackingSystem";
 import { Helmet } from "react-helmet";
 
@@ -108,6 +109,13 @@ const Calculators = () => {
                 <Scale className="mr-2 h-4 w-4" />
                 Towing Safety
               </TabsTrigger>
+              <TabsTrigger 
+                value="smart-systems" 
+                className="data-[state=active]:bg-[#60A5FA] data-[state=active]:text-white text-gray-300 hover:text-white font-semibold text-base px-6 py-3"
+              >
+                <Settings className="mr-2 h-4 w-4" />
+                Smart Systems
+              </TabsTrigger>
             </TabsList>
 
             <TabsContent value="power" className="space-y-8">
@@ -130,6 +138,12 @@ const Calculators = () => {
             <TabsContent value="towing">
               <section aria-label="Towing Safety Tools">
                 <TowingSafetyCalculator />
+              </section>
+            </TabsContent>
+
+            <TabsContent value="smart-systems">
+              <section aria-label="Smart Systems Tools">
+                <SmartSystemDecoder />
               </section>
             </TabsContent>
           </Tabs>
