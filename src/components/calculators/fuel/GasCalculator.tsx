@@ -26,7 +26,7 @@ const GasCalculator = () => {
       toast({
         title: "Gas Cost Calculation",
         description: `Estimated cost: $${totalCost.toFixed(2)}
-          ${numOfFillUps ? `\nApprox. ${numOfFillUps} fill-ups needed` : ""}`,
+          ${numOfFillUps ? `\nApproximately ${numOfFillUps} refills needed` : ""}`,
       });
     } else {
       toast({
