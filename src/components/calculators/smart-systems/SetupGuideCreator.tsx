@@ -108,7 +108,7 @@ const SetupGuideCreator = () => {
               />
             ))}
           </div>
-          <span className="text-sm text-gray-400">
+          <span className="text-sm text-gray-300">
             Step {currentStep} of {steps.length}
           </span>
         </div>
@@ -164,7 +164,7 @@ const SetupGuideCreator = () => {
             variant="outline"
             onClick={handlePrevious}
             disabled={currentStep === 1}
-            className="border-gray-700 text-gray-300 hover:bg-gray-800"
+            className="border-gray-700 text-white hover:bg-gray-800"
           >
             <ArrowLeft className="w-4 h-4 mr-2" />
             Previous
