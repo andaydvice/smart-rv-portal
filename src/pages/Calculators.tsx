@@ -15,6 +15,9 @@ const Calculators = () => {
   const [fuelUsed, setFuelUsed] = useState("");
   const [vehicleWeight, setVehicleWeight] = useState("");
   const [trailerWeight, setTrailerWeight] = useState("");
+  const [tripDistance, setTripDistance] = useState("");
+  const [avgSpeed, setAvgSpeed] = useState("");
+  const [historicalMPG, setHistoricalMPG] = useState<{date: string, mpg: number}[]>([]);
 
   const calculateMPG = () => {
     const dist = parseFloat(distance);
@@ -23,6 +26,29 @@ const Calculators = () => {
       return (dist / fuel).toFixed(2);
     }
     return "0.00";
+  };
+
+  const calculateTripEfficiency = () => {
+    const dist = parseFloat(tripDistance);
+    const speed = parseFloat(avgSpeed);
+    if (dist && speed) {
+      // Basic calculation assuming optimal speed is 60mph
+      const efficiency = speed > 60 ? (1 - (speed - 60) * 0.02) : 1;
+      return (efficiency * 100).toFixed(1);
+    }
+    return "100.0";
+  };
+
+  const addMPGRecord = () => {
+    const mpg = parseFloat(calculateMPG());
+    if (mpg > 0) {
+      setHistoricalMPG([...historicalMPG, {
+        date: new Date().toLocaleDateString(),
+        mpg: mpg
+      }]);
+      setDistance("");
+      setFuelUsed("");
+    }
   };
 
   const calculateTowingCapacity = () => {
@@ -103,7 +129,7 @@ const Calculators = () => {
               <SolarPanelCalculator />
             </TabsContent>
 
-            <TabsContent value="fuel">
+            <TabsContent value="fuel" className="space-y-8">
               <Card className="bg-[#091020] border-gray-700 text-white">
                 <CardHeader>
                   <CardTitle className="text-2xl text-[#60A5FA]">Fuel Efficiency Calculator</CardTitle>
@@ -136,6 +162,73 @@ const Calculators = () => {
                     <p className="text-lg font-semibold text-[#60A5FA]">
                       Miles Per Gallon: {calculateMPG()} MPG
                     </p>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card className="bg-[#091020] border-gray-700 text-white">
+                <CardHeader>
+                  <CardTitle className="text-2xl text-[#60A5FA]">Trip Efficiency Planning</CardTitle>
+                  <CardDescription className="text-gray-400">
+                    Plan your trip's fuel efficiency based on distance and average speed.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="space-y-2">
+                    <label className="text-sm font-bold text-white">Trip Distance (miles)</label>
+                    <Input
+                      type="number"
+                      placeholder="e.g., 500"
+                      value={tripDistance}
+                      onChange={(e) => setTripDistance(e.target.value)}
+                      className="bg-[#131a2a] border-gray-700 text-white"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-sm font-bold text-white">Average Speed (mph)</label>
+                    <Input
+                      type="number"
+                      placeholder="e.g., 65"
+                      value={avgSpeed}
+                      onChange={(e) => setAvgSpeed(e.target.value)}
+                      className="bg-[#131a2a] border-gray-700 text-white"
+                    />
+                  </div>
+                  <div className="pt-4">
+                    <p className="text-lg font-semibold text-[#60A5FA]">
+                      Efficiency Rating: {calculateTripEfficiency()}%
+                    </p>
+                    <p className="text-sm text-gray-400 mt-2">
+                      Based on optimal cruising speed of 60mph for best fuel economy
+                    </p>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card className="bg-[#091020] border-gray-700 text-white">
+                <CardHeader>
+                  <CardTitle className="text-2xl text-[#60A5FA]">MPG Tracking System</CardTitle>
+                  <CardDescription className="text-gray-400">
+                    Keep track of your fuel efficiency over time to optimize your driving habits.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <button
+                    onClick={addMPGRecord}
+                    className="bg-[#60A5FA] text-white px-4 py-2 rounded hover:bg-[#4B8FE3] transition-colors"
+                  >
+                    Add Current MPG to History
+                  </button>
+                  <div className="mt-4">
+                    <h4 className="text-lg font-semibold mb-2">MPG History</h4>
+                    <div className="space-y-2">
+                      {historicalMPG.map((record, index) => (
+                        <div key={index} className="flex justify-between items-center bg-[#131a2a] p-2 rounded">
+                          <span>{record.date}</span>
+                          <span>{record.mpg.toFixed(2)} MPG</span>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 </CardContent>
               </Card>
