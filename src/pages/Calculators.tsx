@@ -8,6 +8,7 @@ import FuelEfficiencyCalculator from "@/components/calculators/fuel/FuelEfficien
 import TripEfficiencyPlanner from "@/components/calculators/fuel/TripEfficiencyPlanner";
 import MPGTrackingSystem from "@/components/calculators/fuel/MPGTrackingSystem";
 import TowingSafetyCalculator from "@/components/calculators/towing/TowingSafetyCalculator";
+import GasCalculator from "@/components/calculators/fuel/GasCalculator";
 import { Battery, Fuel, Scale } from "lucide-react";
 import { MPGRecord } from "@/components/calculators/fuel/MPGTrackingSystem";
 import { Helmet } from "react-helmet";
@@ -119,6 +120,7 @@ const Calculators = () => {
 
             <TabsContent value="fuel" className="space-y-8">
               <section aria-label="Fuel Efficiency Tools">
+                <GasCalculator />
                 <FuelEfficiencyCalculator onAddMPGRecord={handleAddMPGRecord} />
                 <TripEfficiencyPlanner />
                 <MPGTrackingSystem historicalMPG={historicalMPG} />
