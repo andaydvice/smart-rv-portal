@@ -11,6 +11,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { AlertInfo } from "./types/AlertTypes";
 
 const SmartAlertTranslator = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -23,8 +24,12 @@ const SmartAlertTranslator = () => {
     maintenance: "Maintenance Alerts"
   };
 
+  type GroupedAlerts = {
+    [key: string]: [string, AlertInfo][];
+  };
+
   // Group alerts by their predefined categories
-  const groupedAlerts = Object.entries(alertDatabase).reduce((acc, [code, alert]) => {
+  const groupedAlerts: GroupedAlerts = Object.entries(alertDatabase).reduce((acc, [code, alert]) => {
     let category;
     if (code.startsWith("VOLTAGE_") || code.startsWith("GROUND_") || 
         code.startsWith("INVERTER_") || code.startsWith("NEUTRAL_") ||
@@ -50,7 +55,7 @@ const SmartAlertTranslator = () => {
     }
     acc[category].push([code, alert]);
     return acc;
-  }, {});
+  }, {} as GroupedAlerts);
 
   console.log('Grouped Alerts:', groupedAlerts); // Debug log
 
@@ -79,7 +84,7 @@ const SmartAlertTranslator = () => {
       acc[category] = filtered;
     }
     return acc;
-  }, {} as typeof groupedAlerts);
+  }, {} as GroupedAlerts);
 
   return (
     <Card className="bg-[#091020] border-gray-700 text-white">
