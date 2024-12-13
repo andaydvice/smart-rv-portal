@@ -71,6 +71,66 @@ const alertDatabase: Record<string, AlertInfo> = {
       "Contact emergency services if needed",
       "Schedule professional inspection before reuse"
     ]
+  },
+  "TANK_FULL": {
+    title: "Grey/Black Tank Full",
+    description: "Waste tank capacity reached 90%",
+    severity: "medium",
+    steps: [
+      "Locate nearest dump station",
+      "Reduce water usage until emptied",
+      "Prepare sewer hose and connections",
+      "Check tank sensor accuracy",
+      "Plan route to dump station"
+    ]
+  },
+  "SOLAR_FAULT": {
+    title: "Solar System Error",
+    description: "Solar charging system malfunction detected",
+    severity: "medium",
+    steps: [
+      "Check solar panel connections",
+      "Verify charge controller status",
+      "Clean solar panels if dirty",
+      "Test battery bank voltage",
+      "Contact solar system specialist if persists"
+    ]
+  },
+  "DOOR_OPEN": {
+    title: "Door Open While Moving",
+    description: "External door or compartment not properly secured",
+    severity: "high",
+    steps: [
+      "Safely pull over when possible",
+      "Check all external doors and compartments",
+      "Verify door latch functionality",
+      "Test door sensors",
+      "Resume travel once secured"
+    ]
+  },
+  "TIRE_PRESS": {
+    title: "Tire Pressure Warning",
+    description: "Abnormal tire pressure detected",
+    severity: "high",
+    steps: [
+      "Check tire pressure when cool",
+      "Inspect tires for damage",
+      "Add air if needed to reach specifications",
+      "Monitor pressure during travel",
+      "Have tires inspected if issue persists"
+    ]
+  },
+  "INVERTER_FAIL": {
+    title: "Inverter System Failure",
+    description: "Power inverter not functioning correctly",
+    severity: "medium",
+    steps: [
+      "Check inverter display for error codes",
+      "Verify battery voltage levels",
+      "Reset inverter if possible",
+      "Check for loose connections",
+      "Contact technician if issue persists"
+    ]
   }
 };
 
