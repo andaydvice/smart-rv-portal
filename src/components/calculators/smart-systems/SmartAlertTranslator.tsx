@@ -14,21 +14,48 @@ import {
 
 const SmartAlertTranslator = () => {
   const [searchTerm, setSearchTerm] = useState("");
-  
-  // Group alerts by their category
+
+  // Pre-defined categories with their proper display names
+  const categories = {
+    electrical: "Electrical Alerts",
+    safety: "Safety Alerts",
+    system: "System Alerts",
+    maintenance: "Maintenance Alerts"
+  };
+
+  // Group alerts by their predefined categories
   const groupedAlerts = Object.entries(alertDatabase).reduce((acc, [code, alert]) => {
-    // Extract category from the code (everything before the first underscore)
-    const category = code.split('_')[0].toLowerCase();
+    let category;
+    if (code.startsWith("VOLTAGE_") || code.startsWith("GROUND_") || 
+        code.startsWith("INVERTER_") || code.startsWith("NEUTRAL_") ||
+        code.startsWith("SURGE_") || code.startsWith("BATTERY_") ||
+        code.startsWith("AC_") || code.startsWith("DC_")) {
+      category = "electrical";
+    } else if (code.startsWith("GAS_") || code.startsWith("DOOR_") || 
+               code.startsWith("TIRE_")) {
+      category = "safety";
+    } else if (code.startsWith("WIFI_") || code.startsWith("TEMP_") ||
+               code.startsWith("BAT_")) {
+      category = "system";
+    } else if (code.startsWith("WATER_") || code.startsWith("TANK_") ||
+               code.startsWith("FRIDGE_") || code.startsWith("SLIDE_") ||
+               code.startsWith("LEVELING_")) {
+      category = "maintenance";
+    } else {
+      category = "system"; // Default category
+    }
+
     if (!acc[category]) {
       acc[category] = [];
     }
     acc[category].push([code, alert]);
     return acc;
-  }, {} as Record<string, [string, typeof alertDatabase[keyof typeof alertDatabase]][]>);
+  }, {});
+
+  console.log('Grouped Alerts:', groupedAlerts); // Debug log
 
   const getCategoryIcon = (category: string) => {
     switch (category) {
-      case 'voltage':
       case 'electrical':
         return <Zap className="w-5 h-5 text-yellow-400" />;
       case 'safety':
@@ -42,10 +69,6 @@ const SmartAlertTranslator = () => {
     }
   };
 
-  const getCategoryTitle = (category: string) => {
-    return category.charAt(0).toUpperCase() + category.slice(1) + " Alerts";
-  };
-
   const filteredAlerts = Object.entries(groupedAlerts).reduce((acc, [category, alerts]) => {
     const filtered = alerts.filter(([code, alert]) =>
       code.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -57,9 +80,6 @@ const SmartAlertTranslator = () => {
     }
     return acc;
   }, {} as typeof groupedAlerts);
-
-  console.log('Grouped Alerts:', groupedAlerts); // Debug log
-  console.log('Filtered Alerts:', filteredAlerts); // Debug log
 
   return (
     <Card className="bg-[#091020] border-gray-700 text-white">
@@ -83,31 +103,35 @@ const SmartAlertTranslator = () => {
         <ScrollArea className="h-[500px] pr-4">
           <div className="space-y-4">
             {Object.entries(filteredAlerts).length > 0 ? (
-              Object.entries(filteredAlerts).map(([category, alerts]) => (
-                <div key={category} className="space-y-2 border border-gray-700 rounded-lg p-4">
-                  <div className="flex items-center gap-2 mb-4">
-                    {getCategoryIcon(category)}
-                    <h3 className="text-lg font-semibold text-gray-200">
-                      {getCategoryTitle(category)}
-                    </h3>
+              Object.entries(categories).map(([categoryKey, categoryTitle]) => {
+                if (!filteredAlerts[categoryKey]?.length) return null;
+                
+                return (
+                  <div key={categoryKey} className="space-y-2 border border-gray-700 rounded-lg p-4">
+                    <div className="flex items-center gap-2 mb-4">
+                      {getCategoryIcon(categoryKey)}
+                      <h3 className="text-lg font-semibold text-gray-200">
+                        {categoryTitle}
+                      </h3>
+                    </div>
+                    <Accordion type="single" collapsible className="space-y-4">
+                      {filteredAlerts[categoryKey].map(([code, alert]) => (
+                        <AccordionItem key={code} value={code} className="border-gray-700">
+                          <AccordionTrigger className="text-left hover:no-underline">
+                            <div className="flex flex-col items-start">
+                              <span className="text-[#60A5FA] font-semibold">{alert.title}</span>
+                              <span className="text-sm text-gray-400">Code: {code}</span>
+                            </div>
+                          </AccordionTrigger>
+                          <AccordionContent>
+                            <AlertCard code={code} alert={alert} />
+                          </AccordionContent>
+                        </AccordionItem>
+                      ))}
+                    </Accordion>
                   </div>
-                  <Accordion type="single" collapsible className="space-y-4">
-                    {alerts.map(([code, alert]) => (
-                      <AccordionItem key={code} value={code} className="border-gray-700">
-                        <AccordionTrigger className="text-left hover:no-underline">
-                          <div className="flex flex-col items-start">
-                            <span className="text-[#60A5FA] font-semibold">{alert.title}</span>
-                            <span className="text-sm text-gray-400">Code: {code}</span>
-                          </div>
-                        </AccordionTrigger>
-                        <AccordionContent>
-                          <AlertCard code={code} alert={alert} />
-                        </AccordionContent>
-                      </AccordionItem>
-                    ))}
-                  </Accordion>
-                </div>
-              ))
+                );
+              })
             ) : (
               <div className="text-center text-gray-400 py-8">
                 No alerts found matching your search
