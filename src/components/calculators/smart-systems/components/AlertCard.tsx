@@ -1,4 +1,4 @@
-import { AlertCircle, Bell, Info } from "lucide-react";
+import { AlertCircle, Bell, Info, Zap, Shield, Settings, Wrench } from "lucide-react";
 import { AlertInfo } from "../types/AlertTypes";
 
 interface AlertCardProps {
@@ -20,6 +20,26 @@ export const AlertCard = ({ code, alert }: AlertCardProps) => {
     }
   };
 
+  const getAlertIcon = (code: string) => {
+    if (code.startsWith("VOLTAGE_") || code.startsWith("GROUND_") || 
+        code.startsWith("INVERTER_") || code.startsWith("NEUTRAL_") ||
+        code.startsWith("SURGE_") || code.startsWith("BATTERY_") ||
+        code.startsWith("AC_") || code.startsWith("DC_")) {
+      return <Zap className="w-5 h-5 text-yellow-400" />;
+    } else if (code.startsWith("GAS_") || code.startsWith("DOOR_") || 
+               code.startsWith("TIRE_")) {
+      return <Shield className="w-5 h-5 text-red-400" />;
+    } else if (code.startsWith("WIFI_") || code.startsWith("TEMP_") ||
+               code.startsWith("BAT_")) {
+      return <Settings className="w-5 h-5 text-blue-400" />;
+    } else if (code.startsWith("WATER_") || code.startsWith("TANK_") ||
+               code.startsWith("FRIDGE_") || code.startsWith("SLIDE_") ||
+               code.startsWith("LEVELING_")) {
+      return <Wrench className="w-5 h-5 text-green-400" />;
+    }
+    return <Bell className="w-5 h-5 text-purple-400" />;
+  };
+
   const getSeverityIcon = (severity: AlertInfo["severity"]) => {
     switch (severity) {
       case "high":
@@ -36,12 +56,15 @@ export const AlertCard = ({ code, alert }: AlertCardProps) => {
   return (
     <div className="bg-gray-800/50 rounded-lg p-4 border border-gray-700">
       <div className="flex items-start justify-between mb-2">
-        <div>
-          <h3 className="text-lg font-semibold flex items-center gap-2">
-            {getSeverityIcon(alert.severity)}
-            {alert.title}
-          </h3>
-          <p className="text-sm text-gray-400 mt-1">Code: {code}</p>
+        <div className="flex items-start gap-2">
+          {getAlertIcon(code)}
+          <div>
+            <h3 className="text-lg font-semibold flex items-center gap-2">
+              {getSeverityIcon(alert.severity)}
+              {alert.title}
+            </h3>
+            <p className="text-sm text-gray-400 mt-1">Code: {code}</p>
+          </div>
         </div>
         <span className={`text-sm font-medium ${getSeverityColor(alert.severity)}`}>
           {alert.severity.toUpperCase()} Priority
