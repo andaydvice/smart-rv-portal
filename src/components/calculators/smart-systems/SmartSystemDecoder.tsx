@@ -9,6 +9,8 @@ interface SystemInfo {
   name: string;
   features: string[];
   commonIssues: string[];
+  compatibleWith?: string[];
+  incompatibleWith?: string[];
 }
 
 const systemsData: Record<string, SystemInfo> = {
@@ -24,7 +26,9 @@ const systemsData: Record<string, SystemInfo> = {
       "System may need recalibration after battery replacement",
       "Connectivity issues can affect remote monitoring",
       "Sensor readings might drift over time requiring adjustment"
-    ]
+    ],
+    compatibleWith: ["climate-control", "security"],
+    incompatibleWith: ["legacy-power"]
   },
   "climate-control": {
     name: "Smart Climate Control",
@@ -38,7 +42,9 @@ const systemsData: Record<string, SystemInfo> = {
       "Sensors may need periodic cleaning",
       "Temperature variations between zones",
       "System might need reboot after extended power loss"
-    ]
+    ],
+    compatibleWith: ["smart-power", "entertainment"],
+    incompatibleWith: ["manual-thermostat"]
   },
   "security": {
     name: "Smart Security System",
@@ -52,7 +58,9 @@ const systemsData: Record<string, SystemInfo> = {
       "False alarms from pets or wind movement",
       "Battery backup system requires regular testing",
       "Camera night vision range may be affected by weather"
-    ]
+    ],
+    compatibleWith: ["smart-power", "entertainment"],
+    incompatibleWith: ["analog-cameras"]
   },
   "entertainment": {
     name: "Smart Entertainment",
@@ -66,7 +74,9 @@ const systemsData: Record<string, SystemInfo> = {
       "Signal strength varies by location",
       "System updates may affect saved settings",
       "Audio synchronization across zones"
-    ]
+    ],
+    compatibleWith: ["climate-control", "security"],
+    incompatibleWith: ["basic-av"]
   }
 };
 
@@ -81,14 +91,24 @@ const SmartSystemDecoder = () => {
         ? current.filter(id => id !== systemId)
         : [...current, systemId];
       console.log("Updated selected systems:", updated);
+      
+      // Check compatibility with other selected systems
+      const newSystem = systemsData[systemId];
+      const otherSystems = updated.filter(id => id !== systemId);
+      
+      otherSystems.forEach(otherId => {
+        const otherSystem = systemsData[otherId];
+        if (newSystem.incompatibleWith?.includes(otherId) || 
+            otherSystem.incompatibleWith?.includes(systemId)) {
+          toast({
+            title: "Compatibility Warning",
+            description: `${newSystem.name} may have compatibility issues with ${otherSystem.name}`,
+            variant: "destructive"
+          });
+        }
+      });
+      
       return updated;
-    });
-
-    toast({
-      title: "System Selection Updated",
-      description: `${systemsData[systemId].name} ${
-        selectedSystems.includes(systemId) ? "removed from" : "added to"
-      } your configuration`,
     });
   };
 
@@ -97,10 +117,10 @@ const SmartSystemDecoder = () => {
       <CardHeader>
         <div className="flex items-center gap-2">
           <Settings className="w-5 h-5 text-[#60A5FA]" />
-          <CardTitle className="text-xl text-[#60A5FA]">Smart System Decoder</CardTitle>
+          <CardTitle className="text-xl text-[#60A5FA]">Smart System Compatibility Checker</CardTitle>
         </div>
         <p className="text-sm text-gray-300 mt-2">
-          Select your RV's smart components from the checklist below to see detailed information about their features and common troubleshooting tips.
+          Select your RV's smart components to check their compatibility and see detailed information about features and common issues.
         </p>
       </CardHeader>
       <CardContent className="space-y-6">
@@ -139,6 +159,24 @@ const SmartSystemDecoder = () => {
                   
                   <div className="space-y-4">
                     <div>
+                      <h4 className="text-sm font-semibold text-gray-300 mb-2">Compatible With</h4>
+                      <ul className="list-disc list-inside space-y-1 text-sm text-green-400">
+                        {system.compatibleWith?.map((compatSystem, index) => (
+                          <li key={index}>{systemsData[compatSystem]?.name || compatSystem}</li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    <div>
+                      <h4 className="text-sm font-semibold text-gray-300 mb-2">Not Compatible With</h4>
+                      <ul className="list-disc list-inside space-y-1 text-sm text-red-400">
+                        {system.incompatibleWith?.map((incompatSystem, index) => (
+                          <li key={index}>{systemsData[incompatSystem]?.name || incompatSystem}</li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    <div>
                       <h4 className="text-sm font-semibold text-gray-300 mb-2">Key Features</h4>
                       <ul className="list-disc list-inside space-y-1 text-sm text-gray-400">
                         {system.features.map((feature, index) => (
@@ -164,7 +202,7 @@ const SmartSystemDecoder = () => {
             })
           ) : (
             <div className="text-center text-gray-400 py-8">
-              Select one or more systems above to see detailed information
+              Select one or more systems above to see detailed compatibility information
             </div>
           )}
         </ScrollArea>
