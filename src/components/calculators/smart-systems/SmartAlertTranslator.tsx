@@ -17,6 +17,7 @@ const SmartAlertTranslator = () => {
   
   // Group alerts by their category
   const groupedAlerts = Object.entries(alertDatabase).reduce((acc, [code, alert]) => {
+    // Extract category from the code (everything before the first underscore)
     const category = code.split('_')[0].toLowerCase();
     if (!acc[category]) {
       acc[category] = [];
