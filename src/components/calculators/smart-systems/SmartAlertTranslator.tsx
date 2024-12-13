@@ -57,8 +57,6 @@ const SmartAlertTranslator = () => {
     return acc;
   }, {} as GroupedAlerts);
 
-  console.log('Grouped Alerts:', groupedAlerts); // Debug log
-
   const getCategoryIcon = (category: string) => {
     switch (category) {
       case 'electrical':
@@ -72,6 +70,26 @@ const SmartAlertTranslator = () => {
       default:
         return <Bell className="w-5 h-5 text-purple-400" />;
     }
+  };
+
+  const getAlertIcon = (code: string) => {
+    if (code.startsWith("VOLTAGE_") || code.startsWith("GROUND_") || 
+        code.startsWith("INVERTER_") || code.startsWith("NEUTRAL_") ||
+        code.startsWith("SURGE_") || code.startsWith("BATTERY_") ||
+        code.startsWith("AC_") || code.startsWith("DC_")) {
+      return <Zap className="w-5 h-5 text-yellow-400" />;
+    } else if (code.startsWith("GAS_") || code.startsWith("DOOR_") || 
+               code.startsWith("TIRE_")) {
+      return <Shield className="w-5 h-5 text-red-400" />;
+    } else if (code.startsWith("WIFI_") || code.startsWith("TEMP_") ||
+               code.startsWith("BAT_")) {
+      return <Settings className="w-5 h-5 text-blue-400" />;
+    } else if (code.startsWith("WATER_") || code.startsWith("TANK_") ||
+               code.startsWith("FRIDGE_") || code.startsWith("SLIDE_") ||
+               code.startsWith("LEVELING_")) {
+      return <Wrench className="w-5 h-5 text-green-400" />;
+    }
+    return <Bell className="w-5 h-5 text-purple-400" />;
   };
 
   const filteredAlerts = Object.entries(groupedAlerts).reduce((acc, [category, alerts]) => {
@@ -123,9 +141,12 @@ const SmartAlertTranslator = () => {
                       {filteredAlerts[categoryKey].map(([code, alert]) => (
                         <AccordionItem key={code} value={code} className="border-gray-700">
                           <AccordionTrigger className="text-left hover:no-underline">
-                            <div className="flex flex-col items-start">
-                              <span className="text-[#60A5FA] font-semibold">{alert.title}</span>
-                              <span className="text-sm text-gray-400">Code: {code}</span>
+                            <div className="flex items-center gap-2">
+                              {getAlertIcon(code)}
+                              <div className="flex flex-col items-start">
+                                <span className="text-[#60A5FA] font-semibold">{alert.title}</span>
+                                <span className="text-sm text-gray-400">Code: {code}</span>
+                              </div>
                             </div>
                           </AccordionTrigger>
                           <AccordionContent>
