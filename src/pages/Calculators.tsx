@@ -19,6 +19,7 @@ import TowingSafetyCalculator from "@/components/calculators/towing/TowingSafety
 import GasCalculator from "@/components/calculators/fuel/GasCalculator";
 import SmartSystemDecoder from "@/components/calculators/smart-systems/SmartSystemDecoder";
 import SetupGuideCreator from "@/components/calculators/smart-systems/SetupGuideCreator";
+import MaintenanceScheduleCreator from "@/components/calculators/smart-systems/MaintenanceScheduleCreator";
 import { MPGRecord } from "@/components/calculators/fuel/MPGTrackingSystem";
 
 const Calculators = () => {
@@ -99,6 +100,8 @@ const Calculators = () => {
                     <SmartSystemDecoder />
                     <div className="h-6" />
                     <SetupGuideCreator />
+                    <div className="h-6" />
+                    <MaintenanceScheduleCreator />
                   </section>
                 </TabsContent>
               </div>
