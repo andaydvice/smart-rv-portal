@@ -19,10 +19,11 @@ import TowingSafetyCalculator from "@/components/calculators/towing/TowingSafety
 import GasCalculator from "@/components/calculators/fuel/GasCalculator";
 import SmartSystemDecoder from "@/components/calculators/smart-systems/SmartSystemDecoder";
 import SetupGuideCreator from "@/components/calculators/smart-systems/SetupGuideCreator";
+import SmartAlertTranslator from "@/components/calculators/smart-systems/SmartAlertTranslator";
 import { MPGRecord } from "@/components/calculators/fuel/MPGTrackingSystem";
 
 const Calculators = () => {
-  const [activeTab, setActiveTab] = useState("smart-systems"); // Changed default tab to smart-systems
+  const [activeTab, setActiveTab] = useState("smart-systems");
   const [historicalMPG, setHistoricalMPG] = useState<MPGRecord[]>([]);
 
   const handleAddMPGRecord = (record: MPGRecord) => {
@@ -57,7 +58,7 @@ const Calculators = () => {
           <CalculatorIntro />
           
           <Tabs 
-            defaultValue="smart-systems" 
+            defaultValue="smart-systems"
             className="space-y-6"
             value={activeTab}
             onValueChange={setActiveTab}
@@ -99,6 +100,8 @@ const Calculators = () => {
                     <SmartSystemDecoder />
                     <div className="h-6" />
                     <SetupGuideCreator />
+                    <div className="h-6" />
+                    <SmartAlertTranslator />
                   </section>
                 </TabsContent>
               </div>
