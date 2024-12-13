@@ -6,11 +6,11 @@ export const alertDatabase: Record<string, AlertInfo> = {
     description: "Battery level has dropped below 20% capacity",
     severity: "high",
     steps: [
-      "Connect to shore power if available",
-      "Start generator if shore power unavailable",
-      "Reduce power consumption by turning off non-essential systems",
-      "Check battery connections for corrosion",
-      "Monitor charging progress through control panel"
+      "Connect to shore power using a surge protector rated for 50 amp service",
+      "Start generator and verify proper voltage output (120V AC)",
+      "Minimize power draw by shutting down air conditioning, water heater, and other high consumption devices",
+      "Clean battery terminals and verify connections are torqued to manufacturer specifications",
+      "Monitor charging system voltage and current through inverter display panel"
     ]
   },
   "WIFI_DISC": {
@@ -18,11 +18,11 @@ export const alertDatabase: Record<string, AlertInfo> = {
     description: "Smart system has lost WiFi connectivity",
     severity: "medium",
     steps: [
-      "Check if router is powered and functioning",
-      "Verify you're within range of the WiFi network",
-      "Restart router if necessary",
-      "Ensure network credentials haven't changed",
-      "Check for any physical damage to antenna"
+      "Verify router power supply voltage and LED status indicators",
+      "Check signal strength meter and relocate within 100 feet of access point",
+      "Power cycle router and wait 2 minutes for full restart sequence",
+      "Access router configuration page to confirm network SSID and security settings",
+      "Inspect antenna connections and verify proper mounting orientation"
     ]
   },
   "TEMP_HIGH": {
@@ -30,11 +30,11 @@ export const alertDatabase: Record<string, AlertInfo> = {
     description: "Internal temperature exceeds normal operating range",
     severity: "high",
     steps: [
-      "Check air conditioning functionality",
-      "Ensure all vents are unobstructed",
-      "Close windows and doors if using AC",
-      "Check for proper insulation",
-      "Consider moving to shaded area if parked"
+      "Verify AC unit amperage draw and refrigerant pressure levels",
+      "Clear all return air vents and verify proper airflow (minimum 350 CFM)",
+      "Ensure all windows and doors have proper weatherstripping and seals",
+      "Check roof insulation R value and inspect for thermal bridging",
+      "Position RV to minimize sun exposure and deploy awnings for shade"
     ]
   },
   "WATER_LOW": {
@@ -42,11 +42,11 @@ export const alertDatabase: Record<string, AlertInfo> = {
     description: "Fresh water tank level below 15%",
     severity: "medium",
     steps: [
-      "Locate nearest water fill station",
-      "Check for leaks in water system",
-      "Monitor usage until refill possible",
-      "Consider conservation measures",
-      "Verify sensor accuracy through manual check"
+      "Locate water fill station with appropriate pressure regulator (40 60 PSI)",
+      "Inspect water system for pressure drops indicating potential leaks",
+      "Calculate remaining gallons based on tank capacity and usage rate",
+      "Implement water saving devices on faucets and showerheads",
+      "Calibrate tank sensors using manual measurement verification"
     ]
   },
   "GAS_DETECT": {
@@ -54,11 +54,11 @@ export const alertDatabase: Record<string, AlertInfo> = {
     description: "Possible gas leak detected",
     severity: "high",
     steps: [
-      "Immediately turn off all gas appliances",
-      "Open windows and doors for ventilation",
-      "Exit the RV if smell is present",
-      "Contact emergency services if needed",
-      "Schedule professional inspection before reuse"
+      "Immediately close LP gas valve at tank and verify solenoid operation",
+      "Open all windows and roof vents to achieve complete air exchange",
+      "Evacuate RV and maintain safe distance of at least 50 feet",
+      "Contact emergency services if gas odor persists",
+      "Schedule certified RV technician inspection of gas lines and connections"
     ]
   },
   "TANK_FULL": {
@@ -66,11 +66,11 @@ export const alertDatabase: Record<string, AlertInfo> = {
     description: "Waste tank capacity reached 90%",
     severity: "medium",
     steps: [
-      "Locate nearest dump station",
-      "Reduce water usage until emptied",
-      "Prepare sewer hose and connections",
-      "Check tank sensor accuracy",
-      "Plan route to dump station"
+      "Locate dump station with proper sewer connection adapters",
+      "Implement water conservation protocols until tanks are emptied",
+      "Prepare sewer hose system with proper slope (1/4 inch per foot)",
+      "Verify tank level accuracy using multiple sensor readings",
+      "Map route to nearest dump station considering vehicle height and weight"
     ]
   },
   "SOLAR_FAULT": {
@@ -78,11 +78,11 @@ export const alertDatabase: Record<string, AlertInfo> = {
     description: "Solar charging system malfunction detected",
     severity: "medium",
     steps: [
-      "Check solar panel connections",
-      "Verify charge controller status",
-      "Clean solar panels if dirty",
-      "Test battery bank voltage",
-      "Contact solar system specialist if persists"
+      "Test all panel connections with multimeter for voltage and continuity",
+      "Inspect charge controller display for specific error codes",
+      "Remove debris and clean panels with appropriate solar cleaning solution",
+      "Measure battery bank voltage under load and at rest",
+      "Document system performance data for solar technician analysis"
     ]
   },
   "DOOR_OPEN": {
@@ -90,11 +90,11 @@ export const alertDatabase: Record<string, AlertInfo> = {
     description: "External door or compartment not properly secured",
     severity: "high",
     steps: [
-      "Safely pull over when possible",
-      "Check all external doors and compartments",
-      "Verify door latch functionality",
-      "Test door sensors",
-      "Resume travel once secured"
+      "Safely reduce speed and activate hazard lights",
+      "Inspect all compartment and door latching mechanisms",
+      "Test electronic door sensors and verify proper calibration",
+      "Check door alignment and adjust hinges if necessary",
+      "Verify proper operation of door monitoring system"
     ]
   },
   "TIRE_PRESS": {
@@ -102,11 +102,11 @@ export const alertDatabase: Record<string, AlertInfo> = {
     description: "Abnormal tire pressure detected",
     severity: "high",
     steps: [
-      "Check tire pressure when cool",
-      "Inspect tires for damage",
-      "Add air if needed to reach specifications",
-      "Monitor pressure during travel",
-      "Have tires inspected if issue persists"
+      "Check cold tire pressure against manufacturer load rating charts",
+      "Perform visual inspection for sidewall damage or foreign objects",
+      "Adjust pressure to specifications based on actual loaded weight",
+      "Document pressure changes over time for trend analysis",
+      "Schedule professional tire inspection if pressure loss exceeds 2 PSI per day"
     ]
   },
   "INVERTER_FAIL": {
@@ -114,11 +114,11 @@ export const alertDatabase: Record<string, AlertInfo> = {
     description: "Power inverter not functioning correctly",
     severity: "medium",
     steps: [
-      "Check inverter display for error codes",
-      "Verify battery voltage levels",
-      "Reset inverter if possible",
-      "Check for loose connections",
-      "Contact technician if issue persists"
+      "Record specific error codes from inverter display panel",
+      "Test battery voltage under load (should maintain above 12.2V)",
+      "Perform complete power cycle following manufacturer protocol",
+      "Inspect all high current connections with thermal imaging",
+      "Contact certified technician with documented error history"
     ]
   },
   "GEN_FAULT": {
@@ -126,35 +126,35 @@ export const alertDatabase: Record<string, AlertInfo> = {
     description: "Generator system reporting operational issues",
     severity: "high",
     steps: [
-      "Check fuel level and quality",
-      "Inspect oil level and condition",
-      "Look for error codes on control panel",
-      "Verify air filter condition",
-      "Schedule maintenance if issues persist"
+      "Check fuel quality and verify proper octane rating",
+      "Test oil level and condition with dipstick when cool",
+      "Document specific error codes from generator control panel",
+      "Inspect air filter for proper flow and contamination",
+      "Schedule maintenance with authorized generator service center"
     ]
   },
   "SLIDE_ERR": {
-    title: "Slide-Out Error",
-    description: "Slide-out mechanism encountering problems",
+    title: "Slide Out Error",
+    description: "Slide out mechanism encountering problems",
     severity: "medium",
     steps: [
-      "Check for obstacles in slide path",
-      "Verify hydraulic fluid levels",
-      "Inspect slide seals for damage",
-      "Test battery voltage",
-      "Contact RV technician if mechanism stuck"
+      "Clear slide path and verify minimum 3 foot clearance",
+      "Check hydraulic reservoir level and pressure readings",
+      "Inspect slide seals for proper compression and wear",
+      "Test battery voltage under slide operation (minimum 12V)",
+      "Document slide movement and any unusual sounds"
     ]
   },
   "LEVELING_FAIL": {
-    title: "Auto-Leveling System Error",
+    title: "Auto Leveling System Error",
     description: "Automatic leveling system malfunction",
     severity: "medium",
     steps: [
-      "Check ground stability and obstacles",
-      "Verify hydraulic fluid levels",
-      "Reset system through control panel",
-      "Inspect jack mechanisms",
-      "Use manual leveling if necessary"
+      "Verify ground stability with minimum 4000 lb bearing capacity",
+      "Check hydraulic fluid level and condition in reservoir",
+      "Perform system reset following manufacturer sequence",
+      "Inspect jack mechanisms for proper extension and retraction",
+      "Document error codes and system behavior for service"
     ]
   },
   "FRIDGE_TEMP": {
@@ -162,11 +162,11 @@ export const alertDatabase: Record<string, AlertInfo> = {
     description: "Refrigerator temperature outside safe range",
     severity: "high",
     steps: [
-      "Check power source (gas/electric)",
-      "Verify door seal and closure",
-      "Clean cooling fins if accessible",
-      "Monitor food safety",
-      "Contact appliance technician if persists"
+      "Verify power source and proper voltage (120V AC or 12V DC)",
+      "Check door seal compression and alignment",
+      "Clean condenser coils and verify proper airflow",
+      "Monitor internal temperature with calibrated thermometer",
+      "Schedule service if temperature exceeds 40°F for over 2 hours"
     ]
   },
   "AWNING_WIND": {
@@ -174,11 +174,11 @@ export const alertDatabase: Record<string, AlertInfo> = {
     description: "Wind speed exceeds safe awning deployment limit",
     severity: "high",
     steps: [
-      "Retract awning immediately",
-      "Secure any loose outdoor items",
-      "Monitor weather conditions",
-      "Inspect awning for damage",
-      "Wait for safe conditions before redeploying"
+      "Retract awning immediately when wind exceeds 20 mph",
+      "Secure all outdoor furniture and accessories",
+      "Monitor local weather radar for approaching systems",
+      "Inspect awning arms and fabric for wind damage",
+      "Wait for sustained winds below 15 mph before redeploying"
     ]
   }
 };
