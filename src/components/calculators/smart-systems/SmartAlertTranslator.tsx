@@ -57,6 +57,9 @@ const SmartAlertTranslator = () => {
     return acc;
   }, {} as typeof groupedAlerts);
 
+  console.log('Grouped Alerts:', groupedAlerts); // Debug log
+  console.log('Filtered Alerts:', filteredAlerts); // Debug log
+
   return (
     <Card className="bg-[#091020] border-gray-700 text-white">
       <CardHeader>
@@ -78,10 +81,10 @@ const SmartAlertTranslator = () => {
         
         <ScrollArea className="h-[500px] pr-4">
           <div className="space-y-4">
-            {Object.keys(filteredAlerts).length > 0 ? (
+            {Object.entries(filteredAlerts).length > 0 ? (
               Object.entries(filteredAlerts).map(([category, alerts]) => (
-                <div key={category} className="space-y-2">
-                  <div className="flex items-center gap-2 mb-2">
+                <div key={category} className="space-y-2 border border-gray-700 rounded-lg p-4">
+                  <div className="flex items-center gap-2 mb-4">
                     {getCategoryIcon(category)}
                     <h3 className="text-lg font-semibold text-gray-200">
                       {getCategoryTitle(category)}
