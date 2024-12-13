@@ -5,6 +5,12 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { MessageCircle } from "lucide-react";
 import { alertDatabase } from "./data/alertDatabase";
 import { AlertCard } from "./components/AlertCard";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
 const SmartAlertTranslator = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -37,9 +43,21 @@ const SmartAlertTranslator = () => {
         <ScrollArea className="h-[500px] pr-4">
           <div className="space-y-4">
             {filteredAlerts.length > 0 ? (
-              filteredAlerts.map(([code, alert]) => (
-                <AlertCard key={code} code={code} alert={alert} />
-              ))
+              <Accordion type="single" collapsible className="space-y-4">
+                {filteredAlerts.map(([code, alert]) => (
+                  <AccordionItem key={code} value={code} className="border-gray-700">
+                    <AccordionTrigger className="text-left hover:no-underline">
+                      <div className="flex flex-col items-start">
+                        <span className="text-[#60A5FA] font-semibold">{alert.title}</span>
+                        <span className="text-sm text-gray-400">Code: {code}</span>
+                      </div>
+                    </AccordionTrigger>
+                    <AccordionContent>
+                      <AlertCard code={code} alert={alert} />
+                    </AccordionContent>
+                  </AccordionItem>
+                ))}
+              </Accordion>
             ) : (
               <div className="text-center text-gray-400 py-8">
                 No alerts found matching your search
