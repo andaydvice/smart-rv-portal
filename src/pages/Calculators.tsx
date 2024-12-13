@@ -22,7 +22,7 @@ import SetupGuideCreator from "@/components/calculators/smart-systems/SetupGuide
 import { MPGRecord } from "@/components/calculators/fuel/MPGTrackingSystem";
 
 const Calculators = () => {
-  const [activeTab, setActiveTab] = useState("power");
+  const [activeTab, setActiveTab] = useState("smart-systems"); // Changed default tab to smart-systems
   const [historicalMPG, setHistoricalMPG] = useState<MPGRecord[]>([]);
 
   const handleAddMPGRecord = (record: MPGRecord) => {
@@ -57,7 +57,7 @@ const Calculators = () => {
           <CalculatorIntro />
           
           <Tabs 
-            defaultValue="power" 
+            defaultValue="smart-systems" 
             className="space-y-6"
             value={activeTab}
             onValueChange={setActiveTab}
