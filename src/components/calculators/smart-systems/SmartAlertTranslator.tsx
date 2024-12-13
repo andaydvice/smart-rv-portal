@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { MessageCircle, Zap, Shield, Settings, Tool, Bell } from "lucide-react";
+import { MessageCircle, Zap, Shield, Settings, Wrench, Bell } from "lucide-react";
 import { alertDatabase } from "./data/alertDatabase";
 import { AlertCard } from "./components/AlertCard";
 import {
@@ -35,7 +35,7 @@ const SmartAlertTranslator = () => {
       case 'system':
         return <Settings className="w-5 h-5 text-blue-400" />;
       case 'maintenance':
-        return <Tool className="w-5 h-5 text-green-400" />;
+        return <Wrench className="w-5 h-5 text-green-400" />;
       default:
         return <Bell className="w-5 h-5 text-purple-400" />;
     }
