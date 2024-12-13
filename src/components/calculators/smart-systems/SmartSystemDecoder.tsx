@@ -2,83 +2,10 @@ import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Settings, Info, AlertTriangle } from "lucide-react";
+import { Settings, Info } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
-
-interface SystemInfo {
-  name: string;
-  features: string[];
-  commonIssues: string[];
-  compatibleWith?: string[];
-  incompatibleWith?: string[];
-}
-
-const systemsData: Record<string, SystemInfo> = {
-  "smart-power": {
-    name: "Smart Power Management",
-    features: [
-      "Real time power consumption monitoring",
-      "Automatic source switching between shore, solar, and generator power",
-      "Load balancing to prevent circuit overload",
-      "Battery health monitoring and alerts"
-    ],
-    commonIssues: [
-      "System may need recalibration after battery replacement",
-      "Connectivity issues can affect remote monitoring",
-      "Sensor readings might drift over time requiring adjustment"
-    ],
-    compatibleWith: ["climate-control", "security"],
-    incompatibleWith: ["legacy-power"]
-  },
-  "climate-control": {
-    name: "Smart Climate Control",
-    features: [
-      "Zone based temperature management",
-      "Humidity monitoring and control",
-      "Scheduled climate adjustments",
-      "Energy efficient operation modes"
-    ],
-    commonIssues: [
-      "Sensors may need periodic cleaning",
-      "Temperature variations between zones",
-      "System might need reboot after extended power loss"
-    ],
-    compatibleWith: ["smart-power", "entertainment"],
-    incompatibleWith: ["manual-thermostat"]
-  },
-  "security": {
-    name: "Smart Security System",
-    features: [
-      "Remote monitoring and alerts",
-      "Motion detection with camera integration",
-      "Door and window sensors",
-      "GPS tracking capabilities"
-    ],
-    commonIssues: [
-      "False alarms from pets or wind movement",
-      "Battery backup system requires regular testing",
-      "Camera night vision range may be affected by weather"
-    ],
-    compatibleWith: ["smart-power", "entertainment"],
-    incompatibleWith: ["analog-cameras"]
-  },
-  "entertainment": {
-    name: "Smart Entertainment",
-    features: [
-      "Multi zone audio control",
-      "Satellite TV integration",
-      "Streaming service optimization",
-      "Outdoor entertainment options"
-    ],
-    commonIssues: [
-      "Signal strength varies by location",
-      "System updates may affect saved settings",
-      "Audio synchronization across zones"
-    ],
-    compatibleWith: ["climate-control", "security"],
-    incompatibleWith: ["basic-av"]
-  }
-};
+import { SystemDetails } from "./components/SystemDetails";
+import { systemsData } from "./data/systemsData";
 
 const SmartSystemDecoder = () => {
   const [selectedSystems, setSelectedSystems] = useState<string[]>([]);
@@ -148,58 +75,13 @@ const SmartSystemDecoder = () => {
 
         <ScrollArea className="h-[400px] rounded-md border border-gray-700 p-4">
           {selectedSystems.length > 0 ? (
-            selectedSystems.map(systemId => {
-              const system = systemsData[systemId];
-              return (
-                <div key={systemId} className="mb-6 last:mb-0">
-                  <h3 className="text-lg font-semibold text-[#60A5FA] mb-3 flex items-center gap-2">
-                    <Info className="w-4 h-4" />
-                    {system.name}
-                  </h3>
-                  
-                  <div className="space-y-4">
-                    <div>
-                      <h4 className="text-sm font-semibold text-gray-300 mb-2">Compatible With</h4>
-                      <ul className="list-disc list-inside space-y-1 text-sm text-green-400">
-                        {system.compatibleWith?.map((compatSystem, index) => (
-                          <li key={index}>{systemsData[compatSystem]?.name || compatSystem}</li>
-                        ))}
-                      </ul>
-                    </div>
-
-                    <div>
-                      <h4 className="text-sm font-semibold text-gray-300 mb-2">Not Compatible With</h4>
-                      <ul className="list-disc list-inside space-y-1 text-sm text-red-400">
-                        {system.incompatibleWith?.map((incompatSystem, index) => (
-                          <li key={index}>{systemsData[incompatSystem]?.name || incompatSystem}</li>
-                        ))}
-                      </ul>
-                    </div>
-
-                    <div>
-                      <h4 className="text-sm font-semibold text-gray-300 mb-2">Key Features</h4>
-                      <ul className="list-disc list-inside space-y-1 text-sm text-gray-400">
-                        {system.features.map((feature, index) => (
-                          <li key={index}>{feature}</li>
-                        ))}
-                      </ul>
-                    </div>
-                    
-                    <div>
-                      <h4 className="text-sm font-semibold text-gray-300 mb-2 flex items-center gap-2">
-                        <AlertTriangle className="w-4 h-4 text-yellow-500" />
-                        Common Issues
-                      </h4>
-                      <ul className="list-disc list-inside space-y-1 text-sm text-gray-400">
-                        {system.commonIssues.map((issue, index) => (
-                          <li key={index}>{issue}</li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              );
-            })
+            selectedSystems.map(systemId => (
+              <SystemDetails 
+                key={systemId}
+                system={systemsData[systemId]}
+                systemId={systemId}
+              />
+            ))
           ) : (
             <div className="text-center text-gray-400 py-8">
               Select one or more systems above to see detailed compatibility information
