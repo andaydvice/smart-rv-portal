@@ -7,82 +7,67 @@ const CalculatorTabs = ({ activeTab, onTabChange }: { activeTab: string; onTabCh
 
   const tabStyle = `
     relative 
-    transition-colors 
-    duration-200 
-    flex-1
-    min-w-[150px]
-    px-3
-    py-2
+    flex
+    items-center
+    justify-center
+    gap-2
+    px-4
+    py-2.5
     text-sm
-    font-semibold
+    font-medium
     text-gray-300
     hover:text-white
     data-[state=active]:bg-[#60A5FA]/20
     data-[state=active]:text-white
     rounded-md
     whitespace-nowrap
-    flex
-    items-center
+    min-w-[120px]
+    transition-colors
   `;
 
   return (
-    <div className="sticky top-0 z-[5] bg-[#091020] border-b border-gray-800">
+    <div className="sticky top-16 z-[5] bg-[#091020] border-b border-gray-800">
       <div className="container mx-auto px-4">
-        <TabsList className="bg-[#091020] p-2 w-full flex overflow-x-auto gap-2">
+        <TabsList className="bg-[#091020] p-2 w-full flex overflow-x-auto gap-2 no-scrollbar">
           <TabsTrigger 
             value="cost" 
             className={tabStyle}
-            onClick={() => {
-              console.log("Clicking cost tab");
-              onTabChange("cost");
-            }}
+            onClick={() => onTabChange("cost")}
           >
-            <Calculator className="mr-2 h-4 w-4" />
-            Cost Calculator
+            <Calculator className="h-4 w-4 flex-shrink-0" />
+            <span>Cost</span>
           </TabsTrigger>
           <TabsTrigger 
             value="power" 
             className={tabStyle}
-            onClick={() => {
-              console.log("Clicking power tab");
-              onTabChange("power");
-            }}
+            onClick={() => onTabChange("power")}
           >
-            <Battery className="mr-2 h-4 w-4" />
-            Power & Solar
+            <Battery className="h-4 w-4 flex-shrink-0" />
+            <span>Power</span>
           </TabsTrigger>
           <TabsTrigger 
             value="fuel" 
             className={tabStyle}
-            onClick={() => {
-              console.log("Clicking fuel tab");
-              onTabChange("fuel");
-            }}
+            onClick={() => onTabChange("fuel")}
           >
-            <Fuel className="mr-2 h-4 w-4" />
-            Fuel Efficiency
+            <Fuel className="h-4 w-4 flex-shrink-0" />
+            <span>Fuel</span>
           </TabsTrigger>
           <TabsTrigger 
             value="towing" 
             className={tabStyle}
-            onClick={() => {
-              console.log("Clicking towing tab");
-              onTabChange("towing");
-            }}
+            onClick={() => onTabChange("towing")}
           >
-            <Scale className="mr-2 h-4 w-4" />
-            Towing Safety
+            <Scale className="h-4 w-4 flex-shrink-0" />
+            <span>Towing</span>
           </TabsTrigger>
           <TabsTrigger 
             value="smart-systems" 
             className={tabStyle}
-            onClick={() => {
-              console.log("Clicking smart systems tab");
-              onTabChange("smart-systems");
-            }}
+            onClick={() => onTabChange("smart-systems")}
           >
-            <Settings className="mr-2 h-4 w-4" />
-            Smart Systems
+            <Settings className="h-4 w-4 flex-shrink-0" />
+            <span>Smart</span>
           </TabsTrigger>
         </TabsList>
       </div>

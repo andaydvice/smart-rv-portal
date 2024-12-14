@@ -9,7 +9,7 @@ const MenuButton = ({ isOpen, onClick }: MenuButtonProps) => {
   return (
     <button
       onClick={onClick}
-      className="block md:hidden text-gray-300 hover:text-blue-400 p-2"
+      className="block md:hidden p-2 text-gray-300 hover:text-blue-400 transition-colors"
       aria-label="Toggle menu"
     >
       {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}

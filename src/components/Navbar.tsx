@@ -7,14 +7,10 @@ import MenuButton from "./navigation/MenuButton";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const toggleMenu = () => {
     console.log("Toggling mobile menu");
     setIsOpen(!isOpen);
-    if (!isOpen === false) {
-      setIsMobileMenuOpen(false);
-    }
   };
 
   return (
@@ -25,9 +21,11 @@ const Navbar = () => {
             <Logo />
           </Link>
           
-          <div className="flex items-center">
+          <div className="flex items-center gap-4">
             <MenuButton isOpen={isOpen} onClick={toggleMenu} />
-            <DesktopNavigation />
+            <div className="hidden md:block">
+              <DesktopNavigation />
+            </div>
           </div>
         </div>
       </div>
