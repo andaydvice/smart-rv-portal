@@ -5,8 +5,11 @@ import { Button } from "@/components/ui/button";
 const getFullPath = (path: string) => {
   try {
     const baseUrl = window.location.origin;
-    console.log('Generating path with baseUrl:', baseUrl, 'path:', path);
-    return `${baseUrl}${path}`;
+    console.log('Base URL:', baseUrl);
+    console.log('Path:', path);
+    const fullPath = `${baseUrl}${path}`;
+    console.log('Full path generated:', fullPath);
+    return fullPath;
   } catch (error) {
     console.error('Error generating full path:', error);
     return path;
@@ -19,7 +22,7 @@ const systems = [
     name: "Smart Security",
     description: "Advanced security systems with remote monitoring and smart locks",
     image: "/lovable-uploads/smart-security.jpg",
-    link: getFullPath("/features/security")
+    link: "/features/security"
   },
   {
     icon: Phone,
@@ -38,11 +41,35 @@ const systems = [
     name: "Smart Kitchen",
     description: "Connected appliances with remote monitoring",
     image: "/lovable-uploads/smart-kitchen.jpg",
-    link: getFullPath("/features/smart-kitchen")
+    link: "/features/smart-kitchen"
   },
 ];
 
+const CardContent = ({ system }: { system: typeof systems[0] }) => (
+  <>
+    <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+    <div className="p-8">
+      <system.icon className="w-16 h-16 mb-4 text-blue-400" />
+      <h3 className="text-2xl font-bold mb-2 text-white">{system.name}</h3>
+      <p className="text-gray-300 mb-4">{system.description}</p>
+      <Button 
+        variant="outline" 
+        className="bg-white/5 text-white border-white/20 hover:bg-white/10 transition-colors"
+      >
+        Learn More
+      </Button>
+    </div>
+  </>
+);
+
 export const TechnologySection = () => {
+  const handleCardClick = (link: string) => {
+    console.log('Card clicked, link:', link);
+    const fullPath = getFullPath(link);
+    console.log('Navigating to:', fullPath);
+    window.location.href = fullPath;
+  };
+
   return (
     <section className="py-24 px-4 bg-gradient-to-br from-[#2A2A4A] to-[#1A1A2F] relative overflow-hidden">
       <div className="absolute inset-0 bg-[url('/lovable-uploads/0a22c848-dff2-43f4-b1eb-800fa123a904.png')] opacity-5 bg-cover bg-fixed" />
@@ -71,31 +98,10 @@ export const TechnologySection = () => {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.2 }}
-              className="group relative overflow-hidden rounded-xl bg-white/5 backdrop-blur-sm border border-white/10 hover:border-white/20 transition-all duration-300"
+              className="group relative overflow-hidden rounded-xl bg-white/5 backdrop-blur-sm border border-white/10 hover:border-white/20 transition-all duration-300 cursor-pointer"
+              onClick={() => system.link && handleCardClick(system.link)}
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              <div className="p-8">
-                <system.icon className="w-16 h-16 mb-4 text-blue-400" />
-                <h3 className="text-2xl font-bold mb-2 text-white">{system.name}</h3>
-                <p className="text-gray-300 mb-4">{system.description}</p>
-                {system.link ? (
-                  <a href={system.link} className="inline-block">
-                    <Button 
-                      variant="outline" 
-                      className="bg-white/5 text-white border-white/20 hover:bg-white/10 transition-colors"
-                    >
-                      Learn More
-                    </Button>
-                  </a>
-                ) : (
-                  <Button 
-                    variant="outline" 
-                    className="bg-white/5 text-white border-white/20 hover:bg-white/10 transition-colors"
-                  >
-                    Learn More
-                  </Button>
-                )}
-              </div>
+              <CardContent system={system} />
             </motion.div>
           ))}
         </div>
