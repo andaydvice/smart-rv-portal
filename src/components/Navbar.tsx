@@ -10,6 +10,7 @@ const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const toggleMenu = () => {
+    console.log("Toggling mobile menu");
     setIsOpen(!isOpen);
     if (!isOpen === false) {
       setIsMobileMenuOpen(false);
@@ -24,8 +25,10 @@ const Navbar = () => {
             <Logo />
           </Link>
           
-          <MenuButton isOpen={isOpen} onClick={toggleMenu} />
-          <DesktopNavigation />
+          <div className="flex items-center">
+            <MenuButton isOpen={isOpen} onClick={toggleMenu} />
+            <DesktopNavigation />
+          </div>
         </div>
       </div>
 

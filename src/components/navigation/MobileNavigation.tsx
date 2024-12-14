@@ -8,9 +8,13 @@ interface MobileNavigationProps {
 }
 
 const MobileNavigation = ({ isOpen }: MobileNavigationProps) => {
+  console.log("Mobile navigation isOpen:", isOpen);
+  
   return (
-    <div className={`md:hidden bg-gray-900/95 backdrop-blur-sm border-b border-gray-800 ${isOpen ? 'block' : 'hidden'}`}>
-      <div className="px-2 pt-2 pb-3 max-h-[80vh] overflow-y-auto">
+    <div 
+      className={`${isOpen ? 'block' : 'hidden'} md:hidden fixed inset-x-0 top-16 bottom-0 bg-gray-900/95 backdrop-blur-sm border-b border-gray-800 overflow-y-auto`}
+    >
+      <div className="px-2 pt-2 pb-3 space-y-1">
         <Accordion type="single" collapsible className="space-y-2">
           <AccordionItem value="technology" className="border-b-0">
             <AccordionTrigger className="text-gray-300 hover:text-blue-400 py-2 text-base">
