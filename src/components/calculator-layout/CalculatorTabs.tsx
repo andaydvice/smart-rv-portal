@@ -22,14 +22,15 @@ const CalculatorTabs = ({ activeTab, onTabChange }: { activeTab: string; onTabCh
     font-semibold
     text-gray-300
     hover:text-white
-    data-[state=active]:bg-[#60A5FA]
+    data-[state=active]:bg-[#60A5FA]/90
     data-[state=active]:text-white
     rounded-md
+    backdrop-blur-none
   `;
 
   return (
-    <div className="sticky top-0 z-[200] bg-[#091020] py-2 md:py-4 shadow-lg">
-      <TabsList className="bg-[#091020] p-1 md:p-2 w-full flex flex-wrap justify-center gap-1 md:gap-2">
+    <div className="sticky top-0 z-[200] bg-[#091020] py-2 md:py-4 shadow-lg border-b border-gray-800">
+      <TabsList className="bg-[#091020] p-1 md:p-2 w-full flex flex-wrap justify-center gap-1 md:gap-2 relative">
         <TabsTrigger 
           value="power" 
           className={tabStyle}
