@@ -66,7 +66,7 @@ const Calculators = () => {
             <CalculatorTabs activeTab={activeTab} onTabChange={setActiveTab} />
 
             <ScrollArea className="h-[calc(100vh-400px)] pr-4 relative">
-              <div className="pb-16">
+              <div className="pb-16 pt-8">
                 <TabsContent value="power" className="space-y-6 mt-0">
                   <section aria-label="Power Calculators">
                     <PowerConsumptionCalculator />
