@@ -1,5 +1,7 @@
 import { SmartFeaturesLinks, CoreSystemsLinks, VehicleSelectionLinks, SupportLinks, CustomerSupportLinks } from "../NavbarLinks";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { Link } from "react-router-dom";
+import { Calculator } from "lucide-react";
 
 interface MobileNavigationProps {
   isOpen: boolean;
@@ -42,6 +44,13 @@ const MobileNavigation = ({ isOpen }: MobileNavigationProps) => {
               </div>
             </AccordionContent>
           </AccordionItem>
+
+          <div className="py-2">
+            <Link to="/calculators" className="flex items-center gap-2 text-gray-300 hover:text-blue-400 px-4 py-2 text-base">
+              <Calculator className="h-4 w-4" />
+              Calculators
+            </Link>
+          </div>
 
           <AccordionItem value="support" className="border-b-0">
             <AccordionTrigger className="text-gray-300 hover:text-blue-400 py-2 text-base">
