@@ -3,9 +3,29 @@ import { TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Battery, Fuel, Scale, Settings } from "lucide-react";
 
 const CalculatorTabs = ({ activeTab, onTabChange }: { activeTab: string; onTabChange: (value: string) => void }) => {
-  console.log("Current active tab:", activeTab); // Debug log to track active tab
+  console.log("Current active tab:", activeTab);
 
-  const tabStyle = "relative data-[state=active]:bg-[#60A5FA] data-[state=active]:text-white text-gray-300 hover:text-white font-semibold text-sm md:text-base px-2 md:px-4 py-1.5 md:py-2 flex-1 min-w-[120px] md:min-w-[140px] max-w-[200px] transition-colors duration-200";
+  const tabStyle = `
+    relative 
+    transition-colors 
+    duration-200 
+    flex-1 
+    min-w-[120px] 
+    md:min-w-[140px] 
+    max-w-[200px]
+    px-2 
+    md:px-4 
+    py-1.5 
+    md:py-2
+    text-sm 
+    md:text-base 
+    font-semibold
+    text-gray-300
+    hover:text-white
+    data-[state=active]:bg-[#60A5FA]
+    data-[state=active]:text-white
+    rounded-md
+  `;
 
   return (
     <div className="sticky top-0 z-[200] bg-[#091020] py-2 md:py-4 shadow-lg">
@@ -14,7 +34,7 @@ const CalculatorTabs = ({ activeTab, onTabChange }: { activeTab: string; onTabCh
           value="power" 
           className={tabStyle}
           onClick={() => {
-            console.log("Clicking power tab"); // Debug log
+            console.log("Clicking power tab");
             onTabChange("power");
           }}
         >
@@ -25,7 +45,7 @@ const CalculatorTabs = ({ activeTab, onTabChange }: { activeTab: string; onTabCh
           value="fuel" 
           className={tabStyle}
           onClick={() => {
-            console.log("Clicking fuel tab"); // Debug log
+            console.log("Clicking fuel tab");
             onTabChange("fuel");
           }}
         >
@@ -36,7 +56,7 @@ const CalculatorTabs = ({ activeTab, onTabChange }: { activeTab: string; onTabCh
           value="towing" 
           className={tabStyle}
           onClick={() => {
-            console.log("Clicking towing tab"); // Debug log
+            console.log("Clicking towing tab");
             onTabChange("towing");
           }}
         >
@@ -47,7 +67,7 @@ const CalculatorTabs = ({ activeTab, onTabChange }: { activeTab: string; onTabCh
           value="smart-systems" 
           className={tabStyle}
           onClick={() => {
-            console.log("Clicking smart systems tab"); // Debug log
+            console.log("Clicking smart systems tab");
             onTabChange("smart-systems");
           }}
         >
