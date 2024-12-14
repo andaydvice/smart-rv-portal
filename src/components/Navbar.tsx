@@ -22,7 +22,7 @@ const Navbar = () => {
           </Link>
           
           <div className="flex items-center gap-4">
-            <div className="block md:hidden">
+            <div className="block md:hidden z-50">
               <MenuButton isOpen={isOpen} onClick={toggleMenu} />
             </div>
             <div className="hidden md:block">
