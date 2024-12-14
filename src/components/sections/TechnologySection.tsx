@@ -3,13 +3,18 @@ import { Lock, Phone, Mic, Utensils } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 
+const getFullPath = (path: string) => {
+  const baseUrl = window.location.origin;
+  return `${baseUrl}${path}`;
+};
+
 const systems = [
   {
     icon: Lock,
     name: "Smart Security",
     description: "Advanced security systems with remote monitoring and smart locks",
     image: "/lovable-uploads/smart-security.jpg",
-    link: "/features/security"
+    link: getFullPath("/features/security")
   },
   {
     icon: Phone,
@@ -28,7 +33,7 @@ const systems = [
     name: "Smart Kitchen",
     description: "Connected appliances with remote monitoring",
     image: "/lovable-uploads/smart-kitchen.jpg",
-    link: "/features/smart-kitchen"
+    link: getFullPath("/features/smart-kitchen")
   },
 ];
 
