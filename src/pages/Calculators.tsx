@@ -1,10 +1,11 @@
+import { useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import CalculatorHeader from "@/components/calculator-layout/CalculatorHeader";
 import CalculatorIntro from "@/components/calculator-layout/CalculatorIntro";
 import ScrollHint from "@/components/calculator-layout/ScrollHint";
 import GasCalculator from "@/components/calculators/fuel/GasCalculator";
 import FuelEfficiencyCalculator from "@/components/calculators/fuel/FuelEfficiencyCalculator";
-import MPGTrackingSystem from "@/components/calculators/fuel/MPGTrackingSystem";
+import MPGTrackingSystem, { MPGRecord } from "@/components/calculators/fuel/MPGTrackingSystem";
 import TripEfficiencyPlanner from "@/components/calculators/fuel/TripEfficiencyPlanner";
 import BatteryCapacityCalculator from "@/components/calculators/power/BatteryCapacityCalculator";
 import PowerConsumptionCalculator from "@/components/calculators/power/PowerConsumptionCalculator";
@@ -18,6 +19,12 @@ import SetupGuideCreator from "@/components/calculators/smart-systems/SetupGuide
 import RVCostCalculator from "@/components/calculators/rv/RVCostCalculator";
 
 const Calculators = () => {
+  const [historicalMPG, setHistoricalMPG] = useState<MPGRecord[]>([]);
+
+  const handleAddMPGRecord = (record: MPGRecord) => {
+    setHistoricalMPG(prev => [...prev, record]);
+  };
+
   return (
     <div className="min-h-screen bg-[#080F1F] text-white pb-12">
       <CalculatorHeader />
@@ -43,8 +50,8 @@ const Calculators = () => {
           <TabsContent value="fuel" className="mt-8">
             <div className="space-y-8">
               <GasCalculator />
-              <FuelEfficiencyCalculator />
-              <MPGTrackingSystem />
+              <FuelEfficiencyCalculator onAddMPGRecord={handleAddMPGRecord} />
+              <MPGTrackingSystem historicalMPG={historicalMPG} />
               <TripEfficiencyPlanner />
             </div>
           </TabsContent>
