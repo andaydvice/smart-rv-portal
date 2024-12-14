@@ -13,76 +13,74 @@ const systems = [
   },
   {
     icon: Phone,
-    name: "Connectivity",
-    description: "Stay connected with high-speed internet and mobile optimization",
-    image: "/lovable-uploads/connectivity.jpg",
-    link: "/features/internet"
+    name: "Remote Control",
+    description: "Control all RV systems from your smartphone",
+    image: "/lovable-uploads/remote-control.jpg"
   },
   {
     icon: Mic,
     name: "Voice Control",
-    description: "Control your RV systems with simple voice commands",
-    image: "/lovable-uploads/voice-control.jpg",
-    link: "/features/audio"
+    description: "Hands free control with virtual assistant integration",
+    image: "/lovable-uploads/voice-control.jpg"
   },
   {
     icon: Utensils,
     name: "Smart Kitchen",
-    description: "Modern kitchen appliances with smart controls and monitoring",
-    image: "/lovable-uploads/smart-kitchen.jpg",
-    link: "/features/smart-kitchen"
-  }
+    description: "Connected appliances with remote monitoring",
+    image: "/lovable-uploads/smart-kitchen.jpg"
+  },
 ];
 
-export const TechnologySection = () => {
-  return (
-    <section className="py-24 bg-gray-900">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="text-4xl md:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-blue-600"
-          >
-            Smart Systems Integration
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-xl text-gray-400 max-w-2xl mx-auto"
-          >
-            Experience the future of RV living with our integrated smart systems
-          </motion.p>
-        </div>
+export const TechnologySection = () => (
+  <section className="py-24 px-4 bg-gradient-to-br from-[#2A2A4A] to-[#1A1A2F] relative overflow-hidden">
+    <div className="absolute inset-0 bg-[url('/lovable-uploads/0a22c848-dff2-43f4-b1eb-800fa123a904.png')] opacity-5 bg-cover bg-fixed" />
+    <div className="max-w-6xl mx-auto relative z-10">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+        className="text-center mb-16"
+      >
+        <span className="inline-block px-3 py-1 mb-4 text-sm font-medium bg-white/10 text-white rounded-full">
+          Smart Systems
+        </span>
+        <h2 className="text-4xl font-bold mb-4 text-white">Cutting Edge Technology</h2>
+        <p className="text-lg text-gray-300 max-w-2xl mx-auto">
+          Advanced systems for a smarter, more comfortable journey
+        </p>
+      </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {systems.map((system, index) => (
-            <motion.div
-              key={system.name}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="bg-gray-800/50 rounded-xl p-6 text-center hover:bg-gray-800/70 transition-colors"
-            >
-              <div className="flex flex-col items-center">
-                <system.icon className="w-16 h-16 mb-4 text-blue-400" />
-                <h3 className="text-2xl font-bold mb-2 text-white">{system.name}</h3>
-                <p className="text-gray-300 mb-4">{system.description}</p>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {systems.map((system, index) => (
+          <motion.div
+            key={system.name}
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: index * 0.2 }}
+            className="group relative overflow-hidden rounded-xl bg-white/5 backdrop-blur-sm border border-white/10 hover:border-white/20 transition-all duration-300"
+          >
+            <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            <div className="p-8">
+              <system.icon className="w-16 h-16 mb-4 text-blue-400" />
+              <h3 className="text-2xl font-bold mb-2 text-white">{system.name}</h3>
+              <p className="text-gray-300 mb-4">{system.description}</p>
+              {system.link ? (
                 <Link to={system.link}>
                   <Button variant="outline" className="bg-white/5 text-white border-white/20 hover:bg-white/10 transition-colors">
                     Learn More
                   </Button>
                 </Link>
-              </div>
-            </motion.div>
-          ))}
-        </div>
+              ) : (
+                <Button variant="outline" className="bg-white/5 text-white border-white/20 hover:bg-white/10 transition-colors">
+                  Learn More
+                </Button>
+              )}
+            </div>
+          </motion.div>
+        ))}
       </div>
-    </section>
-  );
-};
+    </div>
+  </section>
+);
