@@ -9,7 +9,7 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleMenu = () => {
-    console.log("Toggling mobile menu");
+    console.log("Toggling mobile menu, current state:", isOpen);
     setIsOpen(!isOpen);
   };
 
@@ -22,7 +22,9 @@ const Navbar = () => {
           </Link>
           
           <div className="flex items-center gap-4">
-            <MenuButton isOpen={isOpen} onClick={toggleMenu} />
+            <div className="block md:hidden">
+              <MenuButton isOpen={isOpen} onClick={toggleMenu} />
+            </div>
             <div className="hidden md:block">
               <DesktopNavigation />
             </div>

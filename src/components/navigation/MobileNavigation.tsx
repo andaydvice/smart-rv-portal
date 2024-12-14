@@ -8,68 +8,68 @@ interface MobileNavigationProps {
 }
 
 const MobileNavigation = ({ isOpen }: MobileNavigationProps) => {
-  console.log("Mobile navigation isOpen:", isOpen);
+  console.log("MobileNavigation rendered, isOpen:", isOpen);
+  
+  if (!isOpen) return null;
   
   return (
-    <div 
-      className={`${
-        isOpen ? 'translate-x-0 opacity-100' : '-translate-x-full opacity-0'
-      } fixed inset-0 top-16 z-40 transform bg-gray-900/95 backdrop-blur-sm border-b border-gray-800 overflow-y-auto transition-all duration-300 ease-in-out md:hidden`}
-    >
-      <div className="px-4 py-6 space-y-4">
-        <Accordion type="single" collapsible className="space-y-2">
-          <AccordionItem value="technology" className="border-b-0">
-            <AccordionTrigger className="text-gray-300 hover:text-blue-400 py-2 text-base">
-              Technology
-            </AccordionTrigger>
-            <AccordionContent>
-              <div className="pt-2 pb-3">
-                <SmartFeaturesLinks />
-              </div>
-            </AccordionContent>
-          </AccordionItem>
+    <div className="md:hidden">
+      <div className="fixed inset-0 top-16 z-40 bg-gray-900/95 backdrop-blur-sm border-b border-gray-800 overflow-y-auto">
+        <div className="px-4 py-6 space-y-4">
+          <Accordion type="single" collapsible className="space-y-2">
+            <AccordionItem value="technology" className="border-b-0">
+              <AccordionTrigger className="text-gray-300 hover:text-blue-400 py-2 text-base">
+                Technology
+              </AccordionTrigger>
+              <AccordionContent>
+                <div className="pt-2 pb-3">
+                  <SmartFeaturesLinks />
+                </div>
+              </AccordionContent>
+            </AccordionItem>
 
-          <AccordionItem value="rv-systems" className="border-b-0">
-            <AccordionTrigger className="text-gray-300 hover:text-blue-400 py-2 text-base">
-              RV Systems
-            </AccordionTrigger>
-            <AccordionContent>
-              <div className="pt-2 pb-3">
-                <CoreSystemsLinks />
-              </div>
-            </AccordionContent>
-          </AccordionItem>
+            <AccordionItem value="rv-systems" className="border-b-0">
+              <AccordionTrigger className="text-gray-300 hover:text-blue-400 py-2 text-base">
+                RV Systems
+              </AccordionTrigger>
+              <AccordionContent>
+                <div className="pt-2 pb-3">
+                  <CoreSystemsLinks />
+                </div>
+              </AccordionContent>
+            </AccordionItem>
 
-          <AccordionItem value="models" className="border-b-0">
-            <AccordionTrigger className="text-gray-300 hover:text-blue-400 py-2 text-base">
-              Models
-            </AccordionTrigger>
-            <AccordionContent>
-              <div className="pt-2 pb-3">
-                <VehicleSelectionLinks />
-              </div>
-            </AccordionContent>
-          </AccordionItem>
+            <AccordionItem value="models" className="border-b-0">
+              <AccordionTrigger className="text-gray-300 hover:text-blue-400 py-2 text-base">
+                Models
+              </AccordionTrigger>
+              <AccordionContent>
+                <div className="pt-2 pb-3">
+                  <VehicleSelectionLinks />
+                </div>
+              </AccordionContent>
+            </AccordionItem>
 
-          <div className="py-2">
-            <Link to="/calculators" className="flex items-center gap-2 text-gray-300 hover:text-blue-400 px-4 py-2 text-base">
-              <Calculator className="h-4 w-4" />
-              RV Tools
-            </Link>
-          </div>
+            <div className="py-2">
+              <Link to="/calculators" className="flex items-center gap-2 text-gray-300 hover:text-blue-400 px-4 py-2 text-base">
+                <Calculator className="h-4 w-4" />
+                RV Tools
+              </Link>
+            </div>
 
-          <AccordionItem value="support" className="border-b-0">
-            <AccordionTrigger className="text-gray-300 hover:text-blue-400 py-2 text-base">
-              Support
-            </AccordionTrigger>
-            <AccordionContent>
-              <div className="pt-2 pb-3 grid gap-6">
-                <SupportLinks />
-                <CustomerSupportLinks />
-              </div>
-            </AccordionContent>
-          </AccordionItem>
-        </Accordion>
+            <AccordionItem value="support" className="border-b-0">
+              <AccordionTrigger className="text-gray-300 hover:text-blue-400 py-2 text-base">
+                Support
+              </AccordionTrigger>
+              <AccordionContent>
+                <div className="pt-2 pb-3 grid gap-6">
+                  <SupportLinks />
+                  <CustomerSupportLinks />
+                </div>
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
+        </div>
       </div>
     </div>
   );
