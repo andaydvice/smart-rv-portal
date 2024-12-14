@@ -26,6 +26,9 @@ const CardContent = ({ system }: { system: SystemType }) => (
       <Button 
         variant="outline" 
         className="bg-white/5 text-white border-white/20 hover:bg-white/10 transition-colors"
+        onClick={() => {
+          window.location.href = "https://preview--smart-rv-portal.lovable.app/features/smart-kitchen";
+        }}
       >
         Learn More
       </Button>
@@ -41,7 +44,6 @@ export const TechnologyCard = ({ system, index, onCardClick }: TechnologyCardPro
     viewport={{ once: true }}
     transition={{ delay: index * 0.2 }}
     className="group relative overflow-hidden rounded-xl bg-white/5 backdrop-blur-sm border border-white/10 hover:border-white/20 transition-all duration-300 cursor-pointer"
-    onClick={() => system.link && onCardClick(system.link)}
   >
     <CardContent system={system} />
   </motion.div>
