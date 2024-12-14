@@ -1,6 +1,6 @@
 import React from "react";
 import { TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Battery, Fuel, Scale, Settings, Calculator } from "lucide-react";
+import { Battery, Calculator, Fuel, Scale, Settings } from "lucide-react";
 
 const CalculatorTabs = ({ activeTab, onTabChange }: { activeTab: string; onTabChange: (value: string) => void }) => {
   console.log("Current active tab:", activeTab);
@@ -10,15 +10,11 @@ const CalculatorTabs = ({ activeTab, onTabChange }: { activeTab: string; onTabCh
     transition-colors 
     duration-200 
     flex-1 
-    min-w-[80px] 
-    md:min-w-[120px] 
-    max-w-[200px]
-    px-2 
-    md:px-4 
-    py-1.5 
-    md:py-2
+    min-w-[120px] 
+    max-w-[150px]
+    px-3
+    py-2
     text-sm 
-    md:text-base 
     font-semibold
     text-gray-300
     hover:text-white
@@ -31,7 +27,7 @@ const CalculatorTabs = ({ activeTab, onTabChange }: { activeTab: string; onTabCh
   return (
     <div className="sticky top-0 z-[5] bg-[#091020] border-b border-gray-800">
       <div className="container mx-auto px-2 md:px-4">
-        <TabsList className="bg-[#091020] p-1 md:p-2 w-full flex overflow-x-auto no-scrollbar gap-1 md:gap-2">
+        <TabsList className="bg-[#091020] p-1 md:p-2 w-full flex overflow-x-auto no-scrollbar gap-2">
           <TabsTrigger 
             value="cost" 
             className={tabStyle}
@@ -40,8 +36,8 @@ const CalculatorTabs = ({ activeTab, onTabChange }: { activeTab: string; onTabCh
               onTabChange("cost");
             }}
           >
-            <Calculator className="mr-1 md:mr-2 h-3 w-3 md:h-4 md:w-4" />
-            Cost
+            <Calculator className="mr-2 h-4 w-4" />
+            Cost Calculator
           </TabsTrigger>
           <TabsTrigger 
             value="power" 
@@ -51,8 +47,8 @@ const CalculatorTabs = ({ activeTab, onTabChange }: { activeTab: string; onTabCh
               onTabChange("power");
             }}
           >
-            <Battery className="mr-1 md:mr-2 h-3 w-3 md:h-4 md:w-4" />
-            Power
+            <Battery className="mr-2 h-4 w-4" />
+            Power & Solar
           </TabsTrigger>
           <TabsTrigger 
             value="fuel" 
@@ -62,8 +58,8 @@ const CalculatorTabs = ({ activeTab, onTabChange }: { activeTab: string; onTabCh
               onTabChange("fuel");
             }}
           >
-            <Fuel className="mr-1 md:mr-2 h-3 w-3 md:h-4 md:w-4" />
-            Fuel
+            <Fuel className="mr-2 h-4 w-4" />
+            Fuel Efficiency
           </TabsTrigger>
           <TabsTrigger 
             value="towing" 
@@ -73,8 +69,8 @@ const CalculatorTabs = ({ activeTab, onTabChange }: { activeTab: string; onTabCh
               onTabChange("towing");
             }}
           >
-            <Scale className="mr-1 md:mr-2 h-3 w-3 md:h-4 md:w-4" />
-            Towing
+            <Scale className="mr-2 h-4 w-4" />
+            Towing Safety
           </TabsTrigger>
           <TabsTrigger 
             value="smart-systems" 
@@ -84,8 +80,8 @@ const CalculatorTabs = ({ activeTab, onTabChange }: { activeTab: string; onTabCh
               onTabChange("smart-systems");
             }}
           >
-            <Settings className="mr-1 md:mr-2 h-3 w-3 md:h-4 md:w-4" />
-            Smart
+            <Settings className="mr-2 h-4 w-4" />
+            Smart Systems
           </TabsTrigger>
         </TabsList>
       </div>
