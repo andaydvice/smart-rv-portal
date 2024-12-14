@@ -25,10 +25,11 @@ const CalculatorTabs = ({ activeTab, onTabChange }: { activeTab: string; onTabCh
     data-[state=active]:bg-[#60A5FA]/20
     data-[state=active]:text-white
     rounded-md
+    mb-4
   `;
 
   return (
-    <div className="sticky top-0 z-[5] bg-[#091020] border-b border-gray-800">
+    <div className="sticky top-0 z-[5] bg-[#091020] border-b border-gray-800 pb-2">
       <div className="container mx-auto px-4">
         <TabsList className="bg-[#091020] p-1 md:p-2 w-full flex flex-wrap justify-center gap-1 md:gap-2">
           <TabsTrigger 
