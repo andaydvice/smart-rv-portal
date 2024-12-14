@@ -27,7 +27,8 @@ const systems = [
     icon: Utensils,
     name: "Smart Kitchen",
     description: "Connected appliances with remote monitoring",
-    image: "/lovable-uploads/smart-kitchen.jpg"
+    image: "/lovable-uploads/smart-kitchen.jpg",
+    link: "/features/smart-kitchen"
   },
 ];
 
