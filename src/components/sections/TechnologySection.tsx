@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 import { Lock, Phone, Mic, Utensils } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
 
 const getFullPath = (path: string) => {
   try {
@@ -44,12 +43,6 @@ const systems = [
 ];
 
 export const TechnologySection = () => {
-  const handleLinkClick = (link: string) => {
-    console.log('Link clicked:', link);
-    // Let's prevent the default behavior and handle navigation manually
-    window.location.href = link;
-  };
-
   return (
     <section className="py-24 px-4 bg-gradient-to-br from-[#2A2A4A] to-[#1A1A2F] relative overflow-hidden">
       <div className="absolute inset-0 bg-[url('/lovable-uploads/0a22c848-dff2-43f4-b1eb-800fa123a904.png')] opacity-5 bg-cover bg-fixed" />
@@ -86,15 +79,19 @@ export const TechnologySection = () => {
                 <h3 className="text-2xl font-bold mb-2 text-white">{system.name}</h3>
                 <p className="text-gray-300 mb-4">{system.description}</p>
                 {system.link ? (
+                  <a href={system.link} className="inline-block">
+                    <Button 
+                      variant="outline" 
+                      className="bg-white/5 text-white border-white/20 hover:bg-white/10 transition-colors"
+                    >
+                      Learn More
+                    </Button>
+                  </a>
+                ) : (
                   <Button 
                     variant="outline" 
                     className="bg-white/5 text-white border-white/20 hover:bg-white/10 transition-colors"
-                    onClick={() => handleLinkClick(system.link)}
                   >
-                    Learn More
-                  </Button>
-                ) : (
-                  <Button variant="outline" className="bg-white/5 text-white border-white/20 hover:bg-white/10 transition-colors">
                     Learn More
                   </Button>
                 )}
