@@ -68,7 +68,7 @@ export const TechnologySection = () => (
               <h3 className="text-2xl font-bold mb-2 text-white">{system.name}</h3>
               <p className="text-gray-300 mb-4">{system.description}</p>
               {system.link ? (
-                <Link to={system.link}>
+                <Link to={system.link} onClick={() => console.log('Link clicked:', system.link)}>
                   <Button variant="outline" className="bg-white/5 text-white border-white/20 hover:bg-white/10 transition-colors">
                     Learn More
                   </Button>
