@@ -1,31 +1,32 @@
 import { motion } from "framer-motion";
 import { Lock, Phone, Mic, Utensils } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 const systems = [
   {
     icon: Lock,
     name: "Smart Security",
     description: "Advanced security systems with remote monitoring and smart locks",
-    image: "/lovable-uploads/smart-security.jpg"
+    link: "/features/security"
   },
   {
     icon: Phone,
     name: "Remote Control",
     description: "Control all RV systems from your smartphone",
-    image: "/lovable-uploads/remote-control.jpg"
+    link: "/features/remote-control"
   },
   {
     icon: Mic,
     name: "Voice Control",
     description: "Hands free control with virtual assistant integration",
-    image: "/lovable-uploads/voice-control.jpg"
+    link: "/features/voice-control"
   },
   {
     icon: Utensils,
     name: "Smart Kitchen",
     description: "Connected appliances with remote monitoring",
-    image: "/lovable-uploads/smart-kitchen.jpg"
+    link: "/features/smart-kitchen"
   },
 ];
 
@@ -64,9 +65,11 @@ export const TechnologySection = () => (
               <system.icon className="w-16 h-16 mb-4 text-blue-400" />
               <h3 className="text-2xl font-bold mb-2 text-white">{system.name}</h3>
               <p className="text-gray-300 mb-4">{system.description}</p>
-              <Button variant="outline" className="bg-white/5 text-white border-white/20 hover:bg-white/10 transition-colors">
-                Learn More
-              </Button>
+              <Link to={system.link}>
+                <Button variant="outline" className="bg-white/5 text-white border-white/20 hover:bg-white/10 transition-colors">
+                  Learn More
+                </Button>
+              </Link>
             </div>
           </motion.div>
         ))}
