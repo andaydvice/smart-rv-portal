@@ -33,12 +33,12 @@ const Calculators = () => {
       
       <div className="container mx-auto px-4 mt-8">
         <Tabs defaultValue="cost" className="w-full">
-          <TabsList className="w-full max-w-2xl mx-auto grid grid-cols-2 md:grid-cols-5 bg-[#131a2a]">
-            <TabsTrigger value="cost">Cost</TabsTrigger>
-            <TabsTrigger value="fuel">Fuel</TabsTrigger>
-            <TabsTrigger value="power">Power</TabsTrigger>
-            <TabsTrigger value="towing">Towing</TabsTrigger>
-            <TabsTrigger value="smart">Smart</TabsTrigger>
+          <TabsList className="w-full flex overflow-x-auto no-scrollbar bg-[#131a2a] p-1">
+            <TabsTrigger value="cost" className="flex-1 min-w-[100px]">Cost</TabsTrigger>
+            <TabsTrigger value="fuel" className="flex-1 min-w-[100px]">Fuel</TabsTrigger>
+            <TabsTrigger value="power" className="flex-1 min-w-[100px]">Power</TabsTrigger>
+            <TabsTrigger value="towing" className="flex-1 min-w-[100px]">Towing</TabsTrigger>
+            <TabsTrigger value="smart" className="flex-1 min-w-[100px]">Smart</TabsTrigger>
           </TabsList>
 
           <TabsContent value="cost" className="mt-8">
