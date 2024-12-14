@@ -48,7 +48,7 @@ const MobileNavigation = ({ isOpen }: MobileNavigationProps) => {
           <div className="py-2">
             <Link to="/calculators" className="flex items-center gap-2 text-gray-300 hover:text-blue-400 px-4 py-2 text-base">
               <Calculator className="h-4 w-4" />
-              Calculators
+              RV Tools
             </Link>
           </div>
 

@@ -44,7 +44,7 @@ const DesktopNavigation = () => {
           <NavigationMenuItem>
             <Link to="/calculators" className="text-gray-300 hover:text-blue-400 transition-colors text-base flex items-center gap-2 px-4 py-2">
               <Calculator className="h-4 w-4" />
-              Calculators
+              RV Tools
             </Link>
           </NavigationMenuItem>
 
