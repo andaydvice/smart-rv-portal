@@ -1,13 +1,14 @@
 import { motion } from "framer-motion";
 import { Lock, Phone, Mic, Utensils } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 const systems = [
   {
     icon: Lock,
     name: "Smart Security",
     description: "Advanced security systems with remote monitoring and smart locks",
-    link: "https://preview--smart-rv-portal.lovable.app/features/security"
+    link: "/features/security"
   },
   {
     icon: Phone,
@@ -64,11 +65,13 @@ export const TechnologySection = () => (
               <system.icon className="w-16 h-16 mb-4 text-blue-400" />
               <h3 className="text-2xl font-bold mb-2 text-white">{system.name}</h3>
               <p className="text-gray-300 mb-4">{system.description}</p>
-              <a href={system.link} target="_blank" rel="noopener noreferrer">
-                <Button variant="outline" className="bg-white/5 text-white border-white/20 hover:bg-white/10 transition-colors">
-                  Learn More
-                </Button>
-              </a>
+              {system.link && (
+                <Link to={system.link}>
+                  <Button variant="outline" className="bg-white/5 text-white border-white/20 hover:bg-white/10 transition-colors">
+                    Learn More
+                  </Button>
+                </Link>
+              )}
             </div>
           </motion.div>
         ))}
