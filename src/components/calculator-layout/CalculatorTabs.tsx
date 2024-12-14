@@ -3,15 +3,20 @@ import { TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Battery, Fuel, Scale, Settings } from "lucide-react";
 
 const CalculatorTabs = ({ activeTab, onTabChange }: { activeTab: string; onTabChange: (value: string) => void }) => {
-  const tabStyle = "relative data-[state=active]:bg-[#60A5FA] data-[state=active]:text-white text-gray-300 hover:text-white font-semibold text-sm md:text-base px-2 md:px-4 py-1.5 md:py-2 flex-1 min-w-[120px] md:min-w-[140px] max-w-[200px]";
+  console.log("Current active tab:", activeTab); // Debug log to track active tab
+
+  const tabStyle = "relative data-[state=active]:bg-[#60A5FA] data-[state=active]:text-white text-gray-300 hover:text-white font-semibold text-sm md:text-base px-2 md:px-4 py-1.5 md:py-2 flex-1 min-w-[120px] md:min-w-[140px] max-w-[200px] transition-colors duration-200";
 
   return (
-    <div className="sticky top-0 z-[100] bg-[#091020] py-2 md:py-4 shadow-lg">
+    <div className="sticky top-0 z-[200] bg-[#091020] py-2 md:py-4 shadow-lg">
       <TabsList className="bg-[#091020] p-1 md:p-2 w-full flex flex-wrap justify-center gap-1 md:gap-2">
         <TabsTrigger 
           value="power" 
           className={tabStyle}
-          onClick={() => onTabChange("power")}
+          onClick={() => {
+            console.log("Clicking power tab"); // Debug log
+            onTabChange("power");
+          }}
         >
           <Battery className="mr-1 md:mr-2 h-3 w-3 md:h-4 md:w-4" />
           Power & Solar
@@ -19,7 +24,10 @@ const CalculatorTabs = ({ activeTab, onTabChange }: { activeTab: string; onTabCh
         <TabsTrigger 
           value="fuel" 
           className={tabStyle}
-          onClick={() => onTabChange("fuel")}
+          onClick={() => {
+            console.log("Clicking fuel tab"); // Debug log
+            onTabChange("fuel");
+          }}
         >
           <Fuel className="mr-1 md:mr-2 h-3 w-3 md:h-4 md:w-4" />
           Fuel Efficiency
@@ -27,7 +35,10 @@ const CalculatorTabs = ({ activeTab, onTabChange }: { activeTab: string; onTabCh
         <TabsTrigger 
           value="towing" 
           className={tabStyle}
-          onClick={() => onTabChange("towing")}
+          onClick={() => {
+            console.log("Clicking towing tab"); // Debug log
+            onTabChange("towing");
+          }}
         >
           <Scale className="mr-1 md:mr-2 h-3 w-3 md:h-4 md:w-4" />
           Towing Safety
@@ -35,7 +46,10 @@ const CalculatorTabs = ({ activeTab, onTabChange }: { activeTab: string; onTabCh
         <TabsTrigger 
           value="smart-systems" 
           className={tabStyle}
-          onClick={() => onTabChange("smart-systems")}
+          onClick={() => {
+            console.log("Clicking smart systems tab"); // Debug log
+            onTabChange("smart-systems");
+          }}
         >
           <Settings className="mr-1 md:mr-2 h-3 w-3 md:h-4 md:w-4" />
           Smart Systems
