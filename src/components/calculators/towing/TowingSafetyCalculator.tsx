@@ -18,7 +18,7 @@ const TowingSafetyCalculator = () => {
   };
 
   return (
-    <div className="space-y-8 pt-12 md:pt-20">
+    <div className="space-y-8 pt-8 md:pt-20">
       <Card className="bg-[#091020] border-gray-700 text-white">
         <CardHeader>
           <CardTitle className="text-2xl text-[#60A5FA]">Towing Safety Calculator</CardTitle>
