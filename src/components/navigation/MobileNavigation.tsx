@@ -14,7 +14,7 @@ const MobileNavigation = ({ isOpen }: MobileNavigationProps) => {
   
   return (
     <div className="md:hidden">
-      <div className="fixed inset-0 top-16 z-40 bg-gray-900/95 backdrop-blur-sm border-t border-gray-800 overflow-y-auto">
+      <div className="fixed inset-0 top-16 z-[105] bg-gray-900/95 backdrop-blur-sm border-t border-gray-800 overflow-y-auto">
         <div className="px-4 py-6 space-y-4">
           <Accordion type="single" collapsible className="space-y-2">
             <AccordionItem value="technology" className="border-b-0">
