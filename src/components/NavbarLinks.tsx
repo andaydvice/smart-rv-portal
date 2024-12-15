@@ -16,12 +16,16 @@ import {
   Phone
 } from "lucide-react";
 
+const linkBaseClasses = "block p-2 rounded hover:bg-[#0F1729]/50";
+const textBaseClasses = "text-[#A3B3BC] hover:text-[#4B9EF4] transition-colors";
+const headingClasses = "font-semibold text-white";
+
 export const CoreSystemsLinks = () => (
   <div className="space-y-4">
-    <h4 className="font-semibold text-white">Core Systems</h4>
+    <h4 className={headingClasses}>Core Systems</h4>
     <ul className="space-y-2 text-sm">
-      <li className="hover:text-blue-400 transition-colors text-gray-300">
-        <Link to="/features/navigation" className="block p-2 rounded hover:bg-gray-800/50">
+      <li className={textBaseClasses}>
+        <Link to="/features/navigation" className={linkBaseClasses}>
           <span className="flex items-center gap-2">
             <Navigation className="h-4 w-4 text-blue-500" />
             Navigation System
