@@ -11,14 +11,14 @@ const MenuButton = ({ isOpen, onClick }: MenuButtonProps) => {
   return (
     <button
       onClick={onClick}
-      className="z-[110] inline-flex items-center justify-center p-2 rounded-md text-white hover:text-white hover:bg-gray-700/50 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+      className="z-[110] inline-flex items-center justify-center p-2 text-[#A3B3BC] hover:text-[#4B9EF4] focus:outline-none"
       aria-expanded={isOpen}
       aria-label="Toggle menu"
     >
       {isOpen ? (
-        <X className="block h-8 w-8" aria-hidden="true" />
+        <X className="block h-6 w-6" aria-hidden="true" />
       ) : (
-        <Menu className="block h-8 w-8" aria-hidden="true" />
+        <Menu className="block h-6 w-6" aria-hidden="true" />
       )}
     </button>
   );

@@ -52,55 +52,57 @@ const MobileNavigation = ({ isOpen }: MobileNavigationProps) => {
   
   return (
     <div 
-      className={`fixed inset-0 top-16 z-[105] bg-[#080F1F]/95 backdrop-blur-sm transform transition-transform duration-300 ${
+      className={`fixed inset-0 top-16 z-[105] bg-[#080F1F]/95 backdrop-blur-sm transform transition-transform duration-300 md:hidden ${
         isOpen ? 'translate-x-0' : 'translate-x-full'
       }`}
     >
-      <div className="px-4 py-6 space-y-4 overflow-y-auto h-full">
-        <MenuItem 
-          title="Technology" 
-          isOpen={openSections['technology']} 
-          onToggle={() => toggleSection('technology')}
-        >
-          <SmartFeaturesLinks />
-        </MenuItem>
-
-        <MenuItem 
-          title="RV Systems" 
-          isOpen={openSections['rv-systems']} 
-          onToggle={() => toggleSection('rv-systems')}
-        >
-          <CoreSystemsLinks />
-        </MenuItem>
-
-        <MenuItem 
-          title="Models" 
-          isOpen={openSections['models']} 
-          onToggle={() => toggleSection('models')}
-        >
-          <VehicleSelectionLinks />
-        </MenuItem>
-
-        <div className="py-2">
-          <Link 
-            to="/calculators" 
-            className="flex items-center gap-2 text-[#A3B3BC] hover:text-[#4B9EF4] px-4 py-2 text-base"
+      <div className="h-full overflow-y-auto">
+        <div className="px-4 py-6 space-y-4">
+          <MenuItem 
+            title="Technology" 
+            isOpen={openSections['technology']} 
+            onToggle={() => toggleSection('technology')}
           >
-            <Calculator className="h-4 w-4" />
-            RV Tools
-          </Link>
-        </div>
+            <SmartFeaturesLinks />
+          </MenuItem>
 
-        <MenuItem 
-          title="Support" 
-          isOpen={openSections['support']} 
-          onToggle={() => toggleSection('support')}
-        >
-          <div className="grid gap-6">
-            <SupportLinks />
-            <CustomerSupportLinks />
+          <MenuItem 
+            title="RV Systems" 
+            isOpen={openSections['rv-systems']} 
+            onToggle={() => toggleSection('rv-systems')}
+          >
+            <CoreSystemsLinks />
+          </MenuItem>
+
+          <MenuItem 
+            title="Models" 
+            isOpen={openSections['models']} 
+            onToggle={() => toggleSection('models')}
+          >
+            <VehicleSelectionLinks />
+          </MenuItem>
+
+          <div className="py-2">
+            <Link 
+              to="/calculators" 
+              className="flex items-center gap-2 text-[#A3B3BC] hover:text-[#4B9EF4] px-4 py-2 text-base"
+            >
+              <Calculator className="h-4 w-4" />
+              RV Tools
+            </Link>
           </div>
-        </MenuItem>
+
+          <MenuItem 
+            title="Support" 
+            isOpen={openSections['support']} 
+            onToggle={() => toggleSection('support')}
+          >
+            <div className="grid gap-6">
+              <SupportLinks />
+              <CustomerSupportLinks />
+            </div>
+          </MenuItem>
+        </div>
       </div>
     </div>
   );
