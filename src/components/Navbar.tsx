@@ -9,8 +9,13 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleMenu = () => {
-    console.log("Toggling mobile menu, current state:", isOpen);
+    alert("Menu clicked!");
+    console.log("Toggling mobile menu, previous state:", isOpen);
     setIsOpen(!isOpen);
+    // Log after state update to verify the change
+    setTimeout(() => {
+      console.log("Menu state after update:", !isOpen);
+    }, 0);
   };
 
   return (

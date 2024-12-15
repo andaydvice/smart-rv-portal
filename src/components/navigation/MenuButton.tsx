@@ -8,9 +8,14 @@ interface MenuButtonProps {
 const MenuButton = ({ isOpen, onClick }: MenuButtonProps) => {
   console.log("MenuButton rendered, isOpen:", isOpen);
   
+  const handleClick = () => {
+    console.log("MenuButton clicked!");
+    onClick();
+  };
+  
   return (
     <button
-      onClick={onClick}
+      onClick={handleClick}
       className="z-50 inline-flex items-center justify-center p-2 text-white bg-blue-500 hover:text-[#4B9EF4] focus:outline-none"
       aria-expanded={isOpen}
       aria-label="Toggle menu"
