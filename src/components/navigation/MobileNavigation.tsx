@@ -53,10 +53,14 @@ const MobileNavigation = ({ isOpen }: MobileNavigationProps) => {
   return (
     <div 
       className={`
-        fixed inset-0 top-16
-        bg-[#080F1F] 
+        fixed top-16 left-0 right-0 bottom-0
+        bg-[#080F1F]
+        transition-opacity duration-200
         md:hidden
-        ${isOpen ? 'block' : 'hidden'}
+        ${isOpen 
+          ? 'opacity-100 visible'
+          : 'opacity-0 invisible'
+        }
       `}
     >
       <div className="h-full overflow-y-auto">
