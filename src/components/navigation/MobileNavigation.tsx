@@ -1,11 +1,26 @@
-import { SmartFeaturesLinks, CoreSystemsLinks, VehicleSelectionLinks, SupportLinks, CustomerSupportLinks } from "../NavbarLinks";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { useState } from "react";
+import { ChevronDown } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Calculator } from "lucide-react";
+import { SmartFeaturesLinks, CoreSystemsLinks, VehicleSelectionLinks, SupportLinks, CustomerSupportLinks } from "../NavbarLinks";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 
 interface MobileNavigationProps {
   isOpen: boolean;
 }
+
+const MenuItem = ({ title, children, value }: { title: string; children: React.ReactNode; value: string }) => (
+  <AccordionItem value={value} className="border-b-0">
+    <AccordionTrigger className="text-gray-300 hover:text-blue-400 py-2 text-base">
+      {title}
+    </AccordionTrigger>
+    <AccordionContent>
+      <div className="pt-2 pb-3">
+        {children}
+      </div>
+    </AccordionContent>
+  </AccordionItem>
+);
 
 const MobileNavigation = ({ isOpen }: MobileNavigationProps) => {
   console.log("MobileNavigation rendered, isOpen:", isOpen);
@@ -17,38 +32,17 @@ const MobileNavigation = ({ isOpen }: MobileNavigationProps) => {
       <div className="fixed inset-0 top-16 z-[105] bg-gray-900/95 backdrop-blur-sm border-t border-gray-800 overflow-y-auto">
         <div className="px-4 py-6 space-y-4">
           <Accordion type="single" collapsible className="space-y-2">
-            <AccordionItem value="technology" className="border-b-0">
-              <AccordionTrigger className="text-gray-300 hover:text-blue-400 py-2 text-base">
-                Technology
-              </AccordionTrigger>
-              <AccordionContent>
-                <div className="pt-2 pb-3">
-                  <SmartFeaturesLinks />
-                </div>
-              </AccordionContent>
-            </AccordionItem>
+            <MenuItem value="technology" title="Technology">
+              <SmartFeaturesLinks />
+            </MenuItem>
 
-            <AccordionItem value="rv-systems" className="border-b-0">
-              <AccordionTrigger className="text-gray-300 hover:text-blue-400 py-2 text-base">
-                RV Systems
-              </AccordionTrigger>
-              <AccordionContent>
-                <div className="pt-2 pb-3">
-                  <CoreSystemsLinks />
-                </div>
-              </AccordionContent>
-            </AccordionItem>
+            <MenuItem value="rv-systems" title="RV Systems">
+              <CoreSystemsLinks />
+            </MenuItem>
 
-            <AccordionItem value="models" className="border-b-0">
-              <AccordionTrigger className="text-gray-300 hover:text-blue-400 py-2 text-base">
-                Models
-              </AccordionTrigger>
-              <AccordionContent>
-                <div className="pt-2 pb-3">
-                  <VehicleSelectionLinks />
-                </div>
-              </AccordionContent>
-            </AccordionItem>
+            <MenuItem value="models" title="Models">
+              <VehicleSelectionLinks />
+            </MenuItem>
 
             <div className="py-2">
               <Link to="/calculators" className="flex items-center gap-2 text-gray-300 hover:text-blue-400 px-4 py-2 text-base">
@@ -57,17 +51,12 @@ const MobileNavigation = ({ isOpen }: MobileNavigationProps) => {
               </Link>
             </div>
 
-            <AccordionItem value="support" className="border-b-0">
-              <AccordionTrigger className="text-gray-300 hover:text-blue-400 py-2 text-base">
-                Support
-              </AccordionTrigger>
-              <AccordionContent>
-                <div className="pt-2 pb-3 grid gap-6">
-                  <SupportLinks />
-                  <CustomerSupportLinks />
-                </div>
-              </AccordionContent>
-            </AccordionItem>
+            <MenuItem value="support" title="Support">
+              <div className="grid gap-6">
+                <SupportLinks />
+                <CustomerSupportLinks />
+              </div>
+            </MenuItem>
           </Accordion>
         </div>
       </div>
