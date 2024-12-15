@@ -52,9 +52,12 @@ const MobileNavigation = ({ isOpen }: MobileNavigationProps) => {
   
   return (
     <div 
-      className={`fixed inset-0 top-16 z-50 bg-[#080F1F]/95 backdrop-blur-sm transform transition-transform duration-300 md:hidden ${
-        isOpen ? 'translate-x-0' : 'translate-x-full'
-      }`}
+      className={`
+        fixed inset-0 top-16
+        bg-[#080F1F] 
+        md:hidden
+        ${isOpen ? 'block' : 'hidden'}
+      `}
     >
       <div className="h-full overflow-y-auto">
         <div className="px-4 py-6 space-y-4">
