@@ -40,6 +40,7 @@ const MenuItem = ({ title, children, isOpen, onToggle }: {
 
 const MobileNavigation = ({ isOpen }: MobileNavigationProps) => {
   console.log("MobileNavigation rendered, isOpen:", isOpen);
+  alert(`MobileNavigation rendering with isOpen: ${isOpen}`);  // Added temporary alert
   
   const [openSections, setOpenSections] = useState({});
 
@@ -53,14 +54,9 @@ const MobileNavigation = ({ isOpen }: MobileNavigationProps) => {
   return (
     <div 
       className={`
-        fixed top-16 left-0 right-0 bottom-0
-        bg-[#080F1F]
-        transition-opacity duration-200
-        md:hidden
-        ${isOpen 
-          ? 'opacity-100 visible'
-          : 'opacity-0 invisible'
-        }
+        fixed top-16 left-0 right-0 bottom-0 
+        bg-black 
+        ${isOpen ? 'block' : 'hidden'}
       `}
     >
       <div className="h-full overflow-y-auto">
