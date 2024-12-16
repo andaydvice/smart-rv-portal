@@ -103,6 +103,98 @@ const LuxuryModel = () => {
                   </li>
                 </ul>
               </div>
+
+              <div>
+                <h3 className="text-2xl font-semibold text-blue-400 mb-4">Premium Class A Diesel</h3>
+                <ul className="space-y-4 text-gray-300">
+                  <li className="flex justify-between items-center p-4 bg-gray-700/30 rounded-lg">
+                    <span className="font-medium">Newmar Dutch Star</span>
+                    <span className="text-blue-400">$450K - $700K</span>
+                  </li>
+                  <li className="flex justify-between items-center p-4 bg-gray-700/30 rounded-lg">
+                    <span className="font-medium">Tiffin Allegro Bus</span>
+                    <span className="text-blue-400">$450K - $750K</span>
+                  </li>
+                  <li className="flex justify-between items-center p-4 bg-gray-700/30 rounded-lg">
+                    <span className="font-medium">Entegra Coach Cornerstone</span>
+                    <span className="text-blue-400">$650K - $800K</span>
+                  </li>
+                  <li className="flex justify-between items-center p-4 bg-gray-700/30 rounded-lg">
+                    <span className="font-medium">American Coach American Dream</span>
+                    <span className="text-blue-400">$600K - $850K</span>
+                  </li>
+                  <li className="flex justify-between items-center p-4 bg-gray-700/30 rounded-lg">
+                    <span className="font-medium">Monaco Coach Signature</span>
+                    <span className="text-blue-400">$500K - $700K</span>
+                  </li>
+                </ul>
+              </div>
+
+              <div>
+                <h3 className="text-2xl font-semibold text-blue-400 mb-4">Luxury Fifth Wheels</h3>
+                <ul className="space-y-4 text-gray-300">
+                  <li className="flex justify-between items-center p-4 bg-gray-700/30 rounded-lg">
+                    <span className="font-medium">DRV Full House</span>
+                    <span className="text-blue-400">$150K - $300K</span>
+                  </li>
+                  <li className="flex justify-between items-center p-4 bg-gray-700/30 rounded-lg">
+                    <span className="font-medium">Luxe Gold Series</span>
+                    <span className="text-blue-400">$180K - $250K</span>
+                  </li>
+                  <li className="flex justify-between items-center p-4 bg-gray-700/30 rounded-lg">
+                    <span className="font-medium">Augusta RV Luxe</span>
+                    <span className="text-blue-400">$170K - $240K</span>
+                  </li>
+                  <li className="flex justify-between items-center p-4 bg-gray-700/30 rounded-lg">
+                    <span className="font-medium">Mobile Suites Elite</span>
+                    <span className="text-blue-400">$160K - $220K</span>
+                  </li>
+                  <li className="flex justify-between items-center p-4 bg-gray-700/30 rounded-lg">
+                    <span className="font-medium">New Horizons Majestic</span>
+                    <span className="text-blue-400">$200K - $350K</span>
+                  </li>
+                </ul>
+              </div>
+
+              <div>
+                <h3 className="text-2xl font-semibold text-blue-400 mb-4">Super C Luxury RVs</h3>
+                <ul className="space-y-4 text-gray-300">
+                  <li className="flex justify-between items-center p-4 bg-gray-700/30 rounded-lg">
+                    <span className="font-medium">Renegade Verona</span>
+                    <span className="text-blue-400">$400K - $600K</span>
+                  </li>
+                  <li className="flex justify-between items-center p-4 bg-gray-700/30 rounded-lg">
+                    <span className="font-medium">Dynamax DynaQuest XL</span>
+                    <span className="text-blue-400">$350K - $500K</span>
+                  </li>
+                  <li className="flex justify-between items-center p-4 bg-gray-700/30 rounded-lg">
+                    <span className="font-medium">Jayco Seneca</span>
+                    <span className="text-blue-400">$250K - $350K</span>
+                  </li>
+                  <li className="flex justify-between items-center p-4 bg-gray-700/30 rounded-lg">
+                    <span className="font-medium">Nexus Ghost</span>
+                    <span className="text-blue-400">$280K - $400K</span>
+                  </li>
+                </ul>
+              </div>
+
+              <div>
+                <h3 className="text-2xl font-semibold text-blue-400 mb-4">Premium Travel Trailers</h3>
+                <ul className="space-y-4 text-gray-300">
+                  <li className="flex justify-between items-center p-4 bg-gray-700/30 rounded-lg">
+                    <span className="font-medium">Airstream Classic</span>
+                    <span className="text-blue-400">$150K - $200K</span>
+                  </li>
+                  <li className="flex justify-between items-center p-4 bg-gray-700/30 rounded-lg">
+                    <span className="font-medium">Living Vehicle Models</span>
+                    <span className="text-blue-400">$200K - $500K</span>
+                  </li>
+                  <li className="flex justify-between items-center p-4 bg-gray-700/30 rounded-lg">
+                    <span className="font-medium">Oliver Legacy Elite II</span>
+                    <span className="text-blue-400">$100K - $150K</span>
+                  </li>
+                </ul>
+              </div>
             </div>
           </motion.div>
         </div>
