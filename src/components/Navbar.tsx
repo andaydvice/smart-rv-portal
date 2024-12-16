@@ -103,13 +103,16 @@ const Navbar = () => {
               <CustomerSupportLinks />
             </MenuItem>
 
-            <Link 
-              to="/calculators" 
-              className="flex items-center gap-2 px-4 py-3 text-gray-300 hover:text-blue-400 transition-colors"
+            <MenuItem 
+              title="RV Tools" 
+              isOpen={openSections.tools}
+              onToggle={() => toggleSection('tools')}
             >
-              <Calculator className="h-4 w-4" />
-              RV Tools
-            </Link>
+              <div className="flex items-center gap-2 px-4 py-3 text-gray-300 hover:text-blue-400 transition-colors">
+                <Calculator className="h-4 w-4" />
+                <Link to="/calculators">RV Tools</Link>
+              </div>
+            </MenuItem>
           </div>
         </div>
       )}
