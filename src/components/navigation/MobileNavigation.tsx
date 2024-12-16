@@ -1,10 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 interface MobileNavigationProps {
   isOpen: boolean;
 }
 
 const MobileNavigation = ({ isOpen }: MobileNavigationProps) => {
+  useEffect(() => {
+    console.log('MobileNavigation mounted, isOpen:', isOpen);
+    return () => console.log('MobileNavigation unmounted');
+  }, []);
+
   console.log("Mobile nav rendering, isOpen:", isOpen);
   
   if (!isOpen) return null;
