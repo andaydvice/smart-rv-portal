@@ -24,8 +24,61 @@ const RVCostCalculator = () => {
     superSize: { mpg: 5.5, baseRate: 400 }   // Super Size Class A
   };
 
+  // Enhanced season data with comprehensive information
+  const seasonData = {
+    peak: {
+      season_name: "Peak Season",
+      date_range: "June 15 - August 31, Major Holidays",
+      regional_variations: [
+        "Extended summer in Southern states (May-September)",
+        "Shorter peak in Northern regions",
+        "Year-round peaks in tourist destinations"
+      ],
+      pricing_tier: "Premium (50% above base)",
+      demand_level: "Very High",
+      weather_notes: "Optimal conditions in most regions, but hot in Southern states"
+    },
+    shoulder: {
+      season_name: "Shoulder Season",
+      date_range: "April 15 - June 14, September 1 - October 31",
+      regional_variations: [
+        "Earlier spring in Southern states",
+        "Later fall in warmer climates",
+        "Variable by location"
+      ],
+      pricing_tier: "Moderate (25% above base)",
+      demand_level: "Moderate to High",
+      weather_notes: "Mild temperatures, occasional rain, ideal for many locations"
+    },
+    regular: {
+      season_name: "Regular Season",
+      date_range: "March 1 - April 14, November 1 - 30",
+      regional_variations: [
+        "Extended season in temperate zones",
+        "Limited availability in colder regions",
+        "Popular in desert areas"
+      ],
+      pricing_tier: "Standard (base rate)",
+      demand_level: "Moderate",
+      weather_notes: "Variable conditions, check local forecasts"
+    },
+    offPeak: {
+      season_name: "Off-Peak Season",
+      date_range: "December 1 - February 28",
+      regional_variations: [
+        "Winter sports regions become peak season",
+        "Southern states remain moderate",
+        "Limited services in some areas"
+      ],
+      pricing_tier: "Discounted (20% below base)",
+      demand_level: "Low",
+      weather_notes: "Cold in most regions, winter weather considerations"
+    }
+  };
+
   const seasonMultiplier = {
     peak: 1.5,
+    shoulder: 1.25,
     regular: 1.0,
     offPeak: 0.8
   };
@@ -118,11 +171,15 @@ const RVCostCalculator = () => {
                   <SelectValue placeholder="Select season" />
                 </SelectTrigger>
                 <SelectContent className="bg-[#131a2a] border-gray-700 text-white z-[9999] relative">
-                  <SelectItem value="peak">Peak Season (Summer, Holidays)</SelectItem>
-                  <SelectItem value="regular">Regular Season (Spring, Fall)</SelectItem>
-                  <SelectItem value="offPeak">Off-Peak Season (Winter)</SelectItem>
+                  <SelectItem value="peak">Peak Season (Summer, Major Holidays) - 50% Premium</SelectItem>
+                  <SelectItem value="shoulder">Shoulder Season (Spring/Fall) - 25% Premium</SelectItem>
+                  <SelectItem value="regular">Regular Season (Early Spring/Late Fall) - Base Rate</SelectItem>
+                  <SelectItem value="offPeak">Off-Peak Season (Winter) - 20% Discount</SelectItem>
                 </SelectContent>
               </Select>
+              <p className="text-xs text-gray-400 mt-1">
+                {seasonData[season as keyof typeof seasonData].weather_notes}
+              </p>
             </div>
 
             <div className="space-y-2">
