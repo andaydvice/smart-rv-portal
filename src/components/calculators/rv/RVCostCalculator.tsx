@@ -69,7 +69,7 @@ const RVCostCalculator = () => {
                 <SelectTrigger className="bg-[#131a2a] border-gray-700 text-white">
                   <SelectValue placeholder="Select RV size" />
                 </SelectTrigger>
-                <SelectContent className="bg-[#131a2a] border-gray-700">
+                <SelectContent className="bg-[#131a2a] border-gray-700 text-white z-[9999] relative">
                   <SelectItem value="small">Small (20-25 feet, ~12 MPG)</SelectItem>
                   <SelectItem value="medium">Medium (26-32 feet, ~9 MPG)</SelectItem>
                   <SelectItem value="large">Large (33+ feet, ~7 MPG)</SelectItem>
