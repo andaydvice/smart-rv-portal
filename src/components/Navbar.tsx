@@ -3,18 +3,39 @@ import { Link } from "react-router-dom";
 import { Logo } from "./Logo";
 import DesktopNavigation from "./navigation/DesktopNavigation";
 import MenuButton from "./navigation/MenuButton";
+import MenuItem from "./navigation/MenuItem";
+import {
+  CoreSystemsLinks,
+  SmartFeaturesLinks,
+  VehicleSelectionLinks,
+  SupportLinks,
+  CustomerSupportLinks
+} from "./NavbarLinks";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [openSections, setOpenSections] = useState<Record<string, boolean>>({
+    core: false,
+    features: false,
+    vehicles: false,
+    support: false,
+    customer: false
+  });
 
   const toggleMenu = () => {
-    alert("Menu toggled: " + !isOpen);  // Keep this for debugging
     console.log("Toggling mobile menu, previous state:", isOpen);
     setIsOpen(!isOpen);
     // Log after state update to verify the change
     setTimeout(() => {
       console.log("Menu state after update:", !isOpen);
     }, 0);
+  };
+
+  const toggleSection = (section: string) => {
+    setOpenSections(prev => ({
+      ...prev,
+      [section]: !prev[section]
+    }));
   };
 
   return (
@@ -38,12 +59,48 @@ const Navbar = () => {
         </div>
       </nav>
       
-      {/* Render mobile menu with absolute positioning */}
       {isOpen && (
-        <div className="fixed inset-0 pt-16 bg-black text-white z-[9998]">
-          <div className="p-4">
-            <h2 className="text-xl font-bold mb-4">Menu</h2>
-            <p>Test content</p>
+        <div className="fixed inset-0 pt-16 bg-[#080F1F] text-white z-[9998] overflow-y-auto">
+          <div className="p-4 space-y-2">
+            <MenuItem 
+              title="Core Systems" 
+              isOpen={openSections.core}
+              onToggle={() => toggleSection('core')}
+            >
+              <CoreSystemsLinks />
+            </MenuItem>
+
+            <MenuItem 
+              title="Smart Features" 
+              isOpen={openSections.features}
+              onToggle={() => toggleSection('features')}
+            >
+              <SmartFeaturesLinks />
+            </MenuItem>
+
+            <MenuItem 
+              title="Vehicle Selection" 
+              isOpen={openSections.vehicles}
+              onToggle={() => toggleSection('vehicles')}
+            >
+              <VehicleSelectionLinks />
+            </MenuItem>
+
+            <MenuItem 
+              title="Support & Resources" 
+              isOpen={openSections.support}
+              onToggle={() => toggleSection('support')}
+            >
+              <SupportLinks />
+            </MenuItem>
+
+            <MenuItem 
+              title="Customer Support" 
+              isOpen={openSections.customer}
+              onToggle={() => toggleSection('customer')}
+            >
+              <CustomerSupportLinks />
+            </MenuItem>
           </div>
         </div>
       )}
