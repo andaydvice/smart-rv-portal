@@ -13,9 +13,15 @@ const RVCostCalculator = () => {
 
   // Updated rates and consumption based on current market data
   const rates = {
-    small: { mpg: 12, baseRate: 200 },    // 20-25 feet
-    medium: { mpg: 9, baseRate: 275 },    // 26-32 feet
-    large: { mpg: 7, baseRate: 350 }      // 33+ feet
+    popUp: { mpg: 16, baseRate: 100 },      // Pop Up Campers
+    truckCamper: { mpg: 14, baseRate: 120 }, // Truck Campers
+    camperVan: { mpg: 16, baseRate: 150 },   // Compact Camper Vans
+    ultraCompact: { mpg: 15, baseRate: 175 }, // Ultra Compact Travel Trailers
+    small: { mpg: 12, baseRate: 200 },       // Small RVs (20-25 feet)
+    medium: { mpg: 9, baseRate: 275 },       // Medium RVs (26-32 feet)
+    large: { mpg: 7, baseRate: 350 },        // Large RVs (33-39 feet)
+    fifthWheel: { mpg: 10, baseRate: 300 },  // Fifth Wheel Trailers
+    superSize: { mpg: 5.5, baseRate: 400 }   // Super Size Class A
   };
 
   const seasonMultiplier = {
@@ -70,9 +76,15 @@ const RVCostCalculator = () => {
                   <SelectValue placeholder="Select RV size" />
                 </SelectTrigger>
                 <SelectContent className="bg-[#131a2a] border-gray-700 text-white z-[9999] relative">
-                  <SelectItem value="small">Small (20-25 feet, ~12 MPG)</SelectItem>
-                  <SelectItem value="medium">Medium (26-32 feet, ~9 MPG)</SelectItem>
-                  <SelectItem value="large">Large (33+ feet, ~7 MPG)</SelectItem>
+                  <SelectItem value="popUp">Pop Up Camper (8-16 ft, ~16 MPG)</SelectItem>
+                  <SelectItem value="truckCamper">Truck Camper (12-18 ft, ~14 MPG)</SelectItem>
+                  <SelectItem value="camperVan">Camper Van (16-19 ft, ~16 MPG)</SelectItem>
+                  <SelectItem value="ultraCompact">Ultra Compact (13-19 ft, ~15 MPG)</SelectItem>
+                  <SelectItem value="small">Small RV (20-25 ft, ~12 MPG)</SelectItem>
+                  <SelectItem value="medium">Medium RV (26-32 ft, ~9 MPG)</SelectItem>
+                  <SelectItem value="large">Large RV (33-39 ft, ~7 MPG)</SelectItem>
+                  <SelectItem value="fifthWheel">Fifth Wheel (28-42 ft, ~10 MPG)</SelectItem>
+                  <SelectItem value="superSize">Super Size Class A (40-45 ft, ~5.5 MPG)</SelectItem>
                 </SelectContent>
               </Select>
             </div>
