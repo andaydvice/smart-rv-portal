@@ -11,6 +11,7 @@ import {
   SupportLinks,
   CustomerSupportLinks
 } from "./NavbarLinks";
+import { Calculator } from "lucide-react";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -19,13 +20,13 @@ const Navbar = () => {
     features: false,
     vehicles: false,
     support: false,
-    customer: false
+    customer: false,
+    tools: false
   });
 
   const toggleMenu = () => {
     console.log("Toggling mobile menu, previous state:", isOpen);
     setIsOpen(!isOpen);
-    // Log after state update to verify the change
     setTimeout(() => {
       console.log("Menu state after update:", !isOpen);
     }, 0);
@@ -101,6 +102,14 @@ const Navbar = () => {
             >
               <CustomerSupportLinks />
             </MenuItem>
+
+            <Link 
+              to="/calculators" 
+              className="flex items-center gap-2 px-4 py-3 text-gray-300 hover:text-blue-400 transition-colors"
+            >
+              <Calculator className="h-4 w-4" />
+              RV Tools
+            </Link>
           </div>
         </div>
       )}
