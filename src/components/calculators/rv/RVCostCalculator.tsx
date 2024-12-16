@@ -105,7 +105,7 @@ const RVCostCalculator = () => {
                 <SelectTrigger className="bg-[#131a2a] border-gray-700 text-white">
                   <SelectValue placeholder="Select season" />
                 </SelectTrigger>
-                <SelectContent className="bg-[#131a2a] border-gray-700">
+                <SelectContent className="bg-[#131a2a] border-gray-700 text-white z-[9999] relative">
                   <SelectItem value="peak">Peak Season (Summer, Holidays)</SelectItem>
                   <SelectItem value="regular">Regular Season (Spring, Fall)</SelectItem>
                   <SelectItem value="offPeak">Off-Peak Season (Winter)</SelectItem>
@@ -131,7 +131,7 @@ const RVCostCalculator = () => {
                 <SelectTrigger className="bg-[#131a2a] border-gray-700 text-white">
                   <SelectValue placeholder="Select campsite type" />
                 </SelectTrigger>
-                <SelectContent className="bg-[#131a2a] border-gray-700">
+                <SelectContent className="bg-[#131a2a] border-gray-700 text-white z-[9999] relative">
                   <SelectItem value="state">State/National Park (${campsiteRates.state}/night)</SelectItem>
                   <SelectItem value="standard">Standard RV Park (${campsiteRates.standard}/night)</SelectItem>
                   <SelectItem value="premium">Premium Resort (${campsiteRates.premium}/night)</SelectItem>
