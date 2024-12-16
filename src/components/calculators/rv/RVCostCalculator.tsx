@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
+import { campsiteTypes, campsiteRates, getAverageRate } from "./data/campsiteTypes";
 
 const RVCostCalculator = () => {
   const [rvType, setRvType] = useState('small');
@@ -11,7 +12,6 @@ const RVCostCalculator = () => {
   const [fuelPrice, setFuelPrice] = useState(4);
   const [campsiteType, setCampsiteType] = useState('state');
 
-  // Updated rates and consumption based on current market data
   const rates = {
     popUp: { mpg: 16, baseRate: 100 },      // Pop Up Campers
     truckCamper: { mpg: 14, baseRate: 120 }, // Truck Campers
@@ -24,7 +24,6 @@ const RVCostCalculator = () => {
     superSize: { mpg: 5.5, baseRate: 400 }   // Super Size Class A
   };
 
-  // Enhanced season data with comprehensive information
   const seasonData = {
     peak: {
       season_name: "Peak Season",
@@ -81,12 +80,6 @@ const RVCostCalculator = () => {
     shoulder: 1.25,
     regular: 1.0,
     offPeak: 0.8
-  };
-
-  const campsiteRates = {
-    state: 40,        // State/National Parks
-    standard: 65,     // Standard Private RV Parks
-    premium: 95       // Premium/Resort RV Parks
   };
 
   const calculateCosts = () => {
@@ -201,11 +194,17 @@ const RVCostCalculator = () => {
                   <SelectValue placeholder="Select campsite type" />
                 </SelectTrigger>
                 <SelectContent className="bg-[#131a2a] border-gray-700 text-white z-[9999] relative">
+                  <SelectItem value="primitive">Primitive/Dispersed (${campsiteRates.primitive}/night)</SelectItem>
                   <SelectItem value="state">State/National Park (${campsiteRates.state}/night)</SelectItem>
                   <SelectItem value="standard">Standard RV Park (${campsiteRates.standard}/night)</SelectItem>
                   <SelectItem value="premium">Premium Resort (${campsiteRates.premium}/night)</SelectItem>
+                  <SelectItem value="membership">Membership Campground (${campsiteRates.membership}/night)</SelectItem>
+                  <SelectItem value="urban">Urban RV Park (${campsiteRates.urban}/night)</SelectItem>
                 </SelectContent>
               </Select>
+              <p className="text-xs text-gray-400 mt-1">
+                {campsiteTypes[campsiteType as keyof typeof campsiteTypes].typical_features.join(", ")}
+              </p>
             </div>
           </div>
 
