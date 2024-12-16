@@ -29,19 +29,44 @@ const Calculators = () => {
   return (
     <div className="min-h-screen bg-[#080F1F] text-white pb-12">
       <Navbar />
-      <div className="pt-16"> {/* Add padding-top to account for fixed navbar */}
+      <div className="pt-16">
         <CalculatorHeader />
         <CalculatorIntro />
         <ScrollHint />
         
         <div className="container mx-auto px-4 mt-8">
           <Tabs defaultValue="cost" className="w-full">
-            <TabsList className="w-full flex overflow-x-auto no-scrollbar bg-[#131a2a] p-1">
-              <TabsTrigger value="cost" className="flex-1 min-w-[100px]">Cost</TabsTrigger>
-              <TabsTrigger value="fuel" className="flex-1 min-w-[100px]">Fuel</TabsTrigger>
-              <TabsTrigger value="power" className="flex-1 min-w-[100px]">Power</TabsTrigger>
-              <TabsTrigger value="towing" className="flex-1 min-w-[100px]">Towing</TabsTrigger>
-              <TabsTrigger value="smart" className="flex-1 min-w-[100px]">Smart</TabsTrigger>
+            <TabsList className="w-full h-[60px] flex overflow-x-auto no-scrollbar bg-[#1a202c] p-1 rounded-lg mb-6">
+              <TabsTrigger 
+                value="cost" 
+                className="flex-1 min-w-[44px] text-[#60A5FA] hover:text-[#93C5FD] data-[state=active]:text-[#93C5FD] data-[state=active]:bg-[#2D3748] transition-colors"
+              >
+                Cost
+              </TabsTrigger>
+              <TabsTrigger 
+                value="fuel"
+                className="flex-1 min-w-[44px] text-[#60A5FA] hover:text-[#93C5FD] data-[state=active]:text-[#93C5FD] data-[state=active]:bg-[#2D3748] transition-colors"
+              >
+                Fuel
+              </TabsTrigger>
+              <TabsTrigger 
+                value="power"
+                className="flex-1 min-w-[44px] text-[#60A5FA] hover:text-[#93C5FD] data-[state=active]:text-[#93C5FD] data-[state=active]:bg-[#2D3748] transition-colors"
+              >
+                Power
+              </TabsTrigger>
+              <TabsTrigger 
+                value="towing"
+                className="flex-1 min-w-[44px] text-[#60A5FA] hover:text-[#93C5FD] data-[state=active]:text-[#93C5FD] data-[state=active]:bg-[#2D3748] transition-colors"
+              >
+                Towing
+              </TabsTrigger>
+              <TabsTrigger 
+                value="smart"
+                className="flex-1 min-w-[44px] text-[#60A5FA] hover:text-[#93C5FD] data-[state=active]:text-[#93C5FD] data-[state=active]:bg-[#2D3748] transition-colors"
+              >
+                Smart
+              </TabsTrigger>
             </TabsList>
 
             <TabsContent value="cost" className="mt-8">
