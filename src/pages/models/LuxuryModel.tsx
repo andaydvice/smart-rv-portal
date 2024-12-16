@@ -1,4 +1,4 @@
-import { motion, useScroll } from "framer-motion";
+import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import Navbar from "@/components/Navbar";
@@ -26,7 +26,7 @@ const LuxuryModel = () => {
             </Button>
           </Link>
           
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className="grid md:grid-cols-2 gap-8 mb-12">
             <div>
               <img
                 src="https://images.unsplash.com/photo-1543465077-db45d34b88a5?auto=format&fit=crop&w=800"
@@ -64,6 +64,47 @@ const LuxuryModel = () => {
               </div>
             </div>
           </div>
+
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3 }}
+            className="bg-gray-800/50 rounded-xl p-8 mb-12"
+          >
+            <h2 className="text-3xl font-bold text-white mb-6">Top-Tier Luxury RV Categories and Models</h2>
+            <p className="text-gray-300 mb-8 italic">
+              Note: Prices are approximate ranges based on 2024 models and can vary significantly based on options, customizations, and dealer location. 
+              Many of these manufacturers also offer custom builds that can exceed these ranges.
+            </p>
+
+            <div className="space-y-8">
+              <div>
+                <h3 className="text-2xl font-semibold text-blue-400 mb-4">Class A Diesel Pushers (Ultra Luxury)</h3>
+                <ul className="space-y-4 text-gray-300">
+                  <li className="flex justify-between items-center p-4 bg-gray-700/30 rounded-lg">
+                    <span className="font-medium">Newmar King Aire</span>
+                    <span className="text-blue-400">$1.5M - $2M+</span>
+                  </li>
+                  <li className="flex justify-between items-center p-4 bg-gray-700/30 rounded-lg">
+                    <span className="font-medium">Prevost H3-45 VIP</span>
+                    <span className="text-blue-400">$2M - $3M+</span>
+                  </li>
+                  <li className="flex justify-between items-center p-4 bg-gray-700/30 rounded-lg">
+                    <span className="font-medium">Newell Coach Custom</span>
+                    <span className="text-blue-400">$2M - $3M+</span>
+                  </li>
+                  <li className="flex justify-between items-center p-4 bg-gray-700/30 rounded-lg">
+                    <span className="font-medium">Foretravel ih-45</span>
+                    <span className="text-blue-400">$1.3M - $1.8M</span>
+                  </li>
+                  <li className="flex justify-between items-center p-4 bg-gray-700/30 rounded-lg">
+                    <span className="font-medium">Marathon Coach Custom</span>
+                    <span className="text-blue-400">$2M - $2.5M</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </motion.div>
         </div>
       </motion.main>
     </>
