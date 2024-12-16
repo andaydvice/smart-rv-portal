@@ -88,7 +88,7 @@ const TripInputs = ({
             <SelectItem value="peak">Peak Season (Summer, Major Holidays) - 50% Premium</SelectItem>
             <SelectItem value="shoulder">Shoulder Season (Spring/Fall) - 25% Premium</SelectItem>
             <SelectItem value="regular">Regular Season (Early Spring/Late Fall) - Base Rate</SelectItem>
-            <SelectItem value="offPeak">Off-Peak Season (Winter) - 20% Discount</SelectItem>
+            <SelectItem value="offPeak">Off Peak Season (Winter) - 20% Discount</SelectItem>
           </SelectContent>
         </Select>
         <p className="text-xs text-gray-400 mt-1">
