@@ -31,8 +31,8 @@ const LuxuryModel = () => {
           <div className="grid md:grid-cols-2 gap-8 mb-12">
             <div>
               <img
-                src="https://images.unsplash.com/photo-1543465077-db45d34b88a5?auto=format&fit=crop&w=800"
-                alt="Luxury Class RV"
+                src="/lovable-uploads/8137a7b0-17f6-4adc-a1b8-c790843192e0.png"
+                alt="Luxury Class RV with slide-out in mountain setting"
                 className="rounded-lg shadow-xl w-full h-[400px] object-cover"
               />
             </div>
