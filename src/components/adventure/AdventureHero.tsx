@@ -12,7 +12,7 @@ const AdventureHero = () => {
         className="w-full h-full object-cover"
       />
       <div className="absolute inset-0 bg-black/40" />
-      <div className="absolute top-24 left-0 w-full px-4">
+      <div className="absolute top-8 left-0 w-full px-4">
         <div className="container mx-auto">
           <Link to="/models">
             <Button variant="outline" className="bg-white/10 backdrop-blur-sm text-white hover:text-white hover:bg-white/20 active:bg-white/30">
@@ -21,7 +21,7 @@ const AdventureHero = () => {
           </Link>
         </div>
       </div>
-      <div className="absolute inset-0 flex flex-col justify-center items-center text-center">
+      <div className="absolute inset-0 flex items-center justify-center">
         <motion.h1 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
