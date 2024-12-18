@@ -36,7 +36,7 @@ const LuxuryModel = () => {
 
         <div className="container mx-auto px-4 -mt-20 relative z-10">
           <Link to="/models">
-            <Button variant="outline" className="mb-4 bg-white/10 backdrop-blur-sm">
+            <Button variant="outline" className="mb-4 bg-white/10 backdrop-blur-sm text-white hover:text-white hover:bg-white/20 active:bg-white/30">
               <ArrowLeft className="w-4 h-4 mr-2" /> Back to Models
             </Button>
           </Link>
