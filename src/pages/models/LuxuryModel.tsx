@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, Navigation, Shield, Battery, Wifi } from "lucide-react";
+import { ArrowLeft, Home, Wrench, Building, Cpu } from "lucide-react";
 import { ModelCategory } from "@/components/luxury-models/ModelCategory";
 import { luxuryModels } from "@/data/luxury-models";
 
@@ -37,30 +37,35 @@ const LuxuryModel = () => {
               />
             </div>
             <div>
-              <h1 className="text-4xl font-bold text-white mb-4">Luxury Class</h1>
-              <p className="text-blue-400 text-xl mb-4">Starting at $150,000</p>
+              <h1 className="text-4xl font-bold text-white mb-4">Luxury RV Living</h1>
+              <p className="text-blue-400 text-xl mb-4">Starting at $1.3 Million</p>
+              <p className="text-gray-300 mb-4">
+                The epitome of mobile luxury begins with Class A diesel pushers and custom coaches.
+              </p>
+              <p className="text-gray-300 mb-4">
+                These elite RVs showcase residential grade amenities, sophisticated engineering, and unmatched craftsmanship.
+              </p>
               <p className="text-gray-300 mb-8">
-                Experience unparalleled luxury with our flagship model, featuring advanced automation and premium finishes.
-                The Luxury Class RV sets new standards in mobile living with its state-of-the-art technology and comfort features.
+                Each model represents the pinnacle of mobile living, where cutting edge technology meets timeless elegance.
               </p>
               <div className="space-y-4 text-gray-300">
                 <h2 className="text-2xl font-semibold text-white mb-4">Key Features</h2>
                 <ul className="space-y-4">
                   <li className="flex items-center gap-2">
-                    <Navigation className="w-5 h-5 text-blue-400" />
-                    Advanced Navigation System with real-time traffic updates
+                    <Home className="w-5 h-5 text-blue-400" />
+                    Residential Masterpieces: Heated marble floors, custom cabinetry, premium appliances
                   </li>
                   <li className="flex items-center gap-2">
-                    <Shield className="w-5 h-5 text-emerald-400" />
-                    Premium Security Suite with 360° surveillance
+                    <Wrench className="w-5 h-5 text-emerald-400" />
+                    Advanced Engineering: Air ride suspension, multiplex wiring, independent power systems
                   </li>
                   <li className="flex items-center gap-2">
-                    <Battery className="w-5 h-5 text-yellow-400" />
-                    Extended Range Power System with smart energy management
+                    <Building className="w-5 h-5 text-yellow-400" />
+                    Elite Construction: Aircraft grade materials, thermal windows, vacuum bonded walls
                   </li>
                   <li className="flex items-center gap-2">
-                    <Wifi className="w-5 h-5 text-purple-400" />
-                    High-Speed Internet connectivity with satellite backup
+                    <Cpu className="w-5 h-5 text-purple-400" />
+                    Smart Integration: Whole coach automation, satellite communications, premium security
                   </li>
                 </ul>
               </div>
