@@ -21,7 +21,6 @@ const LuxuryModel = () => {
         transition={{ duration: 0.6 }}
         className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800"
       >
-        {/* Hero Header Image Section */}
         <div className="relative w-full h-[60vh] overflow-hidden">
           <img
             src="/lovable-uploads/8137a7b0-17f6-4adc-a1b8-c790843192e0.png"
@@ -31,11 +30,11 @@ const LuxuryModel = () => {
           <div className="absolute inset-0 bg-black/40" />
           <div className="absolute top-8 left-0 w-full px-4">
             <div className="container mx-auto">
-              <Link to="/models">
+              <a href="https://preview--smart-rv-portal.lovable.app/models">
                 <Button variant="outline" className="bg-white/10 backdrop-blur-sm text-white hover:text-white hover:bg-white/20 active:bg-white/30 border-blue-400">
                   <ArrowLeft className="w-4 h-4 mr-2" /> Back to Models
                 </Button>
-              </Link>
+              </a>
             </div>
           </div>
           <div className="absolute inset-0 flex flex-col justify-center items-center text-center p-6">
