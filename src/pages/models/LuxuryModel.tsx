@@ -41,15 +41,12 @@ const LuxuryModel = () => {
             </Button>
           </Link>
           
-          <p className="text-2xl text-gray-300 mb-4 text-center max-w-3xl mx-auto">
-            The epitome of mobile luxury begins with Class A diesel pushers and custom coaches
-          </p>
           <h2 className="text-3xl font-semibold text-blue-400 mb-6 text-center">Starting at $1.3 Million</h2>
           
           <div className="grid md:grid-cols-2 gap-6 mb-4 mt-8">
             <div className="bg-gray-800/50 rounded-lg p-6 backdrop-blur-sm">
               <p className="text-gray-300 mb-4">
-                These elite RVs showcase residential grade amenities, sophisticated engineering, and unmatched craftsmanship.
+                The epitome of mobile luxury begins with Class A diesel pushers and custom coaches
               </p>
               <p className="text-gray-300 mb-8">
                 Each model represents the pinnacle of mobile living, where cutting edge technology meets timeless elegance.
