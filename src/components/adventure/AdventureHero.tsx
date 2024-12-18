@@ -25,14 +25,16 @@ const AdventureHero = () => {
         </div>
       </div>
       <div className="absolute inset-0 flex items-center justify-center">
-        <motion.h1 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-5xl font-bold text-white"
-        >
-          Ultimate Adventure Vehicles
-        </motion.h1>
+        <Link to="/models" className="group">
+          <motion.h1 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="text-5xl font-bold text-white hover:text-blue-400 transition-colors cursor-pointer"
+          >
+            Ultimate Adventure Vehicles
+          </motion.h1>
+        </Link>
       </div>
     </div>
   );
