@@ -37,6 +37,8 @@ const features = [
 
 const CompareModels = () => {
   useEffect(() => {
+    console.log("[CompareModels] Component mounted");
+    console.log("[CompareModels] Current location:", window.location.pathname);
     window.scrollTo(0, 0);
   }, []);
 
@@ -46,11 +48,19 @@ const CompareModels = () => {
       <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 pt-20">
         <div className="max-w-7xl mx-auto px-4 py-12">
           <div className="mb-8">
-            <Link to="/models">
+            <Link 
+              to="/models"
+              onClick={() => {
+                console.log("[CompareModels] Back to Models link clicked");
+                console.log("[CompareModels] Current location:", window.location.pathname);
+                console.log("[CompareModels] Target location: /models");
+              }}
+            >
               <Button variant="outline" className="mb-8">
                 <ArrowLeft className="w-4 h-4 mr-2" /> Back to Models
               </Button>
             </Link>
+
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -112,7 +122,7 @@ const CompareModels = () => {
                           </TableCell>
                           <TableCell className="text-center text-gray-300">
                             {typeof feature.luxury === 'boolean' 
-                              ? (feature.luxury ? <Check className="w-5 h-5 mx-auto text-green-400" /> 
+                              ? (feature.luxury ? <Check className="w-5 h-5 mx-auto text-green-400" 
                                 : <Minus className="w-5 h-5 mx-auto text-gray-500" />)
                               : feature.luxury}
                           </TableCell>

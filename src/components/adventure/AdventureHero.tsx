@@ -7,8 +7,16 @@ const AdventureHero = () => {
   const navigate = useNavigate();
 
   const handleNavigation = () => {
-    console.log("Navigating to /models");
-    navigate("/models");
+    console.log("[AdventureHero] Navigation attempt started");
+    console.log("[AdventureHero] Current location:", window.location.pathname);
+    console.log("[AdventureHero] Target location: /models");
+    
+    try {
+      navigate("/models");
+      console.log("[AdventureHero] Navigation function called successfully");
+    } catch (error) {
+      console.error("[AdventureHero] Navigation error:", error);
+    }
   };
 
   return (
@@ -24,7 +32,10 @@ const AdventureHero = () => {
           <Button 
             variant="outline" 
             className="bg-white/10 backdrop-blur-sm text-white hover:text-white hover:bg-white/20 active:bg-white/30 border-blue-400"
-            onClick={handleNavigation}
+            onClick={() => {
+              console.log("[AdventureHero] Top 'Back to Models' button clicked");
+              handleNavigation();
+            }}
           >
             <ArrowLeft className="w-4 h-4 mr-2" /> Back to Models
           </Button>
@@ -32,7 +43,10 @@ const AdventureHero = () => {
       </div>
       <div className="absolute inset-0 flex items-center justify-center">
         <motion.button
-          onClick={handleNavigation}
+          onClick={() => {
+            console.log("[AdventureHero] Hero title button clicked");
+            handleNavigation();
+          }}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
