@@ -13,13 +13,6 @@ const AdventureHero = () => {
       />
       <div className="absolute inset-0 bg-black/40" />
       <div className="absolute inset-0 flex flex-col justify-center items-center text-center p-6">
-        <div className="container mx-auto px-4 -mt-20 relative z-10">
-          <Link to="/models">
-            <Button variant="outline" className="mb-4 bg-white/10 backdrop-blur-sm text-white hover:text-white hover:bg-white/20 active:bg-white/30">
-              <ArrowLeft className="w-4 h-4 mr-2" /> Back to Models
-            </Button>
-          </Link>
-        </div>
         <motion.h1 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -28,6 +21,15 @@ const AdventureHero = () => {
         >
           Ultimate Adventure Vehicles
         </motion.h1>
+      </div>
+      <div className="absolute top-24 left-0 w-full px-4">
+        <div className="container mx-auto">
+          <Link to="/models">
+            <Button variant="outline" className="bg-white/10 backdrop-blur-sm text-white hover:text-white hover:bg-white/20 active:bg-white/30">
+              <ArrowLeft className="w-4 h-4 mr-2" /> Back to Models
+            </Button>
+          </Link>
+        </div>
       </div>
     </div>
   );
