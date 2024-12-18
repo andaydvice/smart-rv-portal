@@ -19,29 +19,34 @@ const LuxuryModel = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6 }}
-        className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 pt-20"
+        className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800"
       >
-        <div className="container mx-auto px-4">
+        {/* Hero Header Image Section */}
+        <div className="relative w-full h-[60vh] overflow-hidden">
+          <img
+            src="/lovable-uploads/8137a7b0-17f6-4adc-a1b8-c790843192e0.png"
+            alt="Luxury Class RV with slide-out in mountain setting"
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-black/40" />
+          <div className="absolute inset-0 flex flex-col justify-center items-center text-center p-6">
+            <h1 className="text-5xl font-bold text-white mb-4">Luxury RV Living</h1>
+            <p className="text-2xl text-white/90 max-w-2xl">
+              The epitome of mobile luxury begins with Class A diesel pushers and custom coaches
+            </p>
+          </div>
+        </div>
+
+        <div className="container mx-auto px-4 -mt-20 relative z-10">
           <Link to="/models">
-            <Button variant="outline" className="mb-4">
+            <Button variant="outline" className="mb-4 bg-white/10 backdrop-blur-sm">
               <ArrowLeft className="w-4 h-4 mr-2" /> Back to Models
             </Button>
           </Link>
           
-          <div className="grid md:grid-cols-2 gap-6 mb-4">
-            <div>
-              <img
-                src="/lovable-uploads/8137a7b0-17f6-4adc-a1b8-c790843192e0.png"
-                alt="Luxury Class RV with slide-out in mountain setting"
-                className="rounded-lg shadow-xl w-full h-[400px] object-cover"
-              />
-            </div>
-            <div>
-              <h1 className="text-4xl font-bold text-white mb-4">Luxury RV Living</h1>
+          <div className="grid md:grid-cols-2 gap-6 mb-4 mt-8">
+            <div className="bg-gray-800/50 rounded-lg p-6 backdrop-blur-sm">
               <p className="text-blue-400 text-xl mb-4">Starting at $1.3 Million</p>
-              <p className="text-gray-300 mb-4">
-                The epitome of mobile luxury begins with Class A diesel pushers and custom coaches.
-              </p>
               <p className="text-gray-300 mb-4">
                 These elite RVs showcase residential grade amenities, sophisticated engineering, and unmatched craftsmanship.
               </p>
