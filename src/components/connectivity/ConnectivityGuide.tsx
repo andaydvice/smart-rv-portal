@@ -20,37 +20,37 @@ const ConnectivityGuide = () => {
       transition={{ duration: 0.5 }}
       className="max-w-4xl mx-auto p-6"
     >
-      <Card className="bg-gradient-to-b from-[#1B2028] to-[#151A22] border border-blue-400/20 shadow-lg shadow-blue-500/20">
+      <Card className="bg-gradient-to-b from-[#1B2028] to-[#000000] border-2 border-blue-400/40 shadow-xl shadow-blue-500/40">
         <CardHeader className="pb-2">
-          <CardTitle className="text-4xl font-light text-[#5B9BD5] drop-shadow-[0_0_10px_rgba(91,155,213,0.3)]">
+          <CardTitle className="text-2xl font-medium text-[#5B9BD5] drop-shadow-[0_0_30px_rgba(91,155,213,0.7)]">
             Connectivity Solutions
           </CardTitle>
-          <CardDescription className="text-gray-400 text-lg">
+          <CardDescription className="text-gray-400 text-lg drop-shadow-[0_0_25px_rgba(91,155,213,0.6)]">
             Comprehensive guide to maintaining strong internet connectivity on the road
           </CardDescription>
         </CardHeader>
         <CardContent>
           <Accordion type="single" collapsible className="space-y-4">
             <div className="space-y-2">
-              <div className="flex items-center space-x-3 text-[#5B9BD5] text-xl mb-4">
-                <Signal className="h-6 w-6 drop-shadow-[0_0_8px_rgba(91,155,213,0.3)]" />
-                <h3 className="drop-shadow-[0_0_8px_rgba(91,155,213,0.3)]">Signal Boosting Solutions</h3>
+              <div className="flex items-center space-x-3 text-[#5B9BD5] text-2xl mb-4">
+                <Signal className="h-6 w-6 animate-pulse drop-shadow-[0_0_20px_rgba(91,155,213,0.5)]" />
+                <h3 className="drop-shadow-[0_0_30px_rgba(91,155,213,0.7)]">Signal Boosting Solutions</h3>
               </div>
               <SignalBoostingSection />
             </div>
 
             <div className="space-y-2">
-              <div className="flex items-center space-x-3 text-[#5B9BD5] text-xl mb-4">
-                <Wifi className="h-6 w-6 drop-shadow-[0_0_8px_rgba(91,155,213,0.3)]" />
-                <h3 className="drop-shadow-[0_0_8px_rgba(91,155,213,0.3)]">Mobile Hotspot Comparison</h3>
+              <div className="flex items-center space-x-3 text-[#5B9BD5] text-2xl mb-4">
+                <Wifi className="h-6 w-6 animate-pulse drop-shadow-[0_0_20px_rgba(91,155,213,0.5)]" />
+                <h3 className="drop-shadow-[0_0_30px_rgba(91,155,213,0.7)]">Mobile Hotspot Comparison</h3>
               </div>
               <HotspotSection />
             </div>
 
             <div className="space-y-2">
-              <div className="flex items-center space-x-3 text-[#5B9BD5] text-xl mb-4">
-                <Laptop className="h-6 w-6 drop-shadow-[0_0_8px_rgba(91,155,213,0.3)]" />
-                <h3 className="drop-shadow-[0_0_8px_rgba(91,155,213,0.3)]">Mobile Office Setup Tips</h3>
+              <div className="flex items-center space-x-3 text-[#5B9BD5] text-2xl mb-4">
+                <Laptop className="h-6 w-6 animate-pulse drop-shadow-[0_0_20px_rgba(91,155,213,0.5)]" />
+                <h3 className="drop-shadow-[0_0_30px_rgba(91,155,213,0.7)]">Mobile Office Setup Tips</h3>
               </div>
               <MobileOfficeSection />
             </div>
