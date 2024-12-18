@@ -43,6 +43,7 @@ export default {
         connectivity: {
           bg: "#1B2028",
           accent: "#5B9BD5",
+          darkBg: "#151A22"
         }
       },
       borderRadius: {
