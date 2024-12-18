@@ -1,5 +1,8 @@
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
+import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import { ArrowLeft } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
