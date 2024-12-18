@@ -12,19 +12,21 @@ const AdventureHero = () => {
         className="w-full h-full object-cover"
       />
       <div className="absolute inset-0 bg-black/40" />
-      <div className="absolute inset-0 flex flex-col justify-center items-center text-center p-6">
-        <div className="container mx-auto px-4 -mt-20 relative z-10">
+      <div className="absolute top-24 left-0 w-full px-4">
+        <div className="container mx-auto">
           <Link to="/models">
-            <Button variant="outline" className="mb-4 bg-white/10 backdrop-blur-sm text-white hover:text-white hover:bg-white/20 active:bg-white/30">
+            <Button variant="outline" className="bg-white/10 backdrop-blur-sm text-white hover:text-white hover:bg-white/20 active:bg-white/30">
               <ArrowLeft className="w-4 h-4 mr-2" /> Back to Models
             </Button>
           </Link>
         </div>
+      </div>
+      <div className="absolute inset-0 flex flex-col justify-center items-center text-center">
         <motion.h1 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-5xl font-bold text-white mb-4 mt-[-10%]"
+          className="text-5xl font-bold text-white"
         >
           Ultimate Adventure Vehicles
         </motion.h1>
