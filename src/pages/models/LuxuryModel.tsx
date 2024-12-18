@@ -41,13 +41,14 @@ const LuxuryModel = () => {
             </Button>
           </Link>
           
-          <h2 className="text-3xl font-semibold text-blue-400 mb-6 text-center">Starting at $1.3 Million</h2>
-          
           <div className="grid md:grid-cols-2 gap-6 mb-4 mt-8">
             <div className="bg-gray-800/50 rounded-lg p-6 backdrop-blur-sm">
-              <p className="text-gray-300 mb-4">
+              <h2 className="text-2xl font-semibold text-blue-400 mb-4">
                 The epitome of mobile luxury begins with Class A diesel pushers and custom coaches
-              </p>
+              </h2>
+              <h3 className="text-2xl font-semibold text-blue-400 mb-4">
+                Starting at $1.3 Million
+              </h3>
               <p className="text-gray-300 mb-8">
                 Each model represents the pinnacle of mobile living, where cutting edge technology meets timeless elegance.
               </p>
