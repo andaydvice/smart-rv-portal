@@ -43,17 +43,17 @@ const LuxuryModel = () => {
           
           <div className="grid md:grid-cols-2 gap-6 mb-4 mt-8">
             <div className="bg-gray-800/50 rounded-lg p-6 backdrop-blur-sm">
-              <h2 className="text-2xl font-semibold text-blue-400 mb-4">
+              <h2 className="text-xl font-semibold text-blue-400 mb-4">
                 The epitome of mobile luxury begins with Class A diesel pushers and custom coaches
               </h2>
-              <h3 className="text-2xl font-semibold text-blue-400 mb-4">
+              <h3 className="text-xl font-semibold text-blue-400 mb-4">
                 Starting at $1.3 Million
               </h3>
               <p className="text-gray-300 mb-8">
                 Each model represents the pinnacle of mobile living, where cutting edge technology meets timeless elegance.
               </p>
               <div className="space-y-4 text-gray-300">
-                <h2 className="text-2xl font-semibold text-white mb-4">Key Features</h2>
+                <h2 className="text-xl font-semibold text-white mb-4">Key Features</h2>
                 <ul className="space-y-4">
                   <li className="flex items-center gap-2">
                     <Home className="w-5 h-5 text-blue-400" />
@@ -82,7 +82,7 @@ const LuxuryModel = () => {
             transition={{ delay: 0.3 }}
             className="bg-gray-800/50 rounded-xl p-6 mt-4"
           >
-            <h2 className="text-3xl font-bold text-white mb-6">Complete Guide to Luxury RVs: Authentic Owner Insights 2024</h2>
+            <h2 className="text-2xl font-bold text-white mb-6">Complete Guide to Luxury RVs: Authentic Owner Insights 2024</h2>
             <p className="text-gray-300 mb-8 italic">
               Note: Prices are approximate ranges based on 2024 models and can vary significantly based on options, customizations, and dealer location. 
               Many of these manufacturers also offer custom builds that can exceed these ranges.
