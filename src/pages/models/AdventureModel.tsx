@@ -1,9 +1,59 @@
-import { motion, useScroll } from "framer-motion";
+import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, Navigation, Shield, Battery, Wifi } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+
+const adventureModels = [
+  {
+    category: "Off-Road Ready",
+    models: [
+      {
+        name: "Trail Blazer X1",
+        price: "$125,000",
+        description: "All-terrain capability with luxury amenities",
+        features: ["4x4 drivetrain", "Solar power system", "Satellite connectivity"]
+      },
+      {
+        name: "Mountain Explorer",
+        price: "$145,000",
+        description: "Built for high-altitude adventures",
+        features: ["Enhanced suspension", "Oxygen system", "Weather station"]
+      }
+    ]
+  },
+  {
+    category: "Expedition Series",
+    models: [
+      {
+        name: "Nomad Pro",
+        price: "$165,000",
+        description: "Extended range for long journeys",
+        features: ["500-mile range", "Water purification", "Dual batteries"]
+      },
+      {
+        name: "Safari Master",
+        price: "$155,000",
+        description: "Designed for wildlife photography tours",
+        features: ["360° cameras", "Silent mode", "Observation deck"]
+      }
+    ]
+  }
+];
 
 const AdventureModel = () => {
   useEffect(() => {
@@ -26,44 +76,49 @@ const AdventureModel = () => {
             </Button>
           </Link>
           
-          <div className="grid md:grid-cols-2 gap-8">
-            <div>
-              <img
-                src="https://images.unsplash.com/photo-1533591380348-14193f1de18f?auto=format&fit=crop&w=800"
-                alt="Adventure Class RV"
-                className="rounded-lg shadow-xl w-full h-[400px] object-cover"
-              />
-            </div>
-            <div>
-              <h1 className="text-4xl font-bold text-white mb-4">Adventure Class</h1>
-              <p className="text-blue-400 text-xl mb-4">Starting at $120,000</p>
-              <p className="text-gray-300 mb-8">
-                Built for the modern explorer, combining durability with smart technology for off-grid adventures.
-                The Adventure Class RV is designed for those who want to explore without compromising on comfort and technology.
-              </p>
-              <div className="space-y-4 text-gray-300">
-                <h2 className="text-2xl font-semibold text-white mb-4">Key Features</h2>
-                <ul className="space-y-4">
-                  <li className="flex items-center gap-2">
-                    <Battery className="w-5 h-5 text-yellow-400" />
-                    Solar Power Integration with battery backup
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <Shield className="w-5 h-5 text-emerald-400" />
-                    All-Terrain Monitoring system
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <Navigation className="w-5 h-5 text-blue-400" />
-                    Off-Road Navigation with trail mapping
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <Wifi className="w-5 h-5 text-purple-400" />
-                    Satellite Connectivity for remote areas
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
+          <h1 className="text-4xl font-bold text-white mb-8">Adventure Class RVs</h1>
+          
+          <Accordion type="single" collapsible className="space-y-4">
+            {adventureModels.map((category, index) => (
+              <AccordionItem 
+                key={index} 
+                value={`category-${index}`}
+                className="bg-white/5 rounded-lg border border-white/10"
+              >
+                <AccordionTrigger className="px-6 text-white hover:text-blue-400">
+                  {category.category}
+                </AccordionTrigger>
+                <AccordionContent className="px-6 pb-6">
+                  <div className="grid md:grid-cols-2 gap-6 pt-4">
+                    {category.models.map((model, modelIndex) => (
+                      <Card key={modelIndex} className="bg-white/5 border-white/10">
+                        <CardHeader>
+                          <CardTitle className="text-white">{model.name}</CardTitle>
+                          <CardDescription className="text-blue-400">
+                            Starting at {model.price}
+                          </CardDescription>
+                        </CardHeader>
+                        <CardContent>
+                          <p className="text-gray-300 mb-4">{model.description}</p>
+                          <ul className="space-y-2">
+                            {model.features.map((feature, featureIndex) => (
+                              <li 
+                                key={featureIndex}
+                                className="text-gray-400 flex items-center gap-2"
+                              >
+                                <span className="w-1.5 h-1.5 bg-blue-400 rounded-full" />
+                                {feature}
+                              </li>
+                            ))}
+                          </ul>
+                        </CardContent>
+                      </Card>
+                    ))}
+                  </div>
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
         </div>
       </motion.main>
     </>
