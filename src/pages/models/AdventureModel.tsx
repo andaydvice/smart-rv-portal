@@ -17,12 +17,12 @@ const adventureCategories = {
   ],
   "Off Road Travel Trailers": [
     { name: "Black Series HQ19", price: "$70K - $85K" },
-    { name: "Bruder EXP-6", price: "$125K - $180K" },
+    { name: "Bruder EXP 6", price: "$125K - $180K" },
     { name: "Off Grid Trailers Expedition 2.0", price: "$45K - $65K" },
     { name: "Taxa Outdoors Mantis", price: "$45K - $60K" },
     { name: "Airstream Basecamp X", price: "$48K - $55K" },
-    { name: "Eclipse RV Overland Adventure Series – Mojo 12BD", price: "Price varies" },
-    { name: "inTech O-V-R Expedition", price: "Price varies" },
+    { name: "Eclipse RV Overland Adventure Series Mojo 12BD", price: "Price varies" },
+    { name: "inTech OVR Expedition", price: "Price varies" },
     { name: "Taxa Outdoors TigerMoth", price: "$27,900" },
     { name: "Vorsheer XOC Extreme Overland Camper", price: "$49,995" },
     { name: "nüCamp RV Tab S Teardrop Camper", price: "$31,523" }
@@ -36,10 +36,10 @@ const adventureCategories = {
     { name: "Jayco Comet", price: "Price varies" }
   ],
   "Overlanding Fifth Wheels": [
-    { name: "Arctic Fox 27-5L", price: "$65K - $80K" },
+    { name: "Arctic Fox 27 5L", price: "$65K - $80K" },
     { name: "Northwood Fox Mountain", price: "$60K - $75K" },
-    { name: "KZ Durango Half-Ton", price: "$55K - $70K" },
-    { name: "Bruder EXP-7", price: "Price varies" }
+    { name: "KZ Durango Half Ton", price: "$55K - $70K" },
+    { name: "Bruder EXP 7", price: "Price varies" }
   ],
   "Truck Campers": [
     { name: "Adventurer 901SB", price: "Price varies" },
@@ -55,14 +55,14 @@ const keyFeatures = [
   "Reinforced construction for rough terrain",
   "Extra storage for adventure gear",
   "All season tires and recovery equipment",
-  "Off-grid power systems",
+  "Off grid power systems",
   "Ample storage for outdoor gear",
   "Dedicated workspace for remote work",
   "Upgraded wheels and tires",
   "External shower ports",
-  "On-board air compressors",
-  "Advanced off-grid systems (large solar arrays, battery banks, sustainable water systems)",
-  "Durable construction using high-quality materials for harsh environments",
+  "On board air compressors",
+  "Advanced off grid systems (large solar arrays, battery banks, sustainable water systems)",
+  "Durable construction using high quality materials for harsh environments",
   "Flexible interior configurations for customizable living spaces"
 ];
 
