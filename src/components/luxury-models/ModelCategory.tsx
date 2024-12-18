@@ -21,7 +21,7 @@ interface ModelCategoryProps {
 export const ModelCategory = ({ title, models }: ModelCategoryProps) => (
   <Accordion type="single" collapsible className="mb-6">
     <AccordionItem value={title}>
-      <AccordionTrigger className="text-2xl font-semibold text-blue-400">
+      <AccordionTrigger className="text-lg font-semibold text-blue-400">
         {title}
       </AccordionTrigger>
       <AccordionContent>
