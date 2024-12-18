@@ -15,7 +15,7 @@ const AdventureHero = () => {
       <div className="absolute top-8 left-0 w-full px-4">
         <div className="container mx-auto">
           <Link to="/models">
-            <Button variant="outline" className="bg-white/10 backdrop-blur-sm text-white hover:text-white hover:bg-white/20 active:bg-white/30">
+            <Button variant="outline" className="bg-white/10 backdrop-blur-sm text-white hover:text-white hover:bg-white/20 active:bg-white/30 border-blue-400">
               <ArrowLeft className="w-4 h-4 mr-2" /> Back to Models
             </Button>
           </Link>
