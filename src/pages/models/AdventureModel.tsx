@@ -70,7 +70,7 @@ const AdventureModel = () => {
   return (
     <>
       <Navbar />
-      <div className="relative w-full h-[50vh] mb-8">
+      <div className="relative w-full h-[50vh]">
         <img 
           src="/lovable-uploads/ae14102b-cf2e-443b-a722-7fe364e92e36.png"
           alt="Line up of luxury adventure RVs"
