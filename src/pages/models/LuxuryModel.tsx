@@ -28,7 +28,7 @@ const LuxuryModel = () => {
             </Button>
           </Link>
           
-          <div className="grid md:grid-cols-2 gap-8 mb-12">
+          <div className="grid md:grid-cols-2 gap-8 mb-8">
             <div>
               <img
                 src="/lovable-uploads/8137a7b0-17f6-4adc-a1b8-c790843192e0.png"
