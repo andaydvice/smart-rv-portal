@@ -23,12 +23,12 @@ const LuxuryModel = () => {
       >
         <div className="container mx-auto px-4">
           <Link to="/models">
-            <Button variant="outline" className="mb-6">
+            <Button variant="outline" className="mb-4">
               <ArrowLeft className="w-4 h-4 mr-2" /> Back to Models
             </Button>
           </Link>
           
-          <div className="grid md:grid-cols-2 gap-6 mb-6">
+          <div className="grid md:grid-cols-2 gap-6 mb-4">
             <div>
               <img
                 src="/lovable-uploads/8137a7b0-17f6-4adc-a1b8-c790843192e0.png"
@@ -76,7 +76,7 @@ const LuxuryModel = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
-            className="bg-gray-800/50 rounded-xl p-8"
+            className="bg-gray-800/50 rounded-xl p-6 mt-4"
           >
             <h2 className="text-3xl font-bold text-white mb-6">Complete Guide to Luxury RVs: Authentic Owner Insights 2024</h2>
             <p className="text-gray-300 mb-8 italic">
