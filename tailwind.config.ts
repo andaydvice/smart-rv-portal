@@ -40,6 +40,10 @@ export default {
           DEFAULT: "#FAFAFA",
           foreground: "#1A1A1A",
         },
+        connectivity: {
+          bg: "#1B2028",
+          accent: "#5B9BD5",
+        }
       },
       borderRadius: {
         lg: "1rem",
