@@ -44,9 +44,10 @@ const LuxuryModel = () => {
             </Button>
           </Link>
           
+          <h2 className="text-3xl font-semibold text-blue-400 mb-6 text-center">Starting at $1.3 Million</h2>
+          
           <div className="grid md:grid-cols-2 gap-6 mb-4 mt-8">
             <div className="bg-gray-800/50 rounded-lg p-6 backdrop-blur-sm">
-              <p className="text-blue-400 text-xl mb-4">Starting at $1.3 Million</p>
               <p className="text-gray-300 mb-4">
                 These elite RVs showcase residential grade amenities, sophisticated engineering, and unmatched craftsmanship.
               </p>
