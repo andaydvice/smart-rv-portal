@@ -43,15 +43,15 @@ const LuxuryModel = () => {
           </div>
         </div>
 
-        <div className="container mx-auto px-4 -mt-20 relative z-10">
-          <div className="bg-gray-800/50 rounded-lg p-8 backdrop-blur-sm mb-4 mt-8">
+        <div className="container mx-auto px-4 pt-12 relative z-10">
+          <div className="bg-gray-800/50 rounded-lg p-8 backdrop-blur-sm mb-4">
             <div className="space-y-8">
               <div className="space-y-4">
                 <h2 className="text-2xl font-semibold text-blue-400">
-                  The epitome of mobile luxury begins with Class A diesel pushers and custom coaches
+                  Unrivaled Luxury: Class A Diesel Pushers & Custom Coaches
                 </h2>
                 <h3 className="text-2xl font-semibold text-blue-400">
-                  Starting at $1.3 Million
+                  From $1.3M | Custom Excellence
                 </h3>
                 <p className="text-gray-300 text-lg">
                   Each model represents the pinnacle of mobile living, where cutting edge technology meets timeless elegance.
