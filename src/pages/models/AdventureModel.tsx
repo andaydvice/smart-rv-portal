@@ -92,9 +92,12 @@ const AdventureModel = () => {
         style={{ backgroundColor: "#1B2028" }}
       >
         <div className="max-w-7xl mx-auto">
-          <h1 className="text-4xl font-bold mb-8" style={{ color: "#5B9BD5" }}>
-            Adventure Ready RV Categories and Models
+          <h1 className="text-4xl font-bold mb-2" style={{ color: "#5B9BD5" }}>
+            Ultimate Adventure Vehicles
           </h1>
+          <h2 className="text-2xl mb-8 text-gray-300">
+            Explore Our Off Road RV Collection
+          </h2>
 
           <div className="space-y-6">
             <Card className="bg-gray-800/50 border-gray-700">
