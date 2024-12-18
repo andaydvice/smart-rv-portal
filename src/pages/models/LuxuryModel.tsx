@@ -31,9 +31,6 @@ const LuxuryModel = () => {
           <div className="absolute inset-0 bg-black/40" />
           <div className="absolute inset-0 flex flex-col justify-center items-center text-center p-6">
             <h1 className="text-5xl font-bold text-white mb-4">Luxury RV Living</h1>
-            <p className="text-2xl text-white/90 max-w-2xl">
-              The epitome of mobile luxury begins with Class A diesel pushers and custom coaches
-            </p>
           </div>
         </div>
 
@@ -44,6 +41,9 @@ const LuxuryModel = () => {
             </Button>
           </Link>
           
+          <p className="text-2xl text-gray-300 mb-4 text-center max-w-3xl mx-auto">
+            The epitome of mobile luxury begins with Class A diesel pushers and custom coaches
+          </p>
           <h2 className="text-3xl font-semibold text-blue-400 mb-6 text-center">Starting at $1.3 Million</h2>
           
           <div className="grid md:grid-cols-2 gap-6 mb-4 mt-8">
