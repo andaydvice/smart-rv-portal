@@ -70,94 +70,91 @@ const AdventureModel = () => {
   return (
     <>
       <Navbar />
-      <div className="relative w-full h-[50vh]">
+      <div className="relative w-full h-[60vh]">
         <img 
           src="/lovable-uploads/ae14102b-cf2e-443b-a722-7fe364e92e36.png"
           alt="Line up of luxury adventure RVs"
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#1B2028] flex items-end">
-          <div className="container mx-auto pb-8">
-            <h1 className="text-4xl md:text-5xl font-bold text-white mb-2">
-              Ultimate Adventure Vehicles
-            </h1>
-            <h2 className="text-2xl text-gray-300">
-              Explore Our Off Road RV Collection
-            </h2>
-          </div>
+        <div className="absolute inset-0 bg-black/40" />
+        <div className="absolute inset-0 flex flex-col justify-center items-center text-center p-6">
+          <h1 className="text-5xl font-bold text-white mb-4">Adventure Ready RVs</h1>
         </div>
       </div>
-      <motion.div 
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.6 }}
-        className="min-h-screen px-4"
-        style={{ backgroundColor: "#1B2028" }}
-      >
-        <div className="max-w-7xl mx-auto">
-          <div className="space-y-6">
-            <Card className="bg-gray-800/50 border-gray-700">
-              <CardHeader>
-                <CardTitle className="text-2xl" style={{ color: "#5B9BD5" }}>
-                  Adventure RV Categories
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <Accordion type="single" collapsible className="space-y-4">
-                  {Object.entries(adventureCategories).map(([category, models]) => (
-                    <AccordionItem 
-                      key={category} 
-                      value={category}
-                      className="border-gray-700"
-                    >
-                      <AccordionTrigger className="text-blue-300 hover:text-blue-400">
-                        {category}
-                      </AccordionTrigger>
-                      <AccordionContent>
-                        <div className="space-y-4">
-                          {models.map((model, index) => (
-                            <div 
-                              key={index}
-                              className="bg-gray-800/50 p-4 rounded-lg border border-gray-700"
-                            >
-                              <h3 className="text-lg font-medium text-blue-200">
-                                {model.name}
-                              </h3>
-                              <p className="text-gray-300 mt-1">
-                                Starting at {model.price}
-                              </p>
-                            </div>
-                          ))}
-                        </div>
-                      </AccordionContent>
-                    </AccordionItem>
-                  ))}
-                </Accordion>
-              </CardContent>
-            </Card>
 
-            <Card className="bg-gray-800/50 border-gray-700">
-              <CardHeader>
-                <CardTitle className="text-2xl" style={{ color: "#5B9BD5" }}>
-                  Key Adventure Features
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {keyFeatures.map((feature, index) => (
-                    <div 
-                      key={index}
-                      className="bg-gray-800/50 p-4 rounded-lg border border-gray-700"
-                    >
-                      <p className="text-gray-300">{feature}</p>
-                    </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
+      <div className="container mx-auto px-4 -mt-20 relative z-10">
+        <Link to="/models">
+          <Button variant="outline" className="mb-4 bg-white/10 backdrop-blur-sm text-white hover:text-white hover:bg-white/20 active:bg-white/30">
+            <ArrowLeft className="w-4 h-4 mr-2" /> Back to Models
+          </Button>
+        </Link>
+          
+        <div className="bg-gray-800/50 rounded-lg p-8 backdrop-blur-sm mb-4 mt-8">
+          <div className="space-y-8">
+            <div className="space-y-4">
+              <h2 className="text-2xl font-semibold text-blue-400">
+                Unrivaled Luxury: Class A Diesel Pushers & Custom Coaches
+              </h2>
+              <h3 className="text-2xl font-semibold text-blue-400">
+                From $1.3M | Custom Excellence
+              </h3>
+              <p className="text-gray-300 text-lg">
+                Each model represents the pinnacle of mobile living, where cutting edge technology meets timeless elegance.
+              </p>
+            </div>
+
+            <div className="space-y-6">
+              <h2 className="text-2xl font-semibold text-white">Key Features</h2>
+              <ul className="grid gap-6">
+                {keyFeatures.map((feature, index) => (
+                  <li key={index} className="text-gray-300">
+                    {feature}
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
-      </motion.div>
+
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3 }}
+          className="bg-gray-800/50 rounded-xl p-6 mt-4"
+        >
+          <h2 className="text-2xl font-bold text-white mb-6">Complete Guide to Adventure RVs: Authentic Owner Insights 2024</h2>
+          <p className="text-gray-300 mb-8 italic">
+            Note: Prices are approximate ranges based on 2024 models and can vary significantly based on options, customizations, and dealer location. 
+            Many of these manufacturers also offer custom builds that can exceed these ranges.
+          </p>
+
+          <div className="space-y-8">
+            {Object.entries(adventureCategories).map(([category, models]) => (
+              <Accordion key={category} type="single" collapsible className="mb-6">
+                <AccordionItem value={category}>
+                  <AccordionTrigger className="text-lg font-semibold text-blue-400">
+                    {category}
+                  </AccordionTrigger>
+                  <AccordionContent>
+                    <ul className="space-y-4 pt-4">
+                      {models.map((model, index) => (
+                        <li key={index} className="p-4 bg-gray-700/30 rounded-lg">
+                          <h3 className="text-lg font-medium text-blue-200">
+                            {model.name}
+                          </h3>
+                          <p className="text-gray-300 mt-1">
+                            Starting at {model.price}
+                          </p>
+                        </li>
+                      ))}
+                    </ul>
+                  </AccordionContent>
+                </AccordionItem>
+              </Accordion>
+            ))}
+          </div>
+        </motion.div>
+      </div>
     </>
   );
 };
