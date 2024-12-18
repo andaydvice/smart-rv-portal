@@ -14,11 +14,11 @@ const AdventureHero = () => {
       <div className="absolute inset-0 bg-black/40" />
       <div className="absolute top-8 left-0 w-full px-4">
         <div className="container mx-auto">
-          <Link to="/models">
+          <a href="https://preview--smart-rv-portal.lovable.app/models">
             <Button variant="outline" className="bg-white/10 backdrop-blur-sm text-white hover:text-white hover:bg-white/20 active:bg-white/30 border-blue-400">
               <ArrowLeft className="w-4 h-4 mr-2" /> Back to Models
             </Button>
-          </Link>
+          </a>
         </div>
       </div>
       <div className="absolute inset-0 flex items-center justify-center">
