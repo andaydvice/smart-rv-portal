@@ -1,126 +1,150 @@
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
-import { useEffect } from "react";
 import Navbar from "@/components/Navbar";
-import { Button } from "@/components/ui/button";
-import { ArrowLeft } from "lucide-react";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
-const adventureModels = [
-  {
-    category: "Off-Road Ready",
-    models: [
-      {
-        name: "Trail Blazer X1",
-        price: "$125,000",
-        description: "All-terrain capability with luxury amenities",
-        features: ["4x4 drivetrain", "Solar power system", "Satellite connectivity"]
-      },
-      {
-        name: "Mountain Explorer",
-        price: "$145,000",
-        description: "Built for high-altitude adventures",
-        features: ["Enhanced suspension", "Oxygen system", "Weather station"]
-      }
-    ]
-  },
-  {
-    category: "Expedition Series",
-    models: [
-      {
-        name: "Nomad Pro",
-        price: "$165,000",
-        description: "Extended range for long journeys",
-        features: ["500-mile range", "Water purification", "Dual batteries"]
-      },
-      {
-        name: "Safari Master",
-        price: "$155,000",
-        description: "Designed for wildlife photography tours",
-        features: ["360° cameras", "Silent mode", "Observation deck"]
-      }
-    ]
-  }
+const adventureCategories = {
+  "Rugged Class B Vans (Adventure Vans)": [
+    { name: "Winnebago Revel 4x4", price: "$185K - $210K" },
+    { name: "Storyteller Overland MODE 4x4", price: "$190K - $225K" },
+    { name: "Outside Van Custom Builds", price: "$180K - $350K" },
+    { name: "Advanced RV Custom 4x4", price: "$250K - $400K" },
+    { name: "Sportsmobile Classic 4x4", price: "$175K - $250K" },
+    { name: "Winnebago EKKO AWD", price: "$215K - $245K" },
+    { name: "Tiger Adventure Vehicles", price: "Price varies" },
+    { name: "27 North Venture 170", price: "Price varies" },
+    { name: "Airstream Interstate 19X", price: "Price varies" }
+  ],
+  "Off Road Travel Trailers": [
+    { name: "Black Series HQ19", price: "$70K - $85K" },
+    { name: "Bruder EXP-6", price: "$125K - $180K" },
+    { name: "Off Grid Trailers Expedition 2.0", price: "$45K - $65K" },
+    { name: "Taxa Outdoors Mantis", price: "$45K - $60K" },
+    { name: "Airstream Basecamp X", price: "$48K - $55K" },
+    { name: "Eclipse RV Overland Adventure Series – Mojo 12BD", price: "Price varies" },
+    { name: "inTech O-V-R Expedition", price: "Price varies" },
+    { name: "Taxa Outdoors TigerMoth", price: "$27,900" },
+    { name: "Vorsheer XOC Extreme Overland Camper", price: "$49,995" },
+    { name: "nüCamp RV Tab S Teardrop Camper", price: "$31,523" }
+  ],
+  "Compact Adventure Class C": [
+    { name: "Jayco Redhawk 4x4", price: "$130K - $160K" },
+    { name: "Thor Magnitude 4x4", price: "$150K - $180K" },
+    { name: "Dynamax Isata 3 4x4", price: "$160K - $190K" },
+    { name: "Forester MBS 4x4", price: "$120K - $140K" },
+    { name: "Winnebago EKKO Sprinter 23B", price: "$245K - $270K" },
+    { name: "Jayco Comet", price: "Price varies" }
+  ],
+  "Overlanding Fifth Wheels": [
+    { name: "Arctic Fox 27-5L", price: "$65K - $80K" },
+    { name: "Northwood Fox Mountain", price: "$60K - $75K" },
+    { name: "KZ Durango Half-Ton", price: "$55K - $70K" },
+    { name: "Bruder EXP-7", price: "Price varies" }
+  ],
+  "Truck Campers": [
+    { name: "Adventurer 901SB", price: "Price varies" },
+    { name: "Adventurer 910DB", price: "Price varies" }
+  ]
+};
+
+const keyFeatures = [
+  "Four wheel drive or all wheel drive capability",
+  "Enhanced ground clearance and off road suspension",
+  "Solar power systems and extended battery capacity",
+  "All weather insulation and climate control",
+  "Reinforced construction for rough terrain",
+  "Extra storage for adventure gear",
+  "All season tires and recovery equipment",
+  "Off-grid power systems",
+  "Ample storage for outdoor gear",
+  "Dedicated workspace for remote work",
+  "Upgraded wheels and tires",
+  "External shower ports",
+  "On-board air compressors",
+  "Advanced off-grid systems (large solar arrays, battery banks, sustainable water systems)",
+  "Durable construction using high-quality materials for harsh environments",
+  "Flexible interior configurations for customizable living spaces"
 ];
 
 const AdventureModel = () => {
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
   return (
     <>
       <Navbar />
-      <motion.main 
+      <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6 }}
-        className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 pt-20"
+        className="min-h-screen pt-24 px-4"
+        style={{ backgroundColor: "#1B2028" }}
       >
-        <div className="container mx-auto px-4">
-          <Link to="/models">
-            <Button variant="outline" className="mb-8">
-              <ArrowLeft className="w-4 h-4 mr-2" /> Back to Models
-            </Button>
-          </Link>
-          
-          <h1 className="text-4xl font-bold text-white mb-8">Adventure Class RVs</h1>
-          
-          <Accordion type="single" collapsible className="space-y-4">
-            {adventureModels.map((category, index) => (
-              <AccordionItem 
-                key={index} 
-                value={`category-${index}`}
-                className="bg-white/5 rounded-lg border border-white/10"
-              >
-                <AccordionTrigger className="px-6 text-white hover:text-blue-400">
-                  {category.category}
-                </AccordionTrigger>
-                <AccordionContent className="px-6 pb-6">
-                  <div className="grid md:grid-cols-2 gap-6 pt-4">
-                    {category.models.map((model, modelIndex) => (
-                      <Card key={modelIndex} className="bg-white/5 border-white/10">
-                        <CardHeader>
-                          <CardTitle className="text-white">{model.name}</CardTitle>
-                          <CardDescription className="text-blue-400">
-                            Starting at {model.price}
-                          </CardDescription>
-                        </CardHeader>
-                        <CardContent>
-                          <p className="text-gray-300 mb-4">{model.description}</p>
-                          <ul className="space-y-2">
-                            {model.features.map((feature, featureIndex) => (
-                              <li 
-                                key={featureIndex}
-                                className="text-gray-400 flex items-center gap-2"
-                              >
-                                <span className="w-1.5 h-1.5 bg-blue-400 rounded-full" />
-                                {feature}
-                              </li>
-                            ))}
-                          </ul>
-                        </CardContent>
-                      </Card>
-                    ))}
-                  </div>
-                </AccordionContent>
-              </AccordionItem>
-            ))}
-          </Accordion>
+        <div className="max-w-7xl mx-auto">
+          <h1 className="text-4xl font-bold mb-8" style={{ color: "#5B9BD5" }}>
+            Adventure Ready RV Categories and Models
+          </h1>
+
+          <div className="space-y-6">
+            <Card className="bg-gray-800/50 border-gray-700">
+              <CardHeader>
+                <CardTitle className="text-2xl" style={{ color: "#5B9BD5" }}>
+                  Adventure RV Categories
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <Accordion type="single" collapsible className="space-y-4">
+                  {Object.entries(adventureCategories).map(([category, models]) => (
+                    <AccordionItem 
+                      key={category} 
+                      value={category}
+                      className="border-gray-700"
+                    >
+                      <AccordionTrigger className="text-blue-300 hover:text-blue-400">
+                        {category}
+                      </AccordionTrigger>
+                      <AccordionContent>
+                        <div className="space-y-4">
+                          {models.map((model, index) => (
+                            <div 
+                              key={index}
+                              className="bg-gray-800/50 p-4 rounded-lg border border-gray-700"
+                            >
+                              <h3 className="text-lg font-medium text-blue-200">
+                                {model.name}
+                              </h3>
+                              <p className="text-gray-300 mt-1">
+                                Starting at {model.price}
+                              </p>
+                            </div>
+                          ))}
+                        </div>
+                      </AccordionContent>
+                    </AccordionItem>
+                  ))}
+                </Accordion>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-gray-800/50 border-gray-700">
+              <CardHeader>
+                <CardTitle className="text-2xl" style={{ color: "#5B9BD5" }}>
+                  Key Adventure Features
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {keyFeatures.map((feature, index) => (
+                    <div 
+                      key={index}
+                      className="bg-gray-800/50 p-4 rounded-lg border border-gray-700"
+                    >
+                      <p className="text-gray-300">{feature}</p>
+                    </div>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          </div>
         </div>
-      </motion.main>
+      </motion.div>
     </>
   );
 };
