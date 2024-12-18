@@ -14,7 +14,7 @@ const AdventureHero = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-5xl font-bold text-white mb-4 mt-[-10%]"
+          className="text-5xl font-bold text-white mb-4 mt-[20%]"
         >
           Ultimate Adventure Vehicles
         </motion.h1>

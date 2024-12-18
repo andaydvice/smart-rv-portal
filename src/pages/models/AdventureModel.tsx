@@ -17,7 +17,7 @@ const AdventureModel = () => {
         className="min-h-screen px-4"
         style={{ backgroundColor: "#1B2028" }}
       >
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-7xl mx-auto pt-16">
           <h2 className="text-2xl mb-8 text-gray-300">
             Explore Our Off Road RV Collection
           </h2>
