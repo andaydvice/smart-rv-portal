@@ -1,7 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Check, Minus } from "lucide-react";
@@ -121,22 +120,37 @@ const CompareModels = () => {
                             {feature.name}
                           </TableCell>
                           <TableCell className="text-center text-gray-300">
-                            {typeof feature.luxury === 'boolean' 
-                              ? (feature.luxury ? <Check className="w-5 h-5 mx-auto text-green-400" 
-                                : <Minus className="w-5 h-5 mx-auto text-gray-500" />)
-                              : feature.luxury}
+                            {typeof feature.luxury === 'boolean' ? (
+                              feature.luxury ? (
+                                <Check className="w-5 h-5 mx-auto text-green-400" />
+                              ) : (
+                                <Minus className="w-5 h-5 mx-auto text-gray-500" />
+                              )
+                            ) : (
+                              feature.luxury
+                            )}
                           </TableCell>
                           <TableCell className="text-center text-gray-300">
-                            {typeof feature.adventure === 'boolean'
-                              ? (feature.adventure ? <Check className="w-5 h-5 mx-auto text-green-400" />
-                                : <Minus className="w-5 h-5 mx-auto text-gray-500" />)
-                              : feature.adventure}
+                            {typeof feature.adventure === 'boolean' ? (
+                              feature.adventure ? (
+                                <Check className="w-5 h-5 mx-auto text-green-400" />
+                              ) : (
+                                <Minus className="w-5 h-5 mx-auto text-gray-500" />
+                              )
+                            ) : (
+                              feature.adventure
+                            )}
                           </TableCell>
                           <TableCell className="text-center text-gray-300">
-                            {typeof feature.compact === 'boolean'
-                              ? (feature.compact ? <Check className="w-5 h-5 mx-auto text-green-400" />
-                                : <Minus className="w-5 h-5 mx-auto text-gray-500" />)
-                              : feature.compact}
+                            {typeof feature.compact === 'boolean' ? (
+                              feature.compact ? (
+                                <Check className="w-5 h-5 mx-auto text-green-400" />
+                              ) : (
+                                <Minus className="w-5 h-5 mx-auto text-gray-500" />
+                              )
+                            ) : (
+                              feature.compact
+                            )}
                           </TableCell>
                         </TableRow>
                       ))}
