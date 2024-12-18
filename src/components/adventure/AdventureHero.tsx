@@ -16,7 +16,7 @@ const AdventureHero = () => {
           <Button 
             variant="outline" 
             className="bg-white/10 backdrop-blur-sm text-white hover:text-white hover:bg-white/20 active:bg-white/30 border-blue-400"
-            onClick={() => window.location.href = 'https://preview--smart-rv-portal.lovable.app/models'}
+            onClick={() => window.location.href = '/models'}
           >
             <ArrowLeft className="w-4 h-4 mr-2" /> Back to Models
           </Button>
