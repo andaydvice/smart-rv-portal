@@ -79,7 +79,7 @@ const AdventureModel = () => {
         <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#1B2028] flex items-end">
           <div className="container mx-auto pb-8">
             <h1 className="text-4xl md:text-5xl font-bold text-white">
-              Adventure Ready RVs
+              Ultimate Adventure Vehicles
             </h1>
           </div>
         </div>
@@ -92,9 +92,6 @@ const AdventureModel = () => {
         style={{ backgroundColor: "#1B2028" }}
       >
         <div className="max-w-7xl mx-auto">
-          <h1 className="text-4xl font-bold mb-2" style={{ color: "#5B9BD5" }}>
-            Ultimate Adventure Vehicles
-          </h1>
           <h2 className="text-2xl mb-8 text-gray-300">
             Explore Our Off Road RV Collection
           </h2>
