@@ -122,7 +122,7 @@ const LuxuryModel = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.8 }}
-            className="text-center mt-16"
+            className="text-center mt-16 mb-24" // Added more bottom margin (mb-24) to prevent footer overlap
           >
             <Link to="/models/compare">
               <Button 
