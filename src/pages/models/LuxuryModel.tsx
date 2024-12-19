@@ -128,6 +128,15 @@ const LuxuryModel = () => {
               Many of these manufacturers also offer custom builds that can exceed these ranges.
             </p>
 
+            <div className="relative w-full h-[500px] rounded-xl overflow-hidden bg-gray-900 mb-8">
+              <img 
+                src="/lovable-uploads/795a8cdd-cf65-487f-b550-4e4458d0aa9e.png"
+                alt="Luxury RV with slide-out overlooking coastal sunset"
+                className="w-full h-full object-cover"
+                loading="lazy"
+              />
+            </div>
+
             <div className="space-y-8">
               {Object.values(luxuryModels).map((category, index) => (
                 <ModelCategory key={index} {...category} />
