@@ -24,6 +24,7 @@ const CompactModel = () => {
     },
     {
       title: "Class C Motorhomes (Mini Motorhomes)",
+      image: "/lovable-uploads/ad2ac002-7ec7-479f-b437-6bdaced7fc5e.png",
       icon: <Home className="w-8 h-8 text-emerald-400" />,
       size: "20-26 feet long",
       features: "Built on a truck chassis with over-cab sleeping area, kitchenette, and bathroom",
@@ -140,6 +141,15 @@ const CompactModel = () => {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 className="bg-gray-800/50 backdrop-blur-sm rounded-lg p-8 hover:bg-gray-800/60 transition-colors"
               >
+                {type.image && (
+                  <div className="mb-8 rounded-lg overflow-hidden">
+                    <img 
+                      src={type.image} 
+                      alt={`${type.title} example`}
+                      className="w-full h-[400px] object-cover"
+                    />
+                  </div>
+                )}
                 <div className="flex items-center gap-4 mb-6">
                   {type.icon}
                   <h2 className="text-3xl font-bold text-white">{type.title}</h2>
