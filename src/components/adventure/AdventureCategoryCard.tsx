@@ -23,43 +23,46 @@ const AdventureCategoryCard = ({ categories }: AdventureCategoryCardProps) => {
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <div className="relative w-full h-[500px] rounded-xl overflow-hidden bg-gray-900 mb-6">
-          <img 
-            src="/lovable-uploads/c1732ddf-458c-4eeb-b6ad-7a817ae9ba17.png"
-            alt="Adventure RV at sunset with campfire"
-            className="w-full h-full object-cover"
-            loading="lazy"
-          />
-        </div>
-        
         <Accordion type="single" collapsible className="space-y-4">
-          {Object.entries(categories).map(([category, models]) => (
-            <AccordionItem 
-              key={category} 
-              value={category}
-              className="border-gray-700"
-            >
-              <AccordionTrigger className="text-blue-300 hover:text-blue-400">
-                {category}
-              </AccordionTrigger>
-              <AccordionContent>
-                <div className="space-y-4">
-                  {models.map((model, index) => (
-                    <div 
-                      key={index}
-                      className="bg-gray-800/50 p-4 rounded-lg border border-gray-700"
-                    >
-                      <h3 className="text-lg font-medium text-blue-200">
-                        {model.name}
-                      </h3>
-                      <p className="text-gray-300 mt-1">
-                        Starting at {model.price}
-                      </p>
-                    </div>
-                  ))}
+          {Object.entries(categories).map(([category, models], index) => (
+            <>
+              <AccordionItem 
+                key={category} 
+                value={category}
+                className="border-gray-700"
+              >
+                <AccordionTrigger className="text-blue-300 hover:text-blue-400">
+                  {category}
+                </AccordionTrigger>
+                <AccordionContent>
+                  <div className="space-y-4">
+                    {models.map((model, modelIndex) => (
+                      <div 
+                        key={modelIndex}
+                        className="bg-gray-800/50 p-4 rounded-lg border border-gray-700"
+                      >
+                        <h3 className="text-lg font-medium text-blue-200">
+                          {model.name}
+                        </h3>
+                        <p className="text-gray-300 mt-1">
+                          Starting at {model.price}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </AccordionContent>
+              </AccordionItem>
+              {category === "Rugged Class B Vans (Adventure Vans)" && (
+                <div className="relative w-full h-[500px] rounded-xl overflow-hidden bg-gray-900 mb-6">
+                  <img 
+                    src="/lovable-uploads/3e50571f-8a07-463a-a6a9-6ae4b820bc44.png"
+                    alt="Adventure RV at sunset by mountain stream"
+                    className="w-full h-full object-cover"
+                    loading="lazy"
+                  />
                 </div>
-              </AccordionContent>
-            </AccordionItem>
+              )}
+            </>
           ))}
         </Accordion>
       </CardContent>
