@@ -1,4 +1,4 @@
-import { motion, useScroll } from "framer-motion";
+import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import Navbar from "@/components/Navbar";
@@ -17,24 +17,32 @@ const CompactModel = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6 }}
-        className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 pt-20"
+        className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800"
       >
-        <div className="container mx-auto px-4">
-          <Link to="/models">
-            <Button variant="outline" className="mb-8">
-              <ArrowLeft className="w-4 h-4 mr-2" /> Back to Models
-            </Button>
-          </Link>
-          
-          <div className="grid md:grid-cols-2 gap-8">
-            <div>
-              <img
-                src="https://images.unsplash.com/photo-1523987355523-c7b5b0dd90a7?auto=format&fit=crop&w=800"
-                alt="Compact Smart RV"
-                className="rounded-lg shadow-xl w-full h-[400px] object-cover"
-              />
+        <div className="relative w-full h-[60vh] overflow-hidden">
+          <img
+            src="/lovable-uploads/598a2cb5-ffcb-440a-9943-6c4440749b9f.png"
+            alt="Compact RVs at sunset with campfires and string lights"
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-black/40" />
+          <div className="absolute top-8 left-0 w-full px-4">
+            <div className="container mx-auto">
+              <Link to="/models">
+                <Button 
+                  variant="outline" 
+                  className="bg-white/10 backdrop-blur-sm text-white hover:text-white hover:bg-white/20 active:bg-white/30 border-blue-400"
+                >
+                  <ArrowLeft className="w-4 h-4 mr-2" /> Back to Models
+                </Button>
+              </Link>
             </div>
-            <div>
+          </div>
+        </div>
+
+        <div className="container mx-auto px-4 -mt-20 relative z-10">
+          <div className="grid md:grid-cols-2 gap-8">
+            <div className="bg-gray-800/50 backdrop-blur-sm rounded-lg p-8">
               <h1 className="text-4xl font-bold text-white mb-4">Compact Smart</h1>
               <p className="text-blue-400 text-xl mb-4">Starting at $90,000</p>
               <p className="text-gray-300 mb-8">
