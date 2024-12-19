@@ -63,6 +63,22 @@ const LuxuryModel = () => {
           </div>
         );
       }
+      // Render third image after Luxury Fifth Wheels and before Super C Luxury RVs
+      if (index === 2) {
+        return (
+          <div key={index}>
+            <ModelCategory {...category} />
+            <div className="relative w-full h-[500px] rounded-xl overflow-hidden bg-gray-900 my-8">
+              <img 
+                src="/lovable-uploads/9f85650a-be6b-4396-9016-803960c1b2f5.png"
+                alt="Luxury RV with mountain backdrop at sunset"
+                className="w-full h-full object-cover"
+                loading="lazy"
+              />
+            </div>
+          </div>
+        );
+      }
       return <ModelCategory key={index} {...category} />;
     });
   };
