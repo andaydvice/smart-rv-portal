@@ -40,6 +40,7 @@ export const rvTypes: RVType[] = [
   {
     title: "Teardrop Trailers",
     icon: Car,
+    image: "/lovable-uploads/989028bc-89ec-4ec4-841d-e38421cc7626.png",
     size: "8-15 feet long",
     features: "Lightweight and towable by small vehicles, with sleeping area and basic kitchen",
     pros: "Affordable, easy to tow, and perfect for minimalist campers",
