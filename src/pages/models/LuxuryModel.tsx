@@ -14,11 +14,18 @@ const LuxuryModel = () => {
     window.scrollTo(0, 0);
   }, []);
 
-  const handleNavigation = () => {
+  const handleNavigation = (e: React.MouseEvent) => {
+    e.preventDefault();
     console.log("[LuxuryModel] Navigation attempt started");
     console.log("[LuxuryModel] Current location:", window.location.pathname);
     console.log("[LuxuryModel] Target location: /models");
-    navigate("/models");
+    
+    try {
+      navigate("/models");
+      console.log("[LuxuryModel] Navigation successful");
+    } catch (error) {
+      console.error("[LuxuryModel] Navigation failed:", error);
+    }
   };
 
   return (
@@ -39,13 +46,15 @@ const LuxuryModel = () => {
           <div className="absolute inset-0 bg-black/40" />
           <div className="absolute top-8 left-0 w-full px-4">
             <div className="container mx-auto">
-              <Button 
-                variant="outline" 
-                className="bg-white/10 backdrop-blur-sm text-white hover:text-white hover:bg-white/20 active:bg-white/30 border-blue-400"
-                onClick={handleNavigation}
-              >
-                <ArrowLeft className="w-4 h-4 mr-2" /> Back to Models
-              </Button>
+              <Link to="/models">
+                <Button 
+                  variant="outline" 
+                  className="bg-white/10 backdrop-blur-sm text-white hover:text-white hover:bg-white/20 active:bg-white/30 border-blue-400"
+                  onClick={handleNavigation}
+                >
+                  <ArrowLeft className="w-4 h-4 mr-2" /> Back to Models
+                </Button>
+              </Link>
             </div>
           </div>
           <div className="absolute inset-0 flex flex-col justify-center items-center text-center p-6">
@@ -126,22 +135,21 @@ const LuxuryModel = () => {
             </div>
           </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.8 }}
-            className="text-center mt-16 mb-24"
-          >
-            <Link to="/models/compare">
-              <Button 
-                variant="outline" 
-                className="bg-transparent border-white text-white hover:bg-blue-500/50 hover:text-white"
-              >
-                Compare All Models <ArrowLeft className="w-4 h-4 ml-2" />
-              </Button>
-            </Link>
-          </motion.div>
-        </div>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.8 }}
+          className="text-center mt-16 mb-24"
+        >
+          <Link to="/models/compare">
+            <Button 
+              variant="outline" 
+              className="bg-transparent border-white text-white hover:bg-blue-500/50 hover:text-white"
+            >
+              Compare All Models <ArrowLeft className="w-4 h-4 ml-2" />
+            </Button>
+          </Link>
+        </motion.div>
       </motion.main>
     </>
   );
