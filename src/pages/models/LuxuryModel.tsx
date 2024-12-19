@@ -31,7 +31,7 @@ const LuxuryModel = () => {
   const renderModelCategories = () => {
     const categories = Object.values(luxuryModels);
     return categories.map((category, index) => {
-      // Render image after Class A Diesel Pushers and before Premium Class A Diesel
+      // Render first image after Class A Diesel Pushers and before Premium Class A Diesel
       if (index === 0) {
         return (
           <div key={index}>
@@ -40,6 +40,22 @@ const LuxuryModel = () => {
               <img 
                 src="/lovable-uploads/1e3c2aa7-d13d-4cbd-a98a-37066b326f1d.png"
                 alt="Luxury RV with outdoor lounge setup at sunset"
+                className="w-full h-full object-cover"
+                loading="lazy"
+              />
+            </div>
+          </div>
+        );
+      }
+      // Render second image after Premium Class A Diesel and before Luxury Fifth Wheels
+      if (index === 1) {
+        return (
+          <div key={index}>
+            <ModelCategory {...category} />
+            <div className="relative w-full h-[500px] rounded-xl overflow-hidden bg-gray-900 my-8">
+              <img 
+                src="/lovable-uploads/5f18c537-149c-494e-9adf-6a1c096e3e3a.png"
+                alt="Luxury RV with outdoor setup by the lake at sunset"
                 className="w-full h-full object-cover"
                 loading="lazy"
               />
