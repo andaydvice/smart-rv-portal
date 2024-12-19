@@ -79,6 +79,22 @@ const LuxuryModel = () => {
           </div>
         );
       }
+      // Render fourth image after Super C Luxury RVs and before Premium Travel Trailers
+      if (index === 3) {
+        return (
+          <div key={index}>
+            <ModelCategory {...category} />
+            <div className="relative w-full h-[500px] rounded-xl overflow-hidden bg-gray-900 my-8">
+              <img 
+                src="/lovable-uploads/5fcfb66e-3239-4be0-9cab-eef7112095bf.png"
+                alt="Luxury RV with lakeside setup under starry sky"
+                className="w-full h-full object-cover"
+                loading="lazy"
+              />
+            </div>
+          </div>
+        );
+      }
       return <ModelCategory key={index} {...category} />;
     });
   };
