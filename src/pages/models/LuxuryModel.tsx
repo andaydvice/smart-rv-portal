@@ -90,13 +90,10 @@ const LuxuryModel = () => {
         className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800"
       >
         <div className="relative w-full h-[60vh] overflow-hidden">
-          <a href="/lovable-uploads/8137a7b0-17f6-4adc-a1b8-c790843192e0.png" target="_blank" rel="noopener noreferrer">
-            <img
-              src="/lovable-uploads/8137a7b0-17f6-4adc-a1b8-c790843192e0.png"
-              alt="Luxury Class RV with slide-out in mountain setting"
-              className="w-full h-full object-cover cursor-pointer hover:opacity-90 transition-opacity"
-            />
-          </a>
+          <LuxuryModelImage
+            src="/lovable-uploads/8137a7b0-17f6-4adc-a1b8-c790843192e0.png"
+            alt="Luxury Class RV with slide-out in mountain setting"
+          />
           <div className="absolute inset-0 bg-black/40" />
           <div className="absolute top-8 left-0 w-full px-4">
             <div className="container mx-auto">
