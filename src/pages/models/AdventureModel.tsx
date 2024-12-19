@@ -18,6 +18,15 @@ const AdventureModel = () => {
         style={{ backgroundColor: "#1B2028" }}
       >
         <div className="max-w-7xl mx-auto pt-16">
+          <div className="relative w-full h-[500px] mb-8 rounded-xl overflow-hidden bg-gray-900">
+            <img 
+              src="/lovable-uploads/c1732ddf-458c-4eeb-b6ad-7a817ae9ba17.png"
+              alt="Adventure RV at sunset with campfire"
+              className="w-full h-full object-cover"
+              loading="lazy"
+            />
+          </div>
+          
           <h2 className="text-2xl mb-8 text-gray-300">
             Explore Our Off Road RV Collection
           </h2>
