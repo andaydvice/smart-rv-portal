@@ -15,7 +15,9 @@ const LuxuryModel = () => {
   }, []);
 
   const handleNavigation = () => {
-    console.log("[LuxuryModel] Navigation to models page");
+    console.log("[LuxuryModel] Navigation attempt started");
+    console.log("[LuxuryModel] Current location:", window.location.pathname);
+    console.log("[LuxuryModel] Target location: /models");
     navigate("/models");
   };
 
@@ -40,11 +42,7 @@ const LuxuryModel = () => {
               <Button 
                 variant="outline" 
                 className="bg-white/10 backdrop-blur-sm text-white hover:text-white hover:bg-white/20 active:bg-white/30 border-blue-400"
-                onClick={(e) => {
-                  e.preventDefault();
-                  console.log("[LuxuryModel] Back to Models button clicked");
-                  handleNavigation();
-                }}
+                onClick={handleNavigation}
               >
                 <ArrowLeft className="w-4 h-4 mr-2" /> Back to Models
               </Button>
