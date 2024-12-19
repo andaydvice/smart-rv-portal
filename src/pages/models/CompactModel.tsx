@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, Navigation, Shield, Battery, Wifi, CarFront, Tent, Home, Car } from "lucide-react";
+import { ArrowLeft, CarFront, Home, Car, Tent } from "lucide-react";
 
 const CompactModel = () => {
   useEffect(() => {
@@ -42,6 +42,54 @@ const CompactModel = () => {
       brands: {
         usa: ["nuCamp (TAB 320, TAG)", "Little Guy Trailers (Max, Mini Max)", "inTech RV (Luna, Flyer)"],
         australia: ["Gidget Retro Teardrop Campers", "Caretta Australia", "Trackabout"]
+      }
+    },
+    {
+      title: "Compact Travel Trailers",
+      icon: <Car className="w-8 h-8 text-purple-400" />,
+      size: "Typically under 20 feet long",
+      features: "Include more amenities than teardrop trailers, such as a kitchen, bathroom, and dining area",
+      pros: "Still lightweight and easy to tow",
+      brands: {
+        usa: [
+          "Scamp Trailers (13', 16', 19')",
+          "Casita Travel Trailers (Spirit, Freedom)",
+          "Oliver Travel Trailers (Legacy Elite)",
+          "Forest River (R-Pod, No Boundaries)",
+          "Airstream (Basecamp, Bambi)",
+          "Aliner (Expedition, Ascape)",
+          "Happier Camper (HC1)"
+        ],
+        australia: [
+          "Kokoda Caravans (Challenger)",
+          "Jayco Australia (Journey Pop Top, CrossTrak)",
+          "Avida (Wave, Emerald)",
+          "Avan (Aliner, Aspire)",
+          "Track Trailer (Tvan, Mate)"
+        ]
+      }
+    },
+    {
+      title: "Pop-Up Campers",
+      icon: <Tent className="w-8 h-8 text-green-400" />,
+      size: "Collapsible, often 8-16 feet when folded",
+      features: "Expandable canvas sides, sleeping areas, and basic kitchen amenities",
+      pros: "Easy to store and tow; affordable",
+      brands: {
+        usa: [
+          "Jayco (Jay Sport)",
+          "Forest River (Rockwood, Flagstaff)",
+          "Coachmen (Clipper, Viking)",
+          "Aliner (Classic, Scout)",
+          "Opus Camper USA (OP4, OP Lite)"
+        ],
+        australia: [
+          "Jayco Australia (Journey Pop Top)",
+          "Track Trailer (Topaz, Tvan)",
+          "Cub Campers (Brumby, Scout)",
+          "EzyTrail (Parks, Stirling)",
+          "Coromal (Pioneer Silhouette)"
+        ]
       }
     }
   ];
