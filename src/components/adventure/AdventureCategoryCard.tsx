@@ -71,6 +71,16 @@ const AdventureCategoryCard = ({ categories }: AdventureCategoryCardProps) => {
                   />
                 </div>
               )}
+              {category === "Off Road Travel Trailers" && (
+                <div className="relative w-full h-[500px] rounded-xl overflow-hidden bg-gray-900 mb-6">
+                  <img 
+                    src="/lovable-uploads/fc3d60d2-5d4e-41d4-8db6-ec11fd0a45b9.png"
+                    alt="Adventure RV in desert setting with bike rack"
+                    className="w-full h-full object-cover"
+                    loading="lazy"
+                  />
+                </div>
+              )}
             </>
           ))}
         </Accordion>
