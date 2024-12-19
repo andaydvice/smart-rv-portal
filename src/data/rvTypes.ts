@@ -1,9 +1,22 @@
-import { CarFront, Home, Car, Tent } from "lucide-react";
+import { LucideIcon, CarFront, Home, Car, Tent } from "lucide-react";
 
-export const rvTypes = [
+interface RVType {
+  title: string;
+  icon: LucideIcon;
+  size: string;
+  features: string;
+  pros: string;
+  brands: {
+    usa: string[];
+    australia: string[];
+  };
+  image?: string;
+}
+
+export const rvTypes: RVType[] = [
   {
     title: "Class B Motorhomes (Camper Vans)",
-    icon: <CarFront className="w-8 h-8 text-blue-400" />,
+    icon: CarFront,
     size: "18-24 feet long",
     features: "Built on a van chassis, including sleeping areas, small kitchen, and wet bath",
     pros: "Easy to drive, park, and store. Great for solo travellers or couples",
@@ -14,8 +27,8 @@ export const rvTypes = [
   },
   {
     title: "Class C Motorhomes (Mini Motorhomes)",
+    icon: Home,
     image: "/lovable-uploads/ad2ac002-7ec7-479f-b437-6bdaced7fc5e.png",
-    icon: <Home className="w-8 h-8 text-emerald-400" />,
     size: "20-26 feet long",
     features: "Built on a truck chassis with over-cab sleeping area, kitchenette, and bathroom",
     pros: "Compact enough for most parking spaces but more spacious than Class B",
@@ -26,7 +39,7 @@ export const rvTypes = [
   },
   {
     title: "Teardrop Trailers",
-    icon: <Car className="w-8 h-8 text-purple-400" />,
+    icon: Car,
     size: "8-15 feet long",
     features: "Lightweight and towable by small vehicles, with sleeping area and basic kitchen",
     pros: "Affordable, easy to tow, and perfect for minimalist campers",
@@ -37,7 +50,7 @@ export const rvTypes = [
   },
   {
     title: "Compact Travel Trailers",
-    icon: <Car className="w-8 h-8 text-purple-400" />,
+    icon: Car,
     size: "Typically under 20 feet long",
     features: "Include more amenities than teardrop trailers, such as a kitchen, bathroom, and dining area",
     pros: "Still lightweight and easy to tow",
@@ -62,7 +75,7 @@ export const rvTypes = [
   },
   {
     title: "Pop-Up Campers",
-    icon: <Tent className="w-8 h-8 text-green-400" />,
+    icon: Tent,
     size: "Collapsible, often 8-16 feet when folded",
     features: "Expandable canvas sides, sleeping areas, and basic kitchen amenities",
     pros: "Easy to store and tow; affordable",

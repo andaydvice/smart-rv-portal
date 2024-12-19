@@ -8,7 +8,7 @@ interface Brand {
 
 interface RVTypeProps {
   title: string;
-  icon: React.ReactNode;
+  icon: LucideIcon;
   size: string;
   features: string;
   pros: string;
@@ -17,7 +17,7 @@ interface RVTypeProps {
   index: number;
 }
 
-const RVTypeCard = ({ title, icon, size, features, pros, brands, image, index }: RVTypeProps) => {
+const RVTypeCard = ({ title, icon: Icon, size, features, pros, brands, image, index }: RVTypeProps) => {
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -35,7 +35,7 @@ const RVTypeCard = ({ title, icon, size, features, pros, brands, image, index }:
         </div>
       )}
       <div className="flex items-center gap-4 mb-6">
-        {icon}
+        <Icon className="w-8 h-8 text-blue-400" />
         <h2 className="text-3xl font-bold text-white">{title}</h2>
       </div>
       
