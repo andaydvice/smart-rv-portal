@@ -135,21 +135,22 @@ const LuxuryModel = () => {
             </div>
           </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.8 }}
-          className="text-center mt-16 mb-24"
-        >
-          <Link to="/models/compare">
-            <Button 
-              variant="outline" 
-              className="bg-transparent border-white text-white hover:bg-blue-500/50 hover:text-white"
-            >
-              Compare All Models <ArrowLeft className="w-4 h-4 ml-2" />
-            </Button>
-          </Link>
-        </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.8 }}
+            className="text-center mt-16 mb-24"
+          >
+            <Link to="/models/compare">
+              <Button 
+                variant="outline" 
+                className="bg-transparent border-white text-white hover:bg-blue-500/50 hover:text-white"
+              >
+                Compare All Models <ArrowLeft className="w-4 h-4 ml-2" />
+              </Button>
+            </Link>
+          </motion.div>
+        </div>
       </motion.main>
     </>
   );
