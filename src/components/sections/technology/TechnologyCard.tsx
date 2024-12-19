@@ -44,7 +44,7 @@ export const TechnologyCard = ({ system, index, onCardClick }: TechnologyCardPro
     whileInView={{ opacity: 1, scale: 1 }}
     viewport={{ once: true }}
     transition={{ delay: index * 0.2 }}
-    className="group relative overflow-hidden rounded-xl bg-white/5 backdrop-blur-sm border border-white/10 hover:border-white/20 transition-all duration-300 cursor-pointer"
+    className="group relative overflow-hidden rounded-xl bg-white/5 backdrop-blur-sm border border-white/10 hover:border-white/20 transition-all duration-300 cursor-pointer bg-gray-900"
     onClick={() => system.link && onCardClick(system.link)}
   >
     <CardContent system={system} />
