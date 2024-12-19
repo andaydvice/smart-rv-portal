@@ -78,7 +78,7 @@ export const rvTypes: RVType[] = [
   {
     title: "Pop Up Campers",
     icon: Tent,
-    image: "/lovable-uploads/88d534f5-68b0-42c4-936b-0c3a579bf633.png",
+    image: "https://images.unsplash.com/photo-1518005020951-eccb494ad742",
     size: "Collapsible, often 8-16 feet when folded",
     features: "Expandable canvas sides, sleeping areas, and basic kitchen amenities",
     pros: "Easy to store and tow; affordable",
