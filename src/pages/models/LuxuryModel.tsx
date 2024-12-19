@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import { Button } from "@/components/ui/button";
@@ -8,9 +8,16 @@ import { ModelCategory } from "@/components/luxury-models/ModelCategory";
 import { luxuryModels } from "@/data/luxury-models";
 
 const LuxuryModel = () => {
+  const navigate = useNavigate();
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  const handleNavigation = () => {
+    console.log("[LuxuryModel] Navigation to models page");
+    navigate("/models");
+  };
 
   return (
     <>
@@ -34,6 +41,11 @@ const LuxuryModel = () => {
                 <Button 
                   variant="outline" 
                   className="bg-white/10 backdrop-blur-sm text-white hover:text-white hover:bg-white/20 active:bg-white/30 border-blue-400"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    console.log("[LuxuryModel] Top 'Back to Models' button clicked");
+                    handleNavigation();
+                  }}
                 >
                   <ArrowLeft className="w-4 h-4 mr-2" /> Back to Models
                 </Button>
@@ -122,7 +134,7 @@ const LuxuryModel = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.8 }}
-            className="text-center mt-16 mb-24" // Added more bottom margin (mb-24) to prevent footer overlap
+            className="text-center mt-16 mb-24"
           >
             <Link to="/models/compare">
               <Button 
