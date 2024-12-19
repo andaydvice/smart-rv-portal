@@ -81,6 +81,16 @@ const AdventureCategoryCard = ({ categories }: AdventureCategoryCardProps) => {
                   />
                 </div>
               )}
+              {category === "Compact Adventure Class C" && (
+                <div className="relative w-full h-[500px] rounded-xl overflow-hidden bg-gray-900 mb-6">
+                  <img 
+                    src="/lovable-uploads/23ce0af4-35ca-4e7f-af56-c1a7c6eae380.png"
+                    alt="Adventure RV at night in desert landscape"
+                    className="w-full h-full object-cover"
+                    loading="lazy"
+                  />
+                </div>
+              )}
             </>
           ))}
         </Accordion>
