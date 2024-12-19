@@ -1,33 +1,18 @@
 import { motion } from "framer-motion";
-import { Link, useNavigate } from "react-router-dom";
-import { useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Home, Wrench, Building, Cpu } from "lucide-react";
 import { ModelCategory } from "@/components/luxury-models/ModelCategory";
 import { LuxuryModelImage } from "@/components/luxury-models/LuxuryModelImage";
+import { HeroSection } from "@/components/luxury-models/HeroSection";
 import { luxuryModels } from "@/data/luxury-models";
+import { Link } from "react-router-dom";
+import { useEffect } from "react";
 
 const LuxuryModel = () => {
-  const navigate = useNavigate();
-
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-
-  const handleNavigation = (e: React.MouseEvent) => {
-    e.preventDefault();
-    console.log("[LuxuryModel] Navigation attempt started");
-    console.log("[LuxuryModel] Current location:", window.location.pathname);
-    console.log("[LuxuryModel] Target location: /models");
-    
-    try {
-      navigate("/models");
-      console.log("[LuxuryModel] Navigation successful");
-    } catch (error) {
-      console.error("[LuxuryModel] Navigation failed:", error);
-    }
-  };
 
   const renderModelCategories = () => {
     const categories = Object.values(luxuryModels);
@@ -89,36 +74,7 @@ const LuxuryModel = () => {
         transition={{ duration: 0.6 }}
         className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800"
       >
-        <div className="relative w-full h-[60vh] overflow-hidden">
-          <LuxuryModelImage
-            src="/lovable-uploads/8137a7b0-17f6-4adc-a1b8-c790843192e0.png"
-            alt="Luxury Class RV with slide-out in mountain setting"
-          />
-          <div className="absolute inset-0 bg-black/40" />
-          <div className="absolute top-8 left-0 w-full px-4">
-            <div className="container mx-auto">
-              <Link to="/models">
-                <Button 
-                  variant="outline" 
-                  className="bg-white/10 backdrop-blur-sm text-white hover:text-white hover:bg-white/20 active:bg-white/30 border-blue-400"
-                  onClick={handleNavigation}
-                >
-                  <ArrowLeft className="w-4 h-4 mr-2" /> Back to Models
-                </Button>
-              </Link>
-            </div>
-          </div>
-          <div className="absolute inset-0 flex flex-col justify-center items-center text-center p-6">
-            <motion.h1 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="text-5xl font-bold text-white mb-4"
-            >
-              Luxury RV Living
-            </motion.h1>
-          </div>
-        </div>
+        <HeroSection />
 
         <div className="container mx-auto px-4 pt-12 relative z-10">
           <div className="bg-gray-800/50 rounded-lg p-8 backdrop-blur-sm mb-4">
