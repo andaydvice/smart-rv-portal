@@ -52,6 +52,7 @@ export const rvTypes: RVType[] = [
   {
     title: "Compact Travel Trailers",
     icon: Car,
+    image: "/lovable-uploads/46dcd85e-d26f-4d08-afc1-5f5818266116.png",
     size: "Typically under 20 feet long",
     features: "Include more amenities than teardrop trailers, such as a kitchen, bathroom, and dining area",
     pros: "Still lightweight and easy to tow",
