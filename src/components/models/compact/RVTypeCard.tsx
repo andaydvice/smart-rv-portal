@@ -26,15 +26,19 @@ const RVTypeCard = ({ title, icon: Icon, size, features, pros, brands, image, in
       className="bg-gray-800/50 backdrop-blur-sm rounded-lg p-8 hover:bg-gray-800/60 transition-colors"
     >
       {image && (
-        <div className="mb-8 rounded-lg overflow-hidden bg-gray-800">
-          <img 
-            src={image} 
-            alt={`${title} example`}
-            className="w-full h-[400px] object-cover"
-            loading="lazy"
-          />
+        <div className="mb-8 rounded-lg overflow-hidden bg-gray-900">
+          <div className="w-full h-[400px] bg-gray-900">
+            <img 
+              src={image} 
+              alt={`${title} example`}
+              className="w-full h-full object-cover"
+              loading="lazy"
+              style={{ backgroundColor: '#111827' }} // Matching bg-gray-900
+            />
+          </div>
         </div>
       )}
+      
       <div className="flex items-center gap-4 mb-6">
         <Icon className="w-8 h-8 text-blue-400" />
         <h2 className="text-3xl font-bold text-white">{title}</h2>
