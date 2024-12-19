@@ -91,6 +91,16 @@ const AdventureCategoryCard = ({ categories }: AdventureCategoryCardProps) => {
                   />
                 </div>
               )}
+              {category === "Overlanding Fifth Wheels" && (
+                <div className="relative w-full h-[500px] rounded-xl overflow-hidden bg-gray-900 mb-6">
+                  <img 
+                    src="/lovable-uploads/85e4d897-10d7-4f90-b231-597f7fcfdffc.png"
+                    alt="Adventure RV with campfire at sunset in mountain setting"
+                    className="w-full h-full object-cover"
+                    loading="lazy"
+                  />
+                </div>
+              )}
             </>
           ))}
         </Accordion>
