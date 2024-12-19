@@ -9,6 +9,8 @@ export const HeroSection = () => {
         src="/lovable-uploads/9f7333b9-367c-48a8-b1db-ddf01cadf706.png"
         alt="Luxury RV with outdoor setup by the lake at sunset"
         className="w-full h-full object-cover"
+        loading="eager"
+        fetchpriority="high"
       />
       <div className="absolute inset-0 bg-black/40" />
       <div className="absolute top-20 left-0 w-full px-4">
