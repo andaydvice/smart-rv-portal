@@ -9,7 +9,7 @@ const models = [
   {
     name: "Luxury Class",
     image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=800",
-    price: "Starting at $150,000",
+    price: "From $1.3M",
     description: "Experience unparalleled luxury with our flagship model, featuring advanced automation and premium finishes.",
     features: [
       { icon: Navigation, text: "Advanced Navigation System", color: "text-blue-400" },
