@@ -21,7 +21,7 @@ const models = [
   },
   {
     name: "Adventure Class",
-    image: "https://images.unsplash.com/photo-1518005020951-eccb494ad742?auto=format&fit=crop&w=800",
+    image: "/lovable-uploads/2b866a6b-16bb-4f98-9a79-543ec68ce904.png",
     price: "Starting at $120,000",
     description: "Built for the modern explorer, combining durability with smart technology for off-grid adventures.",
     features: [
