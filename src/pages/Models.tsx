@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Battery, Navigation, Shield, Wifi } from "lucide-react";
-import { useToast } from "@/hooks/use-toast";
+import { useToast } from "@/components/ui/use-toast";
 
 const models = [
   {
@@ -34,7 +34,7 @@ const models = [
   },
   {
     name: "Compact Smart",
-    image: "https://images.unsplash.com/photo-1605810230434-7631ac76ec81?auto=format&fit=crop&w=800",
+    image: "/lovable-uploads/e6619d24-bebf-439f-96b0-6aca2fb69380.png",
     price: "Starting at $90,000",
     description: "Perfect for weekend getaways, packed with smart features in an efficient, easy-to-maneuver package.",
     features: [
