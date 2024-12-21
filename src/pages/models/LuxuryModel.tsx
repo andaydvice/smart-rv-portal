@@ -78,8 +78,8 @@ const LuxuryModel = () => {
       >
         <div className="relative w-full h-[60vh] overflow-hidden">
           <img
-            src="/lovable-uploads/8e0c38bf-20ee-4ba1-8104-4198505bb3d9.png"
-            alt="Luxury RV at sunset with mountain view and outdoor seating"
+            src="/lovable-uploads/59b39828-68e1-44b7-928d-dadccc085146.png"
+            alt="Luxury RV with outdoor seating at sunset with starry purple sky and mountain view"
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-black/40" />
