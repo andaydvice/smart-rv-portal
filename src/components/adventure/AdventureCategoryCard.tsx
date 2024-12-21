@@ -34,9 +34,8 @@ const AdventureCategoryCard = ({ categories }: AdventureCategoryCardProps) => {
         
         <Accordion type="single" collapsible className="space-y-4">
           {Object.entries(categories).map(([category, models], index) => (
-            <>
+            <div key={`category-section-${category}`}>
               <AccordionItem 
-                key={category} 
                 value={category}
                 className="border-gray-700"
               >
@@ -47,7 +46,7 @@ const AdventureCategoryCard = ({ categories }: AdventureCategoryCardProps) => {
                   <div className="space-y-4">
                     {models.map((model, modelIndex) => (
                       <div 
-                        key={modelIndex}
+                        key={`${category}-model-${modelIndex}`}
                         className="bg-gray-800/50 p-4 rounded-lg border border-gray-700"
                       >
                         <h3 className="text-lg font-medium text-blue-200">
@@ -62,7 +61,7 @@ const AdventureCategoryCard = ({ categories }: AdventureCategoryCardProps) => {
                 </AccordionContent>
               </AccordionItem>
               {category === "Rugged Class B Vans (Adventure Vans)" && (
-                <div className="relative w-full h-[500px] rounded-xl overflow-hidden bg-gray-900 mb-6">
+                <div key={`image-${category}`} className="relative w-full h-[500px] rounded-xl overflow-hidden bg-gray-900 mb-6">
                   <img 
                     src="/lovable-uploads/3e50571f-8a07-463a-a6a9-6ae4b820bc44.png"
                     alt="Adventure RV at sunset by mountain stream"
@@ -72,7 +71,7 @@ const AdventureCategoryCard = ({ categories }: AdventureCategoryCardProps) => {
                 </div>
               )}
               {category === "Off Road Travel Trailers" && (
-                <div className="relative w-full h-[500px] rounded-xl overflow-hidden bg-gray-900 mb-6">
+                <div key={`image-${category}`} className="relative w-full h-[500px] rounded-xl overflow-hidden bg-gray-900 mb-6">
                   <img 
                     src="/lovable-uploads/fc3d60d2-5d4e-41d4-8db6-ec11fd0a45b9.png"
                     alt="Adventure RV in desert setting with bike rack"
@@ -82,7 +81,7 @@ const AdventureCategoryCard = ({ categories }: AdventureCategoryCardProps) => {
                 </div>
               )}
               {category === "Compact Adventure Class C" && (
-                <div className="relative w-full h-[500px] rounded-xl overflow-hidden bg-gray-900 mb-6">
+                <div key={`image-${category}`} className="relative w-full h-[500px] rounded-xl overflow-hidden bg-gray-900 mb-6">
                   <img 
                     src="/lovable-uploads/23ce0af4-35ca-4e7f-af56-c1a7c6eae380.png"
                     alt="Adventure RV at night in desert landscape"
@@ -92,7 +91,7 @@ const AdventureCategoryCard = ({ categories }: AdventureCategoryCardProps) => {
                 </div>
               )}
               {category === "Overlanding Fifth Wheels" && (
-                <div className="relative w-full h-[500px] rounded-xl overflow-hidden bg-gray-900 mb-6">
+                <div key={`image-${category}`} className="relative w-full h-[500px] rounded-xl overflow-hidden bg-gray-900 mb-6">
                   <img 
                     src="/lovable-uploads/85e4d897-10d7-4f90-b231-597f7fcfdffc.png"
                     alt="Adventure RV with campfire at sunset in mountain setting"
@@ -101,7 +100,7 @@ const AdventureCategoryCard = ({ categories }: AdventureCategoryCardProps) => {
                   />
                 </div>
               )}
-            </>
+            </div>
           ))}
         </Accordion>
       </CardContent>
