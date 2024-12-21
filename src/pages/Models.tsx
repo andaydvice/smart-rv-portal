@@ -8,7 +8,7 @@ import { useToast } from "@/components/ui/use-toast";
 const models = [
   {
     name: "Luxury Class",
-    image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=800",
+    image: "/lovable-uploads/48fecc70-e0a6-4087-9346-636dab7d62ef.png",
     price: "Starting at $150,000",
     description: "Experience unparalleled luxury with our flagship model, featuring advanced automation and premium finishes.",
     features: [
