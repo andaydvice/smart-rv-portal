@@ -1,57 +1,18 @@
-import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
-import Navbar from "@/components/Navbar";
-import { Button } from "@/components/ui/button";
-import { ArrowRight, Battery, Navigation, Shield, Wifi } from "lucide-react";
-import { useToast } from "@/hooks/use-toast";
-
-const models = [
-  {
-    name: "Luxury Class",
-    image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=800",
-    price: "Starting at $150,000",
-    description: "Experience unparalleled luxury with our flagship model, featuring advanced automation and premium finishes.",
-    features: [
-      { icon: Navigation, text: "Advanced Navigation System", color: "text-blue-400" },
-      { icon: Shield, text: "Premium Security Suite", color: "text-emerald-400" },
-      { icon: Battery, text: "Extended Range Power System", color: "text-yellow-400" },
-      { icon: Wifi, text: "High-Speed Internet", color: "text-purple-400" },
-    ],
-    learnMoreLink: "/models/luxury"
-  },
-  {
-    name: "Adventure Class",
-    image: "https://images.unsplash.com/photo-1518005020951-eccb494ad742?auto=format&fit=crop&w=800",
-    price: "Starting at $120,000",
-    description: "Built for the modern explorer, combining durability with smart technology for off-grid adventures.",
-    features: [
-      { icon: Battery, text: "Solar Power Integration", color: "text-yellow-400" },
-      { icon: Shield, text: "All-Terrain Monitoring", color: "text-emerald-400" },
-      { icon: Navigation, text: "Off-Road Navigation", color: "text-blue-400" },
-      { icon: Wifi, text: "Satellite Connectivity", color: "text-purple-400" },
-    ],
-    learnMoreLink: "/models/adventure"
-  },
-  {
-    name: "Compact Smart",
-    image: "https://images.unsplash.com/photo-1605810230434-7631ac76ec81?auto=format&fit=crop&w=800",
-    price: "Starting at $90,000",
-    description: "Perfect for weekend getaways, packed with smart features in an efficient, easy-to-maneuver package.",
-    features: [
-      { icon: Navigation, text: "City-Optimized Navigation", color: "text-blue-400" },
-      { icon: Battery, text: "Efficient Power Management", color: "text-yellow-400" },
-      { icon: Shield, text: "Smart Security System", color: "text-emerald-400" },
-      { icon: Wifi, text: "4G/5G Connectivity", color: "text-purple-400" },
-    ],
-    learnMoreLink: "/models/compact"
-  }
-];
-
 const Models = () => {
   const { toast } = useToast();
+  console.log("[Models] Component rendering");
 
   const handleCompareModels = () => {
     window.location.href = '/models/compare';
+  };
+
+  const handleImageError = (modelName: string) => {
+    console.error(`[Models] Failed to load image for ${modelName}`);
+    toast({
+      title: "Image Load Error",
+      description: `Failed to load image for ${modelName}. Please try refreshing the page.`,
+      variant: "destructive",
+    });
   };
 
   return (
@@ -90,6 +51,8 @@ const Models = () => {
                     src={model.image}
                     alt={model.name}
                     className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-300"
+                    onError={() => handleImageError(model.name)}
+                    onLoad={() => console.log(`[Models] Image loaded for ${model.name}`)}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent" />
                 </div>
