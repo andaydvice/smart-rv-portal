@@ -5,7 +5,6 @@ import Navbar from "@/components/Navbar";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Home, Wrench, Building, Cpu } from "lucide-react";
 import { ModelCategory } from "@/components/luxury-models/ModelCategory";
-import { LuxuryModelImage } from "@/components/luxury-models/LuxuryModelImage";
 import { luxuryModels } from "@/data/luxury-models";
 
 const LuxuryModel = () => {
@@ -32,47 +31,35 @@ const LuxuryModel = () => {
   const renderModelCategories = () => {
     const categories = Object.values(luxuryModels);
     return categories.map((category, index) => {
+      // Render first image after Class A Diesel Pushers and before Premium Class A Diesel
       if (index === 0) {
         return (
           <div key={index}>
             <ModelCategory {...category} />
-            <LuxuryModelImage 
-              src="/lovable-uploads/1e3c2aa7-d13d-4cbd-a98a-37066b326f1d.png"
-              alt="Luxury RV with outdoor lounge setup at sunset"
-            />
+            <div className="relative w-full h-[500px] rounded-xl overflow-hidden bg-gray-900 my-8">
+              <img 
+                src="/lovable-uploads/1e3c2aa7-d13d-4cbd-a98a-37066b326f1d.png"
+                alt="Luxury RV with outdoor lounge setup at sunset"
+                className="w-full h-full object-cover"
+                loading="lazy"
+              />
+            </div>
           </div>
         );
       }
+      // Render second image after Premium Class A Diesel and before Luxury Fifth Wheels
       if (index === 1) {
         return (
           <div key={index}>
             <ModelCategory {...category} />
-            <LuxuryModelImage 
-              src="/lovable-uploads/5f18c537-149c-494e-9adf-6a1c096e3e3a.png"
-              alt="Luxury RV with outdoor setup by the lake at sunset"
-            />
-          </div>
-        );
-      }
-      if (index === 2) {
-        return (
-          <div key={index}>
-            <ModelCategory {...category} />
-            <LuxuryModelImage 
-              src="/lovable-uploads/9f85650a-be6b-4396-9016-803960c1b2f5.png"
-              alt="Luxury RV with mountain backdrop at sunset"
-            />
-          </div>
-        );
-      }
-      if (index === 3) {
-        return (
-          <div key={index}>
-            <ModelCategory {...category} />
-            <LuxuryModelImage 
-              src="/lovable-uploads/5fcfb66e-3239-4be0-9cab-eef7112095bf.png"
-              alt="Luxury RV with lakeside setup under starry sky"
-            />
+            <div className="relative w-full h-[500px] rounded-xl overflow-hidden bg-gray-900 my-8">
+              <img 
+                src="/lovable-uploads/5f18c537-149c-494e-9adf-6a1c096e3e3a.png"
+                alt="Luxury RV with outdoor setup by the lake at sunset"
+                className="w-full h-full object-cover"
+                loading="lazy"
+              />
+            </div>
           </div>
         );
       }
@@ -90,9 +77,10 @@ const LuxuryModel = () => {
         className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800"
       >
         <div className="relative w-full h-[60vh] overflow-hidden">
-          <LuxuryModelImage
+          <img
             src="/lovable-uploads/8137a7b0-17f6-4adc-a1b8-c790843192e0.png"
             alt="Luxury Class RV with slide-out in mountain setting"
+            className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-black/40" />
           <div className="absolute top-8 left-0 w-full px-4">
@@ -179,10 +167,14 @@ const LuxuryModel = () => {
               Many of these manufacturers also offer custom builds that can exceed these ranges.
             </p>
 
-            <LuxuryModelImage 
-              src="/lovable-uploads/795a8cdd-cf65-487f-b550-4e4458d0aa9e.png"
-              alt="Luxury RV with slide-out overlooking coastal sunset"
-            />
+            <div className="relative w-full h-[500px] rounded-xl overflow-hidden bg-gray-900 mb-8">
+              <img 
+                src="/lovable-uploads/795a8cdd-cf65-487f-b550-4e4458d0aa9e.png"
+                alt="Luxury RV with slide-out overlooking coastal sunset"
+                className="w-full h-full object-cover"
+                loading="lazy"
+              />
+            </div>
 
             <div className="space-y-8">
               {renderModelCategories()}
