@@ -1,26 +1,13 @@
 import { TechnologyHeader } from "./technology/TechnologyHeader";
 import { TechnologyGrid } from "./technology/TechnologyGrid";
-
-const getFullPath = (path: string) => {
-  try {
-    const baseUrl = window.location.origin;
-    console.log('Base URL:', baseUrl);
-    console.log('Path:', path);
-    const fullPath = `${baseUrl}${path}`;
-    console.log('Full path generated:', fullPath);
-    return fullPath;
-  } catch (error) {
-    console.error('Error generating full path:', error);
-    return path;
-  }
-};
+import { useNavigate } from "react-router-dom";
 
 export const TechnologySection = () => {
+  const navigate = useNavigate();
+
   const handleCardClick = (link: string) => {
-    console.log('Card clicked, link:', link);
-    const fullPath = getFullPath(link);
-    console.log('Navigating to:', fullPath);
-    window.location.href = fullPath;
+    console.log('Card clicked, navigating to:', link);
+    navigate(link);
   };
 
   return (
