@@ -38,7 +38,7 @@ const LuxuryModel = () => {
             <ModelCategory {...category} />
             <div className="relative w-full h-[500px] rounded-xl overflow-hidden bg-gray-900 my-8">
               <img 
-                src="/lovable-uploads/1e3c2aa7-d13d-4cbd-a98a-37066b326f1d.png"
+                src="/lovable-uploads/Luxury-Class-RVs-min.jpg"
                 alt="Luxury RV with outdoor lounge setup at sunset"
                 className="w-full h-full object-cover"
                 loading="lazy"
