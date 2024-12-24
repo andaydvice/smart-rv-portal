@@ -78,7 +78,7 @@ const LuxuryModel = () => {
       >
         <div className="relative w-full h-[60vh] overflow-hidden">
           <img
-            src="/lovable-uploads/8137a7b0-17f6-4adc-a1b8-c790843192e0.png"
+            src="/lovable-uploads/Luxury-Class-RVs-min.jpg"
             alt="Luxury Class RV with slide-out in mountain setting"
             className="w-full h-full object-cover"
           />
