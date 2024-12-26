@@ -35,7 +35,7 @@ const LuxuryModel = () => {
       if (index === 0) {
         return (
           <div key={index}>
-            <ModelCategory {...category} />
+            <ModelCategory {...category} /> 
             <div className="relative w-full h-[500px] rounded-xl overflow-hidden bg-gray-900 my-8">
               <img 
                 src="/lovable-uploads/Luxury-Class-RVs-min.jpg"
@@ -46,7 +46,7 @@ const LuxuryModel = () => {
             </div>
           </div>
         );
-      }
+      }    
       // Render second image after Premium Class A Diesel and before Luxury Fifth Wheels
       if (index === 1) {
         return (
@@ -55,6 +55,22 @@ const LuxuryModel = () => {
             <div className="relative w-full h-[500px] rounded-xl overflow-hidden bg-gray-900 my-8">
               <img 
                 src="/lovable-uploads/5f18c537-149c-494e-9adf-6a1c096e3e3a.png"
+                alt="Luxury RV with outdoor setup by the lake at sunset"
+                className="w-full h-full object-cover"
+                loading="lazy"
+              />
+            </div>
+          </div>
+        );
+      }
+      // Render second image after Luxury Fifth Wheels
+      if (index === 2) {
+        return (
+          <div key={index}>
+            <ModelCategory {...category} />
+            <div className="relative w-full h-[500px] rounded-xl overflow-hidden bg-gray-900 my-8">
+              <img 
+                src="/lovable-uploads/Luxury_RV_Living-min.jpg"
                 alt="Luxury RV with outdoor setup by the lake at sunset"
                 className="w-full h-full object-cover"
                 loading="lazy"
