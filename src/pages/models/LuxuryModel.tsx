@@ -79,6 +79,22 @@ const LuxuryModel = () => {
           </div>
         );
       }
+       // Render second image after Luxury Fifth Wheels
+      if (index === 3) {
+        return (
+          <div key={index}>
+            <ModelCategory {...category} />
+            <div className="relative w-full h-[500px] rounded-xl overflow-hidden bg-gray-900 my-8">
+              <img 
+                src="/lovable-uploads/Premium-Travel-Trailers-min.jpg"
+                alt="Luxury RV with outdoor setup by the lake at sunset"
+                className="w-full h-full object-cover"
+                loading="lazy"
+              />
+            </div>
+          </div>
+        );
+      }
       return <ModelCategory key={index} {...category} />;
     });
   };
