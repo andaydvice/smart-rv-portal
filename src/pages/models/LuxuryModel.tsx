@@ -115,7 +115,18 @@ const LuxuryModel = () => {
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-black/40" />
-          <div className="absolute top-8 left-0 w-full px-4">
+        
+          <div className="absolute inset-0 flex flex-col justify-center items-center text-center p-6">
+            <motion.h1 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="text-5xl font-bold text-white mb-4"
+            >
+              Luxury RV Living
+            </motion.h1>
+          </div>
+            <div className="absolute top-8 left-0 w-full px-4">
             <div className="container mx-auto">
               <Link to="/models">
                 <Button 
@@ -128,16 +139,7 @@ const LuxuryModel = () => {
               </Link>
             </div>
           </div>
-          <div className="absolute inset-0 flex flex-col justify-center items-center text-center p-6">
-            <motion.h1 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="text-5xl font-bold text-white mb-4"
-            >
-              Luxury RV Living
-            </motion.h1>
-          </div>
+          
         </div>
 
         <div className="container mx-auto px-4 pt-12 relative z-10">
