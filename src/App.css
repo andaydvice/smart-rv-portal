@@ -56,3 +56,8 @@ label.inner1 {
     padding-left: 15px;
     cursor: pointer;
 }
+
+
+.flex.outer1 button#smart-power {
+    border-color: #fff !important;
+}
