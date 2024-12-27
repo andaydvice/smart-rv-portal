@@ -100,9 +100,9 @@ const CompareModels = () => {
                 <TableBody>
                   <TableRow className="hover:bg-transparent">
                     <TableCell className="font-medium text-gray-300">Starting Price</TableCell>
-                    <TableCell className="text-center text-blue-400">$150,000</TableCell>
-                    <TableCell className="text-center text-blue-400">$120,000</TableCell>
-                    <TableCell className="text-center text-blue-400">$90,000</TableCell>
+                    <TableCell className="text-center text-blue-400">From 1.3M</TableCell>
+                    <TableCell className="text-center text-blue-400">From $50,000</TableCell>
+                    <TableCell className="text-center text-blue-400">From $20,000</TableCell>
                   </TableRow>
                   {features.map((featureGroup, groupIndex) => (
                     <React.Fragment key={`group-${groupIndex}`}>
