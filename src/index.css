@@ -86,6 +86,6 @@ label.inner1 {
 }
 
 
-.flex.outer1 button#smart-power {
+.flex.outer1 button.border-primary {
     border-color: #fff !important;
 }
