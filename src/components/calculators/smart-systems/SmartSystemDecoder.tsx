@@ -55,7 +55,7 @@ const SmartSystemDecoder = () => {
           {Object.entries(systemsData).map(([systemId, system]) => (
             <div
               key={systemId}
-              className="flex items-start space-x-2 bg-gray-800/50 p-4 rounded-lg border border-gray-700"
+              className="flex items-start space-x-2 bg-gray-800/50 p-4 rounded-lg border border-gray-700 outer1"
             >
               <Checkbox
                 id={systemId}
@@ -65,7 +65,7 @@ const SmartSystemDecoder = () => {
               />
               <label
                 htmlFor={systemId}
-                className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 inner1"
               >
                 {system.name}
               </label>
