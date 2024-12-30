@@ -9,7 +9,7 @@ const models = [
   {
     name: "Luxury Class",
     image: "https://smartrvhub.netlify.app/lovable-uploads/Luxury_RV_Living-minx800.jpg",
-    price: "Starting at $150,000",
+    price: "Starting From 1.3M",
     description: "Experience unparalleled luxury with our flagship model, featuring advanced automation and premium finishes.",
     features: [
       { icon: Navigation, text: "Advanced Navigation System", color: "text-blue-400" },
@@ -22,7 +22,7 @@ const models = [
   {
     name: "Adventure Class",
     image: "/lovable-uploads/2935caf5-f345-40a6-8676-0f20817c6d6e.png",
-    price: "Starting at $120,000",
+    price: "Starting From $50,000",
     description: "Built for the modern explorer, combining durability with smart technology for off-grid adventures.",
     features: [
       { icon: Battery, text: "Solar Power Integration", color: "text-yellow-400" },
@@ -35,7 +35,7 @@ const models = [
   {
     name: "Compact Smart",
     image: "/lovable-uploads/e6619d24-bebf-439f-96b0-6aca2fb69380.png",
-    price: "Starting at $90,000",
+    price: "Starting From $20,000",
     description: "Perfect for weekend getaways, packed with smart features in an efficient, easy-to-maneuver package.",
     features: [
       { icon: Navigation, text: "City-Optimized Navigation", color: "text-blue-400" },
