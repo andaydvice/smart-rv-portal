@@ -51,7 +51,7 @@ const Contact = () => {
             className="space-y-6 bg-black/10 backdrop-blur-md p-8 rounded-xl border border-white/10 shadow-2xl"
           >
             <div className="space-y-4">
-              <label htmlFor="name" className="block text-sm font-medium text-white/90 mb-1">Name</label>
+              <label htmlFor="name" className="block text-sm font-medium text-white/90 mb-1">Name * </label>
               <Input 
                 id="name" 
                 className="bg-white/10 border-white/20 text-white placeholder-white/40 focus:border-white/40 focus:bg-white/15 transition-all" 
@@ -59,7 +59,7 @@ const Contact = () => {
               />
             </div>
             <div className="space-y-4">
-              <label htmlFor="email" className="block text-sm font-medium text-white/90 mb-1">Email</label>
+              <label htmlFor="email" className="block text-sm font-medium text-white/90 mb-1">Email * </label>
               <Input 
                 id="email" 
                 type="email" 
@@ -68,7 +68,7 @@ const Contact = () => {
               />
             </div>
             <div className="space-y-4">
-              <label htmlFor="message" className="block text-sm font-medium text-white/90 mb-1">Message</label>
+              <label htmlFor="message" className="block text-sm font-medium text-white/90 mb-1">Message * </label>
               <Textarea 
                 id="message" 
                 className="bg-white/10 border-white/20 text-white min-h-[150px] placeholder-white/40 focus:border-white/40 focus:bg-white/15 transition-all" 
