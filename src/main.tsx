@@ -26,6 +26,18 @@ const startApp = () => {
     );
 
     console.log('App component rendered successfully');
+
+    // Add HMR handling
+    if (import.meta.hot) {
+      import.meta.hot.accept('./App', () => {
+        console.log('HMR update detected, re-rendering App component...');
+        root.render(
+          <React.StrictMode>
+            <App />
+          </React.StrictMode>
+        );
+      });
+    }
   } catch (error) {
     console.error('Failed to initialize application:', error);
     throw error;

@@ -15,6 +15,13 @@ const queryClient = new QueryClient({
   },
 });
 
+// Add HMR logging
+if (import.meta.hot) {
+  import.meta.hot.accept(() => {
+    console.log('App module updated, HMR accepted');
+  });
+}
+
 console.log('QueryClient initialized');
 
 const App = () => {
