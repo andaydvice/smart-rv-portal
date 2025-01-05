@@ -8,7 +8,7 @@ import { useToast } from "@/components/ui/use-toast";
 const models = [
   {
     name: "Luxury Class",
-    image: "https://smartrvhub.netlify.app/lovable-uploads/Luxury_RV_Living-minx800.jpg",
+    image: "/lovable-uploads/Luxury_RV_Living-minx800.jpg",
     price: "Starting From 1.3M",
     description: "Experience unparalleled luxury with our flagship model, featuring advanced automation and premium finishes.",
     features: [
@@ -50,6 +50,9 @@ const models = [
 const Models = () => {
   const { toast } = useToast();
 
+  console.log("[Models] Rendering Models page");
+  console.log("[Models] First model image path:", models[0].image);
+
   const handleCompareModels = () => {
     window.location.href = '/models/compare';
   };
@@ -90,6 +93,10 @@ const Models = () => {
                     src={model.image}
                     alt={model.name}
                     className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-300"
+                    onError={(e) => {
+                      console.error(`[Models] Image failed to load:`, model.image);
+                      e.currentTarget.src = '/placeholder.svg';
+                    }}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent" />
                 </div>
