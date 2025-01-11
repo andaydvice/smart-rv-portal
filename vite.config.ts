@@ -6,23 +6,23 @@ import { componentTagger } from "lovable-tagger";
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
   server: {
-    host: "::",
+    host: "localhost",
     port: 8080,
+    strictPort: true,
     hmr: {
       overlay: true,
-      timeout: 30000,
+      timeout: 60000,
       protocol: 'ws',
+      host: 'localhost',
     },
     watch: {
-      usePolling: true,
-      interval: 100,
+      usePolling: false,
     },
     open: false,
   },
   plugins: [
     react({
       fastRefresh: true,
-      // Enable better HMR debugging
       devTools: {
         autoOpen: true,
       },
@@ -40,7 +40,6 @@ export default defineConfig(({ mode }) => ({
   },
   build: {
     sourcemap: true,
-    // Improve build performance
     minify: mode === 'development' ? false : 'esbuild',
     rollupOptions: {
       output: {

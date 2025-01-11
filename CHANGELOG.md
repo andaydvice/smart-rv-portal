@@ -15,10 +15,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Updated vite.config.ts configuration for improved dev server stability
 - Modified HMR settings for better hot reload performance
+- Changed server host from '::' to 'localhost' for better compatibility
+- Added strictPort and explicit HMR host configuration
+- Disabled usePolling to prevent file watching issues
 
 ### Fixed
 - Dev server initialization issues
 - HMR connectivity problems
+- Project remixing stability issues
 
 ### Performance
 - Implemented initial performance monitoring
