@@ -5,16 +5,13 @@ import { componentTagger } from "lovable-tagger";
 
 export default defineConfig(({ mode }) => ({
   server: {
-    host: true,
+    host: '0.0.0.0',
     port: 8080,
     strictPort: true,
     hmr: {
-      overlay: true,
+      clientPort: 443,
+      path: '/@vite/client',
       timeout: 120000,
-      protocol: 'ws',
-      host: 'localhost',
-      port: 8080,
-      clientPort: 8080
     },
     watch: {
       usePolling: true,
