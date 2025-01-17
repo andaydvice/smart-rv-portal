@@ -24,7 +24,6 @@ export default defineConfig(({ mode }) => ({
   },
   plugins: [
     react({
-      fastRefresh: true,
       devTools: {
         autoOpen: true,
       },
