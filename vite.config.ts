@@ -3,21 +3,22 @@ import react from "@vitejs/plugin-react-swc";
 import path from "path";
 import { componentTagger } from "lovable-tagger";
 
-// https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
   server: {
-    host: "0.0.0.0",
+    host: true,
     port: 8080,
     strictPort: true,
     hmr: {
       overlay: true,
-      timeout: 60000,
+      timeout: 120000,
       protocol: 'ws',
-      clientPort: 8080,
       host: 'localhost',
+      port: 8080,
+      clientPort: 8080
     },
     watch: {
-      usePolling: false,
+      usePolling: true,
+      interval: 100
     },
     open: false,
   },
