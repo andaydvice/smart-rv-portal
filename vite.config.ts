@@ -23,11 +23,7 @@ export default defineConfig(({ mode }) => ({
     open: false,
   },
   plugins: [
-    react({
-      devTools: {
-        autoOpen: true,
-      },
-    }),
+    react(),
     mode === 'development' && componentTagger(),
   ].filter(Boolean),
   resolve: {
