@@ -70,7 +70,7 @@ const AutomatedDriving = () => {
             </div>
           </div>
 
-          <div className="text-center">
+          <div className="text-center mb-16">
             <Link to="/schedule-demo">
               <Button className="bg-blue-500 hover:bg-blue-600">
                 Schedule a Demo
