@@ -12,6 +12,7 @@ export default defineConfig(({ mode }) => ({
       clientPort: 443,
       path: '/@vite/client',
       timeout: 120000,
+      host: '95549a04-cacd-4e64-a52b-ecc6aed8e361.lovableproject.com'
     },
     watch: {
       usePolling: true,
