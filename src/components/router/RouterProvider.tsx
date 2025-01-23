@@ -7,15 +7,20 @@ const RouterProvider = () => {
   
   return (
     <BrowserRouter>
-      <Routes>
-        {routes.map((route) => (
-          <Route
-            key={route.path}
-            path={route.path}
-            element={route.element}
-          />
-        ))}
-      </Routes>
+      <Layout>
+        <Routes>
+          {routes.map((route) => {
+            console.log('Rendering route:', route.path);
+            return (
+              <Route
+                key={route.path}
+                path={route.path}
+                element={route.element}
+              />
+            );
+          })}
+        </Routes>
+      </Layout>
     </BrowserRouter>
   );
 };

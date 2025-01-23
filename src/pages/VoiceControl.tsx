@@ -6,9 +6,7 @@ const VoiceControl = () => {
   
   return (
     <div className="min-h-screen bg-[#0A0E17] text-white">
-      <Navbar />
-      
-      <main className="pt-20">
+      <main className="container mx-auto px-4 pt-24">
         <section className="h-screen flex items-center justify-center relative">
           <div className="absolute inset-0">
             <img 
@@ -19,7 +17,7 @@ const VoiceControl = () => {
             <div className="absolute inset-0 bg-black/50" />
           </div>
           
-          <div className="relative z-10 text-center max-w-4xl mx-auto px-4">
+          <div className="relative z-10 text-center max-w-4xl mx-auto">
             <h1 className="text-4xl md:text-6xl font-bold mb-6 p-4 bg-black/30 backdrop-blur-sm rounded-lg">
               Voice Control for Smart RVs
             </h1>
@@ -33,9 +31,9 @@ const VoiceControl = () => {
           </div>
         </section>
 
-        <section className="py-16 px-4">
+        <section className="py-16">
           <h2 className="text-4xl font-bold text-center mb-12">Voice Systems</h2>
-          <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="bg-[rgba(26,31,46,0.95)] p-8 rounded-lg text-center">
               <Mic className="w-12 h-12 mx-auto mb-6" />
               <h3 className="text-2xl font-bold mb-4">JayVoice</h3>
@@ -52,26 +50,6 @@ const VoiceControl = () => {
               <MessageSquare className="w-12 h-12 mx-auto mb-6" />
               <h3 className="text-2xl font-bold mb-4">Smart Assistant</h3>
               <p className="text-white/90">Traditional voice assistant integration</p>
-            </div>
-          </div>
-        </section>
-
-        <section className="py-16 px-4">
-          <h2 className="text-4xl font-bold text-center mb-12">Benefits</h2>
-          <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-[rgba(26,31,46,0.95)] p-8 rounded-lg text-center">
-              <h3 className="text-2xl font-bold mb-4">Convenience</h3>
-              <p className="text-white/90">Control your RV systems without lifting a finger</p>
-            </div>
-            
-            <div className="bg-[rgba(26,31,46,0.95)] p-8 rounded-lg text-center">
-              <h3 className="text-2xl font-bold mb-4">Safety</h3>
-              <p className="text-white/90">Keep your focus on driving and surroundings</p>
-            </div>
-            
-            <div className="bg-[rgba(26,31,46,0.95)] p-8 rounded-lg text-center">
-              <h3 className="text-2xl font-bold mb-4">Efficiency</h3>
-              <p className="text-white/90">Streamline your RV management</p>
             </div>
           </div>
         </section>
