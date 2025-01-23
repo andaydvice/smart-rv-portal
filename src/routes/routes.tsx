@@ -8,6 +8,7 @@ import ScheduleDemo from "@/pages/ScheduleDemo";
 import Troubleshooting from "@/pages/Troubleshooting";
 import Documentation from "@/pages/Documentation";
 import Calculators from "@/pages/Calculators";
+import VoiceControl from "@/pages/VoiceControl";
 import CompleteDocumentation from "@/pages/documentation/CompleteDocumentation";
 import NavigationSystem from "@/pages/features/NavigationSystem";
 import SecuritySystem from "@/pages/features/SecuritySystem";
@@ -25,6 +26,7 @@ import CompareModels from "@/pages/models/CompareModels";
 export const routes: RouteObject[] = [
   { path: "/", element: <Index /> },
   { path: "/features", element: <Features /> },
+  { path: "/voice-control", element: <VoiceControl /> },
   { path: "/features/navigation", element: <NavigationSystem /> },
   { path: "/features/security", element: <SecuritySystem /> },
   { path: "/features/power", element: <PowerManagement /> },
