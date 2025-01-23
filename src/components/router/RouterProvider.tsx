@@ -12,13 +12,7 @@ const RouterProvider = () => {
           <Route
             key={route.path}
             path={route.path}
-            element={
-              route.path === '/voice-control' ? (
-                route.element
-              ) : (
-                <Layout>{route.element}</Layout>
-              )
-            }
+            element={route.element}
           />
         ))}
       </Routes>
