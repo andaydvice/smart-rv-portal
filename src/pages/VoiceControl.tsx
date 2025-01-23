@@ -3,19 +3,13 @@ import Navbar from "@/components/Navbar";
 import Layout from "@/components/layout/Layout";
 
 const VoiceControl = () => {
+  console.log("Rendering VoiceControl component");
+  
   return (
     <Layout>
       <div className="min-h-screen bg-[#0A0E17] text-white">
-        <nav className="fixed top-0 left-0 right-0 z-50 bg-[rgba(15,18,24,0.8)] backdrop-blur-[8px] border-b border-white/10">
-          <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
-            <div className="text-xl font-bold">Voice Control Platform</div>
-            <button className="flex items-center gap-2 px-4 py-2 bg-transparent border border-white/10 rounded-lg hover:bg-white/10 transition-colors">
-              <Cloud className="w-4 h-4" />
-              Weather Dashboard
-            </button>
-          </div>
-        </nav>
-
+        <Navbar />
+        
         <main>
           <section className="h-screen flex items-center justify-center relative">
             <div className="absolute inset-0">
