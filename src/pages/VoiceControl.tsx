@@ -8,7 +8,7 @@ const VoiceControl = () => {
     <div className="min-h-screen bg-[#0A0E17] text-white">
       <Navbar />
       
-      <main>
+      <main className="pt-16">
         <section className="h-screen flex items-center justify-center relative">
           <div className="absolute inset-0">
             <img 
