@@ -1,9 +1,8 @@
-import { Mic, Cloud, MessageSquare, Facebook, Twitter, Instagram } from "lucide-react";
+import { Mic, Cloud, MessageSquare } from "lucide-react";
 import Navbar from "@/components/Navbar";
-import Layout from "@/components/layout/Layout";
 
 const VoiceControl = () => {
-  console.log("Rendering VoiceControl component");
+  console.log("VoiceControl component rendering");
   
   return (
     <div className="min-h-screen bg-[#0A0E17] text-white">
@@ -76,59 +75,6 @@ const VoiceControl = () => {
             </div>
           </div>
         </section>
-
-        <footer className="bg-[#111827] py-16 px-4 mt-16">
-          <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
-            <div>
-              <h3 className="text-xl font-bold mb-4">Smart RV</h3>
-              <p className="text-white/70 mb-4">
-                Revolutionizing the future of recreational vehicles with smart technology.
-              </p>
-              <div className="flex gap-4">
-                <a href="#" className="text-white/70 hover:text-white transition-colors">
-                  <Facebook className="w-6 h-6" />
-                </a>
-                <a href="#" className="text-white/70 hover:text-white transition-colors">
-                  <Twitter className="w-6 h-6" />
-                </a>
-                <a href="#" className="text-white/70 hover:text-white transition-colors">
-                  <Instagram className="w-6 h-6" />
-                </a>
-              </div>
-            </div>
-
-            <div>
-              <h3 className="text-xl font-bold mb-4">Quick Links</h3>
-              <ul className="space-y-2">
-                <li><a href="#" className="text-white/70 hover:text-white transition-colors">Models</a></li>
-                <li><a href="#" className="text-white/70 hover:text-white transition-colors">Features</a></li>
-                <li><a href="#" className="text-white/70 hover:text-white transition-colors">Technology</a></li>
-              </ul>
-            </div>
-
-            <div>
-              <h3 className="text-xl font-bold mb-4">Features</h3>
-              <ul className="space-y-2">
-                <li><a href="#" className="text-white/70 hover:text-white transition-colors">Navigation System</a></li>
-                <li><a href="#" className="text-white/70 hover:text-white transition-colors">Security System</a></li>
-                <li><a href="#" className="text-white/70 hover:text-white transition-colors">Power Management</a></li>
-              </ul>
-            </div>
-
-            <div>
-              <h3 className="text-xl font-bold mb-4">Contact Us</h3>
-              <ul className="space-y-2 text-white/70">
-                <li>1234 Smart Drive</li>
-                <li>Tech Valley, CA 94025</li>
-                <li>
-                  <a href="mailto:info@smartrv.com" className="hover:text-white transition-colors">
-                    info@smartrv.com
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </footer>
       </main>
     </div>
   );
