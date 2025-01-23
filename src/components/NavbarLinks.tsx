@@ -13,7 +13,8 @@ import {
   Wrench,
   HelpCircle,
   FileText,
-  Phone
+  Phone,
+  Mic
 } from "lucide-react";
 
 const linkBaseClasses = "block p-2 rounded hover:bg-[#0F1729]/50";
@@ -21,6 +22,14 @@ const textBaseClasses = "text-[#A3B3BC] hover:text-[#4B9EF4] transition-colors";
 
 export const CoreSystemsLinks = () => (
   <ul className="space-y-2 text-sm">
+    <li className={textBaseClasses}>
+      <Link to="/voice-control" className={linkBaseClasses}>
+        <span className="flex items-center gap-2">
+          <Mic className="h-4 w-4 text-purple-500" />
+          Voice Control
+        </span>
+      </Link>
+    </li>
     <li className={textBaseClasses}>
       <Link to="/features/navigation" className={linkBaseClasses}>
         <span className="flex items-center gap-2">
