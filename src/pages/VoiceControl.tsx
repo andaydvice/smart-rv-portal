@@ -10,8 +10,8 @@ const VoiceControl = () => {
         <section className="h-screen flex items-center justify-center relative">
           <div className="absolute inset-0">
             <img 
-              src="/lovable-uploads/9cb71164-7823-47a1-b788-5afc310ad5e5.png"
-              alt="RV background"
+              src="/lovable-uploads/b34a2c72-bee2-4710-9d30-6acd31e60c6b.png"
+              alt="Luxury RV at sunset with fire pit"
               className="w-full h-full object-cover"
             />
             <div className="absolute inset-0 bg-black/50" />
