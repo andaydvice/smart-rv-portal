@@ -38,19 +38,14 @@ const Blog = () => {
   
   return (
     <Layout>
-      <motion.div 
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.6 }}
-        className="w-full min-h-screen bg-connectivity-bg"
-      >
+      <div className="w-full min-h-screen bg-connectivity-bg">
         <div className="max-w-7xl mx-auto px-4 py-12">
-          <h1 className="text-4xl font-bold mb-12 text-[#D6BCFA]">RV Living Blog</h1>
+          <h1 className="text-4xl font-bold mb-12 text-white">RV Living Blog</h1>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {blogPosts.map((post) => (
               <Card 
                 key={post.id} 
-                className="overflow-hidden hover:scale-105 transition-transform duration-300 bg-[#6E59A5]/90 border-[#9b87f5]/20"
+                className="overflow-hidden hover:scale-105 transition-transform duration-300 bg-connectivity-darkBg border-connectivity-accent/20"
               >
                 <img 
                   src={post.image} 
@@ -58,15 +53,15 @@ const Blog = () => {
                   className="w-full h-48 object-cover"
                 />
                 <CardHeader className="space-y-2">
-                  <CardTitle className="text-xl text-[#D6BCFA] line-clamp-2">
+                  <CardTitle className="text-xl text-white line-clamp-2">
                     {post.title}
                   </CardTitle>
-                  <CardDescription className="text-[#F1F0FB]/90">
+                  <CardDescription className="text-gray-300">
                     {post.description}
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <div className="flex flex-wrap items-center gap-4 text-sm text-[#D6BCFA]/80">
+                  <div className="flex flex-wrap items-center gap-4 text-sm text-connectivity-accent">
                     <div className="flex items-center gap-1">
                       <User className="h-4 w-4" />
                       <span>{post.author}</span>
@@ -85,7 +80,7 @@ const Blog = () => {
             ))}
           </div>
         </div>
-      </motion.div>
+      </div>
     </Layout>
   );
 };
