@@ -38,23 +38,23 @@ const Blog = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.6 }}
-      className="container mx-auto px-4 py-8 mt-16"
+      className="container mx-auto px-4 py-8 mt-16 bg-[#1A1F2C]"
     >
-      <h1 className="text-4xl font-bold mb-8 text-gray-900">RV Living Blog</h1>
+      <h1 className="text-4xl font-bold mb-8 text-[#D6BCFA]">RV Living Blog</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {blogPosts.map((post) => (
-          <Card key={post.id} className="overflow-hidden hover:shadow-lg transition-shadow">
+          <Card key={post.id} className="overflow-hidden hover:shadow-lg transition-shadow bg-[#6E59A5] border-[#9b87f5]">
             <img 
               src={post.image} 
               alt={post.title}
               className="w-full h-48 object-cover"
             />
             <CardHeader>
-              <CardTitle className="text-xl">{post.title}</CardTitle>
-              <CardDescription>{post.description}</CardDescription>
+              <CardTitle className="text-xl text-[#D6BCFA]">{post.title}</CardTitle>
+              <CardDescription className="text-[#F1F0FB]">{post.description}</CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="flex items-center gap-4 text-sm text-gray-600">
+              <div className="flex items-center gap-4 text-sm text-[#D6BCFA]">
                 <div className="flex items-center gap-1">
                   <User className="h-4 w-4" />
                   <span>{post.author}</span>
