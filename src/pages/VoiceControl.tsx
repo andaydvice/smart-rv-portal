@@ -87,6 +87,8 @@ const VoiceControl = () => {
           </div>
         </section>
 
+        <h2 className="text-4xl font-bold text-white text-center my-12">Voice Control Systems</h2>
+
         <section className="py-16 bg-[#1A1F2E33]">
           <div className="max-w-6xl mx-auto px-4">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
