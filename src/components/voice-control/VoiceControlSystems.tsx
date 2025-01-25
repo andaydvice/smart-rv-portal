@@ -2,6 +2,8 @@ import { ArrowRight } from "lucide-react";
 import { Button } from "../ui/button";
 
 export const VoiceControlSystems = () => {
+  console.log("Rendering VoiceControlSystems component");
+  
   return (
     <section className="container mx-auto px-4 py-24 text-white">
       <div className="max-w-5xl mx-auto space-y-16">
