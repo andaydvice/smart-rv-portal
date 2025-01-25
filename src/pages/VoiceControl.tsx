@@ -1,8 +1,7 @@
 import { Mic, Cloud, MessageSquare, Shield, Home, Cpu, Smartphone, Sun, Home as HomeIcon } from "lucide-react";
-import Navbar from "@/components/Navbar";
 
 const VoiceControl = () => {
-  console.log("VoiceControl component rendering without secondary image");
+  console.log("VoiceControl component rendering");
   
   return (
     <div className="min-h-screen bg-[#0A0E17] text-white">
@@ -29,6 +28,54 @@ const VoiceControl = () => {
                 <Mic className="w-6 h-6" />
                 Start Voice Control
               </button>
+            </div>
+          </div>
+        </section>
+
+        <section className="py-16 bg-[#1A1F2E33]">
+          <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 px-4">
+            <div className="space-y-8">
+              <div className="space-y-4">
+                <div className="flex items-center gap-3">
+                  <Mic className="w-8 h-8 text-[#5B9BD5]" />
+                  <h3 className="text-2xl font-bold text-[#5B9BD5]">The Power of Speech is Here Today</h3>
+                </div>
+                <p className="text-white/90">
+                  Your Smart RV now responds to simple voice commands. Simply speak to control everything from temperature to lighting and entertainment.
+                </p>
+              </div>
+
+              <div className="space-y-4">
+                <div className="flex items-center gap-3">
+                  <Cpu className="w-8 h-8 text-[#5B9BD5]" />
+                  <h3 className="text-2xl font-bold text-[#5B9BD5]">Advanced Technology from Leaders</h3>
+                </div>
+                <p className="text-white/90">
+                  Just say "Jayco" or "Hey Power Pro" and your RV responds instantly. Works with Alexa and Google too.
+                </p>
+              </div>
+            </div>
+
+            <div className="space-y-8">
+              <div className="space-y-4">
+                <div className="flex items-center gap-3">
+                  <Shield className="w-8 h-8 text-[#5B9BD5]" />
+                  <h3 className="text-2xl font-bold text-[#5B9BD5]">Safe, Simple, Smart Control</h3>
+                </div>
+                <p className="text-white/90">
+                  Adjust your AC while keeping your hands on the wheel. Set up camp with a single command.
+                </p>
+              </div>
+
+              <div className="space-y-4">
+                <div className="flex items-center gap-3">
+                  <Home className="w-8 h-8 text-[#5B9BD5]" />
+                  <h3 className="text-2xl font-bold text-[#5B9BD5]">Experience Today's Smart RV Technology</h3>
+                </div>
+                <p className="text-white/90">
+                  Voice control is already transforming thousands of RVs across America, bringing the future of camping to life in luxury fifth wheels, travel trailers, and motorhomes.
+                </p>
+              </div>
             </div>
           </div>
         </section>
@@ -194,7 +241,6 @@ const VoiceControl = () => {
             </button>
           </div>
         </section>
-
       </main>
     </div>
   );
