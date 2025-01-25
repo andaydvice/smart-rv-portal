@@ -31,7 +31,7 @@ const VoiceControl = () => {
           </div>
         </section>
 
-        <section className="py-16 bg-[#1B2028]">
+        <section className="py-16 bg-secondary">
           <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 px-4">
             <div className="space-y-8">
               <div className="space-y-4">
