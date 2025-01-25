@@ -2,7 +2,7 @@ import { Mic, Cloud, MessageSquare, Shield, Home, Cpu, Smartphone, Sun, Home as 
 import Navbar from "@/components/Navbar";
 
 const VoiceControl = () => {
-  console.log("VoiceControl component rendering with updated image placement");
+  console.log("VoiceControl component rendering without secondary image");
   
   return (
     <div className="min-h-screen bg-[#0A0E17] text-white">
