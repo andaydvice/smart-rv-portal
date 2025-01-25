@@ -21,13 +21,19 @@ const FeaturesSection = () => {
       <div className="max-w-3xl mx-auto">
         <Accordion type="single" collapsible className="space-y-4">
           {features.map((feature, index) => (
-            <AccordionItem key={index} value={`item-${index}`} className="border-none bg-[#151B2E] rounded-lg overflow-hidden">
-              <AccordionTrigger className="flex items-center gap-4 px-6 py-4 hover:no-underline hover:bg-[#1A1F2E]">
+            <AccordionItem 
+              key={index} 
+              value={`item-${index}`} 
+              className="border-b border-[#1B2028] bg-[#0A0E17]"
+            >
+              <AccordionTrigger 
+                className="flex items-center gap-4 px-6 py-4 text-xl text-white hover:no-underline"
+              >
                 <span className="text-[#3B82F6]">{feature.icon}</span>
-                <span className="text-[#D3E4FD]">{feature.title}</span>
+                {feature.title}
               </AccordionTrigger>
               <AccordionContent className="px-6 pb-6">
-                <p className="text-[#D3E4FD] pl-10">{feature.content}</p>
+                <p className="text-[#D3E4FD] text-lg pl-10 mb-4">{feature.content}</p>
                 <div className="mt-4 pl-10">
                   <CommandExample
                     command={`Set ${feature.title.toLowerCase()} to optimal`}
