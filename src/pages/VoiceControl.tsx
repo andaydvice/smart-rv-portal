@@ -2,7 +2,7 @@ import { Mic, Cloud, MessageSquare, Shield, Home, Cpu } from "lucide-react";
 import Navbar from "@/components/Navbar";
 
 const VoiceControl = () => {
-  console.log("VoiceControl component rendering");
+  console.log("VoiceControl component rendering with updated background color");
   
   return (
     <div className="min-h-screen bg-[#0A0E17] text-white">
@@ -31,7 +31,7 @@ const VoiceControl = () => {
           </div>
         </section>
 
-        <section className="py-16" style={{ backgroundColor: '#1A1F2E33' }}>
+        <section className="py-16 bg-[#1A1F2E33]">
           <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 px-4">
             <div className="space-y-8">
               <div className="space-y-4">
@@ -87,7 +87,7 @@ const VoiceControl = () => {
           </div>
         </section>
 
-        <section className="py-16 bg-[#151A22]">
+        <section className="py-16 bg-[#1A1F2E33]">
           <div className="max-w-6xl mx-auto px-4">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               <div className="bg-[rgba(26,31,46,0.95)] p-8 rounded-lg">
@@ -136,7 +136,7 @@ const VoiceControl = () => {
           </div>
         </section>
 
-        <section className="py-16" style={{ backgroundColor: '#1A1F2E33' }}>
+        <section className="py-16 bg-[#1A1F2E33]">
           <h2 className="text-4xl font-bold text-center mb-12">Voice Systems</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="bg-[rgba(26,31,46,0.95)] p-8 rounded-lg text-center">

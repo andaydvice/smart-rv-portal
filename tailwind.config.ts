@@ -29,7 +29,7 @@ export default {
           foreground: "#FFFFFF",
         },
         secondary: {
-          DEFAULT: "#1A1F2E",
+          DEFAULT: "rgba(26, 31, 46, 0.95)",
           foreground: "#E2E8FF",
         },
         muted: {
