@@ -8,12 +8,12 @@ interface CommandExampleProps {
 
 const CommandExample = ({ command, description }: CommandExampleProps) => {
   return (
-    <div className="bg-[#0A0E17] rounded-2xl p-10 shadow-lg">
-      <div className="flex items-center gap-4 text-[#3B82F6] mb-6">
-        <Terminal size={32} />
-        <code className="text-2xl font-mono font-medium">{command}</code>
+    <div className="bg-connectivity.bg rounded-lg p-4">
+      <div className="flex items-center gap-2 text-connectivity.accent mb-2">
+        <Terminal size={16} />
+        <code>{command}</code>
       </div>
-      <p className="text-[#D3E4FD] text-xl leading-relaxed tracking-wide">{description}</p>
+      <p className="text-sm text-gray-400">{description}</p>
     </div>
   );
 };
