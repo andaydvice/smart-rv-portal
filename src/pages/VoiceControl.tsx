@@ -85,6 +85,21 @@ const VoiceControl = () => {
         </section>
 
         <section className="py-16 bg-[#1A1F2E33]">
+          <div className="max-w-6xl mx-auto text-center px-4">
+            <div className="flex items-center justify-center gap-3 mb-4">
+              <Smartphone className="w-8 h-8 text-[#5B9BD5]" />
+              <h3 className="text-2xl font-bold text-[#5B9BD5]">Ready to Upgrade?</h3>
+            </div>
+            <p className="text-white/90 text-lg mb-8">
+              Discover what voice control can do for your RV adventures.
+            </p>
+            <button className="px-8 py-3 bg-[#5B9BD5] hover:bg-[#4A8AC4] rounded-lg transition-colors">
+              Learn More
+            </button>
+          </div>
+        </section>
+
+        <section className="py-16 bg-[#1A1F2E33]">
           <h2 className="text-4xl font-bold text-white text-center my-12">Voice Control Systems</h2>
           <div className="max-w-6xl mx-auto px-4">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
