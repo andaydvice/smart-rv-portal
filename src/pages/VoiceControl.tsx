@@ -1,6 +1,7 @@
 import { HeroSection } from "../components/voice-control/HeroSection";
 import { VoiceControlSystems } from "../components/voice-control/VoiceControlSystems";
 import { BenefitsGrid } from "../components/voice-control/BenefitsGrid";
+import FeaturesSection from "../components/voice-control/FeaturesSection";
 
 const VoiceControl = () => {
   console.log("VoiceControl component rendering");
@@ -21,6 +22,7 @@ const VoiceControl = () => {
           />
         </div>
         <BenefitsGrid />
+        <FeaturesSection />
       </main>
     </div>
   );
