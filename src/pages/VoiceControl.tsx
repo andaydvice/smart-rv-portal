@@ -136,7 +136,7 @@ const VoiceControl = () => {
           </div>
         </section>
 
-        <section className="py-16">
+        <section className="py-16" style={{ backgroundColor: '#1A1F2E33' }}>
           <h2 className="text-4xl font-bold text-center mb-12">Voice Systems</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="bg-[rgba(26,31,46,0.95)] p-8 rounded-lg text-center">
