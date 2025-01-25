@@ -6,9 +6,9 @@ const VoiceControl = () => {
   
   return (
     <div className="min-h-screen bg-[#0A0E17] text-white">
-      <main className="relative">
-        <section className="min-h-screen w-full relative">
-          <div className="absolute inset-0 w-full h-screen">
+      <main className="relative w-full">
+        <section className="h-screen w-full relative overflow-hidden">
+          <div className="absolute top-0 left-0 w-full h-full">
             <img 
               src="/lovable-uploads/ff43ed8a-b7cd-42f7-a45e-a3a706d39d07.png"
               alt="Futuristic RV interior with smart display and mountain view"
@@ -17,7 +17,7 @@ const VoiceControl = () => {
             <div className="absolute inset-0 bg-black/50" />
           </div>
           
-          <div className="relative z-10 h-screen flex items-center justify-center">
+          <div className="absolute inset-0 flex items-center justify-center">
             <div className="text-center max-w-4xl mx-auto px-4">
               <h1 className="text-4xl md:text-6xl font-bold mb-6 p-4 bg-black/30 backdrop-blur-sm rounded-lg">
                 Voice Control for Smart RVs
