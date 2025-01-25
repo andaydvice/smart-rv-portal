@@ -24,10 +24,10 @@ const FeaturesSection = () => {
             <AccordionItem key={index} value={`item-${index}`} className="border-none bg-[#151B2E] rounded-lg overflow-hidden">
               <AccordionTrigger className="flex items-center gap-4 px-6 py-4 hover:no-underline hover:bg-[#1A1F2E]">
                 <span className="text-[#3B82F6]">{feature.icon}</span>
-                <span className="text-white">{feature.title}</span>
+                <span className="text-[#D3E4FD]">{feature.title}</span>
               </AccordionTrigger>
               <AccordionContent className="px-6 pb-6">
-                <p className="text-gray-400 pl-10">{feature.content}</p>
+                <p className="text-[#D3E4FD] pl-10">{feature.content}</p>
                 <div className="mt-4 pl-10">
                   <CommandExample
                     command={`Set ${feature.title.toLowerCase()} to optimal`}
