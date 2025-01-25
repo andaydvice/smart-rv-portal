@@ -2,7 +2,7 @@ import { Mic, Cloud, MessageSquare, Shield, Home, Cpu } from "lucide-react";
 import Navbar from "@/components/Navbar";
 
 const VoiceControl = () => {
-  console.log("VoiceControl component rendering with updated background color");
+  console.log("VoiceControl component rendering with updated hero image");
   
   return (
     <div className="min-h-screen bg-[#0A0E17] text-white">
@@ -10,8 +10,8 @@ const VoiceControl = () => {
         <section className="h-screen flex items-center justify-center relative">
           <div className="absolute inset-0">
             <img 
-              src="/lovable-uploads/b34a2c72-bee2-4710-9d30-6acd31e60c6b.png"
-              alt="Luxury RV at sunset with fire pit"
+              src="/lovable-uploads/ff43ed8a-b7cd-42f7-a45e-a3a706d39d07.png"
+              alt="Futuristic RV interior with smart display and mountain view"
               className="w-full h-full object-cover"
             />
             <div className="absolute inset-0 bg-black/50" />
