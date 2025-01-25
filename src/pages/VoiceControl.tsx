@@ -136,6 +136,14 @@ const VoiceControl = () => {
           </div>
         </section>
 
+        <div className="w-full max-w-6xl mx-auto px-4 py-16 bg-[#1A1F2E33]">
+          <img 
+            src="/lovable-uploads/ab7d2423-0ab6-4868-83b1-c84f220e5736.png"
+            alt="Smart RV voice control system visualization showing various connected features"
+            className="w-full h-auto rounded-lg shadow-lg"
+          />
+        </div>
+
         <section className="py-16 bg-[#1A1F2E33]">
           <h2 className="text-4xl font-bold text-center mb-12">Voice Systems</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
