@@ -2,7 +2,7 @@ import { Mic, Cloud, MessageSquare, Shield, Home, Cpu, Smartphone, Sun, Home as 
 import Navbar from "@/components/Navbar";
 
 const VoiceControl = () => {
-  console.log("VoiceControl component rendering with updated benefits section");
+  console.log("VoiceControl component rendering with updated image placement");
   
   return (
     <div className="min-h-screen bg-[#0A0E17] text-white">
@@ -34,6 +34,14 @@ const VoiceControl = () => {
         </section>
 
         <section className="py-20 bg-[#0B1121]">
+          <div className="w-full max-w-6xl mx-auto px-4 mb-16">
+            <img 
+              src="/lovable-uploads/ee98c157-2dd2-47f8-bcbd-55749f6e09e4.png"
+              alt="Voice control system visualization showing connected features in a car dashboard"
+              className="w-full h-auto rounded-lg shadow-xl"
+            />
+          </div>
+
           <h2 className="text-5xl font-bold text-center mb-16 text-white">Benefits of Voice Control</h2>
           
           <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
