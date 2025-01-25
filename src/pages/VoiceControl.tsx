@@ -2,7 +2,7 @@ import { Mic, Cloud, MessageSquare, Shield, Home, Cpu, Smartphone, Sun, Home as 
 import Navbar from "@/components/Navbar";
 
 const VoiceControl = () => {
-  console.log("VoiceControl component rendering with updated image placement");
+  console.log("VoiceControl component rendering - fixing section order");
   
   return (
     <div className="min-h-screen bg-[#0A0E17] text-white">
@@ -89,6 +89,8 @@ const VoiceControl = () => {
           </div>
         </section>
 
+        <h2 className="text-4xl font-bold text-white text-center my-12">Voice Control Systems</h2>
+
         <section className="py-16 bg-[#1A1F2E33]">
           <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 px-4">
             <div className="space-y-8">
@@ -144,8 +146,6 @@ const VoiceControl = () => {
             </button>
           </div>
         </section>
-
-        <h2 className="text-4xl font-bold text-white text-center my-12">Voice Control Systems</h2>
 
         <section className="py-16 bg-[#1A1F2E33]">
           <div className="max-w-6xl mx-auto px-4">
