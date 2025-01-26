@@ -25,20 +25,20 @@ const NewsletterSection = () => {
               <h2 className="text-3xl font-bold text-white mb-4 animate-fade-up">
                 Stay Updated with Smart RV
               </h2>
-              <p className="text-[#E2E8FF] animate-fade-up" style={{ animationDelay: '0.2s' }}>
-                Get the latest insights on RV technology, travel tips, and innovations delivered straight to your inbox.
+              <p className="text-[#E2E8FF] animate-fade-up opacity-90" style={{ animationDelay: '0.2s' }}>
+                Join our community and receive the latest insights on RV technology, travel tips, and innovations delivered straight to your inbox.
               </p>
             </div>
             <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-4 w-full md:w-auto animate-fade-up" style={{ animationDelay: '0.4s' }}>
               <Input 
                 type="email" 
                 placeholder="Enter your email" 
-                className="bg-[#131a2a]/80 border-[#1a202c] text-white w-full sm:w-80"
+                className="bg-[#131a2a]/80 border-[#1a202c] text-white w-full sm:w-80 focus:ring-2 focus:ring-[#5B9BD5] transition-all"
                 required
               />
               <Button 
                 type="submit"
-                className="bg-[#5B9BD5] hover:bg-[#4B8FE3] text-white transition-colors whitespace-nowrap"
+                className="bg-[#5B9BD5] hover:bg-[#4B8FE3] text-white transition-colors whitespace-nowrap px-6"
               >
                 <Mail className="w-4 h-4 mr-2" />
                 Subscribe Now

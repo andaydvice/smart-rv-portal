@@ -4,7 +4,7 @@ import { Card, CardContent } from "../ui/card";
 const trendingPosts = [
   {
     id: 1,
-    title: "Smart RV Systems: The Future of Mobile Living",
+    title: "Designing for Clarity: The Color Psychology Behind Modern RV Tech Interfaces",
     category: "Technology",
     author: "Sarah Johnson",
     date: "March 15, 2024",
@@ -12,7 +12,7 @@ const trendingPosts = [
   },
   {
     id: 2,
-    title: "Sustainable RV Living: Green Tech Solutions",
+    title: "Sustainable RV Living: Green Tech Solutions for the Modern Traveler",
     category: "Sustainability",
     author: "Mike Thompson",
     date: "March 10, 2024",
@@ -20,7 +20,7 @@ const trendingPosts = [
   },
   {
     id: 3,
-    title: "Essential RV Tech Upgrades for 2024",
+    title: "Essential RV Tech Upgrades for the Connected Explorer",
     category: "Gear",
     author: "Emily Parker",
     date: "March 8, 2024",
@@ -32,26 +32,31 @@ const TrendingPosts = () => {
   console.log('Rendering TrendingPosts component');
   
   return (
-    <section className="py-20 bg-[#080F1F]">
+    <section className="py-24 bg-[#080F1F]">
       <div className="max-w-7xl mx-auto px-4">
-        <h2 className="text-4xl font-bold text-white mb-12 animate-fade-up">
-          Trending Stories
-        </h2>
+        <div className="flex justify-between items-center mb-12">
+          <h2 className="text-4xl font-bold text-white animate-fade-up">
+            Trending Stories
+          </h2>
+          <a href="/blog/all" className="text-[#5B9BD5] hover:text-[#4B8FE3] transition-colors">
+            View All Posts →
+          </a>
+        </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {trendingPosts.map((post, index) => (
             <Card 
               key={post.id}
-              className="bg-[#151A22] border-[#1a202c] overflow-hidden hover:scale-105 transition-transform duration-300 animate-fade-up"
+              className="bg-[#151A22] border-[#1a202c] overflow-hidden hover:scale-105 transition-transform duration-300 animate-fade-up group"
               style={{ animationDelay: `${index * 0.2}s` }}
             >
-              <div className="relative h-48 overflow-hidden">
+              <div className="relative h-56 overflow-hidden">
                 <img 
                   src={post.image} 
                   alt={post.title}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
                 />
                 <div className="absolute top-4 right-4">
-                  <span className="bg-[#5B9BD5]/20 text-[#5B9BD5] px-3 py-1 rounded-full text-sm">
+                  <span className="bg-[#5B9BD5]/20 text-[#5B9BD5] px-4 py-2 rounded-full text-sm font-medium">
                     {post.category}
                   </span>
                 </div>
