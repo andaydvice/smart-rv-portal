@@ -39,7 +39,7 @@ export const VoiceIntroSections = () => {
       </div>
 
       <div className="w-full max-w-2xl mx-auto text-center">
-        <Separator className="mb-16" />
+        <Separator className="mb-16 opacity-20" />
         <div className="flex flex-col items-center gap-4">
           <Phone className="w-8 h-8 text-[#2E7DFF] flex-shrink-0" />
           <div>
