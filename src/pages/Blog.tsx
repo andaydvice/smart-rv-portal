@@ -2,7 +2,6 @@ import { motion } from "framer-motion";
 import BlogHeader from "@/components/blog/BlogHeader";
 import TrendingPosts from "@/components/blog/TrendingPosts";
 import NewsletterSection from "@/components/blog/NewsletterSection";
-import Navbar from "@/components/Navbar";
 
 const Blog = () => {
   console.log('Rendering Blog page');
@@ -12,9 +11,8 @@ const Blog = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.6 }}
-      className="min-h-screen bg-connectivity-bg"
+      className="min-h-screen bg-[#080F1F]"
     >
-      <Navbar />
       <div className="pt-16">
         <BlogHeader />
         <TrendingPosts />

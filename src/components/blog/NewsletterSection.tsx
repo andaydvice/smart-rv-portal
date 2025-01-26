@@ -4,6 +4,8 @@ import { Input } from "../ui/input";
 import { useToast } from "../ui/use-toast";
 
 const NewsletterSection = () => {
+  console.log('Rendering NewsletterSection component');
+  
   const { toast } = useToast();
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -15,31 +17,31 @@ const NewsletterSection = () => {
   };
 
   return (
-    <section className="py-16 bg-[#091020]">
+    <section className="py-24 bg-[#080F1F]">
       <div className="max-w-7xl mx-auto px-4">
-        <div className="bg-gradient-to-r from-connectivity-bg to-connectivity-darkBg rounded-xl p-8 md:p-12">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-8">
+        <div className="bg-gradient-to-r from-[#151A22] to-[#1a202c] rounded-2xl p-12">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-12">
             <div className="max-w-lg">
-              <h2 className="text-3xl font-bold text-white mb-4">
+              <h2 className="text-3xl font-bold text-white mb-4 animate-fade-up">
                 Stay Updated with Smart RV
               </h2>
-              <p className="text-[#E2E8FF]">
-                Subscribe to our newsletter for the latest updates on RV technology, tips, and innovations.
+              <p className="text-[#E2E8FF] animate-fade-up" style={{ animationDelay: '0.2s' }}>
+                Get the latest insights on RV technology, travel tips, and innovations delivered straight to your inbox.
               </p>
             </div>
-            <form onSubmit={handleSubmit} className="flex gap-4 w-full md:w-auto">
+            <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-4 w-full md:w-auto animate-fade-up" style={{ animationDelay: '0.4s' }}>
               <Input 
                 type="email" 
                 placeholder="Enter your email" 
-                className="bg-[#131a2a] border-[#1a202c] text-white w-full md:w-80"
+                className="bg-[#131a2a]/80 border-[#1a202c] text-white w-full sm:w-80"
                 required
               />
               <Button 
                 type="submit"
-                className="bg-connectivity-accent hover:bg-[#4B8FE3] text-white transition-colors"
+                className="bg-[#5B9BD5] hover:bg-[#4B8FE3] text-white transition-colors whitespace-nowrap"
               >
                 <Mail className="w-4 h-4 mr-2" />
-                Subscribe
+                Subscribe Now
               </Button>
             </form>
           </div>
