@@ -8,7 +8,7 @@ export const VoiceControlSystems = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div className="bg-connectivity-darkBg p-8 rounded-lg">
             <div className="flex items-center gap-3 mb-4">
-              <Mic className="w-6 h-6 text-white" />
+              <Mic className="w-6 h-6 text-connectivity-accent" />
               <h3 className="text-xl font-bold text-white">JayVoice</h3>
             </div>
             <div className="space-y-3 text-[#E2E8FF] text-sm">
@@ -24,7 +24,7 @@ export const VoiceControlSystems = () => {
 
           <div className="bg-connectivity-darkBg p-8 rounded-lg">
             <div className="flex items-center gap-3 mb-4">
-              <Cloud className="w-6 h-6 text-white" />
+              <Cloud className="w-6 h-6 text-connectivity-accent" />
               <h3 className="text-xl font-bold text-white">Power Pro</h3>
             </div>
             <div className="space-y-3 text-[#E2E8FF] text-sm">
@@ -37,7 +37,7 @@ export const VoiceControlSystems = () => {
 
           <div className="bg-connectivity-darkBg p-8 rounded-lg">
             <div className="flex items-center gap-3 mb-4">
-              <MessageSquare className="w-6 h-6 text-white" />
+              <MessageSquare className="w-6 h-6 text-connectivity-accent" />
               <h3 className="text-xl font-bold text-white">Smart Assistant</h3>
             </div>
             <div className="space-y-3 text-[#E2E8FF] text-sm">
