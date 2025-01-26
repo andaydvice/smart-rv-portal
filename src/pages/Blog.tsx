@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import Layout from "@/components/layout/Layout";
 import BlogHeader from "@/components/blog/BlogHeader";
 import TrendingPosts from "@/components/blog/TrendingPosts";
 import NewsletterSection from "@/components/blog/NewsletterSection";
@@ -9,7 +8,7 @@ const Blog = () => {
   console.log('Rendering Blog page');
   
   return (
-    <Layout>
+    <>
       <Navbar />
       <motion.div 
         initial={{ opacity: 0 }}
@@ -21,7 +20,7 @@ const Blog = () => {
         <TrendingPosts />
         <NewsletterSection />
       </motion.div>
-    </Layout>
+    </>
   );
 };
 
