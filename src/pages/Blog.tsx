@@ -8,19 +8,19 @@ const Blog = () => {
   console.log('Rendering Blog page');
   
   return (
-    <>
+    <motion.div 
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.6 }}
+      className="min-h-screen bg-connectivity-bg"
+    >
       <Navbar />
-      <motion.div 
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.6 }}
-        className="min-h-screen bg-connectivity-bg pt-16"
-      >
+      <div className="pt-16">
         <BlogHeader />
         <TrendingPosts />
         <NewsletterSection />
-      </motion.div>
-    </>
+      </div>
+    </motion.div>
   );
 };
 
