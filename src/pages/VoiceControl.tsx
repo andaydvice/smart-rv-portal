@@ -1,5 +1,6 @@
 import { HeroSection } from "../components/voice-control/HeroSection";
 import { VoiceControlSystems } from "../components/voice-control/VoiceControlSystems";
+import { VoiceIntroSections } from "../components/voice-control/VoiceIntroSections";
 import { BenefitsGrid } from "../components/voice-control/BenefitsGrid";
 import FeaturesSection from "../components/voice-control/FeaturesSection";
 
@@ -13,6 +14,7 @@ const VoiceControl = () => {
         <h2 className="text-4xl font-bold text-white text-center mt-16 mb-8">
           Voice Control Transforms Your RV Experience
         </h2>
+        <VoiceIntroSections />
         <VoiceControlSystems />
         <div className="w-full max-w-6xl mx-auto px-4 py-16 bg-[#1A1F2E33]">
           <img 
