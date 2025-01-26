@@ -4,7 +4,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import RouterProvider from "./components/router/RouterProvider";
 
-console.log('Initializing QueryClient...');
+console.log('Initializing App component...');
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -15,14 +15,11 @@ const queryClient = new QueryClient({
   },
 });
 
-// Add HMR logging
 if (import.meta.hot) {
   import.meta.hot.accept(() => {
-    console.log('App module updated, HMR accepted');
+    console.log('HMR update detected, re-rendering App...');
   });
 }
-
-console.log('QueryClient initialized');
 
 const App = () => {
   console.log('Rendering App component');
@@ -30,7 +27,7 @@ const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
-        <div>
+        <div className="min-h-screen">
           <Toaster />
           <Sonner />
           <RouterProvider />
