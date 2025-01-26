@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { SplineSceneBasic } from "./SplineSceneBasic";
 
 const BlogHeader = () => {
   return (
@@ -14,6 +15,7 @@ const BlogHeader = () => {
       <p className="text-[#E2E8FF] text-xl max-w-2xl mx-auto">
         Explore the intersection of technology and RV lifestyle with expert insights, travel tips, and smart solutions for modern adventurers.
       </p>
+      <SplineSceneBasic />
     </motion.div>
   );
 };
