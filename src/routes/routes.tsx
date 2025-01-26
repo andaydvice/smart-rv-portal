@@ -22,7 +22,6 @@ import LuxuryModel from "@/pages/models/LuxuryModel";
 import AdventureModel from "@/pages/models/AdventureModel";
 import CompactModel from "@/pages/models/CompactModel";
 import CompareModels from "@/pages/models/CompareModels";
-import Blog from "@/pages/Blog";
 
 export const routes: RouteObject[] = [
   { path: "/", element: <Index /> },
@@ -47,6 +46,5 @@ export const routes: RouteObject[] = [
   { path: "/troubleshooting", element: <Troubleshooting /> },
   { path: "/documentation", element: <Documentation /> },
   { path: "/documentation/complete", element: <CompleteDocumentation /> },
-  { path: "/calculators", element: <Calculators /> },
-  { path: "/blog", element: <Blog /> }
+  { path: "/calculators", element: <Calculators /> }
 ];
