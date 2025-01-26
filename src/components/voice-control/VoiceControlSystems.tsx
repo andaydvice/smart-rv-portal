@@ -8,8 +8,8 @@ export const VoiceControlSystems = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div className="bg-connectivity-darkBg p-8 rounded-lg">
             <div className="flex items-center gap-3 mb-4">
-              <Mic className="w-6 h-6 text-connectivity-accent" />
-              <h3 className="text-xl font-bold text-connectivity-accent">JayVoice</h3>
+              <Mic className="w-6 h-6 text-white" />
+              <h3 className="text-xl font-bold text-white">JayVoice</h3>
             </div>
             <div className="space-y-3 text-[#E2E8FF] text-sm">
               <p>JayVoice, integrated with the JAYCOMMAND system, offers advanced voice control for Jayco Smart RVs.</p>
@@ -24,8 +24,8 @@ export const VoiceControlSystems = () => {
 
           <div className="bg-connectivity-darkBg p-8 rounded-lg">
             <div className="flex items-center gap-3 mb-4">
-              <Cloud className="w-6 h-6 text-connectivity-accent" />
-              <h3 className="text-xl font-bold text-connectivity-accent">Power Pro</h3>
+              <Cloud className="w-6 h-6 text-white" />
+              <h3 className="text-xl font-bold text-white">Power Pro</h3>
             </div>
             <div className="space-y-3 text-[#E2E8FF] text-sm">
               <p>Power Pro is a best in class digitally controlled voice recognition system designed to simplify and enhance the RVing experience.</p>
@@ -37,8 +37,8 @@ export const VoiceControlSystems = () => {
 
           <div className="bg-connectivity-darkBg p-8 rounded-lg">
             <div className="flex items-center gap-3 mb-4">
-              <MessageSquare className="w-6 h-6 text-connectivity-accent" />
-              <h3 className="text-xl font-bold text-connectivity-accent">Smart Assistant</h3>
+              <MessageSquare className="w-6 h-6 text-white" />
+              <h3 className="text-xl font-bold text-white">Smart Assistant</h3>
             </div>
             <div className="space-y-3 text-[#E2E8FF] text-sm">
               <p>Smart Assistant integrates traditional voice assistant technology into RVs, enabling users to control various aspects of their vehicle and access information through simple voice commands.</p>
