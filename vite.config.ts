@@ -13,7 +13,8 @@ export default defineConfig(({ mode }) => ({
       path: '/@vite/client',
       timeout: 120000,
       host: '95549a04-cacd-4e64-a52b-ecc6aed8e361.lovableproject.com',
-      overlay: true
+      overlay: true,
+      protocol: 'wss'
     },
     watch: {
       usePolling: true,
