@@ -2,16 +2,16 @@ import { Mic, Cloud, MessageSquare } from "lucide-react";
 
 export const VoiceControlSystems = () => {
   return (
-    <section className="py-16 bg-[#1A1F2E33]">
+    <section className="py-16 bg-connectivity-bg">
       <h2 className="text-4xl font-bold text-white text-center my-12">Voice Control Systems</h2>
       <div className="max-w-6xl mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div className="bg-[rgba(26,31,46,0.95)] p-8 rounded-lg">
+          <div className="bg-connectivity-darkBg p-8 rounded-lg">
             <div className="flex items-center gap-3 mb-4">
-              <Mic className="w-8 h-8 text-[#5B9BD5]" />
-              <h3 className="text-2xl font-bold text-[#5B9BD5]">JayVoice</h3>
+              <Mic className="w-6 h-6 text-connectivity-accent" />
+              <h3 className="text-xl font-bold text-connectivity-accent">JayVoice</h3>
             </div>
-            <div className="space-y-4 text-white/90">
+            <div className="space-y-3 text-[#E2E8FF] text-sm">
               <p>JayVoice, integrated with the JAYCOMMAND system, offers advanced voice control for Jayco Smart RVs.</p>
               <p>Users activate it by saying "Jayco," causing the ceiling mounted voice receiver to light up.</p>
               <p>This centrally located receiver enables control throughout the entire RV, including living areas and bedrooms.</p>
@@ -22,12 +22,12 @@ export const VoiceControlSystems = () => {
             </div>
           </div>
 
-          <div className="bg-[rgba(26,31,46,0.95)] p-8 rounded-lg">
+          <div className="bg-connectivity-darkBg p-8 rounded-lg">
             <div className="flex items-center gap-3 mb-4">
-              <Cloud className="w-8 h-8 text-[#5B9BD5]" />
-              <h3 className="text-2xl font-bold text-[#5B9BD5]">Power Pro</h3>
+              <Cloud className="w-6 h-6 text-connectivity-accent" />
+              <h3 className="text-xl font-bold text-connectivity-accent">Power Pro</h3>
             </div>
-            <div className="space-y-4 text-white/90">
+            <div className="space-y-3 text-[#E2E8FF] text-sm">
               <p>Power Pro is a best in class digitally controlled voice recognition system designed to simplify and enhance the RVing experience.</p>
               <p>It offers complete control of RV functions through simple voice commands, a responsive mobile app, or a button based hardwired panel in the RV.</p>
               <p>The patent pending AI trained voice recognition system with natural language understanding ensures accurate command recognition, allowing users to control various aspects of their RV, including lighting, awnings, slides, and system monitoring.</p>
@@ -35,12 +35,12 @@ export const VoiceControlSystems = () => {
             </div>
           </div>
 
-          <div className="bg-[rgba(26,31,46,0.95)] p-8 rounded-lg">
+          <div className="bg-connectivity-darkBg p-8 rounded-lg">
             <div className="flex items-center gap-3 mb-4">
-              <MessageSquare className="w-8 h-8 text-[#5B9BD5]" />
-              <h3 className="text-2xl font-bold text-[#5B9BD5]">Smart Assistant</h3>
+              <MessageSquare className="w-6 h-6 text-connectivity-accent" />
+              <h3 className="text-xl font-bold text-connectivity-accent">Smart Assistant</h3>
             </div>
-            <div className="space-y-4 text-white/90">
+            <div className="space-y-3 text-[#E2E8FF] text-sm">
               <p>Smart Assistant integrates traditional voice assistant technology into RVs, enabling users to control various aspects of their vehicle and access information through simple voice commands.</p>
               <p>This system leverages natural language processing to understand and respond to user queries effectively.</p>
               <p>Users can manage climate control, lighting, entertainment systems, and even access travel information or local points of interest.</p>
