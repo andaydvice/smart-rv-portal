@@ -1,11 +1,10 @@
 import { motion } from "framer-motion";
 import BlogHeader from "@/components/blog/BlogHeader";
 import TrendingPosts from "@/components/blog/TrendingPosts";
-import NewsletterSection from "@/components/blog/NewsletterSection";
 import FeaturedCategories from "@/components/blog/FeaturedCategories";
 
 const Blog = () => {
-  console.log('Rendering Blog page - component mounted');
+  console.log('Rendering Blog page');
   
   return (
     <motion.div 
@@ -15,9 +14,8 @@ const Blog = () => {
       className="min-h-screen bg-[#080F1F]"
     >
       <BlogHeader />
-      <FeaturedCategories />
       <TrendingPosts />
-      <NewsletterSection />
+      <FeaturedCategories />
     </motion.div>
   );
 };
