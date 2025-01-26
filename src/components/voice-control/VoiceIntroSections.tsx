@@ -1,9 +1,10 @@
 import { Mic, Server, Shield, Home, Phone } from "lucide-react";
+import { Separator } from "@/components/ui/separator";
 
 export const VoiceIntroSections = () => {
   return (
     <div className="max-w-6xl mx-auto px-4 py-12">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
         <div className="flex items-start gap-4">
           <Mic className="w-8 h-8 text-[#2E7DFF] flex-shrink-0" />
           <div>
@@ -35,8 +36,11 @@ export const VoiceIntroSections = () => {
             <p className="text-white/90">Voice control is already transforming thousands of RVs across America, bringing the future of camping to life in luxury fifth wheels, travel trailers, and motorhomes.</p>
           </div>
         </div>
+      </div>
 
-        <div className="flex items-start gap-4">
+      <div className="w-full max-w-2xl mx-auto text-center">
+        <Separator className="mb-16" />
+        <div className="flex flex-col items-center gap-4">
           <Phone className="w-8 h-8 text-[#2E7DFF] flex-shrink-0" />
           <div>
             <h3 className="text-[#2E7DFF] text-xl font-semibold mb-2">Ready to Upgrade?</h3>
