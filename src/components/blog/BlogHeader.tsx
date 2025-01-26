@@ -5,14 +5,14 @@ const BlogHeader = () => {
   console.log('Rendering BlogHeader component');
   
   return (
-    <div className="w-full bg-gradient-to-b from-[#080F1F] to-[#151A22] py-32">
+    <div className="w-full bg-gradient-to-b from-[#080F1F] to-[#151A22] pt-32 pb-20">
       <div className="max-w-7xl mx-auto px-4">
         <div className="max-w-3xl">
           <h1 className="text-7xl font-bold text-white mb-6 animate-fade-up leading-tight">
-            Smart RV Living Blog
+            Discover RV Living
           </h1>
           <p className="text-xl text-[#E2E8FF] mb-12 max-w-2xl animate-fade-up opacity-90" style={{ animationDelay: '0.2s' }}>
-            Discover the latest insights, tips, and innovations in RV technology and modern mobile living.
+            Explore the latest insights on smart RV technology, sustainable travel, and modern mobile living.
           </p>
           <div className="relative max-w-lg animate-fade-up" style={{ animationDelay: '0.4s' }}>
             <Input 
