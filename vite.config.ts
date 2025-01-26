@@ -12,7 +12,8 @@ export default defineConfig(({ mode }) => ({
       clientPort: 443,
       path: '/@vite/client',
       timeout: 120000,
-      host: '95549a04-cacd-4e64-a52b-ecc6aed8e361.lovableproject.com'
+      host: '95549a04-cacd-4e64-a52b-ecc6aed8e361.lovableproject.com',
+      overlay: true
     },
     watch: {
       usePolling: true,
@@ -21,7 +22,9 @@ export default defineConfig(({ mode }) => ({
     open: false,
   },
   plugins: [
-    react(),
+    react({
+      fastRefresh: true,
+    }),
     mode === 'development' && componentTagger(),
   ].filter(Boolean),
   resolve: {
@@ -44,4 +47,7 @@ export default defineConfig(({ mode }) => ({
       },
     },
   },
+  esbuild: {
+    logOverride: { 'this-is-undefined-in-esm': 'silent' }
+  }
 }));
