@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Card } from "@/components/ui/card";
 import { Cpu, Wifi, Battery, Navigation } from "lucide-react";
+import { LampDemo } from "@/components/ui/lamp";
 
 const categories = [
   {
@@ -28,7 +29,7 @@ const categories = [
 const FeaturedCategories = () => {
   return (
     <section className="space-y-8">
-      <h2 className="text-3xl font-semibold text-white">Featured Categories</h2>
+      <LampDemo />
       
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {categories.map((category, index) => (
