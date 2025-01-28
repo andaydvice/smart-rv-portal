@@ -1,7 +1,5 @@
 import { motion } from "framer-motion";
-import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Avatar } from "@/components/ui/avatar";
 
 const featuredPosts = [
   {
@@ -30,54 +28,63 @@ const featuredPosts = [
 
 const FeaturedCategories = () => {
   return (
-    <section className="space-y-8">
-      <h2 className="text-3xl font-semibold text-white mb-8">Featured</h2>
+    <section className="space-y-12 py-8">
+      <h2 className="text-4xl font-bold text-white">Featured</h2>
       
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <div className="space-y-12">
         {featuredPosts.map((post, index) => (
           <motion.div
             key={post.title}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: index * 0.1 }}
+            className={`flex flex-col lg:flex-row gap-8 ${
+              index % 2 === 1 ? 'lg:flex-row-reverse' : ''
+            }`}
           >
-            <Card className="bg-connectivity-darkBg border-none overflow-hidden">
-              <div className="p-6 space-y-4">
-                <div className="flex justify-between items-center">
-                  <span className="bg-[#1B2028] text-white px-3 py-1 text-sm rounded-full">
+            <div className="flex-1 space-y-6">
+              <div className="space-y-4">
+                <div className="flex items-center justify-between">
+                  <span className="bg-[#1B2028] text-white px-4 py-2 text-sm rounded-full">
                     {post.category}
                   </span>
-                  <div className="flex items-center gap-2 text-sm text-[#E2E8FF]">
-                    <Avatar className="w-6 h-6">
-                      <img src={post.author.avatar} alt={post.author.name} />
-                    </Avatar>
-                    <span>{post.author.name}</span>
-                    <span>|</span>
-                    <span>{post.date}</span>
+                  <div className="flex items-center gap-2">
+                    <img 
+                      src={post.author.avatar} 
+                      alt={post.author.name}
+                      className="w-6 h-6 rounded-full"
+                    />
+                    <span className="text-[#00ffff]">{post.author.name}</span>
+                    <span className="text-gray-400">|</span>
+                    <span className="text-gray-400">{post.date}</span>
                   </div>
                 </div>
                 
-                <div className="space-y-2">
-                  <h3 className="text-2xl font-bold text-white">{post.title}</h3>
-                  <p className="text-[#E2E8FF]">{post.description}</p>
-                </div>
+                <h3 className="text-4xl font-bold text-white leading-tight">
+                  {post.title}
+                </h3>
+                <p className="text-gray-400 text-lg">
+                  {post.description}
+                </p>
                 
                 <Button 
-                  variant="ghost" 
-                  className="text-connectivity-accent hover:text-connectivity-accent/80"
+                  variant="ghost"
+                  className="bg-[#00ffff] text-black hover:bg-[#00ffff]/80 px-8 py-2 rounded-full"
                 >
                   Read More
                 </Button>
               </div>
-              
-              <div className="aspect-[16/9] overflow-hidden">
+            </div>
+            
+            <div className="flex-1">
+              <div className="rounded-3xl overflow-hidden aspect-[4/3]">
                 <img 
                   src={post.image} 
                   alt={post.title}
-                  className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                  className="w-full h-full object-cover"
                 />
               </div>
-            </Card>
+            </div>
           </motion.div>
         ))}
       </div>
