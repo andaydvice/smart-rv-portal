@@ -1,6 +1,7 @@
 import { Helmet } from "react-helmet";
 import BlogHeader from "@/components/blog/BlogHeader";
 import TrendingPosts from "@/components/blog/TrendingPosts";
+import BlogGrid from "@/components/blog/BlogGrid";
 import FeaturedCategories from "@/components/blog/FeaturedCategories";
 import NewsletterSection from "@/components/blog/NewsletterSection";
 
@@ -17,6 +18,7 @@ const Blog = () => {
       <div className="container mx-auto px-4 py-8 space-y-12">
         <BlogHeader />
         <TrendingPosts />
+        <BlogGrid />
         <FeaturedCategories />
         <NewsletterSection />
       </div>
