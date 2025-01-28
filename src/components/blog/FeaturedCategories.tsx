@@ -31,20 +31,20 @@ const FeaturedCategories = () => {
     <section className="space-y-12 py-8">
       <h2 className="text-4xl font-bold text-white">Featured</h2>
       
-      <div className="space-y-12">
+      <div className="space-y-24">
         {featuredPosts.map((post, index) => (
           <motion.div
             key={post.title}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: index * 0.1 }}
-            className={`flex flex-col lg:flex-row gap-8 ${
+            className={`flex flex-col lg:flex-row items-center gap-12 ${
               index % 2 === 1 ? 'lg:flex-row-reverse' : ''
             }`}
           >
-            <div className="flex-1 space-y-6">
-              <div className="space-y-4">
-                <div className="flex items-center justify-between">
+            <div className="flex-1 flex items-center">
+              <div className="space-y-6">
+                <div className="flex items-center gap-4">
                   <span className="bg-[#1B2028] text-white px-4 py-2 text-sm rounded-full">
                     {post.category}
                   </span>
@@ -60,7 +60,7 @@ const FeaturedCategories = () => {
                   </div>
                 </div>
                 
-                <h3 className="text-4xl font-bold text-white leading-tight">
+                <h3 className="text-5xl font-bold text-white leading-tight">
                   {post.title}
                 </h3>
                 <p className="text-gray-400 text-lg">
