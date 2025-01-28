@@ -28,8 +28,10 @@ const featuredPosts = [
 
 const FeaturedCategories = () => {
   return (
-    <section className="space-y-12 py-8">
-      <h2 className="text-4xl font-bold text-white">Featured</h2>
+    <section className="space-y-8 py-8">
+      <div className="border-b border-gray-800 pb-2">
+        <h2 className="text-2xl font-medium text-white">Featured</h2>
+      </div>
       
       <div className="space-y-24">
         {featuredPosts.map((post, index) => (
