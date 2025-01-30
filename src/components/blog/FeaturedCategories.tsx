@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 const featuredPosts = [
   {
     category: "Culture",
-    title: "The Digital Age",
+    title: "RV Smart Tech",
     description: "In an era characterized by rapid globalization and technological advancement.",
     author: {
       name: "Jen Taylor",
