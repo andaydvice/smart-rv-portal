@@ -27,6 +27,8 @@ const featuredPosts = [
 ];
 
 const FeaturedCategories = () => {
+  console.log("Rendering FeaturedCategories with posts:", featuredPosts);
+  
   return (
     <section className="space-y-8 py-8">
       <div className="border-b border-gray-800 pb-2">
