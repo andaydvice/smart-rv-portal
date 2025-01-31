@@ -22,7 +22,8 @@ const blogPosts: BlogPost[] = [
     },
     date: 'Sep 16',
     title: 'Sustainable Travel Redefined',
-    description: 'Where eco-friendly design meets intelligent mobile home solutions.'
+    description: 'Where eco-friendly design meets intelligent mobile home solutions.',
+    image: '/lovable-uploads/72144d64-5f93-4ee2-8187-e495f556f206.png'
   }
 ];
 
@@ -94,6 +95,13 @@ export default function BlogGrid() {
         {/* Right Column - Eco Tech */}
         <div className="flex flex-col gap-4">
           <div className="rounded-2xl overflow-hidden">
+            {blogPosts[1].image ? (
+              <img 
+                src={blogPosts[1].image} 
+                alt="Sustainable RV Travel"
+                className="w-full h-auto object-cover"
+              />
+            ) : (
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
               <defs>
                 <linearGradient id="eco-gradient" x1="0" y1="0" x2="1" y2="1">
@@ -123,6 +131,7 @@ export default function BlogGrid() {
                     fill="none" 
                     opacity="0.6"/>
             </svg>
+            )}
           </div>
           
           <div>
