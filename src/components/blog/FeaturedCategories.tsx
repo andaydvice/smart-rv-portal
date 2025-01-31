@@ -15,7 +15,7 @@ const featuredPosts = [
   },
   {
     category: "Technology",
-    title: "The 5G Technology",
+    title: "Indoor RV Storage",
     description: "The world of technology is continually evolving, and the rollout of 5G.",
     author: {
       name: "Jason Williams",
