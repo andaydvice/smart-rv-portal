@@ -12,7 +12,7 @@ const blogPosts: BlogPost[] = [
     date: 'Sep 16',
     title: 'The Future of Mobile Living',
     description: 'Smart RVs are revolutionizing how we experience life on the road.',
-    image: '/lovable-uploads/f3ebf58c-7bbf-427f-9510-9c3b0aec6f6d.png'
+    image: '/lovable-uploads/80ea47f5-5b04-409f-8eb7-1da434a9e0de.png'
   },
   {
     category: 'Technology',
@@ -33,41 +33,43 @@ export default function BlogGrid() {
         {/* Left Column - Modern RV */}
         <div className="flex flex-col gap-4">
           <div className="rounded-2xl overflow-hidden">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
-              {/* Modern tech background */}
-              <defs>
-                <linearGradient id="tech-bg" x1="0" y1="0" x2="1" y2="1">
-                  <stop offset="0%" stopColor="#1E3B70"/>
-                  <stop offset="100%" stopColor="#1E90FF"/>
-                </linearGradient>
-                <linearGradient id="window-gradient" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor="#FFFFFF" stopOpacity="0.9"/>
-                  <stop offset="100%" stopColor="#FFFFFF" stopOpacity="0.4"/>
-                </linearGradient>
-              </defs>
-              
-              {/* Background */}
-              <rect width="400" height="300" fill="url(#tech-bg)"/>
-              
-              {/* Modern RV Shape */}
-              <path d="M50 200 L300 200 L350 150 L350 200 L50 200" 
-                    fill="#2A4A8F" 
-                    stroke="#4A90E2" 
-                    strokeWidth="2"/>
-              
-              {/* Smart Windows */}
-              <rect x="100" y="160" width="40" height="25" fill="url(#window-gradient)" rx="2"/>
-              <rect x="150" y="160" width="40" height="25" fill="url(#window-gradient)" rx="2"/>
-              <rect x="200" y="160" width="40" height="25" fill="url(#window-gradient)" rx="2"/>
-              
-              {/* Tech Elements */}
-              <circle cx="320" cy="80" r="20" fill="#4A90E2" opacity="0.8"/>
-              <circle cx="340" cy="60" r="10" fill="#4A90E2" opacity="0.6"/>
-              
-              {/* Connection Lines */}
-              <path d="M320 80 L340 60" stroke="#FFFFFF" strokeWidth="1" opacity="0.5"/>
-              <path d="M320 80 L300 100" stroke="#FFFFFF" strokeWidth="1" opacity="0.5"/>
-            </svg>
+            {blogPosts[0].image ? (
+              <img 
+                src={blogPosts[0].image} 
+                alt="Modern RV Interior"
+                className="w-full h-auto object-cover"
+              />
+            ) : (
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+                <defs>
+                  <linearGradient id="tech-bg" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0%" stopColor="#1E3B70"/>
+                    <stop offset="100%" stopColor="#1E90FF"/>
+                  </linearGradient>
+                  <linearGradient id="window-gradient" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stopColor="#FFFFFF" stopOpacity="0.9"/>
+                    <stop offset="100%" stopColor="#FFFFFF" stopOpacity="0.4"/>
+                  </linearGradient>
+                </defs>
+                
+                <rect width="400" height="300" fill="url(#tech-bg)"/>
+                
+                <path d="M50 200 L300 200 L350 150 L350 200 L50 200" 
+                      fill="#2A4A8F" 
+                      stroke="#4A90E2" 
+                      strokeWidth="2"/>
+                
+                <rect x="100" y="160" width="40" height="25" fill="url(#window-gradient)" rx="2"/>
+                <rect x="150" y="160" width="40" height="25" fill="url(#window-gradient)" rx="2"/>
+                <rect x="200" y="160" width="40" height="25" fill="url(#window-gradient)" rx="2"/>
+                
+                <circle cx="320" cy="80" r="20" fill="#4A90E2" opacity="0.8"/>
+                <circle cx="340" cy="60" r="10" fill="#4A90E2" opacity="0.6"/>
+                
+                <path d="M320 80 L340 60" stroke="#FFFFFF" strokeWidth="1" opacity="0.5"/>
+                <path d="M320 80 L300 100" stroke="#FFFFFF" strokeWidth="1" opacity="0.5"/>
+              </svg>
+            )}
           </div>
           
           <div>
@@ -104,21 +106,17 @@ export default function BlogGrid() {
                 </linearGradient>
               </defs>
               
-              {/* Eco Background */}
               <rect width="400" height="300" fill="url(#eco-gradient)"/>
               
-              {/* Solar Panels */}
               <rect x="100" y="80" width="200" height="100" fill="url(#solar-gradient)" rx="5"/>
               <path d="M100 105 L300 105" stroke="#FFFFFF" strokeWidth="1" opacity="0.5"/>
               <path d="M100 130 L300 130" stroke="#FFFFFF" strokeWidth="1" opacity="0.5"/>
               <path d="M100 155 L300 155" stroke="#FFFFFF" strokeWidth="1" opacity="0.5"/>
               
-              {/* Energy Indicators */}
               <circle cx="320" cy="60" r="15" fill="#FFFFFF" opacity="0.8"/>
               <circle cx="350" cy="80" r="10" fill="#FFFFFF" opacity="0.6"/>
               <circle cx="330" cy="100" r="8" fill="#FFFFFF" opacity="0.4"/>
               
-              {/* Eco Symbols */}
               <path d="M50 150 C100 100, 150 200, 200 150" 
                     stroke="#FFFFFF" 
                     strokeWidth="2" 
