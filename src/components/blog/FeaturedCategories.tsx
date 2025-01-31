@@ -22,7 +22,7 @@ const featuredPosts = [
       avatar: "/placeholder.svg"
     },
     date: "Sep 15, 2023",
-    image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1000&auto=format&fit=crop"
+    image: "/lovable-uploads/c25a3800-323e-4e21-9402-72b27002e767.png"
   }
 ];
 
