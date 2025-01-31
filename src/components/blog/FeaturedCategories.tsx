@@ -11,7 +11,7 @@ const featuredPosts = [
       avatar: "/placeholder.svg"
     },
     date: "Sep 16, 2023",
-    image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1000&auto=format&fit=crop"
+    image: "/lovable-uploads/11a2f8d8-22f5-4ed7-83f9-28b08a64aeb5.png"
   },
   {
     category: "Technology",
