@@ -11,7 +11,8 @@ const blogPosts: BlogPost[] = [
     },
     date: 'Sep 16',
     title: 'The Future of Mobile Living',
-    description: 'Smart RVs are revolutionizing how we experience life on the road.'
+    description: 'Smart RVs are revolutionizing how we experience life on the road.',
+    image: '/lovable-uploads/f3ebf58c-7bbf-427f-9510-9c3b0aec6f6d.png'
   },
   {
     category: 'Technology',
