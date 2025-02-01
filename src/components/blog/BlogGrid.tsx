@@ -28,17 +28,18 @@ const blogPosts: BlogPost[] = [
 ];
 
 export default function BlogGrid() {
+  console.log("Rendering BlogGrid with posts:", blogPosts);
+  
   return (
     <div className="p-6">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <BlogPostCard 
-          post={blogPosts[0]} 
-          imageAlt="Modern RV Interior"
-        />
-        <BlogPostCard 
-          post={blogPosts[1]} 
-          imageAlt="Sustainable RV Travel"
-        />
+        {blogPosts.map((post, index) => (
+          <BlogPostCard 
+            key={post.title}
+            post={post} 
+            imageAlt={post.title}
+          />
+        ))}
       </div>
     </div>
   );
