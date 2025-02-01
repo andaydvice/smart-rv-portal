@@ -86,6 +86,8 @@ const BlogPost = () => {
     );
   }
 
+  console.log('BlogPost - Rendering post:', post.title);
+  
   return (
     <div className="min-h-screen bg-[#080F1F]">
       <Helmet>
