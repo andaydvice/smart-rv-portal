@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { BlogPost } from '@/types/blog';
 import { Button } from '@/components/ui/button';
 
@@ -8,8 +9,15 @@ interface BlogPostCardProps {
 }
 
 const BlogPostCard = ({ post, imageAlt }: BlogPostCardProps) => {
+  const navigate = useNavigate();
+  
   const getCategoryDisplay = (category: string) => {
     return category.charAt(0).toUpperCase() + category.slice(1).toLowerCase();
+  };
+
+  const handleReadMore = () => {
+    console.log("Navigating to blog post:", post.slug);
+    navigate(`/blog/${post.slug}`);
   };
 
   return (
@@ -40,6 +48,7 @@ const BlogPostCard = ({ post, imageAlt }: BlogPostCardProps) => {
           <Button 
             variant="ghost"
             className="bg-[#00ffff] text-black hover:bg-[#00ffff]/80 px-8 py-2 rounded-full"
+            onClick={handleReadMore}
           >
             Read More
           </Button>

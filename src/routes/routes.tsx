@@ -23,6 +23,7 @@ import AdventureModel from "@/pages/models/AdventureModel";
 import CompactModel from "@/pages/models/CompactModel";
 import CompareModels from "@/pages/models/CompareModels";
 import Blog from "@/pages/Blog";
+import BlogPost from "@/pages/BlogPost";
 
 export const routes: RouteObject[] = [
   { path: "/", element: <Index /> },
@@ -48,5 +49,6 @@ export const routes: RouteObject[] = [
   { path: "/documentation", element: <Documentation /> },
   { path: "/documentation/complete", element: <CompleteDocumentation /> },
   { path: "/calculators", element: <Calculators /> },
-  { path: "/blog", element: <Blog /> }
+  { path: "/blog", element: <Blog /> },
+  { path: "/blog/:slug", element: <BlogPost /> }
 ];
