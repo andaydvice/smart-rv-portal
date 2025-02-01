@@ -71,13 +71,13 @@ const TrendingPosts = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: index * 0.1 }}
           >
-            <Card className="bg-connectivity-darkBg border-connectivity-accent/20 overflow-hidden hover:border-connectivity-accent/40 transition-colors">
+            <Card className="overflow-hidden hover:border-connectivity-accent/40 transition-colors">
               <img 
                 src={post.image} 
                 alt={post.title}
                 className="w-full h-48 object-cover"
               />
-              <div className="p-6 space-y-4">
+              <div className="p-6 space-y-4 bg-[#080f20]">
                 <h3 className="text-xl font-semibold text-white">{post.title}</h3>
                 <p className="text-[#E2E8FF] text-sm">{post.excerpt}</p>
                 <div className="flex justify-between items-center text-sm text-[#E2E8FF]/60">
