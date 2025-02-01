@@ -3,8 +3,45 @@ import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Mail } from "lucide-react";
+import { useState } from "react";
+import { useToast } from "@/hooks/use-toast";
 
 const NewsletterSection = () => {
+  const [email, setEmail] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const { toast } = useToast();
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    
+    console.log("Submitting email:", email);
+    
+    // Here you would typically make an API call to your backend
+    // For now, we'll simulate a successful subscription
+    try {
+      await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate API call
+      
+      toast({
+        title: "Successfully subscribed!",
+        description: "Thank you for subscribing to our newsletter.",
+        duration: 5000,
+      });
+      
+      setEmail("");
+    } catch (error) {
+      console.error("Subscription error:", error);
+      toast({
+        title: "Subscription failed",
+        description: "Please try again later.",
+        variant: "destructive",
+        duration: 5000,
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <motion.section
       initial={{ opacity: 0, y: 20 }}
@@ -28,16 +65,23 @@ const NewsletterSection = () => {
             </p>
           </div>
           
-          <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+          <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
             <Input 
               type="email" 
               placeholder="Enter your email" 
               className="bg-connectivity-bg border-connectivity-accent/20 text-white placeholder:text-[#E2E8FF]/60"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
             />
-            <Button className="bg-connectivity-accent text-white hover:bg-connectivity-accent/80">
-              Subscribe
+            <Button 
+              type="submit" 
+              className="bg-connectivity-accent text-white hover:bg-connectivity-accent/80"
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? "Subscribing..." : "Subscribe"}
             </Button>
-          </div>
+          </form>
         </div>
       </Card>
     </motion.section>
