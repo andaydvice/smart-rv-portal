@@ -11,7 +11,7 @@ const featuredPosts = [
   {
     category: "Technology",
     title: "Indoor RV Storage",
-    description: "The world of technology is continually evolving, and the rollout of 5G.",
+    description: "Discover premium climate controlled indoor RV storage solutions that protect your investment year round. Our state of the art facilities offer advanced security systems and easy access, ensuring your RV stays in pristine condition between adventures.",
     image: "/lovable-uploads/c25a3800-323e-4e21-9402-72b27002e767.png"
   }
 ];
