@@ -50,7 +50,7 @@ export default function BlogPostCard({ post, imageAlt }: BlogPostCardProps) {
         )}
       </div>
       
-      <div>
+      <div className="bg-[#080f20] p-6 rounded-lg border border-white/20">
         <div className="flex justify-between items-center mb-3">
           <span className="bg-connectivity-darkBg text-white px-3 py-1 text-sm rounded-full">
             {post.category}
