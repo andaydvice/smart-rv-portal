@@ -15,8 +15,9 @@ const BlogPostCard = ({ post }: BlogPostCardProps) => {
   };
 
   const handleReadMore = () => {
-    console.log("BlogPostCard - Navigating to:", `/blog/${post.slug}`);
-    navigate(`/blog/${post.slug}`);
+    const path = `/blog/${post.slug}`;
+    console.log("BlogPostCard - Navigating to:", path);
+    navigate(path);
   };
 
   return (

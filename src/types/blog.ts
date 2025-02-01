@@ -8,5 +8,5 @@ export interface BlogPost {
   description: string;
   image: string;
   slug: string;
-  content?: string;
+  content: string;
 }
