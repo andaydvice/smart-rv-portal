@@ -25,8 +25,10 @@ const featuredPosts = [
 ];
 
 const FeaturedCategories = () => {
-  console.log("Rendering FeaturedCategories with posts:", featuredPosts);
-  
+  const getCategoryDisplay = (category: string) => {
+    return category.charAt(0).toUpperCase() + category.slice(1).toLowerCase();
+  };
+
   return (
     <section className="space-y-8 py-8">
       <div className="border-b border-gray-800 pb-2">
@@ -48,7 +50,7 @@ const FeaturedCategories = () => {
               <div className="space-y-6">
                 <div className="flex items-center gap-4">
                   <span className="bg-[#1B2028] text-white px-4 py-2 text-sm rounded-full">
-                    {post.category}
+                    {getCategoryDisplay(post.category)}
                   </span>
                   <div className="flex items-center gap-2">
                     <img 

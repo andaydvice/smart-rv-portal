@@ -39,6 +39,10 @@ const TrendingPosts = ({ activeCategory, onCategoryChange }: TrendingPostsProps)
   console.log("TrendingPosts - Active Category:", activeCategory);
   console.log("TrendingPosts - Filtered Posts:", filteredPosts);
 
+  const getCategoryDisplay = (category: string) => {
+    return category.charAt(0).toUpperCase() + category.slice(1).toLowerCase();
+  };
+
   return (
     <section className="space-y-8 p-6">
       <div className="flex justify-between items-center">

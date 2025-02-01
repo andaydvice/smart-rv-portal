@@ -8,6 +8,10 @@ interface BlogPostCardProps {
 }
 
 const BlogPostCard = ({ post, imageAlt }: BlogPostCardProps) => {
+  const getCategoryDisplay = (category: string) => {
+    return category.charAt(0).toUpperCase() + category.slice(1).toLowerCase();
+  };
+
   return (
     <div className="space-y-4">
       <div className="rounded-3xl overflow-hidden">
@@ -22,7 +26,7 @@ const BlogPostCard = ({ post, imageAlt }: BlogPostCardProps) => {
         <div className="space-y-4">
           <div className="flex items-center gap-4">
             <span className="bg-[#1B2028] text-white px-4 py-2 text-sm rounded-full">
-              {post.category}
+              {getCategoryDisplay(post.category)}
             </span>
             <div className="flex items-center gap-2">
               <div className="bg-[#1B2028] w-8 h-8 rounded-full flex items-center justify-center text-[#00ffff]">
