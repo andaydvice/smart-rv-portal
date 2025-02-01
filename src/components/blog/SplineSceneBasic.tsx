@@ -22,7 +22,7 @@ export function SplineSceneBasic() {
             Discover how modern technology transforms your RV adventures. Experience the perfect blend of comfort and innovation on the road.
           </p>
           
-          <div className="mt-6 space-y-4 text-white font-bold">
+          <div className="mt-6 space-y-4 text-white">
             <p className="text-left">
               Explore the future of mobile living with insights that bridge the gap between technology and the great outdoors.
             </p>
