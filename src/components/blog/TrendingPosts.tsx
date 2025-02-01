@@ -35,7 +35,7 @@ const TrendingPosts = () => {
     : posts.filter(post => post.category === activeCategory);
 
   return (
-    <section className="space-y-8">
+    <section className="space-y-8 bg-[#1f0f57] p-6">
       <div className="flex justify-between items-center">
         <h2 className="text-3xl font-semibold text-white">Trending Posts</h2>
         <div className="flex gap-2">
