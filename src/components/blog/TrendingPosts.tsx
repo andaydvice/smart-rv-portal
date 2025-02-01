@@ -15,11 +15,11 @@ const TrendingPosts = () => {
       image: "/lovable-uploads/d3b696f0-39e5-4cfa-b38c-6579325a495a.png"
     },
     {
-      title: "Solar Power Solutions for Full-Time RVers",
+      title: "Solar Power Solutions for Full Time RVers",
       excerpt: "Complete guide to planning and installing a solar power system in your RV.",
       category: "tech",
       readTime: "12 min read",
-      image: "https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&q=80&w=300"
+      image: "/lovable-uploads/51ac2438-08c7-47ee-b56d-876aa3bbdc80.png"
     },
     {
       title: "Remote Work from Your RV: Essential Setup Guide",
