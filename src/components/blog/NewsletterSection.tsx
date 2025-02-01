@@ -23,7 +23,7 @@ const NewsletterSection = () => {
     try {
       const { error } = await supabase
         .from('newsletter_subscribers')
-        .insert([{ email, subscribed_at: new Date().toISOString() }]);
+        .insert([{ email }]);
 
       if (error) throw error;
       
