@@ -13,7 +13,7 @@ const NewsletterSection = () => {
   const { toast } = useToast();
 
   useEffect(() => {
-    // Set up real-time subscription listener
+    console.log("Setting up real-time subscription listener");
     const channel = supabase
       .channel('public:newsletter_subscribers')
       .on(
@@ -24,11 +24,12 @@ const NewsletterSection = () => {
           table: 'newsletter_subscribers'
         },
         (payload) => {
-          console.log('New subscriber:', payload.new);
+          console.log('New subscriber detected:', payload.new);
           toast({
-            title: "New Newsletter Subscriber!",
-            description: `${payload.new.email} just subscribed to the newsletter.`,
+            title: "🎉 New Newsletter Subscriber!",
+            description: `${payload.new.email} just subscribed to our newsletter.`,
             duration: 5000,
+            className: "bg-connectivity-accent text-white",
           });
         }
       )
@@ -36,6 +37,7 @@ const NewsletterSection = () => {
 
     // Cleanup subscription on component unmount
     return () => {
+      console.log("Cleaning up subscription listener");
       supabase.removeChannel(channel);
     };
   }, [toast]);
@@ -44,7 +46,7 @@ const NewsletterSection = () => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    console.log("Submitting email to Supabase:", email);
+    console.log("Attempting to submit email to Supabase:", email);
     
     try {
       const { error } = await supabase
@@ -53,19 +55,20 @@ const NewsletterSection = () => {
 
       if (error) throw error;
       
-      console.log("Successfully stored email in Supabase");
+      console.log("Successfully stored email in Supabase:", email);
       
       toast({
-        title: "Successfully subscribed!",
+        title: "✅ Successfully subscribed!",
         description: "Thank you for subscribing to our newsletter.",
         duration: 5000,
+        className: "bg-green-600 text-white",
       });
       
       setEmail("");
     } catch (error) {
       console.error("Subscription error:", error);
       toast({
-        title: "Subscription failed",
+        title: "❌ Subscription failed",
         description: "Please try again later.",
         variant: "destructive",
         duration: 5000,
