@@ -108,7 +108,7 @@ const TrendingPosts = ({ activeCategory, onCategoryChange }: TrendingPostsProps)
                 <h3 className="text-xl font-semibold text-white">{post.title}</h3>
                 <p className="text-[#E2E8FF] text-sm">{post.excerpt}</p>
                 <div className="flex justify-between items-center text-sm text-[#E2E8FF]/60">
-                  <span>{post.category.toUpperCase()}</span>
+                  <span>{getCategoryDisplay(post.category)}</span>
                   <span>{post.readTime}</span>
                 </div>
                 <Button 
