@@ -49,8 +49,8 @@ const TrendingPosts = ({ activeCategory, onCategoryChange }: TrendingPostsProps)
             onClick={() => onCategoryChange('all')}
             className={`
               ${activeCategory === 'all' 
-                ? 'bg-[#00ffff] text-white hover:bg-[#00ffff]/80 hover:text-white' 
-                : 'border-[#00ffff] text-[#00ffff] hover:bg-[#00ffff]/10 hover:text-white'
+                ? 'bg-[#00ffff] text-black hover:bg-[#00ffff]/80' 
+                : 'border-[#00ffff] text-[#00ffff] hover:bg-[#00ffff]/10'
               }
             `}
           >
@@ -61,8 +61,8 @@ const TrendingPosts = ({ activeCategory, onCategoryChange }: TrendingPostsProps)
             onClick={() => onCategoryChange('tech')}
             className={`
               ${activeCategory === 'tech' 
-                ? 'bg-[#00ffff] text-white hover:bg-[#00ffff]/80 hover:text-white' 
-                : 'border-[#00ffff] text-[#00ffff] hover:bg-[#00ffff]/10 hover:text-white'
+                ? 'bg-[#00ffff] text-black hover:bg-[#00ffff]/80' 
+                : 'border-[#00ffff] text-[#00ffff] hover:bg-[#00ffff]/10'
               }
             `}
           >
@@ -73,8 +73,8 @@ const TrendingPosts = ({ activeCategory, onCategoryChange }: TrendingPostsProps)
             onClick={() => onCategoryChange('travel')}
             className={`
               ${activeCategory === 'travel' 
-                ? 'bg-[#00ffff] text-white hover:bg-[#00ffff]/80 hover:text-white' 
-                : 'border-[#00ffff] text-[#00ffff] hover:bg-[#00ffff]/10 hover:text-white'
+                ? 'bg-[#00ffff] text-black hover:bg-[#00ffff]/80' 
+                : 'border-[#00ffff] text-[#00ffff] hover:bg-[#00ffff]/10'
               }
             `}
           >
