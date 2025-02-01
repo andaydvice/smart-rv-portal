@@ -52,10 +52,10 @@ const NewsletterSection = () => {
         .from('newsletter_subscribers')
         .insert([{ email }]);
 
-      console.log("Supabase response error:", error);
-
       if (error) {
-        // Check specifically for duplicate email error
+        console.log("Supabase error response:", error);
+        
+        // Check for duplicate email error (code 23505)
         if (error.code === '23505') {
           console.log("Duplicate email detected:", email);
           toast({
@@ -66,7 +66,12 @@ const NewsletterSection = () => {
           });
         } else {
           console.error("Non-duplicate error occurred:", error);
-          throw error;
+          toast({
+            title: "❌ Subscription failed",
+            description: "Please try again later.",
+            variant: "destructive",
+            duration: 5000,
+          });
         }
       } else {
         console.log("Successfully stored email in Supabase:", email);
