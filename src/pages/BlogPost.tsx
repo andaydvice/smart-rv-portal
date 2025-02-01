@@ -8,7 +8,11 @@ const BlogPost = () => {
   const { slug } = useParams();
   const navigate = useNavigate();
   
-  console.log("BlogPost - Slug:", slug);
+  console.log({
+    pathname: window.location.pathname,
+    slug: useParams().slug,
+    postFound: blogPosts.some(p => p.slug === useParams().slug)
+  });
 
   const blogPosts = [
     {
