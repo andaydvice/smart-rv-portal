@@ -16,7 +16,8 @@ const BlogGrid = ({ activeCategory }: BlogGridProps) => {
       title: 'The Future of Mobile Living',
       description: 'Smart RVs are revolutionizing how we experience life on the road.',
       image: '/lovable-uploads/80ea47f5-5b04-409f-8eb7-1da434a9e0de.png',
-      slug: 'future-of-mobile-living'
+      slug: 'future-of-mobile-living',
+      content: 'Smart RVs are revolutionizing how we experience life on the road. With advanced technology integration and innovative design solutions, the future of mobile living is here.'
     },
     {
       category: 'travel',
@@ -27,7 +28,8 @@ const BlogGrid = ({ activeCategory }: BlogGridProps) => {
       title: 'Sustainable Travel Redefined',
       description: 'Where eco friendly design meets intelligent mobile home solutions.',
       image: '/lovable-uploads/72144d64-5f93-4ee2-8187-e495f556f206.png',
-      slug: 'sustainable-travel-redefined'
+      slug: 'sustainable-travel-redefined',
+      content: 'The intersection of eco friendly design and intelligent mobile home solutions is creating a new paradigm in sustainable travel.'
     },
     {
       category: 'tech',
@@ -38,7 +40,8 @@ const BlogGrid = ({ activeCategory }: BlogGridProps) => {
       title: 'RV Smart Tech',
       description: 'Discover the latest smart technology innovations for your RV.',
       image: '/lovable-uploads/80ea47f5-5b04-409f-8eb7-1da434a9e0de.png',
-      slug: 'rv-smart-tech' // Ensuring this matches exactly
+      slug: 'rv-smart-tech',
+      content: 'Explore the cutting-edge smart technology innovations transforming the RV experience. From automated systems to intelligent monitoring solutions, learn how modern tech is making RV living more comfortable and efficient.'
     },
     {
       category: 'tech',
@@ -49,7 +52,8 @@ const BlogGrid = ({ activeCategory }: BlogGridProps) => {
       title: 'Indoor RV Storage',
       description: 'Everything you need to know about indoor RV storage solutions.',
       image: '/lovable-uploads/72144d64-5f93-4ee2-8187-e495f556f206.png',
-      slug: 'indoor-rv-storage' // Ensuring this matches exactly
+      slug: 'indoor-rv-storage',
+      content: 'A comprehensive guide to indoor RV storage solutions. Learn about climate-controlled facilities, maintenance considerations, and how to protect your investment during storage periods.'
     }
   ];
 
@@ -66,7 +70,7 @@ const BlogGrid = ({ activeCategory }: BlogGridProps) => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {filteredPosts.map((post) => (
           <BlogPostCard 
-            key={post.slug} // Changed to use slug as key instead of title
+            key={post.slug}
             post={post}
           />
         ))}

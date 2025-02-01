@@ -5,10 +5,9 @@ import { Button } from '@/components/ui/button';
 
 interface BlogPostCardProps {
   post: BlogPost;
-  imageAlt?: string;
 }
 
-const BlogPostCard = ({ post, imageAlt = post.title }: BlogPostCardProps) => {
+const BlogPostCard = ({ post }: BlogPostCardProps) => {
   const navigate = useNavigate();
   
   const getCategoryDisplay = (category: string) => {
@@ -16,7 +15,7 @@ const BlogPostCard = ({ post, imageAlt = post.title }: BlogPostCardProps) => {
   };
 
   const handleReadMore = () => {
-    console.log("BlogPostCard - Navigating to:", post.slug);
+    console.log("BlogPostCard - Navigating to:", `/blog/${post.slug}`);
     navigate(`/blog/${post.slug}`);
   };
 
@@ -25,7 +24,7 @@ const BlogPostCard = ({ post, imageAlt = post.title }: BlogPostCardProps) => {
       <div className="rounded-3xl overflow-hidden">
         <img 
           src={post.image} 
-          alt={imageAlt}
+          alt={post.title}
           className="w-full h-[300px] object-cover"
         />
       </div>

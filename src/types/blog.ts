@@ -6,7 +6,7 @@ export interface BlogPost {
   };
   title: string;
   description: string;
-  image?: string;
+  image: string;
   slug: string;
   content?: string;
 }
