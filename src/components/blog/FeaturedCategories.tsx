@@ -6,20 +6,12 @@ const featuredPosts = [
     category: "Culture",
     title: "RV Smart Tech",
     description: "In an era characterized by rapid globalization and technological advancement.",
-    author: {
-      name: "Jen Taylor",
-      avatar: "/placeholder.svg"
-    },
     image: "/lovable-uploads/11a2f8d8-22f5-4ed7-83f9-28b08a64aeb5.png"
   },
   {
     category: "Technology",
     title: "Indoor RV Storage",
     description: "The world of technology is continually evolving, and the rollout of 5G.",
-    author: {
-      name: "Jason Williams",
-      avatar: "/placeholder.svg"
-    },
     image: "/lovable-uploads/c25a3800-323e-4e21-9402-72b27002e767.png"
   }
 ];
@@ -52,14 +44,6 @@ const FeaturedCategories = () => {
                   <span className="bg-[#1B2028] text-white px-4 py-2 text-sm rounded-full">
                     {getCategoryDisplay(post.category)}
                   </span>
-                  <div className="flex items-center gap-2">
-                    <img 
-                      src={post.author.avatar} 
-                      alt={post.author.name}
-                      className="w-6 h-6 rounded-full"
-                    />
-                    <span className="text-[#00ffff]">{post.author.name}</span>
-                  </div>
                 </div>
                 
                 <h3 className="text-5xl font-bold text-white leading-tight">
