@@ -21,6 +21,21 @@ export function SplineSceneBasic() {
           <p className="mt-4 text-neutral-300 max-w-lg text-left">
             Discover how modern technology transforms your RV adventures. Experience the perfect blend of comfort and innovation on the road.
           </p>
+          
+          <div className="mt-6 space-y-4 text-white font-bold max-w-lg">
+            <p>
+              Explore the future of mobile living with insights that bridge the gap between technology and the great outdoors.
+            </p>
+            <p>
+              Our comprehensive guides showcase innovative features, from smart connectivity, energy efficient designs through advanced navigation systems to modern home comforts that are transforming the RV lifestyle.
+            </p>
+            <p>
+              Whether you're planning your next adventure or upgrading your current setup, you'll find practical tips, inspiring stories, and the latest trends that empower you to make every journey extraordinary.
+            </p>
+            <p>
+              Dive in to discover how modern technology can elevate your experience on the road, offering both reliability and luxury at every turn.
+            </p>
+          </div>
         </div>
 
         {/* Right content */}
