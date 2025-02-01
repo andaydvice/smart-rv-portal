@@ -5,10 +5,10 @@ import { Button } from '@/components/ui/button';
 
 interface BlogPostCardProps {
   post: BlogPost;
-  imageAlt: string;
+  imageAlt?: string;
 }
 
-const BlogPostCard = ({ post, imageAlt }: BlogPostCardProps) => {
+const BlogPostCard = ({ post, imageAlt = post.title }: BlogPostCardProps) => {
   const navigate = useNavigate();
   
   const getCategoryDisplay = (category: string) => {

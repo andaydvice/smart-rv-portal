@@ -64,8 +64,12 @@ const BlogGrid = ({ activeCategory }: BlogGridProps) => {
     <section className="space-y-8">
       <h2 className="text-3xl font-semibold text-white">Latest Posts</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {filteredPosts.map((post, index) => (
-          <BlogPostCard key={post.title} post={post} index={index} />
+        {filteredPosts.map((post) => (
+          <BlogPostCard 
+            key={post.title} 
+            post={post} 
+            imageAlt={post.title}
+          />
         ))}
       </div>
     </section>
