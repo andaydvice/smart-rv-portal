@@ -8,12 +8,6 @@ const BlogPost = () => {
   const { slug } = useParams();
   const navigate = useNavigate();
   
-  console.log({
-    pathname: window.location.pathname,
-    slug: useParams().slug,
-    postFound: blogPosts.some(p => p.slug === useParams().slug)
-  });
-
   const blogPosts = [
     {
       category: 'tech',
@@ -64,6 +58,12 @@ const BlogPost = () => {
       content: 'A comprehensive guide to indoor RV storage solutions. Learn about climate-controlled facilities, maintenance considerations, and how to protect your investment during storage periods.'
     }
   ];
+
+  console.log({
+    pathname: window.location.pathname,
+    slug: useParams().slug,
+    postFound: blogPosts.some(p => p.slug === useParams().slug)
+  });
 
   const post = blogPosts.find(post => post.slug === slug);
 
