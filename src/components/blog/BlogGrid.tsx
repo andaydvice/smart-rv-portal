@@ -20,7 +20,7 @@ const blogPosts: BlogPost[] = [
       name: 'Alice Smith'
     },
     title: 'Sustainable Travel Redefined',
-    description: 'Where eco-friendly design meets intelligent mobile home solutions.',
+    description: 'Where eco friendly design meets intelligent mobile home solutions.',
     image: '/lovable-uploads/72144d64-5f93-4ee2-8187-e495f556f206.png'
   }
 ];
