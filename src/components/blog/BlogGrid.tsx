@@ -4,7 +4,7 @@ import BlogPostCard from './BlogPostCard';
 
 const blogPosts: BlogPost[] = [
   {
-    category: 'Innovation',
+    category: 'tech',
     author: {
       initials: 'JD',
       name: 'John Doe'
@@ -15,7 +15,7 @@ const blogPosts: BlogPost[] = [
     image: '/lovable-uploads/80ea47f5-5b04-409f-8eb7-1da434a9e0de.png'
   },
   {
-    category: 'Technology',
+    category: 'travel',
     author: {
       initials: 'AS',
       name: 'Alice Smith'
