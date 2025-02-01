@@ -1,18 +1,20 @@
 import { motion } from "framer-motion";
-import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 const featuredPosts = [
   {
     category: "Culture",
     title: "RV Smart Tech",
     description: ["Experience the future of RV living with cutting edge smart technology that transforms your mobile lifestyle.", "Our innovative systems seamlessly integrate automation, monitoring, and control features to enhance every aspect of your RV experience."],
-    image: "/lovable-uploads/11a2f8d8-22f5-4ed7-83f9-28b08a64aeb5.png"
+    image: "/lovable-uploads/11a2f8d8-22f5-4ed7-83f9-28b08a64aeb5.png",
+    slug: "rv-smart-tech"
   },
   {
     category: "Technology",
     title: "Indoor RV Storage",
     description: ["Discover premium climate controlled indoor RV storage solutions that protect your investment year round.", "Our state of the art facilities offer advanced security systems and easy access, ensuring your RV stays in pristine condition between adventures."],
-    image: "/lovable-uploads/c25a3800-323e-4e21-9402-72b27002e767.png"
+    image: "/lovable-uploads/c25a3800-323e-4e21-9402-72b27002e767.png",
+    slug: "indoor-rv-storage"
   }
 ];
 
@@ -59,12 +61,12 @@ const FeaturedCategories = () => {
                   )}
                 </div>
                 
-                <Button 
-                  variant="ghost"
-                  className="bg-[#00ffff] text-black hover:bg-[#00ffff]/80 px-8 py-2 rounded-full"
+                <Link 
+                  to={`/blog/${post.slug}`}
+                  className="inline-block bg-[#00ffff] text-black hover:bg-[#00ffff]/80 px-8 py-2 rounded-full"
                 >
                   Read More
-                </Button>
+                </Link>
               </div>
             </div>
             
