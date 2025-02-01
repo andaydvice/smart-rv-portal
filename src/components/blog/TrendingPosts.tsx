@@ -84,6 +84,12 @@ const TrendingPosts = () => {
                   <span>{post.category.toUpperCase()}</span>
                   <span>{post.readTime}</span>
                 </div>
+                <Button 
+                  variant="ghost"
+                  className="bg-[#00ffff] text-black hover:bg-[#00ffff]/80 px-8 py-2 rounded-full w-full"
+                >
+                  Read More
+                </Button>
               </div>
             </Card>
           </motion.div>
