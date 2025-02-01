@@ -33,7 +33,32 @@ const BlogPost = () => {
       slug: 'sustainable-travel-redefined',
       content: 'The intersection of eco friendly design and intelligent mobile home solutions is creating a new paradigm in sustainable travel.'
     },
-    // Adding the three trending posts that were missing
+    // Featured posts
+    {
+      category: 'Culture',
+      author: {
+        initials: 'ST',
+        name: 'Smart Tech'
+      },
+      title: 'RV Smart Tech',
+      description: 'Experience the future of RV living with cutting edge smart technology.',
+      image: '/lovable-uploads/11a2f8d8-22f5-4ed7-83f9-28b08a64aeb5.png',
+      slug: 'rv-smart-tech',
+      content: 'Experience the future of RV living with cutting edge smart technology that transforms your mobile lifestyle. Our innovative systems seamlessly integrate automation, monitoring, and control features to enhance every aspect of your RV experience.'
+    },
+    {
+      category: 'Technology',
+      author: {
+        initials: 'IS',
+        name: 'Indoor Storage'
+      },
+      title: 'Indoor RV Storage',
+      description: 'Discover premium climate controlled indoor RV storage solutions.',
+      image: '/lovable-uploads/c25a3800-323e-4e21-9402-72b27002e767.png',
+      slug: 'indoor-rv-storage',
+      content: 'Discover premium climate controlled indoor RV storage solutions that protect your investment year round. Our state of the art facilities offer advanced security systems and easy access, ensuring your RV stays in pristine condition between adventures.'
+    },
+    // Trending posts
     {
       category: 'tech',
       author: {
