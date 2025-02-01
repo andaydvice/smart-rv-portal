@@ -4,6 +4,7 @@ import TrendingPosts from "@/components/blog/TrendingPosts";
 import BlogGrid from "@/components/blog/BlogGrid";
 import FeaturedCategories from "@/components/blog/FeaturedCategories";
 import NewsletterSection from "@/components/blog/NewsletterSection";
+import Navbar from "@/components/Navbar";
 
 const Blog = () => {
   console.log("Rendering Blog page");
@@ -15,7 +16,8 @@ const Blog = () => {
         <meta name="description" content="Discover the latest in RV technology, travel tips, and smart living solutions for modern RV enthusiasts." />
       </Helmet>
       
-      <div className="container mx-auto px-4 py-8 space-y-12">
+      <Navbar />
+      <div className="container mx-auto px-4 py-8 space-y-12 pt-20">
         <BlogHeader />
         <TrendingPosts />
         <BlogGrid />
