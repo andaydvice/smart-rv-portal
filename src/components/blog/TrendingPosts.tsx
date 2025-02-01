@@ -8,11 +8,11 @@ const TrendingPosts = () => {
 
   const posts = [
     {
-      title: "Top 10 Smart RV Upgrades for 2024",
+      title: "Top 10 Smart RV Upgrades",
       excerpt: "Transform your RV into a smart home on wheels with these essential tech upgrades.",
       category: "tech",
       readTime: "8 min read",
-      image: "https://images.unsplash.com/photo-1523987355523-c7b5b0dd90a7?auto=format&fit=crop&q=80&w=300"
+      image: "/lovable-uploads/d3b696f0-39e5-4cfa-b38c-6579325a495a.png"
     },
     {
       title: "Solar Power Solutions for Full-Time RVers",
