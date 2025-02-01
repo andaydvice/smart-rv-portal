@@ -26,7 +26,7 @@ const TrendingPosts = () => {
       excerpt: "Create the perfect mobile office setup in your RV with these tips.",
       category: "travel",
       readTime: "10 min read",
-      image: "https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&q=80&w=300"
+      image: "/lovable-uploads/ae930cf7-205f-41d3-9c9b-a4969e5c35e6.png"
     }
   ];
 
