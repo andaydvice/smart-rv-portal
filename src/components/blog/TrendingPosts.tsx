@@ -42,21 +42,36 @@ const TrendingPosts = () => {
           <Button 
             variant={activeCategory === 'all' ? "default" : "outline"}
             onClick={() => setActiveCategory('all')}
-            className="bg-connectivity-accent text-white hover:bg-connectivity-accent/80"
+            className={`
+              ${activeCategory === 'all' 
+                ? 'bg-connectivity-accent text-white hover:bg-connectivity-accent/80 hover:text-white' 
+                : 'border-connectivity-accent text-connectivity-accent hover:bg-connectivity-accent/10 hover:text-white'
+              }
+            `}
           >
             All
           </Button>
           <Button 
             variant={activeCategory === 'tech' ? "default" : "outline"}
             onClick={() => setActiveCategory('tech')}
-            className="bg-connectivity-accent text-white hover:bg-connectivity-accent/80"
+            className={`
+              ${activeCategory === 'tech' 
+                ? 'bg-connectivity-accent text-white hover:bg-connectivity-accent/80 hover:text-white' 
+                : 'border-connectivity-accent text-connectivity-accent hover:bg-connectivity-accent/10 hover:text-white'
+              }
+            `}
           >
             Tech
           </Button>
           <Button 
             variant={activeCategory === 'travel' ? "default" : "outline"}
             onClick={() => setActiveCategory('travel')}
-            className="bg-connectivity-accent text-white hover:bg-connectivity-accent/80"
+            className={`
+              ${activeCategory === 'travel' 
+                ? 'bg-connectivity-accent text-white hover:bg-connectivity-accent/80 hover:text-white' 
+                : 'border-connectivity-accent text-connectivity-accent hover:bg-connectivity-accent/10 hover:text-white'
+              }
+            `}
           >
             Travel
           </Button>
