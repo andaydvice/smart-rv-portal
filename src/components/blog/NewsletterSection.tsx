@@ -5,22 +5,29 @@ import { Button } from "@/components/ui/button";
 import { Mail } from "lucide-react";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/lib/supabase";
 
 const NewsletterSection = () => {
   const [email, setEmail] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
 
+  console.log("Rendering NewsletterSection");
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    console.log("Submitting email:", email);
+    console.log("Submitting email to Supabase:", email);
     
-    // Here you would typically make an API call to your backend
-    // For now, we'll simulate a successful subscription
     try {
-      await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate API call
+      const { error } = await supabase
+        .from('newsletter_subscribers')
+        .insert([{ email, subscribed_at: new Date().toISOString() }]);
+
+      if (error) throw error;
+      
+      console.log("Successfully stored email in Supabase");
       
       toast({
         title: "Successfully subscribed!",
