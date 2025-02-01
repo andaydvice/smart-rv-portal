@@ -22,7 +22,7 @@ const NewsletterSection = () => {
             Stay Updated with Smart RV News
           </h2>
           
-          <p className="text-[#E2E8FF] text-lg whitespace-nowrap overflow-hidden text-ellipsis">
+          <p className="text-[#E2E8FF] text-lg">
             Get the latest tech tips, travel guides, and smart RV solutions delivered to your inbox.
           </p>
           
