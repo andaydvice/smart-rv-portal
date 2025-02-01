@@ -33,29 +33,42 @@ const BlogPost = () => {
       slug: 'sustainable-travel-redefined',
       content: 'The intersection of eco friendly design and intelligent mobile home solutions is creating a new paradigm in sustainable travel.'
     },
+    // Adding the three trending posts that were missing
     {
       category: 'tech',
       author: {
-        initials: 'ST',
-        name: 'Smart Tech'
+        initials: 'TU',
+        name: 'Tech Updates'
       },
-      title: 'RV Smart Tech',
-      description: 'Discover the latest smart technology innovations for your RV.',
-      image: '/lovable-uploads/80ea47f5-5b04-409f-8eb7-1da434a9e0de.png',
-      slug: 'rv-smart-tech',
-      content: 'Explore the cutting-edge smart technology innovations transforming the RV experience. From automated systems to intelligent monitoring solutions, learn how modern tech is making RV living more comfortable and efficient.'
+      title: 'Top 10 Smart RV Upgrades',
+      description: 'Transform your RV into a smart home on wheels with these essential tech upgrades.',
+      image: '/lovable-uploads/d3b696f0-39e5-4cfa-b38c-6579325a495a.png',
+      slug: 'top-10-smart-rv-upgrades',
+      content: 'Transform your RV into a smart home on wheels with these essential tech upgrades. From automated systems to intelligent monitoring solutions, discover the latest innovations that are revolutionizing the RV experience.'
     },
     {
       category: 'tech',
       author: {
-        initials: 'IS',
-        name: 'Indoor Storage'
+        initials: 'SP',
+        name: 'Solar Power Expert'
       },
-      title: 'Indoor RV Storage',
-      description: 'Everything you need to know about indoor RV storage solutions.',
-      image: '/lovable-uploads/72144d64-5f93-4ee2-8187-e495f556f206.png',
-      slug: 'indoor-rv-storage',
-      content: 'A comprehensive guide to indoor RV storage solutions. Learn about climate-controlled facilities, maintenance considerations, and how to protect your investment during storage periods.'
+      title: 'Solar Power Solutions for Full Time RVers',
+      description: 'Complete guide to planning and installing a solar power system in your RV.',
+      image: '/lovable-uploads/51ac2438-08c7-47ee-b56d-876aa3bbdc80.png',
+      slug: 'solar-power-solutions',
+      content: 'Complete guide to planning and installing a solar power system in your RV. Learn about panel selection, battery storage, installation considerations, and how to maximize your solar setup for full-time RV living.'
+    },
+    {
+      category: 'travel',
+      author: {
+        initials: 'RW',
+        name: 'Remote Worker'
+      },
+      title: 'Remote Work from Your RV: Essential Setup Guide',
+      description: 'Create the perfect mobile office setup in your RV with these tips.',
+      image: '/lovable-uploads/ae930cf7-205f-41d3-9c9b-a4969e5c35e6.png',
+      slug: 'remote-work-rv-setup',
+      content: 'Create the perfect mobile office setup in your RV with these essential tips. From connectivity solutions to workspace organization, learn how to maintain productivity while enjoying the freedom of RV living.'
     }
   ];
 
