@@ -38,7 +38,7 @@ const BlogGrid = ({ activeCategory }: BlogGridProps) => {
       title: 'RV Smart Tech',
       description: 'Discover the latest smart technology innovations for your RV.',
       image: '/lovable-uploads/80ea47f5-5b04-409f-8eb7-1da434a9e0de.png',
-      slug: 'rv-smart-tech'
+      slug: 'rv-smart-tech' // Ensuring this matches exactly
     },
     {
       category: 'tech',
@@ -49,7 +49,7 @@ const BlogGrid = ({ activeCategory }: BlogGridProps) => {
       title: 'Indoor RV Storage',
       description: 'Everything you need to know about indoor RV storage solutions.',
       image: '/lovable-uploads/72144d64-5f93-4ee2-8187-e495f556f206.png',
-      slug: 'indoor-rv-storage'
+      slug: 'indoor-rv-storage' // Ensuring this matches exactly
     }
   ];
 
@@ -66,9 +66,8 @@ const BlogGrid = ({ activeCategory }: BlogGridProps) => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {filteredPosts.map((post) => (
           <BlogPostCard 
-            key={post.title} 
-            post={post} 
-            imageAlt={post.title}
+            key={post.slug} // Changed to use slug as key instead of title
+            post={post}
           />
         ))}
       </div>
