@@ -11,7 +11,7 @@ const featuredPosts = [
   {
     category: "Technology",
     title: "Indoor RV Storage",
-    description: "Discover premium climate controlled indoor RV storage solutions that protect your investment year round.\n\nOur state of the art facilities offer advanced security systems and easy access, ensuring your RV stays in pristine condition between adventures.",
+    description: ["Discover premium climate controlled indoor RV storage solutions that protect your investment year round.", "Our state of the art facilities offer advanced security systems and easy access, ensuring your RV stays in pristine condition between adventures."],
     image: "/lovable-uploads/c25a3800-323e-4e21-9402-72b27002e767.png"
   }
 ];
@@ -49,9 +49,15 @@ const FeaturedCategories = () => {
                 <h3 className="text-5xl font-bold text-white leading-tight">
                   {post.title}
                 </h3>
-                <p className="text-gray-400 text-lg">
-                  {post.description}
-                </p>
+                <div className="text-gray-400 text-lg space-y-4">
+                  {Array.isArray(post.description) ? (
+                    post.description.map((paragraph, i) => (
+                      <p key={i}>{paragraph}</p>
+                    ))
+                  ) : (
+                    <p>{post.description}</p>
+                  )}
+                </div>
                 
                 <Button 
                   variant="ghost"
