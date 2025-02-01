@@ -15,7 +15,7 @@ export function SplineSceneBasic() {
       <div className="flex h-full flex-col md:flex-row">
         {/* Left content */}
         <div className="flex-1 p-8 relative z-10 flex flex-col justify-start">
-          <h2 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400">
+          <h2 className="text-4xl md:text-5xl font-bold text-white">
             Smart RV Experience
           </h2>
           <p className="mt-4 text-neutral-300 max-w-lg text-left">
