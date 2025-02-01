@@ -107,9 +107,11 @@ const TrendingPosts = ({ activeCategory, onCategoryChange }: TrendingPostsProps)
               <div className="p-6 space-y-4">
                 <h3 className="text-xl font-semibold text-white">{post.title}</h3>
                 <p className="text-[#E2E8FF] text-sm">{post.excerpt}</p>
-                <div className="flex justify-between items-center text-sm text-[#E2E8FF]/60">
-                  <span>{getCategoryDisplay(post.category)}</span>
-                  <span>{post.readTime}</span>
+                <div className="flex justify-between items-center text-sm">
+                  <span className="bg-[#1B2028] text-white px-4 py-2 rounded-full">
+                    {getCategoryDisplay(post.category)}
+                  </span>
+                  <span className="text-[#E2E8FF]/60">{post.readTime}</span>
                 </div>
                 <Button 
                   variant="ghost"
