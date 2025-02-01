@@ -14,21 +14,24 @@ const TrendingPosts = ({ activeCategory, onCategoryChange }: TrendingPostsProps)
       excerpt: "Transform your RV into a smart home on wheels with these essential tech upgrades.",
       category: "tech",
       readTime: "8 min read",
-      image: "/lovable-uploads/d3b696f0-39e5-4cfa-b38c-6579325a495a.png"
+      image: "/lovable-uploads/d3b696f0-39e5-4cfa-b38c-6579325a495a.png",
+      slug: "top-10-smart-rv-upgrades"
     },
     {
       title: "Solar Power Solutions for Full Time RVers",
       excerpt: "Complete guide to planning and installing a solar power system in your RV.",
       category: "tech",
       readTime: "12 min read",
-      image: "/lovable-uploads/51ac2438-08c7-47ee-b56d-876aa3bbdc80.png"
+      image: "/lovable-uploads/51ac2438-08c7-47ee-b56d-876aa3bbdc80.png",
+      slug: "solar-power-solutions"
     },
     {
       title: "Remote Work from Your RV: Essential Setup Guide",
       excerpt: "Create the perfect mobile office setup in your RV with these tips.",
       category: "travel",
       readTime: "10 min read",
-      image: "/lovable-uploads/ae930cf7-205f-41d3-9c9b-a4969e5c35e6.png"
+      image: "/lovable-uploads/ae930cf7-205f-41d3-9c9b-a4969e5c35e6.png",
+      slug: "remote-work-rv-setup"
     }
   ];
 

@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from "framer-motion";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { useNavigate } from 'react-router-dom';
 
 interface TrendingPost {
   title: string;
@@ -9,6 +10,7 @@ interface TrendingPost {
   category: string;
   readTime: string;
   image: string;
+  slug: string;
 }
 
 interface TrendingPostCardProps {
@@ -18,6 +20,13 @@ interface TrendingPostCardProps {
 }
 
 const TrendingPostCard = ({ post, index, getCategoryDisplay }: TrendingPostCardProps) => {
+  const navigate = useNavigate();
+
+  const handleReadMore = () => {
+    console.log("Navigating to trending post:", post.slug);
+    navigate(`/blog/${post.slug}`);
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -42,6 +51,7 @@ const TrendingPostCard = ({ post, index, getCategoryDisplay }: TrendingPostCardP
           <Button 
             variant="ghost"
             className="bg-[#00ffff] text-black hover:bg-[#00ffff]/80 hover:text-black px-8 py-2 rounded-full"
+            onClick={handleReadMore}
           >
             Read More
           </Button>
