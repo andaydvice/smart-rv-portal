@@ -14,25 +14,25 @@ export function SplineSceneBasic() {
       
       <div className="flex h-full flex-col md:flex-row">
         {/* Left content */}
-        <div className="flex-1 p-8 relative z-10 flex flex-col justify-start">
-          <h2 className="text-4xl md:text-5xl font-bold text-white">
+        <div className="flex-1 p-8 relative z-10 flex flex-col justify-start overflow-y-auto">
+          <h2 className="text-4xl md:text-5xl font-bold text-white text-left">
             Smart RV Experience
           </h2>
-          <p className="mt-4 text-neutral-300 max-w-lg text-left">
+          <p className="mt-4 text-neutral-300 text-left">
             Discover how modern technology transforms your RV adventures. Experience the perfect blend of comfort and innovation on the road.
           </p>
           
-          <div className="mt-6 space-y-4 text-white font-bold max-w-lg">
-            <p>
+          <div className="mt-6 space-y-4 text-white font-bold">
+            <p className="text-left">
               Explore the future of mobile living with insights that bridge the gap between technology and the great outdoors.
             </p>
-            <p>
+            <p className="text-left">
               Our comprehensive guides showcase innovative features, from smart connectivity, energy efficient designs through advanced navigation systems to modern home comforts that are transforming the RV lifestyle.
             </p>
-            <p>
+            <p className="text-left">
               Whether you're planning your next adventure or upgrading your current setup, you'll find practical tips, inspiring stories, and the latest trends that empower you to make every journey extraordinary.
             </p>
-            <p>
+            <p className="text-left">
               Dive in to discover how modern technology can elevate your experience on the road, offering both reliability and luxury at every turn.
             </p>
           </div>
