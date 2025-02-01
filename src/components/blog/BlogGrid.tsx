@@ -27,13 +27,22 @@ const blogPosts: BlogPost[] = [
   }
 ];
 
-export default function BlogGrid() {
-  console.log("Rendering BlogGrid with posts:", blogPosts);
+interface BlogGridProps {
+  activeCategory?: 'all' | 'tech' | 'travel';
+}
+
+export default function BlogGrid({ activeCategory = 'all' }: BlogGridProps) {
+  const filteredPosts = activeCategory === 'all' 
+    ? blogPosts 
+    : blogPosts.filter(post => post.category === activeCategory);
+
+  console.log("BlogGrid - Active Category:", activeCategory);
+  console.log("BlogGrid - Filtered Posts:", filteredPosts);
   
   return (
     <div className="p-6">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {blogPosts.map((post, index) => (
+        {filteredPosts.map((post, index) => (
           <BlogPostCard 
             key={post.title}
             post={post} 

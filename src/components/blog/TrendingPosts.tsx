@@ -1,11 +1,13 @@
 import { motion } from "framer-motion";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
 
-const TrendingPosts = () => {
-  const [activeCategory, setActiveCategory] = useState<'all' | 'tech' | 'travel'>('all');
+interface TrendingPostsProps {
+  activeCategory: 'all' | 'tech' | 'travel';
+  onCategoryChange: (category: 'all' | 'tech' | 'travel') => void;
+}
 
+const TrendingPosts = ({ activeCategory, onCategoryChange }: TrendingPostsProps) => {
   const posts = [
     {
       title: "Top 10 Smart RV Upgrades",
@@ -44,7 +46,7 @@ const TrendingPosts = () => {
         <div className="flex gap-2">
           <Button 
             variant={activeCategory === 'all' ? "default" : "outline"}
-            onClick={() => setActiveCategory('all')}
+            onClick={() => onCategoryChange('all')}
             className={`
               ${activeCategory === 'all' 
                 ? 'bg-[#00ffff] text-white hover:bg-[#00ffff]/80 hover:text-white' 
@@ -56,7 +58,7 @@ const TrendingPosts = () => {
           </Button>
           <Button 
             variant={activeCategory === 'tech' ? "default" : "outline"}
-            onClick={() => setActiveCategory('tech')}
+            onClick={() => onCategoryChange('tech')}
             className={`
               ${activeCategory === 'tech' 
                 ? 'bg-[#00ffff] text-white hover:bg-[#00ffff]/80 hover:text-white' 
@@ -68,7 +70,7 @@ const TrendingPosts = () => {
           </Button>
           <Button 
             variant={activeCategory === 'travel' ? "default" : "outline"}
-            onClick={() => setActiveCategory('travel')}
+            onClick={() => onCategoryChange('travel')}
             className={`
               ${activeCategory === 'travel' 
                 ? 'bg-[#00ffff] text-white hover:bg-[#00ffff]/80 hover:text-white' 

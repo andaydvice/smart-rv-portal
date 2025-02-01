@@ -1,4 +1,5 @@
 import { Helmet } from "react-helmet";
+import { useState } from "react";
 import BlogHeader from "@/components/blog/BlogHeader";
 import TrendingPosts from "@/components/blog/TrendingPosts";
 import BlogGrid from "@/components/blog/BlogGrid";
@@ -7,7 +8,9 @@ import NewsletterSection from "@/components/blog/NewsletterSection";
 import Navbar from "@/components/Navbar";
 
 const Blog = () => {
-  console.log("Rendering Blog page");
+  const [activeCategory, setActiveCategory] = useState<'all' | 'tech' | 'travel'>('all');
+
+  console.log("Blog page - Active Category:", activeCategory);
   
   return (
     <div className="min-h-screen bg-[#080F1F]">
@@ -19,8 +22,8 @@ const Blog = () => {
       <Navbar />
       <div className="container mx-auto px-4 py-8 space-y-12 pt-20">
         <BlogHeader />
-        <TrendingPosts />
-        <BlogGrid />
+        <TrendingPosts activeCategory={activeCategory} onCategoryChange={setActiveCategory} />
+        <BlogGrid activeCategory={activeCategory} />
         <FeaturedCategories />
         <NewsletterSection />
       </div>
