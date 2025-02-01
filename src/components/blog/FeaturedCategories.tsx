@@ -49,7 +49,7 @@ const FeaturedCategories = () => {
                 <h3 className="text-5xl font-bold text-white leading-tight">
                   {post.title}
                 </h3>
-                <div className="text-gray-400 text-lg space-y-4">
+                <div className="text-white/90 text-lg space-y-4">
                   {Array.isArray(post.description) ? (
                     post.description.map((paragraph, i) => (
                       <p key={i}>{paragraph}</p>

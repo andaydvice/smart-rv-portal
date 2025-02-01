@@ -33,7 +33,7 @@ const BlogPostCard = ({ post, imageAlt }: BlogPostCardProps) => {
           <h3 className="text-2xl font-bold text-white">
             {post.title}
           </h3>
-          <p className="text-gray-400">
+          <p className="text-white/90">
             {post.description}
           </p>
           
