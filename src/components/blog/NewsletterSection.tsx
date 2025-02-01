@@ -3,7 +3,7 @@ import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Mail } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -12,7 +12,33 @@ const NewsletterSection = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
 
-  console.log("Rendering NewsletterSection");
+  useEffect(() => {
+    // Set up real-time subscription listener
+    const channel = supabase
+      .channel('public:newsletter_subscribers')
+      .on(
+        'postgres_changes',
+        {
+          event: 'INSERT',
+          schema: 'public',
+          table: 'newsletter_subscribers'
+        },
+        (payload) => {
+          console.log('New subscriber:', payload.new);
+          toast({
+            title: "New Newsletter Subscriber!",
+            description: `${payload.new.email} just subscribed to the newsletter.`,
+            duration: 5000,
+          });
+        }
+      )
+      .subscribe();
+
+    // Cleanup subscription on component unmount
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, [toast]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
