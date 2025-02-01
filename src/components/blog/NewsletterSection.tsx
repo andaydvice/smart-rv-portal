@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { supabase } from "@/integrations/supabase/client";
-import { useToast } from "@/components/ui/use-toast";
+import { useToast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
 
 const NewsletterSection = () => {
@@ -58,18 +58,40 @@ const NewsletterSection = () => {
         throw new Error("Please enter a valid email address");
       }
 
+      console.log("Attempting to submit email to Supabase:", email);
+
       const { error } = await supabase
         .from('newsletter_subscribers')
         .insert([{ email }]);
 
-      if (error) throw error;
-
-      toast({
-        title: "Success!",
-        description: "You've been subscribed to our newsletter.",
-      });
-      
-      setEmail("");
+      if (error) {
+        console.log("Supabase error response:", error);
+        
+        // Check for duplicate email error (code 23505)
+        if (error.code === '23505') {
+          console.log("Duplicate email detected:", email);
+          toast({
+            title: "Already subscribed",
+            description: "This email is already subscribed to our newsletter.",
+            className: "bg-yellow-600 text-white",
+          });
+        } else {
+          console.error("Non-duplicate error occurred:", error);
+          toast({
+            title: "❌ Subscription failed",
+            description: "Please try again later.",
+            variant: "destructive",
+          });
+        }
+      } else {
+        console.log("Successfully stored email in Supabase:", email);
+        toast({
+          title: "✅ Successfully subscribed!",
+          description: "Thank you for subscribing to our newsletter.",
+          className: "bg-green-600 text-white",
+        });
+        setEmail("");
+      }
     } catch (error: any) {
       console.error('Error:', error);
       
