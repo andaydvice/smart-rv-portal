@@ -1,6 +1,6 @@
-import { motion } from "framer-motion";
-import { Card } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+import React from 'react';
+import TrendingPostCard from './TrendingPostCard';
+import CategoryButtons from './CategoryButtons';
 
 interface TrendingPostsProps {
   activeCategory: 'all' | 'tech' | 'travel';
@@ -47,81 +47,20 @@ const TrendingPosts = ({ activeCategory, onCategoryChange }: TrendingPostsProps)
     <section className="space-y-8 p-6">
       <div className="flex justify-between items-center">
         <h2 className="text-3xl font-semibold text-white">Trending Posts</h2>
-        <div className="flex gap-2">
-          <Button 
-            variant={activeCategory === 'all' ? "default" : "outline"}
-            onClick={() => onCategoryChange('all')}
-            className={`
-              ${activeCategory === 'all' 
-                ? 'bg-[#00ffff] text-black hover:bg-[#00ffff]/80' 
-                : 'bg-[#151A22] border-[#00ffff] text-[#00ffff] hover:bg-[#1B2028] hover:text-[#00ffff]'
-              }
-              font-medium
-            `}
-          >
-            All
-          </Button>
-          <Button 
-            variant={activeCategory === 'tech' ? "default" : "outline"}
-            onClick={() => onCategoryChange('tech')}
-            className={`
-              ${activeCategory === 'tech' 
-                ? 'bg-[#00ffff] text-black hover:bg-[#00ffff]/80' 
-                : 'bg-[#151A22] border-[#00ffff] text-[#00ffff] hover:bg-[#1B2028] hover:text-[#00ffff]'
-              }
-              font-medium
-            `}
-          >
-            Tech
-          </Button>
-          <Button 
-            variant={activeCategory === 'travel' ? "default" : "outline"}
-            onClick={() => onCategoryChange('travel')}
-            className={`
-              ${activeCategory === 'travel' 
-                ? 'bg-[#00ffff] text-black hover:bg-[#00ffff]/80' 
-                : 'bg-[#151A22] border-[#00ffff] text-[#00ffff] hover:bg-[#1B2028] hover:text-[#00ffff]'
-              }
-              font-medium
-            `}
-          >
-            Travel
-          </Button>
-        </div>
+        <CategoryButtons 
+          activeCategory={activeCategory} 
+          onCategoryChange={onCategoryChange} 
+        />
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {filteredPosts.map((post, index) => (
-          <motion.div
+          <TrendingPostCard
             key={post.title}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: index * 0.1 }}
-          >
-            <Card className="overflow-hidden hover:border-[#00ffff]/40 transition-colors">
-              <img 
-                src={post.image} 
-                alt={post.title}
-                className="w-full h-48 object-cover"
-              />
-              <div className="p-6 space-y-4">
-                <h3 className="text-xl font-semibold text-white">{post.title}</h3>
-                <p className="text-[#E2E8FF] text-sm">{post.excerpt}</p>
-                <div className="flex justify-between items-center text-sm">
-                  <span className="bg-[#1B2028] text-white px-4 py-2 rounded-full">
-                    {getCategoryDisplay(post.category)}
-                  </span>
-                  <span className="text-[#E2E8FF]/60">{post.readTime}</span>
-                </div>
-                <Button 
-                  variant="ghost"
-                  className="bg-[#00ffff] text-black hover:bg-[#00ffff]/80 hover:text-black px-8 py-2 rounded-full"
-                >
-                  Read More
-                </Button>
-              </div>
-            </Card>
-          </motion.div>
+            post={post}
+            index={index}
+            getCategoryDisplay={getCategoryDisplay}
+          />
         ))}
       </div>
     </section>
