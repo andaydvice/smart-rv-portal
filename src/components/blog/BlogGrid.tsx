@@ -29,7 +29,7 @@ const blogPosts: BlogPost[] = [
 
 export default function BlogGrid() {
   return (
-    <div className="bg-connectivity-darkBg p-6">
+    <div className="p-6">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <BlogPostCard 
           post={blogPosts[0]} 
