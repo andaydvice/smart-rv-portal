@@ -35,7 +35,6 @@ const NewsletterSection = () => {
       )
       .subscribe();
 
-    // Cleanup subscription on component unmount
     return () => {
       console.log("Cleaning up subscription listener");
       supabase.removeChannel(channel);
@@ -53,18 +52,28 @@ const NewsletterSection = () => {
         .from('newsletter_subscribers')
         .insert([{ email }]);
 
-      if (error) throw error;
-      
-      console.log("Successfully stored email in Supabase:", email);
-      
-      toast({
-        title: "✅ Successfully subscribed!",
-        description: "Thank you for subscribing to our newsletter.",
-        duration: 5000,
-        className: "bg-green-600 text-white",
-      });
-      
-      setEmail("");
+      if (error) {
+        // Check specifically for duplicate email error
+        if (error.code === '23505') {
+          toast({
+            title: "Already subscribed",
+            description: "This email is already subscribed to our newsletter.",
+            className: "bg-yellow-600 text-white",
+            duration: 5000,
+          });
+        } else {
+          throw error;
+        }
+      } else {
+        console.log("Successfully stored email in Supabase:", email);
+        toast({
+          title: "✅ Successfully subscribed!",
+          description: "Thank you for subscribing to our newsletter.",
+          duration: 5000,
+          className: "bg-green-600 text-white",
+        });
+        setEmail("");
+      }
     } catch (error) {
       console.error("Subscription error:", error);
       toast({
