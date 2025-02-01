@@ -62,7 +62,7 @@ const TrendingPosts = ({ activeCategory, onCategoryChange }: TrendingPostsProps)
             className={`
               ${activeCategory === 'tech' 
                 ? 'bg-[#00ffff] text-black hover:bg-[#00ffff]/80 hover:text-black' 
-                : 'border-[#00ffff] text-[#00ffff] hover:bg-[#00ffff]/20 hover:text-[#00ffff]'
+                : 'border-[#00ffff] text-[#E2E8FF] hover:bg-[#00ffff]/20 hover:text-[#E2E8FF]'
               }
             `}
           >
@@ -74,7 +74,7 @@ const TrendingPosts = ({ activeCategory, onCategoryChange }: TrendingPostsProps)
             className={`
               ${activeCategory === 'travel' 
                 ? 'bg-[#00ffff] text-black hover:bg-[#00ffff]/80 hover:text-black' 
-                : 'border-[#00ffff] text-[#00ffff] hover:bg-[#00ffff]/20 hover:text-[#00ffff]'
+                : 'border-[#00ffff] text-[#E2E8FF] hover:bg-[#00ffff]/20 hover:text-[#E2E8FF]'
               }
             `}
           >
