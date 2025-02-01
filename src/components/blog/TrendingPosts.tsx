@@ -86,7 +86,7 @@ const TrendingPosts = () => {
                 </div>
                 <Button 
                   variant="ghost"
-                  className="bg-[#00ffff] text-black hover:bg-[#00ffff]/80 px-8 py-2 rounded-full w-full"
+                  className="bg-[#00ffff] text-black hover:bg-[#00ffff]/80 px-8 py-2 rounded-full"
                 >
                   Read More
                 </Button>
