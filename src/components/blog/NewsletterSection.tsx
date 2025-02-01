@@ -52,9 +52,12 @@ const NewsletterSection = () => {
         .from('newsletter_subscribers')
         .insert([{ email }]);
 
+      console.log("Supabase response error:", error);
+
       if (error) {
         // Check specifically for duplicate email error
         if (error.code === '23505') {
+          console.log("Duplicate email detected:", email);
           toast({
             title: "Already subscribed",
             description: "This email is already subscribed to our newsletter.",
@@ -62,6 +65,7 @@ const NewsletterSection = () => {
             duration: 5000,
           });
         } else {
+          console.error("Non-duplicate error occurred:", error);
           throw error;
         }
       } else {
