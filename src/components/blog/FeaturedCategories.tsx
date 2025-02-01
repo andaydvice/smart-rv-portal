@@ -10,7 +10,6 @@ const featuredPosts = [
       name: "Jen Taylor",
       avatar: "/placeholder.svg"
     },
-    date: "Sep 16, 2023",
     image: "/lovable-uploads/11a2f8d8-22f5-4ed7-83f9-28b08a64aeb5.png"
   },
   {
@@ -21,7 +20,6 @@ const featuredPosts = [
       name: "Jason Williams",
       avatar: "/placeholder.svg"
     },
-    date: "Sep 15, 2023",
     image: "/lovable-uploads/c25a3800-323e-4e21-9402-72b27002e767.png"
   }
 ];
@@ -59,8 +57,6 @@ const FeaturedCategories = () => {
                       className="w-6 h-6 rounded-full"
                     />
                     <span className="text-[#00ffff]">{post.author.name}</span>
-                    <span className="text-gray-400">|</span>
-                    <span className="text-gray-400">{post.date}</span>
                   </div>
                 </div>
                 

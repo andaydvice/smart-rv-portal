@@ -29,8 +29,6 @@ const BlogPostCard = ({ post, imageAlt }: BlogPostCardProps) => {
                 {post.author.initials}
               </div>
               <span className="text-[#00ffff]">{post.author.name}</span>
-              <span className="text-gray-400">|</span>
-              <span className="text-gray-400">{post.date}</span>
             </div>
           </div>
           

@@ -4,7 +4,6 @@ export interface BlogPost {
     initials: string;
     name: string;
   };
-  date: string;
   title: string;
   description: string;
   image?: string;
