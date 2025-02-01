@@ -3,7 +3,7 @@ import Layout from "../layout/Layout";
 import { routes } from "@/routes/routes";
 
 const RouterProvider = () => {
-  console.log('Rendering RouterProvider component');
+  console.log('RouterProvider - Available Routes:', routes.map(route => route.path));
   
   return (
     <BrowserRouter>
