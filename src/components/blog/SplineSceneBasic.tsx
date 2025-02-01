@@ -18,7 +18,7 @@ export function SplineSceneBasic() {
           <h2 className="text-4xl md:text-5xl font-bold text-white text-left">
             Smart RV Experience
           </h2>
-          <p className="mt-4 text-neutral-300 text-left">
+          <p className="mt-4 text-white text-left">
             Discover how modern technology transforms your RV adventures. Experience the perfect blend of comfort and innovation on the road.
           </p>
           
