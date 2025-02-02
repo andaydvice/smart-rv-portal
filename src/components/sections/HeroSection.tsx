@@ -18,7 +18,7 @@ export const HeroSection = () => (
       transition={{ duration: 0.8, delay: 0.2 }}
       className="relative text-center text-white px-4 max-w-5xl mx-auto"
     >
-      <div className="absolute inset-0 bg-black/40 backdrop-blur-sm rounded-xl" />
+      <div className="absolute inset-0 bg-black/40 backdrop-blur-sm rounded-xl -bottom-8" />
       <motion.h1 
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
