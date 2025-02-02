@@ -1,21 +1,25 @@
 import { useState } from "react";
-import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
 
-const NewsletterForm = () => {
+export const NewsletterForm = () => {
   const [email, setEmail] = useState("");
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitting(true);
-    
-    console.log("Attempting to submit email to Supabase:", email);
-    
+    setIsLoading(true);
+
     try {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        throw new Error("Please enter a valid email address");
+      }
+
+      console.log("Attempting to submit email to Supabase:", email);
+
       const { error } = await supabase
         .from('newsletter_subscribers')
         .insert([{ email }]);
@@ -23,14 +27,12 @@ const NewsletterForm = () => {
       if (error) {
         console.log("Supabase error response:", error);
         
-        // Check for duplicate email error (code 23505)
         if (error.code === '23505') {
           console.log("Duplicate email detected:", email);
           toast({
             title: "Already subscribed",
             description: "This email is already subscribed to our newsletter.",
             className: "bg-yellow-600 text-white",
-            duration: 5000,
           });
         } else {
           console.error("Non-duplicate error occurred:", error);
@@ -38,7 +40,6 @@ const NewsletterForm = () => {
             title: "❌ Subscription failed",
             description: "Please try again later.",
             variant: "destructive",
-            duration: 5000,
           });
         }
       } else {
@@ -46,43 +47,40 @@ const NewsletterForm = () => {
         toast({
           title: "✅ Successfully subscribed!",
           description: "Thank you for subscribing to our newsletter.",
-          duration: 5000,
           className: "bg-green-600 text-white",
         });
         setEmail("");
       }
-    } catch (error) {
-      console.error("Subscription error:", error);
+    } catch (error: any) {
+      console.error('Error:', error);
+      
       toast({
-        title: "❌ Subscription failed",
-        description: "Please try again later.",
         variant: "destructive",
-        duration: 5000,
+        title: "Error",
+        description: error.message || "Failed to subscribe. Please try again.",
       });
     } finally {
-      setIsSubmitting(false);
+      setIsLoading(false);
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-      <Input 
-        type="email" 
-        placeholder="Enter your email" 
-        className="bg-connectivity-bg border-connectivity-accent/20 text-white placeholder:text-[#E2E8FF]/60"
+    <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-4 max-w-xl mx-auto">
+      <input
+        type="email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
+        placeholder="Enter your email"
+        className="flex-1 px-6 py-3 rounded-full bg-white/10 text-white border border-white/20 focus:outline-none focus:border-[#00ffff]"
         required
       />
-      <Button 
-        type="submit" 
-        className="bg-connectivity-accent text-white hover:bg-connectivity-accent/80"
-        disabled={isSubmitting}
+      <Button
+        type="submit"
+        disabled={isLoading}
+        className="bg-[#00ffff] text-black hover:bg-[#00ffff]/80 px-8 py-2 rounded-full"
       >
-        {isSubmitting ? "Subscribing..." : "Subscribe"}
+        {isLoading ? "Subscribing..." : "Subscribe"}
       </Button>
     </form>
   );
 };
-
-export default NewsletterForm;
