@@ -26,10 +26,10 @@ const MobileMenu = ({ isOpen, openSections, toggleSection }: MobileMenuProps) =>
     <div className="fixed inset-0 pt-16 bg-[#080F1F] text-white z-[9998] overflow-y-auto">
       <div className="p-4 space-y-2">
         {!isHomePage && (
-          <div className="px-4 py-3">
+          <div className="border-b border-[#1E2A3E] last:border-0">
             <Link 
               to="/" 
-              className="flex items-center gap-2 text-lg font-medium text-gray-300 hover:text-blue-400 transition-colors"
+              className="flex items-center gap-2 w-full py-4 text-gray-300 hover:text-blue-400 transition-colors"
             >
               <Home className="h-5 w-5 text-blue-500" />
               <span className="font-medium text-white">Home</span>
@@ -95,10 +95,10 @@ const MobileMenu = ({ isOpen, openSections, toggleSection }: MobileMenuProps) =>
         </MobileMenuSection>
 
         {!isBlogPage && (
-          <div className="px-4 py-3">
+          <div className="border-b border-[#1E2A3E] last:border-0">
             <Link 
               to="/blog" 
-              className="flex items-center gap-2 text-lg font-medium text-gray-300 hover:text-blue-400 transition-colors"
+              className="flex items-center gap-2 w-full py-4 text-gray-300 hover:text-blue-400 transition-colors"
             >
               <BookOpen className="h-5 w-5 text-purple-500" />
               <span className="font-medium text-white">Blog</span>
