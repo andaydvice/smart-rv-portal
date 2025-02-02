@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 const NewsletterSection = () => {
   const [email, setEmail] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [subscriptionCount, setSubscriptionCount] = useState(0);
+  const [subscriptionCount, setSubscriptionCount] = useState<number | null>(null);
   const { toast } = useToast();
 
   useEffect(() => {
@@ -42,9 +42,10 @@ const NewsletterSection = () => {
         .from('newsletter_subscribers')
         .select('*', { count: 'exact' });
       
-      setSubscriptionCount(count || 0);
+      setSubscriptionCount(count || null);
     } catch (error) {
       console.error('Error fetching subscription count:', error);
+      setSubscriptionCount(null);
     }
   };
 
@@ -119,8 +120,9 @@ const NewsletterSection = () => {
               Stay Updated with Smart RV Insights
             </h2>
             <p className="text-lg text-white/90">
-              Join {subscriptionCount} subscribers receiving our latest updates on RV technology, 
-              travel tips, and smart living solutions.
+              {subscriptionCount !== null 
+                ? `Join ${subscriptionCount} subscribers receiving our latest updates on RV technology, travel tips, and smart living solutions.`
+                : "Join our community receiving the latest updates on RV technology, travel tips, and smart living solutions."}
             </p>
           </div>
 
