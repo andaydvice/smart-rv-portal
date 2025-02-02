@@ -1,5 +1,5 @@
-import { Calculator } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Calculator, Home } from "lucide-react";
+import { Link, useLocation } from "react-router-dom";
 import MobileMenuSection from "./MobileMenuSection";
 import {
   CoreSystemsLinks,
@@ -16,11 +16,26 @@ interface MobileMenuProps {
 }
 
 const MobileMenu = ({ isOpen, openSections, toggleSection }: MobileMenuProps) => {
+  const location = useLocation();
+  const isHomePage = location.pathname === "/";
+
   if (!isOpen) return null;
 
   return (
     <div className="fixed inset-0 pt-16 bg-[#080F1F] text-white z-[9998] overflow-y-auto">
       <div className="p-4 space-y-2">
+        {!isHomePage && (
+          <div className="px-4 py-3">
+            <Link 
+              to="/" 
+              className="flex items-center gap-2 text-gray-300 hover:text-blue-400 transition-colors"
+            >
+              <Home className="h-4 w-4" />
+              Home
+            </Link>
+          </div>
+        )}
+
         <MobileMenuSection 
           title="Core Systems"
           isOpen={openSections.core}
