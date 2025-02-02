@@ -32,7 +32,7 @@ const MobileMenu = ({ isOpen, openSections, toggleSection }: MobileMenuProps) =>
               className="flex items-center gap-2 w-full py-4 text-gray-300 hover:text-blue-400 transition-colors"
             >
               <Home className="h-5 w-5 text-blue-500" />
-              <span className="font-medium text-white">Home</span>
+              <span className="text-lg font-medium text-white">Home</span>
             </Link>
           </div>
         )}
@@ -101,7 +101,7 @@ const MobileMenu = ({ isOpen, openSections, toggleSection }: MobileMenuProps) =>
               className="flex items-center gap-2 w-full py-4 text-gray-300 hover:text-blue-400 transition-colors"
             >
               <BookOpen className="h-5 w-5 text-purple-500" />
-              <span className="font-medium text-white">Blog</span>
+              <span className="text-lg font-medium text-white">Blog</span>
             </Link>
           </div>
         )}
