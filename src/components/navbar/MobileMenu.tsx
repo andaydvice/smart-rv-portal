@@ -1,4 +1,4 @@
-import { Calculator, Home, BookOpen } from "lucide-react";
+import { Calculator, Home, BookOpen, Navigation, Shield, Battery, Tv, Music, Wifi, Refrigerator, Car, CarFront, Caravan, Wrench, HelpCircle, FileText, Phone } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import MobileMenuSection from "./MobileMenuSection";
 import {
