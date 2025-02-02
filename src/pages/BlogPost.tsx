@@ -148,7 +148,7 @@ const BlogPost = () => {
           <img 
             src={post.image} 
             alt={post.title}
-            className="w-full h-[400px] object-cover"
+            className="w-full h-[600px] object-cover" // Updated height from 400px to 600px
           />
         </div>
 
