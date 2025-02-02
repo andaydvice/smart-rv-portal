@@ -3,6 +3,9 @@ import { Helmet } from "react-helmet";
 import Navbar from "@/components/Navbar";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft } from "lucide-react";
+import { BlogPostHeader } from "@/components/blog/post/BlogPostHeader";
+import { BlogPostImage } from "@/components/blog/post/BlogPostImage";
+import { BlogPostContent } from "@/components/blog/post/BlogPostContent";
 
 const BlogPost = () => {
   const { slug } = useParams();
@@ -135,45 +138,14 @@ const BlogPost = () => {
       
       <Navbar />
       <div className="container mx-auto px-4 py-8 space-y-8 pt-20">
-        <Button
-          variant="ghost"
-          onClick={() => navigate('/blog')}
-          className="text-white hover:text-white/80"
-        >
-          <ChevronLeft className="mr-2 h-4 w-4" />
-          Back to Blog
-        </Button>
-
-        <div className="rounded-3xl overflow-hidden">
-          <img 
-            src={post.image} 
-            alt={post.title}
-            className="w-full h-[600px] object-cover" // Updated height from 400px to 600px
-          />
-        </div>
-
-        <div className="space-y-4">
-          <div className="flex items-center gap-4">
-            <span className="bg-[#1B2028] text-white px-4 py-2 text-sm rounded-full">
-              {post.category.charAt(0).toUpperCase() + post.category.slice(1)}
-            </span>
-          </div>
-          
-          <h1 className="text-4xl font-bold text-white">
-            {post.title}
-          </h1>
-
-          <div className="flex items-center gap-2 text-white/80">
-            <div className="bg-[#1B2028] w-8 h-8 rounded-full flex items-center justify-center">
-              {post.author.initials}
-            </div>
-            <span>{post.author.name}</span>
-          </div>
-
-          <div className="text-white/90 leading-relaxed">
-            {post.content}
-          </div>
-        </div>
+        <BlogPostHeader />
+        <BlogPostImage image={post.image} title={post.title} />
+        <BlogPostContent 
+          category={post.category}
+          title={post.title}
+          author={post.author}
+          content={post.content}
+        />
       </div>
     </div>
   );
