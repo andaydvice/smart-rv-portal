@@ -1,4 +1,4 @@
-import { Calculator, Home, BookOpen, Navigation, Shield, Battery, Tv, Music, Wifi, Refrigerator, Car, CarFront, Caravan, Wrench, HelpCircle, FileText, Phone } from "lucide-react";
+import { Calculator, Home, BookOpen, Navigation, Shield, Battery, Tv, Music, Wifi, Refrigerator, Car, CarFront, Caravan, Wrench, HelpCircle, FileText, Phone, Mic } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import MobileMenuSection from "./MobileMenuSection";
 import {
@@ -39,6 +39,7 @@ const MobileMenu = ({ isOpen, openSections, toggleSection }: MobileMenuProps) =>
 
         <MobileMenuSection 
           title="Core Systems"
+          icon={<Shield className="h-5 w-5 text-emerald-500" />}
           isOpen={openSections.core}
           onToggle={() => toggleSection('core')}
         >
@@ -47,6 +48,7 @@ const MobileMenu = ({ isOpen, openSections, toggleSection }: MobileMenuProps) =>
 
         <MobileMenuSection 
           title="Smart Features"
+          icon={<Tv className="h-5 w-5 text-purple-500" />}
           isOpen={openSections.features}
           onToggle={() => toggleSection('features')}
         >
@@ -55,6 +57,7 @@ const MobileMenu = ({ isOpen, openSections, toggleSection }: MobileMenuProps) =>
 
         <MobileMenuSection 
           title="Vehicle Selection"
+          icon={<Car className="h-5 w-5 text-blue-500" />}
           isOpen={openSections.vehicles}
           onToggle={() => toggleSection('vehicles')}
         >
@@ -63,6 +66,7 @@ const MobileMenu = ({ isOpen, openSections, toggleSection }: MobileMenuProps) =>
 
         <MobileMenuSection 
           title="Support & Resources"
+          icon={<Wrench className="h-5 w-5 text-orange-500" />}
           isOpen={openSections.support}
           onToggle={() => toggleSection('support')}
         >
@@ -71,6 +75,7 @@ const MobileMenu = ({ isOpen, openSections, toggleSection }: MobileMenuProps) =>
 
         <MobileMenuSection 
           title="Customer Support"
+          icon={<Phone className="h-5 w-5 text-blue-500" />}
           isOpen={openSections.customer}
           onToggle={() => toggleSection('customer')}
         >
@@ -79,6 +84,7 @@ const MobileMenu = ({ isOpen, openSections, toggleSection }: MobileMenuProps) =>
 
         <MobileMenuSection 
           title="RV Tools"
+          icon={<Calculator className="h-5 w-5 text-cyan-500" />}
           isOpen={openSections.tools}
           onToggle={() => toggleSection('tools')}
         >

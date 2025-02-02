@@ -3,19 +3,23 @@ import { ChevronDown, ChevronUp } from "lucide-react";
 
 interface MenuItemProps {
   title: string;
+  icon?: React.ReactNode;
   isOpen: boolean;
   onToggle: () => void;
   children: React.ReactNode;
 }
 
-const MenuItem = ({ title, isOpen, onToggle, children }: MenuItemProps) => {
+const MenuItem = ({ title, icon, isOpen, onToggle, children }: MenuItemProps) => {
   return (
     <div className="border-b border-[#1E2A3E] last:border-0">
       <button
         onClick={onToggle}
         className="flex items-center justify-between w-full py-4 text-white hover:text-blue-400 transition-colors"
       >
-        <span className="text-lg font-medium">{title}</span>
+        <span className="flex items-center gap-2 text-lg font-medium">
+          {icon}
+          {title}
+        </span>
         {isOpen ? (
           <ChevronUp className="h-5 w-5" />
         ) : (
