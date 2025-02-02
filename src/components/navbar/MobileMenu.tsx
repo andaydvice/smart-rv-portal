@@ -18,6 +18,7 @@ interface MobileMenuProps {
 const MobileMenu = ({ isOpen, openSections, toggleSection }: MobileMenuProps) => {
   const location = useLocation();
   const isHomePage = location.pathname === "/";
+  const isBlogPage = location.pathname === "/blog";
 
   if (!isOpen) return null;
 
@@ -32,6 +33,17 @@ const MobileMenu = ({ isOpen, openSections, toggleSection }: MobileMenuProps) =>
             >
               <Home className="h-5 w-5" />
               Home
+            </Link>
+          </div>
+        )}
+
+        {!isBlogPage && (
+          <div className="px-4 py-3">
+            <Link 
+              to="/blog" 
+              className="flex items-center gap-2 text-lg font-medium text-gray-300 hover:text-blue-400 transition-colors"
+            >
+              Blog
             </Link>
           </div>
         )}
