@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const featuredPosts = [
   {
-    category: "Culture",
+    category: "Technology",
     title: "RV Smart Tech",
     description: ["Experience the future of RV living with cutting edge smart technology that transforms your mobile lifestyle.", "Our innovative systems seamlessly integrate automation, monitoring, and control features to enhance every aspect of your RV experience."],
     image: "/lovable-uploads/11a2f8d8-22f5-4ed7-83f9-28b08a64aeb5.png",
