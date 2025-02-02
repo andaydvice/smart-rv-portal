@@ -1,13 +1,28 @@
 import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuList, NavigationMenuTrigger } from "@/components/ui/navigation-menu";
 import { CoreSystemsLinks, SmartFeaturesLinks, VehicleSelectionLinks, SupportLinks, CustomerSupportLinks } from "../NavbarLinks";
-import { Link } from "react-router-dom";
-import { Calculator, BookOpen } from "lucide-react";
+import { Link, useLocation } from "react-router-dom";
+import { Calculator, BookOpen, Home } from "lucide-react";
 
 const DesktopNavigation = () => {
+  const location = useLocation();
+  const isHomePage = location.pathname === "/";
+
   return (
     <div className="hidden md:flex md:items-center md:space-x-8">
       <NavigationMenu>
         <NavigationMenuList>
+          {!isHomePage && (
+            <NavigationMenuItem>
+              <Link 
+                to="/" 
+                className="text-gray-300 hover:text-blue-400 transition-colors text-base flex items-center gap-2 px-4 py-2"
+              >
+                <Home className="h-4 w-4" />
+                Home
+              </Link>
+            </NavigationMenuItem>
+          )}
+
           <NavigationMenuItem>
             <NavigationMenuTrigger className="text-gray-300 hover:text-blue-400 transition-colors !bg-transparent data-[state=open]:!bg-transparent text-base">
               Technology
