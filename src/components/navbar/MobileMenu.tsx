@@ -1,4 +1,4 @@
-import { Calculator, Home } from "lucide-react";
+import { Calculator, Home, BookOpen } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import MobileMenuSection from "./MobileMenuSection";
 import {
@@ -43,6 +43,7 @@ const MobileMenu = ({ isOpen, openSections, toggleSection }: MobileMenuProps) =>
               to="/blog" 
               className="flex items-center gap-2 text-lg font-medium text-gray-300 hover:text-blue-400 transition-colors"
             >
+              <BookOpen className="h-5 w-5" />
               Blog
             </Link>
           </div>
