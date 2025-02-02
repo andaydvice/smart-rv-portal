@@ -28,9 +28,9 @@ const MobileMenu = ({ isOpen, openSections, toggleSection }: MobileMenuProps) =>
           <div className="px-4 py-3">
             <Link 
               to="/" 
-              className="flex items-center gap-2 text-gray-300 hover:text-blue-400 transition-colors"
+              className="flex items-center gap-2 text-lg font-medium text-gray-300 hover:text-blue-400 transition-colors"
             >
-              <Home className="h-4 w-4" />
+              <Home className="h-5 w-5" />
               Home
             </Link>
           </div>
