@@ -43,7 +43,7 @@ const FeaturedCategories = () => {
             <div className="flex-1 flex items-center">
               <div className="space-y-6">
                 <div className="flex items-center gap-4">
-                  <span className="bg-[#1B2028] text-white px-4 py-2 text-sm rounded-full">
+                  <span className="bg-connectivity-accent text-white px-4 py-2 text-sm rounded-full font-medium">
                     {getCategoryDisplay(post.category)}
                   </span>
                 </div>
