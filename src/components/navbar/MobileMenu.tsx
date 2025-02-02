@@ -37,18 +37,6 @@ const MobileMenu = ({ isOpen, openSections, toggleSection }: MobileMenuProps) =>
           </div>
         )}
 
-        {!isBlogPage && (
-          <div className="px-4 py-3">
-            <Link 
-              to="/blog" 
-              className="flex items-center gap-2 text-lg font-medium text-gray-300 hover:text-blue-400 transition-colors"
-            >
-              <BookOpen className="h-5 w-5" />
-              Blog
-            </Link>
-          </div>
-        )}
-
         <MobileMenuSection 
           title="Core Systems"
           isOpen={openSections.core}
@@ -99,6 +87,18 @@ const MobileMenu = ({ isOpen, openSections, toggleSection }: MobileMenuProps) =>
             <Link to="/calculators">RV Tools</Link>
           </div>
         </MobileMenuSection>
+
+        {!isBlogPage && (
+          <div className="px-4 py-3">
+            <Link 
+              to="/blog" 
+              className="flex items-center gap-2 text-lg font-medium text-gray-300 hover:text-blue-400 transition-colors"
+            >
+              <BookOpen className="h-5 w-5" />
+              Blog
+            </Link>
+          </div>
+        )}
       </div>
     </div>
   );
