@@ -1,3 +1,4 @@
+
 "use client";
 
 import { SplineScene } from "@/components/ui/splite";
@@ -6,7 +7,7 @@ import { Spotlight } from "@/components/ui/spotlight";
 
 export function SplineSceneBasic() {
   return (
-    <Card className="w-full h-[500px] bg-[#080F20] relative overflow-hidden mt-8">
+    <Card className="w-full h-[800px] bg-[#080F20] relative overflow-hidden mt-8">
       <Spotlight
         className="-top-40 left-0 md:left-60 md:-top-20"
         fill="white"
@@ -15,6 +16,13 @@ export function SplineSceneBasic() {
       <div className="flex h-full flex-col md:flex-row">
         {/* Left content */}
         <div className="flex-1 p-8 relative z-10 flex flex-col justify-start overflow-y-auto">
+          <div className="w-full mb-8 rounded-lg overflow-hidden">
+            <img 
+              src="/lovable-uploads/3175b015-a5c7-4df7-b8ca-b8a130b05519.png"
+              alt="People enjoying their RV experience with outdoor dining setup"
+              className="w-full h-auto object-cover rounded-lg"
+            />
+          </div>
           <h2 className="text-4xl md:text-5xl font-bold text-white text-left">
             Smart RV Experience
           </h2>
