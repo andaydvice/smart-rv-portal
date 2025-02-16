@@ -114,16 +114,16 @@ const DesktopNavigation = () => {
         </NavigationMenuList>
       </NavigationMenu>
 
-      <div className="flex items-center space-x-4">
+      <div className="flex items-center space-x-4 flex-shrink-0">
         {user ? (
           <div className="flex items-center gap-4">
-            <div className="flex items-center gap-2 text-gray-300">
-              <User className="h-4 w-4" />
-              <span className="text-base">{user.email}</span>
+            <div className="flex items-center gap-2 text-gray-300 whitespace-nowrap overflow-hidden">
+              <User className="h-4 w-4 flex-shrink-0" />
+              <span className="text-base truncate max-w-[200px]">{user.email}</span>
             </div>
             <button
               onClick={handleLogout}
-              className="text-gray-300 hover:text-blue-400 transition-colors text-base flex items-center gap-2 px-4 py-2"
+              className="text-gray-300 hover:text-blue-400 transition-colors text-base flex items-center gap-2 px-4 py-2 whitespace-nowrap"
             >
               <LogOut className="h-4 w-4" />
               Logout
