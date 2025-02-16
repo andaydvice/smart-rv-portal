@@ -1,5 +1,5 @@
 
-import { Building2, MapPin, Phone, Mail, CheckCircle, Heart } from 'lucide-react';
+import { Building2, MapPin, Phone, Mail, CheckCircle, Heart, Star } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 import { useFavorites } from './useFavorites';
 import { Button } from '@/components/ui/button';
@@ -28,6 +28,8 @@ interface StorageFacility {
   };
   contact_phone?: string;
   contact_email?: string;
+  avg_rating?: number;
+  review_count?: number;
 }
 
 interface FacilityCardProps {
@@ -80,6 +82,29 @@ const FacilityCard = ({ facility, isHighlighted, onClick }: FacilityCardProps) =
     }
   };
 
+  const renderRating = () => {
+    if (!facility.avg_rating) return null;
+    return (
+      <div className="flex items-center gap-2 text-sm">
+        <div className="flex items-center">
+          {Array.from({ length: 5 }).map((_, index) => (
+            <Star
+              key={index}
+              className={`w-4 h-4 ${
+                index < Math.floor(facility.avg_rating || 0)
+                  ? 'fill-yellow-400 text-yellow-400'
+                  : 'text-gray-400'
+              }`}
+            />
+          ))}
+        </div>
+        <span className="text-gray-400">
+          ({facility.review_count} {facility.review_count === 1 ? 'review' : 'reviews'})
+        </span>
+      </div>
+    );
+  };
+
   return (
     <Card 
       className={`p-4 cursor-pointer transition-all duration-200 bg-[#131a2a] border-gray-700 hover:border-[#60A5FA] ${
@@ -98,6 +123,7 @@ const FacilityCard = ({ facility, isHighlighted, onClick }: FacilityCardProps) =
               <MapPin className="w-4 h-4 mt-1 flex-shrink-0" />
               <span className="text-sm">{facility.address}, {facility.city}, {facility.state}</span>
             </div>
+            {renderRating()}
           </div>
           <Button
             variant="ghost"

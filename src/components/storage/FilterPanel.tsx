@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/select";
 import { FilterState } from './types';
 import { supabase } from '@/integrations/supabase/client';
-import { MapPin, X } from 'lucide-react';
+import { MapPin, Star, X } from 'lucide-react';
 
 interface FilterPanelProps {
   onFilterChange: (filters: FilterState) => void;
@@ -30,7 +30,8 @@ const FilterPanel = ({ onFilterChange }: FilterPanelProps) => {
       vehicle_washing: false
     },
     priceRange: [0, 1000],
-    selectedState: null
+    selectedState: null,
+    minRating: null
   });
 
   const [states, setStates] = useState<{ state: string, count: number }[]>([]);
@@ -77,6 +78,12 @@ const FilterPanel = ({ onFilterChange }: FilterPanelProps) => {
     onFilterChange(newFilters);
   };
 
+  const handleRatingChange = (rating: string | null) => {
+    const newFilters = { ...filters, minRating: rating ? Number(rating) : null };
+    setFilters(newFilters);
+    onFilterChange(newFilters);
+  };
+
   const handleReset = () => {
     const defaultFilters: FilterState = {
       features: {
@@ -87,7 +94,8 @@ const FilterPanel = ({ onFilterChange }: FilterPanelProps) => {
         vehicle_washing: false
       },
       priceRange: [0, 1000],
-      selectedState: null
+      selectedState: null,
+      minRating: null
     };
     setFilters(defaultFilters);
     onFilterChange(defaultFilters);
@@ -127,17 +135,6 @@ const FilterPanel = ({ onFilterChange }: FilterPanelProps) => {
                 ))}
               </SelectContent>
             </Select>
-            {filters.selectedState && (
-              <Button
-                variant="ghost"
-                size="sm"
-                className="w-full flex items-center justify-center gap-2 text-gray-400 hover:text-white"
-                onClick={() => handleStateChange(null)}
-              >
-                <X className="w-4 h-4" />
-                Clear State Filter
-              </Button>
-            )}
           </div>
         </div>
 
@@ -175,6 +172,38 @@ const FilterPanel = ({ onFilterChange }: FilterPanelProps) => {
               <span>${filters.priceRange[1]}</span>
             </div>
           </div>
+        </div>
+
+        <div>
+          <h3 className="text-lg font-semibold mb-4">Minimum Rating</h3>
+          <Select
+            value={filters.minRating?.toString() || ""}
+            onValueChange={handleRatingChange}
+          >
+            <SelectTrigger className="w-full bg-[#080F1F] border-gray-700">
+              <SelectValue placeholder="Any rating">
+                {filters.minRating ? (
+                  <div className="flex items-center gap-2">
+                    <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                    {filters.minRating}+ Stars
+                  </div>
+                ) : (
+                  "Any rating"
+                )}
+              </SelectValue>
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="">Any rating</SelectItem>
+              {[4, 3, 2, 1].map((rating) => (
+                <SelectItem key={rating} value={rating.toString()}>
+                  <div className="flex items-center gap-2">
+                    <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                    {rating}+ Stars
+                  </div>
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
         </div>
 
         <Button 

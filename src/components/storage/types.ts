@@ -21,6 +21,8 @@ export interface StorageFacility {
   };
   contact_phone?: string;
   contact_email?: string;
+  avg_rating?: number;
+  review_count?: number;
 }
 
 export interface RawStorageFacility {
@@ -45,6 +47,8 @@ export interface RawStorageFacility {
   } | null;
   contact_phone?: string;
   contact_email?: string;
+  avg_rating?: number;
+  review_count?: number;
 }
 
 export interface FilterState {
@@ -57,6 +61,7 @@ export interface FilterState {
   };
   priceRange: [number, number];
   selectedState: string | null;
+  minRating: number | null;
 }
 
 export interface StateBounds {

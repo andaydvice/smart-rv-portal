@@ -5,26 +5,38 @@ import { StorageFacility, FilterState } from './types';
 
 export const useStorageFacilities = (filters: FilterState) => {
   const { data: facilities, isLoading, error } = useQuery({
-    queryKey: ['storage-facilities', filters.selectedState, filters.features],
+    queryKey: ['storage-facilities', filters],
     queryFn: async () => {
       console.log('Fetching facilities with filters:', filters);
       
       let query = supabase
-        .from('storage_facilities')
+        .from('facility_search')
         .select('*');
       
       if (filters.selectedState) {
         query = query.eq('state', filters.selectedState);
       }
 
-      // Handle feature filters
-      const activeFeatures = Object.entries(filters.features)
-        .filter(([_, enabled]) => enabled);
+      // Handle feature filters using the new boolean columns
+      if (filters.features.indoor) {
+        query = query.eq('has_indoor', true);
+      }
+      if (filters.features.climate_controlled) {
+        query = query.eq('has_climate_control', true);
+      }
+      if (filters.features["24h_access"]) {
+        query = query.eq('has_24h_access', true);
+      }
+      if (filters.features.security_system) {
+        query = query.eq('has_security', true);
+      }
+      if (filters.features.vehicle_washing) {
+        query = query.eq('has_washing', true);
+      }
 
-      if (activeFeatures.length > 0) {
-        activeFeatures.forEach(([feature]) => {
-          query = query.eq(`features->>${feature}`, 'true');
-        });
+      // Handle rating filter
+      if (filters.minRating !== null) {
+        query = query.gte('avg_rating', filters.minRating);
       }
       
       const { data, error } = await query;
@@ -45,19 +57,21 @@ export const useStorageFacilities = (filters: FilterState) => {
         latitude: Number(facility.latitude),
         longitude: Number(facility.longitude),
         features: {
-          indoor: (facility.features as any)?.indoor ?? false,
-          climate_controlled: (facility.features as any)?.climate_controlled ?? false,
-          "24h_access": (facility.features as any)?.["24h_access"] ?? false,
-          security_system: (facility.features as any)?.security_system ?? false,
-          vehicle_washing: (facility.features as any)?.vehicle_washing ?? false
+          indoor: facility.has_indoor ?? false,
+          climate_controlled: facility.has_climate_control ?? false,
+          "24h_access": facility.has_24h_access ?? false,
+          security_system: facility.has_security ?? false,
+          vehicle_washing: facility.has_washing ?? false
         },
         price_range: {
-          min: (facility.price_range as any)?.min ?? 0,
-          max: (facility.price_range as any)?.max ?? 0,
-          currency: (facility.price_range as any)?.currency ?? 'USD'
+          min: facility.min_price ?? 0,
+          max: facility.max_price ?? 0,
+          currency: facility.currency ?? 'USD'
         },
         contact_phone: facility.contact_phone,
-        contact_email: facility.contact_email
+        contact_email: facility.contact_email,
+        avg_rating: facility.avg_rating,
+        review_count: facility.review_count
       })) as StorageFacility[];
     }
   });
