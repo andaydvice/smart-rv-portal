@@ -16,13 +16,23 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   useEffect(() => {
     // Get initial session
-    supabase.auth.getUser().then(({ data: { user } }) => {
-      setUser(user);
-      setLoading(false);
-    });
+    const initializeAuth = async () => {
+      try {
+        const { data: { user } } = await supabase.auth.getUser();
+        console.log("Initial auth state:", { user }); // Debug log
+        setUser(user);
+      } catch (error) {
+        console.error("Error getting initial auth state:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    initializeAuth();
 
     // Listen for auth changes
     const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+      console.log("Auth state changed:", { event, session }); // Debug log
       setUser(session?.user ?? null);
       setLoading(false);
     });
