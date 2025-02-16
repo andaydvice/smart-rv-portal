@@ -1,3 +1,4 @@
+
 import Index from "@/pages/Index";
 import Blog from "@/pages/Blog";
 import BlogPost from "@/pages/BlogPost";
@@ -12,11 +13,16 @@ import Troubleshooting from "@/pages/Troubleshooting";
 import VoiceControl from "@/pages/VoiceControl";
 import StorageFacilities from "@/pages/StorageFacilities";
 import Calculators from "@/pages/Calculators";
+import Auth from "@/pages/Auth";
 
 export const routes = [
   {
     path: "/",
     element: <Index />,
+  },
+  {
+    path: "/auth",
+    element: <Auth />,
   },
   {
     path: "/blog",
