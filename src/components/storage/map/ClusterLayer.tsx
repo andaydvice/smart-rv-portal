@@ -11,7 +11,15 @@ interface ClusterLayerProps {
 
 const ClusterLayer: React.FC<ClusterLayerProps> = ({ map, facilities, highlightedFacility }) => {
   useEffect(() => {
-    // Add cluster source and layers when map loads
+    // Remove existing source if it exists
+    if (map.getSource('facilities')) {
+      // Remove layers that use this source first
+      if (map.getLayer('clusters')) map.removeLayer('clusters');
+      if (map.getLayer('cluster-count')) map.removeLayer('cluster-count');
+      map.removeSource('facilities');
+    }
+
+    // Add cluster source and layers
     map.addSource('facilities', {
       type: 'geojson',
       data: {
