@@ -1,5 +1,5 @@
 
-import { RouterProvider } from '@/components/router/RouterProvider';
+import RouterProvider from '@/components/router/RouterProvider';
 import { AuthProvider } from '@/components/auth/AuthContext';
 import { Toaster } from '@/components/ui/toaster';
 
