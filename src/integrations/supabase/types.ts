@@ -129,6 +129,13 @@ export type Database = {
             foreignKeyName: "fk_facility"
             columns: ["facility_id"]
             isOneToOne: false
+            referencedRelation: "facility_search"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "fk_facility"
+            columns: ["facility_id"]
+            isOneToOne: false
             referencedRelation: "storage_facilities"
             referencedColumns: ["id"]
           },
@@ -160,6 +167,13 @@ export type Database = {
           reviewer_name?: string | null
         }
         Relationships: [
+          {
+            foreignKeyName: "storage_facility_reviews_facility_id_fkey"
+            columns: ["facility_id"]
+            isOneToOne: false
+            referencedRelation: "facility_search"
+            referencedColumns: ["id"]
+          },
           {
             foreignKeyName: "storage_facility_reviews_facility_id_fkey"
             columns: ["facility_id"]
@@ -198,6 +212,28 @@ export type Database = {
       }
     }
     Views: {
+      facility_search: {
+        Row: {
+          address: string | null
+          avg_rating: number | null
+          city: string | null
+          contact_email: string | null
+          contact_phone: string | null
+          created_at: string | null
+          features: Json | null
+          id: string | null
+          is_favorited: boolean | null
+          latitude: number | null
+          longitude: number | null
+          name: string | null
+          price_range: Json | null
+          review_count: number | null
+          state: string | null
+          updated_at: string | null
+          zip_code: string | null
+        }
+        Relationships: []
+      }
       geography_columns: {
         Row: {
           coord_dimension: number | null
@@ -579,6 +615,15 @@ export type Database = {
             }
             Returns: string
           }
+      calculate_distance_miles: {
+        Args: {
+          lat1: number
+          lon1: number
+          lat2: number
+          lon2: number
+        }
+        Returns: number
+      }
       disablelongtransactions: {
         Args: Record<PropertyKey, never>
         Returns: string
