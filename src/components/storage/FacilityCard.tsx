@@ -4,6 +4,7 @@ import { Card } from '@/components/ui/card';
 import { useFavorites } from './useFavorites';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/components/ui/use-toast';
+import { useNavigate } from 'react-router-dom';
 
 interface StorageFacility {
   id: string;
@@ -37,6 +38,7 @@ interface FacilityCardProps {
 
 const FacilityCard = ({ facility, isHighlighted, onClick }: FacilityCardProps) => {
   const { toast } = useToast();
+  const navigate = useNavigate();
   const { isAuthenticated, isFavorite, addFavorite, removeFavorite, isLoading } = useFavorites();
   
   const featureLabels = {
@@ -56,9 +58,17 @@ const FacilityCard = ({ facility, isHighlighted, onClick }: FacilityCardProps) =
     
     if (!isAuthenticated) {
       toast({
-        title: "Authentication Required",
-        description: "Please sign in to save favorites",
-        variant: "destructive"
+        title: "Want to save favorites?",
+        description: "Create a free account to save your favorite storage facilities and access them anytime.",
+        action: (
+          <Button 
+            variant="outline" 
+            onClick={() => navigate('/auth')}
+            className="bg-blue-600 text-white hover:bg-blue-700"
+          >
+            Sign Up
+          </Button>
+        ),
       });
       return;
     }

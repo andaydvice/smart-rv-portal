@@ -8,11 +8,8 @@ const RouterProvider = () => {
   console.log('RouterProvider - Available Routes:', routes.map(route => route.path));
   
   // Define which routes should be protected
-  const protectedPaths = [
-    '/storage-facilities',
-    '/rv-weather',
-    '/calculators'
-  ];
+  // Now only protecting routes that involve saving personal data
+  const protectedPaths: string[] = [];  // Removing authentication requirements for core features
 
   return (
     <BrowserRouter>

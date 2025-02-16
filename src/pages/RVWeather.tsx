@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { AlertTriangle } from "lucide-react";
+import { AlertTriangle, LogIn } from "lucide-react";
 import { APIKeyInput } from "@/components/weather/APIKeyInput";
 import AlertCard from "@/components/weather/AlertCard";
 import SafetyInsights from "@/components/weather/SafetyInsights";
@@ -13,8 +13,14 @@ import WeatherDataProvider from "@/components/weather/WeatherDataProvider";
 import WeatherCardsSection from "@/components/weather/WeatherCardsSection";
 import { Location } from "@/types/weather";
 import { weatherConfig } from "@/utils/weatherAPI";
+import { useAuth } from "@/components/auth/AuthContext";
+import { Button } from "@/components/ui/button";
+import { useNavigate } from "react-router-dom";
 
 const RVWeather = () => {
+  const { user } = useAuth();
+  const navigate = useNavigate();
+
   console.log("[RVWeather] Rendering");
   const [currentLocation, setCurrentLocation] = useState<Location>(() => {
     const savedLocation = localStorage.getItem('weatherLocation');
@@ -48,6 +54,22 @@ const RVWeather = () => {
           <WeatherDataProvider currentLocation={currentLocation}>
             {({ weatherData, isLoading, error, isActivationError }) => (
               <>
+                {!user && (
+                  <Alert className="mb-8 bg-blue-500/10 border-blue-500/50">
+                    <LogIn className="h-4 w-4 text-blue-500" />
+                    <AlertDescription className="text-blue-400 flex items-center justify-between">
+                      <span>Sign up for free to get personalized weather alerts and save your favorite locations.</span>
+                      <Button 
+                        variant="outline"
+                        onClick={() => navigate('/auth')}
+                        className="ml-4 bg-blue-600 text-white hover:bg-blue-700"
+                      >
+                        Sign Up
+                      </Button>
+                    </AlertDescription>
+                  </Alert>
+                )}
+
                 {isActivationError && (
                   <Alert className="mb-8 bg-yellow-500/10 border-yellow-500/50">
                     <AlertTriangle className="h-4 w-4 text-yellow-500" />
