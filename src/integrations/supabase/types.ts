@@ -105,6 +105,35 @@ export type Database = {
         }
         Relationships: []
       }
+      storage_facility_favorites: {
+        Row: {
+          created_at: string
+          facility_id: string
+          id: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          facility_id: string
+          id?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          facility_id?: string
+          id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "fk_facility"
+            columns: ["facility_id"]
+            isOneToOne: false
+            referencedRelation: "storage_facilities"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       storage_facility_reviews: {
         Row: {
           created_at: string

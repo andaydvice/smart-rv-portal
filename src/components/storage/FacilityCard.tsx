@@ -1,6 +1,9 @@
 
-import { Building2, MapPin, Phone, Mail, CheckCircle } from 'lucide-react';
+import { Building2, MapPin, Phone, Mail, CheckCircle, Heart } from 'lucide-react';
 import { Card } from '@/components/ui/card';
+import { useFavorites } from './useFavorites';
+import { Button } from '@/components/ui/button';
+import { useToast } from '@/components/ui/use-toast';
 
 interface StorageFacility {
   id: string;
@@ -33,6 +36,9 @@ interface FacilityCardProps {
 }
 
 const FacilityCard = ({ facility, isHighlighted, onClick }: FacilityCardProps) => {
+  const { toast } = useToast();
+  const { isAuthenticated, isFavorite, addFavorite, removeFavorite, isLoading } = useFavorites();
+  
   const featureLabels = {
     indoor: 'Indoor Storage',
     climate_controlled: 'Climate Controlled',
@@ -44,6 +50,25 @@ const FacilityCard = ({ facility, isHighlighted, onClick }: FacilityCardProps) =
   const activeFeatures = Object.entries(facility.features)
     .filter(([_, value]) => value)
     .map(([key, _]) => featureLabels[key as keyof typeof featureLabels]);
+
+  const handleFavoriteClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    
+    if (!isAuthenticated) {
+      toast({
+        title: "Authentication Required",
+        description: "Please sign in to save favorites",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    if (isFavorite(facility.id)) {
+      removeFavorite(facility.id);
+    } else {
+      addFavorite(facility.id);
+    }
+  };
 
   return (
     <Card 
@@ -64,6 +89,17 @@ const FacilityCard = ({ facility, isHighlighted, onClick }: FacilityCardProps) =
               <span className="text-sm">{facility.address}, {facility.city}, {facility.state}</span>
             </div>
           </div>
+          <Button
+            variant="ghost"
+            size="icon"
+            className="h-8 w-8"
+            disabled={isLoading}
+            onClick={handleFavoriteClick}
+          >
+            <Heart 
+              className={`w-5 h-5 ${isFavorite(facility.id) ? 'fill-red-500 text-red-500' : 'text-gray-400'}`}
+            />
+          </Button>
         </div>
 
         <div className="flex justify-between items-center py-2 border-y border-gray-700">
