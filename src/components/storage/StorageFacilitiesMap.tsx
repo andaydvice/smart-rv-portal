@@ -33,7 +33,8 @@ const StorageFacilitiesMap = () => {
       vehicle_washing: false
     },
     priceRange: [0, 1000],
-    selectedState: null
+    selectedState: null,
+    minRating: null  // Added this line to match FilterState interface
   });
 
   const { facilities: filteredFacilities, isLoading, error } = useStorageFacilities(filters);
