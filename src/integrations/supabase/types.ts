@@ -220,11 +220,19 @@ export type Database = {
           contact_email: string | null
           contact_phone: string | null
           created_at: string | null
+          currency: string | null
           features: Json | null
+          has_24h_access: boolean | null
+          has_climate_control: boolean | null
+          has_indoor: boolean | null
+          has_security: boolean | null
+          has_washing: boolean | null
           id: string | null
           is_favorited: boolean | null
           latitude: number | null
           longitude: number | null
+          max_price: number | null
+          min_price: number | null
           name: string | null
           price_range: Json | null
           review_count: number | null
