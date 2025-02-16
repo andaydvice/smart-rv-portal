@@ -1,10 +1,10 @@
 
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
-import { StorageFacility, RawStorageFacility, FilterState } from './types';
+import { StorageFacility, FilterState } from './types';
 
 export const useStorageFacilities = (filters: FilterState) => {
-  const { data: facilities } = useQuery({
+  const { data: facilities, isLoading, error } = useQuery({
     queryKey: ['storage-facilities'],
     queryFn: async () => {
       const { data, error } = await supabase
@@ -51,5 +51,9 @@ export const useStorageFacilities = (filters: FilterState) => {
     });
   });
 
-  return { facilities: filteredFacilities };
+  return { 
+    facilities: filteredFacilities,
+    isLoading,
+    error
+  };
 };
