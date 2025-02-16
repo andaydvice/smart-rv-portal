@@ -100,8 +100,8 @@ const FilterPanel = ({ onFilterChange }: FilterPanelProps) => {
           <h3 className="text-lg font-semibold mb-4">Location</h3>
           <div className="space-y-2">
             <Select
-              value={filters.selectedState || ""}
-              onValueChange={(value) => handleStateChange(value || null)}
+              value={filters.selectedState || "all"}
+              onValueChange={(value) => handleStateChange(value === "all" ? null : value)}
             >
               <SelectTrigger className="w-full bg-[#080F1F] border-gray-700">
                 <SelectValue placeholder="Select a state">
@@ -116,7 +116,7 @@ const FilterPanel = ({ onFilterChange }: FilterPanelProps) => {
                 </SelectValue>
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="">All States</SelectItem>
+                <SelectItem value="all">All States</SelectItem>
                 {states.map((state) => (
                   <SelectItem key={state.state} value={state.state}>
                     <div className="flex items-center justify-between w-full">
