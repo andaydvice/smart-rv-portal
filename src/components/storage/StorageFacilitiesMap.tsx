@@ -12,10 +12,15 @@ import { useStorageFacilities } from './useStorageFacilities';
 import { AlertCircle, Loader2, Search } from 'lucide-react';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 
+const MAPBOX_TOKEN_KEY = 'mapbox_token';
+
 const StorageFacilitiesMap = () => {
   console.log('StorageFacilitiesMap component rendering');
   
-  const [mapToken, setMapToken] = useState<string>('');
+  const [mapToken, setMapToken] = useState<string>(() => {
+    // Try to get token from localStorage on initial render
+    return localStorage.getItem(MAPBOX_TOKEN_KEY) || '';
+  });
   const [mapTokenError, setMapTokenError] = useState<string>('');
   const [highlightedFacility, setHighlightedFacility] = useState<string | null>(null);
   const [filters, setFilters] = useState<FilterState>({
@@ -45,6 +50,10 @@ const StorageFacilitiesMap = () => {
       setMapTokenError('Invalid Mapbox token. Token should start with "pk."');
     } else {
       setMapTokenError('');
+      if (mapToken) {
+        // Save valid token to localStorage
+        localStorage.setItem(MAPBOX_TOKEN_KEY, mapToken);
+      }
     }
   }, [mapToken]);
 
