@@ -4,7 +4,7 @@ import StorageFacilitiesMap from "@/components/storage/StorageFacilitiesMap";
 
 export default function StorageFacilities() {
   return (
-    <div className="min-h-screen bg-[#080F1F] text-white">
+    <div className="min-h-screen bg-[#080F1F] text-white pt-8">
       <Container>
         <div className="py-8">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">
