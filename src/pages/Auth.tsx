@@ -30,7 +30,7 @@ const Auth = () => {
           
           <div className="space-y-4">
             <h2 className="text-xl font-semibold text-blue-400">Why Create an Account?</h2>
-            <ul className="space-y-4 text-gray-300">
+            <ul className="space-y-4 text-left text-gray-300">
               <li className="flex items-start gap-3">
                 <span className="text-blue-400 text-lg">✓</span>
                 <span>Access exclusive RV calculators and tools to plan your trips better</span>
