@@ -31,10 +31,10 @@ const DesktopNavigation = () => {
 
   return (
     <div className="hidden md:flex md:items-center md:space-x-8">
-      <NavigationMenu>
-        <NavigationMenuList className="flex items-center space-x-2">
+      <NavigationMenu className="relative">
+        <NavigationMenuList className="flex items-center space-x-2 whitespace-nowrap">
           {!isHomePage && (
-            <NavigationMenuItem>
+            <NavigationMenuItem className="flex">
               <Link 
                 to="/" 
                 className="text-gray-300 hover:text-blue-400 transition-colors text-base flex items-center gap-2 px-4 py-2"
@@ -45,7 +45,7 @@ const DesktopNavigation = () => {
             </NavigationMenuItem>
           )}
 
-          <NavigationMenuItem>
+          <NavigationMenuItem className="flex">
             <NavigationMenuTrigger className="text-gray-300 hover:text-blue-400 transition-colors !bg-transparent data-[state=open]:!bg-transparent text-base">
               RV Intelligence
             </NavigationMenuTrigger>
@@ -56,7 +56,7 @@ const DesktopNavigation = () => {
             </NavigationMenuContent>
           </NavigationMenuItem>
 
-          <NavigationMenuItem>
+          <NavigationMenuItem className="flex">
             <NavigationMenuTrigger className="text-gray-300 hover:text-blue-400 transition-colors !bg-transparent data-[state=open]:!bg-transparent text-base">
               RV Systems
             </NavigationMenuTrigger>
@@ -67,7 +67,7 @@ const DesktopNavigation = () => {
             </NavigationMenuContent>
           </NavigationMenuItem>
 
-          <NavigationMenuItem>
+          <NavigationMenuItem className="flex">
             <NavigationMenuTrigger className="text-gray-300 hover:text-blue-400 transition-colors !bg-transparent data-[state=open]:!bg-transparent text-base">
               Models
             </NavigationMenuTrigger>
@@ -78,7 +78,7 @@ const DesktopNavigation = () => {
             </NavigationMenuContent>
           </NavigationMenuItem>
 
-          <NavigationMenuItem>
+          <NavigationMenuItem className="flex">
             <Link 
               to="/calculators" 
               className="text-gray-300 hover:text-blue-400 transition-colors text-base flex items-center gap-2 px-4 py-2"
@@ -88,7 +88,7 @@ const DesktopNavigation = () => {
             </Link>
           </NavigationMenuItem>
 
-          <NavigationMenuItem>
+          <NavigationMenuItem className="flex">
             <Link 
               to="/blog" 
               className="text-gray-300 hover:text-blue-400 transition-colors text-base flex items-center gap-2 px-4 py-2"
@@ -98,7 +98,7 @@ const DesktopNavigation = () => {
             </Link>
           </NavigationMenuItem>
 
-          <NavigationMenuItem>
+          <NavigationMenuItem className="flex">
             <NavigationMenuTrigger className="text-gray-300 hover:text-blue-400 transition-colors !bg-transparent data-[state=open]:!bg-transparent text-base">
               Support
             </NavigationMenuTrigger>
