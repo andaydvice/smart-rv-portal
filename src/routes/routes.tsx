@@ -15,66 +15,85 @@ import VoiceControl from "@/pages/VoiceControl";
 import Troubleshooting from "@/pages/Troubleshooting";
 import ScheduleDemo from "@/pages/ScheduleDemo";
 import StorageFacilities from "@/pages/StorageFacilities";
+import Layout from "@/components/layout/Layout";
+import ProtectedRoute from "@/components/auth/ProtectedRoute";
+
+// Define which routes should be protected
+const protectedPaths: string[] = [];  // Removing authentication requirements for core features
+
+const wrapWithLayout = (element: React.ReactNode, path: string) => {
+  const isProtected = protectedPaths.includes(path);
+  
+  if (isProtected) {
+    return (
+      <ProtectedRoute>
+        <Layout>{element}</Layout>
+      </ProtectedRoute>
+    );
+  }
+  
+  return <Layout>{element}</Layout>;
+};
 
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: <Index />,
+    element: wrapWithLayout(<Index />, "/"),
   },
   {
     path: "/auth",
-    element: <Auth />,
+    element: wrapWithLayout(<Auth />, "/auth"),
   },
   {
     path: "/features",
-    element: <Features />,
+    element: wrapWithLayout(<Features />, "/features"),
   },
   {
     path: "/models",
-    element: <Models />,
+    element: wrapWithLayout(<Models />, "/models"),
   },
   {
     path: "/documentation",
-    element: <Documentation />,
+    element: wrapWithLayout(<Documentation />, "/documentation"),
   },
   {
     path: "/blog",
-    element: <Blog />,
+    element: wrapWithLayout(<Blog />, "/blog"),
   },
   {
     path: "/blog/:slug",
-    element: <BlogPost />,
+    element: wrapWithLayout(<BlogPost />, "/blog/:slug"),
   },
   {
     path: "/rv-weather",
-    element: <RVWeather />,
+    element: wrapWithLayout(<RVWeather />, "/rv-weather"),
   },
   {
     path: "/contact",
-    element: <Contact />,
+    element: wrapWithLayout(<Contact />, "/contact"),
   },
   {
     path: "/calculators",
-    element: <Calculators />,
+    element: wrapWithLayout(<Calculators />, "/calculators"),
   },
   {
     path: "/technology",
-    element: <Technology />,
+    element: wrapWithLayout(<Technology />, "/technology"),
   },
   {
     path: "/voice-control",
-    element: <VoiceControl />,
+    element: wrapWithLayout(<VoiceControl />, "/voice-control"),
   },
   {
     path: "/troubleshooting",
-    element: <Troubleshooting />,
+    element: wrapWithLayout(<Troubleshooting />, "/troubleshooting"),
   },
   {
     path: "/schedule-demo",
-    element: <ScheduleDemo />,
+    element: wrapWithLayout(<ScheduleDemo />, "/schedule-demo"),
   },
   {
     path: "/storage-facilities",
-    element: <StorageFacilities />,
+    element: wrapWithLayout(<StorageFacilities />, "/storage-facilities"),
   },
 ]);
