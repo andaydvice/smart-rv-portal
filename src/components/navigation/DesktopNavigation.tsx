@@ -51,7 +51,7 @@ const DesktopNavigation = () => {
 
           <NavigationMenuItem>
             <NavigationMenuTrigger className="text-gray-300 hover:text-blue-400 transition-colors !bg-transparent data-[state=open]:!bg-transparent text-base">
-              Technology
+              RV Intelligence
             </NavigationMenuTrigger>
             <NavigationMenuContent>
               <div className="w-[400px] bg-gray-900/95 backdrop-blur-sm rounded-lg border border-gray-800 shadow-lg p-6">
