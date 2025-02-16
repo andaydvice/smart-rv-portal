@@ -13,6 +13,8 @@ import { AlertCircle, Loader2, Search } from 'lucide-react';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 
 const StorageFacilitiesMap = () => {
+  console.log('StorageFacilitiesMap component rendering');
+  
   const [mapToken, setMapToken] = useState<string>('');
   const [mapTokenError, setMapTokenError] = useState<string>('');
   const [highlightedFacility, setHighlightedFacility] = useState<string | null>(null);
@@ -29,6 +31,14 @@ const StorageFacilitiesMap = () => {
   });
 
   const { facilities: filteredFacilities, isLoading, error } = useStorageFacilities(filters);
+
+  console.log('Current state:', {
+    mapToken,
+    mapTokenError,
+    isLoading,
+    error,
+    facilitiesCount: filteredFacilities?.length
+  });
 
   useEffect(() => {
     if (mapToken && !mapToken.startsWith('pk.')) {
