@@ -55,7 +55,18 @@ const StorageFacilitiesMap = () => {
         .select('*');
       
       if (error) throw error;
-      return data as StorageFacility[];
+      // Cast the data to ensure type safety
+      return (data as any[]).map(facility => ({
+        id: facility.id,
+        name: facility.name,
+        address: facility.address,
+        city: facility.city,
+        state: facility.state,
+        latitude: facility.latitude,
+        longitude: facility.longitude,
+        features: facility.features as StorageFacility['features'],
+        price_range: facility.price_range as StorageFacility['price_range']
+      })) as StorageFacility[];
     }
   });
 

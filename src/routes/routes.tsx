@@ -70,4 +70,4 @@ export const routes = [
     path: "/calculators",
     element: <Calculators />,
   },
-];
+] as const;
