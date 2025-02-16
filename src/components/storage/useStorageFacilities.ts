@@ -5,7 +5,7 @@ import { StorageFacility, FilterState } from './types';
 
 export const useStorageFacilities = (filters: FilterState) => {
   const { data: facilities, isLoading, error } = useQuery({
-    queryKey: ['storage-facilities', filters.selectedState],
+    queryKey: ['storage-facilities', filters.selectedState, filters.features],
     queryFn: async () => {
       console.log('Fetching facilities with filters:', filters);
       
@@ -15,6 +15,23 @@ export const useStorageFacilities = (filters: FilterState) => {
       
       if (filters.selectedState) {
         query = query.eq('state', filters.selectedState);
+      }
+
+      // Add feature filters directly in the database query
+      if (filters.features.indoor) {
+        query = query.contains('features', { indoor: true });
+      }
+      if (filters.features.climate_controlled) {
+        query = query.contains('features', { climate_controlled: true });
+      }
+      if (filters.features['24h_access']) {
+        query = query.contains('features', { '24h_access': true });
+      }
+      if (filters.features.security_system) {
+        query = query.contains('features', { security_system: true });
+      }
+      if (filters.features.vehicle_washing) {
+        query = query.contains('features', { vehicle_washing: true });
       }
       
       const { data, error } = await query;
@@ -52,16 +69,10 @@ export const useStorageFacilities = (filters: FilterState) => {
     }
   });
 
+  // Apply price range filter in memory since it's a range
   const filteredFacilities = facilities?.filter(facility => {
     const facilityMaxPrice = facility.price_range.max;
-    if (facilityMaxPrice < filters.priceRange[0] || facilityMaxPrice > filters.priceRange[1]) {
-      return false;
-    }
-
-    return Object.entries(filters.features).every(([feature, isSelected]) => {
-      if (!isSelected) return true;
-      return facility.features[feature as keyof typeof facility.features];
-    });
+    return facilityMaxPrice >= filters.priceRange[0] && facilityMaxPrice <= filters.priceRange[1];
   });
 
   return { 
