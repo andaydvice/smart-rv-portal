@@ -1,4 +1,3 @@
-
 "use client";
 
 import React, { useEffect, useRef, useState } from 'react';
@@ -8,7 +7,8 @@ import { Card } from '@/components/ui/card';
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
 import FilterPanel, { FilterState } from './FilterPanel';
-import { Phone, Mail, MapPin } from 'lucide-react';
+import { ScrollArea } from '@/components/ui/scroll-area';
+import FacilityCard from './FacilityCard';
 
 interface StorageFacility {
   id: string;
@@ -34,7 +34,6 @@ interface StorageFacility {
   contact_email?: string;
 }
 
-// Define the shape of the raw data from Supabase
 interface RawStorageFacility {
   id: string;
   name: string;
@@ -64,6 +63,7 @@ const StorageFacilitiesMap = () => {
   const map = useRef<mapboxgl.Map | null>(null);
   const markers = useRef<mapboxgl.Marker[]>([]);
   const [mapToken, setMapToken] = useState<string>('');
+  const [highlightedFacility, setHighlightedFacility] = useState<string | null>(null);
   const [filters, setFilters] = useState<FilterState>({
     features: {
       indoor: false,
@@ -84,7 +84,6 @@ const StorageFacilitiesMap = () => {
       
       if (error) throw error;
       
-      // Cast the data and transform it to ensure type safety
       const rawData = data as any[];
       return rawData.map(facility => ({
         id: facility.id,
@@ -113,15 +112,13 @@ const StorageFacilitiesMap = () => {
   });
 
   const filteredFacilities = facilities?.filter(facility => {
-    // Check if facility price is within range
     const facilityMaxPrice = facility.price_range.max;
     if (facilityMaxPrice < filters.priceRange[0] || facilityMaxPrice > filters.priceRange[1]) {
       return false;
     }
 
-    // Check if facility has all selected features
     return Object.entries(filters.features).every(([feature, isSelected]) => {
-      if (!isSelected) return true; // Skip check if feature is not selected
+      if (!isSelected) return true;
       return facility.features[feature as keyof typeof facility.features];
     });
   });
@@ -197,14 +194,27 @@ const StorageFacilitiesMap = () => {
     `;
   };
 
+  const handleFacilityClick = (facility: StorageFacility) => {
+    setHighlightedFacility(facility.id);
+    map.current?.flyTo({
+      center: [facility.longitude, facility.latitude],
+      zoom: 15,
+      duration: 1500
+    });
+
+    const marker = markers.current.find(m => {
+      const [lng, lat] = m.getLngLat().toArray();
+      return lng === facility.longitude && lat === facility.latitude;
+    });
+    marker?.togglePopup();
+  };
+
   useEffect(() => {
     if (!map.current || !filteredFacilities?.length) return;
 
-    // Clear existing markers
     markers.current.forEach(marker => marker.remove());
     markers.current = [];
 
-    // Add new markers
     filteredFacilities.forEach(facility => {
       const popup = new mapboxgl.Popup({ 
         offset: 25,
@@ -212,15 +222,20 @@ const StorageFacilitiesMap = () => {
         className: 'storage-facility-popup'
       }).setHTML(createPopupHTML(facility));
 
-      const marker = new mapboxgl.Marker({ color: '#60A5FA' })
+      const marker = new mapboxgl.Marker({ 
+        color: facility.id === highlightedFacility ? '#10B981' : '#60A5FA'
+      })
         .setLngLat([facility.longitude, facility.latitude])
         .setPopup(popup)
         .addTo(map.current!);
 
+      marker.getElement().addEventListener('click', () => {
+        setHighlightedFacility(facility.id);
+      });
+
       markers.current.push(marker);
     });
 
-    // Fit map to markers if there are any
     if (markers.current.length > 0) {
       const bounds = new mapboxgl.LngLatBounds();
       filteredFacilities.forEach(facility => {
@@ -231,7 +246,7 @@ const StorageFacilitiesMap = () => {
         maxZoom: 15
       });
     }
-  }, [filteredFacilities]);
+  }, [filteredFacilities, highlightedFacility]);
 
   useEffect(() => {
     if (!mapContainer.current || !mapToken) return;
@@ -241,7 +256,7 @@ const StorageFacilitiesMap = () => {
     map.current = new mapboxgl.Map({
       container: mapContainer.current,
       style: 'mapbox://styles/mapbox/dark-v11',
-      center: [-98.5795, 39.8283], // Center of USA
+      center: [-98.5795, 39.8283],
       zoom: 3
     });
 
@@ -258,11 +273,27 @@ const StorageFacilitiesMap = () => {
   }, [mapToken]);
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-      <div className="md:col-span-1">
-        <FilterPanel onFilterChange={setFilters} />
+    <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
+      <div className="lg:col-span-3">
+        <div className="space-y-4">
+          <FilterPanel onFilterChange={setFilters} />
+          <Card className="bg-[#080F1F] border-gray-700">
+            <ScrollArea className="h-[600px]">
+              <div className="p-4 space-y-4">
+                {filteredFacilities?.map(facility => (
+                  <FacilityCard
+                    key={facility.id}
+                    facility={facility}
+                    isHighlighted={facility.id === highlightedFacility}
+                    onClick={() => handleFacilityClick(facility)}
+                  />
+                ))}
+              </div>
+            </ScrollArea>
+          </Card>
+        </div>
       </div>
-      <Card className="md:col-span-3 h-[600px] bg-[#080F1F] relative overflow-hidden">
+      <Card className="lg:col-span-9 h-[600px] bg-[#080F1F] relative overflow-hidden">
         {!mapToken && (
           <div className="absolute inset-0 flex items-center justify-center bg-[#080F1F]/80 backdrop-blur-sm z-10">
             <input
@@ -280,4 +311,3 @@ const StorageFacilitiesMap = () => {
 };
 
 export default StorageFacilitiesMap;
-
