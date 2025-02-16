@@ -46,6 +46,15 @@ const DesktopNavigation = () => {
           )}
 
           <NavigationMenuItem>
+            <Link 
+              to="/"
+              className="text-gray-300 hover:text-blue-400 transition-colors text-base flex items-center gap-2 px-4 py-2"
+            >
+              RV Intelligence
+            </Link>
+          </NavigationMenuItem>
+
+          <NavigationMenuItem>
             <NavigationMenuTrigger className="text-gray-300 hover:text-blue-400 transition-colors !bg-transparent data-[state=open]:!bg-transparent text-base">
               Technology
             </NavigationMenuTrigger>
@@ -79,14 +88,20 @@ const DesktopNavigation = () => {
           </NavigationMenuItem>
 
           <NavigationMenuItem>
-            <Link to="/calculators" className="text-gray-300 hover:text-blue-400 transition-colors text-base flex items-center gap-2 px-4 py-2">
+            <Link 
+              to="/calculators" 
+              className="text-gray-300 hover:text-blue-400 transition-colors text-base flex items-center gap-2 px-4 py-2"
+            >
               <Calculator className="h-4 w-4" />
               RV Tools
             </Link>
           </NavigationMenuItem>
 
           <NavigationMenuItem>
-            <Link to="/blog" className="text-gray-300 hover:text-blue-400 transition-colors text-base flex items-center gap-2 px-4 py-2">
+            <Link 
+              to="/blog" 
+              className="text-gray-300 hover:text-blue-400 transition-colors text-base flex items-center gap-2 px-4 py-2"
+            >
               <BookOpen className="h-4 w-4" />
               Blog
             </Link>
