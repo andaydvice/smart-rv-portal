@@ -13,13 +13,14 @@ import { AlertCircle, Loader2, Search } from 'lucide-react';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 
 const MAPBOX_TOKEN_KEY = 'mapbox_token';
+const DEFAULT_MAPBOX_TOKEN = 'pk.eyJ1IjoibG92YWJsZSIsImEiOiJjbHR4Y3EyY2QwMDh0MmpteDV2cHJnNXd4In0.lN1V_ZVkAc7f_pHMvoA0xg';
 
 const StorageFacilitiesMap = () => {
   console.log('StorageFacilitiesMap component rendering');
   
   const [mapToken, setMapToken] = useState<string>(() => {
-    // Try to get token from localStorage on initial render
-    return localStorage.getItem(MAPBOX_TOKEN_KEY) || '';
+    // Try to get token from localStorage, otherwise use default token
+    return localStorage.getItem(MAPBOX_TOKEN_KEY) || DEFAULT_MAPBOX_TOKEN;
   });
   const [mapTokenError, setMapTokenError] = useState<string>('');
   const [highlightedFacility, setHighlightedFacility] = useState<string | null>(null);
