@@ -20,7 +20,7 @@ export const useStorageFacilities = (filters: FilterState) => {
       // Build features filter condition
       const activeFeatures = Object.entries(filters.features)
         .filter(([_, enabled]) => enabled)
-        .map(([feature]) => `features->>${feature} = 'true'`);
+        .map(([feature]) => `features->'${feature}' = 'true'`);
 
       if (activeFeatures.length > 0) {
         query = query.or(activeFeatures.join(','));
