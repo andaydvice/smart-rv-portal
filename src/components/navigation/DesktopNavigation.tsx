@@ -32,7 +32,7 @@ const DesktopNavigation = () => {
   return (
     <div className="hidden md:flex md:items-center md:space-x-8">
       <NavigationMenu>
-        <NavigationMenuList>
+        <NavigationMenuList className="space-x-2">
           {!isHomePage && (
             <NavigationMenuItem>
               <Link 
@@ -105,36 +105,34 @@ const DesktopNavigation = () => {
               </div>
             </NavigationMenuContent>
           </NavigationMenuItem>
-
-          {user ? (
-            <NavigationMenuItem>
-              <div className="flex items-center space-x-4">
-                <span className="text-gray-300 flex items-center gap-2">
-                  <User className="h-4 w-4" />
-                  {user.email}
-                </span>
-                <button
-                  onClick={handleLogout}
-                  className="text-gray-300 hover:text-blue-400 transition-colors text-base flex items-center gap-2 px-4 py-2"
-                >
-                  <LogOut className="h-4 w-4" />
-                  Logout
-                </button>
-              </div>
-            </NavigationMenuItem>
-          ) : (
-            <NavigationMenuItem>
-              <Link
-                to="/auth"
-                className="text-gray-300 hover:text-blue-400 transition-colors text-base flex items-center gap-2 px-4 py-2"
-              >
-                <LogIn className="h-4 w-4" />
-                Login
-              </Link>
-            </NavigationMenuItem>
-          )}
         </NavigationMenuList>
       </NavigationMenu>
+
+      <div className="flex items-center space-x-4">
+        {user ? (
+          <div className="flex items-center gap-4">
+            <div className="flex items-center gap-2 text-gray-300">
+              <User className="h-4 w-4" />
+              <span className="text-base">{user.email}</span>
+            </div>
+            <button
+              onClick={handleLogout}
+              className="text-gray-300 hover:text-blue-400 transition-colors text-base flex items-center gap-2 px-4 py-2"
+            >
+              <LogOut className="h-4 w-4" />
+              Logout
+            </button>
+          </div>
+        ) : (
+          <Link
+            to="/auth"
+            className="text-gray-300 hover:text-blue-400 transition-colors text-base flex items-center gap-2 px-4 py-2"
+          >
+            <LogIn className="h-4 w-4" />
+            Login
+          </Link>
+        )}
+      </div>
     </div>
   );
 };
