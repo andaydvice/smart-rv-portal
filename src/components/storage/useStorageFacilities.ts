@@ -13,8 +13,7 @@ export const useStorageFacilities = (filters: FilterState) => {
       
       if (error) throw error;
       
-      const rawData = data as RawStorageFacility[];
-      return rawData.map(facility => ({
+      return data.map(facility => ({
         id: facility.id,
         name: facility.name,
         address: facility.address,
@@ -23,16 +22,16 @@ export const useStorageFacilities = (filters: FilterState) => {
         latitude: Number(facility.latitude),
         longitude: Number(facility.longitude),
         features: {
-          indoor: facility.features?.indoor ?? false,
-          climate_controlled: facility.features?.climate_controlled ?? false,
-          "24h_access": facility.features?.["24h_access"] ?? false,
-          security_system: facility.features?.security_system ?? false,
-          vehicle_washing: facility.features?.vehicle_washing ?? false
+          indoor: (facility.features as any)?.indoor ?? false,
+          climate_controlled: (facility.features as any)?.climate_controlled ?? false,
+          "24h_access": (facility.features as any)?.["24h_access"] ?? false,
+          security_system: (facility.features as any)?.security_system ?? false,
+          vehicle_washing: (facility.features as any)?.vehicle_washing ?? false
         },
         price_range: {
-          min: facility.price_range?.min ?? 0,
-          max: facility.price_range?.max ?? 0,
-          currency: facility.price_range?.currency ?? 'USD'
+          min: (facility.price_range as any)?.min ?? 0,
+          max: (facility.price_range as any)?.max ?? 0,
+          currency: (facility.price_range as any)?.currency ?? 'USD'
         },
         contact_phone: facility.contact_phone,
         contact_email: facility.contact_email
