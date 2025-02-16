@@ -177,7 +177,7 @@ const FilterPanel = ({ onFilterChange }: FilterPanelProps) => {
         <div>
           <h3 className="text-lg font-semibold mb-4">Minimum Rating</h3>
           <Select
-            value={filters.minRating?.toString() || ""}
+            value={filters.minRating?.toString() || "none"}
             onValueChange={handleRatingChange}
           >
             <SelectTrigger className="w-full bg-[#080F1F] border-gray-700">
@@ -193,7 +193,7 @@ const FilterPanel = ({ onFilterChange }: FilterPanelProps) => {
               </SelectValue>
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="">Any rating</SelectItem>
+              <SelectItem value="none">Any rating</SelectItem>
               {[4, 3, 2, 1].map((rating) => (
                 <SelectItem key={rating} value={rating.toString()}>
                   <div className="flex items-center gap-2">
