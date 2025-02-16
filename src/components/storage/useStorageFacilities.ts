@@ -7,6 +7,8 @@ export const useStorageFacilities = (filters: FilterState) => {
   const { data: facilities, isLoading, error } = useQuery({
     queryKey: ['storage-facilities', filters.selectedState],
     queryFn: async () => {
+      console.log('Fetching facilities with filters:', filters);
+      
       let query = supabase
         .from('storage_facilities')
         .select('*');
@@ -17,7 +19,12 @@ export const useStorageFacilities = (filters: FilterState) => {
       
       const { data, error } = await query;
       
-      if (error) throw error;
+      if (error) {
+        console.error('Error fetching facilities:', error);
+        throw error;
+      }
+
+      console.log('Fetched facilities:', data);
       
       return data.map(facility => ({
         id: facility.id,
