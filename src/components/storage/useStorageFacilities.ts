@@ -2,6 +2,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
 import { StorageFacility, FilterState } from './types';
+import { PostgrestFilterBuilder } from '@supabase/postgrest-js';
 
 export const useStorageFacilities = (filters: FilterState) => {
   const { data: facilities, isLoading, error } = useQuery({
@@ -17,21 +18,21 @@ export const useStorageFacilities = (filters: FilterState) => {
         query = query.eq('state', filters.selectedState);
       }
 
-      // Add feature filters one by one using containedBy
+      // Add feature filters one by one
       if (filters.features.indoor) {
-        query = query.eq('features->indoor', true);
+        query = (query as PostgrestFilterBuilder<any, any, any>).eq('features->indoor', true);
       }
       if (filters.features.climate_controlled) {
-        query = query.eq('features->climate_controlled', true);
+        query = (query as PostgrestFilterBuilder<any, any, any>).eq('features->climate_controlled', true);
       }
       if (filters.features['24h_access']) {
-        query = query.eq('features->24h_access', true);
+        query = (query as PostgrestFilterBuilder<any, any, any>).eq('features->24h_access', true);
       }
       if (filters.features.security_system) {
-        query = query.eq('features->security_system', true);
+        query = (query as PostgrestFilterBuilder<any, any, any>).eq('features->security_system', true);
       }
       if (filters.features.vehicle_washing) {
-        query = query.eq('features->vehicle_washing', true);
+        query = (query as PostgrestFilterBuilder<any, any, any>).eq('features->vehicle_washing', true);
       }
       
       const { data, error } = await query;
