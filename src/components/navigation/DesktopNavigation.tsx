@@ -1,11 +1,33 @@
+
 import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuList, NavigationMenuTrigger } from "@/components/ui/navigation-menu";
 import { CoreSystemsLinks, SmartFeaturesLinks, VehicleSelectionLinks, SupportLinks, CustomerSupportLinks } from "../NavbarLinks";
 import { Link, useLocation } from "react-router-dom";
-import { Calculator, BookOpen, Home } from "lucide-react";
+import { Calculator, BookOpen, Home, LogIn, User, LogOut } from "lucide-react";
+import { useAuth } from "@/components/auth/AuthContext";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
 
 const DesktopNavigation = () => {
   const location = useLocation();
   const isHomePage = location.pathname === "/";
+  const { user } = useAuth();
+  const { toast } = useToast();
+
+  const handleLogout = async () => {
+    try {
+      await supabase.auth.signOut();
+      toast({
+        title: "Logged out successfully",
+        description: "You have been logged out of your account",
+      });
+    } catch (error) {
+      toast({
+        title: "Error logging out",
+        description: "There was a problem logging out. Please try again.",
+        variant: "destructive",
+      });
+    }
+  };
 
   return (
     <div className="hidden md:flex md:items-center md:space-x-8">
@@ -83,6 +105,34 @@ const DesktopNavigation = () => {
               </div>
             </NavigationMenuContent>
           </NavigationMenuItem>
+
+          {user ? (
+            <NavigationMenuItem>
+              <div className="flex items-center space-x-4">
+                <span className="text-gray-300 flex items-center gap-2">
+                  <User className="h-4 w-4" />
+                  {user.email}
+                </span>
+                <button
+                  onClick={handleLogout}
+                  className="text-gray-300 hover:text-blue-400 transition-colors text-base flex items-center gap-2 px-4 py-2"
+                >
+                  <LogOut className="h-4 w-4" />
+                  Logout
+                </button>
+              </div>
+            </NavigationMenuItem>
+          ) : (
+            <NavigationMenuItem>
+              <Link
+                to="/auth"
+                className="text-gray-300 hover:text-blue-400 transition-colors text-base flex items-center gap-2 px-4 py-2"
+              >
+                <LogIn className="h-4 w-4" />
+                Login
+              </Link>
+            </NavigationMenuItem>
+          )}
         </NavigationMenuList>
       </NavigationMenu>
     </div>

@@ -1,13 +1,22 @@
-import { Calculator, Home, BookOpen, Navigation, Shield, Battery, Tv, Music, Wifi, Refrigerator, Car, CarFront, Caravan, Wrench, HelpCircle, FileText, Phone, Mic } from "lucide-react";
-import { Link, useLocation } from "react-router-dom";
+import { Fragment } from "react";
+import { Link } from "react-router-dom";
 import MobileMenuSection from "./MobileMenuSection";
+import { useAuth } from "@/components/auth/AuthContext";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
 import {
-  CoreSystemsLinks,
-  SmartFeaturesLinks,
-  VehicleSelectionLinks,
-  SupportLinks,
-  CustomerSupportLinks
-} from "../NavbarLinks";
+  Home,
+  Laptop,
+  Settings,
+  Car,
+  Calculator,
+  BookOpen,
+  MessageSquare,
+  User,
+  LogIn,
+  LogOut
+} from "lucide-react";
+import { CoreSystemsLinks, SmartFeaturesLinks, VehicleSelectionLinks, SupportLinks, CustomerSupportLinks } from "../NavbarLinks";
 
 interface MobileMenuProps {
   isOpen: boolean;
@@ -16,95 +25,196 @@ interface MobileMenuProps {
 }
 
 const MobileMenu = ({ isOpen, openSections, toggleSection }: MobileMenuProps) => {
-  const location = useLocation();
-  const isHomePage = location.pathname === "/";
-  const isBlogPage = location.pathname === "/blog";
+  const { user } = useAuth();
+  const { toast } = useToast();
+
+  const handleLogout = async () => {
+    try {
+      await supabase.auth.signOut();
+      toast({
+        title: "Logged out successfully",
+        description: "You have been logged out of your account",
+      });
+    } catch (error) {
+      toast({
+        title: "Error logging out",
+        description: "There was a problem logging out. Please try again.",
+        variant: "destructive",
+      });
+    }
+  };
 
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 pt-16 bg-[#080F1F] text-white z-[9998] overflow-y-auto">
-      <div className="p-4 space-y-2">
-        {!isHomePage && (
-          <div className="border-b border-[#1E2A3E] last:border-0">
-            <Link 
-              to="/" 
-              className="flex items-center gap-2 w-full py-4 text-gray-300 hover:text-blue-400 transition-colors"
+    <div className="fixed inset-0 z-[9998] bg-[#080F1F]/95 backdrop-blur-sm">
+      <div className="fixed inset-y-0 right-0 w-full max-w-sm bg-[#151A22] shadow-xl">
+        <div className="flex flex-col h-full pt-20 pb-6 overflow-y-auto">
+          <nav className="flex-1 px-4 space-y-2">
+            <Link
+              to="/"
+              className="flex items-center gap-2 p-3 text-[#A3B3BC] hover:text-[#4B9EF4] transition-colors rounded-lg hover:bg-[#0F1729]/50"
             >
-              <Home className="h-5 w-5 text-blue-500" />
-              <span className="text-lg font-medium text-white">Home</span>
+              <Home className="h-5 w-5" />
+              Home
             </Link>
-          </div>
-        )}
 
-        <MobileMenuSection 
-          title="Core Systems"
-          icon={<Shield className="h-5 w-5 text-emerald-500" />}
-          isOpen={openSections.core}
-          onToggle={() => toggleSection('core')}
-        >
-          <CoreSystemsLinks />
-        </MobileMenuSection>
-
-        <MobileMenuSection 
-          title="Smart Features"
-          icon={<Tv className="h-5 w-5 text-purple-500" />}
-          isOpen={openSections.features}
-          onToggle={() => toggleSection('features')}
-        >
-          <SmartFeaturesLinks />
-        </MobileMenuSection>
-
-        <MobileMenuSection 
-          title="Vehicle Selection"
-          icon={<Car className="h-5 w-5 text-blue-500" />}
-          isOpen={openSections.vehicles}
-          onToggle={() => toggleSection('vehicles')}
-        >
-          <VehicleSelectionLinks />
-        </MobileMenuSection>
-
-        <MobileMenuSection 
-          title="Support & Resources"
-          icon={<Wrench className="h-5 w-5 text-orange-500" />}
-          isOpen={openSections.support}
-          onToggle={() => toggleSection('support')}
-        >
-          <SupportLinks />
-        </MobileMenuSection>
-
-        <MobileMenuSection 
-          title="Customer Support"
-          icon={<Phone className="h-5 w-5 text-blue-500" />}
-          isOpen={openSections.customer}
-          onToggle={() => toggleSection('customer')}
-        >
-          <CustomerSupportLinks />
-        </MobileMenuSection>
-
-        <MobileMenuSection 
-          title="RV Tools"
-          icon={<Calculator className="h-5 w-5 text-cyan-500" />}
-          isOpen={openSections.tools}
-          onToggle={() => toggleSection('tools')}
-        >
-          <div className="flex items-center gap-2 px-4 py-3 text-gray-300 hover:text-blue-400 transition-colors">
-            <Calculator className="h-4 w-4" />
-            <Link to="/calculators">RV Tools</Link>
-          </div>
-        </MobileMenuSection>
-
-        {!isBlogPage && (
-          <div className="border-b border-[#1E2A3E] last:border-0">
-            <Link 
-              to="/blog" 
-              className="flex items-center gap-2 w-full py-4 text-gray-300 hover:text-blue-400 transition-colors"
+            <MobileMenuSection
+              title="Technology"
+              icon={<Laptop className="h-5 w-5" />}
+              isOpen={openSections.core}
+              onToggle={() => toggleSection('core')}
             >
-              <BookOpen className="h-5 w-5 text-purple-500" />
-              <span className="text-lg font-medium text-white">Blog</span>
+              <ul className="space-y-2 px-3 mt-2">
+                <li>
+                  <Link to="/voice-control" className="flex items-center gap-2 p-2 text-[#A3B3BC] hover:text-[#4B9EF4] transition-colors rounded-lg hover:bg-[#0F1729]/50">
+                    Voice Control
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/features/navigation" className="flex items-center gap-2 p-2 text-[#A3B3BC] hover:text-[#4B9EF4] transition-colors rounded-lg hover:bg-[#0F1729]/50">
+                    Navigation System
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/features/security" className="flex items-center gap-2 p-2 text-[#A3B3BC] hover:text-[#4B9EF4] transition-colors rounded-lg hover:bg-[#0F1729]/50">
+                    Security System
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/features/power" className="flex items-center gap-2 p-2 text-[#A3B3BC] hover:text-[#4B9EF4] transition-colors rounded-lg hover:bg-[#0F1729]/50">
+                    Power Management
+                  </Link>
+                </li>
+              </ul>
+            </MobileMenuSection>
+
+            <MobileMenuSection
+              title="RV Systems"
+              icon={<Settings className="h-5 w-5" />}
+              isOpen={openSections.features}
+              onToggle={() => toggleSection('features')}
+            >
+              <ul className="space-y-2 px-3 mt-2">
+                <li>
+                  <Link to="/features/smart-kitchen" className="flex items-center gap-2 p-2 text-[#A3B3BC] hover:text-[#4B9EF4] transition-colors rounded-lg hover:bg-[#0F1729]/50">
+                    Smart Kitchen
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/features/tv" className="flex items-center gap-2 p-2 text-[#A3B3BC] hover:text-[#4B9EF4] transition-colors rounded-lg hover:bg-[#0F1729]/50">
+                    Smart TV
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/features/audio" className="flex items-center gap-2 p-2 text-[#A3B3BC] hover:text-[#4B9EF4] transition-colors rounded-lg hover:bg-[#0F1729]/50">
+                    Audio System
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/features/internet" className="flex items-center gap-2 p-2 text-[#A3B3BC] hover:text-[#4B9EF4] transition-colors rounded-lg hover:bg-[#0F1729]/50">
+                    Internet Connectivity
+                  </Link>
+                </li>
+              </ul>
+            </MobileMenuSection>
+
+            <MobileMenuSection
+              title="Models"
+              icon={<Car className="h-5 w-5" />}
+              isOpen={openSections.vehicles}
+              onToggle={() => toggleSection('vehicles')}
+            >
+              <ul className="space-y-2 px-3 mt-2">
+                <li>
+                  <Link to="/models/compare" className="flex items-center gap-2 p-2 text-[#A3B3BC] hover:text-[#4B9EF4] transition-colors rounded-lg hover:bg-[#0F1729]/50">
+                    Compare Models
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/models/luxury" className="flex items-center gap-2 p-2 text-[#A3B3BC] hover:text-[#4B9EF4] transition-colors rounded-lg hover:bg-[#0F1729]/50">
+                    Luxury Model
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/models/adventure" className="flex items-center gap-2 p-2 text-[#A3B3BC] hover:text-[#4B9EF4] transition-colors rounded-lg hover:bg-[#0F1729]/50">
+                    Adventure Model
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/models/compact" className="flex items-center gap-2 p-2 text-[#A3B3BC] hover:text-[#4B9EF4] transition-colors rounded-lg hover:bg-[#0F1729]/50">
+                    Compact Model
+                  </Link>
+                </li>
+              </ul>
+            </MobileMenuSection>
+
+            <Link
+              to="/calculators"
+              className="flex items-center gap-2 p-3 text-[#A3B3BC] hover:text-[#4B9EF4] transition-colors rounded-lg hover:bg-[#0F1729]/50"
+            >
+              <Calculator className="h-5 w-5" />
+              RV Tools
             </Link>
-          </div>
-        )}
+
+            <Link
+              to="/blog"
+              className="flex items-center gap-2 p-3 text-[#A3B3BC] hover:text-[#4B9EF4] transition-colors rounded-lg hover:bg-[#0F1729]/50"
+            >
+              <BookOpen className="h-5 w-5" />
+              Blog
+            </Link>
+
+            <MobileMenuSection
+              title="Support"
+              icon={<MessageSquare className="h-5 w-5" />}
+              isOpen={openSections.support}
+              onToggle={() => toggleSection('support')}
+            >
+              <ul className="space-y-2 px-3 mt-2">
+                <li>
+                  <Link to="/troubleshooting" className="flex items-center gap-2 p-2 text-[#A3B3BC] hover:text-[#4B9EF4] transition-colors rounded-lg hover:bg-[#0F1729]/50">
+                    Troubleshooting
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/documentation" className="flex items-center gap-2 p-2 text-[#A3B3BC] hover:text-[#4B9EF4] transition-colors rounded-lg hover:bg-[#0F1729]/50">
+                    Documentation
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/documentation/complete" className="flex items-center gap-2 p-2 text-[#A3B3BC] hover:text-[#4B9EF4] transition-colors rounded-lg hover:bg-[#0F1729]/50">
+                    Complete Documentation
+                  </Link>
+                </li>
+              </ul>
+            </MobileMenuSection>
+
+            {user ? (
+              <Fragment>
+                <div className="flex items-center gap-2 p-3 text-[#A3B3BC]">
+                  <User className="h-5 w-5" />
+                  <span className="truncate">{user.email}</span>
+                </div>
+                <button
+                  onClick={handleLogout}
+                  className="flex w-full items-center gap-2 p-3 text-[#A3B3BC] hover:text-[#4B9EF4] transition-colors rounded-lg hover:bg-[#0F1729]/50"
+                >
+                  <LogOut className="h-5 w-5" />
+                  Logout
+                </button>
+              </Fragment>
+            ) : (
+              <Link
+                to="/auth"
+                className="flex items-center gap-2 p-3 text-[#A3B3BC] hover:text-[#4B9EF4] transition-colors rounded-lg hover:bg-[#0F1729]/50"
+              >
+                <LogIn className="h-5 w-5" />
+                Login
+              </Link>
+            )}
+          </nav>
+        </div>
       </div>
     </div>
   );
