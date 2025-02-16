@@ -3,7 +3,8 @@
 
 import React, { useState, useEffect } from 'react';
 import { Card } from '@/components/ui/card';
-import FilterPanel, { FilterState } from './FilterPanel';
+import FilterPanel from './FilterPanel';
+import { FilterState } from './types';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import FacilityCard from './FacilityCard';
 import MapView from './MapView';
