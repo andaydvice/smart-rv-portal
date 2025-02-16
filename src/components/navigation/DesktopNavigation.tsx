@@ -46,15 +46,6 @@ const DesktopNavigation = () => {
           )}
 
           <NavigationMenuItem>
-            <Link 
-              to="/"
-              className="text-gray-300 hover:text-blue-400 transition-colors text-base flex items-center gap-2 px-4 py-2"
-            >
-              RV Intelligence
-            </Link>
-          </NavigationMenuItem>
-
-          <NavigationMenuItem>
             <NavigationMenuTrigger className="text-gray-300 hover:text-blue-400 transition-colors !bg-transparent data-[state=open]:!bg-transparent text-base">
               Technology
             </NavigationMenuTrigger>
