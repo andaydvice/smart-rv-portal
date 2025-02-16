@@ -55,17 +55,28 @@ const StorageFacilitiesMap = () => {
         .select('*');
       
       if (error) throw error;
+      
       // Cast the data to ensure type safety
-      return (data as any[]).map(facility => ({
+      return data.map(facility => ({
         id: facility.id,
         name: facility.name,
         address: facility.address,
         city: facility.city,
         state: facility.state,
-        latitude: facility.latitude,
-        longitude: facility.longitude,
-        features: facility.features as StorageFacility['features'],
-        price_range: facility.price_range as StorageFacility['price_range']
+        latitude: Number(facility.latitude),
+        longitude: Number(facility.longitude),
+        features: {
+          indoor: facility.features?.indoor ?? false,
+          climate_controlled: facility.features?.climate_controlled ?? false,
+          "24h_access": facility.features?.["24h_access"] ?? false,
+          security_system: facility.features?.security_system ?? false,
+          vehicle_washing: facility.features?.vehicle_washing ?? false
+        },
+        price_range: {
+          min: facility.price_range?.min ?? 0,
+          max: facility.price_range?.max ?? 0,
+          currency: facility.price_range?.currency ?? 'USD'
+        }
       })) as StorageFacility[];
     }
   });
