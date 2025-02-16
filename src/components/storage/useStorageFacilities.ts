@@ -17,13 +17,14 @@ export const useStorageFacilities = (filters: FilterState) => {
         query = query.eq('state', filters.selectedState);
       }
 
-      // Build features filter condition
+      // Handle feature filters
       const activeFeatures = Object.entries(filters.features)
-        .filter(([_, enabled]) => enabled)
-        .map(([feature]) => `features->'${feature}' = true`); // Remove quotes around true
+        .filter(([_, enabled]) => enabled);
 
       if (activeFeatures.length > 0) {
-        query = query.or(activeFeatures.join(','));
+        activeFeatures.forEach(([feature]) => {
+          query = query.eq(`features->>${feature}`, true);
+        });
       }
       
       const { data, error } = await query;
