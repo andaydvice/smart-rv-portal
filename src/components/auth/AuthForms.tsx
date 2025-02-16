@@ -54,14 +54,33 @@ export const AuthForms = ({ onSuccess }: AuthFormsProps) => {
 
   return (
     <div className="space-y-6">
-      <div className="space-y-2">
+      <div className="space-y-4">
+        <div className="flex items-center space-x-4 mb-2">
+          <Button
+            type="button"
+            variant={!isSignUp ? "default" : "outline"}
+            onClick={() => setIsSignUp(false)}
+            className="flex-1"
+          >
+            Sign In
+          </Button>
+          <Button
+            type="button"
+            variant={isSignUp ? "default" : "outline"}
+            onClick={() => setIsSignUp(true)}
+            className="flex-1"
+          >
+            Sign Up
+          </Button>
+        </div>
+        
         <h2 className="text-2xl font-bold text-white text-left">
           {isSignUp ? "Create Your Account" : "Welcome Back"}
         </h2>
         <p className="text-gray-400 text-left">
           {isSignUp 
             ? "Join our community of RV enthusiasts" 
-            : "Sign in to access your RV tools and saved preferences"}
+            : "Access your RV tools and saved preferences"}
         </p>
       </div>
 
@@ -102,18 +121,7 @@ export const AuthForms = ({ onSuccess }: AuthFormsProps) => {
         >
           {loading ? 'Loading...' : isSignUp ? 'Create Account' : 'Sign In'}
         </Button>
-        <Button
-          type="button"
-          variant="ghost"
-          className="w-full"
-          onClick={() => setIsSignUp(!isSignUp)}
-        >
-          {isSignUp 
-            ? 'Already have an account? Sign In' 
-            : "Don't have an account? Sign Up"}
-        </Button>
       </form>
     </div>
   );
 };
-
