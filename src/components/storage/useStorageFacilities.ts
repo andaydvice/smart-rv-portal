@@ -17,17 +17,21 @@ export const useStorageFacilities = (filters: FilterState) => {
         query = query.eq('state', filters.selectedState);
       }
 
-      // Build features filter object based on selected features
-      const selectedFeatures: Record<string, boolean> = {};
-      Object.entries(filters.features).forEach(([feature, isSelected]) => {
-        if (isSelected) {
-          selectedFeatures[feature] = true;
-        }
-      });
-
-      // Only apply features filter if any features are selected
-      if (Object.keys(selectedFeatures).length > 0) {
-        query = query.contains('features', selectedFeatures);
+      // Add feature filters one by one using containedBy
+      if (filters.features.indoor) {
+        query = query.eq('features->indoor', true);
+      }
+      if (filters.features.climate_controlled) {
+        query = query.eq('features->climate_controlled', true);
+      }
+      if (filters.features['24h_access']) {
+        query = query.eq('features->24h_access', true);
+      }
+      if (filters.features.security_system) {
+        query = query.eq('features->security_system', true);
+      }
+      if (filters.features.vehicle_washing) {
+        query = query.eq('features->vehicle_washing', true);
       }
       
       const { data, error } = await query;
