@@ -1,3 +1,4 @@
+
 "use client";
 
 import React, { useEffect, useRef, useState } from 'react';
@@ -48,12 +49,12 @@ interface RawStorageFacility {
     "24h_access": boolean;
     security_system: boolean;
     vehicle_washing: boolean;
-  };
+  } | null;
   price_range: {
     min: number;
     max: number;
     currency: string;
-  };
+  } | null;
   contact_phone?: string;
   contact_email?: string;
 }
@@ -83,8 +84,9 @@ const StorageFacilitiesMap = () => {
       
       if (error) throw error;
       
-      // Cast the data to ensure type safety
-      return (data as RawStorageFacility[]).map(facility => ({
+      // Cast the data and transform it to ensure type safety
+      const rawData = data as any[];
+      return rawData.map(facility => ({
         id: facility.id,
         name: facility.name,
         address: facility.address,
@@ -93,16 +95,16 @@ const StorageFacilitiesMap = () => {
         latitude: Number(facility.latitude),
         longitude: Number(facility.longitude),
         features: {
-          indoor: Boolean(facility.features?.indoor),
-          climate_controlled: Boolean(facility.features?.climate_controlled),
-          "24h_access": Boolean(facility.features?.["24h_access"]),
-          security_system: Boolean(facility.features?.security_system),
-          vehicle_washing: Boolean(facility.features?.vehicle_washing)
+          indoor: facility.features?.indoor ?? false,
+          climate_controlled: facility.features?.climate_controlled ?? false,
+          "24h_access": facility.features?.["24h_access"] ?? false,
+          security_system: facility.features?.security_system ?? false,
+          vehicle_washing: facility.features?.vehicle_washing ?? false
         },
         price_range: {
-          min: Number(facility.price_range?.min) || 0,
-          max: Number(facility.price_range?.max) || 0,
-          currency: facility.price_range?.currency || 'USD'
+          min: facility.price_range?.min ?? 0,
+          max: facility.price_range?.max ?? 0,
+          currency: facility.price_range?.currency ?? 'USD'
         },
         contact_phone: facility.contact_phone,
         contact_email: facility.contact_email
@@ -278,3 +280,4 @@ const StorageFacilitiesMap = () => {
 };
 
 export default StorageFacilitiesMap;
+
