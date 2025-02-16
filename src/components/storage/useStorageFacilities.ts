@@ -5,11 +5,17 @@ import { StorageFacility, FilterState } from './types';
 
 export const useStorageFacilities = (filters: FilterState) => {
   const { data: facilities, isLoading, error } = useQuery({
-    queryKey: ['storage-facilities'],
+    queryKey: ['storage-facilities', filters.selectedState],
     queryFn: async () => {
-      const { data, error } = await supabase
+      let query = supabase
         .from('storage_facilities')
         .select('*');
+      
+      if (filters.selectedState) {
+        query = query.eq('state', filters.selectedState);
+      }
+      
+      const { data, error } = await query;
       
       if (error) throw error;
       

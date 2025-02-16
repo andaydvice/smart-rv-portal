@@ -184,6 +184,17 @@ export type Database = {
         }
         Relationships: []
       }
+      state_bounds: {
+        Row: {
+          facility_count: number | null
+          max_lat: number | null
+          max_lng: number | null
+          min_lat: number | null
+          min_lng: number | null
+          state: string | null
+        }
+        Relationships: []
+      }
     }
     Functions: {
       _postgis_deprecate: {

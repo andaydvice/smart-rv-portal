@@ -23,7 +23,8 @@ const StorageFacilitiesMap = () => {
       security_system: false,
       vehicle_washing: false
     },
-    priceRange: [0, 1000]
+    priceRange: [0, 1000],
+    selectedState: null
   });
 
   const { facilities: filteredFacilities, isLoading, error } = useStorageFacilities(filters);
@@ -125,6 +126,7 @@ const StorageFacilitiesMap = () => {
           facilities={filteredFacilities || []}
           highlightedFacility={highlightedFacility}
           onMarkerClick={handleFacilityClick}
+          selectedState={filters.selectedState}
         />
       </Card>
     </div>

@@ -4,15 +4,23 @@ import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { StorageFacility } from './types';
 import { createPopupHTML } from './popupUtils';
+import { supabase } from '@/integrations/supabase/client';
 
 interface MapViewProps {
   mapToken: string;
   facilities: StorageFacility[];
   highlightedFacility: string | null;
   onMarkerClick: (facilityId: string) => void;
+  selectedState: string | null;
 }
 
-const MapView = ({ mapToken, facilities, highlightedFacility, onMarkerClick }: MapViewProps) => {
+const MapView = ({ 
+  mapToken, 
+  facilities, 
+  highlightedFacility, 
+  onMarkerClick,
+  selectedState 
+}: MapViewProps) => {
   const mapContainer = useRef<HTMLDivElement>(null);
   const map = useRef<mapboxgl.Map | null>(null);
   const markers = useRef<mapboxgl.Marker[]>([]);
@@ -79,6 +87,32 @@ const MapView = ({ mapToken, facilities, highlightedFacility, onMarkerClick }: M
       });
     }
   }, [facilities, highlightedFacility, onMarkerClick]);
+
+  useEffect(() => {
+    const updateMapBounds = async () => {
+      if (!map.current || !selectedState) return;
+
+      const { data: bounds } = await supabase
+        .from('state_bounds')
+        .select('*')
+        .eq('state', selectedState)
+        .single();
+
+      if (bounds) {
+        const mapBounds = new mapboxgl.LngLatBounds(
+          [bounds.min_lng, bounds.min_lat],
+          [bounds.max_lng, bounds.max_lat]
+        );
+
+        map.current.fitBounds(mapBounds, {
+          padding: 50,
+          maxZoom: 12
+        });
+      }
+    };
+
+    updateMapBounds();
+  }, [selectedState]);
 
   return <div ref={mapContainer} className="w-full h-full" />;
 };

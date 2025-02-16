@@ -56,4 +56,14 @@ export interface FilterState {
     vehicle_washing: boolean;
   };
   priceRange: [number, number];
+  selectedState: string | null;
+}
+
+export interface StateBounds {
+  state: string;
+  facility_count: number;
+  min_lat: number;
+  max_lat: number;
+  min_lng: number;
+  max_lng: number;
 }
