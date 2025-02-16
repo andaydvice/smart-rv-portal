@@ -31,6 +31,29 @@ interface StorageFacility {
   };
 }
 
+// Define the shape of the raw data from Supabase
+interface RawStorageFacility {
+  id: string;
+  name: string;
+  address: string;
+  city: string;
+  state: string;
+  latitude: string | number;
+  longitude: string | number;
+  features: {
+    indoor: boolean;
+    climate_controlled: boolean;
+    "24h_access": boolean;
+    security_system: boolean;
+    vehicle_washing: boolean;
+  };
+  price_range: {
+    min: number;
+    max: number;
+    currency: string;
+  };
+}
+
 const StorageFacilitiesMap = () => {
   const mapContainer = useRef<HTMLDivElement>(null);
   const map = useRef<mapboxgl.Map | null>(null);
@@ -57,7 +80,7 @@ const StorageFacilitiesMap = () => {
       if (error) throw error;
       
       // Cast the data to ensure type safety
-      return data.map(facility => ({
+      return (data as RawStorageFacility[]).map(facility => ({
         id: facility.id,
         name: facility.name,
         address: facility.address,
@@ -66,16 +89,16 @@ const StorageFacilitiesMap = () => {
         latitude: Number(facility.latitude),
         longitude: Number(facility.longitude),
         features: {
-          indoor: facility.features?.indoor ?? false,
-          climate_controlled: facility.features?.climate_controlled ?? false,
-          "24h_access": facility.features?.["24h_access"] ?? false,
-          security_system: facility.features?.security_system ?? false,
-          vehicle_washing: facility.features?.vehicle_washing ?? false
+          indoor: Boolean(facility.features?.indoor),
+          climate_controlled: Boolean(facility.features?.climate_controlled),
+          "24h_access": Boolean(facility.features?.["24h_access"]),
+          security_system: Boolean(facility.features?.security_system),
+          vehicle_washing: Boolean(facility.features?.vehicle_washing)
         },
         price_range: {
-          min: facility.price_range?.min ?? 0,
-          max: facility.price_range?.max ?? 0,
-          currency: facility.price_range?.currency ?? 'USD'
+          min: Number(facility.price_range?.min) || 0,
+          max: Number(facility.price_range?.max) || 0,
+          currency: facility.price_range?.currency || 'USD'
         }
       })) as StorageFacility[];
     }
