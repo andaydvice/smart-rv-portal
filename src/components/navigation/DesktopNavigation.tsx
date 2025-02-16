@@ -29,19 +29,23 @@ const DesktopNavigation = () => {
     }
   };
 
+  const MenuLink = ({ to, icon: Icon, children }: { to: string; icon?: any; children: React.ReactNode }) => (
+    <Link 
+      to={to} 
+      className="text-gray-300 hover:text-blue-400 transition-colors text-base flex items-center gap-2 px-4 py-2"
+    >
+      {Icon && <Icon className="h-4 w-4" />}
+      {children}
+    </Link>
+  );
+
   return (
     <div className="hidden md:flex md:items-center md:space-x-8">
       <NavigationMenu>
-        <NavigationMenuList className="space-x-2">
+        <NavigationMenuList className="flex items-center space-x-2">
           {!isHomePage && (
             <NavigationMenuItem>
-              <Link 
-                to="/" 
-                className="text-gray-300 hover:text-blue-400 transition-colors text-base flex items-center gap-2 px-4 py-2"
-              >
-                <Home className="h-4 w-4" />
-                Home
-              </Link>
+              <MenuLink to="/" icon={Home}>Home</MenuLink>
             </NavigationMenuItem>
           )}
 
@@ -79,23 +83,11 @@ const DesktopNavigation = () => {
           </NavigationMenuItem>
 
           <NavigationMenuItem>
-            <Link 
-              to="/calculators" 
-              className="text-gray-300 hover:text-blue-400 transition-colors text-base flex items-center gap-2 px-4 py-2"
-            >
-              <Calculator className="h-4 w-4" />
-              RV Tools
-            </Link>
+            <MenuLink to="/calculators" icon={Calculator}>RV Tools</MenuLink>
           </NavigationMenuItem>
 
           <NavigationMenuItem>
-            <Link 
-              to="/blog" 
-              className="text-gray-300 hover:text-blue-400 transition-colors text-base flex items-center gap-2 px-4 py-2"
-            >
-              <BookOpen className="h-4 w-4" />
-              Blog
-            </Link>
+            <MenuLink to="/blog" icon={BookOpen}>Blog</MenuLink>
           </NavigationMenuItem>
 
           <NavigationMenuItem>
