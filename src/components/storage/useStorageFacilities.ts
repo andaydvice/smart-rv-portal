@@ -17,7 +17,7 @@ export const useStorageFacilities = (filters: FilterState) => {
         query = query.eq('state', filters.selectedState);
       }
 
-      // Handle feature filters using the new boolean columns
+      // Handle feature filters using boolean columns
       if (filters.features.indoor) {
         query = query.eq('has_indoor', true);
       }
