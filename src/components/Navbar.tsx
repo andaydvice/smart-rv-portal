@@ -1,9 +1,14 @@
+
 import { useState } from "react";
 import NavbarContainer from "./navbar/NavbarContainer";
 import MobileMenu from "./navbar/MobileMenu";
+import { useAuth } from "./auth/AuthContext";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { user } = useAuth();
+  console.log("Navbar - Current user:", user); // Debug log
+  
   const [openSections, setOpenSections] = useState<Record<string, boolean>>({
     core: false,
     features: false,
