@@ -54,11 +54,11 @@ export const AuthForms = ({ onSuccess }: AuthFormsProps) => {
 
   return (
     <div className="space-y-6">
-      <div className="space-y-2 text-center">
-        <h2 className="text-2xl font-bold text-white">
+      <div className="space-y-2">
+        <h2 className="text-2xl font-bold text-white text-left">
           {isSignUp ? "Create Your Account" : "Welcome Back"}
         </h2>
-        <p className="text-gray-400">
+        <p className="text-gray-400 text-left">
           {isSignUp 
             ? "Join our community of RV enthusiasts" 
             : "Sign in to access your RV tools and saved preferences"}
@@ -116,3 +116,4 @@ export const AuthForms = ({ onSuccess }: AuthFormsProps) => {
     </div>
   );
 };
+
