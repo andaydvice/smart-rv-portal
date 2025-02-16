@@ -23,7 +23,7 @@ export const useStorageFacilities = (filters: FilterState) => {
 
       if (activeFeatures.length > 0) {
         activeFeatures.forEach(([feature]) => {
-          query = query.eq(`features->>${feature}`, true);
+          query = query.eq(`features->>${feature}`, 'true');
         });
       }
       
