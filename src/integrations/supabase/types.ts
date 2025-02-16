@@ -56,51 +56,84 @@ export type Database = {
       }
       storage_facilities: {
         Row: {
+          additional_services: Json | null
           address: string
+          amenities: Json | null
+          availability: Json | null
+          business_hours: Json | null
+          cancellation_policy: string | null
           city: string
           contact_email: string | null
           contact_phone: string | null
           created_at: string
+          description: string | null
+          dimensions: Json | null
           features: Json | null
           id: string
+          images: string[] | null
+          insurance_requirements: Json | null
           latitude: number
           longitude: number
           name: string
           price_range: Json | null
+          security_details: Json | null
           state: string
           updated_at: string
+          website_url: string | null
           zip_code: string
         }
         Insert: {
+          additional_services?: Json | null
           address: string
+          amenities?: Json | null
+          availability?: Json | null
+          business_hours?: Json | null
+          cancellation_policy?: string | null
           city: string
           contact_email?: string | null
           contact_phone?: string | null
           created_at?: string
+          description?: string | null
+          dimensions?: Json | null
           features?: Json | null
           id?: string
+          images?: string[] | null
+          insurance_requirements?: Json | null
           latitude: number
           longitude: number
           name: string
           price_range?: Json | null
+          security_details?: Json | null
           state: string
           updated_at?: string
+          website_url?: string | null
           zip_code: string
         }
         Update: {
+          additional_services?: Json | null
           address?: string
+          amenities?: Json | null
+          availability?: Json | null
+          business_hours?: Json | null
+          cancellation_policy?: string | null
           city?: string
           contact_email?: string | null
           contact_phone?: string | null
           created_at?: string
+          description?: string | null
+          dimensions?: Json | null
           features?: Json | null
           id?: string
+          images?: string[] | null
+          insurance_requirements?: Json | null
           latitude?: number
           longitude?: number
           name?: string
           price_range?: Json | null
+          security_details?: Json | null
           state?: string
           updated_at?: string
+          website_url?: string | null
           zip_code?: string
         }
         Relationships: []
@@ -214,31 +247,115 @@ export type Database = {
     Views: {
       facility_search: {
         Row: {
+          additional_services: Json | null
           address: string | null
+          amenities: Json | null
+          availability: Json | null
           avg_rating: number | null
+          business_hours: Json | null
+          cancellation_policy: string | null
           city: string | null
           contact_email: string | null
           contact_phone: string | null
           created_at: string | null
           currency: string | null
+          description: string | null
+          dimensions: Json | null
           features: Json | null
-          has_24h_access: boolean | null
-          has_climate_control: boolean | null
-          has_indoor: boolean | null
-          has_security: boolean | null
-          has_washing: boolean | null
+          has_24h_access: string | null
+          has_climate_control: string | null
+          has_indoor: string | null
+          has_security: string | null
+          has_washing: string | null
           id: string | null
-          is_favorited: boolean | null
+          images: string[] | null
+          insurance_requirements: Json | null
           latitude: number | null
           longitude: number | null
-          max_price: number | null
-          min_price: number | null
+          max_price: string | null
+          min_price: string | null
           name: string | null
           price_range: Json | null
           review_count: number | null
+          security_details: Json | null
           state: string | null
           updated_at: string | null
+          website_url: string | null
           zip_code: string | null
+        }
+        Insert: {
+          additional_services?: Json | null
+          address?: string | null
+          amenities?: Json | null
+          availability?: Json | null
+          avg_rating?: never
+          business_hours?: Json | null
+          cancellation_policy?: string | null
+          city?: string | null
+          contact_email?: string | null
+          contact_phone?: string | null
+          created_at?: string | null
+          currency?: never
+          description?: string | null
+          dimensions?: Json | null
+          features?: Json | null
+          has_24h_access?: never
+          has_climate_control?: never
+          has_indoor?: never
+          has_security?: never
+          has_washing?: never
+          id?: string | null
+          images?: string[] | null
+          insurance_requirements?: Json | null
+          latitude?: number | null
+          longitude?: number | null
+          max_price?: never
+          min_price?: never
+          name?: string | null
+          price_range?: Json | null
+          review_count?: never
+          security_details?: Json | null
+          state?: string | null
+          updated_at?: string | null
+          website_url?: string | null
+          zip_code?: string | null
+        }
+        Update: {
+          additional_services?: Json | null
+          address?: string | null
+          amenities?: Json | null
+          availability?: Json | null
+          avg_rating?: never
+          business_hours?: Json | null
+          cancellation_policy?: string | null
+          city?: string | null
+          contact_email?: string | null
+          contact_phone?: string | null
+          created_at?: string | null
+          currency?: never
+          description?: string | null
+          dimensions?: Json | null
+          features?: Json | null
+          has_24h_access?: never
+          has_climate_control?: never
+          has_indoor?: never
+          has_security?: never
+          has_washing?: never
+          id?: string | null
+          images?: string[] | null
+          insurance_requirements?: Json | null
+          latitude?: number | null
+          longitude?: number | null
+          max_price?: never
+          min_price?: never
+          name?: string | null
+          price_range?: Json | null
+          review_count?: never
+          security_details?: Json | null
+          state?: string | null
+          updated_at?: string | null
+          website_url?: string | null
+          zip_code?: string | null
         }
         Relationships: []
       }
