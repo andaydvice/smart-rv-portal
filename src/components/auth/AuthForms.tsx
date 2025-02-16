@@ -4,8 +4,7 @@ import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Card } from '@/components/ui/card';
-import { useToast } from '@/components/ui/use-toast';
+import { useToast } from '@/hooks/use-toast';
 
 interface AuthFormsProps {
   onSuccess?: () => void;
@@ -34,14 +33,21 @@ export const AuthForms = ({ onSuccess }: AuthFormsProps) => {
           description: "We've sent you a verification link",
         });
       } else {
-        const { error } = await supabase.auth.signInWithPassword({
+        console.log("Attempting to sign in with:", { email }); // Debug log
+        const { error, data } = await supabase.auth.signInWithPassword({
           email,
           password,
         });
+        console.log("Sign in response:", { error, data }); // Debug log
         if (error) throw error;
+        toast({
+          title: "Welcome back!",
+          description: "You've been successfully logged in",
+        });
         onSuccess?.();
       }
     } catch (error: any) {
+      console.error("Auth error:", error); // Debug log
       toast({
         title: "Error",
         description: error.message,

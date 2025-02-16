@@ -9,11 +9,13 @@ const Auth = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { user } = useAuth();
+  console.log("Auth page - Current user:", user); // Debug log
 
   const from = location.state?.from?.pathname || '/';
 
   useEffect(() => {
     if (user) {
+      console.log("Auth page - Redirecting authenticated user to:", from); // Debug log
       navigate(from);
     }
   }, [user, navigate, from]);
