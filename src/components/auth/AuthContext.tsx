@@ -1,6 +1,6 @@
 
 import { createContext, useContext, useEffect, useState } from 'react';
-import { User } from '@supabase/supabase-js';
+import { User, Session } from '@supabase/supabase-js';
 import { supabase } from '@/integrations/supabase/client';
 
 interface AuthContextType {
@@ -18,9 +18,19 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     // Get initial session
     const initializeAuth = async () => {
       try {
-        const { data: { user } } = await supabase.auth.getUser();
-        console.log("Initial auth state:", { user }); // Debug log
-        setUser(user);
+        // First try to get the session
+        const { data: { session } } = await supabase.auth.getSession();
+        console.log("Initial session:", session); // Debug log
+        
+        if (session?.user) {
+          console.log("Setting initial user from session:", session.user);
+          setUser(session.user);
+        } else {
+          // If no session, try to get user
+          const { data: { user } } = await supabase.auth.getUser();
+          console.log("Got user data:", user); // Debug log
+          setUser(user);
+        }
       } catch (error) {
         console.error("Error getting initial auth state:", error);
       } finally {
@@ -28,15 +38,28 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       }
     };
 
+    // Initialize auth state
     initializeAuth();
 
     // Listen for auth changes
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
       console.log("Auth state changed:", { event, session }); // Debug log
-      setUser(session?.user ?? null);
+      
+      if (event === 'SIGNED_IN') {
+        console.log("User signed in:", session?.user);
+        setUser(session?.user ?? null);
+      } else if (event === 'SIGNED_OUT') {
+        console.log("User signed out");
+        setUser(null);
+      } else if (event === 'TOKEN_REFRESHED') {
+        console.log("Token refreshed:", session?.user);
+        setUser(session?.user ?? null);
+      }
+      
       setLoading(false);
     });
 
+    // Cleanup subscription
     return () => {
       subscription.unsubscribe();
     };
