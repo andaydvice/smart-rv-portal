@@ -1,11 +1,11 @@
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "../layout/Layout";
-import { routes } from "@/routes/routes";
+import { router } from "@/routes/routes";
 import ProtectedRoute from "../auth/ProtectedRoute";
 
 const RouterProvider = () => {
-  console.log('RouterProvider - Available Routes:', routes.map(route => route.path));
+  console.log('RouterProvider - Available Routes:', router.routes.map(route => route.path));
   
   // Define which routes should be protected
   // Now only protecting routes that involve saving personal data
@@ -14,7 +14,7 @@ const RouterProvider = () => {
   return (
     <BrowserRouter>
       <Routes>
-        {routes.map((route) => {
+        {router.routes.map((route) => {
           console.log('Rendering route:', route.path);
           const isProtected = protectedPaths.includes(route.path);
 
