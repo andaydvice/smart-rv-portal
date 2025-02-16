@@ -53,7 +53,18 @@ export const AuthForms = ({ onSuccess }: AuthFormsProps) => {
   };
 
   return (
-    <Card className="p-6 w-full max-w-md mx-auto bg-[#131a2a] border-gray-700">
+    <div className="space-y-6">
+      <div className="space-y-2 text-center">
+        <h2 className="text-2xl font-bold text-white">
+          {isSignUp ? "Create Your Account" : "Welcome Back"}
+        </h2>
+        <p className="text-gray-400">
+          {isSignUp 
+            ? "Join our community of RV enthusiasts" 
+            : "Sign in to access your RV tools and saved preferences"}
+        </p>
+      </div>
+
       <form onSubmit={handleSubmit} className="space-y-4">
         <div className="space-y-2">
           <Label htmlFor="email">Email</Label>
@@ -62,6 +73,7 @@ export const AuthForms = ({ onSuccess }: AuthFormsProps) => {
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            placeholder="your.email@example.com"
             required
             className="bg-[#1a2235] border-gray-700"
           />
@@ -73,16 +85,22 @@ export const AuthForms = ({ onSuccess }: AuthFormsProps) => {
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            placeholder={isSignUp ? "Create a secure password" : "Enter your password"}
             required
             className="bg-[#1a2235] border-gray-700"
           />
+          {isSignUp && (
+            <p className="text-xs text-gray-400 mt-1">
+              Password must be at least 6 characters long
+            </p>
+          )}
         </div>
         <Button
           type="submit"
           className="w-full"
           disabled={loading}
         >
-          {loading ? 'Loading...' : isSignUp ? 'Sign Up' : 'Sign In'}
+          {loading ? 'Loading...' : isSignUp ? 'Create Account' : 'Sign In'}
         </Button>
         <Button
           type="button"
@@ -90,9 +108,11 @@ export const AuthForms = ({ onSuccess }: AuthFormsProps) => {
           className="w-full"
           onClick={() => setIsSignUp(!isSignUp)}
         >
-          {isSignUp ? 'Already have an account? Sign In' : "Don't have an account? Sign Up"}
+          {isSignUp 
+            ? 'Already have an account? Sign In' 
+            : "Don't have an account? Sign Up"}
         </Button>
       </form>
-    </Card>
+    </div>
   );
 };
