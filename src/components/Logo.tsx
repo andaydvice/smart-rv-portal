@@ -9,9 +9,11 @@ export const Logo = () => {
           <Bus className="w-16 h-8 text-blue-500" strokeWidth={1.2} />
         </div>
       </div>
-      <div className="flex flex-col justify-center">
-        <span className="text-xl font-semibold text-white leading-tight">Smart RV</span>
-        <span className="text-sm text-white/80 whitespace-nowrap">Intelligence Drives Freedom</span>
+      <div className="flex flex-col justify-center items-start">
+        <span className="text-xl font-semibold text-white">Smart RV</span>
+        <div className="text-sm text-white/80 leading-none whitespace-nowrap">
+          RV Intelligence Drives Freedom
+        </div>
       </div>
     </div>
   );
