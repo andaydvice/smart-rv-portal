@@ -30,18 +30,26 @@ const MapView = ({
   const [mapError, setMapError] = useState<string | null>(null);
 
   useEffect(() => {
+    // Clean up existing map instance if it exists
+    if (map.current) {
+      map.current.remove();
+      map.current = null;
+    }
+
     if (!mapContainer.current || !mapToken) {
-      console.log('Missing mapContainer or mapToken:', { 
+      console.log('Missing requirements:', { 
         hasContainer: !!mapContainer.current, 
-        hasToken: !!mapToken 
+        token: mapToken 
       });
       return;
     }
 
     try {
-      console.log('Attempting to initialize map with token:', mapToken);
+      console.log('Setting access token:', mapToken);
+      // Set the token globally for mapboxgl
       mapboxgl.accessToken = mapToken;
 
+      console.log('Initializing map...');
       const initMap = new mapboxgl.Map({
         container: mapContainer.current,
         style: 'mapbox://styles/mapbox/dark-v11',
@@ -50,63 +58,65 @@ const MapView = ({
         attributionControl: true
       });
 
-      initMap.on('load', () => {
-        console.log('Map style loaded successfully');
+      // Wait for map to load before setting up event handlers
+      initMap.once('load', () => {
+        console.log('Map loaded successfully');
         setMapError(null);
+        map.current = initMap;
+
+        // Set up event handlers after map is loaded
+        initMap.on('click', 'clusters', (e) => {
+          const features = initMap.queryRenderedFeatures(e.point, {
+            layers: ['clusters']
+          });
+
+          if (!features.length) return;
+
+          const clusterId = features[0].properties!.cluster_id;
+          const source = initMap.getSource('facilities') as mapboxgl.GeoJSONSource;
+
+          source.getClusterExpansionZoom(clusterId, (err, zoom) => {
+            if (err) return;
+            const coordinates = (features[0].geometry as any).coordinates;
+            initMap.easeTo({ center: coordinates, zoom: zoom });
+          });
+        });
+
+        initMap.on('mouseenter', 'clusters', () => {
+          initMap.getCanvas().style.cursor = 'pointer';
+        });
+
+        initMap.on('mouseleave', 'clusters', () => {
+          initMap.getCanvas().style.cursor = '';
+        });
       });
 
       initMap.on('error', (e) => {
         console.error('Mapbox error:', e);
         setMapError('Failed to load map: ' + e.error.message);
-      });
-
-      map.current = initMap;
-
-      // Handle clicks on clusters
-      initMap.on('click', 'clusters', (e) => {
-        const features = initMap.queryRenderedFeatures(e.point, {
-          layers: ['clusters']
-        });
-
-        if (!features.length) return;
-
-        const clusterId = features[0].properties!.cluster_id;
-        const source = initMap.getSource('facilities') as mapboxgl.GeoJSONSource;
-
-        source.getClusterExpansionZoom(clusterId, (err, zoom) => {
-          if (err) return;
-
-          const coordinates = (features[0].geometry as any).coordinates;
-
-          initMap.easeTo({
-            center: coordinates,
-            zoom: zoom
-          });
-        });
-      });
-
-      // Change cursor on hover
-      initMap.on('mouseenter', 'clusters', () => {
-        if (initMap) {
-          initMap.getCanvas().style.cursor = 'pointer';
+        if (map.current) {
+          map.current.remove();
+          map.current = null;
         }
       });
 
-      initMap.on('mouseleave', 'clusters', () => {
-        if (initMap) {
-          initMap.getCanvas().style.cursor = '';
-        }
-      });
-
-      return () => {
-        console.log('Cleaning up map instance');
-        initMap?.remove();
-      };
     } catch (error) {
       console.error('Error initializing map:', error);
       setMapError('Failed to initialize map: ' + (error as Error).message);
+      if (map.current) {
+        map.current.remove();
+        map.current = null;
+      }
     }
-  }, [mapToken]);
+
+    return () => {
+      console.log('Cleaning up map instance');
+      if (map.current) {
+        map.current.remove();
+        map.current = null;
+      }
+    };
+  }, [mapToken]); // Only re-run when mapToken changes
 
   useEffect(() => {
     const updateMapBounds = async () => {
