@@ -1,5 +1,5 @@
 
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { StorageFacility } from './types';
@@ -25,63 +25,76 @@ const MapView = ({
 }: MapViewProps) => {
   const mapContainer = useRef<HTMLDivElement>(null);
   const map = useRef<mapboxgl.Map | null>(null);
+  const [mapLoaded, setMapLoaded] = useState(false);
 
   useEffect(() => {
     if (!mapContainer.current || !mapToken) return;
 
     mapboxgl.accessToken = mapToken;
 
-    map.current = new mapboxgl.Map({
-      container: mapContainer.current,
-      style: 'mapbox://styles/mapbox/dark-v11',
-      center: [-98.5795, 39.8283],
-      zoom: 3
-    });
-
-    // Handle clicks on clusters
-    map.current.on('click', 'clusters', (e) => {
-      const features = map.current!.queryRenderedFeatures(e.point, {
-        layers: ['clusters']
+    const initializeMap = () => {
+      map.current = new mapboxgl.Map({
+        container: mapContainer.current!,
+        style: 'mapbox://styles/mapbox/dark-v11',
+        center: [-98.5795, 39.8283],
+        zoom: 3
       });
 
-      if (!features.length) return;
+      map.current.on('load', () => {
+        console.log('Map style loaded');
+        setMapLoaded(true);
+      });
 
-      const clusterId = features[0].properties!.cluster_id;
-      const source = map.current!.getSource('facilities') as mapboxgl.GeoJSONSource;
+      // Handle clicks on clusters
+      map.current.on('click', 'clusters', (e) => {
+        const features = map.current!.queryRenderedFeatures(e.point, {
+          layers: ['clusters']
+        });
 
-      source.getClusterExpansionZoom(clusterId, (err, zoom) => {
-        if (err) return;
+        if (!features.length) return;
 
-        const coordinates = (features[0].geometry as any).coordinates;
+        const clusterId = features[0].properties!.cluster_id;
+        const source = map.current!.getSource('facilities') as mapboxgl.GeoJSONSource;
 
-        map.current!.easeTo({
-          center: coordinates,
-          zoom: zoom
+        source.getClusterExpansionZoom(clusterId, (err, zoom) => {
+          if (err) return;
+
+          const coordinates = (features[0].geometry as any).coordinates;
+
+          map.current!.easeTo({
+            center: coordinates,
+            zoom: zoom
+          });
         });
       });
-    });
 
-    // Change cursor on hover
-    map.current.on('mouseenter', 'clusters', () => {
-      if (map.current) {
-        map.current.getCanvas().style.cursor = 'pointer';
-      }
-    });
+      // Change cursor on hover
+      map.current.on('mouseenter', 'clusters', () => {
+        if (map.current) {
+          map.current.getCanvas().style.cursor = 'pointer';
+        }
+      });
 
-    map.current.on('mouseleave', 'clusters', () => {
-      if (map.current) {
-        map.current.getCanvas().style.cursor = '';
-      }
-    });
+      map.current.on('mouseleave', 'clusters', () => {
+        if (map.current) {
+          map.current.getCanvas().style.cursor = '';
+        }
+      });
+    };
+
+    initializeMap();
 
     return () => {
-      map.current?.remove();
+      if (map.current) {
+        map.current.remove();
+        setMapLoaded(false);
+      }
     };
   }, [mapToken]);
 
   useEffect(() => {
     const updateMapBounds = async () => {
-      if (!map.current || !selectedState) return;
+      if (!map.current || !selectedState || !mapLoaded) return;
 
       const { data: bounds } = await supabase
         .from('state_bounds')
@@ -103,12 +116,12 @@ const MapView = ({
     };
 
     updateMapBounds();
-  }, [selectedState]);
+  }, [selectedState, mapLoaded]);
 
   return (
     <div className="relative w-full h-full">
       <div ref={mapContainer} className="w-full h-full" />
-      {map.current && (
+      {map.current && mapLoaded && (
         <>
           <MapControls map={map.current} />
           <ClusterLayer
