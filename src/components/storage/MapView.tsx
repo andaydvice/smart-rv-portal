@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
@@ -30,93 +29,99 @@ const MapView = ({
   const [mapError, setMapError] = useState<string | null>(null);
 
   useEffect(() => {
-    // Clean up existing map instance if it exists
-    if (map.current) {
-      map.current.remove();
-      map.current = null;
-    }
-
-    if (!mapContainer.current || !mapToken) {
-      console.log('Missing requirements:', { 
-        hasContainer: !!mapContainer.current, 
-        token: mapToken 
-      });
-      return;
-    }
-
-    try {
-      console.log('Setting access token:', mapToken);
-      // Set the token globally for mapboxgl
-      mapboxgl.accessToken = mapToken;
-
-      console.log('Initializing map...');
-      const initMap = new mapboxgl.Map({
-        container: mapContainer.current,
-        style: 'mapbox://styles/mapbox/dark-v11',
-        center: [-98.5795, 39.8283], // Center of US
-        zoom: 3,
-        attributionControl: true
-      });
-
-      // Wait for map to load before setting up event handlers
-      initMap.once('load', () => {
-        console.log('Map loaded successfully');
-        setMapError(null);
-        map.current = initMap;
-
-        // Set up event handlers after map is loaded
-        initMap.on('click', 'clusters', (e) => {
-          const features = initMap.queryRenderedFeatures(e.point, {
-            layers: ['clusters']
-          });
-
-          if (!features.length) return;
-
-          const clusterId = features[0].properties!.cluster_id;
-          const source = initMap.getSource('facilities') as mapboxgl.GeoJSONSource;
-
-          source.getClusterExpansionZoom(clusterId, (err, zoom) => {
-            if (err) return;
-            const coordinates = (features[0].geometry as any).coordinates;
-            initMap.easeTo({ center: coordinates, zoom: zoom });
-          });
-        });
-
-        initMap.on('mouseenter', 'clusters', () => {
-          initMap.getCanvas().style.cursor = 'pointer';
-        });
-
-        initMap.on('mouseleave', 'clusters', () => {
-          initMap.getCanvas().style.cursor = '';
-        });
-      });
-
-      initMap.on('error', (e) => {
-        console.error('Mapbox error:', e);
-        setMapError('Failed to load map: ' + e.error.message);
-        if (map.current) {
-          map.current.remove();
-          map.current = null;
-        }
-      });
-
-    } catch (error) {
-      console.error('Error initializing map:', error);
-      setMapError('Failed to initialize map: ' + (error as Error).message);
+    const initializeMap = async () => {
       if (map.current) {
         map.current.remove();
         map.current = null;
       }
-    }
+
+      if (!mapContainer.current || !mapToken) {
+        console.log('Missing requirements:', { 
+          hasContainer: !!mapContainer.current, 
+          token: mapToken 
+        });
+        return;
+      }
+
+      try {
+        // Verify token by fetching style first
+        const styleUrl = `https://api.mapbox.com/styles/v1/mapbox/dark-v11?access_token=${mapToken}`;
+        const response = await fetch(styleUrl);
+        
+        if (!response.ok) {
+          throw new Error(`Failed to validate Mapbox token: ${response.statusText}`);
+        }
+
+        console.log('Token validated successfully');
+        mapboxgl.accessToken = mapToken;
+
+        const initMap = new mapboxgl.Map({
+          container: mapContainer.current,
+          style: 'mapbox://styles/mapbox/dark-v11',
+          center: [-98.5795, 39.8283],
+          zoom: 3,
+          attributionControl: true
+        });
+
+        initMap.once('load', () => {
+          console.log('Map loaded successfully');
+          setMapError(null);
+          map.current = initMap;
+
+          initMap.on('click', 'clusters', (e) => {
+            const features = initMap.queryRenderedFeatures(e.point, {
+              layers: ['clusters']
+            });
+
+            if (!features.length) return;
+
+            const clusterId = features[0].properties!.cluster_id;
+            const source = initMap.getSource('facilities') as mapboxgl.GeoJSONSource;
+
+            source.getClusterExpansionZoom(clusterId, (err, zoom) => {
+              if (err) return;
+              const coordinates = (features[0].geometry as any).coordinates;
+              initMap.easeTo({ center: coordinates, zoom: zoom });
+            });
+          });
+
+          initMap.on('mouseenter', 'clusters', () => {
+            initMap.getCanvas().style.cursor = 'pointer';
+          });
+
+          initMap.on('mouseleave', 'clusters', () => {
+            initMap.getCanvas().style.cursor = '';
+          });
+        });
+
+        initMap.on('error', (e) => {
+          console.error('Mapbox error:', e);
+          setMapError('Failed to load map: ' + e.error.message);
+          if (map.current) {
+            map.current.remove();
+            map.current = null;
+          }
+        });
+
+      } catch (error) {
+        console.error('Error initializing map:', error);
+        setMapError('Failed to initialize map: ' + (error as Error).message);
+        if (map.current) {
+          map.current.remove();
+          map.current = null;
+        }
+      }
+    };
+
+    initializeMap();
 
     return () => {
-      console.log('Cleaning up map instance');
       if (map.current) {
         map.current.remove();
         map.current = null;
       }
     };
-  }, [mapToken]); // Only re-run when mapToken changes
+  }, [mapToken]);
 
   useEffect(() => {
     const updateMapBounds = async () => {
