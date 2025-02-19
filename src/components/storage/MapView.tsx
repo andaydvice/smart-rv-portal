@@ -1,5 +1,5 @@
 
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { StorageFacility } from './types';
@@ -7,6 +7,8 @@ import { supabase } from '@/integrations/supabase/client';
 import MapControls from './map/MapControls';
 import ClusterLayer from './map/ClusterLayer';
 import FacilityMarkers from './map/FacilityMarkers';
+import { Alert, AlertDescription } from '@/components/ui/alert';
+import { AlertCircle } from 'lucide-react';
 
 interface MapViewProps {
   mapToken: string;
@@ -25,6 +27,7 @@ const MapView = ({
 }: MapViewProps) => {
   const mapContainer = useRef<HTMLDivElement>(null);
   const map = useRef<mapboxgl.Map | null>(null);
+  const [mapError, setMapError] = useState<string | null>(null);
 
   useEffect(() => {
     if (!mapContainer.current || !mapToken) {
@@ -35,65 +38,74 @@ const MapView = ({
       return;
     }
 
-    console.log('Initializing map with token:', mapToken);
-    mapboxgl.accessToken = mapToken;
+    try {
+      console.log('Attempting to initialize map with token:', mapToken);
+      mapboxgl.accessToken = mapToken;
 
-    const initMap = new mapboxgl.Map({
-      container: mapContainer.current,
-      style: 'mapbox://styles/mapbox/dark-v11',
-      center: [-98.5795, 39.8283], // Center of US
-      zoom: 3
-    });
-
-    initMap.on('load', () => {
-      console.log('Map style loaded');
-    });
-
-    initMap.on('error', (e) => {
-      console.error('Map error:', e);
-    });
-
-    map.current = initMap;
-
-    // Handle clicks on clusters
-    initMap.on('click', 'clusters', (e) => {
-      const features = initMap.queryRenderedFeatures(e.point, {
-        layers: ['clusters']
+      const initMap = new mapboxgl.Map({
+        container: mapContainer.current,
+        style: 'mapbox://styles/mapbox/dark-v11',
+        center: [-98.5795, 39.8283], // Center of US
+        zoom: 3,
+        attributionControl: true
       });
 
-      if (!features.length) return;
+      initMap.on('load', () => {
+        console.log('Map style loaded successfully');
+        setMapError(null);
+      });
 
-      const clusterId = features[0].properties!.cluster_id;
-      const source = initMap.getSource('facilities') as mapboxgl.GeoJSONSource;
+      initMap.on('error', (e) => {
+        console.error('Mapbox error:', e);
+        setMapError('Failed to load map: ' + e.error.message);
+      });
 
-      source.getClusterExpansionZoom(clusterId, (err, zoom) => {
-        if (err) return;
+      map.current = initMap;
 
-        const coordinates = (features[0].geometry as any).coordinates;
+      // Handle clicks on clusters
+      initMap.on('click', 'clusters', (e) => {
+        const features = initMap.queryRenderedFeatures(e.point, {
+          layers: ['clusters']
+        });
 
-        initMap.easeTo({
-          center: coordinates,
-          zoom: zoom
+        if (!features.length) return;
+
+        const clusterId = features[0].properties!.cluster_id;
+        const source = initMap.getSource('facilities') as mapboxgl.GeoJSONSource;
+
+        source.getClusterExpansionZoom(clusterId, (err, zoom) => {
+          if (err) return;
+
+          const coordinates = (features[0].geometry as any).coordinates;
+
+          initMap.easeTo({
+            center: coordinates,
+            zoom: zoom
+          });
         });
       });
-    });
 
-    // Change cursor on hover
-    initMap.on('mouseenter', 'clusters', () => {
-      if (initMap) {
-        initMap.getCanvas().style.cursor = 'pointer';
-      }
-    });
+      // Change cursor on hover
+      initMap.on('mouseenter', 'clusters', () => {
+        if (initMap) {
+          initMap.getCanvas().style.cursor = 'pointer';
+        }
+      });
 
-    initMap.on('mouseleave', 'clusters', () => {
-      if (initMap) {
-        initMap.getCanvas().style.cursor = '';
-      }
-    });
+      initMap.on('mouseleave', 'clusters', () => {
+        if (initMap) {
+          initMap.getCanvas().style.cursor = '';
+        }
+      });
 
-    return () => {
-      initMap?.remove();
-    };
+      return () => {
+        console.log('Cleaning up map instance');
+        initMap?.remove();
+      };
+    } catch (error) {
+      console.error('Error initializing map:', error);
+      setMapError('Failed to initialize map: ' + (error as Error).message);
+    }
   }, [mapToken]);
 
   useEffect(() => {
@@ -124,7 +136,17 @@ const MapView = ({
 
   return (
     <div className="relative w-full h-full">
-      <div ref={mapContainer} className="w-full h-full" />
+      {mapError && (
+        <Alert variant="destructive" className="absolute top-4 left-4 right-4 z-50">
+          <AlertCircle className="h-4 w-4" />
+          <AlertDescription>{mapError}</AlertDescription>
+        </Alert>
+      )}
+      <div 
+        ref={mapContainer} 
+        className="w-full h-full" 
+        style={{ minHeight: '600px' }}
+      />
       {map.current && (
         <>
           <MapControls map={map.current} />
