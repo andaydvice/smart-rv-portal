@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react';
 import mapboxgl from 'mapbox-gl';
 import { StorageFacility } from '../types';
@@ -11,71 +10,91 @@ interface ClusterLayerProps {
 
 const ClusterLayer: React.FC<ClusterLayerProps> = ({ map, facilities, highlightedFacility }) => {
   useEffect(() => {
-    // Remove existing source if it exists
-    if (map.getSource('facilities')) {
-      // Remove layers that use this source first
-      if (map.getLayer('clusters')) map.removeLayer('clusters');
-      if (map.getLayer('cluster-count')) map.removeLayer('cluster-count');
-      map.removeSource('facilities');
+    // Wait for style to be fully loaded before adding sources and layers
+    const initializeClusterLayer = () => {
+      // Remove existing source if it exists
+      if (map.getSource('facilities')) {
+        // Remove layers that use this source first
+        if (map.getLayer('clusters')) map.removeLayer('clusters');
+        if (map.getLayer('cluster-count')) map.removeLayer('cluster-count');
+        map.removeSource('facilities');
+      }
+
+      // Add cluster source and layers
+      map.addSource('facilities', {
+        type: 'geojson',
+        data: {
+          type: 'FeatureCollection',
+          features: facilities.map(facility => ({
+            type: 'Feature',
+            geometry: {
+              type: 'Point',
+              coordinates: [facility.longitude, facility.latitude]
+            },
+            properties: {
+              id: facility.id,
+              isHighlighted: facility.id === highlightedFacility
+            }
+          }))
+        },
+        cluster: true,
+        clusterMaxZoom: 14,
+        clusterRadius: 50
+      });
+
+      // Add cluster circles
+      map.addLayer({
+        id: 'clusters',
+        type: 'circle',
+        source: 'facilities',
+        filter: ['has', 'point_count'],
+        paint: {
+          'circle-color': '#60A5FA',
+          'circle-radius': [
+            'step',
+            ['get', 'point_count'],
+            20,
+            10,
+            30,
+            50,
+            40
+          ]
+        }
+      });
+
+      // Add cluster count text
+      map.addLayer({
+        id: 'cluster-count',
+        type: 'symbol',
+        source: 'facilities',
+        filter: ['has', 'point_count'],
+        layout: {
+          'text-field': '{point_count_abbreviated}',
+          'text-font': ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
+          'text-size': 12
+        },
+        paint: {
+          'text-color': '#ffffff'
+        }
+      });
+    };
+
+    // If style is already loaded, initialize immediately
+    if (map.isStyleLoaded()) {
+      initializeClusterLayer();
+    } else {
+      // Otherwise wait for style.load event
+      map.once('style.load', initializeClusterLayer);
     }
 
-    // Add cluster source and layers
-    map.addSource('facilities', {
-      type: 'geojson',
-      data: {
-        type: 'FeatureCollection',
-        features: facilities.map(facility => ({
-          type: 'Feature',
-          geometry: {
-            type: 'Point',
-            coordinates: [facility.longitude, facility.latitude]
-          },
-          properties: {
-            id: facility.id,
-            isHighlighted: facility.id === highlightedFacility
-          }
-        }))
-      },
-      cluster: true,
-      clusterMaxZoom: 14,
-      clusterRadius: 50
-    });
-
-    // Add cluster circles
-    map.addLayer({
-      id: 'clusters',
-      type: 'circle',
-      source: 'facilities',
-      filter: ['has', 'point_count'],
-      paint: {
-        'circle-color': '#60A5FA',
-        'circle-radius': [
-          'step',
-          ['get', 'point_count'],
-          20,
-          10,
-          30,
-          50,
-          40
-        ]
+    // Cleanup
+    return () => {
+      if (map.getSource('facilities')) {
+        if (map.getLayer('clusters')) map.removeLayer('clusters');
+        if (map.getLayer('cluster-count')) map.removeLayer('cluster-count');
+        map.removeSource('facilities');
       }
-    });
-
-    // Add cluster count text
-    map.addLayer({
-      id: 'cluster-count',
-      type: 'symbol',
-      source: 'facilities',
-      filter: ['has', 'point_count'],
-      layout: {
-        'text-field': '{point_count_abbreviated}',
-        'text-font': ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
-        'text-size': 12
-      },
-      paint: {
-        'text-color': '#ffffff'
-      }
-    });
+    };
   }, [map, facilities, highlightedFacility]);
 
   return null;
