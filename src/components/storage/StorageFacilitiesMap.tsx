@@ -1,3 +1,4 @@
+
 "use client";
 
 import React, { useState, useEffect } from 'react';
@@ -16,7 +17,10 @@ const DEFAULT_MAPBOX_TOKEN = 'pk.eyJ1IjoicnZzdG9yYWdlZ3VydSIsImEiOiJjbTc3ZTA5OXM
 
 const StorageFacilitiesMap = () => {
   const [mapToken, setMapToken] = useState<string>(() => {
-    return localStorage.getItem(MAPBOX_TOKEN_KEY) || DEFAULT_MAPBOX_TOKEN;
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem(MAPBOX_TOKEN_KEY) || DEFAULT_MAPBOX_TOKEN;
+    }
+    return DEFAULT_MAPBOX_TOKEN;
   });
   
   const [mapTokenError, setMapTokenError] = useState<string>('');
@@ -41,7 +45,7 @@ const StorageFacilitiesMap = () => {
       setMapTokenError('Invalid Mapbox token. Token should start with "pk."');
     } else {
       setMapTokenError('');
-      if (mapToken) {
+      if (mapToken && typeof window !== 'undefined') {
         localStorage.setItem(MAPBOX_TOKEN_KEY, mapToken);
       }
     }
