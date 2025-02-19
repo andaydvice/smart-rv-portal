@@ -1,3 +1,4 @@
+
 import React, { useEffect, useRef, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
@@ -44,17 +45,11 @@ const MapView = ({
       }
 
       try {
-        // Verify token by fetching style first
-        const styleUrl = `https://api.mapbox.com/styles/v1/mapbox/dark-v11?access_token=${mapToken}`;
-        const response = await fetch(styleUrl);
-        
-        if (!response.ok) {
-          throw new Error(`Failed to validate Mapbox token: ${response.statusText}`);
-        }
-
-        console.log('Token validated successfully');
+        // Set the token first
         mapboxgl.accessToken = mapToken;
 
+        // Initialize map directly
+        console.log('Initializing map with token:', mapToken);
         const initMap = new mapboxgl.Map({
           container: mapContainer.current,
           style: 'mapbox://styles/mapbox/dark-v11',
