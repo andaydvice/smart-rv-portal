@@ -27,34 +27,51 @@ const MapView = ({
   const map = useRef<mapboxgl.Map | null>(null);
 
   useEffect(() => {
-    if (!mapContainer.current || !mapToken) return;
+    if (!mapContainer.current || !mapToken) {
+      console.log('Missing mapContainer or mapToken:', { 
+        hasContainer: !!mapContainer.current, 
+        hasToken: !!mapToken 
+      });
+      return;
+    }
 
+    console.log('Initializing map with token:', mapToken);
     mapboxgl.accessToken = mapToken;
 
-    map.current = new mapboxgl.Map({
+    const initMap = new mapboxgl.Map({
       container: mapContainer.current,
       style: 'mapbox://styles/mapbox/dark-v11',
-      center: [-98.5795, 39.8283],
+      center: [-98.5795, 39.8283], // Center of US
       zoom: 3
     });
 
+    initMap.on('load', () => {
+      console.log('Map style loaded');
+    });
+
+    initMap.on('error', (e) => {
+      console.error('Map error:', e);
+    });
+
+    map.current = initMap;
+
     // Handle clicks on clusters
-    map.current.on('click', 'clusters', (e) => {
-      const features = map.current!.queryRenderedFeatures(e.point, {
+    initMap.on('click', 'clusters', (e) => {
+      const features = initMap.queryRenderedFeatures(e.point, {
         layers: ['clusters']
       });
 
       if (!features.length) return;
 
       const clusterId = features[0].properties!.cluster_id;
-      const source = map.current!.getSource('facilities') as mapboxgl.GeoJSONSource;
+      const source = initMap.getSource('facilities') as mapboxgl.GeoJSONSource;
 
       source.getClusterExpansionZoom(clusterId, (err, zoom) => {
         if (err) return;
 
         const coordinates = (features[0].geometry as any).coordinates;
 
-        map.current!.easeTo({
+        initMap.easeTo({
           center: coordinates,
           zoom: zoom
         });
@@ -62,20 +79,20 @@ const MapView = ({
     });
 
     // Change cursor on hover
-    map.current.on('mouseenter', 'clusters', () => {
-      if (map.current) {
-        map.current.getCanvas().style.cursor = 'pointer';
+    initMap.on('mouseenter', 'clusters', () => {
+      if (initMap) {
+        initMap.getCanvas().style.cursor = 'pointer';
       }
     });
 
-    map.current.on('mouseleave', 'clusters', () => {
-      if (map.current) {
-        map.current.getCanvas().style.cursor = '';
+    initMap.on('mouseleave', 'clusters', () => {
+      if (initMap) {
+        initMap.getCanvas().style.cursor = '';
       }
     });
 
     return () => {
-      map.current?.remove();
+      initMap?.remove();
     };
   }, [mapToken]);
 
