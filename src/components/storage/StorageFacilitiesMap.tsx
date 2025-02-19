@@ -1,4 +1,3 @@
-
 "use client";
 
 import React, { useState, useEffect } from 'react';
@@ -13,10 +12,11 @@ import { AlertCircle, Loader2, Search } from 'lucide-react';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 
 const MAPBOX_TOKEN_KEY = 'mapbox_token';
+const DEFAULT_MAPBOX_TOKEN = 'pk.eyJ1IjoicnZzdG9yYWdlZ3VydSIsImEiOiJjbTc3ZTA5OXMwemtrMm5vaG00bXN5anNvIn0.q9bFmwxj8kqjDuid4jb3Tw';
 
 const StorageFacilitiesMap = () => {
   const [mapToken, setMapToken] = useState<string>(() => {
-    return localStorage.getItem(MAPBOX_TOKEN_KEY) || '';
+    return localStorage.getItem(MAPBOX_TOKEN_KEY) || DEFAULT_MAPBOX_TOKEN;
   });
   
   const [mapTokenError, setMapTokenError] = useState<string>('');
@@ -113,39 +113,6 @@ const StorageFacilitiesMap = () => {
         </div>
       </div>
       <Card className="lg:col-span-9 h-[800px] bg-[#080F1F] relative overflow-hidden">
-        {(!mapToken || mapTokenError) && (
-          <div className="absolute inset-0 flex flex-col items-center justify-center bg-[#080F1F]/80 backdrop-blur-sm z-10 p-4">
-            <div className="w-full max-w-md space-y-4">
-              <div className="text-center mb-4">
-                <h3 className="text-lg font-semibold text-white mb-2">Mapbox Token Required</h3>
-                <p className="text-gray-400 text-sm">
-                  Please enter your Mapbox public access token. You can get one from{' '}
-                  <a 
-                    href="https://mapbox.com" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="text-blue-400 hover:text-blue-300 underline"
-                  >
-                    mapbox.com
-                  </a>
-                </p>
-              </div>
-              <input
-                type="text"
-                placeholder="Enter your Mapbox public token (starts with pk.)"
-                className="w-full px-4 py-2 rounded border border-gray-600 bg-[#131a2a] text-white"
-                onChange={(e) => setMapToken(e.target.value)}
-                value={mapToken}
-              />
-              {mapTokenError && (
-                <Alert variant="destructive" className="bg-red-900/50 border-red-700">
-                  <AlertCircle className="h-4 w-4" />
-                  <AlertDescription>{mapTokenError}</AlertDescription>
-                </Alert>
-              )}
-            </div>
-          </div>
-        )}
         <MapView
           mapToken={mapTokenError ? '' : mapToken}
           facilities={filteredFacilities || []}
