@@ -25,24 +25,24 @@ const MapView = ({
 }: MapViewProps) => {
   const mapContainer = useRef<HTMLDivElement>(null);
   const map = useRef<mapboxgl.Map | null>(null);
-  const [mapLoaded, setMapLoaded] = useState(false);
+  const [styleLoaded, setStyleLoaded] = useState(false);
 
   useEffect(() => {
     if (!mapContainer.current || !mapToken) return;
 
     mapboxgl.accessToken = mapToken;
 
-    const initializeMap = () => {
+    if (!map.current) {
       map.current = new mapboxgl.Map({
-        container: mapContainer.current!,
+        container: mapContainer.current,
         style: 'mapbox://styles/mapbox/dark-v11',
         center: [-98.5795, 39.8283],
         zoom: 3
       });
 
-      map.current.on('load', () => {
+      map.current.on('style.load', () => {
         console.log('Map style loaded');
-        setMapLoaded(true);
+        setStyleLoaded(true);
       });
 
       // Handle clicks on clusters
@@ -80,21 +80,20 @@ const MapView = ({
           map.current.getCanvas().style.cursor = '';
         }
       });
-    };
-
-    initializeMap();
+    }
 
     return () => {
       if (map.current) {
         map.current.remove();
-        setMapLoaded(false);
+        map.current = null;
+        setStyleLoaded(false);
       }
     };
   }, [mapToken]);
 
   useEffect(() => {
     const updateMapBounds = async () => {
-      if (!map.current || !selectedState || !mapLoaded) return;
+      if (!map.current || !selectedState || !styleLoaded) return;
 
       const { data: bounds } = await supabase
         .from('state_bounds')
@@ -116,12 +115,12 @@ const MapView = ({
     };
 
     updateMapBounds();
-  }, [selectedState, mapLoaded]);
+  }, [selectedState, styleLoaded]);
 
   return (
     <div className="relative w-full h-full">
       <div ref={mapContainer} className="w-full h-full" />
-      {map.current && mapLoaded && (
+      {map.current && styleLoaded && (
         <>
           <MapControls map={map.current} />
           <ClusterLayer
