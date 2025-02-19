@@ -46,11 +46,7 @@ export const useStorageFacilities = (filters: FilterState) => {
         throw error;
       }
 
-      if (!data || data.length === 0) {
-        console.log('No facilities found matching filters');
-      } else {
-        console.log(`Found ${data.length} facilities`);
-      }
+      console.log('Fetched facilities:', data);
       
       return data.map(facility => ({
         id: facility.id,
@@ -82,24 +78,9 @@ export const useStorageFacilities = (filters: FilterState) => {
 
   // Apply price range filter in memory since it's a range
   const filteredFacilities = facilities?.filter(facility => {
-    if (!facilities) {
-      console.log('No facilities to filter');
-      return false;
-    }
     const facilityMaxPrice = facility.price_range.max;
-    console.log(`Filtering facility ${facility.id} with max price ${facilityMaxPrice} against range ${filters.priceRange[0]}-${filters.priceRange[1]}`);
     return facilityMaxPrice >= filters.priceRange[0] && facilityMaxPrice <= filters.priceRange[1];
   });
-
-  if (isLoading) {
-    console.log('Loading facilities...');
-  }
-
-  if (error) {
-    console.error('Error in useStorageFacilities:', error);
-  }
-
-  console.log('Final filtered facilities count:', filteredFacilities?.length);
 
   return { 
     facilities: filteredFacilities,
