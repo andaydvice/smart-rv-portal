@@ -16,13 +16,7 @@ const MAPBOX_TOKEN_KEY = 'mapbox_token';
 const DEFAULT_MAPBOX_TOKEN = 'pk.eyJ1IjoicnZzdG9yYWdlZ3VydSIsImEiOiJjbTc3ZTA5OXMwemtrMm5vaG00bXN5anNvIn0.q9bFmwxj8kqjDuid4jb3Tw';
 
 const StorageFacilitiesMap = () => {
-  const [mapToken, setMapToken] = useState<string>(() => {
-    if (typeof window !== 'undefined') {
-      return localStorage.getItem(MAPBOX_TOKEN_KEY) || DEFAULT_MAPBOX_TOKEN;
-    }
-    return DEFAULT_MAPBOX_TOKEN;
-  });
-  
+  const [mapToken, setMapToken] = useState<string>(DEFAULT_MAPBOX_TOKEN);
   const [mapTokenError, setMapTokenError] = useState<string>('');
   const [highlightedFacility, setHighlightedFacility] = useState<string | null>(null);
   const [filters, setFilters] = useState<FilterState>({
@@ -40,14 +34,22 @@ const StorageFacilitiesMap = () => {
 
   const { facilities: filteredFacilities, isLoading, error } = useStorageFacilities(filters);
 
+  // Remove any invalid stored token on component mount
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const storedToken = localStorage.getItem(MAPBOX_TOKEN_KEY);
+      if (storedToken && storedToken !== DEFAULT_MAPBOX_TOKEN) {
+        console.log('Removing invalid stored token');
+        localStorage.removeItem(MAPBOX_TOKEN_KEY);
+      }
+    }
+  }, []);
+
   useEffect(() => {
     if (mapToken && !mapToken.startsWith('pk.')) {
       setMapTokenError('Invalid Mapbox token. Token should start with "pk."');
     } else {
       setMapTokenError('');
-      if (mapToken && typeof window !== 'undefined') {
-        localStorage.setItem(MAPBOX_TOKEN_KEY, mapToken);
-      }
     }
   }, [mapToken]);
 
