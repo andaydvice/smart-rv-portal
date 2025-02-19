@@ -19,7 +19,6 @@ const StorageFacilitiesMap = () => {
   console.log('StorageFacilitiesMap component rendering');
   
   const [mapToken, setMapToken] = useState<string>(() => {
-    // Try to get token from localStorage, otherwise use default token
     return localStorage.getItem(MAPBOX_TOKEN_KEY) || DEFAULT_MAPBOX_TOKEN;
   });
   const [mapTokenError, setMapTokenError] = useState<string>('');
@@ -34,7 +33,7 @@ const StorageFacilitiesMap = () => {
     },
     priceRange: [0, 1000],
     selectedState: null,
-    minRating: null  // Added this line to match FilterState interface
+    minRating: null
   });
 
   const { facilities: filteredFacilities, isLoading, error } = useStorageFacilities(filters);
@@ -53,7 +52,6 @@ const StorageFacilitiesMap = () => {
     } else {
       setMapTokenError('');
       if (mapToken) {
-        // Save valid token to localStorage
         localStorage.setItem(MAPBOX_TOKEN_KEY, mapToken);
       }
     }
@@ -115,7 +113,7 @@ const StorageFacilitiesMap = () => {
   };
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
+    <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 min-h-[800px]">
       <div className="lg:col-span-3">
         <div className="space-y-4">
           <FilterPanel onFilterChange={setFilters} />
@@ -124,7 +122,7 @@ const StorageFacilitiesMap = () => {
           </Card>
         </div>
       </div>
-      <Card className="lg:col-span-9 h-[600px] bg-[#080F1F] relative overflow-hidden">
+      <Card className="lg:col-span-9 h-[800px] bg-[#080F1F] relative overflow-hidden">
         {!mapToken && (
           <div className="absolute inset-0 flex flex-col items-center justify-center bg-[#080F1F]/80 backdrop-blur-sm z-10 p-4">
             <div className="w-full max-w-md space-y-4">
