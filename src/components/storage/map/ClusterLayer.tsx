@@ -2,6 +2,7 @@
 import React, { useEffect } from 'react';
 import mapboxgl from 'mapbox-gl';
 import { StorageFacility } from '../types';
+import type { Feature, FeatureCollection, Point } from 'geojson';
 
 interface ClusterLayerProps {
   map: mapboxgl.Map;
@@ -21,13 +22,13 @@ const ClusterLayer: React.FC<ClusterLayerProps> = ({ map, facilities, highlighte
         map.removeSource('facilities');
       }
 
-      // Create the GeoJSON data
-      const geojsonData = {
-        type: 'FeatureCollection',
-        features: facilities.map(facility => ({
-          type: 'Feature',
+      // Create the GeoJSON data with proper typing
+      const geojsonData: FeatureCollection<Point> = {
+        type: "FeatureCollection",
+        features: facilities.map((facility): Feature<Point> => ({
+          type: "Feature",
           geometry: {
-            type: 'Point',
+            type: "Point",
             coordinates: [facility.longitude, facility.latitude]
           },
           properties: {
