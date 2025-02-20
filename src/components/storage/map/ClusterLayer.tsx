@@ -21,23 +21,26 @@ const ClusterLayer: React.FC<ClusterLayerProps> = ({ map, facilities, highlighte
         map.removeSource('facilities');
       }
 
+      // Create the GeoJSON data
+      const geojsonData = {
+        type: 'FeatureCollection',
+        features: facilities.map(facility => ({
+          type: 'Feature',
+          geometry: {
+            type: 'Point',
+            coordinates: [facility.longitude, facility.latitude]
+          },
+          properties: {
+            id: facility.id,
+            isHighlighted: facility.id === highlightedFacility
+          }
+        }))
+      };
+
       // Add cluster source
       map.addSource('facilities', {
         type: 'geojson',
-        data: {
-          type: 'FeatureCollection',
-          features: facilities.map(facility => ({
-            type: 'Feature',
-            geometry: {
-              type: 'Point',
-              coordinates: [facility.longitude, facility.latitude]
-            },
-            properties: {
-              id: facility.id,
-              isHighlighted: facility.id === highlightedFacility
-            }
-          }))
-        },
+        data: geojsonData,
         cluster: true,
         clusterMaxZoom: 14,
         clusterRadius: 50
@@ -80,21 +83,23 @@ const ClusterLayer: React.FC<ClusterLayerProps> = ({ map, facilities, highlighte
       });
     };
 
-    const waitForStyleAndInitialize = () => {
-      if (!isMounted) return;
-
-      if (map.isStyleLoaded()) {
-        initializeLayer();
-      } else {
+    const setupMap = () => {
+      if (!map.isStyleLoaded()) {
+        // Wait for the style to load before adding sources and layers
         map.once('style.load', () => {
           if (isMounted) {
+            console.log('Style loaded, initializing layer');
             initializeLayer();
           }
         });
+      } else {
+        // Style is already loaded, initialize immediately
+        console.log('Style already loaded, initializing layer');
+        initializeLayer();
       }
     };
 
-    waitForStyleAndInitialize();
+    setupMap();
 
     return () => {
       isMounted = false;
