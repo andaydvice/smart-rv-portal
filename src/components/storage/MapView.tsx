@@ -8,7 +8,7 @@ import MapControls from './map/MapControls';
 import ClusterLayer from './map/ClusterLayer';
 import FacilityMarkers from './map/FacilityMarkers';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { AlertCircle } from 'lucide-react';
+import { AlertCircle, Loader2 } from 'lucide-react';
 
 interface MapViewProps {
   mapToken: string;
@@ -28,28 +28,27 @@ const MapView = ({
   const mapContainer = useRef<HTMLDivElement>(null);
   const map = useRef<mapboxgl.Map | null>(null);
   const [mapError, setMapError] = useState<string | null>(null);
+  const [isInitializing, setIsInitializing] = useState(true);
 
   useEffect(() => {
     const initializeMap = async () => {
+      if (!mapContainer.current) return;
+      
+      // Clear any existing map
       if (map.current) {
         map.current.remove();
         map.current = null;
       }
 
-      if (!mapContainer.current || !mapToken) {
-        console.log('Missing requirements:', { 
-          hasContainer: !!mapContainer.current, 
-          token: mapToken 
-        });
+      if (!mapToken) {
+        console.log('No mapbox token available yet');
         return;
       }
 
       try {
-        // Set the token first
+        console.log('Initializing map with token');
         mapboxgl.accessToken = mapToken;
 
-        // Initialize map directly
-        console.log('Initializing map with token:', mapToken);
         const initMap = new mapboxgl.Map({
           container: mapContainer.current,
           style: 'mapbox://styles/mapbox/dark-v11',
@@ -105,6 +104,8 @@ const MapView = ({
           map.current.remove();
           map.current = null;
         }
+      } finally {
+        setIsInitializing(false);
       }
     };
 
@@ -143,6 +144,17 @@ const MapView = ({
 
     updateMapBounds();
   }, [selectedState]);
+
+  if (isInitializing) {
+    return (
+      <div className="flex items-center justify-center w-full h-full bg-[#080F1F]">
+        <div className="flex flex-col items-center gap-4">
+          <Loader2 className="w-8 h-8 animate-spin text-blue-500" />
+          <p className="text-gray-400">Loading map...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="relative w-full h-full">
