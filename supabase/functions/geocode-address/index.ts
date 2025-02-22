@@ -6,14 +6,6 @@ const corsHeaders = {
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
 }
 
-interface GeocodeRequest {
-  type?: 'getToken';
-  address?: string;
-  city?: string;
-  state?: string;
-  zip?: string;
-}
-
 serve(async (req) => {
   // Handle CORS preflight requests
   if (req.method === 'OPTIONS') {
@@ -21,22 +13,18 @@ serve(async (req) => {
   }
 
   try {
-    console.log('Starting geocode-address function...');
-    
     const mapboxToken = Deno.env.get('MAPBOX');
-    console.log('Attempting to get MAPBOX token...');
+    console.log('Getting MAPBOX token...');
     
     if (!mapboxToken) {
-      console.error('MAPBOX token not found in environment variables');
       throw new Error('Mapbox token not configured');
     }
 
-    console.log('Successfully retrieved MAPBOX token');
-    const body = await req.json() as GeocodeRequest;
-
+    const body = await req.json();
+    
     // Handle token requests
     if (body.type === 'getToken') {
-      console.log('Returning MAPBOX token for getToken request');
+      console.log('Returning Mapbox token');
       return new Response(
         JSON.stringify({ token: mapboxToken }),
         { 
