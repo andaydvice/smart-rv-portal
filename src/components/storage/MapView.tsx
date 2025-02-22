@@ -3,7 +3,6 @@ import React, { useEffect, useRef, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { StorageFacility } from './types';
-import { supabase } from '@/integrations/supabase/client';
 import MapControls from './map/MapControls';
 import ClusterLayer from './map/ClusterLayer';
 import FacilityMarkers from './map/FacilityMarkers';
@@ -29,8 +28,18 @@ const MapView = ({
   const map = useRef<mapboxgl.Map | null>(null);
   const [mapError, setMapError] = useState<string | null>(null);
   const [isInitializing, setIsInitializing] = useState(true);
+  const [containerReady, setContainerReady] = useState(false);
+
+  // Monitor container readiness
+  useEffect(() => {
+    if (mapContainer.current) {
+      setContainerReady(true);
+    }
+  }, []);
 
   useEffect(() => {
+    if (!containerReady || !mapToken) return;
+
     const initializeMap = async () => {
       try {
         if (!mapContainer.current) {
@@ -38,28 +47,22 @@ const MapView = ({
           return;
         }
 
-        if (!mapToken) {
-          console.error('No Mapbox token provided');
-          setMapError('Missing map configuration');
-          setIsInitializing(false);
-          return;
-        }
-
-        console.log('Initializing map with token length:', mapToken.length);
-        mapboxgl.accessToken = mapToken;
-
         // Clear any existing map
         if (map.current) {
           map.current.remove();
           map.current = null;
         }
 
+        console.log('Initializing map with token length:', mapToken.length);
+        mapboxgl.accessToken = mapToken;
+
         const newMap = new mapboxgl.Map({
           container: mapContainer.current,
           style: 'mapbox://styles/mapbox/dark-v11',
           center: [-98.5795, 39.8283], // Center of USA
           zoom: 3,
-          maxZoom: 16
+          maxZoom: 16,
+          preserveDrawingBuffer: true
         });
 
         // Handle successful map load
@@ -75,11 +78,6 @@ const MapView = ({
           console.error('Map error:', e);
           setMapError(`Map error: ${e.error?.message || 'Unknown error'}`);
           setIsInitializing(false);
-        });
-
-        // Handle style load errors
-        newMap.on('style.load', () => {
-          console.log('Map style loaded successfully');
         });
 
       } catch (err) {
@@ -99,18 +97,7 @@ const MapView = ({
         map.current = null;
       }
     };
-  }, [mapToken]);
-
-  if (isInitializing) {
-    return (
-      <div className="flex items-center justify-center w-full h-full bg-[#080F1F]">
-        <div className="flex flex-col items-center gap-4">
-          <Loader2 className="w-8 h-8 animate-spin text-blue-500" />
-          <p className="text-gray-400">Loading map...</p>
-        </div>
-      </div>
-    );
-  }
+  }, [mapToken, containerReady]);
 
   return (
     <div className="relative w-full h-full">
@@ -140,6 +127,14 @@ const MapView = ({
             onMarkerClick={onMarkerClick}
           />
         </>
+      )}
+      {isInitializing && (
+        <div className="absolute inset-0 flex items-center justify-center bg-[#080F1F]/80">
+          <div className="flex flex-col items-center gap-4">
+            <Loader2 className="w-8 h-8 animate-spin text-blue-500" />
+            <p className="text-gray-400">Loading map...</p>
+          </div>
+        </div>
       )}
     </div>
   );
