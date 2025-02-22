@@ -21,23 +21,18 @@ serve(async (req) => {
   }
 
   try {
-    console.log('Starting geocode-address function...');
-    
+    // Simple test to check if we can access environment variables
     const mapboxToken = Deno.env.get('MAPBOX');
-    console.log('Available environment variables:', Object.keys(Deno.env.toObject()));
-    console.log('Attempting to get MAPBOX token...');
-    
+    console.log('Function started, checking for MAPBOX token');
+
     if (!mapboxToken) {
-      console.error('MAPBOX token not found in environment variables');
       throw new Error('Mapbox token not configured');
     }
 
-    console.log('Successfully retrieved MAPBOX token');
     const body = await req.json() as GeocodeRequest;
 
-    // Handle token requests
+    // Only handle token requests for now
     if (body.type === 'getToken') {
-      console.log('Returning MAPBOX token for getToken request');
       return new Response(
         JSON.stringify({ token: mapboxToken }),
         { 
@@ -47,38 +42,16 @@ serve(async (req) => {
       );
     }
 
-    // Handle geocoding requests
-    const { address, city, state, zip } = body;
-    if (!address || !city || !state || !zip) {
-      throw new Error('Missing required address fields');
-    }
-
-    const fullAddress = `${address}, ${city}, ${state} ${zip}`;
-    const encodedAddress = encodeURIComponent(fullAddress);
-    
-    const response = await fetch(
-      `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodedAddress}.json?access_token=${mapboxToken}&country=US`,
-      { method: 'GET' }
-    );
-
-    const data = await response.json();
-    
-    if (!data.features?.length) {
-      throw new Error('Address not found');
-    }
-
-    // Get coordinates from the first result
-    const [longitude, latitude] = data.features[0].center;
-
     return new Response(
-      JSON.stringify({ latitude, longitude }),
+      JSON.stringify({ error: 'Invalid request type' }),
       { 
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-        status: 200,
+        status: 400,
       }
     );
+
   } catch (error) {
-    console.error('Error in geocode-address function:', error);
+    console.error('Error:', error.message);
     return new Response(
       JSON.stringify({ error: error.message }),
       { 
