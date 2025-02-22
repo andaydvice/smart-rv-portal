@@ -41,14 +41,14 @@ const MapView = ({
       }
 
       if (!mapToken) {
-        console.log('No mapbox token available yet');
+        console.log('MapView: No mapbox token provided:', mapToken);
         setMapError('Waiting for map token...');
         setIsInitializing(false);
         return;
       }
 
       try {
-        console.log('Initializing map with token');
+        console.log('MapView: Initializing map with token:', mapToken.substring(0, 10) + '...');
         mapboxgl.accessToken = mapToken;
 
         const initMap = new mapboxgl.Map({
@@ -60,7 +60,7 @@ const MapView = ({
         });
 
         initMap.once('load', () => {
-          console.log('Map loaded successfully');
+          console.log('MapView: Map loaded successfully');
           setMapError(null);
           setIsInitializing(false);
           map.current = initMap;
@@ -92,7 +92,7 @@ const MapView = ({
         });
 
         initMap.on('error', (e) => {
-          console.error('Mapbox error:', e);
+          console.error('MapView: Mapbox error:', e);
           setMapError('Failed to load map: ' + e.error.message);
           setIsInitializing(false);
           if (map.current) {
@@ -102,7 +102,7 @@ const MapView = ({
         });
 
       } catch (error) {
-        console.error('Error initializing map:', error);
+        console.error('MapView: Error initializing map:', error);
         setMapError('Failed to initialize map: ' + (error as Error).message);
         setIsInitializing(false);
         if (map.current) {
