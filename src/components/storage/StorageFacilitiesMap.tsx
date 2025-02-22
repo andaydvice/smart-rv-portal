@@ -13,12 +13,10 @@ import { AlertCircle, Loader2, Search, Plus, List } from 'lucide-react';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import AddFacilityForm from './AddFacilityForm';
 import { Button } from '../ui/button';
-
-const MAPBOX_TOKEN_KEY = 'mapbox_token';
-const DEFAULT_MAPBOX_TOKEN = 'pk.eyJ1IjoicnZzdG9yYWdlZ3VydSIsImEiOiJjTTc3ZTA5OXMwemtrMm5vaG00bXN5anNvIn0.q9bFmwxj8kqjDuid4jb3Tw';
+import { supabase } from '@/integrations/supabase/client';
 
 const StorageFacilitiesMap = () => {
-  const [mapToken, setMapToken] = useState<string>(DEFAULT_MAPBOX_TOKEN);
+  const [mapToken, setMapToken] = useState<string>('');
   const [mapTokenError, setMapTokenError] = useState<string>('');
   const [highlightedFacility, setHighlightedFacility] = useState<string | null>(null);
   const [showAddForm, setShowAddForm] = useState(false);
@@ -37,24 +35,27 @@ const StorageFacilitiesMap = () => {
 
   const { facilities: filteredFacilities, isLoading, error } = useStorageFacilities(filters);
 
-  // Remove any invalid stored token on component mount
+  // Fetch Mapbox token on component mount
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const storedToken = localStorage.getItem(MAPBOX_TOKEN_KEY);
-      if (storedToken && storedToken !== DEFAULT_MAPBOX_TOKEN) {
-        console.log('Removing invalid stored token');
-        localStorage.removeItem(MAPBOX_TOKEN_KEY);
+    const fetchMapboxToken = async () => {
+      try {
+        const { data, error } = await supabase.functions.invoke('geocode-address', {
+          body: { type: 'getToken' }
+        });
+        
+        if (error) throw error;
+        if (!data?.token) throw new Error('No token received');
+        
+        setMapToken(data.token);
+        setMapTokenError('');
+      } catch (err) {
+        console.error('Error fetching Mapbox token:', err);
+        setMapTokenError('Failed to load Mapbox token');
       }
-    }
-  }, []);
+    };
 
-  useEffect(() => {
-    if (mapToken && !mapToken.startsWith('pk.')) {
-      setMapTokenError('Invalid Mapbox token. Token should start with "pk."');
-    } else {
-      setMapTokenError('');
-    }
-  }, [mapToken]);
+    fetchMapboxToken();
+  }, []);
 
   const handleFacilityClick = (facilityId: string) => {
     setHighlightedFacility(facilityId);

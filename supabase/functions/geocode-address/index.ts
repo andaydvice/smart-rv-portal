@@ -7,10 +7,11 @@ const corsHeaders = {
 }
 
 interface GeocodeRequest {
-  address: string;
-  city: string;
-  state: string;
-  zip: string;
+  type?: 'getToken';
+  address?: string;
+  city?: string;
+  state?: string;
+  zip?: string;
 }
 
 serve(async (req) => {
@@ -20,16 +21,33 @@ serve(async (req) => {
   }
 
   try {
-    const { address, city, state, zip } = await req.json() as GeocodeRequest;
-    const fullAddress = `${address}, ${city}, ${state} ${zip}`;
-    
     const mapboxToken = Deno.env.get('MAPBOX_TOKEN');
     if (!mapboxToken) {
       throw new Error('Mapbox token not configured');
     }
 
-    // Call Mapbox Geocoding API
+    const body = await req.json() as GeocodeRequest;
+
+    // Handle token requests
+    if (body.type === 'getToken') {
+      return new Response(
+        JSON.stringify({ token: mapboxToken }),
+        { 
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+          status: 200,
+        }
+      );
+    }
+
+    // Handle geocoding requests
+    const { address, city, state, zip } = body;
+    if (!address || !city || !state || !zip) {
+      throw new Error('Missing required address fields');
+    }
+
+    const fullAddress = `${address}, ${city}, ${state} ${zip}`;
     const encodedAddress = encodeURIComponent(fullAddress);
+    
     const response = await fetch(
       `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodedAddress}.json?access_token=${mapboxToken}&country=US`,
       { method: 'GET' }
@@ -52,6 +70,7 @@ serve(async (req) => {
       }
     );
   } catch (error) {
+    console.error('Error in geocode-address function:', error);
     return new Response(
       JSON.stringify({ error: error.message }),
       { 
