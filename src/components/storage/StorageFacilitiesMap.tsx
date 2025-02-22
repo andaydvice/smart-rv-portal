@@ -39,18 +39,27 @@ const StorageFacilitiesMap = () => {
   useEffect(() => {
     const fetchMapboxToken = async () => {
       try {
+        console.log('Fetching Mapbox token...');
         const { data, error } = await supabase.functions.invoke('geocode-address', {
           body: { type: 'getToken' }
         });
         
-        if (error) throw error;
-        if (!data?.token) throw new Error('No token received');
+        if (error) {
+          console.error('Error fetching token:', error);
+          throw error;
+        }
         
+        if (!data?.token) {
+          console.error('No token received in response');
+          throw new Error('No token received');
+        }
+        
+        console.log('Successfully received Mapbox token');
         setMapToken(data.token);
         setMapTokenError('');
       } catch (err) {
-        console.error('Error fetching Mapbox token:', err);
-        setMapTokenError('Failed to load Mapbox token');
+        console.error('Failed to fetch Mapbox token:', err);
+        setMapTokenError('Failed to load map configuration');
       }
     };
 
@@ -147,13 +156,20 @@ const StorageFacilitiesMap = () => {
         </div>
       </div>
       <Card className="lg:col-span-9 h-[800px] bg-[#080F1F] relative overflow-hidden">
-        <MapView
-          mapToken={mapTokenError ? '' : mapToken}
-          facilities={filteredFacilities || []}
-          highlightedFacility={highlightedFacility}
-          onMarkerClick={handleFacilityClick}
-          selectedState={filters.selectedState}
-        />
+        {mapTokenError ? (
+          <Alert variant="destructive" className="m-4">
+            <AlertCircle className="h-4 w-4" />
+            <AlertDescription>{mapTokenError}</AlertDescription>
+          </Alert>
+        ) : (
+          <MapView
+            mapToken={mapToken}
+            facilities={filteredFacilities || []}
+            highlightedFacility={highlightedFacility}
+            onMarkerClick={handleFacilityClick}
+            selectedState={filters.selectedState}
+          />
+        )}
       </Card>
     </div>
   );
