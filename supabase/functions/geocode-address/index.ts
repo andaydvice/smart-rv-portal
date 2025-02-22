@@ -21,19 +21,23 @@ serve(async (req) => {
   }
 
   try {
-    const mapboxToken = Deno.env.get('MAPBOX'); // Using uppercase for environment variable
-    console.log('Attempting to get Mapbox token...');
+    console.log('Starting geocode-address function...');
+    
+    // Try both cases to help debug
+    const mapboxToken = Deno.env.get('Mapbox') || Deno.env.get('MAPBOX');
+    console.log('Environment variables available:', Deno.env.toObject());
     
     if (!mapboxToken) {
-      console.error('Mapbox token not found in environment');
+      console.error('Mapbox token not found in environment variables');
       throw new Error('Mapbox token not configured');
     }
 
+    console.log('Successfully retrieved Mapbox token');
     const body = await req.json() as GeocodeRequest;
 
     // Handle token requests
     if (body.type === 'getToken') {
-      console.log('Token found, returning Mapbox token');
+      console.log('Returning Mapbox token for getToken request');
       return new Response(
         JSON.stringify({ token: mapboxToken }),
         { 
