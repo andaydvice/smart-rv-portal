@@ -675,6 +675,16 @@ export type Database = {
         }
         Returns: number
       }
+      create_storage_facility_with_geocoding: {
+        Args: {
+          facility_name: string
+          facility_address: string
+          facility_city: string
+          facility_state: string
+          facility_zip: string
+        }
+        Returns: string
+      }
       disablelongtransactions: {
         Args: Record<PropertyKey, never>
         Returns: string
