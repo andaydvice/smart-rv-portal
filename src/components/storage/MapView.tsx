@@ -42,6 +42,8 @@ const MapView = ({
 
       if (!mapToken) {
         console.log('No mapbox token available yet');
+        setMapError('Waiting for map token...');
+        setIsInitializing(false);
         return;
       }
 
@@ -60,6 +62,7 @@ const MapView = ({
         initMap.once('load', () => {
           console.log('Map loaded successfully');
           setMapError(null);
+          setIsInitializing(false);
           map.current = initMap;
 
           initMap.on('click', 'clusters', (e) => {
@@ -91,6 +94,7 @@ const MapView = ({
         initMap.on('error', (e) => {
           console.error('Mapbox error:', e);
           setMapError('Failed to load map: ' + e.error.message);
+          setIsInitializing(false);
           if (map.current) {
             map.current.remove();
             map.current = null;
@@ -100,12 +104,11 @@ const MapView = ({
       } catch (error) {
         console.error('Error initializing map:', error);
         setMapError('Failed to initialize map: ' + (error as Error).message);
+        setIsInitializing(false);
         if (map.current) {
           map.current.remove();
           map.current = null;
         }
-      } finally {
-        setIsInitializing(false);
       }
     };
 
