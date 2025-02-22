@@ -21,7 +21,7 @@ serve(async (req) => {
   }
 
   try {
-    const mapboxToken = Deno.env.get('MAPBOX_TOKEN');
+    const mapboxToken = Deno.env.get('Mapbox'); // Updated to match the secret name in Supabase
     if (!mapboxToken) {
       throw new Error('Mapbox token not configured');
     }
@@ -30,6 +30,7 @@ serve(async (req) => {
 
     // Handle token requests
     if (body.type === 'getToken') {
+      console.log('Returning Mapbox token');
       return new Response(
         JSON.stringify({ token: mapboxToken }),
         { 
