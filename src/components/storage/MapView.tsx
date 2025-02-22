@@ -32,121 +32,74 @@ const MapView = ({
 
   useEffect(() => {
     const initializeMap = async () => {
-      if (!mapContainer.current) return;
-      
-      // Clear any existing map
-      if (map.current) {
-        map.current.remove();
-        map.current = null;
-      }
-
-      if (!mapToken) {
-        console.log('MapView: No mapbox token provided:', mapToken);
-        setMapError('Waiting for map token...');
-        setIsInitializing(false);
-        return;
-      }
-
       try {
-        console.log('MapView: Initializing map with token:', mapToken.substring(0, 10) + '...');
+        if (!mapContainer.current) {
+          console.error('Map container not found');
+          return;
+        }
+
+        if (!mapToken) {
+          console.error('No Mapbox token provided');
+          setMapError('Missing map configuration');
+          setIsInitializing(false);
+          return;
+        }
+
+        console.log('Initializing map with token length:', mapToken.length);
         mapboxgl.accessToken = mapToken;
 
-        const initMap = new mapboxgl.Map({
-          container: mapContainer.current,
-          style: 'mapbox://styles/mapbox/dark-v11',
-          center: [-98.5795, 39.8283],
-          zoom: 3,
-          attributionControl: true
-        });
-
-        initMap.once('load', () => {
-          console.log('MapView: Map loaded successfully');
-          setMapError(null);
-          setIsInitializing(false);
-          map.current = initMap;
-
-          initMap.on('click', 'clusters', (e) => {
-            const features = initMap.queryRenderedFeatures(e.point, {
-              layers: ['clusters']
-            });
-
-            if (!features.length) return;
-
-            const clusterId = features[0].properties!.cluster_id;
-            const source = initMap.getSource('facilities') as mapboxgl.GeoJSONSource;
-
-            source.getClusterExpansionZoom(clusterId, (err, zoom) => {
-              if (err) return;
-              const coordinates = (features[0].geometry as any).coordinates;
-              initMap.easeTo({ center: coordinates, zoom: zoom });
-            });
-          });
-
-          initMap.on('mouseenter', 'clusters', () => {
-            initMap.getCanvas().style.cursor = 'pointer';
-          });
-
-          initMap.on('mouseleave', 'clusters', () => {
-            initMap.getCanvas().style.cursor = '';
-          });
-        });
-
-        initMap.on('error', (e) => {
-          console.error('MapView: Mapbox error:', e);
-          setMapError('Failed to load map: ' + e.error.message);
-          setIsInitializing(false);
-          if (map.current) {
-            map.current.remove();
-            map.current = null;
-          }
-        });
-
-      } catch (error) {
-        console.error('MapView: Error initializing map:', error);
-        setMapError('Failed to initialize map: ' + (error as Error).message);
-        setIsInitializing(false);
+        // Clear any existing map
         if (map.current) {
           map.current.remove();
           map.current = null;
         }
+
+        const newMap = new mapboxgl.Map({
+          container: mapContainer.current,
+          style: 'mapbox://styles/mapbox/dark-v11',
+          center: [-98.5795, 39.8283], // Center of USA
+          zoom: 3,
+          maxZoom: 16
+        });
+
+        // Handle successful map load
+        newMap.on('load', () => {
+          console.log('Map loaded successfully');
+          setMapError(null);
+          setIsInitializing(false);
+          map.current = newMap;
+        });
+
+        // Handle map load errors
+        newMap.on('error', (e) => {
+          console.error('Map error:', e);
+          setMapError(`Map error: ${e.error?.message || 'Unknown error'}`);
+          setIsInitializing(false);
+        });
+
+        // Handle style load errors
+        newMap.on('style.load', () => {
+          console.log('Map style loaded successfully');
+        });
+
+      } catch (err) {
+        console.error('Map initialization error:', err);
+        setMapError(`Failed to initialize map: ${err instanceof Error ? err.message : 'Unknown error'}`);
+        setIsInitializing(false);
       }
     };
 
+    console.log('Starting map initialization...');
     initializeMap();
 
     return () => {
       if (map.current) {
+        console.log('Cleaning up map...');
         map.current.remove();
         map.current = null;
       }
     };
   }, [mapToken]);
-
-  useEffect(() => {
-    const updateMapBounds = async () => {
-      if (!map.current || !selectedState) return;
-
-      const { data: bounds } = await supabase
-        .from('state_bounds')
-        .select('*')
-        .eq('state', selectedState)
-        .single();
-
-      if (bounds) {
-        const mapBounds = new mapboxgl.LngLatBounds(
-          [bounds.min_lng, bounds.min_lat],
-          [bounds.max_lng, bounds.max_lat]
-        );
-
-        map.current.fitBounds(mapBounds, {
-          padding: 50,
-          maxZoom: 12
-        });
-      }
-    };
-
-    updateMapBounds();
-  }, [selectedState]);
 
   if (isInitializing) {
     return (
