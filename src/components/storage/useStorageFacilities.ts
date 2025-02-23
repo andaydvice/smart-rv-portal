@@ -32,28 +32,52 @@ export const useStorageFacilities = (filters: FilterState) => {
       console.log('Fetching facilities with filters:', filters);
       
       let query = supabase
-        .from('facility_search')
-        .select('*');
+        .from('storage_facilities') // Changed to storage_facilities table
+        .select(`
+          id,
+          name,
+          address,
+          city,
+          state,
+          latitude,
+          longitude,
+          features,
+          price_range,
+          contact_phone,
+          contact_email,
+          verified_fields,
+          contact_email,
+          avg_rating,
+          review_count,
+          has_indoor:features->>'indoor',
+          has_climate_control:features->>'climate_controlled',
+          has_24h_access:features->>'24h_access',
+          has_security:features->>'security_system',
+          has_washing:features->>'vehicle_washing',
+          min_price:price_range->>'min',
+          max_price:price_range->>'max',
+          currency:price_range->>'currency'
+        `);
       
       if (filters.selectedState) {
         query = query.eq('state', filters.selectedState);
       }
 
-      // Handle feature filters using boolean columns
+      // Handle feature filters using JSON operators
       if (filters.features.indoor) {
-        query = query.eq('has_indoor', true);
+        query = query.eq('features->indoor', true);
       }
       if (filters.features.climate_controlled) {
-        query = query.eq('has_climate_control', true);
+        query = query.eq('features->climate_controlled', true);
       }
       if (filters.features["24h_access"]) {
-        query = query.eq('has_24h_access', true);
+        query = query.eq('features->24h_access', true);
       }
       if (filters.features.security_system) {
-        query = query.eq('has_security', true);
+        query = query.eq('features->security_system', true);
       }
       if (filters.features.vehicle_washing) {
-        query = query.eq('has_washing', true);
+        query = query.eq('features->vehicle_washing', true);
       }
 
       // Handle rating filter
@@ -83,16 +107,16 @@ export const useStorageFacilities = (filters: FilterState) => {
           latitude: Number(facility.latitude),
           longitude: Number(facility.longitude),
           features: {
-            indoor: facility.has_indoor ?? false,
-            climate_controlled: facility.has_climate_control ?? false,
-            "24h_access": facility.has_24h_access ?? false,
-            security_system: facility.has_security ?? false,
-            vehicle_washing: facility.has_washing ?? false
+            indoor: Boolean(facility.has_indoor),
+            climate_controlled: Boolean(facility.has_climate_control),
+            "24h_access": Boolean(facility.has_24h_access),
+            security_system: Boolean(facility.has_security),
+            vehicle_washing: Boolean(facility.has_washing)
           },
           price_range: {
-            min: facility.min_price ?? 0,
-            max: facility.max_price ?? 0,
-            currency: facility.currency ?? 'USD'
+            min: Number(facility.min_price) || 0,
+            max: Number(facility.max_price) || 0,
+            currency: facility.currency || 'USD'
           },
           contact_phone: facility.contact_phone,
           contact_email: facility.contact_email,
