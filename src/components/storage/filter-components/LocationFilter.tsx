@@ -7,6 +7,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useQuery } from '@tanstack/react-query';
+import { supabase } from '@/integrations/supabase/client';
 
 interface LocationFilterProps {
   selectedState: string | null;
@@ -15,6 +17,36 @@ interface LocationFilterProps {
 }
 
 export const LocationFilter = ({ selectedState, states, onStateChange }: LocationFilterProps) => {
+  // Query to get actual state counts from facility_search view
+  const { data: statesWithCounts } = useQuery({
+    queryKey: ['state-counts'],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from('facility_search')
+        .select('state')
+        .is('state', 'not.null');
+
+      if (error) {
+        console.error('Error fetching state counts:', error);
+        return [];
+      }
+
+      // Count occurrences of each state
+      const stateCounts = data.reduce((acc: { [key: string]: number }, curr) => {
+        acc[curr.state] = (acc[curr.state] || 0) + 1;
+        return acc;
+      }, {});
+
+      // Convert to array format
+      return Object.entries(stateCounts).map(([state, count]) => ({
+        state,
+        count
+      })).sort((a, b) => a.state.localeCompare(b.state));
+    }
+  });
+
+  const displayStates = statesWithCounts || states;
+
   return (
     <div>
       <h3 className="text-lg font-semibold mb-4">Location</h3>
@@ -43,7 +75,7 @@ export const LocationFilter = ({ selectedState, states, onStateChange }: Locatio
             }}
           >
             <SelectItem value="all" className="text-white focus:bg-[#2a2f3e] focus:text-white">All States</SelectItem>
-            {states.map((state) => (
+            {displayStates.map((state) => (
               <SelectItem 
                 key={state.state} 
                 value={state.state}
