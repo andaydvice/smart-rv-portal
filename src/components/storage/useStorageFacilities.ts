@@ -74,13 +74,10 @@ export const useStorageFacilities = (filters: FilterState) => {
         .map(([key, _]) => key);
 
       if (activeFeatures.length > 0) {
-        // Create an array to hold our feature conditions
-        const featureConditions = activeFeatures.map(feature => 
-          `features->>'${feature}' = 'true'`
-        );
-
-        // Combine conditions with AND instead of OR to match all selected features
-        query = query.or(featureConditions.join(','));
+        // Apply each feature filter as an AND condition
+        activeFeatures.forEach(feature => {
+          query = query.eq(`features->>${feature}`, 'true');
+        });
       }
 
       // Handle rating filter
