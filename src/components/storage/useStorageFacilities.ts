@@ -69,26 +69,18 @@ export const useStorageFacilities = (filters: FilterState) => {
       }
 
       // Handle feature filters - only apply if true
-      const conditions = [];
-      if (filters.features.indoor) {
-        conditions.push("features->>'indoor' = 'true'");
-      }
-      if (filters.features.climate_controlled) {
-        conditions.push("features->>'climate_controlled' = 'true'");
-      }
-      if (filters.features["24h_access"]) {
-        conditions.push("features->>'24h_access' = 'true'");
-      }
-      if (filters.features.security_system) {
-        conditions.push("features->>'security_system' = 'true'");
-      }
-      if (filters.features.vehicle_washing) {
-        conditions.push("features->>'vehicle_washing' = 'true'");
-      }
+      const activeFeatures = Object.entries(filters.features)
+        .filter(([_, value]) => value)
+        .map(([key, _]) => key);
 
-      // Only apply feature filters if any are selected
-      if (conditions.length > 0) {
-        query = query.or(conditions.join(","));
+      if (activeFeatures.length > 0) {
+        // Create an array to hold our feature conditions
+        const featureConditions = activeFeatures.map(feature => 
+          `features->>'${feature}' = 'true'`
+        );
+
+        // Combine conditions with AND instead of OR to match all selected features
+        query = query.or(featureConditions.join(','));
       }
 
       // Handle rating filter
@@ -106,15 +98,8 @@ export const useStorageFacilities = (filters: FilterState) => {
       if (!data) return [];
 
       // Debug log to check data quality
-      console.log('Data quality check for Texas facilities:');
-      data.filter(f => f.state === 'Texas' || f.state === 'TX').forEach(facility => {
-        console.log(`Facility ${facility.name}:`);
-        console.log('- Coordinates:', facility.latitude, facility.longitude);
-        console.log('- Address:', facility.address, facility.city, facility.state);
-        console.log('- Features:', facility.features);
-        console.log('- Price Range:', facility.price_range);
-        console.log('---');
-      });
+      console.log('Filtered facilities:', data);
+      console.log('Active features:', activeFeatures);
 
       return data.map(facility => ({
         id: facility.id,
