@@ -1,4 +1,3 @@
-
 import { MapPin } from 'lucide-react';
 import { 
   Select,
@@ -20,7 +19,8 @@ interface LocationFilterProps {
 const stateNormalization: { [key: string]: string } = {
   'TX': 'Texas',
   'Texas': 'Texas',
-  // Add other state abbreviations as needed
+  'FL': 'Florida',
+  'Florida': 'Florida'
 };
 
 export const LocationFilter = ({ selectedState, states, onStateChange }: LocationFilterProps) => {

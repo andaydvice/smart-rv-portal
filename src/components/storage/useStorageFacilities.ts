@@ -1,4 +1,3 @@
-
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
 import { StorageFacility, FilterState } from './types';
@@ -8,7 +7,8 @@ import { Json } from '@/integrations/supabase/types';
 const stateNormalization: { [key: string]: string } = {
   'TX': 'Texas',
   'Texas': 'Texas',
-  // Add other state abbreviations as needed
+  'FL': 'Florida',
+  'Florida': 'Florida'
 };
 
 export const useStorageFacilities = (filters: FilterState) => {
