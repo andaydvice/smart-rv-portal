@@ -60,21 +60,27 @@ export const useStorageFacilities = (filters: FilterState) => {
         query = query.eq('state', filters.selectedState);
       }
 
-      // Handle feature filters
+      // Handle feature filters - only apply if true
+      const conditions = [];
       if (filters.features.indoor) {
-        query = query.eq('has_indoor', true);
+        conditions.push("has_indoor.eq.true");
       }
       if (filters.features.climate_controlled) {
-        query = query.eq('has_climate_control', true);
+        conditions.push("has_climate_control.eq.true");
       }
       if (filters.features["24h_access"]) {
-        query = query.eq('has_24h_access', true);
+        conditions.push("has_24h_access.eq.true");
       }
       if (filters.features.security_system) {
-        query = query.eq('has_security', true);
+        conditions.push("has_security.eq.true");
       }
       if (filters.features.vehicle_washing) {
-        query = query.eq('has_washing', true);
+        conditions.push("has_washing.eq.true");
+      }
+
+      // Only apply feature filters if any are selected
+      if (conditions.length > 0) {
+        query = query.or(conditions.join(","));
       }
 
       // Handle rating filter
