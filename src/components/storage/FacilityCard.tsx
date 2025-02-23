@@ -133,7 +133,7 @@ const FacilityCard = ({ facility, isHighlighted, onClick }: FacilityCardProps) =
             <h3 className="font-semibold text-lg text-[#60A5FA] flex items-center gap-2">
               <Building2 className="w-5 h-5" />
               {facility.name}
-              {facility.verified_fields.features && (
+              {facility.verified_fields?.features && (
                 <Check className="w-4 h-4 text-green-500" />
               )}
             </h3>
@@ -141,7 +141,7 @@ const FacilityCard = ({ facility, isHighlighted, onClick }: FacilityCardProps) =
               <MapPin className="w-4 h-4 mt-1 flex-shrink-0" />
               <span className="text-sm">
                 {facility.address}, {facility.city}, {facility.state}
-                {facility.verified_fields.location && (
+                {facility.verified_fields?.location && (
                   <VerifiedBadge verified={true} />
                 )}
               </span>
@@ -166,7 +166,7 @@ const FacilityCard = ({ facility, isHighlighted, onClick }: FacilityCardProps) =
             <span className="text-sm text-gray-400">Price Range</span>
             <div className="font-semibold text-[#60A5FA] flex items-center gap-2">
               ${facility.price_range.min} - ${facility.price_range.max}
-              {facility.verified_fields.price_range && (
+              {facility.verified_fields?.price_range && (
                 <Check className="w-4 h-4 text-green-500" />
               )}
             </div>
@@ -179,7 +179,7 @@ const FacilityCard = ({ facility, isHighlighted, onClick }: FacilityCardProps) =
               <Phone className="w-4 h-4" />
               <span className="text-sm">
                 {facility.contact_phone}
-                {facility.verified_fields.contact_info && (
+                {facility.verified_fields?.contact_info && (
                   <VerifiedBadge verified={true} />
                 )}
               </span>

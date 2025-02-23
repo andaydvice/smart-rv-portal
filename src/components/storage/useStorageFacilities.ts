@@ -8,17 +8,15 @@ export const useStorageFacilities = (filters: FilterState) => {
   const { data: maxPriceData } = useQuery({
     queryKey: ['max-facility-price'],
     queryFn: async () => {
-      const { data, error } = await supabase
-        .from('max_facility_price')
-        .select('max_price')
-        .single();
+      // Using RPC call instead of direct view access for type safety
+      const { data, error } = await supabase.rpc('get_max_facility_price');
       
       if (error) {
         console.error('Error fetching max price:', error);
         return 1000; // fallback value
       }
       
-      return data.max_price;
+      return data || 1000;
     }
   });
 
@@ -91,12 +89,12 @@ export const useStorageFacilities = (filters: FilterState) => {
         contact_email: facility.contact_email,
         avg_rating: facility.avg_rating,
         review_count: facility.review_count,
-        verified_fields: facility.verified_fields || {
-          features: false,
-          price_range: false,
-          contact_info: false,
-          location: false,
-          business_hours: false
+        verified_fields: {
+          features: Boolean(facility.verified_features),
+          price_range: Boolean(facility.verified_price),
+          contact_info: Boolean(facility.verified_contact),
+          location: Boolean(facility.verified_location),
+          business_hours: Boolean(facility.verified_hours)
         }
       })) as StorageFacility[];
     }

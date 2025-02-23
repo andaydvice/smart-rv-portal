@@ -79,6 +79,7 @@ export type Database = {
           security_details: Json | null
           state: string
           updated_at: string
+          verified_fields: Json | null
           website_url: string | null
           zip_code: string
         }
@@ -106,6 +107,7 @@ export type Database = {
           security_details?: Json | null
           state: string
           updated_at?: string
+          verified_fields?: Json | null
           website_url?: string | null
           zip_code: string
         }
@@ -133,6 +135,7 @@ export type Database = {
           security_details?: Json | null
           state?: string
           updated_at?: string
+          verified_fields?: Json | null
           website_url?: string | null
           zip_code?: string
         }
@@ -324,6 +327,12 @@ export type Database = {
           f_table_schema?: unknown | null
           srid?: number | null
           type?: string | null
+        }
+        Relationships: []
+      }
+      max_facility_price: {
+        Row: {
+          max_price: number | null
         }
         Relationships: []
       }
