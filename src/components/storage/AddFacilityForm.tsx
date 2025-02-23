@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
@@ -7,6 +6,7 @@ import { toast } from "sonner";
 import { supabase } from '@/integrations/supabase/client';
 import { Loader2 } from 'lucide-react';
 import { Card } from '@/components/ui/card';
+import { useQueryClient } from '@tanstack/react-query';
 
 // Convert text to proper boolean values
 const getBooleanValue = (value: string | undefined): boolean => {
@@ -28,6 +28,7 @@ const parsePriceRange = (min: string | number, max: string | number) => {
 
 export default function AddFacilityForm() {
   const [loading, setLoading] = useState(false);
+  const queryClient = useQueryClient();
   const [formData, setFormData] = useState({
     name: '',
     address: '',
@@ -229,6 +230,10 @@ export default function AddFacilityForm() {
         if (error) throw error;
       }
 
+      // Invalidate and refetch queries
+      await queryClient.invalidateQueries({ queryKey: ['storage-facilities'] });
+      await queryClient.invalidateQueries({ queryKey: ['state-counts'] });
+      
       toast.success('Arizona facilities added successfully!');
       setFormData({
         name: '',
