@@ -16,6 +16,13 @@ interface LocationFilterProps {
   onStateChange: (state: string | null) => void;
 }
 
+// State name normalization mapping
+const stateNormalization: { [key: string]: string } = {
+  'TX': 'Texas',
+  'Texas': 'Texas',
+  // Add other state abbreviations as needed
+};
+
 export const LocationFilter = ({ selectedState, states, onStateChange }: LocationFilterProps) => {
   // Query to get actual state counts from facility_search view
   const { data: statesWithCounts } = useQuery({
@@ -24,20 +31,21 @@ export const LocationFilter = ({ selectedState, states, onStateChange }: Locatio
       const { data, error } = await supabase
         .from('facility_search')
         .select('state')
-        .not('state', 'is', null); // Changed from .is('state', 'not.null') to proper syntax
+        .not('state', 'is', null);
 
       if (error) {
         console.error('Error fetching state counts:', error);
         return [];
       }
 
-      // Count occurrences of each state
+      // Count occurrences of each state with normalization
       const stateCounts = data.reduce((acc: { [key: string]: number }, curr) => {
-        acc[curr.state] = (acc[curr.state] || 0) + 1;
+        const normalizedState = stateNormalization[curr.state] || curr.state;
+        acc[normalizedState] = (acc[normalizedState] || 0) + 1;
         return acc;
       }, {});
 
-      // Convert to array format
+      // Convert to array format and sort alphabetically
       return Object.entries(stateCounts).map(([state, count]) => ({
         state,
         count
