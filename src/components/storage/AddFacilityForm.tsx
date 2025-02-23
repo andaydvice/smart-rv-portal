@@ -8,6 +8,24 @@ import { supabase } from '@/integrations/supabase/client';
 import { Loader2 } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 
+// Convert text to proper boolean values
+const getBooleanValue = (value: string | undefined): boolean => {
+  if (!value) return false;
+  const lowered = value.toLowerCase();
+  return lowered === 'yes' || lowered === 'true';
+};
+
+// Function to parse price range
+const parsePriceRange = (min: string | number, max: string | number) => {
+  const minAmount = typeof min === 'number' ? min : 0;
+  const maxAmount = typeof max === 'number' ? max : 0;
+  return {
+    min: minAmount,
+    max: maxAmount,
+    currency: "USD"
+  };
+};
+
 export default function AddFacilityForm() {
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
@@ -22,47 +40,58 @@ export default function AddFacilityForm() {
     e.preventDefault();
     setLoading(true);
 
-    try {
-      // First, get coordinates from the address
-      const { data: geoData, error: geoError } = await supabase.functions.invoke('geocode-address', {
-        body: {
-          address: formData.address,
-          city: formData.city,
-          state: formData.state,
-          zip: formData.zip
-        }
-      });
+    // Sample data for Arizona facilities
+    const arizonaFacilities = [
+      {
+        name: "Octane Marine Indoor Boat & RV Storage",
+        address: "N/A (North Phoenix area)",
+        city: "Phoenix",
+        state: "AZ",
+        features: {
+          indoor: true,
+          climate_controlled: true,
+          "24h_access": true,
+          security_system: true,
+          vehicle_washing: false
+        },
+        price_range: parsePriceRange(0, 0),
+        contact_phone: null,
+        contact_email: null,
+        avg_rating: null,
+        review_count: null
+      },
+      {
+        name: "National Indoor RV Centers – Phoenix",
+        address: "11280 N Solar Canyon Way",
+        city: "Surprise",
+        state: "AZ",
+        features: {
+          indoor: true,
+          climate_controlled: true,
+          "24h_access": true,
+          security_system: true,
+          vehicle_washing: true
+        },
+        price_range: parsePriceRange(0, 0),
+        contact_phone: "520-442-2500",
+        contact_email: null,
+        avg_rating: null,
+        review_count: null
+      },
+      // ... Add more facilities here
+    ];
 
-      if (geoError || !geoData) {
-        throw new Error(geoError?.message || 'Failed to geocode address');
+    try {
+      // Insert facilities
+      for (const facility of arizonaFacilities) {
+        const { error } = await supabase
+          .from('storage_facilities')
+          .insert([facility]);
+
+        if (error) throw error;
       }
 
-      // Create the facility using our database function
-      const { data, error } = await supabase.rpc(
-        'create_storage_facility_with_geocoding',
-        {
-          facility_name: formData.name,
-          facility_address: formData.address,
-          facility_city: formData.city,
-          facility_state: formData.state,
-          facility_zip: formData.zip
-        }
-      );
-
-      if (error) throw error;
-
-      // Update the coordinates
-      const { error: updateError } = await supabase
-        .from('storage_facilities')
-        .update({
-          latitude: geoData.latitude,
-          longitude: geoData.longitude
-        })
-        .eq('id', data);
-
-      if (updateError) throw updateError;
-
-      toast.success('Facility added successfully!');
+      toast.success('Arizona facilities added successfully!');
       setFormData({
         name: '',
         address: '',
@@ -71,8 +100,8 @@ export default function AddFacilityForm() {
         zip: ''
       });
     } catch (error) {
-      console.error('Error adding facility:', error);
-      toast.error(error.message || 'Failed to add facility');
+      console.error('Error adding facilities:', error);
+      toast.error(error.message || 'Failed to add facilities');
     } finally {
       setLoading(false);
     }
@@ -131,19 +160,6 @@ export default function AddFacilityForm() {
           </div>
         </div>
 
-        <div>
-          <Label htmlFor="zip">ZIP Code</Label>
-          <Input
-            id="zip"
-            value={formData.zip}
-            onChange={(e) => setFormData(prev => ({ ...prev, zip: e.target.value }))}
-            required
-            placeholder="Enter ZIP code"
-            pattern="[0-9]{5}"
-            className="bg-[#080F1F] border-gray-700"
-          />
-        </div>
-
         <Button 
           type="submit" 
           disabled={loading}
@@ -152,10 +168,10 @@ export default function AddFacilityForm() {
           {loading ? (
             <>
               <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-              Adding Facility...
+              Adding Facilities...
             </>
           ) : (
-            'Add Facility'
+            'Add Arizona Facilities'
           )}
         </Button>
       </form>
