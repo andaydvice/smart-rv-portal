@@ -47,6 +47,9 @@ export default function AddFacilityForm() {
         address: "N/A (North Phoenix area)",
         city: "Phoenix",
         state: "AZ",
+        zip_code: "85001", // Default Phoenix zip
+        latitude: 33.4484, // Phoenix coordinates
+        longitude: -112.0740,
         features: {
           indoor: true,
           climate_controlled: true,
@@ -58,13 +61,30 @@ export default function AddFacilityForm() {
         contact_phone: null,
         contact_email: null,
         avg_rating: null,
-        review_count: null
+        review_count: null,
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString(),
+        additional_services: null,
+        amenities: null,
+        availability: null,
+        business_hours: null,
+        cancellation_policy: null,
+        description: null,
+        dimensions: null,
+        images: null,
+        insurance_requirements: null,
+        security_details: null,
+        verified_fields: null,
+        website_url: null
       },
       {
         name: "National Indoor RV Centers – Phoenix",
         address: "11280 N Solar Canyon Way",
         city: "Surprise",
         state: "AZ",
+        zip_code: "85378",
+        latitude: 33.6292, // Surprise coordinates
+        longitude: -112.3680,
         features: {
           indoor: true,
           climate_controlled: true,
@@ -76,17 +96,30 @@ export default function AddFacilityForm() {
         contact_phone: "520-442-2500",
         contact_email: null,
         avg_rating: null,
-        review_count: null
-      },
-      // ... Add more facilities here
+        review_count: null,
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString(),
+        additional_services: null,
+        amenities: null,
+        availability: null,
+        business_hours: null,
+        cancellation_policy: null,
+        description: null,
+        dimensions: null,
+        images: null,
+        insurance_requirements: null,
+        security_details: null,
+        verified_fields: null,
+        website_url: null
+      }
     ];
 
     try {
-      // Insert facilities
+      // Insert facilities one at a time
       for (const facility of arizonaFacilities) {
         const { error } = await supabase
           .from('storage_facilities')
-          .insert([facility]);
+          .insert(facility);
 
         if (error) throw error;
       }
