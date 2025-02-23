@@ -38,7 +38,7 @@ const MapView = ({
   }, []);
 
   useEffect(() => {
-    if (!containerReady || !mapToken) return;
+    if (!containerReady) return;
 
     const initializeMap = async () => {
       try {
@@ -51,6 +51,11 @@ const MapView = ({
         if (map.current) {
           map.current.remove();
           map.current = null;
+        }
+
+        // Validate mapToken
+        if (!mapToken || mapToken.includes('Error')) {
+          throw new Error('Invalid Mapbox token received');
         }
 
         console.log('Initializing map with token length:', mapToken.length);
