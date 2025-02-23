@@ -4,6 +4,13 @@ import { supabase } from '@/integrations/supabase/client';
 import { StorageFacility, FilterState } from './types';
 import { Json } from '@/integrations/supabase/types';
 
+// State name normalization mapping
+const stateNormalization: { [key: string]: string } = {
+  'TX': 'Texas',
+  'Texas': 'Texas',
+  // Add other state abbreviations as needed
+};
+
 export const useStorageFacilities = (filters: FilterState) => {
   // Query for max price from the view
   const { data: maxPriceData } = useQuery({
@@ -57,7 +64,14 @@ export const useStorageFacilities = (filters: FilterState) => {
         `);
       
       if (filters.selectedState) {
-        query = query.eq('state', filters.selectedState);
+        // Handle both state formats
+        const stateConditions = [filters.selectedState];
+        // Add abbreviated version if we have a full name, or full version if we have abbreviation
+        Object.entries(stateNormalization).forEach(([abbr, full]) => {
+          if (filters.selectedState === full) stateConditions.push(abbr);
+          if (filters.selectedState === abbr) stateConditions.push(full);
+        });
+        query = query.in('state', stateConditions);
       }
 
       // Handle feature filters - only apply if true
@@ -98,12 +112,15 @@ export const useStorageFacilities = (filters: FilterState) => {
       console.log('Fetched facilities:', data);
       
       return data?.map(facility => {
+        // Normalize state in the returned data
+        const normalizedState = stateNormalization[facility.state] || facility.state;
+        
         return {
           id: facility.id,
           name: facility.name,
           address: facility.address,
           city: facility.city,
-          state: facility.state,
+          state: normalizedState,
           latitude: Number(facility.latitude),
           longitude: Number(facility.longitude),
           features: {
