@@ -60,6 +60,7 @@ export type Database = {
           address: string
           amenities: Json | null
           availability: Json | null
+          avg_rating: number | null
           business_hours: Json | null
           cancellation_policy: string | null
           city: string
@@ -76,6 +77,7 @@ export type Database = {
           longitude: number
           name: string
           price_range: Json | null
+          review_count: number | null
           security_details: Json | null
           state: string
           updated_at: string
@@ -88,6 +90,7 @@ export type Database = {
           address: string
           amenities?: Json | null
           availability?: Json | null
+          avg_rating?: number | null
           business_hours?: Json | null
           cancellation_policy?: string | null
           city: string
@@ -104,6 +107,7 @@ export type Database = {
           longitude: number
           name: string
           price_range?: Json | null
+          review_count?: number | null
           security_details?: Json | null
           state: string
           updated_at?: string
@@ -116,6 +120,7 @@ export type Database = {
           address?: string
           amenities?: Json | null
           availability?: Json | null
+          avg_rating?: number | null
           business_hours?: Json | null
           cancellation_policy?: string | null
           city?: string
@@ -132,6 +137,7 @@ export type Database = {
           longitude?: number
           name?: string
           price_range?: Json | null
+          review_count?: number | null
           security_details?: Json | null
           state?: string
           updated_at?: string
