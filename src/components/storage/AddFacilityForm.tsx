@@ -8,14 +8,12 @@ import { Loader2 } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 import { useQueryClient } from '@tanstack/react-query';
 
-// Convert text to proper boolean values
 const getBooleanValue = (value: string | undefined): boolean => {
   if (!value) return false;
   const lowered = value.toLowerCase();
   return lowered === 'yes' || lowered === 'true';
 };
 
-// Function to parse price range
 const parsePriceRange = (min: string | number, max: string | number) => {
   const minAmount = typeof min === 'number' ? min : 0;
   const maxAmount = typeof max === 'number' ? max : 0;
@@ -41,7 +39,6 @@ export default function AddFacilityForm() {
     e.preventDefault();
     setLoading(true);
 
-    // Sample data for Arizona facilities
     const arizonaFacilities = [
       {
         name: "Arrowhead RV & Boat Storage",
@@ -77,164 +74,55 @@ export default function AddFacilityForm() {
         security_details: "24-hour video surveillance, gated access, motion-activated lighting",
         verified_fields: null,
         website_url: null
-      },
-      {
-        name: "I-10 RV Storage",
-        address: "6740 W Germann Rd",
-        city: "Chandler",
-        state: "AZ",
-        zip_code: "85226",
-        latitude: 33.2777,
-        longitude: -111.9649,
-        features: {
-          indoor: true,
-          climate_controlled: true,
-          "24h_access": true,
-          security_system: true,
-          vehicle_washing: true
-        },
-        price_range: parsePriceRange(428, 560),
-        contact_phone: "(480) 841-5770",
-        contact_email: null,
-        avg_rating: null,
-        review_count: null,
-        created_at: new Date().toISOString(),
-        updated_at: new Date().toISOString(),
-        additional_services: null,
-        amenities: null,
-        availability: null,
-        business_hours: null,
-        cancellation_policy: null,
-        description: null,
-        dimensions: null,
-        images: null,
-        insurance_requirements: null,
-        security_details: "Electronic gate, keypad access, 24-hour surveillance",
-        verified_fields: null,
-        website_url: null
-      },
-      {
-        name: "Carefree Covered RV Storage – Apache Junction",
-        address: "535 E 37th Ave",
-        city: "Apache Junction",
-        state: "AZ",
-        zip_code: "85119",
-        latitude: 33.3918,
-        longitude: -111.5468,
-        features: {
-          indoor: true,
-          climate_controlled: true,
-          "24h_access": false,
-          security_system: true,
-          vehicle_washing: true
-        },
-        price_range: parsePriceRange(0, 0),
-        contact_phone: "(480) 983-7600",
-        contact_email: null,
-        avg_rating: 4.99,
-        review_count: 745,
-        created_at: new Date().toISOString(),
-        updated_at: new Date().toISOString(),
-        additional_services: null,
-        amenities: null,
-        availability: null,
-        business_hours: "5:00 AM – 10:00 PM",
-        cancellation_policy: null,
-        description: null,
-        dimensions: null,
-        images: null,
-        insurance_requirements: null,
-        security_details: "24-hour surveillance, gated access, on-site manager",
-        verified_fields: null,
-        website_url: null
-      },
-      {
-        name: "Pecos Storage",
-        address: "3087 E Pecos Rd",
-        city: "Phoenix",
-        state: "AZ",
-        zip_code: "85048",
-        latitude: 33.2977,
-        longitude: -111.9873,
-        features: {
-          indoor: true,
-          climate_controlled: false,
-          "24h_access": true,
-          security_system: true,
-          vehicle_washing: false
-        },
-        price_range: parsePriceRange(0, 0),
-        contact_phone: "(480) 252-6670",
-        contact_email: null,
-        avg_rating: null,
-        review_count: null,
-        created_at: new Date().toISOString(),
-        updated_at: new Date().toISOString(),
-        additional_services: null,
-        amenities: null,
-        availability: null,
-        business_hours: null,
-        cancellation_policy: null,
-        description: null,
-        dimensions: null,
-        images: null,
-        insurance_requirements: null,
-        security_details: "Gated access with enhanced physical security measures",
-        verified_fields: null,
-        website_url: null
-      },
-      {
-        name: "Phoenix Bargain Storage",
-        address: "4200 N Black Canyon Highway",
-        city: "Phoenix",
-        state: "AZ",
-        zip_code: "85017",
-        latitude: 33.4984,
-        longitude: -112.0937,
-        features: {
-          indoor: true,
-          climate_controlled: false,
-          "24h_access": true,
-          security_system: true,
-          vehicle_washing: false
-        },
-        price_range: parsePriceRange(155, 200),
-        contact_phone: "(602) 249-1001",
-        contact_email: null,
-        avg_rating: null,
-        review_count: null,
-        created_at: new Date().toISOString(),
-        updated_at: new Date().toISOString(),
-        additional_services: null,
-        amenities: null,
-        availability: null,
-        business_hours: null,
-        cancellation_policy: null,
-        description: null,
-        dimensions: null,
-        images: null,
-        insurance_requirements: null,
-        security_details: null,
-        verified_fields: null,
-        website_url: null
       }
     ];
 
     try {
-      // Insert facilities one at a time
-      for (const facility of arizonaFacilities) {
-        const { error } = await supabase
-          .from('storage_facilities')
-          .insert(facility);
+      console.log('Starting to add facilities...');
+      
+      const { data: existingFacilities, error: checkError } = await supabase
+        .from('storage_facilities')
+        .select('name, state')
+        .eq('state', 'AZ');
 
-        if (error) throw error;
+      if (checkError) {
+        throw checkError;
       }
 
-      // Invalidate and refetch queries
+      console.log('Existing AZ facilities:', existingFacilities);
+
+      for (const facility of arizonaFacilities) {
+        console.log(`Adding facility: ${facility.name}`);
+        
+        const { data, error } = await supabase
+          .from('storage_facilities')
+          .insert(facility)
+          .select();
+
+        if (error) {
+          console.error(`Error adding ${facility.name}:`, error);
+          throw error;
+        }
+
+        console.log(`Successfully added ${facility.name}:`, data);
+      }
+
       await queryClient.invalidateQueries({ queryKey: ['storage-facilities'] });
       await queryClient.invalidateQueries({ queryKey: ['state-counts'] });
       
       toast.success('Arizona facilities added successfully!');
+      
+      const { data: updatedFacilities, error: verifyError } = await supabase
+        .from('storage_facilities')
+        .select('name, state')
+        .eq('state', 'AZ');
+
+      if (verifyError) {
+        console.error('Error verifying updated facilities:', verifyError);
+      } else {
+        console.log('Updated AZ facilities count:', updatedFacilities?.length);
+      }
+
       setFormData({
         name: '',
         address: '',
