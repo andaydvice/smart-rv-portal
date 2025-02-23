@@ -229,4 +229,3 @@ const FilterPanel = ({ onFilterChange }: FilterPanelProps) => {
 };
 
 export default FilterPanel;
-
