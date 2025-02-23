@@ -111,7 +111,7 @@ const FilterPanel = ({ onFilterChange }: FilterPanelProps) => {
               value={filters.selectedState || "all"}
               onValueChange={(value) => handleStateChange(value === "all" ? null : value)}
             >
-              <SelectTrigger className="w-full bg-[#080F1F] border-gray-700">
+              <SelectTrigger className="w-full bg-[#080F1F] border-gray-700 text-white">
                 <SelectValue placeholder="Select a state">
                   {filters.selectedState ? (
                     <div className="flex items-center gap-2">
@@ -130,12 +130,12 @@ const FilterPanel = ({ onFilterChange }: FilterPanelProps) => {
                   zIndex: 50
                 }}
               >
-                <SelectItem value="all" className="focus:bg-[#2a2f3e] focus:text-white">All States</SelectItem>
+                <SelectItem value="all" className="text-white focus:bg-[#2a2f3e] focus:text-white">All States</SelectItem>
                 {states.map((state) => (
                   <SelectItem 
                     key={state.state} 
                     value={state.state}
-                    className="focus:bg-[#2a2f3e] focus:text-white"
+                    className="text-white focus:bg-[#2a2f3e] focus:text-white"
                   >
                     <div className="flex items-center justify-between w-full">
                       <span>{state.state}</span>
