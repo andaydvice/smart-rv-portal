@@ -4,6 +4,25 @@ import { supabase } from '@/integrations/supabase/client';
 import { StorageFacility, FilterState } from './types';
 
 export const useStorageFacilities = (filters: FilterState) => {
+  // Query for max price
+  const { data: maxPriceData } = useQuery({
+    queryKey: ['max-facility-price'],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from('max_facility_price')
+        .select('max_price')
+        .single();
+      
+      if (error) {
+        console.error('Error fetching max price:', error);
+        return 1000; // fallback value
+      }
+      
+      return data.max_price;
+    }
+  });
+
+  // Main facilities query
   const { data: facilities, isLoading, error } = useQuery({
     queryKey: ['storage-facilities', filters],
     queryFn: async () => {
@@ -71,7 +90,14 @@ export const useStorageFacilities = (filters: FilterState) => {
         contact_phone: facility.contact_phone,
         contact_email: facility.contact_email,
         avg_rating: facility.avg_rating,
-        review_count: facility.review_count
+        review_count: facility.review_count,
+        verified_fields: facility.verified_fields || {
+          features: false,
+          price_range: false,
+          contact_info: false,
+          location: false,
+          business_hours: false
+        }
       })) as StorageFacility[];
     }
   });
@@ -85,6 +111,7 @@ export const useStorageFacilities = (filters: FilterState) => {
   return { 
     facilities: filteredFacilities,
     isLoading,
-    error
+    error,
+    maxPrice: maxPriceData || 1000
   };
 };

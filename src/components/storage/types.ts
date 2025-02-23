@@ -1,4 +1,3 @@
-
 export interface StorageFacility {
   id: string;
   name: string;
@@ -23,6 +22,13 @@ export interface StorageFacility {
   contact_email?: string;
   avg_rating?: number;
   review_count?: number;
+  verified_fields: {
+    features: boolean;
+    price_range: boolean;
+    contact_info: boolean;
+    location: boolean;
+    business_hours: boolean;
+  };
 }
 
 export interface RawStorageFacility {

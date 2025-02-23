@@ -1,5 +1,4 @@
-
-import { Building2, MapPin, Phone, Mail, CheckCircle, Heart, Star } from 'lucide-react';
+import { Building2, MapPin, Phone, Mail, CheckCircle, Heart, Star, Shield, Check } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 import { useFavorites } from './useFavorites';
 import { Button } from '@/components/ui/button';
@@ -30,6 +29,12 @@ interface StorageFacility {
   contact_email?: string;
   avg_rating?: number;
   review_count?: number;
+  verified_fields: {
+    features?: boolean;
+    location?: boolean;
+    price_range?: boolean;
+    contact_info?: boolean;
+  };
 }
 
 interface FacilityCardProps {
@@ -105,6 +110,16 @@ const FacilityCard = ({ facility, isHighlighted, onClick }: FacilityCardProps) =
     );
   };
 
+  const VerifiedBadge = ({ verified }: { verified: boolean }) => {
+    if (!verified) return null;
+    return (
+      <div className="flex items-center gap-1 text-xs text-green-500">
+        <Shield className="w-3 h-3" />
+        <span>Verified</span>
+      </div>
+    );
+  };
+
   return (
     <Card 
       className={`p-4 cursor-pointer transition-all duration-200 bg-[#131a2a] border-gray-700 hover:border-[#60A5FA] ${
@@ -118,10 +133,18 @@ const FacilityCard = ({ facility, isHighlighted, onClick }: FacilityCardProps) =
             <h3 className="font-semibold text-lg text-[#60A5FA] flex items-center gap-2">
               <Building2 className="w-5 h-5" />
               {facility.name}
+              {facility.verified_fields.features && (
+                <Check className="w-4 h-4 text-green-500" />
+              )}
             </h3>
             <div className="flex items-start gap-2 mt-1 text-gray-300">
               <MapPin className="w-4 h-4 mt-1 flex-shrink-0" />
-              <span className="text-sm">{facility.address}, {facility.city}, {facility.state}</span>
+              <span className="text-sm">
+                {facility.address}, {facility.city}, {facility.state}
+                {facility.verified_fields.location && (
+                  <VerifiedBadge verified={true} />
+                )}
+              </span>
             </div>
             {renderRating()}
           </div>
@@ -141,8 +164,11 @@ const FacilityCard = ({ facility, isHighlighted, onClick }: FacilityCardProps) =
         <div className="flex justify-between items-center py-2 border-y border-gray-700">
           <div>
             <span className="text-sm text-gray-400">Price Range</span>
-            <div className="font-semibold text-[#60A5FA]">
+            <div className="font-semibold text-[#60A5FA] flex items-center gap-2">
               ${facility.price_range.min} - ${facility.price_range.max}
+              {facility.verified_fields.price_range && (
+                <Check className="w-4 h-4 text-green-500" />
+              )}
             </div>
           </div>
         </div>
@@ -151,7 +177,12 @@ const FacilityCard = ({ facility, isHighlighted, onClick }: FacilityCardProps) =
           {facility.contact_phone && (
             <div className="flex items-center gap-2 text-gray-300">
               <Phone className="w-4 h-4" />
-              <span className="text-sm">{facility.contact_phone}</span>
+              <span className="text-sm">
+                {facility.contact_phone}
+                {facility.verified_fields.contact_info && (
+                  <VerifiedBadge verified={true} />
+                )}
+              </span>
             </div>
           )}
           {facility.contact_email && (
