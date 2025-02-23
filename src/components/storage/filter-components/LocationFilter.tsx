@@ -24,7 +24,7 @@ export const LocationFilter = ({ selectedState, states, onStateChange }: Locatio
       const { data, error } = await supabase
         .from('facility_search')
         .select('state')
-        .is('state', 'not.null');
+        .not('state', 'is', null); // Changed from .is('state', 'not.null') to proper syntax
 
       if (error) {
         console.error('Error fetching state counts:', error);
