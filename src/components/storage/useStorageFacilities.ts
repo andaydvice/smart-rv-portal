@@ -32,7 +32,7 @@ export const useStorageFacilities = (filters: FilterState) => {
       console.log('Fetching facilities with filters:', filters);
       
       let query = supabase
-        .from('facility_search')  // Using facility_search view instead of storage_facilities
+        .from('facility_search')
         .select(`
           id,
           name,
@@ -42,12 +42,18 @@ export const useStorageFacilities = (filters: FilterState) => {
           latitude,
           longitude,
           features,
-          price_range,
+          min_price,
+          max_price,
+          currency,
           contact_phone,
           contact_email,
-          verified_fields,
           avg_rating,
-          review_count
+          review_count,
+          has_indoor,
+          has_climate_control,
+          has_24h_access,
+          has_security,
+          has_washing
         `);
       
       if (filters.selectedState) {
@@ -56,19 +62,19 @@ export const useStorageFacilities = (filters: FilterState) => {
 
       // Handle feature filters
       if (filters.features.indoor) {
-        query = query.filter('features->indoor', 'eq', true);
+        query = query.eq('has_indoor', true);
       }
       if (filters.features.climate_controlled) {
-        query = query.filter('features->climate_controlled', 'eq', true);
+        query = query.eq('has_climate_control', true);
       }
       if (filters.features["24h_access"]) {
-        query = query.filter('features->24h_access', 'eq', true);
+        query = query.eq('has_24h_access', true);
       }
       if (filters.features.security_system) {
-        query = query.filter('features->security_system', 'eq', true);
+        query = query.eq('has_security', true);
       }
       if (filters.features.vehicle_washing) {
-        query = query.filter('features->vehicle_washing', 'eq', true);
+        query = query.eq('has_washing', true);
       }
 
       // Handle rating filter
@@ -86,11 +92,6 @@ export const useStorageFacilities = (filters: FilterState) => {
       console.log('Fetched facilities:', data);
       
       return data?.map(facility => {
-        // Parse the verified_fields JSON data
-        const rawVerifiedFields = (facility.verified_fields as Json) || {};
-        const features = (facility.features as Json) || {};
-        const priceRange = (facility.price_range as Json) || {};
-        
         return {
           id: facility.id,
           name: facility.name,
@@ -100,27 +101,27 @@ export const useStorageFacilities = (filters: FilterState) => {
           latitude: Number(facility.latitude),
           longitude: Number(facility.longitude),
           features: {
-            indoor: Boolean((features as any)?.indoor),
-            climate_controlled: Boolean((features as any)?.climate_controlled),
-            "24h_access": Boolean((features as any)?.["24h_access"]),
-            security_system: Boolean((features as any)?.security_system),
-            vehicle_washing: Boolean((features as any)?.vehicle_washing)
+            indoor: Boolean(facility.has_indoor),
+            climate_controlled: Boolean(facility.has_climate_control),
+            "24h_access": Boolean(facility.has_24h_access),
+            security_system: Boolean(facility.has_security),
+            vehicle_washing: Boolean(facility.has_washing)
           },
           price_range: {
-            min: Number((priceRange as any)?.min) || 0,
-            max: Number((priceRange as any)?.max) || 0,
-            currency: ((priceRange as any)?.currency as string) || 'USD'
+            min: Number(facility.min_price) || 0,
+            max: Number(facility.max_price) || 0,
+            currency: facility.currency || 'USD'
           },
           contact_phone: facility.contact_phone,
           contact_email: facility.contact_email,
           avg_rating: facility.avg_rating,
           review_count: facility.review_count,
           verified_fields: {
-            features: Boolean((rawVerifiedFields as any)?.features),
-            price_range: Boolean((rawVerifiedFields as any)?.price_range),
-            contact_info: Boolean((rawVerifiedFields as any)?.contact_info),
-            location: Boolean((rawVerifiedFields as any)?.location),
-            business_hours: Boolean((rawVerifiedFields as any)?.business_hours)
+            features: false,
+            price_range: false,
+            contact_info: false,
+            location: false,
+            business_hours: false
           }
         };
       }) as StorageFacility[];
