@@ -165,13 +165,6 @@ export type Database = {
             foreignKeyName: "fk_facility"
             columns: ["facility_id"]
             isOneToOne: false
-            referencedRelation: "facility_search"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "fk_facility"
-            columns: ["facility_id"]
-            isOneToOne: false
             referencedRelation: "storage_facilities"
             referencedColumns: ["id"]
           },
@@ -203,13 +196,6 @@ export type Database = {
           reviewer_name?: string | null
         }
         Relationships: [
-          {
-            foreignKeyName: "storage_facility_reviews_facility_id_fkey"
-            columns: ["facility_id"]
-            isOneToOne: false
-            referencedRelation: "facility_search"
-            referencedColumns: ["id"]
-          },
           {
             foreignKeyName: "storage_facility_reviews_facility_id_fkey"
             columns: ["facility_id"]
@@ -248,46 +234,6 @@ export type Database = {
       }
     }
     Views: {
-      facility_search: {
-        Row: {
-          additional_services: Json | null
-          address: string | null
-          amenities: Json | null
-          availability: Json | null
-          avg_rating: number | null
-          business_hours: Json | null
-          cancellation_policy: string | null
-          city: string | null
-          contact_email: string | null
-          contact_phone: string | null
-          created_at: string | null
-          currency: string | null
-          description: string | null
-          dimensions: Json | null
-          features: Json | null
-          has_24h_access: boolean | null
-          has_climate_control: boolean | null
-          has_indoor: boolean | null
-          has_security: boolean | null
-          has_washing: boolean | null
-          id: string | null
-          images: string[] | null
-          insurance_requirements: Json | null
-          latitude: number | null
-          longitude: number | null
-          max_price: number | null
-          min_price: number | null
-          name: string | null
-          price_range: Json | null
-          review_count: number | null
-          security_details: Json | null
-          state: string | null
-          updated_at: string | null
-          website_url: string | null
-          zip_code: string | null
-        }
-        Relationships: []
-      }
       geography_columns: {
         Row: {
           coord_dimension: number | null
