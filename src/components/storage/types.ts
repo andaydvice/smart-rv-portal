@@ -1,3 +1,4 @@
+
 export interface StorageFacility {
   id: string;
   name: string;
@@ -70,11 +71,28 @@ export interface FilterState {
   minRating: number | null;
 }
 
-export interface StateBounds {
+export interface DatabaseStorageFacility {
+  id: string;
+  name: string;
+  address: string;
+  city: string;
   state: string;
-  facility_count: number;
-  min_lat: number;
-  max_lat: number;
-  min_lng: number;
-  max_lng: number;
+  latitude: number;
+  longitude: number;
+  features: {
+    indoor: boolean;
+    climate_controlled: boolean;
+    "24h_access": boolean;
+    security_system: boolean;
+    vehicle_washing: boolean;
+  };
+  price_range: {
+    min: number;
+    max: number;
+    currency: string;
+  };
+  contact_phone?: string;
+  contact_email?: string;
+  avg_rating?: number;
+  review_count?: number;
 }

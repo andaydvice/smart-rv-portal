@@ -1,8 +1,7 @@
 
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
-import { StorageFacility, FilterState } from './types';
-import { Json } from '@/integrations/supabase/types';
+import { StorageFacility, FilterState, DatabaseStorageFacility } from './types';
 
 // State name normalization mapping
 const stateNormalization: { [key: string]: string } = {
@@ -29,7 +28,8 @@ export const useStorageFacilities = (filters: FilterState) => {
         return 1000; // fallback value
       }
       
-      return data?.price_range?.max || 1000;
+      const priceRange = data?.price_range as { min: number; max: number; currency: string } | null;
+      return priceRange?.max || 1000;
     }
   });
 
@@ -41,7 +41,7 @@ export const useStorageFacilities = (filters: FilterState) => {
       
       let query = supabase
         .from('storage_facilities')
-        .select(`
+        .select<string, DatabaseStorageFacility>(`
           id,
           name,
           address,
@@ -103,56 +103,51 @@ export const useStorageFacilities = (filters: FilterState) => {
         throw error;
       }
 
-      // Debug log to check data quality
-      if (data) {
-        console.log('Data quality check for Texas facilities:');
-        data.filter(f => f.state === 'Texas' || f.state === 'TX').forEach(facility => {
-          console.log(`Facility ${facility.name}:`);
-          console.log('- Coordinates:', facility.latitude, facility.longitude);
-          console.log('- Address:', facility.address, facility.city, facility.state);
-          console.log('- Features:', facility.features);
-          console.log('- Price Range:', facility.price_range);
-          console.log('---');
-        });
-      }
+      if (!data) return [];
 
-      return data?.map(facility => {
-        // Normalize state in the returned data
-        const normalizedState = stateNormalization[facility.state] || facility.state;
-        
-        return {
-          id: facility.id,
-          name: facility.name,
-          address: facility.address,
-          city: facility.city,
-          state: normalizedState,
-          latitude: Number(facility.latitude),
-          longitude: Number(facility.longitude),
-          features: {
-            indoor: Boolean(facility.features?.indoor),
-            climate_controlled: Boolean(facility.features?.climate_controlled),
-            "24h_access": Boolean(facility.features?.["24h_access"]),
-            security_system: Boolean(facility.features?.security_system),
-            vehicle_washing: Boolean(facility.features?.vehicle_washing)
-          },
-          price_range: {
-            min: Number(facility.price_range?.min) || 0,
-            max: Number(facility.price_range?.max) || 0,
-            currency: facility.price_range?.currency || 'USD'
-          },
-          contact_phone: facility.contact_phone,
-          contact_email: facility.contact_email,
-          avg_rating: facility.avg_rating,
-          review_count: facility.review_count,
-          verified_fields: {
-            features: false,
-            price_range: false,
-            contact_info: false,
-            location: false,
-            business_hours: false
-          }
-        };
-      }) as StorageFacility[];
+      // Debug log to check data quality
+      console.log('Data quality check for Texas facilities:');
+      data.filter(f => f.state === 'Texas' || f.state === 'TX').forEach(facility => {
+        console.log(`Facility ${facility.name}:`);
+        console.log('- Coordinates:', facility.latitude, facility.longitude);
+        console.log('- Address:', facility.address, facility.city, facility.state);
+        console.log('- Features:', facility.features);
+        console.log('- Price Range:', facility.price_range);
+        console.log('---');
+      });
+
+      return data.map(facility => ({
+        id: facility.id,
+        name: facility.name,
+        address: facility.address,
+        city: facility.city,
+        state: stateNormalization[facility.state] || facility.state,
+        latitude: Number(facility.latitude),
+        longitude: Number(facility.longitude),
+        features: {
+          indoor: Boolean(facility.features?.indoor),
+          climate_controlled: Boolean(facility.features?.climate_controlled),
+          "24h_access": Boolean(facility.features?.["24h_access"]),
+          security_system: Boolean(facility.features?.security_system),
+          vehicle_washing: Boolean(facility.features?.vehicle_washing)
+        },
+        price_range: {
+          min: Number(facility.price_range?.min) || 0,
+          max: Number(facility.price_range?.max) || 0,
+          currency: facility.price_range?.currency || 'USD'
+        },
+        contact_phone: facility.contact_phone,
+        contact_email: facility.contact_email,
+        avg_rating: facility.avg_rating,
+        review_count: facility.review_count,
+        verified_fields: {
+          features: false,
+          price_range: false,
+          contact_info: false,
+          location: false,
+          business_hours: false
+        }
+      })) as StorageFacility[];
     }
   });
 
