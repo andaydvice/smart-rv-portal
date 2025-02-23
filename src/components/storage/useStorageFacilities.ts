@@ -109,8 +109,19 @@ export const useStorageFacilities = (filters: FilterState) => {
         throw error;
       }
 
-      console.log('Fetched facilities:', data);
-      
+      // Debug log to check data quality
+      if (data) {
+        console.log('Data quality check for Texas facilities:');
+        data.filter(f => f.state === 'Texas' || f.state === 'TX').forEach(facility => {
+          console.log(`Facility ${facility.name}:`);
+          console.log('- Coordinates:', facility.latitude, facility.longitude);
+          console.log('- Address:', facility.address, facility.city, facility.state);
+          console.log('- Features:', facility.features);
+          console.log('- Price Range:', facility.min_price, '-', facility.max_price);
+          console.log('---');
+        });
+      }
+
       return data?.map(facility => {
         // Normalize state in the returned data
         const normalizedState = stateNormalization[facility.state] || facility.state;
