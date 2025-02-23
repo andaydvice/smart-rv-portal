@@ -1167,6 +1167,10 @@ export type Database = {
         }
         Returns: unknown
       }
+      get_max_facility_price: {
+        Args: Record<PropertyKey, never>
+        Returns: number
+      }
       get_proj4_from_srid: {
         Args: {
           "": number
