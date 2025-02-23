@@ -2,6 +2,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
 import { StorageFacility, FilterState } from './types';
+import { Json } from '@/integrations/supabase/types';
 
 export const useStorageFacilities = (filters: FilterState) => {
   // Query for max price from the view
@@ -70,15 +71,9 @@ export const useStorageFacilities = (filters: FilterState) => {
       console.log('Fetched facilities:', data);
       
       return data?.map(facility => {
-        // Cast the verified_fields to the expected type if it exists
-        const verifiedFields = facility.verified_fields as {
-          features: boolean;
-          price_range: boolean;
-          contact_info: boolean;
-          location: boolean;
-          business_hours: boolean;
-        } | null;
-
+        // Parse the verified_fields JSON data
+        const rawVerifiedFields = (facility.verified_fields as Json) || {};
+        
         return {
           id: facility.id,
           name: facility.name,
@@ -104,11 +99,11 @@ export const useStorageFacilities = (filters: FilterState) => {
           avg_rating: facility.avg_rating,
           review_count: facility.review_count,
           verified_fields: {
-            features: verifiedFields?.features ?? false,
-            price_range: verifiedFields?.price_range ?? false,
-            contact_info: verifiedFields?.contact_info ?? false,
-            location: verifiedFields?.location ?? false,
-            business_hours: verifiedFields?.business_hours ?? false
+            features: Boolean((rawVerifiedFields as any)?.features),
+            price_range: Boolean((rawVerifiedFields as any)?.price_range),
+            contact_info: Boolean((rawVerifiedFields as any)?.contact_info),
+            location: Boolean((rawVerifiedFields as any)?.location),
+            business_hours: Boolean((rawVerifiedFields as any)?.business_hours)
           }
         };
       }) as StorageFacility[];
