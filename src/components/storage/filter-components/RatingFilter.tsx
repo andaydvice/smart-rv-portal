@@ -33,10 +33,25 @@ export const RatingFilter = ({ minRating, onRatingChange }: RatingFilterProps) =
             )}
           </SelectValue>
         </SelectTrigger>
-        <SelectContent>
-          <SelectItem value="none">Any rating</SelectItem>
+        <SelectContent 
+          className="z-50 bg-[#1a1f2e] border-gray-700"
+          style={{
+            position: 'relative',
+            zIndex: 50
+          }}
+        >
+          <SelectItem 
+            value="none"
+            className="text-white focus:bg-[#2a2f3e] focus:text-white"
+          >
+            Any rating
+          </SelectItem>
           {[4, 3, 2, 1].map((rating) => (
-            <SelectItem key={rating} value={rating.toString()}>
+            <SelectItem 
+              key={rating} 
+              value={rating.toString()}
+              className="text-white focus:bg-[#2a2f3e] focus:text-white"
+            >
               <div className="flex items-center gap-2">
                 <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
                 {rating}+ Stars
