@@ -13,11 +13,18 @@ serve(async (req) => {
   }
 
   try {
-    const mapboxToken = Deno.env.get('MAPBOX');
+    const mapboxToken = Deno.env.get('MAPBOX_TOKEN');
     console.log('Getting MAPBOX token...');
     
     if (!mapboxToken) {
-      throw new Error('Mapbox token not configured');
+      console.error('Mapbox token not configured in edge function secrets');
+      return new Response(
+        JSON.stringify({ error: 'Mapbox token not configured' }),
+        { 
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+          status: 400,
+        }
+      );
     }
 
     const body = await req.json();

@@ -46,12 +46,14 @@ const StorageFacilitiesMap = () => {
         
         if (error) {
           console.error('Error fetching token:', error);
-          throw error;
+          setMapTokenError('Failed to load map configuration');
+          return;
         }
         
         if (!data?.token) {
           console.error('No token received in response');
-          throw new Error('No token received');
+          setMapTokenError('Failed to load map configuration - no token received');
+          return;
         }
         
         console.log('Successfully received Mapbox token');
@@ -156,7 +158,7 @@ const StorageFacilitiesMap = () => {
         </div>
       </div>
       <Card className="lg:col-span-9 h-[800px] bg-[#080F1F] relative overflow-hidden">
-        {mapTokenError ? (
+        {(!mapToken && mapTokenError) ? (
           <Alert variant="destructive" className="m-4">
             <AlertCircle className="h-4 w-4" />
             <AlertDescription>{mapTokenError}</AlertDescription>
