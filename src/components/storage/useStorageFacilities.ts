@@ -4,18 +4,23 @@ import { supabase } from '@/integrations/supabase/client';
 import { StorageFacility, FilterState } from './types';
 
 export const useStorageFacilities = (filters: FilterState) => {
-  // Query for max price using RPC
+  // Query for max price from the view
   const { data: maxPriceData } = useQuery({
     queryKey: ['max-facility-price'],
     queryFn: async () => {
-      const { data, error } = await supabase.rpc('get_max_facility_price');
+      const { data, error } = await supabase
+        .from('facility_search')
+        .select('max_price')
+        .order('max_price', { ascending: false })
+        .limit(1)
+        .single();
       
       if (error) {
         console.error('Error fetching max price:', error);
         return 1000; // fallback value
       }
       
-      return data || 1000;
+      return data?.max_price || 1000;
     }
   });
 
@@ -64,38 +69,49 @@ export const useStorageFacilities = (filters: FilterState) => {
 
       console.log('Fetched facilities:', data);
       
-      return data?.map(facility => ({
-        id: facility.id,
-        name: facility.name,
-        address: facility.address,
-        city: facility.city,
-        state: facility.state,
-        latitude: Number(facility.latitude),
-        longitude: Number(facility.longitude),
-        features: {
-          indoor: facility.has_indoor ?? false,
-          climate_controlled: facility.has_climate_control ?? false,
-          "24h_access": facility.has_24h_access ?? false,
-          security_system: facility.has_security ?? false,
-          vehicle_washing: facility.has_washing ?? false
-        },
-        price_range: {
-          min: facility.min_price ?? 0,
-          max: facility.max_price ?? 0,
-          currency: facility.currency ?? 'USD'
-        },
-        contact_phone: facility.contact_phone,
-        contact_email: facility.contact_email,
-        avg_rating: facility.avg_rating,
-        review_count: facility.review_count,
-        verified_fields: {
-          features: Boolean(facility.verified_fields?.features),
-          price_range: Boolean(facility.verified_fields?.price_range),
-          contact_info: Boolean(facility.verified_fields?.contact_info),
-          location: Boolean(facility.verified_fields?.location),
-          business_hours: Boolean(facility.verified_fields?.business_hours)
-        }
-      })) as StorageFacility[];
+      return data?.map(facility => {
+        // Cast the verified_fields to the expected type if it exists
+        const verifiedFields = facility.verified_fields as {
+          features: boolean;
+          price_range: boolean;
+          contact_info: boolean;
+          location: boolean;
+          business_hours: boolean;
+        } | null;
+
+        return {
+          id: facility.id,
+          name: facility.name,
+          address: facility.address,
+          city: facility.city,
+          state: facility.state,
+          latitude: Number(facility.latitude),
+          longitude: Number(facility.longitude),
+          features: {
+            indoor: facility.has_indoor ?? false,
+            climate_controlled: facility.has_climate_control ?? false,
+            "24h_access": facility.has_24h_access ?? false,
+            security_system: facility.has_security ?? false,
+            vehicle_washing: facility.has_washing ?? false
+          },
+          price_range: {
+            min: facility.min_price ?? 0,
+            max: facility.max_price ?? 0,
+            currency: facility.currency ?? 'USD'
+          },
+          contact_phone: facility.contact_phone,
+          contact_email: facility.contact_email,
+          avg_rating: facility.avg_rating,
+          review_count: facility.review_count,
+          verified_fields: {
+            features: verifiedFields?.features ?? false,
+            price_range: verifiedFields?.price_range ?? false,
+            contact_info: verifiedFields?.contact_info ?? false,
+            location: verifiedFields?.location ?? false,
+            business_hours: verifiedFields?.business_hours ?? false
+          }
+        };
+      }) as StorageFacility[];
     }
   });
 
