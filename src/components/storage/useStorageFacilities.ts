@@ -32,7 +32,7 @@ export const useStorageFacilities = (filters: FilterState) => {
       console.log('Fetching facilities with filters:', filters);
       
       let query = supabase
-        .from('storage_facilities')
+        .from('facility_search')  // Using facility_search view instead of storage_facilities
         .select(`
           id,
           name,
@@ -46,7 +46,6 @@ export const useStorageFacilities = (filters: FilterState) => {
           contact_phone,
           contact_email,
           verified_fields,
-          contact_email,
           avg_rating,
           review_count
         `);
