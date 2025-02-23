@@ -1,3 +1,4 @@
+
 import { MapPin } from 'lucide-react';
 import { 
   Select,
@@ -24,12 +25,12 @@ const stateNormalization: { [key: string]: string } = {
 };
 
 export const LocationFilter = ({ selectedState, states, onStateChange }: LocationFilterProps) => {
-  // Query to get actual state counts from facility_search view
+  // Query to get actual state counts from storage_facilities table
   const { data: statesWithCounts } = useQuery({
     queryKey: ['state-counts'],
     queryFn: async () => {
       const { data, error } = await supabase
-        .from('facility_search')
+        .from('storage_facilities')
         .select('state')
         .not('state', 'is', null);
 

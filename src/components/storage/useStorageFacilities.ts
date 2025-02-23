@@ -1,3 +1,4 @@
+
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
 import { StorageFacility, FilterState } from './types';
@@ -17,9 +18,9 @@ export const useStorageFacilities = (filters: FilterState) => {
     queryKey: ['max-facility-price'],
     queryFn: async () => {
       const { data, error } = await supabase
-        .from('facility_search')
-        .select('max_price')
-        .order('max_price', { ascending: false })
+        .from('storage_facilities')
+        .select('price_range')
+        .order('price_range->max', { ascending: false })
         .limit(1)
         .single();
       
@@ -28,7 +29,7 @@ export const useStorageFacilities = (filters: FilterState) => {
         return 1000; // fallback value
       }
       
-      return data?.max_price || 1000;
+      return data?.price_range?.max || 1000;
     }
   });
 
@@ -39,7 +40,7 @@ export const useStorageFacilities = (filters: FilterState) => {
       console.log('Fetching facilities with filters:', filters);
       
       let query = supabase
-        .from('facility_search')
+        .from('storage_facilities')
         .select(`
           id,
           name,
@@ -49,18 +50,11 @@ export const useStorageFacilities = (filters: FilterState) => {
           latitude,
           longitude,
           features,
-          min_price,
-          max_price,
-          currency,
+          price_range,
           contact_phone,
           contact_email,
           avg_rating,
-          review_count,
-          has_indoor,
-          has_climate_control,
-          has_24h_access,
-          has_security,
-          has_washing
+          review_count
         `);
       
       if (filters.selectedState) {
@@ -77,19 +71,19 @@ export const useStorageFacilities = (filters: FilterState) => {
       // Handle feature filters - only apply if true
       const conditions = [];
       if (filters.features.indoor) {
-        conditions.push("has_indoor.eq.true");
+        conditions.push("features->>'indoor' = 'true'");
       }
       if (filters.features.climate_controlled) {
-        conditions.push("has_climate_control.eq.true");
+        conditions.push("features->>'climate_controlled' = 'true'");
       }
       if (filters.features["24h_access"]) {
-        conditions.push("has_24h_access.eq.true");
+        conditions.push("features->>'24h_access' = 'true'");
       }
       if (filters.features.security_system) {
-        conditions.push("has_security.eq.true");
+        conditions.push("features->>'security_system' = 'true'");
       }
       if (filters.features.vehicle_washing) {
-        conditions.push("has_washing.eq.true");
+        conditions.push("features->>'vehicle_washing' = 'true'");
       }
 
       // Only apply feature filters if any are selected
@@ -117,7 +111,7 @@ export const useStorageFacilities = (filters: FilterState) => {
           console.log('- Coordinates:', facility.latitude, facility.longitude);
           console.log('- Address:', facility.address, facility.city, facility.state);
           console.log('- Features:', facility.features);
-          console.log('- Price Range:', facility.min_price, '-', facility.max_price);
+          console.log('- Price Range:', facility.price_range);
           console.log('---');
         });
       }
@@ -135,16 +129,16 @@ export const useStorageFacilities = (filters: FilterState) => {
           latitude: Number(facility.latitude),
           longitude: Number(facility.longitude),
           features: {
-            indoor: Boolean(facility.has_indoor),
-            climate_controlled: Boolean(facility.has_climate_control),
-            "24h_access": Boolean(facility.has_24h_access),
-            security_system: Boolean(facility.has_security),
-            vehicle_washing: Boolean(facility.has_washing)
+            indoor: Boolean(facility.features?.indoor),
+            climate_controlled: Boolean(facility.features?.climate_controlled),
+            "24h_access": Boolean(facility.features?.["24h_access"]),
+            security_system: Boolean(facility.features?.security_system),
+            vehicle_washing: Boolean(facility.features?.vehicle_washing)
           },
           price_range: {
-            min: Number(facility.min_price) || 0,
-            max: Number(facility.max_price) || 0,
-            currency: facility.currency || 'USD'
+            min: Number(facility.price_range?.min) || 0,
+            max: Number(facility.price_range?.max) || 0,
+            currency: facility.price_range?.currency || 'USD'
           },
           contact_phone: facility.contact_phone,
           contact_email: facility.contact_email,
