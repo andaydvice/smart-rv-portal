@@ -123,10 +123,20 @@ const FilterPanel = ({ onFilterChange }: FilterPanelProps) => {
                   )}
                 </SelectValue>
               </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="all">All States</SelectItem>
+              <SelectContent 
+                className="z-50 bg-[#1a1f2e] border-gray-700"
+                style={{
+                  position: 'relative',
+                  zIndex: 50
+                }}
+              >
+                <SelectItem value="all" className="focus:bg-[#2a2f3e] focus:text-white">All States</SelectItem>
                 {states.map((state) => (
-                  <SelectItem key={state.state} value={state.state}>
+                  <SelectItem 
+                    key={state.state} 
+                    value={state.state}
+                    className="focus:bg-[#2a2f3e] focus:text-white"
+                  >
                     <div className="flex items-center justify-between w-full">
                       <span>{state.state}</span>
                       <span className="text-sm text-gray-400">({state.count})</span>
@@ -219,3 +229,4 @@ const FilterPanel = ({ onFilterChange }: FilterPanelProps) => {
 };
 
 export default FilterPanel;
+
