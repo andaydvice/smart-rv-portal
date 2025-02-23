@@ -44,24 +44,27 @@ const StorageFacilitiesMap = () => {
           body: { type: 'getToken' }
         });
         
-        if (error) {
+        if (error || !data) {
           console.error('Error fetching token:', error);
           setMapTokenError('Failed to load map configuration');
+          setMapToken('');
           return;
         }
         
-        if (!data?.token) {
-          console.error('No token received in response');
-          setMapTokenError('Failed to load map configuration - no token received');
+        if (!data.token || typeof data.token !== 'string' || !data.token.startsWith('pk.')) {
+          console.error('Invalid token received:', data);
+          setMapTokenError('Invalid map configuration received');
+          setMapToken('');
           return;
         }
         
-        console.log('Successfully received Mapbox token');
+        console.log('Successfully received valid Mapbox token');
         setMapToken(data.token);
         setMapTokenError('');
       } catch (err) {
         console.error('Failed to fetch Mapbox token:', err);
         setMapTokenError('Failed to load map configuration');
+        setMapToken('');
       }
     };
 
@@ -158,10 +161,12 @@ const StorageFacilitiesMap = () => {
         </div>
       </div>
       <Card className="lg:col-span-9 h-[800px] bg-[#080F1F] relative overflow-hidden">
-        {(!mapToken && mapTokenError) ? (
+        {(!mapToken) ? (
           <Alert variant="destructive" className="m-4">
             <AlertCircle className="h-4 w-4" />
-            <AlertDescription>{mapTokenError}</AlertDescription>
+            <AlertDescription>
+              {mapTokenError || 'Map configuration not loaded'}
+            </AlertDescription>
           </Alert>
         ) : (
           <MapView

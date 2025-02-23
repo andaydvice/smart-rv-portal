@@ -16,10 +16,10 @@ serve(async (req) => {
     const mapboxToken = Deno.env.get('MAPBOX_TOKEN');
     console.log('Getting MAPBOX token...');
     
-    if (!mapboxToken) {
-      console.error('Mapbox token not configured in edge function secrets');
+    if (!mapboxToken || typeof mapboxToken !== 'string' || !mapboxToken.startsWith('pk.')) {
+      console.error('Invalid or missing Mapbox token in edge function secrets');
       return new Response(
-        JSON.stringify({ error: 'Mapbox token not configured' }),
+        JSON.stringify({ error: 'Invalid or missing Mapbox token' }),
         { 
           headers: { ...corsHeaders, 'Content-Type': 'application/json' },
           status: 400,
@@ -31,7 +31,7 @@ serve(async (req) => {
     
     // Handle token requests
     if (body.type === 'getToken') {
-      console.log('Returning Mapbox token');
+      console.log('Returning valid Mapbox token');
       return new Response(
         JSON.stringify({ token: mapboxToken }),
         { 
