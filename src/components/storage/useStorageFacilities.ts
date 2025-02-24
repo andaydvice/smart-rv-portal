@@ -8,7 +8,9 @@ const stateNormalization: { [key: string]: string } = {
   'TX': 'Texas',
   'Texas': 'Texas',
   'FL': 'Florida',
-  'Florida': 'Florida'
+  'Florida': 'Florida',
+  'AZ': 'Arizona',
+  'Arizona': 'Arizona'
 };
 
 export const useStorageFacilities = (filters: FilterState) => {
@@ -146,3 +148,4 @@ export const useStorageFacilities = (filters: FilterState) => {
     maxPrice: maxPriceData || 1000
   };
 };
+
