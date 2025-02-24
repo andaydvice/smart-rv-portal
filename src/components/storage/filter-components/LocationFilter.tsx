@@ -20,25 +20,25 @@ export const LocationFilter = ({ selectedState, states, onStateChange }: Locatio
   const { data: statesWithCounts } = useQuery({
     queryKey: ['state-counts'],
     queryFn: async () => {
-      const { data: californiaCount } = await supabase
+      const { count: californiaCount } = await supabase
         .from('storage_facilities')
-        .select('id', { count: 'exact', head: true })
+        .select('*', { count: 'exact', head: true })
         .or('state.eq.CA,state.eq.California');
 
-      const { data: arizonaCount } = await supabase
+      const { count: arizonaCount } = await supabase
         .from('storage_facilities')
-        .select('id', { count: 'exact', head: true })
+        .select('*', { count: 'exact', head: true })
         .or('state.eq.AZ,state.eq.Arizona');
 
-      const { data: texasCount } = await supabase
+      const { count: texasCount } = await supabase
         .from('storage_facilities')
-        .select('id', { count: 'exact', head: true })
+        .select('*', { count: 'exact', head: true })
         .or('state.eq.TX,state.eq.Texas');
 
       return [
-        { state: 'California', count: californiaCount?.count || 0 },
-        { state: 'Arizona', count: arizonaCount?.count || 0 },
-        { state: 'Texas', count: texasCount?.count || 0 }
+        { state: 'California', count: californiaCount || 0 },
+        { state: 'Arizona', count: arizonaCount || 0 },
+        { state: 'Texas', count: texasCount || 0 }
       ].sort((a, b) => a.state.localeCompare(b.state));
     },
     staleTime: 300000 // 5 minute cache
