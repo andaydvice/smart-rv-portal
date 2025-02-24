@@ -9,19 +9,24 @@ import FacilityMarkers from './map/FacilityMarkers';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { AlertCircle, Loader2 } from 'lucide-react';
 
-// Force WebGL context initialization for Firefox
+// Prevent WebGL context errors in Firefox
 if (!mapboxgl.supported()) {
-  console.error('Your browser does not support Mapbox GL');
+  alert('Your browser does not support Mapbox GL');
 } else {
-  // Force WebGL context creation
+  // Pre-initialize WebGL context
   const canvas = document.createElement('canvas');
   const gl = canvas.getContext('webgl', {
     failIfMajorPerformanceCaveat: false,
     preserveDrawingBuffer: true,
-    antialias: true
+    antialias: false // Disable antialiasing to reduce context loss
   });
-  if (gl) gl.getExtension('OES_element_index_uint');
-  (mapboxgl as any).prewarm();
+  if (gl) {
+    gl.getExtension('OES_element_index_uint');
+    // Clear any existing context
+    gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+  }
+  // Warm up the GL context
+  mapboxgl.prewarm();
 }
 
 interface MapViewProps {
@@ -49,6 +54,8 @@ const MapView = ({
     if (!mapContainer.current || !mapToken) return;
 
     let isMounted = true;
+    let retryCount = 0;
+    const maxRetries = 3;
 
     const initializeMap = async () => {
       try {
@@ -63,40 +70,47 @@ const MapView = ({
 
         mapboxgl.accessToken = mapToken;
 
-        // Create map with minimal initial options
+        // Create map with optimized settings
         const newMap = new mapboxgl.Map({
           container: mapContainer.current,
           style: 'mapbox://styles/mapbox/dark-v11',
           center: [-98.5795, 39.8283],
           zoom: 3,
           preserveDrawingBuffer: true,
-          antialias: true,
+          antialias: false, // Disable antialiasing
           trackResize: true,
           attributionControl: true,
-          renderWorldCopies: true,
-          failIfMajorPerformanceCaveat: false
+          renderWorldCopies: false, // Disable world copies to reduce rendering load
+          failIfMajorPerformanceCaveat: false,
+          maxZoom: 17, // Limit max zoom to reduce tile requests
+          minZoom: 2, // Set minimum zoom
+          hash: false, // Disable hash
+          refreshExpiredTiles: false // Disable tile refresh
         });
 
-        // Wait for initial map ready state
-        await new Promise<void>((resolve) => {
-          newMap.once('style.load', () => resolve());
+        // Wait for style to load
+        await new Promise<void>((resolve, reject) => {
+          const timeoutId = setTimeout(() => {
+            reject(new Error('Map style load timeout'));
+          }, 10000);
+
+          newMap.once('style.load', () => {
+            clearTimeout(timeoutId);
+            resolve();
+          });
         });
 
         if (!isMounted) return;
 
-        // Enable all interactions after style load
-        newMap.boxZoom.enable();
-        newMap.scrollZoom.enable();
-        newMap.dragRotate.enable();
+        // Enable essential interactions only
         newMap.dragPan.enable();
-        newMap.keyboard.enable();
+        newMap.scrollZoom.enable();
         newMap.doubleClickZoom.enable();
-        newMap.touchZoomRotate.enable();
 
-        // Force a resize to ensure proper canvas dimensions
-        newMap.resize();
+        // Force a resize
+        setTimeout(() => newMap.resize(), 0);
 
-        // Set up event handlers
+        // Set up error handling
         newMap.on('error', (e) => {
           console.error('Map error:', e);
           if (isMounted) {
@@ -105,7 +119,7 @@ const MapView = ({
           }
         });
 
-        // Final initialization
+        // Complete initialization
         if (isMounted) {
           map.current = newMap;
           setMapError(null);
@@ -115,7 +129,11 @@ const MapView = ({
 
       } catch (err) {
         console.error('Map initialization error:', err);
-        if (isMounted) {
+        if (isMounted && retryCount < maxRetries) {
+          retryCount++;
+          console.log(`Retrying map initialization (attempt ${retryCount}/${maxRetries})...`);
+          setTimeout(initializeMap, 1000 * retryCount);
+        } else if (isMounted) {
           setMapError(`Failed to initialize map: ${err instanceof Error ? err.message : 'Unknown error'}`);
           setIsInitializing(false);
         }
