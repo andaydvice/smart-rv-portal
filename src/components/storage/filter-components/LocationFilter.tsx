@@ -31,29 +31,47 @@ export const LocationFilter = ({ selectedState, states, onStateChange }: Locatio
   const { data: statesWithCounts } = useQuery({
     queryKey: ['state-counts'],
     queryFn: async () => {
+      console.log('Fetching state counts...');
+      
       const { data, error } = await supabase
         .from('storage_facilities')
-        .select('state');
+        .select('state, id');
 
       if (error) {
         console.error('Error fetching state counts:', error);
         return [];
       }
 
+      // Log raw data
+      console.log('Raw state data:', data);
+
       // Count occurrences of each state with normalization
       const stateCounts = data.reduce((acc: { [key: string]: number }, curr) => {
         const normalizedState = stateNormalization[curr.state] || curr.state;
         acc[normalizedState] = (acc[normalizedState] || 0) + 1;
+        console.log(`Processing state: ${curr.state} -> ${normalizedState}, current count: ${acc[normalizedState]}`);
         return acc;
       }, {});
 
+      // Log state counts
+      console.log('Normalized state counts:', stateCounts);
+
       // Convert to array format and sort alphabetically
-      return Object.entries(stateCounts).map(([state, count]) => ({
+      const result = Object.entries(stateCounts).map(([state, count]) => ({
         state,
         count
       })).sort((a, b) => a.state.localeCompare(b.state));
-    }
+
+      console.log('Final state data:', result);
+      return result;
+    },
+    staleTime: 0, // Force refresh every time
+    refetchOnWindowFocus: true
   });
+
+  // Log what's being displayed
+  console.log('Display states:', displayStates);
+  console.log('Selected state:', selectedState);
 
   const displayStates = statesWithCounts || states;
 
@@ -63,7 +81,10 @@ export const LocationFilter = ({ selectedState, states, onStateChange }: Locatio
       <div className="space-y-2">
         <Select
           value={selectedState || "all"}
-          onValueChange={(value) => onStateChange(value === "all" ? null : value)}
+          onValueChange={(value) => {
+            console.log('State selected:', value);
+            onStateChange(value === "all" ? null : value);
+          }}
         >
           <SelectTrigger className="w-full bg-[#080F1F] border-gray-700 text-white">
             <SelectValue placeholder="Select a state">

@@ -104,7 +104,7 @@ export const useStorageFacilities = (filters: FilterState) => {
       if (!data) return [];
 
       // Debug log raw data before normalization
-      console.log('Raw facilities data:', data.map(f => ({ id: f.id, state: f.state })));
+      console.log('Raw facilities data:', data);
 
       const normalizedFacilities = data.map(facility => ({
         id: facility.id,
@@ -140,7 +140,7 @@ export const useStorageFacilities = (filters: FilterState) => {
       }));
 
       // Debug log after normalization
-      console.log('Normalized facilities:', normalizedFacilities.map(f => ({ id: f.id, state: f.state })));
+      console.log('Normalized facilities:', normalizedFacilities);
 
       return normalizedFacilities as StorageFacility[];
     },
@@ -154,6 +154,9 @@ export const useStorageFacilities = (filters: FilterState) => {
     const facilityMaxPrice = facility.price_range.max;
     return facilityMaxPrice >= filters.priceRange[0] && facilityMaxPrice <= filters.priceRange[1];
   });
+
+  // Debug log filtered results
+  console.log('Filtered facilities:', filteredFacilities);
 
   return { 
     facilities: filteredFacilities,
