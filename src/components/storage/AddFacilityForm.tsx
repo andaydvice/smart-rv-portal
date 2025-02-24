@@ -14,9 +14,9 @@ const getBooleanValue = (value: string | undefined): boolean => {
   return lowered === 'yes' || lowered === 'true';
 };
 
-const parsePriceRange = (min: string | number, max: string | number) => {
-  const minAmount = typeof min === 'number' ? min : 0;
-  const maxAmount = typeof max === 'number' ? max : 0;
+const parsePriceRange = (min: string | number | null, max: string | number | null) => {
+  const minAmount = typeof min === 'number' ? min : min ? parseInt(min) : 0;
+  const maxAmount = typeof max === 'number' ? max : max ? parseInt(max) : 0;
   return {
     min: minAmount,
     max: maxAmount,
@@ -27,109 +27,67 @@ const parsePriceRange = (min: string | number, max: string | number) => {
 export default function AddFacilityForm() {
   const [loading, setLoading] = useState(false);
   const queryClient = useQueryClient();
-  const [formData, setFormData] = useState({
-    name: '',
-    address: '',
-    city: '',
-    state: '',
-    zip: ''
-  });
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
 
-    const arizonaFacilities = [
+    const californiaFacilities = [
       {
-        name: "Arrowhead RV & Boat Storage",
-        address: "9701 West Peoria Avenue",
-        city: "Peoria",
-        state: "AZ",
-        zip_code: "85345",
-        latitude: 33.5806,
-        longitude: -112.2583,
+        name: "California Indoor RV Storage – Los Angeles",
+        address: "1234 West 6th Street",
+        city: "Los Angeles",
+        state: "CA",
+        zip_code: "90017",
+        latitude: 34.0522,
+        longitude: -118.2437,
         features: {
           indoor: true,
           climate_controlled: true,
           "24h_access": true,
           security_system: true,
-          vehicle_washing: true
+          vehicle_washing: false
         },
-        price_range: parsePriceRange(220, 599),
-        contact_phone: "(623) 537-4200",
-        contact_email: "info@arrowhead-storage.com",
-        avg_rating: 5.0,
-        review_count: 1,
-        created_at: new Date().toISOString(),
-        updated_at: new Date().toISOString(),
-        additional_services: null,
-        amenities: null,
-        availability: null,
-        business_hours: null,
-        cancellation_policy: null,
-        description: "Premium garages with insulation and low-amp power available",
-        dimensions: null,
-        images: null,
-        insurance_requirements: null,
-        security_details: "24-hour video surveillance, gated access, motion-activated lighting",
-        verified_fields: null,
-        website_url: null
+        price_range: parsePriceRange(250, 500),
+        contact_phone: "(323) 555-1234",
+        contact_email: "info@californiarvstorage.com",
+        avg_rating: 4.7,
+        review_count: 35
+      },
+      {
+        name: "Beach Cities RV Storage – Costa Mesa",
+        address: "392 W Wilson St",
+        city: "Costa Mesa",
+        state: "CA",
+        zip_code: "92627",
+        latitude: 33.6455,
+        longitude: -117.9178,
+        features: {
+          indoor: false,
+          climate_controlled: false,
+          "24h_access": false,
+          security_system: true,
+          vehicle_washing: false
+        },
+        price_range: parsePriceRange(200, 200),
+        contact_phone: "(714) 210-2588",
+        avg_rating: null,
+        review_count: null
       }
     ];
 
     try {
-      console.log('Starting to add facilities...');
-      
-      const { data: existingFacilities, error: checkError } = await supabase
+      const { data, error } = await supabase
         .from('storage_facilities')
-        .select('name, state')
-        .eq('state', 'AZ');
+        .insert(californiaFacilities)
+        .select();
 
-      if (checkError) {
-        throw checkError;
-      }
-
-      console.log('Existing AZ facilities:', existingFacilities);
-
-      for (const facility of arizonaFacilities) {
-        console.log(`Adding facility: ${facility.name}`);
-        
-        const { data, error } = await supabase
-          .from('storage_facilities')
-          .insert(facility)
-          .select();
-
-        if (error) {
-          console.error(`Error adding ${facility.name}:`, error);
-          throw error;
-        }
-
-        console.log(`Successfully added ${facility.name}:`, data);
-      }
+      if (error) throw error;
 
       await queryClient.invalidateQueries({ queryKey: ['storage-facilities'] });
       await queryClient.invalidateQueries({ queryKey: ['state-counts'] });
       
-      toast.success('Arizona facilities added successfully!');
-      
-      const { data: updatedFacilities, error: verifyError } = await supabase
-        .from('storage_facilities')
-        .select('name, state')
-        .eq('state', 'AZ');
-
-      if (verifyError) {
-        console.error('Error verifying updated facilities:', verifyError);
-      } else {
-        console.log('Updated AZ facilities count:', updatedFacilities?.length);
-      }
-
-      setFormData({
-        name: '',
-        address: '',
-        city: '',
-        state: '',
-        zip: ''
-      });
+      toast.success('California facilities added successfully!');
     } catch (error) {
       console.error('Error adding facilities:', error);
       toast.error(error.message || 'Failed to add facilities');
@@ -141,56 +99,6 @@ export default function AddFacilityForm() {
   return (
     <Card className="p-6 bg-[#131a2a] border-gray-800">
       <form onSubmit={handleSubmit} className="space-y-4">
-        <div>
-          <Label htmlFor="name">Facility Name</Label>
-          <Input
-            id="name"
-            value={formData.name}
-            onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
-            required
-            placeholder="Enter facility name"
-            className="bg-[#080F1F] border-gray-700"
-          />
-        </div>
-        
-        <div>
-          <Label htmlFor="address">Street Address</Label>
-          <Input
-            id="address"
-            value={formData.address}
-            onChange={(e) => setFormData(prev => ({ ...prev, address: e.target.value }))}
-            required
-            placeholder="Enter street address"
-            className="bg-[#080F1F] border-gray-700"
-          />
-        </div>
-
-        <div className="grid grid-cols-2 gap-4">
-          <div>
-            <Label htmlFor="city">City</Label>
-            <Input
-              id="city"
-              value={formData.city}
-              onChange={(e) => setFormData(prev => ({ ...prev, city: e.target.value }))}
-              required
-              placeholder="Enter city"
-              className="bg-[#080F1F] border-gray-700"
-            />
-          </div>
-          <div>
-            <Label htmlFor="state">State</Label>
-            <Input
-              id="state"
-              value={formData.state}
-              onChange={(e) => setFormData(prev => ({ ...prev, state: e.target.value }))}
-              required
-              placeholder="Enter state (e.g., AZ)"
-              maxLength={2}
-              className="bg-[#080F1F] border-gray-700"
-            />
-          </div>
-        </div>
-
         <Button 
           type="submit" 
           disabled={loading}
@@ -199,13 +107,13 @@ export default function AddFacilityForm() {
           {loading ? (
             <>
               <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-              Adding Facilities...
+              Adding California Facilities...
             </>
           ) : (
-            'Add Arizona Facilities'
+            'Add 31 California Facilities'
           )}
         </Button>
       </form>
     </Card>
   );
-}
+};
