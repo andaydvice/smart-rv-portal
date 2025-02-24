@@ -49,11 +49,13 @@ export const useStorageFacilities = (filters: FilterState) => {
           review_count
         `);
       
-      // Simple state filtering that handles both AZ and Arizona
-      if (filters.selectedState === 'Arizona') {
-        query = query.or('state.eq.AZ,state.eq.Arizona');
-      } else if (filters.selectedState) {
-        query = query.eq('state', filters.selectedState);
+      // Handle state filtering at the database query level
+      if (filters.selectedState) {
+        if (filters.selectedState === 'Arizona') {
+          query = query.in('state', ['AZ', 'Arizona']);
+        } else {
+          query = query.eq('state', filters.selectedState);
+        }
       }
 
       const { data, error } = await query;
@@ -97,6 +99,7 @@ export const useStorageFacilities = (filters: FilterState) => {
     staleTime: 300000 // 5 minute cache
   });
 
+  // Only apply price range filtering since state filtering is now handled at query level
   const filteredFacilities = facilities?.filter(facility => {
     const facilityMaxPrice = facility.price_range.max;
     return facilityMaxPrice >= filters.priceRange[0] && facilityMaxPrice <= filters.priceRange[1];
