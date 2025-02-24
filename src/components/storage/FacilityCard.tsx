@@ -1,9 +1,15 @@
-import { Building2, MapPin, Phone, Mail, CheckCircle, Heart, Star, Shield, Check } from 'lucide-react';
+
+import React from 'react';
+import { Heart } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 import { useFavorites } from './useFavorites';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/components/ui/use-toast';
 import { useNavigate } from 'react-router-dom';
+import { FacilityHeader } from './facility-card/FacilityHeader';
+import { PriceRange } from './facility-card/PriceRange';
+import { ContactInfo } from './facility-card/ContactInfo';
+import { FacilityFeatures } from './facility-card/FacilityFeatures';
 
 interface StorageFacility {
   id: string;
@@ -47,18 +53,6 @@ const FacilityCard = ({ facility, isHighlighted, onClick }: FacilityCardProps) =
   const { toast } = useToast();
   const navigate = useNavigate();
   const { isAuthenticated, isFavorite, addFavorite, removeFavorite, isLoading } = useFavorites();
-  
-  const featureLabels = {
-    indoor: 'Indoor Storage',
-    climate_controlled: 'Climate Controlled',
-    "24h_access": '24/7 Access',
-    security_system: 'Security System',
-    vehicle_washing: 'Vehicle Washing'
-  };
-
-  const activeFeatures = Object.entries(facility.features)
-    .filter(([_, value]) => value)
-    .map(([key, _]) => featureLabels[key as keyof typeof featureLabels]);
 
   const handleFavoriteClick = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -87,39 +81,6 @@ const FacilityCard = ({ facility, isHighlighted, onClick }: FacilityCardProps) =
     }
   };
 
-  const renderRating = () => {
-    if (!facility.avg_rating) return null;
-    return (
-      <div className="flex items-center gap-2 text-sm">
-        <div className="flex items-center">
-          {Array.from({ length: 5 }).map((_, index) => (
-            <Star
-              key={index}
-              className={`w-4 h-4 ${
-                index < Math.floor(facility.avg_rating || 0)
-                  ? 'fill-yellow-400 text-yellow-400'
-                  : 'text-gray-400'
-              }`}
-            />
-          ))}
-        </div>
-        <span className="text-gray-400">
-          ({facility.review_count} {facility.review_count === 1 ? 'review' : 'reviews'})
-        </span>
-      </div>
-    );
-  };
-
-  const VerifiedBadge = ({ verified }: { verified: boolean }) => {
-    if (!verified) return null;
-    return (
-      <div className="flex items-center gap-1 text-xs text-green-500">
-        <Shield className="w-3 h-3" />
-        <span>Verified</span>
-      </div>
-    );
-  };
-
   return (
     <Card 
       className={`p-4 cursor-pointer transition-all duration-200 bg-[#131a2a] border-gray-700 hover:border-[#60A5FA] ${
@@ -129,25 +90,16 @@ const FacilityCard = ({ facility, isHighlighted, onClick }: FacilityCardProps) =
     >
       <div className="space-y-4">
         <div className="flex items-start justify-between">
-          <div>
-            <h3 className="font-semibold text-lg text-[#60A5FA] flex items-center gap-2">
-              <Building2 className="w-5 h-5" />
-              {facility.name}
-              {facility.verified_fields?.features && (
-                <Check className="w-4 h-4 text-green-500" />
-              )}
-            </h3>
-            <div className="flex items-start gap-2 mt-1 text-gray-300">
-              <MapPin className="w-4 h-4 mt-1 flex-shrink-0" />
-              <span className="text-sm">
-                {facility.address}, {facility.city}, {facility.state}
-                {facility.verified_fields?.location && (
-                  <VerifiedBadge verified={true} />
-                )}
-              </span>
-            </div>
-            {renderRating()}
-          </div>
+          <FacilityHeader 
+            name={facility.name}
+            address={facility.address}
+            city={facility.city}
+            state={facility.state}
+            verifiedFeatures={Boolean(facility.verified_fields?.features)}
+            verifiedLocation={Boolean(facility.verified_fields?.location)}
+            avgRating={facility.avg_rating}
+            reviewCount={facility.review_count}
+          />
           <Button
             variant="ghost"
             size="icon"
@@ -161,53 +113,20 @@ const FacilityCard = ({ facility, isHighlighted, onClick }: FacilityCardProps) =
           </Button>
         </div>
 
-        <div className="flex justify-between items-center py-2 border-y border-gray-700">
-          <div>
-            <span className="text-sm text-gray-400">Price Range</span>
-            <div className="font-semibold text-[#60A5FA] flex items-center gap-2">
-              ${facility.price_range.min} - ${facility.price_range.max}
-              {facility.verified_fields?.price_range && (
-                <Check className="w-4 h-4 text-green-500" />
-              )}
-            </div>
-          </div>
-        </div>
+        <PriceRange 
+          min={facility.price_range.min}
+          max={facility.price_range.max}
+          currency={facility.price_range.currency}
+          verified={Boolean(facility.verified_fields?.price_range)}
+        />
 
-        <div className="space-y-2">
-          {facility.contact_phone && (
-            <div className="flex items-center gap-2 text-gray-300">
-              <Phone className="w-4 h-4" />
-              <span className="text-sm">
-                {facility.contact_phone}
-                {facility.verified_fields?.contact_info && (
-                  <VerifiedBadge verified={true} />
-                )}
-              </span>
-            </div>
-          )}
-          {facility.contact_email && (
-            <div className="flex items-center gap-2 text-gray-300">
-              <Mail className="w-4 h-4" />
-              <span className="text-sm">{facility.contact_email}</span>
-            </div>
-          )}
-        </div>
+        <ContactInfo 
+          phone={facility.contact_phone}
+          email={facility.contact_email}
+          verifiedContact={Boolean(facility.verified_fields?.contact_info)}
+        />
 
-        {activeFeatures.length > 0 && (
-          <div className="space-y-1">
-            <div className="flex flex-wrap gap-2">
-              {activeFeatures.map((feature, index) => (
-                <span 
-                  key={index}
-                  className="inline-flex items-center gap-1 px-2 py-1 rounded text-xs font-medium bg-[#1a2235] text-[#60A5FA]"
-                >
-                  <CheckCircle className="w-3 h-3" />
-                  {feature}
-                </span>
-              ))}
-            </div>
-          </div>
-        )}
+        <FacilityFeatures features={facility.features} />
       </div>
     </Card>
   );
