@@ -26,6 +26,9 @@ export const LocationFilter = ({ selectedState, states, onStateChange }: Locatio
 
       if (error || !data) return [];
 
+      // Log raw state data
+      console.log('Raw state data:', data);
+
       // Normalize and count states, ensuring AZ and Arizona are counted together
       const stateCounts = data.reduce((acc: { [key: string]: number }, curr) => {
         // Always normalize to "Arizona" regardless of whether it's "AZ" or "Arizona"
@@ -33,6 +36,9 @@ export const LocationFilter = ({ selectedState, states, onStateChange }: Locatio
         acc[state] = (acc[state] || 0) + 1;
         return acc;
       }, {});
+
+      // Log state counts
+      console.log('State counts:', stateCounts);
 
       return Object.entries(stateCounts)
         .map(([state, count]) => ({ state, count }))

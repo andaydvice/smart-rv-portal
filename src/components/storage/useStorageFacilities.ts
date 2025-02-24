@@ -58,6 +58,9 @@ export const useStorageFacilities = (filters: FilterState) => {
       if (error) throw error;
       if (!data) return [];
 
+      // Log the raw data to verify what we're getting
+      console.log('Raw facilities data:', data);
+
       const normalizedFacilities = data.map(facility => ({
         id: facility.id,
         name: facility.name,
@@ -90,6 +93,9 @@ export const useStorageFacilities = (filters: FilterState) => {
           business_hours: false
         }
       }));
+
+      // Log normalized facilities to verify the transformation
+      console.log('Normalized facilities:', normalizedFacilities);
 
       return normalizedFacilities;
     },
