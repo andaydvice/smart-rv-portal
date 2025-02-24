@@ -549,9 +549,24 @@ export default function AddFacilityForm() {
     ];
 
     try {
+      const facilitiesWithDefaults = californiaFacilities.map(facility => ({
+        ...facility,
+        // Ensure required fields are present
+        latitude: facility.latitude || 0,
+        longitude: facility.longitude || 0,
+        zip_code: facility.zip_code || '00000',
+        verified_fields: {
+          features: true,
+          price_range: true,
+          contact_info: true,
+          location: true,
+          business_hours: false
+        }
+      }));
+
       const { data, error } = await supabase
         .from('storage_facilities')
-        .insert(californiaFacilities)
+        .insert(facilitiesWithDefaults)
         .select();
 
       if (error) throw error;
