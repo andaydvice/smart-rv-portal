@@ -20,51 +20,26 @@ export const LocationFilter = ({ selectedState, states, onStateChange }: Locatio
   const { data: statesWithCounts } = useQuery({
     queryKey: ['state-counts'],
     queryFn: async () => {
-      // First, get all facilities with their states
-      const { data, error } = await supabase
+      const { data: californiaCount } = await supabase
         .from('storage_facilities')
-        .select('state');
+        .select('id', { count: 'exact', head: true })
+        .or('state.eq.CA,state.eq.California');
 
-      if (error || !data) {
-        console.error('Error fetching states:', error);
-        return [];
-      }
+      const { data: arizonaCount } = await supabase
+        .from('storage_facilities')
+        .select('id', { count: 'exact', head: true })
+        .or('state.eq.AZ,state.eq.Arizona');
 
-      // Log raw data for debugging
-      console.log('Raw states data:', data);
+      const { data: texasCount } = await supabase
+        .from('storage_facilities')
+        .select('id', { count: 'exact', head: true })
+        .or('state.eq.TX,state.eq.Texas');
 
-      // Create a mapping for state abbreviations to full names
-      const stateMap: { [key: string]: string } = {
-        'CA': 'California',
-        'AZ': 'Arizona',
-        'TX': 'Texas',
-      };
-
-      // Normalize and count states
-      const stateCounts = data.reduce((acc: { [key: string]: number }, curr) => {
-        // Get the normalized state name (either from the map or use the original)
-        const normalizedState = stateMap[curr.state] || curr.state;
-        
-        // Update the count
-        acc[normalizedState] = (acc[normalizedState] || 0) + 1;
-        
-        // Log each state normalization for debugging
-        console.log(`State normalization: ${curr.state} -> ${normalizedState} (Current count: ${acc[normalizedState]})`);
-        
-        return acc;
-      }, {});
-
-      // Log final state counts
-      console.log('Final normalized state counts:', stateCounts);
-
-      // Convert to array and sort
-      const sortedStates = Object.entries(stateCounts)
-        .map(([state, count]) => ({ state, count }))
-        .sort((a, b) => a.state.localeCompare(b.state));
-
-      console.log('Sorted states with counts:', sortedStates);
-
-      return sortedStates;
+      return [
+        { state: 'California', count: californiaCount?.count || 0 },
+        { state: 'Arizona', count: arizonaCount?.count || 0 },
+        { state: 'Texas', count: texasCount?.count || 0 }
+      ].sort((a, b) => a.state.localeCompare(b.state));
     },
     staleTime: 300000 // 5 minute cache
   });
