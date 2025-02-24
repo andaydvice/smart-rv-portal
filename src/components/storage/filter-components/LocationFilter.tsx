@@ -69,11 +69,11 @@ export const LocationFilter = ({ selectedState, states, onStateChange }: Locatio
     refetchOnWindowFocus: true
   });
 
-  // Log what's being displayed
+  const displayStates = statesWithCounts || states;
+
+  // Log what's being displayed after displayStates is defined
   console.log('Display states:', displayStates);
   console.log('Selected state:', selectedState);
-
-  const displayStates = statesWithCounts || states;
 
   return (
     <div>
