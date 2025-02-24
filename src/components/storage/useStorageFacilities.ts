@@ -22,8 +22,8 @@ export const useStorageFacilities = (filters: FilterState) => {
       
       if (error) return 1000;
       
-      // Properly type and handle the price_range JSON data
-      const priceRange = data?.price_range as PriceRange | null;
+      // Safe type casting with unknown intermediate step
+      const priceRange = (data?.price_range as unknown) as PriceRange | null;
       return priceRange?.max || 1000;
     }
   });
