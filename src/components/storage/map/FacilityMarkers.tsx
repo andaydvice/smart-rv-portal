@@ -24,35 +24,45 @@ const FacilityMarkers: React.FC<FacilityMarkersProps> = ({
     markers.current.forEach(marker => marker.remove());
     markers.current = [];
 
-    // Log facilities being rendered as markers
-    console.log('Facilities being rendered as markers:', facilities);
-
-    // Add new markers
-    facilities.forEach(facility => {
-      // Validate coordinates
-      if (!facility.latitude || !facility.longitude) {
-        console.error('Invalid coordinates for facility:', facility);
-        return;
+    // Group facilities by their coordinates
+    const coordGroups = facilities.reduce((groups: { [key: string]: StorageFacility[] }, facility) => {
+      const key = `${facility.latitude},${facility.longitude}`;
+      if (!groups[key]) {
+        groups[key] = [];
       }
+      groups[key].push(facility);
+      return groups;
+    }, {});
 
-      const popup = new mapboxgl.Popup({
-        offset: 25,
-        maxWidth: '400px',
-        className: 'storage-facility-popup'
-      }).setHTML(createPopupHTML(facility));
+    // Add new markers with offset for duplicates
+    Object.values(coordGroups).forEach((groupFacilities, groupIndex) => {
+      groupFacilities.forEach((facility, index) => {
+        // Calculate offset for facilities with same coordinates
+        const offsetDistance = 0.0005; // roughly 50 meters
+        const angle = (2 * Math.PI * index) / groupFacilities.length;
+        
+        const adjustedLng = facility.longitude + (groupFacilities.length > 1 ? Math.cos(angle) * offsetDistance : 0);
+        const adjustedLat = facility.latitude + (groupFacilities.length > 1 ? Math.sin(angle) * offsetDistance : 0);
 
-      const marker = new mapboxgl.Marker({
-        color: facility.id === highlightedFacility ? '#10B981' : '#60A5FA'
-      })
-        .setLngLat([facility.longitude, facility.latitude])
-        .setPopup(popup)
-        .addTo(map);
+        const popup = new mapboxgl.Popup({
+          offset: 25,
+          maxWidth: '400px',
+          className: 'storage-facility-popup'
+        }).setHTML(createPopupHTML(facility));
 
-      marker.getElement().addEventListener('click', () => {
-        onMarkerClick(facility.id);
+        const marker = new mapboxgl.Marker({
+          color: facility.id === highlightedFacility ? '#10B981' : '#60A5FA'
+        })
+          .setLngLat([adjustedLng, adjustedLat])
+          .setPopup(popup)
+          .addTo(map);
+
+        marker.getElement().addEventListener('click', () => {
+          onMarkerClick(facility.id);
+        });
+
+        markers.current.push(marker);
       });
-
-      markers.current.push(marker);
     });
 
     return () => {
