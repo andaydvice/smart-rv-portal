@@ -26,9 +26,10 @@ export const LocationFilter = ({ selectedState, states, onStateChange }: Locatio
 
       if (error || !data) return [];
 
-      // Count all variants of Arizona as one state
+      // Normalize and count states, ensuring AZ and Arizona are counted together
       const stateCounts = data.reduce((acc: { [key: string]: number }, curr) => {
-        const state = curr.state === 'AZ' ? 'Arizona' : curr.state;
+        // Always normalize to "Arizona" regardless of whether it's "AZ" or "Arizona"
+        const state = (curr.state === 'AZ' || curr.state === 'Arizona') ? 'Arizona' : curr.state;
         acc[state] = (acc[state] || 0) + 1;
         return acc;
       }, {});

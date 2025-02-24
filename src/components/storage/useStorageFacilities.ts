@@ -1,16 +1,7 @@
+
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
 import { StorageFacility, FilterState, DatabaseStorageFacility } from './types';
-
-// State name normalization mapping
-const stateNormalization: { [key: string]: string } = {
-  'TX': 'Texas',
-  'Texas': 'Texas',
-  'FL': 'Florida',
-  'Florida': 'Florida',
-  'AZ': 'Arizona',
-  'Arizona': 'Arizona'
-};
 
 export const useStorageFacilities = (filters: FilterState) => {
   const { data: maxPriceData } = useQuery({
@@ -25,7 +16,7 @@ export const useStorageFacilities = (filters: FilterState) => {
       
       if (error) {
         console.error('Error fetching max price:', error);
-        return 1000; // fallback value
+        return 1000;
       }
       
       const priceRange = data?.price_range as { min: number; max: number; currency: string } | null;
@@ -33,7 +24,6 @@ export const useStorageFacilities = (filters: FilterState) => {
     }
   });
 
-  // Main facilities query
   const { data: facilities, isLoading, error } = useQuery({
     queryKey: ['storage-facilities', filters],
     queryFn: async () => {
@@ -55,8 +45,12 @@ export const useStorageFacilities = (filters: FilterState) => {
           review_count
         `);
       
-      if (filters.selectedState) {
-        query = query.or(`state.eq.${filters.selectedState},state.eq.AZ,state.eq.Arizona`);
+      if (filters.selectedState === 'Arizona') {
+        // If Arizona is selected, get both 'AZ' and 'Arizona' records
+        query = query.or('state.eq.AZ,state.eq.Arizona');
+      } else if (filters.selectedState) {
+        // For other states, use exact match
+        query = query.eq('state', filters.selectedState);
       }
 
       const { data, error } = await query;
@@ -69,7 +63,7 @@ export const useStorageFacilities = (filters: FilterState) => {
         name: facility.name,
         address: facility.address,
         city: facility.city,
-        state: 'Arizona',
+        state: facility.state === 'AZ' ? 'Arizona' : facility.state,
         latitude: Number(facility.latitude),
         longitude: Number(facility.longitude),
         features: {
