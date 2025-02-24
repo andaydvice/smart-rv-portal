@@ -71,8 +71,12 @@ const MapView = ({
         renderWorldCopies: true // Improve performance
       });
 
-      // Firefox-specific: Force immediate style loading
-      newMap.setStyle('mapbox://styles/mapbox/dark-v11', { diff: false });
+      // Firefox-specific: Force immediate style loading with all required options
+      newMap.setStyle('mapbox://styles/mapbox/dark-v11', {
+        diff: false,
+        localIdeographFontFamily: 'sans-serif',
+        localFontFamily: 'sans-serif'
+      });
 
       const enableInteractions = (mapInstance: mapboxgl.Map) => {
         // Enable all interactions explicitly for Firefox
