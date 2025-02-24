@@ -1,6 +1,7 @@
 
 import React from 'react';
-import { Phone, Mail, Shield } from 'lucide-react';
+import { Phone, Mail } from 'lucide-react';
+import { VerifiedBadge } from './VerifiedBadge';
 
 interface ContactInfoProps {
   phone?: string;
@@ -13,16 +14,6 @@ export const ContactInfo: React.FC<ContactInfoProps> = ({
   email,
   verifiedContact
 }) => {
-  const VerifiedBadge = ({ verified }: { verified: boolean }) => {
-    if (!verified) return null;
-    return (
-      <div className="flex items-center gap-1 text-xs text-green-500">
-        <Shield className="w-3 h-3" />
-        <span>Verified</span>
-      </div>
-    );
-  };
-
   return (
     <div className="space-y-2">
       {phone && (
