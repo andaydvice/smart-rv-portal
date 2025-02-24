@@ -13,6 +13,12 @@ const stateNormalization: { [key: string]: string } = {
   'Arizona': 'Arizona'
 };
 
+const normalizeState = (state: string): string => {
+  const normalized = stateNormalization[state];
+  console.log(`Normalizing state: ${state} -> ${normalized || state}`);
+  return normalized || state;
+};
+
 export const useStorageFacilities = (filters: FilterState) => {
   // Query for max price from the view
   const { data: maxPriceData } = useQuery({
@@ -67,6 +73,7 @@ export const useStorageFacilities = (filters: FilterState) => {
           if (filters.selectedState === full) stateConditions.push(abbr);
           if (filters.selectedState === abbr) stateConditions.push(full);
         });
+        console.log('State filter conditions:', stateConditions);
         query = query.in('state', stateConditions);
       }
 
@@ -96,16 +103,15 @@ export const useStorageFacilities = (filters: FilterState) => {
 
       if (!data) return [];
 
-      // Debug log to check data quality
-      console.log('Filtered facilities:', data);
-      console.log('Active features:', activeFeatures);
+      // Debug log raw data before normalization
+      console.log('Raw facilities data:', data.map(f => ({ id: f.id, state: f.state })));
 
-      return data.map(facility => ({
+      const normalizedFacilities = data.map(facility => ({
         id: facility.id,
         name: facility.name,
         address: facility.address,
         city: facility.city,
-        state: stateNormalization[facility.state] || facility.state,
+        state: normalizeState(facility.state),
         latitude: Number(facility.latitude),
         longitude: Number(facility.longitude),
         features: {
@@ -131,8 +137,16 @@ export const useStorageFacilities = (filters: FilterState) => {
           location: false,
           business_hours: false
         }
-      })) as StorageFacility[];
-    }
+      }));
+
+      // Debug log after normalization
+      console.log('Normalized facilities:', normalizedFacilities.map(f => ({ id: f.id, state: f.state })));
+
+      return normalizedFacilities as StorageFacility[];
+    },
+    // Force refetch on every filter change
+    refetchOnWindowFocus: true,
+    staleTime: 0
   });
 
   // Apply price range filter in memory since it's a range
@@ -148,4 +162,3 @@ export const useStorageFacilities = (filters: FilterState) => {
     maxPrice: maxPriceData || 1000
   };
 };
-
