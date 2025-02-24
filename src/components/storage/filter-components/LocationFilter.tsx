@@ -26,19 +26,22 @@ export const LocationFilter = ({ selectedState, states, onStateChange }: Locatio
 
       if (error || !data) return [];
 
-      // Log raw state data
-      console.log('Raw state data:', data);
+      // Create a mapping for state abbreviations to full names
+      const stateMap: { [key: string]: string } = {
+        'CA': 'California',
+        'AZ': 'Arizona',
+        'TX': 'Texas',
+      };
 
-      // Normalize and count states, ensuring AZ and Arizona are counted together
+      // Normalize and count states
       const stateCounts = data.reduce((acc: { [key: string]: number }, curr) => {
-        // Always normalize to "Arizona" regardless of whether it's "AZ" or "Arizona"
-        const state = (curr.state === 'AZ' || curr.state === 'Arizona') ? 'Arizona' : curr.state;
-        acc[state] = (acc[state] || 0) + 1;
+        // Convert state abbreviation to full name if it exists in our mapping
+        const normalizedState = stateMap[curr.state] || curr.state;
+        acc[normalizedState] = (acc[normalizedState] || 0) + 1;
         return acc;
       }, {});
 
-      // Log state counts
-      console.log('State counts:', stateCounts);
+      console.log('Normalized state counts:', stateCounts);
 
       return Object.entries(stateCounts)
         .map(([state, count]) => ({ state, count }))

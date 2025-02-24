@@ -51,11 +51,13 @@ export const useStorageFacilities = (filters: FilterState) => {
       // Log the selected state for debugging
       console.log('Selected state:', filters.selectedState);
       
-      if (filters.selectedState === 'Arizona') {
+      // Handle different state formats
+      if (filters.selectedState === 'California') {
+        query = query.or('state.eq.CA,state.eq.California');
+      } else if (filters.selectedState === 'Arizona') {
         query = query.or('state.eq.AZ,state.eq.Arizona');
-      } else if (filters.selectedState === 'California') {
-        // Use ilike for case-insensitive matching and handle both formats
-        query = query.or('state.ilike.%CA%,state.ilike.%California%');
+      } else if (filters.selectedState === 'Texas') {
+        query = query.or('state.eq.TX,state.eq.Texas');
       } else if (filters.selectedState) {
         query = query.eq('state', filters.selectedState);
       }
@@ -78,8 +80,9 @@ export const useStorageFacilities = (filters: FilterState) => {
         address: facility.address,
         city: facility.city,
         state: facility.state === 'AZ' ? 'Arizona' : 
-              facility.state.toUpperCase() === 'CA' || facility.state.toLowerCase().includes('california') ? 'California' : 
-              facility.state,
+               facility.state === 'CA' ? 'California' : 
+               facility.state === 'TX' ? 'Texas' : 
+               facility.state,
         latitude: Number(facility.latitude),
         longitude: Number(facility.longitude),
         features: {
