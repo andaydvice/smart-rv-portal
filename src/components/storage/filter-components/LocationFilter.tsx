@@ -21,7 +21,9 @@ const stateNormalization: { [key: string]: string } = {
   'TX': 'Texas',
   'Texas': 'Texas',
   'FL': 'Florida',
-  'Florida': 'Florida'
+  'Florida': 'Florida',
+  'AZ': 'Arizona',
+  'Arizona': 'Arizona'
 };
 
 export const LocationFilter = ({ selectedState, states, onStateChange }: LocationFilterProps) => {
@@ -31,8 +33,7 @@ export const LocationFilter = ({ selectedState, states, onStateChange }: Locatio
     queryFn: async () => {
       const { data, error } = await supabase
         .from('storage_facilities')
-        .select('state')
-        .not('state', 'is', null);
+        .select('state');
 
       if (error) {
         console.error('Error fetching state counts:', error);
