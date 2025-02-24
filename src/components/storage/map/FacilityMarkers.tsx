@@ -38,7 +38,7 @@ const FacilityMarkers: React.FC<FacilityMarkersProps> = ({
     Object.values(coordGroups).forEach((groupFacilities, groupIndex) => {
       groupFacilities.forEach((facility, index) => {
         // Calculate offset for facilities with same coordinates
-        const offsetDistance = 0.0005; // roughly 50 meters
+        const offsetDistance = 0.002; // Increased to roughly 200 meters for better visibility
         const angle = (2 * Math.PI * index) / groupFacilities.length;
         
         const adjustedLng = facility.longitude + (groupFacilities.length > 1 ? Math.cos(angle) * offsetDistance : 0);
