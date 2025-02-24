@@ -24,14 +24,6 @@ const FacilityMarkers: React.FC<FacilityMarkersProps> = ({
     markers.current.forEach(marker => marker.remove());
     markers.current = [];
 
-    // Log incoming facilities
-    console.log('Rendering markers for facilities:', facilities.map(f => ({
-      id: f.id,
-      name: f.name,
-      lat: f.latitude,
-      lng: f.longitude
-    })));
-
     // Group facilities by their coordinates
     const coordGroups = facilities.reduce((groups: { [key: string]: StorageFacility[] }, facility) => {
       const key = `${facility.latitude.toFixed(6)},${facility.longitude.toFixed(6)}`;
@@ -42,13 +34,6 @@ const FacilityMarkers: React.FC<FacilityMarkersProps> = ({
       return groups;
     }, {});
 
-    // Log coordinate groups
-    console.log('Coordinate groups:', Object.entries(coordGroups).map(([coords, facilities]) => ({
-      coordinates: coords,
-      count: facilities.length,
-      facilities: facilities.map(f => f.name)
-    })));
-
     // Add new markers with offset for duplicates
     Object.values(coordGroups).forEach((groupFacilities, groupIndex) => {
       groupFacilities.forEach((facility, index) => {
@@ -58,16 +43,6 @@ const FacilityMarkers: React.FC<FacilityMarkersProps> = ({
         
         const adjustedLng = facility.longitude + (groupFacilities.length > 1 ? Math.cos(angle) * offsetDistance : 0);
         const adjustedLat = facility.latitude + (groupFacilities.length > 1 ? Math.sin(angle) * offsetDistance : 0);
-
-        // Log marker placement
-        console.log('Placing marker:', {
-          facilityName: facility.name,
-          original: { lat: facility.latitude, lng: facility.longitude },
-          adjusted: { lat: adjustedLat, lng: adjustedLng },
-          inGroup: groupFacilities.length > 1,
-          groupSize: groupFacilities.length,
-          index
-        });
 
         const popup = new mapboxgl.Popup({
           offset: 25,
