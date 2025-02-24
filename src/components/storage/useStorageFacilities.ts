@@ -78,7 +78,7 @@ export const useStorageFacilities = (filters: FilterState) => {
       if (activeFeatures.length > 0) {
         // Apply each feature filter as an AND condition
         activeFeatures.forEach(feature => {
-          query = query.eq(`features->>${feature}`, true);
+          query = query.eq(`features->>${feature}`, 'true'); // Convert boolean to string
         });
       }
 
