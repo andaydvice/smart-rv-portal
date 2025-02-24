@@ -28,81 +28,73 @@ const MapView = ({
   const map = useRef<mapboxgl.Map | null>(null);
   const [mapError, setMapError] = useState<string | null>(null);
   const [isInitializing, setIsInitializing] = useState(true);
-  const [containerReady, setContainerReady] = useState(false);
-
-  // Monitor container readiness
-  useEffect(() => {
-    if (mapContainer.current) {
-      setContainerReady(true);
-    }
-  }, []);
+  const [mapLoaded, setMapLoaded] = useState(false);
 
   useEffect(() => {
-    if (!containerReady) return;
+    if (!mapContainer.current || !mapToken) return;
 
-    const initializeMap = async () => {
-      try {
-        if (!mapContainer.current) {
-          console.error('Map container not found');
-          return;
-        }
+    try {
+      if (map.current) {
+        map.current.remove();
+      }
 
-        // Clear any existing map
+      // Validate mapToken
+      if (mapToken.includes('Error')) {
+        throw new Error('Invalid Mapbox token received');
+      }
+
+      console.log('Initializing map with token length:', mapToken.length);
+      mapboxgl.accessToken = mapToken;
+
+      const newMap = new mapboxgl.Map({
+        container: mapContainer.current,
+        style: 'mapbox://styles/mapbox/dark-v11',
+        center: [-98.5795, 39.8283],
+        zoom: 3,
+        maxZoom: 16,
+        preserveDrawingBuffer: true,
+        antialias: true // Enable antialiasing for better Firefox rendering
+      });
+
+      // Handle successful map load
+      newMap.on('load', () => {
+        console.log('Map loaded successfully');
+        setMapError(null);
+        setIsInitializing(false);
+        setMapLoaded(true);
+        map.current = newMap;
+      });
+
+      // Handle map errors
+      newMap.on('error', (e) => {
+        console.error('Map error:', e);
+        setMapError(`Map error: ${e.error?.message || 'Unknown error'}`);
+        setIsInitializing(false);
+      });
+
+      // Cleanup
+      return () => {
         if (map.current) {
           map.current.remove();
           map.current = null;
         }
+      };
+    } catch (err) {
+      console.error('Map initialization error:', err);
+      setMapError(`Failed to initialize map: ${err instanceof Error ? err.message : 'Unknown error'}`);
+      setIsInitializing(false);
+    }
+  }, [mapToken]);
 
-        // Validate mapToken
-        if (!mapToken || mapToken.includes('Error')) {
-          throw new Error('Invalid Mapbox token received');
-        }
-
-        console.log('Initializing map with token length:', mapToken.length);
-        mapboxgl.accessToken = mapToken;
-
-        const newMap = new mapboxgl.Map({
-          container: mapContainer.current,
-          style: 'mapbox://styles/mapbox/dark-v11',
-          center: [-98.5795, 39.8283], // Center of USA
-          zoom: 3,
-          maxZoom: 16,
-          preserveDrawingBuffer: true
-        });
-
-        // Handle successful map load
-        newMap.on('load', () => {
-          console.log('Map loaded successfully');
-          setMapError(null);
-          setIsInitializing(false);
-          map.current = newMap;
-        });
-
-        // Handle map load errors
-        newMap.on('error', (e) => {
-          console.error('Map error:', e);
-          setMapError(`Map error: ${e.error?.message || 'Unknown error'}`);
-          setIsInitializing(false);
-        });
-
-      } catch (err) {
-        console.error('Map initialization error:', err);
-        setMapError(`Failed to initialize map: ${err instanceof Error ? err.message : 'Unknown error'}`);
-        setIsInitializing(false);
-      }
-    };
-
-    console.log('Starting map initialization...');
-    initializeMap();
-
+  // Prevent memory leaks and ensure proper cleanup
+  useEffect(() => {
     return () => {
       if (map.current) {
-        console.log('Cleaning up map...');
         map.current.remove();
         map.current = null;
       }
     };
-  }, [mapToken, containerReady]);
+  }, []);
 
   return (
     <div className="relative w-full h-full">
@@ -117,7 +109,7 @@ const MapView = ({
         className="w-full h-full" 
         style={{ minHeight: '600px' }}
       />
-      {map.current && (
+      {map.current && mapLoaded && (
         <>
           <MapControls map={map.current} />
           <ClusterLayer
