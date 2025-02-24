@@ -39,8 +39,7 @@ const MapView = ({
   const mapInitialized = useRef(false);
 
   useEffect(() => {
-    if (!mapContainer.current || !mapToken || mapInitialized.current) return;
-    mapInitialized.current = true;
+    if (!mapContainer.current || !mapToken) return;
 
     try {
       if (map.current) {
@@ -52,7 +51,6 @@ const MapView = ({
         throw new Error('Invalid Mapbox token received');
       }
 
-      console.log('Initializing map with token length:', mapToken.length);
       mapboxgl.accessToken = mapToken;
 
       const newMap = new mapboxgl.Map({
@@ -63,61 +61,70 @@ const MapView = ({
         maxZoom: 16,
         preserveDrawingBuffer: true,
         antialias: true,
-        crossSourceCollisions: false,
-        fadeDuration: 0,
-        interactive: true, // Ensure interactivity is enabled
-        trackResize: true, // Enable automatic canvas resize
+        interactive: true,
+        trackResize: true,
         attributionControl: true,
-        renderWorldCopies: true // Improve performance
+        renderWorldCopies: true,
+        boxZoom: true,
+        dragRotate: true,
+        dragPan: true,
+        keyboard: true,
+        doubleClickZoom: true,
+        touchZoomRotate: true,
+        scrollZoom: true
       });
 
-      // Firefox-specific: Force immediate style loading with all required options
+      // Force style loading with required options
       newMap.setStyle('mapbox://styles/mapbox/dark-v11', {
         diff: false,
         localIdeographFontFamily: 'sans-serif',
         localFontFamily: 'sans-serif'
       });
 
-      const enableInteractions = (mapInstance: mapboxgl.Map) => {
-        // Enable all interactions explicitly for Firefox
-        mapInstance.boxZoom.enable();
-        mapInstance.scrollZoom.enable();
-        mapInstance.dragRotate.enable();
-        mapInstance.dragPan.enable();
-        mapInstance.keyboard.enable();
-        mapInstance.doubleClickZoom.enable();
-        mapInstance.touchZoomRotate.enable();
+      const enableInteractions = () => {
+        if (!newMap) return;
+        
+        // Force enable all interactions
+        newMap.boxZoom.enable();
+        newMap.scrollZoom.enable();
+        newMap.dragRotate.enable();
+        newMap.dragPan.enable();
+        newMap.keyboard.enable();
+        newMap.doubleClickZoom.enable();
+        newMap.touchZoomRotate.enable();
+        
+        // Set interactive flag
+        (newMap as any).interactive = true;
+        
+        // Force a resize to ensure proper rendering
+        newMap.resize();
       };
 
-      const checkMapReady = () => {
-        if (newMap.loaded() && newMap.isStyleLoaded()) {
-          console.log('Map and style fully loaded');
-          enableInteractions(newMap);
-          setMapError(null);
-          setIsInitializing(false);
-          setMapLoaded(true);
-          map.current = newMap;
-        }
-      };
-
-      // Set up event listeners
-      newMap.once('load', () => {
+      // Handle map load
+      newMap.on('load', () => {
         console.log('Map load event fired');
-        checkMapReady();
+        enableInteractions();
+        setMapError(null);
+        setIsInitializing(false);
+        setMapLoaded(true);
+        map.current = newMap;
       });
 
-      newMap.once('style.load', () => {
-        console.log('Style load event fired');
-        checkMapReady();
+      // Additional event bindings for Firefox
+      newMap.on('movestart', () => {
+        console.log('Map movement started');
+        enableInteractions();
       });
 
-      // Periodic check for map readiness
-      const readinessCheck = setInterval(() => {
-        if (newMap.loaded() && newMap.isStyleLoaded()) {
-          checkMapReady();
-          clearInterval(readinessCheck);
-        }
-      }, 100);
+      newMap.on('mousedown', () => {
+        console.log('Mouse down on map');
+        enableInteractions();
+      });
+
+      newMap.on('touchstart', () => {
+        console.log('Touch started on map');
+        enableInteractions();
+      });
 
       // Error handling
       newMap.on('error', (e) => {
@@ -126,8 +133,8 @@ const MapView = ({
         setIsInitializing(false);
       });
 
+      // Cleanup
       return () => {
-        clearInterval(readinessCheck);
         if (map.current) {
           map.current.remove();
           map.current = null;
@@ -139,16 +146,6 @@ const MapView = ({
       setIsInitializing(false);
     }
   }, [mapToken]);
-
-  // Cleanup on unmount
-  useEffect(() => {
-    return () => {
-      if (map.current) {
-        map.current.remove();
-        map.current = null;
-      }
-    };
-  }, []);
 
   return (
     <div className="relative w-full h-full">
