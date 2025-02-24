@@ -13,6 +13,14 @@ import { AlertCircle, Loader2 } from 'lucide-react';
 if (!mapboxgl.supported()) {
   console.error('Your browser does not support Mapbox GL');
 } else {
+  // Force WebGL context creation
+  const canvas = document.createElement('canvas');
+  const gl = canvas.getContext('webgl', {
+    failIfMajorPerformanceCaveat: false,
+    preserveDrawingBuffer: true,
+    antialias: true
+  });
+  if (gl) gl.getExtension('OES_element_index_uint');
   (mapboxgl as any).prewarm();
 }
 
@@ -36,55 +44,47 @@ const MapView = ({
   const [mapError, setMapError] = useState<string | null>(null);
   const [isInitializing, setIsInitializing] = useState(true);
   const [mapLoaded, setMapLoaded] = useState(false);
-  const mapInitialized = useRef(false);
 
   useEffect(() => {
     if (!mapContainer.current || !mapToken) return;
 
-    try {
-      if (map.current) {
-        map.current.remove();
-        map.current = null;
-      }
+    let isMounted = true;
 
-      if (mapToken.includes('Error')) {
-        throw new Error('Invalid Mapbox token received');
-      }
+    const initializeMap = async () => {
+      try {
+        if (map.current) {
+          map.current.remove();
+          map.current = null;
+        }
 
-      mapboxgl.accessToken = mapToken;
+        if (mapToken.includes('Error')) {
+          throw new Error('Invalid Mapbox token received');
+        }
 
-      const newMap = new mapboxgl.Map({
-        container: mapContainer.current,
-        style: 'mapbox://styles/mapbox/dark-v11',
-        center: [-98.5795, 39.8283],
-        zoom: 3,
-        maxZoom: 16,
-        preserveDrawingBuffer: true,
-        antialias: true,
-        interactive: true,
-        trackResize: true,
-        attributionControl: true,
-        renderWorldCopies: true,
-        boxZoom: true,
-        dragRotate: true,
-        dragPan: true,
-        keyboard: true,
-        doubleClickZoom: true,
-        touchZoomRotate: true,
-        scrollZoom: true
-      });
+        mapboxgl.accessToken = mapToken;
 
-      // Force style loading with required options
-      newMap.setStyle('mapbox://styles/mapbox/dark-v11', {
-        diff: false,
-        localIdeographFontFamily: 'sans-serif',
-        localFontFamily: 'sans-serif'
-      });
+        // Create map with minimal initial options
+        const newMap = new mapboxgl.Map({
+          container: mapContainer.current,
+          style: 'mapbox://styles/mapbox/dark-v11',
+          center: [-98.5795, 39.8283],
+          zoom: 3,
+          preserveDrawingBuffer: true,
+          antialias: true,
+          trackResize: true,
+          attributionControl: true,
+          renderWorldCopies: true,
+          failIfMajorPerformanceCaveat: false
+        });
 
-      const enableInteractions = () => {
-        if (!newMap) return;
-        
-        // Force enable all interactions
+        // Wait for initial map ready state
+        await new Promise<void>((resolve) => {
+          newMap.once('style.load', () => resolve());
+        });
+
+        if (!isMounted) return;
+
+        // Enable all interactions after style load
         newMap.boxZoom.enable();
         newMap.scrollZoom.enable();
         newMap.dragRotate.enable();
@@ -92,59 +92,45 @@ const MapView = ({
         newMap.keyboard.enable();
         newMap.doubleClickZoom.enable();
         newMap.touchZoomRotate.enable();
-        
-        // Set interactive flag
-        (newMap as any).interactive = true;
-        
-        // Force a resize to ensure proper rendering
+
+        // Force a resize to ensure proper canvas dimensions
         newMap.resize();
-      };
 
-      // Handle map load
-      newMap.on('load', () => {
-        console.log('Map load event fired');
-        enableInteractions();
-        setMapError(null);
-        setIsInitializing(false);
-        setMapLoaded(true);
-        map.current = newMap;
-      });
+        // Set up event handlers
+        newMap.on('error', (e) => {
+          console.error('Map error:', e);
+          if (isMounted) {
+            setMapError(`Map error: ${e.error?.message || 'Unknown error'}`);
+            setIsInitializing(false);
+          }
+        });
 
-      // Additional event bindings for Firefox
-      newMap.on('movestart', () => {
-        console.log('Map movement started');
-        enableInteractions();
-      });
-
-      newMap.on('mousedown', () => {
-        console.log('Mouse down on map');
-        enableInteractions();
-      });
-
-      newMap.on('touchstart', () => {
-        console.log('Touch started on map');
-        enableInteractions();
-      });
-
-      // Error handling
-      newMap.on('error', (e) => {
-        console.error('Map error:', e);
-        setMapError(`Map error: ${e.error?.message || 'Unknown error'}`);
-        setIsInitializing(false);
-      });
-
-      // Cleanup
-      return () => {
-        if (map.current) {
-          map.current.remove();
-          map.current = null;
+        // Final initialization
+        if (isMounted) {
+          map.current = newMap;
+          setMapError(null);
+          setIsInitializing(false);
+          setMapLoaded(true);
         }
-      };
-    } catch (err) {
-      console.error('Map initialization error:', err);
-      setMapError(`Failed to initialize map: ${err instanceof Error ? err.message : 'Unknown error'}`);
-      setIsInitializing(false);
-    }
+
+      } catch (err) {
+        console.error('Map initialization error:', err);
+        if (isMounted) {
+          setMapError(`Failed to initialize map: ${err instanceof Error ? err.message : 'Unknown error'}`);
+          setIsInitializing(false);
+        }
+      }
+    };
+
+    initializeMap();
+
+    return () => {
+      isMounted = false;
+      if (map.current) {
+        map.current.remove();
+        map.current = null;
+      }
+    };
   }, [mapToken]);
 
   return (
