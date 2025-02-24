@@ -50,6 +50,8 @@ export const useStorageFacilities = (filters: FilterState) => {
       
       if (filters.selectedState === 'Arizona') {
         query = query.or('state.eq.AZ,state.eq.Arizona');
+      } else if (filters.selectedState === 'California') {
+        query = query.or('state.eq.CA,state.eq.California');
       } else if (filters.selectedState) {
         query = query.eq('state', filters.selectedState);
       }
@@ -67,7 +69,7 @@ export const useStorageFacilities = (filters: FilterState) => {
         name: facility.name,
         address: facility.address,
         city: facility.city,
-        state: facility.state === 'AZ' ? 'Arizona' : facility.state,
+        state: facility.state === 'AZ' ? 'Arizona' : facility.state === 'CA' ? 'California' : facility.state,
         latitude: Number(facility.latitude),
         longitude: Number(facility.longitude),
         features: {
