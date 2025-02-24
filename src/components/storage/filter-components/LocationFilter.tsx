@@ -20,11 +20,18 @@ export const LocationFilter = ({ selectedState, states, onStateChange }: Locatio
   const { data: statesWithCounts } = useQuery({
     queryKey: ['state-counts'],
     queryFn: async () => {
+      // First, get all facilities with their states
       const { data, error } = await supabase
         .from('storage_facilities')
         .select('state');
 
-      if (error || !data) return [];
+      if (error || !data) {
+        console.error('Error fetching states:', error);
+        return [];
+      }
+
+      // Log raw data for debugging
+      console.log('Raw states data:', data);
 
       // Create a mapping for state abbreviations to full names
       const stateMap: { [key: string]: string } = {
@@ -35,18 +42,31 @@ export const LocationFilter = ({ selectedState, states, onStateChange }: Locatio
 
       // Normalize and count states
       const stateCounts = data.reduce((acc: { [key: string]: number }, curr) => {
-        // Convert state abbreviation to full name if it exists in our mapping
+        // Get the normalized state name (either from the map or use the original)
         const normalizedState = stateMap[curr.state] || curr.state;
+        
+        // Update the count
         acc[normalizedState] = (acc[normalizedState] || 0) + 1;
+        
+        // Log each state normalization for debugging
+        console.log(`State normalization: ${curr.state} -> ${normalizedState} (Current count: ${acc[normalizedState]})`);
+        
         return acc;
       }, {});
 
-      console.log('Normalized state counts:', stateCounts);
+      // Log final state counts
+      console.log('Final normalized state counts:', stateCounts);
 
-      return Object.entries(stateCounts)
+      // Convert to array and sort
+      const sortedStates = Object.entries(stateCounts)
         .map(([state, count]) => ({ state, count }))
         .sort((a, b) => a.state.localeCompare(b.state));
-    }
+
+      console.log('Sorted states with counts:', sortedStates);
+
+      return sortedStates;
+    },
+    staleTime: 300000 // 5 minute cache
   });
 
   const displayStates = statesWithCounts || states;
