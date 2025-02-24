@@ -16,64 +16,30 @@ interface LocationFilterProps {
   onStateChange: (state: string | null) => void;
 }
 
-// State name normalization mapping
-const stateNormalization: { [key: string]: string } = {
-  'TX': 'Texas',
-  'Texas': 'Texas',
-  'FL': 'Florida',
-  'Florida': 'Florida',
-  'AZ': 'Arizona',
-  'Arizona': 'Arizona'
-};
-
 export const LocationFilter = ({ selectedState, states, onStateChange }: LocationFilterProps) => {
-  // Query to get actual state counts from storage_facilities table
   const { data: statesWithCounts } = useQuery({
     queryKey: ['state-counts'],
     queryFn: async () => {
-      console.log('Fetching state counts...');
-      
       const { data, error } = await supabase
         .from('storage_facilities')
-        .select('state, id');
+        .select('state');
 
-      if (error) {
-        console.error('Error fetching state counts:', error);
-        return [];
-      }
+      if (error || !data) return [];
 
-      // Log raw data
-      console.log('Raw state data:', data);
-
-      // Count occurrences of each state with normalization
+      // Count all variants of Arizona as one state
       const stateCounts = data.reduce((acc: { [key: string]: number }, curr) => {
-        const normalizedState = stateNormalization[curr.state] || curr.state;
-        acc[normalizedState] = (acc[normalizedState] || 0) + 1;
-        console.log(`Processing state: ${curr.state} -> ${normalizedState}, current count: ${acc[normalizedState]}`);
+        const state = curr.state === 'AZ' ? 'Arizona' : curr.state;
+        acc[state] = (acc[state] || 0) + 1;
         return acc;
       }, {});
 
-      // Log state counts
-      console.log('Normalized state counts:', stateCounts);
-
-      // Convert to array format and sort alphabetically
-      const result = Object.entries(stateCounts).map(([state, count]) => ({
-        state,
-        count
-      })).sort((a, b) => a.state.localeCompare(b.state));
-
-      console.log('Final state data:', result);
-      return result;
-    },
-    staleTime: 0, // Force refresh every time
-    refetchOnWindowFocus: true
+      return Object.entries(stateCounts)
+        .map(([state, count]) => ({ state, count }))
+        .sort((a, b) => a.state.localeCompare(b.state));
+    }
   });
 
   const displayStates = statesWithCounts || states;
-
-  // Log what's being displayed after displayStates is defined
-  console.log('Display states:', displayStates);
-  console.log('Selected state:', selectedState);
 
   return (
     <div>
@@ -81,10 +47,7 @@ export const LocationFilter = ({ selectedState, states, onStateChange }: Locatio
       <div className="space-y-2">
         <Select
           value={selectedState || "all"}
-          onValueChange={(value) => {
-            console.log('State selected:', value);
-            onStateChange(value === "all" ? null : value);
-          }}
+          onValueChange={(value) => onStateChange(value === "all" ? null : value)}
         >
           <SelectTrigger className="w-full bg-[#080F1F] border-gray-700 text-white">
             <SelectValue placeholder="Select a state">

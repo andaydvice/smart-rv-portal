@@ -1,4 +1,3 @@
-
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
 import { StorageFacility, FilterState, DatabaseStorageFacility } from './types';
@@ -13,14 +12,7 @@ const stateNormalization: { [key: string]: string } = {
   'Arizona': 'Arizona'
 };
 
-const normalizeState = (state: string): string => {
-  const normalized = stateNormalization[state];
-  console.log(`Normalizing state: ${state} -> ${normalized || state}`);
-  return normalized || state;
-};
-
 export const useStorageFacilities = (filters: FilterState) => {
-  // Query for max price from the view
   const { data: maxPriceData } = useQuery({
     queryKey: ['max-facility-price'],
     queryFn: async () => {
@@ -45,8 +37,6 @@ export const useStorageFacilities = (filters: FilterState) => {
   const { data: facilities, isLoading, error } = useQuery({
     queryKey: ['storage-facilities', filters],
     queryFn: async () => {
-      console.log('Fetching facilities with filters:', filters);
-      
       let query = supabase
         .from('storage_facilities')
         .select<string, DatabaseStorageFacility>(`
@@ -66,52 +56,20 @@ export const useStorageFacilities = (filters: FilterState) => {
         `);
       
       if (filters.selectedState) {
-        // Handle both state formats
-        const stateConditions = [filters.selectedState];
-        // Add abbreviated version if we have a full name, or full version if we have abbreviation
-        Object.entries(stateNormalization).forEach(([abbr, full]) => {
-          if (filters.selectedState === full) stateConditions.push(abbr);
-          if (filters.selectedState === abbr) stateConditions.push(full);
-        });
-        console.log('State filter conditions:', stateConditions);
-        query = query.in('state', stateConditions);
+        query = query.or(`state.eq.${filters.selectedState},state.eq.AZ,state.eq.Arizona`);
       }
 
-      // Handle feature filters - only apply if true
-      const activeFeatures = Object.entries(filters.features)
-        .filter(([_, value]) => value)
-        .map(([key, _]) => key);
-
-      if (activeFeatures.length > 0) {
-        // Apply each feature filter as an AND condition
-        activeFeatures.forEach(feature => {
-          query = query.eq(`features->>${feature}`, 'true');
-        });
-      }
-
-      // Handle rating filter
-      if (filters.minRating !== null) {
-        query = query.gte('avg_rating', filters.minRating);
-      }
-      
       const { data, error } = await query;
       
-      if (error) {
-        console.error('Error fetching facilities:', error);
-        throw error;
-      }
-
+      if (error) throw error;
       if (!data) return [];
-
-      // Debug log raw data before normalization
-      console.log('Raw facilities data:', data);
 
       const normalizedFacilities = data.map(facility => ({
         id: facility.id,
         name: facility.name,
         address: facility.address,
         city: facility.city,
-        state: normalizeState(facility.state),
+        state: 'Arizona',
         latitude: Number(facility.latitude),
         longitude: Number(facility.longitude),
         features: {
@@ -139,24 +97,16 @@ export const useStorageFacilities = (filters: FilterState) => {
         }
       }));
 
-      // Debug log after normalization
-      console.log('Normalized facilities:', normalizedFacilities);
-
-      return normalizedFacilities as StorageFacility[];
+      return normalizedFacilities;
     },
-    // Force refetch on every filter change
     refetchOnWindowFocus: true,
     staleTime: 0
   });
 
-  // Apply price range filter in memory since it's a range
   const filteredFacilities = facilities?.filter(facility => {
     const facilityMaxPrice = facility.price_range.max;
     return facilityMaxPrice >= filters.priceRange[0] && facilityMaxPrice <= filters.priceRange[1];
   });
-
-  // Debug log filtered results
-  console.log('Filtered facilities:', filteredFacilities);
 
   return { 
     facilities: filteredFacilities,
