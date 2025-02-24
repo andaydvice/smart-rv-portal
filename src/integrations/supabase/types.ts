@@ -533,6 +533,10 @@ export type Database = {
             }
             Returns: string
           }
+      batch_geocode_and_insert_facilities: {
+        Args: Record<PropertyKey, never>
+        Returns: undefined
+      }
       box:
         | {
             Args: {
