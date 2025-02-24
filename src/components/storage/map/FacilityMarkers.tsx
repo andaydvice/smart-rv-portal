@@ -24,8 +24,17 @@ const FacilityMarkers: React.FC<FacilityMarkersProps> = ({
     markers.current.forEach(marker => marker.remove());
     markers.current = [];
 
+    // Log facilities being rendered as markers
+    console.log('Facilities being rendered as markers:', facilities);
+
     // Add new markers
     facilities.forEach(facility => {
+      // Validate coordinates
+      if (!facility.latitude || !facility.longitude) {
+        console.error('Invalid coordinates for facility:', facility);
+        return;
+      }
+
       const popup = new mapboxgl.Popup({
         offset: 25,
         maxWidth: '400px',
