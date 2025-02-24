@@ -8,7 +8,9 @@ const stateNormalization: { [key: string]: string } = {
   'TX': 'Texas',
   'Texas': 'Texas',
   'FL': 'Florida',
-  'Florida': 'Florida'
+  'Florida': 'Florida',
+  'AZ': 'Arizona',
+  'Arizona': 'Arizona'
 };
 
 export const useStorageFacilities = (filters: FilterState) => {
@@ -76,13 +78,20 @@ export const useStorageFacilities = (filters: FilterState) => {
       if (activeFeatures.length > 0) {
         // Apply each feature filter as an AND condition
         activeFeatures.forEach(feature => {
-          query = query.eq(`features->>${feature}`, 'true');
+          query = query.eq(`features->>${feature}`, true);
         });
       }
 
       // Handle rating filter
       if (filters.minRating !== null) {
         query = query.gte('avg_rating', filters.minRating);
+      }
+
+      // Handle price range filter
+      if (filters.priceRange && filters.priceRange[1] < maxPriceData) {
+        query = query
+          .gte('price_range->max', filters.priceRange[0])
+          .lte('price_range->max', filters.priceRange[1]);
       }
       
       const { data, error } = await query;
@@ -133,14 +142,8 @@ export const useStorageFacilities = (filters: FilterState) => {
     }
   });
 
-  // Apply price range filter in memory since it's a range
-  const filteredFacilities = facilities?.filter(facility => {
-    const facilityMaxPrice = facility.price_range.max;
-    return facilityMaxPrice >= filters.priceRange[0] && facilityMaxPrice <= filters.priceRange[1];
-  });
-
   return { 
-    facilities: filteredFacilities,
+    facilities,
     isLoading,
     error,
     maxPrice: maxPriceData || 1000
