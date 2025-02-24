@@ -22,7 +22,6 @@ export const useStorageFacilities = (filters: FilterState) => {
       
       if (error) return 1000;
       
-      // Safe type casting with unknown intermediate step
       const priceRange = (data?.price_range as unknown) as PriceRange | null;
       return priceRange?.max || 1000;
     }
@@ -49,17 +48,24 @@ export const useStorageFacilities = (filters: FilterState) => {
           review_count
         `);
       
-      // Handle state filtering at the database query level
-      if (filters.selectedState) {
-        if (filters.selectedState === 'Arizona') {
-          query = query.in('state', ['AZ', 'Arizona']);
-        } else {
-          query = query.eq('state', filters.selectedState);
-        }
+      // Handle Arizona state filtering using explicit OR condition
+      if (filters.selectedState === 'Arizona') {
+        query = query.or('state.eq.AZ,state.eq.Arizona');
+      } else if (filters.selectedState) {
+        query = query.eq('state', filters.selectedState);
       }
 
+      console.log('Executing query with filters:', filters); // Debug log
+
       const { data, error } = await query;
-      if (error) throw error;
+      
+      if (error) {
+        console.error('Query error:', error); // Debug log
+        throw error;
+      }
+      
+      console.log('Query results:', data); // Debug log
+      
       if (!data) return [];
 
       return data.map(facility => ({
@@ -99,7 +105,6 @@ export const useStorageFacilities = (filters: FilterState) => {
     staleTime: 300000 // 5 minute cache
   });
 
-  // Only apply price range filtering since state filtering is now handled at query level
   const filteredFacilities = facilities?.filter(facility => {
     const facilityMaxPrice = facility.price_range.max;
     return facilityMaxPrice >= filters.priceRange[0] && facilityMaxPrice <= filters.priceRange[1];
