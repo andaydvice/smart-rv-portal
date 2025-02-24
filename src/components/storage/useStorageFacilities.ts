@@ -27,6 +27,8 @@ export const useStorageFacilities = (filters: FilterState) => {
   const { data: facilities, isLoading, error } = useQuery({
     queryKey: ['storage-facilities', filters],
     queryFn: async () => {
+      console.log('Fetching facilities with filters:', filters);
+      
       let query = supabase
         .from('storage_facilities')
         .select<string, DatabaseStorageFacility>(`
@@ -45,17 +47,28 @@ export const useStorageFacilities = (filters: FilterState) => {
           review_count
         `);
       
-      // Changed the filtering logic for Arizona to use a simpler OR condition
+      // Handle Arizona state filtering
       if (filters.selectedState === 'Arizona') {
-        query = query.or(`state.in.(AZ,Arizona)`);
+        console.log('Filtering for Arizona state...');
+        query = query.or('state.eq.AZ,state.eq.Arizona');
       } else if (filters.selectedState) {
+        console.log('Filtering for state:', filters.selectedState);
         query = query.eq('state', filters.selectedState);
       }
 
       const { data, error } = await query;
       
-      if (error) throw error;
-      if (!data) return [];
+      if (error) {
+        console.error('Error fetching facilities:', error);
+        throw error;
+      }
+      
+      if (!data) {
+        console.log('No facilities data returned');
+        return [];
+      }
+
+      console.log('Raw facilities data:', data);
 
       const normalizedFacilities = data.map(facility => ({
         id: facility.id,
@@ -90,16 +103,19 @@ export const useStorageFacilities = (filters: FilterState) => {
         }
       }));
 
+      console.log('Normalized facilities:', normalizedFacilities);
       return normalizedFacilities;
     },
-    refetchOnWindowFocus: false, // Changed to false to prevent unnecessary refetches
-    staleTime: 300000 // Added 5 minute stale time to prevent unnecessary refetches
+    refetchOnWindowFocus: true, // Changed back to true for debugging
+    staleTime: 0 // Removed caching for debugging
   });
 
   const filteredFacilities = facilities?.filter(facility => {
     const facilityMaxPrice = facility.price_range.max;
     return facilityMaxPrice >= filters.priceRange[0] && facilityMaxPrice <= filters.priceRange[1];
   });
+
+  console.log('Final filtered facilities:', filteredFacilities);
   
   return { 
     facilities: filteredFacilities,
