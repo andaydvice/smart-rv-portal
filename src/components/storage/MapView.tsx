@@ -9,8 +9,12 @@ import FacilityMarkers from './map/FacilityMarkers';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { AlertCircle, Loader2 } from 'lucide-react';
 
-// Fix for Firefox missing icons
-(mapboxgl as any).prewarm();
+// Force WebGL context initialization for Firefox
+if (!mapboxgl.supported()) {
+  console.error('Your browser does not support Mapbox GL');
+} else {
+  (mapboxgl as any).prewarm();
+}
 
 interface MapViewProps {
   mapToken: string;
@@ -32,18 +36,18 @@ const MapView = ({
   const [mapError, setMapError] = useState<string | null>(null);
   const [isInitializing, setIsInitializing] = useState(true);
   const [mapLoaded, setMapLoaded] = useState(false);
+  const mapInitialized = useRef(false);
 
   useEffect(() => {
-    if (!mapContainer.current || !mapToken) return;
+    if (!mapContainer.current || !mapToken || mapInitialized.current) return;
+    mapInitialized.current = true;
 
     try {
-      // Cleanup previous map instance if it exists
       if (map.current) {
         map.current.remove();
         map.current = null;
       }
 
-      // Validate mapToken
       if (mapToken.includes('Error')) {
         throw new Error('Invalid Mapbox token received');
       }
@@ -59,50 +63,67 @@ const MapView = ({
         maxZoom: 16,
         preserveDrawingBuffer: true,
         antialias: true,
-        crossSourceCollisions: false, // Improve performance
-        fadeDuration: 0, // Reduce animation lag
-        logoPosition: 'bottom-left',
-        refreshExpiredTiles: false // Improve performance
+        crossSourceCollisions: false,
+        fadeDuration: 0,
+        interactive: true, // Ensure interactivity is enabled
+        trackResize: true, // Enable automatic canvas resize
+        attributionControl: true,
+        renderWorldCopies: true // Improve performance
       });
 
-      // Wait for both style and map to load
-      newMap.on('style.load', () => {
-        console.log('Style loaded');
-        checkMapReady(newMap);
+      // Firefox-specific: Force immediate style loading
+      newMap.setStyle('mapbox://styles/mapbox/dark-v11', { diff: false });
+
+      const enableInteractions = (mapInstance: mapboxgl.Map) => {
+        // Enable all interactions explicitly for Firefox
+        mapInstance.boxZoom.enable();
+        mapInstance.scrollZoom.enable();
+        mapInstance.dragRotate.enable();
+        mapInstance.dragPan.enable();
+        mapInstance.keyboard.enable();
+        mapInstance.doubleClickZoom.enable();
+        mapInstance.touchZoomRotate.enable();
+      };
+
+      const checkMapReady = () => {
+        if (newMap.loaded() && newMap.isStyleLoaded()) {
+          console.log('Map and style fully loaded');
+          enableInteractions(newMap);
+          setMapError(null);
+          setIsInitializing(false);
+          setMapLoaded(true);
+          map.current = newMap;
+        }
+      };
+
+      // Set up event listeners
+      newMap.once('load', () => {
+        console.log('Map load event fired');
+        checkMapReady();
       });
 
-      newMap.on('load', () => {
-        console.log('Map loaded');
-        checkMapReady(newMap);
+      newMap.once('style.load', () => {
+        console.log('Style load event fired');
+        checkMapReady();
       });
 
-      // Handle map errors
+      // Periodic check for map readiness
+      const readinessCheck = setInterval(() => {
+        if (newMap.loaded() && newMap.isStyleLoaded()) {
+          checkMapReady();
+          clearInterval(readinessCheck);
+        }
+      }, 100);
+
+      // Error handling
       newMap.on('error', (e) => {
         console.error('Map error:', e);
         setMapError(`Map error: ${e.error?.message || 'Unknown error'}`);
         setIsInitializing(false);
       });
 
-      // Enable map interactions once fully loaded
-      const checkMapReady = (mapInstance: mapboxgl.Map) => {
-        if (mapInstance.isStyleLoaded() && mapInstance.loaded()) {
-          console.log('Map fully loaded and ready');
-          setMapError(null);
-          setIsInitializing(false);
-          setMapLoaded(true);
-          map.current = mapInstance;
-
-          // Enable interactions
-          mapInstance.scrollZoom.enable();
-          mapInstance.dragRotate.enable();
-          mapInstance.touchZoomRotate.enable();
-          mapInstance.doubleClickZoom.enable();
-          mapInstance.dragPan.enable();
-        }
-      };
-
-      // Cleanup
       return () => {
+        clearInterval(readinessCheck);
         if (map.current) {
           map.current.remove();
           map.current = null;
@@ -115,7 +136,7 @@ const MapView = ({
     }
   }, [mapToken]);
 
-  // Ensure proper cleanup on unmount
+  // Cleanup on unmount
   useEffect(() => {
     return () => {
       if (map.current) {
