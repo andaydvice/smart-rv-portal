@@ -9,6 +9,9 @@ import FacilityMarkers from './map/FacilityMarkers';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { AlertCircle, Loader2 } from 'lucide-react';
 
+// Fix for Firefox missing icons
+(mapboxgl as any).prewarm();
+
 interface MapViewProps {
   mapToken: string;
   facilities: StorageFacility[];
@@ -34,8 +37,10 @@ const MapView = ({
     if (!mapContainer.current || !mapToken) return;
 
     try {
+      // Cleanup previous map instance if it exists
       if (map.current) {
         map.current.remove();
+        map.current = null;
       }
 
       // Validate mapToken
@@ -53,16 +58,22 @@ const MapView = ({
         zoom: 3,
         maxZoom: 16,
         preserveDrawingBuffer: true,
-        antialias: true // Enable antialiasing for better Firefox rendering
+        antialias: true,
+        crossSourceCollisions: false, // Improve performance
+        fadeDuration: 0, // Reduce animation lag
+        logoPosition: 'bottom-left',
+        refreshExpiredTiles: false // Improve performance
       });
 
-      // Handle successful map load
+      // Wait for both style and map to load
+      newMap.on('style.load', () => {
+        console.log('Style loaded');
+        checkMapReady(newMap);
+      });
+
       newMap.on('load', () => {
-        console.log('Map loaded successfully');
-        setMapError(null);
-        setIsInitializing(false);
-        setMapLoaded(true);
-        map.current = newMap;
+        console.log('Map loaded');
+        checkMapReady(newMap);
       });
 
       // Handle map errors
@@ -71,6 +82,24 @@ const MapView = ({
         setMapError(`Map error: ${e.error?.message || 'Unknown error'}`);
         setIsInitializing(false);
       });
+
+      // Enable map interactions once fully loaded
+      const checkMapReady = (mapInstance: mapboxgl.Map) => {
+        if (mapInstance.isStyleLoaded() && mapInstance.loaded()) {
+          console.log('Map fully loaded and ready');
+          setMapError(null);
+          setIsInitializing(false);
+          setMapLoaded(true);
+          map.current = mapInstance;
+
+          // Enable interactions
+          mapInstance.scrollZoom.enable();
+          mapInstance.dragRotate.enable();
+          mapInstance.touchZoomRotate.enable();
+          mapInstance.doubleClickZoom.enable();
+          mapInstance.dragPan.enable();
+        }
+      };
 
       // Cleanup
       return () => {
@@ -86,7 +115,7 @@ const MapView = ({
     }
   }, [mapToken]);
 
-  // Prevent memory leaks and ensure proper cleanup
+  // Ensure proper cleanup on unmount
   useEffect(() => {
     return () => {
       if (map.current) {
@@ -107,7 +136,11 @@ const MapView = ({
       <div 
         ref={mapContainer} 
         className="w-full h-full" 
-        style={{ minHeight: '600px' }}
+        style={{ 
+          minHeight: '600px',
+          opacity: mapLoaded ? 1 : 0,
+          transition: 'opacity 0.3s ease-in-out'
+        }}
       />
       {map.current && mapLoaded && (
         <>
