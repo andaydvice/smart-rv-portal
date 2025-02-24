@@ -15,73 +15,77 @@ const ClusterLayer: React.FC<ClusterLayerProps> = ({ map, facilities, highlighte
     let isMounted = true;
 
     const initializeLayer = () => {
-      // Remove existing source and layers if they exist
-      if (map.getSource('facilities')) {
-        if (map.getLayer('clusters')) map.removeLayer('clusters');
-        if (map.getLayer('cluster-count')) map.removeLayer('cluster-count');
-        map.removeSource('facilities');
-      }
+      try {
+        // Remove existing source and layers if they exist
+        if (map.getSource('facilities')) {
+          if (map.getLayer('clusters')) map.removeLayer('clusters');
+          if (map.getLayer('cluster-count')) map.removeLayer('cluster-count');
+          map.removeSource('facilities');
+        }
 
-      // Create the GeoJSON data with proper typing
-      const geojsonData: FeatureCollection<Point> = {
-        type: "FeatureCollection",
-        features: facilities.map((facility): Feature<Point> => ({
-          type: "Feature",
-          geometry: {
-            type: "Point",
-            coordinates: [facility.longitude, facility.latitude]
-          },
-          properties: {
-            id: facility.id,
-            isHighlighted: facility.id === highlightedFacility
+        // Create the GeoJSON data with proper typing
+        const geojsonData: FeatureCollection<Point> = {
+          type: "FeatureCollection",
+          features: facilities.map((facility): Feature<Point> => ({
+            type: "Feature",
+            geometry: {
+              type: "Point",
+              coordinates: [facility.longitude, facility.latitude]
+            },
+            properties: {
+              id: facility.id,
+              isHighlighted: facility.id === highlightedFacility
+            }
+          }))
+        };
+
+        // Add cluster source
+        map.addSource('facilities', {
+          type: 'geojson',
+          data: geojsonData,
+          cluster: true,
+          clusterMaxZoom: 14,
+          clusterRadius: 50
+        });
+
+        // Add cluster circles
+        map.addLayer({
+          id: 'clusters',
+          type: 'circle',
+          source: 'facilities',
+          filter: ['has', 'point_count'],
+          paint: {
+            'circle-color': '#60A5FA',
+            'circle-radius': [
+              'step',
+              ['get', 'point_count'],
+              20,
+              10,
+              30,
+              50,
+              40
+            ]
           }
-        }))
-      };
+        });
 
-      // Add cluster source
-      map.addSource('facilities', {
-        type: 'geojson',
-        data: geojsonData,
-        cluster: true,
-        clusterMaxZoom: 14,
-        clusterRadius: 50
-      });
-
-      // Add cluster circles
-      map.addLayer({
-        id: 'clusters',
-        type: 'circle',
-        source: 'facilities',
-        filter: ['has', 'point_count'],
-        paint: {
-          'circle-color': '#60A5FA',
-          'circle-radius': [
-            'step',
-            ['get', 'point_count'],
-            20,
-            10,
-            30,
-            50,
-            40
-          ]
-        }
-      });
-
-      // Add cluster count text
-      map.addLayer({
-        id: 'cluster-count',
-        type: 'symbol',
-        source: 'facilities',
-        filter: ['has', 'point_count'],
-        layout: {
-          'text-field': '{point_count_abbreviated}',
-          'text-font': ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
-          'text-size': 12
-        },
-        paint: {
-          'text-color': '#ffffff'
-        }
-      });
+        // Add cluster count text
+        map.addLayer({
+          id: 'cluster-count',
+          type: 'symbol',
+          source: 'facilities',
+          filter: ['has', 'point_count'],
+          layout: {
+            'text-field': '{point_count_abbreviated}',
+            'text-font': ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
+            'text-size': 12
+          },
+          paint: {
+            'text-color': '#ffffff'
+          }
+        });
+      } catch (err) {
+        console.error('Error initializing cluster layer:', err);
+      }
     };
 
     const setupMap = () => {
@@ -104,10 +108,21 @@ const ClusterLayer: React.FC<ClusterLayerProps> = ({ map, facilities, highlighte
 
     return () => {
       isMounted = false;
-      if (map.getSource('facilities')) {
-        if (map.getLayer('clusters')) map.removeLayer('clusters');
-        if (map.getLayer('cluster-count')) map.removeLayer('cluster-count');
-        map.removeSource('facilities');
+      try {
+        // Check if map is still valid and has the layers/source before removing
+        if (map && map.getStyle()) {
+          if (map.getLayer('clusters')) {
+            map.removeLayer('clusters');
+          }
+          if (map.getLayer('cluster-count')) {
+            map.removeLayer('cluster-count');
+          }
+          if (map.getSource('facilities')) {
+            map.removeSource('facilities');
+          }
+        }
+      } catch (err) {
+        console.error('Error during cleanup:', err);
       }
     };
   }, [map, facilities, highlightedFacility]);
