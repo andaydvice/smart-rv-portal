@@ -14,21 +14,14 @@ export const useStorageFacilities = (filters: FilterState) => {
         .limit(1)
         .single();
       
-      if (error) {
-        console.error('Error fetching max price:', error);
-        return 1000;
-      }
-      
-      const priceRange = data?.price_range as { min: number; max: number; currency: string } | null;
-      return priceRange?.max || 1000;
+      if (error) return 1000;
+      return data?.price_range?.max || 1000;
     }
   });
 
   const { data: facilities, isLoading, error } = useQuery({
     queryKey: ['storage-facilities', filters],
     queryFn: async () => {
-      console.log('Fetching facilities with filters:', filters);
-      
       let query = supabase
         .from('storage_facilities')
         .select<string, DatabaseStorageFacility>(`
@@ -47,30 +40,18 @@ export const useStorageFacilities = (filters: FilterState) => {
           review_count
         `);
       
-      // Handle Arizona state filtering
+      // Simple state filtering that handles both AZ and Arizona
       if (filters.selectedState === 'Arizona') {
-        console.log('Filtering for Arizona state...');
         query = query.or('state.eq.AZ,state.eq.Arizona');
       } else if (filters.selectedState) {
-        console.log('Filtering for state:', filters.selectedState);
         query = query.eq('state', filters.selectedState);
       }
 
       const { data, error } = await query;
-      
-      if (error) {
-        console.error('Error fetching facilities:', error);
-        throw error;
-      }
-      
-      if (!data) {
-        console.log('No facilities data returned');
-        return [];
-      }
+      if (error) throw error;
+      if (!data) return [];
 
-      console.log('Raw facilities data:', data);
-
-      const normalizedFacilities = data.map(facility => ({
+      return data.map(facility => ({
         id: facility.id,
         name: facility.name,
         address: facility.address,
@@ -102,20 +83,15 @@ export const useStorageFacilities = (filters: FilterState) => {
           business_hours: false
         }
       }));
-
-      console.log('Normalized facilities:', normalizedFacilities);
-      return normalizedFacilities;
     },
-    refetchOnWindowFocus: true, // Changed back to true for debugging
-    staleTime: 0 // Removed caching for debugging
+    refetchOnWindowFocus: false,
+    staleTime: 300000 // 5 minute cache
   });
 
   const filteredFacilities = facilities?.filter(facility => {
     const facilityMaxPrice = facility.price_range.max;
     return facilityMaxPrice >= filters.priceRange[0] && facilityMaxPrice <= filters.priceRange[1];
   });
-
-  console.log('Final filtered facilities:', filteredFacilities);
   
   return { 
     facilities: filteredFacilities,
