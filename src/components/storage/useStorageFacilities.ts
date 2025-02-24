@@ -48,10 +48,14 @@ export const useStorageFacilities = (filters: FilterState) => {
           review_count
         `);
       
+      // Log the selected state for debugging
+      console.log('Selected state:', filters.selectedState);
+      
       if (filters.selectedState === 'Arizona') {
         query = query.or('state.eq.AZ,state.eq.Arizona');
       } else if (filters.selectedState === 'California') {
-        query = query.or('state.eq.CA,state.eq.California');
+        // Use ilike for case-insensitive matching and handle both formats
+        query = query.or('state.ilike.%CA%,state.ilike.%California%');
       } else if (filters.selectedState) {
         query = query.eq('state', filters.selectedState);
       }
@@ -59,17 +63,23 @@ export const useStorageFacilities = (filters: FilterState) => {
       const { data, error } = await query;
       
       if (error) {
+        console.error('Supabase query error:', error);
         throw error;
       }
       
       if (!data) return [];
+
+      // Log the raw data for debugging
+      console.log('Raw facilities data:', data);
 
       return data.map(facility => ({
         id: facility.id,
         name: facility.name,
         address: facility.address,
         city: facility.city,
-        state: facility.state === 'AZ' ? 'Arizona' : facility.state === 'CA' ? 'California' : facility.state,
+        state: facility.state === 'AZ' ? 'Arizona' : 
+              facility.state.toUpperCase() === 'CA' || facility.state.toLowerCase().includes('california') ? 'California' : 
+              facility.state,
         latitude: Number(facility.latitude),
         longitude: Number(facility.longitude),
         features: {
