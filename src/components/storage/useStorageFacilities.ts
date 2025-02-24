@@ -30,14 +30,6 @@ export const useStorageFacilities = (filters: FilterState) => {
   const { data: facilities, isLoading, error } = useQuery({
     queryKey: ['storage-facilities', filters],
     queryFn: async () => {
-      // First, let's see all Arizona locations regardless of filters
-      const { data: azData } = await supabase
-        .from('storage_facilities')
-        .select('*')
-        .or('state.eq.AZ,state.eq.Arizona');
-      
-      console.log('All Arizona locations:', azData);
-
       let query = supabase
         .from('storage_facilities')
         .select<string, DatabaseStorageFacility>(`
@@ -62,16 +54,11 @@ export const useStorageFacilities = (filters: FilterState) => {
         query = query.eq('state', filters.selectedState);
       }
 
-      console.log('Executing query with filters:', filters);
-
       const { data, error } = await query;
       
       if (error) {
-        console.error('Query error:', error);
         throw error;
       }
-      
-      console.log('Query results:', data);
       
       if (!data) return [];
 
