@@ -46,8 +46,9 @@ export const useStorageFacilities = (filters: FilterState) => {
         `);
       
       if (filters.selectedState === 'Arizona') {
-        // If Arizona is selected, get both 'AZ' and 'Arizona' records
+        // If Arizona is selected, get both 'AZ' and 'Arizona' records using or()
         query = query.or('state.eq.AZ,state.eq.Arizona');
+        console.log('Fetching Arizona facilities...');
       } else if (filters.selectedState) {
         // For other states, use exact match
         query = query.eq('state', filters.selectedState);
@@ -94,8 +95,16 @@ export const useStorageFacilities = (filters: FilterState) => {
         }
       }));
 
-      // Log normalized facilities to verify the transformation
-      console.log('Normalized facilities:', normalizedFacilities);
+      // Log normalized facilities and their coordinates
+      console.log('Normalized facilities with coordinates:', 
+        normalizedFacilities.map(f => ({
+          id: f.id,
+          name: f.name,
+          state: f.state,
+          lat: f.latitude,
+          lng: f.longitude
+        }))
+      );
 
       return normalizedFacilities;
     },
@@ -108,6 +117,9 @@ export const useStorageFacilities = (filters: FilterState) => {
     return facilityMaxPrice >= filters.priceRange[0] && facilityMaxPrice <= filters.priceRange[1];
   });
 
+  // Log filtered facilities count
+  console.log('Filtered facilities count:', filteredFacilities?.length);
+  
   return { 
     facilities: filteredFacilities,
     isLoading,
