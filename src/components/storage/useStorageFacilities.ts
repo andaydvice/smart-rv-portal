@@ -3,6 +3,12 @@ import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
 import { StorageFacility, FilterState, DatabaseStorageFacility } from './types';
 
+interface PriceRange {
+  min: number;
+  max: number;
+  currency: string;
+}
+
 export const useStorageFacilities = (filters: FilterState) => {
   const { data: maxPriceData } = useQuery({
     queryKey: ['max-facility-price'],
@@ -15,7 +21,10 @@ export const useStorageFacilities = (filters: FilterState) => {
         .single();
       
       if (error) return 1000;
-      return data?.price_range?.max || 1000;
+      
+      // Properly type and handle the price_range JSON data
+      const priceRange = data?.price_range as PriceRange | null;
+      return priceRange?.max || 1000;
     }
   });
 
