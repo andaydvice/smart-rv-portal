@@ -45,12 +45,10 @@ export const useStorageFacilities = (filters: FilterState) => {
           review_count
         `);
       
+      // Changed the filtering logic for Arizona to use a simpler OR condition
       if (filters.selectedState === 'Arizona') {
-        // If Arizona is selected, get both 'AZ' and 'Arizona' records using or()
-        query = query.or('state.eq.AZ,state.eq.Arizona');
-        console.log('Fetching Arizona facilities...');
+        query = query.or(`state.in.(AZ,Arizona)`);
       } else if (filters.selectedState) {
-        // For other states, use exact match
         query = query.eq('state', filters.selectedState);
       }
 
@@ -58,9 +56,6 @@ export const useStorageFacilities = (filters: FilterState) => {
       
       if (error) throw error;
       if (!data) return [];
-
-      // Log the raw data to verify what we're getting
-      console.log('Raw facilities data:', data);
 
       const normalizedFacilities = data.map(facility => ({
         id: facility.id,
@@ -95,30 +90,16 @@ export const useStorageFacilities = (filters: FilterState) => {
         }
       }));
 
-      // Log normalized facilities and their coordinates
-      console.log('Normalized facilities with coordinates:', 
-        normalizedFacilities.map(f => ({
-          id: f.id,
-          name: f.name,
-          state: f.state,
-          lat: f.latitude,
-          lng: f.longitude
-        }))
-      );
-
       return normalizedFacilities;
     },
-    refetchOnWindowFocus: true,
-    staleTime: 0
+    refetchOnWindowFocus: false, // Changed to false to prevent unnecessary refetches
+    staleTime: 300000 // Added 5 minute stale time to prevent unnecessary refetches
   });
 
   const filteredFacilities = facilities?.filter(facility => {
     const facilityMaxPrice = facility.price_range.max;
     return facilityMaxPrice >= filters.priceRange[0] && facilityMaxPrice <= filters.priceRange[1];
   });
-
-  // Log filtered facilities count
-  console.log('Filtered facilities count:', filteredFacilities?.length);
   
   return { 
     facilities: filteredFacilities,
