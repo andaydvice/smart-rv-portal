@@ -877,10 +877,9 @@ export default function AddFacilityForm() {
 
       if (fetchError) throw fetchError;
 
-      // Log current database state
-      console.log('Current facilities in database:', currentFacilities);
-      console.log('Number of facilities:', currentFacilities?.length);
-      console.log('Facility names:', currentFacilities?.map(f => f.name));
+      console.log('=== CURRENT DATABASE STATE ===');
+      console.log(`Current total facilities in California: ${currentFacilities?.length}`);
+      console.log('Current facility names:', currentFacilities?.map(f => f.name).sort());
       
       const existingNames = new Set(currentFacilities?.map(f => f.name) || []);
       
@@ -889,8 +888,9 @@ export default function AddFacilityForm() {
         facility => !existingNames.has(facility.name)
       );
 
-      console.log('New facilities to add:', newFacilities.map(f => f.name));
-      console.log('Number of new facilities:', newFacilities.length);
+      console.log('\n=== NEW FACILITIES TO BE ADDED ===');
+      console.log(`Number of new facilities to add: ${newFacilities.length}`);
+      console.log('Names of new facilities:', newFacilities.map(f => f.name).sort());
 
       if (newFacilities.length === 0) {
         toast.info('All facilities already exist in the database');
@@ -904,12 +904,13 @@ export default function AddFacilityForm() {
 
       if (insertError) throw insertError;
 
-      console.log('Successfully inserted facilities:', insertedData);
+      console.log('\n=== INSERTION RESULTS ===');
+      console.log(`Successfully inserted ${insertedData?.length} facilities`);
 
       await queryClient.invalidateQueries({ queryKey: ['storage-facilities'] });
       await queryClient.invalidateQueries({ queryKey: ['state-counts'] });
       
-      toast.success(`Successfully added ${newFacilities.length} new facilities!`);
+      toast.success(`Successfully added ${newFacilities.length} new facilities (from ${currentFacilities?.length} to ${(currentFacilities?.length || 0) + newFacilities.length} total)!`);
 
       // Verify final state
       const { data: finalFacilities } = await supabase
@@ -917,8 +918,9 @@ export default function AddFacilityForm() {
         .select('name')
         .order('name');
 
-      console.log('Final facility count:', finalFacilities?.length);
-      console.log('Final facility names:', finalFacilities?.map(f => f.name));
+      console.log('\n=== FINAL DATABASE STATE ===');
+      console.log(`Final facility count: ${finalFacilities?.length}`);
+      console.log('Final facility names:', finalFacilities?.map(f => f.name).sort());
 
     } catch (error) {
       console.error('Error managing facilities:', error);
