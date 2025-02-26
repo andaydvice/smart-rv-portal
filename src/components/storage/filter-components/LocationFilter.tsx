@@ -20,16 +20,19 @@ export const LocationFilter = ({ selectedState, states, onStateChange }: Locatio
   const { data: statesWithCounts } = useQuery({
     queryKey: ['state-counts'],
     queryFn: async () => {
+      // Get exact count for California including both CA and California in state field
       const { count: californiaCount } = await supabase
         .from('storage_facilities')
         .select('*', { count: 'exact', head: true })
         .or('state.eq.CA,state.eq.California');
 
+      // Get exact count for Arizona
       const { count: arizonaCount } = await supabase
         .from('storage_facilities')
         .select('*', { count: 'exact', head: true })
         .or('state.eq.AZ,state.eq.Arizona');
 
+      // Get exact count for Texas
       const { count: texasCount } = await supabase
         .from('storage_facilities')
         .select('*', { count: 'exact', head: true })
@@ -41,7 +44,7 @@ export const LocationFilter = ({ selectedState, states, onStateChange }: Locatio
         { state: 'Texas', count: texasCount || 0 }
       ].sort((a, b) => a.state.localeCompare(b.state));
     },
-    staleTime: 300000 // 5 minute cache
+    staleTime: 0 // Remove cache to ensure fresh counts
   });
 
   const displayStates = statesWithCounts || states;
