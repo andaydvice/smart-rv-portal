@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
@@ -868,43 +869,60 @@ export default function AddFacilityForm() {
     setLoading(true);
 
     try {
-      // First, let's check current count and log existing facilities
-      const { data: existingFacilities } = await supabase
+      // First, get ALL current facilities to verify what we have
+      const { data: currentFacilities, error: fetchError } = await supabase
         .from('storage_facilities')
-        .select('name')
-        .eq('state', 'CA');
+        .select('*')
+        .order('name');
 
-      console.log('Existing facilities:', existingFacilities?.map(f => f.name));
+      if (fetchError) throw fetchError;
+
+      // Log current database state
+      console.log('Current facilities in database:', currentFacilities);
+      console.log('Number of facilities:', currentFacilities?.length);
+      console.log('Facility names:', currentFacilities?.map(f => f.name));
       
-      const existingNames = new Set(existingFacilities?.map(f => f.name) || []);
+      const existingNames = new Set(currentFacilities?.map(f => f.name) || []);
       
       // Filter out facilities that already exist
       const newFacilities = facilitiesWithDefaults.filter(
         facility => !existingNames.has(facility.name)
       );
 
-      console.log('Facilities to add:', newFacilities.map(f => f.name));
+      console.log('New facilities to add:', newFacilities.map(f => f.name));
+      console.log('Number of new facilities:', newFacilities.length);
 
       if (newFacilities.length === 0) {
         toast.info('All facilities already exist in the database');
         return;
       }
 
-      const { data, error } = await supabase
+      const { data: insertedData, error: insertError } = await supabase
         .from('storage_facilities')
         .insert(newFacilities)
         .select();
 
-      if (error) throw error;
+      if (insertError) throw insertError;
+
+      console.log('Successfully inserted facilities:', insertedData);
 
       await queryClient.invalidateQueries({ queryKey: ['storage-facilities'] });
       await queryClient.invalidateQueries({ queryKey: ['state-counts'] });
       
-      toast.success(`Successfully added ${newFacilities.length} new California facilities!`);
+      toast.success(`Successfully added ${newFacilities.length} new facilities!`);
+
+      // Verify final state
+      const { data: finalFacilities } = await supabase
+        .from('storage_facilities')
+        .select('name')
+        .order('name');
+
+      console.log('Final facility count:', finalFacilities?.length);
+      console.log('Final facility names:', finalFacilities?.map(f => f.name));
 
     } catch (error) {
-      console.error('Error adding facilities:', error);
-      toast.error(error.message || 'Failed to add facilities');
+      console.error('Error managing facilities:', error);
+      toast.error(error.message || 'Failed to manage facilities');
     } finally {
       setLoading(false);
     }
