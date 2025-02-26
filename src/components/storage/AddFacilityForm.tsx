@@ -325,7 +325,7 @@ const facilitiesWithDefaults = [
       business_hours: false
     }
   },
-    {
+  {
     name: "Valley Indoor RV Storage – Chatsworth",
     address: "20701 Plummer Street",
     city: "Chatsworth",
@@ -566,6 +566,286 @@ const facilitiesWithDefaults = [
     },
     price_range: parsePriceRange(200, 200),
     contact_phone: "(714) 210-2588",
+    contact_email: null,
+    avg_rating: null,
+    review_count: null,
+    verified_fields: {
+      features: true,
+      price_range: true,
+      contact_info: true,
+      location: true,
+      business_hours: false
+    }
+  },
+  {
+    name: "Johnson RV – Gilroy",
+    address: "7900 Arroyo Circle",
+    city: "Gilroy",
+    state: "CA",
+    zip_code: "95020",
+    latitude: 37.0058,
+    longitude: -121.5643,
+    features: {
+      indoor: true,
+      climate_controlled: true,
+      "24h_access": false,
+      security_system: true,
+      vehicle_washing: true
+    },
+    price_range: parsePriceRange(200, 350),
+    contact_phone: "(408) 843-9140",
+    contact_email: null,
+    avg_rating: null,
+    review_count: null,
+    verified_fields: {
+      features: true,
+      price_range: true,
+      contact_info: true,
+      location: true,
+      business_hours: false
+    }
+  },
+  {
+    name: "Premier Indoor Storage – Rancho Cucamonga",
+    address: "9275 Buffalo Ave",
+    city: "Rancho Cucamonga",
+    state: "CA",
+    zip_code: "91730",
+    latitude: 34.0952,
+    longitude: -117.5946,
+    features: {
+      indoor: true,
+      climate_controlled: true,
+      "24h_access": false,
+      security_system: true,
+      vehicle_washing: true
+    },
+    price_range: parsePriceRange(200, 400),
+    contact_phone: "(909) 476-9999",
+    contact_email: null,
+    avg_rating: 4.5,
+    review_count: 40,
+    verified_fields: {
+      features: true,
+      price_range: true,
+      contact_info: true,
+      location: true,
+      business_hours: false
+    }
+  },
+  {
+    name: "Acton Indoors RV & Boat Storage – Acton",
+    address: "2210 Soledad Canyon Rd",
+    city: "Acton",
+    state: "CA",
+    zip_code: "93510",
+    latitude: 34.4697,
+    longitude: -118.1937,
+    features: {
+      indoor: true,
+      climate_controlled: true,
+      "24h_access": false,
+      security_system: true,
+      vehicle_washing: false
+    },
+    price_range: parsePriceRange(200, 350),
+    contact_phone: "(661) 268-0000",
+    contact_email: null,
+    avg_rating: null,
+    review_count: null,
+    verified_fields: {
+      features: true,
+      price_range: true,
+      contact_info: true,
+      location: true,
+      business_hours: false
+    }
+  },
+  {
+    name: "Viking RV Storage – Shingle Springs",
+    address: "4481 Business Dr",
+    city: "Shingle Springs",
+    state: "CA",
+    zip_code: "95682",
+    latitude: 38.6743,
+    longitude: -120.9287,
+    features: {
+      indoor: true,
+      climate_controlled: true,
+      "24h_access": false,
+      security_system: true,
+      vehicle_washing: false
+    },
+    price_range: parsePriceRange(200, 400),
+    contact_phone: "(530) 676-1100",
+    contact_email: null,
+    avg_rating: 4.7,
+    review_count: 37,
+    verified_fields: {
+      features: true,
+      price_range: true,
+      contact_info: true,
+      location: true,
+      business_hours: false
+    }
+  },
+  {
+    name: "Bay Indoor RV & Boat Storage – Antioch",
+    address: "1400 W 4th St",
+    city: "Antioch",
+    state: "CA",
+    zip_code: "94509",
+    latitude: 38.0172,
+    longitude: -121.8127,
+    features: {
+      indoor: true,
+      climate_controlled: true,
+      "24h_access": false,
+      security_system: true,
+      vehicle_washing: false
+    },
+    price_range: parsePriceRange(200, 400),
+    contact_phone: "(925) 826-7600",
+    contact_email: null,
+    avg_rating: 4.5,
+    review_count: 27,
+    verified_fields: {
+      features: true,
+      price_range: true,
+      contact_info: true,
+      location: true,
+      business_hours: false
+    }
+  },
+  {
+    name: "River City Indoor RV & Boat Storage – Sacramento",
+    address: "8301 Belvedere Ave Ste 100",
+    city: "Sacramento",
+    state: "CA",
+    zip_code: "95826",
+    latitude: 38.5547,
+    longitude: -121.3797,
+    features: {
+      indoor: true,
+      climate_controlled: true,
+      "24h_access": true,
+      security_system: true,
+      vehicle_washing: false
+    },
+    price_range: parsePriceRange(200, 400),
+    contact_phone: "(916) 398-2050",
+    contact_email: null,
+    avg_rating: 4.5,
+    review_count: 38,
+    verified_fields: {
+      features: true,
+      price_range: true,
+      contact_info: true,
+      location: true,
+      business_hours: false
+    }
+  },
+  {
+    name: "Exclusive RV Services, Inc.",
+    address: "Located off 60 Freeway at Reservoir",
+    city: "Pomona",
+    state: "CA",
+    zip_code: "91766",
+    latitude: 34.0551,
+    longitude: -117.7499,
+    features: {
+      indoor: true,
+      climate_controlled: true,
+      "24h_access": true,
+      security_system: true,
+      vehicle_washing: true
+    },
+    price_range: parsePriceRange(200, 400),
+    contact_phone: "(909) 465-9492",
+    contact_email: null,
+    avg_rating: null,
+    review_count: null,
+    verified_fields: {
+      features: true,
+      price_range: true,
+      contact_info: true,
+      location: true,
+      business_hours: false
+    }
+  },
+  {
+    name: "Allec Self Storage",
+    address: "9750 Galena St",
+    city: "Riverside",
+    state: "CA",
+    zip_code: "92509",
+    latitude: 34.0333,
+    longitude: -117.3686,
+    features: {
+      indoor: true,
+      climate_controlled: true,
+      "24h_access": false,
+      security_system: true,
+      vehicle_washing: false
+    },
+    price_range: parsePriceRange(200, 400),
+    contact_phone: "(951) 681-3396",
+    contact_email: null,
+    avg_rating: null,
+    review_count: null,
+    verified_fields: {
+      features: true,
+      price_range: true,
+      contact_info: true,
+      location: true,
+      business_hours: false
+    }
+  },
+  {
+    name: "Red Carpet RV & Boat Storage – Santa Ana",
+    address: "3130 S Fairview St",
+    city: "Santa Ana",
+    state: "CA",
+    zip_code: "92704",
+    latitude: 33.7147,
+    longitude: -117.8776,
+    features: {
+      indoor: true,
+      climate_controlled: true,
+      "24h_access": false,
+      security_system: true,
+      vehicle_washing: true
+    },
+    price_range: parsePriceRange(200, 400),
+    contact_phone: "(714) 426-9986",
+    contact_email: null,
+    avg_rating: null,
+    review_count: null,
+    verified_fields: {
+      features: true,
+      price_range: true,
+      contact_info: true,
+      location: true,
+      business_hours: false
+    }
+  },
+  {
+    name: "RecNation RV & Boat Storage – Sacramento",
+    address: "5650 66th Ave",
+    city: "Sacramento",
+    state: "CA",
+    zip_code: "95823",
+    latitude: 38.5002,
+    longitude: -121.4276,
+    features: {
+      indoor: true,
+      climate_controlled: true,
+      "24h_access": false,
+      security_system: true,
+      vehicle_washing: false
+    },
+    price_range: parsePriceRange(200, 400),
+    contact_phone: "(916) 395-5563",
     contact_email: null,
     avg_rating: null,
     review_count: null,
