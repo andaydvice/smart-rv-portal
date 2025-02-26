@@ -841,9 +841,37 @@ export default function AddFacilityForm() {
     setLoading(true);
 
     try {
+      // First, let's check current count
+      const { count: currentCount } = await supabase
+        .from('storage_facilities')
+        .select('*', { count: 'exact', head: true })
+        .eq('state', 'CA');
+
+      console.log('Current CA facilities count:', currentCount);
+
+      // Get list of existing facility names
+      const { data: existingFacilities } = await supabase
+        .from('storage_facilities')
+        .select('name')
+        .eq('state', 'CA');
+
+      const existingNames = new Set(existingFacilities?.map(f => f.name) || []);
+      
+      // Filter out facilities that already exist
+      const newFacilities = facilitiesWithDefaults.filter(
+        facility => !existingNames.has(facility.name)
+      );
+
+      console.log('New facilities to add:', newFacilities.length);
+
+      if (newFacilities.length === 0) {
+        toast.info('All facilities already exist in the database');
+        return;
+      }
+
       const { data, error } = await supabase
         .from('storage_facilities')
-        .insert(facilitiesWithDefaults)
+        .insert(newFacilities)
         .select();
 
       if (error) throw error;
@@ -851,7 +879,16 @@ export default function AddFacilityForm() {
       await queryClient.invalidateQueries({ queryKey: ['storage-facilities'] });
       await queryClient.invalidateQueries({ queryKey: ['state-counts'] });
       
-      toast.success('All 31 California facilities added successfully!');
+      toast.success(`Successfully added ${newFacilities.length} new California facilities!`);
+      
+      // Verify final count
+      const { count: finalCount } = await supabase
+        .from('storage_facilities')
+        .select('*', { count: 'exact', head: true })
+        .eq('state', 'CA');
+
+      console.log('Final CA facilities count:', finalCount);
+
     } catch (error) {
       console.error('Error adding facilities:', error);
       toast.error(error.message || 'Failed to add facilities');
@@ -871,10 +908,10 @@ export default function AddFacilityForm() {
           {loading ? (
             <>
               <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-              Adding 31 California Facilities...
+              Adding California Facilities...
             </>
           ) : (
-            'Add 31 California Facilities'
+            'Add California Facilities'
           )}
         </Button>
       </form>
