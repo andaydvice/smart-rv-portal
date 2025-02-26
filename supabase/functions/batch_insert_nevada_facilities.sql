@@ -150,3 +150,4 @@ $$;
 
 -- Execute the function
 SELECT batch_insert_nevada_facilities();
+
