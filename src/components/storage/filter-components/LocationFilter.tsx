@@ -38,10 +38,17 @@ export const LocationFilter = ({ selectedState, states, onStateChange }: Locatio
         .select('*', { count: 'exact', head: true })
         .or('state.eq.TX,state.eq.Texas');
 
+      // Get exact count for Florida
+      const { count: floridaCount } = await supabase
+        .from('storage_facilities')
+        .select('*', { count: 'exact', head: true })
+        .or('state.eq.FL,state.eq.Florida');
+
       return [
         { state: 'California', count: californiaCount || 0 },
         { state: 'Arizona', count: arizonaCount || 0 },
-        { state: 'Texas', count: texasCount || 0 }
+        { state: 'Texas', count: texasCount || 0 },
+        { state: 'Florida', count: floridaCount || 0 }
       ].sort((a, b) => a.state.localeCompare(b.state));
     },
     staleTime: 0 // Remove cache to ensure fresh counts
