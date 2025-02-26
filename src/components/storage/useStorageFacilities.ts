@@ -54,13 +54,15 @@ export const useStorageFacilities = (filters: FilterState) => {
         priceRange: filters.priceRange
       });
       
-      // Handle different state formats for California
+      // Handle different state formats
       if (filters.selectedState === 'California') {
         query = query.or('state.eq.CA,state.eq.California');
       } else if (filters.selectedState === 'Arizona') {
         query = query.or('state.eq.AZ,state.eq.Arizona');
       } else if (filters.selectedState === 'Texas') {
         query = query.or('state.eq.TX,state.eq.Texas');
+      } else if (filters.selectedState === 'Florida') {
+        query = query.or('state.eq.FL,state.eq.Florida');
       } else if (filters.selectedState) {
         query = query.eq('state', filters.selectedState);
       }
@@ -85,7 +87,8 @@ export const useStorageFacilities = (filters: FilterState) => {
         city: facility.city,
         state: facility.state === 'AZ' ? 'Arizona' : 
                facility.state === 'CA' ? 'California' : 
-               facility.state === 'TX' ? 'Texas' : 
+               facility.state === 'TX' ? 'Texas' :
+               facility.state === 'FL' ? 'Florida' :
                facility.state,
         latitude: Number(facility.latitude),
         longitude: Number(facility.longitude),
