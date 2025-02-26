@@ -894,23 +894,43 @@ export default function AddFacilityForm() {
 
       if (newFacilities.length === 0) {
         toast.info('All facilities already exist in the database');
+        setLoading(false);
         return;
       }
 
-      const { data: insertedData, error: insertError } = await supabase
-        .from('storage_facilities')
-        .insert(newFacilities)
-        .select();
+      // Insert new facilities one by one to better track success/failure
+      let successCount = 0;
+      let failureCount = 0;
+      
+      for (const facility of newFacilities) {
+        const { data: insertedData, error: insertError } = await supabase
+          .from('storage_facilities')
+          .insert([facility])
+          .select();
 
-      if (insertError) throw insertError;
+        if (insertError) {
+          console.error(`Failed to insert ${facility.name}:`, insertError);
+          failureCount++;
+        } else {
+          console.log(`Successfully inserted ${facility.name}`);
+          successCount++;
+        }
+      }
 
       console.log('\n=== INSERTION RESULTS ===');
-      console.log(`Successfully inserted ${insertedData?.length} facilities`);
+      console.log(`Successfully inserted ${successCount} facilities`);
+      if (failureCount > 0) {
+        console.log(`Failed to insert ${failureCount} facilities`);
+      }
 
       await queryClient.invalidateQueries({ queryKey: ['storage-facilities'] });
       await queryClient.invalidateQueries({ queryKey: ['state-counts'] });
       
-      toast.success(`Successfully added ${newFacilities.length} new facilities (from ${currentFacilities?.length} to ${(currentFacilities?.length || 0) + newFacilities.length} total)!`);
+      if (failureCount > 0) {
+        toast.error(`Added ${successCount} facilities but failed to add ${failureCount} facilities`);
+      } else {
+        toast.success(`Successfully added ${successCount} new facilities (from ${currentFacilities?.length} to ${(currentFacilities?.length || 0) + successCount} total)!`);
+      }
 
       // Verify final state
       const { data: finalFacilities } = await supabase
