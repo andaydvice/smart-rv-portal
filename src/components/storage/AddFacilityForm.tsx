@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
@@ -898,39 +897,25 @@ export default function AddFacilityForm() {
         return;
       }
 
-      // Insert new facilities one by one to better track success/failure
-      let successCount = 0;
-      let failureCount = 0;
-      
-      for (const facility of newFacilities) {
-        const { data: insertedData, error: insertError } = await supabase
-          .from('storage_facilities')
-          .insert([facility])
-          .select();
+      // Insert ALL facilities at once using batch insert
+      const { data: insertedData, error: insertError } = await supabase
+        .from('storage_facilities')
+        .insert(newFacilities)
+        .select();
 
-        if (insertError) {
-          console.error(`Failed to insert ${facility.name}:`, insertError);
-          failureCount++;
-        } else {
-          console.log(`Successfully inserted ${facility.name}`);
-          successCount++;
-        }
+      if (insertError) {
+        console.error('Failed to insert facilities:', insertError);
+        toast.error('Failed to add facilities: ' + insertError.message);
+        return;
       }
 
       console.log('\n=== INSERTION RESULTS ===');
-      console.log(`Successfully inserted ${successCount} facilities`);
-      if (failureCount > 0) {
-        console.log(`Failed to insert ${failureCount} facilities`);
-      }
+      console.log(`Successfully inserted ${insertedData?.length} facilities`);
 
       await queryClient.invalidateQueries({ queryKey: ['storage-facilities'] });
       await queryClient.invalidateQueries({ queryKey: ['state-counts'] });
       
-      if (failureCount > 0) {
-        toast.error(`Added ${successCount} facilities but failed to add ${failureCount} facilities`);
-      } else {
-        toast.success(`Successfully added ${successCount} new facilities (from ${currentFacilities?.length} to ${(currentFacilities?.length || 0) + successCount} total)!`);
-      }
+      toast.success(`Successfully added ${insertedData?.length} new facilities!`);
 
       // Verify final state
       const { data: finalFacilities } = await supabase
