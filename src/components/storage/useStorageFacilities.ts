@@ -48,10 +48,13 @@ export const useStorageFacilities = (filters: FilterState) => {
           review_count
         `);
       
-      // Log the selected state for debugging
-      console.log('Selected state:', filters.selectedState);
+      // Log the query parameters for debugging
+      console.log('Query params:', {
+        selectedState: filters.selectedState,
+        priceRange: filters.priceRange
+      });
       
-      // Handle different state formats
+      // Handle different state formats for California
       if (filters.selectedState === 'California') {
         query = query.or('state.eq.CA,state.eq.California');
       } else if (filters.selectedState === 'Arizona') {
@@ -71,8 +74,9 @@ export const useStorageFacilities = (filters: FilterState) => {
       
       if (!data) return [];
 
-      // Log the raw data for debugging
-      console.log('Raw facilities data:', data);
+      // Log the results for verification
+      console.log('Total facilities fetched:', data.length);
+      console.log('Facility names:', data.map(f => f.name).sort());
 
       return data.map(facility => ({
         id: facility.id,
