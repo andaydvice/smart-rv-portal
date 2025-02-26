@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
@@ -7,8 +8,8 @@ import { Card } from '@/components/ui/card';
 import { useQueryClient } from '@tanstack/react-query';
 
 const parsePriceRange = (min: string | number | null, max: string | number | null) => {
-  const minAmount = typeof min === 'number' ? min === 'number' ? min : min ? parseInt(min) : 0;
-  const maxAmount = typeof max === 'number' ? max === 'number' ? max : max ? parseInt(max) : 0;
+  const minAmount = typeof min === 'number' ? min : min ? parseInt(min) : 0;
+  const maxAmount = typeof max === 'number' ? max : max ? parseInt(max) : 0;
   return {
     min: minAmount,
     max: maxAmount,
@@ -879,4 +880,4 @@ export default function AddFacilityForm() {
       </form>
     </Card>
   );
-};
+}
