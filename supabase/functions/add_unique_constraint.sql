@@ -42,3 +42,4 @@ INSERT INTO storage_facilities (
     'linda@longleycorners.com'
 )
 ON CONFLICT (name, address) DO NOTHING;
+
