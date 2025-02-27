@@ -53,28 +53,65 @@ export const LocationFilter = ({ selectedState, states, onStateChange }: Locatio
         return [];
       }
       
-      // Create a unique list of states and convert abbreviations to full names
-      const stateCountMap: Record<string, number> = {};
+      // Let's use a more direct approach to query each possible state format
+      // First, collect all unique states and their full names
+      const uniqueStates = new Set<string>();
+      const stateToFullName: Record<string, string> = {};
       
       for (const item of statesData) {
         const fullStateName = isStateAbbreviation(item.state) 
           ? getFullStateName(item.state) 
           : item.state;
-          
-        // Initialize or increment the count for this state
-        stateCountMap[fullStateName] = (stateCountMap[fullStateName] || 0) + 1;
+        
+        stateToFullName[item.state] = fullStateName;
+        uniqueStates.add(fullStateName);
       }
       
-      // Convert the map to array format
-      const statesWithCountsArray = Object.entries(stateCountMap).map(
-        ([state, count]) => ({ 
-          state, 
-          stateCode: state, // This will be the full name now
-          count 
+      // Now calculate counts for each state
+      const result = await Promise.all(
+        Array.from(uniqueStates).map(async (fullStateName) => {
+          // Find all abbreviations that map to this full name
+          const stateKeys = Object.keys(stateToFullName).filter(
+            key => stateToFullName[key] === fullStateName
+          );
+          
+          // If we have just one entry for this state, do a simple count
+          if (stateKeys.length === 1) {
+            const { count, error } = await supabase
+              .from('storage_facilities')
+              .select('*', { count: 'exact', head: true })
+              .eq('state', stateKeys[0]);
+            
+            if (error) {
+              console.error(`Error fetching count for ${stateKeys[0]}:`, error);
+              return { state: fullStateName, count: 0 };
+            }
+            
+            return { state: fullStateName, count: count || 0 };
+          }
+          else {
+            // For states with multiple formats (e.g., "CO" and "Colorado"),
+            // we need to count using OR conditions
+            const orCondition = stateKeys.map(key => `state.eq.${key}`).join(',');
+            const { count, error } = await supabase
+              .from('storage_facilities')
+              .select('*', { count: 'exact', head: true })
+              .or(orCondition);
+            
+            if (error) {
+              console.error(`Error fetching count for ${fullStateName}:`, error);
+              return { state: fullStateName, count: 0 };
+            }
+            
+            return { state: fullStateName, count: count || 0 };
+          }
         })
       );
       
-      return statesWithCountsArray.sort((a, b) => a.state.localeCompare(b.state));
+      // Filter out states with 0 count and sort alphabetically
+      return result
+        .filter(item => item.count > 0)
+        .sort((a, b) => a.state.localeCompare(b.state));
     },
     staleTime: 60000 // 1 minute cache
   });
