@@ -17,48 +17,27 @@ interface LocationFilterProps {
 }
 
 export const LocationFilter = ({ selectedState, states, onStateChange }: LocationFilterProps) => {
-  const { data: statesWithCounts } = useQuery({
-    queryKey: ['state-counts'],
+  const { data: statesWithCounts, isLoading } = useQuery({
+    queryKey: ['all-state-counts'],
     queryFn: async () => {
-      // Get exact count for California including both CA and California in state field
-      const { count: californiaCount } = await supabase
+      // Get list of all unique states with counts
+      const { data, error } = await supabase
         .from('storage_facilities')
-        .select('*', { count: 'exact', head: true })
-        .or('state.eq.CA,state.eq.California');
-
-      // Get exact count for Arizona
-      const { count: arizonaCount } = await supabase
-        .from('storage_facilities')
-        .select('*', { count: 'exact', head: true })
-        .or('state.eq.AZ,state.eq.Arizona');
-
-      // Get exact count for Texas
-      const { count: texasCount } = await supabase
-        .from('storage_facilities')
-        .select('*', { count: 'exact', head: true })
-        .or('state.eq.TX,state.eq.Texas');
-
-      // Get exact count for Florida
-      const { count: floridaCount } = await supabase
-        .from('storage_facilities')
-        .select('*', { count: 'exact', head: true })
-        .or('state.eq.FL,state.eq.Florida');
-
-      // Get exact count for Nevada
-      const { count: nevadaCount } = await supabase
-        .from('storage_facilities')
-        .select('*', { count: 'exact', head: true })
-        .or('state.eq.NV,state.eq.Nevada');
-
-      return [
-        { state: 'California', count: californiaCount || 0 },
-        { state: 'Arizona', count: arizonaCount || 0 },
-        { state: 'Texas', count: texasCount || 0 },
-        { state: 'Florida', count: floridaCount || 0 },
-        { state: 'Nevada', count: nevadaCount || 0 }
-      ].sort((a, b) => a.state.localeCompare(b.state));
+        .select('state, count(*)', { count: 'exact' })
+        .group('state')
+        .order('state');
+      
+      if (error) {
+        console.error('Error fetching states:', error);
+        return [];
+      }
+      
+      return data.map(item => ({
+        state: item.state,
+        count: item.count || 0
+      }));
     },
-    staleTime: 0 // Remove cache to ensure fresh counts
+    staleTime: 60000 // 1 minute cache
   });
 
   const displayStates = statesWithCounts || states;
@@ -91,18 +70,24 @@ export const LocationFilter = ({ selectedState, states, onStateChange }: Locatio
             }}
           >
             <SelectItem value="all" className="text-white focus:bg-[#2a2f3e] focus:text-white">All States</SelectItem>
-            {displayStates.map((state) => (
-              <SelectItem 
-                key={state.state} 
-                value={state.state}
-                className="text-white focus:bg-[#2a2f3e] focus:text-white"
-              >
-                <div className="flex items-center justify-between w-full">
-                  <span>{state.state}</span>
-                  <span className="text-sm text-gray-400">({state.count})</span>
-                </div>
+            {isLoading ? (
+              <SelectItem value="loading" disabled className="text-gray-400">
+                Loading states...
               </SelectItem>
-            ))}
+            ) : (
+              displayStates.map((state) => (
+                <SelectItem 
+                  key={state.state} 
+                  value={state.state}
+                  className="text-white focus:bg-[#2a2f3e] focus:text-white"
+                >
+                  <div className="flex items-center justify-between w-full">
+                    <span>{state.state}</span>
+                    <span className="text-sm text-gray-400">({state.count})</span>
+                  </div>
+                </SelectItem>
+              ))
+            )}
           </SelectContent>
         </Select>
       </div>
