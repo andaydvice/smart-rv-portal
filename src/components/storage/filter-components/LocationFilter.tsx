@@ -42,76 +42,40 @@ export const LocationFilter = ({ selectedState, states, onStateChange }: Locatio
   const { data: statesWithCounts, isLoading } = useQuery({
     queryKey: ['all-state-counts'],
     queryFn: async () => {
-      // Get list of all states first
-      const { data: statesData, error: statesError } = await supabase
+      // First, get a list of all facilities with their states
+      const { data: facilities, error: facilitiesError } = await supabase
         .from('storage_facilities')
-        .select('state')
-        .order('state');
+        .select('id, state');
       
-      if (statesError) {
-        console.error('Error fetching states:', statesError);
+      if (facilitiesError) {
+        console.error('Error fetching facilities:', facilitiesError);
         return [];
       }
       
-      // Let's use a more direct approach to query each possible state format
-      // First, collect all unique states and their full names
-      const uniqueStates = new Set<string>();
-      const stateToFullName: Record<string, string> = {};
+      // Create a map to track unique facilities by state
+      const facilityStateMap: Record<string, Set<string>> = {};
       
-      for (const item of statesData) {
-        const fullStateName = isStateAbbreviation(item.state) 
-          ? getFullStateName(item.state) 
-          : item.state;
+      // Process each facility and add it to the appropriate state's set
+      for (const facility of facilities) {
+        const stateName = isStateAbbreviation(facility.state) 
+          ? getFullStateName(facility.state) 
+          : facility.state;
         
-        stateToFullName[item.state] = fullStateName;
-        uniqueStates.add(fullStateName);
+        if (!facilityStateMap[stateName]) {
+          facilityStateMap[stateName] = new Set();
+        }
+        
+        facilityStateMap[stateName].add(facility.id);
       }
       
-      // Now calculate counts for each state
-      const result = await Promise.all(
-        Array.from(uniqueStates).map(async (fullStateName) => {
-          // Find all abbreviations that map to this full name
-          const stateKeys = Object.keys(stateToFullName).filter(
-            key => stateToFullName[key] === fullStateName
-          );
-          
-          // If we have just one entry for this state, do a simple count
-          if (stateKeys.length === 1) {
-            const { count, error } = await supabase
-              .from('storage_facilities')
-              .select('*', { count: 'exact', head: true })
-              .eq('state', stateKeys[0]);
-            
-            if (error) {
-              console.error(`Error fetching count for ${stateKeys[0]}:`, error);
-              return { state: fullStateName, count: 0 };
-            }
-            
-            return { state: fullStateName, count: count || 0 };
-          }
-          else {
-            // For states with multiple formats (e.g., "CO" and "Colorado"),
-            // we need to count using OR conditions
-            const orCondition = stateKeys.map(key => `state.eq.${key}`).join(',');
-            const { count, error } = await supabase
-              .from('storage_facilities')
-              .select('*', { count: 'exact', head: true })
-              .or(orCondition);
-            
-            if (error) {
-              console.error(`Error fetching count for ${fullStateName}:`, error);
-              return { state: fullStateName, count: 0 };
-            }
-            
-            return { state: fullStateName, count: count || 0 };
-          }
-        })
-      );
+      // Convert the map to our result format with accurate counts
+      const result = Object.entries(facilityStateMap).map(([state, facilityIds]) => ({
+        state,
+        count: facilityIds.size // Using the Set size gives us the unique facility count
+      }));
       
-      // Filter out states with 0 count and sort alphabetically
-      return result
-        .filter(item => item.count > 0)
-        .sort((a, b) => a.state.localeCompare(b.state));
+      // Sort alphabetically by state name
+      return result.sort((a, b) => a.state.localeCompare(b.state));
     },
     staleTime: 60000 // 1 minute cache
   });
