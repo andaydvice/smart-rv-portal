@@ -20,22 +20,38 @@ export const LocationFilter = ({ selectedState, states, onStateChange }: Locatio
   const { data: statesWithCounts, isLoading } = useQuery({
     queryKey: ['all-state-counts'],
     queryFn: async () => {
-      // Get list of all unique states with counts
-      const { data, error } = await supabase
+      // Get list of all states first
+      const { data: statesData, error: statesError } = await supabase
         .from('storage_facilities')
-        .select('state, count(*)', { count: 'exact' })
-        .group('state')
+        .select('state')
         .order('state');
       
-      if (error) {
-        console.error('Error fetching states:', error);
+      if (statesError) {
+        console.error('Error fetching states:', statesError);
         return [];
       }
       
-      return data.map(item => ({
-        state: item.state,
-        count: item.count || 0
-      }));
+      // Create a unique list of states
+      const uniqueStates = [...new Set(statesData.map(item => item.state))];
+      
+      // Get count for each state
+      const statesWithCountsArray = await Promise.all(
+        uniqueStates.map(async (state) => {
+          const { count, error } = await supabase
+            .from('storage_facilities')
+            .select('*', { count: 'exact', head: true })
+            .eq('state', state);
+          
+          if (error) {
+            console.error(`Error fetching count for ${state}:`, error);
+            return { state, count: 0 };
+          }
+          
+          return { state, count: count || 0 };
+        })
+      );
+      
+      return statesWithCountsArray.sort((a, b) => a.state.localeCompare(b.state));
     },
     staleTime: 60000 // 1 minute cache
   });
