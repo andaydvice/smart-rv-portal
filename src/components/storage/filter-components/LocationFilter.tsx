@@ -33,6 +33,11 @@ const getFullStateName = (stateCode: string): string => {
   return stateMap[stateCode] || stateCode;
 };
 
+// Helper to determine if a string is a state abbreviation
+const isStateAbbreviation = (state: string): boolean => {
+  return state.length === 2 && /^[A-Z]{2}$/.test(state);
+};
+
 export const LocationFilter = ({ selectedState, states, onStateChange }: LocationFilterProps) => {
   const { data: statesWithCounts, isLoading } = useQuery({
     queryKey: ['all-state-counts'],
@@ -48,27 +53,24 @@ export const LocationFilter = ({ selectedState, states, onStateChange }: Locatio
         return [];
       }
       
-      // Create a unique list of states
-      const uniqueStates = [...new Set(statesData.map(item => item.state))];
+      // Create a unique list of states and convert abbreviations to full names
+      const stateCountMap: Record<string, number> = {};
       
-      // Get count for each state
-      const statesWithCountsArray = await Promise.all(
-        uniqueStates.map(async (stateCode) => {
-          const { count, error } = await supabase
-            .from('storage_facilities')
-            .select('*', { count: 'exact', head: true })
-            .eq('state', stateCode);
+      for (const item of statesData) {
+        const fullStateName = isStateAbbreviation(item.state) 
+          ? getFullStateName(item.state) 
+          : item.state;
           
-          if (error) {
-            console.error(`Error fetching count for ${stateCode}:`, error);
-            return { state: getFullStateName(stateCode), stateCode, count: 0 };
-          }
-          
-          return { 
-            state: getFullStateName(stateCode), 
-            stateCode,
-            count: count || 0 
-          };
+        // Initialize or increment the count for this state
+        stateCountMap[fullStateName] = (stateCountMap[fullStateName] || 0) + 1;
+      }
+      
+      // Convert the map to array format
+      const statesWithCountsArray = Object.entries(stateCountMap).map(
+        ([state, count]) => ({ 
+          state, 
+          stateCode: state, // This will be the full name now
+          count 
         })
       );
       
