@@ -65,6 +65,8 @@ export const useStorageFacilities = (filters: FilterState) => {
         query = query.or('state.eq.FL,state.eq.Florida');
       } else if (filters.selectedState === 'Nevada') {
         query = query.or('state.eq.NV,state.eq.Nevada');
+      } else if (filters.selectedState === 'Colorado') {
+        query = query.or('state.eq.CO,state.eq.Colorado');
       } else if (filters.selectedState === 'Lowa') {
         query = query.or('state.eq.IA,state.eq.Lowa');
       } else if (filters.selectedState === 'Minnesota') {
@@ -95,6 +97,7 @@ export const useStorageFacilities = (filters: FilterState) => {
         city: facility.city,
         state: facility.state === 'AZ' ? 'Arizona' : 
                facility.state === 'CA' ? 'California' : 
+               facility.state === 'CO' ? 'Colorado' :
                facility.state === 'TX' ? 'Texas' :
                facility.state === 'FL' ? 'Florida' :
                facility.state === 'NV' ? 'Nevada' :

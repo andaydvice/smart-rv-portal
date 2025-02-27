@@ -21,6 +21,7 @@ const getFullStateName = (stateCode: string): string => {
   const stateMap: Record<string, string> = {
     'AZ': 'Arizona',
     'CA': 'California',
+    'CO': 'Colorado',
     'FL': 'Florida',
     'NV': 'Nevada',
     'TX': 'Texas',
