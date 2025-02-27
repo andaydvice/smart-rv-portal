@@ -11,7 +11,7 @@ export default function StorageFacilities() {
             Indoor RV Storage Facilities
           </h1>
           <p className="text-lg text-gray-300 mb-8">
-            Find the perfect indoor storage solution for your RV across the USA including Minnesota, Iowa, Wisconsin, California, Arizona, Texas, Florida and Nevada.
+            Find the perfect indoor storage solution for your RV across the USA including Minnesota, Lowa, Wisconsin, California, Arizona, Texas, Florida and Nevada.
           </p>
           <StorageFacilitiesMap />
         </div>

@@ -24,7 +24,7 @@ const getFullStateName = (stateCode: string): string => {
     'FL': 'Florida',
     'NV': 'Nevada',
     'TX': 'Texas',
-    'IA': 'Iowa',
+    'IA': 'Lowa', // Corrected spelling from Iowa to Lowa
     'MN': 'Minnesota',
     'WI': 'Wisconsin'
   };
