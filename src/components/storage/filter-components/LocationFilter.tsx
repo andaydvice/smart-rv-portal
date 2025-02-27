@@ -16,6 +16,22 @@ interface LocationFilterProps {
   onStateChange: (state: string | null) => void;
 }
 
+// Helper function to convert state abbreviation to full name
+const getFullStateName = (stateCode: string): string => {
+  const stateMap: Record<string, string> = {
+    'AZ': 'Arizona',
+    'CA': 'California',
+    'FL': 'Florida',
+    'NV': 'Nevada',
+    'TX': 'Texas',
+    'IA': 'Iowa',
+    'MN': 'Minnesota',
+    'WI': 'Wisconsin'
+  };
+  
+  return stateMap[stateCode] || stateCode;
+};
+
 export const LocationFilter = ({ selectedState, states, onStateChange }: LocationFilterProps) => {
   const { data: statesWithCounts, isLoading } = useQuery({
     queryKey: ['all-state-counts'],
@@ -36,18 +52,22 @@ export const LocationFilter = ({ selectedState, states, onStateChange }: Locatio
       
       // Get count for each state
       const statesWithCountsArray = await Promise.all(
-        uniqueStates.map(async (state) => {
+        uniqueStates.map(async (stateCode) => {
           const { count, error } = await supabase
             .from('storage_facilities')
             .select('*', { count: 'exact', head: true })
-            .eq('state', state);
+            .eq('state', stateCode);
           
           if (error) {
-            console.error(`Error fetching count for ${state}:`, error);
-            return { state, count: 0 };
+            console.error(`Error fetching count for ${stateCode}:`, error);
+            return { state: getFullStateName(stateCode), stateCode, count: 0 };
           }
           
-          return { state, count: count || 0 };
+          return { 
+            state: getFullStateName(stateCode), 
+            stateCode,
+            count: count || 0 
+          };
         })
       );
       
@@ -91,15 +111,15 @@ export const LocationFilter = ({ selectedState, states, onStateChange }: Locatio
                 Loading states...
               </SelectItem>
             ) : (
-              displayStates.map((state) => (
+              displayStates.map((stateItem) => (
                 <SelectItem 
-                  key={state.state} 
-                  value={state.state}
+                  key={stateItem.state} 
+                  value={stateItem.state}
                   className="text-white focus:bg-[#2a2f3e] focus:text-white"
                 >
                   <div className="flex items-center justify-between w-full">
-                    <span>{state.state}</span>
-                    <span className="text-sm text-gray-400">({state.count})</span>
+                    <span>{stateItem.state}</span>
+                    <span className="text-sm text-gray-400">({stateItem.count})</span>
                   </div>
                 </SelectItem>
               ))
