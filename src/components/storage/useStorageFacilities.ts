@@ -65,6 +65,12 @@ export const useStorageFacilities = (filters: FilterState) => {
         query = query.or('state.eq.FL,state.eq.Florida');
       } else if (filters.selectedState === 'Nevada') {
         query = query.or('state.eq.NV,state.eq.Nevada');
+      } else if (filters.selectedState === 'Iowa') {
+        query = query.or('state.eq.IA,state.eq.Iowa');
+      } else if (filters.selectedState === 'Minnesota') {
+        query = query.or('state.eq.MN,state.eq.Minnesota');
+      } else if (filters.selectedState === 'Wisconsin') {
+        query = query.or('state.eq.WI,state.eq.Wisconsin');
       } else if (filters.selectedState) {
         query = query.eq('state', filters.selectedState);
       }
@@ -92,6 +98,9 @@ export const useStorageFacilities = (filters: FilterState) => {
                facility.state === 'TX' ? 'Texas' :
                facility.state === 'FL' ? 'Florida' :
                facility.state === 'NV' ? 'Nevada' :
+               facility.state === 'IA' ? 'Iowa' :
+               facility.state === 'MN' ? 'Minnesota' :
+               facility.state === 'WI' ? 'Wisconsin' :
                facility.state,
         latitude: Number(facility.latitude),
         longitude: Number(facility.longitude),
