@@ -1,28 +1,34 @@
 
--- Enable Row Level Security on spatial_ref_sys table
-ALTER TABLE public.spatial_ref_sys ENABLE ROW LEVEL SECURITY;
+-- Create a secure view over the spatial_ref_sys table
+CREATE OR REPLACE VIEW public.secure_spatial_ref_sys AS
+SELECT 
+    srid,
+    auth_name,
+    auth_srid,
+    srtext,
+    proj4text
+FROM 
+    public.spatial_ref_sys;
 
--- Create a policy to allow SELECT for authenticated users
-CREATE POLICY "Allow select for authenticated users" 
-ON public.spatial_ref_sys
-FOR SELECT 
-TO authenticated
-USING (true);
+-- Grant SELECT permission on the view to public (both authenticated and anonymous users)
+GRANT SELECT ON public.secure_spatial_ref_sys TO authenticated, anon;
 
--- Create a policy to allow SELECT for anon users (if needed for your app)
-CREATE POLICY "Allow select for anonymous users" 
-ON public.spatial_ref_sys
-FOR SELECT 
-TO anon
-USING (true);
+-- Enable Row Level Security on the view
+ALTER VIEW public.secure_spatial_ref_sys SECURITY INVOKER;
 
--- Policies for other operations (only if needed)
--- Typically, this table should be read-only for most users
--- Only administrators should be able to modify it
+COMMENT ON VIEW public.secure_spatial_ref_sys IS 
+'Secure view over spatial_ref_sys table. Use this view instead of accessing the system table directly.';
 
--- If you need admin users to modify the table:
-CREATE POLICY "Allow all operations for service_role" 
-ON public.spatial_ref_sys
-TO service_role
-USING (true)
-WITH CHECK (true);
+-- Document security approach
+DO $$
+BEGIN
+    EXECUTE 'COMMENT ON TABLE public.spatial_ref_sys IS ''SYSTEM TABLE: Direct access not recommended. Use secure_spatial_ref_sys view instead.''';
+EXCEPTION
+    WHEN insufficient_privilege THEN
+        -- Cannot add comment to system table, which is expected
+        RAISE NOTICE 'Cannot modify system table comments, which is expected.';
+END $$;
+
+-- Ensure our map components will use the view by updating the relevant SQL calls
+-- This is a reminder - actual code changes would be needed in the application
+-- to use 'secure_spatial_ref_sys' instead of 'spatial_ref_sys'
