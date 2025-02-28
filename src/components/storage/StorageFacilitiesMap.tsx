@@ -136,7 +136,7 @@ const StorageFacilitiesMap = () => {
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 min-h-[800px]">
-      <div className="lg:col-span-3">
+      <div className="lg:col-span-4">
         <div className="space-y-4">
           <Button
             onClick={toggleView}
@@ -160,7 +160,7 @@ const StorageFacilitiesMap = () => {
           </Card>
         </div>
       </div>
-      <Card className="lg:col-span-9 h-[800px] bg-[#080F1F] relative overflow-hidden">
+      <Card className="lg:col-span-8 h-[800px] bg-[#080F1F] relative overflow-hidden">
         {(!mapToken) ? (
           <Alert variant="destructive" className="m-4">
             <AlertCircle className="h-4 w-4" />

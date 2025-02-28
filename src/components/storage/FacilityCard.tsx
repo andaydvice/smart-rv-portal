@@ -103,7 +103,7 @@ const FacilityCard = ({ facility, isHighlighted, onClick }: FacilityCardProps) =
           <Button
             variant="ghost"
             size="icon"
-            className="h-8 w-8"
+            className="h-8 w-8 flex-shrink-0 ml-2"
             disabled={isLoading}
             onClick={handleFavoriteClick}
           >
