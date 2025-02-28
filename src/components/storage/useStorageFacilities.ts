@@ -78,7 +78,7 @@ export const useStorageFacilities = (filters: FilterState) => {
       } else if (filters.selectedState === 'Pennsylvania') {
         query = query.or('state.eq.PA,state.eq.Pennsylvania');
       } else if (filters.selectedState === 'New York') {
-        query = query.or('state.eq.NY,state.eq.New York');
+        query = query.or('state.eq.NY,state.eq.New York,state.ilike.New York');
       } else if (filters.selectedState) {
         query = query.eq('state', filters.selectedState);
       }
@@ -95,6 +95,7 @@ export const useStorageFacilities = (filters: FilterState) => {
       // Log the results for verification
       console.log('Total facilities fetched:', data.length);
       console.log('Facility names:', data.map(f => f.name).sort());
+      console.log('States returned:', data.map(f => f.state).sort());
 
       return data.map(facility => ({
         id: facility.id,

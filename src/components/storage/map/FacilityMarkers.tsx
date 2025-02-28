@@ -24,6 +24,9 @@ const FacilityMarkers: React.FC<FacilityMarkersProps> = ({
     markers.current.forEach(marker => marker.remove());
     markers.current = [];
 
+    // Log the number of facilities to be displayed
+    console.log(`Creating markers for ${facilities.length} facilities`);
+    
     // Group facilities by their coordinates
     const coordGroups = facilities.reduce((groups: { [key: string]: StorageFacility[] }, facility) => {
       const key = `${facility.latitude.toFixed(6)},${facility.longitude.toFixed(6)}`;
@@ -38,11 +41,14 @@ const FacilityMarkers: React.FC<FacilityMarkersProps> = ({
     Object.values(coordGroups).forEach((groupFacilities, groupIndex) => {
       groupFacilities.forEach((facility, index) => {
         // Calculate offset for facilities with same coordinates
-        const offsetDistance = 0.004; // Increased to roughly 400 meters for better visibility
+        const offsetDistance = 0.004; // Roughly 400 meters for better visibility
         const angle = (2 * Math.PI * index) / groupFacilities.length;
         
         const adjustedLng = facility.longitude + (groupFacilities.length > 1 ? Math.cos(angle) * offsetDistance : 0);
         const adjustedLat = facility.latitude + (groupFacilities.length > 1 ? Math.sin(angle) * offsetDistance : 0);
+
+        // Log individual marker creation for debugging
+        console.log(`Creating marker for: ${facility.name}, ${facility.state} at ${adjustedLat},${adjustedLng}`);
 
         const popup = new mapboxgl.Popup({
           offset: 25,
