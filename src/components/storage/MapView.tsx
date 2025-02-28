@@ -49,6 +49,15 @@ const MapView = ({
   const [mapError, setMapError] = useState<string | null>(null);
   const [isInitializing, setIsInitializing] = useState(true);
   const [mapLoaded, setMapLoaded] = useState(false);
+  
+  // Debug output - log facilities count whenever it changes
+  useEffect(() => {
+    console.log(`MapView received ${facilities.length} facilities to display`);
+    if (facilities.length > 0) {
+      console.log('First facility:', facilities[0]);
+      console.log('Last facility:', facilities[facilities.length - 1]);
+    }
+  }, [facilities]);
 
   useEffect(() => {
     if (!mapContainer.current || !mapToken) return;
@@ -125,6 +134,29 @@ const MapView = ({
           setMapError(null);
           setIsInitializing(false);
           setMapLoaded(true);
+          
+          // If we have a selected state, adjust the map view
+          if (selectedState && facilities.length > 0) {
+            try {
+              // Calculate bounds of all facilities
+              const bounds = new mapboxgl.LngLatBounds();
+              facilities.forEach(facility => {
+                if (facility.longitude && facility.latitude) {
+                  bounds.extend([facility.longitude, facility.latitude]);
+                }
+              });
+              
+              // Fit map to these bounds if we have valid coordinates
+              if (!bounds.isEmpty()) {
+                newMap.fitBounds(bounds, {
+                  padding: 50,
+                  maxZoom: 10
+                });
+              }
+            } catch (error) {
+              console.error('Error setting map bounds:', error);
+            }
+          }
         }
 
       } catch (err) {
@@ -149,7 +181,7 @@ const MapView = ({
         map.current = null;
       }
     };
-  }, [mapToken]);
+  }, [mapToken, selectedState]);
 
   return (
     <div className="relative w-full h-full">
@@ -159,6 +191,14 @@ const MapView = ({
           <AlertDescription>{mapError}</AlertDescription>
         </Alert>
       )}
+      
+      {/* Show the facilities count in a small overlay (in dev mode only) */}
+      {process.env.NODE_ENV === 'development' && (
+        <div className="absolute top-2 right-2 z-50 bg-gray-800 text-white px-2 py-1 rounded text-xs">
+          Facilities: {facilities.length}
+        </div>
+      )}
+      
       <div 
         ref={mapContainer} 
         className="w-full h-full" 
@@ -171,11 +211,12 @@ const MapView = ({
       {map.current && mapLoaded && (
         <>
           <MapControls map={map.current} />
-          <ClusterLayer
+          {/* Disable clustering temporarily for debugging */}
+          {/* <ClusterLayer
             map={map.current}
             facilities={facilities}
             highlightedFacility={highlightedFacility}
-          />
+          /> */}
           <FacilityMarkers
             map={map.current}
             facilities={facilities}
