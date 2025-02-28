@@ -6,7 +6,8 @@ import Layout from "@/components/layout/Layout";
 
 export default function StorageFacilities() {
   return (
-    <Layout>
+    <>
+      <Navbar />
       <div className="min-h-screen bg-[#080F1F] text-white pt-24">
         <Container>
           <div className="py-8">
@@ -20,6 +21,6 @@ export default function StorageFacilities() {
           </div>
         </Container>
       </div>
-    </Layout>
+    </>
   );
 }
