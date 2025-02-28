@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import NavbarContainer from "./navbar/NavbarContainer";
 import MobileMenu from "./navbar/MobileMenu";
 import { useAuth } from "./auth/AuthContext";
@@ -7,7 +7,10 @@ import { useAuth } from "./auth/AuthContext";
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { user } = useAuth();
-  console.log("Navbar - Current user:", user); // Debug log
+  
+  useEffect(() => {
+    console.log("Navbar effect - Menu state:", isOpen);
+  }, [isOpen]);
   
   const [openSections, setOpenSections] = useState<Record<string, boolean>>({
     core: false,
@@ -15,15 +18,16 @@ const Navbar = () => {
     vehicles: false,
     support: false,
     customer: false,
-    tools: false // Ensuring this is properly initialized
+    tools: false
   });
 
   const toggleMenu = () => {
     console.log("Toggling mobile menu, previous state:", isOpen);
-    setIsOpen(!isOpen);
-    setTimeout(() => {
-      console.log("Menu state after update:", !isOpen);
-    }, 0);
+    setIsOpen(prevState => {
+      const newState = !prevState;
+      console.log("Menu will update to:", newState);
+      return newState;
+    });
   };
 
   const toggleSection = (section: string) => {
@@ -32,7 +36,14 @@ const Navbar = () => {
       ...prev,
       [section]: !prev[section]
     }));
+    
+    // Log after state update
+    setTimeout(() => {
+      console.log(`Section ${section} new state:`, !openSections[section]);
+    }, 0);
   };
+
+  console.log("Navbar rendering, isOpen:", isOpen);
 
   return (
     <div className="relative">

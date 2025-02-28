@@ -1,4 +1,6 @@
+
 import { Menu, X } from "lucide-react";
+import { useState, useEffect } from "react";
 
 interface MenuButtonProps {
   isOpen: boolean;
@@ -8,10 +10,17 @@ interface MenuButtonProps {
 const MenuButton = ({ isOpen, onClick }: MenuButtonProps) => {
   console.log("MenuButton rendered, isOpen:", isOpen);
   
-  const handleClick = () => {
-    console.log("MenuButton clicked!");
+  const handleClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    console.log("MenuButton clicked! Current state:", isOpen);
     onClick();
   };
+  
+  // Force re-render if isOpen changes
+  useEffect(() => {
+    console.log("MenuButton effect triggered, isOpen:", isOpen);
+  }, [isOpen]);
   
   return (
     <button
