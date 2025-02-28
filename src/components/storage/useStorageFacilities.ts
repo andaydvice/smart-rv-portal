@@ -67,8 +67,8 @@ export const useStorageFacilities = (filters: FilterState) => {
         query = query.or('state.eq.NV,state.eq.Nevada');
       } else if (filters.selectedState === 'Colorado') {
         query = query.or('state.eq.CO,state.eq.Colorado');
-      } else if (filters.selectedState === 'Iowa') {
-        query = query.or('state.eq.IA,state.eq.Iowa');
+      } else if (filters.selectedState === 'Lowa') {
+        query = query.or('state.eq.IA,state.eq.Lowa');
       } else if (filters.selectedState === 'Minnesota') {
         query = query.or('state.eq.MN,state.eq.Minnesota');
       } else if (filters.selectedState === 'Wisconsin') {
@@ -103,7 +103,7 @@ export const useStorageFacilities = (filters: FilterState) => {
                facility.state === 'TX' ? 'Texas' :
                facility.state === 'FL' ? 'Florida' :
                facility.state === 'NV' ? 'Nevada' :
-               facility.state === 'IA' ? 'Iowa' :
+               facility.state === 'IA' ? 'Lowa' :
                facility.state === 'MN' ? 'Minnesota' :
                facility.state === 'WI' ? 'Wisconsin' :
                facility.state === 'OR' ? 'Oregon' :

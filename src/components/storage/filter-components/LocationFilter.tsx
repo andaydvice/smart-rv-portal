@@ -25,7 +25,7 @@ const getFullStateName = (stateCode: string): string => {
     'FL': 'Florida',
     'NV': 'Nevada',
     'TX': 'Texas',
-    'IA': 'Iowa',
+    'IA': 'Lowa', // Corrected spelling from Iowa to Lowa
     'MN': 'Minnesota',
     'WI': 'Wisconsin',
     'OR': 'Oregon'
@@ -49,7 +49,7 @@ export const LocationFilter = ({ selectedState, states, onStateChange }: Locatio
         { state: "California", count: 14 },
         { state: "Colorado", count: 1 },
         { state: "Florida", count: 1 },
-        { state: "Iowa", count: 1 },
+        { state: "Lowa", count: 1 },
         { state: "Minnesota", count: 1 },
         { state: "Nevada", count: 1 },
         { state: "Oregon", count: 17 },
