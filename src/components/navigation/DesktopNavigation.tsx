@@ -1,6 +1,6 @@
 
 import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuList, NavigationMenuTrigger } from "@/components/ui/navigation-menu";
-import { CoreSystemsLinks, SmartFeaturesLinks, VehicleSelectionLinks, SupportLinks, CustomerSupportLinks } from "../NavbarLinks";
+import { CoreSystemsLinks, SmartFeaturesLinks, VehicleSelectionLinks, SupportLinks, CustomerSupportLinks, RVToolsLinks } from "../NavbarLinks";
 import { Link, useLocation } from "react-router-dom";
 import { Calculator, BookOpen, Home, LogIn, User, LogOut } from "lucide-react";
 import { useAuth } from "@/components/auth/AuthContext";
@@ -79,13 +79,14 @@ const DesktopNavigation = () => {
           </NavigationMenuItem>
 
           <NavigationMenuItem className="flex">
-            <Link 
-              to="/calculators" 
-              className="text-gray-300 hover:text-blue-400 transition-colors text-base flex items-center gap-2 px-4 py-2"
-            >
-              <Calculator className="h-4 w-4" />
+            <NavigationMenuTrigger className="text-gray-300 hover:text-blue-400 transition-colors !bg-transparent data-[state=open]:!bg-transparent text-base">
               RV Tools
-            </Link>
+            </NavigationMenuTrigger>
+            <NavigationMenuContent>
+              <div className="w-[400px] bg-gray-900/95 backdrop-blur-sm rounded-lg border border-gray-800 shadow-lg p-6">
+                <RVToolsLinks />
+              </div>
+            </NavigationMenuContent>
           </NavigationMenuItem>
 
           <NavigationMenuItem className="flex">

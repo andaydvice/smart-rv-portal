@@ -1,3 +1,4 @@
+
 import { Link } from "react-router-dom";
 import { 
   Navigation, 
@@ -14,7 +15,9 @@ import {
   HelpCircle,
   FileText,
   Phone,
-  Mic
+  Mic,
+  Calculator,
+  Warehouse
 } from "lucide-react";
 
 const linkBaseClasses = "block p-2 rounded hover:bg-[#0F1729]/50";
@@ -134,6 +137,27 @@ export const VehicleSelectionLinks = () => (
         <span className="flex items-center gap-2">
           <Car className={iconBaseClasses + " text-yellow-500"} />
           Compact Model
+        </span>
+      </Link>
+    </li>
+  </ul>
+);
+
+export const RVToolsLinks = () => (
+  <ul className="space-y-2 text-sm">
+    <li className={textBaseClasses}>
+      <Link to="/calculators" className={linkBaseClasses}>
+        <span className="flex items-center gap-2">
+          <Calculator className={iconBaseClasses + " text-blue-500"} />
+          RV Calculators
+        </span>
+      </Link>
+    </li>
+    <li className={textBaseClasses}>
+      <Link to="/storage-facilities" className={linkBaseClasses}>
+        <span className="flex items-center gap-2">
+          <Warehouse className={iconBaseClasses + " text-emerald-500"} />
+          Indoor RV Storage
         </span>
       </Link>
     </li>
