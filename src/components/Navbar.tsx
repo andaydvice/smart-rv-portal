@@ -15,7 +15,7 @@ const Navbar = () => {
     vehicles: false,
     support: false,
     customer: false,
-    tools: false
+    tools: false // Ensuring this is properly initialized
   });
 
   const toggleMenu = () => {
@@ -27,6 +27,7 @@ const Navbar = () => {
   };
 
   const toggleSection = (section: string) => {
+    console.log(`Toggling section: ${section}, current state:`, openSections[section]);
     setOpenSections(prev => ({
       ...prev,
       [section]: !prev[section]
