@@ -9,9 +9,9 @@ export default function StorageFacilities() {
   return (
     <>
       <Navbar />
-      <div className="min-h-screen bg-[#080F1F] text-white pt-24">
+      <div className="min-h-screen bg-[#080F1F] text-white">
         {/* Hero Header with Image */}
-        <div className="relative w-full h-[400px] mb-8">
+        <div className="relative w-full h-[400px]">
           <img 
             src="/lovable-uploads/e9503bf4-354a-4790-8a83-fefea32abc5b.png" 
             alt="Indoor RV Storage Facility" 
