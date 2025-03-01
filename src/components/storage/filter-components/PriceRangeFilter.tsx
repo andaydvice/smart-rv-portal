@@ -21,8 +21,8 @@ export const PriceRangeFilter = ({ priceRange, onPriceChange, maxPrice = 1000 }:
           className="my-6"
         />
         <div className="flex justify-between text-sm">
-          <span>${priceRange[0]}</span>
-          <span>${priceRange[1]}</span>
+          <span className="font-semibold text-[#F97316]">${priceRange[0]}</span>
+          <span className="font-semibold text-[#F97316]">${priceRange[1]}</span>
         </div>
       </div>
     </div>
