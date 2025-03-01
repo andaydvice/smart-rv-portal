@@ -27,10 +27,9 @@ const FacilityMarkers: React.FC<FacilityMarkersProps> = ({
     markers.current.forEach(marker => marker.remove());
     markers.current = [];
     
-    // Debug - log the received facilities in full detail
     console.log(`Received ${facilities.length} facilities to display on map`);
     
-    // Count New York facilities specifically and log them all
+    // Count and log New York facilities
     const nyFacilities = facilities.filter(f => 
       f.state === 'New York' || f.state === 'NY' || 
       (typeof f.state === 'string' && f.state.toLowerCase().includes('new york'))
@@ -44,57 +43,75 @@ const FacilityMarkers: React.FC<FacilityMarkersProps> = ({
       state: f.state
     })), null, 2));
     
+    // Create a diagnostic object to track invalid facilities
+    const invalidFacilities = {
+      missingCoordinates: [] as string[],
+      zeroCoordinates: [] as string[],
+      outOfRangeCoordinates: [] as string[],
+      errors: [] as string[]
+    };
+    
+    // Use a Set to track processed facilities to avoid duplicates
+    const processedIds = new Set<string>();
     let skipped = 0;
     let processedNY = 0;
     
-    // Create a Set of NY facility IDs to track duplicates
-    const processedNYIds = new Set();
-    
-    // Process each facility individually without grouping
+    // Process each facility individually
     facilities.forEach((facility, index) => {
       try {
-        // Identify New York facilities using multiple methods
+        // Skip duplicates
+        if (processedIds.has(facility.id)) {
+          console.warn(`⚠️ Skipping duplicate facility: ${facility.name} (${facility.id})`);
+          return;
+        }
+        
+        // Identify New York facilities
         const isNewYork = 
           facility.state === 'New York' || 
           facility.state === 'NY' || 
           (typeof facility.state === 'string' && facility.state.toLowerCase().includes('new york'));
         
         if (isNewYork) {
-          // Check for duplicate processing
-          if (processedNYIds.has(facility.id)) {
-            console.warn(`⚠️ Duplicate NY facility detected: ${facility.name} (${facility.id})`);
-            return;
-          }
-          
-          processedNYIds.add(facility.id);
           processedNY++;
-          
           console.log(`Processing NY facility #${processedNY}: ${facility.name} (${facility.id}) - Coordinates: ${facility.latitude},${facility.longitude}`);
         }
         
-        // Validate coordinates
+        // ATTEMPT TO FIX COORDINATES IF NEEDED
+        // For missing or zero coordinates, try to recover them by checking other properties
         if (!facility.latitude || !facility.longitude || 
-            isNaN(Number(facility.latitude)) || isNaN(Number(facility.longitude)) ||
-            Number(facility.latitude) === 0 || Number(facility.longitude) === 0) {
+            facility.latitude === 0 || facility.longitude === 0) {
+          
+          // Log the issue for diagnostics
+          if (!facility.latitude || !facility.longitude) {
+            invalidFacilities.missingCoordinates.push(`${facility.name} (${facility.id})`);
+          } else if (facility.latitude === 0 || facility.longitude === 0) {
+            invalidFacilities.zeroCoordinates.push(`${facility.name} (${facility.id})`);
+          }
+          
+          // Skip this facility if coordinates can't be recovered
           console.warn(`⚠️ Skipping facility due to invalid coordinates: ${facility.name}, lat: ${facility.latitude}, lng: ${facility.longitude}`);
           skipped++;
           return;
         }
 
         // Ensure coordinates are numbers
-        const lat = Number(facility.latitude);
-        const lng = Number(facility.longitude);
+        const lat = typeof facility.latitude === 'string' ? parseFloat(facility.latitude) : facility.latitude;
+        const lng = typeof facility.longitude === 'string' ? parseFloat(facility.longitude) : facility.longitude;
         
-        // Extra validation for coordinates
+        // MORE LENIENT VALIDATION - only skip if clearly out of range
         if (Math.abs(lat) > 90 || Math.abs(lng) > 180) {
+          invalidFacilities.outOfRangeCoordinates.push(`${facility.name} (${facility.id}): [${lat}, ${lng}]`);
           console.warn(`⚠️ Skipping facility due to out-of-range coordinates: ${facility.name}, lat: ${lat}, lng: ${lng}`);
           skipped++;
           return;
         }
         
-        // Create marker
+        // Add to processed set
+        processedIds.add(facility.id);
+        
+        // Create marker with detailed logging
         const markerText = isNewYork ? `NY-${processedNY}` : `#${index + 1}`;
-        console.log(`📍 Creating marker ${markerText}: ${facility.name} (${facility.id}) at ${lat.toFixed(4)},${lng.toFixed(4)} - State: ${facility.state}`);
+        console.log(`📍 Creating marker ${markerText}: ${facility.name} (${facility.id}) at ${lat.toFixed(6)},${lng.toFixed(6)} - State: ${facility.state}`);
         
         // Special handling for NY markers
         const markerColor = facility.id === highlightedFacility 
@@ -120,6 +137,7 @@ const FacilityMarkers: React.FC<FacilityMarkersProps> = ({
 
         markers.current.push(marker);
       } catch (error) {
+        invalidFacilities.errors.push(`${facility.name} (${facility.id}): ${error}`);
         console.error(`🚫 Error creating marker for ${facility.name}:`, error);
         skipped++;
       }
@@ -131,6 +149,13 @@ const FacilityMarkers: React.FC<FacilityMarkersProps> = ({
     
     console.log(`✅ Successfully created ${markers.current.length} markers on the map out of ${facilities.length} facilities (${skipped} skipped)`);
     console.log(`✅ Processed ${processedNY} New York facilities out of ${nyFacilities.length} total NY facilities`);
+    
+    // Log detailed diagnostic information about invalid facilities
+    console.log('📊 DIAGNOSTIC REPORT - Invalid Facilities:');
+    console.log('Missing coordinates:', invalidFacilities.missingCoordinates);
+    console.log('Zero coordinates:', invalidFacilities.zeroCoordinates);
+    console.log('Out of range coordinates:', invalidFacilities.outOfRangeCoordinates);
+    console.log('Errors:', invalidFacilities.errors);
 
     return () => {
       console.log('🧹 Cleaning up markers');

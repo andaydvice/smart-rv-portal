@@ -48,41 +48,41 @@ export const useStorageFacilities = (filters: FilterState) => {
           review_count
         `);
       
-      // Debug log query params
+      // Log query params for debugging
       console.log('Query params:', {
         selectedState: filters.selectedState,
         priceRange: filters.priceRange
       });
       
-      // Handle New York state specifically with enhanced matching
+      // IMPROVED: Handle state filters with better OR conditions
       if (filters.selectedState === 'New York') {
-        // Use a filter approach that will catch all variations of NY
+        // Use multiple conditions to catch all variations of NY
         console.log('Using enhanced New York query with multiple state formats');
-        query = query.or('state.eq.NY,state.eq.New York,state.ilike.%new%york%');
+        query = query.or('state.eq.NY,state.eq.New York,state.ilike.%new%york%,state.eq.new york');
       } 
       // Handle different state formats
       else if (filters.selectedState === 'California') {
-        query = query.or('state.eq.CA,state.eq.California');
+        query = query.or('state.eq.CA,state.eq.California,state.ilike.%california%');
       } else if (filters.selectedState === 'Arizona') {
-        query = query.or('state.eq.AZ,state.eq.Arizona');
+        query = query.or('state.eq.AZ,state.eq.Arizona,state.ilike.%arizona%');
       } else if (filters.selectedState === 'Texas') {
-        query = query.or('state.eq.TX,state.eq.Texas');
+        query = query.or('state.eq.TX,state.eq.Texas,state.ilike.%texas%');
       } else if (filters.selectedState === 'Florida') {
-        query = query.or('state.eq.FL,state.eq.Florida');
+        query = query.or('state.eq.FL,state.eq.Florida,state.ilike.%florida%');
       } else if (filters.selectedState === 'Nevada') {
-        query = query.or('state.eq.NV,state.eq.Nevada');
+        query = query.or('state.eq.NV,state.eq.Nevada,state.ilike.%nevada%');
       } else if (filters.selectedState === 'Colorado') {
-        query = query.or('state.eq.CO,state.eq.Colorado');
+        query = query.or('state.eq.CO,state.eq.Colorado,state.ilike.%colorado%');
       } else if (filters.selectedState === 'Lowa') {
-        query = query.or('state.eq.IA,state.eq.Lowa');
+        query = query.or('state.eq.IA,state.eq.Lowa,state.eq.Iowa,state.ilike.%iowa%');
       } else if (filters.selectedState === 'Minnesota') {
-        query = query.or('state.eq.MN,state.eq.Minnesota');
+        query = query.or('state.eq.MN,state.eq.Minnesota,state.ilike.%minnesota%');
       } else if (filters.selectedState === 'Wisconsin') {
-        query = query.or('state.eq.WI,state.eq.Wisconsin');
+        query = query.or('state.eq.WI,state.eq.Wisconsin,state.ilike.%wisconsin%');
       } else if (filters.selectedState === 'Oregon') {
-        query = query.or('state.eq.OR,state.eq.Oregon');
+        query = query.or('state.eq.OR,state.eq.Oregon,state.ilike.%oregon%');
       } else if (filters.selectedState === 'Pennsylvania') {
-        query = query.or('state.eq.PA,state.eq.Pennsylvania');
+        query = query.or('state.eq.PA,state.eq.Pennsylvania,state.ilike.%pennsylvania%');
       } else if (filters.selectedState) {
         query = query.eq('state', filters.selectedState);
       }
@@ -107,17 +107,24 @@ export const useStorageFacilities = (filters: FilterState) => {
       console.log('Total facilities fetched:', data.length);
       console.log('States returned:', [...new Set(data.map(f => f.state))].sort());
       
-      if (filters.selectedState === 'New York') {
+      if (nyFacilities.length > 0) {
         console.log(`Found ${nyFacilities.length} New York facilities in database query result`);
-        console.log('ALL New York facilities from database:', JSON.stringify(nyFacilities, null, 2));
+        console.log('NY facilities - raw data:', JSON.stringify(nyFacilities.map(f => ({
+          id: f.id,
+          name: f.name,
+          lat: f.latitude,
+          lng: f.longitude,
+          state: f.state
+        })), null, 2));
       }
 
+      // IMPROVED: Coordinate conversion and validation
       return data.map(facility => {
         // Extra validation for New York facilities
         if (facility.state === 'NY' || 
             facility.state === 'New York' || 
             (typeof facility.state === 'string' && facility.state.toLowerCase().includes('new york'))) {
-          console.log(`Processing NY facility from DB: ${facility.name} (${facility.id}) - Coordinates: ${facility.latitude},${facility.longitude}`);
+          console.log(`Processing NY facility from DB: ${facility.name} (${facility.id}) - Original coordinates: ${facility.latitude},${facility.longitude}`);
         }
         
         // Normalize state names for display
@@ -135,6 +142,36 @@ export const useStorageFacilities = (filters: FilterState) => {
                facility.state === 'PA' ? 'Pennsylvania' :
                facility.state === 'NY' ? 'New York' :
                facility.state;
+        
+        // IMPROVED: Proper coordinate parsing with fallbacks
+        let latitude = 0, longitude = 0;
+        
+        try {
+          // Handle string or number coordinates
+          latitude = typeof facility.latitude === 'string' 
+            ? parseFloat(facility.latitude) 
+            : Number(facility.latitude);
+            
+          longitude = typeof facility.longitude === 'string' 
+            ? parseFloat(facility.longitude) 
+            : Number(facility.longitude);
+            
+          // Check for NaN after conversion
+          if (isNaN(latitude) || isNaN(longitude)) {
+            console.warn(`Invalid coordinates for facility ${facility.id}, ${facility.name}: ${facility.latitude}, ${facility.longitude}`);
+            latitude = 0;
+            longitude = 0;
+          }
+        } catch (e) {
+          console.error(`Error converting coordinates for ${facility.name}:`, e);
+          latitude = 0;
+          longitude = 0;
+        }
+        
+        // For NY facilities, log the normalized coordinates
+        if (normalizedState === 'New York') {
+          console.log(`Normalized NY facility coordinates: ${facility.name} (${facility.id}) - Final coordinates: ${latitude},${longitude}`);
+        }
                
         // Return cleaned facility data
         return {
@@ -143,8 +180,8 @@ export const useStorageFacilities = (filters: FilterState) => {
           address: facility.address,
           city: facility.city,
           state: normalizedState,
-          latitude: Number(facility.latitude),
-          longitude: Number(facility.longitude),
+          latitude: latitude,
+          longitude: longitude,
           features: {
             indoor: Boolean(facility.features?.indoor),
             climate_controlled: Boolean(facility.features?.climate_controlled),
@@ -177,6 +214,13 @@ export const useStorageFacilities = (filters: FilterState) => {
 
   const filteredFacilities = facilities?.filter(facility => {
     const facilityMaxPrice = facility.price_range.max;
+    
+    // Skip facilities with invalid coordinates 
+    if (facility.latitude === 0 && facility.longitude === 0) {
+      console.warn(`Filtering out facility with invalid coordinates: ${facility.name} (${facility.id})`);
+      return false;
+    }
+    
     return facilityMaxPrice >= filters.priceRange[0] && facilityMaxPrice <= filters.priceRange[1];
   });
   
