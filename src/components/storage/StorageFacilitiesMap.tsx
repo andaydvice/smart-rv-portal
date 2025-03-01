@@ -1,7 +1,6 @@
-
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Card } from '@/components/ui/card';
 import FilterPanel from './FilterPanel';
 import { FilterState } from './types';
@@ -34,8 +33,10 @@ const StorageFacilitiesMap = () => {
 
   const { facilities: filteredFacilities, isLoading, error } = useStorageFacilities(filters);
   const { recentlyViewed, addToRecentlyViewed } = useRecentlyViewed();
+  
+  const scrollAreaRef = useRef<HTMLDivElement>(null);
+  const facilityRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
 
-  // Fetch Mapbox token on component mount
   useEffect(() => {
     const fetchMapboxToken = async () => {
       try {
@@ -74,13 +75,41 @@ const StorageFacilitiesMap = () => {
   const handleFacilityClick = (facilityId: string) => {
     setHighlightedFacility(facilityId);
     
-    // Add the facility to recently viewed
     if (filteredFacilities) {
       const facility = filteredFacilities.find(f => f.id === facilityId);
       if (facility) {
         addToRecentlyViewed(facility);
       }
     }
+    
+    setTimeout(() => {
+      if (facilityRefs.current[facilityId] && scrollAreaRef.current) {
+        const facilityElement = facilityRefs.current[facilityId];
+        const scrollContainer = scrollAreaRef.current.querySelector('[data-radix-scroll-area-viewport]');
+        
+        if (facilityElement && scrollContainer) {
+          const containerRect = scrollContainer.getBoundingClientRect();
+          const elementRect = facilityElement.getBoundingClientRect();
+          
+          const isInView = 
+            elementRect.top >= containerRect.top && 
+            elementRect.bottom <= containerRect.bottom;
+            
+          if (!isInView) {
+            const scrollTop = 
+              elementRect.top - 
+              containerRect.top + 
+              (scrollContainer as HTMLElement).scrollTop - 
+              (containerRect.height - elementRect.height) / 2;
+              
+            (scrollContainer as HTMLElement).scrollTo({
+              top: scrollTop,
+              behavior: 'smooth'
+            });
+          }
+        }
+      }
+    }, 100);
   };
 
   const renderContent = () => {
@@ -119,7 +148,7 @@ const StorageFacilitiesMap = () => {
     }
 
     return (
-      <ScrollArea className="h-[600px]">
+      <ScrollArea className="h-[600px]" ref={scrollAreaRef}>
         <div className="p-4 space-y-4">
           {filteredFacilities?.map(facility => (
             <FacilityCard
@@ -127,6 +156,9 @@ const StorageFacilitiesMap = () => {
               facility={facility}
               isHighlighted={facility.id === highlightedFacility}
               onClick={() => handleFacilityClick(facility.id)}
+              ref={(el) => {
+                facilityRefs.current[facility.id] = el;
+              }}
             />
           ))}
         </div>
