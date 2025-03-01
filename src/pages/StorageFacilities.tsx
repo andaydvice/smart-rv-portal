@@ -19,7 +19,7 @@ export default function StorageFacilities() {
           />
           <div className="absolute inset-0 bg-gradient-to-t from-[#080F1F] to-transparent">
             <Container className="h-full flex flex-col justify-center items-center">
-              <div className="text-center max-w-3xl">
+              <div className="text-center max-w-3xl bg-black/40 backdrop-blur-sm p-6 rounded-lg">
                 <div className="flex items-center justify-center gap-2 mb-2">
                   <Warehouse className="h-7 w-7 text-[#F97316]" />
                   <h1 className="text-4xl md:text-5xl font-bold text-white">
