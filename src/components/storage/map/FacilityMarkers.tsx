@@ -108,10 +108,10 @@ const FacilityMarkers: React.FC<FacilityMarkersProps> = ({
           lng = 0;
         }
         
-        // Special handling for NY markers
+        // Use same marker color for all pins, only highlight the selected one
         const markerColor = facility.id === highlightedFacility 
           ? '#10B981' 
-          : (isNewYork ? '#EF4444' : '#60A5FA'); // Make NY markers red for visibility
+          : '#60A5FA'; // Use the same blue color for all pins including NY
         
         const popup = new mapboxgl.Popup({
           offset: 25,
@@ -158,22 +158,8 @@ const FacilityMarkers: React.FC<FacilityMarkersProps> = ({
     };
   }, [map, facilities, highlightedFacility, onMarkerClick]);
 
-  // Add an extra element to report discrepancies
-  return (
-    <div className={process.env.NODE_ENV === 'development' ? 'fixed bottom-4 right-4 bg-black bg-opacity-70 text-white p-2 rounded text-xs z-50' : 'hidden'}>
-      <div className="font-bold">Map Debug Info:</div>
-      <div>Markers created: {markersCreated}/{facilities.length} (skipped: {skippedFacilities})</div>
-      {facilities.filter(f => f.state === 'New York' || f.state === 'NY').length > 0 && (
-        <div className="mt-1 text-red-400">
-          New York facilities: {processedNYFacilities}/{facilities.filter(f => 
-            f.state === 'New York' || 
-            f.state === 'NY' || 
-            (typeof f.state === 'string' && f.state.toLowerCase().includes('new york'))
-          ).length}
-        </div>
-      )}
-    </div>
-  );
+  // Return null to remove the debug notice
+  return null;
 };
 
 export default FacilityMarkers;
