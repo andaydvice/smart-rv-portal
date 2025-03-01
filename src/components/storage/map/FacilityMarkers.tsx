@@ -36,19 +36,32 @@ const FacilityMarkers: React.FC<FacilityMarkersProps> = ({
     );
     
     console.log(`New York facilities count: ${nyFacilities.length}`);
-    console.log('ALL New York facilities:', JSON.stringify(nyFacilities.map(f => ({
-      id: f.id,
-      name: f.name,
-      coordinates: [f.longitude, f.latitude],
-      state: f.state
-    })), null, 2));
     
     // Track processed NY facilities
     let processedNY = 0;
     let skipped = 0;
+
+    // Create a map to track coordinates and count overlapping markers
+    const coordinatesMap: Record<string, number> = {};
     
-    // CRITICAL FIX: Create ALL markers with minimal validation
-    // We'll only skip entries with clearly invalid data
+    // IMPROVED: First pass to identify overlapping coordinates
+    facilities.forEach(facility => {
+      if (facility.latitude !== null && facility.longitude !== null) {
+        // Round to 5 decimal places for grouping nearby coordinates
+        const roundedLat = Math.round(Number(facility.latitude) * 100000) / 100000;
+        const roundedLng = Math.round(Number(facility.longitude) * 100000) / 100000;
+        const coordKey = `${roundedLat},${roundedLng}`;
+        
+        // Count overlapping markers
+        if (coordinatesMap[coordKey]) {
+          coordinatesMap[coordKey]++;
+        } else {
+          coordinatesMap[coordKey] = 1;
+        }
+      }
+    });
+    
+    // Now create markers with offsets for overlapping points
     facilities.forEach((facility, index) => {
       try {
         // Identify New York facilities
@@ -59,11 +72,9 @@ const FacilityMarkers: React.FC<FacilityMarkersProps> = ({
         
         if (isNewYork) {
           processedNY++;
-          console.log(`Processing NY facility #${processedNY}: ${facility.name} (${facility.id}) - Coordinates: ${facility.latitude},${facility.longitude}`);
         }
         
         // SUPER MINIMAL VALIDATION - only skip if completely missing coordinates
-        // We'll treat 0,0 as valid for now to see if that's the issue
         if (facility.latitude === null || facility.longitude === null || 
             facility.latitude === undefined || facility.longitude === undefined) {
           console.warn(`⚠️ Skipping facility due to missing coordinates: ${facility.name}`);
@@ -92,26 +103,54 @@ const FacilityMarkers: React.FC<FacilityMarkersProps> = ({
             rawLat: facility.latitude, 
             rawLng: facility.longitude,
             parsedLat: lat, 
-            parsedLng: lng,
-            latType: typeof facility.latitude,
-            lngType: typeof facility.longitude,
-            isLatNaN: isNaN(lat),
-            isLngNaN: isNaN(lng)
+            parsedLng: lng
           });
         }
         
         // Even if coordinates are 0,0 or NaN, we'll render them to see what's happening
-        // We'll log warnings instead of skipping
         if (isNaN(lat) || isNaN(lng)) {
           console.warn(`⚠️ Warning: Invalid numeric coordinates for ${facility.name}, using 0,0 instead`);
           lat = 0;
           lng = 0;
         }
         
+        // Add offset to overlapping markers
+        const roundedLat = Math.round(lat * 100000) / 100000;
+        const roundedLng = Math.round(lng * 100000) / 100000;
+        const coordKey = `${roundedLat},${roundedLng}`;
+        
+        // Only add offset if there are multiple markers at this location
+        let offsetLat = lat;
+        let offsetLng = lng;
+        
+        if (coordinatesMap[coordKey] > 1) {
+          // Get the marker index at this coordinate
+          const markersAtCoord = coordinatesMap[coordKey];
+          // Calculate the current marker's position in the stack
+          const markerPosition = facilities.slice(0, index)
+            .filter(f => {
+              const fLat = Number(f.latitude);
+              const fLng = Number(f.longitude);
+              const fRoundedLat = Math.round(fLat * 100000) / 100000;
+              const fRoundedLng = Math.round(fLng * 100000) / 100000;
+              return `${fRoundedLat},${fRoundedLng}` === coordKey;
+            }).length;
+          
+          // Apply spiral pattern offset to make overlapping markers visible
+          // This creates a spiral pattern around the original point
+          const angle = (markerPosition * (2 * Math.PI)) / markersAtCoord;
+          const radius = 0.0003 * (markerPosition + 1); // Small offset in degrees (~30 meters)
+          
+          offsetLat = lat + radius * Math.sin(angle);
+          offsetLng = lng + radius * Math.cos(angle);
+          
+          console.log(`Applied offset to overlapping marker: ${facility.name} (${markerPosition + 1} of ${markersAtCoord} at ${coordKey})`);
+        }
+        
         // Use same marker color for all pins, only highlight the selected one
         const markerColor = facility.id === highlightedFacility 
           ? '#10B981' 
-          : '#60A5FA'; // Use the same blue color for all pins including NY
+          : '#60A5FA';
         
         const popup = new mapboxgl.Popup({
           offset: 25,
@@ -119,11 +158,11 @@ const FacilityMarkers: React.FC<FacilityMarkersProps> = ({
           className: 'storage-facility-popup'
         }).setHTML(createPopupHTML(facility));
 
-        // Create marker and add to map
+        // Create marker with potentially offset coordinates
         const marker = new mapboxgl.Marker({
           color: markerColor
         })
-          .setLngLat([lng, lat])
+          .setLngLat([offsetLng, offsetLat])
           .setPopup(popup)
           .addTo(map);
 
@@ -137,7 +176,7 @@ const FacilityMarkers: React.FC<FacilityMarkersProps> = ({
         
         // Log success for NY facilities
         if (isNewYork) {
-          console.log(`✅ NY #${processedNY} marker created successfully at [${lng}, ${lat}]`);
+          console.log(`✅ NY #${processedNY} marker created successfully at [${offsetLng}, ${offsetLat}]`);
         }
       } catch (error) {
         console.error(`🚫 Error creating marker for ${facility.name}:`, error);
