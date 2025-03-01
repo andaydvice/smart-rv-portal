@@ -12,6 +12,8 @@ import { useStorageFacilities } from './useStorageFacilities';
 import { AlertCircle, Loader2, Search } from 'lucide-react';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { supabase } from '@/integrations/supabase/client';
+import RecentlyViewedFacilities from './RecentlyViewedFacilities';
+import { useRecentlyViewed } from './useRecentlyViewed';
 
 const StorageFacilitiesMap = () => {
   const [mapToken, setMapToken] = useState<string>('');
@@ -31,6 +33,7 @@ const StorageFacilitiesMap = () => {
   });
 
   const { facilities: filteredFacilities, isLoading, error } = useStorageFacilities(filters);
+  const { recentlyViewed, addToRecentlyViewed } = useRecentlyViewed();
 
   // Fetch Mapbox token on component mount
   useEffect(() => {
@@ -70,6 +73,14 @@ const StorageFacilitiesMap = () => {
 
   const handleFacilityClick = (facilityId: string) => {
     setHighlightedFacility(facilityId);
+    
+    // Add the facility to recently viewed
+    if (filteredFacilities) {
+      const facility = filteredFacilities.find(f => f.id === facilityId);
+      if (facility) {
+        addToRecentlyViewed(facility);
+      }
+    }
   };
 
   const renderContent = () => {
@@ -133,24 +144,31 @@ const StorageFacilitiesMap = () => {
           </Card>
         </div>
       </div>
-      <Card className="lg:col-span-8 h-[800px] bg-[#080F1F] relative overflow-hidden">
-        {(!mapToken) ? (
-          <Alert variant="destructive" className="m-4">
-            <AlertCircle className="h-4 w-4" />
-            <AlertDescription>
-              {mapTokenError || 'Map configuration not loaded'}
-            </AlertDescription>
-          </Alert>
-        ) : (
-          <MapView
-            mapToken={mapToken}
-            facilities={filteredFacilities || []}
-            highlightedFacility={highlightedFacility}
-            onMarkerClick={handleFacilityClick}
-            selectedState={filters.selectedState}
-          />
-        )}
-      </Card>
+      <div className="lg:col-span-8 flex flex-col space-y-4">
+        <Card className="h-[600px] bg-[#080F1F] relative overflow-hidden">
+          {(!mapToken) ? (
+            <Alert variant="destructive" className="m-4">
+              <AlertCircle className="h-4 w-4" />
+              <AlertDescription>
+                {mapTokenError || 'Map configuration not loaded'}
+              </AlertDescription>
+            </Alert>
+          ) : (
+            <MapView
+              mapToken={mapToken}
+              facilities={filteredFacilities || []}
+              highlightedFacility={highlightedFacility}
+              onMarkerClick={handleFacilityClick}
+              selectedState={filters.selectedState}
+            />
+          )}
+        </Card>
+        <RecentlyViewedFacilities 
+          facilities={recentlyViewed}
+          onFacilityClick={handleFacilityClick}
+          className="h-[180px]"
+        />
+      </div>
     </div>
   );
 };
