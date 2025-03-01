@@ -9,17 +9,14 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import FacilityCard from './FacilityCard';
 import MapView from './MapView';
 import { useStorageFacilities } from './useStorageFacilities';
-import { AlertCircle, Loader2, Search, Plus, List } from 'lucide-react';
+import { AlertCircle, Loader2, Search } from 'lucide-react';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import AddFacilityForm from './AddFacilityForm';
-import { Button } from '../ui/button';
 import { supabase } from '@/integrations/supabase/client';
 
 const StorageFacilitiesMap = () => {
   const [mapToken, setMapToken] = useState<string>('');
   const [mapTokenError, setMapTokenError] = useState<string>('');
   const [highlightedFacility, setHighlightedFacility] = useState<string | null>(null);
-  const [showAddForm, setShowAddForm] = useState(false);
   const [filters, setFilters] = useState<FilterState>({
     features: {
       indoor: false,
@@ -75,10 +72,6 @@ const StorageFacilitiesMap = () => {
     setHighlightedFacility(facilityId);
   };
 
-  const toggleView = () => {
-    setShowAddForm(!showAddForm);
-  };
-
   const renderContent = () => {
     if (isLoading) {
       return (
@@ -100,10 +93,6 @@ const StorageFacilitiesMap = () => {
           </AlertDescription>
         </Alert>
       );
-    }
-
-    if (showAddForm) {
-      return <AddFacilityForm />;
     }
 
     if (filteredFacilities?.length === 0) {
@@ -138,22 +127,6 @@ const StorageFacilitiesMap = () => {
     <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 min-h-[800px]">
       <div className="lg:col-span-4">
         <div className="space-y-4">
-          <Button
-            onClick={toggleView}
-            className="w-full bg-blue-500 hover:bg-blue-600"
-          >
-            {showAddForm ? (
-              <>
-                <List className="mr-2 h-4 w-4" />
-                View Facilities
-              </>
-            ) : (
-              <>
-                <Plus className="mr-2 h-4 w-4" />
-                Add Facility
-              </>
-            )}
-          </Button>
           <FilterPanel onFilterChange={setFilters} />
           <Card className="bg-[#080F1F] border-gray-700">
             {renderContent()}
