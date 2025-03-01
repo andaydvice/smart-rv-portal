@@ -56,7 +56,7 @@ export const LocationFilter = ({ selectedState, states, onStateChange }: Locatio
         { state: "Nevada", count: 1 },
         { state: "Oregon", count: 17 },
         { state: "Pennsylvania", count: 8 },
-        { state: "New York", count: 9 },
+        { state: "New York", count: 7 },  // Changed from 9 to 7
         { state: "Texas", count: 1 },
         { state: "Wisconsin", count: 1 }
       ];
