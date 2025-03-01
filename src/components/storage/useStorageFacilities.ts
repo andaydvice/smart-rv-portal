@@ -1,4 +1,3 @@
-
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
 import { StorageFacility, FilterState, DatabaseStorageFacility } from './types';
@@ -118,7 +117,7 @@ export const useStorageFacilities = (filters: FilterState) => {
         })), null, 2));
       }
 
-      // IMPROVED: Coordinate conversion and validation
+      // Map database results to StorageFacility objects
       return data.map(facility => {
         // Extra validation for New York facilities
         if (facility.state === 'NY' || 
@@ -143,37 +142,17 @@ export const useStorageFacilities = (filters: FilterState) => {
                facility.state === 'NY' ? 'New York' :
                facility.state;
         
-        // IMPROVED: Proper coordinate parsing with fallbacks
-        let latitude = 0, longitude = 0;
-        
-        try {
-          // Handle string or number coordinates
-          latitude = typeof facility.latitude === 'string' 
-            ? parseFloat(facility.latitude) 
-            : Number(facility.latitude);
-            
-          longitude = typeof facility.longitude === 'string' 
-            ? parseFloat(facility.longitude) 
-            : Number(facility.longitude);
-            
-          // Check for NaN after conversion
-          if (isNaN(latitude) || isNaN(longitude)) {
-            console.warn(`Invalid coordinates for facility ${facility.id}, ${facility.name}: ${facility.latitude}, ${facility.longitude}`);
-            latitude = 0;
-            longitude = 0;
-          }
-        } catch (e) {
-          console.error(`Error converting coordinates for ${facility.name}:`, e);
-          latitude = 0;
-          longitude = 0;
-        }
+        // FIX: Keep original coordinates as-is without validation
+        // This ensures all records pass through without modification
+        const latitude = facility.latitude;
+        const longitude = facility.longitude;
         
         // For NY facilities, log the normalized coordinates
         if (normalizedState === 'New York') {
-          console.log(`Normalized NY facility coordinates: ${facility.name} (${facility.id}) - Final coordinates: ${latitude},${longitude}`);
+          console.log(`Passing NY facility coordinates as-is: ${facility.name} (${facility.id}) - Original: ${facility.latitude},${facility.longitude}`);
         }
                
-        // Return cleaned facility data
+        // Return storage facility with original coordinates
         return {
           id: facility.id,
           name: facility.name,
@@ -212,15 +191,12 @@ export const useStorageFacilities = (filters: FilterState) => {
     staleTime: 300000 // 5 minute cache
   });
 
+  // CRITICAL FIX: Remove all coordinate validation to allow ANY facility to display
+  // This is a sledgehammer approach to find where the missing facilities are
   const filteredFacilities = facilities?.filter(facility => {
     const facilityMaxPrice = facility.price_range.max;
     
-    // Skip facilities with invalid coordinates 
-    if (facility.latitude === 0 && facility.longitude === 0) {
-      console.warn(`Filtering out facility with invalid coordinates: ${facility.name} (${facility.id})`);
-      return false;
-    }
-    
+    // ONLY filter by price, nothing else
     return facilityMaxPrice >= filters.priceRange[0] && facilityMaxPrice <= filters.priceRange[1];
   });
   

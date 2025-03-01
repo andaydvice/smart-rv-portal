@@ -43,28 +43,14 @@ const FacilityMarkers: React.FC<FacilityMarkersProps> = ({
       state: f.state
     })), null, 2));
     
-    // Create a diagnostic object to track invalid facilities
-    const invalidFacilities = {
-      missingCoordinates: [] as string[],
-      zeroCoordinates: [] as string[],
-      outOfRangeCoordinates: [] as string[],
-      errors: [] as string[]
-    };
-    
-    // Use a Set to track processed facilities to avoid duplicates
-    const processedIds = new Set<string>();
-    let skipped = 0;
+    // Track processed NY facilities
     let processedNY = 0;
+    let skipped = 0;
     
-    // Process each facility individually
+    // CRITICAL FIX: Create ALL markers with minimal validation
+    // We'll only skip entries with clearly invalid data
     facilities.forEach((facility, index) => {
       try {
-        // Skip duplicates
-        if (processedIds.has(facility.id)) {
-          console.warn(`⚠️ Skipping duplicate facility: ${facility.name} (${facility.id})`);
-          return;
-        }
-        
         // Identify New York facilities
         const isNewYork = 
           facility.state === 'New York' || 
@@ -76,42 +62,51 @@ const FacilityMarkers: React.FC<FacilityMarkersProps> = ({
           console.log(`Processing NY facility #${processedNY}: ${facility.name} (${facility.id}) - Coordinates: ${facility.latitude},${facility.longitude}`);
         }
         
-        // ATTEMPT TO FIX COORDINATES IF NEEDED
-        // For missing or zero coordinates, try to recover them by checking other properties
-        if (!facility.latitude || !facility.longitude || 
-            facility.latitude === 0 || facility.longitude === 0) {
-          
-          // Log the issue for diagnostics
-          if (!facility.latitude || !facility.longitude) {
-            invalidFacilities.missingCoordinates.push(`${facility.name} (${facility.id})`);
-          } else if (facility.latitude === 0 || facility.longitude === 0) {
-            invalidFacilities.zeroCoordinates.push(`${facility.name} (${facility.id})`);
-          }
-          
-          // Skip this facility if coordinates can't be recovered
-          console.warn(`⚠️ Skipping facility due to invalid coordinates: ${facility.name}, lat: ${facility.latitude}, lng: ${facility.longitude}`);
+        // SUPER MINIMAL VALIDATION - only skip if completely missing coordinates
+        // We'll treat 0,0 as valid for now to see if that's the issue
+        if (facility.latitude === null || facility.longitude === null || 
+            facility.latitude === undefined || facility.longitude === undefined) {
+          console.warn(`⚠️ Skipping facility due to missing coordinates: ${facility.name}`);
           skipped++;
           return;
         }
 
-        // Ensure coordinates are numbers
-        const lat = typeof facility.latitude === 'string' ? parseFloat(facility.latitude) : facility.latitude;
-        const lng = typeof facility.longitude === 'string' ? parseFloat(facility.longitude) : facility.longitude;
+        // Convert coordinates to numbers no matter what
+        let lat = 0, lng = 0;
         
-        // MORE LENIENT VALIDATION - only skip if clearly out of range
-        if (Math.abs(lat) > 90 || Math.abs(lng) > 180) {
-          invalidFacilities.outOfRangeCoordinates.push(`${facility.name} (${facility.id}): [${lat}, ${lng}]`);
-          console.warn(`⚠️ Skipping facility due to out-of-range coordinates: ${facility.name}, lat: ${lat}, lng: ${lng}`);
-          skipped++;
-          return;
+        try {
+          lat = typeof facility.latitude === 'string' ? parseFloat(facility.latitude) : Number(facility.latitude);
+          lng = typeof facility.longitude === 'string' ? parseFloat(facility.longitude) : Number(facility.longitude);
+        } catch (e) {
+          console.warn(`⚠️ Error parsing coordinates for ${facility.name}: ${e}`);
+          // Still attempt to use the coordinates directly
+          lat = facility.latitude as any;
+          lng = facility.longitude as any;
         }
         
-        // Add to processed set
-        processedIds.add(facility.id);
+        // Log detailed coordinate information for NY facilities
+        if (isNewYork) {
+          console.log(`NY #${processedNY} Coordinates detail:`, {
+            facilityId: facility.id, 
+            name: facility.name,
+            rawLat: facility.latitude, 
+            rawLng: facility.longitude,
+            parsedLat: lat, 
+            parsedLng: lng,
+            latType: typeof facility.latitude,
+            lngType: typeof facility.longitude,
+            isLatNaN: isNaN(lat),
+            isLngNaN: isNaN(lng)
+          });
+        }
         
-        // Create marker with detailed logging
-        const markerText = isNewYork ? `NY-${processedNY}` : `#${index + 1}`;
-        console.log(`📍 Creating marker ${markerText}: ${facility.name} (${facility.id}) at ${lat.toFixed(6)},${lng.toFixed(6)} - State: ${facility.state}`);
+        // Even if coordinates are 0,0 or NaN, we'll render them to see what's happening
+        // We'll log warnings instead of skipping
+        if (isNaN(lat) || isNaN(lng)) {
+          console.warn(`⚠️ Warning: Invalid numeric coordinates for ${facility.name}, using 0,0 instead`);
+          lat = 0;
+          lng = 0;
+        }
         
         // Special handling for NY markers
         const markerColor = facility.id === highlightedFacility 
@@ -124,6 +119,7 @@ const FacilityMarkers: React.FC<FacilityMarkersProps> = ({
           className: 'storage-facility-popup'
         }).setHTML(createPopupHTML(facility));
 
+        // Create marker and add to map
         const marker = new mapboxgl.Marker({
           color: markerColor
         })
@@ -131,13 +127,19 @@ const FacilityMarkers: React.FC<FacilityMarkersProps> = ({
           .setPopup(popup)
           .addTo(map);
 
+        // Add click event
         marker.getElement().addEventListener('click', () => {
           onMarkerClick(facility.id);
         });
 
+        // Track marker for later cleanup
         markers.current.push(marker);
+        
+        // Log success for NY facilities
+        if (isNewYork) {
+          console.log(`✅ NY #${processedNY} marker created successfully at [${lng}, ${lat}]`);
+        }
       } catch (error) {
-        invalidFacilities.errors.push(`${facility.name} (${facility.id}): ${error}`);
         console.error(`🚫 Error creating marker for ${facility.name}:`, error);
         skipped++;
       }
@@ -147,15 +149,8 @@ const FacilityMarkers: React.FC<FacilityMarkersProps> = ({
     setSkippedFacilities(skipped);
     setProcessedNYFacilities(processedNY);
     
-    console.log(`✅ Successfully created ${markers.current.length} markers on the map out of ${facilities.length} facilities (${skipped} skipped)`);
+    console.log(`✅ Created ${markers.current.length} markers on the map out of ${facilities.length} facilities (${skipped} skipped)`);
     console.log(`✅ Processed ${processedNY} New York facilities out of ${nyFacilities.length} total NY facilities`);
-    
-    // Log detailed diagnostic information about invalid facilities
-    console.log('📊 DIAGNOSTIC REPORT - Invalid Facilities:');
-    console.log('Missing coordinates:', invalidFacilities.missingCoordinates);
-    console.log('Zero coordinates:', invalidFacilities.zeroCoordinates);
-    console.log('Out of range coordinates:', invalidFacilities.outOfRangeCoordinates);
-    console.log('Errors:', invalidFacilities.errors);
 
     return () => {
       console.log('🧹 Cleaning up markers');
