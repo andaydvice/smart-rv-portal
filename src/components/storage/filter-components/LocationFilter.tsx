@@ -48,19 +48,19 @@ export const LocationFilter = ({ selectedState, states, onStateChange }: Locatio
   const { data: statesWithCounts, isLoading } = useQuery({
     queryKey: ['all-state-counts'],
     queryFn: async () => {
-      // Updated values with Georgia count added (16 facilities)
+      // Updated values with Georgia count corrected to 15 facilities
       return [
         { state: "Arizona", count: 1 },
         { state: "California", count: 14 },
         { state: "Colorado", count: 1 },
         { state: "Florida", count: 1 },
-        { state: "Georgia", count: 16 }, // Added Georgia with 16 facilities
+        { state: "Georgia", count: 15 }, // Corrected Georgia count from 16 to 15
         { state: "Indiana", count: 7 },
         { state: "Lowa", count: 1 }, // Kept as Lowa as requested
         { state: "Minnesota", count: 1 },
         { state: "Nevada", count: 1 },
         { state: "New York", count: 7 },
-        { state: "Ohio", count: 14 }, // Corrected from 15 to 14
+        { state: "Ohio", count: 14 }, 
         { state: "Oregon", count: 17 },
         { state: "Pennsylvania", count: 8 },
         { state: "Texas", count: 1 },
