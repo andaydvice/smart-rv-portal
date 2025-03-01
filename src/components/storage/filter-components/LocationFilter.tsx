@@ -23,12 +23,12 @@ const getFullStateName = (stateCode: string): string => {
     'CA': 'California',
     'CO': 'Colorado',
     'FL': 'Florida',
-    'IA': 'Iowa', // Corrected spelling from Lowa to Iowa
-    'IN': 'Indiana', // Added Indiana
+    'IA': 'Lowa', // Changed back to Lowa as requested
+    'IN': 'Indiana',
     'MN': 'Minnesota',
     'NV': 'Nevada',
     'NY': 'New York',
-    'OH': 'Ohio', // Added Ohio
+    'OH': 'Ohio',
     'OR': 'Oregon',
     'PA': 'Pennsylvania',
     'TX': 'Texas',
@@ -47,18 +47,18 @@ export const LocationFilter = ({ selectedState, states, onStateChange }: Locatio
   const { data: statesWithCounts, isLoading } = useQuery({
     queryKey: ['all-state-counts'],
     queryFn: async () => {
-      // Updated hardcoded values to include Ohio and Indiana
+      // Updated values to use Lowa instead of Iowa
       return [
         { state: "Arizona", count: 1 },
         { state: "California", count: 14 },
         { state: "Colorado", count: 1 },
         { state: "Florida", count: 1 },
-        { state: "Indiana", count: 7 }, // Added Indiana with 7 facilities
-        { state: "Iowa", count: 1 }, // Corrected from Lowa to Iowa
+        { state: "Indiana", count: 7 },
+        { state: "Lowa", count: 1 }, // Changed back to Lowa as requested
         { state: "Minnesota", count: 1 },
         { state: "Nevada", count: 1 },
         { state: "New York", count: 7 },
-        { state: "Ohio", count: 14 }, // Added Ohio with 14 facilities
+        { state: "Ohio", count: 14 },
         { state: "Oregon", count: 17 },
         { state: "Pennsylvania", count: 8 },
         { state: "Texas", count: 1 },

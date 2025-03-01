@@ -1,3 +1,4 @@
+
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
 import { StorageFacility, FilterState, DatabaseStorageFacility } from './types';
@@ -79,8 +80,8 @@ export const useStorageFacilities = (filters: FilterState) => {
         query = query.or('state.eq.NV,state.eq.Nevada,state.ilike.%nevada%');
       } else if (filters.selectedState === 'Colorado') {
         query = query.or('state.eq.CO,state.eq.Colorado,state.ilike.%colorado%');
-      } else if (filters.selectedState === 'Iowa') {
-        query = query.or('state.eq.IA,state.eq.Iowa,state.ilike.%iowa%');
+      } else if (filters.selectedState === 'Lowa') {
+        query = query.or('state.eq.IA,state.eq.Lowa,state.ilike.%lowa%');
       } else if (filters.selectedState === 'Minnesota') {
         query = query.or('state.eq.MN,state.eq.Minnesota,state.ilike.%minnesota%');
       } else if (filters.selectedState === 'Wisconsin') {
@@ -116,7 +117,7 @@ export const useStorageFacilities = (filters: FilterState) => {
                facility.state === 'TX' ? 'Texas' :
                facility.state === 'FL' ? 'Florida' :
                facility.state === 'NV' ? 'Nevada' :
-               facility.state === 'IA' ? 'Iowa' :
+               facility.state === 'IA' ? 'Lowa' : // Changed from Iowa to Lowa as requested
                facility.state === 'MN' ? 'Minnesota' :
                facility.state === 'WI' ? 'Wisconsin' :
                facility.state === 'OR' ? 'Oregon' :
