@@ -1,23 +1,22 @@
+
 "use client";
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState } from 'react';
 import { Card } from '@/components/ui/card';
 import FilterPanel from './FilterPanel';
 import { FilterState } from './types';
-import { ScrollArea } from '@/components/ui/scroll-area';
-import FacilityCard from './FacilityCard';
-import MapView from './MapView';
-import { useStorageFacilities } from './useStorageFacilities';
-import { AlertCircle, Loader2, Search } from 'lucide-react';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { supabase } from '@/integrations/supabase/client';
-import RecentlyViewedFacilities from './RecentlyViewedFacilities';
+import { AlertCircle } from 'lucide-react';
+import { useStorageFacilities } from './useStorageFacilities';
 import { useRecentlyViewed } from './useRecentlyViewed';
+import MapView from './MapView';
+import RecentlyViewedFacilities from './RecentlyViewedFacilities';
+import LoadingStateDisplay from './map-view/LoadingStateDisplay';
+import FacilityList from './map-view/FacilityList';
+import { useMapToken } from './map-view/useMapToken';
+import { useFacilitySelection } from './map-view/useFacilitySelection';
 
 const StorageFacilitiesMap = () => {
-  const [mapToken, setMapToken] = useState<string>('');
-  const [mapTokenError, setMapTokenError] = useState<string>('');
-  const [highlightedFacility, setHighlightedFacility] = useState<string | null>(null);
   const [filters, setFilters] = useState<FilterState>({
     features: {
       indoor: false,
@@ -33,138 +32,15 @@ const StorageFacilitiesMap = () => {
 
   const { facilities: filteredFacilities, isLoading, error } = useStorageFacilities(filters);
   const { recentlyViewed, addToRecentlyViewed } = useRecentlyViewed();
+  const { mapToken, mapTokenError } = useMapToken();
   
-  const scrollAreaRef = useRef<HTMLDivElement>(null);
-  const facilityRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
-
-  useEffect(() => {
-    const fetchMapboxToken = async () => {
-      try {
-        console.log('Fetching Mapbox token...');
-        const { data, error } = await supabase.functions.invoke('geocode-address', {
-          body: { type: 'getToken' }
-        });
-        
-        if (error || !data) {
-          console.error('Error fetching token:', error);
-          setMapTokenError('Failed to load map configuration');
-          setMapToken('');
-          return;
-        }
-        
-        if (!data.token || typeof data.token !== 'string' || !data.token.startsWith('pk.')) {
-          console.error('Invalid token received:', data);
-          setMapTokenError('Invalid map configuration received');
-          setMapToken('');
-          return;
-        }
-        
-        console.log('Successfully received valid Mapbox token');
-        setMapToken(data.token);
-        setMapTokenError('');
-      } catch (err) {
-        console.error('Failed to fetch Mapbox token:', err);
-        setMapTokenError('Failed to load map configuration');
-        setMapToken('');
-      }
-    };
-
-    fetchMapboxToken();
-  }, []);
-
-  const handleFacilityClick = (facilityId: string) => {
-    setHighlightedFacility(facilityId);
-    
-    if (filteredFacilities) {
-      const facility = filteredFacilities.find(f => f.id === facilityId);
-      if (facility) {
-        addToRecentlyViewed(facility);
-      }
-    }
-    
-    setTimeout(() => {
-      if (facilityRefs.current[facilityId] && scrollAreaRef.current) {
-        const facilityElement = facilityRefs.current[facilityId];
-        const scrollContainer = scrollAreaRef.current.querySelector('[data-radix-scroll-area-viewport]');
-        
-        if (facilityElement && scrollContainer) {
-          const containerRect = scrollContainer.getBoundingClientRect();
-          const elementRect = facilityElement.getBoundingClientRect();
-          
-          const isInView = 
-            elementRect.top >= containerRect.top && 
-            elementRect.bottom <= containerRect.bottom;
-            
-          if (!isInView) {
-            const scrollTop = 
-              elementRect.top - 
-              containerRect.top + 
-              (scrollContainer as HTMLElement).scrollTop - 
-              (containerRect.height - elementRect.height) / 2;
-              
-            (scrollContainer as HTMLElement).scrollTo({
-              top: scrollTop,
-              behavior: 'smooth'
-            });
-          }
-        }
-      }
-    }, 100);
-  };
-
-  const renderContent = () => {
-    if (isLoading) {
-      return (
-        <div className="flex items-center justify-center h-[600px]">
-          <div className="flex flex-col items-center space-y-4">
-            <Loader2 className="w-8 h-8 animate-spin text-blue-500" />
-            <p className="text-gray-400">Loading storage facilities...</p>
-          </div>
-        </div>
-      );
-    }
-
-    if (error) {
-      return (
-        <Alert variant="destructive" className="m-4">
-          <AlertCircle className="h-4 w-4" />
-          <AlertDescription>
-            Error loading storage facilities. Please try again later.
-          </AlertDescription>
-        </Alert>
-      );
-    }
-
-    if (filteredFacilities?.length === 0) {
-      return (
-        <div className="flex flex-col items-center justify-center h-[600px] text-center p-4">
-          <Search className="w-12 h-12 text-gray-400 mb-4" />
-          <h3 className="text-lg font-semibold text-gray-300 mb-2">No Storage Facilities Found</h3>
-          <p className="text-gray-400 max-w-md">
-            Try adjusting your filters or price range to see more results.
-          </p>
-        </div>
-      );
-    }
-
-    return (
-      <ScrollArea className="h-[600px]" ref={scrollAreaRef}>
-        <div className="p-4 space-y-4">
-          {filteredFacilities?.map(facility => (
-            <FacilityCard
-              key={facility.id}
-              facility={facility}
-              isHighlighted={facility.id === highlightedFacility}
-              onClick={() => handleFacilityClick(facility.id)}
-              ref={(el) => {
-                facilityRefs.current[facility.id] = el;
-              }}
-            />
-          ))}
-        </div>
-      </ScrollArea>
-    );
-  };
+  const { 
+    highlightedFacility, 
+    scrollAreaRef, 
+    handleFacilityClick 
+  } = useFacilitySelection({ 
+    addToRecentlyViewed 
+  });
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 min-h-[800px]">
@@ -172,7 +48,20 @@ const StorageFacilitiesMap = () => {
         <div className="space-y-4">
           <FilterPanel onFilterChange={setFilters} />
           <Card className="bg-[#080F1F] border-gray-700">
-            {renderContent()}
+            <LoadingStateDisplay
+              isLoading={isLoading}
+              error={error}
+              hasResults={!!filteredFacilities?.length}
+            />
+            
+            {filteredFacilities && filteredFacilities.length > 0 && (
+              <FacilityList
+                facilities={filteredFacilities}
+                highlightedFacility={highlightedFacility}
+                onFacilityClick={(facilityId) => handleFacilityClick(facilityId, filteredFacilities)}
+                scrollAreaRef={scrollAreaRef}
+              />
+            )}
           </Card>
         </div>
       </div>
@@ -190,14 +79,14 @@ const StorageFacilitiesMap = () => {
               mapToken={mapToken}
               facilities={filteredFacilities || []}
               highlightedFacility={highlightedFacility}
-              onMarkerClick={handleFacilityClick}
+              onMarkerClick={(facilityId) => handleFacilityClick(facilityId, filteredFacilities)}
               selectedState={filters.selectedState}
             />
           )}
         </Card>
         <RecentlyViewedFacilities 
           facilities={recentlyViewed}
-          onFacilityClick={handleFacilityClick}
+          onFacilityClick={(facilityId) => handleFacilityClick(facilityId, filteredFacilities)}
           className="h-[180px]"
         />
       </div>
