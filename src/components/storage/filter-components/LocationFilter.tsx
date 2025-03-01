@@ -47,7 +47,7 @@ export const LocationFilter = ({ selectedState, states, onStateChange }: Locatio
   const { data: statesWithCounts, isLoading } = useQuery({
     queryKey: ['all-state-counts'],
     queryFn: async () => {
-      // Updated values to include the new Ohio facility
+      // Updated values with Ohio count corrected to 14
       return [
         { state: "Arizona", count: 1 },
         { state: "California", count: 14 },
@@ -58,7 +58,7 @@ export const LocationFilter = ({ selectedState, states, onStateChange }: Locatio
         { state: "Minnesota", count: 1 },
         { state: "Nevada", count: 1 },
         { state: "New York", count: 7 },
-        { state: "Ohio", count: 15 }, // Updated count to include new facility
+        { state: "Ohio", count: 14 }, // Corrected from 15 to 14
         { state: "Oregon", count: 17 },
         { state: "Pennsylvania", count: 8 },
         { state: "Texas", count: 1 },
