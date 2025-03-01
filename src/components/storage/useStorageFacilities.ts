@@ -48,14 +48,20 @@ export const useStorageFacilities = (filters: FilterState) => {
           review_count
         `);
       
-      // Log the query parameters for debugging
+      // Debug log query params
       console.log('Query params:', {
         selectedState: filters.selectedState,
         priceRange: filters.priceRange
       });
       
+      // Handle New York state specifically with enhanced matching
+      if (filters.selectedState === 'New York') {
+        // Use a filter approach that will catch all variations of NY
+        console.log('Using enhanced New York query with multiple state formats');
+        query = query.or('state.eq.NY,state.eq.New York,state.ilike.%new%york%');
+      } 
       // Handle different state formats
-      if (filters.selectedState === 'California') {
+      else if (filters.selectedState === 'California') {
         query = query.or('state.eq.CA,state.eq.California');
       } else if (filters.selectedState === 'Arizona') {
         query = query.or('state.eq.AZ,state.eq.Arizona');
@@ -77,10 +83,6 @@ export const useStorageFacilities = (filters: FilterState) => {
         query = query.or('state.eq.OR,state.eq.Oregon');
       } else if (filters.selectedState === 'Pennsylvania') {
         query = query.or('state.eq.PA,state.eq.Pennsylvania');
-      } else if (filters.selectedState === 'New York') {
-        // Enhanced New York matching
-        query = query.or('state.eq.NY,state.eq.New York,state.ilike.%new%york%');
-        console.log('Searching for New York facilities with enhanced query');
       } else if (filters.selectedState) {
         query = query.eq('state', filters.selectedState);
       }
@@ -94,37 +96,33 @@ export const useStorageFacilities = (filters: FilterState) => {
       
       if (!data) return [];
 
-      // Enhanced logging for New York facilities
+      // Enhanced debugging for New York facilities
       const nyFacilities = data.filter(f => 
         f.state === 'NY' || 
         f.state === 'New York' || 
         (typeof f.state === 'string' && f.state.toLowerCase().includes('new york'))
       );
       
+      // Log complete data for better debugging
       console.log('Total facilities fetched:', data.length);
-      console.log('Facility names:', data.map(f => f.name).sort());
       console.log('States returned:', [...new Set(data.map(f => f.state))].sort());
       
-      if (nyFacilities.length > 0) {
-        console.log(`Found ${nyFacilities.length} New York facilities:`);
-        console.log('NY Facilities:', JSON.stringify(nyFacilities.map(f => ({
-          id: f.id,
-          name: f.name,
-          state: f.state,
-          latitude: f.latitude,
-          longitude: f.longitude
-        })), null, 2));
+      if (filters.selectedState === 'New York') {
+        console.log(`Found ${nyFacilities.length} New York facilities in database query result`);
+        console.log('ALL New York facilities from database:', JSON.stringify(nyFacilities, null, 2));
       }
-      
-      // Print full facility data to debug coordinate issues
-      console.log('Raw facility data sample:', JSON.stringify(data.slice(0, 3), null, 2));
 
-      return data.map(facility => ({
-        id: facility.id,
-        name: facility.name,
-        address: facility.address,
-        city: facility.city,
-        state: facility.state === 'AZ' ? 'Arizona' : 
+      return data.map(facility => {
+        // Extra validation for New York facilities
+        if (facility.state === 'NY' || 
+            facility.state === 'New York' || 
+            (typeof facility.state === 'string' && facility.state.toLowerCase().includes('new york'))) {
+          console.log(`Processing NY facility from DB: ${facility.name} (${facility.id}) - Coordinates: ${facility.latitude},${facility.longitude}`);
+        }
+        
+        // Normalize state names for display
+        const normalizedState = 
+               facility.state === 'AZ' ? 'Arizona' : 
                facility.state === 'CA' ? 'California' : 
                facility.state === 'CO' ? 'Colorado' :
                facility.state === 'TX' ? 'Texas' :
@@ -136,33 +134,42 @@ export const useStorageFacilities = (filters: FilterState) => {
                facility.state === 'OR' ? 'Oregon' :
                facility.state === 'PA' ? 'Pennsylvania' :
                facility.state === 'NY' ? 'New York' :
-               facility.state,
-        latitude: Number(facility.latitude),
-        longitude: Number(facility.longitude),
-        features: {
-          indoor: Boolean(facility.features?.indoor),
-          climate_controlled: Boolean(facility.features?.climate_controlled),
-          "24h_access": Boolean(facility.features?.["24h_access"]),
-          security_system: Boolean(facility.features?.security_system),
-          vehicle_washing: Boolean(facility.features?.vehicle_washing)
-        },
-        price_range: {
-          min: Number(facility.price_range?.min) || 0,
-          max: Number(facility.price_range?.max) || 0,
-          currency: facility.price_range?.currency || 'USD'
-        },
-        contact_phone: facility.contact_phone,
-        contact_email: facility.contact_email,
-        avg_rating: facility.avg_rating,
-        review_count: facility.review_count,
-        verified_fields: {
-          features: false,
-          price_range: false,
-          contact_info: false,
-          location: false,
-          business_hours: false
-        }
-      }));
+               facility.state;
+               
+        // Return cleaned facility data
+        return {
+          id: facility.id,
+          name: facility.name,
+          address: facility.address,
+          city: facility.city,
+          state: normalizedState,
+          latitude: Number(facility.latitude),
+          longitude: Number(facility.longitude),
+          features: {
+            indoor: Boolean(facility.features?.indoor),
+            climate_controlled: Boolean(facility.features?.climate_controlled),
+            "24h_access": Boolean(facility.features?.["24h_access"]),
+            security_system: Boolean(facility.features?.security_system),
+            vehicle_washing: Boolean(facility.features?.vehicle_washing)
+          },
+          price_range: {
+            min: Number(facility.price_range?.min) || 0,
+            max: Number(facility.price_range?.max) || 0,
+            currency: facility.price_range?.currency || 'USD'
+          },
+          contact_phone: facility.contact_phone,
+          contact_email: facility.contact_email,
+          avg_rating: facility.avg_rating,
+          review_count: facility.review_count,
+          verified_fields: {
+            features: false,
+            price_range: false,
+            contact_info: false,
+            location: false,
+            business_hours: false
+          }
+        };
+      });
     },
     refetchOnWindowFocus: false,
     staleTime: 300000 // 5 minute cache

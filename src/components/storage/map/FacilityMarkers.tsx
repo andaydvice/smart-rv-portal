@@ -20,6 +20,7 @@ const FacilityMarkers: React.FC<FacilityMarkersProps> = ({
   const markers = useRef<mapboxgl.Marker[]>([]);
   const [markersCreated, setMarkersCreated] = useState<number>(0);
   const [skippedFacilities, setSkippedFacilities] = useState<number>(0);
+  const [processedNYFacilities, setProcessedNYFacilities] = useState<number>(0);
 
   useEffect(() => {
     // Clear existing markers
@@ -29,34 +30,46 @@ const FacilityMarkers: React.FC<FacilityMarkersProps> = ({
     // Debug - log the received facilities in full detail
     console.log(`Received ${facilities.length} facilities to display on map`);
     
-    // Count New York facilities specifically
+    // Count New York facilities specifically and log them all
     const nyFacilities = facilities.filter(f => 
       f.state === 'New York' || f.state === 'NY' || 
       (typeof f.state === 'string' && f.state.toLowerCase().includes('new york'))
     );
+    
     console.log(`New York facilities count: ${nyFacilities.length}`);
-    if (nyFacilities.length > 0) {
-      console.log('New York facilities:', JSON.stringify(nyFacilities.map(f => ({
-        id: f.id,
-        name: f.name,
-        coordinates: [f.latitude, f.longitude],
-        state: f.state
-      })), null, 2));
-    }
+    console.log('ALL New York facilities:', JSON.stringify(nyFacilities.map(f => ({
+      id: f.id,
+      name: f.name,
+      coordinates: [f.longitude, f.latitude],
+      state: f.state
+    })), null, 2));
     
     let skipped = 0;
+    let processedNY = 0;
+    
+    // Create a Set of NY facility IDs to track duplicates
+    const processedNYIds = new Set();
     
     // Process each facility individually without grouping
     facilities.forEach((facility, index) => {
       try {
-        // Double-check state formatting for New York facilities
+        // Identify New York facilities using multiple methods
         const isNewYork = 
           facility.state === 'New York' || 
           facility.state === 'NY' || 
           (typeof facility.state === 'string' && facility.state.toLowerCase().includes('new york'));
         
         if (isNewYork) {
-          console.log(`Processing NY facility #${index + 1}: ${facility.name} (${facility.id}) - Coordinates: ${facility.latitude},${facility.longitude}`);
+          // Check for duplicate processing
+          if (processedNYIds.has(facility.id)) {
+            console.warn(`⚠️ Duplicate NY facility detected: ${facility.name} (${facility.id})`);
+            return;
+          }
+          
+          processedNYIds.add(facility.id);
+          processedNY++;
+          
+          console.log(`Processing NY facility #${processedNY}: ${facility.name} (${facility.id}) - Coordinates: ${facility.latitude},${facility.longitude}`);
         }
         
         // Validate coordinates
@@ -80,7 +93,8 @@ const FacilityMarkers: React.FC<FacilityMarkersProps> = ({
         }
         
         // Create marker
-        console.log(`📍 Creating marker #${index + 1}: ${facility.name} (${facility.id}) at ${lat.toFixed(4)},${lng.toFixed(4)} - State: ${facility.state}`);
+        const markerText = isNewYork ? `NY-${processedNY}` : `#${index + 1}`;
+        console.log(`📍 Creating marker ${markerText}: ${facility.name} (${facility.id}) at ${lat.toFixed(4)},${lng.toFixed(4)} - State: ${facility.state}`);
         
         // Special handling for NY markers
         const markerColor = facility.id === highlightedFacility 
@@ -113,7 +127,10 @@ const FacilityMarkers: React.FC<FacilityMarkersProps> = ({
 
     setMarkersCreated(markers.current.length);
     setSkippedFacilities(skipped);
+    setProcessedNYFacilities(processedNY);
+    
     console.log(`✅ Successfully created ${markers.current.length} markers on the map out of ${facilities.length} facilities (${skipped} skipped)`);
+    console.log(`✅ Processed ${processedNY} New York facilities out of ${nyFacilities.length} total NY facilities`);
 
     return () => {
       console.log('🧹 Cleaning up markers');
@@ -124,10 +141,15 @@ const FacilityMarkers: React.FC<FacilityMarkersProps> = ({
   // Add an extra element to report discrepancies
   return (
     <div className={process.env.NODE_ENV === 'development' ? 'fixed bottom-4 right-4 bg-black bg-opacity-70 text-white p-2 rounded text-xs z-50' : 'hidden'}>
-      Markers created: {markersCreated}/{facilities.length} (skipped: {skippedFacilities})
+      <div className="font-bold">Map Debug Info:</div>
+      <div>Markers created: {markersCreated}/{facilities.length} (skipped: {skippedFacilities})</div>
       {facilities.filter(f => f.state === 'New York' || f.state === 'NY').length > 0 && (
-        <div className="mt-1">
-          New York facilities: {facilities.filter(f => f.state === 'New York' || f.state === 'NY').length}
+        <div className="mt-1 text-red-400">
+          New York facilities: {processedNYFacilities}/{facilities.filter(f => 
+            f.state === 'New York' || 
+            f.state === 'NY' || 
+            (typeof f.state === 'string' && f.state.toLowerCase().includes('new york'))
+          ).length}
         </div>
       )}
     </div>
