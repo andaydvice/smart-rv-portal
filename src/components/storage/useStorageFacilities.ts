@@ -60,6 +60,10 @@ export const useStorageFacilities = (filters: FilterState) => {
         console.log('Using enhanced New York query with multiple state formats');
         query = query.or('state.eq.NY,state.eq.New York,state.ilike.%new%york%,state.eq.new york');
       } 
+      // Add Georgia state handling
+      else if (filters.selectedState === 'Georgia') {
+        query = query.or('state.eq.GA,state.eq.Georgia,state.ilike.%georgia%');
+      }
       // Added Ohio and Indiana state handling
       else if (filters.selectedState === 'Ohio') {
         query = query.or('state.eq.OH,state.eq.Ohio,state.ilike.%ohio%');
@@ -117,6 +121,7 @@ export const useStorageFacilities = (filters: FilterState) => {
                facility.state === 'TX' ? 'Texas' :
                facility.state === 'FL' ? 'Florida' :
                facility.state === 'NV' ? 'Nevada' :
+               facility.state === 'GA' ? 'Georgia' : // Added Georgia normalization
                facility.state === 'IA' ? 'Lowa' : // Changed from Iowa to Lowa as requested
                facility.state === 'MN' ? 'Minnesota' :
                facility.state === 'WI' ? 'Wisconsin' :
