@@ -78,8 +78,9 @@ export const useStorageFacilities = (filters: FilterState) => {
       } else if (filters.selectedState === 'Pennsylvania') {
         query = query.or('state.eq.PA,state.eq.Pennsylvania');
       } else if (filters.selectedState === 'New York') {
-        // More comprehensive matching for New York
+        // Enhanced New York matching
         query = query.or('state.eq.NY,state.eq.New York,state.ilike.%new%york%');
+        console.log('Searching for New York facilities with enhanced query');
       } else if (filters.selectedState) {
         query = query.eq('state', filters.selectedState);
       }
@@ -93,13 +94,30 @@ export const useStorageFacilities = (filters: FilterState) => {
       
       if (!data) return [];
 
-      // Log the results for verification
+      // Enhanced logging for New York facilities
+      const nyFacilities = data.filter(f => 
+        f.state === 'NY' || 
+        f.state === 'New York' || 
+        (typeof f.state === 'string' && f.state.toLowerCase().includes('new york'))
+      );
+      
       console.log('Total facilities fetched:', data.length);
       console.log('Facility names:', data.map(f => f.name).sort());
-      console.log('States returned:', data.map(f => f.state).sort());
+      console.log('States returned:', [...new Set(data.map(f => f.state))].sort());
+      
+      if (nyFacilities.length > 0) {
+        console.log(`Found ${nyFacilities.length} New York facilities:`);
+        console.log('NY Facilities:', JSON.stringify(nyFacilities.map(f => ({
+          id: f.id,
+          name: f.name,
+          state: f.state,
+          latitude: f.latitude,
+          longitude: f.longitude
+        })), null, 2));
+      }
       
       // Print full facility data to debug coordinate issues
-      console.log('Raw facility data:', JSON.stringify(data.slice(0, 5), null, 2));
+      console.log('Raw facility data sample:', JSON.stringify(data.slice(0, 3), null, 2));
 
       return data.map(facility => ({
         id: facility.id,
