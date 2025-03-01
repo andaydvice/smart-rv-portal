@@ -47,10 +47,10 @@ export const createPopupHTML = (facility: StorageFacility) => {
         ` : ''}
       </div>
 
-      <div class="flex justify-between items-center py-3 border-y border-gray-700">
+      <div class="flex justify-between items-center py-3 border-y border-gray-700 bg-gradient-to-r from-[#131a2a] to-[#1a2235] rounded-sm px-2">
         <div>
           <span class="text-sm text-gray-400">Price Range</span>
-          <div class="font-semibold text-[#60A5FA]">
+          <div class="font-semibold text-[#F97316]">
             $${facility.price_range.min} - $${facility.price_range.max}
           </div>
         </div>

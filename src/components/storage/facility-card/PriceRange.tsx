@@ -16,10 +16,10 @@ export const PriceRange: React.FC<PriceRangeProps> = ({
   verified
 }) => {
   return (
-    <div className="flex justify-between items-center py-2 border-y border-gray-700">
-      <div>
+    <div className="flex justify-between items-center py-2 border-y border-gray-700 bg-gradient-to-r from-[#131a2a] to-[#1a2235] rounded-sm">
+      <div className="px-2">
         <span className="text-sm text-gray-400">Price Range</span>
-        <div className="font-semibold text-[#60A5FA] flex items-center gap-2">
+        <div className="font-semibold text-[#F97316] flex items-center gap-2">
           ${min} - ${max}
           {verified && (
             <Check className="w-4 h-4 text-green-500" />
