@@ -59,7 +59,14 @@ export const useStorageFacilities = (filters: FilterState) => {
         console.log('Using enhanced New York query with multiple state formats');
         query = query.or('state.eq.NY,state.eq.New York,state.ilike.%new%york%,state.eq.new york');
       } 
-      // Handle different state formats
+      // Added Ohio and Indiana state handling
+      else if (filters.selectedState === 'Ohio') {
+        query = query.or('state.eq.OH,state.eq.Ohio,state.ilike.%ohio%');
+      } 
+      else if (filters.selectedState === 'Indiana') {
+        query = query.or('state.eq.IN,state.eq.Indiana,state.ilike.%indiana%');
+      }
+      // Handle different state formats for existing states
       else if (filters.selectedState === 'California') {
         query = query.or('state.eq.CA,state.eq.California,state.ilike.%california%');
       } else if (filters.selectedState === 'Arizona') {
@@ -72,8 +79,8 @@ export const useStorageFacilities = (filters: FilterState) => {
         query = query.or('state.eq.NV,state.eq.Nevada,state.ilike.%nevada%');
       } else if (filters.selectedState === 'Colorado') {
         query = query.or('state.eq.CO,state.eq.Colorado,state.ilike.%colorado%');
-      } else if (filters.selectedState === 'Lowa') {
-        query = query.or('state.eq.IA,state.eq.Lowa,state.eq.Iowa,state.ilike.%iowa%');
+      } else if (filters.selectedState === 'Iowa') {
+        query = query.or('state.eq.IA,state.eq.Iowa,state.ilike.%iowa%');
       } else if (filters.selectedState === 'Minnesota') {
         query = query.or('state.eq.MN,state.eq.Minnesota,state.ilike.%minnesota%');
       } else if (filters.selectedState === 'Wisconsin') {
@@ -95,37 +102,12 @@ export const useStorageFacilities = (filters: FilterState) => {
       
       if (!data) return [];
 
-      // Enhanced debugging for New York facilities
-      const nyFacilities = data.filter(f => 
-        f.state === 'NY' || 
-        f.state === 'New York' || 
-        (typeof f.state === 'string' && f.state.toLowerCase().includes('new york'))
-      );
-      
-      // Log complete data for better debugging
+      // Log states returned for debugging
       console.log('Total facilities fetched:', data.length);
       console.log('States returned:', [...new Set(data.map(f => f.state))].sort());
       
-      if (nyFacilities.length > 0) {
-        console.log(`Found ${nyFacilities.length} New York facilities in database query result`);
-        console.log('NY facilities - raw data:', JSON.stringify(nyFacilities.map(f => ({
-          id: f.id,
-          name: f.name,
-          lat: f.latitude,
-          lng: f.longitude,
-          state: f.state
-        })), null, 2));
-      }
-
       // Map database results to StorageFacility objects
       return data.map(facility => {
-        // Extra validation for New York facilities
-        if (facility.state === 'NY' || 
-            facility.state === 'New York' || 
-            (typeof facility.state === 'string' && facility.state.toLowerCase().includes('new york'))) {
-          console.log(`Processing NY facility from DB: ${facility.name} (${facility.id}) - Original coordinates: ${facility.latitude},${facility.longitude}`);
-        }
-        
         // Normalize state names for display
         const normalizedState = 
                facility.state === 'AZ' ? 'Arizona' : 
@@ -134,23 +116,19 @@ export const useStorageFacilities = (filters: FilterState) => {
                facility.state === 'TX' ? 'Texas' :
                facility.state === 'FL' ? 'Florida' :
                facility.state === 'NV' ? 'Nevada' :
-               facility.state === 'IA' ? 'Lowa' :
+               facility.state === 'IA' ? 'Iowa' :
                facility.state === 'MN' ? 'Minnesota' :
                facility.state === 'WI' ? 'Wisconsin' :
                facility.state === 'OR' ? 'Oregon' :
                facility.state === 'PA' ? 'Pennsylvania' :
                facility.state === 'NY' ? 'New York' :
+               facility.state === 'OH' ? 'Ohio' :
+               facility.state === 'IN' ? 'Indiana' :
                facility.state;
         
-        // FIX: Keep original coordinates as-is without validation
-        // This ensures all records pass through without modification
+        // Keep original coordinates as-is without validation
         const latitude = facility.latitude;
         const longitude = facility.longitude;
-        
-        // For NY facilities, log the normalized coordinates
-        if (normalizedState === 'New York') {
-          console.log(`Passing NY facility coordinates as-is: ${facility.name} (${facility.id}) - Original: ${facility.latitude},${facility.longitude}`);
-        }
                
         // Return storage facility with original coordinates
         return {
@@ -191,12 +169,10 @@ export const useStorageFacilities = (filters: FilterState) => {
     staleTime: 300000 // 5 minute cache
   });
 
-  // CRITICAL FIX: Remove all coordinate validation to allow ANY facility to display
-  // This is a sledgehammer approach to find where the missing facilities are
+  // Only filter by price range
   const filteredFacilities = facilities?.filter(facility => {
     const facilityMaxPrice = facility.price_range.max;
     
-    // ONLY filter by price, nothing else
     return facilityMaxPrice >= filters.priceRange[0] && facilityMaxPrice <= filters.priceRange[1];
   });
   
