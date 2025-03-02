@@ -32,4 +32,17 @@
   .hover-scale {
     @apply transition-transform duration-300 hover:scale-[1.02];
   }
+  
+  /* Ensure tab text is always visible regardless of state */
+  [role="tab"] span {
+    visibility: visible !important;
+    display: block !important;
+  }
+  
+  /* Fix for disappearing text in active tabs */
+  [role="tab"][data-state="active"] span,
+  [role="tab"][data-state="active"] div {
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
 }

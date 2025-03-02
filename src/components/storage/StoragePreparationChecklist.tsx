@@ -82,7 +82,7 @@ const StoragePreparationChecklist: React.FC = memo(() => {
   }, [progress]);
 
   return (
-    <div className="min-h-screen bg-[#080F1F] py-12">
+    <div className="min-h-screen bg-[#080F1F] py-12 storage-preparation-checklist">
       <div className="container mx-auto px-4 max-w-5xl">
         <Card className="border-gray-700 bg-[#091020] shadow-xl overflow-hidden">
           <ChecklistHeader 

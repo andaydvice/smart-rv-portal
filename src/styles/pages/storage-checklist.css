@@ -87,6 +87,13 @@
   background-color: rgba(255, 255, 255, 0.1) !important;
 }
 
+/* Make sure text is always visible in tabs - fix for disappearing text */
+[role="tab"] span {
+  visibility: visible !important;
+  opacity: 1 !important;
+  display: block !important;
+}
+
 /* Force tab content to be fully visible */
 [role="tabpanel"] {
   position: relative !important;
