@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList } from "@/components/ui/tabs";
 import { Printer, Save, RotateCcw, CheckSquare } from "lucide-react";
+import { toast } from "@/components/ui/use-toast";
 import RVInfoTab from './checklist/RVInfoTab';
 import ExteriorTab from './checklist/ExteriorTab';
 import InteriorTab from './checklist/InteriorTab';
@@ -29,6 +30,38 @@ const StoragePreparationChecklist: React.FC = () => {
     setProgress({});
     setStartDate(new Date());
     setEndDate(undefined);
+    toast({
+      title: "Progress Reset",
+      description: "Your checklist has been reset to default state.",
+    });
+  };
+
+  const handleSaveProgress = () => {
+    // Save progress to localStorage
+    const saveData = {
+      progress,
+      startDate,
+      endDate,
+      savedAt: new Date().toISOString()
+    };
+    
+    localStorage.setItem('rv-storage-checklist', JSON.stringify(saveData));
+    
+    toast({
+      title: "Progress Saved",
+      description: "Your checklist progress has been saved successfully.",
+      variant: "default",
+    });
+  };
+
+  const handlePrint = () => {
+    // Print the checklist
+    window.print();
+    
+    toast({
+      title: "Printing",
+      description: "Sending checklist to printer...",
+    });
   };
 
   // Calculate completion percentage
@@ -55,6 +88,7 @@ const StoragePreparationChecklist: React.FC = () => {
                   variant="outline" 
                   className="gap-2 bg-[#151A22] hover:bg-[#1d2532] hover:text-white text-white border-gray-700 
                   focus:text-white active:text-white focus:bg-[#1d2532] active:bg-[#1d2532] focus:border-[#5B9BD5] active:border-[#5B9BD5]"
+                  onClick={handleSaveProgress}
                 >
                   <Save size={16} className="text-[#5B9BD5]" />
                   Save Progress
@@ -63,6 +97,7 @@ const StoragePreparationChecklist: React.FC = () => {
                   variant="outline" 
                   className="gap-2 bg-[#151A22] hover:bg-[#1d2532] hover:text-white text-white border-gray-700
                   focus:text-white active:text-white focus:bg-[#1d2532] active:bg-[#1d2532] focus:border-[#5B9BD5] active:border-[#5B9BD5]"
+                  onClick={handlePrint}
                 >
                   <Printer size={16} className="text-[#5B9BD5]" />
                   Print
