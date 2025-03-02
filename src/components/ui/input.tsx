@@ -11,7 +11,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     // Create a default style that explicitly sets text color to white for better visibility
     // on dark backgrounds while allowing overrides through the style prop
     const defaultStyle = {
-      color: 'white', // Set default color to white
+      color: 'white !important', // Set default color to white with !important to override any inherited styles
       ...style
     };
     

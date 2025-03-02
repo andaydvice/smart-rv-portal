@@ -87,7 +87,7 @@ const RVInfoTab: React.FC<RVInfoTabProps> = ({
                     selected={startDate}
                     onSelect={setStartDate}
                     initialFocus
-                    className="text-white"
+                    className="text-white bg-[#131a2a]"
                   />
                 </PopoverContent>
               </Popover>
@@ -111,7 +111,7 @@ const RVInfoTab: React.FC<RVInfoTabProps> = ({
                     selected={endDate}
                     onSelect={setEndDate}
                     initialFocus
-                    className="text-white"
+                    className="text-white bg-[#131a2a]"
                   />
                 </PopoverContent>
               </Popover>
