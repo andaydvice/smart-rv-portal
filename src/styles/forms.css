@@ -19,3 +19,27 @@ select.dark-input {
   color: white !important;
   caret-color: white !important;
 }
+
+/* Ensure SelectContent is visible in dark theme */
+.SelectContent {
+  background-color: #131a2a !important;
+  border-color: #374151 !important;
+  color: white !important;
+  z-index: 100 !important;
+}
+
+/* Ensure SelectItems are visible */
+.SelectItem {
+  color: white !important;
+  background-color: transparent !important;
+}
+
+.SelectItem:hover, 
+.SelectItem:focus {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Fix dropdown z-index to ensure it appears above other elements */
+[data-radix-popper-content-wrapper] {
+  z-index: 50 !important;
+}

@@ -8,6 +8,17 @@ import { ChecklistItem, ChecklistSection } from './ChecklistSection';
 import { ChecklistTabProps } from './ChecklistTypes';
 
 const ElectricalTab: React.FC<ChecklistTabProps> = ({ handleCheckboxChange, progress }) => {
+  // Add state for the battery type selection
+  const [batteryType, setBatteryType] = React.useState<string>(progress["battery-type"] as string || "");
+  
+  // Handle battery type change
+  const handleBatteryTypeChange = (value: string) => {
+    setBatteryType(value);
+    // Use the same handleCheckboxChange function to store the battery type
+    // This ensures it's saved in the same storage mechanism as other checklist items
+    handleCheckboxChange("battery-type", value as any);
+  };
+
   return (
     <>
       <h2 className="text-2xl font-bold text-[#60A5FA] mb-4">ELECTRICAL SYSTEM</h2>
@@ -127,15 +138,18 @@ const ElectricalTab: React.FC<ChecklistTabProps> = ({ handleCheckboxChange, prog
         
         <div className="space-y-2">
           <Label htmlFor="battery-type" className="text-gray-200">Main House Battery Type</Label>
-          <Select>
-            <SelectTrigger id="battery-type" className="bg-[#131a2a] border-gray-700">
+          <Select 
+            value={batteryType} 
+            onValueChange={handleBatteryTypeChange}
+          >
+            <SelectTrigger id="battery-type" className="bg-[#131a2a] border-gray-700 text-white">
               <SelectValue placeholder="Select battery type" />
             </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="lead-acid">Standard Lead Acid</SelectItem>
-              <SelectItem value="agm">AGM (Absorbed Glass Mat)</SelectItem>
-              <SelectItem value="gel">Gel Cell</SelectItem>
-              <SelectItem value="lithium">Lithium Iron Phosphate (LiFePO4)</SelectItem>
+            <SelectContent className="bg-[#131a2a] border-gray-700">
+              <SelectItem value="lead-acid" className="text-white">Standard Lead Acid</SelectItem>
+              <SelectItem value="agm" className="text-white">AGM (Absorbed Glass Mat)</SelectItem>
+              <SelectItem value="gel" className="text-white">Gel Cell</SelectItem>
+              <SelectItem value="lithium" className="text-white">Lithium Iron Phosphate (LiFePO4)</SelectItem>
             </SelectContent>
           </Select>
         </div>
@@ -144,7 +158,7 @@ const ElectricalTab: React.FC<ChecklistTabProps> = ({ handleCheckboxChange, prog
           <Label htmlFor="electrical-notes" className="text-gray-200">Additional Electrical Notes</Label>
           <Textarea 
             id="electrical-notes" 
-            className="bg-[#131a2a] border-gray-700 min-h-[100px]" 
+            className="bg-[#131a2a] border-gray-700 min-h-[100px] text-white" 
             placeholder="Enter any additional notes about electrical system preparation..." 
           />
         </div>
