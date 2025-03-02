@@ -2,14 +2,11 @@
 import React from 'react';
 import { TabsTrigger } from "@/components/ui/tabs";
 import * as LucideIcons from "lucide-react";
-import { LucideIcon } from 'lucide-react';
-
-// Define a type that includes only the actual icon components from lucide-react
-type IconName = keyof typeof LucideIcons;
+import { Info, ExternalLink, Home, Droplets, Zap, Settings, CircleDashed, Bug, Lock, FileText } from "lucide-react";
 
 interface ChecklistTabTriggerProps {
   value: string;
-  icon?: IconName;
+  icon?: string;
   label: string;
   iconColor?: string;
   progress?: number;
@@ -24,8 +21,19 @@ const ChecklistTabTrigger: React.FC<ChecklistTabTriggerProps> = ({
   iconColor,
   onTabClick
 }) => {
-  // Use dynamic import to handle the icon properly if it exists
-  const Icon = icon ? (LucideIcons[icon] as LucideIcon) : null;
+  // Define a mapping for icon names to components
+  const iconComponents: Record<string, React.ReactNode> = {
+    Info: <Info />,
+    ExternalLink: <ExternalLink />,
+    Home: <Home />,
+    Droplets: <Droplets />,
+    Zap: <Zap />,
+    Settings: <Settings />,
+    CircleDashed: <CircleDashed />,
+    Bug: <Bug />,
+    Lock: <Lock />,
+    FileText: <FileText />
+  };
   
   // Map labels to specific colors exactly as shown in the image
   let specificIconColor = "";
@@ -74,6 +82,14 @@ const ChecklistTabTrigger: React.FC<ChecklistTabTriggerProps> = ({
     }
   };
   
+  // Get the icon component to render
+  const IconComponent = icon && iconComponents[icon] ? 
+    React.cloneElement(iconComponents[icon] as React.ReactElement, {
+      className: "h-6 w-6",
+      stroke: specificIconColor,
+      strokeWidth: 2
+    }) : null;
+  
   return (
     <TabsTrigger 
       value={value}
@@ -81,7 +97,7 @@ const ChecklistTabTrigger: React.FC<ChecklistTabTriggerProps> = ({
       onClick={handleTabClick}
     >
       <div className="flex flex-col items-center gap-2 justify-center">
-        {Icon && <Icon className="h-6 w-6" stroke={specificIconColor} strokeWidth={2} />}
+        {IconComponent}
         <span className="text-sm font-medium">{label}</span>
       </div>
     </TabsTrigger>
