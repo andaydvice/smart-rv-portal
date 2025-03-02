@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
@@ -22,6 +21,12 @@ const StoragePreparationChecklist: React.FC = () => {
   const [endDate, setEndDate] = useState<Date | undefined>(undefined);
   const [progress, setProgress] = useState<{[key: string]: boolean}>({});
   const [lastSavedAt, setLastSavedAt] = useState<string | null>(null);
+  const [notes, setNotes] = useState({
+    general: '',
+    storageContact: '',
+    emergencyContact: '',
+    returnPreparation: ''
+  });
   
   // Load saved progress when component mounts
   useEffect(() => {
@@ -43,13 +48,17 @@ const StoragePreparationChecklist: React.FC = () => {
         if (parsed.savedAt) {
           setLastSavedAt(parsed.savedAt);
         }
+        
+        if (parsed.notes) {
+          setNotes(parsed.notes);
+        }
       } catch (error) {
         console.error('Error loading saved checklist data:', error);
       }
     }
   }, []);
 
-  // Auto-save whenever progress, startDate, or endDate changes
+  // Auto-save whenever progress, startDate, endDate, or notes changes
   useEffect(() => {
     const autoSaveData = () => {
       const currentTime = new Date().toISOString();
@@ -58,6 +67,7 @@ const StoragePreparationChecklist: React.FC = () => {
         progress,
         startDate,
         endDate,
+        notes,
         savedAt: currentTime
       };
       
@@ -65,14 +75,25 @@ const StoragePreparationChecklist: React.FC = () => {
       setLastSavedAt(currentTime);
     };
     
-    // Only auto-save if we have some progress to save
-    if (Object.keys(progress).length > 0) {
+    // Only auto-save if we have some progress to save or notes content
+    if (Object.keys(progress).length > 0 || 
+        notes.general || 
+        notes.storageContact || 
+        notes.emergencyContact || 
+        notes.returnPreparation) {
       autoSaveData();
     }
-  }, [progress, startDate, endDate]);
+  }, [progress, startDate, endDate, notes]);
 
   const handleCheckboxChange = (id: string, checked: boolean) => {
     setProgress(prev => ({...prev, [id]: checked}));
+  };
+
+  const handleNotesChange = (field: string, value: string) => {
+    setNotes(prev => ({
+      ...prev,
+      [field]: value
+    }));
   };
 
   const handleReset = () => {
@@ -80,6 +101,12 @@ const StoragePreparationChecklist: React.FC = () => {
     setStartDate(new Date());
     setEndDate(undefined);
     setLastSavedAt(null);
+    setNotes({
+      general: '',
+      storageContact: '',
+      emergencyContact: '',
+      returnPreparation: ''
+    });
     
     // Clear localStorage
     localStorage.removeItem('rv-storage-checklist');
@@ -98,6 +125,7 @@ const StoragePreparationChecklist: React.FC = () => {
       progress,
       startDate,
       endDate,
+      notes,
       savedAt: currentTime
     };
     
@@ -248,7 +276,10 @@ const StoragePreparationChecklist: React.FC = () => {
                 </TabsContent>
 
                 <TabsContent value="notes">
-                  <NotesTab />
+                  <NotesTab 
+                    notes={notes} 
+                    onNotesChange={handleNotesChange} 
+                  />
                 </TabsContent>
               </div>
             </Tabs>
