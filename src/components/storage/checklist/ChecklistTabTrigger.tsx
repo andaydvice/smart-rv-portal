@@ -20,22 +20,18 @@ const ChecklistTabTrigger: React.FC<ChecklistTabTriggerProps> = ({
   value, 
   icon, 
   label,
-  iconColor, 
-  progress,
-  total
+  iconColor
 }) => {
   // Use dynamic import to handle the icon properly if it exists
   const Icon = icon ? (LucideIcons[icon] as LucideIcon) : null;
-  
-  // Calculate the progress percentage if progress and total are provided
-  const progressPercentage = (progress !== undefined && total && total > 0) 
-    ? Math.round((progress / total) * 100) 
-    : null;
   
   // Map labels to specific colors exactly as shown in the image
   let specificIconColor = "";
   
   switch(label) {
+    case "RV Info":
+      specificIconColor = "#5B9BD5"; // Blue
+      break;
     case "Exterior":
       specificIconColor = "#00C29A"; // Green
       break;
@@ -60,7 +56,6 @@ const ChecklistTabTrigger: React.FC<ChecklistTabTriggerProps> = ({
     case "Security":
       specificIconColor = "#FF9D00"; // Orange
       break;
-    case "RV Info":
     case "Notes":
       specificIconColor = "#5B9BD5"; // Blue
       break;
