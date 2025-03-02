@@ -1,3 +1,4 @@
+
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
 @tailwind base;
@@ -199,4 +200,15 @@ label.inner1 {
 .storage-preparation-checklist textarea {
   color: white !important;
   background-color: #131a2a !important;
+}
+
+/* Preserve tab functionality - important fix */
+.storage-preparation-checklist [role="tablist"] button {
+  background-color: transparent !important;
+}
+
+.storage-preparation-checklist [role="tablist"] button[data-state="active"] {
+  background-color: #131a2a !important;
+  border-bottom: 2px solid #5B9BD5 !important;
+  color: white !important;
 }
