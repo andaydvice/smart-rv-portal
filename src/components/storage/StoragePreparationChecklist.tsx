@@ -1,14 +1,27 @@
 
-import React, { useEffect, useCallback, memo, useMemo } from 'react';
+import React, { useEffect, useCallback, memo, useMemo, useState } from 'react';
 import { Card, CardContent } from "@/components/ui/card";
 import { toast } from "@/components/ui/use-toast";
 import { useChecklistStorage } from './checklist/hooks/useChecklistStorage';
 import ChecklistHeader from './checklist/ChecklistHeader';
 import ChecklistContent from './checklist/ChecklistContent';
 import { Skeleton } from "@/components/ui/skeleton";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 
 // Memoize the component to prevent unnecessary re-renders
 const StoragePreparationChecklist: React.FC = memo(() => {
+  const [resetDialogOpen, setResetDialogOpen] = useState(false);
+  
   const {
     progress,
     startDate,
@@ -46,15 +59,18 @@ const StoragePreparationChecklist: React.FC = memo(() => {
     }
   }, [saveData]);
 
-  const handleReset = useCallback(() => {
-    if (window.confirm("Are you sure you want to reset the checklist? All your progress will be lost.")) {
-      resetData();
-      
-      toast({
-        title: "Progress Reset",
-        description: "Your checklist has been reset to default state.",
-      });
-    }
+  const handleResetRequest = useCallback(() => {
+    setResetDialogOpen(true);
+  }, []);
+
+  const handleResetConfirm = useCallback(() => {
+    resetData();
+    setResetDialogOpen(false);
+    
+    toast({
+      title: "Progress Reset",
+      description: "Your checklist has been reset to default state.",
+    });
   }, [resetData]);
 
   const handlePrint = useCallback(() => {
@@ -134,7 +150,7 @@ const StoragePreparationChecklist: React.FC = memo(() => {
             lastSavedAt={lastSavedAt}
             getLastSavedMessage={getLastSavedMessage}
             onSave={handleSaveProgress}
-            onReset={handleReset}
+            onReset={handleResetRequest}
             onPrint={handlePrint}
           />
           
@@ -153,6 +169,28 @@ const StoragePreparationChecklist: React.FC = memo(() => {
           </CardContent>
         </Card>
       </div>
+
+      <AlertDialog open={resetDialogOpen} onOpenChange={setResetDialogOpen}>
+        <AlertDialogContent className="bg-[#131a2a] border-gray-700 text-white">
+          <AlertDialogHeader>
+            <AlertDialogTitle className="text-white">Reset Checklist?</AlertDialogTitle>
+            <AlertDialogDescription className="text-[#E2E8FF]">
+              This will reset all of your progress and notes. This action cannot be undone.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel className="bg-[#151A22] text-white border-gray-700 hover:bg-[#1d2532] hover:text-white">
+              Cancel
+            </AlertDialogCancel>
+            <AlertDialogAction 
+              onClick={handleResetConfirm}
+              className="bg-red-600 text-white hover:bg-red-700"
+            >
+              Reset
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 });
