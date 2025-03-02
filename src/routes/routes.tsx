@@ -1,150 +1,148 @@
-
-import { RouteObject } from "react-router-dom";
 import Index from "@/pages/Index";
-import Features from "@/pages/Features";
-import Models from "@/pages/Models";
-import Technology from "@/pages/Technology";
-import Troubleshooting from "@/pages/Troubleshooting";
 import Auth from "@/pages/Auth";
-import LuxuryModel from "@/pages/models/LuxuryModel";
-import CompactModel from "@/pages/models/CompactModel";
-import AdventureModel from "@/pages/models/AdventureModel";
-import CompareModels from "@/pages/models/CompareModels";
-import PowerManagement from "@/pages/features/PowerManagement";
-import SmartKitchen from "@/pages/features/SmartKitchen";
-import NavigationSystem from "@/pages/features/NavigationSystem";
-import SecuritySystem from "@/pages/features/SecuritySystem";
-import AutomatedDriving from "@/pages/features/AutomatedDriving";
-import SmartTV from "@/pages/features/SmartTV";
-import AudioSystem from "@/pages/features/AudioSystem";
-import InternetConnectivity from "@/pages/features/InternetConnectivity";
-import VoiceControl from "@/pages/VoiceControl";
-import Documentation from "@/pages/Documentation";
-import CompleteDocumentation from "@/pages/documentation/CompleteDocumentation";
-import StorageFacilities from "@/pages/StorageFacilities";
-import Calculators from "@/pages/Calculators";
 import Blog from "@/pages/Blog";
 import BlogPost from "@/pages/BlogPost";
-import RVWeather from "@/pages/RVWeather";
+import Calculators from "@/pages/Calculators";
 import Contact from "@/pages/Contact";
+import Documentation from "@/pages/Documentation";
+import CompleteDocumentation from "@/pages/CompleteDocumentation";
+import Features from "@/pages/Features";
+import AudioSystem from "@/pages/AudioSystem";
+import AutomatedDriving from "@/pages/AutomatedDriving";
+import InternetConnectivity from "@/pages/InternetConnectivity";
+import NavigationSystem from "@/pages/NavigationSystem";
+import PowerManagement from "@/pages/PowerManagement";
+import SecuritySystem from "@/pages/SecuritySystem";
+import SmartKitchen from "@/pages/SmartKitchen";
+import SmartTV from "@/pages/SmartTV";
+import Models from "@/pages/Models";
+import AdventureModel from "@/pages/AdventureModel";
+import CompactModel from "@/pages/CompactModel";
+import CompareModels from "@/pages/CompareModels";
+import LuxuryModel from "@/pages/LuxuryModel";
+import RVWeather from "@/pages/RVWeather";
 import ScheduleDemo from "@/pages/ScheduleDemo";
+import StorageFacilities from "@/pages/StorageFacilities";
 import StoragePreparationChecklist from "@/pages/StoragePreparationChecklist";
+import Technology from "@/pages/Technology";
+import Troubleshooting from "@/pages/Troubleshooting";
+import VoiceControl from "@/pages/VoiceControl";
 
-export const routes: RouteObject[] = [
+export const routes = [
   {
     path: "/",
-    element: <Index />,
-  },
-  {
-    path: "/features",
-    element: <Features />,
-  },
-  {
-    path: "/models",
-    element: <Models />,
-  },
-  {
-    path: "/technology",
-    element: <Technology />,
-  },
-  {
-    path: "/troubleshooting",
-    element: <Troubleshooting />,
+    element: <Index />
   },
   {
     path: "/auth",
-    element: <Auth />,
-  },
-  {
-    path: "/models/luxury",
-    element: <LuxuryModel />,
-  },
-  {
-    path: "/models/compact",
-    element: <CompactModel />,
-  },
-  {
-    path: "/models/adventure",
-    element: <AdventureModel />,
-  },
-  {
-    path: "/models/compare",
-    element: <CompareModels />,
-  },
-  {
-    path: "/features/power-management",
-    element: <PowerManagement />,
-  },
-  {
-    path: "/features/smart-kitchen",
-    element: <SmartKitchen />,
-  },
-  {
-    path: "/features/navigation",
-    element: <NavigationSystem />,
-  },
-  {
-    path: "/features/security",
-    element: <SecuritySystem />,
-  },
-  {
-    path: "/features/automated-driving",
-    element: <AutomatedDriving />,
-  },
-  {
-    path: "/features/smart-tv",
-    element: <SmartTV />,
-  },
-  {
-    path: "/features/audio",
-    element: <AudioSystem />,
-  },
-  {
-    path: "/features/connectivity",
-    element: <InternetConnectivity />,
-  },
-  {
-    path: "/voice-control",
-    element: <VoiceControl />,
-  },
-  {
-    path: "/documentation",
-    element: <Documentation />,
-  },
-  {
-    path: "/documentation/full",
-    element: <CompleteDocumentation />,
-  },
-  {
-    path: "/storage-facilities",
-    element: <StorageFacilities />,
-  },
-  {
-    path: "/storage-preparation-checklist",
-    element: <StoragePreparationChecklist />,
-  },
-  {
-    path: "/calculators",
-    element: <Calculators />,
+    element: <Auth />
   },
   {
     path: "/blog",
-    element: <Blog />,
+    element: <Blog />
   },
   {
-    path: "/blog/:slug",
-    element: <BlogPost />,
+    path: "/blog/:id",
+    element: <BlogPost />
   },
   {
-    path: "/weather",
-    element: <RVWeather />,
+    path: "/calculators",
+    element: <Calculators />
   },
   {
     path: "/contact",
-    element: <Contact />,
+    element: <Contact />
+  },
+  {
+    path: "/documentation",
+    element: <Documentation />
+  },
+  {
+    path: "/documentation/complete",
+    element: <CompleteDocumentation />
+  },
+  {
+    path: "/features",
+    element: <Features />
+  },
+  {
+    path: "/features/audio-system",
+    element: <AudioSystem />
+  },
+  {
+    path: "/features/automated-driving",
+    element: <AutomatedDriving />
+  },
+  {
+    path: "/features/internet-connectivity",
+    element: <InternetConnectivity />
+  },
+  {
+    path: "/features/navigation-system",
+    element: <NavigationSystem />
+  },
+  {
+    path: "/features/power-management",
+    element: <PowerManagement />
+  },
+  {
+    path: "/features/security-system",
+    element: <SecuritySystem />
+  },
+  {
+    path: "/features/smart-kitchen",
+    element: <SmartKitchen />
+  },
+  {
+    path: "/features/smart-tv",
+    element: <SmartTV />
+  },
+  {
+    path: "/models",
+    element: <Models />
+  },
+  {
+    path: "/models/adventure",
+    element: <AdventureModel />
+  },
+  {
+    path: "/models/compact",
+    element: <CompactModel />
+  },
+  {
+    path: "/models/compare",
+    element: <CompareModels />
+  },
+  {
+    path: "/models/luxury",
+    element: <LuxuryModel />
+  },
+  {
+    path: "/rv-weather",
+    element: <RVWeather />
   },
   {
     path: "/schedule-demo",
-    element: <ScheduleDemo />,
+    element: <ScheduleDemo />
   },
+  {
+    path: "/storage-facilities",
+    element: <StorageFacilities />
+  },
+  {
+    path: "/storage-preparation-checklist",
+    element: <StoragePreparationChecklist />
+  },
+  {
+    path: "/technology",
+    element: <Technology />
+  },
+  {
+    path: "/troubleshooting",
+    element: <Troubleshooting />
+  },
+  {
+    path: "/voice-control",
+    element: <VoiceControl />
+  }
 ];
