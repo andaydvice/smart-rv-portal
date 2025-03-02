@@ -25,7 +25,7 @@ const RVInfoTab: React.FC<RVInfoTabProps> = ({
             <Label htmlFor="owner" className="text-gray-200">RV Owner</Label>
             <Input 
               id="owner" 
-              className="bg-[#131a2a] border-gray-700 text-white placeholder:text-gray-500 focus:border-[#5B9BD5]" 
+              className="bg-[#131a2a] border-gray-700 placeholder:text-gray-500 focus:border-[#5B9BD5]" 
               placeholder="Enter owner name" 
             />
           </div>
@@ -34,7 +34,7 @@ const RVInfoTab: React.FC<RVInfoTabProps> = ({
             <Label htmlFor="model" className="text-gray-200">RV Make/Model</Label>
             <Input 
               id="model" 
-              className="bg-[#131a2a] border-gray-700 text-white placeholder:text-gray-500 focus:border-[#5B9BD5]" 
+              className="bg-[#131a2a] border-gray-700 placeholder:text-gray-500 focus:border-[#5B9BD5]" 
               placeholder="Enter make and model" 
             />
           </div>
@@ -43,7 +43,7 @@ const RVInfoTab: React.FC<RVInfoTabProps> = ({
             <Label htmlFor="year" className="text-gray-200">Year</Label>
             <Input 
               id="year" 
-              className="bg-[#131a2a] border-gray-700 text-white placeholder:text-gray-500 focus:border-[#5B9BD5]" 
+              className="bg-[#131a2a] border-gray-700 placeholder:text-gray-500 focus:border-[#5B9BD5]" 
               placeholder="Enter year" 
             />
           </div>
@@ -54,7 +54,7 @@ const RVInfoTab: React.FC<RVInfoTabProps> = ({
             <Label htmlFor="vin" className="text-gray-200">VIN/Serial Number</Label>
             <Input 
               id="vin" 
-              className="bg-[#131a2a] border-gray-700 text-white placeholder:text-gray-500 focus:border-[#5B9BD5]" 
+              className="bg-[#131a2a] border-gray-700 placeholder:text-gray-500 focus:border-[#5B9BD5]" 
               placeholder="Enter VIN or serial number" 
             />
           </div>
@@ -63,7 +63,7 @@ const RVInfoTab: React.FC<RVInfoTabProps> = ({
             <Label htmlFor="length" className="text-gray-200">Length</Label>
             <Input 
               id="length" 
-              className="bg-[#131a2a] border-gray-700 text-white placeholder:text-gray-500 focus:border-[#5B9BD5]" 
+              className="bg-[#131a2a] border-gray-700 placeholder:text-gray-500 focus:border-[#5B9BD5]" 
               placeholder="Enter length" 
             />
           </div>

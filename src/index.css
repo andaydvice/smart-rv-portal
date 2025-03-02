@@ -84,6 +84,34 @@ textarea::placeholder {
   opacity: 1;
 }
 
+/* Ensure input text is white in dark themes */
+input, 
+textarea, 
+select {
+  color: white !important;
+}
+
+/* Calendar component overrides for dark theme */
+.rdp-button:hover:not([disabled]):not(.rdp-day_selected) {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  color: white !important;
+}
+
+.rdp-day_selected, 
+.rdp-day_selected:hover {
+  background-color: #5B9BD5 !important;
+  color: white !important;
+}
+
+.rdp-button {
+  color: white !important;
+}
+
+.rdp-caption_label, 
+.rdp-head_cell {
+  color: white !important;
+}
+
 .flex.outer1 {
   position: relative;
 }
