@@ -15,10 +15,6 @@ const RVInfoTab: React.FC<RVInfoTabProps> = ({
   setStartDate, 
   setEndDate 
 }) => {
-  // Handle undefined setters by providing no-op functions
-  const handleStartDateChange = setStartDate || (() => {});
-  const handleEndDateChange = setEndDate || (() => {});
-  
   return (
     <>
       <h2 className="text-2xl font-bold text-[#60A5FA] mb-4">RV INFORMATION</h2>
@@ -89,7 +85,7 @@ const RVInfoTab: React.FC<RVInfoTabProps> = ({
                   <Calendar
                     mode="single"
                     selected={startDate}
-                    onSelect={handleStartDateChange}
+                    onSelect={setStartDate}
                     initialFocus
                   />
                 </PopoverContent>
@@ -112,7 +108,7 @@ const RVInfoTab: React.FC<RVInfoTabProps> = ({
                   <Calendar
                     mode="single"
                     selected={endDate}
-                    onSelect={handleEndDateChange}
+                    onSelect={setEndDate}
                     initialFocus
                   />
                 </PopoverContent>
