@@ -26,6 +26,28 @@
   z-index: 100 !important;
 }
 
+/* Fix for tabs container to ensure proper display */
+.storage-preparation-checklist [role="tablist"] {
+  display: flex;
+  width: 100%;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.storage-preparation-checklist [role="tablist"]::-webkit-scrollbar {
+  display: none;
+}
+
+.storage-preparation-checklist [role="tab"] {
+  flex-shrink: 0;
+  min-width: 110px;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
 .flex.outer1 {
   position: relative;
 }

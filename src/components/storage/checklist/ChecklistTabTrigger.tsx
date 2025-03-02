@@ -72,11 +72,11 @@ const ChecklistTabTrigger: React.FC<ChecklistTabTriggerProps> = ({
   return (
     <TabsTrigger 
       value={value}
-      className="data-[state=active]:bg-[#131a2a] data-[state=active]:border-[#5B9BD5] data-[state=active]:border-b-2 data-[state=active]:text-white py-6 px-4 h-full flex flex-col items-center justify-center text-[#E2E8FF]"
+      className="data-[state=active]:bg-[#131a2a] data-[state=active]:border-[#5B9BD5] data-[state=active]:border-b-2 data-[state=active]:text-white py-6 px-4 h-full flex flex-col items-center justify-center text-[#E2E8FF] min-w-[110px]"
     >
-      <div className="flex flex-col items-center gap-3 min-h-[70px] justify-center">
+      <div className="flex flex-col items-center gap-3 min-h-[70px] justify-center w-full">
         {Icon && <Icon className="h-5 w-5" stroke={specificIconColor} strokeWidth={2} />}
-        <span className="text-xs font-medium text-[#E2E8FF] data-[state=active]:text-white">{label}</span>
+        <span className="text-xs font-medium text-[#E2E8FF] data-[state=active]:text-white truncate w-full text-center">{label}</span>
         
         {progressPercentage !== null && (
           <div className="w-full bg-gray-700 h-1 rounded-full overflow-hidden">

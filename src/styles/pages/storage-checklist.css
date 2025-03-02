@@ -30,6 +30,17 @@
 /* Fix tab text color in RV Preparation Checklist */
 .storage-preparation-checklist [role="tab"] {
   color: white !important;
+  white-space: nowrap;
+  min-width: 110px;
+}
+
+/* Fix tab truncation issues */
+.storage-preparation-checklist [role="tab"] span {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: block;
 }
 
 /* Make sure select options are visible */

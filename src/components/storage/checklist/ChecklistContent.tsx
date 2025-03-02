@@ -54,8 +54,8 @@ const ChecklistContent: React.FC<ChecklistContentProps> = ({
       
       <div className="bg-[#131a2a] rounded-xl p-6 shadow-inner border border-gray-800">
         <Tabs defaultValue="rv-info" className="space-y-6">
-          <div className="overflow-x-auto pb-2">
-            <TabsList className="flex space-x-1 min-w-max bg-transparent p-0 h-auto">
+          <div className="overflow-x-auto pb-2 no-scrollbar">
+            <TabsList className="flex min-w-max bg-transparent p-0 h-auto justify-start space-x-1 w-full">
               <ChecklistTabTrigger value="rv-info" label="RV Info" icon="Info" />
               <ChecklistTabTrigger 
                 value="electrical" 
