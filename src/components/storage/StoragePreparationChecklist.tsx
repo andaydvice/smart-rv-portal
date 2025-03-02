@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList } from "@/components/ui/tabs";
@@ -21,6 +21,55 @@ const StoragePreparationChecklist: React.FC = () => {
   const [startDate, setStartDate] = useState<Date | undefined>(new Date());
   const [endDate, setEndDate] = useState<Date | undefined>(undefined);
   const [progress, setProgress] = useState<{[key: string]: boolean}>({});
+  const [lastSavedAt, setLastSavedAt] = useState<string | null>(null);
+  
+  // Load saved progress when component mounts
+  useEffect(() => {
+    const savedData = localStorage.getItem('rv-storage-checklist');
+    
+    if (savedData) {
+      try {
+        const parsed = JSON.parse(savedData);
+        setProgress(parsed.progress || {});
+        
+        if (parsed.startDate) {
+          setStartDate(new Date(parsed.startDate));
+        }
+        
+        if (parsed.endDate) {
+          setEndDate(new Date(parsed.endDate));
+        }
+        
+        if (parsed.savedAt) {
+          setLastSavedAt(parsed.savedAt);
+        }
+      } catch (error) {
+        console.error('Error loading saved checklist data:', error);
+      }
+    }
+  }, []);
+
+  // Auto-save whenever progress, startDate, or endDate changes
+  useEffect(() => {
+    const autoSaveData = () => {
+      const currentTime = new Date().toISOString();
+      
+      const saveData = {
+        progress,
+        startDate,
+        endDate,
+        savedAt: currentTime
+      };
+      
+      localStorage.setItem('rv-storage-checklist', JSON.stringify(saveData));
+      setLastSavedAt(currentTime);
+    };
+    
+    // Only auto-save if we have some progress to save
+    if (Object.keys(progress).length > 0) {
+      autoSaveData();
+    }
+  }, [progress, startDate, endDate]);
 
   const handleCheckboxChange = (id: string, checked: boolean) => {
     setProgress(prev => ({...prev, [id]: checked}));
@@ -30,6 +79,11 @@ const StoragePreparationChecklist: React.FC = () => {
     setProgress({});
     setStartDate(new Date());
     setEndDate(undefined);
+    setLastSavedAt(null);
+    
+    // Clear localStorage
+    localStorage.removeItem('rv-storage-checklist');
+    
     toast({
       title: "Progress Reset",
       description: "Your checklist has been reset to default state.",
@@ -37,15 +91,18 @@ const StoragePreparationChecklist: React.FC = () => {
   };
 
   const handleSaveProgress = () => {
-    // Save progress to localStorage
+    // Manual save progress to localStorage
+    const currentTime = new Date().toISOString();
+    
     const saveData = {
       progress,
       startDate,
       endDate,
-      savedAt: new Date().toISOString()
+      savedAt: currentTime
     };
     
     localStorage.setItem('rv-storage-checklist', JSON.stringify(saveData));
+    setLastSavedAt(currentTime);
     
     toast({
       title: "Progress Saved",
@@ -68,6 +125,14 @@ const StoragePreparationChecklist: React.FC = () => {
   const totalItems = 50; // Approximate total number of checklist items
   const completedItems = Object.values(progress).filter(val => val).length;
   const completionPercentage = Math.round((completedItems / totalItems) * 100);
+
+  // Format last saved time for display
+  const getLastSavedMessage = () => {
+    if (!lastSavedAt) return "";
+    
+    const savedDate = new Date(lastSavedAt);
+    return `Last auto-saved: ${savedDate.toLocaleTimeString()}`;
+  };
 
   return (
     <div className="min-h-screen bg-[#080F1F] py-12">
@@ -113,11 +178,18 @@ const StoragePreparationChecklist: React.FC = () => {
                 </Button>
               </div>
               
-              <div className="flex items-center gap-3 ml-auto bg-[#151A22] py-2 px-3 rounded-md border border-gray-700">
-                <CheckSquare size={18} className="text-[#10B981]" />
-                <div className="flex flex-col">
-                  <span className="text-xs text-[#E2E8FF]">Completion</span>
-                  <span className="text-[#10B981] font-bold">{completionPercentage}%</span>
+              <div className="flex items-center justify-between gap-3 ml-auto">
+                {lastSavedAt && (
+                  <span className="text-xs text-[#E2E8FF] italic mr-3">
+                    {getLastSavedMessage()}
+                  </span>
+                )}
+                <div className="flex items-center gap-3 bg-[#151A22] py-2 px-3 rounded-md border border-gray-700">
+                  <CheckSquare size={18} className="text-[#10B981]" />
+                  <div className="flex flex-col">
+                    <span className="text-xs text-[#E2E8FF]">Completion</span>
+                    <span className="text-[#10B981] font-bold">{completionPercentage}%</span>
+                  </div>
                 </div>
               </div>
             </div>
