@@ -16,6 +16,7 @@ import { weatherConfig } from "@/utils/weatherAPI";
 import { useAuth } from "@/components/auth/AuthContext";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
+import Navbar from "@/components/Navbar";
 
 const RVWeather = () => {
   const { user } = useAuth();
@@ -34,6 +35,7 @@ const RVWeather = () => {
 
   return (
     <div className="min-h-screen w-full bg-gradient-dark text-white">
+      <Navbar />
       <HeaderImage />
       
       <div className="container mx-auto px-4 py-8 max-w-7xl">
