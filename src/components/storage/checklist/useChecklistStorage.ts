@@ -37,6 +37,10 @@ export const useChecklistStorage = () => {
     if (savedData) {
       try {
         const parsed = JSON.parse(savedData);
+        
+        // Explicitly log what we're loading
+        console.log("Loading saved data:", parsed);
+        
         setProgress(parsed.progress || {});
         
         if (parsed.startDate) {
@@ -51,6 +55,9 @@ export const useChecklistStorage = () => {
           setLastSavedAt(parsed.savedAt);
         }
         
+        // Explicitly log the notes we're loading
+        console.log("Loading notes:", parsed.notes);
+        
         if (parsed.notes) {
           setNotes(parsed.notes);
         }
@@ -60,11 +67,10 @@ export const useChecklistStorage = () => {
     }
   }, []);
 
-  // Save function that properly serializes dates
+  // Core save function
   const saveData = (manualSave: boolean = false) => {
     const currentTime = new Date().toISOString();
     
-    // Properly serialize dates to ISO strings for localStorage
     const dataToSave = {
       progress,
       startDate: startDate ? startDate.toISOString() : undefined,
@@ -73,6 +79,7 @@ export const useChecklistStorage = () => {
       savedAt: currentTime
     };
     
+    // Log what we're saving
     if (manualSave) {
       console.log("Manually saving data:", dataToSave);
     } else {
@@ -85,72 +92,89 @@ export const useChecklistStorage = () => {
     return currentTime;
   };
 
-  // Custom setStartDate that saves immediately
+  // Set start date
   const setStartDateAndSave = (date: Date | undefined) => {
     setStartDate(date);
-    // We're not calling saveData here, as the useEffect below will handle it
+    
+    // Force immediate save after state update using a timeout
+    setTimeout(() => saveData(), 0);
   };
 
-  // Custom setEndDate that saves immediately
+  // Set end date
   const setEndDateAndSave = (date: Date | undefined) => {
     setEndDate(date);
-    // We're not calling saveData here, as the useEffect below will handle it
+    
+    // Force immediate save after state update using a timeout
+    setTimeout(() => saveData(), 0);
   };
 
-  // Handle notes change - save immediately
+  // Handle notes change with IMMEDIATE save
   const handleNotesChange = (field: keyof ChecklistNotes, value: string) => {
-    const updatedNotes = {
-      ...notes,
-      [field]: value
-    };
+    // Log the change
+    console.log(`Notes changed for field: ${field}`, value);
+    
+    // Create a new notes object with the updated field to ensure reactivity
+    const updatedNotes = { ...notes, [field]: value };
     
     // Update state
     setNotes(updatedNotes);
     
-    // Immediately save to localStorage
+    // CRITICAL: Immediately save to localStorage with a direct write
+    // This bypasses React's state batching and ensures the data is saved right away
     const currentTime = new Date().toISOString();
+    
+    // Create the save object with the updated notes directly (don't use state)
     const dataToSave = {
       progress,
       startDate: startDate ? startDate.toISOString() : undefined,
       endDate: endDate ? endDate.toISOString() : undefined,
-      notes: updatedNotes,
+      notes: updatedNotes, // Use the local updated notes, not the state
       savedAt: currentTime
     };
     
-    console.log("Immediate save after notes change for field:", field);
+    console.log("IMMEDIATE SAVE after notes change:", dataToSave);
+    console.log(`Notes for ${field} saved with value:`, value);
+    
+    // Write directly to localStorage
     localStorage.setItem(STORAGE_KEY, JSON.stringify(dataToSave));
     setLastSavedAt(currentTime);
   };
 
-  // Handle checkbox changes and save immediately
+  // Handle checkbox changes with IMMEDIATE save
   const handleCheckboxChange = (id: string, checked: boolean) => {
-    const updatedProgress = {...progress, [id]: checked};
+    // Create updated progress object
+    const updatedProgress = { ...progress, [id]: checked };
+    
+    // Update state
     setProgress(updatedProgress);
     
-    // Immediately save
+    // Immediately save to localStorage directly
     const currentTime = new Date().toISOString();
+    
     const dataToSave = {
-      progress: updatedProgress,
+      progress: updatedProgress, // Use local updated progress
       startDate: startDate ? startDate.toISOString() : undefined,
       endDate: endDate ? endDate.toISOString() : undefined,
       notes,
       savedAt: currentTime
     };
     
-    console.log("Immediate save after checkbox change for:", id);
+    console.log(`Checkbox ${id} changed to ${checked} - saving immediately`);
     localStorage.setItem(STORAGE_KEY, JSON.stringify(dataToSave));
     setLastSavedAt(currentTime);
   };
 
-  // Also add a safety auto-save effect for any other state changes
+  // Backup safety auto-save for any missed changes
   useEffect(() => {
+    console.log("Auto-save effect triggered by state change");
+    
     const timeoutId = setTimeout(() => {
-      console.log("Safety auto-save triggered");
+      console.log("Executing safety auto-save");
       saveData();
     }, 1000);
     
     return () => clearTimeout(timeoutId);
-  }, [progress, startDate, endDate, notes]);
+  }, [progress, startDate, endDate, notes.general, notes.storageContact, notes.emergencyContact, notes.returnPreparation]);
 
   const resetData = () => {
     setProgress({});

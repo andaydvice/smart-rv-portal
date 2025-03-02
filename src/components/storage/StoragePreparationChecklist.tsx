@@ -22,14 +22,35 @@ const StoragePreparationChecklist: React.FC = () => {
     getLastSavedMessage
   } = useChecklistStorage();
 
-  // Ensure data is saved when component unmounts
+  // Force save on any tab change (component blur/focus)
   useEffect(() => {
-    // This will ensure everything is saved when navigating away
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === 'hidden') {
+        console.log("Page visibility changed - saving data");
+        saveData(true);
+      }
+    };
+
+    // Save when user navigates away or switches tabs
+    window.addEventListener('visibilitychange', handleVisibilityChange);
+    
+    // Force save when component unmounts
     return () => {
-      console.log("Component unmounting - saving data");
+      console.log("Component unmounting - final save");
+      window.removeEventListener('visibilitychange', handleVisibilityChange);
       saveData(true);
     };
-  }, []);
+  }, [saveData]);
+
+  // Force periodic saves
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      console.log("Periodic save triggered");
+      saveData(true);
+    }, 10000); // Save every 10 seconds
+
+    return () => clearInterval(intervalId);
+  }, [saveData]);
 
   const handleSaveProgress = () => {
     const currentTime = saveData(true);

@@ -11,7 +11,8 @@ interface NotesTabProps {
 const NotesTab: React.FC<NotesTabProps> = ({ notes, onNotesChange }) => {
   // Ensure changes to any textarea trigger the onNotesChange callback immediately
   const handleNotesChange = (field: keyof ChecklistNotes, value: string) => {
-    console.log(`Notes changed for field: ${field}`, value);
+    console.log(`NotesTab: Notes changed for field: ${field}`, value);
+    // Immediately propagate the change to parent component
     onNotesChange(field, value);
   };
 
