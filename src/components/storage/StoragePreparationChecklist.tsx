@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList } from "@/components/ui/tabs";
-import { Printer, Save, RotateCcw, CheckSquare } from "lucide-react";
+import { Printer, Save, RotateCcw, CheckSquare, FileText } from "lucide-react";
 import { toast } from "@/components/ui/use-toast";
 import RVInfoTab from './checklist/RVInfoTab';
 import ExteriorTab from './checklist/ExteriorTab';
@@ -126,7 +126,7 @@ const StoragePreparationChecklist: React.FC = () => {
           <CardContent className="pt-6">
             <Tabs defaultValue="rv-info" className="space-y-8">
               <TabsList className="bg-[#151A22] mb-8 flex justify-between py-8 px-4 w-full">
-                <ChecklistTabTrigger value="rv-info" icon="Info" iconColor="#60A5FA" label="RV Info" />
+                <ChecklistTabTrigger value="rv-info" icon="FileText" iconColor="#60A5FA" label="RV Info" />
                 <ChecklistTabTrigger value="exterior" icon="ExternalLink" iconColor="#10B981" label="Exterior" />
                 <ChecklistTabTrigger value="interior" icon="Home" iconColor="#F59E0B" label="Interior" />
                 <ChecklistTabTrigger value="plumbing" icon="Droplet" iconColor="#3B82F6" label="Plumbing" />
