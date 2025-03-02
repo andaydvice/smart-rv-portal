@@ -60,14 +60,15 @@ export const useChecklistStorage = () => {
     }
   }, []);
 
-  // Immediate save function - can be called directly or by auto-save
+  // Save function that properly serializes dates
   const saveData = (manualSave: boolean = false) => {
     const currentTime = new Date().toISOString();
     
+    // Properly serialize dates to ISO strings for localStorage
     const dataToSave = {
       progress,
-      startDate,
-      endDate,
+      startDate: startDate ? startDate.toISOString() : undefined,
+      endDate: endDate ? endDate.toISOString() : undefined,
       notes,
       savedAt: currentTime
     };
@@ -84,11 +85,20 @@ export const useChecklistStorage = () => {
     return currentTime;
   };
 
-  // Handle notes change specifically - save immediately on each change
+  // Custom setStartDate that saves immediately
+  const setStartDateAndSave = (date: Date | undefined) => {
+    setStartDate(date);
+    // We're not calling saveData here, as the useEffect below will handle it
+  };
+
+  // Custom setEndDate that saves immediately
+  const setEndDateAndSave = (date: Date | undefined) => {
+    setEndDate(date);
+    // We're not calling saveData here, as the useEffect below will handle it
+  };
+
+  // Handle notes change - save immediately
   const handleNotesChange = (field: keyof ChecklistNotes, value: string) => {
-    console.log(`Notes changed for field: ${field}`, value);
-    
-    // Create new notes object with updated field
     const updatedNotes = {
       ...notes,
       [field]: value
@@ -97,31 +107,50 @@ export const useChecklistStorage = () => {
     // Update state
     setNotes(updatedNotes);
     
-    // Immediately save to localStorage to prevent data loss on tab switch
+    // Immediately save to localStorage
     const currentTime = new Date().toISOString();
     const dataToSave = {
       progress,
-      startDate,
-      endDate,
-      notes: updatedNotes, // Use the updated notes directly
+      startDate: startDate ? startDate.toISOString() : undefined,
+      endDate: endDate ? endDate.toISOString() : undefined,
+      notes: updatedNotes,
       savedAt: currentTime
     };
     
-    console.log("Immediate save after notes change:", dataToSave);
+    console.log("Immediate save after notes change for field:", field);
     localStorage.setItem(STORAGE_KEY, JSON.stringify(dataToSave));
     setLastSavedAt(currentTime);
   };
 
-  // Also add back the auto-save functionality for other changes
+  // Handle checkbox changes and save immediately
+  const handleCheckboxChange = (id: string, checked: boolean) => {
+    const updatedProgress = {...progress, [id]: checked};
+    setProgress(updatedProgress);
+    
+    // Immediately save
+    const currentTime = new Date().toISOString();
+    const dataToSave = {
+      progress: updatedProgress,
+      startDate: startDate ? startDate.toISOString() : undefined,
+      endDate: endDate ? endDate.toISOString() : undefined,
+      notes,
+      savedAt: currentTime
+    };
+    
+    console.log("Immediate save after checkbox change for:", id);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(dataToSave));
+    setLastSavedAt(currentTime);
+  };
+
+  // Also add a safety auto-save effect for any other state changes
   useEffect(() => {
-    // Skip the initial render to avoid double-saving
     const timeoutId = setTimeout(() => {
-      console.log("Auto-saving from useEffect");
+      console.log("Safety auto-save triggered");
       saveData();
-    }, 500);
+    }, 1000);
     
     return () => clearTimeout(timeoutId);
-  }, [progress, startDate, endDate]);
+  }, [progress, startDate, endDate, notes]);
 
   const resetData = () => {
     setProgress({});
@@ -138,11 +167,6 @@ export const useChecklistStorage = () => {
     localStorage.removeItem(STORAGE_KEY);
   };
 
-  const handleCheckboxChange = (id: string, checked: boolean) => {
-    setProgress(prev => ({...prev, [id]: checked}));
-    // Will trigger auto-save via useEffect
-  };
-
   const getLastSavedMessage = () => {
     if (!lastSavedAt) return "";
     
@@ -153,9 +177,9 @@ export const useChecklistStorage = () => {
   return {
     progress,
     startDate,
-    setStartDate,
+    setStartDate: setStartDateAndSave,
     endDate,
-    setEndDate,
+    setEndDate: setEndDateAndSave,
     notes,
     lastSavedAt,
     handleCheckboxChange,

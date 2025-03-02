@@ -24,6 +24,7 @@ const StoragePreparationChecklist: React.FC = () => {
 
   // Ensure data is saved when component unmounts
   useEffect(() => {
+    // This will ensure everything is saved when navigating away
     return () => {
       console.log("Component unmounting - saving data");
       saveData(true);
