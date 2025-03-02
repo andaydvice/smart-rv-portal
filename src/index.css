@@ -131,3 +131,24 @@ label.inner1 {
 .flex.outer1 button.border-primary {
   border-color: #fff !important;
 }
+
+/* Force white text in all inputs on storage checklist page */
+.storage-preparation-checklist input,
+.storage-preparation-checklist .rdp-caption_label,
+.storage-preparation-checklist .rdp-head_cell,
+.storage-preparation-checklist .rdp-button {
+  color: white !important;
+  caret-color: white !important;
+}
+
+/* Force white text for calendar days */
+.rdp-day {
+  color: white !important;
+}
+
+/* Make selected date more visible */
+.rdp-day_selected {
+  background-color: #5B9BD5 !important;
+  color: white !important;
+  font-weight: bold !important;
+}

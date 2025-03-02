@@ -5,10 +5,10 @@ import StoragePreparationChecklist from '@/components/storage/StoragePreparation
 
 const StoragePreparationChecklistPage: React.FC = () => {
   return (
-    <>
+    <div className="storage-preparation-checklist">
       <Navbar />
       <StoragePreparationChecklist />
-    </>
+    </div>
   );
 };
 
