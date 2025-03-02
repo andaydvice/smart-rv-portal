@@ -2,6 +2,7 @@
 import React from 'react';
 import { TabsTrigger } from "@/components/ui/tabs";
 import * as LucideIcons from "lucide-react";
+import { LucideIcon } from "lucide-react";
 
 interface ChecklistTabTriggerProps {
   value: string;
@@ -14,8 +15,8 @@ export const ChecklistTabTrigger: React.FC<ChecklistTabTriggerProps> = ({
   icon, 
   label 
 }) => {
-  // Use dynamic import to get the specific icon component
-  const IconComponent = LucideIcons[icon] as React.ElementType;
+  // Fix the type casting to ensure we get a proper React component
+  const IconComponent = LucideIcons[icon] as unknown as LucideIcon;
   
   return (
     <TabsTrigger 
