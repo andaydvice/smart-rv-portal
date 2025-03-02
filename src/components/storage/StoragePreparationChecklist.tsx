@@ -125,7 +125,7 @@ const StoragePreparationChecklist: React.FC = () => {
           
           <CardContent className="pt-6">
             <Tabs defaultValue="rv-info" className="space-y-8">
-              <TabsList className="bg-[#151A22] mb-8 flex flex-nowrap overflow-x-auto no-scrollbar py-8 px-4 w-full">
+              <TabsList className="bg-[#151A22] mb-8 grid grid-cols-5 gap-2 py-8 px-4 w-full">
                 <ChecklistTabTrigger value="rv-info" icon="Info" iconColor="#60A5FA" label="RV Info" />
                 <ChecklistTabTrigger value="exterior" icon="ExternalLink" iconColor="#10B981" label="Exterior" />
                 <ChecklistTabTrigger value="interior" icon="Home" iconColor="#F59E0B" label="Interior" />
