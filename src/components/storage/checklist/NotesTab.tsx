@@ -1,20 +1,16 @@
 
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Textarea } from "@/components/ui/textarea";
+import { ChecklistNotes } from './useChecklistStorage';
 
 interface NotesTabProps {
-  notes: {
-    general: string;
-    storageContact: string;
-    emergencyContact: string;
-    returnPreparation: string;
-  };
-  onNotesChange: (field: string, value: string) => void;
+  notes: ChecklistNotes;
+  onNotesChange: (field: keyof ChecklistNotes, value: string) => void;
 }
 
 const NotesTab: React.FC<NotesTabProps> = ({ notes, onNotesChange }) => {
   // Ensure changes to any textarea trigger the onNotesChange callback immediately
-  const handleNotesChange = (field: string, value: string) => {
+  const handleNotesChange = (field: keyof ChecklistNotes, value: string) => {
     console.log(`Notes changed for field: ${field}`, value);
     onNotesChange(field, value);
   };

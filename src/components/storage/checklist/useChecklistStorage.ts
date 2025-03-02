@@ -60,7 +60,7 @@ export const useChecklistStorage = () => {
     }
   }, []);
 
-  // Auto-save function
+  // Immediate save function - called directly when notes change
   const saveData = (manualSave: boolean = false) => {
     const currentTime = new Date().toISOString();
     
@@ -84,18 +84,29 @@ export const useChecklistStorage = () => {
     return currentTime;
   };
 
-  // Handle auto-saving when data changes
-  useEffect(() => {
-    saveData();
-  }, [
-    progress,
-    startDate,
-    endDate,
-    notes.general,
-    notes.storageContact,
-    notes.emergencyContact,
-    notes.returnPreparation
-  ]);
+  // Handle notes change specifically - save immediately on each change
+  const handleNotesChange = (field: keyof ChecklistNotes, value: string) => {
+    console.log(`Notes changed for field: ${field}`, value);
+    const updatedNotes = {
+      ...notes,
+      [field]: value
+    };
+    setNotes(updatedNotes);
+    
+    // Save immediately after updating notes
+    setTimeout(() => {
+      const dataToSave = {
+        progress,
+        startDate,
+        endDate,
+        notes: updatedNotes, // Use the updated notes directly
+        savedAt: new Date().toISOString()
+      };
+      console.log("Immediate save after notes change:", dataToSave);
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(dataToSave));
+      setLastSavedAt(dataToSave.savedAt);
+    }, 0);
+  };
 
   const resetData = () => {
     setProgress({});
@@ -114,13 +125,7 @@ export const useChecklistStorage = () => {
 
   const handleCheckboxChange = (id: string, checked: boolean) => {
     setProgress(prev => ({...prev, [id]: checked}));
-  };
-
-  const handleNotesChange = (field: string, value: string) => {
-    setNotes(prev => ({
-      ...prev,
-      [field]: value
-    }));
+    // Will trigger auto-save via useEffect
   };
 
   const getLastSavedMessage = () => {
