@@ -1,5 +1,5 @@
 
-import React, { useEffect, useCallback, memo } from 'react';
+import React, { useEffect, useCallback, memo, useMemo } from 'react';
 import { Card, CardContent } from "@/components/ui/card";
 import { toast } from "@/components/ui/use-toast";
 import { useChecklistStorage } from './checklist/hooks/useChecklistStorage';
@@ -56,49 +56,20 @@ const StoragePreparationChecklist: React.FC = memo(() => {
     });
   }, [saveData]);
 
-  // Reduced frequency of auto-save - IMPORTANT: removed the force save on every render
-  useEffect(() => {
-    // Setup visibility and unload event handlers for saving
-    const handleVisibilityChange = () => {
-      if (document.visibilityState === 'hidden') {
-        console.log("Page visibility changed - saving data");
-        saveData(true);
-      }
-    };
-
-    const handleBeforeUnload = () => {
-      console.log("Window unloading - final save");
-      saveData(true);
-    };
-
-    window.addEventListener('visibilitychange', handleVisibilityChange);
-    window.addEventListener('beforeunload', handleBeforeUnload);
-    
-    // Periodic save but with much lower frequency (30 seconds instead of 3)
-    const intervalId = setInterval(() => {
-      console.log("Periodic save triggered");
-      saveData(true);
-    }, 30000);
-    
-    return () => {
-      window.removeEventListener('visibilitychange', handleVisibilityChange);
-      window.removeEventListener('beforeunload', handleBeforeUnload);
-      clearInterval(intervalId);
-      saveData(true);
-    };
-  }, [saveData]);
-
-  // Calculate completion stats
-  const totalItems = 50;
-  const completedItems = Object.values(progress).filter(val => val).length;
-  const completionPercentage = Math.round((completedItems / totalItems) * 100);
+  // Calculate completion stats - memoize to prevent recalculation on every render
+  const completionStats = useMemo(() => {
+    const totalItems = 50;
+    const completedItems = Object.values(progress).filter(val => val).length;
+    const completionPercentage = Math.round((completedItems / totalItems) * 100);
+    return { totalItems, completedItems, completionPercentage };
+  }, [progress]);
 
   return (
     <div className="min-h-screen bg-[#080F1F] py-12">
       <div className="container mx-auto px-4 max-w-5xl">
         <Card className="border-gray-700 bg-[#091020] shadow-xl overflow-hidden">
           <ChecklistHeader 
-            completionPercentage={completionPercentage}
+            completionPercentage={completionStats.completionPercentage}
             lastSavedAt={lastSavedAt}
             getLastSavedMessage={getLastSavedMessage}
             onSave={handleSaveProgress}
