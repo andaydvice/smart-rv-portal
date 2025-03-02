@@ -1,5 +1,5 @@
 
-import React, { useEffect, useCallback } from 'react';
+import React, { useEffect, useCallback, useMemo, memo } from 'react';
 import { Tabs, TabsContent, TabsList } from "@/components/ui/tabs";
 import RVInfoTab from './RVInfoTab';
 import ExteriorTab from './ExteriorTab';
@@ -26,7 +26,8 @@ interface ChecklistContentProps {
   onTabChange?: () => void;
 }
 
-const ChecklistContent: React.FC<ChecklistContentProps> = ({
+// Use memo to prevent unnecessary re-renders
+const ChecklistContent: React.FC<ChecklistContentProps> = memo(({
   progress,
   startDate,
   endDate,
@@ -40,19 +41,31 @@ const ChecklistContent: React.FC<ChecklistContentProps> = ({
   // Track active tab for explicit saving
   const [activeTab, setActiveTab] = React.useState("rv-info");
   
+  // Using useMemo to create stable tab configurations
+  const tabConfigurations = useMemo(() => [
+    { value: "rv-info", icon: "Info", label: "RV Info" },
+    { value: "exterior", icon: "ExternalLink", label: "Exterior" },
+    { value: "interior", icon: "Home", label: "Interior" },
+    { value: "plumbing", icon: "Droplets", label: "Plumbing" },
+    { value: "electrical", icon: "Zap", label: "Electrical" },
+    { value: "mechanical", icon: "Settings", label: "Mechanical" },
+    { value: "tires", icon: "CircleDashed", label: "Tires" },
+    { value: "pest-control", icon: "Bug", label: "Pest Control" },
+    { value: "security", icon: "Lock", label: "Security" },
+    { value: "notes", icon: "FileText", label: "Notes" }
+  ], []);
+  
   // Optimize with useCallback to prevent recreation on each render
   const handleTabValueChange = useCallback((newValue: string) => {
-    console.log(`Tab changed to ${newValue} - triggering save`);
+    console.log(`Tab changed to ${newValue}`);
     
     // First save the current tab's data
     if (onTabChange) {
       onTabChange();
     }
     
-    // Update with small delay to prevent UI freezing
-    setTimeout(() => {
-      setActiveTab(newValue);
-    }, 0);
+    // Change tabs without delay
+    setActiveTab(newValue);
   }, [onTabChange]);
   
   // Create a memoized tab click handler 
@@ -85,16 +98,15 @@ const ChecklistContent: React.FC<ChecklistContentProps> = ({
       onValueChange={handleTabValueChange}
     >
       <TabsList className="grid grid-cols-5 lg:grid-cols-10 h-auto bg-[#151A22] mb-6 border-b border-gray-700 rounded-none">
-        <ChecklistTabTrigger value="rv-info" icon="Info" label="RV Info" onTabClick={handleTabClick} />
-        <ChecklistTabTrigger value="exterior" icon="ExternalLink" label="Exterior" onTabClick={handleTabClick} />
-        <ChecklistTabTrigger value="interior" icon="Home" label="Interior" onTabClick={handleTabClick} />
-        <ChecklistTabTrigger value="plumbing" icon="Droplets" label="Plumbing" onTabClick={handleTabClick} />
-        <ChecklistTabTrigger value="electrical" icon="Zap" label="Electrical" onTabClick={handleTabClick} />
-        <ChecklistTabTrigger value="mechanical" icon="Settings" label="Mechanical" onTabClick={handleTabClick} />
-        <ChecklistTabTrigger value="tires" icon="CircleDashed" label="Tires" onTabClick={handleTabClick} />
-        <ChecklistTabTrigger value="pest-control" icon="Bug" label="Pest Control" onTabClick={handleTabClick} />
-        <ChecklistTabTrigger value="security" icon="Lock" label="Security" onTabClick={handleTabClick} />
-        <ChecklistTabTrigger value="notes" icon="FileText" label="Notes" onTabClick={handleTabClick} />
+        {tabConfigurations.map((tab) => (
+          <ChecklistTabTrigger 
+            key={tab.value}
+            value={tab.value} 
+            icon={tab.icon} 
+            label={tab.label} 
+            onTabClick={handleTabClick} 
+          />
+        ))}
       </TabsList>
       
       <div className="tab-content-wrapper">
@@ -174,6 +186,8 @@ const ChecklistContent: React.FC<ChecklistContentProps> = ({
       </div>
     </Tabs>
   );
-};
+});
 
-export default React.memo(ChecklistContent);
+ChecklistContent.displayName = 'ChecklistContent';
+
+export default ChecklistContent;

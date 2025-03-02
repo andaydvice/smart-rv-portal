@@ -59,7 +59,16 @@ export const useChecklistStorage = () => {
     }
   }, [loadData, setEndDate, setNotes, setProgress, setStartDate, setLastSavedAt]);
 
-  // Get event handlers
+  // Get auto-save functionality with optimized performance
+  const { getLastSavedMessage, debouncedSave } = useChecklistAutoSave(
+    progress,
+    startDate,
+    endDate,
+    notes,
+    saveDataWrapper
+  );
+
+  // Get event handlers with debounced save
   const {
     setStartDateAndSave,
     setEndDateAndSave,
@@ -76,16 +85,8 @@ export const useChecklistStorage = () => {
     setEndDate,
     setNotes,
     persistence.saveData,
-    saveDataWrapper
-  );
-
-  // Get auto-save functionality
-  const { getLastSavedMessage } = useChecklistAutoSave(
-    progress,
-    startDate,
-    endDate,
-    notes,
-    saveDataWrapper
+    saveDataWrapper,
+    debouncedSave
   );
 
   return {
@@ -101,6 +102,7 @@ export const useChecklistStorage = () => {
     handleTabChange,
     saveData: saveDataWrapper,
     resetData,
-    getLastSavedMessage
+    getLastSavedMessage,
+    debouncedSave
   };
 };

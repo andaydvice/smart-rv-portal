@@ -24,18 +24,17 @@ interface ChecklistTabTriggerProps {
   onTabClick?: () => void;
 }
 
-// Optimize rendering with memo to prevent unnecessary re-renders
-const ChecklistTabTrigger: React.FC<ChecklistTabTriggerProps> = React.memo(({ 
+// Optimize rendering with memo and useMemo/useCallback to prevent unnecessary re-renders
+const ChecklistTabTrigger = React.memo(({ 
   value, 
   icon, 
   label,
-  iconColor,
   onTabClick
-}) => {
-  // Map labels to specific colors
+}: ChecklistTabTriggerProps) => {
+  // Map labels to specific colors - this is a static mapping, so no need for useMemo
   const color = getIconColor(label);
   
-  // Use callback to prevent re-creation on each render
+  // Optimized click handler using React.useCallback to prevent recreation on render
   const handleTabClick = React.useCallback(() => {
     if (onTabClick) {
       onTabClick();
@@ -56,9 +55,7 @@ const ChecklistTabTrigger: React.FC<ChecklistTabTriggerProps> = React.memo(({
   );
 });
 
-ChecklistTabTrigger.displayName = 'ChecklistTabTrigger';
-
-// Helper function to get icon color based on label
+// Helper function to get icon color based on label - no need to recreate on each render
 function getIconColor(label: string): string {
   switch(label) {
     case "RV Info": return "#5B9BD5"; // Blue
@@ -75,7 +72,7 @@ function getIconColor(label: string): string {
   }
 }
 
-// Helper function to render the correct icon component
+// Helper function to render the correct icon component - simplified approach
 function renderIconComponent(iconName?: string, color: string = "#5B9BD5") {
   const props = { className: "h-6 w-6", stroke: color, strokeWidth: 2 };
 
@@ -93,5 +90,8 @@ function renderIconComponent(iconName?: string, color: string = "#5B9BD5") {
     default: return null;
   }
 }
+
+// Add display name for better debugging
+ChecklistTabTrigger.displayName = 'ChecklistTabTrigger';
 
 export default ChecklistTabTrigger;
