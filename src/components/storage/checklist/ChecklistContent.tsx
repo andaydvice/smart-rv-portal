@@ -1,6 +1,5 @@
-
 import React from 'react';
-import { Tabs, TabsContent } from "@/components/ui/tabs";
+import { Tabs, TabsContent, TabsList } from "@/components/ui/tabs";
 import RVInfoTab from './RVInfoTab';
 import ElectricalTab from './ElectricalTab';
 import PlumbingTab from './PlumbingTab';
@@ -11,7 +10,6 @@ import TiresTab from './TiresTab';
 import SecurityTab from './SecurityTab';
 import PestControlTab from './PestControlTab';
 import NotesTab from './NotesTab';
-import ChecklistSection from './ChecklistSection';
 import ChecklistTabTrigger from './ChecklistTabTrigger';
 import { ChecklistData } from './useChecklistStorage';
 
@@ -44,8 +42,8 @@ const ChecklistContent: React.FC<ChecklistContentProps> = ({
       <div className="bg-[#131a2a] rounded-xl p-6 shadow-inner border border-gray-800">
         <Tabs defaultValue="rv-info" className="space-y-6">
           <div className="overflow-x-auto pb-2">
-            <div className="flex space-x-1 min-w-max">
-              <ChecklistTabTrigger value="rv-info" label="RV Info" progress={0} total={0} />
+            <TabsList className="flex space-x-1 min-w-max bg-transparent p-0 h-auto">
+              <ChecklistTabTrigger value="rv-info" label="RV Info" />
               <ChecklistTabTrigger 
                 value="electrical" 
                 label="Electrical" 
@@ -126,8 +124,8 @@ const ChecklistContent: React.FC<ChecklistContentProps> = ({
                 } 
                 total={7} 
               />
-              <ChecklistTabTrigger value="notes" label="Notes" progress={0} total={0} />
-            </div>
+              <ChecklistTabTrigger value="notes" label="Notes" />
+            </TabsList>
           </div>
           
           <TabsContent value="rv-info">
