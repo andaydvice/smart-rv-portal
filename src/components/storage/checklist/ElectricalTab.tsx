@@ -8,14 +8,17 @@ import { ChecklistItem, ChecklistSection } from './ChecklistSection';
 import { ChecklistTabProps } from './ChecklistTypes';
 
 const ElectricalTab: React.FC<ChecklistTabProps> = ({ handleCheckboxChange, progress }) => {
-  // Add state for the battery type selection
-  const [batteryType, setBatteryType] = React.useState<string>(progress["battery-type"] as string || "");
+  // Update state initialization to handle the type correctly
+  // First check if the value is a string, otherwise use empty string
+  const [batteryType, setBatteryType] = React.useState<string>(() => {
+    const savedValue = progress["battery-type"];
+    return typeof savedValue === 'string' ? savedValue : '';
+  });
   
   // Handle battery type change
   const handleBatteryTypeChange = (value: string) => {
     setBatteryType(value);
     // Use the same handleCheckboxChange function to store the battery type
-    // This ensures it's saved in the same storage mechanism as other checklist items
     handleCheckboxChange("battery-type", value as any);
   };
 
