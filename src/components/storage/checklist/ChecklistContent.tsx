@@ -52,10 +52,9 @@ const ChecklistContent: React.FC<ChecklistContentProps> = ({
       </p>
       
       <div className="bg-[#131a2a] rounded-xl p-6 shadow-inner border border-gray-800">
-        <Tabs defaultValue="rv-info" className="space-y-6">
+        <Tabs defaultValue="exterior" className="space-y-6">
           <div className="overflow-x-auto pb-2 no-scrollbar">
-            <TabsList className="bg-[#0c1423] w-full flex p-1 rounded-lg">
-              <ChecklistTabTrigger value="rv-info" label="RV Info" icon="File" />
+            <TabsList className="bg-[#0c1423] min-w-full flex rounded-none p-0">
               <ChecklistTabTrigger 
                 value="exterior" 
                 label="Exterior" 
@@ -144,6 +143,7 @@ const ChecklistContent: React.FC<ChecklistContentProps> = ({
                 } 
                 total={6} 
               />
+              <ChecklistTabTrigger value="rv-info" label="RV Info" icon="File" />
               <ChecklistTabTrigger value="notes" label="Notes" icon="File" />
             </TabsList>
           </div>

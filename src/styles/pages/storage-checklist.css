@@ -31,7 +31,7 @@
 .storage-preparation-checklist [role="tab"] {
   color: white !important;
   white-space: nowrap;
-  min-width: 110px;
+  min-width: 120px;
 }
 
 /* Fix tab truncation issues */
@@ -46,8 +46,8 @@
 /* Tab list styling to match the design */
 .storage-preparation-checklist [role="tablist"] {
   background-color: #0c1423 !important;
-  padding: 4px !important;
-  border-radius: 8px !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
   gap: 0 !important;
 }
 
@@ -84,7 +84,7 @@
 
 /* Preserve tab functionality - important fix */
 .storage-preparation-checklist [role="tablist"] button {
-  background-color: transparent !important;
+  background-color: #0c1423 !important;
 }
 
 .storage-preparation-checklist [role="tablist"] button[data-state="active"] {
