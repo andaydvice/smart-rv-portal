@@ -1,5 +1,6 @@
 
 import { Dispatch, SetStateAction } from 'react';
+import { ChecklistNotes } from './hooks/types';
 
 export interface ChecklistTabProps {
   handleCheckboxChange: (id: string, checked: boolean) => void;
@@ -7,10 +8,12 @@ export interface ChecklistTabProps {
 }
 
 export interface RVInfoTabProps {
+  progress: {[key: string]: boolean};
   startDate: Date | undefined;
   endDate: Date | undefined;
-  setStartDate: Dispatch<SetStateAction<Date | undefined>>;
-  setEndDate: Dispatch<SetStateAction<Date | undefined>>;
+  setStartDate: (date: Date | undefined) => void;
+  setEndDate: (date: Date | undefined) => void;
+  handleCheckboxChange: (id: string, checked: boolean) => void;
 }
 
 // Adding this interface to make it clear what the tab components expect

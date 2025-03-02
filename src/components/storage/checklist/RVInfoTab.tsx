@@ -10,10 +10,12 @@ import { format } from "date-fns";
 import { RVInfoTabProps } from './ChecklistTypes';
 
 const RVInfoTab: React.FC<RVInfoTabProps> = ({ 
+  progress,
   startDate, 
   endDate, 
   setStartDate, 
-  setEndDate 
+  setEndDate,
+  handleCheckboxChange 
 }) => {
   return (
     <>
