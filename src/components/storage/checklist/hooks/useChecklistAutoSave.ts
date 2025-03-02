@@ -4,7 +4,7 @@ import { ChecklistNotes } from './types';
 
 /**
  * Hook for managing automatic saving of checklist data
- * Optimized for performance with debounced saves and reduced save frequency
+ * Enhanced for reliability with improved error handling and save verification
  */
 export const useChecklistAutoSave = (
   progress: {[key: string]: boolean | string},
@@ -18,11 +18,18 @@ export const useChecklistAutoSave = (
   const saveTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const lastSaveDataRef = useRef<string>("");
   const isInitialRenderRef = useRef<boolean>(true);
+  const pendingSaveRef = useRef<boolean>(false);
+  const consecutiveFailuresRef = useRef<number>(0);
   
-  // Track if data has changed since last save
+  // Track if data has changed since last save with improved serialization
   const hasDataChanged = useCallback(() => {
     try {
-      const currentData = JSON.stringify({ progress, startDate, endDate, notes });
+      const currentData = JSON.stringify({ 
+        progress, 
+        startDate: startDate ? startDate.toISOString() : null, 
+        endDate: endDate ? endDate.toISOString() : null, 
+        notes 
+      });
       return currentData !== lastSaveDataRef.current;
     } catch (error) {
       console.error("Error checking for data changes:", error);
@@ -30,11 +37,14 @@ export const useChecklistAutoSave = (
     }
   }, [progress, startDate, endDate, notes]);
   
-  // Debounced save function to prevent excessive saves
+  // Debounced save function with enhanced reliability
   const debouncedSave = useCallback(() => {
     if (saveTimeoutRef.current) {
       clearTimeout(saveTimeoutRef.current);
     }
+    
+    // Set pending save flag
+    pendingSaveRef.current = true;
     
     // Only save if data has actually changed
     if (hasDataChanged()) {
@@ -44,13 +54,33 @@ export const useChecklistAutoSave = (
           const saveTime = saveDataWrapper(false);
           lastSavedTimeRef.current = saveTime;
           // Update last saved data reference
-          lastSaveDataRef.current = JSON.stringify({ progress, startDate, endDate, notes });
+          lastSaveDataRef.current = JSON.stringify({ 
+            progress, 
+            startDate: startDate ? startDate.toISOString() : null, 
+            endDate: endDate ? endDate.toISOString() : null, 
+            notes 
+          });
+          // Reset failure counter after successful save
+          consecutiveFailuresRef.current = 0;
+          pendingSaveRef.current = false;
         } catch (error) {
           console.error("Error during debounced save:", error);
+          // Increment failure counter
+          consecutiveFailuresRef.current++;
+          
+          // If we've had multiple failures, try again with shorter timeout
+          if (consecutiveFailuresRef.current < 3) {
+            const retryDelay = 1000 * consecutiveFailuresRef.current;
+            console.log(`Retrying save in ${retryDelay}ms`);
+            setTimeout(() => debouncedSave(), retryDelay);
+          }
+          pendingSaveRef.current = false;
         } finally {
           saveTimeoutRef.current = null;
         }
-      }, 5000); // Increased debounce time to 5 seconds for better performance
+      }, 3000); // Reduced debounce time to 3 seconds for better reliability
+    } else {
+      pendingSaveRef.current = false;
     }
   }, [saveDataWrapper, hasDataChanged, progress, startDate, endDate, notes]);
 
@@ -68,12 +98,40 @@ export const useChecklistAutoSave = (
     }
   }, []);
 
+  // Force save data and update refs
+  const forceSaveData = useCallback(() => {
+    try {
+      if (hasDataChanged() || pendingSaveRef.current) {
+        console.log("Forcing immediate save");
+        const saveTime = saveDataWrapper(true);
+        lastSavedTimeRef.current = saveTime;
+        lastSaveDataRef.current = JSON.stringify({ 
+          progress, 
+          startDate: startDate ? startDate.toISOString() : null, 
+          endDate: endDate ? endDate.toISOString() : null, 
+          notes 
+        });
+        pendingSaveRef.current = false;
+        return true;
+      }
+      return false;
+    } catch (error) {
+      console.error("Error during forced save:", error);
+      return false;
+    }
+  }, [saveDataWrapper, hasDataChanged, progress, startDate, endDate, notes]);
+
   // Efficient auto-save on data changes with debouncing and change detection
   useEffect(() => {
     // Skip the initial render to prevent unnecessary saves
     if (isInitialRenderRef.current) {
       isInitialRenderRef.current = false;
-      lastSaveDataRef.current = JSON.stringify({ progress, startDate, endDate, notes });
+      lastSaveDataRef.current = JSON.stringify({ 
+        progress, 
+        startDate: startDate ? startDate.toISOString() : null, 
+        endDate: endDate ? endDate.toISOString() : null, 
+        notes 
+      });
       return;
     }
     
@@ -89,78 +147,60 @@ export const useChecklistAutoSave = (
     };
   }, [progress, startDate, endDate, notes, debouncedSave, hasDataChanged]);
   
-  // Reduced frequency auto-save on visibility change and periodic interval
+  // Add specific save on browser events (beforeunload, visibilitychange)
   useEffect(() => {
-    // Set up save on visibility change
+    // Handle visibility changes to save when user switches tabs or minimizes
     const handleVisibilityChange = () => {
-      if (document.visibilityState === 'hidden' && hasDataChanged()) {
-        try {
-          console.log("Page visibility changed - saving data");
-          const saveTime = saveDataWrapper(true);
-          lastSavedTimeRef.current = saveTime;
-          lastSaveDataRef.current = JSON.stringify({ progress, startDate, endDate, notes });
-        } catch (error) {
-          console.error("Error saving on visibility change:", error);
-        }
+      if (document.visibilityState === 'hidden') {
+        forceSaveData();
       }
     };
 
-    // Handle browser refresh/unload event
-    const handleBeforeUnload = () => {
-      if (hasDataChanged()) {
-        try {
-          console.log("Window unloading - final save");
-          saveDataWrapper(true);
-          lastSaveDataRef.current = JSON.stringify({ progress, startDate, endDate, notes });
-        } catch (error) {
-          console.error("Error saving on unload:", error);
-        }
+    // Handle before unload to save when page is refreshed or closed
+    const handleBeforeUnload = (event: BeforeUnloadEvent) => {
+      // Force save before page unloads
+      const saved = forceSaveData();
+      
+      // Only show a confirmation dialog if there are unsaved changes
+      if (pendingSaveRef.current || hasDataChanged()) {
+        event.preventDefault();
+        event.returnValue = '';
+        return '';
       }
     };
-    
-    // Initialize with current data
-    lastSaveDataRef.current = JSON.stringify({ progress, startDate, endDate, notes });
     
     // Add event listeners
     window.addEventListener('visibilitychange', handleVisibilityChange);
     window.addEventListener('beforeunload', handleBeforeUnload);
     
-    // Force periodic saves, but at a much lower frequency (5 minutes)
-    const intervalId = setInterval(() => {
-      if (hasDataChanged()) {
-        try {
-          console.log("Periodic save triggered");
-          const saveTime = saveDataWrapper(true);
-          lastSavedTimeRef.current = saveTime;
-          lastSaveDataRef.current = JSON.stringify({ progress, startDate, endDate, notes });
-        } catch (error) {
-          console.error("Error during periodic save:", error);
-        }
-      }
-    }, 300000); // Save every 300 seconds (5 minutes) to reduce overhead
+    // Initial data snapshot
+    lastSaveDataRef.current = JSON.stringify({ 
+      progress, 
+      startDate: startDate ? startDate.toISOString() : null, 
+      endDate: endDate ? endDate.toISOString() : null, 
+      notes 
+    });
     
-    // Force save when component unmounts
+    // Periodic backup saves (every 60 seconds)
+    const intervalId = setInterval(() => {
+      if (hasDataChanged() || pendingSaveRef.current) {
+        forceSaveData();
+      }
+    }, 60000);
+    
+    // Cleanup event listeners and intervals
     return () => {
-      console.log("Component unmounting - performing cleanup");
       window.removeEventListener('visibilitychange', handleVisibilityChange);
       window.removeEventListener('beforeunload', handleBeforeUnload);
       clearInterval(intervalId);
       
-      if (saveTimeoutRef.current) {
-        clearTimeout(saveTimeoutRef.current);
-      }
-      
-      if (hasDataChanged()) {
-        try {
-          saveDataWrapper(true);
-        } catch (error) {
-          console.error("Error saving on unmount:", error);
-        }
-      }
+      // Final save when component unmounts
+      forceSaveData();
     };
-  }, [saveDataWrapper, hasDataChanged, progress, startDate, endDate, notes]);
+  }, [forceSaveData, hasDataChanged]);
 
   return {
-    getLastSavedMessage
+    getLastSavedMessage,
+    forceSaveData
   };
 };

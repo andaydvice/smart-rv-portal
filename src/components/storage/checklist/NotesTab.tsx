@@ -1,3 +1,4 @@
+
 import React, { useEffect, useRef } from 'react';
 import { Textarea } from "@/components/ui/textarea";
 import { ChecklistNotes } from './hooks/types';
@@ -11,9 +12,13 @@ const NotesTab: React.FC<NotesTabProps> = ({ notes, onNotesChange }) => {
   // Keep track of previous notes to detect changes
   const prevNotesRef = useRef<ChecklistNotes>(notes);
   
+  // Track if the component is mounted
+  const isMountedRef = useRef<boolean>(true);
+  
   // Force save on unmount
   useEffect(() => {
     return () => {
+      isMountedRef.current = false;
       console.log("NotesTab unmounting - ensuring notes are saved");
       
       // Compare current notes with previous to see if we need to force save
@@ -36,7 +41,9 @@ const NotesTab: React.FC<NotesTabProps> = ({ notes, onNotesChange }) => {
   
   // Update previous notes ref whenever notes change
   useEffect(() => {
-    prevNotesRef.current = notes;
+    if (isMountedRef.current) {
+      prevNotesRef.current = { ...notes };
+    }
   }, [notes]);
 
   // Ensure changes to any textarea trigger the onNotesChange callback immediately
@@ -61,9 +68,14 @@ const NotesTab: React.FC<NotesTabProps> = ({ notes, onNotesChange }) => {
           <Textarea 
             className="bg-[#131a2a] border-gray-700 min-h-[300px] text-white placeholder:text-gray-500" 
             placeholder="Enter any additional notes, special procedures, or reminders here..." 
-            value={notes.general}
+            value={notes.general || ''}
             onChange={(e) => handleNotesChange('general', e.target.value)}
             style={{ color: 'white !important', caretColor: 'white !important' }}
+            onBlur={() => {
+              // Force save on blur for better reliability
+              console.log("Text area blur - ensuring note is saved");
+              onNotesChange('general', notes.general || '');
+            }}
           />
         </div>
         
@@ -74,16 +86,18 @@ const NotesTab: React.FC<NotesTabProps> = ({ notes, onNotesChange }) => {
             <Textarea 
               className="bg-[#131a2a] border-gray-700 h-32 text-white placeholder:text-gray-500" 
               placeholder="Storage facility contact information..." 
-              value={notes.storageContact}
+              value={notes.storageContact || ''}
               onChange={(e) => handleNotesChange('storageContact', e.target.value)}
               style={{ color: 'white !important', caretColor: 'white !important' }}
+              onBlur={() => onNotesChange('storageContact', notes.storageContact || '')}
             />
             <Textarea 
               className="bg-[#131a2a] border-gray-700 h-32 text-white placeholder:text-gray-500" 
               placeholder="Emergency contact information..." 
-              value={notes.emergencyContact}
+              value={notes.emergencyContact || ''}
               onChange={(e) => handleNotesChange('emergencyContact', e.target.value)}
               style={{ color: 'white !important', caretColor: 'white !important' }}
+              onBlur={() => onNotesChange('emergencyContact', notes.emergencyContact || '')}
             />
           </div>
         </div>
@@ -94,9 +108,10 @@ const NotesTab: React.FC<NotesTabProps> = ({ notes, onNotesChange }) => {
           <Textarea 
             className="bg-[#131a2a] border-gray-700 min-h-[150px] text-white placeholder:text-gray-500" 
             placeholder="Notes for when you return to use the RV (de-winterizing procedures, systems to check, etc.)..." 
-            value={notes.returnPreparation}
+            value={notes.returnPreparation || ''}
             onChange={(e) => handleNotesChange('returnPreparation', e.target.value)}
             style={{ color: 'white !important', caretColor: 'white !important' }}
+            onBlur={() => onNotesChange('returnPreparation', notes.returnPreparation || '')}
           />
         </div>
       </div>

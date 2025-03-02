@@ -27,37 +27,9 @@ export const useChecklistStorage = () => {
     setLastSavedAt,
     saveDataWrapper,
     resetData,
-    loadData
+    loadData,
+    isLoaded
   } = useChecklistCore();
-
-  // Load data from localStorage on component mount
-  useEffect(() => {
-    const savedData = loadData();
-    
-    if (savedData) {
-      // Make sure to handle all data types correctly
-      if (savedData.progress) {
-        setProgress(savedData.progress);
-      }
-      
-      if (savedData.startDate) {
-        setStartDate(savedData.startDate);
-      }
-      
-      if (savedData.endDate) {
-        setEndDate(savedData.endDate);
-      }
-      
-      if (savedData.savedAt) {
-        setLastSavedAt(savedData.savedAt);
-      }
-      
-      if (savedData.notes) {
-        console.log("Loading notes:", savedData.notes);
-        setNotes(savedData.notes);
-      }
-    }
-  }, [loadData, setEndDate, setNotes, setProgress, setStartDate, setLastSavedAt]);
 
   // Get persistence functionality but don't use it directly - it's already used in useChecklistCore
   const persistence = usePersistence();
@@ -82,14 +54,29 @@ export const useChecklistStorage = () => {
     saveDataWrapper
   );
 
-  // Get auto-save functionality
-  const { getLastSavedMessage } = useChecklistAutoSave(
+  // Get auto-save functionality with enhanced reliability
+  const { getLastSavedMessage, forceSaveData } = useChecklistAutoSave(
     progress,
     startDate,
     endDate,
     notes,
     saveDataWrapper
   );
+
+  // Ensure data is saved when the component unmounts
+  useEffect(() => {
+    return () => {
+      // Force a final save when the component unmounts
+      if (isLoaded) {
+        console.log("Storage component unmounting - forcing final save");
+        try {
+          saveDataWrapper(true);
+        } catch (error) {
+          console.error("Error during final save:", error);
+        }
+      }
+    };
+  }, [saveDataWrapper, isLoaded]);
 
   return {
     progress,
@@ -104,6 +91,8 @@ export const useChecklistStorage = () => {
     handleTabChange,
     saveData: saveDataWrapper,
     resetData,
-    getLastSavedMessage
+    getLastSavedMessage,
+    forceSave: forceSaveData,
+    isLoaded
   };
 };
