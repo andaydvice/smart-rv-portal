@@ -53,24 +53,24 @@ const StoragePreparationChecklist: React.FC = () => {
               <div className="flex gap-2">
                 <Button 
                   variant="outline" 
-                  className="gap-2 bg-[#151A22] hover:bg-[#1d2532] text-white border-gray-700 
-                  active:bg-[#1d2532] active:text-white active:border-[#5B9BD5]"
+                  className="gap-2 bg-[#151A22] hover:bg-[#1d2532] hover:text-white text-white border-gray-700 
+                  focus:text-white active:text-white focus:bg-[#1d2532] active:bg-[#1d2532] focus:border-[#5B9BD5] active:border-[#5B9BD5]"
                 >
                   <Save size={16} className="text-[#5B9BD5]" />
                   Save Progress
                 </Button>
                 <Button 
                   variant="outline" 
-                  className="gap-2 bg-[#151A22] hover:bg-[#1d2532] text-white border-gray-700
-                  active:bg-[#1d2532] active:text-white active:border-[#5B9BD5]"
+                  className="gap-2 bg-[#151A22] hover:bg-[#1d2532] hover:text-white text-white border-gray-700
+                  focus:text-white active:text-white focus:bg-[#1d2532] active:bg-[#1d2532] focus:border-[#5B9BD5] active:border-[#5B9BD5]"
                 >
                   <Printer size={16} className="text-[#5B9BD5]" />
                   Print
                 </Button>
                 <Button 
                   variant="outline" 
-                  className="gap-2 bg-[#151A22] hover:bg-[#1d2532] text-white border-gray-700
-                  active:bg-[#1d2532] active:text-white active:border-[#5B9BD5]"
+                  className="gap-2 bg-[#151A22] hover:bg-[#1d2532] hover:text-white text-white border-gray-700
+                  focus:text-white active:text-white focus:bg-[#1d2532] active:bg-[#1d2532] focus:border-[#5B9BD5] active:border-[#5B9BD5]"
                   onClick={handleReset}
                 >
                   <RotateCcw size={16} className="text-[#5B9BD5]" />
