@@ -34,10 +34,19 @@ const StoragePreparationChecklist: React.FC = () => {
     // Save when user navigates away or switches tabs
     window.addEventListener('visibilitychange', handleVisibilityChange);
     
+    // Handle browser refresh/unload event
+    window.addEventListener('beforeunload', () => {
+      console.log("Window unloading - final save");
+      saveData(true);
+    });
+    
     // Force save when component unmounts
     return () => {
       console.log("Component unmounting - final save");
       window.removeEventListener('visibilitychange', handleVisibilityChange);
+      window.removeEventListener('beforeunload', () => {
+        console.log("Window unload listener removed");
+      });
       saveData(true);
     };
   }, [saveData]);
@@ -47,7 +56,7 @@ const StoragePreparationChecklist: React.FC = () => {
     const intervalId = setInterval(() => {
       console.log("Periodic save triggered");
       saveData(true);
-    }, 10000); // Save every 10 seconds
+    }, 3000); // Save more frequently - every 3 seconds
 
     return () => clearInterval(intervalId);
   }, [saveData]);
@@ -72,6 +81,9 @@ const StoragePreparationChecklist: React.FC = () => {
   };
 
   const handlePrint = () => {
+    // Force a save before printing
+    saveData(true);
+    
     window.print();
     
     toast({

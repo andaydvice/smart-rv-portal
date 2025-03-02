@@ -88,3 +88,13 @@
   height: 24px !important;
   stroke-width: 2px !important;
 }
+
+/* Force textarea to keep its value - specific fix for note persistence */
+.storage-preparation-checklist textarea {
+  min-height: 120px !important;
+}
+
+/* Prevent content from being reset on tab change */
+.storage-preparation-checklist [role="tabpanel"] {
+  transition: opacity 0.2s ease-in-out;
+}

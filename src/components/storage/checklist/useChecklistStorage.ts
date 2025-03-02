@@ -1,5 +1,5 @@
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 export interface ChecklistNotes {
   general: string;
@@ -29,6 +29,29 @@ export const useChecklistStorage = () => {
     emergencyContact: '',
     returnPreparation: ''
   });
+  
+  // Use refs to track actual current values
+  const notesRef = useRef(notes);
+  const progressRef = useRef(progress);
+  const startDateRef = useRef(startDate);
+  const endDateRef = useRef(endDate);
+  
+  // Update refs whenever state changes
+  useEffect(() => {
+    notesRef.current = notes;
+  }, [notes]);
+  
+  useEffect(() => {
+    progressRef.current = progress;
+  }, [progress]);
+  
+  useEffect(() => {
+    startDateRef.current = startDate;
+  }, [startDate]);
+  
+  useEffect(() => {
+    endDateRef.current = endDate;
+  }, [endDate]);
 
   // Load data from localStorage on component mount
   useEffect(() => {
@@ -60,6 +83,8 @@ export const useChecklistStorage = () => {
         
         if (parsed.notes) {
           setNotes(parsed.notes);
+          // Also update the ref
+          notesRef.current = parsed.notes;
         }
       } catch (error) {
         console.error('Error loading saved checklist data:', error);
@@ -67,15 +92,16 @@ export const useChecklistStorage = () => {
     }
   }, []);
 
-  // Core save function
+  // Core save function - uses refs for latest values
   const saveData = (manualSave: boolean = false) => {
     const currentTime = new Date().toISOString();
     
+    // Use refs to ensure we get the absolute latest values
     const dataToSave = {
-      progress,
-      startDate: startDate ? startDate.toISOString() : undefined,
-      endDate: endDate ? endDate.toISOString() : undefined,
-      notes,
+      progress: progressRef.current,
+      startDate: startDateRef.current ? startDateRef.current.toISOString() : undefined,
+      endDate: endDateRef.current ? endDateRef.current.toISOString() : undefined,
+      notes: notesRef.current,
       savedAt: currentTime
     };
     
@@ -95,6 +121,7 @@ export const useChecklistStorage = () => {
   // Set start date
   const setStartDateAndSave = (date: Date | undefined) => {
     setStartDate(date);
+    startDateRef.current = date;
     
     // Force immediate save after state update using a timeout
     setTimeout(() => saveData(), 0);
@@ -103,6 +130,7 @@ export const useChecklistStorage = () => {
   // Set end date
   const setEndDateAndSave = (date: Date | undefined) => {
     setEndDate(date);
+    endDateRef.current = date;
     
     // Force immediate save after state update using a timeout
     setTimeout(() => saveData(), 0);
@@ -114,21 +142,24 @@ export const useChecklistStorage = () => {
     console.log(`Notes changed for field: ${field}`, value);
     
     // Create a new notes object with the updated field to ensure reactivity
-    const updatedNotes = { ...notes, [field]: value };
+    const updatedNotes = { ...notesRef.current, [field]: value };
     
     // Update state
     setNotes(updatedNotes);
+    
+    // CRITICAL: Also update the ref directly for immediate access
+    notesRef.current = updatedNotes;
     
     // CRITICAL: Immediately save to localStorage with a direct write
     // This bypasses React's state batching and ensures the data is saved right away
     const currentTime = new Date().toISOString();
     
-    // Create the save object with the updated notes directly (don't use state)
+    // Create the save object with the updated notes directly using refs
     const dataToSave = {
-      progress,
-      startDate: startDate ? startDate.toISOString() : undefined,
-      endDate: endDate ? endDate.toISOString() : undefined,
-      notes: updatedNotes, // Use the local updated notes, not the state
+      progress: progressRef.current,
+      startDate: startDateRef.current ? startDateRef.current.toISOString() : undefined,
+      endDate: endDateRef.current ? endDateRef.current.toISOString() : undefined,
+      notes: updatedNotes,
       savedAt: currentTime
     };
     
@@ -143,19 +174,20 @@ export const useChecklistStorage = () => {
   // Handle checkbox changes with IMMEDIATE save
   const handleCheckboxChange = (id: string, checked: boolean) => {
     // Create updated progress object
-    const updatedProgress = { ...progress, [id]: checked };
+    const updatedProgress = { ...progressRef.current, [id]: checked };
     
-    // Update state
+    // Update state and ref
     setProgress(updatedProgress);
+    progressRef.current = updatedProgress;
     
     // Immediately save to localStorage directly
     const currentTime = new Date().toISOString();
     
     const dataToSave = {
-      progress: updatedProgress, // Use local updated progress
-      startDate: startDate ? startDate.toISOString() : undefined,
-      endDate: endDate ? endDate.toISOString() : undefined,
-      notes,
+      progress: updatedProgress,
+      startDate: startDateRef.current ? startDateRef.current.toISOString() : undefined,
+      endDate: endDateRef.current ? endDateRef.current.toISOString() : undefined,
+      notes: notesRef.current,
       savedAt: currentTime
     };
     
@@ -174,19 +206,33 @@ export const useChecklistStorage = () => {
     }, 1000);
     
     return () => clearTimeout(timeoutId);
-  }, [progress, startDate, endDate, notes.general, notes.storageContact, notes.emergencyContact, notes.returnPreparation]);
+  }, [progress, startDate, endDate, notes]);
+
+  // Add a tab change handler that forces a save
+  const handleTabChange = () => {
+    console.log("Tab changed - forcing save");
+    saveData(true);
+  };
 
   const resetData = () => {
-    setProgress({});
-    setStartDate(new Date());
-    setEndDate(undefined);
-    setLastSavedAt(null);
-    setNotes({
+    const emptyNotes = {
       general: '',
       storageContact: '',
       emergencyContact: '',
       returnPreparation: ''
-    });
+    };
+    
+    setProgress({});
+    setStartDate(new Date());
+    setEndDate(undefined);
+    setLastSavedAt(null);
+    setNotes(emptyNotes);
+    
+    // Update refs
+    progressRef.current = {};
+    startDateRef.current = new Date();
+    endDateRef.current = undefined;
+    notesRef.current = emptyNotes;
     
     localStorage.removeItem(STORAGE_KEY);
   };
@@ -208,6 +254,7 @@ export const useChecklistStorage = () => {
     lastSavedAt,
     handleCheckboxChange,
     handleNotesChange,
+    handleTabChange,
     saveData,
     resetData,
     getLastSavedMessage
