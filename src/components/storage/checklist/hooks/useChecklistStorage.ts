@@ -56,6 +56,9 @@ export const useChecklistStorage = () => {
     }
   }, [loadData, setEndDate, setNotes, setProgress, setStartDate, setLastSavedAt]);
 
+  // Get persistence functionality but don't use it directly - it's already used in useChecklistCore
+  const persistence = usePersistence();
+
   // Get event handlers
   const {
     setStartDateAndSave,
@@ -72,7 +75,7 @@ export const useChecklistStorage = () => {
     setStartDate,
     setEndDate,
     setNotes,
-    useChecklistCore().saveData, // Access the saveData function 
+    persistence.saveData, // Pass the saveData from the persistence directly
     saveDataWrapper
   );
 
