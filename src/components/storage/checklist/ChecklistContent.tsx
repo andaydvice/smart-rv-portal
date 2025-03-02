@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Tabs, TabsContent, TabsList } from "@/components/ui/tabs";
 import RVInfoTab from './RVInfoTab';
@@ -12,8 +13,21 @@ import PestControlTab from './PestControlTab';
 import NotesTab from './NotesTab';
 import ChecklistTabTrigger from './ChecklistTabTrigger';
 import { ChecklistData } from './useChecklistStorage';
+import { TabContentProps } from './ChecklistTypes';
 
-type ChecklistContentProps = Omit<ChecklistData, 'savedAt'> & {
+// Update the prop interface to include the setter functions
+type ChecklistContentProps = {
+  progress: {[key: string]: boolean};
+  startDate: Date | undefined;
+  endDate: Date | undefined;
+  notes: {
+    general: string;
+    storageContact: string;
+    emergencyContact: string;
+    returnPreparation: string;
+  };
+  setStartDate: React.Dispatch<React.SetStateAction<Date | undefined>>;
+  setEndDate: React.Dispatch<React.SetStateAction<Date | undefined>>;
   handleCheckboxChange: (id: string, checked: boolean) => void;
   handleNotesChange: (field: string, value: string) => void;
 };
@@ -133,35 +147,35 @@ const ChecklistContent: React.FC<ChecklistContentProps> = ({
           </TabsContent>
           
           <TabsContent value="electrical">
-            <ElectricalTab progress={progress} onCheckboxChange={handleCheckboxChange} />
+            <ElectricalTab progress={progress} handleCheckboxChange={handleCheckboxChange} />
           </TabsContent>
           
           <TabsContent value="plumbing">
-            <PlumbingTab progress={progress} onCheckboxChange={handleCheckboxChange} />
+            <PlumbingTab progress={progress} handleCheckboxChange={handleCheckboxChange} />
           </TabsContent>
           
           <TabsContent value="exterior">
-            <ExteriorTab progress={progress} onCheckboxChange={handleCheckboxChange} />
+            <ExteriorTab progress={progress} handleCheckboxChange={handleCheckboxChange} />
           </TabsContent>
           
           <TabsContent value="interior">
-            <InteriorTab progress={progress} onCheckboxChange={handleCheckboxChange} />
+            <InteriorTab progress={progress} handleCheckboxChange={handleCheckboxChange} />
           </TabsContent>
           
           <TabsContent value="mechanical">
-            <MechanicalTab progress={progress} onCheckboxChange={handleCheckboxChange} />
+            <MechanicalTab progress={progress} handleCheckboxChange={handleCheckboxChange} />
           </TabsContent>
           
           <TabsContent value="tires">
-            <TiresTab progress={progress} onCheckboxChange={handleCheckboxChange} />
+            <TiresTab progress={progress} handleCheckboxChange={handleCheckboxChange} />
           </TabsContent>
           
           <TabsContent value="security">
-            <SecurityTab progress={progress} onCheckboxChange={handleCheckboxChange} />
+            <SecurityTab progress={progress} handleCheckboxChange={handleCheckboxChange} />
           </TabsContent>
           
           <TabsContent value="pest">
-            <PestControlTab progress={progress} onCheckboxChange={handleCheckboxChange} />
+            <PestControlTab progress={progress} handleCheckboxChange={handleCheckboxChange} />
           </TabsContent>
           
           <TabsContent value="notes">

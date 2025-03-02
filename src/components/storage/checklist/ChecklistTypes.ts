@@ -12,3 +12,9 @@ export interface RVInfoTabProps {
   setStartDate: Dispatch<SetStateAction<Date | undefined>>;
   setEndDate: Dispatch<SetStateAction<Date | undefined>>;
 }
+
+// Adding this interface to make it clear what the tab components expect
+export interface TabContentProps {
+  progress: {[key: string]: boolean};
+  handleCheckboxChange: (id: string, checked: boolean) => void;
+}
