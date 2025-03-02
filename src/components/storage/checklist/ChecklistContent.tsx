@@ -23,7 +23,7 @@ interface ChecklistContentProps {
   notes: ChecklistNotes;
   handleCheckboxChange: (id: string, checked: boolean) => void;
   handleNotesChange: (field: keyof ChecklistNotes, value: string) => void;
-  onTabChange?: () => void; // New prop for tab change handling
+  onTabChange?: () => void; // Prop for tab change handling
 }
 
 const ChecklistContent: React.FC<ChecklistContentProps> = ({

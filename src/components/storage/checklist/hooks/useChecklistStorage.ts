@@ -30,6 +30,9 @@ export const useChecklistStorage = () => {
     loadData
   } = useChecklistCore();
 
+  // Get persistence functionality
+  const persistence = usePersistence();
+
   // Load data from localStorage on component mount
   useEffect(() => {
     const savedData = loadData();
@@ -56,9 +59,6 @@ export const useChecklistStorage = () => {
     }
   }, [loadData, setEndDate, setNotes, setProgress, setStartDate, setLastSavedAt]);
 
-  // Get persistence functionality but don't use it directly - it's already used in useChecklistCore
-  const persistence = usePersistence();
-
   // Get event handlers
   const {
     setStartDateAndSave,
@@ -75,7 +75,7 @@ export const useChecklistStorage = () => {
     setStartDate,
     setEndDate,
     setNotes,
-    persistence.saveData, // Pass the saveData from the persistence directly
+    persistence.saveData,
     saveDataWrapper
   );
 

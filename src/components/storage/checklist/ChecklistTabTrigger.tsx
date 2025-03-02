@@ -1,7 +1,6 @@
 
 import React from 'react';
 import { TabsTrigger } from "@/components/ui/tabs";
-import * as LucideIcons from "lucide-react";
 import { Info, ExternalLink, Home, Droplets, Zap, Settings, CircleDashed, Bug, Lock, FileText } from "lucide-react";
 
 interface ChecklistTabTriggerProps {
@@ -11,7 +10,7 @@ interface ChecklistTabTriggerProps {
   iconColor?: string;
   progress?: number;
   total?: number;
-  onTabClick?: () => void; // New prop for tab click handler
+  onTabClick?: () => void; // Tab click handler
 }
 
 const ChecklistTabTrigger: React.FC<ChecklistTabTriggerProps> = ({ 
@@ -21,20 +20,6 @@ const ChecklistTabTrigger: React.FC<ChecklistTabTriggerProps> = ({
   iconColor,
   onTabClick
 }) => {
-  // Define a mapping for icon names to components
-  const iconComponents: Record<string, React.ReactNode> = {
-    Info: <Info />,
-    ExternalLink: <ExternalLink />,
-    Home: <Home />,
-    Droplets: <Droplets />,
-    Zap: <Zap />,
-    Settings: <Settings />,
-    CircleDashed: <CircleDashed />,
-    Bug: <Bug />,
-    Lock: <Lock />,
-    FileText: <FileText />
-  };
-  
   // Map labels to specific colors exactly as shown in the image
   let specificIconColor = "";
   
@@ -73,22 +58,41 @@ const ChecklistTabTrigger: React.FC<ChecklistTabTriggerProps> = ({
       specificIconColor = "#5B9BD5"; // Default blue
   }
 
-  // Add a click handler to ensure focus is properly managed
+  // Handle tab click to trigger save
   const handleTabClick = () => {
-    // Force a save when changing tabs
-    console.log(`Tab ${label} clicked - triggering save`);
     if (onTabClick) {
-      onTabClick(); // Call the parent's onTabClick handler to trigger saves
+      console.log(`Tab ${label} clicked - triggering save`);
+      onTabClick();
     }
   };
   
-  // Get the icon component to render
-  const IconComponent = icon && iconComponents[icon] ? 
-    React.cloneElement(iconComponents[icon] as React.ReactElement, {
-      className: "h-6 w-6",
-      stroke: specificIconColor,
-      strokeWidth: 2
-    }) : null;
+  // Render the correct icon based on the icon prop
+  const renderIcon = () => {
+    switch(icon) {
+      case "Info":
+        return <Info className="h-6 w-6" stroke={specificIconColor} strokeWidth={2} />;
+      case "ExternalLink":
+        return <ExternalLink className="h-6 w-6" stroke={specificIconColor} strokeWidth={2} />;
+      case "Home":
+        return <Home className="h-6 w-6" stroke={specificIconColor} strokeWidth={2} />;
+      case "Droplets":
+        return <Droplets className="h-6 w-6" stroke={specificIconColor} strokeWidth={2} />;
+      case "Zap":
+        return <Zap className="h-6 w-6" stroke={specificIconColor} strokeWidth={2} />;
+      case "Settings":
+        return <Settings className="h-6 w-6" stroke={specificIconColor} strokeWidth={2} />;
+      case "CircleDashed":
+        return <CircleDashed className="h-6 w-6" stroke={specificIconColor} strokeWidth={2} />;
+      case "Bug":
+        return <Bug className="h-6 w-6" stroke={specificIconColor} strokeWidth={2} />;
+      case "Lock":
+        return <Lock className="h-6 w-6" stroke={specificIconColor} strokeWidth={2} />;
+      case "FileText":
+        return <FileText className="h-6 w-6" stroke={specificIconColor} strokeWidth={2} />;
+      default:
+        return null;
+    }
+  };
   
   return (
     <TabsTrigger 
@@ -97,7 +101,7 @@ const ChecklistTabTrigger: React.FC<ChecklistTabTriggerProps> = ({
       onClick={handleTabClick}
     >
       <div className="flex flex-col items-center gap-2 justify-center">
-        {IconComponent}
+        {renderIcon()}
         <span className="text-sm font-medium">{label}</span>
       </div>
     </TabsTrigger>
