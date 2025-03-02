@@ -32,9 +32,9 @@ export const usePersistence = () => {
     }
   }, []);
 
-  // Save data to localStorage
+  // Save data to localStorage with improved error handling
   const saveData = useCallback((
-    progress: {[key: string]: boolean},
+    progress: {[key: string]: boolean | string},
     startDate: Date | undefined,
     endDate: Date | undefined,
     notes: ChecklistNotes,

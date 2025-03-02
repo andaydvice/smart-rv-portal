@@ -12,7 +12,7 @@ export const useChecklistCore = () => {
   const { loadData, saveData, clearData } = usePersistence();
   
   // State with refs for immediate access
-  const [progress, setProgress, progressRef] = useRefState<{[key: string]: boolean}>({});
+  const [progress, setProgress, progressRef] = useRefState<{[key: string]: boolean | string}>({});
   const [startDate, setStartDate, startDateRef] = useRefState<Date | undefined>(new Date());
   const [endDate, setEndDate, endDateRef] = useRefState<Date | undefined>(undefined);
   const [notes, setNotes, notesRef] = useRefState<ChecklistNotes>({

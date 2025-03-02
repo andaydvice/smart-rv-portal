@@ -35,7 +35,10 @@ export const useChecklistStorage = () => {
     const savedData = loadData();
     
     if (savedData) {
-      setProgress(savedData.progress || {});
+      // Make sure to handle all data types correctly
+      if (savedData.progress) {
+        setProgress(savedData.progress);
+      }
       
       if (savedData.startDate) {
         setStartDate(savedData.startDate);

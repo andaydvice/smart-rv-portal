@@ -8,7 +8,7 @@ export interface ChecklistNotes {
 }
 
 export interface ChecklistData {
-  progress: {[key: string]: boolean};
+  progress: {[key: string]: boolean | string};
   startDate?: Date;
   endDate?: Date;
   notes: ChecklistNotes;
