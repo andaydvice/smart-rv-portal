@@ -20,6 +20,7 @@ export const useCompletionStats = (progress: {[key: string]: boolean | string}) 
       ? Math.round((completedItems / totalItems) * 100) 
       : 0;
       
+    // Ensure we don't return NaN values and always return a valid number
     return { 
       totalItems, 
       completedItems, 
