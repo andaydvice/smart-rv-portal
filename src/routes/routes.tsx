@@ -10,7 +10,7 @@ import CompleteDocumentation from "@/pages/documentation/CompleteDocumentation";
 import Features from "@/pages/Features";
 import AudioSystem from "@/pages/features/AudioSystem";
 import AutomatedDriving from "@/pages/features/AutomatedDriving";
-import InternetConnectivity from "@/pages/features/InternetConnectivity";
+import ConnectivityFeature from "@/pages/features/InternetConnectivity";
 import NavigationSystem from "@/pages/features/NavigationSystem";
 import PowerManagement from "@/pages/features/PowerManagement";
 import SecuritySystem from "@/pages/features/SecuritySystem";
@@ -77,6 +77,10 @@ export const routes = [
   {
     path: "/features/internet-connectivity",
     element: <InternetConnectivity />
+  },
+  {
+    path: "/features/connectivity",
+    element: <ConnectivityFeature />
   },
   {
     path: "/features/navigation-system",
