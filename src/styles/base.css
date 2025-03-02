@@ -23,8 +23,6 @@
     font-feature-settings: "ss01" on, "ss02" on, "cv01" on, "cv02" on;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     text-size-adjust: 100%;
-    -webkit-text-size-adjust: 100%;
-    -moz-text-size-adjust: 100%;
   }
 
   .glass-card {

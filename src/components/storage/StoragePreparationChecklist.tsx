@@ -113,4 +113,6 @@ const StoragePreparationChecklist: React.FC = memo(() => {
   );
 });
 
+StoragePreparationChecklist.displayName = 'StoragePreparationChecklist';
+
 export default StoragePreparationChecklist;

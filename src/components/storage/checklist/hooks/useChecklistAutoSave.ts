@@ -50,7 +50,7 @@ export const useChecklistAutoSave = (
         } finally {
           saveTimeoutRef.current = null;
         }
-      }, 3000); // Increased debounce time to 3 seconds for better performance
+      }, 5000); // Increased debounce time to 5 seconds for better performance
     }
   }, [saveDataWrapper, hasDataChanged, progress, startDate, endDate, notes]);
 
@@ -125,7 +125,7 @@ export const useChecklistAutoSave = (
     window.addEventListener('visibilitychange', handleVisibilityChange);
     window.addEventListener('beforeunload', handleBeforeUnload);
     
-    // Force periodic saves, but at a much lower frequency (180 seconds)
+    // Force periodic saves, but at a much lower frequency (5 minutes)
     const intervalId = setInterval(() => {
       if (hasDataChanged()) {
         try {
@@ -137,7 +137,7 @@ export const useChecklistAutoSave = (
           console.error("Error during periodic save:", error);
         }
       }
-    }, 180000); // Save every 180 seconds (3 minutes) to reduce overhead
+    }, 300000); // Save every 300 seconds (5 minutes) to reduce overhead
     
     // Force save when component unmounts
     return () => {
