@@ -11,8 +11,8 @@ import TiresTab from './TiresTab';
 import SecurityTab from './SecurityTab';
 import PestControlTab from './PestControlTab';
 import NotesTab from './NotesTab';
-import ChecklistSection from './ChecklistSection';
-import ChecklistTabTrigger from './ChecklistTabTrigger';
+import { ChecklistSection } from './ChecklistSection';
+import { ChecklistTabTrigger } from './ChecklistTabTrigger';
 import { ChecklistData } from './useChecklistStorage';
 
 type ChecklistContentProps = Omit<ChecklistData, 'savedAt'> & {
@@ -24,8 +24,6 @@ const ChecklistContent: React.FC<ChecklistContentProps> = ({
   progress,
   startDate,
   endDate,
-  setStartDate,
-  setEndDate,
   notes,
   handleCheckboxChange,
   handleNotesChange
@@ -45,7 +43,7 @@ const ChecklistContent: React.FC<ChecklistContentProps> = ({
         <Tabs defaultValue="rv-info" className="space-y-6">
           <div className="overflow-x-auto pb-2">
             <div className="flex space-x-1 min-w-max">
-              <ChecklistTabTrigger value="rv-info" label="RV Info" progress={0} total={0} />
+              <ChecklistTabTrigger value="rv-info" label="RV Info" progress={0} total={0} icon="InfoIcon" />
               <ChecklistTabTrigger 
                 value="electrical" 
                 label="Electrical" 
@@ -55,6 +53,7 @@ const ChecklistContent: React.FC<ChecklistContentProps> = ({
                     .length
                 } 
                 total={5} 
+                icon="ZapIcon"
               />
               <ChecklistTabTrigger 
                 value="plumbing" 
@@ -65,6 +64,7 @@ const ChecklistContent: React.FC<ChecklistContentProps> = ({
                     .length
                 } 
                 total={6} 
+                icon="DropletIcon"
               />
               <ChecklistTabTrigger 
                 value="exterior" 
@@ -75,6 +75,7 @@ const ChecklistContent: React.FC<ChecklistContentProps> = ({
                     .length
                 } 
                 total={7} 
+                icon="ExternalLinkIcon"
               />
               <ChecklistTabTrigger 
                 value="interior" 
@@ -85,6 +86,7 @@ const ChecklistContent: React.FC<ChecklistContentProps> = ({
                     .length
                 } 
                 total={8} 
+                icon="HomeIcon"
               />
               <ChecklistTabTrigger 
                 value="mechanical" 
@@ -95,6 +97,7 @@ const ChecklistContent: React.FC<ChecklistContentProps> = ({
                     .length
                 } 
                 total={6} 
+                icon="WrenchIcon"
               />
               <ChecklistTabTrigger 
                 value="tires" 
@@ -105,6 +108,7 @@ const ChecklistContent: React.FC<ChecklistContentProps> = ({
                     .length
                 } 
                 total={5} 
+                icon="CircleIcon"
               />
               <ChecklistTabTrigger 
                 value="security" 
@@ -115,6 +119,7 @@ const ChecklistContent: React.FC<ChecklistContentProps> = ({
                     .length
                 } 
                 total={6} 
+                icon="LockIcon"
               />
               <ChecklistTabTrigger 
                 value="pest" 
@@ -125,45 +130,46 @@ const ChecklistContent: React.FC<ChecklistContentProps> = ({
                     .length
                 } 
                 total={7} 
+                icon="BugIcon"
               />
-              <ChecklistTabTrigger value="notes" label="Notes" progress={0} total={0} />
+              <ChecklistTabTrigger value="notes" label="Notes" progress={0} total={0} icon="FileTextIcon" />
             </div>
           </div>
           
           <TabsContent value="rv-info">
-            <RVInfoTab startDate={startDate} endDate={endDate} setStartDate={setStartDate} setEndDate={setEndDate} />
+            <RVInfoTab startDate={startDate} endDate={endDate} setStartDate={undefined} setEndDate={undefined} />
           </TabsContent>
           
           <TabsContent value="electrical">
-            <ElectricalTab progress={progress} onCheckboxChange={handleCheckboxChange} />
+            <ElectricalTab progress={progress} handleCheckboxChange={handleCheckboxChange} />
           </TabsContent>
           
           <TabsContent value="plumbing">
-            <PlumbingTab progress={progress} onCheckboxChange={handleCheckboxChange} />
+            <PlumbingTab progress={progress} handleCheckboxChange={handleCheckboxChange} />
           </TabsContent>
           
           <TabsContent value="exterior">
-            <ExteriorTab progress={progress} onCheckboxChange={handleCheckboxChange} />
+            <ExteriorTab progress={progress} handleCheckboxChange={handleCheckboxChange} />
           </TabsContent>
           
           <TabsContent value="interior">
-            <InteriorTab progress={progress} onCheckboxChange={handleCheckboxChange} />
+            <InteriorTab progress={progress} handleCheckboxChange={handleCheckboxChange} />
           </TabsContent>
           
           <TabsContent value="mechanical">
-            <MechanicalTab progress={progress} onCheckboxChange={handleCheckboxChange} />
+            <MechanicalTab progress={progress} handleCheckboxChange={handleCheckboxChange} />
           </TabsContent>
           
           <TabsContent value="tires">
-            <TiresTab progress={progress} onCheckboxChange={handleCheckboxChange} />
+            <TiresTab progress={progress} handleCheckboxChange={handleCheckboxChange} />
           </TabsContent>
           
           <TabsContent value="security">
-            <SecurityTab progress={progress} onCheckboxChange={handleCheckboxChange} />
+            <SecurityTab progress={progress} handleCheckboxChange={handleCheckboxChange} />
           </TabsContent>
           
           <TabsContent value="pest">
-            <PestControlTab progress={progress} onCheckboxChange={handleCheckboxChange} />
+            <PestControlTab progress={progress} handleCheckboxChange={handleCheckboxChange} />
           </TabsContent>
           
           <TabsContent value="notes">

@@ -102,8 +102,6 @@ const StoragePreparationChecklist: React.FC = () => {
               progress={progress}
               startDate={startDate}
               endDate={endDate}
-              setStartDate={setStartDate}
-              setEndDate={setEndDate}
               notes={notes}
               handleCheckboxChange={handleCheckboxChange}
               handleNotesChange={handleNotesChange}
