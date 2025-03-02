@@ -51,15 +51,28 @@ const StoragePreparationChecklist: React.FC = () => {
             
             <div className="flex flex-col sm:flex-row gap-4 mt-6">
               <div className="flex gap-2">
-                <Button variant="outline" className="gap-2 bg-[#151A22] hover:bg-[#1d2532] text-white border-gray-700">
+                <Button 
+                  variant="outline" 
+                  className="gap-2 bg-[#151A22] hover:bg-[#1d2532] text-white border-gray-700 
+                  active:bg-[#1d2532] active:text-[#E2E8FF] active:border-[#5B9BD5]"
+                >
                   <Save size={16} className="text-[#5B9BD5]" />
                   Save Progress
                 </Button>
-                <Button variant="outline" className="gap-2 bg-[#151A22] hover:bg-[#1d2532] text-white border-gray-700">
+                <Button 
+                  variant="outline" 
+                  className="gap-2 bg-[#151A22] hover:bg-[#1d2532] text-white border-gray-700
+                  active:bg-[#1d2532] active:text-[#E2E8FF] active:border-[#5B9BD5]"
+                >
                   <Printer size={16} className="text-[#5B9BD5]" />
                   Print
                 </Button>
-                <Button variant="outline" className="gap-2 bg-[#151A22] hover:bg-[#1d2532] text-white border-gray-700" onClick={handleReset}>
+                <Button 
+                  variant="outline" 
+                  className="gap-2 bg-[#151A22] hover:bg-[#1d2532] text-white border-gray-700
+                  active:bg-[#1d2532] active:text-[#E2E8FF] active:border-[#5B9BD5]"
+                  onClick={handleReset}
+                >
                   <RotateCcw size={16} className="text-[#5B9BD5]" />
                   Reset
                 </Button>
