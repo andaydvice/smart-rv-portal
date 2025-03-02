@@ -1,3 +1,4 @@
+
 interface BlogPostImageProps {
   image: string;
   title: string;
@@ -9,7 +10,7 @@ export const BlogPostImage = ({ image, title }: BlogPostImageProps) => {
       <img 
         src={image} 
         alt={title}
-        className="w-full h-[600px] object-cover"
+        className="w-full h-auto md:h-[600px] object-cover"
       />
     </div>
   );
