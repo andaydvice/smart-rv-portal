@@ -1,9 +1,9 @@
 
-import { useEffect, useCallback, useRef } from 'react';
+import { useEffect, useCallback } from 'react';
 import { ChecklistNotes } from './types';
 
 /**
- * Hook for managing automatic saving of checklist data with optimized performance
+ * Hook for managing automatic saving of checklist data
  */
 export const useChecklistAutoSave = (
   progress: {[key: string]: boolean},
@@ -12,10 +12,6 @@ export const useChecklistAutoSave = (
   notes: ChecklistNotes,
   saveDataWrapper: (manualSave?: boolean) => string
 ) => {
-  // Use ref to track last save time to prevent excessive saves
-  const lastSaveTimeRef = useRef<number>(Date.now());
-  const saveTimeoutRef = useRef<NodeJS.Timeout | null>(null);
-  
   // Format last saved message
   const getLastSavedMessage = useCallback(() => {
     const lastSavedAt = saveDataWrapper(false);
@@ -25,30 +21,24 @@ export const useChecklistAutoSave = (
     return `Last auto-saved: ${savedDate.toLocaleTimeString()}`;
   }, [saveDataWrapper]);
 
-  // Debounced save function to prevent excessive saves
-  const debouncedSave = useCallback((manualSave: boolean = false) => {
-    const now = Date.now();
-    // Only save if it's been at least 2 seconds since last save (unless manual)
-    if (manualSave || now - lastSaveTimeRef.current > 2000) {
-      // Clear any pending save operation
-      if (saveTimeoutRef.current) {
-        clearTimeout(saveTimeoutRef.current);
-        saveTimeoutRef.current = null;
-      }
-      
-      // Perform the save
-      saveDataWrapper(manualSave);
-      lastSaveTimeRef.current = now;
-    }
-  }, [saveDataWrapper]);
-
-  // Optimize auto-save by using a throttled approach
+  // Backup safety auto-save for any missed changes
   useEffect(() => {
-    // Handle visibility change 
+    console.log("Auto-save effect triggered by state change");
+    
+    const timeoutId = setTimeout(() => {
+      console.log("Executing safety auto-save");
+      saveDataWrapper();
+    }, 1000);
+    
+    return () => clearTimeout(timeoutId);
+  }, [progress, startDate, endDate, notes, saveDataWrapper]);
+  
+  // Add additional auto-save on component mount/unmount and visibility change
+  useEffect(() => {
     const handleVisibilityChange = () => {
       if (document.visibilityState === 'hidden') {
         console.log("Page visibility changed - saving data");
-        debouncedSave(true);
+        saveDataWrapper(true);
       }
     };
 
@@ -56,37 +46,30 @@ export const useChecklistAutoSave = (
     window.addEventListener('visibilitychange', handleVisibilityChange);
     
     // Handle browser refresh/unload event
-    const handleBeforeUnload = () => {
+    window.addEventListener('beforeunload', () => {
       console.log("Window unloading - final save");
-      debouncedSave(true);
-    };
+      saveDataWrapper(true);
+    });
     
-    window.addEventListener('beforeunload', handleBeforeUnload);
-    
-    // Reduce periodic saves to prevent performance issues
-    // Use a much longer interval (60 seconds) for background saves
+    // Force periodic saves
     const intervalId = setInterval(() => {
       console.log("Periodic save triggered");
-      debouncedSave(false); // Silent save
-    }, 60000); // Save every 60 seconds (was 30 seconds)
+      saveDataWrapper(true);
+    }, 3000); // Save every 3 seconds
     
     // Force save when component unmounts
     return () => {
       console.log("Component unmounting - final save");
       window.removeEventListener('visibilitychange', handleVisibilityChange);
-      window.removeEventListener('beforeunload', handleBeforeUnload);
+      window.removeEventListener('beforeunload', () => {
+        console.log("Window unload listener removed");
+      });
       clearInterval(intervalId);
-      
-      if (saveTimeoutRef.current) {
-        clearTimeout(saveTimeoutRef.current);
-      }
-      
-      debouncedSave(true);
+      saveDataWrapper(true);
     };
-  }, [debouncedSave]);
+  }, [saveDataWrapper]);
 
   return {
-    getLastSavedMessage,
-    debouncedSave
+    getLastSavedMessage
   };
 };

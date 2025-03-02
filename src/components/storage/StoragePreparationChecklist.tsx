@@ -1,13 +1,12 @@
 
-import React, { useEffect, useCallback, memo } from 'react';
+import React, { useEffect } from 'react';
 import { Card, CardContent } from "@/components/ui/card";
 import { toast } from "@/components/ui/use-toast";
 import { useChecklistStorage } from './checklist/hooks/useChecklistStorage';
 import ChecklistHeader from './checklist/ChecklistHeader';
 import ChecklistContent from './checklist/ChecklistContent';
 
-// Use memo to prevent re-rendering when props haven't changed
-const StoragePreparationChecklist: React.FC = memo(() => {
+const StoragePreparationChecklist: React.FC = () => {
   const {
     progress,
     startDate,
@@ -21,31 +20,68 @@ const StoragePreparationChecklist: React.FC = memo(() => {
     handleTabChange,
     saveData,
     resetData,
-    getLastSavedMessage,
-    debouncedSave
+    getLastSavedMessage
   } = useChecklistStorage();
 
-  // Memoize event handlers to prevent recreation on each render
-  const handleSaveProgress = useCallback(() => {
-    saveData(true);
+  // Force save on any tab change (component blur/focus)
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === 'hidden') {
+        console.log("Page visibility changed - saving data");
+        saveData(true);
+      }
+    };
+
+    // Save when user navigates away or switches tabs
+    window.addEventListener('visibilitychange', handleVisibilityChange);
+    
+    // Handle browser refresh/unload event
+    window.addEventListener('beforeunload', () => {
+      console.log("Window unloading - final save");
+      saveData(true);
+    });
+    
+    // Force save when component unmounts
+    return () => {
+      console.log("Component unmounting - final save");
+      window.removeEventListener('visibilitychange', handleVisibilityChange);
+      window.removeEventListener('beforeunload', () => {
+        console.log("Window unload listener removed");
+      });
+      saveData(true);
+    };
+  }, [saveData]);
+
+  // Force periodic saves
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      console.log("Periodic save triggered");
+      saveData(true);
+    }, 3000); // Save more frequently - every 3 seconds
+
+    return () => clearInterval(intervalId);
+  }, [saveData]);
+
+  const handleSaveProgress = () => {
+    const currentTime = saveData(true);
     
     toast({
       title: "Progress Saved",
       description: "Your checklist progress has been saved successfully.",
       variant: "default",
     });
-  }, [saveData]);
+  };
 
-  const handleReset = useCallback(() => {
+  const handleReset = () => {
     resetData();
     
     toast({
       title: "Progress Reset",
       description: "Your checklist has been reset to default state.",
     });
-  }, [resetData]);
+  };
 
-  const handlePrint = useCallback(() => {
+  const handlePrint = () => {
     // Force a save before printing
     saveData(true);
     
@@ -55,9 +91,15 @@ const StoragePreparationChecklist: React.FC = memo(() => {
       title: "Printing",
       description: "Sending checklist to printer...",
     });
-  }, [saveData]);
+  };
 
-  // IMPORTANT: Calculate completion stats only when needed
+  // Force a save before every render by doing an automatic save in the background
+  useEffect(() => {
+    console.log("StoragePreparationChecklist rendered - auto-saving");
+    const timeoutId = setTimeout(() => saveData(false), 500);
+    return () => clearTimeout(timeoutId);
+  });
+
   const totalItems = 50;
   const completedItems = Object.values(progress).filter(val => val).length;
   const completionPercentage = Math.round((completedItems / totalItems) * 100);
@@ -92,9 +134,6 @@ const StoragePreparationChecklist: React.FC = memo(() => {
       </div>
     </div>
   );
-});
-
-// Add display name for better debugging
-StoragePreparationChecklist.displayName = 'StoragePreparationChecklist';
+};
 
 export default StoragePreparationChecklist;

@@ -21,34 +21,23 @@ export const useChecklistEvents = (
     notes: ChecklistNotes,
     manualSave?: boolean
   ) => string,
-  saveDataWrapper: (manualSave?: boolean) => string,
-  debouncedSave?: (manualSave?: boolean) => void
+  saveDataWrapper: (manualSave?: boolean) => string
 ) => {
-  // Set start date with optimized save
+  // Set start date with immediate save
   const setStartDateAndSave = useCallback((date: Date | undefined) => {
     setStartDate(date);
-    // Use debounced save if available
-    if (debouncedSave) {
-      debouncedSave(false);
-    } else {
-      // Fallback to immediate save with small delay
-      setTimeout(() => saveDataWrapper(false), 0);
-    }
-  }, [saveDataWrapper, setStartDate, debouncedSave]);
+    // Force immediate save after state update
+    setTimeout(() => saveDataWrapper(), 0);
+  }, [saveDataWrapper, setStartDate]);
 
-  // Set end date with optimized save
+  // Set end date with immediate save
   const setEndDateAndSave = useCallback((date: Date | undefined) => {
     setEndDate(date);
-    // Use debounced save if available
-    if (debouncedSave) {
-      debouncedSave(false);
-    } else {
-      // Fallback to immediate save with small delay
-      setTimeout(() => saveDataWrapper(false), 0);
-    }
-  }, [saveDataWrapper, setEndDate, debouncedSave]);
+    // Force immediate save after state update
+    setTimeout(() => saveDataWrapper(), 0);
+  }, [saveDataWrapper, setEndDate]);
 
-  // Handle notes change with OPTIMIZED save
+  // Handle notes change with IMMEDIATE save
   const handleNotesChange = useCallback((field: keyof ChecklistNotes, value: string) => {
     // Log the change
     console.log(`Notes changed for field: ${field}`, value);
@@ -59,26 +48,22 @@ export const useChecklistEvents = (
     // Update state
     setNotes(updatedNotes);
     
-    // Use debounced save for better performance
-    if (debouncedSave) {
-      debouncedSave(false);
-      return ""; // Return empty string since debounced save doesn't return timestamp
-    } else {
-      // Fallback to direct save method
-      const currentTime = saveData(
-        progressRef.current,
-        startDateRef.current,
-        endDateRef.current,
-        updatedNotes,
-        false
-      );
-      
-      console.log(`Notes for ${field} saved with value:`, value);
-      return currentTime;
-    }
-  }, [notesRef, progressRef, saveData, setNotes, startDateRef, endDateRef, debouncedSave]);
+    // CRITICAL: Immediately save to localStorage with a direct write
+    const currentTime = saveData(
+      progressRef.current,
+      startDateRef.current,
+      endDateRef.current,
+      updatedNotes,
+      false
+    );
+    
+    console.log("IMMEDIATE SAVE after notes change:", updatedNotes);
+    console.log(`Notes for ${field} saved with value:`, value);
+    
+    return currentTime;
+  }, [notesRef, progressRef, saveData, setNotes, startDateRef, endDateRef]);
 
-  // Handle checkbox changes with OPTIMIZED save
+  // Handle checkbox changes with IMMEDIATE save
   const handleCheckboxChange = useCallback((id: string, checked: boolean) => {
     // Create updated progress object
     const updatedProgress = { ...progressRef.current, [id]: checked };
@@ -86,37 +71,24 @@ export const useChecklistEvents = (
     // Update state
     setProgress(updatedProgress);
     
-    // Use debounced save for better performance
-    if (debouncedSave) {
-      debouncedSave(false);
-      return ""; // Return empty string since debounced save doesn't return timestamp
-    } else {
-      // Fallback to direct save method
-      const currentTime = saveData(
-        updatedProgress,
-        startDateRef.current,
-        endDateRef.current,
-        notesRef.current,
-        false
-      );
-      
-      console.log(`Checkbox ${id} changed to ${checked}`);
-      return currentTime;
-    }
-  }, [notesRef, progressRef, saveData, setProgress, startDateRef, endDateRef, debouncedSave]);
+    // Immediately save to localStorage directly
+    const currentTime = saveData(
+      updatedProgress,
+      startDateRef.current,
+      endDateRef.current,
+      notesRef.current,
+      false
+    );
+    
+    console.log(`Checkbox ${id} changed to ${checked} - saving immediately`);
+    return currentTime;
+  }, [notesRef, progressRef, saveData, setProgress, startDateRef, endDateRef]);
 
-  // Optimized tab change handler
+  // Add a tab change handler that forces a save
   const handleTabChange = useCallback(() => {
     console.log("Tab changed - forcing save with current notesRef state:", notesRef.current);
-    
-    // Use debounced save for better performance
-    if (debouncedSave) {
-      debouncedSave(true);
-      return ""; // Return empty string since debounced save doesn't return timestamp
-    } else {
-      return saveDataWrapper(true);
-    }
-  }, [saveDataWrapper, notesRef, debouncedSave]);
+    return saveDataWrapper(true);
+  }, [saveDataWrapper, notesRef]);
 
   return {
     setStartDateAndSave,

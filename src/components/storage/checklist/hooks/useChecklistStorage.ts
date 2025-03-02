@@ -30,9 +30,6 @@ export const useChecklistStorage = () => {
     loadData
   } = useChecklistCore();
 
-  // Get persistence functionality
-  const persistence = usePersistence();
-
   // Load data from localStorage on component mount
   useEffect(() => {
     const savedData = loadData();
@@ -59,16 +56,10 @@ export const useChecklistStorage = () => {
     }
   }, [loadData, setEndDate, setNotes, setProgress, setStartDate, setLastSavedAt]);
 
-  // Get auto-save functionality with optimized performance
-  const { getLastSavedMessage, debouncedSave } = useChecklistAutoSave(
-    progress,
-    startDate,
-    endDate,
-    notes,
-    saveDataWrapper
-  );
+  // Get persistence functionality but don't use it directly - it's already used in useChecklistCore
+  const persistence = usePersistence();
 
-  // Get event handlers with debounced save
+  // Get event handlers
   const {
     setStartDateAndSave,
     setEndDateAndSave,
@@ -84,9 +75,17 @@ export const useChecklistStorage = () => {
     setStartDate,
     setEndDate,
     setNotes,
-    persistence.saveData,
-    saveDataWrapper,
-    debouncedSave
+    persistence.saveData, // Pass the saveData from the persistence directly
+    saveDataWrapper
+  );
+
+  // Get auto-save functionality
+  const { getLastSavedMessage } = useChecklistAutoSave(
+    progress,
+    startDate,
+    endDate,
+    notes,
+    saveDataWrapper
   );
 
   return {
@@ -102,7 +101,6 @@ export const useChecklistStorage = () => {
     handleTabChange,
     saveData: saveDataWrapper,
     resetData,
-    getLastSavedMessage,
-    debouncedSave
+    getLastSavedMessage
   };
 };
