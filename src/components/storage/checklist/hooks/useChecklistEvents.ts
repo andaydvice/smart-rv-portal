@@ -1,9 +1,10 @@
 
-import { useCallback } from 'react';
+import { useCallback, useRef } from 'react';
 import { ChecklistNotes } from './types';
 
 /**
  * Hook for handling user interactions with the checklist
+ * Optimized with debounced saves for better performance
  */
 export const useChecklistEvents = (
   progressRef: React.MutableRefObject<{[key: string]: boolean}>,
@@ -23,47 +24,61 @@ export const useChecklistEvents = (
   ) => string,
   saveDataWrapper: (manualSave?: boolean) => string
 ) => {
+  // Debounce timers for notes changes
+  const notesDebounceTimers = useRef<Record<string, NodeJS.Timeout>>({});
+
   // Set start date with immediate save
   const setStartDateAndSave = useCallback((date: Date | undefined) => {
     setStartDate(date);
-    // Force immediate save after state update
-    setTimeout(() => saveDataWrapper(), 0);
+    // Delay save to avoid state update conflicts
+    setTimeout(() => saveDataWrapper(), 10);
   }, [saveDataWrapper, setStartDate]);
 
   // Set end date with immediate save
   const setEndDateAndSave = useCallback((date: Date | undefined) => {
     setEndDate(date);
-    // Force immediate save after state update
-    setTimeout(() => saveDataWrapper(), 0);
+    // Delay save to avoid state update conflicts
+    setTimeout(() => saveDataWrapper(), 10);
   }, [saveDataWrapper, setEndDate]);
 
-  // Handle notes change with IMMEDIATE save
+  // Handle notes change with DEBOUNCED save for better performance
   const handleNotesChange = useCallback((field: keyof ChecklistNotes, value: string) => {
+    // Clear previous timer for this field if exists
+    if (notesDebounceTimers.current[field]) {
+      clearTimeout(notesDebounceTimers.current[field]);
+    }
+    
     // Log the change
     console.log(`Notes changed for field: ${field}`, value);
     
     // Create a new notes object with the updated field to ensure reactivity
     const updatedNotes = { ...notesRef.current, [field]: value };
     
-    // Update state
+    // Update state immediately
     setNotes(updatedNotes);
     
-    // CRITICAL: Immediately save to localStorage with a direct write
-    const currentTime = saveData(
-      progressRef.current,
-      startDateRef.current,
-      endDateRef.current,
-      updatedNotes,
-      false
-    );
+    // Debounce the save operation to reduce performance load
+    notesDebounceTimers.current[field] = setTimeout(() => {
+      console.log(`Debounced save for field: ${field}`);
+      const currentTime = saveData(
+        progressRef.current,
+        startDateRef.current,
+        endDateRef.current,
+        updatedNotes,
+        false
+      );
+      
+      // Clear the timer reference
+      delete notesDebounceTimers.current[field];
+      
+      return currentTime;
+    }, 500); // 500ms debounce
     
-    console.log("IMMEDIATE SAVE after notes change:", updatedNotes);
-    console.log(`Notes for ${field} saved with value:`, value);
-    
-    return currentTime;
+    // Return a timestamp for immediate feedback
+    return new Date().toISOString();
   }, [notesRef, progressRef, saveData, setNotes, startDateRef, endDateRef]);
 
-  // Handle checkbox changes with IMMEDIATE save
+  // Handle checkbox changes with immediate save but prevent rapid changes
   const handleCheckboxChange = useCallback((id: string, checked: boolean) => {
     // Create updated progress object
     const updatedProgress = { ...progressRef.current, [id]: checked };
