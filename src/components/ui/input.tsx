@@ -8,10 +8,12 @@ export interface InputProps
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
   ({ className, type, style, ...props }, ref) => {
-    // Force white text color with !important at multiple levels
+    // Apply even more aggressive white text styling
     const defaultStyle = {
       color: 'white !important', // Set default color to white with !important
       caretColor: 'white !important', // Also set the caret color to white for visibility
+      backgroundColor: '#131a2a !important', // Force dark background
+      borderColor: '#1a202c !important', // Ensure visible borders
       ...style
     };
     

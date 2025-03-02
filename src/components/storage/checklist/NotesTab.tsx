@@ -33,6 +33,7 @@ const NotesTab: React.FC<NotesTabProps> = ({ notes, onNotesChange }) => {
             placeholder="Enter any additional notes, special procedures, or reminders here..." 
             value={notes.general}
             onChange={(e) => handleNotesChange('general', e.target.value)}
+            style={{ color: 'white !important', caretColor: 'white !important' }}
           />
         </div>
         
@@ -45,12 +46,14 @@ const NotesTab: React.FC<NotesTabProps> = ({ notes, onNotesChange }) => {
               placeholder="Storage facility contact information..." 
               value={notes.storageContact}
               onChange={(e) => handleNotesChange('storageContact', e.target.value)}
+              style={{ color: 'white !important', caretColor: 'white !important' }}
             />
             <Textarea 
               className="bg-[#131a2a] border-gray-700 h-32 text-white placeholder:text-gray-500" 
               placeholder="Emergency contact information..." 
               value={notes.emergencyContact}
               onChange={(e) => handleNotesChange('emergencyContact', e.target.value)}
+              style={{ color: 'white !important', caretColor: 'white !important' }}
             />
           </div>
         </div>
@@ -63,6 +66,7 @@ const NotesTab: React.FC<NotesTabProps> = ({ notes, onNotesChange }) => {
             placeholder="Notes for when you return to use the RV (de-winterizing procedures, systems to check, etc.)..." 
             value={notes.returnPreparation}
             onChange={(e) => handleNotesChange('returnPreparation', e.target.value)}
+            style={{ color: 'white !important', caretColor: 'white !important' }}
           />
         </div>
       </div>
