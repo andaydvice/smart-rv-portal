@@ -156,7 +156,7 @@ export const RVToolsLinks = () => (
       <Calculator className="h-4 w-4" />
       <span>RV Calculators</span>
     </NavLink>
-    <NavLink to="/weather" className="text-gray-300 hover:text-blue-400 transition-colors flex items-center gap-2">
+    <NavLink to="/rv-weather" className="text-gray-300 hover:text-blue-400 transition-colors flex items-center gap-2">
       <Settings className="h-4 w-4" />
       <span>RV Weather</span>
     </NavLink>
