@@ -27,7 +27,6 @@ const RVInfoTab: React.FC<RVInfoTabProps> = ({
               id="owner" 
               className="bg-[#131a2a] border-gray-700 text-white placeholder:text-gray-500 focus:border-[#5B9BD5]" 
               placeholder="Enter owner name" 
-              style={{ color: 'white !important' }}
             />
           </div>
           
@@ -37,7 +36,6 @@ const RVInfoTab: React.FC<RVInfoTabProps> = ({
               id="model" 
               className="bg-[#131a2a] border-gray-700 text-white placeholder:text-gray-500 focus:border-[#5B9BD5]" 
               placeholder="Enter make and model" 
-              style={{ color: 'white !important' }}
             />
           </div>
           
@@ -47,7 +45,6 @@ const RVInfoTab: React.FC<RVInfoTabProps> = ({
               id="year" 
               className="bg-[#131a2a] border-gray-700 text-white placeholder:text-gray-500 focus:border-[#5B9BD5]" 
               placeholder="Enter year" 
-              style={{ color: 'white !important' }}
             />
           </div>
         </div>
@@ -59,7 +56,6 @@ const RVInfoTab: React.FC<RVInfoTabProps> = ({
               id="vin" 
               className="bg-[#131a2a] border-gray-700 text-white placeholder:text-gray-500 focus:border-[#5B9BD5]" 
               placeholder="Enter VIN or serial number" 
-              style={{ color: 'white !important' }}
             />
           </div>
           
@@ -69,7 +65,6 @@ const RVInfoTab: React.FC<RVInfoTabProps> = ({
               id="length" 
               className="bg-[#131a2a] border-gray-700 text-white placeholder:text-gray-500 focus:border-[#5B9BD5]" 
               placeholder="Enter length" 
-              style={{ color: 'white !important' }}
             />
           </div>
           
