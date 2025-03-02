@@ -36,11 +36,8 @@ const ChecklistTabTrigger: React.FC<ChecklistTabTriggerProps> = ({
   let specificIconColor = "";
   
   switch(label) {
-    case "RV Info":
-      specificIconColor = "#5B9BD5"; // Blue
-      break;
     case "Exterior":
-      specificIconColor = "#00C29A"; // Teal/Green
+      specificIconColor = "#00C29A"; // Green
       break;
     case "Interior":
       specificIconColor = "#FFA500"; // Orange
@@ -63,6 +60,7 @@ const ChecklistTabTrigger: React.FC<ChecklistTabTriggerProps> = ({
     case "Security":
       specificIconColor = "#FF9D00"; // Orange
       break;
+    case "RV Info":
     case "Notes":
       specificIconColor = "#5B9BD5"; // Blue
       break;
@@ -73,23 +71,11 @@ const ChecklistTabTrigger: React.FC<ChecklistTabTriggerProps> = ({
   return (
     <TabsTrigger 
       value={value}
-      className="data-[state=active]:bg-[#131a2a] data-[state=active]:border-b-2 data-[state=active]:border-b-[#5B9BD5] flex-col items-center justify-center h-[80px] text-center px-0 text-white min-w-[120px] relative"
+      className="flex flex-col items-center justify-center w-full py-4 text-white"
     >
-      <div className="flex flex-col items-center gap-1 justify-center w-full p-0">
-        {Icon && <Icon className="h-6 w-6 mb-1" stroke={specificIconColor} strokeWidth={2} />}
+      <div className="flex flex-col items-center gap-2 justify-center">
+        {Icon && <Icon className="h-6 w-6" stroke={specificIconColor} strokeWidth={2} />}
         <span className="text-sm font-medium">{label}</span>
-        
-        {progressPercentage !== null && (
-          <div className="w-[80%] bg-gray-800 h-1 rounded-full absolute bottom-2 left-0 right-0 mx-auto">
-            <div 
-              className="h-full rounded-full" 
-              style={{ 
-                width: `${progressPercentage}%`,
-                backgroundColor: specificIconColor
-              }}
-            />
-          </div>
-        )}
       </div>
     </TabsTrigger>
   );

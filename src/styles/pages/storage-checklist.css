@@ -30,32 +30,6 @@
 /* Fix tab text color in RV Preparation Checklist */
 .storage-preparation-checklist [role="tab"] {
   color: white !important;
-  white-space: nowrap;
-  min-width: 120px;
-}
-
-/* Fix tab truncation issues */
-.storage-preparation-checklist [role="tab"] span {
-  max-width: 100%;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  display: block;
-}
-
-/* Tab list styling to match the design exactly */
-.storage-preparation-checklist [role="tablist"] {
-  background-color: #0c1423 !important;
-  padding: 0 !important;
-  border-radius: 0 !important;
-  gap: 0 !important;
-}
-
-/* Make active tab styling stand out */
-.storage-preparation-checklist [role="tab"][data-state="active"] {
-  background-color: #131a2a !important;
-  color: white !important;
-  border-bottom: 2px solid #5B9BD5 !important;
 }
 
 /* Make sure select options are visible */
@@ -82,24 +56,36 @@
   background-color: #131a2a !important;
 }
 
-/* Preserve tab functionality - important fix */
-.storage-preparation-checklist [role="tablist"] button {
-  background-color: #0c1423 !important;
+/* Tab styling to exactly match the image */
+.storage-preparation-checklist [role="tablist"] {
+  display: grid !important;
+  grid-template-columns: repeat(8, 1fr) !important;
+  background-color: #0a101e !important;
+  width: 100% !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border-radius: 0 !important;
+  height: auto !important;
+  border-bottom: 1px solid #1a202c;
 }
 
-.storage-preparation-checklist [role="tablist"] button[data-state="active"] {
+.storage-preparation-checklist [role="tab"] {
+  height: 70px !important;
+  padding: 12px 0 !important;
+  border-radius: 0 !important;
+  background-color: transparent !important;
+  transition: background-color 0.3s ease !important;
+}
+
+.storage-preparation-checklist [role="tab"][data-state="active"] {
   background-color: #131a2a !important;
-  border-bottom: 2px solid #5B9BD5 !important;
-  color: white !important;
+  border-bottom: none !important;
 }
 
 /* Ensure tab icons have the right color and size */
 .storage-preparation-checklist [role="tab"] svg {
+  width: 24px !important;
+  height: 24px !important;
   stroke-width: 2px !important;
 }
 
-/* Fix the dark background container for tabs */
-.storage-preparation-checklist [role="tablist"] {
-  background-color: #0c1423 !important;
-  border-radius: 0 !important;
-}
