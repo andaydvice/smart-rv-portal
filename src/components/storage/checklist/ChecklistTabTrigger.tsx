@@ -12,7 +12,6 @@ interface ChecklistTabTriggerProps {
   icon: IconName;
   label: string;
   iconColor?: string;
-  // Add these new props
   progress?: number;
   total?: number;
 }
