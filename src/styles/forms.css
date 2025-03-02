@@ -1,0 +1,15 @@
+
+/* Placeholder Styles */
+input::placeholder,
+textarea::placeholder {
+  color: #666666;
+  opacity: 1;
+}
+
+/* Ensure input text is white in dark themes - even more aggressive */
+input, 
+textarea, 
+select {
+  color: white !important;
+  caret-color: white !important;
+}

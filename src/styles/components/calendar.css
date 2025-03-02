@@ -1,0 +1,33 @@
+
+/* Calendar component overrides for dark theme */
+.rdp-button:hover:not([disabled]):not(.rdp-day_selected) {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  color: white !important;
+}
+
+.rdp-day_selected, 
+.rdp-day_selected:hover {
+  background-color: #5B9BD5 !important;
+  color: white !important;
+}
+
+.rdp-button {
+  color: white !important;
+}
+
+.rdp-caption_label, 
+.rdp-head_cell {
+  color: white !important;
+}
+
+/* Force white text for calendar days */
+.rdp-day {
+  color: white !important;
+}
+
+/* Make selected date more visible */
+.rdp-day_selected {
+  background-color: #5B9BD5 !important;
+  color: white !important;
+  font-weight: bold !important;
+}

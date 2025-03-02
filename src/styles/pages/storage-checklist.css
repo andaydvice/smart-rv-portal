@@ -1,0 +1,68 @@
+
+/* Force white text in ALL inputs on storage checklist page - super aggressive */
+.storage-preparation-checklist input,
+.storage-preparation-checklist .rdp-caption_label,
+.storage-preparation-checklist .rdp-head_cell,
+.storage-preparation-checklist .rdp-button,
+.storage-preparation-checklist textarea,
+.storage-preparation-checklist select,
+.storage-preparation-checklist [contenteditable],
+.storage-preparation-checklist *[class*="input"],
+.storage-preparation-checklist *[class*="Input"],
+.storage-preparation-checklist button,
+.storage-preparation-checklist label {
+  color: white !important;
+  caret-color: white !important;
+}
+
+/* Additional aggressive styles for storage checklist page */
+.storage-preparation-checklist *[contenteditable],
+.storage-preparation-checklist textarea,
+.storage-preparation-checklist input,
+.storage-preparation-checklist select,
+.storage-preparation-checklist .text-input,
+.storage-preparation-checklist [class*="input"] {
+  color: white !important;
+  background-color: #131a2a !important;
+  border-color: #1a202c !important;
+}
+
+/* Fix tab text color in RV Preparation Checklist */
+.storage-preparation-checklist [role="tab"] {
+  color: white !important;
+}
+
+/* Make sure select options are visible */
+.storage-preparation-checklist select option {
+  background-color: #131a2a;
+  color: white;
+}
+
+/* !!! FORCE RESET !!! - Extremely aggressive approach */
+.storage-preparation-checklist * {
+  --text-color-override: white !important;
+  --input-text: white !important;
+  --input-placeholder: #666 !important;
+}
+
+.storage-preparation-checklist *::placeholder {
+  color: #666 !important;
+  opacity: 1 !important;
+}
+
+/* Force textarea color */
+.storage-preparation-checklist textarea {
+  color: white !important;
+  background-color: #131a2a !important;
+}
+
+/* Preserve tab functionality - important fix */
+.storage-preparation-checklist [role="tablist"] button {
+  background-color: transparent !important;
+}
+
+.storage-preparation-checklist [role="tablist"] button[data-state="active"] {
+  background-color: #131a2a !important;
+  border-bottom: 2px solid #5B9BD5 !important;
+  color: white !important;
+}
