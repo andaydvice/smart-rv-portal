@@ -78,15 +78,16 @@ const RVInfoTab: React.FC<RVInfoTabProps> = ({
                     className="w-full justify-start text-left font-normal bg-[#131a2a] border-gray-700 text-white"
                   >
                     <CalendarIcon className="mr-2 h-4 w-4" />
-                    {startDate ? format(startDate, "PPP") : <span>Pick a date</span>}
+                    {startDate ? format(startDate, "PPP") : <span className="text-gray-400">Pick a date</span>}
                   </Button>
                 </PopoverTrigger>
-                <PopoverContent className="w-auto p-0" align="start">
+                <PopoverContent className="w-auto p-0 bg-[#131a2a] border-gray-700" align="start">
                   <Calendar
                     mode="single"
                     selected={startDate}
                     onSelect={setStartDate}
                     initialFocus
+                    className="text-white"
                   />
                 </PopoverContent>
               </Popover>
@@ -101,15 +102,16 @@ const RVInfoTab: React.FC<RVInfoTabProps> = ({
                     className="w-full justify-start text-left font-normal bg-[#131a2a] border-gray-700 text-white"
                   >
                     <CalendarIcon className="mr-2 h-4 w-4" />
-                    {endDate ? format(endDate, "PPP") : <span>Pick a date</span>}
+                    {endDate ? format(endDate, "PPP") : <span className="text-gray-400">Pick a date</span>}
                   </Button>
                 </PopoverTrigger>
-                <PopoverContent className="w-auto p-0" align="start">
+                <PopoverContent className="w-auto p-0 bg-[#131a2a] border-gray-700" align="start">
                   <Calendar
                     mode="single"
                     selected={endDate}
                     onSelect={setEndDate}
                     initialFocus
+                    className="text-white"
                   />
                 </PopoverContent>
               </Popover>
