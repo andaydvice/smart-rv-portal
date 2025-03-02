@@ -7,10 +7,10 @@ import { ChecklistTabProps } from './ChecklistTypes';
 
 const ExteriorTab: React.FC<ChecklistTabProps> = ({ handleCheckboxChange, progress }) => {
   return (
-    <>
-      <h2 className="text-2xl font-bold text-[#60A5FA] mb-4">EXTERIOR PREPARATION</h2>
+    <div className="animate-fade-in">
+      <h2 className="text-2xl md:text-3xl font-bold text-[#60A5FA] mb-6 border-b border-gray-800 pb-4">EXTERIOR PREPARATION</h2>
       
-      <div className="space-y-6">
+      <div className="space-y-8">
         <ChecklistSection title="Cleaning">
           <ChecklistItem
             id="wash"
@@ -104,16 +104,16 @@ const ExteriorTab: React.FC<ChecklistTabProps> = ({ handleCheckboxChange, progre
           />
         </ChecklistSection>
         
-        <div className="space-y-2">
-          <Label htmlFor="exterior-notes" className="text-gray-200">Additional Exterior Notes</Label>
+        <div className="space-y-3">
+          <Label htmlFor="exterior-notes" className="text-[#5B9BD5] font-medium">Additional Exterior Notes</Label>
           <Textarea 
             id="exterior-notes" 
-            className="bg-[#131a2a] border-gray-700 min-h-[100px]" 
+            className="bg-[#131a2a] border-gray-700 min-h-[100px] focus:border-[#5B9BD5] focus:ring-1 focus:ring-[#5B9BD5]" 
             placeholder="Enter any additional notes about exterior preparation..." 
           />
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

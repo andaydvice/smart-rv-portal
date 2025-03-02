@@ -2,11 +2,12 @@
 import React from 'react';
 import { TabsTrigger } from "@/components/ui/tabs";
 import * as LucideIcons from "lucide-react";
-import { LucideIcon } from "lucide-react";
+
+type IconName = keyof typeof LucideIcons;
 
 interface ChecklistTabTriggerProps {
   value: string;
-  icon: keyof typeof LucideIcons;
+  icon: IconName;
   label: string;
   iconColor?: string;
 }
@@ -15,18 +16,19 @@ export const ChecklistTabTrigger: React.FC<ChecklistTabTriggerProps> = ({
   value, 
   icon, 
   label,
-  iconColor = "#60A5FA" // Default blue if no color provided
+  iconColor = "#60A5FA" // Default color if not specified
 }) => {
-  // Fix the type casting to ensure we get a proper React component
-  const IconComponent = LucideIcons[icon] as unknown as LucideIcon;
+  const IconComponent = LucideIcons[icon];
   
   return (
     <TabsTrigger 
-      value={value} 
-      className="data-[state=active]:bg-[#60A5FA] data-[state=active]:text-white flex items-center gap-1"
+      value={value}
+      className="data-[state=active]:bg-[#131a2a] data-[state=active]:border-[#5B9BD5] data-[state=active]:border-b-2 py-3 px-4 whitespace-nowrap"
     >
-      {IconComponent && <IconComponent className="h-3.5 w-3.5" style={{ color: iconColor }} />}
-      {label}
+      <div className="flex flex-col items-center gap-1.5">
+        <IconComponent className="h-5 w-5" style={{ color: iconColor }} />
+        <span className="text-xs font-medium">{label}</span>
+      </div>
     </TabsTrigger>
   );
 };
