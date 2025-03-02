@@ -28,7 +28,6 @@ const StoragePreparationChecklist: React.FC = () => {
     returnPreparation: ''
   });
   
-  // Load saved progress when component mounts
   useEffect(() => {
     const savedData = localStorage.getItem('rv-storage-checklist');
     
@@ -58,7 +57,6 @@ const StoragePreparationChecklist: React.FC = () => {
     }
   }, []);
 
-  // Auto-save whenever progress, startDate, endDate, or notes changes
   useEffect(() => {
     const autoSaveData = () => {
       const currentTime = new Date().toISOString();
@@ -71,29 +69,27 @@ const StoragePreparationChecklist: React.FC = () => {
         savedAt: currentTime
       };
       
+      console.log("Auto-saving data:", saveData);
       localStorage.setItem('rv-storage-checklist', JSON.stringify(saveData));
       setLastSavedAt(currentTime);
     };
     
-    // Only auto-save if we have some progress to save or notes content
-    if (Object.keys(progress).length > 0 || 
-        notes.general || 
-        notes.storageContact || 
-        notes.emergencyContact || 
-        notes.returnPreparation) {
-      autoSaveData();
-    }
-  }, [progress, startDate, endDate, notes]);
+    autoSaveData();
+  }, [progress, startDate, endDate, notes.general, notes.storageContact, notes.emergencyContact, notes.returnPreparation]);
 
   const handleCheckboxChange = (id: string, checked: boolean) => {
     setProgress(prev => ({...prev, [id]: checked}));
   };
 
   const handleNotesChange = (field: string, value: string) => {
-    setNotes(prev => ({
-      ...prev,
-      [field]: value
-    }));
+    console.log(`Handling notes change for ${field}:`, value);
+    setNotes(prev => {
+      const updated = {
+        ...prev,
+        [field]: value
+      };
+      return updated;
+    });
   };
 
   const handleReset = () => {
@@ -108,7 +104,6 @@ const StoragePreparationChecklist: React.FC = () => {
       returnPreparation: ''
     });
     
-    // Clear localStorage
     localStorage.removeItem('rv-storage-checklist');
     
     toast({
@@ -118,7 +113,6 @@ const StoragePreparationChecklist: React.FC = () => {
   };
 
   const handleSaveProgress = () => {
-    // Manual save progress to localStorage
     const currentTime = new Date().toISOString();
     
     const saveData = {
@@ -140,7 +134,6 @@ const StoragePreparationChecklist: React.FC = () => {
   };
 
   const handlePrint = () => {
-    // Print the checklist
     window.print();
     
     toast({
@@ -149,12 +142,10 @@ const StoragePreparationChecklist: React.FC = () => {
     });
   };
 
-  // Calculate completion percentage
-  const totalItems = 50; // Approximate total number of checklist items
+  const totalItems = 50;
   const completedItems = Object.values(progress).filter(val => val).length;
   const completionPercentage = Math.round((completedItems / totalItems) * 100);
 
-  // Format last saved time for display
   const getLastSavedMessage = () => {
     if (!lastSavedAt) return "";
     
