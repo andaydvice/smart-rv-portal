@@ -1,3 +1,4 @@
+
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
@@ -14,11 +15,13 @@ export default defineConfig(({ mode }) => ({
       timeout: 120000,
       host: '95549a04-cacd-4e64-a52b-ecc6aed8e361.lovableproject.com',
       overlay: true,
-      protocol: 'wss'
+      protocol: 'wss',
+      // Add better reconnection handling
+      reloadOnFailure: true
     },
     watch: {
       usePolling: true,
-      interval: 100
+      interval: 300 // Increase interval to reduce CPU usage
     },
     open: false,
   },
@@ -34,9 +37,12 @@ export default defineConfig(({ mode }) => ({
   optimizeDeps: {
     include: ['react', 'react-dom'],
     force: true,
+    esbuildOptions: {
+      target: 'es2020' // Update target for better compatibility
+    }
   },
   build: {
-    sourcemap: true,
+    sourcemap: mode === 'development',
     minify: mode === 'development' ? false : 'esbuild',
     rollupOptions: {
       output: {
@@ -45,6 +51,7 @@ export default defineConfig(({ mode }) => ({
         },
       },
     },
+    target: 'es2020' // Ensure consistent target with optimizeDeps
   },
   esbuild: {
     logOverride: { 'this-is-undefined-in-esm': 'silent' }
