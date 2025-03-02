@@ -11,7 +11,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     // Force white text color with !important at multiple levels
     const defaultStyle = {
       color: 'white !important', // Set default color to white with !important
-      caretColor: 'white', // Also set the caret color to white for visibility
+      caretColor: 'white !important', // Also set the caret color to white for visibility
       ...style
     };
     

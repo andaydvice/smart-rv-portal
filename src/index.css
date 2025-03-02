@@ -136,7 +136,9 @@ label.inner1 {
 .storage-preparation-checklist input,
 .storage-preparation-checklist .rdp-caption_label,
 .storage-preparation-checklist .rdp-head_cell,
-.storage-preparation-checklist .rdp-button {
+.storage-preparation-checklist .rdp-button,
+.storage-preparation-checklist textarea,
+.storage-preparation-checklist select {
   color: white !important;
   caret-color: white !important;
 }
@@ -151,4 +153,25 @@ label.inner1 {
   background-color: #5B9BD5 !important;
   color: white !important;
   font-weight: bold !important;
+}
+
+/* Additional aggressive styles for storage checklist page */
+.storage-preparation-checklist *[contenteditable],
+.storage-preparation-checklist textarea,
+.storage-preparation-checklist input,
+.storage-preparation-checklist select,
+.storage-preparation-checklist .text-input,
+.storage-preparation-checklist [class*="input"] {
+  color: white !important;
+}
+
+/* Fix tab text color in RV Preparation Checklist */
+.storage-preparation-checklist [role="tab"] {
+  color: white !important;
+}
+
+/* Make sure select options are visible */
+.storage-preparation-checklist select option {
+  background-color: #131a2a;
+  color: white;
 }

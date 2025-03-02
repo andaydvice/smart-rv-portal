@@ -5,7 +5,7 @@ import StoragePreparationChecklist from '@/components/storage/StoragePreparation
 
 const StoragePreparationChecklistPage: React.FC = () => {
   return (
-    <div className="storage-preparation-checklist">
+    <div className="storage-preparation-checklist bg-[#080F1F] min-h-screen">
       <Navbar />
       <StoragePreparationChecklist />
     </div>
