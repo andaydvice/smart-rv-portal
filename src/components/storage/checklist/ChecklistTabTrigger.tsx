@@ -26,10 +26,10 @@ export const ChecklistTabTrigger: React.FC<ChecklistTabTriggerProps> = ({
   return (
     <TabsTrigger 
       value={value}
-      className="data-[state=active]:bg-[#131a2a] data-[state=active]:border-[#5B9BD5] data-[state=active]:border-b-2 py-4 px-4 whitespace-nowrap"
+      className="data-[state=active]:bg-[#131a2a] data-[state=active]:border-[#5B9BD5] data-[state=active]:border-b-2 py-6 px-5 whitespace-nowrap"
     >
-      <div className="flex flex-col items-center gap-3 min-h-[60px] justify-center py-2">
-        {Icon && <Icon className="h-5 w-5" color={iconColor} />}
+      <div className="flex flex-col items-center gap-4 min-h-[80px] justify-center py-3">
+        {Icon && <Icon className="h-6 w-6" color={iconColor} />}
         <span className="text-xs font-medium text-[#E2E8FF] data-[state=active]:text-white">{label}</span>
       </div>
     </TabsTrigger>
