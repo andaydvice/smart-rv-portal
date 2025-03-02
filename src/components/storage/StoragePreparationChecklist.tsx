@@ -22,6 +22,14 @@ const StoragePreparationChecklist: React.FC = () => {
     getLastSavedMessage
   } = useChecklistStorage();
 
+  // Ensure data is saved when component unmounts
+  useEffect(() => {
+    return () => {
+      console.log("Component unmounting - saving data");
+      saveData(true);
+    };
+  }, []);
+
   const handleSaveProgress = () => {
     const currentTime = saveData(true);
     

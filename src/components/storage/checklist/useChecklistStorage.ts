@@ -60,7 +60,7 @@ export const useChecklistStorage = () => {
     }
   }, []);
 
-  // Immediate save function - called directly when notes change
+  // Immediate save function - can be called directly or by auto-save
   const saveData = (manualSave: boolean = false) => {
     const currentTime = new Date().toISOString();
     
@@ -87,26 +87,41 @@ export const useChecklistStorage = () => {
   // Handle notes change specifically - save immediately on each change
   const handleNotesChange = (field: keyof ChecklistNotes, value: string) => {
     console.log(`Notes changed for field: ${field}`, value);
+    
+    // Create new notes object with updated field
     const updatedNotes = {
       ...notes,
       [field]: value
     };
+    
+    // Update state
     setNotes(updatedNotes);
     
-    // Save immediately after updating notes
-    setTimeout(() => {
-      const dataToSave = {
-        progress,
-        startDate,
-        endDate,
-        notes: updatedNotes, // Use the updated notes directly
-        savedAt: new Date().toISOString()
-      };
-      console.log("Immediate save after notes change:", dataToSave);
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(dataToSave));
-      setLastSavedAt(dataToSave.savedAt);
-    }, 0);
+    // Immediately save to localStorage to prevent data loss on tab switch
+    const currentTime = new Date().toISOString();
+    const dataToSave = {
+      progress,
+      startDate,
+      endDate,
+      notes: updatedNotes, // Use the updated notes directly
+      savedAt: currentTime
+    };
+    
+    console.log("Immediate save after notes change:", dataToSave);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(dataToSave));
+    setLastSavedAt(currentTime);
   };
+
+  // Also add back the auto-save functionality for other changes
+  useEffect(() => {
+    // Skip the initial render to avoid double-saving
+    const timeoutId = setTimeout(() => {
+      console.log("Auto-saving from useEffect");
+      saveData();
+    }, 500);
+    
+    return () => clearTimeout(timeoutId);
+  }, [progress, startDate, endDate]);
 
   const resetData = () => {
     setProgress({});
