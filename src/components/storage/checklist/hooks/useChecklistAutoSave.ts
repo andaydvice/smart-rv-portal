@@ -21,19 +21,8 @@ export const useChecklistAutoSave = (
     return `Last auto-saved: ${savedDate.toLocaleTimeString()}`;
   }, [saveDataWrapper]);
 
-  // Backup safety auto-save for any missed changes
-  useEffect(() => {
-    console.log("Auto-save effect triggered by state change");
-    
-    const timeoutId = setTimeout(() => {
-      console.log("Executing safety auto-save");
-      saveDataWrapper();
-    }, 1000);
-    
-    return () => clearTimeout(timeoutId);
-  }, [progress, startDate, endDate, notes, saveDataWrapper]);
-  
-  // Add additional auto-save on component mount/unmount and visibility change
+  // Optimize auto-save by using a throttled approach
+  // Only save when component unmounts or visibility changes
   useEffect(() => {
     const handleVisibilityChange = () => {
       if (document.visibilityState === 'hidden') {
@@ -51,11 +40,11 @@ export const useChecklistAutoSave = (
       saveDataWrapper(true);
     });
     
-    // Force periodic saves
+    // Reduce periodic saves to prevent performance issues
     const intervalId = setInterval(() => {
       console.log("Periodic save triggered");
-      saveDataWrapper(true);
-    }, 3000); // Save every 3 seconds
+      saveDataWrapper(false); // Silent save
+    }, 30000); // Save every 30 seconds (not 3 seconds)
     
     // Force save when component unmounts
     return () => {

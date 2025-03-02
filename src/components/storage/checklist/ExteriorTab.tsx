@@ -6,6 +6,11 @@ import { ChecklistItem, ChecklistSection } from './ChecklistSection';
 import { ChecklistTabProps } from './ChecklistTypes';
 
 const ExteriorTab: React.FC<ChecklistTabProps> = ({ handleCheckboxChange, progress }) => {
+  // Use memoized handler to prevent performance issues
+  const handleCheckChange = React.useCallback((id: string, checked: boolean) => {
+    handleCheckboxChange(id, checked);
+  }, [handleCheckboxChange]);
+
   return (
     <div className="animate-fade-in">
       <h2 className="text-2xl md:text-3xl font-bold text-[#60A5FA] mb-6 border-b border-gray-800 pb-4">EXTERIOR PREPARATION</h2>
@@ -16,31 +21,31 @@ const ExteriorTab: React.FC<ChecklistTabProps> = ({ handleCheckboxChange, progre
             id="wash"
             label="Wash exterior thoroughly, including roof, sides, and undercarriage"
             checked={!!progress["wash"]}
-            onCheckedChange={(id, checked) => handleCheckboxChange(id, checked)}
+            onCheckedChange={handleCheckChange}
           />
           <ChecklistItem
             id="bugs"
             label="Remove all bugs, tree sap, and road tar"
             checked={!!progress["bugs"]}
-            onCheckedChange={(id, checked) => handleCheckboxChange(id, checked)}
+            onCheckedChange={handleCheckChange}
           />
           <ChecklistItem
             id="awnings"
             label="Clean awnings and allow to dry completely before retracting"
             checked={!!progress["awnings"]}
-            onCheckedChange={(id, checked) => handleCheckboxChange(id, checked)}
+            onCheckedChange={handleCheckChange}
           />
           <ChecklistItem
             id="uv"
             label="Apply UV protectant to rubber seals and gaskets"
             checked={!!progress["uv"]}
-            onCheckedChange={(id, checked) => handleCheckboxChange(id, checked)}
+            onCheckedChange={handleCheckChange}
           />
           <ChecklistItem
             id="steps"
             label="Clean and lube entry steps and slide-out mechanisms"
             checked={!!progress["steps"]}
-            onCheckedChange={(id, checked) => handleCheckboxChange(id, checked)}
+            onCheckedChange={handleCheckChange}
           />
         </ChecklistSection>
         
@@ -49,31 +54,31 @@ const ExteriorTab: React.FC<ChecklistTabProps> = ({ handleCheckboxChange, progre
             id="seals"
             label="Inspect and reseal any roof or sidewall seams that show signs of cracking"
             checked={!!progress["seals"]}
-            onCheckedChange={(id, checked) => handleCheckboxChange(id, checked)}
+            onCheckedChange={handleCheckChange}
           />
           <ChecklistItem
             id="damage"
             label="Check for and repair any exterior damage (cracks, chips, delamination)"
             checked={!!progress["damage"]}
-            onCheckedChange={(id, checked) => handleCheckboxChange(id, checked)}
+            onCheckedChange={handleCheckChange}
           />
           <ChecklistItem
             id="wax"
             label="Apply wax to fiberglass or painted surfaces for extended protection"
             checked={!!progress["wax"]}
-            onCheckedChange={(id, checked) => handleCheckboxChange(id, checked)}
+            onCheckedChange={handleCheckChange}
           />
           <ChecklistItem
             id="plastic"
             label="Cover or protect exterior plastic components from UV damage"
             checked={!!progress["plastic"]}
-            onCheckedChange={(id, checked) => handleCheckboxChange(id, checked)}
+            onCheckedChange={handleCheckChange}
           />
           <ChecklistItem
             id="accessories"
             label="Remove any exterior accessories that can be detached and store separately"
             checked={!!progress["accessories"]}
-            onCheckedChange={(id, checked) => handleCheckboxChange(id, checked)}
+            onCheckedChange={handleCheckChange}
           />
         </ChecklistSection>
         
@@ -82,25 +87,25 @@ const ExteriorTab: React.FC<ChecklistTabProps> = ({ handleCheckboxChange, progre
             id="cover"
             label="Consider a breathable RV cover designed for indoor storage (prevents dust)"
             checked={!!progress["cover"]}
-            onCheckedChange={(id, checked) => handleCheckboxChange(id, checked)}
+            onCheckedChange={handleCheckChange}
           />
           <ChecklistItem
             id="secure"
             label="If using a cover, ensure it's properly secured but not tight against surfaces"
             checked={!!progress["secure"]}
-            onCheckedChange={(id, checked) => handleCheckboxChange(id, checked)}
+            onCheckedChange={handleCheckChange}
           />
           <ChecklistItem
             id="padding"
             label="Place padding over sharp edges to prevent cover damage"
             checked={!!progress["padding"]}
-            onCheckedChange={(id, checked) => handleCheckboxChange(id, checked)}
+            onCheckedChange={handleCheckChange}
           />
           <ChecklistItem
             id="vents"
             label="Ensure any vents or air circulation points aren't completely sealed by the cover"
             checked={!!progress["vents"]}
-            onCheckedChange={(id, checked) => handleCheckboxChange(id, checked)}
+            onCheckedChange={handleCheckChange}
           />
         </ChecklistSection>
         
@@ -117,4 +122,4 @@ const ExteriorTab: React.FC<ChecklistTabProps> = ({ handleCheckboxChange, progre
   );
 };
 
-export default ExteriorTab;
+export default React.memo(ExteriorTab);

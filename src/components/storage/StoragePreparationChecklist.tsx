@@ -23,7 +23,7 @@ const StoragePreparationChecklist: React.FC = () => {
     getLastSavedMessage
   } = useChecklistStorage();
 
-  // Force save on any tab change (component blur/focus)
+  // Handle visibility change for saving when user leaves page
   useEffect(() => {
     const handleVisibilityChange = () => {
       if (document.visibilityState === 'hidden') {
@@ -36,34 +36,34 @@ const StoragePreparationChecklist: React.FC = () => {
     window.addEventListener('visibilitychange', handleVisibilityChange);
     
     // Handle browser refresh/unload event
-    window.addEventListener('beforeunload', () => {
+    const handleBeforeUnload = () => {
       console.log("Window unloading - final save");
       saveData(true);
-    });
+    };
+    
+    window.addEventListener('beforeunload', handleBeforeUnload);
     
     // Force save when component unmounts
     return () => {
       console.log("Component unmounting - final save");
       window.removeEventListener('visibilitychange', handleVisibilityChange);
-      window.removeEventListener('beforeunload', () => {
-        console.log("Window unload listener removed");
-      });
+      window.removeEventListener('beforeunload', handleBeforeUnload);
       saveData(true);
     };
   }, [saveData]);
 
-  // Reduce the frequency of auto-saves to prevent performance issues
+  // IMPORTANT: Reduced auto-save frequency to prevent freezing
   useEffect(() => {
     const intervalId = setInterval(() => {
       console.log("Periodic save triggered");
       saveData(false); // Use silent save to prevent UI freezing
-    }, 10000); // Save less frequently - every 10 seconds
+    }, 30000); // Save every 30 seconds instead of 10 seconds
 
     return () => clearInterval(intervalId);
   }, [saveData]);
 
   const handleSaveProgress = () => {
-    const currentTime = saveData(true);
+    saveData(true);
     
     toast({
       title: "Progress Saved",
@@ -93,12 +93,8 @@ const StoragePreparationChecklist: React.FC = () => {
     });
   };
 
-  // Optimize auto-save to prevent frequent renders
-  useEffect(() => {
-    console.log("StoragePreparationChecklist rendered - auto-saving");
-    const timeoutId = setTimeout(() => saveData(false), 2000);
-    return () => clearTimeout(timeoutId);
-  }, [saveData]);
+  // Remove the extra auto-save effect that was causing duplicate saves
+  // This was causing performance issues
 
   const totalItems = 50;
   const completedItems = Object.values(progress).filter(val => val).length;

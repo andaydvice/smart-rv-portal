@@ -24,7 +24,8 @@ interface ChecklistTabTriggerProps {
   onTabClick?: () => void;
 }
 
-const ChecklistTabTrigger: React.FC<ChecklistTabTriggerProps> = ({ 
+// Optimize rendering with memo to prevent unnecessary re-renders
+const ChecklistTabTrigger: React.FC<ChecklistTabTriggerProps> = React.memo(({ 
   value, 
   icon, 
   label,
@@ -32,14 +33,14 @@ const ChecklistTabTrigger: React.FC<ChecklistTabTriggerProps> = ({
   onTabClick
 }) => {
   // Map labels to specific colors
-  const specificIconColor = getIconColor(label);
+  const color = getIconColor(label);
   
-  // Handle tab click efficiently
-  const handleTabClick = (e: React.MouseEvent) => {
+  // Use callback to prevent re-creation on each render
+  const handleTabClick = React.useCallback(() => {
     if (onTabClick) {
       onTabClick();
     }
-  };
+  }, [onTabClick]);
   
   return (
     <TabsTrigger 
@@ -48,12 +49,14 @@ const ChecklistTabTrigger: React.FC<ChecklistTabTriggerProps> = ({
       onClick={handleTabClick}
     >
       <div className="flex flex-col items-center gap-2 justify-center">
-        {renderIconComponent(icon, specificIconColor)}
+        {renderIconComponent(icon, color)}
         <span className="text-sm font-medium">{label}</span>
       </div>
     </TabsTrigger>
   );
-};
+});
+
+ChecklistTabTrigger.displayName = 'ChecklistTabTrigger';
 
 // Helper function to get icon color based on label
 function getIconColor(label: string): string {

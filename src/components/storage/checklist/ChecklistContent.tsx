@@ -1,5 +1,5 @@
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { Tabs, TabsContent, TabsList } from "@/components/ui/tabs";
 import RVInfoTab from './RVInfoTab';
 import ExteriorTab from './ExteriorTab';
@@ -40,8 +40,8 @@ const ChecklistContent: React.FC<ChecklistContentProps> = ({
   // Track active tab for explicit saving
   const [activeTab, setActiveTab] = React.useState("rv-info");
   
-  // Force save whenever tab changes
-  const handleTabValueChange = (newValue: string) => {
+  // Optimize with useCallback to prevent recreation on each render
+  const handleTabValueChange = useCallback((newValue: string) => {
     console.log(`Tab changed to ${newValue} - triggering save`);
     
     // First save the current tab's data
@@ -49,9 +49,18 @@ const ChecklistContent: React.FC<ChecklistContentProps> = ({
       onTabChange();
     }
     
-    // Then update the active tab
-    setActiveTab(newValue);
-  };
+    // Update with small delay to prevent UI freezing
+    setTimeout(() => {
+      setActiveTab(newValue);
+    }, 0);
+  }, [onTabChange]);
+  
+  // Create a memoized tab click handler 
+  const handleTabClick = useCallback(() => {
+    if (onTabChange) {
+      onTabChange();
+    }
+  }, [onTabChange]);
   
   // On component mount/unmount, force a save
   useEffect(() => {
@@ -76,16 +85,16 @@ const ChecklistContent: React.FC<ChecklistContentProps> = ({
       onValueChange={handleTabValueChange}
     >
       <TabsList className="grid grid-cols-5 lg:grid-cols-10 h-auto bg-[#151A22] mb-6 border-b border-gray-700 rounded-none">
-        <ChecklistTabTrigger value="rv-info" icon="Info" label="RV Info" onTabClick={onTabChange} />
-        <ChecklistTabTrigger value="exterior" icon="ExternalLink" label="Exterior" onTabClick={onTabChange} />
-        <ChecklistTabTrigger value="interior" icon="Home" label="Interior" onTabClick={onTabChange} />
-        <ChecklistTabTrigger value="plumbing" icon="Droplets" label="Plumbing" onTabClick={onTabChange} />
-        <ChecklistTabTrigger value="electrical" icon="Zap" label="Electrical" onTabClick={onTabChange} />
-        <ChecklistTabTrigger value="mechanical" icon="Settings" label="Mechanical" onTabClick={onTabChange} />
-        <ChecklistTabTrigger value="tires" icon="CircleDashed" label="Tires" onTabClick={onTabChange} />
-        <ChecklistTabTrigger value="pest-control" icon="Bug" label="Pest Control" onTabClick={onTabChange} />
-        <ChecklistTabTrigger value="security" icon="Lock" label="Security" onTabClick={onTabChange} />
-        <ChecklistTabTrigger value="notes" icon="FileText" label="Notes" onTabClick={onTabChange} />
+        <ChecklistTabTrigger value="rv-info" icon="Info" label="RV Info" onTabClick={handleTabClick} />
+        <ChecklistTabTrigger value="exterior" icon="ExternalLink" label="Exterior" onTabClick={handleTabClick} />
+        <ChecklistTabTrigger value="interior" icon="Home" label="Interior" onTabClick={handleTabClick} />
+        <ChecklistTabTrigger value="plumbing" icon="Droplets" label="Plumbing" onTabClick={handleTabClick} />
+        <ChecklistTabTrigger value="electrical" icon="Zap" label="Electrical" onTabClick={handleTabClick} />
+        <ChecklistTabTrigger value="mechanical" icon="Settings" label="Mechanical" onTabClick={handleTabClick} />
+        <ChecklistTabTrigger value="tires" icon="CircleDashed" label="Tires" onTabClick={handleTabClick} />
+        <ChecklistTabTrigger value="pest-control" icon="Bug" label="Pest Control" onTabClick={handleTabClick} />
+        <ChecklistTabTrigger value="security" icon="Lock" label="Security" onTabClick={handleTabClick} />
+        <ChecklistTabTrigger value="notes" icon="FileText" label="Notes" onTabClick={handleTabClick} />
       </TabsList>
       
       <div className="tab-content-wrapper">
@@ -167,4 +176,4 @@ const ChecklistContent: React.FC<ChecklistContentProps> = ({
   );
 };
 
-export default ChecklistContent;
+export default React.memo(ChecklistContent);
