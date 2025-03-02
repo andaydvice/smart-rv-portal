@@ -1,29 +1,24 @@
 
 import React from 'react';
-import { Tabs, TabsContent, TabsList } from "@/components/ui/tabs";
-import { ChecklistTabTrigger } from './ChecklistTabTrigger';
+import { Tabs, TabsContent } from "@/components/ui/tabs";
 import RVInfoTab from './RVInfoTab';
+import ElectricalTab from './ElectricalTab';
+import PlumbingTab from './PlumbingTab';
 import ExteriorTab from './ExteriorTab';
 import InteriorTab from './InteriorTab';
-import PlumbingTab from './PlumbingTab';
-import ElectricalTab from './ElectricalTab';
 import MechanicalTab from './MechanicalTab';
 import TiresTab from './TiresTab';
-import PestControlTab from './PestControlTab';
 import SecurityTab from './SecurityTab';
+import PestControlTab from './PestControlTab';
 import NotesTab from './NotesTab';
-import { ChecklistNotes } from './useChecklistStorage';
+import ChecklistSection from './ChecklistSection';
+import ChecklistTabTrigger from './ChecklistTabTrigger';
+import { ChecklistData } from './useChecklistStorage';
 
-interface ChecklistContentProps {
-  progress: {[key: string]: boolean};
-  startDate: Date | undefined;
-  endDate: Date | undefined;
-  setStartDate: (date: Date | undefined) => void;
-  setEndDate: (date: Date | undefined) => void;
-  notes: ChecklistNotes;
+type ChecklistContentProps = Omit<ChecklistData, 'savedAt'> & {
   handleCheckboxChange: (id: string, checked: boolean) => void;
   handleNotesChange: (field: string, value: string) => void;
-}
+};
 
 const ChecklistContent: React.FC<ChecklistContentProps> = ({
   progress,
@@ -36,65 +31,147 @@ const ChecklistContent: React.FC<ChecklistContentProps> = ({
   handleNotesChange
 }) => {
   return (
-    <Tabs defaultValue="rv-info" className="space-y-8">
-      <TabsList className="bg-[#151A22] mb-8 flex justify-between py-8 px-4 w-full">
-        <ChecklistTabTrigger value="rv-info" icon="FileText" iconColor="#60A5FA" label="RV Info" />
-        <ChecklistTabTrigger value="exterior" icon="ExternalLink" iconColor="#10B981" label="Exterior" />
-        <ChecklistTabTrigger value="interior" icon="Home" iconColor="#F59E0B" label="Interior" />
-        <ChecklistTabTrigger value="plumbing" icon="Droplet" iconColor="#3B82F6" label="Plumbing" />
-        <ChecklistTabTrigger value="electrical" icon="Zap" iconColor="#EF4444" label="Electrical" />
-        <ChecklistTabTrigger value="mechanical" icon="Settings" iconColor="#8B5CF6" label="Mechanical" />
-        <ChecklistTabTrigger value="tires" icon="Truck" iconColor="#EC4899" label="Tires" />
-        <ChecklistTabTrigger value="pest" icon="Bug" iconColor="#14B8A6" label="Pest Control" />
-        <ChecklistTabTrigger value="security" icon="ShieldCheck" iconColor="#F97316" label="Security" />
-        <ChecklistTabTrigger value="notes" icon="FileText" iconColor="#6366F1" label="Notes" />
-      </TabsList>
-
-      <div className="bg-[#0c1219] rounded-xl p-6 shadow-inner border border-gray-800">
-        <TabsContent value="rv-info">
-          <RVInfoTab startDate={startDate} endDate={endDate} setStartDate={setStartDate} setEndDate={setEndDate} />
-        </TabsContent>
-
-        <TabsContent value="exterior">
-          <ExteriorTab handleCheckboxChange={handleCheckboxChange} progress={progress} />
-        </TabsContent>
-
-        <TabsContent value="interior">
-          <InteriorTab handleCheckboxChange={handleCheckboxChange} progress={progress} />
-        </TabsContent>
-
-        <TabsContent value="plumbing">
-          <PlumbingTab handleCheckboxChange={handleCheckboxChange} progress={progress} />
-        </TabsContent>
-
-        <TabsContent value="electrical">
-          <ElectricalTab handleCheckboxChange={handleCheckboxChange} progress={progress} />
-        </TabsContent>
-
-        <TabsContent value="mechanical">
-          <MechanicalTab handleCheckboxChange={handleCheckboxChange} progress={progress} />
-        </TabsContent>
-
-        <TabsContent value="tires">
-          <TiresTab handleCheckboxChange={handleCheckboxChange} progress={progress} />
-        </TabsContent>
-
-        <TabsContent value="pest">
-          <PestControlTab handleCheckboxChange={handleCheckboxChange} progress={progress} />
-        </TabsContent>
-
-        <TabsContent value="security">
-          <SecurityTab handleCheckboxChange={handleCheckboxChange} progress={progress} />
-        </TabsContent>
-
-        <TabsContent value="notes">
-          <NotesTab 
-            notes={notes} 
-            onNotesChange={handleNotesChange} 
-          />
-        </TabsContent>
+    <div className="space-y-6">
+      <h1 className="text-3xl font-bold text-[#60A5FA]">
+        RV STORAGE PREPARATION CHECKLIST
+      </h1>
+      
+      <p className="text-gray-300">
+        Use this comprehensive checklist to properly prepare your RV for storage. 
+        Track your progress and ensure nothing is missed before putting your RV into storage.
+      </p>
+      
+      <div className="bg-[#131a2a] rounded-xl p-6 shadow-inner border border-gray-800">
+        <Tabs defaultValue="rv-info" className="space-y-6">
+          <div className="overflow-x-auto pb-2">
+            <div className="flex space-x-1 min-w-max">
+              <ChecklistTabTrigger value="rv-info" label="RV Info" progress={0} total={0} />
+              <ChecklistTabTrigger 
+                value="electrical" 
+                label="Electrical" 
+                progress={
+                  ['electrical1', 'electrical2', 'electrical3', 'electrical4', 'electrical5']
+                    .filter(id => progress[id])
+                    .length
+                } 
+                total={5} 
+              />
+              <ChecklistTabTrigger 
+                value="plumbing" 
+                label="Plumbing" 
+                progress={
+                  ['plumbing1', 'plumbing2', 'plumbing3', 'plumbing4', 'plumbing5', 'plumbing6']
+                    .filter(id => progress[id])
+                    .length
+                } 
+                total={6} 
+              />
+              <ChecklistTabTrigger 
+                value="exterior" 
+                label="Exterior" 
+                progress={
+                  ['exterior1', 'exterior2', 'exterior3', 'exterior4', 'exterior5', 'exterior6', 'exterior7']
+                    .filter(id => progress[id])
+                    .length
+                } 
+                total={7} 
+              />
+              <ChecklistTabTrigger 
+                value="interior" 
+                label="Interior" 
+                progress={
+                  ['interior1', 'interior2', 'interior3', 'interior4', 'interior5', 'interior6', 'interior7', 'interior8']
+                    .filter(id => progress[id])
+                    .length
+                } 
+                total={8} 
+              />
+              <ChecklistTabTrigger 
+                value="mechanical" 
+                label="Mechanical" 
+                progress={
+                  ['mechanical1', 'mechanical2', 'mechanical3', 'mechanical4', 'mechanical5', 'mechanical6']
+                    .filter(id => progress[id])
+                    .length
+                } 
+                total={6} 
+              />
+              <ChecklistTabTrigger 
+                value="tires" 
+                label="Tires & Suspension" 
+                progress={
+                  ['tires1', 'tires2', 'tires3', 'tires4', 'tires5']
+                    .filter(id => progress[id])
+                    .length
+                } 
+                total={5} 
+              />
+              <ChecklistTabTrigger 
+                value="security" 
+                label="Security" 
+                progress={
+                  ['security1', 'security2', 'security3', 'security4', 'security5', 'security6']
+                    .filter(id => progress[id])
+                    .length
+                } 
+                total={6} 
+              />
+              <ChecklistTabTrigger 
+                value="pest" 
+                label="Pest Control" 
+                progress={
+                  ['pest1', 'pest2', 'pest3', 'pest4', 'pest5', 'pest6', 'pest7']
+                    .filter(id => progress[id])
+                    .length
+                } 
+                total={7} 
+              />
+              <ChecklistTabTrigger value="notes" label="Notes" progress={0} total={0} />
+            </div>
+          </div>
+          
+          <TabsContent value="rv-info">
+            <RVInfoTab startDate={startDate} endDate={endDate} setStartDate={setStartDate} setEndDate={setEndDate} />
+          </TabsContent>
+          
+          <TabsContent value="electrical">
+            <ElectricalTab progress={progress} onCheckboxChange={handleCheckboxChange} />
+          </TabsContent>
+          
+          <TabsContent value="plumbing">
+            <PlumbingTab progress={progress} onCheckboxChange={handleCheckboxChange} />
+          </TabsContent>
+          
+          <TabsContent value="exterior">
+            <ExteriorTab progress={progress} onCheckboxChange={handleCheckboxChange} />
+          </TabsContent>
+          
+          <TabsContent value="interior">
+            <InteriorTab progress={progress} onCheckboxChange={handleCheckboxChange} />
+          </TabsContent>
+          
+          <TabsContent value="mechanical">
+            <MechanicalTab progress={progress} onCheckboxChange={handleCheckboxChange} />
+          </TabsContent>
+          
+          <TabsContent value="tires">
+            <TiresTab progress={progress} onCheckboxChange={handleCheckboxChange} />
+          </TabsContent>
+          
+          <TabsContent value="security">
+            <SecurityTab progress={progress} onCheckboxChange={handleCheckboxChange} />
+          </TabsContent>
+          
+          <TabsContent value="pest">
+            <PestControlTab progress={progress} onCheckboxChange={handleCheckboxChange} />
+          </TabsContent>
+          
+          <TabsContent value="notes">
+            <NotesTab notes={notes} onNotesChange={handleNotesChange} />
+          </TabsContent>
+        </Tabs>
       </div>
-    </Tabs>
+    </div>
   );
 };
 

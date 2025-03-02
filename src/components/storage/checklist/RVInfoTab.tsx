@@ -23,29 +23,49 @@ const RVInfoTab: React.FC<RVInfoTabProps> = ({
         <div className="space-y-4">
           <div className="space-y-2">
             <Label htmlFor="owner" className="text-gray-200">RV Owner</Label>
-            <Input id="owner" className="bg-[#131a2a] border-gray-700" placeholder="Enter owner name" />
+            <Input 
+              id="owner" 
+              className="bg-[#131a2a] border-gray-700 text-white placeholder:text-gray-500" 
+              placeholder="Enter owner name" 
+            />
           </div>
           
           <div className="space-y-2">
             <Label htmlFor="model" className="text-gray-200">RV Make/Model</Label>
-            <Input id="model" className="bg-[#131a2a] border-gray-700" placeholder="Enter make and model" />
+            <Input 
+              id="model" 
+              className="bg-[#131a2a] border-gray-700 text-white placeholder:text-gray-500" 
+              placeholder="Enter make and model" 
+            />
           </div>
           
           <div className="space-y-2">
             <Label htmlFor="year" className="text-gray-200">Year</Label>
-            <Input id="year" className="bg-[#131a2a] border-gray-700" placeholder="Enter year" />
+            <Input 
+              id="year" 
+              className="bg-[#131a2a] border-gray-700 text-white placeholder:text-gray-500" 
+              placeholder="Enter year" 
+            />
           </div>
         </div>
         
         <div className="space-y-4">
           <div className="space-y-2">
             <Label htmlFor="vin" className="text-gray-200">VIN/Serial Number</Label>
-            <Input id="vin" className="bg-[#131a2a] border-gray-700" placeholder="Enter VIN or serial number" />
+            <Input 
+              id="vin" 
+              className="bg-[#131a2a] border-gray-700 text-white placeholder:text-gray-500" 
+              placeholder="Enter VIN or serial number" 
+            />
           </div>
           
           <div className="space-y-2">
             <Label htmlFor="length" className="text-gray-200">Length</Label>
-            <Input id="length" className="bg-[#131a2a] border-gray-700" placeholder="Enter length" />
+            <Input 
+              id="length" 
+              className="bg-[#131a2a] border-gray-700 text-white placeholder:text-gray-500" 
+              placeholder="Enter length" 
+            />
           </div>
           
           <div className="grid grid-cols-2 gap-4">
@@ -55,7 +75,7 @@ const RVInfoTab: React.FC<RVInfoTabProps> = ({
                 <PopoverTrigger asChild>
                   <Button
                     variant="outline"
-                    className="w-full justify-start text-left font-normal bg-[#131a2a] border-gray-700"
+                    className="w-full justify-start text-left font-normal bg-[#131a2a] border-gray-700 text-white"
                   >
                     <CalendarIcon className="mr-2 h-4 w-4" />
                     {startDate ? format(startDate, "PPP") : <span>Pick a date</span>}
@@ -78,7 +98,7 @@ const RVInfoTab: React.FC<RVInfoTabProps> = ({
                 <PopoverTrigger asChild>
                   <Button
                     variant="outline"
-                    className="w-full justify-start text-left font-normal bg-[#131a2a] border-gray-700"
+                    className="w-full justify-start text-left font-normal bg-[#131a2a] border-gray-700 text-white"
                   >
                     <CalendarIcon className="mr-2 h-4 w-4" />
                     {endDate ? format(endDate, "PPP") : <span>Pick a date</span>}
