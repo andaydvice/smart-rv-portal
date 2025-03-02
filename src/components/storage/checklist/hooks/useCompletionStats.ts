@@ -16,15 +16,24 @@ export const useCompletionStats = (progress: {[key: string]: boolean | string}) 
     ).length;
     
     // Handle edge case where no items exist yet
-    const completionPercentage = totalItems > 0 
+    let completionPercentage = totalItems > 0 
       ? Math.round((completedItems / totalItems) * 100) 
       : 0;
       
     // Ensure we don't return NaN values and always return a valid number
+    if (isNaN(completionPercentage) || !isFinite(completionPercentage)) {
+      completionPercentage = 0;
+    }
+    
+    // Ensure we don't exceed 100%
+    completionPercentage = Math.min(completionPercentage, 100);
+    
+    console.log(`Progress calculation: ${completedItems}/${totalItems} = ${completionPercentage}%`);
+    
     return { 
       totalItems, 
       completedItems, 
-      completionPercentage: isNaN(completionPercentage) ? 0 : completionPercentage 
+      completionPercentage 
     };
   }, [progress]);
 };
