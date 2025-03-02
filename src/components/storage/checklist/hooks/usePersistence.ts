@@ -42,11 +42,17 @@ export const usePersistence = () => {
   ) => {
     const currentTime = new Date().toISOString();
     
+    // Important: Ensure we're saving primitives and not complex objects
     const dataToSave = {
       progress,
       startDate: startDate ? startDate.toISOString() : undefined,
       endDate: endDate ? endDate.toISOString() : undefined,
-      notes,
+      notes: {
+        general: notes.general || '',
+        storageContact: notes.storageContact || '',
+        emergencyContact: notes.emergencyContact || '',
+        returnPreparation: notes.returnPreparation || ''
+      },
       savedAt: currentTime
     };
     
@@ -56,7 +62,14 @@ export const usePersistence = () => {
       console.log("Auto-saving data:", dataToSave);
     }
     
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(dataToSave));
+    // Force synchronous storage operation
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(dataToSave));
+      console.log("Storage operation completed successfully");
+    } catch (err) {
+      console.error("Error saving to localStorage:", err);
+    }
+    
     return currentTime;
   }, []);
 

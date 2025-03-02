@@ -17,6 +17,7 @@ const StoragePreparationChecklist: React.FC = () => {
     lastSavedAt,
     handleCheckboxChange,
     handleNotesChange,
+    handleTabChange,
     saveData,
     resetData,
     getLastSavedMessage
@@ -92,6 +93,13 @@ const StoragePreparationChecklist: React.FC = () => {
     });
   };
 
+  // Force a save before every render by doing an automatic save in the background
+  useEffect(() => {
+    console.log("StoragePreparationChecklist rendered - auto-saving");
+    const timeoutId = setTimeout(() => saveData(false), 500);
+    return () => clearTimeout(timeoutId);
+  });
+
   const totalItems = 50;
   const completedItems = Object.values(progress).filter(val => val).length;
   const completionPercentage = Math.round((completedItems / totalItems) * 100);
@@ -119,6 +127,7 @@ const StoragePreparationChecklist: React.FC = () => {
               notes={notes}
               handleCheckboxChange={handleCheckboxChange}
               handleNotesChange={handleNotesChange}
+              onTabChange={handleTabChange}
             />
           </CardContent>
         </Card>

@@ -50,6 +50,8 @@ export const useChecklistStorage = () => {
 
   // Core save function - uses refs for latest values
   const saveDataWrapper = useCallback((manualSave: boolean = false) => {
+    console.log("Saving data with refs, notes state:", notesRef.current);
+    
     const currentTime = saveData(
       progressRef.current,
       startDateRef.current,
@@ -137,9 +139,9 @@ export const useChecklistStorage = () => {
 
   // Add a tab change handler that forces a save
   const handleTabChange = useCallback(() => {
-    console.log("Tab changed - forcing save");
+    console.log("Tab changed - forcing save with current notesRef state:", notesRef.current);
     saveDataWrapper(true);
-  }, [saveDataWrapper]);
+  }, [saveDataWrapper, notesRef]);
 
   // Reset all data
   const resetData = useCallback(() => {

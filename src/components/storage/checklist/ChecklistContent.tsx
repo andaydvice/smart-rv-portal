@@ -1,33 +1,30 @@
+
 import React, { useEffect } from 'react';
 import { Tabs, TabsContent, TabsList } from "@/components/ui/tabs";
 import RVInfoTab from './RVInfoTab';
-import ElectricalTab from './ElectricalTab';
-import PlumbingTab from './PlumbingTab';
 import ExteriorTab from './ExteriorTab';
 import InteriorTab from './InteriorTab';
+import PlumbingTab from './PlumbingTab';
+import ElectricalTab from './ElectricalTab';
 import MechanicalTab from './MechanicalTab';
 import TiresTab from './TiresTab';
-import SecurityTab from './SecurityTab';
 import PestControlTab from './PestControlTab';
+import SecurityTab from './SecurityTab';
 import NotesTab from './NotesTab';
-import ChecklistTabTrigger from './ChecklistTabTrigger';
-import { ChecklistNotes } from './hooks/useChecklistStorage';
+import ChecklistTabTrigger from "./ChecklistTabTrigger";
+import { ChecklistNotes } from './hooks/types';
 
-type ChecklistContentProps = {
+interface ChecklistContentProps {
   progress: {[key: string]: boolean};
   startDate: Date | undefined;
   endDate: Date | undefined;
-  notes: {
-    general: string;
-    storageContact: string;
-    emergencyContact: string;
-    returnPreparation: string;
-  };
-  setStartDate: React.Dispatch<React.SetStateAction<Date | undefined>>;
-  setEndDate: React.Dispatch<React.SetStateAction<Date | undefined>>;
+  setStartDate: (date: Date | undefined) => void;
+  setEndDate: (date: Date | undefined) => void;
+  notes: ChecklistNotes;
   handleCheckboxChange: (id: string, checked: boolean) => void;
-  handleNotesChange: (field: string, value: string) => void;
-};
+  handleNotesChange: (field: keyof ChecklistNotes, value: string) => void;
+  onTabChange?: () => void; // New prop for tab change handling
+}
 
 const ChecklistContent: React.FC<ChecklistContentProps> = ({
   progress,
@@ -37,84 +34,136 @@ const ChecklistContent: React.FC<ChecklistContentProps> = ({
   setEndDate,
   notes,
   handleCheckboxChange,
-  handleNotesChange
+  handleNotesChange,
+  onTabChange
 }) => {
-  const handleTabChange = (value: string) => {
-    console.log("Tab changed to:", value);
-    // This is a noop function as the actual save happens in the NotesTab component
-    // We're just making sure React registers the tab change event
+  // Track active tab for explicit saving
+  const [activeTab, setActiveTab] = React.useState("rv-info");
+  
+  // Force save whenever tab changes
+  const handleTabValueChange = (newValue: string) => {
+    console.log(`Tab changed to ${newValue} - triggering save`);
+    
+    // First save the current tab's data
+    if (onTabChange) {
+      onTabChange();
+    }
+    
+    // Then update the active tab
+    setActiveTab(newValue);
   };
+  
+  // On component mount/unmount, force a save
+  useEffect(() => {
+    if (onTabChange) {
+      console.log("ChecklistContent mounted - initial save");
+      onTabChange();
+    }
+    
+    return () => {
+      if (onTabChange) {
+        console.log("ChecklistContent unmounting - final save");
+        onTabChange();
+      }
+    };
+  }, [onTabChange]);
 
   return (
-    <div className="space-y-6">
-      <h1 className="text-3xl font-bold text-[#60A5FA]">
-        RV STORAGE PREPARATION CHECKLIST
-      </h1>
+    <Tabs 
+      defaultValue="rv-info" 
+      className="w-full"
+      value={activeTab}
+      onValueChange={handleTabValueChange}
+    >
+      <TabsList className="grid grid-cols-5 lg:grid-cols-10 h-auto bg-[#151A22] mb-6 border-b border-gray-700 rounded-none">
+        <ChecklistTabTrigger value="rv-info" icon="Info" label="RV Info" onTabClick={onTabChange} />
+        <ChecklistTabTrigger value="exterior" icon="ExternalLink" label="Exterior" onTabClick={onTabChange} />
+        <ChecklistTabTrigger value="interior" icon="Home" label="Interior" onTabClick={onTabChange} />
+        <ChecklistTabTrigger value="plumbing" icon="Droplets" label="Plumbing" onTabClick={onTabChange} />
+        <ChecklistTabTrigger value="electrical" icon="Zap" label="Electrical" onTabClick={onTabChange} />
+        <ChecklistTabTrigger value="mechanical" icon="Settings" label="Mechanical" onTabClick={onTabChange} />
+        <ChecklistTabTrigger value="tires" icon="CircleDashed" label="Tires" onTabClick={onTabChange} />
+        <ChecklistTabTrigger value="pest-control" icon="Bug" label="Pest Control" onTabClick={onTabChange} />
+        <ChecklistTabTrigger value="security" icon="Lock" label="Security" onTabClick={onTabChange} />
+        <ChecklistTabTrigger value="notes" icon="FileText" label="Notes" onTabClick={onTabChange} />
+      </TabsList>
       
-      <p className="text-gray-300">
-        Use this comprehensive checklist to properly prepare your RV for storage. 
-        Track your progress and ensure nothing is missed before putting your RV into storage.
-      </p>
-      
-      <div className="bg-[#131a2a] rounded-xl p-6 shadow-inner border border-gray-800">
-        <Tabs defaultValue="rv-info" className="space-y-6" onValueChange={handleTabChange}>
-          <div className="overflow-x-auto pb-2 no-scrollbar">
-            <TabsList className="bg-[#0a101e] min-w-full grid grid-cols-10 rounded-none p-0 h-auto">
-              <ChecklistTabTrigger value="rv-info" label="RV Info" icon="File" />
-              <ChecklistTabTrigger value="exterior" label="Exterior" icon="ExternalLink" />
-              <ChecklistTabTrigger value="interior" label="Interior" icon="Home" />
-              <ChecklistTabTrigger value="plumbing" label="Plumbing" icon="Droplet" />
-              <ChecklistTabTrigger value="electrical" label="Electrical" icon="Zap" />
-              <ChecklistTabTrigger value="mechanical" label="Mechanical" icon="Settings" />
-              <ChecklistTabTrigger value="tires" label="Tires" icon="Truck" />
-              <ChecklistTabTrigger value="pest" label="Pest Control" icon="Bug" />
-              <ChecklistTabTrigger value="security" label="Security" icon="ShieldCheck" />
-              <ChecklistTabTrigger value="notes" label="Notes" icon="File" />
-            </TabsList>
-          </div>
-          
-          <TabsContent value="rv-info">
-            <RVInfoTab startDate={startDate} endDate={endDate} setStartDate={setStartDate} setEndDate={setEndDate} />
-          </TabsContent>
-          
-          <TabsContent value="electrical">
-            <ElectricalTab progress={progress} handleCheckboxChange={handleCheckboxChange} />
-          </TabsContent>
-          
-          <TabsContent value="plumbing">
-            <PlumbingTab progress={progress} handleCheckboxChange={handleCheckboxChange} />
-          </TabsContent>
-          
-          <TabsContent value="exterior">
-            <ExteriorTab progress={progress} handleCheckboxChange={handleCheckboxChange} />
-          </TabsContent>
-          
-          <TabsContent value="interior">
-            <InteriorTab progress={progress} handleCheckboxChange={handleCheckboxChange} />
-          </TabsContent>
-          
-          <TabsContent value="mechanical">
-            <MechanicalTab progress={progress} handleCheckboxChange={handleCheckboxChange} />
-          </TabsContent>
-          
-          <TabsContent value="tires">
-            <TiresTab progress={progress} handleCheckboxChange={handleCheckboxChange} />
-          </TabsContent>
-          
-          <TabsContent value="security">
-            <SecurityTab progress={progress} handleCheckboxChange={handleCheckboxChange} />
-          </TabsContent>
-          
-          <TabsContent value="pest">
-            <PestControlTab progress={progress} handleCheckboxChange={handleCheckboxChange} />
-          </TabsContent>
-          
-          <TabsContent value="notes">
-            <NotesTab notes={notes} onNotesChange={handleNotesChange} />
-          </TabsContent>
-        </Tabs>
+      <div className="tab-content-wrapper">
+        <TabsContent value="rv-info" className="mt-0">
+          <RVInfoTab
+            progress={progress}
+            startDate={startDate}
+            endDate={endDate}
+            setStartDate={setStartDate}
+            setEndDate={setEndDate}
+            handleCheckboxChange={handleCheckboxChange}
+          />
+        </TabsContent>
+        
+        <TabsContent value="exterior" className="mt-0">
+          <ExteriorTab 
+            progress={progress}
+            handleCheckboxChange={handleCheckboxChange}
+          />
+        </TabsContent>
+        
+        <TabsContent value="interior" className="mt-0">
+          <InteriorTab 
+            progress={progress}
+            handleCheckboxChange={handleCheckboxChange}
+          />
+        </TabsContent>
+        
+        <TabsContent value="plumbing" className="mt-0">
+          <PlumbingTab 
+            progress={progress}
+            handleCheckboxChange={handleCheckboxChange}
+          />
+        </TabsContent>
+        
+        <TabsContent value="electrical" className="mt-0">
+          <ElectricalTab 
+            progress={progress}
+            handleCheckboxChange={handleCheckboxChange}
+          />
+        </TabsContent>
+        
+        <TabsContent value="mechanical" className="mt-0">
+          <MechanicalTab 
+            progress={progress}
+            handleCheckboxChange={handleCheckboxChange}
+          />
+        </TabsContent>
+        
+        <TabsContent value="tires" className="mt-0">
+          <TiresTab 
+            progress={progress}
+            handleCheckboxChange={handleCheckboxChange}
+          />
+        </TabsContent>
+        
+        <TabsContent value="pest-control" className="mt-0">
+          <PestControlTab 
+            progress={progress}
+            handleCheckboxChange={handleCheckboxChange}
+          />
+        </TabsContent>
+        
+        <TabsContent value="security" className="mt-0">
+          <SecurityTab 
+            progress={progress}
+            handleCheckboxChange={handleCheckboxChange}
+          />
+        </TabsContent>
+        
+        <TabsContent value="notes" className="mt-0">
+          <NotesTab 
+            notes={notes}
+            onNotesChange={handleNotesChange}
+          />
+        </TabsContent>
       </div>
-    </div>
+    </Tabs>
   );
 };
 

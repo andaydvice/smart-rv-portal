@@ -1,7 +1,6 @@
-
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Textarea } from "@/components/ui/textarea";
-import { ChecklistNotes } from './useChecklistStorage';
+import { ChecklistNotes } from './hooks/types';
 
 interface NotesTabProps {
   notes: ChecklistNotes;
@@ -9,6 +8,37 @@ interface NotesTabProps {
 }
 
 const NotesTab: React.FC<NotesTabProps> = ({ notes, onNotesChange }) => {
+  // Keep track of previous notes to detect changes
+  const prevNotesRef = useRef<ChecklistNotes>(notes);
+  
+  // Force save on unmount
+  useEffect(() => {
+    return () => {
+      console.log("NotesTab unmounting - ensuring notes are saved");
+      
+      // Compare current notes with previous to see if we need to force save
+      const hasChanges = Object.keys(notes).some(
+        key => notes[key as keyof ChecklistNotes] !== prevNotesRef.current[key as keyof ChecklistNotes]
+      );
+      
+      if (hasChanges) {
+        console.log("Detected unsaved changes in notes - forcing save");
+        // Force saving each field that changed
+        Object.keys(notes).forEach(key => {
+          const typedKey = key as keyof ChecklistNotes;
+          if (notes[typedKey] !== prevNotesRef.current[typedKey]) {
+            onNotesChange(typedKey, notes[typedKey]);
+          }
+        });
+      }
+    };
+  }, [notes, onNotesChange]);
+  
+  // Update previous notes ref whenever notes change
+  useEffect(() => {
+    prevNotesRef.current = notes;
+  }, [notes]);
+
   // Ensure changes to any textarea trigger the onNotesChange callback immediately
   const handleNotesChange = (field: keyof ChecklistNotes, value: string) => {
     console.log(`NotesTab: Notes changed for field: ${field}`, value);

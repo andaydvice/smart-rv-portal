@@ -14,13 +14,15 @@ interface ChecklistTabTriggerProps {
   iconColor?: string;
   progress?: number;
   total?: number;
+  onTabClick?: () => void; // New prop for tab click handler
 }
 
 const ChecklistTabTrigger: React.FC<ChecklistTabTriggerProps> = ({ 
   value, 
   icon, 
   label,
-  iconColor
+  iconColor,
+  onTabClick
 }) => {
   // Use dynamic import to handle the icon properly if it exists
   const Icon = icon ? (LucideIcons[icon] as LucideIcon) : null;
@@ -65,8 +67,11 @@ const ChecklistTabTrigger: React.FC<ChecklistTabTriggerProps> = ({
 
   // Add a click handler to ensure focus is properly managed
   const handleTabClick = () => {
-    // Force a save when changing tabs (this is a no-op but signals to React)
-    console.log(`Tab ${label} clicked`);
+    // Force a save when changing tabs
+    console.log(`Tab ${label} clicked - triggering save`);
+    if (onTabClick) {
+      onTabClick(); // Call the parent's onTabClick handler to trigger saves
+    }
   };
   
   return (
