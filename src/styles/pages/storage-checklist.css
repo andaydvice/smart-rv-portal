@@ -140,3 +140,21 @@
   min-height: 500px;
 }
 
+/* Fix for header image in new tab */
+.storage-preparation-checklist img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Fix for progress bar visibility */
+.storage-preparation-checklist [role="progressbar"] {
+  overflow: visible !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Ensure header displays properly */
+.storage-preparation-checklist .pt-20 {
+  padding-top: 5rem !important;
+}

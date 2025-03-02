@@ -3,7 +3,7 @@ import { useMemo } from 'react';
 
 export const useCompletionStats = (progress: {[key: string]: boolean | string}) => {
   return useMemo(() => {
-    // Count total boolean fields (items that can be checked)
+    // Only count fields that are booleans or string representations of booleans
     const booleanKeys = Object.keys(progress).filter(key => 
       typeof progress[key] === 'boolean' || progress[key] === 'true' || progress[key] === 'false'
     );
@@ -15,11 +15,16 @@ export const useCompletionStats = (progress: {[key: string]: boolean | string}) 
       val === true || val === 'true'
     ).length;
     
+    // Handle edge case where no items exist yet
     const completionPercentage = totalItems > 0 
       ? Math.round((completedItems / totalItems) * 100) 
       : 0;
       
-    return { totalItems, completedItems, completionPercentage };
+    return { 
+      totalItems, 
+      completedItems, 
+      completionPercentage: isNaN(completionPercentage) ? 0 : completionPercentage 
+    };
   }, [progress]);
 };
 
