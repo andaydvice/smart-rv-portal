@@ -9,9 +9,10 @@ const ChecklistHeroImage: React.FC = () => {
     // Force immediate image preload with highest priority
     const img = new Image();
     img.src = imagePath;
-    
-    // Set fetchPriority to high to ensure browser prioritizes this image
     img.fetchPriority = 'high';
+    
+    // Enable immediate visibility regardless of load state
+    setImageLoaded(true);
     
     // If image is already in cache, this will fire immediately
     img.onload = () => {
@@ -19,32 +20,37 @@ const ChecklistHeroImage: React.FC = () => {
       setImageLoaded(true);
     };
 
-    // Set a fallback in case the image doesn't load within 1 second
-    const timer = setTimeout(() => {
-      if (!imageLoaded) {
-        console.log("Using fallback for hero image load");
-        setImageLoaded(true);
-      }
-    }, 1000);
+    // No timeout needed - we're showing immediately
+  }, []);
 
-    return () => clearTimeout(timer);
-  }, [imageLoaded]);
-
-  // Force the image to be visible regardless of loading state
+  // Always render the image, regardless of load state
   return (
     <div className="w-full relative mb-8">
+      {/* Primary image - always visible */}
       <img 
         src={imagePath} 
         alt="Complete Guide to Indoor RV Vehicle Storage Preparation" 
-        className={`w-full h-auto object-cover ${!imageLoaded ? 'hidden' : 'block'}`}
+        className="w-full h-auto object-cover"
         loading="eager"
         fetchPriority="high"
-        onLoad={() => setImageLoaded(true)}
-        style={{visibility: 'visible', opacity: 1}}
+        style={{
+          visibility: 'visible', 
+          opacity: 1,
+          display: 'block',
+          width: '100%',
+          maxWidth: '100%'
+        }}
       />
       
+      {/* Fallback in case the image doesn't load */}
       {!imageLoaded && (
-        <div className="w-full h-64 bg-[#151A22] animate-pulse rounded"></div>
+        <div 
+          className="w-full h-64 bg-[#151A22] rounded absolute top-0 left-0 z-0"
+          style={{
+            visibility: imageLoaded ? 'hidden' : 'visible',
+            opacity: imageLoaded ? 0 : 1
+          }}
+        ></div>
       )}
     </div>
   );
