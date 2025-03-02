@@ -30,13 +30,52 @@ const ChecklistTabTrigger: React.FC<ChecklistTabTriggerProps> = ({
   // Calculate progress percentage if progress tracking is provided
   const progressPercentage = total && progress !== undefined ? Math.round((progress / total) * 100) : null;
   
+  // Set specific colors for different tabs based on the label
+  let specificIconColor = iconColor;
+  
+  // Map labels to specific colors from the screenshot
+  switch(label) {
+    case "RV Info":
+      specificIconColor = "#5B9BD5"; // Ocean blue
+      break;
+    case "Exterior":
+      specificIconColor = "#10B981"; // Green
+      break;
+    case "Interior":
+      specificIconColor = "#F59E0B"; // Orange/amber
+      break;
+    case "Plumbing":
+      specificIconColor = "#3B82F6"; // Blue
+      break;
+    case "Electrical":
+      specificIconColor = "#EF4444"; // Red
+      break;
+    case "Mechanical":
+      specificIconColor = "#8B5CF6"; // Purple
+      break;
+    case "Tires":
+      specificIconColor = "#EC4899"; // Pink
+      break;
+    case "Pest Control":
+      specificIconColor = "#06B6D4"; // Cyan
+      break;
+    case "Security":
+      specificIconColor = "#F97316"; // Orange
+      break;
+    case "Notes":
+      specificIconColor = "#818CF8"; // Indigo
+      break;
+    default:
+      specificIconColor = iconColor;
+  }
+  
   return (
     <TabsTrigger 
       value={value}
       className="data-[state=active]:bg-[#131a2a] data-[state=active]:border-[#5B9BD5] data-[state=active]:border-b-2 data-[state=active]:text-white py-6 px-4 h-full flex flex-col items-center justify-center text-[#E2E8FF]"
     >
       <div className="flex flex-col items-center gap-3 min-h-[70px] justify-center">
-        {Icon && <Icon className="h-5 w-5" stroke={iconColor} strokeWidth={2} />}
+        {Icon && <Icon className="h-5 w-5" stroke={specificIconColor} strokeWidth={2} />}
         <span className="text-xs font-medium text-[#E2E8FF] data-[state=active]:text-white">{label}</span>
         
         {progressPercentage !== null && (
