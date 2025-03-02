@@ -2,8 +2,7 @@
 import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { format } from "date-fns";
+import { Tabs, TabsContent, TabsList } from "@/components/ui/tabs";
 import { Printer, Save, RotateCcw } from "lucide-react";
 import RVInfoTab from './checklist/RVInfoTab';
 import ExteriorTab from './checklist/ExteriorTab';
@@ -64,26 +63,16 @@ const StoragePreparationChecklist: React.FC = () => {
           <CardContent className="pt-6">
             <Tabs defaultValue="rv-info" className="space-y-8">
               <TabsList className="bg-[#151A22] p-1 mb-8 grid grid-cols-2 md:grid-cols-5 lg:flex">
-                <TabsTrigger value="rv-info" className="data-[state=active]:bg-[#60A5FA] data-[state=active]:text-white">
-                  RV Info
-                </TabsTrigger>
-                <TabsTrigger value="exterior" className="data-[state=active]:bg-[#60A5FA] data-[state=active]:text-white">
-                  Exterior
-                </TabsTrigger>
-                <TabsTrigger value="interior" className="data-[state=active]:bg-[#60A5FA] data-[state=active]:text-white">
-                  Interior
-                </TabsTrigger>
+                <ChecklistTabTrigger value="rv-info" icon="Info" label="RV Info" />
+                <ChecklistTabTrigger value="exterior" icon="ExternalLink" label="Exterior" />
+                <ChecklistTabTrigger value="interior" icon="Home" label="Interior" />
                 <ChecklistTabTrigger value="plumbing" icon="Droplet" label="Plumbing" />
                 <ChecklistTabTrigger value="electrical" icon="Zap" label="Electrical" />
-                <TabsTrigger value="mechanical" className="data-[state=active]:bg-[#60A5FA] data-[state=active]:text-white">
-                  Mechanical
-                </TabsTrigger>
+                <ChecklistTabTrigger value="mechanical" icon="Settings" label="Mechanical" />
                 <ChecklistTabTrigger value="tires" icon="Truck" label="Tires" />
                 <ChecklistTabTrigger value="pest" icon="Bug" label="Pest Control" />
                 <ChecklistTabTrigger value="security" icon="ShieldCheck" label="Security" />
-                <TabsTrigger value="notes" className="data-[state=active]:bg-[#60A5FA] data-[state=active]:text-white">
-                  Notes
-                </TabsTrigger>
+                <ChecklistTabTrigger value="notes" icon="FileText" label="Notes" />
               </TabsList>
 
               <TabsContent value="rv-info">

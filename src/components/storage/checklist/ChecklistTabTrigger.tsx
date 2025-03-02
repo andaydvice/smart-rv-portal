@@ -1,7 +1,6 @@
 
 import React from 'react';
 import { TabsTrigger } from "@/components/ui/tabs";
-import { LucideIcon } from "lucide-react";
 import * as LucideIcons from "lucide-react";
 
 interface ChecklistTabTriggerProps {
@@ -15,14 +14,15 @@ export const ChecklistTabTrigger: React.FC<ChecklistTabTriggerProps> = ({
   icon, 
   label 
 }) => {
-  const IconComponent = LucideIcons[icon];
+  // Use dynamic import to get the specific icon component
+  const IconComponent = LucideIcons[icon] as React.ElementType;
   
   return (
     <TabsTrigger 
       value={value} 
       className="data-[state=active]:bg-[#60A5FA] data-[state=active]:text-white flex items-center gap-1"
     >
-      <IconComponent className="h-3.5 w-3.5" />
+      {IconComponent && <IconComponent className="h-3.5 w-3.5" />}
       {label}
     </TabsTrigger>
   );
