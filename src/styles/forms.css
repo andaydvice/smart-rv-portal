@@ -6,10 +6,16 @@ textarea::placeholder {
   opacity: 1;
 }
 
-/* Ensure input text is white in dark themes - even more aggressive */
-input, 
-textarea, 
-select {
+/* Ensure input text is white in dark themes */
+.dark input, 
+.dark textarea, 
+.dark select,
+[data-theme="dark"] input, 
+[data-theme="dark"] textarea, 
+[data-theme="dark"] select,
+input.dark-input, 
+textarea.dark-input, 
+select.dark-input {
   color: white !important;
   caret-color: white !important;
 }

@@ -30,29 +30,56 @@ export const useChecklistEvents = (
   const checkboxDebounceTimer = useRef<NodeJS.Timeout | null>(null);
   // Track if we're in a batch update to prevent excessive saves
   const batchUpdateRef = useRef<boolean>(false);
+  // Track previous state for change detection
+  const prevStateRef = useRef<{
+    notes: ChecklistNotes;
+    progress: {[key: string]: boolean};
+  }>({
+    notes: notesRef.current,
+    progress: progressRef.current
+  });
 
   // Set start date with optimized save
   const setStartDateAndSave = useCallback((date: Date | undefined) => {
+    if (date?.getTime() === startDateRef.current?.getTime()) return;
+    
     setStartDate(date);
     // Delay save to avoid state update conflicts
     if (!batchUpdateRef.current) {
       // Use a smaller timeout to ensure it happens after state update but before UI response
-      setTimeout(() => saveDataWrapper(false), 50);
+      setTimeout(() => {
+        try {
+          saveDataWrapper(false);
+        } catch (error) {
+          console.error("Error saving after start date change:", error);
+        }
+      }, 100);
     }
-  }, [saveDataWrapper, setStartDate]);
+  }, [saveDataWrapper, setStartDate, startDateRef]);
 
   // Set end date with optimized save
   const setEndDateAndSave = useCallback((date: Date | undefined) => {
+    if (date?.getTime() === endDateRef.current?.getTime()) return;
+    
     setEndDate(date);
     // Delay save to avoid state update conflicts
     if (!batchUpdateRef.current) {
       // Use a smaller timeout to ensure it happens after state update but before UI response
-      setTimeout(() => saveDataWrapper(false), 50);
+      setTimeout(() => {
+        try {
+          saveDataWrapper(false);
+        } catch (error) {
+          console.error("Error saving after end date change:", error);
+        }
+      }, 100);
     }
-  }, [saveDataWrapper, setEndDate]);
+  }, [saveDataWrapper, setEndDate, endDateRef]);
 
   // Handle notes change with DEBOUNCED save for better performance
   const handleNotesChange = useCallback((field: keyof ChecklistNotes, value: string) => {
+    // Skip update if the value hasn't changed
+    if (notesRef.current[field] === value) return new Date().toISOString();
+    
     // Clear previous timer for this field if exists
     if (notesDebounceTimers.current[field]) {
       clearTimeout(notesDebounceTimers.current[field]);
@@ -66,22 +93,25 @@ export const useChecklistEvents = (
     
     // Debounce the save operation to reduce performance load
     notesDebounceTimers.current[field] = setTimeout(() => {
-      console.log(`Debounced save for field: ${field}`);
-      
-      if (!batchUpdateRef.current) {
-        const currentTime = saveData(
-          progressRef.current,
-          startDateRef.current,
-          endDateRef.current,
-          updatedNotes,
-          false
-        );
+      try {
+        console.log(`Debounced save for field: ${field}`);
+        
+        if (!batchUpdateRef.current) {
+          const currentTime = saveData(
+            progressRef.current,
+            startDateRef.current,
+            endDateRef.current,
+            updatedNotes,
+            false
+          );
+        }
+      } catch (error) {
+        console.error(`Error during debounced save for field ${field}:`, error);
+      } finally {
+        // Clear the timer reference
+        delete notesDebounceTimers.current[field];
       }
-      
-      // Clear the timer reference
-      delete notesDebounceTimers.current[field];
-      
-    }, 1000); // 1000ms debounce
+    }, 2000); // 2000ms debounce for better performance
     
     // Return a timestamp for immediate feedback
     return new Date().toISOString();
@@ -89,6 +119,9 @@ export const useChecklistEvents = (
 
   // Handle checkbox changes with optimized save strategy
   const handleCheckboxChange = useCallback((id: string, checked: boolean) => {
+    // Skip if the value hasn't changed
+    if (progressRef.current[id] === checked) return new Date().toISOString();
+    
     // Create updated progress object
     const updatedProgress = { ...progressRef.current, [id]: checked };
     
@@ -102,18 +135,23 @@ export const useChecklistEvents = (
     
     // Debounce checkbox saves to prevent rapid firing
     checkboxDebounceTimer.current = setTimeout(() => {
-      if (!batchUpdateRef.current) {
-        // Save to localStorage
-        const currentTime = saveData(
-          updatedProgress,
-          startDateRef.current,
-          endDateRef.current,
-          notesRef.current,
-          false
-        );
+      try {
+        if (!batchUpdateRef.current) {
+          // Save to localStorage
+          const currentTime = saveData(
+            updatedProgress,
+            startDateRef.current,
+            endDateRef.current,
+            notesRef.current,
+            false
+          );
+        }
+      } catch (error) {
+        console.error("Error during debounced checkbox save:", error);
+      } finally {
+        checkboxDebounceTimer.current = null;
       }
-      checkboxDebounceTimer.current = null;
-    }, 500);
+    }, 1000);
     
     // Return timestamp for immediate feedback
     return new Date().toISOString();
@@ -137,15 +175,21 @@ export const useChecklistEvents = (
       checkboxDebounceTimer.current = null;
     }
     
-    // Force a save
-    const result = saveDataWrapper(true);
+    let result;
     
-    // Reset batch update flag
-    setTimeout(() => {
-      batchUpdateRef.current = false;
-    }, 100);
+    try {
+      // Force a save
+      result = saveDataWrapper(true);
+    } catch (error) {
+      console.error("Error saving data on tab change:", error);
+    } finally {
+      // Reset batch update flag
+      setTimeout(() => {
+        batchUpdateRef.current = false;
+      }, 100);
+    }
     
-    return result;
+    return result || new Date().toISOString();
   }, [saveDataWrapper, notesRef]);
 
   return {

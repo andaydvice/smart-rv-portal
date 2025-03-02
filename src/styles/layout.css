@@ -14,7 +14,6 @@
 .column-layout {
   column-gap: 1rem;
   break-inside: avoid;
-  column-count: auto;
 }
 
 /* Navigation Menu Styles */
@@ -26,10 +25,10 @@
   z-index: 100 !important;
 }
 
-/* Tab list styling for RV Storage Checklist - exact match to the image */
+/* Tab list styling for RV Storage Checklist */
 .storage-preparation-checklist [role="tablist"] {
   display: grid;
-  grid-template-columns: repeat(10, 1fr); /* Exactly 10 tabs as in the image */
+  grid-template-columns: repeat(10, 1fr);
   width: 100%;
   overflow-x: auto;
   scrollbar-width: none;
@@ -58,7 +57,7 @@
 
 .storage-preparation-checklist [role="tab"][data-state="active"] {
   background-color: #131a2a !important;
-  border-bottom: 2px solid #5B9BD5 !important; /* Blue underline for active tab */
+  border-bottom: 2px solid #5B9BD5 !important;
 }
 
 .flex.outer1 {

@@ -26,13 +26,22 @@ const StoragePreparationChecklist: React.FC = memo(() => {
 
   // Create memoized handlers to prevent recreation on every render
   const handleSaveProgress = useCallback(() => {
-    saveData(true);
-    
-    toast({
-      title: "Progress Saved",
-      description: "Your checklist progress has been saved successfully.",
-      variant: "default",
-    });
+    try {
+      saveData(true);
+      
+      toast({
+        title: "Progress Saved",
+        description: "Your checklist progress has been saved successfully.",
+        variant: "default",
+      });
+    } catch (error) {
+      console.error("Error saving progress:", error);
+      toast({
+        title: "Save Failed",
+        description: "There was an error saving your progress. Please try again.",
+        variant: "destructive",
+      });
+    }
   }, [saveData]);
 
   const handleReset = useCallback(() => {
@@ -46,14 +55,22 @@ const StoragePreparationChecklist: React.FC = memo(() => {
 
   const handlePrint = useCallback(() => {
     // Force a save before printing
-    saveData(true);
-    
-    window.print();
-    
-    toast({
-      title: "Printing",
-      description: "Sending checklist to printer...",
-    });
+    try {
+      saveData(true);
+      window.print();
+      
+      toast({
+        title: "Printing",
+        description: "Sending checklist to printer...",
+      });
+    } catch (error) {
+      console.error("Error preparing for print:", error);
+      toast({
+        title: "Print Failed",
+        description: "There was an error preparing the document for printing.",
+        variant: "destructive",
+      });
+    }
   }, [saveData]);
 
   // Calculate completion stats - memoize to prevent recalculation on every render

@@ -73,7 +73,7 @@
   }
 }
 
-/* Focus styles for tab triggers - fix for tab switching */
+/* Focus styles for tab triggers */
 [data-state="active"][role="tab"] {
   outline: 2px solid #5B9BD5 !important; 
   outline-offset: -2px;
