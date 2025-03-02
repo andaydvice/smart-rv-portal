@@ -76,7 +76,7 @@ export const routes = [
   },
   {
     path: "/features/internet-connectivity",
-    element: <InternetConnectivity />
+    element: <ConnectivityFeature />
   },
   {
     path: "/features/connectivity",
