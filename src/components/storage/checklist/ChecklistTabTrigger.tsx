@@ -27,6 +27,11 @@ const ChecklistTabTrigger: React.FC<ChecklistTabTriggerProps> = ({
   // Use dynamic import to handle the icon properly if it exists
   const Icon = icon ? (LucideIcons[icon] as LucideIcon) : null;
   
+  // Calculate the progress percentage if progress and total are provided
+  const progressPercentage = (progress !== undefined && total && total > 0) 
+    ? Math.round((progress / total) * 100) 
+    : null;
+  
   // Map labels to specific colors exactly as shown in the image
   let specificIconColor = "";
   
