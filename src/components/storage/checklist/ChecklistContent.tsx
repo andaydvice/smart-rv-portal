@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react';
 import { Tabs, TabsContent, TabsList } from "@/components/ui/tabs";
 import RVInfoTab from './RVInfoTab';
@@ -12,8 +11,8 @@ import SecurityTab from './SecurityTab';
 import PestControlTab from './PestControlTab';
 import NotesTab from './NotesTab';
 import ChecklistTabTrigger from './ChecklistTabTrigger';
+import { ChecklistNotes } from './hooks/useChecklistStorage';
 
-// Update the prop interface to include the setter functions
 type ChecklistContentProps = {
   progress: {[key: string]: boolean};
   startDate: Date | undefined;
@@ -40,7 +39,6 @@ const ChecklistContent: React.FC<ChecklistContentProps> = ({
   handleCheckboxChange,
   handleNotesChange
 }) => {
-  // Force immediate save when tab changes to preserve notes
   const handleTabChange = (value: string) => {
     console.log("Tab changed to:", value);
     // This is a noop function as the actual save happens in the NotesTab component
