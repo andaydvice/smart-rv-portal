@@ -16,7 +16,7 @@ const NotesTab: React.FC = () => {
           </p>
           
           <Textarea 
-            className="bg-[#131a2a] border-gray-700 min-h-[300px]" 
+            className="bg-[#131a2a] border-gray-700 min-h-[300px] text-white placeholder:text-gray-500" 
             placeholder="Enter any additional notes, special procedures, or reminders here..." 
           />
         </div>
@@ -26,11 +26,11 @@ const NotesTab: React.FC = () => {
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <Textarea 
-              className="bg-[#131a2a] border-gray-700 h-32" 
+              className="bg-[#131a2a] border-gray-700 h-32 text-white placeholder:text-gray-500" 
               placeholder="Storage facility contact information..." 
             />
             <Textarea 
-              className="bg-[#131a2a] border-gray-700 h-32" 
+              className="bg-[#131a2a] border-gray-700 h-32 text-white placeholder:text-gray-500" 
               placeholder="Emergency contact information..." 
             />
           </div>
@@ -40,7 +40,7 @@ const NotesTab: React.FC = () => {
           <h3 className="text-xl font-semibold text-gray-200">Return Preparation Notes</h3>
           
           <Textarea 
-            className="bg-[#131a2a] border-gray-700 min-h-[150px]" 
+            className="bg-[#131a2a] border-gray-700 min-h-[150px] text-white placeholder:text-gray-500" 
             placeholder="Notes for when you return to use the RV (de-winterizing procedures, systems to check, etc.)..." 
           />
         </div>

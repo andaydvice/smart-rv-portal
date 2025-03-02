@@ -114,7 +114,7 @@ const MechanicalTab: React.FC<ChecklistTabProps> = ({ handleCheckboxChange, prog
           <Label htmlFor="mechanical-notes" className="text-gray-200">Additional Mechanical Notes</Label>
           <Textarea 
             id="mechanical-notes" 
-            className="bg-[#131a2a] border-gray-700 min-h-[100px]" 
+            className="bg-[#131a2a] border-gray-700 min-h-[100px] text-white placeholder:text-gray-500" 
             placeholder="Enter any additional notes about mechanical system preparation..." 
           />
         </div>

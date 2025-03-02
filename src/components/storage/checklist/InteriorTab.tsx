@@ -114,7 +114,7 @@ const InteriorTab: React.FC<ChecklistTabProps> = ({ handleCheckboxChange, progre
           <Label htmlFor="interior-notes" className="text-gray-200">Additional Interior Notes</Label>
           <Textarea 
             id="interior-notes" 
-            className="bg-[#131a2a] border-gray-700 min-h-[100px]" 
+            className="bg-[#131a2a] border-gray-700 min-h-[100px] text-white placeholder:text-gray-500" 
             placeholder="Enter any additional notes about interior preparation..." 
           />
         </div>

@@ -108,7 +108,7 @@ const ExteriorTab: React.FC<ChecklistTabProps> = ({ handleCheckboxChange, progre
           <Label htmlFor="exterior-notes" className="text-[#5B9BD5] font-medium">Additional Exterior Notes</Label>
           <Textarea 
             id="exterior-notes" 
-            className="bg-[#131a2a] border-gray-700 min-h-[100px] focus:border-[#5B9BD5] focus:ring-1 focus:ring-[#5B9BD5]" 
+            className="bg-[#131a2a] border-gray-700 min-h-[100px] focus:border-[#5B9BD5] focus:ring-1 focus:ring-[#5B9BD5] text-white placeholder:text-gray-500" 
             placeholder="Enter any additional notes about exterior preparation..." 
           />
         </div>
