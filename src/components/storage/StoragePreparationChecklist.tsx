@@ -76,7 +76,7 @@ const StoragePreparationChecklist: React.FC = memo(() => {
   // Calculate completion stats - memoize to prevent recalculation on every render
   const completionStats = useMemo(() => {
     const totalItems = 50;
-    const completedItems = Object.values(progress).filter(val => val).length;
+    const completedItems = Object.values(progress).filter(val => val === true).length;
     const completionPercentage = Math.round((completedItems / totalItems) * 100);
     return { totalItems, completedItems, completionPercentage };
   }, [progress]);

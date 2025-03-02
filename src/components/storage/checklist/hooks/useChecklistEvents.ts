@@ -7,16 +7,16 @@ import { ChecklistNotes } from './types';
  * Optimized with debounced saves for better performance
  */
 export const useChecklistEvents = (
-  progressRef: React.MutableRefObject<{[key: string]: boolean}>,
+  progressRef: React.MutableRefObject<{[key: string]: boolean | string}>,
   startDateRef: React.MutableRefObject<Date | undefined>,
   endDateRef: React.MutableRefObject<Date | undefined>,
   notesRef: React.MutableRefObject<ChecklistNotes>,
-  setProgress: (value: {[key: string]: boolean}) => void,
+  setProgress: (value: {[key: string]: boolean | string}) => void,
   setStartDate: (value: Date | undefined) => void,
   setEndDate: (value: Date | undefined) => void,
   setNotes: (value: ChecklistNotes) => void,
   saveData: (
-    progress: {[key: string]: boolean},
+    progress: {[key: string]: boolean | string},
     startDate: Date | undefined,
     endDate: Date | undefined,
     notes: ChecklistNotes,
@@ -33,7 +33,7 @@ export const useChecklistEvents = (
   // Track previous state for change detection
   const prevStateRef = useRef<{
     notes: ChecklistNotes;
-    progress: {[key: string]: boolean};
+    progress: {[key: string]: boolean | string};
   }>({
     notes: notesRef.current,
     progress: progressRef.current

@@ -7,7 +7,7 @@ import { ChecklistNotes } from './types';
  * Optimized for performance with debounced saves and reduced save frequency
  */
 export const useChecklistAutoSave = (
-  progress: {[key: string]: boolean},
+  progress: {[key: string]: boolean | string},
   startDate: Date | undefined, 
   endDate: Date | undefined,
   notes: ChecklistNotes,

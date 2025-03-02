@@ -15,7 +15,7 @@ import ChecklistTabTrigger from "./ChecklistTabTrigger";
 import { ChecklistNotes } from './hooks/types';
 
 interface ChecklistContentProps {
-  progress: {[key: string]: boolean};
+  progress: {[key: string]: boolean | string};
   startDate: Date | undefined;
   endDate: Date | undefined;
   setStartDate: (date: Date | undefined) => void;
