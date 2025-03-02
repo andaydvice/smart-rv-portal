@@ -1,0 +1,23 @@
+
+import React from 'react';
+import { NavLink } from 'react-router-dom';
+import { BookOpen, AlertTriangle } from 'lucide-react';
+
+const SupportLinks = () => (
+  <div className="grid gap-3">
+    <NavLink to="/documentation" className="text-gray-300 hover:text-blue-400 transition-colors flex items-center gap-2">
+      <BookOpen className="h-4 w-4 text-[#F97316]" />
+      <span>Documentation</span>
+    </NavLink>
+    <NavLink to="/troubleshooting" className="text-gray-300 hover:text-blue-400 transition-colors flex items-center gap-2">
+      <AlertTriangle className="h-4 w-4 text-[#F59E0B]" />
+      <span>Troubleshooting Guide</span>
+    </NavLink>
+    <NavLink to="/documentation/full" className="text-gray-300 hover:text-blue-400 transition-colors flex items-center gap-2">
+      <BookOpen className="h-4 w-4 text-[#10B981]" />
+      <span>Complete Documentation</span>
+    </NavLink>
+  </div>
+);
+
+export default SupportLinks;

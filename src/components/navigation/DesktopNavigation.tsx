@@ -1,6 +1,6 @@
 
 import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuList, NavigationMenuTrigger } from "@/components/ui/navigation-menu";
-import { CoreSystemsLinks, SmartFeaturesLinks, VehicleSelectionLinks, SupportLinks, CustomerSupportLinks, RVToolsLinks } from "../NavbarLinks";
+import { CoreSystemsLinks, SmartFeaturesLinks, VehicleSelectionLinks, SupportLinks, CustomerSupportLinks, RVToolsLinks } from "./links";
 import { Link, useLocation } from "react-router-dom";
 import { Calculator, BookOpen, Home, LogIn, User, LogOut } from "lucide-react";
 import { useAuth } from "@/components/auth/AuthContext";
