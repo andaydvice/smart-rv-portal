@@ -36,31 +36,31 @@ const ChecklistTabTrigger: React.FC<ChecklistTabTriggerProps> = ({
   // Map labels to specific colors from the screenshot
   switch(label) {
     case "RV Info":
-      specificIconColor = "#5B9BD5"; // Ocean blue
-      break;
-    case "Electrical":
-      specificIconColor = "#F44336"; // Red
-      break;
-    case "Plumbing":
-      specificIconColor = "#4B9EF5"; // Blue
-      break;
-    case "Exterior":
-      specificIconColor = "#2ECC71"; // Green
-      break;
-    case "Interior":
-      specificIconColor = "#F2B200"; // Gold/Amber
-      break;
-    case "Mechanical":
-      specificIconColor = "#9C4DF5"; // Purple
-      break;
-    case "Tires & Suspension":
       specificIconColor = "#5B9BD5"; // Blue
       break;
-    case "Security":
-      specificIconColor = "#FF7043"; // Orange
+    case "Exterior":
+      specificIconColor = "#00C29A"; // Green
+      break;
+    case "Interior":
+      specificIconColor = "#FFA500"; // Orange
+      break;
+    case "Plumbing":
+      specificIconColor = "#3B82F6"; // Blue
+      break;
+    case "Electrical":
+      specificIconColor = "#FF4444"; // Red
+      break;
+    case "Mechanical":
+      specificIconColor = "#9853E0"; // Purple
+      break;
+    case "Tires":
+      specificIconColor = "#FF5E93"; // Pink
       break;
     case "Pest Control":
       specificIconColor = "#06B6D4"; // Cyan
+      break;
+    case "Security":
+      specificIconColor = "#FF9D00"; // Orange
       break;
     case "Notes":
       specificIconColor = "#818CF8"; // Indigo
@@ -74,9 +74,9 @@ const ChecklistTabTrigger: React.FC<ChecklistTabTriggerProps> = ({
       value={value}
       className="data-[state=active]:bg-[#131a2a] data-[state=active]:border-b-2 data-[state=active]:border-[#5B9BD5] flex-col justify-center h-[100px] text-center px-4 text-[#E2E8FF] min-w-[110px] relative"
     >
-      <div className="flex flex-col items-center gap-4 justify-center w-full">
-        {Icon && <Icon className="h-6 w-6" stroke={specificIconColor} strokeWidth={2} />}
-        <span className="text-xs font-medium truncate w-full text-center">{label}</span>
+      <div className="flex flex-col items-center gap-3 justify-center w-full">
+        {Icon && <Icon className="h-5 w-5" stroke={specificIconColor} strokeWidth={2} />}
+        <span className="text-xs font-medium text-center">{label}</span>
         
         {progressPercentage !== null && (
           <div className="w-full bg-gray-800 h-1 rounded-full absolute bottom-2 left-0 right-0 mx-auto max-w-[80%]">

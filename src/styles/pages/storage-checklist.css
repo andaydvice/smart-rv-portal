@@ -46,8 +46,8 @@
 /* Tab list styling to match the design */
 .storage-preparation-checklist [role="tablist"] {
   background-color: #0c1423 !important;
-  padding: 0.5rem !important;
-  border-radius: 0.5rem !important;
+  padding: 4px !important;
+  border-radius: 8px !important;
   gap: 0 !important;
 }
 
@@ -55,6 +55,7 @@
 .storage-preparation-checklist [role="tab"][data-state="active"] {
   background-color: #131a2a !important;
   color: white !important;
+  border-bottom: 2px solid #5B9BD5 !important;
 }
 
 /* Make sure select options are visible */

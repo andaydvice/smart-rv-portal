@@ -55,33 +55,11 @@ const ChecklistContent: React.FC<ChecklistContentProps> = ({
         <Tabs defaultValue="rv-info" className="space-y-6">
           <div className="overflow-x-auto pb-2 no-scrollbar">
             <TabsList className="bg-[#0c1423] w-full flex p-1 rounded-lg">
-              <ChecklistTabTrigger value="rv-info" label="RV Info" icon="Info" />
-              <ChecklistTabTrigger 
-                value="electrical" 
-                label="Electrical" 
-                icon="Zap"
-                progress={
-                  ['electrical1', 'electrical2', 'electrical3', 'electrical4', 'electrical5']
-                    .filter(id => progress[id])
-                    .length
-                } 
-                total={5} 
-              />
-              <ChecklistTabTrigger 
-                value="plumbing" 
-                label="Plumbing" 
-                icon="Droplets"
-                progress={
-                  ['plumbing1', 'plumbing2', 'plumbing3', 'plumbing4', 'plumbing5', 'plumbing6']
-                    .filter(id => progress[id])
-                    .length
-                } 
-                total={6} 
-              />
+              <ChecklistTabTrigger value="rv-info" label="RV Info" icon="File" />
               <ChecklistTabTrigger 
                 value="exterior" 
                 label="Exterior" 
-                icon="Home"
+                icon="ExternalLink"
                 progress={
                   ['exterior1', 'exterior2', 'exterior3', 'exterior4', 'exterior5', 'exterior6', 'exterior7']
                     .filter(id => progress[id])
@@ -92,13 +70,35 @@ const ChecklistContent: React.FC<ChecklistContentProps> = ({
               <ChecklistTabTrigger 
                 value="interior" 
                 label="Interior" 
-                icon="Sofa"
+                icon="Home"
                 progress={
                   ['interior1', 'interior2', 'interior3', 'interior4', 'interior5', 'interior6', 'interior7', 'interior8']
                     .filter(id => progress[id])
                     .length
                 } 
                 total={8} 
+              />
+              <ChecklistTabTrigger 
+                value="plumbing" 
+                label="Plumbing" 
+                icon="Droplet"
+                progress={
+                  ['plumbing1', 'plumbing2', 'plumbing3', 'plumbing4', 'plumbing5', 'plumbing6']
+                    .filter(id => progress[id])
+                    .length
+                } 
+                total={6} 
+              />
+              <ChecklistTabTrigger 
+                value="electrical" 
+                label="Electrical" 
+                icon="Zap"
+                progress={
+                  ['electrical1', 'electrical2', 'electrical3', 'electrical4', 'electrical5']
+                    .filter(id => progress[id])
+                    .length
+                } 
+                total={5} 
               />
               <ChecklistTabTrigger 
                 value="mechanical" 
@@ -113,25 +113,14 @@ const ChecklistContent: React.FC<ChecklistContentProps> = ({
               />
               <ChecklistTabTrigger 
                 value="tires" 
-                label="Tires & Suspension" 
-                icon="Disc"
+                label="Tires" 
+                icon="Truck"
                 progress={
                   ['tires1', 'tires2', 'tires3', 'tires4', 'tires5']
                     .filter(id => progress[id])
                     .length
                 } 
                 total={5} 
-              />
-              <ChecklistTabTrigger 
-                value="security" 
-                label="Security" 
-                icon="Shield"
-                progress={
-                  ['security1', 'security2', 'security3', 'security4', 'security5', 'security6']
-                    .filter(id => progress[id])
-                    .length
-                } 
-                total={6} 
               />
               <ChecklistTabTrigger 
                 value="pest" 
@@ -144,7 +133,18 @@ const ChecklistContent: React.FC<ChecklistContentProps> = ({
                 } 
                 total={7} 
               />
-              <ChecklistTabTrigger value="notes" label="Notes" icon="ClipboardList" />
+              <ChecklistTabTrigger 
+                value="security" 
+                label="Security" 
+                icon="ShieldCheck"
+                progress={
+                  ['security1', 'security2', 'security3', 'security4', 'security5', 'security6']
+                    .filter(id => progress[id])
+                    .length
+                } 
+                total={6} 
+              />
+              <ChecklistTabTrigger value="notes" label="Notes" icon="File" />
             </TabsList>
           </div>
           
