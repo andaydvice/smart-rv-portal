@@ -12,3 +12,12 @@ export interface RVInfoTabProps {
   setStartDate: ((date: Date | undefined) => void) | undefined;
   setEndDate: ((date: Date | undefined) => void) | undefined;
 }
+
+export interface ChecklistNotesProps {
+  notes: {
+    general: string;
+    maintenance: string;
+    contacts: string;
+  };
+  onNotesChange: (field: string, value: string) => void;
+}

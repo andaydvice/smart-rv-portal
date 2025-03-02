@@ -14,6 +14,7 @@ import NotesTab from './NotesTab';
 import { ChecklistSection } from './ChecklistSection';
 import { ChecklistTabTrigger } from './ChecklistTabTrigger';
 import { ChecklistData } from './useChecklistStorage';
+import { ChecklistTabProps, RVInfoTabProps } from './ChecklistTypes';
 
 type ChecklistContentProps = Omit<ChecklistData, 'savedAt'> & {
   handleCheckboxChange: (id: string, checked: boolean) => void;
@@ -43,7 +44,7 @@ const ChecklistContent: React.FC<ChecklistContentProps> = ({
         <Tabs defaultValue="rv-info" className="space-y-6">
           <div className="overflow-x-auto pb-2">
             <div className="flex space-x-1 min-w-max">
-              <ChecklistTabTrigger value="rv-info" label="RV Info" progress={0} total={0} icon="InfoIcon" />
+              <ChecklistTabTrigger value="rv-info" label="RV Info" icon="InfoIcon" />
               <ChecklistTabTrigger 
                 value="electrical" 
                 label="Electrical" 
@@ -132,12 +133,17 @@ const ChecklistContent: React.FC<ChecklistContentProps> = ({
                 total={7} 
                 icon="BugIcon"
               />
-              <ChecklistTabTrigger value="notes" label="Notes" progress={0} total={0} icon="FileTextIcon" />
+              <ChecklistTabTrigger value="notes" label="Notes" icon="FileTextIcon" />
             </div>
           </div>
           
           <TabsContent value="rv-info">
-            <RVInfoTab startDate={startDate} endDate={endDate} setStartDate={undefined} setEndDate={undefined} />
+            <RVInfoTab 
+              startDate={startDate} 
+              endDate={endDate} 
+              setStartDate={undefined} 
+              setEndDate={undefined} 
+            />
           </TabsContent>
           
           <TabsContent value="electrical">
