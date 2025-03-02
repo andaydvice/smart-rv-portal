@@ -52,12 +52,12 @@ const StoragePreparationChecklist: React.FC = () => {
     };
   }, [saveData]);
 
-  // Force periodic saves
+  // Reduce the frequency of auto-saves to prevent performance issues
   useEffect(() => {
     const intervalId = setInterval(() => {
       console.log("Periodic save triggered");
-      saveData(true);
-    }, 3000); // Save more frequently - every 3 seconds
+      saveData(false); // Use silent save to prevent UI freezing
+    }, 10000); // Save less frequently - every 10 seconds
 
     return () => clearInterval(intervalId);
   }, [saveData]);
@@ -93,12 +93,12 @@ const StoragePreparationChecklist: React.FC = () => {
     });
   };
 
-  // Force a save before every render by doing an automatic save in the background
+  // Optimize auto-save to prevent frequent renders
   useEffect(() => {
     console.log("StoragePreparationChecklist rendered - auto-saving");
-    const timeoutId = setTimeout(() => saveData(false), 500);
+    const timeoutId = setTimeout(() => saveData(false), 2000);
     return () => clearTimeout(timeoutId);
-  });
+  }, [saveData]);
 
   const totalItems = 50;
   const completedItems = Object.values(progress).filter(val => val).length;

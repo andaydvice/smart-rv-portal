@@ -16,31 +16,31 @@ const ExteriorTab: React.FC<ChecklistTabProps> = ({ handleCheckboxChange, progre
             id="wash"
             label="Wash exterior thoroughly, including roof, sides, and undercarriage"
             checked={!!progress["wash"]}
-            onCheckedChange={handleCheckboxChange}
+            onCheckedChange={(id, checked) => handleCheckboxChange(id, checked)}
           />
           <ChecklistItem
             id="bugs"
             label="Remove all bugs, tree sap, and road tar"
             checked={!!progress["bugs"]}
-            onCheckedChange={handleCheckboxChange}
+            onCheckedChange={(id, checked) => handleCheckboxChange(id, checked)}
           />
           <ChecklistItem
             id="awnings"
             label="Clean awnings and allow to dry completely before retracting"
             checked={!!progress["awnings"]}
-            onCheckedChange={handleCheckboxChange}
+            onCheckedChange={(id, checked) => handleCheckboxChange(id, checked)}
           />
           <ChecklistItem
             id="uv"
             label="Apply UV protectant to rubber seals and gaskets"
             checked={!!progress["uv"]}
-            onCheckedChange={handleCheckboxChange}
+            onCheckedChange={(id, checked) => handleCheckboxChange(id, checked)}
           />
           <ChecklistItem
             id="steps"
             label="Clean and lube entry steps and slide-out mechanisms"
             checked={!!progress["steps"]}
-            onCheckedChange={handleCheckboxChange}
+            onCheckedChange={(id, checked) => handleCheckboxChange(id, checked)}
           />
         </ChecklistSection>
         
@@ -49,31 +49,31 @@ const ExteriorTab: React.FC<ChecklistTabProps> = ({ handleCheckboxChange, progre
             id="seals"
             label="Inspect and reseal any roof or sidewall seams that show signs of cracking"
             checked={!!progress["seals"]}
-            onCheckedChange={handleCheckboxChange}
+            onCheckedChange={(id, checked) => handleCheckboxChange(id, checked)}
           />
           <ChecklistItem
             id="damage"
             label="Check for and repair any exterior damage (cracks, chips, delamination)"
             checked={!!progress["damage"]}
-            onCheckedChange={handleCheckboxChange}
+            onCheckedChange={(id, checked) => handleCheckboxChange(id, checked)}
           />
           <ChecklistItem
             id="wax"
             label="Apply wax to fiberglass or painted surfaces for extended protection"
             checked={!!progress["wax"]}
-            onCheckedChange={handleCheckboxChange}
+            onCheckedChange={(id, checked) => handleCheckboxChange(id, checked)}
           />
           <ChecklistItem
             id="plastic"
             label="Cover or protect exterior plastic components from UV damage"
             checked={!!progress["plastic"]}
-            onCheckedChange={handleCheckboxChange}
+            onCheckedChange={(id, checked) => handleCheckboxChange(id, checked)}
           />
           <ChecklistItem
             id="accessories"
             label="Remove any exterior accessories that can be detached and store separately"
             checked={!!progress["accessories"]}
-            onCheckedChange={handleCheckboxChange}
+            onCheckedChange={(id, checked) => handleCheckboxChange(id, checked)}
           />
         </ChecklistSection>
         
@@ -82,25 +82,25 @@ const ExteriorTab: React.FC<ChecklistTabProps> = ({ handleCheckboxChange, progre
             id="cover"
             label="Consider a breathable RV cover designed for indoor storage (prevents dust)"
             checked={!!progress["cover"]}
-            onCheckedChange={handleCheckboxChange}
+            onCheckedChange={(id, checked) => handleCheckboxChange(id, checked)}
           />
           <ChecklistItem
             id="secure"
             label="If using a cover, ensure it's properly secured but not tight against surfaces"
             checked={!!progress["secure"]}
-            onCheckedChange={handleCheckboxChange}
+            onCheckedChange={(id, checked) => handleCheckboxChange(id, checked)}
           />
           <ChecklistItem
             id="padding"
             label="Place padding over sharp edges to prevent cover damage"
             checked={!!progress["padding"]}
-            onCheckedChange={handleCheckboxChange}
+            onCheckedChange={(id, checked) => handleCheckboxChange(id, checked)}
           />
           <ChecklistItem
             id="vents"
             label="Ensure any vents or air circulation points aren't completely sealed by the cover"
             checked={!!progress["vents"]}
-            onCheckedChange={handleCheckboxChange}
+            onCheckedChange={(id, checked) => handleCheckboxChange(id, checked)}
           />
         </ChecklistSection>
         

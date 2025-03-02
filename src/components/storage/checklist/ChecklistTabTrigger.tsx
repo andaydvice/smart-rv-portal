@@ -1,7 +1,18 @@
 
 import React from 'react';
 import { TabsTrigger } from "@/components/ui/tabs";
-import { Info, ExternalLink, Home, Droplets, Zap, Settings, CircleDashed, Bug, Lock, FileText } from "lucide-react";
+import { 
+  Info, 
+  ExternalLink, 
+  Home, 
+  Droplets, 
+  Zap, 
+  Settings, 
+  CircleDashed, 
+  Bug, 
+  Lock, 
+  FileText 
+} from "lucide-react";
 
 interface ChecklistTabTriggerProps {
   value: string;
@@ -10,7 +21,7 @@ interface ChecklistTabTriggerProps {
   iconColor?: string;
   progress?: number;
   total?: number;
-  onTabClick?: () => void; // Tab click handler
+  onTabClick?: () => void;
 }
 
 const ChecklistTabTrigger: React.FC<ChecklistTabTriggerProps> = ({ 
@@ -20,77 +31,13 @@ const ChecklistTabTrigger: React.FC<ChecklistTabTriggerProps> = ({
   iconColor,
   onTabClick
 }) => {
-  // Map labels to specific colors exactly as shown in the image
-  let specificIconColor = "";
+  // Map labels to specific colors
+  const specificIconColor = getIconColor(label);
   
-  switch(label) {
-    case "RV Info":
-      specificIconColor = "#5B9BD5"; // Blue
-      break;
-    case "Exterior":
-      specificIconColor = "#00C29A"; // Green
-      break;
-    case "Interior":
-      specificIconColor = "#FFA500"; // Orange
-      break;
-    case "Plumbing":
-      specificIconColor = "#4B8FE3"; // Blue
-      break;
-    case "Electrical":
-      specificIconColor = "#FF4444"; // Red
-      break;
-    case "Mechanical":
-      specificIconColor = "#9853E0"; // Purple
-      break;
-    case "Tires":
-      specificIconColor = "#FF5E93"; // Pink
-      break;
-    case "Pest Control":
-      specificIconColor = "#06B6D4"; // Cyan
-      break;
-    case "Security":
-      specificIconColor = "#FF9D00"; // Orange
-      break;
-    case "Notes":
-      specificIconColor = "#5B9BD5"; // Blue
-      break;
-    default:
-      specificIconColor = "#5B9BD5"; // Default blue
-  }
-
-  // Handle tab click to trigger save
-  const handleTabClick = () => {
+  // Handle tab click efficiently
+  const handleTabClick = (e: React.MouseEvent) => {
     if (onTabClick) {
-      console.log(`Tab ${label} clicked - triggering save`);
       onTabClick();
-    }
-  };
-  
-  // Render the correct icon based on the icon prop
-  const renderIcon = () => {
-    switch(icon) {
-      case "Info":
-        return <Info className="h-6 w-6" stroke={specificIconColor} strokeWidth={2} />;
-      case "ExternalLink":
-        return <ExternalLink className="h-6 w-6" stroke={specificIconColor} strokeWidth={2} />;
-      case "Home":
-        return <Home className="h-6 w-6" stroke={specificIconColor} strokeWidth={2} />;
-      case "Droplets":
-        return <Droplets className="h-6 w-6" stroke={specificIconColor} strokeWidth={2} />;
-      case "Zap":
-        return <Zap className="h-6 w-6" stroke={specificIconColor} strokeWidth={2} />;
-      case "Settings":
-        return <Settings className="h-6 w-6" stroke={specificIconColor} strokeWidth={2} />;
-      case "CircleDashed":
-        return <CircleDashed className="h-6 w-6" stroke={specificIconColor} strokeWidth={2} />;
-      case "Bug":
-        return <Bug className="h-6 w-6" stroke={specificIconColor} strokeWidth={2} />;
-      case "Lock":
-        return <Lock className="h-6 w-6" stroke={specificIconColor} strokeWidth={2} />;
-      case "FileText":
-        return <FileText className="h-6 w-6" stroke={specificIconColor} strokeWidth={2} />;
-      default:
-        return null;
     }
   };
   
@@ -101,11 +48,47 @@ const ChecklistTabTrigger: React.FC<ChecklistTabTriggerProps> = ({
       onClick={handleTabClick}
     >
       <div className="flex flex-col items-center gap-2 justify-center">
-        {renderIcon()}
+        {renderIconComponent(icon, specificIconColor)}
         <span className="text-sm font-medium">{label}</span>
       </div>
     </TabsTrigger>
   );
 };
+
+// Helper function to get icon color based on label
+function getIconColor(label: string): string {
+  switch(label) {
+    case "RV Info": return "#5B9BD5"; // Blue
+    case "Exterior": return "#00C29A"; // Green
+    case "Interior": return "#FFA500"; // Orange
+    case "Plumbing": return "#4B8FE3"; // Blue
+    case "Electrical": return "#FF4444"; // Red
+    case "Mechanical": return "#9853E0"; // Purple
+    case "Tires": return "#FF5E93"; // Pink
+    case "Pest Control": return "#06B6D4"; // Cyan
+    case "Security": return "#FF9D00"; // Orange
+    case "Notes": return "#5B9BD5"; // Blue
+    default: return "#5B9BD5"; // Default blue
+  }
+}
+
+// Helper function to render the correct icon component
+function renderIconComponent(iconName?: string, color: string = "#5B9BD5") {
+  const props = { className: "h-6 w-6", stroke: color, strokeWidth: 2 };
+
+  switch(iconName) {
+    case "Info": return <Info {...props} />;
+    case "ExternalLink": return <ExternalLink {...props} />;
+    case "Home": return <Home {...props} />;
+    case "Droplets": return <Droplets {...props} />;
+    case "Zap": return <Zap {...props} />;
+    case "Settings": return <Settings {...props} />;
+    case "CircleDashed": return <CircleDashed {...props} />;
+    case "Bug": return <Bug {...props} />;
+    case "Lock": return <Lock {...props} />;
+    case "FileText": return <FileText {...props} />;
+    default: return null;
+  }
+}
 
 export default ChecklistTabTrigger;
