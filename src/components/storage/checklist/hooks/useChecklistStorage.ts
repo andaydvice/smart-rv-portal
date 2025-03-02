@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { useChecklistCore } from './useChecklistCore';
 import { useChecklistEvents } from './useChecklistEvents';
 import { useChecklistAutoSave } from './useChecklistAutoSave';
+import { usePersistence } from './usePersistence';
 import { ChecklistNotes } from './types';
 
 export type { ChecklistNotes } from './types';
