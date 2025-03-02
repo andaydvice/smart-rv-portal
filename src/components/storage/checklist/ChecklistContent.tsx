@@ -75,7 +75,10 @@ const ChecklistContent: React.FC<ChecklistContentProps> = ({
       value={activeTab}
       onValueChange={handleTabValueChange}
     >
-      <TabsList className="grid grid-cols-5 lg:grid-cols-10 h-auto bg-[#151A22] mb-6 border-b border-gray-700 rounded-none">
+      <TabsList 
+        className="grid grid-cols-5 lg:grid-cols-10 h-auto bg-[#151A22] mb-6 border-b border-gray-700 rounded-none"
+        style={{ display: 'grid', visibility: 'visible' }}
+      >
         <ChecklistTabTrigger value="rv-info" icon="Info" label="RV Info" onTabClick={onTabChange} />
         <ChecklistTabTrigger value="exterior" icon="ExternalLink" label="Exterior" onTabClick={onTabChange} />
         <ChecklistTabTrigger value="interior" icon="Home" label="Interior" onTabClick={onTabChange} />
@@ -88,8 +91,11 @@ const ChecklistContent: React.FC<ChecklistContentProps> = ({
         <ChecklistTabTrigger value="notes" icon="FileText" label="Notes" onTabClick={onTabChange} />
       </TabsList>
       
-      <div className="tab-content-wrapper">
-        <TabsContent value="rv-info" className="mt-0">
+      <div 
+        className="tab-content-wrapper"
+        style={{ visibility: 'visible', display: 'block' }}
+      >
+        <TabsContent value="rv-info" className="mt-0" style={{ visibility: 'visible' }}>
           <RVInfoTab
             progress={progress}
             startDate={startDate}
@@ -100,63 +106,63 @@ const ChecklistContent: React.FC<ChecklistContentProps> = ({
           />
         </TabsContent>
         
-        <TabsContent value="exterior" className="mt-0">
+        <TabsContent value="exterior" className="mt-0" style={{ visibility: 'visible' }}>
           <ExteriorTab 
             progress={progress}
             handleCheckboxChange={handleCheckboxChange}
           />
         </TabsContent>
         
-        <TabsContent value="interior" className="mt-0">
+        <TabsContent value="interior" className="mt-0" style={{ visibility: 'visible' }}>
           <InteriorTab 
             progress={progress}
             handleCheckboxChange={handleCheckboxChange}
           />
         </TabsContent>
         
-        <TabsContent value="plumbing" className="mt-0">
+        <TabsContent value="plumbing" className="mt-0" style={{ visibility: 'visible' }}>
           <PlumbingTab 
             progress={progress}
             handleCheckboxChange={handleCheckboxChange}
           />
         </TabsContent>
         
-        <TabsContent value="electrical" className="mt-0">
+        <TabsContent value="electrical" className="mt-0" style={{ visibility: 'visible' }}>
           <ElectricalTab 
             progress={progress}
             handleCheckboxChange={handleCheckboxChange}
           />
         </TabsContent>
         
-        <TabsContent value="mechanical" className="mt-0">
+        <TabsContent value="mechanical" className="mt-0" style={{ visibility: 'visible' }}>
           <MechanicalTab 
             progress={progress}
             handleCheckboxChange={handleCheckboxChange}
           />
         </TabsContent>
         
-        <TabsContent value="tires" className="mt-0">
+        <TabsContent value="tires" className="mt-0" style={{ visibility: 'visible' }}>
           <TiresTab 
             progress={progress}
             handleCheckboxChange={handleCheckboxChange}
           />
         </TabsContent>
         
-        <TabsContent value="pest-control" className="mt-0">
+        <TabsContent value="pest-control" className="mt-0" style={{ visibility: 'visible' }}>
           <PestControlTab 
             progress={progress}
             handleCheckboxChange={handleCheckboxChange}
           />
         </TabsContent>
         
-        <TabsContent value="security" className="mt-0">
+        <TabsContent value="security" className="mt-0" style={{ visibility: 'visible' }}>
           <SecurityTab 
             progress={progress}
             handleCheckboxChange={handleCheckboxChange}
           />
         </TabsContent>
         
-        <TabsContent value="notes" className="mt-0">
+        <TabsContent value="notes" className="mt-0" style={{ visibility: 'visible' }}>
           <NotesTab 
             notes={notes}
             onNotesChange={handleNotesChange}

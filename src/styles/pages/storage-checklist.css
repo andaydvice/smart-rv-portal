@@ -1,6 +1,79 @@
 
 /* Storage Checklist Styles */
 
+/* CRITICAL FIXES - These must not be removed or modified */
+/* Force visibility of ALL elements */
+.storage-preparation-checklist,
+.storage-preparation-checklist *,
+[role="progressbar"],
+[role="progressbar"] > div,
+[role="checkbox"],
+[role="tablist"],
+[role="tabpanel"],
+[role="tab"],
+.storage-preparation-checklist button,
+.storage-preparation-checklist img,
+.storage-preparation-checklist .container,
+.storage-preparation-checklist .card,
+.storage-preparation-checklist .card-header,
+.storage-preparation-checklist .card-content {
+  visibility: visible !important;
+  opacity: 1 !important;
+  display: block !important;
+}
+
+/* Keep display:flex for flex items */
+.storage-preparation-checklist [role="checkbox"],
+.storage-preparation-checklist [role="checkbox"] > *,
+.storage-preparation-checklist button,
+.storage-preparation-checklist .flex,
+.storage-preparation-checklist [role="tab"] {
+  display: flex !important;
+}
+
+/* Special styling for progress bars */
+.storage-preparation-checklist [role="progressbar"] {
+  position: relative !important;
+  height: 8px !important;
+  width: 100% !important;
+  overflow: visible !important;
+  background-color: rgba(31, 41, 55, 0.7) !important;
+  border-radius: 9999px !important;
+}
+
+/* Progress indicator */
+.storage-preparation-checklist [role="progressbar"] > div {
+  position: absolute !important;
+  left: 0 !important;
+  top: 0 !important;
+  height: 100% !important;
+  background-color: #60A5FA !important;
+  transform: none !important;
+  transition: none !important;
+}
+
+/* Force images to display properly */
+.storage-preparation-checklist img {
+  max-width: 100% !important;
+  height: auto !important;
+  width: 100% !important;
+}
+
+/* Ensure tab panels behave correctly */
+.storage-preparation-checklist [role="tabpanel"][data-state="active"] {
+  display: block !important;
+  visibility: visible !important;
+}
+
+.storage-preparation-checklist [role="tabpanel"][data-state="inactive"] {
+  display: none !important;
+}
+
+/* Fix inline-flex for specific elements */
+.storage-preparation-checklist .inline-flex {
+  display: inline-flex !important;
+}
+
 /* Print styles */
 @media print {
   body * {
@@ -140,74 +213,7 @@
   min-height: 500px;
 }
 
-/* Critical fixes for elements not showing in new preview */
-/* The !important flags ensure these styles override anything else */
-
-/* Force visibility of ALL images */
-.storage-preparation-checklist img {
-  max-width: 100% !important;
-  height: auto !important;
-  display: block !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-}
-
-/* Force visibility of progress bars */
-.storage-preparation-checklist [role="progressbar"] {
-  display: flex !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-  overflow: visible !important;
-  position: relative !important;
-  height: 0.5rem !important;
-}
-
-/* Force visibility of progress indicator */
-.storage-preparation-checklist [role="progressbar"] > div {
-  visibility: visible !important;
-  opacity: 1 !important;
-  display: block !important;
-  position: absolute !important;
-  left: 0 !important;
-  top: 0 !important;
-  bottom: 0 !important;
-  transition: none !important;
-}
-
-/* Ensure header displays properly */
-.storage-preparation-checklist .pt-20 {
-  padding-top: 5rem !important;
-}
-
-/* Force visibility of all checklist containers */
-.storage-preparation-checklist .container {
-  visibility: visible !important;
-  opacity: 1 !important;
-  display: block !important;
-}
-
-/* Prevent any transition issues */
-.storage-preparation-checklist * {
-  transition: none !important;
-}
-
-/* Force visibility of card content */
-.storage-preparation-checklist .card,
-.storage-preparation-checklist .card-header,
-.storage-preparation-checklist .card-content {
-  visibility: visible !important;
-  opacity: 1 !important;
-  display: block !important;
-}
-
-/* Ensure checkboxes are visible */
-.storage-preparation-checklist [role="checkbox"] {
-  visibility: visible !important;
-  opacity: 1 !important;
-  display: inline-flex !important;
-}
-
-/* Force tab list visibility */
+/* Force visibility of tab list */
 .storage-preparation-checklist [role="tablist"] {
   display: grid !important;
   visibility: visible !important;
@@ -219,4 +225,9 @@
   visibility: visible !important;
   opacity: 1 !important;
   display: inline-flex !important;
+}
+
+/* Ensure header displays properly */
+.storage-preparation-checklist .pt-20 {
+  padding-top: 5rem !important;
 }

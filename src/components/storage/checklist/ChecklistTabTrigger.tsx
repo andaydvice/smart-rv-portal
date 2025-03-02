@@ -79,10 +79,54 @@ const ChecklistTabTrigger: React.FC<ChecklistTabTriggerProps> = ({
       value={value}
       className="flex flex-col items-center justify-center w-full py-4 text-white data-[state=active]:bg-[#131a2a]"
       onClick={handleTabClick}
+      style={{ 
+        display: 'flex',
+        visibility: 'visible',
+        opacity: 1,
+        flexDirection: 'column',
+        alignItems: 'center', 
+        justifyContent: 'center',
+        width: '100%',
+        padding: '12px 0'
+      }}
     >
-      <div className="flex flex-col items-center gap-2 justify-center">
-        {Icon && <Icon className="h-6 w-6" stroke={specificIconColor} strokeWidth={2} />}
-        <span className="text-sm font-medium text-white">{label}</span>
+      <div 
+        className="flex flex-col items-center gap-2 justify-center"
+        style={{ 
+          display: 'flex',
+          visibility: 'visible',
+          opacity: 1,
+          flexDirection: 'column', 
+          alignItems: 'center', 
+          gap: '8px' 
+        }}
+      >
+        {Icon && (
+          <Icon 
+            className="h-6 w-6" 
+            stroke={specificIconColor} 
+            strokeWidth={2}
+            style={{ 
+              visibility: 'visible',
+              display: 'block',
+              opacity: 1,
+              width: '24px',
+              height: '24px'
+            }}
+          />
+        )}
+        <span 
+          className="text-sm font-medium text-white"
+          style={{ 
+            visibility: 'visible',
+            display: 'block',
+            opacity: 1,
+            color: 'white',
+            fontSize: '0.875rem'
+          }}
+        >
+          {label}
+        </span>
       </div>
     </TabsTrigger>
   );

@@ -16,17 +16,30 @@ const Checkbox = React.forwardRef<
       className
     )}
     style={{
-      visibility: 'visible',
+      visibility: 'visible !important',
       opacity: 1,
-      display: 'inline-flex'
+      display: 'inline-flex',
+      width: '16px',
+      height: '16px',
+      minWidth: '16px',
+      minHeight: '16px',
+      border: '1px solid #60A5FA',
+      borderRadius: '4px',
+      backgroundColor: props["data-state"] === "checked" ? "#60A5FA" : "transparent",
+      ...props.style
     }}
     {...props}
   >
     <CheckboxPrimitive.Indicator
       className={cn("flex items-center justify-center text-current")}
       style={{ 
-        visibility: 'visible',
-        opacity: 1
+        visibility: 'visible !important',
+        opacity: 1,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: '100%',
+        height: '100%'
       }}
     >
       <Check className="h-4 w-4" />

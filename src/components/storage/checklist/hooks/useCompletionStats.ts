@@ -6,6 +6,11 @@ export const useCompletionStats = (progress: {[key: string]: boolean | string}) 
     try {
       console.log("Calculating completion stats from progress:", progress);
       
+      if (!progress || typeof progress !== 'object') {
+        console.warn("Invalid progress object:", progress);
+        return { totalItems: 0, completedItems: 0, completionPercentage: 0 };
+      }
+      
       // Only count fields that are booleans or string representations of booleans
       const booleanKeys = Object.keys(progress).filter(key => 
         typeof progress[key] === 'boolean' || progress[key] === 'true' || progress[key] === 'false'

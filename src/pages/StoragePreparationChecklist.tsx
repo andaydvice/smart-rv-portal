@@ -1,13 +1,11 @@
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import StoragePreparationChecklist from '@/components/storage/StoragePreparationChecklist';
 import ChecklistHeroImage from '@/components/storage/checklist/ChecklistHeroImage';
 import Layout from '@/components/layout/Layout';
 
 const StoragePreparationChecklistPage: React.FC = () => {
-  const [isLoaded, setIsLoaded] = useState(true); // Start with true for immediate visibility
-
   // Force scroll to top and ensure components load with direct visibility
   useEffect(() => {
     console.log('Storage checklist page loaded - forcing scroll to top');
@@ -15,30 +13,48 @@ const StoragePreparationChecklistPage: React.FC = () => {
     // Force scroll to top on page load
     window.scrollTo(0, 0);
     
-    // No need for complex preloading - we'll render everything immediately
-    // and let the browser handle loading in the background
+    // Ensure all root elements are visible
     document.documentElement.style.visibility = 'visible';
     document.body.style.visibility = 'visible';
     
-    // Set timeout to ensure all content has time to render
-    const timer = setTimeout(() => {
-      setIsLoaded(true);
-    }, 100);
+    // Preload the hero image
+    const heroImage = new Image();
+    heroImage.src = "/lovable-uploads/8d977391-dd15-4260-8535-839f728126c6.png";
+    heroImage.fetchPriority = 'high';
     
-    return () => clearTimeout(timer);
+    // Add event logging
+    console.log("Page fully initialized");
+    
+    return () => {
+      console.log("StoragePreparationChecklistPage unmounting");
+    };
   }, []);
 
   return (
     <Layout>
       <div 
         className="storage-preparation-checklist bg-[#080F1F] min-h-screen"
-        style={{ visibility: 'visible', display: 'block' }}
+        style={{ 
+          visibility: 'visible', 
+          display: 'block',
+          opacity: 1
+        }}
       >
         <Navbar />
-        <div className="pt-20" style={{ visibility: 'visible', display: 'block' }}>
-          {/* Always render these components regardless of loading state */}
-          <ChecklistHeroImage />
-          <StoragePreparationChecklist />
+        <div 
+          className="pt-20" 
+          style={{ 
+            visibility: 'visible', 
+            display: 'block',
+            opacity: 1
+          }}
+        >
+          <div id="hero-container" style={{ visibility: 'visible', display: 'block', opacity: 1 }}>
+            <ChecklistHeroImage />
+          </div>
+          <div id="checklist-container" style={{ visibility: 'visible', display: 'block', opacity: 1 }}>
+            <StoragePreparationChecklist />
+          </div>
         </div>
       </div>
     </Layout>
