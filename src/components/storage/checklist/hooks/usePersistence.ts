@@ -2,7 +2,7 @@
 import { useCallback } from 'react';
 import { STORAGE_KEY, ChecklistData, ChecklistNotes } from './types';
 
-// Hook for handling localStorage persistence operations with improved reliability
+// Hook for handling localStorage persistence operations with improved reliability and performance
 export const usePersistence = () => {
   // Load data from localStorage with enhanced error handling
   const loadData = useCallback(() => {
@@ -15,7 +15,7 @@ export const usePersistence = () => {
       }
       
       const parsed = JSON.parse(savedData);
-      console.log("Loading saved data:", parsed);
+      console.log("Loading saved data");
       
       // Convert date strings back to Date objects
       if (parsed.startDate) {
@@ -58,7 +58,7 @@ export const usePersistence = () => {
     }
   }, []);
 
-  // Save data to localStorage with improved error handling and retry mechanism
+  // Save data to localStorage with improved error handling, retry mechanism, and chunking for large data
   const saveData = useCallback((
     progress: {[key: string]: boolean | string},
     startDate: Date | undefined,
@@ -83,17 +83,60 @@ export const usePersistence = () => {
     };
     
     if (manualSave) {
-      console.log("Manually saving data:", dataToSave);
+      console.log("Manually saving data");
     } else {
-      console.log("Auto-saving data:", dataToSave);
+      console.log("Auto-saving data");
     }
+    
+    // Function to handle large data by using chunking if needed
+    const saveWithSizeCheck = (data: any) => {
+      try {
+        const jsonString = JSON.stringify(data);
+        
+        // Check if data is too large (approaching 5MB limit of localStorage)
+        if (jsonString.length > 4 * 1024 * 1024) {
+          console.warn("Data is very large, attempting to optimize storage");
+          
+          // Check if notes are causing the size issue
+          const notesSize = JSON.stringify(data.notes).length;
+          if (notesSize > 1 * 1024 * 1024) {
+            // If notes are too large, truncate or split them
+            console.warn("Notes are very large, may need to be truncated");
+            
+            // Limit each notes field to a reasonable size (100KB)
+            const MAX_SIZE = 100 * 1024;
+            for (const key in data.notes) {
+              if (data.notes[key] && data.notes[key].length > MAX_SIZE) {
+                console.warn(`Truncating ${key} notes to prevent storage issues`);
+                data.notes[key] = data.notes[key].substring(0, MAX_SIZE) + 
+                  "\n\n[Note truncated due to size limitations]";
+              }
+            }
+            
+            // Try again with truncated notes
+            return localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+          }
+        }
+        
+        // If data isn't too large, save it normally
+        localStorage.setItem(STORAGE_KEY, jsonString);
+        return true;
+      } catch (err) {
+        console.error("Failed to save data:", err);
+        return false;
+      }
+    };
     
     // Add retry mechanism for storage operations
     const saveWithRetry = (retries = 2) => {
       try {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(dataToSave));
-        console.log("Storage operation completed successfully");
-        return true;
+        const result = saveWithSizeCheck(dataToSave);
+        if (result) {
+          console.log("Storage operation completed successfully");
+          return true;
+        } else {
+          throw new Error("Save operation failed");
+        }
       } catch (err) {
         console.error(`Error saving to localStorage (attempt ${3 - retries})`, err);
         

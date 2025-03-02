@@ -21,6 +21,7 @@ import {
 // Memoize the component to prevent unnecessary re-renders
 const StoragePreparationChecklist: React.FC = memo(() => {
   const [resetDialogOpen, setResetDialogOpen] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
   
   const {
     progress,
@@ -42,20 +43,32 @@ const StoragePreparationChecklist: React.FC = memo(() => {
   // Create memoized handlers to prevent recreation on every render
   const handleSaveProgress = useCallback(() => {
     try {
-      saveData(true);
+      setIsSaving(true);
       
-      toast({
-        title: "Progress Saved",
-        description: "Your checklist progress has been saved successfully.",
-        variant: "default",
-      });
+      // Short timeout to allow UI to update before potentially blocking operation
+      setTimeout(() => {
+        try {
+          saveData(true);
+          
+          toast({
+            title: "Progress Saved",
+            description: "Your checklist progress has been saved successfully.",
+            variant: "default",
+          });
+        } catch (error) {
+          console.error("Error saving progress:", error);
+          toast({
+            title: "Save Failed",
+            description: "There was an error saving your progress. Please try again.",
+            variant: "destructive",
+          });
+        } finally {
+          setIsSaving(false);
+        }
+      }, 50);
     } catch (error) {
-      console.error("Error saving progress:", error);
-      toast({
-        title: "Save Failed",
-        description: "There was an error saving your progress. Please try again.",
-        variant: "destructive",
-      });
+      console.error("Error in save handler:", error);
+      setIsSaving(false);
     }
   }, [saveData]);
 
@@ -76,20 +89,32 @@ const StoragePreparationChecklist: React.FC = memo(() => {
   const handlePrint = useCallback(() => {
     // Force a save before printing
     try {
-      saveData(true);
-      window.print();
+      setIsSaving(true);
       
-      toast({
-        title: "Printing",
-        description: "Sending checklist to printer...",
-      });
+      // Short timeout to allow UI to update
+      setTimeout(() => {
+        try {
+          saveData(true);
+          window.print();
+          
+          toast({
+            title: "Printing",
+            description: "Sending checklist to printer...",
+          });
+        } catch (error) {
+          console.error("Error preparing for print:", error);
+          toast({
+            title: "Print Failed",
+            description: "There was an error preparing the document for printing.",
+            variant: "destructive",
+          });
+        } finally {
+          setIsSaving(false);
+        }
+      }, 50);
     } catch (error) {
-      console.error("Error preparing for print:", error);
-      toast({
-        title: "Print Failed",
-        description: "There was an error preparing the document for printing.",
-        variant: "destructive",
-      });
+      console.error("Error in print handler:", error);
+      setIsSaving(false);
     }
   }, [saveData]);
 
@@ -152,6 +177,7 @@ const StoragePreparationChecklist: React.FC = memo(() => {
             onSave={handleSaveProgress}
             onReset={handleResetRequest}
             onPrint={handlePrint}
+            isSaving={isSaving}
           />
           
           <CardContent className="pt-6">

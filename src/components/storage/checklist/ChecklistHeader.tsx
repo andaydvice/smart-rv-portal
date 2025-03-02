@@ -1,9 +1,9 @@
 
 import React from 'react';
+import { CardHeader } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { Printer, Save, RotateCcw, CheckSquare } from "lucide-react";
-import { toast } from "@/components/ui/use-toast";
+import { Printer, Save, RotateCcw, CheckCircle, Loader2 } from "lucide-react";
+import { Progress } from "@/components/ui/progress";
 
 interface ChecklistHeaderProps {
   completionPercentage: number;
@@ -12,6 +12,7 @@ interface ChecklistHeaderProps {
   onSave: () => void;
   onReset: () => void;
   onPrint: () => void;
+  isSaving?: boolean;
 }
 
 const ChecklistHeader: React.FC<ChecklistHeaderProps> = ({
@@ -20,62 +21,75 @@ const ChecklistHeader: React.FC<ChecklistHeaderProps> = ({
   getLastSavedMessage,
   onSave,
   onReset,
-  onPrint
+  onPrint,
+  isSaving = false
 }) => {
   return (
-    <CardHeader className="border-b border-gray-700 pb-6 bg-gradient-to-r from-[#0c1219] to-[#131a2a]">
-      <div className="flex justify-between items-start mb-4">
-        <div>
-          <CardTitle className="text-3xl font-bold text-white mb-2">COMPLETE GUIDE TO RV STORAGE PREPARATION</CardTitle>
-          <CardDescription className="text-xl text-[#E2E8FF] font-light">Interactive Checklist for Extended Indoor Storage</CardDescription>
-        </div>
-        <div className="text-[#5B9BD5] font-bold text-xl">SMART RV</div>
-      </div>
-      
-      <div className="flex flex-col sm:flex-row gap-4 mt-6">
-        <div className="flex gap-2">
-          <Button 
-            variant="outline" 
-            className="gap-2 bg-[#151A22] hover:bg-[#1d2532] hover:text-white text-white border-gray-700 
-            focus:text-white active:text-white focus:bg-[#1d2532] active:bg-[#1d2532] focus:border-[#5B9BD5] active:border-[#5B9BD5]"
-            onClick={onSave}
-          >
-            <Save size={16} className="text-[#5B9BD5]" />
-            Save Progress
-          </Button>
-          <Button 
-            variant="outline" 
-            className="gap-2 bg-[#151A22] hover:bg-[#1d2532] hover:text-white text-white border-gray-700
-            focus:text-white active:text-white focus:bg-[#1d2532] active:bg-[#1d2532] focus:border-[#5B9BD5] active:border-[#5B9BD5]"
-            onClick={onPrint}
-          >
-            <Printer size={16} className="text-[#5B9BD5]" />
-            Print
-          </Button>
-          <Button 
-            variant="outline" 
-            className="gap-2 bg-[#151A22] hover:bg-[#1d2532] hover:text-white text-white border-gray-700
-            focus:text-white active:text-white focus:bg-[#1d2532] active:bg-[#1d2532] focus:border-[#5B9BD5] active:border-[#5B9BD5]"
-            onClick={onReset}
-          >
-            <RotateCcw size={16} className="text-[#5B9BD5]" />
-            Reset
-          </Button>
+    <CardHeader className="p-6 border-b border-gray-700">
+      <div className="space-y-4">
+        <div className="flex flex-col space-y-2">
+          <h2 className="text-2xl font-bold text-white">RV Storage Preparation Checklist</h2>
+          <p className="text-[#E2E8FF]">Track your progress as you prepare your RV for storage</p>
         </div>
         
-        <div className="flex items-center justify-between gap-3 ml-auto">
-          {lastSavedAt && (
-            <span className="text-xs text-[#E2E8FF] italic mr-3">
-              {getLastSavedMessage()}
-            </span>
-          )}
-          <div className="flex items-center gap-3 bg-[#151A22] py-2 px-3 rounded-md border border-gray-700">
-            <CheckSquare size={18} className="text-[#10B981]" />
-            <div className="flex flex-col">
-              <span className="text-xs text-[#E2E8FF]">Completion</span>
-              <span className="text-[#10B981] font-bold">{completionPercentage}%</span>
+        <div className="flex items-center space-x-2">
+          <div className="flex-1">
+            <div className="flex justify-between text-sm mb-1">
+              <span className="text-[#E2E8FF]">Completion: {completionPercentage}%</span>
+              {lastSavedAt && (
+                <span className="text-gray-400 text-xs">{getLastSavedMessage()}</span>
+              )}
             </div>
+            <Progress value={completionPercentage} className="h-2 bg-gray-700" indicatorClassName="bg-[#60A5FA]" />
           </div>
+        </div>
+        
+        <div className="flex flex-wrap gap-2 print:hidden">
+          <Button 
+            variant="outline" 
+            className="bg-[#151A22] border-gray-700 text-white hover:bg-[#1d2532] hover:text-white"
+            onClick={onSave}
+            disabled={isSaving}
+          >
+            {isSaving ? (
+              <>
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                Saving...
+              </>
+            ) : (
+              <>
+                <Save className="mr-2 h-4 w-4" />
+                Save Progress
+              </>
+            )}
+          </Button>
+          
+          <Button 
+            variant="outline" 
+            className="bg-[#151A22] border-gray-700 text-white hover:bg-[#1d2532] hover:text-white"
+            onClick={onPrint}
+            disabled={isSaving}
+          >
+            <Printer className="mr-2 h-4 w-4" />
+            Print Checklist
+          </Button>
+          
+          <Button 
+            variant="outline" 
+            className="bg-[#151A22] border-gray-700 text-white hover:bg-[#1d2532] hover:text-white hover:border-red-500"
+            onClick={onReset}
+            disabled={isSaving}
+          >
+            <RotateCcw className="mr-2 h-4 w-4" />
+            Reset
+          </Button>
+          
+          {completionPercentage === 100 && (
+            <div className="ml-auto flex items-center text-green-400">
+              <CheckCircle className="h-5 w-5 mr-1" />
+              <span>Checklist Complete!</span>
+            </div>
+          )}
         </div>
       </div>
     </CardHeader>
