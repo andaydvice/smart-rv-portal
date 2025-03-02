@@ -18,7 +18,7 @@ const ChecklistHeroImage: React.FC = () => {
         alt="Complete Guide to Indoor RV Vehicle Storage Preparation" 
         className="w-full h-auto object-cover"
         loading="eager"
-        fetchpriority="high"
+        fetchPriority="high"
       />
     </div>
   );
