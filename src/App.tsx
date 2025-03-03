@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
 import { ensureVisibility, debugAnimations, debugConnections } from './utils/visibilityDebugger';
 import './App.css';
 
-// Create a client with improved error handling
+// Create a client with improved error handling and retry logic
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -27,14 +27,16 @@ const queryClient = new QueryClient({
 function App() {
   const [isConnected, setIsConnected] = useState(true);
   const [initialLoadAttempted, setInitialLoadAttempted] = useState(false);
+  const [reconnectionAttempts, setReconnectionAttempts] = useState(0);
 
-  // Add useEffect to debug performance issues and handle connectivity
+  // Enhanced useEffect to debug performance issues and handle connectivity
   useEffect(() => {
-    console.log('App component mounted');
+    console.log('App component mounted - initializing with enhanced error recovery');
     
     // Debug visibility immediately and then again after a short delay
     ensureVisibility();
     
+    // Schedule multiple visibility checks with increasing delays
     const timeoutIds = [
       setTimeout(() => {
         console.log('Running visibility debugger (first pass)');
@@ -46,39 +48,96 @@ function App() {
         console.log('Running visibility debugger (second pass)');
         ensureVisibility();
         debugAnimations();
-        setInitialLoadAttempted(true);
       }, 500),
+      
+      setTimeout(() => {
+        console.log('Running visibility debugger (third pass)');
+        ensureVisibility();
+        debugAnimations();
+        setInitialLoadAttempted(true);
+      }, 1500),
       
       setTimeout(() => {
         console.log('Running connection debugger');
         debugConnections();
-      }, 1000)
+      }, 1000),
+      
+      // Additional debug pass
+      setTimeout(() => {
+        console.log('Running final visibility check');
+        ensureVisibility();
+        debugAnimations();
+        debugConnections();
+      }, 3000)
     ];
 
-    // Monitor connectivity status
+    // Monitor connectivity status with improved handling
     const handleOnline = () => {
       console.log('Network connection restored');
       setIsConnected(true);
+      setReconnectionAttempts(0);
+      
       // Force re-render critical components
       ensureVisibility();
       debugAnimations();
+      
+      // Refresh any failed queries
+      queryClient.invalidateQueries();
     };
 
     const handleOffline = () => {
       console.log('Network connection lost');
       setIsConnected(false);
+      
+      // Attempt to reconnect periodically
+      const reconnectInterval = setInterval(() => {
+        if (navigator.onLine) {
+          console.log('Reconnection successful');
+          clearInterval(reconnectInterval);
+          handleOnline();
+        } else {
+          setReconnectionAttempts(prev => prev + 1);
+          console.log(`Reconnection attempt ${reconnectionAttempts + 1}`);
+        }
+      }, 5000);
+      
+      // Clear interval after maximum attempts
+      if (reconnectionAttempts >= 10) {
+        clearInterval(reconnectInterval);
+      }
+      
+      // Store for cleanup
+      timeoutIds.push(reconnectInterval);
     };
 
     window.addEventListener('online', handleOnline);
     window.addEventListener('offline', handleOffline);
     
+    // Check WebSocket connectivity periodically
+    const wsCheckInterval = setInterval(() => {
+      try {
+        const testWs = new WebSocket('wss://echo.websocket.org');
+        testWs.onopen = () => {
+          console.log('WebSocket connectivity check successful');
+          testWs.close();
+        };
+        testWs.onerror = () => {
+          console.warn('WebSocket connectivity check failed');
+        };
+      } catch (err) {
+        console.error('WebSocket test failed:', err);
+      }
+    }, 30000);
+    
+    timeoutIds.push(wsCheckInterval);
+    
     return () => {
-      console.log('App component unmounted');
+      console.log('App component unmounting - cleaning up');
       timeoutIds.forEach(id => clearTimeout(id));
       window.removeEventListener('online', handleOnline);
       window.removeEventListener('offline', handleOffline);
     };
-  }, []);
+  }, [reconnectionAttempts]);
 
   return (
     <QueryClientProvider client={queryClient}>
@@ -97,6 +156,7 @@ function App() {
               zIndex: 9999
             }}>
               Network connection lost. Please check your internet connection.
+              {reconnectionAttempts > 0 && ` (Reconnection attempts: ${reconnectionAttempts})`}
             </div>
           )}
           <RouterProvider />

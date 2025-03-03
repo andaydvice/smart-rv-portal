@@ -12,11 +12,12 @@ export default defineConfig(({ mode }) => ({
     hmr: {
       clientPort: 443,
       path: '/@vite/client',
-      timeout: 120000,
-      host: 'lovableproject.com',
-      overlay: true,
+      timeout: 300000, // Extended timeout for more stable connections
+      host: mode === 'development' ? 'lovableproject.com' : 'lovable.app',
+      overlay: false, // Disable overlay to prevent additional connection issues
       protocol: 'wss',
-      reloadOnFailure: true
+      reloadOnFailure: true,
+      reconnect: 10 // Increase reconnection attempts
     },
     watch: {
       usePolling: true,
@@ -53,7 +54,6 @@ export default defineConfig(({ mode }) => ({
         manualChunks: {
           vendor: ['react', 'react-dom'],
         },
-        // Ensure proper MIME types for all files
         assetFileNames: 'assets/[name]-[hash][extname]',
         chunkFileNames: 'js/[name]-[hash].js',
         entryFileNames: 'js/[name]-[hash].js',
@@ -65,16 +65,20 @@ export default defineConfig(({ mode }) => ({
     assetsDir: 'assets',
   },
   css: {
-    // Ensure proper CSS processing
+    // Improve CSS processing and MIME type handling
     postcss: {
-      plugins: [],
+      plugins: [require('autoprefixer')],
     },
-    // Ensure CSS modules work properly
     modules: {
       localsConvention: 'camelCase',
     },
+    devSourcemap: true // Add source maps for better debugging
   },
   esbuild: {
-    logOverride: { 'this-is-undefined-in-esm': 'silent' }
+    logOverride: { 'this-is-undefined-in-esm': 'silent' },
+    supported: {
+      // Ensure modern CSS syntax is supported
+      'nesting-rules': true
+    }
   }
 }));

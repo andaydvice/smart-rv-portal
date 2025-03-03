@@ -8,23 +8,63 @@
     <meta name="description" content="Complete RV Storage Preparation Checklist for your vehicle" />
     <meta name="author" content="Lovable" />
     <meta property="og:image" content="/og-image.svg" />
-    <style>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- Force correct MIME types -->
+    <style type="text/css">
       /* Critical CSS for initial render */
       body, html {
         visibility: visible !important;
         display: block !important;
         opacity: 1 !important;
+        margin: 0;
+        padding: 0;
       }
       #root {
         visibility: visible !important;
         display: block !important;
         opacity: 1 !important;
+        min-height: 100vh;
+        width: 100%;
       }
     </style>
+    <!-- Preconnect to essential domains -->
+    <link rel="preconnect" href="https://lovableproject.com" crossorigin />
+    <link rel="preconnect" href="https://lovable.app" crossorigin />
+    <!-- Preload critical resources -->
+    <link rel="preload" href="/src/critical.css" as="style" />
   </head>
   <body>
     <div id="root"></div>
     <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
     <script type="module" src="/src/main.tsx"></script>
+    <!-- Fallback script for browser compatibility -->
+    <script>
+      // Force visibility of root element
+      document.addEventListener('DOMContentLoaded', function() {
+        const root = document.getElementById('root');
+        if (root) {
+          root.style.visibility = 'visible';
+          root.style.display = 'block';
+          root.style.opacity = '1';
+        }
+        
+        // Check for CSS loading issues
+        const styles = document.querySelectorAll('link[rel="stylesheet"]');
+        console.log(`Checking ${styles.length} stylesheets`);
+        
+        // Ensure all stylesheets load correctly
+        styles.forEach(function(link) {
+          link.addEventListener('error', function(e) {
+            console.error('Stylesheet failed to load:', e);
+            // Reload the stylesheet
+            const newLink = document.createElement('link');
+            newLink.rel = 'stylesheet';
+            newLink.href = link.href + '?reload=' + new Date().getTime();
+            document.head.appendChild(newLink);
+          });
+        });
+      });
+    </script>
   </body>
 </html>

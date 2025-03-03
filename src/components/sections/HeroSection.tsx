@@ -1,15 +1,25 @@
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 
 export const HeroSection = () => {
   const [imageLoaded, setImageLoaded] = useState(false);
   const [renderKey, setRenderKey] = useState(0);
+  const [retryCount, setRetryCount] = useState(0);
+  const imageRef = useRef<HTMLImageElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
 
-  // Ensure component is always visible
+  // Ensure component is always visible with enhanced fallback
   useEffect(() => {
     console.log("HeroSection mounted");
+    
+    // Force visibility on section immediately
+    if (sectionRef.current) {
+      sectionRef.current.style.visibility = 'visible';
+      sectionRef.current.style.opacity = '1';
+      sectionRef.current.style.display = 'block';
+    }
     
     // Force re-render once after mount to ensure visibility
     setTimeout(() => {
@@ -26,13 +36,29 @@ export const HeroSection = () => {
         });
     }, 100);
     
+    // Additional visibility enforcement after a longer delay
+    setTimeout(() => {
+      if (!imageLoaded && imageRef.current) {
+        console.log("Forcing image load");
+        // Force image load with timestamp to bypass cache
+        if (retryCount < 3) {
+          setRetryCount(prev => prev + 1);
+          imageRef.current.src = `/lovable-uploads/f3ebf58c-7bbf-427f-9510-9c3b0aec6f6d.png?retry=${Date.now()}`;
+        } else {
+          // If image still fails, mark as loaded anyway to show fallback
+          setImageLoaded(true);
+        }
+      }
+    }, 1000);
+    
     return () => {
       console.log("HeroSection unmounted");
     };
-  }, []);
+  }, [imageLoaded, retryCount]);
 
   return (
     <section 
+      ref={sectionRef}
       key={renderKey} 
       className="hero-section relative min-h-screen flex items-center justify-center overflow-hidden"
       style={{ visibility: 'visible', opacity: 1, display: 'block' }}
@@ -42,6 +68,7 @@ export const HeroSection = () => {
         <div className="w-full h-full bg-gray-800"></div>
         
         <img
+          ref={imageRef}
           src="/lovable-uploads/f3ebf58c-7bbf-427f-9510-9c3b0aec6f6d.png"
           alt="Luxury RV interior with panoramic windows and modern design"
           className={`w-full h-full object-cover ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
@@ -52,8 +79,14 @@ export const HeroSection = () => {
           }}
           onError={(e) => {
             console.error("Hero image failed to load", e);
-            // Still mark as loaded to show the fallback
-            setImageLoaded(true);
+            // Try one more time with cache-busting
+            if (retryCount < 3 && e.currentTarget) {
+              setRetryCount(prev => prev + 1);
+              e.currentTarget.src = `/lovable-uploads/f3ebf58c-7bbf-427f-9510-9c3b0aec6f6d.png?retry=${Date.now()}`;
+            } else {
+              // Still mark as loaded to show the fallback
+              setImageLoaded(true);
+            }
           }}
           style={{ visibility: 'visible', display: 'block' }}
         />

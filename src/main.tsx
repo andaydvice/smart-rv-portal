@@ -4,11 +4,11 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import './index.css';
 
-console.log('Starting application initialization...');
+console.log('Starting application initialization with enhanced error handling...');
 
-// Function to check for CSS loading errors
+// Function to check for CSS loading errors with enhanced error handling
 const monitorCssLoading = () => {
-  console.log('Monitoring CSS loading...');
+  console.log('Monitoring CSS loading with enhanced error recovery...');
   
   const styleSheets = document.styleSheets;
   console.log(`Found ${styleSheets.length} stylesheets`);
@@ -23,6 +23,14 @@ const monitorCssLoading = () => {
           console.log(`  Rules: ${rules.length}`);
         } catch (cssErr) {
           console.warn(`  Cannot access rules (likely CORS issue): ${cssErr}`);
+          // Attempt to reload the stylesheet if it fails to load
+          if (sheet.href) {
+            console.log(`  Attempting to reload stylesheet: ${sheet.href}`);
+            const link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.href = sheet.href + '?reload=' + new Date().getTime();
+            document.head.appendChild(link);
+          }
         }
       } catch (sheetErr) {
         console.error(`Error accessing stylesheet ${i}:`, sheetErr);
@@ -33,7 +41,7 @@ const monitorCssLoading = () => {
   }
 };
 
-// Apply critical styles directly for initial render
+// Ensure critical CSS is applied immediately for rendering
 document.documentElement.style.visibility = 'visible';
 document.documentElement.style.display = 'block';
 document.documentElement.style.opacity = '1';
@@ -46,6 +54,46 @@ document.body.style.margin = '0';
 document.body.style.padding = '0';
 document.body.style.minHeight = '100vh';
 document.body.style.width = '100%';
+
+// Attempt to detect and recover from websocket connection issues
+const setupWebSocketErrorHandling = () => {
+  console.log('Setting up WebSocket error recovery...');
+  
+  // Override WebSocket constructor to add error handling
+  const OriginalWebSocket = window.WebSocket;
+  window.WebSocket = function(...args) {
+    const socket = new OriginalWebSocket(...args);
+    
+    socket.addEventListener('error', (event) => {
+      console.error('WebSocket connection error:', event);
+      console.log('Attempting to recover from WebSocket error...');
+      
+      // Schedule a reconnection attempt
+      setTimeout(() => {
+        console.log('Attempting to reconnect WebSocket to:', args[0]);
+        try {
+          new OriginalWebSocket(...args);
+        } catch (e) {
+          console.error('WebSocket reconnection failed:', e);
+        }
+      }, 3000);
+    });
+    
+    return socket;
+  };
+  
+  // Add properties from the original WebSocket
+  Object.defineProperties(window.WebSocket, {
+    CONNECTING: { value: 0 },
+    OPEN: { value: 1 },
+    CLOSING: { value: 2 },
+    CLOSED: { value: 3 },
+    prototype: { value: OriginalWebSocket.prototype }
+  });
+};
+
+// Setup WebSocket error handling
+setupWebSocketErrorHandling();
 
 const startApp = () => {
   try {
@@ -66,9 +114,24 @@ const startApp = () => {
     
     console.log('React root created, rendering App component...');
     
-    // Monitor CSS loading after a short delay
-    setTimeout(monitorCssLoading, 500);
+    // Monitor CSS loading with multiple retry attempts
+    let cssMonitorAttempts = 0;
+    const maxCssMonitorAttempts = 3;
     
+    const monitorCssWithRetry = () => {
+      if (cssMonitorAttempts < maxCssMonitorAttempts) {
+        setTimeout(() => {
+          cssMonitorAttempts++;
+          console.log(`CSS monitoring attempt ${cssMonitorAttempts}/${maxCssMonitorAttempts}`);
+          monitorCssLoading();
+          monitorCssWithRetry();
+        }, 500 * cssMonitorAttempts);
+      }
+    };
+    
+    monitorCssWithRetry();
+    
+    // Render with error boundary
     root.render(
       <React.StrictMode>
         <App />
@@ -90,12 +153,13 @@ const startApp = () => {
   } catch (error) {
     console.error('Failed to initialize application:', error);
     
-    // Fallback error display
+    // Fallback error display with retry button
     document.body.innerHTML = `
       <div style="color: white; background: #333; padding: 20px; font-family: sans-serif;">
         <h1>Application Error</h1>
         <p>${error.message}</p>
         <button onclick="location.reload()">Reload</button>
+        <button onclick="localStorage.clear(); location.reload();">Clear Cache & Reload</button>
       </div>
     `;
     
@@ -103,4 +167,23 @@ const startApp = () => {
   }
 };
 
-startApp();
+// Add a small delay to ensure DOM is ready and attempt multiple starts if needed
+let startAttempts = 0;
+const maxStartAttempts = 3;
+
+const attemptStart = () => {
+  if (startAttempts < maxStartAttempts) {
+    setTimeout(() => {
+      startAttempts++;
+      console.log(`Attempt ${startAttempts}/${maxStartAttempts} to start the application`);
+      try {
+        startApp();
+      } catch (e) {
+        console.error(`Start attempt ${startAttempts} failed:`, e);
+        attemptStart();
+      }
+    }, 100 * startAttempts);
+  }
+};
+
+attemptStart();

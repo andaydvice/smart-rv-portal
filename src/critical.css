@@ -1,5 +1,5 @@
 
-/* Critical CSS for initial rendering */
+/* Essential CSS for initial rendering - cross-browser compatible */
 body, html, #root {
   visibility: visible !important;
   display: block !important;
@@ -8,9 +8,6 @@ body, html, #root {
   padding: 0;
   min-height: 100%;
   width: 100%;
-  text-size-adjust: 100%;
-  -webkit-text-size-adjust: 100%;
-  -moz-text-size-adjust: 100%;
 }
 
 /* Basic layout */
@@ -29,9 +26,10 @@ div[style*="transform"],
 [data-framer-motion-initial] {
   visibility: visible !important;
   opacity: 1 !important;
+  display: block;
 }
 
-/* Text visibility */
+/* Text visibility - without browser-specific properties */
 .text-white, 
 .text-gray-300, 
 .text-blue-400, 
@@ -41,10 +39,9 @@ div[style*="transform"],
   visibility: visible !important;
 }
 
-/* Layout components */
+/* Layout components - standard CSS */
 .column-layout {
   column-gap: 1rem;
-  -moz-column-gap: 1rem;
 }
 
 /* HeroSection specific styles */
@@ -61,4 +58,17 @@ section img {
   visibility: visible !important;
   opacity: 1 !important;
   display: block !important;
+}
+
+/* Basic form element visibility */
+input, textarea, select, button {
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* Ensure interactive elements are visible */
+[role="button"],
+[tabindex]:not([tabindex="-1"]) {
+  visibility: visible !important;
+  opacity: 1 !important;
 }

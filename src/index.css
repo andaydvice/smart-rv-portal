@@ -19,3 +19,28 @@
 
 /* Page-specific styles */
 @import './styles/pages/storage-checklist.css';
+
+/* Cross-browser compatibility fixes */
+html, body, #root {
+  visibility: visible !important;
+  display: block !important;
+  opacity: 1 !important;
+  text-size-adjust: 100%;
+}
+
+/* Fallback for browser-specific properties */
+@supports (-webkit-text-size-adjust: 100%) or (-moz-text-size-adjust: 100%) or (text-size-adjust: 100%) {
+  body {
+    -webkit-text-size-adjust: 100%;
+    -moz-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+}
+
+@supports (-webkit-column-gap: 1rem) or (-moz-column-gap: 1rem) or (column-gap: 1rem) {
+  .column-layout {
+    -webkit-column-gap: 1rem;
+    -moz-column-gap: 1rem;
+    column-gap: 1rem;
+  }
+}
