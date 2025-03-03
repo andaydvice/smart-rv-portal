@@ -78,7 +78,7 @@ export const useChecklistActions = ({
     }, 300);
   }, [saveData]);
   
-  // Handle PDF export
+  // Handle PDF export - update the type definition to accept Date | undefined
   const handleExportPDF = useCallback((
     progress: {[key: string]: boolean | string},
     startDate: Date | undefined,
