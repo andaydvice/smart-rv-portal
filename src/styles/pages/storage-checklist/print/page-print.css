@@ -12,7 +12,8 @@
   
   /* Page margins */
   @page {
-    margin: 0.5cm;
+    margin: 0.75cm;
+    size: portrait;
   }
   
   /* Page header */
@@ -25,6 +26,7 @@
     margin-bottom: 5px !important;
     border-bottom: 1px solid #000 !important;
     padding-bottom: 10px !important;
+    color: black !important;
   }
   
   /* Page footer with page numbers */
@@ -37,11 +39,23 @@
     bottom: 5px !important;
     left: 0 !important;
     right: 0 !important;
+    color: black !important;
   }
   
   /* Format checklist items to prevent page breaks within items */
   .storage-preparation-checklist .flex.items-start {
     margin-bottom: 0.8em !important;
     padding: 0.25em 0 !important;
+  }
+  
+  /* Progress bars in print - force them to be visible with high contrast */
+  .storage-preparation-checklist [role="progressbar"] {
+    height: 8px !important;
+    background-color: #e0e0e0 !important;
+    border: 1px solid #aaa !important;
+  }
+  
+  .storage-preparation-checklist [role="progressbar"] > div {
+    background-color: #000 !important;
   }
 }

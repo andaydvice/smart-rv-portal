@@ -38,7 +38,7 @@
   /* Card styling for print */
   .storage-preparation-checklist .card {
     box-shadow: none !important;
-    border: 1px solid #ddd !important;
+    border: 1px solid #000 !important;
     border-radius: 0 !important;
     background-color: white !important;
     color: black !important;
@@ -52,6 +52,7 @@
     margin-bottom: 15px !important;
     border: 1px solid #000 !important;
     background-color: white !important;
+    padding: 15px !important;
   }
   
   /* Tab panel display in print */
@@ -65,5 +66,14 @@
   /* Hide tab navigation in print */
   .storage-preparation-checklist [role="tablist"] {
     display: none !important;
+  }
+  
+  /* Override any dark backgrounds */
+  .storage-preparation-checklist .bg-\[\#080F1F\],
+  .storage-preparation-checklist .bg-\[\#091020\],
+  .storage-preparation-checklist .bg-\[\#131a2a\],
+  .storage-preparation-checklist .bg-\[\#151A22\],
+  .storage-preparation-checklist .bg-\[\#0c1219\] {
+    background-color: white !important;
   }
 }

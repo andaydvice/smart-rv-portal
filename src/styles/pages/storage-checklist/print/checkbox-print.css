@@ -20,6 +20,7 @@
     opacity: 1 !important;
     print-color-adjust: exact !important;
     -webkit-print-color-adjust: exact !important;
+    color-adjust: exact !important;
     page-break-inside: avoid !important;
     break-inside: avoid !important;
   }
@@ -80,5 +81,12 @@
     border: 1px solid black !important;
     margin-right: 8px !important;
     font-weight: bold !important;
+  }
+  
+  /* Ensure label text is black for high contrast */
+  .storage-preparation-checklist label {
+    color: black !important;
+    print-color-adjust: exact !important;
+    -webkit-print-color-adjust: exact !important;
   }
 }

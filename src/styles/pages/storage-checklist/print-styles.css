@@ -11,15 +11,25 @@
 
 /* Additional print optimization rules */
 @media print {
-  /* Ensure all checkboxes are clearly visible */
+  /* Reset all colors to ensure high contrast for printing */
   * {
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
+    color-adjust: exact !important;
+  }
+  
+  /* Force light background for all content when printing from dark mode */
+  .storage-preparation-checklist {
+    background-color: white !important;
+    color: black !important;
+    print-color-adjust: exact !important;
+    -webkit-print-color-adjust: exact !important;
   }
   
   /* Force background-colors and borders to print */
   .storage-preparation-checklist [role="checkbox"] {
     border-color: black !important;
+    background-color: white !important;
     print-color-adjust: exact !important;
     -webkit-print-color-adjust: exact !important;
   }
@@ -28,5 +38,15 @@
   .storage-preparation-checklist .checklist-item {
     page-break-inside: avoid !important;
     break-inside: avoid !important;
+  }
+  
+  /* Force all cards and sections to have white background with clear borders */
+  .storage-preparation-checklist .card,
+  .storage-preparation-checklist .bg-\[\#091020\],
+  .storage-preparation-checklist .bg-\[\#0c1219\],
+  .storage-preparation-checklist .checklist-section {
+    background-color: white !important;
+    color: black !important;
+    border: 1px solid #000 !important;
   }
 }

@@ -35,6 +35,7 @@ const Checkbox = React.forwardRef<
       }}
       {...props}
       data-print-checked={isChecked ? "true" : "false"}
+      data-print-visible="true"
     >
       <CheckboxPrimitive.Indicator
         className={cn("flex items-center justify-center text-current")}
@@ -49,6 +50,7 @@ const Checkbox = React.forwardRef<
           position: 'relative',
           zIndex: 10
         }}
+        data-print-indicator="true"
       >
         <Check className="h-4 w-4 checkbox-indicator" style={{ display: 'block', visibility: 'visible' }} />
       </CheckboxPrimitive.Indicator>
