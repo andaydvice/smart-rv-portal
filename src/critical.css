@@ -19,6 +19,9 @@ body, html, #root {
   margin: 0 auto;
   padding-left: 1rem;
   padding-right: 1rem;
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
 }
 
 .hero-section {
@@ -31,10 +34,37 @@ body, html, #root {
   opacity: 1 !important;
 }
 
+/* Critical selectors to ensure visibility */
+section, main, div, nav, header, footer {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+section.h-screen {
+  display: flex !important;
+  min-height: 100vh;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
 /* Fixed text gradient with cross-browser compatibility */
 .text-gradient {
   background: linear-gradient(to right, #5B9BD5, #4ECDC4, #2ECC71);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+}
+
+/* Force visibility for specific elements */
+.motion-div, .motion-div > div, .motion-div > * {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+img {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
 }

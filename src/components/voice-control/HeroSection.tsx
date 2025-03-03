@@ -19,21 +19,42 @@ export const HeroSection = () => {
       (backgroundImg as HTMLElement).style.visibility = 'visible';
       (backgroundImg as HTMLElement).style.opacity = '1';
     }
+    
+    // Apply these changes multiple times
+    const forceVisibility = () => {
+      const heroSection = document.querySelector('section.h-screen');
+      if (heroSection) {
+        (heroSection as HTMLElement).style.display = 'flex';
+        (heroSection as HTMLElement).style.visibility = 'visible';
+        (heroSection as HTMLElement).style.opacity = '1';
+      }
+      
+      const backgroundImg = document.querySelector('section.h-screen img');
+      if (backgroundImg) {
+        (backgroundImg as HTMLElement).style.display = 'block';
+        (backgroundImg as HTMLElement).style.visibility = 'visible';
+        (backgroundImg as HTMLElement).style.opacity = '1';
+      }
+    };
+    
+    setTimeout(forceVisibility, 100);
+    setTimeout(forceVisibility, 500);
   }, []);
 
   return (
     <section className="h-screen w-full relative overflow-hidden flex items-center justify-center" style={{display: 'flex', visibility: 'visible', opacity: 1}}>
-      <div className="absolute top-0 left-0 w-full h-full">
+      <div className="absolute top-0 left-0 w-full h-full" style={{display: 'block', visibility: 'visible', opacity: 1}}>
         <img 
           src="/lovable-uploads/ff43ed8a-b7cd-42f7-a45e-a3a706d39d07.png"
           alt="Futuristic RV interior with smart display and mountain view"
           className="w-full h-full object-cover"
           style={{ display: 'block', visibility: 'visible', opacity: 1 }}
+          loading="eager"
         />
-        <div className="absolute inset-0 bg-black/50" />
+        <div className="absolute inset-0 bg-black/50" style={{display: 'block', visibility: 'visible', opacity: 1}} />
       </div>
       
-      <div className="absolute inset-0 flex items-center justify-center">
+      <div className="absolute inset-0 flex items-center justify-center" style={{display: 'flex', visibility: 'visible', opacity: 1}}>
         <div className="text-center max-w-4xl mx-auto px-4 z-10">
           <h1 className="text-4xl md:text-6xl font-bold mb-6 p-4 bg-black/30 backdrop-blur-sm rounded-lg">
             Voice Control for Smart RVs

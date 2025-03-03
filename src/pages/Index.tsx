@@ -28,13 +28,23 @@ const Index = () => {
       });
     };
     
-    // Run immediately
+    // Run immediately and multiple times to catch any late-rendering elements
     forceVisibility();
+    setTimeout(forceVisibility, 100);
+    setTimeout(forceVisibility, 500);
+    setTimeout(forceVisibility, 1000);
     
-    // Also run after a slight delay to catch any late-rendering elements
-    const timeout = setTimeout(forceVisibility, 100);
+    // Additional check for body and root visibility
+    document.body.style.display = 'block';
+    document.body.style.visibility = 'visible';
+    document.body.style.opacity = '1';
     
-    return () => clearTimeout(timeout);
+    const root = document.getElementById('root');
+    if (root) {
+      root.style.display = 'block';
+      root.style.visibility = 'visible';
+      root.style.opacity = '1';
+    }
   }, []);
 
   return (
@@ -44,6 +54,7 @@ const Index = () => {
         animate={{ opacity: 1 }}
         transition={{ duration: 0.3 }}
         className="min-h-screen bg-[#080F1F]"
+        style={{ display: 'block', visibility: 'visible', opacity: 1 }}
       >
         <Navbar />
         <HeroSection />
