@@ -16,3 +16,18 @@
 
 /* Page-specific styles */
 @import './styles/pages/storage-checklist.css';
+
+/* Critical render path styles */
+body, html, #root {
+  visibility: visible !important;
+  display: block !important;
+  opacity: 1 !important;
+}
+
+.motion-div, 
+[data-framer-motion-initial],
+[data-radix-tabs-content] {
+  visibility: visible !important;
+  display: block !important;
+  opacity: 1 !important;
+}

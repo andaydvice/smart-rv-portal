@@ -18,8 +18,8 @@ const TabsContainer: React.FC<TabsContainerProps> = ({
 }) => {
   // On component mount/unmount, force a save
   useEffect(() => {
+    console.log("TabsContainer mounted - initial save");
     if (onSaveTab) {
-      console.log("TabsContainer mounted - initial save");
       onSaveTab();
     }
     
@@ -50,8 +50,8 @@ const TabsContainer: React.FC<TabsContainerProps> = ({
     window.addEventListener('afterprint', handleAfterPrint);
     
     return () => {
+      console.log("TabsContainer unmounting - final save");
       if (onSaveTab) {
-        console.log("TabsContainer unmounting - final save");
         onSaveTab();
       }
       window.removeEventListener('beforeprint', handleBeforePrint);
@@ -59,11 +59,22 @@ const TabsContainer: React.FC<TabsContainerProps> = ({
     };
   }, [onSaveTab, activeTab]);
 
+  // Force all tab content to be visible for debugging
+  useEffect(() => {
+    console.log("Ensuring tab content is visible");
+    document.querySelectorAll('[role="tabpanel"]').forEach(panel => {
+      const htmlPanel = panel as HTMLElement;
+      htmlPanel.style.display = 'block';
+      htmlPanel.style.visibility = 'visible';
+    });
+  }, []);
+
   return (
     <Tabs 
       value={activeTab}
       onValueChange={onTabChange}
       className="w-full"
+      defaultValue={activeTab}
     >
       <TabsList 
         className="grid grid-cols-5 lg:grid-cols-10 h-auto bg-[#151A22] mb-6 border-b border-gray-700 rounded-none no-print"
