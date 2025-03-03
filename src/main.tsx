@@ -62,36 +62,35 @@ const setupWebSocketErrorHandling = () => {
   // Store original WebSocket constructor
   const OriginalWebSocket = window.WebSocket;
   
-  // Create a simple function that wraps WebSocket creation with error handling
-  function createEnhancedWebSocket(url: string | URL, protocols?: string | string[]) {
-    try {
-      const ws = new OriginalWebSocket(url, protocols);
+  // Create a wrapper function that adds error handling
+  function EnhancedWebSocket(url: string | URL, protocols?: string | string[]) {
+    // Create the actual WebSocket instance using the original constructor
+    const ws = new OriginalWebSocket(url, protocols);
+    
+    // Add error handling to this instance
+    ws.addEventListener('error', (event) => {
+      console.error('WebSocket connection error:', event);
+      console.log('Attempting to recover from WebSocket error...');
       
-      ws.addEventListener('error', (event) => {
-        console.error('WebSocket connection error:', event);
-        console.log('Attempting to recover from WebSocket error...');
-        
-        // Schedule a reconnection attempt
-        setTimeout(() => {
-          console.log('Attempting to reconnect WebSocket to:', url);
-          try {
-            new OriginalWebSocket(url instanceof URL ? url.toString() : url, protocols);
-          } catch (e) {
-            console.error('WebSocket reconnection failed:', e);
-          }
-        }, 3000);
-      });
-      
-      return ws;
-    } catch (error) {
-      console.error('Error creating WebSocket:', error);
-      return new OriginalWebSocket('wss://echo.websocket.org'); // Fallback connection
-    }
+      // Schedule a reconnection attempt
+      setTimeout(() => {
+        console.log('Attempting to reconnect WebSocket to:', url);
+        try {
+          new OriginalWebSocket(url instanceof URL ? url.toString() : url, protocols);
+        } catch (e) {
+          console.error('WebSocket reconnection failed:', e);
+        }
+      }, 3000);
+    });
+    
+    return ws;
   }
   
-  // Replace global WebSocket with our enhanced version, with type assertion
-  // This approach avoids trying to modify read-only static properties
-  window.WebSocket = createEnhancedWebSocket as unknown as typeof WebSocket;
+  // Make the enhanced constructor properly inherit from original
+  EnhancedWebSocket.prototype = OriginalWebSocket.prototype;
+  
+  // Type assertion to satisfy TypeScript
+  window.WebSocket = EnhancedWebSocket as unknown as typeof WebSocket;
 };
 
 // Setup WebSocket error handling
@@ -141,17 +140,6 @@ const startApp = () => {
     );
 
     console.log('App component rendered successfully');
-
-    if (import.meta.hot) {
-      import.meta.hot.accept('./App', () => {
-        console.log('HMR update detected, re-rendering App component...');
-        root.render(
-          <React.StrictMode>
-            <App />
-          </React.StrictMode>
-        );
-      });
-    }
   } catch (error) {
     console.error('Failed to initialize application:', error);
     
@@ -164,28 +152,17 @@ const startApp = () => {
         <button onclick="localStorage.clear(); location.reload();">Clear Cache & Reload</button>
       </div>
     `;
-    
-    throw error;
   }
 };
 
-// Add a small delay to ensure DOM is ready and attempt multiple starts if needed
-let startAttempts = 0;
-const maxStartAttempts = 3;
+// Attempt to start the application immediately
+console.log('Starting application immediately...');
+startApp();
 
-const attemptStart = () => {
-  if (startAttempts < maxStartAttempts) {
-    setTimeout(() => {
-      startAttempts++;
-      console.log(`Attempt ${startAttempts}/${maxStartAttempts} to start the application`);
-      try {
-        startApp();
-      } catch (e) {
-        console.error(`Start attempt ${startAttempts} failed:`, e);
-        attemptStart();
-      }
-    }, 100 * startAttempts);
+// Set a fallback timer in case the application doesn't start
+setTimeout(() => {
+  if (document.body.innerHTML.includes('Loading application...')) {
+    console.log('Application may have failed to start, attempting recovery...');
+    startApp();
   }
-};
-
-attemptStart();
+}, 2000);

@@ -50,9 +50,18 @@ export const HeroSection = () => {
         }
       }
     }, 1000);
+
+    // Explicitly set loaded to true after timeout to prevent perpetual loading
+    const fallbackTimer = setTimeout(() => {
+      if (!imageLoaded) {
+        console.log("Using fallback for hero image");
+        setImageLoaded(true);
+      }
+    }, 3000);
     
     return () => {
       console.log("HeroSection unmounted");
+      clearTimeout(fallbackTimer);
     };
   }, [imageLoaded, retryCount]);
 

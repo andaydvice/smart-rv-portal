@@ -36,6 +36,12 @@ function App() {
     // Debug visibility immediately and then again after a short delay
     ensureVisibility();
     
+    // Force set initialLoadAttempted to true to remove loading indicator
+    setTimeout(() => {
+      setInitialLoadAttempted(true);
+      console.log('Initial load attempted set to true');
+    }, 500);
+    
     // Schedule multiple visibility checks with increasing delays
     const timeoutIds = [
       setTimeout(() => {
@@ -54,7 +60,6 @@ function App() {
         console.log('Running visibility debugger (third pass)');
         ensureVisibility();
         debugAnimations();
-        setInitialLoadAttempted(true);
       }, 1500),
       
       setTimeout(() => {
@@ -112,24 +117,6 @@ function App() {
 
     window.addEventListener('online', handleOnline);
     window.addEventListener('offline', handleOffline);
-    
-    // Check WebSocket connectivity periodically
-    const wsCheckInterval = setInterval(() => {
-      try {
-        const testWs = new WebSocket('wss://echo.websocket.org');
-        testWs.onopen = () => {
-          console.log('WebSocket connectivity check successful');
-          testWs.close();
-        };
-        testWs.onerror = () => {
-          console.warn('WebSocket connectivity check failed');
-        };
-      } catch (err) {
-        console.error('WebSocket test failed:', err);
-      }
-    }, 30000);
-    
-    timeoutIds.push(wsCheckInterval);
     
     return () => {
       console.log('App component unmounting - cleaning up');
