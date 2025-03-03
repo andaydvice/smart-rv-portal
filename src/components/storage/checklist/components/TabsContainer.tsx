@@ -1,6 +1,6 @@
 
 import React, { useEffect } from 'react';
-import { Tabs, TabsContent, TabsList } from "@/components/ui/tabs";
+import { Tabs, TabsList } from "@/components/ui/tabs";
 import ChecklistTabTrigger from "../ChecklistTabTrigger";
 
 interface TabsContainerProps {
