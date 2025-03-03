@@ -22,7 +22,7 @@ export interface TabContentProps {
   handleCheckboxChange: (id: string, checked: boolean) => void;
 }
 
-// Add the ChecklistContentProps interface that was missing
+// Updated ChecklistContentProps interface to ensure proper Date typing
 export interface ChecklistContentProps {
   progress: {[key: string]: boolean | string};
   startDate: Date | undefined;

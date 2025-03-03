@@ -4,6 +4,7 @@ import { useToast } from "@/components/ui/use-toast";
 import { exportChecklistToPDF } from './utils/pdfExport';
 import { checklistData } from './utils/checklistData';
 import { ChecklistNotes } from './hooks/types';
+import { ensureValidDate } from './utils/dateUtils';
 
 interface ChecklistActionsProps {
   saveData: (showToast?: boolean) => void;
@@ -90,12 +91,12 @@ export const useChecklistActions = ({
     // First, save the current progress
     saveData(false);
     
-    // Then export to PDF - the dates should already be validated by the caller
+    // Export to PDF with valid date objects
     try {
       exportChecklistToPDF(
         progress,
-        startDate, // Already validated as Date | undefined by the caller
-        endDate,   // Already validated as Date | undefined by the caller
+        startDate,
+        endDate,
         notes,
         completionPercentage,
         checklistData

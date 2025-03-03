@@ -8,6 +8,7 @@ import ChecklistLoading from './checklist/ChecklistLoading';
 import ResetDialog from './checklist/ResetDialog';
 import useCompletionStats from './checklist/hooks/useCompletionStats';
 import { useChecklistActions } from './checklist/ChecklistActions';
+import { ensureValidDate } from './checklist/utils/dateUtils';
 
 // Memoize the component to prevent unnecessary re-renders
 const StoragePreparationChecklist: React.FC = memo(() => {
@@ -94,30 +95,6 @@ const StoragePreparationChecklist: React.FC = memo(() => {
     handlePrint();
   }, [handlePrint, progress]);
   
-  // Helper function to ensure date values are valid Date objects before passing to handleExportPDF
-  const ensureValidDate = useCallback((dateValue: Date | string | null | undefined): Date | undefined => {
-    if (!dateValue) return undefined;
-    
-    // If it's already a valid Date object
-    if (dateValue instanceof Date && !isNaN(dateValue.getTime())) {
-      return dateValue;
-    }
-    
-    // Try to convert string to Date
-    if (typeof dateValue === 'string') {
-      try {
-        const parsedDate = new Date(dateValue);
-        if (!isNaN(parsedDate.getTime())) {
-          return parsedDate;
-        }
-      } catch (error) {
-        console.error("Invalid date string:", dateValue);
-      }
-    }
-    
-    return undefined;
-  }, []);
-  
   // Enhanced PDF export handler with proper type safety - this is where the error was occurring
   const enhancedExportPDFHandler = useCallback(() => {
     // Convert both startDate and endDate to valid Date objects or undefined
@@ -132,7 +109,7 @@ const StoragePreparationChecklist: React.FC = memo(() => {
       notes,
       completionStats.completionPercentage
     );
-  }, [progress, startDate, endDate, notes, completionStats.completionPercentage, handleExportPDF, ensureValidDate]);
+  }, [progress, startDate, endDate, notes, completionStats.completionPercentage, handleExportPDF]);
   
   // Auto-save on first load to ensure data is properly initialized
   useEffect(() => {
@@ -155,6 +132,10 @@ const StoragePreparationChecklist: React.FC = memo(() => {
 
   console.log("StoragePreparationChecklist - Rendering main content");
   
+  // Ensure valid dates for all components that expect Date objects
+  const safeStartDate = ensureValidDate(startDate);
+  const safeEndDate = ensureValidDate(endDate);
+  
   return (
     <div className="min-h-screen bg-[#080F1F] py-12 storage-preparation-checklist">
       <div className="container mx-auto px-4 max-w-5xl">
@@ -173,8 +154,8 @@ const StoragePreparationChecklist: React.FC = memo(() => {
           <CardContent className="pt-6">
             <ChecklistContent 
               progress={progress}
-              startDate={typeof startDate === 'string' ? ensureValidDate(startDate) : startDate}
-              endDate={typeof endDate === 'string' ? ensureValidDate(endDate) : endDate}
+              startDate={safeStartDate}
+              endDate={safeEndDate}
               setStartDate={setStartDate}
               setEndDate={setEndDate}
               notes={notes}
