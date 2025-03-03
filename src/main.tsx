@@ -6,7 +6,7 @@ import './index.css';
 
 console.log('Starting application...');
 
-// Force document visibility
+// Force document visibility immediately
 document.documentElement.style.visibility = 'visible';
 document.documentElement.style.display = 'block';
 document.documentElement.style.opacity = '1';
@@ -14,7 +14,14 @@ document.body.style.visibility = 'visible';
 document.body.style.display = 'block';
 document.body.style.opacity = '1';
 
-// Simplified startup without WebSocket connections
+// Remove loading indicator immediately
+const loadingIndicator = document.querySelector('.app-loading');
+if (loadingIndicator && loadingIndicator.parentNode) {
+  console.log('Removing loading indicator immediately');
+  loadingIndicator.parentNode.removeChild(loadingIndicator);
+}
+
+// Render the app
 const rootElement = document.getElementById('root');
 
 if (rootElement) {
@@ -32,12 +39,6 @@ if (rootElement) {
     </React.StrictMode>
   );
   
-  // Remove loading indicator
-  const loadingIndicator = document.querySelector('.app-loading');
-  if (loadingIndicator && loadingIndicator.parentNode) {
-    loadingIndicator.parentNode.removeChild(loadingIndicator);
-  }
-  
   console.log('Application rendered successfully');
 }
 
@@ -48,4 +49,4 @@ setTimeout(() => {
     loadingElement.parentNode.removeChild(loadingElement);
     console.log('Forced removal of loading indicator');
   }
-}, 2000);
+}, 500);

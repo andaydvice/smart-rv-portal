@@ -13,6 +13,8 @@ html, body, #root {
   min-height: 100vh;
   width: 100%;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background-color: #080F1F;
+  color: #f5f5f5;
 }
 
 /* Basic browser reset */
@@ -42,4 +44,48 @@ img {
   max-width: 100%;
   height: auto;
   display: block;
+}
+
+/* Fix navbar styling */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: rgba(8, 15, 31, 0.8);
+  backdrop-filter: blur(10px);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  width: 100%;
+}
+
+.navbar-links {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.navbar-links a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.navbar-container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Fix button styling */
+button.bg-white {
+  background-color: #fff !important;
+  color: #000 !important;
+}
+
+button.border-white {
+  border-color: #fff !important;
 }

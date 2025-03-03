@@ -1,22 +1,27 @@
 
-// This file exists for backward compatibility and to avoid breaking changes
-// It re-exports all the navigation link components from their new location
-import {
-  NavbarLinks as MainNavbarLinks,
-  SmartFeaturesLinks,
-  CoreSystemsLinks,
-  VehicleSelectionLinks,
-  RVToolsLinks,
-  SupportLinks,
-  CustomerSupportLinks
-} from './navigation/links';
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-export default MainNavbarLinks;
-export {
-  SmartFeaturesLinks,
-  CoreSystemsLinks,
-  VehicleSelectionLinks,
-  RVToolsLinks,
-  SupportLinks,
-  CustomerSupportLinks
+const NavbarLinks = () => {
+  return (
+    <>
+      <Link to="/models" className="text-white hover:text-blue-300 transition-colors">
+        Models
+      </Link>
+      <Link to="/features" className="text-white hover:text-blue-300 transition-colors">
+        Features
+      </Link>
+      <Link to="/technology" className="text-white hover:text-blue-300 transition-colors">
+        Technology
+      </Link>
+      <Link to="/blog" className="text-white hover:text-blue-300 transition-colors">
+        Blog
+      </Link>
+      <Link to="/calculators" className="text-white hover:text-blue-300 transition-colors">
+        Tools
+      </Link>
+    </>
+  );
 };
+
+export default NavbarLinks;
