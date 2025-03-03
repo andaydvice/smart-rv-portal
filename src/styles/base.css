@@ -26,16 +26,19 @@
     visibility: visible !important;
     display: block !important;
     opacity: 1 !important;
+    background-color: #080F1F !important;
+    color: #ffffff !important;
   }
 
   #root, html {
     visibility: visible !important;
     display: block !important;
     opacity: 1 !important;
+    background-color: #080F1F !important;
   }
 
   .glass-card {
-    @apply bg-white/80 backdrop-blur-lg border border-white/20 shadow-lg;
+    @apply bg-white/10 backdrop-blur-lg border border-white/20 shadow-lg;
   }
 
   .hover-scale {
@@ -72,4 +75,14 @@
     opacity: 1 !important;
     visibility: visible !important;
   }
+}
+
+/* Brand color variables */
+:root {
+  --color-connectivity-accent: #5B9BD5;
+  --color-connectivity-accent-hover: #4B8FE3;
+  --color-connectivity-bg: #080F1F;
+  --color-connectivity-darkBg: #151A22;
+  --color-connectivity-text: #FFFFFF;
+  --color-connectivity-text-secondary: #E2E8FF;
 }

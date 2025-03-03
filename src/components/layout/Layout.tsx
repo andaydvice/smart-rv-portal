@@ -1,6 +1,8 @@
+
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import Footer from "../Footer";
+import { ensureVisibility } from "@/utils/visibility";
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -18,9 +20,20 @@ interface LayoutProps {
 }
 
 const Layout = ({ children }: LayoutProps) => {
-  console.log('Rendering Layout component');
+  useEffect(() => {
+    // Ensure visibility of all critical elements on mount
+    ensureVisibility();
+    
+    // Add additional check after a short delay to catch any late-rendering elements
+    const timeoutId = setTimeout(() => {
+      ensureVisibility();
+    }, 500);
+    
+    return () => clearTimeout(timeoutId);
+  }, []);
+  
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col bg-[#080F1F]">
       <ScrollToTop />
       {children}
       <Footer />

@@ -1,21 +1,10 @@
 
 /* Critical CSS for initial render */
 @import './critical.css';
-
-/* Base styles */
-html, body, #root {
-  visibility: visible !important;
-  display: block !important;
-  opacity: 1 !important;
-  text-size-adjust: 100%;
-  margin: 0;
-  padding: 0;
-  min-height: 100vh;
-  width: 100%;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  background-color: #080F1F;
-  color: #f5f5f5;
-}
+@import './styles/base.css';
+@import './styles/animations.css';
+@import './styles/layout.css';
+@import './styles/forms.css';
 
 /* Basic browser reset */
 *, *::before, *::after {
@@ -35,7 +24,7 @@ select {
 
 /* Simple and clean focus styles */
 :focus {
-  outline: 2px solid #4299e1;
+  outline: 2px solid #5B9BD5;
   outline-offset: 2px;
 }
 
@@ -56,7 +45,7 @@ img {
   --color-text-secondary: #E2E8FF;
 }
 
-/* Fix navbar styling */
+/* Fixed navbar styling */
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -97,16 +86,6 @@ img {
   padding-top: 80px;
   min-height: 100vh;
   background-color: var(--color-background);
-}
-
-/* Fix button styling */
-button.bg-white {
-  background-color: #fff !important;
-  color: #000 !important;
-}
-
-button.border-white {
-  border-color: #fff !important;
 }
 
 /* Additional gradient styles */

@@ -1,6 +1,6 @@
 
 /**
- * Simplified utility to ensure all critical elements are visible
+ * Comprehensive utility to ensure all critical elements are visible
  */
 export const ensureVisibility = () => {
   // Target critical elements that might be hidden
@@ -10,12 +10,20 @@ export const ensureVisibility = () => {
     '#root', 
     'section',
     '.hero-section',
-    'h1',
+    'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
     'img',
     'button',
     'a',
     'p',
-    'div'
+    'div',
+    'nav',
+    'form',
+    'input',
+    'textarea',
+    'header',
+    'footer',
+    '[data-framer-motion-initial="true"]',
+    '[data-motion]'
   ];
   
   console.log('Starting visibility enforcement');
@@ -35,14 +43,19 @@ export const ensureVisibility = () => {
     }
   });
   
-  // Force all elements to be visible
-  document.querySelectorAll('*').forEach(el => {
+  // Specifically target motion elements
+  document.querySelectorAll('[style*="opacity"]').forEach(el => {
     if (el instanceof HTMLElement) {
-      if (el.style.visibility === 'hidden' || el.style.display === 'none' || el.style.opacity === '0') {
-        el.style.visibility = 'visible';
-        el.style.display = 'block';
-        el.style.opacity = '1';
-      }
+      el.style.opacity = '1';
+      el.style.visibility = 'visible';
+    }
+  });
+  
+  // Fix button colors
+  document.querySelectorAll('button.bg-white').forEach(el => {
+    if (el instanceof HTMLElement) {
+      el.style.backgroundColor = '#fff';
+      el.style.color = '#000';
     }
   });
   

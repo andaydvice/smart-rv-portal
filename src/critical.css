@@ -10,7 +10,7 @@ body, html, #root {
   width: 100%;
   background-color: #080F1F;
   color: #f5f5f5;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
 
 section, h1, h2, h3, h4, h5, p, button, a, img, div {
@@ -29,4 +29,31 @@ img {
   align-items: center;
   justify-content: center;
   position: relative;
+}
+
+/* Fixed container */
+.container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+/* Fixed Button Styling */
+button.bg-white {
+  background-color: #fff !important;
+  color: #000 !important;
+}
+
+button.border-white {
+  border-color: #fff !important;
+}
+
+/* Fixed text gradient */
+.text-gradient {
+  background: linear-gradient(to right, #5B9BD5, #4ECDC4, #2ECC71);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
