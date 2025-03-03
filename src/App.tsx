@@ -12,15 +12,19 @@ const queryClient = new QueryClient({
       staleTime: 1000 * 60 * 5, // 5 minutes
       refetchOnWindowFocus: false,
       retry: 1,
-      // Handle errors globally to prevent unhandled promise rejections
-      onError: (error) => {
-        console.error('Query error:', error);
+      // In newer versions of react-query, onError is moved to meta
+      meta: {
+        onError: (error: Error) => {
+          console.error('Query error:', error);
+        }
       }
     },
     mutations: {
-      // Handle mutation errors globally
-      onError: (error) => {
-        console.error('Mutation error:', error);
+      // In newer versions of react-query, onError is moved to meta
+      meta: {
+        onError: (error: Error) => {
+          console.error('Mutation error:', error);
+        }
       }
     }
   },
