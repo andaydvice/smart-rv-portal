@@ -14,6 +14,17 @@ export const useDateHandlers = (
 ) => {
   // Set start date with optimized save
   const setStartDateAndSave = useCallback((date: Date | undefined) => {
+    // Ensure we have a valid date or undefined
+    if (typeof date === 'string') {
+      // If somehow we received a string, try to convert it to a Date
+      try {
+        date = new Date(date);
+      } catch (error) {
+        console.error("Invalid date string provided:", date);
+        date = undefined;
+      }
+    }
+    
     if (date?.getTime() === startDateRef.current?.getTime()) return;
     
     setStartDate(date);
@@ -32,6 +43,17 @@ export const useDateHandlers = (
 
   // Set end date with optimized save
   const setEndDateAndSave = useCallback((date: Date | undefined) => {
+    // Ensure we have a valid date or undefined
+    if (typeof date === 'string') {
+      // If somehow we received a string, try to convert it to a Date
+      try {
+        date = new Date(date);
+      } catch (error) {
+        console.error("Invalid date string provided:", date);
+        date = undefined;
+      }
+    }
+    
     if (date?.getTime() === endDateRef.current?.getTime()) return;
     
     setEndDate(date);
