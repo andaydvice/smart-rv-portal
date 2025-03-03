@@ -11,10 +11,18 @@ export const HeroSection = () => {
       (heroSection as HTMLElement).style.visibility = 'visible';
       (heroSection as HTMLElement).style.opacity = '1';
     }
+    
+    // Force visibility of the background image
+    const backgroundImg = document.querySelector('section.h-screen img');
+    if (backgroundImg) {
+      (backgroundImg as HTMLElement).style.display = 'block';
+      (backgroundImg as HTMLElement).style.visibility = 'visible';
+      (backgroundImg as HTMLElement).style.opacity = '1';
+    }
   }, []);
 
   return (
-    <section className="h-screen w-full relative overflow-hidden flex items-center justify-center">
+    <section className="h-screen w-full relative overflow-hidden flex items-center justify-center" style={{display: 'flex', visibility: 'visible', opacity: 1}}>
       <div className="absolute top-0 left-0 w-full h-full">
         <img 
           src="/lovable-uploads/ff43ed8a-b7cd-42f7-a45e-a3a706d39d07.png"

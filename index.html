@@ -34,6 +34,9 @@
       #root {
         min-height: 100vh;
         width: 100%;
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
       }
       .app-loading {
         position: fixed;
@@ -56,15 +59,17 @@
       }
       .hero-section {
         min-height: 100vh;
-        display: flex;
+        display: flex !important;
         align-items: center;
         justify-content: center;
         position: relative;
+        visibility: visible !important;
+        opacity: 1 !important;
       }
     </style>
   </head>
   <body>
-    <div id="root">
+    <div id="root" style="display: block; visibility: visible; opacity: 1;">
       <!-- Simple loading indicator -->
       <div class="app-loading">
         Loading application...

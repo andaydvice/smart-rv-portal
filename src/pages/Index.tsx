@@ -13,15 +13,26 @@ import Layout from "@/components/layout/Layout";
 const Index = () => {
   // Ensure we start at the top of the page
   useEffect(() => {
+    // Force scroll to top
     window.scrollTo(0, 0);
     
-    // Add additional check for visibility issues
-    const timeout = setTimeout(() => {
-      const heroElement = document.querySelector('.hero-section');
-      if (heroElement) {
-        heroElement.scrollIntoView({ behavior: 'auto', block: 'start' });
-      }
-    }, 100);
+    // Force visibility of hero section elements
+    const forceVisibility = () => {
+      const heroElements = document.querySelectorAll('.hero-section, section.h-screen');
+      heroElements.forEach(element => {
+        if (element instanceof HTMLElement) {
+          element.style.display = 'flex';
+          element.style.visibility = 'visible';
+          element.style.opacity = '1';
+        }
+      });
+    };
+    
+    // Run immediately
+    forceVisibility();
+    
+    // Also run after a slight delay to catch any late-rendering elements
+    const timeout = setTimeout(forceVisibility, 100);
     
     return () => clearTimeout(timeout);
   }, []);
@@ -29,7 +40,7 @@ const Index = () => {
   return (
     <Layout>
       <motion.div 
-        initial={{ opacity: 0 }}
+        initial={{ opacity: 1 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.3 }}
         className="min-h-screen bg-[#080F1F]"

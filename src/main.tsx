@@ -10,6 +10,11 @@ console.log('Starting application...');
 const rootElement = document.getElementById('root');
 
 if (rootElement) {
+  // Ensure visibility of root element
+  rootElement.style.display = 'block';
+  rootElement.style.visibility = 'visible';
+  rootElement.style.opacity = '1';
+  
   // Remove loading indicator if present
   const loadingElement = document.querySelector('.app-loading');
   if (loadingElement && loadingElement.parentNode) {
@@ -32,4 +37,16 @@ if (rootElement) {
   );
   
   console.log('Application rendered successfully');
+
+  // Force visibility check after render
+  setTimeout(() => {
+    const heroElements = document.querySelectorAll('.hero-section, section.h-screen');
+    heroElements.forEach(element => {
+      if (element instanceof HTMLElement) {
+        element.style.display = 'flex';
+        element.style.visibility = 'visible';
+        element.style.opacity = '1';
+      }
+    });
+  }, 500);
 }

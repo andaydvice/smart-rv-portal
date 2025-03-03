@@ -1,25 +1,21 @@
 
 /* Placeholder Styles with cross-browser compatibility */
-input::-webkit-input-placeholder,
-textarea::-webkit-input-placeholder {
+::-webkit-input-placeholder {
   color: #666666;
   opacity: 1;
 }
 
-input::-moz-placeholder,
-textarea::-moz-placeholder {
+::-moz-placeholder {
   color: #666666;
   opacity: 1;
 }
 
-input:-ms-input-placeholder,
-textarea:-ms-input-placeholder {
+:-ms-input-placeholder {
   color: #666666;
   opacity: 1;
 }
 
-input::placeholder,
-textarea::placeholder {
+::placeholder {
   color: #666666;
   opacity: 1;
 }
@@ -64,8 +60,7 @@ select.dark-input {
 
 /* Fullscreen fixes */
 :fullscreen,
-:-webkit-full-screen,
-:-moz-full-screen {
+::backdrop {
   background-color: #080F1F;
   width: 100vw;
   height: 100vh;
