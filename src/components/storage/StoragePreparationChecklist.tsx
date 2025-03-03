@@ -9,13 +9,9 @@ import ResetDialog from './checklist/ResetDialog';
 import useCompletionStats from './checklist/hooks/useCompletionStats';
 import { useChecklistActions } from './checklist/ChecklistActions';
 
-// Add debug counters for render tracking
-let renderCount = 0;
-
 // Memoize the component to prevent unnecessary re-renders
 const StoragePreparationChecklist: React.FC = memo(() => {
-  const renderIndex = ++renderCount;
-  console.log(`StoragePreparationChecklist rendering #${renderIndex}`);
+  console.log('StoragePreparationChecklist rendering');
   
   const [resetDialogOpen, setResetDialogOpen] = useState(false);
   
@@ -57,6 +53,7 @@ const StoragePreparationChecklist: React.FC = memo(() => {
   useEffect(() => {
     if (isLoaded) {
       console.log("StoragePreparationChecklist - Data loaded, initializing auto-save");
+      
       // Small delay to ensure all data is loaded
       const timer = setTimeout(() => {
         saveData(false);
@@ -74,30 +71,9 @@ const StoragePreparationChecklist: React.FC = memo(() => {
   console.log("StoragePreparationChecklist - Rendering main content");
   
   return (
-    <div 
-      className="min-h-screen bg-[#080F1F] py-12 storage-preparation-checklist"
-      style={{ 
-        visibility: 'visible', 
-        display: 'block', 
-        opacity: 1 
-      }}
-    >
-      <div 
-        className="container mx-auto px-4 max-w-5xl"
-        style={{ 
-          visibility: 'visible', 
-          display: 'block', 
-          opacity: 1 
-        }}
-      >
-        <Card 
-          className="border-gray-700 bg-[#091020] shadow-xl overflow-hidden"
-          style={{ 
-            visibility: 'visible', 
-            display: 'block', 
-            opacity: 1 
-          }}
-        >
+    <div className="min-h-screen bg-[#080F1F] py-12 storage-preparation-checklist">
+      <div className="container mx-auto px-4 max-w-5xl">
+        <Card className="border-gray-700 bg-[#091020] shadow-xl overflow-hidden">
           <ChecklistHeader 
             completionPercentage={completionStats.completionPercentage}
             lastSavedAt={lastSavedAt}
@@ -108,14 +84,7 @@ const StoragePreparationChecklist: React.FC = memo(() => {
             isSaving={isSaving}
           />
           
-          <CardContent 
-            className="pt-6"
-            style={{ 
-              visibility: 'visible', 
-              display: 'block', 
-              opacity: 1 
-            }}
-          >
+          <CardContent className="pt-6">
             <ChecklistContent 
               progress={progress}
               startDate={startDate}

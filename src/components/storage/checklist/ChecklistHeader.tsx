@@ -24,15 +24,12 @@ const ChecklistHeader: React.FC<ChecklistHeaderProps> = ({
   onPrint,
   isSaving = false
 }) => {
-  console.log(`ChecklistHeader rendering with completion: ${completionPercentage}%`);
-  
-  // Force a valid number for percentage
+  // Sanitize percentage value to ensure it's a valid number between 0-100
   const safePercentage = typeof completionPercentage === 'number' && !isNaN(completionPercentage)
     ? Math.max(0, Math.min(completionPercentage, 100))
     : 0;
     
-  // Log the actual percentage we're using for rendering
-  console.log(`ChecklistHeader using safe percentage: ${safePercentage}%`);
+  console.log(`ChecklistHeader rendering with sanitized percentage: ${safePercentage}%`);
   
   return (
     <CardHeader className="p-6 border-b border-gray-700">
@@ -43,21 +40,18 @@ const ChecklistHeader: React.FC<ChecklistHeaderProps> = ({
         </div>
         
         <div className="flex items-center space-x-2">
-          <div className="flex-1" style={{ position: 'relative', width: '100%' }}>
+          <div className="flex-1">
             <div className="flex justify-between text-sm mb-1">
               <span className="text-[#E2E8FF]">Completion: {safePercentage}%</span>
               {lastSavedAt && (
                 <span className="text-gray-400 text-xs">{getLastSavedMessage()}</span>
               )}
             </div>
-            <div className="progress-container" style={{ position: 'relative', width: '100%', height: '8px' }}>
-              <Progress 
-                value={safePercentage} 
-                className="h-2 bg-gray-700" 
-                indicatorClassName="bg-[#60A5FA]" 
-                style={{ height: '8px' }}
-              />
-            </div>
+            <Progress 
+              value={safePercentage} 
+              className="h-2 bg-gray-700" 
+              indicatorClassName="bg-[#60A5FA]" 
+            />
           </div>
         </div>
         
@@ -67,7 +61,6 @@ const ChecklistHeader: React.FC<ChecklistHeaderProps> = ({
             className="bg-[#151A22] border-gray-700 text-white hover:bg-[#1d2532] hover:text-white"
             onClick={onSave}
             disabled={isSaving}
-            style={{ visibility: 'visible', display: 'inline-flex' }}
           >
             {isSaving ? (
               <>
@@ -87,7 +80,6 @@ const ChecklistHeader: React.FC<ChecklistHeaderProps> = ({
             className="bg-[#151A22] border-gray-700 text-white hover:bg-[#1d2532] hover:text-white"
             onClick={onPrint}
             disabled={isSaving}
-            style={{ visibility: 'visible', display: 'inline-flex' }}
           >
             <Printer className="mr-2 h-4 w-4" />
             Print Checklist
@@ -98,7 +90,6 @@ const ChecklistHeader: React.FC<ChecklistHeaderProps> = ({
             className="bg-[#151A22] border-gray-700 text-white hover:bg-[#1d2532] hover:text-white hover:border-red-500"
             onClick={onReset}
             disabled={isSaving}
-            style={{ visibility: 'visible', display: 'inline-flex' }}
           >
             <RotateCcw className="mr-2 h-4 w-4" />
             Reset

@@ -13,13 +13,15 @@ const StoragePreparationChecklistPage: React.FC = () => {
     // Force scroll to top on page load
     window.scrollTo(0, 0);
     
-    // Ensure all root elements are visible
+    // Ensure all UI elements are fully visible
     document.documentElement.style.visibility = 'visible';
     document.body.style.visibility = 'visible';
     
-    // Preload the hero image
-    const heroImage = new Image();
-    heroImage.src = "/lovable-uploads/8d977391-dd15-4260-8535-839f728126c6.png";
+    // Force any progress indicators to update immediately
+    const progressElements = document.querySelectorAll('[role="progressbar"]');
+    progressElements.forEach(elem => {
+      elem.setAttribute('aria-valuenow', elem.getAttribute('aria-valuenow') || '0');
+    });
     
     // Add event logging
     console.log("Page fully initialized");
@@ -31,27 +33,13 @@ const StoragePreparationChecklistPage: React.FC = () => {
 
   return (
     <Layout>
-      <div 
-        className="storage-preparation-checklist bg-[#080F1F] min-h-screen"
-        style={{ 
-          visibility: 'visible', 
-          display: 'block',
-          opacity: 1
-        }}
-      >
+      <div className="storage-preparation-checklist bg-[#080F1F] min-h-screen">
         <Navbar />
-        <div 
-          className="pt-20" 
-          style={{ 
-            visibility: 'visible', 
-            display: 'block',
-            opacity: 1
-          }}
-        >
-          <div id="hero-container" style={{ visibility: 'visible', display: 'block', opacity: 1 }}>
+        <div className="pt-20">
+          <div id="hero-container">
             <ChecklistHeroImage />
           </div>
-          <div id="checklist-container" style={{ visibility: 'visible', display: 'block', opacity: 1 }}>
+          <div id="checklist-container">
             <StoragePreparationChecklist />
           </div>
         </div>

@@ -65,6 +65,33 @@ export const useChecklistStorage = () => {
 
   // Ensure data is saved when the component unmounts
   useEffect(() => {
+    // Validate progress data when it changes
+    if (isLoaded && progress) {
+      // Check if we have any entries with string boolean values that need conversion
+      const needsNormalization = Object.entries(progress).some(
+        ([key, value]) => 
+          (value === 'true' || value === 'false') && 
+          /^[a-z]+-\d+$/.test(key)
+      );
+      
+      if (needsNormalization) {
+        console.log("Converting string boolean values to actual booleans");
+        
+        // Create a normalized version with proper boolean values
+        const normalizedProgress = { ...progress };
+        
+        Object.entries(progress).forEach(([key, value]) => {
+          if (/^[a-z]+-\d+$/.test(key)) {
+            if (value === 'true') normalizedProgress[key] = true;
+            else if (value === 'false') normalizedProgress[key] = false;
+          }
+        });
+        
+        // Update the progress state with properly typed values
+        setProgress(normalizedProgress);
+      }
+    }
+    
     return () => {
       // Force a final save when the component unmounts
       if (isLoaded) {
@@ -76,7 +103,7 @@ export const useChecklistStorage = () => {
         }
       }
     };
-  }, [saveDataWrapper, isLoaded]);
+  }, [progress, isLoaded, saveDataWrapper, setProgress]);
 
   return {
     progress,
