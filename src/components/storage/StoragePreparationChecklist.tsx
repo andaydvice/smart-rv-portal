@@ -95,7 +95,7 @@ const StoragePreparationChecklist: React.FC = memo(() => {
   }, [handlePrint, progress]);
   
   // Helper function to ensure date values are valid Date objects before passing to handleExportPDF
-  const ensureValidDate = useCallback((dateValue: Date | string | undefined): Date | undefined => {
+  const ensureValidDate = useCallback((dateValue: Date | string | null | undefined): Date | undefined => {
     if (!dateValue) return undefined;
     
     // If it's already a valid Date object
