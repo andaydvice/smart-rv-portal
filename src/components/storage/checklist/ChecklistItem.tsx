@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
@@ -5,7 +6,7 @@ import { Label } from "@/components/ui/label";
 interface ChecklistItemProps {
   id: string;
   label: string;
-  checked: boolean;
+  checked: boolean | string;
   onCheckedChange: (id: string, checked: boolean) => void;
 }
 
@@ -15,14 +16,18 @@ export const ChecklistItem: React.FC<ChecklistItemProps> = ({
   checked, 
   onCheckedChange 
 }) => {
-  // Force convert to boolean to prevent any string/boolean mismatches
-  const isChecked = checked === true || checked === 'true';
+  // Ensure checked is always a boolean by converting string values if needed
+  const isChecked = typeof checked === 'string' 
+    ? checked === 'true' 
+    : Boolean(checked);
   
   // Handler to ensure we always pass a boolean
   const handleChange = (value: boolean | string) => {
     // Convert to actual boolean if it's a string
-    const boolValue = value === true || value === 'true';
-    console.log(`ChecklistItem ${id} changed: ${value} → ${boolValue}`);
+    const boolValue = typeof value === 'string'
+      ? value === 'true'
+      : Boolean(value);
+      
     onCheckedChange(id, boolValue);
   };
   
