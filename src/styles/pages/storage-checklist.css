@@ -58,6 +58,19 @@
 }
 
 /* ========= PROGRESS INDICATORS ========= */
+/* Completion indicator styling */
+.storage-preparation-checklist .bg-[#131a2a] {
+  background-color: #131a2a !important;
+  padding: 0.5rem 1rem !important;
+  border-radius: 0.375rem !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+.storage-preparation-checklist .text-green-500 {
+  color: #10B981 !important;
+}
+
 /* Progress bar styling and behavior */
 .storage-preparation-checklist [role="progressbar"] {
   position: relative !important;

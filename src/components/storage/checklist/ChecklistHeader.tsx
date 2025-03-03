@@ -36,14 +36,17 @@ const ChecklistHeader: React.FC<ChecklistHeaderProps> = ({
           <p className="text-[#E2E8FF]">Track your progress as you prepare your RV for storage</p>
         </div>
         
-        <div className="flex items-center space-x-2">
+        <div className="flex items-center justify-between">
           <div className="flex-1">
-            <div className="flex justify-between text-sm mb-1">
-              {lastSavedAt && (
-                <span className="text-gray-400 text-xs">{getLastSavedMessage()}</span>
-              )}
-            </div>
-            {/* Progress bar removed */}
+            {lastSavedAt && (
+              <span className="text-gray-400 text-xs">{getLastSavedMessage()}</span>
+            )}
+          </div>
+          
+          <div className="bg-[#131a2a] px-4 py-2 rounded-md flex items-center">
+            <CheckCircle className="h-5 w-5 mr-2 text-green-500" />
+            <span className="text-white">Completion</span>
+            <span className="text-green-500 font-semibold ml-2">{safePercentage}%</span>
           </div>
         </div>
         
