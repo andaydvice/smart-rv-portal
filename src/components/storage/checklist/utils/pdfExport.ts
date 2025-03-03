@@ -1,195 +1,167 @@
 
 import jsPDF from 'jspdf';
-import 'jspdf-autotable';
-import { format } from 'date-fns';
+import autoTable from 'jspdf-autotable';
 import { ChecklistNotes } from '../hooks/types';
+import { format } from 'date-fns';
+import { checklistData, ChecklistSectionData } from './checklistData';
 
-// Add the autotable plugin to the jsPDF types
-declare module 'jspdf' {
-  interface jsPDF {
-    autoTable: (options: any) => jsPDF;
-  }
-}
+// Define the type of the checklist items
+type ProgressMap = {[key: string]: boolean | string};
 
-// Format dates for the PDF
+/**
+ * Formats a date object for display or returns a placeholder if undefined
+ */
 const formatDate = (date: Date | undefined): string => {
   if (!date) return 'Not set';
-  
-  // If we get a Date object, format it properly
-  if (date instanceof Date) {
-    return format(date, 'MMM d, yyyy');
-  }
-  
-  // If we somehow get a string date or something else
-  try {
-    return format(new Date(date), 'MMM d, yyyy');
-  } catch (error) {
-    console.error("Error formatting date:", error);
-    return 'Invalid date';
-  }
+  return format(date, 'MMMM d, yyyy');
 };
 
-// Helper to create section header in PDF
-const addSectionHeader = (doc: jsPDF, title: string, y: number): number => {
-  doc.setFillColor(21, 26, 34); // Dark background
-  doc.setTextColor(91, 155, 213); // Blue text
-  doc.setFontSize(14);
-  doc.setFont('helvetica', 'bold');
-  
-  // Draw section header with background
-  doc.rect(15, y, doc.internal.pageSize.width - 30, 10, 'F');
-  doc.text(title, 20, y + 7);
-  
-  return y + 15; // Return the next y position
-};
-
-// Helper to add a checklist section with items
-const addChecklistSection = (
-  doc: jsPDF, 
-  title: string, 
-  items: { id: string; label: string; checked: boolean }[],
-  y: number
-): number => {
-  // Add section header
-  y = addSectionHeader(doc, title, y);
-  
-  // Add checklist items
-  doc.setFontSize(10);
-  doc.setFont('helvetica', 'normal');
-  doc.setTextColor(226, 232, 255); // Light text for items
-  
-  items.forEach((item) => {
-    const checkboxChar = item.checked ? '☑' : '☐';
-    doc.text(`${checkboxChar} ${item.label}`, 20, y);
-    y += 7;
-    
-    // Add page if needed
-    if (y > doc.internal.pageSize.height - 20) {
-      doc.addPage();
-      y = 20;
-    }
-  });
-  
-  return y + 10; // Return the next y position with spacing
-};
-
-// Helper to process checklist data into sections
-interface ChecklistSection {
-  title: string;
-  items: { id: string; label: string; checked: boolean }[];
-}
-
-// Main export function
+/**
+ * Exports the RV Storage Checklist to a downloadable PDF file
+ */
 export const exportChecklistToPDF = (
-  progress: {[key: string]: boolean | string},
+  progress: ProgressMap,
   startDate: Date | undefined,
   endDate: Date | undefined,
   notes: ChecklistNotes,
   completionPercentage: number,
-  checklistItems: {[sectionId: string]: {title: string, items: {id: string, label: string}[]}}
-) => {
-  // Create new PDF document
-  const doc = new jsPDF();
-  
-  // Set document metadata
-  doc.setProperties({
-    title: 'RV Storage Preparation Checklist',
-    subject: 'RV Storage Checklist',
-    author: 'RV Connection',
-    keywords: 'RV, storage, checklist, preparation',
-    creator: 'RV Connection Checklist Tool'
-  });
-  
-  // Add title
-  doc.setFontSize(24);
-  doc.setTextColor(255, 255, 255);
-  doc.setFont('helvetica', 'bold');
-  doc.text('RV STORAGE PREPARATION CHECKLIST', 105, 20, { align: 'center' });
-  
-  // Add completion percentage
-  doc.setFontSize(12);
-  doc.text(`Completion: ${Math.round(completionPercentage)}%`, 105, 30, { align: 'center' });
-  
-  // Add dates
-  doc.setFontSize(10);
-  doc.text(`Storage Start: ${formatDate(startDate)} | Storage End: ${formatDate(endDate)}`, 105, 40, { align: 'center' });
-  
-  // Draw progress bar
-  const barWidth = 180;
-  const completionWidth = (barWidth * completionPercentage) / 100;
-  
-  doc.setDrawColor(50, 50, 50);
-  doc.setFillColor(50, 50, 50);
-  doc.roundedRect(15, 45, barWidth, 5, 1, 1, 'F');
-  
-  doc.setFillColor(91, 155, 213); // Blue
-  doc.roundedRect(15, 45, completionWidth, 5, 1, 1, 'F');
-  
-  let y = 60; // Starting y position for content
-  
-  // Process all sections and items
-  for (const sectionId in checklistItems) {
-    const section = checklistItems[sectionId];
+  checklistDataObj: {[key: string]: ChecklistSectionData}
+): void => {
+  try {
+    // Create a new PDF document
+    const doc = new jsPDF();
     
-    const sectionItems = section.items.map(item => ({
-      id: item.id,
-      label: item.label,
-      checked: !!progress[item.id]
-    }));
+    // Add title
+    doc.setFontSize(20);
+    doc.setTextColor(41, 65, 148); // Dark blue color
+    doc.text('RV Storage Preparation Checklist', 105, 15, { align: 'center' });
     
-    y = addChecklistSection(doc, section.title, sectionItems, y);
+    // Add completion percentage
+    doc.setFontSize(12);
+    doc.setTextColor(100);
+    doc.text(`Completion: ${Math.round(completionPercentage)}%`, 105, 22, { align: 'center' });
     
-    // Add page if needed
-    if (y > doc.internal.pageSize.height - 30) {
-      doc.addPage();
-      y = 20;
-    }
-  }
-  
-  // Add notes section at the end
-  if (Object.values(notes).some(note => note.trim() !== '')) {
-    y = addSectionHeader(doc, 'NOTES', y);
+    // Add storage dates
+    doc.setFontSize(11);
+    doc.text(`Storage Start: ${formatDate(startDate)}`, 20, 30);
+    doc.text(`Expected Return: ${formatDate(endDate)}`, 20, 36);
     
-    doc.setFontSize(10);
-    doc.setFont('helvetica', 'normal');
-    doc.setTextColor(226, 232, 255);
+    // Generate date stamp
+    const currentDate = format(new Date(), 'MMMM d, yyyy - h:mm a');
+    doc.setFontSize(9);
+    doc.setTextColor(130);
+    doc.text(`Generated: ${currentDate}`, 195, 10, { align: 'right' });
     
-    // Add each note if it has content
-    Object.entries(notes).forEach(([key, value]) => {
-      if (value.trim() !== '') {
-        const noteTitle = key.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase());
-        
-        doc.setFont('helvetica', 'bold');
-        doc.text(noteTitle, 20, y);
-        y += 7;
-        
-        doc.setFont('helvetica', 'normal');
-        
-        // Split notes into multiple lines
-        const splitText = doc.splitTextToSize(value, doc.internal.pageSize.width - 40);
-        
-        splitText.forEach(line => {
-          doc.text(line, 20, y);
-          y += 7;
-          
-          // Add page if needed
-          if (y > doc.internal.pageSize.height - 20) {
-            doc.addPage();
-            y = 20;
-          }
-        });
-        
-        y += 5; // Space after each note
+    // Add page number function
+    const addPageNumbers = () => {
+      const totalPages = doc.getNumberOfPages();
+      for (let i = 1; i <= totalPages; i++) {
+        doc.setPage(i);
+        doc.setFontSize(9);
+        doc.setTextColor(130);
+        doc.text(`Page ${i} of ${totalPages}`, 195, 287, { align: 'right' });
       }
+    };
+    
+    // Process and add each checklist section
+    let currentY = 45;
+    
+    // Loop through each category/section in the checklist data
+    Object.keys(checklistDataObj).forEach((sectionKey) => {
+      const section = checklistDataObj[sectionKey];
+      
+      // Check if we need a new page (rough estimate for space needed)
+      if (currentY > 250) {
+        doc.addPage();
+        currentY = 20;
+      }
+      
+      // Add section title
+      doc.setFontSize(12);
+      doc.setTextColor(41, 65, 148); // Dark blue color
+      doc.text(section.title, 20, currentY);
+      currentY += 8;
+      
+      // Table data for this section
+      const tableData: string[][] = [];
+      
+      // Process each item in the section
+      section.items.forEach(item => {
+        const status = progress[item.id] === true ? '✓' : '□';
+        tableData.push([status, item.label]);
+      });
+      
+      // Add table for this section
+      autoTable(doc, {
+        startY: currentY,
+        head: [],
+        body: tableData,
+        theme: 'plain',
+        styles: {
+          fontSize: 10,
+          cellPadding: 3,
+        },
+        columnStyles: {
+          0: { cellWidth: 10, halign: 'center' },
+          1: { cellWidth: 170 },
+        },
+      });
+      
+      // Update Y position after table
+      currentY = (doc as any).lastAutoTable.finalY + 15;
     });
+    
+    // Add a new page for notes
+    doc.addPage();
+    
+    // Add notes header
+    doc.setFontSize(16);
+    doc.setTextColor(41, 65, 148);
+    doc.text('Notes & Additional Information', 105, 20, { align: 'center' });
+    
+    // Process notes
+    const addNotesSection = (title: string, content: string, yPosition: number) => {
+      doc.setFontSize(12);
+      doc.setTextColor(60, 60, 60);
+      doc.text(title, 20, yPosition);
+      
+      doc.setFontSize(10);
+      doc.setTextColor(80, 80, 80);
+      
+      // Split long text into lines that fit the page width
+      const textLines = doc.splitTextToSize(content || 'No notes added.', 170);
+      doc.text(textLines, 20, yPosition + 8);
+      
+      return yPosition + 12 + (textLines.length * 5);
+    };
+    
+    let notesY = 30;
+    notesY = addNotesSection('General Notes', notes.general || '', notesY);
+    
+    // Add some spacing
+    notesY += 10;
+    
+    doc.setFontSize(12);
+    doc.setTextColor(41, 65, 148);
+    doc.text('Contact Information', 20, notesY);
+    notesY += 8;
+    
+    notesY = addNotesSection('Storage Facility Contact', notes.storageContact || '', notesY);
+    notesY = addNotesSection('Emergency Contact', notes.emergencyContact || '', notesY);
+    
+    // Add some spacing
+    notesY += 10;
+    
+    notesY = addNotesSection('Return Preparation Notes', notes.returnPreparation || '', notesY);
+    
+    // Add page numbers
+    addPageNumbers();
+    
+    // Save the PDF
+    doc.save('RV_Storage_Checklist.pdf');
+    
+  } catch (error) {
+    console.error('Error generating PDF:', error);
+    throw error;
   }
-  
-  // Add footer with date
-  const dateStr = format(new Date(), 'MMMM d, yyyy');
-  doc.setFontSize(8);
-  doc.setTextColor(150, 150, 150);
-  doc.text(`Generated on ${dateStr}`, 105, doc.internal.pageSize.height - 10, { align: 'center' });
-  
-  // Save the PDF
-  doc.save('RV_Storage_Checklist.pdf');
 };

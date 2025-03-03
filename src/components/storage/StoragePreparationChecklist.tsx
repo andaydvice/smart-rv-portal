@@ -9,7 +9,7 @@ import ResetDialog from './checklist/ResetDialog';
 import useCompletionStats from './checklist/hooks/useCompletionStats';
 import { useChecklistActions } from './checklist/ChecklistActions';
 import { exportChecklistToPDF } from './checklist/utils/pdfExport';
-import { checklistItems } from './checklist/utils/checklistData';
+import { checklistData } from './checklist/utils/checklistData';
 
 // Memoize the component to prevent unnecessary re-renders
 const StoragePreparationChecklist: React.FC = memo(() => {
@@ -105,7 +105,7 @@ const StoragePreparationChecklist: React.FC = memo(() => {
       endDate,
       notes,
       completionStats.completionPercentage,
-      checklistItems
+      checklistData
     );
   }, [progress, startDate, endDate, notes, completionStats.completionPercentage]);
   
