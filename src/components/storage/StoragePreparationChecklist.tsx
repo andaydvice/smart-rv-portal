@@ -8,8 +8,6 @@ import ChecklistLoading from './checklist/ChecklistLoading';
 import ResetDialog from './checklist/ResetDialog';
 import useCompletionStats from './checklist/hooks/useCompletionStats';
 import { useChecklistActions } from './checklist/ChecklistActions';
-import { exportChecklistToPDF } from './checklist/utils/pdfExport';
-import { checklistData } from './checklist/utils/checklistData';
 
 // Memoize the component to prevent unnecessary re-renders
 const StoragePreparationChecklist: React.FC = memo(() => {
@@ -96,18 +94,41 @@ const StoragePreparationChecklist: React.FC = memo(() => {
     handlePrint();
   }, [handlePrint, progress]);
   
-  // Enhanced PDF export handler
+  // Enhanced PDF export handler with proper type safety
   const enhancedExportPDFHandler = useCallback(() => {
-    // Call the export function with the current checklist data
-    exportChecklistToPDF(
+    // Validate that startDate and endDate are actual Date objects or undefined
+    const ensureValidDate = (date: any): Date | undefined => {
+      if (!date) return undefined;
+      
+      // If it's already a Date object
+      if (date instanceof Date && !isNaN(date.getTime())) {
+        return date;
+      }
+      
+      // If it's a string, try to convert it
+      if (typeof date === 'string') {
+        try {
+          const parsedDate = new Date(date);
+          if (!isNaN(parsedDate.getTime())) {
+            return parsedDate;
+          }
+        } catch (error) {
+          console.error("Invalid date string:", date);
+        }
+      }
+      
+      return undefined;
+    };
+    
+    // Call the export function with validated dates
+    handleExportPDF(
       progress,
-      startDate,
-      endDate,
+      ensureValidDate(startDate),
+      ensureValidDate(endDate),
       notes,
-      completionStats.completionPercentage,
-      checklistData
+      completionStats.completionPercentage
     );
-  }, [progress, startDate, endDate, notes, completionStats.completionPercentage]);
+  }, [progress, startDate, endDate, notes, completionStats.completionPercentage, handleExportPDF]);
   
   // Auto-save on first load to ensure data is properly initialized
   useEffect(() => {

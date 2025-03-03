@@ -3,6 +3,7 @@ import { useState, useCallback } from 'react';
 import { useToast } from "@/components/ui/use-toast";
 import { exportChecklistToPDF } from './utils/pdfExport';
 import { checklistData } from './utils/checklistData';
+import { ChecklistNotes } from './hooks/types';
 
 interface ChecklistActionsProps {
   saveData: (showToast?: boolean) => void;
@@ -78,23 +79,48 @@ export const useChecklistActions = ({
     }, 300);
   }, [saveData]);
   
-  // Handle PDF export - update the type definition to accept Date | undefined
+  // Enhanced PDF export handler with proper type safety for dates
   const handleExportPDF = useCallback((
     progress: {[key: string]: boolean | string},
     startDate: Date | undefined,
     endDate: Date | undefined,
-    notes: any,
+    notes: ChecklistNotes,
     completionPercentage: number
   ) => {
     // First, save the current progress
     saveData(false);
     
+    // Ensure dates are valid Date objects or undefined
+    const validateDate = (date: any): Date | undefined => {
+      if (!date) return undefined;
+      
+      if (date instanceof Date && !isNaN(date.getTime())) {
+        return date;
+      }
+      
+      if (typeof date === 'string') {
+        try {
+          const parsedDate = new Date(date);
+          if (!isNaN(parsedDate.getTime())) {
+            return parsedDate;
+          }
+        } catch (error) {
+          console.error("Invalid date:", date);
+        }
+      }
+      
+      return undefined;
+    };
+    
+    const validStartDate = validateDate(startDate);
+    const validEndDate = validateDate(endDate);
+    
     // Then export to PDF
     try {
       exportChecklistToPDF(
         progress,
-        startDate,
-        endDate,
+        validStartDate,
+        validEndDate,
         notes,
         completionPercentage,
         checklistData

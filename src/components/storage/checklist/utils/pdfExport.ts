@@ -10,24 +10,73 @@ type ProgressMap = {[key: string]: boolean | string};
 
 /**
  * Formats a date object for display or returns a placeholder if undefined
+ * Ensures type safety by validating the date object
  */
-const formatDate = (date: Date | undefined): string => {
+const formatDate = (date: Date | undefined | string): string => {
   if (!date) return 'Not set';
-  return format(date, 'MMMM d, yyyy');
+  
+  // Handle the case where we might get a string instead of a Date object
+  if (typeof date === 'string') {
+    try {
+      // Try to parse the string into a Date object
+      return format(new Date(date), 'MMMM d, yyyy');
+    } catch (error) {
+      console.error('Invalid date string:', date);
+      return 'Not set';
+    }
+  }
+  
+  // If it's already a Date object, format it
+  try {
+    return format(date, 'MMMM d, yyyy');
+  } catch (error) {
+    console.error('Invalid date object:', date);
+    return 'Not set';
+  }
+};
+
+/**
+ * Ensures a value is a valid Date object or undefined
+ */
+const ensureDate = (value: any): Date | undefined => {
+  if (!value) return undefined;
+  
+  if (value instanceof Date) {
+    return value;
+  }
+  
+  if (typeof value === 'string') {
+    try {
+      const date = new Date(value);
+      // Check if the date is valid
+      if (!isNaN(date.getTime())) {
+        return date;
+      }
+    } catch (error) {
+      console.error('Failed to convert string to Date:', value);
+    }
+  }
+  
+  return undefined;
 };
 
 /**
  * Exports the RV Storage Checklist to a downloadable PDF file
+ * Adds type safety for date handling
  */
 export const exportChecklistToPDF = (
   progress: ProgressMap,
-  startDate: Date | undefined,
-  endDate: Date | undefined,
+  startDate: Date | string | undefined,
+  endDate: Date | string | undefined,
   notes: ChecklistNotes,
   completionPercentage: number,
   checklistDataObj: {[key: string]: ChecklistSectionData}
 ): void => {
   try {
+    // Convert dates to proper Date objects or undefined
+    const validStartDate = ensureDate(startDate);
+    const validEndDate = ensureDate(endDate);
+    
     // Create a new PDF document
     const doc = new jsPDF();
     
@@ -43,8 +92,8 @@ export const exportChecklistToPDF = (
     
     // Add storage dates
     doc.setFontSize(11);
-    doc.text(`Storage Start: ${formatDate(startDate)}`, 20, 30);
-    doc.text(`Expected Return: ${formatDate(endDate)}`, 20, 36);
+    doc.text(`Storage Start: ${formatDate(validStartDate)}`, 20, 30);
+    doc.text(`Expected Return: ${formatDate(validEndDate)}`, 20, 36);
     
     // Generate date stamp
     const currentDate = format(new Date(), 'MMMM d, yyyy - h:mm a');

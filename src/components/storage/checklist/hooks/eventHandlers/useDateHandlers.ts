@@ -3,6 +3,7 @@ import { useCallback } from 'react';
 
 /**
  * Hook for handling date-related events in the checklist
+ * Enhanced with better type safety for dates
  */
 export const useDateHandlers = (
   startDateRef: React.MutableRefObject<Date | undefined>,
@@ -12,22 +13,46 @@ export const useDateHandlers = (
   saveDataWrapper: (manualSave?: boolean) => string,
   batchUpdateRef: React.MutableRefObject<boolean>
 ) => {
-  // Set start date with optimized save
-  const setStartDateAndSave = useCallback((date: Date | undefined) => {
-    // Ensure we have a valid date or undefined
-    if (typeof date === 'string') {
-      // If somehow we received a string, try to convert it to a Date
+  // Helper function to ensure value is a proper Date or undefined
+  const ensureValidDate = (value: any): Date | undefined => {
+    if (!value) return undefined;
+    
+    // If it's already a Date object and valid
+    if (value instanceof Date && !isNaN(value.getTime())) {
+      return value;
+    }
+    
+    // If it's a string, try to convert it
+    if (typeof value === 'string') {
       try {
-        date = new Date(date);
+        const date = new Date(value);
+        // Check if it's a valid date
+        if (!isNaN(date.getTime())) {
+          return date;
+        }
       } catch (error) {
-        console.error("Invalid date string provided:", date);
-        date = undefined;
+        console.error("Invalid date string:", value);
       }
     }
     
-    if (date?.getTime() === startDateRef.current?.getTime()) return;
+    return undefined;
+  };
+
+  // Set start date with optimized save and type safety
+  const setStartDateAndSave = useCallback((date: Date | undefined) => {
+    // Convert to valid Date or undefined
+    const validDate = ensureValidDate(date);
     
-    setStartDate(date);
+    // Check if the date has actually changed
+    if (
+      (validDate && startDateRef.current && validDate.getTime() === startDateRef.current.getTime()) ||
+      (!validDate && !startDateRef.current)
+    ) {
+      return;
+    }
+    
+    setStartDate(validDate);
+    
     // Delay save to avoid state update conflicts
     if (!batchUpdateRef.current) {
       // Use a smaller timeout to ensure it happens after state update but before UI response
@@ -41,22 +66,21 @@ export const useDateHandlers = (
     }
   }, [saveDataWrapper, setStartDate, startDateRef, batchUpdateRef]);
 
-  // Set end date with optimized save
+  // Set end date with optimized save and type safety
   const setEndDateAndSave = useCallback((date: Date | undefined) => {
-    // Ensure we have a valid date or undefined
-    if (typeof date === 'string') {
-      // If somehow we received a string, try to convert it to a Date
-      try {
-        date = new Date(date);
-      } catch (error) {
-        console.error("Invalid date string provided:", date);
-        date = undefined;
-      }
+    // Convert to valid Date or undefined
+    const validDate = ensureValidDate(date);
+    
+    // Check if the date has actually changed
+    if (
+      (validDate && endDateRef.current && validDate.getTime() === endDateRef.current.getTime()) ||
+      (!validDate && !endDateRef.current)
+    ) {
+      return;
     }
     
-    if (date?.getTime() === endDateRef.current?.getTime()) return;
+    setEndDate(validDate);
     
-    setEndDate(date);
     // Delay save to avoid state update conflicts
     if (!batchUpdateRef.current) {
       // Use a smaller timeout to ensure it happens after state update but before UI response

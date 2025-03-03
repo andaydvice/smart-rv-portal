@@ -2,6 +2,31 @@
 import { useCallback } from 'react';
 import { STORAGE_KEY, ChecklistData, ChecklistNotes } from './types';
 
+/**
+ * Ensures a value is a valid Date object or undefined
+ */
+const ensureDate = (value: any): Date | undefined => {
+  if (!value) return undefined;
+  
+  if (value instanceof Date && !isNaN(value.getTime())) {
+    return value;
+  }
+  
+  if (typeof value === 'string') {
+    try {
+      const date = new Date(value);
+      // Check if the date is valid
+      if (!isNaN(date.getTime())) {
+        return date;
+      }
+    } catch (error) {
+      console.error('Failed to convert string to Date:', value);
+    }
+  }
+  
+  return undefined;
+};
+
 // Hook for handling localStorage persistence operations with improved reliability and performance
 export const usePersistence = () => {
   // Load data from localStorage with enhanced error handling
@@ -17,13 +42,13 @@ export const usePersistence = () => {
       const parsed = JSON.parse(savedData);
       console.log("Loading saved data");
       
-      // Convert date strings back to Date objects
+      // Convert date strings back to Date objects with proper validation
       if (parsed.startDate) {
-        parsed.startDate = new Date(parsed.startDate);
+        parsed.startDate = ensureDate(parsed.startDate);
       }
       
       if (parsed.endDate) {
-        parsed.endDate = new Date(parsed.endDate);
+        parsed.endDate = ensureDate(parsed.endDate);
       }
       
       // Ensure notes object has all required fields
@@ -68,11 +93,15 @@ export const usePersistence = () => {
   ) => {
     const currentTime = new Date().toISOString();
     
+    // Important: Ensure dates are valid before serializing
+    const safeStartDate = ensureDate(startDate);
+    const safeEndDate = ensureDate(endDate);
+    
     // Important: Ensure we're saving primitives and not complex objects
     const dataToSave = {
       progress,
-      startDate: startDate ? startDate.toISOString() : undefined,
-      endDate: endDate ? endDate.toISOString() : undefined,
+      startDate: safeStartDate ? safeStartDate.toISOString() : undefined,
+      endDate: safeEndDate ? safeEndDate.toISOString() : undefined,
       notes: {
         general: notes.general || '',
         storageContact: notes.storageContact || '',

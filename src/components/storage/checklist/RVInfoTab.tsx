@@ -17,6 +17,18 @@ const RVInfoTab: React.FC<RVInfoTabProps> = ({
   setEndDate,
   handleCheckboxChange 
 }) => {
+  // Format date function with validation
+  const formatDate = (date: Date | undefined): string => {
+    if (!date) return "";
+    
+    try {
+      return format(date, "PPP");
+    } catch (error) {
+      console.error("Invalid date in RVInfoTab:", date);
+      return "";
+    }
+  };
+
   return (
     <>
       <h2 className="text-2xl font-bold text-[#60A5FA] mb-4">RV INFORMATION</h2>
@@ -80,13 +92,17 @@ const RVInfoTab: React.FC<RVInfoTabProps> = ({
                     className="w-full justify-start text-left font-normal bg-[#131a2a] border-gray-700 text-white"
                   >
                     <CalendarIcon className="mr-2 h-4 w-4" />
-                    {startDate ? format(startDate, "PPP") : <span className="text-gray-400">Pick a date</span>}
+                    {startDate && startDate instanceof Date ? (
+                      formatDate(startDate)
+                    ) : (
+                      <span className="text-gray-400">Pick a date</span>
+                    )}
                   </Button>
                 </PopoverTrigger>
                 <PopoverContent className="w-auto p-0 bg-[#131a2a] border-gray-700" align="start">
                   <Calendar
                     mode="single"
-                    selected={startDate}
+                    selected={startDate instanceof Date ? startDate : undefined}
                     onSelect={setStartDate}
                     initialFocus
                     className="text-white bg-[#131a2a]"
@@ -104,13 +120,17 @@ const RVInfoTab: React.FC<RVInfoTabProps> = ({
                     className="w-full justify-start text-left font-normal bg-[#131a2a] border-gray-700 text-white"
                   >
                     <CalendarIcon className="mr-2 h-4 w-4" />
-                    {endDate ? format(endDate, "PPP") : <span className="text-gray-400">Pick a date</span>}
+                    {endDate && endDate instanceof Date ? (
+                      formatDate(endDate)
+                    ) : (
+                      <span className="text-gray-400">Pick a date</span>
+                    )}
                   </Button>
                 </PopoverTrigger>
                 <PopoverContent className="w-auto p-0 bg-[#131a2a] border-gray-700" align="start">
                   <Calendar
                     mode="single"
-                    selected={endDate}
+                    selected={endDate instanceof Date ? endDate : undefined}
                     onSelect={setEndDate}
                     initialFocus
                     className="text-white bg-[#131a2a]"
