@@ -30,7 +30,7 @@
         min-height: 100vh;
         width: 100%;
       }
-      /* Loading indicator */
+      /* Loading indicator that will be quickly replaced */
       .app-loading {
         position: fixed;
         top: 0;
@@ -49,13 +49,12 @@
     <!-- Preconnect to essential domains -->
     <link rel="preconnect" href="https://lovableproject.com" crossorigin />
     <link rel="preconnect" href="https://lovable.app" crossorigin />
-    <!-- Preload critical resources -->
-    <link rel="preload" href="/src/critical.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
-    <noscript><link rel="stylesheet" href="/src/critical.css"></noscript>
+    <!-- DIRECT CSS INCLUDE - no preload delay -->
+    <link rel="stylesheet" href="/src/critical.css">
   </head>
   <body>
     <div id="root">
-      <!-- Initial loading state that will be replaced by React -->
+      <!-- Simple loading indicator -->
       <div class="app-loading">
         Loading application...
       </div>
@@ -69,28 +68,13 @@
           root.style.display = 'block';
           root.style.opacity = '1';
         }
-        
-        // Check for CSS loading issues
-        const styles = document.querySelectorAll('link[rel="stylesheet"]');
-        console.log(`Checking ${styles.length} stylesheets`);
-        
-        // Ensure all stylesheets load correctly
-        styles.forEach(function(link) {
-          link.addEventListener('error', function(e) {
-            console.error('Stylesheet failed to load:', e);
-            // Reload the stylesheet
-            const newLink = document.createElement('link');
-            newLink.rel = 'stylesheet';
-            newLink.href = link.href + '?reload=' + new Date().getTime();
-            document.head.appendChild(newLink);
-          });
-        });
-        
-        // Polyfill for browsers that don't support certain features
-        if (!window.structuredClone) {
-          window.structuredClone = function(obj) {
-            return JSON.parse(JSON.stringify(obj));
-          };
+      });
+      
+      // Directly start the application without delays
+      window.addEventListener('load', function() {
+        const loadingElement = document.querySelector('.app-loading');
+        if (loadingElement && loadingElement.parentNode) {
+          loadingElement.parentNode.removeChild(loadingElement);
         }
       });
     </script>

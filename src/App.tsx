@@ -26,23 +26,18 @@ const queryClient = new QueryClient({
 
 function App() {
   const [isConnected, setIsConnected] = useState(true);
-  const [initialLoadAttempted, setInitialLoadAttempted] = useState(false);
+  // CRITICAL FIX: Start with initialLoadAttempted = true to avoid loading indicator
+  const [initialLoadAttempted, setInitialLoadAttempted] = useState(true);
   const [reconnectionAttempts, setReconnectionAttempts] = useState(0);
 
   // Enhanced useEffect to debug performance issues and handle connectivity
   useEffect(() => {
     console.log('App component mounted - initializing with enhanced error recovery');
     
-    // Debug visibility immediately and then again after a short delay
+    // Debug visibility immediately
     ensureVisibility();
     
-    // Force set initialLoadAttempted to true to remove loading indicator
-    setTimeout(() => {
-      setInitialLoadAttempted(true);
-      console.log('Initial load attempted set to true');
-    }, 500);
-    
-    // Schedule multiple visibility checks with increasing delays
+    // Additional visibility checks with increasing delays
     const timeoutIds = [
       setTimeout(() => {
         console.log('Running visibility debugger (first pass)');
@@ -55,12 +50,6 @@ function App() {
         ensureVisibility();
         debugAnimations();
       }, 500),
-      
-      setTimeout(() => {
-        console.log('Running visibility debugger (third pass)');
-        ensureVisibility();
-        debugAnimations();
-      }, 1500),
       
       setTimeout(() => {
         console.log('Running connection debugger');
@@ -148,21 +137,6 @@ function App() {
           )}
           <RouterProvider />
           <Toaster />
-          {!initialLoadAttempted && (
-            <div style={{
-              position: 'fixed',
-              top: '50%',
-              left: '50%',
-              transform: 'translate(-50%, -50%)',
-              color: 'white',
-              backgroundColor: 'rgba(0,0,0,0.7)',
-              padding: '20px',
-              borderRadius: '8px',
-              zIndex: 9000
-            }}>
-              Loading application...
-            </div>
-          )}
         </div>
       </AuthProvider>
     </QueryClientProvider>
