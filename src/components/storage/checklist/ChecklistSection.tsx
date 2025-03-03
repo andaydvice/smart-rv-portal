@@ -35,9 +35,10 @@ export const ChecklistItem: React.FC<ChecklistItemProps> = ({
     <div className="flex items-start space-x-3 p-2 rounded-md hover:bg-[#151A22]/50 transition-colors">
       <Checkbox 
         id={id} 
-        className="mt-1 h-5 w-5 border-[#5B9BD5]" 
+        className="mt-1 h-5 w-5 border-[#5B9BD5] print-checkbox" 
         checked={isChecked}
         onCheckedChange={handleChange} 
+        data-print-checked={isChecked ? "true" : "false"}
       />
       <Label htmlFor={id} className="text-[#E2E8FF] text-base cursor-pointer">
         {label}

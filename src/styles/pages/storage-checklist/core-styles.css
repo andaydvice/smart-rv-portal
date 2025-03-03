@@ -48,6 +48,11 @@
   display: flex !important;
 }
 
+/* Checkbox print optimization */
+.storage-preparation-checklist .print-checkbox[data-state="checked"] {
+  position: relative;
+}
+
 /* Flexbox containers */
 .storage-preparation-checklist .flex {
   display: flex !important;
@@ -65,3 +70,4 @@
   width: 100% !important;
   display: block !important;
 }
+

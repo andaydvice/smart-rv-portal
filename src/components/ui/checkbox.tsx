@@ -42,7 +42,7 @@ const Checkbox = React.forwardRef<
         height: '100%'
       }}
     >
-      <Check className="h-4 w-4" />
+      <Check className="h-4 w-4 checkbox-indicator" />
     </CheckboxPrimitive.Indicator>
   </CheckboxPrimitive.Root>
 ))
