@@ -95,9 +95,3 @@ img {
   background-clip: text;
   color: transparent;
 }
-
-/* Critical elements visibility */
-section, h1, h2, p, button, a, img, div {
-  visibility: visible !important;
-  opacity: 1 !important;
-}

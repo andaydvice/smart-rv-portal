@@ -1,5 +1,5 @@
 
-import React, { useEffect } from "react";
+import React from "react";
 import Navbar from "@/components/Navbar";
 import { HeroSection } from "@/components/sections/HeroSection";
 import { FeaturesSection } from "@/components/sections/FeaturesSection";
@@ -9,16 +9,8 @@ import { ContactSection } from "@/components/sections/ContactSection";
 import { motion } from "framer-motion";
 import { FeatureHighlights } from "@/components/sections/FeatureHighlights";
 import Layout from "@/components/layout/Layout";
-import { ensureVisibility } from "@/utils/visibility";
 
 const Index = () => {
-  // Force visibility of elements on mount
-  useEffect(() => {
-    ensureVisibility();
-    // Force scroll to top on page load
-    window.scrollTo(0, 0);
-  }, []);
-
   return (
     <Layout>
       <motion.div 

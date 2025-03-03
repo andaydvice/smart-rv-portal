@@ -23,18 +23,8 @@
     font-feature-settings: "ss01" on, "ss02" on, "cv01" on, "cv02" on;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     text-size-adjust: 100%;
-    visibility: visible !important;
-    display: block !important;
-    opacity: 1 !important;
     background-color: #080F1F !important;
     color: #ffffff !important;
-  }
-
-  #root, html {
-    visibility: visible !important;
-    display: block !important;
-    opacity: 1 !important;
-    background-color: #080F1F !important;
   }
 
   .glass-card {
@@ -43,37 +33,6 @@
 
   .hover-scale {
     @apply transition-transform duration-300 hover:scale-[1.02];
-  }
-  
-  /* Ensure tab text is always visible regardless of state */
-  [role="tab"] span {
-    visibility: visible !important;
-    display: block !important;
-  }
-  
-  /* Fix for disappearing text in active tabs */
-  [role="tab"][data-state="active"] span,
-  [role="tab"][data-state="active"] div {
-    opacity: 1 !important;
-    visibility: visible !important;
-  }
-
-  /* Ensure all tab panels are visible */
-  [role="tabpanel"] {
-    visibility: visible !important;
-    display: block !important;
-  }
-
-  /* Critical elements visibility */
-  section, h1, h2, p, button, a {
-    visibility: visible !important;
-    opacity: 1 !important;
-  }
-
-  /* Fix framer-motion animation initial visibility */
-  [data-framer-motion-initial="true"] {
-    opacity: 1 !important;
-    visibility: visible !important;
   }
 }
 
