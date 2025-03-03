@@ -9,7 +9,7 @@ interface TabContentProps {
 
 const TabContent: React.FC<TabContentProps> = ({ value, children }) => {
   return (
-    <TabsContent value={value} className="mt-0" style={{ visibility: 'visible' }}>
+    <TabsContent value={value} className="mt-0" style={{ visibility: 'visible', display: 'block' }}>
       {children}
     </TabsContent>
   );
