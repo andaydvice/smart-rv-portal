@@ -12,6 +12,17 @@ const Index = () => {
   // Add debug logs to track rendering
   useEffect(() => {
     console.log('Index component mounted');
+    
+    // Ensure all sections are visible after component mounts
+    const sections = document.querySelectorAll('section, h1, p, button, img');
+    sections.forEach(el => {
+      if (el instanceof HTMLElement) {
+        el.style.visibility = 'visible';
+        el.style.opacity = '1';
+        console.log(`Ensured visibility for ${el.tagName}`);
+      }
+    });
+    
     return () => console.log('Index component unmounted');
   }, []);
 
