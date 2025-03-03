@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
@@ -16,54 +17,6 @@ const RVInfoTab: React.FC<RVInfoTabProps> = ({
   setEndDate,
   handleCheckboxChange 
 }) => {
-  // Format date function with validation
-  const formatDate = (date: Date | undefined | string): string => {
-    if (!date) return "";
-    
-    try {
-      // If it's a string, try to convert to Date first
-      if (typeof date === 'string') {
-        const parsedDate = new Date(date);
-        if (!isNaN(parsedDate.getTime())) {
-          return format(parsedDate, "PPP");
-        }
-        return "";
-      }
-      
-      // Otherwise it should be a Date object
-      if (date instanceof Date && !isNaN(date.getTime())) {
-        return format(date, "PPP");
-      }
-      
-      return "";
-    } catch (error) {
-      console.error("Invalid date in RVInfoTab:", date);
-      return "";
-    }
-  };
-
-  // Ensure date is a valid Date object before passing to Calendar
-  const ensureValidDate = (date: Date | string | undefined): Date | undefined => {
-    if (!date) return undefined;
-    
-    if (date instanceof Date && !isNaN(date.getTime())) {
-      return date;
-    }
-    
-    if (typeof date === 'string') {
-      try {
-        const parsedDate = new Date(date);
-        if (!isNaN(parsedDate.getTime())) {
-          return parsedDate;
-        }
-      } catch (error) {
-        console.error("Invalid date string:", date);
-      }
-    }
-    
-    return undefined;
-  };
-
   return (
     <>
       <h2 className="text-2xl font-bold text-[#60A5FA] mb-4">RV INFORMATION</h2>
@@ -127,17 +80,13 @@ const RVInfoTab: React.FC<RVInfoTabProps> = ({
                     className="w-full justify-start text-left font-normal bg-[#131a2a] border-gray-700 text-white"
                   >
                     <CalendarIcon className="mr-2 h-4 w-4" />
-                    {startDate ? (
-                      formatDate(startDate)
-                    ) : (
-                      <span className="text-gray-400">Pick a date</span>
-                    )}
+                    {startDate ? format(startDate, "PPP") : <span className="text-gray-400">Pick a date</span>}
                   </Button>
                 </PopoverTrigger>
                 <PopoverContent className="w-auto p-0 bg-[#131a2a] border-gray-700" align="start">
                   <Calendar
                     mode="single"
-                    selected={ensureValidDate(startDate)}
+                    selected={startDate}
                     onSelect={setStartDate}
                     initialFocus
                     className="text-white bg-[#131a2a]"
@@ -155,17 +104,13 @@ const RVInfoTab: React.FC<RVInfoTabProps> = ({
                     className="w-full justify-start text-left font-normal bg-[#131a2a] border-gray-700 text-white"
                   >
                     <CalendarIcon className="mr-2 h-4 w-4" />
-                    {endDate ? (
-                      formatDate(endDate)
-                    ) : (
-                      <span className="text-gray-400">Pick a date</span>
-                    )}
+                    {endDate ? format(endDate, "PPP") : <span className="text-gray-400">Pick a date</span>}
                   </Button>
                 </PopoverTrigger>
                 <PopoverContent className="w-auto p-0 bg-[#131a2a] border-gray-700" align="start">
                   <Calendar
                     mode="single"
-                    selected={ensureValidDate(endDate)}
+                    selected={endDate}
                     onSelect={setEndDate}
                     initialFocus
                     className="text-white bg-[#131a2a]"

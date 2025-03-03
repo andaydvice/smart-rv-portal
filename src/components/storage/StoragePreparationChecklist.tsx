@@ -8,7 +8,6 @@ import ChecklistLoading from './checklist/ChecklistLoading';
 import ResetDialog from './checklist/ResetDialog';
 import useCompletionStats from './checklist/hooks/useCompletionStats';
 import { useChecklistActions } from './checklist/ChecklistActions';
-import { ensureValidDate } from './checklist/utils/dateUtils';
 
 // Memoize the component to prevent unnecessary re-renders
 const StoragePreparationChecklist: React.FC = memo(() => {
@@ -39,8 +38,7 @@ const StoragePreparationChecklist: React.FC = memo(() => {
     handleSaveProgress,
     handleResetRequest,
     handleResetConfirm,
-    handlePrint,
-    handleExportPDF
+    handlePrint
   } = useChecklistActions({
     saveData,
     resetData,
@@ -63,14 +61,14 @@ const StoragePreparationChecklist: React.FC = memo(() => {
     // After a short delay, update the print-specific attributes for this checkbox
     setTimeout(() => {
       const checkbox = document.getElementById(id);
-      if (checkbox && checkbox instanceof HTMLElement) {
+      if (checkbox) {
         checkbox.setAttribute('data-print-checked', checked ? 'true' : 'false');
         checkbox.setAttribute('aria-checked', checked ? 'true' : 'false');
         checkbox.setAttribute('data-state', checked ? 'checked' : 'unchecked');
         
         // Also update the label
         const label = document.querySelector(`label[for="${id}"]`);
-        if (label && label instanceof HTMLElement) {
+        if (label) {
           label.setAttribute('data-checked', checked ? 'true' : 'false');
           label.setAttribute('data-print-state', checked ? 'checked' : 'unchecked');
         }
@@ -95,22 +93,6 @@ const StoragePreparationChecklist: React.FC = memo(() => {
     handlePrint();
   }, [handlePrint, progress]);
   
-  // Enhanced PDF export handler with proper type safety - this is where the error was occurring
-  const enhancedExportPDFHandler = useCallback(() => {
-    // Convert both startDate and endDate to valid Date objects or undefined
-    const validStartDate = ensureValidDate(startDate);
-    const validEndDate = ensureValidDate(endDate);
-    
-    // Now call the export function with properly validated dates
-    handleExportPDF(
-      progress,
-      validStartDate, // Now guaranteed to be Date | undefined
-      validEndDate,   // Now guaranteed to be Date | undefined
-      notes,
-      completionStats.completionPercentage
-    );
-  }, [progress, startDate, endDate, notes, completionStats.completionPercentage, handleExportPDF]);
-  
   // Auto-save on first load to ensure data is properly initialized
   useEffect(() => {
     if (isLoaded) {
@@ -132,10 +114,6 @@ const StoragePreparationChecklist: React.FC = memo(() => {
 
   console.log("StoragePreparationChecklist - Rendering main content");
   
-  // Ensure valid dates for all components that expect Date objects
-  const safeStartDate = ensureValidDate(startDate);
-  const safeEndDate = ensureValidDate(endDate);
-  
   return (
     <div className="min-h-screen bg-[#080F1F] py-12 storage-preparation-checklist">
       <div className="container mx-auto px-4 max-w-5xl">
@@ -147,15 +125,14 @@ const StoragePreparationChecklist: React.FC = memo(() => {
             onSave={handleSaveProgress}
             onReset={handleResetRequest}
             onPrint={enhancedPrintHandler}
-            onExportPDF={enhancedExportPDFHandler}
             isSaving={isSaving}
           />
           
           <CardContent className="pt-6">
             <ChecklistContent 
               progress={progress}
-              startDate={safeStartDate}
-              endDate={safeEndDate}
+              startDate={startDate}
+              endDate={endDate}
               setStartDate={setStartDate}
               setEndDate={setEndDate}
               notes={notes}

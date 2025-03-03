@@ -1,20 +1,17 @@
 
-import React from 'react';
-import { Button } from "@/components/ui/button";
+import React, { useEffect, useState } from 'react';
 import { CardHeader } from "@/components/ui/card";
-import { Progress } from "@/components/ui/progress";
-import { Save, RotateCcw, Printer, FileDown } from "lucide-react";
-import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
+import { Button } from "@/components/ui/button";
+import { Printer, Save, RotateCcw, CheckCircle, Loader2 } from "lucide-react";
 
 interface ChecklistHeaderProps {
   completionPercentage: number;
-  lastSavedAt: Date | null;
+  lastSavedAt: string | null;
   getLastSavedMessage: () => string;
   onSave: () => void;
   onReset: () => void;
   onPrint: () => void;
-  onExportPDF: () => void; // New prop for PDF export
-  isSaving: boolean;
+  isSaving?: boolean;
 }
 
 const ChecklistHeader: React.FC<ChecklistHeaderProps> = ({
@@ -24,95 +21,82 @@ const ChecklistHeader: React.FC<ChecklistHeaderProps> = ({
   onSave,
   onReset,
   onPrint,
-  onExportPDF, // New prop for PDF export
-  isSaving
+  isSaving = false
 }) => {
+  // Force sanitize the percentage value
+  const safePercentage = typeof completionPercentage === 'number' && !isNaN(completionPercentage)
+    ? Math.max(0, Math.min(Math.round(completionPercentage), 100))
+    : 0;
+  
   return (
-    <CardHeader className="pb-4 border-b border-gray-800">
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-4">
-        <div>
+    <CardHeader className="p-6 border-b border-gray-700">
+      <div className="space-y-4">
+        <div className="flex flex-col space-y-2">
           <h2 className="text-2xl font-bold text-white">RV Storage Preparation Checklist</h2>
-          <p className="text-[#E2E8FF] text-opacity-80 mt-1">{getLastSavedMessage()}</p>
+          <p className="text-[#E2E8FF]">Track your progress as you prepare your RV for storage</p>
         </div>
-        <div className="flex space-x-2 mt-4 md:mt-0">
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Button
-                variant="outline"
-                size="sm"
-                className="text-gray-300 border-gray-700 hover:bg-[#151A22] hover:text-white"
-                disabled={isSaving}
-                onClick={onSave}
-              >
-                <Save className="h-4 w-4 mr-2" />
-                {isSaving ? "Saving..." : "Save"}
-              </Button>
-            </TooltipTrigger>
-            <TooltipContent>
-              <p>Save your progress</p>
-            </TooltipContent>
-          </Tooltip>
+        
+        <div className="flex items-center justify-between">
+          <div className="flex-1">
+            {lastSavedAt && (
+              <span className="text-gray-400 text-xs">{getLastSavedMessage()}</span>
+            )}
+          </div>
           
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Button
-                variant="outline"
-                size="sm"
-                className="text-gray-300 border-gray-700 hover:bg-[#151A22] hover:text-white"
-                onClick={onReset}
-              >
-                <RotateCcw className="h-4 w-4 mr-2" />
-                Reset
-              </Button>
-            </TooltipTrigger>
-            <TooltipContent>
-              <p>Reset all progress</p>
-            </TooltipContent>
-          </Tooltip>
-          
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Button
-                variant="outline"
-                size="sm"
-                className="text-gray-300 border-gray-700 hover:bg-[#151A22] hover:text-white"
-                onClick={onPrint}
-              >
-                <Printer className="h-4 w-4 mr-2" />
-                Print
-              </Button>
-            </TooltipTrigger>
-            <TooltipContent>
-              <p>Print checklist</p>
-            </TooltipContent>
-          </Tooltip>
-          
-          {/* New PDF export button */}
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Button
-                variant="outline"
-                size="sm"
-                className="text-gray-300 border-gray-700 hover:bg-[#151A22] hover:text-[#5B9BD5]"
-                onClick={onExportPDF}
-              >
-                <FileDown className="h-4 w-4 mr-2" />
-                Export PDF
-              </Button>
-            </TooltipTrigger>
-            <TooltipContent>
-              <p>Download as PDF</p>
-            </TooltipContent>
-          </Tooltip>
+          <div className="bg-[#131a2a] px-4 py-2 rounded-md flex items-center completion-indicator">
+            <CheckCircle className="h-5 w-5 mr-2 text-green-500" />
+            <span className="text-white">Completion</span>
+            <span className="text-green-500 font-semibold ml-2">{safePercentage}%</span>
+          </div>
         </div>
-      </div>
-      
-      <div className="space-y-2">
-        <div className="flex justify-between items-center">
-          <span className="text-sm font-medium text-[#5B9BD5]">Completion</span>
-          <span className="text-sm font-medium text-white">{Math.round(completionPercentage)}%</span>
+        
+        <div className="flex flex-wrap gap-2 print:hidden">
+          <Button 
+            variant="outline" 
+            className="bg-[#151A22] border-gray-700 text-white hover:bg-[#1d2532] hover:text-white"
+            onClick={onSave}
+            disabled={isSaving}
+          >
+            {isSaving ? (
+              <>
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                Saving...
+              </>
+            ) : (
+              <>
+                <Save className="mr-2 h-4 w-4" />
+                Save Progress
+              </>
+            )}
+          </Button>
+          
+          <Button 
+            variant="outline" 
+            className="bg-[#151A22] border-gray-700 text-white hover:bg-[#1d2532] hover:text-white"
+            onClick={onPrint}
+            disabled={isSaving}
+          >
+            <Printer className="mr-2 h-4 w-4" />
+            Print Checklist
+          </Button>
+          
+          <Button 
+            variant="outline" 
+            className="bg-[#151A22] border-gray-700 text-white hover:bg-[#1d2532] hover:text-white hover:border-red-500"
+            onClick={onReset}
+            disabled={isSaving}
+          >
+            <RotateCcw className="mr-2 h-4 w-4" />
+            Reset
+          </Button>
+          
+          {safePercentage === 100 && (
+            <div className="ml-auto flex items-center text-green-400">
+              <CheckCircle className="h-5 w-5 mr-1" />
+              <span>Checklist Complete!</span>
+            </div>
+          )}
         </div>
-        <Progress value={completionPercentage} className="h-2 bg-gray-800" indicatorClassName="bg-[#5B9BD5]" />
       </div>
     </CardHeader>
   );

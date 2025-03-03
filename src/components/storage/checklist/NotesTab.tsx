@@ -1,8 +1,13 @@
+
 import React, { useEffect, useRef, useState, useCallback } from 'react';
 import { Textarea } from "@/components/ui/textarea";
 import { ChecklistNotes } from './hooks/types';
 import { debounce } from 'lodash';
-import { NotesTabProps } from './ChecklistTypes';
+
+interface NotesTabProps {
+  notes: ChecklistNotes;
+  onNotesChange: (field: keyof ChecklistNotes, value: string) => void;
+}
 
 const NotesTab: React.FC<NotesTabProps> = ({ notes, onNotesChange }) => {
   // Keep track of previous notes to detect changes

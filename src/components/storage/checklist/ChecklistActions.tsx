@@ -1,131 +1,103 @@
 
-import { useState, useCallback } from 'react';
-import { useToast } from "@/components/ui/use-toast";
-import { exportChecklistToPDF } from './utils/pdfExport';
-import { checklistData } from './utils/checklistData';
-import { ChecklistNotes } from './hooks/types';
-import { ensureValidDate } from './utils/dateUtils';
+import React from 'react';
+import { toast } from "@/components/ui/use-toast";
+import { useCallback, useState } from 'react';
 
 interface ChecklistActionsProps {
-  saveData: (showToast?: boolean) => void;
+  saveData: (explicit: boolean) => void;
   resetData: () => void;
   setResetDialogOpen: (open: boolean) => void;
 }
 
-export const useChecklistActions = ({
-  saveData,
-  resetData,
-  setResetDialogOpen
+export const useChecklistActions = ({ 
+  saveData, 
+  resetData, 
+  setResetDialogOpen 
 }: ChecklistActionsProps) => {
   const [isSaving, setIsSaving] = useState(false);
-  const { toast } = useToast();
 
-  // Handle save progress with debounce
   const handleSaveProgress = useCallback(() => {
-    if (isSaving) return;
-    
-    setIsSaving(true);
-    
     try {
-      saveData(true);
+      setIsSaving(true);
       
-      // Show success toast
-      toast({
-        title: "Progress saved",
-        description: "Your checklist has been saved successfully.",
-        variant: "default",
-      });
-    } catch (error) {
-      console.error("Error saving progress:", error);
-      
-      // Show error toast
-      toast({
-        title: "Save failed",
-        description: "There was an error saving your progress. Please try again.",
-        variant: "destructive",
-      });
-    } finally {
+      // Short timeout to allow UI to update before potentially blocking operation
       setTimeout(() => {
-        setIsSaving(false);
-      }, 800);
+        try {
+          saveData(true);
+          
+          toast({
+            title: "Progress Saved",
+            description: "Your checklist progress has been saved successfully.",
+            variant: "default",
+          });
+        } catch (error) {
+          console.error("Error saving progress:", error);
+          toast({
+            title: "Save Failed",
+            description: "There was an error saving your progress. Please try again.",
+            variant: "destructive",
+          });
+        } finally {
+          setIsSaving(false);
+        }
+      }, 50);
+    } catch (error) {
+      console.error("Error in save handler:", error);
+      setIsSaving(false);
     }
-  }, [isSaving, saveData, toast]);
+  }, [saveData]);
 
-  // Handle reset request
   const handleResetRequest = useCallback(() => {
     setResetDialogOpen(true);
   }, [setResetDialogOpen]);
 
-  // Handle reset confirm
   const handleResetConfirm = useCallback(() => {
     resetData();
     setResetDialogOpen(false);
     
-    // Show reset toast
     toast({
-      title: "Checklist reset",
+      title: "Progress Reset",
       description: "Your checklist has been reset to default state.",
-      variant: "default",
     });
-  }, [resetData, setResetDialogOpen, toast]);
+  }, [resetData, setResetDialogOpen]);
 
-  // Handle print
   const handlePrint = useCallback(() => {
-    // First, save the current progress
-    saveData(false);
-    
-    // Then prepare for print and trigger browser print dialog
-    setTimeout(() => {
-      window.print();
-    }, 300);
-  }, [saveData]);
-  
-  // Enhanced PDF export handler with proper type safety for dates
-  const handleExportPDF = useCallback((
-    progress: {[key: string]: boolean | string},
-    startDate: Date | undefined,
-    endDate: Date | undefined,
-    notes: ChecklistNotes,
-    completionPercentage: number
-  ) => {
-    // First, save the current progress
-    saveData(false);
-    
-    // Export to PDF with valid date objects
+    // Force a save before printing
     try {
-      exportChecklistToPDF(
-        progress,
-        startDate,
-        endDate,
-        notes,
-        completionPercentage,
-        checklistData
-      );
+      setIsSaving(true);
       
-      // Show success toast
-      toast({
-        title: "PDF exported",
-        description: "Your checklist has been exported to PDF successfully.",
-        variant: "default",
-      });
+      // Short timeout to allow UI to update
+      setTimeout(() => {
+        try {
+          saveData(true);
+          window.print();
+          
+          toast({
+            title: "Printing",
+            description: "Sending checklist to printer...",
+          });
+        } catch (error) {
+          console.error("Error preparing for print:", error);
+          toast({
+            title: "Print Failed",
+            description: "There was an error preparing the document for printing.",
+            variant: "destructive",
+          });
+        } finally {
+          setIsSaving(false);
+        }
+      }, 50);
     } catch (error) {
-      console.error("Error exporting PDF:", error);
-      
-      // Show error toast
-      toast({
-        title: "Export failed",
-        description: "There was an error exporting your checklist. Please try again.",
-        variant: "destructive",
-      });
+      console.error("Error in print handler:", error);
+      setIsSaving(false);
     }
-  }, [saveData, toast]);
+  }, [saveData]);
 
   return {
     isSaving,
     handleSaveProgress,
     handleResetRequest,
     handleResetConfirm,
-    handlePrint,
-    handleExportPDF
+    handlePrint
   };
 };
