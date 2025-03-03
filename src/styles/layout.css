@@ -79,3 +79,28 @@ label.inner1 {
 .flex.outer1 button.border-primary {
   border-color: #fff !important;
 }
+
+/* Print-specific checkbox styling overrides */
+@media print {
+  .print-checkbox {
+    visibility: visible !important;
+    opacity: 1 !important;
+    display: inline-block !important;
+    position: relative !important;
+    print-color-adjust: exact !important;
+    -webkit-print-color-adjust: exact !important;
+  }
+  
+  [role="checkbox"][data-print-checked="true"]::after,
+  [role="checkbox"][aria-checked="true"]::after,
+  [role="checkbox"][data-state="checked"]::after {
+    content: '✓' !important;
+    visibility: visible !important;
+    display: block !important;
+    position: absolute !important;
+    font-weight: bold !important;
+    z-index: 9999 !important;
+    print-color-adjust: exact !important;
+    -webkit-print-color-adjust: exact !important;
+  }
+}

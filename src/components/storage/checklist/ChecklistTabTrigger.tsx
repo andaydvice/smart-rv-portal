@@ -72,6 +72,16 @@ const ChecklistTabTrigger: React.FC<ChecklistTabTriggerProps> = ({
     if (onTabClick) {
       onTabClick(); // Call the parent's onTabClick handler to trigger saves
     }
+    
+    // Refresh checkbox states for print preparation
+    setTimeout(() => {
+      const checkboxes = document.querySelectorAll('[role="checkbox"]');
+      checkboxes.forEach(checkbox => {
+        const isChecked = checkbox.getAttribute('data-state') === 'checked';
+        checkbox.setAttribute('data-print-checked', isChecked ? 'true' : 'false');
+        checkbox.setAttribute('aria-checked', isChecked ? 'true' : 'false');
+      });
+    }, 100);
   };
   
   return (

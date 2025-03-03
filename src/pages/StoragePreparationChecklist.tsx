@@ -1,3 +1,4 @@
+
 import React, { useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import StoragePreparationChecklist from '@/components/storage/StoragePreparationChecklist';
@@ -47,9 +48,30 @@ const StoragePreparationChecklistPage: React.FC = () => {
     syncProgressBars();
     setTimeout(syncProgressBars, 200);
     
-    console.log("Page fully initialized");
+    // Add special print CSS to ensure checkboxes display properly in print mode
+    const addPrintStyles = () => {
+      // Find all checkboxes and ensure they have the proper print attributes
+      const checkboxes = document.querySelectorAll('[role="checkbox"]');
+      checkboxes.forEach(checkbox => {
+        // Make sure the data-print-checked attribute is set based on the checked state
+        const isChecked = checkbox.getAttribute('data-state') === 'checked';
+        checkbox.setAttribute('data-print-checked', isChecked ? 'true' : 'false');
+        checkbox.setAttribute('aria-checked', isChecked ? 'true' : 'false');
+        
+        // Add a special print class to ensure visibility
+        checkbox.classList.add('print-checkbox');
+      });
+      
+      console.log(`Print preparation complete: ${checkboxes.length} checkboxes prepared for printing`);
+    };
     
+    // Run print preparation on load and whenever print is triggered
+    addPrintStyles();
+    window.addEventListener('beforeprint', addPrintStyles);
+    
+    // Cleanup
     return () => {
+      window.removeEventListener('beforeprint', addPrintStyles);
       console.log("StoragePreparationChecklistPage unmounting");
     };
   }, []);
