@@ -27,17 +27,19 @@ const ChecklistHeader: React.FC<ChecklistHeaderProps> = ({
   // Maintain local state to ensure smoother transitions
   const [displayedPercentage, setDisplayedPercentage] = useState<number>(0);
   
-  // Update displayed percentage when prop changes
+  // Force sanitize the percentage value
   useEffect(() => {
-    // Sanitize percentage value to ensure it's a valid number between 0-100
-    const safePercentage = typeof completionPercentage === 'number' && !isNaN(completionPercentage)
-      ? Math.max(0, Math.min(completionPercentage, 100))
-      : 0;
-      
-    // Update the display value
-    setDisplayedPercentage(safePercentage);
+    if (typeof completionPercentage !== 'number' || isNaN(completionPercentage)) {
+      console.error(`Invalid completion percentage received: ${completionPercentage}`);
+      setDisplayedPercentage(0);
+      return;
+    }
     
-    console.log(`ChecklistHeader received ${completionPercentage}%, sanitized to ${safePercentage}%`);
+    // Ensure percentage is within valid range
+    const safePercentage = Math.max(0, Math.min(Math.round(completionPercentage), 100));
+    
+    console.log(`ChecklistHeader - Updating progress from ${displayedPercentage}% to ${safePercentage}%`);
+    setDisplayedPercentage(safePercentage);
   }, [completionPercentage]);
   
   return (

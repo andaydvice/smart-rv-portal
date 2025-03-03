@@ -26,10 +26,27 @@ const StoragePreparationChecklistPage: React.FC = () => {
       // Add a class to force reflow/repaint
       elem.classList.add('force-repaint');
       // Remove it after a brief delay to trigger the browser to update
-      setTimeout(() => elem.classList.remove('force-repaint'), 50);
+      setTimeout(() => {
+        if (elem) elem.classList.remove('force-repaint');
+      }, 50);
     });
+
+    // Force progress elements to consistently reflect current value
+    const syncProgressBars = () => {
+      const progressBars = document.querySelectorAll('.progress-bar');
+      progressBars.forEach(bar => {
+        const value = bar.getAttribute('data-value') || '0';
+        const indicator = bar.querySelector('.progress-indicator');
+        if (indicator && indicator instanceof HTMLElement) {
+          indicator.style.transform = `translateX(-${100 - parseInt(value, 10)}%)`;
+        }
+      });
+    };
+
+    // Run once on load and again after a short delay
+    syncProgressBars();
+    setTimeout(syncProgressBars, 200);
     
-    // Add event logging
     console.log("Page fully initialized");
     
     return () => {

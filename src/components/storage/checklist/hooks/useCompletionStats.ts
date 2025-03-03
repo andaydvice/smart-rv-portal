@@ -25,11 +25,14 @@ export const useCompletionStats = (progress: {[key: string]: boolean | string}) 
         // Verify key format
         const isValidKeyFormat = validKeyPattern.test(key);
         
-        // Strictly validate that the value is a boolean
-        // This is important as localStorage might convert booleans to strings
-        const isActualBoolean = typeof value === 'boolean';
+        // Strictly validate that the value is a boolean or 'true'/'false' string
+        const isValidValue = typeof value === 'boolean' || value === 'true' || value === 'false';
         
-        return isValidKeyFormat && isActualBoolean;
+        if (isValidKeyFormat && !isValidValue) {
+          console.warn(`Found invalid value type for checkbox key ${key}:`, value);
+        }
+        
+        return isValidKeyFormat && isValidValue;
       })
       .map(([key]) => key);
 
@@ -37,10 +40,13 @@ export const useCompletionStats = (progress: {[key: string]: boolean | string}) 
     
     const totalItems = checkboxKeys.length;
     
-    // Only count items that are strictly true
-    const completedItems = checkboxKeys.filter(key => progress[key] === true).length;
+    // Count items that are true (either boolean true or string 'true')
+    const completedItems = checkboxKeys.filter(key => {
+      const value = progress[key];
+      return value === true || value === 'true';
+    }).length;
     
-    // Calculate percentage with proper bounds checking
+    // Calculate percentage with proper bounds checking and rounding
     let completionPercentage = 0;
     if (totalItems > 0) {
       completionPercentage = Math.round((completedItems / totalItems) * 100);
