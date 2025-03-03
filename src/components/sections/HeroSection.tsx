@@ -26,9 +26,8 @@ export const HeroSection = () => {
           className="w-full h-full object-cover"
           loading="eager"
           onLoad={() => setImageLoaded(true)}
-          style={{ opacity: 1, visibility: "visible" }}
         />
-        <div className="absolute inset-0 bg-black/50" />
+        <div className="absolute inset-0 bg-black/50"></div>
       </div>
 
       {/* Hero content */}

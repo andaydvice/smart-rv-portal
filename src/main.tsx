@@ -10,6 +10,12 @@ console.log('Starting application...');
 const rootElement = document.getElementById('root');
 
 if (rootElement) {
+  // Remove loading indicator if present
+  const loadingElement = document.querySelector('.app-loading');
+  if (loadingElement && loadingElement.parentNode) {
+    loadingElement.parentNode.removeChild(loadingElement);
+  }
+
   const root = ReactDOM.createRoot(rootElement);
   
   root.render(

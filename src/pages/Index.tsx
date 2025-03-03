@@ -1,5 +1,5 @@
 
-import React from "react";
+import React, { useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import { HeroSection } from "@/components/sections/HeroSection";
 import { FeaturesSection } from "@/components/sections/FeaturesSection";
@@ -11,6 +11,11 @@ import { FeatureHighlights } from "@/components/sections/FeatureHighlights";
 import Layout from "@/components/layout/Layout";
 
 const Index = () => {
+  // Ensure we start at the top of the page
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <Layout>
       <motion.div 
