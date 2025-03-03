@@ -96,24 +96,24 @@ const StoragePreparationChecklist: React.FC = memo(() => {
   
   // Enhanced PDF export handler with proper type safety
   const enhancedExportPDFHandler = useCallback(() => {
-    // Validate that startDate and endDate are actual Date objects or undefined
-    const ensureValidDate = (date: any): Date | undefined => {
-      if (!date) return undefined;
+    // Ensure dates are valid Date objects or undefined when passed to exportChecklistToPDF
+    const ensureValidDate = (dateInput: any): Date | undefined => {
+      if (!dateInput) return undefined;
       
-      // If it's already a Date object
-      if (date instanceof Date && !isNaN(date.getTime())) {
-        return date;
+      // If it's already a Date object and valid
+      if (dateInput instanceof Date && !isNaN(dateInput.getTime())) {
+        return dateInput;
       }
       
       // If it's a string, try to convert it
-      if (typeof date === 'string') {
+      if (typeof dateInput === 'string') {
         try {
-          const parsedDate = new Date(date);
-          if (!isNaN(parsedDate.getTime())) {
-            return parsedDate;
+          const date = new Date(dateInput);
+          if (!isNaN(date.getTime())) {
+            return date;
           }
         } catch (error) {
-          console.error("Invalid date string:", date);
+          console.error("Invalid date string:", dateInput);
         }
       }
       

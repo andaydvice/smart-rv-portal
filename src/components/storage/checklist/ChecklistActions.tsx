@@ -90,37 +90,12 @@ export const useChecklistActions = ({
     // First, save the current progress
     saveData(false);
     
-    // Ensure dates are valid Date objects or undefined
-    const validateDate = (date: any): Date | undefined => {
-      if (!date) return undefined;
-      
-      if (date instanceof Date && !isNaN(date.getTime())) {
-        return date;
-      }
-      
-      if (typeof date === 'string') {
-        try {
-          const parsedDate = new Date(date);
-          if (!isNaN(parsedDate.getTime())) {
-            return parsedDate;
-          }
-        } catch (error) {
-          console.error("Invalid date:", date);
-        }
-      }
-      
-      return undefined;
-    };
-    
-    const validStartDate = validateDate(startDate);
-    const validEndDate = validateDate(endDate);
-    
-    // Then export to PDF
+    // Then export to PDF - the dates should already be validated by the caller
     try {
       exportChecklistToPDF(
         progress,
-        validStartDate,
-        validEndDate,
+        startDate, // Already validated as Date | undefined by the caller
+        endDate,   // Already validated as Date | undefined by the caller
         notes,
         completionPercentage,
         checklistData

@@ -86,8 +86,8 @@ export const usePersistence = () => {
   // Save data to localStorage with improved error handling, retry mechanism, and chunking for large data
   const saveData = useCallback((
     progress: {[key: string]: boolean | string},
-    startDate: Date | undefined,
-    endDate: Date | undefined,
+    startDate: Date | undefined | string,
+    endDate: Date | undefined | string,
     notes: ChecklistNotes,
     manualSave: boolean = false
   ) => {

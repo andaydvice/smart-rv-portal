@@ -39,7 +39,7 @@ export const useDateHandlers = (
   };
 
   // Set start date with optimized save and type safety
-  const setStartDateAndSave = useCallback((date: Date | undefined) => {
+  const setStartDateAndSave = useCallback((date: Date | undefined | string) => {
     // Convert to valid Date or undefined
     const validDate = ensureValidDate(date);
     
@@ -67,7 +67,7 @@ export const useDateHandlers = (
   }, [saveDataWrapper, setStartDate, startDateRef, batchUpdateRef]);
 
   // Set end date with optimized save and type safety
-  const setEndDateAndSave = useCallback((date: Date | undefined) => {
+  const setEndDateAndSave = useCallback((date: Date | undefined | string) => {
     // Convert to valid Date or undefined
     const validDate = ensureValidDate(date);
     
