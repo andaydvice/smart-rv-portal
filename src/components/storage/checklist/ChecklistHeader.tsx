@@ -30,6 +30,9 @@ const ChecklistHeader: React.FC<ChecklistHeaderProps> = ({
   const safePercentage = typeof completionPercentage === 'number' && !isNaN(completionPercentage)
     ? Math.max(0, Math.min(completionPercentage, 100))
     : 0;
+    
+  // Log the actual percentage we're using for rendering
+  console.log(`ChecklistHeader using safe percentage: ${safePercentage}%`);
   
   return (
     <CardHeader className="p-6 border-b border-gray-700">

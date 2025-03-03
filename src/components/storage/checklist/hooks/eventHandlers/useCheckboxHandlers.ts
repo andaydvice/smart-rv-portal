@@ -28,6 +28,13 @@ export const useCheckboxHandlers = (
     // Skip if the value hasn't changed
     if (progressRef.current[id] === checked) return new Date().toISOString();
     
+    console.log(`Checkbox change: ${id} = ${checked}`);
+    
+    // Ensure the ID follows our section-number pattern
+    if (!/^[a-z]+-\d+$/.test(id)) {
+      console.warn(`Invalid checkbox ID format: ${id}`);
+    }
+    
     // Create updated progress object
     const updatedProgress = { ...progressRef.current, [id]: checked };
     

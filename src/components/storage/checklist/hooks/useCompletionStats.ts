@@ -11,23 +11,19 @@ export const useCompletionStats = (progress: {[key: string]: boolean | string}) 
         return { totalItems: 0, completedItems: 0, completionPercentage: 0 };
       }
       
-      // Find all checkbox items by inspecting all keys in the progress object
-      // We need to identify all checkbox items across all tabs
+      // Identify checkbox items using a more reliable approach
+      // Look for keys that match section-number pattern which are checkboxes in our app
       const checkboxKeys = Object.keys(progress).filter(key => {
-        // Exclude notes, dates and other non-checkbox fields
-        const isCheckboxItem = (
-          // Skip fields that are clearly not checkboxes
-          key !== 'notes' && 
-          key !== 'startDate' && 
-          key !== 'endDate' && 
-          !key.includes('Date') &&
-          
-          // Check if the value is a boolean or a string representation of a boolean
-          (typeof progress[key] === 'boolean' || progress[key] === 'true' || progress[key] === 'false')
-        );
+        // Use a specific pattern match for checkbox items (section-number format)
+        // Example: "exterior-1", "electrical-5", "plumbing-2", etc.
+        const isCheckboxItem = /^[a-z]+-\d+$/.test(key) && 
+          // Verify it's a boolean or string boolean value
+          (typeof progress[key] === 'boolean' || progress[key] === 'true' || progress[key] === 'false');
         
         return isCheckboxItem;
       });
+      
+      console.log("Identified checkbox keys:", checkboxKeys);
       
       const totalItems = checkboxKeys.length;
       console.log(`Total checkbox items: ${totalItems}`);
