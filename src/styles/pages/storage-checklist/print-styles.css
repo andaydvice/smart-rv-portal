@@ -57,7 +57,7 @@
   
   /* Checkbox appearance for print */
   .storage-preparation-checklist [role="checkbox"] {
-    border: 1px solid black !important;
+    border: 2px solid black !important;
     background-color: white !important;
     width: 16px !important;
     height: 16px !important;
@@ -66,24 +66,50 @@
     margin-top: 3px !important;
     position: relative !important;
     display: inline-block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    print-color-adjust: exact !important;
+    -webkit-print-color-adjust: exact !important;
   }
   
   /* Improve checked state visibility in print */
+  .storage-preparation-checklist [role="checkbox"][data-print-checked="true"]::after,
+  .storage-preparation-checklist [role="checkbox"][aria-checked="true"]::after,
   .storage-preparation-checklist [role="checkbox"][data-state="checked"]::after {
     content: '✓' !important;
     position: absolute !important;
-    top: -1px !important;
+    top: -2px !important;
     left: 3px !important;
     color: black !important;
     font-weight: bold !important;
-    font-size: 12px !important;
+    font-size: 14px !important;
     visibility: visible !important;
     display: block !important;
+    z-index: 999 !important;
+    print-color-adjust: exact !important;
+    -webkit-print-color-adjust: exact !important;
   }
   
   /* Hide the original checkbox indicator icon */
   .storage-preparation-checklist [role="checkbox"] svg {
     display: none !important;
+  }
+  
+  /* Ensure all checklist items are visible */
+  .storage-preparation-checklist .checklist-item {
+    display: flex !important;
+    visibility: visible !important;
+    margin-bottom: 8px !important;
+    page-break-inside: avoid !important;
+  }
+  
+  /* Make sure checklist sections print properly */
+  .storage-preparation-checklist .checklist-section {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+    margin-bottom: 15px !important;
+    border: 1px solid #000 !important;
+    background-color: white !important;
   }
   
   /* Show all tab panels in print */
@@ -175,5 +201,22 @@
     color: black !important;
     background-color: white !important;
   }
+  
+  /* Ensure print-checkbox class is clearly visible */
+  .storage-preparation-checklist .print-checkbox {
+    visibility: visible !important;
+    opacity: 1 !important;
+    display: inline-block !important;
+    border: 2px solid black !important;
+    background-color: white !important;
+    width: 18px !important;
+    height: 18px !important;
+    min-width: 18px !important;
+    min-height: 18px !important;
+    position: relative !important;
+    border-radius: 3px !important;
+    margin-right: 8px !important;
+    print-color-adjust: exact !important;
+    -webkit-print-color-adjust: exact !important;
+  }
 }
-

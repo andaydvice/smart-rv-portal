@@ -29,6 +29,7 @@ const Checkbox = React.forwardRef<
       ...props.style
     }}
     {...props}
+    data-print-checked={props["data-state"] === "checked" ? "true" : "false"}
   >
     <CheckboxPrimitive.Indicator
       className={cn("flex items-center justify-center text-current")}
