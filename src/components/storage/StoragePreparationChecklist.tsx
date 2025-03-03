@@ -8,6 +8,7 @@ import ChecklistLoading from './checklist/ChecklistLoading';
 import ResetDialog from './checklist/ResetDialog';
 import useCompletionStats from './checklist/hooks/useCompletionStats';
 import { useChecklistActions } from './checklist/ChecklistActions';
+import { ensureValidDate } from './checklist/utils/dateUtils';
 
 // Memoize the component to prevent unnecessary re-renders
 const StoragePreparationChecklist: React.FC = memo(() => {
@@ -114,6 +115,10 @@ const StoragePreparationChecklist: React.FC = memo(() => {
 
   console.log("StoragePreparationChecklist - Rendering main content");
   
+  // Ensure dates are properly converted to Date objects or undefined
+  const validStartDate = ensureValidDate(startDate);
+  const validEndDate = ensureValidDate(endDate);
+  
   return (
     <div className="min-h-screen bg-[#080F1F] py-12 storage-preparation-checklist">
       <div className="container mx-auto px-4 max-w-5xl">
@@ -131,8 +136,8 @@ const StoragePreparationChecklist: React.FC = memo(() => {
           <CardContent className="pt-6">
             <ChecklistContent 
               progress={progress}
-              startDate={startDate}
-              endDate={endDate}
+              startDate={validStartDate}
+              endDate={validEndDate}
               setStartDate={setStartDate}
               setEndDate={setEndDate}
               notes={notes}
