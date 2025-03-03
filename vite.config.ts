@@ -13,7 +13,8 @@ export default defineConfig(({ mode }) => ({
       clientPort: 443,
       path: '/@vite/client',
       timeout: 120000,
-      host: '95549a04-cacd-4e64-a52b-ecc6aed8e361.lovableproject.com',
+      // Use the correct host without any subdomain prefixes
+      host: 'lovableproject.com',
       overlay: true,
       protocol: 'wss',
       // Add better reconnection handling
@@ -24,6 +25,7 @@ export default defineConfig(({ mode }) => ({
       interval: 300 // Increase interval to reduce CPU usage
     },
     open: false,
+    cors: true // Enable CORS for all server requests
   },
   plugins: [
     react(),
@@ -51,7 +53,11 @@ export default defineConfig(({ mode }) => ({
         },
       },
     },
-    target: 'es2020' // Ensure consistent target with optimizeDeps
+    target: 'es2020', // Ensure consistent target with optimizeDeps
+    assetsInlineLimit: 4096, // Improve performance by inlining small assets
+    cssCodeSplit: true,
+    // Ensure proper MIME types for all assets
+    assetsDir: 'assets',
   },
   esbuild: {
     logOverride: { 'this-is-undefined-in-esm': 'silent' }

@@ -2,73 +2,106 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
 
-export const HeroSection = () => (
-  <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-    <div className="absolute inset-0">
-      <img
-        src="/lovable-uploads/f3ebf58c-7bbf-427f-9510-9c3b0aec6f6d.png"
-        alt="Luxury RV interior with panoramic windows and modern design"
-        className="w-full h-full object-cover"
-        loading="eager"
-      />
-      <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent" />
-    </div>
-    <motion.div
-      initial={{ opacity: 1, y: 0 }} 
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8 }}
-      className="relative text-center text-white px-4 max-w-5xl mx-auto"
-      style={{ visibility: 'visible', display: 'block' }}
-    >
-      <div className="absolute inset-0 bg-black/40 backdrop-blur-sm rounded-xl -bottom-8" />
-      <motion.h1 
-        initial={{ opacity: 1, y: 0 }}
+export const HeroSection = () => {
+  const [imageLoaded, setImageLoaded] = useState(false);
+  const [renderKey, setRenderKey] = useState(0);
+
+  // Ensure component is always visible
+  useEffect(() => {
+    console.log("HeroSection mounted");
+    
+    // Force re-render once after mount to ensure visibility
+    setTimeout(() => {
+      setRenderKey(prev => prev + 1);
+    }, 100);
+    
+    return () => {
+      console.log("HeroSection unmounted");
+    };
+  }, []);
+
+  return (
+    <section key={renderKey} className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      <div className="absolute inset-0">
+        {/* Use a background color as fallback while image loads */}
+        <div className="w-full h-full bg-gray-800"></div>
+        
+        <img
+          src="/lovable-uploads/f3ebf58c-7bbf-427f-9510-9c3b0aec6f6d.png"
+          alt="Luxury RV interior with panoramic windows and modern design"
+          className={`w-full h-full object-cover ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
+          loading="eager"
+          onLoad={() => {
+            console.log("Hero image loaded");
+            setImageLoaded(true);
+          }}
+          onError={(e) => {
+            console.error("Hero image failed to load", e);
+            // Still mark as loaded to show the fallback
+            setImageLoaded(true);
+          }}
+          style={{ visibility: 'visible', display: 'block' }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent" />
+      </div>
+      <motion.div
+        initial={{ opacity: 1, y: 0 }} 
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        className="text-6xl md:text-7xl font-bold mb-8 leading-tight relative z-10"
+        transition={{ duration: 0.8 }}
+        className="relative text-center text-white px-4 max-w-5xl mx-auto"
         style={{ visibility: 'visible', display: 'block' }}
       >
-        The Future of <br />
-        <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-emerald-400">
-          Luxury Travel
-        </span>
-      </motion.h1>
-      <motion.p 
-        initial={{ opacity: 1, y: 0 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        className="text-xl md:text-2xl mb-12 max-w-2xl mx-auto text-gray-200 relative z-10"
-        style={{ visibility: 'visible', display: 'block' }}
-      >
-        Experience unparalleled luxury and innovation with cutting edge smart technology
-      </motion.p>
-      <motion.div 
-        initial={{ opacity: 1, y: 0 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        className="flex flex-col sm:flex-row gap-6 justify-center items-center relative z-10"
-        style={{ visibility: 'visible', display: 'block' }}
-      >
-        <Link to="/schedule-demo">
-          <Button 
-            size="lg" 
-            className="bg-white text-black hover:bg-white/90 text-lg px-8 py-6 rounded-full transition-all duration-300 transform hover:scale-105"
-          >
-            Schedule Demo
-          </Button>
-        </Link>
-        <Link to="/models">
-          <Button 
-            variant="outline" 
-            size="lg" 
-            className="border-2 border-white text-white bg-transparent hover:bg-blue-500 hover:border-blue-500 hover:text-white text-lg px-8 py-6 rounded-full transition-all duration-300 transform hover:scale-105"
-          >
-            Explore Models
-          </Button>
-        </Link>
+        <div className="absolute inset-0 bg-black/40 backdrop-blur-sm rounded-xl -bottom-8" />
+        <motion.h1 
+          initial={{ opacity: 1, y: 0 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="text-6xl md:text-7xl font-bold mb-8 leading-tight relative z-10"
+          style={{ visibility: 'visible', display: 'block' }}
+        >
+          The Future of <br />
+          <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-emerald-400">
+            Luxury Travel
+          </span>
+        </motion.h1>
+        <motion.p 
+          initial={{ opacity: 1, y: 0 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="text-xl md:text-2xl mb-12 max-w-2xl mx-auto text-gray-200 relative z-10"
+          style={{ visibility: 'visible', display: 'block' }}
+        >
+          Experience unparalleled luxury and innovation with cutting edge smart technology
+        </motion.p>
+        <motion.div 
+          initial={{ opacity: 1, y: 0 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="flex flex-col sm:flex-row gap-6 justify-center items-center relative z-10"
+          style={{ visibility: 'visible', display: 'block' }}
+        >
+          <Link to="/schedule-demo">
+            <Button 
+              size="lg" 
+              className="bg-white text-black hover:bg-white/90 text-lg px-8 py-6 rounded-full transition-all duration-300 transform hover:scale-105"
+            >
+              Schedule Demo
+            </Button>
+          </Link>
+          <Link to="/models">
+            <Button 
+              variant="outline" 
+              size="lg" 
+              className="border-2 border-white text-white bg-transparent hover:bg-blue-500 hover:border-blue-500 hover:text-white text-lg px-8 py-6 rounded-full transition-all duration-300 transform hover:scale-105"
+            >
+              Explore Models
+            </Button>
+          </Link>
+        </motion.div>
       </motion.div>
-    </motion.div>
-    <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black/50 to-transparent" />
-  </section>
-);
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black/50 to-transparent" />
+    </section>
+  );
+};

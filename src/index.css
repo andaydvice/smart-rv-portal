@@ -1,4 +1,7 @@
 
+/* Critical CSS for initial render */
+@import './critical.css';
+
 /* Base imports and tailwind directives */
 @import './styles/base.css';
 
@@ -17,17 +20,4 @@
 /* Page-specific styles */
 @import './styles/pages/storage-checklist.css';
 
-/* Critical render path styles */
-body, html, #root {
-  visibility: visible !important;
-  display: block !important;
-  opacity: 1 !important;
-}
-
-.motion-div, 
-[data-framer-motion-initial],
-[data-radix-tabs-content] {
-  visibility: visible !important;
-  display: block !important;
-  opacity: 1 !important;
-}
+/* Critical render path styles - Moved to critical.css */

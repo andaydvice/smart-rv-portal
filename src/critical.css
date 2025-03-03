@@ -1,0 +1,45 @@
+
+/* Critical CSS for initial rendering */
+body, html, #root {
+  visibility: visible !important;
+  display: block !important;
+  opacity: 1 !important;
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  width: 100%;
+}
+
+/* Basic layout */
+.min-h-screen {
+  min-height: 100vh;
+}
+
+/* Critical component visibility */
+section, 
+h1, h2, h3, h4, h5, h6, 
+p, 
+button, 
+a, 
+img, 
+div[style*="transform"],
+[data-framer-motion-initial] {
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* Text visibility */
+.text-white, 
+.text-gray-300, 
+.text-blue-400, 
+.text-emerald-400, 
+.text-gray-200 {
+  color: inherit;
+  visibility: visible !important;
+}
+
+/* HeroSection specific styles */
+section img {
+  max-width: 100%;
+  height: auto;
+}
