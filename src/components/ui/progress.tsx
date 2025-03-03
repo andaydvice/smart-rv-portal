@@ -16,7 +16,7 @@ const Progress = React.forwardRef<
   const safeValue = typeof value === 'number' && !isNaN(value) ? Math.max(0, Math.min(value, 100)) : 0;
   
   // Use inline styles for maximum override capability
-  const rootStyles = { 
+  const rootStyles: React.CSSProperties = { 
     visibility: 'visible', 
     display: 'block', 
     position: 'relative',
@@ -29,17 +29,17 @@ const Progress = React.forwardRef<
     ...props.style 
   };
   
-  // Indicator styles with !important to override any other styles
-  const indicatorStyles = { 
+  // Indicator styles with proper type annotations
+  const indicatorStyles: React.CSSProperties = { 
     transform: `translateX(0%)`,
-    visibility: 'visible !important',
-    display: 'block !important',
-    position: 'absolute !important',
+    visibility: 'visible',
+    display: 'block',
+    position: 'absolute',
     left: 0,
     top: 0,
     bottom: 0,
-    width: `${safeValue}% !important`,
-    height: '100% !important',
+    width: `${safeValue}%`,
+    height: '100%',
     opacity: 1,
     backgroundColor: '#3B82F6'
   };

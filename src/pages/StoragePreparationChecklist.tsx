@@ -20,7 +20,6 @@ const StoragePreparationChecklistPage: React.FC = () => {
     // Preload the hero image
     const heroImage = new Image();
     heroImage.src = "/lovable-uploads/8d977391-dd15-4260-8535-839f728126c6.png";
-    heroImage.fetchPriority = 'high';
     
     // Add event logging
     console.log("Page fully initialized");

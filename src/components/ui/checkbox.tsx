@@ -16,7 +16,7 @@ const Checkbox = React.forwardRef<
       className
     )}
     style={{
-      visibility: 'visible !important',
+      visibility: 'visible',
       opacity: 1,
       display: 'inline-flex',
       width: '16px',
@@ -33,7 +33,7 @@ const Checkbox = React.forwardRef<
     <CheckboxPrimitive.Indicator
       className={cn("flex items-center justify-center text-current")}
       style={{ 
-        visibility: 'visible !important',
+        visibility: 'visible',
         opacity: 1,
         display: 'flex',
         alignItems: 'center',
