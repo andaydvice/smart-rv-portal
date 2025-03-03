@@ -14,6 +14,7 @@
     position: absolute;
     left: 0;
     top: 0;
+    width: 100%;
   }
   
   .storage-preparation-checklist * {
@@ -21,7 +22,8 @@
   }
   
   /* Print-specific hiding */
-  .storage-preparation-checklist button {
+  .storage-preparation-checklist button,
+  .storage-preparation-checklist [role="tablist"] {
     display: none !important;
   }
   
@@ -43,6 +45,8 @@
     background-color: white !important;
     color: black !important;
     margin: 0 !important;
+    padding: 15px !important;
+    width: 100% !important;
   }
   
   /* Print layout for sections and containers */
@@ -53,19 +57,68 @@
     border: 1px solid #000 !important;
     background-color: white !important;
     padding: 15px !important;
+    position: relative !important;
   }
   
   /* Tab panel display in print */
   .storage-preparation-checklist [role="tabpanel"] {
     display: block !important;
     visibility: visible !important;
-    break-inside: avoid !important;
+    break-inside: avoid-page !important;
     page-break-inside: avoid !important;
+    margin-bottom: 30px !important;
+    position: relative !important;
   }
   
-  /* Hide tab navigation in print */
-  .storage-preparation-checklist [role="tablist"] {
-    display: none !important;
+  /* Label each tab panel with its title */
+  .storage-preparation-checklist [role="tabpanel"][value="rv-info"]::before {
+    content: "RV INFO" !important;
+  }
+  
+  .storage-preparation-checklist [role="tabpanel"][value="exterior"]::before {
+    content: "EXTERIOR" !important;
+  }
+  
+  .storage-preparation-checklist [role="tabpanel"][value="interior"]::before {
+    content: "INTERIOR" !important;
+  }
+  
+  .storage-preparation-checklist [role="tabpanel"][value="plumbing"]::before {
+    content: "PLUMBING" !important;
+  }
+  
+  .storage-preparation-checklist [role="tabpanel"][value="electrical"]::before {
+    content: "ELECTRICAL SYSTEM" !important;
+  }
+  
+  .storage-preparation-checklist [role="tabpanel"][value="mechanical"]::before {
+    content: "MECHANICAL" !important;
+  }
+  
+  .storage-preparation-checklist [role="tabpanel"][value="tires"]::before {
+    content: "TIRES" !important;
+  }
+  
+  .storage-preparation-checklist [role="tabpanel"][value="pest-control"]::before {
+    content: "PEST CONTROL" !important;
+  }
+  
+  .storage-preparation-checklist [role="tabpanel"][value="security"]::before {
+    content: "SECURITY" !important;
+  }
+  
+  .storage-preparation-checklist [role="tabpanel"][value="notes"]::before {
+    content: "NOTES" !important;
+  }
+  
+  /* Force tab panels to have page breaks between them */
+  .storage-preparation-checklist [role="tabpanel"] {
+    page-break-before: always !important;
+  }
+  
+  /* Except the first one */
+  .storage-preparation-checklist [role="tabpanel"]:first-of-type {
+    page-break-before: avoid !important;
   }
   
   /* Override any dark backgrounds */
@@ -75,5 +128,15 @@
   .storage-preparation-checklist .bg-\[\#151A22\],
   .storage-preparation-checklist .bg-\[\#0c1219\] {
     background-color: white !important;
+  }
+  
+  /* Ensure checklist items and controls are visible */
+  .storage-preparation-checklist .checklist-item,
+  .storage-preparation-checklist [role="checkbox"],
+  .storage-preparation-checklist label {
+    visibility: visible !important;
+    display: flex !important;
+    position: relative !important;
+    page-break-inside: avoid !important;
   }
 }

@@ -57,7 +57,41 @@ const StoragePreparationChecklist: React.FC = memo(() => {
   const enhancedCheckboxHandler = useCallback((id: string, checked: boolean) => {
     console.log(`Checkbox change: ${id} => ${checked}`);
     handleCheckboxChange(id, checked);
+    
+    // After a short delay, update the print-specific attributes for this checkbox
+    setTimeout(() => {
+      const checkbox = document.getElementById(id);
+      if (checkbox) {
+        checkbox.setAttribute('data-print-checked', checked ? 'true' : 'false');
+        checkbox.setAttribute('aria-checked', checked ? 'true' : 'false');
+        checkbox.setAttribute('data-state', checked ? 'checked' : 'unchecked');
+        
+        // Also update the label
+        const label = document.querySelector(`label[for="${id}"]`);
+        if (label) {
+          label.setAttribute('data-checked', checked ? 'true' : 'false');
+          label.setAttribute('data-print-state', checked ? 'checked' : 'unchecked');
+        }
+      }
+    }, 50);
   }, [handleCheckboxChange]);
+  
+  // Enhanced print handler to ensure all checkboxes are properly prepared
+  const enhancedPrintHandler = useCallback(() => {
+    // First prepare all checkboxes for printing
+    const checkboxes = document.querySelectorAll('[role="checkbox"]');
+    checkboxes.forEach(checkbox => {
+      const id = checkbox.getAttribute('id');
+      const isChecked = progress[id as string];
+      
+      checkbox.setAttribute('data-print-checked', isChecked ? 'true' : 'false');
+      checkbox.setAttribute('aria-checked', isChecked ? 'true' : 'false');
+      checkbox.setAttribute('data-state', isChecked ? 'checked' : 'unchecked');
+    });
+    
+    // Then call the original print handler
+    handlePrint();
+  }, [handlePrint, progress]);
   
   // Auto-save on first load to ensure data is properly initialized
   useEffect(() => {
@@ -90,7 +124,7 @@ const StoragePreparationChecklist: React.FC = memo(() => {
             getLastSavedMessage={getLastSavedMessage}
             onSave={handleSaveProgress}
             onReset={handleResetRequest}
-            onPrint={handlePrint}
+            onPrint={enhancedPrintHandler}
             isSaving={isSaving}
           />
           

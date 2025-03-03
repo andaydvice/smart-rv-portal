@@ -11,6 +11,12 @@
 
 /* Additional print optimization rules */
 @media print {
+  /* Global print setup */
+  @page {
+    size: portrait;
+    margin: 0.75cm;
+  }
+  
   /* Reset all colors to ensure high contrast for printing */
   * {
     -webkit-print-color-adjust: exact !important;
@@ -28,7 +34,7 @@
   
   /* Force background-colors and borders to print */
   .storage-preparation-checklist [role="checkbox"] {
-    border-color: black !important;
+    border: 2px solid black !important;
     background-color: white !important;
     print-color-adjust: exact !important;
     -webkit-print-color-adjust: exact !important;
@@ -48,5 +54,45 @@
     background-color: white !important;
     color: black !important;
     border: 1px solid #000 !important;
+  }
+  
+  /* Show all tab panels in print mode */
+  .storage-preparation-checklist [role="tabpanel"] {
+    display: block !important;
+    visibility: visible !important;
+  }
+  
+  /* Add section titles before each tab panel in print */
+  .storage-preparation-checklist [role="tabpanel"]::before {
+    display: block !important;
+    font-size: 20px !important;
+    font-weight: bold !important;
+    border-bottom: 2px solid black !important;
+    margin-bottom: 15px !important;
+    padding-bottom: 5px !important;
+  }
+  
+  /* Special print-only elements */
+  .print-only {
+    display: none;
+  }
+  
+  @media print {
+    .print-only {
+      display: block !important;
+    }
+    
+    .no-print {
+      display: none !important;
+    }
+  }
+  
+  /* Print-specific checkbox styles */
+  .storage-preparation-checklist input[type="checkbox"].print-only-native-checkbox {
+    display: inline-block !important;
+    visibility: visible !important;
+    -webkit-appearance: checkbox !important;
+    -moz-appearance: checkbox !important;
+    appearance: checkbox !important;
   }
 }

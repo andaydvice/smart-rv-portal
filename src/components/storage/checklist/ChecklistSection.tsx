@@ -33,6 +33,14 @@ export const ChecklistItem: React.FC<ChecklistItemProps> = ({
   
   return (
     <div className="flex items-start space-x-3 p-2 rounded-md hover:bg-[#151A22]/50 transition-colors checklist-item print-item">
+      {/* HTML checkbox that only shows in print mode as fallback */}
+      <input 
+        type="checkbox" 
+        checked={isChecked}
+        readOnly
+        className="print-only-native-checkbox hidden" 
+      />
+      
       <Checkbox 
         id={id} 
         className="mt-1 h-5 w-5 border-[#5B9BD5] print-checkbox" 
@@ -53,6 +61,10 @@ export const ChecklistItem: React.FC<ChecklistItemProps> = ({
         data-checked={isChecked ? "true" : "false"}
         data-print-state={isChecked ? "checked" : "unchecked"}
       >
+        {/* For print only: add a checkmark indicator before the label if checked */}
+        <span className="print-only-label-prefix" aria-hidden="true">
+          {isChecked ? '☑ ' : '☐ '}
+        </span>
         {label}
       </Label>
     </div>

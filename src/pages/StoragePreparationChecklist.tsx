@@ -48,30 +48,116 @@ const StoragePreparationChecklistPage: React.FC = () => {
     syncProgressBars();
     setTimeout(syncProgressBars, 200);
     
-    // Add special print CSS to ensure checkboxes display properly in print mode
-    const addPrintStyles = () => {
-      // Find all checkboxes and ensure they have the proper print attributes
+    // Enhanced print preparation that ensures checkboxes are visible
+    const prepareForPrinting = () => {
+      console.log('Preparing document for printing...');
+      
+      // 1. Find all checkboxes and ensure they have print-specific attributes
       const checkboxes = document.querySelectorAll('[role="checkbox"]');
       checkboxes.forEach(checkbox => {
-        // Make sure the data-print-checked attribute is set based on the checked state
-        const isChecked = checkbox.getAttribute('data-state') === 'checked';
+        // Get the checked state from data-state or aria-checked
+        const isChecked = 
+          checkbox.getAttribute('data-state') === 'checked' || 
+          checkbox.getAttribute('aria-checked') === 'true';
+        
+        // Set multiple attributes to ensure visibility in print
         checkbox.setAttribute('data-print-checked', isChecked ? 'true' : 'false');
         checkbox.setAttribute('aria-checked', isChecked ? 'true' : 'false');
+        checkbox.setAttribute('data-state', isChecked ? 'checked' : 'unchecked');
         
-        // Add a special print class to ensure visibility
+        // Add a bold checkmark character as child for print visibility
+        if (isChecked && !checkbox.querySelector('.print-checkmark-fallback')) {
+          const checkmark = document.createElement('span');
+          checkmark.className = 'print-checkmark-fallback';
+          checkmark.style.position = 'absolute';
+          checkmark.style.top = '-4px';
+          checkmark.style.left = '2px';
+          checkmark.style.fontSize = '18px';
+          checkmark.style.fontWeight = 'bold';
+          checkmark.textContent = '✓';
+          checkmark.style.display = 'none'; // Only visible in print
+          checkbox.appendChild(checkmark);
+        }
+        
+        // Add print-specific classes
         checkbox.classList.add('print-checkbox');
       });
       
-      console.log(`Print preparation complete: ${checkboxes.length} checkboxes prepared for printing`);
+      // 2. Find all labels associated with checkboxes and add print attributes
+      const labels = document.querySelectorAll('label');
+      labels.forEach(label => {
+        // Get the associated checkbox
+        const id = label.getAttribute('for');
+        if (id) {
+          const checkbox = document.getElementById(id);
+          if (checkbox) {
+            const isChecked = 
+              checkbox.getAttribute('data-state') === 'checked' || 
+              checkbox.getAttribute('aria-checked') === 'true';
+            
+            // Set label print attributes
+            label.setAttribute('data-checked', isChecked ? 'true' : 'false');
+            label.setAttribute('data-print-state', isChecked ? 'checked' : 'unchecked');
+            
+            // Add print-only text prefix for the label
+            if (!label.querySelector('.print-prefix')) {
+              const prefix = document.createElement('span');
+              prefix.className = 'print-prefix';
+              prefix.style.display = 'none'; // Only visible in print
+              prefix.textContent = isChecked ? '☑ ' : '☐ ';
+              label.insertBefore(prefix, label.firstChild);
+            }
+          }
+        }
+      });
+      
+      // 3. Make sure all tab panels are visible for printing
+      const tabPanels = document.querySelectorAll('[role="tabpanel"]');
+      tabPanels.forEach(panel => {
+        panel.style.display = 'block';
+        panel.style.visibility = 'visible';
+      });
+      
+      // 4. Force checkboxes to be visible in print with inline HTML
+      document.querySelectorAll('.checklist-item').forEach(item => {
+        const checkbox = item.querySelector('[role="checkbox"]');
+        const label = item.querySelector('label');
+        
+        if (checkbox && label) {
+          const isChecked = 
+            checkbox.getAttribute('data-state') === 'checked' || 
+            checkbox.getAttribute('aria-checked') === 'true';
+          
+          // Create a native HTML checkbox for ultimate fallback
+          if (!item.querySelector('.html-checkbox-fallback')) {
+            const nativeCheckbox = document.createElement('input');
+            nativeCheckbox.type = 'checkbox';
+            nativeCheckbox.checked = isChecked;
+            nativeCheckbox.className = 'html-checkbox-fallback';
+            nativeCheckbox.style.display = 'none'; // Only visible in print
+            nativeCheckbox.style.position = 'absolute';
+            nativeCheckbox.style.left = '0';
+            item.insertBefore(nativeCheckbox, item.firstChild);
+          }
+        }
+      });
+      
+      console.log(`Print preparation complete: ${checkboxes.length} checkboxes prepared`);
     };
     
-    // Run print preparation on load and whenever print is triggered
-    addPrintStyles();
-    window.addEventListener('beforeprint', addPrintStyles);
+    // Run print preparation on load
+    prepareForPrinting();
+    
+    // Run again whenever print is triggered
+    window.addEventListener('beforeprint', prepareForPrinting);
+    
+    // Also add a manual print preparation every few seconds to ensure it's always ready
+    const printPrepInterval = setInterval(prepareForPrinting, 5000);
     
     // Cleanup
     return () => {
-      window.removeEventListener('beforeprint', addPrintStyles);
+      window.removeEventListener('beforeprint', prepareForPrinting);
+      clearInterval(printPrepInterval);
       console.log("StoragePreparationChecklistPage unmounting");
     };
   }, []);

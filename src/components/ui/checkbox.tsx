@@ -16,7 +16,7 @@ const Checkbox = React.forwardRef<
     <CheckboxPrimitive.Root
       ref={ref}
       className={cn(
-        "peer h-4 w-4 shrink-0 rounded-sm border border-primary ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground",
+        "peer h-4 w-4 shrink-0 rounded-sm border border-primary ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground print-checkbox",
         className
       )}
       style={{
@@ -36,6 +36,7 @@ const Checkbox = React.forwardRef<
       {...props}
       data-print-checked={isChecked ? "true" : "false"}
       data-print-visible="true"
+      aria-checked={isChecked}
     >
       <CheckboxPrimitive.Indicator
         className={cn("flex items-center justify-center text-current")}
@@ -54,6 +55,24 @@ const Checkbox = React.forwardRef<
       >
         <Check className="h-4 w-4 checkbox-indicator" style={{ display: 'block', visibility: 'visible' }} />
       </CheckboxPrimitive.Indicator>
+      
+      {/* Print-specific hard-coded checkmark character that will show in print mode */}
+      {isChecked && (
+        <span 
+          aria-hidden="true" 
+          className="print-only-checkmark"
+          style={{
+            display: 'none',
+            position: 'absolute',
+            top: '-4px',
+            left: '2px',
+            fontSize: '16px',
+            fontWeight: 'bold'
+          }}
+        >
+          ✓
+        </span>
+      )}
     </CheckboxPrimitive.Root>
   )
 })

@@ -51,6 +51,20 @@ const ChecklistContent: React.FC<ChecklistContentProps> = ({
     
     // Then update the active tab
     setActiveTab(newValue);
+    
+    // Update print attributes for all checkboxes after tab change
+    setTimeout(() => {
+      const checkboxes = document.querySelectorAll('[role="checkbox"]');
+      checkboxes.forEach(checkbox => {
+        const id = checkbox.getAttribute('id');
+        if (id && progress[id] !== undefined) {
+          const isChecked = !!progress[id];
+          checkbox.setAttribute('data-print-checked', isChecked ? 'true' : 'false');
+          checkbox.setAttribute('aria-checked', isChecked ? 'true' : 'false');
+          checkbox.setAttribute('data-state', isChecked ? 'checked' : 'unchecked');
+        }
+      });
+    }, 100);
   };
   
   // On component mount/unmount, force a save
@@ -60,13 +74,39 @@ const ChecklistContent: React.FC<ChecklistContentProps> = ({
       onTabChange();
     }
     
+    // Add beforeprint listener to make all tab content visible
+    const handleBeforePrint = () => {
+      // Make all tab panels visible in print
+      document.querySelectorAll('[role="tabpanel"]').forEach(panel => {
+        const originalDisplay = panel.style.display;
+        panel.style.display = 'block';
+        panel.style.visibility = 'visible';
+        panel.setAttribute('data-original-display', originalDisplay);
+      });
+    };
+    
+    // Add afterprint listener to restore the original visibility
+    const handleAfterPrint = () => {
+      document.querySelectorAll('[role="tabpanel"]').forEach(panel => {
+        const originalDisplay = panel.getAttribute('data-original-display') || '';
+        if (panel.getAttribute('value') !== activeTab) {
+          panel.style.display = originalDisplay;
+        }
+      });
+    };
+    
+    window.addEventListener('beforeprint', handleBeforePrint);
+    window.addEventListener('afterprint', handleAfterPrint);
+    
     return () => {
       if (onTabChange) {
         console.log("ChecklistContent unmounting - final save");
         onTabChange();
       }
+      window.removeEventListener('beforeprint', handleBeforePrint);
+      window.removeEventListener('afterprint', handleAfterPrint);
     };
-  }, [onTabChange]);
+  }, [onTabChange, activeTab]);
 
   return (
     <Tabs 
@@ -76,7 +116,7 @@ const ChecklistContent: React.FC<ChecklistContentProps> = ({
       onValueChange={handleTabValueChange}
     >
       <TabsList 
-        className="grid grid-cols-5 lg:grid-cols-10 h-auto bg-[#151A22] mb-6 border-b border-gray-700 rounded-none"
+        className="grid grid-cols-5 lg:grid-cols-10 h-auto bg-[#151A22] mb-6 border-b border-gray-700 rounded-none no-print"
         style={{ display: 'grid', visibility: 'visible' }}
       >
         <ChecklistTabTrigger value="rv-info" icon="Info" label="RV Info" onTabClick={onTabChange} />
