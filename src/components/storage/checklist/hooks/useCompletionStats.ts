@@ -3,6 +3,7 @@ import { useMemo } from 'react';
 
 /**
  * Hook that calculates completion statistics for checkbox items in the checklist
+ * Optimized to reliably identify and count only proper checkbox items
  * 
  * @param progress Object containing the checklist state with keys in section-number format (e.g., "exterior-1")
  * @returns Object with totalItems, completedItems, and completionPercentage
@@ -15,20 +16,24 @@ export const useCompletionStats = (progress: {[key: string]: boolean | string}) 
       return { totalItems: 0, completedItems: 0, completionPercentage: 0 };
     }
 
-    // Only consider section-number format keys that hold boolean values
-    // Example valid keys: "exterior-1", "plumbing-3", "electrical-2", etc.
-    const checkboxKeys = Object.keys(progress).filter(key => {
-      // Match pattern: section name followed by hyphen and number (e.g., "exterior-1")
-      const keyPattern = /^[a-z]+-\d+$/;
-      const isValidKey = keyPattern.test(key);
-      
-      // Ensure the value is strictly boolean (not string 'true'/'false')
-      const isBoolean = typeof progress[key] === 'boolean';
-      
-      return isValidKey && isBoolean;
-    });
+    // Only consider correctly formatted checkbox keys that hold boolean values
+    // Valid keys follow the pattern: section name followed by hyphen and number (e.g., "exterior-1")
+    const validKeyPattern = /^[a-z]+-\d+$/;
+    
+    const checkboxKeys = Object.entries(progress)
+      .filter(([key, value]) => {
+        // Verify key format
+        const isValidKeyFormat = validKeyPattern.test(key);
+        
+        // Strictly validate that the value is a boolean
+        // This is important as localStorage might convert booleans to strings
+        const isActualBoolean = typeof value === 'boolean';
+        
+        return isValidKeyFormat && isActualBoolean;
+      })
+      .map(([key]) => key);
 
-    console.log(`Found ${checkboxKeys.length} valid checkbox items`, checkboxKeys);
+    console.log(`Found ${checkboxKeys.length} valid checkbox items for progress calculation`);
     
     const totalItems = checkboxKeys.length;
     

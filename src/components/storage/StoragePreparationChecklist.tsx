@@ -1,5 +1,5 @@
 
-import React, { useEffect, memo, useState } from 'react';
+import React, { useEffect, memo, useState, useCallback } from 'react';
 import { Card, CardContent } from "@/components/ui/card";
 import { useChecklistStorage } from './checklist/hooks/useChecklistStorage';
 import ChecklistHeader from './checklist/ChecklistHeader';
@@ -45,9 +45,19 @@ const StoragePreparationChecklist: React.FC = memo(() => {
     setResetDialogOpen
   });
 
-  // Calculate completion stats using the hook
+  // Calculate completion stats using the optimized hook
   const completionStats = useCompletionStats(progress);
-  console.log(`Completion stats: ${completionStats.completedItems}/${completionStats.totalItems} = ${completionStats.completionPercentage}%`);
+  
+  // Force recalculation when progress changes
+  useEffect(() => {
+    console.log(`Completion stats updated: ${completionStats.completedItems}/${completionStats.totalItems} = ${completionStats.completionPercentage}%`);
+  }, [completionStats]);
+  
+  // Enhanced checkbox handler that ensures values are always stored as booleans
+  const enhancedCheckboxHandler = useCallback((id: string, checked: boolean) => {
+    console.log(`Checkbox change: ${id} => ${checked}`);
+    handleCheckboxChange(id, checked);
+  }, [handleCheckboxChange]);
   
   // Auto-save on first load to ensure data is properly initialized
   useEffect(() => {
@@ -92,7 +102,7 @@ const StoragePreparationChecklist: React.FC = memo(() => {
               setStartDate={setStartDate}
               setEndDate={setEndDate}
               notes={notes}
-              handleCheckboxChange={handleCheckboxChange}
+              handleCheckboxChange={enhancedCheckboxHandler}
               handleNotesChange={handleNotesChange}
               onTabChange={handleTabChange}
             />

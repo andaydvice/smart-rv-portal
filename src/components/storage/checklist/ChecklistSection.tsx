@@ -16,13 +16,23 @@ export const ChecklistItem: React.FC<ChecklistItemProps> = ({
   checked, 
   onCheckedChange 
 }) => {
+  // Ensure checked is always a boolean
+  const isChecked = checked === true;
+  
+  // Handler to ensure we always pass a boolean
+  const handleChange = (value: boolean | string) => {
+    // Convert to actual boolean if it's a string
+    const boolValue = value === true || value === 'true';
+    onCheckedChange(id, boolValue);
+  };
+  
   return (
     <div className="flex items-start space-x-3 p-2 rounded-md hover:bg-[#151A22]/50 transition-colors">
       <Checkbox 
         id={id} 
         className="mt-1 h-5 w-5 border-[#5B9BD5]" 
-        checked={checked}
-        onCheckedChange={(checked) => onCheckedChange(id, checked as boolean)} 
+        checked={isChecked}
+        onCheckedChange={handleChange} 
       />
       <Label htmlFor={id} className="text-[#E2E8FF] text-base cursor-pointer">
         {label}

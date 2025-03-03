@@ -20,7 +20,13 @@ const StoragePreparationChecklistPage: React.FC = () => {
     // Force any progress indicators to update immediately
     const progressElements = document.querySelectorAll('[role="progressbar"]');
     progressElements.forEach(elem => {
+      // Update ARIA attributes for screen readers
       elem.setAttribute('aria-valuenow', elem.getAttribute('aria-valuenow') || '0');
+      
+      // Add a class to force reflow/repaint
+      elem.classList.add('force-repaint');
+      // Remove it after a brief delay to trigger the browser to update
+      setTimeout(() => elem.classList.remove('force-repaint'), 50);
     });
     
     // Add event logging
@@ -39,7 +45,7 @@ const StoragePreparationChecklistPage: React.FC = () => {
           <div id="hero-container">
             <ChecklistHeroImage />
           </div>
-          <div id="checklist-container">
+          <div id="checklist-container" className="progress-critical">
             <StoragePreparationChecklist />
           </div>
         </div>

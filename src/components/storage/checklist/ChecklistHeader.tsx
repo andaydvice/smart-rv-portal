@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { CardHeader } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Printer, Save, RotateCcw, CheckCircle, Loader2 } from "lucide-react";
@@ -24,12 +24,21 @@ const ChecklistHeader: React.FC<ChecklistHeaderProps> = ({
   onPrint,
   isSaving = false
 }) => {
-  // Sanitize percentage value to ensure it's a valid number between 0-100
-  const safePercentage = typeof completionPercentage === 'number' && !isNaN(completionPercentage)
-    ? Math.max(0, Math.min(completionPercentage, 100))
-    : 0;
+  // Maintain local state to ensure smoother transitions
+  const [displayedPercentage, setDisplayedPercentage] = useState<number>(0);
+  
+  // Update displayed percentage when prop changes
+  useEffect(() => {
+    // Sanitize percentage value to ensure it's a valid number between 0-100
+    const safePercentage = typeof completionPercentage === 'number' && !isNaN(completionPercentage)
+      ? Math.max(0, Math.min(completionPercentage, 100))
+      : 0;
+      
+    // Update the display value
+    setDisplayedPercentage(safePercentage);
     
-  console.log(`ChecklistHeader rendering with sanitized percentage: ${safePercentage}%`);
+    console.log(`ChecklistHeader received ${completionPercentage}%, sanitized to ${safePercentage}%`);
+  }, [completionPercentage]);
   
   return (
     <CardHeader className="p-6 border-b border-gray-700">
@@ -42,13 +51,13 @@ const ChecklistHeader: React.FC<ChecklistHeaderProps> = ({
         <div className="flex items-center space-x-2">
           <div className="flex-1">
             <div className="flex justify-between text-sm mb-1">
-              <span className="text-[#E2E8FF]">Completion: {safePercentage}%</span>
+              <span className="text-[#E2E8FF]">Completion: {displayedPercentage}%</span>
               {lastSavedAt && (
                 <span className="text-gray-400 text-xs">{getLastSavedMessage()}</span>
               )}
             </div>
             <Progress 
-              value={safePercentage} 
+              value={displayedPercentage} 
               className="h-2 bg-gray-700" 
               indicatorClassName="bg-[#60A5FA]" 
             />
@@ -95,7 +104,7 @@ const ChecklistHeader: React.FC<ChecklistHeaderProps> = ({
             Reset
           </Button>
           
-          {safePercentage === 100 && (
+          {displayedPercentage === 100 && (
             <div className="ml-auto flex items-center text-green-400">
               <CheckCircle className="h-5 w-5 mr-1" />
               <span>Checklist Complete!</span>
