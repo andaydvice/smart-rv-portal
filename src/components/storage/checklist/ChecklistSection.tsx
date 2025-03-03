@@ -16,13 +16,18 @@ export const ChecklistItem: React.FC<ChecklistItemProps> = ({
   checked, 
   onCheckedChange 
 }) => {
-  // Ensure checked is always a boolean
-  const isChecked = checked === true;
+  // Ensure checked is always a boolean by converting string values if needed
+  const isChecked = typeof checked === 'string' 
+    ? checked === 'true' 
+    : Boolean(checked);
   
   // Handler to ensure we always pass a boolean
   const handleChange = (value: boolean | string) => {
     // Convert to actual boolean if it's a string
-    const boolValue = value === true || value === 'true';
+    const boolValue = typeof value === 'string'
+      ? value === 'true'
+      : Boolean(value);
+      
     onCheckedChange(id, boolValue);
   };
   
