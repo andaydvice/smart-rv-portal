@@ -1,0 +1,69 @@
+
+/* ============================================
+   RV STORAGE CHECKLIST TAB NAVIGATION
+   Styles for tab lists, panels, and state management
+   ============================================ */
+
+/* ========= TAB NAVIGATION SYSTEM ========= */
+/* Tab list container */
+.storage-preparation-checklist [role="tablist"] {
+  display: grid !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* Individual tab items */
+.storage-preparation-checklist [role="tab"] {
+  display: flex !important;
+}
+
+/* Tab text content */
+.storage-preparation-checklist [role="tab"] span {
+  visibility: visible !important;
+  opacity: 1 !important;
+  display: block !important;
+}
+
+/* Tab states - active/inactive */
+.storage-preparation-checklist [role="tabpanel"][data-state="active"] {
+  display: block !important;
+  visibility: visible !important;
+}
+
+.storage-preparation-checklist [role="tabpanel"][data-state="inactive"] {
+  display: none !important;
+}
+
+/* Tab panel stability */
+.storage-preparation-checklist [role="tabpanel"] {
+  position: relative !important;
+  visibility: visible !important;
+  transition: none !important;
+  transform: none !important;
+}
+
+/* ========= FOCUS & INTERACTIVE STATES ========= */
+/* Focus styles for active tabs */
+[data-state="active"][role="tab"] {
+  outline: 2px solid #5B9BD5 !important; 
+  outline-offset: -2px;
+  background-color: rgba(91, 155, 213, 0.2) !important;
+  position: relative;
+  z-index: 10;
+}
+
+/* Tab hover feedback */
+[role="tab"]:hover {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Textarea focus handling */
+.tab-content-wrapper textarea:focus {
+  outline: 2px solid #5B9BD5 !important;
+  outline-offset: -2px;
+  border-color: #5B9BD5 !important;
+}
+
+.tab-content-wrapper textarea {
+  color: white !important;
+}

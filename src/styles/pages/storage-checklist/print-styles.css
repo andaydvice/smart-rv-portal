@@ -1,0 +1,77 @@
+
+/* ============================================
+   RV STORAGE CHECKLIST PRINT STYLES
+   Optimized for printing the checklist
+   ============================================ */
+
+/* ========= PRINT LAYOUT ========= */
+@media print {
+  /* Base print visibility */
+  body * {
+    visibility: hidden;
+  }
+  
+  .storage-preparation-checklist .container {
+    visibility: visible;
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+  
+  .storage-preparation-checklist * {
+    visibility: visible;
+  }
+  
+  /* Print-specific hiding */
+  .storage-preparation-checklist button {
+    display: none !important;
+  }
+  
+  /* Print color and format adjustments */
+  .storage-preparation-checklist {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: white !important;
+    color: black !important;
+  }
+  
+  .storage-preparation-checklist .card {
+    box-shadow: none !important;
+    border: none !important;
+    border-radius: 0 !important;
+    background-color: white !important;
+    color: black !important;
+  }
+  
+  /* Text visibility in print */
+  .storage-preparation-checklist p,
+  .storage-preparation-checklist h1,
+  .storage-preparation-checklist h2,
+  .storage-preparation-checklist h3,
+  .storage-preparation-checklist span {
+    color: black !important;
+  }
+  
+  /* Checkbox appearance for print */
+  .storage-preparation-checklist [role="checkbox"] {
+    border: 1px solid black !important;
+    background-color: white !important;
+  }
+  
+  /* Show all tab panels in print */
+  .storage-preparation-checklist [role="tabpanel"] {
+    display: block;
+    visibility: visible;
+  }
+  
+  /* Hide tab navigation in print */
+  .storage-preparation-checklist [role="tablist"] {
+    display: none !important;
+  }
+  
+  /* Page break handling */
+  .storage-preparation-checklist section {
+    page-break-inside: avoid;
+  }
+}

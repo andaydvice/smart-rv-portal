@@ -1,9 +1,9 @@
-
 import React, { useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import StoragePreparationChecklist from '@/components/storage/StoragePreparationChecklist';
 import ChecklistHeroImage from '@/components/storage/checklist/ChecklistHeroImage';
 import Layout from '@/components/layout/Layout';
+import '@/styles/pages/storage-checklist/index.css';
 
 const StoragePreparationChecklistPage: React.FC = () => {
   // Force scroll to top and ensure components load with direct visibility
