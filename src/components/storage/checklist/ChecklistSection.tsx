@@ -40,8 +40,18 @@ export const ChecklistItem: React.FC<ChecklistItemProps> = ({
         onCheckedChange={handleChange} 
         data-print-checked={isChecked ? "true" : "false"}
         aria-checked={isChecked}
+        data-state={isChecked ? "checked" : "unchecked"}
+        style={{
+          position: 'relative',
+          visibility: 'visible',
+          display: 'inline-block'
+        }}
       />
-      <Label htmlFor={id} className="text-[#E2E8FF] text-base cursor-pointer">
+      <Label 
+        htmlFor={id} 
+        className={`text-[#E2E8FF] text-base cursor-pointer ${isChecked ? 'print-item-checked' : ''}`}
+        data-checked={isChecked ? "true" : "false"}
+      >
         {label}
       </Label>
     </div>

@@ -8,3 +8,25 @@
 @import "./print/layout-print.css";
 @import "./print/text-print.css";
 @import "./print/page-print.css";
+
+/* Additional print optimization rules */
+@media print {
+  /* Ensure all checkboxes are clearly visible */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+  
+  /* Force background-colors and borders to print */
+  .storage-preparation-checklist [role="checkbox"] {
+    border-color: black !important;
+    print-color-adjust: exact !important;
+    -webkit-print-color-adjust: exact !important;
+  }
+  
+  /* Ensure page breaks don't happen inside checklist items */
+  .storage-preparation-checklist .checklist-item {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+}
