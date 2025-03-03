@@ -39,7 +39,6 @@ const ChecklistHeader: React.FC<ChecklistHeaderProps> = ({
         <div className="flex items-center space-x-2">
           <div className="flex-1">
             <div className="flex justify-between text-sm mb-1">
-              <span className="text-[#E2E8FF]">Completion: 0%</span>
               {lastSavedAt && (
                 <span className="text-gray-400 text-xs">{getLastSavedMessage()}</span>
               )}
