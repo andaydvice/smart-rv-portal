@@ -94,41 +94,45 @@ const StoragePreparationChecklist: React.FC = memo(() => {
     handlePrint();
   }, [handlePrint, progress]);
   
-  // Enhanced PDF export handler with proper type safety
-  const enhancedExportPDFHandler = useCallback(() => {
-    // Ensure dates are valid Date objects or undefined when passed to exportChecklistToPDF
-    const ensureValidDate = (dateInput: any): Date | undefined => {
-      if (!dateInput) return undefined;
-      
-      // If it's already a Date object and valid
-      if (dateInput instanceof Date && !isNaN(dateInput.getTime())) {
-        return dateInput;
-      }
-      
-      // If it's a string, try to convert it
-      if (typeof dateInput === 'string') {
-        try {
-          const date = new Date(dateInput);
-          if (!isNaN(date.getTime())) {
-            return date;
-          }
-        } catch (error) {
-          console.error("Invalid date string:", dateInput);
-        }
-      }
-      
-      return undefined;
-    };
+  // Helper function to ensure date values are valid Date objects before passing to handleExportPDF
+  const ensureValidDate = useCallback((dateValue: Date | string | undefined): Date | undefined => {
+    if (!dateValue) return undefined;
     
-    // Call the export function with validated dates
+    // If it's already a valid Date object
+    if (dateValue instanceof Date && !isNaN(dateValue.getTime())) {
+      return dateValue;
+    }
+    
+    // Try to convert string to Date
+    if (typeof dateValue === 'string') {
+      try {
+        const parsedDate = new Date(dateValue);
+        if (!isNaN(parsedDate.getTime())) {
+          return parsedDate;
+        }
+      } catch (error) {
+        console.error("Invalid date string:", dateValue);
+      }
+    }
+    
+    return undefined;
+  }, []);
+  
+  // Enhanced PDF export handler with proper type safety - this is where the error was occurring
+  const enhancedExportPDFHandler = useCallback(() => {
+    // Convert both startDate and endDate to valid Date objects or undefined
+    const validStartDate = ensureValidDate(startDate);
+    const validEndDate = ensureValidDate(endDate);
+    
+    // Now call the export function with properly validated dates
     handleExportPDF(
       progress,
-      ensureValidDate(startDate),
-      ensureValidDate(endDate),
+      validStartDate, // Now guaranteed to be Date | undefined
+      validEndDate,   // Now guaranteed to be Date | undefined
       notes,
       completionStats.completionPercentage
     );
-  }, [progress, startDate, endDate, notes, completionStats.completionPercentage, handleExportPDF]);
+  }, [progress, startDate, endDate, notes, completionStats.completionPercentage, handleExportPDF, ensureValidDate]);
   
   // Auto-save on first load to ensure data is properly initialized
   useEffect(() => {
