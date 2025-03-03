@@ -1,7 +1,7 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 import MobileMenuSection from "./MobileMenuSection";
-import { CoreSystemsLinks, SmartFeaturesLinks, VehicleSelectionLinks, SupportLinks, CustomerSupportLinks, RVToolsLinks } from "../NavbarLinks";
+import { CoreSystemsLinks, SmartFeaturesLinks, VehicleSelectionLinks, SupportLinks, CustomerSupportLinks, RVToolsLinks } from "../navigation/links";
 import { Link } from "react-router-dom";
 import { Calculator, LogIn, Home } from "lucide-react";
 import { useAuth } from "@/components/auth/AuthContext";

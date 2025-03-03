@@ -30,7 +30,7 @@ const DesktopNavigation = () => {
   };
 
   return (
-    <div className="hidden md:flex md:items-center md:space-x-8">
+    <div className="flex items-center space-x-8">
       <NavigationMenu className="relative">
         <NavigationMenuList className="flex items-center space-x-2 whitespace-nowrap">
           {!isHomePage && (
