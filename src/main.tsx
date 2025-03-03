@@ -62,8 +62,8 @@ const setupWebSocketErrorHandling = () => {
   // Override WebSocket constructor to add error handling
   const OriginalWebSocket = window.WebSocket;
   
-  // Create a properly typed constructor function
-  const EnhancedWebSocket = function(this: WebSocket, url: string | URL, protocols?: string | string[]) {
+  // Create a properly typed constructor wrapper that doesn't try to modify read-only properties
+  const EnhancedWebSocketWrapper = function(url: string | URL, protocols?: string | string[]) {
     const socket = new OriginalWebSocket(url, protocols);
     
     socket.addEventListener('error', (event) => {
@@ -82,13 +82,13 @@ const setupWebSocketErrorHandling = () => {
     });
     
     return socket;
-  } as unknown as typeof WebSocket;
+  };
+
+  // TypeScript workaround to create a constructor function with the proper prototype chain
+  // without trying to modify read-only static properties
+  const EnhancedWebSocket = EnhancedWebSocketWrapper as unknown as typeof WebSocket;
   
-  // Add properties from the original WebSocket
-  EnhancedWebSocket.CONNECTING = OriginalWebSocket.CONNECTING;
-  EnhancedWebSocket.OPEN = OriginalWebSocket.OPEN;
-  EnhancedWebSocket.CLOSING = OriginalWebSocket.CLOSING;
-  EnhancedWebSocket.CLOSED = OriginalWebSocket.CLOSED;
+  // Copy the prototype to maintain instanceof checks
   EnhancedWebSocket.prototype = OriginalWebSocket.prototype;
   
   // Replace the global WebSocket
