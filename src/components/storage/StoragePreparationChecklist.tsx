@@ -38,7 +38,8 @@ const StoragePreparationChecklist: React.FC = memo(() => {
     handleSaveProgress,
     handleResetRequest,
     handleResetConfirm,
-    handlePrint
+    handlePrint,
+    handleExportPDF
   } = useChecklistActions({
     saveData,
     resetData,
@@ -93,6 +94,18 @@ const StoragePreparationChecklist: React.FC = memo(() => {
     handlePrint();
   }, [handlePrint, progress]);
   
+  // Enhanced PDF export handler
+  const enhancedExportPDFHandler = useCallback(() => {
+    // Call the export function with the current checklist data
+    handleExportPDF(
+      progress,
+      startDate,
+      endDate,
+      notes,
+      completionStats.completionPercentage
+    );
+  }, [handleExportPDF, progress, startDate, endDate, notes, completionStats.completionPercentage]);
+  
   // Auto-save on first load to ensure data is properly initialized
   useEffect(() => {
     if (isLoaded) {
@@ -125,6 +138,7 @@ const StoragePreparationChecklist: React.FC = memo(() => {
             onSave={handleSaveProgress}
             onReset={handleResetRequest}
             onPrint={enhancedPrintHandler}
+            onExportPDF={enhancedExportPDFHandler}
             isSaving={isSaving}
           />
           
