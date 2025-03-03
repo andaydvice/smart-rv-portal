@@ -8,6 +8,8 @@ import ChecklistLoading from './checklist/ChecklistLoading';
 import ResetDialog from './checklist/ResetDialog';
 import useCompletionStats from './checklist/hooks/useCompletionStats';
 import { useChecklistActions } from './checklist/ChecklistActions';
+import { exportChecklistToPDF } from './checklist/utils/pdfExport';
+import { checklistItems } from './checklist/utils/checklistData';
 
 // Memoize the component to prevent unnecessary re-renders
 const StoragePreparationChecklist: React.FC = memo(() => {
@@ -97,14 +99,15 @@ const StoragePreparationChecklist: React.FC = memo(() => {
   // Enhanced PDF export handler
   const enhancedExportPDFHandler = useCallback(() => {
     // Call the export function with the current checklist data
-    handleExportPDF(
+    exportChecklistToPDF(
       progress,
       startDate,
       endDate,
       notes,
-      completionStats.completionPercentage
+      completionStats.completionPercentage,
+      checklistItems
     );
-  }, [handleExportPDF, progress, startDate, endDate, notes, completionStats.completionPercentage]);
+  }, [progress, startDate, endDate, notes, completionStats.completionPercentage]);
   
   // Auto-save on first load to ensure data is properly initialized
   useEffect(() => {

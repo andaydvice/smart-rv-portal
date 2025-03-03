@@ -21,3 +21,22 @@ export interface TabContentProps {
   progress: {[key: string]: boolean | string};
   handleCheckboxChange: (id: string, checked: boolean) => void;
 }
+
+// Add the ChecklistContentProps interface that was missing
+export interface ChecklistContentProps {
+  progress: {[key: string]: boolean | string};
+  startDate: Date | undefined;
+  endDate: Date | undefined;
+  setStartDate: (date: Date | undefined) => void;
+  setEndDate: (date: Date | undefined) => void;
+  notes: ChecklistNotes;
+  handleCheckboxChange: (id: string, checked: boolean) => void;
+  handleNotesChange: (field: keyof ChecklistNotes, value: string) => void;
+  onTabChange: () => void;
+}
+
+// Define NotesTabProps interface to match the component implementation
+export interface NotesTabProps {
+  notes: ChecklistNotes;
+  onNotesChange: (field: keyof ChecklistNotes, value: string) => void;
+}

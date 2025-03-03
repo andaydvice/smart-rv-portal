@@ -12,7 +12,7 @@ import PestControlTab from './PestControlTab';
 import SecurityTab from './SecurityTab';
 import NotesTab from './NotesTab';
 import RVInfoTab from './RVInfoTab';
-import { ChecklistContentProps } from './ChecklistTypes';
+import { ChecklistContentProps, NotesTabProps } from './ChecklistTypes';
 
 const ChecklistContent: React.FC<ChecklistContentProps> = ({
   progress,
@@ -224,7 +224,7 @@ const ChecklistContent: React.FC<ChecklistContentProps> = ({
       <TabsContent value="notes" className="space-y-4 tab-content">
         <NotesTab 
           notes={notes} 
-          handleNotesChange={handleNotesChange} 
+          onNotesChange={handleNotesChange} 
         />
       </TabsContent>
     </Tabs>
