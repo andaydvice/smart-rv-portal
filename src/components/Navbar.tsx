@@ -2,7 +2,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import Logo from './Logo';
+import { Logo } from './Logo';
 import NavbarLinks from './NavbarLinks';
 
 const Navbar = () => {
