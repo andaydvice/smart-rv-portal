@@ -16,7 +16,6 @@
   -webkit-column-gap: 1rem;
   -moz-column-gap: 1rem;
   break-inside: avoid;
-  -webkit-column-break-inside: avoid;
   page-break-inside: avoid;
 }
 
@@ -110,7 +109,7 @@ label.inner1 {
 }
 
 /* High contrast media query fix */
-@media (forced-colors: active), (-ms-high-contrast: active) {
+@media (forced-colors: active) {
   .high-contrast-visible {
     border: 1px solid currentColor;
   }

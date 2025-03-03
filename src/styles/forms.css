@@ -65,8 +65,7 @@ select.dark-input {
 /* Fullscreen fixes */
 :fullscreen,
 :-webkit-full-screen,
-:-moz-full-screen,
-:-ms-fullscreen {
+:-moz-full-screen {
   background-color: #080F1F;
   width: 100vw;
   height: 100vh;

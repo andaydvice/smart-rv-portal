@@ -14,6 +14,16 @@ const Index = () => {
   // Ensure we start at the top of the page
   useEffect(() => {
     window.scrollTo(0, 0);
+    
+    // Add additional check for visibility issues
+    const timeout = setTimeout(() => {
+      const heroElement = document.querySelector('.hero-section');
+      if (heroElement) {
+        heroElement.scrollIntoView({ behavior: 'auto', block: 'start' });
+      }
+    }, 100);
+    
+    return () => clearTimeout(timeout);
   }, []);
 
   return (

@@ -10,6 +10,10 @@
     <meta property="og:image" content="/og-image.svg" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- Preload critical fonts -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" as="style" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" />
+    
     <!-- Error handling -->
     <script>
       window.onerror = function(message, source, lineno, colno, error) {
@@ -17,6 +21,7 @@
         return true; // Prevents default error handling
       };
     </script>
+    
     <!-- Inline critical CSS to avoid MIME type issues -->
     <style>
       body, html {
@@ -66,15 +71,24 @@
       </div>
     </div>
     <script>
+      // Force visibility of root element
+      document.getElementById('root').style.display = 'block';
+      document.getElementById('root').style.visibility = 'visible';
+      document.getElementById('root').style.opacity = '1';
+      
       // Ensure visibility of root element and remove loading indicator quickly
       window.addEventListener('DOMContentLoaded', function() {
         const root = document.getElementById('root');
         if (root) {
+          root.style.display = 'block';
+          root.style.visibility = 'visible';
+          root.style.opacity = '1';
+          
           const loadingElement = document.querySelector('.app-loading');
           if (loadingElement && loadingElement.parentNode) {
             setTimeout(function() {
               loadingElement.parentNode.removeChild(loadingElement);
-            }, 500);
+            }, 100);
           }
         }
       });

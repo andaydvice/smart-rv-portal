@@ -18,6 +18,11 @@ interface LayoutProps {
 }
 
 const Layout = ({ children }: LayoutProps) => {
+  useEffect(() => {
+    // Force scroll to top when component mounts
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className="min-h-screen flex flex-col bg-[#080F1F]">
       <ScrollToTop />
