@@ -4,7 +4,7 @@ import RouterProvider from './components/router/RouterProvider';
 import { Toaster } from '@/components/ui/toaster';
 import { AuthProvider } from './components/auth/AuthContext';
 import { useEffect, useState } from 'react';
-import { ensureVisibility, debugAnimations, debugConnections } from './utils/visibilityDebugger';
+import { ensureVisibility, debugAnimations, debugConnections } from './utils/visibility';
 import './App.css';
 
 // Create a client with improved error handling and retry logic
