@@ -19,5 +19,3 @@
 
 /* Page-specific styles */
 @import './styles/pages/storage-checklist.css';
-
-/* Critical render path styles - Moved to critical.css */

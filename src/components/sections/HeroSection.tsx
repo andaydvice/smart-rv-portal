@@ -1,8 +1,7 @@
 
-import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
 
 export const HeroSection = () => {
   const [imageLoaded, setImageLoaded] = useState(false);
@@ -15,6 +14,16 @@ export const HeroSection = () => {
     // Force re-render once after mount to ensure visibility
     setTimeout(() => {
       setRenderKey(prev => prev + 1);
+      
+      // Make sure all elements are visible
+      document.querySelectorAll('.hero-section, .hero-section *, h1, p, button, a, img')
+        .forEach(el => {
+          if (el instanceof HTMLElement) {
+            el.style.visibility = 'visible';
+            el.style.opacity = '1';
+            el.style.display = el.style.display === 'none' ? 'block' : el.style.display;
+          }
+        });
     }, 100);
     
     return () => {
@@ -23,7 +32,11 @@ export const HeroSection = () => {
   }, []);
 
   return (
-    <section key={renderKey} className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section 
+      key={renderKey} 
+      className="hero-section relative min-h-screen flex items-center justify-center overflow-hidden"
+      style={{ visibility: 'visible', opacity: 1, display: 'block' }}
+    >
       <div className="absolute inset-0">
         {/* Use a background color as fallback while image loads */}
         <div className="w-full h-full bg-gray-800"></div>
@@ -46,41 +59,29 @@ export const HeroSection = () => {
         />
         <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent" />
       </div>
-      <motion.div
-        initial={{ opacity: 1, y: 0 }} 
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
+      <div
         className="relative text-center text-white px-4 max-w-5xl mx-auto"
-        style={{ visibility: 'visible', display: 'block' }}
+        style={{ visibility: 'visible', display: 'block', opacity: 1 }}
       >
         <div className="absolute inset-0 bg-black/40 backdrop-blur-sm rounded-xl -bottom-8" />
-        <motion.h1 
-          initial={{ opacity: 1, y: 0 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+        <h1 
           className="text-6xl md:text-7xl font-bold mb-8 leading-tight relative z-10"
-          style={{ visibility: 'visible', display: 'block' }}
+          style={{ visibility: 'visible', display: 'block', opacity: 1 }}
         >
           The Future of <br />
           <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-emerald-400">
             Luxury Travel
           </span>
-        </motion.h1>
-        <motion.p 
-          initial={{ opacity: 1, y: 0 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+        </h1>
+        <p 
           className="text-xl md:text-2xl mb-12 max-w-2xl mx-auto text-gray-200 relative z-10"
-          style={{ visibility: 'visible', display: 'block' }}
+          style={{ visibility: 'visible', display: 'block', opacity: 1 }}
         >
           Experience unparalleled luxury and innovation with cutting edge smart technology
-        </motion.p>
-        <motion.div 
-          initial={{ opacity: 1, y: 0 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+        </p>
+        <div 
           className="flex flex-col sm:flex-row gap-6 justify-center items-center relative z-10"
-          style={{ visibility: 'visible', display: 'block' }}
+          style={{ visibility: 'visible', display: 'block', opacity: 1 }}
         >
           <Link to="/schedule-demo">
             <Button 
@@ -99,8 +100,8 @@ export const HeroSection = () => {
               Explore Models
             </Button>
           </Link>
-        </motion.div>
-      </motion.div>
+        </div>
+      </div>
       <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black/50 to-transparent" />
     </section>
   );

@@ -8,6 +8,9 @@ body, html, #root {
   padding: 0;
   min-height: 100%;
   width: 100%;
+  text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
 }
 
 /* Basic layout */
@@ -38,8 +41,24 @@ div[style*="transform"],
   visibility: visible !important;
 }
 
+/* Layout components */
+.column-layout {
+  column-gap: 1rem;
+  -moz-column-gap: 1rem;
+}
+
 /* HeroSection specific styles */
 section img {
   max-width: 100%;
   height: auto;
+}
+
+/* Ensure visibility of basic elements */
+.motion-div, 
+[data-framer-motion-initial],
+[data-radix-tabs-content],
+[role="tabpanel"] {
+  visibility: visible !important;
+  opacity: 1 !important;
+  display: block !important;
 }

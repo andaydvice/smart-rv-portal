@@ -16,7 +16,11 @@ export const ensureVisibility = () => {
     'section',
     '.hero-section',
     'h1',
-    'img'
+    'img',
+    'button',
+    'a',
+    'p',
+    'div[style*="transform"]'
   ];
   
   console.log('Starting visibility enforcement');
@@ -59,13 +63,25 @@ export const ensureVisibility = () => {
     console.error('Error handling iframes:', err);
   }
   
+  // Fix framer-motion elements
+  try {
+    document.querySelectorAll('[style*="opacity: 0"]').forEach(el => {
+      if (el instanceof HTMLElement) {
+        el.style.opacity = '1';
+        el.style.visibility = 'visible';
+      }
+    });
+  } catch (err) {
+    console.error('Error fixing opacity elements:', err);
+  }
+  
   console.log('Visibility ensured for critical elements');
 };
 
 // Add debugging output for animation issues
 export const debugAnimations = () => {
   try {
-    const animatedElements = document.querySelectorAll('[data-framer-animation]');
+    const animatedElements = document.querySelectorAll('[data-framer-animation], [data-motion], [data-framer-motion-initial]');
     console.log(`Found ${animatedElements.length} animated elements`);
     
     animatedElements.forEach((el, index) => {
@@ -73,6 +89,13 @@ export const debugAnimations = () => {
         // Force animation elements to be visible
         el.style.visibility = 'visible';
         el.style.opacity = '1';
+        el.style.transform = el.style.transform || 'none'; // Ensure transform is set
+        
+        // Override Framer Motion's initial animation settings
+        if (el.dataset.framerMotionInitial) {
+          el.dataset.framerMotionInitial = 'false';
+        }
+        
         console.log(`Animation ${index}: ${el.className} - ${el.style.opacity}`);
       }
     });
@@ -95,9 +118,17 @@ export const debugConnections = () => {
   // Test connectivity to key resources
   console.log('Testing connectivity to key resources...');
   
-  fetch('/index.html', { method: 'HEAD' })
-    .then(response => console.log('Base app accessible:', response.ok))
-    .catch(error => console.error('Base app fetch failed:', error));
+  const domains = [
+    '/index.html', 
+    '/index.css',
+    '/@vite/client'
+  ];
+  
+  domains.forEach(url => {
+    fetch(url, { method: 'HEAD' })
+      .then(response => console.log(`${url} accessible:`, response.ok))
+      .catch(error => console.error(`${url} fetch failed:`, error));
+  });
     
   // Check if WebSocket connection is possible
   try {
@@ -112,4 +143,17 @@ export const debugConnections = () => {
   } catch (error) {
     console.error('WebSocket initialization failed:', error);
   }
+  
+  // Test CORS
+  console.log('Testing CORS...');
+  const corsTest = document.createElement('div');
+  corsTest.style.backgroundImage = `url(https://lovable.app/favicon.ico)`;
+  document.body.appendChild(corsTest);
+  
+  // Wait for image to load or fail
+  setTimeout(() => {
+    const computed = window.getComputedStyle(corsTest).backgroundImage;
+    console.log('CORS image test result:', computed);
+    document.body.removeChild(corsTest);
+  }, 1000);
 };

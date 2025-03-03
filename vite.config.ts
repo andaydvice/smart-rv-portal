@@ -13,19 +13,21 @@ export default defineConfig(({ mode }) => ({
       clientPort: 443,
       path: '/@vite/client',
       timeout: 120000,
-      // Use the correct host without any subdomain prefixes
       host: 'lovableproject.com',
       overlay: true,
       protocol: 'wss',
-      // Add better reconnection handling
       reloadOnFailure: true
     },
     watch: {
       usePolling: true,
-      interval: 300 // Increase interval to reduce CPU usage
+      interval: 300
     },
     open: false,
-    cors: true // Enable CORS for all server requests
+    cors: {
+      origin: '*',
+      methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+      allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
+    }
   },
   plugins: [
     react(),
@@ -40,7 +42,7 @@ export default defineConfig(({ mode }) => ({
     include: ['react', 'react-dom'],
     force: true,
     esbuildOptions: {
-      target: 'es2020' // Update target for better compatibility
+      target: 'es2020'
     }
   },
   build: {
@@ -51,13 +53,26 @@ export default defineConfig(({ mode }) => ({
         manualChunks: {
           vendor: ['react', 'react-dom'],
         },
+        // Ensure proper MIME types for all files
+        assetFileNames: 'assets/[name]-[hash][extname]',
+        chunkFileNames: 'js/[name]-[hash].js',
+        entryFileNames: 'js/[name]-[hash].js',
       },
     },
-    target: 'es2020', // Ensure consistent target with optimizeDeps
-    assetsInlineLimit: 4096, // Improve performance by inlining small assets
+    target: 'es2020',
+    assetsInlineLimit: 4096,
     cssCodeSplit: true,
-    // Ensure proper MIME types for all assets
     assetsDir: 'assets',
+  },
+  css: {
+    // Ensure proper CSS processing
+    postcss: {
+      plugins: [],
+    },
+    // Ensure CSS modules work properly
+    modules: {
+      localsConvention: 'camelCase',
+    },
   },
   esbuild: {
     logOverride: { 'this-is-undefined-in-esm': 'silent' }
