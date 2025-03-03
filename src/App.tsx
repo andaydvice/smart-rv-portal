@@ -15,8 +15,10 @@ const queryClient = new QueryClient({
       refetchOnWindowFocus: false,
       retry: 5, // Increase retry attempts
       retryDelay: attempt => Math.min(1000 * 2 ** attempt, 30000), // Exponential backoff
-      onError: (error) => {
-        console.error('Query error:', error);
+      meta: {
+        onError: (error: Error) => {
+          console.error('Query error:', error);
+        }
       },
     },
   },
