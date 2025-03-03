@@ -61,8 +61,10 @@ const setupWebSocketErrorHandling = () => {
   
   // Override WebSocket constructor to add error handling
   const OriginalWebSocket = window.WebSocket;
-  window.WebSocket = function(...args) {
-    const socket = new OriginalWebSocket(...args);
+  
+  // Create a properly typed constructor function
+  const EnhancedWebSocket = function(this: WebSocket, url: string | URL, protocols?: string | string[]) {
+    const socket = new OriginalWebSocket(url, protocols);
     
     socket.addEventListener('error', (event) => {
       console.error('WebSocket connection error:', event);
@@ -70,9 +72,9 @@ const setupWebSocketErrorHandling = () => {
       
       // Schedule a reconnection attempt
       setTimeout(() => {
-        console.log('Attempting to reconnect WebSocket to:', args[0]);
+        console.log('Attempting to reconnect WebSocket to:', url);
         try {
-          new OriginalWebSocket(...args);
+          new OriginalWebSocket(url, protocols);
         } catch (e) {
           console.error('WebSocket reconnection failed:', e);
         }
@@ -80,16 +82,17 @@ const setupWebSocketErrorHandling = () => {
     });
     
     return socket;
-  };
+  } as unknown as typeof WebSocket;
   
   // Add properties from the original WebSocket
-  Object.defineProperties(window.WebSocket, {
-    CONNECTING: { value: 0 },
-    OPEN: { value: 1 },
-    CLOSING: { value: 2 },
-    CLOSED: { value: 3 },
-    prototype: { value: OriginalWebSocket.prototype }
-  });
+  EnhancedWebSocket.CONNECTING = OriginalWebSocket.CONNECTING;
+  EnhancedWebSocket.OPEN = OriginalWebSocket.OPEN;
+  EnhancedWebSocket.CLOSING = OriginalWebSocket.CLOSING;
+  EnhancedWebSocket.CLOSED = OriginalWebSocket.CLOSED;
+  EnhancedWebSocket.prototype = OriginalWebSocket.prototype;
+  
+  // Replace the global WebSocket
+  window.WebSocket = EnhancedWebSocket;
 };
 
 // Setup WebSocket error handling
@@ -157,7 +160,7 @@ const startApp = () => {
     document.body.innerHTML = `
       <div style="color: white; background: #333; padding: 20px; font-family: sans-serif;">
         <h1>Application Error</h1>
-        <p>${error.message}</p>
+        <p>${error instanceof Error ? error.message : 'Unknown error'}</p>
         <button onclick="location.reload()">Reload</button>
         <button onclick="localStorage.clear(); location.reload();">Clear Cache & Reload</button>
       </div>

@@ -3,6 +3,7 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
 import { componentTagger } from "lovable-tagger";
+import autoprefixer from "autoprefixer";
 
 export default defineConfig(({ mode }) => ({
   server: {
@@ -67,7 +68,10 @@ export default defineConfig(({ mode }) => ({
   css: {
     // Improve CSS processing and MIME type handling
     postcss: {
-      plugins: [require('autoprefixer')],
+      // Use autoprefixer directly as an object rather than requiring it dynamically
+      plugins: [
+        autoprefixer()
+      ],
     },
     modules: {
       localsConvention: 'camelCase',
