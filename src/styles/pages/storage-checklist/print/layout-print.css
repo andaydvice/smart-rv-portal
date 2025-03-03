@@ -1,0 +1,69 @@
+
+/* ============================================
+   LAYOUT PRINT STYLES
+   ============================================ */
+
+@media print {
+  /* Base visibility settings */
+  body * {
+    visibility: hidden;
+  }
+  
+  .storage-preparation-checklist .container {
+    visibility: visible;
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+  
+  .storage-preparation-checklist * {
+    visibility: visible;
+  }
+  
+  /* Print-specific hiding */
+  .storage-preparation-checklist button {
+    display: none !important;
+  }
+  
+  /* Base layout adjustments */
+  .storage-preparation-checklist {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: white !important;
+    color: black !important;
+    font-family: Arial, sans-serif !important;
+  }
+  
+  /* Card styling for print */
+  .storage-preparation-checklist .card {
+    box-shadow: none !important;
+    border: 1px solid #ddd !important;
+    border-radius: 0 !important;
+    background-color: white !important;
+    color: black !important;
+    margin: 0 !important;
+  }
+  
+  /* Print layout for sections and containers */
+  .storage-preparation-checklist .checklist-section {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+    margin-bottom: 15px !important;
+    border: 1px solid #000 !important;
+    background-color: white !important;
+  }
+  
+  /* Tab panel display in print */
+  .storage-preparation-checklist [role="tabpanel"] {
+    display: block !important;
+    visibility: visible !important;
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+  
+  /* Hide tab navigation in print */
+  .storage-preparation-checklist [role="tablist"] {
+    display: none !important;
+  }
+}

@@ -1,0 +1,47 @@
+
+/* ============================================
+   PAGE PRINT STYLES (Headers, Footers, Page Breaks)
+   ============================================ */
+
+@media print {
+  /* Page break handling */
+  .storage-preparation-checklist section {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+  
+  /* Page margins */
+  @page {
+    margin: 0.5cm;
+  }
+  
+  /* Page header */
+  .storage-preparation-checklist .container::before {
+    content: 'Smart RV - RV PREPARATION' !important;
+    display: block !important;
+    text-align: center !important;
+    font-size: 18px !important;
+    font-weight: bold !important;
+    margin-bottom: 5px !important;
+    border-bottom: 1px solid #000 !important;
+    padding-bottom: 10px !important;
+  }
+  
+  /* Page footer with page numbers */
+  .storage-preparation-checklist .container::after {
+    content: 'Page ' counter(page) ' of ' counter(pages) !important;
+    display: block !important;
+    text-align: center !important;
+    font-size: 10px !important;
+    position: fixed !important;
+    bottom: 5px !important;
+    left: 0 !important;
+    right: 0 !important;
+  }
+  
+  /* Format checklist items to prevent page breaks within items */
+  .storage-preparation-checklist .flex.items-start {
+    margin-bottom: 0.8em !important;
+    padding: 0.25em 0 !important;
+  }
+}
