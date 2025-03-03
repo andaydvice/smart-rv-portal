@@ -1,10 +1,21 @@
 
-/* Storage Checklist Styles */
+/* Storage Checklist Styles - Refactored for maintainability */
 
-/* CRITICAL FIXES - These must not be removed or modified */
-/* Force visibility of ALL elements */
+/* ========= CRITICAL VISIBILITY FIXES ========= */
+/* These rules ensure all elements are visible and properly displayed */
 .storage-preparation-checklist,
-.storage-preparation-checklist *,
+.storage-preparation-checklist * {
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* ========= DISPLAY PROPERTY FIXES ========= */
+/* Base display rules */
+.storage-preparation-checklist,
+.storage-preparation-checklist .container,
+.storage-preparation-checklist .card,
+.storage-preparation-checklist .card-header,
+.storage-preparation-checklist .card-content,
 [role="progressbar"],
 [role="progressbar"] > div,
 [role="checkbox"],
@@ -12,17 +23,11 @@
 [role="tabpanel"],
 [role="tab"],
 .storage-preparation-checklist button,
-.storage-preparation-checklist img,
-.storage-preparation-checklist .container,
-.storage-preparation-checklist .card,
-.storage-preparation-checklist .card-header,
-.storage-preparation-checklist .card-content {
-  visibility: visible !important;
-  opacity: 1 !important;
+.storage-preparation-checklist img {
   display: block !important;
 }
 
-/* Keep display:flex for flex items */
+/* Flex display overrides */
 .storage-preparation-checklist [role="checkbox"],
 .storage-preparation-checklist [role="checkbox"] > *,
 .storage-preparation-checklist button,
@@ -31,7 +36,12 @@
   display: flex !important;
 }
 
-/* Special styling for progress bars */
+/* Inline-flex specific elements */
+.storage-preparation-checklist .inline-flex {
+  display: inline-flex !important;
+}
+
+/* ========= PROGRESS BAR STYLING ========= */
 .storage-preparation-checklist [role="progressbar"] {
   position: relative !important;
   height: 8px !important;
@@ -41,7 +51,6 @@
   border-radius: 9999px !important;
 }
 
-/* Progress indicator */
 .storage-preparation-checklist [role="progressbar"] > div {
   position: absolute !important;
   left: 0 !important;
@@ -52,14 +61,15 @@
   transition: none !important;
 }
 
-/* Force images to display properly */
+/* ========= IMAGE HANDLING ========= */
 .storage-preparation-checklist img {
   max-width: 100% !important;
   height: auto !important;
   width: 100% !important;
 }
 
-/* Ensure tab panels behave correctly */
+/* ========= TAB PANEL BEHAVIOR ========= */
+/* State-based display toggling */
 .storage-preparation-checklist [role="tabpanel"][data-state="active"] {
   display: block !important;
   visibility: visible !important;
@@ -69,12 +79,82 @@
   display: none !important;
 }
 
-/* Fix inline-flex for specific elements */
-.storage-preparation-checklist .inline-flex {
-  display: inline-flex !important;
+/* Tab content stability */
+.storage-preparation-checklist [role="tabpanel"] {
+  position: relative !important;
+  visibility: visible !important;
+  transition: none !important;
+  transform: none !important;
 }
 
-/* Print styles */
+/* Tab list visibility */
+.storage-preparation-checklist [role="tablist"] {
+  display: grid !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* ========= FOCUS AND INTERACTIVE STATES ========= */
+/* Focus styles for tab triggers */
+[data-state="active"][role="tab"] {
+  outline: 2px solid #5B9BD5 !important; 
+  outline-offset: -2px;
+  background-color: rgba(91, 155, 213, 0.2) !important;
+  position: relative;
+  z-index: 10;
+}
+
+/* Tab hover states */
+[role="tab"]:hover {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Text visibility in tabs */
+[role="tab"] span {
+  visibility: visible !important;
+  opacity: 1 !important;
+  display: block !important;
+}
+
+/* Textarea focus and color */
+.tab-content-wrapper textarea:focus {
+  outline: 2px solid #5B9BD5 !important;
+  outline-offset: -2px;
+  border-color: #5B9BD5 !important;
+}
+
+.tab-content-wrapper textarea {
+  color: white !important;
+}
+
+/* ========= LAYOUT STABILITY ========= */
+/* Minimum content height */
+.tab-content-wrapper {
+  min-height: 500px;
+}
+
+/* Header spacing */
+.storage-preparation-checklist .pt-20 {
+  padding-top: 5rem !important;
+}
+
+/* ========= LOADING STATES ========= */
+.storage-preparation-checklist .skeleton-pulse {
+  animation: skeleton-pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  background: linear-gradient(90deg, rgba(30,41,59,0.8) 0%, rgba(51,65,85,0.4) 50%, rgba(30,41,59,0.8) 100%);
+  background-size: 200% 100%;
+}
+
+@keyframes skeleton-pulse {
+  0% {
+    background-position: 0% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* ========= PRINT STYLES ========= */
 @media print {
   body * {
     visibility: hidden;
@@ -96,7 +176,7 @@
     display: none !important;
   }
   
-  /* Format the overall page for printing */
+  /* Format for printing */
   .storage-preparation-checklist {
     width: 100%;
     margin: 0;
@@ -105,7 +185,6 @@
     color: black !important;
   }
   
-  /* Format the card for printing */
   .storage-preparation-checklist .card {
     box-shadow: none !important;
     border: none !important;
@@ -114,7 +193,7 @@
     color: black !important;
   }
   
-  /* Ensure all text is visible */
+  /* Text visibility */
   .storage-preparation-checklist p,
   .storage-preparation-checklist h1,
   .storage-preparation-checklist h2,
@@ -123,19 +202,19 @@
     color: black !important;
   }
   
-  /* Ensure checkboxes are visible */
+  /* Checkbox visibility */
   .storage-preparation-checklist [role="checkbox"] {
     border: 1px solid black !important;
     background-color: white !important;
   }
   
-  /* Show the active tab only */
+  /* Tab panel visibility */
   .storage-preparation-checklist [role="tabpanel"] {
     display: block;
     visibility: visible;
   }
   
-  /* Hide the tabs navigation */
+  /* Hide tabs navigation */
   .storage-preparation-checklist [role="tablist"] {
     display: none !important;
   }
@@ -144,90 +223,4 @@
   .storage-preparation-checklist section {
     page-break-inside: avoid;
   }
-}
-
-/* Loading state styles */
-.storage-preparation-checklist .skeleton-pulse {
-  animation: skeleton-pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-  background: linear-gradient(90deg, rgba(30,41,59,0.8) 0%, rgba(51,65,85,0.4) 50%, rgba(30,41,59,0.8) 100%);
-  background-size: 200% 100%;
-}
-
-@keyframes skeleton-pulse {
-  0% {
-    background-position: 0% 0;
-  }
-  100% {
-    background-position: -200% 0;
-  }
-}
-
-/* Focus styles for tab triggers */
-[data-state="active"][role="tab"] {
-  outline: 2px solid #5B9BD5 !important; 
-  outline-offset: -2px;
-  background-color: rgba(91, 155, 213, 0.2) !important;
-  position: relative;
-  z-index: 10;
-}
-
-/* Fix tab hover states */
-[role="tab"]:hover {
-  background-color: rgba(255, 255, 255, 0.1) !important;
-}
-
-/* Make sure text is always visible in tabs - fix for disappearing text */
-[role="tab"] span {
-  visibility: visible !important;
-  opacity: 1 !important;
-  display: block !important;
-}
-
-/* Force tab content to be fully visible */
-[role="tabpanel"] {
-  position: relative !important;
-  visibility: visible !important;
-  transition: none !important;
-  transform: none !important;
-}
-
-/* Proper tab animation handling */
-[role="tabpanel"][data-state="inactive"] {
-  display: none !important;
-}
-
-/* Ensure notes textarea retains focus properly */
-.tab-content-wrapper textarea:focus {
-  outline: 2px solid #5B9BD5 !important;
-  outline-offset: -2px;
-  border-color: #5B9BD5 !important;
-}
-
-/* Force visibility of notes text */
-.tab-content-wrapper textarea {
-  color: white !important;
-}
-
-/* Ensure data doesn't get lost during tab transitions */
-.tab-content-wrapper {
-  min-height: 500px;
-}
-
-/* Force visibility of tab list */
-.storage-preparation-checklist [role="tablist"] {
-  display: grid !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-}
-
-/* Force buttons to be visible */
-.storage-preparation-checklist button {
-  visibility: visible !important;
-  opacity: 1 !important;
-  display: inline-flex !important;
-}
-
-/* Ensure header displays properly */
-.storage-preparation-checklist .pt-20 {
-  padding-top: 5rem !important;
 }
