@@ -73,6 +73,20 @@ const Checkbox = React.forwardRef<
           ✓
         </span>
       )}
+      
+      {/* Additional print fallback - this will be absolutely positioned and only show in print */}
+      <span
+        aria-hidden="true"
+        className="print-only absolute inset-0 hidden"
+        style={{
+          fontSize: '18px',
+          fontWeight: 'bold',
+          textAlign: 'center',
+          lineHeight: '1.2'
+        }}
+      >
+        {isChecked ? '☑' : '☐'}
+      </span>
     </CheckboxPrimitive.Root>
   )
 })

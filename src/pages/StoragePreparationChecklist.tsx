@@ -114,8 +114,9 @@ const StoragePreparationChecklistPage: React.FC = () => {
       // 3. Make sure all tab panels are visible for printing
       const tabPanels = document.querySelectorAll('[role="tabpanel"]');
       tabPanels.forEach(panel => {
-        panel.style.display = 'block';
-        panel.style.visibility = 'visible';
+        const htmlPanel = panel as HTMLElement;
+        htmlPanel.style.display = 'block';
+        htmlPanel.style.visibility = 'visible';
       });
       
       // 4. Force checkboxes to be visible in print with inline HTML

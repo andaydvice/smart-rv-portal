@@ -78,19 +78,21 @@ const ChecklistContent: React.FC<ChecklistContentProps> = ({
     const handleBeforePrint = () => {
       // Make all tab panels visible in print
       document.querySelectorAll('[role="tabpanel"]').forEach(panel => {
-        const originalDisplay = panel.style.display;
-        panel.style.display = 'block';
-        panel.style.visibility = 'visible';
-        panel.setAttribute('data-original-display', originalDisplay);
+        const htmlPanel = panel as HTMLElement;
+        const originalDisplay = htmlPanel.style.display;
+        htmlPanel.style.display = 'block';
+        htmlPanel.style.visibility = 'visible';
+        htmlPanel.setAttribute('data-original-display', originalDisplay);
       });
     };
     
     // Add afterprint listener to restore the original visibility
     const handleAfterPrint = () => {
       document.querySelectorAll('[role="tabpanel"]').forEach(panel => {
+        const htmlPanel = panel as HTMLElement;
         const originalDisplay = panel.getAttribute('data-original-display') || '';
         if (panel.getAttribute('value') !== activeTab) {
-          panel.style.display = originalDisplay;
+          htmlPanel.style.display = originalDisplay;
         }
       });
     };

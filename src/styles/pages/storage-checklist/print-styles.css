@@ -40,6 +40,37 @@
     -webkit-print-color-adjust: exact !important;
   }
   
+  /* Show the hard-coded checkmark in print mode */
+  .storage-preparation-checklist .print-only-checkmark {
+    display: block !important;
+    visibility: visible !important;
+  }
+  
+  /* Show native-checkbox replacement in print mode */
+  .storage-preparation-checklist .print-only-native-checkbox {
+    display: inline-block !important;
+    visibility: visible !important;
+  }
+  
+  /* Show print-only elements */
+  .storage-preparation-checklist .print-only {
+    display: block !important;
+    visibility: visible !important;
+  }
+  
+  /* Show print-only checkbox character */
+  .storage-preparation-checklist .print-only-checkbox-char {
+    display: inline-block !important;
+    visibility: visible !important;
+  }
+  
+  /* Make label prefixes visible in print */
+  .storage-preparation-checklist .print-only-label-prefix {
+    display: inline !important;
+    visibility: visible !important;
+    font-weight: bold !important;
+  }
+  
   /* Ensure page breaks don't happen inside checklist items */
   .storage-preparation-checklist .checklist-item {
     page-break-inside: avoid !important;
@@ -94,5 +125,45 @@
     -webkit-appearance: checkbox !important;
     -moz-appearance: checkbox !important;
     appearance: checkbox !important;
+  }
+  
+  /* Enhanced checkbox styling for print */
+  .storage-preparation-checklist [data-state="checked"],
+  .storage-preparation-checklist [aria-checked="true"],
+  .storage-preparation-checklist [data-print-checked="true"] {
+    position: relative !important;
+    
+    /* Show a visible checkmark for checked items */
+    &::after {
+      content: '✓' !important;
+      position: absolute !important;
+      top: 0 !important;
+      left: 0 !important;
+      width: 100% !important;
+      height: 100% !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      font-weight: bold !important;
+      font-size: 16px !important;
+      background-color: white !important;
+      color: black !important;
+      z-index: 9999 !important;
+      border: 2px solid black !important;
+      visibility: visible !important;
+    }
+  }
+  
+  /* Force checked labels to indicate their state */
+  .storage-preparation-checklist label[data-checked="true"],
+  .storage-preparation-checklist label[data-print-state="checked"] {
+    font-weight: bold !important;
+    
+    &::before {
+      content: '☑ ' !important;
+      display: inline !important;
+      visibility: visible !important;
+      margin-right: 4px !important;
+    }
   }
 }

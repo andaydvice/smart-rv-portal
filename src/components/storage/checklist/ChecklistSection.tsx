@@ -41,6 +41,20 @@ export const ChecklistItem: React.FC<ChecklistItemProps> = ({
         className="print-only-native-checkbox hidden" 
       />
       
+      {/* Print-only checkbox visual - bold ☑ or ☐ character */}
+      <span 
+        aria-hidden="true" 
+        className="print-only-checkbox-char hidden"
+        style={{ 
+          fontSize: '18px',
+          fontWeight: 'bold',
+          lineHeight: '1',
+          marginRight: '8px'
+        }}
+      >
+        {isChecked ? '☑' : '☐'}
+      </span>
+      
       <Checkbox 
         id={id} 
         className="mt-1 h-5 w-5 border-[#5B9BD5] print-checkbox" 
