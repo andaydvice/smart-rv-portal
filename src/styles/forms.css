@@ -1,5 +1,23 @@
 
-/* Placeholder Styles */
+/* Placeholder Styles with cross-browser compatibility */
+input::-webkit-input-placeholder,
+textarea::-webkit-input-placeholder {
+  color: #666666;
+  opacity: 1;
+}
+
+input::-moz-placeholder,
+textarea::-moz-placeholder {
+  color: #666666;
+  opacity: 1;
+}
+
+input:-ms-input-placeholder,
+textarea:-ms-input-placeholder {
+  color: #666666;
+  opacity: 1;
+}
+
 input::placeholder,
 textarea::placeholder {
   color: #666666;
@@ -42,4 +60,14 @@ select.dark-input {
 /* Fix dropdown z-index to ensure it appears above other elements */
 [data-radix-popper-content-wrapper] {
   z-index: 50 !important;
+}
+
+/* Fullscreen fixes */
+:fullscreen,
+:-webkit-full-screen,
+:-moz-full-screen,
+:-ms-fullscreen {
+  background-color: #080F1F;
+  width: 100vw;
+  height: 100vh;
 }

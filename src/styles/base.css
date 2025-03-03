@@ -1,6 +1,7 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
+/* Tailwind directives need to be properly formatted */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -22,6 +23,8 @@
     @apply bg-background text-foreground antialiased;
     font-feature-settings: "ss01" on, "ss02" on, "cv01" on, "cv02" on;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
     text-size-adjust: 100%;
     background-color: #080F1F !important;
     color: #ffffff !important;

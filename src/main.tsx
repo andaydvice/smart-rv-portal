@@ -18,6 +18,13 @@ if (rootElement) {
 
   const root = ReactDOM.createRoot(rootElement);
   
+  // Handle unhandled promise rejections to prevent runtime errors
+  window.addEventListener('unhandledrejection', (event) => {
+    console.warn('Unhandled promise rejection:', event.reason);
+    // Prevent the default handling of the event
+    event.preventDefault();
+  });
+  
   root.render(
     <React.StrictMode>
       <App />

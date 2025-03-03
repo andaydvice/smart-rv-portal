@@ -10,6 +10,13 @@
     <meta property="og:image" content="/og-image.svg" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- Error handling -->
+    <script>
+      window.onerror = function(message, source, lineno, colno, error) {
+        console.error('Global error caught:', message, 'at', source, lineno, colno);
+        return true; // Prevents default error handling
+      };
+    </script>
     <!-- Inline critical CSS to avoid MIME type issues -->
     <style>
       body, html {
@@ -70,6 +77,12 @@
             }, 500);
           }
         }
+      });
+      
+      // Handle unhandled promise rejections
+      window.addEventListener('unhandledrejection', function(event) {
+        console.warn('Unhandled promise rejection:', event.reason);
+        event.preventDefault();
       });
     </script>
     <!-- Lovable Script - Required for new features -->
