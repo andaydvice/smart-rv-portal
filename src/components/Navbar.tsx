@@ -7,16 +7,15 @@ import NavbarLinks from './NavbarLinks';
 
 const Navbar = () => {
   return (
-    <header className="navbar" style={{ visibility: 'visible', display: 'block' }}>
-      <div className="navbar-container">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-[#080F1F]/90 backdrop-blur-sm border-b border-white/10">
+      <div className="container mx-auto flex items-center justify-between py-4 px-6">
         <div className="flex items-center">
           <Link to="/" className="flex items-center gap-2">
             <Logo />
-            <span className="font-bold text-white text-xl">Smart Road Portal</span>
           </Link>
         </div>
         
-        <nav className="navbar-links hidden md:flex">
+        <nav className="hidden md:flex items-center space-x-6">
           <NavbarLinks />
         </nav>
         

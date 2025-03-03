@@ -42,6 +42,18 @@ if (rootElement) {
   console.log('Application rendered successfully');
 }
 
+// Force visibility on all elements
+document.addEventListener('DOMContentLoaded', () => {
+  console.log('DOM fully loaded');
+  document.querySelectorAll('section, h1, h2, p, button, a, img, div').forEach(el => {
+    if (el instanceof HTMLElement) {
+      el.style.visibility = 'visible';
+      el.style.opacity = '1';
+      el.style.display = el.style.display === 'none' ? 'block' : el.style.display;
+    }
+  });
+});
+
 // Extra safety - remove loading screen after timeout
 setTimeout(() => {
   const loadingElement = document.querySelector('.app-loading');
@@ -49,4 +61,4 @@ setTimeout(() => {
     loadingElement.parentNode.removeChild(loadingElement);
     console.log('Forced removal of loading indicator');
   }
-}, 500);
+}, 100);

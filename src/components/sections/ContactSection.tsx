@@ -1,51 +1,43 @@
-import { motion } from "framer-motion";
+
+import React from "react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 
-export const ContactSection = () => (
-  <section className="relative py-32 px-4 overflow-hidden">
-    <div className="absolute inset-0">
-      <img
-        src="/lovable-uploads/1c1bb4c0-13a3-42f8-9b4d-f0aa74e2adb3.png"
-        alt="Modern Smart RV exterior with tablet displaying website"
-        className="w-full h-full object-cover"
-        loading="eager"
-      />
-      <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/80 to-black/90" />
-    </div>
-    <div className="relative max-w-4xl mx-auto text-center">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6 }}
-        className="space-y-8"
-      >
-        <span className="inline-block px-4 py-2 mb-6 text-sm font-medium bg-white/10 backdrop-blur-sm rounded-full text-white border border-white/20">
-          Get Started
-        </span>
-        <h2 className="text-5xl font-bold mb-6 text-white">Ready to Transform Your Journey?</h2>
-        <p className="text-xl mb-12 text-gray-300 max-w-2xl mx-auto">
-          Connect with our team to learn more about Smart RV technology and begin your luxury travel experience
-        </p>
-        <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-          <Link to="/contact">
-            <Button 
-              size="lg"
-              className="bg-white text-black hover:bg-white/90 text-lg px-8 py-6 rounded-full transition-all duration-300 transform hover:scale-105"
-            >
-              Contact Sales
-            </Button>
-          </Link>
-          <Button 
-            variant="outline" 
-            size="lg"
-            className="border-2 border-white text-white bg-transparent hover:bg-white/10 text-lg px-8 py-6 rounded-full transition-all duration-300 transform hover:scale-105"
-          >
-            View Brochure
-          </Button>
+export const ContactSection = () => {
+  return (
+    <section className="py-20 relative overflow-hidden">
+      {/* Background image */}
+      <div className="absolute inset-0 z-0">
+        <img
+          src="/lovable-uploads/38c0f49c-f4c1-4849-a734-c74fe938c2c6.png"
+          alt="Smart RV and tablet showing interface"
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#080F1F] to-transparent"></div>
+      </div>
+      
+      <div className="container mx-auto px-4 relative z-10">
+        <div className="text-center max-w-3xl mx-auto mt-32">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+            Ready to Transform Your Journey?
+          </h2>
+          <p className="text-white/80 mb-8">
+            Connect with our team to learn more about Smart RV technology and begin your luxury travel experience
+          </p>
+          <div className="flex flex-wrap justify-center gap-4">
+            <Link to="/schedule-demo">
+              <Button size="lg" className="bg-[#5B9BD5] hover:bg-[#4B8FE3] text-white">
+                Request a Demo
+              </Button>
+            </Link>
+            <Link to="/contact">
+              <Button variant="outline" size="lg" className="border-white text-white hover:bg-white/10">
+                Contact Sales
+              </Button>
+            </Link>
+          </div>
         </div>
-      </motion.div>
-    </div>
-  </section>
-);
+      </div>
+    </section>
+  );
+};
