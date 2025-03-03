@@ -1,47 +1,64 @@
 
-/* Storage Checklist Styles - Refactored for maintainability */
+/* ============================================
+   RV STORAGE CHECKLIST STYLES
+   Organized for improved maintainability
+   ============================================ */
 
-/* ========= CRITICAL VISIBILITY FIXES ========= */
-/* These rules ensure all elements are visible and properly displayed */
+/* ========= CORE VISIBILITY FIXES ========= */
+/* Essential rules to ensure all checklist elements are properly visible */
 .storage-preparation-checklist,
 .storage-preparation-checklist * {
   visibility: visible !important;
   opacity: 1 !important;
 }
 
-/* ========= DISPLAY PROPERTY FIXES ========= */
-/* Base display rules */
+/* ========= LAYOUT STRUCTURE ========= */
+/* Base display rules for structural elements */
 .storage-preparation-checklist,
 .storage-preparation-checklist .container,
-.storage-preparation-checklist .card,
-.storage-preparation-checklist .card-header,
-.storage-preparation-checklist .card-content,
-[role="progressbar"],
-[role="progressbar"] > div,
-[role="checkbox"],
-[role="tablist"],
-[role="tabpanel"],
-[role="tab"],
-.storage-preparation-checklist button,
-.storage-preparation-checklist img {
+.storage-preparation-checklist .card {
   display: block !important;
 }
 
-/* Flex display overrides */
-.storage-preparation-checklist [role="checkbox"],
-.storage-preparation-checklist [role="checkbox"] > *,
-.storage-preparation-checklist button,
-.storage-preparation-checklist .flex,
-.storage-preparation-checklist [role="tab"] {
+/* Card structure and spacing */
+.storage-preparation-checklist .card-header,
+.storage-preparation-checklist .card-content {
+  display: block !important;
+}
+
+/* Minimum content height for stability */
+.tab-content-wrapper {
+  min-height: 500px;
+}
+
+/* Header spacing */
+.storage-preparation-checklist .pt-20 {
+  padding-top: 5rem !important;
+}
+
+/* ========= INTERACTIVE ELEMENTS ========= */
+/* Buttons and controls */
+.storage-preparation-checklist button {
   display: flex !important;
 }
 
-/* Inline-flex specific elements */
+/* Checkbox elements */
+.storage-preparation-checklist [role="checkbox"],
+.storage-preparation-checklist [role="checkbox"] > * {
+  display: flex !important;
+}
+
+/* Flexbox containers */
+.storage-preparation-checklist .flex {
+  display: flex !important;
+}
+
 .storage-preparation-checklist .inline-flex {
   display: inline-flex !important;
 }
 
-/* ========= PROGRESS BAR STYLING ========= */
+/* ========= PROGRESS INDICATORS ========= */
+/* Progress bar styling and behavior */
 .storage-preparation-checklist [role="progressbar"] {
   position: relative !important;
   height: 8px !important;
@@ -61,84 +78,7 @@
   transition: none !important;
 }
 
-/* ========= IMAGE HANDLING ========= */
-.storage-preparation-checklist img {
-  max-width: 100% !important;
-  height: auto !important;
-  width: 100% !important;
-}
-
-/* ========= TAB PANEL BEHAVIOR ========= */
-/* State-based display toggling */
-.storage-preparation-checklist [role="tabpanel"][data-state="active"] {
-  display: block !important;
-  visibility: visible !important;
-}
-
-.storage-preparation-checklist [role="tabpanel"][data-state="inactive"] {
-  display: none !important;
-}
-
-/* Tab content stability */
-.storage-preparation-checklist [role="tabpanel"] {
-  position: relative !important;
-  visibility: visible !important;
-  transition: none !important;
-  transform: none !important;
-}
-
-/* Tab list visibility */
-.storage-preparation-checklist [role="tablist"] {
-  display: grid !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-}
-
-/* ========= FOCUS AND INTERACTIVE STATES ========= */
-/* Focus styles for tab triggers */
-[data-state="active"][role="tab"] {
-  outline: 2px solid #5B9BD5 !important; 
-  outline-offset: -2px;
-  background-color: rgba(91, 155, 213, 0.2) !important;
-  position: relative;
-  z-index: 10;
-}
-
-/* Tab hover states */
-[role="tab"]:hover {
-  background-color: rgba(255, 255, 255, 0.1) !important;
-}
-
-/* Text visibility in tabs */
-[role="tab"] span {
-  visibility: visible !important;
-  opacity: 1 !important;
-  display: block !important;
-}
-
-/* Textarea focus and color */
-.tab-content-wrapper textarea:focus {
-  outline: 2px solid #5B9BD5 !important;
-  outline-offset: -2px;
-  border-color: #5B9BD5 !important;
-}
-
-.tab-content-wrapper textarea {
-  color: white !important;
-}
-
-/* ========= LAYOUT STABILITY ========= */
-/* Minimum content height */
-.tab-content-wrapper {
-  min-height: 500px;
-}
-
-/* Header spacing */
-.storage-preparation-checklist .pt-20 {
-  padding-top: 5rem !important;
-}
-
-/* ========= LOADING STATES ========= */
+/* Loading state indicators */
 .storage-preparation-checklist .skeleton-pulse {
   animation: skeleton-pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
   background: linear-gradient(90deg, rgba(30,41,59,0.8) 0%, rgba(51,65,85,0.4) 50%, rgba(30,41,59,0.8) 100%);
@@ -154,8 +94,82 @@
   }
 }
 
-/* ========= PRINT STYLES ========= */
+/* ========= TAB NAVIGATION SYSTEM ========= */
+/* Tab list container */
+.storage-preparation-checklist [role="tablist"] {
+  display: grid !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* Individual tab items */
+.storage-preparation-checklist [role="tab"] {
+  display: flex !important;
+}
+
+/* Tab text content */
+.storage-preparation-checklist [role="tab"] span {
+  visibility: visible !important;
+  opacity: 1 !important;
+  display: block !important;
+}
+
+/* Tab states - active/inactive */
+.storage-preparation-checklist [role="tabpanel"][data-state="active"] {
+  display: block !important;
+  visibility: visible !important;
+}
+
+.storage-preparation-checklist [role="tabpanel"][data-state="inactive"] {
+  display: none !important;
+}
+
+/* Tab panel stability */
+.storage-preparation-checklist [role="tabpanel"] {
+  position: relative !important;
+  visibility: visible !important;
+  transition: none !important;
+  transform: none !important;
+}
+
+/* ========= FOCUS & INTERACTIVE STATES ========= */
+/* Focus styles for active tabs */
+[data-state="active"][role="tab"] {
+  outline: 2px solid #5B9BD5 !important; 
+  outline-offset: -2px;
+  background-color: rgba(91, 155, 213, 0.2) !important;
+  position: relative;
+  z-index: 10;
+}
+
+/* Tab hover feedback */
+[role="tab"]:hover {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Textarea focus handling */
+.tab-content-wrapper textarea:focus {
+  outline: 2px solid #5B9BD5 !important;
+  outline-offset: -2px;
+  border-color: #5B9BD5 !important;
+}
+
+.tab-content-wrapper textarea {
+  color: white !important;
+}
+
+/* ========= MEDIA & IMAGES ========= */
+/* Image sizing and responsiveness */
+.storage-preparation-checklist img {
+  max-width: 100% !important;
+  height: auto !important;
+  width: 100% !important;
+  display: block !important;
+}
+
+/* ========= PRINT LAYOUT ========= */
 @media print {
+  /* Base print visibility */
   body * {
     visibility: hidden;
   }
@@ -171,12 +185,12 @@
     visibility: visible;
   }
   
-  /* Hide buttons in print view */
+  /* Print-specific hiding */
   .storage-preparation-checklist button {
     display: none !important;
   }
   
-  /* Format for printing */
+  /* Print color and format adjustments */
   .storage-preparation-checklist {
     width: 100%;
     margin: 0;
@@ -193,7 +207,7 @@
     color: black !important;
   }
   
-  /* Text visibility */
+  /* Text visibility in print */
   .storage-preparation-checklist p,
   .storage-preparation-checklist h1,
   .storage-preparation-checklist h2,
@@ -202,24 +216,24 @@
     color: black !important;
   }
   
-  /* Checkbox visibility */
+  /* Checkbox appearance for print */
   .storage-preparation-checklist [role="checkbox"] {
     border: 1px solid black !important;
     background-color: white !important;
   }
   
-  /* Tab panel visibility */
+  /* Show all tab panels in print */
   .storage-preparation-checklist [role="tabpanel"] {
     display: block;
     visibility: visible;
   }
   
-  /* Hide tabs navigation */
+  /* Hide tab navigation in print */
   .storage-preparation-checklist [role="tablist"] {
     display: none !important;
   }
   
-  /* Page breaks */
+  /* Page break handling */
   .storage-preparation-checklist section {
     page-break-inside: avoid;
   }
