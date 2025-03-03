@@ -173,8 +173,8 @@ const StoragePreparationChecklist: React.FC = memo(() => {
           <CardContent className="pt-6">
             <ChecklistContent 
               progress={progress}
-              startDate={startDate}
-              endDate={endDate}
+              startDate={typeof startDate === 'string' ? ensureValidDate(startDate) : startDate}
+              endDate={typeof endDate === 'string' ? ensureValidDate(endDate) : endDate}
               setStartDate={setStartDate}
               setEndDate={setEndDate}
               notes={notes}
