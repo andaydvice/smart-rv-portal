@@ -43,7 +43,7 @@ const ChecklistHeader: React.FC<ChecklistHeaderProps> = ({
             )}
           </div>
           
-          <div className="bg-[#131a2a] px-4 py-2 rounded-md flex items-center">
+          <div className="bg-[#131a2a] px-4 py-2 rounded-md flex items-center completion-indicator">
             <CheckCircle className="h-5 w-5 mr-2 text-green-500" />
             <span className="text-white">Completion</span>
             <span className="text-green-500 font-semibold ml-2">{safePercentage}%</span>
