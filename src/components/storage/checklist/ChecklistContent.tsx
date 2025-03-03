@@ -1,30 +1,18 @@
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Tabs, TabsContent, TabsList } from "@/components/ui/tabs";
-import RVInfoTab from './RVInfoTab';
+import ChecklistTabTrigger from './ChecklistTabTrigger';
 import ExteriorTab from './ExteriorTab';
 import InteriorTab from './InteriorTab';
 import PlumbingTab from './PlumbingTab';
+import TiresTab from './TiresTab';
 import ElectricalTab from './ElectricalTab';
 import MechanicalTab from './MechanicalTab';
-import TiresTab from './TiresTab';
 import PestControlTab from './PestControlTab';
 import SecurityTab from './SecurityTab';
 import NotesTab from './NotesTab';
-import ChecklistTabTrigger from "./ChecklistTabTrigger";
-import { ChecklistNotes } from './hooks/types';
-
-interface ChecklistContentProps {
-  progress: {[key: string]: boolean | string};
-  startDate: Date | undefined;
-  endDate: Date | undefined;
-  setStartDate: (date: Date | undefined) => void;
-  setEndDate: (date: Date | undefined) => void;
-  notes: ChecklistNotes;
-  handleCheckboxChange: (id: string, checked: boolean) => void;
-  handleNotesChange: (field: keyof ChecklistNotes, value: string) => void;
-  onTabChange?: () => void; // New prop for tab change handling
-}
+import RVInfoTab from './RVInfoTab';
+import { ChecklistContentProps } from './ChecklistTypes';
 
 const ChecklistContent: React.FC<ChecklistContentProps> = ({
   progress,
@@ -37,180 +25,208 @@ const ChecklistContent: React.FC<ChecklistContentProps> = ({
   handleNotesChange,
   onTabChange
 }) => {
-  // Track active tab for explicit saving
-  const [activeTab, setActiveTab] = React.useState("rv-info");
+  const didMountRef = useRef(false);
+  const tabsRef = useRef<HTMLDivElement>(null);
   
-  // Force save whenever tab changes
-  const handleTabValueChange = (newValue: string) => {
-    console.log(`Tab changed to ${newValue} - triggering save`);
-    
-    // First save the current tab's data
-    if (onTabChange) {
-      onTabChange();
-    }
-    
-    // Then update the active tab
-    setActiveTab(newValue);
-    
-    // Update print attributes for all checkboxes after tab change
-    setTimeout(() => {
-      const checkboxes = document.querySelectorAll('[role="checkbox"]');
-      checkboxes.forEach(checkbox => {
+  // Auto-save when component unmounts
+  useEffect(() => {
+    // On mount, prepare for print by ensuring all checkboxes have appropriate attributes
+    const prepareCheckboxesForPrint = () => {
+      document.querySelectorAll('[role="checkbox"]').forEach(checkbox => {
         const id = checkbox.getAttribute('id');
         if (id && progress[id] !== undefined) {
           const isChecked = !!progress[id];
           checkbox.setAttribute('data-print-checked', isChecked ? 'true' : 'false');
-          checkbox.setAttribute('aria-checked', isChecked ? 'true' : 'false');
           checkbox.setAttribute('data-state', isChecked ? 'checked' : 'unchecked');
         }
       });
-    }, 100);
-  };
-  
-  // On component mount/unmount, force a save
-  useEffect(() => {
-    if (onTabChange) {
-      console.log("ChecklistContent mounted - initial save");
-      onTabChange();
-    }
-    
-    // Add beforeprint listener to make all tab content visible
-    const handleBeforePrint = () => {
-      // Make all tab panels visible in print
-      document.querySelectorAll('[role="tabpanel"]').forEach(panel => {
-        const htmlPanel = panel as HTMLElement;
-        const originalDisplay = htmlPanel.style.display;
-        htmlPanel.style.display = 'block';
-        htmlPanel.style.visibility = 'visible';
-        htmlPanel.setAttribute('data-original-display', originalDisplay);
-      });
     };
     
-    // Add afterprint listener to restore the original visibility
-    const handleAfterPrint = () => {
+    prepareCheckboxesForPrint();
+    
+    // Force all tabs to be visible in print mode but hidden in screen mode
+    const prepareTabsForPrint = () => {
       document.querySelectorAll('[role="tabpanel"]').forEach(panel => {
-        const htmlPanel = panel as HTMLElement;
-        const originalDisplay = panel.getAttribute('data-original-display') || '';
-        if (panel.getAttribute('value') !== activeTab) {
-          htmlPanel.style.display = originalDisplay;
+        if (panel instanceof HTMLElement) {
+          panel.dataset.printDisplay = 'block';
         }
       });
     };
     
-    window.addEventListener('beforeprint', handleBeforePrint);
-    window.addEventListener('afterprint', handleAfterPrint);
+    prepareTabsForPrint();
+    
+    // Prepare before print
+    const beforePrintHandler = () => {
+      prepareCheckboxesForPrint();
+      prepareTabsForPrint();
+      
+      // Make all tab content visible for printing
+      document.querySelectorAll('[role="tabpanel"]').forEach(panel => {
+        if (panel instanceof HTMLElement) {
+          panel.style.display = 'block';
+          panel.style.visibility = 'visible';
+          panel.style.height = 'auto';
+        }
+      });
+      
+      // Add page breaks between tabs for cleaner printing
+      const tabPanels = document.querySelectorAll('[role="tabpanel"]');
+      tabPanels.forEach((panel, index) => {
+        if (index > 0 && panel instanceof HTMLElement) {
+          panel.style.pageBreakBefore = 'always';
+        }
+      });
+    };
+    
+    // Reset after print
+    const afterPrintHandler = () => {
+      // Restore tab panel visibility to normal
+      const tabPanels = document.querySelectorAll('[role="tabpanel"]');
+      const activePanel = document.querySelector('[role="tabpanel"][data-state="active"]');
+      
+      tabPanels.forEach(panel => {
+        if (panel !== activePanel && panel instanceof HTMLElement) {
+          panel.style.display = '';
+          panel.style.visibility = '';
+          panel.style.height = '';
+          panel.style.pageBreakBefore = '';
+        }
+      });
+    };
+    
+    window.addEventListener('beforeprint', beforePrintHandler);
+    window.addEventListener('afterprint', afterPrintHandler);
+    
+    console.log("ChecklistContent mounted - initial save");
     
     return () => {
-      if (onTabChange) {
-        console.log("ChecklistContent unmounting - final save");
-        onTabChange();
-      }
-      window.removeEventListener('beforeprint', handleBeforePrint);
-      window.removeEventListener('afterprint', handleAfterPrint);
+      console.log("ChecklistContent unmounting - final save");
+      onTabChange();
+      window.removeEventListener('beforeprint', beforePrintHandler);
+      window.removeEventListener('afterprint', afterPrintHandler);
     };
-  }, [onTabChange, activeTab]);
-
+  }, [progress, onTabChange]);
+  
+  useEffect(() => {
+    if (didMountRef.current) {
+      // Setup resize observer to ensure tab content fills its container
+      if (tabsRef.current) {
+        const observer = new ResizeObserver(() => {
+          if (tabsRef.current) {
+            const tabsHeight = tabsRef.current.offsetHeight;
+            const tabsList = tabsRef.current.querySelector('[role="tablist"]');
+            const tabsListHeight = tabsList ? tabsList.clientHeight : 0;
+            const contentHeight = tabsHeight - tabsListHeight - 20; // Subtract padding
+            
+            document.querySelectorAll('[role="tabpanel"]').forEach(panel => {
+              if (panel instanceof HTMLElement) {
+                panel.style.minHeight = `${contentHeight}px`;
+              }
+            });
+          }
+        });
+        
+        observer.observe(tabsRef.current);
+        return () => observer.disconnect();
+      }
+    } else {
+      didMountRef.current = true;
+    }
+  }, []);
+  
   return (
     <Tabs 
       defaultValue="rv-info" 
-      className="w-full"
-      value={activeTab}
-      onValueChange={handleTabValueChange}
+      className="space-y-4" 
+      onValueChange={onTabChange}
+      ref={tabsRef}
     >
-      <TabsList 
-        className="grid grid-cols-5 lg:grid-cols-10 h-auto bg-[#151A22] mb-6 border-b border-gray-700 rounded-none no-print"
-        style={{ display: 'grid', visibility: 'visible' }}
-      >
-        <ChecklistTabTrigger value="rv-info" icon="Info" label="RV Info" onTabClick={onTabChange} />
-        <ChecklistTabTrigger value="exterior" icon="ExternalLink" label="Exterior" onTabClick={onTabChange} />
-        <ChecklistTabTrigger value="interior" icon="Home" label="Interior" onTabClick={onTabChange} />
-        <ChecklistTabTrigger value="plumbing" icon="Droplets" label="Plumbing" onTabClick={onTabChange} />
-        <ChecklistTabTrigger value="electrical" icon="Zap" label="Electrical" onTabClick={onTabChange} />
-        <ChecklistTabTrigger value="mechanical" icon="Settings" label="Mechanical" onTabClick={onTabChange} />
-        <ChecklistTabTrigger value="tires" icon="CircleDashed" label="Tires" onTabClick={onTabChange} />
-        <ChecklistTabTrigger value="pest-control" icon="Bug" label="Pest Control" onTabClick={onTabChange} />
-        <ChecklistTabTrigger value="security" icon="Lock" label="Security" onTabClick={onTabChange} />
-        <ChecklistTabTrigger value="notes" icon="FileText" label="Notes" onTabClick={onTabChange} />
+      <TabsList className="grid grid-cols-2 md:grid-cols-5 lg:grid-cols-10 gap-2 bg-[#131a2a] p-1">
+        <ChecklistTabTrigger value="rv-info" label="RV Info" />
+        <ChecklistTabTrigger value="exterior" label="Exterior" />
+        <ChecklistTabTrigger value="interior" label="Interior" />
+        <ChecklistTabTrigger value="plumbing" label="Plumbing" />
+        <ChecklistTabTrigger value="tires" label="Tires" />
+        <ChecklistTabTrigger value="electrical" label="Electrical" />
+        <ChecklistTabTrigger value="mechanical" label="Engine" />
+        <ChecklistTabTrigger value="pest-control" label="Pest Control" />
+        <ChecklistTabTrigger value="security" label="Security" />
+        <ChecklistTabTrigger value="notes" label="Notes" />
       </TabsList>
       
-      <div 
-        className="tab-content-wrapper"
-        style={{ visibility: 'visible', display: 'block' }}
-      >
-        <TabsContent value="rv-info" className="mt-0" style={{ visibility: 'visible' }}>
-          <RVInfoTab
-            progress={progress}
-            startDate={startDate}
-            endDate={endDate}
-            setStartDate={setStartDate}
-            setEndDate={setEndDate}
-            handleCheckboxChange={handleCheckboxChange}
-          />
-        </TabsContent>
-        
-        <TabsContent value="exterior" className="mt-0" style={{ visibility: 'visible' }}>
-          <ExteriorTab 
-            progress={progress}
-            handleCheckboxChange={handleCheckboxChange}
-          />
-        </TabsContent>
-        
-        <TabsContent value="interior" className="mt-0" style={{ visibility: 'visible' }}>
-          <InteriorTab 
-            progress={progress}
-            handleCheckboxChange={handleCheckboxChange}
-          />
-        </TabsContent>
-        
-        <TabsContent value="plumbing" className="mt-0" style={{ visibility: 'visible' }}>
-          <PlumbingTab 
-            progress={progress}
-            handleCheckboxChange={handleCheckboxChange}
-          />
-        </TabsContent>
-        
-        <TabsContent value="electrical" className="mt-0" style={{ visibility: 'visible' }}>
-          <ElectricalTab 
-            progress={progress}
-            handleCheckboxChange={handleCheckboxChange}
-          />
-        </TabsContent>
-        
-        <TabsContent value="mechanical" className="mt-0" style={{ visibility: 'visible' }}>
-          <MechanicalTab 
-            progress={progress}
-            handleCheckboxChange={handleCheckboxChange}
-          />
-        </TabsContent>
-        
-        <TabsContent value="tires" className="mt-0" style={{ visibility: 'visible' }}>
-          <TiresTab 
-            progress={progress}
-            handleCheckboxChange={handleCheckboxChange}
-          />
-        </TabsContent>
-        
-        <TabsContent value="pest-control" className="mt-0" style={{ visibility: 'visible' }}>
-          <PestControlTab 
-            progress={progress}
-            handleCheckboxChange={handleCheckboxChange}
-          />
-        </TabsContent>
-        
-        <TabsContent value="security" className="mt-0" style={{ visibility: 'visible' }}>
-          <SecurityTab 
-            progress={progress}
-            handleCheckboxChange={handleCheckboxChange}
-          />
-        </TabsContent>
-        
-        <TabsContent value="notes" className="mt-0" style={{ visibility: 'visible' }}>
-          <NotesTab 
-            notes={notes}
-            onNotesChange={handleNotesChange}
-          />
-        </TabsContent>
-      </div>
+      <TabsContent value="rv-info" className="space-y-4 tab-content">
+        <RVInfoTab 
+          progress={progress}
+          startDate={startDate}
+          endDate={endDate}
+          setStartDate={setStartDate}
+          setEndDate={setEndDate}
+          handleCheckboxChange={handleCheckboxChange}
+        />
+      </TabsContent>
+      
+      <TabsContent value="exterior" className="space-y-4 tab-content">
+        <ExteriorTab 
+          progress={progress} 
+          handleCheckboxChange={handleCheckboxChange} 
+        />
+      </TabsContent>
+      
+      <TabsContent value="interior" className="space-y-4 tab-content">
+        <InteriorTab 
+          progress={progress} 
+          handleCheckboxChange={handleCheckboxChange} 
+        />
+      </TabsContent>
+      
+      <TabsContent value="plumbing" className="space-y-4 tab-content">
+        <PlumbingTab 
+          progress={progress} 
+          handleCheckboxChange={handleCheckboxChange} 
+        />
+      </TabsContent>
+      
+      <TabsContent value="tires" className="space-y-4 tab-content">
+        <TiresTab 
+          progress={progress} 
+          handleCheckboxChange={handleCheckboxChange} 
+        />
+      </TabsContent>
+      
+      <TabsContent value="electrical" className="space-y-4 tab-content">
+        <ElectricalTab 
+          progress={progress} 
+          handleCheckboxChange={handleCheckboxChange} 
+        />
+      </TabsContent>
+      
+      <TabsContent value="mechanical" className="space-y-4 tab-content">
+        <MechanicalTab 
+          progress={progress} 
+          handleCheckboxChange={handleCheckboxChange} 
+        />
+      </TabsContent>
+      
+      <TabsContent value="pest-control" className="space-y-4 tab-content">
+        <PestControlTab 
+          progress={progress} 
+          handleCheckboxChange={handleCheckboxChange} 
+        />
+      </TabsContent>
+      
+      <TabsContent value="security" className="space-y-4 tab-content">
+        <SecurityTab 
+          progress={progress} 
+          handleCheckboxChange={handleCheckboxChange} 
+        />
+      </TabsContent>
+      
+      <TabsContent value="notes" className="space-y-4 tab-content">
+        <NotesTab 
+          notes={notes} 
+          handleNotesChange={handleNotesChange} 
+        />
+      </TabsContent>
     </Tabs>
   );
 };

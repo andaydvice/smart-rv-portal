@@ -14,7 +14,19 @@ declare module 'jspdf' {
 // Format dates for the PDF
 const formatDate = (date: Date | undefined): string => {
   if (!date) return 'Not set';
-  return format(date, 'MMM d, yyyy');
+  
+  // If we get a Date object, format it properly
+  if (date instanceof Date) {
+    return format(date, 'MMM d, yyyy');
+  }
+  
+  // If we somehow get a string date or something else
+  try {
+    return format(new Date(date), 'MMM d, yyyy');
+  } catch (error) {
+    console.error("Error formatting date:", error);
+    return 'Invalid date';
+  }
 };
 
 // Helper to create section header in PDF

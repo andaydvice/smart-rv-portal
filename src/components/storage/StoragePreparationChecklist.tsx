@@ -62,14 +62,14 @@ const StoragePreparationChecklist: React.FC = memo(() => {
     // After a short delay, update the print-specific attributes for this checkbox
     setTimeout(() => {
       const checkbox = document.getElementById(id);
-      if (checkbox) {
+      if (checkbox && checkbox instanceof HTMLElement) {
         checkbox.setAttribute('data-print-checked', checked ? 'true' : 'false');
         checkbox.setAttribute('aria-checked', checked ? 'true' : 'false');
         checkbox.setAttribute('data-state', checked ? 'checked' : 'unchecked');
         
         // Also update the label
         const label = document.querySelector(`label[for="${id}"]`);
-        if (label) {
+        if (label && label instanceof HTMLElement) {
           label.setAttribute('data-checked', checked ? 'true' : 'false');
           label.setAttribute('data-print-state', checked ? 'checked' : 'unchecked');
         }

@@ -15,8 +15,12 @@ const StoragePreparationChecklistPage: React.FC = () => {
     window.scrollTo(0, 0);
     
     // Ensure all UI elements are fully visible
-    document.documentElement.style.visibility = 'visible';
-    document.body.style.visibility = 'visible';
+    if (document.documentElement instanceof HTMLElement) {
+      document.documentElement.style.visibility = 'visible';
+    }
+    if (document.body instanceof HTMLElement) {
+      document.body.style.visibility = 'visible';
+    }
     
     // Force any progress indicators to update immediately
     const progressElements = document.querySelectorAll('[role="progressbar"]');
@@ -114,9 +118,10 @@ const StoragePreparationChecklistPage: React.FC = () => {
       // 3. Make sure all tab panels are visible for printing
       const tabPanels = document.querySelectorAll('[role="tabpanel"]');
       tabPanels.forEach(panel => {
-        const htmlPanel = panel as HTMLElement;
-        htmlPanel.style.display = 'block';
-        htmlPanel.style.visibility = 'visible';
+        if (panel instanceof HTMLElement) {
+          panel.style.display = 'block';
+          panel.style.visibility = 'visible';
+        }
       });
       
       // 4. Force checkboxes to be visible in print with inline HTML
