@@ -44,8 +44,26 @@ section.h-screen {
   color: transparent;
 }
 
+/* Image optimization */
 img {
   max-width: 100%;
   height: auto;
   display: block;
+  content-visibility: auto;
+}
+
+/* Layout performance optimization */
+.content-visibility-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: 0 500px;
+}
+
+/* Fresh Lovable-specific optimizations */
+.lovable-render {
+  transition: opacity 0.2s ease-in-out;
+}
+
+.lovable-container {
+  width: 100%;
+  position: relative;
 }
