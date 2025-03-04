@@ -21,6 +21,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Improved layout component with fade-in effect
 - Updated image rendering optimizations
 - Optimized server configuration
+- Removed @swc/plugin-emotion dependency to fix build errors
 
 ### Fixed
 - Dev server initialization issues
@@ -28,6 +29,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Project remixing stability issues
 - Network interface binding problems
 - Sandbox loading issues
+- Build failure due to missing @swc/plugin-emotion dependency
 
 ### Performance
 - Implemented manual chunking for improved loading
@@ -35,3 +37,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Improved initial load time with critical CSS
 - Reduced layout shifts during page transitions
 - Optimized image loading strategy
+

@@ -17,9 +17,7 @@ export default defineConfig(({ mode }) => ({
     }
   },
   plugins: [
-    react({
-      plugins: [['@swc/plugin-emotion', {}]],
-    }),
+    react(), // Removed the SWC emotion plugin that was causing the error
     mode === 'development' && componentTagger(),
   ].filter(Boolean),
   resolve: {
