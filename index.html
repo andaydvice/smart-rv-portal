@@ -14,29 +14,18 @@
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" as="style" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" />
     
-    <!-- Error handling -->
-    <script>
-      window.onerror = function(message, source, lineno, colno, error) {
-        console.error('Global error caught:', message, 'at', source, lineno, colno);
-        return true; // Prevents default error handling
-      };
-    </script>
-    
-    <!-- Inline critical CSS to avoid MIME type issues -->
+    <!-- Inline critical CSS -->
     <style>
       body, html {
         margin: 0;
         padding: 0;
         background-color: #080F1F;
         color: #f5f5f5;
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
       }
       #root {
         min-height: 100vh;
         width: 100%;
-        display: block !important;
-        visibility: visible !important;
-        opacity: 1 !important;
       }
       .app-loading {
         position: fixed;
@@ -52,60 +41,20 @@
         color: white;
         font-size: 16px;
       }
-      /* Essential CSS for immediate rendering */
       img {
         max-width: 100%;
         height: auto;
       }
-      .hero-section {
-        min-height: 100vh;
-        display: flex !important;
-        align-items: center;
-        justify-content: center;
-        position: relative;
-        visibility: visible !important;
-        opacity: 1 !important;
-      }
     </style>
   </head>
   <body>
-    <div id="root" style="display: block; visibility: visible; opacity: 1;">
+    <div id="root">
       <!-- Simple loading indicator -->
       <div class="app-loading">
         Loading application...
       </div>
     </div>
-    <script>
-      // Force visibility of root element
-      document.getElementById('root').style.display = 'block';
-      document.getElementById('root').style.visibility = 'visible';
-      document.getElementById('root').style.opacity = '1';
-      
-      // Ensure visibility of root element and remove loading indicator quickly
-      window.addEventListener('DOMContentLoaded', function() {
-        const root = document.getElementById('root');
-        if (root) {
-          root.style.display = 'block';
-          root.style.visibility = 'visible';
-          root.style.opacity = '1';
-          
-          const loadingElement = document.querySelector('.app-loading');
-          if (loadingElement && loadingElement.parentNode) {
-            setTimeout(function() {
-              loadingElement.parentNode.removeChild(loadingElement);
-            }, 100);
-          }
-        }
-      });
-      
-      // Handle unhandled promise rejections
-      window.addEventListener('unhandledrejection', function(event) {
-        console.warn('Unhandled promise rejection:', event.reason);
-        event.preventDefault();
-      });
-    </script>
-    <!-- Lovable Script - Required for new features -->
-    <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
+    
     <!-- Place these scripts at the bottom for faster initial rendering -->
     <script type="module" src="/src/main.tsx"></script>
   </body>
