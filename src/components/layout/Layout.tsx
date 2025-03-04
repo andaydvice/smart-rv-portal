@@ -21,60 +21,12 @@ const Layout = ({ children }: LayoutProps) => {
   useEffect(() => {
     // Force scroll to top when component mounts
     window.scrollTo(0, 0);
-    
-    // Ensure root element is visible
-    const rootElement = document.getElementById('root');
-    if (rootElement) {
-      rootElement.style.display = 'block';
-      rootElement.style.visibility = 'visible';
-      rootElement.style.opacity = '1';
-    }
-    
-    // Force visibility of body
-    document.body.style.display = 'block';
-    document.body.style.visibility = 'visible';
-    document.body.style.opacity = '1';
-    
-    // Force visibility of any hero sections
-    const heroSections = document.querySelectorAll('.hero-section');
-    heroSections.forEach(section => {
-      if (section instanceof HTMLElement) {
-        section.style.display = 'flex';
-        section.style.visibility = 'visible';
-        section.style.opacity = '1';
-      }
-    });
-    
-    // Apply these changes multiple times to ensure they stick
-    const forceVisibility = () => {
-      document.body.style.display = 'block';
-      document.body.style.visibility = 'visible';
-      document.body.style.opacity = '1';
-      
-      if (rootElement) {
-        rootElement.style.display = 'block';
-        rootElement.style.visibility = 'visible';
-        rootElement.style.opacity = '1';
-      }
-      
-      document.querySelectorAll('.hero-section, section.h-screen').forEach(section => {
-        if (section instanceof HTMLElement) {
-          section.style.display = 'flex';
-          section.style.visibility = 'visible';
-          section.style.opacity = '1';
-        }
-      });
-    };
-    
-    setTimeout(forceVisibility, 100);
-    setTimeout(forceVisibility, 500);
-    setTimeout(forceVisibility, 1000);
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#080F1F]" style={{ display: 'block', visibility: 'visible', opacity: 1 }}>
+    <div className="min-h-screen flex flex-col bg-[#080F1F]">
       <ScrollToTop />
-      <main className="flex-grow" style={{ display: 'block', visibility: 'visible', opacity: 1 }}>
+      <main className="flex-grow">
         {children}
       </main>
       <Footer />

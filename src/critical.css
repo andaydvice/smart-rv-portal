@@ -8,9 +8,6 @@ body, html, #root {
   background-color: #080F1F;
   color: #f5f5f5;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  display: block !important;
-  visibility: visible !important;
-  opacity: 1 !important;
 }
 
 .container {
@@ -19,33 +16,24 @@ body, html, #root {
   margin: 0 auto;
   padding-left: 1rem;
   padding-right: 1rem;
-  display: block !important;
-  visibility: visible !important;
-  opacity: 1 !important;
 }
 
 .hero-section {
   min-height: 100vh;
-  display: flex !important;
+  display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
-  visibility: visible !important;
-  opacity: 1 !important;
 }
 
-/* Critical selectors to ensure visibility */
+/* Critical selectors for styling */
 section, main, div, nav, header, footer {
-  display: block !important;
-  visibility: visible !important;
-  opacity: 1 !important;
+  display: block;
 }
 
 section.h-screen {
-  display: flex !important;
+  display: flex;
   min-height: 100vh;
-  visibility: visible !important;
-  opacity: 1 !important;
 }
 
 /* Fixed text gradient with cross-browser compatibility */
@@ -56,15 +44,8 @@ section.h-screen {
   color: transparent;
 }
 
-/* Force visibility for specific elements */
-.motion-div, .motion-div > div, .motion-div > * {
-  display: block !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-}
-
 img {
-  display: block !important;
-  visibility: visible !important;
-  opacity: 1 !important;
+  max-width: 100%;
+  height: auto;
+  display: block;
 }
