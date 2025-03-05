@@ -12,6 +12,7 @@ interface ChecklistHeaderProps {
   onSave: () => void;
   onReset: () => void;
   onPrint: () => void;
+  isSaving: boolean;
 }
 
 const ChecklistHeader: React.FC<ChecklistHeaderProps> = ({
@@ -20,7 +21,8 @@ const ChecklistHeader: React.FC<ChecklistHeaderProps> = ({
   getLastSavedMessage,
   onSave,
   onReset,
-  onPrint
+  onPrint,
+  isSaving
 }) => {
   return (
     <CardHeader className="border-b border-gray-700 pb-6 bg-gradient-to-r from-[#0c1219] to-[#131a2a]">
@@ -39,9 +41,10 @@ const ChecklistHeader: React.FC<ChecklistHeaderProps> = ({
             className="gap-2 bg-[#151A22] hover:bg-[#1d2532] hover:text-white text-white border-gray-700 
             focus:text-white active:text-white focus:bg-[#1d2532] active:bg-[#1d2532] focus:border-[#5B9BD5] active:border-[#5B9BD5]"
             onClick={onSave}
+            disabled={isSaving}
           >
             <Save size={16} className="text-[#5B9BD5]" />
-            Save Progress
+            {isSaving ? 'Saving...' : 'Save Progress'}
           </Button>
           <Button 
             variant="outline" 
@@ -57,6 +60,7 @@ const ChecklistHeader: React.FC<ChecklistHeaderProps> = ({
             className="gap-2 bg-[#151A22] hover:bg-[#1d2532] hover:text-white text-white border-gray-700
             focus:text-white active:text-white focus:bg-[#1d2532] active:bg-[#1d2532] focus:border-[#5B9BD5] active:border-[#5B9BD5]"
             onClick={onReset}
+            disabled={isSaving}
           >
             <RotateCcw size={16} className="text-[#5B9BD5]" />
             Reset
