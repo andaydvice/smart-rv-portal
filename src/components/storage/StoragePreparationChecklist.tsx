@@ -1,82 +1,197 @@
-import { motion } from "framer-motion";
-import Navbar from "@/components/Navbar";
-import Layout from "@/components/layout/Layout";
-import { Shield, Lock, Bell, Camera } from "lucide-react";
 
-const SecuritySystem = () => {
+import { useState } from "react";
+import { Tabs, TabsContent, TabsList } from "@/components/ui/tabs";
+import { Clipboard, CheckSquare } from "lucide-react";
+import ChecklistHeader from "./checklist/ChecklistHeader";
+import ChecklistTabTrigger from "./checklist/ChecklistTabTrigger";
+import RVInfoTab from "./checklist/RVInfoTab";
+import InteriorTab from "./checklist/InteriorTab";
+import ExteriorTab from "./checklist/ExteriorTab";
+import MechanicalTab from "./checklist/MechanicalTab";
+import ElectricalTab from "./checklist/ElectricalTab";
+import PlumbingTab from "./checklist/PlumbingTab";
+import TiresTab from "./checklist/TiresTab";
+import PestControlTab from "./checklist/PestControlTab";
+import SecurityTab from "./checklist/SecurityTab";
+import NotesTab from "./checklist/NotesTab";
+import useChecklistCore from "./checklist/hooks/useChecklistCore";
+
+const StoragePreparationChecklist = () => {
+  const {
+    checklist,
+    activeTab,
+    setActiveTab,
+    handleCheckboxChange,
+    handleDateChange,
+    handleNotesChange,
+    completionStats,
+  } = useChecklistCore();
+
+  const [isSaving, setIsSaving] = useState(false);
+
+  // Show saving indicator
+  const handleChange = (...args: any[]) => {
+    setIsSaving(true);
+    setTimeout(() => setIsSaving(false), 1000);
+    
+    // Pass to appropriate handler based on argument types
+    if (args.length === 2 && typeof args[0] === 'string' && typeof args[1] === 'boolean') {
+      handleCheckboxChange(args[0], args[1]);
+    } else if (args.length === 2 && typeof args[0] === 'string' && (args[1] instanceof Date || typeof args[1] === 'string')) {
+      handleDateChange(args[0], args[1]);
+    } else if (args.length === 2 && typeof args[0] === 'string' && typeof args[1] === 'string') {
+      handleNotesChange(args[0], args[1]);
+    }
+  };
+
   return (
-    <Layout>
-      <Navbar />
-      <motion.div 
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.6 }}
-        className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800"
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-16">
+      <ChecklistHeader 
+        completionStats={completionStats} 
+        isSaving={isSaving}
+      />
+      
+      <Tabs 
+        value={activeTab} 
+        onValueChange={setActiveTab}
+        className="mt-8"
       >
-        <div className="max-w-7xl mx-auto px-4 pt-24">
-          <div className="flex items-center gap-4 mb-8">
-            <Shield className="h-8 w-8 text-emerald-500" />
-            <h1 className="text-4xl font-bold text-white">Security System</h1>
-          </div>
+        <TabsList className="storage-preparation-checklist mb-6">
+          <ChecklistTabTrigger 
+            value="rv-info" 
+            icon={<Clipboard className="h-4 w-4" />}
+            label="RV Info"
+            completionPercent={completionStats.tabs["rv-info"]}
+          />
+          <ChecklistTabTrigger 
+            value="interior" 
+            icon={<CheckSquare className="h-4 w-4" />}
+            label="Interior"
+            completionPercent={completionStats.tabs.interior}
+          />
+          <ChecklistTabTrigger 
+            value="exterior" 
+            icon={<CheckSquare className="h-4 w-4" />}
+            label="Exterior"
+            completionPercent={completionStats.tabs.exterior}
+          />
+          <ChecklistTabTrigger 
+            value="mechanical" 
+            icon={<CheckSquare className="h-4 w-4" />}
+            label="Mechanical"
+            completionPercent={completionStats.tabs.mechanical}
+          />
+          <ChecklistTabTrigger 
+            value="electrical" 
+            icon={<CheckSquare className="h-4 w-4" />}
+            label="Electrical"
+            completionPercent={completionStats.tabs.electrical}
+          />
+          <ChecklistTabTrigger 
+            value="plumbing" 
+            icon={<CheckSquare className="h-4 w-4" />}
+            label="Plumbing"
+            completionPercent={completionStats.tabs.plumbing}
+          />
+          <ChecklistTabTrigger 
+            value="tires" 
+            icon={<CheckSquare className="h-4 w-4" />}
+            label="Tires"
+            completionPercent={completionStats.tabs.tires}
+          />
+          <ChecklistTabTrigger 
+            value="pest-control" 
+            icon={<CheckSquare className="h-4 w-4" />}
+            label="Pest Control"
+            completionPercent={completionStats.tabs["pest-control"]}
+          />
+          <ChecklistTabTrigger 
+            value="security" 
+            icon={<CheckSquare className="h-4 w-4" />}
+            label="Security"
+            completionPercent={completionStats.tabs.security}
+          />
+          <ChecklistTabTrigger 
+            value="notes" 
+            icon={<CheckSquare className="h-4 w-4" />}
+            label="Notes"
+            completionPercent={completionStats.tabs.notes}
+          />
+        </TabsList>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-            <div className="bg-gray-800/50 p-8 rounded-lg border border-gray-700">
-              <h2 className="text-2xl font-semibold text-emerald-400 mb-4">Advanced Security Features</h2>
-              <div className="text-gray-300 mb-6 space-y-4">
-                <p>
-                  Our comprehensive security system provides peace of mind with state of the art technology.
-                </p>
-                <p>
-                  Round the clock monitoring ensures constant protection.
-                </p>
-                <p>
-                  From smart locks to motion detection, your RV is protected wherever your journey takes you.
-                </p>
-              </div>
-              <img 
-                src="/lovable-uploads/24586e9a-422f-45ee-aaaa-2ffa5f0e2274.png"
-                alt="RV Security System Interface" 
-                className="w-full h-64 object-cover rounded-lg mb-6"
-              />
-              <ul className="list-disc list-inside space-y-3 text-gray-300">
-                <li>Smart door locks with remote access</li>
-                <li>Motion sensors and security cameras</li>
-                <li>Real time alerts to your mobile device</li>
-                <li>GPS tracking and geofencing</li>
-                <li>Emergency response integration</li>
-              </ul>
-            </div>
-
-            <div className="space-y-6">
-              <div className="bg-gray-800/50 p-6 rounded-lg border border-gray-700">
-                <Lock className="h-6 w-6 text-blue-400 mb-4" />
-                <h3 className="text-xl font-semibold text-white mb-2">Smart Locks</h3>
-                <p className="text-gray-300">
-                  Keyless entry system with remote control and automatic locking features.
-                </p>
-              </div>
-
-              <div className="bg-gray-800/50 p-6 rounded-lg border border-gray-700">
-                <Bell className="h-6 w-6 text-yellow-400 mb-4" />
-                <h3 className="text-xl font-semibold text-white mb-2">Alert System</h3>
-                <p className="text-gray-300">
-                  Instant notifications for any security events with customizable alert settings.
-                </p>
-              </div>
-
-              <div className="bg-gray-800/50 p-6 rounded-lg border border-gray-700">
-                <Camera className="h-6 w-6 text-red-400 mb-4" />
-                <h3 className="text-xl font-semibold text-white mb-2">Video Surveillance</h3>
-                <p className="text-gray-300">
-                  HD cameras with night vision and motion detection for complete coverage.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </motion.div>
-    </Layout>
+        <TabsContent value="rv-info">
+          <RVInfoTab 
+            data={checklist.rvInfo} 
+            onDateChange={handleChange}
+            onNotesChange={handleChange}
+          />
+        </TabsContent>
+        
+        <TabsContent value="interior">
+          <InteriorTab 
+            data={checklist.interior} 
+            onCheckboxChange={handleChange} 
+          />
+        </TabsContent>
+        
+        <TabsContent value="exterior">
+          <ExteriorTab 
+            data={checklist.exterior} 
+            onCheckboxChange={handleChange} 
+          />
+        </TabsContent>
+        
+        <TabsContent value="mechanical">
+          <MechanicalTab 
+            data={checklist.mechanical} 
+            onCheckboxChange={handleChange} 
+          />
+        </TabsContent>
+        
+        <TabsContent value="electrical">
+          <ElectricalTab 
+            data={checklist.electrical} 
+            onCheckboxChange={handleChange} 
+          />
+        </TabsContent>
+        
+        <TabsContent value="plumbing">
+          <PlumbingTab 
+            data={checklist.plumbing} 
+            onCheckboxChange={handleChange} 
+          />
+        </TabsContent>
+        
+        <TabsContent value="tires">
+          <TiresTab 
+            data={checklist.tires} 
+            onCheckboxChange={handleChange} 
+          />
+        </TabsContent>
+        
+        <TabsContent value="pest-control">
+          <PestControlTab 
+            data={checklist.pestControl} 
+            onCheckboxChange={handleChange} 
+          />
+        </TabsContent>
+        
+        <TabsContent value="security">
+          <SecurityTab 
+            data={checklist.security} 
+            onCheckboxChange={handleChange} 
+          />
+        </TabsContent>
+        
+        <TabsContent value="notes">
+          <NotesTab 
+            data={checklist.notes} 
+            onNotesChange={handleChange} 
+          />
+        </TabsContent>
+      </Tabs>
+    </div>
   );
 };
 
-export default SecuritySystem;
+export default StoragePreparationChecklist;
