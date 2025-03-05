@@ -1,11 +1,9 @@
-
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/components/ui/use-toast";
-import Layout from "@/components/layout/Layout";
 
 const Contact = () => {
   const { toast } = useToast();
@@ -19,7 +17,7 @@ const Contact = () => {
   };
 
   return (
-    <Layout>
+    <>
       <Navbar />
       <motion.div 
         initial={{ opacity: 0 }}
@@ -36,7 +34,7 @@ const Contact = () => {
           <div className="absolute inset-0 bg-gradient-to-br from-black/90 via-black/50 to-black/80 backdrop-blur-[2px]" />
         </div>
         
-        <div className="relative z-10 max-w-3xl mx-auto px-4 pt-16">
+        <div className="relative z-10 max-w-3xl mx-auto px-4">
           <motion.h1 
             initial={{ y: -20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
@@ -86,7 +84,7 @@ const Contact = () => {
           </motion.form>
         </div>
       </motion.div>
-    </Layout>
+    </>
   );
 };
 

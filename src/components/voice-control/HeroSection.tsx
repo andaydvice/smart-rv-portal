@@ -1,21 +1,19 @@
-
 import { Mic } from "lucide-react";
 
 export const HeroSection = () => {
   return (
-    <section className="h-screen w-full relative overflow-hidden flex items-center justify-center">
+    <section className="h-screen w-full relative overflow-hidden">
       <div className="absolute top-0 left-0 w-full h-full">
         <img 
           src="/lovable-uploads/ff43ed8a-b7cd-42f7-a45e-a3a706d39d07.png"
           alt="Futuristic RV interior with smart display and mountain view"
           className="w-full h-full object-cover"
-          loading="eager"
         />
         <div className="absolute inset-0 bg-black/50" />
       </div>
       
       <div className="absolute inset-0 flex items-center justify-center">
-        <div className="text-center max-w-4xl mx-auto px-4 z-10">
+        <div className="text-center max-w-4xl mx-auto px-4">
           <h1 className="text-4xl md:text-6xl font-bold mb-6 p-4 bg-black/30 backdrop-blur-sm rounded-lg">
             Voice Control for Smart RVs
           </h1>

@@ -1,6 +1,5 @@
 
 import { useCallback } from 'react';
-import { ensureValidDate } from '../../utils/dateUtils';
 
 /**
  * Hook for handling date-related events in the checklist
@@ -15,12 +14,9 @@ export const useDateHandlers = (
 ) => {
   // Set start date with optimized save
   const setStartDateAndSave = useCallback((date: Date | undefined) => {
-    // Ensure we have a valid Date object or undefined
-    const validDate = ensureValidDate(date);
+    if (date?.getTime() === startDateRef.current?.getTime()) return;
     
-    if (validDate?.getTime() === startDateRef.current?.getTime()) return;
-    
-    setStartDate(validDate);
+    setStartDate(date);
     // Delay save to avoid state update conflicts
     if (!batchUpdateRef.current) {
       // Use a smaller timeout to ensure it happens after state update but before UI response
@@ -36,12 +32,9 @@ export const useDateHandlers = (
 
   // Set end date with optimized save
   const setEndDateAndSave = useCallback((date: Date | undefined) => {
-    // Ensure we have a valid Date object or undefined
-    const validDate = ensureValidDate(date);
+    if (date?.getTime() === endDateRef.current?.getTime()) return;
     
-    if (validDate?.getTime() === endDateRef.current?.getTime()) return;
-    
-    setEndDate(validDate);
+    setEndDate(date);
     // Delay save to avoid state update conflicts
     if (!batchUpdateRef.current) {
       // Use a smaller timeout to ensure it happens after state update but before UI response

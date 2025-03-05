@@ -4,35 +4,44 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import './index.css';
 
-// Performance-optimized rendering
-const renderApp = () => {
-  const rootElement = document.getElementById('root');
-  
-  if (rootElement) {
-    // Remove loading indicator if present
-    const loadingElement = document.querySelector('.app-loading');
-    if (loadingElement) {
-      loadingElement.remove();
-    }
+console.log('Starting application initialization...');
+
+const startApp = () => {
+  try {
+    const rootElement = document.getElementById('root');
     
-    // Create and render root
+    if (!rootElement) {
+      throw new Error('Root element not found');
+    }
+
+    console.log('Root element found, creating React root...');
+    
     const root = ReactDOM.createRoot(rootElement);
+    
+    console.log('React root created, rendering App component...');
     
     root.render(
       <React.StrictMode>
         <App />
       </React.StrictMode>
     );
-    
-    console.log('Application rendered successfully with latest Lovable version');
-  } else {
-    console.error('Root element not found in the DOM');
+
+    console.log('App component rendered successfully');
+
+    if (import.meta.hot) {
+      import.meta.hot.accept('./App', () => {
+        console.log('HMR update detected, re-rendering App component...');
+        root.render(
+          <React.StrictMode>
+            <App />
+          </React.StrictMode>
+        );
+      });
+    }
+  } catch (error) {
+    console.error('Failed to initialize application:', error);
+    throw error;
   }
 };
 
-// Execute rendering as soon as DOM is ready
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', renderApp);
-} else {
-  renderApp();
-}
+startApp();

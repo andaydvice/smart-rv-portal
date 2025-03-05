@@ -1,18 +1,13 @@
-
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import Footer from "../Footer";
 
-// Enhanced scroll to top component with smooth behavior
 const ScrollToTop = () => {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    // Smooth scroll to top when route changes
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
+    console.log('ScrollToTop effect triggered for path:', pathname);
+    window.scrollTo(0, 0);
   }, [pathname]);
 
   return null;
@@ -23,20 +18,11 @@ interface LayoutProps {
 }
 
 const Layout = ({ children }: LayoutProps) => {
-  const [isReady, setIsReady] = useState(false);
-  
-  // Ensure content is visible after hydration
-  useEffect(() => {
-    setIsReady(true);
-  }, []);
-  
+  console.log('Rendering Layout component');
   return (
-    <div className={`min-h-screen flex flex-col bg-[#080F1F] ${isReady ? 'opacity-100' : 'opacity-0'}`} 
-         style={{ transition: 'opacity 0.3s ease-in-out' }}>
+    <div className="min-h-screen flex flex-col">
       <ScrollToTop />
-      <main className="flex-grow content-visibility-auto">
-        {children}
-      </main>
+      {children}
       <Footer />
     </div>
   );

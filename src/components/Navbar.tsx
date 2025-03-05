@@ -1,67 +1,59 @@
 
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { Button } from '@/components/ui/button';
-import { Logo } from './Logo';
-import NavbarLinks from './NavbarLinks';
-import { Menu } from 'lucide-react';
+import { useState, useEffect } from "react";
+import NavbarContainer from "./navbar/NavbarContainer";
+import MobileMenu from "./navbar/MobileMenu";
+import { useAuth } from "./auth/AuthContext";
 
 const Navbar = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
+  const [isOpen, setIsOpen] = useState(false);
+  const { user } = useAuth();
+  
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 30);
-    };
+    console.log("Navbar effect - Menu state:", isOpen);
+  }, [isOpen]);
+  
+  const [openSections, setOpenSections] = useState<Record<string, boolean>>({
+    core: false,
+    features: false,
+    vehicles: false,
+    support: false,
+    customer: false,
+    tools: false
+  });
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  const toggleMenu = () => {
+    console.log("Toggling mobile menu, previous state:", isOpen);
+    setIsOpen(prevState => {
+      const newState = !prevState;
+      console.log("Menu will update to:", newState);
+      return newState;
+    });
+  };
+
+  const toggleSection = (section: string) => {
+    console.log(`Toggling section: ${section}, current state:`, openSections[section]);
+    setOpenSections(prev => ({
+      ...prev,
+      [section]: !prev[section]
+    }));
+    
+    // Log after state update
+    setTimeout(() => {
+      console.log(`Section ${section} new state:`, !openSections[section]);
+    }, 0);
+  };
+
+  console.log("Navbar rendering, isOpen:", isOpen);
 
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 ${isScrolled ? 'bg-[#080F1F]/95' : 'bg-[#080F1F]/70'} backdrop-blur-sm border-b border-white/10 transition-all duration-300`}>
-      <div className="container mx-auto flex items-center justify-between py-4 px-6">
-        <div className="flex items-center">
-          <Link to="/" className="flex items-center gap-2">
-            <Logo />
-          </Link>
-        </div>
-        
-        <nav className="hidden md:flex items-center space-x-6">
-          <NavbarLinks />
-        </nav>
-        
-        <div className="flex items-center gap-4">
-          <Link to="/contact">
-            <Button variant="outline" className="text-white border-white hover:bg-white/10">
-              Contact
-            </Button>
-          </Link>
-          <Link to="/auth">
-            <Button className="bg-[#5B9BD5] hover:bg-[#4B8FE3] text-white">
-              Sign In
-            </Button>
-          </Link>
-
-          <button 
-            className="md:hidden text-white"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          >
-            <Menu className="w-6 h-6" />
-          </button>
-        </div>
-      </div>
-
-      {/* Mobile menu */}
-      {mobileMenuOpen && (
-        <div className="md:hidden bg-[#080F1F] border-t border-white/10 py-4 px-6">
-          <nav className="flex flex-col space-y-4">
-            <NavbarLinks />
-          </nav>
-        </div>
-      )}
-    </header>
+    <div className="relative">
+      <NavbarContainer isOpen={isOpen} toggleMenu={toggleMenu} />
+      <MobileMenu 
+        isOpen={isOpen}
+        openSections={openSections}
+        toggleSection={toggleSection}
+      />
+    </div>
   );
 };
 

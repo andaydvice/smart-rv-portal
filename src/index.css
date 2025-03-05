@@ -1,103 +1,18 @@
 
-/* Critical CSS for initial render */
-@import './critical.css';
+/* Base imports and tailwind directives */
 @import './styles/base.css';
-@import './styles/animations.css';
+
+/* Layout styles */
 @import './styles/layout.css';
+
+/* Animation styles */
+@import './styles/animations.css';
+
+/* Form styles */
 @import './styles/forms.css';
 
-/* Basic browser reset */
-*, *::before, *::after {
-  box-sizing: border-box;
-}
+/* Component-specific styles */
+@import './styles/components/calendar.css';
 
-/* Ensure all inputs and buttons are visible */
-input, 
-button, 
-textarea, 
-select {
-  font-family: inherit;
-  font-size: inherit;
-  line-height: inherit;
-  margin: 0;
-}
-
-/* Simple and clean focus styles */
-:focus {
-  outline: 2px solid #5B9BD5;
-  outline-offset: 2px;
-}
-
-/* Ensure images are responsive */
-img {
-  max-width: 100%;
-  height: auto;
-  display: block;
-}
-
-/* Core color variables */
-:root {
-  --color-primary: #5B9BD5;
-  --color-primary-hover: #4B8FE3;
-  --color-background: #080F1F;
-  --color-card-bg: #151A22;
-  --color-text: #FFFFFF;
-  --color-text-secondary: #E2E8FF;
-}
-
-/* Fixed navbar styling */
-.navbar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 2rem;
-  background-color: rgba(8, 15, 31, 0.9);
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
-  z-index: 50;
-  width: 100%;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.navbar-links {
-  display: flex;
-  gap: 1.5rem;
-  align-items: center;
-}
-
-.navbar-links a {
-  color: #fff;
-  text-decoration: none;
-  font-weight: 500;
-}
-
-.navbar-container {
-  width: 100%;
-  max-width: 1400px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-/* Hero section styling */
-.hero-section {
-  padding-top: 80px;
-  min-height: 100vh;
-  display: flex !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-  background-color: var(--color-background);
-}
-
-/* Additional gradient styles */
-.text-gradient {
-  background: linear-gradient(to right, #5B9BD5, #4ECDC4, #2ECC71);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
+/* Page-specific styles */
+@import './styles/pages/storage-checklist.css';

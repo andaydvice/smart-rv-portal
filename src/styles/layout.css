@@ -13,8 +13,7 @@
 /* Column Layout Styles */
 .column-layout {
   column-gap: 1rem;
-  column-break-inside: avoid;
-  page-break-inside: avoid;
+  break-inside: avoid;
 }
 
 /* Navigation Menu Styles */
@@ -103,12 +102,5 @@ label.inner1 {
     z-index: 9999 !important;
     print-color-adjust: exact !important;
     -webkit-print-color-adjust: exact !important;
-  }
-}
-
-/* High contrast media query fix */
-@media (forced-colors: active) {
-  .high-contrast-visible {
-    border: 1px solid currentColor;
   }
 }

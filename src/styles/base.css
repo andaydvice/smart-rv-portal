@@ -23,25 +23,26 @@
     font-feature-settings: "ss01" on, "ss02" on, "cv01" on, "cv02" on;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     text-size-adjust: 100%;
-    background-color: #080F1F !important;
-    color: #ffffff !important;
   }
 
   .glass-card {
-    @apply bg-white/10 backdrop-blur-lg border border-white/20 shadow-lg;
+    @apply bg-white/80 backdrop-blur-lg border border-white/20 shadow-lg;
   }
 
   .hover-scale {
     @apply transition-transform duration-300 hover:scale-[1.02];
   }
-}
-
-/* Brand color variables */
-:root {
-  --color-connectivity-accent: #5B9BD5;
-  --color-connectivity-accent-hover: #4B8FE3;
-  --color-connectivity-bg: #080F1F;
-  --color-connectivity-darkBg: #151A22;
-  --color-connectivity-text: #FFFFFF;
-  --color-connectivity-text-secondary: #E2E8FF;
+  
+  /* Ensure tab text is always visible regardless of state */
+  [role="tab"] span {
+    visibility: visible !important;
+    display: block !important;
+  }
+  
+  /* Fix for disappearing text in active tabs */
+  [role="tab"][data-state="active"] span,
+  [role="tab"][data-state="active"] div {
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
 }
