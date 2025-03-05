@@ -19,10 +19,12 @@ export const usePersistence = () => {
       
       // Convert date strings back to Date objects
       if (parsed.startDate) {
+        // Ensure we create a proper Date object from string
         parsed.startDate = new Date(parsed.startDate);
       }
       
       if (parsed.endDate) {
+        // Ensure we create a proper Date object from string
         parsed.endDate = new Date(parsed.endDate);
       }
       

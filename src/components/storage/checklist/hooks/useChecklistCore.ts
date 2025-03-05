@@ -51,11 +51,11 @@ export const useChecklistCore = () => {
         }
         
         // Handle dates
-        if (savedData.startDate) {
+        if (savedData.startDate instanceof Date) {
           setStartDate(savedData.startDate);
         }
         
-        if (savedData.endDate) {
+        if (savedData.endDate instanceof Date) {
           setEndDate(savedData.endDate);
         }
         
