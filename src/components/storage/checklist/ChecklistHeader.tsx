@@ -36,17 +36,17 @@ const ChecklistHeader: React.FC<ChecklistHeaderProps> = ({
       </div>
 
       <CardHeader className="border-b border-gray-700 pb-6 bg-gradient-to-r from-[#0c1219] to-[#131a2a]">
-        <div className="flex justify-between items-start mb-4">
+        <div className="flex flex-col sm:flex-row justify-between items-start mb-4">
           <div>
             <CardTitle className="text-2xl sm:text-3xl font-bold text-white mb-2">COMPLETE GUIDE TO RV STORAGE PREPARATION</CardTitle>
             <CardDescription className="text-lg sm:text-xl text-[#E2E8FF] font-light">Interactive Checklist for Extended Indoor Storage</CardDescription>
           </div>
-          <div className="text-[#5B9BD5] font-bold text-lg sm:text-xl">SMART RV</div>
+          <div className="text-[#5B9BD5] font-bold text-lg sm:text-xl mt-2 sm:mt-0">SMART RV</div>
         </div>
         
-        <div className="flex flex-col sm:flex-row flex-wrap gap-2 sm:gap-4 mt-6">
+        <div className="flex flex-col gap-4 mt-6">
           {/* Button group - stack vertically on mobile, horizontal on larger screens */}
-          <div className="flex flex-wrap gap-2 w-full sm:w-auto">
+          <div className="flex flex-wrap gap-2 w-full">
             <Button 
               variant="outline" 
               className="gap-2 bg-[#151A22] hover:bg-[#1d2532] hover:text-white text-white border-gray-700 
@@ -81,13 +81,13 @@ const ChecklistHeader: React.FC<ChecklistHeaderProps> = ({
             </Button>
           </div>
           
-          <div className="flex items-center justify-between gap-3 mt-3 sm:mt-0 sm:ml-auto">
+          <div className="flex items-center justify-between gap-3 w-full">
             {lastSavedAt && (
-              <span className="text-xs text-[#E2E8FF] italic mr-3">
+              <span className="text-xs text-[#E2E8FF] italic">
                 {getLastSavedMessage()}
               </span>
             )}
-            <div className="flex items-center gap-3 bg-[#151A22] py-2 px-3 rounded-md border border-gray-700">
+            <div className="flex items-center gap-3 bg-[#151A22] py-2 px-3 rounded-md border border-gray-700 ml-auto">
               <CheckSquare size={18} className="text-[#10B981]" />
               <div className="flex flex-col">
                 <span className="text-xs text-[#E2E8FF]">Completion</span>

@@ -125,7 +125,7 @@ const StoragePreparationChecklist = () => {
             onValueChange={handleTabChange}
             className="mt-8"
           >
-            <div className="overflow-x-auto -mx-2 px-2 pb-1">
+            <div className="overflow-x-auto no-scrollbar -mx-2 px-2 pb-1">
               <TabsList className="storage-preparation-checklist mb-6 grid grid-cols-5 md:grid-cols-10 min-w-[600px] gap-1">
                 <ChecklistTabTrigger 
                   value="rv-info" 
