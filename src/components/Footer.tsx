@@ -1,3 +1,4 @@
+
 import { Link } from "react-router-dom";
 import { Facebook, Twitter, Instagram, Youtube, Mail } from "lucide-react";
 
@@ -7,12 +8,12 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto px-4 py-12 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Company Info */}
-          <div className="space-y-4">
+          <div className="space-y-4 text-center md:text-left">
             <h3 className="text-2xl font-bold">Smart RV</h3>
             <p className="text-gray-400">
               Revolutionizing the future of recreational vehicles with smart technology.
             </p>
-            <div className="flex space-x-4">
+            <div className="flex justify-center md:justify-start space-x-4">
               <a href="https://facebook.com" className="hover:text-blue-400 transition-colors">
                 <Facebook className="h-5 w-5" />
               </a>
@@ -30,19 +31,19 @@ const Footer = () => {
 
           {/* Quick Links */}
           <div>
-            <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
+            <h4 className="text-lg font-semibold mb-4 text-center md:text-left">Quick Links</h4>
             <ul className="space-y-2">
-              <li>
+              <li className="text-center md:text-left">
                 <Link to="/models" className="text-gray-400 hover:text-white transition-colors">
                   Models
                 </Link>
               </li>
-              <li>
+              <li className="text-center md:text-left">
                 <Link to="/features" className="text-gray-400 hover:text-white transition-colors">
                   Features
                 </Link>
               </li>
-              <li>
+              <li className="text-center md:text-left">
                 <Link to="/technology" className="text-gray-400 hover:text-white transition-colors">
                   Technology
                 </Link>
@@ -52,19 +53,19 @@ const Footer = () => {
 
           {/* Features */}
           <div>
-            <h4 className="text-lg font-semibold mb-4">Features</h4>
+            <h4 className="text-lg font-semibold mb-4 text-center md:text-left">Features</h4>
             <ul className="space-y-2">
-              <li>
+              <li className="text-center md:text-left">
                 <Link to="/features/navigation" className="text-gray-400 hover:text-white transition-colors">
                   Navigation System
                 </Link>
               </li>
-              <li>
+              <li className="text-center md:text-left">
                 <Link to="/features/security" className="text-gray-400 hover:text-white transition-colors">
                   Security System
                 </Link>
               </li>
-              <li>
+              <li className="text-center md:text-left">
                 <Link to="/features/power" className="text-gray-400 hover:text-white transition-colors">
                   Power Management
                 </Link>
@@ -74,11 +75,11 @@ const Footer = () => {
 
           {/* Contact */}
           <div>
-            <h4 className="text-lg font-semibold mb-4">Contact Us</h4>
-            <div className="space-y-2 text-gray-400">
+            <h4 className="text-lg font-semibold mb-4 text-center md:text-left">Contact Us</h4>
+            <div className="space-y-2 text-gray-400 text-center md:text-left">
               <p>1234 Smart Drive</p>
               <p>Tech Valley, CA 94025</p>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 justify-center md:justify-start">
                 <Mail className="h-4 w-4" />
                 <a href="mailto:info@smartrv.com" className="hover:text-white transition-colors">
                   info@smartrv.com
