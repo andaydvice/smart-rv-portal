@@ -1,10 +1,12 @@
+
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
+import Layout from "@/components/layout/Layout";
 import { Shield, Lock, Bell, Camera } from "lucide-react";
 
 const SecuritySystem = () => {
   return (
-    <>
+    <Layout>
       <Navbar />
       <motion.div 
         initial={{ opacity: 0 }}
@@ -74,7 +76,7 @@ const SecuritySystem = () => {
           </div>
         </div>
       </motion.div>
-    </>
+    </Layout>
   );
 };
 
