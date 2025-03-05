@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Tabs, TabsContent, TabsList } from "@/components/ui/tabs";
 import ChecklistHeader from "./checklist/ChecklistHeader";
@@ -33,7 +32,6 @@ const StoragePreparationChecklist = () => {
   const [isSaving, setIsSaving] = useState(false);
   const [activeTab, setActiveTab] = useState<string>("rv-info");
 
-  // Create these handlers locally since they're not provided by useChecklistCore
   const handleCheckboxChange = (id: string, checked: boolean) => {
     setProgress({ ...progress, [id]: checked });
     setIsSaving(true);
@@ -62,60 +60,46 @@ const StoragePreparationChecklist = () => {
     saveDataWrapper(true);
   };
 
-  // FIX: Calculate completion percentage correctly by counting total checkboxes
-  // and checking only boolean values (excluding dates, notes, and the activeTab entry)
   const completionPercentage = (() => {
-    // Count of all boolean entries that are checked
     const checkedCount = Object.entries(progress)
       .filter(([key, value]) => typeof value === 'boolean' && key !== 'activeTab')
       .filter(([_, value]) => value === true)
       .length;
       
-    // Total count of all boolean entries (checkboxes)
     const totalCheckboxes = Object.entries(progress)
       .filter(([key, value]) => typeof value === 'boolean' && key !== 'activeTab')
       .length;
       
-    // Define the expected total number of checkboxes in the checklist
-    // This represents all possible checkboxes across all tabs
-    const expectedTotalCheckboxes = 80; // Adjust this number based on your actual total number of checkboxes
+    const expectedTotalCheckboxes = 80;
     
-    // If there are no checkboxes tracked yet, return 0
     if (totalCheckboxes === 0) return 0;
     
-    // Use the larger of actual tracked checkboxes or expected total
     const denominator = Math.max(totalCheckboxes, expectedTotalCheckboxes);
     
-    // Calculate percentage and round to nearest integer
     return Math.round((checkedCount / denominator) * 100);
   })();
 
-  // Get formatted "last saved" message
   const getLastSavedMessage = () => {
     if (!lastSavedAt) return "";
     return `Last saved: ${new Date(lastSavedAt).toLocaleTimeString()}`;
   };
 
-  // Handle manual save
   const handleSave = () => {
     setIsSaving(true);
     saveDataWrapper(true);
     setTimeout(() => setIsSaving(false), 1000);
   };
 
-  // Handle reset
   const handleReset = () => {
     if (window.confirm("Are you sure you want to reset all checklist data? This cannot be undone.")) {
       resetData();
     }
   };
 
-  // Handle print
   const handlePrint = () => {
     window.print();
   };
 
-  // Handle tab change
   const handleTabChange = (value: string) => {
     console.log(`Tab changed to: ${value}`);
     setActiveTab(value);
@@ -135,74 +119,76 @@ const StoragePreparationChecklist = () => {
           isSaving={isSaving}
         />
         
-        <div className="px-4 sm:px-0">
+        <div className="px-2 sm:px-0">
           <Tabs 
             value={activeTab} 
             onValueChange={handleTabChange}
             className="mt-8"
           >
-            <TabsList className="storage-preparation-checklist mb-6 grid grid-cols-5 md:grid-cols-10 gap-1">
-              <ChecklistTabTrigger 
-                value="rv-info" 
-                icon="Clipboard"
-                label="RV Info"
-                onTabClick={() => saveDataWrapper(true)}
-              />
-              <ChecklistTabTrigger 
-                value="interior" 
-                icon="Home"
-                label="Interior"
-                onTabClick={() => saveDataWrapper(true)}
-              />
-              <ChecklistTabTrigger 
-                value="exterior" 
-                icon="Warehouse"
-                label="Exterior"
-                onTabClick={() => saveDataWrapper(true)}
-              />
-              <ChecklistTabTrigger 
-                value="mechanical" 
-                icon="Wrench"
-                label="Mechanical"
-                onTabClick={() => saveDataWrapper(true)}
-              />
-              <ChecklistTabTrigger 
-                value="electrical" 
-                icon="Zap"
-                label="Electrical"
-                onTabClick={() => saveDataWrapper(true)}
-              />
-              <ChecklistTabTrigger 
-                value="plumbing" 
-                icon="Droplets"
-                label="Plumbing"
-                onTabClick={() => saveDataWrapper(true)}
-              />
-              <ChecklistTabTrigger 
-                value="tires" 
-                icon="Disc"
-                label="Tires"
-                onTabClick={() => saveDataWrapper(true)}
-              />
-              <ChecklistTabTrigger 
-                value="pest-control" 
-                icon="Bug"
-                label="Pest Control"
-                onTabClick={() => saveDataWrapper(true)}
-              />
-              <ChecklistTabTrigger 
-                value="security" 
-                icon="ShieldCheck"
-                label="Security"
-                onTabClick={() => saveDataWrapper(true)}
-              />
-              <ChecklistTabTrigger 
-                value="notes" 
-                icon="FileText"
-                label="Notes"
-                onTabClick={() => saveDataWrapper(true)}
-              />
-            </TabsList>
+            <div className="overflow-x-auto -mx-2 px-2 pb-1">
+              <TabsList className="storage-preparation-checklist mb-6 grid grid-cols-5 md:grid-cols-10 min-w-[600px] gap-1">
+                <ChecklistTabTrigger 
+                  value="rv-info" 
+                  icon="Clipboard"
+                  label="RV Info"
+                  onTabClick={() => saveDataWrapper(true)}
+                />
+                <ChecklistTabTrigger 
+                  value="interior" 
+                  icon="Home"
+                  label="Interior"
+                  onTabClick={() => saveDataWrapper(true)}
+                />
+                <ChecklistTabTrigger 
+                  value="exterior" 
+                  icon="Warehouse"
+                  label="Exterior"
+                  onTabClick={() => saveDataWrapper(true)}
+                />
+                <ChecklistTabTrigger 
+                  value="mechanical" 
+                  icon="Wrench"
+                  label="Mechanical"
+                  onTabClick={() => saveDataWrapper(true)}
+                />
+                <ChecklistTabTrigger 
+                  value="electrical" 
+                  icon="Zap"
+                  label="Electrical"
+                  onTabClick={() => saveDataWrapper(true)}
+                />
+                <ChecklistTabTrigger 
+                  value="plumbing" 
+                  icon="Droplets"
+                  label="Plumbing"
+                  onTabClick={() => saveDataWrapper(true)}
+                />
+                <ChecklistTabTrigger 
+                  value="tires" 
+                  icon="Disc"
+                  label="Tires"
+                  onTabClick={() => saveDataWrapper(true)}
+                />
+                <ChecklistTabTrigger 
+                  value="pest-control" 
+                  icon="Bug"
+                  label="Pest Control"
+                  onTabClick={() => saveDataWrapper(true)}
+                />
+                <ChecklistTabTrigger 
+                  value="security" 
+                  icon="ShieldCheck"
+                  label="Security"
+                  onTabClick={() => saveDataWrapper(true)}
+                />
+                <ChecklistTabTrigger 
+                  value="notes" 
+                  icon="FileText"
+                  label="Notes"
+                  onTabClick={() => saveDataWrapper(true)}
+                />
+              </TabsList>
+            </div>
 
             <TabsContent value="rv-info">
               <RVInfoTab 

@@ -38,20 +38,22 @@ const ChecklistHeader: React.FC<ChecklistHeaderProps> = ({
       <CardHeader className="border-b border-gray-700 pb-6 bg-gradient-to-r from-[#0c1219] to-[#131a2a]">
         <div className="flex justify-between items-start mb-4">
           <div>
-            <CardTitle className="text-3xl font-bold text-white mb-2">COMPLETE GUIDE TO RV STORAGE PREPARATION</CardTitle>
-            <CardDescription className="text-xl text-[#E2E8FF] font-light">Interactive Checklist for Extended Indoor Storage</CardDescription>
+            <CardTitle className="text-2xl sm:text-3xl font-bold text-white mb-2">COMPLETE GUIDE TO RV STORAGE PREPARATION</CardTitle>
+            <CardDescription className="text-lg sm:text-xl text-[#E2E8FF] font-light">Interactive Checklist for Extended Indoor Storage</CardDescription>
           </div>
-          <div className="text-[#5B9BD5] font-bold text-xl">SMART RV</div>
+          <div className="text-[#5B9BD5] font-bold text-lg sm:text-xl">SMART RV</div>
         </div>
         
-        <div className="flex flex-col sm:flex-row gap-4 mt-6">
-          <div className="flex gap-2">
+        <div className="flex flex-col sm:flex-row flex-wrap gap-2 sm:gap-4 mt-6">
+          {/* Button group - stack vertically on mobile, horizontal on larger screens */}
+          <div className="flex flex-wrap gap-2 w-full sm:w-auto">
             <Button 
               variant="outline" 
               className="gap-2 bg-[#151A22] hover:bg-[#1d2532] hover:text-white text-white border-gray-700 
               focus:text-white active:text-white focus:bg-[#1d2532] active:bg-[#1d2532] focus:border-[#5B9BD5] active:border-[#5B9BD5]"
               onClick={onSave}
               disabled={isSaving}
+              size="sm"
             >
               <Save size={16} className="text-[#5B9BD5]" />
               {isSaving ? 'Saving...' : 'Save Progress'}
@@ -61,6 +63,7 @@ const ChecklistHeader: React.FC<ChecklistHeaderProps> = ({
               className="gap-2 bg-[#151A22] hover:bg-[#1d2532] hover:text-white text-white border-gray-700
               focus:text-white active:text-white focus:bg-[#1d2532] active:bg-[#1d2532] focus:border-[#5B9BD5] active:border-[#5B9BD5]"
               onClick={onPrint}
+              size="sm"
             >
               <Printer size={16} className="text-[#5B9BD5]" />
               Print
@@ -71,13 +74,14 @@ const ChecklistHeader: React.FC<ChecklistHeaderProps> = ({
               focus:text-white active:text-white focus:bg-[#1d2532] active:bg-[#1d2532] focus:border-[#5B9BD5] active:border-[#5B9BD5]"
               onClick={onReset}
               disabled={isSaving}
+              size="sm"
             >
               <RotateCcw size={16} className="text-[#5B9BD5]" />
               Reset
             </Button>
           </div>
           
-          <div className="flex items-center justify-between gap-3 ml-auto">
+          <div className="flex items-center justify-between gap-3 mt-3 sm:mt-0 sm:ml-auto">
             {lastSavedAt && (
               <span className="text-xs text-[#E2E8FF] italic mr-3">
                 {getLastSavedMessage()}

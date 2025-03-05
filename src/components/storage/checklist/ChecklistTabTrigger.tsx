@@ -78,12 +78,12 @@ const ChecklistTabTrigger: React.FC<ChecklistTabTriggerProps> = ({
   return (
     <TabsTrigger 
       value={value}
-      className="flex flex-col items-center justify-center w-full py-4 text-white data-[state=active]:bg-[#131a2a]"
+      className="flex flex-col items-center justify-center w-full py-3 text-white data-[state=active]:bg-[#131a2a]"
       onClick={handleTabClick}
     >
-      <div className="flex flex-col items-center gap-2 justify-center">
-        <IconComponent className="h-6 w-6" stroke={specificIconColor} strokeWidth={2} />
-        <span className="text-sm font-medium text-white">{label}</span>
+      <div className="flex flex-col items-center gap-1 sm:gap-2 justify-center">
+        <IconComponent className="h-5 w-5 sm:h-6 sm:w-6" stroke={specificIconColor} strokeWidth={2} />
+        <span className="text-[10px] sm:text-xs font-medium text-white leading-tight text-center">{label}</span>
       </div>
     </TabsTrigger>
   );

@@ -110,6 +110,18 @@
   }
 }
 
+/* Mobile-friendly styles */
+@media (max-width: 640px) {
+  .storage-preparation-checklist button {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  
+  .storage-preparation-checklist .card-header {
+    padding: 16px 12px;
+  }
+}
+
 /* Focus styles for tab triggers */
 [data-state="active"][role="tab"] {
   outline: 2px solid #5B9BD5 !important; 
@@ -159,4 +171,14 @@
 /* Ensure data doesn't get lost during tab transitions */
 .tab-content-wrapper {
   min-height: 500px;
+}
+
+/* Fixed tab scrolling container */
+.storage-preparation-checklist .overflow-x-auto {
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.storage-preparation-checklist .overflow-x-auto::-webkit-scrollbar {
+  display: none;
 }

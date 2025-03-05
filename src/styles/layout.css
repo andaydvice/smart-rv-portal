@@ -28,7 +28,6 @@
 /* Tab list styling for RV Storage Checklist */
 .storage-preparation-checklist [role="tablist"] {
   display: grid;
-  grid-template-columns: repeat(10, 1fr);
   width: 100%;
   overflow-x: auto;
   scrollbar-width: none;
@@ -37,6 +36,7 @@
   padding: 0;
   gap: 0;
   height: auto;
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
 }
 
 .storage-preparation-checklist [role="tablist"]::-webkit-scrollbar {
@@ -48,11 +48,36 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 12px 0;
+  padding: 8px 4px;
   border-radius: 0;
   margin: 0;
-  height: 70px;
+  height: 64px;
+  min-width: 65px;
   background-color: transparent;
+  word-break: normal;
+  white-space: normal;
+  font-size: 11px;
+}
+
+.storage-preparation-checklist [role="tab"] span {
+  font-size: 10px;
+  line-height: 1.1;
+  text-align: center;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (min-width: 640px) {
+  .storage-preparation-checklist [role="tab"] {
+    padding: 12px 0;
+    height: 70px;
+    font-size: 12px;
+  }
+  
+  .storage-preparation-checklist [role="tab"] span {
+    font-size: 12px;
+  }
 }
 
 .storage-preparation-checklist [role="tab"][data-state="active"] {
