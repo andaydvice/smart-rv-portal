@@ -67,8 +67,9 @@ const ChecklistTabTrigger: React.FC<ChecklistTabTriggerProps> = ({
     }
   };
   
-  // Fix icon component rendering - explicitly cast the LucideIcons object indexing
+  // Use type assertion to get the icon component
   const IconComponent = LucideIcons[icon] as React.ElementType;
+  
   if (!IconComponent) {
     console.error(`Icon ${icon} not found in lucide-react`);
     return null;

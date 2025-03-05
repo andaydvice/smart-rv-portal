@@ -31,6 +31,7 @@ const StoragePreparationChecklist = () => {
   } = useChecklistCore();
 
   const [isSaving, setIsSaving] = useState(false);
+  const [activeTab, setActiveTab] = useState<string>("rv-info");
 
   // Create these handlers locally since they're not provided by useChecklistCore
   const handleCheckboxChange = (id: string, checked: boolean) => {
@@ -64,10 +65,10 @@ const StoragePreparationChecklist = () => {
   // Calculate completion percentage
   const completionPercentage = Math.round(
     Object.entries(progress)
-      .filter(([key, value]) => typeof value === 'boolean')
+      .filter(([key, value]) => typeof value === 'boolean' && key !== 'activeTab')
       .filter(([_, value]) => value === true).length / 
-    Object.entries(progress)
-      .filter(([key, value]) => typeof value === 'boolean').length * 100
+    Math.max(1, Object.entries(progress)
+      .filter(([key, value]) => typeof value === 'boolean' && key !== 'activeTab').length) * 100
   ) || 0;
 
   // Get formatted "last saved" message
@@ -95,6 +96,13 @@ const StoragePreparationChecklist = () => {
     window.print();
   };
 
+  // Handle tab change
+  const handleTabChange = (value: string) => {
+    console.log(`Tab changed to: ${value}`);
+    setActiveTab(value);
+    saveDataWrapper(true);
+  };
+
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-16">
       <ChecklistHeader 
@@ -104,14 +112,15 @@ const StoragePreparationChecklist = () => {
         onSave={handleSave}
         onReset={handleReset}
         onPrint={handlePrint}
+        isSaving={isSaving}
       />
       
       <Tabs 
-        value={progress.activeTab as string || "rv-info"} 
-        onValueChange={(tab) => handleCheckboxChange("activeTab", tab === "true")}
+        value={activeTab} 
+        onValueChange={handleTabChange}
         className="mt-8"
       >
-        <TabsList className="storage-preparation-checklist mb-6">
+        <TabsList className="storage-preparation-checklist mb-6 grid grid-cols-5 md:grid-cols-10 gap-1">
           <ChecklistTabTrigger 
             value="rv-info" 
             icon="Clipboard"
@@ -120,55 +129,55 @@ const StoragePreparationChecklist = () => {
           />
           <ChecklistTabTrigger 
             value="interior" 
-            icon="CheckSquare"
+            icon="Home"
             label="Interior"
             onTabClick={() => saveDataWrapper(true)}
           />
           <ChecklistTabTrigger 
             value="exterior" 
-            icon="CheckSquare"
+            icon="Warehouse"
             label="Exterior"
             onTabClick={() => saveDataWrapper(true)}
           />
           <ChecklistTabTrigger 
             value="mechanical" 
-            icon="CheckSquare"
+            icon="Wrench"
             label="Mechanical"
             onTabClick={() => saveDataWrapper(true)}
           />
           <ChecklistTabTrigger 
             value="electrical" 
-            icon="CheckSquare"
+            icon="Zap"
             label="Electrical"
             onTabClick={() => saveDataWrapper(true)}
           />
           <ChecklistTabTrigger 
             value="plumbing" 
-            icon="CheckSquare"
+            icon="Droplets"
             label="Plumbing"
             onTabClick={() => saveDataWrapper(true)}
           />
           <ChecklistTabTrigger 
             value="tires" 
-            icon="CheckSquare"
+            icon="Disc"
             label="Tires"
             onTabClick={() => saveDataWrapper(true)}
           />
           <ChecklistTabTrigger 
             value="pest-control" 
-            icon="CheckSquare"
+            icon="Bug"
             label="Pest Control"
             onTabClick={() => saveDataWrapper(true)}
           />
           <ChecklistTabTrigger 
             value="security" 
-            icon="CheckSquare"
+            icon="ShieldCheck"
             label="Security"
             onTabClick={() => saveDataWrapper(true)}
           />
           <ChecklistTabTrigger 
             value="notes" 
-            icon="CheckSquare"
+            icon="FileText"
             label="Notes"
             onTabClick={() => saveDataWrapper(true)}
           />
