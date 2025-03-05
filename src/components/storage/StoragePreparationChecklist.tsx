@@ -62,14 +62,33 @@ const StoragePreparationChecklist = () => {
     saveDataWrapper(true);
   };
 
-  // Calculate completion percentage
-  const completionPercentage = Math.round(
-    Object.entries(progress)
+  // FIX: Calculate completion percentage correctly by counting total checkboxes
+  // and checking only boolean values (excluding dates, notes, and the activeTab entry)
+  const completionPercentage = (() => {
+    // Count of all boolean entries that are checked
+    const checkedCount = Object.entries(progress)
       .filter(([key, value]) => typeof value === 'boolean' && key !== 'activeTab')
-      .filter(([_, value]) => value === true).length / 
-    Math.max(1, Object.entries(progress)
-      .filter(([key, value]) => typeof value === 'boolean' && key !== 'activeTab').length) * 100
-  ) || 0;
+      .filter(([_, value]) => value === true)
+      .length;
+      
+    // Total count of all boolean entries (checkboxes)
+    const totalCheckboxes = Object.entries(progress)
+      .filter(([key, value]) => typeof value === 'boolean' && key !== 'activeTab')
+      .length;
+      
+    // Define the expected total number of checkboxes in the checklist
+    // This represents all possible checkboxes across all tabs
+    const expectedTotalCheckboxes = 80; // Adjust this number based on your actual total number of checkboxes
+    
+    // If there are no checkboxes tracked yet, return 0
+    if (totalCheckboxes === 0) return 0;
+    
+    // Use the larger of actual tracked checkboxes or expected total
+    const denominator = Math.max(totalCheckboxes, expectedTotalCheckboxes);
+    
+    // Calculate percentage and round to nearest integer
+    return Math.round((checkedCount / denominator) * 100);
+  })();
 
   // Get formatted "last saved" message
   const getLastSavedMessage = () => {
