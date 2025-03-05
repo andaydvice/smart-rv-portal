@@ -1,3 +1,4 @@
+
 # Changelog
 All notable changes to this project will be documented in this file.
 
@@ -7,25 +8,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
-- Initial CHANGELOG.md creation
-- Performance monitoring setup
-- Enhanced console logging for debugging
+- Added Lovable script tag in index.html
+- Enhanced Web Vitals monitoring
+- Improved date handling in usePersistence.ts
+- Added preconnect for fonts in index.html
 
 ### Changed
-- Updated vite.config.ts configuration for improved dev server stability
-- Modified HMR settings for better hot reload performance
-- Changed server host to '0.0.0.0' for universal access
-- Added clientPort configuration for HMR
-- Forced dependency optimization
+- Updated vite.config.ts configuration for improved build performance
+- Modified SWC plugin configuration to fix build errors
 - Disabled usePolling to prevent file watching issues
+- Improved chunking strategy for better code splitting
+- Added stronger typechecking for date objects
 
 ### Fixed
-- Dev server initialization issues
-- HMR connectivity problems
-- Project remixing stability issues
-- Network interface binding problems
+- Fixed TypeScript error with Date handling in storage checklist
+- Resolved build errors related to missing @swc/plugin-emotion
+- Fixed blank preview issue with document visibility
+- Improved initialization sequence for faster rendering
 
 ### Performance
-- Implemented initial performance monitoring
-- Enhanced build optimization settings
+- Implemented performance optimizations for bundle sizes
+- Enhanced critical rendering path with preloads
 - Improved dependency handling
+- Optimized localStorage operations with retry mechanisms
