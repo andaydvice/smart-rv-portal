@@ -21,9 +21,6 @@ const ChecklistTabTrigger: React.FC<ChecklistTabTriggerProps> = ({
   iconColor,
   onTabClick
 }) => {
-  // Dynamically use the icon from Lucide
-  const IconComponent = LucideIcons[icon];
-  
   // Map labels to specific colors exactly as shown in the image
   let specificIconColor = "";
   
@@ -69,6 +66,13 @@ const ChecklistTabTrigger: React.FC<ChecklistTabTriggerProps> = ({
       onTabClick(); // Call the parent's onTabClick handler to trigger saves
     }
   };
+  
+  // Fix icon component rendering - explicitly cast the LucideIcons object indexing
+  const IconComponent = LucideIcons[icon] as React.ElementType;
+  if (!IconComponent) {
+    console.error(`Icon ${icon} not found in lucide-react`);
+    return null;
+  }
   
   return (
     <TabsTrigger 

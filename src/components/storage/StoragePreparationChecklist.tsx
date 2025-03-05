@@ -1,7 +1,6 @@
 
 import { useState } from "react";
 import { Tabs, TabsContent, TabsList } from "@/components/ui/tabs";
-import { Clipboard, CheckSquare } from "lucide-react";
 import ChecklistHeader from "./checklist/ChecklistHeader";
 import ChecklistTabTrigger from "./checklist/ChecklistTabTrigger";
 import RVInfoTab from "./checklist/RVInfoTab";
@@ -24,9 +23,8 @@ const StoragePreparationChecklist = () => {
     notes,
     setStartDate,
     setEndDate,
-    handleCheckboxChange,
-    handleDateChange,
-    handleNotesChange,
+    setProgress,
+    setNotes,
     saveDataWrapper,
     resetData,
     lastSavedAt,
@@ -34,43 +32,43 @@ const StoragePreparationChecklist = () => {
 
   const [isSaving, setIsSaving] = useState(false);
 
-  // Show saving indicator
-  const handleChange = (...args: any[]) => {
+  // Create these handlers locally since they're not provided by useChecklistCore
+  const handleCheckboxChange = (id: string, checked: boolean) => {
+    setProgress({ ...progress, [id]: checked });
     setIsSaving(true);
     setTimeout(() => setIsSaving(false), 1000);
-    
-    // Pass to appropriate handler based on argument types
-    if (args.length === 2 && typeof args[0] === 'string' && typeof args[1] === 'boolean') {
-      handleCheckboxChange(args[0], args[1]);
-    } else if (args.length === 2 && typeof args[0] === 'string' && (args[1] instanceof Date || typeof args[1] === 'string')) {
-      handleDateChange(args[0], args[1]);
-    } else if (args.length === 2 && typeof args[0] === 'string' && typeof args[1] === 'string') {
-      handleNotesChange(args[0], args[1]);
+    saveDataWrapper(true);
+  };
+
+  const handleDateChange = (id: string, date: Date | string) => {
+    if (id === 'startDate') {
+      setStartDate(date instanceof Date ? date : new Date(date));
+    } else if (id === 'endDate') {
+      setEndDate(date instanceof Date ? date : new Date(date));
     }
+    setIsSaving(true);
+    setTimeout(() => setIsSaving(false), 1000);
+    saveDataWrapper(true);
+  };
+
+  const handleNotesChange = (id: string, value: string) => {
+    setNotes({
+      ...notes,
+      [id]: value
+    });
+    setIsSaving(true);
+    setTimeout(() => setIsSaving(false), 1000);
+    saveDataWrapper(true);
   };
 
   // Calculate completion percentage
   const completionPercentage = Math.round(
-    Object.values(progress).filter(value => value === true).length / 
-    Object.keys(progress).length * 100
+    Object.entries(progress)
+      .filter(([key, value]) => typeof value === 'boolean')
+      .filter(([_, value]) => value === true).length / 
+    Object.entries(progress)
+      .filter(([key, value]) => typeof value === 'boolean').length * 100
   ) || 0;
-
-  // Calculate completion stats for each tab
-  const completionStats = {
-    overall: completionPercentage,
-    tabs: {
-      "rv-info": 0,
-      interior: 0,
-      exterior: 0,
-      mechanical: 0,
-      electrical: 0,
-      plumbing: 0,
-      tires: 0,
-      "pest-control": 0,
-      security: 0,
-      notes: 0
-    }
-  };
 
   // Get formatted "last saved" message
   const getLastSavedMessage = () => {
@@ -110,7 +108,7 @@ const StoragePreparationChecklist = () => {
       
       <Tabs 
         value={progress.activeTab as string || "rv-info"} 
-        onValueChange={(tab) => handleChange("activeTab", tab)}
+        onValueChange={(tab) => handleCheckboxChange("activeTab", tab === "true")}
         className="mt-8"
       >
         <TabsList className="storage-preparation-checklist mb-6">
@@ -118,51 +116,61 @@ const StoragePreparationChecklist = () => {
             value="rv-info" 
             icon="Clipboard"
             label="RV Info"
+            onTabClick={() => saveDataWrapper(true)}
           />
           <ChecklistTabTrigger 
             value="interior" 
             icon="CheckSquare"
             label="Interior"
+            onTabClick={() => saveDataWrapper(true)}
           />
           <ChecklistTabTrigger 
             value="exterior" 
             icon="CheckSquare"
             label="Exterior"
+            onTabClick={() => saveDataWrapper(true)}
           />
           <ChecklistTabTrigger 
             value="mechanical" 
             icon="CheckSquare"
             label="Mechanical"
+            onTabClick={() => saveDataWrapper(true)}
           />
           <ChecklistTabTrigger 
             value="electrical" 
             icon="CheckSquare"
             label="Electrical"
+            onTabClick={() => saveDataWrapper(true)}
           />
           <ChecklistTabTrigger 
             value="plumbing" 
             icon="CheckSquare"
             label="Plumbing"
+            onTabClick={() => saveDataWrapper(true)}
           />
           <ChecklistTabTrigger 
             value="tires" 
             icon="CheckSquare"
             label="Tires"
+            onTabClick={() => saveDataWrapper(true)}
           />
           <ChecklistTabTrigger 
             value="pest-control" 
             icon="CheckSquare"
             label="Pest Control"
+            onTabClick={() => saveDataWrapper(true)}
           />
           <ChecklistTabTrigger 
             value="security" 
             icon="CheckSquare"
             label="Security"
+            onTabClick={() => saveDataWrapper(true)}
           />
           <ChecklistTabTrigger 
             value="notes" 
             icon="CheckSquare"
             label="Notes"
+            onTabClick={() => saveDataWrapper(true)}
           />
         </TabsList>
 
