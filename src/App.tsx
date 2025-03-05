@@ -18,6 +18,13 @@ const queryClient = new QueryClient({
 
 function App() {
   console.log('Rendering App component');
+  
+  // Make sure the root is visible
+  if (typeof document !== 'undefined') {
+    document.documentElement.style.visibility = 'visible';
+    document.body.style.visibility = 'visible';
+  }
+  
   return (
     <QueryClientProvider client={queryClient}>
       <AuthProvider>

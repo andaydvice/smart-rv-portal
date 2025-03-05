@@ -6,14 +6,12 @@ import './index.css';
 
 console.log('Starting application initialization...');
 
-document.addEventListener('DOMContentLoaded', () => {
-  const rootElement = document.getElementById('root');
-  
-  if (!rootElement) {
-    console.error('Root element not found');
-    return;
-  }
+// Ensure the app is rendered as soon as possible
+const rootElement = document.getElementById('root');
 
+if (!rootElement) {
+  console.error('Root element not found');
+} else {
   console.log('Root element found, creating React root...');
   
   const root = ReactDOM.createRoot(rootElement);
@@ -24,17 +22,11 @@ document.addEventListener('DOMContentLoaded', () => {
   root.render(<App />);
 
   console.log('App component rendered successfully');
-});
-
-// Backup initialization in case DOMContentLoaded already fired
-if (document.readyState === 'complete' || document.readyState === 'interactive') {
-  console.log('Document already loaded, initializing app directly');
-  setTimeout(() => {
-    const rootElement = document.getElementById('root');
-    if (rootElement && !rootElement.hasChildNodes()) {
-      console.log('Root element found empty, creating React root...');
-      const root = ReactDOM.createRoot(rootElement);
-      root.render(<App />);
-    }
-  }, 1);
 }
+
+// Force visibility of content
+document.addEventListener('DOMContentLoaded', () => {
+  console.log('DOMContentLoaded event fired');
+  document.documentElement.style.visibility = 'visible';
+  document.body.style.visibility = 'visible';
+});
