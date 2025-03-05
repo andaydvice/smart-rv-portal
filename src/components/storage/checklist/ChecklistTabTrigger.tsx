@@ -2,19 +2,16 @@
 import React from 'react';
 import { TabsTrigger } from "@/components/ui/tabs";
 import * as LucideIcons from "lucide-react";
-import { LucideIcon } from 'lucide-react';
 
-// Define a type that includes only the actual icon components from lucide-react
+// Define a type for icon names from lucide-react
 type IconName = keyof typeof LucideIcons;
 
 interface ChecklistTabTriggerProps {
   value: string;
-  icon?: IconName;
+  icon: IconName;
   label: string;
   iconColor?: string;
-  progress?: number;
-  total?: number;
-  onTabClick?: () => void; // New prop for tab click handler
+  onTabClick?: () => void;
 }
 
 const ChecklistTabTrigger: React.FC<ChecklistTabTriggerProps> = ({ 
@@ -24,8 +21,8 @@ const ChecklistTabTrigger: React.FC<ChecklistTabTriggerProps> = ({
   iconColor,
   onTabClick
 }) => {
-  // Use dynamic import to handle the icon properly if it exists
-  const Icon = icon ? (LucideIcons[icon] as LucideIcon) : null;
+  // Dynamically use the icon from Lucide
+  const IconComponent = LucideIcons[icon];
   
   // Map labels to specific colors exactly as shown in the image
   let specificIconColor = "";
@@ -67,7 +64,6 @@ const ChecklistTabTrigger: React.FC<ChecklistTabTriggerProps> = ({
 
   // Add a click handler to ensure focus is properly managed
   const handleTabClick = () => {
-    // Force a save when changing tabs
     console.log(`Tab ${label} clicked - triggering save`);
     if (onTabClick) {
       onTabClick(); // Call the parent's onTabClick handler to trigger saves
@@ -81,7 +77,7 @@ const ChecklistTabTrigger: React.FC<ChecklistTabTriggerProps> = ({
       onClick={handleTabClick}
     >
       <div className="flex flex-col items-center gap-2 justify-center">
-        {Icon && <Icon className="h-6 w-6" stroke={specificIconColor} strokeWidth={2} />}
+        <IconComponent className="h-6 w-6" stroke={specificIconColor} strokeWidth={2} />
         <span className="text-sm font-medium text-white">{label}</span>
       </div>
     </TabsTrigger>
