@@ -8,9 +8,9 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto px-4 py-12 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Company Info */}
-          <div className="space-y-4 text-center md:text-left">
-            <h3 className="text-2xl font-bold">Smart RV</h3>
-            <p className="text-gray-400">
+          <div className="space-y-4 flex flex-col items-center md:items-start">
+            <h3 className="text-2xl font-bold text-center md:text-left">Smart RV</h3>
+            <p className="text-gray-400 text-center md:text-left">
               Revolutionizing the future of recreational vehicles with smart technology.
             </p>
             <div className="flex justify-center md:justify-start space-x-4">
@@ -30,9 +30,9 @@ const Footer = () => {
           </div>
 
           {/* Quick Links */}
-          <div>
+          <div className="flex flex-col items-center md:items-start">
             <h4 className="text-lg font-semibold mb-4 text-center md:text-left">Quick Links</h4>
-            <ul className="space-y-2">
+            <ul className="space-y-2 w-full">
               <li className="text-center md:text-left">
                 <Link to="/models" className="text-gray-400 hover:text-white transition-colors">
                   Models
@@ -52,9 +52,9 @@ const Footer = () => {
           </div>
 
           {/* Features */}
-          <div>
+          <div className="flex flex-col items-center md:items-start">
             <h4 className="text-lg font-semibold mb-4 text-center md:text-left">Features</h4>
-            <ul className="space-y-2">
+            <ul className="space-y-2 w-full">
               <li className="text-center md:text-left">
                 <Link to="/features/navigation" className="text-gray-400 hover:text-white transition-colors">
                   Navigation System
@@ -74,9 +74,9 @@ const Footer = () => {
           </div>
 
           {/* Contact */}
-          <div>
+          <div className="flex flex-col items-center md:items-start">
             <h4 className="text-lg font-semibold mb-4 text-center md:text-left">Contact Us</h4>
-            <div className="space-y-2 text-gray-400 text-center md:text-left">
+            <div className="space-y-2 text-gray-400 text-center md:text-left w-full">
               <p>1234 Smart Drive</p>
               <p>Tech Valley, CA 94025</p>
               <div className="flex items-center gap-2 justify-center md:justify-start">
