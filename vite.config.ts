@@ -20,15 +20,13 @@ export default defineConfig(({ mode }) => ({
       reloadOnFailure: true
     },
     watch: {
-      usePolling: false, // Disabled polling for better performance
-      interval: 300 
+      usePolling: true,
+      interval: 300 // Increase interval to reduce CPU usage
     },
     open: false,
   },
   plugins: [
-    react({
-      plugins: [] // Removed emotion plugin to fix build errors
-    }),
+    react(),
     mode === 'development' && componentTagger(),
   ].filter(Boolean),
   resolve: {
@@ -37,10 +35,10 @@ export default defineConfig(({ mode }) => ({
     },
   },
   optimizeDeps: {
-    include: ['react', 'react-dom', 'react-router-dom', 'framer-motion'],
+    include: ['react', 'react-dom'],
     force: true,
     esbuildOptions: {
-      target: 'es2020'
+      target: 'es2020' // Update target for better compatibility
     }
   },
   build: {
@@ -50,14 +48,10 @@ export default defineConfig(({ mode }) => ({
       output: {
         manualChunks: {
           vendor: ['react', 'react-dom'],
-          router: ['react-router-dom'],
-          ui: ['@radix-ui/react-dialog', '@radix-ui/react-tabs'],
         },
       },
     },
-    target: 'es2020',
-    reportCompressedSize: false, // Improves build performance
-    chunkSizeWarningLimit: 1000 // Increased limit for better bundle analysis
+    target: 'es2020' // Ensure consistent target with optimizeDeps
   },
   esbuild: {
     logOverride: { 'this-is-undefined-in-esm': 'silent' }

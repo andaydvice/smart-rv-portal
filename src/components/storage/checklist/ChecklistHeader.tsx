@@ -1,20 +1,17 @@
 
 import React from 'react';
 import { Button } from "@/components/ui/button";
-import { CardHeader } from "@/components/ui/card";
-import { Progress } from "@/components/ui/progress";
-import { Save, RotateCcw, Printer, FileDown } from "lucide-react";
-import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
+import { CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { Printer, Save, RotateCcw, CheckSquare } from "lucide-react";
+import { toast } from "@/components/ui/use-toast";
 
 interface ChecklistHeaderProps {
   completionPercentage: number;
-  lastSavedAt: Date | null;
+  lastSavedAt: string | null;
   getLastSavedMessage: () => string;
   onSave: () => void;
   onReset: () => void;
   onPrint: () => void;
-  onExportPDF: () => void; // New prop for PDF export
-  isSaving: boolean;
 }
 
 const ChecklistHeader: React.FC<ChecklistHeaderProps> = ({
@@ -23,96 +20,63 @@ const ChecklistHeader: React.FC<ChecklistHeaderProps> = ({
   getLastSavedMessage,
   onSave,
   onReset,
-  onPrint,
-  onExportPDF, // New prop for PDF export
-  isSaving
+  onPrint
 }) => {
   return (
-    <CardHeader className="pb-4 border-b border-gray-800">
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-4">
+    <CardHeader className="border-b border-gray-700 pb-6 bg-gradient-to-r from-[#0c1219] to-[#131a2a]">
+      <div className="flex justify-between items-start mb-4">
         <div>
-          <h2 className="text-2xl font-bold text-white">RV Storage Preparation Checklist</h2>
-          <p className="text-[#E2E8FF] text-opacity-80 mt-1">{getLastSavedMessage()}</p>
+          <CardTitle className="text-3xl font-bold text-white mb-2">COMPLETE GUIDE TO RV STORAGE PREPARATION</CardTitle>
+          <CardDescription className="text-xl text-[#E2E8FF] font-light">Interactive Checklist for Extended Indoor Storage</CardDescription>
         </div>
-        <div className="flex space-x-2 mt-4 md:mt-0">
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Button
-                variant="outline"
-                size="sm"
-                className="text-gray-300 border-gray-700 hover:bg-[#151A22] hover:text-white"
-                disabled={isSaving}
-                onClick={onSave}
-              >
-                <Save className="h-4 w-4 mr-2" />
-                {isSaving ? "Saving..." : "Save"}
-              </Button>
-            </TooltipTrigger>
-            <TooltipContent>
-              <p>Save your progress</p>
-            </TooltipContent>
-          </Tooltip>
-          
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Button
-                variant="outline"
-                size="sm"
-                className="text-gray-300 border-gray-700 hover:bg-[#151A22] hover:text-white"
-                onClick={onReset}
-              >
-                <RotateCcw className="h-4 w-4 mr-2" />
-                Reset
-              </Button>
-            </TooltipTrigger>
-            <TooltipContent>
-              <p>Reset all progress</p>
-            </TooltipContent>
-          </Tooltip>
-          
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Button
-                variant="outline"
-                size="sm"
-                className="text-gray-300 border-gray-700 hover:bg-[#151A22] hover:text-white"
-                onClick={onPrint}
-              >
-                <Printer className="h-4 w-4 mr-2" />
-                Print
-              </Button>
-            </TooltipTrigger>
-            <TooltipContent>
-              <p>Print checklist</p>
-            </TooltipContent>
-          </Tooltip>
-          
-          {/* New PDF export button */}
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Button
-                variant="outline"
-                size="sm"
-                className="text-gray-300 border-gray-700 hover:bg-[#151A22] hover:text-[#5B9BD5]"
-                onClick={onExportPDF}
-              >
-                <FileDown className="h-4 w-4 mr-2" />
-                Export PDF
-              </Button>
-            </TooltipTrigger>
-            <TooltipContent>
-              <p>Download as PDF</p>
-            </TooltipContent>
-          </Tooltip>
-        </div>
+        <div className="text-[#5B9BD5] font-bold text-xl">SMART RV</div>
       </div>
       
-      <div className="space-y-2">
-        <div className="flex justify-between items-center">
-          <span className="text-sm font-medium text-[#5B9BD5]">Completion</span>
-          <span className="text-sm font-medium text-white">{Math.round(completionPercentage)}%</span>
+      <div className="flex flex-col sm:flex-row gap-4 mt-6">
+        <div className="flex gap-2">
+          <Button 
+            variant="outline" 
+            className="gap-2 bg-[#151A22] hover:bg-[#1d2532] hover:text-white text-white border-gray-700 
+            focus:text-white active:text-white focus:bg-[#1d2532] active:bg-[#1d2532] focus:border-[#5B9BD5] active:border-[#5B9BD5]"
+            onClick={onSave}
+          >
+            <Save size={16} className="text-[#5B9BD5]" />
+            Save Progress
+          </Button>
+          <Button 
+            variant="outline" 
+            className="gap-2 bg-[#151A22] hover:bg-[#1d2532] hover:text-white text-white border-gray-700
+            focus:text-white active:text-white focus:bg-[#1d2532] active:bg-[#1d2532] focus:border-[#5B9BD5] active:border-[#5B9BD5]"
+            onClick={onPrint}
+          >
+            <Printer size={16} className="text-[#5B9BD5]" />
+            Print
+          </Button>
+          <Button 
+            variant="outline" 
+            className="gap-2 bg-[#151A22] hover:bg-[#1d2532] hover:text-white text-white border-gray-700
+            focus:text-white active:text-white focus:bg-[#1d2532] active:bg-[#1d2532] focus:border-[#5B9BD5] active:border-[#5B9BD5]"
+            onClick={onReset}
+          >
+            <RotateCcw size={16} className="text-[#5B9BD5]" />
+            Reset
+          </Button>
         </div>
-        <Progress value={completionPercentage} className="h-2 bg-gray-800" indicatorClassName="bg-[#5B9BD5]" />
+        
+        <div className="flex items-center justify-between gap-3 ml-auto">
+          {lastSavedAt && (
+            <span className="text-xs text-[#E2E8FF] italic mr-3">
+              {getLastSavedMessage()}
+            </span>
+          )}
+          <div className="flex items-center gap-3 bg-[#151A22] py-2 px-3 rounded-md border border-gray-700">
+            <CheckSquare size={18} className="text-[#10B981]" />
+            <div className="flex flex-col">
+              <span className="text-xs text-[#E2E8FF]">Completion</span>
+              <span className="text-[#10B981] font-bold">{completionPercentage}%</span>
+            </div>
+          </div>
+        </div>
       </div>
     </CardHeader>
   );

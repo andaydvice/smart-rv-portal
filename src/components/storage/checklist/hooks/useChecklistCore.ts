@@ -36,26 +36,15 @@ export const useChecklistCore = () => {
         
         // Handle progress data with type safety
         if (savedData.progress) {
-          // Normalize any string boolean values to actual booleans
-          const normalizedProgress = { ...savedData.progress };
-          
-          // Ensure checkbox values are stored as actual booleans
-          Object.entries(savedData.progress).forEach(([key, value]) => {
-            if (/^[a-z]+-\d+$/.test(key)) {
-              if (value === 'true') normalizedProgress[key] = true;
-              else if (value === 'false') normalizedProgress[key] = false;
-            }
-          });
-          
-          setProgress(normalizedProgress);
+          setProgress(savedData.progress);
         }
         
         // Handle dates
-        if (savedData.startDate instanceof Date) {
+        if (savedData.startDate) {
           setStartDate(savedData.startDate);
         }
         
-        if (savedData.endDate instanceof Date) {
+        if (savedData.endDate) {
           setEndDate(savedData.endDate);
         }
         

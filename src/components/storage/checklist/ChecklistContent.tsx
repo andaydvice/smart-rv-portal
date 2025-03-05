@@ -51,20 +51,6 @@ const ChecklistContent: React.FC<ChecklistContentProps> = ({
     
     // Then update the active tab
     setActiveTab(newValue);
-    
-    // Update print attributes for all checkboxes after tab change
-    setTimeout(() => {
-      const checkboxes = document.querySelectorAll('[role="checkbox"]');
-      checkboxes.forEach(checkbox => {
-        const id = checkbox.getAttribute('id');
-        if (id && progress[id] !== undefined) {
-          const isChecked = !!progress[id];
-          checkbox.setAttribute('data-print-checked', isChecked ? 'true' : 'false');
-          checkbox.setAttribute('aria-checked', isChecked ? 'true' : 'false');
-          checkbox.setAttribute('data-state', isChecked ? 'checked' : 'unchecked');
-        }
-      });
-    }, 100);
   };
   
   // On component mount/unmount, force a save
@@ -74,41 +60,13 @@ const ChecklistContent: React.FC<ChecklistContentProps> = ({
       onTabChange();
     }
     
-    // Add beforeprint listener to make all tab content visible
-    const handleBeforePrint = () => {
-      // Make all tab panels visible in print
-      document.querySelectorAll('[role="tabpanel"]').forEach(panel => {
-        const htmlPanel = panel as HTMLElement;
-        const originalDisplay = htmlPanel.style.display;
-        htmlPanel.style.display = 'block';
-        htmlPanel.style.visibility = 'visible';
-        htmlPanel.setAttribute('data-original-display', originalDisplay);
-      });
-    };
-    
-    // Add afterprint listener to restore the original visibility
-    const handleAfterPrint = () => {
-      document.querySelectorAll('[role="tabpanel"]').forEach(panel => {
-        const htmlPanel = panel as HTMLElement;
-        const originalDisplay = panel.getAttribute('data-original-display') || '';
-        if (panel.getAttribute('value') !== activeTab) {
-          htmlPanel.style.display = originalDisplay;
-        }
-      });
-    };
-    
-    window.addEventListener('beforeprint', handleBeforePrint);
-    window.addEventListener('afterprint', handleAfterPrint);
-    
     return () => {
       if (onTabChange) {
         console.log("ChecklistContent unmounting - final save");
         onTabChange();
       }
-      window.removeEventListener('beforeprint', handleBeforePrint);
-      window.removeEventListener('afterprint', handleAfterPrint);
     };
-  }, [onTabChange, activeTab]);
+  }, [onTabChange]);
 
   return (
     <Tabs 
@@ -117,10 +75,7 @@ const ChecklistContent: React.FC<ChecklistContentProps> = ({
       value={activeTab}
       onValueChange={handleTabValueChange}
     >
-      <TabsList 
-        className="grid grid-cols-5 lg:grid-cols-10 h-auto bg-[#151A22] mb-6 border-b border-gray-700 rounded-none no-print"
-        style={{ display: 'grid', visibility: 'visible' }}
-      >
+      <TabsList className="grid grid-cols-5 lg:grid-cols-10 h-auto bg-[#151A22] mb-6 border-b border-gray-700 rounded-none">
         <ChecklistTabTrigger value="rv-info" icon="Info" label="RV Info" onTabClick={onTabChange} />
         <ChecklistTabTrigger value="exterior" icon="ExternalLink" label="Exterior" onTabClick={onTabChange} />
         <ChecklistTabTrigger value="interior" icon="Home" label="Interior" onTabClick={onTabChange} />
@@ -133,11 +88,8 @@ const ChecklistContent: React.FC<ChecklistContentProps> = ({
         <ChecklistTabTrigger value="notes" icon="FileText" label="Notes" onTabClick={onTabChange} />
       </TabsList>
       
-      <div 
-        className="tab-content-wrapper"
-        style={{ visibility: 'visible', display: 'block' }}
-      >
-        <TabsContent value="rv-info" className="mt-0" style={{ visibility: 'visible' }}>
+      <div className="tab-content-wrapper">
+        <TabsContent value="rv-info" className="mt-0">
           <RVInfoTab
             progress={progress}
             startDate={startDate}
@@ -148,63 +100,63 @@ const ChecklistContent: React.FC<ChecklistContentProps> = ({
           />
         </TabsContent>
         
-        <TabsContent value="exterior" className="mt-0" style={{ visibility: 'visible' }}>
+        <TabsContent value="exterior" className="mt-0">
           <ExteriorTab 
             progress={progress}
             handleCheckboxChange={handleCheckboxChange}
           />
         </TabsContent>
         
-        <TabsContent value="interior" className="mt-0" style={{ visibility: 'visible' }}>
+        <TabsContent value="interior" className="mt-0">
           <InteriorTab 
             progress={progress}
             handleCheckboxChange={handleCheckboxChange}
           />
         </TabsContent>
         
-        <TabsContent value="plumbing" className="mt-0" style={{ visibility: 'visible' }}>
+        <TabsContent value="plumbing" className="mt-0">
           <PlumbingTab 
             progress={progress}
             handleCheckboxChange={handleCheckboxChange}
           />
         </TabsContent>
         
-        <TabsContent value="electrical" className="mt-0" style={{ visibility: 'visible' }}>
+        <TabsContent value="electrical" className="mt-0">
           <ElectricalTab 
             progress={progress}
             handleCheckboxChange={handleCheckboxChange}
           />
         </TabsContent>
         
-        <TabsContent value="mechanical" className="mt-0" style={{ visibility: 'visible' }}>
+        <TabsContent value="mechanical" className="mt-0">
           <MechanicalTab 
             progress={progress}
             handleCheckboxChange={handleCheckboxChange}
           />
         </TabsContent>
         
-        <TabsContent value="tires" className="mt-0" style={{ visibility: 'visible' }}>
+        <TabsContent value="tires" className="mt-0">
           <TiresTab 
             progress={progress}
             handleCheckboxChange={handleCheckboxChange}
           />
         </TabsContent>
         
-        <TabsContent value="pest-control" className="mt-0" style={{ visibility: 'visible' }}>
+        <TabsContent value="pest-control" className="mt-0">
           <PestControlTab 
             progress={progress}
             handleCheckboxChange={handleCheckboxChange}
           />
         </TabsContent>
         
-        <TabsContent value="security" className="mt-0" style={{ visibility: 'visible' }}>
+        <TabsContent value="security" className="mt-0">
           <SecurityTab 
             progress={progress}
             handleCheckboxChange={handleCheckboxChange}
           />
         </TabsContent>
         
-        <TabsContent value="notes" className="mt-0" style={{ visibility: 'visible' }}>
+        <TabsContent value="notes" className="mt-0">
           <NotesTab 
             notes={notes}
             onNotesChange={handleNotesChange}

@@ -6,27 +6,42 @@ import './index.css';
 
 console.log('Starting application initialization...');
 
-// Ensure the app is rendered as soon as possible
-const rootElement = document.getElementById('root');
+const startApp = () => {
+  try {
+    const rootElement = document.getElementById('root');
+    
+    if (!rootElement) {
+      throw new Error('Root element not found');
+    }
 
-if (!rootElement) {
-  console.error('Root element not found');
-} else {
-  console.log('Root element found, creating React root...');
-  
-  const root = ReactDOM.createRoot(rootElement);
-  
-  console.log('React root created, rendering App component...');
-  
-  // Render without StrictMode in development to reduce double-rendering issues
-  root.render(<App />);
+    console.log('Root element found, creating React root...');
+    
+    const root = ReactDOM.createRoot(rootElement);
+    
+    console.log('React root created, rendering App component...');
+    
+    root.render(
+      <React.StrictMode>
+        <App />
+      </React.StrictMode>
+    );
 
-  console.log('App component rendered successfully');
-}
+    console.log('App component rendered successfully');
 
-// Force visibility of content
-document.addEventListener('DOMContentLoaded', () => {
-  console.log('DOMContentLoaded event fired');
-  document.documentElement.style.visibility = 'visible';
-  document.body.style.visibility = 'visible';
-});
+    if (import.meta.hot) {
+      import.meta.hot.accept('./App', () => {
+        console.log('HMR update detected, re-rendering App component...');
+        root.render(
+          <React.StrictMode>
+            <App />
+          </React.StrictMode>
+        );
+      });
+    }
+  } catch (error) {
+    console.error('Failed to initialize application:', error);
+    throw error;
+  }
+};
+
+startApp();

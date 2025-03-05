@@ -5,7 +5,6 @@ import { ChecklistNotes } from './types';
 /**
  * Hook for managing automatic saving of checklist data
  * Enhanced for reliability with improved error handling and save verification
- * Optimized for performance to prevent UI blocking
  */
 export const useChecklistAutoSave = (
   progress: {[key: string]: boolean | string},
@@ -21,52 +20,24 @@ export const useChecklistAutoSave = (
   const isInitialRenderRef = useRef<boolean>(true);
   const pendingSaveRef = useRef<boolean>(false);
   const consecutiveFailuresRef = useRef<number>(0);
-  const saveInProgressRef = useRef<boolean>(false);
   
   // Track if data has changed since last save with improved serialization
   const hasDataChanged = useCallback(() => {
     try {
-      // Use a lightweight comparison approach for better performance
-      // Only stringify the minimal needed data to detect changes
-      const currentProgress = JSON.stringify(progress);
-      const currentNotes = JSON.stringify(notes);
-      const currentDates = JSON.stringify({
-        startDate: startDate ? startDate.toISOString() : null,
-        endDate: endDate ? endDate.toISOString() : null
+      const currentData = JSON.stringify({ 
+        progress, 
+        startDate: startDate ? startDate.toISOString() : null, 
+        endDate: endDate ? endDate.toISOString() : null, 
+        notes 
       });
-      
-      const prevData = lastSaveDataRef.current ? JSON.parse(lastSaveDataRef.current) : {};
-      
-      // Check individual parts instead of the whole object for better performance
-      return (
-        currentProgress !== (prevData.progress || '{}') ||
-        currentNotes !== (prevData.notes || '{}') ||
-        currentDates !== (prevData.dates || '{}')
-      );
+      return currentData !== lastSaveDataRef.current;
     } catch (error) {
       console.error("Error checking for data changes:", error);
       return true; // If there's an error, assume data changed to be safe
     }
   }, [progress, startDate, endDate, notes]);
   
-  // Update the reference of saved data
-  const updateSavedDataRef = useCallback(() => {
-    try {
-      // Store parts separately for more efficient comparisons
-      lastSaveDataRef.current = JSON.stringify({
-        progress: JSON.stringify(progress),
-        notes: JSON.stringify(notes),
-        dates: JSON.stringify({
-          startDate: startDate ? startDate.toISOString() : null,
-          endDate: endDate ? endDate.toISOString() : null
-        })
-      });
-    } catch (error) {
-      console.error("Error updating saved data reference:", error);
-    }
-  }, [progress, startDate, endDate, notes]);
-  
-  // Debounced save function with enhanced reliability and non-blocking behavior
+  // Debounced save function with enhanced reliability
   const debouncedSave = useCallback(() => {
     if (saveTimeoutRef.current) {
       clearTimeout(saveTimeoutRef.current);
@@ -75,32 +46,23 @@ export const useChecklistAutoSave = (
     // Set pending save flag
     pendingSaveRef.current = true;
     
-    // Only save if data has actually changed and no save is in progress
-    if (hasDataChanged() && !saveInProgressRef.current) {
+    // Only save if data has actually changed
+    if (hasDataChanged()) {
       saveTimeoutRef.current = setTimeout(() => {
         try {
           console.log("Executing debounced auto-save");
-          saveInProgressRef.current = true;
-          
-          // Use requestAnimationFrame to schedule save during idle time
-          requestAnimationFrame(() => {
-            try {
-              const saveTime = saveDataWrapper(false);
-              lastSavedTimeRef.current = saveTime;
-              
-              // Update last saved data reference
-              updateSavedDataRef();
-              
-              // Reset failure counter after successful save
-              consecutiveFailuresRef.current = 0;
-            } catch (error) {
-              console.error("Error during scheduled save:", error);
-              consecutiveFailuresRef.current++;
-            } finally {
-              saveInProgressRef.current = false;
-              pendingSaveRef.current = false;
-            }
+          const saveTime = saveDataWrapper(false);
+          lastSavedTimeRef.current = saveTime;
+          // Update last saved data reference
+          lastSaveDataRef.current = JSON.stringify({ 
+            progress, 
+            startDate: startDate ? startDate.toISOString() : null, 
+            endDate: endDate ? endDate.toISOString() : null, 
+            notes 
           });
+          // Reset failure counter after successful save
+          consecutiveFailuresRef.current = 0;
+          pendingSaveRef.current = false;
         } catch (error) {
           console.error("Error during debounced save:", error);
           // Increment failure counter
@@ -110,22 +72,17 @@ export const useChecklistAutoSave = (
           if (consecutiveFailuresRef.current < 3) {
             const retryDelay = 1000 * consecutiveFailuresRef.current;
             console.log(`Retrying save in ${retryDelay}ms`);
-            setTimeout(() => {
-              saveInProgressRef.current = false;
-              debouncedSave();
-            }, retryDelay);
-          } else {
-            saveInProgressRef.current = false;
+            setTimeout(() => debouncedSave(), retryDelay);
           }
           pendingSaveRef.current = false;
         } finally {
           saveTimeoutRef.current = null;
         }
-      }, 3000); // Debounce time of 3 seconds
+      }, 3000); // Reduced debounce time to 3 seconds for better reliability
     } else {
       pendingSaveRef.current = false;
     }
-  }, [saveDataWrapper, hasDataChanged, updateSavedDataRef]);
+  }, [saveDataWrapper, hasDataChanged, progress, startDate, endDate, notes]);
 
   // Format last saved message
   const getLastSavedMessage = useCallback(() => {
@@ -141,49 +98,44 @@ export const useChecklistAutoSave = (
     }
   }, []);
 
-  // Force save data and update refs with non-blocking approach
+  // Force save data and update refs
   const forceSaveData = useCallback(() => {
     try {
-      if ((hasDataChanged() || pendingSaveRef.current) && !saveInProgressRef.current) {
+      if (hasDataChanged() || pendingSaveRef.current) {
         console.log("Forcing immediate save");
-        saveInProgressRef.current = true;
-        
-        // Use setTimeout with 0ms to prevent UI blocking
-        setTimeout(() => {
-          try {
-            const saveTime = saveDataWrapper(true);
-            lastSavedTimeRef.current = saveTime;
-            updateSavedDataRef();
-            saveInProgressRef.current = false;
-            return true;
-          } catch (error) {
-            console.error("Error during forced save:", error);
-            saveInProgressRef.current = false;
-            return false;
-          }
-        }, 0);
-        
+        const saveTime = saveDataWrapper(true);
+        lastSavedTimeRef.current = saveTime;
+        lastSaveDataRef.current = JSON.stringify({ 
+          progress, 
+          startDate: startDate ? startDate.toISOString() : null, 
+          endDate: endDate ? endDate.toISOString() : null, 
+          notes 
+        });
+        pendingSaveRef.current = false;
         return true;
       }
       return false;
     } catch (error) {
-      console.error("Error during forced save setup:", error);
-      saveInProgressRef.current = false;
+      console.error("Error during forced save:", error);
       return false;
     }
-  }, [saveDataWrapper, hasDataChanged, updateSavedDataRef]);
+  }, [saveDataWrapper, hasDataChanged, progress, startDate, endDate, notes]);
 
   // Efficient auto-save on data changes with debouncing and change detection
   useEffect(() => {
     // Skip the initial render to prevent unnecessary saves
     if (isInitialRenderRef.current) {
       isInitialRenderRef.current = false;
-      updateSavedDataRef();
+      lastSaveDataRef.current = JSON.stringify({ 
+        progress, 
+        startDate: startDate ? startDate.toISOString() : null, 
+        endDate: endDate ? endDate.toISOString() : null, 
+        notes 
+      });
       return;
     }
     
-    // Only trigger save if data has changed and we're not already saving
-    if (hasDataChanged() && !saveInProgressRef.current) {
+    if (hasDataChanged()) {
       console.log("Auto-save effect triggered by state change");
       debouncedSave();
     }
@@ -193,29 +145,27 @@ export const useChecklistAutoSave = (
         clearTimeout(saveTimeoutRef.current);
       }
     };
-  }, [progress, startDate, endDate, notes, debouncedSave, hasDataChanged, updateSavedDataRef]);
+  }, [progress, startDate, endDate, notes, debouncedSave, hasDataChanged]);
   
   // Add specific save on browser events (beforeunload, visibilitychange)
   useEffect(() => {
     // Handle visibility changes to save when user switches tabs or minimizes
     const handleVisibilityChange = () => {
-      if (document.visibilityState === 'hidden' && !saveInProgressRef.current) {
+      if (document.visibilityState === 'hidden') {
         forceSaveData();
       }
     };
 
     // Handle before unload to save when page is refreshed or closed
     const handleBeforeUnload = (event: BeforeUnloadEvent) => {
-      // Only try to save if we're not already in the middle of saving
-      if (!saveInProgressRef.current) {
-        const saved = forceSaveData();
-        
-        // Only show a confirmation dialog if there are unsaved changes
-        if (pendingSaveRef.current || hasDataChanged()) {
-          event.preventDefault();
-          event.returnValue = '';
-          return '';
-        }
+      // Force save before page unloads
+      const saved = forceSaveData();
+      
+      // Only show a confirmation dialog if there are unsaved changes
+      if (pendingSaveRef.current || hasDataChanged()) {
+        event.preventDefault();
+        event.returnValue = '';
+        return '';
       }
     };
     
@@ -224,11 +174,16 @@ export const useChecklistAutoSave = (
     window.addEventListener('beforeunload', handleBeforeUnload);
     
     // Initial data snapshot
-    updateSavedDataRef();
+    lastSaveDataRef.current = JSON.stringify({ 
+      progress, 
+      startDate: startDate ? startDate.toISOString() : null, 
+      endDate: endDate ? endDate.toISOString() : null, 
+      notes 
+    });
     
     // Periodic backup saves (every 60 seconds)
     const intervalId = setInterval(() => {
-      if ((hasDataChanged() || pendingSaveRef.current) && !saveInProgressRef.current) {
+      if (hasDataChanged() || pendingSaveRef.current) {
         forceSaveData();
       }
     }, 60000);
@@ -240,11 +195,9 @@ export const useChecklistAutoSave = (
       clearInterval(intervalId);
       
       // Final save when component unmounts
-      if (!saveInProgressRef.current) {
-        forceSaveData();
-      }
+      forceSaveData();
     };
-  }, [forceSaveData, hasDataChanged, updateSavedDataRef]);
+  }, [forceSaveData, hasDataChanged]);
 
   return {
     getLastSavedMessage,

@@ -1,0 +1,142 @@
+
+/* Storage Checklist Styles */
+
+/* Print styles */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  
+  .storage-preparation-checklist .container {
+    visibility: visible;
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+  
+  .storage-preparation-checklist * {
+    visibility: visible;
+  }
+  
+  /* Hide buttons in print view */
+  .storage-preparation-checklist button {
+    display: none !important;
+  }
+  
+  /* Format the overall page for printing */
+  .storage-preparation-checklist {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: white !important;
+    color: black !important;
+  }
+  
+  /* Format the card for printing */
+  .storage-preparation-checklist .card {
+    box-shadow: none !important;
+    border: none !important;
+    border-radius: 0 !important;
+    background-color: white !important;
+    color: black !important;
+  }
+  
+  /* Ensure all text is visible */
+  .storage-preparation-checklist p,
+  .storage-preparation-checklist h1,
+  .storage-preparation-checklist h2,
+  .storage-preparation-checklist h3,
+  .storage-preparation-checklist span {
+    color: black !important;
+  }
+  
+  /* Ensure checkboxes are visible */
+  .storage-preparation-checklist [role="checkbox"] {
+    border: 1px solid black !important;
+    background-color: white !important;
+  }
+  
+  /* Show the active tab only */
+  .storage-preparation-checklist [role="tabpanel"] {
+    display: block;
+    visibility: visible;
+  }
+  
+  /* Hide the tabs navigation */
+  .storage-preparation-checklist [role="tablist"] {
+    display: none !important;
+  }
+  
+  /* Page breaks */
+  .storage-preparation-checklist section {
+    page-break-inside: avoid;
+  }
+}
+
+/* Loading state styles */
+.storage-preparation-checklist .skeleton-pulse {
+  animation: skeleton-pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  background: linear-gradient(90deg, rgba(30,41,59,0.8) 0%, rgba(51,65,85,0.4) 50%, rgba(30,41,59,0.8) 100%);
+  background-size: 200% 100%;
+}
+
+@keyframes skeleton-pulse {
+  0% {
+    background-position: 0% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Focus styles for tab triggers */
+[data-state="active"][role="tab"] {
+  outline: 2px solid #5B9BD5 !important; 
+  outline-offset: -2px;
+  background-color: rgba(91, 155, 213, 0.2) !important;
+  position: relative;
+  z-index: 10;
+}
+
+/* Fix tab hover states */
+[role="tab"]:hover {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Make sure text is always visible in tabs - fix for disappearing text */
+[role="tab"] span {
+  visibility: visible !important;
+  opacity: 1 !important;
+  display: block !important;
+}
+
+/* Force tab content to be fully visible */
+[role="tabpanel"] {
+  position: relative !important;
+  visibility: visible !important;
+  transition: none !important;
+  transform: none !important;
+}
+
+/* Proper tab animation handling */
+[role="tabpanel"][data-state="inactive"] {
+  display: none !important;
+}
+
+/* Ensure notes textarea retains focus properly */
+.tab-content-wrapper textarea:focus {
+  outline: 2px solid #5B9BD5 !important;
+  outline-offset: -2px;
+  border-color: #5B9BD5 !important;
+}
+
+/* Force visibility of notes text */
+.tab-content-wrapper textarea {
+  color: white !important;
+}
+
+/* Ensure data doesn't get lost during tab transitions */
+.tab-content-wrapper {
+  min-height: 500px;
+}
+

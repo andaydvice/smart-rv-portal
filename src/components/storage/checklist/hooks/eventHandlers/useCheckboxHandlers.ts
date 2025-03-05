@@ -28,18 +28,8 @@ export const useCheckboxHandlers = (
     // Skip if the value hasn't changed
     if (progressRef.current[id] === checked) return new Date().toISOString();
     
-    console.log(`Checkbox change: ${id} = ${checked}`);
-    
-    // Ensure the ID follows our section-number pattern
-    if (!/^[a-z]+-\d+$/.test(id)) {
-      console.warn(`Invalid checkbox ID format: ${id}`);
-    }
-    
-    // Create updated progress object - ensure we store boolean values, not strings
-    const updatedProgress = { 
-      ...progressRef.current, 
-      [id]: checked // Store as true/false boolean, not 'true'/'false' string
-    };
+    // Create updated progress object
+    const updatedProgress = { ...progressRef.current, [id]: checked };
     
     // Update state
     setProgress(updatedProgress);
@@ -54,7 +44,7 @@ export const useCheckboxHandlers = (
       try {
         if (!batchUpdateRef.current) {
           // Save to localStorage
-          saveData(
+          const currentTime = saveData(
             updatedProgress,
             startDateRef.current,
             endDateRef.current,

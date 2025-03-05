@@ -25,7 +25,7 @@ const MenuButton = ({ isOpen, onClick }: MenuButtonProps) => {
   return (
     <button
       onClick={handleClick}
-      className="z-50 inline-flex items-center justify-center p-2 rounded-md text-white hover:text-[#4B9EF4] focus:outline-none"
+      className="z-50 inline-flex items-center justify-center p-2 text-white bg-blue-500 hover:text-[#4B9EF4] focus:outline-none"
       aria-expanded={isOpen}
       aria-label="Toggle menu"
     >

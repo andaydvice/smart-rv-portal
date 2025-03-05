@@ -27,7 +27,7 @@ const NavbarContainer = ({ isOpen, toggleMenu }: NavbarContainerProps) => {
           </Link>
           
           <div className="flex items-center gap-4">
-            <div className="md:hidden">
+            <div className="block md:hidden">
               <MenuButton isOpen={isOpen} onClick={toggleMenu} />
             </div>
             <div className="hidden md:block">

@@ -1,8 +1,7 @@
 
-import React, { useEffect, useRef, useState, useCallback } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Textarea } from "@/components/ui/textarea";
 import { ChecklistNotes } from './hooks/types';
-import { debounce } from 'lodash';
 
 interface NotesTabProps {
   notes: ChecklistNotes;
@@ -16,14 +15,6 @@ const NotesTab: React.FC<NotesTabProps> = ({ notes, onNotesChange }) => {
   // Track if the component is mounted
   const isMountedRef = useRef<boolean>(true);
   
-  // Local state for notes to prevent UI lag with large text
-  const [localNotes, setLocalNotes] = useState<ChecklistNotes>(notes);
-  
-  // Update local state when props change
-  useEffect(() => {
-    setLocalNotes(notes);
-  }, [notes]);
-  
   // Force save on unmount
   useEffect(() => {
     return () => {
@@ -31,54 +22,35 @@ const NotesTab: React.FC<NotesTabProps> = ({ notes, onNotesChange }) => {
       console.log("NotesTab unmounting - ensuring notes are saved");
       
       // Compare current notes with previous to see if we need to force save
-      Object.keys(localNotes).forEach(key => {
-        const typedKey = key as keyof ChecklistNotes;
-        if (localNotes[typedKey] !== prevNotesRef.current[typedKey]) {
-          console.log(`Detected unsaved changes in ${key} notes - forcing save`);
-          onNotesChange(typedKey, localNotes[typedKey]);
-        }
-      });
+      const hasChanges = Object.keys(notes).some(
+        key => notes[key as keyof ChecklistNotes] !== prevNotesRef.current[key as keyof ChecklistNotes]
+      );
+      
+      if (hasChanges) {
+        console.log("Detected unsaved changes in notes - forcing save");
+        // Force saving each field that changed
+        Object.keys(notes).forEach(key => {
+          const typedKey = key as keyof ChecklistNotes;
+          if (notes[typedKey] !== prevNotesRef.current[typedKey]) {
+            onNotesChange(typedKey, notes[typedKey]);
+          }
+        });
+      }
     };
-  }, [localNotes, onNotesChange]);
+  }, [notes, onNotesChange]);
   
   // Update previous notes ref whenever notes change
   useEffect(() => {
     if (isMountedRef.current) {
-      prevNotesRef.current = { ...localNotes };
+      prevNotesRef.current = { ...notes };
     }
-  }, [localNotes]);
+  }, [notes]);
 
-  // Create debounced save function for each field
-  const debouncedSave = useCallback(
-    debounce((field: keyof ChecklistNotes, value: string) => {
-      if (isMountedRef.current) {
-        onNotesChange(field, value);
-      }
-    }, 800),
-    [onNotesChange]
-  );
-
-  // Handle changes to any textarea
+  // Ensure changes to any textarea trigger the onNotesChange callback immediately
   const handleNotesChange = (field: keyof ChecklistNotes, value: string) => {
-    // Update local state immediately for responsive UI
-    setLocalNotes(prev => ({
-      ...prev,
-      [field]: value
-    }));
-    
-    // Save changes after debounce period
-    debouncedSave(field, value);
-  };
-
-  // Handle blur events to ensure saving
-  const handleBlur = (field: keyof ChecklistNotes) => {
-    // Cancel any pending debounced saves
-    debouncedSave.flush();
-    
-    // Force immediate save
-    if (localNotes[field] !== notes[field]) {
-      onNotesChange(field, localNotes[field]);
-    }
+    console.log(`NotesTab: Notes changed for field: ${field}`, value);
+    // Immediately propagate the change to parent component
+    onNotesChange(field, value);
   };
 
   return (
@@ -96,10 +68,14 @@ const NotesTab: React.FC<NotesTabProps> = ({ notes, onNotesChange }) => {
           <Textarea 
             className="bg-[#131a2a] border-gray-700 min-h-[300px] text-white placeholder:text-gray-500" 
             placeholder="Enter any additional notes, special procedures, or reminders here..." 
-            value={localNotes.general || ''}
+            value={notes.general || ''}
             onChange={(e) => handleNotesChange('general', e.target.value)}
             style={{ color: 'white !important', caretColor: 'white !important' }}
-            onBlur={() => handleBlur('general')}
+            onBlur={() => {
+              // Force save on blur for better reliability
+              console.log("Text area blur - ensuring note is saved");
+              onNotesChange('general', notes.general || '');
+            }}
           />
         </div>
         
@@ -110,18 +86,18 @@ const NotesTab: React.FC<NotesTabProps> = ({ notes, onNotesChange }) => {
             <Textarea 
               className="bg-[#131a2a] border-gray-700 h-32 text-white placeholder:text-gray-500" 
               placeholder="Storage facility contact information..." 
-              value={localNotes.storageContact || ''}
+              value={notes.storageContact || ''}
               onChange={(e) => handleNotesChange('storageContact', e.target.value)}
               style={{ color: 'white !important', caretColor: 'white !important' }}
-              onBlur={() => handleBlur('storageContact')}
+              onBlur={() => onNotesChange('storageContact', notes.storageContact || '')}
             />
             <Textarea 
               className="bg-[#131a2a] border-gray-700 h-32 text-white placeholder:text-gray-500" 
               placeholder="Emergency contact information..." 
-              value={localNotes.emergencyContact || ''}
+              value={notes.emergencyContact || ''}
               onChange={(e) => handleNotesChange('emergencyContact', e.target.value)}
               style={{ color: 'white !important', caretColor: 'white !important' }}
-              onBlur={() => handleBlur('emergencyContact')}
+              onBlur={() => onNotesChange('emergencyContact', notes.emergencyContact || '')}
             />
           </div>
         </div>
@@ -132,10 +108,10 @@ const NotesTab: React.FC<NotesTabProps> = ({ notes, onNotesChange }) => {
           <Textarea 
             className="bg-[#131a2a] border-gray-700 min-h-[150px] text-white placeholder:text-gray-500" 
             placeholder="Notes for when you return to use the RV (de-winterizing procedures, systems to check, etc.)..." 
-            value={localNotes.returnPreparation || ''}
+            value={notes.returnPreparation || ''}
             onChange={(e) => handleNotesChange('returnPreparation', e.target.value)}
             style={{ color: 'white !important', caretColor: 'white !important' }}
-            onBlur={() => handleBlur('returnPreparation')}
+            onBlur={() => onNotesChange('returnPreparation', notes.returnPreparation || '')}
           />
         </div>
       </div>

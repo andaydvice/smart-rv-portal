@@ -1,20 +1,14 @@
 
-import React, { useEffect, memo, useState, useCallback } from 'react';
+import React, { useEffect, useCallback, memo, useMemo } from 'react';
 import { Card, CardContent } from "@/components/ui/card";
+import { toast } from "@/components/ui/use-toast";
 import { useChecklistStorage } from './checklist/hooks/useChecklistStorage';
 import ChecklistHeader from './checklist/ChecklistHeader';
 import ChecklistContent from './checklist/ChecklistContent';
-import ChecklistLoading from './checklist/ChecklistLoading';
-import ResetDialog from './checklist/ResetDialog';
-import useCompletionStats from './checklist/hooks/useCompletionStats';
-import { useChecklistActions } from './checklist/ChecklistActions';
+import { Skeleton } from "@/components/ui/skeleton";
 
 // Memoize the component to prevent unnecessary re-renders
 const StoragePreparationChecklist: React.FC = memo(() => {
-  console.log('StoragePreparationChecklist rendering');
-  
-  const [resetDialogOpen, setResetDialogOpen] = useState(false);
-  
   const {
     progress,
     startDate,
@@ -32,85 +26,69 @@ const StoragePreparationChecklist: React.FC = memo(() => {
     isLoaded
   } = useChecklistStorage();
 
-  // Use the extracted actions hook
-  const {
-    isSaving,
-    handleSaveProgress,
-    handleResetRequest,
-    handleResetConfirm,
-    handlePrint,
-    handleExportPDF
-  } = useChecklistActions({
-    saveData,
-    resetData,
-    setResetDialogOpen
-  });
-
-  // Calculate completion stats using the optimized hook
-  const completionStats = useCompletionStats(progress);
-  
-  // Force recalculation when progress changes
-  useEffect(() => {
-    console.log(`Completion stats updated: ${completionStats.completedItems}/${completionStats.totalItems} = ${completionStats.completionPercentage}%`);
-  }, [completionStats]);
-  
-  // Enhanced checkbox handler that ensures values are always stored as booleans
-  const enhancedCheckboxHandler = useCallback((id: string, checked: boolean) => {
-    console.log(`Checkbox change: ${id} => ${checked}`);
-    handleCheckboxChange(id, checked);
-    
-    // After a short delay, update the print-specific attributes for this checkbox
-    setTimeout(() => {
-      const checkbox = document.getElementById(id);
-      if (checkbox) {
-        checkbox.setAttribute('data-print-checked', checked ? 'true' : 'false');
-        checkbox.setAttribute('aria-checked', checked ? 'true' : 'false');
-        checkbox.setAttribute('data-state', checked ? 'checked' : 'unchecked');
-        
-        // Also update the label
-        const label = document.querySelector(`label[for="${id}"]`);
-        if (label) {
-          label.setAttribute('data-checked', checked ? 'true' : 'false');
-          label.setAttribute('data-print-state', checked ? 'checked' : 'unchecked');
-        }
-      }
-    }, 50);
-  }, [handleCheckboxChange]);
-  
-  // Enhanced print handler to ensure all checkboxes are properly prepared
-  const enhancedPrintHandler = useCallback(() => {
-    // First prepare all checkboxes for printing
-    const checkboxes = document.querySelectorAll('[role="checkbox"]');
-    checkboxes.forEach(checkbox => {
-      const id = checkbox.getAttribute('id');
-      const isChecked = progress[id as string];
+  // Create memoized handlers to prevent recreation on every render
+  const handleSaveProgress = useCallback(() => {
+    try {
+      saveData(true);
       
-      checkbox.setAttribute('data-print-checked', isChecked ? 'true' : 'false');
-      checkbox.setAttribute('aria-checked', isChecked ? 'true' : 'false');
-      checkbox.setAttribute('data-state', isChecked ? 'checked' : 'unchecked');
-    });
-    
-    // Then call the original print handler
-    handlePrint();
-  }, [handlePrint, progress]);
-  
-  // Enhanced PDF export handler
-  const enhancedExportPDFHandler = useCallback(() => {
-    // Call the export function with the current checklist data
-    handleExportPDF(
-      progress,
-      startDate,
-      endDate,
-      notes,
-      completionStats.completionPercentage
-    );
-  }, [handleExportPDF, progress, startDate, endDate, notes, completionStats.completionPercentage]);
+      toast({
+        title: "Progress Saved",
+        description: "Your checklist progress has been saved successfully.",
+        variant: "default",
+      });
+    } catch (error) {
+      console.error("Error saving progress:", error);
+      toast({
+        title: "Save Failed",
+        description: "There was an error saving your progress. Please try again.",
+        variant: "destructive",
+      });
+    }
+  }, [saveData]);
+
+  const handleReset = useCallback(() => {
+    if (window.confirm("Are you sure you want to reset the checklist? All your progress will be lost.")) {
+      resetData();
+      
+      toast({
+        title: "Progress Reset",
+        description: "Your checklist has been reset to default state.",
+      });
+    }
+  }, [resetData]);
+
+  const handlePrint = useCallback(() => {
+    // Force a save before printing
+    try {
+      saveData(true);
+      window.print();
+      
+      toast({
+        title: "Printing",
+        description: "Sending checklist to printer...",
+      });
+    } catch (error) {
+      console.error("Error preparing for print:", error);
+      toast({
+        title: "Print Failed",
+        description: "There was an error preparing the document for printing.",
+        variant: "destructive",
+      });
+    }
+  }, [saveData]);
+
+  // Calculate completion stats - memoize to prevent recalculation on every render
+  const completionStats = useMemo(() => {
+    const totalItems = 50;
+    // Only count true boolean values, not strings or other values
+    const completedItems = Object.values(progress).filter(val => val === true).length;
+    const completionPercentage = Math.round((completedItems / totalItems) * 100);
+    return { totalItems, completedItems, completionPercentage };
+  }, [progress]);
   
   // Auto-save on first load to ensure data is properly initialized
   useEffect(() => {
     if (isLoaded) {
-      console.log("StoragePreparationChecklist - Data loaded, initializing auto-save");
-      
       // Small delay to ensure all data is loaded
       const timer = setTimeout(() => {
         saveData(false);
@@ -121,12 +99,32 @@ const StoragePreparationChecklist: React.FC = memo(() => {
 
   // Show loading state while data is being loaded
   if (!isLoaded) {
-    console.log("StoragePreparationChecklist - Still loading data");
-    return <ChecklistLoading />;
+    return (
+      <div className="min-h-screen bg-[#080F1F] py-12">
+        <div className="container mx-auto px-4 max-w-5xl">
+          <Card className="border-gray-700 bg-[#091020] shadow-xl overflow-hidden">
+            <div className="p-6 border-b border-gray-700 space-y-4">
+              <Skeleton className="h-8 w-1/3 bg-gray-700" />
+              <Skeleton className="h-4 w-1/2 bg-gray-700" />
+              <div className="flex space-x-2">
+                <Skeleton className="h-10 w-24 bg-gray-700" />
+                <Skeleton className="h-10 w-24 bg-gray-700" />
+              </div>
+            </div>
+            <CardContent className="pt-6 space-y-6">
+              <Skeleton className="h-8 w-1/4 bg-gray-700" />
+              <div className="space-y-4">
+                {[1, 2, 3, 4, 5].map(i => (
+                  <Skeleton key={i} className="h-10 w-full bg-gray-700" />
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
+    );
   }
 
-  console.log("StoragePreparationChecklist - Rendering main content");
-  
   return (
     <div className="min-h-screen bg-[#080F1F] py-12 storage-preparation-checklist">
       <div className="container mx-auto px-4 max-w-5xl">
@@ -136,10 +134,8 @@ const StoragePreparationChecklist: React.FC = memo(() => {
             lastSavedAt={lastSavedAt}
             getLastSavedMessage={getLastSavedMessage}
             onSave={handleSaveProgress}
-            onReset={handleResetRequest}
-            onPrint={enhancedPrintHandler}
-            onExportPDF={enhancedExportPDFHandler}
-            isSaving={isSaving}
+            onReset={handleReset}
+            onPrint={handlePrint}
           />
           
           <CardContent className="pt-6">
@@ -150,19 +146,13 @@ const StoragePreparationChecklist: React.FC = memo(() => {
               setStartDate={setStartDate}
               setEndDate={setEndDate}
               notes={notes}
-              handleCheckboxChange={enhancedCheckboxHandler}
+              handleCheckboxChange={handleCheckboxChange}
               handleNotesChange={handleNotesChange}
               onTabChange={handleTabChange}
             />
           </CardContent>
         </Card>
       </div>
-
-      <ResetDialog 
-        open={resetDialogOpen} 
-        setOpen={setResetDialogOpen} 
-        onConfirm={handleResetConfirm} 
-      />
     </div>
   );
 });
