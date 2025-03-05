@@ -71,6 +71,27 @@
   .storage-preparation-checklist section {
     page-break-inside: avoid;
   }
+  
+  /* Print-friendly header image */
+  .storage-preparation-checklist .header-image {
+    max-height: 300px;
+    object-fit: contain;
+    margin-bottom: 20px;
+  }
+}
+
+/* Header image styling */
+.header-image-container {
+  width: 100%;
+  height: auto;
+  position: relative;
+  overflow: hidden;
+}
+
+.header-image {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
 }
 
 /* Loading state styles */
@@ -139,4 +160,3 @@
 .tab-content-wrapper {
   min-height: 500px;
 }
-

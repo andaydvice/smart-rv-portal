@@ -123,159 +123,163 @@ const StoragePreparationChecklist = () => {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-16">
-      <ChecklistHeader 
-        completionPercentage={completionPercentage} 
-        lastSavedAt={lastSavedAt}
-        getLastSavedMessage={getLastSavedMessage}
-        onSave={handleSave}
-        onReset={handleReset}
-        onPrint={handlePrint}
-        isSaving={isSaving}
-      />
-      
-      <Tabs 
-        value={activeTab} 
-        onValueChange={handleTabChange}
-        className="mt-8"
-      >
-        <TabsList className="storage-preparation-checklist mb-6 grid grid-cols-5 md:grid-cols-10 gap-1">
-          <ChecklistTabTrigger 
-            value="rv-info" 
-            icon="Clipboard"
-            label="RV Info"
-            onTabClick={() => saveDataWrapper(true)}
-          />
-          <ChecklistTabTrigger 
-            value="interior" 
-            icon="Home"
-            label="Interior"
-            onTabClick={() => saveDataWrapper(true)}
-          />
-          <ChecklistTabTrigger 
-            value="exterior" 
-            icon="Warehouse"
-            label="Exterior"
-            onTabClick={() => saveDataWrapper(true)}
-          />
-          <ChecklistTabTrigger 
-            value="mechanical" 
-            icon="Wrench"
-            label="Mechanical"
-            onTabClick={() => saveDataWrapper(true)}
-          />
-          <ChecklistTabTrigger 
-            value="electrical" 
-            icon="Zap"
-            label="Electrical"
-            onTabClick={() => saveDataWrapper(true)}
-          />
-          <ChecklistTabTrigger 
-            value="plumbing" 
-            icon="Droplets"
-            label="Plumbing"
-            onTabClick={() => saveDataWrapper(true)}
-          />
-          <ChecklistTabTrigger 
-            value="tires" 
-            icon="Disc"
-            label="Tires"
-            onTabClick={() => saveDataWrapper(true)}
-          />
-          <ChecklistTabTrigger 
-            value="pest-control" 
-            icon="Bug"
-            label="Pest Control"
-            onTabClick={() => saveDataWrapper(true)}
-          />
-          <ChecklistTabTrigger 
-            value="security" 
-            icon="ShieldCheck"
-            label="Security"
-            onTabClick={() => saveDataWrapper(true)}
-          />
-          <ChecklistTabTrigger 
-            value="notes" 
-            icon="FileText"
-            label="Notes"
-            onTabClick={() => saveDataWrapper(true)}
-          />
-        </TabsList>
+    <div className="max-w-full mx-auto px-0 sm:px-6 lg:px-8 pt-0 pb-16">
+      <div className="max-w-7xl mx-auto">
+        <ChecklistHeader 
+          completionPercentage={completionPercentage} 
+          lastSavedAt={lastSavedAt}
+          getLastSavedMessage={getLastSavedMessage}
+          onSave={handleSave}
+          onReset={handleReset}
+          onPrint={handlePrint}
+          isSaving={isSaving}
+        />
+        
+        <div className="px-4 sm:px-0">
+          <Tabs 
+            value={activeTab} 
+            onValueChange={handleTabChange}
+            className="mt-8"
+          >
+            <TabsList className="storage-preparation-checklist mb-6 grid grid-cols-5 md:grid-cols-10 gap-1">
+              <ChecklistTabTrigger 
+                value="rv-info" 
+                icon="Clipboard"
+                label="RV Info"
+                onTabClick={() => saveDataWrapper(true)}
+              />
+              <ChecklistTabTrigger 
+                value="interior" 
+                icon="Home"
+                label="Interior"
+                onTabClick={() => saveDataWrapper(true)}
+              />
+              <ChecklistTabTrigger 
+                value="exterior" 
+                icon="Warehouse"
+                label="Exterior"
+                onTabClick={() => saveDataWrapper(true)}
+              />
+              <ChecklistTabTrigger 
+                value="mechanical" 
+                icon="Wrench"
+                label="Mechanical"
+                onTabClick={() => saveDataWrapper(true)}
+              />
+              <ChecklistTabTrigger 
+                value="electrical" 
+                icon="Zap"
+                label="Electrical"
+                onTabClick={() => saveDataWrapper(true)}
+              />
+              <ChecklistTabTrigger 
+                value="plumbing" 
+                icon="Droplets"
+                label="Plumbing"
+                onTabClick={() => saveDataWrapper(true)}
+              />
+              <ChecklistTabTrigger 
+                value="tires" 
+                icon="Disc"
+                label="Tires"
+                onTabClick={() => saveDataWrapper(true)}
+              />
+              <ChecklistTabTrigger 
+                value="pest-control" 
+                icon="Bug"
+                label="Pest Control"
+                onTabClick={() => saveDataWrapper(true)}
+              />
+              <ChecklistTabTrigger 
+                value="security" 
+                icon="ShieldCheck"
+                label="Security"
+                onTabClick={() => saveDataWrapper(true)}
+              />
+              <ChecklistTabTrigger 
+                value="notes" 
+                icon="FileText"
+                label="Notes"
+                onTabClick={() => saveDataWrapper(true)}
+              />
+            </TabsList>
 
-        <TabsContent value="rv-info">
-          <RVInfoTab 
-            progress={progress}
-            startDate={startDate}
-            endDate={endDate}
-            setStartDate={setStartDate}
-            setEndDate={setEndDate}
-            handleCheckboxChange={handleCheckboxChange}
-          />
-        </TabsContent>
-        
-        <TabsContent value="interior">
-          <InteriorTab 
-            progress={progress}
-            handleCheckboxChange={handleCheckboxChange}
-          />
-        </TabsContent>
-        
-        <TabsContent value="exterior">
-          <ExteriorTab 
-            progress={progress}
-            handleCheckboxChange={handleCheckboxChange}
-          />
-        </TabsContent>
-        
-        <TabsContent value="mechanical">
-          <MechanicalTab 
-            progress={progress}
-            handleCheckboxChange={handleCheckboxChange}
-          />
-        </TabsContent>
-        
-        <TabsContent value="electrical">
-          <ElectricalTab 
-            progress={progress}
-            handleCheckboxChange={handleCheckboxChange}
-          />
-        </TabsContent>
-        
-        <TabsContent value="plumbing">
-          <PlumbingTab 
-            progress={progress}
-            handleCheckboxChange={handleCheckboxChange}
-          />
-        </TabsContent>
-        
-        <TabsContent value="tires">
-          <TiresTab 
-            progress={progress}
-            handleCheckboxChange={handleCheckboxChange}
-          />
-        </TabsContent>
-        
-        <TabsContent value="pest-control">
-          <PestControlTab 
-            progress={progress}
-            handleCheckboxChange={handleCheckboxChange}
-          />
-        </TabsContent>
-        
-        <TabsContent value="security">
-          <SecurityTab 
-            progress={progress}
-            handleCheckboxChange={handleCheckboxChange}
-          />
-        </TabsContent>
-        
-        <TabsContent value="notes">
-          <NotesTab 
-            notes={notes}
-            onNotesChange={handleNotesChange}
-          />
-        </TabsContent>
-      </Tabs>
+            <TabsContent value="rv-info">
+              <RVInfoTab 
+                progress={progress}
+                startDate={startDate}
+                endDate={endDate}
+                setStartDate={setStartDate}
+                setEndDate={setEndDate}
+                handleCheckboxChange={handleCheckboxChange}
+              />
+            </TabsContent>
+            
+            <TabsContent value="interior">
+              <InteriorTab 
+                progress={progress}
+                handleCheckboxChange={handleCheckboxChange}
+              />
+            </TabsContent>
+            
+            <TabsContent value="exterior">
+              <ExteriorTab 
+                progress={progress}
+                handleCheckboxChange={handleCheckboxChange}
+              />
+            </TabsContent>
+            
+            <TabsContent value="mechanical">
+              <MechanicalTab 
+                progress={progress}
+                handleCheckboxChange={handleCheckboxChange}
+              />
+            </TabsContent>
+            
+            <TabsContent value="electrical">
+              <ElectricalTab 
+                progress={progress}
+                handleCheckboxChange={handleCheckboxChange}
+              />
+            </TabsContent>
+            
+            <TabsContent value="plumbing">
+              <PlumbingTab 
+                progress={progress}
+                handleCheckboxChange={handleCheckboxChange}
+              />
+            </TabsContent>
+            
+            <TabsContent value="tires">
+              <TiresTab 
+                progress={progress}
+                handleCheckboxChange={handleCheckboxChange}
+              />
+            </TabsContent>
+            
+            <TabsContent value="pest-control">
+              <PestControlTab 
+                progress={progress}
+                handleCheckboxChange={handleCheckboxChange}
+              />
+            </TabsContent>
+            
+            <TabsContent value="security">
+              <SecurityTab 
+                progress={progress}
+                handleCheckboxChange={handleCheckboxChange}
+              />
+            </TabsContent>
+            
+            <TabsContent value="notes">
+              <NotesTab 
+                notes={notes}
+                onNotesChange={handleNotesChange}
+              />
+            </TabsContent>
+          </Tabs>
+        </div>
+      </div>
     </div>
   );
 };
