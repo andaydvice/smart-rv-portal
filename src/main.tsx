@@ -6,42 +6,35 @@ import './index.css';
 
 console.log('Starting application initialization...');
 
-const startApp = () => {
-  try {
-    const rootElement = document.getElementById('root');
-    
-    if (!rootElement) {
-      throw new Error('Root element not found');
-    }
-
-    console.log('Root element found, creating React root...');
-    
-    const root = ReactDOM.createRoot(rootElement);
-    
-    console.log('React root created, rendering App component...');
-    
-    root.render(
-      <React.StrictMode>
-        <App />
-      </React.StrictMode>
-    );
-
-    console.log('App component rendered successfully');
-
-    if (import.meta.hot) {
-      import.meta.hot.accept('./App', () => {
-        console.log('HMR update detected, re-rendering App component...');
-        root.render(
-          <React.StrictMode>
-            <App />
-          </React.StrictMode>
-        );
-      });
-    }
-  } catch (error) {
-    console.error('Failed to initialize application:', error);
-    throw error;
+document.addEventListener('DOMContentLoaded', () => {
+  const rootElement = document.getElementById('root');
+  
+  if (!rootElement) {
+    console.error('Root element not found');
+    return;
   }
-};
 
-startApp();
+  console.log('Root element found, creating React root...');
+  
+  const root = ReactDOM.createRoot(rootElement);
+  
+  console.log('React root created, rendering App component...');
+  
+  // Render without StrictMode in development to reduce double-rendering issues
+  root.render(<App />);
+
+  console.log('App component rendered successfully');
+});
+
+// Backup initialization in case DOMContentLoaded already fired
+if (document.readyState === 'complete' || document.readyState === 'interactive') {
+  console.log('Document already loaded, initializing app directly');
+  setTimeout(() => {
+    const rootElement = document.getElementById('root');
+    if (rootElement && !rootElement.hasChildNodes()) {
+      console.log('Root element found empty, creating React root...');
+      const root = ReactDOM.createRoot(rootElement);
+      root.render(<App />);
+    }
+  }, 1);
+}
