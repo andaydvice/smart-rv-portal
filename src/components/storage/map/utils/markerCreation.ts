@@ -17,46 +17,31 @@ export function createFacilityMarker(
   // Apply critical styling directly to element for guaranteed visibility
   Object.assign(el.style, {
     backgroundColor: isHighlighted ? '#10B981' : '#F97316',
-    zIndex: isHighlighted ? '9999' : '9998',
-    visibility: 'visible !important',
-    display: 'block !important',
-    opacity: '1 !important',
-    pointerEvents: 'all !important',
-    cursor: 'pointer',
-    position: 'absolute',
-    transform: `translate(-50%, -50%) scale(${isHighlighted ? 1.2 : 1})`,
-    boxShadow: isHighlighted ? '0 0 20px rgba(16, 185, 129, 0.8)' : '0 0 10px rgba(0,0,0,0.8)',
     width: '24px',
     height: '24px',
     borderRadius: '50%',
-    border: '2px solid white'
+    border: '2px solid white',
+    cursor: 'pointer',
+    boxShadow: isHighlighted ? '0 0 20px rgba(16, 185, 129, 0.8)' : '0 0 10px rgba(0,0,0,0.8)',
+    position: 'absolute',
+    transform: `translate(-50%, -50%) scale(${isHighlighted ? 1.2 : 1})`,
+    zIndex: isHighlighted ? '9999' : '9998',
+    visibility: 'visible',
+    display: 'block',
+    opacity: '1',
+    pointerEvents: 'all'
   });
   
-  // Set data attributes for stable selection
+  // Set data attributes for facility identification
   el.setAttribute('data-facility-id', facility.id);
-  el.setAttribute('data-marker-persistent', 'true');
+  el.setAttribute('data-marker-type', 'facility');
   
-  // Create popup with rich content
+  // Create popup with facility information
   const popup = new mapboxgl.Popup({
     closeButton: true,
     closeOnClick: false,
     maxWidth: '300px',
     className: 'facility-popup'
-  });
-  
-  // Make sure popup doesn't automatically close when clicking elsewhere
-  popup.on('open', () => {
-    setTimeout(() => {
-      const popupElement = popup.getElement();
-      if (popupElement) {
-        popupElement.style.zIndex = '10000';
-        popupElement.style.visibility = 'visible';
-        popupElement.style.display = 'block';
-        popupElement.style.opacity = '1';
-        popupElement.style.pointerEvents = 'all';
-        popupElement.setAttribute('data-facility-id', facility.id);
-      }
-    }, 10);
   });
   
   // Set popup content
@@ -72,24 +57,21 @@ export function createFacilityMarker(
   // Create marker and attach popup
   const marker = new mapboxgl.Marker({
     element: el,
-    anchor: 'center',
-    draggable: false,
-    offset: [0, 0]
+    anchor: 'center'
   })
   .setLngLat(coordinates)
   .setPopup(popup);
   
-  // Add marker to map immediately if it's loaded
+  // Add marker to map immediately if map is ready
   if (map && map.loaded()) {
     try {
       marker.addTo(map);
     } catch (err) {
-      console.error(`Error adding marker for ${facility.name}:`, err);
-      
-      // Retry once after a short delay
+      console.error(`Error adding marker to map:`, err);
+      // Retry after a short delay
       setTimeout(() => {
         try {
-          if (!marker.getElement().isConnected && map) {
+          if (!marker.getElement().isConnected) {
             marker.addTo(map);
           }
         } catch (retryErr) {
@@ -104,30 +86,30 @@ export function createFacilityMarker(
     e.stopPropagation();
     onClick(facility.id);
     
-    // Toggle popup with force-open behavior
+    // Force popup to stay open
     if (!popup.isOpen()) {
       popup.addTo(map);
     }
     
-    // Ensure popup stays visible and gets proper styling
-    setTimeout(() => {
-      const popupEl = popup.getElement();
-      if (popupEl) {
-        popupEl.style.zIndex = '10000';
-        popupEl.style.visibility = 'visible';
-        popupEl.style.display = 'block';
-        popupEl.style.opacity = '1';
-        popupEl.style.pointerEvents = 'all';
-      }
+    // Ensure popup has proper styling
+    const popupEl = popup.getElement();
+    if (popupEl) {
+      Object.assign(popupEl.style, {
+        zIndex: '10000',
+        visibility: 'visible',
+        display: 'block',
+        opacity: '1',
+        pointerEvents: 'all'
+      });
       
-      // Add event listener to View Details button inside popup
-      const viewButton = popupEl?.querySelector('.view-facility-btn');
+      // Add click event to the view details button inside popup
+      const viewButton = popupEl.querySelector('.view-facility-btn');
       if (viewButton) {
         viewButton.addEventListener('click', () => {
           onClick(facility.id);
         });
       }
-    }, 50);
+    }
   });
   
   return marker;
