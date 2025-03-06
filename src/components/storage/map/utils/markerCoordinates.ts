@@ -1,0 +1,84 @@
+
+import { StorageFacility } from '../../types';
+
+// Track coordinates that are too close together
+export interface CoordinateMap {
+  [key: string]: number;
+}
+
+/**
+ * Creates and applies a coordinate offset for overlapping markers
+ */
+export const calculateMarkerOffset = (
+  facility: StorageFacility,
+  coordinatesMap: CoordinateMap,
+  facilities: StorageFacility[],
+  index: number
+): [number, number] => {
+  // Extract and normalize coordinates
+  let lat = typeof facility.latitude === 'string' ? parseFloat(facility.latitude) : Number(facility.latitude);
+  let lng = typeof facility.longitude === 'string' ? parseFloat(facility.longitude) : Number(facility.longitude);
+  
+  // Handle invalid coordinates
+  if (isNaN(lat) || isNaN(lng)) {
+    console.warn(`⚠️ Warning: Invalid numeric coordinates for ${facility.name}, using default coordinates`);
+    lat = 39.8283; // Default to center of USA if coordinates are invalid
+    lng = -98.5795;
+  }
+  
+  // Round coordinates for grouping nearby points
+  const roundedLat = Math.round(lat * 100000) / 100000;
+  const roundedLng = Math.round(lng * 100000) / 100000;
+  const coordKey = `${roundedLat},${roundedLng}`;
+  
+  // Only add offset if there are multiple markers at this location
+  let offsetLat = lat;
+  let offsetLng = lng;
+  
+  if (coordinatesMap[coordKey] > 1) {
+    // Get the marker position in the stack
+    const markersAtCoord = coordinatesMap[coordKey];
+    const markerPosition = facilities.slice(0, index)
+      .filter(f => {
+        const fLat = Number(f.latitude);
+        const fLng = Number(f.longitude);
+        const fRoundedLat = Math.round(fLat * 100000) / 100000;
+        const fRoundedLng = Math.round(fLng * 100000) / 100000;
+        return `${fRoundedLat},${fRoundedLng}` === coordKey;
+      }).length;
+    
+    // Apply spiral pattern offset
+    const angle = (markerPosition * (2 * Math.PI)) / markersAtCoord;
+    const radius = 0.0005 * (markerPosition + 1); // Increased offset for better visibility
+    
+    offsetLat = lat + radius * Math.sin(angle);
+    offsetLng = lng + radius * Math.cos(angle);
+  }
+  
+  return [offsetLng, offsetLat];
+};
+
+/**
+ * Builds a coordinate map to identify overlapping markers
+ */
+export const buildCoordinatesMap = (facilities: StorageFacility[]): CoordinateMap => {
+  const coordinatesMap: CoordinateMap = {};
+  
+  facilities.forEach(facility => {
+    if (facility.latitude !== null && facility.longitude !== null) {
+      // Round to 5 decimal places for grouping nearby coordinates
+      const roundedLat = Math.round(Number(facility.latitude) * 100000) / 100000;
+      const roundedLng = Math.round(Number(facility.longitude) * 100000) / 100000;
+      const coordKey = `${roundedLat},${roundedLng}`;
+      
+      // Count overlapping markers
+      if (coordinatesMap[coordKey]) {
+        coordinatesMap[coordKey]++;
+      } else {
+        coordinatesMap[coordKey] = 1;
+      }
+    }
+  });
+  
+  return coordinatesMap;
+};
