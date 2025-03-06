@@ -23,9 +23,9 @@ export const calculateMarkerOffset = (
   
   // Handle invalid coordinates
   if (isNaN(lat) || isNaN(lng)) {
-    console.warn(`⚠️ Warning: Invalid numeric coordinates for ${facility.name}, using 0,0 instead`);
-    lat = 0;
-    lng = 0;
+    console.warn(`⚠️ Warning: Invalid numeric coordinates for ${facility.name}, using default coordinates`);
+    lat = 39.8283; // Default to center of USA if coordinates are invalid
+    lng = -98.5795;
   }
   
   // Round coordinates for grouping nearby points
@@ -95,8 +95,8 @@ export const createFacilityMarker = (
   onMarkerClick: (facilityId: string) => void,
   map: mapboxgl.Map
 ): mapboxgl.Marker => {
-  // Use same marker color for all pins, only highlight the selected one
-  const markerColor = isHighlighted ? '#10B981' : '#60A5FA';
+  // Use more visible marker colors
+  const markerColor = isHighlighted ? '#10B981' : '#F97316'; // Changed to orange for better visibility
   
   // Create popup
   const popup = new mapboxgl.Popup({
@@ -105,9 +105,10 @@ export const createFacilityMarker = (
     className: 'storage-facility-popup'
   }).setHTML(createPopupHTML(facility));
 
-  // Create marker
+  // Create marker with larger size for better visibility
   const marker = new mapboxgl.Marker({
-    color: markerColor
+    color: markerColor,
+    scale: 1.2 // Slightly larger markers
   })
     .setLngLat(coordinates)
     .setPopup(popup)
@@ -126,10 +127,18 @@ export const createFacilityMarker = (
  * @returns true if coordinates are valid, false otherwise
  */
 export const hasValidCoordinates = (facility: StorageFacility): boolean => {
-  return !(
+  if (
     facility.latitude === null || 
     facility.longitude === null || 
     facility.latitude === undefined || 
     facility.longitude === undefined
-  );
+  ) {
+    return false;
+  }
+  
+  // Convert to numbers and check if they're valid
+  const lat = Number(facility.latitude);
+  const lng = Number(facility.longitude);
+  
+  return !isNaN(lat) && !isNaN(lng);
 };

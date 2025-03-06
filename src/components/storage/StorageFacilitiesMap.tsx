@@ -1,7 +1,7 @@
 
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card } from '@/components/ui/card';
 import FilterPanel from './FilterPanel';
 import { FilterState } from './types';
@@ -15,6 +15,7 @@ import LoadingStateDisplay from './map-view/LoadingStateDisplay';
 import FacilityList from './map-view/FacilityList';
 import { useMapToken } from './map-view/useMapToken';
 import { useFacilitySelection } from './map-view/useFacilitySelection';
+import { toast } from "sonner";
 
 const StorageFacilitiesMap = () => {
   const [filters, setFilters] = useState<FilterState>({
@@ -41,6 +42,14 @@ const StorageFacilitiesMap = () => {
   } = useFacilitySelection({ 
     addToRecentlyViewed 
   });
+  
+  // Log when facilities are loaded to help with debugging
+  useEffect(() => {
+    if (filteredFacilities?.length) {
+      console.log(`Loaded ${filteredFacilities.length} storage facilities`);
+      toast.success(`Loaded ${filteredFacilities.length} storage facilities`);
+    }
+  }, [filteredFacilities?.length]);
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 min-h-[800px]">
@@ -66,7 +75,7 @@ const StorageFacilitiesMap = () => {
         </div>
       </div>
       <div className="lg:col-span-8 flex flex-col space-y-4">
-        <Card className="h-[600px] bg-[#080F1F] relative overflow-hidden">
+        <Card className="h-[600px] bg-[#080F1F] relative overflow-hidden border-gray-700">
           {(!mapToken) ? (
             <Alert variant="destructive" className="m-4">
               <AlertCircle className="h-4 w-4" />

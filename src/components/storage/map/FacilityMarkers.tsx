@@ -55,59 +55,62 @@ const FacilityMarkers: React.FC<FacilityMarkersProps> = ({
     // Build coordinates map to identify overlapping markers
     const coordinatesMap = buildCoordinatesMap(facilities);
     
-    // Create markers for each facility
-    facilities.forEach((facility, index) => {
-      try {
-        // Check if this is a New York facility
-        const isNY = isNewYorkFacility(facility);
-        if (isNY) {
-          processedNY++;
-        }
-        
-        // Skip facilities with missing coordinates
-        if (!hasValidCoordinates(facility)) {
-          console.warn(`⚠️ Skipping facility due to missing coordinates: ${facility.name}`);
+    // Force marker display by adding a small delay to ensure map is ready
+    setTimeout(() => {
+      // Create markers for each facility
+      facilities.forEach((facility, index) => {
+        try {
+          // Check if facility has valid coordinates
+          if (!hasValidCoordinates(facility)) {
+            console.warn(`⚠️ Skipping facility due to missing coordinates: ${facility.name}`);
+            skipped++;
+            return;
+          }
+
+          // Check if this is a New York facility
+          const isNY = isNewYorkFacility(facility);
+          if (isNY) {
+            processedNY++;
+          }
+          
+          // Calculate marker coordinates with offset for overlapping markers
+          const coordinates = calculateMarkerOffset(facility, coordinatesMap, facilities, index);
+          
+          // Log detailed information for New York facilities
+          if (isNY) {
+            logNewYorkFacilityDetails(facility, processedNY, coordinates);
+          }
+          
+          // Create the marker
+          const marker = createFacilityMarker(
+            facility,
+            coordinates,
+            facility.id === highlightedFacility,
+            onMarkerClick,
+            map
+          );
+
+          // Track marker for later cleanup
+          markers.current.push(marker);
+        } catch (error) {
+          console.error(`🚫 Error creating marker for ${facility.name}:`, error);
           skipped++;
-          return;
         }
+      });
 
-        // Calculate marker coordinates with offset for overlapping markers
-        const coordinates = calculateMarkerOffset(facility, coordinatesMap, facilities, index);
-        
-        // Log detailed information for New York facilities
-        if (isNY) {
-          logNewYorkFacilityDetails(facility, processedNY, coordinates);
-        }
-        
-        // Create the marker
-        const marker = createFacilityMarker(
-          facility,
-          coordinates,
-          facility.id === highlightedFacility,
-          onMarkerClick,
-          map
-        );
-
-        // Track marker for later cleanup
-        markers.current.push(marker);
-      } catch (error) {
-        console.error(`🚫 Error creating marker for ${facility.name}:`, error);
-        skipped++;
-      }
-    });
-
-    // Update statistics
-    setStats({
-      markersCreated: markers.current.length,
-      skippedFacilities: skipped,
-      processedNYFacilities: processedNY,
-      totalFacilities: facilities.length,
-      totalNYFacilities: nyFacilitiesCount
-    });
-    
-    // Log summary
-    console.log(`✅ Created ${markers.current.length} markers on the map out of ${facilities.length} facilities (${skipped} skipped)`);
-    console.log(`✅ Processed ${processedNY} New York facilities out of ${nyFacilitiesCount} total NY facilities`);
+      // Update statistics
+      setStats({
+        markersCreated: markers.current.length,
+        skippedFacilities: skipped,
+        processedNYFacilities: processedNY,
+        totalFacilities: facilities.length,
+        totalNYFacilities: nyFacilitiesCount
+      });
+      
+      // Log summary
+      console.log(`✅ Created ${markers.current.length} markers on the map out of ${facilities.length} facilities (${skipped} skipped)`);
+      console.log(`✅ Processed ${processedNY} New York facilities out of ${nyFacilitiesCount} total NY facilities`);
+    }, 500);
 
     // Cleanup function
     return () => {

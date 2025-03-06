@@ -149,12 +149,11 @@ const MapView = ({
       {map.current && mapLoaded && (
         <>
           <MapControls map={map.current} />
-          {/* Disable clustering temporarily for debugging */}
-          {/* <ClusterLayer
+          <ClusterLayer
             map={map.current}
             facilities={facilities}
             highlightedFacility={highlightedFacility}
-          /> */}
+          />
           <FacilityMarkers
             map={map.current}
             facilities={facilities}
