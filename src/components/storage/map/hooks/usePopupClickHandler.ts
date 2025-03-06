@@ -2,27 +2,31 @@
 import { useEffect } from 'react';
 
 /**
- * Hook to handle global click events to prevent popups from closing unintentionally
+ * Hook to set up global handlers for map popups
+ * Ensures popups don't close when clicking on the map
  */
 export const usePopupClickHandler = () => {
   useEffect(() => {
-    const handleGlobalClick = (e: MouseEvent) => {
-      // Check if clicked element is part of a popup
-      const isPopupClick = (e.target as HTMLElement)?.closest('.mapboxgl-popup');
-      const isMarkerClick = (e.target as HTMLElement)?.closest('.custom-marker');
+    // Global handler to prevent closing popups when clicking outside them
+    const handleDocumentClick = (e: MouseEvent) => {
+      // If we're clicking on a popup or marker, don't do anything special
+      if ((e.target as HTMLElement)?.closest('.mapboxgl-popup') || 
+          (e.target as HTMLElement)?.closest('.custom-marker')) {
+        return;
+      }
       
-      if (isPopupClick || isMarkerClick) {
-        // Stop event from reaching map and closing popup
-        e.stopPropagation();
-        console.log('Global click handler: prevented click from closing popup');
+      // If we're clicking on the map canvas directly
+      if ((e.target as HTMLElement)?.classList.contains('mapboxgl-canvas')) {
+        console.log('Click on map canvas detected, ensuring popups stay open');
       }
     };
-
-    // Use capture phase to intercept events before they reach map
-    document.addEventListener('click', handleGlobalClick, true);
     
+    // Add global document click listener
+    document.addEventListener('click', handleDocumentClick, true);
+    
+    // Cleanup
     return () => {
-      document.removeEventListener('click', handleGlobalClick, true);
+      document.removeEventListener('click', handleDocumentClick, true);
     };
   }, []);
 };

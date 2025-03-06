@@ -9,7 +9,7 @@ import { createFacilityMarker } from './markerCreation';
 
 import { hasValidCoordinates } from './markerValidation';
 
-// Re-export the type with the "export type" syntax
+// Re-export type with the proper "export type" syntax
 import type { CoordinateMap } from './markerCoordinates';
 
 export {
@@ -24,5 +24,5 @@ export {
   hasValidCoordinates
 };
 
-// Re-export the type properly
+// Re-export the type properly using export type
 export type { CoordinateMap };
