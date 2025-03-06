@@ -13,8 +13,11 @@ const queryClient = new QueryClient({
       staleTime: 1000 * 60 * 5, // 5 minutes
       refetchOnWindowFocus: false,
       retry: 1,
-      onError: (error) => {
-        console.error('Query error:', error);
+      // Using the correct error handling API for @tanstack/react-query v5+
+      meta: {
+        onError: (error: Error) => {
+          console.error('Query error:', error);
+        }
       }
     },
   },
