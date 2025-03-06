@@ -29,6 +29,17 @@ export const useCreateNewMarker = () => {
     index: number
   ): mapboxgl.Marker | null => {
     try {
+      // Ensure map is fully loaded before creating markers
+      if (!map || !map.loaded()) {
+        console.warn(`Map not loaded for marker: ${facility.name}`);
+        setTimeout(() => {
+          if (map && map.loaded()) {
+            createMarker(facility, map, isHighlighted, onMarkerClick, facilities, index);
+          }
+        }, 500);
+        return null;
+      }
+      
       // Check if facility has valid coordinates
       if (!hasValidCoordinates(facility)) {
         addError(facility, new Error('Missing coordinates'), 'INVALID_COORDINATES');
@@ -40,6 +51,8 @@ export const useCreateNewMarker = () => {
       const coordinatesMap = buildCoordinatesMap(facilities);
       const coordinates = calculateMarkerOffset(facility, coordinatesMap, facilities, index);
       
+      console.log(`Creating marker for: ${facility.name} at coordinates:`, coordinates);
+      
       // Create the marker with explicit map reference for reliable addition
       const marker = createFacilityMarker(
         facility,
@@ -49,13 +62,26 @@ export const useCreateNewMarker = () => {
         map
       );
 
-      // Add marker to the DOM with explicit addTo call to ensure it's added to the map
-      marker.addTo(map);
-
       // Explicitly set popup options to prevent automatic closing
       const popup = marker.getPopup();
-      popup.options.closeOnClick = false;
-      popup.options.closeButton = true;
+      if (popup) {
+        popup.options.closeOnClick = false;
+        popup.options.closeButton = true;
+      }
+      
+      // Aggressive approach: Add marker to the map multiple times to ensure it appears
+      marker.addTo(map);
+      
+      // Force a second attachment after a small delay to ensure it's added
+      setTimeout(() => {
+        if (map && marker) {
+          if (!marker.getElement().isConnected) {
+            console.log(`Re-adding marker for ${facility.name} to ensure visibility`);
+            marker.addTo(map);
+          }
+          enhanceMarkerVisibility(marker);
+        }
+      }, 100);
       
       // Get marker element and apply click handler
       const markerElement = marker.getElement();
@@ -77,7 +103,10 @@ export const useCreateNewMarker = () => {
       enhanceMarkerVisibility(marker);
       
       // Store marker in global registry to prevent garbage collection
-      if (window._persistentMarkers) {
+      if (typeof window !== 'undefined') {
+        if (!window._persistentMarkers) {
+          window._persistentMarkers = {};
+        }
         window._persistentMarkers[facility.id] = marker;
       }
       
@@ -118,32 +147,55 @@ export const useCreateNewMarker = () => {
   const enhanceMarkerVisibility = (marker: mapboxgl.Marker) => {
     const el = marker.getElement();
     if (el) {
-      // IMPORTANT: Using !important flags for critical CSS properties
-      el.style.cssText += `
+      // CRITICAL: Apply extremely aggressive styling to force visibility
+      el.style.cssText = `
         visibility: visible !important;
         opacity: 1 !important;
         display: block !important;
-        z-index: 1000 !important;
+        z-index: 9999 !important;
         pointer-events: all !important;
+        position: absolute !important;
+        transform: translate(-50%, -50%) !important;
+        width: 24px !important;
+        height: 24px !important;
+        border-radius: 50% !important;
+        background-color: ${el.getAttribute('data-highlighted') === 'true' ? '#10B981' : '#F97316'} !important;
+        border: 3px solid white !important;
+        box-shadow: 0 0 10px rgba(0,0,0,0.8) !important;
       `;
       
       // Set persistent data attribute
       el.setAttribute('data-persistent', 'true');
-      el.setAttribute('data-facility-id', marker.getPopup()._content.dataset.facilityId);
+      el.setAttribute('data-facility-id', marker.getPopup()._content.dataset.facilityId || 'unknown');
       
       // Enhance popup visibility when it opens
-      marker.getPopup().on('open', () => {
-        setTimeout(() => {
-          const popupEl = marker.getPopup().getElement();
-          if (popupEl) {
-            popupEl.style.cssText += `
-              z-index: 1100 !important;
-              visibility: visible !important;
-              pointer-events: all !important;
-            `;
-          }
-        }, 50);
-      });
+      const popup = marker.getPopup();
+      if (popup) {
+        popup.on('open', () => {
+          setTimeout(() => {
+            const popupEl = popup.getElement();
+            if (popupEl) {
+              popupEl.style.cssText += `
+                z-index: 10000 !important;
+                visibility: visible !important;
+                pointer-events: all !important;
+                display: block !important;
+              `;
+              
+              // Find close button and ensure it's visible
+              const closeButton = popupEl.querySelector('.mapboxgl-popup-close-button');
+              if (closeButton && closeButton instanceof HTMLElement) {
+                closeButton.style.cssText += `
+                  visibility: visible !important;
+                  display: block !important;
+                  z-index: 10001 !important;
+                  pointer-events: all !important;
+                `;
+              }
+            }
+          }, 50);
+        });
+      }
     }
   };
 
