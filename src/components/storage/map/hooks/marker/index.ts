@@ -9,5 +9,12 @@ export * from './useMarkerStats';
 export * from './useProcessExistingMarkers';
 export * from './useCreateNewMarker';
 export * from './useMarkerClickHandlers';
-export * from './useMarkerErrorHandling';
+
+// Export types from types.ts
 export * from './types';
+
+// Export useMarkerErrorHandling without re-exporting MarkerError which is already exported from types.ts
+export { 
+  useMarkerErrorHandling,
+  type UseMarkerErrorHandlingReturn 
+} from './useMarkerErrorHandling';

@@ -1,4 +1,4 @@
-
+<lov-codelov-code>
 import mapboxgl from 'mapbox-gl';
 import { StorageFacility } from '../../../types';
 import { 
@@ -9,6 +9,7 @@ import {
 } from '../../utils/markerUtils';
 import { useMarkerClickHandlers } from './useMarkerClickHandlers';
 import { useMarkerErrorHandling } from './useMarkerErrorHandling';
+import { MarkerError } from './types';
 
 export const useCreateNewMarker = () => {
   const { applyClickHandlerToMarker } = useMarkerClickHandlers();
@@ -151,3 +152,4 @@ export const useCreateNewMarker = () => {
     enhanceMarkerVisibility
   };
 };
+</lov-code>

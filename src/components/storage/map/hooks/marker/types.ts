@@ -32,6 +32,7 @@ export interface UseMarkerPersistenceProps {
   map: mapboxgl.Map | null;
 }
 
+// Define MarkerError interface once here to avoid duplication
 export interface MarkerError {
   facilityId: string;
   facilityName: string;
