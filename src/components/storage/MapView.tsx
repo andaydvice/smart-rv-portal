@@ -128,9 +128,14 @@ const MapView = ({
 
         console.log('Creating new map instance');
         
+        // Reference the DOM element before using it
+        const mapContainerEl = mapContainer.current;
+        if (!mapContainerEl) {
+          throw new Error('Map container element not found');
+        }
+        
         // Create new map instance with the existing ref
-        const mapContainerElement = mapContainer.current;
-        const newMap = createMapInstance(mapContainerElement, mapToken);
+        const newMap = createMapInstance(mapContainerEl, mapToken);
 
         // Wait for style to load
         console.log('Waiting for map style to load');
@@ -174,11 +179,6 @@ const MapView = ({
           setIsInitializing(false);
           setMapLoaded(true);
           toast.success('Map loaded successfully');
-          
-          // If we have a selected state, adjust the map view
-          if (selectedState && facilities.length > 0) {
-            fitMapToBounds(newMap, facilities);
-          }
         }
 
       } catch (err) {
@@ -205,7 +205,7 @@ const MapView = ({
         map.current = null;
       }
     };
-  }, [mapToken, selectedState, facilities]);
+  }, [mapToken]);
 
   // Update map bounds when facilities change
   useEffect(() => {
