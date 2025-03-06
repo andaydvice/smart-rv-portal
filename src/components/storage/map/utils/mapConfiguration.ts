@@ -46,9 +46,19 @@ export const applyMapStyles = () => {
     }
     .custom-marker {
       cursor: pointer !important;
-      z-index: 999 !important;
+      z-index: 2000 !important;
       transform: translate(-50%, -50%);
       position: absolute;
+      display: block !important;
+      width: 40px !important;
+      height: 40px !important;
+      border-radius: 50% !important;
+      background-color: #F97316 !important;
+      border: 4px solid white !important;
+      box-shadow: 0 0 15px rgba(0,0,0,0.8) !important;
+      pointer-events: auto !important;
+      visibility: visible !important;
+      opacity: 1 !important;
     }
     .marker-inner {
       width: 100%;
@@ -83,8 +93,36 @@ export const applyMapStyles = () => {
       top: 5px !important;
       right: 5px !important;
     }
+    
+    /* Ensure marker visibility */
+    .mapboxgl-marker {
+      z-index: 2000 !important;
+      visibility: visible !important;
+      opacity: 1 !important;
+      pointer-events: auto !important;
+    }
+    
+    /* Fix marker container visibility */
+    .mapboxgl-marker svg,
+    .mapboxgl-marker div {
+      display: block !important;
+      visibility: visible !important;
+      opacity: 1 !important;
+    }
   `;
   document.head.appendChild(style);
+  
+  // Force marker visibility on window resize
+  window.addEventListener('resize', () => {
+    const markers = document.querySelectorAll('.mapboxgl-marker');
+    markers.forEach(marker => {
+      if (marker instanceof HTMLElement) {
+        marker.style.visibility = 'visible';
+        marker.style.opacity = '1';
+        marker.style.zIndex = '2000';
+      }
+    });
+  });
   
   return () => {
     document.head.removeChild(style);
@@ -108,4 +146,17 @@ export const configureMapSettings = (map: mapboxgl.Map): void => {
     [-180, -85], // Southwest coordinates
     [180, 85]    // Northeast coordinates
   ]);
+  
+  // Add custom layer to ensure markers show above all map layers
+  map.on('load', () => {
+    if (!map.getLayer('markers-layer')) {
+      map.addLayer({
+        id: 'markers-layer',
+        type: 'background',
+        paint: {
+          'background-opacity': 0
+        }
+      });
+    }
+  });
 };

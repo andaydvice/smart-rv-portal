@@ -61,8 +61,11 @@ const FacilityMarkers: React.FC<FacilityMarkersProps> = ({
           const el = marker.getElement();
           if (el) {
             el.style.backgroundColor = isHighlighted ? '#10B981' : '#F97316';
-            el.style.zIndex = isHighlighted ? '1000' : '1';
-            el.style.transform = isHighlighted ? 'scale(1.2)' : 'scale(1)';
+            el.style.zIndex = isHighlighted ? '2000' : '1000';
+            el.style.transform = `translate(-50%, -50%) scale(${isHighlighted ? 1.2 : 1})`;
+            el.style.boxShadow = isHighlighted ? 
+              '0 0 20px rgba(16, 185, 129, 0.8)' : 
+              '0 0 15px rgba(0,0,0,0.8)';
           }
           
           if (isHighlighted) {
@@ -131,6 +134,21 @@ const FacilityMarkers: React.FC<FacilityMarkersProps> = ({
             map
           );
 
+          // Add marker to DOM if it wasn't done automatically
+          const markerEl = marker.getElement();
+          if (markerEl && !document.body.contains(markerEl)) {
+            map.getCanvasContainer().appendChild(markerEl);
+          }
+
+          // Force the marker to be visible
+          const el = marker.getElement();
+          if (el) {
+            el.style.visibility = 'visible';
+            el.style.opacity = '1';
+            el.style.display = 'block';
+            el.style.pointerEvents = 'auto';
+          }
+
           // Track marker for later cleanup
           markers.current.push(marker);
           created++;
@@ -161,21 +179,32 @@ const FacilityMarkers: React.FC<FacilityMarkersProps> = ({
       }
     };
 
-    if (map && facilities.length > 0) {
-      // Check if map is loaded
-      if (!map.loaded()) {
-        console.log('Map not yet loaded, waiting for load event');
-        const onLoad = () => {
-          if (isMounted.current) {
-            createMarkers();
-          }
-          map.off('load', onLoad);
-        };
-        map.on('load', onLoad);
-      } else {
-        createMarkers();
+    // Force marker creation after map is fully rendered
+    const attemptMarkerCreation = () => {
+      if (map && facilities.length > 0) {
+        // Check if map is loaded
+        if (!map.loaded()) {
+          console.log('Map not yet loaded, waiting for load event');
+          map.once('load', () => {
+            if (isMounted.current) {
+              setTimeout(createMarkers, 100);
+            }
+          });
+        } else {
+          createMarkers();
+          
+          // Add a safety timeout to ensure markers are created even if there were issues
+          setTimeout(() => {
+            if (isMounted.current && markers.current.length === 0) {
+              console.log('No markers created on first attempt, trying again...');
+              createMarkers();
+            }
+          }, 1000);
+        }
       }
-    }
+    };
+    
+    attemptMarkerCreation();
     
     // Cleanup function
     return () => {

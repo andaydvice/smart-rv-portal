@@ -20,15 +20,27 @@ export const createFacilityMarker = (
   const el = document.createElement('div');
   el.className = 'custom-marker';
   el.innerHTML = '<div class="marker-inner"></div>';
-  el.style.width = '30px'; // Increased size
-  el.style.height = '30px'; // Increased size
+  el.style.width = '40px'; // Increased size for better visibility
+  el.style.height = '40px'; // Increased size for better visibility
   el.style.borderRadius = '50%';
   el.style.backgroundColor = markerColor;
-  el.style.border = '3px solid white'; // Added white border
-  el.style.boxShadow = '0 0 10px rgba(0,0,0,0.7)'; // Added shadow
+  el.style.border = '4px solid white'; // Thicker white border
+  el.style.boxShadow = '0 0 15px rgba(0,0,0,0.8)'; // Enhanced shadow
   el.style.cursor = 'pointer';
-  el.style.zIndex = isHighlighted ? '1000' : '1';
+  el.style.position = 'absolute'; // Ensure correct positioning
+  el.style.transform = 'translate(-50%, -50%)'; // Center the marker
+  el.style.zIndex = isHighlighted ? '2000' : '1000'; // Ensure markers are above map layers
   el.setAttribute('data-facility-id', facility.id);
+  
+  // Add animation for better visibility
+  const innerEl = el.querySelector('.marker-inner');
+  if (innerEl instanceof HTMLElement) {
+    innerEl.style.width = '100%';
+    innerEl.style.height = '100%';
+    innerEl.style.borderRadius = '50%';
+    innerEl.style.opacity = '0.6';
+    innerEl.style.animation = 'pulse 2s infinite';
+  }
   
   // Create a persistent popup
   const popup = new mapboxgl.Popup({
@@ -37,7 +49,8 @@ export const createFacilityMarker = (
     className: 'storage-facility-popup',
     closeButton: true,
     closeOnClick: false, // Critical: prevent popup from closing when clicking map
-    anchor: 'bottom'
+    anchor: 'bottom',
+    focusAfterOpen: false // Don't steal focus when opening
   });
   
   // Set the popup content
@@ -52,8 +65,8 @@ export const createFacilityMarker = (
   // Create marker with custom element
   const marker = new mapboxgl.Marker({
     element: el,
-    anchor: 'bottom',
-    offset: [0, -5]
+    anchor: 'center', // Use center anchor for better positioning
+    offset: [0, 0] // Reset offset as we're using center anchor
   })
     .setLngLat(coordinates)
     .setPopup(popup)
@@ -78,6 +91,25 @@ export const createFacilityMarker = (
   // Add event listeners to popup element to prevent click bubbling
   popup.on('open', () => {
     console.log(`Popup opened for ${facility.name}`);
+    
+    // Apply additional styles to ensure popup content is visible
+    const popupEl = popup.getElement();
+    if (popupEl) {
+      popupEl.style.zIndex = '10000';
+      popupEl.style.pointerEvents = 'auto';
+      
+      // Ensure popup content is styled properly
+      const contentEl = popupEl.querySelector('.mapboxgl-popup-content');
+      if (contentEl instanceof HTMLElement) {
+        contentEl.style.zIndex = '10000';
+        contentEl.style.pointerEvents = 'auto';
+        contentEl.style.backgroundColor = '#151A22';
+        contentEl.style.color = 'white';
+        contentEl.style.borderRadius = '8px';
+        contentEl.style.padding = '15px';
+        contentEl.style.boxShadow = '0 4px 12px rgba(0,0,0,0.2)';
+      }
+    }
   });
   
   return marker;
