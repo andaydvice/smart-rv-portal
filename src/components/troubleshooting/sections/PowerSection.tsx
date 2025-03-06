@@ -1,3 +1,4 @@
+
 import { Power, Clock, AlertTriangle, HelpCircle } from "lucide-react";
 import {
   AccordionContent,
@@ -7,7 +8,6 @@ import {
 import {
   Tooltip,
   TooltipContent,
-  TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 
@@ -29,16 +29,14 @@ const PowerSection = () => {
                 Test output voltage (should be 13.6-14.4V DC)
                 <Clock className="h-4 w-4 text-blue-300" />
                 <span className="text-sm text-blue-300">(5-10 min)</span>
-                <TooltipProvider>
-                  <Tooltip>
-                    <TooltipTrigger>
-                      <HelpCircle className="h-4 w-4 text-purple-400" />
-                    </TooltipTrigger>
-                    <TooltipContent>
-                      <p>Use certified multimeter</p>
-                    </TooltipContent>
-                  </Tooltip>
-                </TooltipProvider>
+                <Tooltip>
+                  <TooltipTrigger>
+                    <HelpCircle className="h-4 w-4 text-purple-400" />
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>Use certified multimeter</p>
+                  </TooltipContent>
+                </Tooltip>
               </div>
             </li>
             <li>
@@ -46,16 +44,14 @@ const PowerSection = () => {
                 Check for unusual noise or vibration
                 <Clock className="h-4 w-4 text-blue-300" />
                 <span className="text-sm text-blue-300">(2-3 min)</span>
-                <TooltipProvider>
-                  <Tooltip>
-                    <TooltipTrigger>
-                      <AlertTriangle className="h-4 w-4 text-yellow-400" />
-                    </TooltipTrigger>
-                    <TooltipContent>
-                      <p>Immediate attention needed if present</p>
-                    </TooltipContent>
-                  </Tooltip>
-                </TooltipProvider>
+                <Tooltip>
+                  <TooltipTrigger>
+                    <AlertTriangle className="h-4 w-4 text-yellow-400" />
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>Immediate attention needed if present</p>
+                  </TooltipContent>
+                </Tooltip>
               </div>
             </li>
             <li>
@@ -70,16 +66,14 @@ const PowerSection = () => {
                 Verify proper grounding
                 <Clock className="h-4 w-4 text-blue-300" />
                 <span className="text-sm text-blue-300">(10-15 min)</span>
-                <TooltipProvider>
-                  <Tooltip>
-                    <TooltipTrigger>
-                      <HelpCircle className="h-4 w-4 text-purple-400" />
-                    </TooltipTrigger>
-                    <TooltipContent>
-                      <p>Professional inspection recommended</p>
-                    </TooltipContent>
-                  </Tooltip>
-                </TooltipProvider>
+                <Tooltip>
+                  <TooltipTrigger>
+                    <HelpCircle className="h-4 w-4 text-purple-400" />
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>Professional inspection recommended</p>
+                  </TooltipContent>
+                </Tooltip>
               </div>
             </li>
           </ol>
@@ -99,16 +93,14 @@ const PowerSection = () => {
                 Check for tripped breakers
                 <Clock className="h-4 w-4 text-blue-300" />
                 <span className="text-sm text-blue-300">(2-3 min)</span>
-                <TooltipProvider>
-                  <Tooltip>
-                    <TooltipTrigger>
-                      <AlertTriangle className="h-4 w-4 text-yellow-400" />
-                    </TooltipTrigger>
-                    <TooltipContent>
-                      <p>Note which circuits are affected</p>
-                    </TooltipContent>
-                  </Tooltip>
-                </TooltipProvider>
+                <Tooltip>
+                  <TooltipTrigger>
+                    <AlertTriangle className="h-4 w-4 text-yellow-400" />
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>Note which circuits are affected</p>
+                  </TooltipContent>
+                </Tooltip>
               </div>
             </li>
             <li>
@@ -123,16 +115,14 @@ const PowerSection = () => {
                 Test GFCI outlets
                 <Clock className="h-4 w-4 text-blue-300" />
                 <span className="text-sm text-blue-300">(10-15 min)</span>
-                <TooltipProvider>
-                  <Tooltip>
-                    <TooltipTrigger>
-                      <HelpCircle className="h-4 w-4 text-purple-400" />
-                    </TooltipTrigger>
-                    <TooltipContent>
-                      <p>Professional testing recommended if multiple failures</p>
-                    </TooltipContent>
-                  </Tooltip>
-                </TooltipProvider>
+                <Tooltip>
+                  <TooltipTrigger>
+                    <HelpCircle className="h-4 w-4 text-purple-400" />
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>Professional testing recommended if multiple failures</p>
+                  </TooltipContent>
+                </Tooltip>
               </div>
             </li>
           </ol>
