@@ -4,4 +4,8 @@ export * from './useMarkerCreation';
 export * from './useMarkerVisibility';
 export * from './useMarkerHighlight';
 export * from './useMarkerPersistence';
+export * from './useMarkerInitialization';
+export * from './useMarkerStats';
+export * from './useProcessExistingMarkers';
+export * from './useCreateNewMarker';
 export * from './types';
