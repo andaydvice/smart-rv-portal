@@ -49,7 +49,7 @@ export function createFacilityMarker(
     <div class="facility-popup-content">
       <h3>${facility.name}</h3>
       <p>${facility.address}</p>
-      <p>Price: $${facility.priceRange.min} - $${facility.priceRange.max}</p>
+      <p>Price: $${facility.price_range.min} - $${facility.price_range.max}</p>
       <button class="view-facility-btn" onclick="window.viewFacility('${facility.id}')">View Details</button>
     </div>
   `);
