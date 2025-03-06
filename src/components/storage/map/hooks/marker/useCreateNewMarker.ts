@@ -1,15 +1,15 @@
 
 import mapboxgl from 'mapbox-gl';
-import { StorageFacility } from '../../../types';
-import { 
-  calculateMarkerOffset, 
-  buildCoordinatesMap, 
-  createFacilityMarker,
-  hasValidCoordinates
-} from '../../utils/markerUtils';
 import { useMarkerClickHandlers } from './useMarkerClickHandlers';
 import { useMarkerErrorHandling } from './useMarkerErrorHandling';
-import { MarkerError } from './types';
+import { StorageFacility } from '../../../types';
+import { 
+  createMarker, 
+  enhanceMarkerVisibility, 
+  persistMarker 
+} from '../../services/markerCreationService';
+import { configurePopup, forcePopupOpen } from '../../services/markerPopupService';
+import { attachMarkerToMap } from '../../services/markerAttachmentService';
 
 export const useCreateNewMarker = () => {
   const { applyClickHandlerToMarker } = useMarkerClickHandlers();
@@ -20,7 +20,7 @@ export const useCreateNewMarker = () => {
     attemptErrorRecovery 
   } = useMarkerErrorHandling();
 
-  const createMarker = (
+  const createNewMarker = (
     facility: StorageFacility,
     map: mapboxgl.Map,
     isHighlighted: boolean,
@@ -33,47 +33,32 @@ export const useCreateNewMarker = () => {
       if (!map || !map.loaded()) {
         setTimeout(() => {
           if (map && map.loaded()) {
-            createMarker(facility, map, isHighlighted, onMarkerClick, facilities, index);
+            createNewMarker(facility, map, isHighlighted, onMarkerClick, facilities, index);
           }
         }, 500);
         return null;
       }
       
-      // Check if facility has valid coordinates
-      if (!hasValidCoordinates(facility)) {
-        addError(facility, new Error('Missing coordinates'), 'INVALID_COORDINATES');
-        return null;
-      }
-      
-      // Calculate marker coordinates with offset for overlapping markers
-      const coordinatesMap = buildCoordinatesMap(facilities);
-      const coordinates = calculateMarkerOffset(facility, coordinatesMap, facilities, index);
-      
-      // Create the marker with explicit map reference for reliable addition
-      const marker = createFacilityMarker(
+      // Create the marker using our service
+      const marker = createMarker(
         facility,
-        coordinates,
+        map,
         isHighlighted,
         onMarkerClick,
-        map
+        facilities,
+        index
       );
-
-      // Explicitly set popup options to prevent automatic closing
-      const popup = marker.getPopup();
-      if (popup) {
-        popup.options.closeOnClick = false;
-        popup.options.closeButton = true;
-      }
       
-      // Force a second attachment after a small delay to ensure it's added
-      setTimeout(() => {
-        if (map && marker) {
-          if (!marker.getElement().isConnected) {
-            marker.addTo(map);
-          }
-          enhanceMarkerVisibility(marker);
-        }
-      }, 100);
+      if (!marker) {
+        addError(facility, new Error('Failed to create marker'), 'CREATION_FAILED');
+        return null;
+      }
+
+      // Configure the popup
+      configurePopup(marker);
+      
+      // Attach marker to map
+      attachMarkerToMap(marker, map);
       
       // Get marker element and apply click handler
       const markerElement = marker.getElement();
@@ -85,6 +70,11 @@ export const useCreateNewMarker = () => {
           facility.name,
           onMarkerClick
         );
+        
+        // Also apply click handler to show popup
+        markerElement.addEventListener('click', () => {
+          forcePopupOpen(marker, facility.id);
+        });
       } else {
         // Handle missing marker element error
         addError(facility, new Error('Marker element not created'), 'MISSING_ELEMENT');
@@ -94,13 +84,8 @@ export const useCreateNewMarker = () => {
       // Force the marker to be visible and interactive
       enhanceMarkerVisibility(marker);
       
-      // Store marker in global registry to prevent garbage collection
-      if (typeof window !== 'undefined' && !window._persistentMarkers?.[facility.id]) {
-        if (!window._persistentMarkers) {
-          window._persistentMarkers = {};
-        }
-        window._persistentMarkers[facility.id] = marker;
-      }
+      // Persist marker to prevent garbage collection
+      persistMarker(facility, marker);
       
       // If we had previous errors for this facility, mark them as recovered
       if (hasErrorForFacility(facility.id)) {
@@ -124,7 +109,7 @@ export const useCreateNewMarker = () => {
         // If we should retry, attempt to create the marker again with a slight delay
         setTimeout(() => {
           try {
-            createMarker(facility, map, isHighlighted, onMarkerClick, facilities, index);
+            createNewMarker(facility, map, isHighlighted, onMarkerClick, facilities, index);
           } catch (retryError) {
             console.error(`Retry failed for ${facility.name}:`, retryError);
           }
@@ -135,37 +120,8 @@ export const useCreateNewMarker = () => {
     }
   };
 
-  // Simplified enhancer to prevent excessive DOM manipulation
-  const enhanceMarkerVisibility = (marker: mapboxgl.Marker) => {
-    const el = marker.getElement();
-    if (el) {
-      // Use CSS classes instead of inline styles where possible
-      el.classList.add('custom-marker');
-      
-      // Set minimal but critical inline styles
-      el.style.visibility = 'visible';
-      el.style.display = 'block';
-      el.style.zIndex = '9999';
-      
-      // Set persistent data attribute
-      el.setAttribute('data-persistent', 'true');
-      
-      // Set facility ID for click handlers
-      const facilityId = el.getAttribute('data-facility-id');
-      if (!facilityId) {
-        const popup = marker.getPopup();
-        if (popup && popup._content) {
-          const contentDataset = popup._content.dataset;
-          if (contentDataset && contentDataset.facilityId) {
-            el.setAttribute('data-facility-id', contentDataset.facilityId);
-          }
-        }
-      }
-    }
-  };
-
   return {
-    createMarker,
+    createMarker: createNewMarker,
     enhanceMarkerVisibility
   };
 };

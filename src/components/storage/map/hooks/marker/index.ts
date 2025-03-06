@@ -13,7 +13,7 @@ export * from './useMarkerClickHandlers';
 // Export types from types.ts
 export * from './types';
 
-// Export useMarkerErrorHandling without re-exporting MarkerError which is already exported from types.ts
+// Export services
 export { 
   useMarkerErrorHandling,
   type UseMarkerErrorHandlingReturn 

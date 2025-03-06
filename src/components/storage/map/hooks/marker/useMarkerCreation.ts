@@ -18,11 +18,11 @@ export const useMarkerCreation = ({
 }: UseMarkerCreationProps) => {
   const markers = useRef<mapboxgl.Marker[]>([]);
   
-  // Use our new refactored hooks
+  // Use our refactored hooks
   const { isMounted } = useMarkerInitialization();
   const { stats, updateStats } = useMarkerStats();
   const { processExistingMarker, markAsProcessed } = useProcessExistingMarkers();
-  const { createMarker } = useCreateNewMarker();
+  const { createMarker, enhanceMarkerVisibility } = useCreateNewMarker();
   const { forceMarkerVisibility } = useMarkerVisibility({ map });
 
   // Function to create all markers with improved persistence
@@ -52,7 +52,7 @@ export const useMarkerCreation = ({
         return;
       }
       
-      // Create a new marker
+      // Create a new marker using our refactored service
       const marker = createMarker(
         facility,
         map,
