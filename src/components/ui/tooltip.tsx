@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils"
 const TooltipProvider = TooltipPrimitive.Provider
 
 const Tooltip = ({ children, ...props }: React.ComponentPropsWithoutRef<typeof TooltipPrimitive.Root>) => {
-  // Ensure tooltip is always wrapped with provider
+  // Always wrap tooltip with provider to prevent errors
   return (
     <TooltipProvider>
       <TooltipPrimitive.Root {...props}>
