@@ -6,6 +6,7 @@ import { usePopupClickHandler } from './hooks/usePopupClickHandler';
 import MarkerStats from './components/MarkerStats';
 import { useMarkerManagement } from './hooks/useMarkerManagement';
 import MarkerVisibilityEnhancer from './components/MarkerVisibilityEnhancer';
+import MarkerErrorDisplay from './components/MarkerErrorDisplay';
 
 interface FacilityMarkersProps {
   map: mapboxgl.Map;
@@ -24,7 +25,13 @@ const FacilityMarkers: React.FC<FacilityMarkersProps> = ({
   usePopupClickHandler();
   
   // Use marker management hook
-  const { stats, createMarkers, forceMarkerVisibility } = useMarkerManagement({
+  const { 
+    stats, 
+    createMarkers, 
+    forceMarkerVisibility,
+    errors,
+    markErrorAsRecovered
+  } = useMarkerManagement({
     map,
     facilities,
     highlightedFacility,
@@ -51,6 +58,17 @@ const FacilityMarkers: React.FC<FacilityMarkersProps> = ({
     <>
       <MarkerStats stats={stats} />
       <MarkerVisibilityEnhancer enhanceVisibility={enhanceVisibility} />
+      
+      {/* Show errors in dev mode or if there are more than 5 errors */}
+      {(process.env.NODE_ENV === 'development' || (errors && errors.length > 5)) && (
+        <div className="absolute top-20 right-4 z-50 w-80">
+          <MarkerErrorDisplay 
+            errors={errors || []} 
+            onDismiss={markErrorAsRecovered}
+            className="max-h-48 overflow-y-auto"
+          />
+        </div>
+      )}
     </>
   );
 };

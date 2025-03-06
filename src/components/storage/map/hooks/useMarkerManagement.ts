@@ -6,7 +6,8 @@ import {
   useMarkerCreation,
   useMarkerHighlight,
   useMarkerPersistence,
-  useMarkerVisibility
+  useMarkerVisibility,
+  useMarkerErrorHandling
 } from './marker';
 
 interface UseMarkerManagementProps {
@@ -47,10 +48,22 @@ export const useMarkerManagement = ({
     map
   });
 
+  // Get error handling
+  const { 
+    errors, 
+    clearErrors, 
+    markErrorAsRecovered,
+    errorCount
+  } = useMarkerErrorHandling();
+
   return {
     markers,
     stats,
     createMarkers,
-    forceMarkerVisibility
+    forceMarkerVisibility,
+    errors,
+    clearErrors,
+    markErrorAsRecovered,
+    errorCount
   };
 };

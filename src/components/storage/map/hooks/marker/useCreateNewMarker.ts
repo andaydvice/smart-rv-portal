@@ -8,9 +8,16 @@ import {
   hasValidCoordinates
 } from '../../utils/markerUtils';
 import { useMarkerClickHandlers } from './useMarkerClickHandlers';
+import { useMarkerErrorHandling } from './useMarkerErrorHandling';
 
 export const useCreateNewMarker = () => {
   const { applyClickHandlerToMarker } = useMarkerClickHandlers();
+  const { 
+    addError, 
+    hasErrorForFacility, 
+    markErrorAsRecovered, 
+    attemptErrorRecovery 
+  } = useMarkerErrorHandling();
 
   const createMarker = (
     facility: StorageFacility,
@@ -23,6 +30,7 @@ export const useCreateNewMarker = () => {
     try {
       // Check if facility has valid coordinates
       if (!hasValidCoordinates(facility)) {
+        addError(facility, new Error('Missing coordinates'), 'INVALID_COORDINATES');
         console.warn(`⚠️ Skipping facility due to missing coordinates: ${facility.name}`);
         return null;
       }
@@ -58,6 +66,10 @@ export const useCreateNewMarker = () => {
           facility.name,
           onMarkerClick
         );
+      } else {
+        // Handle missing marker element error
+        addError(facility, new Error('Marker element not created'), 'MISSING_ELEMENT');
+        return null;
       }
       
       // Force the marker to be visible and interactive
@@ -68,9 +80,36 @@ export const useCreateNewMarker = () => {
         window._persistentMarkers[facility.id] = marker;
       }
       
+      // If we had previous errors for this facility, mark them as recovered
+      if (hasErrorForFacility(facility.id)) {
+        markErrorAsRecovered(facility.id);
+      }
+      
       return marker;
     } catch (error) {
+      // Log and track the error
       console.error(`🚫 Error creating marker for ${facility.name}:`, error);
+      
+      // Add structured error information
+      addError(
+        facility, 
+        error instanceof Error ? error : new Error('Unknown error creating marker'), 
+        'MARKER_CREATION_FAILED'
+      );
+      
+      // Check if we should retry the operation
+      if (attemptErrorRecovery(facility.id)) {
+        // If we should retry, attempt to create the marker again with a slight delay
+        setTimeout(() => {
+          console.log(`Retrying marker creation for ${facility.name}`);
+          try {
+            createMarker(facility, map, isHighlighted, onMarkerClick, facilities, index);
+          } catch (retryError) {
+            console.error(`Retry failed for ${facility.name}:`, retryError);
+          }
+        }, 500); // 500ms delay before retry
+      }
+      
       return null;
     }
   };

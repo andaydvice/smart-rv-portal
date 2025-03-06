@@ -32,6 +32,15 @@ export interface UseMarkerPersistenceProps {
   map: mapboxgl.Map | null;
 }
 
+export interface MarkerError {
+  facilityId: string;
+  facilityName: string;
+  errorMessage: string;
+  errorCode: string;
+  timestamp: number;
+  recovered: boolean;
+}
+
 export interface PersistentMarkers {
   [facilityId: string]: mapboxgl.Marker;
 }

@@ -9,4 +9,5 @@ export * from './useMarkerStats';
 export * from './useProcessExistingMarkers';
 export * from './useCreateNewMarker';
 export * from './useMarkerClickHandlers';
+export * from './useMarkerErrorHandling';
 export * from './types';
