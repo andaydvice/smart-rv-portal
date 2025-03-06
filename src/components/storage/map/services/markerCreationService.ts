@@ -5,7 +5,7 @@ import { createFacilityMarker } from '../utils/markerCreation';
 import { calculateMarkerOffset, buildCoordinatesMap, hasValidCoordinates } from '../utils/markerUtils';
 
 /**
- * Service responsible for creating markers
+ * Service responsible for creating markers with performance optimizations
  */
 export const createMarker = (
   facility: StorageFacility,
@@ -24,6 +24,19 @@ export const createMarker = (
   const coordinatesMap = buildCoordinatesMap(facilities);
   const coordinates = calculateMarkerOffset(facility, coordinatesMap, facilities, index);
   
+  // Reduce performance impact by not creating markers outside current viewport
+  // unless it's the highlighted facility
+  if (!isHighlighted) {
+    const bounds = map.getBounds();
+    const isInViewport = bounds.contains(coordinates);
+    
+    // Skip markers far outside the current viewport to reduce load
+    if (!isInViewport && facilities.length > 20) {
+      // Only create markers in the current viewport when showing many facilities
+      return null;
+    }
+  }
+  
   // Create the marker with explicit map reference for reliable addition
   const marker = createFacilityMarker(
     facility,
@@ -37,44 +50,53 @@ export const createMarker = (
 };
 
 /**
- * Apply styles to enhance marker visibility
+ * Apply styles to enhance marker visibility with better performance
  */
 export const enhanceMarkerVisibility = (marker: mapboxgl.Marker) => {
   const el = marker.getElement();
   if (el) {
-    // Use CSS classes instead of inline styles where possible
+    // Use CSS classes instead of inline styles when possible
     el.classList.add('custom-marker');
     
     // Set minimal but critical inline styles
     el.style.visibility = 'visible';
     el.style.display = 'block';
-    el.style.zIndex = '9999';
+    
+    // Use a more reasonable z-index that doesn't conflict with controls
+    el.style.zIndex = '99';
     
     // Set persistent data attribute
     el.setAttribute('data-persistent', 'true');
-    
-    // Set facility ID for click handlers
-    const facilityId = el.getAttribute('data-facility-id');
-    if (!facilityId) {
-      const popup = marker.getPopup();
-      if (popup && popup._content) {
-        const contentDataset = popup._content.dataset;
-        if (contentDataset && contentDataset.facilityId) {
-          el.setAttribute('data-facility-id', contentDataset.facilityId);
-        }
-      }
-    }
   }
 };
 
 /**
- * Store the marker in a global registry to prevent garbage collection
+ * Store the marker in a global registry with memory management
  */
 export const persistMarker = (facility: StorageFacility, marker: mapboxgl.Marker) => {
-  if (typeof window !== 'undefined' && !window._persistentMarkers?.[facility.id]) {
+  if (typeof window !== 'undefined') {
     if (!window._persistentMarkers) {
       window._persistentMarkers = {};
     }
-    window._persistentMarkers[facility.id] = marker;
+    
+    // Don't overwrite existing markers to reduce re-rendering
+    if (!window._persistentMarkers[facility.id]) {
+      window._persistentMarkers[facility.id] = marker;
+    }
+    
+    // Limit total number of persistent markers to prevent memory issues
+    const markerKeys = Object.keys(window._persistentMarkers);
+    const MAX_PERSISTENT_MARKERS = 200;
+    
+    if (markerKeys.length > MAX_PERSISTENT_MARKERS) {
+      // Remove oldest markers when we exceed the limit
+      const markersToRemove = markerKeys.slice(0, markerKeys.length - MAX_PERSISTENT_MARKERS);
+      markersToRemove.forEach(id => {
+        if (window._persistentMarkers && window._persistentMarkers[id]) {
+          window._persistentMarkers[id].remove();
+          delete window._persistentMarkers[id];
+        }
+      });
+    }
   }
 };

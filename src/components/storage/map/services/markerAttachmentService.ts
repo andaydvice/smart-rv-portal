@@ -2,36 +2,29 @@
 import mapboxgl from 'mapbox-gl';
 
 /**
- * Reliably attach a marker to the map with retry logic
+ * Reliably attach a marker to the map with performance optimizations
  */
 export const attachMarkerToMap = (
   marker: mapboxgl.Marker, 
   map: mapboxgl.Map
 ): void => {
   if (!map || !map.loaded()) {
+    // Don't try to attach markers to unloaded maps - schedule just once
     setTimeout(() => {
       if (map && map.loaded()) {
-        attachMarkerToMap(marker, map);
+        marker.addTo(map);
       }
     }, 500);
     return;
   }
   
-  // Force a second attachment after a small delay to ensure it's added
+  // Attach marker to map only once
   marker.addTo(map);
   
+  // Check if marker is actually attached after a short delay
   setTimeout(() => {
-    if (map && marker) {
-      if (!marker.getElement().isConnected) {
-        marker.addTo(map);
-      }
-    }
-  }, 100);
-  
-  // Use requestAnimationFrame for smoother performance
-  requestAnimationFrame(() => {
-    if (map && map.loaded() && marker) {
+    if (map && marker && !marker.getElement().isConnected) {
       marker.addTo(map);
     }
-  });
+  }, 300);
 };

@@ -1,5 +1,5 @@
 
-import React, { useEffect, useCallback } from 'react';
+import React, { useEffect, useCallback, memo } from 'react';
 import mapboxgl from 'mapbox-gl';
 import { StorageFacility } from '../types';
 import { usePopupClickHandler } from './hooks/usePopupClickHandler';
@@ -15,7 +15,8 @@ interface FacilityMarkersProps {
   onMarkerClick: (facilityId: string) => void;
 }
 
-const FacilityMarkers: React.FC<FacilityMarkersProps> = ({
+// Use React.memo to prevent unnecessary re-renders
+const FacilityMarkers: React.FC<FacilityMarkersProps> = memo(({
   map,
   facilities,
   highlightedFacility,
@@ -43,11 +44,13 @@ const FacilityMarkers: React.FC<FacilityMarkersProps> = ({
 
   // Effect to create markers when facilities or map changes
   useEffect(() => {
+    // Create markers only when we have both map and facilities
+    if (!map || !facilities.length) return;
+    
+    // Use a longer delay for initial marker creation to ensure the map is ready
     const timer = setTimeout(() => {
-      if (map && facilities.length > 0) {
-        createMarkers();
-      }
-    }, 500);
+      createMarkers();
+    }, 800);
     
     return () => {
       clearTimeout(timer);
@@ -56,10 +59,12 @@ const FacilityMarkers: React.FC<FacilityMarkersProps> = ({
 
   return (
     <>
-      <MarkerStats stats={stats} />
+      {/* Only show stats in development mode */}
+      {process.env.NODE_ENV === 'development' && <MarkerStats stats={stats} />}
+      
       <MarkerVisibilityEnhancer enhanceVisibility={enhanceVisibility} />
       
-      {/* Show errors in dev mode or if there are more than 5 errors */}
+      {/* Show errors only in dev mode or if there are critical errors */}
       {(process.env.NODE_ENV === 'development' || (errors && errors.length > 5)) && (
         <div className="absolute top-20 right-4 z-50 w-80">
           <MarkerErrorDisplay 
@@ -71,6 +76,13 @@ const FacilityMarkers: React.FC<FacilityMarkersProps> = ({
       )}
     </>
   );
-};
+}, (prevProps, nextProps) => {
+  // Custom comparison function to prevent unnecessary re-renders
+  return (
+    prevProps.map === nextProps.map &&
+    prevProps.highlightedFacility === nextProps.highlightedFacility &&
+    prevProps.facilities.length === nextProps.facilities.length
+  );
+});
 
 export default FacilityMarkers;

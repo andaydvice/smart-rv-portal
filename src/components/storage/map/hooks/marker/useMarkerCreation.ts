@@ -1,5 +1,5 @@
 
-import { useRef, useCallback } from 'react';
+import { useRef, useCallback, useEffect } from 'react';
 import mapboxgl from 'mapbox-gl';
 import { StorageFacility } from '../../../types';
 import { toast } from "sonner";
@@ -17,6 +17,7 @@ export const useMarkerCreation = ({
   onMarkerClick 
 }: UseMarkerCreationProps) => {
   const markers = useRef<mapboxgl.Marker[]>([]);
+  const creationInProgress = useRef<boolean>(false);
   
   // Use our refactored hooks
   const { isMounted } = useMarkerInitialization();
@@ -25,12 +26,31 @@ export const useMarkerCreation = ({
   const { createMarker, enhanceMarkerVisibility } = useCreateNewMarker();
   const { forceMarkerVisibility } = useMarkerVisibility({ map });
 
-  // Function to create all markers with improved persistence
+  // Effect to clean up markers when component unmounts
+  useEffect(() => {
+    return () => {
+      // Clean up markers when component unmounts
+      markers.current.forEach(marker => {
+        if (marker) marker.remove();
+      });
+      markers.current = [];
+    };
+  }, []);
+
+  // Function to create all markers with improved persistence and performance
   const createMarkers = useCallback(() => {
+    // Prevent multiple concurrent creation processes
+    if (creationInProgress.current) {
+      console.log('Marker creation already in progress, skipping');
+      return;
+    }
+    
+    creationInProgress.current = true;
     console.log(`Creating markers for ${facilities.length} facilities`);
     
     if (!map || !map.loaded()) {
       console.warn('Map not fully loaded yet, cannot create markers');
+      creationInProgress.current = false;
       return;
     }
     
@@ -38,64 +58,87 @@ export const useMarkerCreation = ({
     const newFacilities = facilities.filter(f => !window._persistentMarkers?.[f.id]);
     
     if (newFacilities.length > 0) {
-      toast.info(`Loading ${newFacilities.length} facilities on map`);
+      // Only toast if we have a significant number of new facilities
+      if (newFacilities.length > 5) {
+        toast.info(`Loading ${newFacilities.length} facilities on map`);
+      }
     }
     
     // Initialize statistics
     let skipped = 0;
     let created = 0;
-
-    // Create markers for each facility
-    facilities.forEach((facility, index) => {
-      // Check if we should process an existing marker instead of creating a new one
-      if (processExistingMarker(facility, map)) {
-        return;
-      }
-      
-      // Create a new marker using our refactored service
-      const marker = createMarker(
-        facility,
-        map,
-        facility.id === highlightedFacility,
-        onMarkerClick,
-        facilities,
-        index
-      );
-      
-      if (marker) {
-        // Track marker for later management
-        markers.current.push(marker);
-        
-        // Add to our processed set to avoid duplication
-        markAsProcessed(facility.id);
-        
-        created++;
-      } else {
-        skipped++;
-      }
-    });
-
-    // Update statistics
-    if (isMounted.current) {
-      updateStats({
-        markersCreated: created,
-        skippedFacilities: skipped,
-        totalFacilities: facilities.length,
-      });
-      
-      // Log summary
-      console.log(`✅ Created ${created} markers on the map out of ${facilities.length} facilities`);
-      
-      if (created > 0) {
-        toast.success(`Added ${created} storage facilities to map`);
-      } else if (facilities.length > 0 && created === 0 && newFacilities.length > 0) {
-        toast.error('Failed to display facilities on map');
-      }
-    }
     
-    // Force all markers to be visible after creation
-    setTimeout(forceMarkerVisibility, 100);
-  }, [facilities, map, highlightedFacility, onMarkerClick, forceMarkerVisibility, updateStats]);
+    // Use batch processing for better performance - process markers in chunks
+    const processFacilityChunk = (startIndex: number, chunkSize: number) => {
+      const endIndex = Math.min(startIndex + chunkSize, facilities.length);
+      
+      for (let i = startIndex; i < endIndex; i++) {
+        const facility = facilities[i];
+        
+        // Check if we should process an existing marker instead of creating a new one
+        if (processExistingMarker(facility, map)) {
+          continue;
+        }
+        
+        // Create a new marker using our refactored service
+        const marker = createMarker(
+          facility,
+          map,
+          facility.id === highlightedFacility,
+          onMarkerClick,
+          facilities,
+          i
+        );
+        
+        if (marker) {
+          // Track marker for later management
+          markers.current.push(marker);
+          
+          // Add to our processed set to avoid duplication
+          markAsProcessed(facility.id);
+          
+          created++;
+        } else {
+          skipped++;
+        }
+      }
+      
+      // If we have more chunks to process, schedule the next chunk
+      if (endIndex < facilities.length && isMounted.current) {
+        setTimeout(() => {
+          processFacilityChunk(endIndex, chunkSize);
+        }, 0);
+      } else {
+        // All chunks processed, update statistics and finish
+        if (isMounted.current) {
+          updateStats({
+            markersCreated: created,
+            skippedFacilities: skipped,
+            totalFacilities: facilities.length,
+          });
+          
+          // Log summary
+          console.log(`✅ Created ${created} markers on the map out of ${facilities.length} facilities`);
+          
+          if (created > 0 && created > 10) {
+            toast.success(`Added ${created} storage facilities to map`);
+          } else if (facilities.length > 0 && created === 0 && newFacilities.length > 10) {
+            toast.error('Failed to display facilities on map');
+          }
+        }
+        
+        // Force all markers to be visible after creation
+        setTimeout(forceMarkerVisibility, 100);
+        
+        // Reset creation flag
+        creationInProgress.current = false;
+      }
+    };
+    
+    // Start processing facilities in chunks of 10 for smoother performance
+    processFacilityChunk(0, 10);
+    
+  }, [facilities, map, highlightedFacility, onMarkerClick, forceMarkerVisibility, updateStats, isMounted, createMarker, markAsProcessed, processExistingMarker]);
 
   return {
     markers,

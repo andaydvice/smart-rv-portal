@@ -1,67 +1,37 @@
 
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import App from './App';
-import './index.css';
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import App from './App.tsx'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { Toaster } from "@/components/ui/toaster"
+import { Toaster as SonnerToaster } from "sonner"
+import './index.css'
+import './styles/base.css'
+import './styles/animations.css'
+import './styles/forms.css'
+import './styles/layout.css'
+import './styles/components/calendar.css'
+import './styles/pages/storage-checklist.css'
+import './styles/map-optimizations.css' // Add map performance optimizations
 
-// Global error handler to recover from fatal errors
-window.addEventListener('error', (event) => {
-  console.error('Global error caught:', event.error);
-  const rootElement = document.getElementById('root');
-  
-  // If we have a fatal error that might freeze the UI, we attempt to recover
-  if (rootElement && !rootElement.hasChildNodes()) {
-    try {
-      // Force a fresh render of the app
-      const root = ReactDOM.createRoot(rootElement);
-      root.render(
-        <React.StrictMode>
-          <App />
-        </React.StrictMode>
-      );
-    } catch (e) {
-      console.error('Recovery attempt failed:', e);
-    }
-  }
-});
+// Create a client with better performance settings
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 60000, // Keep data fresh for 1 minute
+      cacheTime: 300000, // Cache for 5 minutes
+      refetchOnWindowFocus: false, // Don't refetch on focus
+      retry: 1, // Reduce retry attempts
+    },
+  },
+})
 
-const startApp = () => {
-  try {
-    const rootElement = document.getElementById('root');
-    
-    if (!rootElement) {
-      console.error('Root element not found in DOM');
-      throw new Error('Root element not found');
-    }
-    
-    const root = ReactDOM.createRoot(rootElement);
-    
-    root.render(
-      <React.StrictMode>
-        <App />
-      </React.StrictMode>
-    );
-
-    if (import.meta.hot) {
-      import.meta.hot.accept('./App', () => {
-        root.render(
-          <React.StrictMode>
-            <App />
-          </React.StrictMode>
-        );
-      });
-    }
-  } catch (error) {
-    console.error('Failed to initialize application:', error);
-    document.body.innerHTML = '<div style="color: red; padding: 20px;">Failed to load application. Please check console for details.</div>';
-    throw error;
-  }
-};
-
-// Start app when DOM is ready
-if (document.readyState === 'loading') {
-  window.addEventListener('DOMContentLoaded', startApp);
-} else {
-  // DOM already loaded, start immediately
-  startApp();
-}
+ReactDOM.createRoot(document.getElementById('root')!).render(
+  <React.StrictMode>
+    <QueryClientProvider client={queryClient}>
+      <App />
+      <Toaster />
+      <SonnerToaster position="top-right" richColors />
+    </QueryClientProvider>
+  </React.StrictMode>,
+)

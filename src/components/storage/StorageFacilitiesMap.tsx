@@ -1,7 +1,7 @@
 
 "use client";
 
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { Card } from '@/components/ui/card';
 import FilterPanel from './FilterPanel';
 import { FilterState } from './types';
@@ -32,9 +32,12 @@ const StorageFacilitiesMap = () => {
   });
 
   // Get data with useQuery
-  const { facilities: filteredFacilities, isLoading, error } = useStorageFacilities(filters);
+  const { facilities: filteredFacilities, isLoading, error, maxPrice } = useStorageFacilities(filters);
   const { recentlyViewed, addToRecentlyViewed } = useRecentlyViewed();
   const { mapToken, mapTokenError } = useMapToken();
+  
+  // Memoize facilities to prevent unnecessary re-renders
+  const displayFacilities = useMemo(() => filteredFacilities || [], [filteredFacilities]);
   
   // Memoize handlers to prevent unnecessary re-renders
   const { 
@@ -47,12 +50,19 @@ const StorageFacilitiesMap = () => {
   
   // Optimize filter change handler 
   const handleFilterChange = useCallback((newFilters: FilterState) => {
-    setFilters(newFilters);
+    setFilters(prevFilters => {
+      // Only update if actually changed
+      if (JSON.stringify(prevFilters) === JSON.stringify(newFilters)) {
+        return prevFilters;
+      }
+      return newFilters;
+    });
   }, []);
   
   // Simplified effect to reduce re-renders and only show critical information
   useEffect(() => {
-    if (filteredFacilities?.length && !isLoading) {
+    // Only show success message if loaded a significant number of facilities
+    if (filteredFacilities?.length > 10 && !isLoading) {
       toast.success(`Loaded ${filteredFacilities.length} storage facilities`);
     } else if (filteredFacilities && filteredFacilities.length === 0 && !isLoading) {
       toast.info('No facilities found for the current filters');
@@ -67,6 +77,11 @@ const StorageFacilitiesMap = () => {
     }
   }, [error]);
 
+  // Create a memoized click handler
+  const onMarkerClick = useCallback((facilityId: string) => {
+    handleFacilityClick(facilityId, displayFacilities);
+  }, [handleFacilityClick, displayFacilities]);
+
   return (
     <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 min-h-[800px]">
       <div className="lg:col-span-4">
@@ -76,14 +91,14 @@ const StorageFacilitiesMap = () => {
             <LoadingStateDisplay
               isLoading={isLoading}
               error={error}
-              hasResults={!!filteredFacilities?.length}
+              hasResults={!!displayFacilities.length}
             />
             
-            {filteredFacilities && filteredFacilities.length > 0 && (
+            {displayFacilities.length > 0 && (
               <FacilityList
-                facilities={filteredFacilities}
+                facilities={displayFacilities}
                 highlightedFacility={highlightedFacility}
-                onFacilityClick={(facilityId) => handleFacilityClick(facilityId, filteredFacilities)}
+                onFacilityClick={onMarkerClick}
                 scrollAreaRef={scrollAreaRef}
               />
             )}
@@ -102,16 +117,16 @@ const StorageFacilitiesMap = () => {
           ) : (
             <MapView
               mapToken={mapToken}
-              facilities={filteredFacilities || []}
+              facilities={displayFacilities}
               highlightedFacility={highlightedFacility}
-              onMarkerClick={(facilityId) => handleFacilityClick(facilityId, filteredFacilities)}
+              onMarkerClick={onMarkerClick}
               selectedState={filters.selectedState}
             />
           )}
         </Card>
         <RecentlyViewedFacilities 
           facilities={recentlyViewed}
-          onFacilityClick={(facilityId) => handleFacilityClick(facilityId, filteredFacilities)}
+          onFacilityClick={onMarkerClick}
           className="h-[180px]"
         />
       </div>

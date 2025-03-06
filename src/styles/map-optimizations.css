@@ -1,0 +1,62 @@
+
+/* Map performance optimizations */
+
+/* Apply hardware acceleration and reduce repaints for map elements */
+.mapboxgl-canvas {
+  transform: translate3d(0,0,0);
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+/* Prevent layout thrashing for markers */
+.mapboxgl-marker, .custom-marker {
+  visibility: visible !important;
+  display: block !important;
+  opacity: 1 !important;
+  z-index: 99 !important;
+  pointer-events: all !important;
+  cursor: pointer !important;
+  will-change: transform;
+  transform: translate3d(0,0,0);
+}
+
+/* Better popup performance */
+.mapboxgl-popup {
+  z-index: 100 !important;
+  visibility: visible !important;
+  will-change: transform;
+  transform: translate3d(0,0,0);
+}
+
+/* Ensure popups are clickable */
+.mapboxgl-popup-content {
+  pointer-events: all !important;
+  will-change: transform;
+}
+
+/* Fix close button visibility */
+.mapboxgl-popup-close-button {
+  z-index: 101 !important;
+  font-size: 16px !important;
+  pointer-events: all !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* Reduce layers for better performance */
+.mapboxgl-control-container {
+  z-index: 200;
+  position: relative;
+}
+
+/* Reduce animation complexity */
+.mapboxgl-ctrl-group {
+  transition: none !important;
+}
+
+/* Prevent unnecessary renders */
+body.show-map-markers .mapboxgl-marker {
+  visibility: visible !important;
+  display: block !important;
+  opacity: 1 !important;
+}

@@ -21,7 +21,7 @@ export default defineConfig(({ mode }) => ({
     },
     watch: {
       usePolling: true,
-      interval: 300 // Increase interval to reduce CPU usage
+      interval: 1000 // Increase interval to reduce CPU usage
     },
     open: false,
   },
@@ -35,10 +35,17 @@ export default defineConfig(({ mode }) => ({
     },
   },
   optimizeDeps: {
-    include: ['react', 'react-dom'],
+    include: [
+      'react', 
+      'react-dom', 
+      'mapbox-gl', 
+      '@tanstack/react-query', 
+      'lucide-react'
+    ],
     force: true,
     esbuildOptions: {
-      target: 'es2020' // Update target for better compatibility
+      target: 'es2020',
+      treeShaking: true // Enable tree shaking for dependencies
     }
   },
   build: {
@@ -48,12 +55,21 @@ export default defineConfig(({ mode }) => ({
       output: {
         manualChunks: {
           vendor: ['react', 'react-dom'],
+          mapbox: ['mapbox-gl'],
+          query: ['@tanstack/react-query'],
+          ui: ['lucide-react', '@radix-ui/react-dialog', '@radix-ui/react-popover']
         },
       },
     },
-    target: 'es2020' // Ensure consistent target with optimizeDeps
+    target: 'es2020', // Ensure consistent target with optimizeDeps
+    cssCodeSplit: true,
+    reportCompressedSize: false, // Disable compressed size reporting for faster builds
+    chunkSizeWarningLimit: 1000 // Increase chunk size warning limit
   },
   esbuild: {
     logOverride: { 'this-is-undefined-in-esm': 'silent' }
+  },
+  css: {
+    devSourcemap: mode === 'development' // Enable sourcemaps for CSS in dev
   }
 }));
