@@ -4,6 +4,8 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import RouterProvider from './components/router/RouterProvider';
 import { Toaster } from '@/components/ui/toaster';
 import { AuthProvider } from './components/auth/AuthContext';
+import { injectEmergencyStyles } from './utils/injectEmergencyStyles';
+import { forceMapMarkersVisible } from './utils/forceMapMarkers';
 import './App.css';
 
 // Create a client with better error handling
@@ -26,6 +28,20 @@ const queryClient = new QueryClient({
 function AppContent() {
   useEffect(() => {
     console.log('App component mounted');
+    
+    // Apply emergency fixes that bypass React
+    injectEmergencyStyles();
+    forceMapMarkersVisible();
+    
+    // Store map instance globally for emergency access
+    document.addEventListener('mapboxgl.map.created', (e: CustomEvent) => {
+      (window as any).mapInstance = e.detail.map;
+    });
+    
+    // Create custom event dispatch system for map
+    (window as any).dispatchMapEvent = (eventName: string, detail: any) => {
+      document.dispatchEvent(new CustomEvent(eventName, { detail }));
+    };
   }, []);
 
   return (

@@ -1,4 +1,3 @@
-
 import React, { useEffect, useCallback, useMemo } from 'react';
 import { useMap } from './MapContext';
 import MapControls from './MapControls';
@@ -23,6 +22,18 @@ const MapContainer: React.FC<MapContainerProps> = ({
 }) => {
   const { mapContainer, isInitializing, mapError, mapLoaded, map } = useMap();
   
+  // Add global map instance access
+  useEffect(() => {
+    if (map) {
+      (window as any).mapInstance = map;
+      document.dispatchEvent(new CustomEvent('mapboxgl.map.created', { detail: { map } }));
+    }
+    
+    return () => {
+      (window as any).mapInstance = null;
+    };
+  }, [map]);
+
   // Validate facilities data
   const validFacilities = useMemo(() => {
     return facilities.filter(facility => {
@@ -92,12 +103,12 @@ const MapContainer: React.FC<MapContainerProps> = ({
           <MapControls map={map} />
           <ClusterLayer
             map={map}
-            facilities={validFacilities}
+            facilities={facilities}
             highlightedFacility={highlightedFacility}
           />
           <FacilityMarkers
             map={map}
-            facilities={validFacilities}
+            facilities={facilities}
             highlightedFacility={highlightedFacility}
             onMarkerClick={onMarkerClick}
           />

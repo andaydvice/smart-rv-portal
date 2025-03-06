@@ -1,0 +1,50 @@
+
+export function injectEmergencyStyles() {
+  const style = document.createElement('style');
+  style.id = 'emergency-marker-fix';
+  style.innerHTML = `
+    .custom-marker,
+    .mapboxgl-marker {
+      display: block !important;
+      visibility: visible !important;
+      opacity: 1 !important;
+      z-index: 9999 !important;
+      pointer-events: auto !important;
+      position: absolute !important;
+    }
+    
+    .emergency-marker {
+      width: 24px !important;
+      height: 24px !important;
+      border-radius: 50% !important;
+      background-color: #F97316 !important;
+      border: 2px solid white !important;
+      box-shadow: 0 0 10px rgba(0,0,0,0.8) !important;
+    }
+    
+    .custom-marker:hover,
+    .mapboxgl-marker:hover,
+    .emergency-marker:hover {
+      transform: scale(1.2) !important;
+      z-index: 10000 !important;
+    }
+    
+    .mapboxgl-map {
+      visibility: visible !important;
+      opacity: 1 !important;
+    }
+    
+    .mapboxgl-popup,
+    .mapboxgl-popup-content {
+      display: block !important;
+      visibility: visible !important;
+      opacity: 1 !important;
+      z-index: 10001 !important;
+    }
+    
+    [data-radix-tooltip-provider] {
+      display: contents !important;
+    }
+  `;
+  document.head.appendChild(style);
+}
