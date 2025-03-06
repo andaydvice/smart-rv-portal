@@ -17,90 +17,54 @@
 /* Page-specific styles */
 @import './styles/pages/storage-checklist.css';
 
-/* Map marker styles - SIMPLIFIED FOR BETTER PERFORMANCE */
+/* Critical marker styles */
 .custom-marker {
-  cursor: pointer !important;
-  z-index: 9999 !important;
+  visibility: visible !important;
   display: block !important;
-  width: 24px !important;
-  height: 24px !important;
-  border-radius: 50% !important;
-  background-color: #F97316 !important;
-  border: 3px solid white !important;
-  box-shadow: 0 0 10px rgba(0,0,0,0.8) !important;
+  opacity: 1 !important;
+  pointer-events: all !important;
+  z-index: 9998 !important;
   position: absolute !important;
-  transform: translate(-50%, -50%) !important;
-  pointer-events: all !important;
-  visibility: visible !important;
-  opacity: 1 !important;
+  cursor: pointer !important;
 }
 
-.custom-marker[data-highlighted="true"] {
-  z-index: 10000 !important;
-  background-color: #10B981 !important;
-  transform: translate(-50%, -50%) scale(1.2) !important;
-  box-shadow: 0 0 15px rgba(16, 185, 129, 0.8) !important;
-}
-
-/* Remove the animation that could cause performance issues */
-
-/* Force marker visibility - SIMPLIFIED FOR BETTER PERFORMANCE */
-.mapboxgl-marker {
-  z-index: 9999 !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-  pointer-events: all !important;
-  display: block !important;
-}
-
-/* Popup styles with higher z-index and better visibility */
 .mapboxgl-popup {
   z-index: 10000 !important;
   visibility: visible !important;
-  pointer-events: all !important;
   display: block !important;
+  opacity: 1 !important;
+  pointer-events: all !important;
 }
 
 .mapboxgl-popup-content {
   z-index: 10000 !important;
-  pointer-events: all !important;
-  padding: 15px !important;
-  border-radius: 8px !important;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2) !important;
-  background-color: #151A22 !important;
-  color: white !important;
-  border: 1px solid #1a202c !important;
   visibility: visible !important;
   display: block !important;
+  opacity: 1 !important;
+  pointer-events: all !important;
+  padding: 15px !important;
 }
 
 .mapboxgl-popup-close-button {
-  color: white !important;
-  font-size: 16px !important;
-  right: 5px !important;
-  top: 5px !important;
   z-index: 10001 !important;
+  visibility: visible !important;
+  display: block !important;
+  opacity: 1 !important;
+  pointer-events: all !important;
+  font-size: 16px !important;
   padding: 5px !important;
-  visibility: visible !important;
-  display: block !important;
-  pointer-events: all !important;
 }
 
-.storage-facility-popup {
-  z-index: 10000 !important;
-  visibility: visible !important;
-  pointer-events: all !important;
-  display: block !important;
+.facility-popup-content {
+  min-width: 200px;
 }
 
-.storage-facility-popup .mapboxgl-popup-content {
-  visibility: visible !important;
-  pointer-events: all !important;
-  z-index: 10000 !important;
-  display: block !important;
-}
-
-/* Performance improvements for map - add will-change for GPU acceleration */
-.mapboxgl-canvas {
-  will-change: transform;
+.view-facility-btn {
+  margin-top: 10px;
+  padding: 5px 10px;
+  background-color: #F97316;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
 }
