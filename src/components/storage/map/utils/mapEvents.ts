@@ -10,11 +10,17 @@ export const setupMapEventListeners = (map: mapboxgl.Map): void => {
     e.stopPropagation();
   });
   
-  // Log render performance statistics
+  // Log render performance statistics using timestamp tracking instead of getFrameTime
+  let lastRenderTime = Date.now();
+  
   map.on('render', () => {
-    // This will only log warnings if the frame rate drops significantly
-    const frameTime = map.getFrameTime();
-    if (frameTime > 100) { // Only log slow frames (>100ms)
+    // Calculate frame time manually
+    const currentTime = Date.now();
+    const frameTime = currentTime - lastRenderTime;
+    lastRenderTime = currentTime;
+    
+    // Only log slow frames (>100ms)
+    if (frameTime > 100) {
       console.warn(`Slow map render detected: ${frameTime.toFixed(1)}ms`);
     }
   });
@@ -54,4 +60,3 @@ export const createMapClickHandler = (container: HTMLElement): void => {
     }, 100);
   });
 };
-
