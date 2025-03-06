@@ -279,4 +279,4 @@ export const useMarkerManagement = ({
     createMarkers,
     forceMarkerVisibility
   };
-}, [facilities, map, highlightedFacility, onMarkerClick]);
+};
