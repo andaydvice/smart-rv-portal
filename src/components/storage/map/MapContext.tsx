@@ -1,8 +1,14 @@
-
 import React, { createContext, useContext, useEffect, useRef, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
 import { toast } from "sonner";
-import { initializeMapboxGL, createMapInstance, waitForMapStyleLoad } from './utils/mapboxInit';
+import { 
+  initializeMapboxGL, 
+  createMapInstance, 
+  waitForMapStyleLoad,
+  configureMapSettings,
+  setupMapEventListeners,
+  createMapClickHandler
+} from './utils/mapboxInit';
 import { useMapStyles } from './hooks/useMapStyles';
 import { usePopupClickHandler } from './hooks/usePopupClickHandler';
 
@@ -92,10 +98,19 @@ export const MapProvider: React.FC<MapProviderProps> = ({
 
         console.log('Map style loaded successfully');
         
+        // Configure map settings
+        configureMapSettings(newMap);
+        
         // Enable essential interactions
         newMap.dragPan.enable();
         newMap.scrollZoom.enable();
         newMap.doubleClickZoom.enable();
+
+        // Set up event listeners
+        setupMapEventListeners(newMap);
+        
+        // Add click handler to map container to prevent closing popups
+        createMapClickHandler(newMap.getContainer());
 
         // Force a resize to ensure proper rendering
         setTimeout(() => newMap.resize(), 100);
@@ -109,15 +124,6 @@ export const MapProvider: React.FC<MapProviderProps> = ({
             toast.error(`Map error: ${e.error?.message || 'Unknown error'}`);
           }
         });
-        
-        // Add click handler to map container to prevent closing popups
-        const mapContainerDiv = newMap.getContainer();
-        mapContainerDiv.addEventListener('click', (e) => {
-          // Only prevent default behavior if NOT clicking a marker (so marker clicks work)
-          if (!(e.target as HTMLElement)?.closest('.custom-marker')) {
-            console.log('Map container click - keeping popups open');
-          }
-        }, true);
 
         // Complete initialization
         if (isMounted) {
