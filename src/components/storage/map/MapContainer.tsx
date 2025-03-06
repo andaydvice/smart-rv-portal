@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useMap } from './MapContext';
 import MapControls from './MapControls';
 import ClusterLayer from './ClusterLayer';
@@ -7,6 +7,8 @@ import FacilityMarkers from './FacilityMarkers';
 import MapLoadingState from './MapLoadingState';
 import { StorageFacility } from '../types';
 import { fitMapToBounds } from './utils/mapboxInit';
+import { useMapStyles } from './hooks/useMapStyles';
+import { setupMapEventListeners, createMapClickHandler } from './utils/mapEvents';
 
 interface MapContainerProps {
   facilities: StorageFacility[];
@@ -23,8 +25,23 @@ const MapContainer: React.FC<MapContainerProps> = ({
 }) => {
   const { mapContainer, isInitializing, mapError, mapLoaded, map } = useMap();
 
+  // Apply custom styles to ensure markers and popups are visible
+  useMapStyles();
+  
+  // Setup map event listeners when map is ready
+  useEffect(() => {
+    if (map && mapLoaded) {
+      console.log('Setting up map event listeners');
+      setupMapEventListeners(map);
+      
+      if (mapContainer.current) {
+        createMapClickHandler(mapContainer.current);
+      }
+    }
+  }, [map, mapLoaded, mapContainer]);
+
   // Update map bounds when facilities change
-  React.useEffect(() => {
+  useEffect(() => {
     if (map && mapLoaded && facilities.length > 0) {
       console.log('Updating map bounds for new facilities');
       fitMapToBounds(map, facilities);
@@ -32,7 +49,7 @@ const MapContainer: React.FC<MapContainerProps> = ({
   }, [facilities, mapLoaded, map]);
   
   // Handle facility highlighting specially
-  React.useEffect(() => {
+  useEffect(() => {
     if (map && highlightedFacility) {
       console.log(`Highlighting facility: ${highlightedFacility}`);
       

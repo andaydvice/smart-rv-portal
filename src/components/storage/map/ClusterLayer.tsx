@@ -61,7 +61,7 @@ const ClusterLayer: React.FC<ClusterLayerProps> = ({ map, facilities, highlighte
           }))
         };
 
-        // Add cluster source with clustering disabled to show individual points
+        // Add source with clustering disabled to show individual points
         map.addSource('facilities', {
           type: 'geojson',
           data: geojsonData,
