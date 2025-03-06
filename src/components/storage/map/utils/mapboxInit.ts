@@ -1,17 +1,12 @@
 
-// Re-export all functionality from the individual files
-import { initializeMapboxGL, createMapInstance } from './initialization';
-import { waitForMapStyleLoad, applyMapStyles, configureMapSettings } from './mapConfiguration';
-import { setupMapEventListeners, createMapClickHandler } from './mapEvents';
-import { fitMapToBounds } from './mapBounds';
+// Re-export all initialization functions
+export * from './initialization';
 
-export {
-  initializeMapboxGL,
-  createMapInstance,
-  waitForMapStyleLoad,
-  applyMapStyles,
-  configureMapSettings,
-  setupMapEventListeners,
-  createMapClickHandler,
-  fitMapToBounds
-};
+// Re-export all configuration functions
+export * from './mapConfiguration';
+
+// Re-export all map event functions
+export * from './mapEvents';
+
+// Re-export all map bounds functions
+export * from './mapBounds';
