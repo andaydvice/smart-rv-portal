@@ -1,5 +1,5 @@
 
-import { useRef, useCallback, useEffect } from 'react';
+import { useRef, useCallback, useEffect, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
 import { StorageFacility } from '../../../types';
 import { toast } from "sonner";
@@ -19,13 +19,27 @@ export const useMarkerCreation = ({
   const markers = useRef<mapboxgl.Marker[]>([]);
   const creationInProgress = useRef<boolean>(false);
   const lastFacilitiesLength = useRef<number>(0);
+  const [stats, setStats] = useState<MarkerStatistics>({
+    markersCreated: 0,
+    skippedFacilities: 0,
+    totalFacilities: 0,
+    startTime: Date.now(),
+    endTime: Date.now()
+  });
   
   // Use our refactored hooks
   const { isMounted } = useMarkerInitialization();
-  const { stats, updateStats } = useMarkerStats();
   const { processExistingMarker, markAsProcessed } = useProcessExistingMarkers();
   const { createMarker, enhanceMarkerVisibility, clearExistingMarkers } = useCreateNewMarker();
   const { forceMarkerVisibility } = useMarkerVisibility({ map });
+
+  const updateStats = useCallback((newStats: Partial<MarkerStatistics>) => {
+    setStats(prevStats => ({
+      ...prevStats,
+      ...newStats,
+      endTime: Date.now()
+    }));
+  }, []);
 
   // Effect to clean up markers when component unmounts
   useEffect(() => {

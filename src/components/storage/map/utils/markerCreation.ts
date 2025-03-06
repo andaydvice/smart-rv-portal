@@ -64,9 +64,13 @@ export function createFacilityMarker(
   .setLngLat(coordinates)
   .setPopup(popup);
   
-  // Only add to map if it doesn't already exist
-  if (!document.getElementById(`marker-${facility.id}`)) {
-    marker.addTo(map);
+  // Only add to map if map is fully loaded
+  if (map && map.loaded()) {
+    try {
+      marker.addTo(map);
+    } catch (err) {
+      console.error(`Error adding marker for ${facility.name}:`, err);
+    }
   }
   
   // Add separate click handler on marker element
@@ -76,7 +80,7 @@ export function createFacilityMarker(
     
     // Toggle popup
     if (!popup.isOpen()) {
-      marker.togglePopup();
+      popup.addTo(map);
     }
   });
   

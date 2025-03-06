@@ -4,6 +4,9 @@ import { StorageFacility } from '../../types';
 import { createFacilityMarker } from '../utils/markerCreation';
 import { calculateMarkerOffset, buildCoordinatesMap, hasValidCoordinates } from '../utils/markerUtils';
 
+let creationAttempts = 0;
+const MAX_ATTEMPTS = 3;
+
 /**
  * Service responsible for creating markers with performance optimizations
  */
@@ -15,26 +18,50 @@ export const createMarker = (
   facilities: StorageFacility[],
   index: number
 ): mapboxgl.Marker | null => {
-  // Check if facility has valid coordinates
-  if (!hasValidCoordinates(facility)) {
+  try {
+    // Check if map is loaded and valid
+    if (!map || !map.loaded()) {
+      console.warn('Map not fully loaded, cannot create marker');
+      return null;
+    }
+    
+    // Check if facility has valid coordinates
+    if (!hasValidCoordinates(facility)) {
+      console.warn(`Invalid coordinates for facility ${facility.id}`);
+      return null;
+    }
+    
+    // Calculate marker coordinates with offset for overlapping markers
+    const coordinatesMap = buildCoordinatesMap(facilities);
+    const coordinates = calculateMarkerOffset(facility, coordinatesMap, facilities, index);
+    
+    // Create the marker with explicit map reference for reliable addition
+    const marker = createFacilityMarker(
+      facility,
+      coordinates,
+      isHighlighted,
+      onMarkerClick,
+      map
+    );
+    
+    // Reset attempts counter on success
+    creationAttempts = 0;
+    
+    return marker;
+  } catch (error) {
+    console.error(`Error creating marker for facility ${facility.id}:`, error);
+    
+    // Implement retry logic for transient errors
+    if (creationAttempts < MAX_ATTEMPTS) {
+      creationAttempts++;
+      console.log(`Retrying marker creation (attempt ${creationAttempts}/${MAX_ATTEMPTS})`);
+      return createMarker(facility, map, isHighlighted, onMarkerClick, facilities, index);
+    }
+    
+    // Reset counter after max attempts
+    creationAttempts = 0;
     return null;
   }
-  
-  // Calculate marker coordinates with offset for overlapping markers
-  const coordinatesMap = buildCoordinatesMap(facilities);
-  const coordinates = calculateMarkerOffset(facility, coordinatesMap, facilities, index);
-  
-  // Don't skip any markers - we want to show all markers
-  // Create the marker with explicit map reference for reliable addition
-  const marker = createFacilityMarker(
-    facility,
-    coordinates,
-    isHighlighted,
-    onMarkerClick,
-    map
-  );
-
-  return marker;
 };
 
 /**

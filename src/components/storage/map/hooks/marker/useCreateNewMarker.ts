@@ -24,7 +24,13 @@ export const useCreateNewMarker = () => {
   const clearExistingMarkers = () => {
     if (window._persistentMarkers) {
       Object.values(window._persistentMarkers).forEach(marker => {
-        marker.remove();
+        if (marker && marker.remove) {
+          try {
+            marker.remove();
+          } catch (err) {
+            console.error("Error removing marker:", err);
+          }
+        }
       });
       window._persistentMarkers = {};
     }
@@ -39,8 +45,15 @@ export const useCreateNewMarker = () => {
     index: number
   ): mapboxgl.Marker | null => {
     try {
-      // Ensure map is fully loaded before creating markers
-      if (!map || !map.loaded()) {
+      // Check if map is fully loaded
+      if (!map) {
+        console.warn('Map is not available');
+        return null;
+      }
+      
+      // Ensure map is loaded before creating markers
+      if (!map.loaded()) {
+        console.warn('Map not fully loaded, will retry with delay');
         setTimeout(() => {
           if (map && map.loaded()) {
             createNewMarker(facility, map, isHighlighted, onMarkerClick, facilities, index);
@@ -83,6 +96,7 @@ export const useCreateNewMarker = () => {
       );
       
       if (!marker) {
+        console.warn(`Failed to create marker for ${facility.name}`);
         addError(facility, new Error('Failed to create marker'), 'CREATION_FAILED');
         return null;
       }
@@ -90,8 +104,15 @@ export const useCreateNewMarker = () => {
       // Configure the popup
       configurePopup(marker);
       
-      // Attach marker to map
-      attachMarkerToMap(marker, map);
+      // Attach marker to map - check if it's already attached
+      if (map && !marker.getElement().isConnected) {
+        try {
+          attachMarkerToMap(marker, map);
+        } catch (err) {
+          console.error("Error attaching marker to map:", err);
+          addError(facility, new Error('Error attaching to map'), 'ATTACHMENT_FAILED');
+        }
+      }
       
       // Get marker element and apply click handler
       const markerElement = marker.getElement();
@@ -104,7 +125,7 @@ export const useCreateNewMarker = () => {
           onMarkerClick
         );
         
-        // Also apply click handler to show popup
+        // Apply click handler to show popup
         markerElement.addEventListener('click', () => {
           forcePopupOpen(marker, facility.id);
         });
