@@ -4,8 +4,25 @@ import StorageFacilitiesMap from "@/components/storage/StorageFacilitiesMap";
 import Navbar from "@/components/Navbar";
 import Layout from "@/components/layout/Layout";
 import { Warehouse } from "lucide-react";
+import { useEffect } from 'react';
 
 export default function StorageFacilities() {
+  useEffect(() => {
+    // Inject the fix script
+    const script = document.createElement('script');
+    script.src = '/markerFix.js';
+    script.async = true;
+    document.body.appendChild(script);
+    
+    return () => {
+      // Only remove if it exists to prevent errors
+      const scriptElement = document.querySelector('script[src="/markerFix.js"]');
+      if (scriptElement && scriptElement.parentNode) {
+        scriptElement.parentNode.removeChild(scriptElement);
+      }
+    };
+  }, []);
+
   return (
     <Layout>
       <Navbar />
