@@ -79,44 +79,6 @@ export const createFacilityMarker = (
   // @ts-ignore - Adding a global reference
   window._persistentMarkers[facility.id] = marker;
 
-  // Define a more robust click handler that won't be garbage collected
-  const handleMarkerClick = (e: MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    
-    console.log(`Marker clicked for: ${facility.name} (ID: ${facility.id})`);
-    
-    // First open the popup if not already open
-    if (!marker.getPopup().isOpen()) {
-      marker.togglePopup();
-    }
-    
-    // Then call the click handler
-    onMarkerClick(facility.id);
-    
-    // Force the popup to stay open with a delay
-    setTimeout(() => {
-      if (!marker.getPopup().isOpen()) {
-        marker.togglePopup();
-      }
-      
-      // Ensure popup is visible and clickable
-      const popupElement = document.querySelector(`.mapboxgl-popup[data-facility-id="${facility.id}"]`);
-      if (popupElement instanceof HTMLElement) {
-        popupElement.style.zIndex = '1100';
-        popupElement.style.visibility = 'visible';
-        popupElement.style.display = 'block';
-        popupElement.style.pointerEvents = 'all';
-      }
-    }, 50);
-  };
-  
-  // Remove any existing click listeners to prevent duplicates
-  el.removeEventListener('click', handleMarkerClick as EventListener);
-  
-  // Add click event with direct method call and logging
-  el.addEventListener('click', handleMarkerClick);
-  
   // Add the facility ID to the popup element when it's added to the DOM
   popup.on('open', () => {
     setTimeout(() => {

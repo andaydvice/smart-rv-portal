@@ -7,8 +7,11 @@ import {
   createFacilityMarker,
   hasValidCoordinates
 } from '../../utils/markerUtils';
+import { useMarkerClickHandlers } from './useMarkerClickHandlers';
 
 export const useCreateNewMarker = () => {
+  const { applyClickHandlerToMarker } = useMarkerClickHandlers();
+
   const createMarker = (
     facility: StorageFacility,
     map: mapboxgl.Map,
@@ -44,6 +47,18 @@ export const useCreateNewMarker = () => {
       const popup = marker.getPopup();
       popup.options.closeOnClick = false;
       popup.options.closeButton = true;
+      
+      // Get marker element and apply click handler
+      const markerElement = marker.getElement();
+      if (markerElement) {
+        applyClickHandlerToMarker(
+          markerElement,
+          marker,
+          facility.id,
+          facility.name,
+          onMarkerClick
+        );
+      }
       
       // Force the marker to be visible and interactive
       enhanceMarkerVisibility(marker);
