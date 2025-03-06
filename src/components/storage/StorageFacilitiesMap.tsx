@@ -47,9 +47,31 @@ const StorageFacilitiesMap = () => {
   useEffect(() => {
     if (filteredFacilities?.length) {
       console.log(`Loaded ${filteredFacilities.length} storage facilities`);
+      console.log('First few facilities:', filteredFacilities.slice(0, 3));
       toast.success(`Loaded ${filteredFacilities.length} storage facilities`);
+    } else if (filteredFacilities && filteredFacilities.length === 0 && !isLoading) {
+      console.log('No facilities found for the current filters');
+      toast.info('No facilities found for the current filters');
     }
-  }, [filteredFacilities?.length]);
+  }, [filteredFacilities, isLoading]);
+
+  // Log any errors that occur
+  useEffect(() => {
+    if (error) {
+      console.error('Error loading facilities:', error);
+      toast.error(`Error loading facilities: ${error.message}`);
+    }
+  }, [error]);
+
+  // Log map token status
+  useEffect(() => {
+    if (mapToken) {
+      console.log('Map token loaded successfully');
+    } else if (mapTokenError) {
+      console.error('Map token error:', mapTokenError);
+      toast.error(`Map token error: ${mapTokenError}`);
+    }
+  }, [mapToken, mapTokenError]);
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 min-h-[800px]">

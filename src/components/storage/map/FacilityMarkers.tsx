@@ -14,6 +14,7 @@ import {
   countNewYorkFacilities
 } from './components/NewYorkFacilities';
 import MarkerStats, { MarkerStatistics } from './components/MarkerStats';
+import { toast } from "sonner";
 
 interface FacilityMarkersProps {
   map: mapboxgl.Map;
@@ -37,26 +38,64 @@ const FacilityMarkers: React.FC<FacilityMarkersProps> = ({
     totalNYFacilities: 0
   });
 
+  // Use a reference to track if the component is mounted
+  const isMounted = useRef(true);
+
   useEffect(() => {
+    isMounted.current = true;
+    return () => {
+      isMounted.current = false;
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!map || !map.loaded()) {
+      console.warn('Map not fully loaded yet, delaying marker creation');
+      const checkMapInterval = setInterval(() => {
+        if (map && map.loaded()) {
+          clearInterval(checkMapInterval);
+          if (isMounted.current) createMarkers();
+        }
+      }, 200);
+      
+      return () => {
+        clearInterval(checkMapInterval);
+      };
+    } else {
+      createMarkers();
+    }
+    
+    // Cleanup function
+    return () => {
+      console.log('🧹 Cleaning up markers');
+      markers.current.forEach(marker => marker.remove());
+      markers.current = [];
+    };
+  }, [map, facilities, highlightedFacility, onMarkerClick]);
+
+  const createMarkers = () => {
     // Clear existing markers
     markers.current.forEach(marker => marker.remove());
     markers.current = [];
     
-    console.log(`Received ${facilities.length} facilities to display on map`);
+    console.log(`Creating markers for ${facilities.length} facilities`);
+    toast.info(`Loading ${facilities.length} facilities on map`);
     
     // Count New York facilities
     const nyFacilitiesCount = countNewYorkFacilities(facilities);
-    console.log(`New York facilities count: ${nyFacilitiesCount}`);
     
     // Initialize statistics
     let processedNY = 0;
     let skipped = 0;
+    let created = 0;
 
     // Build coordinates map to identify overlapping markers
     const coordinatesMap = buildCoordinatesMap(facilities);
     
     // Force marker display by adding a small delay to ensure map is ready
     setTimeout(() => {
+      if (!isMounted.current) return;
+      
       // Create markers for each facility
       facilities.forEach((facility, index) => {
         try {
@@ -76,11 +115,6 @@ const FacilityMarkers: React.FC<FacilityMarkersProps> = ({
           // Calculate marker coordinates with offset for overlapping markers
           const coordinates = calculateMarkerOffset(facility, coordinatesMap, facilities, index);
           
-          // Log detailed information for New York facilities
-          if (isNY) {
-            logNewYorkFacilityDetails(facility, processedNY, coordinates);
-          }
-          
           // Create the marker
           const marker = createFacilityMarker(
             facility,
@@ -92,6 +126,7 @@ const FacilityMarkers: React.FC<FacilityMarkersProps> = ({
 
           // Track marker for later cleanup
           markers.current.push(marker);
+          created++;
         } catch (error) {
           console.error(`🚫 Error creating marker for ${facility.name}:`, error);
           skipped++;
@@ -99,25 +134,26 @@ const FacilityMarkers: React.FC<FacilityMarkersProps> = ({
       });
 
       // Update statistics
-      setStats({
-        markersCreated: markers.current.length,
-        skippedFacilities: skipped,
-        processedNYFacilities: processedNY,
-        totalFacilities: facilities.length,
-        totalNYFacilities: nyFacilitiesCount
-      });
-      
-      // Log summary
-      console.log(`✅ Created ${markers.current.length} markers on the map out of ${facilities.length} facilities (${skipped} skipped)`);
-      console.log(`✅ Processed ${processedNY} New York facilities out of ${nyFacilitiesCount} total NY facilities`);
-    }, 500);
-
-    // Cleanup function
-    return () => {
-      console.log('🧹 Cleaning up markers');
-      markers.current.forEach(marker => marker.remove());
-    };
-  }, [map, facilities, highlightedFacility, onMarkerClick]);
+      if (isMounted.current) {
+        setStats({
+          markersCreated: created,
+          skippedFacilities: skipped,
+          processedNYFacilities: processedNY,
+          totalFacilities: facilities.length,
+          totalNYFacilities: nyFacilitiesCount
+        });
+        
+        // Log summary
+        console.log(`✅ Created ${created} markers on the map out of ${facilities.length} facilities (${skipped} skipped)`);
+        
+        if (created > 0) {
+          toast.success(`Added ${created} storage facilities to map`);
+        } else if (facilities.length > 0 && created === 0) {
+          toast.error('Failed to display facilities on map');
+        }
+      }
+    }, 1000); // Increased delay to ensure map is fully loaded
+  };
 
   return <MarkerStats stats={stats} />;
 };

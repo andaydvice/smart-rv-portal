@@ -13,6 +13,7 @@ import {
   waitForMapStyleLoad,
   fitMapToBounds
 } from './map/utils/mapboxInit';
+import { toast } from "sonner";
 
 // Initialize Mapbox
 initializeMapboxGL();
@@ -42,8 +43,7 @@ const MapView = ({
   useEffect(() => {
     console.log(`MapView received ${facilities.length} facilities to display`);
     if (facilities.length > 0) {
-      console.log('First facility:', facilities[0]);
-      console.log('Last facility:', facilities[facilities.length - 1]);
+      console.log('Sample facilities:', facilities.slice(0, 3));
     }
   }, [facilities]);
 
@@ -57,6 +57,7 @@ const MapView = ({
     const initializeMap = async () => {
       try {
         if (map.current) {
+          console.log('Removing existing map instance');
           map.current.remove();
           map.current = null;
         }
@@ -65,21 +66,25 @@ const MapView = ({
           throw new Error('Invalid Mapbox token received');
         }
 
+        console.log('Creating new map instance');
         // Create new map instance
         const newMap = createMapInstance(mapContainer.current, mapToken);
 
         // Wait for style to load
+        console.log('Waiting for map style to load');
         await waitForMapStyleLoad(newMap);
         
         if (!isMounted) return;
 
-        // Enable essential interactions only
+        console.log('Map style loaded successfully');
+        
+        // Enable essential interactions
         newMap.dragPan.enable();
         newMap.scrollZoom.enable();
         newMap.doubleClickZoom.enable();
 
-        // Force a resize
-        setTimeout(() => newMap.resize(), 0);
+        // Force a resize to ensure proper rendering
+        setTimeout(() => newMap.resize(), 100);
 
         // Set up error handling
         newMap.on('error', (e) => {
@@ -87,6 +92,7 @@ const MapView = ({
           if (isMounted) {
             setMapError(`Map error: ${e.error?.message || 'Unknown error'}`);
             setIsInitializing(false);
+            toast.error(`Map error: ${e.error?.message || 'Unknown error'}`);
           }
         });
 
@@ -96,6 +102,7 @@ const MapView = ({
           setMapError(null);
           setIsInitializing(false);
           setMapLoaded(true);
+          toast.success('Map loaded successfully');
           
           // If we have a selected state, adjust the map view
           if (selectedState && facilities.length > 0) {
@@ -112,6 +119,7 @@ const MapView = ({
         } else if (isMounted) {
           setMapError(`Failed to initialize map: ${err instanceof Error ? err.message : 'Unknown error'}`);
           setIsInitializing(false);
+          toast.error(`Failed to initialize map: ${err instanceof Error ? err.message : 'Unknown error'}`);
         }
       }
     };
@@ -121,11 +129,20 @@ const MapView = ({
     return () => {
       isMounted = false;
       if (map.current) {
+        console.log('Cleaning up map instance');
         map.current.remove();
         map.current = null;
       }
     };
-  }, [mapToken, selectedState, facilities]);
+  }, [mapToken, selectedState]);
+
+  // Update map bounds when facilities change
+  useEffect(() => {
+    if (map.current && mapLoaded && facilities.length > 0) {
+      console.log('Updating map bounds for new facilities');
+      fitMapToBounds(map.current, facilities);
+    }
+  }, [facilities, mapLoaded]);
 
   return (
     <div className="relative w-full h-full">

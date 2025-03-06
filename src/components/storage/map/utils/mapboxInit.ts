@@ -4,26 +4,33 @@ import mapboxgl from 'mapbox-gl';
 // Prevent WebGL context errors in Firefox
 export const initializeMapboxGL = () => {
   if (!mapboxgl.supported()) {
+    console.error('Your browser does not support Mapbox GL');
     alert('Your browser does not support Mapbox GL');
     return false;
   } else {
-    // Pre-initialize WebGL context
-    const canvas = document.createElement('canvas');
-    const gl = canvas.getContext('webgl', {
-      failIfMajorPerformanceCaveat: false,
-      preserveDrawingBuffer: true,
-      antialias: false // Disable antialiasing to reduce context loss
-    });
-    
-    if (gl) {
-      gl.getExtension('OES_element_index_uint');
-      // Clear any existing context
-      gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+    try {
+      // Pre-initialize WebGL context
+      const canvas = document.createElement('canvas');
+      const gl = canvas.getContext('webgl', {
+        failIfMajorPerformanceCaveat: false,
+        preserveDrawingBuffer: true,
+        antialias: false // Disable antialiasing to reduce context loss
+      });
+      
+      if (gl) {
+        gl.getExtension('OES_element_index_uint');
+        // Clear any existing context
+        gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+      }
+      
+      // Warm up the GL context
+      mapboxgl.prewarm();
+      console.log('MapboxGL initialized successfully');
+      return true;
+    } catch (error) {
+      console.error('Error initializing MapboxGL:', error);
+      return false;
     }
-    
-    // Warm up the GL context
-    mapboxgl.prewarm();
-    return true;
   }
 };
 
@@ -33,11 +40,13 @@ export const createMapInstance = (
   center: [number, number] = [-98.5795, 39.8283],
   zoom: number = 3
 ): mapboxgl.Map => {
+  console.log('Setting up mapbox with token', mapToken.substring(0, 5) + '...');
+  
   // Set the token
   mapboxgl.accessToken = mapToken;
 
   // Create map with optimized settings
-  return new mapboxgl.Map({
+  const mapInstance = new mapboxgl.Map({
     container,
     style: 'mapbox://styles/mapbox/dark-v11',
     center,
@@ -51,18 +60,39 @@ export const createMapInstance = (
     maxZoom: 17, // Limit max zoom to reduce tile requests
     minZoom: 2, // Set minimum zoom
     hash: false, // Disable hash
-    refreshExpiredTiles: false // Disable tile refresh
+    refreshExpiredTiles: false, // Disable tile refresh
+    logoPosition: 'bottom-left',
+    cooperativeGestures: false, // Disable cooperative gestures for better mobile experience
   });
+  
+  // Add debug event listeners
+  mapInstance.on('load', () => {
+    console.log('Map fully loaded');
+  });
+  
+  mapInstance.on('idle', () => {
+    console.log('Map is idle and ready for markers');
+  });
+  
+  return mapInstance;
 };
 
 export const waitForMapStyleLoad = (map: mapboxgl.Map): Promise<void> => {
   return new Promise<void>((resolve, reject) => {
+    if (map.isStyleLoaded()) {
+      console.log('Map style already loaded');
+      resolve();
+      return;
+    }
+    
+    console.log('Waiting for map style to load...');
     const timeoutId = setTimeout(() => {
-      reject(new Error('Map style load timeout'));
-    }, 10000);
+      reject(new Error('Map style load timeout after 15 seconds'));
+    }, 15000); // Increased timeout
 
     map.once('style.load', () => {
       clearTimeout(timeoutId);
+      console.log('Map style loaded event fired');
       resolve();
     });
   });
@@ -70,24 +100,50 @@ export const waitForMapStyleLoad = (map: mapboxgl.Map): Promise<void> => {
 
 export const fitMapToBounds = (
   map: mapboxgl.Map, 
-  facilities: Array<{ longitude: number; latitude: number }>,
+  facilities: Array<{ longitude: number | string; latitude: number | string }>,
   padding: number = 50,
   maxZoom: number = 10
 ): void => {
   try {
+    if (!facilities || facilities.length === 0) {
+      console.warn('No facilities provided to fit bounds');
+      return;
+    }
+    
     // Calculate bounds of all facilities
     const bounds = new mapboxgl.LngLatBounds();
+    let validCoordinatesCount = 0;
+    
     facilities.forEach(facility => {
-      if (facility.longitude && facility.latitude) {
-        bounds.extend([facility.longitude, facility.latitude]);
+      try {
+        const lng = typeof facility.longitude === 'string' ? 
+          parseFloat(facility.longitude) : Number(facility.longitude);
+        const lat = typeof facility.latitude === 'string' ? 
+          parseFloat(facility.latitude) : Number(facility.latitude);
+          
+        if (!isNaN(lng) && !isNaN(lat) && Math.abs(lat) <= 90 && Math.abs(lng) <= 180) {
+          bounds.extend([lng, lat]);
+          validCoordinatesCount++;
+        }
+      } catch (e) {
+        console.warn('Invalid facility coordinates:', facility);
       }
     });
+    
+    console.log(`Fitting map to bounds with ${validCoordinatesCount} valid coordinates`);
     
     // Fit map to these bounds if we have valid coordinates
     if (!bounds.isEmpty()) {
       map.fitBounds(bounds, {
         padding,
         maxZoom
+      });
+    } else {
+      console.warn('No valid coordinates to fit bounds');
+      // Default to US view if no valid coordinates
+      map.flyTo({
+        center: [-98.5795, 39.8283],
+        zoom: 3
       });
     }
   } catch (error) {

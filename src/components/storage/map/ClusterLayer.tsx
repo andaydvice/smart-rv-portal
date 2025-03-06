@@ -3,6 +3,7 @@ import React, { useEffect } from 'react';
 import mapboxgl from 'mapbox-gl';
 import { StorageFacility } from '../types';
 import type { Feature, FeatureCollection, Point } from 'geojson';
+import { toast } from "sonner";
 
 interface ClusterLayerProps {
   map: mapboxgl.Map;
@@ -23,17 +24,37 @@ const ClusterLayer: React.FC<ClusterLayerProps> = ({ map, facilities, highlighte
           map.removeSource('facilities');
         }
 
+        // Skip if no facilities
+        if (!facilities || facilities.length === 0) {
+          console.log('No facilities to add to cluster layer');
+          return;
+        }
+
+        console.log(`Adding ${facilities.length} facilities to cluster layer`);
+
         // Create the GeoJSON data with proper typing
+        const validFacilities = facilities.filter(facility => {
+          const lat = Number(facility.latitude);
+          const lng = Number(facility.longitude);
+          return !isNaN(lat) && !isNaN(lng) && Math.abs(lat) <= 90 && Math.abs(lng) <= 180;
+        });
+
+        if (validFacilities.length === 0) {
+          console.warn('No valid coordinates for cluster layer');
+          return;
+        }
+
         const geojsonData: FeatureCollection<Point> = {
           type: "FeatureCollection",
-          features: facilities.map((facility): Feature<Point> => ({
+          features: validFacilities.map((facility): Feature<Point> => ({
             type: "Feature",
             geometry: {
               type: "Point",
-              coordinates: [facility.longitude, facility.latitude]
+              coordinates: [Number(facility.longitude), Number(facility.latitude)]
             },
             properties: {
               id: facility.id,
+              name: facility.name,
               isHighlighted: facility.id === highlightedFacility
             }
           }))
@@ -55,16 +76,18 @@ const ClusterLayer: React.FC<ClusterLayerProps> = ({ map, facilities, highlighte
           source: 'facilities',
           filter: ['has', 'point_count'],
           paint: {
-            'circle-color': '#60A5FA',
+            'circle-color': '#F97316', // Changed to orange for better visibility
             'circle-radius': [
               'step',
               ['get', 'point_count'],
-              20,
+              25, // Base size
               10,
-              30,
+              35,
               50,
-              40
-            ]
+              45
+            ],
+            'circle-stroke-width': 2,
+            'circle-stroke-color': '#fff'
           }
         });
 
@@ -77,29 +100,38 @@ const ClusterLayer: React.FC<ClusterLayerProps> = ({ map, facilities, highlighte
           layout: {
             'text-field': '{point_count_abbreviated}',
             'text-font': ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
-            'text-size': 12
+            'text-size': 14
           },
           paint: {
             'text-color': '#ffffff'
           }
         });
+
+        console.log('Cluster layer initialized successfully');
       } catch (err) {
         console.error('Error initializing cluster layer:', err);
+        toast.error(`Error initializing map clusters: ${err instanceof Error ? err.message : 'Unknown error'}`);
       }
     };
 
     const setupMap = () => {
+      if (!map) {
+        console.error('Map not available for cluster layer');
+        return;
+      }
+      
       if (!map.isStyleLoaded()) {
         // Wait for the style to load before adding sources and layers
+        console.log('Style not loaded yet, waiting...');
         map.once('style.load', () => {
           if (isMounted) {
-            console.log('Style loaded, initializing layer');
+            console.log('Style loaded, initializing cluster layer');
             initializeLayer();
           }
         });
       } else {
         // Style is already loaded, initialize immediately
-        console.log('Style already loaded, initializing layer');
+        console.log('Style already loaded, initializing cluster layer');
         initializeLayer();
       }
     };

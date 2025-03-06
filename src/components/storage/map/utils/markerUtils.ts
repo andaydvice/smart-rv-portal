@@ -51,7 +51,7 @@ export const calculateMarkerOffset = (
     
     // Apply spiral pattern offset
     const angle = (markerPosition * (2 * Math.PI)) / markersAtCoord;
-    const radius = 0.0003 * (markerPosition + 1); // Small offset in degrees (~30 meters)
+    const radius = 0.0005 * (markerPosition + 1); // Increased offset for better visibility
     
     offsetLat = lat + radius * Math.sin(angle);
     offsetLng = lng + radius * Math.cos(angle);
@@ -95,8 +95,19 @@ export const createFacilityMarker = (
   onMarkerClick: (facilityId: string) => void,
   map: mapboxgl.Map
 ): mapboxgl.Marker => {
-  // Use more visible marker colors
-  const markerColor = isHighlighted ? '#10B981' : '#F97316'; // Changed to orange for better visibility
+  // Use more visible marker colors with higher contrast
+  const markerColor = isHighlighted ? '#10B981' : '#F97316'; // Green for highlighted, Orange for normal
+  
+  // Create a custom HTML marker for better visibility
+  const el = document.createElement('div');
+  el.className = 'custom-marker';
+  el.style.backgroundColor = markerColor;
+  el.style.width = '20px';
+  el.style.height = '20px';
+  el.style.borderRadius = '50%';
+  el.style.border = '2px solid white';
+  el.style.boxShadow = '0 0 10px rgba(0,0,0,0.5)';
+  el.style.cursor = 'pointer';
   
   // Create popup
   const popup = new mapboxgl.Popup({
@@ -105,10 +116,10 @@ export const createFacilityMarker = (
     className: 'storage-facility-popup'
   }).setHTML(createPopupHTML(facility));
 
-  // Create marker with larger size for better visibility
+  // Create marker with custom element for better visibility
   const marker = new mapboxgl.Marker({
-    color: markerColor,
-    scale: 1.2 // Slightly larger markers
+    element: el,
+    anchor: 'center'
   })
     .setLngLat(coordinates)
     .setPopup(popup)
@@ -140,5 +151,5 @@ export const hasValidCoordinates = (facility: StorageFacility): boolean => {
   const lat = Number(facility.latitude);
   const lng = Number(facility.longitude);
   
-  return !isNaN(lat) && !isNaN(lng);
+  return !isNaN(lat) && !isNaN(lng) && Math.abs(lat) <= 90 && Math.abs(lng) <= 180;
 };
