@@ -15,7 +15,7 @@ export const createPopupHTML = (facility: StorageFacility) => {
     .map(([key, _]) => featureLabels[key as keyof typeof featureLabels]);
 
   return `
-    <div class="p-6 bg-[#131a2a] text-white rounded-lg max-w-md popup-content">
+    <div class="p-6 bg-[#131a2a] text-white rounded-lg max-w-md popup-content" data-facility-id="${facility.id}">
       <h3 class="font-bold text-xl mb-3 text-[#60A5FA]">${facility.name}</h3>
       
       <div class="space-y-2 mb-4">
@@ -72,26 +72,29 @@ export const createPopupHTML = (facility: StorageFacility) => {
       <style>
         /* Critical styles to fix popup visibility and interaction issues */
         .mapboxgl-popup {
-          z-index: 10000 !important; 
-          pointer-events: auto !important;
+          z-index: 1100 !important; 
+          pointer-events: all !important;
+          visibility: visible !important;
+          display: block !important;
         }
         .mapboxgl-popup-content {
-          z-index: 10001 !important;
+          z-index: 1100 !important;
           padding: 0 !important;
           overflow: visible !important;
-          pointer-events: auto !important;
+          pointer-events: all !important;
+          visibility: visible !important;
         }
         .mapboxgl-popup-close-button {
-          z-index: 10002 !important;
+          z-index: 1110 !important;
           color: white !important;
           font-size: 20px !important;
           padding: 5px 10px !important;
           right: 2px !important;
           top: 2px !important;
-          pointer-events: auto !important;
+          pointer-events: all !important;
         }
         .popup-content {
-          pointer-events: auto !important;
+          pointer-events: all !important;
         }
       </style>
     </div>

@@ -1,5 +1,5 @@
 
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState, useEffect, useCallback } from 'react';
 import mapboxgl from 'mapbox-gl';
 import { StorageFacility } from '../../types';
 import { 
@@ -35,11 +35,28 @@ export const useMarkerManagement = ({
 
   // Use a reference to track if the component is mounted
   const isMounted = useRef(true);
+  
+  // Track facilities that have already been processed
+  const processedFacilityIds = useRef<Set<string>>(new Set());
 
   useEffect(() => {
     isMounted.current = true;
+    
+    // Add global event listener to handle popup clicks (persists across re-renders)
+    const handleDocumentClick = (e: MouseEvent) => {
+      // Don't close popups when clicking on the map or other elements
+      if ((e.target as Element)?.closest('.mapboxgl-popup-content') ||
+          (e.target as Element)?.closest('.custom-marker')) {
+        // Prevent default actions for popup interactions
+        e.stopPropagation();
+      }
+    };
+    
+    document.addEventListener('click', handleDocumentClick, true);
+    
     return () => {
       isMounted.current = false;
+      document.removeEventListener('click', handleDocumentClick, true);
     };
   }, []);
 
@@ -55,17 +72,24 @@ export const useMarkerManagement = ({
           const el = marker.getElement();
           if (el) {
             el.style.backgroundColor = isHighlighted ? '#10B981' : '#F97316';
-            el.style.zIndex = isHighlighted ? '10000' : '9999';
+            el.style.zIndex = isHighlighted ? '1100' : '1000';
             el.style.transform = `translate(-50%, -50%) scale(${isHighlighted ? 1.2 : 1})`;
             el.style.boxShadow = isHighlighted ? 
               '0 0 20px rgba(16, 185, 129, 0.8)' : 
               '0 0 10px rgba(0,0,0,0.8)';
             
+            // Set highlighted attribute for CSS targeting
+            if (isHighlighted) {
+              el.setAttribute('data-highlighted', 'true');
+            } else {
+              el.removeAttribute('data-highlighted');
+            }
+            
             // Force visibility and interactivity
             el.style.visibility = 'visible';
             el.style.opacity = '1';
             el.style.display = 'block';
-            el.style.pointerEvents = 'auto';
+            el.style.pointerEvents = 'all';
           }
           
           if (isHighlighted) {
@@ -73,6 +97,16 @@ export const useMarkerManagement = ({
             // Open popup for highlighted facility
             if (!marker.getPopup().isOpen()) {
               marker.togglePopup();
+              
+              // Enhance popup visibility after opening
+              setTimeout(() => {
+                const popupEl = marker.getPopup().getElement();
+                if (popupEl) {
+                  popupEl.style.zIndex = '1100';
+                  popupEl.style.visibility = 'visible';
+                  popupEl.style.pointerEvents = 'all';
+                }
+              }, 50);
             }
           }
         }
@@ -80,20 +114,21 @@ export const useMarkerManagement = ({
     }
   }, [highlightedFacility, facilities, map]);
 
-  // Function to create all markers
-  const createMarkers = () => {
+  // Function to create all markers - using useCallback to maintain reference stability
+  const createMarkers = useCallback(() => {
     console.log(`Creating markers for ${facilities.length} facilities`);
-    
-    // Clear existing markers
-    markers.current.forEach(marker => marker.remove());
-    markers.current = [];
     
     if (!map || !map.loaded()) {
       console.warn('Map not fully loaded yet, cannot create markers');
       return;
     }
     
-    toast.info(`Loading ${facilities.length} facilities on map`);
+    // Only show toast if we're actually creating new markers
+    const newFacilities = facilities.filter(f => !processedFacilityIds.current.has(f.id));
+    
+    if (newFacilities.length > 0) {
+      toast.info(`Loading ${newFacilities.length} facilities on map`);
+    }
     
     // Initialize statistics
     let skipped = 0;
@@ -104,6 +139,12 @@ export const useMarkerManagement = ({
     
     // Create markers for each facility
     facilities.forEach((facility, index) => {
+      // Skip if we've already created a marker for this facility
+      if (processedFacilityIds.current.has(facility.id)) {
+        console.log(`Marker already exists for ${facility.name}, skipping`);
+        return;
+      }
+      
       try {
         // Check if facility has valid coordinates
         if (!hasValidCoordinates(facility)) {
@@ -130,8 +171,11 @@ export const useMarkerManagement = ({
           el.style.visibility = 'visible';
           el.style.opacity = '1';
           el.style.display = 'block';
-          el.style.zIndex = '9999';
-          el.style.pointerEvents = 'auto';
+          el.style.zIndex = '1000';
+          el.style.pointerEvents = 'all';
+          
+          // Set persistent data attribute
+          el.setAttribute('data-persistent', 'true');
           
           // Add extra click handler in case the original one doesn't fire
           el.onclick = (e) => {
@@ -148,6 +192,10 @@ export const useMarkerManagement = ({
 
         // Track marker for later cleanup
         markers.current.push(marker);
+        
+        // Add to our processed set to avoid duplication
+        processedFacilityIds.current.add(facility.id);
+        
         created++;
       } catch (error) {
         console.error(`🚫 Error creating marker for ${facility.name}:`, error);
@@ -170,34 +218,60 @@ export const useMarkerManagement = ({
       
       if (created > 0) {
         toast.success(`Added ${created} storage facilities to map`);
-      } else if (facilities.length > 0 && created === 0) {
+      } else if (facilities.length > 0 && created === 0 && newFacilities.length > 0) {
         toast.error('Failed to display facilities on map');
       }
     }
-  };
+  }, [facilities, map, highlightedFacility, onMarkerClick]);
 
-  // Function to ensure markers are visible
-  const forceMarkerVisibility = () => {
+  // Function to ensure markers are visible - using useCallback for stability
+  const forceMarkerVisibility = useCallback(() => {
     // Force all markers to be visible and interactive
     document.querySelectorAll('.mapboxgl-marker, .custom-marker').forEach(marker => {
       if (marker instanceof HTMLElement) {
         marker.style.visibility = 'visible';
         marker.style.opacity = '1';
         marker.style.display = 'block';
-        marker.style.zIndex = '9999';
-        marker.style.pointerEvents = 'auto';
+        marker.style.zIndex = '1000';
+        marker.style.pointerEvents = 'all';
         marker.style.cursor = 'pointer';
       }
     });
     
-    // Force all popups to be visible and interactive
+    // Force all popups to be visible and interactive with higher z-index
     document.querySelectorAll('.mapboxgl-popup, .mapboxgl-popup-content').forEach(popup => {
       if (popup instanceof HTMLElement) {
-        popup.style.zIndex = '10000';
-        popup.style.pointerEvents = 'auto';
+        popup.style.zIndex = '1100';
+        popup.style.visibility = 'visible';
+        popup.style.pointerEvents = 'all';
+        popup.style.display = 'block';
       }
     });
-  };
+    
+    // Fix popup close buttons
+    document.querySelectorAll('.mapboxgl-popup-close-button').forEach(button => {
+      if (button instanceof HTMLElement) {
+        button.style.zIndex = '1110';
+        button.style.pointerEvents = 'all';
+      }
+    });
+  }, []);
+  
+  // Restore markers after map style reload
+  useEffect(() => {
+    if (!map) return;
+    
+    const handleStyleData = () => {
+      // When map style reloads, restore markers
+      setTimeout(forceMarkerVisibility, 100);
+    };
+    
+    map.on('styledata', handleStyleData);
+    
+    return () => {
+      map.off('styledata', handleStyleData);
+    };
+  }, [map, forceMarkerVisibility]);
 
   return {
     markers,
@@ -205,4 +279,4 @@ export const useMarkerManagement = ({
     createMarkers,
     forceMarkerVisibility
   };
-};
+}, [facilities, map, highlightedFacility, onMarkerClick]);
