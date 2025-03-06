@@ -73,3 +73,69 @@ export const createMapInstance = (
     pitchWithRotate: false, // Disable pitch with rotate for simpler navigation
   });
 };
+
+/**
+ * Waits for the map style to be fully loaded
+ */
+export const waitForMapStyleLoad = (map: mapboxgl.Map): Promise<void> => {
+  return new Promise((resolve, reject) => {
+    if (!map) {
+      reject(new Error('Map instance is null or undefined'));
+      return;
+    }
+
+    if (map.isStyleLoaded()) {
+      console.log('Map style already loaded');
+      resolve();
+      return;
+    }
+
+    // Set a timeout to avoid hanging if the style never loads
+    const timeout = setTimeout(() => {
+      console.warn('Map style load timeout - continuing anyway');
+      resolve();
+    }, 10000);
+
+    // Listen for the styledata event
+    const styleListener = () => {
+      console.log('Map style loaded via event');
+      clearTimeout(timeout);
+      map.off('styledata', styleListener);
+      resolve();
+    };
+
+    map.on('styledata', styleListener);
+    
+    // Also check for the style.load event
+    map.once('style.load', () => {
+      console.log('Map style.load event fired');
+      clearTimeout(timeout);
+      map.off('styledata', styleListener);
+      resolve();
+    });
+  });
+};
+
+/**
+ * Configures map settings after initialization
+ */
+export const configureMapSettings = (map: mapboxgl.Map): void => {
+  if (!map) return;
+  
+  // Apply performance optimizations
+  map.dragRotate.disable(); // Disable 3D rotation for better performance
+  
+  // Set better defaults for marker visibility
+  map.getCanvas().style.cursor = 'default';
+  
+  // Force hardware acceleration if available
+  const canvas = map.getCanvas();
+  canvas.style.transform = 'translate3d(0,0,0)';
+  
+  // Add a custom event for map ready state
+  setTimeout(() => {
+    map.fire('map.ready');
+    console.log('Map ready event fired');
+  }, 500);
+};
+

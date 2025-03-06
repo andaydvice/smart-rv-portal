@@ -1,69 +1,57 @@
 
-import mapboxgl from 'mapbox-gl';
-
 /**
- * Set up event listeners for the map
+ * Sets up map event listeners for essential map functionality
  */
 export const setupMapEventListeners = (map: mapboxgl.Map): void => {
-  // Log when the map becomes idle (fully loaded and ready)
-  map.on('idle', () => {
-    console.log('Map is idle and ready for markers');
+  if (!map) return;
+  
+  // Prevent map interaction events from bubbling up
+  map.getCanvas().addEventListener('click', (e) => {
+    e.stopPropagation();
   });
-
-  // Handle click events on map to ensure popups stay open
-  map.on('click', (e) => {
-    // Log the click coordinates
-    console.log(`Map clicked at: ${e.lngLat.lng}, ${e.lngLat.lat}`);
+  
+  // Log render performance statistics
+  map.on('render', () => {
+    // This will only log warnings if the frame rate drops significantly
+    const frameTime = map.getFrameTime();
+    if (frameTime > 100) { // Only log slow frames (>100ms)
+      console.warn(`Slow map render detected: ${frameTime.toFixed(1)}ms`);
+    }
   });
-
-  // Handle popup events for debugging
-  map.on('popupopen', () => {
-    console.log('A popup was opened');
-  });
-
-  map.on('popupclose', () => {
-    console.log('A popup was closed');
-  });
-
-  // Handle map movement events
-  map.on('movestart', () => {
-    console.log('Map movement started');
-  });
-
-  map.on('moveend', () => {
-    console.log('Map movement ended');
-  });
-
-  // Handle zoom events
-  map.on('zoomstart', () => {
-    console.log('Map zoom started');
-  });
-
-  map.on('zoomend', () => {
-    console.log('Map zoom ended');
-  });
-
-  // Log errors
-  map.on('error', (e) => {
-    console.error('Map error:', e);
+  
+  // Enhance marker visibility after style load
+  map.once('style.load', () => {
+    // Apply any additional style-dependent configurations
+    document.querySelectorAll('.mapboxgl-marker').forEach(marker => {
+      if (marker instanceof HTMLElement) {
+        marker.style.zIndex = '9999';
+        marker.style.visibility = 'visible';
+        marker.style.display = 'block';
+      }
+    });
   });
 };
 
 /**
- * Create map click handler to prevent popups from closing
+ * Creates a click handler for the map container to prevent closing popups
  */
-export const createMapClickHandler = (mapContainer: HTMLElement): void => {
-  // This handler is attached to the map container to prevent closing popups
-  mapContainer.addEventListener('click', (e: MouseEvent) => {
-    // Only handle clicks on the map canvas, not on markers or popups
-    if ((e.target as HTMLElement)?.classList.contains('mapboxgl-canvas')) {
-      // Check if we're clicking outside any popup
-      if (!(e.target as HTMLElement)?.closest('.mapboxgl-popup')) {
-        console.log('Map canvas clicked, checking if we need to prevent popup closing');
-        
-        // Let map handle the click, but log for debugging
-        console.log('Allowing map click to proceed');
-      }
-    }
-  }, true); // Use capture phase to intercept events early
+export const createMapClickHandler = (container: HTMLElement): void => {
+  if (!container) return;
+  
+  container.addEventListener('click', (e) => {
+    // Prevent clicks on the map from bubbling up to parent elements
+    e.stopPropagation();
+    
+    // Ensure markers remain visible after clicks
+    setTimeout(() => {
+      document.querySelectorAll('.mapboxgl-marker, .custom-marker').forEach(marker => {
+        if (marker instanceof HTMLElement) {
+          marker.style.visibility = 'visible';
+          marker.style.opacity = '1';
+          marker.style.zIndex = '9999';
+        }
+      });
+    }, 100);
+  });
 };
+

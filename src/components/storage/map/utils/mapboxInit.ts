@@ -1,6 +1,11 @@
 
-// Re-export all initialization functions
-export * from './initialization';
+// Re-export all initialization functions including new waitForMapStyleLoad and configureMapSettings
+export { 
+  initializeMapboxGL, 
+  createMapInstance, 
+  waitForMapStyleLoad, 
+  configureMapSettings 
+} from './initialization';
 
 // Re-export all configuration functions
 export * from './mapConfiguration';
@@ -10,3 +15,4 @@ export * from './mapEvents';
 
 // Re-export all map bounds functions
 export * from './mapBounds';
+
