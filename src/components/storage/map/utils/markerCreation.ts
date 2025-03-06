@@ -14,14 +14,14 @@ export function createFacilityMarker(
   el.className = 'custom-marker';
   el.id = `marker-${facility.id}`;
   
-  // Apply critical styling directly to element
+  // Apply critical styling directly to element for guaranteed visibility
   Object.assign(el.style, {
     backgroundColor: isHighlighted ? '#10B981' : '#F97316',
     zIndex: isHighlighted ? '9999' : '9998',
-    visibility: 'visible',
-    display: 'block',
-    opacity: '1',
-    pointerEvents: 'all',
+    visibility: 'visible !important',
+    display: 'block !important',
+    opacity: '1 !important',
+    pointerEvents: 'all !important',
     cursor: 'pointer',
     position: 'absolute',
     transform: `translate(-50%, -50%) scale(${isHighlighted ? 1.2 : 1})`,
@@ -44,13 +44,28 @@ export function createFacilityMarker(
     className: 'facility-popup'
   });
   
-  // Set popup content - using price_range instead of priceRange
+  // Make sure popup doesn't automatically close when clicking elsewhere
+  popup.on('open', () => {
+    setTimeout(() => {
+      const popupElement = popup.getElement();
+      if (popupElement) {
+        popupElement.style.zIndex = '10000';
+        popupElement.style.visibility = 'visible';
+        popupElement.style.display = 'block';
+        popupElement.style.opacity = '1';
+        popupElement.style.pointerEvents = 'all';
+        popupElement.setAttribute('data-facility-id', facility.id);
+      }
+    }, 10);
+  });
+  
+  // Set popup content
   popup.setHTML(`
     <div class="facility-popup-content">
       <h3>${facility.name}</h3>
       <p>${facility.address}</p>
       <p>Price: $${facility.price_range.min} - $${facility.price_range.max}</p>
-      <button class="view-facility-btn" onclick="window.viewFacility('${facility.id}')">View Details</button>
+      <button class="view-facility-btn" data-facility-id="${facility.id}">View Details</button>
     </div>
   `);
   
@@ -64,33 +79,56 @@ export function createFacilityMarker(
   .setLngLat(coordinates)
   .setPopup(popup);
   
-  // Only add to map if map is fully loaded
+  // Add marker to map immediately if it's loaded
   if (map && map.loaded()) {
     try {
       marker.addTo(map);
     } catch (err) {
       console.error(`Error adding marker for ${facility.name}:`, err);
+      
+      // Retry once after a short delay
+      setTimeout(() => {
+        try {
+          if (!marker.getElement().isConnected && map) {
+            marker.addTo(map);
+          }
+        } catch (retryErr) {
+          console.error(`Retry failed for marker ${facility.id}:`, retryErr);
+        }
+      }, 100);
     }
   }
   
-  // Add separate click handler on marker element
+  // Add click handler to marker element
   el.addEventListener('click', (e) => {
     e.stopPropagation();
     onClick(facility.id);
     
-    // Toggle popup
+    // Toggle popup with force-open behavior
     if (!popup.isOpen()) {
       popup.addTo(map);
     }
+    
+    // Ensure popup stays visible and gets proper styling
+    setTimeout(() => {
+      const popupEl = popup.getElement();
+      if (popupEl) {
+        popupEl.style.zIndex = '10000';
+        popupEl.style.visibility = 'visible';
+        popupEl.style.display = 'block';
+        popupEl.style.opacity = '1';
+        popupEl.style.pointerEvents = 'all';
+      }
+      
+      // Add event listener to View Details button inside popup
+      const viewButton = popupEl?.querySelector('.view-facility-btn');
+      if (viewButton) {
+        viewButton.addEventListener('click', () => {
+          onClick(facility.id);
+        });
+      }
+    }, 50);
   });
-  
-  // Add global function to window for popup button click
-  // Only set if it doesn't exist to prevent multiple handlers
-  if (!window.viewFacility) {
-    window.viewFacility = function(id: string) {
-      onClick(id);
-    };
-  }
   
   return marker;
 }

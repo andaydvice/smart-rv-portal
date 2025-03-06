@@ -3,6 +3,7 @@ import React from 'react';
 import { Button } from "@/components/ui/button";
 import { CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Printer, Save, RotateCcw, CheckSquare } from "lucide-react";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
 interface ChecklistHeaderProps {
   completionPercentage: number;
@@ -47,38 +48,67 @@ const ChecklistHeader: React.FC<ChecklistHeaderProps> = ({
         <div className="flex flex-col gap-4 mt-6">
           {/* Button group - stack vertically on mobile, horizontal on larger screens */}
           <div className="flex flex-wrap gap-2 w-full">
-            <Button 
-              variant="outline" 
-              className="gap-2 bg-[#151A22] hover:bg-[#1d2532] hover:text-white text-white border-gray-700 
-              focus:text-white active:text-white focus:bg-[#1d2532] active:bg-[#1d2532] focus:border-[#5B9BD5] active:border-[#5B9BD5]"
-              onClick={onSave}
-              disabled={isSaving}
-              size="sm"
-            >
-              <Save size={16} className="text-[#5B9BD5]" />
-              {isSaving ? 'Saving...' : 'Save Progress'}
-            </Button>
-            <Button 
-              variant="outline" 
-              className="gap-2 bg-[#151A22] hover:bg-[#1d2532] hover:text-white text-white border-gray-700
-              focus:text-white active:text-white focus:bg-[#1d2532] active:bg-[#1d2532] focus:border-[#5B9BD5] active:border-[#5B9BD5]"
-              onClick={onPrint}
-              size="sm"
-            >
-              <Printer size={16} className="text-[#5B9BD5]" />
-              Print
-            </Button>
-            <Button 
-              variant="outline" 
-              className="gap-2 bg-[#151A22] hover:bg-[#1d2532] hover:text-white text-white border-gray-700
-              focus:text-white active:text-white focus:bg-[#1d2532] active:bg-[#1d2532] focus:border-[#5B9BD5] active:border-[#5B9BD5]"
-              onClick={onReset}
-              disabled={isSaving}
-              size="sm"
-            >
-              <RotateCcw size={16} className="text-[#5B9BD5]" />
-              Reset
-            </Button>
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button 
+                    variant="outline" 
+                    className="gap-2 bg-[#151A22] hover:bg-[#1d2532] hover:text-white text-white border-gray-700 
+                    focus:text-white active:text-white focus:bg-[#1d2532] active:bg-[#1d2532] focus:border-[#5B9BD5] active:border-[#5B9BD5]"
+                    onClick={onSave}
+                    disabled={isSaving}
+                    size="sm"
+                  >
+                    <Save size={16} className="text-[#5B9BD5]" />
+                    {isSaving ? 'Saving...' : 'Save Progress'}
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>Save your checklist progress</p>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
+
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button 
+                    variant="outline" 
+                    className="gap-2 bg-[#151A22] hover:bg-[#1d2532] hover:text-white text-white border-gray-700
+                    focus:text-white active:text-white focus:bg-[#1d2532] active:bg-[#1d2532] focus:border-[#5B9BD5] active:border-[#5B9BD5]"
+                    onClick={onPrint}
+                    size="sm"
+                  >
+                    <Printer size={16} className="text-[#5B9BD5]" />
+                    Print
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>Print your checklist</p>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
+
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button 
+                    variant="outline" 
+                    className="gap-2 bg-[#151A22] hover:bg-[#1d2532] hover:text-white text-white border-gray-700
+                    focus:text-white active:text-white focus:bg-[#1d2532] active:bg-[#1d2532] focus:border-[#5B9BD5] active:border-[#5B9BD5]"
+                    onClick={onReset}
+                    disabled={isSaving}
+                    size="sm"
+                  >
+                    <RotateCcw size={16} className="text-[#5B9BD5]" />
+                    Reset
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>Reset all progress</p>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
           </div>
           
           <div className="flex items-center justify-between gap-3 w-full">

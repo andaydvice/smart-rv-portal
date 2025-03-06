@@ -14,57 +14,8 @@
 /* Component-specific styles */
 @import './styles/components/calendar.css';
 
+/* Map-specific styles - critical for marker visibility */
+@import './styles/map-optimizations.css';
+
 /* Page-specific styles */
 @import './styles/pages/storage-checklist.css';
-
-/* Critical marker styles */
-.custom-marker {
-  visibility: visible !important;
-  display: block !important;
-  opacity: 1 !important;
-  pointer-events: all !important;
-  z-index: 9998 !important;
-  position: absolute !important;
-  cursor: pointer !important;
-}
-
-.mapboxgl-popup {
-  z-index: 10000 !important;
-  visibility: visible !important;
-  display: block !important;
-  opacity: 1 !important;
-  pointer-events: all !important;
-}
-
-.mapboxgl-popup-content {
-  z-index: 10000 !important;
-  visibility: visible !important;
-  display: block !important;
-  opacity: 1 !important;
-  pointer-events: all !important;
-  padding: 15px !important;
-}
-
-.mapboxgl-popup-close-button {
-  z-index: 10001 !important;
-  visibility: visible !important;
-  display: block !important;
-  opacity: 1 !important;
-  pointer-events: all !important;
-  font-size: 16px !important;
-  padding: 5px !important;
-}
-
-.facility-popup-content {
-  min-width: 200px;
-}
-
-.view-facility-btn {
-  margin-top: 10px;
-  padding: 5px 10px;
-  background-color: #F97316;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
