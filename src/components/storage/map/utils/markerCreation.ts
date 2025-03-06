@@ -21,30 +21,30 @@ export const createFacilityMarker = (
   // Create a custom HTML marker for better visibility
   const el = document.createElement('div');
   el.className = 'custom-marker';
-  el.innerHTML = '<div class="marker-inner"></div>';
-  el.style.width = '50px'; // Increased size for better visibility
-  el.style.height = '50px'; // Increased size for better visibility
+  el.style.width = '24px'; // Smaller size to ensure proper clicking
+  el.style.height = '24px'; 
   el.style.borderRadius = '50%';
   el.style.backgroundColor = markerColor;
-  el.style.border = '5px solid white'; // Thicker white border
-  el.style.boxShadow = '0 0 20px rgba(0,0,0,0.9)'; // Enhanced shadow
+  el.style.border = '3px solid white'; 
+  el.style.boxShadow = '0 0 10px rgba(0,0,0,0.8)';
   el.style.cursor = 'pointer';
-  el.style.position = 'absolute'; // Ensure correct positioning
-  el.style.transform = 'translate(-50%, -50%)'; // Center the marker
-  el.style.zIndex = '9999'; // Ensure markers are always visible
+  el.style.position = 'absolute';
+  el.style.transform = 'translate(-50%, -50%)';
+  el.style.zIndex = '9999';
   el.style.visibility = 'visible';
   el.style.opacity = '1';
   el.style.display = 'block';
   el.style.pointerEvents = 'auto';
   el.setAttribute('data-facility-id', facility.id);
   
-  // Create a persistent popup
+  // Create a popup that stays open until explicitly closed
   const popup = new mapboxgl.Popup({
     offset: 25,
     maxWidth: '300px',
     className: 'storage-facility-popup',
     closeButton: true,
-    closeOnClick: false
+    closeOnClick: false,
+    focusAfterOpen: false
   });
   
   // Set the popup content
@@ -59,29 +59,28 @@ export const createFacilityMarker = (
     .setPopup(popup)
     .addTo(map);
 
-  // Add click event
+  // Add click event with direct method call and logging
   el.addEventListener('click', (e) => {
+    e.preventDefault();
     e.stopPropagation();
-    console.log(`Marker clicked for: ${facility.name} (ID: ${facility.id})`);
-    onMarkerClick(facility.id);
     
-    // Toggle popup
+    console.log(`Marker clicked for: ${facility.name} (ID: ${facility.id})`);
+    
+    // First open the popup
     if (!marker.getPopup().isOpen()) {
       marker.togglePopup();
     }
+    
+    // Then call the click handler
+    onMarkerClick(facility.id);
+    
+    // Force the popup to stay open
+    setTimeout(() => {
+      if (!marker.getPopup().isOpen()) {
+        marker.togglePopup();
+      }
+    }, 10);
   });
-  
-  // Force visibility after creation
-  setTimeout(() => {
-    const markerEl = marker.getElement();
-    if (markerEl) {
-      markerEl.style.visibility = 'visible';
-      markerEl.style.opacity = '1';
-      markerEl.style.display = 'block';
-      markerEl.style.zIndex = '9999';
-      markerEl.style.pointerEvents = 'auto';
-    }
-  }, 100);
   
   return marker;
 };

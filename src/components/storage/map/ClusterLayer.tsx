@@ -21,6 +21,7 @@ const ClusterLayer: React.FC<ClusterLayerProps> = ({ map, facilities, highlighte
         if (map.getSource('facilities')) {
           if (map.getLayer('clusters')) map.removeLayer('clusters');
           if (map.getLayer('cluster-count')) map.removeLayer('cluster-count');
+          if (map.getLayer('unclustered-point')) map.removeLayer('unclustered-point');
           map.removeSource('facilities');
         }
 
@@ -60,54 +61,26 @@ const ClusterLayer: React.FC<ClusterLayerProps> = ({ map, facilities, highlighte
           }))
         };
 
-        // Add cluster source
+        // Add cluster source with clustering disabled to show individual points
         map.addSource('facilities', {
           type: 'geojson',
           data: geojsonData,
-          cluster: true,
-          clusterMaxZoom: 14,
-          clusterRadius: 50
+          cluster: false // Disable clustering to show individual points
         });
 
-        // Add cluster circles
+        // Add individual point layer
         map.addLayer({
-          id: 'clusters',
+          id: 'unclustered-point',
           type: 'circle',
           source: 'facilities',
-          filter: ['has', 'point_count'],
           paint: {
-            'circle-color': '#F97316', // Changed to orange for better visibility
-            'circle-radius': [
-              'step',
-              ['get', 'point_count'],
-              25, // Base size
-              10,
-              35,
-              50,
-              45
-            ],
-            'circle-stroke-width': 2,
-            'circle-stroke-color': '#fff'
+            'circle-color': '#F97316',
+            'circle-radius': 0, // Set to 0 to make invisible (we use custom markers)
+            'circle-opacity': 0
           }
         });
 
-        // Add cluster count text
-        map.addLayer({
-          id: 'cluster-count',
-          type: 'symbol',
-          source: 'facilities',
-          filter: ['has', 'point_count'],
-          layout: {
-            'text-field': '{point_count_abbreviated}',
-            'text-font': ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
-            'text-size': 14
-          },
-          paint: {
-            'text-color': '#ffffff'
-          }
-        });
-
-        console.log('Cluster layer initialized successfully');
+        console.log('Cluster layer initialized successfully with clustering disabled');
       } catch (err) {
         console.error('Error initializing cluster layer:', err);
         toast.error(`Error initializing map clusters: ${err instanceof Error ? err.message : 'Unknown error'}`);
@@ -148,6 +121,9 @@ const ClusterLayer: React.FC<ClusterLayerProps> = ({ map, facilities, highlighte
           }
           if (map.getLayer('cluster-count')) {
             map.removeLayer('cluster-count');
+          }
+          if (map.getLayer('unclustered-point')) {
+            map.removeLayer('unclustered-point');
           }
           if (map.getSource('facilities')) {
             map.removeSource('facilities');

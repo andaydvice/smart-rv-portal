@@ -24,9 +24,23 @@ export const usePopupClickHandler = () => {
     // Add global document click listener
     document.addEventListener('click', handleDocumentClick, true);
     
+    // Force popups to be clickable
+    const ensurePopupsAreClickable = () => {
+      document.querySelectorAll('.mapboxgl-popup, .mapboxgl-popup-content').forEach(popup => {
+        if (popup instanceof HTMLElement) {
+          popup.style.pointerEvents = 'auto';
+          popup.style.zIndex = '10000';
+        }
+      });
+    };
+    
+    // Run periodically to ensure popups stay clickable
+    const interval = setInterval(ensurePopupsAreClickable, 1000);
+    
     // Cleanup
     return () => {
       document.removeEventListener('click', handleDocumentClick, true);
+      clearInterval(interval);
     };
   }, []);
 };

@@ -8,11 +8,7 @@ import {
   createFacilityMarker,
   hasValidCoordinates
 } from './utils/markerUtils';
-import {
-  isNewYorkFacility,
-  logNewYorkFacilityDetails,
-  countNewYorkFacilities
-} from './components/NewYorkFacilities';
+import { usePopupClickHandler } from './hooks/usePopupClickHandler';
 import MarkerStats, { MarkerStatistics } from './components/MarkerStats';
 import { toast } from "sonner";
 
@@ -37,6 +33,9 @@ const FacilityMarkers: React.FC<FacilityMarkersProps> = ({
     totalFacilities: 0,
     totalNYFacilities: 0
   });
+
+  // Use popup click handler
+  usePopupClickHandler();
 
   // Use a reference to track if the component is mounted
   const isMounted = useRef(true);
@@ -64,12 +63,13 @@ const FacilityMarkers: React.FC<FacilityMarkersProps> = ({
             el.style.transform = `translate(-50%, -50%) scale(${isHighlighted ? 1.2 : 1})`;
             el.style.boxShadow = isHighlighted ? 
               '0 0 20px rgba(16, 185, 129, 0.8)' : 
-              '0 0 20px rgba(0,0,0,0.9)';
+              '0 0 10px rgba(0,0,0,0.8)';
             
-            // Force visibility
+            // Force visibility and interactivity
             el.style.visibility = 'visible';
             el.style.opacity = '1';
             el.style.display = 'block';
+            el.style.pointerEvents = 'auto';
           }
           
           if (isHighlighted) {
@@ -99,11 +99,7 @@ const FacilityMarkers: React.FC<FacilityMarkersProps> = ({
       
       toast.info(`Loading ${facilities.length} facilities on map`);
       
-      // Count New York facilities
-      const nyFacilitiesCount = countNewYorkFacilities(facilities);
-      
       // Initialize statistics
-      let processedNY = 0;
       let skipped = 0;
       let created = 0;
 
@@ -119,12 +115,6 @@ const FacilityMarkers: React.FC<FacilityMarkersProps> = ({
             skipped++;
             return;
           }
-
-          // Check if this is a New York facility
-          const isNY = isNewYorkFacility(facility);
-          if (isNY) {
-            processedNY++;
-          }
           
           // Calculate marker coordinates with offset for overlapping markers
           const coordinates = calculateMarkerOffset(facility, coordinatesMap, facilities, index);
@@ -138,7 +128,7 @@ const FacilityMarkers: React.FC<FacilityMarkersProps> = ({
             map
           );
 
-          // Force the marker to be visible
+          // Force the marker to be visible and interactive
           const el = marker.getElement();
           if (el) {
             el.style.visibility = 'visible';
@@ -146,16 +136,23 @@ const FacilityMarkers: React.FC<FacilityMarkersProps> = ({
             el.style.display = 'block';
             el.style.zIndex = '9999';
             el.style.pointerEvents = 'auto';
+            
+            // Add extra click handler in case the original one doesn't fire
+            el.onclick = (e) => {
+              e.stopPropagation();
+              console.log(`Extra click handler for: ${facility.name}`);
+              onMarkerClick(facility.id);
+              
+              // Open popup if not open
+              if (!marker.getPopup().isOpen()) {
+                marker.togglePopup();
+              }
+            };
           }
 
           // Track marker for later cleanup
           markers.current.push(marker);
           created++;
-          
-          // Extra validation for debugging
-          if (created % 5 === 0) {
-            console.log(`✅ Created ${created} markers so far...`);
-          }
         } catch (error) {
           console.error(`🚫 Error creating marker for ${facility.name}:`, error);
           skipped++;
@@ -167,9 +164,9 @@ const FacilityMarkers: React.FC<FacilityMarkersProps> = ({
         setStats({
           markersCreated: created,
           skippedFacilities: skipped,
-          processedNYFacilities: processedNY,
+          processedNYFacilities: 0,
           totalFacilities: facilities.length,
-          totalNYFacilities: nyFacilitiesCount
+          totalNYFacilities: 0
         });
         
         // Log summary
@@ -183,42 +180,39 @@ const FacilityMarkers: React.FC<FacilityMarkersProps> = ({
       }
     };
 
-    // Force marker creation after map is fully rendered
-    const attemptMarkerCreation = () => {
-      if (map && facilities.length > 0) {
-        // Delay marker creation to ensure map is ready
+    // Create markers with delay to ensure map is ready
+    const timer = setTimeout(() => {
+      if (isMounted.current && map && facilities.length > 0) {
+        createMarkers();
+        
+        // Add a safety timeout to ensure markers are visible and clickable
         setTimeout(() => {
-          if (isMounted.current) {
-            createMarkers();
-            
-            // Add a safety timeout to ensure markers are created
-            setTimeout(() => {
-              if (isMounted.current && markers.current.length === 0) {
-                console.log('No markers created on first attempt, trying again...');
-                createMarkers();
-                
-                // Force marker visibility after creation
-                setTimeout(() => {
-                  document.querySelectorAll('.mapboxgl-marker, .custom-marker').forEach(marker => {
-                    if (marker instanceof HTMLElement) {
-                      marker.style.visibility = 'visible';
-                      marker.style.opacity = '1';
-                      marker.style.display = 'block';
-                      marker.style.zIndex = '9999';
-                    }
-                  });
-                }, 500);
-              }
-            }, 1000);
-          }
+          // Force all markers to be visible and interactive
+          document.querySelectorAll('.mapboxgl-marker, .custom-marker').forEach(marker => {
+            if (marker instanceof HTMLElement) {
+              marker.style.visibility = 'visible';
+              marker.style.opacity = '1';
+              marker.style.display = 'block';
+              marker.style.zIndex = '9999';
+              marker.style.pointerEvents = 'auto';
+              marker.style.cursor = 'pointer';
+            }
+          });
+          
+          // Force all popups to be visible and interactive
+          document.querySelectorAll('.mapboxgl-popup, .mapboxgl-popup-content').forEach(popup => {
+            if (popup instanceof HTMLElement) {
+              popup.style.zIndex = '10000';
+              popup.style.pointerEvents = 'auto';
+            }
+          });
         }, 500);
       }
-    };
-    
-    attemptMarkerCreation();
+    }, 500);
     
     // Cleanup function
     return () => {
+      clearTimeout(timer);
       console.log('🧹 Cleaning up markers');
       markers.current.forEach(marker => marker.remove());
       markers.current = [];
