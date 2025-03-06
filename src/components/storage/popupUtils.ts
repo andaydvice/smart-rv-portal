@@ -68,6 +68,16 @@ export const createPopupHTML = (facility: StorageFacility) => {
           </div>
         </div>
       ` : ''}
+      
+      <style>
+        /* Custom styles to ensure popup stays visible */
+        .mapboxgl-popup-content {
+          z-index: 9999 !important;
+        }
+        .mapboxgl-popup {
+          z-index: 9999 !important;
+        }
+      </style>
     </div>
   `;
 };

@@ -18,6 +18,28 @@ import { toast } from "sonner";
 // Initialize Mapbox
 initializeMapboxGL();
 
+// Add global CSS to ensure popups appear above other elements
+const addGlobalStyles = () => {
+  const styleElement = document.createElement('style');
+  styleElement.textContent = `
+    .mapboxgl-popup {
+      z-index: 9999 !important;
+    }
+    .mapboxgl-popup-content {
+      z-index: 9999 !important;
+    }
+    .custom-marker {
+      cursor: pointer;
+    }
+  `;
+  document.head.appendChild(styleElement);
+};
+
+// Add global styles once
+if (typeof window !== 'undefined') {
+  addGlobalStyles();
+}
+
 interface MapViewProps {
   mapToken: string;
   facilities: StorageFacility[];
@@ -46,6 +68,22 @@ const MapView = ({
       console.log('Sample facilities:', facilities.slice(0, 3));
     }
   }, [facilities]);
+
+  // Add a listener to handle popup clicks correctly
+  useEffect(() => {
+    const handleMapClick = (e: MouseEvent) => {
+      // Prevent default behavior for popup clicks
+      if ((e.target as HTMLElement)?.closest('.mapboxgl-popup')) {
+        e.stopPropagation();
+      }
+    };
+
+    document.addEventListener('click', handleMapClick, true);
+    
+    return () => {
+      document.removeEventListener('click', handleMapClick, true);
+    };
+  }, []);
 
   useEffect(() => {
     if (!mapContainer.current || !mapToken) return;

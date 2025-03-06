@@ -48,6 +48,30 @@ const FacilityMarkers: React.FC<FacilityMarkersProps> = ({
     };
   }, []);
 
+  // Effect to update markers when highlighted facility changes
+  // This ensures the highlighted marker color updates without recreating all markers
+  useEffect(() => {
+    if (map && markers.current.length > 0) {
+      // Find the facility that corresponds to each marker and update its appearance
+      markers.current.forEach((marker, index) => {
+        if (index < facilities.length) {
+          const facility = facilities[index];
+          const isHighlighted = facility.id === highlightedFacility;
+          
+          // Update marker appearance based on highlight state
+          const el = marker.getElement().querySelector('div') || marker.getElement();
+          el.style.backgroundColor = isHighlighted ? '#10B981' : '#F97316';
+          el.style.zIndex = isHighlighted ? '1000' : '1';
+          
+          // Log if the marker is highlighted
+          if (isHighlighted) {
+            console.log(`Highlighted marker for facility: ${facility.name}`);
+          }
+        }
+      });
+    }
+  }, [highlightedFacility, facilities, map]);
+
   useEffect(() => {
     if (!map || !map.loaded()) {
       console.warn('Map not fully loaded yet, delaying marker creation');
@@ -71,7 +95,7 @@ const FacilityMarkers: React.FC<FacilityMarkersProps> = ({
       markers.current.forEach(marker => marker.remove());
       markers.current = [];
     };
-  }, [map, facilities, highlightedFacility, onMarkerClick]);
+  }, [map, facilities]);  // Removed highlightedFacility and onMarkerClick dependencies
 
   const createMarkers = () => {
     // Clear existing markers

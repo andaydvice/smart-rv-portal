@@ -63,11 +63,39 @@ export const createMapInstance = (
     refreshExpiredTiles: false, // Disable tile refresh
     logoPosition: 'bottom-left',
     cooperativeGestures: false, // Disable cooperative gestures for better mobile experience
+    interactive: true, // Ensure the map is interactive
+    pitchWithRotate: false, // Disable pitch with rotate for simpler navigation
+  });
+  
+  // Disable map fog for better performance
+  mapInstance.once('style.load', () => {
+    // Ensure popups appear above other elements
+    mapInstance.getContainer().style.zIndex = '1';
+    
+    // Setup handlers to work around Firefox specific issues
+    mapInstance.on('click', (e) => {
+      // Prevent default behavior only if not clicking a marker
+      if (!(e.originalEvent.target as HTMLElement)?.closest('.custom-marker')) {
+        // Don't close popups when clicking outside them
+        e.originalEvent.stopPropagation();
+      }
+    });
   });
   
   // Add debug event listeners
   mapInstance.on('load', () => {
     console.log('Map fully loaded');
+    
+    // Enable touch interactions explicitly to ensure popups work on mobile
+    if (mapInstance.touchZoomRotate) {
+      mapInstance.touchZoomRotate.enable();
+    }
+    
+    // Setting max bounds to prevent users from getting lost
+    mapInstance.setMaxBounds([
+      [-180, -85], // Southwest coordinates
+      [180, 85]    // Northeast coordinates
+    ]);
   });
   
   mapInstance.on('idle', () => {

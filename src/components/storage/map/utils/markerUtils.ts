@@ -109,25 +109,50 @@ export const createFacilityMarker = (
   el.style.boxShadow = '0 0 10px rgba(0,0,0,0.5)';
   el.style.cursor = 'pointer';
   
-  // Create popup
+  // Create popup with offset and prevent close on click
   const popup = new mapboxgl.Popup({
     offset: 25,
     maxWidth: '400px',
-    className: 'storage-facility-popup'
+    className: 'storage-facility-popup',
+    closeButton: true,
+    closeOnClick: false, // Prevent closing when clicking the map
+    focusAfterOpen: false // Prevent grabbing focus which can cause issues
   }).setHTML(createPopupHTML(facility));
 
   // Create marker with custom element for better visibility
   const marker = new mapboxgl.Marker({
     element: el,
-    anchor: 'center'
+    anchor: 'center',
+    clickTolerance: 10 // Increase click tolerance
   })
     .setLngLat(coordinates)
     .setPopup(popup)
     .addTo(map);
 
-  // Add click event
-  marker.getElement().addEventListener('click', () => {
+  // Add click event to the marker element to prevent default map click behavior
+  marker.getElement().addEventListener('click', (e) => {
+    e.stopPropagation(); // Prevent event bubbling
+    e.preventDefault();
+    
+    // Trigger the facility selection
     onMarkerClick(facility.id);
+    
+    // Make sure popup shows
+    if (!marker.getPopup().isOpen()) {
+      marker.togglePopup();
+    }
+    
+    // Log for debugging
+    console.log(`Clicked marker for facility: ${facility.name} (ID: ${facility.id})`);
+  });
+  
+  // Add popup event listeners to debug any issues
+  popup.on('open', () => {
+    console.log(`Popup opened for ${facility.name}`);
+  });
+  
+  popup.on('close', () => {
+    console.log(`Popup closed for ${facility.name}`);
   });
   
   return marker;
