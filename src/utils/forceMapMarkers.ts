@@ -16,25 +16,27 @@ export function forceMapMarkersVisible() {
         
         // Force all markers to be visible with important styling
         document.querySelectorAll('.custom-marker, .mapboxgl-marker').forEach(marker => {
-          Object.assign(marker.style, {
-            display: 'block !important',
-            visibility: 'visible !important',
-            opacity: '1 !important',
-            zIndex: '9999 !important',
-            pointerEvents: 'auto !important',
-            width: '24px !important',
-            height: '24px !important',
-            borderRadius: '50% !important',
-            backgroundColor: '#F97316 !important',
-            border: '2px solid white !important',
-            boxShadow: '0 0 10px rgba(0,0,0,0.8) !important',
-            position: 'absolute !important',
-            transform: 'translate(-50%, -50%) !important'
-          });
-          
-          // Ensure marker is in document
-          if (!document.body.contains(marker)) {
-            document.body.appendChild(marker);
+          if (marker instanceof HTMLElement) {
+            Object.assign(marker.style, {
+              display: 'block !important',
+              visibility: 'visible !important',
+              opacity: '1 !important',
+              zIndex: '9999 !important',
+              pointerEvents: 'auto !important',
+              width: '24px !important',
+              height: '24px !important',
+              borderRadius: '50% !important',
+              backgroundColor: '#F97316 !important',
+              border: '2px solid white !important',
+              boxShadow: '0 0 10px rgba(0,0,0,0.8) !important',
+              position: 'absolute !important',
+              transform: 'translate(-50%, -50%) !important'
+            });
+            
+            // Ensure marker is in document
+            if (!document.body.contains(marker)) {
+              document.body.appendChild(marker);
+            }
           }
         });
       }

@@ -78,6 +78,7 @@ const StoragePreparationChecklist = () => {
     <div className="max-w-full mx-auto px-0 sm:px-6 lg:px-8 pt-0 pb-16">
       <div className="max-w-7xl mx-auto">
         <ChecklistHeader 
+          title="Storage Preparation Checklist"
           completionPercentage={completionPercentage} 
           lastSavedAt={lastSavedAt}
           getLastSavedMessage={getLastSavedMessage}
