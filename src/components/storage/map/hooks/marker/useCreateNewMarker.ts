@@ -20,6 +20,16 @@ export const useCreateNewMarker = () => {
     attemptErrorRecovery 
   } = useMarkerErrorHandling();
 
+  // Clear existing markers before creating new ones
+  const clearExistingMarkers = () => {
+    if (window._persistentMarkers) {
+      Object.values(window._persistentMarkers).forEach(marker => {
+        marker.remove();
+      });
+      window._persistentMarkers = {};
+    }
+  };
+
   const createNewMarker = (
     facility: StorageFacility,
     map: mapboxgl.Map,
@@ -37,6 +47,29 @@ export const useCreateNewMarker = () => {
           }
         }, 500);
         return null;
+      }
+      
+      // Don't create duplicate markers
+      if (window._persistentMarkers && window._persistentMarkers[facility.id]) {
+        // Update existing marker if highlight state changed
+        const existingMarker = window._persistentMarkers[facility.id];
+        const markerEl = existingMarker.getElement();
+        
+        if (markerEl) {
+          if (isHighlighted) {
+            markerEl.style.backgroundColor = '#10B981';
+            markerEl.style.zIndex = '9999';
+            markerEl.style.transform = 'translate(-50%, -50%) scale(1.2)';
+            markerEl.style.boxShadow = '0 0 20px rgba(16, 185, 129, 0.8)';
+          } else {
+            markerEl.style.backgroundColor = '#F97316';
+            markerEl.style.zIndex = '9998';
+            markerEl.style.transform = 'translate(-50%, -50%) scale(1)';
+            markerEl.style.boxShadow = '0 0 10px rgba(0,0,0,0.8)';
+          }
+        }
+        
+        return existingMarker;
       }
       
       // Create the marker using our service
@@ -122,6 +155,7 @@ export const useCreateNewMarker = () => {
 
   return {
     createMarker: createNewMarker,
-    enhanceMarkerVisibility
+    enhanceMarkerVisibility,
+    clearExistingMarkers
   };
 };

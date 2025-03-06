@@ -24,19 +24,7 @@ export const createMarker = (
   const coordinatesMap = buildCoordinatesMap(facilities);
   const coordinates = calculateMarkerOffset(facility, coordinatesMap, facilities, index);
   
-  // Reduce performance impact by not creating markers outside current viewport
-  // unless it's the highlighted facility
-  if (!isHighlighted) {
-    const bounds = map.getBounds();
-    const isInViewport = bounds.contains(coordinates);
-    
-    // Skip markers far outside the current viewport to reduce load
-    if (!isInViewport && facilities.length > 20) {
-      // Only create markers in the current viewport when showing many facilities
-      return null;
-    }
-  }
-  
+  // Don't skip any markers - we want to show all markers
   // Create the marker with explicit map reference for reliable addition
   const marker = createFacilityMarker(
     facility,
@@ -61,6 +49,7 @@ export const enhanceMarkerVisibility = (marker: mapboxgl.Marker) => {
     // Set minimal but critical inline styles
     el.style.visibility = 'visible';
     el.style.display = 'block';
+    el.style.opacity = '1';
     
     // Use a more reasonable z-index that doesn't conflict with controls
     el.style.zIndex = '99';
@@ -86,7 +75,7 @@ export const persistMarker = (facility: StorageFacility, marker: mapboxgl.Marker
     
     // Limit total number of persistent markers to prevent memory issues
     const markerKeys = Object.keys(window._persistentMarkers);
-    const MAX_PERSISTENT_MARKERS = 200;
+    const MAX_PERSISTENT_MARKERS = 100; // Reduced from 200 to 100 for better performance
     
     if (markerKeys.length > MAX_PERSISTENT_MARKERS) {
       // Remove oldest markers when we exceed the limit

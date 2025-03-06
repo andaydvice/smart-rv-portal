@@ -18,12 +18,13 @@ export const useMarkerCreation = ({
 }: UseMarkerCreationProps) => {
   const markers = useRef<mapboxgl.Marker[]>([]);
   const creationInProgress = useRef<boolean>(false);
+  const lastFacilitiesLength = useRef<number>(0);
   
   // Use our refactored hooks
   const { isMounted } = useMarkerInitialization();
   const { stats, updateStats } = useMarkerStats();
   const { processExistingMarker, markAsProcessed } = useProcessExistingMarkers();
-  const { createMarker, enhanceMarkerVisibility } = useCreateNewMarker();
+  const { createMarker, enhanceMarkerVisibility, clearExistingMarkers } = useCreateNewMarker();
   const { forceMarkerVisibility } = useMarkerVisibility({ map });
 
   // Effect to clean up markers when component unmounts
@@ -34,6 +35,14 @@ export const useMarkerCreation = ({
         if (marker) marker.remove();
       });
       markers.current = [];
+      
+      // Also clear persistent markers
+      if (window._persistentMarkers) {
+        Object.values(window._persistentMarkers).forEach(marker => {
+          marker.remove();
+        });
+        window._persistentMarkers = {};
+      }
     };
   }, []);
 
@@ -52,6 +61,15 @@ export const useMarkerCreation = ({
       console.warn('Map not fully loaded yet, cannot create markers');
       creationInProgress.current = false;
       return;
+    }
+    
+    // Check if facilities array has changed significantly
+    const significantChange = Math.abs(facilities.length - lastFacilitiesLength.current) > 5;
+    lastFacilitiesLength.current = facilities.length;
+    
+    // Clear existing markers if there's a significant change in facilities
+    if (significantChange) {
+      clearExistingMarkers();
     }
     
     // Only show toast if we're actually creating new markers
@@ -138,7 +156,7 @@ export const useMarkerCreation = ({
     // Start processing facilities in chunks of 10 for smoother performance
     processFacilityChunk(0, 10);
     
-  }, [facilities, map, highlightedFacility, onMarkerClick, forceMarkerVisibility, updateStats, isMounted, createMarker, markAsProcessed, processExistingMarker]);
+  }, [facilities, map, highlightedFacility, onMarkerClick, forceMarkerVisibility, updateStats, isMounted, createMarker, markAsProcessed, processExistingMarker, clearExistingMarkers]);
 
   return {
     markers,

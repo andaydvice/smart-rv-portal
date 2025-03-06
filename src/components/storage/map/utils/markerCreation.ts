@@ -18,12 +18,12 @@ export function createFacilityMarker(
   Object.assign(el.style, {
     backgroundColor: isHighlighted ? '#10B981' : '#F97316',
     zIndex: isHighlighted ? '9999' : '9998',
-    visibility: 'visible !important',
-    display: 'block !important',
-    opacity: '1 !important',
-    pointerEvents: 'all !important',
-    cursor: 'pointer !important',
-    position: 'absolute !important',
+    visibility: 'visible',
+    display: 'block',
+    opacity: '1',
+    pointerEvents: 'all',
+    cursor: 'pointer',
+    position: 'absolute',
     transform: `translate(-50%, -50%) scale(${isHighlighted ? 1.2 : 1})`,
     boxShadow: isHighlighted ? '0 0 20px rgba(16, 185, 129, 0.8)' : '0 0 10px rgba(0,0,0,0.8)',
     width: '24px',
@@ -54,11 +54,6 @@ export function createFacilityMarker(
     </div>
   `);
   
-  // Add global function to window for popup button click
-  window.viewFacility = function(id: string) {
-    onClick(id);
-  };
-  
   // Create marker and attach popup
   const marker = new mapboxgl.Marker({
     element: el,
@@ -67,8 +62,12 @@ export function createFacilityMarker(
     offset: [0, 0]
   })
   .setLngLat(coordinates)
-  .setPopup(popup)
-  .addTo(map); // This is crucial - explicitly add to map
+  .setPopup(popup);
+  
+  // Only add to map if it doesn't already exist
+  if (!document.getElementById(`marker-${facility.id}`)) {
+    marker.addTo(map);
+  }
   
   // Add separate click handler on marker element
   el.addEventListener('click', (e) => {
@@ -78,42 +77,16 @@ export function createFacilityMarker(
     // Toggle popup
     if (!popup.isOpen()) {
       marker.togglePopup();
-      
-      // Force popup visibility
-      setTimeout(() => {
-        const popupEl = popup.getElement();
-        if (popupEl) {
-          Object.assign(popupEl.style, {
-            zIndex: '10000',
-            visibility: 'visible !important',
-            display: 'block !important',
-            opacity: '1 !important',
-            pointerEvents: 'all !important'
-          });
-        }
-      }, 50);
     }
   });
   
-  // Add observer to ensure marker stays in DOM
-  const observer = new MutationObserver((mutations) => {
-    mutations.forEach((mutation) => {
-      if (mutation.removedNodes.length > 0) {
-        Array.from(mutation.removedNodes).forEach((node) => {
-          if (node === el || node.contains(el)) {
-            // Re-add marker to map if it was removed
-            marker.addTo(map);
-          }
-        });
-      }
-    });
-  });
-  
-  // Observe map container
-  observer.observe(map.getContainer(), { 
-    childList: true,
-    subtree: true 
-  });
+  // Add global function to window for popup button click
+  // Only set if it doesn't exist to prevent multiple handlers
+  if (!window.viewFacility) {
+    window.viewFacility = function(id: string) {
+      onClick(id);
+    };
+  }
   
   return marker;
 }
