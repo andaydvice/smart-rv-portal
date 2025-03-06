@@ -1,6 +1,6 @@
 
 import { Menu, X } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useCallback } from "react";
 
 interface MenuButtonProps {
   isOpen: boolean;
@@ -8,19 +8,17 @@ interface MenuButtonProps {
 }
 
 const MenuButton = ({ isOpen, onClick }: MenuButtonProps) => {
-  console.log("MenuButton rendered, isOpen:", isOpen);
+  // Remove unnecessary logging that could cause performance issues
+  // console.log("MenuButton rendered, isOpen:", isOpen);
   
-  const handleClick = (e: React.MouseEvent) => {
+  // Optimize the click handler with useCallback to prevent re-renders
+  const handleClick = useCallback((e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    console.log("MenuButton clicked! Current state:", isOpen);
     onClick();
-  };
+  }, [onClick]);
   
-  // Force re-render if isOpen changes
-  useEffect(() => {
-    console.log("MenuButton effect triggered, isOpen:", isOpen);
-  }, [isOpen]);
+  // Remove the effect that might be causing re-renders
   
   return (
     <button

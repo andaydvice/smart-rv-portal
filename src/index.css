@@ -17,10 +17,10 @@
 /* Page-specific styles */
 @import './styles/pages/storage-checklist.css';
 
-/* Map marker styles - IMPROVED FOR VISIBILITY - MAXIMUM ENFORCED STYLING */
+/* Map marker styles - SIMPLIFIED FOR BETTER PERFORMANCE */
 .custom-marker {
   cursor: pointer !important;
-  z-index: 9999 !important; /* Higher z-index for better layer management */
+  z-index: 9999 !important;
   display: block !important;
   width: 24px !important;
   height: 24px !important;
@@ -30,7 +30,7 @@
   box-shadow: 0 0 10px rgba(0,0,0,0.8) !important;
   position: absolute !important;
   transform: translate(-50%, -50%) !important;
-  pointer-events: all !important; /* Use 'all' instead of 'auto' for maximum click capture */
+  pointer-events: all !important;
   visibility: visible !important;
   opacity: 1 !important;
 }
@@ -42,29 +42,9 @@
   box-shadow: 0 0 15px rgba(16, 185, 129, 0.8) !important;
 }
 
-.marker-inner {
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  animation: pulse 2s infinite;
-}
+/* Remove the animation that could cause performance issues */
 
-@keyframes pulse {
-  0% {
-    transform: scale(1);
-    opacity: 1;
-  }
-  50% {
-    transform: scale(1.2);
-    opacity: 0.8;
-  }
-  100% {
-    transform: scale(1);
-    opacity: 1;
-  }
-}
-
-/* Force marker visibility - MAXIMUM AGGRESSIVE STYLES */
+/* Force marker visibility - SIMPLIFIED FOR BETTER PERFORMANCE */
 .mapboxgl-marker {
   z-index: 9999 !important;
   visibility: visible !important;
@@ -106,7 +86,6 @@
   pointer-events: all !important;
 }
 
-/* Force popup to remain visible and interactive */
 .storage-facility-popup {
   z-index: 10000 !important;
   visibility: visible !important;
@@ -114,10 +93,14 @@
   display: block !important;
 }
 
-/* Ensure popup content is always visible */
 .storage-facility-popup .mapboxgl-popup-content {
   visibility: visible !important;
   pointer-events: all !important;
   z-index: 10000 !important;
   display: block !important;
+}
+
+/* Performance improvements for map - add will-change for GPU acceleration */
+.mapboxgl-canvas {
+  will-change: transform;
 }

@@ -1,7 +1,7 @@
 
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Card } from '@/components/ui/card';
 import FilterPanel from './FilterPanel';
 import { FilterState } from './types';
@@ -31,10 +31,12 @@ const StorageFacilitiesMap = () => {
     minRating: null
   });
 
+  // Get data with useQuery
   const { facilities: filteredFacilities, isLoading, error } = useStorageFacilities(filters);
   const { recentlyViewed, addToRecentlyViewed } = useRecentlyViewed();
   const { mapToken, mapTokenError } = useMapToken();
   
+  // Memoize handlers to prevent unnecessary re-renders
   const { 
     highlightedFacility, 
     scrollAreaRef, 
@@ -43,19 +45,21 @@ const StorageFacilitiesMap = () => {
     addToRecentlyViewed 
   });
   
-  // Log when facilities are loaded to help with debugging
+  // Optimize filter change handler 
+  const handleFilterChange = useCallback((newFilters: FilterState) => {
+    setFilters(newFilters);
+  }, []);
+  
+  // Simplified effect to reduce re-renders and only show critical information
   useEffect(() => {
-    if (filteredFacilities?.length) {
-      console.log(`Loaded ${filteredFacilities.length} storage facilities`);
-      console.log('First few facilities:', filteredFacilities.slice(0, 3));
+    if (filteredFacilities?.length && !isLoading) {
       toast.success(`Loaded ${filteredFacilities.length} storage facilities`);
     } else if (filteredFacilities && filteredFacilities.length === 0 && !isLoading) {
-      console.log('No facilities found for the current filters');
       toast.info('No facilities found for the current filters');
     }
   }, [filteredFacilities, isLoading]);
 
-  // Log any errors that occur
+  // Only show actual errors
   useEffect(() => {
     if (error) {
       console.error('Error loading facilities:', error);
@@ -63,21 +67,11 @@ const StorageFacilitiesMap = () => {
     }
   }, [error]);
 
-  // Log map token status
-  useEffect(() => {
-    if (mapToken) {
-      console.log('Map token loaded successfully');
-    } else if (mapTokenError) {
-      console.error('Map token error:', mapTokenError);
-      toast.error(`Map token error: ${mapTokenError}`);
-    }
-  }, [mapToken, mapTokenError]);
-
   return (
     <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 min-h-[800px]">
       <div className="lg:col-span-4">
         <div className="space-y-4">
-          <FilterPanel onFilterChange={setFilters} />
+          <FilterPanel onFilterChange={handleFilterChange} />
           <Card className="bg-[#080F1F] border-gray-700">
             <LoadingStateDisplay
               isLoading={isLoading}
