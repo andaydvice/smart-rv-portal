@@ -1,16 +1,15 @@
 
 import { useEffect } from 'react';
-import { applyMapStyles } from '../utils/mapboxInit';
+import { applyMapStyles } from '../utils/mapConfiguration';
 
-/**
- * Hook to add global CSS styles for mapbox elements
- */
 export const useMapStyles = () => {
   useEffect(() => {
-    // Use the utility function to apply styles and get cleanup function
-    const removeStyles = applyMapStyles();
+    // Apply custom CSS styles for map elements
+    const cleanup = applyMapStyles();
     
-    // Return cleanup function
-    return removeStyles;
+    // Clean up on unmount
+    return () => {
+      cleanup();
+    };
   }, []);
 };

@@ -49,7 +49,6 @@ const FacilityMarkers: React.FC<FacilityMarkersProps> = ({
   }, []);
 
   // Effect to update markers when highlighted facility changes
-  // This ensures the highlighted marker color updates without recreating all markers
   useEffect(() => {
     if (map && markers.current.length > 0) {
       // Find the facility that corresponds to each marker and update its appearance
@@ -59,13 +58,19 @@ const FacilityMarkers: React.FC<FacilityMarkersProps> = ({
           const isHighlighted = facility.id === highlightedFacility;
           
           // Update marker appearance based on highlight state
-          const el = marker.getElement().querySelector('div') || marker.getElement();
-          el.style.backgroundColor = isHighlighted ? '#10B981' : '#F97316';
-          el.style.zIndex = isHighlighted ? '1000' : '1';
+          const el = marker.getElement();
+          if (el) {
+            el.style.backgroundColor = isHighlighted ? '#10B981' : '#F97316';
+            el.style.zIndex = isHighlighted ? '1000' : '1';
+            el.style.transform = isHighlighted ? 'scale(1.2)' : 'scale(1)';
+          }
           
-          // Log if the marker is highlighted
           if (isHighlighted) {
             console.log(`Highlighted marker for facility: ${facility.name}`);
+            // Open popup for highlighted facility
+            if (!marker.getPopup().isOpen()) {
+              marker.togglePopup();
+            }
           }
         }
       });
@@ -73,52 +78,30 @@ const FacilityMarkers: React.FC<FacilityMarkersProps> = ({
   }, [highlightedFacility, facilities, map]);
 
   useEffect(() => {
-    if (!map || !map.loaded()) {
-      console.warn('Map not fully loaded yet, delaying marker creation');
-      const checkMapInterval = setInterval(() => {
-        if (map && map.loaded()) {
-          clearInterval(checkMapInterval);
-          if (isMounted.current) createMarkers();
-        }
-      }, 200);
+    const createMarkers = () => {
+      console.log(`Creating markers for ${facilities.length} facilities`);
       
-      return () => {
-        clearInterval(checkMapInterval);
-      };
-    } else {
-      createMarkers();
-    }
-    
-    // Cleanup function
-    return () => {
-      console.log('🧹 Cleaning up markers');
+      // Clear existing markers
       markers.current.forEach(marker => marker.remove());
       markers.current = [];
-    };
-  }, [map, facilities]);  // Removed highlightedFacility and onMarkerClick dependencies
+      
+      if (!map || !map.loaded()) {
+        console.warn('Map not fully loaded yet, cannot create markers');
+        return;
+      }
+      
+      toast.info(`Loading ${facilities.length} facilities on map`);
+      
+      // Count New York facilities
+      const nyFacilitiesCount = countNewYorkFacilities(facilities);
+      
+      // Initialize statistics
+      let processedNY = 0;
+      let skipped = 0;
+      let created = 0;
 
-  const createMarkers = () => {
-    // Clear existing markers
-    markers.current.forEach(marker => marker.remove());
-    markers.current = [];
-    
-    console.log(`Creating markers for ${facilities.length} facilities`);
-    toast.info(`Loading ${facilities.length} facilities on map`);
-    
-    // Count New York facilities
-    const nyFacilitiesCount = countNewYorkFacilities(facilities);
-    
-    // Initialize statistics
-    let processedNY = 0;
-    let skipped = 0;
-    let created = 0;
-
-    // Build coordinates map to identify overlapping markers
-    const coordinatesMap = buildCoordinatesMap(facilities);
-    
-    // Force marker display by adding a small delay to ensure map is ready
-    setTimeout(() => {
-      if (!isMounted.current) return;
+      // Build coordinates map to identify overlapping markers
+      const coordinatesMap = buildCoordinatesMap(facilities);
       
       // Create markers for each facility
       facilities.forEach((facility, index) => {
@@ -176,8 +159,31 @@ const FacilityMarkers: React.FC<FacilityMarkersProps> = ({
           toast.error('Failed to display facilities on map');
         }
       }
-    }, 1000); // Increased delay to ensure map is fully loaded
-  };
+    };
+
+    if (map && facilities.length > 0) {
+      // Check if map is loaded
+      if (!map.loaded()) {
+        console.log('Map not yet loaded, waiting for load event');
+        const onLoad = () => {
+          if (isMounted.current) {
+            createMarkers();
+          }
+          map.off('load', onLoad);
+        };
+        map.on('load', onLoad);
+      } else {
+        createMarkers();
+      }
+    }
+    
+    // Cleanup function
+    return () => {
+      console.log('🧹 Cleaning up markers');
+      markers.current.forEach(marker => marker.remove());
+      markers.current = [];
+    };
+  }, [map, facilities, onMarkerClick, highlightedFacility]);
 
   return <MarkerStats stats={stats} />;
 };

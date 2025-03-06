@@ -37,10 +37,38 @@ export const applyMapStyles = () => {
     .mapboxgl-popup-content {
       z-index: 10000 !important;
       pointer-events: auto !important;
+      padding: 15px !important;
+      border-radius: 8px !important;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2) !important;
+      background-color: #151A22 !important;
+      color: white !important;
+      border: 1px solid #1a202c !important;
     }
     .custom-marker {
       cursor: pointer !important;
       z-index: 999 !important;
+      transform: translate(-50%, -50%);
+      position: absolute;
+    }
+    .marker-inner {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+        opacity: 1;
+      }
+      50% {
+        transform: scale(1.1);
+        opacity: 0.8;
+      }
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
     }
     .mapboxgl-popup-close-button {
       font-size: 20px !important;
