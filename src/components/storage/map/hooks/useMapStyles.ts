@@ -14,15 +14,26 @@ export const useMapStyles = () => {
         if (marker instanceof HTMLElement) {
           marker.style.visibility = 'visible';
           marker.style.opacity = '1';
-          marker.style.zIndex = '2000';
+          marker.style.zIndex = '9999';
           marker.style.pointerEvents = 'auto';
+          marker.style.display = 'block';
+        }
+      });
+      
+      document.querySelectorAll('.custom-marker').forEach(marker => {
+        if (marker instanceof HTMLElement) {
+          marker.style.visibility = 'visible';
+          marker.style.opacity = '1';
+          marker.style.zIndex = '9999';
+          marker.style.pointerEvents = 'auto';
+          marker.style.display = 'block';
         }
       });
     };
     
-    // Apply styles immediately and after a short delay
+    // Apply styles immediately and repeatedly to ensure they take effect
     forceMarkerStyles();
-    const styleInterval = setInterval(forceMarkerStyles, 500);
+    const styleInterval = setInterval(forceMarkerStyles, 300);
     
     // Clean up on unmount
     return () => {

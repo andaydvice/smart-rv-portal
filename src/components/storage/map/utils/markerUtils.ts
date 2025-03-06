@@ -10,6 +10,7 @@ import { createFacilityMarker } from './markerCreation';
 
 import { hasValidCoordinates } from './markerValidation';
 
+// Export all functions
 export {
   // Coordinate handling
   calculateMarkerOffset,
@@ -22,5 +23,5 @@ export {
   hasValidCoordinates
 };
 
-// Re-export the type properly
+// Re-export types explicitly
 export type { CoordinateMap };

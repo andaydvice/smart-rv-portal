@@ -51,7 +51,6 @@ const FacilityMarkers: React.FC<FacilityMarkersProps> = ({
   // Effect to update markers when highlighted facility changes
   useEffect(() => {
     if (map && markers.current.length > 0) {
-      // Find the facility that corresponds to each marker and update its appearance
       markers.current.forEach((marker, index) => {
         if (index < facilities.length) {
           const facility = facilities[index];
@@ -61,11 +60,16 @@ const FacilityMarkers: React.FC<FacilityMarkersProps> = ({
           const el = marker.getElement();
           if (el) {
             el.style.backgroundColor = isHighlighted ? '#10B981' : '#F97316';
-            el.style.zIndex = isHighlighted ? '2000' : '1000';
+            el.style.zIndex = isHighlighted ? '10000' : '9999';
             el.style.transform = `translate(-50%, -50%) scale(${isHighlighted ? 1.2 : 1})`;
             el.style.boxShadow = isHighlighted ? 
               '0 0 20px rgba(16, 185, 129, 0.8)' : 
-              '0 0 15px rgba(0,0,0,0.8)';
+              '0 0 20px rgba(0,0,0,0.9)';
+            
+            // Force visibility
+            el.style.visibility = 'visible';
+            el.style.opacity = '1';
+            el.style.display = 'block';
           }
           
           if (isHighlighted) {
@@ -134,24 +138,24 @@ const FacilityMarkers: React.FC<FacilityMarkersProps> = ({
             map
           );
 
-          // Add marker to DOM if it wasn't done automatically
-          const markerEl = marker.getElement();
-          if (markerEl && !document.body.contains(markerEl)) {
-            map.getCanvasContainer().appendChild(markerEl);
-          }
-
           // Force the marker to be visible
           const el = marker.getElement();
           if (el) {
             el.style.visibility = 'visible';
             el.style.opacity = '1';
             el.style.display = 'block';
+            el.style.zIndex = '9999';
             el.style.pointerEvents = 'auto';
           }
 
           // Track marker for later cleanup
           markers.current.push(marker);
           created++;
+          
+          // Extra validation for debugging
+          if (created % 5 === 0) {
+            console.log(`✅ Created ${created} markers so far...`);
+          }
         } catch (error) {
           console.error(`🚫 Error creating marker for ${facility.name}:`, error);
           skipped++;
@@ -169,7 +173,7 @@ const FacilityMarkers: React.FC<FacilityMarkersProps> = ({
         });
         
         // Log summary
-        console.log(`✅ Created ${created} markers on the map out of ${facilities.length} facilities (${skipped} skipped)`);
+        console.log(`✅ Created ${created} markers on the map out of ${facilities.length} facilities`);
         
         if (created > 0) {
           toast.success(`Added ${created} storage facilities to map`);
@@ -182,25 +186,32 @@ const FacilityMarkers: React.FC<FacilityMarkersProps> = ({
     // Force marker creation after map is fully rendered
     const attemptMarkerCreation = () => {
       if (map && facilities.length > 0) {
-        // Check if map is loaded
-        if (!map.loaded()) {
-          console.log('Map not yet loaded, waiting for load event');
-          map.once('load', () => {
-            if (isMounted.current) {
-              setTimeout(createMarkers, 100);
-            }
-          });
-        } else {
-          createMarkers();
-          
-          // Add a safety timeout to ensure markers are created even if there were issues
-          setTimeout(() => {
-            if (isMounted.current && markers.current.length === 0) {
-              console.log('No markers created on first attempt, trying again...');
-              createMarkers();
-            }
-          }, 1000);
-        }
+        // Delay marker creation to ensure map is ready
+        setTimeout(() => {
+          if (isMounted.current) {
+            createMarkers();
+            
+            // Add a safety timeout to ensure markers are created
+            setTimeout(() => {
+              if (isMounted.current && markers.current.length === 0) {
+                console.log('No markers created on first attempt, trying again...');
+                createMarkers();
+                
+                // Force marker visibility after creation
+                setTimeout(() => {
+                  document.querySelectorAll('.mapboxgl-marker, .custom-marker').forEach(marker => {
+                    if (marker instanceof HTMLElement) {
+                      marker.style.visibility = 'visible';
+                      marker.style.opacity = '1';
+                      marker.style.display = 'block';
+                      marker.style.zIndex = '9999';
+                    }
+                  });
+                }, 500);
+              }
+            }, 1000);
+          }
+        }, 500);
       }
     };
     

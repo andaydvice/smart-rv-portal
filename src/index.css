@@ -17,17 +17,17 @@
 /* Page-specific styles */
 @import './styles/pages/storage-checklist.css';
 
-/* Map marker styles */
+/* Map marker styles - IMPROVED FOR VISIBILITY */
 .custom-marker {
   cursor: pointer !important;
-  z-index: 2000 !important;
+  z-index: 9999 !important; 
   display: block !important;
-  width: 40px !important;
-  height: 40px !important;
+  width: 50px !important;
+  height: 50px !important;
   border-radius: 50% !important;
   background-color: #F97316 !important;
-  border: 4px solid white !important;
-  box-shadow: 0 0 15px rgba(0,0,0,0.8) !important;
+  border: 5px solid white !important;
+  box-shadow: 0 0 20px rgba(0,0,0,0.9) !important;
   position: absolute !important;
   transform: translate(-50%, -50%) !important;
   pointer-events: auto !important;
@@ -48,7 +48,7 @@
     opacity: 1;
   }
   50% {
-    transform: scale(1.1);
+    transform: scale(1.2);
     opacity: 0.8;
   }
   100% {
@@ -57,15 +57,18 @@
   }
 }
 
+/* Force marker visibility */
 .mapboxgl-marker {
-  z-index: 2000 !important;
+  z-index: 9999 !important;
   visibility: visible !important;
   opacity: 1 !important;
   pointer-events: auto !important;
+  display: block !important;
 }
 
 .mapboxgl-popup {
   z-index: 10000 !important;
+  visibility: visible !important;
 }
 
 .mapboxgl-popup-content {
@@ -77,4 +80,13 @@
   background-color: #151A22 !important;
   color: white !important;
   border: 1px solid #1a202c !important;
+  visibility: visible !important;
+}
+
+.mapboxgl-popup-close-button {
+  color: white !important;
+  font-size: 16px !important;
+  right: 5px !important;
+  top: 5px !important;
+  z-index: 10001 !important;
 }
