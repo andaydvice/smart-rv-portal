@@ -1,4 +1,3 @@
-
 import { RefObject } from 'react';
 import mapboxgl from 'mapbox-gl';
 import { StorageFacility } from '../../../types';
@@ -9,6 +8,8 @@ export interface MarkerStatistics {
   processedNYFacilities: number;
   totalFacilities: number;
   totalNYFacilities: number;
+  startTime?: number;
+  endTime?: number;
 }
 
 export interface UseMarkerCreationProps {

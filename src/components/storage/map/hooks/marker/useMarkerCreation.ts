@@ -1,4 +1,3 @@
-
 import { useRef, useCallback, useEffect, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
 import { StorageFacility } from '../../../types';
@@ -23,6 +22,8 @@ export const useMarkerCreation = ({
     markersCreated: 0,
     skippedFacilities: 0,
     totalFacilities: 0,
+    processedNYFacilities: 0,
+    totalNYFacilities: 0,
     startTime: Date.now(),
     endTime: Date.now()
   });

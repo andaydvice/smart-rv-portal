@@ -44,7 +44,7 @@ export function createFacilityMarker(
     className: 'facility-popup'
   });
   
-  // Set popup content
+  // Set popup content - using price_range instead of priceRange
   popup.setHTML(`
     <div class="facility-popup-content">
       <h3>${facility.name}</h3>
