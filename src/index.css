@@ -1,9 +1,11 @@
-
 /* Base imports and tailwind directives */
 @import './styles/base.css';
 
 /* Layout styles */
 @import './styles/layout.css';
+
+/* Map-specific styles - critical for marker visibility */
+@import './styles/map-optimizations.css';
 
 /* Animation styles */
 @import './styles/animations.css';
@@ -13,9 +15,6 @@
 
 /* Component-specific styles */
 @import './styles/components/calendar.css';
-
-/* Map-specific styles - critical for marker visibility */
-@import './styles/map-optimizations.css';
 
 /* Page-specific styles */
 @import './styles/pages/storage-checklist.css';
