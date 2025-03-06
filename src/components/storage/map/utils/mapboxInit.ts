@@ -72,14 +72,19 @@ export const createMapInstance = (
     // Ensure popups appear above other elements
     mapInstance.getContainer().style.zIndex = '1';
     
-    // Setup handlers to work around Firefox specific issues
-    mapInstance.on('click', (e) => {
-      // Prevent default behavior only if not clicking a marker
-      if (!(e.originalEvent.target as HTMLElement)?.closest('.custom-marker')) {
-        // Don't close popups when clicking outside them
-        e.originalEvent.stopPropagation();
+    // Add global click handler to prevent popup closing
+    const container = mapInstance.getContainer();
+    container.addEventListener('click', (e) => {
+      // If we clicked a marker or popup, stop propagation
+      if ((e.target as HTMLElement)?.closest('.custom-marker') || 
+          (e.target as HTMLElement)?.closest('.mapboxgl-popup')) {
+        e.stopPropagation();
+        console.log('Prevented map click from closing popup');
+      } else {
+        // For debugging, log regular map clicks
+        console.log('Regular map click detected');
       }
-    });
+    }, true); // Use capture phase
   });
   
   // Add debug event listeners
@@ -96,6 +101,37 @@ export const createMapInstance = (
       [-180, -85], // Southwest coordinates
       [180, 85]    // Northeast coordinates
     ]);
+    
+    // Add global CSS for popups - also ensures they work
+    const style = document.createElement('style');
+    style.textContent = `
+      .mapboxgl-popup {
+        z-index: 10000 !important;
+      }
+      .mapboxgl-popup-content {
+        z-index: 10000 !important;
+        pointer-events: auto !important;
+      }
+      .custom-marker {
+        cursor: pointer !important;
+        z-index: 999 !important;
+      }
+      /* Prevent popup closing by ensuring clicking on map doesn't close it */
+      .mapboxgl-popup-close-button {
+        font-size: 20px !important;
+        color: white !important;
+        background: rgba(0,0,0,0.2) !important;
+        border-radius: 50% !important;
+        width: 24px !important;
+        height: 24px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        top: 5px !important;
+        right: 5px !important;
+      }
+    `;
+    document.head.appendChild(style);
   });
   
   mapInstance.on('idle', () => {

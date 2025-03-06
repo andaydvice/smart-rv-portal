@@ -15,7 +15,7 @@ export const createPopupHTML = (facility: StorageFacility) => {
     .map(([key, _]) => featureLabels[key as keyof typeof featureLabels]);
 
   return `
-    <div class="p-6 bg-[#131a2a] text-white rounded-lg max-w-md">
+    <div class="p-6 bg-[#131a2a] text-white rounded-lg max-w-md popup-content">
       <h3 class="font-bold text-xl mb-3 text-[#60A5FA]">${facility.name}</h3>
       
       <div class="space-y-2 mb-4">
@@ -71,11 +71,25 @@ export const createPopupHTML = (facility: StorageFacility) => {
       
       <style>
         /* Custom styles to ensure popup stays visible */
-        .mapboxgl-popup-content {
-          z-index: 9999 !important;
-        }
         .mapboxgl-popup {
-          z-index: 9999 !important;
+          z-index: 10000 !important; 
+        }
+        .mapboxgl-popup-content {
+          z-index: 10000 !important;
+          padding: 0 !important;
+          overflow: visible !important;
+          pointer-events: auto !important;
+        }
+        .mapboxgl-popup-close-button {
+          z-index: 10001 !important;
+          color: white !important;
+          font-size: 20px !important;
+          padding: 5px 10px !important;
+          right: 2px !important;
+          top: 2px !important;
+        }
+        .popup-content {
+          pointer-events: auto !important;
         }
       </style>
     </div>

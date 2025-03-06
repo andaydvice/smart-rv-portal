@@ -27,9 +27,23 @@ const addGlobalStyles = () => {
     }
     .mapboxgl-popup-content {
       z-index: 9999 !important;
+      pointer-events: auto !important;
     }
     .custom-marker {
-      cursor: pointer;
+      cursor: pointer !important;
+      z-index: 999 !important;
+    }
+    
+    /* Ensure popup stays visible by overriding any conflicting CSS */
+    .mapboxgl-popup-close-button {
+      color: white !important;
+      font-size: 18px !important;
+      margin: 5px !important;
+    }
+    
+    /* Make popup content clickable */
+    .popup-content {
+      pointer-events: auto !important;
     }
   `;
   document.head.appendChild(styleElement);
@@ -60,6 +74,7 @@ const MapView = ({
   const [mapError, setMapError] = useState<string | null>(null);
   const [isInitializing, setIsInitializing] = useState(true);
   const [mapLoaded, setMapLoaded] = useState(false);
+  const activePopupRef = useRef<mapboxgl.Popup | null>(null);
   
   // Debug output - log facilities count whenever it changes
   useEffect(() => {
@@ -69,22 +84,29 @@ const MapView = ({
     }
   }, [facilities]);
 
-  // Add a listener to handle popup clicks correctly
+  // Add a global listener to handle popup clicks correctly
   useEffect(() => {
-    const handleMapClick = (e: MouseEvent) => {
-      // Prevent default behavior for popup clicks
-      if ((e.target as HTMLElement)?.closest('.mapboxgl-popup')) {
+    const handleGlobalClick = (e: MouseEvent) => {
+      // Check if clicked element is part of a popup
+      const isPopupClick = (e.target as HTMLElement)?.closest('.mapboxgl-popup');
+      const isMarkerClick = (e.target as HTMLElement)?.closest('.custom-marker');
+      
+      if (isPopupClick || isMarkerClick) {
+        // Stop event from reaching map and closing popup
         e.stopPropagation();
+        console.log('Global click handler: prevented click from closing popup');
       }
     };
 
-    document.addEventListener('click', handleMapClick, true);
+    // Use capture phase to intercept events before they reach map
+    document.addEventListener('click', handleGlobalClick, true);
     
     return () => {
-      document.removeEventListener('click', handleMapClick, true);
+      document.removeEventListener('click', handleGlobalClick, true);
     };
   }, []);
 
+  // Initialize map
   useEffect(() => {
     if (!mapContainer.current || !mapToken) return;
 
@@ -133,6 +155,15 @@ const MapView = ({
             toast.error(`Map error: ${e.error?.message || 'Unknown error'}`);
           }
         });
+        
+        // Add click handler to map container to prevent closing popups
+        const mapContainer = newMap.getContainer();
+        mapContainer.addEventListener('click', (e) => {
+          // Only prevent default behavior if NOT clicking a marker (so marker clicks work)
+          if (!(e.target as HTMLElement)?.closest('.custom-marker')) {
+            console.log('Map container click - keeping popups open');
+          }
+        }, true);
 
         // Complete initialization
         if (isMounted) {
@@ -181,6 +212,20 @@ const MapView = ({
       fitMapToBounds(map.current, facilities);
     }
   }, [facilities, mapLoaded]);
+  
+  // Handle facility highlighting specially
+  useEffect(() => {
+    if (map.current && highlightedFacility) {
+      console.log(`Highlighting facility: ${highlightedFacility}`);
+      
+      // Find the highlighted marker element
+      const markerEl = document.querySelector(`[data-facility-id="${highlightedFacility}"]`);
+      if (markerEl) {
+        // Scroll to bring it into view if needed
+        markerEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+    }
+  }, [highlightedFacility]);
 
   return (
     <div className="relative w-full h-full">
