@@ -127,8 +127,10 @@ const MapView = ({
         }
 
         console.log('Creating new map instance');
-        // Create new map instance
-        const newMap = createMapInstance(mapContainer.current, mapToken);
+        
+        // Create new map instance with the existing ref
+        const mapContainerElement = mapContainer.current;
+        const newMap = createMapInstance(mapContainerElement, mapToken);
 
         // Wait for style to load
         console.log('Waiting for map style to load');
@@ -157,8 +159,8 @@ const MapView = ({
         });
         
         // Add click handler to map container to prevent closing popups
-        const mapContainer = newMap.getContainer();
-        mapContainer.addEventListener('click', (e) => {
+        const mapContainerDiv = newMap.getContainer();
+        mapContainerDiv.addEventListener('click', (e) => {
           // Only prevent default behavior if NOT clicking a marker (so marker clicks work)
           if (!(e.target as HTMLElement)?.closest('.custom-marker')) {
             console.log('Map container click - keeping popups open');
@@ -203,7 +205,7 @@ const MapView = ({
         map.current = null;
       }
     };
-  }, [mapToken, selectedState]);
+  }, [mapToken, selectedState, facilities]);
 
   // Update map bounds when facilities change
   useEffect(() => {
