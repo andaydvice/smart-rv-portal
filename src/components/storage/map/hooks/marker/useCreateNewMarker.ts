@@ -1,4 +1,4 @@
-<lov-codelov-code>
+
 import mapboxgl from 'mapbox-gl';
 import { StorageFacility } from '../../../types';
 import { 
@@ -152,4 +152,3 @@ export const useCreateNewMarker = () => {
     enhanceMarkerVisibility
   };
 };
-</lov-code>
