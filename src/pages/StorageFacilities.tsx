@@ -7,7 +7,7 @@ import { Warehouse } from "lucide-react";
 
 export default function StorageFacilities() {
   return (
-    <>
+    <Layout>
       <Navbar />
       <div className="min-h-screen bg-[#080F1F] text-white">
         {/* Hero Header with Image */}
@@ -40,6 +40,6 @@ export default function StorageFacilities() {
           </div>
         </Container>
       </div>
-    </>
+    </Layout>
   );
 }
