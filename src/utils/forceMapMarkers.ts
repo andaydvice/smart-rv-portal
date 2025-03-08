@@ -1,17 +1,22 @@
 
+// Import mapboxgl to ensure we have the Marker type
+import mapboxgl from 'mapbox-gl';
+
+// Define the Window interface extension once with the correct type
 interface Window {
-  _persistentMarkers?: Record<string, any>;
-  mapInstance?: any;
+  _persistentMarkers?: Record<string, mapboxgl.Marker>;
+  mapInstance?: mapboxgl.Map;
   isStorageFacilitiesPage?: boolean;
-  mapboxgl?: any;
+  mapboxgl?: typeof mapboxgl;
 }
 
+// Update the global declaration to match the interface above
 declare global {
   interface Window {
-    _persistentMarkers?: Record<string, any>;
-    mapInstance?: any;
+    _persistentMarkers?: Record<string, mapboxgl.Marker>;
+    mapInstance?: mapboxgl.Map;
     isStorageFacilitiesPage?: boolean;
-    mapboxgl?: any;
+    mapboxgl?: typeof mapboxgl;
   }
 }
 

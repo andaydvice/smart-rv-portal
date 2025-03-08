@@ -1,3 +1,4 @@
+
 import { RefObject } from 'react';
 import mapboxgl from 'mapbox-gl';
 import { StorageFacility } from '../../../types';
@@ -51,5 +52,8 @@ export interface PersistentMarkers {
 declare global {
   interface Window {
     _persistentMarkers?: PersistentMarkers;
+    mapInstance?: mapboxgl.Map;
+    isStorageFacilitiesPage?: boolean;
+    mapboxgl?: typeof mapboxgl;
   }
 }
