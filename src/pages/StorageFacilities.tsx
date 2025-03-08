@@ -16,14 +16,14 @@ export default function StorageFacilities() {
     // Signal that we're on the storage facilities page
     window.isStorageFacilitiesPage = true;
     
-    // Apply all marker visibility fixes with higher frequency
+    // Apply all marker visibility fixes immediately
     document.body.setAttribute('data-markers-loading', 'true');
     injectEmergencyStyles();
     patchMapboxMarkerPrototype();
     
-    // Immediate and repeated visibility enforcement
+    // Force markers to be visible - run multiple times with different delays
     forceMapMarkersVisible();
-    const forceIntervals = [100, 500, 1000, 2000, 5000].map(delay => 
+    const forceIntervals = [100, 300, 500, 1000, 2000, 5000].map(delay => 
       setTimeout(forceMapMarkersVisible, delay)
     );
     
@@ -64,7 +64,7 @@ export default function StorageFacilities() {
           }
         }
       });
-    }, 300); // Run more frequently for better marker visibility
+    }, 200); // Run more frequently for better marker visibility
     
     // Clean up
     return () => {
@@ -90,10 +90,10 @@ export default function StorageFacilities() {
             <Container className="h-full flex flex-col justify-center items-center">
               <div className="text-center max-w-3xl bg-black/40 backdrop-blur-sm p-6 rounded-lg">
                 <div className="flex items-center justify-center gap-2 mb-2">
+                  {/* Enhanced orange marker indicator with animation and visibility */}
                   <div className="relative flex items-center">
-                    <div className="orange-marker-indicator"></div>
+                    <div className="fixed-orange-marker w-8 h-8 bg-[#F97316] rounded-full border-2 border-white shadow-lg animate-pulse"></div>
                     <Warehouse className="h-7 w-7 text-[#F97316]" />
-                    {/* Orange marker indicator in the header - made larger and more visible */}
                     <div className="absolute -top-1 -right-1 w-4 h-4 bg-[#F97316] rounded-full border-2 border-white animate-pulse"></div>
                   </div>
                   <h1 className="text-4xl md:text-5xl font-bold text-white">

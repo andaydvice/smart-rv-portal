@@ -16,7 +16,8 @@ div[class*="marker"],
 }
 
 /* Improve emergency marker styling */
-.emergency-marker {
+.emergency-marker,
+.fixed-orange-marker {
   width: 30px !important;
   height: 30px !important;
   border-radius: 50% !important;
@@ -34,8 +35,18 @@ div[class*="marker"],
   100% { transform: scale(1) translate(-50%, -50%); box-shadow: 0 0 10px rgba(249, 115, 22, 0.8); }
 }
 
+@keyframes header-pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
 .emergency-marker {
   animation: pulse 1.5s infinite ease-in-out;
+}
+
+.fixed-orange-marker {
+  animation: header-pulse 1.5s infinite ease-in-out;
 }
 
 /* Force popup visibility */
@@ -111,5 +122,5 @@ div .mapboxgl-marker {
   position: relative !important;
   top: 0 !important;
   margin-right: 8px !important;
-  animation: pulse 1.5s infinite ease-in-out !important;
+  animation: header-pulse 1.5s infinite ease-in-out !important;
 }

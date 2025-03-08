@@ -27,7 +27,8 @@ export function injectEmergencyStyles() {
     }
     
     /* Emergency marker styling */
-    .emergency-marker {
+    .emergency-marker,
+    .fixed-orange-marker {
       width: 30px !important;
       height: 30px !important;
       background-color: #F97316 !important;
@@ -44,8 +45,18 @@ export function injectEmergencyStyles() {
       100% { transform: scale(1) translate(-50%, -50%); box-shadow: 0 0 10px rgba(249, 115, 22, 0.8); }
     }
     
+    @keyframes header-pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+    
     .emergency-marker {
       animation: pulse-marker 1.5s infinite ease-in-out;
+    }
+    
+    .fixed-orange-marker {
+      animation: header-pulse 1.5s infinite ease-in-out;
     }
     
     /* Force popup visibility */
@@ -102,7 +113,7 @@ export function injectEmergencyStyles() {
       box-shadow: 0 0 10px rgba(249,115,22,0.8) !important;
       display: inline-block !important;
       position: relative !important;
-      animation: pulse-marker 1.5s infinite ease-in-out !important;
+      animation: header-pulse 1.5s infinite ease-in-out !important;
     }
     
     /* Make sure markers created programmatically are visible */
@@ -135,7 +146,7 @@ export function injectEmergencyStyles() {
         `;
       }
     });
-  }, 100);
+  }, 0);
 }
 
 // Patch the Mapbox marker prototype if available
@@ -177,7 +188,7 @@ export function patchMapboxMarkerPrototype() {
             console.log('Marker clicked via patched handler');
             
             // Try to open popup
-            if (this.getPopup && !this.getPopup().isOpen()) {
+            if (this.getPopup && typeof this.getPopup === 'function' && !this.getPopup().isOpen()) {
               this.togglePopup();
             }
           });
@@ -219,6 +230,6 @@ export function patchMapboxMarkerPrototype() {
       if (window.mapboxgl && window.mapboxgl.Marker) {
         patchMapboxMarkerPrototype();
       }
-    }, 2000);
+    }, 1000);
   }
 }
