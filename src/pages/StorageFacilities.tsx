@@ -5,21 +5,32 @@ import Navbar from "@/components/Navbar";
 import Layout from "@/components/layout/Layout";
 import { Warehouse } from "lucide-react";
 import { useEffect } from 'react';
+import { injectEmergencyStyles } from "@/utils/injectEmergencyStyles";
 
 export default function StorageFacilities() {
   useEffect(() => {
-    // Inject the fix script
-    const script = document.createElement('script');
-    script.src = '/markerFix.js';
-    script.async = true;
-    document.body.appendChild(script);
+    // Apply direct emergency styling to force markers to be visible
+    injectEmergencyStyles();
+    
+    // Create a global variable to track if we're on the storage facilities page
+    window.isStorageFacilitiesPage = true;
+    
+    // Force visibility of markers periodically
+    const forceInterval = setInterval(() => {
+      document.querySelectorAll('.mapboxgl-marker, .custom-marker').forEach(marker => {
+        if (marker instanceof HTMLElement) {
+          marker.style.visibility = 'visible';
+          marker.style.display = 'block';
+          marker.style.opacity = '1';
+          marker.style.zIndex = '9999';
+        }
+      });
+    }, 1000);
     
     return () => {
-      // Only remove if it exists to prevent errors
-      const scriptElement = document.querySelector('script[src="/markerFix.js"]');
-      if (scriptElement && scriptElement.parentNode) {
-        scriptElement.parentNode.removeChild(scriptElement);
-      }
+      // Clean up
+      window.isStorageFacilitiesPage = false;
+      clearInterval(forceInterval);
     };
   }, []);
 

@@ -16,6 +16,7 @@ import FacilityList from './map-view/FacilityList';
 import { useMapToken } from './map-view/useMapToken';
 import { useFacilitySelection } from './map-view/useFacilitySelection';
 import { toast } from "sonner";
+import { forceMapMarkersVisible } from '@/utils/forceMapMarkers';
 
 const StorageFacilitiesMap = () => {
   const [filters, setFilters] = useState<FilterState>({
@@ -57,6 +58,28 @@ const StorageFacilitiesMap = () => {
       }
       return newFilters;
     });
+  }, []);
+  
+  // Force map markers to be visible
+  useEffect(() => {
+    // Add a direct approach to force marker visibility
+    const forceInterval = setInterval(() => {
+      document.querySelectorAll('.mapboxgl-marker, .custom-marker').forEach(marker => {
+        if (marker instanceof HTMLElement) {
+          marker.style.visibility = 'visible';
+          marker.style.display = 'block';
+          marker.style.opacity = '1';
+          marker.style.zIndex = '9999';
+        }
+      });
+    }, 1000);
+    
+    // Run the standalone force function as well
+    forceMapMarkersVisible();
+    
+    return () => {
+      clearInterval(forceInterval);
+    };
   }, []);
   
   // Simplified effect to reduce re-renders and only show critical information
