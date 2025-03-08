@@ -102,7 +102,8 @@ export function forceMapMarkersVisible() {
         
         // Position correctly on map
         if (map.project) {
-          const coordinates = [facility.lng, facility.lat];
+          // Fix: Explicitly define coordinates as [number, number] tuple to satisfy LngLatLike
+          const coordinates: [number, number] = [facility.lng, facility.lat];
           const point = map.project(coordinates);
           el.style.left = `${point.x}px`;
           el.style.top = `${point.y}px`;
