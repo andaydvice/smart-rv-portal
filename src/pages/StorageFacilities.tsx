@@ -16,13 +16,18 @@ export default function StorageFacilities() {
     // Signal that we're on the storage facilities page
     window.isStorageFacilitiesPage = true;
     
-    // Apply all marker visibility fixes
+    // Apply all marker visibility fixes with higher frequency
     document.body.setAttribute('data-markers-loading', 'true');
     injectEmergencyStyles();
     patchMapboxMarkerPrototype();
-    forceMapMarkersVisible();
     
-    // Add direct DOM manipulation fallback
+    // Immediate and repeated visibility enforcement
+    forceMapMarkersVisible();
+    const forceIntervals = [100, 500, 1000, 2000, 5000].map(delay => 
+      setTimeout(forceMapMarkersVisible, delay)
+    );
+    
+    // Add direct DOM manipulation fallback on a faster interval
     const forceInterval = setInterval(() => {
       const markers = document.querySelectorAll('.mapboxgl-marker, .custom-marker');
       console.log(`Found ${markers.length} markers to force visible`);
@@ -36,15 +41,36 @@ export default function StorageFacilities() {
             z-index: 9999 !important;
             pointer-events: auto !important;
             position: absolute !important;
+            cursor: pointer !important;
           `;
+          
+          // Add click handler if missing
+          if (!marker.getAttribute('data-has-click')) {
+            marker.setAttribute('data-has-click', 'true');
+            marker.addEventListener('click', (e) => {
+              console.log('Marker clicked:', marker.getAttribute('data-facility-id'));
+              e.stopPropagation();
+              
+              // Try to find and click the view button
+              const facilityId = marker.getAttribute('data-facility-id');
+              if (facilityId) {
+                setTimeout(() => {
+                  document.querySelectorAll(`.view-facility-btn[data-facility-id="${facilityId}"]`).forEach(btn => {
+                    (btn as HTMLElement).click();
+                  });
+                }, 100);
+              }
+            });
+          }
         }
       });
-    }, 1000);
+    }, 500); // Run every 500ms instead of 1000ms
     
     // Clean up
     return () => {
       window.isStorageFacilitiesPage = false;
       clearInterval(forceInterval);
+      forceIntervals.forEach(timeout => clearTimeout(timeout));
       document.body.removeAttribute('data-markers-loading');
     };
   }, []);
@@ -64,7 +90,11 @@ export default function StorageFacilities() {
             <Container className="h-full flex flex-col justify-center items-center">
               <div className="text-center max-w-3xl bg-black/40 backdrop-blur-sm p-6 rounded-lg">
                 <div className="flex items-center justify-center gap-2 mb-2">
-                  <Warehouse className="h-7 w-7 text-[#F97316]" />
+                  <div className="relative">
+                    <Warehouse className="h-7 w-7 text-[#F97316]" />
+                    {/* Orange marker indicator in the header */}
+                    <div className="absolute -top-1 -right-1 w-3 h-3 bg-[#F97316] rounded-full border border-white animate-pulse"></div>
+                  </div>
                   <h1 className="text-4xl md:text-5xl font-bold text-white">
                     Indoor RV Storage Facilities
                   </h1>

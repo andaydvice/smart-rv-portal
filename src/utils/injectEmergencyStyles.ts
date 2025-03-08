@@ -21,24 +21,28 @@ export function injectEmergencyStyles() {
       z-index: 9999 !important;
       pointer-events: auto !important;
       position: absolute !important;
+      cursor: pointer !important;
     }
     
     /* Emergency marker styling */
-    .mapboxgl-marker:before,
-    .custom-marker:before {
-      content: '';
-      position: absolute;
-      display: block !important;
-      width: 24px;
-      height: 24px;
-      background-color: #F97316;
-      border-radius: 50%;
-      border: 2px solid white;
-      box-shadow: 0 0 10px rgba(0,0,0,0.8);
-      z-index: 9999;
-      pointer-events: auto;
-      opacity: 1 !important;
-      visibility: visible !important;
+    .emergency-marker {
+      width: 30px !important;
+      height: 30px !important;
+      background-color: #F97316 !important;
+      border-radius: 50% !important;
+      border: 3px solid white !important;
+      box-shadow: 0 0 15px rgba(249,115,22,0.8) !important;
+    }
+    
+    /* Pulsing animation */
+    @keyframes pulse-marker {
+      0% { transform: scale(1) translate(-50%, -50%); box-shadow: 0 0 10px rgba(249, 115, 22, 0.8); }
+      50% { transform: scale(1.2) translate(-42%, -42%); box-shadow: 0 0 20px rgba(249, 115, 22, 0.9); }
+      100% { transform: scale(1) translate(-50%, -50%); box-shadow: 0 0 10px rgba(249, 115, 22, 0.8); }
+    }
+    
+    .emergency-marker {
+      animation: pulse-marker 1.5s infinite ease-in-out;
     }
     
     /* Force popup visibility */
@@ -47,6 +51,7 @@ export function injectEmergencyStyles() {
       visibility: visible !important;
       opacity: 1 !important;
       z-index: 10000 !important;
+      pointer-events: auto !important;
     }
     
     /* Style popup content */
@@ -57,12 +62,31 @@ export function injectEmergencyStyles() {
       border-radius: 8px !important;
       padding: 15px !important;
       border: 1px solid rgb(55 65 81) !important;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5) !important;
     }
     
     /* Ensure map is visible */
     .mapboxgl-map {
       visibility: visible !important;
       opacity: 1 !important;
+    }
+    
+    /* Style marker buttons */
+    .view-facility-btn {
+      background-color: #F97316 !important;
+      color: white !important;
+      border: none !important;
+      padding: 8px 12px !important;
+      border-radius: 4px !important;
+      cursor: pointer !important;
+      font-weight: bold !important;
+      margin-top: 8px !important;
+      display: block !important;
+      width: 100% !important;
+    }
+    
+    .view-facility-btn:hover {
+      background-color: #EA580C !important;
     }
     
     /* Make sure markers created programmatically are visible */
@@ -100,11 +124,50 @@ export function patchMapboxMarkerPrototype() {
           opacity: '1',
           zIndex: '9999',
           pointerEvents: 'auto',
-          position: 'absolute'
+          position: 'absolute',
+          cursor: 'pointer'
         });
         
         // Add a data attribute for debugging
         this._element.setAttribute('data-patched', 'true');
+        
+        // Add click handler if missing
+        if (!this._element.getAttribute('data-has-click')) {
+          this._element.setAttribute('data-has-click', 'true');
+          
+          this._element.addEventListener('click', (e) => {
+            e.stopPropagation();
+            console.log('Marker clicked via patched handler');
+            
+            // Try to open popup
+            if (this.getPopup && !this.getPopup().isOpen()) {
+              this.togglePopup();
+            }
+          });
+        }
+      }
+      
+      return result;
+    };
+    
+    // Patch the popup system
+    const originalSetPopup = window.mapboxgl.Marker.prototype.setPopup;
+    
+    window.mapboxgl.Marker.prototype.setPopup = function(popup) {
+      const result = originalSetPopup.call(this, popup);
+      
+      // Enhance popup if it exists
+      if (popup && popup.getElement) {
+        const popupEl = popup.getElement();
+        if (popupEl) {
+          Object.assign(popupEl.style, {
+            visibility: 'visible',
+            display: 'block',
+            opacity: '1',
+            zIndex: '10000',
+            pointerEvents: 'auto'
+          });
+        }
       }
       
       return result;
