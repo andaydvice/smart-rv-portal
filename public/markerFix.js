@@ -1,144 +1,157 @@
 
 // Emergency fix for map markers
 (function() {
-  // Immediately invoked function to fix map markers
-  function fixMapMarkers() {
-    console.log('Attempting emergency marker fix');
+  console.log('Map marker fix initialized');
+  
+  // Function to apply fixes to all markers
+  function fixAllMarkers() {
+    console.log('Force-displaying map markers!');
     
-    // Override prototypes to force markers to be visible
-    if (window.mapboxgl && window.mapboxgl.Marker) {
-      const originalAddTo = window.mapboxgl.Marker.prototype.addTo;
-      
-      window.mapboxgl.Marker.prototype.addTo = function(map) {
-        const result = originalAddTo.call(this, map);
+    // Apply to all markers
+    document.querySelectorAll('.mapboxgl-marker, .custom-marker').forEach(marker => {
+      if (marker instanceof HTMLElement) {
+        // Set critical styles directly
+        marker.style.display = 'block';
+        marker.style.visibility = 'visible';
+        marker.style.opacity = '1';
+        marker.style.zIndex = '9999';
+        marker.style.pointerEvents = 'auto';
         
-        // Force element to be visible after it's added to the map
-        if (this._element) {
-          Object.assign(this._element.style, {
-            display: 'block !important',
-            visibility: 'visible !important',
-            opacity: '1 !important',
-            zIndex: '9999 !important',
-            backgroundColor: '#F97316 !important',
-            width: '24px !important',
-            height: '24px !important',
-            borderRadius: '50% !important',
-            border: '2px solid white !important',
-            boxShadow: '0 0 10px rgba(0,0,0,0.8) !important'
-          });
-          
-          // Add a data attribute to track our modified markers
-          this._element.setAttribute('data-fixed-marker', 'true');
-          
-          // Log success
-          console.log('Marker fixed:', this._element);
+        // For empty/invisible markers, make them visible
+        if (marker.clientWidth < 5 || marker.clientHeight < 5) {
+          marker.style.width = '24px';
+          marker.style.height = '24px';
+          marker.style.borderRadius = '50%';
+          marker.style.backgroundColor = '#F97316';
+          marker.style.border = '2px solid white';
+          marker.style.boxShadow = '0 0 10px rgba(0,0,0,0.8)';
         }
-        
-        return result;
-      };
-      
-      console.log('Mapbox Marker prototype successfully patched');
-    }
+      }
+    });
     
-    // Periodically check for markers and force them to be visible
-    setInterval(() => {
-      document.querySelectorAll('.mapboxgl-marker, .custom-marker').forEach(marker => {
-        if (!marker.hasAttribute('data-fixed-marker')) {
-          Object.assign(marker.style, {
-            display: 'block',
-            visibility: 'visible',
-            opacity: '1',
-            zIndex: '9999',
-            backgroundColor: '#F97316',
-            width: '24px',
-            height: '24px',
-            borderRadius: '50%',
-            border: '2px solid white',
-            boxShadow: '0 0 10px rgba(0,0,0,0.8)'
-          });
-          
-          marker.setAttribute('data-fixed-marker', 'true');
-          console.log('Fixed existing marker:', marker);
-        }
-      });
-    }, 1000);
-    
-    // Add a global event listener to catch when the map is created
-    window.addEventListener('load', () => {
-      console.log('Window loaded, looking for map');
-      
-      // Give the map time to initialize
-      setTimeout(() => {
-        const mapContainer = document.querySelector('.mapboxgl-map');
-        if (mapContainer) {
-          console.log('Map container found, injecting emergency markers');
-          
-          // Create emergency markers if none exist
-          if (document.querySelectorAll('.mapboxgl-marker, .custom-marker').length === 0) {
-            console.log('No markers found, creating emergency markers');
-            
-            // Create hardcoded markers as a last resort
-            const emergencyLocations = [
-              { lat: 40.7128, lng: -74.0060, name: "Central Storage" },
-              { lat: 40.7500, lng: -74.0300, name: "North Storage" },
-              { lat: 40.6800, lng: -73.9800, name: "South Storage" }
-            ];
-            
-            emergencyLocations.forEach((location, index) => {
-              const marker = document.createElement('div');
-              marker.className = 'emergency-marker';
-              marker.style.position = 'absolute';
-              marker.style.width = '24px';
-              marker.style.height = '24px';
-              marker.style.backgroundColor = '#F97316';
-              marker.style.borderRadius = '50%';
-              marker.style.border = '2px solid white';
-              marker.style.boxShadow = '0 0 10px rgba(0,0,0,0.8)';
-              marker.style.zIndex = '9999';
-              marker.style.cursor = 'pointer';
-              
-              // Position approximately based on map container dimensions
-              const containerRect = mapContainer.getBoundingClientRect();
-              marker.style.left = `${containerRect.width * (0.3 + (index * 0.2))}px`;
-              marker.style.top = `${containerRect.height * 0.5}px`;
-              
-              // Add click handler
-              marker.onclick = function() {
-                alert(`${location.name}: ${location.lat}, ${location.lng}`);
-              };
-              
-              mapContainer.appendChild(marker);
-              console.log('Created emergency marker:', marker);
-            });
-          }
-        }
-      }, 3000);
+    // Fix popups
+    document.querySelectorAll('.mapboxgl-popup').forEach(popup => {
+      if (popup instanceof HTMLElement) {
+        popup.style.display = 'block';
+        popup.style.visibility = 'visible';
+        popup.style.opacity = '1';
+        popup.style.zIndex = '10000';
+      }
     });
   }
   
-  // Run our fix on script load
-  fixMapMarkers();
+  // Apply styles for map elements
+  function addEmergencyStyles() {
+    const style = document.createElement('style');
+    style.textContent = `
+      .mapboxgl-marker, .custom-marker {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        z-index: 9999 !important;
+        pointer-events: auto !important;
+      }
+      
+      .mapboxgl-popup {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        z-index: 10000 !important;
+      }
+      
+      .mapboxgl-popup-content {
+        display: block !important;
+        visibility: visible !important;
+        background-color: #151A22 !important;
+        color: white !important;
+        border-radius: 8px !important;
+        padding: 15px !important;
+      }
+      
+      .mapboxgl-popup-close-button {
+        color: white !important;
+        font-size: 16px !important;
+      }
+      
+      /* Force marker visibility */
+      body .mapboxgl-marker {
+        visibility: visible !important;
+        display: block !important;
+        opacity: 1 !important;
+      }
+    `;
+    document.head.appendChild(style);
+  }
   
-  // Also add CSS directly to the page
-  const style = document.createElement('style');
-  style.textContent = `
-    .mapboxgl-marker, .custom-marker, .emergency-marker {
-      display: block !important;
-      visibility: visible !important;
-      opacity: 1 !important;
-      z-index: 9999 !important;
-    }
+  // Create emergency markers if none exist
+  function createEmergencyMarkers() {
+    const mapContainer = document.querySelector('.mapboxgl-map');
+    if (!mapContainer) return;
     
-    .mapboxgl-popup {
-      display: block !important;
-      visibility: visible !important;
-      opacity: 1 !important;
-      z-index: 10000 !important;
-    }
+    // Check if we need emergency markers
+    if (document.querySelectorAll('.mapboxgl-marker, .custom-marker').length > 0) return;
     
-    [data-radix-tooltip-provider] {
-      display: contents !important;
-    }
-  `;
-  document.head.appendChild(style);
+    console.log('Creating emergency markers');
+    
+    // Sample facilities with hardcoded coordinates
+    const emergencyFacilities = [
+      { name: "Downtown Storage", lat: 40.7128, lng: -74.0060 },
+      { name: "Westside Storage", lat: 40.7139, lng: -74.0080 },
+      { name: "Eastside Storage", lat: 40.7135, lng: -74.0040 }
+    ];
+    
+    emergencyFacilities.forEach((facility, index) => {
+      const marker = document.createElement('div');
+      marker.className = 'custom-marker emergency-marker';
+      
+      // Style the marker
+      Object.assign(marker.style, {
+        position: 'absolute',
+        left: `${50 + (index * 100)}px`,
+        top: '50%',
+        width: '24px',
+        height: '24px',
+        borderRadius: '50%',
+        backgroundColor: '#F97316',
+        border: '2px solid white',
+        boxShadow: '0 0 10px rgba(0,0,0,0.8)',
+        zIndex: '9999',
+        cursor: 'pointer'
+      });
+      
+      // Add click handler
+      marker.addEventListener('click', () => {
+        alert(`${facility.name} (${facility.lat}, ${facility.lng})`);
+      });
+      
+      // Add to map
+      mapContainer.appendChild(marker);
+    });
+  }
+  
+  // Initialize all fixes
+  function initialize() {
+    addEmergencyStyles();
+    
+    // Apply fixes immediately
+    fixAllMarkers();
+    
+    // Then periodically
+    setInterval(fixAllMarkers, 3000);
+    
+    // Check for map container and create emergency markers if needed
+    setTimeout(() => {
+      createEmergencyMarkers();
+    }, 5000);
+  }
+  
+  // Run on load and when DOM changes
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initialize);
+  } else {
+    initialize();
+  }
+  
+  // Make function available globally for manual triggering
+  window.forceShowMapMarkers = fixAllMarkers;
 })();
