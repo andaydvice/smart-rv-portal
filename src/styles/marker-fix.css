@@ -1,9 +1,11 @@
 
-/* CRITICAL - Force marker visibility */
+/* CRITICAL - Force marker visibility - high-specificity selectors */
 .mapboxgl-marker,
 .custom-marker,
 .marker,
-[class*="marker"] {
+[class*="marker"],
+div[class*="marker"],
+.mapboxgl-canvas-container .mapboxgl-marker {
   display: block !important;
   visibility: visible !important;
   opacity: 1 !important;
@@ -61,10 +63,14 @@
 }
 
 /* Make sure marker creation works */
-body[data-markers-loading="true"] .mapboxgl-marker {
+body[data-markers-loading="true"] .mapboxgl-marker,
+.mapboxgl-map[loaded="true"] .mapboxgl-marker,
+#map .mapboxgl-marker,
+div .mapboxgl-marker {
   display: block !important;
   visibility: visible !important;
   opacity: 1 !important;
+  pointer-events: auto !important;
 }
 
 /* Highlighted marker specific styles */
@@ -91,4 +97,19 @@ body[data-markers-loading="true"] .mapboxgl-marker {
 
 .view-facility-btn:hover {
   background-color: #EA580C !important;
+}
+
+/* Header orange marker indicator style */
+.orange-marker-indicator {
+  width: 24px !important;
+  height: 24px !important;
+  background-color: #F97316 !important;
+  border-radius: 50% !important;
+  border: 2px solid white !important;
+  box-shadow: 0 0 10px rgba(249,115,22,0.8) !important;
+  display: inline-block !important;
+  position: relative !important;
+  top: 0 !important;
+  margin-right: 8px !important;
+  animation: pulse 1.5s infinite ease-in-out !important;
 }

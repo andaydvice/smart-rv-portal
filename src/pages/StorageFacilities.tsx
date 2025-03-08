@@ -64,7 +64,7 @@ export default function StorageFacilities() {
           }
         }
       });
-    }, 500); // Run every 500ms instead of 1000ms
+    }, 300); // Run more frequently for better marker visibility
     
     // Clean up
     return () => {
@@ -90,10 +90,11 @@ export default function StorageFacilities() {
             <Container className="h-full flex flex-col justify-center items-center">
               <div className="text-center max-w-3xl bg-black/40 backdrop-blur-sm p-6 rounded-lg">
                 <div className="flex items-center justify-center gap-2 mb-2">
-                  <div className="relative">
+                  <div className="relative flex items-center">
+                    <div className="orange-marker-indicator"></div>
                     <Warehouse className="h-7 w-7 text-[#F97316]" />
-                    {/* Orange marker indicator in the header */}
-                    <div className="absolute -top-1 -right-1 w-3 h-3 bg-[#F97316] rounded-full border border-white animate-pulse"></div>
+                    {/* Orange marker indicator in the header - made larger and more visible */}
+                    <div className="absolute -top-1 -right-1 w-4 h-4 bg-[#F97316] rounded-full border-2 border-white animate-pulse"></div>
                   </div>
                   <h1 className="text-4xl md:text-5xl font-bold text-white">
                     Indoor RV Storage Facilities

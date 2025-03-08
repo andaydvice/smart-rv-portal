@@ -10,11 +10,13 @@ export function injectEmergencyStyles() {
   const style = document.createElement('style');
   style.id = 'emergency-marker-fix';
   style.innerHTML = `
-    /* Critical visibility overrides */
-    .custom-marker,
+    /* Critical visibility overrides with higher specificity */
     .mapboxgl-marker,
+    .custom-marker,
     .marker,
-    [class*="marker"] {
+    [class*="marker"],
+    div[class*="marker"],
+    .mapboxgl-canvas-container .mapboxgl-marker {
       display: block !important;
       visibility: visible !important;
       opacity: 1 !important;
@@ -32,6 +34,7 @@ export function injectEmergencyStyles() {
       border-radius: 50% !important;
       border: 3px solid white !important;
       box-shadow: 0 0 15px rgba(249,115,22,0.8) !important;
+      transform: translate(-50%, -50%) !important;
     }
     
     /* Pulsing animation */
@@ -89,16 +92,50 @@ export function injectEmergencyStyles() {
       background-color: #EA580C !important;
     }
     
+    /* Add visibility to header markers */
+    .orange-marker-indicator {
+      width: 24px !important;
+      height: 24px !important;
+      background-color: #F97316 !important;
+      border-radius: 50% !important;
+      border: 2px solid white !important;
+      box-shadow: 0 0 10px rgba(249,115,22,0.8) !important;
+      display: inline-block !important;
+      position: relative !important;
+      animation: pulse-marker 1.5s infinite ease-in-out !important;
+    }
+    
     /* Make sure markers created programmatically are visible */
-    body[data-markers-loading="true"] .mapboxgl-marker {
+    body[data-markers-loading="true"] .mapboxgl-marker,
+    .mapboxgl-map[loaded="true"] .mapboxgl-marker,
+    #map .mapboxgl-marker,
+    div .mapboxgl-marker {
       display: block !important;
       visibility: visible !important;
       opacity: 1 !important;
+      pointer-events: auto !important;
     }
   `;
   
   document.head.appendChild(style);
   console.log('Emergency marker styles injected successfully');
+
+  // Add inline styles to any existing markers immediately
+  setTimeout(() => {
+    document.querySelectorAll('.mapboxgl-marker, .custom-marker').forEach(marker => {
+      if (marker instanceof HTMLElement) {
+        marker.style.cssText += `
+          visibility: visible !important;
+          display: block !important;
+          opacity: 1 !important;
+          z-index: 9999 !important;
+          pointer-events: auto !important;
+          position: absolute !important;
+          cursor: pointer !important;
+        `;
+      }
+    });
+  }, 100);
 }
 
 // Patch the Mapbox marker prototype if available
@@ -176,5 +213,12 @@ export function patchMapboxMarkerPrototype() {
     console.log('Mapbox Marker prototype successfully patched');
   } else {
     console.warn('Could not patch Mapbox Marker prototype - mapboxgl not available');
+    
+    // Add a fallback to try again later after scripts may have loaded
+    setTimeout(() => {
+      if (window.mapboxgl && window.mapboxgl.Marker) {
+        patchMapboxMarkerPrototype();
+      }
+    }, 2000);
   }
 }
