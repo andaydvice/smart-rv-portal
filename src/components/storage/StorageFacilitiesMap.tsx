@@ -60,29 +60,82 @@ const StorageFacilitiesMap = () => {
     });
   }, []);
   
-  // Force map markers to be visible
+  // Force map markers to be visible with multiple strategies
   useEffect(() => {
-    // Add a direct approach to force marker visibility
+    console.log("StorageFacilitiesMap: Running visibility enforcement");
+    
+    // Set a flag on body to indicate we're loading markers
+    document.body.setAttribute('data-markers-loading', 'true');
+    
+    // Approach 1: Run the standalone force function
+    forceMapMarkersVisible();
+    
+    // Approach 2: Direct DOM manipulation at regular intervals
     const forceInterval = setInterval(() => {
-      document.querySelectorAll('.mapboxgl-marker, .custom-marker').forEach(marker => {
+      const markers = document.querySelectorAll('.mapboxgl-marker, .custom-marker');
+      console.log(`Found ${markers.length} markers - forcing visible`);
+      
+      markers.forEach(marker => {
         if (marker instanceof HTMLElement) {
-          marker.style.visibility = 'visible';
-          marker.style.display = 'block';
-          marker.style.opacity = '1';
-          marker.style.zIndex = '9999';
+          // Use style.cssText to make sure !important is included
+          marker.style.cssText += `
+            visibility: visible !important;
+            display: block !important;
+            opacity: 1 !important;
+            z-index: 9999 !important;
+            pointer-events: auto !important;
+            position: absolute !important;
+          `;
+          
+          // Add data attribute for debugging
+          marker.setAttribute('data-forced-visible', 'true');
         }
       });
     }, 1000);
     
-    // Run the standalone force function as well
-    forceMapMarkersVisible();
+    // Approach 3: Use a mutation observer to catch any newly added markers
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach(mutation => {
+        if (mutation.type === 'childList') {
+          mutation.addedNodes.forEach(node => {
+            if (node instanceof HTMLElement) {
+              if (node.classList.contains('mapboxgl-marker') || 
+                  node.classList.contains('custom-marker')) {
+                console.log('Mutation observer caught new marker - forcing visible');
+                node.style.cssText += `
+                  visibility: visible !important;
+                  display: block !important;
+                  opacity: 1 !important;
+                  z-index: 9999 !important;
+                  pointer-events: auto !important;
+                  position: absolute !important;
+                `;
+              }
+            }
+          });
+        }
+      });
+    });
+    
+    // Start observing the document body for changes
+    observer.observe(document.body, { 
+      childList: true,
+      subtree: true
+    });
+    
+    // Remove the loading flag after a delay
+    setTimeout(() => {
+      document.body.removeAttribute('data-markers-loading');
+    }, 5000);
     
     return () => {
       clearInterval(forceInterval);
+      observer.disconnect();
+      document.body.removeAttribute('data-markers-loading');
     };
   }, []);
   
-  // Simplified effect to reduce re-renders and only show critical information
+  // Simplified effect to show only critical information
   useEffect(() => {
     // Only show success message if loaded a significant number of facilities
     if (filteredFacilities?.length > 10 && !isLoading) {
@@ -102,11 +155,13 @@ const StorageFacilitiesMap = () => {
 
   // Create a memoized click handler
   const onMarkerClick = useCallback((facilityId: string) => {
+    console.log(`Marker clicked: ${facilityId}`);
     handleFacilityClick(facilityId, displayFacilities);
   }, [handleFacilityClick, displayFacilities]);
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 min-h-[800px]">
+      {/* Sidebar */}
       <div className="lg:col-span-4">
         <div className="space-y-4">
           <FilterPanel onFilterChange={handleFilterChange} />
@@ -128,6 +183,8 @@ const StorageFacilitiesMap = () => {
           </Card>
         </div>
       </div>
+      
+      {/* Map section */}
       <div className="lg:col-span-8 flex flex-col space-y-4">
         <Card className="h-[600px] bg-[#080F1F] relative overflow-hidden border-gray-700">
           {(!mapToken) ? (

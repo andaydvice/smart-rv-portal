@@ -5,32 +5,47 @@ import Navbar from "@/components/Navbar";
 import Layout from "@/components/layout/Layout";
 import { Warehouse } from "lucide-react";
 import { useEffect } from 'react';
-import { injectEmergencyStyles } from "@/utils/injectEmergencyStyles";
+import { injectEmergencyStyles, patchMapboxMarkerPrototype } from "@/utils/injectEmergencyStyles";
+import { forceMapMarkersVisible } from "@/utils/forceMapMarkers";
+import "../styles/marker-fix.css";
 
 export default function StorageFacilities() {
   useEffect(() => {
-    // Apply direct emergency styling to force markers to be visible
-    injectEmergencyStyles();
+    console.log("StorageFacilities: Component mounted");
     
-    // Create a global variable to track if we're on the storage facilities page
+    // Signal that we're on the storage facilities page
     window.isStorageFacilitiesPage = true;
     
-    // Force visibility of markers periodically
+    // Apply all marker visibility fixes
+    document.body.setAttribute('data-markers-loading', 'true');
+    injectEmergencyStyles();
+    patchMapboxMarkerPrototype();
+    forceMapMarkersVisible();
+    
+    // Add direct DOM manipulation fallback
     const forceInterval = setInterval(() => {
-      document.querySelectorAll('.mapboxgl-marker, .custom-marker').forEach(marker => {
+      const markers = document.querySelectorAll('.mapboxgl-marker, .custom-marker');
+      console.log(`Found ${markers.length} markers to force visible`);
+      
+      markers.forEach(marker => {
         if (marker instanceof HTMLElement) {
-          marker.style.visibility = 'visible';
-          marker.style.display = 'block';
-          marker.style.opacity = '1';
-          marker.style.zIndex = '9999';
+          marker.style.cssText += `
+            visibility: visible !important;
+            display: block !important;
+            opacity: 1 !important;
+            z-index: 9999 !important;
+            pointer-events: auto !important;
+            position: absolute !important;
+          `;
         }
       });
     }, 1000);
     
+    // Clean up
     return () => {
-      // Clean up
       window.isStorageFacilitiesPage = false;
       clearInterval(forceInterval);
+      document.body.removeAttribute('data-markers-loading');
     };
   }, []);
 

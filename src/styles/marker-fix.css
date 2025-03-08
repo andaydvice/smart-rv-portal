@@ -1,0 +1,51 @@
+
+/* CRITICAL - Force marker visibility */
+.mapboxgl-marker,
+.custom-marker,
+.marker,
+[class*="marker"] {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  z-index: 9999 !important;
+  pointer-events: auto !important;
+  position: absolute !important;
+}
+
+.emergency-marker {
+  width: 24px !important;
+  height: 24px !important;
+  border-radius: 50% !important;
+  background-color: #F97316 !important;
+  border: 2px solid white !important;
+  box-shadow: 0 0 10px rgba(0,0,0,0.8) !important;
+}
+
+/* Force popup visibility */
+.mapboxgl-popup {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  z-index: 10000 !important;
+}
+
+.mapboxgl-popup-content {
+  background-color: #151A22 !important;
+  color: white !important;
+  border-radius: 8px !important;
+  padding: 15px !important;
+  border: 1px solid rgb(55 65 81) !important;
+}
+
+/* Ensure map container is visible */
+.mapboxgl-map {
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* Make sure marker creation works */
+body[data-markers-loading="true"] .mapboxgl-marker {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}

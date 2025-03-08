@@ -42,26 +42,77 @@ const FacilityMarkers: React.FC<FacilityMarkersProps> = memo(({
   // Memoize the visibility enhancer function to prevent unnecessary re-renders
   const enhanceVisibility = useCallback(forceMarkerVisibility, [forceMarkerVisibility]);
 
+  // Create log showing marker creation started
+  useEffect(() => {
+    console.log(`FacilityMarkers: Received ${facilities.length} facilities to display as markers`);
+  }, [facilities]);
+
   // Effect to create markers when facilities or map changes
   useEffect(() => {
     // Create markers only when we have both map and facilities
-    if (!map || !facilities.length) return;
+    if (!map || !facilities.length) {
+      console.log("FacilityMarkers: Missing map or facilities, skipping marker creation");
+      return;
+    }
     
-    // Use a longer delay for initial marker creation to ensure the map is ready
-    const timer = setTimeout(() => {
+    console.log(`FacilityMarkers: Creating markers for ${facilities.length} facilities`);
+    
+    // Add visible emergency marker outside the map system for debugging
+    const debugElement = document.createElement('div');
+    debugElement.className = 'debug-marker';
+    debugElement.style.cssText = `
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      width: 24px;
+      height: 24px;
+      background-color: red;
+      border-radius: 50%;
+      z-index: 10000;
+      border: 2px solid white;
+    `;
+    document.body.appendChild(debugElement);
+    
+    // Use multiple creation attempts with increasing delays
+    const createWithRetry = (attempt = 1) => {
+      console.log(`FacilityMarkers: Marker creation attempt ${attempt}`);
       createMarkers();
-    }, 800);
+      
+      // Check if markers were actually created after a short delay
+      setTimeout(() => {
+        const markerCount = document.querySelectorAll('.mapboxgl-marker, .custom-marker').length;
+        console.log(`FacilityMarkers: Found ${markerCount} markers after creation attempt ${attempt}`);
+        
+        // If no markers created and we haven't exceeded max attempts, try again
+        if (markerCount === 0 && attempt < 3) {
+          setTimeout(() => createWithRetry(attempt + 1), 1000 * attempt);
+        }
+      }, 500);
+    };
     
+    // Start the creation process with a delay to ensure map is fully loaded
+    setTimeout(() => createWithRetry(), 800);
+    
+    // Clean up debug marker on unmount
     return () => {
-      clearTimeout(timer);
+      if (debugElement.parentNode) {
+        debugElement.parentNode.removeChild(debugElement);
+      }
     };
   }, [map, facilities, createMarkers]);
 
   return (
     <>
+      {/* Debug marker count */}
+      <div className="absolute top-2 left-2 z-50 bg-black/70 text-white p-2 rounded text-xs pointer-events-none">
+        {facilities.length} facilities | 
+        {document.querySelectorAll('.mapboxgl-marker, .custom-marker').length} markers
+      </div>
+      
       {/* Only show stats in development mode */}
       {process.env.NODE_ENV === 'development' && <MarkerStats stats={stats} />}
       
+      {/* This component runs the visibility enhancement on a regular interval */}
       <MarkerVisibilityEnhancer enhanceVisibility={enhanceVisibility} />
       
       {/* Show errors only in dev mode or if there are critical errors */}
