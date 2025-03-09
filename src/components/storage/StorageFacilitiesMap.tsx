@@ -16,6 +16,7 @@ import { useMapToken } from './map-view/useMapToken';
 import { useFacilitySelection } from './map-view/useFacilitySelection';
 import { toast } from "sonner";
 import { forceMapMarkersVisible, applyForcedStyles, testMarkersVisibility, ensureMarkersExist } from '@/utils/markers';
+import { setDetailPanelState } from '@/utils/markers/emergency';
 
 const StorageFacilitiesMap = () => {
   const [filters, setFilters] = useState<FilterState>({
@@ -46,10 +47,19 @@ const StorageFacilitiesMap = () => {
   const { 
     highlightedFacility, 
     scrollAreaRef, 
-    handleFacilityClick 
+    handleFacilityClick,
+    setHighlightedFacility
   } = useFacilitySelection({ 
     addToRecentlyViewed 
   });
+  
+  useEffect(() => {
+    if (highlightedFacility) {
+      window.hasDetailPanelOpen = true;
+    } else {
+      window.hasDetailPanelOpen = false;
+    }
+  }, [highlightedFacility]);
   
   const handleFilterChange = useCallback((newFilters: FilterState) => {
     setFilters(prevFilters => {
@@ -59,6 +69,12 @@ const StorageFacilitiesMap = () => {
       return newFilters;
     });
   }, []);
+  
+  const handleCloseFacilityDetail = useCallback(() => {
+    setHighlightedFacility(null);
+    window.hasDetailPanelOpen = false;
+    setDetailPanelState(false);
+  }, [setHighlightedFacility]);
   
   useEffect(() => {
     console.log("StorageFacilitiesMap: EMERGENCY FIX - Running visibility enforcement");
@@ -124,10 +140,13 @@ const StorageFacilitiesMap = () => {
       document.body.removeAttribute('data-markers-loading');
     }, 3000);
     
+    window.hasDetailPanelOpen = false;
+    
     return () => {
       clearInterval(forceInterval);
       observer.disconnect();
       document.body.removeAttribute('data-markers-loading');
+      window.hasDetailPanelOpen = false;
     };
   }, []);
   
@@ -169,6 +188,7 @@ const StorageFacilitiesMap = () => {
                 highlightedFacility={highlightedFacility}
                 onFacilityClick={onMarkerClick}
                 scrollAreaRef={scrollAreaRef}
+                onClose={handleCloseFacilityDetail}
               />
             )}
           </Card>
@@ -191,6 +211,7 @@ const StorageFacilitiesMap = () => {
               highlightedFacility={highlightedFacility}
               onMarkerClick={onMarkerClick}
               selectedState={filters.selectedState}
+              onCloseFacilityDetail={handleCloseFacilityDetail}
             />
           )}
         </Card>

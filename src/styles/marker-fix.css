@@ -100,6 +100,48 @@ header .emergency-marker,
   transform: scale(1.2) translate(-42%, -42%) !important;
 }
 
+/* Green marker styles and explanation tooltip */
+[style*="background-color: rgb(16, 185, 129)"],
+[style*="background-color: #10B981"],
+.mapboxgl-marker[style*="background-color: rgb(16, 185, 129)"],
+.custom-marker[style*="background-color: #10B981"] {
+  position: relative !important;
+  z-index: 10001 !important;
+  cursor: pointer !important;
+  animation: greenPulse 2s infinite !important;
+}
+
+/* Add animation for green markers */
+@keyframes greenPulse {
+  0% { box-shadow: 0 0 8px 2px rgba(16, 185, 129, 0.6); }
+  50% { box-shadow: 0 0 15px 4px rgba(16, 185, 129, 0.8); }
+  100% { box-shadow: 0 0 8px 2px rgba(16, 185, 129, 0.6); }
+}
+
+/* Green markers should be clickable and indicate currently selected facility */
+.custom-marker[style*="background-color: #10B981"]::before,
+.mapboxgl-marker[style*="background-color: rgb(16, 185, 129)"]::before {
+  content: "Selected facility";
+  position: absolute;
+  white-space: nowrap;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(16, 185, 129, 0.8);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  opacity: 0;
+  transition: opacity 0.2s;
+  pointer-events: none;
+}
+
+.custom-marker[style*="background-color: #10B981"]:hover::before,
+.mapboxgl-marker[style*="background-color: rgb(16, 185, 129)"]::hover::before {
+  opacity: 1;
+}
+
 /* Style marker buttons */
 .view-facility-btn {
   background-color: #F97316 !important;
@@ -116,4 +158,26 @@ header .emergency-marker,
 
 .view-facility-btn:hover {
   background-color: #EA580C !important;
+}
+
+/* Fix for close button within popups */
+.emergency-close-btn {
+  background: none !important;
+  border: none !important;
+  color: white !important;
+  font-size: 18px !important;
+  cursor: pointer !important;
+  padding: 0 5px !important;
+  line-height: 1 !important;
+  border-radius: 50% !important;
+  min-width: 24px !important;
+  min-height: 24px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.emergency-close-btn:hover {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  color: #F97316 !important;
 }

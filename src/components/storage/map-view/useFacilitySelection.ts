@@ -1,5 +1,4 @@
-
-import { useState, useRef, RefObject } from 'react';
+import { useState, useRef, useCallback } from 'react';
 import { StorageFacility } from '../types';
 
 interface UseFacilitySelectionProps {
@@ -9,55 +8,32 @@ interface UseFacilitySelectionProps {
 export const useFacilitySelection = ({ addToRecentlyViewed }: UseFacilitySelectionProps) => {
   const [highlightedFacility, setHighlightedFacility] = useState<string | null>(null);
   const scrollAreaRef = useRef<HTMLDivElement>(null);
-  const facilityRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
 
-  const handleFacilityClick = (
-    facilityId: string, 
-    facilities: StorageFacility[] | undefined
-  ) => {
-    setHighlightedFacility(facilityId);
+  const handleFacilityClick = useCallback((facilityId: string, facilities: StorageFacility[]) => {
+    const facility = facilities.find(f => f.id === facilityId);
     
-    if (facilities) {
-      const facility = facilities.find(f => f.id === facilityId);
-      if (facility) {
-        addToRecentlyViewed(facility);
-      }
+    if (highlightedFacility === facilityId) {
+      setHighlightedFacility(null);
+      window.hasDetailPanelOpen = false;
+      return;
     }
     
-    setTimeout(() => {
-      if (facilityRefs.current[facilityId] && scrollAreaRef.current) {
-        const facilityElement = facilityRefs.current[facilityId];
-        const scrollContainer = scrollAreaRef.current.querySelector('[data-radix-scroll-area-viewport]');
-        
-        if (facilityElement && scrollContainer) {
-          const containerRect = scrollContainer.getBoundingClientRect();
-          const elementRect = facilityElement.getBoundingClientRect();
-          
-          const isInView = 
-            elementRect.top >= containerRect.top && 
-            elementRect.bottom <= containerRect.bottom;
-            
-          if (!isInView) {
-            const scrollTop = 
-              elementRect.top - 
-              containerRect.top + 
-              (scrollContainer as HTMLElement).scrollTop - 
-              (containerRect.height - elementRect.height) / 2;
-              
-            (scrollContainer as HTMLElement).scrollTo({
-              top: scrollTop,
-              behavior: 'smooth'
-            });
-          }
-        }
-      }
-    }, 100);
-  };
+    setHighlightedFacility(facilityId);
+    window.hasDetailPanelOpen = true;
+    
+    if (facility) {
+      addToRecentlyViewed(facility);
+    }
+    
+    if (scrollAreaRef.current) {
+      scrollAreaRef.current.scrollTop = 0;
+    }
+  }, [highlightedFacility, addToRecentlyViewed]);
 
   return {
     highlightedFacility,
+    setHighlightedFacility,
     scrollAreaRef,
-    facilityRefs,
     handleFacilityClick
   };
 };

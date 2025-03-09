@@ -30,9 +30,21 @@ export function createMarkerElement(facility: any, point: { x: number, y: number
     opacity: 1;
   `;
   
-  // Add click handler to show popup
+  // Add click handler
   markerEl.addEventListener('click', (e) => {
     e.stopPropagation();
+    
+    // Dispatch event for facility selection without showing popup
+    // if we already have facility detail panel open
+    if (window.hasDetailPanelOpen) {
+      console.log('Detail panel already open, just selecting facility');
+      const event = new CustomEvent('emergency-marker-click', {
+        bubbles: true,
+        detail: { facilityId: facility.id, skipPopup: true }
+      });
+      document.dispatchEvent(event);
+      return;
+    }
     
     // Create a custom event for facility selection
     const event = new CustomEvent('emergency-marker-click', {
@@ -55,11 +67,7 @@ export function createMarkerElement(facility: any, point: { x: number, y: number
  */
 function showMarkerPopup(facility: any, point: { x: number, y: number }): void {
   // Remove any existing popups first
-  document.querySelectorAll('.emergency-popup').forEach(popup => {
-    if (popup.parentNode) {
-      popup.parentNode.removeChild(popup);
-    }
-  });
+  closeAllPopups();
   
   // Create popup element
   const popup = document.createElement('div');
@@ -116,6 +124,17 @@ function showMarkerPopup(facility: any, point: { x: number, y: number }): void {
 }
 
 /**
+ * Close all popups
+ */
+function closeAllPopups(): void {
+  document.querySelectorAll('.emergency-popup').forEach(popup => {
+    if (popup.parentNode) {
+      popup.parentNode.removeChild(popup);
+    }
+  });
+}
+
+/**
  * Set up event handlers for a popup
  */
 function setupPopupEventHandlers(popup: HTMLElement, facilityId: string): void {
@@ -123,31 +142,30 @@ function setupPopupEventHandlers(popup: HTMLElement, facilityId: string): void {
   const viewBtn = popup.querySelector('.emergency-view-btn');
   if (viewBtn) {
     viewBtn.addEventListener('click', () => {
+      window.hasDetailPanelOpen = true;
+      
       document.dispatchEvent(new CustomEvent('emergency-marker-detail-view', {
         bubbles: true,
         detail: { facilityId: facilityId }
       }));
       
       // Remove popup
-      if (popup.parentNode) {
-        popup.parentNode.removeChild(popup);
-      }
+      closeAllPopups();
     });
   }
   
-  // Handle close button click
+  // Handle close button click - Fix for close button not working
   const closeBtn = popup.querySelector('.emergency-close-btn');
   if (closeBtn) {
     closeBtn.addEventListener('click', (e) => {
       e.stopPropagation();
-      if (popup.parentNode) {
-        popup.parentNode.removeChild(popup);
-      }
+      e.preventDefault();
+      closeAllPopups();
     });
   }
   
   // Close when clicking outside
-  const closePopup = (e: MouseEvent) => {
+  document.addEventListener('click', function closePopupHandler(e) {
     // Skip if the click is on the popup itself
     if (popup.contains(e.target as Node)) {
       return;
@@ -159,14 +177,7 @@ function setupPopupEventHandlers(popup: HTMLElement, facilityId: string): void {
       return;
     }
     
-    if (popup.parentNode) {
-      popup.parentNode.removeChild(popup);
-    }
-    document.removeEventListener('click', closePopup);
-  };
-  
-  // Add event listener with small delay
-  setTimeout(() => {
-    document.addEventListener('click', closePopup);
-  }, 100);
+    closeAllPopups();
+    document.removeEventListener('click', closePopupHandler);
+  });
 }

@@ -7,10 +7,26 @@ export function setupEmergencyMarkerListeners(onMarkerClick: (facilityId: string
   document.removeEventListener('emergency-marker-click', handleClick as any);
   document.removeEventListener('emergency-marker-detail-view', handleDetailView as any);
   
+  // Set up global tracking variable if not exists
+  if (typeof window.hasDetailPanelOpen === 'undefined') {
+    window.hasDetailPanelOpen = false;
+  }
+  
   // Function to handle marker clicks
-  function handleClick(event: CustomEvent<{facilityId: string}>) {
+  function handleClick(event: CustomEvent<{facilityId: string, skipPopup?: boolean}>) {
     const facilityId = event.detail.facilityId;
-    console.log('Emergency marker clicked:', facilityId);
+    const skipPopup = event.detail.skipPopup;
+    
+    console.log('Emergency marker clicked:', facilityId, skipPopup ? '(skipping popup)' : '');
+    
+    // If the skipPopup flag is set, we only want to update the facility selection
+    // without showing a popup (useful when detail panel is already open)
+    if (skipPopup) {
+      if (window.hasDetailPanelOpen) {
+        closeAllEmergencyPopups();
+      }
+    }
+    
     onMarkerClick(facilityId);
   }
   
@@ -18,6 +34,10 @@ export function setupEmergencyMarkerListeners(onMarkerClick: (facilityId: string
   function handleDetailView(event: CustomEvent<{facilityId: string}>) {
     const facilityId = event.detail.facilityId;
     console.log('Emergency marker detail view:', facilityId);
+    
+    // Set the global detail panel state
+    window.hasDetailPanelOpen = true;
+    
     onMarkerClick(facilityId);
     
     // Close all popups when viewing details
@@ -32,6 +52,7 @@ export function setupEmergencyMarkerListeners(onMarkerClick: (facilityId: string
   return () => {
     document.removeEventListener('emergency-marker-click', handleClick as any);
     document.removeEventListener('emergency-marker-detail-view', handleDetailView as any);
+    window.hasDetailPanelOpen = false;
   };
 }
 
@@ -42,4 +63,9 @@ export function closeAllEmergencyPopups() {
       popup.parentNode.removeChild(popup);
     }
   });
+}
+
+// Function to toggle detail panel state
+export function setDetailPanelState(isOpen: boolean) {
+  window.hasDetailPanelOpen = isOpen;
 }
