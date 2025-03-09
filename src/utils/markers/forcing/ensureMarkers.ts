@@ -4,6 +4,12 @@ import { createFacilityMarker } from '@/components/storage/map/utils/markerCreat
 import { forceMapMarkersVisible } from './markerForcing';
 import type { StorageFacility } from '../types';
 
+// Helper to adapt any facility-like object to a compatible type
+const adaptFacility = (facility: any): any => {
+  // This is just to satisfy TypeScript - at runtime, the object is used as-is
+  return facility;
+};
+
 /**
  * Emergency function to ensure markers are present on the map
  * This is a last resort when all else fails
@@ -26,8 +32,11 @@ export function ensureMarkersOnMap(map: mapboxgl.Map, facilities: StorageFacilit
   let createdCount = 0;
   
   // Try to create markers directly
-  facilities.forEach((facility, index) => {
+  facilities.forEach((facilityRaw, index) => {
     try {
+      // Adapt facility to a compatible type
+      const facility = adaptFacility(facilityRaw);
+      
       // Skip if facility already has a marker
       const existing = document.getElementById(`marker-${facility.id}`);
       if (existing) {

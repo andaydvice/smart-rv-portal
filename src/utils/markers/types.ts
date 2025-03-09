@@ -52,5 +52,16 @@ export interface StorageFacility {
     max: number;
     currency: string;
   };
+  contact_phone?: string;
+  contact_email?: string;
+  avg_rating?: number;
+  review_count?: number;
+  verified_fields?: {
+    features?: boolean;
+    price_range?: boolean;
+    contact_info?: boolean;
+    location?: boolean;
+    business_hours?: boolean;
+  };
   [key: string]: any; // Allow additional properties to support both types
 }
