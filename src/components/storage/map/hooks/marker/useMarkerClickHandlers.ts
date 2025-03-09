@@ -18,27 +18,46 @@ export const useMarkerClickHandlers = () => {
       
       console.log(`Marker clicked for: ${facilityName} (ID: ${facilityId})`);
       
-      // First open the popup if not already open
+      // Call the click handler first (this navigates or shows details)
+      onMarkerClick(facilityId);
+      
+      // Then handle the popup toggle
       if (!marker.getPopup().isOpen()) {
         marker.togglePopup();
       }
       
-      // Then call the click handler
-      onMarkerClick(facilityId);
-      
-      // Force the popup to stay open with a delay
+      // Ensure popup is visible and clickable
       setTimeout(() => {
-        if (!marker.getPopup().isOpen()) {
-          marker.togglePopup();
-        }
-        
-        // Ensure popup is visible and clickable
         const popupElement = document.querySelector(`.mapboxgl-popup[data-facility-id="${facilityId}"]`);
         if (popupElement instanceof HTMLElement) {
-          popupElement.style.zIndex = '1100';
+          popupElement.style.zIndex = '10000';
           popupElement.style.visibility = 'visible';
           popupElement.style.display = 'block';
           popupElement.style.pointerEvents = 'all';
+          
+          // Ensure the close button works
+          const closeButton = popupElement.querySelector('.mapboxgl-popup-close-button');
+          if (closeButton instanceof HTMLElement) {
+            closeButton.style.pointerEvents = 'all';
+            closeButton.style.cursor = 'pointer';
+            
+            // Ensure close button has proper event handler
+            closeButton.addEventListener('click', (e) => {
+              e.stopPropagation();
+              marker.getPopup().remove();
+            });
+          }
+          
+          // Make "View Details" button functional
+          const viewButton = popupElement.querySelector('.view-facility-btn');
+          if (viewButton instanceof HTMLElement) {
+            viewButton.style.pointerEvents = 'all';
+            viewButton.style.cursor = 'pointer';
+            viewButton.addEventListener('click', (e) => {
+              e.stopPropagation();
+              onMarkerClick(facilityId);
+            });
+          }
         }
       }, 50);
     };
@@ -65,10 +84,18 @@ export const useMarkerClickHandlers = () => {
     );
     
     // Remove any existing click listeners to prevent duplicates
-    markerElement.removeEventListener('click', handleMarkerClick as EventListener);
+    const oldHandler = markerElement.getAttribute('data-click-handler');
+    if (oldHandler) {
+      markerElement.removeEventListener('click', window[oldHandler as keyof typeof window] as EventListener);
+    }
     
-    // Add click event with direct method call and logging
+    // Add new click event handler
     markerElement.addEventListener('click', handleMarkerClick);
+    
+    // Store handler reference for later cleanup
+    const handlerName = `marker_handler_${facilityId.replace(/[^a-zA-Z0-9]/g, '_')}`;
+    window[handlerName as keyof typeof window] = handleMarkerClick as any;
+    markerElement.setAttribute('data-click-handler', handlerName);
   };
 
   return {

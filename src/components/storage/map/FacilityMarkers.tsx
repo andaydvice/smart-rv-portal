@@ -59,23 +59,6 @@ const FacilityMarkers: React.FC<FacilityMarkersProps> = memo(({
     
     console.log(`FacilityMarkers: Creating markers for ${facilities.length} facilities`);
     
-    // Add visible emergency marker outside the map system for debugging that we'll remove at the end
-    const debugElement = document.createElement('div');
-    debugElement.className = 'debug-marker';
-    debugElement.style.cssText = `
-      position: fixed;
-      top: 10px;
-      left: 10px;
-      width: 24px;
-      height: 24px;
-      background-color: red;
-      border-radius: 50%;
-      z-index: 10000;
-      border: 2px solid white;
-      pointer-events: none;
-    `;
-    document.body.appendChild(debugElement);
-    
     // Use multiple creation attempts with increasing delays
     const createWithRetry = (attempt = 1) => {
       console.log(`FacilityMarkers: Marker creation attempt ${attempt}`);
@@ -90,6 +73,30 @@ const FacilityMarkers: React.FC<FacilityMarkersProps> = memo(({
         if (markerCount === 0 && attempt < 3) {
           setTimeout(() => createWithRetry(attempt + 1), 1000 * attempt);
         } else {
+          // Set up event listeners for popup close buttons and view details buttons
+          document.querySelectorAll('.mapboxgl-popup-close-button').forEach(btn => {
+            if (btn instanceof HTMLElement) {
+              btn.style.pointerEvents = 'all';
+              btn.style.cursor = 'pointer';
+            }
+          });
+          
+          document.querySelectorAll('.view-facility-btn').forEach(btn => {
+            if (btn instanceof HTMLElement) {
+              btn.style.pointerEvents = 'all';
+              btn.style.cursor = 'pointer';
+              
+              // Re-add click handler to ensure it works
+              const facilityId = btn.getAttribute('data-facility-id');
+              if (facilityId) {
+                btn.addEventListener('click', (e) => {
+                  e.stopPropagation();
+                  onMarkerClick(facilityId);
+                });
+              }
+            }
+          });
+          
           // Run visibility test after marker creation
           if (process.env.NODE_ENV === 'development') {
             setTimeout(() => {
@@ -103,13 +110,38 @@ const FacilityMarkers: React.FC<FacilityMarkersProps> = memo(({
     // Start the creation process with a delay to ensure map is fully loaded
     setTimeout(() => createWithRetry(), 800);
     
-    // Clean up debug marker on unmount
-    return () => {
-      if (debugElement.parentNode) {
-        debugElement.parentNode.removeChild(debugElement);
+    // Set up event delegation for popups
+    const handlePopupInteractions = (e: MouseEvent) => {
+      // Handle close button clicks
+      if ((e.target as HTMLElement)?.closest('.mapboxgl-popup-close-button')) {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        const popup = (e.target as HTMLElement).closest('.mapboxgl-popup');
+        if (popup) {
+          popup.remove();
+        }
+      }
+      
+      // Handle view details button clicks
+      if ((e.target as HTMLElement)?.closest('.view-facility-btn')) {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        const btn = (e.target as HTMLElement).closest('.view-facility-btn');
+        const facilityId = btn?.getAttribute('data-facility-id');
+        if (facilityId) {
+          onMarkerClick(facilityId);
+        }
       }
     };
-  }, [map, facilities, createMarkers]);
+    
+    map.getContainer().addEventListener('click', handlePopupInteractions);
+    
+    return () => {
+      map.getContainer().removeEventListener('click', handlePopupInteractions);
+    };
+  }, [map, facilities, createMarkers, onMarkerClick]);
 
   // Create a proper stats object for the MarkerStats component
   const displayStats = {

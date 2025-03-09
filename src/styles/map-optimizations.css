@@ -30,12 +30,23 @@
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3) !important;
 }
 
+/* Fix the close button */
 .mapboxgl-popup-close-button {
   color: white !important;
   font-size: 18px !important;
   padding: 5px 8px !important;
   right: 5px !important;
   top: 5px !important;
+  background: none !important;
+  border: none !important;
+  cursor: pointer !important;
+  pointer-events: all !important;
+  z-index: 10001 !important;
+}
+
+.mapboxgl-popup-close-button:hover {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  color: #F97316 !important;
 }
 
 /* Performance optimization class selectors */
@@ -70,6 +81,24 @@ body.show-map-markers .custom-marker,
 .custom-marker:hover,
 .mapboxgl-marker:hover {
   z-index: 10000 !important;
+}
+
+/* Style the View Details button */
+.view-facility-btn {
+  background-color: #F97316 !important;
+  color: white !important;
+  font-weight: bold !important;
+  padding: 8px 12px !important;
+  border-radius: 4px !important;
+  cursor: pointer !important;
+  width: 100% !important;
+  border: none !important;
+  margin-top: 8px !important;
+  pointer-events: all !important;
+}
+
+.view-facility-btn:hover {
+  background-color: #EA580C !important;
 }
 
 /* Make marker handling more efficient */

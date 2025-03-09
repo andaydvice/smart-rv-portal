@@ -45,13 +45,16 @@ export function createFacilityMarker(
     offset: [0, -15]
   });
   
+  // Set popup data attribute for CSS targeting
+  popup.addClassName(`popup-${facility.id}`);
+  
   // Set rich popup content
   popup.setHTML(`
-    <div class="facility-popup-content">
-      <h3>${facility.name}</h3>
-      <p>${facility.address}</p>
-      <p>Price: $${facility.price_range.min} - $${facility.price_range.max}</p>
-      <button class="view-facility-btn" data-facility-id="${facility.id}">View Details</button>
+    <div class="facility-popup-content" data-facility-id="${facility.id}">
+      <h3 class="text-lg font-semibold mb-1">${facility.name}</h3>
+      <p class="text-sm mb-1">${facility.address}</p>
+      <p class="text-sm mb-2">Price: $${facility.price_range.min} - $${facility.price_range.max}</p>
+      <button class="view-facility-btn bg-[#F97316] hover:bg-[#EA580C] text-white font-bold py-2 px-4 rounded w-full" data-facility-id="${facility.id}">View Details</button>
     </div>
   `);
 
@@ -65,48 +68,58 @@ export function createFacilityMarker(
 
   // Ensure marker gets added to map
   if (map) {
-    const addMarkerWithRetry = (retries = 3) => {
-      try {
-        if (!marker.getElement().isConnected) {
-          marker.addTo(map);
+    try {
+      marker.addTo(map);
+    } catch (err) {
+      console.error(`Failed to add marker for ${facility.name}:`, err);
+      // Retry once after a short delay
+      setTimeout(() => {
+        try {
+          if (!marker.getElement().isConnected) {
+            marker.addTo(map);
+          }
+        } catch (retryErr) {
+          console.error(`Retry failed for marker ${facility.id}:`, retryErr);
         }
-      } catch (err) {
-        console.error(`Marker addition attempt failed:`, err);
-        if (retries > 0) {
-          setTimeout(() => addMarkerWithRetry(retries - 1), 100);
-        }
-      }
-    };
-
-    addMarkerWithRetry();
+      }, 100);
+    }
   }
 
-  // Handle marker click with guaranteed popup visibility
-  el.addEventListener('click', (e) => {
-    e.stopPropagation();
-    onClick(facility.id);
-    
-    if (!popup.isOpen()) {
-      popup.addTo(map);
-    }
-    
-    requestAnimationFrame(() => {
-      const popupEl = popup.getElement();
-      if (popupEl) {
-        popupEl.style.cssText = `
-          z-index: 10000 !important;
-          visibility: visible !important;
-          display: block !important;
-          opacity: 1 !important;
-          pointer-events: all !important;
-        `;
-        
-        const viewButton = popupEl.querySelector('.view-facility-btn');
-        if (viewButton) {
-          viewButton.addEventListener('click', () => onClick(facility.id));
-        }
+  // Once the popup is added, set up event listeners on it
+  marker.getPopup().on('open', () => {
+    // Get the popup element
+    const popupEl = marker.getPopup().getElement();
+    if (popupEl) {
+      // Set facility ID data attribute on popup
+      popupEl.setAttribute('data-facility-id', facility.id);
+      
+      // Ensure popup has the right styles
+      popupEl.style.zIndex = '10000';
+      popupEl.style.visibility = 'visible';
+      popupEl.style.pointerEvents = 'all';
+      
+      // Make close button work
+      const closeButton = popupEl.querySelector('.mapboxgl-popup-close-button');
+      if (closeButton instanceof HTMLElement) {
+        closeButton.style.pointerEvents = 'all';
+        closeButton.style.cursor = 'pointer';
+        closeButton.addEventListener('click', (e) => {
+          e.stopPropagation();
+          marker.getPopup().remove();
+        });
       }
-    });
+      
+      // Make "View Details" button work
+      const viewButton = popupEl.querySelector('.view-facility-btn');
+      if (viewButton instanceof HTMLElement) {
+        viewButton.style.pointerEvents = 'all';
+        viewButton.style.cursor = 'pointer';
+        viewButton.addEventListener('click', (e) => {
+          e.stopPropagation();
+          onClick(facility.id);
+        });
+      }
+    }
   });
 
   return marker;
