@@ -27,5 +27,6 @@ export type {
 // Function to ensure markers exist on map - emergency marker creation
 export const ensureMarkersExist = (map: mapboxgl.Map, facilities: any[]) => {
   console.log('EMERGENCY MARKER CREATION: Ensuring markers exist on map', facilities.length);
+  // Use the imported ensureMarkersOnMap function from the export above
   return ensureMarkersOnMap(map, facilities);
 };
