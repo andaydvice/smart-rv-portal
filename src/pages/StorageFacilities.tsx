@@ -1,56 +1,65 @@
+
 import { Container } from "@/components/ui/container";
 import StorageFacilitiesMap from "@/components/storage/StorageFacilitiesMap";
 import Navbar from "@/components/Navbar";
 import Layout from "@/components/layout/Layout";
 import { Warehouse } from "lucide-react";
 import { useEffect } from 'react';
-import { applyAllEmergencyFixes } from "@/utils/emergency-styles/combined";
-import { forceMapMarkersVisible, testMarkersVisibility, ensureMarkersExist } from "@/utils/markers";
+import { toast } from "sonner";
 import "../styles/marker-fix.css";
 import "../styles/emergency-marker-fix.css";
 import "../styles/map-optimizations.css";
 
 export default function StorageFacilities() {
   useEffect(() => {
-    console.log("StorageFacilities: EMERGENCY FIX - Component mounted");
+    console.log("StorageFacilities: Component mounted");
     
     // Signal that we're on the storage facilities page
     window.isStorageFacilitiesPage = true;
     
-    // Apply all marker visibility fixes
-    const cleanup = applyAllEmergencyFixes();
+    // Add specific CSS to force markers to be visible
+    const style = document.createElement('style');
+    style.textContent = `
+      .mapboxgl-marker, 
+      .marker-container,
+      [data-facility-id] {
+        visibility: visible !important;
+        display: block !important;
+        opacity: 1 !important;
+        pointer-events: auto !important;
+        cursor: pointer !important;
+      }
+    `;
+    document.head.appendChild(style);
     
-    // Force markers to be visible - run multiple times with different delays
-    forceMapMarkersVisible();
-    const forceIntervals = [100, 300, 500, 1000, 2000, 5000].map(delay => 
-      setTimeout(forceMapMarkersVisible, delay)
-    );
-    
-    // Add event listener for map creation to ensure markers are visible
-    document.addEventListener('mapboxgl.map.created', (e: any) => {
-      console.log('Map created - ensuring markers are visible');
-      const map = e.detail.map;
+    // Set up global click listener for any element with data-facility-id
+    const handleGlobalMarkerClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      const markerEl = target.closest('[data-facility-id]');
       
-      // Wait for facilities to be loaded, then ensure markers exist
-      setTimeout(() => {
-        if (window.mapFacilities && window.mapFacilities.length > 0) {
-          ensureMarkersExist(map, window.mapFacilities);
+      if (markerEl) {
+        const facilityId = markerEl.getAttribute('data-facility-id');
+        if (facilityId) {
+          console.log('Global marker click handler:', facilityId);
+          // The click will be handled by the specific marker handlers
         }
-      }, 2000);
-    });
+      }
+    };
     
-    // Run marker visibility test after the page has loaded
-    const testTimeout = setTimeout(() => {
-      testMarkersVisibility(true);
-    }, 3000);
+    document.addEventListener('click', handleGlobalMarkerClick);
+    
+    // Show a notification to users
+    setTimeout(() => {
+      toast.info("Click on orange markers to view storage facilities");
+    }, 2000);
     
     // Clean up
     return () => {
       window.isStorageFacilitiesPage = false;
-      cleanup();
-      forceIntervals.forEach(timeout => clearTimeout(timeout));
-      clearTimeout(testTimeout);
-      document.removeEventListener('mapboxgl.map.created', () => {});
+      document.removeEventListener('click', handleGlobalMarkerClick);
+      if (style.parentNode) {
+        style.parentNode.removeChild(style);
+      }
     };
   }, []);
 
@@ -69,9 +78,8 @@ export default function StorageFacilities() {
             <Container className="h-full flex flex-col justify-center items-center">
               <div className="text-center max-w-3xl bg-black/40 backdrop-blur-sm p-6 rounded-lg">
                 <div className="flex items-center justify-center gap-2 mb-2">
-                  {/* Enhanced orange marker indicator that won't interfere with map markers */}
                   <div className="relative flex items-center">
-                    <div className="hero-marker w-8 h-8 bg-[#F97316] rounded-full border-2 border-white shadow-lg animate-pulse"></div>
+                    <div className="hero-marker w-8 h-8 bg-[#F97316] rounded-full border-2 border-white shadow-lg"></div>
                     <Warehouse className="h-7 w-7 text-[#F97316]" />
                   </div>
                   <h1 className="text-4xl md:text-5xl font-bold text-white">

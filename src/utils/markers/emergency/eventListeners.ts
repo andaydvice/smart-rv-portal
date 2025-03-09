@@ -1,58 +1,56 @@
 
 /**
- * Listen for emergency marker clicks
+ * Listen for emergency marker clicks with a simplified approach
  */
 export function setupEmergencyMarkerListeners(onMarkerClick: (facilityId: string) => void) {
-  // Remove any existing listeners
-  document.removeEventListener('emergency-marker-click', handleClick as any);
-  document.removeEventListener('emergency-marker-detail-view', handleDetailView as any);
+  // Set up global variable
+  window.hasDetailPanelOpen = false;
   
-  // Set up global tracking variable if not exists
-  if (typeof window.hasDetailPanelOpen === 'undefined') {
-    window.hasDetailPanelOpen = false;
-  }
-  
-  // Function to handle marker clicks
-  function handleClick(event: CustomEvent<{facilityId: string, skipPopup?: boolean}>) {
-    const facilityId = event.detail.facilityId;
-    const skipPopup = event.detail.skipPopup;
+  // Add direct document level handler for facility marker clicks
+  const handleMarkerClick = (e: MouseEvent) => {
+    // Find the closest marker element
+    const markerEl = (e.target as HTMLElement).closest('[data-facility-id]');
+    if (!markerEl) return;
     
-    console.log('Emergency marker clicked:', facilityId, skipPopup ? '(skipping popup)' : '');
+    // Get facility ID
+    const facilityId = markerEl.getAttribute('data-facility-id');
+    if (!facilityId) return;
     
-    // Simply call the click handler to update application state
+    console.log('Emergency marker system detected click:', facilityId);
+    
+    // Call the marker click handler
     onMarkerClick(facilityId);
-  }
+  };
   
-  // Function to handle detailed view requests
-  function handleDetailView(event: CustomEvent<{facilityId: string}>) {
-    const facilityId = event.detail.facilityId;
-    console.log('Emergency marker detail view:', facilityId);
-    
-    // Set the global detail panel state
-    window.hasDetailPanelOpen = true;
-    
-    // Update application state
-    onMarkerClick(facilityId);
-    
-    // Close all popups when viewing details
-    closeAllEmergencyPopups();
-  }
+  // Add global click handler for any element with data-facility-id attribute
+  document.addEventListener('click', handleMarkerClick);
   
-  // Add listeners
-  document.addEventListener('emergency-marker-click', handleClick as any);
-  document.addEventListener('emergency-marker-detail-view', handleDetailView as any);
+  // Also handle view facility button clicks
+  document.addEventListener('click', (e) => {
+    const target = e.target as HTMLElement;
+    if (target.classList.contains('view-facility-btn')) {
+      e.preventDefault();
+      e.stopPropagation();
+      
+      const facilityId = target.getAttribute('data-facility-id');
+      if (facilityId) {
+        console.log('View facility button clicked:', facilityId);
+        window.hasDetailPanelOpen = true;
+        onMarkerClick(facilityId);
+      }
+    }
+  });
   
   // Return cleanup function
   return () => {
-    document.removeEventListener('emergency-marker-click', handleClick as any);
-    document.removeEventListener('emergency-marker-detail-view', handleDetailView as any);
+    document.removeEventListener('click', handleMarkerClick);
     window.hasDetailPanelOpen = false;
   };
 }
 
 // Function to close all emergency popups
 export function closeAllEmergencyPopups() {
-  document.querySelectorAll('.emergency-popup, .mapboxgl-popup').forEach(popup => {
+  document.querySelectorAll('.mapboxgl-popup').forEach(popup => {
     if (popup.parentNode) {
       popup.parentNode.removeChild(popup);
     }
