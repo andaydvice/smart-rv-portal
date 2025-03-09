@@ -81,15 +81,20 @@ export function createFacilityMarker(
     addMarkerWithRetry();
   }
 
-  // Handle marker click with guaranteed popup visibility
+  // Handle marker click with direct handler
   el.addEventListener('click', (e) => {
     e.stopPropagation();
+    console.log(`Direct marker click detected for facility ${facility.id}`);
+    
+    // First trigger the state update
     onClick(facility.id);
     
+    // Then handle popup visibility
     if (!popup.isOpen()) {
       popup.addTo(map);
     }
     
+    // Force popup to be visible and interactive
     requestAnimationFrame(() => {
       const popupEl = popup.getElement();
       if (popupEl) {
@@ -103,7 +108,11 @@ export function createFacilityMarker(
         
         const viewButton = popupEl.querySelector('.view-facility-btn');
         if (viewButton) {
-          viewButton.addEventListener('click', () => onClick(facility.id));
+          viewButton.addEventListener('click', (e) => {
+            e.stopPropagation();
+            e.preventDefault();
+            onClick(facility.id);
+          });
         }
       }
     });

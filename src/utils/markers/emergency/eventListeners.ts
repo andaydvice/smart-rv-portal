@@ -27,6 +27,7 @@ export function setupEmergencyMarkerListeners(onMarkerClick: (facilityId: string
       }
     }
     
+    // Always call the click handler to update application state
     onMarkerClick(facilityId);
   }
   
@@ -38,6 +39,7 @@ export function setupEmergencyMarkerListeners(onMarkerClick: (facilityId: string
     // Set the global detail panel state
     window.hasDetailPanelOpen = true;
     
+    // Update application state
     onMarkerClick(facilityId);
     
     // Close all popups when viewing details

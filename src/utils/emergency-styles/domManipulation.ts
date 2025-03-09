@@ -24,6 +24,8 @@ export function forceExistingMarkersVisible() {
       marker.style.display = 'block';
       marker.style.opacity = '1';
       marker.style.zIndex = '9999';
+      marker.style.pointerEvents = 'auto';
+      marker.style.cursor = 'pointer';
       
       // Mark as processed
       marker.setAttribute('data-forced-visible', 'true');
@@ -71,18 +73,23 @@ export function enhanceMarkerClickability() {
         const facilityId = marker.getAttribute('data-facility-id');
         if (!facilityId) return;
         
-        // Log only in development
-        if (process.env.NODE_ENV === 'development') {
-          console.log('Marker clicked:', facilityId);
+        console.log('Marker clicked with enhanced handler:', facilityId);
+        
+        // Create and dispatch a synthetic click event to facility view button
+        const viewBtnSelector = `.view-facility-btn[data-facility-id="${facilityId}"]`;
+        
+        // First, try to find and click the direct view button
+        const viewBtn = document.querySelector(viewBtnSelector);
+        if (viewBtn) {
+          (viewBtn as HTMLElement).click();
+          return;
         }
         
-        // Use requestAnimationFrame for better performance
-        requestAnimationFrame(() => {
-          // Find and click the view button
-          document.querySelectorAll(`.view-facility-btn[data-facility-id="${facilityId}"]`).forEach(btn => {
-            (btn as HTMLElement).click();
-          });
-        });
+        // If no button is found, create and dispatch a custom event
+        document.dispatchEvent(new CustomEvent('emergency-marker-detail-view', {
+          bubbles: true,
+          detail: { facilityId }
+        }));
       });
       
       handlersAdded++;

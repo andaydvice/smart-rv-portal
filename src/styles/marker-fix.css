@@ -62,6 +62,8 @@ header .emergency-marker,
 
 .emergency-marker {
   animation: pulse 1.5s infinite ease-in-out;
+  pointer-events: auto !important;
+  cursor: pointer !important;
 }
 
 .fixed-orange-marker {
@@ -138,7 +140,7 @@ header .emergency-marker,
 }
 
 .custom-marker[style*="background-color: #10B981"]:hover::before,
-.mapboxgl-marker[style*="background-color: rgb(16, 185, 129)"]::hover::before {
+.mapboxgl-marker[style*="background-color: rgb(16, 185, 129)"]:hover::before {
   opacity: 1;
 }
 
@@ -180,4 +182,20 @@ header .emergency-marker,
 .emergency-close-btn:hover {
   background-color: rgba(255, 255, 255, 0.1) !important;
   color: #F97316 !important;
+}
+
+/* Force marker element to be clickable and visible */
+.mapboxgl-marker, 
+.custom-marker, 
+.emergency-marker {
+  cursor: pointer !important;
+  pointer-events: auto !important;
+}
+
+/* Add visual feedback on marker hover */
+.mapboxgl-marker:hover, 
+.custom-marker:hover, 
+.emergency-marker:hover {
+  transform: scale(1.1) translate(-45%, -45%) !important;
+  transition: transform 0.2s !important;
 }

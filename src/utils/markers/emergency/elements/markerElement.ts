@@ -30,14 +30,14 @@ export function createMarkerElement(facility: any, point: { x: number, y: number
     opacity: 1;
   `;
   
-  // Add click handler
+  // Add click handler with more direct callback
   markerEl.addEventListener('click', (e) => {
     e.stopPropagation();
+    console.log('Emergency marker clicked for facility:', facility.id);
     
     // Dispatch event for facility selection without showing popup
     // if we already have facility detail panel open
     if (window.hasDetailPanelOpen) {
-      console.log('Detail panel already open, just selecting facility');
       const event = new CustomEvent('emergency-marker-click', {
         bubbles: true,
         detail: { facilityId: facility.id, skipPopup: true }
@@ -141,9 +141,13 @@ function setupPopupEventHandlers(popup: HTMLElement, facilityId: string): void {
   // Handle view button click
   const viewBtn = popup.querySelector('.emergency-view-btn');
   if (viewBtn) {
-    viewBtn.addEventListener('click', () => {
+    viewBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      e.preventDefault();
+      
       window.hasDetailPanelOpen = true;
       
+      // Use a dedicated event for detail view
       document.dispatchEvent(new CustomEvent('emergency-marker-detail-view', {
         bubbles: true,
         detail: { facilityId: facilityId }
@@ -154,7 +158,7 @@ function setupPopupEventHandlers(popup: HTMLElement, facilityId: string): void {
     });
   }
   
-  // Handle close button click - Fix for close button not working
+  // Handle close button click
   const closeBtn = popup.querySelector('.emergency-close-btn');
   if (closeBtn) {
     closeBtn.addEventListener('click', (e) => {

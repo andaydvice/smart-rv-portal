@@ -18,13 +18,13 @@ export const useMarkerClickHandlers = () => {
       
       console.log(`Marker clicked for: ${facilityName} (ID: ${facilityId})`);
       
-      // First open the popup if not already open
+      // Call the click handler first to update state
+      onMarkerClick(facilityId);
+      
+      // Then open the popup if not already open
       if (!marker.getPopup().isOpen()) {
         marker.togglePopup();
       }
-      
-      // Then call the click handler
-      onMarkerClick(facilityId);
       
       // Force the popup to stay open with a delay
       setTimeout(() => {
@@ -56,6 +56,12 @@ export const useMarkerClickHandlers = () => {
     facilityName: string,
     onMarkerClick: (facilityId: string) => void
   ): void => {
+    // Remove any existing click listeners to prevent duplicates
+    const oldHandler = markerElement.getAttribute('data-click-handler');
+    if (oldHandler) {
+      markerElement.removeEventListener('click', window[oldHandler as any] as EventListener);
+    }
+    
     // Create the click handler
     const handleMarkerClick = createMarkerClickHandler(
       marker,
@@ -64,11 +70,17 @@ export const useMarkerClickHandlers = () => {
       onMarkerClick
     );
     
-    // Remove any existing click listeners to prevent duplicates
-    markerElement.removeEventListener('click', handleMarkerClick as EventListener);
+    // Store handler reference for potential cleanup
+    const handlerName = `markerClickHandler_${facilityId}`;
+    window[handlerName as any] = handleMarkerClick;
+    markerElement.setAttribute('data-click-handler', handlerName);
     
     // Add click event with direct method call and logging
     markerElement.addEventListener('click', handleMarkerClick);
+    
+    // Add additional data attributes for debugging
+    markerElement.setAttribute('data-has-click', 'true');
+    markerElement.setAttribute('data-facility-id', facilityId);
   };
 
   return {
