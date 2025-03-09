@@ -1,4 +1,6 @@
 
+import { testMarkersVisibility as runTest } from '../testing/visibilityTester';
+
 /**
  * Force all markers on the map to be visible
  */
@@ -45,7 +47,5 @@ export function applyForcedStyles(element: HTMLElement) {
  * Test marker visibility and fix any issues
  */
 export function testMarkersVisibility(fixIssues = true) {
-  // Import here to avoid circular reference
-  const { testMarkersVisibility: runTest } = require('../testing/visibilityTester');
   return runTest(fixIssues);
 }

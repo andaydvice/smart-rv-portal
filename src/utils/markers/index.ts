@@ -6,11 +6,15 @@ export { ensureMarkersOnMap } from './forcing/ensureMarkers';
 // Export marker testing utilities
 export {
   createMarkerDebugger,
-  testMarkerVisibility,
-  auditMarkerVisibility,
-  monitorMarkerVisibility,
   createMarkerDebugOverlay
-} from './testing';
+} from './testing/visibilityTester';
+
+// Export emergency solution
+export { 
+  createEmergencyMarkers,
+  setupEmergencyMarkerListeners,
+  injectEmergencyMarkerStyles
+} from './emergency/directMarkerCreation';
 
 // Export types from central types file
 export type {
