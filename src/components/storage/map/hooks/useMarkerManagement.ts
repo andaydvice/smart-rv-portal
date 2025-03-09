@@ -1,3 +1,4 @@
+
 import { useState, useCallback, useEffect, useRef } from 'react';
 import mapboxgl from 'mapbox-gl';
 import { StorageFacility } from '../../types';
@@ -13,7 +14,9 @@ interface UseMarkerManagementProps {
 interface MarkerStats {
   markersCreated: number;
   skippedFacilities: number;
+  processedNYFacilities: number;
   totalFacilities: number;
+  totalNYFacilities: number;
 }
 
 interface MarkerError {
@@ -34,7 +37,9 @@ export const useMarkerManagement = ({
   const [stats, setStats] = useState<MarkerStats>({
     markersCreated: 0,
     skippedFacilities: 0,
-    totalFacilities: 0
+    processedNYFacilities: 0,
+    totalFacilities: 0,
+    totalNYFacilities: 0
   });
   
   const [errors, setErrors] = useState<MarkerError[]>([]);
