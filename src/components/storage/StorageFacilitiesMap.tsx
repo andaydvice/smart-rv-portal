@@ -1,4 +1,3 @@
-
 "use client";
 
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
@@ -16,7 +15,7 @@ import FacilityList from './map-view/FacilityList';
 import { useMapToken } from './map-view/useMapToken';
 import { useFacilitySelection } from './map-view/useFacilitySelection';
 import { toast } from "sonner";
-import { forceMapMarkersVisible } from '@/utils/forceMapMarkers';
+import { forceMapMarkersVisible, applyForcedStyles } from '@/utils/markers';
 
 const StorageFacilitiesMap = () => {
   const [filters, setFilters] = useState<FilterState>({
@@ -32,15 +31,12 @@ const StorageFacilitiesMap = () => {
     minRating: null
   });
 
-  // Get data with useQuery
   const { facilities: filteredFacilities, isLoading, error, maxPrice } = useStorageFacilities(filters);
   const { recentlyViewed, addToRecentlyViewed } = useRecentlyViewed();
   const { mapToken, mapTokenError } = useMapToken();
   
-  // Memoize facilities to prevent unnecessary re-renders
   const displayFacilities = useMemo(() => filteredFacilities || [], [filteredFacilities]);
   
-  // Memoize handlers to prevent unnecessary re-renders
   const { 
     highlightedFacility, 
     scrollAreaRef, 
@@ -49,10 +45,8 @@ const StorageFacilitiesMap = () => {
     addToRecentlyViewed 
   });
   
-  // Optimize filter change handler 
   const handleFilterChange = useCallback((newFilters: FilterState) => {
     setFilters(prevFilters => {
-      // Only update if actually changed
       if (JSON.stringify(prevFilters) === JSON.stringify(newFilters)) {
         return prevFilters;
       }
@@ -60,24 +54,19 @@ const StorageFacilitiesMap = () => {
     });
   }, []);
   
-  // Force map markers to be visible with multiple strategies
   useEffect(() => {
     console.log("StorageFacilitiesMap: Running visibility enforcement");
     
-    // Set a flag on body to indicate we're loading markers
     document.body.setAttribute('data-markers-loading', 'true');
     
-    // Approach 1: Run the standalone force function
     forceMapMarkersVisible();
     
-    // Approach 2: Direct DOM manipulation at regular intervals
     const forceInterval = setInterval(() => {
       const markers = document.querySelectorAll('.mapboxgl-marker, .custom-marker');
       console.log(`Found ${markers.length} markers - forcing visible`);
       
       markers.forEach(marker => {
         if (marker instanceof HTMLElement) {
-          // Use style.cssText to make sure !important is included
           marker.style.cssText += `
             visibility: visible !important;
             display: block !important;
@@ -87,13 +76,11 @@ const StorageFacilitiesMap = () => {
             position: absolute !important;
           `;
           
-          // Add data attribute for debugging
           marker.setAttribute('data-forced-visible', 'true');
         }
       });
     }, 1000);
     
-    // Approach 3: Use a mutation observer to catch any newly added markers
     const observer = new MutationObserver((mutations) => {
       mutations.forEach(mutation => {
         if (mutation.type === 'childList') {
@@ -117,13 +104,11 @@ const StorageFacilitiesMap = () => {
       });
     });
     
-    // Start observing the document body for changes
     observer.observe(document.body, { 
       childList: true,
       subtree: true
     });
     
-    // Remove the loading flag after a delay
     setTimeout(() => {
       document.body.removeAttribute('data-markers-loading');
     }, 5000);
@@ -135,9 +120,7 @@ const StorageFacilitiesMap = () => {
     };
   }, []);
   
-  // Simplified effect to show only critical information
   useEffect(() => {
-    // Only show success message if loaded a significant number of facilities
     if (filteredFacilities?.length > 10 && !isLoading) {
       toast.success(`Loaded ${filteredFacilities.length} storage facilities`);
     } else if (filteredFacilities && filteredFacilities.length === 0 && !isLoading) {
@@ -145,7 +128,6 @@ const StorageFacilitiesMap = () => {
     }
   }, [filteredFacilities, isLoading]);
 
-  // Only show actual errors
   useEffect(() => {
     if (error) {
       console.error('Error loading facilities:', error);
@@ -153,7 +135,6 @@ const StorageFacilitiesMap = () => {
     }
   }, [error]);
 
-  // Create a memoized click handler
   const onMarkerClick = useCallback((facilityId: string) => {
     console.log(`Marker clicked: ${facilityId}`);
     handleFacilityClick(facilityId, displayFacilities);
@@ -161,7 +142,6 @@ const StorageFacilitiesMap = () => {
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 min-h-[800px]">
-      {/* Sidebar */}
       <div className="lg:col-span-4">
         <div className="space-y-4">
           <FilterPanel onFilterChange={handleFilterChange} />
@@ -184,7 +164,6 @@ const StorageFacilitiesMap = () => {
         </div>
       </div>
       
-      {/* Map section */}
       <div className="lg:col-span-8 flex flex-col space-y-4">
         <Card className="h-[600px] bg-[#080F1F] relative overflow-hidden border-gray-700">
           {(!mapToken) ? (

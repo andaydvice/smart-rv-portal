@@ -6,7 +6,7 @@ import Layout from "@/components/layout/Layout";
 import { Warehouse } from "lucide-react";
 import { useEffect } from 'react';
 import { injectEmergencyStyles, patchMapboxMarkerPrototype } from "@/utils/injectEmergencyStyles";
-import { forceMapMarkersVisible } from "@/utils/forceMapMarkers";
+import { forceMapMarkersVisible, injectEmergencyMarkerStyles } from "@/utils/markers";
 import "../styles/marker-fix.css";
 
 export default function StorageFacilities() {
