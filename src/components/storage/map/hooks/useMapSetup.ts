@@ -60,6 +60,7 @@ export const useMapSetup = (map: mapboxgl.Map | null,
       console.log(`Fitting map to bounds with ${validFacilities.length} valid coordinates`);
       
       // Fix: Pass all required arguments to fitMapToBounds
+      // The function expects (map, facilities, padding, maxZoom)
       fitMapToBounds(map, validFacilities, 50, 10);
     }
   }, [validFacilities, mapLoaded, map, selectedState]);
