@@ -171,7 +171,7 @@ function createMapboxEmergencyMarkers() {
       
       // Create and add the marker
       try {
-        // Fix TypeScript error here - ensure coords is a tuple with exactly two elements
+        // Ensure coords is a tuple with exactly two elements by explicitly specifying the type and indexes
         const lngLat: [number, number] = [coords[0], coords[1]];
         const marker = new window.mapboxgl.Marker({ element: el })
           .setLngLat(lngLat)
