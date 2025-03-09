@@ -1,3 +1,4 @@
+
 import { Container } from "@/components/ui/container";
 import StorageFacilitiesMap from "@/components/storage/StorageFacilitiesMap";
 import Navbar from "@/components/Navbar";
@@ -57,7 +58,7 @@ export default function StorageFacilities() {
   return (
     <Layout>
       <Navbar />
-      <div className="min-h-screen bg-[#080F1F] text-white">
+      <div className="min-h-screen w-full bg-[#080F1F] text-white">
         {/* Hero Header with Image */}
         <div className="relative w-full h-[400px]">
           <img 
@@ -66,7 +67,7 @@ export default function StorageFacilities() {
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-[#080F1F] to-transparent">
-            <Container className="h-full flex flex-col justify-center items-center">
+            <Container className="h-full flex flex-col justify-center items-center" fullWidth>
               <div className="text-center max-w-3xl bg-black/40 backdrop-blur-sm p-6 rounded-lg">
                 <div className="flex items-center justify-center gap-2 mb-2">
                   {/* Enhanced orange marker indicator that won't interfere with map markers */}
@@ -86,7 +87,7 @@ export default function StorageFacilities() {
           </div>
         </div>
         
-        <Container>
+        <Container fullWidth className="px-2 md:px-4">
           <div className="py-8">
             <StorageFacilitiesMap />
           </div>

@@ -28,14 +28,16 @@ const MapView = ({
   }, [facilities]);
 
   return (
-    <MapProvider mapToken={mapToken}>
-      <MapContainer
-        facilities={facilities}
-        highlightedFacility={highlightedFacility}
-        onMarkerClick={onMarkerClick}
-        selectedState={selectedState}
-      />
-    </MapProvider>
+    <div className="w-full h-full">
+      <MapProvider mapToken={mapToken}>
+        <MapContainer
+          facilities={facilities}
+          highlightedFacility={highlightedFacility}
+          onMarkerClick={onMarkerClick}
+          selectedState={selectedState}
+        />
+      </MapProvider>
+    </div>
   );
 };
 

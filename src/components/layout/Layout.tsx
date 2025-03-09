@@ -1,3 +1,4 @@
+
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import Footer from "../Footer";
@@ -20,7 +21,7 @@ interface LayoutProps {
 const Layout = ({ children }: LayoutProps) => {
   console.log('Rendering Layout component');
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col w-full max-w-full overflow-x-hidden">
       <ScrollToTop />
       {children}
       <Footer />

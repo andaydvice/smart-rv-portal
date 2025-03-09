@@ -18,8 +18,12 @@
     @apply border-border;
   }
 
+  html, body {
+    @apply w-full max-w-full overflow-x-hidden;
+  }
+
   body {
-    @apply bg-background text-foreground antialiased;
+    @apply bg-background text-foreground antialiased w-full max-w-full overflow-x-hidden;
     font-feature-settings: "ss01" on, "ss02" on, "cv01" on, "cv02" on;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     text-size-adjust: 100%;
@@ -44,5 +48,11 @@
   [role="tab"][data-state="active"] div {
     opacity: 1 !important;
     visibility: visible !important;
+  }
+  
+  /* Ensure full width layout */
+  #root > div {
+    width: 100%;
+    max-width: 100%;
   }
 }
