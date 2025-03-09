@@ -1,14 +1,23 @@
 
+import { 
+  testMarkersVisibility,
+  createMarkerDebugger,
+  monitorMarkerVisibility,
+  createMarkerDebugOverlay
+} from './visibilityTester';
+
+// Re-export with appropriate aliases
 export {
   testMarkersVisibility,
-  testMarkerVisibility,
-  auditMarkerVisibility,
+  testMarkersVisibility as testMarkerVisibility,
+  testMarkersVisibility as auditMarkerVisibility,
   monitorMarkerVisibility,
   createMarkerDebugger,
   createMarkerDebugOverlay,
-} from './visibilityTester';
+};
 
+// Re-export types from main markers index file
 export type {
   MarkerVisibilityTestResult,
   VisibilityIssueDetail,
-} from '../../components/storage/map/hooks/marker/types';
+} from '../index';

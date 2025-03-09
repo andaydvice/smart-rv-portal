@@ -1,5 +1,4 @@
-
-import { VisibilityIssueDetail, MarkerVisibilityTestResult } from '../../components/storage/map/hooks/marker/types';
+import type { MarkerVisibilityTestResult, VisibilityIssueDetail } from '../index';
 
 /**
  * Test marker visibility and fix issues
@@ -274,15 +273,14 @@ export function createMarkerDebugger() {
   return debuggerContainer;
 }
 
-// For backward compatibility
-export const auditMarkerVisibility = testMarkersVisibility;
-export const testMarkerVisibility = testMarkersVisibility;
-export const monitorMarkerVisibility = (interval = 5000) => {
+// Monitor marker visibility at regular intervals
+export function monitorMarkerVisibility(interval = 5000) {
   const timer = setInterval(() => {
-    testMarkersVisibility(false);
+    testMarkersVisibility(true);
   }, interval);
   
   return () => clearInterval(timer);
-};
+}
 
+// Alias for the debug overlay
 export const createMarkerDebugOverlay = createMarkerDebugger;

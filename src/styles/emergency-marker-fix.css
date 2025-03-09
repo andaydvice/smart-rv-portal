@@ -1,26 +1,9 @@
 
-/* Critical rules to fix unwanted debug/test markers */
-header .fixed-orange-marker,
-header .emergency-marker,
-header .orange-marker-indicator,
-.debug-marker {
-  display: none !important;
-  visibility: hidden !important;
-  opacity: 0 !important;
-  pointer-events: none !important;
-}
-
-/* No "header > " for these, we want them under the correct parent only */
-.hero-marker {
-  display: block !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-  z-index: 10 !important;
-}
-
-/* Actual map marker rules for the ones we do want to display */
+/* EMERGENCY FIX: Force marker visibility */
+.mapboxgl-marker,
 .custom-marker,
-.mapboxgl-marker {
+body .mapboxgl-canvas-container .mapboxgl-marker,
+body [class*="marker"] {
   display: block !important;
   visibility: visible !important;
   opacity: 1 !important;
@@ -29,38 +12,37 @@ header .orange-marker-indicator,
   position: absolute !important;
 }
 
-.emergency-marker {
-  width: 24px !important;
-  height: 24px !important;
-  border-radius: 50% !important;
-  background-color: #F97316 !important;
-  border: 2px solid white !important;
-  box-shadow: 0 0 10px rgba(0,0,0,0.8) !important;
+/* Hide any unwanted markers in the header */
+header .mapboxgl-marker,
+header .custom-marker,
+nav .mapboxgl-marker,
+nav .custom-marker,
+.fixed-orange-marker:not([data-in-map="true"]),
+.debug-marker {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
 }
 
-.custom-marker:hover,
-.mapboxgl-marker:hover,
-.emergency-marker:hover {
-  transform: scale(1.2) !important;
-  z-index: 10000 !important;
-}
-
-/* Ensure map container is visible */
-.mapboxgl-map {
-  visibility: visible !important;
-  opacity: 1 !important;
-}
-
-/* Force tooltips to appear */
-.mapboxgl-popup,
-.mapboxgl-popup-content {
+/* Only show emergency markers in the map container */
+.mapboxgl-map .mapboxgl-marker,
+.mapboxgl-map .custom-marker {
   display: block !important;
   visibility: visible !important;
   opacity: 1 !important;
-  z-index: 10001 !important;
 }
 
-/* Tooltip provider override */
-[data-radix-tooltip-provider] {
-  display: contents !important;
+/* Make popups visible */
+.mapboxgl-popup {
+  z-index: 10000 !important;
+  visibility: visible !important;
+  display: block !important;
+  opacity: 1 !important;
+}
+
+/* Fix map container */
+.mapboxgl-map {
+  visibility: visible !important;
+  opacity: 1 !important;
+  display: block !important;
 }

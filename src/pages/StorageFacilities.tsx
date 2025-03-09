@@ -1,4 +1,3 @@
-
 import { Container } from "@/components/ui/container";
 import StorageFacilitiesMap from "@/components/storage/StorageFacilitiesMap";
 import Navbar from "@/components/Navbar";
@@ -6,13 +5,14 @@ import Layout from "@/components/layout/Layout";
 import { Warehouse } from "lucide-react";
 import { useEffect } from 'react';
 import { applyAllEmergencyFixes } from "@/utils/emergency-styles/combined";
-import { forceMapMarkersVisible, testMarkersVisibility } from "@/utils/markers";
+import { forceMapMarkersVisible, testMarkersVisibility, ensureMarkersExist } from "@/utils/markers";
 import "../styles/marker-fix.css";
 import "../styles/emergency-marker-fix.css";
+import "../styles/map-optimizations.css";
 
 export default function StorageFacilities() {
   useEffect(() => {
-    console.log("StorageFacilities: Component mounted");
+    console.log("StorageFacilities: EMERGENCY FIX - Component mounted");
     
     // Signal that we're on the storage facilities page
     window.isStorageFacilitiesPage = true;
@@ -26,6 +26,19 @@ export default function StorageFacilities() {
       setTimeout(forceMapMarkersVisible, delay)
     );
     
+    // Add event listener for map creation to ensure markers are visible
+    document.addEventListener('mapboxgl.map.created', (e: any) => {
+      console.log('Map created - ensuring markers are visible');
+      const map = e.detail.map;
+      
+      // Wait for facilities to be loaded, then ensure markers exist
+      setTimeout(() => {
+        if (window.mapFacilities && window.mapFacilities.length > 0) {
+          ensureMarkersExist(map, window.mapFacilities);
+        }
+      }, 2000);
+    });
+    
     // Run marker visibility test after the page has loaded
     const testTimeout = setTimeout(() => {
       testMarkersVisibility(true);
@@ -37,6 +50,7 @@ export default function StorageFacilities() {
       cleanup();
       forceIntervals.forEach(timeout => clearTimeout(timeout));
       clearTimeout(testTimeout);
+      document.removeEventListener('mapboxgl.map.created', () => {});
     };
   }, []);
 

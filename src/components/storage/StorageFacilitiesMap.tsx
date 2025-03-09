@@ -1,4 +1,3 @@
-
 "use client";
 
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
@@ -16,7 +15,7 @@ import FacilityList from './map-view/FacilityList';
 import { useMapToken } from './map-view/useMapToken';
 import { useFacilitySelection } from './map-view/useFacilitySelection';
 import { toast } from "sonner";
-import { forceMapMarkersVisible, applyForcedStyles, testMarkersVisibility } from '@/utils/markers';
+import { forceMapMarkersVisible, applyForcedStyles, testMarkersVisibility, ensureMarkersExist } from '@/utils/markers';
 
 const StorageFacilitiesMap = () => {
   const [filters, setFilters] = useState<FilterState>({
@@ -38,6 +37,12 @@ const StorageFacilitiesMap = () => {
   
   const displayFacilities = useMemo(() => filteredFacilities || [], [filteredFacilities]);
   
+  useEffect(() => {
+    if (displayFacilities.length > 0) {
+      window.mapFacilities = displayFacilities;
+    }
+  }, [displayFacilities]);
+  
   const { 
     highlightedFacility, 
     scrollAreaRef, 
@@ -56,7 +61,7 @@ const StorageFacilitiesMap = () => {
   }, []);
   
   useEffect(() => {
-    console.log("StorageFacilitiesMap: Running visibility enforcement");
+    console.log("StorageFacilitiesMap: EMERGENCY FIX - Running visibility enforcement");
     
     document.body.setAttribute('data-markers-loading', 'true');
     
@@ -80,6 +85,10 @@ const StorageFacilitiesMap = () => {
           marker.setAttribute('data-forced-visible', 'true');
         }
       });
+      
+      if (window.mapInstance && window.mapFacilities && markers.length < window.mapFacilities.length * 0.8) {
+        ensureMarkersExist(window.mapInstance, window.mapFacilities);
+      }
     }, 1000);
     
     const observer = new MutationObserver((mutations) => {
@@ -110,7 +119,6 @@ const StorageFacilitiesMap = () => {
       subtree: true
     });
     
-    // Run visibility test after initial load
     setTimeout(() => {
       testMarkersVisibility(true);
       document.body.removeAttribute('data-markers-loading');

@@ -1,149 +1,94 @@
 
 import React, { useEffect, useState } from 'react';
-import { createMarkerDebugger, testMarkersVisibility, MarkerVisibilityTestResult } from '@/utils/markers/testing';
 import { Button } from '@/components/ui/button';
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from '@/components/ui/dialog';
-import { Bug, CheckCircle2, AlertTriangle } from 'lucide-react';
+import { createMarkerDebugger, testMarkersVisibility, MarkerVisibilityTestResult } from '@/utils/markers';
 
+/**
+ * A component that provides debugging tools for marker visibility issues
+ */
 const MarkerDebugOverlay: React.FC = () => {
+  const [testResults, setTestResults] = useState<MarkerVisibilityTestResult | null>(null);
   const [isOpen, setIsOpen] = useState(false);
-  const [markerStats, setMarkerStats] = useState<{
-    total: number;
-    visible: number;
-    hidden: number;
-  }>({
-    total: 0,
-    visible: 0,
-    hidden: 0
-  });
   
-  // Run visibility test to get initial stats
+  // Run visibility test when component mounts
   useEffect(() => {
-    const result = testMarkersVisibility(false);
-    setMarkerStats({
-      total: result.totalMarkers,
-      visible: result.visibleMarkers,
-      hidden: result.hiddenMarkers
-    });
-    
-    // Periodically update stats
-    const interval = setInterval(() => {
-      const updatedResult = testMarkersVisibility(false);
-      setMarkerStats({
-        total: updatedResult.totalMarkers,
-        visible: updatedResult.visibleMarkers,
-        hidden: updatedResult.hiddenMarkers
-      });
-    }, 5000);
-    
-    return () => clearInterval(interval);
+    if (process.env.NODE_ENV === 'development') {
+      const results = testMarkersVisibility(false);
+      setTestResults(results);
+    }
   }, []);
-
-  const handleShowDebugger = () => {
-    createMarkerDebugger();
-    setIsOpen(false);
+  
+  // Toggle visibility of the debug panel
+  const toggleOpen = () => setIsOpen(!isOpen);
+  
+  // Run another test and force visibility
+  const runTest = () => {
+    const results = testMarkersVisibility(true);
+    setTestResults(results);
   };
   
-  const handleFixIssues = () => {
-    testMarkersVisibility(true);
-    const result = testMarkersVisibility(false);
-    setMarkerStats({
-      total: result.totalMarkers,
-      visible: result.visibleMarkers,
-      hidden: result.hiddenMarkers
-    });
+  // Show full debugger
+  const showDebugger = () => {
+    const debugger = createMarkerDebugger();
+    document.body.appendChild(debugger);
   };
-
-  // Only show in development environment
-  if (process.env.NODE_ENV !== 'development') {
-    return null;
-  }
-
-  // Status icon based on marker visibility
-  const StatusIcon = markerStats.hidden === 0 
-    ? CheckCircle2 
-    : (markerStats.hidden < markerStats.total / 2 ? AlertTriangle : Bug);
   
-  const statusColor = markerStats.hidden === 0 
-    ? 'text-green-500' 
-    : (markerStats.hidden < markerStats.total / 2 ? 'text-amber-500' : 'text-red-500');
-
+  // Do not render in production
+  if (process.env.NODE_ENV !== 'development') return null;
+  
   return (
-    <Dialog open={isOpen} onOpenChange={setIsOpen}>
-      <DialogTrigger asChild>
-        <Button 
-          variant="ghost" 
-          size="sm" 
-          className="fixed bottom-4 right-4 z-[1000] bg-black/60 hover:bg-black/80"
-        >
-          <StatusIcon className={`w-5 h-5 mr-2 ${statusColor}`} />
-          <span className="text-xs">
-            Markers: {markerStats.visible}/{markerStats.total}
-          </span>
+    <div className="fixed bottom-4 right-4 z-[9999]">
+      {!isOpen ? (
+        <Button onClick={toggleOpen} size="sm" variant="outline" className="bg-black text-white">
+          Debug Markers
         </Button>
-      </DialogTrigger>
-      <DialogContent className="sm:max-w-md">
-        <DialogHeader>
-          <DialogTitle>Map Marker Debug Tools</DialogTitle>
-          <DialogDescription>
-            Tools for diagnosing and fixing marker visibility issues.
-          </DialogDescription>
-        </DialogHeader>
-        <div className="grid gap-4 py-4">
-          <div className="grid grid-cols-3 gap-4 text-center">
-            <div>
-              <div className="text-2xl font-bold">{markerStats.total}</div>
-              <div className="text-xs text-gray-500">Total</div>
-            </div>
-            <div>
-              <div className="text-2xl font-bold text-green-500">{markerStats.visible}</div>
-              <div className="text-xs text-gray-500">Visible</div>
-            </div>
-            <div>
-              <div className="text-2xl font-bold text-red-500">{markerStats.hidden}</div>
-              <div className="text-xs text-gray-500">Hidden</div>
-            </div>
+      ) : (
+        <div className="bg-black/80 text-white p-4 rounded-lg shadow-lg w-80">
+          <div className="flex justify-between mb-2">
+            <h3 className="font-bold">Marker Debug</h3>
+            <Button variant="ghost" size="sm" onClick={toggleOpen} className="h-6 w-6 p-0">✕</Button>
           </div>
           
-          <div className="mt-2">
-            <p className="text-sm text-gray-500">
-              {markerStats.hidden === 0 
-                ? "All markers are visible! 🎉" 
-                : `Found ${markerStats.hidden} marker${markerStats.hidden !== 1 ? 's' : ''} with visibility issues.`}
-            </p>
-          </div>
+          {testResults && (
+            <div className="text-xs space-y-2">
+              <div className="grid grid-cols-2 gap-1">
+                <div>Total Markers:</div>
+                <div className="font-mono">{testResults.totalMarkers}</div>
+                <div>Visible:</div>
+                <div className="font-mono">{testResults.visibleMarkers}</div>
+                <div>Hidden:</div>
+                <div className="font-mono">{testResults.hiddenMarkers}</div>
+              </div>
+              
+              {testResults.issues.length > 0 && (
+                <div className="mt-2">
+                  <div className="font-semibold text-orange-400">{testResults.issues.length} Issues Found</div>
+                  <ul className="mt-1 space-y-1 max-h-32 overflow-y-auto">
+                    {testResults.issues.slice(0, 5).map((issue, i) => (
+                      <li key={i} className="text-[10px] border-l-2 border-orange-400 pl-2">
+                        {issue.description}
+                      </li>
+                    ))}
+                    {testResults.issues.length > 5 && (
+                      <li className="text-[10px] italic">...and {testResults.issues.length - 5} more</li>
+                    )}
+                  </ul>
+                </div>
+              )}
+              
+              <div className="flex gap-2 mt-3">
+                <Button size="sm" variant="destructive" onClick={runTest} className="text-xs px-2 py-1 h-auto">
+                  Fix Issues
+                </Button>
+                <Button size="sm" variant="outline" onClick={showDebugger} className="text-xs px-2 py-1 h-auto">
+                  Full Debug
+                </Button>
+              </div>
+            </div>
+          )}
         </div>
-        <DialogFooter className="gap-2 sm:gap-0">
-          <Button
-            variant="outline"
-            onClick={() => setIsOpen(false)}
-          >
-            Close
-          </Button>
-          <Button 
-            variant="secondary"
-            onClick={handleShowDebugger}
-          >
-            Open Debugger
-          </Button>
-          <Button 
-            variant={markerStats.hidden > 0 ? "default" : "outline"}
-            disabled={markerStats.hidden === 0}
-            onClick={handleFixIssues}
-          >
-            Fix Issues
-          </Button>
-        </DialogFooter>
-      </DialogContent>
-    </Dialog>
+      )}
+    </div>
   );
 };
 
