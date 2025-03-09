@@ -10,7 +10,7 @@ export const useMarkerClickHandlers = () => {
     facilityName: string,
     onMarkerClick: (facilityId: string) => void
   ): ((e: MouseEvent) => void) => {
-    // Simple handler that just calls onMarkerClick
+    // Simple handler that just calls onMarkerClick with proper event handling
     const handleMarkerClick = (e: MouseEvent) => {
       e.preventDefault();
       e.stopPropagation();
@@ -31,7 +31,17 @@ export const useMarkerClickHandlers = () => {
     facilityName: string,
     onMarkerClick: (facilityId: string) => void
   ): void => {
-    // Clean up any existing listeners first for safety
+    // Make sure the element is visible and clickable
+    markerElement.style.visibility = 'visible';
+    markerElement.style.display = 'block';
+    markerElement.style.opacity = '1';
+    markerElement.style.pointerEvents = 'auto';
+    markerElement.style.cursor = 'pointer';
+    
+    // Set attribute and add listener
+    markerElement.setAttribute('data-facility-id', facilityId);
+    
+    // Simple direct click handler
     const newHandler = (e: MouseEvent) => {
       e.preventDefault();
       e.stopPropagation();
@@ -39,18 +49,8 @@ export const useMarkerClickHandlers = () => {
       onMarkerClick(facilityId);
     };
     
-    // Set attribute and add listener
-    markerElement.setAttribute('data-facility-id', facilityId);
-    markerElement.setAttribute('data-has-click', 'true');
-    
-    // Remove old handlers by cloning the element
-    const newElement = markerElement.cloneNode(true) as HTMLElement;
-    if (markerElement.parentNode) {
-      markerElement.parentNode.replaceChild(newElement, markerElement);
-    }
-    
-    // Add new click listener
-    newElement.addEventListener('click', newHandler);
+    // Add new click listener (use once: false to ensure it can be clicked multiple times)
+    markerElement.addEventListener('click', newHandler);
   };
 
   return {

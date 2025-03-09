@@ -17,9 +17,10 @@ export default function StorageFacilities() {
     // Signal that we're on the storage facilities page
     window.isStorageFacilitiesPage = true;
     
-    // Add specific CSS to force markers to be visible
+    // Add specific inline CSS to force markers to be visible
     const style = document.createElement('style');
     style.textContent = `
+      /* CRITICAL - Ensure all markers are visible */
       .mapboxgl-marker, 
       .static-marker,
       [data-facility-id] {
@@ -30,6 +31,20 @@ export default function StorageFacilities() {
         cursor: pointer !important;
         transform: none !important;
         transition: none !important;
+        position: absolute !important;
+        z-index: 9999 !important;
+      }
+      
+      /* Make popups stand out */
+      .mapboxgl-popup {
+        z-index: 10000 !important;
+      }
+      
+      /* Ensure proper popup styling */
+      .mapboxgl-popup-content {
+        background-color: #151A22 !important;
+        color: white !important;
+        border-radius: 8px !important;
       }
     `;
     document.head.appendChild(style);
@@ -40,11 +55,7 @@ export default function StorageFacilities() {
       const markerEl = target.closest('[data-facility-id]');
       
       if (markerEl) {
-        const facilityId = markerEl.getAttribute('data-facility-id');
-        if (facilityId) {
-          console.log('Global marker click handler:', facilityId);
-          // The click will be handled by the specific marker handlers
-        }
+        console.log('Global marker click handler activated');
       }
     };
     
@@ -55,24 +66,29 @@ export default function StorageFacilities() {
       toast.info("Click on orange markers to view storage facilities");
     }, 2000);
     
-    // Close popups when clicking on the map outside markers
-    document.addEventListener('click', (e) => {
-      const target = e.target as HTMLElement;
-      // If clicking on the map canvas (not a marker or popup)
-      if (target.classList.contains('mapboxgl-canvas')) {
-        // Close all popups
-        document.querySelectorAll('.mapboxgl-popup').forEach(popup => {
-          if (popup.parentNode) {
-            popup.parentNode.removeChild(popup);
-          }
-        });
-      }
-    });
+    // Force visibility of markers every second
+    const forceVisibilityInterval = setInterval(() => {
+      const markers = document.querySelectorAll('.mapboxgl-marker, .static-marker, [data-facility-id]');
+      console.log(`Found ${markers.length} markers - forcing visible`);
+      
+      markers.forEach(marker => {
+        if (marker instanceof HTMLElement) {
+          marker.style.visibility = 'visible';
+          marker.style.display = 'block';
+          marker.style.opacity = '1';
+          marker.style.pointerEvents = 'auto';
+          marker.style.cursor = 'pointer';
+          marker.style.zIndex = '9999';
+          marker.style.position = 'absolute';
+        }
+      });
+    }, 1000);
     
     // Clean up
     return () => {
       window.isStorageFacilitiesPage = false;
       document.removeEventListener('click', handleGlobalMarkerClick);
+      clearInterval(forceVisibilityInterval);
       if (style.parentNode) {
         style.parentNode.removeChild(style);
       }

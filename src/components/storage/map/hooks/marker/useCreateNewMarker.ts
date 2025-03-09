@@ -6,18 +6,12 @@ import { StorageFacility } from '../../../types';
 import { createFacilityMarker } from '../../utils/markerCreation';
 import { calculateMarkerOffset, buildCoordinatesMap, hasValidCoordinates } from '../../utils/markerUtils';
 
-// Helper function to adapt any facility-like object to the expected StorageFacility type
-const adaptFacility = (facility: any): StorageFacility => {
-  return facility as StorageFacility;
-};
-
 export const useCreateNewMarker = () => {
   const { applyClickHandlerToMarker } = useMarkerClickHandlers();
   const { 
     addError, 
     hasErrorForFacility, 
-    markErrorAsRecovered, 
-    attemptErrorRecovery 
+    markErrorAsRecovered
   } = useMarkerErrorHandling();
 
   // Clear existing markers before creating new ones
@@ -57,12 +51,9 @@ export const useCreateNewMarker = () => {
         return null;
       }
       
-      // Adapt facilities to the expected type before building coordinates map
-      const adaptedFacilities = facilities.map(adaptFacility);
-      
       // Calculate marker coordinates with offset for overlapping markers
-      const coordinatesMap = buildCoordinatesMap(adaptedFacilities);
-      const coordinates = calculateMarkerOffset(facility, coordinatesMap, adaptedFacilities, index);
+      const coordinatesMap = buildCoordinatesMap(facilities);
+      const coordinates = calculateMarkerOffset(facility, coordinatesMap, facilities, index);
       
       // Create the marker with explicit map reference for reliable addition
       const marker = createFacilityMarker(
@@ -73,14 +64,30 @@ export const useCreateNewMarker = () => {
         map
       );
       
-      // Don't overwrite existing markers to reduce re-rendering
+      // Store the marker for future reference
       if (typeof window !== 'undefined') {
         if (!window._persistentMarkers) {
           window._persistentMarkers = {};
         }
-        
-        // Store the marker for future reference
         window._persistentMarkers[facility.id] = marker;
+      }
+      
+      // Apply extra click handler directly to the marker element
+      const markerElement = marker.getElement();
+      if (markerElement) {
+        applyClickHandlerToMarker(
+          markerElement,
+          facility.id,
+          facility.name,
+          onMarkerClick
+        );
+        
+        // Force marker to be visible
+        markerElement.style.visibility = 'visible';
+        markerElement.style.display = 'block';
+        markerElement.style.opacity = '1';
+        markerElement.style.zIndex = '9999';
+        markerElement.style.pointerEvents = 'auto';
       }
       
       // If we had previous errors for this facility, mark them as recovered
@@ -100,18 +107,6 @@ export const useCreateNewMarker = () => {
         'MARKER_CREATION_FAILED'
       );
       
-      // Check if we should retry the operation
-      if (attemptErrorRecovery(facility.id)) {
-        // If we should retry, attempt to create the marker again with a slight delay
-        setTimeout(() => {
-          try {
-            createMarker(facility, map, isHighlighted, onMarkerClick, facilities, index);
-          } catch (retryError) {
-            console.error(`Retry failed for ${facility.name}:`, retryError);
-          }
-        }, 500); // 500ms delay before retry
-      }
-      
       return null;
     }
   };
@@ -120,14 +115,15 @@ export const useCreateNewMarker = () => {
   const enhanceMarkerVisibility = (marker: mapboxgl.Marker) => {
     const el = marker.getElement();
     if (el) {
-      // Use CSS classes instead of inline styles when possible
-      el.classList.add('custom-marker');
-      
       // Set critical inline styles for visibility
       el.style.visibility = 'visible';
       el.style.display = 'block';
       el.style.opacity = '1';
       el.style.zIndex = '9999';
+      el.style.pointerEvents = 'auto';
+      el.style.position = 'absolute';
+      el.style.transform = 'none';
+      el.style.transition = 'none';
       
       // Set persistent data attribute
       el.setAttribute('data-persistent', 'true');

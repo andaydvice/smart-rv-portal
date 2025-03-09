@@ -9,12 +9,12 @@ export function createFacilityMarker(
   onClick: (facilityId: string) => void,
   map: mapboxgl.Map
 ): mapboxgl.Marker {
-  // Create marker container
+  // Create marker container with simpler structure
   const el = document.createElement('div');
   el.className = 'static-marker';
   el.id = `marker-${facility.id}`;
   
-  // Use fixed styling without transforms to prevent marker movement
+  // Use static styling to prevent any marker movement
   el.style.cssText = `
     background-color: ${isHighlighted ? '#10B981' : '#F97316'};
     width: 30px;
@@ -23,12 +23,17 @@ export function createFacilityMarker(
     border: 3px solid white;
     cursor: pointer;
     box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    position: absolute;
+    z-index: 9999;
+    display: block;
+    visibility: visible;
+    opacity: 1;
   `;
   
   // Store facility ID as data attribute
   el.setAttribute('data-facility-id', facility.id);
   
-  // Create popup content with address, phone and price
+  // Create simple HTML popup content with address, phone and price
   const popupContent = `
     <div class="facility-popup-content p-4">
       <h3 class="text-lg font-bold mb-2">${facility.name}</h3>
@@ -42,7 +47,7 @@ export function createFacilityMarker(
     </div>
   `;
   
-  // Create popup with proper offset to avoid movement
+  // Create popup with fixed offset to avoid movement
   const popup = new mapboxgl.Popup({
     closeButton: false,
     closeOnClick: false,
@@ -58,20 +63,19 @@ export function createFacilityMarker(
   })
   .setLngLat(coordinates);
   
-  // Add click handler directly to the element
+  // Simple direct click handler
   el.addEventListener('click', (e) => {
     e.preventDefault();
     e.stopPropagation();
     
-    // Toggle popup
-    const popupIsOpen = el.getAttribute('data-popup-open') === 'true';
+    console.log(`Marker clicked for facility: ${facility.name}`);
     
-    if (!popupIsOpen) {
+    // Toggle popup visibility
+    if (!popup.isOpen()) {
       marker.setPopup(popup);
       marker.togglePopup();
-      el.setAttribute('data-popup-open', 'true');
       
-      // Add event listeners to popup buttons
+      // Add event listeners to popup buttons after it's open
       setTimeout(() => {
         const popupEl = popup.getElement();
         if (popupEl) {
@@ -81,8 +85,9 @@ export function createFacilityMarker(
             viewBtn.addEventListener('click', (e) => {
               e.preventDefault();
               e.stopPropagation();
+              console.log(`View details clicked for: ${facility.name}`);
               onClick(facility.id);
-              marker.togglePopup(); // Close popup after clicking
+              popup.remove(); // Close popup after clicking
             });
           }
           
@@ -92,15 +97,14 @@ export function createFacilityMarker(
             closeBtn.addEventListener('click', (e) => {
               e.preventDefault();
               e.stopPropagation();
-              marker.togglePopup(); // Close popup
-              el.setAttribute('data-popup-open', 'false');
+              console.log(`Close popup clicked for: ${facility.name}`);
+              popup.remove();
             });
           }
         }
       }, 50);
     } else {
-      marker.togglePopup();
-      el.setAttribute('data-popup-open', 'false');
+      popup.remove();
     }
   });
   

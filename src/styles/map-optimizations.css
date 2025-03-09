@@ -1,22 +1,26 @@
 
-/* Fix map markers */
+/* CRITICAL - Force ALL markers to be visible with !important flags */
 .mapboxgl-marker,
 .static-marker,
-[data-facility-id] {
+.custom-marker,
+[data-facility-id],
+.marker-container {
   visibility: visible !important;
   display: block !important;
   opacity: 1 !important;
   z-index: 9999 !important;
   pointer-events: auto !important;
   cursor: pointer !important;
-  transform: none !important;
   position: absolute !important;
+  transform: none !important;
+  transition: none !important;
 }
 
-/* Prevent marker movement animations */
+/* Prevent ANY marker animations or transitions */
 .mapboxgl-marker {
   transform: none !important;
   transition: none !important;
+  animation: none !important;
 }
 
 /* Make popup content more readable */
@@ -58,7 +62,8 @@
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* Ensure the marker doesn't change on highlighted state */
-.mapboxgl-marker.highlighted {
-  transform: none !important; 
+/* Make sure the highlighted marker has a visual indicator */
+.mapboxgl-marker.highlighted, .static-marker.highlighted {
+  background-color: #10B981 !important;
+  border: 3px solid white !important;
 }
