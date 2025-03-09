@@ -40,11 +40,35 @@ const MapContainer: React.FC<MapContainerProps> = ({
       if (container) {
         container.style.visibility = 'visible';
         container.style.opacity = '1';
+        container.style.display = 'block';
       }
+      
+      // Add event listener for popup close events
+      map.on('popupclose', () => {
+        // Ensure map canvas is visible after popup closes
+        const canvas = map.getCanvas();
+        if (canvas) {
+          canvas.style.visibility = 'visible';
+          canvas.style.display = 'block';
+          canvas.style.opacity = '1';
+        }
+        
+        // Make sure all markers are visible
+        document.querySelectorAll('.mapboxgl-marker, .custom-marker').forEach(marker => {
+          if (marker instanceof HTMLElement) {
+            marker.style.visibility = 'visible';
+            marker.style.display = 'block';
+            marker.style.opacity = '1';
+          }
+        });
+      });
     }
     
     return () => {
       (window as any).mapInstance = null;
+      if (map) {
+        map.off('popupclose');
+      }
     };
   }, [map]);
 
@@ -82,8 +106,65 @@ const MapContainer: React.FC<MapContainerProps> = ({
     // Set up event listeners
     const cleanup = setupEmergencyMarkerListeners(onMarkerClick);
     
+    // Set up a MutationObserver to watch for popup close buttons
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach(mutation => {
+        if (mutation.type === 'childList') {
+          // Look for newly added popups
+          mutation.addedNodes.forEach(node => {
+            if (node instanceof HTMLElement && node.classList.contains('mapboxgl-popup')) {
+              // Find close button
+              const closeButton = node.querySelector('.mapboxgl-popup-close-button');
+              if (closeButton instanceof HTMLElement) {
+                // Replace with new button to clear old event listeners
+                const newButton = closeButton.cloneNode(true);
+                closeButton.parentNode?.replaceChild(newButton, closeButton);
+                
+                // Add clean event listener to the close button
+                newButton.addEventListener('click', (e) => {
+                  e.stopPropagation();
+                  e.preventDefault();
+                  
+                  // Remove the popup
+                  node.remove();
+                  
+                  // Make sure map is visible
+                  setTimeout(() => {
+                    if (map) {
+                      // Ensure map canvas is visible
+                      const canvas = map.getCanvas();
+                      if (canvas) {
+                        canvas.style.visibility = 'visible';
+                        canvas.style.display = 'block';
+                      }
+                      
+                      // Force all markers to be visible
+                      document.querySelectorAll('.mapboxgl-marker, .custom-marker').forEach(m => {
+                        if (m instanceof HTMLElement) {
+                          m.style.visibility = 'visible';
+                          m.style.display = 'block';
+                          m.style.opacity = '1';
+                        }
+                      });
+                    }
+                  }, 50);
+                });
+              }
+            }
+          });
+        }
+      });
+    });
+    
+    // Start observing the document for popup additions
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true
+    });
+    
     return () => {
       cleanup();
+      observer.disconnect();
       // Remove emergency markers
       document.querySelectorAll('.emergency-marker').forEach(marker => {
         if (marker.parentNode) marker.parentNode.removeChild(marker);
@@ -112,26 +193,34 @@ const MapContainer: React.FC<MapContainerProps> = ({
           map.flyTo({
             center: [lng, lat],
             zoom: 12,
+            padding: {top: 50, bottom: 50, left: 50, right: 50}, // Add padding to ensure marker is visible
             essential: true
           });
           
           // Highlight the emergency marker
-          document.querySelectorAll('.emergency-marker').forEach(marker => {
+          document.querySelectorAll('.emergency-marker, .custom-marker, .mapboxgl-marker').forEach(marker => {
             if (marker instanceof HTMLElement) {
-              if (marker.getAttribute('data-facility-id') === highlightedFacility) {
+              const markerFacilityId = marker.getAttribute('data-facility-id');
+              if (markerFacilityId === highlightedFacility) {
                 marker.style.backgroundColor = '#10B981';
                 marker.style.width = '28px';
                 marker.style.height = '28px';
                 marker.style.transform = 'translate(-50%, -50%) scale(1.3)';
                 marker.style.zIndex = '10002';
                 marker.style.boxShadow = '0 0 15px rgba(16, 185, 129, 0.8)';
-              } else {
+                marker.style.display = 'block';
+                marker.style.visibility = 'visible';
+                marker.style.opacity = '1';
+              } else if (markerFacilityId) {
                 marker.style.backgroundColor = '#F97316';
                 marker.style.width = '24px';
                 marker.style.height = '24px';
                 marker.style.transform = 'translate(-50%, -50%) scale(1)';
                 marker.style.zIndex = '10000';
                 marker.style.boxShadow = '0 0 10px rgba(0, 0, 0, 0.5)';
+                marker.style.display = 'block';
+                marker.style.visibility = 'visible';
+                marker.style.opacity = '1';
               }
             }
           });

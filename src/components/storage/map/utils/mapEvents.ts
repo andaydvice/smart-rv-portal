@@ -30,6 +30,30 @@ export const setupMapEventListeners = (map: mapboxgl.Map): void => {
     }
   });
   
+  // Handle popup close events to ensure map visibility
+  map.on('popupclose', () => {
+    console.log('Mapbox popupclose event detected');
+    // Ensure map canvas is visible
+    const canvas = map.getCanvas();
+    if (canvas) {
+      canvas.style.visibility = 'visible';
+      canvas.style.display = 'block';
+      canvas.style.opacity = '1';
+    }
+    
+    // Ensure all markers are visible
+    document.querySelectorAll('.mapboxgl-marker, .custom-marker, .emergency-marker').forEach(marker => {
+      if (marker instanceof HTMLElement) {
+        marker.style.visibility = 'visible';
+        marker.style.display = 'block';
+        marker.style.opacity = '1';
+      }
+    });
+    
+    // Trigger custom event
+    document.dispatchEvent(new CustomEvent('mapbox.popup.closed'));
+  });
+  
   // Handle popup close button clicks
   const handleCloseButtonClick = (e: MouseEvent) => {
     if ((e.target as HTMLElement)?.closest('.mapboxgl-popup-close-button')) {
@@ -39,6 +63,19 @@ export const setupMapEventListeners = (map: mapboxgl.Map): void => {
       const popup = (e.target as HTMLElement).closest('.mapboxgl-popup');
       if (popup) {
         popup.remove();
+        
+        // Trigger custom event
+        document.dispatchEvent(new CustomEvent('mapbox.popup.closed'));
+        
+        // Ensure map is visible
+        setTimeout(() => {
+          const canvas = map.getCanvas();
+          if (canvas) {
+            canvas.style.visibility = 'visible';
+            canvas.style.display = 'block';
+            canvas.style.opacity = '1';
+          }
+        }, 50);
       }
     }
   };
@@ -49,7 +86,7 @@ export const setupMapEventListeners = (map: mapboxgl.Map): void => {
   // Enhance marker visibility and interactivity after style load
   map.once('style.load', () => {
     // Apply any additional style-dependent configurations
-    document.querySelectorAll('.mapboxgl-marker, .custom-marker').forEach(marker => {
+    document.querySelectorAll('.mapboxgl-marker, .custom-marker, .emergency-marker').forEach(marker => {
       if (marker instanceof HTMLElement) {
         marker.style.zIndex = '9999';
         marker.style.visibility = 'visible';
@@ -69,6 +106,36 @@ export const setupMapEventListeners = (map: mapboxgl.Map): void => {
         if (closeButton instanceof HTMLElement) {
           closeButton.style.pointerEvents = 'all';
           closeButton.style.cursor = 'pointer';
+          
+          // Add enhanced click handling
+          closeButton.addEventListener('click', (e) => {
+            e.stopPropagation();
+            e.preventDefault();
+            
+            // Remove popup
+            popup.remove();
+            
+            // Trigger custom event
+            document.dispatchEvent(new CustomEvent('mapbox.popup.closed'));
+            
+            // Ensure map is visible
+            setTimeout(() => {
+              const canvas = map.getCanvas();
+              if (canvas) {
+                canvas.style.visibility = 'visible';
+                canvas.style.display = 'block';
+                canvas.style.opacity = '1';
+              }
+            }, 50);
+          });
+        }
+        
+        // Remove any View Details buttons
+        const viewDetailsBtn = popup.querySelector('.view-facility-btn, button.view-details');
+        if (viewDetailsBtn instanceof HTMLElement) {
+          viewDetailsBtn.style.display = 'none';
+          viewDetailsBtn.style.visibility = 'hidden';
+          viewDetailsBtn.style.opacity = '0';
         }
       }
     });
@@ -89,7 +156,7 @@ export const createMapClickHandler = (container: HTMLElement): void => {
     }
     
     // Don't interfere with marker interactions
-    if ((e.target as HTMLElement)?.closest('.mapboxgl-marker, .custom-marker')) {
+    if ((e.target as HTMLElement)?.closest('.mapboxgl-marker, .custom-marker, .emergency-marker')) {
       return;
     }
     
@@ -101,7 +168,7 @@ export const createMapClickHandler = (container: HTMLElement): void => {
     
     // Force markers to remain visible after clicks
     setTimeout(() => {
-      document.querySelectorAll('.mapboxgl-marker, .custom-marker').forEach(marker => {
+      document.querySelectorAll('.mapboxgl-marker, .custom-marker, .emergency-marker').forEach(marker => {
         if (marker instanceof HTMLElement) {
           marker.style.visibility = 'visible';
           marker.style.opacity = '1';
@@ -109,6 +176,14 @@ export const createMapClickHandler = (container: HTMLElement): void => {
           marker.style.pointerEvents = 'auto';
         }
       });
+      
+      // Ensure map canvas is visible
+      const canvas = document.querySelector('.mapboxgl-canvas');
+      if (canvas instanceof HTMLElement) {
+        canvas.style.visibility = 'visible';
+        canvas.style.display = 'block';
+        canvas.style.opacity = '1';
+      }
     }, 100);
   });
 };

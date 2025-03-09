@@ -1,3 +1,4 @@
+
 "use client";
 
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
@@ -15,7 +16,14 @@ import FacilityList from './map-view/FacilityList';
 import { useMapToken } from './map-view/useMapToken';
 import { useFacilitySelection } from './map-view/useFacilitySelection';
 import { toast } from "sonner";
-import { forceMapMarkersVisible, applyForcedStyles, testMarkersVisibility, ensureMarkersExist } from '@/utils/markers';
+import { 
+  forceMapMarkersVisible, 
+  applyForcedStyles, 
+  testMarkersVisibility, 
+  ensureMarkersExist, 
+  ensureMapVisible,
+  removeViewDetailsButtons 
+} from '@/utils/markers';
 
 const StorageFacilitiesMap = () => {
   const [filters, setFilters] = useState<FilterState>({
@@ -51,6 +59,15 @@ const StorageFacilitiesMap = () => {
     addToRecentlyViewed 
   });
   
+  // Store highlighted facility ID globally for other components to access
+  useEffect(() => {
+    if (highlightedFacility) {
+      window.highlightedFacilityId = highlightedFacility;
+    } else {
+      window.highlightedFacilityId = null;
+    }
+  }, [highlightedFacility]);
+  
   const handleFilterChange = useCallback((newFilters: FilterState) => {
     setFilters(prevFilters => {
       if (JSON.stringify(prevFilters) === JSON.stringify(newFilters)) {
@@ -65,10 +82,17 @@ const StorageFacilitiesMap = () => {
     
     document.body.setAttribute('data-markers-loading', 'true');
     
+    // Force map markers to be visible
     forceMapMarkersVisible();
     
+    // Remove any "View Details" buttons
+    removeViewDetailsButtons();
+    
+    // Set up interval to continuously force markers visible
     const forceInterval = setInterval(() => {
-      const markers = document.querySelectorAll('.mapboxgl-marker, .custom-marker');
+      ensureMapVisible();
+      
+      const markers = document.querySelectorAll('.mapboxgl-marker, .custom-marker, .emergency-marker');
       console.log(`Found ${markers.length} markers - forcing visible`);
       
       markers.forEach(marker => {
@@ -86,18 +110,25 @@ const StorageFacilitiesMap = () => {
         }
       });
       
+      // Remove view details buttons
+      removeViewDetailsButtons();
+      
+      // Ensure markers exist if needed
       if (window.mapInstance && window.mapFacilities && markers.length < window.mapFacilities.length * 0.8) {
         ensureMarkersExist(window.mapInstance, window.mapFacilities);
       }
     }, 1000);
     
+    // Set up mutation observer to catch new markers and make them visible
     const observer = new MutationObserver((mutations) => {
       mutations.forEach(mutation => {
         if (mutation.type === 'childList') {
           mutation.addedNodes.forEach(node => {
             if (node instanceof HTMLElement) {
+              // Make new markers visible
               if (node.classList.contains('mapboxgl-marker') || 
-                  node.classList.contains('custom-marker')) {
+                  node.classList.contains('custom-marker') ||
+                  node.classList.contains('emergency-marker')) {
                 console.log('Mutation observer caught new marker - forcing visible');
                 node.style.cssText += `
                   visibility: visible !important;
@@ -107,6 +138,26 @@ const StorageFacilitiesMap = () => {
                   pointer-events: auto !important;
                   position: absolute !important;
                 `;
+              }
+              
+              // Handle new popups
+              if (node.classList.contains('mapboxgl-popup')) {
+                // Fix close button
+                const closeButton = node.querySelector('.mapboxgl-popup-close-button');
+                if (closeButton instanceof HTMLElement) {
+                  closeButton.style.pointerEvents = 'all';
+                  closeButton.style.cursor = 'pointer';
+                  closeButton.style.zIndex = '10001';
+                  
+                  // Remove View Details button in popup
+                  const viewDetailsBtn = node.querySelector('.view-facility-btn, button.view-details');
+                  if (viewDetailsBtn instanceof HTMLElement) {
+                    viewDetailsBtn.style.display = 'none';
+                    viewDetailsBtn.style.visibility = 'hidden';
+                    viewDetailsBtn.style.opacity = '0';
+                    viewDetailsBtn.style.pointerEvents = 'none';
+                  }
+                }
               }
             }
           });
@@ -119,15 +170,34 @@ const StorageFacilitiesMap = () => {
       subtree: true
     });
     
+    // Add event listener for popup close events
+    const handlePopupClosed = () => {
+      console.log('Popup closed event detected');
+      
+      // Ensure map is visible
+      ensureMapVisible();
+      
+      // Force all markers to be visible
+      forceMapMarkersVisible();
+      
+      // Remove unwanted buttons
+      removeViewDetailsButtons();
+    };
+    
+    document.addEventListener('mapbox.popup.closed', handlePopupClosed);
+    
     setTimeout(() => {
       testMarkersVisibility(true);
       document.body.removeAttribute('data-markers-loading');
+      document.body.classList.add('map-loaded');
     }, 3000);
     
     return () => {
       clearInterval(forceInterval);
       observer.disconnect();
+      document.removeEventListener('mapbox.popup.closed', handlePopupClosed);
       document.body.removeAttribute('data-markers-loading');
+      document.body.classList.remove('map-loaded');
     };
   }, []);
   
@@ -149,6 +219,11 @@ const StorageFacilitiesMap = () => {
   const onMarkerClick = useCallback((facilityId: string) => {
     console.log(`Marker clicked: ${facilityId}`);
     handleFacilityClick(facilityId, displayFacilities);
+    
+    // Make sure map remains visible
+    setTimeout(() => {
+      ensureMapVisible();
+    }, 100);
   }, [handleFacilityClick, displayFacilities]);
 
   return (

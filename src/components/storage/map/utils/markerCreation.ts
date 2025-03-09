@@ -85,6 +85,44 @@ export function createFacilityMarker(
     }
   }
 
+  // Add click handler to the marker element
+  el.addEventListener('click', (e) => {
+    e.stopPropagation();
+    e.preventDefault();
+    
+    // Call the onClick callback to handle facility selection
+    onClick(facility.id);
+    
+    // Toggle the popup
+    if (!marker.getPopup().isOpen()) {
+      marker.togglePopup();
+    }
+  });
+
+  // Handle popup close button properly
+  marker.getPopup().on('close', () => {
+    // Ensure map remains visible when popup is closed
+    if (map) {
+      setTimeout(() => {
+        // Make sure map canvas is visible
+        const canvas = map.getCanvas();
+        if (canvas) {
+          canvas.style.visibility = 'visible';
+          canvas.style.display = 'block';
+        }
+        
+        // Force all markers to be visible
+        document.querySelectorAll('.mapboxgl-marker, .custom-marker').forEach(m => {
+          if (m instanceof HTMLElement) {
+            m.style.visibility = 'visible';
+            m.style.display = 'block';
+            m.style.opacity = '1';
+          }
+        });
+      }, 50);
+    }
+  });
+
   // Once the popup is added, set up event listeners on it
   marker.getPopup().on('open', () => {
     // Get the popup element
@@ -98,14 +136,44 @@ export function createFacilityMarker(
       popupEl.style.visibility = 'visible';
       popupEl.style.pointerEvents = 'all';
       
-      // Make close button work
+      // Make close button work properly
       const closeButton = popupEl.querySelector('.mapboxgl-popup-close-button');
       if (closeButton instanceof HTMLElement) {
         closeButton.style.pointerEvents = 'all';
         closeButton.style.cursor = 'pointer';
-        closeButton.addEventListener('click', (e) => {
+        
+        // Clear existing event listeners
+        const newCloseButton = closeButton.cloneNode(true);
+        closeButton.parentNode?.replaceChild(newCloseButton, closeButton);
+        
+        // Add new event listener
+        newCloseButton.addEventListener('click', (e) => {
           e.stopPropagation();
+          e.preventDefault();
+          
+          // Close the popup
           marker.getPopup().remove();
+          
+          // Ensure map is visible after popup closes
+          setTimeout(() => {
+            if (map) {
+              // Make sure map canvas is visible
+              const canvas = map.getCanvas();
+              if (canvas) {
+                canvas.style.visibility = 'visible';
+                canvas.style.display = 'block';
+              }
+              
+              // Force markers to be visible
+              document.querySelectorAll('.mapboxgl-marker, .custom-marker').forEach(m => {
+                if (m instanceof HTMLElement) {
+                  m.style.visibility = 'visible';
+                  m.style.display = 'block';
+                  m.style.opacity = '1';
+                }
+              });
+            }
+          }, 50);
         });
       }
     }

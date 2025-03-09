@@ -41,12 +41,39 @@ export const useMarkerClickHandlers = () => {
             closeButton.style.pointerEvents = 'all';
             closeButton.style.cursor = 'pointer';
             
+            // Replace with new button to clear existing handlers
+            const newButton = closeButton.cloneNode(true);
+            closeButton.parentNode?.replaceChild(newButton, closeButton);
+            
             // Enhance close button with clear event handler
-            closeButton.addEventListener('click', (e) => {
+            newButton.addEventListener('click', (e) => {
               e.stopPropagation();
               e.preventDefault();
+              
+              // Remove the popup
               marker.getPopup().remove();
+              
+              // Trigger custom event to ensure map visibility
+              document.dispatchEvent(new CustomEvent('mapbox.popup.closed'));
+              
+              // Ensure map is visible
+              setTimeout(() => {
+                const canvas = document.querySelector('.mapboxgl-canvas');
+                if (canvas instanceof HTMLElement) {
+                  canvas.style.visibility = 'visible';
+                  canvas.style.display = 'block';
+                  canvas.style.opacity = '1';
+                }
+              }, 50);
             });
+          }
+          
+          // Remove any View Details buttons
+          const viewDetailsBtn = popupElement.querySelector('.view-facility-btn, button.view-details');
+          if (viewDetailsBtn instanceof HTMLElement) {
+            viewDetailsBtn.style.display = 'none';
+            viewDetailsBtn.style.visibility = 'hidden';
+            viewDetailsBtn.style.opacity = '0';
           }
         }
       }, 50);

@@ -88,3 +88,76 @@ body.show-map-markers .custom-marker,
 .map-loaded .mapboxgl-map {
   contain: content;
 }
+
+/* Fixed styles to ensure map remains visible */
+.mapboxgl-map {
+  visibility: visible !important;
+  display: block !important;
+  opacity: 1 !important;
+}
+
+.mapboxgl-canvas-container,
+.mapboxgl-canvas {
+  visibility: visible !important;
+  display: block !important;
+  opacity: 1 !important;
+}
+
+/* Hide the "View Details" button in popups */
+.view-facility-btn,
+button.view-details,
+.facility-popup-content button {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* Hide the floating facility card in the top-left */
+.fixed-orange-marker:not(.custom-marker):not(.mapboxgl-marker):not(.emergency-marker):not(.hero-marker) {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+}
+
+/* Preserve only the legitimate marker in the hero section */
+.hero-marker {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* Allow facility popups to be properly sized */
+.facility-popup {
+  max-width: 300px !important;
+}
+
+/* Properly position and style highlighted (green) markers */
+.mapboxgl-marker[data-highlighted="true"],
+.custom-marker[data-highlighted="true"],
+.emergency-marker[data-highlighted="true"] {
+  background-color: #10B981 !important;
+  width: 28px !important;
+  height: 28px !important;
+  transform: translate(-50%, -50%) scale(1.3) !important;
+  z-index: 10002 !important;
+  box-shadow: 0 0 15px rgba(16, 185, 129, 0.8) !important;
+  border: 2px solid white !important;
+}
+
+/* Ensure map is always visible after popups are closed */
+body.markers-forced .mapboxgl-canvas {
+  visibility: visible !important;
+  display: block !important;
+  opacity: 1 !important;
+}
+
+/* Remove the floating info box that appears at the top of the map */
+.fixed-info-card,
+.facility-info-card,
+.floating-facility-card {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}

@@ -19,6 +19,28 @@ export const usePopupClickHandler = () => {
         if (popup) {
           // Remove the popup from the DOM
           popup.remove();
+          
+          // Trigger a custom event to notify that a popup was closed
+          document.dispatchEvent(new CustomEvent('mapbox.popup.closed'));
+          
+          // Ensure the map is visible
+          setTimeout(() => {
+            const mapCanvas = document.querySelector('.mapboxgl-canvas');
+            if (mapCanvas instanceof HTMLElement) {
+              mapCanvas.style.visibility = 'visible';
+              mapCanvas.style.display = 'block';
+              mapCanvas.style.opacity = '1';
+            }
+            
+            // Force all markers to be visible
+            document.querySelectorAll('.mapboxgl-marker, .custom-marker').forEach(marker => {
+              if (marker instanceof HTMLElement) {
+                marker.style.visibility = 'visible';
+                marker.style.display = 'block';
+                marker.style.opacity = '1';
+              }
+            });
+          }, 50);
         }
         
         return;
@@ -34,6 +56,8 @@ export const usePopupClickHandler = () => {
         if (popup instanceof HTMLElement) {
           popup.style.pointerEvents = 'auto';
           popup.style.zIndex = '10000';
+          popup.style.visibility = 'visible';
+          popup.style.display = 'block';
           
           // Make sure close buttons are clickable
           const closeButton = popup.querySelector('.mapboxgl-popup-close-button');
@@ -45,12 +69,38 @@ export const usePopupClickHandler = () => {
       });
     };
     
+    // Add handler for custom popup closed event
+    const handlePopupClosed = () => {
+      console.log('Popup closed, ensuring map visibility');
+      
+      // Find map canvas
+      const mapCanvas = document.querySelector('.mapboxgl-canvas');
+      if (mapCanvas instanceof HTMLElement) {
+        mapCanvas.style.visibility = 'visible';
+        mapCanvas.style.display = 'block';
+        mapCanvas.style.opacity = '1';
+      }
+      
+      // Show all markers
+      document.querySelectorAll('.mapboxgl-marker, .custom-marker').forEach(marker => {
+        if (marker instanceof HTMLElement) {
+          marker.style.visibility = 'visible';
+          marker.style.display = 'block';
+          marker.style.opacity = '1';
+        }
+      });
+    };
+    
+    // Listen for custom popup closed event
+    document.addEventListener('mapbox.popup.closed', handlePopupClosed);
+    
     // Run periodically to ensure popups stay clickable
     const interval = setInterval(ensurePopupsAreClickable, 1000);
     
     // Cleanup
     return () => {
       document.removeEventListener('click', handleDocumentClick, true);
+      document.removeEventListener('mapbox.popup.closed', handlePopupClosed);
       clearInterval(interval);
     };
   }, []);
