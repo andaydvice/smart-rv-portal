@@ -19,15 +19,7 @@ export function setupEmergencyMarkerListeners(onMarkerClick: (facilityId: string
     
     console.log('Emergency marker clicked:', facilityId, skipPopup ? '(skipping popup)' : '');
     
-    // If the skipPopup flag is set, we only want to update the facility selection
-    // without showing a popup (useful when detail panel is already open)
-    if (skipPopup) {
-      if (window.hasDetailPanelOpen) {
-        closeAllEmergencyPopups();
-      }
-    }
-    
-    // Always call the click handler to update application state
+    // Simply call the click handler to update application state
     onMarkerClick(facilityId);
   }
   
@@ -60,7 +52,7 @@ export function setupEmergencyMarkerListeners(onMarkerClick: (facilityId: string
 
 // Function to close all emergency popups
 export function closeAllEmergencyPopups() {
-  document.querySelectorAll('.emergency-popup').forEach(popup => {
+  document.querySelectorAll('.emergency-popup, .mapboxgl-popup').forEach(popup => {
     if (popup.parentNode) {
       popup.parentNode.removeChild(popup);
     }

@@ -27,6 +27,11 @@ export function forceExistingMarkersVisible() {
       marker.style.pointerEvents = 'auto';
       marker.style.cursor = 'pointer';
       
+      // Remove any transform that could cause movement
+      if (marker.style.transform && marker.style.transform.includes('translate3d')) {
+        marker.style.transform = 'translate(-50%, -50%)';
+      }
+      
       // Mark as processed
       marker.setAttribute('data-forced-visible', 'true');
       mapMarkersStyled++;
@@ -66,26 +71,17 @@ export function enhanceMarkerClickability() {
     if (marker instanceof HTMLElement && !marker.getAttribute('data-has-click')) {
       marker.setAttribute('data-has-click', 'true');
       
-      // Use event delegation for better performance
+      // Direct click handler that prevents event propagation
       marker.addEventListener('click', (e) => {
         e.stopPropagation();
+        e.preventDefault();
         
         const facilityId = marker.getAttribute('data-facility-id');
         if (!facilityId) return;
         
         console.log('Marker clicked with enhanced handler:', facilityId);
         
-        // Create and dispatch a synthetic click event to facility view button
-        const viewBtnSelector = `.view-facility-btn[data-facility-id="${facilityId}"]`;
-        
-        // First, try to find and click the direct view button
-        const viewBtn = document.querySelector(viewBtnSelector);
-        if (viewBtn) {
-          (viewBtn as HTMLElement).click();
-          return;
-        }
-        
-        // If no button is found, create and dispatch a custom event
+        // Dispatch the custom event for facility selection
         document.dispatchEvent(new CustomEvent('emergency-marker-detail-view', {
           bubbles: true,
           detail: { facilityId }

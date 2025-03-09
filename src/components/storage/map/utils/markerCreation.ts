@@ -24,7 +24,7 @@ export function createFacilityMarker(
     cursor: pointer !important;
     box-shadow: ${isHighlighted ? '0 0 20px rgba(16, 185, 129, 0.8)' : '0 0 10px rgba(0,0,0,0.8)'} !important;
     position: absolute !important;
-    transform: translate(-50%, -50%) scale(${isHighlighted ? 1.2 : 1}) !important;
+    transform: translate(-50%, -50%) !important;
     z-index: ${isHighlighted ? 9999 : 9998} !important;
     visibility: visible !important;
     display: block !important;
@@ -42,7 +42,8 @@ export function createFacilityMarker(
     closeOnClick: false,
     maxWidth: '300px',
     className: 'facility-popup',
-    offset: [0, -15]
+    offset: [0, -15],
+    anchor: 'bottom'
   });
   
   // Set rich popup content
@@ -55,67 +56,32 @@ export function createFacilityMarker(
     </div>
   `);
 
-  // Create and configure marker
+  // Create and configure marker - do NOT use offset or other settings that could cause movement
   const marker = new mapboxgl.Marker({
     element: el,
-    anchor: 'center'
+    anchor: 'center',
+    pitchAlignment: 'auto',
+    rotationAlignment: 'auto'
   })
   .setLngLat(coordinates)
   .setPopup(popup);
 
   // Ensure marker gets added to map
   if (map) {
-    const addMarkerWithRetry = (retries = 3) => {
-      try {
-        if (!marker.getElement().isConnected) {
-          marker.addTo(map);
-        }
-      } catch (err) {
-        console.error(`Marker addition attempt failed:`, err);
-        if (retries > 0) {
-          setTimeout(() => addMarkerWithRetry(retries - 1), 100);
-        }
-      }
-    };
-
-    addMarkerWithRetry();
+    marker.addTo(map);
   }
 
   // Handle marker click with direct handler
   el.addEventListener('click', (e) => {
     e.stopPropagation();
+    e.preventDefault();
+    
     console.log(`Direct marker click detected for facility ${facility.id}`);
     
-    // First trigger the state update
+    // Simply call the onClick handler to update application state
     onClick(facility.id);
     
-    // Then handle popup visibility
-    if (!popup.isOpen()) {
-      popup.addTo(map);
-    }
-    
-    // Force popup to be visible and interactive
-    requestAnimationFrame(() => {
-      const popupEl = popup.getElement();
-      if (popupEl) {
-        popupEl.style.cssText = `
-          z-index: 10000 !important;
-          visibility: visible !important;
-          display: block !important;
-          opacity: 1 !important;
-          pointer-events: all !important;
-        `;
-        
-        const viewButton = popupEl.querySelector('.view-facility-btn');
-        if (viewButton) {
-          viewButton.addEventListener('click', (e) => {
-            e.stopPropagation();
-            e.preventDefault();
-            onClick(facility.id);
-          });
-        }
-      }
-    });
+    // Don't manipulate popups directly here - let the state change handle display updates
   });
 
   return marker;

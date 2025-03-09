@@ -25,34 +25,17 @@ export const useMarkerClickHandlers = () => {
   ): ((e: MouseEvent) => void) => {
     // Define a more robust click handler that won't be garbage collected
     const handleMarkerClick = (e: MouseEvent) => {
+      // Prevent default behavior and stop propagation to prevent map movement
       e.preventDefault();
       e.stopPropagation();
       
       console.log(`Marker clicked for: ${facilityName} (ID: ${facilityId})`);
       
-      // Call the click handler first to update state
+      // Call the click handler to update state first
       onMarkerClick(facilityId);
       
-      // Then open the popup if not already open
-      if (!marker.getPopup().isOpen()) {
-        marker.togglePopup();
-      }
-      
-      // Force the popup to stay open with a delay
-      setTimeout(() => {
-        if (!marker.getPopup().isOpen()) {
-          marker.togglePopup();
-        }
-        
-        // Ensure popup is visible and clickable
-        const popupElement = document.querySelector(`.mapboxgl-popup[data-facility-id="${facilityId}"]`);
-        if (popupElement instanceof HTMLElement) {
-          popupElement.style.zIndex = '1100';
-          popupElement.style.visibility = 'visible';
-          popupElement.style.display = 'block';
-          popupElement.style.pointerEvents = 'all';
-        }
-      }, 50);
+      // Do not toggle or manipulate the popup here - let the state update handle it
+      // This prevents markers from moving unexpectedly
     };
     
     return handleMarkerClick;
