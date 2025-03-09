@@ -1,3 +1,4 @@
+
 import { Container } from "@/components/ui/container";
 import StorageFacilitiesMap from "@/components/storage/StorageFacilitiesMap";
 import Navbar from "@/components/Navbar";
@@ -7,6 +8,7 @@ import { useEffect } from 'react';
 import { applyAllEmergencyFixes } from "@/utils/emergency-styles/combined";
 import { forceMapMarkersVisible } from "@/utils/markers";
 import "../styles/marker-fix.css";
+import "../styles/emergency-marker-fix.css";
 
 export default function StorageFacilities() {
   useEffect(() => {

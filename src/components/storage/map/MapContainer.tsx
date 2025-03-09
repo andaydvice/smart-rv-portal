@@ -1,3 +1,4 @@
+
 import React, { useEffect, useCallback, useMemo } from 'react';
 import { useMap } from './MapContext';
 import MapControls from './MapControls';
@@ -27,6 +28,13 @@ const MapContainer: React.FC<MapContainerProps> = ({
     if (map) {
       (window as any).mapInstance = map;
       document.dispatchEvent(new CustomEvent('mapboxgl.map.created', { detail: { map } }));
+      
+      // Explicitly set map container to visible
+      const container = map.getContainer();
+      if (container) {
+        container.style.visibility = 'visible';
+        container.style.opacity = '1';
+      }
     }
     
     return () => {
@@ -48,6 +56,14 @@ const MapContainer: React.FC<MapContainerProps> = ({
   useEffect(() => {
     if (map && mapLoaded) {
       document.body.classList.add('map-loaded');
+      
+      // Set map container to be explicitly visible
+      const container = map.getContainer();
+      if (container) {
+        container.style.visibility = 'visible';
+        container.style.opacity = '1';
+        container.style.display = 'block';
+      }
       
       // Force visibility checks
       const enhanceVisibility = () => {
@@ -94,7 +110,8 @@ const MapContainer: React.FC<MapContainerProps> = ({
         style={{ 
           minHeight: '600px',
           opacity: mapLoaded ? 1 : 0,
-          transition: 'opacity 0.3s ease-in-out'
+          transition: 'opacity 0.3s ease-in-out',
+          visibility: 'visible'
         }}
       />
       

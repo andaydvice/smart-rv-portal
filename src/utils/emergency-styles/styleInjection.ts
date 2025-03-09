@@ -39,6 +39,7 @@ export function injectEmergencyStyles() {
       border: 3px solid white !important;
       box-shadow: 0 0 15px rgba(249,115,22,0.8) !important;
       transform: translate(-50%, -50%) !important;
+      animation: pulse-marker 1.5s infinite ease-in-out !important;
     }
     
     /* Pulsing animation */
@@ -52,10 +53,6 @@ export function injectEmergencyStyles() {
       0% { transform: scale(1); }
       50% { transform: scale(1.1); }
       100% { transform: scale(1); }
-    }
-    
-    .emergency-marker {
-      animation: pulse-marker 1.5s infinite ease-in-out;
     }
     
     .fixed-orange-marker {
@@ -89,24 +86,6 @@ export function injectEmergencyStyles() {
     .mapboxgl-map {
       visibility: visible !important;
       opacity: 1 !important;
-    }
-    
-    /* Style marker buttons */
-    .view-facility-btn {
-      background-color: #F97316 !important;
-      color: white !important;
-      border: none !important;
-      padding: 8px 12px !important;
-      border-radius: 4px !important;
-      cursor: pointer !important;
-      font-weight: bold !important;
-      margin-top: 8px !important;
-      display: block !important;
-      width: 100% !important;
-    }
-    
-    .view-facility-btn:hover {
-      background-color: #EA580C !important;
     }
     
     /* Add visibility to header markers */
