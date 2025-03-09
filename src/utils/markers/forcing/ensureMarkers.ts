@@ -73,10 +73,10 @@ export function ensureMarkersOnMap(map: mapboxgl.Map, facilities: StorageFacilit
       marker.addTo(map);
       
       // Track in global store for future reference
-      if (!window._persistentMarkers) {
-        window._persistentMarkers = {};
+      if (!(window as any)._persistentMarkers) {
+        (window as any)._persistentMarkers = {};
       }
-      window._persistentMarkers[facility.id] = marker;
+      (window as any)._persistentMarkers[facility.id] = marker;
       
       createdCount++;
     } catch (error) {

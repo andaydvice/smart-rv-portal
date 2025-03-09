@@ -94,6 +94,13 @@ body.show-map-markers .custom-marker,
   visibility: visible !important;
   display: block !important;
   opacity: 1 !important;
+  position: absolute !important;
+  top: 0 !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  height: 100% !important;
+  width: 100% !important;
 }
 
 .mapboxgl-canvas-container,
@@ -101,6 +108,8 @@ body.show-map-markers .custom-marker,
   visibility: visible !important;
   display: block !important;
   opacity: 1 !important;
+  width: 100% !important;
+  height: 100% !important;
 }
 
 /* Hide the "View Details" button in popups */
@@ -172,4 +181,26 @@ body.markers-forced .mapboxgl-canvas {
   visibility: hidden !important;
   opacity: 0 !important;
   pointer-events: none !important;
+}
+
+/* CRITICAL FIX: Enforce map container visibility */
+.h-\[600px\] {
+  position: relative !important;
+  min-height: 600px !important;
+  height: 600px !important;
+  overflow: hidden !important;
+}
+
+/* Make sure map container is properly structured */
+.relative.w-full.h-full, 
+.mapboxgl-map, 
+.mapboxgl-canvas-container {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  visibility: visible !important;
+  display: block !important;
+  opacity: 1 !important;
 }

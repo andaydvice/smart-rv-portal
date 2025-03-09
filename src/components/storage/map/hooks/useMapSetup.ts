@@ -1,5 +1,4 @@
-
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { StorageFacility } from '../../types';
 import { fitMapToBounds } from '../utils/mapBounds';
 
@@ -10,6 +9,9 @@ export const useMapSetup = (map: mapboxgl.Map | null,
                             mapLoaded: boolean, 
                             validFacilities: StorageFacility[], 
                             selectedState: string | null) => {
+  
+  // Keep track of whether we've fitted the bounds
+  const boundsSetRef = useRef(false);
   
   // Make map instance globally available
   useEffect(() => {
@@ -24,6 +26,14 @@ export const useMapSetup = (map: mapboxgl.Map | null,
         container.style.opacity = '1';
         container.style.display = 'block';
       }
+      
+      // Force map to resize and redraw
+      setTimeout(() => {
+        if (map) {
+          map.resize();
+          console.log('Map resize triggered');
+        }
+      }, 300);
       
       // Add event listener for popup close events
       map.on('popupclose', () => {
@@ -56,12 +66,23 @@ export const useMapSetup = (map: mapboxgl.Map | null,
 
   // Update map bounds when facilities change
   useEffect(() => {
-    if (map && mapLoaded && validFacilities.length > 0) {
+    if (map && mapLoaded && validFacilities.length > 0 && !boundsSetRef.current) {
       console.log(`Fitting map to bounds with ${validFacilities.length} valid coordinates`);
       
       // Fix: Pass all required arguments to fitMapToBounds
       // The function expects (map, facilities, padding, maxZoom)
       fitMapToBounds(map, validFacilities, 50, 10);
+      
+      // Mark bounds as set to avoid repeated fitting
+      boundsSetRef.current = true;
+      
+      // Force map re-render
+      setTimeout(() => {
+        if (map) {
+          map.resize();
+          console.log('Map bounds set and resize triggered');
+        }
+      }, 500);
     }
   }, [validFacilities, mapLoaded, map, selectedState]);
 

@@ -6,39 +6,51 @@ import Layout from "@/components/layout/Layout";
 import { Warehouse } from "lucide-react";
 import { useEffect } from 'react';
 import { applyAllEmergencyFixes } from "@/utils/emergency-styles/combined";
-import { forceMapMarkersVisible, testMarkersVisibility, ensureMarkersExist } from "@/utils/markers";
+import { forceMapMarkersVisible, testMarkersVisibility, ensureMarkersExist, ensureMapVisible } from "@/utils/markers";
 import "../styles/marker-fix.css";
 import "../styles/emergency-marker-fix.css";
 import "../styles/map-optimizations.css";
 
 export default function StorageFacilities() {
   useEffect(() => {
-    console.log("StorageFacilities: EMERGENCY FIX - Component mounted");
+    console.log("StorageFacilities: Component mounted, applying fixes");
     
     // Signal that we're on the storage facilities page
-    window.isStorageFacilitiesPage = true;
+    (window as any).isStorageFacilitiesPage = true;
     
     // Apply all marker visibility fixes
     const cleanup = applyAllEmergencyFixes();
     
     // Force markers to be visible - run multiple times with different delays
     forceMapMarkersVisible();
+    
+    // Create multiple timeouts to ensure markers stay visible during page load
     const forceIntervals = [100, 300, 500, 1000, 2000, 5000].map(delay => 
-      setTimeout(forceMapMarkersVisible, delay)
+      setTimeout(() => {
+        console.log(`Running marker visibility check at ${delay}ms`);
+        forceMapMarkersVisible();
+        ensureMapVisible();
+      }, delay)
     );
     
+    // Add class to document for CSS targeting
+    document.body.classList.add('storage-facilities-page');
+    document.body.classList.add('map-page-active');
+    
     // Add event listener for map creation to ensure markers are visible
-    document.addEventListener('mapboxgl.map.created', (e: any) => {
+    const handleMapCreated = (e: any) => {
       console.log('Map created - ensuring markers are visible');
       const map = e.detail.map;
       
       // Wait for facilities to be loaded, then ensure markers exist
       setTimeout(() => {
-        if (window.mapFacilities && window.mapFacilities.length > 0) {
-          ensureMarkersExist(map, window.mapFacilities);
+        if ((window as any).mapFacilities && (window as any).mapFacilities.length > 0) {
+          ensureMarkersExist(map, (window as any).mapFacilities);
         }
       }, 2000);
-    });
+    };
+    
+    document.addEventListener('mapboxgl.map.created', handleMapCreated);
     
     // Run marker visibility test after the page has loaded
     const testTimeout = setTimeout(() => {
@@ -47,11 +59,13 @@ export default function StorageFacilities() {
     
     // Clean up
     return () => {
-      window.isStorageFacilitiesPage = false;
+      (window as any).isStorageFacilitiesPage = false;
       cleanup();
       forceIntervals.forEach(timeout => clearTimeout(timeout));
       clearTimeout(testTimeout);
-      document.removeEventListener('mapboxgl.map.created', () => {});
+      document.removeEventListener('mapboxgl.map.created', handleMapCreated);
+      document.body.classList.remove('storage-facilities-page');
+      document.body.classList.remove('map-page-active');
     };
   }, []);
 

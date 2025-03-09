@@ -48,7 +48,7 @@ export function createFacilityMarker(
   // Set popup data attribute for CSS targeting
   popup.addClassName(`popup-${facility.id}`);
   
-  // FIX: Properly populate popup content with actual facility data
+  // Properly populate popup content with actual facility data
   popup.setHTML(`
     <div class="facility-popup-content" data-facility-id="${facility.id}">
       <h3 class="text-lg font-semibold mb-1">${facility.name || 'Unnamed Facility'}</h3>
@@ -63,26 +63,43 @@ export function createFacilityMarker(
     element: el,
     anchor: 'center'
   })
-  .setLngLat(coordinates)
-  .setPopup(popup);
+  .setLngLat(coordinates);
+  
+  // Add popup to marker
+  marker.setPopup(popup);
 
-  // Ensure marker gets added to map
-  if (map) {
-    try {
+  // Try to add marker to map immediately
+  try {
+    if (map && map.loaded()) {
       marker.addTo(map);
-    } catch (err) {
-      console.error(`Failed to add marker for ${facility.name}:`, err);
-      // Retry once after a short delay
+      console.log(`Added marker for ${facility.name}`);
+    } else {
+      // If map isn't loaded yet, wait and try again
+      console.log(`Map not loaded, delaying marker addition for ${facility.id}`);
       setTimeout(() => {
         try {
-          if (!marker.getElement().isConnected) {
+          if (map && !el.isConnected) {
             marker.addTo(map);
+            console.log(`Added delayed marker for ${facility.id}`);
           }
         } catch (retryErr) {
           console.error(`Retry failed for marker ${facility.id}:`, retryErr);
         }
-      }, 100);
+      }, 500);
     }
+  } catch (err) {
+    console.error(`Failed to add marker for ${facility.name}:`, err);
+    // Retry once after a longer delay
+    setTimeout(() => {
+      try {
+        if (map && !el.isConnected) {
+          marker.addTo(map);
+          console.log(`Added retry marker for ${facility.id}`);
+        }
+      } catch (retryErr) {
+        console.error(`Retry failed for marker ${facility.id}:`, retryErr);
+      }
+    }, 1000);
   }
 
   // Add click handler to the marker element
