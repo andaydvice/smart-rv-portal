@@ -1,193 +1,110 @@
 
-import { useState, useCallback, useEffect, useRef } from 'react';
-import mapboxgl from 'mapbox-gl';
+import { useEffect } from 'react';
 import { StorageFacility } from '../../types';
-import { useMarkerCreation, useMarkerHighlight, useMarkerPersistence } from './marker';
+import { 
+  injectEmergencyMarkerStyles,
+  createEmergencyMarkers,
+  setupEmergencyMarkerListeners
+} from '@/utils/markers';
 
-interface UseMarkerManagementProps {
-  map: mapboxgl.Map;
-  facilities: StorageFacility[];
-  highlightedFacility: string | null;
-  onMarkerClick: (facilityId: string) => void;
-}
-
-interface MarkerStats {
-  markersCreated: number;
-  skippedFacilities: number;
-  processedNYFacilities: number;
-  totalFacilities: number;
-  totalNYFacilities: number;
-}
-
-interface MarkerError {
-  facilityId: string;
-  facilityName: string;
-  error: Error;
-  timestamp: number;
-  type: string;
-  recovered: boolean;
-}
-
-export const useMarkerManagement = ({
-  map,
-  facilities,
-  highlightedFacility,
-  onMarkerClick
-}: UseMarkerManagementProps) => {
-  const [stats, setStats] = useState<MarkerStats>({
-    markersCreated: 0,
-    skippedFacilities: 0,
-    processedNYFacilities: 0,
-    totalFacilities: 0,
-    totalNYFacilities: 0
-  });
+/**
+ * Hook to handle marker creation and management
+ */
+export const useMarkerManagement = (
+  map: mapboxgl.Map | null, 
+  mapLoaded: boolean, 
+  validFacilities: StorageFacility[], 
+  onMarkerClick: (facilityId: string) => void
+) => {
   
-  const [errors, setErrors] = useState<MarkerError[]>([]);
-  
-  // Track which facility IDs we've already processed
-  const processedFacilityIds = useRef<Set<string>>(new Set());
-  // Track the last time we created markers
-  const lastCreationTime = useRef<number>(0);
-  
-  // Use composable hooks for specific marker functionality
-  const { markers, createMarkers } = useMarkerCreation({ 
-    map, 
-    facilities, 
-    highlightedFacility, 
-    onMarkerClick 
-  });
-  
-  // Use marker highlight hook
-  useMarkerHighlight({ 
-    map, 
-    facilities, 
-    highlightedFacility 
-  });
-  
-  // Use marker persistence hook to ensure markers stay visible
-  useMarkerPersistence({ map });
-  
-  // Optimized version of marker visibility forcing
-  const forceMarkerVisibility = useCallback(() => {
-    // Apply visibility optimization to all markers
-    const allMarkers = document.querySelectorAll('.mapboxgl-marker, .custom-marker');
-    
-    // Skip if no markers or if we've recently processed
-    if (allMarkers.length === 0) return;
-    
-    // Track which markers we actually changed
-    let updatedCount = 0;
-    
-    // Process in batches for better performance
-    allMarkers.forEach(marker => {
-      if (marker instanceof HTMLElement && !marker.hasAttribute('data-visible')) {
-        // Add data attribute for CSS rules to apply
-        marker.setAttribute('data-visible', 'true');
-        updatedCount++;
-      }
-    });
-    
-    // Only log if we made actual changes
-    if (updatedCount > 0 && process.env.NODE_ENV === 'development') {
-      console.log(`Force-enabled visibility on ${updatedCount} markers`);
-    }
-  }, []);
-  
-  // Track marker errors with deduplication
-  const addError = useCallback((facility: StorageFacility, error: Error, type: string) => {
-    setErrors(prev => {
-      // Check if this exact error already exists
-      const exists = prev.some(e => 
-        e.facilityId === facility.id && 
-        e.type === type && 
-        e.error.message === error.message &&
-        !e.recovered
-      );
-      
-      if (exists) return prev;
-      
-      // Add new error
-      return [...prev, {
-        facilityId: facility.id,
-        facilityName: facility.name,
-        error,
-        timestamp: Date.now(),
-        type,
-        recovered: false
-      }];
-    });
-  }, []);
-  
-  // Check if a facility has errors
-  const hasErrorForFacility = useCallback((facilityId: string) => {
-    return errors.some(e => e.facilityId === facilityId && !e.recovered);
-  }, [errors]);
-  
-  // Mark errors as recovered
-  const markErrorAsRecovered = useCallback((facilityId: string) => {
-    setErrors(prev => prev.map(e => 
-      e.facilityId === facilityId ? { ...e, recovered: true } : e
-    ));
-  }, []);
-  
-  // Throttle error recovery attempts
-  const facilityRecoveryAttempts = useRef<Map<string, number>>(new Map());
-  
-  const attemptErrorRecovery = useCallback((facilityId: string) => {
-    const attempts = facilityRecoveryAttempts.current.get(facilityId) || 0;
-    
-    // Limit recovery attempts to prevent infinite loops
-    if (attempts >= 3) {
-      console.log(`Maximum recovery attempts reached for facility ${facilityId}`);
-      return false;
-    }
-    
-    facilityRecoveryAttempts.current.set(facilityId, attempts + 1);
-    return true;
-  }, []);
-  
-  // Periodically clean up the errors list to avoid memory issues
+  // Emergency marker creation approach
   useEffect(() => {
-    const cleanupInterval = setInterval(() => {
-      const oneHourAgo = Date.now() - (60 * 60 * 1000);
-      
-      setErrors(prev => {
-        // Keep only recent or unrecovered errors
-        const filtered = prev.filter(e => 
-          !e.recovered || e.timestamp > oneHourAgo
-        );
-        
-        // If we removed any, return the new array
-        if (filtered.length !== prev.length) {
-          return filtered;
-        }
-        
-        // Otherwise keep the same reference
-        return prev;
-      });
-      
-      // Also clean up recovery attempts for facilities we haven't seen in a while
-      const facilityIdsToKeep = new Set(facilities.map(f => f.id));
-      
-      // Remove entries for facilities not in current list
-      facilityRecoveryAttempts.current.forEach((_, id) => {
-        if (!facilityIdsToKeep.has(id)) {
-          facilityRecoveryAttempts.current.delete(id);
-        }
-      });
-    }, 5 * 60 * 1000); // Clean up every 5 minutes
+    if (!map || !mapLoaded || validFacilities.length === 0) return;
     
-    return () => clearInterval(cleanupInterval);
-  }, [facilities]);
-
-  return {
-    stats,
-    errors,
-    createMarkers,
-    forceMarkerVisibility,
-    addError,
-    hasErrorForFacility,
-    markErrorAsRecovered,
-    attemptErrorRecovery
-  };
+    // Inject emergency styles
+    injectEmergencyMarkerStyles();
+    
+    // Set map container to be explicitly visible
+    const container = map.getContainer();
+    if (container) {
+      container.style.visibility = 'visible';
+      container.style.opacity = '1';
+      container.style.display = 'block';
+    }
+    
+    console.log('Creating markers for facilities...');
+    
+    // Create emergency markers and set up listeners
+    // Pass both map and validFacilities as arguments
+    const markerCount = createEmergencyMarkers(map, validFacilities);
+    console.log(`Created ${markerCount} emergency markers`);
+    
+    // Set up event listeners
+    const cleanup = setupEmergencyMarkerListeners(onMarkerClick);
+    
+    // Set up a MutationObserver to watch for popup close buttons
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach(mutation => {
+        if (mutation.type === 'childList') {
+          // Look for newly added popups
+          mutation.addedNodes.forEach(node => {
+            if (node instanceof HTMLElement && node.classList.contains('mapboxgl-popup')) {
+              // Find close button
+              const closeButton = node.querySelector('.mapboxgl-popup-close-button');
+              if (closeButton instanceof HTMLElement) {
+                // Replace with new button to clear old event listeners
+                const newButton = closeButton.cloneNode(true);
+                closeButton.parentNode?.replaceChild(newButton, closeButton);
+                
+                // Add clean event listener to the close button
+                newButton.addEventListener('click', (e) => {
+                  e.stopPropagation();
+                  e.preventDefault();
+                  
+                  // Remove the popup
+                  node.remove();
+                  
+                  // Make sure map is visible
+                  setTimeout(() => {
+                    if (map) {
+                      // Ensure map canvas is visible
+                      const canvas = map.getCanvas();
+                      if (canvas) {
+                        canvas.style.visibility = 'visible';
+                        canvas.style.display = 'block';
+                      }
+                      
+                      // Force all markers to be visible
+                      document.querySelectorAll('.mapboxgl-marker, .custom-marker').forEach(m => {
+                        if (m instanceof HTMLElement) {
+                          m.style.visibility = 'visible';
+                          m.style.display = 'block';
+                          m.style.opacity = '1';
+                        }
+                      });
+                    }
+                  }, 50);
+                });
+              }
+            }
+          });
+        }
+      });
+    });
+    
+    // Start observing the document for popup additions
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true
+    });
+    
+    return () => {
+      cleanup();
+      observer.disconnect();
+      // Remove emergency markers
+      document.querySelectorAll('.emergency-marker').forEach(marker => {
+        if (marker.parentNode) marker.parentNode.removeChild(marker);
+      });
+    };
+  }, [map, mapLoaded, validFacilities, onMarkerClick]);
 };
