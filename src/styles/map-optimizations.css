@@ -1,5 +1,5 @@
 
-/* Critical marker visibility styles */
+/* Critical marker visibility styles - optimized for performance */
 .custom-marker {
   visibility: visible !important;
   display: block !important;
@@ -12,7 +12,7 @@
   will-change: transform !important;
 }
 
-/* Critical popup visibility styles */
+/* Critical popup visibility styles - optimized */
 .mapboxgl-popup {
   z-index: 10000 !important;
   visibility: visible !important;
@@ -38,21 +38,42 @@
   top: 5px !important;
 }
 
-/* Force marker visibility when map is loaded */
+/* Performance optimization class selectors */
 body.map-loaded .mapboxgl-marker,
-body.map-loaded .custom-marker {
+body.map-loaded .custom-marker,
+body.show-map-markers .mapboxgl-marker,
+body.show-map-markers .custom-marker,
+.mapboxgl-marker[data-visible="true"],
+.custom-marker[data-visible="true"],
+.mapboxgl-marker[data-forced="true"],
+.custom-marker[data-forced="true"] {
   visibility: visible !important;
   display: block !important;
   opacity: 1 !important;
 }
 
-/* Ensure map container is visible */
-.mapboxgl-map {
-  height: 100% !important;
-  width: 100% !important;
+/* Hardware acceleration for smooth animations */
+.mapboxgl-marker,
+.custom-marker,
+.mapboxgl-popup {
+  transform: translateZ(0);
+  will-change: transform;
 }
 
-/* Remove outline from canvas */
-.mapboxgl-canvas {
-  outline: none !important;
+/* Reduce paint operations with opacity transitions */
+.mapboxgl-marker,
+.custom-marker {
+  transition: transform 0.2s ease-out;
+}
+
+/* Reduce repaints when hovering */
+.custom-marker:hover,
+.mapboxgl-marker:hover {
+  z-index: 10000 !important;
+}
+
+/* Make marker handling more efficient */
+[data-markers-loading="true"] .mapboxgl-map,
+.map-loaded .mapboxgl-map {
+  contain: content;
 }

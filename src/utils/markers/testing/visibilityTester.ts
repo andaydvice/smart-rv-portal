@@ -1,495 +1,335 @@
 
 import { toast } from "sonner";
 
-/**
- * Interface for marker visibility test results
- */
+// Define types for visibility testing
 export interface MarkerVisibilityTestResult {
   totalMarkers: number;
   visibleMarkers: number;
   hiddenMarkers: number;
-  styleIssues: number;
-  zIndexIssues: number;
-  positionIssues: number;
-  eventIssues: number;
-  details: VisibilityIssueDetail[];
+  issues: VisibilityIssueDetail[];
   timestamp: number;
-  duration: number;
 }
 
-/**
- * Interface for detailed marker visibility issues
- */
 export interface VisibilityIssueDetail {
   elementId: string;
   elementType: string;
-  issueType: 'visibility' | 'display' | 'opacity' | 'zIndex' | 'position' | 'events' | 'other';
+  issueType: "visibility" | "display" | "opacity" | "zIndex" | "position" | "events" | "other";
   description: string;
-  computedStyles?: Partial<CSSStyleDeclaration>;
+  computedStyles: {
+    visibility: string;
+    display: string;
+    opacity: string;
+    zIndex: string;
+    position: string;
+    pointerEvents: string;
+  };
   recommendation: string;
 }
 
-/**
- * Runs a comprehensive test on marker visibility and reports issues
- */
-export function testMarkerVisibility(options?: {
-  showToast?: boolean;
-  logToConsole?: boolean;
-  selector?: string;
+// Configuration options for the visibility test
+interface VisibilityTestOptions {
   fixIssues?: boolean;
-}): MarkerVisibilityTestResult {
-  const startTime = performance.now();
-  const {
-    showToast = true,
-    logToConsole = true,
-    selector = '.mapboxgl-marker, .custom-marker',
-    fixIssues = false
-  } = options || {};
+  showToast?: boolean;
+  logResults?: boolean;
+}
 
-  // Find all markers in the document
-  const markers = document.querySelectorAll(selector);
-  const issues: VisibilityIssueDetail[] = [];
+/**
+ * Tests for marker visibility issues across the application
+ */
+export function testMarkerVisibility(options: VisibilityTestOptions = {}): MarkerVisibilityTestResult {
+  const { fixIssues = false, showToast = true, logResults = true } = options;
   
-  // Count different types of issues
-  let hiddenMarkers = 0;
-  let styleIssues = 0;
-  let zIndexIssues = 0;
-  let positionIssues = 0;
-  let eventIssues = 0;
-
-  // Test each marker
-  markers.forEach((marker, index) => {
-    if (!(marker instanceof HTMLElement)) return;
-    
-    const markerId = marker.id || `unnamed-marker-${index}`;
-    const markerType = marker.className || 'unknown';
-    const computedStyle = window.getComputedStyle(marker);
-    const issues: string[] = [];
-    
-    // Check visibility
-    if (computedStyle.visibility !== 'visible') {
-      issues.push(`visibility: ${computedStyle.visibility}`);
-      hiddenMarkers++;
-    }
-    
-    // Check display
-    if (computedStyle.display === 'none') {
-      issues.push(`display: ${computedStyle.display}`);
-      hiddenMarkers++;
-    }
-    
-    // Check opacity
-    if (parseFloat(computedStyle.opacity) < 0.1) {
-      issues.push(`opacity: ${computedStyle.opacity}`);
-      styleIssues++;
-    }
-    
-    // Check z-index
-    if (parseInt(computedStyle.zIndex) < 1) {
-      issues.push(`zIndex: ${computedStyle.zIndex}`);
-      zIndexIssues++;
-    }
-    
-    // Check position
-    if (computedStyle.position !== 'absolute') {
-      issues.push(`position: ${computedStyle.position}`);
-      positionIssues++;
-    }
-    
-    // Check pointer events
-    if (computedStyle.pointerEvents === 'none') {
-      issues.push(`pointerEvents: ${computedStyle.pointerEvents}`);
-      eventIssues++;
-    }
-    
-    // If there are issues with this marker, add it to the list
-    if (issues.length > 0) {
-      // Determine issue type for categorization
-      let primaryIssueType: 'visibility' | 'display' | 'opacity' | 'zIndex' | 'position' | 'events' | 'other' = 'other';
-      
-      if (computedStyle.visibility !== 'visible') {
-        primaryIssueType = 'visibility';
-      } else if (computedStyle.display === 'none') {
-        primaryIssueType = 'display';
-      } else if (parseFloat(computedStyle.opacity) < 0.1) {
-        primaryIssueType = 'opacity';
-      } else if (parseInt(computedStyle.zIndex) < 1) {
-        primaryIssueType = 'zIndex';
-      } else if (computedStyle.position !== 'absolute') {
-        primaryIssueType = 'position';
-      } else if (computedStyle.pointerEvents === 'none') {
-        primaryIssueType = 'events';
-      }
-      
-      // Create recommendation based on the issue
-      let recommendation = 'Apply forced visibility styles';
-      if (primaryIssueType === 'zIndex') {
-        recommendation = 'Increase z-index to ensure marker is above other elements';
-      } else if (primaryIssueType === 'position') {
-        recommendation = 'Set position to absolute for proper placement';
-      } else if (primaryIssueType === 'events') {
-        recommendation = 'Enable pointer-events for interaction';
-      }
-      
-      // Add to detailed issues list
-      issues.push({
-        elementId: markerId,
-        elementType: markerType,
-        issueType: primaryIssueType,
-        description: `Marker has style issues: ${issues.join(', ')}`,
-        computedStyles: {
-          visibility: computedStyle.visibility,
-          display: computedStyle.display,
-          opacity: computedStyle.opacity,
-          zIndex: computedStyle.zIndex,
-          position: computedStyle.position,
-          pointerEvents: computedStyle.pointerEvents
-        },
-        recommendation
-      });
-      
-      // Apply fixes if requested
-      if (fixIssues) {
-        marker.style.visibility = 'visible';
-        marker.style.display = 'block';
-        marker.style.opacity = '1';
-        marker.style.zIndex = '9999';
-        marker.style.position = 'absolute';
-        marker.style.pointerEvents = 'auto';
-        marker.setAttribute('data-fixed-by-test', 'true');
-      }
-    }
-  });
-
-  // Calculate results
-  const visibleMarkers = markers.length - hiddenMarkers;
-  const endTime = performance.now();
-  const duration = endTime - startTime;
-
+  // Query all potential markers using a single optimized selector
+  const markers = document.querySelectorAll('.mapboxgl-marker, .custom-marker, .emergency-marker, .fixed-orange-marker');
+  
   const result: MarkerVisibilityTestResult = {
     totalMarkers: markers.length,
-    visibleMarkers,
-    hiddenMarkers,
-    styleIssues,
-    zIndexIssues,
-    positionIssues,
-    eventIssues,
-    details: issues,
-    timestamp: Date.now(),
-    duration
+    visibleMarkers: 0,
+    hiddenMarkers: 0,
+    issues: [],
+    timestamp: Date.now()
   };
-
-  // Log results if requested
-  if (logToConsole) {
-    console.group('Marker Visibility Test Results');
-    console.log(`Found ${markers.length} markers, ${visibleMarkers} visible, ${hiddenMarkers} hidden`);
+  
+  // Process in batches for better performance
+  const processBatch = (startIdx: number, batchSize: number) => {
+    const endIdx = Math.min(startIdx + batchSize, markers.length);
     
-    if (issues.length > 0) {
-      console.warn(`Found ${issues.length} markers with visibility issues`);
-      console.table(issues.map(issue => ({
-        id: issue.elementId,
-        type: issue.elementType,
-        issue: issue.issueType,
-        description: issue.description
-      })));
-    } else {
-      console.log('No visibility issues detected');
-    }
-    
-    console.log(`Test completed in ${duration.toFixed(2)}ms`);
-    console.groupEnd();
-  }
-
-  // Show toast notification if requested
-  if (showToast) {
-    if (hiddenMarkers > 0) {
-      toast.error(`Found ${hiddenMarkers} hidden markers out of ${markers.length}`, {
-        description: 'Use the console for detailed information',
-        action: {
-          label: 'Fix Now',
-          onClick: () => testMarkerVisibility({ ...options, fixIssues: true })
+    for (let i = startIdx; i < endIdx; i++) {
+      const marker = markers[i] as HTMLElement;
+      if (!(marker instanceof HTMLElement)) continue;
+      
+      const computedStyle = window.getComputedStyle(marker);
+      const isVisible = 
+        computedStyle.visibility !== 'hidden' && 
+        computedStyle.display !== 'none' && 
+        computedStyle.opacity !== '0';
+      
+      // Count marker visibility
+      if (isVisible) {
+        result.visibleMarkers++;
+      } else {
+        result.hiddenMarkers++;
+        
+        // Determine issue type
+        let issueType: VisibilityIssueDetail['issueType'] = 'other';
+        if (computedStyle.visibility === 'hidden') issueType = 'visibility';
+        else if (computedStyle.display === 'none') issueType = 'display';
+        else if (computedStyle.opacity === '0') issueType = 'opacity';
+        
+        // Add issue to result
+        const issue: VisibilityIssueDetail = {
+          elementId: marker.id || `marker-${i}`,
+          elementType: Array.from(marker.classList).join(' '),
+          issueType,
+          description: `Marker is not visible (${issueType} issue)`,
+          computedStyles: {
+            visibility: computedStyle.visibility,
+            display: computedStyle.display,
+            opacity: computedStyle.opacity,
+            zIndex: computedStyle.zIndex,
+            position: computedStyle.position,
+            pointerEvents: computedStyle.pointerEvents
+          },
+          recommendation: `Set ${issueType} to ensure marker is visible`
+        };
+        
+        result.issues.push(issue);
+        
+        // Fix issues if requested
+        if (fixIssues) {
+          marker.style.cssText += `
+            visibility: visible !important;
+            display: block !important;
+            opacity: 1 !important;
+            z-index: 9999 !important;
+            pointer-events: auto !important;
+            position: absolute !important;
+          `;
+          marker.setAttribute('data-fixed-by-test', 'true');
         }
-      });
-    } else if (markers.length > 0) {
-      toast.success(`All ${markers.length} markers are visible`);
-    } else {
-      toast.warning('No markers found on the page');
+      }
     }
-  }
-
+    
+    // Process next batch if needed
+    if (endIdx < markers.length) {
+      setTimeout(() => processBatch(endIdx, batchSize), 0);
+    } else {
+      // All batches processed, show results
+      if (logResults) {
+        console.log(`Marker Visibility Test: ${result.visibleMarkers}/${result.totalMarkers} markers visible`);
+        
+        if (result.issues.length > 0) {
+          console.warn(`Found ${result.issues.length} visibility issues:`, result.issues);
+        }
+      }
+      
+      if (showToast) {
+        if (result.issues.length > 0) {
+          if (fixIssues) {
+            toast.success(`Fixed ${result.issues.length} marker visibility issues`);
+          } else {
+            toast.warning(`Found ${result.issues.length} marker visibility issues`);
+          }
+        } else if (result.totalMarkers > 0) {
+          toast.success(`All ${result.totalMarkers} markers are visible`);
+        }
+      }
+    }
+  };
+  
+  // Start batch processing with small batches for better performance
+  processBatch(0, 10);
+  
   return result;
 }
 
 /**
- * Periodically runs visibility tests to detect issues in real-time
+ * Setup continuous monitoring of marker visibility
  */
-export function monitorMarkerVisibility(options?: {
-  interval?: number;
-  selector?: string;
-  autoFix?: boolean;
-  showToasts?: boolean;
-}): () => void {
-  const {
-    interval = 2000,
-    selector = '.mapboxgl-marker, .custom-marker',
-    autoFix = false,
-    showToasts = false
-  } = options || {};
-
-  let previousResult: MarkerVisibilityTestResult | null = null;
-  
-  // Run initial test
-  previousResult = testMarkerVisibility({
-    showToast: showToasts,
-    logToConsole: true,
-    selector,
-    fixIssues: autoFix
-  });
-
-  // Set up interval to periodically check
+export function monitorMarkerVisibility(intervalMs = 5000, autoFix = false) {
   const intervalId = setInterval(() => {
-    const result = testMarkerVisibility({
-      showToast: false,
-      logToConsole: false,
-      selector,
-      fixIssues: autoFix
+    testMarkerVisibility({ 
+      fixIssues: autoFix, 
+      showToast: false, 
+      logResults: false 
     });
-    
-    // Only show notifications if something changed
-    if (previousResult && 
-        (previousResult.visibleMarkers !== result.visibleMarkers || 
-         previousResult.totalMarkers !== result.totalMarkers)) {
-      
-      if (showToasts) {
-        if (result.visibleMarkers < previousResult.visibleMarkers) {
-          toast.warning(`Markers disappeared: ${previousResult.visibleMarkers} → ${result.visibleMarkers}`);
-          
-          // Log only if there's a significant change
-          console.warn('Marker visibility decreased:', {
-            before: previousResult,
-            after: result
-          });
-          
-          if (autoFix) {
-            testMarkerVisibility({ showToast: false, fixIssues: true, selector });
-          }
-        } else if (result.totalMarkers > previousResult.totalMarkers) {
-          toast.info(`New markers: ${result.totalMarkers - previousResult.totalMarkers}`);
-        }
-      }
-    }
-    
-    previousResult = result;
-  }, interval);
-
+  }, intervalMs);
+  
   // Return cleanup function
-  return () => {
-    clearInterval(intervalId);
-  };
+  return () => clearInterval(intervalId);
 }
 
 /**
- * Creates a visual debug overlay for markers
+ * Creates a visual debug overlay on map markers for better testing
  */
-export function createMarkerDebugOverlay(): () => void {
-  // Create overlay container
-  const overlay = document.createElement('div');
-  overlay.className = 'marker-debug-overlay';
-  overlay.style.cssText = `
+export function createMarkerDebugOverlay() {
+  // Create a container for the debug overlay
+  const overlayContainer = document.createElement('div');
+  overlayContainer.className = 'marker-debug-overlay';
+  overlayContainer.style.cssText = `
     position: fixed;
-    top: 10px;
-    right: 10px;
-    z-index: 10000;
-    background-color: rgba(0, 0, 0, 0.8);
+    top: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.8);
     color: white;
     padding: 10px;
-    border-radius: 5px;
+    z-index: 10000;
     font-family: monospace;
-    font-size: 12px;
     max-width: 300px;
-    max-height: 400px;
-    overflow: auto;
-    pointer-events: auto;
+    max-height: 80vh;
+    overflow-y: auto;
   `;
   
-  // Add close button
-  const closeButton = document.createElement('button');
-  closeButton.textContent = 'Close';
-  closeButton.style.cssText = `
-    position: absolute;
-    top: 5px;
-    right: 5px;
-    background: #666;
-    border: none;
-    color: white;
-    padding: 2px 5px;
-    border-radius: 3px;
-    cursor: pointer;
+  // Create info panel
+  const infoPanel = document.createElement('div');
+  infoPanel.innerHTML = `
+    <h4>Marker Debug</h4>
+    <p>Total Markers: <span id="total-markers">0</span></p>
+    <p>Visible: <span id="visible-markers">0</span></p>
+    <p>Hidden: <span id="hidden-markers">0</span></p>
+    <button id="fix-markers-btn">Fix All</button>
+    <button id="close-debug-btn">Close</button>
   `;
-  closeButton.addEventListener('click', () => {
-    document.body.removeChild(overlay);
-  });
-  overlay.appendChild(closeButton);
+  overlayContainer.appendChild(infoPanel);
   
-  // Create content container
-  const content = document.createElement('div');
-  content.id = 'marker-debug-content';
-  overlay.appendChild(content);
-  
-  // Add test button
-  const testButton = document.createElement('button');
-  testButton.textContent = 'Run Visibility Test';
-  testButton.style.cssText = `
-    margin-top: 10px;
-    background: #F97316;
-    border: none;
-    color: white;
-    padding: 5px 10px;
-    border-radius: 3px;
-    cursor: pointer;
-    width: 100%;
-  `;
-  testButton.addEventListener('click', () => {
-    const result = testMarkerVisibility({ showToast: true });
-    updateOverlayContent(result);
-  });
-  overlay.appendChild(testButton);
-  
-  // Add fix button
-  const fixButton = document.createElement('button');
-  fixButton.textContent = 'Fix Visibility Issues';
-  fixButton.style.cssText = `
-    margin-top: 5px;
-    background: #10B981;
-    border: none;
-    color: white;
-    padding: 5px 10px;
-    border-radius: 3px;
-    cursor: pointer;
-    width: 100%;
-  `;
-  fixButton.addEventListener('click', () => {
-    const result = testMarkerVisibility({ fixIssues: true, showToast: true });
-    updateOverlayContent(result);
-  });
-  overlay.appendChild(fixButton);
-  
-  // Add to document
-  document.body.appendChild(overlay);
-  
-  // Initial test
-  const initialResult = testMarkerVisibility({ showToast: false });
-  updateOverlayContent(initialResult);
-  
-  // Function to update overlay content
-  function updateOverlayContent(result: MarkerVisibilityTestResult) {
-    const contentElement = document.getElementById('marker-debug-content');
-    if (!contentElement) return;
-    
-    contentElement.innerHTML = `
-      <div>Total markers: ${result.totalMarkers}</div>
-      <div>Visible: ${result.visibleMarkers}</div>
-      <div>Hidden: ${result.hiddenMarkers}</div>
-      <div>Style issues: ${result.styleIssues}</div>
-      <div>Z-Index issues: ${result.zIndexIssues}</div>
-      <div>Position issues: ${result.positionIssues}</div>
-      <div>Event issues: ${result.eventIssues}</div>
-      <div>Last updated: ${new Date().toLocaleTimeString()}</div>
-    `;
-    
-    if (result.details.length > 0) {
-      contentElement.innerHTML += `<div style="margin-top: 10px; font-weight: bold;">Issues:</div>`;
+  // Add highlighting to markers for visibility
+  document.querySelectorAll('.mapboxgl-marker, .custom-marker').forEach((marker, idx) => {
+    if (marker instanceof HTMLElement) {
+      // Add debug outline
+      marker.style.outline = '2px solid red';
+      marker.setAttribute('data-debug-id', `marker-${idx}`);
       
-      const issuesList = document.createElement('ul');
-      issuesList.style.cssText = `
-        margin-top: 5px;
-        padding-left: 20px;
-        font-size: 11px;
+      // Add marker to list in overlay
+      const markerItem = document.createElement('div');
+      markerItem.style.marginTop = '5px';
+      markerItem.style.padding = '3px';
+      markerItem.style.borderTop = '1px solid #444';
+      
+      const computedStyle = window.getComputedStyle(marker);
+      const isVisible = 
+        computedStyle.visibility !== 'hidden' && 
+        computedStyle.display !== 'none' && 
+        computedStyle.opacity !== '0';
+      
+      markerItem.innerHTML = `
+        <div>ID: marker-${idx}</div>
+        <div>Visible: ${isVisible ? '✅' : '❌'}</div>
+        <button data-marker-id="marker-${idx}" class="fix-single-marker">Fix</button>
       `;
       
-      result.details.slice(0, 5).forEach(issue => {
-        const item = document.createElement('li');
-        item.textContent = `${issue.elementId}: ${issue.description}`;
-        issuesList.appendChild(item);
-      });
-      
-      if (result.details.length > 5) {
-        const item = document.createElement('li');
-        item.textContent = `... and ${result.details.length - 5} more issues`;
-        issuesList.appendChild(item);
-      }
-      
-      contentElement.appendChild(issuesList);
+      overlayContainer.appendChild(markerItem);
     }
-  }
-  
-  // Set up periodic updates
-  const updateIntervalId = setInterval(() => {
-    const result = testMarkerVisibility({ showToast: false, logToConsole: false });
-    updateOverlayContent(result);
-  }, 5000);
-  
-  // Return cleanup function
-  return () => {
-    clearInterval(updateIntervalId);
-    if (document.body.contains(overlay)) {
-      document.body.removeChild(overlay);
-    }
-  };
-}
-
-/**
- * Performs a one-time audit of marker visibility and returns a detailed report
- */
-export function auditMarkerVisibility(): string {
-  const result = testMarkerVisibility({
-    showToast: false,
-    logToConsole: false
   });
   
-  let report = `# Marker Visibility Audit Report\n\n`;
-  report += `Generated: ${new Date().toLocaleString()}\n\n`;
-  report += `## Summary\n\n`;
-  report += `- Total markers: ${result.totalMarkers}\n`;
-  report += `- Visible markers: ${result.visibleMarkers}\n`;
-  report += `- Hidden markers: ${result.hiddenMarkers}\n`;
-  report += `- Style issues: ${result.styleIssues}\n`;
-  report += `- Z-Index issues: ${result.zIndexIssues}\n`;
-  report += `- Position issues: ${result.positionIssues}\n`;
-  report += `- Event issues: ${result.eventIssues}\n\n`;
+  // Add to document
+  document.body.appendChild(overlayContainer);
   
-  if (result.details.length > 0) {
-    report += `## Detailed Issues\n\n`;
-    
-    result.details.forEach((issue, index) => {
-      report += `### Issue ${index + 1}: ${issue.elementId}\n\n`;
-      report += `- Type: ${issue.elementType}\n`;
-      report += `- Issue: ${issue.issueType}\n`;
-      report += `- Description: ${issue.description}\n`;
-      report += `- Recommendation: ${issue.recommendation}\n\n`;
+  // Setup event handlers
+  const closeBtn = document.getElementById('close-debug-btn');
+  if (closeBtn) {
+    closeBtn.addEventListener('click', () => {
+      overlayContainer.remove();
       
-      if (issue.computedStyles) {
-        report += `#### Computed Styles\n\n`;
-        Object.entries(issue.computedStyles).forEach(([key, value]) => {
-          if (value) report += `- ${key}: ${value}\n`;
-        });
-        report += `\n`;
-      }
+      // Remove debug outlines
+      document.querySelectorAll('.mapboxgl-marker, .custom-marker').forEach(marker => {
+        if (marker instanceof HTMLElement) {
+          marker.style.outline = '';
+        }
+      });
     });
   }
   
-  report += `## Recommendations\n\n`;
-  
-  if (result.hiddenMarkers > 0) {
-    report += `- Apply the \`forceMapMarkersVisible()\` function to ensure all markers are visible\n`;
-    report += `- Check for any CSS rules that might be hiding markers\n`;
-    report += `- Ensure marker elements have proper z-index values\n`;
-  } else {
-    report += `- No visibility issues detected. Maintain current implementation.\n`;
+  const fixAllBtn = document.getElementById('fix-markers-btn');
+  if (fixAllBtn) {
+    fixAllBtn.addEventListener('click', () => {
+      testMarkerVisibility({ fixIssues: true, showToast: true });
+      
+      // Update counts
+      const result = testMarkerVisibility({ showToast: false, logResults: false });
+      
+      const totalMarkers = document.getElementById('total-markers');
+      const visibleMarkers = document.getElementById('visible-markers');
+      const hiddenMarkers = document.getElementById('hidden-markers');
+      
+      if (totalMarkers) totalMarkers.textContent = result.totalMarkers.toString();
+      if (visibleMarkers) visibleMarkers.textContent = result.visibleMarkers.toString();
+      if (hiddenMarkers) hiddenMarkers.textContent = result.hiddenMarkers.toString();
+    });
   }
   
-  // Log report to console
-  console.info('Marker Visibility Audit Report', report);
+  // Setup fix buttons for individual markers
+  document.querySelectorAll('.fix-single-marker').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const markerId = (e.currentTarget as HTMLElement).getAttribute('data-marker-id');
+      const marker = document.querySelector(`[data-debug-id="${markerId}"]`);
+      
+      if (marker instanceof HTMLElement) {
+        marker.style.cssText += `
+          visibility: visible !important;
+          display: block !important;
+          opacity: 1 !important;
+          z-index: 9999 !important;
+          pointer-events: auto !important;
+          position: absolute !important;
+        `;
+        marker.setAttribute('data-fixed-by-debug', 'true');
+        toast.success(`Fixed marker ${markerId}`);
+      }
+    });
+  });
   
+  // Update counts initially
+  const result = testMarkerVisibility({ showToast: false, logResults: false });
+  
+  const totalMarkers = document.getElementById('total-markers');
+  const visibleMarkers = document.getElementById('visible-markers');
+  const hiddenMarkers = document.getElementById('hidden-markers');
+  
+  if (totalMarkers) totalMarkers.textContent = result.totalMarkers.toString();
+  if (visibleMarkers) visibleMarkers.textContent = result.visibleMarkers.toString();
+  if (hiddenMarkers) hiddenMarkers.textContent = result.hiddenMarkers.toString();
+  
+  return overlayContainer;
+}
+
+/**
+ * Performs a comprehensive audit of marker visibility
+ * Returns a detailed report
+ */
+export function auditMarkerVisibility(): string {
+  const result = testMarkerVisibility({ showToast: false, logResults: false });
+  
+  let report = `
+MARKER VISIBILITY AUDIT
+======================
+Time: ${new Date(result.timestamp).toLocaleTimeString()}
+
+SUMMARY:
+- Total markers: ${result.totalMarkers}
+- Visible markers: ${result.visibleMarkers}
+- Hidden markers: ${result.hiddenMarkers}
+- Visibility rate: ${result.totalMarkers > 0 ? Math.round((result.visibleMarkers / result.totalMarkers) * 100) : 0}%
+
+${result.issues.length > 0 ? `ISSUES FOUND (${result.issues.length}):` : 'No visibility issues found!'}
+`;
+
+  // Add detailed issues
+  result.issues.forEach((issue, idx) => {
+    report += `
+Issue #${idx + 1}: ${issue.elementType} (${issue.elementId})
+Type: ${issue.issueType}
+Description: ${issue.description}
+Computed styles:
+- visibility: ${issue.computedStyles.visibility}
+- display: ${issue.computedStyles.display}
+- opacity: ${issue.computedStyles.opacity}
+- z-index: ${issue.computedStyles.zIndex}
+- position: ${issue.computedStyles.position}
+- pointer-events: ${issue.computedStyles.pointerEvents}
+Recommendation: ${issue.recommendation}
+`;
+  });
+  
+  console.log(report);
   return report;
 }

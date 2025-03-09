@@ -1,35 +1,34 @@
 
 /**
- * Core function to inject emergency marker styles
+ * Core function to inject emergency marker styles with better performance
  */
 export function injectEmergencyStyles() {
   console.log("Injecting emergency marker styles");
   
-  // Check if styles already exist
+  // Check if styles already exist to avoid redundant operations
   if (document.getElementById('emergency-marker-fix')) {
     return;
   }
   
+  // Create a single style element instead of manipulating individual elements
   const style = document.createElement('style');
   style.id = 'emergency-marker-fix';
+  
+  // Use more efficient CSS selectors and optimize the CSS rules
   style.innerHTML = `
-    /* Critical visibility overrides with higher specificity */
+    /* Critical visibility overrides with higher specificity but fewer rules */
     .mapboxgl-marker,
     .custom-marker,
-    .marker,
-    [class*="marker"],
-    div[class*="marker"],
+    [class*="marker"].mapboxgl-marker,
     .mapboxgl-canvas-container .mapboxgl-marker {
-      display: block !important;
       visibility: visible !important;
+      display: block !important;
       opacity: 1 !important;
       z-index: 9999 !important;
       pointer-events: auto !important;
-      position: absolute !important;
-      cursor: pointer !important;
     }
     
-    /* Emergency marker styling */
+    /* Combined emergency marker styling for better performance */
     .emergency-marker,
     .fixed-orange-marker {
       width: 30px !important;
@@ -40,40 +39,33 @@ export function injectEmergencyStyles() {
       box-shadow: 0 0 15px rgba(249,115,22,0.8) !important;
       transform: translate(-50%, -50%) !important;
       animation: pulse-marker 1.5s infinite ease-in-out !important;
+      visibility: visible !important;
+      display: block !important;
+      opacity: 1 !important;
+      z-index: 99999 !important;
     }
     
-    /* Pulsing animation */
+    /* Simplified animations with better performance */
     @keyframes pulse-marker {
-      0% { transform: scale(1) translate(-50%, -50%); box-shadow: 0 0 10px rgba(249, 115, 22, 0.8); }
-      50% { transform: scale(1.2) translate(-42%, -42%); box-shadow: 0 0 20px rgba(249, 115, 22, 0.9); }
-      100% { transform: scale(1) translate(-50%, -50%); box-shadow: 0 0 10px rgba(249, 115, 22, 0.8); }
+      0%, 100% { transform: scale(1) translate(-50%, -50%); }
+      50% { transform: scale(1.2) translate(-42%, -42%); }
     }
     
     @keyframes header-pulse {
-      0% { transform: scale(1); }
+      0%, 100% { transform: scale(1); }
       50% { transform: scale(1.1); }
-      100% { transform: scale(1); }
     }
     
-    .fixed-orange-marker {
-      animation: header-pulse 1.5s infinite ease-in-out;
-      display: block !important;
-      visibility: visible !important;
-      opacity: 1 !important;
-    }
-    
-    /* Force popup visibility */
+    /* More efficient popup styling */
     .mapboxgl-popup {
-      display: block !important;
-      visibility: visible !important;
-      opacity: 1 !important;
       z-index: 10000 !important;
-      pointer-events: auto !important;
+      visibility: visible !important;
+      display: block !important;
+      opacity: 1 !important;
     }
     
-    /* Style popup content */
+    /* Combined popup styling */
     .mapboxgl-popup-content {
-      display: block !important;
       background-color: #151A22 !important;
       color: white !important;
       border-radius: 8px !important;
@@ -82,38 +74,18 @@ export function injectEmergencyStyles() {
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5) !important;
     }
     
-    /* Ensure map is visible */
-    .mapboxgl-map {
-      visibility: visible !important;
-      opacity: 1 !important;
-    }
-    
-    /* Add visibility to header markers */
-    .orange-marker-indicator,
-    .fixed-orange-marker {
-      width: 24px !important;
-      height: 24px !important;
-      background-color: #F97316 !important;
-      border-radius: 50% !important;
-      border: 2px solid white !important;
-      box-shadow: 0 0 10px rgba(249,115,22,0.8) !important;
-      display: inline-block !important;
-      position: relative !important;
-      visibility: visible !important;
-      opacity: 1 !important;
-      animation: header-pulse 1.5s infinite ease-in-out !important;
-      z-index: 999999 !important;
-    }
-    
-    /* Make sure markers created programmatically are visible */
+    /* Data attribute based selectors for more efficient targeting */
     body[data-markers-loading="true"] .mapboxgl-marker,
-    .mapboxgl-map[loaded="true"] .mapboxgl-marker,
-    #map .mapboxgl-marker,
-    div .mapboxgl-marker {
-      display: block !important;
+    .mapboxgl-map[loaded="true"] .mapboxgl-marker {
       visibility: visible !important;
+      display: block !important;
       opacity: 1 !important;
-      pointer-events: auto !important;
+    }
+    
+    /* Hardware acceleration for better performance */
+    .mapboxgl-marker, .custom-marker, .mapboxgl-popup {
+      transform: translateZ(0);
+      will-change: transform;
     }
   `;
   
