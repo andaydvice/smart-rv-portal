@@ -23,30 +23,6 @@ export const usePopupClickHandler = () => {
         
         return;
       }
-      
-      // Handle view details button clicks
-      if ((e.target as HTMLElement)?.closest('.view-facility-btn')) {
-        e.preventDefault();
-        e.stopPropagation();
-        
-        // Find facility ID
-        const facilityId = (e.target as HTMLElement)?.closest('.view-facility-btn')?.getAttribute('data-facility-id');
-        if (facilityId) {
-          console.log(`View details clicked for facility ${facilityId}`);
-          // Dispatch a custom event that can be listened for to handle navigation
-          document.dispatchEvent(new CustomEvent('facility-details-requested', {
-            detail: { facilityId }
-          }));
-        }
-        
-        return;
-      }
-      
-      // If we're clicking on a popup or marker, don't do anything special
-      if ((e.target as HTMLElement)?.closest('.mapboxgl-popup') || 
-          (e.target as HTMLElement)?.closest('.custom-marker')) {
-        return;
-      }
     };
     
     // Add global document click listener
@@ -65,13 +41,6 @@ export const usePopupClickHandler = () => {
             closeButton.style.pointerEvents = 'all';
             closeButton.style.cursor = 'pointer';
           }
-          
-          // Make sure view details buttons are clickable
-          const viewDetailsButton = popup.querySelector('.view-facility-btn');
-          if (viewDetailsButton instanceof HTMLElement) {
-            viewDetailsButton.style.pointerEvents = 'all';
-            viewDetailsButton.style.cursor = 'pointer';
-          }
         }
       });
     };
@@ -79,19 +48,9 @@ export const usePopupClickHandler = () => {
     // Run periodically to ensure popups stay clickable
     const interval = setInterval(ensurePopupsAreClickable, 1000);
     
-    // Listen for our custom event
-    const handleFacilityDetailsRequested = (e: Event) => {
-      const { facilityId } = (e as CustomEvent).detail;
-      console.log(`Handling facility details request for ${facilityId}`);
-      // This could dispatch to a router or state manager
-    };
-    
-    document.addEventListener('facility-details-requested', handleFacilityDetailsRequested);
-    
     // Cleanup
     return () => {
       document.removeEventListener('click', handleDocumentClick, true);
-      document.removeEventListener('facility-details-requested', handleFacilityDetailsRequested);
       clearInterval(interval);
     };
   }, []);

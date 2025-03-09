@@ -48,13 +48,13 @@ export function createFacilityMarker(
   // Set popup data attribute for CSS targeting
   popup.addClassName(`popup-${facility.id}`);
   
-  // Set rich popup content
+  // Simplified popup content with just the essential info
   popup.setHTML(`
     <div class="facility-popup-content" data-facility-id="${facility.id}">
       <h3 class="text-lg font-semibold mb-1">${facility.name}</h3>
       <p class="text-sm mb-1">${facility.address}</p>
-      <p class="text-sm mb-2">Price: $${facility.price_range.min} - $${facility.price_range.max}</p>
-      <button class="view-facility-btn bg-[#F97316] hover:bg-[#EA580C] text-white font-bold py-2 px-4 rounded w-full" data-facility-id="${facility.id}">View Details</button>
+      <p class="text-sm mb-1">Price: $${facility.price_range.min} - $${facility.price_range.max}</p>
+      ${facility.phone ? `<p class="text-sm mb-1">Phone: ${facility.phone}</p>` : ''}
     </div>
   `);
 
@@ -106,17 +106,6 @@ export function createFacilityMarker(
         closeButton.addEventListener('click', (e) => {
           e.stopPropagation();
           marker.getPopup().remove();
-        });
-      }
-      
-      // Make "View Details" button work
-      const viewButton = popupEl.querySelector('.view-facility-btn');
-      if (viewButton instanceof HTMLElement) {
-        viewButton.style.pointerEvents = 'all';
-        viewButton.style.cursor = 'pointer';
-        viewButton.addEventListener('click', (e) => {
-          e.stopPropagation();
-          onClick(facility.id);
         });
       }
     }

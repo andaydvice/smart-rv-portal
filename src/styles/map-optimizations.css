@@ -83,24 +83,6 @@ body.show-map-markers .custom-marker,
   z-index: 10000 !important;
 }
 
-/* Style the View Details button */
-.view-facility-btn {
-  background-color: #F97316 !important;
-  color: white !important;
-  font-weight: bold !important;
-  padding: 8px 12px !important;
-  border-radius: 4px !important;
-  cursor: pointer !important;
-  width: 100% !important;
-  border: none !important;
-  margin-top: 8px !important;
-  pointer-events: all !important;
-}
-
-.view-facility-btn:hover {
-  background-color: #EA580C !important;
-}
-
 /* Make marker handling more efficient */
 [data-markers-loading="true"] .mapboxgl-map,
 .map-loaded .mapboxgl-map {

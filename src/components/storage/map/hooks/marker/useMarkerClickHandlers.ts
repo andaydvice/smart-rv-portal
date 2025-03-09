@@ -41,21 +41,11 @@ export const useMarkerClickHandlers = () => {
             closeButton.style.pointerEvents = 'all';
             closeButton.style.cursor = 'pointer';
             
-            // Ensure close button has proper event handler
+            // Enhance close button with clear event handler
             closeButton.addEventListener('click', (e) => {
               e.stopPropagation();
+              e.preventDefault();
               marker.getPopup().remove();
-            });
-          }
-          
-          // Make "View Details" button functional
-          const viewButton = popupElement.querySelector('.view-facility-btn');
-          if (viewButton instanceof HTMLElement) {
-            viewButton.style.pointerEvents = 'all';
-            viewButton.style.cursor = 'pointer';
-            viewButton.addEventListener('click', (e) => {
-              e.stopPropagation();
-              onMarkerClick(facilityId);
             });
           }
         }

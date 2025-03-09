@@ -1,3 +1,4 @@
+
 import React, { useEffect, useCallback, useMemo } from 'react';
 import { useMap } from './MapContext';
 import MapControls from './MapControls';
@@ -7,7 +8,7 @@ import MapLoadingState from './MapLoadingState';
 import { StorageFacility } from '../types';
 import { fitMapToBounds } from './utils/mapBounds';
 import { 
-  ensureMarkersOnMap, 
+  ensureMarkersExist, 
   createEmergencyMarkers, 
   setupEmergencyMarkerListeners,
   injectEmergencyMarkerStyles 
@@ -57,7 +58,7 @@ const MapContainer: React.FC<MapContainerProps> = ({
     });
   }, [facilities]);
 
-  // NEW EMERGENCY APPROACH - Direct marker creation
+  // Emergency marker creation approach
   useEffect(() => {
     if (!map || !mapLoaded || validFacilities.length === 0) return;
     
@@ -72,7 +73,7 @@ const MapContainer: React.FC<MapContainerProps> = ({
       container.style.display = 'block';
     }
     
-    console.log('EMERGENCY: Using direct DOM marker creation');
+    console.log('Creating markers for facilities...');
     
     // Create emergency markers and set up listeners
     const markerCount = createEmergencyMarkers(map, validFacilities);
@@ -119,11 +120,15 @@ const MapContainer: React.FC<MapContainerProps> = ({
             if (marker instanceof HTMLElement) {
               if (marker.getAttribute('data-facility-id') === highlightedFacility) {
                 marker.style.backgroundColor = '#10B981';
+                marker.style.width = '28px';
+                marker.style.height = '28px';
                 marker.style.transform = 'translate(-50%, -50%) scale(1.3)';
                 marker.style.zIndex = '10002';
                 marker.style.boxShadow = '0 0 15px rgba(16, 185, 129, 0.8)';
               } else {
                 marker.style.backgroundColor = '#F97316';
+                marker.style.width = '24px';
+                marker.style.height = '24px';
                 marker.style.transform = 'translate(-50%, -50%) scale(1)';
                 marker.style.zIndex = '10000';
                 marker.style.boxShadow = '0 0 10px rgba(0, 0, 0, 0.5)';

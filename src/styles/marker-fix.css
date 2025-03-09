@@ -98,22 +98,11 @@ header .emergency-marker,
   z-index: 10001 !important;
   box-shadow: 0 0 20px rgba(16, 185, 129, 1) !important;
   transform: scale(1.2) translate(-42%, -42%) !important;
+  width: 28px !important;
+  height: 28px !important;
 }
 
 /* Style marker buttons */
 .view-facility-btn {
-  background-color: #F97316 !important;
-  color: white !important;
-  border: none !important;
-  padding: 8px 12px !important;
-  border-radius: 4px !important;
-  cursor: pointer !important;
-  font-weight: bold !important;
-  margin-top: 8px !important;
-  display: block !important;
-  width: 100% !important;
-}
-
-.view-facility-btn:hover {
-  background-color: #EA580C !important;
+  display: none !important; /* Hidden as requested */
 }

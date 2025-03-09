@@ -20,7 +20,9 @@ export const useMarkerHighlight = ({
         const el = highlightedMarker.getElement();
         if (el) {
           el.style.backgroundColor = '#10B981';
-          el.style.zIndex = '1100';
+          el.style.zIndex = '10002';
+          el.style.width = '28px';
+          el.style.height = '28px';
           el.style.transform = 'translate(-50%, -50%) scale(1.2)';
           el.style.boxShadow = '0 0 20px rgba(16, 185, 129, 0.8)';
           
@@ -43,7 +45,7 @@ export const useMarkerHighlight = ({
           setTimeout(() => {
             const popupEl = highlightedMarker.getPopup().getElement();
             if (popupEl) {
-              popupEl.style.zIndex = '1100';
+              popupEl.style.zIndex = '10000';
               popupEl.style.visibility = 'visible';
               popupEl.style.pointerEvents = 'all';
               
@@ -60,7 +62,9 @@ export const useMarkerHighlight = ({
             const markerEl = marker.getElement();
             if (markerEl) {
               markerEl.style.backgroundColor = '#F97316';
-              markerEl.style.zIndex = '1000';
+              markerEl.style.zIndex = '10000';
+              markerEl.style.width = '24px';
+              markerEl.style.height = '24px';
               markerEl.style.transform = 'translate(-50%, -50%) scale(1)';
               markerEl.style.boxShadow = '0 0 10px rgba(0,0,0,0.8)';
               markerEl.removeAttribute('data-highlighted');
