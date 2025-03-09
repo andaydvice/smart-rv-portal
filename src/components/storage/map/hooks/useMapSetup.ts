@@ -1,3 +1,4 @@
+
 import { useEffect, useRef } from 'react';
 import { StorageFacility } from '../../types';
 import { fitMapToBounds } from '../utils/mapBounds';
@@ -70,7 +71,6 @@ export const useMapSetup = (map: mapboxgl.Map | null,
       console.log(`Fitting map to bounds with ${validFacilities.length} valid coordinates`);
       
       // Fix: Pass all required arguments to fitMapToBounds
-      // The function expects (map, facilities, padding, maxZoom)
       fitMapToBounds(map, validFacilities, 50, 10);
       
       // Mark bounds as set to avoid repeated fitting
