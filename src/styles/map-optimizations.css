@@ -94,13 +94,6 @@ body.show-map-markers .custom-marker,
   visibility: visible !important;
   display: block !important;
   opacity: 1 !important;
-  position: absolute !important;
-  top: 0 !important;
-  bottom: 0 !important;
-  left: 0 !important;
-  right: 0 !important;
-  height: 100% !important;
-  width: 100% !important;
 }
 
 .mapboxgl-canvas-container,
@@ -108,8 +101,6 @@ body.show-map-markers .custom-marker,
   visibility: visible !important;
   display: block !important;
   opacity: 1 !important;
-  width: 100% !important;
-  height: 100% !important;
 }
 
 /* Hide the "View Details" button in popups */
@@ -122,23 +113,11 @@ button.view-details,
   pointer-events: none !important;
 }
 
-/* Enhanced: Completely hide and remove the floating facility card in the top-left */
-.fixed-orange-marker:not(.custom-marker):not(.mapboxgl-marker):not(.emergency-marker):not(.hero-marker),
-.fixed-info-card,
-.facility-info-card,
-.floating-facility-card,
-div[class*="floating"],
-div[class*="fixed-card"],
-div[class*="facility-card"]:not(.mapboxgl-popup-content *) {
+/* Hide the floating facility card in the top-left */
+.fixed-orange-marker:not(.custom-marker):not(.mapboxgl-marker):not(.emergency-marker):not(.hero-marker) {
   display: none !important;
   visibility: hidden !important;
   opacity: 0 !important;
-  pointer-events: none !important;
-  position: absolute !important;
-  left: -9999px !important;
-  height: 0 !important;
-  width: 0 !important;
-  overflow: hidden !important;
 }
 
 /* Preserve only the legitimate marker in the hero section */
@@ -181,26 +160,4 @@ body.markers-forced .mapboxgl-canvas {
   visibility: hidden !important;
   opacity: 0 !important;
   pointer-events: none !important;
-}
-
-/* CRITICAL FIX: Enforce map container visibility */
-.h-\[600px\] {
-  position: relative !important;
-  min-height: 600px !important;
-  height: 600px !important;
-  overflow: hidden !important;
-}
-
-/* Make sure map container is properly structured */
-.relative.w-full.h-full, 
-.mapboxgl-map, 
-.mapboxgl-canvas-container {
-  position: absolute !important;
-  top: 0 !important;
-  left: 0 !important;
-  width: 100% !important;
-  height: 100% !important;
-  visibility: visible !important;
-  display: block !important;
-  opacity: 1 !important;
 }

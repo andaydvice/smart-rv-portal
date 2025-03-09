@@ -30,8 +30,8 @@ export type {
 import { ensureMarkersOnMap } from './forcing/ensureMarkers';
 
 // Function to ensure markers exist on map - emergency marker creation
-export const ensureMarkersExist = async (map: mapboxgl.Map, facilities: any[]) => {
+export const ensureMarkersExist = (map: mapboxgl.Map, facilities: any[]) => {
   console.log('EMERGENCY MARKER CREATION: Ensuring markers exist on map', facilities.length);
   // Use the imported ensureMarkersOnMap function
-  return await ensureMarkersOnMap(map, facilities);
+  return ensureMarkersOnMap(map, facilities);
 };

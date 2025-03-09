@@ -161,25 +161,13 @@ export function removeViewDetailsButtons() {
     }
   });
   
-  // Enhanced: More aggressively remove the floating facility card in the top-left
-  const floatingCards = document.querySelectorAll('.fixed-orange-marker, .fixed-info-card, .facility-info-card, .floating-facility-card');
+  // Also remove the floating facility card in the top-left
+  const floatingCards = document.querySelectorAll('.fixed-orange-marker:not(.custom-marker):not(.mapboxgl-marker):not(.emergency-marker)');
   floatingCards.forEach(card => {
     if (card instanceof HTMLElement && !card.closest('.mapboxgl-map')) {
-      // Completely remove the element from DOM instead of just hiding it
-      card.remove();
-    }
-  });
-  
-  // Additional fix: Remove any elements with content about Mountain View RV Storage
-  document.querySelectorAll('div:not(.mapboxgl-popup-content)').forEach(el => {
-    if (el instanceof HTMLElement) {
-      const text = el.textContent || '';
-      if (text.includes('Mountain View RV Storage') || text.includes('View Details')) {
-        // Only remove if it's not within the map container
-        if (!el.closest('.mapboxgl-map') && !el.closest('.facility-popup-content')) {
-          el.remove();
-        }
-      }
+      card.style.display = 'none';
+      card.style.visibility = 'hidden';
+      card.style.opacity = '0';
     }
   });
 }

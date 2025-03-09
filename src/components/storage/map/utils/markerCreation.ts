@@ -48,12 +48,12 @@ export function createFacilityMarker(
   // Set popup data attribute for CSS targeting
   popup.addClassName(`popup-${facility.id}`);
   
-  // Properly populate popup content with actual facility data
+  // Simplified popup content with just the essential info
   popup.setHTML(`
     <div class="facility-popup-content" data-facility-id="${facility.id}">
-      <h3 class="text-lg font-semibold mb-1">${facility.name || 'Unnamed Facility'}</h3>
-      <p class="text-sm mb-1">${facility.address || 'No address available'}, ${facility.city || ''}, ${facility.state || ''}</p>
-      <p class="text-sm mb-1">Price: $${facility.price_range?.min || 0} - $${facility.price_range?.max || 0}</p>
+      <h3 class="text-lg font-semibold mb-1">${facility.name}</h3>
+      <p class="text-sm mb-1">${facility.address}</p>
+      <p class="text-sm mb-1">Price: $${facility.price_range.min} - $${facility.price_range.max}</p>
       ${facility.contact_phone ? `<p class="text-sm mb-1">Phone: ${facility.contact_phone}</p>` : ''}
     </div>
   `);
@@ -63,43 +63,26 @@ export function createFacilityMarker(
     element: el,
     anchor: 'center'
   })
-  .setLngLat(coordinates);
-  
-  // Add popup to marker
-  marker.setPopup(popup);
+  .setLngLat(coordinates)
+  .setPopup(popup);
 
-  // Try to add marker to map immediately
-  try {
-    if (map && map.loaded()) {
+  // Ensure marker gets added to map
+  if (map) {
+    try {
       marker.addTo(map);
-      console.log(`Added marker for ${facility.name}`);
-    } else {
-      // If map isn't loaded yet, wait and try again
-      console.log(`Map not loaded, delaying marker addition for ${facility.id}`);
+    } catch (err) {
+      console.error(`Failed to add marker for ${facility.name}:`, err);
+      // Retry once after a short delay
       setTimeout(() => {
         try {
-          if (map && !el.isConnected) {
+          if (!marker.getElement().isConnected) {
             marker.addTo(map);
-            console.log(`Added delayed marker for ${facility.id}`);
           }
         } catch (retryErr) {
           console.error(`Retry failed for marker ${facility.id}:`, retryErr);
         }
-      }, 500);
+      }, 100);
     }
-  } catch (err) {
-    console.error(`Failed to add marker for ${facility.name}:`, err);
-    // Retry once after a longer delay
-    setTimeout(() => {
-      try {
-        if (map && !el.isConnected) {
-          marker.addTo(map);
-          console.log(`Added retry marker for ${facility.id}`);
-        }
-      } catch (retryErr) {
-        console.error(`Retry failed for marker ${facility.id}:`, retryErr);
-      }
-    }, 1000);
   }
 
   // Add click handler to the marker element

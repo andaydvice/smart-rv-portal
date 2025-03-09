@@ -21,7 +21,7 @@ export default defineConfig(({ mode }) => ({
     },
     watch: {
       usePolling: true,
-      interval: 3000 // Increase interval to reduce CPU usage
+      interval: 1000 // Increase interval to reduce CPU usage
     },
     open: false,
   },
@@ -45,8 +45,7 @@ export default defineConfig(({ mode }) => ({
     force: true,
     esbuildOptions: {
       target: 'es2020',
-      treeShaking: true, // Enable tree shaking for dependencies
-      logLevel: 'error', // Reduce console output
+      treeShaking: true // Enable tree shaking for dependencies
     }
   },
   build: {
@@ -60,14 +59,7 @@ export default defineConfig(({ mode }) => ({
           query: ['@tanstack/react-query'],
           ui: ['lucide-react', '@radix-ui/react-dialog', '@radix-ui/react-popover']
         },
-        // Reduce console noise
-        inlineDynamicImports: false,
       },
-      onwarn(warning, warn) {
-        // Suppress circular dependency warnings
-        if (warning.code === 'CIRCULAR_DEPENDENCY') return;
-        warn(warning);
-      }
     },
     target: 'es2020', // Ensure consistent target with optimizeDeps
     cssCodeSplit: true,
@@ -79,10 +71,5 @@ export default defineConfig(({ mode }) => ({
   },
   css: {
     devSourcemap: mode === 'development' // Enable sourcemaps for CSS in dev
-  },
-  preview: {
-    port: 8080,
-    strictPort: true,
-    host: true,
   }
 }));
