@@ -1,3 +1,4 @@
+
 import { useState, useCallback, useRef } from 'react';
 import { toast } from 'sonner';
 import { StorageFacility } from '../../../types';
@@ -20,7 +21,7 @@ export const useMarkerErrorHandling = (): UseMarkerErrorHandlingReturn => {
   
   const addError = useCallback((facility: StorageFacility, error: Error, errorCode: string) => {
     const existingError = errors.find(
-      e => e.facilityId === facility.id && e.errorCode === errorCode && !e.recovered
+      e => e.facilityId === facility.id && e.type === errorCode && !e.recovered
     );
     
     if (!existingError) {
@@ -32,8 +33,8 @@ export const useMarkerErrorHandling = (): UseMarkerErrorHandlingReturn => {
       {
         facilityId: facility.id,
         facilityName: facility.name,
-        errorMessage: error.message,
-        errorCode,
+        error: error,
+        type: errorCode,
         timestamp: Date.now(),
         recovered: false
       }

@@ -6,7 +6,7 @@ import { usePopupClickHandler } from './hooks/usePopupClickHandler';
 import MarkerStats, { MarkerStatistics } from './components/MarkerStats';
 import { useMarkerManagement } from './hooks/useMarkerManagement';
 import MarkerVisibilityEnhancer from './components/MarkerVisibilityEnhancer';
-import MarkerErrorDisplay, { MarkerError } from './components/MarkerErrorDisplay';
+import MarkerErrorDisplay, { MarkerError as DisplayMarkerError } from './components/MarkerErrorDisplay';
 import MarkerDebugOverlay from './components/MarkerDebugOverlay';
 import { testMarkersVisibility } from '@/utils/markers';
 
@@ -112,14 +112,23 @@ const FacilityMarkers: React.FC<FacilityMarkersProps> = memo(({
 
   // Create a proper MarkerStatistics object from stats
   const markerStats: MarkerStatistics = {
-    total: stats.total || 0,
-    created: stats.created || 0,
-    visible: stats.visible || 0,
-    hidden: stats.hidden || 0,
-    failed: stats.failed || 0,
+    total: stats.markersCreated + stats.skippedFacilities || 0,
+    created: stats.markersCreated || 0,
+    visible: stats.markersCreated - (stats.skippedFacilities || 0),
+    hidden: stats.skippedFacilities || 0,
+    failed: stats.skippedFacilities || 0,
     processedNYFacilities: stats.processedNYFacilities || 0,
     totalNYFacilities: stats.totalNYFacilities || 0
   };
+
+  // Convert errors to the format expected by MarkerErrorDisplay
+  const displayErrors: DisplayMarkerError[] = errors ? errors.map(err => ({
+    id: `${err.facilityId}-${err.timestamp}`,
+    facilityId: err.facilityId,
+    errorMessage: err.error?.message || 'Unknown error',
+    errorCode: err.type || 'ERR',
+    timestamp: err.timestamp
+  })) : [];
 
   return (
     <>
@@ -139,11 +148,16 @@ const FacilityMarkers: React.FC<FacilityMarkersProps> = memo(({
       {process.env.NODE_ENV === 'development' && <MarkerDebugOverlay />}
       
       {/* Show errors only in dev mode or if there are critical errors */}
-      {(process.env.NODE_ENV === 'development' || (errors && errors.length > 5)) && (
+      {(process.env.NODE_ENV === 'development' || (displayErrors && displayErrors.length > 5)) && (
         <div className="absolute top-20 right-4 z-50 w-80">
           <MarkerErrorDisplay 
-            errors={errors as MarkerError[]} 
-            onDismiss={markErrorAsRecovered}
+            errors={displayErrors} 
+            onDismiss={(errorId) => {
+              const parts = errorId.split('-');
+              if (parts.length > 0) {
+                markErrorAsRecovered(parts[0]);
+              }
+            }}
             className="max-h-48 overflow-y-auto"
           />
         </div>
