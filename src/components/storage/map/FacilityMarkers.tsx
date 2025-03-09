@@ -3,10 +3,10 @@ import React, { useEffect, useCallback, memo } from 'react';
 import mapboxgl from 'mapbox-gl';
 import { StorageFacility } from '../types';
 import { usePopupClickHandler } from './hooks/usePopupClickHandler';
-import MarkerStats from './components/MarkerStats';
+import MarkerStats, { MarkerStatistics } from './components/MarkerStats';
 import { useMarkerManagement } from './hooks/useMarkerManagement';
 import MarkerVisibilityEnhancer from './components/MarkerVisibilityEnhancer';
-import MarkerErrorDisplay from './components/MarkerErrorDisplay';
+import MarkerErrorDisplay, { MarkerError } from './components/MarkerErrorDisplay';
 import MarkerDebugOverlay from './components/MarkerDebugOverlay';
 import { testMarkersVisibility } from '@/utils/markers';
 
@@ -110,6 +110,17 @@ const FacilityMarkers: React.FC<FacilityMarkersProps> = memo(({
     };
   }, [map, facilities, createMarkers]);
 
+  // Create a proper MarkerStatistics object from stats
+  const markerStats: MarkerStatistics = {
+    total: stats.total || 0,
+    created: stats.created || 0,
+    visible: stats.visible || 0,
+    hidden: stats.hidden || 0,
+    failed: stats.failed || 0,
+    processedNYFacilities: stats.processedNYFacilities || 0,
+    totalNYFacilities: stats.totalNYFacilities || 0
+  };
+
   return (
     <>
       {/* Debug marker count */}
@@ -119,7 +130,7 @@ const FacilityMarkers: React.FC<FacilityMarkersProps> = memo(({
       </div>
       
       {/* Only show stats in development mode */}
-      {process.env.NODE_ENV === 'development' && <MarkerStats stats={stats} />}
+      {process.env.NODE_ENV === 'development' && <MarkerStats stats={markerStats} />}
       
       {/* This component runs the visibility enhancement on a regular interval */}
       <MarkerVisibilityEnhancer enhanceVisibility={enhanceVisibility} />
@@ -131,7 +142,7 @@ const FacilityMarkers: React.FC<FacilityMarkersProps> = memo(({
       {(process.env.NODE_ENV === 'development' || (errors && errors.length > 5)) && (
         <div className="absolute top-20 right-4 z-50 w-80">
           <MarkerErrorDisplay 
-            errors={errors || []} 
+            errors={errors as MarkerError[]} 
             onDismiss={markErrorAsRecovered}
             className="max-h-48 overflow-y-auto"
           />

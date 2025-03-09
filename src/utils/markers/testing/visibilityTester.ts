@@ -76,7 +76,7 @@ export function testMarkerVisibility(options: VisibilityTestOptions = {}): Marke
         else if (computedStyle.display === 'none') issueType = 'display';
         else if (computedStyle.opacity === '0') issueType = 'opacity';
         
-        // Add issue to result
+        // Add issue to result - Create a proper VisibilityIssueDetail object
         const issue: VisibilityIssueDetail = {
           elementId: marker.id || `marker-${i}`,
           elementType: Array.from(marker.classList).join(' '),
@@ -93,6 +93,7 @@ export function testMarkerVisibility(options: VisibilityTestOptions = {}): Marke
           recommendation: `Set ${issueType} to ensure marker is visible`
         };
         
+        // Push the issue object to the issues array
         result.issues.push(issue);
         
         // Fix issues if requested
@@ -116,11 +117,14 @@ export function testMarkerVisibility(options: VisibilityTestOptions = {}): Marke
     } else {
       // All batches processed, show results
       if (logResults) {
-        console.log(`Marker Visibility Test: ${result.visibleMarkers}/${result.totalMarkers} markers visible`);
+        console.log(`Found ${result.totalMarkers} markers, ${result.visibleMarkers} visible, ${result.hiddenMarkers} hidden`);
         
         if (result.issues.length > 0) {
           console.warn(`Found ${result.issues.length} visibility issues:`, result.issues);
+        } else {
+          console.log(`No visibility issues detected`);
         }
+        console.log(`Test completed in ${(Date.now() - result.timestamp).toFixed(2)}ms`);
       }
       
       if (showToast) {
