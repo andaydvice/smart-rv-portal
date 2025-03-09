@@ -55,11 +55,10 @@ export default function StorageFacilities() {
             <Container className="h-full flex flex-col justify-center items-center">
               <div className="text-center max-w-3xl bg-black/40 backdrop-blur-sm p-6 rounded-lg">
                 <div className="flex items-center justify-center gap-2 mb-2">
-                  {/* Enhanced orange marker indicator with animation and visibility */}
+                  {/* Enhanced orange marker indicator that won't interfere with map markers */}
                   <div className="relative flex items-center">
-                    <div className="fixed-orange-marker w-8 h-8 bg-[#F97316] rounded-full border-2 border-white shadow-lg animate-pulse"></div>
+                    <div className="hero-marker w-8 h-8 bg-[#F97316] rounded-full border-2 border-white shadow-lg animate-pulse"></div>
                     <Warehouse className="h-7 w-7 text-[#F97316]" />
-                    <div className="absolute -top-1 -right-1 w-4 h-4 bg-[#F97316] rounded-full border-2 border-white animate-pulse"></div>
                   </div>
                   <h1 className="text-4xl md:text-5xl font-bold text-white">
                     Indoor RV Storage Facilities

@@ -3,10 +3,10 @@ import React, { useEffect, useCallback, memo } from 'react';
 import mapboxgl from 'mapbox-gl';
 import { StorageFacility } from '../types';
 import { usePopupClickHandler } from './hooks/usePopupClickHandler';
-import MarkerStats, { MarkerStatistics } from './components/MarkerStats';
+import MarkerStats from './components/MarkerStats';
 import { useMarkerManagement } from './hooks/useMarkerManagement';
 import MarkerVisibilityEnhancer from './components/MarkerVisibilityEnhancer';
-import MarkerErrorDisplay, { MarkerError as DisplayMarkerError } from './components/MarkerErrorDisplay';
+import MarkerErrorDisplay from './components/MarkerErrorDisplay';
 import MarkerDebugOverlay from './components/MarkerDebugOverlay';
 import { testMarkersVisibility } from '@/utils/markers';
 
@@ -59,7 +59,7 @@ const FacilityMarkers: React.FC<FacilityMarkersProps> = memo(({
     
     console.log(`FacilityMarkers: Creating markers for ${facilities.length} facilities`);
     
-    // Add visible emergency marker outside the map system for debugging
+    // Add visible emergency marker outside the map system for debugging that we'll remove at the end
     const debugElement = document.createElement('div');
     debugElement.className = 'debug-marker';
     debugElement.style.cssText = `
@@ -72,6 +72,7 @@ const FacilityMarkers: React.FC<FacilityMarkersProps> = memo(({
       border-radius: 50%;
       z-index: 10000;
       border: 2px solid white;
+      pointer-events: none;
     `;
     document.body.appendChild(debugElement);
     
@@ -110,8 +111,8 @@ const FacilityMarkers: React.FC<FacilityMarkersProps> = memo(({
     };
   }, [map, facilities, createMarkers]);
 
-  // Create a proper MarkerStatistics object from stats
-  const markerStats: MarkerStatistics = {
+  // Create a proper stats object for the MarkerStats component
+  const displayStats = {
     total: stats.markersCreated + stats.skippedFacilities || 0,
     created: stats.markersCreated || 0,
     visible: stats.markersCreated - (stats.skippedFacilities || 0),
@@ -122,7 +123,7 @@ const FacilityMarkers: React.FC<FacilityMarkersProps> = memo(({
   };
 
   // Convert errors to the format expected by MarkerErrorDisplay
-  const displayErrors: DisplayMarkerError[] = errors ? errors.map(err => ({
+  const displayErrors = errors ? errors.map(err => ({
     id: `${err.facilityId}-${err.timestamp}`,
     facilityId: err.facilityId,
     errorMessage: err.error?.message || 'Unknown error',
@@ -139,7 +140,7 @@ const FacilityMarkers: React.FC<FacilityMarkersProps> = memo(({
       </div>
       
       {/* Only show stats in development mode */}
-      {process.env.NODE_ENV === 'development' && <MarkerStats stats={markerStats} />}
+      {process.env.NODE_ENV === 'development' && <MarkerStats stats={displayStats} />}
       
       {/* This component runs the visibility enhancement on a regular interval */}
       <MarkerVisibilityEnhancer enhanceVisibility={enhanceVisibility} />

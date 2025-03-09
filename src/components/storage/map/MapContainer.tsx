@@ -6,7 +6,8 @@ import ClusterLayer from './ClusterLayer';
 import FacilityMarkers from './FacilityMarkers';
 import MapLoadingState from './MapLoadingState';
 import { StorageFacility } from '../types';
-import { fitMapToBounds } from './utils/mapboxInit';
+import { fitMapToBounds } from './utils/mapBounds';
+import { ensureMarkersOnMap } from '@/utils/markers/forcing/ensureMarkers';
 
 interface MapContainerProps {
   facilities: StorageFacility[];
@@ -65,27 +66,22 @@ const MapContainer: React.FC<MapContainerProps> = ({
         container.style.display = 'block';
       }
       
-      // Force visibility checks
-      const enhanceVisibility = () => {
-        document.querySelectorAll('.mapboxgl-marker, .custom-marker').forEach(marker => {
-          if (marker instanceof HTMLElement) {
-            marker.style.visibility = 'visible';
-            marker.style.display = 'block';
-            marker.style.opacity = '1';
-          }
-        });
-      };
-      
-      // Run visibility checks multiple times
-      [0, 500, 1000, 2000].forEach(delay => {
-        setTimeout(enhanceVisibility, delay);
-      });
+      // EMERGENCY FIX: Ensure markers are created if normal method fails
+      // Try after a delay to allow normal creation first
+      const emergencyTimeout = setTimeout(() => {
+        const markers = document.querySelectorAll('.mapboxgl-marker, .custom-marker');
+        if (markers.length < validFacilities.length * 0.5) {
+          console.warn('EMERGENCY FIX: Not enough markers created, forcing creation');
+          ensureMarkersOnMap(map, validFacilities);
+        }
+      }, 3000);
       
       return () => {
         document.body.classList.remove('map-loaded');
+        clearTimeout(emergencyTimeout);
       };
     }
-  }, [map, mapLoaded]);
+  }, [map, mapLoaded, validFacilities]);
 
   // Update map bounds when facilities change
   useEffect(() => {
@@ -93,7 +89,27 @@ const MapContainer: React.FC<MapContainerProps> = ({
       console.log(`Fitting map to bounds with ${validFacilities.length} valid coordinates`);
       fitMapToBounds(map, validFacilities);
     }
-  }, [validFacilities, mapLoaded, map]);
+  }, [validFacilities, mapLoaded, map, selectedState]);
+
+  // Listen for facility selection to update the map view
+  useEffect(() => {
+    if (map && mapLoaded && highlightedFacility) {
+      const facility = validFacilities.find(f => f.id === highlightedFacility);
+      if (facility) {
+        const lat = Number(facility.latitude);
+        const lng = Number(facility.longitude);
+        
+        if (!isNaN(lat) && !isNaN(lng)) {
+          console.log(`Flying to facility: ${facility.name}`);
+          map.flyTo({
+            center: [lng, lat],
+            zoom: 12,
+            essential: true
+          });
+        }
+      }
+    }
+  }, [highlightedFacility, map, mapLoaded, validFacilities]);
 
   return (
     <div className="relative w-full h-full">

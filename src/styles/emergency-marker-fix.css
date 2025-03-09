@@ -1,4 +1,24 @@
 
+/* Critical rules to fix unwanted debug/test markers */
+header .fixed-orange-marker,
+header .emergency-marker,
+header .orange-marker-indicator,
+.debug-marker {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* No "header > " for these, we want them under the correct parent only */
+.hero-marker {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  z-index: 10 !important;
+}
+
+/* Actual map marker rules for the ones we do want to display */
 .custom-marker,
 .mapboxgl-marker {
   display: block !important;

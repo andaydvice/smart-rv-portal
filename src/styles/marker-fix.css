@@ -1,11 +1,11 @@
 
 /* CRITICAL - Force marker visibility - high-specificity selectors */
-.mapboxgl-marker,
-.custom-marker,
-.marker,
-[class*="marker"],
-div[class*="marker"],
-.mapboxgl-canvas-container .mapboxgl-marker {
+body .mapboxgl-marker,
+body .custom-marker,
+body .marker,
+body [class*="marker"],
+body div[class*="marker"],
+body .mapboxgl-canvas-container .mapboxgl-marker {
   display: block !important;
   visibility: visible !important;
   opacity: 1 !important;
@@ -15,14 +15,33 @@ div[class*="marker"],
   cursor: pointer !important;
 }
 
-/* Improve emergency marker styling */
+/* Remove unwanted debug markers in header */
+/* This targets the unwanted orange markers in header */
+header .fixed-orange-marker,
+header .orange-marker-indicator,
+header .emergency-marker,
+.debug-marker {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* Keep only the legitimate marker in the hero section */
+.relative.w-full.h-\[400px\] .fixed-orange-marker {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* Improve emergency marker styling for the ones we actually want */
 .emergency-marker,
 .fixed-orange-marker {
-  width: 30px !important;
-  height: 30px !important;
+  width: 24px !important;
+  height: 24px !important;
   border-radius: 50% !important;
   background-color: #F97316 !important;
-  border: 3px solid white !important;
+  border: 2px solid white !important;
   box-shadow: 0 0 15px rgba(0,0,0,0.8) !important;
   transform: translate(-50%, -50%) !important;
   cursor: pointer !important;
@@ -47,9 +66,6 @@ div[class*="marker"],
 
 .fixed-orange-marker {
   animation: header-pulse 1.5s infinite ease-in-out;
-  display: block !important;
-  visibility: visible !important;
-  opacity: 1 !important;
 }
 
 /* Force popup visibility */
@@ -76,17 +92,6 @@ div[class*="marker"],
   opacity: 1 !important;
 }
 
-/* Make sure marker creation works */
-body[data-markers-loading="true"] .mapboxgl-marker,
-.mapboxgl-map[loaded="true"] .mapboxgl-marker,
-#map .mapboxgl-marker,
-div .mapboxgl-marker {
-  display: block !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-  pointer-events: auto !important;
-}
-
 /* Highlighted marker specific styles */
 .mapboxgl-marker[data-highlighted="true"],
 .custom-marker[data-highlighted="true"] {
@@ -111,29 +116,4 @@ div .mapboxgl-marker {
 
 .view-facility-btn:hover {
   background-color: #EA580C !important;
-}
-
-/* Header orange marker indicator style */
-.orange-marker-indicator {
-  width: 24px !important;
-  height: 24px !important;
-  background-color: #F97316 !important;
-  border-radius: 50% !important;
-  border: 2px solid white !important;
-  box-shadow: 0 0 10px rgba(249,115,22,0.8) !important;
-  display: inline-block !important;
-  position: relative !important;
-  top: 0 !important;
-  margin-right: 8px !important;
-  animation: header-pulse 1.5s infinite ease-in-out !important;
-}
-
-/* Ensure header markers specially are visible */
-.fixed-orange-marker,
-.orange-marker-indicator {
-  visibility: visible !important;
-  display: block !important;
-  opacity: 1 !important;
-  background-color: #F97316 !important;
-  z-index: 99999 !important;
 }

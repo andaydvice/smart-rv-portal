@@ -1,96 +1,74 @@
 
-import { useState, useCallback, useRef } from 'react';
-import { toast } from 'sonner';
+import { useState, useCallback } from 'react';
 import { StorageFacility } from '../../../types';
-import { MarkerError } from './types';
-
-export interface UseMarkerErrorHandlingReturn {
-  errors: MarkerError[];
-  addError: (facility: StorageFacility, error: Error, errorCode: string) => void;
-  clearErrors: () => void;
-  markErrorAsRecovered: (facilityId: string) => void;
-  hasErrorForFacility: (facilityId: string) => boolean;
-  getErrorsForFacility: (facilityId: string) => MarkerError[];
-  attemptErrorRecovery: (facilityId: string) => boolean;
-  errorCount: number;
-}
+import { MarkerError, UseMarkerErrorHandlingReturn } from './types';
 
 export const useMarkerErrorHandling = (): UseMarkerErrorHandlingReturn => {
   const [errors, setErrors] = useState<MarkerError[]>([]);
-  const recoveryAttemptsRef = useRef<Record<string, number>>({});
+  const [recoveryAttempts, setRecoveryAttempts] = useState<Map<string, number>>(new Map());
   
-  const addError = useCallback((facility: StorageFacility, error: Error, errorCode: string) => {
-    const existingError = errors.find(
-      e => e.facilityId === facility.id && e.type === errorCode && !e.recovered
-    );
-    
-    if (!existingError) {
-      toast.error(`Error with marker: ${error.message}`);
-    }
-    
-    setErrors(prev => [
-      ...prev,
-      {
+  // Track marker errors with deduplication
+  const addError = useCallback((facility: StorageFacility, error: Error, type: string) => {
+    setErrors(prev => {
+      // Check if this exact error already exists
+      const exists = prev.some(e => 
+        e.facilityId === facility.id && 
+        e.type === type && 
+        e.error.message === error.message &&
+        !e.recovered
+      );
+      
+      if (exists) return prev;
+      
+      // Add new error
+      return [...prev, {
         facilityId: facility.id,
         facilityName: facility.name,
-        error: error,
-        type: errorCode,
+        error,
         timestamp: Date.now(),
+        type,
         recovered: false
-      }
-    ]);
-    
-    console.error(`Marker Error [${errorCode}] for ${facility.name}:`, error);
-  }, [errors]);
-  
-  const clearErrors = useCallback(() => {
-    setErrors([]);
+      }];
+    });
   }, []);
   
-  const markErrorAsRecovered = useCallback((facilityId: string) => {
-    setErrors(prev => 
-      prev.map(err => 
-        err.facilityId === facilityId 
-          ? { ...err, recovered: true } 
-          : err
-      )
-    );
-  }, []);
-  
+  // Check if a facility has errors
   const hasErrorForFacility = useCallback((facilityId: string) => {
-    return errors.some(err => err.facilityId === facilityId && !err.recovered);
+    return errors.some(e => e.facilityId === facilityId && !e.recovered);
   }, [errors]);
   
-  const getErrorsForFacility = useCallback((facilityId: string) => {
-    return errors.filter(err => err.facilityId === facilityId);
-  }, [errors]);
-  
-  const attemptErrorRecovery = useCallback((facilityId: string): boolean => {
-    const attempts = recoveryAttemptsRef.current[facilityId] || 0;
-    
-    if (attempts >= 3) {
-      return false;
-    }
-    
-    const backoffTime = Math.pow(2, attempts) * 500;
-    
-    recoveryAttemptsRef.current[facilityId] = attempts + 1;
-    
-    console.log(`Attempting recovery for facility ${facilityId} (attempt ${attempts + 1})`);
-    
-    return true;
+  // Mark errors as recovered
+  const markErrorAsRecovered = useCallback((facilityId: string) => {
+    setErrors(prev => prev.map(e => 
+      e.facilityId === facilityId ? { ...e, recovered: true } : e
+    ));
   }, []);
   
-  const errorCount = errors.filter(err => !err.recovered).length;
+  // Throttle error recovery attempts
+  const attemptErrorRecovery = useCallback((facilityId: string) => {
+    setRecoveryAttempts(prev => {
+      const newMap = new Map(prev);
+      const attempts = prev.get(facilityId) || 0;
+      
+      // Limit recovery attempts to prevent infinite loops
+      if (attempts >= 3) {
+        console.log(`Maximum recovery attempts reached for facility ${facilityId}`);
+        return prev;
+      }
+      
+      newMap.set(facilityId, attempts + 1);
+      return newMap;
+    });
+    
+    const attempts = recoveryAttempts.get(facilityId) || 0;
+    return attempts < 3;
+  }, [recoveryAttempts]);
   
   return {
-    errors,
     addError,
-    clearErrors,
-    markErrorAsRecovered,
     hasErrorForFacility,
-    getErrorsForFacility,
+    markErrorAsRecovered,
     attemptErrorRecovery,
-    errorCount
+    errors
   };
 };

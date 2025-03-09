@@ -3,13 +3,8 @@ import mapboxgl from 'mapbox-gl';
 import { useMarkerClickHandlers } from './useMarkerClickHandlers';
 import { useMarkerErrorHandling } from './useMarkerErrorHandling';
 import { StorageFacility } from '../../../types';
-import { 
-  createMarker, 
-  enhanceMarkerVisibility, 
-  persistMarker 
-} from '../../services/markerCreationService';
-import { configurePopup, forcePopupOpen } from '../../services/markerPopupService';
-import { attachMarkerToMap } from '../../services/markerAttachmentService';
+import { createFacilityMarker } from '../../utils/markerCreation';
+import { calculateMarkerOffset, buildCoordinatesMap, hasValidCoordinates } from '../../utils/markerUtils';
 
 export const useCreateNewMarker = () => {
   const { applyClickHandlerToMarker } = useMarkerClickHandlers();
@@ -36,7 +31,7 @@ export const useCreateNewMarker = () => {
     }
   };
 
-  const createNewMarker = (
+  const createMarker = (
     facility: StorageFacility,
     map: mapboxgl.Map,
     isHighlighted: boolean,
@@ -45,101 +40,40 @@ export const useCreateNewMarker = () => {
     index: number
   ): mapboxgl.Marker | null => {
     try {
-      // Check if map is fully loaded
-      if (!map) {
-        console.warn('Map is not available');
+      // Check if map is loaded and valid
+      if (!map || !map.loaded()) {
+        console.warn('Map not fully loaded, cannot create marker');
         return null;
       }
       
-      // Ensure map is loaded before creating markers
-      if (!map.loaded()) {
-        console.warn('Map not fully loaded, will retry with delay');
-        setTimeout(() => {
-          if (map && map.loaded()) {
-            createNewMarker(facility, map, isHighlighted, onMarkerClick, facilities, index);
-          }
-        }, 500);
+      // Check if facility has valid coordinates
+      if (!hasValidCoordinates(facility)) {
+        console.warn(`Invalid coordinates for facility ${facility.id}`);
         return null;
       }
       
-      // Don't create duplicate markers
-      if (window._persistentMarkers && window._persistentMarkers[facility.id]) {
-        // Update existing marker if highlight state changed
-        const existingMarker = window._persistentMarkers[facility.id];
-        const markerEl = existingMarker.getElement();
-        
-        if (markerEl) {
-          if (isHighlighted) {
-            markerEl.style.backgroundColor = '#10B981';
-            markerEl.style.zIndex = '9999';
-            markerEl.style.transform = 'translate(-50%, -50%) scale(1.2)';
-            markerEl.style.boxShadow = '0 0 20px rgba(16, 185, 129, 0.8)';
-          } else {
-            markerEl.style.backgroundColor = '#F97316';
-            markerEl.style.zIndex = '9998';
-            markerEl.style.transform = 'translate(-50%, -50%) scale(1)';
-            markerEl.style.boxShadow = '0 0 10px rgba(0,0,0,0.8)';
-          }
-        }
-        
-        return existingMarker;
-      }
+      // Calculate marker coordinates with offset for overlapping markers
+      const coordinatesMap = buildCoordinatesMap(facilities);
+      const coordinates = calculateMarkerOffset(facility, coordinatesMap, facilities, index);
       
-      // Create the marker using our service
-      const marker = createMarker(
+      // Create the marker with explicit map reference for reliable addition
+      const marker = createFacilityMarker(
         facility,
-        map,
+        coordinates,
         isHighlighted,
         onMarkerClick,
-        facilities,
-        index
+        map
       );
       
-      if (!marker) {
-        console.warn(`Failed to create marker for ${facility.name}`);
-        addError(facility, new Error('Failed to create marker'), 'CREATION_FAILED');
-        return null;
-      }
-
-      // Configure the popup
-      configurePopup(marker);
-      
-      // Attach marker to map - check if it's already attached
-      if (map && !marker.getElement().isConnected) {
-        try {
-          attachMarkerToMap(marker, map);
-        } catch (err) {
-          console.error("Error attaching marker to map:", err);
-          addError(facility, new Error('Error attaching to map'), 'ATTACHMENT_FAILED');
+      // Don't overwrite existing markers to reduce re-rendering
+      if (typeof window !== 'undefined') {
+        if (!window._persistentMarkers) {
+          window._persistentMarkers = {};
         }
-      }
-      
-      // Get marker element and apply click handler
-      const markerElement = marker.getElement();
-      if (markerElement) {
-        applyClickHandlerToMarker(
-          markerElement,
-          marker,
-          facility.id,
-          facility.name,
-          onMarkerClick
-        );
         
-        // Apply click handler to show popup
-        markerElement.addEventListener('click', () => {
-          forcePopupOpen(marker, facility.id);
-        });
-      } else {
-        // Handle missing marker element error
-        addError(facility, new Error('Marker element not created'), 'MISSING_ELEMENT');
-        return null;
+        // Store the marker for future reference
+        window._persistentMarkers[facility.id] = marker;
       }
-      
-      // Force the marker to be visible and interactive
-      enhanceMarkerVisibility(marker);
-      
-      // Persist marker to prevent garbage collection
-      persistMarker(facility, marker);
       
       // If we had previous errors for this facility, mark them as recovered
       if (hasErrorForFacility(facility.id)) {
@@ -163,7 +97,7 @@ export const useCreateNewMarker = () => {
         // If we should retry, attempt to create the marker again with a slight delay
         setTimeout(() => {
           try {
-            createNewMarker(facility, map, isHighlighted, onMarkerClick, facilities, index);
+            createMarker(facility, map, isHighlighted, onMarkerClick, facilities, index);
           } catch (retryError) {
             console.error(`Retry failed for ${facility.name}:`, retryError);
           }
@@ -174,8 +108,26 @@ export const useCreateNewMarker = () => {
     }
   };
 
+  // Apply styles to enhance marker visibility
+  const enhanceMarkerVisibility = (marker: mapboxgl.Marker) => {
+    const el = marker.getElement();
+    if (el) {
+      // Use CSS classes instead of inline styles when possible
+      el.classList.add('custom-marker');
+      
+      // Set critical inline styles for visibility
+      el.style.visibility = 'visible';
+      el.style.display = 'block';
+      el.style.opacity = '1';
+      el.style.zIndex = '9999';
+      
+      // Set persistent data attribute
+      el.setAttribute('data-persistent', 'true');
+    }
+  };
+
   return {
-    createMarker: createNewMarker,
+    createMarker,
     enhanceMarkerVisibility,
     clearExistingMarkers
   };

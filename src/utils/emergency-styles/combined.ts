@@ -29,7 +29,6 @@ export function applyAllEmergencyFixes() {
   const interval = setInterval(() => {
     forceExistingMarkersVisible();
     enhanceMarkerClickability();
-    enhanceHeaderMarkers();
   }, 200);
   
   // Return cleanup function

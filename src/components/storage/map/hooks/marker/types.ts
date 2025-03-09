@@ -1,7 +1,10 @@
 
-import { RefObject } from 'react';
-import mapboxgl from 'mapbox-gl';
-import { StorageFacility } from '../../../types';
+export interface UseMarkerCreationProps {
+  map: mapboxgl.Map;
+  facilities: StorageFacility[];
+  highlightedFacility: string | null;
+  onMarkerClick: (facilityId: string) => void;
+}
 
 export interface MarkerStatistics {
   markersCreated: number;
@@ -13,28 +16,6 @@ export interface MarkerStatistics {
   endTime?: number;
 }
 
-export interface UseMarkerCreationProps {
-  map: mapboxgl.Map;
-  facilities: StorageFacility[];
-  highlightedFacility: string | null;
-  onMarkerClick: (facilityId: string) => void;
-}
-
-export interface UseMarkerVisibilityProps {
-  map: mapboxgl.Map | null;
-}
-
-export interface UseMarkerHighlightProps {
-  map: mapboxgl.Map | null;
-  facilities: StorageFacility[];
-  highlightedFacility: string | null;
-}
-
-export interface UseMarkerPersistenceProps {
-  map: mapboxgl.Map | null;
-}
-
-// Define MarkerError interface for internal usage
 export interface MarkerError {
   facilityId: string;
   facilityName: string;
@@ -44,16 +25,10 @@ export interface MarkerError {
   recovered: boolean;
 }
 
-export interface PersistentMarkers {
-  [facilityId: string]: mapboxgl.Marker;
-}
-
-// Extend Window interface to include our custom property
-declare global {
-  interface Window {
-    _persistentMarkers?: PersistentMarkers;
-    mapInstance?: mapboxgl.Map;
-    isStorageFacilitiesPage?: boolean;
-    mapboxgl?: typeof mapboxgl;
-  }
+export interface UseMarkerErrorHandlingReturn {
+  addError: (facility: any, error: Error, type: string) => void;
+  hasErrorForFacility: (facilityId: string) => boolean;
+  markErrorAsRecovered: (facilityId: string) => void;
+  attemptErrorRecovery: (facilityId: string) => boolean;
+  errors: MarkerError[];
 }
