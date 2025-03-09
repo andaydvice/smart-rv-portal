@@ -9,8 +9,9 @@
     <meta name="author" content="Lovable" />
     <meta property="og:image" content="/og-image.svg" />
     
-    <!-- Critical CSS for map markers -->
+    <!-- Critical CSS for map markers - Updated for better performance -->
     <style>
+      /* Force markers to be visible */
       .mapboxgl-marker, .custom-marker, .marker, [class*="marker"] {
         display: block !important;
         visibility: visible !important;
@@ -19,16 +20,48 @@
         pointer-events: auto !important;
         position: absolute !important;
       }
+      /* Force popups to be visible */
       .mapboxgl-popup {
         display: block !important;
         visibility: visible !important;
         opacity: 1 !important;
         z-index: 10000 !important;
       }
+      /* Ensure map is visible */
+      .mapboxgl-map {
+        visibility: visible !important;
+        display: block !important;
+        opacity: 1 !important;
+      }
+      /* Enhance map container visibility */
+      .mapboxgl-canvas-container,
+      .mapboxgl-canvas {
+        visibility: visible !important;
+        display: block !important;
+        opacity: 1 !important;
+      }
+      /* Add fade-in animation for smoother loading */
+      body {
+        opacity: 1;
+        transition: opacity 0.5s ease-in-out;
+      }
+      body.loading {
+        opacity: 0;
+      }
     </style>
   </head>
-  <body>
+  <body class="loading">
     <div id="root"></div>
+    <script>
+      // Mark body as loaded after content is available
+      window.addEventListener('DOMContentLoaded', function() {
+        document.body.classList.remove('loading');
+      });
+      // Force any stalled loading to complete after 5 seconds
+      setTimeout(function() {
+        document.body.classList.remove('loading');
+      }, 5000);
+    </script>
     <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
     <script type="module" src="/src/main.tsx"></script>
     <script src="/markerFix.js" defer></script>

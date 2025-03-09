@@ -4,7 +4,7 @@ import StorageFacilitiesMap from "@/components/storage/StorageFacilitiesMap";
 import Navbar from "@/components/Navbar";
 import Layout from "@/components/layout/Layout";
 import { Warehouse } from "lucide-react";
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { applyAllEmergencyFixes } from "@/utils/emergency-styles/combined";
 import { forceMapMarkersVisible, testMarkersVisibility, ensureMarkersExist, ensureMapVisible } from "@/utils/markers";
 import "../styles/marker-fix.css";
@@ -12,6 +12,8 @@ import "../styles/emergency-marker-fix.css";
 import "../styles/map-optimizations.css";
 
 export default function StorageFacilities() {
+  const [isLoading, setIsLoading] = useState(true);
+  
   useEffect(() => {
     console.log("StorageFacilities: Component mounted, applying fixes");
     
@@ -23,15 +25,6 @@ export default function StorageFacilities() {
     
     // Force markers to be visible - run multiple times with different delays
     forceMapMarkersVisible();
-    
-    // Create multiple timeouts to ensure markers stay visible during page load
-    const forceIntervals = [100, 300, 500, 1000, 2000, 5000].map(delay => 
-      setTimeout(() => {
-        console.log(`Running marker visibility check at ${delay}ms`);
-        forceMapMarkersVisible();
-        ensureMapVisible();
-      }, delay)
-    );
     
     // Add class to document for CSS targeting
     document.body.classList.add('storage-facilities-page');
@@ -47,14 +40,27 @@ export default function StorageFacilities() {
         if ((window as any).mapFacilities && (window as any).mapFacilities.length > 0) {
           ensureMarkersExist(map, (window as any).mapFacilities);
         }
-      }, 2000);
+        
+        // Set loading to false when map is created
+        setIsLoading(false);
+      }, 1000);
     };
     
     document.addEventListener('mapboxgl.map.created', handleMapCreated);
     
+    // Create multiple timeouts to ensure markers stay visible during page load
+    const forceIntervals = [300, 1000, 2000].map(delay => 
+      setTimeout(() => {
+        console.log(`Running marker visibility check at ${delay}ms`);
+        forceMapMarkersVisible();
+        ensureMapVisible();
+      }, delay)
+    );
+    
     // Run marker visibility test after the page has loaded
     const testTimeout = setTimeout(() => {
       testMarkersVisibility(true);
+      setIsLoading(false); // Ensure loading is set to false even if map creation event never fires
     }, 3000);
     
     // Clean up
@@ -103,7 +109,14 @@ export default function StorageFacilities() {
         
         <Container fullWidth className="px-2 md:px-4">
           <div className="py-8">
-            <StorageFacilitiesMap />
+            {isLoading ? (
+              <div className="flex flex-col items-center justify-center h-[600px] bg-[#151A22] rounded-lg">
+                <div className="w-16 h-16 border-4 border-t-[#5B9BD5] border-r-transparent border-b-transparent border-l-transparent rounded-full animate-spin"></div>
+                <p className="mt-4 text-lg text-white">Loading map and facilities...</p>
+              </div>
+            ) : (
+              <StorageFacilitiesMap />
+            )}
           </div>
         </Container>
       </div>
