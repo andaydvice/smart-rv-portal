@@ -1,19 +1,14 @@
 
-import { 
-  testMarkerVisibility, 
-  monitorMarkerVisibility,
-  createMarkerDebugOverlay,
-  auditMarkerVisibility
-} from './visibilityTester';
-
 export {
+  testMarkersVisibility,
   testMarkerVisibility,
+  auditMarkerVisibility,
   monitorMarkerVisibility,
+  createMarkerDebugger,
   createMarkerDebugOverlay,
-  auditMarkerVisibility
-};
-
-export type { 
-  MarkerVisibilityTestResult,
-  VisibilityIssueDetail
 } from './visibilityTester';
+
+export type {
+  MarkerVisibilityTestResult,
+  VisibilityIssueDetail,
+} from '../../components/storage/map/hooks/marker/types';

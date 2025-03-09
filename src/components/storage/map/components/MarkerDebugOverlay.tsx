@@ -1,6 +1,6 @@
 
 import React, { useEffect, useState } from 'react';
-import { createMarkerDebugger, testMarkersVisibility } from '@/utils/markers';
+import { createMarkerDebugger, testMarkersVisibility, MarkerVisibilityTestResult } from '@/utils/markers/testing';
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
@@ -15,7 +15,11 @@ import { Bug, CheckCircle2, AlertTriangle } from 'lucide-react';
 
 const MarkerDebugOverlay: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [markerStats, setMarkerStats] = useState({
+  const [markerStats, setMarkerStats] = useState<{
+    total: number;
+    visible: number;
+    hidden: number;
+  }>({
     total: 0,
     visible: 0,
     hidden: 0

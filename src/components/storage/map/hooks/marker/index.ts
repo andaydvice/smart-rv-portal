@@ -15,6 +15,5 @@ export * from './types';
 
 // Export services
 export { 
-  useMarkerErrorHandling,
-  type UseMarkerErrorHandlingReturn 
+  useMarkerErrorHandling 
 } from './useMarkerErrorHandling';

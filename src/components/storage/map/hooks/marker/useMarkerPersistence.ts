@@ -1,61 +1,78 @@
 
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 import { UseMarkerPersistenceProps } from './types';
-import { useMarkerVisibility } from './useMarkerVisibility';
 
 export const useMarkerPersistence = ({ map }: UseMarkerPersistenceProps) => {
-  const { forceMarkerVisibility } = useMarkerVisibility({ map });
-  const lastRestoredTime = useRef<number>(0);
+  // Initialize the persistent markers tracking if needed
+  useEffect(() => {
+    if (typeof window !== 'undefined' && !window._persistentMarkers) {
+      window._persistentMarkers = {};
+    }
+  }, []);
 
-  // Restore markers after map style reload with rate limiting
+  // Ensure markers persist across map updates
   useEffect(() => {
     if (!map) return;
-    
-    const handleStyleData = () => {
-      // Rate limit restoration to prevent excessive operations
-      const now = Date.now();
-      if (now - lastRestoredTime.current < 1000) {
-        return; // Skip if called too frequently
-      }
-      
-      lastRestoredTime.current = now;
-      
-      // When map style reloads, restore markers after a delay
-      setTimeout(() => {
-        // Re-add markers that aren't connected to DOM
-        if (window._persistentMarkers) {
-          let restoredCount = 0;
-          Object.values(window._persistentMarkers).forEach((marker) => {
-            if (marker && !marker.getElement().isConnected && map) {
-              marker.addTo(map);
-              restoredCount++;
-            }
-          });
-          
-          if (restoredCount > 0) {
-            console.log(`Restored ${restoredCount} markers after style reload`);
-          }
-        }
-        
-        // Force visibility after restoring markers
-        forceMarkerVisibility();
-      }, 300);
-    };
-    
-    map.on('styledata', handleStyleData);
-    
-    return () => {
-      map.off('styledata', handleStyleData);
-    };
-  }, [map, forceMarkerVisibility]);
 
-  // Use a less frequent interval for periodic visibility checks
-  useEffect(() => {
-    const visibilityInterval = setInterval(forceMarkerVisibility, 3000); // Less frequent checks
-    return () => {
-      clearInterval(visibilityInterval);
+    // Function to enforce markers to stay on the map
+    const enforceMarkers = () => {
+      if (window._persistentMarkers) {
+        // Count how many markers we readded
+        let readdedCount = 0;
+        
+        // Check all tracked markers
+        Object.entries(window._persistentMarkers).forEach(([facilityId, marker]) => {
+          try {
+            // Skip already attached markers
+            if (marker.getElement().isConnected) return;
+            
+            // Re-add marker to map
+            marker.addTo(map);
+            readdedCount++;
+            
+            // Make marker visible and functional
+            const el = marker.getElement();
+            if (el) {
+              el.style.visibility = 'visible';
+              el.style.display = 'block';
+              el.style.opacity = '1';
+              el.style.pointerEvents = 'auto';
+            }
+          } catch (err) {
+            console.warn(`Error ensuring persistence for marker ${facilityId}:`, err);
+          }
+        });
+        
+        // Log only if we actually did something
+        if (readdedCount > 0) {
+          console.log(`Re-added ${readdedCount} markers to map`);
+        }
+      }
     };
-  }, [forceMarkerVisibility]);
+    
+    // Run initially
+    enforceMarkers();
+    
+    // Set up recurring checks
+    const interval = setInterval(enforceMarkers, 2000);
+    
+    // Set up event listeners for map movements that might affect markers
+    map.on('moveend', enforceMarkers);
+    map.on('zoomend', enforceMarkers);
+    map.on('rotate', enforceMarkers);
+    map.on('dragend', enforceMarkers);
+    
+    return () => {
+      clearInterval(interval);
+      
+      if (map) {
+        map.off('moveend', enforceMarkers);
+        map.off('zoomend', enforceMarkers);
+        map.off('rotate', enforceMarkers);
+        map.off('dragend', enforceMarkers);
+      }
+    };
+  }, [map]);
 
   return {};
 };
