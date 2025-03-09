@@ -16,7 +16,8 @@ export function createEmergencyMarkers(map: mapboxgl.Map, facilities: any[]): nu
   if (!container) {
     container = document.createElement('div');
     container.className = 'emergency-markers-container';
-    container.style.cssText = `
+    // Use proper HTMLElement type assertion for the container
+    (container as HTMLElement).style.cssText = `
       position: absolute;
       top: 0;
       left: 0;
@@ -30,7 +31,10 @@ export function createEmergencyMarkers(map: mapboxgl.Map, facilities: any[]): nu
     if (mapContainer) {
       mapContainer.appendChild(container);
     } else {
-      document.querySelector('.mapboxgl-map')?.appendChild(container);
+      const mapElement = document.querySelector('.mapboxgl-map');
+      if (mapElement) {
+        mapElement.appendChild(container);
+      }
     }
   }
   
@@ -63,8 +67,8 @@ export function createEmergencyMarkers(map: mapboxgl.Map, facilities: any[]): nu
       markerEl.setAttribute('data-lat', String(lat));
       markerEl.setAttribute('data-lng', String(lng));
       
-      // Style the marker
-      markerEl.style.cssText = `
+      // Style the marker - use HTMLElement type assertion
+      (markerEl as HTMLElement).style.cssText = `
         position: absolute;
         left: ${point.x}px;
         top: ${point.y}px;
@@ -102,7 +106,8 @@ export function createEmergencyMarkers(map: mapboxgl.Map, facilities: any[]): nu
         // Show a simple popup
         const popup = document.createElement('div');
         popup.className = 'emergency-popup';
-        popup.style.cssText = `
+        // Use HTMLElement type assertion for popup
+        (popup as HTMLElement).style.cssText = `
           position: absolute;
           left: ${point.x}px;
           top: ${point.y - 10}px;

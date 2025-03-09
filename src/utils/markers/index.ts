@@ -1,6 +1,7 @@
 
 // Export marker forcing utilities
 export { forceMapMarkersVisible, applyForcedStyles, testMarkersVisibility } from './forcing/markerForcing';
+// Export ensureMarkersOnMap directly from the ensureMarkers file
 export { ensureMarkersOnMap } from './forcing/ensureMarkers';
 
 // Export marker testing utilities
