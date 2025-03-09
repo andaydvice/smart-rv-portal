@@ -24,9 +24,12 @@ export type {
   StorageFacility
 } from './types';
 
+// Import ensureMarkersOnMap for local use
+import { ensureMarkersOnMap } from './forcing/ensureMarkers';
+
 // Function to ensure markers exist on map - emergency marker creation
 export const ensureMarkersExist = (map: mapboxgl.Map, facilities: any[]) => {
   console.log('EMERGENCY MARKER CREATION: Ensuring markers exist on map', facilities.length);
-  // Use the imported ensureMarkersOnMap function from the export above
+  // Use the imported ensureMarkersOnMap function
   return ensureMarkersOnMap(map, facilities);
 };
