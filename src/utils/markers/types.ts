@@ -29,10 +29,11 @@ export interface VisibilityIssueDetail {
 }
 
 // Type for facility objects used by the markers
+// This is a minimal version that only includes what markers need
 export interface StorageFacility {
   id: string;
   name: string;
   latitude: number | string;
   longitude: number | string;
-  [key: string]: any;
+  [key: string]: any; // Allow additional properties to support both types
 }
