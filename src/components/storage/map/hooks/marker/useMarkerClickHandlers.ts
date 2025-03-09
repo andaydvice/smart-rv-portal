@@ -86,15 +86,15 @@ export const useMarkerClickHandlers = () => {
     // Remove any existing click listeners to prevent duplicates
     const oldHandler = markerElement.getAttribute('data-click-handler');
     if (oldHandler) {
-      markerElement.removeEventListener('click', window[oldHandler as keyof typeof window] as EventListener);
+      markerElement.removeEventListener('click', (window as any)[oldHandler] as EventListener);
     }
     
     // Add new click event handler
     markerElement.addEventListener('click', handleMarkerClick);
     
-    // Store handler reference for later cleanup
+    // Store handler reference for later cleanup - using window object instead of globalThis
     const handlerName = `marker_handler_${facilityId.replace(/[^a-zA-Z0-9]/g, '_')}`;
-    window[handlerName as keyof typeof window] = handleMarkerClick as any;
+    (window as any)[handlerName] = handleMarkerClick;
     markerElement.setAttribute('data-click-handler', handlerName);
   };
 
