@@ -58,9 +58,12 @@ export const useMapSetup = (map: mapboxgl.Map | null,
   useEffect(() => {
     if (map && mapLoaded && validFacilities.length > 0) {
       console.log(`Fitting map to bounds with ${validFacilities.length} valid coordinates`);
-      fitMapToBounds(map, validFacilities);
+      
+      // Fix: Pass the required arguments to fitMapToBounds
+      fitMapToBounds(map, validFacilities, 50, 10);
     }
   }, [validFacilities, mapLoaded, map, selectedState]);
 
   return { map };
 };
+
