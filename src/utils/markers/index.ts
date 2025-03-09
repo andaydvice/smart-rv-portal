@@ -12,29 +12,12 @@ export {
   createMarkerDebugOverlay
 } from './testing';
 
-// Export types
-export interface MarkerVisibilityTestResult {
-  totalMarkers: number;
-  visibleMarkers: number;
-  hiddenMarkers: number;
-  issues: VisibilityIssueDetail[];
-}
-
-export interface VisibilityIssueDetail {
-  elementId: string;
-  elementType: string;
-  issueType: 'visibility' | 'display' | 'opacity' | 'zIndex' | 'position' | 'events' | 'other';
-  description: string;
-  computedStyles: {
-    visibility: string;
-    display: string;
-    opacity: string;
-    zIndex: string;
-    position: string;
-    pointerEvents: string;
-  };
-  recommendation: string;
-}
+// Export types from central types file
+export type {
+  MarkerVisibilityTestResult,
+  VisibilityIssueDetail,
+  StorageFacility
+} from './types';
 
 // Function to ensure markers exist on map - emergency marker creation
 export const ensureMarkersExist = (map: mapboxgl.Map, facilities: any[]) => {

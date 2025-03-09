@@ -1,5 +1,5 @@
 
-import { StorageFacility } from '../../../types';
+import { StorageFacility, MarkerVisibilityTestResult, VisibilityIssueDetail } from '@/utils/markers';
 
 export interface UseMarkerCreationProps {
   map: mapboxgl.Map;
@@ -49,25 +49,5 @@ export interface UseMarkerPersistenceProps {
   map: mapboxgl.Map | null;
 }
 
-export interface MarkerVisibilityTestResult {
-  totalMarkers: number;
-  visibleMarkers: number;
-  hiddenMarkers: number;
-  issues: VisibilityIssueDetail[];
-}
-
-export interface VisibilityIssueDetail {
-  elementId: string;
-  elementType: string;
-  issueType: 'visibility' | 'display' | 'opacity' | 'zIndex' | 'position' | 'events' | 'other';
-  description: string;
-  computedStyles: {
-    visibility: string;
-    display: string;
-    opacity: string;
-    zIndex: string;
-    position: string;
-    pointerEvents: string;
-  };
-  recommendation: string;
-}
+// Re-export these types for backward compatibility
+export type { MarkerVisibilityTestResult, VisibilityIssueDetail };

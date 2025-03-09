@@ -16,8 +16,8 @@ export {
   createMarkerDebugOverlay,
 };
 
-// Re-export types from main markers index file
+// Re-export types from main markers types file
 export type {
   MarkerVisibilityTestResult,
   VisibilityIssueDetail,
-} from '../index';
+} from '../types';

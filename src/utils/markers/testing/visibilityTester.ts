@@ -1,4 +1,4 @@
-import type { MarkerVisibilityTestResult, VisibilityIssueDetail } from '../index';
+import type { MarkerVisibilityTestResult, VisibilityIssueDetail } from '../types';
 
 /**
  * Test marker visibility and fix issues

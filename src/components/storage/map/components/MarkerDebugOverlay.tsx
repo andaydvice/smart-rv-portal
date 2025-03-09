@@ -29,8 +29,8 @@ const MarkerDebugOverlay: React.FC = () => {
   
   // Show full debugger
   const showDebugger = () => {
-    const debugger = createMarkerDebugger();
-    document.body.appendChild(debugger);
+    const debugElement = createMarkerDebugger();
+    document.body.appendChild(debugElement);
   };
   
   // Do not render in production
