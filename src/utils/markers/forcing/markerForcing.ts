@@ -106,7 +106,9 @@ export function applyForcedStyles(element: HTMLElement) {
   const facilityId = element.getAttribute('data-facility-id');
   if (facilityId && window._persistentMarkers && window._persistentMarkers[facilityId]) {
     // This is a marker that should be highlighted
-    if (facilityId === window.highlightedFacilityId) {
+    // Fix: Use type assertion to access highlightedFacilityId on window
+    const highlightedId = (window as any).highlightedFacilityId;
+    if (facilityId === highlightedId) {
       element.style.backgroundColor = '#10B981';
       element.style.width = '28px';
       element.style.height = '28px';
@@ -150,7 +152,7 @@ export function ensureMapVisible() {
  */
 export function removeViewDetailsButtons() {
   // Target all view details buttons
-  document.querySelectorAll('.view-facility-btn, button:contains("View Details")').forEach(button => {
+  document.querySelectorAll('.view-facility-btn, button.view-details').forEach(button => {
     if (button instanceof HTMLElement) {
       button.style.display = 'none';
       button.style.visibility = 'hidden';

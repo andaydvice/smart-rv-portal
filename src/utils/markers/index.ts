@@ -3,6 +3,8 @@
 export { forceMapMarkersVisible, applyForcedStyles, testMarkersVisibility } from './forcing/markerForcing';
 // Export ensureMarkersOnMap directly from the ensureMarkers file
 export { ensureMarkersOnMap } from './forcing/ensureMarkers';
+// Export ensureMapVisible and removeViewDetailsButtons from markerForcing.ts
+export { ensureMapVisible, removeViewDetailsButtons } from './forcing/markerForcing';
 
 // Export marker testing utilities
 export {

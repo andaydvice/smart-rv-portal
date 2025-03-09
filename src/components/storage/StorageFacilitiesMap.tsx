@@ -1,4 +1,3 @@
-
 "use client";
 
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
@@ -47,7 +46,7 @@ const StorageFacilitiesMap = () => {
   
   useEffect(() => {
     if (displayFacilities.length > 0) {
-      window.mapFacilities = displayFacilities;
+      (window as any).mapFacilities = displayFacilities;
     }
   }, [displayFacilities]);
   
@@ -59,12 +58,11 @@ const StorageFacilitiesMap = () => {
     addToRecentlyViewed 
   });
   
-  // Store highlighted facility ID globally for other components to access
   useEffect(() => {
     if (highlightedFacility) {
-      window.highlightedFacilityId = highlightedFacility;
+      (window as any).highlightedFacilityId = highlightedFacility;
     } else {
-      window.highlightedFacilityId = null;
+      (window as any).highlightedFacilityId = null;
     }
   }, [highlightedFacility]);
   
@@ -82,13 +80,10 @@ const StorageFacilitiesMap = () => {
     
     document.body.setAttribute('data-markers-loading', 'true');
     
-    // Force map markers to be visible
     forceMapMarkersVisible();
     
-    // Remove any "View Details" buttons
     removeViewDetailsButtons();
     
-    // Set up interval to continuously force markers visible
     const forceInterval = setInterval(() => {
       ensureMapVisible();
       
@@ -110,22 +105,19 @@ const StorageFacilitiesMap = () => {
         }
       });
       
-      // Remove view details buttons
       removeViewDetailsButtons();
       
-      // Ensure markers exist if needed
-      if (window.mapInstance && window.mapFacilities && markers.length < window.mapFacilities.length * 0.8) {
-        ensureMarkersExist(window.mapInstance, window.mapFacilities);
+      if ((window as any).mapInstance && (window as any).mapFacilities && 
+          markers.length < ((window as any).mapFacilities.length * 0.8)) {
+        ensureMarkersExist((window as any).mapInstance, (window as any).mapFacilities);
       }
     }, 1000);
     
-    // Set up mutation observer to catch new markers and make them visible
     const observer = new MutationObserver((mutations) => {
       mutations.forEach(mutation => {
         if (mutation.type === 'childList') {
           mutation.addedNodes.forEach(node => {
             if (node instanceof HTMLElement) {
-              // Make new markers visible
               if (node.classList.contains('mapboxgl-marker') || 
                   node.classList.contains('custom-marker') ||
                   node.classList.contains('emergency-marker')) {
@@ -140,16 +132,13 @@ const StorageFacilitiesMap = () => {
                 `;
               }
               
-              // Handle new popups
               if (node.classList.contains('mapboxgl-popup')) {
-                // Fix close button
                 const closeButton = node.querySelector('.mapboxgl-popup-close-button');
                 if (closeButton instanceof HTMLElement) {
                   closeButton.style.pointerEvents = 'all';
                   closeButton.style.cursor = 'pointer';
                   closeButton.style.zIndex = '10001';
                   
-                  // Remove View Details button in popup
                   const viewDetailsBtn = node.querySelector('.view-facility-btn, button.view-details');
                   if (viewDetailsBtn instanceof HTMLElement) {
                     viewDetailsBtn.style.display = 'none';
@@ -170,17 +159,13 @@ const StorageFacilitiesMap = () => {
       subtree: true
     });
     
-    // Add event listener for popup close events
     const handlePopupClosed = () => {
       console.log('Popup closed event detected');
       
-      // Ensure map is visible
       ensureMapVisible();
       
-      // Force all markers to be visible
       forceMapMarkersVisible();
       
-      // Remove unwanted buttons
       removeViewDetailsButtons();
     };
     
@@ -220,7 +205,6 @@ const StorageFacilitiesMap = () => {
     console.log(`Marker clicked: ${facilityId}`);
     handleFacilityClick(facilityId, displayFacilities);
     
-    // Make sure map remains visible
     setTimeout(() => {
       ensureMapVisible();
     }, 100);
