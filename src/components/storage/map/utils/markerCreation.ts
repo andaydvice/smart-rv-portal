@@ -48,12 +48,12 @@ export function createFacilityMarker(
   // Set popup data attribute for CSS targeting
   popup.addClassName(`popup-${facility.id}`);
   
-  // Simplified popup content with just the essential info
+  // FIX: Properly populate popup content with actual facility data
   popup.setHTML(`
     <div class="facility-popup-content" data-facility-id="${facility.id}">
-      <h3 class="text-lg font-semibold mb-1">${facility.name}</h3>
-      <p class="text-sm mb-1">${facility.address}</p>
-      <p class="text-sm mb-1">Price: $${facility.price_range.min} - $${facility.price_range.max}</p>
+      <h3 class="text-lg font-semibold mb-1">${facility.name || 'Unnamed Facility'}</h3>
+      <p class="text-sm mb-1">${facility.address || 'No address available'}, ${facility.city || ''}, ${facility.state || ''}</p>
+      <p class="text-sm mb-1">Price: $${facility.price_range?.min || 0} - $${facility.price_range?.max || 0}</p>
       ${facility.contact_phone ? `<p class="text-sm mb-1">Phone: ${facility.contact_phone}</p>` : ''}
     </div>
   `);
