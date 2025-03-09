@@ -13,7 +13,8 @@ export {
 export { 
   createEmergencyMarkers,
   setupEmergencyMarkerListeners,
-  injectEmergencyMarkerStyles
+  injectEmergencyMarkerStyles,
+  closeAllEmergencyPopups
 } from './emergency/directMarkerCreation';
 
 // Export types from central types file
