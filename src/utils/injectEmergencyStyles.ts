@@ -57,6 +57,9 @@ export function injectEmergencyStyles() {
     
     .fixed-orange-marker {
       animation: header-pulse 1.5s infinite ease-in-out;
+      display: block !important;
+      visibility: visible !important;
+      opacity: 1 !important;
     }
     
     /* Force popup visibility */
@@ -104,7 +107,8 @@ export function injectEmergencyStyles() {
     }
     
     /* Add visibility to header markers */
-    .orange-marker-indicator {
+    .orange-marker-indicator,
+    .fixed-orange-marker {
       width: 24px !important;
       height: 24px !important;
       background-color: #F97316 !important;
@@ -113,7 +117,10 @@ export function injectEmergencyStyles() {
       box-shadow: 0 0 10px rgba(249,115,22,0.8) !important;
       display: inline-block !important;
       position: relative !important;
+      visibility: visible !important;
+      opacity: 1 !important;
       animation: header-pulse 1.5s infinite ease-in-out !important;
+      z-index: 999999 !important;
     }
     
     /* Make sure markers created programmatically are visible */
@@ -133,6 +140,7 @@ export function injectEmergencyStyles() {
 
   // Add inline styles to any existing markers immediately
   setTimeout(() => {
+    // Force map markers
     document.querySelectorAll('.mapboxgl-marker, .custom-marker').forEach(marker => {
       if (marker instanceof HTMLElement) {
         marker.style.cssText += `
@@ -143,6 +151,22 @@ export function injectEmergencyStyles() {
           pointer-events: auto !important;
           position: absolute !important;
           cursor: pointer !important;
+        `;
+      }
+    });
+    
+    // Force header markers
+    document.querySelectorAll('.fixed-orange-marker, .orange-marker-indicator').forEach(marker => {
+      if (marker instanceof HTMLElement) {
+        marker.style.cssText += `
+          visibility: visible !important;
+          display: block !important;
+          opacity: 1 !important;
+          background-color: #F97316 !important;
+          border-radius: 50% !important;
+          border: 3px solid white !important;
+          box-shadow: 0 0 15px rgba(249,115,22,0.8) !important;
+          z-index: 999999 !important;
         `;
       }
     });

@@ -47,6 +47,9 @@ div[class*="marker"],
 
 .fixed-orange-marker {
   animation: header-pulse 1.5s infinite ease-in-out;
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
 }
 
 /* Force popup visibility */
@@ -123,4 +126,14 @@ div .mapboxgl-marker {
   top: 0 !important;
   margin-right: 8px !important;
   animation: header-pulse 1.5s infinite ease-in-out !important;
+}
+
+/* Ensure header markers specially are visible */
+.fixed-orange-marker,
+.orange-marker-indicator {
+  visibility: visible !important;
+  display: block !important;
+  opacity: 1 !important;
+  background-color: #F97316 !important;
+  z-index: 99999 !important;
 }

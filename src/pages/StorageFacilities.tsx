@@ -29,6 +29,25 @@ export default function StorageFacilities() {
     
     // Add direct DOM manipulation fallback on a faster interval
     const forceInterval = setInterval(() => {
+      // Force header markers to be visible
+      document.querySelectorAll('.fixed-orange-marker').forEach(marker => {
+        if (marker instanceof HTMLElement) {
+          marker.style.cssText += `
+            width: 30px !important;
+            height: 30px !important;
+            background-color: #F97316 !important;
+            border-radius: 50% !important;
+            border: 3px solid white !important;
+            box-shadow: 0 0 15px rgba(249, 115, 22, 0.8) !important;
+            animation: header-pulse 1.5s infinite ease-in-out !important;
+            display: block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+          `;
+        }
+      });
+      
+      // Force map markers to be visible
       const markers = document.querySelectorAll('.mapboxgl-marker, .custom-marker');
       console.log(`Found ${markers.length} markers to force visible`);
       
