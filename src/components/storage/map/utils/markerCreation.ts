@@ -11,10 +11,10 @@ export function createFacilityMarker(
 ): mapboxgl.Marker {
   // Create marker container
   const el = document.createElement('div');
-  el.className = 'marker-container';
+  el.className = 'static-marker';
   el.id = `marker-${facility.id}`;
   
-  // Use simplified styling that won't cause positioning issues
+  // Use fixed styling without transforms to prevent marker movement
   el.style.cssText = `
     background-color: ${isHighlighted ? '#10B981' : '#F97316'};
     width: 30px;
@@ -28,66 +28,86 @@ export function createFacilityMarker(
   // Store facility ID as data attribute
   el.setAttribute('data-facility-id', facility.id);
   
-  // Create popup content
+  // Create popup content with address, phone and price
   const popupContent = `
-    <div class="facility-popup-content">
-      <h3>${facility.name}</h3>
-      <p>${facility.address}</p>
-      <p>Price: $${facility.price_range.min} - $${facility.price_range.max}</p>
-      <button class="view-facility-btn" data-facility-id="${facility.id}">View Details</button>
+    <div class="facility-popup-content p-4">
+      <h3 class="text-lg font-bold mb-2">${facility.name}</h3>
+      <p class="mb-1 text-sm"><strong>Address:</strong> ${facility.address}</p>
+      ${facility.contact_phone ? `<p class="mb-1 text-sm"><strong>Phone:</strong> ${facility.contact_phone}</p>` : ''}
+      <p class="mb-2 text-sm"><strong>Price:</strong> $${facility.price_range.min} - $${facility.price_range.max}</p>
+      <div class="flex justify-between items-center mt-3">
+        <button class="view-facility-btn bg-[#F97316] text-white px-3 py-1 rounded text-sm" data-facility-id="${facility.id}">View Details</button>
+        <button class="close-popup-btn text-white bg-gray-600 px-3 py-1 rounded text-sm">Close</button>
+      </div>
     </div>
   `;
   
-  // Create popup
+  // Create popup with proper offset to avoid movement
   const popup = new mapboxgl.Popup({
-    closeButton: true,
+    closeButton: false,
     closeOnClick: false,
     maxWidth: '300px',
     className: 'facility-popup',
-    offset: 15
+    offset: 0
   }).setHTML(popupContent);
   
-  // Add a direct click handler to the element before creating the marker
-  const directClickHandler = (e: MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    
-    console.log(`Direct marker click for facility ${facility.id}`);
-    
-    // Call the onClick handler directly
-    onClick(facility.id);
-  };
-  
-  // Add click event listener
-  el.addEventListener('click', directClickHandler);
-  
-  // Create the marker with NO OFFSET to prevent movement
+  // Create marker with fixed position
   const marker = new mapboxgl.Marker({
     element: el,
     anchor: 'center'
   })
-  .setLngLat(coordinates)
-  .setPopup(popup);
+  .setLngLat(coordinates);
+  
+  // Add click handler directly to the element
+  el.addEventListener('click', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    
+    // Toggle popup
+    const popupIsOpen = el.getAttribute('data-popup-open') === 'true';
+    
+    if (!popupIsOpen) {
+      marker.setPopup(popup);
+      marker.togglePopup();
+      el.setAttribute('data-popup-open', 'true');
+      
+      // Add event listeners to popup buttons
+      setTimeout(() => {
+        const popupEl = popup.getElement();
+        if (popupEl) {
+          // View details button
+          const viewBtn = popupEl.querySelector('.view-facility-btn');
+          if (viewBtn) {
+            viewBtn.addEventListener('click', (e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              onClick(facility.id);
+              marker.togglePopup(); // Close popup after clicking
+            });
+          }
+          
+          // Close button
+          const closeBtn = popupEl.querySelector('.close-popup-btn');
+          if (closeBtn) {
+            closeBtn.addEventListener('click', (e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              marker.togglePopup(); // Close popup
+              el.setAttribute('data-popup-open', 'false');
+            });
+          }
+        }
+      }, 50);
+    } else {
+      marker.togglePopup();
+      el.setAttribute('data-popup-open', 'false');
+    }
+  });
   
   // Add to map immediately
   if (map) {
     marker.addTo(map);
   }
-  
-  // Also handle popup button clicks directly
-  setTimeout(() => {
-    const popupEl = popup.getElement();
-    if (popupEl) {
-      const button = popupEl.querySelector('.view-facility-btn');
-      if (button) {
-        button.addEventListener('click', (e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          onClick(facility.id);
-        });
-      }
-    }
-  }, 100);
   
   return marker;
 }

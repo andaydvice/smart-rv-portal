@@ -1,25 +1,9 @@
 
 import mapboxgl from 'mapbox-gl';
 
-interface MarkerClickHandlers {
-  [key: string]: (e: MouseEvent) => void;
-}
-
-// Define a type for the global window extension with our handler properties
-declare global {
-  interface Window {
-    markerClickHandlers: MarkerClickHandlers;
-  }
-}
-
 export const useMarkerClickHandlers = () => {
-  // Initialize the global handlers object if it doesn't exist
-  if (typeof window !== 'undefined' && !window.markerClickHandlers) {
-    window.markerClickHandlers = {};
-  }
-
   /**
-   * Creates a simple click handler for markers
+   * Creates a simple direct click handler for markers
    */
   const createMarkerClickHandler = (
     facilityId: string,
@@ -47,30 +31,26 @@ export const useMarkerClickHandlers = () => {
     facilityName: string,
     onMarkerClick: (facilityId: string) => void
   ): void => {
-    // Remove any existing handlers
-    const oldHandlerKey = markerElement.getAttribute('data-click-handler');
-    if (oldHandlerKey && window.markerClickHandlers[oldHandlerKey]) {
-      markerElement.removeEventListener('click', window.markerClickHandlers[oldHandlerKey]);
-    }
-    
-    // Create new handler
-    const handleMarkerClick = createMarkerClickHandler(
-      facilityId,
-      facilityName,
-      onMarkerClick
-    );
-    
-    // Store for cleanup
-    const handlerKey = `marker_${facilityId}_${Date.now()}`;
-    window.markerClickHandlers[handlerKey] = handleMarkerClick;
+    // Clean up any existing listeners first for safety
+    const newHandler = (e: MouseEvent) => {
+      e.preventDefault();
+      e.stopPropagation();
+      console.log(`Static marker clicked for: ${facilityName}`);
+      onMarkerClick(facilityId);
+    };
     
     // Set attribute and add listener
-    markerElement.setAttribute('data-click-handler', handlerKey);
     markerElement.setAttribute('data-facility-id', facilityId);
     markerElement.setAttribute('data-has-click', 'true');
     
-    // Add click listener
-    markerElement.addEventListener('click', handleMarkerClick);
+    // Remove old handlers by cloning the element
+    const newElement = markerElement.cloneNode(true) as HTMLElement;
+    if (markerElement.parentNode) {
+      markerElement.parentNode.replaceChild(newElement, markerElement);
+    }
+    
+    // Add new click listener
+    newElement.addEventListener('click', newHandler);
   };
 
   return {

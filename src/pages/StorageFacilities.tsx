@@ -21,13 +21,15 @@ export default function StorageFacilities() {
     const style = document.createElement('style');
     style.textContent = `
       .mapboxgl-marker, 
-      .marker-container,
+      .static-marker,
       [data-facility-id] {
         visibility: visible !important;
         display: block !important;
         opacity: 1 !important;
         pointer-events: auto !important;
         cursor: pointer !important;
+        transform: none !important;
+        transition: none !important;
       }
     `;
     document.head.appendChild(style);
@@ -52,6 +54,20 @@ export default function StorageFacilities() {
     setTimeout(() => {
       toast.info("Click on orange markers to view storage facilities");
     }, 2000);
+    
+    // Close popups when clicking on the map outside markers
+    document.addEventListener('click', (e) => {
+      const target = e.target as HTMLElement;
+      // If clicking on the map canvas (not a marker or popup)
+      if (target.classList.contains('mapboxgl-canvas')) {
+        // Close all popups
+        document.querySelectorAll('.mapboxgl-popup').forEach(popup => {
+          if (popup.parentNode) {
+            popup.parentNode.removeChild(popup);
+          }
+        });
+      }
+    });
     
     // Clean up
     return () => {

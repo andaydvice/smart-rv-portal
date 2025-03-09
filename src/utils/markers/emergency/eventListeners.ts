@@ -3,9 +3,6 @@
  * Listen for emergency marker clicks with a simplified approach
  */
 export function setupEmergencyMarkerListeners(onMarkerClick: (facilityId: string) => void) {
-  // Set up global variable
-  window.hasDetailPanelOpen = false;
-  
   // Add direct document level handler for facility marker clicks
   const handleMarkerClick = (e: MouseEvent) => {
     // Find the closest marker element
@@ -35,7 +32,6 @@ export function setupEmergencyMarkerListeners(onMarkerClick: (facilityId: string
       const facilityId = target.getAttribute('data-facility-id');
       if (facilityId) {
         console.log('View facility button clicked:', facilityId);
-        window.hasDetailPanelOpen = true;
         onMarkerClick(facilityId);
       }
     }
@@ -44,7 +40,6 @@ export function setupEmergencyMarkerListeners(onMarkerClick: (facilityId: string
   // Return cleanup function
   return () => {
     document.removeEventListener('click', handleMarkerClick);
-    window.hasDetailPanelOpen = false;
   };
 }
 
@@ -59,5 +54,7 @@ export function closeAllEmergencyPopups() {
 
 // Function to toggle detail panel state
 export function setDetailPanelState(isOpen: boolean) {
-  window.hasDetailPanelOpen = isOpen;
+  if (typeof window !== 'undefined') {
+    window.hasDetailPanelOpen = isOpen;
+  }
 }
