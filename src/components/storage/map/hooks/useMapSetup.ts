@@ -26,6 +26,7 @@ export const useMapSetup = (map: mapboxgl.Map | null,
     // Force resize after a short delay to ensure proper rendering
     const resizeTimer = setTimeout(() => {
       if (map) {
+        // Fix: The resize method doesn't expect arguments, call it without arguments
         map.resize();
         console.log('Initial map resize triggered');
         
@@ -94,6 +95,7 @@ export const useMapSetup = (map: mapboxgl.Map | null,
       // Force map re-render
       setTimeout(() => {
         if (map) {
+          // Fix: The resize method doesn't expect arguments, call it without arguments
           map.resize();
           console.log('Map bounds set and resize triggered');
           
