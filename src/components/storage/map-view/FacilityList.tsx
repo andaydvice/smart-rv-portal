@@ -50,7 +50,7 @@ const FacilityList: React.FC<FacilityListProps> = ({
           </div>
           <div className="bg-gray-800 p-3 rounded">
             <p className="text-sm text-gray-400">Rating</p>
-            <p className="text-lg text-white">{selectedFacility.rating} ★</p>
+            <p className="text-lg text-white">{selectedFacility.avg_rating || 'N/A'} ★</p>
           </div>
         </div>
         
@@ -68,14 +68,25 @@ const FacilityList: React.FC<FacilityListProps> = ({
         
         <h3 className="text-md font-medium text-white mb-2">Contact Information</h3>
         <div className="bg-gray-800 p-3 rounded mb-4">
-          <p className="text-gray-300 mb-1">{selectedFacility.phone}</p>
-          <p className="text-gray-300">{selectedFacility.email}</p>
+          <p className="text-gray-300 mb-1">{selectedFacility.contact_phone || 'Phone not available'}</p>
+          <p className="text-gray-300">{selectedFacility.contact_email || 'Email not available'}</p>
         </div>
         
-        {selectedFacility.description && (
+        {selectedFacility.verified_fields && (
           <>
-            <h3 className="text-md font-medium text-white mb-2">Description</h3>
-            <p className="text-gray-300 bg-gray-800 p-3 rounded">{selectedFacility.description}</p>
+            <h3 className="text-md font-medium text-white mb-2">Verified Information</h3>
+            <div className="bg-gray-800 p-3 rounded">
+              <ul className="text-gray-300">
+                {Object.entries(selectedFacility.verified_fields).map(([field, isVerified]) => 
+                  isVerified ? (
+                    <li key={field} className="flex items-center mb-1">
+                      <span className="mr-2 h-2 w-2 rounded-full bg-green-500"></span>
+                      {field.replace(/_/g, ' ')}
+                    </li>
+                  ) : null
+                )}
+              </ul>
+            </div>
           </>
         )}
       </div>
@@ -101,7 +112,7 @@ const FacilityList: React.FC<FacilityListProps> = ({
                 <p className="text-gray-400 text-sm">{facility.address}</p>
                 <div className="flex justify-between items-center mt-2">
                   <div className="text-[#5B9BD5]">${facility.price_range.min} - ${facility.price_range.max}</div>
-                  <div className="text-gray-400">{facility.rating} ★</div>
+                  <div className="text-gray-400">{facility.avg_rating || 'N/A'} ★</div>
                 </div>
               </CardContent>
             </Card>
