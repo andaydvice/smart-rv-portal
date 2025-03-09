@@ -1,69 +1,79 @@
 
-/* CRITICAL - Force ALL markers to be visible with !important flags */
-.mapboxgl-marker,
-.static-marker,
-.custom-marker,
-[data-facility-id],
-.marker-container {
+/* Critical marker visibility styles - optimized for performance */
+.custom-marker {
   visibility: visible !important;
   display: block !important;
   opacity: 1 !important;
-  z-index: 9999 !important;
-  pointer-events: auto !important;
-  cursor: pointer !important;
+  pointer-events: all !important;
+  z-index: 9998 !important;
   position: absolute !important;
-  transform: none !important;
-  transition: none !important;
+  cursor: pointer !important;
+  transform-origin: center !important;
+  will-change: transform !important;
 }
 
-/* Prevent ANY marker animations or transitions */
-.mapboxgl-marker {
-  transform: none !important;
-  transition: none !important;
-  animation: none !important;
-}
-
-/* Make popup content more readable */
-.facility-popup-content {
-  background-color: #151A22 !important;
-  border-radius: 8px !important;
-  color: white !important;
-}
-
+/* Critical popup visibility styles - optimized */
 .mapboxgl-popup {
   z-index: 10000 !important;
+  visibility: visible !important;
+  display: block !important;
+  opacity: 1 !important;
+  pointer-events: all !important;
 }
 
-/* Better popup style */
 .mapboxgl-popup-content {
   background-color: #151A22 !important;
   color: white !important;
-  border: 1px solid #374151 !important;
-  border-radius: 6px !important;
+  border-radius: 8px !important;
   padding: 15px !important;
+  border: 1px solid rgb(55 65 81) !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3) !important;
 }
 
-/* Arrow styling */
-.mapboxgl-popup-anchor-bottom .mapboxgl-popup-tip {
-  border-top-color: #151A22 !important;
+.mapboxgl-popup-close-button {
+  color: white !important;
+  font-size: 18px !important;
+  padding: 5px 8px !important;
+  right: 5px !important;
+  top: 5px !important;
 }
 
-.mapboxgl-popup-anchor-top .mapboxgl-popup-tip {
-  border-bottom-color: #151A22 !important;
+/* Performance optimization class selectors */
+body.map-loaded .mapboxgl-marker,
+body.map-loaded .custom-marker,
+body.show-map-markers .mapboxgl-marker,
+body.show-map-markers .custom-marker,
+.mapboxgl-marker[data-visible="true"],
+.custom-marker[data-visible="true"],
+.mapboxgl-marker[data-forced="true"],
+.custom-marker[data-forced="true"] {
+  visibility: visible !important;
+  display: block !important;
+  opacity: 1 !important;
 }
 
-/* Add some animation for better UX */
-.facility-popup-content {
-  animation: popup-fade-in 0.2s ease-out;
+/* Hardware acceleration for smooth animations */
+.mapboxgl-marker,
+.custom-marker,
+.mapboxgl-popup {
+  transform: translateZ(0);
+  will-change: transform;
 }
 
-@keyframes popup-fade-in {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+/* Reduce paint operations with opacity transitions */
+.mapboxgl-marker,
+.custom-marker {
+  transition: transform 0.2s ease-out;
 }
 
-/* Make sure the highlighted marker has a visual indicator */
-.mapboxgl-marker.highlighted, .static-marker.highlighted {
-  background-color: #10B981 !important;
-  border: 3px solid white !important;
+/* Reduce repaints when hovering */
+.custom-marker:hover,
+.mapboxgl-marker:hover {
+  z-index: 10000 !important;
+}
+
+/* Make marker handling more efficient */
+[data-markers-loading="true"] .mapboxgl-map,
+.map-loaded .mapboxgl-map {
+  contain: content;
 }

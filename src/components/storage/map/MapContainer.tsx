@@ -1,4 +1,3 @@
-
 import React, { useEffect, useCallback, useMemo } from 'react';
 import { useMap } from './MapContext';
 import MapControls from './MapControls';
@@ -11,8 +10,7 @@ import {
   ensureMarkersOnMap, 
   createEmergencyMarkers, 
   setupEmergencyMarkerListeners,
-  injectEmergencyMarkerStyles,
-  closeAllEmergencyPopups
+  injectEmergencyMarkerStyles 
 } from '@/utils/markers';
 
 interface MapContainerProps {
@@ -89,9 +87,6 @@ const MapContainer: React.FC<MapContainerProps> = ({
       document.querySelectorAll('.emergency-marker').forEach(marker => {
         if (marker.parentNode) marker.parentNode.removeChild(marker);
       });
-      
-      // Remove any popups
-      closeAllEmergencyPopups();
     };
   }, [map, mapLoaded, validFacilities, onMarkerClick]);
 
@@ -106,9 +101,6 @@ const MapContainer: React.FC<MapContainerProps> = ({
   // Listen for facility selection to update the map view
   useEffect(() => {
     if (map && mapLoaded && highlightedFacility) {
-      // Close any open popups when a facility is selected
-      closeAllEmergencyPopups();
-      
       const facility = validFacilities.find(f => f.id === highlightedFacility);
       if (facility) {
         const lat = Number(facility.latitude);

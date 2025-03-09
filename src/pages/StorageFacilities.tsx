@@ -1,97 +1,56 @@
-
 import { Container } from "@/components/ui/container";
 import StorageFacilitiesMap from "@/components/storage/StorageFacilitiesMap";
 import Navbar from "@/components/Navbar";
 import Layout from "@/components/layout/Layout";
 import { Warehouse } from "lucide-react";
 import { useEffect } from 'react';
-import { toast } from "sonner";
+import { applyAllEmergencyFixes } from "@/utils/emergency-styles/combined";
+import { forceMapMarkersVisible, testMarkersVisibility, ensureMarkersExist } from "@/utils/markers";
 import "../styles/marker-fix.css";
 import "../styles/emergency-marker-fix.css";
 import "../styles/map-optimizations.css";
 
 export default function StorageFacilities() {
   useEffect(() => {
-    console.log("StorageFacilities: Component mounted");
+    console.log("StorageFacilities: EMERGENCY FIX - Component mounted");
     
     // Signal that we're on the storage facilities page
     window.isStorageFacilitiesPage = true;
     
-    // Add specific inline CSS to force markers to be visible
-    const style = document.createElement('style');
-    style.textContent = `
-      /* CRITICAL - Ensure all markers are visible */
-      .mapboxgl-marker, 
-      .static-marker,
-      [data-facility-id] {
-        visibility: visible !important;
-        display: block !important;
-        opacity: 1 !important;
-        pointer-events: auto !important;
-        cursor: pointer !important;
-        transform: none !important;
-        transition: none !important;
-        position: absolute !important;
-        z-index: 9999 !important;
-      }
-      
-      /* Make popups stand out */
-      .mapboxgl-popup {
-        z-index: 10000 !important;
-      }
-      
-      /* Ensure proper popup styling */
-      .mapboxgl-popup-content {
-        background-color: #151A22 !important;
-        color: white !important;
-        border-radius: 8px !important;
-      }
-    `;
-    document.head.appendChild(style);
+    // Apply all marker visibility fixes
+    const cleanup = applyAllEmergencyFixes();
     
-    // Set up global click listener for any element with data-facility-id
-    const handleGlobalMarkerClick = (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
-      const markerEl = target.closest('[data-facility-id]');
+    // Force markers to be visible - run multiple times with different delays
+    forceMapMarkersVisible();
+    const forceIntervals = [100, 300, 500, 1000, 2000, 5000].map(delay => 
+      setTimeout(forceMapMarkersVisible, delay)
+    );
+    
+    // Add event listener for map creation to ensure markers are visible
+    document.addEventListener('mapboxgl.map.created', (e: any) => {
+      console.log('Map created - ensuring markers are visible');
+      const map = e.detail.map;
       
-      if (markerEl) {
-        console.log('Global marker click handler activated');
-      }
-    };
-    
-    document.addEventListener('click', handleGlobalMarkerClick);
-    
-    // Show a notification to users
-    setTimeout(() => {
-      toast.info("Click on orange markers to view storage facilities");
-    }, 2000);
-    
-    // Force visibility of markers every second
-    const forceVisibilityInterval = setInterval(() => {
-      const markers = document.querySelectorAll('.mapboxgl-marker, .static-marker, [data-facility-id]');
-      console.log(`Found ${markers.length} markers - forcing visible`);
-      
-      markers.forEach(marker => {
-        if (marker instanceof HTMLElement) {
-          marker.style.visibility = 'visible';
-          marker.style.display = 'block';
-          marker.style.opacity = '1';
-          marker.style.pointerEvents = 'auto';
-          marker.style.cursor = 'pointer';
-          marker.style.zIndex = '9999';
-          marker.style.position = 'absolute';
+      // Wait for facilities to be loaded, then ensure markers exist
+      setTimeout(() => {
+        if (window.mapFacilities && window.mapFacilities.length > 0) {
+          ensureMarkersExist(map, window.mapFacilities);
         }
-      });
-    }, 1000);
+      }, 2000);
+    });
+    
+    // Run marker visibility test after the page has loaded
+    const testTimeout = setTimeout(() => {
+      testMarkersVisibility(true);
+    }, 3000);
     
     // Clean up
     return () => {
       window.isStorageFacilitiesPage = false;
-      document.removeEventListener('click', handleGlobalMarkerClick);
-      clearInterval(forceVisibilityInterval);
-      if (style.parentNode) {
-        style.parentNode.removeChild(style);
-      }
+      cleanup();
+      forceIntervals.forEach(timeout => clearTimeout(timeout));
+      clearTimeout(testTimeout);
+      document.removeEventListener('mapboxgl.map.created', () => {});
     };
   }, []);
 
@@ -110,8 +69,9 @@ export default function StorageFacilities() {
             <Container className="h-full flex flex-col justify-center items-center">
               <div className="text-center max-w-3xl bg-black/40 backdrop-blur-sm p-6 rounded-lg">
                 <div className="flex items-center justify-center gap-2 mb-2">
+                  {/* Enhanced orange marker indicator that won't interfere with map markers */}
                   <div className="relative flex items-center">
-                    <div className="hero-marker w-8 h-8 bg-[#F97316] rounded-full border-2 border-white shadow-lg"></div>
+                    <div className="hero-marker w-8 h-8 bg-[#F97316] rounded-full border-2 border-white shadow-lg animate-pulse"></div>
                     <Warehouse className="h-7 w-7 text-[#F97316]" />
                   </div>
                   <h1 className="text-4xl md:text-5xl font-bold text-white">

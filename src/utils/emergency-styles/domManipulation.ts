@@ -24,13 +24,6 @@ export function forceExistingMarkersVisible() {
       marker.style.display = 'block';
       marker.style.opacity = '1';
       marker.style.zIndex = '9999';
-      marker.style.pointerEvents = 'auto';
-      marker.style.cursor = 'pointer';
-      
-      // Remove any transform that could cause movement
-      if (marker.style.transform && marker.style.transform.includes('translate3d')) {
-        marker.style.transform = 'translate(-50%, -50%)';
-      }
       
       // Mark as processed
       marker.setAttribute('data-forced-visible', 'true');
@@ -71,21 +64,25 @@ export function enhanceMarkerClickability() {
     if (marker instanceof HTMLElement && !marker.getAttribute('data-has-click')) {
       marker.setAttribute('data-has-click', 'true');
       
-      // Direct click handler that prevents event propagation
+      // Use event delegation for better performance
       marker.addEventListener('click', (e) => {
         e.stopPropagation();
-        e.preventDefault();
         
         const facilityId = marker.getAttribute('data-facility-id');
         if (!facilityId) return;
         
-        console.log('Marker clicked with enhanced handler:', facilityId);
+        // Log only in development
+        if (process.env.NODE_ENV === 'development') {
+          console.log('Marker clicked:', facilityId);
+        }
         
-        // Dispatch the custom event for facility selection
-        document.dispatchEvent(new CustomEvent('emergency-marker-detail-view', {
-          bubbles: true,
-          detail: { facilityId }
-        }));
+        // Use requestAnimationFrame for better performance
+        requestAnimationFrame(() => {
+          // Find and click the view button
+          document.querySelectorAll(`.view-facility-btn[data-facility-id="${facilityId}"]`).forEach(btn => {
+            (btn as HTMLElement).click();
+          });
+        });
       });
       
       handlersAdded++;

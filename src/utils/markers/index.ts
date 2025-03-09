@@ -1,8 +1,7 @@
 
 // Export marker forcing utilities
 export { forceMapMarkersVisible, applyForcedStyles, testMarkersVisibility } from './forcing/markerForcing';
-import { ensureMarkersOnMap } from './forcing/ensureMarkers';
-export { ensureMarkersOnMap };
+export { ensureMarkersOnMap } from './forcing/ensureMarkers';
 
 // Export marker testing utilities
 export {
@@ -14,9 +13,8 @@ export {
 export { 
   createEmergencyMarkers,
   setupEmergencyMarkerListeners,
-  injectEmergencyMarkerStyles,
-  closeAllEmergencyPopups
-} from './emergency';
+  injectEmergencyMarkerStyles
+} from './emergency/directMarkerCreation';
 
 // Export types from central types file
 export type {

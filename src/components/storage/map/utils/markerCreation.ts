@@ -9,109 +9,105 @@ export function createFacilityMarker(
   onClick: (facilityId: string) => void,
   map: mapboxgl.Map
 ): mapboxgl.Marker {
-  // Create marker container with simpler structure
+  // Create marker container with guaranteed visibility
   const el = document.createElement('div');
-  el.className = 'static-marker';
+  el.className = 'custom-marker';
   el.id = `marker-${facility.id}`;
   
-  // Use static styling to prevent any marker movement
+  // Force critical styling directly
   el.style.cssText = `
     background-color: ${isHighlighted ? '#10B981' : '#F97316'};
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    border: 3px solid white;
-    cursor: pointer;
-    box-shadow: 0 0 10px rgba(0,0,0,0.5);
-    position: absolute;
-    z-index: 9999;
-    display: block;
-    visibility: visible;
-    opacity: 1;
+    width: 24px !important;
+    height: 24px !important;
+    border-radius: 50% !important;
+    border: 2px solid white !important;
+    cursor: pointer !important;
+    box-shadow: ${isHighlighted ? '0 0 20px rgba(16, 185, 129, 0.8)' : '0 0 10px rgba(0,0,0,0.8)'} !important;
+    position: absolute !important;
+    transform: translate(-50%, -50%) scale(${isHighlighted ? 1.2 : 1}) !important;
+    z-index: ${isHighlighted ? 9999 : 9998} !important;
+    visibility: visible !important;
+    display: block !important;
+    opacity: 1 !important;
+    pointer-events: all !important;
   `;
   
-  // Store facility ID as data attribute
+  // Set data attributes
   el.setAttribute('data-facility-id', facility.id);
+  el.setAttribute('data-marker-type', 'facility');
   
-  // Create simple HTML popup content with address, phone and price
-  const popupContent = `
-    <div class="facility-popup-content p-4">
-      <h3 class="text-lg font-bold mb-2">${facility.name}</h3>
-      <p class="mb-1 text-sm"><strong>Address:</strong> ${facility.address}</p>
-      ${facility.contact_phone ? `<p class="mb-1 text-sm"><strong>Phone:</strong> ${facility.contact_phone}</p>` : ''}
-      <p class="mb-2 text-sm"><strong>Price:</strong> $${facility.price_range.min} - $${facility.price_range.max}</p>
-      <div class="flex justify-between items-center mt-3">
-        <button class="view-facility-btn bg-[#F97316] text-white px-3 py-1 rounded text-sm" data-facility-id="${facility.id}">View Details</button>
-        <button class="close-popup-btn text-white bg-gray-600 px-3 py-1 rounded text-sm">Close</button>
-      </div>
-    </div>
-  `;
-  
-  // Create popup with fixed offset to avoid movement
+  // Create persistent popup
   const popup = new mapboxgl.Popup({
-    closeButton: false,
+    closeButton: true,
     closeOnClick: false,
     maxWidth: '300px',
     className: 'facility-popup',
-    offset: 0
-  }).setHTML(popupContent);
+    offset: [0, -15]
+  });
   
-  // Create marker with fixed position
+  // Set rich popup content
+  popup.setHTML(`
+    <div class="facility-popup-content">
+      <h3>${facility.name}</h3>
+      <p>${facility.address}</p>
+      <p>Price: $${facility.price_range.min} - $${facility.price_range.max}</p>
+      <button class="view-facility-btn" data-facility-id="${facility.id}">View Details</button>
+    </div>
+  `);
+
+  // Create and configure marker
   const marker = new mapboxgl.Marker({
     element: el,
     anchor: 'center'
   })
-  .setLngLat(coordinates);
-  
-  // Simple direct click handler
-  el.addEventListener('click', (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    
-    console.log(`Marker clicked for facility: ${facility.name}`);
-    
-    // Toggle popup visibility
-    if (!popup.isOpen()) {
-      marker.setPopup(popup);
-      marker.togglePopup();
-      
-      // Add event listeners to popup buttons after it's open
-      setTimeout(() => {
-        const popupEl = popup.getElement();
-        if (popupEl) {
-          // View details button
-          const viewBtn = popupEl.querySelector('.view-facility-btn');
-          if (viewBtn) {
-            viewBtn.addEventListener('click', (e) => {
-              e.preventDefault();
-              e.stopPropagation();
-              console.log(`View details clicked for: ${facility.name}`);
-              onClick(facility.id);
-              popup.remove(); // Close popup after clicking
-            });
-          }
-          
-          // Close button
-          const closeBtn = popupEl.querySelector('.close-popup-btn');
-          if (closeBtn) {
-            closeBtn.addEventListener('click', (e) => {
-              e.preventDefault();
-              e.stopPropagation();
-              console.log(`Close popup clicked for: ${facility.name}`);
-              popup.remove();
-            });
-          }
-        }
-      }, 50);
-    } else {
-      popup.remove();
-    }
-  });
-  
-  // Add to map immediately
+  .setLngLat(coordinates)
+  .setPopup(popup);
+
+  // Ensure marker gets added to map
   if (map) {
-    marker.addTo(map);
+    const addMarkerWithRetry = (retries = 3) => {
+      try {
+        if (!marker.getElement().isConnected) {
+          marker.addTo(map);
+        }
+      } catch (err) {
+        console.error(`Marker addition attempt failed:`, err);
+        if (retries > 0) {
+          setTimeout(() => addMarkerWithRetry(retries - 1), 100);
+        }
+      }
+    };
+
+    addMarkerWithRetry();
   }
-  
+
+  // Handle marker click with guaranteed popup visibility
+  el.addEventListener('click', (e) => {
+    e.stopPropagation();
+    onClick(facility.id);
+    
+    if (!popup.isOpen()) {
+      popup.addTo(map);
+    }
+    
+    requestAnimationFrame(() => {
+      const popupEl = popup.getElement();
+      if (popupEl) {
+        popupEl.style.cssText = `
+          z-index: 10000 !important;
+          visibility: visible !important;
+          display: block !important;
+          opacity: 1 !important;
+          pointer-events: all !important;
+        `;
+        
+        const viewButton = popupEl.querySelector('.view-facility-btn');
+        if (viewButton) {
+          viewButton.addEventListener('click', () => onClick(facility.id));
+        }
+      }
+    });
+  });
+
   return marker;
 }

@@ -3,20 +3,44 @@ import mapboxgl from 'mapbox-gl';
 
 export const useMarkerClickHandlers = () => {
   /**
-   * Creates a simple direct click handler for markers
+   * Creates a robust click handler for markers that won't be garbage collected
    */
   const createMarkerClickHandler = (
+    marker: mapboxgl.Marker,
     facilityId: string,
     facilityName: string,
     onMarkerClick: (facilityId: string) => void
   ): ((e: MouseEvent) => void) => {
-    // Simple handler that just calls onMarkerClick with proper event handling
+    // Define a more robust click handler that won't be garbage collected
     const handleMarkerClick = (e: MouseEvent) => {
       e.preventDefault();
       e.stopPropagation();
       
       console.log(`Marker clicked for: ${facilityName} (ID: ${facilityId})`);
+      
+      // First open the popup if not already open
+      if (!marker.getPopup().isOpen()) {
+        marker.togglePopup();
+      }
+      
+      // Then call the click handler
       onMarkerClick(facilityId);
+      
+      // Force the popup to stay open with a delay
+      setTimeout(() => {
+        if (!marker.getPopup().isOpen()) {
+          marker.togglePopup();
+        }
+        
+        // Ensure popup is visible and clickable
+        const popupElement = document.querySelector(`.mapboxgl-popup[data-facility-id="${facilityId}"]`);
+        if (popupElement instanceof HTMLElement) {
+          popupElement.style.zIndex = '1100';
+          popupElement.style.visibility = 'visible';
+          popupElement.style.display = 'block';
+          popupElement.style.pointerEvents = 'all';
+        }
+      }, 50);
     };
     
     return handleMarkerClick;
@@ -27,30 +51,24 @@ export const useMarkerClickHandlers = () => {
    */
   const applyClickHandlerToMarker = (
     markerElement: HTMLElement,
+    marker: mapboxgl.Marker,
     facilityId: string,
     facilityName: string,
     onMarkerClick: (facilityId: string) => void
   ): void => {
-    // Make sure the element is visible and clickable
-    markerElement.style.visibility = 'visible';
-    markerElement.style.display = 'block';
-    markerElement.style.opacity = '1';
-    markerElement.style.pointerEvents = 'auto';
-    markerElement.style.cursor = 'pointer';
+    // Create the click handler
+    const handleMarkerClick = createMarkerClickHandler(
+      marker,
+      facilityId,
+      facilityName,
+      onMarkerClick
+    );
     
-    // Set attribute and add listener
-    markerElement.setAttribute('data-facility-id', facilityId);
+    // Remove any existing click listeners to prevent duplicates
+    markerElement.removeEventListener('click', handleMarkerClick as EventListener);
     
-    // Simple direct click handler
-    const newHandler = (e: MouseEvent) => {
-      e.preventDefault();
-      e.stopPropagation();
-      console.log(`Static marker clicked for: ${facilityName}`);
-      onMarkerClick(facilityId);
-    };
-    
-    // Add new click listener (use once: false to ensure it can be clicked multiple times)
-    markerElement.addEventListener('click', newHandler);
+    // Add click event with direct method call and logging
+    markerElement.addEventListener('click', handleMarkerClick);
   };
 
   return {
