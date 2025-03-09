@@ -100,7 +100,7 @@ const MapContainer: React.FC<MapContainerProps> = ({
     console.log('Creating markers for facilities...');
     
     // Create emergency markers and set up listeners
-    // Fix: Pass the map and validFacilities as arguments
+    // Fix: Pass both map and validFacilities as arguments
     const markerCount = createEmergencyMarkers(map, validFacilities);
     console.log(`Created ${markerCount} emergency markers`);
     
