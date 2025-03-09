@@ -6,7 +6,7 @@ import Layout from "@/components/layout/Layout";
 import { Warehouse } from "lucide-react";
 import { useEffect } from 'react';
 import { applyAllEmergencyFixes } from "@/utils/emergency-styles/combined";
-import { forceMapMarkersVisible } from "@/utils/markers";
+import { forceMapMarkersVisible, testMarkersVisibility } from "@/utils/markers";
 import "../styles/marker-fix.css";
 import "../styles/emergency-marker-fix.css";
 
@@ -26,11 +26,17 @@ export default function StorageFacilities() {
       setTimeout(forceMapMarkersVisible, delay)
     );
     
+    // Run marker visibility test after the page has loaded
+    const testTimeout = setTimeout(() => {
+      testMarkersVisibility(true);
+    }, 3000);
+    
     // Clean up
     return () => {
       window.isStorageFacilitiesPage = false;
       cleanup();
       forceIntervals.forEach(timeout => clearTimeout(timeout));
+      clearTimeout(testTimeout);
     };
   }, []);
 

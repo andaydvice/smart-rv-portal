@@ -1,5 +1,6 @@
 
 import '../emergency-styles/styleInjection';
+import { testMarkerVisibility, createMarkerDebugOverlay } from './testing';
 
 /**
  * Force map markers to be visible
@@ -79,3 +80,20 @@ export function createEmergencyMarkers() {
   
   mapContainer.appendChild(marker);
 }
+
+/**
+ * Run comprehensive marker visibility testing
+ */
+export function testMarkersVisibility(autoFix = false) {
+  return testMarkerVisibility({ fixIssues: autoFix, showToast: true });
+}
+
+/**
+ * Create debugging overlay for marker visibility
+ */
+export function createMarkerDebugger() {
+  return createMarkerDebugOverlay();
+}
+
+// Export testing functions
+export * from './testing';

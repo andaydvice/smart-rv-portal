@@ -7,6 +7,8 @@ import MarkerStats from './components/MarkerStats';
 import { useMarkerManagement } from './hooks/useMarkerManagement';
 import MarkerVisibilityEnhancer from './components/MarkerVisibilityEnhancer';
 import MarkerErrorDisplay from './components/MarkerErrorDisplay';
+import MarkerDebugOverlay from './components/MarkerDebugOverlay';
+import { testMarkersVisibility } from '@/utils/markers';
 
 interface FacilityMarkersProps {
   map: mapboxgl.Map;
@@ -86,6 +88,13 @@ const FacilityMarkers: React.FC<FacilityMarkersProps> = memo(({
         // If no markers created and we haven't exceeded max attempts, try again
         if (markerCount === 0 && attempt < 3) {
           setTimeout(() => createWithRetry(attempt + 1), 1000 * attempt);
+        } else {
+          // Run visibility test after marker creation
+          if (process.env.NODE_ENV === 'development') {
+            setTimeout(() => {
+              testMarkersVisibility(false);
+            }, 1000);
+          }
         }
       }, 500);
     };
@@ -114,6 +123,9 @@ const FacilityMarkers: React.FC<FacilityMarkersProps> = memo(({
       
       {/* This component runs the visibility enhancement on a regular interval */}
       <MarkerVisibilityEnhancer enhanceVisibility={enhanceVisibility} />
+      
+      {/* Marker debugger component (dev only) */}
+      {process.env.NODE_ENV === 'development' && <MarkerDebugOverlay />}
       
       {/* Show errors only in dev mode or if there are critical errors */}
       {(process.env.NODE_ENV === 'development' || (errors && errors.length > 5)) && (

@@ -1,3 +1,4 @@
+
 "use client";
 
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
@@ -15,7 +16,7 @@ import FacilityList from './map-view/FacilityList';
 import { useMapToken } from './map-view/useMapToken';
 import { useFacilitySelection } from './map-view/useFacilitySelection';
 import { toast } from "sonner";
-import { forceMapMarkersVisible, applyForcedStyles } from '@/utils/markers';
+import { forceMapMarkersVisible, applyForcedStyles, testMarkersVisibility } from '@/utils/markers';
 
 const StorageFacilitiesMap = () => {
   const [filters, setFilters] = useState<FilterState>({
@@ -109,9 +110,11 @@ const StorageFacilitiesMap = () => {
       subtree: true
     });
     
+    // Run visibility test after initial load
     setTimeout(() => {
+      testMarkersVisibility(true);
       document.body.removeAttribute('data-markers-loading');
-    }, 5000);
+    }, 3000);
     
     return () => {
       clearInterval(forceInterval);
