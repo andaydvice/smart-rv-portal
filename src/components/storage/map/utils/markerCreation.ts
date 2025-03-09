@@ -54,7 +54,7 @@ export function createFacilityMarker(
       <h3 class="text-lg font-semibold mb-1">${facility.name}</h3>
       <p class="text-sm mb-1">${facility.address}</p>
       <p class="text-sm mb-1">Price: $${facility.price_range.min} - $${facility.price_range.max}</p>
-      ${facility.phone ? `<p class="text-sm mb-1">Phone: ${facility.phone}</p>` : ''}
+      ${facility.contact_phone ? `<p class="text-sm mb-1">Phone: ${facility.contact_phone}</p>` : ''}
     </div>
   `);
 
