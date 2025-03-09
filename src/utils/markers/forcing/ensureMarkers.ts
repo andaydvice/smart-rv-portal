@@ -17,7 +17,7 @@ const adaptFacility = (facility: any): any => {
  * Emergency function to ensure markers are present on the map
  * This is a last resort when all else fails
  */
-export function ensureMarkersOnMap(map: mapboxgl.Map, facilities: StorageFacility[] | any[]) {
+export async function ensureMarkersOnMap(map: mapboxgl.Map, facilities: StorageFacility[] | any[]) {
   // First check if we already have markers
   const existingMarkers = document.querySelectorAll('.mapboxgl-marker, .custom-marker');
   console.log(`Emergency marker check: Found ${existingMarkers.length} markers, should have ${facilities.length}`);

@@ -85,7 +85,7 @@ export const useMapSetup = (map: mapboxgl.Map | null,
     if (map && mapLoaded && validFacilities.length > 0 && !boundsSetRef.current) {
       console.log(`Fitting map to bounds with ${validFacilities.length} valid coordinates`);
       
-      // Call fitMapToBounds with all required arguments
+      // Fix: Pass all required arguments to fitMapToBounds - map, facilities, padding, maxZoom
       fitMapToBounds(map, validFacilities, 50, 10);
       
       // Mark bounds as set to avoid repeated fitting

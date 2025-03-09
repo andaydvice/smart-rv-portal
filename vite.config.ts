@@ -26,20 +26,7 @@ export default defineConfig(({ mode }) => ({
     open: false,
   },
   plugins: [
-    react({
-      // Optimize swc
-      swcOptions: {
-        jsc: {
-          transform: {
-            react: {
-              runtime: 'automatic',
-              development: mode === 'development',
-              refresh: mode === 'development',
-            },
-          },
-        },
-      },
-    }),
+    react(),
     mode === 'development' && componentTagger(),
   ].filter(Boolean),
   resolve: {
