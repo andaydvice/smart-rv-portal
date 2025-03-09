@@ -66,4 +66,3 @@ export const useMapSetup = (map: mapboxgl.Map | null,
 
   return { map };
 };
-
