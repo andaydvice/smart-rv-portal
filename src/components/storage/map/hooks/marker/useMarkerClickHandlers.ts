@@ -1,7 +1,19 @@
 
 import mapboxgl from 'mapbox-gl';
 
+// Define a type for the global window extension with our handler properties
+declare global {
+  interface Window {
+    markerClickHandlers: Record<string, (e: MouseEvent) => void>;
+  }
+}
+
 export const useMarkerClickHandlers = () => {
+  // Initialize the global handlers object if it doesn't exist
+  if (typeof window !== 'undefined' && !window.markerClickHandlers) {
+    window.markerClickHandlers = {};
+  }
+
   /**
    * Creates a robust click handler for markers that won't be garbage collected
    */
@@ -57,9 +69,9 @@ export const useMarkerClickHandlers = () => {
     onMarkerClick: (facilityId: string) => void
   ): void => {
     // Remove any existing click listeners to prevent duplicates
-    const oldHandler = markerElement.getAttribute('data-click-handler');
-    if (oldHandler) {
-      markerElement.removeEventListener('click', window[oldHandler as any] as EventListener);
+    const oldHandlerKey = markerElement.getAttribute('data-click-handler');
+    if (oldHandlerKey && window.markerClickHandlers[oldHandlerKey]) {
+      markerElement.removeEventListener('click', window.markerClickHandlers[oldHandlerKey]);
     }
     
     // Create the click handler
@@ -71,9 +83,9 @@ export const useMarkerClickHandlers = () => {
     );
     
     // Store handler reference for potential cleanup
-    const handlerName = `markerClickHandler_${facilityId}`;
-    window[handlerName as any] = handleMarkerClick;
-    markerElement.setAttribute('data-click-handler', handlerName);
+    const handlerKey = `marker_${facilityId}_${Date.now()}`;
+    window.markerClickHandlers[handlerKey] = handleMarkerClick;
+    markerElement.setAttribute('data-click-handler', handlerKey);
     
     // Add click event with direct method call and logging
     markerElement.addEventListener('click', handleMarkerClick);
