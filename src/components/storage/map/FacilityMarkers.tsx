@@ -27,19 +27,14 @@ const FacilityMarkers: React.FC<FacilityMarkersProps> = memo(({
   // Use popup click handler
   usePopupClickHandler();
   
-  // Use marker management hook
+  // Use marker management hook with all required parameters
   const { 
     stats, 
     createMarkers, 
     forceMarkerVisibility,
     errors,
     markErrorAsRecovered
-  } = useMarkerManagement({
-    map,
-    facilities,
-    highlightedFacility,
-    onMarkerClick
-  });
+  } = useMarkerManagement(map, true, facilities, onMarkerClick);
   
   // Memoize the visibility enhancer function to prevent unnecessary re-renders
   const enhanceVisibility = useCallback(forceMarkerVisibility, [forceMarkerVisibility]);

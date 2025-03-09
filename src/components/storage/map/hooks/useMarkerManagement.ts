@@ -1,5 +1,5 @@
 
-import { useEffect } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { StorageFacility } from '../../types';
 import { 
   injectEmergencyMarkerStyles,
@@ -16,6 +16,65 @@ export const useMarkerManagement = (
   validFacilities: StorageFacility[], 
   onMarkerClick: (facilityId: string) => void
 ) => {
+  // State for tracking markers
+  const [stats, setStats] = useState({
+    markersCreated: 0,
+    skippedFacilities: 0,
+    processedNYFacilities: 0,
+    totalNYFacilities: 0
+  });
+  
+  // State for tracking errors
+  const [errors, setErrors] = useState<Array<{
+    facilityId: string,
+    error?: Error,
+    type: string,
+    timestamp: number
+  }>>([]);
+
+  // Create markers function
+  const createMarkers = useCallback(() => {
+    if (!map || !mapLoaded || validFacilities.length === 0) return 0;
+    
+    try {
+      // Create emergency markers
+      const markerCount = createEmergencyMarkers(map, validFacilities);
+      
+      // Update stats
+      setStats(prev => ({
+        ...prev,
+        markersCreated: markerCount,
+        skippedFacilities: validFacilities.length - markerCount
+      }));
+      
+      return markerCount;
+    } catch (error) {
+      console.error("Error creating markers:", error);
+      setErrors(prev => [...prev, {
+        facilityId: 'batch-creation',
+        error: error instanceof Error ? error : new Error(String(error)),
+        type: 'CREATION_ERROR',
+        timestamp: Date.now()
+      }]);
+      return 0;
+    }
+  }, [map, mapLoaded, validFacilities]);
+
+  // Force marker visibility function
+  const forceMarkerVisibility = useCallback(() => {
+    document.querySelectorAll('.mapboxgl-marker, .custom-marker').forEach(marker => {
+      if (marker instanceof HTMLElement) {
+        marker.style.visibility = 'visible';
+        marker.style.display = 'block';
+        marker.style.opacity = '1';
+      }
+    });
+  }, []);
+
+  // Mark error as recovered
+  const markErrorAsRecovered = useCallback((facilityId: string) => {
+    setErrors(prev => prev.filter(err => err.facilityId !== facilityId));
+  }, []);
   
   // Emergency marker creation approach
   useEffect(() => {
@@ -35,9 +94,15 @@ export const useMarkerManagement = (
     console.log('Creating markers for facilities...');
     
     // Create emergency markers and set up listeners
-    // Pass both map and validFacilities as arguments
     const markerCount = createEmergencyMarkers(map, validFacilities);
     console.log(`Created ${markerCount} emergency markers`);
+    
+    // Update stats
+    setStats(prev => ({
+      ...prev,
+      markersCreated: markerCount,
+      skippedFacilities: validFacilities.length - markerCount
+    }));
     
     // Set up event listeners
     const cleanup = setupEmergencyMarkerListeners(onMarkerClick);
@@ -75,13 +140,7 @@ export const useMarkerManagement = (
                       }
                       
                       // Force all markers to be visible
-                      document.querySelectorAll('.mapboxgl-marker, .custom-marker').forEach(m => {
-                        if (m instanceof HTMLElement) {
-                          m.style.visibility = 'visible';
-                          m.style.display = 'block';
-                          m.style.opacity = '1';
-                        }
-                      });
+                      forceMarkerVisibility();
                     }
                   }, 50);
                 });
@@ -106,5 +165,14 @@ export const useMarkerManagement = (
         if (marker.parentNode) marker.parentNode.removeChild(marker);
       });
     };
-  }, [map, mapLoaded, validFacilities, onMarkerClick]);
+  }, [map, mapLoaded, validFacilities, onMarkerClick, forceMarkerVisibility]);
+
+  // Return all needed functions and state
+  return {
+    stats,
+    createMarkers,
+    forceMarkerVisibility,
+    errors,
+    markErrorAsRecovered
+  };
 };
