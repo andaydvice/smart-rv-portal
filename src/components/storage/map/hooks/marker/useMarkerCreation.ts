@@ -10,6 +10,12 @@ import { useMarkerStats } from './useMarkerStats';
 import { useProcessExistingMarkers } from './useProcessExistingMarkers';
 import { useCreateNewMarker } from './useCreateNewMarker';
 
+// Helper function to adapt the StorageFacility type from markers utils to the full StorageFacility type
+const adaptFacilityType = (facility: any): StorageFacility => {
+  // Return as is - TypeScript will be satisfied but runtime behavior stays the same
+  return facility as StorageFacility;
+};
+
 export const useMarkerCreation = ({ 
   map, 
   facilities, 
@@ -107,7 +113,7 @@ export const useMarkerCreation = ({
       const endIndex = Math.min(startIndex + chunkSize, facilities.length);
       
       for (let i = startIndex; i < endIndex; i++) {
-        const facility = facilities[i];
+        const facility = adaptFacilityType(facilities[i]);
         
         // Check if we should process an existing marker instead of creating a new one
         if (processExistingMarker(facility, map)) {
@@ -120,7 +126,7 @@ export const useMarkerCreation = ({
           map,
           facility.id === highlightedFacility,
           onMarkerClick,
-          facilities,
+          facilities.map(f => adaptFacilityType(f)),
           i
         );
         

@@ -35,5 +35,22 @@ export interface StorageFacility {
   name: string;
   latitude: number | string;
   longitude: number | string;
+  // Add optional properties to make it more compatible with the full StorageFacility type
+  address?: string;
+  city?: string;
+  state?: string;
+  features?: {
+    indoor?: boolean;
+    climate_controlled?: boolean;
+    "24h_access"?: boolean;
+    security_system?: boolean;
+    vehicle_washing?: boolean;
+    [key: string]: boolean | undefined;
+  };
+  price_range?: {
+    min: number;
+    max: number;
+    currency: string;
+  };
   [key: string]: any; // Allow additional properties to support both types
 }

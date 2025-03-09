@@ -6,6 +6,11 @@ import { StorageFacility } from '../../../types';
 import { createFacilityMarker } from '../../utils/markerCreation';
 import { calculateMarkerOffset, buildCoordinatesMap, hasValidCoordinates } from '../../utils/markerUtils';
 
+// Helper function to adapt any facility-like object to the expected StorageFacility type
+const adaptFacility = (facility: any): StorageFacility => {
+  return facility as StorageFacility;
+};
+
 export const useCreateNewMarker = () => {
   const { applyClickHandlerToMarker } = useMarkerClickHandlers();
   const { 
@@ -36,7 +41,7 @@ export const useCreateNewMarker = () => {
     map: mapboxgl.Map,
     isHighlighted: boolean,
     onMarkerClick: (facilityId: string) => void,
-    facilities: StorageFacility[],
+    facilities: any[],
     index: number
   ): mapboxgl.Marker | null => {
     try {
@@ -52,9 +57,12 @@ export const useCreateNewMarker = () => {
         return null;
       }
       
+      // Adapt facilities to the expected type before building coordinates map
+      const adaptedFacilities = facilities.map(adaptFacility);
+      
       // Calculate marker coordinates with offset for overlapping markers
-      const coordinatesMap = buildCoordinatesMap(facilities);
-      const coordinates = calculateMarkerOffset(facility, coordinatesMap, facilities, index);
+      const coordinatesMap = buildCoordinatesMap(adaptedFacilities);
+      const coordinates = calculateMarkerOffset(facility, coordinatesMap, adaptedFacilities, index);
       
       // Create the marker with explicit map reference for reliable addition
       const marker = createFacilityMarker(
