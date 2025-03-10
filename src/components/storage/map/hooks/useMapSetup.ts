@@ -72,7 +72,7 @@ export const useMapSetup = (map: mapboxgl.Map | null,
       // Call resize() without arguments as it doesn't take any
       map.resize();
       
-      // Call fitMapToBounds with the correct parameters
+      // Ensure we're passing the correct parameters to fitMapToBounds
       fitMapToBounds(map, validFacilities, 50, 10);
       
       // NEW: Ensure all markers exist and are visible
