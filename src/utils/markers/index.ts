@@ -35,6 +35,8 @@ export const ensureMarkersExist = (map: mapboxgl.Map, facilities: any[]) => {
   
   const createMarkers = () => {
     attempts++;
+    // Import the function directly to avoid circular dependencies
+    const { ensureMarkersOnMap } = require('./forcing/ensureMarkers');
     const markerCount = ensureMarkersOnMap(map, facilities);
     console.log(`Marker creation attempt ${attempts}: Created ${markerCount} markers`);
     
@@ -59,7 +61,11 @@ export const ensureMarkersExist = (map: mapboxgl.Map, facilities: any[]) => {
   
   // Force markers to be visible regardless
   [100, 300, 600, 1000, 1500].forEach(delay => {
-    setTimeout(() => forceMapMarkersVisible(), delay);
+    setTimeout(() => {
+      // Import directly to avoid circular dependencies
+      const { forceMapMarkersVisible } = require('./forcing/markerForcing');
+      forceMapMarkersVisible();
+    }, delay);
   });
   
   return document.querySelectorAll('.mapboxgl-marker, .custom-marker').length;
