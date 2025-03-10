@@ -79,7 +79,7 @@ export const useMapSetup = (map: mapboxgl.Map | null,
       const paddingValue: number = 50;
       const maxZoomValue: number = 10;
       
-      // Explicitly provide all arguments with proper types to avoid TypeScript errors
+      // Make sure types are explicitly provided to avoid TypeScript errors
       fitMapToBounds(
         map,
         validFacilities as Array<{ longitude: number | string; latitude: number | string }>,

@@ -15,4 +15,3 @@ export * from './mapEvents';
 
 // Re-export all map bounds functions
 export * from './mapBounds';
-
