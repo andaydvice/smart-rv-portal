@@ -46,9 +46,12 @@ export const useMapSetup = (map: mapboxgl.Map | null,
         });
       });
       
-      // NEW: Try to create markers immediately after map creation
+      // Store facilities in window for debugging
       if (validFacilities && validFacilities.length > 0) {
-        // Use a timeout to ensure the map is ready
+        (window as any).mapFacilities = validFacilities;
+        console.log(`Stored ${validFacilities.length} facilities in window.mapFacilities`);
+        
+        // Try to create markers immediately after map creation
         setTimeout(() => {
           console.log(`Attempting to create ${validFacilities.length} markers on initial map setup`);
           ensureMarkersExist(map, validFacilities);
@@ -67,16 +70,16 @@ export const useMapSetup = (map: mapboxgl.Map | null,
   // Update map bounds when facilities change
   useEffect(() => {
     if (map && mapLoaded && validFacilities.length > 0) {
-      console.log(`Fitting map to bounds with ${validFacilities.length} valid coordinates`);
+      console.log(`Fitting map to bounds with ${validFacilities.length} valid coordinates for state: ${selectedState || 'All States'}`);
       
-      // Call resize() without arguments as it doesn't take any
+      // Call resize() to ensure the map container is properly sized
       map.resize();
       
-      // Make explicit function call with all parameters spelled out
+      // Create explicit variables for padding and zoom to ensure type safety
       const paddingValue: number = 50;
       const maxZoomValue: number = 10;
       
-      // Explicitly call with all four parameters to ensure type safety
+      // Fit the map to the bounds of the facilities
       fitMapToBounds(
         map,
         validFacilities,
@@ -84,10 +87,19 @@ export const useMapSetup = (map: mapboxgl.Map | null,
         maxZoomValue
       );
       
-      // NEW: Ensure all markers exist and are visible
+      // Log facility coordinates for debugging
+      console.log('Facility coordinates to fit bounds:', validFacilities.map(f => ({
+        id: f.id,
+        name: f.name,
+        lat: f.latitude,
+        lng: f.longitude
+      })));
+      
+      // Ensure markers exist for the filtered facilities
       setTimeout(() => {
-        ensureMarkersExist(map, validFacilities);
-      }, 500);
+        const markerCount = ensureMarkersExist(map, validFacilities);
+        console.log(`Created ${markerCount} markers after filtering to ${validFacilities.length} facilities`);
+      }, 300);
     }
   }, [validFacilities, mapLoaded, map, selectedState]);
 

@@ -34,22 +34,40 @@ export const fitMapToBounds = (
         if (!isNaN(lng) && !isNaN(lat) && Math.abs(lat) <= 90 && Math.abs(lng) <= 180) {
           bounds.extend([lng, lat]);
           validCoordinatesCount++;
+          console.log(`Added coordinate to bounds: [${lng}, ${lat}] for facility`);
+        } else {
+          console.warn(`Invalid coordinate skipped: [${lng}, ${lat}]`);
         }
       } catch (e) {
         console.warn('Invalid facility coordinates:', facility);
       }
     });
     
-    console.log(`Fitting map to bounds with ${validCoordinatesCount} valid coordinates`);
+    console.log(`Fitting map to bounds with ${validCoordinatesCount} valid coordinates out of ${facilities.length}`);
+    
+    // Add additional debug info
+    if (validCoordinatesCount === 0) {
+      console.error('CRITICAL: No valid coordinates to create bounds - Map will default to US view');
+    }
     
     // Fit map to these bounds if we have valid coordinates
     if (!bounds.isEmpty()) {
+      // Log the bounds for debugging
+      const ne = bounds.getNorthEast();
+      const sw = bounds.getSouthWest();
+      console.log(`Bounds: NE [${ne.lng}, ${ne.lat}], SW [${sw.lng}, ${sw.lat}]`);
+      
       map.fitBounds(bounds, {
         padding,
         maxZoom
       });
+      
+      // Verify the map view changed
+      const center = map.getCenter();
+      const zoom = map.getZoom();
+      console.log(`Map center after fitBounds: [${center.lng}, ${center.lat}], zoom: ${zoom}`);
     } else {
-      console.warn('No valid coordinates to fit bounds');
+      console.warn('No valid coordinates to fit bounds, defaulting to US view');
       // Default to US view if no valid coordinates
       map.flyTo({
         center: [-98.5795, 39.8283],
@@ -58,5 +76,15 @@ export const fitMapToBounds = (
     }
   } catch (error) {
     console.error('Error setting map bounds:', error);
+    
+    // Recovery: set to US view
+    try {
+      map.flyTo({
+        center: [-98.5795, 39.8283],
+        zoom: 3
+      });
+    } catch (recoveryError) {
+      console.error('Recovery failed:', recoveryError);
+    }
   }
 };

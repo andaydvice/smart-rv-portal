@@ -42,6 +42,11 @@ export function ensureMarkersOnMap(map: mapboxgl.Map, facilities: StorageFacilit
     });
   }
   
+  // Store created markers in a window variable for debugging
+  if (!window._createdMarkers) {
+    window._createdMarkers = [];
+  }
+  
   // Try to create markers directly
   facilities.forEach((facilityRaw, index) => {
     try {
@@ -51,6 +56,7 @@ export function ensureMarkersOnMap(map: mapboxgl.Map, facilities: StorageFacilit
       // IMPROVED: Only skip if marker definitely exists
       const existing = document.getElementById(`marker-${facility.id}`);
       if (existing && existing.isConnected) {
+        console.log(`Marker already exists for facility ${facility.id}`);
         return;
       }
       
@@ -85,6 +91,14 @@ export function ensureMarkersOnMap(map: mapboxgl.Map, facilities: StorageFacilit
       // Force add to map
       marker.addTo(map);
       
+      // Store the marker in our debug array
+      window._createdMarkers.push({
+        id: facility.id,
+        marker: marker,
+        lat: lat,
+        lng: lng
+      });
+      
       // IMPROVED: Force marker visibility through style attributes
       const el = marker.getElement();
       if (el) {
@@ -94,6 +108,7 @@ export function ensureMarkersOnMap(map: mapboxgl.Map, facilities: StorageFacilit
         el.style.zIndex = '9999';
         el.style.pointerEvents = 'auto';
         el.setAttribute('data-emergency-created', 'true');
+        el.setAttribute('title', facility.name); // Add title for debugging
       }
       
       // Track in global store for future reference
@@ -114,5 +129,6 @@ export function ensureMarkersOnMap(map: mapboxgl.Map, facilities: StorageFacilit
   setTimeout(() => forceMapMarkersVisible(), 100);
   setTimeout(() => forceMapMarkersVisible(), 500);
   
+  // Return the count of actually created markers
   return createdCount;
 }
