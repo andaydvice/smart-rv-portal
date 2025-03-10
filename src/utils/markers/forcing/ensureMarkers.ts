@@ -92,7 +92,7 @@ export function ensureMarkersOnMap(map: mapboxgl.Map, facilities: StorageFacilit
       marker.addTo(map);
       
       // Store the marker in our debug array
-      window._createdMarkers.push({
+      window._createdMarkers?.push({
         id: facility.id,
         marker: marker,
         lat: lat,

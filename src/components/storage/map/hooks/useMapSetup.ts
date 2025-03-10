@@ -79,10 +79,10 @@ export const useMapSetup = (map: mapboxgl.Map | null,
       const paddingValue: number = 50;
       const maxZoomValue: number = 10;
       
-      // Fit the map to the bounds of the facilities
+      // Explicitly provide all arguments with proper types to avoid TypeScript errors
       fitMapToBounds(
         map,
-        validFacilities,
+        validFacilities as Array<{ longitude: number | string; latitude: number | string }>,
         paddingValue,
         maxZoomValue
       );
