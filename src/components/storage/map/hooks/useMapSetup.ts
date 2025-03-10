@@ -59,7 +59,7 @@ export const useMapSetup = (map: mapboxgl.Map | null,
     if (map && mapLoaded && validFacilities.length > 0) {
       console.log(`Fitting map to bounds with ${validFacilities.length} valid coordinates`);
       
-      // Fix: Call map.resize() without arguments as it doesn't expect any
+      // Fix: The map.resize() method doesn't take any arguments
       map.resize();
       
       // Fix: Pass the required arguments to fitMapToBounds
