@@ -3,6 +3,10 @@ import mapboxgl from 'mapbox-gl';
 
 /**
  * Fits map view to bounds of all facility coordinates
+ * @param map - The Mapbox GL map instance
+ * @param facilities - Array of facilities with longitude and latitude
+ * @param padding - Padding around the bounds in pixels (default: 50)
+ * @param maxZoom - Maximum zoom level (default: 10)
  */
 export const fitMapToBounds = (
   map: mapboxgl.Map, 

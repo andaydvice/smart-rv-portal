@@ -1,3 +1,4 @@
+
 // Export marker forcing utilities
 export { forceMapMarkersVisible, applyForcedStyles, testMarkersVisibility } from './forcing/markerForcing';
 // Export ensureMarkersOnMap directly from the ensureMarkers file
@@ -35,9 +36,11 @@ export const ensureMarkersExist = (map: mapboxgl.Map, facilities: any[]) => {
   
   const createMarkers = () => {
     attempts++;
-    // Import the function directly to avoid circular dependencies
-    const { ensureMarkersOnMap } = require('./forcing/ensureMarkers');
-    const markerCount = ensureMarkersOnMap(map, facilities);
+    
+    // Use dynamic import to avoid circular dependencies but maintain type safety
+    const forcing = require('./forcing/ensureMarkers');
+    const markerCount = forcing.ensureMarkersOnMap(map, facilities);
+    
     console.log(`Marker creation attempt ${attempts}: Created ${markerCount} markers`);
     
     // If we still don't have enough markers, try again (up to max attempts)
@@ -62,9 +65,9 @@ export const ensureMarkersExist = (map: mapboxgl.Map, facilities: any[]) => {
   // Force markers to be visible regardless
   [100, 300, 600, 1000, 1500].forEach(delay => {
     setTimeout(() => {
-      // Import directly to avoid circular dependencies
-      const { forceMapMarkersVisible } = require('./forcing/markerForcing');
-      forceMapMarkersVisible();
+      // Use dynamic import to avoid circular dependencies
+      const forcing = require('./forcing/markerForcing');
+      forcing.forceMapMarkersVisible();
     }, delay);
   });
   

@@ -72,8 +72,17 @@ export const useMapSetup = (map: mapboxgl.Map | null,
       // Call resize() without arguments as it doesn't take any
       map.resize();
       
-      // Ensure we're passing the correct parameters to fitMapToBounds
-      fitMapToBounds(map, validFacilities, 50, 10);
+      // Make explicit function call with all parameters spelled out
+      const paddingValue: number = 50;
+      const maxZoomValue: number = 10;
+      
+      // Explicitly call with all four parameters to ensure type safety
+      fitMapToBounds(
+        map,
+        validFacilities,
+        paddingValue,
+        maxZoomValue
+      );
       
       // NEW: Ensure all markers exist and are visible
       setTimeout(() => {
