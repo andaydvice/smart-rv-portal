@@ -1,4 +1,3 @@
-
 // Export marker forcing utilities
 export { forceMapMarkersVisible, applyForcedStyles, testMarkersVisibility } from './forcing/markerForcing';
 // Export ensureMarkersOnMap directly from the ensureMarkers file
@@ -26,12 +25,42 @@ export type {
   StorageFacility
 } from './types';
 
-// Import ensureMarkersOnMap for local use
-import { ensureMarkersOnMap } from './forcing/ensureMarkers';
-
-// Function to ensure markers exist on map - emergency marker creation
+// Create a more aggressive ensureMarkersExist function
 export const ensureMarkersExist = (map: mapboxgl.Map, facilities: any[]) => {
-  console.log('EMERGENCY MARKER CREATION: Ensuring markers exist on map', facilities.length);
-  // Use the imported ensureMarkersOnMap function
-  return ensureMarkersOnMap(map, facilities);
+  console.log('AGGRESSIVE MARKER CREATION: Ensuring markers exist on map', facilities.length);
+  
+  // Create an interval that will keep checking and creating markers
+  let attempts = 0;
+  const maxAttempts = 5;
+  
+  const createMarkers = () => {
+    attempts++;
+    const markerCount = ensureMarkersOnMap(map, facilities);
+    console.log(`Marker creation attempt ${attempts}: Created ${markerCount} markers`);
+    
+    // If we still don't have enough markers, try again (up to max attempts)
+    if (markerCount < facilities.length * 0.9 && attempts < maxAttempts) {
+      return false; // Continue trying
+    }
+    return true; // Stop trying
+  };
+  
+  // Try immediately
+  if (!createMarkers()) {
+    // Try again with increasing delays
+    [200, 500, 1000, 2000].forEach((delay, index) => {
+      setTimeout(() => {
+        if (attempts <= index + 1) {
+          createMarkers();
+        }
+      }, delay);
+    });
+  }
+  
+  // Force markers to be visible regardless
+  [100, 300, 600, 1000, 1500].forEach(delay => {
+    setTimeout(() => forceMapMarkersVisible(), delay);
+  });
+  
+  return document.querySelectorAll('.mapboxgl-marker, .custom-marker').length;
 };

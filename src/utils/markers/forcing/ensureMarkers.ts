@@ -19,9 +19,10 @@ export function ensureMarkersOnMap(map: mapboxgl.Map, facilities: StorageFacilit
   const existingMarkers = document.querySelectorAll('.mapboxgl-marker, .custom-marker');
   console.log(`Emergency marker check: Found ${existingMarkers.length} markers, should have ${facilities.length}`);
   
-  // If we have a reasonable number of markers, just make them visible
-  if (existingMarkers.length > facilities.length * 0.8) {
-    console.log('Sufficient markers found, forcing visibility');
+  // IMPROVED: More aggressive marker creation - create markers even if some exist
+  // Only skip if we have almost the exact number of markers we need
+  if (existingMarkers.length > facilities.length * 0.95) {
+    console.log('Almost all markers found, forcing visibility');
     forceMapMarkersVisible();
     return existingMarkers.length;
   }
@@ -31,27 +32,39 @@ export function ensureMarkersOnMap(map: mapboxgl.Map, facilities: StorageFacilit
   // Track how many markers we create
   let createdCount = 0;
   
+  // IMPROVED: Clear existing markers if we're recreating them
+  if (existingMarkers.length > 0 && existingMarkers.length < facilities.length * 0.5) {
+    console.log('Clearing existing incomplete markers before recreation');
+    existingMarkers.forEach(marker => {
+      if (marker.parentNode) {
+        marker.parentNode.removeChild(marker);
+      }
+    });
+  }
+  
   // Try to create markers directly
   facilities.forEach((facilityRaw, index) => {
     try {
       // Adapt facility to a compatible type
       const facility = adaptFacility(facilityRaw);
       
-      // Skip if facility already has a marker
+      // IMPROVED: Only skip if marker definitely exists
       const existing = document.getElementById(`marker-${facility.id}`);
-      if (existing) {
+      if (existing && existing.isConnected) {
         return;
       }
       
       // Ensure map is ready
       if (!map || !map.loaded()) {
+        console.log('Map not ready, cannot create markers');
         return;
       }
       
-      // Ensure coordinates are valid
+      // IMPROVED: More lenient coordinate validation
       const lat = Number(facility.latitude);
       const lng = Number(facility.longitude);
-      if (isNaN(lat) || isNaN(lng) || Math.abs(lat) > 90 || Math.abs(lng) > 180) {
+      if (isNaN(lat) || isNaN(lng)) {
+        console.log(`Invalid coordinates for facility ${facility.id}: ${lat}, ${lng}`);
         return;
       }
       
@@ -72,6 +85,17 @@ export function ensureMarkersOnMap(map: mapboxgl.Map, facilities: StorageFacilit
       // Force add to map
       marker.addTo(map);
       
+      // IMPROVED: Force marker visibility through style attributes
+      const el = marker.getElement();
+      if (el) {
+        el.style.visibility = 'visible';
+        el.style.display = 'block';
+        el.style.opacity = '1';
+        el.style.zIndex = '9999';
+        el.style.pointerEvents = 'auto';
+        el.setAttribute('data-emergency-created', 'true');
+      }
+      
       // Track in global store for future reference
       if (!window._persistentMarkers) {
         window._persistentMarkers = {};
@@ -85,5 +109,10 @@ export function ensureMarkersOnMap(map: mapboxgl.Map, facilities: StorageFacilit
   });
   
   console.log(`Emergency marker creation complete: Created ${createdCount} markers`);
+  
+  // IMPROVED: Trigger additional marker visibility enforcement
+  setTimeout(() => forceMapMarkersVisible(), 100);
+  setTimeout(() => forceMapMarkersVisible(), 500);
+  
   return createdCount;
 }

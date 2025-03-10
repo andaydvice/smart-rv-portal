@@ -2,6 +2,7 @@
 import { useEffect } from 'react';
 import { StorageFacility } from '../../types';
 import { fitMapToBounds } from '../utils/mapBounds';
+import { ensureMarkersExist } from '@/utils/markers';
 
 /**
  * Hook to handle map initialization and setup
@@ -44,6 +45,15 @@ export const useMapSetup = (map: mapboxgl.Map | null,
           }
         });
       });
+      
+      // NEW: Try to create markers immediately after map creation
+      if (validFacilities && validFacilities.length > 0) {
+        // Use a timeout to ensure the map is ready
+        setTimeout(() => {
+          console.log(`Attempting to create ${validFacilities.length} markers on initial map setup`);
+          ensureMarkersExist(map, validFacilities);
+        }, 1000);
+      }
     }
     
     return () => {
@@ -52,7 +62,7 @@ export const useMapSetup = (map: mapboxgl.Map | null,
         map.off('popupclose');
       }
     };
-  }, [map]);
+  }, [map, validFacilities]);
 
   // Update map bounds when facilities change
   useEffect(() => {
@@ -64,6 +74,11 @@ export const useMapSetup = (map: mapboxgl.Map | null,
       
       // Call fitMapToBounds with the correct parameters
       fitMapToBounds(map, validFacilities, 50, 10);
+      
+      // NEW: Ensure all markers exist and are visible
+      setTimeout(() => {
+        ensureMarkersExist(map, validFacilities);
+      }, 500);
     }
   }, [validFacilities, mapLoaded, map, selectedState]);
 

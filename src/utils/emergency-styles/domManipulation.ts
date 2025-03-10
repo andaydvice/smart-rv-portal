@@ -1,4 +1,3 @@
-
 /**
  * Apply inline styles directly to marker elements in the DOM with better performance
  */
@@ -24,12 +23,16 @@ export function forceExistingMarkersVisible() {
       marker.style.display = 'block';
       marker.style.opacity = '1';
       marker.style.zIndex = '9999';
+      marker.style.pointerEvents = 'auto';
       
       // Mark as processed
       marker.setAttribute('data-forced-visible', 'true');
       mapMarkersStyled++;
     }
   });
+  
+  // Log the count of markers we found for debugging
+  console.log(`Found ${mapMarkers.length} total map markers (styled ${mapMarkersStyled} new ones)`);
   
   // Batch operations for header markers
   headerMarkers.forEach(marker => {
@@ -49,6 +52,14 @@ export function forceExistingMarkersVisible() {
   // Log only if we actually did something
   if (mapMarkersStyled > 0 || headerMarkersStyled > 0) {
     console.log(`Forced visibility on ${mapMarkersStyled} map markers and ${headerMarkersStyled} header markers`);
+  }
+  
+  // Ensure canvas is also visible
+  const canvas = document.querySelector('.mapboxgl-canvas');
+  if (canvas instanceof HTMLElement) {
+    canvas.style.visibility = 'visible';
+    canvas.style.display = 'block';
+    canvas.style.opacity = '1';
   }
 }
 
