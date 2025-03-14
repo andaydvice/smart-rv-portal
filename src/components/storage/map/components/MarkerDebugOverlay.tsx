@@ -1,7 +1,8 @@
 
 import React, { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { createMarkerDebugger, testMarkersVisibility, MarkerVisibilityTestResult } from '@/utils/markers/testing';
+import { createMarkerDebugger, testMarkersVisibility } from '@/utils/markers/testing';
+import type { MarkerVisibilityTestResult } from '@/utils/markers/types';
 
 /**
  * A component that provides debugging tools for marker visibility issues
@@ -31,8 +32,9 @@ const MarkerDebugOverlay: React.FC = () => {
   
   // Show full debugger
   const showDebugger = () => {
-    const debugElement = createMarkerDebugger();
-    document.body.appendChild(debugElement);
+    const cleanup = createMarkerDebugger();
+    // Return cleanup function to prevent TypeScript error
+    return cleanup;
   };
   
   // Do not render in production

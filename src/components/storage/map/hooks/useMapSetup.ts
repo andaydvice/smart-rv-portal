@@ -112,8 +112,9 @@ export const useMapSetup = (map: mapboxgl.Map | null,
         });
         
         if (map) {
-          const markerCount = ensureMarkersExist(map, validFacilities);
-          console.log(`Created ${markerCount} markers after filtering to ${validFacilities.length} facilities`);
+          // Pass both map and validFacilities to ensureMarkersExist
+          ensureMarkersExist(map, validFacilities);
+          console.log(`Created markers after filtering to ${validFacilities.length} facilities`);
           
           // Remove any view details buttons
           removeViewDetailsButtons();
