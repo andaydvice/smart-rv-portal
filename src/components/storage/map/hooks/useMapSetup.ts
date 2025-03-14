@@ -1,3 +1,4 @@
+
 import { useEffect } from 'react';
 import { StorageFacility } from '../../types';
 import { fitMapToBounds } from '../utils/mapBounds';
