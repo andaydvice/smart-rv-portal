@@ -1,161 +1,60 @@
 
-/* Critical marker visibility styles - optimized for performance */
-.custom-marker {
-  visibility: visible !important;
-  display: block !important;
-  opacity: 1 !important;
-  pointer-events: all !important;
-  z-index: 9998 !important;
-  position: absolute !important;
-  cursor: pointer !important;
-  transform-origin: center !important;
-  will-change: transform !important;
-}
-
-/* Critical popup visibility styles - optimized */
+/* Fixes for Mapbox popups */
 .mapboxgl-popup {
-  z-index: 10000 !important;
-  visibility: visible !important;
-  display: block !important;
-  opacity: 1 !important;
-  pointer-events: all !important;
+  z-index: 1000 !important;
 }
 
 .mapboxgl-popup-content {
-  background-color: #151A22 !important;
-  color: white !important;
+  padding: 10px !important;
   border-radius: 8px !important;
-  padding: 15px !important;
-  border: 1px solid rgb(55 65 81) !important;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3) !important;
-}
-
-/* Fix the close button */
-.mapboxgl-popup-close-button {
-  color: white !important;
-  font-size: 18px !important;
-  padding: 5px 8px !important;
-  right: 5px !important;
-  top: 5px !important;
-  background: none !important;
-  border: none !important;
-  cursor: pointer !important;
-  pointer-events: all !important;
-  z-index: 10001 !important;
-}
-
-.mapboxgl-popup-close-button:hover {
-  background-color: rgba(255, 255, 255, 0.1) !important;
-  color: #F97316 !important;
-}
-
-/* Performance optimization class selectors */
-body.map-loaded .mapboxgl-marker,
-body.map-loaded .custom-marker,
-body.show-map-markers .mapboxgl-marker,
-body.show-map-markers .custom-marker,
-.mapboxgl-marker[data-visible="true"],
-.custom-marker[data-visible="true"],
-.mapboxgl-marker[data-forced="true"],
-.custom-marker[data-forced="true"] {
-  visibility: visible !important;
-  display: block !important;
-  opacity: 1 !important;
-}
-
-/* Hardware acceleration for smooth animations */
-.mapboxgl-marker,
-.custom-marker,
-.mapboxgl-popup {
-  transform: translateZ(0);
-  will-change: transform;
-}
-
-/* Reduce paint operations with opacity transitions */
-.mapboxgl-marker,
-.custom-marker {
-  transition: transform 0.2s ease-out;
-}
-
-/* Reduce repaints when hovering */
-.custom-marker:hover,
-.mapboxgl-marker:hover {
-  z-index: 10000 !important;
-}
-
-/* Make marker handling more efficient */
-[data-markers-loading="true"] .mapboxgl-map,
-.map-loaded .mapboxgl-map {
-  contain: content;
-}
-
-/* Fixed styles to ensure map remains visible */
-.mapboxgl-map {
-  visibility: visible !important;
-  display: block !important;
-  opacity: 1 !important;
-}
-
-.mapboxgl-canvas-container,
-.mapboxgl-canvas {
-  visibility: visible !important;
-  display: block !important;
-  opacity: 1 !important;
-}
-
-/* Hide the "View Details" button in popups */
-.view-facility-btn,
-button.view-details,
-.facility-popup-content button {
-  display: none !important;
-  visibility: hidden !important;
-  opacity: 0 !important;
-  pointer-events: none !important;
-}
-
-/* Hide the floating facility card in the top-left */
-.fixed-orange-marker:not(.custom-marker):not(.mapboxgl-marker):not(.emergency-marker):not(.hero-marker) {
-  display: none !important;
-  visibility: hidden !important;
-  opacity: 0 !important;
-}
-
-/* Preserve only the legitimate marker in the hero section */
-.hero-marker {
-  display: block !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-}
-
-/* Allow facility popups to be properly sized */
-.facility-popup {
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2) !important;
   max-width: 300px !important;
 }
 
-/* Properly position and style highlighted (green) markers */
-.mapboxgl-marker[data-highlighted="true"],
-.custom-marker[data-highlighted="true"],
-.emergency-marker[data-highlighted="true"] {
-  background-color: #10B981 !important;
-  width: 28px !important;
-  height: 28px !important;
-  transform: translate(-50%, -50%) scale(1.3) !important;
-  z-index: 10002 !important;
-  box-shadow: 0 0 15px rgba(16, 185, 129, 0.8) !important;
-  border: 2px solid white !important;
+.mapboxgl-popup-close-button {
+  font-size: 16px !important;
+  color: #666 !important;
+  right: 5px !important;
+  top: 5px !important;
+  padding: 0 !important;
+  width: 24px !important;
+  height: 24px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
 }
 
-/* Ensure map is always visible after popups are closed */
-body.markers-forced .mapboxgl-canvas {
+.mapboxgl-popup-close-button:hover {
+  background-color: rgba(0, 0, 0, 0.05) !important;
+  color: #333 !important;
+}
+
+/* Fix for marker visibility and popup position */
+.custom-marker {
   visibility: visible !important;
   display: block !important;
   opacity: 1 !important;
 }
 
-/* Remove the floating info box that appears at the top of the map */
-.fixed-info-card,
-.facility-info-card,
-.floating-facility-card {
+/* Ensure popups have proper position */
+.mapboxgl-popup {
+  transform: none !important;
+  position: absolute !important;
+  pointer-events: auto !important;
+}
+
+/* Fix for popup appearing in the header area */
+.mapboxgl-popup.mapboxgl-popup-anchor-bottom {
+  margin-top: -10px !important;
+}
+
+/* Hide any view details buttons */
+.view-facility-btn, 
+button.view-details, 
+a.view-details, 
+.view-details,
+[class*="view-detail"], 
+[id*="view-detail"] {
   display: none !important;
   visibility: hidden !important;
   opacity: 0 !important;

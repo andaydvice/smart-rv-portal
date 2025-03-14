@@ -49,8 +49,7 @@ export function createFacilityMarker(
   // Set popup data attribute for CSS targeting
   popup.addClassName(`popup-${facility.id}`);
   
-  // Simplified popup content with just the essential info
-  // Remove the "view details" button
+  // Simplified popup content without the "view details" button
   popup.setHTML(`
     <div class="facility-popup-content" data-facility-id="${facility.id}">
       <h3 class="text-lg font-semibold mb-1">${facility.name}</h3>
