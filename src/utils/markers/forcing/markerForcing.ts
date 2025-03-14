@@ -1,173 +1,122 @@
-
-import { testMarkersVisibility as runTest } from '../testing/visibilityTester';
+import mapboxgl from 'mapbox-gl';
 
 /**
- * Force all markers on the map to be visible
+ * Forces all map markers to be visible by setting their CSS styles
  */
 export function forceMapMarkersVisible() {
-  console.log("Forcing map markers to be visible");
+  console.log('Forcing map markers to be visible');
   
-  // Add a class to the body to indicate markers are being forced
-  document.body.classList.add('markers-forced');
+  document.querySelectorAll('.mapboxgl-marker, .custom-marker, .emergency-marker').forEach(marker => {
+    if (marker instanceof HTMLElement) {
+      marker.style.visibility = 'visible';
+      marker.style.display = 'block';
+      marker.style.opacity = '1';
+      marker.style.zIndex = '9999';
+      marker.style.pointerEvents = 'auto';
+      marker.style.position = 'absolute';
+      marker.setAttribute('data-forced-visible', 'true');
+    }
+  });
+}
+
+/**
+ * Applies forced visibility styles to a single marker
+ */
+export function applyForcedStyles(marker: HTMLElement) {
+  marker.style.visibility = 'visible';
+  marker.style.display = 'block';
+  marker.style.opacity = '1';
+  marker.style.zIndex = '9999';
+  marker.style.pointerEvents = 'auto';
+  marker.style.position = 'absolute';
+  marker.setAttribute('data-forced-visible', 'true');
+}
+
+/**
+ * Tests the visibility of map markers and logs any issues
+ */
+export function testMarkersVisibility(isInitialLoad: boolean = false) {
+  console.log('Testing map markers visibility');
   
-  // Find all mapbox markers and make them visible
   const markers = document.querySelectorAll('.mapboxgl-marker, .custom-marker, .emergency-marker');
+  console.log(`Found ${markers.length} markers to test`);
+  
   markers.forEach(marker => {
     if (marker instanceof HTMLElement) {
-      applyForcedStyles(marker);
+      const isVisible = marker.style.visibility === 'visible' &&
+                        marker.style.display === 'block' &&
+                        marker.style.opacity === '1';
+      
+      if (!isVisible) {
+        console.warn('Marker is not visible:', marker);
+        console.warn('Style:', marker.style.cssText);
+        console.warn('Attributes:', marker.attributes);
+        
+        if (isInitialLoad) {
+          console.warn('This may be due to initial load issues - try again after the map has fully loaded');
+        }
+      }
+    }
+  });
+}
+
+/**
+ * Forces the map to be visible
+ */
+export function ensureMapVisible() {
+  document.querySelectorAll('.mapboxgl-canvas-container, .mapboxgl-canvas').forEach(el => {
+    if (el instanceof HTMLElement) {
+      el.style.visibility = 'visible';
+      el.style.display = 'block';
+      el.style.opacity = '1';
+    }
+  });
+}
+
+/**
+ * Remove View Details buttons from all popups since they're not functional
+ */
+export function removeViewDetailsButtons() {
+  console.log('Removing all View Details buttons from popups');
+  
+  const viewDetailsButtons = document.querySelectorAll('.view-facility-btn, button.view-details, a.view-details, .view-details');
+  viewDetailsButtons.forEach(btn => {
+    if (btn instanceof HTMLElement) {
+      // Completely remove the button from the DOM
+      if (btn.parentNode) {
+        btn.parentNode.removeChild(btn);
+      }
     }
   });
   
-  // Also force map visibility
-  const mapContainer = document.querySelector('.mapboxgl-map');
-  if (mapContainer instanceof HTMLElement) {
-    mapContainer.style.visibility = 'visible';
-    mapContainer.style.opacity = '1';
-    mapContainer.style.display = 'block';
-  }
-  
-  // Ensure the map canvas is visible too
-  const mapCanvas = document.querySelector('.mapboxgl-canvas');
-  if (mapCanvas instanceof HTMLElement) {
-    mapCanvas.style.visibility = 'visible';
-    mapCanvas.style.opacity = '1';
-    mapCanvas.style.display = 'block';
-  }
-  
-  // Fix popup close buttons
-  document.querySelectorAll('.mapboxgl-popup-close-button').forEach(button => {
-    if (button instanceof HTMLElement) {
-      button.style.pointerEvents = 'all';
-      button.style.cursor = 'pointer';
-      button.style.zIndex = '10001';
+  // Also check popups for any view details buttons and remove them
+  document.querySelectorAll('.mapboxgl-popup-content').forEach(popup => {
+    if (popup instanceof HTMLElement) {
+      // Find any elements that might be view details buttons by text content
+      const possibleButtons = Array.from(popup.querySelectorAll('button, a, div')).filter(el => {
+        const text = el.textContent?.toLowerCase() || '';
+        return text.includes('view') && text.includes('detail');
+      });
       
-      // Remove any existing click events and add a clean one
-      const newButton = button.cloneNode(true);
-      button.parentNode?.replaceChild(newButton, button);
-      
-      newButton.addEventListener('click', (e) => {
-        e.stopPropagation();
-        e.preventDefault();
-        
-        // Find and remove the popup
-        const popup = (newButton as HTMLElement).closest('.mapboxgl-popup');
-        if (popup) {
-          popup.remove();
-          
-          // Trigger custom event
-          document.dispatchEvent(new CustomEvent('mapbox.popup.closed'));
-          
-          // Make sure map is visible
-          setTimeout(() => {
-            const mapCanvas = document.querySelector('.mapboxgl-canvas');
-            if (mapCanvas instanceof HTMLElement) {
-              mapCanvas.style.visibility = 'visible';
-              mapCanvas.style.display = 'block';
-              mapCanvas.style.opacity = '1';
-            }
-            
-            // Ensure all markers are visible
-            forceMapMarkersVisible();
-          }, 50);
+      // Remove any found buttons
+      possibleButtons.forEach(btn => {
+        if (btn.parentNode) {
+          btn.parentNode.removeChild(btn);
         }
       });
     }
   });
   
-  // Remove the floating facility card
-  const floatingCards = document.querySelectorAll('.fixed-orange-marker:not(.custom-marker):not(.mapboxgl-marker):not(.emergency-marker)');
-  floatingCards.forEach(card => {
-    if (card instanceof HTMLElement && !card.closest('.mapboxgl-map')) {
-      card.style.display = 'none';
-      card.style.visibility = 'hidden';
-      card.style.opacity = '0';
+  // Also add CSS to hide these buttons if they're added dynamically
+  const style = document.createElement('style');
+  style.textContent = `
+    .view-facility-btn, button.view-details, a.view-details, .view-details, 
+    [class*="view-detail"], [id*="view-detail"] {
+      display: none !important;
+      visibility: hidden !important;
+      opacity: 0 !important;
+      pointer-events: none !important;
     }
-  });
-  
-  return markers.length;
-}
-
-/**
- * Apply critical styles to make a marker visible
- */
-export function applyForcedStyles(element: HTMLElement) {
-  // Apply critical visibility styles
-  element.style.visibility = 'visible';
-  element.style.display = 'block';
-  element.style.opacity = '1';
-  element.style.zIndex = '9999';
-  element.style.pointerEvents = 'auto';
-  element.style.position = 'absolute';
-  
-  // Mark as forced visible
-  element.setAttribute('data-forced-visible', 'true');
-  
-  // Special handling for highlighted markers
-  const facilityId = element.getAttribute('data-facility-id');
-  if (facilityId && window._persistentMarkers && window._persistentMarkers[facilityId]) {
-    // This is a marker that should be highlighted
-    // Fix: Use type assertion to access highlightedFacilityId on window
-    const highlightedId = (window as any).highlightedFacilityId;
-    if (facilityId === highlightedId) {
-      element.style.backgroundColor = '#10B981';
-      element.style.width = '28px';
-      element.style.height = '28px';
-      element.style.transform = 'translate(-50%, -50%) scale(1.3)';
-      element.style.zIndex = '10002';
-      element.style.boxShadow = '0 0 15px rgba(16, 185, 129, 0.8)';
-    }
-  }
-}
-
-/**
- * Test marker visibility and fix any issues
- */
-export function testMarkersVisibility(fixIssues = true) {
-  return runTest(fixIssues);
-}
-
-/**
- * Ensure map container and canvas are visible
- */
-export function ensureMapVisible() {
-  // Force map container to be visible
-  const mapContainer = document.querySelector('.mapboxgl-map');
-  if (mapContainer instanceof HTMLElement) {
-    mapContainer.style.visibility = 'visible';
-    mapContainer.style.opacity = '1';
-    mapContainer.style.display = 'block';
-  }
-  
-  // Force map canvas to be visible
-  const mapCanvas = document.querySelector('.mapboxgl-canvas');
-  if (mapCanvas instanceof HTMLElement) {
-    mapCanvas.style.visibility = 'visible';
-    mapCanvas.style.opacity = '1';
-    mapCanvas.style.display = 'block';
-  }
-}
-
-/**
- * Remove any unwanted "View Details" buttons
- */
-export function removeViewDetailsButtons() {
-  // Target all view details buttons
-  document.querySelectorAll('.view-facility-btn, button.view-details').forEach(button => {
-    if (button instanceof HTMLElement) {
-      button.style.display = 'none';
-      button.style.visibility = 'hidden';
-      button.style.opacity = '0';
-      button.style.pointerEvents = 'none';
-    }
-  });
-  
-  // Also remove the floating facility card in the top-left
-  const floatingCards = document.querySelectorAll('.fixed-orange-marker:not(.custom-marker):not(.mapboxgl-marker):not(.emergency-marker)');
-  floatingCards.forEach(card => {
-    if (card instanceof HTMLElement && !card.closest('.mapboxgl-map')) {
-      card.style.display = 'none';
-      card.style.visibility = 'hidden';
-      card.style.opacity = '0';
-    }
-  });
+  `;
+  document.head.appendChild(style);
 }

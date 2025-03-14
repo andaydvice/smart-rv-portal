@@ -2,7 +2,7 @@
 import { useEffect } from 'react';
 import { StorageFacility } from '../../types';
 import { fitMapToBounds } from '../utils/mapBounds';
-import { ensureMarkersExist } from '@/utils/markers';
+import { ensureMarkersExist, removeViewDetailsButtons } from '@/utils/markers';
 
 /**
  * Hook to handle map initialization and setup
@@ -44,6 +44,9 @@ export const useMapSetup = (map: mapboxgl.Map | null,
             marker.style.opacity = '1';
           }
         });
+        
+        // Remove any view details buttons
+        removeViewDetailsButtons();
       });
       
       // Store facilities in window for debugging
@@ -55,6 +58,7 @@ export const useMapSetup = (map: mapboxgl.Map | null,
         setTimeout(() => {
           console.log(`Attempting to create ${validFacilities.length} markers on initial map setup`);
           ensureMarkersExist(map, validFacilities);
+          removeViewDetailsButtons();
         }, 1000);
       }
     }
@@ -97,8 +101,18 @@ export const useMapSetup = (map: mapboxgl.Map | null,
       
       // Ensure markers exist for the filtered facilities
       setTimeout(() => {
+        // Force clear existing markers first to ensure accurate count
+        document.querySelectorAll('.mapboxgl-marker, .custom-marker').forEach(marker => {
+          if (marker.parentNode) {
+            marker.parentNode.removeChild(marker);
+          }
+        });
+        
         const markerCount = ensureMarkersExist(map, validFacilities);
         console.log(`Created ${markerCount} markers after filtering to ${validFacilities.length} facilities`);
+        
+        // Remove any view details buttons
+        removeViewDetailsButtons();
       }, 300);
     }
   }, [validFacilities, mapLoaded, map, selectedState]);

@@ -4,7 +4,8 @@ import { StorageFacility } from '../../types';
 import { 
   injectEmergencyMarkerStyles,
   createEmergencyMarkers,
-  setupEmergencyMarkerListeners
+  setupEmergencyMarkerListeners,
+  removeViewDetailsButtons
 } from '@/utils/markers';
 
 /**
@@ -37,8 +38,21 @@ export const useMarkerManagement = (
     if (!map || !mapLoaded || validFacilities.length === 0) return 0;
     
     try {
-      // Create emergency markers
+      // Create emergency markers - ensure we're creating the exact number of markers needed
+      console.log(`Creating markers for ${validFacilities.length} facilities`);
+      
+      // Force clear existing markers first to ensure accurate count
+      document.querySelectorAll('.mapboxgl-marker, .custom-marker').forEach(marker => {
+        if (marker.parentNode) {
+          marker.parentNode.removeChild(marker);
+        }
+      });
+      
+      // Create fresh markers for all facilities
       const markerCount = createEmergencyMarkers(map, validFacilities);
+      
+      // Remove any view details buttons that might be created
+      removeViewDetailsButtons();
       
       // Update stats
       setStats(prev => ({
@@ -69,6 +83,9 @@ export const useMarkerManagement = (
         marker.style.opacity = '1';
       }
     });
+    
+    // Also remove any view details buttons
+    removeViewDetailsButtons();
   }, []);
 
   // Mark error as recovered
@@ -91,11 +108,14 @@ export const useMarkerManagement = (
       container.style.display = 'block';
     }
     
-    console.log('Creating markers for facilities...');
+    console.log(`Creating ${validFacilities.length} markers for facilities...`);
     
     // Create emergency markers and set up listeners
     const markerCount = createEmergencyMarkers(map, validFacilities);
     console.log(`Created ${markerCount} emergency markers`);
+    
+    // Remove any view details buttons
+    removeViewDetailsButtons();
     
     // Update stats
     setStats(prev => ({
@@ -107,13 +127,16 @@ export const useMarkerManagement = (
     // Set up event listeners
     const cleanup = setupEmergencyMarkerListeners(onMarkerClick);
     
-    // Set up a MutationObserver to watch for popup close buttons
+    // Set up a MutationObserver to watch for popup close buttons and remove view details buttons
     const observer = new MutationObserver((mutations) => {
       mutations.forEach(mutation => {
         if (mutation.type === 'childList') {
           // Look for newly added popups
           mutation.addedNodes.forEach(node => {
             if (node instanceof HTMLElement && node.classList.contains('mapboxgl-popup')) {
+              // Remove any view details buttons
+              removeViewDetailsButtons();
+              
               // Find close button
               const closeButton = node.querySelector('.mapboxgl-popup-close-button');
               if (closeButton instanceof HTMLElement) {
@@ -157,9 +180,13 @@ export const useMarkerManagement = (
       subtree: true
     });
     
+    // Periodically remove view details buttons
+    const removalInterval = setInterval(removeViewDetailsButtons, 2000);
+    
     return () => {
       cleanup();
       observer.disconnect();
+      clearInterval(removalInterval);
       // Remove emergency markers
       document.querySelectorAll('.emergency-marker').forEach(marker => {
         if (marker.parentNode) marker.parentNode.removeChild(marker);

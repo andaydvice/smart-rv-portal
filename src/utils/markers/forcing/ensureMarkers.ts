@@ -19,46 +19,44 @@ export function ensureMarkersOnMap(map: mapboxgl.Map, facilities: StorageFacilit
   const existingMarkers = document.querySelectorAll('.mapboxgl-marker, .custom-marker');
   console.log(`Emergency marker check: Found ${existingMarkers.length} markers, should have ${facilities.length}`);
   
-  // IMPROVED: More aggressive marker creation - create markers even if some exist
-  // Only skip if we have almost the exact number of markers we need
-  if (existingMarkers.length > facilities.length * 0.95) {
-    console.log('Almost all markers found, forcing visibility');
-    forceMapMarkersVisible();
-    return existingMarkers.length;
-  }
+  // IMPROVED: More aggressive marker creation - always recreate all markers to ensure accurate count
+  console.log('EMERGENCY: Recreating all markers to ensure accurate count');
   
-  console.log('EMERGENCY: Not enough markers found, creating them directly');
+  // Clear existing markers first
+  existingMarkers.forEach(marker => {
+    if (marker.parentNode) {
+      marker.parentNode.removeChild(marker);
+    }
+  });
   
   // Track how many markers we create
   let createdCount = 0;
   
-  // IMPROVED: Clear existing markers if we're recreating them
-  if (existingMarkers.length > 0 && existingMarkers.length < facilities.length * 0.5) {
-    console.log('Clearing existing incomplete markers before recreation');
-    existingMarkers.forEach(marker => {
-      if (marker.parentNode) {
-        marker.parentNode.removeChild(marker);
-      }
-    });
-  }
-  
   // Store created markers in a window variable for debugging
   if (!window._createdMarkers) {
     window._createdMarkers = [];
+  } else {
+    // Clear existing tracked markers
+    window._createdMarkers = [];
+  }
+  
+  // Clear existing persistent markers
+  if (window._persistentMarkers) {
+    Object.values(window._persistentMarkers).forEach((marker: any) => {
+      if (marker && typeof marker.remove === 'function') {
+        marker.remove();
+      }
+    });
+    window._persistentMarkers = {};
+  } else {
+    window._persistentMarkers = {};
   }
   
   // Try to create markers directly
-  facilities.forEach((facilityRaw, index) => {
+  facilities.forEach((facilityRaw) => {
     try {
       // Adapt facility to a compatible type
       const facility = adaptFacility(facilityRaw);
-      
-      // IMPROVED: Only skip if marker definitely exists
-      const existing = document.getElementById(`marker-${facility.id}`);
-      if (existing && existing.isConnected) {
-        console.log(`Marker already exists for facility ${facility.id}`);
-        return;
-      }
       
       // Ensure map is ready
       if (!map || !map.loaded()) {
@@ -66,7 +64,7 @@ export function ensureMarkersOnMap(map: mapboxgl.Map, facilities: StorageFacilit
         return;
       }
       
-      // IMPROVED: More lenient coordinate validation
+      // Validate coordinates
       const lat = Number(facility.latitude);
       const lng = Number(facility.longitude);
       if (isNaN(lat) || isNaN(lng)) {
@@ -80,9 +78,9 @@ export function ensureMarkersOnMap(map: mapboxgl.Map, facilities: StorageFacilit
         [lng, lat],
         false,
         (id) => {
-          console.log(`Emergency marker clicked: ${id}`);
+          console.log(`Marker clicked: ${id}`);
           // Dispatch a custom event for other systems to listen for
-          const event = new CustomEvent('marker-emergency-click', { detail: { facilityId: id } });
+          const event = new CustomEvent('marker-click', { detail: { facilityId: id } });
           document.dispatchEvent(event);
         },
         map
@@ -99,7 +97,7 @@ export function ensureMarkersOnMap(map: mapboxgl.Map, facilities: StorageFacilit
         lng: lng
       });
       
-      // IMPROVED: Force marker visibility through style attributes
+      // Force marker visibility through style attributes
       const el = marker.getElement();
       if (el) {
         el.style.visibility = 'visible';
@@ -112,20 +110,17 @@ export function ensureMarkersOnMap(map: mapboxgl.Map, facilities: StorageFacilit
       }
       
       // Track in global store for future reference
-      if (!window._persistentMarkers) {
-        window._persistentMarkers = {};
-      }
       window._persistentMarkers[facility.id] = marker;
       
       createdCount++;
     } catch (error) {
-      console.error('Error in emergency marker creation:', error);
+      console.error('Error in marker creation:', error);
     }
   });
   
-  console.log(`Emergency marker creation complete: Created ${createdCount} markers`);
+  console.log(`Marker creation complete: Created ${createdCount} markers for ${facilities.length} facilities`);
   
-  // IMPROVED: Trigger additional marker visibility enforcement
+  // Force marker visibility after creation
   setTimeout(() => forceMapMarkersVisible(), 100);
   setTimeout(() => forceMapMarkersVisible(), 500);
   

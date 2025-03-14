@@ -36,19 +36,21 @@ export function createFacilityMarker(
   el.setAttribute('data-facility-id', facility.id);
   el.setAttribute('data-marker-type', 'facility');
   
-  // Create persistent popup
+  // Create properly positioned popup
   const popup = new mapboxgl.Popup({
     closeButton: true,
     closeOnClick: false,
     maxWidth: '300px',
     className: 'facility-popup',
-    offset: [0, -15]
+    offset: [0, -15],
+    anchor: 'bottom' // Position popup above the marker
   });
   
   // Set popup data attribute for CSS targeting
   popup.addClassName(`popup-${facility.id}`);
   
   // Simplified popup content with just the essential info
+  // Remove the "view details" button
   popup.setHTML(`
     <div class="facility-popup-content" data-facility-id="${facility.id}">
       <h3 class="text-lg font-semibold mb-1">${facility.name}</h3>
