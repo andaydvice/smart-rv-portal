@@ -1,22 +1,15 @@
 
-// Re-export the core testing functionality
-export { testMarkersVisibility } from './core/testVisibility';
+// Import the correct test function from whereever it's defined
+import { testMarkersVisibility } from './visibility';
 
-// Re-export the debug overlay creators
+// Re-export from specialized utility files
 export { 
   createMarkerDebugger,
-  createMarkerDebugOverlay 
-} from './ui/debugOverlay';
+  createMarkerDebugOverlay
+} from './debugging';
 
-// Re-export the monitoring functionality
-export { monitorMarkerVisibility } from './monitoring/visibilityMonitor';
+// Re-export the testMarkersVisibility function
+export { testMarkersVisibility };
 
-// Export aliases for backward compatibility
+// Add alias for backward compatibility
 export const testMarkerVisibility = testMarkersVisibility;
-export const auditMarkerVisibility = testMarkersVisibility;
-
-// Re-export types from main markers types file
-export type {
-  MarkerVisibilityTestResult,
-  VisibilityIssueDetail,
-} from '../types';

@@ -1,129 +1,101 @@
-
 import mapboxgl from 'mapbox-gl';
-import { createFacilityMarker } from '@/components/storage/map/utils/markerCreation';
-import { forceMapMarkersVisible } from './markerForcing';
-import type { StorageFacility } from '../types';
-
-// Helper to adapt any facility-like object to a compatible type
-const adaptFacility = (facility: any): any => {
-  // This is just to satisfy TypeScript - at runtime, the object is used as-is
-  return facility;
-};
 
 /**
- * Emergency function to ensure markers are present on the map
- * This is a last resort when all else fails
+ * Ensures markers exist on the map for all facilities
+ * @param map The Mapbox GL map instance
+ * @param facilities Array of facilities to create markers for
+ * @returns Number of markers created
  */
-export function ensureMarkersOnMap(map: mapboxgl.Map, facilities: StorageFacility[] | any[]) {
-  // First check if we already have markers
-  const existingMarkers = document.querySelectorAll('.mapboxgl-marker, .custom-marker');
-  console.log(`Emergency marker check: Found ${existingMarkers.length} markers, should have ${facilities.length}`);
+export function ensureMarkersOnMap(map: mapboxgl.Map, facilities: any[]): number {
+  if (!map || !facilities || facilities.length === 0) {
+    console.warn('Cannot create markers: missing map or facilities');
+    return 0;
+  }
   
-  // IMPROVED: More aggressive marker creation - always recreate all markers to ensure accurate count
-  console.log('EMERGENCY: Recreating all markers to ensure accurate count');
+  console.log(`Ensuring markers exist for ${facilities.length} facilities`);
   
-  // Clear existing markers first
-  existingMarkers.forEach(marker => {
-    if (marker.parentNode) {
-      marker.parentNode.removeChild(marker);
+  let markersCreated = 0;
+  let markersSkipped = 0;
+  
+  // Keep track of which facility IDs we've already processed
+  const processedIds = new Set<string>();
+  document.querySelectorAll('.mapboxgl-marker[data-facility-id], .custom-marker[data-facility-id]').forEach(marker => {
+    const facilityId = marker.getAttribute('data-facility-id');
+    if (facilityId) {
+      processedIds.add(facilityId);
     }
   });
   
-  // Track how many markers we create
-  let createdCount = 0;
-  
-  // Store created markers in a window variable for debugging
-  if (!window._createdMarkers) {
-    window._createdMarkers = [];
-  } else {
-    // Clear existing tracked markers
-    window._createdMarkers = [];
-  }
-  
-  // Clear existing persistent markers
-  if (window._persistentMarkers) {
-    Object.values(window._persistentMarkers).forEach((marker: any) => {
-      if (marker && typeof marker.remove === 'function') {
-        marker.remove();
-      }
-    });
-    window._persistentMarkers = {};
-  } else {
-    window._persistentMarkers = {};
-  }
-  
-  // Try to create markers directly
-  facilities.forEach((facilityRaw) => {
-    try {
-      // Adapt facility to a compatible type
-      const facility = adaptFacility(facilityRaw);
+  // Create markers for facilities that don't already have them
+  facilities.forEach(facility => {
+    if (!facility.id || processedIds.has(facility.id)) {
+      markersSkipped++;
+      return;
+    }
+    
+    // Validate coordinates
+    const lat = parseFloat(String(facility.latitude));
+    const lng = parseFloat(String(facility.longitude));
+    
+    if (isNaN(lat) || isNaN(lng)) {
+      console.warn(`Invalid coordinates for facility ${facility.id}: ${lat}, ${lng}`);
+      markersSkipped++;
+      return;
+    }
+    
+    // Create marker element
+    const markerElement = document.createElement('div');
+    markerElement.className = 'custom-marker';
+    markerElement.setAttribute('data-facility-id', facility.id);
+    markerElement.style.cssText = `
+      width: 20px;
+      height: 20px;
+      background-color: #F97316;
+      border-radius: 50%;
+      border: 2px solid white;
+      cursor: pointer;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+      visibility: visible !important;
+      display: block !important;
+      opacity: 1 !important;
+      z-index: 9999 !important;
+    `;
+    
+    // Create popup content
+    const popupContent = document.createElement('div');
+    popupContent.innerHTML = `
+      <h3 style="font-weight: bold; margin-bottom: 5px;">${facility.name || 'Storage Facility'}</h3>
+      <p style="margin: 0 0 5px 0;">${facility.city || ''}, ${facility.state || ''}</p>
+    `;
+    
+    // Create popup
+    const popup = new mapboxgl.Popup({
+      closeButton: true,
+      closeOnClick: false,
+      offset: 15,
+      className: 'storage-facility-popup'
+    }).setDOMContent(popupContent);
+    
+    // Create and add the marker
+    const marker = new mapboxgl.Marker(markerElement)
+      .setLngLat([lng, lat])
+      .setPopup(popup)
+      .addTo(map);
       
-      // Ensure map is ready
-      if (!map || !map.loaded()) {
-        console.log('Map not ready, cannot create markers');
-        return;
-      }
-      
-      // Validate coordinates
-      const lat = Number(facility.latitude);
-      const lng = Number(facility.longitude);
-      if (isNaN(lat) || isNaN(lng)) {
-        console.log(`Invalid coordinates for facility ${facility.id}: ${lat}, ${lng}`);
-        return;
-      }
-      
-      // Create marker directly
-      const marker = createFacilityMarker(
-        facility,
-        [lng, lat],
-        false,
-        (id) => {
-          console.log(`Marker clicked: ${id}`);
-          // Dispatch a custom event for other systems to listen for
-          const event = new CustomEvent('marker-click', { detail: { facilityId: id } });
-          document.dispatchEvent(event);
-        },
-        map
-      );
-      
-      // Force add to map
-      marker.addTo(map);
-      
-      // Store the marker in our debug array
-      window._createdMarkers?.push({
-        id: facility.id,
-        marker: marker,
-        lat: lat,
-        lng: lng
+    // Add to processed set
+    processedIds.add(facility.id);
+    markersCreated++;
+    
+    // Add click handler to marker element
+    markerElement.addEventListener('click', () => {
+      // Dispatch event for facility selection
+      const event = new CustomEvent('marker.clicked', { 
+        detail: { facilityId: facility.id }
       });
-      
-      // Force marker visibility through style attributes
-      const el = marker.getElement();
-      if (el) {
-        el.style.visibility = 'visible';
-        el.style.display = 'block';
-        el.style.opacity = '1';
-        el.style.zIndex = '9999';
-        el.style.pointerEvents = 'auto';
-        el.setAttribute('data-emergency-created', 'true');
-        el.setAttribute('title', facility.name); // Add title for debugging
-      }
-      
-      // Track in global store for future reference
-      window._persistentMarkers[facility.id] = marker;
-      
-      createdCount++;
-    } catch (error) {
-      console.error('Error in marker creation:', error);
-    }
+      document.dispatchEvent(event);
+    });
   });
   
-  console.log(`Marker creation complete: Created ${createdCount} markers for ${facilities.length} facilities`);
-  
-  // Force marker visibility after creation
-  setTimeout(() => forceMapMarkersVisible(), 100);
-  setTimeout(() => forceMapMarkersVisible(), 500);
-  
-  // Return the count of actually created markers
-  return createdCount;
+  console.log(`Created ${markersCreated} new markers, skipped ${markersSkipped} existing markers`);
+  return markersCreated;
 }
