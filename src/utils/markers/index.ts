@@ -1,3 +1,4 @@
+
 // Export marker forcing utilities
 export { forceMapMarkersVisible, applyForcedStyles, testMarkersVisibility } from './forcing/markerForcing';
 // Export ensureMarkersOnMap directly from the ensureMarkers file
@@ -8,8 +9,9 @@ export { ensureMapVisible, removeViewDetailsButtons } from './forcing/markerForc
 // Export marker testing utilities
 export {
   createMarkerDebugger,
-  createMarkerDebugOverlay
-} from './testing/visibilityTester';
+  createMarkerDebugOverlay,
+  testMarkersVisibility as testMarkerVisibility
+} from './testing';
 
 // Export emergency solution
 export { 

@@ -1,7 +1,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { createMarkerDebugger, testMarkersVisibility, MarkerVisibilityTestResult } from '@/utils/markers';
+import { createMarkerDebugger, testMarkersVisibility, MarkerVisibilityTestResult } from '@/utils/markers/testing';
 
 /**
  * A component that provides debugging tools for marker visibility issues
@@ -13,7 +13,7 @@ const MarkerDebugOverlay: React.FC = () => {
   // Run visibility test when component mounts
   useEffect(() => {
     if (process.env.NODE_ENV === 'development') {
-      // Run the test and set the results directly
+      // Run the test and set the results
       const results = testMarkersVisibility(false);
       setTestResults(results);
     }
@@ -24,7 +24,7 @@ const MarkerDebugOverlay: React.FC = () => {
   
   // Run another test and force visibility
   const runTest = () => {
-    // Run the test and set the results directly
+    // Run the test and set the results
     const results = testMarkersVisibility(true);
     setTestResults(results);
   };

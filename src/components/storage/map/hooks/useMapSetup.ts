@@ -56,7 +56,7 @@ export const useMapSetup = (map: mapboxgl.Map | null,
         // Try to create markers immediately after map creation
         setTimeout(() => {
           console.log(`Attempting to create ${validFacilities.length} markers on initial map setup`);
-          // Pass map and facilities to ensureMarkersExist
+          // Pass both map and facilities to ensureMarkersExist
           if (map) {
             ensureMarkersExist(map, validFacilities);
             removeViewDetailsButtons();
@@ -110,11 +110,13 @@ export const useMapSetup = (map: mapboxgl.Map | null,
           }
         });
         
-        const markerCount = ensureMarkersExist(map, validFacilities);
-        console.log(`Created ${markerCount} markers after filtering to ${validFacilities.length} facilities`);
-        
-        // Remove any view details buttons
-        removeViewDetailsButtons();
+        if (map) {
+          const markerCount = ensureMarkersExist(map, validFacilities);
+          console.log(`Created ${markerCount} markers after filtering to ${validFacilities.length} facilities`);
+          
+          // Remove any view details buttons
+          removeViewDetailsButtons();
+        }
       }, 300);
     }
   }, [validFacilities, mapLoaded, map, selectedState]);
