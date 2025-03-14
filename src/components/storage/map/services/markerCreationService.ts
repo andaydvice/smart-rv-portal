@@ -1,118 +1,147 @@
 
 import mapboxgl from 'mapbox-gl';
 import { StorageFacility } from '../../types';
-import { createFacilityMarker } from '../utils/markerCreation';
-import { calculateMarkerOffset, buildCoordinatesMap, hasValidCoordinates } from '../utils/markerUtils';
-
-let creationAttempts = 0;
-const MAX_ATTEMPTS = 3;
 
 /**
- * Service responsible for creating markers with performance optimizations
+ * Creates a facility marker with proper visibility and positioning
  */
-export const createMarker = (
+export const createFacilityMarker = (
   facility: StorageFacility,
   map: mapboxgl.Map,
   isHighlighted: boolean,
-  onMarkerClick: (facilityId: string) => void,
-  facilities: StorageFacility[],
-  index: number
+  onMarkerClick: (facilityId: string) => void
 ): mapboxgl.Marker | null => {
-  try {
-    // Check if map is loaded and valid
-    if (!map || !map.loaded()) {
-      console.warn('Map not fully loaded, cannot create marker');
-      return null;
-    }
-    
-    // Check if facility has valid coordinates
-    if (!hasValidCoordinates(facility)) {
-      console.warn(`Invalid coordinates for facility ${facility.id}`);
-      return null;
-    }
-    
-    // Calculate marker coordinates with offset for overlapping markers
-    const coordinatesMap = buildCoordinatesMap(facilities);
-    const coordinates = calculateMarkerOffset(facility, coordinatesMap, facilities, index);
-    
-    // Create the marker with explicit map reference for reliable addition
-    const marker = createFacilityMarker(
-      facility,
-      coordinates,
-      isHighlighted,
-      onMarkerClick,
-      map
-    );
-    
-    // Reset attempts counter on success
-    creationAttempts = 0;
-    
-    return marker;
-  } catch (error) {
-    console.error(`Error creating marker for facility ${facility.id}:`, error);
-    
-    // Implement retry logic for transient errors
-    if (creationAttempts < MAX_ATTEMPTS) {
-      creationAttempts++;
-      console.log(`Retrying marker creation (attempt ${creationAttempts}/${MAX_ATTEMPTS})`);
-      return createMarker(facility, map, isHighlighted, onMarkerClick, facilities, index);
-    }
-    
-    // Reset counter after max attempts
-    creationAttempts = 0;
+  if (!map || !map.loaded() || !facility.latitude || !facility.longitude) {
     return null;
   }
+  
+  // Validate coordinates
+  const lat = Number(facility.latitude);
+  const lng = Number(facility.longitude);
+  
+  if (isNaN(lat) || isNaN(lng) || Math.abs(lat) > 90 || Math.abs(lng) > 180) {
+    console.warn(`Invalid coordinates for facility ${facility.id}: ${lat}, ${lng}`);
+    return null;
+  }
+  
+  // Create marker element
+  const el = document.createElement('div');
+  el.className = 'custom-marker';
+  el.id = `marker-${facility.id}`;
+  
+  // Set data attributes for debugging and state filtering
+  el.setAttribute('data-facility-id', facility.id);
+  el.setAttribute('data-state', facility.state);
+  el.setAttribute('data-highlighted', isHighlighted ? 'true' : 'false');
+  
+  // Set proper styling
+  el.style.cssText = `
+    background-color: ${isHighlighted ? '#10B981' : '#F97316'};
+    width: ${isHighlighted ? '28px' : '24px'};
+    height: ${isHighlighted ? '28px' : '24px'};
+    border-radius: 50%;
+    border: 2px solid white;
+    cursor: pointer;
+    box-shadow: ${isHighlighted ? '0 0 20px rgba(16, 185, 129, 0.8)' : '0 0 10px rgba(0,0,0,0.3)'};
+    z-index: ${isHighlighted ? '999' : '99'};
+    transform: translate(-50%, -50%) ${isHighlighted ? 'scale(1.2)' : ''};
+    visibility: visible !important;
+    display: block !important;
+    opacity: 1 !important;
+  `;
+  
+  // Create properly positioned popup
+  const popup = new mapboxgl.Popup({
+    closeButton: true,
+    closeOnClick: false,
+    maxWidth: '300px',
+    className: 'facility-popup',
+    offset: 15,
+    focusAfterOpen: false
+  });
+  
+  // Set popup content without "View Details" button
+  popup.setHTML(`
+    <div class="facility-popup-content" data-facility-id="${facility.id}">
+      <h3 class="text-lg font-semibold mb-1">${facility.name}</h3>
+      <p class="text-sm mb-1">${facility.city}, ${facility.state}</p>
+      <p class="text-sm mb-2">${facility.address}</p>
+      ${facility.price_range ? 
+        `<p class="text-sm text-gray-300">Price: $${facility.price_range.min} - $${facility.price_range.max}</p>` : ''}
+    </div>
+  `);
+  
+  // Create marker
+  const marker = new mapboxgl.Marker({
+    element: el,
+    anchor: 'center'
+  })
+  .setLngLat([lng, lat])
+  .setPopup(popup);
+  
+  // Add to map
+  marker.addTo(map);
+  
+  // Add click handler
+  el.addEventListener('click', (e) => {
+    e.stopPropagation();
+    // Call the onClick callback
+    onMarkerClick(facility.id);
+  });
+  
+  return marker;
 };
 
 /**
- * Apply styles to enhance marker visibility with better performance
+ * Efficiently creates markers for a set of facilities
  */
-export const enhanceMarkerVisibility = (marker: mapboxgl.Marker) => {
-  const el = marker.getElement();
-  if (el) {
-    // Use CSS classes instead of inline styles when possible
-    el.classList.add('custom-marker');
+export const createMarkersForState = (
+  facilities: StorageFacility[],
+  map: mapboxgl.Map,
+  highlightedFacility: string | null,
+  onMarkerClick: (facilityId: string) => void,
+  state: string | null = null
+): mapboxgl.Marker[] => {
+  // Clear existing markers for this state first
+  document.querySelectorAll(`.mapboxgl-marker[data-state="${state}"], .custom-marker[data-state="${state}"]`)
+    .forEach(marker => {
+      if (marker.parentNode) {
+        marker.parentNode.removeChild(marker);
+      }
+    });
+  
+  // Filter facilities by state if specified
+  const stateFacilities = state 
+    ? facilities.filter(f => f.state === state)
+    : facilities;
+  
+  console.log(`Creating ${stateFacilities.length} markers for ${state || 'all states'}`);
+  
+  // Create markers
+  const markers: mapboxgl.Marker[] = [];
+  stateFacilities.forEach(facility => {
+    const marker = createFacilityMarker(
+      facility,
+      map,
+      facility.id === highlightedFacility,
+      onMarkerClick
+    );
     
-    // Set minimal but critical inline styles
-    el.style.visibility = 'visible';
-    el.style.display = 'block';
-    el.style.opacity = '1';
-    
-    // Use a more reasonable z-index that doesn't conflict with controls
-    el.style.zIndex = '99';
-    
-    // Set persistent data attribute
-    el.setAttribute('data-persistent', 'true');
-  }
+    if (marker) {
+      markers.push(marker);
+    }
+  });
+  
+  return markers;
 };
 
 /**
- * Store the marker in a global registry with memory management
+ * Removes all markers from the map
  */
-export const persistMarker = (facility: StorageFacility, marker: mapboxgl.Marker) => {
-  if (typeof window !== 'undefined') {
-    if (!window._persistentMarkers) {
-      window._persistentMarkers = {};
+export const clearAllMarkers = () => {
+  document.querySelectorAll('.mapboxgl-marker, .custom-marker').forEach(marker => {
+    if (marker.parentNode) {
+      marker.parentNode.removeChild(marker);
     }
-    
-    // Don't overwrite existing markers to reduce re-rendering
-    if (!window._persistentMarkers[facility.id]) {
-      window._persistentMarkers[facility.id] = marker;
-    }
-    
-    // Limit total number of persistent markers to prevent memory issues
-    const markerKeys = Object.keys(window._persistentMarkers);
-    const MAX_PERSISTENT_MARKERS = 100; // Reduced from 200 to 100 for better performance
-    
-    if (markerKeys.length > MAX_PERSISTENT_MARKERS) {
-      // Remove oldest markers when we exceed the limit
-      const markersToRemove = markerKeys.slice(0, markerKeys.length - MAX_PERSISTENT_MARKERS);
-      markersToRemove.forEach(id => {
-        if (window._persistentMarkers && window._persistentMarkers[id]) {
-          window._persistentMarkers[id].remove();
-          delete window._persistentMarkers[id];
-        }
-      });
-    }
-  }
+  });
 };

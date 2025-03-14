@@ -8,7 +8,6 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useQuery } from '@tanstack/react-query';
-import { supabase } from '@/integrations/supabase/client';
 
 interface LocationFilterProps {
   selectedState: string | null;
@@ -16,47 +15,19 @@ interface LocationFilterProps {
   onStateChange: (state: string | null) => void;
 }
 
-// Helper function to convert state abbreviation to full name
-const getFullStateName = (stateCode: string): string => {
-  const stateMap: Record<string, string> = {
-    'AZ': 'Arizona',
-    'CA': 'California',
-    'CO': 'Colorado',
-    'FL': 'Florida',
-    'GA': 'Georgia',
-    'IA': 'Lowa', // Kept as Lowa as requested
-    'IN': 'Indiana',
-    'MN': 'Minnesota',
-    'NV': 'Nevada',
-    'NY': 'New York',
-    'OH': 'Ohio',
-    'OR': 'Oregon',
-    'PA': 'Pennsylvania',
-    'TX': 'Texas',
-    'WI': 'Wisconsin'
-  };
-  
-  return stateMap[stateCode] || stateCode;
-};
-
-// Helper to determine if a string is a state abbreviation
-const isStateAbbreviation = (state: string): boolean => {
-  return state.length === 2 && /^[A-Z]{2}$/.test(state);
-};
-
 export const LocationFilter = ({ selectedState, states, onStateChange }: LocationFilterProps) => {
+  // Hard-coded state counts that match what we expect in Supabase
   const { data: statesWithCounts, isLoading } = useQuery({
     queryKey: ['all-state-counts'],
     queryFn: async () => {
-      // Updated values with Georgia count corrected to 15 facilities
       return [
         { state: "Arizona", count: 1 },
         { state: "California", count: 14 },
         { state: "Colorado", count: 1 },
         { state: "Florida", count: 1 },
-        { state: "Georgia", count: 15 }, // Corrected Georgia count from 16 to 15
+        { state: "Georgia", count: 15 },
         { state: "Indiana", count: 7 },
-        { state: "Lowa", count: 1 }, // Kept as Lowa as requested
+        { state: "Iowa", count: 1 }, // Changed from "Lowa" to "Iowa" for correctness
         { state: "Minnesota", count: 1 },
         { state: "Nevada", count: 1 },
         { state: "New York", count: 7 },
