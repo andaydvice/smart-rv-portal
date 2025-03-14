@@ -2,6 +2,12 @@
 /* Fixes for Mapbox popups */
 .mapboxgl-popup {
   z-index: 1000 !important;
+  position: absolute !important;
+  top: auto !important;
+  left: auto !important;
+  transform: none !important; 
+  pointer-events: auto !important;
+  max-width: 300px !important;
 }
 
 .mapboxgl-popup-content {
@@ -9,11 +15,17 @@
   border-radius: 8px !important;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2) !important;
   max-width: 300px !important;
+  background-color: #131a2a !important;
+  color: white !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  display: block !important;
+  pointer-events: auto !important;
 }
 
 .mapboxgl-popup-close-button {
   font-size: 16px !important;
-  color: #666 !important;
+  color: white !important;
   right: 5px !important;
   top: 5px !important;
   padding: 0 !important;
@@ -22,11 +34,16 @@
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  z-index: 10001 !important;
+  pointer-events: auto !important;
+  cursor: pointer !important;
 }
 
 .mapboxgl-popup-close-button:hover {
-  background-color: rgba(0, 0, 0, 0.05) !important;
-  color: #333 !important;
+  background-color: rgba(255, 255, 255, 0.2) !important;
+  color: #fff !important;
 }
 
 /* Fix for marker visibility and popup position */
@@ -34,21 +51,21 @@
   visibility: visible !important;
   display: block !important;
   opacity: 1 !important;
+  pointer-events: auto !important;
 }
 
-/* Ensure popups have proper position */
+/* Set popup positioning correctly */
 .mapboxgl-popup {
-  transform: none !important;
-  position: absolute !important;
+  transform: translate(-50%, -100%) !important;
   pointer-events: auto !important;
 }
 
 /* Fix for popup appearing in the header area */
 .mapboxgl-popup.mapboxgl-popup-anchor-bottom {
-  margin-top: -10px !important;
+  margin-top: -30px !important;
 }
 
-/* Hide any view details buttons */
+/* Completely hide any view details buttons */
 .view-facility-btn, 
 button.view-details, 
 a.view-details, 
@@ -59,4 +76,42 @@ a.view-details,
   visibility: hidden !important;
   opacity: 0 !important;
   pointer-events: none !important;
+  position: absolute !important;
+  z-index: -999 !important;
+  width: 0 !important;
+  height: 0 !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+/* Fix positioning of popup tip */
+.mapboxgl-popup-tip {
+  border-top-color: #131a2a !important;
+  border-bottom-color: #131a2a !important;
+  z-index: 1001 !important;
+}
+
+/* Additional fixup for marker specificity */
+body .mapboxgl-map .mapboxgl-marker,
+body .mapboxgl-map .custom-marker {
+  visibility: visible !important;
+  display: block !important;
+  opacity: 1 !important;
+  z-index: 999 !important;
+}
+
+/* Fix for hidden popups */
+body .mapboxgl-map .mapboxgl-popup {
+  display: block !important;
+  visibility: visible !important;
+  z-index: 10000 !important;
+}
+
+/* Fix for marker state accuracy */
+.mapboxgl-marker[data-state],
+.custom-marker[data-state] {
+  visibility: visible !important;
+  display: block !important;
 }

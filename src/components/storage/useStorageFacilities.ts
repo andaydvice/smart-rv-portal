@@ -1,4 +1,3 @@
-
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
 import { StorageFacility, FilterState, DatabaseStorageFacility } from './types';
@@ -54,48 +53,43 @@ export const useStorageFacilities = (filters: FilterState) => {
         priceRange: filters.priceRange
       });
       
-      // IMPROVED: Handle state filters with better OR conditions
-      if (filters.selectedState === 'New York') {
-        // Use multiple conditions to catch all variations of NY
-        console.log('Using enhanced New York query with multiple state formats');
-        query = query.or('state.eq.NY,state.eq.New York,state.ilike.%new%york%,state.eq.new york');
-      } 
-      // Add Georgia state handling
-      else if (filters.selectedState === 'Georgia') {
-        query = query.or('state.eq.GA,state.eq.Georgia,state.ilike.%georgia%');
-      }
-      // Added Ohio and Indiana state handling
-      else if (filters.selectedState === 'Ohio') {
-        query = query.or('state.eq.OH,state.eq.Ohio,state.ilike.%ohio%');
-      } 
-      else if (filters.selectedState === 'Indiana') {
-        query = query.or('state.eq.IN,state.eq.Indiana,state.ilike.%indiana%');
-      }
-      // Handle different state formats for existing states
-      else if (filters.selectedState === 'California') {
-        query = query.or('state.eq.CA,state.eq.California,state.ilike.%california%');
-      } else if (filters.selectedState === 'Arizona') {
-        query = query.or('state.eq.AZ,state.eq.Arizona,state.ilike.%arizona%');
-      } else if (filters.selectedState === 'Texas') {
-        query = query.or('state.eq.TX,state.eq.Texas,state.ilike.%texas%');
-      } else if (filters.selectedState === 'Florida') {
-        query = query.or('state.eq.FL,state.eq.Florida,state.ilike.%florida%');
-      } else if (filters.selectedState === 'Nevada') {
-        query = query.or('state.eq.NV,state.eq.Nevada,state.ilike.%nevada%');
-      } else if (filters.selectedState === 'Colorado') {
-        query = query.or('state.eq.CO,state.eq.Colorado,state.ilike.%colorado%');
-      } else if (filters.selectedState === 'Lowa') {
-        query = query.or('state.eq.IA,state.eq.Lowa,state.ilike.%lowa%');
-      } else if (filters.selectedState === 'Minnesota') {
-        query = query.or('state.eq.MN,state.eq.Minnesota,state.ilike.%minnesota%');
-      } else if (filters.selectedState === 'Wisconsin') {
-        query = query.or('state.eq.WI,state.eq.Wisconsin,state.ilike.%wisconsin%');
-      } else if (filters.selectedState === 'Oregon') {
-        query = query.or('state.eq.OR,state.eq.Oregon,state.ilike.%oregon%');
-      } else if (filters.selectedState === 'Pennsylvania') {
-        query = query.or('state.eq.PA,state.eq.Pennsylvania,state.ilike.%pennsylvania%');
-      } else if (filters.selectedState) {
-        query = query.eq('state', filters.selectedState);
+      // Ensure we're doing proper state filtering with a single condition
+      if (filters.selectedState) {
+        // Use a simplified approach with a single filter for better accuracy
+        if (filters.selectedState === 'New York') {
+          query = query.or('state.eq.NY,state.eq.New York');
+        } else if (filters.selectedState === 'California') {
+          query = query.or('state.eq.CA,state.eq.California');
+        } else if (filters.selectedState === 'Texas') {
+          query = query.or('state.eq.TX,state.eq.Texas');
+        } else if (filters.selectedState === 'Florida') {
+          query = query.or('state.eq.FL,state.eq.Florida');
+        } else if (filters.selectedState === 'Arizona') {
+          query = query.or('state.eq.AZ,state.eq.Arizona');
+        } else if (filters.selectedState === 'Nevada') {
+          query = query.or('state.eq.NV,state.eq.Nevada');
+        } else if (filters.selectedState === 'Georgia') {
+          query = query.or('state.eq.GA,state.eq.Georgia');
+        } else if (filters.selectedState === 'Colorado') {
+          query = query.or('state.eq.CO,state.eq.Colorado');
+        } else if (filters.selectedState === 'Iowa') {  // Fixed from Lowa to Iowa
+          query = query.or('state.eq.IA,state.eq.Iowa');
+        } else if (filters.selectedState === 'Minnesota') {
+          query = query.or('state.eq.MN,state.eq.Minnesota');
+        } else if (filters.selectedState === 'Wisconsin') {
+          query = query.or('state.eq.WI,state.eq.Wisconsin');
+        } else if (filters.selectedState === 'Oregon') {
+          query = query.or('state.eq.OR,state.eq.Oregon');
+        } else if (filters.selectedState === 'Pennsylvania') {
+          query = query.or('state.eq.PA,state.eq.Pennsylvania');
+        } else if (filters.selectedState === 'Ohio') {
+          query = query.or('state.eq.OH,state.eq.Ohio');
+        } else if (filters.selectedState === 'Indiana') {
+          query = query.or('state.eq.IN,state.eq.Indiana');
+        } else {
+          // For other states, use direct equality
+          query = query.eq('state', filters.selectedState);
+        }
       }
 
       const { data, error } = await query;
@@ -121,8 +115,8 @@ export const useStorageFacilities = (filters: FilterState) => {
                facility.state === 'TX' ? 'Texas' :
                facility.state === 'FL' ? 'Florida' :
                facility.state === 'NV' ? 'Nevada' :
-               facility.state === 'GA' ? 'Georgia' : // Added Georgia normalization
-               facility.state === 'IA' ? 'Lowa' : // Changed from Iowa to Lowa as requested
+               facility.state === 'GA' ? 'Georgia' :
+               facility.state === 'IA' ? 'Iowa' : // Fixed from Lowa to Iowa
                facility.state === 'MN' ? 'Minnesota' :
                facility.state === 'WI' ? 'Wisconsin' :
                facility.state === 'OR' ? 'Oregon' :

@@ -43,7 +43,9 @@ export function createFacilityMarker(
     maxWidth: '300px',
     className: 'facility-popup',
     offset: [0, -15],
-    anchor: 'bottom' // Position popup above the marker
+    anchor: 'bottom', // Position popup above the marker
+    // Add extra options to ensure proper positioning
+    focusAfterOpen: false
   });
   
   // Set popup data attribute for CSS targeting
@@ -177,6 +179,16 @@ export function createFacilityMarker(
           }, 50);
         });
       }
+      
+      // Hide any existing view details buttons
+      popupEl.querySelectorAll('.view-facility-btn, .view-details, button.view-details, a.view-details').forEach(btn => {
+        if (btn instanceof HTMLElement) {
+          btn.style.display = 'none';
+          btn.style.visibility = 'hidden';
+          btn.style.opacity = '0';
+          btn.style.pointerEvents = 'none';
+        }
+      });
     }
   });
 

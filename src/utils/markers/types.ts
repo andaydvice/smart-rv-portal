@@ -1,4 +1,7 @@
 
+// Re-export StorageFacility type from the storage component types
+import { StorageFacility as FacilityType } from '@/components/storage/types';
+
 export interface MarkerVisibilityTestResult {
   totalMarkers: number;
   visibleMarkers: number;
@@ -37,3 +40,6 @@ export interface MarkerCount {
   count: number;
   actualCount: number;
 }
+
+// Export the imported type
+export type StorageFacility = FacilityType;

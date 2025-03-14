@@ -1,90 +1,51 @@
 
-import mapboxgl from 'mapbox-gl';
+import { StorageFacility } from '../../types';
+
+interface MapBounds {
+  north: number;
+  south: number;
+  east: number;
+  west: number;
+}
 
 /**
- * Fits map view to bounds of all facility coordinates
- * @param map - The Mapbox GL map instance
- * @param facilities - Array of facilities with longitude and latitude
- * @param padding - Padding around the bounds in pixels (default: 50)
- * @param maxZoom - Maximum zoom level (default: 10)
+ * Calculates map bounds based on facilities and optional selected state
  */
-export const fitMapToBounds = (
-  map: mapboxgl.Map, 
-  facilities: Array<{ longitude: number | string; latitude: number | string }>,
-  padding: number = 50,
-  maxZoom: number = 10
-): void => {
-  try {
-    if (!facilities || facilities.length === 0) {
-      console.warn('No facilities provided to fit bounds');
-      return;
-    }
-    
-    // Calculate bounds of all facilities
-    const bounds = new mapboxgl.LngLatBounds();
-    let validCoordinatesCount = 0;
-    
-    facilities.forEach(facility => {
-      try {
-        const lng = typeof facility.longitude === 'string' ? 
-          parseFloat(facility.longitude) : Number(facility.longitude);
-        const lat = typeof facility.latitude === 'string' ? 
-          parseFloat(facility.latitude) : Number(facility.latitude);
-          
-        if (!isNaN(lng) && !isNaN(lat) && Math.abs(lat) <= 90 && Math.abs(lng) <= 180) {
-          bounds.extend([lng, lat]);
-          validCoordinatesCount++;
-          console.log(`Added coordinate to bounds: [${lng}, ${lat}] for facility`);
-        } else {
-          console.warn(`Invalid coordinate skipped: [${lng}, ${lat}]`);
-        }
-      } catch (e) {
-        console.warn('Invalid facility coordinates:', facility);
-      }
-    });
-    
-    console.log(`Fitting map to bounds with ${validCoordinatesCount} valid coordinates out of ${facilities.length}`);
-    
-    // Add additional debug info
-    if (validCoordinatesCount === 0) {
-      console.error('CRITICAL: No valid coordinates to create bounds - Map will default to US view');
-    }
-    
-    // Fit map to these bounds if we have valid coordinates
-    if (!bounds.isEmpty()) {
-      // Log the bounds for debugging
-      const ne = bounds.getNorthEast();
-      const sw = bounds.getSouthWest();
-      console.log(`Bounds: NE [${ne.lng}, ${ne.lat}], SW [${sw.lng}, ${sw.lat}]`);
-      
-      map.fitBounds(bounds, {
-        padding,
-        maxZoom
-      });
-      
-      // Verify the map view changed
-      const center = map.getCenter();
-      const zoom = map.getZoom();
-      console.log(`Map center after fitBounds: [${center.lng}, ${center.lat}], zoom: ${zoom}`);
-    } else {
-      console.warn('No valid coordinates to fit bounds, defaulting to US view');
-      // Default to US view if no valid coordinates
-      map.flyTo({
-        center: [-98.5795, 39.8283],
-        zoom: 3
-      });
-    }
-  } catch (error) {
-    console.error('Error setting map bounds:', error);
-    
-    // Recovery: set to US view
-    try {
-      map.flyTo({
-        center: [-98.5795, 39.8283],
-        zoom: 3
-      });
-    } catch (recoveryError) {
-      console.error('Recovery failed:', recoveryError);
-    }
+export const calculateMapBounds = (
+  facilities: StorageFacility[],
+  selectedState: string | null
+): MapBounds | null => {
+  // Filter facilities by the selected state if provided
+  const facilitiesToUse = selectedState 
+    ? facilities.filter(f => f.state === selectedState)
+    : facilities;
+  
+  if (facilitiesToUse.length === 0) {
+    return null;
   }
+  
+  // Initialize bounds with the first facility
+  let north = facilitiesToUse[0].latitude;
+  let south = facilitiesToUse[0].latitude;
+  let east = facilitiesToUse[0].longitude;
+  let west = facilitiesToUse[0].longitude;
+  
+  // Expand bounds to include all facilities
+  for (const facility of facilitiesToUse) {
+    if (facility.latitude > north) north = facility.latitude;
+    if (facility.latitude < south) south = facility.latitude;
+    if (facility.longitude > east) east = facility.longitude;
+    if (facility.longitude < west) west = facility.longitude;
+  }
+  
+  // Add padding to the bounds
+  const latPadding = (north - south) * 0.1;
+  const lngPadding = (east - west) * 0.1;
+  
+  return {
+    north: north + latPadding,
+    south: south - latPadding,
+    east: east + lngPadding,
+    west: west - lngPadding
+  };
 };

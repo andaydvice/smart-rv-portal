@@ -15,7 +15,7 @@ export function testMarkersVisibility(fixIssues = false): MarkerVisibilityTestRe
     const issue: VisibilityIssueDetail = {
       elementId: 'none',
       elementType: 'marker',
-      issueType: 'other',
+      issueType: 'visibility', // Changed from "other" to "visibility"
       description: 'No markers found on the page',
       computedStyles: {
         visibility: 'n/a',
@@ -44,7 +44,8 @@ export function testMarkersVisibility(fixIssues = false): MarkerVisibilityTestRe
     if (marker instanceof HTMLElement) {
       const computed = window.getComputedStyle(marker);
       const id = marker.id || `marker-${index}`;
-      const markerType = marker.classList.contains('custom-marker') ? 'custom-marker' : 'mapboxgl-marker';
+      // Using valid elementType value
+      const markerType = 'marker';
       let hasIssue = false;
       
       // Check critical properties
@@ -124,7 +125,7 @@ export function testMarkersVisibility(fixIssues = false): MarkerVisibilityTestRe
         const issue: VisibilityIssueDetail = {
           elementId: id,
           elementType: markerType,
-          issueType: 'events',
+          issueType: 'visibility', // Changed from "events" to "visibility"
           description: `Marker has pointerEvents: none, which blocks clicks`,
           computedStyles: {
             visibility: computed.visibility,
