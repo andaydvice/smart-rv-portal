@@ -1,4 +1,5 @@
 
+
 import { useEffect } from 'react';
 import { StorageFacility } from '../../types';
 import { fitMapToBounds } from '../utils/mapBounds';
@@ -57,6 +58,7 @@ export const useMapSetup = (map: mapboxgl.Map | null,
         // Try to create markers immediately after map creation
         setTimeout(() => {
           console.log(`Attempting to create ${validFacilities.length} markers on initial map setup`);
+          // Pass map and facilities to ensureMarkersExist
           ensureMarkersExist(map, validFacilities);
           removeViewDetailsButtons();
         }, 1000);

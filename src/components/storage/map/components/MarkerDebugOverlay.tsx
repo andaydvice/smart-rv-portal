@@ -13,8 +13,11 @@ const MarkerDebugOverlay: React.FC = () => {
   // Run visibility test when component mounts
   useEffect(() => {
     if (process.env.NODE_ENV === 'development') {
+      // Capture the return value from testMarkersVisibility
       const results = testMarkersVisibility(false);
-      setTestResults(results);
+      if (results) { // Only set state if we have valid results
+        setTestResults(results);
+      }
     }
   }, []);
   
@@ -23,8 +26,11 @@ const MarkerDebugOverlay: React.FC = () => {
   
   // Run another test and force visibility
   const runTest = () => {
+    // Capture the return value from testMarkersVisibility
     const results = testMarkersVisibility(true);
-    setTestResults(results);
+    if (results) { // Only set state if we have valid results
+      setTestResults(results);
+    }
   };
   
   // Show full debugger
