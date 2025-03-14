@@ -1,127 +1,77 @@
 
 import { useEffect } from 'react';
+import mapboxgl from 'mapbox-gl';
 import { StorageFacility } from '../../types';
-import { fitMapToBounds } from '../utils/mapBounds';
-import { ensureMarkersExist, removeViewDetailsButtons } from '@/utils/markers';
+import { calculateMapBounds } from '../utils/mapBounds';
+import { ensureMarkersExist } from '@/utils/markers';
 
 /**
- * Hook to handle map initialization and setup
+ * Sets up the map with facilities data
  */
-export const useMapSetup = (map: mapboxgl.Map | null, 
-                            mapLoaded: boolean, 
-                            validFacilities: StorageFacility[], 
-                            selectedState: string | null) => {
-  
-  // Make map instance globally available
+export const useMapSetup = (
+  map: mapboxgl.Map | null,
+  mapLoaded: boolean,
+  facilities: StorageFacility[],
+  selectedState: string | null
+) => {
+  // When facilities change, update the map
   useEffect(() => {
-    if (map) {
-      (window as any).mapInstance = map;
-      document.dispatchEvent(new CustomEvent('mapboxgl.map.created', { detail: { map } }));
+    if (!map || !mapLoaded || facilities.length === 0) return;
+
+    try {
+      // Store facilities in window for emergency access
+      if (typeof window !== 'undefined') {
+        window.mapFacilities = facilities;
+        window.mapInstance = map;
+      }
+
+      // Get bounds for all visible facilities
+      const bounds = calculateMapBounds(facilities, selectedState);
       
-      // Explicitly set map container to visible
-      const container = map.getContainer();
-      if (container) {
-        container.style.visibility = 'visible';
-        container.style.opacity = '1';
-        container.style.display = 'block';
+      // If we have valid bounds, fit the map to those bounds
+      if (bounds && 
+          bounds.north !== bounds.south && 
+          bounds.east !== bounds.west) {
+        map.fitBounds(
+          [
+            [bounds.west, bounds.south],
+            [bounds.east, bounds.north]
+          ],
+          {
+            padding: { top: 50, bottom: 50, left: 50, right: 50 },
+            duration: 1000
+          }
+        );
+      } else {
+        // Fallback to USA-wide view
+        map.flyTo({
+          center: [-95.7129, 37.0902],
+          zoom: 3.5,
+          essential: true
+        });
       }
       
-      // Add event listener for popup close events
-      map.on('popupclose', () => {
-        // Ensure map canvas is visible after popup closes
-        const canvas = map.getCanvas();
-        if (canvas) {
-          canvas.style.visibility = 'visible';
-          canvas.style.display = 'block';
-          canvas.style.opacity = '1';
-        }
-        
-        // Make sure all markers are visible
-        document.querySelectorAll('.mapboxgl-marker, .custom-marker').forEach(marker => {
-          if (marker instanceof HTMLElement) {
-            marker.style.visibility = 'visible';
-            marker.style.display = 'block';
-            marker.style.opacity = '1';
-          }
-        });
-        
-        // Remove any view details buttons
-        removeViewDetailsButtons();
+      // Log information
+      console.log(`Map setup with ${facilities.length} facilities`);
+      console.log('Map bounds:', bounds);
+      
+      // Dispatch an event that map is ready with facilities
+      const event = new CustomEvent('map.ready', { 
+        detail: { map, facilities } 
       });
+      document.dispatchEvent(event);
       
-      // Store facilities in window for debugging
-      if (validFacilities && validFacilities.length > 0) {
-        (window as any).mapFacilities = validFacilities;
-        console.log(`Stored ${validFacilities.length} facilities in window.mapFacilities`);
-        
-        // Try to create markers immediately after map creation
-        setTimeout(() => {
-          console.log(`Attempting to create ${validFacilities.length} markers on initial map setup`);
-          // Pass both map and facilities to ensureMarkersExist
-          if (map) {
-            ensureMarkersExist(map, validFacilities);
-            removeViewDetailsButtons();
-          }
-        }, 1000);
+      // Add the facilities data as an attribute to the map
+      map.getContainer().setAttribute('data-facilities-count', facilities.length.toString());
+      
+      // For California, New York, and Georgia, ensure markers exist
+      if (selectedState === 'California' || selectedState === 'New York' || selectedState === 'Georgia') {
+        console.log(`Ensuring markers exist for ${selectedState}`);
+        // Fix: Pass both map and facilities to ensureMarkersExist
+        ensureMarkersExist(map, facilities);
       }
+    } catch (err) {
+      console.error('Error setting up map:', err);
     }
-    
-    return () => {
-      (window as any).mapInstance = null;
-      if (map) {
-        map.off('popupclose');
-      }
-    };
-  }, [map, validFacilities]);
-
-  // Update map bounds when facilities change
-  useEffect(() => {
-    if (map && mapLoaded && validFacilities.length > 0) {
-      console.log(`Fitting map to bounds with ${validFacilities.length} valid coordinates for state: ${selectedState || 'All States'}`);
-      
-      // Call resize() to ensure the map container is properly sized
-      map.resize();
-      
-      // Create explicit variables for padding and zoom to ensure type safety
-      const paddingValue: number = 50;
-      const maxZoomValue: number = 10;
-      
-      // Make sure types are explicitly provided to avoid TypeScript errors
-      fitMapToBounds(
-        map,
-        validFacilities as Array<{ longitude: number | string; latitude: number | string }>,
-        paddingValue,
-        maxZoomValue
-      );
-      
-      // Log facility coordinates for debugging
-      console.log('Facility coordinates to fit bounds:', validFacilities.map(f => ({
-        id: f.id,
-        name: f.name,
-        lat: f.latitude,
-        lng: f.longitude
-      })));
-      
-      // Ensure markers exist for the filtered facilities
-      setTimeout(() => {
-        // Force clear existing markers first to ensure accurate count
-        document.querySelectorAll('.mapboxgl-marker, .custom-marker').forEach(marker => {
-          if (marker.parentNode) {
-            marker.parentNode.removeChild(marker);
-          }
-        });
-        
-        if (map) {
-          // Pass both map and validFacilities to ensureMarkersExist
-          ensureMarkersExist(map, validFacilities);
-          console.log(`Created markers after filtering to ${validFacilities.length} facilities`);
-          
-          // Remove any view details buttons
-          removeViewDetailsButtons();
-        }
-      }, 300);
-    }
-  }, [validFacilities, mapLoaded, map, selectedState]);
-
-  return { map };
+  }, [map, mapLoaded, facilities, selectedState]);
 };

@@ -33,7 +33,7 @@ const MarkerDebugOverlay: React.FC = () => {
   // Show full debugger
   const showDebugger = () => {
     const cleanup = createMarkerDebugger();
-    // Return cleanup function to prevent TypeScript error
+    // Clean up function for when debugger is closed
     return cleanup;
   };
   
