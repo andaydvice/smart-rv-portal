@@ -55,24 +55,24 @@ export function createFacilityMarker(
   
   // Create HTML content - full popup content with all information
   popup.setHTML(`
-    <div class="facility-popup-content p-4 bg-[#131a2a] text-white" data-facility-id="${facility.id}">
-      <h3 class="text-lg font-semibold mb-1 text-[#60A5FA]">${facility.name}</h3>
-      <div class="space-y-1 text-sm">
-        <p>${facility.address}</p>
-        <p>${facility.city}, ${facility.state}</p>
+    <div class="facility-popup-content p-4 bg-[#131a2a] text-white overflow-visible break-words" data-facility-id="${facility.id}">
+      <h3 class="text-lg font-semibold mb-1 text-[#60A5FA] overflow-visible break-words">${facility.name}</h3>
+      <div class="space-y-1 text-sm overflow-visible">
+        <p class="overflow-visible break-words">${facility.address}</p>
+        <p class="overflow-visible break-words">${facility.city}, ${facility.state}</p>
         <p class="mt-2 font-semibold text-[#F97316]">Price: $${facility.price_range.min} - $${facility.price_range.max}</p>
-        ${facility.contact_phone ? `<p class="mt-1">Phone: ${facility.contact_phone}</p>` : ''}
+        ${facility.contact_phone ? `<p class="mt-1 overflow-visible break-words">Phone: ${facility.contact_phone}</p>` : ''}
       </div>
       
       ${Object.values(facility.features).some(v => v) ? `
         <div class="mt-2 border-t border-gray-700 pt-2">
           <p class="text-xs text-gray-400 mb-1">Features:</p>
           <div class="flex flex-wrap gap-1">
-            ${facility.features.indoor ? '<span class="text-xs bg-[#1a2235] text-[#60A5FA] px-2 py-0.5 rounded">Indoor</span>' : ''}
-            ${facility.features.climate_controlled ? '<span class="text-xs bg-[#1a2235] text-[#60A5FA] px-2 py-0.5 rounded">Climate Controlled</span>' : ''}
-            ${facility.features["24h_access"] ? '<span class="text-xs bg-[#1a2235] text-[#60A5FA] px-2 py-0.5 rounded">24/7 Access</span>' : ''}
-            ${facility.features.security_system ? '<span class="text-xs bg-[#1a2235] text-[#60A5FA] px-2 py-0.5 rounded">Security</span>' : ''}
-            ${facility.features.vehicle_washing ? '<span class="text-xs bg-[#1a2235] text-[#60A5FA] px-2 py-0.5 rounded">Vehicle Washing</span>' : ''}
+            ${facility.features.indoor ? '<span class="text-xs bg-[#1a2235] text-[#60A5FA] px-2 py-0.5 rounded overflow-visible">Indoor</span>' : ''}
+            ${facility.features.climate_controlled ? '<span class="text-xs bg-[#1a2235] text-[#60A5FA] px-2 py-0.5 rounded overflow-visible">Climate Controlled</span>' : ''}
+            ${facility.features["24h_access"] ? '<span class="text-xs bg-[#1a2235] text-[#60A5FA] px-2 py-0.5 rounded overflow-visible">24/7 Access</span>' : ''}
+            ${facility.features.security_system ? '<span class="text-xs bg-[#1a2235] text-[#60A5FA] px-2 py-0.5 rounded overflow-visible">Security</span>' : ''}
+            ${facility.features.vehicle_washing ? '<span class="text-xs bg-[#1a2235] text-[#60A5FA] px-2 py-0.5 rounded overflow-visible">Vehicle Washing</span>' : ''}
           </div>
         </div>
       ` : ''}
@@ -124,12 +124,16 @@ export function createFacilityMarker(
         if (popupEl instanceof HTMLElement) {
           popupEl.style.maxWidth = '300px';
           popupEl.style.width = 'auto';
+          popupEl.style.overflow = 'visible';
           
           const contentEl = popupEl.querySelector('.mapboxgl-popup-content');
           if (contentEl instanceof HTMLElement) {
             contentEl.style.minWidth = '220px';
             contentEl.style.width = 'auto';
             contentEl.style.maxWidth = '300px';
+            contentEl.style.overflow = 'visible';
+            contentEl.style.wordBreak = 'break-word';
+            contentEl.style.maxHeight = 'none';
           }
         }
       }, 50);

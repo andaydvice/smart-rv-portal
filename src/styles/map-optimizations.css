@@ -22,6 +22,8 @@
   display: block !important;
   pointer-events: auto !important;
   overflow: visible !important;
+  max-height: none !important;
+  word-break: break-word !important;
 }
 
 .mapboxgl-popup-close-button {
@@ -65,6 +67,7 @@
   overflow-wrap: break-word !important;
   width: 100% !important;
   overflow: visible !important;
+  max-height: none !important;
 }
 
 .facility-popup-content h3 {
@@ -162,4 +165,24 @@ body .mapboxgl-map .mapboxgl-popup {
     max-width: 220px !important;
     min-width: 180px !important;
   }
+}
+
+/* Ensure popup text is fully visible */
+.mapboxgl-popup * {
+  overflow: visible !important;
+  max-height: none !important;
+  word-break: break-word !important;
+}
+
+/* Force wrapper divs to properly handle content */
+.mapboxgl-popup-content > div {
+  overflow: visible !important;
+  max-height: none !important;
+}
+
+/* Fix any text truncation */
+p, span, h1, h2, h3, h4, h5, h6 {
+  overflow: visible !important;
+  text-overflow: clip !important;
+  white-space: normal !important;
 }

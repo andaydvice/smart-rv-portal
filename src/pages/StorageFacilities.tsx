@@ -75,13 +75,9 @@ export default function StorageFacilities() {
           <div className="absolute inset-0 bg-gradient-to-t from-[#080F1F] to-transparent">
             <Container className="h-full flex flex-col justify-center items-center" fullWidth>
               <div className="text-center max-w-3xl bg-black/40 backdrop-blur-sm p-6 rounded-lg">
-                <div className="flex items-center justify-center gap-2 mb-2">
-                  <div className="w-8 h-8 bg-[#F97316] rounded-full border-2 border-white shadow-lg animate-pulse fixed-orange-marker hero-marker"></div>
-                  <Warehouse className="h-7 w-7 text-[#F97316]" />
-                  <h1 className="text-4xl md:text-5xl font-bold text-white">
-                    Indoor RV Storage Facilities
-                  </h1>
-                </div>
+                <h1 className="text-4xl md:text-5xl font-bold text-white">
+                  Indoor RV Storage Facilities
+                </h1>
                 <p className="text-lg text-gray-300 max-w-2xl mx-auto">
                   Find the perfect indoor storage solution for your RV across the USA including Oregon, Pennsylvania, New York, Minnesota, Iowa, Wisconsin, California, Arizona, Colorado, Texas, Florida, Georgia and Nevada.
                 </p>
