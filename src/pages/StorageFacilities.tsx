@@ -6,14 +6,15 @@ import Layout from "@/components/layout/Layout";
 import { Warehouse } from "lucide-react";
 import { useEffect } from 'react';
 import "../styles/map-fixes.css";
+import "../styles/map-optimizations.css";
 
 export default function StorageFacilities() {
   useEffect(() => {
     console.log("StorageFacilities: Component mounted");
     
-    // Apply emergency marker fixes
+    // Apply emergency marker and popup fixes
     const applyMarkerFixes = () => {
-      console.log("Applying marker visibility fixes");
+      console.log("Applying marker and popup visibility fixes");
       const style = document.createElement('style');
       style.innerHTML = `
         .mapboxgl-marker, .custom-marker {
@@ -24,6 +25,18 @@ export default function StorageFacilities() {
         }
         .mapboxgl-popup {
           z-index: 1000 !important;
+          max-width: 300px !important;
+          width: auto !important;
+        }
+        .mapboxgl-popup-content {
+          min-width: 220px !important;
+          width: auto !important;
+          max-width: 300px !important;
+          overflow: visible !important;
+        }
+        .facility-popup-content {
+          word-break: break-word !important;
+          overflow-wrap: break-word !important;
         }
         .view-facility-btn, .view-details {
           display: none !important;

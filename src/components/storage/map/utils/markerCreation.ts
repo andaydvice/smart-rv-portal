@@ -36,28 +36,33 @@ export function createFacilityMarker(
   el.setAttribute('data-facility-id', facility.id);
   el.setAttribute('data-marker-type', 'facility');
   
-  // Create properly positioned popup
+  // Create properly positioned popup with fixed width
   const popup = new mapboxgl.Popup({
     closeButton: true,
     closeOnClick: false,
     maxWidth: '300px',
-    className: 'facility-popup',
+    className: `facility-popup popup-${facility.id}`,
     offset: [0, -15],
-    anchor: 'bottom', // Position popup above the marker
-    // Add extra options to ensure proper positioning
+    anchor: 'bottom',
     focusAfterOpen: false
   });
   
   // Set popup data attribute for CSS targeting
   popup.addClassName(`popup-${facility.id}`);
   
+  // Create simplified HTML content - trim long text values
+  const cityState = `${facility.city}, ${facility.state}`;
+  const address = facility.address;
+  const name = facility.name;
+  
   // Simplified popup content without the "view details" button
   popup.setHTML(`
-    <div class="facility-popup-content" data-facility-id="${facility.id}">
-      <h3 class="text-lg font-semibold mb-1">${facility.name}</h3>
-      <p class="text-sm mb-1">${facility.address}</p>
-      <p class="text-sm mb-1">Price: $${facility.price_range.min} - $${facility.price_range.max}</p>
-      ${facility.contact_phone ? `<p class="text-sm mb-1">Phone: ${facility.contact_phone}</p>` : ''}
+    <div class="facility-popup-content p-4" data-facility-id="${facility.id}">
+      <h3 class="text-lg font-semibold mb-1">${name}</h3>
+      <p class="text-xs mb-1">${address}</p>
+      <p class="text-xs mb-1">${cityState}</p>
+      <p class="text-xs mb-2">Price: $${facility.price_range.min} - $${facility.price_range.max}</p>
+      ${facility.contact_phone ? `<p class="text-xs mb-1">Phone: ${facility.contact_phone}</p>` : ''}
     </div>
   `);
 
@@ -99,6 +104,22 @@ export function createFacilityMarker(
     // Toggle the popup
     if (!marker.getPopup().isOpen()) {
       marker.togglePopup();
+      
+      // Force popup to correct size after opening
+      setTimeout(() => {
+        const popupEl = document.querySelector(`.popup-${facility.id}`);
+        if (popupEl instanceof HTMLElement) {
+          popupEl.style.maxWidth = '300px';
+          popupEl.style.width = 'auto';
+          
+          const contentEl = popupEl.querySelector('.mapboxgl-popup-content');
+          if (contentEl instanceof HTMLElement) {
+            contentEl.style.minWidth = '220px';
+            contentEl.style.width = 'auto';
+            contentEl.style.maxWidth = '300px';
+          }
+        }
+      }, 50);
     }
   });
 
@@ -138,6 +159,8 @@ export function createFacilityMarker(
       popupEl.style.zIndex = '10000';
       popupEl.style.visibility = 'visible';
       popupEl.style.pointerEvents = 'all';
+      popupEl.style.maxWidth = '300px';
+      popupEl.style.width = 'auto';
       
       // Make close button work properly
       const closeButton = popupEl.querySelector('.mapboxgl-popup-close-button');
@@ -189,6 +212,15 @@ export function createFacilityMarker(
           btn.style.pointerEvents = 'none';
         }
       });
+      
+      // Set content element styles
+      const contentEl = popupEl.querySelector('.mapboxgl-popup-content');
+      if (contentEl instanceof HTMLElement) {
+        contentEl.style.minWidth = '220px';
+        contentEl.style.width = 'auto';
+        contentEl.style.maxWidth = '300px';
+        contentEl.style.overflow = 'visible';
+      }
     }
   });
 
