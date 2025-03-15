@@ -1,3 +1,4 @@
+
 "use client";
 
 import React, { useState, useEffect, useCallback } from 'react';
@@ -99,7 +100,7 @@ const StorageFacilitiesMap = () => {
   }, [mapToken, mapTokenError]);
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 min-h-[800px] mt-12 pt-4 storage-map-container">
+    <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 min-h-[800px] storage-map-container">
       <div className="lg:col-span-4">
         <div className="space-y-4">
           <FilterPanel onFilterChange={handleFilterChange} />

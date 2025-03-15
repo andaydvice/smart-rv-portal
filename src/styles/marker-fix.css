@@ -98,7 +98,7 @@ header .direct-marker,
   overflow: visible !important;
   height: 100% !important;
   width: 100% !important;
-  margin-top: 20px !important;
+  margin-top: 0 !important;
   clear: both !important;
 }
 
@@ -125,15 +125,15 @@ header .direct-marker,
 .h-\[600px\] {
   min-height: 600px !important;
   overflow: visible !important;
-  margin-top: 30px !important;
+  margin-top: 0 !important;
   position: relative !important;
   z-index: 1 !important;
 }
 
-/* Enhanced map container spacing */
+/* Enhanced map container spacing - FIXED FOR LAYOUT */
 .map-container {
-  padding-top: 30px !important;
-  margin-top: 30px !important;
+  padding-top: 0 !important;
+  margin-top: 0 !important;
   position: relative !important;
   z-index: 1 !important;
 }
@@ -165,4 +165,9 @@ header .direct-marker,
 
 .mapboxgl-popup-anchor-bottom .mapboxgl-popup-tip {
   border-top-color: #151A22 !important;
+}
+
+/* Fix specifically for the storage facilities page layout */
+.storage-map-container {
+  margin-top: 0 !important;
 }
