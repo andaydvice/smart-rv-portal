@@ -1,11 +1,12 @@
 
-/* CRITICAL - Force marker visibility - high-specificity selectors */
-body .mapboxgl-marker,
-body .custom-marker,
-body .marker,
-body [class*="marker"],
-body div[class*="marker"],
-body .mapboxgl-canvas-container .mapboxgl-marker {
+/* CRITICAL - Force marker visibility - ultra-high-specificity selectors */
+html body .mapboxgl-marker,
+html body .custom-marker,
+html body .marker,
+html body [class*="marker"],
+html body div[class*="marker"],
+html body .mapboxgl-canvas-container .mapboxgl-marker,
+html body .emergency-marker {
   display: block !important;
   visibility: visible !important;
   opacity: 1 !important;
@@ -13,6 +14,7 @@ body .mapboxgl-canvas-container .mapboxgl-marker {
   pointer-events: auto !important;
   position: absolute !important;
   cursor: pointer !important;
+  transform: translate(-50%, -50%) !important;
 }
 
 /* Remove unwanted debug markers in header */

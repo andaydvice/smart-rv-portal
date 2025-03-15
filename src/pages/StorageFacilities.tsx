@@ -17,56 +17,66 @@ export default function StorageFacilities() {
     // Apply emergency marker and popup fixes immediately
     const applyMarkerFixes = () => {
       console.log("Applying marker and popup visibility fixes");
+      // Create a simple style element with essential fixes
       const style = document.createElement('style');
-      style.innerHTML = `
-        .mapboxgl-marker, .custom-marker {
+      style.textContent = `
+        .mapboxgl-marker, .custom-marker, .emergency-marker {
           visibility: visible !important;
           display: block !important;
           opacity: 1 !important;
           z-index: 999 !important;
           position: absolute !important;
-          transform: translate(-50%, -50%) !important;
+          pointer-events: auto !important;
+          cursor: pointer !important;
         }
         .mapboxgl-popup {
           z-index: 1000 !important;
           max-width: 300px !important;
           width: auto !important;
+          visibility: visible !important;
+          display: block !important;
+          opacity: 1 !important;
         }
         .mapboxgl-popup-content {
           min-width: 220px !important;
           width: auto !important;
           max-width: 300px !important;
           overflow: visible !important;
+          visibility: visible !important;
+          display: block !important;
+          opacity: 1 !important;
         }
-        .facility-popup-content {
-          word-break: break-word !important;
-          overflow-wrap: break-word !important;
-        }
-        .view-facility-btn, .view-details {
+        .view-facility-btn, .view-details, button.view-details, a.view-details {
           display: none !important;
+          visibility: hidden !important;
         }
         .mapboxgl-canvas-container, .mapboxgl-canvas {
           height: 100% !important;
           width: 100% !important;
+          overflow: visible !important;
         }
-        .h-[600px] {
+        .h-\\[600px\\] {
           min-height: 600px !important;
           overflow: visible !important;
+          position: relative !important;
         }
         .mapboxgl-map {
           overflow: visible !important;
+          padding-bottom: 60px !important;
         }
       `;
       document.head.appendChild(style);
       
       // Force visibility of any existing markers
-      document.querySelectorAll('.mapboxgl-marker, .custom-marker').forEach(marker => {
+      document.querySelectorAll('.mapboxgl-marker, .custom-marker, .emergency-marker').forEach(marker => {
         if (marker instanceof HTMLElement) {
           marker.style.visibility = 'visible';
           marker.style.display = 'block';
           marker.style.opacity = '1';
           marker.style.zIndex = '999';
           marker.style.position = 'absolute';
+          marker.style.pointerEvents = 'auto';
+          marker.style.cursor = 'pointer';
         }
       });
     };
@@ -76,8 +86,33 @@ export default function StorageFacilities() {
     
     // And repeatedly to ensure they stick
     const fixInterval = setInterval(() => {
-      const markers = document.querySelectorAll('.mapboxgl-marker, .custom-marker');
+      const markers = document.querySelectorAll('.mapboxgl-marker, .custom-marker, .emergency-marker');
       console.log(`Found ${markers.length} markers - applying visibility fixes`);
+      
+      // Check if markers exist but are invisible
+      if (markers.length > 0) {
+        let visibleCount = 0;
+        markers.forEach(marker => {
+          if (marker instanceof HTMLElement) {
+            // Check if marker is visible
+            const computedStyle = window.getComputedStyle(marker);
+            if (computedStyle.visibility !== 'visible' || computedStyle.display === 'none' || computedStyle.opacity === '0') {
+              // Force visibility
+              marker.style.visibility = 'visible';
+              marker.style.display = 'block';
+              marker.style.opacity = '1';
+              marker.style.zIndex = '999';
+              marker.style.position = 'absolute';
+              marker.style.pointerEvents = 'auto';
+              marker.style.cursor = 'pointer';
+            } else {
+              visibleCount++;
+            }
+          }
+        });
+        console.log(`${visibleCount} of ${markers.length} markers are visible`);
+      }
+      
       applyMarkerFixes();
       
       // Patch marker transform if needed
@@ -86,16 +121,10 @@ export default function StorageFacilities() {
           marker.style.transform = 'translate(-50%, -50%)';
         }
       });
-    }, 2000);
+    }, 1000);
     
     // Flag for emergency script
     window.isStorageFacilitiesPage = true;
-    
-    // Load emergency marker script
-    const script = document.createElement('script');
-    script.src = '/markerFix.js';
-    script.async = true;
-    document.head.appendChild(script);
     
     return () => {
       window.isStorageFacilitiesPage = false;

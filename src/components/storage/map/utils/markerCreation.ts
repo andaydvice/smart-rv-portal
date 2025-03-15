@@ -16,14 +16,16 @@ export function createFacilityMarker(
   
   // Force critical styling directly
   el.style.cssText = `
-    background-color: ${isHighlighted ? '#10B981' : '#F97316'};
+    position: absolute !important;
+    left: 0 !important;
+    top: 0 !important;
+    background-color: ${isHighlighted ? '#10B981' : '#F97316'} !important;
     width: ${isHighlighted ? '28px' : '24px'} !important;
     height: ${isHighlighted ? '28px' : '24px'} !important;
     border-radius: 50% !important;
     border: 2px solid white !important;
     cursor: pointer !important;
     box-shadow: ${isHighlighted ? '0 0 20px rgba(16, 185, 129, 0.8)' : '0 0 10px rgba(0,0,0,0.8)'} !important;
-    position: absolute !important;
     transform: translate(-50%, -50%) scale(${isHighlighted ? 1.2 : 1}) !important;
     z-index: ${isHighlighted ? 9999 : 9998} !important;
     visibility: visible !important;
@@ -86,22 +88,22 @@ export function createFacilityMarker(
   .setPopup(popup);
 
   // Ensure marker gets added to map
-  if (map) {
-    try {
-      marker.addTo(map);
-    } catch (err) {
-      console.error(`Failed to add marker for ${facility.name}:`, err);
-      // Retry once after a short delay
-      setTimeout(() => {
-        try {
-          if (!marker.getElement().isConnected) {
-            marker.addTo(map);
-          }
-        } catch (retryErr) {
-          console.error(`Retry failed for marker ${facility.id}:`, retryErr);
+  try {
+    marker.addTo(map);
+    console.log(`Added marker for ${facility.name} at [${coordinates[0]}, ${coordinates[1]}]`);
+  } catch (err) {
+    console.error(`Failed to add marker for ${facility.name}:`, err);
+    // Retry with a short delay
+    setTimeout(() => {
+      try {
+        if (!marker.getElement().isConnected) {
+          marker.addTo(map);
+          console.log(`Retry successful for marker ${facility.id}`);
         }
-      }, 100);
-    }
+      } catch (retryErr) {
+        console.error(`Retry failed for marker ${facility.id}:`, retryErr);
+      }
+    }, 100);
   }
 
   // Add click handler to the marker element

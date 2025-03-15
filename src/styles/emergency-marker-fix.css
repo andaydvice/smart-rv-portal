@@ -30,6 +30,7 @@
   min-width: 220px !important;
   width: auto !important;
   overflow: visible !important;
+  visibility: visible !important;
 }
 
 /* Fix popup close button */
@@ -66,16 +67,6 @@
   box-shadow: 0 0 10px rgba(0,0,0,0.5) !important;
   cursor: pointer !important;
   transform: translate(-50%, -50%) !important;
-}
-
-/* Override any animations or transitions affecting visibility */
-.mapboxgl-marker,
-.custom-marker,
-.emergency-marker,
-.mapboxgl-canvas,
-.mapboxgl-popup {
-  transition: transform 0.2s ease-out !important;
-  animation: none !important;
 }
 
 /* Prevent hidden elements from affecting layout */
@@ -143,18 +134,12 @@ button.view-details,
   position: relative !important;
 }
 
-/* Fix marker position calculation issues */
-.mapboxgl-marker:not([style*="absolute"]),
-.custom-marker:not([style*="absolute"]) {
-  position: absolute !important;
-  transform: translate(-50%, -50%) !important;
-}
-
-/* Emergency fix for Firefox and Safari */
-@supports (-moz-appearance:none) or (-webkit-appearance:none) {
-  .mapboxgl-marker, .custom-marker {
-    position: absolute !important;
-    top: auto !important;
-    left: auto !important;
-  }
+/* Make all elements visible on hover, even if JavaScript fails */
+.mapboxgl-marker:hover,
+.custom-marker:hover,
+.emergency-marker:hover {
+  visibility: visible !important;
+  display: block !important;
+  opacity: 1 !important;
+  z-index: 10000 !important;
 }
