@@ -22,13 +22,11 @@ export const LocationFilter = ({ selectedState, states, onStateChange }: Locatio
   const { data: statesWithCounts, isLoading } = useQuery({
     queryKey: ['actual-state-counts'],
     queryFn: async () => {
-      // First try the RPC function (which may not exist)
       try {
-        // Directly query the storage_facilities table and count by state
+        // Fetch states and count facilities by state
         const { data, error } = await supabase
           .from('storage_facilities')
-          .select('state, count(*)', { count: 'exact' })
-          .order('state');
+          .select('state');
         
         if (error || !data) {
           console.error('Error with direct query:', error);
@@ -36,35 +34,44 @@ export const LocationFilter = ({ selectedState, states, onStateChange }: Locatio
           return getStateCountsWithSQL();
         }
         
-        // Transform the data to match our expected format
-        return data.map(item => {
+        // Count occurrences of each state
+        const stateCounts = data.reduce((acc, item) => {
+          const state = item.state;
+          if (!state) return acc;
+          
+          acc[state] = (acc[state] || 0) + 1;
+          return acc;
+        }, {});
+        
+        // Transform to array format and normalize state names
+        return Object.entries(stateCounts).map(([stateAbbr, count]) => {
           // Normalize state names
           const normalizedState = 
-            item.state === 'AZ' ? 'Arizona' : 
-            item.state === 'CA' ? 'California' : 
-            item.state === 'CO' ? 'Colorado' :
-            item.state === 'TX' ? 'Texas' :
-            item.state === 'FL' ? 'Florida' :
-            item.state === 'NV' ? 'Nevada' :
-            item.state === 'GA' ? 'Georgia' :
-            item.state === 'IA' ? 'Iowa' :
-            item.state === 'MN' ? 'Minnesota' :
-            item.state === 'WI' ? 'Wisconsin' :
-            item.state === 'OR' ? 'Oregon' :
-            item.state === 'PA' ? 'Pennsylvania' :
-            item.state === 'NY' ? 'New York' :
-            item.state === 'OH' ? 'Ohio' :
-            item.state === 'IN' ? 'Indiana' :
-            item.state;
+            stateAbbr === 'AZ' ? 'Arizona' : 
+            stateAbbr === 'CA' ? 'California' : 
+            stateAbbr === 'CO' ? 'Colorado' :
+            stateAbbr === 'TX' ? 'Texas' :
+            stateAbbr === 'FL' ? 'Florida' :
+            stateAbbr === 'NV' ? 'Nevada' :
+            stateAbbr === 'GA' ? 'Georgia' :
+            stateAbbr === 'IA' ? 'Iowa' :
+            stateAbbr === 'MN' ? 'Minnesota' :
+            stateAbbr === 'WI' ? 'Wisconsin' :
+            stateAbbr === 'OR' ? 'Oregon' :
+            stateAbbr === 'PA' ? 'Pennsylvania' :
+            stateAbbr === 'NY' ? 'New York' :
+            stateAbbr === 'OH' ? 'Ohio' :
+            stateAbbr === 'IN' ? 'Indiana' :
+            stateAbbr;
           
           return {
             state: normalizedState,
-            count: typeof item.count === 'number' ? item.count : parseInt(item.count)
+            count: Number(count)
           };
         }).sort((a, b) => a.state.localeCompare(b.state));
       } catch (e) {
-        console.error('Error fetching state counts with RPC:', e);
-        // Fall back to SQL method if RPC fails
+        console.error('Error fetching state counts:', e);
+        // Fall back to SQL method if query fails
         return getStateCountsWithSQL();
       }
     },
