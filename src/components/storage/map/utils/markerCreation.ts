@@ -46,8 +46,8 @@ export function createFacilityMarker(
     maxWidth: '300px',
     className: `facility-popup popup-${facility.id}`,
     offset: [0, -15],
-    // Change from anchor: 'bottom' to auto to allow flexibility in popup positioning
-    anchor: 'auto',
+    // Fix: Change from "auto" to "bottom" which is a valid anchor type
+    anchor: 'bottom',
     focusAfterOpen: false
   });
   

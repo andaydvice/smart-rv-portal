@@ -92,8 +92,8 @@ export default function StorageFacilities() {
         </Container>
       </div>
       
-      {/* Style to hide any markers in the header section */}
-      <style jsx global>{`
+      {/* Fix: Remove invalid jsx and global props, use standard style element */}
+      <style>{`
         /* Hide any markers in the header area */
         .marker-free-zone .mapboxgl-marker,
         .marker-free-zone .custom-marker,

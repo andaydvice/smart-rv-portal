@@ -162,7 +162,8 @@ const MapContainer: React.FC<MapContainerProps> = ({
         const isNearBottom = lat < (mapBounds.getSouth() + (mapBounds.getNorth() - mapBounds.getSouth()) * 0.3);
         
         // Adjust the center point to ensure popup has room to display
-        const adjustedCenter = [lng, lat];
+        // Fix: Define as tuple instead of array to match LngLatLike type
+        const adjustedCenter: [number, number] = [lng, lat];
         
         // If near top edge, move the center down slightly
         if (isNearTop) {
