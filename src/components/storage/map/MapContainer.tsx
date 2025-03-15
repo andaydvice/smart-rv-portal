@@ -7,6 +7,7 @@ import { StorageFacility } from '../types';
 import MapLoadingState from './MapLoadingState';
 import { toast } from "sonner";
 import { createDirectMarkers } from './utils/directMarkerCreation';
+import { removeViewDetailsButtons } from '@/utils/markers/forcing/uiManipulation';
 
 interface MapContainerProps {
   facilities: StorageFacility[];
@@ -73,8 +74,12 @@ const MapContainer: React.FC<MapContainerProps> = ({
       }
     }
     
-    // Periodically force markers to be visible
-    const forceMarkersVisible = () => {
+    // Aggressively remove any "View Details" buttons
+    removeViewDetailsButtons();
+    
+    // Periodically force markers to be visible and popups to be hidden
+    const forceMarkerStates = () => {
+      // Force markers to be visible
       document.querySelectorAll('.mapboxgl-marker, .custom-marker, .direct-marker').forEach(marker => {
         if (marker instanceof HTMLElement) {
           marker.style.visibility = 'visible';
@@ -82,11 +87,22 @@ const MapContainer: React.FC<MapContainerProps> = ({
           marker.style.opacity = '1';
         }
       });
+      
+      // Hide all popups by default, except for clicked ones
+      document.querySelectorAll('.mapboxgl-popup, .direct-popup').forEach(popup => {
+        if (popup instanceof HTMLElement && !popup.classList.contains('clicked')) {
+          popup.style.display = 'none';
+          popup.style.visibility = 'hidden';
+        }
+      });
+      
+      // Remove any view details buttons
+      removeViewDetailsButtons();
     };
     
     // Run immediately and set interval
-    forceMarkersVisible();
-    const intervalId = setInterval(forceMarkersVisible, 1000);
+    forceMarkerStates();
+    const intervalId = setInterval(forceMarkerStates, 1000);
     
     // Clean up on unmount
     return () => {
@@ -118,11 +134,12 @@ const MapContainer: React.FC<MapContainerProps> = ({
           marker.style.zIndex = '10000';
           marker.style.boxShadow = '0 0 20px rgba(16, 185, 129, 0.8)';
           
-          // Show the popup
+          // Show the popup for the highlighted facility
           const popup = document.getElementById(`direct-popup-${facility.id}`);
           if (popup) {
             popup.style.display = 'block';
             popup.style.visibility = 'visible';
+            popup.classList.add('clicked');
           }
         }
       }

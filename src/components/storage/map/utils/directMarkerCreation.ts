@@ -62,7 +62,6 @@ export function createDirectMarker(
     <p style="margin: 5px 0 0; font-size: 12px;">${facility.city}, ${facility.state}</p>
     ${facility.price_range ? 
       `<p style="margin: 5px 0 0; font-size: 12px;">Price: $${facility.price_range.min} - $${facility.price_range.max}</p>` : ''}
-    <button style="margin-top: 8px; padding: 4px 8px; background: #4B8FE3; border: none; color: white; border-radius: 4px; cursor: pointer;">View Details</button>
   `;
   
   // Position marker on map if coordinates and map are available

@@ -41,6 +41,26 @@
         map.style.minHeight = '600px';
       }
     });
+    
+    // Hide all popups by default
+    document.querySelectorAll('.mapboxgl-popup, .direct-popup').forEach(popup => {
+      if (popup instanceof HTMLElement && !popup.classList.contains('clicked')) {
+        popup.style.display = 'none';
+        popup.style.visibility = 'hidden';
+        popup.style.opacity = '0';
+      }
+    });
+    
+    // Remove any view details buttons
+    document.querySelectorAll('.view-facility-btn, button.view-details, a.view-details, .view-details').forEach(btn => {
+      if (btn instanceof HTMLElement) {
+        btn.style.display = 'none';
+        btn.style.visibility = 'hidden';
+        btn.style.opacity = '0';
+        btn.style.width = '0';
+        btn.style.height = '0';
+      }
+    });
   }
   
   // Create emergency markers if none exist
@@ -97,11 +117,60 @@
           opacity: 1 !important;
         `;
         
+        // Create popup element (hidden by default)
+        const popup = document.createElement('div');
+        popup.className = 'emergency-popup';
+        popup.id = `emergency-popup-${index}`;
+        popup.style.cssText = `
+          position: absolute !important;
+          left: ${left}% !important;
+          top: ${top - 5}% !important;
+          transform: translate(-50%, -100%) !important;
+          background-color: #151A22 !important;
+          color: white !important;
+          padding: 10px !important;
+          border-radius: 4px !important;
+          max-width: 200px !important;
+          z-index: 10000 !important;
+          display: none !important;
+          visibility: hidden !important;
+          opacity: 0 !important;
+        `;
+        
+        popup.innerHTML = `
+          <div style="margin-bottom: 5px; font-weight: bold;">${location.name}</div>
+          <div style="margin-bottom: 5px;">${location.state}</div>
+          <div>Coordinates: ${location.lat.toFixed(2)}, ${location.lng.toFixed(2)}</div>
+        `;
+        
         // Add to container
         container.appendChild(marker);
+        container.appendChild(popup);
         
-        // Log creation
-        console.log(`Created emergency marker for ${location.name}`);
+        // Add click handler to toggle popup
+        marker.addEventListener('click', () => {
+          const isVisible = popup.style.display === 'block';
+          popup.style.display = isVisible ? 'none' : 'block';
+          popup.style.visibility = isVisible ? 'hidden' : 'visible';
+          popup.style.opacity = isVisible ? '0' : '1';
+          
+          // Toggle clicked class
+          if (isVisible) {
+            popup.classList.remove('clicked');
+          } else {
+            popup.classList.add('clicked');
+          }
+        });
+        
+        // Add close handler for clicking outside popup
+        document.addEventListener('click', (e) => {
+          if (e.target !== marker && e.target !== popup && !popup.contains(e.target)) {
+            popup.style.display = 'none';
+            popup.style.visibility = 'hidden';
+            popup.style.opacity = '0';
+            popup.classList.remove('clicked');
+          }
+        });
       });
     });
   }

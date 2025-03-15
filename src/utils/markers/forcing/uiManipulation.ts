@@ -28,7 +28,7 @@ export function removeViewDetailsButtons() {
     }
   });
   
-  // Also check popups for any view details buttons and remove them
+  // Also check popups for any elements that might be view details buttons by text content
   document.querySelectorAll('.mapboxgl-popup-content').forEach(popup => {
     if (popup instanceof HTMLElement) {
       // Find any elements that might be view details buttons by text content
@@ -46,7 +46,7 @@ export function removeViewDetailsButtons() {
     }
   });
   
-  // Also add CSS to hide these buttons if they're added dynamically
+  // Add CSS to hide these buttons if they're added dynamically
   const style = document.createElement('style');
   style.textContent = `
     .view-facility-btn, button.view-details, a.view-details, .view-details, 
@@ -55,6 +55,14 @@ export function removeViewDetailsButtons() {
       visibility: hidden !important;
       opacity: 0 !important;
       pointer-events: none !important;
+      position: absolute !important;
+      z-index: -999 !important;
+      width: 0 !important;
+      height: 0 !important;
+      overflow: hidden !important;
+      clip: rect(0, 0, 0, 0) !important;
+      white-space: nowrap !important;
+      border: 0 !important;
     }
   `;
   document.head.appendChild(style);
