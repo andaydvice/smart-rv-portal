@@ -47,28 +47,7 @@ const MapContainer: React.FC<MapContainerProps> = ({
     
     // Show toast with the correct number of locations
     if (facilities.length > 0) {
-      // Get the expected count for the selected state
-      const stateCounts = {
-        'Arizona': 1,
-        'California': 14,
-        'Colorado': 1,
-        'Florida': 1,
-        'Georgia': 15,
-        'Indiana': 7,
-        'Iowa': 1,
-        'Minnesota': 1,
-        'Nevada': 1,
-        'New York': 7,
-        'Ohio': 14,
-        'Oregon': 17,
-        'Pennsylvania': 8,
-        'Texas': 1,
-        'Wisconsin': 1
-      };
-      
-      const expectedCount = selectedState ? (stateCounts[selectedState] || facilities.length) : facilities.length;
-      
-      toast.success(`Showing ${expectedCount} locations${selectedState ? ` in ${selectedState}` : ''}`);
+      toast.success(`Showing ${facilities.length} locations${selectedState ? ` in ${selectedState}` : ''}`);
     }
     
     // Fit bounds to show all markers
@@ -213,31 +192,6 @@ const MapContainer: React.FC<MapContainerProps> = ({
     }
   }, [highlightedFacility, map, mapLoaded, facilities]);
 
-  // Get the correct count for the selected state
-  const getDisplayCount = () => {
-    if (!selectedState) return facilities.length;
-    
-    const stateCounts = {
-      'Arizona': 1,
-      'California': 14,
-      'Colorado': 1,
-      'Florida': 1,
-      'Georgia': 15,
-      'Indiana': 7,
-      'Iowa': 1,
-      'Minnesota': 1,
-      'Nevada': 1,
-      'New York': 7,
-      'Ohio': 14,
-      'Oregon': 17,
-      'Pennsylvania': 8,
-      'Texas': 1,
-      'Wisconsin': 1
-    };
-    
-    return stateCounts[selectedState] || facilities.length;
-  };
-
   return (
     <div className="w-full h-full relative">
       {/* Map container */}
@@ -257,8 +211,7 @@ const MapContainer: React.FC<MapContainerProps> = ({
       
       {/* Debug overlay */}
       <div className="absolute top-2 left-2 z-50 bg-black/60 text-white text-xs p-2 rounded">
-        {getDisplayCount()} facilities | 
-        {document.querySelectorAll('.mapboxgl-marker, .custom-marker, .direct-marker').length} markers
+        {facilities.length} facilities
         {selectedState && ` | ${selectedState}`}
       </div>
     </div>

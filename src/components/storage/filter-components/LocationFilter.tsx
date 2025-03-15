@@ -8,6 +8,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useQuery } from '@tanstack/react-query';
+import { supabase } from '@/integrations/supabase/client';
 
 interface LocationFilterProps {
   selectedState: string | null;
@@ -16,31 +17,52 @@ interface LocationFilterProps {
 }
 
 export const LocationFilter = ({ selectedState, states, onStateChange }: LocationFilterProps) => {
-  // Hard-coded state counts that match exact numbers to be displayed on the map
+  // Fetch actual state counts directly from the database
   const { data: statesWithCounts, isLoading } = useQuery({
-    queryKey: ['all-state-counts'],
+    queryKey: ['actual-state-counts'],
     queryFn: async () => {
-      return [
-        { state: "Arizona", count: 1 },
-        { state: "California", count: 14 },
-        { state: "Colorado", count: 1 },
-        { state: "Florida", count: 1 },
-        { state: "Georgia", count: 15 },
-        { state: "Indiana", count: 7 },
-        { state: "Iowa", count: 1 },
-        { state: "Minnesota", count: 1 },
-        { state: "Nevada", count: 1 },
-        { state: "New York", count: 7 },
-        { state: "Ohio", count: 14 }, 
-        { state: "Oregon", count: 17 },
-        { state: "Pennsylvania", count: 8 },
-        { state: "Texas", count: 1 },
-        { state: "Wisconsin", count: 1 }
-      ];
+      // Get the actual counts from Supabase storage_facilities table
+      const { data: facilityCounts, error } = await supabase
+        .from('storage_facilities')
+        .select('state, count(*)')
+        .group('state');
+      
+      if (error) {
+        console.error('Error fetching state counts:', error);
+        return states; // Fall back to passed states if there's an error
+      }
+      
+      // Map and normalize state abbreviations to full names
+      return facilityCounts.map(item => {
+        // Normalize state names
+        const normalizedState = 
+          item.state === 'AZ' ? 'Arizona' : 
+          item.state === 'CA' ? 'California' : 
+          item.state === 'CO' ? 'Colorado' :
+          item.state === 'TX' ? 'Texas' :
+          item.state === 'FL' ? 'Florida' :
+          item.state === 'NV' ? 'Nevada' :
+          item.state === 'GA' ? 'Georgia' :
+          item.state === 'IA' ? 'Iowa' :
+          item.state === 'MN' ? 'Minnesota' :
+          item.state === 'WI' ? 'Wisconsin' :
+          item.state === 'OR' ? 'Oregon' :
+          item.state === 'PA' ? 'Pennsylvania' :
+          item.state === 'NY' ? 'New York' :
+          item.state === 'OH' ? 'Ohio' :
+          item.state === 'IN' ? 'Indiana' :
+          item.state;
+        
+        return {
+          state: normalizedState,
+          count: parseInt(item.count)
+        };
+      }).sort((a, b) => a.state.localeCompare(b.state));
     },
-    staleTime: 60000 // 1 minute cache
+    staleTime: 300000 // 5 minute cache
   });
 
+  // Use the fetched counts or fall back to the provided states prop
   const displayStates = statesWithCounts || states;
 
   return (

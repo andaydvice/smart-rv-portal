@@ -1,208 +1,211 @@
 
-import mapboxgl from 'mapbox-gl';
 import { StorageFacility } from '../../types';
+import mapboxgl from 'mapbox-gl';
 
-/**
- * Creates a marker directly in the DOM, bypassing any Mapbox abstractions that might be failing
- */
-export function createDirectMarker(
-  facility: StorageFacility,
-  map: mapboxgl.Map | null
-): HTMLElement {
-  console.log(`Creating direct marker for ${facility.name}`);
+// Create direct markers that aren't managed by Mapbox
+export const createDirectMarkers = (facilities: StorageFacility[], map: mapboxgl.Map) => {
+  // Start by removing existing markers to prevent duplicates
+  document.querySelectorAll('.direct-marker').forEach(marker => {
+    if (marker.parentNode) {
+      marker.parentNode.removeChild(marker);
+    }
+  });
   
-  // Create marker element
-  const marker = document.createElement('div');
-  marker.className = 'direct-marker mapboxgl-marker custom-marker';
-  marker.id = `direct-marker-${facility.id}`;
-  marker.setAttribute('data-facility-id', facility.id);
-  marker.setAttribute('data-state', facility.state);
+  document.querySelectorAll('.direct-popup').forEach(popup => {
+    if (popup.parentNode) {
+      popup.parentNode.removeChild(popup);
+    }
+  });
   
-  // Set critical styling to guarantee visibility
-  marker.style.cssText = `
-    position: absolute !important;
-    visibility: visible !important;
-    display: block !important;
-    opacity: 1 !important;
-    width: 24px !important;
-    height: 24px !important;
-    background-color: #F97316 !important;
-    border-radius: 50% !important;
-    border: 2px solid white !important;
-    box-shadow: 0 0 10px rgba(0,0,0,0.5) !important;
-    z-index: 9999 !important;
-    transform: translate(-50%, -50%) !important;
-    cursor: pointer !important;
-    left: 50% !important;
-    top: 50% !important;
-  `;
+  console.log(`Creating ${facilities.length} direct markers`);
   
-  // Create a simple popup element - HIDDEN BY DEFAULT
-  const popup = document.createElement('div');
-  popup.className = 'direct-popup mapboxgl-popup';
-  popup.id = `direct-popup-${facility.id}`;
-  popup.style.cssText = `
-    position: absolute;
-    background-color: #151A22;
-    color: white;
-    padding: 10px;
-    border-radius: 4px;
-    max-width: 250px;
-    z-index: -9999;
-    display: none;
-    visibility: hidden;
-    opacity: 0;
-    pointer-events: none;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-    left: 50%;
-    top: 40%;
-    transform: translateX(-50%);
-  `;
-  
-  // Set popup content WITHOUT view details button
-  popup.innerHTML = `
-    <h3 style="margin: 0; font-size: 14px; font-weight: bold;">${facility.name}</h3>
-    <p style="margin: 5px 0 0; font-size: 12px;">${facility.address}</p>
-    <p style="margin: 5px 0 0; font-size: 12px;">${facility.city}, ${facility.state}</p>
-    ${facility.price_range ? 
-      `<p style="margin: 5px 0 0; font-size: 12px;">Price: $${facility.price_range.min} - $${facility.price_range.max}</p>` : ''}
-    <button style="position:absolute; right:5px; top:5px; background:none; border:none; color:white; font-size:16px; cursor:pointer;" class="popup-close">×</button>
-  `;
-  
-  // Position marker on map if coordinates and map are available
-  if (map && facility.latitude && facility.longitude) {
+  // Create a marker for each facility
+  facilities.forEach(facility => {
+    // Skip invalid coordinates
+    if (!facility.latitude || !facility.longitude) {
+      console.warn(`Missing coordinates for facility ${facility.id}`);
+      return;
+    }
+    
     const lat = parseFloat(String(facility.latitude));
     const lng = parseFloat(String(facility.longitude));
     
-    if (!isNaN(lat) && !isNaN(lng)) {
-      try {
-        // Try to use mapbox to position the marker
-        const point = map.project([lng, lat]);
-        marker.style.left = `${point.x}px`;
-        marker.style.top = `${point.y}px`;
-      } catch (err) {
-        console.error(`Error positioning marker for ${facility.name}:`, err);
-      }
+    if (isNaN(lat) || isNaN(lng) || Math.abs(lat) > 90 || Math.abs(lng) > 180) {
+      console.warn(`Invalid coordinates for facility ${facility.id}: ${lat}, ${lng}`);
+      return;
     }
-  }
-  
-  // Add to map container if available
-  const mapContainer = document.querySelector('.mapboxgl-map');
-  if (mapContainer) {
-    mapContainer.appendChild(marker);
-    mapContainer.appendChild(popup);
     
-    // Add click handler to marker - toggle popup ONLY on click
-    marker.addEventListener('click', (e) => {
-      e.stopPropagation();
+    try {
+      // Convert lat/lng to pixel coordinates
+      const { x, y } = map.project([lng, lat]);
       
-      // Hide all other popups first
-      document.querySelectorAll('.direct-popup, .mapboxgl-popup').forEach(p => {
-        if (p.id !== popup.id) {
-          // Cast to HTMLElement to access style property
-          (p as HTMLElement).style.display = 'none';
-          (p as HTMLElement).style.visibility = 'hidden';
-          (p as HTMLElement).style.opacity = '0';
-          (p as HTMLElement).style.zIndex = '-9999';
-          (p as HTMLElement).style.pointerEvents = 'none';
-          p.classList.remove('visible');
-          p.classList.remove('clicked');
+      // Create marker element
+      const marker = document.createElement('div');
+      marker.className = 'direct-marker';
+      marker.id = `direct-marker-${facility.id}`;
+      
+      // Set data attributes for debugging and filtering
+      marker.setAttribute('data-facility-id', facility.id);
+      marker.setAttribute('data-state', facility.state);
+      marker.setAttribute('data-lat', lat.toString());
+      marker.setAttribute('data-lng', lng.toString());
+      
+      // Cast to HTMLElement to fix TypeScript errors for style property
+      const markerElement = marker as HTMLElement;
+      
+      // Set styling to ensure visibility
+      markerElement.style.position = 'absolute';
+      markerElement.style.left = `${x}px`;
+      markerElement.style.top = `${y}px`;
+      markerElement.style.backgroundColor = '#F97316';
+      markerElement.style.width = '24px';
+      markerElement.style.height = '24px';
+      markerElement.style.borderRadius = '50%';
+      markerElement.style.border = '2px solid white';
+      markerElement.style.cursor = 'pointer';
+      markerElement.style.boxShadow = '0 0 10px rgba(0,0,0,0.5)';
+      markerElement.style.zIndex = '9999';
+      markerElement.style.transform = 'translate(-50%, -50%)';
+      markerElement.style.visibility = 'visible';
+      markerElement.style.display = 'block';
+      markerElement.style.opacity = '1';
+      markerElement.style.pointerEvents = 'auto';
+      
+      // Create popup element
+      const popup = document.createElement('div');
+      popup.className = 'direct-popup';
+      popup.id = `direct-popup-${facility.id}`;
+      
+      // Cast to HTMLElement for TypeScript
+      const popupElement = popup as HTMLElement;
+      
+      // Style the popup
+      popupElement.style.position = 'absolute';
+      popupElement.style.left = `${x}px`;
+      popupElement.style.top = `${y - 15}px`;
+      popupElement.style.transform = 'translate(-50%, -100%)';
+      popupElement.style.backgroundColor = '#131a2a';
+      popupElement.style.color = 'white';
+      popupElement.style.padding = '12px';
+      popupElement.style.borderRadius = '4px';
+      popupElement.style.minWidth = '220px';
+      popupElement.style.maxWidth = '300px';
+      popupElement.style.boxShadow = '0 2px 10px rgba(0,0,0,0.2)';
+      popupElement.style.zIndex = '10000';
+      popupElement.style.display = 'none';
+      popupElement.style.visibility = 'hidden';
+      popupElement.style.pointerEvents = 'auto';
+      
+      // Set popup content
+      popup.innerHTML = `
+        <div class="p-2">
+          <h3 class="text-lg font-semibold mb-1 text-[#60A5FA]">${facility.name}</h3>
+          <div class="space-y-1 text-sm">
+            <p>${facility.address}</p>
+            <p>${facility.city}, ${facility.state}</p>
+            ${facility.price_range ? 
+              `<p class="mt-2 font-semibold text-[#F97316]">Price: $${facility.price_range.min} - $${facility.price_range.max}</p>` : ''}
+            ${facility.contact_phone ? `<p class="mt-1">Phone: ${facility.contact_phone}</p>` : ''}
+          </div>
+          
+          ${Object.values(facility.features).some(v => v) ? `
+            <div class="mt-2 border-t border-gray-700 pt-2">
+              <p class="text-xs text-gray-400 mb-1">Features:</p>
+              <div class="flex flex-wrap gap-1">
+                ${facility.features.indoor ? '<span class="text-xs bg-[#1a2235] text-[#60A5FA] px-2 py-0.5 rounded">Indoor</span>' : ''}
+                ${facility.features.climate_controlled ? '<span class="text-xs bg-[#1a2235] text-[#60A5FA] px-2 py-0.5 rounded">Climate Controlled</span>' : ''}
+                ${facility.features["24h_access"] ? '<span class="text-xs bg-[#1a2235] text-[#60A5FA] px-2 py-0.5 rounded">24/7 Access</span>' : ''}
+                ${facility.features.security_system ? '<span class="text-xs bg-[#1a2235] text-[#60A5FA] px-2 py-0.5 rounded">Security</span>' : ''}
+                ${facility.features.vehicle_washing ? '<span class="text-xs bg-[#1a2235] text-[#60A5FA] px-2 py-0.5 rounded">Vehicle Washing</span>' : ''}
+              </div>
+            </div>
+          ` : ''}
+        </div>
+      `;
+      
+      // Add close button
+      const closeButton = document.createElement('button');
+      closeButton.innerHTML = '×';
+      closeButton.className = 'absolute top-1 right-1 text-lg font-bold text-gray-400 hover:text-white';
+      
+      // Cast to HTMLElement
+      const closeButtonElement = closeButton as HTMLElement;
+      closeButtonElement.style.position = 'absolute';
+      closeButtonElement.style.top = '4px';
+      closeButtonElement.style.right = '8px';
+      closeButtonElement.style.fontSize = '20px';
+      closeButtonElement.style.fontWeight = 'bold';
+      closeButtonElement.style.color = '#aaa';
+      closeButtonElement.style.cursor = 'pointer';
+      closeButtonElement.style.background = 'none';
+      closeButtonElement.style.border = 'none';
+      
+      // Add click handler to close button
+      closeButton.addEventListener('click', (e) => {
+        e.stopPropagation();
+        popupElement.style.display = 'none';
+        popupElement.style.visibility = 'hidden';
+        popup.classList.remove('visible');
+        popup.classList.remove('clicked');
+      });
+      
+      popup.appendChild(closeButton);
+      
+      // Add to map container
+      const mapContainer = map.getContainer();
+      mapContainer.appendChild(marker);
+      mapContainer.appendChild(popup);
+      
+      // Add marker click event
+      marker.addEventListener('click', (e) => {
+        e.stopPropagation();
+        
+        // Toggle popup
+        const isVisible = popup.classList.contains('visible');
+        
+        // Hide all other popups first
+        document.querySelectorAll('.direct-popup').forEach(p => {
+          if (p.id !== popup.id) {
+            p.classList.remove('visible');
+            p.classList.remove('clicked');
+            (p as HTMLElement).style.display = 'none';
+            (p as HTMLElement).style.visibility = 'hidden';
+          }
+        });
+        
+        if (isVisible) {
+          // Hide this popup
+          popupElement.style.display = 'none';
+          popupElement.style.visibility = 'hidden';
+          popup.classList.remove('visible');
+          popup.classList.remove('clicked');
+        } else {
+          // Show this popup
+          popupElement.style.display = 'block';
+          popupElement.style.visibility = 'visible';
+          popup.classList.add('visible');
+          popup.classList.add('clicked');
         }
       });
       
-      // Toggle popup visibility
-      const isVisible = popup.style.display === 'block';
-      
-      if (isVisible) {
-        // Hide this popup
-        popup.style.display = 'none';
-        popup.style.visibility = 'hidden';
-        popup.style.opacity = '0';
-        popup.style.zIndex = '-9999';
-        popup.style.pointerEvents = 'none';
-        popup.classList.remove('visible');
-        popup.classList.remove('clicked');
-      } else {
-        // Show this popup
-        popup.style.display = 'block';
-        popup.style.visibility = 'visible';
-        popup.style.opacity = '1';
-        popup.style.zIndex = '10000';
-        popup.style.pointerEvents = 'auto';
-        popup.classList.add('visible');
-        popup.classList.add('clicked');
-      }
-      
-      // Log click for debugging
-      console.log(`Clicked direct marker ${facility.id}`);
-    });
-    
-    // Add close button handler
-    const closeButton = popup.querySelector('.popup-close');
-    if (closeButton) {
-      closeButton.addEventListener('click', (e) => {
-        e.stopPropagation();
-        popup.style.display = 'none';
-        popup.style.visibility = 'hidden';
-        popup.style.opacity = '0';
-        popup.style.zIndex = '-9999';
-        popup.style.pointerEvents = 'none';
-        popup.classList.remove('visible');
-        popup.classList.remove('clicked');
+      // Update marker position on map move
+      map.on('move', () => {
+        // Recalculate position
+        const newPos = map.project([lng, lat]);
+        
+        // Update marker position
+        markerElement.style.left = `${newPos.x}px`;
+        markerElement.style.top = `${newPos.y}px`;
+        
+        // Update popup position
+        popupElement.style.left = `${newPos.x}px`;
+        popupElement.style.top = `${newPos.y - 15}px`;
       });
+      
+    } catch (err) {
+      console.error(`Error creating marker for facility ${facility.id}:`, err);
     }
-    
-    // Close popup when clicking outside
-    document.addEventListener('click', (e) => {
-      if (e.target !== marker && !popup.contains(e.target as Node)) {
-        popup.style.display = 'none';
-        popup.style.visibility = 'hidden';
-        popup.style.opacity = '0';
-        popup.style.zIndex = '-9999';
-        popup.style.pointerEvents = 'none';
-        popup.classList.remove('visible');
-        popup.classList.remove('clicked');
-      }
-    });
-    
-    console.log(`Added direct marker ${facility.id} to map container`);
-  } else {
-    console.error('No map container found to add direct marker');
-  }
-  
-  return marker;
-}
-
-/**
- * Creates markers directly in the DOM for multiple facilities
- */
-export function createDirectMarkers(
-  facilities: StorageFacility[],
-  map: mapboxgl.Map | null
-): void {
-  console.log(`Creating ${facilities.length} direct markers`);
-  
-  // Clear any existing direct markers first
-  document.querySelectorAll('.direct-marker, .direct-popup').forEach(el => {
-    el.remove();
   });
   
-  // Create markers for each facility
-  facilities.forEach(facility => {
-    createDirectMarker(facility, map);
-  });
-  
-  // Ensure all popups are hidden initially
-  document.querySelectorAll('.direct-popup, .mapboxgl-popup').forEach(popup => {
-    // Cast to HTMLElement to access style property
-    (popup as HTMLElement).style.display = 'none';
-    (popup as HTMLElement).style.visibility = 'hidden';
-    (popup as HTMLElement).style.opacity = '0';
-    (popup as HTMLElement).style.zIndex = '-9999';
-    (popup as HTMLElement).style.pointerEvents = 'none';
-    popup.classList.remove('visible');
-    popup.classList.remove('clicked');
-  });
-  
-  console.log('Direct marker creation complete');
-}
+  console.log(`Created ${facilities.length} direct markers`);
+};
