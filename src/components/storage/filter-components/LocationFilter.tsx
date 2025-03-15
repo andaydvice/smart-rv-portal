@@ -41,7 +41,7 @@ export const LocationFilter = ({ selectedState, states, onStateChange }: Locatio
           
           acc[state] = (acc[state] || 0) + 1;
           return acc;
-        }, {});
+        }, {} as Record<string, number>); // Add explicit type to fix inference
         
         // Transform to array format and normalize state names
         return Object.entries(stateCounts).map(([stateAbbr, count]) => {
@@ -122,7 +122,7 @@ export const LocationFilter = ({ selectedState, states, onStateChange }: Locatio
                 >
                   <div className="flex items-center justify-between w-full">
                     <span>{stateItem.state}</span>
-                    <span className="text-sm text-gray-400">({stateItem.count})</span>
+                    <span className="text-sm text-gray-400">({stateItem.count.toString()})</span>
                   </div>
                 </SelectItem>
               ))
