@@ -97,11 +97,12 @@ export function createDirectMarker(
       // Hide all other popups first
       document.querySelectorAll('.direct-popup, .mapboxgl-popup').forEach(p => {
         if (p.id !== popup.id) {
-          p.style.display = 'none';
-          p.style.visibility = 'hidden';
-          p.style.opacity = '0';
-          p.style.zIndex = '-9999';
-          p.style.pointerEvents = 'none';
+          // Cast to HTMLElement to access style property
+          (p as HTMLElement).style.display = 'none';
+          (p as HTMLElement).style.visibility = 'hidden';
+          (p as HTMLElement).style.opacity = '0';
+          (p as HTMLElement).style.zIndex = '-9999';
+          (p as HTMLElement).style.pointerEvents = 'none';
           p.classList.remove('visible');
           p.classList.remove('clicked');
         }
@@ -191,11 +192,12 @@ export function createDirectMarkers(
   
   // Ensure all popups are hidden initially
   document.querySelectorAll('.direct-popup, .mapboxgl-popup').forEach(popup => {
-    popup.style.display = 'none';
-    popup.style.visibility = 'hidden';
-    popup.style.opacity = '0';
-    popup.style.zIndex = '-9999';
-    popup.style.pointerEvents = 'none';
+    // Cast to HTMLElement to access style property
+    (popup as HTMLElement).style.display = 'none';
+    (popup as HTMLElement).style.visibility = 'hidden';
+    (popup as HTMLElement).style.opacity = '0';
+    (popup as HTMLElement).style.zIndex = '-9999';
+    (popup as HTMLElement).style.pointerEvents = 'none';
     (popup as HTMLElement).classList.remove('visible');
     (popup as HTMLElement).classList.remove('clicked');
   });
