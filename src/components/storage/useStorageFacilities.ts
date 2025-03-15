@@ -8,6 +8,26 @@ interface PriceRange {
   currency: string;
 }
 
+// Helper function to normalize state names consistently
+const normalizeStateName = (stateAbbr: string): string => {
+  return stateAbbr === 'AZ' ? 'Arizona' : 
+         stateAbbr === 'CA' ? 'California' : 
+         stateAbbr === 'CO' ? 'Colorado' :
+         stateAbbr === 'TX' ? 'Texas' :
+         stateAbbr === 'FL' ? 'Florida' :
+         stateAbbr === 'NV' ? 'Nevada' :
+         stateAbbr === 'GA' ? 'Georgia' :
+         stateAbbr === 'IA' ? 'Iowa' :
+         stateAbbr === 'MN' ? 'Minnesota' :
+         stateAbbr === 'WI' ? 'Wisconsin' :
+         stateAbbr === 'OR' ? 'Oregon' :
+         stateAbbr === 'PA' ? 'Pennsylvania' :
+         stateAbbr === 'NY' ? 'New York' :
+         stateAbbr === 'OH' ? 'Ohio' :
+         stateAbbr === 'IN' ? 'Indiana' :
+         stateAbbr;
+};
+
 export const useStorageFacilities = (filters: FilterState) => {
   const { data: maxPriceData } = useQuery({
     queryKey: ['max-facility-price'],
@@ -55,41 +75,45 @@ export const useStorageFacilities = (filters: FilterState) => {
       
       // Apply state filter if selected
       if (filters.selectedState) {
-        // Handle state abbreviations and full names
-        if (filters.selectedState === 'New York') {
-          query = query.or('state.eq.NY,state.eq.New York');
+        // Create an array of possible state values (full name and abbreviation)
+        const stateValues = [];
+        if (filters.selectedState === 'Arizona') {
+          stateValues.push('AZ', 'Arizona');
         } else if (filters.selectedState === 'California') {
-          query = query.or('state.eq.CA,state.eq.California');
+          stateValues.push('CA', 'California');
         } else if (filters.selectedState === 'Texas') {
-          query = query.or('state.eq.TX,state.eq.Texas');
+          stateValues.push('TX', 'Texas');
         } else if (filters.selectedState === 'Florida') {
-          query = query.or('state.eq.FL,state.eq.Florida');
-        } else if (filters.selectedState === 'Arizona') {
-          query = query.or('state.eq.AZ,state.eq.Arizona');
+          stateValues.push('FL', 'Florida');
         } else if (filters.selectedState === 'Nevada') {
-          query = query.or('state.eq.NV,state.eq.Nevada');
+          stateValues.push('NV', 'Nevada');
         } else if (filters.selectedState === 'Georgia') {
-          query = query.or('state.eq.GA,state.eq.Georgia');
+          stateValues.push('GA', 'Georgia');
         } else if (filters.selectedState === 'Colorado') {
-          query = query.or('state.eq.CO,state.eq.Colorado');
+          stateValues.push('CO', 'Colorado');
         } else if (filters.selectedState === 'Iowa') {
-          query = query.or('state.eq.IA,state.eq.Iowa');
+          stateValues.push('IA', 'Iowa');
         } else if (filters.selectedState === 'Minnesota') {
-          query = query.or('state.eq.MN,state.eq.Minnesota');
+          stateValues.push('MN', 'Minnesota');
         } else if (filters.selectedState === 'Wisconsin') {
-          query = query.or('state.eq.WI,state.eq.Wisconsin');
+          stateValues.push('WI', 'Wisconsin');
         } else if (filters.selectedState === 'Oregon') {
-          query = query.or('state.eq.OR,state.eq.Oregon');
+          stateValues.push('OR', 'Oregon');
         } else if (filters.selectedState === 'Pennsylvania') {
-          query = query.or('state.eq.PA,state.eq.Pennsylvania');
+          stateValues.push('PA', 'Pennsylvania');
+        } else if (filters.selectedState === 'New York') {
+          stateValues.push('NY', 'New York');
         } else if (filters.selectedState === 'Ohio') {
-          query = query.or('state.eq.OH,state.eq.Ohio');
+          stateValues.push('OH', 'Ohio');
         } else if (filters.selectedState === 'Indiana') {
-          query = query.or('state.eq.IN,state.eq.Indiana');
+          stateValues.push('IN', 'Indiana');
         } else {
-          // For other states, use direct equality
-          query = query.eq('state', filters.selectedState);
+          // For other states, use direct equality and add the state name
+          stateValues.push(filters.selectedState);
         }
+        
+        // Use in operator to match any of the possible state values
+        query = query.in('state', stateValues);
       }
 
       const { data, error } = await query;
@@ -108,24 +132,8 @@ export const useStorageFacilities = (filters: FilterState) => {
       // Map database results to StorageFacility objects
       const mappedFacilities = data.map(facility => {
         // Normalize state names for display
-        const normalizedState = 
-               facility.state === 'AZ' ? 'Arizona' : 
-               facility.state === 'CA' ? 'California' : 
-               facility.state === 'CO' ? 'Colorado' :
-               facility.state === 'TX' ? 'Texas' :
-               facility.state === 'FL' ? 'Florida' :
-               facility.state === 'NV' ? 'Nevada' :
-               facility.state === 'GA' ? 'Georgia' :
-               facility.state === 'IA' ? 'Iowa' :
-               facility.state === 'MN' ? 'Minnesota' :
-               facility.state === 'WI' ? 'Wisconsin' :
-               facility.state === 'OR' ? 'Oregon' :
-               facility.state === 'PA' ? 'Pennsylvania' :
-               facility.state === 'NY' ? 'New York' :
-               facility.state === 'OH' ? 'Ohio' :
-               facility.state === 'IN' ? 'Indiana' :
-               facility.state;
-        
+        const normalizedState = normalizeStateName(facility.state);
+               
         // Keep original coordinates as-is without validation
         const latitude = facility.latitude;
         const longitude = facility.longitude;

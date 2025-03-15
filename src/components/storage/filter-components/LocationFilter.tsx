@@ -17,6 +17,26 @@ interface LocationFilterProps {
   onStateChange: (state: string | null) => void;
 }
 
+// Helper function to normalize state names consistently
+const normalizeStateName = (stateAbbr: string): string => {
+  return stateAbbr === 'AZ' ? 'Arizona' : 
+         stateAbbr === 'CA' ? 'California' : 
+         stateAbbr === 'CO' ? 'Colorado' :
+         stateAbbr === 'TX' ? 'Texas' :
+         stateAbbr === 'FL' ? 'Florida' :
+         stateAbbr === 'NV' ? 'Nevada' :
+         stateAbbr === 'GA' ? 'Georgia' :
+         stateAbbr === 'IA' ? 'Iowa' :
+         stateAbbr === 'MN' ? 'Minnesota' :
+         stateAbbr === 'WI' ? 'Wisconsin' :
+         stateAbbr === 'OR' ? 'Oregon' :
+         stateAbbr === 'PA' ? 'Pennsylvania' :
+         stateAbbr === 'NY' ? 'New York' :
+         stateAbbr === 'OH' ? 'Ohio' :
+         stateAbbr === 'IN' ? 'Indiana' :
+         stateAbbr;
+};
+
 export const LocationFilter = ({ selectedState, states, onStateChange }: LocationFilterProps) => {
   // Fetch actual state counts directly from the database
   const { data: statesWithCounts, isLoading } = useQuery({
@@ -34,41 +54,27 @@ export const LocationFilter = ({ selectedState, states, onStateChange }: Locatio
           return getStateCountsWithSQL();
         }
         
-        // Count occurrences of each state
-        const stateCounts = data.reduce((acc, item) => {
-          const state = item.state;
-          if (!state) return acc;
-          
-          acc[state] = (acc[state] || 0) + 1;
-          return acc;
-        }, {} as Record<string, number>); // Add explicit type to fix inference
+        // Create map to consolidate counts for both abbreviated and full state names
+        const consolidatedCounts: Record<string, number> = {};
         
-        // Transform to array format and normalize state names
-        return Object.entries(stateCounts).map(([stateAbbr, count]) => {
-          // Normalize state names
-          const normalizedState = 
-            stateAbbr === 'AZ' ? 'Arizona' : 
-            stateAbbr === 'CA' ? 'California' : 
-            stateAbbr === 'CO' ? 'Colorado' :
-            stateAbbr === 'TX' ? 'Texas' :
-            stateAbbr === 'FL' ? 'Florida' :
-            stateAbbr === 'NV' ? 'Nevada' :
-            stateAbbr === 'GA' ? 'Georgia' :
-            stateAbbr === 'IA' ? 'Iowa' :
-            stateAbbr === 'MN' ? 'Minnesota' :
-            stateAbbr === 'WI' ? 'Wisconsin' :
-            stateAbbr === 'OR' ? 'Oregon' :
-            stateAbbr === 'PA' ? 'Pennsylvania' :
-            stateAbbr === 'NY' ? 'New York' :
-            stateAbbr === 'OH' ? 'Ohio' :
-            stateAbbr === 'IN' ? 'Indiana' :
-            stateAbbr;
+        // Count occurrences of each state and normalize them
+        data.forEach(item => {
+          if (!item.state) return;
           
-          return {
-            state: normalizedState,
-            count: Number(count)
-          };
-        }).sort((a, b) => a.state.localeCompare(b.state));
+          // Normalize the state name
+          const normalizedState = normalizeStateName(item.state);
+          
+          // Add to consolidated counts with the normalized name
+          consolidatedCounts[normalizedState] = (consolidatedCounts[normalizedState] || 0) + 1;
+        });
+        
+        // Transform to array format with normalized names only
+        return Object.entries(consolidatedCounts)
+          .map(([stateName, count]) => ({
+            state: stateName,
+            count: count
+          }))
+          .sort((a, b) => a.state.localeCompare(b.state));
       } catch (e) {
         console.error('Error fetching state counts:', e);
         // Fall back to SQL method if query fails

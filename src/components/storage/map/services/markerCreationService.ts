@@ -2,6 +2,26 @@
 import mapboxgl from 'mapbox-gl';
 import { StorageFacility } from '../../types';
 
+// Helper function to normalize state names consistently
+const normalizeStateName = (stateAbbr: string): string => {
+  return stateAbbr === 'AZ' ? 'Arizona' : 
+         stateAbbr === 'CA' ? 'California' : 
+         stateAbbr === 'CO' ? 'Colorado' :
+         stateAbbr === 'TX' ? 'Texas' :
+         stateAbbr === 'FL' ? 'Florida' :
+         stateAbbr === 'NV' ? 'Nevada' :
+         stateAbbr === 'GA' ? 'Georgia' :
+         stateAbbr === 'IA' ? 'Iowa' :
+         stateAbbr === 'MN' ? 'Minnesota' :
+         stateAbbr === 'WI' ? 'Wisconsin' :
+         stateAbbr === 'OR' ? 'Oregon' :
+         stateAbbr === 'PA' ? 'Pennsylvania' :
+         stateAbbr === 'NY' ? 'New York' :
+         stateAbbr === 'OH' ? 'Ohio' :
+         stateAbbr === 'IN' ? 'Indiana' :
+         stateAbbr;
+};
+
 /**
  * Creates a facility marker with proper visibility and positioning
  */

@@ -6,6 +6,26 @@ import Layout from "@/components/layout/Layout";
 import { Warehouse } from "lucide-react";
 import "../styles/force-markers.css"; // Only load the minimal, clean CSS
 
+// Helper function to normalize state names consistently
+const normalizeStateName = (stateAbbr: string): string => {
+  return stateAbbr === 'AZ' ? 'Arizona' : 
+         stateAbbr === 'CA' ? 'California' : 
+         stateAbbr === 'CO' ? 'Colorado' :
+         stateAbbr === 'TX' ? 'Texas' :
+         stateAbbr === 'FL' ? 'Florida' :
+         stateAbbr === 'NV' ? 'Nevada' :
+         stateAbbr === 'GA' ? 'Georgia' :
+         stateAbbr === 'IA' ? 'Iowa' :
+         stateAbbr === 'MN' ? 'Minnesota' :
+         stateAbbr === 'WI' ? 'Wisconsin' :
+         stateAbbr === 'OR' ? 'Oregon' :
+         stateAbbr === 'PA' ? 'Pennsylvania' :
+         stateAbbr === 'NY' ? 'New York' :
+         stateAbbr === 'OH' ? 'Ohio' :
+         stateAbbr === 'IN' ? 'Indiana' :
+         stateAbbr;
+};
+
 // Create a function to count facilities by state without relying on RPC
 // This runs client-side when the Supabase RPC is not available
 export async function getStateCountsWithSQL() {
@@ -21,20 +41,23 @@ export async function getStateCountsWithSQL() {
     return [];
   }
   
-  // Count occurrences of each state
-  const stateCounts = data.reduce((acc, item) => {
-    const state = item.state;
-    if (!state) return acc;
+  // Count occurrences of each state using normalized state names
+  const stateCounts: Record<string, number> = {};
+  data.forEach(item => {
+    if (!item.state) return;
     
-    acc[state] = (acc[state] || 0) + 1;
-    return acc;
-  }, {});
+    // Normalize the state name
+    const normalizedState = normalizeStateName(item.state);
+    
+    // Add to counts with the normalized name
+    stateCounts[normalizedState] = (stateCounts[normalizedState] || 0) + 1;
+  });
   
   // Convert to array format
   return Object.entries(stateCounts).map(([state, count]) => ({
     state,
     count
-  }));
+  })).sort((a, b) => a.state.localeCompare(b.state));
 }
 
 export default function StorageFacilities() {
