@@ -25,21 +25,26 @@
   width: 100% !important;
 }
 
-/* Fix the popup styles - hidden by default, only shown when clicked */
+/* Fix the popup styles - COMPLETELY HIDDEN by default */
 .mapboxgl-popup,
 .direct-popup {
-  z-index: 10000 !important;
+  z-index: -9999 !important;
   display: none !important;
   visibility: hidden !important;
   opacity: 0 !important;
+  pointer-events: none !important;
 }
 
-/* Override for visible popups */
+/* Override for visible popups - only applied when clicked */
 .mapboxgl-popup.visible,
-.direct-popup.visible {
+.direct-popup.visible,
+.mapboxgl-popup.clicked,
+.direct-popup.clicked {
   visibility: visible !important;
   display: block !important;
   opacity: 1 !important;
+  z-index: 10000 !important;
+  pointer-events: auto !important;
 }
 
 /* Fix map height and overflow */
@@ -49,13 +54,17 @@
   overflow: visible !important; /* Critical to prevent clipping */
 }
 
-/* Hide all "View Details" buttons */
+/* Hide all "View Details" buttons - more aggressive selectors */
 .view-facility-btn, 
 button.view-details, 
 a.view-details, 
 .view-details,
 [class*="view-detail"], 
-[id*="view-detail"] {
+[id*="view-detail"],
+button:contains("View Details"),
+a:contains("View Details"),
+*[class*="view"][class*="detail"],
+*[id*="view"][id*="detail"] {
   display: none !important;
   visibility: hidden !important;
   opacity: 0 !important;
@@ -64,4 +73,8 @@ a.view-details,
   width: 0 !important;
   height: 0 !important;
   overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+  z-index: -9999 !important;
 }

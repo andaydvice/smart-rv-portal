@@ -42,23 +42,49 @@
       }
     });
     
-    // Hide all popups by default
+    // AGGRESSIVELY hide all popups except clicked ones
     document.querySelectorAll('.mapboxgl-popup, .direct-popup').forEach(popup => {
-      if (popup instanceof HTMLElement && !popup.classList.contains('clicked')) {
+      if (popup instanceof HTMLElement && 
+          !popup.classList.contains('clicked') && 
+          !popup.classList.contains('visible')) {
         popup.style.display = 'none';
         popup.style.visibility = 'hidden';
         popup.style.opacity = '0';
+        popup.style.zIndex = '-9999';
+        popup.style.pointerEvents = 'none';
       }
     });
     
-    // Remove any view details buttons
-    document.querySelectorAll('.view-facility-btn, button.view-details, a.view-details, .view-details').forEach(btn => {
+    // Remove any view details buttons - more aggressive approach
+    document.querySelectorAll('.view-facility-btn, button.view-details, a.view-details, .view-details, [class*="view-detail"], [id*="view-detail"]').forEach(btn => {
       if (btn instanceof HTMLElement) {
         btn.style.display = 'none';
         btn.style.visibility = 'hidden';
         btn.style.opacity = '0';
         btn.style.width = '0';
         btn.style.height = '0';
+        btn.style.padding = '0';
+        btn.style.margin = '0';
+        btn.style.border = 'none';
+        btn.style.pointerEvents = 'none';
+        
+        // Remove from DOM
+        if (btn.parentNode) {
+          btn.parentNode.removeChild(btn);
+        }
+      }
+    });
+    
+    // Also look for any button or link with text containing "view" and "detail"
+    document.querySelectorAll('button, a').forEach(el => {
+      if (el instanceof HTMLElement) {
+        const text = el.textContent?.toLowerCase() || '';
+        if (text.includes('view') && text.includes('detail')) {
+          // Remove from DOM
+          if (el.parentNode) {
+            el.parentNode.removeChild(el);
+          }
+        }
       }
     });
   }
@@ -131,16 +157,18 @@
           padding: 10px !important;
           border-radius: 4px !important;
           max-width: 200px !important;
-          z-index: 10000 !important;
+          z-index: -9999 !important;
           display: none !important;
           visibility: hidden !important;
           opacity: 0 !important;
+          pointer-events: none !important;
         `;
         
         popup.innerHTML = `
           <div style="margin-bottom: 5px; font-weight: bold;">${location.name}</div>
           <div style="margin-bottom: 5px;">${location.state}</div>
           <div>Coordinates: ${location.lat.toFixed(2)}, ${location.lng.toFixed(2)}</div>
+          <button style="position:absolute; right:5px; top:5px; background:none; border:none; color:white; font-size:16px; cursor:pointer;" class="popup-close">×</button>
         `;
         
         // Add to container
@@ -149,25 +177,58 @@
         
         // Add click handler to toggle popup
         marker.addEventListener('click', () => {
-          const isVisible = popup.style.display === 'block';
-          popup.style.display = isVisible ? 'none' : 'block';
-          popup.style.visibility = isVisible ? 'hidden' : 'visible';
-          popup.style.opacity = isVisible ? '0' : '1';
+          // Hide all other popups first
+          document.querySelectorAll('.emergency-popup').forEach(p => {
+            if (p.id !== popup.id) {
+              p.style.display = 'none';
+              p.style.visibility = 'hidden';
+              p.style.opacity = '0';
+              p.style.zIndex = '-9999';
+              p.style.pointerEvents = 'none';
+              p.classList.remove('clicked');
+            }
+          });
           
-          // Toggle clicked class
+          const isVisible = popup.style.display === 'block';
           if (isVisible) {
+            popup.style.display = 'none';
+            popup.style.visibility = 'hidden';
+            popup.style.opacity = '0';
+            popup.style.zIndex = '-9999';
+            popup.style.pointerEvents = 'none';
             popup.classList.remove('clicked');
           } else {
+            popup.style.display = 'block';
+            popup.style.visibility = 'visible';
+            popup.style.opacity = '1';
+            popup.style.zIndex = '10000';
+            popup.style.pointerEvents = 'auto';
             popup.classList.add('clicked');
           }
         });
         
-        // Add close handler for clicking outside popup
-        document.addEventListener('click', (e) => {
-          if (e.target !== marker && e.target !== popup && !popup.contains(e.target)) {
+        // Add close button handler
+        const closeButton = popup.querySelector('.popup-close');
+        if (closeButton) {
+          closeButton.addEventListener('click', (e) => {
+            e.stopPropagation();
             popup.style.display = 'none';
             popup.style.visibility = 'hidden';
             popup.style.opacity = '0';
+            popup.style.zIndex = '-9999';
+            popup.style.pointerEvents = 'none';
+            popup.classList.remove('clicked');
+          });
+        }
+        
+        // Close when clicking outside
+        document.addEventListener('click', (e) => {
+          if (e.target !== marker && !popup.contains(e.target)) {
+            popup.style.display = 'none';
+            popup.style.visibility = 'hidden';
+            popup.style.opacity = '0'; 
+            popup.style.zIndex = '-9999';
+            popup.style.pointerEvents = 'none';
             popup.classList.remove('clicked');
           }
         });

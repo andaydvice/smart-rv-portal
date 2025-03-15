@@ -35,7 +35,7 @@ export function createDirectMarker(
     top: 50% !important;
   `;
   
-  // Create a simple popup element
+  // Create a simple popup element - HIDDEN BY DEFAULT
   const popup = document.createElement('div');
   popup.className = 'direct-popup mapboxgl-popup';
   popup.id = `direct-popup-${facility.id}`;
@@ -46,22 +46,25 @@ export function createDirectMarker(
     padding: 10px;
     border-radius: 4px;
     max-width: 250px;
-    z-index: 10000;
+    z-index: -9999;
     display: none;
     visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
     box-shadow: 0 2px 10px rgba(0,0,0,0.2);
     left: 50%;
     top: 40%;
     transform: translateX(-50%);
   `;
   
-  // Set popup content
+  // Set popup content WITHOUT view details button
   popup.innerHTML = `
     <h3 style="margin: 0; font-size: 14px; font-weight: bold;">${facility.name}</h3>
     <p style="margin: 5px 0 0; font-size: 12px;">${facility.address}</p>
     <p style="margin: 5px 0 0; font-size: 12px;">${facility.city}, ${facility.state}</p>
     ${facility.price_range ? 
       `<p style="margin: 5px 0 0; font-size: 12px;">Price: $${facility.price_range.min} - $${facility.price_range.max}</p>` : ''}
+    <button style="position:absolute; right:5px; top:5px; background:none; border:none; color:white; font-size:16px; cursor:pointer;" class="popup-close">×</button>
   `;
   
   // Position marker on map if coordinates and map are available
@@ -87,17 +90,76 @@ export function createDirectMarker(
     mapContainer.appendChild(marker);
     mapContainer.appendChild(popup);
     
-    // Add click handler to marker
+    // Add click handler to marker - toggle popup ONLY on click
     marker.addEventListener('click', (e) => {
       e.stopPropagation();
       
+      // Hide all other popups first
+      document.querySelectorAll('.direct-popup, .mapboxgl-popup').forEach(p => {
+        if (p.id !== popup.id) {
+          p.style.display = 'none';
+          p.style.visibility = 'hidden';
+          p.style.opacity = '0';
+          p.style.zIndex = '-9999';
+          p.style.pointerEvents = 'none';
+          p.classList.remove('visible');
+          p.classList.remove('clicked');
+        }
+      });
+      
       // Toggle popup visibility
       const isVisible = popup.style.display === 'block';
-      popup.style.display = isVisible ? 'none' : 'block';
-      popup.style.visibility = isVisible ? 'hidden' : 'visible';
+      
+      if (isVisible) {
+        // Hide this popup
+        popup.style.display = 'none';
+        popup.style.visibility = 'hidden';
+        popup.style.opacity = '0';
+        popup.style.zIndex = '-9999';
+        popup.style.pointerEvents = 'none';
+        popup.classList.remove('visible');
+        popup.classList.remove('clicked');
+      } else {
+        // Show this popup
+        popup.style.display = 'block';
+        popup.style.visibility = 'visible';
+        popup.style.opacity = '1';
+        popup.style.zIndex = '10000';
+        popup.style.pointerEvents = 'auto';
+        popup.classList.add('visible');
+        popup.classList.add('clicked');
+      }
       
       // Log click for debugging
       console.log(`Clicked direct marker ${facility.id}`);
+    });
+    
+    // Add close button handler
+    const closeButton = popup.querySelector('.popup-close');
+    if (closeButton) {
+      closeButton.addEventListener('click', (e) => {
+        e.stopPropagation();
+        popup.style.display = 'none';
+        popup.style.visibility = 'hidden';
+        popup.style.opacity = '0';
+        popup.style.zIndex = '-9999';
+        popup.style.pointerEvents = 'none';
+        popup.classList.remove('visible');
+        popup.classList.remove('clicked');
+      });
+    }
+    
+    // Close popup when clicking outside
+    document.addEventListener('click', (e) => {
+      if (e.target !== marker && !popup.contains(e.target as Node)) {
+        popup.style.display = 'none';
+        popup.style.visibility = 'hidden';
+        popup.style.opacity = '0';
+        popup.style.zIndex = '-9999';
+        popup.style.pointerEvents = 'none';
+        popup.classList.remove('visible');
+        popup.classList.remove('clicked');
+      }
     });
     
     console.log(`Added direct marker ${facility.id} to map container`);
@@ -125,6 +187,17 @@ export function createDirectMarkers(
   // Create markers for each facility
   facilities.forEach(facility => {
     createDirectMarker(facility, map);
+  });
+  
+  // Ensure all popups are hidden initially
+  document.querySelectorAll('.direct-popup, .mapboxgl-popup').forEach(popup => {
+    popup.style.display = 'none';
+    popup.style.visibility = 'hidden';
+    popup.style.opacity = '0';
+    popup.style.zIndex = '-9999';
+    popup.style.pointerEvents = 'none';
+    (popup as HTMLElement).classList.remove('visible');
+    (popup as HTMLElement).classList.remove('clicked');
   });
   
   console.log('Direct marker creation complete');

@@ -7,7 +7,7 @@ import { StorageFacility } from '../types';
 import MapLoadingState from './MapLoadingState';
 import { toast } from "sonner";
 import { createDirectMarkers } from './utils/directMarkerCreation';
-import { removeViewDetailsButtons } from '@/utils/markers/forcing/uiManipulation';
+import { removeViewDetailsButtons, hideAllPopups } from '@/utils/markers/forcing/uiManipulation';
 
 interface MapContainerProps {
   facilities: StorageFacility[];
@@ -77,6 +77,32 @@ const MapContainer: React.FC<MapContainerProps> = ({
     // Aggressively remove any "View Details" buttons
     removeViewDetailsButtons();
     
+    // Hide all popups initially
+    hideAllPopups();
+    
+    // Add global click handler to close popups when clicking outside
+    const handleGlobalClick = (e: MouseEvent) => {
+      // Don't close popups if clicking on a marker or inside a popup
+      if ((e.target as HTMLElement)?.closest('.mapboxgl-marker, .custom-marker, .direct-marker, .mapboxgl-popup, .direct-popup')) {
+        return;
+      }
+      
+      // Close all popups
+      document.querySelectorAll('.mapboxgl-popup, .direct-popup').forEach(popup => {
+        if (popup instanceof HTMLElement) {
+          popup.style.display = 'none';
+          popup.style.visibility = 'hidden';
+          popup.style.opacity = '0';
+          popup.style.zIndex = '-9999';
+          popup.style.pointerEvents = 'none';
+          popup.classList.remove('visible');
+          popup.classList.remove('clicked');
+        }
+      });
+    };
+    
+    document.addEventListener('click', handleGlobalClick);
+    
     // Periodically force markers to be visible and popups to be hidden
     const forceMarkerStates = () => {
       // Force markers to be visible
@@ -90,9 +116,12 @@ const MapContainer: React.FC<MapContainerProps> = ({
       
       // Hide all popups by default, except for clicked ones
       document.querySelectorAll('.mapboxgl-popup, .direct-popup').forEach(popup => {
-        if (popup instanceof HTMLElement && !popup.classList.contains('clicked')) {
+        if (popup instanceof HTMLElement && !popup.classList.contains('clicked') && !popup.classList.contains('visible')) {
           popup.style.display = 'none';
           popup.style.visibility = 'hidden';
+          popup.style.opacity = '0';
+          popup.style.zIndex = '-9999';
+          popup.style.pointerEvents = 'none';
         }
       });
       
@@ -107,6 +136,7 @@ const MapContainer: React.FC<MapContainerProps> = ({
     // Clean up on unmount
     return () => {
       clearInterval(intervalId);
+      document.removeEventListener('click', handleGlobalClick);
     };
   }, [map, mapLoaded, facilities, selectedState]);
   
@@ -134,12 +164,29 @@ const MapContainer: React.FC<MapContainerProps> = ({
           marker.style.zIndex = '10000';
           marker.style.boxShadow = '0 0 20px rgba(16, 185, 129, 0.8)';
           
+          // Close all other popups first
+          document.querySelectorAll('.mapboxgl-popup, .direct-popup').forEach(popup => {
+            if (popup.id !== `direct-popup-${facility.id}`) {
+              popup.classList.remove('clicked');
+              popup.classList.remove('visible');
+              (popup as HTMLElement).style.display = 'none';
+              (popup as HTMLElement).style.visibility = 'hidden';
+              (popup as HTMLElement).style.opacity = '0';
+              (popup as HTMLElement).style.zIndex = '-9999';
+              (popup as HTMLElement).style.pointerEvents = 'none';
+            }
+          });
+          
           // Show the popup for the highlighted facility
           const popup = document.getElementById(`direct-popup-${facility.id}`);
           if (popup) {
             popup.style.display = 'block';
             popup.style.visibility = 'visible';
+            popup.style.opacity = '1';
+            popup.style.zIndex = '10000';
+            popup.style.pointerEvents = 'auto';
             popup.classList.add('clicked');
+            popup.classList.add('visible');
           }
         }
       }
