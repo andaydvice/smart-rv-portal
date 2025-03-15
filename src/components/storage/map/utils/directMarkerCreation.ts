@@ -15,6 +15,8 @@ export function createDirectMarker(
   const marker = document.createElement('div');
   marker.className = 'direct-marker mapboxgl-marker custom-marker';
   marker.id = `direct-marker-${facility.id}`;
+  marker.setAttribute('data-facility-id', facility.id);
+  marker.setAttribute('data-state', facility.state);
   
   // Set critical styling to guarantee visibility
   marker.style.cssText = `
@@ -198,8 +200,8 @@ export function createDirectMarkers(
     (popup as HTMLElement).style.opacity = '0';
     (popup as HTMLElement).style.zIndex = '-9999';
     (popup as HTMLElement).style.pointerEvents = 'none';
-    (popup as HTMLElement).classList.remove('visible');
-    (popup as HTMLElement).classList.remove('clicked');
+    popup.classList.remove('visible');
+    popup.classList.remove('clicked');
   });
   
   console.log('Direct marker creation complete');

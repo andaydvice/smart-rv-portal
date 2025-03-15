@@ -16,7 +16,7 @@ interface LocationFilterProps {
 }
 
 export const LocationFilter = ({ selectedState, states, onStateChange }: LocationFilterProps) => {
-  // Hard-coded state counts that match what we expect in Supabase
+  // Hard-coded state counts that match our expected marker counts
   const { data: statesWithCounts, isLoading } = useQuery({
     queryKey: ['all-state-counts'],
     queryFn: async () => {
@@ -27,7 +27,7 @@ export const LocationFilter = ({ selectedState, states, onStateChange }: Locatio
         { state: "Florida", count: 1 },
         { state: "Georgia", count: 15 },
         { state: "Indiana", count: 7 },
-        { state: "Iowa", count: 1 }, // Changed from "Lowa" to "Iowa" for correctness
+        { state: "Iowa", count: 1 },
         { state: "Minnesota", count: 1 },
         { state: "Nevada", count: 1 },
         { state: "New York", count: 7 },
