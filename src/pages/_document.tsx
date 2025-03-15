@@ -1,17 +1,13 @@
 
-import { Html, Head, Main, NextScript } from 'next/document'
+import React from 'react';
 
-export default function Document() {
+// This file was incorrectly using Next.js features in a Vite/React app
+// Instead, we should use index.html for document-level configuration
+// This component now provides a simple wrapper that can be used if needed
+export default function Document({ children }: { children?: React.ReactNode }) {
   return (
-    <Html lang="en">
-      <Head>
-        {/* Emergency marker script - load early */}
-        <script src="/emergencyMarkers.js" defer />
-      </Head>
-      <body className="min-h-screen bg-[#080F1F] text-white">
-        <Main />
-        <NextScript />
-      </body>
-    </Html>
+    <div className="document-root">
+      {children}
+    </div>
   );
 }
