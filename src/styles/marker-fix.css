@@ -1,12 +1,12 @@
 
 /* CRITICAL - Force marker visibility - ultra-high-specificity selectors */
-html body .mapboxgl-marker,
-html body .custom-marker,
-html body .marker,
-html body [class*="marker"],
-html body div[class*="marker"],
+html body .mapboxgl-map .mapboxgl-marker,
+html body .mapboxgl-map .custom-marker,
+html body .mapboxgl-map .marker,
+html body .mapboxgl-map [class*="marker"],
+html body .mapboxgl-map div[class*="marker"],
 html body .mapboxgl-canvas-container .mapboxgl-marker,
-html body .emergency-marker {
+html body .mapboxgl-map .emergency-marker {
   display: block !important;
   visibility: visible !important;
   opacity: 1 !important;
@@ -17,8 +17,7 @@ html body .emergency-marker {
   transform: translate(-50%, -50%) !important;
 }
 
-/* Remove unwanted debug markers in header */
-/* This targets the unwanted orange markers in header */
+/* Remove unwanted debug markers in header - highly specific selectors */
 .marker-free-zone .fixed-orange-marker,
 .marker-free-zone .orange-marker-indicator,
 .marker-free-zone .emergency-marker,
@@ -26,6 +25,7 @@ html body .emergency-marker {
 .marker-free-zone .mapboxgl-marker,
 .marker-free-zone .direct-marker,
 .marker-free-zone div[class*="marker"],
+.marker-free-zone [class*="marker"],
 .no-markers-allowed .fixed-orange-marker,
 .no-markers-allowed .orange-marker-indicator,
 .no-markers-allowed .emergency-marker,
@@ -33,6 +33,7 @@ html body .emergency-marker {
 .no-markers-allowed .mapboxgl-marker,
 .no-markers-allowed .direct-marker,
 .no-markers-allowed div[class*="marker"],
+.no-markers-allowed [class*="marker"],
 header .fixed-orange-marker,
 header .orange-marker-indicator,
 header .emergency-marker,

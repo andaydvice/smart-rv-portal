@@ -65,17 +65,17 @@ export default function StorageFacilities() {
     <Layout>
       <Navbar />
       <div className="min-h-screen w-full bg-[#080F1F] text-white">
-        {/* Hero Header with Image - Applying specific classes to prevent marker display in header */}
-        <div className="relative w-full h-[400px] marker-free-zone no-markers-allowed">
+        {/* Hero Header with Image - Applying fixed height and improved marker prevention */}
+        <div className="relative w-full h-[450px] marker-free-zone no-markers-allowed overflow-visible z-10">
           <img 
             src="/lovable-uploads/e9503bf4-354a-4790-8a83-fefea32abc5b.png" 
             alt="Indoor RV Storage Facility" 
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-[#080F1F] to-transparent">
-            <Container className="h-full flex flex-col justify-center items-center" fullWidth>
-              <div className="text-center max-w-3xl bg-black/40 backdrop-blur-sm p-6 rounded-lg">
-                <h1 className="text-4xl md:text-5xl font-bold text-white">
+            <Container className="h-full flex flex-col justify-center items-center mt-0 pt-0" fullWidth>
+              <div className="text-center max-w-3xl bg-black/40 backdrop-blur-sm p-8 rounded-lg mt-8">
+                <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
                   Indoor RV Storage Facilities
                 </h1>
                 <p className="text-lg text-gray-300 max-w-2xl mx-auto">
@@ -86,7 +86,7 @@ export default function StorageFacilities() {
           </div>
         </div>
         
-        <Container fullWidth className="px-2 md:px-4">
+        <Container fullWidth className="px-2 md:px-4 mt-6">
           <div className="py-8">
             <StorageFacilitiesMap />
           </div>
