@@ -16,7 +16,7 @@ interface LocationFilterProps {
 }
 
 export const LocationFilter = ({ selectedState, states, onStateChange }: LocationFilterProps) => {
-  // Hard-coded state counts that match our expected marker counts
+  // Hard-coded state counts that match exact numbers to be displayed on the map
   const { data: statesWithCounts, isLoading } = useQuery({
     queryKey: ['all-state-counts'],
     queryFn: async () => {

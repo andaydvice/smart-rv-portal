@@ -17,14 +17,7 @@ export default function StorageFacilities() {
       
       // Emergency marker data - hardcoded to ensure visibility
       const emergencyLocations = [
-        { id: "em1", lat: 33.4484, lng: -112.0740, name: "Arizona Storage" },
-        { id: "em2", lat: 36.7783, lng: -119.4179, name: "California Storage" },
-        { id: "em3", lat: 31.9686, lng: -99.9018, name: "Texas Storage" },
-        { id: "em4", lat: 27.6648, lng: -81.5158, name: "Florida Storage" },
-        { id: "em5", lat: 43.2994, lng: -74.2179, name: "New York Storage" },
-        { id: "em6", lat: 41.4925, lng: -99.9018, name: "Nebraska Storage" },
-        { id: "em7", lat: 44.5000, lng: -89.5000, name: "Wisconsin Storage" },
-        { id: "em8", lat: 42.0346, lng: -93.6218, name: "Iowa Storage" }
+        { id: "em1", lat: 33.4484, lng: -112.0740, name: "Arizona Storage", state: "Arizona" }
       ];
       
       // Find all map elements
@@ -34,12 +27,20 @@ export default function StorageFacilities() {
       mapElements.forEach((mapElement, mapIndex) => {
         // For each emergency location, create a marker
         emergencyLocations.forEach((location, index) => {
+          // Check if we already have a marker with this ID
+          const existingMarker = document.getElementById(`emergency-marker-${location.id}-${mapIndex}`);
+          if (existingMarker) {
+            console.log(`Marker ${location.id} already exists, skipping`);
+            return;
+          }
+          
           // Create marker element
           const marker = document.createElement('div');
           marker.className = 'emergency-marker';
           marker.id = `emergency-marker-${location.id}-${mapIndex}`;
           marker.setAttribute('data-lat', location.lat.toString());
           marker.setAttribute('data-lng', location.lng.toString());
+          marker.setAttribute('data-state', location.state);
           
           // Set critical inline styles to guarantee visibility
           marker.style.cssText = `
@@ -84,7 +85,6 @@ export default function StorageFacilities() {
           popup.innerHTML = `
             <h3 style="margin: 0; font-size: 14px; font-weight: bold;">${location.name}</h3>
             <p style="margin: 5px 0 0; font-size: 12px;">Lat: ${location.lat}, Lng: ${location.lng}</p>
-            <button style="margin-top: 8px; padding: 4px 8px; background: #4B8FE3; border: none; color: white; border-radius: 4px; cursor: pointer;">Details</button>
           `;
           
           mapElement.appendChild(popup);
