@@ -1,12 +1,13 @@
 
 /* CRITICAL - Force marker visibility - ultra-high-specificity selectors */
-html body .mapboxgl-map .mapboxgl-marker,
-html body .mapboxgl-map .custom-marker,
-html body .mapboxgl-map .marker,
-html body .mapboxgl-map [class*="marker"],
-html body .mapboxgl-map div[class*="marker"],
-html body .mapboxgl-canvas-container .mapboxgl-marker,
-html body .mapboxgl-map .emergency-marker {
+/* Only target markers inside the map container - increased specificity */
+.map-container .mapboxgl-map .mapboxgl-marker,
+.map-container .mapboxgl-map .custom-marker,
+.map-container .mapboxgl-map .marker,
+.map-container .mapboxgl-map [class*="marker"],
+.map-container .mapboxgl-map div[class*="marker"],
+.map-container .mapboxgl-canvas-container .mapboxgl-marker,
+.map-container .mapboxgl-map .emergency-marker {
   display: block !important;
   visibility: visible !important;
   opacity: 1 !important;
@@ -90,15 +91,15 @@ header .direct-marker,
   white-space: normal !important;
 }
 
-/* Ensure map container is visible and has enough space for popups */
+/* Ensure map container is visible with proper spacing and no header markers */
 .mapboxgl-map {
   visibility: visible !important;
   opacity: 1 !important;
   overflow: visible !important;
   height: 100% !important;
   width: 100% !important;
-  padding-bottom: 60px !important;
-  padding-top: 60px !important;
+  margin-top: 20px !important;
+  clear: both !important;
 }
 
 .mapboxgl-canvas-container,
@@ -124,7 +125,22 @@ header .direct-marker,
 .h-\[600px\] {
   min-height: 600px !important;
   overflow: visible !important;
-  padding: 60px 0 !important;
+  margin-top: 30px !important;
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+/* Enhanced map container spacing */
+.map-container {
+  padding-top: 30px !important;
+  margin-top: 30px !important;
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+/* Ensure proper scroll behavior and prevent header/map overlay */
+.min-h-screen {
+  padding-bottom: 40px !important;
 }
 
 /* Ensure popups have proper spacing and don't get cut off */

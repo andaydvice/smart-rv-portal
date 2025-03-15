@@ -65,16 +65,16 @@ export default function StorageFacilities() {
     <Layout>
       <Navbar />
       <div className="min-h-screen w-full bg-[#080F1F] text-white">
-        {/* Hero Header with Image - Applying fixed height and improved marker prevention */}
-        <div className="relative w-full h-[450px] marker-free-zone no-markers-allowed overflow-visible z-10">
+        {/* Hero Header with Image - Clear separation from map content */}
+        <div className="relative w-full h-[400px] marker-free-zone no-markers-allowed">
           <img 
             src="/lovable-uploads/e9503bf4-354a-4790-8a83-fefea32abc5b.png" 
             alt="Indoor RV Storage Facility" 
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-[#080F1F] to-transparent">
-            <Container className="h-full flex flex-col justify-center items-center mt-0 pt-0" fullWidth>
-              <div className="text-center max-w-3xl bg-black/40 backdrop-blur-sm p-8 rounded-lg mt-8">
+            <Container className="h-full flex flex-col justify-center items-center" fullWidth>
+              <div className="text-center max-w-3xl bg-black/40 backdrop-blur-sm p-8 rounded-lg">
                 <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
                   Indoor RV Storage Facilities
                 </h1>
@@ -86,8 +86,12 @@ export default function StorageFacilities() {
           </div>
         </div>
         
-        <Container fullWidth className="px-2 md:px-4 mt-6">
-          <div className="py-8">
+        {/* Increased vertical spacing between header and map (mb-16) */}
+        <div className="mb-16"></div>
+        
+        {/* Map container with explicit separation from header */}
+        <Container fullWidth className="px-2 md:px-4">
+          <div className="py-8 mt-8 map-container">
             <StorageFacilitiesMap />
           </div>
         </Container>
@@ -123,6 +127,14 @@ export default function StorageFacilities() {
             opacity: 0 !important;
             pointer-events: none !important;
             z-index: -9999 !important;
+          }
+          
+          /* Ensure proper spacing for map container */
+          .map-container {
+            margin-top: 40px;
+            padding-top: 20px;
+            position: relative;
+            z-index: 1;
           }
         `}
       </style>
