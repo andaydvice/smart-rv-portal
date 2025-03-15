@@ -50,7 +50,7 @@ const MapContainer: React.FC<MapContainerProps> = ({
       toast.success(`Showing ${facilities.length} locations${selectedState ? ` in ${selectedState}` : ''}`);
     }
     
-    // Fit bounds to show all markers
+    // Fit bounds to show all markers with extra padding to prevent popup clipping
     if (facilities.length > 0 && map) {
       const bounds = new mapboxgl.LngLatBounds();
       
@@ -67,10 +67,16 @@ const MapContainer: React.FC<MapContainerProps> = ({
       
       if (!bounds.isEmpty()) {
         map.fitBounds(bounds, {
-          padding: { top: 50, bottom: 50, left: 50, right: 50 },
+          padding: { top: 80, bottom: 80, left: 50, right: 50 }, // Increased top/bottom padding
           maxZoom: 15
         });
       }
+    }
+    
+    // Add safety padding to the map container to prevent popup clipping
+    const mapContainer = map.getContainer();
+    if (mapContainer) {
+      mapContainer.style.padding = '30px';
     }
     
     // Aggressively remove any "View Details" buttons
@@ -149,8 +155,26 @@ const MapContainer: React.FC<MapContainerProps> = ({
       const lng = parseFloat(String(facility.longitude));
       
       if (!isNaN(lat) && !isNaN(lng)) {
+        // Check position relative to map bounds to determine best popup placement
+        const mapBounds = map.getBounds();
+        const mapCenter = map.getCenter();
+        const isNearTop = lat > (mapBounds.getNorth() - (mapBounds.getNorth() - mapBounds.getSouth()) * 0.3);
+        const isNearBottom = lat < (mapBounds.getSouth() + (mapBounds.getNorth() - mapBounds.getSouth()) * 0.3);
+        
+        // Adjust the center point to ensure popup has room to display
+        const adjustedCenter = [lng, lat];
+        
+        // If near top edge, move the center down slightly
+        if (isNearTop) {
+          adjustedCenter[1] = lat - 0.02;
+        } 
+        // If near bottom edge, move the center up slightly
+        else if (isNearBottom) {
+          adjustedCenter[1] = lat + 0.02;
+        }
+        
         map.flyTo({
-          center: [lng, lat],
+          center: adjustedCenter,
           zoom: 14,
           essential: true
         });

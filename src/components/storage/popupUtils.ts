@@ -68,6 +68,7 @@ export const createPopupHTML = (facility: StorageFacility) => {
           display: block !important;
           max-width: 300px !important;
           width: auto !important;
+          margin: 10px !important;
         }
         .mapboxgl-popup-content {
           z-index: 1100 !important;
@@ -79,6 +80,7 @@ export const createPopupHTML = (facility: StorageFacility) => {
           width: auto !important;
           max-width: 300px !important;
           word-break: break-word !important;
+          max-height: none !important;
         }
         .mapboxgl-popup-close-button {
           z-index: 1110 !important;
@@ -94,6 +96,19 @@ export const createPopupHTML = (facility: StorageFacility) => {
           word-break: break-word !important;
           overflow: visible !important;
           max-height: none !important;
+        }
+        /* Fix anchor positions to ensure popup is always fully visible */
+        .mapboxgl-popup-anchor-top .mapboxgl-popup-tip {
+          border-bottom-color: #131a2a !important;
+        }
+        .mapboxgl-popup-anchor-bottom .mapboxgl-popup-tip {
+          border-top-color: #131a2a !important;
+        }
+        .mapboxgl-popup-anchor-left .mapboxgl-popup-tip {
+          border-right-color: #131a2a !important;
+        }
+        .mapboxgl-popup-anchor-right .mapboxgl-popup-tip {
+          border-left-color: #131a2a !important;
         }
       </style>
     </div>

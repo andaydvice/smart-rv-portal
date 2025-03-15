@@ -39,14 +39,15 @@ export function createFacilityMarker(
   el.setAttribute('data-marker-type', 'facility');
   el.setAttribute('data-state', facility.state);
   
-  // Create properly positioned popup with fixed width
+  // Create properly positioned popup with smart positioning
   const popup = new mapboxgl.Popup({
     closeButton: true,
     closeOnClick: false,
     maxWidth: '300px',
     className: `facility-popup popup-${facility.id}`,
     offset: [0, -15],
-    anchor: 'bottom',
+    // Change from anchor: 'bottom' to auto to allow flexibility in popup positioning
+    anchor: 'auto',
     focusAfterOpen: false
   });
   

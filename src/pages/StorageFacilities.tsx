@@ -3,7 +3,6 @@ import { Container } from "@/components/ui/container";
 import StorageFacilitiesMap from "@/components/storage/StorageFacilitiesMap";
 import Navbar from "@/components/Navbar";
 import Layout from "@/components/layout/Layout";
-import { Warehouse } from "lucide-react";
 import "../styles/force-markers.css"; // Only load the minimal, clean CSS
 
 // Helper function to normalize state names consistently
@@ -65,8 +64,8 @@ export default function StorageFacilities() {
     <Layout>
       <Navbar />
       <div className="min-h-screen w-full bg-[#080F1F] text-white">
-        {/* Hero Header with Image */}
-        <div className="relative w-full h-[400px]">
+        {/* Hero Header with Image - Applying specific classes to prevent marker display in header */}
+        <div className="relative w-full h-[400px] marker-free-zone">
           <img 
             src="/lovable-uploads/e9503bf4-354a-4790-8a83-fefea32abc5b.png" 
             alt="Indoor RV Storage Facility" 
@@ -92,6 +91,20 @@ export default function StorageFacilities() {
           </div>
         </Container>
       </div>
+      
+      {/* Style to hide any markers in the header section */}
+      <style jsx global>{`
+        /* Hide any markers in the header area */
+        .marker-free-zone .mapboxgl-marker,
+        .marker-free-zone .custom-marker,
+        .marker-free-zone .emergency-marker,
+        .marker-free-zone .fixed-orange-marker {
+          display: none !important;
+          visibility: hidden !important;
+          opacity: 0 !important;
+          pointer-events: none !important;
+        }
+      `}</style>
     </Layout>
   );
 }
