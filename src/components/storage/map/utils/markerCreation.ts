@@ -17,8 +17,8 @@ export function createFacilityMarker(
   // Force critical styling directly
   el.style.cssText = `
     background-color: ${isHighlighted ? '#10B981' : '#F97316'};
-    width: 24px !important;
-    height: 24px !important;
+    width: ${isHighlighted ? '28px' : '24px'} !important;
+    height: ${isHighlighted ? '28px' : '24px'} !important;
     border-radius: 50% !important;
     border: 2px solid white !important;
     cursor: pointer !important;
@@ -35,6 +35,7 @@ export function createFacilityMarker(
   // Set data attributes
   el.setAttribute('data-facility-id', facility.id);
   el.setAttribute('data-marker-type', 'facility');
+  el.setAttribute('data-state', facility.state);
   
   // Create properly positioned popup with fixed width
   const popup = new mapboxgl.Popup({

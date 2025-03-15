@@ -7,14 +7,14 @@ import { Warehouse } from "lucide-react";
 import { useEffect } from 'react';
 import "../styles/map-fixes.css";
 import "../styles/map-optimizations.css";
-import "../styles/marker-fix.css"; // Add this emergency marker fix
-import "../styles/emergency-marker-fix.css"; // Add this emergency marker fix
+import "../styles/marker-fix.css"; 
+import "../styles/emergency-marker-fix.css";
 
 export default function StorageFacilities() {
   useEffect(() => {
     console.log("StorageFacilities: Component mounted");
     
-    // Apply emergency marker and popup fixes
+    // Apply emergency marker and popup fixes immediately
     const applyMarkerFixes = () => {
       console.log("Applying marker and popup visibility fixes");
       const style = document.createElement('style');
@@ -24,6 +24,8 @@ export default function StorageFacilities() {
           display: block !important;
           opacity: 1 !important;
           z-index: 999 !important;
+          position: absolute !important;
+          transform: translate(-50%, -50%) !important;
         }
         .mapboxgl-popup {
           z-index: 1000 !important;
@@ -43,6 +45,17 @@ export default function StorageFacilities() {
         .view-facility-btn, .view-details {
           display: none !important;
         }
+        .mapboxgl-canvas-container, .mapboxgl-canvas {
+          height: 100% !important;
+          width: 100% !important;
+        }
+        .h-[600px] {
+          min-height: 600px !important;
+          overflow: visible !important;
+        }
+        .mapboxgl-map {
+          overflow: visible !important;
+        }
       `;
       document.head.appendChild(style);
       
@@ -53,6 +66,7 @@ export default function StorageFacilities() {
           marker.style.display = 'block';
           marker.style.opacity = '1';
           marker.style.zIndex = '999';
+          marker.style.position = 'absolute';
         }
       });
     };
@@ -65,6 +79,13 @@ export default function StorageFacilities() {
       const markers = document.querySelectorAll('.mapboxgl-marker, .custom-marker');
       console.log(`Found ${markers.length} markers - applying visibility fixes`);
       applyMarkerFixes();
+      
+      // Patch marker transform if needed
+      document.querySelectorAll('.mapboxgl-marker, .custom-marker').forEach(marker => {
+        if (marker instanceof HTMLElement && !marker.style.transform.includes('translate')) {
+          marker.style.transform = 'translate(-50%, -50%)';
+        }
+      });
     }, 2000);
     
     // Flag for emergency script

@@ -17,9 +17,9 @@ body .mapboxgl-canvas-container .mapboxgl-marker {
 
 /* Remove unwanted debug markers in header */
 /* This targets the unwanted orange markers in header */
-header .fixed-orange-marker,
+header .fixed-orange-marker:not(.hero-marker),
 header .orange-marker-indicator,
-header .emergency-marker,
+header .emergency-marker:not(.hero-marker),
 .debug-marker {
   display: none !important;
   visibility: hidden !important;
@@ -84,12 +84,26 @@ header .emergency-marker,
   padding: 15px !important;
   border: 1px solid rgb(55 65 81) !important;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5) !important;
+  max-width: 300px !important;
+  min-width: 220px !important;
+  width: auto !important;
+  overflow: visible !important;
 }
 
 /* Ensure map container is visible */
 .mapboxgl-map {
   visibility: visible !important;
   opacity: 1 !important;
+  overflow: visible !important;
+  height: 100% !important;
+  width: 100% !important;
+}
+
+.mapboxgl-canvas-container,
+.mapboxgl-canvas {
+  height: 100% !important;
+  width: 100% !important;
+  overflow: visible !important;
 }
 
 /* Highlighted marker specific styles */
@@ -106,4 +120,26 @@ header .emergency-marker,
 /* Style marker buttons */
 .view-facility-btn {
   display: none !important; /* Hidden as requested */
+}
+
+/* Fix for map container positioning */
+.h-\[600px\] {
+  min-height: 600px !important;
+  overflow: visible !important;
+}
+
+/* Fix for markers being cut off at bottom of map */
+.mapboxgl-map {
+  padding-bottom: 60px !important;
+}
+
+/* Make markers visible in all contexts */
+#root .mapboxgl-marker,
+#__next .mapboxgl-marker,
+main .mapboxgl-marker,
+.card .mapboxgl-marker,
+div[class^="bg-"] .mapboxgl-marker {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
 }

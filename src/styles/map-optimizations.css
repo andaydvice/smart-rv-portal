@@ -3,9 +3,6 @@
 .mapboxgl-popup {
   z-index: 1000 !important;
   position: absolute !important;
-  top: auto !important;
-  left: auto !important;
-  transform: none !important; 
   pointer-events: auto !important;
   max-width: 300px !important;
   width: auto !important;
@@ -51,22 +48,15 @@
 }
 
 /* Fix for marker visibility and popup position */
-.custom-marker {
+.custom-marker,
+.mapboxgl-marker {
   visibility: visible !important;
   display: block !important;
   opacity: 1 !important;
   pointer-events: auto !important;
-}
-
-/* Set popup positioning correctly */
-.mapboxgl-popup {
-  transform: translate(-50%, -100%) !important;
-  pointer-events: auto !important;
-}
-
-/* Fix for popup appearing in the header area */
-.mapboxgl-popup.mapboxgl-popup-anchor-bottom {
-  margin-top: -30px !important;
+  position: absolute !important;
+  transform: translate(-50%, -50%) !important;
+  z-index: 999 !important;
 }
 
 /* Prevent text overflow and ensure proper wrapping */
@@ -118,6 +108,8 @@ body .mapboxgl-map .custom-marker {
   display: block !important;
   opacity: 1 !important;
   z-index: 999 !important;
+  position: absolute !important;
+  transform: translate(-50%, -50%) !important;
 }
 
 /* Fix for hidden popups */
@@ -132,10 +124,42 @@ body .mapboxgl-map .mapboxgl-popup {
 .custom-marker[data-state] {
   visibility: visible !important;
   display: block !important;
+  position: absolute !important;
+}
+
+/* Fix for map container */
+.mapboxgl-map {
+  height: 100% !important;
+  width: 100% !important;
+  overflow: visible !important;
+}
+
+.mapboxgl-canvas-container,
+.mapboxgl-canvas {
+  height: 100% !important;
+  width: 100% !important;
+}
+
+/* Fix for markers that exceed container bounds */
+.h-\[600px\] {
+  min-height: 600px !important;
+  overflow: visible !important;
+  position: relative !important;
+}
+
+/* Fix marker count display */
+.absolute.top-2.left-2.z-50 {
+  z-index: 10000 !important;
+  background-color: rgba(0, 0, 0, 0.8) !important;
+  padding: 6px 8px !important;
+  border-radius: 4px !important;
+  font-weight: bold !important;
 }
 
 /* Fix for popup width on mobile */
-@media (max-width:.mapboxgl-popup-content {
-  max-width: 220px !important;
-  min-width: 180px !important;
+@media (max-width: 768px) {
+  .mapboxgl-popup-content {
+    max-width: 220px !important;
+    min-width: 180px !important;
+  }
 }
