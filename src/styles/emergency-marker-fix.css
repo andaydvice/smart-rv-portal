@@ -50,6 +50,15 @@
   pointer-events: auto !important;
   position: absolute !important;
   z-index: 9999 !important;
+  
+  /* Force marker appearance */
+  width: 24px !important;
+  height: 24px !important;
+  border-radius: 50% !important;
+  background-color: #F97316 !important;
+  border: 2px solid white !important;
+  box-shadow: 0 0 10px rgba(0,0,0,0.5) !important;
+  cursor: pointer !important;
 }
 
 /* Override any animations or transitions affecting visibility */

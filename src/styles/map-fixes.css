@@ -62,6 +62,9 @@ a.view-details {
 
 .mapboxgl-canvas {
   outline: none !important;
+  visibility: visible !important;
+  display: block !important;
+  opacity: 1 !important;
 }
 
 /* Make sure controls are visible */
@@ -80,6 +83,18 @@ a.view-details {
   width: 100% !important;
   word-break: break-word !important;
   overflow: visible !important;
+}
+
+/* Force all markers to be visible with correct appearance */
+.custom-marker {
+  background-color: #F97316 !important;
+  width: 24px !important;
+  height: 24px !important;
+  border-radius: 50% !important;
+  border: 2px solid white !important;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3) !important;
+  transform: translate(-50%, -50%) !important;
+  cursor: pointer !important;
 }
 
 /* Fix for mobile support */

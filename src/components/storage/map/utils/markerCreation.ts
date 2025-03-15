@@ -50,19 +50,29 @@ export function createFacilityMarker(
   // Set popup data attribute for CSS targeting
   popup.addClassName(`popup-${facility.id}`);
   
-  // Create simplified HTML content - trim long text values
-  const cityState = `${facility.city}, ${facility.state}`;
-  const address = facility.address;
-  const name = facility.name;
-  
-  // Simplified popup content without the "view details" button
+  // Create HTML content - full popup content with all information
   popup.setHTML(`
-    <div class="facility-popup-content p-4" data-facility-id="${facility.id}">
-      <h3 class="text-lg font-semibold mb-1">${name}</h3>
-      <p class="text-xs mb-1">${address}</p>
-      <p class="text-xs mb-1">${cityState}</p>
-      <p class="text-xs mb-2">Price: $${facility.price_range.min} - $${facility.price_range.max}</p>
-      ${facility.contact_phone ? `<p class="text-xs mb-1">Phone: ${facility.contact_phone}</p>` : ''}
+    <div class="facility-popup-content p-4 bg-[#131a2a] text-white" data-facility-id="${facility.id}">
+      <h3 class="text-lg font-semibold mb-1 text-[#60A5FA]">${facility.name}</h3>
+      <div class="space-y-1 text-sm">
+        <p>${facility.address}</p>
+        <p>${facility.city}, ${facility.state}</p>
+        <p class="mt-2 font-semibold text-[#F97316]">Price: $${facility.price_range.min} - $${facility.price_range.max}</p>
+        ${facility.contact_phone ? `<p class="mt-1">Phone: ${facility.contact_phone}</p>` : ''}
+      </div>
+      
+      ${Object.values(facility.features).some(v => v) ? `
+        <div class="mt-2 border-t border-gray-700 pt-2">
+          <p class="text-xs text-gray-400 mb-1">Features:</p>
+          <div class="flex flex-wrap gap-1">
+            ${facility.features.indoor ? '<span class="text-xs bg-[#1a2235] text-[#60A5FA] px-2 py-0.5 rounded">Indoor</span>' : ''}
+            ${facility.features.climate_controlled ? '<span class="text-xs bg-[#1a2235] text-[#60A5FA] px-2 py-0.5 rounded">Climate Controlled</span>' : ''}
+            ${facility.features["24h_access"] ? '<span class="text-xs bg-[#1a2235] text-[#60A5FA] px-2 py-0.5 rounded">24/7 Access</span>' : ''}
+            ${facility.features.security_system ? '<span class="text-xs bg-[#1a2235] text-[#60A5FA] px-2 py-0.5 rounded">Security</span>' : ''}
+            ${facility.features.vehicle_washing ? '<span class="text-xs bg-[#1a2235] text-[#60A5FA] px-2 py-0.5 rounded">Vehicle Washing</span>' : ''}
+          </div>
+        </div>
+      ` : ''}
     </div>
   `);
 
@@ -120,107 +130,6 @@ export function createFacilityMarker(
           }
         }
       }, 50);
-    }
-  });
-
-  // Handle popup close button properly
-  marker.getPopup().on('close', () => {
-    // Ensure map remains visible when popup is closed
-    if (map) {
-      setTimeout(() => {
-        // Make sure map canvas is visible
-        const canvas = map.getCanvas();
-        if (canvas) {
-          canvas.style.visibility = 'visible';
-          canvas.style.display = 'block';
-        }
-        
-        // Force all markers to be visible
-        document.querySelectorAll('.mapboxgl-marker, .custom-marker').forEach(m => {
-          if (m instanceof HTMLElement) {
-            m.style.visibility = 'visible';
-            m.style.display = 'block';
-            m.style.opacity = '1';
-          }
-        });
-      }, 50);
-    }
-  });
-
-  // Once the popup is added, set up event listeners on it
-  marker.getPopup().on('open', () => {
-    // Get the popup element
-    const popupEl = marker.getPopup().getElement();
-    if (popupEl) {
-      // Set facility ID data attribute on popup
-      popupEl.setAttribute('data-facility-id', facility.id);
-      
-      // Ensure popup has the right styles
-      popupEl.style.zIndex = '10000';
-      popupEl.style.visibility = 'visible';
-      popupEl.style.pointerEvents = 'all';
-      popupEl.style.maxWidth = '300px';
-      popupEl.style.width = 'auto';
-      
-      // Make close button work properly
-      const closeButton = popupEl.querySelector('.mapboxgl-popup-close-button');
-      if (closeButton instanceof HTMLElement) {
-        closeButton.style.pointerEvents = 'all';
-        closeButton.style.cursor = 'pointer';
-        
-        // Clear existing event listeners
-        const newCloseButton = closeButton.cloneNode(true);
-        closeButton.parentNode?.replaceChild(newCloseButton, closeButton);
-        
-        // Add new event listener
-        newCloseButton.addEventListener('click', (e) => {
-          e.stopPropagation();
-          e.preventDefault();
-          
-          // Close the popup
-          marker.getPopup().remove();
-          
-          // Ensure map is visible after popup closes
-          setTimeout(() => {
-            if (map) {
-              // Make sure map canvas is visible
-              const canvas = map.getCanvas();
-              if (canvas) {
-                canvas.style.visibility = 'visible';
-                canvas.style.display = 'block';
-              }
-              
-              // Force markers to be visible
-              document.querySelectorAll('.mapboxgl-marker, .custom-marker').forEach(m => {
-                if (m instanceof HTMLElement) {
-                  m.style.visibility = 'visible';
-                  m.style.display = 'block';
-                  m.style.opacity = '1';
-                }
-              });
-            }
-          }, 50);
-        });
-      }
-      
-      // Hide any existing view details buttons
-      popupEl.querySelectorAll('.view-facility-btn, .view-details, button.view-details, a.view-details').forEach(btn => {
-        if (btn instanceof HTMLElement) {
-          btn.style.display = 'none';
-          btn.style.visibility = 'hidden';
-          btn.style.opacity = '0';
-          btn.style.pointerEvents = 'none';
-        }
-      });
-      
-      // Set content element styles
-      const contentEl = popupEl.querySelector('.mapboxgl-popup-content');
-      if (contentEl instanceof HTMLElement) {
-        contentEl.style.minWidth = '220px';
-        contentEl.style.width = 'auto';
-        contentEl.style.maxWidth = '300px';
-        contentEl.style.overflow = 'visible';
-      }
     }
   });
 

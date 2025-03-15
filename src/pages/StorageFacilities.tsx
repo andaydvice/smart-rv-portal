@@ -7,6 +7,8 @@ import { Warehouse } from "lucide-react";
 import { useEffect } from 'react';
 import "../styles/map-fixes.css";
 import "../styles/map-optimizations.css";
+import "../styles/marker-fix.css"; // Add this emergency marker fix
+import "../styles/emergency-marker-fix.css"; // Add this emergency marker fix
 
 export default function StorageFacilities() {
   useEffect(() => {
@@ -43,15 +45,39 @@ export default function StorageFacilities() {
         }
       `;
       document.head.appendChild(style);
+      
+      // Force visibility of any existing markers
+      document.querySelectorAll('.mapboxgl-marker, .custom-marker').forEach(marker => {
+        if (marker instanceof HTMLElement) {
+          marker.style.visibility = 'visible';
+          marker.style.display = 'block';
+          marker.style.opacity = '1';
+          marker.style.zIndex = '999';
+        }
+      });
     };
     
     // Apply fixes immediately
     applyMarkerFixes();
     
     // And repeatedly to ensure they stick
-    const fixInterval = setInterval(applyMarkerFixes, 2000);
+    const fixInterval = setInterval(() => {
+      const markers = document.querySelectorAll('.mapboxgl-marker, .custom-marker');
+      console.log(`Found ${markers.length} markers - applying visibility fixes`);
+      applyMarkerFixes();
+    }, 2000);
+    
+    // Flag for emergency script
+    window.isStorageFacilitiesPage = true;
+    
+    // Load emergency marker script
+    const script = document.createElement('script');
+    script.src = '/markerFix.js';
+    script.async = true;
+    document.head.appendChild(script);
     
     return () => {
+      window.isStorageFacilitiesPage = false;
       clearInterval(fixInterval);
     };
   }, []);
@@ -71,7 +97,7 @@ export default function StorageFacilities() {
             <Container className="h-full flex flex-col justify-center items-center" fullWidth>
               <div className="text-center max-w-3xl bg-black/40 backdrop-blur-sm p-6 rounded-lg">
                 <div className="flex items-center justify-center gap-2 mb-2">
-                  <div className="w-8 h-8 bg-[#F97316] rounded-full border-2 border-white shadow-lg animate-pulse"></div>
+                  <div className="w-8 h-8 bg-[#F97316] rounded-full border-2 border-white shadow-lg animate-pulse fixed-orange-marker hero-marker"></div>
                   <Warehouse className="h-7 w-7 text-[#F97316]" />
                   <h1 className="text-4xl md:text-5xl font-bold text-white">
                     Indoor RV Storage Facilities

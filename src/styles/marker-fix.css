@@ -28,7 +28,7 @@ header .emergency-marker,
 }
 
 /* Keep only the legitimate marker in the hero section */
-.relative.w-full.h-\[400px\] .fixed-orange-marker {
+.relative.w-full.h-\[400px\] .fixed-orange-marker.hero-marker {
   display: block !important;
   visibility: visible !important;
   opacity: 1 !important;
@@ -64,7 +64,7 @@ header .emergency-marker,
   animation: pulse 1.5s infinite ease-in-out;
 }
 
-.fixed-orange-marker {
+.fixed-orange-marker.hero-marker {
   animation: header-pulse 1.5s infinite ease-in-out;
 }
 
@@ -100,6 +100,7 @@ header .emergency-marker,
   transform: scale(1.2) translate(-42%, -42%) !important;
   width: 28px !important;
   height: 28px !important;
+  background-color: #10B981 !important;
 }
 
 /* Style marker buttons */
