@@ -2,16 +2,15 @@
 import React, { createContext, useContext, useEffect, useRef, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
 import { toast } from "sonner";
-import { 
-  initializeMapboxGL, 
-  createMapInstance, 
-  waitForMapStyleLoad,
-  configureMapSettings,
-  setupMapEventListeners,
-  createMapClickHandler
-} from './utils/mapboxInit';
-import { useMapStyles } from './hooks/useMapStyles';
-import { usePopupClickHandler } from './hooks/usePopupClickHandler';
+
+// Initialize function to prepare Mapbox
+const initializeMapboxGL = () => {
+  if (!mapboxgl.supported()) {
+    console.error('Your browser does not support Mapbox GL');
+    return false;
+  }
+  return true;
+};
 
 // Initialize Mapbox
 initializeMapboxGL();
@@ -39,7 +38,7 @@ export const useMap = () => {
   return context;
 };
 
-// Export an alias for backward compatibility
+// Export alias for backward compatibility
 export const useMapContext = useMap;
 
 interface MapProviderProps {
@@ -58,12 +57,6 @@ export const MapProvider: React.FC<MapProviderProps> = ({
   const [mapLoaded, setMapLoaded] = useState(false);
   const activePopupRef = useRef<mapboxgl.Popup | null>(null);
 
-  // Apply global styles for mapbox elements
-  useMapStyles();
-  
-  // Set up global popup click handler
-  usePopupClickHandler();
-
   // Initialize map
   useEffect(() => {
     if (!mapContainer.current || !mapToken) return;
@@ -80,46 +73,41 @@ export const MapProvider: React.FC<MapProviderProps> = ({
           map.current = null;
         }
 
-        if (mapToken.includes('Error')) {
-          throw new Error('Invalid Mapbox token received');
-        }
-
         console.log('Creating new map instance');
         
-        // Reference the DOM element before using it
-        const mapContainerEl = mapContainer.current;
-        if (!mapContainerEl) {
-          throw new Error('Map container element not found');
-        }
+        // Set access token
+        mapboxgl.accessToken = mapToken;
         
-        // Create new map instance with the existing ref
-        const newMap = createMapInstance(mapContainerEl, mapToken);
+        // Create new map instance
+        const newMap = new mapboxgl.Map({
+          container: mapContainer.current,
+          style: 'mapbox://styles/mapbox/dark-v11',
+          center: [-95.7129, 37.0902], // Center on US
+          zoom: 3,
+          attributionControl: true,
+          preserveDrawingBuffer: true
+        });
 
-        // Wait for style to load
-        console.log('Waiting for map style to load');
-        await waitForMapStyleLoad(newMap);
+        // Wait for map to load
+        newMap.on('load', () => {
+          console.log('Map loaded successfully');
+          if (isMounted) {
+            map.current = newMap;
+            setMapError(null);
+            setIsInitializing(false);
+            setMapLoaded(true);
+            toast.success('Map loaded successfully');
+          }
+        });
         
-        if (!isMounted) return;
-
-        console.log('Map style loaded successfully');
-        
-        // Configure map settings
-        configureMapSettings(newMap);
-        
-        // Enable essential interactions
+        // Enable interactions
         newMap.dragPan.enable();
         newMap.scrollZoom.enable();
         newMap.doubleClickZoom.enable();
-
-        // Set up event listeners
-        setupMapEventListeners(newMap);
         
-        // Add click handler to map container to prevent closing popups
-        createMapClickHandler(newMap.getContainer());
-
-        // Force a resize to ensure proper rendering
-        setTimeout(() => newMap.resize(), 100);
-
+        // Add navigation controls
+        newMap.addControl(new mapboxgl.NavigationControl(), 'top-right');
+        
         // Set up error handling
         newMap.on('error', (e) => {
           console.error('Map error:', e);
@@ -129,15 +117,6 @@ export const MapProvider: React.FC<MapProviderProps> = ({
             toast.error(`Map error: ${e.error?.message || 'Unknown error'}`);
           }
         });
-
-        // Complete initialization
-        if (isMounted) {
-          map.current = newMap;
-          setMapError(null);
-          setIsInitializing(false);
-          setMapLoaded(true);
-          toast.success('Map loaded successfully');
-        }
 
       } catch (err) {
         console.error('Map initialization error:', err);

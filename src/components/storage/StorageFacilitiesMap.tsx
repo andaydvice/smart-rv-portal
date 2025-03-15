@@ -1,7 +1,7 @@
 
 "use client";
 
-import React, { useState, useEffect, useCallback, useMemo } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Card } from '@/components/ui/card';
 import FilterPanel from './FilterPanel';
 import { FilterState } from './types';
@@ -35,7 +35,7 @@ const StorageFacilitiesMap = () => {
   const { recentlyViewed, addToRecentlyViewed } = useRecentlyViewed();
   const { mapToken, mapTokenError } = useMapToken();
   
-  // State-specific counts for debugging
+  // Log state-specific counts for debugging
   useEffect(() => {
     if (allFacilities && allFacilities.length > 0) {
       const stateMap = new Map<string, number>();
@@ -50,16 +50,6 @@ const StorageFacilitiesMap = () => {
       Array.from(stateMap.entries()).sort(([a], [b]) => a.localeCompare(b)).forEach(([state, count]) => {
         console.log(`${state}: ${count} facilities`);
       });
-      
-      // Also log facility IDs for states with few facilities for easy verification
-      ['Arizona', 'Nevada', 'Oregon'].forEach(state => {
-        if (stateMap.has(state) && stateMap.get(state)! < 5) {
-          const stateIds = allFacilities
-            .filter(f => f.state === state)
-            .map(f => f.id);
-          console.log(`${state} facility IDs:`, stateIds);
-        }
-      });
     }
   }, [allFacilities]);
   
@@ -72,6 +62,7 @@ const StorageFacilitiesMap = () => {
   });
   
   const handleFilterChange = useCallback((newFilters: FilterState) => {
+    console.log('Filter changed:', newFilters);
     setFilters(prevFilters => {
       if (JSON.stringify(prevFilters) === JSON.stringify(newFilters)) {
         return prevFilters;
@@ -80,7 +71,7 @@ const StorageFacilitiesMap = () => {
     });
   }, []);
   
-  // Clear highlight when state filter changes
+  // Reset highlight when filter changes
   useEffect(() => {
     if (filters.selectedState) {
       const facilityInState = allFacilities?.find(f => 
@@ -88,7 +79,6 @@ const StorageFacilitiesMap = () => {
       );
       
       if (!facilityInState) {
-        // Reset highlighted facility if it's not in the currently selected state
         handleFacilityClick(null, allFacilities || []);
       }
     }
@@ -98,6 +88,15 @@ const StorageFacilitiesMap = () => {
     console.log(`Marker clicked: ${facilityId}`);
     handleFacilityClick(facilityId, allFacilities || []);
   }, [handleFacilityClick, allFacilities]);
+
+  // Log when map token is received
+  useEffect(() => {
+    if (mapToken) {
+      console.log('Map token received');
+    } else if (mapTokenError) {
+      console.error('Map token error:', mapTokenError);
+    }
+  }, [mapToken, mapTokenError]);
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 min-h-[800px]">

@@ -6,9 +6,10 @@
   display: block !important;
   opacity: 1 !important;
   z-index: 999 !important;
+  pointer-events: auto !important;
 }
 
-/* Fix popup positioning */
+/* Make popups appear above other elements */
 .mapboxgl-popup {
   z-index: 1000 !important;
   max-width: 300px !important;
@@ -37,4 +38,32 @@ a.view-details {
   visibility: hidden !important;
   opacity: 0 !important;
   pointer-events: none !important;
+}
+
+/* Additional fixes for common issues */
+.mapboxgl-canvas-container {
+  height: 100% !important;
+  width: 100% !important;
+}
+
+.mapboxgl-canvas {
+  outline: none !important;
+}
+
+/* Make sure controls are visible */
+.mapboxgl-ctrl-group {
+  background-color: #151A22 !important;
+  border-radius: 4px !important;
+}
+
+.mapboxgl-ctrl button {
+  background-color: transparent !important;
+  color: white !important;
+}
+
+/* Fix for mobile support */
+@media (max-width: 768px) {
+  .mapboxgl-popup-content {
+    max-width: 200px !important;
+  }
 }

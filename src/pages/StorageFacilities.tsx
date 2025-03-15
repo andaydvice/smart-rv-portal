@@ -11,23 +11,35 @@ export default function StorageFacilities() {
   useEffect(() => {
     console.log("StorageFacilities: Component mounted");
     
-    // Apply some basic style fixes
-    const style = document.createElement('style');
-    style.textContent = `
-      .mapboxgl-popup {
-        z-index: 1000 !important;
-      }
-      .mapboxgl-marker {
-        visibility: visible !important;
-        display: block !important;
-      }
-    `;
-    document.head.appendChild(style);
+    // Apply emergency marker fixes
+    const applyMarkerFixes = () => {
+      console.log("Applying marker visibility fixes");
+      const style = document.createElement('style');
+      style.innerHTML = `
+        .mapboxgl-marker, .custom-marker {
+          visibility: visible !important;
+          display: block !important;
+          opacity: 1 !important;
+          z-index: 999 !important;
+        }
+        .mapboxgl-popup {
+          z-index: 1000 !important;
+        }
+        .view-facility-btn, .view-details {
+          display: none !important;
+        }
+      `;
+      document.head.appendChild(style);
+    };
+    
+    // Apply fixes immediately
+    applyMarkerFixes();
+    
+    // And repeatedly to ensure they stick
+    const fixInterval = setInterval(applyMarkerFixes, 2000);
     
     return () => {
-      if (style.parentNode) {
-        style.parentNode.removeChild(style);
-      }
+      clearInterval(fixInterval);
     };
   }, []);
 

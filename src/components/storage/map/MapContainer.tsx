@@ -1,9 +1,10 @@
 
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { useMap } from './MapContext';
 import { StorageFacility } from '../types';
+import MapLoadingState from './MapLoadingState';
 import { toast } from "sonner";
 
 interface MapContainerProps {
@@ -19,79 +20,62 @@ const MapContainer: React.FC<MapContainerProps> = ({
   onMarkerClick,
   selectedState
 }) => {
-  const { mapToken } = useMap();
-  const mapContainer = useRef<HTMLDivElement>(null);
-  const map = useRef<mapboxgl.Map | null>(null);
-  const [mapLoaded, setMapLoaded] = useState(false);
-  const markersRef = useRef<{[id: string]: mapboxgl.Marker}>({});
-  const [activeMarkers, setActiveMarkers] = useState<number>(0);
+  const { mapContainer, mapLoaded, isInitializing, mapError, map } = useMap();
+  const [markersCreated, setMarkersCreated] = useState<boolean>(false);
+  const [visibleMarkerCount, setVisibleMarkerCount] = useState<number>(0);
   
-  // Initialize map
-  useEffect(() => {
-    if (!mapContainer.current || map.current) return;
-    
-    mapboxgl.accessToken = mapToken;
-    
-    map.current = new mapboxgl.Map({
-      container: mapContainer.current,
-      style: 'mapbox://styles/mapbox/dark-v11',
-      center: [-95.7129, 37.0902], // Center on US
-      zoom: 3,
-      minZoom: 2,
-      maxZoom: 18
-    });
-    
-    map.current.on('load', () => {
-      setMapLoaded(true);
-      console.log('Map loaded successfully');
-    });
-    
-    return () => {
-      if (map.current) {
-        map.current.remove();
-        map.current = null;
-      }
-    };
-  }, [mapToken]);
+  // Track and manage markers
+  const markersRef = React.useRef<{[id: string]: mapboxgl.Marker}>({});
   
-  // Clear markers and create new ones when facilities or highlighted facility changes
+  // Log props for debugging
   useEffect(() => {
-    if (!map.current || !mapLoaded) return;
+    console.log(`MapContainer received ${facilities.length} facilities`);
+    console.log(`Selected state: ${selectedState || 'none'}`);
+    console.log(`Map loaded: ${mapLoaded}, Map initialized: ${!isInitializing}`);
     
-    // Clear existing markers
-    Object.values(markersRef.current).forEach(marker => marker.remove());
+    if (map && facilities.length > 0) {
+      console.log('Map is ready and has facilities to display');
+    }
+  }, [facilities, selectedState, mapLoaded, isInitializing, map]);
+
+  // Clear and create markers when dependencies change
+  useEffect(() => {
+    if (!map || isInitializing || !mapLoaded) {
+      console.log('Map not ready yet, skipping marker creation');
+      return;
+    }
+    
+    // Remove existing markers
+    Object.values(markersRef.current).forEach(marker => {
+      marker.remove();
+    });
     markersRef.current = {};
     
-    // Filter facilities by state if selected
-    const facilitiesToShow = selectedState 
-      ? facilities.filter(f => f.state === selectedState)
-      : facilities;
+    console.log(`Creating markers for ${facilities.length} facilities${selectedState ? ` in ${selectedState}` : ''}`);
     
-    console.log(`Creating markers for ${facilitiesToShow.length} facilities${selectedState ? ` in ${selectedState}` : ''}`);
-    
-    // Create markers for filtered facilities
+    // Track valid markers
     let validMarkerCount = 0;
     
-    facilitiesToShow.forEach(facility => {
-      // Skip facilities without valid coordinates
+    // Create markers for all facilities
+    facilities.forEach(facility => {
       if (!facility.latitude || !facility.longitude) {
         console.warn(`Facility ${facility.id} has invalid coordinates`);
         return;
       }
       
-      const lat = parseFloat(facility.latitude.toString());
-      const lng = parseFloat(facility.longitude.toString());
+      const lat = parseFloat(String(facility.latitude));
+      const lng = parseFloat(String(facility.longitude));
       
-      if (isNaN(lat) || isNaN(lng) || Math.abs(lat) > 90 || Math.abs(lng) > 180) {
+      if (isNaN(lat) || isNaN(lng) || lat === 0 || lng === 0) {
         console.warn(`Facility ${facility.id} has invalid coordinates: ${lat}, ${lng}`);
         return;
       }
-      
+
       // Create marker element
       const el = document.createElement('div');
       el.className = 'custom-marker';
       
-      // Set marker style based on highlight state
+      // Set styling based on highlight state
       const isHighlighted = facility.id === highlightedFacility;
       el.style.cssText = `
         background-color: ${isHighlighted ? '#10B981' : '#F97316'};
@@ -102,9 +86,15 @@ const MapContainer: React.FC<MapContainerProps> = ({
         cursor: pointer;
         box-shadow: ${isHighlighted ? '0 0 20px rgba(16, 185, 129, 0.8)' : '0 0 10px rgba(0,0,0,0.3)'};
         transform: translate(-50%, -50%) ${isHighlighted ? 'scale(1.2)' : ''};
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        z-index: 999 !important;
+        visibility: visible !important;
+        display: block !important;
       `;
       
-      // Create popup with facility details
+      // Create popup
       const popup = new mapboxgl.Popup({
         closeButton: true,
         closeOnClick: false,
@@ -113,7 +103,7 @@ const MapContainer: React.FC<MapContainerProps> = ({
         className: 'facility-popup'
       });
       
-      // Set popup content (without View Details button)
+      // Set popup content
       popup.setHTML(`
         <div class="facility-popup-content">
           <h3 class="text-lg font-semibold mb-1">${facility.name}</h3>
@@ -124,88 +114,109 @@ const MapContainer: React.FC<MapContainerProps> = ({
         </div>
       `);
       
-      // Create and add marker to map
+      // Create marker
       const marker = new mapboxgl.Marker({
         element: el,
         anchor: 'center'
       })
       .setLngLat([lng, lat])
       .setPopup(popup)
-      .addTo(map.current);
+      .addTo(map);
       
-      // Add click handler
-      el.addEventListener('click', () => {
+      // Add click event
+      el.addEventListener('click', (e) => {
+        e.stopPropagation();
         onMarkerClick(facility.id);
       });
       
-      // Store marker reference for later cleanup
+      // Store marker reference
       markersRef.current[facility.id] = marker;
       validMarkerCount++;
     });
     
-    // Update active markers count for display
-    setActiveMarkers(validMarkerCount);
+    setVisibleMarkerCount(validMarkerCount);
     
-    // Set map bounds to show all markers
+    // Update progress
     if (validMarkerCount > 0) {
-      // Calculate bounds
-      const bounds = new mapboxgl.LngLatBounds();
-      
-      facilitiesToShow.forEach(facility => {
-        if (facility.latitude && facility.longitude) {
-          const lat = parseFloat(facility.latitude.toString());
-          const lng = parseFloat(facility.longitude.toString());
-          
-          if (!isNaN(lat) && !isNaN(lng) && Math.abs(lat) <= 90 && Math.abs(lng) <= 180) {
-            bounds.extend([lng, lat]);
-          }
-        }
-      });
-      
-      // Only fit bounds if we have valid coordinates
-      if (!bounds.isEmpty()) {
-        map.current.fitBounds(bounds, {
-          padding: 50,
-          maxZoom: 12
-        });
-      }
-    }
-    
-    // Add CSS to fix popup positioning
-    const style = document.createElement('style');
-    style.textContent = `
-      .mapboxgl-popup {
-        z-index: 10 !important;
-      }
-      .mapboxgl-popup-content {
-        background-color: #151A22 !important;
-        color: white !important;
-        border-radius: 8px !important;
-      }
-      .mapboxgl-popup-close-button {
-        color: white !important;
-      }
-      .view-facility-btn, .view-details {
-        display: none !important;
-      }
-    `;
-    document.head.appendChild(style);
-    
-    console.log(`Created ${validMarkerCount} markers out of ${facilitiesToShow.length} facilities`);
-    
-    if (validMarkerCount > 0) {
+      setMarkersCreated(true);
       toast.success(`Showing ${validMarkerCount} locations${selectedState ? ` in ${selectedState}` : ''}`);
-    } else if (facilitiesToShow.length > 0) {
+    } else if (facilities.length > 0) {
       toast.error(`No valid locations found${selectedState ? ` in ${selectedState}` : ''}`);
     }
     
-  }, [facilities, highlightedFacility, map, mapLoaded, onMarkerClick, selectedState]);
+    // Fit bounds if we have markers
+    if (validMarkerCount > 0) {
+      const bounds = new mapboxgl.LngLatBounds();
+      
+      Object.values(markersRef.current).forEach(marker => {
+        bounds.extend(marker.getLngLat());
+      });
+      
+      map.fitBounds(bounds, {
+        padding: { top: 50, bottom: 50, left: 50, right: 50 },
+        maxZoom: 15
+      });
+    }
+    
+    // Helper function to make markers visible
+    const forceMarkersVisible = () => {
+      const markers = document.querySelectorAll('.mapboxgl-marker, .custom-marker');
+      console.log(`Found ${markers.length} markers - applying visibility fixes`);
+      
+      markers.forEach(marker => {
+        (marker as HTMLElement).style.visibility = 'visible';
+        (marker as HTMLElement).style.display = 'block';
+        (marker as HTMLElement).style.opacity = '1';
+        (marker as HTMLElement).style.zIndex = '999';
+      });
+    };
+    
+    // Apply visibility fixes after a short delay
+    setTimeout(forceMarkersVisible, 500);
+    
+    // Apply fixes again after map movements
+    map.on('moveend', forceMarkersVisible);
+    map.on('zoomend', forceMarkersVisible);
+    
+    return () => {
+      // Clean up event listeners
+      map.off('moveend', forceMarkersVisible);
+      map.off('zoomend', forceMarkersVisible);
+    };
+  }, [facilities, map, mapLoaded, isInitializing, highlightedFacility, onMarkerClick, selectedState]);
   
+  // Focus on specific facility when highlighted
+  useEffect(() => {
+    if (!map || !mapLoaded || !highlightedFacility) return;
+    
+    const marker = markersRef.current[highlightedFacility];
+    if (marker) {
+      map.flyTo({
+        center: marker.getLngLat(),
+        zoom: 14,
+        essential: true
+      });
+      
+      // Open popup for highlighted facility
+      marker.togglePopup();
+    }
+  }, [highlightedFacility, map, mapLoaded]);
+
   return (
     <div className="w-full h-full relative">
       <div ref={mapContainer} className="w-full h-full rounded-lg overflow-hidden" />
+      
+      {/* Loading and error states */}
+      <MapLoadingState 
+        isInitializing={isInitializing} 
+        mapError={mapError} 
+        mapLoaded={mapLoaded} 
+        facilitiesCount={facilities.length}
+      />
+      
+      {/* Debug overlay */}
       <div className="absolute top-2 left-2 z-50 bg-black/60 text-white text-xs p-2 rounded">
-        {activeMarkers} visible markers | {facilities.length} total facilities
+        {visibleMarkerCount} visible markers | {facilities.length} total facilities
         {selectedState && ` | ${selectedState}`}
       </div>
     </div>

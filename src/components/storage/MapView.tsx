@@ -19,6 +19,9 @@ const MapView: React.FC<MapViewProps> = ({
   onMarkerClick,
   selectedState
 }) => {
+  // Simple logging to confirm props being passed
+  console.log(`MapView rendering with ${facilities.length} facilities, selected state: ${selectedState}`);
+  
   return (
     <div className="w-full h-full">
       <MapProvider mapToken={mapToken}>
