@@ -24,6 +24,7 @@ type MapContextType = {
   isInitializing: boolean;
   mapError: string | null;
   activePopupRef: React.MutableRefObject<mapboxgl.Popup | null>;
+  mapToken: string;
 };
 
 // Create context with default values
@@ -37,6 +38,9 @@ export const useMap = () => {
   }
   return context;
 };
+
+// Export an alias for backward compatibility
+export const useMapContext = useMap;
 
 interface MapProviderProps {
   mapToken: string;
@@ -168,7 +172,8 @@ export const MapProvider: React.FC<MapProviderProps> = ({
     mapLoaded,
     isInitializing,
     mapError,
-    activePopupRef
+    activePopupRef,
+    mapToken
   };
 
   return (

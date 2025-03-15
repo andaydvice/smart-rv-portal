@@ -1,8 +1,7 @@
-
 import React, { useRef, useEffect, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
-import { useMapContext } from './MapContext';
+import { useMap } from './MapContext';
 import { StorageFacility } from '../types';
 import { calculateMapBounds } from './utils/mapBounds';
 import { createMarkersForState, clearAllMarkers } from './services/markerCreationService';
@@ -20,7 +19,7 @@ const MapContainer: React.FC<MapContainerProps> = ({
   onMarkerClick,
   selectedState
 }) => {
-  const { mapToken } = useMapContext();
+  const { mapToken } = useMap();
   const mapContainer = useRef<HTMLDivElement>(null);
   const map = useRef<mapboxgl.Map | null>(null);
   const [mapLoaded, setMapLoaded] = useState(false);
