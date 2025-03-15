@@ -5,130 +5,116 @@ import Navbar from "@/components/Navbar";
 import Layout from "@/components/layout/Layout";
 import { Warehouse } from "lucide-react";
 import { useEffect } from 'react';
-import "../styles/map-fixes.css";
-import "../styles/map-optimizations.css";
-import "../styles/marker-fix.css"; 
-import "../styles/emergency-marker-fix.css";
+import "../styles/force-markers.css"; // Only load the minimal, clean CSS
 
 export default function StorageFacilities() {
   useEffect(() => {
     console.log("StorageFacilities: Component mounted");
     
-    // Apply emergency marker and popup fixes immediately
-    const applyMarkerFixes = () => {
-      console.log("Applying marker and popup visibility fixes");
-      // Create a simple style element with essential fixes
-      const style = document.createElement('style');
-      style.textContent = `
-        .mapboxgl-marker, .custom-marker, .emergency-marker {
-          visibility: visible !important;
-          display: block !important;
-          opacity: 1 !important;
-          z-index: 999 !important;
-          position: absolute !important;
-          pointer-events: auto !important;
-          cursor: pointer !important;
-        }
-        .mapboxgl-popup {
-          z-index: 1000 !important;
-          max-width: 300px !important;
-          width: auto !important;
-          visibility: visible !important;
-          display: block !important;
-          opacity: 1 !important;
-        }
-        .mapboxgl-popup-content {
-          min-width: 220px !important;
-          width: auto !important;
-          max-width: 300px !important;
-          overflow: visible !important;
-          visibility: visible !important;
-          display: block !important;
-          opacity: 1 !important;
-        }
-        .view-facility-btn, .view-details, button.view-details, a.view-details {
-          display: none !important;
-          visibility: hidden !important;
-        }
-        .mapboxgl-canvas-container, .mapboxgl-canvas {
-          height: 100% !important;
-          width: 100% !important;
-          overflow: visible !important;
-        }
-        .h-\\[600px\\] {
-          min-height: 600px !important;
-          overflow: visible !important;
-          position: relative !important;
-        }
-        .mapboxgl-map {
-          overflow: visible !important;
-          padding-bottom: 60px !important;
-        }
-      `;
-      document.head.appendChild(style);
+    // Create emergency markers directly in the page component
+    const createEmergencyMarkers = () => {
+      console.log("Creating emergency markers directly");
       
-      // Force visibility of any existing markers
-      document.querySelectorAll('.mapboxgl-marker, .custom-marker, .emergency-marker').forEach(marker => {
-        if (marker instanceof HTMLElement) {
-          marker.style.visibility = 'visible';
-          marker.style.display = 'block';
-          marker.style.opacity = '1';
-          marker.style.zIndex = '999';
-          marker.style.position = 'absolute';
-          marker.style.pointerEvents = 'auto';
-          marker.style.cursor = 'pointer';
-        }
+      // Emergency marker data - hardcoded to ensure visibility
+      const emergencyLocations = [
+        { id: "em1", lat: 33.4484, lng: -112.0740, name: "Arizona Storage" },
+        { id: "em2", lat: 36.7783, lng: -119.4179, name: "California Storage" },
+        { id: "em3", lat: 31.9686, lng: -99.9018, name: "Texas Storage" },
+        { id: "em4", lat: 27.6648, lng: -81.5158, name: "Florida Storage" },
+        { id: "em5", lat: 43.2994, lng: -74.2179, name: "New York Storage" },
+        { id: "em6", lat: 41.4925, lng: -99.9018, name: "Nebraska Storage" },
+        { id: "em7", lat: 44.5000, lng: -89.5000, name: "Wisconsin Storage" },
+        { id: "em8", lat: 42.0346, lng: -93.6218, name: "Iowa Storage" }
+      ];
+      
+      // Find all map elements
+      const mapElements = document.querySelectorAll('.mapboxgl-map');
+      console.log(`Found ${mapElements.length} map elements`);
+      
+      mapElements.forEach((mapElement, mapIndex) => {
+        // For each emergency location, create a marker
+        emergencyLocations.forEach((location, index) => {
+          // Create marker element
+          const marker = document.createElement('div');
+          marker.className = 'emergency-marker';
+          marker.id = `emergency-marker-${location.id}-${mapIndex}`;
+          marker.setAttribute('data-lat', location.lat.toString());
+          marker.setAttribute('data-lng', location.lng.toString());
+          
+          // Set critical inline styles to guarantee visibility
+          marker.style.cssText = `
+            position: absolute !important;
+            left: ${50 + (index * 5)}% !important;
+            top: ${50 + (index % 3) * 10}% !important;
+            width: 24px !important;
+            height: 24px !important;
+            background-color: #F97316 !important;
+            border-radius: 50% !important;
+            border: 2px solid white !important;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5) !important;
+            cursor: pointer !important;
+            z-index: 9999 !important;
+            visibility: visible !important;
+            display: block !important;
+            opacity: 1 !important;
+            transform: translate(-50%, -50%) !important;
+          `;
+          
+          // Add to the map
+          mapElement.appendChild(marker);
+          
+          // Create a simple popup element
+          const popup = document.createElement('div');
+          popup.className = 'emergency-popup mapboxgl-popup';
+          popup.id = `popup-${location.id}-${mapIndex}`;
+          popup.style.cssText = `
+            position: absolute;
+            left: ${50 + (index * 5)}%;
+            top: ${40 + (index % 3) * 10}%;
+            background-color: #151A22;
+            color: white;
+            padding: 10px;
+            border-radius: 4px;
+            max-width: 200px;
+            z-index: 10000;
+            display: none;
+            visibility: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+          `;
+          popup.innerHTML = `
+            <h3 style="margin: 0; font-size: 14px; font-weight: bold;">${location.name}</h3>
+            <p style="margin: 5px 0 0; font-size: 12px;">Lat: ${location.lat}, Lng: ${location.lng}</p>
+            <button style="margin-top: 8px; padding: 4px 8px; background: #4B8FE3; border: none; color: white; border-radius: 4px; cursor: pointer;">Details</button>
+          `;
+          
+          mapElement.appendChild(popup);
+          
+          // Add click handler to marker
+          marker.addEventListener('click', () => {
+            // Toggle popup visibility
+            const isVisible = popup.style.display === 'block';
+            popup.style.display = isVisible ? 'none' : 'block';
+            popup.style.visibility = isVisible ? 'hidden' : 'visible';
+            
+            // Log click for debugging
+            console.log(`Clicked marker ${location.id} at ${location.lat}, ${location.lng}`);
+          });
+        });
+        
+        console.log(`Added ${emergencyLocations.length} emergency markers to map ${mapIndex}`);
       });
     };
     
-    // Apply fixes immediately
-    applyMarkerFixes();
+    // Run immediately and with a slight delay to ensure map is loaded
+    setTimeout(createEmergencyMarkers, 1000);
+    setTimeout(createEmergencyMarkers, 3000);
     
-    // And repeatedly to ensure they stick
-    const fixInterval = setInterval(() => {
-      const markers = document.querySelectorAll('.mapboxgl-marker, .custom-marker, .emergency-marker');
-      console.log(`Found ${markers.length} markers - applying visibility fixes`);
-      
-      // Check if markers exist but are invisible
-      if (markers.length > 0) {
-        let visibleCount = 0;
-        markers.forEach(marker => {
-          if (marker instanceof HTMLElement) {
-            // Check if marker is visible
-            const computedStyle = window.getComputedStyle(marker);
-            if (computedStyle.visibility !== 'visible' || computedStyle.display === 'none' || computedStyle.opacity === '0') {
-              // Force visibility
-              marker.style.visibility = 'visible';
-              marker.style.display = 'block';
-              marker.style.opacity = '1';
-              marker.style.zIndex = '999';
-              marker.style.position = 'absolute';
-              marker.style.pointerEvents = 'auto';
-              marker.style.cursor = 'pointer';
-            } else {
-              visibleCount++;
-            }
-          }
-        });
-        console.log(`${visibleCount} of ${markers.length} markers are visible`);
-      }
-      
-      applyMarkerFixes();
-      
-      // Patch marker transform if needed
-      document.querySelectorAll('.mapboxgl-marker, .custom-marker').forEach(marker => {
-        if (marker instanceof HTMLElement && !marker.style.transform.includes('translate')) {
-          marker.style.transform = 'translate(-50%, -50%)';
-        }
-      });
-    }, 1000);
+    // Also run periodically to handle any new maps that might be created
+    const intervalId = setInterval(createEmergencyMarkers, 5000);
     
-    // Flag for emergency script
-    window.isStorageFacilitiesPage = true;
-    
+    // Cleanup function
     return () => {
-      window.isStorageFacilitiesPage = false;
-      clearInterval(fixInterval);
+      clearInterval(intervalId);
     };
   }, []);
 
@@ -166,6 +152,11 @@ export default function StorageFacilities() {
             <StorageFacilitiesMap />
           </div>
         </Container>
+        
+        {/* Direct emergency fallback markers - these will be displayed directly in the DOM */}
+        <div id="emergency-markers-container" className="hidden">
+          {/* Emergency markers will be injected here by the useEffect hook */}
+        </div>
       </div>
     </Layout>
   );

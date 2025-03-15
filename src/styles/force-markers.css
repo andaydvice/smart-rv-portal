@@ -1,0 +1,41 @@
+
+/* CRITICAL VISIBILITY OVERRIDE - Absolute minimum CSS needed */
+.mapboxgl-marker,
+.custom-marker,
+.emergency-marker {
+  visibility: visible !important;
+  display: block !important;
+  opacity: 1 !important;
+  position: absolute !important;
+  width: 24px !important;
+  height: 24px !important;
+  background-color: #F97316 !important;
+  border-radius: 50% !important;
+  border: 2px solid white !important;
+  box-shadow: 0 0 10px rgba(0,0,0,0.5) !important;
+  z-index: 9999 !important;
+  transform: translate(-50%, -50%) !important;
+  pointer-events: auto !important;
+}
+
+/* Ensure map container is visible and correctly sized */
+.mapboxgl-map {
+  overflow: visible !important;
+  height: 100% !important;
+  width: 100% !important;
+}
+
+/* Fix the popup styles */
+.mapboxgl-popup {
+  z-index: 10000 !important;
+  visibility: visible !important;
+  display: block !important;
+  opacity: 1 !important;
+}
+
+/* Fix map height and overflow */
+.h-\[600px\] {
+  min-height: 600px !important;
+  height: auto !important; /* Allow it to expand if needed */
+  overflow: visible !important; /* Critical to prevent clipping */
+}
