@@ -4,6 +4,7 @@ import StorageFacilitiesMap from "@/components/storage/StorageFacilitiesMap";
 import Navbar from "@/components/Navbar";
 import Layout from "@/components/layout/Layout";
 import "../styles/force-markers.css"; // Only load the minimal, clean CSS
+import "../styles/marker-fix.css"; // Add specific marker fixes
 
 // Helper function to normalize state names consistently
 const normalizeStateName = (stateAbbr: string): string => {
@@ -65,7 +66,7 @@ export default function StorageFacilities() {
       <Navbar />
       <div className="min-h-screen w-full bg-[#080F1F] text-white">
         {/* Hero Header with Image - Applying specific classes to prevent marker display in header */}
-        <div className="relative w-full h-[400px] marker-free-zone">
+        <div className="relative w-full h-[400px] marker-free-zone no-markers-allowed">
           <img 
             src="/lovable-uploads/e9503bf4-354a-4790-8a83-fefea32abc5b.png" 
             alt="Indoor RV Storage Facility" 
@@ -92,19 +93,39 @@ export default function StorageFacilities() {
         </Container>
       </div>
       
-      {/* Fix: Remove invalid jsx and global props, use standard style element */}
-      <style>{`
-        /* Hide any markers in the header area */
-        .marker-free-zone .mapboxgl-marker,
-        .marker-free-zone .custom-marker,
-        .marker-free-zone .emergency-marker,
-        .marker-free-zone .fixed-orange-marker {
-          display: none !important;
-          visibility: hidden !important;
-          opacity: 0 !important;
-          pointer-events: none !important;
-        }
-      `}</style>
+      {/* Use standard style element with stronger selectors to hide any markers in the header */}
+      <style>
+        {`
+          /* Hide ANY markers in the header area with maximum specificity */
+          .marker-free-zone .mapboxgl-marker,
+          .marker-free-zone .custom-marker,
+          .marker-free-zone .emergency-marker,
+          .marker-free-zone .fixed-orange-marker,
+          .marker-free-zone .mapboxgl-popup,
+          .marker-free-zone .direct-marker,
+          .marker-free-zone .direct-popup,
+          .marker-free-zone div[class*="marker"],
+          .marker-free-zone *[class*="marker"],
+          .no-markers-allowed .mapboxgl-marker,
+          .no-markers-allowed .custom-marker,
+          .no-markers-allowed .emergency-marker,
+          .no-markers-allowed .fixed-orange-marker,
+          .no-markers-allowed .direct-marker,
+          .no-markers-allowed *[class*="marker"],
+          .no-markers-allowed div[class*="marker"],
+          header .mapboxgl-marker,
+          header .custom-marker,
+          header .emergency-marker,
+          header .fixed-orange-marker,
+          header .direct-marker {
+            display: none !important;
+            visibility: hidden !important;
+            opacity: 0 !important;
+            pointer-events: none !important;
+            z-index: -9999 !important;
+          }
+        `}
+      </style>
     </Layout>
   );
 }
