@@ -5,53 +5,29 @@ import Navbar from "@/components/Navbar";
 import Layout from "@/components/layout/Layout";
 import { Warehouse } from "lucide-react";
 import { useEffect } from 'react';
-import { applyAllEmergencyFixes } from "@/utils/emergency-styles/combined";
-import { forceMapMarkersVisible, testMarkersVisibility, ensureMarkersExist } from "@/utils/markers";
-import "../styles/marker-fix.css";
-import "../styles/emergency-marker-fix.css";
-import "../styles/map-optimizations.css";
+import "../styles/map-fixes.css";
 
 export default function StorageFacilities() {
   useEffect(() => {
-    console.log("StorageFacilities: EMERGENCY FIX - Component mounted");
+    console.log("StorageFacilities: Component mounted");
     
-    // Signal that we're on the storage facilities page
-    window.isStorageFacilitiesPage = true;
+    // Apply some basic style fixes
+    const style = document.createElement('style');
+    style.textContent = `
+      .mapboxgl-popup {
+        z-index: 1000 !important;
+      }
+      .mapboxgl-marker {
+        visibility: visible !important;
+        display: block !important;
+      }
+    `;
+    document.head.appendChild(style);
     
-    // Apply all marker visibility fixes
-    const cleanup = applyAllEmergencyFixes();
-    
-    // Force markers to be visible - run multiple times with different delays
-    forceMapMarkersVisible();
-    const forceIntervals = [100, 300, 500, 1000, 2000, 5000].map(delay => 
-      setTimeout(forceMapMarkersVisible, delay)
-    );
-    
-    // Add event listener for map creation to ensure markers are visible
-    document.addEventListener('mapboxgl.map.created', (e: any) => {
-      console.log('Map created - ensuring markers are visible');
-      const map = e.detail.map;
-      
-      // Wait for facilities to be loaded, then ensure markers exist
-      setTimeout(() => {
-        if (window.mapFacilities && window.mapFacilities.length > 0) {
-          ensureMarkersExist(map, window.mapFacilities);
-        }
-      }, 2000);
-    });
-    
-    // Run marker visibility test after the page has loaded
-    const testTimeout = setTimeout(() => {
-      testMarkersVisibility(true);
-    }, 3000);
-    
-    // Clean up
     return () => {
-      window.isStorageFacilitiesPage = false;
-      cleanup();
-      forceIntervals.forEach(timeout => clearTimeout(timeout));
-      clearTimeout(testTimeout);
-      document.removeEventListener('mapboxgl.map.created', () => {});
+      if (style.parentNode) {
+        style.parentNode.removeChild(style);
+      }
     };
   }, []);
 
@@ -70,11 +46,8 @@ export default function StorageFacilities() {
             <Container className="h-full flex flex-col justify-center items-center" fullWidth>
               <div className="text-center max-w-3xl bg-black/40 backdrop-blur-sm p-6 rounded-lg">
                 <div className="flex items-center justify-center gap-2 mb-2">
-                  {/* Enhanced orange marker indicator that won't interfere with map markers */}
-                  <div className="relative flex items-center">
-                    <div className="hero-marker w-8 h-8 bg-[#F97316] rounded-full border-2 border-white shadow-lg animate-pulse"></div>
-                    <Warehouse className="h-7 w-7 text-[#F97316]" />
-                  </div>
+                  <div className="w-8 h-8 bg-[#F97316] rounded-full border-2 border-white shadow-lg animate-pulse"></div>
+                  <Warehouse className="h-7 w-7 text-[#F97316]" />
                   <h1 className="text-4xl md:text-5xl font-bold text-white">
                     Indoor RV Storage Facilities
                   </h1>

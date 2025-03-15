@@ -1,3 +1,4 @@
+
 "use client";
 
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
@@ -15,14 +16,6 @@ import FacilityList from './map-view/FacilityList';
 import { useMapToken } from './map-view/useMapToken';
 import { useFacilitySelection } from './map-view/useFacilitySelection';
 import { toast } from "sonner";
-import { 
-  forceMapMarkersVisible, 
-  applyForcedStyles, 
-  testMarkersVisibility, 
-  ensureMarkersExist, 
-  ensureMapVisible,
-  removeViewDetailsButtons 
-} from '@/utils/markers';
 
 const StorageFacilitiesMap = () => {
   const [filters, setFilters] = useState<FilterState>({
@@ -38,17 +31,37 @@ const StorageFacilitiesMap = () => {
     minRating: null
   });
 
-  const { facilities: filteredFacilities, isLoading, error, maxPrice } = useStorageFacilities(filters);
+  const { facilities: allFacilities, isLoading, error, maxPrice } = useStorageFacilities(filters);
   const { recentlyViewed, addToRecentlyViewed } = useRecentlyViewed();
   const { mapToken, mapTokenError } = useMapToken();
   
-  const displayFacilities = useMemo(() => filteredFacilities || [], [filteredFacilities]);
-  
+  // State-specific counts for debugging
   useEffect(() => {
-    if (displayFacilities.length > 0) {
-      (window as any).mapFacilities = displayFacilities;
+    if (allFacilities && allFacilities.length > 0) {
+      const stateMap = new Map<string, number>();
+      
+      allFacilities.forEach(facility => {
+        if (facility.state) {
+          stateMap.set(facility.state, (stateMap.get(facility.state) || 0) + 1);
+        }
+      });
+      
+      console.log('Facility counts by state:');
+      Array.from(stateMap.entries()).sort(([a], [b]) => a.localeCompare(b)).forEach(([state, count]) => {
+        console.log(`${state}: ${count} facilities`);
+      });
+      
+      // Also log facility IDs for states with few facilities for easy verification
+      ['Arizona', 'Nevada', 'Oregon'].forEach(state => {
+        if (stateMap.has(state) && stateMap.get(state)! < 5) {
+          const stateIds = allFacilities
+            .filter(f => f.state === state)
+            .map(f => f.id);
+          console.log(`${state} facility IDs:`, stateIds);
+        }
+      });
     }
-  }, [displayFacilities]);
+  }, [allFacilities]);
   
   const { 
     highlightedFacility, 
@@ -57,14 +70,6 @@ const StorageFacilitiesMap = () => {
   } = useFacilitySelection({ 
     addToRecentlyViewed 
   });
-  
-  useEffect(() => {
-    if (highlightedFacility) {
-      (window as any).highlightedFacilityId = highlightedFacility;
-    } else {
-      (window as any).highlightedFacilityId = null;
-    }
-  }, [highlightedFacility]);
   
   const handleFilterChange = useCallback((newFilters: FilterState) => {
     setFilters(prevFilters => {
@@ -75,140 +80,24 @@ const StorageFacilitiesMap = () => {
     });
   }, []);
   
+  // Clear highlight when state filter changes
   useEffect(() => {
-    console.log("StorageFacilitiesMap: EMERGENCY FIX - Running visibility enforcement");
-    
-    document.body.setAttribute('data-markers-loading', 'true');
-    
-    forceMapMarkersVisible();
-    
-    removeViewDetailsButtons();
-    
-    const forceInterval = setInterval(() => {
-      ensureMapVisible();
+    if (filters.selectedState) {
+      const facilityInState = allFacilities?.find(f => 
+        f.id === highlightedFacility && f.state === filters.selectedState
+      );
       
-      const markers = document.querySelectorAll('.mapboxgl-marker, .custom-marker, .emergency-marker');
-      console.log(`Found ${markers.length} markers - forcing visible`);
-      
-      markers.forEach(marker => {
-        if (marker instanceof HTMLElement) {
-          marker.style.cssText += `
-            visibility: visible !important;
-            display: block !important;
-            opacity: 1 !important;
-            z-index: 9999 !important;
-            pointer-events: auto !important;
-            position: absolute !important;
-          `;
-          
-          marker.setAttribute('data-forced-visible', 'true');
-        }
-      });
-      
-      removeViewDetailsButtons();
-      
-      if ((window as any).mapInstance && (window as any).mapFacilities && 
-          markers.length < ((window as any).mapFacilities.length * 0.8)) {
-        ensureMarkersExist((window as any).mapInstance, (window as any).mapFacilities);
+      if (!facilityInState) {
+        // Reset highlighted facility if it's not in the currently selected state
+        handleFacilityClick(null, allFacilities || []);
       }
-    }, 1000);
-    
-    const observer = new MutationObserver((mutations) => {
-      mutations.forEach(mutation => {
-        if (mutation.type === 'childList') {
-          mutation.addedNodes.forEach(node => {
-            if (node instanceof HTMLElement) {
-              if (node.classList.contains('mapboxgl-marker') || 
-                  node.classList.contains('custom-marker') ||
-                  node.classList.contains('emergency-marker')) {
-                console.log('Mutation observer caught new marker - forcing visible');
-                node.style.cssText += `
-                  visibility: visible !important;
-                  display: block !important;
-                  opacity: 1 !important;
-                  z-index: 9999 !important;
-                  pointer-events: auto !important;
-                  position: absolute !important;
-                `;
-              }
-              
-              if (node.classList.contains('mapboxgl-popup')) {
-                const closeButton = node.querySelector('.mapboxgl-popup-close-button');
-                if (closeButton instanceof HTMLElement) {
-                  closeButton.style.pointerEvents = 'all';
-                  closeButton.style.cursor = 'pointer';
-                  closeButton.style.zIndex = '10001';
-                  
-                  const viewDetailsBtn = node.querySelector('.view-facility-btn, button.view-details');
-                  if (viewDetailsBtn instanceof HTMLElement) {
-                    viewDetailsBtn.style.display = 'none';
-                    viewDetailsBtn.style.visibility = 'hidden';
-                    viewDetailsBtn.style.opacity = '0';
-                    viewDetailsBtn.style.pointerEvents = 'none';
-                  }
-                }
-              }
-            }
-          });
-        }
-      });
-    });
-    
-    observer.observe(document.body, { 
-      childList: true,
-      subtree: true
-    });
-    
-    const handlePopupClosed = () => {
-      console.log('Popup closed event detected');
-      
-      ensureMapVisible();
-      
-      forceMapMarkersVisible();
-      
-      removeViewDetailsButtons();
-    };
-    
-    document.addEventListener('mapbox.popup.closed', handlePopupClosed);
-    
-    setTimeout(() => {
-      testMarkersVisibility(true);
-      document.body.removeAttribute('data-markers-loading');
-      document.body.classList.add('map-loaded');
-    }, 3000);
-    
-    return () => {
-      clearInterval(forceInterval);
-      observer.disconnect();
-      document.removeEventListener('mapbox.popup.closed', handlePopupClosed);
-      document.body.removeAttribute('data-markers-loading');
-      document.body.classList.remove('map-loaded');
-    };
-  }, []);
+    }
+  }, [filters.selectedState, highlightedFacility, allFacilities, handleFacilityClick]);
   
-  useEffect(() => {
-    if (filteredFacilities?.length > 10 && !isLoading) {
-      toast.success(`Loaded ${filteredFacilities.length} storage facilities`);
-    } else if (filteredFacilities && filteredFacilities.length === 0 && !isLoading) {
-      toast.info('No facilities found for the current filters');
-    }
-  }, [filteredFacilities, isLoading]);
-
-  useEffect(() => {
-    if (error) {
-      console.error('Error loading facilities:', error);
-      toast.error(`Error loading facilities: ${error.message}`);
-    }
-  }, [error]);
-
   const onMarkerClick = useCallback((facilityId: string) => {
     console.log(`Marker clicked: ${facilityId}`);
-    handleFacilityClick(facilityId, displayFacilities);
-    
-    setTimeout(() => {
-      ensureMapVisible();
-    }, 100);
-  }, [handleFacilityClick, displayFacilities]);
+    handleFacilityClick(facilityId, allFacilities || []);
+  }, [handleFacilityClick, allFacilities]);
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 min-h-[800px]">
@@ -219,12 +108,12 @@ const StorageFacilitiesMap = () => {
             <LoadingStateDisplay
               isLoading={isLoading}
               error={error}
-              hasResults={!!displayFacilities.length}
+              hasResults={!!(allFacilities && allFacilities.length > 0)}
             />
             
-            {displayFacilities.length > 0 && (
+            {allFacilities && allFacilities.length > 0 && (
               <FacilityList
-                facilities={displayFacilities}
+                facilities={allFacilities}
                 highlightedFacility={highlightedFacility}
                 onFacilityClick={onMarkerClick}
                 scrollAreaRef={scrollAreaRef}
@@ -246,7 +135,7 @@ const StorageFacilitiesMap = () => {
           ) : (
             <MapView
               mapToken={mapToken}
-              facilities={displayFacilities}
+              facilities={allFacilities || []}
               highlightedFacility={highlightedFacility}
               onMarkerClick={onMarkerClick}
               selectedState={filters.selectedState}
