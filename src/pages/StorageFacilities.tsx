@@ -6,6 +6,37 @@ import Layout from "@/components/layout/Layout";
 import { Warehouse } from "lucide-react";
 import "../styles/force-markers.css"; // Only load the minimal, clean CSS
 
+// Create a function to count facilities by state without relying on RPC
+// This runs client-side when the Supabase RPC is not available
+export async function getStateCountsWithSQL() {
+  const { supabase } = await import('@/integrations/supabase/client');
+  
+  // Execute a plain SQL query
+  const { data, error } = await supabase
+    .from('storage_facilities')
+    .select('state');
+  
+  if (error || !data) {
+    console.error('Error fetching states:', error);
+    return [];
+  }
+  
+  // Count occurrences of each state
+  const stateCounts = data.reduce((acc, item) => {
+    const state = item.state;
+    if (!state) return acc;
+    
+    acc[state] = (acc[state] || 0) + 1;
+    return acc;
+  }, {});
+  
+  // Convert to array format
+  return Object.entries(stateCounts).map(([state, count]) => ({
+    state,
+    count
+  }));
+}
+
 export default function StorageFacilities() {
   return (
     <Layout>

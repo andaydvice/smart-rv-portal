@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/select";
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
+import { getStateCountsWithSQL } from '@/pages/StorageFacilities';
 
 interface LocationFilterProps {
   selectedState: string | null;
@@ -21,43 +22,51 @@ export const LocationFilter = ({ selectedState, states, onStateChange }: Locatio
   const { data: statesWithCounts, isLoading } = useQuery({
     queryKey: ['actual-state-counts'],
     queryFn: async () => {
-      // Get the actual counts from Supabase storage_facilities table
-      const { data: facilityCounts, error } = await supabase
-        .from('storage_facilities')
-        .select('state, count(*)')
-        .group('state');
-      
-      if (error) {
-        console.error('Error fetching state counts:', error);
-        return states; // Fall back to passed states if there's an error
-      }
-      
-      // Map and normalize state abbreviations to full names
-      return facilityCounts.map(item => {
-        // Normalize state names
-        const normalizedState = 
-          item.state === 'AZ' ? 'Arizona' : 
-          item.state === 'CA' ? 'California' : 
-          item.state === 'CO' ? 'Colorado' :
-          item.state === 'TX' ? 'Texas' :
-          item.state === 'FL' ? 'Florida' :
-          item.state === 'NV' ? 'Nevada' :
-          item.state === 'GA' ? 'Georgia' :
-          item.state === 'IA' ? 'Iowa' :
-          item.state === 'MN' ? 'Minnesota' :
-          item.state === 'WI' ? 'Wisconsin' :
-          item.state === 'OR' ? 'Oregon' :
-          item.state === 'PA' ? 'Pennsylvania' :
-          item.state === 'NY' ? 'New York' :
-          item.state === 'OH' ? 'Ohio' :
-          item.state === 'IN' ? 'Indiana' :
-          item.state;
+      // First try the RPC function (which may not exist)
+      try {
+        // Directly query the storage_facilities table and count by state
+        const { data, error } = await supabase
+          .from('storage_facilities')
+          .select('state, count(*)', { count: 'exact' })
+          .order('state');
         
-        return {
-          state: normalizedState,
-          count: parseInt(item.count)
-        };
-      }).sort((a, b) => a.state.localeCompare(b.state));
+        if (error || !data) {
+          console.error('Error with direct query:', error);
+          // Fall back to the SQL client-side method
+          return getStateCountsWithSQL();
+        }
+        
+        // Transform the data to match our expected format
+        return data.map(item => {
+          // Normalize state names
+          const normalizedState = 
+            item.state === 'AZ' ? 'Arizona' : 
+            item.state === 'CA' ? 'California' : 
+            item.state === 'CO' ? 'Colorado' :
+            item.state === 'TX' ? 'Texas' :
+            item.state === 'FL' ? 'Florida' :
+            item.state === 'NV' ? 'Nevada' :
+            item.state === 'GA' ? 'Georgia' :
+            item.state === 'IA' ? 'Iowa' :
+            item.state === 'MN' ? 'Minnesota' :
+            item.state === 'WI' ? 'Wisconsin' :
+            item.state === 'OR' ? 'Oregon' :
+            item.state === 'PA' ? 'Pennsylvania' :
+            item.state === 'NY' ? 'New York' :
+            item.state === 'OH' ? 'Ohio' :
+            item.state === 'IN' ? 'Indiana' :
+            item.state;
+          
+          return {
+            state: normalizedState,
+            count: typeof item.count === 'number' ? item.count : parseInt(item.count)
+          };
+        }).sort((a, b) => a.state.localeCompare(b.state));
+      } catch (e) {
+        console.error('Error fetching state counts with RPC:', e);
+        // Fall back to SQL method if RPC fails
+        return getStateCountsWithSQL();
+      }
     },
     staleTime: 300000 // 5 minute cache
   });
