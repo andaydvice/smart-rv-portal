@@ -75,29 +75,12 @@
   contain: layout paint style !important;
   min-height: 600px !important;
   overflow: visible !important;
-  /* Add padding to prevent popup clipping */
-  padding: 30px !important;
 }
 
 /* Hide unwanted elements */
 .view-facility-btn,
 button.view-details,
 .fixed-orange-marker:not(.custom-marker):not(.mapboxgl-marker):not(.emergency-marker):not(.hero-marker) {
-  display: none !important;
-  visibility: hidden !important;
-  opacity: 0 !important;
-  pointer-events: none !important;
-}
-
-/* Hide any markers in the page header */
-.relative.w-full.h-\[400px\] .mapboxgl-marker,
-.relative.w-full.h-\[400px\] .custom-marker,
-.relative.w-full.h-\[400px\] .emergency-marker,
-.relative.w-full.h-\[400px\] .fixed-orange-marker,
-.marker-free-zone .mapboxgl-marker,
-.marker-free-zone .custom-marker,
-.marker-free-zone .emergency-marker,
-.marker-free-zone .fixed-orange-marker {
   display: none !important;
   visibility: hidden !important;
   opacity: 0 !important;
@@ -117,12 +100,16 @@ button.view-details,
   border: 2px solid white !important;
 }
 
-/* Fix popup anchors to ensure they're positioned correctly */
-.mapboxgl-popup-anchor-top .mapboxgl-popup-tip {
+/* Prevent popup position issues */
+.mapboxgl-popup-anchor-top .mapboxgl-popup-tip,
+.mapboxgl-popup-anchor-top-left .mapboxgl-popup-tip,
+.mapboxgl-popup-anchor-top-right .mapboxgl-popup-tip {
   border-bottom-color: #151A22 !important;
 }
 
-.mapboxgl-popup-anchor-bottom .mapboxgl-popup-tip {
+.mapboxgl-popup-anchor-bottom .mapboxgl-popup-tip,
+.mapboxgl-popup-anchor-bottom-left .mapboxgl-popup-tip,
+.mapboxgl-popup-anchor-bottom-right .mapboxgl-popup-tip {
   border-top-color: #151A22 !important;
 }
 
@@ -132,23 +119,6 @@ button.view-details,
 
 .mapboxgl-popup-anchor-right .mapboxgl-popup-tip {
   border-left-color: #151A22 !important;
-}
-
-/* Add additional space for popups near the edges */
-.mapboxgl-popup-anchor-top {
-  margin-top: 15px !important;
-}
-
-.mapboxgl-popup-anchor-bottom {
-  margin-bottom: 15px !important;
-}
-
-.mapboxgl-popup-anchor-left {
-  margin-left: 15px !important;
-}
-
-.mapboxgl-popup-anchor-right {
-  margin-right: 15px !important;
 }
 
 /* Force padding on map to prevent marker clipping */

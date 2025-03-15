@@ -18,7 +18,6 @@ import { useFacilitySelection } from './map-view/useFacilitySelection';
 import { toast } from "sonner";
 
 const StorageFacilitiesMap = () => {
-  
   const [filters, setFilters] = useState<FilterState>({
     features: {
       indoor: false,
@@ -100,7 +99,7 @@ const StorageFacilitiesMap = () => {
   }, [mapToken, mapTokenError]);
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 min-h-[800px] storage-map-container">
+    <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 min-h-[800px]">
       <div className="lg:col-span-4">
         <div className="space-y-4">
           <FilterPanel onFilterChange={handleFilterChange} />
@@ -124,7 +123,7 @@ const StorageFacilitiesMap = () => {
       </div>
       
       <div className="lg:col-span-8 flex flex-col space-y-4">
-        <Card className="h-[600px] bg-[#080F1F] relative overflow-hidden border-gray-700 map-content">
+        <Card className="h-[600px] bg-[#080F1F] relative overflow-hidden border-gray-700">
           {(!mapToken) ? (
             <Alert variant="destructive" className="m-4">
               <AlertCircle className="h-4 w-4" />

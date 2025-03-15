@@ -1,13 +1,12 @@
 
 /* CRITICAL - Force marker visibility - ultra-high-specificity selectors */
-/* Only target markers inside the map container - increased specificity */
-.map-container .mapboxgl-map .mapboxgl-marker,
-.map-container .mapboxgl-map .custom-marker,
-.map-container .mapboxgl-map .marker,
-.map-container .mapboxgl-map [class*="marker"],
-.map-container .mapboxgl-map div[class*="marker"],
-.map-container .mapboxgl-canvas-container .mapboxgl-marker,
-.map-container .mapboxgl-map .emergency-marker {
+html body .mapboxgl-marker,
+html body .custom-marker,
+html body .marker,
+html body [class*="marker"],
+html body div[class*="marker"],
+html body .mapboxgl-canvas-container .mapboxgl-marker,
+html body .emergency-marker {
   display: block !important;
   visibility: visible !important;
   opacity: 1 !important;
@@ -18,35 +17,23 @@
   transform: translate(-50%, -50%) !important;
 }
 
-/* Remove unwanted debug markers in header - highly specific selectors */
-.marker-free-zone .fixed-orange-marker,
-.marker-free-zone .orange-marker-indicator,
-.marker-free-zone .emergency-marker,
-.marker-free-zone .custom-marker,
-.marker-free-zone .mapboxgl-marker,
-.marker-free-zone .direct-marker,
-.marker-free-zone div[class*="marker"],
-.marker-free-zone [class*="marker"],
-.no-markers-allowed .fixed-orange-marker,
-.no-markers-allowed .orange-marker-indicator,
-.no-markers-allowed .emergency-marker,
-.no-markers-allowed .custom-marker,
-.no-markers-allowed .mapboxgl-marker,
-.no-markers-allowed .direct-marker,
-.no-markers-allowed div[class*="marker"],
-.no-markers-allowed [class*="marker"],
-header .fixed-orange-marker,
+/* Remove unwanted debug markers in header */
+/* This targets the unwanted orange markers in header */
+header .fixed-orange-marker:not(.hero-marker),
 header .orange-marker-indicator,
-header .emergency-marker,
-header .custom-marker,
-header .mapboxgl-marker,
-header .direct-marker,
+header .emergency-marker:not(.hero-marker),
 .debug-marker {
   display: none !important;
   visibility: hidden !important;
   opacity: 0 !important;
   pointer-events: none !important;
-  z-index: -9999 !important;
+}
+
+/* Keep only the legitimate marker in the hero section */
+.relative.w-full.h-\[400px\] .fixed-orange-marker.hero-marker {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
 }
 
 /* Improve emergency marker styling for the ones we actually want */
@@ -62,20 +49,37 @@ header .direct-marker,
   cursor: pointer !important;
 }
 
-/* Force popup visibility and prevent clipping */
-.mapboxgl-popup,
-.direct-popup {
+/* Emergency marker pulsing animation */
+@keyframes pulse {
+  0% { transform: scale(1) translate(-50%, -50%); box-shadow: 0 0 10px rgba(249, 115, 22, 0.8); }
+  50% { transform: scale(1.1) translate(-45%, -45%); box-shadow: 0 0 20px rgba(249, 115, 22, 0.9); }
+  100% { transform: scale(1) translate(-50%, -50%); box-shadow: 0 0 10px rgba(249, 115, 22, 0.8); }
+}
+
+@keyframes header-pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+.emergency-marker {
+  animation: pulse 1.5s infinite ease-in-out;
+}
+
+.fixed-orange-marker.hero-marker {
+  animation: header-pulse 1.5s infinite ease-in-out;
+}
+
+/* Force popup visibility */
+.mapboxgl-popup {
   display: block !important;
   visibility: visible !important;
   opacity: 1 !important;
   z-index: 10000 !important;
   pointer-events: auto !important;
-  max-width: none !important;
-  width: auto !important;
 }
 
-.mapboxgl-popup-content,
-.direct-popup-content {
+.mapboxgl-popup-content {
   background-color: #151A22 !important;
   color: white !important;
   border-radius: 8px !important;
@@ -85,21 +89,16 @@ header .direct-marker,
   max-width: 300px !important;
   min-width: 220px !important;
   width: auto !important;
-  height: auto !important;
-  overflow: visible !important; 
-  word-break: break-word !important;
-  white-space: normal !important;
+  overflow: visible !important;
 }
 
-/* Ensure map container is visible with proper spacing and no header markers */
+/* Ensure map container is visible */
 .mapboxgl-map {
   visibility: visible !important;
   opacity: 1 !important;
   overflow: visible !important;
   height: 100% !important;
   width: 100% !important;
-  margin-top: 0 !important;
-  clear: both !important;
 }
 
 .mapboxgl-canvas-container,
@@ -111,8 +110,7 @@ header .direct-marker,
 
 /* Highlighted marker specific styles */
 .mapboxgl-marker[data-highlighted="true"],
-.custom-marker[data-highlighted="true"],
-.direct-marker[data-highlighted="true"] {
+.custom-marker[data-highlighted="true"] {
   z-index: 10001 !important;
   box-shadow: 0 0 20px rgba(16, 185, 129, 1) !important;
   transform: scale(1.2) translate(-42%, -42%) !important;
@@ -121,53 +119,29 @@ header .direct-marker,
   background-color: #10B981 !important;
 }
 
-/* Fix for markers being cut off at edges of map */
+/* Style marker buttons */
+.view-facility-btn {
+  display: none !important; /* Hidden as requested */
+}
+
+/* Fix for map container positioning */
 .h-\[600px\] {
   min-height: 600px !important;
   overflow: visible !important;
-  margin-top: 0 !important;
-  position: relative !important;
-  z-index: 1 !important;
 }
 
-/* Enhanced map container spacing - FIXED FOR LAYOUT */
-.map-container {
-  padding-top: 0 !important;
-  margin-top: 0 !important;
-  position: relative !important;
-  z-index: 1 !important;
+/* Fix for markers being cut off at bottom of map */
+.mapboxgl-map {
+  padding-bottom: 60px !important;
 }
 
-/* Ensure proper scroll behavior and prevent header/map overlay */
-.min-h-screen {
-  padding-bottom: 40px !important;
-}
-
-/* Ensure popups have proper spacing and don't get cut off */
-.mapboxgl-popup-tip {
-  border-top-color: #151A22 !important;
-  border-bottom-color: #151A22 !important;
-}
-
-/* Ensure text in popups is fully visible */
-.facility-popup-content {
-  overflow: visible !important;
-  word-wrap: break-word !important;
-  white-space: normal !important;
-  max-height: none !important;
-  height: auto !important;
-}
-
-/* Ensure popups at top of map adjust properly */
-.mapboxgl-popup-anchor-top .mapboxgl-popup-tip {
-  border-bottom-color: #151A22 !important;
-}
-
-.mapboxgl-popup-anchor-bottom .mapboxgl-popup-tip {
-  border-top-color: #151A22 !important;
-}
-
-/* Fix specifically for the storage facilities page layout */
-.storage-map-container {
-  margin-top: 0 !important;
+/* Make markers visible in all contexts */
+#root .mapboxgl-marker,
+#__next .mapboxgl-marker,
+main .mapboxgl-marker,
+.card .mapboxgl-marker,
+div[class^="bg-"] .mapboxgl-marker {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
 }

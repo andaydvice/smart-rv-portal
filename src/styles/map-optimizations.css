@@ -22,8 +22,6 @@
   display: block !important;
   pointer-events: auto !important;
   overflow: visible !important;
-  max-height: none !important;
-  word-break: break-word !important;
 }
 
 .mapboxgl-popup-close-button {
@@ -67,7 +65,6 @@
   overflow-wrap: break-word !important;
   width: 100% !important;
   overflow: visible !important;
-  max-height: none !important;
 }
 
 .facility-popup-content h3 {
@@ -97,42 +94,11 @@ a.view-details,
   border: 0 !important;
 }
 
-/* Fix positioning of popup tip for all anchors */
+/* Fix positioning of popup tip */
 .mapboxgl-popup-tip {
-  border-top-color: transparent !important;
-  border-bottom-color: transparent !important;
-  z-index: 1001 !important;
-}
-
-/* Explicitly set correct colors for each anchor position */
-.mapboxgl-popup-anchor-top .mapboxgl-popup-tip {
-  border-bottom-color: #131a2a !important;
-}
-
-.mapboxgl-popup-anchor-bottom .mapboxgl-popup-tip {
   border-top-color: #131a2a !important;
-}
-
-.mapboxgl-popup-anchor-left .mapboxgl-popup-tip {
-  border-right-color: #131a2a !important;
-}
-
-.mapboxgl-popup-anchor-right .mapboxgl-popup-tip {
-  border-left-color: #131a2a !important;
-}
-
-/* Specific positioning fixes for top/bottom anchors */
-.mapboxgl-popup-anchor-top {
-  padding-top: 10px !important;
-}
-
-.mapboxgl-popup-anchor-bottom {
-  padding-bottom: 10px !important;
-}
-
-/* Add additional safety margin to ensure popups are fully visible */
-.mapboxgl-popup {
-  margin: 10px !important;
+  border-bottom-color: #131a2a !important;
+  z-index: 1001 !important;
 }
 
 /* Additional fixup for marker specificity */
@@ -166,8 +132,6 @@ body .mapboxgl-map .mapboxgl-popup {
   height: 100% !important;
   width: 100% !important;
   overflow: visible !important;
-  /* Add padding to ensure markers near edges have room for popups */
-  padding: 20px !important;
 }
 
 .mapboxgl-canvas-container,
@@ -198,24 +162,4 @@ body .mapboxgl-map .mapboxgl-popup {
     max-width: 220px !important;
     min-width: 180px !important;
   }
-}
-
-/* Ensure popup text is fully visible */
-.mapboxgl-popup * {
-  overflow: visible !important;
-  max-height: none !important;
-  word-break: break-word !important;
-}
-
-/* Force wrapper divs to properly handle content */
-.mapboxgl-popup-content > div {
-  overflow: visible !important;
-  max-height: none !important;
-}
-
-/* Fix any text truncation */
-p, span, h1, h2, h3, h4, h5, h6 {
-  overflow: visible !important;
-  text-overflow: clip !important;
-  white-space: normal !important;
 }
