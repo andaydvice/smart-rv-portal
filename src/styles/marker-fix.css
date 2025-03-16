@@ -19,21 +19,15 @@ html body .emergency-marker {
 
 /* Remove unwanted debug markers in header */
 /* This targets the unwanted orange markers in header */
-header .fixed-orange-marker:not(.hero-marker),
+header .fixed-orange-marker,
 header .orange-marker-indicator,
-header .emergency-marker:not(.hero-marker),
-.debug-marker {
+header .emergency-marker,
+.debug-marker,
+.hero-marker {
   display: none !important;
   visibility: hidden !important;
   opacity: 0 !important;
   pointer-events: none !important;
-}
-
-/* Keep only the legitimate marker in the hero section */
-.relative.w-full.h-\[400px\] .fixed-orange-marker.hero-marker {
-  display: block !important;
-  visibility: visible !important;
-  opacity: 1 !important;
 }
 
 /* Improve emergency marker styling for the ones we actually want */
@@ -64,10 +58,6 @@ header .emergency-marker:not(.hero-marker),
 
 .emergency-marker {
   animation: pulse 1.5s infinite ease-in-out;
-}
-
-.fixed-orange-marker.hero-marker {
-  animation: header-pulse 1.5s infinite ease-in-out;
 }
 
 /* Force popup visibility */
