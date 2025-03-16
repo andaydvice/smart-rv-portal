@@ -1,5 +1,5 @@
 
-import { testMarkerVisibility as testMarkersVisibility } from '../core/testVisibility';
+import { testMarkerVisibility } from '../core/testVisibility';
 
 /**
  * Monitor marker visibility at regular intervals
@@ -10,7 +10,7 @@ export function monitorMarkerVisibility(interval = 5000) {
   console.log(`Starting marker visibility monitoring (interval: ${interval}ms)`);
   
   const timer = setInterval(() => {
-    testMarkersVisibility(true);
+    testMarkerVisibility();
   }, interval);
   
   return () => {

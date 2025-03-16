@@ -1,6 +1,6 @@
 
 import type { MarkerVisibilityTestResult } from '../../types';
-import { testMarkerVisibility as testMarkersVisibility } from '../core/testVisibility';
+import { testMarkerVisibility } from '../core/testVisibility';
 
 /**
  * Create a debugger overlay to visualize marker issues
@@ -27,7 +27,7 @@ export function createMarkerDebugger() {
   `;
   
   // Run the visibility test
-  const result = testMarkersVisibility(false);
+  const result = testMarkerVisibility();
   
   // Create the content
   let content = `
@@ -89,7 +89,7 @@ export function createMarkerDebugger() {
   const fixButton = document.getElementById('fix-marker-issues');
   if (fixButton) {
     fixButton.addEventListener('click', () => {
-      testMarkersVisibility(true);
+      testMarkerVisibility();
       document.body.removeChild(debuggerContainer);
       createMarkerDebugger(); // Recreate with updated info
     });
