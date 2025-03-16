@@ -1,4 +1,3 @@
-
 import React, { Suspense, useEffect } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import RouterProvider from './components/router/RouterProvider';
@@ -7,6 +6,8 @@ import { AuthProvider } from './components/auth/AuthContext';
 import { injectEmergencyStyles } from './utils/markers/styleInjection';
 import { forceMapMarkersVisible } from './utils/forceMapMarkers';
 import './App.css';
+import './styles/animations.css';
+import './styles/map-loading.css';
 
 // Create a client with better error handling
 const queryClient = new QueryClient({

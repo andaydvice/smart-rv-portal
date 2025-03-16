@@ -11,6 +11,7 @@ interface MapViewProps {
   mapLoaded: boolean;
   facilities: StorageFacility[];
   selectedState: string | null;
+  loadingProgress?: number;
 }
 
 /**
@@ -22,7 +23,8 @@ const MapView: React.FC<MapViewProps> = ({
   mapError,
   mapLoaded,
   facilities,
-  selectedState
+  selectedState,
+  loadingProgress = 0
 }) => {
   return (
     <div className="w-full h-full relative">

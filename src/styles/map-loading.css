@@ -1,0 +1,28 @@
+
+/* Loading progress animations */
+@keyframes progress-pulse {
+  0% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.6;
+  }
+}
+
+.progress-bar-animated {
+  animation: progress-pulse 1.5s ease-in-out infinite;
+}
+
+.map-loading-overlay {
+  background-color: rgba(8, 15, 31, 0.85);
+  backdrop-filter: blur(3px);
+  transition: opacity 0.3s ease-out;
+}
+
+.map-loading-overlay.fade-out {
+  opacity: 0;
+  pointer-events: none;
+}

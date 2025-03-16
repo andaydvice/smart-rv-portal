@@ -1,7 +1,8 @@
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { AlertCircle, Loader2 } from 'lucide-react';
+import MapLoadingProgress from './MapLoadingProgress';
 
 interface MapLoadingStateProps {
   isInitializing: boolean;
@@ -16,6 +17,38 @@ const MapLoadingState: React.FC<MapLoadingStateProps> = ({
   mapLoaded,
   facilitiesCount
 }) => {
+  const [percentLoaded, setPercentLoaded] = useState(0);
+  
+  // Animate loading progress
+  useEffect(() => {
+    if (!isInitializing || mapLoaded) return;
+    
+    let progressInterval: NodeJS.Timeout;
+    
+    // Simulate loading progress
+    progressInterval = setInterval(() => {
+      setPercentLoaded(prev => {
+        // Start slow, accelerate in the middle, and slow down at the end
+        const increment = prev < 30 ? 1 : prev < 70 ? 2 : 0.5;
+        const newValue = prev + increment;
+        
+        // Cap at 90% until fully loaded
+        return newValue > 90 && !mapLoaded ? 90 : newValue;
+      });
+    }, 100);
+    
+    return () => {
+      clearInterval(progressInterval);
+    };
+  }, [isInitializing, mapLoaded]);
+  
+  // Complete progress when map is loaded
+  useEffect(() => {
+    if (mapLoaded && percentLoaded < 100) {
+      setPercentLoaded(100);
+    }
+  }, [mapLoaded, percentLoaded]);
+
   return (
     <>
       {mapError && (
@@ -32,14 +65,11 @@ const MapLoadingState: React.FC<MapLoadingStateProps> = ({
         </div>
       )}
       
-      {isInitializing && (
-        <div className="absolute inset-0 flex items-center justify-center bg-[#080F1F]/80">
-          <div className="flex flex-col items-center gap-4">
-            <Loader2 className="w-8 h-8 animate-spin text-blue-500" />
-            <p className="text-gray-400">Loading map...</p>
-          </div>
-        </div>
-      )}
+      {/* Use our new progress component */}
+      <MapLoadingProgress 
+        percentLoaded={percentLoaded} 
+        showProgress={isInitializing && !mapLoaded} 
+      />
     </>
   );
 };

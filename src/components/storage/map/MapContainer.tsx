@@ -23,6 +23,7 @@ const MapContainer: React.FC<MapContainerProps> = ({
   const { mapContainer, mapLoaded, isInitializing, mapError } = useMap();
   const { mapRef } = useMapContext();
   const [markersCreated, setMarkersCreated] = useState<boolean>(false);
+  const [loadingProgress, setLoadingProgress] = useState<number>(0);
   
   // Log props for debugging
   useEffect(() => {
@@ -50,6 +51,19 @@ const MapContainer: React.FC<MapContainerProps> = ({
         [-98.5795, 39.8283], // Center of US
         3 // Initial zoom level
       );
+      
+      // Track loading progress
+      map.on('dataloading', () => {
+        setLoadingProgress(prev => Math.min(prev + 5, 90));
+      });
+      
+      map.on('data', () => {
+        setLoadingProgress(prev => Math.min(prev + 2, 95));
+      });
+      
+      map.on('idle', () => {
+        setLoadingProgress(100);
+      });
       
       // Set the map reference
       mapRef.current = map;
@@ -85,6 +99,7 @@ const MapContainer: React.FC<MapContainerProps> = ({
         mapLoaded={mapLoaded}
         facilities={facilities || []}
         selectedState={selectedState}
+        loadingProgress={loadingProgress}
       />
       
       {mapRef.current && mapLoaded && (
