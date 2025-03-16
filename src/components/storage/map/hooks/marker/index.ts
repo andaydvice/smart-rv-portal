@@ -5,3 +5,5 @@ export * from './useMarkerVisibility';
 export * from './useMarkerErrorHandling';
 export * from './useMarkerStats';
 export * from './useMarkerSetup';
+export * from './useMarkerHighlight';
+export * from './useCreateNewMarker';
