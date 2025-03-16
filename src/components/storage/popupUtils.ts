@@ -79,7 +79,7 @@ export const createPopupHTML = (facility: StorageFacility) => {
           visibility: visible !important;
           min-width: 220px !important;
           width: auto !important;
-          max-width: 300px !important;
+          max-width: 320px !important;
           border-radius: 8px !important;
           box-shadow: 0 0 20px rgba(0,0,0,0.5) !important;
           position: relative !important;

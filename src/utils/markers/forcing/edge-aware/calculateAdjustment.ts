@@ -37,10 +37,10 @@ export function calculateEdgeAdjustment(
   let needsAdjustment = false;
   
   // Check if marker is too close to the left edge
-  if (markerPoint.x < effectivePadding.left + markerWidth / 2) {
+  if (markerPoint.x < effectivePadding.left + markerWidth / 2 + popupWidth/4) {
     console.log('Marker too close to left edge, adjusting');
     const adjustedPoint = map.unproject(
-      new mapboxgl.Point(effectivePadding.left + markerWidth / 2 + popupWidth/4, markerPoint.y)
+      new mapboxgl.Point(effectivePadding.left + markerWidth / 2 + popupWidth/3, markerPoint.y)
     );
     newCenter[0] = adjustedPoint.lng;
     needsAdjustment = true;
@@ -50,27 +50,27 @@ export function calculateEdgeAdjustment(
   else if (markerPoint.x > mapWidth - effectivePadding.right - popupWidth/2) {
     console.log('Marker too close to right edge, adjusting');
     const adjustedPoint = map.unproject(
-      new mapboxgl.Point(mapWidth - effectivePadding.right - popupWidth/2, markerPoint.y)
+      new mapboxgl.Point(mapWidth - effectivePadding.right - popupWidth/2 - markerWidth/2, markerPoint.y)
     );
     newCenter[0] = adjustedPoint.lng;
     needsAdjustment = true;
   }
   
   // Check if marker is too close to the top edge
-  if (markerPoint.y < effectivePadding.top + markerHeight/2) {
+  if (markerPoint.y < effectivePadding.top + markerHeight/2 + popupHeight/4) {
     console.log('Marker too close to top edge, adjusting');
     const adjustedPoint = map.unproject(
-      new mapboxgl.Point(markerPoint.x, effectivePadding.top + markerHeight/2)
+      new mapboxgl.Point(markerPoint.x, effectivePadding.top + markerHeight/2 + popupHeight/3)
     );
     newCenter[1] = adjustedPoint.lat;
     needsAdjustment = true;
   }
   
   // Check if marker is too close to the bottom edge
-  else if (markerPoint.y > mapHeight - effectivePadding.bottom - popupHeight) {
+  else if (markerPoint.y > mapHeight - effectivePadding.bottom - popupHeight - markerHeight/2) {
     console.log('Marker too close to bottom edge, adjusting');
     const adjustedPoint = map.unproject(
-      new mapboxgl.Point(markerPoint.x, mapHeight - effectivePadding.bottom - popupHeight)
+      new mapboxgl.Point(markerPoint.x, mapHeight - effectivePadding.bottom - popupHeight - markerHeight)
     );
     newCenter[1] = adjustedPoint.lat;
     needsAdjustment = true;
