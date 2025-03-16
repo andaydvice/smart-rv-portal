@@ -7,7 +7,8 @@ import { toast } from "sonner";
 import { 
   removeViewDetailsButtons, 
   hideAllPopups,
-  enableEdgeAwareMarkers
+  enableEdgeAwareMarkers,
+  createEdgeAwareClickHandler
 } from '@/utils/markers';
 
 /**
@@ -109,7 +110,7 @@ export const useMapMarkers = (
         if (isNaN(lat) || isNaN(lng)) return;
         
         // Create edge-aware handler
-        const edgeAwareHandler = createEdgeAwareHandler(map, lng, lat, facilityId);
+        const edgeAwareHandler = createCustomEdgeAwareHandler(map, lng, lat, facilityId);
         
         // Remove old handlers
         const oldHandler = markerEl.getAttribute('data-click-handler');
@@ -134,15 +135,13 @@ export const useMapMarkers = (
   /**
    * Creates an edge-aware handler for a marker
    */
-  const createEdgeAwareHandler = useCallback((
+  const createCustomEdgeAwareHandler = useCallback((
     map: mapboxgl.Map, 
     lng: number, 
     lat: number, 
     facilityId: string
   ) => {
-    // Import here to avoid circular dependencies
-    const { createEdgeAwareClickHandler } = require('@/utils/markers');
-    
+    // Use imported function directly, no require statement
     return createEdgeAwareClickHandler(
       map,
       [lng, lat],
