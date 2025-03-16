@@ -39,3 +39,26 @@
 .animate-fade-in {
   animation: fade-in 0.3s ease-out;
 }
+
+/* Popup and marker visibility fixes */
+.mapboxgl-popup {
+  z-index: 1200 !important;
+  max-width: none !important;
+}
+
+.mapboxgl-popup-content {
+  max-width: 300px !important;
+  min-width: 200px !important;
+  overflow: visible !important;
+}
+
+/* Ensure details are fully visible when markers are clicked */
+.facility-popup-content {
+  max-height: none !important;
+  overflow: visible !important;
+}
+
+/* Fix for popup tips that can cause content clipping */
+.mapboxgl-popup-tip {
+  z-index: 1199 !important;
+}

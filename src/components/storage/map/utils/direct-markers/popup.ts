@@ -20,12 +20,16 @@ export function createPopupElement(
   popup.className = 'direct-popup';
   popup.id = `direct-popup-${facility.id}`;
   
-  // Position popup
+  // Position popup - moved further away from the marker to prevent overlap
   popup.style.left = `${point.x}px`;
-  popup.style.top = `${point.y - 15}px`;
+  popup.style.top = `${point.y - 25}px`; // Increased distance from marker
   
   // Apply styling
-  applyPopupStyling(popup, options);
+  applyPopupStyling(popup, {
+    ...options,
+    minWidth: options?.minWidth || 240, // Increased min width
+    maxWidth: options?.maxWidth || 340  // Increased max width
+  });
   
   // Set popup content
   popup.innerHTML = createPopupContent(facility);
@@ -38,7 +42,7 @@ export function createPopupElement(
  */
 export function createPopupContent(facility: StorageFacility): string {
   return `
-    <div class="p-2">
+    <div class="p-3 overflow-visible">
       <h3 class="text-lg font-semibold mb-1 text-[#60A5FA]">${facility.name}</h3>
       <div class="space-y-1 text-sm">
         <p>${facility.address}</p>
@@ -83,6 +87,7 @@ export function addCloseButton(popup: HTMLElement, onClose?: () => void): HTMLEl
   closeButton.style.cursor = 'pointer';
   closeButton.style.background = 'none';
   closeButton.style.border = 'none';
+  closeButton.style.zIndex = '10001'; // Increased z-index for better clickability
   
   // Add click handler
   closeButton.addEventListener('click', (e) => {

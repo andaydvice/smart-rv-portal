@@ -62,17 +62,17 @@ export const createPopupHTML = (facility: StorageFacility) => {
       <style>
         /* Critical styles to fix popup visibility and interaction issues */
         .mapboxgl-popup {
-          z-index: 1100 !important; 
+          z-index: 1500 !important; 
           pointer-events: all !important;
           visibility: visible !important;
           display: block !important;
-          max-width: 300px !important;
+          max-width: none !important;
           width: auto !important;
           position: absolute !important;
           overflow: visible !important;
         }
         .mapboxgl-popup-content {
-          z-index: 1100 !important;
+          z-index: 1500 !important;
           padding: 0 !important;
           overflow: visible !important;
           pointer-events: all !important;
@@ -86,7 +86,7 @@ export const createPopupHTML = (facility: StorageFacility) => {
           transform: none !important;
         }
         .mapboxgl-popup-close-button {
-          z-index: 1110 !important;
+          z-index: 1510 !important;
           color: white !important;
           font-size: 20px !important;
           padding: 5px 10px !important;

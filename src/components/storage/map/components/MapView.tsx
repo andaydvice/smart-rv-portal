@@ -29,12 +29,17 @@ const MapView: React.FC<MapViewProps> = ({
   infiniteLoading = false
 }) => {
   return (
-    <div className="w-full h-full relative">
-      {/* Map container */}
+    <div className="w-full h-full relative overflow-visible">
+      {/* Map container with improved overflow handling */}
       <div 
         ref={mapContainer} 
         className="w-full h-full rounded-lg overflow-visible" 
-        style={{ overflow: 'visible', minHeight: '650px' }}
+        style={{ 
+          overflow: 'visible', 
+          minHeight: '650px', 
+          contain: 'layout paint',
+          isolation: 'isolate'
+        }}
       />
       
       {/* Loading and error states */}

@@ -53,9 +53,9 @@ export function preventMarkerEdgeCutoff(
   const markerWidth = markerElement.offsetWidth || 24;
   const markerHeight = markerElement.offsetHeight || 24;
   
-  // Account for popup height (estimated)
-  const popupHeight = 150;
-  const popupWidth = 300;
+  // Account for popup height (estimated) - increased to ensure full visibility
+  const popupHeight = 200;  // Increased from 150
+  const popupWidth = 320;   // Increased from 300
   
   // Calculate if adjustment is needed
   const { needsAdjustment, newCenter } = calculateEdgeAdjustment(
