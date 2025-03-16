@@ -25,16 +25,22 @@ const MapControlsLayer: React.FC<MapControlsLayerProps> = ({
   const failedAttempts = markerErrorHandling?.getTotalFailedAttempts() || 0;
   const maxAttempts = markerErrorHandling?.MAX_RETRY_ATTEMPTS || 10;
 
+  // Get facilities count for debug overlay
+  const facilitiesCount = Object.keys(markersRef.current || {}).length;
+  
   return (
     <>
-      {enableControls && (
-        <MapControls onFilterClick={onFilterClick} />
+      {enableControls && mapRef.current && (
+        <MapControls 
+          map={mapRef.current} 
+          onFilterClick={onFilterClick} 
+        />
       )}
       
-      {showDebugOverlay && mapRef.current && (
+      {showDebugOverlay && (
         <MapDebugOverlay 
-          map={mapRef.current} 
-          markers={markersRef.current || {}} 
+          facilitiesCount={facilitiesCount}
+          selectedState={null}
         />
       )}
       

@@ -24,7 +24,10 @@ const MapView: React.FC<MapViewProps> = ({
   
   return (
     <div className="w-full h-full">
-      <MapProvider mapToken={mapToken}>
+      <MapProvider 
+        facilities={facilities} 
+        mapToken={mapToken}
+      >
         <MapContainer
           facilities={facilities}
           highlightedFacility={highlightedFacility}

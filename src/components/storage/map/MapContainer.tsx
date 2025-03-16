@@ -1,6 +1,6 @@
 
 import React, { useEffect, useState } from 'react';
-import { useMap } from './MapContext';
+import { useMap, useMapContext } from './MapContext';
 import { StorageFacility } from '../types';
 import MapView from './components/MapView';
 import MapInteractions from './components/MapInteractions';

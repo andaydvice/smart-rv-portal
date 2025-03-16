@@ -14,7 +14,7 @@ const MapDebugOverlay: React.FC<MapDebugOverlayProps> = ({
   selectedState
 }) => {
   // Only show in development mode
-  if (process.env.NODE_ENV !== 'development') {
+  if (import.meta.env.MODE !== 'development') {
     return null;
   }
   
