@@ -113,7 +113,7 @@ export function createEmergencyMarkers(
         () => {
           // Close all other popups
           document.querySelectorAll('.direct-popup').forEach(p => {
-            if (p.id !== popup.id) {
+            if (p.id !== popup.id && p instanceof HTMLElement) {
               p.style.display = 'none';
               p.style.visibility = 'hidden';
               p.style.opacity = '0';
@@ -207,14 +207,14 @@ export function createEmergencyMarkers(
         
         // Update marker position
         const marker = document.getElementById(`direct-marker-${facility.id}`);
-        if (marker) {
+        if (marker && marker instanceof HTMLElement) {
           marker.style.left = `${point.x}px`;
           marker.style.top = `${point.y}px`;
         }
         
         // Update popup position
         const popup = document.getElementById(`direct-popup-${facility.id}`);
-        if (popup) {
+        if (popup && popup instanceof HTMLElement) {
           popup.style.left = `${point.x}px`;
           popup.style.top = `${point.y - 140}px`;
         }
