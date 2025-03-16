@@ -5,7 +5,7 @@ import { StorageFacility } from '../../types';
 import { useMapMarkers } from '../hooks/useMapMarkers';
 import { useFacilityHighlight } from '../hooks/useFacilityHighlight';
 import { useMapSetup } from '../hooks/useMapSetup';
-import { enableEdgeAwareMarkers } from '@/utils/markers/forcing/edge-aware';
+import { enableEdgeAwareMarkers } from '@/utils/markers/forcing/edge-aware/index';
 
 interface MapInteractionsProps {
   map: mapboxgl.Map | null;

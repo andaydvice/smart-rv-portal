@@ -1,11 +1,20 @@
 
 import mapboxgl from 'mapbox-gl';
 import { preventMarkerEdgeCutoff } from './edge-aware/preventEdgeCutoff';
+import { createEdgeAwareClickHandler } from './edge-aware/createClickHandler';
+import { enableEdgeAwareMarkers } from './edge-aware/enableEdgeAwareMarkers';
+import type { EdgePadding } from './edge-aware/types';
+
+// Re-export all utilities
+export { preventMarkerEdgeCutoff, createEdgeAwareClickHandler, enableEdgeAwareMarkers };
+export type { EdgePadding };
 
 /**
  * Enables edge-aware behavior for all markers on a map
+ * 
+ * @deprecated Use `enableEdgeAwareMarkers` from './edge-aware/enableEdgeAwareMarkers' instead
  */
-export function enableEdgeAwareMarkers(map: mapboxgl.Map): void {
+export function enableEdgeAwareMarkers_old(map: mapboxgl.Map): void {
   if (!map) {
     console.warn('Cannot enable edge-aware markers: map is null');
     return;
@@ -47,8 +56,10 @@ export function enableEdgeAwareMarkers(map: mapboxgl.Map): void {
 
 /**
  * Creates an edge-aware click handler for a marker at specific coordinates
+ * 
+ * @deprecated Use `createEdgeAwareClickHandler` from './edge-aware/createClickHandler' instead
  */
-export function createEdgeAwareClickHandler(
+export function createEdgeAwareClickHandler_old(
   map: mapboxgl.Map,
   coordinates: [number, number],
   callback: (e: MouseEvent) => void

@@ -17,7 +17,7 @@ export {
   preventMarkerEdgeCutoff,
   createEdgeAwareClickHandler,
   enableEdgeAwareMarkers
-} from './forcing/edge-aware';
+} from './forcing/edge-aware/index';
 
 // Popup utilities
 export { hideAllPopups } from './forcing/uiManipulation';

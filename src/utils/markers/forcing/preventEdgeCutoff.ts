@@ -4,11 +4,9 @@
  * It exists for backward compatibility with existing imports
  */
 
-export { 
-  preventMarkerEdgeCutoff,
-  createEdgeAwareClickHandler,
-  enableEdgeAwareMarkers
-} from './edge-aware';
+export { preventMarkerEdgeCutoff } from './edge-aware/preventEdgeCutoff';
+export { createEdgeAwareClickHandler } from './edge-aware/createClickHandler';
+export { enableEdgeAwareMarkers } from './edge-aware/enableEdgeAwareMarkers';
 
 export type { 
   EdgePadding,
