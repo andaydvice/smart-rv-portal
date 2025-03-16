@@ -8,7 +8,7 @@ export type StorageFacility = StorageFacilityType;
  * Results of testing marker visibility
  */
 export interface MarkerVisibilityTestResult {
-  // Original properties
+  // Original properties - these need to stay for backward compatibility
   total: number;
   visible: number;
   hidden: number;
@@ -24,7 +24,7 @@ export interface MarkerVisibilityTestResult {
  * Details about a specific marker visibility issue
  */
 export interface VisibilityIssueDetail {
-  // Original properties
+  // Original properties - these need to stay for backward compatibility
   facilityId?: string;
   elementId?: string;
   issue: string;

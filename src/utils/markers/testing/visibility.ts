@@ -58,7 +58,8 @@ export function testMarkersVisibility(fixIssues: boolean = false): MarkerVisibil
     }
   });
   
-  return {
+  // Create result object with both original and new property names
+  const result: MarkerVisibilityTestResult = {
     total: markers.length,
     visible: visibleCount, 
     hidden: hiddenCount,
@@ -68,4 +69,7 @@ export function testMarkersVisibility(fixIssues: boolean = false): MarkerVisibil
     visibleMarkers: visibleCount,
     hiddenMarkers: hiddenCount
   };
+  
+  console.log('Marker visibility test results:', result);
+  return result;
 }

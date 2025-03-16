@@ -1,3 +1,4 @@
+
 import React, { useEffect, useCallback, memo } from 'react';
 import mapboxgl from 'mapbox-gl';
 import { StorageFacility } from '../types';
@@ -94,7 +95,7 @@ const FacilityMarkers: React.FC<FacilityMarkersProps> = memo(({
           // Run visibility test after marker creation
           if (process.env.NODE_ENV === 'development') {
             setTimeout(() => {
-              // Fix: Remove the argument as testMarkersVisibility doesn't expect one
+              // Fix: Call the testMarkersVisibility function without arguments
               testMarkersVisibility();
             }, 1000);
           }

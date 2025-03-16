@@ -1,14 +1,13 @@
 
-import type { MarkerVisibilityTestResult, VisibilityIssueDetail } from '../types';
+import { StorageFacility } from '@/components/storage/types';
+import { MarkerVisibilityTestResult, VisibilityIssueDetail } from '../types';
 
 /**
- * Tests the visibility of map markers and logs any issues
+ * Tests marker visibility and reports any issues
  */
 export function testMarkersVisibility(fixIssues: boolean = false): MarkerVisibilityTestResult {
-  console.log('Testing map markers visibility');
-  
-  const markers = document.querySelectorAll('.mapboxgl-marker, .custom-marker, .emergency-marker');
-  console.log(`Found ${markers.length} markers to test`);
+  const markers = document.querySelectorAll('.mapboxgl-marker, .custom-marker');
+  console.log(`Testing visibility of ${markers.length} markers`);
   
   const issues: VisibilityIssueDetail[] = [];
   let visibleCount = 0;
@@ -16,51 +15,46 @@ export function testMarkersVisibility(fixIssues: boolean = false): MarkerVisibil
   
   markers.forEach(marker => {
     if (marker instanceof HTMLElement) {
-      const isVisible = marker.style.visibility === 'visible' &&
-                        marker.style.display === 'block' &&
-                        marker.style.opacity === '1';
+      const style = window.getComputedStyle(marker);
+      const isVisible = style.display !== 'none' && 
+                        style.visibility !== 'hidden' && 
+                        style.opacity !== '0';
       
-      if (!isVisible) {
-        console.warn('Marker is not visible:', marker);
-        console.warn('Style:', marker.style.cssText);
-        console.warn('Attributes:', marker.attributes);
-        
-        if (fixIssues) {
-          // Force marker to be visible
-          marker.style.visibility = 'visible';
-          marker.style.display = 'block';
-          marker.style.opacity = '1';
-          console.log('Fixed visibility for marker:', marker);
-        }
-        
-        // Add to issues
-        const issue: VisibilityIssueDetail = {
-          elementId: marker.id || `marker-${hiddenCount}`,
+      if (isVisible) {
+        visibleCount++;
+      } else {
+        hiddenCount++;
+        issues.push({
+          elementId: marker.id || undefined,
+          issue: `Marker hidden: display=${style.display}, visibility=${style.visibility}, opacity=${style.opacity}`,
+          description: `Marker is not visible (display=${style.display}, visibility=${style.visibility}, opacity=${style.opacity})`,
           elementType: 'marker',
           issueType: 'visibility',
-          description: `Marker is not visible (visibility: ${marker.style.visibility}, display: ${marker.style.display}, opacity: ${marker.style.opacity})`,
+          recommendation: 'Force visibility with CSS',
           computedStyles: {
-            visibility: marker.style.visibility,
-            display: marker.style.display,
-            opacity: marker.style.opacity,
-            zIndex: marker.style.zIndex,
-            position: marker.style.position,
-            pointerEvents: marker.style.pointerEvents
-          },
-          recommendation: 'Force visibility with CSS'
-        };
-        issues.push(issue);
-        hiddenCount++;
-      } else {
-        visibleCount++;
+            visibility: style.visibility,
+            display: style.display,
+            opacity: style.opacity,
+            zIndex: style.zIndex,
+            position: style.position,
+            pointerEvents: style.pointerEvents
+          }
+        });
       }
     }
   });
-  
-  return {
+
+  const result: MarkerVisibilityTestResult = {
+    total: markers.length,
+    visible: visibleCount,
+    hidden: hiddenCount,
+    issues,
+    // Add the same values to the new property names for consistency
     totalMarkers: markers.length,
     visibleMarkers: visibleCount,
-    hiddenMarkers: hiddenCount,
-    issues
+    hiddenMarkers: hiddenCount
   };
+  
+  console.log('Marker visibility test results:', result);
+  return result;
 }
