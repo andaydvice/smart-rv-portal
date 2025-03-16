@@ -1,5 +1,6 @@
 
 import mapboxgl from 'mapbox-gl';
+import { createEdgeAwareClickHandler } from '@/utils/markers/forcing/preventEdgeCutoff';
 
 export const useMarkerClickHandlers = () => {
   /**
@@ -9,7 +10,8 @@ export const useMarkerClickHandlers = () => {
     marker: mapboxgl.Marker,
     facilityId: string,
     facilityName: string,
-    onMarkerClick: (facilityId: string) => void
+    onMarkerClick: (facilityId: string) => void,
+    map: mapboxgl.Map
   ): ((e: MouseEvent) => void) => {
     // Define a more robust click handler that won't be garbage collected
     const handleMarkerClick = (e: MouseEvent) => {
@@ -21,10 +23,21 @@ export const useMarkerClickHandlers = () => {
       // Call the click handler first (this navigates or shows details)
       onMarkerClick(facilityId);
       
-      // Then handle the popup toggle
-      if (!marker.getPopup().isOpen()) {
-        marker.togglePopup();
-      }
+      // Apply edge-aware positioning to ensure marker and popup are fully visible
+      const markerElement = marker.getElement();
+      const coordinates = marker.getLngLat().toArray() as [number, number];
+      
+      // Use edge-aware handler to adjust map position
+      createEdgeAwareClickHandler(
+        map,
+        coordinates,
+        () => {
+          // Then handle the popup toggle after map position is adjusted
+          if (!marker.getPopup().isOpen()) {
+            marker.togglePopup();
+          }
+        }
+      )(e);
       
       // Ensure popup is visible and clickable
       setTimeout(() => {
@@ -90,14 +103,16 @@ export const useMarkerClickHandlers = () => {
     marker: mapboxgl.Marker,
     facilityId: string,
     facilityName: string,
-    onMarkerClick: (facilityId: string) => void
+    onMarkerClick: (facilityId: string) => void,
+    map: mapboxgl.Map
   ): void => {
     // Create the click handler
     const handleMarkerClick = createMarkerClickHandler(
       marker,
       facilityId,
       facilityName,
-      onMarkerClick
+      onMarkerClick,
+      map
     );
     
     // Remove any existing click listeners to prevent duplicates

@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar";
 import Layout from "@/components/layout/Layout";
 import { Warehouse } from "lucide-react";
 import "../styles/force-markers.css"; // Only load the minimal, clean CSS
+import "../styles/map-fixes.css"; // Add our marker edge-clipping fixes
 
 // Helper function to normalize state names consistently
 const normalizeStateName = (stateAbbr: string): string => {
