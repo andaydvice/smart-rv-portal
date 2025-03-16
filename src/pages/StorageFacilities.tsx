@@ -6,6 +6,7 @@ import { Warehouse } from "lucide-react";
 import "../styles/force-markers.css"; // Only load the minimal, clean CSS
 import "../styles/map-fixes.css"; // Add our marker edge-clipping fixes
 import "../styles/marker-fix.css"; // Additional critical marker fixes
+import "../styles/responsive-map.css"; // Add our new responsive map styles
 
 // Helper function to normalize state names consistently
 const normalizeStateName = (stateAbbr: string): string => {
@@ -93,7 +94,7 @@ export default function StorageFacilities() {
         {/* Add clear spacing between hero and map content */}
         <div className="h-6"></div>
         
-        <Container fullWidth className="px-2 md:px-4">
+        <Container fullWidth className="px-2 md:px-4 overflow-hidden max-w-[1920px] mx-auto">
           <div className="py-4">
             <StorageFacilitiesMap />
           </div>
