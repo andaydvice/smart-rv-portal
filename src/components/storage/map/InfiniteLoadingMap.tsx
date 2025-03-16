@@ -60,16 +60,17 @@ const InfiniteLoadingMap: React.FC<InfiniteLoadingMapProps> = ({
       mapInstance.on('load', () => {
         console.log('Map loaded');
         
-        // After map loads, simulate a delay before reaching 100%
-        setTimeout(() => {
-          setLoadingPercent(100);
-          setTimeout(() => {
-            setLoading(false);
-            if (onMapLoaded) onMapLoaded();
-          }, 500);
-        }, 1000);
-        
+        // Clear any existing interval
         clearInterval(intervalId);
+        
+        // After map loads, explicitly set loading to 100%
+        setLoadingPercent(100);
+        
+        // Then hide loading screen after a short delay to show 100%
+        setTimeout(() => {
+          setLoading(false);
+          if (onMapLoaded) onMapLoaded();
+        }, 800);
       });
       
       // Add navigation controls

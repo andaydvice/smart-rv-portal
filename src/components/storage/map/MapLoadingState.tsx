@@ -20,10 +20,11 @@ const MapLoadingState: React.FC<MapLoadingStateProps> = ({
   infiniteLoading = false
 }) => {
   const [percentLoaded, setPercentLoaded] = useState(0);
+  const [showLoader, setShowLoader] = useState(true);
   
   // Animate loading progress
   useEffect(() => {
-    if (!isInitializing || mapLoaded) return;
+    if (!isInitializing) return;
     
     let progressInterval: NodeJS.Timeout;
     
@@ -52,10 +53,18 @@ const MapLoadingState: React.FC<MapLoadingStateProps> = ({
   
   // Complete progress when map is loaded
   useEffect(() => {
-    if (mapLoaded && percentLoaded < 100) {
+    if (mapLoaded) {
+      // Set to 100% when map is loaded
       setPercentLoaded(100);
+      
+      // Hide loader after a short delay to show 100%
+      const hideTimer = setTimeout(() => {
+        setShowLoader(false);
+      }, 500);
+      
+      return () => clearTimeout(hideTimer);
     }
-  }, [mapLoaded, percentLoaded]);
+  }, [mapLoaded]);
 
   return (
     <>
@@ -76,7 +85,7 @@ const MapLoadingState: React.FC<MapLoadingStateProps> = ({
       {/* Use our progress component with infinite loading option */}
       <MapLoadingProgress 
         percentLoaded={percentLoaded} 
-        showProgress={isInitializing && !mapLoaded} 
+        showProgress={isInitializing && !mapLoaded && showLoader} 
         infiniteLoading={infiniteLoading}
       />
     </>
