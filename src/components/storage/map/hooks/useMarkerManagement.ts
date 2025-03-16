@@ -1,12 +1,14 @@
 
-import { useEffect, useState, useCallback } from 'react';
+import { useCallback } from 'react';
 import { StorageFacility } from '../../types';
+import { removeViewDetailsButtons } from '@/utils/markers';
 import { 
-  injectEmergencyMarkerStyles,
-  createEmergencyMarkers,
-  setupEmergencyMarkerListeners,
-  removeViewDetailsButtons
-} from '@/utils/markers';
+  useMarkerCreation,
+  useMarkerVisibility,
+  useMarkerErrorHandling,
+  useMarkerStats,
+  useMarkerSetup
+} from './marker';
 
 /**
  * Hook to handle marker creation and management
@@ -17,182 +19,43 @@ export const useMarkerManagement = (
   validFacilities: StorageFacility[], 
   onMarkerClick: (facilityId: string) => void
 ) => {
-  // State for tracking markers
-  const [stats, setStats] = useState({
-    markersCreated: 0,
-    skippedFacilities: 0,
-    processedNYFacilities: 0,
-    totalNYFacilities: 0
-  });
+  // Use smaller, focused hooks
+  const { stats, updateStats } = useMarkerStats();
+  const { forceMarkerVisibility } = useMarkerVisibility();
+  const { errors, markErrorAsRecovered, addError } = useMarkerErrorHandling();
+  const { createMarkers: createMarkersBase } = useMarkerCreation(map, mapLoaded, validFacilities);
   
-  // State for tracking errors
-  const [errors, setErrors] = useState<Array<{
-    facilityId: string,
-    error?: Error,
-    type: string,
-    timestamp: number
-  }>>([]);
+  // Set up markers and event listeners
+  useMarkerSetup(
+    map, 
+    mapLoaded, 
+    validFacilities, 
+    onMarkerClick, 
+    forceMarkerVisibility,
+    updateStats
+  );
 
-  // Create markers function
+  // Enhanced createMarkers function that updates stats and tracks errors
   const createMarkers = useCallback(() => {
     if (!map || !mapLoaded || validFacilities.length === 0) return 0;
     
     try {
-      // Create emergency markers - ensure we're creating the exact number of markers needed
-      console.log(`Creating markers for ${validFacilities.length} facilities`);
-      
-      // Force clear existing markers first to ensure accurate count
-      document.querySelectorAll('.mapboxgl-marker, .custom-marker').forEach(marker => {
-        if (marker.parentNode) {
-          marker.parentNode.removeChild(marker);
-        }
-      });
-      
-      // Create fresh markers for all facilities
-      const markerCount = createEmergencyMarkers(map, validFacilities);
-      
-      // Remove any view details buttons that might be created
-      removeViewDetailsButtons();
+      const markerCount = createMarkersBase();
       
       // Update stats
-      setStats(prev => ({
-        ...prev,
-        markersCreated: markerCount,
-        skippedFacilities: validFacilities.length - markerCount
-      }));
+      updateStats(markerCount, validFacilities.length - markerCount);
       
       return markerCount;
     } catch (error) {
       console.error("Error creating markers:", error);
-      setErrors(prev => [...prev, {
-        facilityId: 'batch-creation',
-        error: error instanceof Error ? error : new Error(String(error)),
-        type: 'CREATION_ERROR',
-        timestamp: Date.now()
-      }]);
+      addError(
+        { id: 'batch-creation' } as StorageFacility, 
+        error instanceof Error ? error : new Error(String(error)), 
+        'CREATION_ERROR'
+      );
       return 0;
     }
-  }, [map, mapLoaded, validFacilities]);
-
-  // Force marker visibility function
-  const forceMarkerVisibility = useCallback(() => {
-    document.querySelectorAll('.mapboxgl-marker, .custom-marker').forEach(marker => {
-      if (marker instanceof HTMLElement) {
-        marker.style.visibility = 'visible';
-        marker.style.display = 'block';
-        marker.style.opacity = '1';
-      }
-    });
-    
-    // Also remove any view details buttons
-    removeViewDetailsButtons();
-  }, []);
-
-  // Mark error as recovered
-  const markErrorAsRecovered = useCallback((facilityId: string) => {
-    setErrors(prev => prev.filter(err => err.facilityId !== facilityId));
-  }, []);
-  
-  // Emergency marker creation approach
-  useEffect(() => {
-    if (!map || !mapLoaded || validFacilities.length === 0) return;
-    
-    // Inject emergency styles
-    injectEmergencyMarkerStyles();
-    
-    // Set map container to be explicitly visible
-    const container = map.getContainer();
-    if (container) {
-      container.style.visibility = 'visible';
-      container.style.opacity = '1';
-      container.style.display = 'block';
-    }
-    
-    console.log(`Creating ${validFacilities.length} markers for facilities...`);
-    
-    // Create emergency markers and set up listeners
-    const markerCount = createEmergencyMarkers(map, validFacilities);
-    console.log(`Created ${markerCount} emergency markers`);
-    
-    // Remove any view details buttons
-    removeViewDetailsButtons();
-    
-    // Update stats
-    setStats(prev => ({
-      ...prev,
-      markersCreated: markerCount,
-      skippedFacilities: validFacilities.length - markerCount
-    }));
-    
-    // Set up event listeners
-    const cleanup = setupEmergencyMarkerListeners(onMarkerClick);
-    
-    // Set up a MutationObserver to watch for popup close buttons and remove view details buttons
-    const observer = new MutationObserver((mutations) => {
-      mutations.forEach(mutation => {
-        if (mutation.type === 'childList') {
-          // Look for newly added popups
-          mutation.addedNodes.forEach(node => {
-            if (node instanceof HTMLElement && node.classList.contains('mapboxgl-popup')) {
-              // Remove any view details buttons
-              removeViewDetailsButtons();
-              
-              // Find close button
-              const closeButton = node.querySelector('.mapboxgl-popup-close-button');
-              if (closeButton instanceof HTMLElement) {
-                // Replace with new button to clear old event listeners
-                const newButton = closeButton.cloneNode(true);
-                closeButton.parentNode?.replaceChild(newButton, closeButton);
-                
-                // Add clean event listener to the close button
-                newButton.addEventListener('click', (e) => {
-                  e.stopPropagation();
-                  e.preventDefault();
-                  
-                  // Remove the popup
-                  node.remove();
-                  
-                  // Make sure map is visible
-                  setTimeout(() => {
-                    if (map) {
-                      // Ensure map canvas is visible
-                      const canvas = map.getCanvas();
-                      if (canvas) {
-                        canvas.style.visibility = 'visible';
-                        canvas.style.display = 'block';
-                      }
-                      
-                      // Force all markers to be visible
-                      forceMarkerVisibility();
-                    }
-                  }, 50);
-                });
-              }
-            }
-          });
-        }
-      });
-    });
-    
-    // Start observing the document for popup additions
-    observer.observe(document.body, {
-      childList: true,
-      subtree: true
-    });
-    
-    // Periodically remove view details buttons
-    const removalInterval = setInterval(removeViewDetailsButtons, 2000);
-    
-    return () => {
-      cleanup();
-      observer.disconnect();
-      clearInterval(removalInterval);
-      // Remove emergency markers
-      document.querySelectorAll('.emergency-marker').forEach(marker => {
-        if (marker.parentNode) marker.parentNode.removeChild(marker);
-      });
-    };
-  }, [map, mapLoaded, validFacilities, onMarkerClick, forceMarkerVisibility]);
+  }, [map, mapLoaded, validFacilities, createMarkersBase, updateStats, addError]);
 
   // Return all needed functions and state
   return {

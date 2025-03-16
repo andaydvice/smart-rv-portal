@@ -1,34 +1,32 @@
 
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 
-export interface MarkerStatistics {
-  markersCreated: number;
-  skippedFacilities: number;
-  processedNYFacilities: number;
-  totalFacilities: number;
-  totalNYFacilities: number;
-  startTime?: number;
-  endTime?: number;
-}
-
+/**
+ * Hook for tracking marker statistics
+ */
 export const useMarkerStats = () => {
-  const [stats, setStats] = useState<MarkerStatistics>({
+  // State for tracking markers
+  const [stats, setStats] = useState({
     markersCreated: 0,
     skippedFacilities: 0,
     processedNYFacilities: 0,
-    totalFacilities: 0,
-    totalNYFacilities: 0,
-    startTime: Date.now(),
-    endTime: Date.now()
+    totalNYFacilities: 0
   });
 
-  const updateStats = (newStats: Partial<MarkerStatistics>) => {
-    setStats(prev => ({
-      ...prev,
-      ...newStats,
-      endTime: Date.now()
-    }));
-  };
+  // Update stats
+  const updateStats = useCallback((
+    markersCreated: number,
+    skippedFacilities: number,
+    processedNYFacilities = 0,
+    totalNYFacilities = 0
+  ) => {
+    setStats({
+      markersCreated,
+      skippedFacilities,
+      processedNYFacilities,
+      totalNYFacilities
+    });
+  }, []);
 
   return {
     stats,
