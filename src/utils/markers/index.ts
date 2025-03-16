@@ -55,3 +55,11 @@ export type {
   MarkerPosition,
   EdgeAwareClickHandler
 } from './forcing/edge-aware/types';
+
+// Export emergency marker types
+export type {
+  EmergencyMarkerOptions,
+  EmergencyPopupOptions,
+  MarkerClickHandlerOptions,
+  MarkerClickHandler
+} from './emergency/types';
