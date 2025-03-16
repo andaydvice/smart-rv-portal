@@ -1,63 +1,74 @@
 
 import { useEffect } from 'react';
+import mapboxgl from 'mapbox-gl';
 import { StorageFacility } from '../../types';
 
 /**
- * Hook to handle highlighted facility marker behavior
+ * Hook for highlighting a specific facility on the map
  */
 export const useFacilityHighlight = (
-  map: mapboxgl.Map | null, 
-  mapLoaded: boolean, 
-  validFacilities: StorageFacility[],
+  map: mapboxgl.Map | null,
+  mapLoaded: boolean,
+  facilities: StorageFacility[],
   highlightedFacility: string | null
 ) => {
-  
-  // Listen for facility selection to update the map view
+  // Focus on specific facility when highlighted
   useEffect(() => {
-    if (map && mapLoaded && highlightedFacility) {
-      const facility = validFacilities.find(f => f.id === highlightedFacility);
-      if (facility) {
-        const lat = Number(facility.latitude);
-        const lng = Number(facility.longitude);
+    if (!map || !mapLoaded || !highlightedFacility) return;
+    
+    const facility = facilities.find(f => f.id === highlightedFacility);
+    if (facility && facility.latitude && facility.longitude) {
+      const lat = parseFloat(String(facility.latitude));
+      const lng = parseFloat(String(facility.longitude));
+      
+      if (!isNaN(lat) && !isNaN(lng)) {
+        map.flyTo({
+          center: [lng, lat],
+          zoom: 14,
+          essential: true
+        });
         
-        if (!isNaN(lat) && !isNaN(lng)) {
-          console.log(`Flying to facility: ${facility.name}`);
-          map.flyTo({
-            center: [lng, lat],
-            zoom: 12,
-            padding: {top: 50, bottom: 50, left: 50, right: 50}, // Add padding to ensure marker is visible
-            essential: true
-          });
-          
-          // Highlight the emergency marker
-          document.querySelectorAll('.emergency-marker, .custom-marker, .mapboxgl-marker').forEach(marker => {
-            if (marker instanceof HTMLElement) {
-              const markerFacilityId = marker.getAttribute('data-facility-id');
-              if (markerFacilityId === highlightedFacility) {
-                marker.style.backgroundColor = '#10B981';
-                marker.style.width = '28px';
-                marker.style.height = '28px';
-                marker.style.transform = 'translate(-50%, -50%) scale(1.3)';
-                marker.style.zIndex = '10002';
-                marker.style.boxShadow = '0 0 15px rgba(16, 185, 129, 0.8)';
-                marker.style.display = 'block';
-                marker.style.visibility = 'visible';
-                marker.style.opacity = '1';
-              } else if (markerFacilityId) {
-                marker.style.backgroundColor = '#F97316';
-                marker.style.width = '24px';
-                marker.style.height = '24px';
-                marker.style.transform = 'translate(-50%, -50%) scale(1)';
-                marker.style.zIndex = '10000';
-                marker.style.boxShadow = '0 0 10px rgba(0, 0, 0, 0.5)';
-                marker.style.display = 'block';
-                marker.style.visibility = 'visible';
-                marker.style.opacity = '1';
-              }
-            }
-          });
-        }
+        // Highlight the marker
+        highlightMarker(facility.id);
       }
     }
-  }, [highlightedFacility, map, mapLoaded, validFacilities]);
+  }, [highlightedFacility, map, mapLoaded, facilities]);
+
+  /**
+   * Highlights a marker and shows its popup
+   */
+  const highlightMarker = (facilityId: string) => {
+    const marker = document.getElementById(`direct-marker-${facilityId}`);
+    if (marker instanceof HTMLElement) {
+      marker.style.backgroundColor = '#10B981';
+      marker.style.transform = 'translate(-50%, -50%) scale(1.2)';
+      marker.style.zIndex = '10000';
+      marker.style.boxShadow = '0 0 20px rgba(16, 185, 129, 0.8)';
+      
+      // Close all other popups first
+      document.querySelectorAll('.mapboxgl-popup, .direct-popup').forEach(popup => {
+        if (popup.id !== `direct-popup-${facilityId}` && popup instanceof HTMLElement) {
+          popup.classList.remove('clicked');
+          popup.classList.remove('visible');
+          popup.style.display = 'none';
+          popup.style.visibility = 'hidden';
+          popup.style.opacity = '0';
+          popup.style.zIndex = '-9999';
+          popup.style.pointerEvents = 'none';
+        }
+      });
+      
+      // Show the popup for the highlighted facility
+      const popup = document.getElementById(`direct-popup-${facilityId}`);
+      if (popup instanceof HTMLElement) {
+        popup.style.display = 'block';
+        popup.style.visibility = 'visible';
+        popup.style.opacity = '1';
+        popup.style.zIndex = '10000';
+        popup.style.pointerEvents = 'auto';
+        popup.classList.add('clicked');
+        popup.classList.add('visible');
+      }
+    }
+  };
 };
