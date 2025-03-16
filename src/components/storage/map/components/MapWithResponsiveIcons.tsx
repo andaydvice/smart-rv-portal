@@ -9,7 +9,7 @@ import '@/styles/map-icon-animations.css';
 
 interface MapLocation {
   id: string;
-  coordinates: [number, number];
+  coordinates: [number, number]; // Explicitly defined as a tuple
   details: string;
   icon: {
     src: string;
