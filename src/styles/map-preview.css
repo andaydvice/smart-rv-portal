@@ -1,0 +1,89 @@
+
+/* Map Preview Specific Styles */
+.map-preview-container {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+/* Custom styling for the location popup */
+.location-popup .mapboxgl-popup-content {
+  background-color: #151A22 !important;
+  color: white !important;
+  border-radius: 8px !important;
+  padding: 10px !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5) !important;
+  max-width: 300px !important;
+  width: auto !important;
+  min-width: 200px !important;
+}
+
+.location-popup .mapboxgl-popup-close-button {
+  color: white !important;
+  font-size: 16px !important;
+  padding: 5px !important;
+  right: 5px !important;
+  top: 5px !important;
+}
+
+/* Ensure popup tip has consistent styling */
+.location-popup .mapboxgl-popup-tip {
+  border-top-color: #151A22 !important;
+  border-bottom-color: #151A22 !important;
+}
+
+/* Ensure popups stay within map boundary */
+.mapboxgl-popup {
+  max-width: 80% !important;
+}
+
+/* Ensure the map container doesn't clip markers */
+.map-preview-container .mapboxgl-map {
+  overflow: visible !important;
+}
+
+/* Custom marker for the location preview */
+.map-preview-container .custom-marker {
+  width: 26px;
+  height: 26px;
+  background-color: #F97316;
+  border: 2px solid white;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+  transform: translate(-50%, -50%);
+  z-index: 999;
+  visibility: visible !important;
+  display: block !important;
+  opacity: 1 !important;
+  position: absolute !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .map-preview-container .custom-marker {
+    width: 22px;
+    height: 22px;
+  }
+  
+  .location-popup .mapboxgl-popup-content {
+    max-width: 220px !important;
+    min-width: 150px !important;
+  }
+}
+
+/* Failed attempts counter styling */
+.map-preview-container .failed-attempts {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(239, 68, 68, 0.8);
+  color: white;
+  padding: 4px 8px;
+  font-size: 12px;
+  text-align: center;
+  z-index: 10;
+  border-radius: 4px 4px 0 0;
+}

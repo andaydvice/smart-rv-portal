@@ -3,10 +3,12 @@ import StorageFacilitiesMap from "@/components/storage/StorageFacilitiesMap";
 import Navbar from "@/components/Navbar";
 import Layout from "@/components/layout/Layout";
 import { Warehouse } from "lucide-react";
+import LocationPreviewSection from "@/components/storage/LocationPreviewSection";
 import "../styles/force-markers.css"; // Only load the minimal, clean CSS
 import "../styles/map-fixes.css"; // Add our marker edge-clipping fixes
 import "../styles/marker-fix.css"; // Additional critical marker fixes
 import "../styles/responsive-map.css"; // Add our new responsive map styles
+import "../styles/map-preview.css"; // Add our map preview styles
 
 // Helper function to normalize state names consistently
 const normalizeStateName = (stateAbbr: string): string => {
@@ -94,11 +96,17 @@ export default function StorageFacilities() {
         {/* Add clear spacing between hero and map content */}
         <div className="h-6"></div>
         
+        {/* Main map container */}
         <Container fullWidth className="px-2 md:px-4 overflow-hidden max-w-[1920px] mx-auto">
           <div className="py-4">
             <StorageFacilitiesMap />
           </div>
         </Container>
+        
+        {/* Location Preview Section */}
+        <div className="mt-8 mb-12">
+          <LocationPreviewSection mapToken={process.env.MAPBOX_TOKEN || ""} />
+        </div>
       </div>
     </Layout>
   );
