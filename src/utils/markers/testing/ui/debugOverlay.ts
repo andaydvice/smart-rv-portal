@@ -1,6 +1,6 @@
 
 import type { MarkerVisibilityTestResult } from '../../types';
-import { testMarkersVisibility } from '../core/testVisibility';
+import { testMarkerVisibility as testMarkersVisibility } from '../core/testVisibility';
 
 /**
  * Create a debugger overlay to visualize marker issues

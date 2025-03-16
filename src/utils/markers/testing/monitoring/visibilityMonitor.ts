@@ -1,5 +1,5 @@
 
-import { testMarkersVisibility } from '../core/testVisibility';
+import { testMarkerVisibility as testMarkersVisibility } from '../core/testVisibility';
 
 /**
  * Monitor marker visibility at regular intervals
