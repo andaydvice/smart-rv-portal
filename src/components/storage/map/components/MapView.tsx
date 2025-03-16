@@ -12,6 +12,7 @@ interface MapViewProps {
   facilities: StorageFacility[];
   selectedState: string | null;
   loadingProgress?: number;
+  infiniteLoading?: boolean;
 }
 
 /**
@@ -24,7 +25,8 @@ const MapView: React.FC<MapViewProps> = ({
   mapLoaded,
   facilities,
   selectedState,
-  loadingProgress = 0
+  loadingProgress = 0,
+  infiniteLoading = false
 }) => {
   return (
     <div className="w-full h-full relative">
@@ -41,6 +43,7 @@ const MapView: React.FC<MapViewProps> = ({
         mapError={mapError} 
         mapLoaded={mapLoaded} 
         facilitiesCount={facilities.length}
+        infiniteLoading={infiniteLoading}
       />
       
       {/* Debug overlay */}
