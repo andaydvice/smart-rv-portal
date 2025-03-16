@@ -44,6 +44,22 @@ export const MapProvider: React.FC<MapProviderProps> = ({
   // Add marker error handling
   const markerErrorHandling = useMarkerErrorHandling();
 
+  // Initialize the map when the component mounts
+  useEffect(() => {
+    if (!mapToken) {
+      console.error('No mapToken provided to MapProvider');
+      return;
+    }
+
+    try {
+      // Set Mapbox token
+      mapboxgl.accessToken = mapToken;
+      console.log('Mapbox token set successfully');
+    } catch (error) {
+      console.error('Failed to set Mapbox token:', error);
+    }
+  }, [mapToken]);
+
   return (
     <MapContext.Provider
       value={{
@@ -69,7 +85,7 @@ export const useMapContext = (): MapContextProps => {
   return context;
 };
 
-// Add the useMap hook for MapContainer.tsx
+// Implement the useMap hook that was previously missing
 export const useMap = (): UseMapReturn => {
   const { mapRef } = useMapContext();
   const mapContainer = useRef<HTMLDivElement>(null);
@@ -78,14 +94,51 @@ export const useMap = (): UseMapReturn => {
   const [mapError, setMapError] = useState<string | null>(null);
 
   useEffect(() => {
-    // Basic setup to show the hook is working
-    if (mapRef.current) {
-      if (!mapLoaded) {
-        setMapLoaded(true);
+    if (!mapContainer.current) return;
+    
+    if (!mapRef.current && mapContainer.current) {
+      try {
+        // Map will be initialized in MapContainer component
+        console.log('Map container ref is ready for initialization');
+      } catch (error) {
+        console.error('Error preparing map container:', error);
+        setMapError('Failed to initialize map');
       }
-      setIsInitializing(false);
     }
-  }, [mapRef.current, mapLoaded]);
+  }, [mapContainer.current]);
+
+  useEffect(() => {
+    // Check if map is loaded
+    if (mapRef.current) {
+      const checkMapLoaded = () => {
+        if (mapRef.current?.loaded()) {
+          console.log('Map is now loaded');
+          setMapLoaded(true);
+          setIsInitializing(false);
+          mapRef.current.off('render', checkMapLoaded);
+        }
+      };
+
+      if (mapRef.current.loaded()) {
+        console.log('Map was already loaded');
+        setMapLoaded(true);
+        setIsInitializing(false);
+      } else {
+        console.log('Waiting for map to load...');
+        mapRef.current.on('render', checkMapLoaded);
+        mapRef.current.on('load', () => {
+          console.log('Map load event fired');
+          setMapLoaded(true);
+          setIsInitializing(false);
+        });
+      }
+
+      return () => {
+        mapRef.current?.off('render', checkMapLoaded);
+        mapRef.current?.off('load', () => {});
+      };
+    }
+  }, [mapRef.current]);
 
   return {
     map: mapRef.current,

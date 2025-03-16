@@ -4,6 +4,8 @@ import { useMap, useMapContext } from './MapContext';
 import { StorageFacility } from '../types';
 import MapView from './components/MapView';
 import MapInteractions from './components/MapInteractions';
+import { createMapInstance, initializeMapboxGL, configureMapSettings } from './utils/mapboxInit';
+import mapboxgl from 'mapbox-gl';
 
 interface MapContainerProps {
   facilities: StorageFacility[];
@@ -18,7 +20,8 @@ const MapContainer: React.FC<MapContainerProps> = ({
   onMarkerClick,
   selectedState
 }) => {
-  const { mapContainer, mapLoaded, isInitializing, mapError, map } = useMap();
+  const { mapContainer, mapLoaded, isInitializing, mapError } = useMap();
+  const { mapRef } = useMapContext();
   const [markersCreated, setMarkersCreated] = useState<boolean>(false);
   
   // Log props for debugging
@@ -27,6 +30,45 @@ const MapContainer: React.FC<MapContainerProps> = ({
     console.log(`Selected state: ${selectedState || 'none'}`);
     console.log(`Map loaded: ${mapLoaded}, Map initialized: ${!isInitializing}`);
   }, [facilities, selectedState, mapLoaded, isInitializing]);
+
+  // Initialize map when the component mounts
+  useEffect(() => {
+    if (!mapContainer.current || mapRef.current) return;
+    
+    // Initialize Mapbox GL
+    const isInitialized = initializeMapboxGL();
+    if (!isInitialized) {
+      console.error('Failed to initialize MapboxGL');
+      return;
+    }
+    
+    try {
+      // Create map instance
+      const map = createMapInstance(
+        mapContainer.current,
+        mapboxgl.accessToken,
+        [-98.5795, 39.8283], // Center of US
+        3 // Initial zoom level
+      );
+      
+      // Set the map reference
+      mapRef.current = map;
+      
+      // Configure map settings
+      configureMapSettings(map);
+      
+      console.log('Map instance created successfully');
+      
+      // Clean up on unmount
+      return () => {
+        console.log('Cleaning up map instance');
+        map.remove();
+        mapRef.current = null;
+      };
+    } catch (error) {
+      console.error('Error creating map instance:', error);
+    }
+  }, [mapContainer.current]);
 
   // Handler for marker creation status
   const handleMarkersCreated = (created: boolean) => {
@@ -45,9 +87,9 @@ const MapContainer: React.FC<MapContainerProps> = ({
         selectedState={selectedState}
       />
       
-      {map && mapLoaded && (
+      {mapRef.current && mapLoaded && (
         <MapInteractions
-          map={map}
+          map={mapRef.current}
           mapLoaded={mapLoaded}
           facilities={facilities || []}
           highlightedFacility={highlightedFacility}
