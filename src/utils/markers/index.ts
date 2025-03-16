@@ -17,7 +17,7 @@ export {
   preventMarkerEdgeCutoff,
   createEdgeAwareClickHandler,
   enableEdgeAwareMarkers
-} from './forcing/preventEdgeCutoff';
+} from './forcing/edge-aware';
 
 // Popup utilities
 export { hideAllPopups } from './forcing/uiManipulation';
@@ -48,3 +48,10 @@ export type {
   VisibilityIssueDetail,
   StorageFacility
 } from './types';
+
+// Export edge-aware types
+export type {
+  EdgePadding,
+  MarkerPosition,
+  EdgeAwareClickHandler
+} from './forcing/edge-aware/types';
