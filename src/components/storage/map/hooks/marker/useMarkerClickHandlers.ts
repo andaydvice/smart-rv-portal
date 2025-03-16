@@ -1,8 +1,13 @@
 
 import mapboxgl from 'mapbox-gl';
 import { createEdgeAwareClickHandler } from '@/utils/markers/forcing/preventEdgeCutoff';
+import { useState, useCallback, useRef } from 'react';
 
 export const useMarkerClickHandlers = () => {
+  // Track failed attempts for retries
+  const failedAttemptsRef = useRef<Record<string, number>>({});
+  const MAX_RETRY_ATTEMPTS = 10;
+
   /**
    * Creates a robust click handler for markers that won't be garbage collected
    */
@@ -34,19 +39,60 @@ export const useMarkerClickHandlers = () => {
         () => {
           // Then handle the popup toggle after map position is adjusted
           if (!marker.getPopup().isOpen()) {
-            marker.togglePopup();
+            try {
+              marker.togglePopup();
+              // Reset failed attempts on success
+              failedAttemptsRef.current[facilityId] = 0;
+            } catch (error) {
+              console.error('Failed to toggle popup:', error);
+              // Increment failed attempts
+              failedAttemptsRef.current[facilityId] = (failedAttemptsRef.current[facilityId] || 0) + 1;
+              
+              // Retry if within the max attempts
+              if ((failedAttemptsRef.current[facilityId] || 0) <= MAX_RETRY_ATTEMPTS) {
+                console.log(`Retry attempt ${failedAttemptsRef.current[facilityId]}/${MAX_RETRY_ATTEMPTS} for marker ${facilityId}`);
+                setTimeout(() => {
+                  try {
+                    marker.togglePopup();
+                  } catch (retryError) {
+                    console.error('Retry attempt failed:', retryError);
+                  }
+                }, 300); // Small delay before retry
+              }
+            }
           }
         }
       )(e);
       
-      // Ensure popup is visible and clickable
+      // Ensure popup is visible and clickable with improved edge detection
       setTimeout(() => {
         const popupElement = document.querySelector(`.mapboxgl-popup[data-facility-id="${facilityId}"]`);
         if (popupElement instanceof HTMLElement) {
+          // Apply styles to ensure visibility
           popupElement.style.zIndex = '10000';
           popupElement.style.visibility = 'visible';
           popupElement.style.display = 'block';
           popupElement.style.pointerEvents = 'all';
+          
+          // Ensure the popup is within viewport bounds
+          const rect = popupElement.getBoundingClientRect();
+          const viewport = {
+            width: window.innerWidth,
+            height: window.innerHeight
+          };
+          
+          // Check if popup is cut off by viewport edges
+          if (rect.right > viewport.width || rect.bottom > viewport.height ||
+              rect.left < 0 || rect.top < 0) {
+            
+            // Adjust map center to ensure popup is fully visible
+            const currentCenter = map.getCenter();
+            const adjustedCenter = marker.getLngLat();
+            map.easeTo({
+              center: adjustedCenter,
+              duration: 300
+            });
+          }
           
           // Ensure the close button works
           const closeButton = popupElement.querySelector('.mapboxgl-popup-close-button');
@@ -80,6 +126,20 @@ export const useMarkerClickHandlers = () => {
               }, 50);
             });
           }
+          
+          // Update any links to open in the same tab
+          const links = popupElement.querySelectorAll('a');
+          links.forEach(link => {
+            if (link instanceof HTMLAnchorElement) {
+              link.target = ''; // Remove any target attributes
+              link.setAttribute('data-same-tab', 'true');
+              
+              // Ensure clicks work properly
+              link.addEventListener('click', (e) => {
+                e.stopPropagation(); // Prevent event bubbling
+              });
+            }
+          });
           
           // Remove any View Details buttons
           const viewDetailsBtn = popupElement.querySelector('.view-facility-btn, button.view-details');
@@ -130,8 +190,25 @@ export const useMarkerClickHandlers = () => {
     markerElement.setAttribute('data-click-handler', handlerName);
   };
 
+  /**
+   * Get the current count of failed attempts for a specific facility
+   */
+  const getFailedAttempts = (facilityId: string): number => {
+    return failedAttemptsRef.current[facilityId] || 0;
+  };
+
+  /**
+   * Get the total count of failed attempts across all facilities
+   */
+  const getTotalFailedAttempts = (): number => {
+    return Object.values(failedAttemptsRef.current).reduce((sum, count) => sum + count, 0);
+  };
+
   return {
     createMarkerClickHandler,
-    applyClickHandlerToMarker
+    applyClickHandlerToMarker,
+    getFailedAttempts,
+    getTotalFailedAttempts,
+    MAX_RETRY_ATTEMPTS
   };
 };

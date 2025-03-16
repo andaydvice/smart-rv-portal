@@ -1,39 +1,47 @@
+
 import React from 'react';
+import { useMapContext } from '../MapContext';
 import MapControls from '../MapControls';
-import ClusterLayer from '../ClusterLayer';
-import FacilityMarkers from '../FacilityMarkers';
-import { StorageFacility } from '../../types';
+import MapDebugOverlay from './MapDebugOverlay';
+import FailedAttemptsCounter from './FailedAttemptsCounter';
 
 interface MapControlsLayerProps {
-  map: mapboxgl.Map;
-  facilities: StorageFacility[];
-  highlightedFacility: string | null;
-  onMarkerClick: (facilityId: string) => void;
+  showDebugOverlay?: boolean;
+  enableControls?: boolean;
+  onFilterClick?: () => void;
 }
 
 /**
- * Component that manages all map control layers
+ * Component to handle map controls and overlays
  */
 const MapControlsLayer: React.FC<MapControlsLayerProps> = ({
-  map,
-  facilities,
-  highlightedFacility,
-  onMarkerClick
+  showDebugOverlay = false,
+  enableControls = true,
+  onFilterClick
 }) => {
+  const { mapRef, markersRef, markerErrorHandling } = useMapContext();
+  
+  // Get total failed attempts if available
+  const failedAttempts = markerErrorHandling?.getTotalFailedAttempts() || 0;
+  const maxAttempts = markerErrorHandling?.MAX_RETRY_ATTEMPTS || 10;
+
   return (
     <>
-      <MapControls map={map} />
-      <ClusterLayer
-        map={map}
-        facilities={facilities}
-        highlightedFacility={highlightedFacility}
-      />
-      {/* Keep the original markers but they'll likely be invisible */}
-      <FacilityMarkers
-        map={map}
-        facilities={facilities}
-        highlightedFacility={highlightedFacility}
-        onMarkerClick={onMarkerClick}
+      {enableControls && (
+        <MapControls onFilterClick={onFilterClick} />
+      )}
+      
+      {showDebugOverlay && mapRef.current && (
+        <MapDebugOverlay 
+          map={mapRef.current} 
+          markers={markersRef.current || {}} 
+        />
+      )}
+      
+      {/* Display failed attempts counter */}
+      <FailedAttemptsCounter 
+        failedAttempts={failedAttempts}
+        maxAttempts={maxAttempts}
       />
     </>
   );

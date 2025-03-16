@@ -32,3 +32,59 @@ html {
   min-width: max-content !important;
   z-index: 100 !important;
 }
+
+/* Popup edge prevention - ensures popups don't get cut off */
+.mapboxgl-popup {
+  z-index: 1000 !important;
+  max-width: 300px !important;
+}
+
+/* Ensure popup content is fully visible */
+.mapboxgl-popup-content {
+  max-height: calc(100vh - 100px);
+  overflow-y: auto;
+  overflow-x: hidden;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+}
+
+/* Handle popup links to open in same tab */
+.mapboxgl-popup-content a[data-same-tab="true"] {
+  display: inline-block;
+  padding: 4px 8px;
+  color: #5B9BD5;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* Failed attempts counter UI */
+.failed-attempts-counter {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  z-index: 1000;
+}
+
+/* Popup close button enhancement */
+.mapboxgl-popup-close-button {
+  padding: 5px !important;
+  font-size: 18px !important;
+  background: rgba(0, 0, 0, 0.1) !important;
+  border-radius: 50% !important;
+  width: 24px !important;
+  height: 24px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  top: 5px !important;
+  right: 5px !important;
+  transition: background 0.2s ease-in-out !important;
+}
+
+.mapboxgl-popup-close-button:hover {
+  background: rgba(0, 0, 0, 0.2) !important;
+}
