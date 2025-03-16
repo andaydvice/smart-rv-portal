@@ -5,7 +5,7 @@ import { calculateEdgeAdjustment } from './calculateAdjustment';
 
 /**
  * Adjusts the map view when an icon is clicked near the edge of the map
- * to ensure the icon and its popup remain fully visible
+ * to ensure the icon and its popup remain fully visible with at least 20px padding
  * 
  * @param map - The mapbox map instance
  * @param markerElement - The HTML element of the clicked marker
@@ -25,10 +25,26 @@ export function preventMarkerEdgeCutoff(
 
   console.log(`Checking if marker at [${coordinates[0]}, ${coordinates[1]}] is near edge`);
   
-  // Determine standard padding as an object
-  const standardPadding: EdgePadding = typeof padding === 'number' 
-    ? { top: padding, right: padding, bottom: padding, left: padding }
-    : padding;
+  // Determine standard padding as an object, ensuring minimum 20px padding
+  const minPadding = 20;
+  let standardPadding: EdgePadding;
+  
+  if (typeof padding === 'number') {
+    const paddingValue = Math.max(padding, minPadding);
+    standardPadding = { 
+      top: paddingValue, 
+      right: paddingValue, 
+      bottom: paddingValue, 
+      left: paddingValue 
+    };
+  } else {
+    standardPadding = {
+      top: Math.max(padding.top, minPadding),
+      right: Math.max(padding.right, minPadding),
+      bottom: Math.max(padding.bottom, minPadding),
+      left: Math.max(padding.left, minPadding)
+    };
+  }
   
   // Convert marker coordinates to pixel position
   const markerPoint = map.project(new mapboxgl.LngLat(coordinates[0], coordinates[1]));

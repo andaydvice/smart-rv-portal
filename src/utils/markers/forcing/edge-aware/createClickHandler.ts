@@ -5,6 +5,7 @@ import { preventMarkerEdgeCutoff } from './preventEdgeCutoff';
 
 /**
  * Creates a click handler for markers that prevents edge cutoff
+ * with a minimum padding of 20px from any edge
  * 
  * @param map - The mapbox map instance
  * @param coordinates - The [lng, lat] coordinates of the marker
@@ -27,12 +28,12 @@ export function createEdgeAwareClickHandler(
     // Get the marker element
     const markerElement = e.currentTarget as HTMLElement;
     
-    // Prevent edge cutoff with generous padding
+    // Prevent edge cutoff with generous padding (minimum 20px on all sides)
     preventMarkerEdgeCutoff(map, markerElement, coordinates, {
-      top: 120,    // Extra space for header/controls
-      right: 100,  // Extra space for popup
-      bottom: 200, // Extra space for popup
-      left: 100    // Extra space for popup
+      top: Math.max(120, 20),     // Extra space for header/controls
+      right: Math.max(100, 20),   // Extra space for popup
+      bottom: Math.max(200, 20),  // Extra space for popup
+      left: Math.max(100, 20)     // Extra space for popup
     });
     
     // Call the original click callback after a short delay to ensure map has adjusted

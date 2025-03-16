@@ -1,4 +1,3 @@
-
 import { StorageFacility } from '../types';
 import mapboxgl from 'mapbox-gl';
 import { createEdgeAwareClickHandler } from '../forcing/edge-aware';
@@ -41,6 +40,7 @@ export function removeExistingEmergencyMarkers(): void {
 
 /**
  * Create edge-aware click handler for a marker
+ * ensuring popups stay at least 20px from any edge
  */
 export function createMarkerClickHandler(
   map: mapboxgl.Map,
@@ -52,7 +52,10 @@ export function createMarkerClickHandler(
   const lat = parseFloat(String(facility.latitude));
   const lng = parseFloat(String(facility.longitude));
   
-  // Create edge-aware click handler
+  // Minimum required padding from any edge
+  const minPadding = 20;
+  
+  // Create edge-aware click handler with minimum padding
   const edgeAwareHandler = createEdgeAwareClickHandler(
     map,
     [lng, lat],

@@ -5,6 +5,7 @@ import { closeAllPopupsExcept } from './popup';
 
 /**
  * Adds click event to a marker and its popup
+ * ensuring popup stays at least 20px from any edge
  */
 export function setupMarkerClickEvent(
   marker: HTMLElement,
@@ -34,33 +35,36 @@ export function setupMarkerClickEvent(
     const containerWidth = Math.min(mapRect.width, windowWidth);
     const containerHeight = Math.min(mapRect.height, windowHeight);
     
+    // Minimum padding from any edge (20px)
+    const minPadding = 20;
+    
     // Check if marker is near the edge
-    const isNearLeftEdge = markerRect.left < 150;
-    const isNearRightEdge = markerRect.right > containerWidth - 200;
-    const isNearTopEdge = markerRect.top < 100;
-    const isNearBottomEdge = markerRect.bottom > containerHeight - 180;
+    const isNearLeftEdge = markerRect.left < (150 + minPadding);
+    const isNearRightEdge = markerRect.right > (containerWidth - (200 + minPadding));
+    const isNearTopEdge = markerRect.top < (100 + minPadding);
+    const isNearBottomEdge = markerRect.bottom > (containerHeight - (180 + minPadding));
     
     // Default popup position (centered below marker)
     let xPos = markerRect.left + markerRect.width/2;
     let yPos = markerRect.top - 15;
     let transform = 'translateX(-50%)';
     
-    // Position the popup based on edge proximity
+    // Position the popup based on edge proximity, ensuring minimum padding
     if (isNearLeftEdge) {
-      xPos = markerRect.left + markerRect.width + 20;
+      xPos = markerRect.left + markerRect.width + (20 + minPadding);
       transform = 'translateY(-50%)';
       yPos = markerRect.top;
     } else if (isNearRightEdge) {
-      xPos = markerRect.left - 20;
+      xPos = markerRect.left - (20 + minPadding);
       transform = 'translateX(-100%) translateY(-50%)';
       yPos = markerRect.top;
     }
     
     if (isNearTopEdge) {
-      yPos = markerRect.bottom + 20;
+      yPos = markerRect.bottom + (20 + minPadding);
       transform = transform.replace('translateY(-50%)', '');
     } else if (isNearBottomEdge) {
-      yPos = markerRect.top - 20;
+      yPos = markerRect.top - (20 + minPadding);
       if (!transform.includes('translateY')) {
         transform += ' translateY(-100%)';
       }
@@ -96,6 +100,7 @@ export function setupMarkerClickEvent(
 
 /**
  * Sets up event handlers for all direct markers
+ * ensuring popups stay at least 20px from any edge
  */
 export function setupDirectMarkerListeners(
   onMarkerClick: (facilityId: string, event: MouseEvent) => void
