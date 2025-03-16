@@ -36,9 +36,11 @@ export function testMarkersVisibility(fixIssues: boolean = false): MarkerVisibil
         // Add to issues
         const issue: VisibilityIssueDetail = {
           elementId: marker.id || `marker-${hiddenCount}`,
+          issue: 'Marker visibility issue',
+          description: `Marker is not visible (visibility: ${marker.style.visibility}, display: ${marker.style.display}, opacity: ${marker.style.opacity})`,
           elementType: 'marker',
           issueType: 'visibility',
-          description: `Marker is not visible (visibility: ${marker.style.visibility}, display: ${marker.style.display}, opacity: ${marker.style.opacity})`,
+          recommendation: 'Force visibility with CSS',
           computedStyles: {
             visibility: marker.style.visibility,
             display: marker.style.display,
@@ -46,8 +48,7 @@ export function testMarkersVisibility(fixIssues: boolean = false): MarkerVisibil
             zIndex: marker.style.zIndex,
             position: marker.style.position,
             pointerEvents: marker.style.pointerEvents
-          },
-          recommendation: 'Force visibility with CSS'
+          }
         };
         issues.push(issue);
         hiddenCount++;
@@ -58,9 +59,13 @@ export function testMarkersVisibility(fixIssues: boolean = false): MarkerVisibil
   });
   
   return {
+    total: markers.length,
+    visible: visibleCount, 
+    hidden: hiddenCount,
+    issues,
+    // Add the same values to the new property names for consistency
     totalMarkers: markers.length,
     visibleMarkers: visibleCount,
-    hiddenMarkers: hiddenCount,
-    issues
+    hiddenMarkers: hiddenCount
   };
 }
