@@ -1,6 +1,6 @@
-
 import mapboxgl from 'mapbox-gl';
 import { StorageFacility } from '../../types';
+import { createEdgeAwareClickHandler } from '@/utils/markers/forcing/preventEdgeCutoff';
 
 export function createFacilityMarker(
   facility: StorageFacility,
@@ -106,35 +106,45 @@ export function createFacilityMarker(
     }, 100);
   }
 
-  // Add click handler to the marker element
-  el.addEventListener('click', (e) => {
-    e.stopPropagation();
-    e.preventDefault();
-    
-    // Call the onClick callback to handle facility selection
-    onClick(facility.id);
-    
-    // Toggle the popup
-    if (!marker.getPopup().isOpen()) {
-      marker.togglePopup();
+  // Create an edge-aware click handler
+  const edgeAwareClickHandler = createEdgeAwareClickHandler(
+    map,
+    coordinates,
+    (e) => {
+      e.stopPropagation();
+      e.preventDefault();
       
-      // Force popup to correct size after opening
-      setTimeout(() => {
-        const popupEl = document.querySelector(`.popup-${facility.id}`);
-        if (popupEl instanceof HTMLElement) {
-          popupEl.style.maxWidth = '300px';
-          popupEl.style.width = 'auto';
-          
-          const contentEl = popupEl.querySelector('.mapboxgl-popup-content');
-          if (contentEl instanceof HTMLElement) {
-            contentEl.style.minWidth = '220px';
-            contentEl.style.width = 'auto';
-            contentEl.style.maxWidth = '300px';
+      // Call the onClick callback to handle facility selection
+      onClick(facility.id);
+      
+      // Toggle the popup
+      if (!marker.getPopup().isOpen()) {
+        marker.togglePopup();
+        
+        // Force popup to correct size after opening
+        setTimeout(() => {
+          const popupEl = document.querySelector(`.popup-${facility.id}`);
+          if (popupEl instanceof HTMLElement) {
+            popupEl.style.maxWidth = '300px';
+            popupEl.style.width = 'auto';
+            
+            const contentEl = popupEl.querySelector('.mapboxgl-popup-content');
+            if (contentEl instanceof HTMLElement) {
+              contentEl.style.minWidth = '220px';
+              contentEl.style.width = 'auto';
+              contentEl.style.maxWidth = '300px';
+            }
           }
-        }
-      }, 50);
+        }, 50);
+      }
     }
-  });
+  );
+
+  // Add the edge-aware click handler to the marker element
+  el.addEventListener('click', edgeAwareClickHandler);
+  
+  // Mark as edge-aware
+  el.setAttribute('data-edge-aware', 'true');
 
   return marker;
 }

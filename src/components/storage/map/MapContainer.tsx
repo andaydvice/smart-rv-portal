@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
@@ -8,6 +7,7 @@ import MapLoadingState from './MapLoadingState';
 import { toast } from "sonner";
 import { createDirectMarkers } from './utils/directMarkerCreation';
 import { removeViewDetailsButtons, hideAllPopups } from '@/utils/markers/forcing/uiManipulation';
+import { enableEdgeAwareMarkers } from '@/utils/markers/forcing/preventEdgeCutoff';
 
 interface MapContainerProps {
   facilities: StorageFacility[];
@@ -73,6 +73,11 @@ const MapContainer: React.FC<MapContainerProps> = ({
       }
     }
     
+    // Apply edge-aware click handling to all markers
+    setTimeout(() => {
+      enableEdgeAwareMarkers(map);
+    }, 1000);
+    
     // Aggressively remove any "View Details" buttons
     removeViewDetailsButtons();
     
@@ -126,6 +131,9 @@ const MapContainer: React.FC<MapContainerProps> = ({
       
       // Remove any view details buttons
       removeViewDetailsButtons();
+      
+      // Re-apply edge-aware click handling periodically
+      enableEdgeAwareMarkers(map);
     };
     
     // Run immediately and set interval
