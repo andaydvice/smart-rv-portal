@@ -5,6 +5,7 @@ import { StorageFacility } from '../../types';
 import { useMapMarkers } from '../hooks/useMapMarkers';
 import { useFacilityHighlight } from '../hooks/useFacilityHighlight';
 import { useMapSetup } from '../hooks/useMapSetup';
+import { enableEdgeAwareMarkers } from '@/utils/markers/forcing/edge-aware';
 
 interface MapInteractionsProps {
   map: mapboxgl.Map | null;
@@ -37,6 +38,16 @@ const MapInteractions: React.FC<MapInteractionsProps> = ({
   
   // Handle facility highlighting
   useFacilityHighlight(map, mapLoaded, validFacilities, highlightedFacility);
+  
+  // Make markers edge-aware to prevent truncation
+  useEffect(() => {
+    if (map && mapLoaded && markersCreated) {
+      // Apply edge-aware behavior to all markers
+      setTimeout(() => {
+        enableEdgeAwareMarkers(map);
+      }, 500);
+    }
+  }, [map, mapLoaded, markersCreated]);
   
   // Log status for debugging
   useEffect(() => {

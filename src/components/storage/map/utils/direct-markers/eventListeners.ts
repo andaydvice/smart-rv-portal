@@ -20,6 +20,38 @@ export function setupMarkerClickEvent(
     // Toggle this popup
     const isVisible = popup.classList.contains('visible');
     
+    // Get marker position for potential edge detection
+    const markerRect = marker.getBoundingClientRect();
+    const mapContainer = marker.closest('.mapboxgl-map') || document.body;
+    const mapRect = mapContainer.getBoundingClientRect();
+    
+    // Check if marker is near the edge
+    const isNearLeftEdge = markerRect.left < 100;
+    const isNearRightEdge = markerRect.right > mapRect.width - 100;
+    const isNearTopEdge = markerRect.top < 100;
+    const isNearBottomEdge = markerRect.bottom > mapRect.height - 100;
+    
+    // Position the popup based on edge proximity
+    if (isNearLeftEdge) {
+      popup.style.left = `${markerRect.left + markerRect.width + 10}px`;
+      popup.style.transform = 'translateY(-50%)';
+    } else if (isNearRightEdge) {
+      popup.style.left = `${markerRect.left - 10}px`;
+      popup.style.transform = 'translateX(-100%) translateY(-50%)';
+    } else {
+      popup.style.left = `${markerRect.left + markerRect.width/2}px`;
+      popup.style.transform = 'translateX(-50%)';
+    }
+    
+    if (isNearTopEdge) {
+      popup.style.top = `${markerRect.bottom + 10}px`;
+    } else if (isNearBottomEdge) {
+      popup.style.top = `${markerRect.top - 10}px`;
+      popup.style.transform += ' translateY(-100%)';
+    } else {
+      popup.style.top = `${markerRect.top - 15}px`;
+    }
+    
     if (!isVisible) {
       // Show popup
       popup.style.display = 'block';
