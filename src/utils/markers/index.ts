@@ -27,7 +27,7 @@ export {
 } from './emergency/directMarkerCreation';
 
 // Style injection utilities
-export { injectEmergencyStyles } from './styleInjection';
+export { injectEmergencyMarkerStyles as injectEmergencyStyles } from './styleInjection';
 
 // Testing and debugging utilities
 export {
@@ -42,5 +42,6 @@ export { ensureMarkersExist } from './forcing/ensureMarkers';
 // Types
 export type { 
   MarkerVisibilityTestResult, 
-  VisibilityIssueDetail 
+  VisibilityIssueDetail,
+  StorageFacility
 } from './types';

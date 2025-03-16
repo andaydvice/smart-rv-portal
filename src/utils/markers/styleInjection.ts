@@ -46,5 +46,8 @@ export function injectEmergencyMarkerStyles() {
   console.log('Injected emergency marker styles');
 }
 
+// Alias for backward compatibility
+export { injectEmergencyMarkerStyles as injectEmergencyStyles };
+
 // Run style injection immediately
 injectEmergencyMarkerStyles();

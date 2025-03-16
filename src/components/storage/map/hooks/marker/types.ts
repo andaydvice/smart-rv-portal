@@ -1,5 +1,6 @@
 
-import type { StorageFacility, MarkerVisibilityTestResult, VisibilityIssueDetail } from '@/utils/markers';
+import type { StorageFacility } from '@/components/storage/types';
+import type { MarkerVisibilityTestResult, VisibilityIssueDetail } from '@/utils/markers/types';
 
 export interface UseMarkerCreationProps {
   map: mapboxgl.Map;
