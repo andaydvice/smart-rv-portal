@@ -19,6 +19,9 @@ export {
   enableEdgeAwareMarkers
 } from './forcing/preventEdgeCutoff';
 
+// Popup utilities
+export { hideAllPopups } from './forcing/uiManipulation';
+
 // Emergency marker utilities
 export { 
   createEmergencyMarkers,

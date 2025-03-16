@@ -1,10 +1,14 @@
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import mapboxgl from 'mapbox-gl';
 import { StorageFacility } from '../../types';
 import { createDirectMarkers } from '../utils/directMarkerCreation';
-import { removeViewDetailsButtons, hideAllPopups } from '@/utils/markers/forcing/uiManipulation';
-import { enableEdgeAwareMarkers } from '@/utils/markers/forcing/preventEdgeCutoff';
+import { 
+  removeViewDetailsButtons, 
+  hideAllPopups,
+  createEdgeAwareClickHandler,
+  enableEdgeAwareMarkers
+} from '@/utils/markers';
 import { toast } from "sonner";
 
 interface MapInteractionsProps {
@@ -37,7 +41,7 @@ const MapInteractions: React.FC<MapInteractionsProps> = ({
     console.log('Map is ready, creating direct markers');
     
     // Create direct markers
-    createDirectMarkers(facilities, map);
+    const markers = createDirectMarkers(facilities, map);
     onMarkersCreated(true);
     
     // Show toast with the correct number of locations
@@ -68,10 +72,79 @@ const MapInteractions: React.FC<MapInteractionsProps> = ({
       }
     }
     
-    // Apply edge-aware click handling to all markers
-    setTimeout(() => {
+    // Apply edge-aware click handling to all markers - IMPORTANT
+    const applyEdgeAwareHandling = () => {
+      console.log('Applying edge-aware handling to markers');
       enableEdgeAwareMarkers(map);
-    }, 1000);
+      
+      // Also directly apply to all markers to ensure it works
+      document.querySelectorAll('.mapboxgl-marker, .custom-marker, .direct-marker').forEach(markerEl => {
+        if (markerEl instanceof HTMLElement) {
+          const facilityId = markerEl.getAttribute('data-facility-id');
+          if (!facilityId) return;
+          
+          const facility = facilities.find(f => f.id === facilityId);
+          if (!facility) return;
+          
+          // Get coordinates
+          const lat = parseFloat(String(facility.latitude));
+          const lng = parseFloat(String(facility.longitude));
+          if (isNaN(lat) || isNaN(lng)) return;
+          
+          // Create edge-aware handler
+          const edgeAwareHandler = createEdgeAwareClickHandler(
+            map,
+            [lng, lat],
+            (e) => {
+              if (e) {
+                e.stopPropagation();
+                e.preventDefault();
+              }
+              
+              // Call the marker click handler
+              const facilityId = markerEl.getAttribute('data-facility-id');
+              if (facilityId) {
+                console.log(`Edge-aware handler clicking facility: ${facilityId}`);
+                // Show popup with delay to ensure map is repositioned first
+                setTimeout(() => {
+                  // Find popup
+                  const popup = document.getElementById(`direct-popup-${facilityId}`);
+                  if (popup) {
+                    popup.style.display = 'block';
+                    popup.style.visibility = 'visible';
+                    popup.style.opacity = '1';
+                    popup.style.zIndex = '10000';
+                    popup.classList.add('visible');
+                    popup.classList.add('clicked');
+                  }
+                }, 300);
+              }
+            }
+          );
+          
+          // Remove old handlers
+          const oldHandler = markerEl.getAttribute('data-click-handler');
+          if (oldHandler && (window as any)[oldHandler]) {
+            markerEl.removeEventListener('click', (window as any)[oldHandler]);
+          }
+          
+          // Add new edge-aware handler
+          markerEl.addEventListener('click', edgeAwareHandler);
+          
+          // Store reference
+          const handlerName = `edge_handler_${facilityId.replace(/[^a-zA-Z0-9]/g, '_')}`;
+          (window as any)[handlerName] = edgeAwareHandler;
+          markerEl.setAttribute('data-click-handler', handlerName);
+          markerEl.setAttribute('data-edge-aware', 'true');
+          
+          console.log(`Applied edge-aware handler to marker ${facilityId}`);
+        }
+      });
+    };
+    
+    // Apply immediately and periodically
+    applyEdgeAwareHandling();
+    const intervalId = setInterval(applyEdgeAwareHandling, 2000);
     
     // Aggressively remove any "View Details" buttons
     removeViewDetailsButtons();
@@ -101,39 +174,6 @@ const MapInteractions: React.FC<MapInteractionsProps> = ({
     };
     
     document.addEventListener('click', handleGlobalClick);
-    
-    // Periodically force markers to be visible and popups to be hidden
-    const forceMarkerStates = () => {
-      // Force markers to be visible
-      document.querySelectorAll('.mapboxgl-marker, .custom-marker, .direct-marker').forEach(marker => {
-        if (marker instanceof HTMLElement) {
-          marker.style.visibility = 'visible';
-          marker.style.display = 'block';
-          marker.style.opacity = '1';
-        }
-      });
-      
-      // Hide all popups by default, except for clicked ones
-      document.querySelectorAll('.mapboxgl-popup, .direct-popup').forEach(popup => {
-        if (popup instanceof HTMLElement && !popup.classList.contains('clicked') && !popup.classList.contains('visible')) {
-          popup.style.display = 'none';
-          popup.style.visibility = 'hidden';
-          popup.style.opacity = '0';
-          popup.style.zIndex = '-9999';
-          popup.style.pointerEvents = 'none';
-        }
-      });
-      
-      // Remove any view details buttons
-      removeViewDetailsButtons();
-      
-      // Re-apply edge-aware click handling periodically
-      enableEdgeAwareMarkers(map);
-    };
-    
-    // Run immediately and set interval
-    forceMarkerStates();
-    const intervalId = setInterval(forceMarkerStates, 1000);
     
     // Clean up on unmount
     return () => {
