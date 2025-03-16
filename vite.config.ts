@@ -71,5 +71,10 @@ export default defineConfig(({ mode }) => ({
   },
   css: {
     devSourcemap: mode === 'development' // Enable sourcemaps for CSS in dev
+  },
+  // Make environment variables available to the application
+  define: {
+    // This ensures process.env is not used directly
+    'process.env': {}
   }
 }));

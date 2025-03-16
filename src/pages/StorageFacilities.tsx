@@ -1,3 +1,4 @@
+
 import { Container } from "@/components/ui/container";
 import StorageFacilitiesMap from "@/components/storage/StorageFacilitiesMap";
 import Navbar from "@/components/Navbar";
@@ -105,7 +106,7 @@ export default function StorageFacilities() {
         
         {/* Location Preview Section */}
         <div className="mt-8 mb-12">
-          <LocationPreviewSection mapToken={process.env.MAPBOX_TOKEN || ""} />
+          <LocationPreviewSection mapToken={import.meta.env.VITE_MAPBOX_TOKEN || ""} />
         </div>
       </div>
     </Layout>
