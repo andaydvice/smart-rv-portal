@@ -1,45 +1,25 @@
 
-// Re-export StorageFacility type from the storage component types
-import { StorageFacility as FacilityType } from '@/components/storage/types';
+import { StorageFacility as StorageFacilityType } from '@/components/storage/types';
 
+// Re-export the StorageFacility type for use in marker utilities
+export type StorageFacility = StorageFacilityType;
+
+/**
+ * Results of testing marker visibility
+ */
 export interface MarkerVisibilityTestResult {
-  totalMarkers: number;
-  visibleMarkers: number;
-  hiddenMarkers: number;
+  total: number;
+  visible: number;
+  hidden: number;
   issues: VisibilityIssueDetail[];
 }
 
+/**
+ * Details about a specific marker visibility issue
+ */
 export interface VisibilityIssueDetail {
-  elementId: string;
-  elementType: 'marker' | 'popup' | 'mapElement';
-  issueType: 'visibility' | 'display' | 'opacity' | 'position' | 'zIndex';
-  description: string;
-  computedStyles: {
-    visibility?: string;
-    display?: string;
-    opacity?: string;
-    zIndex?: string;
-    position?: string;
-    pointerEvents?: string;
-  };
-  recommendation: string;
+  facilityId?: string;
+  elementId?: string;
+  issue: string;
+  cssProperties?: Record<string, string>;
 }
-
-export interface MarkerStatistics {
-  total: number;
-  created: number;
-  visible: number;
-  hidden: number;
-  failed: number;
-  processedNYFacilities: number;
-  totalNYFacilities: number;
-}
-
-export interface MarkerCount {
-  state: string;
-  count: number;
-  actualCount: number;
-}
-
-// Export the imported type
-export type StorageFacility = FacilityType;
