@@ -109,10 +109,14 @@ a.view-details {
   }
 }
 
-/* Fix map container boundaries */
-.h-\[600px\] {
-  min-height: 600px !important;
+/* Fix map container boundaries - increased height */
+.h-\[650px\],
+.map-container {
+  min-height: 650px !important;
+  height: 650px !important;
   overflow: visible !important;
+  position: relative !important;
+  margin-top: 1rem !important;
 }
 
 /* Ensure all content inside the map is visible */
@@ -141,4 +145,10 @@ a.view-details {
   padding: 6px 8px !important;
   border-radius: 4px !important;
   font-weight: bold !important;
+}
+
+/* Ensure map-content-wrapper has adequate spacing */
+.map-content-wrapper {
+  margin-top: 1rem !important;
+  padding-top: 1rem !important;
 }

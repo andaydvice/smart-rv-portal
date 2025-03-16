@@ -67,7 +67,7 @@ const MapContainer: React.FC<MapContainerProps> = ({
       
       if (!bounds.isEmpty()) {
         map.fitBounds(bounds, {
-          padding: { top: 50, bottom: 50, left: 50, right: 50 },
+          padding: { top: 70, bottom: 70, left: 50, right: 50 },
           maxZoom: 15
         });
       }
@@ -198,7 +198,7 @@ const MapContainer: React.FC<MapContainerProps> = ({
       <div 
         ref={mapContainer} 
         className="w-full h-full rounded-lg overflow-visible" 
-        style={{ overflow: 'visible', minHeight: '600px' }}
+        style={{ overflow: 'visible', minHeight: '650px' }}
       />
       
       {/* Loading and error states */}

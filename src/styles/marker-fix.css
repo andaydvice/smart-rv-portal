@@ -115,14 +115,20 @@ header .emergency-marker,
 }
 
 /* Fix for map container positioning */
-.h-\[600px\] {
-  min-height: 600px !important;
+.h-\[650px\],
+.map-container {
+  min-height: 650px !important;
   overflow: visible !important;
 }
 
 /* Fix for markers being cut off at bottom of map */
 .mapboxgl-map {
   padding-bottom: 60px !important;
+}
+
+/* Fix for markers being cut off at top of map */
+.mapboxgl-canvas-container {
+  padding-top: 30px !important;
 }
 
 /* Make markers visible in all contexts */
@@ -134,4 +140,13 @@ div[class^="bg-"] .mapboxgl-marker {
   display: block !important;
   visibility: visible !important;
   opacity: 1 !important;
+}
+
+/* Only show markers inside map container */
+.relative.w-full.h-\[300px\] .mapboxgl-marker,
+.relative.w-full.h-\[300px\] .custom-marker,
+.relative.w-full.h-\[300px\] .emergency-marker {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
 }

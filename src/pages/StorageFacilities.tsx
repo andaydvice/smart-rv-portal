@@ -1,3 +1,4 @@
+
 import { Container } from "@/components/ui/container";
 import StorageFacilitiesMap from "@/components/storage/StorageFacilitiesMap";
 import Navbar from "@/components/Navbar";
@@ -65,7 +66,7 @@ export default function StorageFacilities() {
       <Navbar />
       <div className="min-h-screen w-full bg-[#080F1F] text-white">
         {/* Hero Header with Image */}
-        <div className="relative w-full h-[400px]">
+        <div className="relative w-full h-[300px]">
           <img 
             src="/lovable-uploads/e9503bf4-354a-4790-8a83-fefea32abc5b.png" 
             alt="Indoor RV Storage Facility" 
@@ -88,8 +89,11 @@ export default function StorageFacilities() {
           </div>
         </div>
         
+        {/* Add clear spacing between hero and map content */}
+        <div className="h-6"></div>
+        
         <Container fullWidth className="px-2 md:px-4">
-          <div className="py-8">
+          <div className="py-4">
             <StorageFacilitiesMap />
           </div>
         </Container>
