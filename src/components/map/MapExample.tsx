@@ -8,22 +8,22 @@ interface MapExampleProps {
 }
 
 const MapExample: React.FC<MapExampleProps> = ({ mapToken }) => {
-  // Example map data
+  // Example map data with proper tuple typing for coordinates
   const sampleMapData = {
     features: [
       {
         id: '1',
-        coordinates: [-122.4194, 37.7749], // San Francisco
+        coordinates: [-122.4194, 37.7749] as [number, number], // San Francisco - explicitly typed as tuple
         properties: { name: 'San Francisco' }
       },
       {
         id: '2',
-        coordinates: [-118.2437, 34.0522], // Los Angeles
+        coordinates: [-118.2437, 34.0522] as [number, number], // Los Angeles - explicitly typed as tuple
         properties: { name: 'Los Angeles' }
       },
       {
         id: '3',
-        coordinates: [-117.1611, 32.7157], // San Diego
+        coordinates: [-117.1611, 32.7157] as [number, number], // San Diego - explicitly typed as tuple
         properties: { name: 'San Diego' }
       }
     ]
@@ -41,7 +41,7 @@ const MapExample: React.FC<MapExampleProps> = ({ mapToken }) => {
       <h2 className="text-2xl font-bold mb-4 text-white">California Storage Locations</h2>
       <ResponsiveMap
         mapData={sampleMapData}
-        centerCoordinates={[-119.4179, 36.7783]} // California
+        centerCoordinates={[-119.4179, 36.7783] as [number, number]} // California - explicitly typed as tuple
         zoomLevel={5}
         mapToken={mapToken}
         onMarkerClick={handleMarkerClick}
