@@ -1,3 +1,4 @@
+
 /* Base imports and tailwind directives */
 @import './styles/base.css';
 
@@ -12,6 +13,9 @@
 
 /* Form styles */
 @import './styles/forms.css';
+
+/* Navbar styles */
+@import './styles/navbar.css';
 
 /* Component-specific styles */
 @import './styles/components/calendar.css';
