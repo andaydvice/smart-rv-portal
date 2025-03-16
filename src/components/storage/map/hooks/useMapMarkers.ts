@@ -1,5 +1,5 @@
 
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback, useRef } from 'react';
 import { StorageFacility } from '../../types';
 import mapboxgl from 'mapbox-gl';
 import { createDirectMarkers } from '../utils/direct-markers';
@@ -15,10 +15,18 @@ export const useMapMarkers = (
   selectedState: string | null,
   onMarkersCreated: (created: boolean) => void
 ) => {
+  // Initialize state outside of any conditional logic
   const [markersCreated, setMarkersCreated] = useState(false);
+  
+  // Use a ref to track if we've already created markers in this render cycle
+  const markersCreatedRef = useRef(false);
   
   // Create markers for all facilities
   useEffect(() => {
+    // Reset the markersCreated flag when dependencies change
+    setMarkersCreated(false);
+    markersCreatedRef.current = false;
+    
     if (!map || !mapLoaded || facilities.length === 0) {
       console.log("Map not ready or no facilities available");
       return;
@@ -71,11 +79,16 @@ export const useMapMarkers = (
         });
       }, 500);
       
-      setMarkersCreated(true);
-      onMarkersCreated(true);
+      // Update state and ref
+      if (!markersCreatedRef.current) {
+        setMarkersCreated(true);
+        markersCreatedRef.current = true;
+        onMarkersCreated(true);
+      }
     } catch (error) {
       console.error("Error creating markers:", error);
       setMarkersCreated(false);
+      markersCreatedRef.current = false;
       onMarkersCreated(false);
     }
     

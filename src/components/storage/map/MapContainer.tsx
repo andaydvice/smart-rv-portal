@@ -23,10 +23,16 @@ const MapContainer: React.FC<MapContainerProps> = ({
   
   // Log props for debugging
   useEffect(() => {
-    console.log(`MapContainer received ${facilities.length} facilities`);
+    console.log(`MapContainer received ${facilities?.length || 0} facilities`);
     console.log(`Selected state: ${selectedState || 'none'}`);
     console.log(`Map loaded: ${mapLoaded}, Map initialized: ${!isInitializing}`);
   }, [facilities, selectedState, mapLoaded, isInitializing]);
+
+  // Handler for marker creation status
+  const handleMarkersCreated = (created: boolean) => {
+    setMarkersCreated(created);
+    console.log(`Markers created status: ${created}`);
+  };
 
   return (
     <>
@@ -35,18 +41,20 @@ const MapContainer: React.FC<MapContainerProps> = ({
         isInitializing={isInitializing}
         mapError={mapError}
         mapLoaded={mapLoaded}
-        facilities={facilities}
+        facilities={facilities || []}
         selectedState={selectedState}
       />
       
-      <MapInteractions
-        map={map}
-        mapLoaded={mapLoaded}
-        facilities={facilities}
-        highlightedFacility={highlightedFacility}
-        selectedState={selectedState}
-        onMarkersCreated={setMarkersCreated}
-      />
+      {map && mapLoaded && (
+        <MapInteractions
+          map={map}
+          mapLoaded={mapLoaded}
+          facilities={facilities || []}
+          highlightedFacility={highlightedFacility}
+          selectedState={selectedState}
+          onMarkersCreated={handleMarkersCreated}
+        />
+      )}
     </>
   );
 };
