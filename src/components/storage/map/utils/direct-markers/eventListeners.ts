@@ -1,4 +1,5 @@
 
+import mapboxgl from 'mapbox-gl';
 import { StorageFacility } from '../../../types';
 import { closeAllPopupsExcept } from './popup';
 
@@ -20,37 +21,55 @@ export function setupMarkerClickEvent(
     // Toggle this popup
     const isVisible = popup.classList.contains('visible');
     
-    // Get marker position for potential edge detection
+    // Get marker position for edge detection
     const markerRect = marker.getBoundingClientRect();
     const mapContainer = marker.closest('.mapboxgl-map') || document.body;
     const mapRect = mapContainer.getBoundingClientRect();
     
+    // Get window dimensions for edge detection when viewed in a new tab or preview
+    const windowWidth = window.innerWidth;
+    const windowHeight = window.innerHeight;
+    
+    // Use the smaller of map container or window dimensions
+    const containerWidth = Math.min(mapRect.width, windowWidth);
+    const containerHeight = Math.min(mapRect.height, windowHeight);
+    
     // Check if marker is near the edge
-    const isNearLeftEdge = markerRect.left < 100;
-    const isNearRightEdge = markerRect.right > mapRect.width - 100;
+    const isNearLeftEdge = markerRect.left < 150;
+    const isNearRightEdge = markerRect.right > containerWidth - 200;
     const isNearTopEdge = markerRect.top < 100;
-    const isNearBottomEdge = markerRect.bottom > mapRect.height - 100;
+    const isNearBottomEdge = markerRect.bottom > containerHeight - 180;
+    
+    // Default popup position (centered below marker)
+    let xPos = markerRect.left + markerRect.width/2;
+    let yPos = markerRect.top - 15;
+    let transform = 'translateX(-50%)';
     
     // Position the popup based on edge proximity
     if (isNearLeftEdge) {
-      popup.style.left = `${markerRect.left + markerRect.width + 10}px`;
-      popup.style.transform = 'translateY(-50%)';
+      xPos = markerRect.left + markerRect.width + 20;
+      transform = 'translateY(-50%)';
+      yPos = markerRect.top;
     } else if (isNearRightEdge) {
-      popup.style.left = `${markerRect.left - 10}px`;
-      popup.style.transform = 'translateX(-100%) translateY(-50%)';
-    } else {
-      popup.style.left = `${markerRect.left + markerRect.width/2}px`;
-      popup.style.transform = 'translateX(-50%)';
+      xPos = markerRect.left - 20;
+      transform = 'translateX(-100%) translateY(-50%)';
+      yPos = markerRect.top;
     }
     
     if (isNearTopEdge) {
-      popup.style.top = `${markerRect.bottom + 10}px`;
+      yPos = markerRect.bottom + 20;
+      transform = transform.replace('translateY(-50%)', '');
     } else if (isNearBottomEdge) {
-      popup.style.top = `${markerRect.top - 10}px`;
-      popup.style.transform += ' translateY(-100%)';
-    } else {
-      popup.style.top = `${markerRect.top - 15}px`;
+      yPos = markerRect.top - 20;
+      if (!transform.includes('translateY')) {
+        transform += ' translateY(-100%)';
+      }
     }
+    
+    // Apply calculated position and transform
+    popup.style.left = `${xPos}px`;
+    popup.style.top = `${yPos}px`;
+    popup.style.transform = transform;
     
     if (!isVisible) {
       // Show popup
@@ -58,6 +77,10 @@ export function setupMarkerClickEvent(
       popup.style.visibility = 'visible';
       popup.classList.add('visible');
       popup.classList.add('clicked');
+      
+      // Add additional styles to ensure popup is fully visible
+      popup.style.zIndex = '10000';
+      popup.style.pointerEvents = 'auto';
       
       // Call optional callback
       if (onMarkerClick) onMarkerClick(facilityId, e);

@@ -42,12 +42,38 @@ const MapInteractions: React.FC<MapInteractionsProps> = ({
   // Make markers edge-aware to prevent truncation
   useEffect(() => {
     if (map && mapLoaded && markersCreated) {
-      // Apply edge-aware behavior to all markers
-      setTimeout(() => {
+      // Apply edge-aware behavior to all markers with a delay to ensure DOM is ready
+      const timer = setTimeout(() => {
         enableEdgeAwareMarkers(map);
       }, 500);
+      
+      return () => clearTimeout(timer);
     }
   }, [map, mapLoaded, markersCreated]);
+  
+  // Setup key event listener to close popups with Escape key
+  useEffect(() => {
+    const handleKeyPress = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        // Close all popups
+        document.querySelectorAll('.mapboxgl-popup, .direct-popup').forEach(popup => {
+          if (popup instanceof HTMLElement) {
+            popup.style.display = 'none';
+            popup.style.visibility = 'hidden';
+            if (popup.classList.contains('visible')) {
+              popup.classList.remove('visible');
+            }
+            if (popup.classList.contains('clicked')) {
+              popup.classList.remove('clicked');
+            }
+          }
+        });
+      }
+    };
+    
+    document.addEventListener('keydown', handleKeyPress);
+    return () => document.removeEventListener('keydown', handleKeyPress);
+  }, []);
   
   // Log status for debugging
   useEffect(() => {

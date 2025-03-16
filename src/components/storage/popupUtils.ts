@@ -68,6 +68,8 @@ export const createPopupHTML = (facility: StorageFacility) => {
           display: block !important;
           max-width: 300px !important;
           width: auto !important;
+          position: absolute !important;
+          overflow: visible !important;
         }
         .mapboxgl-popup-content {
           z-index: 1100 !important;
@@ -77,6 +79,11 @@ export const createPopupHTML = (facility: StorageFacility) => {
           visibility: visible !important;
           min-width: 220px !important;
           width: auto !important;
+          max-width: 300px !important;
+          border-radius: 8px !important;
+          box-shadow: 0 0 20px rgba(0,0,0,0.5) !important;
+          position: relative !important;
+          transform: none !important;
         }
         .mapboxgl-popup-close-button {
           z-index: 1110 !important;
@@ -86,10 +93,24 @@ export const createPopupHTML = (facility: StorageFacility) => {
           right: 2px !important;
           top: 2px !important;
           pointer-events: all !important;
+          cursor: pointer !important;
         }
         .facility-popup-content {
           pointer-events: all !important;
           word-break: break-word !important;
+          max-height: none !important;
+          overflow: visible !important;
+        }
+        .mapboxgl-popup-anchor-bottom .mapboxgl-popup-tip,
+        .mapboxgl-popup-anchor-top .mapboxgl-popup-tip,
+        .mapboxgl-popup-anchor-left .mapboxgl-popup-tip,
+        .mapboxgl-popup-anchor-right .mapboxgl-popup-tip {
+          display: none !important;
+        }
+        @media (max-width: 640px) {
+          .mapboxgl-popup-content {
+            max-width: 260px !important;
+          }
         }
       </style>
     </div>
