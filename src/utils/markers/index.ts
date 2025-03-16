@@ -2,6 +2,11 @@
 import mapboxgl from 'mapbox-gl';
 import { StorageFacility } from '@/components/storage/types';
 import { enableEdgeAwareMarkers } from './forcing/edge-aware';
+import { 
+  createEmergencyMarkers,
+  setupEmergencyMarkerListeners,
+  injectEmergencyMarkerStyles
+} from './emergency';
 
 /**
  * Remove unnecessary "View Details" buttons from markers
@@ -77,3 +82,10 @@ export const ensureMarkersExist = (map: mapboxgl.Map, facilities: StorageFacilit
   
   return false;
 };
+
+// Re-export emergency marker functions for use in other components
+export { 
+  createEmergencyMarkers,
+  setupEmergencyMarkerListeners, 
+  injectEmergencyMarkerStyles 
+} from './emergency';
