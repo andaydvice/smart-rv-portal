@@ -29,6 +29,7 @@ const GoogleMapView: React.FC<GoogleMapViewProps> = ({
 }) => {
   const [selectedFacility, setSelectedFacility] = useState<StorageFacility | null>(null);
   const [mapRef, setMapRef] = useState<google.maps.Map | null>(null);
+  const [currentZoom, setCurrentZoom] = useState<number>(zoom);
   const infoWindowRef = useRef<google.maps.InfoWindow | null>(null);
 
   // Load Google Maps script
@@ -65,14 +66,42 @@ const GoogleMapView: React.FC<GoogleMapViewProps> = ({
     }
   };
 
+  // Track zoom level changes
+  useEffect(() => {
+    if (!mapRef) return;
+    
+    const listener = mapRef.addListener('zoom_changed', () => {
+      if (mapRef) {
+        setCurrentZoom(mapRef.getZoom() || zoom);
+      }
+    });
+    
+    return () => {
+      google.maps.event.removeListener(listener);
+    };
+  }, [mapRef, zoom]);
+
   // Check if a facility is in the recently viewed list
   const isRecentlyViewed = (facilityId: string) => {
     return recentlyViewedFacilityIds.includes(facilityId);
+  };
+  
+  // Determine marker color based on status and zoom level
+  const getMarkerColor = (facilityId: string, isSelected: boolean) => {
+    // If selected, always green
+    if (isSelected) return '#10B981';
+    // If recently viewed, always highlight color
+    if (isRecentlyViewed(facilityId)) return '#10B981';
+    // If current zoom is close-up (> 10), show green
+    if (currentZoom > 10) return '#10B981';
+    // Default color
+    return '#F97316';
   };
 
   // Handle map load event
   const onMapLoad = (map: google.maps.Map) => {
     setMapRef(map);
+    setCurrentZoom(map.getZoom() || zoom);
     
     // Create bounds to fit all markers
     if (facilities.length > 0) {
@@ -176,8 +205,8 @@ const GoogleMapView: React.FC<GoogleMapViewProps> = ({
             onClick={() => handleMarkerClick(facility)}
             icon={{
               path: google.maps.SymbolPath.CIRCLE,
-              scale: isRecentlyViewed(facility.id) ? 12 : 10,
-              fillColor: isRecentlyViewed(facility.id) ? '#10B981' : '#F97316',
+              scale: isRecentlyViewed(facility.id) || selectedFacility?.id === facility.id || currentZoom > 10 ? 12 : 10,
+              fillColor: getMarkerColor(facility.id, selectedFacility?.id === facility.id),
               fillOpacity: 1,
               strokeColor: '#FFFFFF',
               strokeWeight: 2,
@@ -245,11 +274,16 @@ const GoogleMapView: React.FC<GoogleMapViewProps> = ({
       {selectedFacility && (
         <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-black/70 backdrop-blur-sm px-4 py-2 rounded-full z-10">
           <div className="flex items-center space-x-2">
-            <div className={`w-3 h-3 rounded-full ${isRecentlyViewed(selectedFacility.id) ? 'bg-green-500' : 'bg-orange-500'}`}></div>
+            <div className={`w-3 h-3 rounded-full ${currentZoom > 10 ? 'bg-green-500' : isRecentlyViewed(selectedFacility.id) ? 'bg-green-500' : 'bg-orange-500'}`}></div>
             <span className="text-white text-sm">{selectedFacility.name}</span>
           </div>
         </div>
       )}
+      
+      {/* Zoom level indicator for debugging */}
+      <div className="absolute top-4 left-4 bg-black/60 text-white text-xs px-2 py-1 rounded z-10">
+        Zoom: {currentZoom.toFixed(1)}
+      </div>
     </div>
   );
 };

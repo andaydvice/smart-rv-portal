@@ -44,6 +44,12 @@ export const createFacilityMarker = (
     return null;
   }
   
+  // Check if zoom level is close enough to show green markers
+  const isZoomedIn = map.getZoom() > 10;
+  
+  // Choose color based on highlighted state and zoom level
+  const markerColor = isHighlighted ? '#10B981' : (isZoomedIn ? '#10B981' : '#F97316');
+  
   // Create marker element
   const el = document.createElement('div');
   el.className = 'custom-marker';
@@ -53,10 +59,11 @@ export const createFacilityMarker = (
   el.setAttribute('data-facility-id', facility.id);
   el.setAttribute('data-state', facility.state);
   el.setAttribute('data-highlighted', isHighlighted ? 'true' : 'false');
+  el.setAttribute('data-zoomed', isZoomedIn ? 'true' : 'false');
   
   // Set proper styling
   el.style.cssText = `
-    background-color: ${isHighlighted ? '#10B981' : '#F97316'};
+    background-color: ${markerColor} !important;
     width: ${isHighlighted ? '28px' : '24px'};
     height: ${isHighlighted ? '28px' : '24px'};
     border-radius: 50%;
@@ -107,6 +114,20 @@ export const createFacilityMarker = (
     e.stopPropagation();
     // Call the onClick callback
     onMarkerClick(facility.id);
+  });
+  
+  // Add zoom change handler to update marker colors
+  map.on('zoom', () => {
+    const zoomedIn = map.getZoom() > 10;
+    
+    // Only update if zoom state changed
+    if (zoomedIn && el.getAttribute('data-zoomed') !== 'true') {
+      el.style.backgroundColor = isHighlighted ? '#10B981' : '#10B981';
+      el.setAttribute('data-zoomed', 'true');
+    } else if (!zoomedIn && el.getAttribute('data-zoomed') === 'true') {
+      el.style.backgroundColor = isHighlighted ? '#10B981' : '#F97316';
+      el.setAttribute('data-zoomed', 'false');
+    }
   });
   
   return marker;

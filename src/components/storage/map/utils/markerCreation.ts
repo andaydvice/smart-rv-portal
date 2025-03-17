@@ -15,12 +15,19 @@ export function createFacilityMarker(
   el.className = 'custom-marker';
   el.id = `marker-${facility.id}`;
   
+  // Check if zoom level is close-up (> 10)
+  const isZoomedIn = map.getZoom() > 10;
+  
+  // Choose color based on highlight state and zoom level
+  const markerColor = isHighlighted ? '#10B981' : 
+                      isZoomedIn ? '#10B981' : '#F97316';
+  
   // Force critical styling directly
   el.style.cssText = `
     position: absolute !important;
     left: 0 !important;
     top: 0 !important;
-    background-color: ${isHighlighted ? '#10B981' : '#F97316'} !important;
+    background-color: ${markerColor} !important;
     width: ${isHighlighted ? '28px' : '24px'} !important;
     height: ${isHighlighted ? '28px' : '24px'} !important;
     border-radius: 50% !important;
@@ -39,6 +46,7 @@ export function createFacilityMarker(
   el.setAttribute('data-facility-id', facility.id);
   el.setAttribute('data-marker-type', 'facility');
   el.setAttribute('data-state', facility.state);
+  el.setAttribute('data-zoomed', isZoomedIn ? 'true' : 'false');
   
   // Create properly positioned popup with fixed width
   const popup = new mapboxgl.Popup({
@@ -146,6 +154,18 @@ export function createFacilityMarker(
   
   // Mark as edge-aware
   el.setAttribute('data-edge-aware', 'true');
+
+  // Add zoom change listener to update marker color
+  map.on('zoom', () => {
+    const zoomedIn = map.getZoom() > 10;
+    if (zoomedIn && el.getAttribute('data-zoomed') !== 'true') {
+      el.style.backgroundColor = isHighlighted ? '#10B981' : '#10B981';
+      el.setAttribute('data-zoomed', 'true');
+    } else if (!zoomedIn && el.getAttribute('data-zoomed') === 'true') {
+      el.style.backgroundColor = isHighlighted ? '#10B981' : '#F97316';
+      el.setAttribute('data-zoomed', 'false');
+    }
+  });
 
   return marker;
 }

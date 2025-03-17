@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Card } from '@/components/ui/card';
 import GoogleMapView from './map/GoogleMapView';
 import { StorageFacility } from './types';
@@ -21,6 +21,8 @@ const GoogleMapFacilitiesView: React.FC<GoogleMapFacilitiesViewProps> = ({
   apiKey,
   className = ''
 }) => {
+  const [currentZoom, setCurrentZoom] = useState<number>(4);
+  
   // Validate facilities before rendering
   const validFacilities = facilities.filter(
     facility => facility.latitude && facility.longitude
@@ -28,6 +30,11 @@ const GoogleMapFacilitiesView: React.FC<GoogleMapFacilitiesViewProps> = ({
 
   // Check if we have missing coordinates
   const missingCoordinates = facilities.length - validFacilities.length;
+  
+  // Handle zoom change
+  const handleZoomChange = (zoom: number) => {
+    setCurrentZoom(zoom);
+  };
 
   return (
     <Card className={`h-[650px] bg-[#080F1F] relative overflow-hidden border-gray-700 ${className}`}>
@@ -49,11 +56,19 @@ const GoogleMapFacilitiesView: React.FC<GoogleMapFacilitiesViewProps> = ({
             recentlyViewedFacilityIds={recentlyViewedFacilityIds}
             onMarkerClick={onMarkerClick}
             apiKey={apiKey}
+            zoom={currentZoom}
           />
           
           {missingCoordinates > 0 && (
             <div className="absolute bottom-2 right-2 bg-black/60 text-white text-xs px-2 py-1 rounded">
               {missingCoordinates} facilities missing coordinates
+            </div>
+          )}
+          
+          {currentZoom > 10 && (
+            <div className="absolute top-4 left-4 bg-green-500/80 text-white text-xs px-3 py-1 rounded-full z-10 flex items-center">
+              <div className="w-2 h-2 bg-white rounded-full mr-1.5"></div>
+              <span>Zoomed in - Showing nearby facilities</span>
             </div>
           )}
         </>

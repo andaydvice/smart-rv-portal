@@ -74,3 +74,17 @@
   transition: all 0.3s ease;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 }
+
+/* Zoom-based marker styles */
+.zoomed-marker {
+  background-color: #10B981 !important;
+  box-shadow: 0 0 15px rgba(16, 185, 129, 0.6) !important;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Custom marker hover effect */
+.custom-marker:hover {
+  transform: scale(1.1) translate(-45%, -45%) !important;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5) !important;
+  z-index: 10000 !important;
+}
