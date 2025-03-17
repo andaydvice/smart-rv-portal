@@ -1,4 +1,3 @@
-
 import React, { useRef, useEffect, useState } from 'react';
 import { GoogleMap, useLoadScript, MarkerF, InfoWindowF } from '@react-google-maps/api';
 import { StorageFacility } from '../types';
@@ -10,6 +9,7 @@ interface GoogleMapViewProps {
   apiKey?: string;
   center?: { lat: number; lng: number };
   zoom?: number;
+  onZoomChange?: (zoom: number) => void;
 }
 
 const mapContainerStyle = {
@@ -26,6 +26,7 @@ const GoogleMapView: React.FC<GoogleMapViewProps> = ({
   apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY || '',
   center = { lat: 39.8283, lng: -98.5795 }, // Center of the US
   zoom = 4,
+  onZoomChange,
 }) => {
   const [selectedFacility, setSelectedFacility] = useState<StorageFacility | null>(null);
   const [mapRef, setMapRef] = useState<google.maps.Map | null>(null);
@@ -72,14 +73,20 @@ const GoogleMapView: React.FC<GoogleMapViewProps> = ({
     
     const listener = mapRef.addListener('zoom_changed', () => {
       if (mapRef) {
-        setCurrentZoom(mapRef.getZoom() || zoom);
+        const newZoom = mapRef.getZoom() || zoom;
+        setCurrentZoom(newZoom);
+        
+        // Call the onZoomChange callback if provided
+        if (onZoomChange) {
+          onZoomChange(newZoom);
+        }
       }
     });
     
     return () => {
       google.maps.event.removeListener(listener);
     };
-  }, [mapRef, zoom]);
+  }, [mapRef, zoom, onZoomChange]);
 
   // Check if a facility is in the recently viewed list
   const isRecentlyViewed = (facilityId: string) => {
