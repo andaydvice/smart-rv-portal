@@ -57,6 +57,7 @@ const GoogleMapFacilitiesView: React.FC<GoogleMapFacilitiesViewProps> = ({
             onMarkerClick={onMarkerClick}
             apiKey={apiKey}
             zoom={currentZoom}
+            onZoomChange={handleZoomChange}
           />
           
           {missingCoordinates > 0 && (
