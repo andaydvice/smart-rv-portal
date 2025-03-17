@@ -61,6 +61,27 @@
   animation: pulse 2s infinite ease-in-out;
 }
 
+/* Navigation hint for popups */
+.map-navigation-hint {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 14px;
+  z-index: 1000;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.map-navigation-hint.visible {
+  opacity: 1;
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -89,4 +110,16 @@
   width: 100% !important;
   position: relative !important;
   overflow: visible !important;
+}
+
+/* Enhanced popup visibility styles */
+.mapboxgl-popup {
+  z-index: 2000 !important; /* Increased z-index for better visibility */
+}
+
+.mapboxgl-popup-content {
+  background-color: #131a2a !important;
+  color: white !important;
+  border: 1px solid #2d3748 !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5) !important;
 }

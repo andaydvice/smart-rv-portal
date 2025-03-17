@@ -53,6 +53,22 @@
   animation: fade-out 0.3s ease-out forwards;
 }
 
+/* Navigation hint message */
+.map-navigation-hint {
+  background: rgba(21, 26, 34, 0.9);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-size: 14px;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 1001;
+  max-width: 280px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  border: 1px solid #2d3748;
+}
+
 /* Popup and marker visibility fixes - increased z-index and improved overflow handling */
 .mapboxgl-popup {
   z-index: 1500 !important;
@@ -106,6 +122,11 @@
   .mapboxgl-popup-content {
     max-width: 260px !important;
     min-width: 180px !important;
+  }
+  
+  .map-navigation-hint {
+    max-width: 220px;
+    font-size: 12px;
   }
 }
 

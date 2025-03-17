@@ -27,21 +27,21 @@ const MapLoadingProgress: React.FC<MapLoadingProgressProps> = ({
       return;
     }
     
-    // In infinite loading mode, animate slowly to 95% then jump to 100%
+    // In infinite loading mode, animate more quickly to 100%
     let timeout: NodeJS.Timeout;
     if (displayPercent < 95) {
       timeout = setTimeout(() => {
         // Gradually slow down as we approach 95%
-        const increment = displayPercent < 50 ? 2 : 
-                         displayPercent < 75 ? 1 : 
-                         displayPercent < 90 ? 0.5 : 0.1;
+        const increment = displayPercent < 50 ? 3 : 
+                         displayPercent < 75 ? 2 : 
+                         displayPercent < 90 ? 1 : 0.5;
         setDisplayPercent(prev => Math.min(95, prev + increment));
-      }, 100);
+      }, 80); // Reduced from 100ms to 80ms for faster animation
     } else if (percentLoaded >= 100) {
       // When signaled to complete, jump to 100%
       timeout = setTimeout(() => {
         setDisplayPercent(100);
-      }, 200); // Reduced from 500ms to 200ms for faster completion
+      }, 100); // Reduced from 200ms to 100ms for faster completion
     }
     
     return () => {
