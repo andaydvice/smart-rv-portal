@@ -62,6 +62,20 @@ const MapControls: React.FC<MapControlsProps> = ({ map, onFilterClick }) => {
           }, 5000);
         }
       });
+      
+      // Show hint when any marker is clicked directly
+      document.addEventListener('click', (e) => {
+        const target = e.target as HTMLElement;
+        if (target && (target.classList.contains('custom-marker') || 
+            target.closest('.custom-marker') || 
+            target.classList.contains('mapboxgl-marker') || 
+            target.closest('.mapboxgl-marker'))) {
+          setShowHint(true);
+          setTimeout(() => {
+            setShowHint(false);
+          }, 5000);
+        }
+      });
     }
     
     // Cleanup function
@@ -70,6 +84,7 @@ const MapControls: React.FC<MapControlsProps> = ({ map, onFilterClick }) => {
         map.off('load', () => {});
         map.off('click', () => {});
       }
+      document.removeEventListener('click', () => {});
     };
   }, [map]);
 
@@ -90,7 +105,12 @@ const MapControls: React.FC<MapControlsProps> = ({ map, onFilterClick }) => {
         </div>
       )}
       
-      {/* Navigation hint */}
+      {/* Navigation hint - always visible */}
+      <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 bg-black/70 text-white px-3 py-1 rounded-full text-sm z-[1000]">
+        If location details cut off, move the map with your browser
+      </div>
+      
+      {/* Additional hint when clicking markers - temporarily visible */}
       <div className={`map-navigation-hint ${showHint ? 'visible' : ''}`}>
         If location details cut off, move the map with your browser
       </div>

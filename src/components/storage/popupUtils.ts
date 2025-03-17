@@ -2,6 +2,9 @@
 import { StorageFacility } from './types';
 
 export const createPopupHTML = (facility: StorageFacility) => {
+  // Safely access features with optional chaining
+  const features = facility.features || {};
+  
   const featureLabels = {
     indoor: 'Indoor Storage',
     climate_controlled: 'Climate Controlled',
@@ -10,7 +13,7 @@ export const createPopupHTML = (facility: StorageFacility) => {
     vehicle_washing: 'Vehicle Washing'
   };
 
-  const activeFeatures = Object.entries(facility.features)
+  const activeFeatures = Object.entries(features)
     .filter(([_, value]) => value)
     .map(([key, _]) => featureLabels[key as keyof typeof featureLabels]);
 
@@ -41,7 +44,7 @@ export const createPopupHTML = (facility: StorageFacility) => {
         <div>
           <span class="text-xs text-gray-400">Price Range</span>
           <div class="font-semibold text-[#F97316] text-sm">
-            $${facility.price_range.min} - $${facility.price_range.max}
+            $${facility.price_range?.min || 0} - $${facility.price_range?.max || 0}
           </div>
         </div>
       </div>

@@ -73,27 +73,6 @@
   text-overflow: clip !important;
 }
 
-/* Completely hide any view details buttons */
-.view-facility-btn, 
-button.view-details, 
-a.view-details, 
-.view-details,
-[class*="view-detail"], 
-[id*="view-detail"] {
-  display: none !important;
-  visibility: hidden !important;
-  opacity: 0 !important;
-  pointer-events: none !important;
-  position: absolute !important;
-  z-index: -999 !important;
-  width: 0 !important;
-  height: 0 !important;
-  overflow: hidden !important;
-  clip: rect(0, 0, 0, 0) !important;
-  white-space: nowrap !important;
-  border: 0 !important;
-}
-
 /* Fix positioning of popup tip */
 .mapboxgl-popup-tip {
   border-top-color: #131a2a !important;
@@ -140,26 +119,20 @@ body .mapboxgl-map .mapboxgl-popup {
   width: 100% !important;
 }
 
-/* Fix for markers that exceed container bounds */
-.h-\[600px\] {
-  min-height: 600px !important;
-  overflow: visible !important;
-  position: relative !important;
-}
-
-/* Fix marker count display */
-.absolute.top-2.left-2.z-50 {
-  z-index: 10000 !important;
-  background-color: rgba(0, 0, 0, 0.8) !important;
-  padding: 6px 8px !important;
-  border-radius: 4px !important;
-  font-weight: bold !important;
-}
-
 /* Fix for popup width on mobile */
 @media (max-width: 768px) {
   .mapboxgl-popup-content {
     max-width: 220px !important;
     min-width: 180px !important;
   }
+}
+
+/* Prevent coordinates-only display */
+.mapboxgl-popup-content div:not(.facility-popup-content) {
+  display: none !important;
+}
+
+/* Alternative popup style to ensure content shows */
+.mapboxgl-popup .mapboxgl-popup-content {
+  padding: 15px !important;
 }

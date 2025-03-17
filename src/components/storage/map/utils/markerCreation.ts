@@ -69,19 +69,19 @@ export function createFacilityMarker(
       <div class="space-y-1 text-sm">
         <p>${facility.address}</p>
         <p>${facility.city}, ${facility.state}</p>
-        <p class="mt-2 font-semibold text-[#F97316]">Price: $${facility.price_range.min} - $${facility.price_range.max}</p>
+        <p class="mt-2 font-semibold text-[#F97316]">Price: $${facility.price_range?.min || 0} - $${facility.price_range?.max || 0}</p>
         ${facility.contact_phone ? `<p class="mt-1">Phone: ${facility.contact_phone}</p>` : ''}
       </div>
       
-      ${Object.values(facility.features).some(v => v) ? `
+      ${Object.values(facility.features || {}).some(v => v) ? `
         <div class="mt-2 border-t border-gray-700 pt-2">
           <p class="text-xs text-gray-400 mb-1">Features:</p>
           <div class="flex flex-wrap gap-1">
-            ${facility.features.indoor ? '<span class="text-xs bg-[#1a2235] text-[#60A5FA] px-2 py-0.5 rounded">Indoor</span>' : ''}
-            ${facility.features.climate_controlled ? '<span class="text-xs bg-[#1a2235] text-[#60A5FA] px-2 py-0.5 rounded">Climate Controlled</span>' : ''}
-            ${facility.features["24h_access"] ? '<span class="text-xs bg-[#1a2235] text-[#60A5FA] px-2 py-0.5 rounded">24/7 Access</span>' : ''}
-            ${facility.features.security_system ? '<span class="text-xs bg-[#1a2235] text-[#60A5FA] px-2 py-0.5 rounded">Security</span>' : ''}
-            ${facility.features.vehicle_washing ? '<span class="text-xs bg-[#1a2235] text-[#60A5FA] px-2 py-0.5 rounded">Vehicle Washing</span>' : ''}
+            ${facility.features?.indoor ? '<span class="text-xs bg-[#1a2235] text-[#60A5FA] px-2 py-0.5 rounded">Indoor</span>' : ''}
+            ${facility.features?.climate_controlled ? '<span class="text-xs bg-[#1a2235] text-[#60A5FA] px-2 py-0.5 rounded">Climate Controlled</span>' : ''}
+            ${facility.features?.["24h_access"] ? '<span class="text-xs bg-[#1a2235] text-[#60A5FA] px-2 py-0.5 rounded">24/7 Access</span>' : ''}
+            ${facility.features?.security_system ? '<span class="text-xs bg-[#1a2235] text-[#60A5FA] px-2 py-0.5 rounded">Security</span>' : ''}
+            ${facility.features?.vehicle_washing ? '<span class="text-xs bg-[#1a2235] text-[#60A5FA] px-2 py-0.5 rounded">Vehicle Washing</span>' : ''}
           </div>
         </div>
       ` : ''}

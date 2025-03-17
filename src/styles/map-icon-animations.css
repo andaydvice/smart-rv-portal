@@ -115,6 +115,8 @@
 /* Enhanced popup visibility styles */
 .mapboxgl-popup {
   z-index: 2000 !important; /* Increased z-index for better visibility */
+  max-width: none !important;
+  width: auto !important;
 }
 
 .mapboxgl-popup-content {
@@ -122,4 +124,26 @@
   color: white !important;
   border: 1px solid #2d3748 !important;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5) !important;
+  max-width: 320px !important;
+  min-width: 220px !important;
+  width: auto !important;
+  padding: 15px !important;
+}
+
+/* Ensure content within popups is visible */
+.facility-popup-content {
+  width: 100% !important;
+  word-break: break-word !important;
+  max-height: none !important;
+  overflow: visible !important;
+}
+
+/* Ensure popup close button is clearly visible and clickable */
+.mapboxgl-popup-close-button {
+  color: white !important;
+  font-size: 18px !important;
+  padding: 5px 10px !important;
+  right: 2px !important;
+  top: 2px !important;
+  z-index: 2010 !important;
 }
