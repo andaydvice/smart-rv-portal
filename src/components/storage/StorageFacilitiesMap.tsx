@@ -17,6 +17,7 @@ import FacilityList from './map-view/FacilityList';
 import { useMapToken } from './map-view/useMapToken';
 import { useFacilitySelection } from './map-view/useFacilitySelection';
 import { toast } from "sonner";
+import PreviewToggle from '@/components/ui/preview-toggle';
 
 // Create a helper hook to get Google Maps API key
 const useGoogleMapsKey = () => {
@@ -54,6 +55,9 @@ const StorageFacilitiesMap = () => {
 
   // State to toggle between map views
   const [useGoogleMaps, setUseGoogleMaps] = useState<boolean>(false);
+  
+  // New state for preview mode
+  const [isPreviewMode, setIsPreviewMode] = useState<boolean>(false);
 
   const { facilities: allFacilities, isLoading, error, maxPrice } = useStorageFacilities(filters);
   const { recentlyViewed, addToRecentlyViewed } = useRecentlyViewed();
@@ -123,8 +127,14 @@ const StorageFacilitiesMap = () => {
     toast.info(`Switched to ${!useGoogleMaps ? 'Google Maps' : 'Mapbox'} view`);
   };
 
+  // Toggle preview mode
+  const togglePreviewMode = (preview: boolean) => {
+    setIsPreviewMode(preview);
+    toast.info(`${preview ? 'Enabled' : 'Disabled'} preview mode`);
+  };
+
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 min-h-[800px] map-content-wrapper">
+    <div className={`grid grid-cols-1 lg:grid-cols-12 gap-4 min-h-[800px] map-content-wrapper ${isPreviewMode ? 'bg-[#080F1F] p-4 rounded-lg' : ''}`}>
       <div className="lg:col-span-4">
         <div className="space-y-4">
           <FilterPanel onFilterChange={handleFilterChange} />
@@ -148,8 +158,12 @@ const StorageFacilitiesMap = () => {
       </div>
       
       <div className="lg:col-span-8 flex flex-col space-y-4">
-        {/* Map toggle button */}
-        <div className="flex justify-end">
+        {/* Map toggle and preview mode buttons */}
+        <div className="flex justify-end gap-2">
+          <PreviewToggle 
+            isPreview={isPreviewMode} 
+            onChange={togglePreviewMode}
+          />
           <button 
             onClick={toggleMapView} 
             className="bg-[#151A22] hover:bg-[#1F2937] text-white px-3 py-1.5 rounded-md text-sm flex items-center gap-1.5 transition-colors"
@@ -165,9 +179,10 @@ const StorageFacilitiesMap = () => {
             recentlyViewedFacilityIds={recentlyViewedIds}
             onMarkerClick={onMarkerClick}
             apiKey={googleMapsKey}
+            className={isPreviewMode ? 'border-2 border-[#5B9BD5]' : ''}
           />
         ) : (
-          <Card className="h-[650px] bg-[#080F1F] relative overflow-visible border-gray-700 map-container">
+          <Card className={`h-[650px] bg-[#080F1F] relative overflow-visible border-gray-700 map-container ${isPreviewMode ? 'border-2 border-[#5B9BD5]' : ''}`}>
             {(!mapToken) ? (
               <Alert variant="destructive" className="m-4">
                 <AlertCircle className="h-4 w-4" />
@@ -190,7 +205,7 @@ const StorageFacilitiesMap = () => {
         <RecentlyViewedFacilities 
           facilities={recentlyViewed}
           onFacilityClick={onMarkerClick}
-          className="h-[180px]"
+          className={`h-[180px] ${isPreviewMode ? 'border border-[#5B9BD5]/30' : ''}`}
         />
       </div>
     </div>
