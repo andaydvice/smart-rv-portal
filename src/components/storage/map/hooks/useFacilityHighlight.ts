@@ -2,6 +2,7 @@
 import { useEffect } from 'react';
 import mapboxgl from 'mapbox-gl';
 import { StorageFacility } from '../../types';
+import { updateMarkersForZoomLevel } from '../utils/direct-markers/marker';
 
 /**
  * Hook for highlighting a specific facility on the map
@@ -24,12 +25,17 @@ export const useFacilityHighlight = (
       if (!isNaN(lat) && !isNaN(lng)) {
         map.flyTo({
           center: [lng, lat],
-          zoom: 14,
+          zoom: 14, // Zoomed in enough to show the green marker
           essential: true
         });
         
         // Highlight the marker
         highlightMarker(facility.id);
+        
+        // Update all markers based on new zoom level
+        setTimeout(() => {
+          updateMarkersForZoomLevel(map);
+        }, 1000);
       }
     }
   }, [highlightedFacility, map, mapLoaded, facilities]);
@@ -40,10 +46,11 @@ export const useFacilityHighlight = (
   const highlightMarker = (facilityId: string) => {
     const marker = document.getElementById(`direct-marker-${facilityId}`);
     if (marker instanceof HTMLElement) {
-      marker.style.backgroundColor = '#10B981';
+      marker.style.backgroundColor = '#10B981'; // Always green for highlighted marker
       marker.style.transform = 'translate(-50%, -50%) scale(1.2)';
       marker.style.zIndex = '10000';
       marker.style.boxShadow = '0 0 20px rgba(16, 185, 129, 0.8)';
+      marker.classList.add('highlighted-marker'); // Add class to track highlighted state
       
       // Close all other popups first
       document.querySelectorAll('.mapboxgl-popup, .direct-popup').forEach(popup => {

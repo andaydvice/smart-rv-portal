@@ -4,6 +4,7 @@ import mapboxgl from 'mapbox-gl';
 import { StorageFacility } from '../../types';
 import { calculateMapBounds } from '../utils/mapBounds';
 import { ensureMarkersExist } from '@/utils/markers';
+import { updateMarkersForZoomLevel } from '../utils/direct-markers/marker';
 
 /**
  * Sets up the map with facilities data
@@ -70,6 +71,15 @@ export const useMapSetup = (
         // Fix: Pass both map and facilities to ensureMarkersExist
         ensureMarkersExist(map, facilities);
       }
+      
+      // Add zoom change handler to update marker colors based on zoom level
+      map.on('zoom', () => {
+        updateMarkersForZoomLevel(map);
+      });
+      
+      // Initial update based on current zoom
+      updateMarkersForZoomLevel(map);
+      
     } catch (err) {
       console.error('Error setting up map:', err);
     }

@@ -1,72 +1,73 @@
 
-/* Map Icon Animation Styles */
-
-@keyframes float {
+/* Map Icon Animations */
+@keyframes pulse {
   0% {
-    transform: translateY(0px);
+    transform: scale(1);
+    opacity: 1;
   }
   50% {
-    transform: translateY(-5px);
+    transform: scale(1.1);
+    opacity: 0.8;
   }
   100% {
-    transform: translateY(0px);
+    transform: scale(1);
+    opacity: 1;
   }
 }
 
-@keyframes glow {
-  0% {
-    box-shadow: 0 0 5px rgba(249, 115, 22, 0.5);
-  }
-  50% {
-    box-shadow: 0 0 15px rgba(249, 115, 22, 0.8);
-  }
-  100% {
-    box-shadow: 0 0 5px rgba(249, 115, 22, 0.5);
-  }
+.animated-marker {
+  animation: pulse 2s infinite ease-in-out;
 }
 
-@keyframes rotate {
+/* Highlighted marker styling */
+.highlighted-marker {
+  background-color: #10B981 !important;
+  box-shadow: 0 0 15px rgba(16, 185, 129, 0.8) !important;
+  z-index: 9999 !important;
+  transform: translate(-50%, -50%) scale(1.2) !important;
+}
+
+/* Zoomed-in marker styling */
+.zoomed-marker {
+  background-color: #10B981 !important;
+  box-shadow: 0 0 10px rgba(16, 185, 129, 0.6) !important;
+  transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+/* Zoom level indicator styling */
+.zoom-level-indicator {
+  display: flex;
+  align-items: center;
+  background-color: rgba(16, 185, 129, 0.8);
+  color: white;
+  padding: 4px 12px;
+  border-radius: 16px;
+  font-size: 12px;
+  position: absolute;
+  top: 60px;
+  left: 10px;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease-in-out;
+  transition: opacity 0.3s ease-in-out;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.indicator-dot {
+  width: 8px;
+  height: 8px;
+  background-color: white;
+  border-radius: 50%;
+  margin-right: 6px;
+  animation: pulse 2s infinite ease-in-out;
+}
+
+@keyframes fadeIn {
   from {
-    transform: rotate(0deg);
+    opacity: 0;
+    transform: translateY(-10px);
   }
   to {
-    transform: rotate(360deg);
+    opacity: 1;
+    transform: translateY(0);
   }
-}
-
-/* Apply animations to classes */
-.map-icon-float {
-  animation: float 2s ease-in-out infinite;
-}
-
-.map-icon-glow {
-  animation: glow 1.5s ease-in-out infinite;
-}
-
-.map-icon-rotate {
-  animation: rotate 1s linear infinite;
-}
-
-/* Combinations */
-.map-icon-active {
-  animation: float 2s ease-in-out infinite, glow 1.5s ease-in-out infinite;
-}
-
-/* Transition helpers */
-.map-icon-transition {
-  transition: all 0.3s ease-in-out;
-}
-
-/* Scale effects */
-.map-icon-hover:hover {
-  transform: scale(1.15);
-}
-
-/* Status indicators */
-.map-icon-selected {
-  box-shadow: 0 0 0 3px #10B981, 0 0 15px rgba(16, 185, 129, 0.8);
-}
-
-.map-icon-active {
-  box-shadow: 0 0 0 3px #F97316, 0 0 15px rgba(249, 115, 22, 0.8);
 }
