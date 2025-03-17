@@ -37,13 +37,16 @@ const MapLoadingState: React.FC<MapLoadingStateProps> = ({
           const increment = prev < 30 ? 1 : prev < 70 ? 2 : 0.5;
           const newValue = prev + increment;
           
-          // Cap at 90% until fully loaded
-          return newValue > 90 && !mapLoaded ? 90 : newValue;
+          // Cap at 95% until fully loaded, then allow it to reach 100%
+          if (mapLoaded) {
+            return Math.min(100, newValue);
+          }
+          return newValue > 95 ? 95 : newValue;
         });
       }, 100);
     } else {
       // For infinite loading, we just need to signal completion when map loads
-      setPercentLoaded(1); // Start with a minimal value
+      setPercentLoaded(10); // Start with a visible value
     }
     
     return () => {
@@ -60,7 +63,7 @@ const MapLoadingState: React.FC<MapLoadingStateProps> = ({
       // Hide loader after a short delay to show 100%
       const hideTimer = setTimeout(() => {
         setShowLoader(false);
-      }, 500);
+      }, 300); // Reduced from 500ms to 300ms for faster display
       
       return () => clearTimeout(hideTimer);
     }

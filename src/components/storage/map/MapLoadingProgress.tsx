@@ -41,7 +41,7 @@ const MapLoadingProgress: React.FC<MapLoadingProgressProps> = ({
       // When signaled to complete, jump to 100%
       timeout = setTimeout(() => {
         setDisplayPercent(100);
-      }, 500);
+      }, 200); // Reduced from 500ms to 200ms for faster completion
     }
     
     return () => {

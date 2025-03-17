@@ -8,7 +8,6 @@ import mapboxgl from 'mapbox-gl';
 export const initializeMapboxGL = () => {
   if (!mapboxgl.supported()) {
     console.error('Your browser does not support Mapbox GL');
-    alert('Your browser does not support Mapbox GL');
     return false;
   } else {
     try {
@@ -52,7 +51,7 @@ export const createMapInstance = (
   mapboxgl.accessToken = mapToken;
 
   // Create map with optimized settings
-  return new mapboxgl.Map({
+  const map = new mapboxgl.Map({
     container,
     style: 'mapbox://styles/mapbox/dark-v11',
     center,
@@ -72,6 +71,26 @@ export const createMapInstance = (
     interactive: true, // Ensure the map is interactive
     pitchWithRotate: false, // Disable pitch with rotate for simpler navigation
   });
+  
+  // Add load event listener to debug loading issues
+  map.on('load', () => {
+    console.log('Map load event fired');
+    
+    // Force canvas to be visible
+    const canvas = map.getCanvas();
+    if (canvas) {
+      canvas.style.visibility = 'visible';
+      canvas.style.display = 'block';
+      canvas.style.opacity = '1';
+    }
+  });
+  
+  // Add error event listener
+  map.on('error', (e) => {
+    console.error('Mapbox error:', e);
+  });
+
+  return map;
 };
 
 /**
@@ -94,7 +113,7 @@ export const waitForMapStyleLoad = (map: mapboxgl.Map): Promise<void> => {
     const timeout = setTimeout(() => {
       console.warn('Map style load timeout - continuing anyway');
       resolve();
-    }, 10000);
+    }, 5000); // Reduced from 10s to 5s to prevent long hangs
 
     // Listen for the styledata event
     const styleListener = () => {
@@ -136,6 +155,13 @@ export const configureMapSettings = (map: mapboxgl.Map): void => {
   setTimeout(() => {
     map.fire('map.ready');
     console.log('Map ready event fired');
-  }, 500);
+    
+    // Force canvas to be visible again
+    const canvas = map.getCanvas();
+    if (canvas) {
+      canvas.style.visibility = 'visible';
+      canvas.style.display = 'block';
+      canvas.style.opacity = '1';
+    }
+  }, 300); // Reduced from 500ms to 300ms
 };
-

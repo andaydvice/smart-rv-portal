@@ -108,3 +108,36 @@
     min-width: 180px !important;
   }
 }
+
+/* Critical fixes to prevent map from being blank/white */
+.map-container {
+  position: relative !important;
+  overflow: visible !important;
+  visibility: visible !important;
+  display: block !important;
+  height: 650px !important;
+  width: 100% !important;
+}
+
+.mapboxgl-canvas-container {
+  height: 100% !important;
+  width: 100% !important;
+  position: absolute !important;
+  visibility: visible !important;
+  display: block !important;
+  opacity: 1 !important;
+}
+
+.mapboxgl-canvas {
+  visibility: visible !important;
+  display: block !important;
+  opacity: 1 !important;
+  transform: translateZ(0) !important;
+}
+
+/* Fix for showing canvas during loading */
+canvas.mapboxgl-canvas {
+  visibility: visible !important;
+  display: block !important;
+  opacity: 1 !important;
+}

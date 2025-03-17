@@ -56,6 +56,14 @@ export const useMapSetup = (
       console.log(`Map setup with ${facilities.length} facilities`);
       console.log('Map bounds:', bounds);
       
+      // Force map canvas visibility
+      const canvas = map.getCanvas();
+      if (canvas) {
+        canvas.style.visibility = 'visible';
+        canvas.style.display = 'block';
+        canvas.style.opacity = '1';
+      }
+      
       // Dispatch an event that map is ready with facilities
       const event = new CustomEvent('map.ready', { 
         detail: { map, facilities } 

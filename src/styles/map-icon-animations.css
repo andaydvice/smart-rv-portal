@@ -71,3 +71,22 @@
     transform: translateY(0);
   }
 }
+
+/* Force visibility for canvas and map elements */
+.mapboxgl-canvas-container,
+.mapboxgl-canvas {
+  visibility: visible !important;
+  display: block !important;
+  opacity: 1 !important;
+}
+
+/* Enhanced mapbox visibility overrides */
+.mapboxgl-map {
+  visibility: visible !important;
+  display: block !important;
+  opacity: 1 !important;
+  height: 100% !important;
+  width: 100% !important;
+  position: relative !important;
+  overflow: visible !important;
+}
