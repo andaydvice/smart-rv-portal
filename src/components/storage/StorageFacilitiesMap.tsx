@@ -10,12 +10,33 @@ import { AlertCircle } from 'lucide-react';
 import { useStorageFacilities } from './useStorageFacilities';
 import { useRecentlyViewed } from './useRecentlyViewed';
 import MapView from './MapView';
+import GoogleMapFacilitiesView from './GoogleMapFacilitiesView';
 import RecentlyViewedFacilities from './RecentlyViewedFacilities';
 import LoadingStateDisplay from './map-view/LoadingStateDisplay';
 import FacilityList from './map-view/FacilityList';
 import { useMapToken } from './map-view/useMapToken';
 import { useFacilitySelection } from './map-view/useFacilitySelection';
 import { toast } from "sonner";
+
+// Create a helper hook to get Google Maps API key
+const useGoogleMapsKey = () => {
+  const [apiKey, setApiKey] = useState<string>('');
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    // Try to get API key from environment variables
+    const key = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
+    
+    if (key) {
+      setApiKey(key);
+    } else {
+      setError('Google Maps API key not found in environment variables');
+      console.error('Missing VITE_GOOGLE_MAPS_API_KEY environment variable');
+    }
+  }, []);
+
+  return { apiKey, error };
+};
 
 const StorageFacilitiesMap = () => {
   const [filters, setFilters] = useState<FilterState>({
@@ -31,9 +52,16 @@ const StorageFacilitiesMap = () => {
     minRating: null
   });
 
+  // State to toggle between map views
+  const [useGoogleMaps, setUseGoogleMaps] = useState<boolean>(false);
+
   const { facilities: allFacilities, isLoading, error, maxPrice } = useStorageFacilities(filters);
   const { recentlyViewed, addToRecentlyViewed } = useRecentlyViewed();
   const { mapToken, mapTokenError } = useMapToken();
+  const { apiKey: googleMapsKey, error: googleMapsError } = useGoogleMapsKey();
+  
+  // Get recently viewed facility IDs for highlighting on the map
+  const recentlyViewedIds = recentlyViewed.map(facility => facility.id);
   
   // Log state-specific counts for debugging
   useEffect(() => {
@@ -89,14 +117,11 @@ const StorageFacilitiesMap = () => {
     handleFacilityClick(facilityId, allFacilities || []);
   }, [handleFacilityClick, allFacilities]);
 
-  // Log when map token is received
-  useEffect(() => {
-    if (mapToken) {
-      console.log('Map token received');
-    } else if (mapTokenError) {
-      console.error('Map token error:', mapTokenError);
-    }
-  }, [mapToken, mapTokenError]);
+  // Toggle map view
+  const toggleMapView = () => {
+    setUseGoogleMaps(prev => !prev);
+    toast.info(`Switched to ${!useGoogleMaps ? 'Google Maps' : 'Mapbox'} view`);
+  };
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 min-h-[800px] map-content-wrapper">
@@ -123,24 +148,45 @@ const StorageFacilitiesMap = () => {
       </div>
       
       <div className="lg:col-span-8 flex flex-col space-y-4">
-        <Card className="h-[650px] bg-[#080F1F] relative overflow-visible border-gray-700 map-container">
-          {(!mapToken) ? (
-            <Alert variant="destructive" className="m-4">
-              <AlertCircle className="h-4 w-4" />
-              <AlertDescription>
-                {mapTokenError || 'Map configuration not loaded'}
-              </AlertDescription>
-            </Alert>
-          ) : (
-            <MapView
-              mapToken={mapToken}
-              facilities={allFacilities || []}
-              highlightedFacility={highlightedFacility}
-              onMarkerClick={onMarkerClick}
-              selectedState={filters.selectedState}
-            />
-          )}
-        </Card>
+        {/* Map toggle button */}
+        <div className="flex justify-end">
+          <button 
+            onClick={toggleMapView} 
+            className="bg-[#151A22] hover:bg-[#1F2937] text-white px-3 py-1.5 rounded-md text-sm flex items-center gap-1.5 transition-colors"
+          >
+            <span>{useGoogleMaps ? 'Switch to Mapbox' : 'Switch to Google Maps'}</span>
+          </button>
+        </div>
+        
+        {/* Map view based on toggle state */}
+        {useGoogleMaps ? (
+          <GoogleMapFacilitiesView
+            facilities={allFacilities || []}
+            recentlyViewedFacilityIds={recentlyViewedIds}
+            onMarkerClick={onMarkerClick}
+            apiKey={googleMapsKey}
+          />
+        ) : (
+          <Card className="h-[650px] bg-[#080F1F] relative overflow-visible border-gray-700 map-container">
+            {(!mapToken) ? (
+              <Alert variant="destructive" className="m-4">
+                <AlertCircle className="h-4 w-4" />
+                <AlertDescription>
+                  {mapTokenError || 'Map configuration not loaded'}
+                </AlertDescription>
+              </Alert>
+            ) : (
+              <MapView
+                mapToken={mapToken}
+                facilities={allFacilities || []}
+                highlightedFacility={highlightedFacility}
+                onMarkerClick={onMarkerClick}
+                selectedState={filters.selectedState}
+              />
+            )}
+          </Card>
+        )}
+        
         <RecentlyViewedFacilities 
           facilities={recentlyViewed}
           onFacilityClick={onMarkerClick}

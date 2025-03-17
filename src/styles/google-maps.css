@@ -1,0 +1,76 @@
+
+/* Google Maps Specific Styling */
+
+/* Info Window Styling */
+.gm-style .gm-style-iw-c {
+  padding: 12px !important;
+  border-radius: 8px !important;
+  background-color: #fff !important;
+  box-shadow: 0 2px 7px 1px rgba(0, 0, 0, 0.3) !important;
+  max-width: 320px !important;
+  min-width: 240px !important;
+}
+
+.gm-style .gm-style-iw-d {
+  overflow: hidden !important;
+  max-width: 100% !important;
+}
+
+/* Remove default InfoWindow arrows */
+.gm-style .gm-style-iw-tc {
+  display: none !important;
+}
+
+/* Custom InfoWindow style */
+.facility-info-window {
+  font-family: system-ui, -apple-system, sans-serif;
+  color: #333;
+  line-height: 1.5;
+}
+
+.facility-info-window h3 {
+  margin-top: 0;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+/* Make sure popup height adjusts properly */
+.gm-style-iw.gm-style-iw-c {
+  max-height: none !important;
+}
+
+.gm-style-iw-d {
+  max-height: none !important;
+}
+
+/* Make sure popups are fully visible */
+.gm-style .gm-style-iw-c {
+  transform: translate(-50%, -100%) !important;
+  margin-bottom: 10px;
+}
+
+/* Custom map marker animation */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.highlighted-marker {
+  animation: pulse 1.5s infinite ease-in-out;
+}
+
+/* Bottom facility indicator */
+.facility-indicator {
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}

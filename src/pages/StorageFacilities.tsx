@@ -10,6 +10,8 @@ import "../styles/map-fixes.css"; // Add our marker edge-clipping fixes
 import "../styles/marker-fix.css"; // Additional critical marker fixes
 import "../styles/responsive-map.css"; // Add our new responsive map styles
 import "../styles/map-preview.css"; // Add our map preview styles
+import "../styles/map-loading.css"; // Add loading styles
+import "../styles/google-maps.css"; // Add Google Maps specific styles
 
 // Helper function to normalize state names consistently
 const normalizeStateName = (stateAbbr: string): string => {
