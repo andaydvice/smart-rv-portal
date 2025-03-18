@@ -1,4 +1,3 @@
-
 import mapboxgl from 'mapbox-gl';
 import { StorageFacility } from '../../types';
 import { createEdgeAwareClickHandler } from '@/utils/markers/forcing/preventEdgeCutoff';
@@ -48,40 +47,38 @@ export function createFacilityMarker(
   el.setAttribute('data-state', facility.state);
   el.setAttribute('data-zoomed', isZoomedIn ? 'true' : 'false');
   
-  // Create properly positioned popup with fixed width
+  // Create popup with updated styling
   const popup = new mapboxgl.Popup({
     closeButton: true,
     closeOnClick: false,
-    maxWidth: '300px',
+    maxWidth: '340px',
     className: `facility-popup popup-${facility.id}`,
     offset: [0, -15],
     anchor: 'bottom',
     focusAfterOpen: false
   });
-  
-  // Set popup data attribute for CSS targeting
-  popup.addClassName(`popup-${facility.id}`);
-  
-  // Create HTML content - full popup content with all information
+
+  // Set popup content with improved styling
   popup.setHTML(`
-    <div class="facility-popup-content p-4 bg-[#131a2a] text-white" data-facility-id="${facility.id}">
-      <h3 class="text-lg font-semibold mb-1 text-[#60A5FA]">${facility.name}</h3>
-      <div class="space-y-1 text-sm">
-        <p>${facility.address}</p>
-        <p>${facility.city}, ${facility.state}</p>
-        <p class="mt-2 font-semibold text-[#F97316]">Price: $${facility.price_range?.min || 0} - $${facility.price_range?.max || 0}</p>
-        ${facility.contact_phone ? `<p class="mt-1">Phone: ${facility.contact_phone}</p>` : ''}
-      </div>
+    <div class="facility-popup-content p-6 bg-[#131a2a] text-white" data-facility-id="${facility.id}">
+      <h3 class="text-2xl font-semibold mb-2 text-[#60A5FA]">${facility.name}</h3>
+      <p class="text-lg mb-1">${facility.address}</p>
+      <p class="text-lg mb-4">${facility.city}, ${facility.state}</p>
+      
+      <p class="text-xl font-medium text-[#F97316] mb-3">Price: $${facility.price_range?.min || 0} - $${facility.price_range?.max || 0}</p>
+      
+      ${facility.contact_phone ? `
+        <p class="text-lg mb-4">Phone: ${facility.contact_phone}</p>
+      ` : ''}
       
       ${Object.values(facility.features || {}).some(v => v) ? `
-        <div class="mt-2 border-t border-gray-700 pt-2">
-          <p class="text-xs text-gray-400 mb-1">Features:</p>
-          <div class="flex flex-wrap gap-1">
-            ${facility.features?.indoor ? '<span class="text-xs bg-[#1a2235] text-[#60A5FA] px-2 py-0.5 rounded">Indoor</span>' : ''}
-            ${facility.features?.climate_controlled ? '<span class="text-xs bg-[#1a2235] text-[#60A5FA] px-2 py-0.5 rounded">Climate Controlled</span>' : ''}
-            ${facility.features?.["24h_access"] ? '<span class="text-xs bg-[#1a2235] text-[#60A5FA] px-2 py-0.5 rounded">24/7 Access</span>' : ''}
-            ${facility.features?.security_system ? '<span class="text-xs bg-[#1a2235] text-[#60A5FA] px-2 py-0.5 rounded">Security</span>' : ''}
-            ${facility.features?.vehicle_washing ? '<span class="text-xs bg-[#1a2235] text-[#60A5FA] px-2 py-0.5 rounded">Vehicle Washing</span>' : ''}
+        <div class="mt-2">
+          <p class="text-lg text-gray-400 mb-2">Features:</p>
+          <div class="flex flex-wrap gap-2">
+            ${facility.features?.indoor ? '<span class="text-md text-[#60A5FA]">Indoor</span>' : ''}
+            ${facility.features?.climate_controlled ? '<span class="text-md text-[#60A5FA]">Climate Controlled</span>' : ''}
+            ${facility.features?.["24h_access"] ? '<span class="text-md text-[#60A5FA]">24/7 Access</span>' : ''}
+            ${facility.features?.security_system ? '<span class="text-md text-[#60A5FA]">Security</span>' : ''}
           </div>
         </div>
       ` : ''}
