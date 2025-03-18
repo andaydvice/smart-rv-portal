@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import mapboxgl from 'mapbox-gl';
 
@@ -168,7 +167,7 @@ const MapControls: React.FC<MapControlsProps> = ({ map, onFilterClick }) => {
       
       {/* Additional hint when clicking markers - temporarily visible with improved styling */}
       <div className={`map-navigation-hint ${showHint ? 'visible' : ''}`}>
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-move mr-2">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-move mr-2 shrink-0">
           <polyline points="5 9 2 12 5 15" />
           <polyline points="9 5 12 2 15 5" />
           <polyline points="15 19 12 22 9 19" />
@@ -176,7 +175,10 @@ const MapControls: React.FC<MapControlsProps> = ({ map, onFilterClick }) => {
           <line x1="2" y1="12" x2="22" y2="12" />
           <line x1="12" y1="2" x2="12" y2="22" />
         </svg>
-        If location details cut off, move the map with your browser
+        <span className="leading-snug">
+          If the location details are cut off,<br/>
+          move the map with your browser
+        </span>
       </div>
     </>
   );
