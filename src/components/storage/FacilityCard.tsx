@@ -3,11 +3,11 @@ import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Star, ChevronRight } from 'lucide-react';
 import { Facility } from './types';
-import FacilityHeader from './facility-card/FacilityHeader';
-import FacilityFeatures from './facility-card/FacilityFeatures';
-import PriceRange from './facility-card/PriceRange';
-import ContactInfo from './facility-card/ContactInfo';
-import VerifiedBadge from './facility-card/VerifiedBadge';
+import { FacilityHeader } from './facility-card/FacilityHeader';
+import { FacilityFeatures } from './facility-card/FacilityFeatures';
+import { PriceRange } from './facility-card/PriceRange';
+import { ContactInfo } from './facility-card/ContactInfo';
+import { VerifiedBadge } from './facility-card/VerifiedBadge';
 
 interface FacilityCardProps {
   facility: Facility;
@@ -32,21 +32,22 @@ const FacilityCard: React.FC<FacilityCardProps> = ({
         ${compact ? 'p-2' : 'p-4'}
       `}
       onClick={onClick}
+      data-facility-id={facility.id}
     >
       <CardContent className={compact ? 'p-0' : 'p-0 pb-2'}>
         <div className="flex justify-between items-start mb-2">
           <FacilityHeader 
             name={facility.name} 
-            address={{
-              city: facility.city || '',
-              state: facility.state || '',
-              street: facility.street || '',
-              zip: facility.zip || ''
-            }}
-            compact={compact}
+            address={facility.street || ''}
+            city={facility.city || ''}
+            state={facility.state || ''}
+            verifiedFeatures={facility.is_verified || false}
+            verifiedLocation={facility.is_verified || false}
+            avgRating={facility.rating}
+            reviewCount={facility.review_count}
           />
           
-          {!hideBadge && facility.is_verified && <VerifiedBadge />}
+          {!hideBadge && facility.is_verified && <VerifiedBadge verified={true} />}
         </div>
         
         {/* Rating */}
@@ -64,9 +65,18 @@ const FacilityCard: React.FC<FacilityCardProps> = ({
         
         {!compact && (
           <>
-            <PriceRange minPrice={facility.min_price} maxPrice={facility.max_price} />
+            <PriceRange 
+              min={facility.min_price || 0} 
+              max={facility.max_price || 0} 
+              currency="USD" 
+              verified={facility.is_verified || false} 
+            />
             <FacilityFeatures features={facility.features || {}} />
-            <ContactInfo phone={facility.phone} website={facility.website} />
+            <ContactInfo 
+              phone={facility.phone} 
+              email={facility.email} 
+              verifiedContact={facility.is_verified || false} 
+            />
           </>
         )}
         

@@ -1,12 +1,12 @@
 
 import { useState, useEffect } from 'react';
-import { StorageFacility } from './types';
+import { Facility } from './types';
 
 const STORAGE_KEY = 'recently-viewed-facilities';
 const MAX_RECENT_ITEMS = 5;
 
 export const useRecentlyViewed = () => {
-  const [recentlyViewed, setRecentlyViewed] = useState<StorageFacility[]>([]);
+  const [recentlyViewed, setRecentlyViewed] = useState<Facility[]>([]);
 
   // Load recently viewed facilities from localStorage on initial render
   useEffect(() => {
@@ -26,7 +26,7 @@ export const useRecentlyViewed = () => {
   }, []);
 
   // Add a facility to recently viewed list
-  const addToRecentlyViewed = (facility: StorageFacility) => {
+  const addToRecentlyViewed = (facility: Facility) => {
     setRecentlyViewed(prev => {
       // Remove the facility if it already exists in the list
       const filtered = prev.filter(item => item.id !== facility.id);

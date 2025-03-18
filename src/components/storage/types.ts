@@ -1,4 +1,3 @@
-
 export interface StorageFacility {
   id: string;
   name: string;
@@ -96,3 +95,6 @@ export interface DatabaseStorageFacility {
   avg_rating?: number;
   review_count?: number;
 }
+
+// Add Facility as an alias for StorageFacility for backward compatibility
+export type Facility = StorageFacility;
