@@ -1,9 +1,14 @@
 
 import { createBrowserRouter, RouterProvider as ReactRouterProvider } from "react-router-dom";
-import { routes } from "@/routes/routes";
+import AppRoutes from "@/routes/routes";
 
-// Create the router from the routes array
-const router = createBrowserRouter(routes);
+// Create the router from the routes component
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <AppRoutes />
+  }
+]);
 
 const RouterProvider = () => {
   console.log('RouterProvider - Available Routes:', router.routes);
