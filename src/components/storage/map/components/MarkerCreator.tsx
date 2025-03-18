@@ -2,6 +2,7 @@
 import React, { useEffect } from 'react';
 import { StorageFacility } from '../../types';
 import { removeViewDetailsButtons } from '@/utils/markers';
+import StarRating from '@/components/ui/star-rating';
 
 interface MarkerCreatorProps {
   map: mapboxgl.Map;
@@ -73,24 +74,55 @@ const MarkerCreator: React.FC<MarkerCreatorProps> = ({
           // Remove any view details buttons
           removeViewDetailsButtons();
           
-          // Force star rating visibility in all popups
-          document.querySelectorAll('.star-rating-container, .facility-popup-content .flex').forEach(container => {
-            if (container instanceof HTMLElement) {
-              container.style.display = 'flex';
-              container.style.visibility = 'visible';
-              container.style.opacity = '1';
+          // Update star ratings in all popups with our new component
+          document.querySelectorAll('.facility-popup-content').forEach(content => {
+            // Find the facility for this popup
+            const facilityId = content.getAttribute('data-facility-id');
+            if (!facilityId) return;
+            
+            const facility = facilities.find(f => f.id === facilityId);
+            if (!facility || !facility.avg_rating) return;
+            
+            // Find the star rating container or create one
+            let ratingContainer = content.querySelector('.star-rating-container');
+            if (!ratingContainer) {
+              // Try to find where to insert the rating (after the title)
+              const title = content.querySelector('h3');
+              if (!title || !title.parentNode) return;
               
-              // Force each star to be visible
-              container.querySelectorAll('svg').forEach(star => {
-                if (star instanceof SVGElement) {
-                  star.style.display = 'inline-block';
-                  star.style.visibility = 'visible';
-                  star.style.opacity = '1';
-                  star.style.width = '20px';
-                  star.style.height = '20px';
-                }
-              });
+              // Create a container for the star rating
+              ratingContainer = document.createElement('div');
+              ratingContainer.className = 'star-rating-container mb-3';
+              title.parentNode.insertBefore(ratingContainer, title.nextSibling);
             }
+            
+            // Replace with stars rendered directly in the DOM
+            const stars = Array.from({ length: 5 }, (_, i) => {
+              const filled = i < Math.round(facility.avg_rating || 0);
+              return `
+                <svg 
+                  xmlns="http://www.w3.org/2000/svg" 
+                  width="20" 
+                  height="20" 
+                  viewBox="0 0 24 24" 
+                  fill="${filled ? '#FBBF24' : 'none'}" 
+                  stroke="${filled ? '#FBBF24' : '#6B7280'}" 
+                  stroke-width="1.5" 
+                  stroke-linecap="round" 
+                  stroke-linejoin="round" 
+                  class="star-icon"
+                >
+                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                </svg>
+              `;
+            }).join('');
+            
+            ratingContainer.innerHTML = stars;
+            ratingContainer.style.display = 'flex';
+            ratingContainer.style.gap = '4px';
+            ratingContainer.style.marginBottom = '12px';
+            ratingContainer.style.opacity = '1';
+            ratingContainer.style.visibility = 'visible';
           });
         }
       }, 500);

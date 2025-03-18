@@ -10,6 +10,7 @@ import { FacilityHeader } from './facility-card/FacilityHeader';
 import { PriceRange } from './facility-card/PriceRange';
 import { ContactInfo } from './facility-card/ContactInfo';
 import { FacilityFeatures } from './facility-card/FacilityFeatures';
+import StarRating from '@/components/ui/star-rating';
 
 interface StorageFacility {
   id: string;
@@ -82,6 +83,19 @@ const FacilityCard = forwardRef<HTMLDivElement, FacilityCardProps>(
       }
     };
 
+    // Custom rating description based on facility features
+    const getRatingDescription = () => {
+      if (facility.features.indoor && facility.features.climate_controlled) {
+        return "Premium indoor facility";
+      } else if (facility.features.indoor) {
+        return "Indoor storage facility";
+      } else if (facility.features.security_system) {
+        return "Secure storage facility";
+      } else {
+        return "Storage facility rating";
+      }
+    };
+
     return (
       <Card 
         ref={ref}
@@ -92,16 +106,28 @@ const FacilityCard = forwardRef<HTMLDivElement, FacilityCardProps>(
       >
         <div className="space-y-4">
           <div className="flex items-start justify-between">
-            <FacilityHeader 
-              name={facility.name}
-              address={facility.address}
-              city={facility.city}
-              state={facility.state}
-              verifiedFeatures={Boolean(facility.verified_fields?.features)}
-              verifiedLocation={Boolean(facility.verified_fields?.location)}
-              avgRating={facility.avg_rating}
-              reviewCount={facility.review_count}
-            />
+            <div className="flex-1">
+              <FacilityHeader 
+                name={facility.name}
+                address={facility.address}
+                city={facility.city}
+                state={facility.state}
+                verifiedFeatures={Boolean(facility.verified_fields?.features)}
+                verifiedLocation={Boolean(facility.verified_fields?.location)}
+                reviewCount={facility.review_count}
+              />
+              
+              {facility.avg_rating !== undefined && (
+                <div className="mt-1">
+                  <StarRating 
+                    rating={facility.avg_rating} 
+                    description={getRatingDescription()}
+                    readonly
+                    size="sm"
+                  />
+                </div>
+              )}
+            </div>
             <Button
               variant="ghost"
               size="icon"

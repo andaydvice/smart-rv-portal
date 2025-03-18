@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { MapPin } from 'lucide-react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { Star } from "lucide-react";
+import StarRating from "@/components/ui/star-rating";
 
 interface LocationDetails {
   name: string;
@@ -35,7 +35,18 @@ const InteractiveMapIcon: React.FC<InteractiveMapIconProps> = ({
   };
 
   // Validate rating
-  const rating = Math.min(Math.max(locationDetails.rating, 1), 5);
+  const rating = Math.min(Math.max(locationDetails.rating, 0), 5);
+
+  // Get rating description based on the facility type
+  const getRatingDescription = () => {
+    if (locationDetails.name.includes("Indoor")) {
+      return "Indoor storage quality rating";
+    } else if (locationDetails.name.includes("Security")) {
+      return "Security features rating";
+    } else {
+      return "Overall facility rating";
+    }
+  };
 
   return (
     <>
@@ -61,15 +72,14 @@ const InteractiveMapIcon: React.FC<InteractiveMapIconProps> = ({
             </DialogTitle>
           </DialogHeader>
           
-          <div className="flex items-center gap-1 mb-4">
-            {[...Array(5)].map((_, index) => (
-              <Star
-                key={index}
-                className={`w-5 h-5 ${
-                  index < rating ? 'text-yellow-400 fill-yellow-400' : 'text-gray-400'
-                }`}
-              />
-            ))}
+          <div className="mb-4">
+            <StarRating 
+              rating={rating} 
+              description={getRatingDescription()}
+              readonly
+              size="lg"
+              className="mb-1"
+            />
           </div>
 
           <div className="space-y-4">
