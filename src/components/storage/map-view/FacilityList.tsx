@@ -1,34 +1,37 @@
 
-import React from 'react';
+import React, { useRef } from 'react';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { Facility } from '../types';
+import { StorageFacility } from '../types';
 import FacilityCard from '../FacilityCard';
 
 interface FacilityListProps {
-  facilities: Facility[];
+  facilities: StorageFacility[];
   highlightedFacility: string | null;
-  onFacilityClick: (id: string) => void;
+  onFacilityClick: (facilityId: string) => void;
   scrollAreaRef: React.RefObject<HTMLDivElement>;
-  hideBadge?: boolean;
 }
 
 const FacilityList: React.FC<FacilityListProps> = ({
   facilities,
   highlightedFacility,
   onFacilityClick,
-  scrollAreaRef,
-  hideBadge = false
+  scrollAreaRef
 }) => {
+  // Create a ref object for each facility card
+  const facilityRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
+
   return (
-    <ScrollArea className="h-[600px] pr-3">
-      <div ref={scrollAreaRef} className="space-y-4 p-4">
-        {facilities.map((facility) => (
+    <ScrollArea className="h-[600px] w-full" ref={scrollAreaRef}>
+      <div className="p-4 space-y-4">
+        {facilities.map(facility => (
           <FacilityCard
             key={facility.id}
             facility={facility}
-            highlighted={facility.id === highlightedFacility}
+            isHighlighted={facility.id === highlightedFacility}
             onClick={() => onFacilityClick(facility.id)}
-            hideBadge={hideBadge}
+            ref={(el) => {
+              facilityRefs.current[facility.id] = el;
+            }}
           />
         ))}
       </div>

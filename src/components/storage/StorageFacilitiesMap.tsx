@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useCallback } from 'react';
 import { Card } from '@/components/ui/card';
 import FilterPanel from './FilterPanel';
@@ -36,15 +35,7 @@ const useGoogleMapsKey = () => {
   return { apiKey, error };
 };
 
-interface StorageFacilitiesMapProps {
-  initialFacilityId?: string;
-  hideBadge?: boolean;
-}
-
-const StorageFacilitiesMap: React.FC<StorageFacilitiesMapProps> = ({ 
-  initialFacilityId,
-  hideBadge = false
-}) => {
+const StorageFacilitiesMap = () => {
   const [filters, setFilters] = useState<FilterState>({
     features: {
       indoor: false,
@@ -90,26 +81,10 @@ const StorageFacilitiesMap: React.FC<StorageFacilitiesMapProps> = ({
   const { 
     highlightedFacility, 
     scrollAreaRef, 
-    handleFacilityClick,
-    setHighlightedFacility 
+    handleFacilityClick 
   } = useFacilitySelection({ 
     addToRecentlyViewed 
   });
-
-  // Set initial highlighted facility from route parameter
-  useEffect(() => {
-    if (initialFacilityId && allFacilities) {
-      console.log(`Setting initial facility highlight to: ${initialFacilityId}`);
-      const facilityExists = allFacilities.some(f => f.id === initialFacilityId);
-      
-      if (facilityExists) {
-        setHighlightedFacility(initialFacilityId);
-        handleFacilityClick(initialFacilityId, allFacilities);
-      } else {
-        console.warn(`Facility with ID ${initialFacilityId} not found in loaded facilities`);
-      }
-    }
-  }, [initialFacilityId, allFacilities, handleFacilityClick, setHighlightedFacility]);
   
   const handleFilterChange = useCallback((newFilters: FilterState) => {
     console.log('Filter changed:', newFilters);
@@ -163,7 +138,6 @@ const StorageFacilitiesMap: React.FC<StorageFacilitiesMapProps> = ({
                 highlightedFacility={highlightedFacility}
                 onFacilityClick={onMarkerClick}
                 scrollAreaRef={scrollAreaRef}
-                hideBadge={hideBadge}
               />
             )}
           </Card>
@@ -202,7 +176,6 @@ const StorageFacilitiesMap: React.FC<StorageFacilitiesMapProps> = ({
             recentlyViewedFacilityIds={recentlyViewedIds}
             onMarkerClick={onMarkerClick}
             apiKey={googleMapsKey}
-            highlightedFacility={highlightedFacility}
           />
         ) : (
           <Card className="h-[650px] bg-[#080F1F] relative overflow-visible border-gray-700 map-container">
@@ -229,7 +202,6 @@ const StorageFacilitiesMap: React.FC<StorageFacilitiesMapProps> = ({
           facilities={recentlyViewed}
           onFacilityClick={onMarkerClick}
           className="h-[180px]"
-          hideBadge={hideBadge}
         />
       </div>
     </div>

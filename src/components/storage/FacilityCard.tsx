@@ -1,96 +1,140 @@
 
-import React from 'react';
-import { Card, CardContent } from '@/components/ui/card';
-import { Star, ChevronRight } from 'lucide-react';
-import { Facility } from './types';
+import React, { forwardRef } from 'react';
+import { Heart } from 'lucide-react';
+import { Card } from '@/components/ui/card';
+import { useFavorites } from './useFavorites';
+import { Button } from '@/components/ui/button';
+import { useToast } from '@/components/ui/use-toast';
+import { useNavigate } from 'react-router-dom';
 import { FacilityHeader } from './facility-card/FacilityHeader';
-import { FacilityFeatures } from './facility-card/FacilityFeatures';
 import { PriceRange } from './facility-card/PriceRange';
 import { ContactInfo } from './facility-card/ContactInfo';
-import { VerifiedBadge } from './facility-card/VerifiedBadge';
+import { FacilityFeatures } from './facility-card/FacilityFeatures';
 
-interface FacilityCardProps {
-  facility: Facility;
-  highlighted?: boolean;
-  onClick?: () => void;
-  compact?: boolean;
-  hideBadge?: boolean;
+interface StorageFacility {
+  id: string;
+  name: string;
+  address: string;
+  city: string;
+  state: string;
+  latitude: number;
+  longitude: number;
+  features: {
+    indoor: boolean;
+    climate_controlled: boolean;
+    "24h_access": boolean;
+    security_system: boolean;
+    vehicle_washing: boolean;
+  };
+  price_range: {
+    min: number;
+    max: number;
+    currency: string;
+  };
+  contact_phone?: string;
+  contact_email?: string;
+  avg_rating?: number;
+  review_count?: number;
+  verified_fields: {
+    features?: boolean;
+    location?: boolean;
+    price_range?: boolean;
+    contact_info?: boolean;
+  };
 }
 
-const FacilityCard: React.FC<FacilityCardProps> = ({ 
-  facility, 
-  highlighted = false, 
-  onClick,
-  compact = false,
-  hideBadge = false
-}) => {
-  return (
-    <Card 
-      className={`
-        border-gray-700 cursor-pointer transition-all duration-200 overflow-hidden
-        ${highlighted ? 'bg-[#131a2a] ring-2 ring-[#5B9BD5] shadow-lg' : 'bg-[#080F1F] hover:bg-[#131a2a]'}
-        ${compact ? 'p-2' : 'p-4'}
-      `}
-      onClick={onClick}
-      data-facility-id={facility.id}
-    >
-      <CardContent className={compact ? 'p-0' : 'p-0 pb-2'}>
-        <div className="flex justify-between items-start mb-2">
-          <FacilityHeader 
-            name={facility.name} 
-            address={facility.street || ''}
-            city={facility.city || ''}
-            state={facility.state || ''}
-            verifiedFeatures={facility.is_verified || false}
-            verifiedLocation={facility.is_verified || false}
-            avgRating={facility.rating}
-            reviewCount={facility.review_count}
-          />
-          
-          {!hideBadge && facility.is_verified && <VerifiedBadge verified={true} />}
-        </div>
-        
-        {/* Rating */}
-        {facility.rating && (
-          <div className="flex items-center mb-2">
-            {Array.from({ length: 5 }).map((_, i) => (
-              <Star 
-                key={i} 
-                className={`h-4 w-4 ${i < facility.rating! ? 'text-yellow-400 fill-yellow-400' : 'text-gray-500'}`} 
+interface FacilityCardProps {
+  facility: StorageFacility;
+  isHighlighted: boolean;
+  onClick: () => void;
+}
+
+const FacilityCard = forwardRef<HTMLDivElement, FacilityCardProps>(
+  ({ facility, isHighlighted, onClick }, ref) => {
+    const { toast } = useToast();
+    const navigate = useNavigate();
+    const { isAuthenticated, isFavorite, addFavorite, removeFavorite, isLoading } = useFavorites();
+
+    const handleFavoriteClick = (e: React.MouseEvent) => {
+      e.stopPropagation();
+      
+      if (!isAuthenticated) {
+        toast({
+          title: "Want to save favorites?",
+          description: "Create a free account to save your favorite storage facilities and access them anytime.",
+          action: (
+            <Button 
+              variant="outline" 
+              onClick={() => navigate('/auth')}
+              className="bg-blue-600 text-white hover:bg-blue-700"
+            >
+              Sign Up
+            </Button>
+          ),
+        });
+        return;
+      }
+
+      if (isFavorite(facility.id)) {
+        removeFavorite(facility.id);
+      } else {
+        addFavorite(facility.id);
+      }
+    };
+
+    return (
+      <Card 
+        ref={ref}
+        className={`p-4 cursor-pointer transition-all duration-200 bg-[#131a2a] border-gray-700 hover:border-[#60A5FA] ${
+          isHighlighted ? 'border-[#60A5FA] ring-1 ring-[#60A5FA]' : ''
+        }`}
+        onClick={onClick}
+      >
+        <div className="space-y-4">
+          <div className="flex items-start justify-between">
+            <FacilityHeader 
+              name={facility.name}
+              address={facility.address}
+              city={facility.city}
+              state={facility.state}
+              verifiedFeatures={Boolean(facility.verified_fields?.features)}
+              verifiedLocation={Boolean(facility.verified_fields?.location)}
+              avgRating={facility.avg_rating}
+              reviewCount={facility.review_count}
+            />
+            <Button
+              variant="ghost"
+              size="icon"
+              className="h-8 w-8 flex-shrink-0 ml-2"
+              disabled={isLoading}
+              onClick={handleFavoriteClick}
+            >
+              <Heart 
+                className={`w-5 h-5 ${isFavorite(facility.id) ? 'fill-red-500 text-red-500' : 'text-gray-400'}`}
               />
-            ))}
-            <span className="text-white ml-2 text-sm">{facility.rating.toFixed(1)}</span>
+            </Button>
           </div>
-        )}
-        
-        {!compact && (
-          <>
-            <PriceRange 
-              min={facility.min_price || 0} 
-              max={facility.max_price || 0} 
-              currency="USD" 
-              verified={facility.is_verified || false} 
-            />
-            <FacilityFeatures features={facility.features || {}} />
-            <ContactInfo 
-              phone={facility.phone} 
-              email={facility.email} 
-              verifiedContact={facility.is_verified || false} 
-            />
-          </>
-        )}
-        
-        {compact && (
-          <div className="flex justify-between items-center mt-2">
-            <div className="text-sm text-gray-300 truncate max-w-[200px]">
-              {facility.features && Object.keys(facility.features).filter(key => facility.features![key]).length} amenities
-            </div>
-            <ChevronRight className="h-4 w-4 text-gray-400" />
-          </div>
-        )}
-      </CardContent>
-    </Card>
-  );
-};
+
+          <PriceRange 
+            min={facility.price_range.min}
+            max={facility.price_range.max}
+            currency={facility.price_range.currency}
+            verified={Boolean(facility.verified_fields?.price_range)}
+          />
+
+          <ContactInfo 
+            phone={facility.contact_phone}
+            email={facility.contact_email}
+            verifiedContact={Boolean(facility.verified_fields?.contact_info)}
+          />
+
+          <FacilityFeatures features={facility.features} />
+        </div>
+      </Card>
+    );
+  }
+);
+
+FacilityCard.displayName = 'FacilityCard';
 
 export default FacilityCard;

@@ -1,96 +1,159 @@
 
-import { lazy, Suspense } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import React from 'react';
+import { RouteObject } from 'react-router-dom';
 
 // Pages
-const Index = lazy(() => import('@/pages/Index'));
-const Auth = lazy(() => import('@/pages/Auth'));
-const Features = lazy(() => import('@/pages/Features'));
-const Contact = lazy(() => import('@/pages/Contact'));
-const Documentation = lazy(() => import('@/pages/Documentation'));
-const Blog = lazy(() => import('@/pages/Blog'));
-const BlogPost = lazy(() => import('@/pages/BlogPost'));
-const Models = lazy(() => import('@/pages/Models'));
-const Technology = lazy(() => import('@/pages/Technology'));
-const CompleteDocumentation = lazy(() => import('@/pages/documentation/CompleteDocumentation'));
-const ScheduleDemo = lazy(() => import('@/pages/ScheduleDemo'));
-const CompareModels = lazy(() => import('@/pages/models/CompareModels'));
-const CompactModel = lazy(() => import('@/pages/models/CompactModel'));
-const LuxuryModel = lazy(() => import('@/pages/models/LuxuryModel'));
-const AdventureModel = lazy(() => import('@/pages/models/AdventureModel'));
-const Troubleshooting = lazy(() => import('@/pages/Troubleshooting'));
-const SmartTV = lazy(() => import('@/pages/features/SmartTV'));
-const SmartKitchen = lazy(() => import('@/pages/features/SmartKitchen'));
-const NavigationSystem = lazy(() => import('@/pages/features/NavigationSystem'));
-const SecuritySystem = lazy(() => import('@/pages/features/SecuritySystem'));
-const PowerManagement = lazy(() => import('@/pages/features/PowerManagement'));
-const InternetConnectivity = lazy(() => import('@/pages/features/InternetConnectivity'));
-const AudioSystem = lazy(() => import('@/pages/features/AudioSystem'));
-const AutomatedDriving = lazy(() => import('@/pages/features/AutomatedDriving'));
-const Calculators = lazy(() => import('@/pages/Calculators'));
-const VoiceControl = lazy(() => import('@/pages/VoiceControl'));
-const RVWeather = lazy(() => import('@/pages/RVWeather'));
-const StorageFacilities = lazy(() => import('@/pages/StorageFacilities'));
-const StoragePreparationChecklist = lazy(() => import('@/pages/StoragePreparationChecklist'));
-const MapIconDemo = lazy(() => import('@/pages/MapIconDemo'));
-const StarRatingDemo = lazy(() => import('@/pages/StarRatingDemo'));
+import Index from '../pages/Index';
+import Features from '../pages/Features';
+import Models from '../pages/Models';
+import AudioSystem from '../pages/features/AudioSystem';
+import SmartTV from '../pages/features/SmartTV';
+import AutomatedDriving from '../pages/features/AutomatedDriving';
+import InternetConnectivity from '../pages/features/InternetConnectivity';
+import NavigationSystem from '../pages/features/NavigationSystem';
+import PowerManagement from '../pages/features/PowerManagement';
+import SecuritySystem from '../pages/features/SecuritySystem';
+import SmartKitchen from '../pages/features/SmartKitchen';
+import ScheduleDemo from '../pages/ScheduleDemo';
+import Calculators from '../pages/Calculators';
+import Contact from '../pages/Contact';
+import Auth from '../pages/Auth';
+import Documentation from '../pages/Documentation';
+import CompleteDocumentation from '../pages/documentation/CompleteDocumentation';
+import Blog from '../pages/Blog';
+import BlogPost from '../pages/BlogPost';
+import Technology from '../pages/Technology';
+import AdventureModel from '../pages/models/AdventureModel';
+import CompactModel from '../pages/models/CompactModel';
+import LuxuryModel from '../pages/models/LuxuryModel';
+import CompareModels from '../pages/models/CompareModels';
+import RVWeather from '../pages/RVWeather';
+import VoiceControl from '../pages/VoiceControl';
+import Troubleshooting from '../pages/Troubleshooting';
+import StorageFacilities from '../pages/StorageFacilities';
+import StoragePreparationChecklist from '../pages/StoragePreparationChecklist';
+import MapIconDemo from '../pages/MapIconDemo'; // Add the new page import
 
-// Loading component
-const Loading = () => (
-  <div className="h-screen w-full flex items-center justify-center bg-background text-foreground">
-    <div className="w-16 h-16 border-t-4 border-b-4 border-blue-500 rounded-full animate-spin" />
-  </div>
-);
-
-// 404 component for better error handling
-const NotFound = () => (
-  <div className="flex flex-col items-center justify-center h-screen bg-[#080F1F] text-white p-4">
-    <h1 className="text-3xl font-bold text-[#F97316] mb-4">Page Not Found</h1>
-    <p className="text-lg mb-6">We couldn't find the page you're looking for.</p>
-    <a href="/" className="px-4 py-2 bg-[#5B9BD5] text-white rounded-md hover:bg-[#4B8FE3] transition-colors">
-      Return to Home
-    </a>
-  </div>
-);
-
-export default function AppRoutes() {
-  return (
-    <Suspense fallback={<Loading />}>
-      <Routes>
-        <Route path="/" element={<Index />} />
-        <Route path="/auth" element={<Auth />} />
-        <Route path="/features" element={<Features />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/documentation" element={<Documentation />} />
-        <Route path="/blog" element={<Blog />} />
-        <Route path="/blog/:id" element={<BlogPost />} />
-        <Route path="/models" element={<Models />} />
-        <Route path="/technology" element={<Technology />} />
-        <Route path="/documentation/complete" element={<CompleteDocumentation />} />
-        <Route path="/schedule-demo" element={<ScheduleDemo />} />
-        <Route path="/models/compare" element={<CompareModels />} />
-        <Route path="/models/compact" element={<CompactModel />} />
-        <Route path="/models/luxury" element={<LuxuryModel />} />
-        <Route path="/models/adventure" element={<AdventureModel />} />
-        <Route path="/troubleshooting" element={<Troubleshooting />} />
-        <Route path="/features/smart-tv" element={<SmartTV />} />
-        <Route path="/features/smart-kitchen" element={<SmartKitchen />} />
-        <Route path="/features/navigation-system" element={<NavigationSystem />} />
-        <Route path="/features/security-system" element={<SecuritySystem />} />
-        <Route path="/features/power-management" element={<PowerManagement />} />
-        <Route path="/features/internet-connectivity" element={<InternetConnectivity />} />
-        <Route path="/features/audio-system" element={<AudioSystem />} />
-        <Route path="/features/automated-driving" element={<AutomatedDriving />} />
-        <Route path="/calculators" element={<Calculators />} />
-        <Route path="/voice-control" element={<VoiceControl />} />
-        <Route path="/weather" element={<RVWeather />} />
-        <Route path="/storage-facilities" element={<StorageFacilities />} />
-        <Route path="/storage-facilities/:id" element={<StorageFacilities />} />
-        <Route path="/storage-preparation-checklist" element={<StoragePreparationChecklist />} />
-        <Route path="/map-icon-demo" element={<MapIconDemo />} />
-        <Route path="/star-rating-demo" element={<StarRatingDemo />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </Suspense>
-  );
-}
+// Define routes
+export const routes: RouteObject[] = [
+  {
+    path: '/',
+    element: <Index />,
+  },
+  {
+    path: '/features',
+    element: <Features />,
+  },
+  {
+    path: '/features/audio-system',
+    element: <AudioSystem />,
+  },
+  {
+    path: '/features/smart-tv',
+    element: <SmartTV />,
+  },
+  {
+    path: '/features/automated-driving',
+    element: <AutomatedDriving />,
+  },
+  {
+    path: '/features/internet-connectivity',
+    element: <InternetConnectivity />,
+  },
+  {
+    path: '/features/navigation-system',
+    element: <NavigationSystem />,
+  },
+  {
+    path: '/features/power-management',
+    element: <PowerManagement />,
+  },
+  {
+    path: '/features/security-system',
+    element: <SecuritySystem />,
+  },
+  {
+    path: '/features/smart-kitchen',
+    element: <SmartKitchen />,
+  },
+  {
+    path: '/models',
+    element: <Models />,
+  },
+  {
+    path: '/models/adventure',
+    element: <AdventureModel />,
+  },
+  {
+    path: '/models/compact',
+    element: <CompactModel />,
+  },
+  {
+    path: '/models/luxury',
+    element: <LuxuryModel />,
+  },
+  {
+    path: '/models/compare',
+    element: <CompareModels />,
+  },
+  {
+    path: '/schedule-demo',
+    element: <ScheduleDemo />,
+  },
+  {
+    path: '/calculators',
+    element: <Calculators />,
+  },
+  {
+    path: '/contact',
+    element: <Contact />,
+  },
+  {
+    path: '/auth',
+    element: <Auth />,
+  },
+  {
+    path: '/documentation',
+    element: <Documentation />,
+  },
+  {
+    path: '/documentation/complete',
+    element: <CompleteDocumentation />,
+  },
+  {
+    path: '/blog',
+    element: <Blog />,
+  },
+  {
+    path: '/blog/:slug',
+    element: <BlogPost />,
+  },
+  {
+    path: '/technology',
+    element: <Technology />,
+  },
+  {
+    path: '/weather',
+    element: <RVWeather />,
+  },
+  {
+    path: '/voice-control',
+    element: <VoiceControl />,
+  },
+  {
+    path: '/troubleshooting',
+    element: <Troubleshooting />,
+  },
+  {
+    path: '/storage-facilities',
+    element: <StorageFacilities />,
+  },
+  {
+    path: '/storage-preparation-checklist',
+    element: <StoragePreparationChecklist />,
+  },
+  {
+    path: '/map-icon-demo',
+    element: <MapIconDemo />,
+  },
+];

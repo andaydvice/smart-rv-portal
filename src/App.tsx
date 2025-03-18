@@ -1,4 +1,3 @@
-
 import React, { Suspense, useEffect } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import RouterProvider from './components/router/RouterProvider';
@@ -6,7 +5,6 @@ import { Toaster } from '@/components/ui/toaster';
 import { AuthProvider } from './components/auth/AuthContext';
 import { injectEmergencyStyles } from './utils/markers/styleInjection';
 import { forceMapMarkersVisible } from './utils/forceMapMarkers';
-import { LazyMotion, domAnimation } from 'framer-motion';
 import './App.css';
 import './styles/animations.css';
 import './styles/map-loading.css';
@@ -49,9 +47,7 @@ function AppContent() {
 
   return (
     <Suspense fallback={<div className="flex items-center justify-center h-screen">Loading application...</div>}>
-      <LazyMotion features={domAnimation}>
-        <RouterProvider />
-      </LazyMotion>
+      <RouterProvider />
       <Toaster />
     </Suspense>
   );
