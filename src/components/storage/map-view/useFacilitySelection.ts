@@ -1,63 +1,41 @@
 
-import { useState, useRef, RefObject } from 'react';
-import { StorageFacility } from '../types';
+import { useState, useRef, useCallback, useEffect } from 'react';
+import { Facility } from '../types';
 
 interface UseFacilitySelectionProps {
-  addToRecentlyViewed: (facility: StorageFacility) => void;
+  addToRecentlyViewed: (facility: Facility) => void;
 }
 
 export const useFacilitySelection = ({ addToRecentlyViewed }: UseFacilitySelectionProps) => {
   const [highlightedFacility, setHighlightedFacility] = useState<string | null>(null);
   const scrollAreaRef = useRef<HTMLDivElement>(null);
-  const facilityRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
-
-  const handleFacilityClick = (
-    facilityId: string, 
-    facilities: StorageFacility[] | undefined
-  ) => {
+  
+  const handleFacilityClick = useCallback((facilityId: string | null, facilities: Facility[]) => {
     setHighlightedFacility(facilityId);
     
-    if (facilities) {
+    if (facilityId) {
       const facility = facilities.find(f => f.id === facilityId);
       if (facility) {
         addToRecentlyViewed(facility);
       }
     }
-    
-    setTimeout(() => {
-      if (facilityRefs.current[facilityId] && scrollAreaRef.current) {
-        const facilityElement = facilityRefs.current[facilityId];
-        const scrollContainer = scrollAreaRef.current.querySelector('[data-radix-scroll-area-viewport]');
-        
-        if (facilityElement && scrollContainer) {
-          const containerRect = scrollContainer.getBoundingClientRect();
-          const elementRect = facilityElement.getBoundingClientRect();
-          
-          const isInView = 
-            elementRect.top >= containerRect.top && 
-            elementRect.bottom <= containerRect.bottom;
-            
-          if (!isInView) {
-            const scrollTop = 
-              elementRect.top - 
-              containerRect.top + 
-              (scrollContainer as HTMLElement).scrollTop - 
-              (containerRect.height - elementRect.height) / 2;
-              
-            (scrollContainer as HTMLElement).scrollTo({
-              top: scrollTop,
-              behavior: 'smooth'
-            });
-          }
-        }
+  }, [addToRecentlyViewed]);
+  
+  // Scroll to highlighted facility
+  useEffect(() => {
+    if (highlightedFacility && scrollAreaRef.current) {
+      const highlightedElement = scrollAreaRef.current.querySelector(`[data-facility-id="${highlightedFacility}"]`);
+      
+      if (highlightedElement) {
+        highlightedElement.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
       }
-    }, 100);
-  };
-
-  return {
-    highlightedFacility,
-    scrollAreaRef,
-    facilityRefs,
-    handleFacilityClick
+    }
+  }, [highlightedFacility]);
+  
+  return { 
+    highlightedFacility, 
+    setHighlightedFacility,
+    scrollAreaRef, 
+    handleFacilityClick 
   };
 };

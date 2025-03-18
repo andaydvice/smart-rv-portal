@@ -85,6 +85,7 @@ export default function AppRoutes() {
         <Route path="/voice-control" element={<VoiceControl />} />
         <Route path="/weather" element={<RVWeather />} />
         <Route path="/storage-facilities" element={<StorageFacilities />} />
+        <Route path="/storage-facilities/:id" element={<StorageFacilities />} />
         <Route path="/storage-preparation-checklist" element={<StoragePreparationChecklist />} />
         <Route path="/map-icon-demo" element={<MapIconDemo />} />
         <Route path="/star-rating-demo" element={<StarRatingDemo />} />

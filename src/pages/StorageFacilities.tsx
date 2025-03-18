@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar";
 import Layout from "@/components/layout/Layout";
 import { Warehouse } from "lucide-react";
 import LocationPreviewSection from "@/components/storage/LocationPreviewSection";
+import { useSearchParams, useParams } from "react-router-dom";
 import "../styles/force-markers.css"; // Only load the minimal, clean CSS
 import "../styles/map-fixes.css"; // Add our marker edge-clipping fixes
 import "../styles/marker-fix.css"; // Additional critical marker fixes
@@ -69,6 +70,18 @@ export async function getStateCountsWithSQL() {
 }
 
 export default function StorageFacilities() {
+  // Get URL query parameters and route params
+  const [searchParams] = useSearchParams();
+  const params = useParams();
+  const facilityId = params.id;
+  const forceHideBadge = searchParams.get('forceHideBadge') === 'true';
+  
+  console.log('StorageFacilities page loaded with params:', { 
+    facilityId, 
+    forceHideBadge,
+    searchParams: Object.fromEntries(searchParams.entries()) 
+  });
+
   return (
     <Layout>
       <Navbar />
@@ -103,7 +116,10 @@ export default function StorageFacilities() {
         {/* Main map container */}
         <Container fullWidth className="px-2 md:px-4 overflow-hidden max-w-[1920px] mx-auto">
           <div className="py-4">
-            <StorageFacilitiesMap />
+            <StorageFacilitiesMap 
+              initialFacilityId={facilityId} 
+              hideBadge={forceHideBadge} 
+            />
           </div>
         </Container>
         

@@ -1,72 +1,51 @@
 
 import React from 'react';
-import { Card } from '@/components/ui/card';
-import { StorageFacility } from './types';
-import { Button } from '@/components/ui/button';
-import { Eye, MapPin } from 'lucide-react';
-import { cn } from '@/lib/utils';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
+import { Facility } from './types';
+import FacilityCard from './FacilityCard';
+import { History } from 'lucide-react';
 
 interface RecentlyViewedFacilitiesProps {
-  facilities: StorageFacility[];
+  facilities: Facility[];
   onFacilityClick: (facilityId: string) => void;
   className?: string;
+  hideBadge?: boolean;
 }
 
-const RecentlyViewedFacilities = ({
-  facilities,
+const RecentlyViewedFacilities: React.FC<RecentlyViewedFacilitiesProps> = ({ 
+  facilities, 
   onFacilityClick,
-  className
-}: RecentlyViewedFacilitiesProps) => {
-  if (facilities.length === 0) {
-    return (
-      <Card className={cn("bg-[#080F1F] border-gray-700 p-4", className)}>
-        <div className="flex items-center gap-2 mb-3">
-          <Eye className="h-5 w-5 text-[#60A5FA]" />
-          <h3 className="text-lg font-semibold text-white">Recently Viewed Facilities</h3>
-        </div>
-        <p className="text-gray-400 text-sm">
-          Facilities you view will appear here for quick access.
-        </p>
-      </Card>
-    );
-  }
-
+  className = "",
+  hideBadge = false
+}) => {
+  if (facilities.length === 0) return null;
+  
   return (
-    <Card className={cn("bg-[#080F1F] border-gray-700 p-4", className)}>
-      <div className="flex items-center gap-2 mb-3">
-        <Eye className="h-5 w-5 text-[#60A5FA]" />
-        <h3 className="text-lg font-semibold text-white">Recently Viewed Facilities</h3>
-      </div>
-      <div className="space-y-3">
-        {facilities.map(facility => (
-          <div
-            key={facility.id}
-            className="p-2 rounded hover:bg-[#131a2a] cursor-pointer border border-gray-800"
-            onClick={() => onFacilityClick(facility.id)}
-          >
-            <div className="flex justify-between items-start">
-              <div>
-                <h4 className="font-medium text-white text-sm">{facility.name}</h4>
-                <div className="flex items-center gap-1 text-gray-400 mt-1">
-                  <MapPin className="h-3 w-3" />
-                  <span className="text-xs truncate">{facility.city}, {facility.state}</span>
-                </div>
+    <Card className={`bg-[#080F1F] border-gray-700 ${className}`}>
+      <CardHeader className="pb-2">
+        <CardTitle className="text-white text-lg flex items-center gap-2">
+          <History className="h-5 w-5 text-[#5B9BD5]" />
+          <span>Recently Viewed</span>
+        </CardTitle>
+      </CardHeader>
+      <CardContent className="p-4 pt-0">
+        <ScrollArea>
+          <div className="flex space-x-4 pb-4">
+            {facilities.map(facility => (
+              <div key={facility.id} className="min-w-[280px] max-w-[280px]">
+                <FacilityCard 
+                  facility={facility} 
+                  compact={true} 
+                  onClick={() => onFacilityClick(facility.id)}
+                  hideBadge={hideBadge}
+                />
               </div>
-              <Button
-                variant="ghost"
-                size="sm"
-                className="h-7 text-[#60A5FA] hover:text-blue-300 hover:bg-blue-900/20 -mr-1"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  onFacilityClick(facility.id);
-                }}
-              >
-                View
-              </Button>
-            </div>
+            ))}
           </div>
-        ))}
-      </div>
+          <ScrollBar orientation="horizontal" />
+        </ScrollArea>
+      </CardContent>
     </Card>
   );
 };
