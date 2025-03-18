@@ -62,10 +62,10 @@ export function createFacilityMarker(
   // Get rating and ensure it's between 1-5
   const rating = facility.avg_rating ? Math.min(Math.max(Math.round(facility.avg_rating), 1), 5) : 0;
   
-  // Create star rating HTML
+  // Create star rating HTML with improved styling
   const starRatingHtml = `
-    <div class="flex items-center gap-1 mb-4">
-      ${[...Array(5)].map((_, i) => `
+    <div class="star-rating-container flex items-center gap-1 mb-4">
+      ${Array.from({ length: 5 }, (_, i) => `
         <svg 
           xmlns="http://www.w3.org/2000/svg" 
           width="20" 
@@ -76,7 +76,7 @@ export function createFacilityMarker(
           stroke-width="1.5" 
           stroke-linecap="round" 
           stroke-linejoin="round" 
-          class="lucide lucide-star"
+          class="star-icon"
         >
           <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
         </svg>
@@ -169,6 +169,16 @@ export function createFacilityMarker(
               contentEl.style.width = 'auto';
               contentEl.style.maxWidth = '300px';
             }
+            
+            // Force star icons to be visible
+            const starIcons = popupEl.querySelectorAll('.star-icon');
+            starIcons.forEach(icon => {
+              if (icon instanceof SVGElement) {
+                icon.style.display = 'inline-block';
+                icon.style.visibility = 'visible';
+                icon.style.opacity = '1';
+              }
+            });
           }
         }, 50);
       }

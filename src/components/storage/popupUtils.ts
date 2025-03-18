@@ -17,9 +17,36 @@ export const createPopupHTML = (facility: StorageFacility) => {
     .filter(([_, value]) => value)
     .map(([key, _]) => featureLabels[key as keyof typeof featureLabels]);
 
+  // Get rating and ensure it's between 1-5
+  const rating = facility.avg_rating ? Math.min(Math.max(Math.round(facility.avg_rating), 1), 5) : 0;
+  
+  // Create star rating HTML
+  const starRatingHtml = rating > 0 ? `
+    <div class="flex items-center gap-2 my-3">
+      ${Array.from({ length: 5 }, (_, i) => `
+        <svg 
+          xmlns="http://www.w3.org/2000/svg" 
+          width="18" 
+          height="18" 
+          viewBox="0 0 24 24" 
+          fill="${i < rating ? '#FBBF24' : 'none'}" 
+          stroke="${i < rating ? '#FBBF24' : '#6B7280'}" 
+          stroke-width="1.5" 
+          stroke-linecap="round" 
+          stroke-linejoin="round" 
+          class="lucide-star"
+        >
+          <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+        </svg>
+      `).join('')}
+    </div>
+  ` : '';
+
   return `
     <div class="p-4 bg-[#131a2a] text-white rounded-lg w-full facility-popup-content" data-facility-id="${facility.id}">
-      <h3 class="font-bold text-lg mb-2 text-[#60A5FA] truncate">${facility.name}</h3>
+      <h3 class="font-bold text-xl mb-1 text-[#60A5FA]">${facility.name}</h3>
+      
+      ${starRatingHtml}
       
       <div class="space-y-2 mb-3">
         <div class="flex items-start gap-2 text-gray-300">
@@ -27,7 +54,7 @@ export const createPopupHTML = (facility: StorageFacility) => {
             <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
             <circle cx="12" cy="10" r="3"></circle>
           </svg>
-          <span class="text-xs">${facility.address}, ${facility.city}, ${facility.state}</span>
+          <span class="text-sm">${facility.address}, ${facility.city}, ${facility.state}</span>
         </div>
         
         ${facility.contact_phone ? `
@@ -35,7 +62,7 @@ export const createPopupHTML = (facility: StorageFacility) => {
             <svg class="w-4 h-4 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
             </svg>
-            <span class="text-xs">${facility.contact_phone}</span>
+            <span class="text-sm">${facility.contact_phone}</span>
           </div>
         ` : ''}
       </div>
@@ -51,7 +78,7 @@ export const createPopupHTML = (facility: StorageFacility) => {
 
       ${activeFeatures.length > 0 ? `
         <div class="mt-2">
-          <span class="text-xs text-gray-400 block mb-1">Features</span>
+          <span class="text-xs text-gray-400 block mb-1">Features:</span>
           <div class="flex flex-wrap gap-1">
             ${activeFeatures.map(feature => `
               <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-[#1a2235] text-[#60A5FA]">
