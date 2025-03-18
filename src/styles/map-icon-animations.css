@@ -117,6 +117,7 @@
   z-index: 2000 !important; /* Increased z-index for better visibility */
   max-width: none !important;
   width: auto !important;
+  transition: transform 0.3s ease-out !important;
 }
 
 .mapboxgl-popup-content {
@@ -146,4 +147,22 @@
   right: 2px !important;
   top: 2px !important;
   z-index: 2010 !important;
+}
+
+/* Add styles for auto-scrolling adjustment */
+.popup-auto-adjusting {
+  transition: all 0.3s ease-out !important;
+  will-change: transform !important;
+}
+
+/* Class for map containers during scrolling */
+.map-scrolling-active {
+  will-change: transform !important;
+}
+
+/* Make sure popups stay visible during scroll */
+body.scrolling-map-view .mapboxgl-popup {
+  visibility: visible !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
 }

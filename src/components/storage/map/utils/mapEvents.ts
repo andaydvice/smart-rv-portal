@@ -83,6 +83,55 @@ export const setupMapEventListeners = (map: mapboxgl.Map): void => {
   // Add global listener for popup close button clicks
   document.addEventListener('click', handleCloseButtonClick, true);
   
+  // Add scroll handler for ensuring popup visibility
+  const scrollHandler = () => {
+    const popups = document.querySelectorAll('.mapboxgl-popup');
+    if (popups.length === 0) return;
+    
+    document.body.classList.add('scrolling-map-view');
+    
+    popups.forEach(popup => {
+      if (popup instanceof HTMLElement) {
+        const rect = popup.getBoundingClientRect();
+        
+        // Check if popup is partially off-screen
+        const isTopCutOff = rect.top < 0;
+        const isBottomCutOff = rect.bottom > window.innerHeight;
+        
+        if (isTopCutOff || isBottomCutOff) {
+          popup.classList.add('popup-auto-adjusting');
+          
+          if (isTopCutOff && window.scrollY > 0) {
+            // Scroll up to show the top of the popup
+            window.scrollBy({
+              top: rect.top - 20,
+              behavior: 'smooth'
+            });
+          } else if (isBottomCutOff) {
+            // Scroll down to show the bottom of the popup
+            window.scrollBy({
+              top: rect.bottom - window.innerHeight + 20,
+              behavior: 'smooth'
+            });
+          }
+          
+          // Remove the adjustment class after a delay
+          setTimeout(() => {
+            popup.classList.remove('popup-auto-adjusting');
+          }, 300);
+        }
+      }
+    });
+    
+    // Remove the scrolling class after a delay
+    setTimeout(() => {
+      document.body.classList.remove('scrolling-map-view');
+    }, 300);
+  };
+  
+  // Add the scroll handler
+  window.addEventListener('scroll', scrollHandler, { passive: true });
+  
   // Enhance marker visibility and interactivity after style load
   map.once('style.load', () => {
     // Apply any additional style-dependent configurations
@@ -136,6 +185,78 @@ export const setupMapEventListeners = (map: mapboxgl.Map): void => {
           viewDetailsBtn.style.display = 'none';
           viewDetailsBtn.style.visibility = 'hidden';
           viewDetailsBtn.style.opacity = '0';
+        }
+      }
+    });
+  });
+  
+  // Listen for popup open event
+  document.addEventListener('mapbox.popup.opened', () => {
+    // Find all popups
+    const popups = document.querySelectorAll('.mapboxgl-popup');
+    
+    popups.forEach(popup => {
+      if (popup instanceof HTMLElement) {
+        // Check if popup is visible
+        const isVisible = window.getComputedStyle(popup).display !== 'none';
+        
+        if (isVisible) {
+          const rect = popup.getBoundingClientRect();
+          
+          // Check if popup is partially off-screen
+          const isTopCutOff = rect.top < 0;
+          const isBottomCutOff = rect.bottom > window.innerHeight;
+          
+          if (isTopCutOff || isBottomCutOff) {
+            popup.classList.add('popup-auto-adjusting');
+            
+            if (isTopCutOff && window.scrollY > 0) {
+              // Scroll up to show the top of the popup
+              window.scrollBy({
+                top: rect.top - 20,
+                behavior: 'smooth'
+              });
+            } else if (isBottomCutOff) {
+              // Scroll down to show the bottom of the popup
+              window.scrollBy({
+                top: rect.bottom - window.innerHeight + 20,
+                behavior: 'smooth'
+              });
+            }
+            
+            // Remove the adjustment class after a delay
+            setTimeout(() => {
+              popup.classList.remove('popup-auto-adjusting');
+            }, 300);
+          }
+        }
+      }
+    });
+  });
+  
+  // Add an event listener to handle window resize
+  window.addEventListener('resize', () => {
+    const popups = document.querySelectorAll('.mapboxgl-popup');
+    if (popups.length === 0) return;
+    
+    popups.forEach(popup => {
+      if (popup instanceof HTMLElement) {
+        const rect = popup.getBoundingClientRect();
+        
+        // Check if popup is outside viewport after resize
+        if (rect.top < 0 || rect.left < 0 || rect.bottom > window.innerHeight || rect.right > window.innerWidth) {
+          // Add the adjustment class
+          popup.classList.add('popup-auto-adjusting');
+          
+          // Dispatch event to handle positioning
+          document.dispatchEvent(new CustomEvent('mapbox.popup.check-position', {
+            detail: { popupElement: popup }
+          }));
+          
+          // Remove the adjustment class after a delay
+          setTimeout(() => {
+            popup.classList.remove('popup-auto-adjusting');
+          }, 300);
         }
       }
     });

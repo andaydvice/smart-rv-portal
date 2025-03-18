@@ -6,6 +6,7 @@
   pointer-events: auto !important;
   max-width: 300px !important;
   width: auto !important;
+  transition: transform 0.3s ease-out !important;
 }
 
 .mapboxgl-popup-content {
@@ -111,6 +112,7 @@ body .mapboxgl-map .mapboxgl-popup {
   height: 100% !important;
   width: 100% !important;
   overflow: visible !important;
+  transition: transform 0.2s ease-out !important;
 }
 
 .mapboxgl-canvas-container,
@@ -135,4 +137,23 @@ body .mapboxgl-map .mapboxgl-popup {
 /* Alternative popup style to ensure content shows */
 .mapboxgl-popup .mapboxgl-popup-content {
   padding: 15px !important;
+}
+
+/* Auto-scroll adjustment styles */
+.mapboxgl-popup.adjusting-position {
+  transition: transform 0.3s ease-out !important;
+}
+
+.map-container-scrollable {
+  position: relative !important;
+  height: 100% !important;
+  width: 100% !important;
+  overflow: visible !important;
+}
+
+/* Visibility for content during scroll */
+.popup-visible-during-scroll {
+  visibility: visible !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
 }

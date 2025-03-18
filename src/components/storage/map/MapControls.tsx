@@ -1,5 +1,4 @@
-
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import mapboxgl from 'mapbox-gl';
 
 interface MapControlsProps {
@@ -9,6 +8,7 @@ interface MapControlsProps {
 
 const MapControls: React.FC<MapControlsProps> = ({ map, onFilterClick }) => {
   const [showHint, setShowHint] = useState(false);
+  const mapContainerRef = useRef<HTMLElement | null>(null);
 
   // Add map navigation controls
   useEffect(() => {
@@ -78,6 +78,62 @@ const MapControls: React.FC<MapControlsProps> = ({ map, onFilterClick }) => {
       });
     }
     
+    // Find and store map container reference
+    if (map) {
+      const container = map.getContainer();
+      mapContainerRef.current = container;
+    }
+
+    // Handle scroll events to keep map visible
+    const handleScroll = () => {
+      if (!mapContainerRef.current) return;
+      
+      const container = mapContainerRef.current;
+      const rect = container.getBoundingClientRect();
+      const popups = document.querySelectorAll('.mapboxgl-popup');
+      
+      // Only adjust if there are popups and they might be cut off
+      if (popups.length > 0) {
+        popups.forEach((popup) => {
+          const popupRect = popup.getBoundingClientRect();
+          
+          // Check if popup is partially off-screen
+          const isTopCutOff = popupRect.top < 0;
+          const isBottomCutOff = popupRect.bottom > window.innerHeight;
+          const isLeftCutOff = popupRect.left < 0;
+          const isRightCutOff = popupRect.right > window.innerWidth;
+          
+          if (isTopCutOff || isBottomCutOff || isLeftCutOff || isRightCutOff) {
+            // Calculate scroll adjustment if needed
+            if (isTopCutOff && window.scrollY > 0) {
+              // Scroll up to show the top of the popup
+              window.scrollBy(0, popupRect.top - 20);
+            } else if (isBottomCutOff) {
+              // Scroll down to show the bottom of the popup
+              window.scrollBy(0, popupRect.bottom - window.innerHeight + 20);
+            }
+            
+            // For horizontal adjustments, pan the map instead of scrolling
+            if (map && (isLeftCutOff || isRightCutOff)) {
+              const center = map.getCenter();
+              if (isLeftCutOff) {
+                center.lng -= 0.02; // Adjust as needed
+                map.panTo(center);
+              } else if (isRightCutOff) {
+                center.lng += 0.02; // Adjust as needed
+                map.panTo(center);
+              }
+            }
+          }
+        });
+      }
+    };
+    
+    window.addEventListener('scroll', handleScroll);
+    
+    // Additional event listener for popup creation
+    document.addEventListener('mapbox.popup.opened', handleScroll);
+    
     // Cleanup function
     return () => {
       if (map) {
@@ -85,6 +141,8 @@ const MapControls: React.FC<MapControlsProps> = ({ map, onFilterClick }) => {
         map.off('click', () => {});
       }
       document.removeEventListener('click', () => {});
+      window.removeEventListener('scroll', handleScroll);
+      document.removeEventListener('mapbox.popup.opened', handleScroll);
     };
   }, [map]);
 

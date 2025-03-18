@@ -73,6 +73,7 @@ export const createPopupHTML = (facility: StorageFacility) => {
           width: auto !important;
           position: absolute !important;
           overflow: visible !important;
+          transition: transform 0.3s ease-out !important;
         }
         .mapboxgl-popup-content {
           z-index: 1500 !important;
@@ -115,7 +116,83 @@ export const createPopupHTML = (facility: StorageFacility) => {
             max-width: 260px !important;
           }
         }
+        
+        /* Add styles for auto-scrolling adjustments */
+        .popup-needs-adjustment {
+          outline: 2px solid rgba(255, 165, 0, 0.5) !important;
+        }
+        
+        /* Custom event dispatch for popup opened */
+        document.dispatchEvent(new CustomEvent('mapbox.popup.opened'));
       </style>
     </div>
   `;
+};
+
+/**
+ * Utility function to check if a popup is partially off-screen
+ */
+export const isPopupOffScreen = (popup: HTMLElement): boolean => {
+  if (!popup) return false;
+  
+  const rect = popup.getBoundingClientRect();
+  
+  return (
+    rect.top < 0 ||
+    rect.left < 0 ||
+    rect.bottom > window.innerHeight ||
+    rect.right > window.innerWidth
+  );
+};
+
+/**
+ * Utility function to ensure a popup is visible by scrolling the page if needed
+ */
+export const ensurePopupVisible = (popup: HTMLElement, map?: mapboxgl.Map): void => {
+  if (!popup) return;
+  
+  const rect = popup.getBoundingClientRect();
+  
+  // Check if popup is partially off-screen
+  const isTopCutOff = rect.top < 0;
+  const isBottomCutOff = rect.bottom > window.innerHeight;
+  const isLeftCutOff = rect.left < 0;
+  const isRightCutOff = rect.right > window.innerWidth;
+  
+  if (isTopCutOff || isBottomCutOff || isLeftCutOff || isRightCutOff) {
+    // Add a class to highlight that this popup needs adjustment
+    popup.classList.add('popup-needs-adjustment');
+    
+    // For vertical offscreen, scroll the window
+    if (isTopCutOff && window.scrollY > 0) {
+      // Scroll up to show the top of the popup
+      window.scrollBy({ 
+        top: rect.top - 20, 
+        behavior: 'smooth' 
+      });
+    } else if (isBottomCutOff) {
+      // Scroll down to show the bottom of the popup
+      window.scrollBy({ 
+        top: rect.bottom - window.innerHeight + 20, 
+        behavior: 'smooth' 
+      });
+    }
+    
+    // For horizontal offscreen, pan the map if available
+    if (map && (isLeftCutOff || isRightCutOff)) {
+      const center = map.getCenter();
+      if (isLeftCutOff) {
+        center.lng -= 0.01; // Small adjustment
+        map.panTo(center);
+      } else if (isRightCutOff) {
+        center.lng += 0.01; // Small adjustment
+        map.panTo(center);
+      }
+    }
+    
+    // Remove the highlight class after adjustment
+    setTimeout(() => {
+      popup.classList.remove('popup-needs-adjustment');
+    }, 500);
+  }
 };
