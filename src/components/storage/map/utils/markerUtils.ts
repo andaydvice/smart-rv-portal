@@ -1,5 +1,7 @@
 
 import { StorageFacility } from '../../types';
+import { calculateMarkerOffset, buildCoordinatesMap } from './markerCoordinates';
+import { hasValidCoordinates } from './markerValidation';
 
 /**
  * Checks if a facility ID is in the recently viewed list
@@ -26,3 +28,6 @@ export const getMarkerColor = (
   // Default color
   return '#F97316';
 };
+
+// Re-export functions from other files
+export { calculateMarkerOffset, buildCoordinatesMap, hasValidCoordinates };
