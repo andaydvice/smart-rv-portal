@@ -10,6 +10,8 @@ interface GoogleMapViewProps {
   onMarkerClick?: (facilityId: string) => void;
   apiKey?: string;
   onMapLoad?: (map: google.maps.Map) => void;
+  zoom?: number;
+  onZoomChange?: (zoom: number) => void;
 }
 
 const GoogleMapView: React.FC<GoogleMapViewProps> = ({
@@ -17,7 +19,9 @@ const GoogleMapView: React.FC<GoogleMapViewProps> = ({
   recentlyViewedFacilityIds,
   onMarkerClick,
   apiKey,
-  onMapLoad
+  onMapLoad,
+  zoom: initialZoom = 4,
+  onZoomChange
 }) => {
   const mapRef = useRef<HTMLDivElement>(null);
   const [map, setMap] = useState<google.maps.Map | null>(null);
@@ -25,6 +29,13 @@ const GoogleMapView: React.FC<GoogleMapViewProps> = ({
   
   // Set up the map
   const { currentZoom, onMapLoad: setupMapLoad } = useGoogleMapSetup(map, facilities);
+  
+  // When zoom changes, call the onZoomChange callback
+  useEffect(() => {
+    if (onZoomChange && currentZoom) {
+      onZoomChange(currentZoom);
+    }
+  }, [currentZoom, onZoomChange]);
   
   // Initialize the map
   useEffect(() => {
@@ -42,7 +53,7 @@ const GoogleMapView: React.FC<GoogleMapViewProps> = ({
         // Create a new map
         const newMap = new google.maps.Map(mapRef.current, {
           center: { lat: 39.8283, lng: -98.5795 }, // Center of US
-          zoom: 4,
+          zoom: initialZoom,
           mapTypeId: google.maps.MapTypeId.ROADMAP,
           mapTypeControl: false,
           fullscreenControl: false,
@@ -73,6 +84,13 @@ const GoogleMapView: React.FC<GoogleMapViewProps> = ({
         
         setMap(newMap);
         
+        // Listen for zoom changes
+        if (onZoomChange) {
+          newMap.addListener('zoom_changed', () => {
+            onZoomChange(newMap.getZoom());
+          });
+        }
+        
         // Call the map load handler from props
         if (onMapLoad) {
           onMapLoad(newMap);
@@ -89,7 +107,7 @@ const GoogleMapView: React.FC<GoogleMapViewProps> = ({
       setMap(null);
       setMarkers([]);
     };
-  }, [apiKey, onMapLoad, setupMapLoad]);
+  }, [apiKey, onMapLoad, setupMapLoad, initialZoom, onZoomChange]);
   
   // Add markers
   useEffect(() => {

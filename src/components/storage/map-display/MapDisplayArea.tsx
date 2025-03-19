@@ -2,29 +2,44 @@
 import React from 'react';
 import { Card } from '@/components/ui/card';
 import { StorageFacility } from '../types';
-import { MapLoadingState } from '../map/MapLoadingState';
+import MapLoadingState from '../map/MapLoadingState';
 import GoogleMapView from '../map/GoogleMapView';
 import MapboxMapView from '../map-view/MapboxMapView';
 import mapboxgl from 'mapbox-gl';
+import { FilterState } from '../types';
 
 interface MapDisplayAreaProps {
   facilities: StorageFacility[];
-  isLoading: boolean;
+  isLoading?: boolean;
   recentlyViewedFacilityIds: string[];
   onMarkerClick: (facilityId: string) => void;
   useMapbox?: boolean;
   googleMapsApiKey?: string;
   mapboxApiKey?: string;
+  showFilteredLocations?: boolean;
+  useGoogleMaps?: boolean;
+  allFacilities?: StorageFacility[];
+  mapToken?: string;
+  mapTokenError?: string | null;
+  highlightedFacility?: string | null;
+  filters?: FilterState;
 }
 
 const MapDisplayArea: React.FC<MapDisplayAreaProps> = ({
   facilities,
-  isLoading,
+  isLoading = false,
   recentlyViewedFacilityIds,
   onMarkerClick,
   useMapbox = false,
   googleMapsApiKey,
-  mapboxApiKey
+  mapboxApiKey,
+  showFilteredLocations = false,
+  useGoogleMaps = false,
+  allFacilities = [],
+  mapToken,
+  mapTokenError,
+  highlightedFacility,
+  filters
 }) => {
   const handleMapLoad = (map: google.maps.Map | mapboxgl.Map) => {
     console.log('Map loaded successfully');
@@ -42,10 +57,27 @@ const MapDisplayArea: React.FC<MapDisplayAreaProps> = ({
     }, 500);
   };
 
+  // If we have specialized filtering logic or views based on showFilteredLocations prop
+  if (showFilteredLocations) {
+    // For now, just show a message - in the future this could render a different map component
+    return (
+      <Card className="h-[650px] bg-connectivity-darkBg relative border-gray-700 overflow-hidden">
+        <div className="flex items-center justify-center h-full text-gray-400">
+          <p>Filtered Locations Demo View</p>
+        </div>
+      </Card>
+    );
+  }
+
   return (
     <Card className="h-[650px] bg-connectivity-darkBg relative border-gray-700 overflow-hidden">
       {isLoading ? (
-        <MapLoadingState />
+        <MapLoadingState 
+          isInitializing={true} 
+          mapError={null} 
+          mapLoaded={false}
+          facilitiesCount={facilities?.length}
+        />
       ) : facilities.length === 0 ? (
         <div className="flex items-center justify-center h-full text-gray-400">
           <p>No storage facilities found. Try adjusting your filters.</p>

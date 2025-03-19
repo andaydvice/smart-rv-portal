@@ -182,14 +182,17 @@ const StorageFacilitiesMap = () => {
           />
         </div>
         
-        {/* Map view based on toggle state */}
+        {/* Map display with the properly typed props */}
         <MapDisplayArea 
+          facilities={allFacilities || []}
+          isLoading={isLoading}
+          recentlyViewedFacilityIds={recentlyViewedIds}
+          onMarkerClick={onMarkerClick}
+          useMapbox={!useGoogleMaps && !showFilteredLocations}
+          googleMapsApiKey={googleMapsKey}
+          mapboxApiKey={mapToken}
           showFilteredLocations={showFilteredLocations}
           useGoogleMaps={useGoogleMaps}
-          allFacilities={allFacilities}
-          recentlyViewedIds={recentlyViewedIds}
-          onMarkerClick={onMarkerClick}
-          googleMapsKey={googleMapsKey}
           mapToken={mapToken}
           mapTokenError={mapTokenError}
           highlightedFacility={highlightedFacility}
