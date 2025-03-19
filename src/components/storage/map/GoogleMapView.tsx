@@ -207,7 +207,8 @@ const GoogleMapView: React.FC<GoogleMapViewProps> = ({
       });
       
       // Also invoke any custom marker fix script if it exists
-      if (window.forceGoogleMarkersVisible) {
+      // Check if the function exists before calling it
+      if (typeof window.forceGoogleMarkersVisible === 'function') {
         window.forceGoogleMarkersVisible();
       }
     }, 500);

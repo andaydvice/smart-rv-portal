@@ -14,4 +14,5 @@ interface Window {
   mapFacilities?: any[];
   mapInstance?: mapboxgl.Map;
   isStorageFacilitiesPage?: boolean;
+  forceGoogleMarkersVisible?: () => void; // Add this declaration for the Google Maps marker visibility function
 }
