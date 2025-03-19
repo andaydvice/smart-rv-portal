@@ -15,6 +15,8 @@ import FacilityList from './map-view/FacilityList';
 import { useMapToken } from './map-view/useMapToken';
 import { useFacilitySelection } from './map-view/useFacilitySelection';
 import { toast } from "sonner";
+import FilteredLocationMapDemo from './map/components/FilteredLocationMapDemo';
+import '../styles/location-filter.css';
 
 // Create a helper hook to get Google Maps API key
 const useGoogleMapsKey = () => {
@@ -52,6 +54,7 @@ const StorageFacilitiesMap = () => {
 
   // State to toggle between map views
   const [useGoogleMaps, setUseGoogleMaps] = useState<boolean>(false);
+  const [showFilteredLocations, setShowFilteredLocations] = useState<boolean>(false);
 
   const { facilities: allFacilities, isLoading, error, maxPrice } = useStorageFacilities(filters);
   const { recentlyViewed, addToRecentlyViewed } = useRecentlyViewed();
@@ -117,8 +120,22 @@ const StorageFacilitiesMap = () => {
 
   // Toggle map view
   const toggleMapView = () => {
+    if (showFilteredLocations) {
+      setShowFilteredLocations(false);
+      return;
+    }
+    
     setUseGoogleMaps(prev => !prev);
     toast.info(`Switched to ${!useGoogleMaps ? 'Google Maps' : 'Mapbox'} view`);
+  };
+
+  // Toggle filtered location demo
+  const toggleFilteredLocations = () => {
+    setShowFilteredLocations(prev => !prev);
+    if (!showFilteredLocations) {
+      setUseGoogleMaps(false);
+    }
+    toast.info(showFilteredLocations ? 'Switched to standard view' : 'Viewing filtered locations demo');
   };
 
   return (
@@ -146,7 +163,7 @@ const StorageFacilitiesMap = () => {
       </div>
       
       <div className="lg:col-span-8 flex flex-col space-y-4">
-        {/* Navigation hint and map toggle button */}
+        {/* Navigation hint and map toggle buttons */}
         <div className="flex justify-between items-center">
           <div className="text-white bg-[#F97316] px-3 py-2 rounded-md text-sm shadow-md border-2 border-white/20 animate-pulse font-medium flex items-center gap-2 max-w-[280px]">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-move shrink-0">
@@ -162,16 +179,28 @@ const StorageFacilitiesMap = () => {
               move the map with your browser
             </span>
           </div>
-          <button 
-            onClick={toggleMapView} 
-            className="bg-[#151A22] hover:bg-[#1F2937] text-white px-3 py-1.5 rounded-md text-sm flex items-center gap-1.5 transition-colors"
-          >
-            <span>{useGoogleMaps ? 'Switch to Mapbox' : 'Switch to Google Maps'}</span>
-          </button>
+          <div className="flex space-x-2">
+            <button 
+              onClick={toggleFilteredLocations} 
+              className="bg-[#151A22] hover:bg-[#1F2937] text-white px-3 py-1.5 rounded-md text-sm flex items-center gap-1.5 transition-colors"
+            >
+              <span>{showFilteredLocations ? 'Standard View' : 'Filtered Locations Demo'}</span>
+            </button>
+            {!showFilteredLocations && (
+              <button 
+                onClick={toggleMapView} 
+                className="bg-[#151A22] hover:bg-[#1F2937] text-white px-3 py-1.5 rounded-md text-sm flex items-center gap-1.5 transition-colors"
+              >
+                <span>{useGoogleMaps ? 'Switch to Mapbox' : 'Switch to Google Maps'}</span>
+              </button>
+            )}
+          </div>
         </div>
         
         {/* Map view based on toggle state */}
-        {useGoogleMaps ? (
+        {showFilteredLocations ? (
+          <FilteredLocationMapDemo />
+        ) : useGoogleMaps ? (
           <GoogleMapFacilitiesView
             facilities={allFacilities || []}
             recentlyViewedFacilityIds={recentlyViewedIds}
