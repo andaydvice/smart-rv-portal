@@ -4,9 +4,9 @@
   console.log('Google Maps marker visibility fix script loaded');
   
   // Function to ensure Google Maps markers are visible
-  function forceGoogleMapsMarkersVisible() {
+  function forceGoogleMarkersVisible() {
     // Find all Google Maps markers
-    const markers = document.querySelectorAll('.gm-style img[src*="marker"], .gm-style div[role="button"]');
+    const markers = document.querySelectorAll('.gm-style img[src*="marker"], .gm-style div[role="button"], .gm-style [title]');
     
     // If we found markers, make them visible
     if (markers.length > 0) {
@@ -19,43 +19,36 @@
           marker.style.display = 'block';
           marker.style.opacity = '1';
           marker.style.zIndex = '999';
+          marker.style.transform = 'none';
         }
       });
+    } else {
+      console.log('No Google Maps markers found yet');
     }
   }
   
+  // Expose the function globally
+  window.forceGoogleMarkersVisible = forceGoogleMarkersVisible;
+  
   // Run the fix function periodically
-  setInterval(forceGoogleMapsMarkersVisible, 1000);
+  setInterval(forceGoogleMarkersVisible, 1000);
   
   // Also run after state filter changes
   document.addEventListener('stateFilterChanged', () => {
     console.log('State filter changed, fixing Google Maps markers');
     
     // Run multiple times after a state filter change
-    setTimeout(forceGoogleMapsMarkersVisible, 500);
-    setTimeout(forceGoogleMapsMarkersVisible, 1000);
-    setTimeout(forceGoogleMapsMarkersVisible, 2000);
+    setTimeout(forceGoogleMarkersVisible, 500);
+    setTimeout(forceGoogleMarkersVisible, 1000);
+    setTimeout(forceGoogleMarkersVisible, 2000);
   });
   
-  // Also check whenever the map is idle (after pan/zoom operations)
-  if (window.google && window.google.maps) {
-    const checkMapIdle = setInterval(() => {
-      const maps = Array.from(document.querySelectorAll('.gm-style')).map(el => {
-        // Try to find the map instance
-        const mapDiv = el.closest('[id^="map_"]') || el.closest('.google-map-container');
-        if (mapDiv && mapDiv.id && window.google.maps.Map && window.google.maps.event) {
-          const mapInstance = window.google.maps.Map.getMapForElement(mapDiv);
-          if (mapInstance) {
-            window.google.maps.event.addListener(mapInstance, 'idle', forceGoogleMapsMarkersVisible);
-            console.log('Added idle listener to Google Map');
-          }
-        }
-      });
-      
-      // If we've found maps, clear the interval
-      if (maps.length > 0) {
-        clearInterval(checkMapIdle);
-      }
-    }, 1000);
-  }
+  // Also run when map becomes idle (after zoom/pan operations)
+  document.addEventListener('google-map-idle', forceGoogleMarkersVisible);
+  
+  // Initial run
+  forceGoogleMarkersVisible();
+  
+  // Run again after a delay to catch late-loaded markers
+  setTimeout(forceGoogleMarkersVisible, 2000);
 })();

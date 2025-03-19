@@ -1,12 +1,13 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Card } from '@/components/ui/card';
 import { StorageFacility } from '../types';
-import MapLoadingState from '../map/MapLoadingState';
+import MapLoadingState from '../map/components/MapLoadingState';
 import GoogleMapView from '../map/GoogleMapView';
 import MapboxMapView from '../map-view/MapboxMapView';
 import mapboxgl from 'mapbox-gl';
 import { FilterState } from '../types';
+import { toast } from 'sonner';
 
 interface MapDisplayAreaProps {
   facilities: StorageFacility[];
@@ -41,19 +42,32 @@ const MapDisplayArea: React.FC<MapDisplayAreaProps> = ({
   highlightedFacility,
   filters
 }) => {
+  // Log API key state for debugging
+  useEffect(() => {
+    console.log('MapDisplayArea - Google Maps API Key available:', !!googleMapsApiKey);
+    console.log('MapDisplayArea - Mapbox Token available:', !!mapboxApiKey);
+  }, [googleMapsApiKey, mapboxApiKey]);
+
   const handleMapLoad = (map: google.maps.Map | mapboxgl.Map) => {
     console.log('Map loaded successfully');
-    // Any common map initialization logic can go here
+    
+    // Show loading confirmation to help user know map is working
+    toast.success('Map loaded successfully');
     
     // Force visibility of markers after a brief delay
     setTimeout(() => {
       const markers = document.querySelectorAll('.gm-style [title], .gm-style-pbc [title], .mapbox-marker');
+      console.log(`Found ${markers.length} markers to enhance visibility`);
+      
       markers.forEach(marker => {
         if (marker instanceof HTMLElement) {
           marker.style.visibility = 'visible';
           marker.style.opacity = '1';
         }
       });
+      
+      // Dispatch event to trigger marker visibility fixes
+      document.dispatchEvent(new Event('map-markers-ready'));
     }, 500);
   };
 
@@ -97,6 +111,8 @@ const MapDisplayArea: React.FC<MapDisplayAreaProps> = ({
           onMarkerClick={onMarkerClick}
           apiKey={googleMapsApiKey || ''}
           onMapLoad={(map) => handleMapLoad(map)}
+          zoom={4}
+          onZoomChange={(zoom) => console.log('Zoom changed:', zoom)}
         />
       )}
     </Card>

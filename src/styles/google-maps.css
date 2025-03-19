@@ -63,3 +63,18 @@
   height: 100% !important;
   overflow: hidden !important;
 }
+
+/* Fix marker icons */
+.gm-style img[src*="marker"] {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* Ensure Google attribution remains visible */
+.gm-style .gmnoprint,
+.gm-style .gm-style-cc {
+  display: block !important;
+  visibility: visible !important;
+  z-index: 1000 !important;
+}
