@@ -18,6 +18,7 @@ interface GoogleMapViewProps {
   center?: { lat: number; lng: number };
   zoom?: number;
   onZoomChange?: (zoom: number) => void;
+  onMapLoad?: (map: google.maps.Map) => void; // Add the missing prop
 }
 
 const mapContainerStyle = {
@@ -35,6 +36,7 @@ const GoogleMapView: React.FC<GoogleMapViewProps> = ({
   center = { lat: 39.8283, lng: -98.5795 }, // Center of the US
   zoom = 4,
   onZoomChange,
+  onMapLoad,
 }) => {
   const [selectedFacility, setSelectedFacility] = useState<StorageFacility | null>(null);
   const [mapRef, setMapRef] = useState<google.maps.Map | null>(null);
@@ -46,7 +48,7 @@ const GoogleMapView: React.FC<GoogleMapViewProps> = ({
   });
 
   // Use custom hook for map setup
-  const { currentZoom, onMapLoad } = useGoogleMapSetup(
+  const { currentZoom, onMapLoad: hookMapLoad } = useGoogleMapSetup(
     mapRef,
     facilities,
     onZoomChange,
@@ -112,8 +114,12 @@ const GoogleMapView: React.FC<GoogleMapViewProps> = ({
       
       // Fit bounds if we have valid coordinates
       if (validBounds && facilities.length > 1) {
-        mapRef.fitBounds(bounds, {
-          padding: 50,
+        // Fix padding format
+        mapRef.fitBounds(bounds, { 
+          top: 50,
+          right: 50,
+          bottom: 50,
+          left: 50
         });
       }
     }
@@ -135,7 +141,11 @@ const GoogleMapView: React.FC<GoogleMapViewProps> = ({
         zoom={zoom}
         onLoad={(map) => {
           setMapRef(map);
-          onMapLoad(map);
+          hookMapLoad(map);
+          // Call the parent's onMapLoad if provided
+          if (onMapLoad) {
+            onMapLoad(map);
+          }
           console.log("Google Map loaded");
         }}
         onClick={onMapClick}

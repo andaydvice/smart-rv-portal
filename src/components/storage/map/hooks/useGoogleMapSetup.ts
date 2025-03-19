@@ -99,8 +99,12 @@ export const useGoogleMapSetup = (
         
         // Fit bounds if we have valid coordinates
         if (validBounds && facilities.length > 1) {
+          // Fix padding format: Use top, right, bottom, left properties instead of padding
           map.fitBounds(bounds, {
-            padding: 50,
+            top: 50,
+            right: 50,
+            bottom: 50, 
+            left: 50
           });
         }
       }
