@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useCallback } from 'react';
 import { toast } from "sonner";
 import { Card } from '@/components/ui/card';
@@ -16,6 +15,7 @@ import MapViewToggle from './map-controls/MapViewToggle';
 import MapDisplayArea from './map-display/MapDisplayArea';
 import { useGoogleMapsKey } from './hooks/useGoogleMapsKey';
 import '../styles/location-filter.css';
+import '../styles/google-maps.css'; // Add Google Maps specific styles
 
 const StorageFacilitiesMap = () => {
   const [filters, setFilters] = useState<FilterState>({
@@ -71,13 +71,34 @@ const StorageFacilitiesMap = () => {
   
   const handleFilterChange = useCallback((newFilters: FilterState) => {
     console.log('Filter changed:', newFilters);
+    
+    // Save current filter state to compare later
+    const currentState = filters.selectedState;
+    const newState = newFilters.selectedState;
+    
     setFilters(prevFilters => {
       if (JSON.stringify(prevFilters) === JSON.stringify(newFilters)) {
         return prevFilters;
       }
       return newFilters;
     });
-  }, []);
+    
+    // Show a notification for state changes to help users understand what's happening
+    if (currentState !== newState) {
+      if (newState) {
+        toast.info(`Showing facilities in ${newState}`);
+      } else {
+        toast.info('Showing facilities in all states');
+      }
+      
+      // If switching to Google Maps when changing state, alert user about marker visibility
+      if (useGoogleMaps) {
+        setTimeout(() => {
+          toast.info('Refreshing map markers...', { duration: 2000 });
+        }, 500);
+      }
+    }
+  }, [filters.selectedState, useGoogleMaps]);
   
   // Reset highlight when filter changes
   useEffect(() => {
@@ -106,6 +127,14 @@ const StorageFacilitiesMap = () => {
     
     setUseGoogleMaps(prev => !prev);
     toast.info(`Switched to ${!useGoogleMaps ? 'Google Maps' : 'Mapbox'} view`);
+    
+    // Force reload markers if switching to Google Maps
+    if (!useGoogleMaps) {
+      setTimeout(() => {
+        // This delay gives the component time to update before showing toast
+        toast.info('Loading map markers...', { duration: 2000 });
+      }, 100);
+    }
   };
 
   // Toggle filtered location demo

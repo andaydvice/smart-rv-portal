@@ -7,41 +7,54 @@ interface FacilityInfoWindowProps {
 }
 
 const FacilityInfoWindow: React.FC<FacilityInfoWindowProps> = ({ facility }) => {
+  // Get rating and ensure it's between 1-5
+  const rating = facility.avg_rating ? Math.min(Math.max(Math.round(facility.avg_rating), 1), 5) : 0;
+  
   return (
-    <div className="facility-info-window max-w-[300px]">
-      <h3 className="text-lg font-semibold mb-1 text-[#5B9BD5]">{facility.name}</h3>
-      <div className="space-y-1 text-sm">
-        <p>{facility.address}</p>
-        <p>{facility.city}, {facility.state}</p>
-        {facility.price_range && (
-          <p className="mt-2 font-semibold text-[#F97316]">
-            Price: ${facility.price_range.min} - ${facility.price_range.max}
-          </p>
-        )}
-        {facility.contact_phone && (
-          <p className="mt-1">Phone: {facility.contact_phone}</p>
-        )}
-      </div>
+    <div className="facility-info-window text-white" style={{ minWidth: '220px', maxWidth: '300px' }}>
+      <h3 className="text-xl font-semibold mb-2 text-[#60A5FA]">{facility.name}</h3>
       
-      {facility.features && Object.values(facility.features).some(v => v) && (
-        <div className="mt-2 border-t border-gray-300 pt-2">
-          <p className="text-xs text-gray-600 mb-1">Features:</p>
-          <div className="flex flex-wrap gap-1">
-            {facility.features.indoor && (
-              <span className="text-xs bg-[#e0f2ff] text-[#4285F4] px-2 py-0.5 rounded">Indoor</span>
-            )}
-            {facility.features.climate_controlled && (
-              <span className="text-xs bg-[#e0f2ff] text-[#4285F4] px-2 py-0.5 rounded">Climate Controlled</span>
-            )}
-            {facility.features["24h_access"] && (
-              <span className="text-xs bg-[#e0f2ff] text-[#4285F4] px-2 py-0.5 rounded">24/7 Access</span>
-            )}
-            {facility.features.security_system && (
-              <span className="text-xs bg-[#e0f2ff] text-[#4285F4] px-2 py-0.5 rounded">Security</span>
-            )}
-            {facility.features.vehicle_washing && (
-              <span className="text-xs bg-[#e0f2ff] text-[#4285F4] px-2 py-0.5 rounded">Vehicle Washing</span>
-            )}
+      {rating > 0 && (
+        <div className="flex items-center gap-1 mb-4">
+          {Array.from({ length: 5 }, (_, i) => (
+            <svg 
+              key={i}
+              xmlns="http://www.w3.org/2000/svg" 
+              width="16" 
+              height="16" 
+              viewBox="0 0 24 24" 
+              fill={i < rating ? '#FBBF24' : 'none'} 
+              stroke={i < rating ? '#FBBF24' : '#6B7280'} 
+              strokeWidth="1.5" 
+              strokeLinecap="round" 
+              strokeLinejoin="round" 
+              style={{ display: 'inline-block', visibility: 'visible', opacity: 1 }}
+            >
+              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+            </svg>
+          ))}
+        </div>
+      )}
+      
+      <p className="text-sm mb-1">{facility.address}</p>
+      <p className="text-sm mb-4">{facility.city}, {facility.state}</p>
+      
+      <p className="text-md font-medium text-[#F97316] mb-3">
+        Price: ${facility.price_range?.min || 0} - ${facility.price_range?.max || 0}
+      </p>
+      
+      {facility.contact_phone && (
+        <p className="text-sm mb-4">Phone: {facility.contact_phone}</p>
+      )}
+      
+      {Object.values(facility.features || {}).some(v => v) && (
+        <div className="mt-2">
+          <p className="text-sm text-gray-400 mb-2">Features:</p>
+          <div className="flex flex-wrap gap-2">
+            {facility.features?.indoor && <span className="text-xs text-[#60A5FA]">Indoor</span>}
+            {facility.features?.climate_controlled && <span className="text-xs text-[#60A5FA]">Climate Controlled</span>}
+            {facility.features?.["24h_access"] && <span className="text-xs text-[#60A5FA]">24/7 Access</span>}
+            {facility.features?.security_system && <span className="text-xs text-[#60A5FA]">Security</span>}
           </div>
         </div>
       )}

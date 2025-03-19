@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { GoogleMap, useLoadScript, MarkerF, InfoWindowF } from '@react-google-maps/api';
 import { StorageFacility } from '../types';
 import { getMarkerColor } from './utils/markerUtils';
@@ -38,6 +38,7 @@ const GoogleMapView: React.FC<GoogleMapViewProps> = ({
 }) => {
   const [selectedFacility, setSelectedFacility] = useState<StorageFacility | null>(null);
   const [mapRef, setMapRef] = useState<google.maps.Map | null>(null);
+  const [markersRendered, setMarkersRendered] = useState(false);
 
   // Load Google Maps script
   const { isLoaded, loadError } = useLoadScript({
@@ -86,6 +87,38 @@ const GoogleMapView: React.FC<GoogleMapViewProps> = ({
     setSelectedFacility(null);
   };
 
+  // Effect to ensure markers re-render when facilities or map changes
+  useEffect(() => {
+    if (mapRef && facilities.length > 0) {
+      // Force markers to update by setting this state
+      setMarkersRendered(true);
+      
+      // Log for debugging
+      console.log(`Rendering ${facilities.length} markers on Google Map`);
+      
+      // Create bounds to fit all markers if we have facilities
+      const bounds = new google.maps.LatLngBounds();
+      let validBounds = false;
+      
+      facilities.forEach(facility => {
+        if (facility.latitude && facility.longitude) {
+          bounds.extend({
+            lat: Number(facility.latitude),
+            lng: Number(facility.longitude),
+          });
+          validBounds = true;
+        }
+      });
+      
+      // Fit bounds if we have valid coordinates
+      if (validBounds && facilities.length > 1) {
+        mapRef.fitBounds(bounds, {
+          padding: 50,
+        });
+      }
+    }
+  }, [facilities, mapRef]);
+
   if (loadError) {
     return <MapErrorState error="Error loading Google Maps. Please check your API key." />;
   }
@@ -103,6 +136,7 @@ const GoogleMapView: React.FC<GoogleMapViewProps> = ({
         onLoad={(map) => {
           setMapRef(map);
           onMapLoad(map);
+          console.log("Google Map loaded");
         }}
         onClick={onMapClick}
         options={{
@@ -135,10 +169,10 @@ const GoogleMapView: React.FC<GoogleMapViewProps> = ({
           maxZoom: 18,
         }}
       >
-        {/* Render Markers */}
+        {/* Render Markers with key based on facilities to force re-render */}
         {facilities.map((facility) => (
           <MarkerF
-            key={`marker-${facility.id}`}
+            key={`marker-${facility.id}-${markersRendered ? 'rendered' : 'initial'}`}
             position={{
               lat: Number(facility.latitude),
               lng: Number(facility.longitude),

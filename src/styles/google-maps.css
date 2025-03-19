@@ -1,90 +1,103 @@
 
-/* Google Maps Specific Styling */
+/* Fix for Google Maps Markers */
+.gm-style-iw,
+.gm-style div[role="button"],
+.gm-style img,
+.gm-style div:has(img) {
+  visibility: visible !important;
+  opacity: 1 !important;
+  display: block !important;
+  pointer-events: auto !important;
+}
 
-/* Info Window Styling */
-.gm-style .gm-style-iw-c {
-  padding: 12px !important;
+/* Ensure markers are visible with correct appearance */
+.gm-style [title],
+.gm-style [role="button"] {
+  visibility: visible !important;
+  opacity: 1 !important;
+  display: block !important;
+  z-index: 999 !important;
+  pointer-events: auto !important;
+}
+
+/* Ensure popup windows are correctly sized */
+.gm-style-iw-c {
+  background-color: #151A22 !important;
+  color: white !important;
   border-radius: 8px !important;
-  background-color: #fff !important;
-  box-shadow: 0 2px 7px 1px rgba(0, 0, 0, 0.3) !important;
-  max-width: 320px !important;
-  min-width: 240px !important;
+  padding: 15px !important;
+  max-width: 300px !important;
+  border: 1px solid rgb(55 65 81) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5) !important;
 }
 
-.gm-style .gm-style-iw-d {
-  overflow: hidden !important;
-  max-width: 100% !important;
+/* Style popup window tip */
+.gm-style-iw-tc::after {
+  background-color: #151A22 !important;
 }
 
-/* Remove default InfoWindow arrows */
-.gm-style .gm-style-iw-tc {
-  display: none !important;
+/* Makes sure close button is visible */
+.gm-style-iw-d button {
+  background-color: rgba(255, 255, 255, 0.2) !important;
+  color: white !important;
+  border-radius: 50% !important;
 }
 
-/* Custom InfoWindow style */
-.facility-info-window {
-  font-family: system-ui, -apple-system, sans-serif;
-  color: #333;
-  line-height: 1.5;
-}
-
-.facility-info-window h3 {
-  margin-top: 0;
-  margin-bottom: 8px;
-  font-weight: 600;
-}
-
-/* Make sure popup height adjusts properly */
-.gm-style-iw.gm-style-iw-c {
-  max-height: none !important;
-}
-
-.gm-style-iw-d {
-  max-height: none !important;
-}
-
-/* Make sure popups are fully visible */
-.gm-style .gm-style-iw-c {
-  transform: translate(-50%, -100%) !important;
-  margin-bottom: 10px;
-}
-
-/* Custom map marker animation */
-@keyframes pulse {
+/* Make sure marker animation works correctly */
+@keyframes drop {
   0% {
-    transform: scale(1);
-    opacity: 1;
-  }
-  50% {
-    transform: scale(1.2);
-    opacity: 0.7;
+    transform: translateY(-100px);
+    opacity: 0;
   }
   100% {
-    transform: scale(1);
+    transform: translateY(0);
     opacity: 1;
   }
 }
 
-.highlighted-marker {
-  animation: pulse 1.5s infinite ease-in-out;
+.gm-style img[src*="marker"] {
+  animation: drop 0.5s ease-out;
 }
 
-/* Bottom facility indicator */
-.facility-indicator {
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+/* Style info window content */
+.facility-info-window {
+  padding: 10px !important;
 }
 
-/* Zoom-based marker styles */
-.zoomed-marker {
-  background-color: #10B981 !important;
-  box-shadow: 0 0 15px rgba(16, 185, 129, 0.6) !important;
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+/* Force info window container to be visible */
+.gm-style-iw-d {
+  overflow: visible !important;
+  max-height: none !important;
 }
 
-/* Custom marker hover effect */
-.custom-marker:hover {
-  transform: scale(1.1) translate(-45%, -45%) !important;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5) !important;
-  z-index: 10000 !important;
+/* Ensure correct info window shadows */
+.gm-style-iw-t::after {
+  background: linear-gradient(45deg, #151A22 50%, transparent 50%) !important;
+}
+
+/* Fix marker color issues */
+.gm-style [src*="marker"] {
+  filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.5));
+}
+
+/* Ensure map container is correctly sized */
+.google-map-container {
+  height: 650px !important;
+  width: 100% !important;
+  position: relative !important;
+  overflow: visible !important;
+}
+
+/* Make map controls visible */
+.gm-style-cc, 
+.gm-control-active {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Fix for locations filter display */
+.location-filters .dropdown-display img {
+  visibility: visible !important;
+  display: inline-block !important;
+  opacity: 1 !important;
 }
