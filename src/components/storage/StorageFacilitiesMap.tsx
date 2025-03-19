@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useCallback } from 'react';
 import { Card } from '@/components/ui/card';
 import FilterPanel from './FilterPanel';
@@ -21,7 +22,7 @@ const useGoogleMapsKey = () => {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    // Try to get API key from environment variables
+    // Get API key from environment variables
     const key = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
     
     if (key) {
