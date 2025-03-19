@@ -23,17 +23,23 @@ const FacilityList: React.FC<FacilityListProps> = ({
   return (
     <ScrollArea className="h-[600px] w-full" ref={scrollAreaRef}>
       <div className="p-4 space-y-4">
-        {facilities.map(facility => (
-          <FacilityCard
-            key={facility.id}
-            facility={facility}
-            isHighlighted={facility.id === highlightedFacility}
-            onClick={() => onFacilityClick(facility.id)}
-            ref={(el) => {
-              facilityRefs.current[facility.id] = el;
-            }}
-          />
-        ))}
+        {facilities.length === 0 ? (
+          <div className="text-gray-400 text-center py-8">
+            No facilities found matching your criteria
+          </div>
+        ) : (
+          facilities.map(facility => (
+            <FacilityCard
+              key={facility.id}
+              facility={facility}
+              isHighlighted={facility.id === highlightedFacility}
+              onClick={() => onFacilityClick(facility.id)}
+              ref={(el) => {
+                facilityRefs.current[facility.id] = el;
+              }}
+            />
+          ))
+        )}
       </div>
     </ScrollArea>
   );
