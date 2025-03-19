@@ -1,6 +1,14 @@
-import React, { useRef, useEffect, useState } from 'react';
+
+import React, { useState } from 'react';
 import { GoogleMap, useLoadScript, MarkerF, InfoWindowF } from '@react-google-maps/api';
 import { StorageFacility } from '../types';
+import { getMarkerColor } from './utils/markerUtils';
+import FacilityInfoWindow from './components/FacilityInfoWindow';
+import MapLoadingState from './components/MapLoadingState';
+import MapErrorState from './components/MapErrorState';
+import HighlightIndicator from './components/HighlightIndicator';
+import ZoomIndicator from './components/ZoomIndicator';
+import { useGoogleMapSetup } from './hooks/useGoogleMapSetup';
 
 interface GoogleMapViewProps {
   facilities: StorageFacility[];
@@ -30,13 +38,19 @@ const GoogleMapView: React.FC<GoogleMapViewProps> = ({
 }) => {
   const [selectedFacility, setSelectedFacility] = useState<StorageFacility | null>(null);
   const [mapRef, setMapRef] = useState<google.maps.Map | null>(null);
-  const [currentZoom, setCurrentZoom] = useState<number>(zoom);
-  const infoWindowRef = useRef<google.maps.InfoWindow | null>(null);
 
   // Load Google Maps script
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: apiKey,
   });
+
+  // Use custom hook for map setup
+  const { currentZoom, onMapLoad } = useGoogleMapSetup(
+    mapRef,
+    facilities,
+    onZoomChange,
+    zoom
+  );
 
   // Function to handle marker click
   const handleMarkerClick = (facility: StorageFacility) => {
@@ -67,100 +81,17 @@ const GoogleMapView: React.FC<GoogleMapViewProps> = ({
     }
   };
 
-  // Track zoom level changes
-  useEffect(() => {
-    if (!mapRef) return;
-    
-    const listener = mapRef.addListener('zoom_changed', () => {
-      if (mapRef) {
-        const newZoom = mapRef.getZoom() || zoom;
-        setCurrentZoom(newZoom);
-        
-        // Call the onZoomChange callback if provided
-        if (onZoomChange) {
-          onZoomChange(newZoom);
-        }
-      }
-    });
-    
-    return () => {
-      google.maps.event.removeListener(listener);
-    };
-  }, [mapRef, zoom, onZoomChange]);
-
-  // Check if a facility is in the recently viewed list
-  const isRecentlyViewed = (facilityId: string) => {
-    return recentlyViewedFacilityIds.includes(facilityId);
-  };
-  
-  // Determine marker color based on status and zoom level
-  const getMarkerColor = (facilityId: string, isSelected: boolean) => {
-    // If selected, always green
-    if (isSelected) return '#10B981';
-    // If recently viewed, always highlight color
-    if (isRecentlyViewed(facilityId)) return '#10B981';
-    // If current zoom is close-up (> 10), show green
-    if (currentZoom > 10) return '#10B981';
-    // Default color
-    return '#F97316';
-  };
-
-  // Handle map load event
-  const onMapLoad = (map: google.maps.Map) => {
-    setMapRef(map);
-    setCurrentZoom(map.getZoom() || zoom);
-    
-    // Create bounds to fit all markers
-    if (facilities.length > 0) {
-      const bounds = new google.maps.LatLngBounds();
-      
-      facilities.forEach(facility => {
-        bounds.extend({
-          lat: Number(facility.latitude),
-          lng: Number(facility.longitude),
-        });
-      });
-      
-      // Adjust the bounds fitting to avoid zooming too far in for single markers
-      map.fitBounds(bounds, {
-        top: 50, 
-        right: 50, 
-        bottom: 50, 
-        left: 50
-      });
-      
-      // Limit the maximum zoom level
-      const listener = google.maps.event.addListener(map, 'idle', () => {
-        if (map.getZoom() && map.getZoom() > 15) {
-          map.setZoom(15);
-        }
-        google.maps.event.removeListener(listener);
-      });
-    }
-  };
-
   // Close info window when clicking on the map
   const onMapClick = () => {
     setSelectedFacility(null);
   };
 
   if (loadError) {
-    return (
-      <div className="w-full h-full flex items-center justify-center bg-[#080F1F] text-white p-4 rounded-lg">
-        <p>Error loading Google Maps. Please check your API key.</p>
-      </div>
-    );
+    return <MapErrorState error="Error loading Google Maps. Please check your API key." />;
   }
 
   if (!isLoaded) {
-    return (
-      <div className="w-full h-[650px] flex items-center justify-center bg-[#080F1F] text-white rounded-lg">
-        <div className="text-center space-y-2">
-          <div className="w-10 h-10 border-t-2 border-r-2 border-[#5B9BD5] rounded-full animate-spin mx-auto"></div>
-          <p>Loading Map...</p>
-        </div>
-      </div>
-    );
+    return <MapLoadingState />;
   }
 
   return (
@@ -169,7 +100,10 @@ const GoogleMapView: React.FC<GoogleMapViewProps> = ({
         mapContainerStyle={mapContainerStyle}
         center={center}
         zoom={zoom}
-        onLoad={onMapLoad}
+        onLoad={(map) => {
+          setMapRef(map);
+          onMapLoad(map);
+        }}
         onClick={onMapClick}
         options={{
           styles: [
@@ -212,8 +146,16 @@ const GoogleMapView: React.FC<GoogleMapViewProps> = ({
             onClick={() => handleMarkerClick(facility)}
             icon={{
               path: google.maps.SymbolPath.CIRCLE,
-              scale: isRecentlyViewed(facility.id) || selectedFacility?.id === facility.id || currentZoom > 10 ? 12 : 10,
-              fillColor: getMarkerColor(facility.id, selectedFacility?.id === facility.id),
+              scale: 
+                recentlyViewedFacilityIds.includes(facility.id) || 
+                selectedFacility?.id === facility.id || 
+                currentZoom > 10 ? 12 : 10,
+              fillColor: getMarkerColor(
+                facility.id, 
+                selectedFacility?.id === facility.id,
+                recentlyViewedFacilityIds,
+                currentZoom
+              ),
               fillOpacity: 1,
               strokeColor: '#FFFFFF',
               strokeWeight: 2,
@@ -235,62 +177,20 @@ const GoogleMapView: React.FC<GoogleMapViewProps> = ({
               maxWidth: 320,
             }}
           >
-            <div className="facility-info-window max-w-[300px]">
-              <h3 className="text-lg font-semibold mb-1 text-[#5B9BD5]">{selectedFacility.name}</h3>
-              <div className="space-y-1 text-sm">
-                <p>{selectedFacility.address}</p>
-                <p>{selectedFacility.city}, {selectedFacility.state}</p>
-                {selectedFacility.price_range && (
-                  <p className="mt-2 font-semibold text-[#F97316]">
-                    Price: ${selectedFacility.price_range.min} - ${selectedFacility.price_range.max}
-                  </p>
-                )}
-                {selectedFacility.contact_phone && (
-                  <p className="mt-1">Phone: {selectedFacility.contact_phone}</p>
-                )}
-              </div>
-              
-              {selectedFacility.features && Object.values(selectedFacility.features).some(v => v) && (
-                <div className="mt-2 border-t border-gray-300 pt-2">
-                  <p className="text-xs text-gray-600 mb-1">Features:</p>
-                  <div className="flex flex-wrap gap-1">
-                    {selectedFacility.features.indoor && (
-                      <span className="text-xs bg-[#e0f2ff] text-[#4285F4] px-2 py-0.5 rounded">Indoor</span>
-                    )}
-                    {selectedFacility.features.climate_controlled && (
-                      <span className="text-xs bg-[#e0f2ff] text-[#4285F4] px-2 py-0.5 rounded">Climate Controlled</span>
-                    )}
-                    {selectedFacility.features["24h_access"] && (
-                      <span className="text-xs bg-[#e0f2ff] text-[#4285F4] px-2 py-0.5 rounded">24/7 Access</span>
-                    )}
-                    {selectedFacility.features.security_system && (
-                      <span className="text-xs bg-[#e0f2ff] text-[#4285F4] px-2 py-0.5 rounded">Security</span>
-                    )}
-                    {selectedFacility.features.vehicle_washing && (
-                      <span className="text-xs bg-[#e0f2ff] text-[#4285F4] px-2 py-0.5 rounded">Vehicle Washing</span>
-                    )}
-                  </div>
-                </div>
-              )}
-            </div>
+            <FacilityInfoWindow facility={selectedFacility} />
           </InfoWindowF>
         )}
       </GoogleMap>
       
-      {/* Facility highlight indicators below map */}
-      {selectedFacility && (
-        <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-black/70 backdrop-blur-sm px-4 py-2 rounded-full z-10">
-          <div className="flex items-center space-x-2">
-            <div className={`w-3 h-3 rounded-full ${currentZoom > 10 ? 'bg-green-500' : isRecentlyViewed(selectedFacility.id) ? 'bg-green-500' : 'bg-orange-500'}`}></div>
-            <span className="text-white text-sm">{selectedFacility.name}</span>
-          </div>
-        </div>
-      )}
+      {/* Facility highlight indicator below map */}
+      <HighlightIndicator 
+        selectedFacility={selectedFacility} 
+        currentZoom={currentZoom} 
+        recentlyViewedFacilityIds={recentlyViewedFacilityIds}
+      />
       
       {/* Zoom level indicator for debugging */}
-      <div className="absolute top-4 left-4 bg-black/60 text-white text-xs px-2 py-1 rounded z-10">
-        Zoom: {currentZoom.toFixed(1)}
-      </div>
+      <ZoomIndicator zoom={currentZoom} />
     </div>
   );
 };

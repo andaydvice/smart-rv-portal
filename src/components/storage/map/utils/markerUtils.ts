@@ -1,104 +1,28 @@
 
 import { StorageFacility } from '../../types';
 
-// Track coordinates that are too close together
-export interface CoordinateMap {
-  [key: string]: number;
-}
-
 /**
- * Checks if a facility has valid coordinates
+ * Checks if a facility ID is in the recently viewed list
  */
-export const hasValidCoordinates = (facility: StorageFacility): boolean => {
-  if (
-    facility.latitude === null || 
-    facility.longitude === null || 
-    facility.latitude === undefined || 
-    facility.longitude === undefined
-  ) {
-    return false;
-  }
-  
-  // Convert to numbers and check if they're valid
-  const lat = Number(facility.latitude);
-  const lng = Number(facility.longitude);
-  
-  return !isNaN(lat) && !isNaN(lng) && Math.abs(lat) <= 90 && Math.abs(lng) <= 180;
+export const isRecentlyViewed = (facilityId: string, recentlyViewedFacilityIds: string[]): boolean => {
+  return recentlyViewedFacilityIds.includes(facilityId);
 };
 
 /**
- * Creates and applies a coordinate offset for overlapping markers
+ * Determines marker color based on various conditions
  */
-export const calculateMarkerOffset = (
-  facility: StorageFacility,
-  coordinatesMap: CoordinateMap,
-  facilities: StorageFacility[],
-  index: number
-): [number, number] => {
-  // Extract and normalize coordinates
-  let lat = typeof facility.latitude === 'string' ? parseFloat(facility.latitude) : Number(facility.latitude);
-  let lng = typeof facility.longitude === 'string' ? parseFloat(facility.longitude) : Number(facility.longitude);
-  
-  // Handle invalid coordinates
-  if (isNaN(lat) || isNaN(lng)) {
-    console.warn(`⚠️ Warning: Invalid numeric coordinates for ${facility.name}, using default coordinates`);
-    lat = 39.8283; // Default to center of USA if coordinates are invalid
-    lng = -98.5795;
-  }
-  
-  // Round coordinates for grouping nearby points
-  const roundedLat = Math.round(lat * 100000) / 100000;
-  const roundedLng = Math.round(lng * 100000) / 100000;
-  const coordKey = `${roundedLat},${roundedLng}`;
-  
-  // Only add offset if there are multiple markers at this location
-  let offsetLat = lat;
-  let offsetLng = lng;
-  
-  if (coordinatesMap[coordKey] > 1) {
-    // Get the marker position in the stack
-    const markersAtCoord = coordinatesMap[coordKey];
-    const markerPosition = facilities.slice(0, index)
-      .filter(f => {
-        const fLat = Number(f.latitude);
-        const fLng = Number(f.longitude);
-        const fRoundedLat = Math.round(fLat * 100000) / 100000;
-        const fRoundedLng = Math.round(fLng * 100000) / 100000;
-        return `${fRoundedLat},${fRoundedLng}` === coordKey;
-      }).length;
-    
-    // Apply spiral pattern offset
-    const angle = (markerPosition * (2 * Math.PI)) / markersAtCoord;
-    const radius = 0.0005 * (markerPosition + 1); // Increased offset for better visibility
-    
-    offsetLat = lat + radius * Math.sin(angle);
-    offsetLng = lng + radius * Math.cos(angle);
-  }
-  
-  return [offsetLng, offsetLat];
-};
-
-/**
- * Builds a coordinate map to identify overlapping markers
- */
-export const buildCoordinatesMap = (facilities: StorageFacility[]): CoordinateMap => {
-  const coordinatesMap: CoordinateMap = {};
-  
-  facilities.forEach(facility => {
-    if (facility.latitude !== null && facility.longitude !== null) {
-      // Round to 5 decimal places for grouping nearby coordinates
-      const roundedLat = Math.round(Number(facility.latitude) * 100000) / 100000;
-      const roundedLng = Math.round(Number(facility.longitude) * 100000) / 100000;
-      const coordKey = `${roundedLat},${roundedLng}`;
-      
-      // Count overlapping markers
-      if (coordinatesMap[coordKey]) {
-        coordinatesMap[coordKey]++;
-      } else {
-        coordinatesMap[coordKey] = 1;
-      }
-    }
-  });
-  
-  return coordinatesMap;
+export const getMarkerColor = (
+  facilityId: string, 
+  isSelected: boolean, 
+  recentlyViewedFacilityIds: string[],
+  currentZoom: number
+): string => {
+  // If selected, always green
+  if (isSelected) return '#10B981';
+  // If recently viewed, always highlight color
+  if (isRecentlyViewed(facilityId, recentlyViewedFacilityIds)) return '#10B981';
+  // If current zoom is close-up (> 10), show green
+  if (currentZoom > 10) return '#10B981';
+  // Default color
+  return '#F97316';
 };
