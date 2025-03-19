@@ -1,5 +1,5 @@
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useCallback } from 'react';
 import { Card } from '@/components/ui/card';
 import { StorageFacility } from '../types';
 import mapboxgl from 'mapbox-gl';
@@ -10,17 +10,20 @@ interface MapboxMapViewProps {
   recentlyViewedFacilityIds: string[];
   onMarkerClick?: (facilityId: string) => void;
   apiKey?: string;
+  onMapLoad?: (map: mapboxgl.Map) => void;
 }
 
 const MapboxMapView: React.FC<MapboxMapViewProps> = ({
   facilities,
   recentlyViewedFacilityIds,
   onMarkerClick,
-  apiKey
+  apiKey,
+  onMapLoad
 }) => {
   const mapContainer = useRef<HTMLDivElement>(null);
   const map = useRef<mapboxgl.Map | null>(null);
   const [mapLoaded, setMapLoaded] = useState(false);
+  const markersRef = useRef<{[key: string]: mapboxgl.Marker}>({});
 
   // Initialize map when component mounts
   useEffect(() => {
@@ -35,7 +38,9 @@ const MapboxMapView: React.FC<MapboxMapViewProps> = ({
       style: 'mapbox://styles/mapbox/dark-v11',
       center: [-98.5795, 39.8283], // Center of US
       zoom: 3.5,
-      attributionControl: false
+      attributionControl: false,
+      maxBounds: [[-180, 15], [-30, 72]], // Limit to continental US with padding
+      renderWorldCopies: false
     });
 
     // Add navigation controls
@@ -45,12 +50,26 @@ const MapboxMapView: React.FC<MapboxMapViewProps> = ({
     map.current.on('load', () => {
       setMapLoaded(true);
       
+      // Call the onMapLoad callback if provided
+      if (onMapLoad && map.current) {
+        onMapLoad(map.current);
+      }
+      
       // Dispatch custom event for global access if needed
       document.dispatchEvent(
         new CustomEvent('mapboxgl.map.created', { detail: { map: map.current } })
       );
       
       console.log('Mapbox map loaded successfully');
+    });
+
+    // Ensure markers remain visible after style changes or zoom
+    map.current.on('zoom', () => {
+      refreshMarkerVisibility();
+    });
+
+    map.current.on('style.load', () => {
+      refreshMarkerVisibility();
     });
 
     // Cleanup on unmount
@@ -60,15 +79,33 @@ const MapboxMapView: React.FC<MapboxMapViewProps> = ({
         map.current = null;
       }
     };
-  }, [apiKey]);
+  }, [apiKey, onMapLoad]);
+
+  // Function to ensure all markers are visible
+  const refreshMarkerVisibility = useCallback(() => {
+    if (!map.current) return;
+    
+    Object.values(markersRef.current).forEach(marker => {
+      const element = marker.getElement();
+      if (element) {
+        // Force the marker to be visible
+        element.style.visibility = 'visible';
+        element.style.opacity = '1';
+      }
+    });
+  }, []);
 
   // Add markers when facilities data changes or map loads
   useEffect(() => {
     if (!map.current || !mapLoaded || facilities.length === 0) return;
 
     // Clear existing markers first
-    const existingMarkers = document.querySelectorAll('.mapboxgl-marker');
-    existingMarkers.forEach(marker => marker.remove());
+    Object.values(markersRef.current).forEach(marker => marker.remove());
+    markersRef.current = {};
+
+    // Prepare bounds to fit all markers
+    const bounds = new mapboxgl.LngLatBounds();
+    let hasBounds = false;
 
     // Add markers for each facility
     facilities.forEach(facility => {
@@ -86,6 +123,7 @@ const MapboxMapView: React.FC<MapboxMapViewProps> = ({
       el.style.border = '2px solid white';
       el.style.cursor = 'pointer';
       el.style.boxShadow = '0 2px 4px rgba(0,0,0,0.3)';
+      el.setAttribute('data-facility-id', facility.id);
       
       // Create popup
       const popup = new mapboxgl.Popup({ offset: 25 })
@@ -97,10 +135,15 @@ const MapboxMapView: React.FC<MapboxMapViewProps> = ({
         `);
       
       // Add marker to map
-      new mapboxgl.Marker(el)
-        .setLngLat([Number(facility.longitude), Number(facility.latitude)])
+      const lng = Number(facility.longitude);
+      const lat = Number(facility.latitude);
+      const marker = new mapboxgl.Marker(el)
+        .setLngLat([lng, lat])
         .setPopup(popup)
         .addTo(map.current!);
+      
+      // Store marker reference for later use
+      markersRef.current[facility.id] = marker;
       
       // Add click handler
       el.addEventListener('click', () => {
@@ -108,8 +151,27 @@ const MapboxMapView: React.FC<MapboxMapViewProps> = ({
           onMarkerClick(facility.id);
         }
       });
+
+      // Extend bounds to include this marker
+      bounds.extend([lng, lat]);
+      hasBounds = true;
     });
-  }, [facilities, recentlyViewedFacilityIds, mapLoaded, onMarkerClick]);
+
+    // Fit bounds if we have any markers
+    if (hasBounds && facilities.length > 1) {
+      map.current.fitBounds(bounds, {
+        padding: {
+          top: 50,
+          right: 50,
+          bottom: 50,
+          left: 50
+        }
+      });
+    }
+
+    // Force refresh of marker visibility
+    setTimeout(refreshMarkerVisibility, 100);
+  }, [facilities, recentlyViewedFacilityIds, mapLoaded, onMarkerClick, refreshMarkerVisibility]);
 
   return (
     <Card className="h-[650px] bg-[#080F1F] relative overflow-hidden border-gray-700">

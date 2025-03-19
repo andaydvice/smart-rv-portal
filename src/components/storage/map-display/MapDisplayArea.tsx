@@ -1,129 +1,73 @@
-import React, { useEffect } from 'react';
+
+import React from 'react';
 import { Card } from '@/components/ui/card';
 import { StorageFacility } from '../types';
-import { FilterState } from '../types';
-import { forceMarkersRefresh } from '../map/utils/markerUtils';
-import GoogleMapFacilitiesView from '../GoogleMapFacilitiesView';
+import { MapLoadingState } from '../map/MapLoadingState';
 import GoogleMapView from '../map/GoogleMapView';
-import GoogleMapWithFilteredLocations from '../map/components/GoogleMapWithFilteredLocations';
 import MapboxMapView from '../map-view/MapboxMapView';
-import MapErrorState from '../map/components/MapErrorState';
+import mapboxgl from 'mapbox-gl';
 
 interface MapDisplayAreaProps {
-  showFilteredLocations: boolean;
-  useGoogleMaps: boolean;
-  allFacilities: StorageFacility[] | null;
-  recentlyViewedIds: string[];
+  facilities: StorageFacility[];
+  isLoading: boolean;
+  recentlyViewedFacilityIds: string[];
   onMarkerClick: (facilityId: string) => void;
-  googleMapsKey?: string;
-  mapToken?: string;
-  mapTokenError?: string | null;
-  highlightedFacility: string | null;
-  filters: FilterState;
+  useMapbox?: boolean;
+  googleMapsApiKey?: string;
+  mapboxApiKey?: string;
 }
 
 const MapDisplayArea: React.FC<MapDisplayAreaProps> = ({
-  showFilteredLocations,
-  useGoogleMaps,
-  allFacilities,
-  recentlyViewedIds,
+  facilities,
+  isLoading,
+  recentlyViewedFacilityIds,
   onMarkerClick,
-  googleMapsKey,
-  mapToken,
-  mapTokenError,
-  highlightedFacility,
-  filters
+  useMapbox = false,
+  googleMapsApiKey,
+  mapboxApiKey
 }) => {
-  // Track last filter state to detect changes
-  const [lastFilterState, setLastFilterState] = React.useState<string>('');
-  
-  // Reference to the Google Map instance
-  const [googleMapRef, setGoogleMapRef] = React.useState<google.maps.Map | null>(null);
-  
-  // Track filter changes to force marker refresh
-  useEffect(() => {
-    const currentFilterState = JSON.stringify(filters);
+  const handleMapLoad = (map: google.maps.Map | mapboxgl.Map) => {
+    console.log('Map loaded successfully');
+    // Any common map initialization logic can go here
     
-    // Only force refresh if filters have changed
-    if (lastFilterState && lastFilterState !== currentFilterState && googleMapRef && useGoogleMaps) {
-      console.log('Filter changed, forcing marker refresh');
-      
-      // Wait a moment for the facilities to update
-      setTimeout(() => {
-        forceMarkersRefresh(googleMapRef, allFacilities || []);
-      }, 300);
-    }
-    
-    // Update the stored filter state
-    setLastFilterState(currentFilterState);
-  }, [filters, lastFilterState, googleMapRef, useGoogleMaps, allFacilities]);
-  
-  // Function to capture map reference from GoogleMapView
-  const captureGoogleMapRef = (map: google.maps.Map) => {
-    if (!googleMapRef) {
-      console.log('Captured Google Maps reference for visibility management');
-      setGoogleMapRef(map);
-    }
+    // Force visibility of markers after a brief delay
+    setTimeout(() => {
+      const markers = document.querySelectorAll('.gm-style [title], .gm-style-pbc [title], .mapbox-marker');
+      markers.forEach(marker => {
+        if (marker instanceof HTMLElement) {
+          marker.style.visibility = 'visible';
+          marker.style.opacity = '1';
+        }
+      });
+    }, 500);
   };
-  
-  if (!allFacilities) {
-    return (
-      <Card className="h-[650px] bg-[#080F1F] relative overflow-hidden border-gray-700">
-        <div className="flex items-center justify-center h-full text-gray-400">
-          <p>Loading facilities...</p>
-        </div>
-      </Card>
-    );
-  }
-  
-  // Handle the filtered locations demo view
-  if (showFilteredLocations) {
-    // Mock data for the filtered locations demo
-    const filteredLocations = allFacilities.slice(0, 10).map((facility, index) => ({
-      id: Number(facility.id),
-      name: facility.name,
-      latitude: Number(facility.latitude),
-      longitude: Number(facility.longitude),
-      icon: {
-        url: index % 2 === 0 ? 'orange-pin.png' : 'blue-pin.png'
-      }
-    }));
-    
-    return (
-      <GoogleMapWithFilteredLocations
-        locations={filteredLocations}
-        apiKey={googleMapsKey}
-        className="h-[650px]"
-      />
-    );
-  }
-  
-  // Use Google Maps view
-  if (useGoogleMaps) {
-    // Filter out facilities without valid coordinates
-    const validFacilities = allFacilities.filter(
-      facility => facility.latitude && facility.longitude
-    );
-    
-    return (
-      <GoogleMapView
-        facilities={validFacilities}
-        recentlyViewedFacilityIds={recentlyViewedIds}
-        onMarkerClick={onMarkerClick}
-        apiKey={googleMapsKey}
-        onMapLoad={captureGoogleMapRef}
-      />
-    );
-  }
-  
-  // Otherwise, use Mapbox view
+
   return (
-    <GoogleMapFacilitiesView
-      facilities={allFacilities}
-      recentlyViewedFacilityIds={recentlyViewedIds}
-      onMarkerClick={onMarkerClick}
-      apiKey={mapToken}
-    />
+    <Card className="h-[650px] bg-connectivity-darkBg relative border-gray-700 overflow-hidden">
+      {isLoading ? (
+        <MapLoadingState />
+      ) : facilities.length === 0 ? (
+        <div className="flex items-center justify-center h-full text-gray-400">
+          <p>No storage facilities found. Try adjusting your filters.</p>
+        </div>
+      ) : useMapbox ? (
+        <MapboxMapView
+          facilities={facilities}
+          recentlyViewedFacilityIds={recentlyViewedFacilityIds}
+          onMarkerClick={onMarkerClick}
+          apiKey={mapboxApiKey || ''}
+          onMapLoad={(map) => handleMapLoad(map)}
+        />
+      ) : (
+        <GoogleMapView
+          facilities={facilities}
+          recentlyViewedFacilityIds={recentlyViewedFacilityIds}
+          onMarkerClick={onMarkerClick}
+          apiKey={googleMapsApiKey || ''}
+          onMapLoad={(map) => handleMapLoad(map)}
+        />
+      )}
+    </Card>
   );
 };
 

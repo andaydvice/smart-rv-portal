@@ -1,3 +1,4 @@
+
 import React, { Suspense, useEffect } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import RouterProvider from './components/router/RouterProvider';
@@ -43,6 +44,14 @@ function AppContent() {
     (window as any).dispatchMapEvent = (eventName: string, detail: any) => {
       document.dispatchEvent(new CustomEvent(eventName, { detail }));
     };
+
+    // Register that Lovable features are available
+    if (typeof window !== 'undefined') {
+      window.addEventListener('lovable:ready', () => {
+        console.log('Lovable features are ready to use');
+        document.documentElement.classList.add('lovable-enabled');
+      });
+    }
   }, []);
 
   return (
