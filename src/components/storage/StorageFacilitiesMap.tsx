@@ -40,6 +40,13 @@ const StorageFacilitiesMap = () => {
   const { mapToken, mapTokenError } = useMapToken();
   const { apiKey: googleMapsKey, error: googleMapsError } = useGoogleMapsKey();
   
+  // Log important values for debugging
+  useEffect(() => {
+    console.log('Google Maps API Key available:', !!googleMapsKey);
+    console.log('Mapbox Token available:', !!mapToken);
+    console.log('Facilities loaded:', allFacilities?.length || 0);
+  }, [googleMapsKey, mapToken, allFacilities]);
+  
   // Get recently viewed facility IDs for highlighting on the map
   const recentlyViewedIds = recentlyViewed.map(facility => facility.id);
   
@@ -193,6 +200,7 @@ const StorageFacilitiesMap = () => {
           mapboxApiKey={mapToken}
           showFilteredLocations={showFilteredLocations}
           useGoogleMaps={useGoogleMaps}
+          allFacilities={allFacilities || []}
           mapToken={mapToken}
           mapTokenError={mapTokenError}
           highlightedFacility={highlightedFacility}

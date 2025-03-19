@@ -50,6 +50,8 @@ const GoogleMapView: React.FC<GoogleMapViewProps> = ({
     
     googleMapsScript.onload = () => {
       if (mapRef.current) {
+        console.log('Google Maps script loaded successfully');
+        
         // Create a new map
         const newMap = new google.maps.Map(mapRef.current, {
           center: { lat: 39.8283, lng: -98.5795 }, // Center of US
@@ -103,7 +105,10 @@ const GoogleMapView: React.FC<GoogleMapViewProps> = ({
     
     return () => {
       // Clean up
-      document.head.removeChild(googleMapsScript);
+      const script = document.querySelector(`script[src*="maps.googleapis.com/maps/api"]`);
+      if (script && script.parentNode) {
+        script.parentNode.removeChild(script);
+      }
       setMap(null);
       setMarkers([]);
     };
@@ -112,6 +117,8 @@ const GoogleMapView: React.FC<GoogleMapViewProps> = ({
   // Add markers
   useEffect(() => {
     if (!map) return;
+    
+    console.log(`Creating ${facilities.length} markers on Google Map`);
     
     // Clear existing markers
     markers.forEach(marker => marker.setMap(null));
@@ -138,7 +145,9 @@ const GoogleMapView: React.FC<GoogleMapViewProps> = ({
           strokeWeight: 2,
           scale: isRecentlyViewed ? 8 : 7
         },
-        optimized: false
+        optimized: false, // Important for marker visibility
+        visible: true, // Explicitly set visible
+        zIndex: isRecentlyViewed ? 2 : 1 // Higher z-index for recently viewed
       });
       
       // Add click handler
@@ -173,7 +182,7 @@ const GoogleMapView: React.FC<GoogleMapViewProps> = ({
         bounds.extend(marker.getPosition()!);
       });
       
-      // Fix padding format: Use top, right, bottom, left properties instead of padding
+      // Fix padding format
       map.fitBounds(bounds, {
         top: 50,
         right: 50,
@@ -184,14 +193,24 @@ const GoogleMapView: React.FC<GoogleMapViewProps> = ({
     
     // Force marker visibility
     setTimeout(() => {
+      console.log('Force Google Map markers to be visible');
+      
+      // Try to find and force markers to be visible
       const markerElements = document.querySelectorAll('.gm-style [title], .gm-style-pbc [title]');
       markerElements.forEach(marker => {
         if (marker instanceof HTMLElement) {
           marker.style.visibility = 'visible';
           marker.style.opacity = '1';
+          marker.style.display = 'block';
+          marker.style.zIndex = '9999';
         }
       });
-    }, 100);
+      
+      // Also invoke any custom marker fix script if it exists
+      if (window.forceGoogleMarkersVisible) {
+        window.forceGoogleMarkersVisible();
+      }
+    }, 500);
     
   }, [facilities, map, onMarkerClick, recentlyViewedFacilityIds]);
   

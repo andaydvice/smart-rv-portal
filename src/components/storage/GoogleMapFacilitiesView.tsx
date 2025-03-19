@@ -87,7 +87,7 @@ const GoogleMapFacilitiesView: React.FC<GoogleMapFacilitiesViewProps> = ({
             
             {/* Facility Details Modal */}
             <Dialog open={showDetailsModal} onOpenChange={setShowDetailsModal}>
-              <FacilityDetailsModal selectedFacility={selectedFacility} />
+              {selectedFacility && <FacilityDetailsModal selectedFacility={selectedFacility} />}
             </Dialog>
           </>
         )}
