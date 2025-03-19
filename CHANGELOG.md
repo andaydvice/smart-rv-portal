@@ -1,3 +1,4 @@
+
 # Changelog
 All notable changes to this project will be documented in this file.
 
@@ -7,6 +8,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- Added Lovable script tag for enabling new features like Select and Pick
+- Enhanced Mapbox integration with proper marker implementation
 - Initial CHANGELOG.md creation
 - Performance monitoring setup
 - Enhanced console logging for debugging
@@ -24,6 +27,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - HMR connectivity problems
 - Project remixing stability issues
 - Network interface binding problems
+- Mapbox marker visibility issues 
 
 ### Performance
 - Implemented initial performance monitoring
