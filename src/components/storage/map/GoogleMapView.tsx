@@ -53,17 +53,18 @@ const GoogleMapView: React.FC<GoogleMapViewProps> = ({
       return;
     }
     
+    // Define a global callback function before loading the script
+    // Make sure we use the type-safe approach
+    window.initGoogleMap = () => {
+      console.log('Google Maps script loaded via callback');
+      setIsScriptLoaded(true);
+    };
+    
     // Load the Google Maps script
     const googleMapsScript = document.createElement('script');
     googleMapsScript.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places&callback=initGoogleMap`;
     googleMapsScript.async = true;
     googleMapsScript.defer = true;
-    
-    // Define a global callback function
-    window.initGoogleMap = () => {
-      console.log('Google Maps script loaded via callback');
-      setIsScriptLoaded(true);
-    };
     
     // Handle script load error
     googleMapsScript.onerror = () => {
@@ -74,7 +75,9 @@ const GoogleMapView: React.FC<GoogleMapViewProps> = ({
     
     return () => {
       // Clean up
-      delete window.initGoogleMap;
+      if (window.initGoogleMap) {
+        delete window.initGoogleMap;
+      }
       if (googleMapsScript.parentNode) {
         googleMapsScript.parentNode.removeChild(googleMapsScript);
       }
