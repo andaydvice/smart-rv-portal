@@ -152,7 +152,7 @@ const GoogleMapView: React.FC<GoogleMapViewProps> = ({
   useEffect(() => {
     if (!map || !facilities.length) return;
     
-    console.log(`Creating ${facilities.length} markers on Google Map for all states`);
+    console.log(`Creating ${facilities.length} markers on Google Map`);
     
     // Clear existing markers
     markers.forEach(marker => marker.setMap(null));
@@ -164,9 +164,6 @@ const GoogleMapView: React.FC<GoogleMapViewProps> = ({
       const isRecentlyViewed = recentlyViewedFacilityIds.includes(facility.id);
       
       try {
-        // Log state for debugging
-        console.log(`Creating marker for ${facility.name} in ${facility.state}`);
-        
         // Create marker
         const marker = new google.maps.Marker({
           position: {
