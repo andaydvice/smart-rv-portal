@@ -54,7 +54,6 @@ const GoogleMapView: React.FC<GoogleMapViewProps> = ({
     }
     
     // Define a global callback function before loading the script
-    // Make sure we use the type-safe approach
     window.initGoogleMap = () => {
       console.log('Google Maps script loaded via callback');
       setIsScriptLoaded(true);
@@ -276,7 +275,6 @@ const GoogleMapView: React.FC<GoogleMapViewProps> = ({
       });
       
       // Also invoke any custom marker fix script if it exists
-      // Check if the function exists before calling it
       if (typeof window.forceGoogleMarkersVisible === 'function') {
         window.forceGoogleMarkersVisible();
       }

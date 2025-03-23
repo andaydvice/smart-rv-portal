@@ -65,7 +65,10 @@ const MapDisplayArea: React.FC<MapDisplayAreaProps> = ({
     console.log('Map loaded successfully');
     
     // Show loading confirmation to help user know map is working
-    toast.success('Map loaded successfully');
+    toast.success('Map loaded successfully', {
+      duration: 2000,
+      position: 'bottom-right'
+    });
     
     // Force visibility of markers after a brief delay
     setTimeout(() => {

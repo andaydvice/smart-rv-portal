@@ -78,3 +78,20 @@
   visibility: visible !important;
   z-index: 1000 !important;
 }
+
+/* Force correct marker colors */
+.gm-style .marker-orange,
+.gm-style img[src*="orange"] {
+  filter: none !important;
+}
+
+/* Add specific classes to ensure map elements are visible */
+.map-marker,
+.map-icon,
+[class*="map-marker"],
+[class*="map-icon"] {
+  visibility: visible !important;
+  opacity: 1 !important;
+  display: block !important;
+  z-index: 9999 !important;
+}
