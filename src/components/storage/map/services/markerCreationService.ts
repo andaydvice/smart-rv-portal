@@ -58,6 +58,7 @@ export const createFacilityMarker = (
   // Set data attributes for debugging and state filtering
   el.setAttribute('data-facility-id', facility.id);
   el.setAttribute('data-state', facility.state);
+  el.setAttribute('data-normalized-state', normalizeStateName(facility.state));
   el.setAttribute('data-highlighted', isHighlighted ? 'true' : 'false');
   el.setAttribute('data-zoomed', isZoomedIn ? 'true' : 'false');
   
@@ -91,7 +92,7 @@ export const createFacilityMarker = (
   popup.setHTML(`
     <div class="facility-popup-content" data-facility-id="${facility.id}">
       <h3 class="text-lg font-semibold mb-1">${facility.name}</h3>
-      <p class="text-sm mb-1">${facility.city}, ${facility.state}</p>
+      <p class="text-sm mb-1">${facility.city}, ${normalizeStateName(facility.state)}</p>
       <p class="text-sm mb-2">${facility.address}</p>
       ${facility.price_range ? 
         `<p class="text-sm text-gray-300">Price: $${facility.price_range.min} - $${facility.price_range.max}</p>` : ''}
@@ -143,6 +144,12 @@ export const createMarkersForState = (
   onMarkerClick: (facilityId: string) => void,
   state: string | null = null
 ): mapboxgl.Marker[] => {
+  // Normalize the state for comparison if provided
+  const normalizedState = state ? normalizeStateName(state) : null;
+  
+  // Log marker creation event
+  console.log(`Creating markers for state: ${normalizedState || 'all states'}`);
+  
   // Clear existing markers for this state first
   document.querySelectorAll(`.mapboxgl-marker[data-state="${state}"], .custom-marker[data-state="${state}"]`)
     .forEach(marker => {
@@ -151,12 +158,12 @@ export const createMarkersForState = (
       }
     });
   
-  // Filter facilities by state if specified
-  const stateFacilities = state 
-    ? facilities.filter(f => f.state === state)
+  // Filter facilities by normalized state if specified
+  const stateFacilities = normalizedState 
+    ? facilities.filter(f => normalizeStateName(f.state) === normalizedState)
     : facilities;
   
-  console.log(`Creating ${stateFacilities.length} markers for ${state || 'all states'}`);
+  console.log(`Creating ${stateFacilities.length} markers for ${normalizedState || 'all states'}`);
   
   // Create markers
   const markers: mapboxgl.Marker[] = [];

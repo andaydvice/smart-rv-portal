@@ -28,6 +28,26 @@ const normalizeStateName = (stateAbbr: string): string => {
          stateAbbr;
 };
 
+// Get abbreviated state code for a given full state name
+const getStateAbbreviation = (stateName: string): string => {
+  if (stateName === 'Arizona') return 'AZ';
+  if (stateName === 'California') return 'CA';
+  if (stateName === 'Colorado') return 'CO';
+  if (stateName === 'Texas') return 'TX';
+  if (stateName === 'Florida') return 'FL';
+  if (stateName === 'Nevada') return 'NV';
+  if (stateName === 'Georgia') return 'GA';
+  if (stateName === 'Iowa') return 'IA';
+  if (stateName === 'Minnesota') return 'MN';
+  if (stateName === 'Wisconsin') return 'WI';
+  if (stateName === 'Oregon') return 'OR';
+  if (stateName === 'Pennsylvania') return 'PA';
+  if (stateName === 'New York') return 'NY';
+  if (stateName === 'Ohio') return 'OH';
+  if (stateName === 'Indiana') return 'IN';
+  return stateName; // Return original if no abbreviation found
+};
+
 export const useStorageFacilities = (filters: FilterState) => {
   const { data: maxPriceData } = useQuery({
     queryKey: ['max-facility-price'],
@@ -77,40 +97,13 @@ export const useStorageFacilities = (filters: FilterState) => {
       if (filters.selectedState) {
         // Create an array of possible state values (full name and abbreviation)
         const stateValues = [];
-        if (filters.selectedState === 'Arizona') {
-          stateValues.push('AZ', 'Arizona');
-        } else if (filters.selectedState === 'California') {
-          stateValues.push('CA', 'California');
-        } else if (filters.selectedState === 'Texas') {
-          stateValues.push('TX', 'Texas');
-        } else if (filters.selectedState === 'Florida') {
-          stateValues.push('FL', 'Florida');
-        } else if (filters.selectedState === 'Nevada') {
-          stateValues.push('NV', 'Nevada');
-        } else if (filters.selectedState === 'Georgia') {
-          stateValues.push('GA', 'Georgia');
-        } else if (filters.selectedState === 'Colorado') {
-          stateValues.push('CO', 'Colorado');
-        } else if (filters.selectedState === 'Iowa') {
-          stateValues.push('IA', 'Iowa');
-        } else if (filters.selectedState === 'Minnesota') {
-          stateValues.push('MN', 'Minnesota');
-        } else if (filters.selectedState === 'Wisconsin') {
-          stateValues.push('WI', 'Wisconsin');
-        } else if (filters.selectedState === 'Oregon') {
-          stateValues.push('OR', 'Oregon');
-        } else if (filters.selectedState === 'Pennsylvania') {
-          stateValues.push('PA', 'Pennsylvania');
-        } else if (filters.selectedState === 'New York') {
-          stateValues.push('NY', 'New York');
-        } else if (filters.selectedState === 'Ohio') {
-          stateValues.push('OH', 'Ohio');
-        } else if (filters.selectedState === 'Indiana') {
-          stateValues.push('IN', 'Indiana');
-        } else {
-          // For other states, use direct equality and add the state name
-          stateValues.push(filters.selectedState);
-        }
+        const stateAbbr = getStateAbbreviation(filters.selectedState);
+        
+        // Add both the full name and abbreviation to handle inconsistencies in the database
+        stateValues.push(filters.selectedState, stateAbbr);
+        
+        // Log state values for debugging
+        console.log('Filtering by states:', stateValues);
         
         // Use in operator to match any of the possible state values
         query = query.in('state', stateValues);

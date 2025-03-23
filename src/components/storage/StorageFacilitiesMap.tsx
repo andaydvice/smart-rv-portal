@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useCallback } from 'react';
 import { toast } from "sonner";
 import { Card } from '@/components/ui/card';
@@ -98,7 +99,7 @@ const StorageFacilitiesMap = () => {
         toast.info('Showing facilities in all states');
       }
       
-      // If switching to Google Maps when changing state, alert user about marker visibility
+      // If using Google Maps when changing state, alert user about marker visibility
       if (useGoogleMaps) {
         setTimeout(() => {
           toast.info('Refreshing map markers...', { duration: 2000 });
