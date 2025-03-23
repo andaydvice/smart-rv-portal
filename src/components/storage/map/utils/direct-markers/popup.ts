@@ -22,17 +22,21 @@ export function createPopupElement(
   
   // Position popup - moved further away from the marker to prevent overlap
   popup.style.left = `${point.x}px`;
-  popup.style.top = `${point.y - 25}px`; // Increased distance from marker
+  popup.style.top = `${point.y - 35}px`; // Increased distance from marker even more
   
   // Apply styling
   applyPopupStyling(popup, {
     ...options,
-    minWidth: options?.minWidth || 240, // Increased min width
-    maxWidth: options?.maxWidth || 340  // Increased max width
+    minWidth: options?.minWidth || 250, // Slightly increased min width
+    maxWidth: options?.maxWidth || 350  // Slightly increased max width
   });
   
   // Set popup content
   popup.innerHTML = createPopupContent(facility);
+  
+  // Add data attribute for debugging
+  popup.setAttribute('data-facility-id', facility.id);
+  popup.setAttribute('data-facility-state', facility.state || '');
   
   return popup;
 }
@@ -51,7 +55,7 @@ export function createPopupContent(facility: StorageFacility): string {
     // Add filled or empty stars
     for (let i = 1; i <= 5; i++) {
       const starColor = i <= Math.round(rating) ? 'text-yellow-400' : 'text-gray-600';
-      starsHtml += `<span class="${starColor} text-sm">★</span>`;
+      starsHtml += `<span class="${starColor} text-sm" aria-hidden="true">★</span>`;
     }
     
     // Add numeric rating
@@ -71,7 +75,7 @@ export function createPopupContent(facility: StorageFacility): string {
   };
   
   return `
-    <div class="p-3 overflow-visible">
+    <div class="p-3 overflow-visible popup-content" tabindex="0">
       <h3 class="text-lg font-semibold mb-1 text-[#60A5FA]">${facility.name}</h3>
       
       ${createRatingStars()}
@@ -96,6 +100,29 @@ export function createPopupContent(facility: StorageFacility): string {
           </div>
         </div>
       ` : ''}
+      
+      <!-- Add enhanced visibility styles -->
+      <style>
+        .popup-content {
+          color: white;
+          background-color: #131a2a;
+          border-radius: 8px;
+          box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+          position: relative;
+          z-index: 10000;
+        }
+        
+        /* Flash effect to draw attention to popup when it appears */
+        @keyframes popup-flash {
+          0% { box-shadow: 0 0 0 rgba(96, 165, 250, 0); }
+          50% { box-shadow: 0 0 15px rgba(96, 165, 250, 0.5); }
+          100% { box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
+        }
+        
+        .direct-popup.visible .popup-content {
+          animation: popup-flash 0.5s ease-out;
+        }
+      </style>
     </div>
   `;
 }
@@ -108,6 +135,7 @@ export function addCloseButton(popup: HTMLElement, onClose?: () => void): HTMLEl
   const closeButton = document.createElement('button');
   closeButton.innerHTML = '×';
   closeButton.className = 'absolute top-1 right-1 text-lg font-bold text-gray-400 hover:text-white';
+  closeButton.setAttribute('aria-label', 'Close popup');
   
   // Style the close button
   closeButton.style.position = 'absolute';
@@ -120,6 +148,7 @@ export function addCloseButton(popup: HTMLElement, onClose?: () => void): HTMLEl
   closeButton.style.background = 'none';
   closeButton.style.border = 'none';
   closeButton.style.zIndex = '10001'; // Increased z-index for better clickability
+  closeButton.style.padding = '4px 10px';  // Larger hit area
   
   // Add click handler
   closeButton.addEventListener('click', (e) => {

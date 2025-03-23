@@ -1,4 +1,3 @@
-
 import React, { useRef, useEffect, useState } from 'react';
 import { GoogleMap, useLoadScript, MarkerF, InfoWindowF } from '@react-google-maps/api';
 import { StorageFacility } from '../types';
@@ -11,6 +10,7 @@ interface GoogleMapViewProps {
   center?: { lat: number; lng: number };
   zoom?: number;
   onZoomChange?: (zoom: number) => void;
+  selectedState?: string | null;
 }
 
 const mapContainerStyle = {
@@ -18,6 +18,25 @@ const mapContainerStyle = {
   height: '650px',
   borderRadius: '0.5rem',
   overflow: 'hidden',
+};
+
+// Define a mapping of states to their approximate center coordinates
+const stateCoordinates: Record<string, { lat: number; lng: number; zoom: number }> = {
+  "Arizona": { lat: 34.0489, lng: -111.0937, zoom: 6 },
+  "California": { lat: 36.7783, lng: -119.4179, zoom: 5.5 },
+  "Colorado": { lat: 39.5501, lng: -105.7821, zoom: 6 },
+  "Texas": { lat: 31.9686, lng: -99.9018, zoom: 5.5 },
+  "Florida": { lat: 27.6648, lng: -81.5158, zoom: 6 },
+  "Nevada": { lat: 38.8026, lng: -116.4194, zoom: 6 },
+  "Georgia": { lat: 32.1656, lng: -82.9001, zoom: 6 },
+  "Iowa": { lat: 41.8780, lng: -93.0977, zoom: 6 },
+  "Minnesota": { lat: 46.7296, lng: -94.6859, zoom: 6 },
+  "Wisconsin": { lat: 44.2563, lng: -89.6385, zoom: 6 },
+  "Oregon": { lat: 43.8041, lng: -120.5542, zoom: 6 },
+  "Pennsylvania": { lat: 41.2033, lng: -77.1945, zoom: 6 },
+  "New York": { lat: 43.2994, lng: -74.2179, zoom: 6 },
+  "Ohio": { lat: 40.4173, lng: -82.9071, zoom: 6 },
+  "Indiana": { lat: 40.2672, lng: -86.1349, zoom: 6 }
 };
 
 const GoogleMapView: React.FC<GoogleMapViewProps> = ({
@@ -28,16 +47,43 @@ const GoogleMapView: React.FC<GoogleMapViewProps> = ({
   center = { lat: 39.8283, lng: -98.5795 }, // Center of the US
   zoom = 4,
   onZoomChange,
+  selectedState
 }) => {
   const [selectedFacility, setSelectedFacility] = useState<StorageFacility | null>(null);
   const [mapRef, setMapRef] = useState<google.maps.Map | null>(null);
   const [currentZoom, setCurrentZoom] = useState<number>(zoom);
   const infoWindowRef = useRef<google.maps.InfoWindow | null>(null);
+  const [mapCenter, setMapCenter] = useState(center);
+  const [mapZoom, setMapZoom] = useState(zoom);
 
   // Load Google Maps script
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: apiKey,
   });
+
+  // Update map center and zoom when selectedState changes
+  useEffect(() => {
+    if (selectedState && stateCoordinates[selectedState]) {
+      const stateLocation = stateCoordinates[selectedState];
+      setMapCenter({ lat: stateLocation.lat, lng: stateLocation.lng });
+      setMapZoom(stateLocation.zoom);
+      
+      // If map is already loaded, pan to the new location
+      if (mapRef) {
+        mapRef.panTo({ lat: stateLocation.lat, lng: stateLocation.lng });
+        mapRef.setZoom(stateLocation.zoom);
+      }
+    } else if (!selectedState) {
+      // Reset to default view when no state is selected
+      setMapCenter(center);
+      setMapZoom(zoom);
+      
+      if (mapRef) {
+        mapRef.panTo(center);
+        mapRef.setZoom(zoom);
+      }
+    }
+  }, [selectedState, mapRef]);
 
   // Function to handle marker click
   const handleMarkerClick = (facility: StorageFacility) => {
@@ -109,10 +155,16 @@ const GoogleMapView: React.FC<GoogleMapViewProps> = ({
   // Handle map load event
   const onMapLoad = (map: google.maps.Map) => {
     setMapRef(map);
-    setCurrentZoom(map.getZoom() || zoom);
+    setCurrentZoom(map.getZoom() || mapZoom);
     
-    // Create bounds to fit all markers
-    if (facilities.length > 0) {
+    // Use state-specific coordinates if a state is selected
+    if (selectedState && stateCoordinates[selectedState]) {
+      const stateLocation = stateCoordinates[selectedState];
+      map.panTo({ lat: stateLocation.lat, lng: stateLocation.lng });
+      map.setZoom(stateLocation.zoom);
+    }
+    // Otherwise, if facilities are present, fit the map to them
+    else if (facilities.length > 0) {
       const bounds = new google.maps.LatLngBounds();
       
       facilities.forEach(facility => {
@@ -188,8 +240,8 @@ const GoogleMapView: React.FC<GoogleMapViewProps> = ({
     <div className="w-full h-[650px] relative rounded-lg overflow-hidden">
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
-        center={center}
-        zoom={zoom}
+        center={mapCenter}
+        zoom={mapZoom}
         onLoad={onMapLoad}
         onClick={onMapClick}
         options={{

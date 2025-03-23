@@ -12,6 +12,7 @@ interface GoogleMapFacilitiesViewProps {
   onMarkerClick?: (facilityId: string) => void;
   apiKey?: string;
   className?: string;
+  selectedState?: string | null;
 }
 
 const GoogleMapFacilitiesView: React.FC<GoogleMapFacilitiesViewProps> = ({
@@ -19,7 +20,8 @@ const GoogleMapFacilitiesView: React.FC<GoogleMapFacilitiesViewProps> = ({
   recentlyViewedFacilityIds,
   onMarkerClick,
   apiKey,
-  className = ''
+  className = '',
+  selectedState
 }) => {
   const [currentZoom, setCurrentZoom] = useState<number>(4);
   
@@ -58,6 +60,7 @@ const GoogleMapFacilitiesView: React.FC<GoogleMapFacilitiesViewProps> = ({
             apiKey={apiKey}
             zoom={currentZoom}
             onZoomChange={handleZoomChange}
+            selectedState={selectedState}
           />
           
           {missingCoordinates > 0 && (

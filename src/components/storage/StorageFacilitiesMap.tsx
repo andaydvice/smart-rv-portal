@@ -200,6 +200,7 @@ const StorageFacilitiesMap = () => {
             recentlyViewedFacilityIds={recentlyViewedIds}
             onMarkerClick={onMarkerClick}
             apiKey={googleMapsKey}
+            selectedState={filters.selectedState}
           />
         ) : (
           <Card className="h-[650px] bg-[#080F1F] relative overflow-visible border-gray-700 map-container">
