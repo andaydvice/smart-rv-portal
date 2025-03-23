@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Card } from '@/components/ui/card';
 import { StorageFacility } from '../types';
 import { useGoogleMapSetup } from './hooks/useGoogleMapSetup';
-import '../../styles/google-maps.css';
+import '@/styles/google-maps.css';
 
 interface GoogleMapViewProps {
   facilities: StorageFacility[];
