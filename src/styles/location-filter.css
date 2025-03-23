@@ -65,3 +65,37 @@
   border-radius: 4px;
   background-color: rgba(91, 155, 213, 0.2);
 }
+
+/* Orange marker styles */
+.orange-marker {
+  background-color: #F97316 !important;
+  border: 2px solid white;
+  box-shadow: 0 0 10px rgba(249, 115, 22, 0.6);
+  z-index: 10;
+}
+
+/* Standard marker styles */
+.standard-marker {
+  background-color: #5B9BD5 !important;
+  border: 2px solid white;
+  box-shadow: 0 0 10px rgba(59, 130, 246, 0.6);
+  z-index: 5;
+}
+
+/* Custom info window styling */
+.gm-style .gm-style-iw-c {
+  background-color: #151A22 !important;
+  color: white !important;
+  border-radius: 8px !important;
+  padding: 12px !important;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3) !important;
+}
+
+.gm-style .gm-style-iw-d {
+  overflow: hidden !important;
+  max-height: none !important;
+}
+
+.gm-style .gm-style-iw-t::after {
+  background: #151A22 !important;
+}
