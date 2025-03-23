@@ -42,11 +42,24 @@ const MapDisplayArea: React.FC<MapDisplayAreaProps> = ({
   highlightedFacility,
   filters
 }) => {
-  // Log API key state for debugging
+  // Log API key state and facilities count for debugging
   useEffect(() => {
     console.log('MapDisplayArea - Google Maps API Key available:', !!googleMapsApiKey);
     console.log('MapDisplayArea - Mapbox Token available:', !!mapboxApiKey);
-  }, [googleMapsApiKey, mapboxApiKey]);
+    console.log('MapDisplayArea - Facilities count:', facilities?.length || 0);
+    
+    // Check for any facilities with invalid coordinates
+    if (facilities && facilities.length > 0) {
+      const invalidCoords = facilities.filter(f => 
+        !f.latitude || !f.longitude || 
+        isNaN(Number(f.latitude)) || isNaN(Number(f.longitude))
+      ).length;
+      
+      if (invalidCoords > 0) {
+        console.warn(`${invalidCoords} facilities have invalid coordinates`);
+      }
+    }
+  }, [googleMapsApiKey, mapboxApiKey, facilities]);
 
   const handleMapLoad = (map: google.maps.Map | mapboxgl.Map) => {
     console.log('Map loaded successfully');
@@ -56,13 +69,14 @@ const MapDisplayArea: React.FC<MapDisplayAreaProps> = ({
     
     // Force visibility of markers after a brief delay
     setTimeout(() => {
-      const markers = document.querySelectorAll('.gm-style [title], .gm-style-pbc [title], .mapbox-marker');
+      const markers = document.querySelectorAll('.gm-style [title], .gm-style-pbc [title], .mapbox-marker, .custom-marker, .mapboxgl-marker');
       console.log(`Found ${markers.length} markers to enhance visibility`);
       
       markers.forEach(marker => {
         if (marker instanceof HTMLElement) {
           marker.style.visibility = 'visible';
           marker.style.opacity = '1';
+          marker.style.display = 'block';
         }
       });
       
@@ -115,6 +129,12 @@ const MapDisplayArea: React.FC<MapDisplayAreaProps> = ({
           onZoomChange={(zoom) => console.log('Zoom changed:', zoom)}
         />
       )}
+      
+      {/* Show map debug info */}
+      <div className="absolute bottom-2 left-2 bg-black/60 text-white text-xs px-2 py-1 rounded">
+        {facilities?.length || 0} facilities loaded | 
+        Map type: {useMapbox ? 'Mapbox' : 'Google Maps'}
+      </div>
     </Card>
   );
 };

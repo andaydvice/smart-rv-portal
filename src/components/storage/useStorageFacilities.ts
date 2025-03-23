@@ -1,3 +1,4 @@
+
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
 import { StorageFacility, FilterState, DatabaseStorageFacility } from './types';
@@ -69,104 +70,114 @@ export const useStorageFacilities = (filters: FilterState) => {
   const { data: facilities, isLoading, error } = useQuery({
     queryKey: ['storage-facilities', filters],
     queryFn: async () => {
-      let query = supabase
-        .from('storage_facilities')
-        .select<string, DatabaseStorageFacility>(`
-          id,
-          name,
-          address,
-          city,
-          state,
-          latitude,
-          longitude,
-          features,
-          price_range,
-          contact_phone,
-          contact_email,
-          avg_rating,
-          review_count
-        `);
-      
-      // Log query params for debugging
-      console.log('Query params:', {
-        selectedState: filters.selectedState,
-        priceRange: filters.priceRange
-      });
-      
-      // Apply state filter if selected
-      if (filters.selectedState) {
-        // Create an array of possible state values (full name and abbreviation)
-        const stateValues = [];
-        const stateAbbr = getStateAbbreviation(filters.selectedState);
+      try {
+        // Create base query
+        let query = supabase
+          .from('storage_facilities')
+          .select<string, DatabaseStorageFacility>(`
+            id,
+            name,
+            address,
+            city,
+            state,
+            latitude,
+            longitude,
+            features,
+            price_range,
+            contact_phone,
+            contact_email,
+            avg_rating,
+            review_count
+          `);
         
-        // Add both the full name and abbreviation to handle inconsistencies in the database
-        stateValues.push(filters.selectedState, stateAbbr);
+        // Log query params for debugging
+        console.log('Query params:', {
+          selectedState: filters.selectedState,
+          priceRange: filters.priceRange
+        });
         
-        // Log state values for debugging
-        console.log('Filtering by states:', stateValues);
+        // Apply state filter if selected
+        if (filters.selectedState) {
+          // Create an array of possible state values (full name and abbreviation)
+          const stateValues = [];
+          const stateAbbr = getStateAbbreviation(filters.selectedState);
+          
+          // Add both the full name and abbreviation to handle inconsistencies in the database
+          stateValues.push(filters.selectedState, stateAbbr);
+          
+          // Log state values for debugging
+          console.log('Filtering by states:', stateValues);
+          
+          // Use in operator to match any of the possible state values
+          query = query.in('state', stateValues);
+        }
+
+        const { data, error } = await query;
         
-        // Use in operator to match any of the possible state values
-        query = query.in('state', stateValues);
+        if (error) {
+          console.error('Supabase query error:', error);
+          throw error;
+        }
+        
+        if (!data) return [];
+
+        // Log states returned for debugging
+        console.log('Total facilities fetched:', data.length);
+        if (data.length > 0) {
+          console.log('States returned:', [...new Set(data.map(f => f.state))].sort());
+        }
+        
+        // Map database results to StorageFacility objects
+        const mappedFacilities = data.map(facility => {
+          // Normalize state names for display
+          const normalizedState = normalizeStateName(facility.state);
+                
+          // Store original coordinates
+          const latitude = facility.latitude;
+          const longitude = facility.longitude;
+                
+          // Return storage facility
+          return {
+            id: facility.id,
+            name: facility.name,
+            address: facility.address,
+            city: facility.city,
+            state: normalizedState,
+            latitude: latitude,
+            longitude: longitude,
+            features: {
+              indoor: Boolean(facility.features?.indoor),
+              climate_controlled: Boolean(facility.features?.climate_controlled),
+              "24h_access": Boolean(facility.features?.["24h_access"]),
+              security_system: Boolean(facility.features?.security_system),
+              vehicle_washing: Boolean(facility.features?.vehicle_washing)
+            },
+            price_range: {
+              min: Number(facility.price_range?.min) || 0,
+              max: Number(facility.price_range?.max) || 0,
+              currency: facility.price_range?.currency || 'USD'
+            },
+            contact_phone: facility.contact_phone,
+            contact_email: facility.contact_email,
+            avg_rating: facility.avg_rating,
+            review_count: facility.review_count,
+            verified_fields: {
+              features: false,
+              price_range: false,
+              contact_info: false,
+              location: false,
+              business_hours: false
+            }
+          };
+        });
+
+        // Log the obtained facilities with their coordinates
+        console.log(`Mapped ${mappedFacilities.length} facilities with coordinates`);
+        return mappedFacilities;
+      } catch (error) {
+        console.error('Error fetching storage facilities:', error);
+        return [];
       }
-
-      const { data, error } = await query;
-      
-      if (error) {
-        console.error('Supabase query error:', error);
-        throw error;
-      }
-      
-      if (!data) return [];
-
-      // Log states returned for debugging
-      console.log('Total facilities fetched:', data.length);
-      console.log('States returned:', [...new Set(data.map(f => f.state))].sort());
-      
-      // Map database results to StorageFacility objects
-      const mappedFacilities = data.map(facility => {
-        // Normalize state names for display
-        const normalizedState = normalizeStateName(facility.state);
-               
-        // Keep original coordinates as-is without validation
-        const latitude = facility.latitude;
-        const longitude = facility.longitude;
-               
-        // Return storage facility with original coordinates
-        return {
-          id: facility.id,
-          name: facility.name,
-          address: facility.address,
-          city: facility.city,
-          state: normalizedState,
-          latitude: latitude,
-          longitude: longitude,
-          features: {
-            indoor: Boolean(facility.features?.indoor),
-            climate_controlled: Boolean(facility.features?.climate_controlled),
-            "24h_access": Boolean(facility.features?.["24h_access"]),
-            security_system: Boolean(facility.features?.security_system),
-            vehicle_washing: Boolean(facility.features?.vehicle_washing)
-          },
-          price_range: {
-            min: Number(facility.price_range?.min) || 0,
-            max: Number(facility.price_range?.max) || 0,
-            currency: facility.price_range?.currency || 'USD'
-          },
-          contact_phone: facility.contact_phone,
-          contact_email: facility.contact_email,
-          avg_rating: facility.avg_rating,
-          review_count: facility.review_count,
-          verified_fields: {
-            features: false,
-            price_range: false,
-            contact_info: false,
-            location: false,
-            business_hours: false
-          }
-        };
-      });
-
-      return mappedFacilities;
     },
     refetchOnWindowFocus: false,
     staleTime: 300000 // 5 minute cache
@@ -178,6 +189,9 @@ export const useStorageFacilities = (filters: FilterState) => {
     
     return facilityMaxPrice >= filters.priceRange[0] && facilityMaxPrice <= filters.priceRange[1];
   });
+  
+  // Add additional logging to track filtered results
+  console.log(`Filtered facilities: ${filteredFacilities?.length || 0} out of ${facilities?.length || 0}`);
   
   return { 
     facilities: filteredFacilities,
