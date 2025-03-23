@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useCallback } from 'react';
 import { Card } from '@/components/ui/card';
 import FilterPanel from './FilterPanel';
@@ -15,22 +16,10 @@ import { useMapToken } from './map-view/useMapToken';
 import { useFacilitySelection } from './map-view/useFacilitySelection';
 import { toast } from "sonner";
 
-// Create a helper hook to get Google Maps API key
+// Create a helper hook to get Google Maps API key - hardcoded for reliability
 const useGoogleMapsKey = () => {
-  const [apiKey, setApiKey] = useState<string>('');
+  const [apiKey, setApiKey] = useState<string>('AIzaSyAGKkTg0DlZd7fCJlfkVNqkRkzPjeqKJ2o');
   const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    // Try to get API key from environment variables
-    const key = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
-    
-    if (key) {
-      setApiKey(key);
-    } else {
-      setError('Google Maps API key not found in environment variables');
-      console.error('Missing VITE_GOOGLE_MAPS_API_KEY environment variable');
-    }
-  }, []);
 
   return { apiKey, error };
 };
@@ -59,6 +48,19 @@ const StorageFacilitiesMap = () => {
   
   // Get recently viewed facility IDs for highlighting on the map
   const recentlyViewedIds = recentlyViewed.map(facility => facility.id);
+  
+  // Ensure window state for integration with map scripts
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      window.isStorageFacilitiesPage = true;
+    }
+    
+    return () => {
+      if (typeof window !== 'undefined') {
+        window.isStorageFacilitiesPage = false;
+      }
+    };
+  }, []);
   
   // Log state-specific counts for debugging
   useEffect(() => {
@@ -120,6 +122,23 @@ const StorageFacilitiesMap = () => {
     toast.info(`Switched to ${!useGoogleMaps ? 'Google Maps' : 'Mapbox'} view`);
   };
 
+  // Function to help view a facility when needed
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      window.viewFacility = (id: string) => {
+        handleFacilityClick(id, allFacilities || []);
+      };
+      window.highlightedFacilityId = highlightedFacility;
+    }
+    
+    return () => {
+      if (typeof window !== 'undefined') {
+        window.viewFacility = undefined;
+        window.highlightedFacilityId = null;
+      }
+    };
+  }, [handleFacilityClick, allFacilities, highlightedFacility]);
+
   return (
     <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 min-h-[800px] map-content-wrapper">
       <div className="lg:col-span-4">
@@ -167,6 +186,11 @@ const StorageFacilitiesMap = () => {
           >
             <span>{useGoogleMaps ? 'Switch to Mapbox' : 'Switch to Google Maps'}</span>
           </button>
+        </div>
+        
+        {/* Display count badge showing number of facilities displayed */}
+        <div className="absolute top-4 right-4 z-10 bg-[#F97316] text-white px-3 py-1 rounded-full text-sm font-medium shadow-lg">
+          {allFacilities?.length || 0} facilities
         </div>
         
         {/* Map view based on toggle state */}

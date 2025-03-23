@@ -41,9 +41,41 @@ export function createPopupElement(
  * Creates the HTML content for a facility popup
  */
 export function createPopupContent(facility: StorageFacility): string {
+  // Create rating stars
+  const createRatingStars = () => {
+    if (!facility.avg_rating) return '';
+    
+    const rating = Number(facility.avg_rating);
+    let starsHtml = '<div class="flex items-center mt-2 mb-1">';
+    
+    // Add filled or empty stars
+    for (let i = 1; i <= 5; i++) {
+      const starColor = i <= Math.round(rating) ? 'text-yellow-400' : 'text-gray-600';
+      starsHtml += `<span class="${starColor} text-sm">★</span>`;
+    }
+    
+    // Add numeric rating
+    starsHtml += `<span class="text-xs ml-1 text-gray-400">(${rating.toFixed(1)})</span>`;
+    
+    // Add review count if available
+    if (facility.review_count && facility.review_count > 0) {
+      starsHtml += `
+        <span class="text-xs text-gray-400 ml-2">
+          ${facility.review_count} ${facility.review_count === 1 ? 'review' : 'reviews'}
+        </span>
+      `;
+    }
+    
+    starsHtml += '</div>';
+    return starsHtml;
+  };
+  
   return `
     <div class="p-3 overflow-visible">
       <h3 class="text-lg font-semibold mb-1 text-[#60A5FA]">${facility.name}</h3>
+      
+      ${createRatingStars()}
+      
       <div class="space-y-1 text-sm">
         <p>${facility.address}</p>
         <p>${facility.city}, ${facility.state}</p>

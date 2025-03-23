@@ -17,9 +17,35 @@ export const createPopupHTML = (facility: StorageFacility) => {
     .filter(([_, value]) => value)
     .map(([key, _]) => featureLabels[key as keyof typeof featureLabels]);
 
+  // Create rating stars display
+  const renderRatingStars = () => {
+    if (!facility.avg_rating) return '';
+    
+    const rating = Number(facility.avg_rating);
+    let starsHtml = '<div class="flex items-center gap-1 mt-1 mb-2">';
+    
+    // Add filled or empty stars
+    for (let i = 1; i <= 5; i++) {
+      const starColor = i <= Math.round(rating) ? 'text-yellow-400' : 'text-gray-500';
+      starsHtml += `<span class="${starColor}">★</span>`;
+    }
+    
+    // Add numeric rating and review count
+    starsHtml += `<span class="text-xs ml-1 text-gray-300">(${rating.toFixed(1)})</span>`;
+    
+    if (facility.review_count && facility.review_count > 0) {
+      starsHtml += `<span class="text-xs text-gray-400 ml-2">${facility.review_count} ${facility.review_count === 1 ? 'review' : 'reviews'}</span>`;
+    }
+    
+    starsHtml += '</div>';
+    return starsHtml;
+  };
+
   return `
     <div class="p-4 bg-[#131a2a] text-white rounded-lg w-full facility-popup-content" data-facility-id="${facility.id}">
-      <h3 class="font-bold text-lg mb-2 text-[#60A5FA] truncate">${facility.name}</h3>
+      <h3 class="font-bold text-lg mb-1 text-[#60A5FA] truncate">${facility.name}</h3>
+      
+      ${renderRatingStars()}
       
       <div class="space-y-2 mb-3">
         <div class="flex items-start gap-2 text-gray-300">

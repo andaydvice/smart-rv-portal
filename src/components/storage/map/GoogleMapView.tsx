@@ -1,3 +1,4 @@
+
 import React, { useRef, useEffect, useState } from 'react';
 import { GoogleMap, useLoadScript, MarkerF, InfoWindowF } from '@react-google-maps/api';
 import { StorageFacility } from '../types';
@@ -23,7 +24,7 @@ const GoogleMapView: React.FC<GoogleMapViewProps> = ({
   facilities,
   recentlyViewedFacilityIds,
   onMarkerClick,
-  apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY || '',
+  apiKey = 'AIzaSyAGKkTg0DlZd7fCJlfkVNqkRkzPjeqKJ2o', // Use the provided API key as default
   center = { lat: 39.8283, lng: -98.5795 }, // Center of the US
   zoom = 4,
   onZoomChange,
@@ -163,6 +164,26 @@ const GoogleMapView: React.FC<GoogleMapViewProps> = ({
     );
   }
 
+  // Helper function to render ratings stars
+  const renderRatingStars = (rating?: number) => {
+    if (!rating) return null;
+    
+    const stars = [];
+    for (let i = 1; i <= 5; i++) {
+      const starClass = i <= Math.round(rating) ? 'text-yellow-400' : 'text-gray-300';
+      stars.push(
+        <span key={i} className={`${starClass} text-lg`}>★</span>
+      );
+    }
+    
+    return (
+      <div className="flex items-center mt-1">
+        {stars}
+        <span className="ml-1 text-sm">({rating.toFixed(1)})</span>
+      </div>
+    );
+  };
+
   return (
     <div className="w-full h-[650px] relative rounded-lg overflow-hidden">
       <GoogleMap
@@ -237,6 +258,17 @@ const GoogleMapView: React.FC<GoogleMapViewProps> = ({
           >
             <div className="facility-info-window max-w-[300px]">
               <h3 className="text-lg font-semibold mb-1 text-[#5B9BD5]">{selectedFacility.name}</h3>
+              
+              {/* Rating display */}
+              {renderRatingStars(selectedFacility.avg_rating as number)}
+              
+              {/* Review count */}
+              {selectedFacility.review_count && selectedFacility.review_count > 0 && (
+                <p className="text-xs text-gray-500 mb-2">
+                  {selectedFacility.review_count} {selectedFacility.review_count === 1 ? 'review' : 'reviews'}
+                </p>
+              )}
+              
               <div className="space-y-1 text-sm">
                 <p>{selectedFacility.address}</p>
                 <p>{selectedFacility.city}, {selectedFacility.state}</p>
