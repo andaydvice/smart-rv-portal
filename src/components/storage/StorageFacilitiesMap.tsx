@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useCallback } from 'react';
 import { toast } from "sonner";
 import { Card } from '@/components/ui/card';
@@ -15,8 +14,8 @@ import MapNavigationHint from './map-controls/MapNavigationHint';
 import MapViewToggle from './map-controls/MapViewToggle';
 import MapDisplayArea from './map-display/MapDisplayArea';
 import { useGoogleMapsKey } from './hooks/useGoogleMapsKey';
-import '../styles/location-filter.css';
-import '../styles/google-maps.css'; // Add Google Maps specific styles
+import '@/styles/location-filter.css';
+import '@/styles/google-maps.css'; // Add Google Maps specific styles
 
 const StorageFacilitiesMap = () => {
   const [filters, setFilters] = useState<FilterState>({
