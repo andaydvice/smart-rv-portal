@@ -72,26 +72,6 @@ const MarkerCreator: React.FC<MarkerCreatorProps> = ({
           
           // Remove any view details buttons
           removeViewDetailsButtons();
-          
-          // Force star rating visibility in all popups
-          document.querySelectorAll('.star-rating-container, .facility-popup-content .flex').forEach(container => {
-            if (container instanceof HTMLElement) {
-              container.style.display = 'flex';
-              container.style.visibility = 'visible';
-              container.style.opacity = '1';
-              
-              // Force each star to be visible
-              container.querySelectorAll('svg').forEach(star => {
-                if (star instanceof SVGElement) {
-                  star.style.display = 'inline-block';
-                  star.style.visibility = 'visible';
-                  star.style.opacity = '1';
-                  star.style.width = '20px';
-                  star.style.height = '20px';
-                }
-              });
-            }
-          });
         }
       }, 500);
     };

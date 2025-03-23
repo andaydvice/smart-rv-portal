@@ -1,97 +1,90 @@
 
-/* Google Maps specific styles to ensure visibility */
-.gm-style img,
-.gm-style-pbc img,
-.gm-style div[role="button"],
-.gm-style-pbc div[role="button"],
-.gm-style [title],
-.gm-style-pbc [title] {
-  visibility: visible !important;
-  opacity: 1 !important;
-  display: block !important;
-  transform: none !important;
-}
+/* Google Maps Specific Styling */
 
-/* Ensure markers are visible */
-.gm-style div[style*="z-index: 1000"],
-.gm-style div[style*="z-index: 1001"] {
-  visibility: visible !important;
-  opacity: 1 !important;
-  display: block !important;
-}
-
-/* Fix marker positioning */
-.gm-style .gm-style-iw {
-  color: white !important;
-  background-color: #151A22 !important;
-  padding: 8px !important;
+/* Info Window Styling */
+.gm-style .gm-style-iw-c {
+  padding: 12px !important;
   border-radius: 8px !important;
-  max-width: 250px !important;
+  background-color: #fff !important;
+  box-shadow: 0 2px 7px 1px rgba(0, 0, 0, 0.3) !important;
+  max-width: 320px !important;
+  min-width: 240px !important;
 }
 
-/* Force marker visibility */
-@keyframes forceMarkerVisibility {
-  0%, 100% { opacity: 1; }
-}
-
-.gm-style div[role="img"],
-.gm-style span[role="img"],
-.gm-style img[src*="marker"],
-.gm-style div[title],
-.gm-style div[aria-label] {
-  animation: forceMarkerVisibility 0.1s linear forwards !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-  display: block !important;
-  z-index: 9999 !important;
-}
-
-/* Ensure map loads properly */
-.gm-style {
-  position: absolute !important;
-  left: 0 !important;
-  top: 0 !important;
-  width: 100% !important;
-  height: 100% !important;
-  z-index: 1 !important;
-}
-
-/* Fix map container */
-#map-container, .map-container, [class*="map-container"] {
-  position: relative !important;
-  width: 100% !important;
-  height: 100% !important;
+.gm-style .gm-style-iw-d {
   overflow: hidden !important;
+  max-width: 100% !important;
 }
 
-/* Fix marker icons */
-.gm-style img[src*="marker"] {
-  display: block !important;
-  visibility: visible !important;
-  opacity: 1 !important;
+/* Remove default InfoWindow arrows */
+.gm-style .gm-style-iw-tc {
+  display: none !important;
 }
 
-/* Ensure Google attribution remains visible */
-.gm-style .gmnoprint,
-.gm-style .gm-style-cc {
-  display: block !important;
-  visibility: visible !important;
-  z-index: 1000 !important;
+/* Custom InfoWindow style */
+.facility-info-window {
+  font-family: system-ui, -apple-system, sans-serif;
+  color: #333;
+  line-height: 1.5;
 }
 
-/* Force correct marker colors */
-.gm-style .marker-orange,
-.gm-style img[src*="orange"] {
-  filter: none !important;
+.facility-info-window h3 {
+  margin-top: 0;
+  margin-bottom: 8px;
+  font-weight: 600;
 }
 
-/* Add specific classes to ensure map elements are visible */
-.map-marker,
-.map-icon,
-[class*="map-marker"],
-[class*="map-icon"] {
-  visibility: visible !important;
-  opacity: 1 !important;
-  display: block !important;
-  z-index: 9999 !important;
+/* Make sure popup height adjusts properly */
+.gm-style-iw.gm-style-iw-c {
+  max-height: none !important;
+}
+
+.gm-style-iw-d {
+  max-height: none !important;
+}
+
+/* Make sure popups are fully visible */
+.gm-style .gm-style-iw-c {
+  transform: translate(-50%, -100%) !important;
+  margin-bottom: 10px;
+}
+
+/* Custom map marker animation */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.highlighted-marker {
+  animation: pulse 1.5s infinite ease-in-out;
+}
+
+/* Bottom facility indicator */
+.facility-indicator {
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Zoom-based marker styles */
+.zoomed-marker {
+  background-color: #10B981 !important;
+  box-shadow: 0 0 15px rgba(16, 185, 129, 0.6) !important;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Custom marker hover effect */
+.custom-marker:hover {
+  transform: scale(1.1) translate(-45%, -45%) !important;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5) !important;
+  z-index: 10000 !important;
 }

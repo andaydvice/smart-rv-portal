@@ -1,21 +1,39 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { toast } from "sonner";
 import { Card } from '@/components/ui/card';
 import FilterPanel from './FilterPanel';
 import { FilterState } from './types';
+import { Alert, AlertDescription } from '@/components/ui/alert';
+import { AlertCircle } from 'lucide-react';
 import { useStorageFacilities } from './useStorageFacilities';
 import { useRecentlyViewed } from './useRecentlyViewed';
-import { useMapToken } from './map-view/useMapToken';
-import { useFacilitySelection } from './map-view/useFacilitySelection';
+import MapView from './MapView';
+import GoogleMapFacilitiesView from './GoogleMapFacilitiesView';
+import RecentlyViewedFacilities from './RecentlyViewedFacilities';
 import LoadingStateDisplay from './map-view/LoadingStateDisplay';
 import FacilityList from './map-view/FacilityList';
-import RecentlyViewedFacilities from './RecentlyViewedFacilities';
-import MapNavigationHint from './map-controls/MapNavigationHint';
-import MapViewToggle from './map-controls/MapViewToggle';
-import MapDisplayArea from './map-display/MapDisplayArea';
-import { useGoogleMapsKey } from './hooks/useGoogleMapsKey';
-import '@/styles/location-filter.css';
-import '@/styles/google-maps.css'; // Add Google Maps specific styles
+import { useMapToken } from './map-view/useMapToken';
+import { useFacilitySelection } from './map-view/useFacilitySelection';
+import { toast } from "sonner";
+
+// Create a helper hook to get Google Maps API key
+const useGoogleMapsKey = () => {
+  const [apiKey, setApiKey] = useState<string>('');
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    // Try to get API key from environment variables
+    const key = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
+    
+    if (key) {
+      setApiKey(key);
+    } else {
+      setError('Google Maps API key not found in environment variables');
+      console.error('Missing VITE_GOOGLE_MAPS_API_KEY environment variable');
+    }
+  }, []);
+
+  return { apiKey, error };
+};
 
 const StorageFacilitiesMap = () => {
   const [filters, setFilters] = useState<FilterState>({
@@ -33,19 +51,11 @@ const StorageFacilitiesMap = () => {
 
   // State to toggle between map views
   const [useGoogleMaps, setUseGoogleMaps] = useState<boolean>(false);
-  const [showFilteredLocations, setShowFilteredLocations] = useState<boolean>(false);
 
   const { facilities: allFacilities, isLoading, error, maxPrice } = useStorageFacilities(filters);
   const { recentlyViewed, addToRecentlyViewed } = useRecentlyViewed();
   const { mapToken, mapTokenError } = useMapToken();
   const { apiKey: googleMapsKey, error: googleMapsError } = useGoogleMapsKey();
-  
-  // Log important values for debugging
-  useEffect(() => {
-    console.log('Google Maps API Key available:', !!googleMapsKey);
-    console.log('Mapbox Token available:', !!mapToken);
-    console.log('Facilities loaded:', allFacilities?.length || 0);
-  }, [googleMapsKey, mapToken, allFacilities]);
   
   // Get recently viewed facility IDs for highlighting on the map
   const recentlyViewedIds = recentlyViewed.map(facility => facility.id);
@@ -78,34 +88,13 @@ const StorageFacilitiesMap = () => {
   
   const handleFilterChange = useCallback((newFilters: FilterState) => {
     console.log('Filter changed:', newFilters);
-    
-    // Save current filter state to compare later
-    const currentState = filters.selectedState;
-    const newState = newFilters.selectedState;
-    
     setFilters(prevFilters => {
       if (JSON.stringify(prevFilters) === JSON.stringify(newFilters)) {
         return prevFilters;
       }
       return newFilters;
     });
-    
-    // Show a notification for state changes to help users understand what's happening
-    if (currentState !== newState) {
-      if (newState) {
-        toast.info(`Showing facilities in ${newState}`);
-      } else {
-        toast.info('Showing facilities in all states');
-      }
-      
-      // If using Google Maps when changing state, alert user about marker visibility
-      if (useGoogleMaps) {
-        setTimeout(() => {
-          toast.info('Refreshing map markers...', { duration: 2000 });
-        }, 500);
-      }
-    }
-  }, [filters.selectedState, useGoogleMaps]);
+  }, []);
   
   // Reset highlight when filter changes
   useEffect(() => {
@@ -127,30 +116,8 @@ const StorageFacilitiesMap = () => {
 
   // Toggle map view
   const toggleMapView = () => {
-    if (showFilteredLocations) {
-      setShowFilteredLocations(false);
-      return;
-    }
-    
     setUseGoogleMaps(prev => !prev);
     toast.info(`Switched to ${!useGoogleMaps ? 'Google Maps' : 'Mapbox'} view`);
-    
-    // Force reload markers if switching to Google Maps
-    if (!useGoogleMaps) {
-      setTimeout(() => {
-        // This delay gives the component time to update before showing toast
-        toast.info('Loading map markers...', { duration: 2000 });
-      }, 100);
-    }
-  };
-
-  // Toggle filtered location demo
-  const toggleFilteredLocations = () => {
-    setShowFilteredLocations(prev => !prev);
-    if (!showFilteredLocations) {
-      setUseGoogleMaps(false);
-    }
-    toast.info(showFilteredLocations ? 'Switched to standard view' : 'Viewing filtered locations demo');
   };
 
   return (
@@ -178,34 +145,58 @@ const StorageFacilitiesMap = () => {
       </div>
       
       <div className="lg:col-span-8 flex flex-col space-y-4">
-        {/* Navigation hint and map toggle buttons */}
+        {/* Navigation hint and map toggle button */}
         <div className="flex justify-between items-center">
-          <MapNavigationHint />
-          <MapViewToggle 
-            showFilteredLocations={showFilteredLocations}
-            useGoogleMaps={useGoogleMaps}
-            onToggleFilteredLocations={toggleFilteredLocations}
-            onToggleMapView={toggleMapView}
-          />
+          <div className="text-white bg-[#F97316] px-3 py-2 rounded-md text-sm shadow-md border-2 border-white/20 animate-pulse font-medium flex items-center gap-2 max-w-[280px]">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-move shrink-0">
+              <polyline points="5 9 2 12 5 15" />
+              <polyline points="9 5 12 2 15 5" />
+              <polyline points="15 19 12 22 9 19" />
+              <polyline points="19 9 22 12 19 15" />
+              <line x1="2" y1="12" x2="22" y2="12" />
+              <line x1="12" y1="2" x2="12" y2="22" />
+            </svg>
+            <span className="leading-snug">
+              If the location details are cut off,<br/>
+              move the map with your browser
+            </span>
+          </div>
+          <button 
+            onClick={toggleMapView} 
+            className="bg-[#151A22] hover:bg-[#1F2937] text-white px-3 py-1.5 rounded-md text-sm flex items-center gap-1.5 transition-colors"
+          >
+            <span>{useGoogleMaps ? 'Switch to Mapbox' : 'Switch to Google Maps'}</span>
+          </button>
         </div>
         
-        {/* Map display with the properly typed props */}
-        <MapDisplayArea 
-          facilities={allFacilities || []}
-          isLoading={isLoading}
-          recentlyViewedFacilityIds={recentlyViewedIds}
-          onMarkerClick={onMarkerClick}
-          useMapbox={!useGoogleMaps && !showFilteredLocations}
-          googleMapsApiKey={googleMapsKey}
-          mapboxApiKey={mapToken}
-          showFilteredLocations={showFilteredLocations}
-          useGoogleMaps={useGoogleMaps}
-          allFacilities={allFacilities || []}
-          mapToken={mapToken}
-          mapTokenError={mapTokenError}
-          highlightedFacility={highlightedFacility}
-          filters={filters}
-        />
+        {/* Map view based on toggle state */}
+        {useGoogleMaps ? (
+          <GoogleMapFacilitiesView
+            facilities={allFacilities || []}
+            recentlyViewedFacilityIds={recentlyViewedIds}
+            onMarkerClick={onMarkerClick}
+            apiKey={googleMapsKey}
+          />
+        ) : (
+          <Card className="h-[650px] bg-[#080F1F] relative overflow-visible border-gray-700 map-container">
+            {(!mapToken) ? (
+              <Alert variant="destructive" className="m-4">
+                <AlertCircle className="h-4 w-4" />
+                <AlertDescription>
+                  {mapTokenError || 'Map configuration not loaded'}
+                </AlertDescription>
+              </Alert>
+            ) : (
+              <MapView
+                mapToken={mapToken}
+                facilities={allFacilities || []}
+                highlightedFacility={highlightedFacility}
+                onMarkerClick={onMarkerClick}
+                selectedState={filters.selectedState}
+              />
+            )}
+          </Card>
+        )}
         
         <RecentlyViewedFacilities 
           facilities={recentlyViewed}

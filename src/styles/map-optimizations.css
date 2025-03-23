@@ -1,4 +1,3 @@
-
 /* Fixes for Mapbox popups */
 .mapboxgl-popup {
   z-index: 1000 !important;
@@ -189,51 +188,4 @@ body .mapboxgl-map .mapboxgl-popup {
 /* Hide any coordinate information */
 .mapboxgl-popup-content div:not(.facility-popup-content) {
   display: none !important;
-}
-
-/* Fix for star ratings in popups */
-.facility-popup-content .flex svg,
-.facility-popup-content svg.star-icon,
-.facility-popup-content .star-rating-container svg,
-.star-icon,
-.facility-popup-content svg {
-  display: inline-block !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-  width: 20px !important;
-  height: 20px !important;
-  pointer-events: auto !important;
-}
-
-/* Make star container visible */
-.facility-popup-content .flex,
-.facility-popup-content .star-rating-container,
-.star-rating-container {
-  display: flex !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-  margin-bottom: 16px !important;
-  pointer-events: auto !important;
-  z-index: 10001 !important;
-}
-
-/* Add more specificity for star icons */
-body .mapboxgl-map .mapboxgl-popup .mapboxgl-popup-content .facility-popup-content .star-icon,
-body .mapboxgl-map .mapboxgl-popup .mapboxgl-popup-content .facility-popup-content .star-rating-container svg {
-  display: inline-block !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-  width: 20px !important;
-  height: 20px !important;
-  pointer-events: auto !important;
-}
-
-/* Extra strong selector for star container */
-body .mapboxgl-map .mapboxgl-popup .mapboxgl-popup-content .facility-popup-content .star-rating-container {
-  display: flex !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-  margin-bottom: 16px !important;
-  align-items: center !important;
-  gap: 4px !important;
 }

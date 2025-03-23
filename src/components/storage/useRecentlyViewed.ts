@@ -27,8 +27,6 @@ export const useRecentlyViewed = () => {
 
   // Add a facility to recently viewed list
   const addToRecentlyViewed = (facility: StorageFacility) => {
-    if (!facility) return; // Guard against null or undefined
-    
     setRecentlyViewed(prev => {
       // Remove the facility if it already exists in the list
       const filtered = prev.filter(item => item.id !== facility.id);
@@ -53,14 +51,8 @@ export const useRecentlyViewed = () => {
     localStorage.removeItem(STORAGE_KEY);
   };
 
-  // Get only the IDs of recently viewed facilities
-  const getRecentlyViewedIds = (): string[] => {
-    return recentlyViewed.map(facility => facility.id);
-  };
-
   return {
     recentlyViewed,
-    recentlyViewedIds: getRecentlyViewedIds(),
     addToRecentlyViewed,
     clearRecentlyViewed
   };

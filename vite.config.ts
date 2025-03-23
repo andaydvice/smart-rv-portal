@@ -75,8 +75,6 @@ export default defineConfig(({ mode }) => ({
   // Make environment variables available to the application
   define: {
     // This ensures process.env is not used directly
-    'process.env': {},
-    // Securely inject the Google Maps API key as an environment variable
-    'import.meta.env.VITE_GOOGLE_MAPS_API_KEY': JSON.stringify('AIzaSyAGKkTg0DlZd7fCJlfkVNqkRkzPjeqKJ2o')
+    'process.env': {}
   }
 }));

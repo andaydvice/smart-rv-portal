@@ -1,308 +1,297 @@
-
-import React, { useEffect, useRef, useState } from 'react';
-import { Card } from '@/components/ui/card';
+import React, { useRef, useEffect, useState } from 'react';
+import { GoogleMap, useLoadScript, MarkerF, InfoWindowF } from '@react-google-maps/api';
 import { StorageFacility } from '../types';
-import { useGoogleMapSetup } from './hooks/useGoogleMapSetup';
-import '@/styles/google-maps.css';
 
 interface GoogleMapViewProps {
   facilities: StorageFacility[];
   recentlyViewedFacilityIds: string[];
   onMarkerClick?: (facilityId: string) => void;
   apiKey?: string;
-  onMapLoad?: (map: google.maps.Map) => void;
+  center?: { lat: number; lng: number };
   zoom?: number;
   onZoomChange?: (zoom: number) => void;
 }
+
+const mapContainerStyle = {
+  width: '100%',
+  height: '650px',
+  borderRadius: '0.5rem',
+  overflow: 'hidden',
+};
 
 const GoogleMapView: React.FC<GoogleMapViewProps> = ({
   facilities,
   recentlyViewedFacilityIds,
   onMarkerClick,
-  apiKey,
-  onMapLoad,
-  zoom: initialZoom = 4,
-  onZoomChange
+  apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY || '',
+  center = { lat: 39.8283, lng: -98.5795 }, // Center of the US
+  zoom = 4,
+  onZoomChange,
 }) => {
-  const mapRef = useRef<HTMLDivElement>(null);
-  const [map, setMap] = useState<google.maps.Map | null>(null);
-  const [markers, setMarkers] = useState<google.maps.Marker[]>([]);
-  const [isScriptLoaded, setIsScriptLoaded] = useState(false);
-  
-  // Set up the map
-  const { currentZoom, onMapLoad: setupMapLoad } = useGoogleMapSetup(map, facilities);
-  
-  // When zoom changes, call the onZoomChange callback
-  useEffect(() => {
-    if (onZoomChange && currentZoom) {
-      onZoomChange(currentZoom);
-    }
-  }, [currentZoom, onZoomChange]);
-  
+  const [selectedFacility, setSelectedFacility] = useState<StorageFacility | null>(null);
+  const [mapRef, setMapRef] = useState<google.maps.Map | null>(null);
+  const [currentZoom, setCurrentZoom] = useState<number>(zoom);
+  const infoWindowRef = useRef<google.maps.InfoWindow | null>(null);
+
   // Load Google Maps script
-  useEffect(() => {
-    if (!apiKey || !mapRef.current || isScriptLoaded) return;
+  const { isLoaded, loadError } = useLoadScript({
+    googleMapsApiKey: apiKey,
+  });
+
+  // Function to handle marker click
+  const handleMarkerClick = (facility: StorageFacility) => {
+    setSelectedFacility(facility);
     
-    console.log('Loading Google Maps script with API key');
-    
-    // Check if the script is already loaded
-    const existingScript = document.querySelector('script[src*="maps.googleapis.com/maps/api"]');
-    if (existingScript) {
-      console.log('Google Maps script already exists, not loading again');
-      setIsScriptLoaded(true);
-      return;
+    // Call the onMarkerClick callback if provided
+    if (onMarkerClick) {
+      onMarkerClick(facility.id);
     }
+
+    // If we have a map reference, adjust the center to show the info window properly
+    if (mapRef) {
+      const position = { lat: Number(facility.latitude), lng: Number(facility.longitude) };
+      mapRef.panTo(position);
+      
+      // Add slight offset to ensure infowindow is fully visible
+      setTimeout(() => {
+        if (mapRef) {
+          const currentCenter = mapRef.getCenter()?.toJSON();
+          if (currentCenter) {
+            mapRef.panTo({
+              lat: currentCenter.lat - 0.015, // Slight offset upward
+              lng: currentCenter.lng,
+            });
+          }
+        }
+      }, 50);
+    }
+  };
+
+  // Track zoom level changes
+  useEffect(() => {
+    if (!mapRef) return;
     
-    // Define a global callback function before loading the script
-    window.initGoogleMap = () => {
-      console.log('Google Maps script loaded via callback');
-      setIsScriptLoaded(true);
-    };
-    
-    // Load the Google Maps script
-    const googleMapsScript = document.createElement('script');
-    googleMapsScript.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places&callback=initGoogleMap`;
-    googleMapsScript.async = true;
-    googleMapsScript.defer = true;
-    
-    // Handle script load error
-    googleMapsScript.onerror = () => {
-      console.error('Failed to load Google Maps script');
-    };
-    
-    document.head.appendChild(googleMapsScript);
+    const listener = mapRef.addListener('zoom_changed', () => {
+      if (mapRef) {
+        const newZoom = mapRef.getZoom() || zoom;
+        setCurrentZoom(newZoom);
+        
+        // Call the onZoomChange callback if provided
+        if (onZoomChange) {
+          onZoomChange(newZoom);
+        }
+      }
+    });
     
     return () => {
-      // Clean up
-      if (window.initGoogleMap) {
-        delete window.initGoogleMap;
-      }
-      if (googleMapsScript.parentNode) {
-        googleMapsScript.parentNode.removeChild(googleMapsScript);
-      }
-      setIsScriptLoaded(false);
-      setMap(null);
-      setMarkers([]);
+      google.maps.event.removeListener(listener);
     };
-  }, [apiKey, mapRef.current]);
+  }, [mapRef, zoom, onZoomChange]);
+
+  // Check if a facility is in the recently viewed list
+  const isRecentlyViewed = (facilityId: string) => {
+    return recentlyViewedFacilityIds.includes(facilityId);
+  };
   
-  // Initialize the map once script is loaded
-  useEffect(() => {
-    if (!isScriptLoaded || !mapRef.current || map) return;
+  // Determine marker color based on status and zoom level
+  const getMarkerColor = (facilityId: string, isSelected: boolean) => {
+    // If selected, always green
+    if (isSelected) return '#10B981';
+    // If recently viewed, always highlight color
+    if (isRecentlyViewed(facilityId)) return '#10B981';
+    // If current zoom is close-up (> 10), show green
+    if (currentZoom > 10) return '#10B981';
+    // Default color
+    return '#F97316';
+  };
+
+  // Handle map load event
+  const onMapLoad = (map: google.maps.Map) => {
+    setMapRef(map);
+    setCurrentZoom(map.getZoom() || zoom);
     
-    console.log('Initializing Google Map after script load');
-    
-    try {
-      // Create a new map
-      const newMap = new google.maps.Map(mapRef.current, {
-        center: { lat: 39.8283, lng: -98.5795 }, // Center of US
-        zoom: initialZoom,
-        mapTypeId: google.maps.MapTypeId.ROADMAP,
-        mapTypeControl: false,
-        fullscreenControl: false,
-        streetViewControl: false,
-        styles: [
-          {
-            featureType: 'all',
-            elementType: 'geometry',
-            stylers: [{ color: '#131a2a' }]
-          },
-          {
-            featureType: 'all',
-            elementType: 'labels.text.fill',
-            stylers: [{ color: '#ffffff' }]
-          },
-          {
-            featureType: 'all',
-            elementType: 'labels.text.stroke',
-            stylers: [{ color: '#000000' }, { lightness: 13 }]
-          },
-          {
-            featureType: 'water',
-            elementType: 'geometry',
-            stylers: [{ color: '#0e1626' }]
-          }
-        ]
-      });
-      
-      setMap(newMap);
-      
-      // Listen for zoom changes
-      if (onZoomChange) {
-        newMap.addListener('zoom_changed', () => {
-          onZoomChange(newMap.getZoom());
-        });
-      }
-      
-      // Call the map load handler from props
-      if (onMapLoad) {
-        onMapLoad(newMap);
-      }
-      
-      // Also call the internal map setup handler
-      setupMapLoad(newMap);
-      
-      console.log('Google Map initialized successfully');
-    } catch (error) {
-      console.error('Error initializing Google Map:', error);
-    }
-  }, [isScriptLoaded, initialZoom, onMapLoad, setupMapLoad, onZoomChange]);
-  
-  // Add markers
-  useEffect(() => {
-    if (!map || !facilities.length) return;
-    
-    console.log(`Creating ${facilities.length} markers on Google Map`);
-    
-    // Clear existing markers
-    markers.forEach(marker => marker.setMap(null));
-    
-    // Create new markers
-    const newMarkers = facilities.map(facility => {
-      if (!facility.latitude || !facility.longitude) return null;
-      
-      const isRecentlyViewed = recentlyViewedFacilityIds.includes(facility.id);
-      
-      try {
-        // Create marker
-        const marker = new google.maps.Marker({
-          position: {
-            lat: Number(facility.latitude),
-            lng: Number(facility.longitude)
-          },
-          map,
-          title: facility.name,
-          icon: {
-            path: google.maps.SymbolPath.CIRCLE,
-            fillColor: isRecentlyViewed ? '#F59E0B' : '#5B9BD5',
-            fillOpacity: 1,
-            strokeColor: '#FFFFFF',
-            strokeWeight: 2,
-            scale: isRecentlyViewed ? 8 : 7
-          },
-          optimized: false, // Important for marker visibility
-          visible: true, // Explicitly set visible
-          zIndex: isRecentlyViewed ? 1000 : 999, // Higher z-index for better visibility
-          clickable: true
-        });
-        
-        // Add click handler
-        marker.addListener('click', () => {
-          if (onMarkerClick) {
-            onMarkerClick(facility.id);
-          }
-          
-          // Create info window
-          const infoWindow = new google.maps.InfoWindow({
-            content: `
-              <div style="color: #fff; background-color: #151A22; padding: 8px; border-radius: 4px; max-width: 200px;">
-                <h3 style="margin: 0 0 4px 0; font-size: 14px;">${facility.name}</h3>
-                <p style="margin: 0; font-size: 12px;">${facility.city}, ${facility.state}</p>
-              </div>
-            `,
-            pixelOffset: new google.maps.Size(0, -30)
-          });
-          
-          infoWindow.open(map, marker);
-        });
-        
-        return marker;
-      } catch (error) {
-        console.error(`Error creating marker for facility ${facility.id}:`, error);
-        return null;
-      }
-    }).filter(Boolean) as google.maps.Marker[];
-    
-    setMarkers(newMarkers);
-    
-    // Fit bounds if we have markers
-    if (newMarkers.length > 1) {
+    // Create bounds to fit all markers
+    if (facilities.length > 0) {
       const bounds = new google.maps.LatLngBounds();
-      newMarkers.forEach(marker => {
-        bounds.extend(marker.getPosition()!);
+      
+      facilities.forEach(facility => {
+        bounds.extend({
+          lat: Number(facility.latitude),
+          lng: Number(facility.longitude),
+        });
       });
       
-      // Fix padding format
+      // Adjust the bounds fitting to avoid zooming too far in for single markers
       map.fitBounds(bounds, {
-        top: 50,
-        right: 50,
-        bottom: 50,
+        top: 50, 
+        right: 50, 
+        bottom: 50, 
         left: 50
       });
+      
+      // Limit the maximum zoom level
+      const listener = google.maps.event.addListener(map, 'idle', () => {
+        if (map.getZoom() && map.getZoom() > 15) {
+          map.setZoom(15);
+        }
+        google.maps.event.removeListener(listener);
+      });
     }
-    
-    // Load the marker visibility fix script
-    loadMarkerVisibilityFixScript();
-    
-    // Force marker visibility
-    forceMarkersVisible();
-    
-  }, [facilities, map, onMarkerClick, recentlyViewedFacilityIds]);
-  
-  // Helper function to load the marker visibility fix script
-  const loadMarkerVisibilityFixScript = () => {
-    if (document.getElementById('google-markers-fix-script')) return;
-    
-    const script = document.createElement('script');
-    script.id = 'google-markers-fix-script';
-    script.src = '/googleMarkersVisibilityFix.js';
-    script.async = true;
-    document.body.appendChild(script);
-    
-    console.log('Loaded Google Maps marker visibility fix script');
   };
-  
-  // Helper function to force markers to be visible
-  const forceMarkersVisible = () => {
-    console.log('Forcing Google Map markers to be visible');
-    
-    // Force visibility through direct DOM manipulation
-    setTimeout(() => {
-      console.log('Applying marker visibility fixes');
-      
-      // Target all potential marker elements
-      const markerElements = document.querySelectorAll('.gm-style [title], .gm-style-pbc [title], .gm-style img[src*="marker"], .gm-style div[role="button"]');
-      markerElements.forEach(marker => {
-        if (marker instanceof HTMLElement) {
-          marker.style.visibility = 'visible';
-          marker.style.opacity = '1';
-          marker.style.display = 'block';
-          marker.style.zIndex = '9999';
-        }
-      });
-      
-      // Also invoke any custom marker fix script if it exists
-      if (typeof window.forceGoogleMarkersVisible === 'function') {
-        window.forceGoogleMarkersVisible();
-      }
-    }, 500);
-    
-    // Run again after a longer delay to catch late-loaded markers
-    setTimeout(() => {
-      const markerElements = document.querySelectorAll('.gm-style [title], .gm-style-pbc [title], .gm-style img[src*="marker"]');
-      console.log(`Found ${markerElements.length} Google Map markers to force visible`);
-      
-      markerElements.forEach(marker => {
-        if (marker instanceof HTMLElement) {
-          marker.style.visibility = 'visible';
-          marker.style.opacity = '1';
-          marker.style.display = 'block';
-          marker.style.zIndex = '9999';
-        }
-      });
-    }, 2000);
+
+  // Close info window when clicking on the map
+  const onMapClick = () => {
+    setSelectedFacility(null);
   };
-  
-  return (
-    <Card className="h-full bg-connectivity-darkBg relative overflow-hidden border-gray-700">
-      {!apiKey ? (
-        <div className="flex items-center justify-center h-full text-gray-400">
-          <p>Google Maps API key is required. Please provide a valid API key.</p>
+
+  if (loadError) {
+    return (
+      <div className="w-full h-full flex items-center justify-center bg-[#080F1F] text-white p-4 rounded-lg">
+        <p>Error loading Google Maps. Please check your API key.</p>
+      </div>
+    );
+  }
+
+  if (!isLoaded) {
+    return (
+      <div className="w-full h-[650px] flex items-center justify-center bg-[#080F1F] text-white rounded-lg">
+        <div className="text-center space-y-2">
+          <div className="w-10 h-10 border-t-2 border-r-2 border-[#5B9BD5] rounded-full animate-spin mx-auto"></div>
+          <p>Loading Map...</p>
         </div>
-      ) : (
-        <div ref={mapRef} className="w-full h-full" />
+      </div>
+    );
+  }
+
+  return (
+    <div className="w-full h-[650px] relative rounded-lg overflow-hidden">
+      <GoogleMap
+        mapContainerStyle={mapContainerStyle}
+        center={center}
+        zoom={zoom}
+        onLoad={onMapLoad}
+        onClick={onMapClick}
+        options={{
+          styles: [
+            {
+              featureType: 'all',
+              elementType: 'geometry',
+              stylers: [{ color: '#242f3e' }],
+            },
+            {
+              featureType: 'all',
+              elementType: 'labels.text.stroke',
+              stylers: [{ color: '#242f3e' }, { lightness: -80 }],
+            },
+            {
+              featureType: 'all',
+              elementType: 'labels.text.fill',
+              stylers: [{ color: '#746855' }, { lightness: 40 }],
+            },
+            {
+              featureType: 'water',
+              elementType: 'geometry',
+              stylers: [{ color: '#17263c' }],
+            },
+          ],
+          mapTypeControl: false,
+          streetViewControl: false,
+          fullscreenControl: true,
+          zoomControl: true,
+          maxZoom: 18,
+        }}
+      >
+        {/* Render Markers */}
+        {facilities.map((facility) => (
+          <MarkerF
+            key={`marker-${facility.id}`}
+            position={{
+              lat: Number(facility.latitude),
+              lng: Number(facility.longitude),
+            }}
+            onClick={() => handleMarkerClick(facility)}
+            icon={{
+              path: google.maps.SymbolPath.CIRCLE,
+              scale: isRecentlyViewed(facility.id) || selectedFacility?.id === facility.id || currentZoom > 10 ? 12 : 10,
+              fillColor: getMarkerColor(facility.id, selectedFacility?.id === facility.id),
+              fillOpacity: 1,
+              strokeColor: '#FFFFFF',
+              strokeWeight: 2,
+            }}
+            animation={google.maps.Animation.DROP}
+          />
+        ))}
+
+        {/* Info Window for Selected Facility */}
+        {selectedFacility && (
+          <InfoWindowF
+            position={{
+              lat: Number(selectedFacility.latitude),
+              lng: Number(selectedFacility.longitude),
+            }}
+            onCloseClick={() => setSelectedFacility(null)}
+            options={{
+              pixelOffset: new google.maps.Size(0, -30),
+              maxWidth: 320,
+            }}
+          >
+            <div className="facility-info-window max-w-[300px]">
+              <h3 className="text-lg font-semibold mb-1 text-[#5B9BD5]">{selectedFacility.name}</h3>
+              <div className="space-y-1 text-sm">
+                <p>{selectedFacility.address}</p>
+                <p>{selectedFacility.city}, {selectedFacility.state}</p>
+                {selectedFacility.price_range && (
+                  <p className="mt-2 font-semibold text-[#F97316]">
+                    Price: ${selectedFacility.price_range.min} - ${selectedFacility.price_range.max}
+                  </p>
+                )}
+                {selectedFacility.contact_phone && (
+                  <p className="mt-1">Phone: {selectedFacility.contact_phone}</p>
+                )}
+              </div>
+              
+              {selectedFacility.features && Object.values(selectedFacility.features).some(v => v) && (
+                <div className="mt-2 border-t border-gray-300 pt-2">
+                  <p className="text-xs text-gray-600 mb-1">Features:</p>
+                  <div className="flex flex-wrap gap-1">
+                    {selectedFacility.features.indoor && (
+                      <span className="text-xs bg-[#e0f2ff] text-[#4285F4] px-2 py-0.5 rounded">Indoor</span>
+                    )}
+                    {selectedFacility.features.climate_controlled && (
+                      <span className="text-xs bg-[#e0f2ff] text-[#4285F4] px-2 py-0.5 rounded">Climate Controlled</span>
+                    )}
+                    {selectedFacility.features["24h_access"] && (
+                      <span className="text-xs bg-[#e0f2ff] text-[#4285F4] px-2 py-0.5 rounded">24/7 Access</span>
+                    )}
+                    {selectedFacility.features.security_system && (
+                      <span className="text-xs bg-[#e0f2ff] text-[#4285F4] px-2 py-0.5 rounded">Security</span>
+                    )}
+                    {selectedFacility.features.vehicle_washing && (
+                      <span className="text-xs bg-[#e0f2ff] text-[#4285F4] px-2 py-0.5 rounded">Vehicle Washing</span>
+                    )}
+                  </div>
+                </div>
+              )}
+            </div>
+          </InfoWindowF>
+        )}
+      </GoogleMap>
+      
+      {/* Facility highlight indicators below map */}
+      {selectedFacility && (
+        <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-black/70 backdrop-blur-sm px-4 py-2 rounded-full z-10">
+          <div className="flex items-center space-x-2">
+            <div className={`w-3 h-3 rounded-full ${currentZoom > 10 ? 'bg-green-500' : isRecentlyViewed(selectedFacility.id) ? 'bg-green-500' : 'bg-orange-500'}`}></div>
+            <span className="text-white text-sm">{selectedFacility.name}</span>
+          </div>
+        </div>
       )}
-    </Card>
+      
+      {/* Zoom level indicator for debugging */}
+      <div className="absolute top-4 left-4 bg-black/60 text-white text-xs px-2 py-1 rounded z-10">
+        Zoom: {currentZoom.toFixed(1)}
+      </div>
+    </div>
   );
 };
 

@@ -1,4 +1,3 @@
-
 import mapboxgl from 'mapbox-gl';
 import { StorageFacility } from '../../types';
 import { createEdgeAwareClickHandler } from '@/utils/markers/forcing/preventEdgeCutoff';
@@ -59,38 +58,10 @@ export function createFacilityMarker(
     focusAfterOpen: false
   });
 
-  // Get rating and ensure it's between 1-5
-  const rating = facility.avg_rating ? Math.min(Math.max(Math.round(facility.avg_rating), 1), 5) : 0;
-  
-  // Create star rating HTML with improved styling
-  const starRatingHtml = `
-    <div class="star-rating-container flex items-center gap-1 mb-4">
-      ${Array.from({ length: 5 }, (_, i) => `
-        <svg 
-          xmlns="http://www.w3.org/2000/svg" 
-          width="20" 
-          height="20" 
-          viewBox="0 0 24 24" 
-          fill="${i < rating ? '#FBBF24' : 'none'}" 
-          stroke="${i < rating ? '#FBBF24' : '#6B7280'}" 
-          stroke-width="1.5" 
-          stroke-linecap="round" 
-          stroke-linejoin="round" 
-          class="star-icon"
-        >
-          <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
-        </svg>
-      `).join('')}
-    </div>
-  `;
-
-  // Set popup content with improved styling including star rating
+  // Set popup content with improved styling
   popup.setHTML(`
     <div class="facility-popup-content p-6 bg-[#131a2a] text-white" data-facility-id="${facility.id}">
       <h3 class="text-2xl font-semibold mb-2 text-[#60A5FA]">${facility.name}</h3>
-      
-      ${rating > 0 ? starRatingHtml : ''}
-      
       <p class="text-lg mb-1">${facility.address}</p>
       <p class="text-lg mb-4">${facility.city}, ${facility.state}</p>
       
@@ -169,16 +140,6 @@ export function createFacilityMarker(
               contentEl.style.width = 'auto';
               contentEl.style.maxWidth = '300px';
             }
-            
-            // Force star icons to be visible
-            const starIcons = popupEl.querySelectorAll('.star-icon');
-            starIcons.forEach(icon => {
-              if (icon instanceof SVGElement) {
-                icon.style.display = 'inline-block';
-                icon.style.visibility = 'visible';
-                icon.style.opacity = '1';
-              }
-            });
           }
         }, 50);
       }

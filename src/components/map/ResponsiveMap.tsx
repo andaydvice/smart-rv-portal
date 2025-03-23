@@ -2,8 +2,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
-import '@/styles/map-fixes.css';
-import '@/styles/marker-fix.css';
+import { enableEdgeAwareMarkers } from '@/utils/markers/forcing/edge-aware';
 
 interface MapData {
   features: Array<{
@@ -61,11 +60,10 @@ const ResponsiveMap: React.FC<ResponsiveMapProps> = ({
       setMapLoaded(true);
       console.log('Map loaded successfully');
       
-      // Load marker fix script
-      const markerFixScript = document.createElement('script');
-      markerFixScript.src = '/markerFix.js';
-      markerFixScript.async = true;
-      document.body.appendChild(markerFixScript);
+      // Enable edge-aware behavior for markers
+      if (map.current) {
+        enableEdgeAwareMarkers(map.current);
+      }
     });
 
     // Cleanup on unmount
@@ -91,18 +89,6 @@ const ResponsiveMap: React.FC<ResponsiveMapProps> = ({
       const markerElement = document.createElement('div');
       markerElement.className = 'custom-marker';
       markerElement.setAttribute('data-feature-id', id);
-      
-      // Style the marker directly
-      Object.assign(markerElement.style, {
-        width: '24px',
-        height: '24px',
-        backgroundColor: '#F97316',
-        borderRadius: '50%',
-        border: '2px solid white',
-        boxShadow: '0 0 10px rgba(0,0,0,0.5)',
-        cursor: 'pointer',
-        zIndex: '9999'
-      });
       
       // Create new marker
       const marker = new mapboxgl.Marker(markerElement)
