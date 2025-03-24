@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import MapLoadingProgress from './MapLoadingProgress';
+import { cn } from '@/lib/utils';
 
 interface InfiniteLoadingMapProps {
   mapToken: string;
@@ -42,26 +43,23 @@ const InfiniteLoadingMap: React.FC<InfiniteLoadingMapProps> = ({
       
       map.current = mapInstance;
       
-      // Track loading progress
+      // Track loading progress with more events
       let resourcesLoaded = 0;
       const totalResources = 20; // Arbitrary number for demonstration
       
-      // Simulate loading events
-      const intervalId = setInterval(() => {
-        resourcesLoaded++;
-        setLoadingPercent(Math.min((resourcesLoaded / totalResources) * 100, 95));
-        
-        if (resourcesLoaded >= totalResources) {
-          clearInterval(intervalId);
-        }
-      }, 300);
+      const loadEvents = ['styledata', 'sourcedata', 'dataloading', 'data', 'render'];
+      
+      // Listen to various events to track progress
+      loadEvents.forEach(eventName => {
+        mapInstance.on(eventName, () => {
+          resourcesLoaded++;
+          setLoadingPercent(Math.min((resourcesLoaded / totalResources) * 100, 95));
+        });
+      });
       
       // Map load events
       mapInstance.on('load', () => {
         console.log('Map loaded');
-        
-        // Clear any existing interval
-        clearInterval(intervalId);
         
         // After map loads, explicitly set loading to 100%
         setLoadingPercent(100);
@@ -73,6 +71,19 @@ const InfiniteLoadingMap: React.FC<InfiniteLoadingMapProps> = ({
         }, 800);
       });
       
+      // Force completion after timeout
+      const forceCompleteTimeout = setTimeout(() => {
+        if (loadingPercent < 100) {
+          console.log('Forcing load completion after timeout');
+          setLoadingPercent(100);
+          
+          setTimeout(() => {
+            setLoading(false);
+            if (onMapLoaded) onMapLoaded();
+          }, 500);
+        }
+      }, 8000);
+      
       // Add navigation controls
       mapInstance.addControl(
         new mapboxgl.NavigationControl(),
@@ -81,7 +92,7 @@ const InfiniteLoadingMap: React.FC<InfiniteLoadingMapProps> = ({
       
       // Clean up on unmount
       return () => {
-        clearInterval(intervalId);
+        clearTimeout(forceCompleteTimeout);
         if (map.current) {
           map.current.remove();
         }
@@ -103,6 +114,7 @@ const InfiniteLoadingMap: React.FC<InfiniteLoadingMapProps> = ({
         percentLoaded={loadingPercent} 
         showProgress={loading} 
         infiniteLoading={true}
+        forceComplete={true}
       />
     </div>
   );

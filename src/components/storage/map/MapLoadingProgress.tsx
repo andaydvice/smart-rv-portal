@@ -9,18 +9,30 @@ interface MapLoadingProgressProps {
   showProgress: boolean;
   className?: string;
   infiniteLoading?: boolean;
+  forceComplete?: boolean;
 }
 
 const MapLoadingProgress: React.FC<MapLoadingProgressProps> = ({
   percentLoaded,
   showProgress,
   className,
-  infiniteLoading = false
+  infiniteLoading = false,
+  forceComplete = false
 }) => {
   const [displayPercent, setDisplayPercent] = useState(0);
   
-  // Animate the progress when in infinite loading mode
+  // Ensure progress always reaches 100%
   useEffect(() => {
+    // If forceComplete is true, we guarantee the progress will reach 100%
+    if (forceComplete && percentLoaded >= 95) {
+      const timeout = setTimeout(() => {
+        setDisplayPercent(100);
+      }, 300);
+      
+      return () => clearTimeout(timeout);
+    }
+    
+    // Animate the progress when in infinite loading mode
     if (!infiniteLoading) {
       // Normal mode - directly display the provided percent
       setDisplayPercent(percentLoaded);
@@ -37,7 +49,7 @@ const MapLoadingProgress: React.FC<MapLoadingProgressProps> = ({
                          displayPercent < 90 ? 1 : 0.5;
         setDisplayPercent(prev => Math.min(95, prev + increment));
       }, 80); // Reduced from 100ms to 80ms for faster animation
-    } else if (percentLoaded >= 100) {
+    } else if (percentLoaded >= 100 || forceComplete) {
       // When signaled to complete, jump to 100%
       timeout = setTimeout(() => {
         setDisplayPercent(100);
@@ -47,7 +59,7 @@ const MapLoadingProgress: React.FC<MapLoadingProgressProps> = ({
     return () => {
       if (timeout) clearTimeout(timeout);
     };
-  }, [infiniteLoading, percentLoaded, displayPercent]);
+  }, [infiniteLoading, percentLoaded, displayPercent, forceComplete]);
   
   // Ensure percent is between 0-100
   const normalizedPercent = Math.min(100, Math.max(0, displayPercent));
@@ -57,6 +69,7 @@ const MapLoadingProgress: React.FC<MapLoadingProgressProps> = ({
   return (
     <div className={cn(
       "absolute inset-0 flex flex-col items-center justify-center bg-[#080F1F]/80 z-50 animate-fade-in",
+      displayPercent >= 100 ? "animate-fade-out" : "",
       className
     )}>
       <div className="flex flex-col items-center gap-6 max-w-xs w-full px-4">
