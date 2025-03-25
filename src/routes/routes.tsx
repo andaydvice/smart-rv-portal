@@ -61,6 +61,10 @@ export const routes: RouteObject[] = [
     element: <InternetConnectivity />,
   },
   {
+    path: '/features/connectivity',
+    element: <InternetConnectivity />,
+  },
+  {
     path: '/features/navigation-system',
     element: <NavigationSystem />,
   },

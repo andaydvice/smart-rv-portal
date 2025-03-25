@@ -21,7 +21,7 @@ const SmartFeaturesLinks = () => (
       <Settings className="h-4 w-4 text-[#D946EF]" />
       <span>Smart TV System</span>
     </NavLink>
-    <NavLink to="/features/connectivity" className="text-gray-300 hover:text-blue-400 transition-colors flex items-center gap-2">
+    <NavLink to="/features/internet-connectivity" className="text-gray-300 hover:text-blue-400 transition-colors flex items-center gap-2">
       <Wifi className="h-4 w-4 text-[#5B9BD5]" />
       <span>Internet Connectivity</span>
     </NavLink>

@@ -17,7 +17,7 @@ const CoreSystemsLinks = () => (
       <Settings className="h-4 w-4 text-[#8B5CF6]" />
       <span>Audio System</span>
     </NavLink>
-    <NavLink to="/features/connectivity" className="text-gray-300 hover:text-blue-400 transition-colors flex items-center gap-2">
+    <NavLink to="/features/internet-connectivity" className="text-gray-300 hover:text-blue-400 transition-colors flex items-center gap-2">
       <Settings className="h-4 w-4 text-[#10B981]" />
       <span>Internet Connectivity</span>
     </NavLink>
