@@ -1,3 +1,4 @@
+
 import React, { Suspense, useEffect } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import RouterProvider from './components/router/RouterProvider';
