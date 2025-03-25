@@ -1,3 +1,4 @@
+
 import { HeroSection } from "../components/voice-control/HeroSection";
 import { VoiceControlSystems } from "../components/voice-control/VoiceControlSystems";
 import { VoiceIntroSections } from "../components/voice-control/VoiceIntroSections";
@@ -5,13 +6,43 @@ import { BenefitsGrid } from "../components/voice-control/BenefitsGrid";
 import FeaturesSection from "../components/voice-control/FeaturesSection";
 import { Smartphone } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import Footer2 from "@/components/ui/Footer2";
+import Navbar from "@/components/Navbar";
 
 const VoiceControl = () => {
   console.log("VoiceControl component rendering");
   
+  // Define the footer links and socials for this page
+  const footerLinks = [
+    {
+      title: "Quick Links",
+      links: [
+        { text: "Home", href: "/" },
+        { text: "Features", href: "/features" },
+        { text: "Models", href: "/models" }
+      ]
+    },
+    {
+      title: "Technology",
+      links: [
+        { text: "Smart Technology", href: "/technology" },
+        { text: "Voice Control", href: "/voice-control" },
+        { text: "Documentation", href: "/documentation" }
+      ]
+    }
+  ];
+
+  const footerSocials = [
+    { icon: "facebook", href: "https://facebook.com" },
+    { icon: "twitter", href: "https://twitter.com" },
+    { icon: "instagram", href: "https://instagram.com" },
+    { icon: "youtube", href: "https://youtube.com" }
+  ];
+  
   return (
-    <div className="min-h-screen bg-[#0A0E17] text-white">
-      <main className="relative w-full">
+    <div className="min-h-screen flex flex-col bg-[#0A0E17] text-white">
+      <Navbar />
+      <main className="relative w-full flex-grow">
         <HeroSection />
         <h2 className="text-4xl font-bold text-white text-center mt-16 mb-8">
           Voice Control Transforms Your RV Experience
@@ -44,6 +75,11 @@ const VoiceControl = () => {
           </Button>
         </section>
       </main>
+      <Footer2 
+        links={footerLinks}
+        socials={footerSocials}
+        description="Control your Smart RV with just your voice - the future of recreational vehicles"
+      />
     </div>
   );
 };

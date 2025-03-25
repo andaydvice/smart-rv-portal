@@ -12,6 +12,7 @@ import "../styles/responsive-map.css"; // Add our new responsive map styles
 import "../styles/map-preview.css"; // Add our map preview styles
 import "../styles/map-loading.css"; // Add loading styles
 import "../styles/google-maps.css"; // Add Google Maps specific styles
+import Footer2 from "@/components/ui/Footer2";
 
 // Helper function to normalize state names consistently
 const normalizeStateName = (stateAbbr: string): string => {
@@ -68,49 +69,80 @@ export async function getStateCountsWithSQL() {
 }
 
 export default function StorageFacilities() {
+  // Define the footer links and socials for this page
+  const footerLinks = [
+    {
+      title: "Quick Links",
+      links: [
+        { text: "Home", href: "/" },
+        { text: "Features", href: "/features" },
+        { text: "Models", href: "/models" }
+      ]
+    },
+    {
+      title: "Tools",
+      links: [
+        { text: "Weather", href: "/rv-weather" },
+        { text: "Calculators", href: "/calculators" },
+        { text: "Documentation", href: "/documentation" }
+      ]
+    }
+  ];
+
+  const footerSocials = [
+    { icon: "facebook", href: "https://facebook.com" },
+    { icon: "twitter", href: "https://twitter.com" },
+    { icon: "instagram", href: "https://instagram.com" },
+    { icon: "youtube", href: "https://youtube.com" }
+  ];
+
   return (
-    <Layout>
+    <div className="min-h-screen flex flex-col w-full bg-[#080F1F] text-white">
       <Navbar />
-      <div className="min-h-screen w-full bg-[#080F1F] text-white">
-        {/* Hero Header with Image */}
-        <div className="relative w-full h-[300px]">
-          <img 
-            src="/lovable-uploads/e9503bf4-354a-4790-8a83-fefea32abc5b.png" 
-            alt="Indoor RV Storage Facility" 
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#080F1F] to-transparent">
-            <Container className="h-full flex flex-col justify-center items-center" fullWidth>
-              <div className="text-center max-w-3xl bg-black/40 backdrop-blur-sm p-6 rounded-lg">
-                <div className="flex items-center justify-center gap-2 mb-2">
-                  <Warehouse className="h-7 w-7 text-[#F97316]" />
-                  <h1 className="text-4xl md:text-5xl font-bold text-white">
-                    Indoor RV Storage Facilities
-                  </h1>
-                </div>
-                <p className="text-lg text-gray-300 max-w-2xl mx-auto">
-                  Find the perfect indoor storage solution for your RV across the USA including Oregon, Pennsylvania, New York, Minnesota, Iowa, Wisconsin, California, Arizona, Colorado, Texas, Florida, Georgia and Nevada.
-                </p>
+      {/* Hero Header with Image */}
+      <div className="relative w-full h-[300px]">
+        <img 
+          src="/lovable-uploads/e9503bf4-354a-4790-8a83-fefea32abc5b.png" 
+          alt="Indoor RV Storage Facility" 
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#080F1F] to-transparent">
+          <Container className="h-full flex flex-col justify-center items-center" fullWidth>
+            <div className="text-center max-w-3xl bg-black/40 backdrop-blur-sm p-6 rounded-lg">
+              <div className="flex items-center justify-center gap-2 mb-2">
+                <Warehouse className="h-7 w-7 text-[#F97316]" />
+                <h1 className="text-4xl md:text-5xl font-bold text-white">
+                  Indoor RV Storage Facilities
+                </h1>
               </div>
-            </Container>
-          </div>
-        </div>
-        
-        {/* Add clear spacing between hero and map content */}
-        <div className="h-6"></div>
-        
-        {/* Main map container */}
-        <Container fullWidth className="px-2 md:px-4 overflow-hidden max-w-[1920px] mx-auto">
-          <div className="py-4">
-            <StorageFacilitiesMap />
-          </div>
-        </Container>
-        
-        {/* Location Preview Section */}
-        <div className="mt-8 mb-12">
-          <LocationPreviewSection mapToken={import.meta.env.VITE_MAPBOX_TOKEN || ""} />
+              <p className="text-lg text-gray-300 max-w-2xl mx-auto">
+                Find the perfect indoor storage solution for your RV across the USA including Oregon, Pennsylvania, New York, Minnesota, Iowa, Wisconsin, California, Arizona, Colorado, Texas, Florida, Georgia and Nevada.
+              </p>
+            </div>
+          </Container>
         </div>
       </div>
-    </Layout>
+      
+      {/* Add clear spacing between hero and map content */}
+      <div className="h-6"></div>
+      
+      {/* Main map container */}
+      <Container fullWidth className="px-2 md:px-4 overflow-hidden max-w-[1920px] mx-auto flex-grow">
+        <div className="py-4">
+          <StorageFacilitiesMap />
+        </div>
+      </Container>
+      
+      {/* Location Preview Section */}
+      <div className="mt-8 mb-12">
+        <LocationPreviewSection mapToken={import.meta.env.VITE_MAPBOX_TOKEN || ""} />
+      </div>
+      
+      <Footer2 
+        links={footerLinks}
+        socials={footerSocials}
+        description="Find the perfect storage solution for your valuable RV investment"
+      />
+    </div>
   );
 }

@@ -1,8 +1,10 @@
+
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Cpu, Wifi, Battery, Shield, Smartphone, Bot, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
+import Footer2 from "@/components/ui/Footer2";
 
 const technologies = [
   {
@@ -44,14 +46,41 @@ const technologies = [
 ];
 
 const Technology = () => {
+  // Define the footer links and socials for this page
+  const footerLinks = [
+    {
+      title: "Quick Links",
+      links: [
+        { text: "Models", href: "/models" },
+        { text: "Features", href: "/features" },
+        { text: "Contact", href: "/contact" }
+      ]
+    },
+    {
+      title: "Technology",
+      links: [
+        { text: "AI Integration", href: "/technology#ai" },
+        { text: "Connected Systems", href: "/technology#connected" },
+        { text: "Security Suite", href: "/technology#security" }
+      ]
+    }
+  ];
+
+  const footerSocials = [
+    { icon: "facebook", href: "https://facebook.com" },
+    { icon: "twitter", href: "https://twitter.com" },
+    { icon: "instagram", href: "https://instagram.com" },
+    { icon: "youtube", href: "https://youtube.com" }
+  ];
+
   return (
-    <>
+    <div className="flex flex-col min-h-screen">
       <Navbar />
       <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6 }}
-        className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800"
+        className="flex-grow bg-gradient-to-b from-gray-900 to-gray-800"
       >
         <div className="max-w-7xl mx-auto px-4 py-20">
           <motion.div
@@ -109,7 +138,12 @@ const Technology = () => {
           </motion.div>
         </div>
       </motion.div>
-    </>
+      <Footer2 
+        links={footerLinks}
+        socials={footerSocials}
+        description="Innovating the future of recreational vehicles with cutting-edge technology"
+      />
+    </div>
   );
 };
 

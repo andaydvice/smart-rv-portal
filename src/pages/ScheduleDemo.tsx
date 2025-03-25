@@ -1,3 +1,4 @@
+
 import { motion } from "framer-motion";
 import { useState } from "react";
 import Navbar from "@/components/Navbar";
@@ -15,6 +16,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { useToast } from "@/components/ui/use-toast";
+import Footer2 from "@/components/ui/Footer2";
 
 const ScheduleDemo = () => {
   const [date, setDate] = useState<Date>();
@@ -26,6 +28,33 @@ const ScheduleDemo = () => {
     message: "",
   });
 
+  // Define the footer links and socials for this page
+  const footerLinks = [
+    {
+      title: "Quick Links",
+      links: [
+        { text: "Models", href: "/models" },
+        { text: "Features", href: "/features" },
+        { text: "Technology", href: "/technology" }
+      ]
+    },
+    {
+      title: "Support",
+      links: [
+        { text: "Contact", href: "/contact" },
+        { text: "Documentation", href: "/documentation" },
+        { text: "FAQs", href: "/faqs" }
+      ]
+    }
+  ];
+
+  const footerSocials = [
+    { icon: "facebook", href: "https://facebook.com" },
+    { icon: "twitter", href: "https://twitter.com" },
+    { icon: "instagram", href: "https://instagram.com" },
+    { icon: "youtube", href: "https://youtube.com" }
+  ];
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     toast({
@@ -36,23 +65,21 @@ const ScheduleDemo = () => {
   };
 
   return (
-    <>
+    <div className="flex flex-col min-h-screen bg-gradient-to-b from-gray-900 to-gray-800">
       <Navbar />
-      <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800">
-        <div className="relative">
-          <img
-            src="/lovable-uploads/5ad3c360-419f-4662-8c19-3d5a3cffe23f.png"
-            alt="Luxury Smart RV on mountain road"
-            className="w-full h-[500px] object-cover opacity-20"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent to-gray-900" />
-          <div className="absolute top-4 left-4">
-            <Link to="/">
-              <Button variant="ghost" className="text-white hover:text-white/80">
-                <ArrowLeft className="mr-2 h-4 w-4" /> Back to Home
-              </Button>
-            </Link>
-          </div>
+      <div className="relative flex-grow">
+        <img
+          src="/lovable-uploads/5ad3c360-419f-4662-8c19-3d5a3cffe23f.png"
+          alt="Luxury Smart RV on mountain road"
+          className="w-full h-[500px] object-cover opacity-20"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-gray-900" />
+        <div className="absolute top-4 left-4">
+          <Link to="/">
+            <Button variant="ghost" className="text-white hover:text-white/80">
+              <ArrowLeft className="mr-2 h-4 w-4" /> Back to Home
+            </Button>
+          </Link>
         </div>
 
         <div className="max-w-4xl mx-auto px-4 py-16 -mt-32 relative z-10">
@@ -174,7 +201,12 @@ const ScheduleDemo = () => {
           </motion.div>
         </div>
       </div>
-    </>
+      <Footer2 
+        links={footerLinks}
+        socials={footerSocials}
+        description="Experience our Smart RV technology firsthand with a personalized demo"
+      />
+    </div>
   );
 };
 

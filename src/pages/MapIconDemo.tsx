@@ -1,10 +1,10 @@
 
 import React from 'react';
-import Layout from "@/components/layout/Layout";
 import Navbar from "@/components/Navbar";
 import { Container } from "@/components/ui/container";
 import MapIconDemo from "@/components/storage/map/components/MapIconDemo";
 import MapWithResponsiveIcons from "@/components/storage/map/components/MapWithResponsiveIcons";
+import Footer2 from "@/components/ui/Footer2";
 
 // Sample data for the icons
 const demoIcons = [
@@ -90,10 +90,37 @@ const mapLocations = [
 ];
 
 const MapIconDemoPage = () => {
+  // Define the footer links and socials for this page
+  const footerLinks = [
+    {
+      title: "Quick Links",
+      links: [
+        { text: "Home", href: "/" },
+        { text: "Storage Facilities", href: "/storage-facilities" },
+        { text: "Weather", href: "/rv-weather" }
+      ]
+    },
+    {
+      title: "Support",
+      links: [
+        { text: "Documentation", href: "/documentation" },
+        { text: "Calculators", href: "/calculators" },
+        { text: "Contact", href: "/contact" }
+      ]
+    }
+  ];
+
+  const footerSocials = [
+    { icon: "facebook", href: "https://facebook.com" },
+    { icon: "twitter", href: "https://twitter.com" },
+    { icon: "instagram", href: "https://instagram.com" },
+    { icon: "youtube", href: "https://youtube.com" }
+  ];
+
   return (
-    <Layout>
+    <div className="flex flex-col min-h-screen">
       <Navbar />
-      <div className="min-h-screen w-full bg-[#080F1F] text-white">
+      <div className="min-h-screen w-full bg-[#080F1F] text-white flex-grow">
         <Container className="py-10" fullWidth>
           <h1 className="text-3xl font-bold mb-6 text-center">Interactive Map Icons</h1>
           <p className="text-center text-gray-300 max-w-2xl mx-auto mb-10">
@@ -122,7 +149,12 @@ const MapIconDemoPage = () => {
           </div>
         </Container>
       </div>
-    </Layout>
+      <Footer2 
+        links={footerLinks}
+        socials={footerSocials}
+        description="Interactive map components for improved RV location visualization"
+      />
+    </div>
   );
 };
 

@@ -1,3 +1,4 @@
+
 import { useParams, useNavigate } from 'react-router-dom';
 import { Helmet } from "react-helmet";
 import Navbar from "@/components/Navbar";
@@ -6,10 +7,38 @@ import { ChevronLeft } from "lucide-react";
 import { BlogPostHeader } from "@/components/blog/post/BlogPostHeader";
 import { BlogPostImage } from "@/components/blog/post/BlogPostImage";
 import { BlogPostContent } from "@/components/blog/post/BlogPostContent";
+import Footer2 from "@/components/ui/Footer2";
 
 const BlogPost = () => {
   const { slug } = useParams();
   const navigate = useNavigate();
+  
+  // Define the footer links and socials for this page
+  const footerLinks = [
+    {
+      title: "Quick Links",
+      links: [
+        { text: "Home", href: "/" },
+        { text: "Blog", href: "/blog" },
+        { text: "Features", href: "/features" }
+      ]
+    },
+    {
+      title: "Blog Categories",
+      links: [
+        { text: "Technology", href: "/blog?category=tech" },
+        { text: "Travel", href: "/blog?category=travel" },
+        { text: "All Posts", href: "/blog" }
+      ]
+    }
+  ];
+
+  const footerSocials = [
+    { icon: "facebook", href: "https://facebook.com" },
+    { icon: "twitter", href: "https://twitter.com" },
+    { icon: "instagram", href: "https://instagram.com" },
+    { icon: "youtube", href: "https://youtube.com" }
+  ];
   
   const blogPosts = [
     {
@@ -110,9 +139,9 @@ const BlogPost = () => {
 
   if (!post) {
     return (
-      <div className="min-h-screen bg-[#080F1F] text-white">
+      <div className="flex flex-col min-h-screen bg-[#080F1F] text-white">
         <Navbar />
-        <div className="container mx-auto px-4 py-8 pt-20">
+        <div className="container mx-auto px-4 py-8 pt-20 flex-grow">
           <h1>Blog post not found</h1>
           <Button
             variant="ghost"
@@ -123,6 +152,11 @@ const BlogPost = () => {
             Back to Blog
           </Button>
         </div>
+        <Footer2 
+          links={footerLinks}
+          socials={footerSocials}
+          description="Discover the latest in Smart RV technology and travel tips"
+        />
       </div>
     );
   }
@@ -130,14 +164,14 @@ const BlogPost = () => {
   console.log('BlogPost - Rendering post:', post.title);
   
   return (
-    <div className="min-h-screen bg-[#080F1F]">
+    <div className="flex flex-col min-h-screen bg-[#080F1F]">
       <Helmet>
         <title>{post.title} - Smart RV Blog</title>
         <meta name="description" content={post.description} />
       </Helmet>
       
       <Navbar />
-      <div className="container mx-auto px-4 py-8 space-y-8 pt-20">
+      <div className="container mx-auto px-4 py-8 space-y-8 pt-20 flex-grow">
         <BlogPostHeader />
         <BlogPostImage image={post.image} title={post.title} />
         <BlogPostContent 
@@ -147,6 +181,11 @@ const BlogPost = () => {
           content={post.content}
         />
       </div>
+      <Footer2 
+        links={footerLinks}
+        socials={footerSocials}
+        description="Discover the latest in Smart RV technology and travel tips"
+      />
     </div>
   );
 };

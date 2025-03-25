@@ -1,9 +1,11 @@
+
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Battery, Navigation, Shield, Wifi } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
+import Footer2 from "@/components/ui/Footer2";
 
 const models = [
   {
@@ -57,14 +59,41 @@ const Models = () => {
     window.location.href = '/models/compare';
   };
 
+  // Define the footer links and socials for this page
+  const footerLinks = [
+    {
+      title: "Quick Links",
+      links: [
+        { text: "Features", href: "/features" },
+        { text: "Technology", href: "/technology" },
+        { text: "Contact", href: "/contact" }
+      ]
+    },
+    {
+      title: "Model Types",
+      links: [
+        { text: "Luxury Class", href: "/models/luxury" },
+        { text: "Adventure Class", href: "/models/adventure" },
+        { text: "Compact Smart", href: "/models/compact" }
+      ]
+    }
+  ];
+
+  const footerSocials = [
+    { icon: "facebook", href: "https://facebook.com" },
+    { icon: "twitter", href: "https://twitter.com" },
+    { icon: "instagram", href: "https://instagram.com" },
+    { icon: "youtube", href: "https://youtube.com" }
+  ];
+
   return (
-    <>
+    <div className="flex flex-col min-h-screen">
       <Navbar />
       <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6 }}
-        className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 pt-16"
+        className="flex-grow bg-gradient-to-b from-gray-900 to-gray-800"
       >
         <div className="max-w-7xl mx-auto px-4 py-20">
           <motion.div
@@ -139,7 +168,12 @@ const Models = () => {
           </motion.div>
         </div>
       </motion.div>
-    </>
+      <Footer2 
+        links={footerLinks}
+        socials={footerSocials}
+        description="Explore our premium Smart RV lineup - from compact to luxury class models"
+      />
+    </div>
   );
 };
 

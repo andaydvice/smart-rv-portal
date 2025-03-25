@@ -1,3 +1,4 @@
+
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -6,10 +7,38 @@ import Navbar from "@/components/Navbar";
 import SmartSystemGuide from "@/components/troubleshooting/SmartSystemGuide";
 import ConnectivityGuide from "@/components/connectivity/ConnectivityGuide";
 import TroubleshootingFlowchart from "@/components/troubleshooting/TroubleshootingFlowchart";
+import Footer2 from "@/components/ui/Footer2";
 
 const Troubleshooting = () => {
+  // Define the footer links and socials for this page
+  const footerLinks = [
+    {
+      title: "Support",
+      links: [
+        { text: "Contact Us", href: "/contact" },
+        { text: "Documentation", href: "/documentation" },
+        { text: "FAQs", href: "/faqs" }
+      ]
+    },
+    {
+      title: "Resources",
+      links: [
+        { text: "Blog", href: "/blog" },
+        { text: "Videos", href: "/videos" },
+        { text: "Community", href: "/community" }
+      ]
+    }
+  ];
+
+  const footerSocials = [
+    { icon: "facebook", href: "https://facebook.com" },
+    { icon: "twitter", href: "https://twitter.com" },
+    { icon: "instagram", href: "https://instagram.com" },
+    { icon: "youtube", href: "https://youtube.com" }
+  ];
+
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800">
+    <div className="flex flex-col min-h-screen">
       <Navbar />
       {/* Hero Section */}
       <section className="relative">
@@ -37,7 +66,7 @@ const Troubleshooting = () => {
       </section>
 
       {/* Main Content */}
-      <section className="py-16 container mx-auto px-4">
+      <section className="py-16 container mx-auto px-4 flex-grow">
         <div className="max-w-4xl mx-auto space-y-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -80,6 +109,12 @@ const Troubleshooting = () => {
           </motion.div>
         </div>
       </section>
+      
+      <Footer2 
+        links={footerLinks}
+        socials={footerSocials}
+        description="Helping you troubleshoot and maximize your Smart RV experience"
+      />
     </div>
   );
 };

@@ -5,6 +5,7 @@ import { AuthForms } from '@/components/auth/AuthForms';
 import { useAuth } from '@/components/auth/AuthContext';
 import { Card } from '@/components/ui/card';
 import Navbar from '@/components/Navbar';
+import Footer2 from "@/components/ui/Footer2";
 
 const Auth = () => {
   const navigate = useNavigate();
@@ -14,6 +15,33 @@ const Auth = () => {
 
   const from = location.state?.from?.pathname || '/';
 
+  // Define the footer links and socials for this page
+  const footerLinks = [
+    {
+      title: "Quick Links",
+      links: [
+        { text: "Home", href: "/" },
+        { text: "Features", href: "/features" },
+        { text: "Models", href: "/models" }
+      ]
+    },
+    {
+      title: "Support",
+      links: [
+        { text: "Contact", href: "/contact" },
+        { text: "Documentation", href: "/documentation" },
+        { text: "FAQs", href: "/faqs" }
+      ]
+    }
+  ];
+
+  const footerSocials = [
+    { icon: "facebook", href: "https://facebook.com" },
+    { icon: "twitter", href: "https://twitter.com" },
+    { icon: "instagram", href: "https://instagram.com" },
+    { icon: "youtube", href: "https://youtube.com" }
+  ];
+
   useEffect(() => {
     if (user) {
       console.log("Auth page - Redirecting authenticated user to:", from); // Debug log
@@ -22,9 +50,9 @@ const Auth = () => {
   }, [user, navigate, from]);
 
   return (
-    <>
+    <div className="flex flex-col min-h-screen bg-[#080F1F]">
       <Navbar />
-      <div className="min-h-screen flex items-center justify-center px-4 py-12 bg-[#080F1F] pt-24">
+      <div className="flex-grow flex items-center justify-center px-4 py-12 pt-24">
         <div className="w-full max-w-4xl grid md:grid-cols-2 gap-8 items-start">
           <div className="space-y-6">
             <h1 className="text-3xl font-bold text-white">
@@ -65,7 +93,12 @@ const Auth = () => {
           </div>
         </div>
       </div>
-    </>
+      <Footer2 
+        links={footerLinks}
+        socials={footerSocials}
+        description="Join our community of Smart RV enthusiasts and unlock premium features"
+      />
+    </div>
   );
 };
 

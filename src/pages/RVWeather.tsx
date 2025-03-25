@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { AlertTriangle, LogIn } from "lucide-react";
 import { APIKeyInput } from "@/components/weather/APIKeyInput";
@@ -8,7 +9,7 @@ import LocationSearch from "@/components/weather/LocationSearch";
 import TripImpact from "@/components/weather/TripImpact";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import HeaderImage from "@/components/weather/HeaderImage";
-import Footer from "@/components/Footer";
+import Footer2 from "@/components/ui/Footer2";
 import WeatherDataProvider from "@/components/weather/WeatherDataProvider";
 import WeatherCardsSection from "@/components/weather/WeatherCardsSection";
 import { Location } from "@/types/weather";
@@ -22,6 +23,33 @@ const RVWeather = () => {
   const { user } = useAuth();
   const navigate = useNavigate();
 
+  // Define the footer links and socials for this page
+  const footerLinks = [
+    {
+      title: "Quick Links",
+      links: [
+        { text: "Home", href: "/" },
+        { text: "Features", href: "/features" },
+        { text: "Models", href: "/models" }
+      ]
+    },
+    {
+      title: "Tools",
+      links: [
+        { text: "Calculators", href: "/calculators" },
+        { text: "Storage", href: "/storage-facilities" },
+        { text: "Documentation", href: "/documentation" }
+      ]
+    }
+  ];
+
+  const footerSocials = [
+    { icon: "facebook", href: "https://facebook.com" },
+    { icon: "twitter", href: "https://twitter.com" },
+    { icon: "instagram", href: "https://instagram.com" },
+    { icon: "youtube", href: "https://youtube.com" }
+  ];
+
   console.log("[RVWeather] Rendering");
   const [currentLocation, setCurrentLocation] = useState<Location>(() => {
     const savedLocation = localStorage.getItem('weatherLocation');
@@ -34,11 +62,11 @@ const RVWeather = () => {
   const [imageLoaded, setImageLoaded] = useState(false);
 
   return (
-    <div className="min-h-screen w-full bg-gradient-dark text-white">
+    <div className="min-h-screen w-full flex flex-col bg-gradient-dark text-white">
       <Navbar />
       <HeaderImage />
       
-      <div className="container mx-auto px-4 py-8 max-w-7xl">
+      <div className="container mx-auto px-4 py-8 max-w-7xl flex-grow">
         <div className="mb-8">
           <APIKeyInput onKeySet={() => {
             const oneCallKey = localStorage.getItem("oneCallAPIKey");
@@ -134,7 +162,11 @@ const RVWeather = () => {
           </WeatherDataProvider>
         </div>
       </div>
-      <Footer />
+      <Footer2 
+        links={footerLinks}
+        socials={footerSocials}
+        description="Stay ahead of weather conditions for safer and smarter RV travel"
+      />
     </div>
   );
 };
