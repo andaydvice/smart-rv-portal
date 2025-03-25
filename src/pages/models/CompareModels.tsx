@@ -1,9 +1,11 @@
+
 import React, { useEffect } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Check, Minus } from "lucide-react";
+import Layout from "@/components/layout/Layout";
 import {
   Table,
   TableBody,
@@ -42,10 +44,10 @@ const CompareModels = () => {
   }, []);
 
   return (
-    <>
-      <Navbar />
-      <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 pt-20">
-        <div className="max-w-7xl mx-auto px-4 py-12">
+    <Layout>
+      <div className="bg-gradient-to-b from-gray-900 to-gray-800 pt-20">
+        <Navbar />
+        <div className="max-w-7xl mx-auto px-4 py-12 pb-24">
           <div className="mb-8">
             <Link 
               to="/models"
@@ -190,7 +192,7 @@ const CompareModels = () => {
           </div>
         </div>
       </div>
-    </>
+    </Layout>
   );
 };
 
