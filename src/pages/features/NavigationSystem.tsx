@@ -1,6 +1,8 @@
+
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import { Navigation, Map, Compass, Radar } from "lucide-react";
+import FooterSimple from "@/components/ui/FooterSimple";
 
 const NavigationSystem = () => {
   return (
@@ -70,6 +72,7 @@ const NavigationSystem = () => {
           </div>
         </div>
       </motion.div>
+      <FooterSimple siteName="Smart RV" year={new Date().getFullYear()} />
     </>
   );
 };
