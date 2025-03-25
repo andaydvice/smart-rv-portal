@@ -6,22 +6,22 @@ import FooterSimple from "@/components/ui/FooterSimple";
 
 const NavigationSystem = () => {
   return (
-    <>
+    <div className="flex flex-col min-h-screen">
       <Navbar />
       <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6 }}
-        className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800"
+        className="flex-grow bg-gradient-to-b from-gray-900 to-gray-800"
       >
-        <div className="max-w-7xl mx-auto px-4 pt-24">
+        <div className="max-w-7xl mx-auto px-4 pt-24 pb-12">
           <div className="flex items-center gap-4 mb-8">
-            <Navigation className="h-8 w-8 text-blue-500" />
+            <Navigation className="h-8 w-8 text-connectivity-accent" />
             <h1 className="text-4xl font-bold text-white">Navigation System</h1>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-            <div className="bg-gray-800/50 p-8 rounded-lg border border-gray-700">
+            <div className="bg-connectivity-darkBg p-8 rounded-lg border border-gray-700">
               <h2 className="text-2xl font-semibold text-blue-400 mb-4">Smart Navigation Features</h2>
               <div className="text-gray-300 mb-6 space-y-4">
                 <p>Experience next generation navigation with our advanced GPS system designed specifically for RVs.</p>
@@ -45,7 +45,7 @@ const NavigationSystem = () => {
             </div>
 
             <div className="space-y-6">
-              <div className="bg-gray-800/50 p-6 rounded-lg border border-gray-700">
+              <div className="bg-connectivity-darkBg p-6 rounded-lg border border-gray-700">
                 <Map className="h-6 w-6 text-green-400 mb-4" />
                 <h3 className="text-xl font-semibold text-white mb-2">Smart Mapping</h3>
                 <p className="text-gray-300">
@@ -53,7 +53,7 @@ const NavigationSystem = () => {
                 </p>
               </div>
 
-              <div className="bg-gray-800/50 p-6 rounded-lg border border-gray-700">
+              <div className="bg-connectivity-darkBg p-6 rounded-lg border border-gray-700">
                 <Compass className="h-6 w-6 text-yellow-400 mb-4" />
                 <h3 className="text-xl font-semibold text-white mb-2">Offline Navigation</h3>
                 <p className="text-gray-300">
@@ -61,7 +61,7 @@ const NavigationSystem = () => {
                 </p>
               </div>
 
-              <div className="bg-gray-800/50 p-6 rounded-lg border border-gray-700">
+              <div className="bg-connectivity-darkBg p-6 rounded-lg border border-gray-700">
                 <Radar className="h-6 w-6 text-pink-400 mb-4" />
                 <h3 className="text-xl font-semibold text-white mb-2">Real Time Updates</h3>
                 <p className="text-gray-300">
@@ -73,7 +73,7 @@ const NavigationSystem = () => {
         </div>
       </motion.div>
       <FooterSimple siteName="Smart RV" year={new Date().getFullYear()} />
-    </>
+    </div>
   );
 };
 
