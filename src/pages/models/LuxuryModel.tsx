@@ -105,16 +105,16 @@ const LuxuryModel = () => {
 
   return (
     <Layout>
-      <Navbar />
       <motion.main 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6 }}
-        className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800"
+        className="bg-gradient-to-b from-gray-900 to-gray-800"
       >
+        <Navbar />
         <LuxuryHero handleNavigation={handleNavigation} />
 
-        <div className="container mx-auto px-4 pt-12 relative z-10">
+        <div className="container mx-auto px-4 pt-12 pb-24 relative z-10">
           <KeyFeatures />
 
           <motion.div 
@@ -147,7 +147,7 @@ const LuxuryModel = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.8 }}
-            className="text-center mt-16 mb-24"
+            className="text-center mt-16"
           >
             <Link to="/models/compare">
               <Button 

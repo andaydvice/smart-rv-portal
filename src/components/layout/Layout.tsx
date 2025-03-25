@@ -56,7 +56,7 @@ const Layout = ({ children }: LayoutProps) => {
 
   console.log('Rendering Layout component');
   return (
-    <div className="min-h-screen flex flex-col w-full max-w-full overflow-x-hidden">
+    <div className="min-h-screen flex flex-col w-full max-w-full overflow-x-hidden bg-gray-900">
       <ScrollToTop />
       <div className="flex-grow">
         {children}
