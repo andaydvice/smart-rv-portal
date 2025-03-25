@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { Zap, Settings } from 'lucide-react';
+import { Zap, Settings, Music, Wifi } from 'lucide-react';
 
 const CoreSystemsLinks = () => (
   <div className="grid gap-3">
@@ -13,12 +13,12 @@ const CoreSystemsLinks = () => (
       <Settings className="h-4 w-4 text-[#0EA5E9]" />
       <span>Smart Kitchen</span>
     </NavLink>
-    <NavLink to="/features/audio" className="text-gray-300 hover:text-blue-400 transition-colors flex items-center gap-2">
-      <Settings className="h-4 w-4 text-[#8B5CF6]" />
+    <NavLink to="/features/audio-system" className="text-gray-300 hover:text-blue-400 transition-colors flex items-center gap-2">
+      <Music className="h-4 w-4 text-[#8B5CF6]" />
       <span>Audio System</span>
     </NavLink>
     <NavLink to="/features/internet-connectivity" className="text-gray-300 hover:text-blue-400 transition-colors flex items-center gap-2">
-      <Settings className="h-4 w-4 text-[#10B981]" />
+      <Wifi className="h-4 w-4 text-[#10B981]" />
       <span>Internet Connectivity</span>
     </NavLink>
   </div>

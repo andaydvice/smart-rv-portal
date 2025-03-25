@@ -49,6 +49,10 @@ export const routes: RouteObject[] = [
     element: <AudioSystem />,
   },
   {
+    path: '/features/audio',
+    element: <AudioSystem />,
+  },
+  {
     path: '/features/smart-tv',
     element: <SmartTV />,
   },
