@@ -1,4 +1,3 @@
-
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
@@ -56,7 +55,7 @@ const Models = () => {
   console.log("[Models] First model image path:", models[0].image);
 
   const handleCompareModels = () => {
-    window.location.href = '/models/compare';
+    window.location.href = '/compare-models';
   };
 
   // Define the footer links and socials for this page
@@ -157,7 +156,7 @@ const Models = () => {
             transition={{ delay: 0.8 }}
             className="text-center mt-16"
           >
-            <Link to="/models/compare">
+            <Link to="/compare-models">
               <Button 
                 variant="outline" 
                 className="bg-transparent border-white text-white hover:bg-blue-500/50 hover:text-white"

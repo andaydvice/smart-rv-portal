@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { Ship, Map, Home, Truck, Warehouse, Scale } from 'lucide-react';
+import { Ship, Map, Home, Scale } from 'lucide-react';
 
 interface VehicleSelectionLinksProps {
   className?: string;
@@ -21,7 +21,7 @@ const VehicleSelectionLinks: React.FC<VehicleSelectionLinksProps> = ({ className
       <Home className="h-4 w-4 text-[#10B981]" />
       <span>Compact Smart</span>
     </NavLink>
-    <NavLink to="/models/compare" className="text-gray-300 hover:text-blue-400 transition-colors flex items-center gap-2">
+    <NavLink to="/compare-models" className="text-gray-300 hover:text-blue-400 transition-colors flex items-center gap-2">
       <Scale className="h-4 w-4 text-[#F59E0B]" />
       <span>Compare Models</span>
     </NavLink>

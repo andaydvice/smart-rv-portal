@@ -26,7 +26,7 @@ const NavbarLinks: React.FC<NavbarLinksProps> = ({ className = "" }) => {
         Models
       </NavLink>
       <NavLink 
-        to="/models/compare" 
+        to="/compare-models" 
         className={({ isActive }) => 
           isActive ? "text-[#5B9BD5] font-medium" : "text-gray-300 hover:text-white transition-colors"
         }

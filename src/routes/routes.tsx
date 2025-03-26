@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { RouteObject } from 'react-router-dom';
 
@@ -31,13 +32,39 @@ import VoiceControl from '../pages/VoiceControl';
 import Troubleshooting from '../pages/Troubleshooting';
 import StorageFacilities from '../pages/StorageFacilities';
 import StoragePreparationChecklist from '../pages/StoragePreparationChecklist';
-import MapIconDemo from '../pages/MapIconDemo'; // Add the new page import
+import MapIconDemo from '../pages/MapIconDemo';
 
-// Define routes
+// Define routes with highest priority routes first
 export const routes: RouteObject[] = [
+  // Core pages
   {
     path: '/',
     element: <Index />,
+  },
+  // Make sure compare models paths are near the top for higher priority
+  {
+    path: '/models/compare',
+    element: <CompareModels />,
+  },
+  {
+    path: '/compare-models',
+    element: <CompareModels />,
+  },
+  {
+    path: '/models',
+    element: <Models />,
+  },
+  {
+    path: '/models/adventure',
+    element: <AdventureModel />,
+  },
+  {
+    path: '/models/compact',
+    element: <CompactModel />,
+  },
+  {
+    path: '/models/luxury',
+    element: <LuxuryModel />,
   },
   {
     path: '/features',
@@ -82,32 +109,6 @@ export const routes: RouteObject[] = [
   {
     path: '/features/smart-kitchen',
     element: <SmartKitchen />,
-  },
-  {
-    path: '/models',
-    element: <Models />,
-  },
-  {
-    path: '/models/adventure',
-    element: <AdventureModel />,
-  },
-  {
-    path: '/models/compact',
-    element: <CompactModel />,
-  },
-  {
-    path: '/models/luxury',
-    element: <LuxuryModel />,
-  },
-  // Move the compare models route earlier in the list
-  {
-    path: '/models/compare',
-    element: <CompareModels />,
-  },
-  // Add the alternate route path for backward compatibility
-  {
-    path: '/compare-models',
-    element: <CompareModels />,
   },
   {
     path: '/schedule-demo',
@@ -169,6 +170,19 @@ export const routes: RouteObject[] = [
     path: '/map-icon-demo',
     element: <MapIconDemo />,
   },
+  // Catch-all route for 404
+  {
+    path: '*',
+    element: <div className="flex min-h-screen items-center justify-center bg-[#080F1F] text-white">
+              <div className="text-center p-8">
+                <h1 className="text-4xl font-bold mb-4">Page Not Found</h1>
+                <p className="mb-6">The page you're looking for doesn't exist or has been moved.</p>
+                <a href="/" className="px-6 py-3 bg-[#5B9BD5] hover:bg-[#4B8FE3] rounded-lg transition-colors">
+                  Return to Home
+                </a>
+              </div>
+            </div>,
+  }
 ];
 
 // Add console logging to debug routes

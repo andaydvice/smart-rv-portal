@@ -8,7 +8,8 @@ import ErrorDisplay from "../error/ErrorDisplay";
 const router = createBrowserRouter(routes);
 
 const RouterProvider = () => {
-  console.log('RouterProvider - Available Routes:', routes.map(route => route.path));
+  console.log('RouterProvider - Initialized with routes:', routes.map(route => route.path));
+  console.log('RouterProvider - Current location:', window.location.pathname);
   
   // Custom error handler for 404 and other routing errors
   const handleRouteError = (error: any) => {

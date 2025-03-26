@@ -1,4 +1,3 @@
-
 import React, { useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Footer2 from "@/components/ui/Footer2";
@@ -96,6 +95,9 @@ const CompareModels = () => {
     console.log("[CompareModels] Current location:", location.pathname);
     // Ensure the page scrolls to top when mounted
     window.scrollTo(0, 0);
+    
+    // Log that we reached the component successfully
+    console.log("[CompareModels] Component successfully rendered");
   }, [location]);
 
   console.log("[CompareModels] Rendering component, current path:", location.pathname);
@@ -133,12 +135,15 @@ const CompareModels = () => {
                 <h3 className="text-2xl font-bold mb-2">{model.name}</h3>
                 <p className="text-[#5B9BD5] font-semibold mb-4">{model.price}</p>
                 <p className="text-gray-300 mb-6">{model.description}</p>
-                <Link to={`/models/${model.name.toLowerCase().replace(/\s+/g, '-')}`} className="block text-center py-2 px-4 bg-[#5B9BD5] hover:bg-[#4B8FE3] rounded-lg transition-colors">
-                  View Details
-                </Link>
-              </div>
+                <Link 
+                to={`/models/${model.name.split(' ')[0].toLowerCase()}`} 
+                className="block text-center py-2 px-4 bg-[#5B9BD5] hover:bg-[#4B8FE3] rounded-lg transition-colors"
+              >
+                View Details
+              </Link>
             </div>
-          ))}
+          </div>
+        ))}
         </div>
 
         {/* Specifications comparison */}
@@ -248,5 +253,5 @@ const CompareModels = () => {
   );
 };
 
-// Make sure we're exporting this component as default
+// Ensure the component is exported properly
 export default CompareModels;
