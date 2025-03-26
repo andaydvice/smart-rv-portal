@@ -10,6 +10,9 @@ import './styles/base.css'
 import './styles/emergency-marker-fix.css'  // Add emergency marker styles globally
 import './styles/map-optimizations.css'     // Add map optimization styles globally
 
+// Log the current deployed URL for debugging
+console.log('Application starting, window.location:', window.location.href);
+
 // Ensure emergency styles are loaded first
 import('./styles/marker-fix.css').catch(err => console.error('Failed to load marker fix styles:', err));
 

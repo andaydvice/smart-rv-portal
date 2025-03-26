@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { RouteObject } from 'react-router-dom';
 
@@ -100,11 +99,12 @@ export const routes: RouteObject[] = [
     path: '/models/luxury',
     element: <LuxuryModel />,
   },
+  // Move the compare models route earlier in the list
   {
     path: '/models/compare',
     element: <CompareModels />,
   },
-  // Let's add an additional route for backward compatibility or potential alternate URLs
+  // Add the alternate route path for backward compatibility
   {
     path: '/compare-models',
     element: <CompareModels />,
@@ -170,3 +170,6 @@ export const routes: RouteObject[] = [
     element: <MapIconDemo />,
   },
 ];
+
+// Add console logging to debug routes
+console.log('Routes configured:', routes.map(route => route.path));

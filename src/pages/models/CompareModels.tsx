@@ -98,6 +98,8 @@ const CompareModels = () => {
     window.scrollTo(0, 0);
   }, [location]);
 
+  console.log("[CompareModels] Rendering component, current path:", location.pathname);
+
   return (
     <div className="min-h-screen flex flex-col bg-[#080F1F] text-white">
       <Navbar />
@@ -246,4 +248,5 @@ const CompareModels = () => {
   );
 };
 
+// Make sure we're exporting this component as default
 export default CompareModels;
