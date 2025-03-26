@@ -38,7 +38,7 @@ const Troubleshooting = () => {
   ];
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen bg-[#080F1F]">
       <Navbar />
       {/* Hero Section */}
       <section className="relative">
@@ -66,7 +66,7 @@ const Troubleshooting = () => {
       </section>
 
       {/* Main Content */}
-      <section className="py-16 container mx-auto px-4 flex-grow">
+      <section className="py-16 container mx-auto px-4 flex-grow bg-[#080F1F]">
         <div className="max-w-4xl mx-auto space-y-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
