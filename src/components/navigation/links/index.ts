@@ -1,18 +1,7 @@
 
-import NavbarLinks from './NavbarLinks';
-import SmartFeaturesLinks from './SmartFeaturesLinks';
-import CoreSystemsLinks from './CoreSystemsLinks';
-import VehicleSelectionLinks from './VehicleSelectionLinks';
-import RVToolsLinks from './RVToolsLinks';
-import SupportLinks from './SupportLinks';
-import CustomerSupportLinks from './CustomerSupportLinks';
-
-export {
-  NavbarLinks,
-  SmartFeaturesLinks,
-  CoreSystemsLinks,
-  VehicleSelectionLinks,
-  RVToolsLinks,
-  SupportLinks,
-  CustomerSupportLinks
-};
+export { default as CoreSystemsLinks } from './CoreSystemsLinks';
+export { default as SmartFeaturesLinks } from './SmartFeaturesLinks';
+export { default as VehicleSelectionLinks } from './VehicleSelectionLinks';
+export { default as SupportLinks } from './SupportLinks';
+export { default as CustomerSupportLinks } from './CustomerSupportLinks';
+export { default as RVToolsLinks } from './RVToolsLinks';

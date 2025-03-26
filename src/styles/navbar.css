@@ -22,6 +22,7 @@ body {
 /* Prevent content shift when scrollbar appears/disappears */
 html {
   scrollbar-gutter: stable;
+  overflow-x: hidden; /* Prevent horizontal scrolling */
 }
 
 /* Style adjustments for the NavigationMenu components */
@@ -31,6 +32,18 @@ html {
   transform: none !important;
   min-width: max-content !important;
   z-index: 100 !important;
+}
+
+/* Make sure content loads from top */
+.page-content {
+  margin-top: 4rem; /* Should match navbar height */
+}
+
+/* Ensure proper mobile menu positioning */
+.mobile-menu {
+  top: 4rem;
+  max-height: calc(100vh - 4rem);
+  overflow-y: auto;
 }
 
 /* Popup edge prevention - ensures popups don't get cut off */

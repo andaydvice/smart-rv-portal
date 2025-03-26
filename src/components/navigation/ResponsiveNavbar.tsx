@@ -27,10 +27,6 @@ const ResponsiveNavbar = () => {
     setIsMenuOpen(false);
   }, [location.pathname]);
 
-  const toggleMenu = () => {
-    setIsMenuOpen(prev => !prev);
-  };
-
   // Prevent body scroll when mobile menu is open
   useEffect(() => {
     if (isMenuOpen) {
@@ -60,7 +56,7 @@ const ResponsiveNavbar = () => {
           
           {/* Mobile menu button */}
           <button
-            onClick={toggleMenu}
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
             className="md:hidden inline-flex items-center justify-center p-2 rounded-md text-gray-300 hover:text-[#5B9BD5] focus:outline-none"
             aria-expanded={isMenuOpen}
             aria-label="Toggle menu"

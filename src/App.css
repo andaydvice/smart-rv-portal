@@ -49,3 +49,22 @@ body, html {
   overflow-x: hidden;
   max-width: 100%;
 }
+
+/* Additional fixes to ensure content loads properly */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Ensure the responsive display */
+@media (max-width: 768px) {
+  .hide-mobile {
+    display: none;
+  }
+}
+
+@media (min-width: 769px) {
+  .hide-desktop {
+    display: none;
+  }
+}
