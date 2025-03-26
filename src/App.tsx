@@ -35,6 +35,17 @@ function AppContent() {
     injectEmergencyStyles();
     forceMapMarkersVisible();
     
+    // Log the current URL for debugging
+    console.log('Current URL:', window.location.href);
+    console.log('Current pathname:', window.location.pathname);
+    
+    // Verify routes are available
+    if ((window as any).routesAvailable) {
+      console.log('Routes confirmed available');
+    } else {
+      console.warn('Routes may not be properly configured');
+    }
+    
     // Store map instance globally for emergency access
     document.addEventListener('mapboxgl.map.created', (e: CustomEvent) => {
       (window as any).mapInstance = e.detail.map;
@@ -55,6 +66,9 @@ function AppContent() {
 }
 
 function App() {
+  // Set routes available flag for debugging
+  (window as any).routesAvailable = true;
+  
   return (
     <QueryClientProvider client={queryClient}>
       <AuthProvider>

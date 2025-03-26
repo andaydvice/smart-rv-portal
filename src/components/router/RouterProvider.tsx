@@ -4,12 +4,29 @@ import { routes } from "@/routes/routes";
 import ErrorBoundary from "../error/ErrorBoundary";
 import ErrorDisplay from "../error/ErrorDisplay";
 
-// Create the router from the routes array
+// Create the router from the routes array with better error handling
 const router = createBrowserRouter(routes);
 
 const RouterProvider = () => {
   console.log('RouterProvider - Initialized with routes:', routes.map(route => route.path));
   console.log('RouterProvider - Current location:', window.location.pathname);
+  
+  // Log any missing route matches
+  const currentPath = window.location.pathname;
+  const routeFound = routes.some(route => {
+    if (route.path === '*') return false;
+    if (route.path === currentPath) return true;
+    // Handle parameterized routes
+    if (route.path.includes(':') && currentPath.startsWith(route.path.split(':')[0])) return true;
+    return false;
+  });
+  
+  if (!routeFound) {
+    console.warn(`No exact route match found for: ${currentPath}`);
+    if (currentPath === '/compare-models' || currentPath === '/models/compare') {
+      console.error(`Critical routing error: ${currentPath} is defined but not matching!`);
+    }
+  }
   
   // Custom error handler for 404 and other routing errors
   const handleRouteError = (error: any) => {

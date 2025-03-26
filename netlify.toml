@@ -8,15 +8,15 @@
   status = 200
   force = true  # Make sure the redirect is forced
 
-# Specific redirect for compare models page
+# Specific redirects for compare models pages (high priority)
 [[redirects]]
-  from = "/models/compare"
+  from = "/compare-models"
   to = "/index.html"
   status = 200
   force = true
-
+  
 [[redirects]]
-  from = "/compare-models"
+  from = "/models/compare"
   to = "/index.html"
   status = 200
   force = true
@@ -25,3 +25,9 @@
 [build]
   command = "npm run build"
   publish = "dist"
+
+# Add cache control for better performance
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"

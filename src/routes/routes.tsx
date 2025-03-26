@@ -41,13 +41,12 @@ export const routes: RouteObject[] = [
     path: '/',
     element: <Index />,
   },
-  // Make sure compare models paths are near the top for higher priority
   {
-    path: '/models/compare',
+    path: '/compare-models',
     element: <CompareModels />,
   },
   {
-    path: '/compare-models',
+    path: '/models/compare',
     element: <CompareModels />,
   },
   {

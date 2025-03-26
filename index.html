@@ -11,6 +11,11 @@
     <script src="/emergencyMarkers.js"></script>
     <!-- Add Google Maps API with the key -->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAGKkTg0DlZd7fCJlfkVNqkRkzPjeqKJ2o&libraries=places" async defer></script>
+    <!-- Initial page path detection -->
+    <script>
+      window.initialPath = window.location.pathname;
+      console.log('Initial page load path:', window.initialPath);
+    </script>
   </head>
   <body>
     <div id="root"></div>

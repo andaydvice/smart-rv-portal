@@ -1,3 +1,4 @@
+
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
@@ -6,6 +7,7 @@ import { ArrowRight, Battery, Navigation, Shield, Wifi } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
 import Footer2 from "@/components/ui/Footer2";
 
+// Model data
 const models = [
   {
     name: "Luxury Class",
@@ -55,6 +57,7 @@ const Models = () => {
   console.log("[Models] First model image path:", models[0].image);
 
   const handleCompareModels = () => {
+    console.log('Navigating to compare models page');
     window.location.href = '/compare-models';
   };
 
@@ -73,7 +76,8 @@ const Models = () => {
       links: [
         { text: "Luxury Class", href: "/models/luxury" },
         { text: "Adventure Class", href: "/models/adventure" },
-        { text: "Compact Smart", href: "/models/compact" }
+        { text: "Compact Smart", href: "/models/compact" },
+        { text: "Compare Models", href: "/compare-models" }
       ]
     }
   ];
@@ -160,6 +164,9 @@ const Models = () => {
               <Button 
                 variant="outline" 
                 className="bg-transparent border-white text-white hover:bg-blue-500/50 hover:text-white"
+                onClick={() => {
+                  console.log('Compare models button clicked');
+                }}
               >
                 Compare All Models <ArrowRight className="w-4 h-4 ml-2" />
               </Button>

@@ -1,3 +1,4 @@
+
 import React, { useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Footer2 from "@/components/ui/Footer2";
@@ -87,6 +88,10 @@ const models = [
   }
 ];
 
+// CRITICAL DEBUGGING LOGS
+console.log('CompareModels component loaded');
+console.log('Component file path: src/pages/models/CompareModels.tsx');
+
 const CompareModels = () => {
   const location = useLocation();
   
@@ -98,6 +103,12 @@ const CompareModels = () => {
     
     // Log that we reached the component successfully
     console.log("[CompareModels] Component successfully rendered");
+    
+    // Alert for debugging purposes on production
+    if (window.location.hostname.includes('preview--smart-rv-portal') || 
+        window.location.hostname.includes('lovable.app')) {
+      console.warn('COMPARE MODELS PAGE LOADED ON PRODUCTION');
+    }
   }, [location]);
 
   console.log("[CompareModels] Rendering component, current path:", location.pathname);
@@ -237,7 +248,7 @@ const CompareModels = () => {
               { text: "Luxury Class", href: "/models/luxury" },
               { text: "Adventure Class", href: "/models/adventure" },
               { text: "Compact Smart", href: "/models/compact" },
-              { text: "Compare Models", href: "/models/compare" }
+              { text: "Compare Models", href: "/compare-models" }
             ]
           }
         ]}
@@ -253,5 +264,5 @@ const CompareModels = () => {
   );
 };
 
-// Ensure the component is exported properly
+// CRITICAL: Export is properly done here
 export default CompareModels;

@@ -12,6 +12,25 @@ import './styles/map-optimizations.css'     // Add map optimization styles globa
 
 // Log the current deployed URL for debugging
 console.log('Application starting, window.location:', window.location.href);
+console.log('Application path:', window.location.pathname);
+
+// Force immediate style injection for emergency fixes
+const injectEmergencyStyles = () => {
+  // Force visibility of map markers
+  const style = document.createElement('style');
+  style.textContent = `
+    .mapboxgl-marker, .map-marker, .marker, [class*="marker"] {
+      visibility: visible !important;
+      opacity: 1 !important;
+      display: block !important;
+    }
+  `;
+  document.head.appendChild(style);
+  console.log('Injected emergency marker styles');
+};
+
+// Inject emergency styles immediately
+injectEmergencyStyles();
 
 // Ensure emergency styles are loaded first
 import('./styles/marker-fix.css').catch(err => console.error('Failed to load marker fix styles:', err));
