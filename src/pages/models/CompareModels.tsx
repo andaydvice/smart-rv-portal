@@ -105,7 +105,7 @@ const CompareModels = () => {
       {/* Hero header image */}
       <div className="relative w-full h-96">
         <img 
-          src="/lovable-uploads/c74fc5fd-d76a-4edf-9dad-d3349d6826a8.png" 
+          src="/lovable-uploads/Luxury-Class-RVs-min.jpg" 
           alt="RV models comparison" 
           className="w-full h-full object-cover"
         />
