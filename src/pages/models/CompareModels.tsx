@@ -131,7 +131,7 @@ const CompareModels = () => {
                 <h3 className="text-2xl font-bold mb-2">{model.name}</h3>
                 <p className="text-[#5B9BD5] font-semibold mb-4">{model.price}</p>
                 <p className="text-gray-300 mb-6">{model.description}</p>
-                <Link to={`/models/${model.name.toLowerCase().replace(' ', '-')}`} className="block text-center py-2 px-4 bg-[#5B9BD5] hover:bg-[#4B8FE3] rounded-lg transition-colors">
+                <Link to={`/models/${model.name.toLowerCase().replace(/\s+/g, '-')}`} className="block text-center py-2 px-4 bg-[#5B9BD5] hover:bg-[#4B8FE3] rounded-lg transition-colors">
                   View Details
                 </Link>
               </div>
@@ -229,7 +229,8 @@ const CompareModels = () => {
             links: [
               { text: "Luxury Class", href: "/models/luxury" },
               { text: "Adventure Class", href: "/models/adventure" },
-              { text: "Compact Smart", href: "/models/compact" }
+              { text: "Compact Smart", href: "/models/compact" },
+              { text: "Compare Models", href: "/models/compare" }
             ]
           }
         ]}

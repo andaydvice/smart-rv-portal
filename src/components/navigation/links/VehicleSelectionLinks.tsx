@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { Truck, Settings } from 'lucide-react';
+import { Ship, Map, Home, Truck, Warehouse, Scale } from 'lucide-react';
 
 interface VehicleSelectionLinksProps {
   className?: string;
@@ -10,19 +10,19 @@ interface VehicleSelectionLinksProps {
 const VehicleSelectionLinks: React.FC<VehicleSelectionLinksProps> = ({ className }) => (
   <div className={`grid gap-3 ${className || ''}`}>
     <NavLink to="/models/luxury" className="text-gray-300 hover:text-blue-400 transition-colors flex items-center gap-2">
-      <Truck className="h-4 w-4 text-[#D946EF]" />
-      <span>Luxury Models</span>
-    </NavLink>
-    <NavLink to="/models/compact" className="text-gray-300 hover:text-blue-400 transition-colors flex items-center gap-2">
-      <Truck className="h-4 w-4 text-[#0EA5E9]" />
-      <span>Compact Models</span>
+      <Ship className="h-4 w-4 text-[#EC4899]" />
+      <span>Luxury Class</span>
     </NavLink>
     <NavLink to="/models/adventure" className="text-gray-300 hover:text-blue-400 transition-colors flex items-center gap-2">
-      <Truck className="h-4 w-4 text-[#F97316]" />
-      <span>Adventure Models</span>
+      <Map className="h-4 w-4 text-[#6366F1]" />
+      <span>Adventure Class</span>
+    </NavLink>
+    <NavLink to="/models/compact" className="text-gray-300 hover:text-blue-400 transition-colors flex items-center gap-2">
+      <Home className="h-4 w-4 text-[#10B981]" />
+      <span>Compact Smart</span>
     </NavLink>
     <NavLink to="/models/compare" className="text-gray-300 hover:text-blue-400 transition-colors flex items-center gap-2">
-      <Settings className="h-4 w-4 text-[#10B981]" />
+      <Scale className="h-4 w-4 text-[#F59E0B]" />
       <span>Compare Models</span>
     </NavLink>
   </div>

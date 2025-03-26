@@ -104,6 +104,11 @@ export const routes: RouteObject[] = [
     path: '/models/compare',
     element: <CompareModels />,
   },
+  // Let's add an additional route for backward compatibility or potential alternate URLs
+  {
+    path: '/compare-models',
+    element: <CompareModels />,
+  },
   {
     path: '/schedule-demo',
     element: <ScheduleDemo />,
