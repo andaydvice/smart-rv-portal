@@ -17,7 +17,7 @@ const SupportLinks: React.FC<SupportLinksProps> = ({ className }) => (
       <AlertTriangle className="h-4 w-4 text-[#F59E0B]" />
       <span>Troubleshooting Guide</span>
     </NavLink>
-    <NavLink to="/documentation/full" className="text-gray-300 hover:text-blue-400 transition-colors flex items-center gap-2">
+    <NavLink to="/documentation/complete" className="text-gray-300 hover:text-blue-400 transition-colors flex items-center gap-2">
       <BookOpen className="h-4 w-4 text-[#10B981]" />
       <span>Complete Documentation</span>
     </NavLink>
