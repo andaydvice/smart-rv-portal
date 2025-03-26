@@ -1,10 +1,38 @@
+
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import { Refrigerator, Droplet } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import Footer2 from "@/components/ui/Footer2";
 
 const SmartKitchen = () => {
+  // Define the footer links and socials for this page
+  const footerLinks = [
+    {
+      title: "Quick Links",
+      links: [
+        { text: "Features", href: "/features" },
+        { text: "Models", href: "/models" },
+        { text: "Documentation", href: "/documentation" }
+      ]
+    },
+    {
+      title: "Other Features",
+      links: [
+        { text: "Navigation System", href: "/features/navigation-system" },
+        { text: "Power Management", href: "/features/power-management" },
+        { text: "Audio System", href: "/features/audio-system" }
+      ]
+    }
+  ];
+
+  const footerSocials = [
+    { icon: "facebook", href: "https://facebook.com" },
+    { icon: "twitter", href: "https://twitter.com" },
+    { icon: "instagram", href: "https://instagram.com" }
+  ];
+
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
@@ -12,7 +40,7 @@ const SmartKitchen = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6 }}
-        className="flex-grow pt-24 pb-32 px-4 bg-gradient-to-b from-gray-900 to-gray-800"
+        className="flex-grow pt-24 pb-16 px-4 bg-gradient-to-b from-gray-900 to-gray-800"
       >
         <div className="max-w-7xl mx-auto">
           <div className="flex items-center gap-4 mb-8">
@@ -75,6 +103,11 @@ const SmartKitchen = () => {
           </div>
         </div>
       </motion.div>
+      <Footer2 
+        links={footerLinks}
+        socials={footerSocials}
+        description="Transform your RV cooking experience with our smart kitchen technologies"
+      />
     </div>
   );
 };

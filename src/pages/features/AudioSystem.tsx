@@ -1,16 +1,44 @@
+
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import { Music, Volume2, Radio, Mic2 } from "lucide-react";
+import Footer2 from "@/components/ui/Footer2";
 
 const AudioSystem = () => {
+  // Define the footer links and socials for this page
+  const footerLinks = [
+    {
+      title: "Quick Links",
+      links: [
+        { text: "Features", href: "/features" },
+        { text: "Models", href: "/models" },
+        { text: "Documentation", href: "/documentation" }
+      ]
+    },
+    {
+      title: "Other Features",
+      links: [
+        { text: "Smart TV", href: "/features/smart-tv" },
+        { text: "Power Management", href: "/features/power-management" },
+        { text: "Navigation System", href: "/features/navigation-system" }
+      ]
+    }
+  ];
+
+  const footerSocials = [
+    { icon: "facebook", href: "https://facebook.com" },
+    { icon: "twitter", href: "https://twitter.com" },
+    { icon: "instagram", href: "https://instagram.com" }
+  ];
+
   return (
-    <>
+    <div className="flex flex-col min-h-screen">
       <Navbar />
       <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6 }}
-        className="min-h-screen pt-24 px-4 bg-gradient-to-b from-gray-900 to-gray-800"
+        className="flex-grow pt-24 px-4 bg-gradient-to-b from-gray-900 to-gray-800"
       >
         <div className="max-w-7xl mx-auto">
           <div className="flex items-center gap-4 mb-8">
@@ -67,7 +95,12 @@ const AudioSystem = () => {
           </div>
         </div>
       </motion.div>
-    </>
+      <Footer2 
+        links={footerLinks}
+        socials={footerSocials}
+        description="Elevate your RV audio experience with premium sound technology and smart controls"
+      />
+    </div>
   );
 };
 
