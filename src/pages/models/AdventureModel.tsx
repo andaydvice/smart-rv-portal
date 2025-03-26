@@ -6,30 +6,38 @@ import AdventureCategoryCard from "@/components/adventure/AdventureCategoryCard"
 import KeyFeaturesCard from "@/components/adventure/KeyFeaturesCard";
 import { adventureCategories, keyFeatures } from "@/data/adventure-data";
 import Layout from "@/components/layout/Layout";
+import { useEffect } from "react";
 
 const AdventureModel = () => {
+  useEffect(() => {
+    console.log("[AdventureModel] Component mounted");
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <Layout>
-      <Navbar />
-      <AdventureHero />
-      <motion.div 
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.6 }}
-        className="px-4 pb-24"
-        style={{ backgroundColor: "#1B2028" }}
-      >
-        <div className="max-w-7xl mx-auto pt-16">
-          <h2 className="text-2xl mb-8 text-gray-300">
-            Explore Our Off Road RV Collection
-          </h2>
+      <div className="bg-gradient-to-b from-gray-900 to-gray-800">
+        <Navbar />
+        <AdventureHero />
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6 }}
+          className="px-4 pb-24"
+          style={{ backgroundColor: "#1B2028" }}
+        >
+          <div className="max-w-7xl mx-auto pt-16">
+            <h2 className="text-2xl mb-8 text-gray-300">
+              Explore Our Off Road RV Collection
+            </h2>
 
-          <div className="space-y-6">
-            <AdventureCategoryCard categories={adventureCategories} />
-            <KeyFeaturesCard features={keyFeatures} />
+            <div className="space-y-6">
+              <AdventureCategoryCard categories={adventureCategories} />
+              <KeyFeaturesCard features={keyFeatures} />
+            </div>
           </div>
-        </div>
-      </motion.div>
+        </motion.div>
+      </div>
     </Layout>
   );
 };

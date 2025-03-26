@@ -9,17 +9,13 @@ import Layout from "@/components/layout/Layout";
 
 const CompactModel = () => {
   useEffect(() => {
+    console.log("[CompactModel] Component mounted");
     window.scrollTo(0, 0);
   }, []);
 
   return (
     <Layout>
-      <motion.main 
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.6 }}
-        className="bg-gradient-to-b from-gray-900 to-gray-800"
-      >
+      <div className="bg-gradient-to-b from-gray-900 to-gray-800">
         <Navbar />
         <HeroSection />
         <div className="container mx-auto px-4 py-12 pb-24">
@@ -29,7 +25,7 @@ const CompactModel = () => {
             ))}
           </div>
         </div>
-      </motion.main>
+      </div>
     </Layout>
   );
 };
