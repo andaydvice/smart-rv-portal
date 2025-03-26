@@ -1,4 +1,3 @@
-
 import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuList, NavigationMenuTrigger } from "@/components/ui/navigation-menu";
 import { CoreSystemsLinks, SmartFeaturesLinks, VehicleSelectionLinks, SupportLinks, CustomerSupportLinks, RVToolsLinks } from "./links";
 import { Link, useLocation } from "react-router-dom";
@@ -78,15 +77,6 @@ const DesktopNavigation = () => {
               className="text-gray-300 hover:text-[#5B9BD5] transition-colors text-base flex items-center gap-2 px-4 py-2"
             >
               Blog
-            </Link>
-          </NavigationMenuItem>
-
-          <NavigationMenuItem>
-            <Link 
-              to="/storage-facilities" 
-              className="text-gray-300 hover:text-[#5B9BD5] transition-colors text-base flex items-center gap-2 px-4 py-2"
-            >
-              Storage
             </Link>
           </NavigationMenuItem>
 
