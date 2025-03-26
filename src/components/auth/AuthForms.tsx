@@ -66,7 +66,7 @@ export const AuthForms = ({ onSuccess }: AuthFormsProps) => {
             type="button"
             variant={!isSignUp ? "default" : "outline"}
             onClick={() => setIsSignUp(false)}
-            className="flex-1"
+            className={`flex-1 ${!isSignUp ? "text-white" : "text-blue-400 hover:text-blue-300"}`}
           >
             Sign In
           </Button>
@@ -74,7 +74,7 @@ export const AuthForms = ({ onSuccess }: AuthFormsProps) => {
             type="button"
             variant={isSignUp ? "default" : "outline"}
             onClick={() => setIsSignUp(true)}
-            className="flex-1"
+            className={`flex-1 ${isSignUp ? "text-white" : "text-blue-400 hover:text-blue-300"}`}
           >
             Sign Up
           </Button>
