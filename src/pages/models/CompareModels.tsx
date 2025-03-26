@@ -74,12 +74,13 @@ const CompareModels = () => {
                   alt="RV Models Comparison"
                   className="w-full h-full object-cover"
                 />
-                <div className="absolute inset-0 bg-black/40"></div>
+                <div className="absolute inset-0 bg-black/40 flex flex-col items-center justify-center">
+                  <h1 className="text-4xl font-bold text-white mb-4 z-10">Compare Models</h1>
+                  <p className="text-gray-300 max-w-2xl mx-auto z-10">
+                    Find the perfect smart RV that matches your lifestyle. Compare features and specifications across our range of models.
+                  </p>
+                </div>
               </div>
-              <h1 className="text-4xl font-bold text-white mb-4">Compare Models</h1>
-              <p className="text-gray-300 max-w-2xl mx-auto">
-                Find the perfect smart RV that matches your lifestyle. Compare features and specifications across our range of models.
-              </p>
             </motion.div>
           </div>
 
@@ -102,7 +103,7 @@ const CompareModels = () => {
                 <TableBody>
                   <TableRow className="hover:bg-transparent">
                     <TableCell className="font-medium text-gray-300">Starting Price</TableCell>
-                    <TableCell className="text-center text-blue-400">From 1.3M</TableCell>
+                    <TableCell className="text-center text-blue-400">From $1.3M</TableCell>
                     <TableCell className="text-center text-blue-400">From $50,000</TableCell>
                     <TableCell className="text-center text-blue-400">From $20,000</TableCell>
                   </TableRow>
@@ -116,8 +117,8 @@ const CompareModels = () => {
                           {featureGroup.category}
                         </TableCell>
                       </TableRow>
-                      {featureGroup.items.map((feature) => (
-                        <TableRow key={feature.name} className="hover:bg-gray-800/30">
+                      {featureGroup.items.map((feature, itemIndex) => (
+                        <TableRow key={`${groupIndex}-${itemIndex}`} className="hover:bg-gray-800/30">
                           <TableCell className="font-medium text-gray-300">
                             {feature.name}
                           </TableCell>
