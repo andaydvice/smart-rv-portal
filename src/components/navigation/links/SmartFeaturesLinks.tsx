@@ -3,8 +3,12 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { Settings, ShieldCheck, Terminal, Wifi } from 'lucide-react';
 
-const SmartFeaturesLinks = () => (
-  <div className="grid gap-3">
+interface SmartFeaturesLinksProps {
+  className?: string;
+}
+
+const SmartFeaturesLinks: React.FC<SmartFeaturesLinksProps> = ({ className }) => (
+  <div className={`grid gap-3 ${className || ''}`}>
     <NavLink to="/features/navigation-system" className="text-gray-300 hover:text-blue-400 transition-colors flex items-center gap-2">
       <Settings className="h-4 w-4 text-[#0EA5E9]" />
       <span>Navigation System</span>

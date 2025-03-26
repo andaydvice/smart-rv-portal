@@ -3,8 +3,12 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { BookOpen, AlertTriangle } from 'lucide-react';
 
-const SupportLinks = () => (
-  <div className="grid gap-3">
+interface SupportLinksProps {
+  className?: string;
+}
+
+const SupportLinks: React.FC<SupportLinksProps> = ({ className }) => (
+  <div className={`grid gap-3 ${className || ''}`}>
     <NavLink to="/documentation" className="text-gray-300 hover:text-blue-400 transition-colors flex items-center gap-2">
       <BookOpen className="h-4 w-4 text-[#F97316]" />
       <span>Documentation</span>

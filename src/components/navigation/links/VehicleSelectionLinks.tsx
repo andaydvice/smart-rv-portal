@@ -3,8 +3,12 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { Truck, Settings } from 'lucide-react';
 
-const VehicleSelectionLinks = () => (
-  <div className="grid gap-3">
+interface VehicleSelectionLinksProps {
+  className?: string;
+}
+
+const VehicleSelectionLinks: React.FC<VehicleSelectionLinksProps> = ({ className }) => (
+  <div className={`grid gap-3 ${className || ''}`}>
     <NavLink to="/models/luxury" className="text-gray-300 hover:text-blue-400 transition-colors flex items-center gap-2">
       <Truck className="h-4 w-4 text-[#D946EF]" />
       <span>Luxury Models</span>

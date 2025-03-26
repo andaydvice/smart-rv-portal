@@ -2,7 +2,11 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-const NavbarLinks = ({ className = "" }: { className?: string }) => {
+interface NavbarLinksProps {
+  className?: string;
+}
+
+const NavbarLinks: React.FC<NavbarLinksProps> = ({ className = "" }) => {
   return (
     <div className={`flex space-x-6 ${className}`}>
       <NavLink 

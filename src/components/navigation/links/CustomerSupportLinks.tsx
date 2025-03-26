@@ -3,8 +3,12 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { Phone, Settings } from 'lucide-react';
 
-const CustomerSupportLinks = () => (
-  <div className="grid gap-3">
+interface CustomerSupportLinksProps {
+  className?: string;
+}
+
+const CustomerSupportLinks: React.FC<CustomerSupportLinksProps> = ({ className }) => (
+  <div className={`grid gap-3 ${className || ''}`}>
     <NavLink to="/contact" className="text-gray-300 hover:text-blue-400 transition-colors flex items-center gap-2">
       <Phone className="h-4 w-4 text-[#0EA5E9]" />
       <span>Contact Support</span>

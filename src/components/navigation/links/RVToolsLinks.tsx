@@ -3,8 +3,12 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { Calculator, Settings } from 'lucide-react';
 
-const RVToolsLinks = () => (
-  <div className="grid gap-3">
+interface RVToolsLinksProps {
+  className?: string;
+}
+
+const RVToolsLinks: React.FC<RVToolsLinksProps> = ({ className }) => (
+  <div className={`grid gap-3 ${className || ''}`}>
     <NavLink to="/calculators" className="text-gray-300 hover:text-blue-400 transition-colors flex items-center gap-2">
       <Calculator className="h-4 w-4 text-[#F59E0B]" />
       <span>RV Calculators</span>

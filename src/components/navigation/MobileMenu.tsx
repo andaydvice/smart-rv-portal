@@ -46,7 +46,7 @@ const MobileMenu = ({ isOpen }: MobileMenuProps) => {
         />
         {expandedSections.intelligence && (
           <div className="pl-4 border-l border-gray-700 ml-4 mt-1 space-y-1">
-            <SmartFeaturesLinks className="flex flex-col space-y-1" />
+            <SmartFeaturesLinks />
           </div>
         )}
         
@@ -58,7 +58,7 @@ const MobileMenu = ({ isOpen }: MobileMenuProps) => {
         />
         {expandedSections.systems && (
           <div className="pl-4 border-l border-gray-700 ml-4 mt-1 space-y-1">
-            <CoreSystemsLinks className="flex flex-col space-y-1" />
+            <CoreSystemsLinks />
           </div>
         )}
         
@@ -70,7 +70,7 @@ const MobileMenu = ({ isOpen }: MobileMenuProps) => {
         />
         {expandedSections.models && (
           <div className="pl-4 border-l border-gray-700 ml-4 mt-1 space-y-1">
-            <VehicleSelectionLinks className="flex flex-col space-y-1" />
+            <VehicleSelectionLinks />
           </div>
         )}
         
@@ -82,7 +82,7 @@ const MobileMenu = ({ isOpen }: MobileMenuProps) => {
         />
         {expandedSections.tools && (
           <div className="pl-4 border-l border-gray-700 ml-4 mt-1 space-y-1">
-            <RVToolsLinks className="flex flex-col space-y-1" />
+            <RVToolsLinks />
           </div>
         )}
         
@@ -108,7 +108,7 @@ const MobileMenu = ({ isOpen }: MobileMenuProps) => {
         />
         {expandedSections.support && (
           <div className="pl-4 border-l border-gray-700 ml-4 mt-1 space-y-1">
-            <SupportLinks className="flex flex-col space-y-1" />
+            <SupportLinks />
           </div>
         )}
         
