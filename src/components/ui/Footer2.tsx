@@ -87,12 +87,23 @@ const Footer2 = ({
               <ul className="space-y-2 w-full">
                 {group.links.map((link, linkIndex) => (
                   <li key={linkIndex} className="text-center md:text-left">
-                    <Link 
-                      to={link.href} 
-                      className="text-gray-400 hover:text-white transition-colors"
-                    >
-                      {link.text}
-                    </Link>
+                    {link.href.startsWith('http') ? (
+                      <a 
+                        href={link.href}
+                        target="_blank"
+                        rel="noopener noreferrer" 
+                        className="text-gray-400 hover:text-white transition-colors"
+                      >
+                        {link.text}
+                      </a>
+                    ) : (
+                      <Link 
+                        to={link.href} 
+                        className="text-gray-400 hover:text-white transition-colors"
+                      >
+                        {link.text}
+                      </Link>
+                    )}
                   </li>
                 ))}
               </ul>

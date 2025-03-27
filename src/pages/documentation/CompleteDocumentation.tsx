@@ -10,8 +10,16 @@ import NetworkInfrastructureSection from "@/components/documentation/sections/Ne
 import PowerManagementSection from "@/components/documentation/sections/PowerManagementSection";
 import SecuritySection from "@/components/documentation/sections/SecuritySection";
 import Footer2 from "@/components/ui/Footer2";
+import { useEffect } from "react";
+import { scrollToTop } from "@/utils/scrollToTop";
 
 const CompleteDocumentation = () => {
+  // Scroll to top on component mount
+  useEffect(() => {
+    console.log("CompleteDocumentation page - Scrolling to top");
+    scrollToTop();
+  }, []);
+
   // Define the footer links and socials for this page
   const footerLinks = [
     {

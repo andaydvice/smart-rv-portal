@@ -1,11 +1,17 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import Navbar from '@/components/Navbar';
-import Layout from '@/components/layout/Layout';
 import StoragePreparationChecklist from '@/components/storage/StoragePreparationChecklist';
 import Footer2 from "@/components/ui/Footer2";
+import { scrollToTop } from "@/utils/scrollToTop";
 
 const StoragePreparationChecklistPage: React.FC = () => {
+  // Scroll to top on component mount
+  useEffect(() => {
+    console.log("StoragePreparationChecklist page - Scrolling to top");
+    scrollToTop();
+  }, []);
+
   // Define the footer links and socials for this page
   const footerLinks = [
     {
@@ -13,7 +19,7 @@ const StoragePreparationChecklistPage: React.FC = () => {
       links: [
         { text: "Home", href: "/" },
         { text: "Storage Facilities", href: "/storage-facilities" },
-        { text: "Weather", href: "/rv-weather" }
+        { text: "Weather", href: "/weather" }
       ]
     },
     {

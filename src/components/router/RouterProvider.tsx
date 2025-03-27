@@ -1,11 +1,39 @@
 
-import { createBrowserRouter, RouterProvider as ReactRouterProvider } from "react-router-dom";
+import { createBrowserRouter, RouterProvider as ReactRouterProvider, useLocation, useNavigationType } from "react-router-dom";
 import { routes } from "@/routes/routes";
 import ErrorBoundary from "../error/ErrorBoundary";
 import ErrorDisplay from "../error/ErrorDisplay";
+import { useEffect } from "react";
+import { scrollToTop } from "@/utils/scrollToTop";
 
 // Create the router from the routes array with better error handling
 const router = createBrowserRouter(routes);
+
+// Component to handle scroll behavior
+function ScrollToTopOnMount() {
+  const { pathname } = useLocation();
+  const navigationType = useNavigationType();
+
+  useEffect(() => {
+    console.log('ScrollToTop effect triggered for path:', pathname);
+    // Only scroll to top if not replacing the current entry
+    if (navigationType !== 'replace') {
+      scrollToTop();
+    }
+  }, [pathname, navigationType]);
+
+  return null;
+}
+
+// Wrap routes with scroll behavior
+function RoutesWithScrollBehavior({ children }: { children: React.ReactNode }) {
+  return (
+    <>
+      <ScrollToTopOnMount />
+      {children}
+    </>
+  );
+}
 
 const RouterProvider = () => {
   console.log('RouterProvider - Initialized with routes:', routes.map(route => route.path));
@@ -47,17 +75,19 @@ const RouterProvider = () => {
   
   return (
     <ErrorBoundary>
-      <ReactRouterProvider 
-        router={router} 
-        fallbackElement={
-          <ErrorDisplay 
-            error={{
-              message: "Loading application...",
-              statusCode: 0
-            }}
-          />
-        }
-      />
+      <RoutesWithScrollBehavior>
+        <ReactRouterProvider 
+          router={router} 
+          fallbackElement={
+            <ErrorDisplay 
+              error={{
+                message: "Loading application...",
+                statusCode: 0
+              }}
+            />
+          }
+        />
+      </RoutesWithScrollBehavior>
     </ErrorBoundary>
   );
 };

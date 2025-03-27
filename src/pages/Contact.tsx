@@ -1,14 +1,22 @@
 
 import { motion } from "framer-motion";
+import { useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/components/ui/use-toast";
 import Footer2 from "@/components/ui/Footer2";
+import { scrollToTop } from "@/utils/scrollToTop";
 
 const Contact = () => {
   const { toast } = useToast();
+  
+  // Scroll to top on component mount
+  useEffect(() => {
+    console.log("Contact page - Scrolling to top");
+    scrollToTop();
+  }, []);
 
   // Define the footer links and socials for this page
   const footerLinks = [
@@ -79,7 +87,7 @@ const Contact = () => {
             onSubmit={handleSubmit} 
             className="space-y-6 bg-black/10 backdrop-blur-md p-8 rounded-xl border border-white/10 shadow-2xl text-left"
           >
-            <div className="text-sm text-white/80 mb-4">* Required</div>
+            <div className="text-sm text-white/80 mb-4 text-left">* Required</div>
             <div className="space-y-4">
               <label htmlFor="name" className="block text-sm font-medium text-white/90 mb-1 text-left">Name * </label>
               <Input 

@@ -1,6 +1,6 @@
 
 import { Helmet } from "react-helmet";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import BlogHeader from "@/components/blog/BlogHeader";
 import TrendingPosts from "@/components/blog/TrendingPosts";
 import BlogGrid from "@/components/blog/BlogGrid";
@@ -8,9 +8,16 @@ import FeaturedCategories from "@/components/blog/FeaturedCategories";
 import NewsletterSection from "@/components/blog/NewsletterSection";
 import Navbar from "@/components/Navbar";
 import Footer2 from "@/components/ui/Footer2";
+import { scrollToTop } from "@/utils/scrollToTop";
 
 const Blog = () => {
   const [activeCategory, setActiveCategory] = useState<'all' | 'tech' | 'travel'>('all');
+
+  // Scroll to top on component mount
+  useEffect(() => {
+    console.log("Blog page - Scrolling to top");
+    scrollToTop();
+  }, []);
 
   // Define the footer links and socials for this page
   const footerLinks = [

@@ -2,23 +2,20 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import Footer2 from "../ui/Footer2";
-
-const ScrollToTop = () => {
-  const { pathname } = useLocation();
-
-  useEffect(() => {
-    console.log('ScrollToTop effect triggered for path:', pathname);
-    window.scrollTo(0, 0);
-  }, [pathname]);
-
-  return null;
-};
+import { scrollToTop } from "@/utils/scrollToTop";
 
 interface LayoutProps {
   children: React.ReactNode;
 }
 
 const Layout = ({ children }: LayoutProps) => {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    console.log('Layout component scroll reset for path:', pathname);
+    scrollToTop();
+  }, [pathname]);
+
   // Define the footer links and socials for all pages
   const footerLinks = [
     {
@@ -57,7 +54,6 @@ const Layout = ({ children }: LayoutProps) => {
   console.log('Rendering Layout component');
   return (
     <div className="min-h-screen flex flex-col w-full max-w-full overflow-x-hidden bg-gray-900">
-      <ScrollToTop />
       <div className="flex-grow">
         {children}
       </div>

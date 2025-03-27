@@ -1,6 +1,7 @@
 
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import Navbar from "@/components/Navbar";
@@ -8,8 +9,15 @@ import SmartSystemGuide from "@/components/troubleshooting/SmartSystemGuide";
 import ConnectivityGuide from "@/components/connectivity/ConnectivityGuide";
 import TroubleshootingFlowchart from "@/components/troubleshooting/TroubleshootingFlowchart";
 import Footer2 from "@/components/ui/Footer2";
+import { scrollToTop } from "@/utils/scrollToTop";
 
 const Troubleshooting = () => {
+  // Scroll to top on component mount
+  useEffect(() => {
+    console.log("Troubleshooting page - Scrolling to top");
+    scrollToTop();
+  }, []);
+
   // Define the footer links and socials for this page
   const footerLinks = [
     {
