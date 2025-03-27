@@ -1,5 +1,5 @@
 
-import { createBrowserRouter, RouterProvider as ReactRouterProvider, useLocation, useNavigationType } from "react-router-dom";
+import { createBrowserRouter, RouterProvider as ReactRouterProvider, useLocation, useNavigationType, NavigationType } from "react-router-dom";
 import { routes } from "@/routes/routes";
 import ErrorBoundary from "../error/ErrorBoundary";
 import ErrorDisplay from "../error/ErrorDisplay";
@@ -17,7 +17,7 @@ function ScrollToTopOnMount() {
   useEffect(() => {
     console.log('ScrollToTop effect triggered for path:', pathname);
     // Only scroll to top if not replacing the current entry
-    if (navigationType !== 'replace') {
+    if (navigationType !== 'REPLACE') {
       scrollToTop();
     }
   }, [pathname, navigationType]);
