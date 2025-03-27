@@ -25,16 +25,7 @@ function ScrollToTopOnMount() {
   return null;
 }
 
-// Wrap routes with scroll behavior
-function RoutesWithScrollBehavior({ children }: { children: React.ReactNode }) {
-  return (
-    <>
-      <ScrollToTopOnMount />
-      {children}
-    </>
-  );
-}
-
+// Modified structure to ensure ScrollToTopOnMount is within Router context
 const RouterProvider = () => {
   console.log('RouterProvider - Initialized with routes:', routes.map(route => route.path));
   console.log('RouterProvider - Current location:', window.location.pathname);
@@ -75,19 +66,19 @@ const RouterProvider = () => {
   
   return (
     <ErrorBoundary>
-      <RoutesWithScrollBehavior>
-        <ReactRouterProvider 
-          router={router} 
-          fallbackElement={
-            <ErrorDisplay 
-              error={{
-                message: "Loading application...",
-                statusCode: 0
-              }}
-            />
-          }
-        />
-      </RoutesWithScrollBehavior>
+      <ReactRouterProvider 
+        router={router} 
+        fallbackElement={
+          <ErrorDisplay 
+            error={{
+              message: "Loading application...",
+              statusCode: 0
+            }}
+          />
+        }
+      >
+        <ScrollToTopOnMount />
+      </ReactRouterProvider>
     </ErrorBoundary>
   );
 };

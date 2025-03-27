@@ -2,7 +2,6 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import Footer2 from "../ui/Footer2";
-import { scrollToTop } from "@/utils/scrollToTop";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -11,9 +10,9 @@ interface LayoutProps {
 const Layout = ({ children }: LayoutProps) => {
   const { pathname } = useLocation();
 
+  // We've removed the scrollToTop call here since it's now handled by the RouterProvider
   useEffect(() => {
-    console.log('Layout component scroll reset for path:', pathname);
-    scrollToTop();
+    console.log('Layout component rendered for path:', pathname);
   }, [pathname]);
 
   // Define the footer links and socials for all pages
