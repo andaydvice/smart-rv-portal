@@ -16,7 +16,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { useToast } from "@/components/ui/use-toast";
-import Footer2 from "@/components/ui/Footer2";
+import Layout from "@/components/layout/Layout";
 
 const ScheduleDemo = () => {
   const [date, setDate] = useState<Date>();
@@ -28,33 +28,6 @@ const ScheduleDemo = () => {
     message: "",
   });
 
-  // Define the footer links and socials for this page
-  const footerLinks = [
-    {
-      title: "Quick Links",
-      links: [
-        { text: "Models", href: "/models" },
-        { text: "Features", href: "/features" },
-        { text: "Technology", href: "/technology" }
-      ]
-    },
-    {
-      title: "Support",
-      links: [
-        { text: "Contact", href: "/contact" },
-        { text: "Documentation", href: "/documentation" },
-        { text: "FAQs", href: "/faqs" }
-      ]
-    }
-  ];
-
-  const footerSocials = [
-    { icon: "facebook", href: "https://facebook.com" },
-    { icon: "twitter", href: "https://twitter.com" },
-    { icon: "instagram", href: "https://instagram.com" },
-    { icon: "youtube", href: "https://youtube.com" }
-  ];
-
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     toast({
@@ -65,9 +38,8 @@ const ScheduleDemo = () => {
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-gradient-to-b from-gray-900 to-gray-800">
-      <Navbar />
-      <div className="relative flex-grow">
+    <Layout>
+      <div className="relative">
         <img
           src="/lovable-uploads/5ad3c360-419f-4662-8c19-3d5a3cffe23f.png"
           alt="Luxury Smart RV on mountain road"
@@ -201,12 +173,7 @@ const ScheduleDemo = () => {
           </motion.div>
         </div>
       </div>
-      <Footer2 
-        links={footerLinks}
-        socials={footerSocials}
-        description="Experience our Smart RV technology firsthand with a personalized demo"
-      />
-    </div>
+    </Layout>
   );
 };
 
