@@ -8,38 +8,11 @@ import OverviewTab from "@/components/documentation/OverviewTab";
 import TechnicalTab from "@/components/documentation/TechnicalTab";
 import MaintenanceTab from "@/components/documentation/MaintenanceTab";
 import PowerTab from "@/components/documentation/PowerTab";
-import Footer2 from "@/components/ui/Footer2";
+import Layout from "@/components/layout/Layout";
 
 const Documentation = () => {
-  // Define the footer links and socials for this page
-  const footerLinks = [
-    {
-      title: "Quick Links",
-      links: [
-        { text: "Support", href: "/support" },
-        { text: "Troubleshooting", href: "/troubleshooting" },
-        { text: "Contact", href: "/contact" }
-      ]
-    },
-    {
-      title: "Documentation",
-      links: [
-        { text: "Technical Specs", href: "/documentation?tab=technical" },
-        { text: "Maintenance", href: "/documentation?tab=maintenance" },
-        { text: "Power Systems", href: "/documentation?tab=power" }
-      ]
-    }
-  ];
-
-  const footerSocials = [
-    { icon: "facebook", href: "https://facebook.com" },
-    { icon: "twitter", href: "https://twitter.com" },
-    { icon: "instagram", href: "https://instagram.com" },
-    { icon: "youtube", href: "https://youtube.com" }
-  ];
-
   return (
-    <div className="flex flex-col min-h-screen bg-[#131a2a]">
+    <Layout>
       <Navbar />
       <div className="flex-grow">
         <div className="container mx-auto px-4 py-8 -mt-32 relative z-10">
@@ -95,12 +68,7 @@ const Documentation = () => {
           </Tabs>
         </div>
       </div>
-      <Footer2 
-        links={footerLinks}
-        socials={footerSocials}
-        description="Comprehensive documentation for your Smart RV systems"
-      />
-    </div>
+    </Layout>
   );
 };
 
