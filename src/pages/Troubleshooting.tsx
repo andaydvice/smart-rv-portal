@@ -8,7 +8,7 @@ import Navbar from "@/components/Navbar";
 import SmartSystemGuide from "@/components/troubleshooting/SmartSystemGuide";
 import ConnectivityGuide from "@/components/connectivity/ConnectivityGuide";
 import TroubleshootingFlowchart from "@/components/troubleshooting/TroubleshootingFlowchart";
-import Footer2 from "@/components/ui/Footer2";
+import Layout from "@/components/layout/Layout";
 import { scrollToTop } from "@/utils/scrollToTop";
 
 const Troubleshooting = () => {
@@ -18,35 +18,8 @@ const Troubleshooting = () => {
     scrollToTop();
   }, []);
 
-  // Define the footer links and socials for this page
-  const footerLinks = [
-    {
-      title: "Support",
-      links: [
-        { text: "Contact Us", href: "/contact" },
-        { text: "Documentation", href: "/documentation" },
-        { text: "FAQs", href: "/faqs" }
-      ]
-    },
-    {
-      title: "Resources",
-      links: [
-        { text: "Blog", href: "/blog" },
-        { text: "Videos", href: "/videos" },
-        { text: "Community", href: "/community" }
-      ]
-    }
-  ];
-
-  const footerSocials = [
-    { icon: "facebook", href: "https://facebook.com" },
-    { icon: "twitter", href: "https://twitter.com" },
-    { icon: "instagram", href: "https://instagram.com" },
-    { icon: "youtube", href: "https://youtube.com" }
-  ];
-
   return (
-    <div className="flex flex-col min-h-screen bg-[#080F1F]">
+    <Layout>
       <Navbar />
       {/* Hero Section */}
       <section className="relative">
@@ -117,13 +90,7 @@ const Troubleshooting = () => {
           </motion.div>
         </div>
       </section>
-      
-      <Footer2 
-        links={footerLinks}
-        socials={footerSocials}
-        description="Helping you troubleshoot and maximize your Smart RV experience"
-      />
-    </div>
+    </Layout>
   );
 };
 

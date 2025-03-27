@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Cpu, Wifi, Battery, Shield, Smartphone, Bot, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
-import Footer2 from "@/components/ui/Footer2";
+import Layout from "@/components/layout/Layout";
 
 const technologies = [
   {
@@ -46,35 +46,8 @@ const technologies = [
 ];
 
 const Technology = () => {
-  // Define the footer links and socials for this page
-  const footerLinks = [
-    {
-      title: "Quick Links",
-      links: [
-        { text: "Models", href: "/models" },
-        { text: "Features", href: "/features" },
-        { text: "Contact", href: "/contact" }
-      ]
-    },
-    {
-      title: "Technology",
-      links: [
-        { text: "AI Integration", href: "/technology#ai" },
-        { text: "Connected Systems", href: "/technology#connected" },
-        { text: "Security Suite", href: "/technology#security" }
-      ]
-    }
-  ];
-
-  const footerSocials = [
-    { icon: "facebook", href: "https://facebook.com" },
-    { icon: "twitter", href: "https://twitter.com" },
-    { icon: "instagram", href: "https://instagram.com" },
-    { icon: "youtube", href: "https://youtube.com" }
-  ];
-
   return (
-    <div className="flex flex-col min-h-screen">
+    <Layout>
       <Navbar />
       <motion.div 
         initial={{ opacity: 0 }}
@@ -138,12 +111,7 @@ const Technology = () => {
           </motion.div>
         </div>
       </motion.div>
-      <Footer2 
-        links={footerLinks}
-        socials={footerSocials}
-        description="Innovating the future of recreational vehicles with cutting-edge technology"
-      />
-    </div>
+    </Layout>
   );
 };
 

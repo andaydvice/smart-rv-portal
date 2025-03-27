@@ -12,7 +12,6 @@ import "../styles/responsive-map.css"; // Add our new responsive map styles
 import "../styles/map-preview.css"; // Add our map preview styles
 import "../styles/map-loading.css"; // Add loading styles
 import "../styles/google-maps.css"; // Add Google Maps specific styles
-import Footer2 from "@/components/ui/Footer2";
 
 // Helper function to normalize state names consistently
 const normalizeStateName = (stateAbbr: string): string => {
@@ -69,35 +68,8 @@ export async function getStateCountsWithSQL() {
 }
 
 export default function StorageFacilities() {
-  // Define the footer links and socials for this page
-  const footerLinks = [
-    {
-      title: "Quick Links",
-      links: [
-        { text: "Home", href: "/" },
-        { text: "Features", href: "/features" },
-        { text: "Models", href: "/models" }
-      ]
-    },
-    {
-      title: "Tools",
-      links: [
-        { text: "Weather", href: "/rv-weather" },
-        { text: "Calculators", href: "/calculators" },
-        { text: "Documentation", href: "/documentation" }
-      ]
-    }
-  ];
-
-  const footerSocials = [
-    { icon: "facebook", href: "https://facebook.com" },
-    { icon: "twitter", href: "https://twitter.com" },
-    { icon: "instagram", href: "https://instagram.com" },
-    { icon: "youtube", href: "https://youtube.com" }
-  ];
-
   return (
-    <div className="min-h-screen flex flex-col w-full bg-[#080F1F] text-white">
+    <Layout>
       <Navbar />
       {/* Hero Header with Image */}
       <div className="relative w-full h-[300px]">
@@ -137,12 +109,6 @@ export default function StorageFacilities() {
       <div className="mt-8 mb-12">
         <LocationPreviewSection mapToken={import.meta.env.VITE_MAPBOX_TOKEN || ""} />
       </div>
-      
-      <Footer2 
-        links={footerLinks}
-        socials={footerSocials}
-        description="Find the perfect storage solution for your valuable RV investment"
-      />
-    </div>
+    </Layout>
   );
 }

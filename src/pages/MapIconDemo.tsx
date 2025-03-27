@@ -4,7 +4,7 @@ import Navbar from "@/components/Navbar";
 import { Container } from "@/components/ui/container";
 import MapIconDemo from "@/components/storage/map/components/MapIconDemo";
 import MapWithResponsiveIcons from "@/components/storage/map/components/MapWithResponsiveIcons";
-import Footer2 from "@/components/ui/Footer2";
+import Layout from "@/components/layout/Layout";
 
 // Sample data for the icons
 const demoIcons = [
@@ -90,35 +90,8 @@ const mapLocations = [
 ];
 
 const MapIconDemoPage = () => {
-  // Define the footer links and socials for this page
-  const footerLinks = [
-    {
-      title: "Quick Links",
-      links: [
-        { text: "Home", href: "/" },
-        { text: "Storage Facilities", href: "/storage-facilities" },
-        { text: "Weather", href: "/rv-weather" }
-      ]
-    },
-    {
-      title: "Support",
-      links: [
-        { text: "Documentation", href: "/documentation" },
-        { text: "Calculators", href: "/calculators" },
-        { text: "Contact", href: "/contact" }
-      ]
-    }
-  ];
-
-  const footerSocials = [
-    { icon: "facebook", href: "https://facebook.com" },
-    { icon: "twitter", href: "https://twitter.com" },
-    { icon: "instagram", href: "https://instagram.com" },
-    { icon: "youtube", href: "https://youtube.com" }
-  ];
-
   return (
-    <div className="flex flex-col min-h-screen">
+    <Layout>
       <Navbar />
       <div className="min-h-screen w-full bg-[#080F1F] text-white flex-grow">
         <Container className="py-10" fullWidth>
@@ -149,12 +122,7 @@ const MapIconDemoPage = () => {
           </div>
         </Container>
       </div>
-      <Footer2 
-        links={footerLinks}
-        socials={footerSocials}
-        description="Interactive map components for improved RV location visualization"
-      />
-    </div>
+    </Layout>
   );
 };
 

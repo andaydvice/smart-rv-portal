@@ -2,37 +2,11 @@
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import { Battery, Sun, Zap, Activity } from "lucide-react";
-import Footer2 from "@/components/ui/Footer2";
+import Layout from "@/components/layout/Layout";
 
 const PowerManagement = () => {
-  // Define the footer links and socials for this page
-  const footerLinks = [
-    {
-      title: "Quick Links",
-      links: [
-        { text: "Features", href: "/features" },
-        { text: "Models", href: "/models" },
-        { text: "Documentation", href: "/documentation" }
-      ]
-    },
-    {
-      title: "Other Features",
-      links: [
-        { text: "Navigation System", href: "/features/navigation-system" },
-        { text: "Audio System", href: "/features/audio-system" },
-        { text: "Smart Kitchen", href: "/features/smart-kitchen" }
-      ]
-    }
-  ];
-
-  const footerSocials = [
-    { icon: "facebook", href: "https://facebook.com" },
-    { icon: "twitter", href: "https://twitter.com" },
-    { icon: "instagram", href: "https://instagram.com" }
-  ];
-
   return (
-    <div className="flex flex-col min-h-screen">
+    <Layout>
       <Navbar />
       <motion.div 
         initial={{ opacity: 0 }}
@@ -100,12 +74,7 @@ const PowerManagement = () => {
           </div>
         </div>
       </motion.div>
-      <Footer2 
-        links={footerLinks}
-        socials={footerSocials}
-        description="Maximize your power efficiency with our intelligent energy management systems"
-      />
-    </div>
+    </Layout>
   );
 };
 

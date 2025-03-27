@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import CalculatorHeader from "@/components/calculator-layout/CalculatorHeader";
@@ -19,44 +18,17 @@ import SmartAlertTranslator from "@/components/calculators/smart-systems/SmartAl
 import SetupGuideCreator from "@/components/calculators/smart-systems/SetupGuideCreator";
 import RVCostCalculator from "@/components/calculators/rv/RVCostCalculator";
 import Navbar from "@/components/Navbar";
-import Footer2 from "@/components/ui/Footer2";
+import Layout from "@/components/layout/Layout";
 
 const Calculators = () => {
   const [historicalMPG, setHistoricalMPG] = useState<MPGRecord[]>([]);
-
-  // Define the footer links and socials for this page
-  const footerLinks = [
-    {
-      title: "Quick Links",
-      links: [
-        { text: "Home", href: "/" },
-        { text: "Features", href: "/features" },
-        { text: "Models", href: "/models" }
-      ]
-    },
-    {
-      title: "Tools",
-      links: [
-        { text: "Weather", href: "/rv-weather" },
-        { text: "Storage", href: "/storage-facilities" },
-        { text: "Documentation", href: "/documentation" }
-      ]
-    }
-  ];
-
-  const footerSocials = [
-    { icon: "facebook", href: "https://facebook.com" },
-    { icon: "twitter", href: "https://twitter.com" },
-    { icon: "instagram", href: "https://instagram.com" },
-    { icon: "youtube", href: "https://youtube.com" }
-  ];
 
   const handleAddMPGRecord = (record: MPGRecord) => {
     setHistoricalMPG(prev => [...prev, record]);
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-[#080F1F] text-white">
+    <Layout>
       <Navbar />
       <div className="pt-16 flex-grow">
         <CalculatorHeader />
@@ -139,12 +111,7 @@ const Calculators = () => {
           </Tabs>
         </div>
       </div>
-      <Footer2 
-        links={footerLinks}
-        socials={footerSocials}
-        description="Essential calculators and tools for Smart RV owners and enthusiasts"
-      />
-    </div>
+    </Layout>
   );
 };
 

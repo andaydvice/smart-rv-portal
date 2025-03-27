@@ -2,7 +2,12 @@
 import { Link } from "react-router-dom";
 import { Facebook, Twitter, Instagram, Youtube, Mail } from "lucide-react";
 
+// This component is no longer used since we're now using Layout with Footer2
+// It's kept for reference or fallback purposes
+
 const Footer = () => {
+  console.log("DEPRECATED: Using old Footer component - use Layout with Footer2 instead");
+  
   return (
     <footer className="bg-gray-900 text-white mt-auto">
       <div className="max-w-7xl mx-auto px-4 py-12 sm:px-6 lg:px-8">

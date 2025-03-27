@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/components/ui/use-toast";
-import Footer2 from "@/components/ui/Footer2";
+import Layout from "@/components/layout/Layout";
 import { scrollToTop } from "@/utils/scrollToTop";
 
 const Contact = () => {
@@ -18,33 +18,6 @@ const Contact = () => {
     scrollToTop();
   }, []);
 
-  // Define the footer links and socials for this page
-  const footerLinks = [
-    {
-      title: "Quick Links",
-      links: [
-        { text: "Home", href: "/" },
-        { text: "Features", href: "/features" },
-        { text: "Models", href: "/models" }
-      ]
-    },
-    {
-      title: "Support",
-      links: [
-        { text: "Documentation", href: "/documentation" },
-        { text: "Troubleshooting", href: "/troubleshooting" },
-        { text: "FAQs", href: "/faqs" }
-      ]
-    }
-  ];
-
-  const footerSocials = [
-    { icon: "facebook", href: "https://facebook.com" },
-    { icon: "twitter", href: "https://twitter.com" },
-    { icon: "instagram", href: "https://instagram.com" },
-    { icon: "youtube", href: "https://youtube.com" }
-  ];
-
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     toast({
@@ -54,7 +27,7 @@ const Contact = () => {
   };
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <Layout>
       <Navbar />
       <motion.div 
         initial={{ opacity: 0 }}
@@ -122,12 +95,7 @@ const Contact = () => {
           </motion.form>
         </div>
       </motion.div>
-      <Footer2 
-        links={footerLinks}
-        socials={footerSocials}
-        description="Get in touch with our Smart RV experts"
-      />
-    </div>
+    </Layout>
   );
 };
 
