@@ -4,37 +4,11 @@ import Navbar from "@/components/Navbar";
 import { Refrigerator, Droplet } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import Footer2 from "@/components/ui/Footer2";
+import Layout from "@/components/layout/Layout";
 
 const SmartKitchen = () => {
-  // Define the footer links and socials for this page
-  const footerLinks = [
-    {
-      title: "Quick Links",
-      links: [
-        { text: "Features", href: "/features" },
-        { text: "Models", href: "/models" },
-        { text: "Documentation", href: "/documentation" }
-      ]
-    },
-    {
-      title: "Other Features",
-      links: [
-        { text: "Navigation System", href: "/features/navigation-system" },
-        { text: "Power Management", href: "/features/power-management" },
-        { text: "Audio System", href: "/features/audio-system" }
-      ]
-    }
-  ];
-
-  const footerSocials = [
-    { icon: "facebook", href: "https://facebook.com" },
-    { icon: "twitter", href: "https://twitter.com" },
-    { icon: "instagram", href: "https://instagram.com" }
-  ];
-
   return (
-    <div className="min-h-screen flex flex-col">
+    <Layout>
       <Navbar />
       <motion.div 
         initial={{ opacity: 0 }}
@@ -103,12 +77,7 @@ const SmartKitchen = () => {
           </div>
         </div>
       </motion.div>
-      <Footer2 
-        links={footerLinks}
-        socials={footerSocials}
-        description="Transform your RV cooking experience with our smart kitchen technologies"
-      />
-    </div>
+    </Layout>
   );
 };
 
