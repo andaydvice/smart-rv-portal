@@ -9,46 +9,11 @@ import SystemArchitectureSection from "@/components/documentation/sections/Syste
 import NetworkInfrastructureSection from "@/components/documentation/sections/NetworkInfrastructureSection";
 import PowerManagementSection from "@/components/documentation/sections/PowerManagementSection";
 import SecuritySection from "@/components/documentation/sections/SecuritySection";
-import Footer2 from "@/components/ui/Footer2";
-import { useEffect } from "react";
-import { scrollToTop } from "@/utils/scrollToTop";
+import Layout from "@/components/layout/Layout";
 
 const CompleteDocumentation = () => {
-  // Scroll to top on component mount
-  useEffect(() => {
-    console.log("CompleteDocumentation page - Scrolling to top");
-    scrollToTop();
-  }, []);
-
-  // Define the footer links and socials for this page
-  const footerLinks = [
-    {
-      title: "Support",
-      links: [
-        { text: "Contact Us", href: "/contact" },
-        { text: "Troubleshooting", href: "/troubleshooting" },
-        { text: "FAQs", href: "/faqs" }
-      ]
-    },
-    {
-      title: "Resources",
-      links: [
-        { text: "Documentation", href: "/documentation" },
-        { text: "Blog", href: "/blog" },
-        { text: "Videos", href: "/videos" }
-      ]
-    }
-  ];
-
-  const footerSocials = [
-    { icon: "facebook", href: "https://facebook.com" },
-    { icon: "twitter", href: "https://twitter.com" },
-    { icon: "instagram", href: "https://instagram.com" },
-    { icon: "youtube", href: "https://youtube.com" }
-  ];
-
   return (
-    <div className="min-h-screen flex flex-col bg-[#131a2a]">
+    <Layout>
       <Navbar />
       <div className="container mx-auto px-4 pt-24 pb-16 flex-grow">
         <motion.div
@@ -92,13 +57,7 @@ const CompleteDocumentation = () => {
           </div>
         </motion.div>
       </div>
-      
-      <Footer2 
-        links={footerLinks}
-        socials={footerSocials}
-        description="Comprehensive technical documentation for your Smart RV system"
-      />
-    </div>
+    </Layout>
   );
 };
 

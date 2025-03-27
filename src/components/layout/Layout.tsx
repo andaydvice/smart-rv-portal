@@ -15,14 +15,16 @@ const Layout = ({ children }: LayoutProps) => {
     console.log('Layout component rendered for path:', pathname);
   }, [pathname]);
 
-  // Define the footer links and socials for all pages
+  // Define standardized footer links for all pages
   const footerLinks = [
     {
       title: "Quick Links",
       links: [
         { text: "Home", href: "/" },
         { text: "Features", href: "/features" },
-        { text: "Models", href: "/models" }
+        { text: "Models", href: "/models" },
+        { text: "Technology", href: "/technology" },
+        { text: "Blog", href: "/blog" }
       ]
     },
     {
@@ -30,15 +32,28 @@ const Layout = ({ children }: LayoutProps) => {
       links: [
         { text: "Navigation System", href: "/features/navigation-system" },
         { text: "Security System", href: "/features/security-system" },
-        { text: "Power Management", href: "/features/power-management" }
+        { text: "Power Management", href: "/features/power-management" },
+        { text: "Internet Connectivity", href: "/features/internet-connectivity" },
+        { text: "Smart Kitchen", href: "/features/smart-kitchen" }
+      ]
+    },
+    {
+      title: "Resources",
+      links: [
+        { text: "Calculators", href: "/calculators" },
+        { text: "Documentation", href: "/documentation" },
+        { text: "Weather", href: "/weather" },
+        { text: "Storage Facilities", href: "/storage-facilities" },
+        { text: "Storage Checklist", href: "/storage-preparation-checklist" }
       ]
     },
     {
       title: "Support",
       links: [
-        { text: "Documentation", href: "/documentation" },
+        { text: "Contact Us", href: "/contact" },
         { text: "Troubleshooting", href: "/troubleshooting" },
-        { text: "Contact", href: "/contact" }
+        { text: "Schedule Demo", href: "/schedule-demo" },
+        { text: "Voice Control", href: "/voice-control" }
       ]
     }
   ];
