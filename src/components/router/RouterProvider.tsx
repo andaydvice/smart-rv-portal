@@ -1,5 +1,5 @@
 
-import { createBrowserRouter, RouterProvider as ReactRouterProvider, useLocation, useNavigationType, NavigationType } from "react-router-dom";
+import { createBrowserRouter, RouterProvider as ReactRouterProvider, useNavigationType, useLocation } from "react-router-dom";
 import { routes } from "@/routes/routes";
 import ErrorBoundary from "../error/ErrorBoundary";
 import ErrorDisplay from "../error/ErrorDisplay";
@@ -7,25 +7,22 @@ import { useEffect } from "react";
 import { scrollToTop } from "@/utils/scrollToTop";
 
 // Create the router from the routes array with better error handling
-const router = createBrowserRouter(routes);
-
-// Component to handle scroll behavior
-function ScrollToTopOnMount() {
-  const { pathname } = useLocation();
-  const navigationType = useNavigationType();
-
-  useEffect(() => {
-    console.log('ScrollToTop effect triggered for path:', pathname);
-    // Only scroll to top if not replacing the current entry
-    if (navigationType !== 'REPLACE') {
-      scrollToTop();
+const router = createBrowserRouter(
+  routes.map(route => ({
+    ...route,
+    // Add a loader to each route to handle scrolling to top
+    loader: (args) => {
+      // Only scroll to top for new navigations, not for replacements
+      if (window.history.state?.type !== 'REPLACE') {
+        scrollToTop();
+      }
+      // Return null to not affect data loading
+      return null;
     }
-  }, [pathname, navigationType]);
+  }))
+);
 
-  return null;
-}
-
-// Modified structure to ensure ScrollToTopOnMount is within Router context
+// Modified structure to properly handle React Router Provider
 const RouterProvider = () => {
   console.log('RouterProvider - Initialized with routes:', routes.map(route => route.path));
   console.log('RouterProvider - Current location:', window.location.pathname);
@@ -76,9 +73,7 @@ const RouterProvider = () => {
             }}
           />
         }
-      >
-        <ScrollToTopOnMount />
-      </ReactRouterProvider>
+      />
     </ErrorBoundary>
   );
 };
