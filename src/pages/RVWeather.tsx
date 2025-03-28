@@ -1,5 +1,5 @@
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { AlertTriangle, LogIn } from "lucide-react";
 import { APIKeyInput } from "@/components/weather/APIKeyInput";
 import AlertCard from "@/components/weather/AlertCard";
@@ -9,7 +9,6 @@ import LocationSearch from "@/components/weather/LocationSearch";
 import TripImpact from "@/components/weather/TripImpact";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import HeaderImage from "@/components/weather/HeaderImage";
-import Footer2 from "@/components/ui/Footer2";
 import WeatherDataProvider from "@/components/weather/WeatherDataProvider";
 import WeatherCardsSection from "@/components/weather/WeatherCardsSection";
 import { Location } from "@/types/weather";
@@ -18,37 +17,18 @@ import { useAuth } from "@/components/auth/AuthContext";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import Navbar from "@/components/Navbar";
+import Layout from "@/components/layout/Layout";
+import { scrollToTop } from "@/utils/scrollToTop";
 
 const RVWeather = () => {
   const { user } = useAuth();
   const navigate = useNavigate();
 
-  // Define the footer links and socials for this page
-  const footerLinks = [
-    {
-      title: "Quick Links",
-      links: [
-        { text: "Home", href: "/" },
-        { text: "Features", href: "/features" },
-        { text: "Models", href: "/models" }
-      ]
-    },
-    {
-      title: "Tools",
-      links: [
-        { text: "Calculators", href: "/calculators" },
-        { text: "Storage", href: "/storage-facilities" },
-        { text: "Documentation", href: "/documentation" }
-      ]
-    }
-  ];
-
-  const footerSocials = [
-    { icon: "facebook", href: "https://facebook.com" },
-    { icon: "twitter", href: "https://twitter.com" },
-    { icon: "instagram", href: "https://instagram.com" },
-    { icon: "youtube", href: "https://youtube.com" }
-  ];
+  // Scroll to top on component mount
+  useEffect(() => {
+    console.log("RVWeather page - Scrolling to top");
+    scrollToTop();
+  }, []);
 
   console.log("[RVWeather] Rendering");
   const [currentLocation, setCurrentLocation] = useState<Location>(() => {
@@ -62,8 +42,7 @@ const RVWeather = () => {
   const [imageLoaded, setImageLoaded] = useState(false);
 
   return (
-    <div className="min-h-screen w-full flex flex-col bg-gradient-dark text-white">
-      <Navbar />
+    <Layout>
       <HeaderImage />
       
       <div className="container mx-auto px-4 py-8 max-w-7xl flex-grow">
@@ -162,12 +141,7 @@ const RVWeather = () => {
           </WeatherDataProvider>
         </div>
       </div>
-      <Footer2 
-        links={footerLinks}
-        socials={footerSocials}
-        description="Stay ahead of weather conditions for safer and smarter RV travel"
-      />
-    </div>
+    </Layout>
   );
 };
 

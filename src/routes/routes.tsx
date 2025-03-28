@@ -150,6 +150,10 @@ export const routes: RouteObject[] = [
     element: <RVWeather />,
   },
   {
+    path: '/rv-weather',
+    element: <RVWeather />,
+  },
+  {
     path: '/voice-control',
     element: <VoiceControl />,
   },
