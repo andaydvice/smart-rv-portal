@@ -5,7 +5,7 @@ import DropdownMenuComponent from '../ui/DropdownMenuComponent';
 
 const DropdownMenuExample: React.FC = () => {
   return (
-    <div className="p-8 flex justify-center">
+    <div className="p-8">
       <DropdownMenuComponent 
         menuLink={{ text: "Features", href: "/features" }}
       >
