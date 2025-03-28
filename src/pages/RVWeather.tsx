@@ -16,7 +16,6 @@ import { weatherConfig } from "@/utils/weatherAPI";
 import { useAuth } from "@/components/auth/AuthContext";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
-import Navbar from "@/components/Navbar";
 import Layout from "@/components/layout/Layout";
 import { scrollToTop } from "@/utils/scrollToTop";
 

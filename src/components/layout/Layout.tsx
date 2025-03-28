@@ -2,6 +2,7 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import Footer2 from "../ui/Footer2";
+import Navbar from "@/components/Navbar";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -68,6 +69,7 @@ const Layout = ({ children }: LayoutProps) => {
   console.log('Rendering Layout component');
   return (
     <div className="min-h-screen flex flex-col w-full max-w-full overflow-x-hidden bg-gray-900">
+      <Navbar />
       <div className="flex-grow">
         {children}
       </div>
