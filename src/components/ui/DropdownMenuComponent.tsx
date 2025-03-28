@@ -44,8 +44,9 @@ const DropdownMenuComponent: React.FC<DropdownMenuComponentProps> = ({
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent 
-        align="center"
-        sideOffset={0}
+        align="start"
+        alignOffset={0}
+        sideOffset={5}
         className="bg-gray-900/95 backdrop-blur-sm rounded-lg border border-gray-800 shadow-lg p-2 w-auto min-w-[200px] z-50"
       >
         {React.Children.map(children, (child) => {
