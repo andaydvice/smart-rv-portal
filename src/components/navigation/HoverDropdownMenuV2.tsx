@@ -83,7 +83,7 @@ const HoverDropdownMenuV2: React.FC<HoverDropdownMenuV2Props> = ({
                 to={link.href} 
                 className="text-gray-300 hover:text-[#5B9BD5] transition-colors flex items-center gap-2 w-full px-2 py-1.5 text-sm"
               >
-                {link.icon && <span>{link.icon}</span>}
+                {link.icon && <span className="flex-shrink-0">{link.icon}</span>}
                 {link.text}
               </Link>
             ))}

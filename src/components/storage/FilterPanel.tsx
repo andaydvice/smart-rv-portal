@@ -118,6 +118,7 @@ const FilterPanel = ({ onFilterChange }: FilterPanelProps) => {
           variant="outline" 
           className="w-full text-black border-gray-600 hover:bg-gray-700 hover:text-white" 
           onClick={handleReset}
+          id="filter-panel-reset-button"
         >
           Reset Filters
         </Button>

@@ -160,3 +160,15 @@ html {
   background-color: #131a2a;
   border: 1px solid rgba(255, 255, 255, 0.3);
 }
+
+/* Improve dropdown menu icon styling */
+.hover-dropdown-menu svg {
+  flex-shrink: 0;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* Fix the button color in FilterPanel */
+#filter-panel-reset-button {
+  color: black !important;
+}

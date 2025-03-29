@@ -1,6 +1,12 @@
 
 import { Link, useLocation } from "react-router-dom";
-import { Home, Calculator, CloudSun, Warehouse, ClipboardCheck } from "lucide-react";
+import { 
+  Home, Calculator, CloudSun, Warehouse, ClipboardCheck,
+  Brain, Lightbulb, Eye, Search,
+  Cog, Layers, Activity, Network,
+  Car, Truck, Tent, LayoutTemplate,
+  HelpCircle, MessageCircleQuestion, LifeBuoy, Phone 
+} from "lucide-react";
 import AuthButtons from "./AuthButtons";
 import HoverDropdownMenu from "./HoverDropdownMenu";
 import HoverDropdownMenuV2 from "./HoverDropdownMenuV2";
@@ -34,36 +40,100 @@ const DesktopNavigation = () => {
     }
   ];
 
-  // Define RV Intelligence links
+  // Define RV Intelligence links with icons
   const intelligenceLinks = [
-    { text: "Voice Control", href: "/voice-control" },
-    { text: "Smart Automation", href: "/features/smart-automation" },
-    { text: "Security System", href: "/features/security-system" },
-    { text: "Navigation System", href: "/features/navigation-system" }
+    { 
+      text: "Voice Control", 
+      href: "/voice-control",
+      icon: <Brain size={16} className="text-[#D946EF]" />
+    },
+    { 
+      text: "Smart Automation", 
+      href: "/features/smart-automation",
+      icon: <Lightbulb size={16} className="text-[#F59E0B]" /> 
+    },
+    { 
+      text: "Security System", 
+      href: "/features/security-system",
+      icon: <Eye size={16} className="text-[#10B981]" />
+    },
+    { 
+      text: "Navigation System", 
+      href: "/features/navigation-system",
+      icon: <Search size={16} className="text-[#3B82F6]" />
+    }
   ];
 
-  // Define RV Systems links
+  // Define RV Systems links with icons
   const systemsLinks = [
-    { text: "Power Management", href: "/features/power-management" },
-    { text: "Water Systems", href: "/features/water-systems" },
-    { text: "Climate Control", href: "/features/climate-control" },
-    { text: "Entertainment", href: "/features/entertainment" }
+    { 
+      text: "Power Management", 
+      href: "/features/power-management",
+      icon: <Cog size={16} className="text-[#F97316]" />
+    },
+    { 
+      text: "Water Systems", 
+      href: "/features/water-systems",
+      icon: <Layers size={16} className="text-[#0EA5E9]" />
+    },
+    { 
+      text: "Climate Control", 
+      href: "/features/climate-control",
+      icon: <Activity size={16} className="text-[#10B981]" />
+    },
+    { 
+      text: "Entertainment", 
+      href: "/features/entertainment",
+      icon: <Network size={16} className="text-[#8B5CF6]" />
+    }
   ];
 
-  // Define Models links
+  // Define Models links with icons
   const modelsLinks = [
-    { text: "Luxury Models", href: "/models/luxury-model" },
-    { text: "Compact Models", href: "/models/compact-model" },
-    { text: "Adventure Models", href: "/models/adventure-model" },
-    { text: "Compare Models", href: "/models/compare-models" }
+    { 
+      text: "Luxury Models", 
+      href: "/models/luxury-model",
+      icon: <Car size={16} className="text-[#F59E0B]" />
+    },
+    { 
+      text: "Compact Models", 
+      href: "/models/compact-model",
+      icon: <Truck size={16} className="text-[#3B82F6]" />
+    },
+    { 
+      text: "Adventure Models", 
+      href: "/models/adventure-model",
+      icon: <Tent size={16} className="text-[#10B981]" />
+    },
+    { 
+      text: "Compare Models", 
+      href: "/models/compare-models",
+      icon: <LayoutTemplate size={16} className="text-[#D946EF]" />
+    }
   ];
 
-  // Define Support links
+  // Define Support links with icons
   const supportLinks = [
-    { text: "Troubleshooting", href: "/troubleshooting" },
-    { text: "Documentation", href: "/documentation" },
-    { text: "Contact Us", href: "/contact" },
-    { text: "Schedule Demo", href: "/schedule-demo" }
+    { 
+      text: "Troubleshooting", 
+      href: "/troubleshooting",
+      icon: <HelpCircle size={16} className="text-[#F97316]" />
+    },
+    { 
+      text: "Documentation", 
+      href: "/documentation",
+      icon: <MessageCircleQuestion size={16} className="text-[#0EA5E9]" />
+    },
+    { 
+      text: "Contact Us", 
+      href: "/contact",
+      icon: <Phone size={16} className="text-[#10B981]" />
+    },
+    { 
+      text: "Schedule Demo", 
+      href: "/schedule-demo",
+      icon: <LifeBuoy size={16} className="text-[#8B5CF6]" />
+    }
   ];
 
   return (
