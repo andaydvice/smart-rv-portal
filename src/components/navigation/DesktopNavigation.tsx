@@ -11,12 +11,28 @@ const DesktopNavigation = () => {
   const location = useLocation();
   const isHomePage = location.pathname === "/";
 
-  // Define RV Tools links for the hover dropdown with icons
+  // Define RV Tools links for the hover dropdown with icons and specific colors
   const rvToolsLinks = [
-    { text: "RV Calculators", href: "/calculators", icon: <Calculator size={16} /> },
-    { text: "RV Weather", href: "/rv-weather", icon: <CloudSun size={16} /> },
-    { text: "Storage Facilities", href: "/storage-facilities", icon: <Warehouse size={16} /> },
-    { text: "Storage Checklist", href: "/storage-preparation-checklist", icon: <ClipboardCheck size={16} /> }
+    { 
+      text: "RV Calculators", 
+      href: "/calculators", 
+      icon: <Calculator size={16} className="text-[#F59E0B]" /> 
+    },
+    { 
+      text: "RV Weather", 
+      href: "/rv-weather", 
+      icon: <CloudSun size={16} className="text-[#3B82F6]" /> 
+    },
+    { 
+      text: "Storage Facilities", 
+      href: "/storage-facilities", 
+      icon: <Warehouse size={16} className="text-[#8B5CF6]" /> 
+    },
+    { 
+      text: "Storage Checklist", 
+      href: "/storage-preparation-checklist", 
+      icon: <ClipboardCheck size={16} className="text-[#10B981]" /> 
+    }
   ];
 
   return (
@@ -40,7 +56,7 @@ const DesktopNavigation = () => {
               RV Intelligence
             </NavigationMenuTrigger>
             <NavigationMenuContent>
-              <div className="w-[400px] bg-gray-900/95 backdrop-blur-sm rounded-lg border border-white/10 shadow-lg p-6">
+              <div className="w-[400px] bg-gray-900/95 backdrop-blur-sm rounded-lg border border-white/30 shadow-lg p-6">
                 <SmartFeaturesLinks />
               </div>
             </NavigationMenuContent>
@@ -51,7 +67,7 @@ const DesktopNavigation = () => {
               RV Systems
             </NavigationMenuTrigger>
             <NavigationMenuContent>
-              <div className="w-[400px] bg-gray-900/95 backdrop-blur-sm rounded-lg border border-white/10 shadow-lg p-6">
+              <div className="w-[400px] bg-gray-900/95 backdrop-blur-sm rounded-lg border border-white/30 shadow-lg p-6">
                 <CoreSystemsLinks />
               </div>
             </NavigationMenuContent>
@@ -62,13 +78,13 @@ const DesktopNavigation = () => {
               Models
             </NavigationMenuTrigger>
             <NavigationMenuContent>
-              <div className="w-[400px] bg-gray-900/95 backdrop-blur-sm rounded-lg border border-white/10 shadow-lg p-6">
+              <div className="w-[400px] bg-gray-900/95 backdrop-blur-sm rounded-lg border border-white/30 shadow-lg p-6">
                 <VehicleSelectionLinks />
               </div>
             </NavigationMenuContent>
           </NavigationMenuItem>
 
-          {/* Custom hover dropdown with icons */}
+          {/* Custom hover dropdown with colored icons */}
           <HoverDropdownMenu 
             trigger="RV Tools" 
             links={rvToolsLinks}
@@ -88,7 +104,7 @@ const DesktopNavigation = () => {
               Support
             </NavigationMenuTrigger>
             <NavigationMenuContent>
-              <div className="w-[600px] bg-gray-900/95 backdrop-blur-sm rounded-lg border border-white/10 shadow-lg p-6">
+              <div className="w-[600px] bg-gray-900/95 backdrop-blur-sm rounded-lg border border-white/30 shadow-lg p-6">
                 <div className="grid gap-6 grid-cols-2">
                   <SupportLinks />
                   <CustomerSupportLinks />

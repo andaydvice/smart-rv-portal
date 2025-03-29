@@ -73,7 +73,7 @@ const HoverDropdownMenu: React.FC<HoverDropdownMenuProps> = ({
 
       {isOpen && (
         <div 
-          className="hover-dropdown-menu absolute min-w-[200px] w-[400px] bg-gray-900/95 backdrop-blur-sm rounded-lg border border-white/10 shadow-lg p-6 z-[9999] left-1/2 transform -translate-x-1/2"
+          className="hover-dropdown-menu absolute min-w-[200px] w-[400px] bg-gray-900/95 backdrop-blur-sm rounded-lg border border-white/30 shadow-lg p-6 z-[9999] left-1/2 transform -translate-x-1/2"
           role="menu"
           aria-orientation="vertical"
         >
@@ -84,7 +84,7 @@ const HoverDropdownMenu: React.FC<HoverDropdownMenuProps> = ({
                 to={link.href} 
                 className="text-gray-300 hover:text-[#5B9BD5] transition-colors flex items-center gap-2 w-full px-2 py-1.5 text-sm"
               >
-                {link.icon && <span className="text-[#5B9BD5]">{link.icon}</span>}
+                {link.icon && <span>{link.icon}</span>}
                 {link.text}
               </Link>
             ))}
