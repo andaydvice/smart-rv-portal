@@ -2,7 +2,7 @@
 import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuList, NavigationMenuTrigger } from "@/components/ui/navigation-menu";
 import { CoreSystemsLinks, SmartFeaturesLinks, VehicleSelectionLinks, SupportLinks, CustomerSupportLinks, RVToolsLinks } from "./links";
 import { Link, useLocation } from "react-router-dom";
-import { Home } from "lucide-react";
+import { Home, Calculator, CloudSun, Warehouse, ClipboardCheck } from "lucide-react";
 import { useAuth } from "@/components/auth/AuthContext";
 import AuthButtons from "./AuthButtons";
 import HoverDropdownMenu from "./HoverDropdownMenu";
@@ -11,12 +11,12 @@ const DesktopNavigation = () => {
   const location = useLocation();
   const isHomePage = location.pathname === "/";
 
-  // Define RV Tools links for the hover dropdown
+  // Define RV Tools links for the hover dropdown with icons
   const rvToolsLinks = [
-    { text: "RV Calculators", href: "/calculators" },
-    { text: "RV Weather", href: "/rv-weather" },
-    { text: "Storage Facilities", href: "/storage-facilities" },
-    { text: "Storage Checklist", href: "/storage-preparation-checklist" }
+    { text: "RV Calculators", href: "/calculators", icon: <Calculator size={16} /> },
+    { text: "RV Weather", href: "/rv-weather", icon: <CloudSun size={16} /> },
+    { text: "Storage Facilities", href: "/storage-facilities", icon: <Warehouse size={16} /> },
+    { text: "Storage Checklist", href: "/storage-preparation-checklist", icon: <ClipboardCheck size={16} /> }
   ];
 
   return (
@@ -40,7 +40,7 @@ const DesktopNavigation = () => {
               RV Intelligence
             </NavigationMenuTrigger>
             <NavigationMenuContent>
-              <div className="w-[400px] bg-gray-900/95 backdrop-blur-sm rounded-lg border border-gray-800 shadow-lg p-6">
+              <div className="w-[400px] bg-gray-900/95 backdrop-blur-sm rounded-lg border border-white/10 shadow-lg p-6">
                 <SmartFeaturesLinks />
               </div>
             </NavigationMenuContent>
@@ -51,7 +51,7 @@ const DesktopNavigation = () => {
               RV Systems
             </NavigationMenuTrigger>
             <NavigationMenuContent>
-              <div className="w-[400px] bg-gray-900/95 backdrop-blur-sm rounded-lg border border-gray-800 shadow-lg p-6">
+              <div className="w-[400px] bg-gray-900/95 backdrop-blur-sm rounded-lg border border-white/10 shadow-lg p-6">
                 <CoreSystemsLinks />
               </div>
             </NavigationMenuContent>
@@ -62,13 +62,13 @@ const DesktopNavigation = () => {
               Models
             </NavigationMenuTrigger>
             <NavigationMenuContent>
-              <div className="w-[400px] bg-gray-900/95 backdrop-blur-sm rounded-lg border border-gray-800 shadow-lg p-6">
+              <div className="w-[400px] bg-gray-900/95 backdrop-blur-sm rounded-lg border border-white/10 shadow-lg p-6">
                 <VehicleSelectionLinks />
               </div>
             </NavigationMenuContent>
           </NavigationMenuItem>
 
-          {/* Replace the problematic RV Tools dropdown with our new HoverDropdownMenu */}
+          {/* Custom hover dropdown with icons */}
           <HoverDropdownMenu 
             trigger="RV Tools" 
             links={rvToolsLinks}
@@ -88,7 +88,7 @@ const DesktopNavigation = () => {
               Support
             </NavigationMenuTrigger>
             <NavigationMenuContent>
-              <div className="w-[600px] bg-gray-900/95 backdrop-blur-sm rounded-lg border border-gray-800 shadow-lg p-6">
+              <div className="w-[600px] bg-gray-900/95 backdrop-blur-sm rounded-lg border border-white/10 shadow-lg p-6">
                 <div className="grid gap-6 grid-cols-2">
                   <SupportLinks />
                   <CustomerSupportLinks />

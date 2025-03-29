@@ -2,11 +2,12 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
-import { ChevronDown, ChevronUp } from "lucide-react";
+import { ChevronDown, ChevronUp, Calculator, CloudSun, Warehouse, ClipboardCheck } from "lucide-react";
 
 interface MenuLink {
   text: string;
   href: string;
+  icon?: React.ReactNode;
 }
 
 interface HoverDropdownMenuProps {
@@ -72,7 +73,7 @@ const HoverDropdownMenu: React.FC<HoverDropdownMenuProps> = ({
 
       {isOpen && (
         <div 
-          className="hover-dropdown-menu absolute min-w-[200px] w-[400px] bg-gray-900/95 backdrop-blur-sm rounded-lg border border-gray-800 shadow-lg p-6 z-[9999] left-1/2 transform -translate-x-1/2"
+          className="hover-dropdown-menu absolute min-w-[200px] w-[400px] bg-gray-900/95 backdrop-blur-sm rounded-lg border border-white/10 shadow-lg p-6 z-[9999] left-1/2 transform -translate-x-1/2"
           role="menu"
           aria-orientation="vertical"
         >
@@ -81,8 +82,9 @@ const HoverDropdownMenu: React.FC<HoverDropdownMenuProps> = ({
               <Link 
                 key={link.href}
                 to={link.href} 
-                className="text-gray-300 hover:text-[#5B9BD5] transition-colors block w-full px-2 py-1.5 text-sm"
+                className="text-gray-300 hover:text-[#5B9BD5] transition-colors flex items-center gap-2 w-full px-2 py-1.5 text-sm"
               >
+                {link.icon && <span className="text-[#5B9BD5]">{link.icon}</span>}
                 {link.text}
               </Link>
             ))}
