@@ -116,7 +116,7 @@ const FilterPanel = ({ onFilterChange }: FilterPanelProps) => {
         />
         <Button 
           variant="outline" 
-          className="w-full text-gray-300 border-gray-600 hover:bg-gray-700 hover:text-white" 
+          className="w-full text-black border-gray-600 hover:bg-gray-700 hover:text-white" 
           onClick={handleReset}
         >
           Reset Filters
