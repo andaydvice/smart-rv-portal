@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Card } from '@/components/ui/card';
 import FilterPanel from './FilterPanel';
-import { FilterState } from './types';
+import { FilterState, StorageFacility } from './types';
 import { useStorageFacilities } from './useStorageFacilities';
 import { useRecentlyViewed } from './useRecentlyViewed';
 import RecentlyViewedFacilities from './RecentlyViewedFacilities';
@@ -15,8 +15,14 @@ import { useWindowFacilityViewer } from './hooks/useWindowFacilityViewer';
 import NavigationHint from './map/components/NavigationHint';
 import MapToggleButton from './map/components/MapToggleButton';
 import MapViewContainer from './map/components/MapViewContainer';
+import { Button } from '@/components/ui/button';
+import { Star } from 'lucide-react';
 
-const StorageFacilitiesMap = () => {
+interface StorageFacilitiesMapProps {
+  onSelectFeaturedLocation?: (facility: StorageFacility | null) => void;
+}
+
+const StorageFacilitiesMap: React.FC<StorageFacilitiesMapProps> = ({ onSelectFeaturedLocation }) => {
   const [filters, setFilters] = useState<FilterState>({
     features: {
       indoor: false,
@@ -56,6 +62,16 @@ const StorageFacilitiesMap = () => {
   
   // Use window facility viewer hook
   useWindowFacilityViewer(highlightedFacility, allFacilities, handleFacilityClick);
+  
+  // Feature a location when selected
+  const handleFeatureLocation = useCallback((facilityId: string) => {
+    if (allFacilities && onSelectFeaturedLocation) {
+      const facility = allFacilities.find(f => f.id === facilityId);
+      if (facility) {
+        onSelectFeaturedLocation(facility);
+      }
+    }
+  }, [allFacilities, onSelectFeaturedLocation]);
   
   const handleFilterChange = useCallback((newFilters: FilterState) => {
     console.log('Filter changed:', newFilters);
@@ -103,6 +119,20 @@ const StorageFacilitiesMap = () => {
                 highlightedFacility={highlightedFacility}
                 onFacilityClick={onMarkerClick}
                 scrollAreaRef={scrollAreaRef}
+                renderFacilityAction={(facilityId) => (
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="ml-2 bg-[#131a2a] text-[#5B9BD5] hover:bg-[#1d2739] border-gray-700"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleFeatureLocation(facilityId);
+                    }}
+                    title="Set as featured location"
+                  >
+                    <Star className="h-4 w-4" />
+                  </Button>
+                )}
               />
             )}
           </Card>

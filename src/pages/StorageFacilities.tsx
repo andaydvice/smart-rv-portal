@@ -5,6 +5,8 @@ import Navbar from "@/components/Navbar";
 import Layout from "@/components/layout/Layout";
 import { Warehouse } from "lucide-react";
 import LocationPreviewSection from "@/components/storage/LocationPreviewSection";
+import { useState, useEffect } from "react";
+import { StorageFacility } from "@/components/storage/types";
 import "../styles/force-markers.css"; // Only load the minimal, clean CSS
 import "../styles/map-fixes.css"; // Add our marker edge-clipping fixes
 import "../styles/marker-fix.css"; // Additional critical marker fixes
@@ -68,6 +70,16 @@ export async function getStateCountsWithSQL() {
 }
 
 export default function StorageFacilities() {
+  const [featuredLocation, setFeaturedLocation] = useState<StorageFacility | undefined>();
+  const mapToken = import.meta.env.VITE_MAPBOX_TOKEN || "";
+  
+  // Function to handle selecting a featured location
+  const handleSelectFeaturedLocation = (facility: StorageFacility | null) => {
+    if (facility) {
+      setFeaturedLocation(facility);
+    }
+  };
+
   return (
     <Layout>
       <Navbar />
@@ -101,13 +113,13 @@ export default function StorageFacilities() {
       {/* Main map container */}
       <Container fullWidth className="px-2 md:px-4 overflow-hidden max-w-[1920px] mx-auto flex-grow">
         <div className="py-4">
-          <StorageFacilitiesMap />
+          <StorageFacilitiesMap onSelectFeaturedLocation={handleSelectFeaturedLocation} />
         </div>
       </Container>
       
       {/* Location Preview Section */}
       <div className="mt-8 mb-12">
-        <LocationPreviewSection mapToken={import.meta.env.VITE_MAPBOX_TOKEN || ""} />
+        <LocationPreviewSection mapToken={mapToken} featuredLocation={featuredLocation} />
       </div>
     </Layout>
   );

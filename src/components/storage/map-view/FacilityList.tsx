@@ -9,13 +9,15 @@ interface FacilityListProps {
   highlightedFacility: string | null;
   onFacilityClick: (facilityId: string) => void;
   scrollAreaRef: React.RefObject<HTMLDivElement>;
+  renderFacilityAction?: (facilityId: string) => React.ReactNode;
 }
 
 const FacilityList: React.FC<FacilityListProps> = ({
   facilities,
   highlightedFacility,
   onFacilityClick,
-  scrollAreaRef
+  scrollAreaRef,
+  renderFacilityAction
 }) => {
   // Create a ref object for each facility card
   const facilityRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
@@ -32,6 +34,7 @@ const FacilityList: React.FC<FacilityListProps> = ({
             ref={(el) => {
               facilityRefs.current[facility.id] = el;
             }}
+            actionContent={renderFacilityAction ? renderFacilityAction(facility.id) : undefined}
           />
         ))}
       </div>
