@@ -31,14 +31,20 @@ html {
   left: 50% !important;
   transform: translateX(-50%) !important;
   min-width: max-content !important;
-  z-index: 100 !important;
+  z-index: 1000 !important;
   margin-top: 0 !important;
 }
 
-/* Fixed positioning for RV tools dropdown */
-.navigation-menu-rv-tools [data-radix-navigation-menu-content] {
-  left: 50% !important;
+/* Specific positioning for RV tools dropdown */
+.rv-tools-menu-item [data-radix-navigation-menu-content] {
   transform: translateX(-50%) !important;
+}
+
+/* Ensure the RV Tools dropdown is visible */
+.rv-tools-dropdown {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
 }
 
 /* Make sure content loads from top */

@@ -61,17 +61,15 @@ const DesktopNavigation = () => {
             </NavigationMenuContent>
           </NavigationMenuItem>
 
-          <NavigationMenuItem>
-            <div className="relative">
-              <NavigationMenuTrigger className="text-gray-300 hover:text-[#5B9BD5] transition-colors !bg-transparent data-[state=open]:!bg-transparent text-base">
-                RV Tools
-              </NavigationMenuTrigger>
-              <NavigationMenuContent>
-                <div className="w-[400px] bg-gray-900/95 backdrop-blur-sm rounded-lg border border-gray-800 shadow-lg p-6 absolute left-1/2 transform -translate-x-1/2 z-50">
-                  <RVToolsLinks />
-                </div>
-              </NavigationMenuContent>
-            </div>
+          <NavigationMenuItem className="rv-tools-menu-item">
+            <NavigationMenuTrigger className="text-gray-300 hover:text-[#5B9BD5] transition-colors !bg-transparent data-[state=open]:!bg-transparent text-base">
+              RV Tools
+            </NavigationMenuTrigger>
+            <NavigationMenuContent className="rv-tools-dropdown">
+              <div className="w-[400px] bg-gray-900/95 backdrop-blur-sm rounded-lg border border-gray-800 shadow-lg p-6">
+                <RVToolsLinks />
+              </div>
+            </NavigationMenuContent>
           </NavigationMenuItem>
 
           <NavigationMenuItem>
