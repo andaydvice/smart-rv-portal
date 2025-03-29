@@ -80,6 +80,31 @@ export default function StorageFacilities() {
     }
   };
 
+  // Set a random featured location if none is selected
+  useEffect(() => {
+    const fetchRandomLocation = async () => {
+      if (!featuredLocation) {
+        try {
+          const { supabase } = await import('@/integrations/supabase/client');
+          const { data, error } = await supabase
+            .from('storage_facilities')
+            .select('*')
+            .limit(5);
+            
+          if (data && data.length > 0) {
+            // Pick a random facility from the fetched data
+            const randomIndex = Math.floor(Math.random() * data.length);
+            setFeaturedLocation(data[randomIndex] as StorageFacility);
+          }
+        } catch (error) {
+          console.error('Error fetching random facility:', error);
+        }
+      }
+    };
+    
+    fetchRandomLocation();
+  }, [featuredLocation]);
+
   return (
     <Layout>
       <Navbar />
@@ -94,7 +119,7 @@ export default function StorageFacilities() {
           <Container className="h-full flex flex-col justify-center items-center" fullWidth>
             <div className="text-center max-w-3xl bg-black/40 backdrop-blur-sm p-6 rounded-lg">
               <div className="flex items-center justify-center gap-2 mb-2">
-                <Warehouse className="h-7 w-7 text-[#F97316]" />
+                <Warehouse className="h-7 w-7 text-[#5B9BD5]" />
                 <h1 className="text-4xl md:text-5xl font-bold text-white">
                   Indoor RV Storage Facilities
                 </h1>
@@ -112,7 +137,7 @@ export default function StorageFacilities() {
       
       {/* Main map container */}
       <Container fullWidth className="px-2 md:px-4 overflow-hidden max-w-[1920px] mx-auto flex-grow">
-        <div className="py-4">
+        <div className="py-4 storage-facilities-map">
           <StorageFacilitiesMap onSelectFeaturedLocation={handleSelectFeaturedLocation} />
         </div>
       </Container>

@@ -48,7 +48,7 @@ export const createFacilityMarker = (
   const isZoomedIn = map.getZoom() > 10;
   
   // Choose color based on highlighted state and zoom level
-  const markerColor = isHighlighted ? '#10B981' : (isZoomedIn ? '#10B981' : '#F97316');
+  const markerColor = isHighlighted ? '#10B981' : (isZoomedIn ? '#10B981' : '#5B9BD5');
   
   // Create marker element
   const el = document.createElement('div');
@@ -125,7 +125,7 @@ export const createFacilityMarker = (
       el.style.backgroundColor = isHighlighted ? '#10B981' : '#10B981';
       el.setAttribute('data-zoomed', 'true');
     } else if (!zoomedIn && el.getAttribute('data-zoomed') === 'true') {
-      el.style.backgroundColor = isHighlighted ? '#10B981' : '#F97316';
+      el.style.backgroundColor = isHighlighted ? '#10B981' : '#5B9BD5';
       el.setAttribute('data-zoomed', 'false');
     }
   });

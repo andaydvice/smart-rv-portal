@@ -22,7 +22,7 @@ const MapPreviewExample: React.FC<MapPreviewExampleProps> = ({ mapToken }) => {
   return (
     <div className="py-6 px-4">
       <h2 className="text-2xl font-bold mb-4 text-white">RV Storage Location Preview</h2>
-      <p className="text-gray-300 mb-6">Click on the orange marker to view location details.</p>
+      <p className="text-gray-300 mb-6">Click on the marker to view location details.</p>
       
       <MapPreview
         location={exampleLocation}
