@@ -2,10 +2,10 @@
 import React, { forwardRef } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { StorageFacility } from './types';
-import FacilityHeader from './facility-card/FacilityHeader';
-import FacilityFeatures from './facility-card/FacilityFeatures';
-import ContactInfo from './facility-card/ContactInfo';
-import PriceRange from './facility-card/PriceRange';
+import { FacilityHeader } from './facility-card/FacilityHeader';
+import { FacilityFeatures } from './facility-card/FacilityFeatures';
+import { ContactInfo } from './facility-card/ContactInfo';
+import { PriceRange } from './facility-card/PriceRange';
 
 interface FacilityCardProps {
   facility: StorageFacility;
@@ -27,7 +27,16 @@ const FacilityCard = forwardRef<HTMLDivElement, FacilityCardProps>(
       >
         <CardContent className="p-4">
           <div className="flex justify-between items-start">
-            <FacilityHeader facility={facility} className="flex-1" />
+            <FacilityHeader 
+              name={facility.name}
+              address={facility.address}
+              city={facility.city}
+              state={facility.state}
+              verifiedFeatures={facility.verified_features || false}
+              verifiedLocation={facility.verified_location || false}
+              avgRating={facility.avg_rating}
+              reviewCount={facility.review_count}
+            />
             {actionContent}
           </div>
           
@@ -35,10 +44,16 @@ const FacilityCard = forwardRef<HTMLDivElement, FacilityCardProps>(
             <FacilityFeatures features={facility.features} />
             
             <div className="grid gap-2 md:grid-cols-2">
-              <PriceRange priceRange={facility.price_range} />
+              <PriceRange 
+                min={facility.price_range?.min || 0}
+                max={facility.price_range?.max || 0}
+                currency={facility.price_range?.currency || 'USD'}
+                verified={facility.price_range?.verified || false}
+              />
               <ContactInfo 
                 phone={facility.contact_phone} 
                 email={facility.contact_email}
+                verifiedContact={facility.verified_contact || false}
               />
             </div>
           </div>
