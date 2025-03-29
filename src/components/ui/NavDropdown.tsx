@@ -33,7 +33,7 @@ const NavDropdown: React.FC<NavDropdownProps> = ({
   const selectedItem = items.find(item => item.label === selected) || items[0];
 
   return (
-    <div className="relative inline-block">
+    <div className="inline-block">
       <DropdownMenu onOpenChange={setIsOpen}>
         <DropdownMenuTrigger asChild>
           <Button 
@@ -52,7 +52,7 @@ const NavDropdown: React.FC<NavDropdownProps> = ({
         </DropdownMenuTrigger>
         <DropdownMenuContent 
           align="center"
-          sideOffset={8}
+          sideOffset={4}
           className="bg-gray-900/95 backdrop-blur-sm rounded-lg border border-gray-800 shadow-lg p-2 min-w-[200px] z-50"
           aria-label={`${selected} dropdown menu`}
         >
