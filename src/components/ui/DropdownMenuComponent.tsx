@@ -30,7 +30,7 @@ const DropdownMenuComponent: React.FC<DropdownMenuComponentProps> = ({
   const location = useLocation();
 
   return (
-    <div className="relative">
+    <div className="relative inline-block">
       <DropdownMenu onOpenChange={setIsOpen}>
         <DropdownMenuTrigger asChild>
           <Button 
@@ -48,8 +48,9 @@ const DropdownMenuComponent: React.FC<DropdownMenuComponentProps> = ({
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent 
-          align="start"
-          className="bg-gray-900/95 backdrop-blur-sm rounded-lg border border-gray-800 shadow-lg p-2 w-auto min-w-[200px] z-50"
+          align="center"
+          sideOffset={8}
+          className="bg-gray-900/95 backdrop-blur-sm rounded-lg border border-gray-800 shadow-lg p-2 min-w-[200px] z-50"
           aria-label={`${menuLink.text} dropdown menu`}
         >
           <DropdownMenuItem 
