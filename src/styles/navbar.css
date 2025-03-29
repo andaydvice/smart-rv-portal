@@ -40,11 +40,10 @@ html {
   transform: translateX(-50%) !important;
 }
 
-/* Ensure the RV Tools dropdown is visible */
-.rv-tools-dropdown {
-  display: block !important;
-  visibility: visible !important;
-  opacity: 1 !important;
+/* Hover dropdown menu specific styles */
+.hover-dropdown-menu {
+  top: 100%;
+  margin-top: 0.5rem;
 }
 
 /* Make sure content loads from top */
