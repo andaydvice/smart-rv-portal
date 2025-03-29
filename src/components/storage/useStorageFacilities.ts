@@ -28,6 +28,49 @@ const normalizeStateName = (stateAbbr: string): string => {
          stateAbbr;
 };
 
+// Conversion function for consistent typing
+function convertToStorageFacility(facility: any): StorageFacility {
+  // Create a properly typed features object
+  const features = {
+    indoor: Boolean(facility.features?.indoor),
+    climate_controlled: Boolean(facility.features?.climate_controlled),
+    "24h_access": Boolean(facility.features?.["24h_access"]),
+    security_system: Boolean(facility.features?.security_system),
+    vehicle_washing: Boolean(facility.features?.vehicle_washing)
+  };
+
+  // Normalize state names for display
+  const normalizedState = normalizeStateName(facility.state);
+         
+  // Return storage facility with proper typing
+  return {
+    id: facility.id,
+    name: facility.name,
+    address: facility.address,
+    city: facility.city,
+    state: normalizedState,
+    latitude: Number(facility.latitude),
+    longitude: Number(facility.longitude),
+    features: features,
+    price_range: {
+      min: Number(facility.price_range?.min) || 0,
+      max: Number(facility.price_range?.max) || 0,
+      currency: facility.price_range?.currency || 'USD'
+    },
+    contact_phone: facility.contact_phone,
+    contact_email: facility.contact_email,
+    avg_rating: facility.avg_rating,
+    review_count: facility.review_count,
+    verified_fields: {
+      features: Boolean(facility.verified_fields?.features),
+      price_range: Boolean(facility.verified_fields?.price_range),
+      contact_info: Boolean(facility.verified_fields?.contact_info),
+      location: Boolean(facility.verified_fields?.location),
+      business_hours: Boolean(facility.verified_fields?.business_hours)
+    }
+  };
+}
+
 export const useStorageFacilities = (filters: FilterState) => {
   const { data: maxPriceData } = useQuery({
     queryKey: ['max-facility-price'],
@@ -49,9 +92,10 @@ export const useStorageFacilities = (filters: FilterState) => {
   const { data: facilities, isLoading, error } = useQuery({
     queryKey: ['storage-facilities', filters],
     queryFn: async () => {
+      
       let query = supabase
         .from('storage_facilities')
-        .select<string, DatabaseStorageFacility>(`
+        .select(`
           id,
           name,
           address,
@@ -64,7 +108,8 @@ export const useStorageFacilities = (filters: FilterState) => {
           contact_phone,
           contact_email,
           avg_rating,
-          review_count
+          review_count,
+          verified_fields
         `);
       
       // Log query params for debugging
@@ -75,6 +120,7 @@ export const useStorageFacilities = (filters: FilterState) => {
       
       // Apply state filter if selected
       if (filters.selectedState) {
+        
         // Create an array of possible state values (full name and abbreviation)
         const stateValues = [];
         if (filters.selectedState === 'Arizona') {
@@ -129,51 +175,8 @@ export const useStorageFacilities = (filters: FilterState) => {
       console.log('Total facilities fetched:', data.length);
       console.log('States returned:', [...new Set(data.map(f => f.state))].sort());
       
-      // Map database results to StorageFacility objects
-      const mappedFacilities = data.map(facility => {
-        // Normalize state names for display
-        const normalizedState = normalizeStateName(facility.state);
-               
-        // Keep original coordinates as-is without validation
-        const latitude = facility.latitude;
-        const longitude = facility.longitude;
-               
-        // Return storage facility with original coordinates
-        return {
-          id: facility.id,
-          name: facility.name,
-          address: facility.address,
-          city: facility.city,
-          state: normalizedState,
-          latitude: latitude,
-          longitude: longitude,
-          features: {
-            indoor: Boolean(facility.features?.indoor),
-            climate_controlled: Boolean(facility.features?.climate_controlled),
-            "24h_access": Boolean(facility.features?.["24h_access"]),
-            security_system: Boolean(facility.features?.security_system),
-            vehicle_washing: Boolean(facility.features?.vehicle_washing)
-          },
-          price_range: {
-            min: Number(facility.price_range?.min) || 0,
-            max: Number(facility.price_range?.max) || 0,
-            currency: facility.price_range?.currency || 'USD'
-          },
-          contact_phone: facility.contact_phone,
-          contact_email: facility.contact_email,
-          avg_rating: facility.avg_rating,
-          review_count: facility.review_count,
-          verified_fields: {
-            features: false,
-            price_range: false,
-            contact_info: false,
-            location: false,
-            business_hours: false
-          }
-        };
-      });
-
-      return mappedFacilities;
+      // Map database results to StorageFacility objects using our conversion function
+      return data.map(facility => convertToStorageFacility(facility));
     },
     refetchOnWindowFocus: false,
     staleTime: 300000 // 5 minute cache

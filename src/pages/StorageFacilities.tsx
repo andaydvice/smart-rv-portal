@@ -1,4 +1,3 @@
-
 import { Container } from "@/components/ui/container";
 import StorageFacilitiesMap from "@/components/storage/StorageFacilitiesMap";
 import Navbar from "@/components/Navbar";
@@ -69,6 +68,52 @@ export async function getStateCountsWithSQL() {
   })).sort((a, b) => a.state.localeCompare(b.state));
 }
 
+// Helper function to convert Supabase data to StorageFacility type
+function convertToStorageFacility(data: any): StorageFacility {
+  // Create a properly typed features object
+  const features = {
+    indoor: Boolean(data.features?.indoor),
+    climate_controlled: Boolean(data.features?.climate_controlled),
+    "24h_access": Boolean(data.features?.["24h_access"]),
+    security_system: Boolean(data.features?.security_system),
+    vehicle_washing: Boolean(data.features?.vehicle_washing)
+  };
+  
+  // Create a properly typed price_range object
+  const priceRange = {
+    min: Number(data.price_range?.min) || 0,
+    max: Number(data.price_range?.max) || 0,
+    currency: data.price_range?.currency || 'USD'
+  };
+  
+  // Create a properly typed verified_fields object
+  const verifiedFields = {
+    features: Boolean(data.verified_fields?.features),
+    price_range: Boolean(data.verified_fields?.price_range),
+    contact_info: Boolean(data.verified_fields?.contact_info),
+    location: Boolean(data.verified_fields?.location),
+    business_hours: Boolean(data.verified_fields?.business_hours)
+  };
+  
+  // Return a properly typed StorageFacility object
+  return {
+    id: data.id,
+    name: data.name,
+    address: data.address,
+    city: data.city,
+    state: normalizeStateName(data.state),
+    latitude: Number(data.latitude),
+    longitude: Number(data.longitude),
+    features: features,
+    price_range: priceRange,
+    contact_phone: data.contact_phone || undefined,
+    contact_email: data.contact_email || undefined,
+    avg_rating: data.avg_rating || undefined,
+    review_count: data.review_count || undefined,
+    verified_fields: verifiedFields
+  };
+}
+
 export default function StorageFacilities() {
   const [featuredLocation, setFeaturedLocation] = useState<StorageFacility | undefined>();
   const mapToken = import.meta.env.VITE_MAPBOX_TOKEN || "";
@@ -94,7 +139,8 @@ export default function StorageFacilities() {
           if (data && data.length > 0) {
             // Pick a random facility from the fetched data
             const randomIndex = Math.floor(Math.random() * data.length);
-            setFeaturedLocation(data[randomIndex] as StorageFacility);
+            // Convert the Supabase data to StorageFacility type
+            setFeaturedLocation(convertToStorageFacility(data[randomIndex]));
           }
         } catch (error) {
           console.error('Error fetching random facility:', error);
