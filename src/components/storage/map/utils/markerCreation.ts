@@ -1,3 +1,4 @@
+
 import mapboxgl from 'mapbox-gl';
 import { StorageFacility } from '../../types';
 import { createEdgeAwareClickHandler } from '@/utils/markers/forcing/preventEdgeCutoff';
@@ -19,7 +20,7 @@ export function createFacilityMarker(
   
   // Choose color based on highlight state and zoom level
   const markerColor = isHighlighted ? '#10B981' : 
-                      isZoomedIn ? '#10B981' : '#F97316';
+                      isZoomedIn ? '#10B981' : '#5B9BD5';
   
   // Force critical styling directly
   el.style.cssText = `
@@ -65,7 +66,7 @@ export function createFacilityMarker(
       <p class="text-lg mb-1">${facility.address}</p>
       <p class="text-lg mb-4">${facility.city}, ${facility.state}</p>
       
-      <p class="text-xl font-medium text-[#F97316] mb-3">Price: $${facility.price_range?.min || 0} - $${facility.price_range?.max || 0}</p>
+      <p class="text-xl font-medium text-[#5B9BD5] mb-3">Price: $${facility.price_range?.min || 0} - $${facility.price_range?.max || 0}</p>
       
       ${facility.contact_phone ? `
         <p class="text-lg mb-4">Phone: ${facility.contact_phone}</p>
@@ -159,7 +160,7 @@ export function createFacilityMarker(
       el.style.backgroundColor = isHighlighted ? '#10B981' : '#10B981';
       el.setAttribute('data-zoomed', 'true');
     } else if (!zoomedIn && el.getAttribute('data-zoomed') === 'true') {
-      el.style.backgroundColor = isHighlighted ? '#10B981' : '#F97316';
+      el.style.backgroundColor = isHighlighted ? '#10B981' : '#5B9BD5';
       el.setAttribute('data-zoomed', 'false');
     }
   });
