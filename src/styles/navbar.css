@@ -28,10 +28,17 @@ html {
 /* Style adjustments for the NavigationMenu components */
 [data-radix-navigation-menu-content] {
   position: absolute !important;
-  left: 0 !important;
-  transform: none !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
   min-width: max-content !important;
   z-index: 100 !important;
+  margin-top: 0 !important;
+}
+
+/* Fixed positioning for RV tools dropdown */
+.navigation-menu-rv-tools [data-radix-navigation-menu-content] {
+  left: 50% !important;
+  transform: translateX(-50%) !important;
 }
 
 /* Make sure content loads from top */
