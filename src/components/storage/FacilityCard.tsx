@@ -32,8 +32,8 @@ const FacilityCard = forwardRef<HTMLDivElement, FacilityCardProps>(
               address={facility.address}
               city={facility.city}
               state={facility.state}
-              verifiedFeatures={facility.verified_features || false}
-              verifiedLocation={facility.verified_location || false}
+              verifiedFeatures={facility.verified_fields.features}
+              verifiedLocation={facility.verified_fields.location}
               avgRating={facility.avg_rating}
               reviewCount={facility.review_count}
             />
@@ -48,12 +48,12 @@ const FacilityCard = forwardRef<HTMLDivElement, FacilityCardProps>(
                 min={facility.price_range?.min || 0}
                 max={facility.price_range?.max || 0}
                 currency={facility.price_range?.currency || 'USD'}
-                verified={facility.price_range?.verified || false}
+                verified={facility.verified_fields.price_range}
               />
               <ContactInfo 
                 phone={facility.contact_phone} 
                 email={facility.contact_email}
-                verifiedContact={facility.verified_contact || false}
+                verifiedContact={facility.verified_fields.contact_info}
               />
             </div>
           </div>
