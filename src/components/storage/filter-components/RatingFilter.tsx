@@ -16,12 +16,12 @@ interface RatingFilterProps {
 export const RatingFilter = ({ minRating, onRatingChange }: RatingFilterProps) => {
   return (
     <div>
-      <h3 className="text-lg font-semibold mb-4">Minimum Rating</h3>
+      <h3 className="text-lg font-semibold mb-4 text-white">Minimum Rating</h3>
       <Select
         value={minRating?.toString() || "none"}
         onValueChange={onRatingChange}
       >
-        <SelectTrigger className="w-full bg-[#080F1F] border-gray-700">
+        <SelectTrigger className="w-full bg-[#080F1F] border-gray-700 text-white">
           <SelectValue placeholder="Any rating">
             {minRating ? (
               <div className="flex items-center gap-2">

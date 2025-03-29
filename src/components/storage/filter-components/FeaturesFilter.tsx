@@ -11,11 +11,11 @@ interface FeaturesFilterProps {
 export const FeaturesFilter = ({ features, onFeatureToggle }: FeaturesFilterProps) => {
   return (
     <div>
-      <h3 className="text-lg font-semibold mb-4">Features</h3>
+      <h3 className="text-lg font-semibold mb-4 text-white">Features</h3>
       <div className="space-y-4">
         {Object.entries(features).map(([key, value]) => (
           <div key={key} className="flex items-center justify-between">
-            <Label htmlFor={key} className="capitalize">
+            <Label htmlFor={key} className="capitalize text-white">
               {key.replace(/_/g, ' ')}
             </Label>
             <Switch

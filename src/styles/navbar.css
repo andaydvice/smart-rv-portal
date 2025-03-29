@@ -119,3 +119,29 @@ html {
 .mapboxgl-popup-close-button:hover {
   background: rgba(0, 0, 0, 0.2) !important;
 }
+
+/* Fix filter text visibility */
+.filter-panel-text,
+.filter-label,
+.filter-heading {
+  color: white !important;
+}
+
+/* Ensure select components are visible */
+.select-trigger-text,
+.select-item-text {
+  color: white !important;
+}
+
+/* Badge colors */
+.feature-badge {
+  background-color: #1a2235;
+  color: #60A5FA;
+  border-radius: 0.25rem;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}

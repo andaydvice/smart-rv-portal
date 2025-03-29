@@ -96,7 +96,7 @@ const FilterPanel = ({ onFilterChange }: FilterPanelProps) => {
 
   return (
     <Card className="p-4 bg-[#131a2a] border-gray-800">
-      <div className="space-y-6">
+      <div className="space-y-6 text-white">
         <LocationFilter
           selectedState={filters.selectedState}
           states={states}
@@ -116,7 +116,7 @@ const FilterPanel = ({ onFilterChange }: FilterPanelProps) => {
         />
         <Button 
           variant="outline" 
-          className="w-full" 
+          className="w-full text-white border-gray-600 hover:bg-gray-700 hover:text-white" 
           onClick={handleReset}
         >
           Reset Filters
