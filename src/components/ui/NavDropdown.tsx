@@ -52,8 +52,6 @@ const NavDropdown: React.FC<NavDropdownProps> = ({
         </DropdownMenuTrigger>
         <DropdownMenuContent 
           align="start"
-          alignOffset={0}
-          sideOffset={4}
           className="bg-gray-900/95 backdrop-blur-sm rounded-lg border border-gray-800 shadow-lg p-2 w-auto min-w-[200px] z-50"
           aria-label={`${selected} dropdown menu`}
         >
