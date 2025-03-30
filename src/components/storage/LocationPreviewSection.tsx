@@ -118,7 +118,7 @@ const LocationPreviewSection: React.FC<LocationPreviewSectionProps> = ({ mapToke
                 </div>
               )}
               
-              <p className="text-gray-300 border-l-2 border-[#5B9BD5] pl-3 italic">
+              <p className="text-gray-300 border-l-2 border-[#5B9BD5] pl-3 italic mt-6 text-left">
                 Explore our premium indoor RV storage facility with climate control and 24/7 security.
               </p>
             </div>
