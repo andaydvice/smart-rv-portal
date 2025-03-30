@@ -1,8 +1,9 @@
+
 import React from 'react';
 import { Container } from '@/components/ui/container';
 import { StorageFacility } from './types';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { AlertCircle, MapPin, Phone, Star } from 'lucide-react';
+import { AlertCircle, MapPin, Star } from 'lucide-react';
 import EnhancedGoogleMap from '../map/EnhancedGoogleMap';
 
 interface LocationPreviewSectionProps {
@@ -89,7 +90,6 @@ const LocationPreviewSection: React.FC<LocationPreviewSectionProps> = ({ mapToke
               
               {featuredLocation.contact_phone && (
                 <div className="flex items-center gap-2">
-                  <Phone className="w-5 h-5 text-gray-400" />
                   <span className="text-gray-300">{featuredLocation.contact_phone}</span>
                 </div>
               )}
