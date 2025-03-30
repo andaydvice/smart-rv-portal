@@ -48,6 +48,22 @@ const LocationPreviewSection: React.FC<LocationPreviewSectionProps> = ({ mapToke
     
     return features;
   };
+  
+  // Handle map load event to ensure persistence of markers
+  const handleMapLoad = () => {
+    // Add a small delay to ensure the map is fully loaded
+    setTimeout(() => {
+      // Force any markers to be visible via DOM manipulation
+      document.querySelectorAll('.gm-style img[src*="marker"]').forEach(el => {
+        if (el instanceof HTMLElement) {
+          el.style.visibility = 'visible';
+          el.style.opacity = '1';
+          el.style.display = 'block';
+          el.style.zIndex = '1000';
+        }
+      });
+    }, 500);
+  };
 
   return (
     <Container className="py-8">
@@ -107,14 +123,15 @@ const LocationPreviewSection: React.FC<LocationPreviewSectionProps> = ({ mapToke
               </p>
             </div>
             
-            {/* Right side: Enhanced Google Map */}
-            <div>
+            {/* Right side: Enhanced Google Map with persistent markers */}
+            <div className="map-container-persistent">
               <EnhancedGoogleMap 
                 apiKey={googleMapsKey}
                 location={{
                   lat: featuredLocation.latitude,
                   lng: featuredLocation.longitude
                 }}
+                onMapLoad={handleMapLoad}
                 facilities={[{
                   name: featuredLocation.name,
                   address: `${featuredLocation.address}, ${featuredLocation.city}, ${featuredLocation.state}`,

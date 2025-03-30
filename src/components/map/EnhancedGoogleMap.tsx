@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { GoogleMap, useLoadScript, MarkerF, InfoWindowF } from '@react-google-maps/api';
 import { Loader2, Star, Phone, MapPin } from 'lucide-react';
 import { Alert, AlertDescription } from '@/components/ui/alert';
@@ -37,6 +37,9 @@ const EnhancedGoogleMap: React.FC<EnhancedGoogleMapProps> = ({
 }) => {
   const [error, setError] = useState<string | null>(null);
   const [selectedFacility, setSelectedFacility] = useState<Facility | null>(null);
+  const [markersActive, setMarkersActive] = useState<boolean>(true);
+  const mapRef = useRef<google.maps.Map | null>(null);
+  const markersRef = useRef<google.maps.Marker[]>([]);
   
   // Load Google Maps script
   const { isLoaded, loadError } = useLoadScript({
@@ -44,11 +47,44 @@ const EnhancedGoogleMap: React.FC<EnhancedGoogleMapProps> = ({
   });
 
   // Handle map errors
-  React.useEffect(() => {
+  useEffect(() => {
     if (loadError) {
       setError(`Error loading Google Maps: ${loadError.message}`);
     }
   }, [loadError]);
+
+  // Handle map load
+  const handleMapLoad = (map: google.maps.Map) => {
+    mapRef.current = map;
+    if (onMapLoad) onMapLoad();
+  };
+  
+  // Ensure markers remain visible even when info window is open
+  useEffect(() => {
+    if (selectedFacility) {
+      // Force markers to remain visible when a popup is open
+      const forceMarkersVisible = () => {
+        markersRef.current.forEach(marker => {
+          const markerElement = marker.getIcon();
+          if (markerElement) {
+            // Ensure marker visibility through DOM manipulation if needed
+            const el = document.querySelector(`.gm-style img[src="${markerElement.url}"]`);
+            if (el instanceof HTMLElement) {
+              el.style.visibility = 'visible';
+              el.style.opacity = '1';
+              el.style.display = 'block';
+            }
+          }
+        });
+      };
+      
+      // Run immediately and set up recurring check
+      forceMarkersVisible();
+      const intervalId = setInterval(forceMarkersVisible, 300);
+      
+      return () => clearInterval(intervalId);
+    }
+  }, [selectedFacility]);
 
   // If no facilities are provided, create a default one at the location
   const displayFacilities = facilities.length > 0 ? facilities : [
@@ -102,7 +138,7 @@ const EnhancedGoogleMap: React.FC<EnhancedGoogleMapProps> = ({
           mapContainerStyle={mapContainerStyle}
           center={location}
           zoom={zoom}
-          onLoad={onMapLoad}
+          onLoad={handleMapLoad}
           options={{
             styles: [
               {
@@ -148,6 +184,13 @@ const EnhancedGoogleMap: React.FC<EnhancedGoogleMapProps> = ({
               }}
               animation={google.maps.Animation.DROP}
               title={facility.name}
+              onLoad={(marker) => {
+                // Store reference to marker for visibility management
+                markersRef.current.push(marker);
+              }}
+              // Force marker visibility to be always true
+              visible={true}
+              zIndex={1000}
             />
           ))}
 
@@ -158,7 +201,8 @@ const EnhancedGoogleMap: React.FC<EnhancedGoogleMapProps> = ({
               onCloseClick={() => setSelectedFacility(null)}
               options={{
                 pixelOffset: new google.maps.Size(0, -10),
-                maxWidth: 320
+                maxWidth: 320,
+                zIndex: 999
               }}
             >
               <div className="p-4 max-w-[300px] bg-[#131a2a] text-white rounded-lg">
