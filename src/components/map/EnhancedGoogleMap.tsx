@@ -145,6 +145,7 @@ const EnhancedGoogleMap: React.FC<EnhancedGoogleMapProps> = ({
                 strokeWeight: 2,
               }}
               animation={google.maps.Animation.DROP}
+              title={facility.name}
             />
           ))}
 
@@ -153,8 +154,12 @@ const EnhancedGoogleMap: React.FC<EnhancedGoogleMapProps> = ({
             <InfoWindowF
               position={location}
               onCloseClick={() => setSelectedFacility(null)}
+              options={{
+                pixelOffset: new google.maps.Size(0, -10),
+                maxWidth: 320
+              }}
             >
-              <div className="p-2 max-w-[250px]">
+              <div className="p-2 max-w-[280px]">
                 <h3 className="text-lg font-semibold text-[#5B9BD5]">{selectedFacility.name}</h3>
                 
                 {selectedFacility.rating && (
