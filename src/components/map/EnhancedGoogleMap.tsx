@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { GoogleMap, useLoadScript, MarkerF, InfoWindowF } from '@react-google-maps/api';
-import { Loader2, Star } from 'lucide-react';
+import { Loader2, Star, Phone, MapPin } from 'lucide-react';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { AlertCircle } from 'lucide-react';
 
@@ -10,6 +10,8 @@ interface Facility {
   rating?: number;
   address?: string;
   description?: string;
+  phone?: string;
+  features?: string[];
 }
 
 interface EnhancedGoogleMapProps {
@@ -149,7 +151,7 @@ const EnhancedGoogleMap: React.FC<EnhancedGoogleMapProps> = ({
             />
           ))}
 
-          {/* Info Window for selected facility */}
+          {/* Enhanced Info Window for selected facility */}
           {selectedFacility && (
             <InfoWindowF
               position={location}
@@ -159,19 +161,44 @@ const EnhancedGoogleMap: React.FC<EnhancedGoogleMapProps> = ({
                 maxWidth: 320
               }}
             >
-              <div className="p-2 max-w-[280px]">
-                <h3 className="text-lg font-semibold text-[#5B9BD5]">{selectedFacility.name}</h3>
+              <div className="p-4 max-w-[300px] bg-[#131a2a] text-white rounded-lg">
+                <h3 className="text-xl font-semibold text-[#5B9BD5] mb-2">{selectedFacility.name}</h3>
                 
                 {selectedFacility.rating && (
                   renderRatingStars(selectedFacility.rating)
                 )}
                 
                 {selectedFacility.address && (
-                  <p className="text-sm mt-1">{selectedFacility.address}</p>
+                  <div className="flex items-start gap-2 mt-3">
+                    <MapPin className="w-5 h-5 text-gray-400 mt-0.5 flex-shrink-0" />
+                    <span className="text-gray-300">{selectedFacility.address}</span>
+                  </div>
+                )}
+                
+                {selectedFacility.phone && (
+                  <div className="flex items-center gap-2 mt-3">
+                    <Phone className="w-5 h-5 text-gray-400" />
+                    <span className="text-gray-300">{selectedFacility.phone}</span>
+                  </div>
+                )}
+                
+                {selectedFacility.features && selectedFacility.features.length > 0 && (
+                  <div className="mt-3">
+                    <h4 className="text-sm font-medium text-gray-400 mb-2">FACILITIES & AMENITIES</h4>
+                    <div className="flex flex-wrap gap-2">
+                      {selectedFacility.features.map((feature, idx) => (
+                        <span key={idx} className="bg-[#1d2434] text-[#5B9BD5] text-xs px-2 py-1 rounded">
+                          {feature}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
                 )}
                 
                 {selectedFacility.description && (
-                  <p className="text-sm mt-2 text-gray-600">{selectedFacility.description}</p>
+                  <p className="text-sm mt-3 text-gray-300 border-l-2 border-[#5B9BD5] pl-3 italic">
+                    {selectedFacility.description}
+                  </p>
                 )}
               </div>
             </InfoWindowF>

@@ -3,22 +3,13 @@ import React from 'react';
 import { Container } from '@/components/ui/container';
 import { StorageFacility } from './types';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { AlertCircle, Navigation, Phone, MapPin, Star } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { AlertCircle, MapPin, Phone, Star } from 'lucide-react';
 import EnhancedGoogleMap from '../map/EnhancedGoogleMap';
 
 interface LocationPreviewSectionProps {
   mapToken: string;
   featuredLocation?: StorageFacility;
 }
-
-// Function to scroll to map section
-const scrollToMap = () => {
-  const mapElement = document.querySelector('.storage-facilities-map');
-  if (mapElement) {
-    mapElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }
-};
 
 const LocationPreviewSection: React.FC<LocationPreviewSectionProps> = ({ mapToken, featuredLocation }) => {
   // Validate that we have required fields for the featured location
@@ -42,6 +33,20 @@ const LocationPreviewSection: React.FC<LocationPreviewSectionProps> = ({ mapToke
         </span>
       </div>
     );
+  };
+
+  // Convert facility features to array of strings for the map component
+  const getFacilityFeatures = (featuredLocation?: StorageFacility): string[] => {
+    if (!featuredLocation || !featuredLocation.features) return [];
+    
+    const features: string[] = [];
+    if (featuredLocation.features.indoor) features.push('Indoor Storage');
+    if (featuredLocation.features.climate_controlled) features.push('Climate Controlled');
+    if (featuredLocation.features["24h_access"]) features.push('24/7 Access');
+    if (featuredLocation.features.security_system) features.push('Security System');
+    if (featuredLocation.features.vehicle_washing) features.push('Vehicle Washing');
+    
+    return features;
   };
 
   return (
@@ -100,15 +105,6 @@ const LocationPreviewSection: React.FC<LocationPreviewSectionProps> = ({ mapToke
               <p className="text-gray-300 border-l-2 border-[#5B9BD5] pl-3 italic">
                 Explore our premium indoor RV storage facility with climate control and 24/7 security.
               </p>
-              
-              <Button 
-                variant="outline" 
-                className="mt-2 flex items-center gap-2 text-[#5B9BD5] border-[#5B9BD5] hover:bg-[#5B9BD5]/10"
-                onClick={scrollToMap}
-              >
-                <Navigation size={16} />
-                <span className="inline-block">View on Map</span>
-              </Button>
             </div>
             
             {/* Right side: Enhanced Google Map */}
@@ -123,7 +119,9 @@ const LocationPreviewSection: React.FC<LocationPreviewSectionProps> = ({ mapToke
                   name: featuredLocation.name,
                   address: `${featuredLocation.address}, ${featuredLocation.city}, ${featuredLocation.state}`,
                   rating: featuredLocation.avg_rating,
-                  description: "Premium indoor RV storage facility"
+                  phone: featuredLocation.contact_phone,
+                  description: "Premium indoor RV storage facility",
+                  features: getFacilityFeatures(featuredLocation)
                 }]}
               />
             </div>
