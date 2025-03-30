@@ -119,12 +119,20 @@ function convertToStorageFacility(data: any): StorageFacility {
 export default function StorageFacilities() {
   const [featuredLocation, setFeaturedLocation] = useState<StorageFacility | undefined>();
   const mapToken = import.meta.env.VITE_MAPBOX_TOKEN || "";
+  const googleMapsKey = "AIzaSyAGKkTg0DlZd7fCJlfkVNqkRkzPjeqKJ2o"; // Google Maps API key
+  const [mapLoaded, setMapLoaded] = useState(false);
   
   // Function to handle selecting a featured location
   const handleSelectFeaturedLocation = (facility: StorageFacility | null) => {
     if (facility) {
       setFeaturedLocation(facility);
     }
+  };
+
+  // Handle map load event
+  const handleMapLoad = () => {
+    setMapLoaded(true);
+    console.log("Map loaded successfully");
   };
 
   // Set a random featured location if none is selected
@@ -195,10 +203,19 @@ export default function StorageFacilities() {
         <LocationPreviewSection mapToken={mapToken} featuredLocation={featuredLocation} />
       </div>
       
-      {/* User Location Map Section */}
+      {/* User Location Map Section - Using the updated component */}
       <div className="mt-8 mb-12">
         <Container>
-          <UserLocationMap mapToken={mapToken} />
+          <UserLocationMap 
+            mapToken={mapToken}
+            skipLocationCheck={true} // Skip location check
+            googleMapsKey={googleMapsKey} // Use Google Maps instead
+            fallbackLocation={featuredLocation ? 
+              { lat: featuredLocation.latitude, lng: featuredLocation.longitude } : 
+              { lat: 32.7767, lng: -96.7970 } // Dallas, TX as default
+            }
+            onMapLoad={handleMapLoad}
+          />
         </Container>
       </div>
     </Layout>

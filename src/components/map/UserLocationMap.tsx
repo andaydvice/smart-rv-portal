@@ -4,27 +4,51 @@ import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { AlertCircle, Loader2, MapPin } from 'lucide-react';
+import StaticMapComponent from './StaticMapComponent';
 
 interface UserLocationMapProps {
   mapToken: string;
   fallbackLocation?: { lat: number; lng: number };
+  skipLocationCheck?: boolean; // New prop to skip location check
+  googleMapsKey?: string; // Google Maps API key
+  onMapLoad?: () => void; // Callback when map loads
 }
 
 const UserLocationMap: React.FC<UserLocationMapProps> = ({
   mapToken,
-  fallbackLocation = { lat: 39.8283, lng: -98.5795 } // Center of US as fallback
+  fallbackLocation = { lat: 39.8283, lng: -98.5795 }, // Center of US as fallback
+  skipLocationCheck = false, // Default to false to maintain current behavior
+  googleMapsKey,
+  onMapLoad
 }) => {
   const mapContainer = useRef<HTMLDivElement>(null);
   const map = useRef<mapboxgl.Map | null>(null);
   const marker = useRef<mapboxgl.Marker | null>(null);
   
   const [userLocation, setUserLocation] = useState<{ lat: number; lng: number } | null>(null);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isLoading, setIsLoading] = useState<boolean>(!skipLocationCheck);
   const [error, setError] = useState<string | null>(null);
   const [permissionDenied, setPermissionDenied] = useState<boolean>(false);
 
+  // If skipLocationCheck is true, use the static map component
+  if (skipLocationCheck && googleMapsKey) {
+    return (
+      <StaticMapComponent
+        apiKey={googleMapsKey}
+        mapCenter={fallbackLocation}
+        mapZoom={4}
+        onMapLoad={onMapLoad}
+      />
+    );
+  }
+
   // Get user's location
   useEffect(() => {
+    if (skipLocationCheck) {
+      setIsLoading(false);
+      return;
+    }
+
     if (!navigator.geolocation) {
       setError('Geolocation is not supported by your browser');
       setIsLoading(false);
@@ -53,7 +77,7 @@ const UserLocationMap: React.FC<UserLocationMapProps> = ({
       timeout: 10000,
       maximumAge: 0
     });
-  }, []);
+  }, [skipLocationCheck]);
 
   // Initialize map when the component mounts or when user location changes
   useEffect(() => {
@@ -116,12 +140,17 @@ const UserLocationMap: React.FC<UserLocationMapProps> = ({
       marker.current.setPopup(popup);
     }
 
+    // Call onMapLoad callback if provided
+    if (onMapLoad && map.current) {
+      map.current.on('load', onMapLoad);
+    }
+
     // Cleanup on unmount
     return () => {
       if (marker.current) marker.current.remove();
       map.current?.remove();
     };
-  }, [mapToken, userLocation]);
+  }, [mapToken, userLocation, fallbackLocation, onMapLoad]);
 
   // Render loading state
   if (isLoading) {
@@ -151,7 +180,17 @@ const UserLocationMap: React.FC<UserLocationMapProps> = ({
   }
 
   // Render permission denied state
-  if (permissionDenied) {
+  if (permissionDenied && googleMapsKey) {
+    // If Google Maps API key is provided, use StaticMapComponent instead of permission denied message
+    return (
+      <StaticMapComponent
+        apiKey={googleMapsKey}
+        mapCenter={fallbackLocation}
+        mapZoom={4}
+        onMapLoad={onMapLoad}
+      />
+    );
+  } else if (permissionDenied) {
     return (
       <div className="bg-[#091020] rounded-lg p-6 border border-[#1a202c]">
         <div className="text-center space-y-4">
