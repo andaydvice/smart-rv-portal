@@ -1,12 +1,11 @@
 
 import React from 'react';
-import MapPreview from '../map/MapPreview';
 import { Container } from '@/components/ui/container';
 import { StorageFacility } from './types';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { AlertCircle, Navigation } from 'lucide-react';
-import '../../styles/map-preview.css';
 import { Button } from '@/components/ui/button';
+import EnhancedGoogleMap from '../map/EnhancedGoogleMap';
 
 interface LocationPreviewSectionProps {
   mapToken: string;
@@ -24,6 +23,7 @@ const scrollToMap = () => {
 const LocationPreviewSection: React.FC<LocationPreviewSectionProps> = ({ mapToken, featuredLocation }) => {
   // Validate that we have required fields for the featured location
   const isValidFeaturedLocation = featuredLocation && featuredLocation.id && featuredLocation.name;
+  const googleMapsKey = "AIzaSyAGKkTg0DlZd7fCJlfkVNqkRkzPjeqKJ2o"; // Google Maps API key
 
   return (
     <Container className="py-8">
@@ -70,16 +70,20 @@ const LocationPreviewSection: React.FC<LocationPreviewSectionProps> = ({ mapToke
               </Button>
             </div>
             
-            {/* Right side: Map preview */}
+            {/* Right side: Enhanced Google Map */}
             <div>
-              <MapPreview 
+              <EnhancedGoogleMap 
+                apiKey={googleMapsKey}
                 location={{
                   lat: featuredLocation.latitude,
-                  lng: featuredLocation.longitude,
-                  details: `${featuredLocation.name}<br/>${featuredLocation.address}, ${featuredLocation.city}, ${featuredLocation.state}`
+                  lng: featuredLocation.longitude
                 }}
-                mapToken={mapToken}
-                title={featuredLocation.name}
+                facilities={[{
+                  name: featuredLocation.name,
+                  address: `${featuredLocation.address}, ${featuredLocation.city}, ${featuredLocation.state}`,
+                  rating: featuredLocation.avg_rating,
+                  description: "Premium indoor RV storage facility"
+                }]}
               />
             </div>
           </div>

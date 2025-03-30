@@ -5,7 +5,6 @@ import Navbar from "@/components/Navbar";
 import Layout from "@/components/layout/Layout";
 import { Warehouse } from "lucide-react";
 import LocationPreviewSection from "@/components/storage/LocationPreviewSection";
-import UserLocationMap from "@/components/map/UserLocationMap";
 import { useState, useEffect } from "react";
 import { StorageFacility } from "@/components/storage/types";
 import "../styles/force-markers.css"; // Only load the minimal, clean CSS
@@ -119,7 +118,6 @@ function convertToStorageFacility(data: any): StorageFacility {
 export default function StorageFacilities() {
   const [featuredLocation, setFeaturedLocation] = useState<StorageFacility | undefined>();
   const mapToken = import.meta.env.VITE_MAPBOX_TOKEN || "";
-  const googleMapsKey = "AIzaSyAGKkTg0DlZd7fCJlfkVNqkRkzPjeqKJ2o"; // Google Maps API key
   const [mapLoaded, setMapLoaded] = useState(false);
   
   // Function to handle selecting a featured location
@@ -199,24 +197,8 @@ export default function StorageFacilities() {
       </Container>
       
       {/* Location Preview Section */}
-      <div className="mt-8">
-        <LocationPreviewSection mapToken={mapToken} featuredLocation={featuredLocation} />
-      </div>
-      
-      {/* User Location Map Section - Using the updated component */}
       <div className="mt-8 mb-12">
-        <Container>
-          <UserLocationMap 
-            mapToken={mapToken}
-            skipLocationCheck={true} // Skip location check
-            googleMapsKey={googleMapsKey} // Use Google Maps instead
-            fallbackLocation={featuredLocation ? 
-              { lat: featuredLocation.latitude, lng: featuredLocation.longitude } : 
-              { lat: 32.7767, lng: -96.7970 } // Dallas, TX as default
-            }
-            onMapLoad={handleMapLoad}
-          />
-        </Container>
+        <LocationPreviewSection mapToken={mapToken} featuredLocation={featuredLocation} />
       </div>
     </Layout>
   );

@@ -12,6 +12,8 @@ interface UserLocationMapProps {
   skipLocationCheck?: boolean; // New prop to skip location check
   googleMapsKey?: string; // Google Maps API key
   onMapLoad?: () => void; // Callback when map loads
+  facilities?: Array<{name: string; rating?: number; address?: string;}>;
+  title?: string;
 }
 
 const UserLocationMap: React.FC<UserLocationMapProps> = ({
@@ -19,7 +21,9 @@ const UserLocationMap: React.FC<UserLocationMapProps> = ({
   fallbackLocation = { lat: 39.8283, lng: -98.5795 }, // Center of US as fallback
   skipLocationCheck = false, // Default to false to maintain current behavior
   googleMapsKey,
-  onMapLoad
+  onMapLoad,
+  facilities = [],
+  title
 }) => {
   const mapContainer = useRef<HTMLDivElement>(null);
   const map = useRef<mapboxgl.Map | null>(null);
@@ -38,6 +42,8 @@ const UserLocationMap: React.FC<UserLocationMapProps> = ({
         mapCenter={fallbackLocation}
         mapZoom={4}
         onMapLoad={onMapLoad}
+        facilities={facilities}
+        title={title}
       />
     );
   }
@@ -188,6 +194,8 @@ const UserLocationMap: React.FC<UserLocationMapProps> = ({
         mapCenter={fallbackLocation}
         mapZoom={4}
         onMapLoad={onMapLoad}
+        facilities={facilities}
+        title={title}
       />
     );
   } else if (permissionDenied) {
