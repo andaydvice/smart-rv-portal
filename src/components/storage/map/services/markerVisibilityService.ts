@@ -25,10 +25,34 @@ export const ensureMarkersVisible = (map: google.maps.Map | null) => {
       }
     });
     
-    // Remove any diagonal white arrows or unwanted UI elements
-    document.querySelectorAll('.gm-ui-hover-effect, .gm-style img[src*="arrow"]').forEach(el => {
+    // More aggressive removal of diagonal white arrows and unwanted UI elements
+    document.querySelectorAll('.gm-ui-hover-effect, .gm-style img[src*="arrow"], .gm-style button, .gm-control-active').forEach(el => {
       if (el instanceof HTMLElement) {
         el.style.display = 'none';
+        el.style.visibility = 'hidden';
+        el.style.opacity = '0';
+      }
+    });
+    
+    // Remove the diagonal white arrow in the info windows
+    document.querySelectorAll('.gm-style-iw-a, .gm-style-iw-t').forEach(el => {
+      if (el instanceof HTMLElement) {
+        const arrows = el.querySelectorAll('img');
+        arrows.forEach(arrow => {
+          arrow.style.display = 'none';
+          arrow.style.visibility = 'hidden';
+          arrow.style.opacity = '0';
+        });
+      }
+    });
+    
+    // Ensure info window content is visible and scrollable
+    document.querySelectorAll('.gm-style-iw, .gm-style-iw-c, .gm-style-iw-d').forEach(el => {
+      if (el instanceof HTMLElement) {
+        el.style.overflow = 'auto';
+        el.style.maxHeight = 'none';
+        el.style.boxSizing = 'border-box';
+        el.style.padding = '12px';
       }
     });
   }, 500);
@@ -53,17 +77,79 @@ export const createCleanMarkers = (
   });
 };
 
+// Run this function to remove all unwanted Google Maps UI elements
 export const removeUnwantedMapElements = () => {
-  // Remove any diagonal white arrows or other unwanted UI elements
+  // More comprehensive removal of unwanted UI elements
   const removeElements = () => {
+    // Remove diagonal white arrows
     document.querySelectorAll('.gm-ui-hover-effect, .gm-style img[src*="arrow"]').forEach(el => {
       if (el instanceof HTMLElement) {
         el.style.display = 'none';
+        el.style.visibility = 'hidden';
+        el.style.opacity = '0';
       }
     });
+    
+    // Remove additional unwanted UI controls
+    document.querySelectorAll('.gm-style button, .gm-control-active, .gm-svpc').forEach(el => {
+      if (el instanceof HTMLElement) {
+        el.style.display = 'none';
+        el.style.visibility = 'hidden';
+      }
+    });
+    
+    // Fix info window appearance
+    document.querySelectorAll('.gm-style-iw-c').forEach(el => {
+      if (el instanceof HTMLElement) {
+        el.style.padding = '12px';
+        el.style.borderRadius = '8px';
+        el.style.boxShadow = '0 2px 7px 1px rgba(0, 0, 0, 0.3)';
+        el.style.maxHeight = 'none';
+      }
+    });
+    
+    // Ensure info window content is visible and scrollable
+    document.querySelectorAll('.gm-style-iw-d').forEach(el => {
+      if (el instanceof HTMLElement) {
+        el.style.overflow = 'auto !important';
+        el.style.maxHeight = 'none !important';
+      }
+    });
+    
+    // Target specific arrow elements in the info window
+    document.querySelectorAll('.gm-style-iw-t').forEach(el => {
+      const arrowImgs = el.querySelectorAll('img');
+      arrowImgs.forEach(img => {
+        if (img instanceof HTMLElement) {
+          img.style.display = 'none';
+          img.style.visibility = 'hidden';
+          img.style.opacity = '0';
+        }
+      });
+    });
+    
+    // Log count of found elements for debugging
+    console.log(`Found ${document.querySelectorAll('.gm-style img[src*="marker"]').length} markers to make visible`);
   };
   
   // Run immediately and also set interval to catch any dynamically added elements
   removeElements();
-  return setInterval(removeElements, 1000);
+  return setInterval(removeElements, 2000); // Check every 2 seconds
+};
+
+// Function to fix infowindow scrolling issues
+export const fixInfoWindowScrolling = () => {
+  document.querySelectorAll('.gm-style-iw, .gm-style-iw-c, .gm-style-iw-d').forEach(el => {
+    if (el instanceof HTMLElement) {
+      el.style.overflow = 'auto';
+      el.style.maxHeight = 'none';
+      
+      // Ensure infowindow content is scrollable
+      const content = el.querySelector('div');
+      if (content instanceof HTMLElement) {
+        content.style.overflow = 'auto';
+        content.style.maxHeight = '300px'; // Set a reasonable max height
+      }
+    }
+  });
 };

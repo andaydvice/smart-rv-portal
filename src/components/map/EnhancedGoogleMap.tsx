@@ -8,7 +8,7 @@ import FacilityMarker from './components/FacilityMarker';
 import FacilityInfoWindow from './components/FacilityInfoWindow';
 import { Facility } from './types';
 import { forceMarkersVisible } from './utils/markerUtils';
-import { ensureMarkersVisible, removeUnwantedMapElements } from '../storage/map/services/markerVisibilityService';
+import { ensureMarkersVisible, removeUnwantedMapElements, fixInfoWindowScrolling } from '../storage/map/services/markerVisibilityService';
 
 interface EnhancedGoogleMapProps {
   apiKey: string;
@@ -38,8 +38,11 @@ const EnhancedGoogleMap: React.FC<EnhancedGoogleMapProps> = ({
     mapRef.current = map;
     ensureMarkersVisible(map);
     
-    // Add cleanup interval
+    // Add cleanup interval with more aggressive removal
     cleanupRef.current = removeUnwantedMapElements() as unknown as number;
+    
+    // Fix infowindow scrolling
+    setTimeout(fixInfoWindowScrolling, 1000);
     
     if (onMapLoad) onMapLoad();
   };
@@ -60,6 +63,16 @@ const EnhancedGoogleMap: React.FC<EnhancedGoogleMapProps> = ({
       const runForceVisible = () => {
         forceMarkersVisible(markersRef);
         ensureMarkersVisible(mapRef.current);
+        fixInfoWindowScrolling();
+        
+        // Force removal of unwanted UI elements
+        document.querySelectorAll('.gm-ui-hover-effect, .gm-style img[src*="arrow"]').forEach(el => {
+          if (el instanceof HTMLElement) {
+            el.style.display = 'none';
+            el.style.visibility = 'hidden';
+            el.style.opacity = '0';
+          }
+        });
       };
       
       // Run immediately and set up recurring check
