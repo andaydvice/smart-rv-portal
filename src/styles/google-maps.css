@@ -36,3 +36,27 @@
   display: block !important;
   z-index: 1003 !important;
 }
+
+/* Improve marker icon visibility */
+.gm-style img[src*="circle"], 
+.gm-style img[src*="marker"] {
+  transform: translate(-50%, -50%);
+  visibility: visible !important;
+  opacity: 1 !important;
+  display: block !important;
+  pointer-events: all !important;
+}
+
+/* Fix for SVG marker icons */
+.gm-style .gmnoprint div[role="button"],
+.gm-style .gmnoprint svg {
+  visibility: visible !important;
+  opacity: 1 !important;
+  display: block !important;
+}
+
+/* Fix for marker position */
+.gm-style .map-marker {
+  transform: translate(-50%, -50%);
+  position: absolute !important;
+}

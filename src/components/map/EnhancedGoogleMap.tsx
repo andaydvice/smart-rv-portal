@@ -65,14 +65,21 @@ const EnhancedGoogleMap: React.FC<EnhancedGoogleMapProps> = ({
       // Force markers to remain visible when a popup is open
       const forceMarkersVisible = () => {
         markersRef.current.forEach(marker => {
-          const markerElement = marker.getIcon();
-          if (markerElement) {
-            // Ensure marker visibility through DOM manipulation if needed
-            const el = document.querySelector(`.gm-style img[src="${markerElement.url}"]`);
-            if (el instanceof HTMLElement) {
-              el.style.visibility = 'visible';
-              el.style.opacity = '1';
-              el.style.display = 'block';
+          const markerIcon = marker.getIcon();
+          if (markerIcon) {
+            // Type guard to check if the icon is an object with a url property
+            const iconUrl = typeof markerIcon === 'object' && 'url' in markerIcon 
+              ? markerIcon.url as string 
+              : null;
+              
+            if (iconUrl) {
+              // Ensure marker visibility through DOM manipulation if needed
+              const el = document.querySelector(`.gm-style img[src="${iconUrl}"]`);
+              if (el instanceof HTMLElement) {
+                el.style.visibility = 'visible';
+                el.style.opacity = '1';
+                el.style.display = 'block';
+              }
             }
           }
         });
