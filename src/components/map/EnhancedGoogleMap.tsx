@@ -8,6 +8,7 @@ import FacilityMarker from './components/FacilityMarker';
 import FacilityInfoWindow from './components/FacilityInfoWindow';
 import { Facility } from './types';
 import { forceMarkersVisible } from './utils/markerUtils';
+import { ensureMarkersVisible, removeUnwantedMapElements } from '../storage/map/services/markerVisibilityService';
 
 interface EnhancedGoogleMapProps {
   apiKey: string;
@@ -27,6 +28,7 @@ const EnhancedGoogleMap: React.FC<EnhancedGoogleMapProps> = ({
   const [selectedFacility, setSelectedFacility] = useState<Facility | null>(null);
   const markersRef = useRef<google.maps.Marker[]>([]);
   const mapRef = useRef<google.maps.Map | null>(null);
+  const cleanupRef = useRef<number | null>(null);
   
   // Use our custom hook to load Google Maps
   const { isLoaded, error } = useGoogleMaps({ apiKey });
@@ -34,14 +36,31 @@ const EnhancedGoogleMap: React.FC<EnhancedGoogleMapProps> = ({
   // Handle map load
   const handleMapLoad = (map: google.maps.Map) => {
     mapRef.current = map;
+    ensureMarkersVisible(map);
+    
+    // Add cleanup interval
+    cleanupRef.current = removeUnwantedMapElements() as unknown as number;
+    
     if (onMapLoad) onMapLoad();
   };
+  
+  // Cleanup on unmount
+  useEffect(() => {
+    return () => {
+      if (cleanupRef.current !== null) {
+        clearInterval(cleanupRef.current);
+      }
+    };
+  }, []);
   
   // Ensure markers remain visible even when info window is open
   useEffect(() => {
     if (selectedFacility) {
       // Force markers to remain visible when a popup is open
-      const runForceVisible = () => forceMarkersVisible(markersRef);
+      const runForceVisible = () => {
+        forceMarkersVisible(markersRef);
+        ensureMarkersVisible(mapRef.current);
+      };
       
       // Run immediately and set up recurring check
       runForceVisible();
