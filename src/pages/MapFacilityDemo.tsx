@@ -8,7 +8,7 @@ const MapFacilityDemo: React.FC = () => {
   return (
     <Layout>
       <Navbar />
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-4 py-8 mt-20">
         <FacilityMapExample />
       </div>
     </Layout>

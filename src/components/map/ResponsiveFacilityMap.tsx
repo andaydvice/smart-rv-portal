@@ -125,9 +125,9 @@ const ResponsiveFacilityMap: React.FC<ResponsiveFacilityMapProps> = ({
     <Container className="w-full max-w-5xl mx-auto">
       <div className="bg-[#091020] rounded-lg p-4 md:p-6 border border-[#1a202c] w-full">
         <div className="flex flex-col space-y-4">
-          {/* Facility Name with Typography component */}
+          {/* Facility Name with Typography component - FIXED OVERFLOW ISSUE */}
           <div className="text-center mb-2">
-            <TypographyH3 className="text-[#5B9BD5] truncate hover:text-clip">
+            <TypographyH3 className="text-[#5B9BD5] break-words overflow-hidden px-2">
               {name}
             </TypographyH3>
           </div>
@@ -137,14 +137,14 @@ const ResponsiveFacilityMap: React.FC<ResponsiveFacilityMapProps> = ({
             <div className="flex flex-col md:flex-row md:justify-center gap-2 md:gap-6 text-gray-300 mb-4">
               {address && (
                 <div className="flex items-center justify-center gap-2">
-                  <MapPin className="h-4 w-4 text-gray-400" />
-                  <p className="text-sm md:text-base truncate hover:text-clip">{address}</p>
+                  <MapPin className="h-4 w-4 text-gray-400 flex-shrink-0" />
+                  <p className="text-sm md:text-base break-words">{address}</p>
                 </div>
               )}
               
               {phoneNumber && (
                 <div className="flex items-center justify-center gap-2">
-                  <Phone className="h-4 w-4 text-gray-400" />
+                  <Phone className="h-4 w-4 text-gray-400 flex-shrink-0" />
                   <p className="text-sm md:text-base">{phoneNumber}</p>
                 </div>
               )}
@@ -199,9 +199,9 @@ const ResponsiveFacilityMap: React.FC<ResponsiveFacilityMapProps> = ({
                   }}
                 >
                   <div className="p-2 max-w-[250px]">
-                    <h3 className="text-lg font-semibold text-[#5B9BD5]">{name}</h3>
-                    {address && <p className="text-sm mt-1">{address}</p>}
-                    {description && <p className="text-sm mt-2 text-gray-600">{description}</p>}
+                    <h3 className="text-lg font-semibold text-[#5B9BD5] break-words">{name}</h3>
+                    {address && <p className="text-sm mt-1 break-words">{address}</p>}
+                    {description && <p className="text-sm mt-2 text-gray-600 break-words">{description}</p>}
                   </div>
                 </InfoWindow>
               )}
@@ -211,7 +211,7 @@ const ResponsiveFacilityMap: React.FC<ResponsiveFacilityMapProps> = ({
           {/* Description section */}
           {description && (
             <div className="border-l-2 border-[#5B9BD5] pl-3 mt-4">
-              <p className="text-gray-300 italic">{description}</p>
+              <p className="text-gray-300 italic break-words">{description}</p>
             </div>
           )}
         </div>
