@@ -22,19 +22,53 @@
   visibility: visible !important;
   opacity: 1 !important;
   display: block !important;
+  background-color: transparent !important;
+  padding: 0 !important;
+  border-radius: 8px !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3) !important;
+  overflow: visible !important;
+  max-width: 300px !important;
+}
+
+/* Style the info window content wrapper */
+.gm-style .gm-style-iw-d {
+  overflow: hidden !important;
+  padding: 0 !important;
+  max-width: 300px !important;
+}
+
+/* Ensure the info window tip points to the correct location */
+.gm-style .gm-style-iw-t::after {
+  background: #091020 !important;
+}
+
+/* Improve close button styling for better visibility */
+.gm-style .gm-style-iw-t button.gm-ui-hover-effect {
+  background: #5B9BD5 !important;
+  opacity: 1 !important;
+  top: 0 !important;
+  right: 0 !important;
+  width: 30px !important;
+  height: 30px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: 50% !important;
+  margin: 8px !important;
+}
+
+/* Adjust the X icon in the close button */
+.gm-style .gm-style-iw-t button.gm-ui-hover-effect img {
+  width: 18px !important;
+  height: 18px !important;
+  margin: 0 !important;
+  opacity: 1 !important;
+  filter: invert(1) !important;
 }
 
 /* Ensure markers stay on top of popups when needed */
 .gm-style .gm-style-iw + div {
   z-index: 1002 !important;
-}
-
-/* Ensure close button for info windows is visible */
-.gm-style .gm-style-iw-t button {
-  visibility: visible !important;
-  opacity: 1 !important;
-  display: block !important;
-  z-index: 1003 !important;
 }
 
 /* Improve marker icon visibility */

@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { GoogleMap, useLoadScript, MarkerF, InfoWindowF } from '@react-google-maps/api';
 import { Loader2, Star, Phone, MapPin } from 'lucide-react';
@@ -35,6 +34,7 @@ const EnhancedGoogleMap: React.FC<EnhancedGoogleMapProps> = ({
   facilities = [],
   onMapLoad
 }) => {
+  
   const [error, setError] = useState<string | null>(null);
   const [selectedFacility, setSelectedFacility] = useState<Facility | null>(null);
   const [markersActive, setMarkersActive] = useState<boolean>(true);
@@ -212,45 +212,46 @@ const EnhancedGoogleMap: React.FC<EnhancedGoogleMapProps> = ({
                 zIndex: 999
               }}
             >
-              <div className="p-4 max-w-[300px] bg-[#131a2a] text-white rounded-lg">
-                <h3 className="text-xl font-semibold text-[#5B9BD5] mb-2">{selectedFacility.name}</h3>
+              <div className="p-0 max-w-[300px] bg-[#131a2a] text-white rounded-lg">
+                {/* Title with bold text and proper spacing */}
+                <div className="bg-[#091020] px-5 py-5 rounded-t-lg">
+                  <h3 className="text-xl font-bold text-[#5B9BD5] text-center">{selectedFacility.name}</h3>
+                </div>
                 
-                {selectedFacility.rating && (
-                  renderRatingStars(selectedFacility.rating)
-                )}
-                
-                {selectedFacility.address && (
-                  <div className="flex items-start gap-2 mt-3">
-                    <MapPin className="w-5 h-5 text-gray-400 mt-0.5 flex-shrink-0" />
-                    <span className="text-gray-300">{selectedFacility.address}</span>
-                  </div>
-                )}
-                
-                {selectedFacility.phone && (
-                  <div className="flex items-center gap-2 mt-3">
-                    <Phone className="w-5 h-5 text-gray-400" />
-                    <span className="text-gray-300">{selectedFacility.phone}</span>
-                  </div>
-                )}
-                
-                {selectedFacility.features && selectedFacility.features.length > 0 && (
-                  <div className="mt-3">
-                    <h4 className="text-sm font-medium text-gray-400 mb-2">FACILITIES & AMENITIES</h4>
-                    <div className="flex flex-wrap gap-2">
-                      {selectedFacility.features.map((feature, idx) => (
-                        <span key={idx} className="bg-[#1d2434] text-[#5B9BD5] text-xs px-2 py-1 rounded">
-                          {feature}
-                        </span>
-                      ))}
+                <div className="px-5 pt-4 pb-5">
+                  {selectedFacility.address && (
+                    <div className="flex items-center justify-center gap-2 mb-4">
+                      <MapPin className="w-5 h-5 text-gray-400 flex-shrink-0" />
+                      <span className="text-white font-medium text-center">{selectedFacility.address}</span>
                     </div>
-                  </div>
-                )}
-                
-                {selectedFacility.description && (
-                  <p className="text-sm mt-3 text-gray-300 border-l-2 border-[#5B9BD5] pl-3 italic">
-                    {selectedFacility.description}
-                  </p>
-                )}
+                  )}
+                  
+                  {selectedFacility.phone && (
+                    <div className="flex items-center justify-center gap-2 mb-5">
+                      <Phone className="w-5 h-5 text-gray-400" />
+                      <span className="text-white font-medium">{selectedFacility.phone}</span>
+                    </div>
+                  )}
+                  
+                  {selectedFacility.features && selectedFacility.features.length > 0 && (
+                    <div className="mb-5">
+                      <h4 className="text-sm font-bold text-gray-400 uppercase text-center mb-3">FACILITIES & AMENITIES</h4>
+                      <div className="grid grid-cols-2 gap-3">
+                        {selectedFacility.features.map((feature, idx) => (
+                          <div key={idx} className="bg-[#1d2434] text-[#5B9BD5] text-sm font-medium px-3 py-2 rounded text-center">
+                            {feature}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                  
+                  {selectedFacility.description && (
+                    <div className="border-l-2 border-[#5B9BD5] pl-3 italic text-gray-300 mb-2">
+                      <p>{selectedFacility.description}</p>
+                    </div>
+                  )}
+                </div>
               </div>
             </InfoWindowF>
           )}
