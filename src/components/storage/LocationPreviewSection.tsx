@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Container } from '@/components/ui/container';
 import { StorageFacility } from './types';
