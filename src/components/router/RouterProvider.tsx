@@ -1,5 +1,5 @@
 
-import { createBrowserRouter, RouterProvider as ReactRouterProvider, useNavigationType, useLocation } from "react-router-dom";
+import { createBrowserRouter, RouterProvider as ReactRouterProvider } from "react-router-dom";
 import { routes } from "@/routes/routes";
 import ErrorBoundary from "../error/ErrorBoundary";
 import ErrorDisplay from "../error/ErrorDisplay";

@@ -36,7 +36,7 @@ import ScheduleDemo from "../pages/ScheduleDemo";
 import MapFacilityDemo from "../pages/MapFacilityDemo";
 
 // Define routes
-const routes: RouteObject[] = [
+export const routes: RouteObject[] = [
   {
     path: "/",
     element: <Index />,
@@ -163,4 +163,5 @@ const routes: RouteObject[] = [
   },
 ];
 
+// For backward compatibility
 export default routes;
