@@ -1,18 +1,7 @@
-
 import React, { useRef, useEffect, useState } from 'react';
 import { GoogleMap, useLoadScript, MarkerF, InfoWindowF } from '@react-google-maps/api';
 import { StorageFacility } from '../types';
-
-interface GoogleMapViewProps {
-  facilities: StorageFacility[];
-  recentlyViewedFacilityIds: string[];
-  onMarkerClick?: (facilityId: string) => void;
-  apiKey?: string;
-  center?: { lat: number; lng: number };
-  zoom?: number;
-  onZoomChange?: (zoom: number) => void;
-  selectedState?: string | null;
-}
+import { fixInfoWindowVisibility } from './utils/infoWindowUtils';
 
 const mapContainerStyle = {
   width: '100%',
@@ -191,6 +180,11 @@ const GoogleMapView: React.FC<GoogleMapViewProps> = ({
         google.maps.event.removeListener(listener);
       });
     }
+    
+    // Call our helper function to fix info window styling after the map loads
+    setTimeout(() => {
+      fixInfoWindowVisibility();
+    }, 1000);
   };
 
   // Close info window when clicking on the map
@@ -317,7 +311,6 @@ const GoogleMapView: React.FC<GoogleMapViewProps> = ({
             options={{
               pixelOffset: new google.maps.Size(0, -30),
               maxWidth: 320,
-              backgroundColor: '#131a2a',
               disableAutoPan: false,
             }}
           >

@@ -31,6 +31,7 @@ export function fixInfoWindowVisibility() {
     // Apply style fixes to each info window
     infoWindows.forEach((infoWindow, index) => {
       if (infoWindow instanceof HTMLElement) {
+        // Set background color directly in style
         infoWindow.style.backgroundColor = '#131a2a';
         infoWindow.style.color = 'white';
         infoWindow.style.visibility = 'visible';
@@ -58,6 +59,35 @@ export function fixInfoWindowVisibility() {
       if (arrow instanceof HTMLElement) {
         arrow.style.backgroundColor = '#131a2a';
       }
+    });
+    
+    // Add a mutation observer to fix dynamically added info windows
+    const observer = new MutationObserver(mutations => {
+      mutations.forEach(mutation => {
+        if (mutation.addedNodes.length) {
+          mutation.addedNodes.forEach(node => {
+            if (node instanceof HTMLElement) {
+              if (node.classList.contains('gm-style-iw-c') || 
+                  node.classList.contains('gm-style-iw-d')) {
+                node.style.backgroundColor = '#131a2a';
+                node.style.color = 'white';
+              }
+              
+              // Check for info window elements within added node
+              const newInfoWindows = node.querySelectorAll('.gm-style-iw-c, .gm-style-iw-d');
+              if (newInfoWindows.length > 0) {
+                fixInfoWindowVisibility();
+              }
+            }
+          });
+        }
+      });
+    });
+    
+    // Start observing the body for changes
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true
     });
     
   } catch (error) {
