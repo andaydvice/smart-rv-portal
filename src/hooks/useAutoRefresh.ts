@@ -5,7 +5,7 @@ import { startAutoRefresh, stopAutoRefresh, toggleAutoRefresh } from '@/utils/au
 /**
  * Hook for controlling the auto-refresh functionality
  */
-export function useAutoRefresh(initialEnabled: boolean = true) {
+export function useAutoRefresh(initialEnabled: boolean = false) { // Changed default to false
   const [isEnabled, setIsEnabled] = useState<boolean>(initialEnabled);
   
   useEffect(() => {

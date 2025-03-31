@@ -4,14 +4,14 @@
  */
 
 // Define refresh intervals (in milliseconds)
-const REFRESH_CHECK_INTERVAL = 2000; // Check for changes every 2 seconds
-const DEBOUNCE_TIMEOUT = 500; // Debounce refresh events
+const REFRESH_CHECK_INTERVAL = 5000; // Increased from 2s to 5s to reduce frequency
+const DEBOUNCE_TIMEOUT = 2000; // Increased from 500ms to 2s
 
 // Track state for the auto-refresh system
 let lastRefreshTimestamp = Date.now();
 let changeDetected = false;
 let refreshTimer: number | null = null;
-let isEnabled = true;
+let isEnabled = false; // Changed default to disabled
 
 // Store a hash of the last content state to detect changes
 let lastContentHash = '';
@@ -31,7 +31,9 @@ const generateContentHash = (): string => {
  */
 const hasContentChanged = (): boolean => {
   const newHash = generateContentHash();
-  const changed = lastContentHash !== '' && newHash !== lastContentHash;
+  // Only consider it a change if the hash is different and the page has been loaded for at least 5 seconds
+  const pageLoadedTime = Date.now() - performance.timing.navigationStart;
+  const changed = lastContentHash !== '' && newHash !== lastContentHash && pageLoadedTime > 5000;
   lastContentHash = newHash;
   return changed;
 };
@@ -73,6 +75,11 @@ export const startAutoRefresh = () => {
   
   // Set up interval to check for changes
   refreshTimer = window.setInterval(() => {
+    // Prevent refreshing during initial page load
+    if (document.readyState !== 'complete') {
+      return;
+    }
+    
     // Check for content changes
     if (hasContentChanged()) {
       console.log('Auto refresh: Changes detected');

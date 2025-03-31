@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { RefreshCw } from 'lucide-react';
+import { RefreshCw, RefreshOff } from 'lucide-react';
 import { useAutoRefresh } from '@/hooks/useAutoRefresh';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 
@@ -11,22 +11,24 @@ interface GlobalAutoRefreshControlProps {
 const GlobalAutoRefreshControl: React.FC<GlobalAutoRefreshControlProps> = ({
   className = ''
 }) => {
-  const { isEnabled, toggle } = useAutoRefresh(true);
-  
-  if (!isEnabled) return null;
+  const { isEnabled, toggle } = useAutoRefresh(false); // Changed initial state to false
   
   return (
     <Tooltip>
       <TooltipTrigger asChild>
         <div
-          className={`refresh-status-indicator p-2 bg-[#5B9BD5] rounded-full cursor-pointer ${className}`}
+          className={`refresh-status-indicator p-2 ${isEnabled ? 'bg-[#5B9BD5]' : 'bg-gray-600'} rounded-full cursor-pointer ${className}`}
           onClick={toggle}
         >
-          <RefreshCw className="h-4 w-4 text-white animate-spin-slow" />
+          {isEnabled ? (
+            <RefreshCw className="h-4 w-4 text-white animate-spin-slow" />
+          ) : (
+            <RefreshOff className="h-4 w-4 text-white" />
+          )}
         </div>
       </TooltipTrigger>
       <TooltipContent side="left">
-        <p>Auto-refresh active</p>
+        <p>{isEnabled ? 'Auto-refresh active' : 'Auto-refresh disabled'}</p>
       </TooltipContent>
     </Tooltip>
   );
