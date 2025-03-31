@@ -6,6 +6,7 @@ import { Loader2 } from "lucide-react";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { AlertCircle, MapPin, Phone } from "lucide-react";
 import { Container } from "@/components/ui/container";
+import CustomInfoWindow from './components/CustomInfoWindow';
 
 interface Location {
   lat: number;
@@ -44,6 +45,7 @@ const ResponsiveFacilityMap: React.FC<ResponsiveFacilityMapProps> = ({
   const infoWindowRef = useRef<HTMLDivElement>(null);
   const markerRef = useRef<google.maps.Marker | null>(null);
   const mapContainerRef = useRef<HTMLDivElement>(null);
+  const [infoPosition, setInfoPosition] = useState({ x: 0, y: 0 });
 
   const mapContainerStyle = {
     width: '100%',
@@ -82,6 +84,7 @@ const ResponsiveFacilityMap: React.FC<ResponsiveFacilityMapProps> = ({
   };
 
   // Handle map loading and apply custom styles
+  // FIX: Changed return type to void to match expected function signature
   const handleMapLoad = (map: google.maps.Map) => {
     mapRef.current = map;
     
@@ -111,97 +114,17 @@ const ResponsiveFacilityMap: React.FC<ResponsiveFacilityMapProps> = ({
       positionCustomInfoWindow();
     });
     
-    // Apply essential styles for DOM-based info windows
-    const style = document.createElement('style');
-    style.id = 'responsive-map-styles';
-    style.textContent = `
-      .custom-info-window {
-        z-index: 1000;
-        position: absolute;
-        transform: translate(-50%, -100%);
-        background-color: #131a2a;
-        color: white;
-        border-radius: 8px;
-        padding: 0;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-        max-width: 300px;
-        width: auto;
-        pointer-events: auto;
-      }
-      
-      .custom-info-window::after {
-        content: '';
-        position: absolute;
-        left: 50%;
-        bottom: -10px;
-        transform: translateX(-50%);
-        border-left: 10px solid transparent;
-        border-right: 10px solid transparent;
-        border-top: 10px solid #131a2a;
-      }
-      
-      .custom-info-window h3 {
-        font-size: 1.1rem;
-        font-weight: 600;
-        margin: 0;
-        padding: 12px;
-        background-color: #091020;
-        color: #5B9BD5;
-        border-top-left-radius: 8px;
-        border-top-right-radius: 8px;
-        word-wrap: break-word;
-        word-break: break-word;
-        white-space: normal;
-        overflow-wrap: break-word;
-        hyphens: auto;
-      }
-      
-      .custom-info-window .info-content {
-        padding: 12px;
-      }
-      
-      .custom-info-window .close-btn {
-        position: absolute;
-        right: 8px;
-        top: 8px;
-        background: rgba(0,0,0,0.2);
-        border: none;
-        color: white;
-        width: 24px;
-        height: 24px;
-        border-radius: 50%;
-        font-size: 14px;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        z-index: 1;
-      }
-    `;
-    document.head.appendChild(style);
-    
-    // Initial positioning of info window if showing
-    if (showInfo) {
-      positionCustomInfoWindow();
-    }
-    
     // Listen for map movements to reposition info window
     map.addListener('bounds_changed', () => {
       if (showInfo) {
         positionCustomInfoWindow();
       }
     });
-    
-    return () => {
-      if (document.getElementById('responsive-map-styles')) {
-        document.getElementById('responsive-map-styles')?.remove();
-      }
-    };
   };
   
   // Position custom info window based on marker position
   const positionCustomInfoWindow = () => {
-    if (!mapRef.current || !infoWindowRef.current || !markerRef.current) return;
+    if (!mapRef.current || !markerRef.current) return;
     
     const map = mapRef.current;
     const marker = markerRef.current;
@@ -215,27 +138,26 @@ const ResponsiveFacilityMap: React.FC<ResponsiveFacilityMapProps> = ({
       if (!projection) return;
       
       const position = projection.fromLatLngToDivPixel(marker.getPosition() as google.maps.LatLng);
-      if (!position || !infoWindowRef.current || !mapContainerRef.current) return;
+      if (!position || !mapContainerRef.current) return;
       
       // Get map container bounds
       const mapBounds = mapContainerRef.current.getBoundingClientRect();
       
-      // Position the info window above the marker
-      infoWindowRef.current.style.left = `${position.x}px`;
-      infoWindowRef.current.style.top = `${position.y - 15}px`;
+      // Set the info position for the CustomInfoWindow
+      setInfoPosition({
+        x: position.x,
+        y: position.y
+      });
     };
     
     overlay.draw();
     overlay.setMap(null); // Clean up overlay
   };
 
-  // Remove unwanted UI elements when map is loaded
+  // Reposition info window when map is loaded or visibility changes
   useEffect(() => {
-    if (isLoaded) {
-      // Initial setup of the map
-      if (showInfo) {
-        positionCustomInfoWindow();
-      }
+    if (isLoaded && showInfo) {
+      positionCustomInfoWindow();
       
       // Handle window resize
       const handleResize = () => {
@@ -349,19 +271,13 @@ const ResponsiveFacilityMap: React.FC<ResponsiveFacilityMapProps> = ({
             
             {/* Custom info window */}
             {showInfo && (
-              <div 
-                ref={infoWindowRef}
-                className="custom-info-window"
+              <CustomInfoWindow
+                isVisible={showInfo}
+                onClose={handleCloseInfoWindow}
+                position={infoPosition}
+                title={name}
               >
-                <button 
-                  className="close-btn"
-                  onClick={handleCloseInfoWindow}
-                  aria-label="Close"
-                >
-                  ×
-                </button>
-                <h3>{name}</h3>
-                <div className="info-content">
+                <div>
                   {address && <p className="text-sm mb-2">{address}</p>}
                   {phoneNumber && <p className="text-sm mb-2">{phoneNumber}</p>}
                   
@@ -386,7 +302,7 @@ const ResponsiveFacilityMap: React.FC<ResponsiveFacilityMapProps> = ({
                     </p>
                   )}
                 </div>
-              </div>
+              </CustomInfoWindow>
             )}
           </div>
           
