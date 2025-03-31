@@ -1,7 +1,8 @@
 
-import React, { useState, useEffect } from 'react';
-import { GoogleMap, useLoadScript, Marker, InfoWindow } from '@react-google-maps/api';
+import React, { useState, useEffect, useRef } from 'react';
+import { GoogleMap, useLoadScript, Marker } from '@react-google-maps/api';
 import { Loader2 } from 'lucide-react';
+import CustomInfoWindow from './components/CustomInfoWindow';
 
 interface Facility {
   name: string;
@@ -29,40 +30,86 @@ const EnhancedGoogleMap: React.FC<EnhancedGoogleMapProps> = ({
   onMapLoad
 }) => {
   const [selectedFacility, setSelectedFacility] = useState<Facility | null>(null);
+  const [showInfoWindow, setShowInfoWindow] = useState(false);
+  const mapRef = useRef<google.maps.Map | null>(null);
+  const infoWindowRef = useRef<HTMLDivElement | null>(null);
+  const markerRef = useRef<google.maps.Marker | null>(null);
   
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: apiKey,
   });
 
-  // Force markers to be visible
+  // Force styling and visibility
   useEffect(() => {
     if (isLoaded && onMapLoad) {
       // Call the onMapLoad callback
       onMapLoad();
       
-      // Additional forceful styling to ensure info window content doesn't get clipped
+      // Add DOM-based force styling
       const style = document.createElement('style');
       style.textContent = `
-        .gm-style-iw.gm-style-iw-c {
-          padding: 0 !important;
-          max-height: none !important;
-          max-width: 340px !important;
-          width: auto !important;
-          overflow: visible !important;
+        /* Force custom info window visibility */
+        .custom-info-window {
+          z-index: 1000;
+          position: absolute;
+          transform: translate(-50%, -100%);
+          background-color: #131a2a;
+          color: white;
+          border-radius: 8px;
+          padding: 0;
+          box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+          max-width: 300px;
+          width: auto;
+          pointer-events: auto;
         }
         
-        .gm-style-iw-d {
-          overflow: visible !important;
-          max-height: none !important;
+        .custom-info-window::after {
+          content: '';
+          position: absolute;
+          left: 50%;
+          bottom: -10px;
+          transform: translateX(-50%);
+          border-left: 10px solid transparent;
+          border-right: 10px solid transparent;
+          border-top: 10px solid #131a2a;
         }
         
-        .gm-style .gm-style-iw-c .facility-info h3,
-        .gm-style .gm-style-iw-c .facility-info p {
-          white-space: normal !important;
-          overflow: visible !important;
-          text-overflow: clip !important;
-          word-break: break-word !important;
-          max-width: 100% !important;
+        .custom-info-window h3 {
+          font-size: 1.1rem;
+          font-weight: 600;
+          margin: 0;
+          padding: 12px;
+          background-color: #091020;
+          color: #5B9BD5;
+          border-top-left-radius: 8px;
+          border-top-right-radius: 8px;
+          word-wrap: break-word;
+          word-break: break-word;
+          white-space: normal;
+          overflow-wrap: break-word;
+          hyphens: auto;
+        }
+        
+        .custom-info-window .info-content {
+          padding: 12px;
+        }
+        
+        .custom-info-window .close-btn {
+          position: absolute;
+          right: 8px;
+          top: 8px;
+          background: rgba(0,0,0,0.2);
+          border: none;
+          color: white;
+          width: 24px;
+          height: 24px;
+          border-radius: 50%;
+          font-size: 14px;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          z-index: 1;
         }
       `;
       document.head.appendChild(style);
@@ -72,6 +119,50 @@ const EnhancedGoogleMap: React.FC<EnhancedGoogleMapProps> = ({
       };
     }
   }, [isLoaded, onMapLoad]);
+
+  // Position the custom info window
+  useEffect(() => {
+    if (!isLoaded || !mapRef.current || !showInfoWindow || !infoWindowRef.current || !selectedFacility) return;
+    
+    // Use the projection to convert LatLng to pixel coordinates
+    const overlay = new google.maps.OverlayView();
+    overlay.setMap(mapRef.current);
+    
+    overlay.draw = () => {
+      if (!mapRef.current || !infoWindowRef.current) return;
+      
+      // Get the pixel position
+      const projection = overlay.getProjection();
+      if (!projection) return;
+      
+      const position = projection.fromLatLngToDivPixel(
+        new google.maps.LatLng(location.lat, location.lng)
+      );
+      
+      if (position && infoWindowRef.current) {
+        // Position the info window above the marker
+        infoWindowRef.current.style.left = `${position.x}px`;
+        infoWindowRef.current.style.top = `${position.y - 15}px`;
+      }
+    };
+    
+    // Trigger a redraw when the map moves
+    const moveHandler = () => {
+      overlay.draw();
+    };
+    
+    mapRef.current.addListener('bounds_changed', moveHandler);
+    
+    // Initial draw
+    overlay.draw();
+    
+    return () => {
+      if (mapRef.current) {
+        google.maps.event.clearListeners(mapRef.current, 'bounds_changed');
+      }
+      overlay.setMap(null);
+    };
+  }, [isLoaded, location, mapRef.current, showInfoWindow, selectedFacility, infoWindowRef.current]);
 
   // Dark theme map styles
   const mapOptions = {
@@ -103,6 +194,23 @@ const EnhancedGoogleMap: React.FC<EnhancedGoogleMapProps> = ({
     zoomControl: true,
   };
 
+  const handleMapLoad = (map: google.maps.Map) => {
+    mapRef.current = map;
+    if (onMapLoad) {
+      onMapLoad();
+    }
+  };
+  
+  const handleMarkerClick = (facility: Facility) => {
+    setSelectedFacility(facility);
+    setShowInfoWindow(true);
+  };
+  
+  const handleCloseInfoWindow = () => {
+    setShowInfoWindow(false);
+    setSelectedFacility(null);
+  };
+
   if (loadError) {
     return (
       <div className="bg-[#091020] p-4 rounded text-white">
@@ -120,19 +228,19 @@ const EnhancedGoogleMap: React.FC<EnhancedGoogleMapProps> = ({
   }
 
   return (
-    <div className="w-full h-[300px] rounded-lg overflow-hidden">
+    <div className="w-full h-[300px] rounded-lg overflow-hidden relative">
       <GoogleMap
         mapContainerStyle={{ width: '100%', height: '100%', borderRadius: '0.5rem' }}
         center={location}
         zoom={14}
         options={mapOptions}
-        onLoad={() => onMapLoad?.()}
+        onLoad={handleMapLoad}
       >
         {facilities.map((facility, index) => (
           <Marker
             key={`facility-${index}`}
             position={location}
-            onClick={() => setSelectedFacility(facility)}
+            onClick={() => handleMarkerClick(facility)}
             icon={{
               path: window.google.maps.SymbolPath.CIRCLE,
               scale: 12,
@@ -143,50 +251,47 @@ const EnhancedGoogleMap: React.FC<EnhancedGoogleMapProps> = ({
             }}
           />
         ))}
-        
-        {selectedFacility && (
-          <InfoWindow
-            position={location}
-            onCloseClick={() => setSelectedFacility(null)}
-            options={{
-              pixelOffset: new window.google.maps.Size(0, -30),
-              maxWidth: 300
-            }}
-          >
-            <div className="facility-info p-2 max-w-[280px]">
-              <h3 className="text-lg font-semibold text-[#5B9BD5] break-words whitespace-normal"
-                  style={{ overflowWrap: 'break-word', wordWrap: 'break-word', wordBreak: 'break-word', maxWidth: '100%' }}>
-                {selectedFacility.name}
-              </h3>
-              
-              {selectedFacility.address && (
-                <p className="text-sm mt-1 break-words">{selectedFacility.address}</p>
-              )}
-              
-              {selectedFacility.phone && (
-                <p className="text-sm mt-1 break-words">{selectedFacility.phone}</p>
-              )}
-              
-              {selectedFacility.description && (
-                <p className="text-sm mt-2 text-gray-600 break-words">{selectedFacility.description}</p>
-              )}
-              
-              {selectedFacility.features && selectedFacility.features.length > 0 && (
-                <div className="mt-2">
-                  <p className="text-xs text-gray-500 mb-1">Features:</p>
-                  <div className="flex flex-wrap gap-1">
-                    {selectedFacility.features.map((feature, idx) => (
-                      <span key={idx} className="text-xs bg-blue-100 text-blue-700 px-2 py-0.5 rounded">
-                        {feature}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              )}
-            </div>
-          </InfoWindow>
-        )}
       </GoogleMap>
+      
+      {/* Custom Info Window */}
+      {showInfoWindow && selectedFacility && (
+        <div 
+          ref={infoWindowRef}
+          className="custom-info-window"
+        >
+          <button 
+            className="close-btn"
+            onClick={handleCloseInfoWindow}
+            aria-label="Close"
+          >
+            ×
+          </button>
+          <h3>{selectedFacility.name}</h3>
+          <div className="info-content">
+            {selectedFacility.address && (
+              <p className="text-sm mb-2">{selectedFacility.address}</p>
+            )}
+            {selectedFacility.phone && (
+              <p className="text-sm mb-2">{selectedFacility.phone}</p>
+            )}
+            {selectedFacility.description && (
+              <p className="text-sm text-gray-300 mt-3 italic border-l-2 border-[#5B9BD5] pl-3">{selectedFacility.description}</p>
+            )}
+            {selectedFacility.features && selectedFacility.features.length > 0 && (
+              <div className="mt-3">
+                <p className="text-xs text-gray-400 uppercase mb-2">Facilities & Amenities</p>
+                <div className="flex flex-wrap gap-1">
+                  {selectedFacility.features.map((feature, idx) => (
+                    <span key={idx} className="bg-[#1d2434] text-[#5B9BD5] text-xs px-2 py-1 rounded">
+                      {feature}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
 };

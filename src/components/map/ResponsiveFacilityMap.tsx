@@ -1,8 +1,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { useGoogleMaps } from './hooks/useGoogleMaps';
-import { GoogleMap, Marker, InfoWindow } from '@react-google-maps/api';
-import { TypographyH3 } from "@/components/ui/typography";
+import { GoogleMap, Marker } from '@react-google-maps/api';
 import { Loader2 } from "lucide-react";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { AlertCircle, MapPin, Phone } from "lucide-react";
@@ -26,6 +25,7 @@ interface ResponsiveFacilityMapProps {
   features?: Feature[];
   description?: string;
   apiKey?: string;
+  onMapLoad?: () => void;
 }
 
 const ResponsiveFacilityMap: React.FC<ResponsiveFacilityMapProps> = ({
@@ -35,11 +35,15 @@ const ResponsiveFacilityMap: React.FC<ResponsiveFacilityMapProps> = ({
   phoneNumber,
   features = [],
   description,
-  apiKey = "AIzaSyAGKkTg0DlZd7fCJlfkVNqkRkzPjeqKJ2o" // Default API key
+  apiKey = "AIzaSyAGKkTg0DlZd7fCJlfkVNqkRkzPjeqKJ2o", // Default API key
+  onMapLoad
 }) => {
   const [showInfo, setShowInfo] = useState(false);
   const { isLoaded, error } = useGoogleMaps({ apiKey });
   const mapRef = useRef<google.maps.Map | null>(null);
+  const infoWindowRef = useRef<HTMLDivElement>(null);
+  const markerRef = useRef<google.maps.Marker | null>(null);
+  const mapContainerRef = useRef<HTMLDivElement>(null);
 
   const mapContainerStyle = {
     width: '100%',
@@ -78,56 +82,179 @@ const ResponsiveFacilityMap: React.FC<ResponsiveFacilityMapProps> = ({
   };
 
   // Handle map loading and apply custom styles
-  const onMapLoad = (map: google.maps.Map) => {
+  const handleMapLoad = (map: google.maps.Map) => {
     mapRef.current = map;
     
-    // Apply essential styles for info windows immediately
+    // Call the external onMapLoad handler if provided
+    if (onMapLoad) {
+      onMapLoad();
+    }
+    
+    // Create marker
+    const marker = new google.maps.Marker({
+      position: location,
+      map: map,
+      icon: {
+        path: google.maps.SymbolPath.CIRCLE,
+        scale: 12,
+        fillColor: '#5B9BD5',
+        fillOpacity: 1,
+        strokeColor: '#FFFFFF',
+        strokeWeight: 2,
+      }
+    });
+    markerRef.current = marker;
+    
+    // Add click handler
+    marker.addListener('click', () => {
+      setShowInfo(true);
+      positionCustomInfoWindow();
+    });
+    
+    // Apply essential styles for DOM-based info windows
     const style = document.createElement('style');
+    style.id = 'responsive-map-styles';
     style.textContent = `
-      .gm-style .gm-style-iw-c {
-        padding: 0 !important;
-        max-height: none !important;
-        overflow: visible !important;
+      .custom-info-window {
+        z-index: 1000;
+        position: absolute;
+        transform: translate(-50%, -100%);
+        background-color: #131a2a;
+        color: white;
+        border-radius: 8px;
+        padding: 0;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        max-width: 300px;
+        width: auto;
+        pointer-events: auto;
       }
       
-      .gm-style .gm-style-iw-d {
-        overflow: visible !important;
-        max-height: none !important;
+      .custom-info-window::after {
+        content: '';
+        position: absolute;
+        left: 50%;
+        bottom: -10px;
+        transform: translateX(-50%);
+        border-left: 10px solid transparent;
+        border-right: 10px solid transparent;
+        border-top: 10px solid #131a2a;
       }
       
-      .facility-name-heading {
-        overflow-wrap: break-word !important;
-        word-wrap: break-word !important;
-        word-break: break-all !important;
-        white-space: normal !important;
-        max-width: 100% !important;
+      .custom-info-window h3 {
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin: 0;
+        padding: 12px;
+        background-color: #091020;
+        color: #5B9BD5;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+        word-wrap: break-word;
+        word-break: break-word;
+        white-space: normal;
+        overflow-wrap: break-word;
+        hyphens: auto;
+      }
+      
+      .custom-info-window .info-content {
+        padding: 12px;
+      }
+      
+      .custom-info-window .close-btn {
+        position: absolute;
+        right: 8px;
+        top: 8px;
+        background: rgba(0,0,0,0.2);
+        border: none;
+        color: white;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        font-size: 14px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1;
       }
     `;
     document.head.appendChild(style);
+    
+    // Initial positioning of info window if showing
+    if (showInfo) {
+      positionCustomInfoWindow();
+    }
+    
+    // Listen for map movements to reposition info window
+    map.addListener('bounds_changed', () => {
+      if (showInfo) {
+        positionCustomInfoWindow();
+      }
+    });
+    
+    return () => {
+      if (document.getElementById('responsive-map-styles')) {
+        document.getElementById('responsive-map-styles')?.remove();
+      }
+    };
+  };
+  
+  // Position custom info window based on marker position
+  const positionCustomInfoWindow = () => {
+    if (!mapRef.current || !infoWindowRef.current || !markerRef.current) return;
+    
+    const map = mapRef.current;
+    const marker = markerRef.current;
+    
+    // Use overlay to get pixel coordinates
+    const overlay = new google.maps.OverlayView();
+    overlay.setMap(map);
+    
+    overlay.draw = () => {
+      const projection = overlay.getProjection();
+      if (!projection) return;
+      
+      const position = projection.fromLatLngToDivPixel(marker.getPosition() as google.maps.LatLng);
+      if (!position || !infoWindowRef.current || !mapContainerRef.current) return;
+      
+      // Get map container bounds
+      const mapBounds = mapContainerRef.current.getBoundingClientRect();
+      
+      // Position the info window above the marker
+      infoWindowRef.current.style.left = `${position.x}px`;
+      infoWindowRef.current.style.top = `${position.y - 15}px`;
+    };
+    
+    overlay.draw();
+    overlay.setMap(null); // Clean up overlay
   };
 
   // Remove unwanted UI elements when map is loaded
   useEffect(() => {
     if (isLoaded) {
-      const removeUnwantedElements = () => {
-        document.querySelectorAll('.gm-ui-hover-effect, .gm-style img[src*="arrow"]').forEach(el => {
-          if (el instanceof HTMLElement) {
-            el.style.display = 'none';
-            el.style.visibility = 'hidden';
-            el.style.opacity = '0';
-          }
-        });
+      // Initial setup of the map
+      if (showInfo) {
+        positionCustomInfoWindow();
+      }
+      
+      // Handle window resize
+      const handleResize = () => {
+        if (showInfo) {
+          positionCustomInfoWindow();
+        }
       };
-
-      // Run repeatedly to ensure the elements are removed
-      const intervalId = setInterval(removeUnwantedElements, 300);
       
-      // Initial run
-      removeUnwantedElements();
-      
-      return () => clearInterval(intervalId);
+      window.addEventListener('resize', handleResize);
+      return () => {
+        window.removeEventListener('resize', handleResize);
+      };
     }
-  }, [isLoaded]);
+  }, [isLoaded, showInfo]);
+
+  // Handle close info window
+  const handleCloseInfoWindow = () => {
+    setShowInfo(false);
+  };
 
   if (!isLoaded) {
     return (
@@ -206,54 +333,61 @@ const ResponsiveFacilityMap: React.FC<ResponsiveFacilityMapProps> = ({
           )}
           
           {/* Map container with enhanced styling */}
-          <div className="w-full overflow-hidden rounded-lg relative">
+          <div 
+            className="w-full overflow-hidden rounded-lg relative"
+            ref={mapContainerRef}
+          >
             <GoogleMap
               mapContainerStyle={mapContainerStyle}
               center={location}
               zoom={14}
               options={mapOptions}
-              onLoad={onMapLoad}
+              onLoad={handleMapLoad}
             >
-              <Marker
-                position={location}
-                onClick={() => setShowInfo(!showInfo)}
-                icon={{
-                  path: window.google.maps.SymbolPath.CIRCLE,
-                  scale: 12,
-                  fillColor: '#5B9BD5',
-                  fillOpacity: 1,
-                  strokeColor: '#FFFFFF',
-                  strokeWeight: 2,
-                }}
-              />
-              
-              {showInfo && (
-                <InfoWindow
-                  position={location}
-                  onCloseClick={() => setShowInfo(false)}
-                  options={{
-                    pixelOffset: new window.google.maps.Size(0, -30),
-                    maxWidth: 300
-                  }}
-                >
-                  <div className="p-2 max-w-[250px]">
-                    <h3 className="text-lg font-semibold text-[#5B9BD5] facility-name-heading"
-                        style={{ 
-                          overflowWrap: 'break-word',
-                          wordWrap: 'break-word',
-                          wordBreak: 'break-word',
-                          whiteSpace: 'normal',
-                          maxWidth: '100%',
-                          overflow: 'visible'
-                        }}>
-                      {name}
-                    </h3>
-                    {address && <p className="text-sm mt-1 break-words">{address}</p>}
-                    {description && <p className="text-sm mt-2 text-gray-600 break-words">{description}</p>}
-                  </div>
-                </InfoWindow>
-              )}
+              {/* We're not using the built-in InfoWindow, using DOM-based instead */}
             </GoogleMap>
+            
+            {/* Custom info window */}
+            {showInfo && (
+              <div 
+                ref={infoWindowRef}
+                className="custom-info-window"
+              >
+                <button 
+                  className="close-btn"
+                  onClick={handleCloseInfoWindow}
+                  aria-label="Close"
+                >
+                  ×
+                </button>
+                <h3>{name}</h3>
+                <div className="info-content">
+                  {address && <p className="text-sm mb-2">{address}</p>}
+                  {phoneNumber && <p className="text-sm mb-2">{phoneNumber}</p>}
+                  
+                  {features && features.length > 0 && (
+                    <div className="mt-2">
+                      <p className="text-xs text-gray-400 uppercase mb-1">Facilities & Amenities</p>
+                      <div className="flex flex-wrap gap-1">
+                        {features
+                          .filter(feature => feature.available)
+                          .map((feature, idx) => (
+                            <span key={idx} className="bg-[#1d2434] text-[#5B9BD5] text-xs px-2 py-1 rounded">
+                              {feature.name}
+                            </span>
+                          ))}
+                      </div>
+                    </div>
+                  )}
+                  
+                  {description && (
+                    <p className="text-sm text-gray-300 mt-3 italic border-l-2 border-[#5B9BD5] pl-3">
+                      {description}
+                    </p>
+                  )}
+                </div>
+              </div>
+            )}
           </div>
           
           {/* Description section */}
