@@ -28,6 +28,8 @@
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3) !important;
   overflow: visible !important;
   max-width: 300px !important;
+  /* Fix 1: Add transform property to prevent truncation */
+  transform: translate(-50%, -100%) !important;
 }
 
 /* Style the info window content wrapper */
@@ -35,6 +37,8 @@
   overflow: hidden !important;
   padding: 0 !important;
   max-width: 300px !important;
+  /* Fix 2: Remove max-height restriction */
+  max-height: none !important;
 }
 
 /* Ensure the info window tip points to the correct location */
@@ -93,4 +97,21 @@
 .gm-style .map-marker {
   transform: translate(-50%, -50%);
   position: absolute !important;
+}
+
+/* Fix for info window content - NEW */
+.gm-style-iw.gm-style-iw-c .gm-style-iw-d {
+  overflow: visible !important;
+}
+
+/* Ensure text doesn't get cut off in Google info windows - NEW */
+.gm-style-iw.gm-style-iw-c h3,
+.gm-style-iw.gm-style-iw-c p,
+.gm-style-iw.gm-style-iw-c span,
+.gm-style-iw.gm-style-iw-c div {
+  white-space: normal !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
+  word-break: break-word !important;
+  max-width: 100% !important;
 }
