@@ -84,8 +84,8 @@ const ResponsiveFacilityMap: React.FC<ResponsiveFacilityMapProps> = ({
   };
 
   // Handle map loading and apply custom styles
-  // FIX: Changed return type to void to match expected function signature
-  const handleMapLoad = (map: google.maps.Map) => {
+  // Fixing TypeScript error by ensuring handleMapLoad returns void
+  const handleMapLoad = (map: google.maps.Map): void => {
     mapRef.current = map;
     
     // Call the external onMapLoad handler if provided
