@@ -1,3 +1,4 @@
+
 import React, { useRef, useEffect, useState } from 'react';
 import { GoogleMap, useLoadScript, MarkerF, InfoWindowF } from '@react-google-maps/api';
 import { StorageFacility } from '../types';
@@ -308,21 +309,21 @@ const GoogleMapView: React.FC<GoogleMapViewProps> = ({
               maxWidth: 320,
             }}
           >
-            <div className="facility-info-window max-w-[300px]">
-              <h3 className="text-lg font-semibold mb-1 text-[#5B9BD5]">{selectedFacility.name}</h3>
+            <div className="facility-info-window max-w-[300px] bg-[#131a2a] text-white p-4 rounded-lg shadow-lg border border-gray-700">
+              <h3 className="text-lg font-semibold mb-1 text-[#5B9BD5] break-words whitespace-normal max-w-full overflow-visible">{selectedFacility.name}</h3>
               
               {/* Rating display */}
               {renderRatingStars(selectedFacility.avg_rating as number)}
               
               {/* Review count */}
               {selectedFacility.review_count && selectedFacility.review_count > 0 && (
-                <p className="text-xs text-gray-500 mb-2">
+                <p className="text-xs text-gray-400 mb-2">
                   {selectedFacility.review_count} {selectedFacility.review_count === 1 ? 'review' : 'reviews'}
                 </p>
               )}
               
-              <div className="space-y-1 text-sm">
-                <p>{selectedFacility.address}</p>
+              <div className="space-y-1 text-sm text-white">
+                <p className="break-words">{selectedFacility.address}</p>
                 <p>{selectedFacility.city}, {selectedFacility.state}</p>
                 {selectedFacility.price_range && (
                   <p className="mt-2 font-semibold text-[#F97316]">
@@ -335,23 +336,23 @@ const GoogleMapView: React.FC<GoogleMapViewProps> = ({
               </div>
               
               {selectedFacility.features && Object.values(selectedFacility.features).some(v => v) && (
-                <div className="mt-2 border-t border-gray-300 pt-2">
-                  <p className="text-xs text-gray-600 mb-1">Features:</p>
+                <div className="mt-2 border-t border-gray-700 pt-2">
+                  <p className="text-xs text-gray-400 mb-1">Features:</p>
                   <div className="flex flex-wrap gap-1">
                     {selectedFacility.features.indoor && (
-                      <span className="text-xs bg-[#e0f2ff] text-[#4285F4] px-2 py-0.5 rounded">Indoor</span>
+                      <span className="text-xs bg-[#1d2434] text-[#60A5FA] px-2 py-0.5 rounded">Indoor</span>
                     )}
                     {selectedFacility.features.climate_controlled && (
-                      <span className="text-xs bg-[#e0f2ff] text-[#4285F4] px-2 py-0.5 rounded">Climate Controlled</span>
+                      <span className="text-xs bg-[#1d2434] text-[#60A5FA] px-2 py-0.5 rounded">Climate Controlled</span>
                     )}
                     {selectedFacility.features["24h_access"] && (
-                      <span className="text-xs bg-[#e0f2ff] text-[#4285F4] px-2 py-0.5 rounded">24/7 Access</span>
+                      <span className="text-xs bg-[#1d2434] text-[#60A5FA] px-2 py-0.5 rounded">24/7 Access</span>
                     )}
                     {selectedFacility.features.security_system && (
-                      <span className="text-xs bg-[#e0f2ff] text-[#4285F4] px-2 py-0.5 rounded">Security</span>
+                      <span className="text-xs bg-[#1d2434] text-[#60A5FA] px-2 py-0.5 rounded">Security</span>
                     )}
                     {selectedFacility.features.vehicle_washing && (
-                      <span className="text-xs bg-[#e0f2ff] text-[#4285F4] px-2 py-0.5 rounded">Vehicle Washing</span>
+                      <span className="text-xs bg-[#1d2434] text-[#60A5FA] px-2 py-0.5 rounded">Vehicle Washing</span>
                     )}
                   </div>
                 </div>
