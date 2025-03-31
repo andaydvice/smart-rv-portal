@@ -65,17 +65,15 @@ const CustomInfoWindow: React.FC<CustomInfoWindowProps> = ({
         borderRadius: '8px',
         boxShadow: '0 2px 10px rgba(0,0,0,0.2)',
         zIndex: 10000,
-        maxWidth: '350px', // Increased from 300px for more space
-        minWidth: '250px', // Increased from 220px
-        width: 'auto',
-        overflow: 'visible' // Ensure content doesn't get cut off
+        maxWidth: '400px', // Increased width for longer headlines
+        minWidth: '280px', // Increased minimum width
+        width: 'auto'
       }}
     >
       <div 
         style={{
           position: 'relative',
-          width: '100%',
-          overflow: 'visible' // Ensure content doesn't get cut off
+          width: '100%'
         }}
       >
         <button 
@@ -102,7 +100,7 @@ const CustomInfoWindow: React.FC<CustomInfoWindowProps> = ({
           ×
         </button>
         
-        <div 
+        <h3 
           style={{
             fontSize: '1.1rem',
             fontWeight: 600,
@@ -112,49 +110,26 @@ const CustomInfoWindow: React.FC<CustomInfoWindowProps> = ({
             color: '#5B9BD5',
             borderTopLeftRadius: '8px',
             borderTopRightRadius: '8px',
-            paddingRight: '36px', // Make room for the close button
-            wordBreak: 'break-word',  // Critical for long text
-            wordWrap: 'break-word',   // Additional word wrapping
-            whiteSpace: 'normal',     // Allow text to wrap
-            overflowWrap: 'break-word', // Modern word wrapping
-            hyphens: 'auto',           // Allow hyphenation
-            textAlign: 'left',
-            overflow: 'visible',       // Prevent clipping
-            maxWidth: '100%',
-            width: '100%'
-          }}
-        >
-          {/* Render title with additional safeguards */}
-          <h3 style={{
-            margin: 0,
-            padding: 0,
-            fontSize: '1.1rem',
-            fontWeight: 600,
             wordBreak: 'break-word',
             wordWrap: 'break-word',
             whiteSpace: 'normal',
             overflowWrap: 'break-word',
             hyphens: 'auto',
             textAlign: 'left',
-            width: '100%',
             maxWidth: '100%',
-            overflow: 'visible',
-            display: 'inline-block'
-          }}>
-            {title}
-          </h3>
-        </div>
+            paddingRight: '36px', // Make room for the close button
+            overflow: 'visible'
+          }}
+        >
+          {title}
+        </h3>
         
         <div 
           className="info-content"
           style={{
             padding: '12px',
             overflowWrap: 'break-word',
-            wordBreak: 'break-word',
-            width: '100%',
-            maxWidth: '100%',
-            overflow: 'visible',
-            boxSizing: 'border-box'
+            wordBreak: 'break-word'
           }}
         >
           {children}

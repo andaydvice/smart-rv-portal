@@ -133,14 +133,13 @@ body .gm-style .gm-style-iw-d::-webkit-scrollbar {
   border-radius: 8px !important;
   padding: 0 !important;
   box-shadow: 0 2px 10px rgba(0,0,0,0.2) !important;
-  max-width: 350px !important; /* Increased from 300px */
+  max-width: 400px !important; /* Increased width for longer headlines */
   width: auto !important;
-  min-width: 250px !important; /* Increased from 220px */
+  min-width: 280px !important; /* Increased minimum width */
   pointer-events: auto !important;
   visibility: visible !important;
   display: block !important;
   opacity: 1 !important;
-  overflow: visible !important; /* CRITICAL FIX - ensure content isn't cut off */
 }
 
 .custom-info-window::after {
@@ -174,7 +173,7 @@ body .gm-style .gm-style-iw-d::-webkit-scrollbar {
   width: 100% !important;
   box-sizing: border-box !important;
   overflow: visible !important;
-  text-overflow: ellipsis !important;
+  text-overflow: clip !important;
   display: block !important;
 }
 
@@ -208,8 +207,8 @@ body .gm-style .gm-style-iw-d::-webkit-scrollbar {
 /* Responsive adjustments for mobile devices */
 @media (max-width: 480px) {
   .custom-info-window {
-    max-width: 280px !important; /* Increased from 260px */
-    min-width: 220px !important; /* Increased from 200px */
+    max-width: 300px !important; /* Increased width */
+    min-width: 250px !important; /* Increased width */
   }
   
   .custom-info-window h3 {
@@ -227,3 +226,4 @@ body .gm-style .gm-style-iw-d::-webkit-scrollbar {
     height: 22px !important;
   }
 }
+
