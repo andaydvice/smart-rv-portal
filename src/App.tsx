@@ -6,9 +6,11 @@ import { Toaster } from '@/components/ui/toaster';
 import { AuthProvider } from './components/auth/AuthContext';
 import { injectEmergencyStyles } from './utils/markers/styleInjection';
 import { forceMapMarkersVisible } from './utils/forceMapMarkers';
+import { startAutoRefresh } from './utils/autoRefresh';
 import './App.css';
 import './styles/animations.css';
 import './styles/map-loading.css';
+import './styles/auto-refresh.css';
 
 // Create a client with better error handling
 const queryClient = new QueryClient({
@@ -34,6 +36,9 @@ function AppContent() {
     // Apply emergency fixes that bypass React
     injectEmergencyStyles();
     forceMapMarkersVisible();
+    
+    // Initialize auto-refresh system
+    startAutoRefresh();
     
     // Log the current URL for debugging
     console.log('Current URL:', window.location.href);

@@ -1,0 +1,31 @@
+
+/* Auto-refresh specific animations */
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 3s linear infinite;
+}
+
+/* Status indicator for refresh system */
+.refresh-status-indicator {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  z-index: 100;
+  transition: all 0.2s ease;
+}
+
+.refresh-status-indicator.active {
+  transform: scale(1.1);
+}
+
+.refresh-status-indicator.refreshing {
+  transform: scale(1.2);
+}

@@ -9,6 +9,7 @@ import { StorageFacility } from '../../types';
 import FacilityCountBadge from './FacilityCountBadge';
 import FullScreenPreview from './FullScreenPreview';
 import { Button } from '@/components/ui/button';
+import AutoRefreshControl from '@/components/ui/AutoRefreshControl';
 
 interface MapViewContainerProps {
   useGoogleMaps: boolean;
@@ -38,18 +39,25 @@ const MapViewContainer: React.FC<MapViewContainerProps> = ({
 
   return (
     <div className="relative">
-      <FacilityCountBadge count={facilities?.length || 0} />
-      
-      {/* Full Screen Button */}
-      <Button
-        variant="outline"
-        size="sm"
-        className="absolute top-2 right-2 z-10 bg-black/60 hover:bg-black/80 text-white border-gray-700"
-        onClick={() => setIsFullScreenOpen(true)}
-      >
-        <Maximize2 className="h-4 w-4 mr-1" />
-        <span className="hidden sm:inline">Full Screen</span>
-      </Button>
+      <div className="flex items-center justify-between mb-2">
+        <FacilityCountBadge count={facilities?.length || 0} />
+        
+        {/* Auto-refresh control */}
+        <div className="flex items-center gap-2">
+          <AutoRefreshControl />
+          
+          {/* Full Screen Button */}
+          <Button
+            variant="outline"
+            size="sm"
+            className="bg-black/60 hover:bg-black/80 text-white border-gray-700"
+            onClick={() => setIsFullScreenOpen(true)}
+          >
+            <Maximize2 className="h-4 w-4 mr-1" />
+            <span className="hidden sm:inline">Full Screen</span>
+          </Button>
+        </div>
+      </div>
       
       {useGoogleMaps ? (
         <GoogleMapFacilitiesView
