@@ -4,17 +4,24 @@
  */
 
 // Define refresh intervals (in milliseconds)
-const REFRESH_CHECK_INTERVAL = 5000; // Increased from 2s to 5s to reduce frequency
-const DEBOUNCE_TIMEOUT = 2000; // Increased from 500ms to 2s
+const REFRESH_CHECK_INTERVAL = 10000; // Increased from 5s to 10s to reduce frequency
+const DEBOUNCE_TIMEOUT = 3000; // Increased from 2s to 3s
 
 // Track state for the auto-refresh system
 let lastRefreshTimestamp = Date.now();
 let changeDetected = false;
 let refreshTimer: number | null = null;
-let isEnabled = false; // Changed default to disabled
+let isEnabled = false; 
 
 // Store a hash of the last content state to detect changes
 let lastContentHash = '';
+
+/**
+ * Check if auto-refresh is currently enabled
+ */
+export const isAutoRefreshEnabled = (): boolean => {
+  return isEnabled;
+};
 
 /**
  * Generate a simple hash from current DOM state to detect changes
@@ -31,9 +38,9 @@ const generateContentHash = (): string => {
  */
 const hasContentChanged = (): boolean => {
   const newHash = generateContentHash();
-  // Only consider it a change if the hash is different and the page has been loaded for at least 5 seconds
-  const pageLoadedTime = Date.now() - performance.timing.navigationStart;
-  const changed = lastContentHash !== '' && newHash !== lastContentHash && pageLoadedTime > 5000;
+  // Only consider it a change if the hash is different and the page has been loaded for at least 10 seconds
+  const pageLoadedTime = Date.now() - (window.performance?.timing?.navigationStart || Date.now() - 10000);
+  const changed = lastContentHash !== '' && newHash !== lastContentHash && pageLoadedTime > 10000;
   lastContentHash = newHash;
   return changed;
 };
@@ -107,6 +114,7 @@ export const stopAutoRefresh = () => {
   }
   isEnabled = false;
   console.log('Auto refresh: Monitoring stopped');
+  return false;
 };
 
 /**

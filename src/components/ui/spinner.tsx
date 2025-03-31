@@ -19,7 +19,9 @@ export const Spinner: React.FC<SpinnerProps> = ({
   return (
     <div className={`relative ${className}`}>
       <div 
-        className={`animate-spin rounded-full border-2 border-gray-300 border-t-[#5B9BD5] ${sizeClasses[size]}`}
+        className={`animate-spin rounded-full border-2 border-t-[#5B9BD5] border-r-[#5B9BD5] border-b-gray-200 border-l-gray-200 ${sizeClasses[size]}`}
+        role="status"
+        aria-label="Loading"
       ></div>
     </div>
   );

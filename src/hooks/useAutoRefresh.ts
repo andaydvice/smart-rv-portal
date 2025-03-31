@@ -1,25 +1,27 @@
 
 import { useEffect, useState } from 'react';
-import { startAutoRefresh, stopAutoRefresh, toggleAutoRefresh } from '@/utils/autoRefresh';
+import { startAutoRefresh, stopAutoRefresh, toggleAutoRefresh, isAutoRefreshEnabled } from '@/utils/autoRefresh';
 
 /**
  * Hook for controlling the auto-refresh functionality
  */
-export function useAutoRefresh(initialEnabled: boolean = false) { // Changed default to false
-  const [isEnabled, setIsEnabled] = useState<boolean>(initialEnabled);
+export function useAutoRefresh(initialEnabled: boolean = false) {
+  // Initialize with the current state from the utility
+  const [isEnabled, setIsEnabled] = useState<boolean>(isAutoRefreshEnabled());
   
   useEffect(() => {
-    // Start auto-refresh on mount if enabled
-    if (initialEnabled) {
-      const controls = startAutoRefresh();
-      
-      // Clean up on unmount
-      return () => {
-        stopAutoRefresh();
-      };
+    // Only start auto-refresh if initialEnabled is true and it's not already running
+    if (initialEnabled && !isEnabled) {
+      startAutoRefresh();
+      setIsEnabled(true);
     }
     
-    return undefined;
+    // Clean up on unmount
+    return () => {
+      if (isEnabled) {
+        stopAutoRefresh();
+      }
+    };
   }, [initialEnabled]);
   
   // Toggle function that updates state

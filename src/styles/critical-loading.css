@@ -1,0 +1,66 @@
+
+/* Critical loading styles to prevent blank screens */
+
+/* Ensure body and root elements always have height and background */
+html, body, #root {
+  min-height: 100vh;
+  background-color: #080F1F;
+  margin: 0;
+  padding: 0;
+  color: white;
+}
+
+/* Ensure content is visible even during partial loads */
+.min-h-screen {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Force scrollbars to be visible to prevent layout shifts */
+html {
+  overflow-y: scroll;
+}
+
+/* Prevent flash of unstyled content */
+body {
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* Initial loading state - display while React is initializing */
+#root::before {
+  content: '';
+  display: none; /* Only shown when loading class is added */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 3px solid rgba(255, 255, 255, 0.1);
+  border-top-color: #5B9BD5;
+  animation: spin 1s linear infinite;
+}
+
+#root.loading::before {
+  display: block;
+}
+
+@keyframes spin {
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* Ensure elements don't disappear during transitions */
+.animate-spin, .animate-spin-slow {
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* Force mainline content to be visible */
+main, header, footer {
+  visibility: visible !important;
+  opacity: 1 !important;
+  display: block !important;
+}
