@@ -1,52 +1,59 @@
 
 import React from 'react';
-import ResponsiveMap from './ResponsiveMap';
-import { toast } from 'sonner';
+import GoogleMapWithModal, { Location } from './GoogleMapWithModal';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
-interface MapExampleProps {
-  mapToken: string;
-}
-
-const MapExample: React.FC<MapExampleProps> = ({ mapToken }) => {
-  // Example map data with proper tuple typing for coordinates
-  const sampleMapData = {
-    features: [
-      {
-        id: '1',
-        coordinates: [-122.4194, 37.7749] as [number, number], // San Francisco - explicitly typed as tuple
-        properties: { name: 'San Francisco' }
-      },
-      {
-        id: '2',
-        coordinates: [-118.2437, 34.0522] as [number, number], // Los Angeles - explicitly typed as tuple
-        properties: { name: 'Los Angeles' }
-      },
-      {
-        id: '3',
-        coordinates: [-117.1611, 32.7157] as [number, number], // San Diego - explicitly typed as tuple
-        properties: { name: 'San Diego' }
-      }
-    ]
-  };
-
-  const handleMarkerClick = (featureId: string) => {
-    const feature = sampleMapData.features.find(f => f.id === featureId);
-    if (feature) {
-      toast.info(`Selected: ${feature.properties.name}`);
+const MapExample: React.FC = () => {
+  // Sample location data
+  const locations: Location[] = [
+    {
+      id: '1',
+      lat: 44.9778, 
+      lng: -93.2650,
+      name: 'Paul Bunyan Mini Storage',
+      description: 'A secure storage facility with multiple unit sizes available for both short and long-term rentals. Our facility features 24/7 surveillance and climate-controlled units.',
+      address: '3050 Irvine Ave NW, Bemidji, Minnesota',
+      features: ['Indoor', 'Climate Controlled', '24/7 Access', 'Security'],
+      price: '$85 - $177',
+      phone: '(218) 751-1064'
+    },
+    {
+      id: '2',
+      lat: 41.8781,
+      lng: -87.6298,
+      name: 'Chicago Metro Storage',
+      description: 'Centrally located storage facility in Chicago with easy access from major highways. Offering various unit sizes with premium security features.',
+      address: '123 Michigan Ave, Chicago, IL',
+      features: ['Climate Controlled', 'Security', 'Drive-up Access'],
+      price: '$95 - $250',
+      phone: '(312) 555-1234'
+    },
+    {
+      id: '3',
+      lat: 34.0522,
+      lng: -118.2437,
+      name: 'LA Downtown Storage Solutions',
+      description: 'Premium storage units in downtown Los Angeles. Convenient location with flexible access hours and professional management.',
+      address: '456 Main St, Los Angeles, CA',
+      features: ['24/7 Access', 'Indoor', 'Vehicle Storage'],
+      price: '$110 - $350',
+      phone: '(213) 555-6789'
     }
-  };
+  ];
 
   return (
-    <div className="py-6 px-4">
-      <h2 className="text-2xl font-bold mb-4 text-white">California Storage Locations</h2>
-      <ResponsiveMap
-        mapData={sampleMapData}
-        centerCoordinates={[-119.4179, 36.7783] as [number, number]} // California - explicitly typed as tuple
-        zoomLevel={5}
-        mapToken={mapToken}
-        onMarkerClick={handleMarkerClick}
-      />
-    </div>
+    <Card className="bg-[#080F1F] border-gray-700">
+      <CardHeader>
+        <CardTitle className="text-white">Storage Facilities Map</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <GoogleMapWithModal 
+          locations={locations} 
+          mapCenter={{ lat: 39.8283, lng: -98.5795 }} 
+          mapZoom={4}
+        />
+      </CardContent>
+    </Card>
   );
 };
 

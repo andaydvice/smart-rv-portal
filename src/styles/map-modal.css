@@ -1,0 +1,77 @@
+
+/* Map modal specific styles */
+.mapboxgl-popup-content, 
+.gm-style-iw,
+.gm-style .gm-style-iw-c {
+  background-color: #131a2a !important;
+  color: white !important;
+  border-radius: 8px !important;
+  padding: 0 !important;
+  max-width: 320px !important;
+  width: auto !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* Ensure modal visibility */
+.mapboxgl-popup,
+.gm-style-iw-d {
+  opacity: 1 !important;
+  visibility: visible !important;
+  background-color: #131a2a !important;
+  overflow: hidden !important;
+  max-height: none !important;
+}
+
+/* Fix transparency in Google Maps info windows */
+.gm-style .gm-style-iw-t::after {
+  background: #131a2a !important;
+}
+
+/* Custom styling for Dialog component when used with maps */
+.map-dialog[data-state="open"] {
+  background-color: rgba(0, 0, 0, 0.8) !important;
+}
+
+.map-dialog .map-dialog-content {
+  background-color: #131a2a !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.7) !important;
+}
+
+/* Ensure modals are on top of the map */
+.map-location-modal {
+  z-index: 9999 !important;
+}
+
+/* Style for the location cards in modal */
+.location-card {
+  background-color: #131a2a;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.location-card-header {
+  background-color: #091020;
+  padding: 1rem;
+}
+
+.location-card-content {
+  padding: 1rem;
+}
+
+.location-card-features {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.location-card-feature {
+  background-color: #1d2434;
+  color: #60A5FA;
+  font-size: 0.875rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 0.25rem;
+}
