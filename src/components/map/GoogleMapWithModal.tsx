@@ -175,7 +175,7 @@ const GoogleMapWithModal: React.FC<GoogleMapWithModalProps> = ({
 
       {/* Location Details Modal - Using Dialog from shadcn/ui */}
       <Dialog open={!!selectedLocation} onOpenChange={(open) => !open && setSelectedLocation(null)}>
-        <DialogContent className="bg-[#131a2a] text-white border-gray-700 p-0 max-w-md w-full max-h-[90vh] overflow-hidden">
+        <DialogContent className="bg-[#131a2a] text-white border-gray-700 p-0 max-w-md w-full max-h-[90vh] overflow-hidden map-dialog-content">
           {selectedLocation && (
             <>
               <div className="bg-[#091020] px-6 py-4 relative">

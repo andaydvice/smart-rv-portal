@@ -75,3 +75,45 @@
   padding: 0.25rem 0.75rem;
   border-radius: 0.25rem;
 }
+
+/* Critical Google Maps overrides to ensure opaque backgrounds */
+.gm-style .gm-style-iw-c,
+.gm-style-iw,
+.gm-style-iw-d {
+  background-color: #131a2a !important;
+}
+
+.gm-style-iw-d {
+  overflow: hidden !important;
+  max-height: none !important;
+}
+
+/* Fix for Google Maps info window content */
+.gm-style-iw.gm-style-iw-c > *,
+.gm-style-iw-d > * {
+  background-color: #131a2a !important;
+}
+
+/* Fix Google Maps info window arrow */
+.gm-style .gm-style-iw-tc::after {
+  background-color: #131a2a !important;
+}
+
+/* Force all facility-info-window elements to be opaque */
+.facility-info-window {
+  background-color: #131a2a !important;
+  color: white !important;
+  max-width: 300px !important;
+  border-radius: 8px !important;
+}
+
+/* Fix specific Google Maps info window styling */
+.gm-style .gm-style-iw-t::after {
+  box-shadow: none !important;
+  background: #131a2a !important;
+}
+
+/* Override transparency in Google Maps info window */
+.gm-ui-hover-effect {
+  background-color: transparent !important;
+}
