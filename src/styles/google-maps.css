@@ -33,7 +33,7 @@ body .gm-style-iw.gm-style-iw-c {
   min-width: 0 !important;
   width: auto !important;
   transform-origin: center !important;
-  background-color: transparent !important;
+  background-color: #131a2a !important; /* Set solid color */
 }
 
 /* Reset all info window content styles */
@@ -47,6 +47,7 @@ body .gm-style-iw.gm-style-iw-c .gm-style-iw-d {
   -ms-overflow-style: none !important;
   max-width: none !important;
   box-sizing: content-box !important;
+  background-color: #131a2a !important; /* Set solid color */
 }
 
 /* Hide scrollbars */
@@ -80,6 +81,7 @@ body .gm-style .gm-style-iw-d::-webkit-scrollbar {
 .gm-style-iw-d {
   overflow: visible !important;
   max-height: none !important;
+  background-color: #131a2a !important; /* Set solid color */
 }
 
 /* Override Google's aggressive display restrictions */
@@ -89,6 +91,7 @@ body .gm-style .gm-style-iw-d::-webkit-scrollbar {
   max-height: none !important;
   max-width: 100% !important;
   white-space: normal !important;
+  color: white !important; /* Ensure text is white for readability */
 }
 
 /* Essential fix for facility popup title */
@@ -104,6 +107,7 @@ body .gm-style .gm-style-iw-d::-webkit-scrollbar {
   max-width: 100% !important;
   overflow-wrap: break-word !important;
   text-align: left !important;
+  color: #5B9BD5 !important; /* Use blue for headings */
 }
 
 /* Ensure proper width for infowindow on all devices */
@@ -264,4 +268,41 @@ div.gm-style-iw-c {
 
 .gm-style .gm-style-iw-t::after {
   background: #131a2a !important;
+}
+
+/* Fix for the arrow that points to the marker */
+.gm-style .gm-style-iw-tc::after {
+  background-color: #131a2a !important;
+}
+
+/* Fix the background color of each element in the info window tree */
+.gm-style-iw.gm-style-iw-c > * {
+  background-color: #131a2a !important;
+}
+
+/* Fix for the outer container of the info window */
+.gm-style-iw-tc {
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.5)) !important;
+}
+
+/* Fix for the inner popup area */
+.facility-info-window {
+  background-color: #131a2a !important;
+  opacity: 1 !important;
+}
+
+/* Add opaque border to ensure visibility */
+.gm-style-iw.gm-style-iw-c {
+  border: 2px solid rgba(75, 85, 99, 0.8) !important;
+}
+
+/* Fix for text contrast */
+.facility-info-window p {
+  color: #ffffff !important;
+  opacity: 1 !important;
+}
+
+/* Fix for the info window arrow pointer */
+.gm-style div[style*="background-color: rgb("] {
+  background-color: #131a2a !important;
 }
