@@ -5,6 +5,7 @@ import Navbar from '@/components/Navbar';
 import { Container } from '@/components/ui/container';
 import MapExample from '@/components/map/MapExample';
 import '../styles/map-modal.css';
+import '../styles/google-maps.css'; // Import the new Google Maps specific styles
 
 const MapDemoPage: React.FC = () => {
   return (

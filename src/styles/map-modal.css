@@ -117,3 +117,46 @@
 .gm-ui-hover-effect {
   background-color: transparent !important;
 }
+
+/* ADVANCED FIX: Complete overhaul of Google Maps info window styling */
+/* Target every possible element in the info window hierarchy */
+.gm-style *[class^="gm-"] {
+  background-color: #131a2a !important;
+}
+
+/* Force background color for all info window parent elements */
+.gm-style-iw-a,
+.gm-style-iw-t,
+.gm-style-iw,
+.gm-style-iw-c,
+.gm-style-iw-d,
+.gm-style-iw-tc,
+.gm-style div[style*="background-color:"] {
+  background-color: #131a2a !important;
+  background: #131a2a !important;
+}
+
+/* Target the info window arrow specifically */
+.gm-style .gm-style-iw-t::after,
+.gm-style-iw-tc::after {
+  background: #131a2a !important;
+  box-shadow: none !important;
+}
+
+/* Apply !important to all background properties */
+.gm-style .gm-style-iw-c,
+.gm-style-iw.gm-style-iw-c {
+  padding: 0 !important;
+  background-color: #131a2a !important;
+  background: #131a2a !important;
+  border: 2px solid rgba(91, 155, 213, 0.4) !important;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6) !important;
+}
+
+/* Target the actual content container */
+.gm-style-iw.gm-style-iw-c > div,
+.gm-style-iw-d > div,
+.gm-style-iw-d > div > div {
+  background-color: #131a2a !important;
+  color: white !important;
+}
