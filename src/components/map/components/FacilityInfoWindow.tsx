@@ -30,7 +30,13 @@ const FacilityInfoWindow: React.FC<FacilityInfoWindowProps> = ({
         <div className="bg-[#091020] px-4 py-4 rounded-t-lg">
           <h3 
             className="text-xl font-bold text-[#5B9BD5] text-center break-words whitespace-normal overflow-visible" 
-            style={{ maxWidth: '100%', wordBreak: 'break-word' }}
+            style={{ 
+              maxWidth: '100%', 
+              wordBreak: 'break-word',
+              overflowWrap: 'break-word',
+              hyphens: 'auto',
+              textOverflow: 'ellipsis'
+            }}
           >
             {facility.name}
           </h3>
@@ -42,7 +48,10 @@ const FacilityInfoWindow: React.FC<FacilityInfoWindowProps> = ({
               <MapPin className="w-5 h-5 text-gray-400 flex-shrink-0 mt-1" />
               <span 
                 className="text-white font-medium break-words whitespace-normal"
-                style={{ wordBreak: 'break-word' }}
+                style={{ 
+                  wordBreak: 'break-word',
+                  overflowWrap: 'break-word'
+                }}
               >
                 {facility.address}
               </span>
@@ -54,7 +63,10 @@ const FacilityInfoWindow: React.FC<FacilityInfoWindowProps> = ({
               <Phone className="w-5 h-5 text-gray-400 flex-shrink-0" />
               <span 
                 className="text-white font-medium break-words"
-                style={{ wordBreak: 'break-word' }}
+                style={{ 
+                  wordBreak: 'break-word',
+                  overflowWrap: 'break-word'
+                }}
               >
                 {facility.phone}
               </span>
@@ -69,7 +81,10 @@ const FacilityInfoWindow: React.FC<FacilityInfoWindowProps> = ({
                   <div 
                     key={idx} 
                     className="bg-[#1d2434] text-[#5B9BD5] text-sm font-medium px-3 py-2 rounded text-center break-words"
-                    style={{ wordBreak: 'break-word' }}
+                    style={{ 
+                      wordBreak: 'break-word',
+                      overflowWrap: 'break-word'
+                    }}
                   >
                     {feature}
                   </div>
@@ -82,7 +97,10 @@ const FacilityInfoWindow: React.FC<FacilityInfoWindowProps> = ({
             <div className="border-l-2 border-[#5B9BD5] pl-3 italic text-gray-300 mb-2 mt-4">
               <p 
                 className="break-words whitespace-normal"
-                style={{ wordBreak: 'break-word' }}
+                style={{ 
+                  wordBreak: 'break-word',
+                  overflowWrap: 'break-word'
+                }}
               >
                 {facility.description}
               </p>

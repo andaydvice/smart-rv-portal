@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useGoogleMaps } from './hooks/useGoogleMaps';
 import { GoogleMap, Marker, InfoWindow } from '@react-google-maps/api';
 import { TypographyH3 } from "@/components/ui/typography";
@@ -39,6 +39,7 @@ const ResponsiveFacilityMap: React.FC<ResponsiveFacilityMapProps> = ({
 }) => {
   const [showInfo, setShowInfo] = useState(false);
   const { isLoaded, error } = useGoogleMaps({ apiKey });
+  const mapRef = useRef<google.maps.Map | null>(null);
 
   const mapContainerStyle = {
     width: '100%',
@@ -74,6 +75,35 @@ const ResponsiveFacilityMap: React.FC<ResponsiveFacilityMapProps> = ({
     streetViewControl: false,
     fullscreenControl: true,
     zoomControl: true,
+  };
+
+  // Handle map loading and apply custom styles
+  const onMapLoad = (map: google.maps.Map) => {
+    mapRef.current = map;
+    
+    // Apply essential styles for info windows immediately
+    const style = document.createElement('style');
+    style.textContent = `
+      .gm-style .gm-style-iw-c {
+        padding: 0 !important;
+        max-height: none !important;
+        overflow: visible !important;
+      }
+      
+      .gm-style .gm-style-iw-d {
+        overflow: visible !important;
+        max-height: none !important;
+      }
+      
+      .facility-name-heading {
+        overflow-wrap: break-word !important;
+        word-wrap: break-word !important;
+        word-break: break-all !important;
+        white-space: normal !important;
+        max-width: 100% !important;
+      }
+    `;
+    document.head.appendChild(style);
   };
 
   // Remove unwanted UI elements when map is loaded
@@ -126,10 +156,17 @@ const ResponsiveFacilityMap: React.FC<ResponsiveFacilityMapProps> = ({
       <div className="bg-[#091020] rounded-lg p-4 md:p-6 border border-[#1a202c] w-full">
         <div className="flex flex-col space-y-4">
           {/* Facility Name with Typography component - FIXED OVERFLOW ISSUE */}
-          <div className="text-center mb-2">
-            <TypographyH3 className="text-[#5B9BD5] break-words overflow-hidden px-2">
+          <div className="text-center mb-2 px-4">
+            <h3 className="text-xl md:text-2xl font-bold text-[#5B9BD5] break-words whitespace-normal"
+                style={{ 
+                  overflowWrap: 'break-word',
+                  wordWrap: 'break-word',
+                  wordBreak: 'break-word',
+                  maxWidth: '100%',
+                  overflow: 'visible'
+                }}>
               {name}
-            </TypographyH3>
+            </h3>
           </div>
           
           {/* Facility details section */}
@@ -175,6 +212,7 @@ const ResponsiveFacilityMap: React.FC<ResponsiveFacilityMapProps> = ({
               center={location}
               zoom={14}
               options={mapOptions}
+              onLoad={onMapLoad}
             >
               <Marker
                 position={location}
@@ -199,7 +237,17 @@ const ResponsiveFacilityMap: React.FC<ResponsiveFacilityMapProps> = ({
                   }}
                 >
                   <div className="p-2 max-w-[250px]">
-                    <h3 className="text-lg font-semibold text-[#5B9BD5] break-words">{name}</h3>
+                    <h3 className="text-lg font-semibold text-[#5B9BD5] facility-name-heading"
+                        style={{ 
+                          overflowWrap: 'break-word',
+                          wordWrap: 'break-word',
+                          wordBreak: 'break-word',
+                          whiteSpace: 'normal',
+                          maxWidth: '100%',
+                          overflow: 'visible'
+                        }}>
+                      {name}
+                    </h3>
                     {address && <p className="text-sm mt-1 break-words">{address}</p>}
                     {description && <p className="text-sm mt-2 text-gray-600 break-words">{description}</p>}
                   </div>

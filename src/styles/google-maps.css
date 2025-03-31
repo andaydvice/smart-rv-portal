@@ -31,6 +31,9 @@
   width: auto !important;
   /* Fix for transform to prevent truncation */
   transform: none !important;
+  /* Critical fixes for text overflow */
+  min-width: 0 !important;
+  max-height: none !important;
 }
 
 /* Style the info window content wrapper */
@@ -39,6 +42,16 @@
   padding: 0 !important;
   max-width: 320px !important;
   max-height: none !important;
+  /* Force scrollbars to be hidden */
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+}
+
+/* Hide scrollbars */
+.gm-style .gm-style-iw-d::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
 }
 
 /* Ensure the info window tip points to the correct location */
@@ -176,4 +189,45 @@
 .gm-style-iw *,
 .gm-style-iw-d * {
   overflow: visible !important;
+}
+
+/* Essential fix for facility popup title */
+.facility-info h3,
+.facility-popup-content h3,
+.gm-style-iw h3 {
+  white-space: normal !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
+  word-break: break-word !important;
+  max-width: 100% !important;
+  overflow-wrap: break-word !important;
+}
+
+/* Ensure proper width for infowindow on all devices */
+@media (max-width: 640px) {
+  .gm-style-iw.gm-style-iw-c {
+    max-width: 260px !important;
+  }
+}
+
+/* Extra critical fixes for Google Maps popups */
+.gm-style .gm-style-iw-c > button {
+  top: 0 !important;
+  right: 0 !important;
+}
+
+/* Force override for max-width on popup content */
+.facility-info-window,
+.facility-popup-content {
+  max-width: 100% !important;
+  width: auto !important;
+}
+
+/* Make sure the map container in the preview section has correct sizing */
+.map-container-persistent {
+  height: 300px;
+  width: 100%;
+  position: relative;
+  border-radius: 0.5rem;
+  overflow: hidden;
 }
