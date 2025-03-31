@@ -27,17 +27,17 @@
   border-radius: 8px !important;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3) !important;
   overflow: visible !important;
-  max-width: 300px !important;
-  /* Fix 1: Add transform property to prevent truncation */
-  transform: translate(-50%, -100%) !important;
+  max-width: 340px !important;
+  width: auto !important;
+  /* Fix for transform to prevent truncation */
+  transform: none !important;
 }
 
 /* Style the info window content wrapper */
 .gm-style .gm-style-iw-d {
-  overflow: hidden !important;
+  overflow: visible !important;
   padding: 0 !important;
-  max-width: 300px !important;
-  /* Fix 2: Remove max-height restriction */
+  max-width: 320px !important;
   max-height: none !important;
 }
 
@@ -99,12 +99,13 @@
   position: absolute !important;
 }
 
-/* Fix for info window content - NEW */
+/* Fix for info window content positioning */
 .gm-style-iw.gm-style-iw-c .gm-style-iw-d {
   overflow: visible !important;
+  max-height: none !important;
 }
 
-/* Ensure text doesn't get cut off in Google info windows - NEW */
+/* Ensure text doesn't get cut off in Google info windows */
 .gm-style-iw.gm-style-iw-c h3,
 .gm-style-iw.gm-style-iw-c p,
 .gm-style-iw.gm-style-iw-c span,
@@ -114,4 +115,65 @@
   text-overflow: clip !important;
   word-break: break-word !important;
   max-width: 100% !important;
+  overflow-wrap: break-word !important;
+}
+
+/* Fix for info window container sizing */
+.gm-style-iw-tc,
+.gm-style-iw-c,
+.gm-style-iw-d {
+  overflow: visible !important;
+}
+
+/* Override Google's aggressive display restrictions */
+.gm-style-iw-c * {
+  overflow: visible !important;
+  max-height: none !important;
+  max-width: 100% !important;
+}
+
+/* Ensure popup content is fully visible */
+.gm-style-iw.gm-style-iw-c {
+  overflow: visible !important;
+  max-height: none !important;
+  box-sizing: content-box !important;
+}
+
+/* Fix InfoWindow positioning */
+.gm-style-iw {
+  padding-right: 0 !important; 
+  padding-bottom: 0 !important;
+}
+
+/* Add important display fix for any overflow issues */
+.gm-style-iw + .gm-style-iw-a {
+  overflow: visible !important;
+}
+
+/* Force popup width to prevent text truncation */
+.gm-style-iw-d > div,
+.gm-style-iw-d > div > div {
+  width: auto !important;
+  max-width: 100% !important;
+  overflow: visible !important;
+}
+
+/* Ensure text in facility popups display correctly */
+.gm-style-iw-c .bg-\[\#091020\] h3 {
+  overflow-wrap: break-word !important;
+  word-wrap: break-word !important;
+  word-break: break-word !important;
+  hyphens: auto !important;
+  max-width: 100% !important;
+}
+
+/* Remove max-height restrictions that could cause truncation */
+.gm-style-iw.gm-style-iw-c > div {
+  max-height: none !important;
+}
+
+/* Make sure no element inside popups is hidden */
+.gm-style-iw *,
+.gm-style-iw-d * {
+  overflow: visible !important;
 }

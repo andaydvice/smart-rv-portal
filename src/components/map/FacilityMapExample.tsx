@@ -1,9 +1,10 @@
 
 import React from 'react';
 import ResponsiveFacilityMap from './ResponsiveFacilityMap';
+import '../styles/google-maps.css';
 
 const FacilityMapExample: React.FC = () => {
-  const facilityName = "Covered RV Solutions";
+  const facilityName = "Premium Indoor Storage";
   const facilityLocation = {
     lat: 36.1699,
     lng: -115.1398
@@ -13,8 +14,8 @@ const FacilityMapExample: React.FC = () => {
     { name: "Indoor Storage", available: true },
     { name: "Climate Controlled", available: true },
     { name: "Security System", available: true },
-    { name: "Vehicle Washing", available: true },
-    { name: "24/7 Access", available: false }
+    { name: "24/7 Access", available: true },
+    { name: "Vehicle Washing", available: false }
   ];
 
   return (
@@ -26,8 +27,8 @@ const FacilityMapExample: React.FC = () => {
       <ResponsiveFacilityMap
         name={facilityName}
         location={facilityLocation}
-        address="456 Safe Harbor Dr, Las Vegas, Nevada"
-        phoneNumber="(725) 555-0123"
+        address="789 Shelter Lane, Dallas, Texas"
+        phoneNumber="(214) 555-0123"
         features={facilityFeatures}
         description="Explore our premium indoor RV storage facility with climate control and 24/7 security."
         apiKey="AIzaSyAGKkTg0DlZd7fCJlfkVNqkRkzPjeqKJ2o"
