@@ -3,6 +3,17 @@ import { GoogleMap, useLoadScript, MarkerF, InfoWindowF } from '@react-google-ma
 import { StorageFacility } from '../types';
 import { fixInfoWindowVisibility } from './utils/infoWindowUtils';
 
+interface GoogleMapViewProps {
+  facilities: StorageFacility[];
+  recentlyViewedFacilityIds: string[];
+  onMarkerClick?: (facilityId: string) => void;
+  apiKey?: string;
+  center?: { lat: number; lng: number };
+  zoom?: number;
+  onZoomChange?: (zoom: number) => void;
+  selectedState?: string | null;
+}
+
 const mapContainerStyle = {
   width: '100%',
   height: '650px',
