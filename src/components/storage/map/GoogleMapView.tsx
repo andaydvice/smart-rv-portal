@@ -12,6 +12,7 @@ interface GoogleMapViewProps {
   zoom?: number;
   onZoomChange?: (zoom: number) => void;
   selectedState?: string | null;
+  fullScreenMode?: boolean;
 }
 
 const mapContainerStyle = {
@@ -48,7 +49,8 @@ const GoogleMapView: React.FC<GoogleMapViewProps> = ({
   center = { lat: 39.8283, lng: -98.5795 }, // Center of the US
   zoom = 4,
   onZoomChange,
-  selectedState
+  selectedState,
+  fullScreenMode = false
 }) => {
   const [selectedFacility, setSelectedFacility] = useState<StorageFacility | null>(null);
   const [mapRef, setMapRef] = useState<google.maps.Map | null>(null);
@@ -252,10 +254,18 @@ const GoogleMapView: React.FC<GoogleMapViewProps> = ({
     );
   };
 
+  // Adjust container style for full-screen mode
+  const containerStyle = fullScreenMode ? {
+    width: '100%',
+    height: '100%',
+    borderRadius: '0',
+    overflow: 'hidden'
+  } : mapContainerStyle;
+
   return (
-    <div className="w-full h-[650px] relative rounded-lg overflow-hidden">
+    <div className={`relative ${fullScreenMode ? 'w-full h-full' : 'w-full h-[650px]'} overflow-hidden`}>
       <GoogleMap
-        mapContainerStyle={mapContainerStyle}
+        mapContainerStyle={containerStyle}
         center={mapCenter}
         zoom={mapZoom}
         onLoad={onMapLoad}
