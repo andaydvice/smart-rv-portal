@@ -65,8 +65,8 @@ const CustomInfoWindow: React.FC<CustomInfoWindowProps> = ({
         borderRadius: '8px',
         boxShadow: '0 2px 10px rgba(0,0,0,0.2)',
         zIndex: 10000,
-        maxWidth: '400px', // Increased width for longer headlines
-        minWidth: '280px', // Increased minimum width
+        maxWidth: '400px',
+        minWidth: '280px',
         width: 'auto'
       }}
     >
@@ -79,6 +79,7 @@ const CustomInfoWindow: React.FC<CustomInfoWindowProps> = ({
         <button 
           onClick={onClose}
           aria-label="Close"
+          className="close-btn"
           style={{
             position: 'absolute',
             right: '8px',
@@ -117,7 +118,7 @@ const CustomInfoWindow: React.FC<CustomInfoWindowProps> = ({
             hyphens: 'auto',
             textAlign: 'left',
             maxWidth: '100%',
-            paddingRight: '36px', // Make room for the close button
+            paddingRight: '36px',
             overflow: 'visible'
           }}
         >

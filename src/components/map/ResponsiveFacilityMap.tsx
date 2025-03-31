@@ -36,7 +36,7 @@ const ResponsiveFacilityMap: React.FC<ResponsiveFacilityMapProps> = ({
   phoneNumber,
   features = [],
   description,
-  apiKey = "AIzaSyAGKkTg0DlZd7fCJlfkVNqkRkzPjeqKJ2o", // Default API key
+  apiKey = "AIzaSyAGKkTg0DlZd7fCJlfkVNqkRkzPjeqKJ2o",
   onMapLoad
 }) => {
   const [showInfo, setShowInfo] = useState(false);
@@ -84,9 +84,20 @@ const ResponsiveFacilityMap: React.FC<ResponsiveFacilityMapProps> = ({
   };
 
   // Handle map loading and apply custom styles
-  // Fixed TypeScript error by ensuring handleMapLoad returns void
   const handleMapLoad = (map: google.maps.Map): void => {
     mapRef.current = map;
+    
+    // Force map to be visible
+    setTimeout(() => {
+      if (mapRef.current) {
+        const div = mapRef.current.getDiv();
+        if (div) {
+          div.style.visibility = 'visible';
+          div.style.opacity = '1';
+          div.style.display = 'block';
+        }
+      }
+    }, 100);
     
     // Call the external onMapLoad handler if provided
     if (onMapLoad) {
@@ -120,6 +131,8 @@ const ResponsiveFacilityMap: React.FC<ResponsiveFacilityMapProps> = ({
         positionCustomInfoWindow();
       }
     });
+    
+    console.log('Map loaded successfully with marker');
   };
   
   // Position custom info window based on marker position
@@ -172,6 +185,32 @@ const ResponsiveFacilityMap: React.FC<ResponsiveFacilityMapProps> = ({
       };
     }
   }, [isLoaded, showInfo]);
+
+  // When the component mounts, force visibility on the map
+  useEffect(() => {
+    if (isLoaded) {
+      // Set all parent containers to be visible
+      const forceVisibility = (element: HTMLElement | null) => {
+        if (!element) return;
+        
+        element.style.visibility = 'visible';
+        element.style.display = 'block';
+        element.style.opacity = '1';
+        element.style.height = '350px';
+        
+        if (element.parentElement) {
+          forceVisibility(element.parentElement);
+        }
+      };
+      
+      // Apply to map container
+      if (mapContainerRef.current) {
+        forceVisibility(mapContainerRef.current);
+      }
+      
+      console.log('Force visibility applied to map containers');
+    }
+  }, [isLoaded]);
 
   // Handle close info window
   const handleCloseInfoWindow = () => {
@@ -258,6 +297,11 @@ const ResponsiveFacilityMap: React.FC<ResponsiveFacilityMapProps> = ({
           <div 
             className="w-full overflow-hidden rounded-lg relative"
             ref={mapContainerRef}
+            style={{
+              height: '350px',
+              visibility: 'visible',
+              display: 'block'
+            }}
           >
             <GoogleMap
               mapContainerStyle={mapContainerStyle}

@@ -1,70 +1,88 @@
 
-/* Responsive Map Styles */
-.responsive-map-container {
-  position: relative;
-  width: 100%;
-  max-width: 100%;
-  overflow: hidden;
-  border-radius: 0.5rem;
-}
+/* CRITICAL STYLES FOR MAP VISIBILITY */
 
-.responsive-map-container .mapboxgl-map {
-  width: 100%;
-  height: 100%;
-  overflow: visible !important;
-}
-
-/* Custom marker styles */
-.custom-marker {
-  width: 24px;
-  height: 24px;
-  background-color: #F97316;
-  border: 2px solid white;
-  border-radius: 50%;
-  cursor: pointer;
-  box-shadow: 0 0 10px rgba(0,0,0,0.5);
-  transform: translate(-50%, -50%);
-  z-index: 999;
+/* Force map container to be visible */
+.map-container,
+.map-container-persistent,
+[class*="map-container"],
+[class*="mapContainer"],
+div[id*="map-container"],
+div[id*="mapContainer"] {
+  height: 350px !important;
+  min-height: 350px !important;
+  width: 100% !important;
   visibility: visible !important;
   display: block !important;
   opacity: 1 !important;
-  position: absolute !important;
+  overflow: visible !important;
+  position: relative !important;
+  z-index: 1 !important;
 }
 
-/* Ensure popups appear above other elements */
-.mapboxgl-popup {
-  z-index: 1000 !important;
-  max-width: 300px !important;
+/* Force Google map element to be visible */
+.gm-style,
+.gm-style-cc,
+.gmnoprint,
+.gm-fullscreen-control,
+.gm-bundled-control,
+.gm-ui-hover-effect {
+  visibility: visible !important;
+  display: block !important;
+  opacity: 1 !important;
 }
 
-.mapboxgl-popup-content {
-  background-color: #151A22 !important;
-  color: white !important;
-  border-radius: 8px !important;
-  padding: 15px !important;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5) !important;
+/* Force canvas to be visible */
+.gm-style > div:first-child > div:first-child {
+  visibility: visible !important;
+  opacity: 1 !important;
+  display: block !important;
+  height: 100% !important;
+  width: 100% !important;
 }
 
-.mapboxgl-popup-close-button {
-  color: white !important;
-  font-size: 16px !important;
-  padding: 5px !important;
+/* Fix map canvas positioning */
+.gm-style > div:first-child > div:first-child > div:nth-child(2) {
+  visibility: visible !important;
+  opacity: 1 !important;
+  display: block !important;
+  height: 100% !important;
+  width: 100% !important;
 }
 
-/* Fix for popup tip */
-.mapboxgl-popup-tip {
-  border-top-color: #151A22 !important;
-  border-bottom-color: #151A22 !important;
+/* Force all images to be visible */
+.gm-style img {
+  visibility: visible !important;
+  display: block !important;
+  opacity: 1 !important;
+  max-width: none !important; /* Critical for Google Maps images */
 }
 
-/* Responsive tweaks */
+/* Make sure parent containers don't hide the map */
+.w-full, .max-w-5xl, .mx-auto, .relative {
+  overflow: visible !important;
+}
+
+/* Force markers to be visible */
+.gm-style div[role="button"],
+.gm-style div[role="button"] > img,
+.gm-style div[role="button"] > div,
+[style*="marker"] {
+  visibility: visible !important;
+  display: block !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  z-index: 1001 !important;
+}
+
+/* Fix responsive scaling */
 @media (max-width: 768px) {
-  .custom-marker {
-    width: 20px;
-    height: 20px;
-  }
-  
-  .mapboxgl-popup {
-    max-width: 220px !important;
+  .map-container,
+  .map-container-persistent,
+  [class*="map-container"],
+  [class*="mapContainer"],
+  div[id*="map-container"],
+  div[id*="mapContainer"] {
+    height: 300px !important;
+    min-height: 300px !important;
   }
 }
