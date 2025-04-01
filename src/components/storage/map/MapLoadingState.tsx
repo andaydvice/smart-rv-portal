@@ -19,7 +19,7 @@ const MapLoadingState: React.FC<MapLoadingStateProps> = ({
   facilitiesCount,
   infiniteLoading = false
 }) => {
-  const [percentLoaded, setPercentLoaded] = useState(0);
+  const [percentLoaded, setPercentLoaded] = useState(10); // Start at 10% instead of 0
   const [showLoader, setShowLoader] = useState(true);
   
   // Animate loading progress
@@ -34,7 +34,7 @@ const MapLoadingState: React.FC<MapLoadingStateProps> = ({
       progressInterval = setInterval(() => {
         setPercentLoaded(prev => {
           // Start slow, accelerate in the middle, and slow down at the end
-          const increment = prev < 30 ? 1 : prev < 70 ? 2 : 0.5;
+          const increment = prev < 30 ? 2 : prev < 70 ? 3 : 1; // Increased increments for faster loading
           const newValue = prev + increment;
           
           // Cap at 95% until fully loaded, then allow it to reach 100%
@@ -43,10 +43,10 @@ const MapLoadingState: React.FC<MapLoadingStateProps> = ({
           }
           return newValue > 95 ? 95 : newValue;
         });
-      }, 100);
+      }, 50); // Reduced from 100ms to 50ms for faster animation
     } else {
       // For infinite loading, we just need to signal completion when map loads
-      setPercentLoaded(10); // Start with a visible value
+      setPercentLoaded(15); // Start with a visible value
     }
     
     return () => {
@@ -63,7 +63,7 @@ const MapLoadingState: React.FC<MapLoadingStateProps> = ({
       // Hide loader after a short delay to show 100%
       const hideTimer = setTimeout(() => {
         setShowLoader(false);
-      }, 300); // Reduced from 500ms to 300ms for faster display
+      }, 200); // Reduced from 300ms to 200ms for faster display
       
       return () => clearTimeout(hideTimer);
     }
@@ -88,8 +88,9 @@ const MapLoadingState: React.FC<MapLoadingStateProps> = ({
       {/* Use our progress component with infinite loading option */}
       <MapLoadingProgress 
         percentLoaded={percentLoaded} 
-        showProgress={isInitializing && !mapLoaded && showLoader} 
+        showProgress={isInitializing && showLoader} 
         infiniteLoading={infiniteLoading}
+        forceComplete={mapLoaded}
       />
     </>
   );
