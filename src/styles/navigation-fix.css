@@ -1,8 +1,9 @@
 
 /* Prevent flash of white during navigation */
 body {
-  background-color: #080F1F;
+  background-color: #080F1F !important;
   min-height: 100vh;
+  color: white;
 }
 
 /* Ensure content remains visible during navigation */
@@ -10,6 +11,7 @@ body {
   visibility: visible !important;
   opacity: 1 !important;
   display: block !important;
+  background-color: #080F1F;
 }
 
 /* Style for loading states */
@@ -30,6 +32,7 @@ body {
 /* Enhance transition experiences */
 .navigation-enabled .page-transition {
   transition: opacity 0.3s ease;
+  background-color: #080F1F;
 }
 
 /* Fix for nested routes and transitions */
@@ -39,26 +42,31 @@ body {
   left: 0;
   width: 100%;
   z-index: 1;
+  background-color: #080F1F;
 }
 
 .navigation-enabled .page-transition-enter {
   opacity: 0;
   z-index: 2;
+  background-color: #080F1F;
 }
 
 .navigation-enabled .page-transition-enter-active {
   opacity: 1;
   transition: opacity 0.3s ease;
+  background-color: #080F1F;
 }
 
 .navigation-enabled .page-transition-exit {
   opacity: 1;
   z-index: 1;
+  background-color: #080F1F;
 }
 
 .navigation-enabled .page-transition-exit-active {
   opacity: 0;
   transition: opacity 0.3s ease;
+  background-color: #080F1F;
 }
 
 /* Force visibility for main content containers */
@@ -71,6 +79,7 @@ main,
   opacity: 1 !important;
   display: block !important;
   min-height: 100vh;
+  background-color: #080F1F;
 }
 
 /* Ensure layout is properly displayed */
@@ -80,4 +89,17 @@ main,
   min-height: 100vh;
   visibility: visible !important;
   opacity: 1 !important;
+  background-color: #080F1F;
+}
+
+/* Ensure all routes have a background */
+[id="root"] > div {
+  background-color: #080F1F;
+}
+
+/* Force background on all major page containers */
+.container,
+.max-w-7xl,
+.mx-auto {
+  background-color: transparent;
 }

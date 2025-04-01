@@ -13,6 +13,17 @@ const PageTransition: React.FC<PageTransitionProps> = ({ children }) => {
     
     // Scroll to top on page change
     window.scrollTo(0, 0);
+    
+    // Force background color on the body
+    document.body.style.backgroundColor = '#080F1F';
+    
+    // Ensure all content is visible
+    const mainContent = document.querySelector('[data-main-content="true"]');
+    if (mainContent instanceof HTMLElement) {
+      mainContent.style.visibility = 'visible';
+      mainContent.style.opacity = '1';
+      mainContent.style.backgroundColor = '#080F1F';
+    }
   }, []);
 
   return (
@@ -21,7 +32,7 @@ const PageTransition: React.FC<PageTransitionProps> = ({ children }) => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.3 }}
-      className="w-full"
+      className="w-full bg-[#080F1F]"
     >
       {children}
     </motion.div>

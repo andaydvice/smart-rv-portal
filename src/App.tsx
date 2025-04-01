@@ -9,6 +9,7 @@ import { forceMapMarkersVisible } from './utils/forceMapMarkers';
 import './App.css';
 import './styles/animations.css';
 import './styles/map-loading.css';
+import './styles/map-preview.css'; // Import map preview styles
 
 // Create a client with better error handling
 const queryClient = new QueryClient({
@@ -39,9 +40,14 @@ function AppContent() {
     console.log('Current URL:', window.location.href);
     console.log('Current pathname:', window.location.pathname);
     
+    // Force the background color on the document body
+    document.body.style.backgroundColor = '#080F1F';
+    
     // Debug navigation events
     const handleRouteChange = () => {
       console.log('Navigation detected, path:', window.location.pathname);
+      // Ensure body background color persists after navigation
+      document.body.style.backgroundColor = '#080F1F';
     };
     
     window.addEventListener('popstate', handleRouteChange);

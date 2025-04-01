@@ -14,6 +14,7 @@ const Troubleshooting = lazy(() => import('@/pages/Troubleshooting'));
 const Contact = lazy(() => import('@/pages/Contact'));
 const StoragePreparationChecklist = lazy(() => import('@/pages/StoragePreparationChecklist'));
 const ScheduleDemo = lazy(() => import('@/pages/ScheduleDemo'));
+const WaterSystems = lazy(() => import('@/pages/features/WaterSystems'));
 
 // Loading component
 const PageLoading = () => (
@@ -32,6 +33,9 @@ const RouterProvider: React.FC = () => {
     
     console.log('RouterProvider mounted');
     console.log('Current path:', window.location.pathname);
+    
+    // Force background color
+    document.body.style.backgroundColor = '#080F1F';
     
     // Add class to body for styling during navigation
     document.body.classList.add('navigation-enabled');
@@ -54,6 +58,7 @@ const RouterProvider: React.FC = () => {
           <Route path="/contact" element={<Contact />} />
           <Route path="/storage-preparation-checklist" element={<StoragePreparationChecklist />} />
           <Route path="/schedule-demo" element={<ScheduleDemo />} />
+          <Route path="/features/water-systems" element={<WaterSystems />} />
           
           {/* Redirect all 404s to home page */}
           <Route path="*" element={<Navigate to="/" replace />} />
