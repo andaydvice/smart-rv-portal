@@ -1,3 +1,4 @@
+
 import { Link, useLocation } from "react-router-dom";
 import { 
   Home, Calculator, CloudSun, Warehouse, ClipboardCheck,
@@ -87,26 +88,26 @@ const DesktopNavigation = () => {
     }
   ];
 
-  // Define Models links with icons
+  // Define Models links with icons - Update paths to be consistent
   const modelsLinks = [
     { 
       text: "Luxury Models", 
-      href: "/models/luxury-model",
+      href: "/models/luxury",
       icon: <Car size={16} className="text-[#F59E0B]" />
     },
     { 
       text: "Compact Models", 
-      href: "/models/compact-model",
+      href: "/models/compact",
       icon: <Truck size={16} className="text-[#3B82F6]" />
     },
     { 
       text: "Adventure Models", 
-      href: "/models/adventure-model",
+      href: "/models/adventure",
       icon: <Tent size={16} className="text-[#10B981]" />
     },
     { 
       text: "Compare Models", 
-      href: "/models/compare-models",
+      href: "/models/compare",
       icon: <LayoutTemplate size={16} className="text-[#D946EF]" />
     }
   ];

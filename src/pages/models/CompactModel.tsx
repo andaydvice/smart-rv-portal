@@ -16,7 +16,6 @@ const CompactModel = () => {
   return (
     <Layout>
       <div className="bg-gradient-to-b from-gray-900 to-gray-800">
-        <Navbar />
         <HeroSection />
         <div className="container mx-auto px-4 py-12 pb-24">
           <div className="grid gap-12">
