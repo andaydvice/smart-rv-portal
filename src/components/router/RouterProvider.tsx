@@ -11,8 +11,8 @@ const RVWeather = lazy(() => import('@/pages/RVWeather'));
 const Calculators = lazy(() => import('@/pages/Calculators'));
 const Documentation = lazy(() => import('@/pages/Documentation'));
 const Troubleshooting = lazy(() => import('@/pages/Troubleshooting'));
-const Contact = lazy(() => import('@/pages/ContactPage'));
-const StoragePrepChecklist = lazy(() => import('@/pages/StoragePrepChecklist'));
+const Contact = lazy(() => import('@/pages/Contact'));
+const StoragePreparationChecklist = lazy(() => import('@/pages/StoragePreparationChecklist'));
 const ScheduleDemo = lazy(() => import('@/pages/ScheduleDemo'));
 
 // Loading component
@@ -52,7 +52,7 @@ const RouterProvider: React.FC = () => {
           <Route path="/documentation" element={<Documentation />} />
           <Route path="/troubleshooting" element={<Troubleshooting />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/storage-preparation-checklist" element={<StoragePrepChecklist />} />
+          <Route path="/storage-preparation-checklist" element={<StoragePreparationChecklist />} />
           <Route path="/schedule-demo" element={<ScheduleDemo />} />
           
           {/* Redirect all 404s to home page */}
