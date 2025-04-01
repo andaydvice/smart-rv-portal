@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -25,12 +26,16 @@ export default {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         primary: {
-          DEFAULT: "#1A1A1A",
+          DEFAULT: "#333",
           foreground: "#FFFFFF",
         },
         secondary: {
-          DEFAULT: "rgba(26, 31, 46, 0.95)",
+          DEFAULT: "#666",
           foreground: "#E2E8FF",
+        },
+        success: {
+          DEFAULT: "#0f0",
+          foreground: "#FFFFFF",
         },
         muted: {
           DEFAULT: "#F0F0F0",
@@ -45,6 +50,17 @@ export default {
           accent: "#5B9BD5",
           darkBg: "#151A22"
         }
+      },
+      fontSize: {
+        xs: "0.75rem",    // 12px
+        sm: "0.875rem",   // 14px - secondary text
+        base: "1rem",     // 16px - body text
+        lg: "1.125rem",   // 18px - headings
+        xl: "1.25rem",    // 20px
+        "2xl": "1.5rem",  // 24px
+        "3xl": "1.875rem", // 30px
+        "4xl": "2.25rem", // 36px
+        "5xl": "3rem",    // 48px
       },
       borderRadius: {
         lg: "1rem",

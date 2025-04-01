@@ -2,6 +2,9 @@
 /* Base imports and tailwind directives */
 @import './styles/base.css';
 
+/* Typography styles */
+@import './styles/typography.css';
+
 /* Layout styles */
 @import './styles/layout.css';
 
