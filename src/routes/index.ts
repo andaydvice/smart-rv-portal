@@ -5,7 +5,7 @@ import { RouteObject } from "react-router-dom";
 import modelRoutes from "./modelRoutes";
 import featureRoutes from "./featureRoutes";
 import contentRoutes from "./contentRoutes";
-import utilityRoutes from "./demoRoutes";
+import utilityRoutes from "./utilityRoutes";
 import demoRoutes from "./demoRoutes";
 import Index from "../pages/Index";
 import ErrorDisplay from "../components/error/ErrorDisplay";
