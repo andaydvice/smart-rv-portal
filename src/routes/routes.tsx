@@ -62,6 +62,15 @@ export const routes: RouteObject[] = [
     path: "/models/compare",
     element: <CompareModels />,
   },
+  // Add the correct path for compare-models as well to handle both URL patterns
+  {
+    path: "/models/compare-models",
+    element: <CompareModels />,
+  },
+  {
+    path: "/compare-models",
+    element: <CompareModels />,
+  },
   {
     path: "/features",
     element: <Features />,
