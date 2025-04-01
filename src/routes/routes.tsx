@@ -1,4 +1,3 @@
-
 import React from "react";
 import { RouteObject } from "react-router-dom";
 
@@ -19,6 +18,7 @@ import NavigationSystem from "../pages/features/NavigationSystem";
 import SecuritySystem from "../pages/features/SecuritySystem";
 import AutomatedDriving from "../pages/features/AutomatedDriving";
 import SmartAutomation from "../pages/features/SmartAutomation";
+import Entertainment from "../pages/features/Entertainment";
 import Technology from "../pages/Technology";
 import Contact from "../pages/Contact";
 import Blog from "../pages/Blog";
@@ -110,6 +110,10 @@ export const routes: RouteObject[] = [
   {
     path: "/features/smart-automation",
     element: <SmartAutomation />,
+  },
+  {
+    path: "/features/entertainment",
+    element: <Entertainment />,
   },
   {
     path: "/technology",
