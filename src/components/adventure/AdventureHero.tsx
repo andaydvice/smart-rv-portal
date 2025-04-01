@@ -1,7 +1,9 @@
+
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
+import { TypographyH1 } from "@/components/ui/typography";
 
 const AdventureHero = () => {
   console.log("[AdventureHero] Component rendered");
@@ -46,9 +48,11 @@ const AdventureHero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="text-5xl font-bold text-white hover:text-blue-400 transition-colors cursor-pointer bg-transparent border-none focus:outline-none"
+            className="bg-transparent border-none focus:outline-none"
           >
-            Ultimate Adventure Vehicles
+            <TypographyH1 className="text-5xl font-bold text-white hover:text-blue-400 transition-colors cursor-pointer">
+              Ultimate Adventure Vehicles
+            </TypographyH1>
           </motion.button>
         </Link>
       </div>

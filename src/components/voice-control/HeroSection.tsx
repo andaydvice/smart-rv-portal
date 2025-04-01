@@ -1,4 +1,6 @@
+
 import { Mic } from "lucide-react";
+import { TypographyH1, TypographyP } from "@/components/ui/typography";
 
 export const HeroSection = () => {
   return (
@@ -14,12 +16,12 @@ export const HeroSection = () => {
       
       <div className="absolute inset-0 flex items-center justify-center">
         <div className="text-center max-w-4xl mx-auto px-4">
-          <h1 className="text-4xl md:text-6xl font-bold mb-6 p-4 bg-black/30 backdrop-blur-sm rounded-lg">
+          <TypographyH1 className="text-4xl md:text-6xl font-bold mb-6 p-4 bg-black/30 backdrop-blur-sm rounded-lg text-white">
             Voice Control for Smart RVs
-          </h1>
-          <p className="text-xl text-white/90 mb-12 p-4 bg-black/30 backdrop-blur-sm rounded-lg">
+          </TypographyH1>
+          <TypographyP className="text-xl mb-12 p-4 bg-black/30 backdrop-blur-sm rounded-lg text-white/90">
             Experience RV living's future: Voice control technology for hands-free system operation
-          </p>
+          </TypographyP>
           <button className="inline-flex items-center gap-2 px-6 py-3 bg-blue-500 hover:bg-blue-600 rounded-lg transition-colors">
             <Mic className="w-6 h-6" />
             Start Voice Control

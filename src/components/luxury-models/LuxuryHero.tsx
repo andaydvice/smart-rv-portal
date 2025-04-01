@@ -1,7 +1,9 @@
+
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
+import { TypographyH1 } from "@/components/ui/typography";
 
 interface LuxuryHeroProps {
   handleNavigation: (e: React.MouseEvent) => void;
@@ -18,14 +20,15 @@ export const LuxuryHero = ({ handleNavigation }: LuxuryHeroProps) => {
       <div className="absolute inset-0 bg-black/40" />
     
       <div className="absolute inset-0 flex flex-col justify-center items-center text-center p-6">
-        <motion.h1 
+        <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-5xl font-bold text-white mb-4"
         >
-          Luxury RV Living
-        </motion.h1>
+          <TypographyH1 className="text-5xl font-bold text-white mb-4">
+            Luxury RV Living
+          </TypographyH1>
+        </motion.div>
       </div>
       <div className="absolute top-8 left-0 w-full px-4">
         <div className="container mx-auto">

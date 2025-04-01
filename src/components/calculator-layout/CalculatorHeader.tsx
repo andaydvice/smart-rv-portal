@@ -1,4 +1,6 @@
+
 import React from "react";
+import { TypographyH1 } from "@/components/ui/typography";
 
 const CalculatorHeader = () => {
   return (
@@ -10,9 +12,9 @@ const CalculatorHeader = () => {
       />
       <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#131a2a]" />
       <div className="absolute inset-0 flex items-center justify-center">
-        <h1 className="text-4xl md:text-5xl font-bold text-white z-10">
+        <TypographyH1 className="text-4xl md:text-5xl font-bold text-white z-10">
           RV Tools Suite
-        </h1>
+        </TypographyH1>
       </div>
     </div>
   );
