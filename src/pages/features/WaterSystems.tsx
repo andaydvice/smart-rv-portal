@@ -29,9 +29,9 @@ const WaterSystems = () => {
                   </p>
                 </div>
                 <img
-                  src="/lovable-uploads/9cb71164-7823-47a1-b788-5afc310ad5e5.png"
-                  alt="RV Water System"
-                  className="w-full h-64 object-cover rounded-lg mb-6"
+                  src="/lovable-uploads/9aad29ee-aa45-4fa1-8f8d-a44ed1f43a56.png"
+                  alt="RV Smart Water Management System"
+                  className="w-full h-auto object-cover rounded-lg mb-6"
                   loading="eager"
                 />
                 <ul className="list-disc list-inside space-y-3 text-gray-300">
