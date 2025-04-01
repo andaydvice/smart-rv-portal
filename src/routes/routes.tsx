@@ -147,6 +147,10 @@ export const routes: RouteObject[] = [
     element: <RVWeather />,
   },
   {
+    path: "/storage-preparation-checklist",
+    element: <StoragePreparationChecklist />,
+  },
+  {
     path: "/storage-checklist",
     element: <StoragePreparationChecklist />,
   },

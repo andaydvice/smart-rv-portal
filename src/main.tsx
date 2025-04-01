@@ -9,6 +9,7 @@ import './styles/layout.css'
 import './styles/base.css'
 import './styles/emergency-marker-fix.css'  // Add emergency marker styles globally
 import './styles/map-optimizations.css'     // Add map optimization styles globally
+import './styles/pages/storage-checklist.css' // Add storage checklist styles
 
 // Log the current deployed URL for debugging
 console.log('Application starting, window.location:', window.location.href);
