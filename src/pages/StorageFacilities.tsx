@@ -116,6 +116,7 @@ function convertToStorageFacility(data: any): StorageFacility {
 }
 
 export default function StorageFacilities() {
+  console.log('StorageFacilities page rendering');
   const [featuredLocation, setFeaturedLocation] = useState<StorageFacility | undefined>();
   const mapToken = import.meta.env.VITE_MAPBOX_TOKEN || "";
   const [mapLoaded, setMapLoaded] = useState(false);
@@ -124,6 +125,7 @@ export default function StorageFacilities() {
   const handleSelectFeaturedLocation = (facility: StorageFacility | null) => {
     if (facility) {
       setFeaturedLocation(facility);
+      console.log('Featured location set:', facility.name);
     }
   };
 
@@ -138,6 +140,7 @@ export default function StorageFacilities() {
     const fetchRandomLocation = async () => {
       if (!featuredLocation) {
         try {
+          console.log('Fetching random facility...');
           const { supabase } = await import('@/integrations/supabase/client');
           const { data, error } = await supabase
             .from('storage_facilities')
@@ -148,7 +151,11 @@ export default function StorageFacilities() {
             // Pick a random facility from the fetched data
             const randomIndex = Math.floor(Math.random() * data.length);
             // Convert the Supabase data to StorageFacility type
-            setFeaturedLocation(convertToStorageFacility(data[randomIndex]));
+            const facility = convertToStorageFacility(data[randomIndex]);
+            console.log('Random facility selected:', facility.name);
+            setFeaturedLocation(facility);
+          } else {
+            console.log('No facilities found or error:', error);
           }
         } catch (error) {
           console.error('Error fetching random facility:', error);
