@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useCallback } from 'react';
 import { Card } from '@/components/ui/card';
 import FilterPanel from './FilterPanel';
@@ -16,23 +17,12 @@ import MapToggleButton from './map/components/MapToggleButton';
 import MapViewContainer from './map/components/MapViewContainer';
 import { Button } from '@/components/ui/button';
 import { Star } from 'lucide-react';
-import { useQueryClient } from '@tanstack/react-query';
 
 interface StorageFacilitiesMapProps {
   onSelectFeaturedLocation?: (facility: StorageFacility | null) => void;
 }
 
 const StorageFacilitiesMap: React.FC<StorageFacilitiesMapProps> = ({ onSelectFeaturedLocation }) => {
-  console.log('StorageFacilitiesMap component rendering');
-  
-  // Debug: Check if QueryClient is available
-  try {
-    const queryClient = useQueryClient();
-    console.log('QueryClient in StorageFacilitiesMap is available:', !!queryClient);
-  } catch (error) {
-    console.error('QueryClient access error in StorageFacilitiesMap:', error);
-  }
-  
   const [filters, setFilters] = useState<FilterState>({
     features: {
       indoor: false,
@@ -46,15 +36,7 @@ const StorageFacilitiesMap: React.FC<StorageFacilitiesMapProps> = ({ onSelectFea
     minRating: null
   });
 
-  console.log('About to call useStorageFacilities with filters:', filters);
   const { facilities: allFacilities, isLoading, error, maxPrice } = useStorageFacilities(filters);
-  console.log('useStorageFacilities returned:', { 
-    facilitiesCount: allFacilities?.length, 
-    isLoading, 
-    hasError: !!error, 
-    maxPrice 
-  });
-
   const { recentlyViewed, addToRecentlyViewed } = useRecentlyViewed();
   const { 
     useGoogleMaps, 

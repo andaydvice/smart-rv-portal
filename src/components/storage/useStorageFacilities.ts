@@ -1,5 +1,4 @@
-
-import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
 import { StorageFacility, FilterState, DatabaseStorageFacility } from './types';
 
@@ -73,16 +72,6 @@ function convertToStorageFacility(facility: any): StorageFacility {
 }
 
 export const useStorageFacilities = (filters: FilterState) => {
-  console.log('useStorageFacilities hook is being called with filters:', filters);
-  
-  // Check if QueryClient is available
-  try {
-    const queryClient = useQueryClient();
-    console.log('QueryClient is available:', !!queryClient);
-  } catch (error) {
-    console.error('QueryClient access error:', error);
-  }
-  
   const { data: maxPriceData } = useQuery({
     queryKey: ['max-facility-price'],
     queryFn: async () => {

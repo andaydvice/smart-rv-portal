@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Layout from '@/components/layout/Layout';
 import Navbar from '@/components/Navbar';
@@ -45,8 +44,7 @@ const OpaqueMapExample: React.FC = () => {
     }
   ];
 
-  // This API key is already exposed in your HTML, so we're using the same one
-  const apiKey = 'AIzaSyAGKkTg0DlZd7fCJlfkVNqkRkzPjeqKJ2o';
+  const apiKey = 'AIzaSyAGKkTg0DlZd7fCJlfkVNqkRkzPjeqKJ2o'; // Replace with your actual API key
 
   return (
     <Layout>
