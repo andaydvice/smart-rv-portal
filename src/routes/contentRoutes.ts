@@ -1,8 +1,8 @@
 
-import React from "react";
 import { RouteObject } from "react-router-dom";
 import ErrorDisplay from "../components/error/ErrorDisplay";
 
+// Import page components
 import Blog from "../pages/Blog";
 import BlogPost from "../pages/BlogPost";
 import Technology from "../pages/Technology";
@@ -13,33 +13,45 @@ import CompleteDocumentation from "../pages/documentation/CompleteDocumentation"
 export const contentRoutes: RouteObject[] = [
   {
     path: "/technology",
-    element: <Technology />,
-    errorElement: <ErrorDisplay error={{message: "Technology page not found", statusCode: 404}} />
+    element: React.createElement(Technology),
+    errorElement: React.createElement(ErrorDisplay, { 
+      error: {message: "Technology page not found", statusCode: 404} 
+    })
   },
   {
     path: "/contact",
-    element: <Contact />,
-    errorElement: <ErrorDisplay error={{message: "Contact page not found", statusCode: 404}} />
+    element: React.createElement(Contact),
+    errorElement: React.createElement(ErrorDisplay, { 
+      error: {message: "Contact page not found", statusCode: 404} 
+    })
   },
   {
     path: "/blog",
-    element: <Blog />,
-    errorElement: <ErrorDisplay error={{message: "Blog page not found", statusCode: 404}} />
+    element: React.createElement(Blog),
+    errorElement: React.createElement(ErrorDisplay, { 
+      error: {message: "Blog page not found", statusCode: 404} 
+    })
   },
   {
     path: "/blog/:slug",
-    element: <BlogPost />,
-    errorElement: <ErrorDisplay error={{message: "Blog post not found", statusCode: 404}} />
+    element: React.createElement(BlogPost),
+    errorElement: React.createElement(ErrorDisplay, { 
+      error: {message: "Blog post not found", statusCode: 404} 
+    })
   },
   {
     path: "/documentation",
-    element: <Documentation />,
-    errorElement: <ErrorDisplay error={{message: "Documentation page not found", statusCode: 404}} />
+    element: React.createElement(Documentation),
+    errorElement: React.createElement(ErrorDisplay, { 
+      error: {message: "Documentation page not found", statusCode: 404} 
+    })
   },
   {
     path: "/documentation/complete",
-    element: <CompleteDocumentation />,
-    errorElement: <ErrorDisplay error={{message: "Complete Documentation page not found", statusCode: 404}} />
+    element: React.createElement(CompleteDocumentation),
+    errorElement: React.createElement(ErrorDisplay, { 
+      error: {message: "Complete Documentation page not found", statusCode: 404} 
+    })
   }
 ];
 

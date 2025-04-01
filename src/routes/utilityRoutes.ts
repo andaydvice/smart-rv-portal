@@ -1,5 +1,4 @@
 
-import React from "react";
 import { RouteObject } from "react-router-dom";
 import ErrorDisplay from "../components/error/ErrorDisplay";
 
@@ -14,43 +13,59 @@ import StorageFacilities from "../pages/StorageFacilities";
 export const utilityRoutes: RouteObject[] = [
   {
     path: "/auth",
-    element: <Auth />,
-    errorElement: <ErrorDisplay error={{message: "Authentication page not found", statusCode: 404}} />
+    element: React.createElement(Auth),
+    errorElement: React.createElement(ErrorDisplay, { 
+      error: {message: "Authentication page not found", statusCode: 404} 
+    })
   },
   {
     path: "/calculators",
-    element: <Calculators />,
-    errorElement: <ErrorDisplay error={{message: "Calculators page not found", statusCode: 404}} />
+    element: React.createElement(Calculators),
+    errorElement: React.createElement(ErrorDisplay, { 
+      error: {message: "Calculators page not found", statusCode: 404} 
+    })
   },
   {
     path: "/voice-control",
-    element: <VoiceControl />,
-    errorElement: <ErrorDisplay error={{message: "Voice Control page not found", statusCode: 404}} />
+    element: React.createElement(VoiceControl),
+    errorElement: React.createElement(ErrorDisplay, { 
+      error: {message: "Voice Control page not found", statusCode: 404} 
+    })
   },
   {
     path: "/troubleshooting",
-    element: <Troubleshooting />,
-    errorElement: <ErrorDisplay error={{message: "Troubleshooting page not found", statusCode: 404}} />
+    element: React.createElement(Troubleshooting),
+    errorElement: React.createElement(ErrorDisplay, { 
+      error: {message: "Troubleshooting page not found", statusCode: 404} 
+    })
   },
   {
     path: "/rv-weather",
-    element: <RVWeather />,
-    errorElement: <ErrorDisplay error={{message: "RV Weather page not found", statusCode: 404}} />
+    element: React.createElement(RVWeather),
+    errorElement: React.createElement(ErrorDisplay, { 
+      error: {message: "RV Weather page not found", statusCode: 404} 
+    })
   },
   {
     path: "/storage-preparation-checklist",
-    element: <StoragePreparationChecklist />,
-    errorElement: <ErrorDisplay error={{message: "Storage Preparation Checklist page not found", statusCode: 404}} />
+    element: React.createElement(StoragePreparationChecklist),
+    errorElement: React.createElement(ErrorDisplay, { 
+      error: {message: "Storage Preparation Checklist page not found", statusCode: 404} 
+    })
   },
   {
     path: "/storage-checklist",
-    element: <StoragePreparationChecklist />,
-    errorElement: <ErrorDisplay error={{message: "Storage Checklist page not found", statusCode: 404}} />
+    element: React.createElement(StoragePreparationChecklist),
+    errorElement: React.createElement(ErrorDisplay, { 
+      error: {message: "Storage Checklist page not found", statusCode: 404} 
+    })
   },
   {
     path: "/storage-facilities",
-    element: <StorageFacilities />,
-    errorElement: <ErrorDisplay error={{message: "Storage Facilities page not found", statusCode: 404}} />
+    element: React.createElement(StorageFacilities),
+    errorElement: React.createElement(ErrorDisplay, { 
+      error: {message: "Storage Facilities page not found", statusCode: 404} 
+    })
   }
 ];
 
