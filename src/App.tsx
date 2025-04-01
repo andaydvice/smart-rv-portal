@@ -39,6 +39,13 @@ function AppContent() {
     console.log('Current URL:', window.location.href);
     console.log('Current pathname:', window.location.pathname);
     
+    // Debug navigation events
+    const handleRouteChange = () => {
+      console.log('Navigation detected, path:', window.location.pathname);
+    };
+    
+    window.addEventListener('popstate', handleRouteChange);
+    
     // Verify routes are available
     if ((window as any).routesAvailable) {
       console.log('Routes confirmed available');
@@ -55,10 +62,21 @@ function AppContent() {
     (window as any).dispatchMapEvent = (eventName: string, detail: any) => {
       document.dispatchEvent(new CustomEvent(eventName, { detail }));
     };
+    
+    return () => {
+      window.removeEventListener('popstate', handleRouteChange);
+    };
   }, []);
 
   return (
-    <Suspense fallback={<div className="flex items-center justify-center h-screen">Loading application...</div>}>
+    <Suspense fallback={
+      <div className="flex items-center justify-center h-screen bg-[#080F1F] text-white">
+        <div className="text-center">
+          <div className="w-16 h-16 border-t-4 border-blue-500 border-solid rounded-full animate-spin mx-auto mb-4"></div>
+          <p className="text-lg">Loading application...</p>
+        </div>
+      </div>
+    }>
       <RouterProvider />
       <Toaster />
     </Suspense>

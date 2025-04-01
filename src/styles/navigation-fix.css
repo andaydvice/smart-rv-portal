@@ -1,0 +1,83 @@
+
+/* Prevent flash of white during navigation */
+body {
+  background-color: #080F1F;
+  min-height: 100vh;
+}
+
+/* Ensure content remains visible during navigation */
+#root {
+  visibility: visible !important;
+  opacity: 1 !important;
+  display: block !important;
+}
+
+/* Style for loading states */
+.page-loading {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(8, 15, 31, 0.8);
+  z-index: 9999;
+  transition: opacity 0.3s ease;
+}
+
+/* Enhance transition experiences */
+.navigation-enabled .page-transition {
+  transition: opacity 0.3s ease;
+}
+
+/* Fix for nested routes and transitions */
+.navigation-enabled .page-transition-exit {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1;
+}
+
+.navigation-enabled .page-transition-enter {
+  opacity: 0;
+  z-index: 2;
+}
+
+.navigation-enabled .page-transition-enter-active {
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.navigation-enabled .page-transition-exit {
+  opacity: 1;
+  z-index: 1;
+}
+
+.navigation-enabled .page-transition-exit-active {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+/* Force visibility for main content containers */
+main, 
+.min-h-screen,
+.h-screen,
+.layout-container,
+[data-main-content="true"] {
+  visibility: visible !important;
+  opacity: 1 !important;
+  display: block !important;
+  min-height: 100vh;
+}
+
+/* Ensure layout is properly displayed */
+.layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  visibility: visible !important;
+  opacity: 1 !important;
+}

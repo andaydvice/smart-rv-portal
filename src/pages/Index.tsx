@@ -18,6 +18,9 @@ const Index = () => {
     setTimeout(() => {
       toast.success("Welcome to the Smart Road Portal");
     }, 1000);
+    
+    // Ensure window is scrolled to top
+    window.scrollTo(0, 0);
   }, []);
 
   return (

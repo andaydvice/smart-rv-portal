@@ -1,5 +1,5 @@
 
-import React, { ReactNode } from 'react';
+import React, { ReactNode, useEffect } from 'react';
 import { motion } from 'framer-motion';
 
 interface PageTransitionProps {
@@ -7,6 +7,14 @@ interface PageTransitionProps {
 }
 
 const PageTransition: React.FC<PageTransitionProps> = ({ children }) => {
+  useEffect(() => {
+    // Ensure content is visible
+    console.log("PageTransition mounted - ensuring content is visible");
+    
+    // Scroll to top on page change
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <motion.div
       initial={{ opacity: 0 }}

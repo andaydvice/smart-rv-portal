@@ -9,6 +9,7 @@ import './styles/layout.css'
 import './styles/base.css'
 import './styles/emergency-marker-fix.css'  // Add emergency marker styles globally
 import './styles/map-optimizations.css'     // Add map optimization styles globally
+import './styles/navigation-fix.css'        // Add navigation fix styles
 import './styles/pages/storage-checklist.css' // Add storage checklist styles
 
 // Log the current deployed URL for debugging
@@ -25,9 +26,23 @@ const injectEmergencyStyles = () => {
       opacity: 1 !important;
       display: block !important;
     }
+    
+    /* Ensure content is visible during navigation */
+    #root {
+      display: block !important;
+      opacity: 1 !important;
+      visibility: visible !important;
+    }
+    
+    /* Prevent flash of white screen during navigation */
+    .page-transition-container {
+      min-height: 100vh;
+      background-color: #080F1F;
+      transition: opacity 0.3s ease;
+    }
   `;
   document.head.appendChild(style);
-  console.log('Injected emergency marker styles');
+  console.log('Injected emergency styles');
 };
 
 // Inject emergency styles immediately
@@ -49,6 +64,11 @@ if (!rootElement) {
       </React.StrictMode>,
     );
     console.log('React application successfully mounted');
+    
+    // Add navigation event listener for debugging
+    window.addEventListener('popstate', () => {
+      console.log('Navigation occurred, new path:', window.location.pathname);
+    });
   } catch (error) {
     console.error('Failed to mount React application:', error);
   }
