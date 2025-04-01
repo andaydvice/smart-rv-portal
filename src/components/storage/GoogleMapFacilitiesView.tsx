@@ -5,6 +5,7 @@ import GoogleMapView from './map/GoogleMapView';
 import { StorageFacility } from './types';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { AlertCircle } from 'lucide-react';
+import { MapFacility, convertToMapFacility } from './utils/facilityAdapters';
 
 interface GoogleMapFacilitiesViewProps {
   facilities: StorageFacility[];
@@ -32,6 +33,9 @@ const GoogleMapFacilitiesView: React.FC<GoogleMapFacilitiesViewProps> = ({
 
   // Check if we have missing coordinates
   const missingCoordinates = facilities.length - validFacilities.length;
+
+  // Convert to the format expected by GoogleMapView
+  const mapFacilities: MapFacility[] = validFacilities.map(convertToMapFacility);
   
   // Handle zoom change
   const handleZoomChange = (zoom: number) => {
@@ -54,7 +58,7 @@ const GoogleMapFacilitiesView: React.FC<GoogleMapFacilitiesViewProps> = ({
       ) : (
         <>
           <GoogleMapView
-            facilities={validFacilities}
+            facilities={mapFacilities}
             recentlyViewedFacilityIds={recentlyViewedFacilityIds}
             onMarkerClick={onMarkerClick}
             apiKey={apiKey}

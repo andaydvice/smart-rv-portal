@@ -1,14 +1,33 @@
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Layout from '@/components/layout/Layout';
 import PageTransition from '@/components/transitions/PageTransition';
 import StorageFacilitiesMap from '@/components/storage/StorageFacilitiesMap';
 import FilterPanel from '@/components/storage/FilterPanel';
 import RecentlyViewedFacilities from '@/components/storage/RecentlyViewedFacilities';
 import { useStorageFacilities } from '@/components/storage/useStorageFacilities';
+import { FilterState, StorageFacility } from '@/components/storage/types';
 
 const StorageFacilities = () => {
-  const { facilities, isLoading, error } = useStorageFacilities();
+  // Initialize filter state
+  const [filters, setFilters] = useState<FilterState>({
+    features: {
+      indoor: false,
+      climate_controlled: false,
+      "24h_access": false,
+      security_system: false,
+      vehicle_washing: false
+    },
+    priceRange: [0, 1000],
+    selectedState: null,
+    minRating: null
+  });
+  
+  // Track recently viewed facilities
+  const [recentlyViewed, setRecentlyViewed] = useState<StorageFacility[]>([]);
+  
+  // Get facilities based on filters
+  const { facilities, isLoading, error } = useStorageFacilities(filters);
   
   useEffect(() => {
     // Document title
@@ -24,6 +43,27 @@ const StorageFacilities = () => {
     window.scrollTo(0, 0);
   }, []);
   
+  // Handle filter changes
+  const handleFilterChange = (newFilters: FilterState) => {
+    setFilters(newFilters);
+  };
+  
+  // Handle facility click
+  const handleFacilityClick = (facilityId: string) => {
+    // Find the facility in the current list
+    const facility = facilities.find(f => f.id === facilityId);
+    
+    if (facility) {
+      // Add to recently viewed if not already there
+      setRecentlyViewed(prev => {
+        // Remove if already exists
+        const filtered = prev.filter(f => f.id !== facilityId);
+        // Add to beginning (most recent)
+        return [facility, ...filtered].slice(0, 5); // Keep only 5 most recent
+      });
+    }
+  };
+  
   return (
     <PageTransition>
       <Layout>
@@ -35,7 +75,7 @@ const StorageFacilities = () => {
             
             {/* Search and filter row */}
             <div className="mb-6">
-              <FilterPanel />
+              <FilterPanel onFilterChange={handleFilterChange} />
             </div>
             
             {/* Map area */}
@@ -45,7 +85,10 @@ const StorageFacilities = () => {
             
             {/* Recently viewed */}
             <div className="mt-8">
-              <RecentlyViewedFacilities />
+              <RecentlyViewedFacilities 
+                facilities={recentlyViewed} 
+                onFacilityClick={handleFacilityClick} 
+              />
             </div>
           </div>
         </div>

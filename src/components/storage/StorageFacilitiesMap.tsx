@@ -4,22 +4,11 @@ import GoogleMapView from './map/GoogleMapView';
 import MapLoadingState from './map/MapLoadingState';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { AlertCircle } from 'lucide-react';
-
-interface Facility {
-  id: string;
-  name: string;
-  location: {
-    lat: number;
-    lng: number;
-  };
-  address: string;
-  rating?: number;
-  priceRange?: string;
-  features?: string[];
-}
+import { StorageFacility } from './types';
+import { MapFacility, convertToMapFacility } from './utils/facilityAdapters';
 
 interface StorageFacilitiesMapProps {
-  facilities: Facility[];
+  facilities: StorageFacility[];
   isLoading: boolean;
   error: string | null;
 }
@@ -31,6 +20,9 @@ const StorageFacilitiesMap: React.FC<StorageFacilitiesMapProps> = ({
 }) => {
   const [mapLoaded, setMapLoaded] = useState(false);
   const [mapError, setMapError] = useState<string | null>(error);
+  
+  // Convert StorageFacility objects to MapFacility objects
+  const mapFacilities: MapFacility[] = facilities.map(convertToMapFacility);
   
   // Update error state when prop changes
   useEffect(() => {
@@ -74,7 +66,7 @@ const StorageFacilitiesMap: React.FC<StorageFacilitiesMapProps> = ({
       {/* The actual map component */}
       <div className="h-full w-full bg-[#080F1F]">
         <GoogleMapView 
-          facilities={facilities}
+          facilities={mapFacilities}
           onLoad={handleMapLoad}
           onError={handleMapError}
         />
