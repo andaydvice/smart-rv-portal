@@ -23,23 +23,21 @@ const FacilityList: React.FC<FacilityListProps> = ({
   const facilityRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
 
   return (
-    <div ref={scrollAreaRef} className="h-[600px] w-full overflow-auto">
-      <ScrollArea className="h-full w-full">
-        <div className="p-4 space-y-4">
-          {facilities.map(facility => (
-            <FacilityCard
-              key={facility.id}
-              facility={facility}
-              isHighlighted={facility.id === highlightedFacility}
-              onClick={() => onFacilityClick(facility.id)}
-              ref={(el) => {
-                facilityRefs.current[facility.id] = el;
-              }}
-              actionContent={renderFacilityAction ? renderFacilityAction(facility.id) : undefined}
-            />
-          ))}
-        </div>
-      </ScrollArea>
+    <div ref={scrollAreaRef} className="h-[600px] w-full">
+      <div className="p-4 space-y-4">
+        {facilities.map(facility => (
+          <FacilityCard
+            key={facility.id}
+            facility={facility}
+            isHighlighted={facility.id === highlightedFacility}
+            onClick={() => onFacilityClick(facility.id)}
+            ref={(el) => {
+              facilityRefs.current[facility.id] = el;
+            }}
+            actionContent={renderFacilityAction ? renderFacilityAction(facility.id) : undefined}
+          />
+        ))}
+      </div>
     </div>
   );
 };

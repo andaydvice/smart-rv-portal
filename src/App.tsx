@@ -8,20 +8,15 @@ import OpaqueMapExample from './pages/OpaqueMapExample';
 import Features from './pages/Features';
 import SmartAutomation from './pages/features/SmartAutomation';
 import NotFound from './pages/NotFound';
+import { routes } from './routes/routes';
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<StorageFacilities />} />
-        <Route path="/storage-facilities" element={<StorageFacilities />} />
-        <Route path="/map-demo" element={<MapDemoPage />} />
-        <Route path="/opaque-map-example" element={<OpaqueMapExample />} />
-        <Route path="/features" element={<Features />} />
-        <Route path="/features/smart-automation" element={<SmartAutomation />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </Router>
+    <Routes>
+      {routes.map((route) => (
+        <Route key={route.path} path={route.path} element={route.element} />
+      ))}
+    </Routes>
   );
 }
 
