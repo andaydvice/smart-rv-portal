@@ -11,9 +11,16 @@ interface LayoutProps {
 const Layout = ({ children }: LayoutProps) => {
   const { pathname } = useLocation();
 
-  // We've removed the scrollToTop call here since it's now handled by the RouterProvider
+  // Log page rendering and ensure content is visible
   useEffect(() => {
     console.log('Layout component rendered for path:', pathname);
+    
+    // Ensure page content is visible by forcing a repaint
+    window.requestAnimationFrame(() => {
+      document.documentElement.style.display = 'none';
+      document.documentElement.offsetHeight; // Force reflow
+      document.documentElement.style.display = '';
+    });
   }, [pathname]);
 
   // Define standardized footer links for all pages

@@ -18,7 +18,9 @@ const router = createBrowserRouter(
       }
       // Return null to not affect data loading
       return null;
-    }
+    },
+    // Add better error element handling
+    errorElement: route.errorElement || <ErrorDisplay error={{message: "Page not found", statusCode: 404}} />
   }))
 );
 
@@ -44,34 +46,19 @@ const RouterProvider = () => {
     }
   }
   
-  // Custom error handler for 404 and other routing errors
-  const handleRouteError = (error: any) => {
-    console.error('Route error:', error);
-    // Check if it's a 404 error
-    if (error.statusCode === 404 || error.status === 404 || error.message?.includes('Not Found')) {
-      return {
-        message: "The page you're looking for doesn't exist or has been moved",
-        statusCode: 404
-      };
-    }
-    return {
-      message: error.message || 'An unexpected routing error occurred',
-      statusCode: error.statusCode || error.status || 500,
-      stack: error.stack
-    };
-  };
-  
   return (
     <ErrorBoundary>
       <ReactRouterProvider 
         router={router} 
         fallbackElement={
-          <ErrorDisplay 
-            error={{
-              message: "Loading application...",
-              statusCode: 0
-            }}
-          />
+          <div className="flex items-center justify-center h-screen bg-gray-900 text-white">
+            <div className="text-center">
+              <div className="mb-4">
+                <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500 mx-auto"></div>
+              </div>
+              <p className="text-xl">Loading application...</p>
+            </div>
+          </div>
         }
       />
     </ErrorBoundary>

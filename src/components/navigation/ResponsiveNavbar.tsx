@@ -39,6 +39,14 @@ const ResponsiveNavbar = () => {
       document.body.style.overflow = '';
     };
   }, [isMenuOpen]);
+  
+  const handleMenuToggle = () => {
+    setIsMenuOpen(prev => !prev);
+  };
+  
+  const handleNavigate = () => {
+    setIsMenuOpen(false);
+  };
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-[#080F1F]/95 backdrop-blur-sm border-b border-[#1E2A3E]">
@@ -56,7 +64,7 @@ const ResponsiveNavbar = () => {
           
           {/* Mobile menu button */}
           <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            onClick={handleMenuToggle}
             className="md:hidden inline-flex items-center justify-center p-2 rounded-md text-gray-300 hover:text-[#5B9BD5] focus:outline-none"
             aria-expanded={isMenuOpen}
             aria-label="Toggle menu"
@@ -75,7 +83,7 @@ const ResponsiveNavbar = () => {
       </div>
 
       {/* Mobile menu */}
-      <MobileMenu isOpen={isMenuOpen} />
+      <MobileMenu isOpen={isMenuOpen} onNavigate={handleNavigate} />
     </header>
   );
 };

@@ -1,6 +1,6 @@
 
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Link, NavLink } from "react-router-dom";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import NavigationSection from "./NavigationSection";
 import AuthButtons from "./AuthButtons";
@@ -8,9 +8,10 @@ import { SmartFeaturesLinks, CoreSystemsLinks, VehicleSelectionLinks, SupportLin
 
 interface MobileMenuProps {
   isOpen: boolean;
+  onNavigate?: () => void;
 }
 
-const MobileMenu = ({ isOpen }: MobileMenuProps) => {
+const MobileMenu = ({ isOpen, onNavigate }: MobileMenuProps) => {
   const [expandedSections, setExpandedSections] = useState({
     intelligence: false,
     systems: false,
@@ -26,17 +27,36 @@ const MobileMenu = ({ isOpen }: MobileMenuProps) => {
     }));
   };
   
+  // Handle outside clicks to close the menu
+  useEffect(() => {
+    if (!isOpen) return;
+    
+    const handleOutsideClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      if (!target.closest('.mobile-nav-menu')) {
+        onNavigate?.();
+      }
+    };
+    
+    document.addEventListener('click', handleOutsideClick);
+    return () => document.removeEventListener('click', handleOutsideClick);
+  }, [isOpen, onNavigate]);
+  
   if (!isOpen) return null;
 
   return (
-    <div className="md:hidden">
+    <div className="md:hidden mobile-nav-menu">
       <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-gray-900 shadow-lg">
-        <Link
+        <NavLink
           to="/"
-          className="text-gray-300 hover:text-[#5B9BD5] block px-3 py-2 rounded-md text-base font-medium"
+          className={({ isActive }) => 
+            isActive ? "text-[#5B9BD5] font-medium block px-3 py-2 rounded-md text-base" 
+            : "text-gray-300 hover:text-[#5B9BD5] block px-3 py-2 rounded-md text-base font-medium"
+          }
+          onClick={onNavigate}
         >
           Home
-        </Link>
+        </NavLink>
         
         <NavigationSection 
           title="RV Intelligence" 
@@ -46,7 +66,7 @@ const MobileMenu = ({ isOpen }: MobileMenuProps) => {
         />
         {expandedSections.intelligence && (
           <div className="pl-4 border-l border-gray-700 ml-4 mt-1 space-y-1">
-            <SmartFeaturesLinks />
+            <SmartFeaturesLinks onClick={onNavigate} />
           </div>
         )}
         
@@ -58,7 +78,7 @@ const MobileMenu = ({ isOpen }: MobileMenuProps) => {
         />
         {expandedSections.systems && (
           <div className="pl-4 border-l border-gray-700 ml-4 mt-1 space-y-1">
-            <CoreSystemsLinks />
+            <CoreSystemsLinks onClick={onNavigate} />
           </div>
         )}
         
@@ -70,7 +90,7 @@ const MobileMenu = ({ isOpen }: MobileMenuProps) => {
         />
         {expandedSections.models && (
           <div className="pl-4 border-l border-gray-700 ml-4 mt-1 space-y-1">
-            <VehicleSelectionLinks />
+            <VehicleSelectionLinks onClick={onNavigate} />
           </div>
         )}
         
@@ -82,23 +102,31 @@ const MobileMenu = ({ isOpen }: MobileMenuProps) => {
         />
         {expandedSections.tools && (
           <div className="pl-4 border-l border-gray-700 ml-4 mt-1 space-y-1">
-            <RVToolsLinks />
+            <RVToolsLinks onClick={onNavigate} />
           </div>
         )}
         
-        <Link
+        <NavLink
           to="/blog"
-          className="text-gray-300 hover:text-[#5B9BD5] block px-3 py-2 rounded-md text-base font-medium"
+          className={({ isActive }) => 
+            isActive ? "text-[#5B9BD5] font-medium block px-3 py-2 rounded-md text-base" 
+            : "text-gray-300 hover:text-[#5B9BD5] block px-3 py-2 rounded-md text-base font-medium"
+          }
+          onClick={onNavigate}
         >
           Blog
-        </Link>
+        </NavLink>
         
-        <Link
+        <NavLink
           to="/storage-facilities"
-          className="text-gray-300 hover:text-[#5B9BD5] block px-3 py-2 rounded-md text-base font-medium"
+          className={({ isActive }) => 
+            isActive ? "text-[#5B9BD5] font-medium block px-3 py-2 rounded-md text-base" 
+            : "text-gray-300 hover:text-[#5B9BD5] block px-3 py-2 rounded-md text-base font-medium"
+          }
+          onClick={onNavigate}
         >
           Storage
-        </Link>
+        </NavLink>
         
         <NavigationSection 
           title="Support" 
@@ -108,7 +136,7 @@ const MobileMenu = ({ isOpen }: MobileMenuProps) => {
         />
         {expandedSections.support && (
           <div className="pl-4 border-l border-gray-700 ml-4 mt-1 space-y-1">
-            <SupportLinks />
+            <SupportLinks onClick={onNavigate} />
           </div>
         )}
         

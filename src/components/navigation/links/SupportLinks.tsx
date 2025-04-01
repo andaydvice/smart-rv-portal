@@ -1,27 +1,52 @@
 
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { BookOpen, AlertTriangle } from 'lucide-react';
 
 interface SupportLinksProps {
-  className?: string;
+  onClick?: () => void;
 }
 
-const SupportLinks: React.FC<SupportLinksProps> = ({ className }) => (
-  <div className={`grid gap-3 ${className || ''}`}>
-    <NavLink to="/documentation" className="text-gray-300 hover:text-blue-400 transition-colors flex items-center gap-2">
-      <BookOpen className="h-4 w-4 text-[#F97316]" />
-      <span>Documentation</span>
-    </NavLink>
-    <NavLink to="/troubleshooting" className="text-gray-300 hover:text-blue-400 transition-colors flex items-center gap-2">
-      <AlertTriangle className="h-4 w-4 text-[#F59E0B]" />
-      <span>Troubleshooting Guide</span>
-    </NavLink>
-    <NavLink to="/documentation/complete" className="text-gray-300 hover:text-blue-400 transition-colors flex items-center gap-2">
-      <BookOpen className="h-4 w-4 text-[#10B981]" />
-      <span>Complete Documentation</span>
-    </NavLink>
-  </div>
-);
+const SupportLinks = ({ onClick }: SupportLinksProps) => {
+  return (
+    <div className="flex flex-col space-y-2">
+      <NavLink 
+        to="/troubleshooting" 
+        className={({ isActive }) => 
+          isActive ? "text-[#5B9BD5] font-medium" : "text-gray-300 hover:text-white transition-colors"
+        }
+        onClick={onClick}
+      >
+        Troubleshooting
+      </NavLink>
+      <NavLink 
+        to="/documentation" 
+        className={({ isActive }) => 
+          isActive ? "text-[#5B9BD5] font-medium" : "text-gray-300 hover:text-white transition-colors"
+        }
+        onClick={onClick}
+      >
+        Documentation
+      </NavLink>
+      <NavLink 
+        to="/contact" 
+        className={({ isActive }) => 
+          isActive ? "text-[#5B9BD5] font-medium" : "text-gray-300 hover:text-white transition-colors"
+        }
+        onClick={onClick}
+      >
+        Contact Us
+      </NavLink>
+      <NavLink 
+        to="/schedule-demo" 
+        className={({ isActive }) => 
+          isActive ? "text-[#5B9BD5] font-medium" : "text-gray-300 hover:text-white transition-colors"
+        }
+        onClick={onClick}
+      >
+        Schedule Demo
+      </NavLink>
+    </div>
+  );
+};
 
 export default SupportLinks;

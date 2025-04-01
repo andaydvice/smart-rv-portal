@@ -4,9 +4,10 @@ import { NavLink } from 'react-router-dom';
 
 interface NavbarLinksProps {
   className?: string;
+  onClick?: () => void;
 }
 
-const NavbarLinks: React.FC<NavbarLinksProps> = ({ className = "" }) => {
+const NavbarLinks: React.FC<NavbarLinksProps> = ({ className = "", onClick }) => {
   return (
     <div className={`flex space-x-6 ${className}`}>
       <NavLink 
@@ -14,6 +15,7 @@ const NavbarLinks: React.FC<NavbarLinksProps> = ({ className = "" }) => {
         className={({ isActive }) => 
           isActive ? "text-[#5B9BD5] font-medium" : "text-gray-300 hover:text-white transition-colors"
         }
+        onClick={onClick}
       >
         Home
       </NavLink>
@@ -22,6 +24,7 @@ const NavbarLinks: React.FC<NavbarLinksProps> = ({ className = "" }) => {
         className={({ isActive }) => 
           isActive ? "text-[#5B9BD5] font-medium" : "text-gray-300 hover:text-white transition-colors"
         }
+        onClick={onClick}
       >
         Models
       </NavLink>
@@ -30,6 +33,7 @@ const NavbarLinks: React.FC<NavbarLinksProps> = ({ className = "" }) => {
         className={({ isActive }) => 
           isActive ? "text-[#5B9BD5] font-medium" : "text-gray-300 hover:text-white transition-colors"
         }
+        onClick={onClick}
       >
         Compare Models
       </NavLink>
@@ -38,6 +42,7 @@ const NavbarLinks: React.FC<NavbarLinksProps> = ({ className = "" }) => {
         className={({ isActive }) => 
           isActive ? "text-[#5B9BD5] font-medium" : "text-gray-300 hover:text-white transition-colors"
         }
+        onClick={onClick}
       >
         Features
       </NavLink>
@@ -46,6 +51,7 @@ const NavbarLinks: React.FC<NavbarLinksProps> = ({ className = "" }) => {
         className={({ isActive }) => 
           isActive ? "text-[#5B9BD5] font-medium" : "text-gray-300 hover:text-white transition-colors"
         }
+        onClick={onClick}
       >
         Technology
       </NavLink>
@@ -54,6 +60,7 @@ const NavbarLinks: React.FC<NavbarLinksProps> = ({ className = "" }) => {
         className={({ isActive }) => 
           isActive ? "text-[#5B9BD5] font-medium" : "text-gray-300 hover:text-white transition-colors"
         }
+        onClick={onClick}
       >
         Voice Control
       </NavLink>
@@ -62,6 +69,7 @@ const NavbarLinks: React.FC<NavbarLinksProps> = ({ className = "" }) => {
         className={({ isActive }) => 
           isActive ? "text-[#5B9BD5] font-medium" : "text-gray-300 hover:text-white transition-colors"
         }
+        onClick={onClick}
       >
         Storage
       </NavLink>
@@ -70,6 +78,7 @@ const NavbarLinks: React.FC<NavbarLinksProps> = ({ className = "" }) => {
         className={({ isActive }) => 
           isActive ? "text-[#5B9BD5] font-medium" : "text-gray-300 hover:text-white transition-colors"
         }
+        onClick={onClick}
       >
         Storage Checklist
       </NavLink>
@@ -78,6 +87,7 @@ const NavbarLinks: React.FC<NavbarLinksProps> = ({ className = "" }) => {
         className={({ isActive }) => 
           isActive ? "text-[#5B9BD5] font-medium" : "text-gray-300 hover:text-white transition-colors"
         }
+        onClick={onClick}
       >
         Troubleshooting
       </NavLink>
@@ -86,6 +96,7 @@ const NavbarLinks: React.FC<NavbarLinksProps> = ({ className = "" }) => {
         className={({ isActive }) => 
           isActive ? "text-[#5B9BD5] font-medium" : "text-gray-300 hover:text-white transition-colors"
         }
+        onClick={onClick}
       >
         Blog
       </NavLink>
