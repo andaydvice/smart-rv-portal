@@ -14,8 +14,9 @@ const PageTransition: React.FC<PageTransitionProps> = ({ children }) => {
     // Scroll to top on page change
     window.scrollTo(0, 0);
     
-    // Force background color on the body
+    // Force background color on the body and html elements
     document.body.style.backgroundColor = '#080F1F';
+    document.documentElement.style.backgroundColor = '#080F1F';
     
     // Ensure all content is visible
     const mainContent = document.querySelector('[data-main-content="true"]');
@@ -24,6 +25,20 @@ const PageTransition: React.FC<PageTransitionProps> = ({ children }) => {
       mainContent.style.opacity = '1';
       mainContent.style.backgroundColor = '#080F1F';
     }
+    
+    // Fix for any map elements that might be present
+    const fixMapElements = () => {
+      document.querySelectorAll('.mapboxgl-map, .google-map').forEach(el => {
+        if (el instanceof HTMLElement) {
+          el.style.visibility = 'visible';
+          el.style.opacity = '1';
+        }
+      });
+    };
+    
+    // Run immediately and after a short delay
+    fixMapElements();
+    setTimeout(fixMapElements, 300);
   }, []);
 
   return (
@@ -33,6 +48,7 @@ const PageTransition: React.FC<PageTransitionProps> = ({ children }) => {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.3 }}
       className="w-full bg-[#080F1F]"
+      data-main-content="true"
     >
       {children}
     </motion.div>

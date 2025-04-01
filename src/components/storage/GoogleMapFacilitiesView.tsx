@@ -59,7 +59,7 @@ const GoogleMapFacilitiesView: React.FC<GoogleMapFacilitiesViewProps> = ({
         <>
           <GoogleMapView
             facilities={mapFacilities}
-            recentlyViewedFacilityIds={recentlyViewedFacilityIds}
+            recentlyViewed={recentlyViewedFacilityIds}
             onMarkerClick={onMarkerClick}
             apiKey={apiKey}
             zoom={currentZoom}

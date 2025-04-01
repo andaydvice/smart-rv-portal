@@ -15,7 +15,33 @@
     <script>
       window.initialPath = window.location.pathname;
       console.log('Initial page load path:', window.initialPath);
+      
+      // Ensure background color is set immediately
+      document.documentElement.style.backgroundColor = '#080F1F';
+      
+      // Add visibility monitoring
+      document.addEventListener('visibilitychange', function() {
+        if (document.visibilityState === 'visible') {
+          document.documentElement.style.backgroundColor = '#080F1F';
+          document.body.style.backgroundColor = '#080F1F';
+          console.log('Page became visible, ensuring dark background');
+        }
+      });
     </script>
+    <style>
+      /* Critical CSS to prevent flashing */
+      html, body {
+        background-color: #080F1F !important;
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+        color: white;
+      }
+      #root {
+        min-height: 100vh;
+        background-color: #080F1F;
+      }
+    </style>
   </head>
   <body>
     <div id="root"></div>

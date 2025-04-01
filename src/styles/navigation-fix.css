@@ -1,9 +1,11 @@
 
 /* Prevent flash of white during navigation */
-body {
+html, body {
   background-color: #080F1F !important;
   min-height: 100vh;
   color: white;
+  visibility: visible !important;
+  opacity: 1 !important;
 }
 
 /* Ensure content remains visible during navigation */
@@ -12,6 +14,7 @@ body {
   opacity: 1 !important;
   display: block !important;
   background-color: #080F1F;
+  min-height: 100vh;
 }
 
 /* Style for loading states */
@@ -29,10 +32,22 @@ body {
   transition: opacity 0.3s ease;
 }
 
+/* Fix for global visibility issues during page transitions */
+.navigation-enabled .app-content,
+.navigation-enabled .page-content,
+.navigation-enabled [data-main-content="true"],
+.navigation-enabled .mapboxgl-map,
+.navigation-enabled .google-map {
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
 /* Enhance transition experiences */
 .navigation-enabled .page-transition {
   transition: opacity 0.3s ease;
   background-color: #080F1F;
+  visibility: visible !important;
+  opacity: 1 !important;
 }
 
 /* Fix for nested routes and transitions */
@@ -102,4 +117,45 @@ main,
 .max-w-7xl,
 .mx-auto {
   background-color: transparent;
+}
+
+/* Fix for Framer Motion container visibility */
+.framer-motion-div,
+.motion-div {
+  visibility: visible !important;
+  opacity: 1 !important;
+  background-color: #080F1F;
+}
+
+/* Fix for React Router transitions */
+.page-wrapper,
+.route-container {
+  min-height: 100vh;
+  background-color: #080F1F;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* Ensure google maps elements stay visible */
+.gm-style, 
+.mapboxgl-canvas-container,
+[class*="map-container"],
+[class*="mapContainer"] {
+  visibility: visible !important;
+  opacity: 1 !important;
+  display: block !important;
+}
+
+/* Fix for map markers */
+.mapboxgl-marker,
+.map-marker,
+[class*="marker"] {
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* Fix for any SVG elements that might be hidden during transitions */
+svg {
+  visibility: visible !important;
+  opacity: 1 !important;
 }

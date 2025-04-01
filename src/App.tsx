@@ -6,10 +6,11 @@ import { Toaster } from '@/components/ui/toaster';
 import { AuthProvider } from './components/auth/AuthContext';
 import { injectEmergencyStyles } from './utils/markers/styleInjection';
 import { forceMapMarkersVisible } from './utils/forceMapMarkers';
+import { preventRouteReload } from './utils/navigation/preventRouteReload';
 import './App.css';
 import './styles/animations.css';
 import './styles/map-loading.css';
-import './styles/map-preview.css'; // Import map preview styles
+import './styles/map-preview.css'; 
 
 // Create a client with better error handling
 const queryClient = new QueryClient({
@@ -35,6 +36,7 @@ function AppContent() {
     // Apply emergency fixes that bypass React
     injectEmergencyStyles();
     forceMapMarkersVisible();
+    preventRouteReload();
     
     // Log the current URL for debugging
     console.log('Current URL:', window.location.href);
@@ -48,9 +50,11 @@ function AppContent() {
       console.log('Navigation detected, path:', window.location.pathname);
       // Ensure body background color persists after navigation
       document.body.style.backgroundColor = '#080F1F';
+      document.documentElement.style.backgroundColor = '#080F1F';
     };
     
     window.addEventListener('popstate', handleRouteChange);
+    window.addEventListener('lovable-navigation', handleRouteChange);
     
     // Verify routes are available
     if ((window as any).routesAvailable) {
@@ -71,6 +75,7 @@ function AppContent() {
     
     return () => {
       window.removeEventListener('popstate', handleRouteChange);
+      window.removeEventListener('lovable-navigation', handleRouteChange);
     };
   }, []);
 

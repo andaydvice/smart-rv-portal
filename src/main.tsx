@@ -7,10 +7,10 @@ import './styles/animations.css'
 import './styles/forms.css'
 import './styles/layout.css'
 import './styles/base.css'
-import './styles/emergency-marker-fix.css'  // Add emergency marker styles globally
-import './styles/map-optimizations.css'     // Add map optimization styles globally
-import './styles/navigation-fix.css'        // Add navigation fix styles
-import './styles/pages/storage-checklist.css' // Add storage checklist styles
+import './styles/emergency-marker-fix.css'
+import './styles/map-optimizations.css'
+import './styles/navigation-fix.css'
+import './styles/pages/storage-checklist.css'
 
 // Log the current deployed URL for debugging
 console.log('Application starting, window.location:', window.location.href);
@@ -32,6 +32,8 @@ const injectEmergencyStyles = () => {
       display: block !important;
       opacity: 1 !important;
       visibility: visible !important;
+      background-color: #080F1F;
+      min-height: 100vh;
     }
     
     /* Prevent flash of white screen during navigation */
@@ -39,10 +41,46 @@ const injectEmergencyStyles = () => {
       min-height: 100vh;
       background-color: #080F1F;
       transition: opacity 0.3s ease;
+      visibility: visible !important;
+      opacity: 1 !important;
+    }
+
+    /* Force dark background on html and body */
+    html, body {
+      background-color: #080F1F !important;
+      min-height: 100vh;
+      color: white;
+      visibility: visible !important;
+      opacity: 1 !important;
     }
   `;
   document.head.appendChild(style);
   console.log('Injected emergency styles');
+
+  // Force dark background on all children of root
+  const observer = new MutationObserver((mutations) => {
+    mutations.forEach(() => {
+      document.querySelectorAll('#root > div').forEach(div => {
+        if (div instanceof HTMLElement) {
+          div.style.backgroundColor = '#080F1F';
+          div.style.visibility = 'visible';
+          div.style.opacity = '1';
+        }
+      });
+    });
+  });
+
+  observer.observe(document.getElementById('root') || document, {
+    childList: true,
+    subtree: true
+  });
+
+  // Create navigation listening system
+  window.addEventListener('popstate', () => {
+    console.log('Navigation occurred, ensuring visibility');
+    document.body.style.backgroundColor = '#080F1F';
+    document.documentElement.style.backgroundColor = '#080F1F';
+  });
 };
 
 // Inject emergency styles immediately
