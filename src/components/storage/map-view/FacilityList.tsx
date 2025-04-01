@@ -1,5 +1,5 @@
 
-import React, { useRef } from 'react';
+import React from 'react';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { StorageFacility } from '../types';
 import FacilityCard from '../FacilityCard';
@@ -20,10 +20,10 @@ const FacilityList: React.FC<FacilityListProps> = ({
   renderFacilityAction
 }) => {
   // Create a ref object for each facility card
-  const facilityRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
+  const facilityRefs = React.useRef<{ [key: string]: HTMLDivElement | null }>({});
 
   return (
-    <ScrollArea className="h-[600px] w-full" ref={scrollAreaRef}>
+    <div className="h-[600px] w-full overflow-auto" ref={scrollAreaRef}>
       <div className="p-4 space-y-4">
         {facilities.map(facility => (
           <FacilityCard
@@ -38,7 +38,7 @@ const FacilityList: React.FC<FacilityListProps> = ({
           />
         ))}
       </div>
-    </ScrollArea>
+    </div>
   );
 };
 

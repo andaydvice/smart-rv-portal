@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { Settings, ShieldCheck, Terminal, Wifi } from 'lucide-react';
+import { Settings, ShieldCheck, Terminal, Wifi, Brain, Lightbulb } from 'lucide-react';
 
 interface SmartFeaturesLinksProps {
   className?: string;
@@ -28,6 +28,10 @@ const SmartFeaturesLinks: React.FC<SmartFeaturesLinksProps> = ({ className }) =>
     <NavLink to="/features/internet-connectivity" className="text-gray-300 hover:text-blue-400 transition-colors flex items-center gap-2">
       <Wifi className="h-4 w-4 text-[#5B9BD5]" />
       <span>Internet Connectivity</span>
+    </NavLink>
+    <NavLink to="/features/smart-automation" className="text-gray-300 hover:text-blue-400 transition-colors flex items-center gap-2">
+      <Lightbulb className="h-4 w-4 text-[#F59E0B]" />
+      <span>Smart Automation</span>
     </NavLink>
     <NavLink to="/voice-control" className="text-gray-300 hover:text-blue-400 transition-colors flex items-center gap-2">
       <Terminal className="h-4 w-4 text-[#10B981]" />

@@ -18,6 +18,7 @@ import InternetConnectivity from "../pages/features/InternetConnectivity";
 import NavigationSystem from "../pages/features/NavigationSystem";
 import SecuritySystem from "../pages/features/SecuritySystem";
 import AutomatedDriving from "../pages/features/AutomatedDriving";
+import SmartAutomation from "../pages/features/SmartAutomation";
 import Technology from "../pages/Technology";
 import Contact from "../pages/Contact";
 import Blog from "../pages/Blog";
@@ -96,6 +97,10 @@ export const routes: RouteObject[] = [
   {
     path: "/features/automated-driving",
     element: <AutomatedDriving />,
+  },
+  {
+    path: "/features/smart-automation",
+    element: <SmartAutomation />,
   },
   {
     path: "/technology",
