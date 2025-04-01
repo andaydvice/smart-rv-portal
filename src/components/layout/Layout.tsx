@@ -1,6 +1,5 @@
 import React, { ReactNode, useEffect, useState } from 'react';
 import Footer from '../Footer';
-import { ScrollArea } from '@/components/ui/scroll-area';
 import GlobalAutoRefreshControl from '../ui/GlobalAutoRefreshControl';
 import { Spinner } from '../ui/spinner';
 
@@ -39,7 +38,7 @@ const Layout = ({ children, className = '', hideFooter = false }: LayoutProps) =
 
   return (
     <div className={`min-h-screen bg-[#080F1F] text-white ${className}`}>
-      <ScrollArea className="h-screen overflow-y-auto">
+      <div className="h-screen overflow-y-auto">
         {!contentLoaded ? (
           <div className="flex items-center justify-center min-h-screen">
             <div className="text-center">
@@ -58,7 +57,7 @@ const Layout = ({ children, className = '', hideFooter = false }: LayoutProps) =
         
         {/* Show auto-refresh control only after content is loaded */}
         {contentLoaded && <GlobalAutoRefreshControl className="fixed bottom-4 right-4 z-50" />}
-      </ScrollArea>
+      </div>
     </div>
   );
 };

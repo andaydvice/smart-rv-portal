@@ -80,12 +80,15 @@ if (!rootElement) {
   console.error('Root element not found! Cannot mount React application.');
 } else {
   try {
-    ReactDOM.createRoot(rootElement).render(
+    // Important: Use the synchronous createRoot API to avoid any potential issues
+    const root = ReactDOM.createRoot(rootElement);
+    
+    root.render(
       <React.StrictMode>
         <QueryClientProvider client={queryClient}>
           <App />
         </QueryClientProvider>
-      </React.StrictMode>,
+      </React.StrictMode>
     );
     console.log('React application successfully mounted');
     
