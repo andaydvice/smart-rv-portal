@@ -101,14 +101,25 @@ interface Facility {
 
 interface GoogleMapViewProps {
   facilities: Facility[];
+  recentlyViewedFacilityIds?: string[]; // Added this prop
+  onMarkerClick?: (facilityId: string) => void; // Made this optional
   onLoad?: () => void;
   onError?: (error: string) => void;
+  zoom?: number; // Added zoom prop
+  onZoomChange?: (zoom: number) => void; // Added zoom change handler
+  apiKey?: string; // Added API key prop
+  selectedState?: string | null; // Added selected state prop
 }
 
 const GoogleMapView: React.FC<GoogleMapViewProps> = ({
   facilities,
+  recentlyViewedFacilityIds = [], // Default to empty array
+  onMarkerClick,
   onLoad,
   onError,
+  zoom: initialZoom = 4, // Default zoom level
+  onZoomChange,
+  selectedState,
 }) => {
   const { isLoaded, loadError } = useJsApiLoader({
     googleMapsApiKey: 'AIzaSyAGKkTg0DlZd7fCJlfkVNqkRkzPjeqKJ2o', // Use the API key from the HTML file
@@ -118,6 +129,7 @@ const GoogleMapView: React.FC<GoogleMapViewProps> = ({
   const mapRef = useRef<google.maps.Map | null>(null);
   const [selectedFacility, setSelectedFacility] = useState<Facility | null>(null);
   const [mapLoadCalled, setMapLoadCalled] = useState(false);
+  const [currentZoom, setCurrentZoom] = useState(initialZoom);
 
   // Handle map load event
   const handleMapLoad = (map: google.maps.Map) => {
@@ -130,7 +142,7 @@ const GoogleMapView: React.FC<GoogleMapViewProps> = ({
     // Force the map to be fully visible
     setTimeout(() => {
       map.setCenter(defaultCenter);
-      map.setZoom(4); // Set initial zoom
+      map.setZoom(initialZoom); // Set initial zoom
     }, 100);
   };
   
@@ -171,6 +183,9 @@ const GoogleMapView: React.FC<GoogleMapViewProps> = ({
   // Handle marker click
   const handleMarkerClick = (facility: Facility) => {
     setSelectedFacility(facility);
+    if (onMarkerClick) {
+      onMarkerClick(facility.id);
+    }
   };
 
   // Handle info window close
@@ -203,6 +218,19 @@ const GoogleMapView: React.FC<GoogleMapViewProps> = ({
     }
   }, [facilities, isLoaded]);
 
+  // Handle zoom changes
+  const handleZoomChanged = () => {
+    if (mapRef.current) {
+      const newZoom = mapRef.current.getZoom();
+      if (newZoom !== undefined && newZoom !== currentZoom) {
+        setCurrentZoom(newZoom);
+        if (onZoomChange) {
+          onZoomChange(newZoom);
+        }
+      }
+    }
+  };
+
   // Indicate still loading if API not loaded yet
   if (!isLoaded) {
     return <div className="h-full w-full bg-[#080F1F] flex items-center justify-center text-white">Loading Map...</div>;
@@ -213,25 +241,31 @@ const GoogleMapView: React.FC<GoogleMapViewProps> = ({
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
         center={defaultCenter}
-        zoom={4}
+        zoom={currentZoom}
         options={defaultOptions}
         onLoad={handleMapLoad}
+        onZoomChanged={handleZoomChanged}
       >
         {/* Render markers */}
-        {facilities.map((facility) => (
-          <Marker
-            key={facility.id}
-            position={{
-              lat: facility.location.lat,
-              lng: facility.location.lng,
-            }}
-            onClick={() => handleMarkerClick(facility)}
-            icon={{
-              url: 'https://maps.google.com/mapfiles/ms/icons/blue-dot.png',
-              scaledSize: new google.maps.Size(40, 40),
-            }}
-          />
-        ))}
+        {facilities.map((facility) => {
+          const isRecent = recentlyViewedFacilityIds.includes(facility.id);
+          return (
+            <Marker
+              key={facility.id}
+              position={{
+                lat: facility.location.lat,
+                lng: facility.location.lng,
+              }}
+              onClick={() => handleMarkerClick(facility)}
+              icon={{
+                url: isRecent 
+                  ? 'https://maps.google.com/mapfiles/ms/icons/green-dot.png' 
+                  : 'https://maps.google.com/mapfiles/ms/icons/blue-dot.png',
+                scaledSize: new google.maps.Size(40, 40),
+              }}
+            />
+          );
+        })}
 
         {/* Info Window for selected facility */}
         {selectedFacility && (
