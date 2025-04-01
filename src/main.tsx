@@ -10,6 +10,18 @@ import './styles/base.css'
 import './styles/critical-loading.css' // Add critical loading styles
 import './styles/emergency-marker-fix.css'
 import './styles/map-optimizations.css'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+
+// Create a client
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: 1,
+      refetchOnWindowFocus: false,
+      staleTime: 5 * 60 * 1000, // 5 minutes
+    },
+  },
+})
 
 // Mark root as loading while React initializes
 const markRootLoading = () => {
@@ -70,7 +82,9 @@ if (!rootElement) {
   try {
     ReactDOM.createRoot(rootElement).render(
       <React.StrictMode>
-        <App />
+        <QueryClientProvider client={queryClient}>
+          <App />
+        </QueryClientProvider>
       </React.StrictMode>,
     );
     console.log('React application successfully mounted');
