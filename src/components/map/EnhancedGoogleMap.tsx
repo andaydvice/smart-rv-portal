@@ -1,24 +1,19 @@
 
 import React, { useState, useEffect, useRef } from 'react';
-import { GoogleMap, useLoadScript, Marker } from '@react-google-maps/api';
-import { Loader2 } from 'lucide-react';
-import CustomInfoWindow from './components/CustomInfoWindow';
-
-interface Facility {
-  name: string;
-  address?: string;
-  phone?: string;
-  description?: string;
-  features?: string[];
-  rating?: number;
-}
+import { useGoogleMaps } from './hooks/useGoogleMaps';
+import LoadingState from './components/LoadingState';
+import MapErrorAlert from './components/MapErrorAlert';
+import GoogleMapContainer from './components/GoogleMapContainer';
+import FacilityMarker from './components/FacilityMarker';
+import FacilityInfoWindow from './components/FacilityInfoWindow';
+import { Facility } from './types';
+import { forceMarkersVisible } from './utils/markerUtils';
+import { ensureMarkersVisible, removeUnwantedMapElements, fixInfoWindowScrolling } from '../storage/map/services/markerVisibilityService';
 
 interface EnhancedGoogleMapProps {
   apiKey: string;
-  location: {
-    lat: number;
-    lng: number;
-  };
+  location: { lat: number; lng: number };
+  zoom?: number;
   facilities?: Facility[];
   onMapLoad?: () => void;
 }
@@ -26,272 +21,117 @@ interface EnhancedGoogleMapProps {
 const EnhancedGoogleMap: React.FC<EnhancedGoogleMapProps> = ({
   apiKey,
   location,
+  zoom = 14,
   facilities = [],
   onMapLoad
 }) => {
   const [selectedFacility, setSelectedFacility] = useState<Facility | null>(null);
-  const [showInfoWindow, setShowInfoWindow] = useState(false);
+  const markersRef = useRef<google.maps.Marker[]>([]);
   const mapRef = useRef<google.maps.Map | null>(null);
-  const infoWindowRef = useRef<HTMLDivElement | null>(null);
-  const markerRef = useRef<google.maps.Marker | null>(null);
+  const cleanupRef = useRef<number | null>(null);
   
-  const { isLoaded, loadError } = useLoadScript({
-    googleMapsApiKey: apiKey,
-  });
+  // Use our custom hook to load Google Maps
+  const { isLoaded, error } = useGoogleMaps({ apiKey });
 
-  // Force styling and visibility
-  useEffect(() => {
-    if (isLoaded && onMapLoad) {
-      // Call the onMapLoad callback
-      onMapLoad();
-      
-      // Add DOM-based force styling
-      const style = document.createElement('style');
-      style.textContent = `
-        /* Force custom info window visibility */
-        .custom-info-window {
-          z-index: 1000;
-          position: absolute;
-          transform: translate(-50%, -100%);
-          background-color: #131a2a;
-          color: white;
-          border-radius: 8px;
-          padding: 0;
-          box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-          max-width: 300px;
-          width: auto;
-          pointer-events: auto;
-        }
-        
-        .custom-info-window::after {
-          content: '';
-          position: absolute;
-          left: 50%;
-          bottom: -10px;
-          transform: translateX(-50%);
-          border-left: 10px solid transparent;
-          border-right: 10px solid transparent;
-          border-top: 10px solid #131a2a;
-        }
-        
-        .custom-info-window h3 {
-          font-size: 1.1rem;
-          font-weight: 600;
-          margin: 0;
-          padding: 12px;
-          background-color: #091020;
-          color: #5B9BD5;
-          border-top-left-radius: 8px;
-          border-top-right-radius: 8px;
-          word-wrap: break-word;
-          word-break: break-word;
-          white-space: normal;
-          overflow-wrap: break-word;
-          hyphens: auto;
-        }
-        
-        .custom-info-window .info-content {
-          padding: 12px;
-        }
-        
-        .custom-info-window .close-btn {
-          position: absolute;
-          right: 8px;
-          top: 8px;
-          background: rgba(0,0,0,0.2);
-          border: none;
-          color: white;
-          width: 24px;
-          height: 24px;
-          border-radius: 50%;
-          font-size: 14px;
-          cursor: pointer;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          z-index: 1;
-        }
-      `;
-      document.head.appendChild(style);
-      
-      return () => {
-        document.head.removeChild(style);
-      };
-    }
-  }, [isLoaded, onMapLoad]);
-
-  // Position the custom info window
-  useEffect(() => {
-    if (!isLoaded || !mapRef.current || !showInfoWindow || !infoWindowRef.current || !selectedFacility) return;
-    
-    // Use the projection to convert LatLng to pixel coordinates
-    const overlay = new google.maps.OverlayView();
-    overlay.setMap(mapRef.current);
-    
-    overlay.draw = () => {
-      if (!mapRef.current || !infoWindowRef.current) return;
-      
-      // Get the pixel position
-      const projection = overlay.getProjection();
-      if (!projection) return;
-      
-      const position = projection.fromLatLngToDivPixel(
-        new google.maps.LatLng(location.lat, location.lng)
-      );
-      
-      if (position && infoWindowRef.current) {
-        // Position the info window above the marker
-        infoWindowRef.current.style.left = `${position.x}px`;
-        infoWindowRef.current.style.top = `${position.y - 15}px`;
-      }
-    };
-    
-    // Trigger a redraw when the map moves
-    const moveHandler = () => {
-      overlay.draw();
-    };
-    
-    mapRef.current.addListener('bounds_changed', moveHandler);
-    
-    // Initial draw
-    overlay.draw();
-    
-    return () => {
-      if (mapRef.current) {
-        google.maps.event.clearListeners(mapRef.current, 'bounds_changed');
-      }
-      overlay.setMap(null);
-    };
-  }, [isLoaded, location, mapRef.current, showInfoWindow, selectedFacility, infoWindowRef.current]);
-
-  // Dark theme map styles
-  const mapOptions = {
-    styles: [
-      {
-        featureType: 'all',
-        elementType: 'geometry',
-        stylers: [{ color: '#242f3e' }],
-      },
-      {
-        featureType: 'all',
-        elementType: 'labels.text.stroke',
-        stylers: [{ color: '#242f3e' }, { lightness: -80 }],
-      },
-      {
-        featureType: 'all',
-        elementType: 'labels.text.fill',
-        stylers: [{ color: '#746855' }, { lightness: 40 }],
-      },
-      {
-        featureType: 'water',
-        elementType: 'geometry',
-        stylers: [{ color: '#17263c' }],
-      },
-    ],
-    mapTypeControl: false,
-    streetViewControl: false,
-    fullscreenControl: true,
-    zoomControl: true,
-  };
-
+  // Handle map load
   const handleMapLoad = (map: google.maps.Map) => {
     mapRef.current = map;
-    if (onMapLoad) {
-      onMapLoad();
-    }
+    ensureMarkersVisible(map);
+    
+    // Add cleanup interval with more aggressive removal
+    cleanupRef.current = removeUnwantedMapElements() as unknown as number;
+    
+    // Fix infowindow scrolling
+    setTimeout(fixInfoWindowScrolling, 1000);
+    
+    if (onMapLoad) onMapLoad();
   };
   
-  const handleMarkerClick = (facility: Facility) => {
-    setSelectedFacility(facility);
-    setShowInfoWindow(true);
-  };
+  // Cleanup on unmount
+  useEffect(() => {
+    return () => {
+      if (cleanupRef.current !== null) {
+        clearInterval(cleanupRef.current);
+      }
+    };
+  }, []);
   
-  const handleCloseInfoWindow = () => {
-    setShowInfoWindow(false);
-    setSelectedFacility(null);
-  };
-
-  if (loadError) {
-    return (
-      <div className="bg-[#091020] p-4 rounded text-white">
-        Error loading map: {loadError.message}
-      </div>
-    );
-  }
-
-  if (!isLoaded) {
-    return (
-      <div className="flex h-[300px] w-full items-center justify-center bg-[#091020] rounded-lg">
-        <Loader2 className="h-8 w-8 animate-spin text-[#5B9BD5]" />
-      </div>
-    );
-  }
-
-  return (
-    <div className="w-full h-[300px] rounded-lg overflow-hidden relative">
-      <GoogleMap
-        mapContainerStyle={{ width: '100%', height: '100%', borderRadius: '0.5rem' }}
-        center={location}
-        zoom={14}
-        options={mapOptions}
-        onLoad={handleMapLoad}
-      >
-        {facilities.map((facility, index) => (
-          <Marker
-            key={`facility-${index}`}
-            position={location}
-            onClick={() => handleMarkerClick(facility)}
-            icon={{
-              path: window.google.maps.SymbolPath.CIRCLE,
-              scale: 12,
-              fillColor: '#5B9BD5',
-              fillOpacity: 1,
-              strokeColor: '#FFFFFF',
-              strokeWeight: 2,
-            }}
-          />
-        ))}
-      </GoogleMap>
+  // Ensure markers remain visible even when info window is open
+  useEffect(() => {
+    if (selectedFacility) {
+      // Force markers to remain visible when a popup is open
+      const runForceVisible = () => {
+        forceMarkersVisible(markersRef);
+        ensureMarkersVisible(mapRef.current);
+        fixInfoWindowScrolling();
+        
+        // Force removal of unwanted UI elements
+        document.querySelectorAll('.gm-ui-hover-effect, .gm-style img[src*="arrow"]').forEach(el => {
+          if (el instanceof HTMLElement) {
+            el.style.display = 'none';
+            el.style.visibility = 'hidden';
+            el.style.opacity = '0';
+          }
+        });
+      };
       
-      {/* Custom Info Window */}
-      {showInfoWindow && selectedFacility && (
-        <div 
-          ref={infoWindowRef}
-          className="custom-info-window"
+      // Run immediately and set up recurring check
+      runForceVisible();
+      const intervalId = setInterval(runForceVisible, 300);
+      
+      return () => clearInterval(intervalId);
+    }
+  }, [selectedFacility]);
+
+  // If no facilities are provided, create a default one at the location
+  const displayFacilities = facilities.length > 0 ? facilities : [
+    { 
+      name: "Location", 
+      address: "Pin location",
+      description: "View details for this location"
+    }
+  ];
+
+  // Render loading state
+  if (!isLoaded) {
+    return <LoadingState />;
+  }
+
+  // Render map with error handling
+  return (
+    <div className="bg-[#091020] rounded-lg p-4 border border-[#1a202c] w-full">
+      {error && <MapErrorAlert error={error} />}
+      
+      <div className="w-full overflow-hidden rounded-lg relative">
+        <GoogleMapContainer
+          center={location}
+          zoom={zoom}
+          onLoad={handleMapLoad}
         >
-          <button 
-            className="close-btn"
-            onClick={handleCloseInfoWindow}
-            aria-label="Close"
-          >
-            ×
-          </button>
-          <h3>{selectedFacility.name}</h3>
-          <div className="info-content">
-            {selectedFacility.address && (
-              <p className="text-sm mb-2">{selectedFacility.address}</p>
-            )}
-            {selectedFacility.phone && (
-              <p className="text-sm mb-2">{selectedFacility.phone}</p>
-            )}
-            {selectedFacility.description && (
-              <p className="text-sm text-gray-300 mt-3 italic border-l-2 border-[#5B9BD5] pl-3">{selectedFacility.description}</p>
-            )}
-            {selectedFacility.features && selectedFacility.features.length > 0 && (
-              <div className="mt-3">
-                <p className="text-xs text-gray-400 uppercase mb-2">Facilities & Amenities</p>
-                <div className="flex flex-wrap gap-1">
-                  {selectedFacility.features.map((feature, idx) => (
-                    <span key={idx} className="bg-[#1d2434] text-[#5B9BD5] text-xs px-2 py-1 rounded">
-                      {feature}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            )}
-          </div>
-        </div>
-      )}
+          {/* Markers for each facility */}
+          {displayFacilities.map((facility, index) => (
+            <FacilityMarker
+              key={`marker-${index}`}
+              position={location}
+              title={facility.name}
+              onClick={() => setSelectedFacility(facility)}
+              onLoad={(marker) => {
+                // Store reference to marker for visibility management
+                markersRef.current.push(marker);
+              }}
+            />
+          ))}
+
+          {/* Enhanced Info Window for selected facility */}
+          {selectedFacility && (
+            <FacilityInfoWindow
+              facility={selectedFacility}
+              position={location}
+              onCloseClick={() => setSelectedFacility(null)}
+            />
+          )}
+        </GoogleMapContainer>
+      </div>
     </div>
   );
 };

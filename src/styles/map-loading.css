@@ -1,109 +1,164 @@
 
-/* Ensure map is visible during loading */
-.gm-style {
+/* Loading progress animations */
+@keyframes progress-pulse {
+  0% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.6;
+  }
+}
+
+.progress-bar-animated {
+  animation: progress-pulse 1.5s ease-in-out infinite;
+}
+
+.map-loading-overlay {
+  background-color: rgba(8, 15, 31, 0.85);
+  backdrop-filter: blur(3px);
+  transition: opacity 0.3s ease-out;
+}
+
+.map-loading-overlay.fade-out {
+  opacity: 0;
+  pointer-events: none;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.3s ease-out;
+}
+
+@keyframes fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.animate-fade-out {
+  animation: fade-out 0.3s ease-out forwards;
+}
+
+/* Navigation hint message */
+.map-navigation-hint {
+  background: rgba(21, 26, 34, 0.9);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-size: 14px;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 1001;
+  max-width: 280px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  border: 1px solid #2d3748;
+}
+
+/* Popup and marker visibility fixes - increased z-index and improved overflow handling */
+.mapboxgl-popup {
+  z-index: 1500 !important;
+  max-width: none !important;
+  overflow: visible !important;
+}
+
+.mapboxgl-popup-content {
+  max-width: 320px !important; /* Increased from 300px */
+  min-width: 220px !important;
+  overflow: visible !important;
+  padding: 15px !important;
+  border-radius: 8px !important;
+  box-shadow: 0 0 20px rgba(0,0,0,0.5) !important;
+}
+
+/* Ensure details are fully visible when markers are clicked */
+.facility-popup-content {
+  max-height: none !important;
+  overflow: visible !important;
+  width: 100% !important;
+  word-break: break-word !important;
+}
+
+/* Fix for popup tips that can cause content clipping */
+.mapboxgl-popup-tip {
+  z-index: 1199 !important;
+  display: none !important; /* Remove the popup tip to prevent layout issues */
+}
+
+/* Specific fixes for marker popups */
+.mapboxgl-popup-close-button {
+  font-size: 20px !important;
+  color: white !important;
+  padding: 5px 10px !important;
+  right: 5px !important;
+  top: 5px !important;
+  z-index: 2000 !important;
+}
+
+/* Ensure popups are properly visible regardless of position */
+.mapboxgl-popup.mapboxgl-popup-anchor-top,
+.mapboxgl-popup.mapboxgl-popup-anchor-bottom,
+.mapboxgl-popup.mapboxgl-popup-anchor-left,
+.mapboxgl-popup.mapboxgl-popup-anchor-right {
+  overflow: visible !important;
+}
+
+/* Mobile-specific adjustments */
+@media (max-width: 640px) {
+  .mapboxgl-popup-content {
+    max-width: 260px !important;
+    min-width: 180px !important;
+  }
+  
+  .map-navigation-hint {
+    max-width: 220px;
+    font-size: 12px;
+  }
+}
+
+/* Critical fixes to prevent map from being blank/white */
+.map-container {
+  position: relative !important;
+  overflow: visible !important;
   visibility: visible !important;
-  opacity: 1 !important;
   display: block !important;
-  height: 100% !important;
+  height: 650px !important;
   width: 100% !important;
 }
 
-.gm-err-content {
-  background-color: #131a2a !important;
-  padding: 20px !important;
-  color: white !important;
-  text-align: center !important;
-  border-radius: 8px !important;
-  max-width: 80% !important;
-  margin: 0 auto !important;
-  top: 50% !important;
-  left: 50% !important;
-  transform: translate(-50%, -50%) !important;
+.mapboxgl-canvas-container {
+  height: 100% !important;
+  width: 100% !important;
   position: absolute !important;
-  z-index: 9999 !important;
-}
-
-.gm-err-title {
-  margin-bottom: 12px !important;
-  font-weight: bold !important;
-  font-size: 18px !important;
-  color: #f97316 !important;
-}
-
-.gm-err-message {
-  margin-bottom: 12px !important;
-  color: white !important;
-}
-
-.gm-err-autocomplete {
-  display: none !important;
-}
-
-/* Map loading indicator */
-.map-loading {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(19, 26, 42, 0.8);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  z-index: 999;
-  border-radius: 8px;
-}
-
-.map-loading-spinner {
-  width: 40px;
-  height: 40px;
-  border: 4px solid rgba(255, 255, 255, 0.1);
-  border-radius: 50%;
-  border-top: 4px solid #5B9BD5;
-  animation: spin 1s linear infinite;
-  margin-bottom: 12px;
-}
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-.map-loading-text {
-  color: white;
-  font-size: 14px;
-}
-
-/* Visible during map load */
-.map-visible-during-load {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #091020;
-  border-radius: 8px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 998;
-}
-
-/* Fix Google Maps logo and terms positioning */
-.gmnoprint,
-.gm-style-cc {
   visibility: visible !important;
   display: block !important;
   opacity: 1 !important;
-  z-index: 1000 !important;
 }
 
-/* Ensure map controls are visible */
-.gm-bundled-control,
-.gm-fullscreen-control {
+.mapboxgl-canvas {
   visibility: visible !important;
   display: block !important;
   opacity: 1 !important;
-  z-index: 1000 !important;
+  transform: translateZ(0) !important;
+}
+
+/* Fix for showing canvas during loading */
+canvas.mapboxgl-canvas {
+  visibility: visible !important;
+  display: block !important;
+  opacity: 1 !important;
 }

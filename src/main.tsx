@@ -1,47 +1,14 @@
 
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import { BrowserRouter } from 'react-router-dom'
 import App from './App.tsx'
 import './index.css'
 import './styles/animations.css'
 import './styles/forms.css'
 import './styles/layout.css'
 import './styles/base.css'
-import './styles/critical-loading.css' // Add critical loading styles
-import './styles/emergency-marker-fix.css'
-import './styles/map-optimizations.css'
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-
-// Create a client
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      retry: 1,
-      refetchOnWindowFocus: false,
-      staleTime: 5 * 60 * 1000, // 5 minutes
-    },
-  },
-})
-
-// Mark root as loading while React initializes
-const markRootLoading = () => {
-  const rootElement = document.getElementById('root');
-  if (rootElement) {
-    rootElement.classList.add('loading');
-  }
-};
-
-// Remove loading state when React takes over
-const removeRootLoading = () => {
-  const rootElement = document.getElementById('root');
-  if (rootElement) {
-    rootElement.classList.remove('loading');
-  }
-};
-
-// Add loading state immediately
-markRootLoading();
+import './styles/emergency-marker-fix.css'  // Add emergency marker styles globally
+import './styles/map-optimizations.css'     // Add map optimization styles globally
 
 // Log the current deployed URL for debugging
 console.log('Application starting, window.location:', window.location.href);
@@ -57,15 +24,9 @@ const injectEmergencyStyles = () => {
       opacity: 1 !important;
       display: block !important;
     }
-    
-    /* Force critical elements to be visible */
-    body, #root, main, .mapboxgl-map {
-      visibility: visible !important;
-      opacity: 1 !important;
-    }
   `;
   document.head.appendChild(style);
-  console.log('Injected emergency marker and visibility styles');
+  console.log('Injected emergency marker styles');
 };
 
 // Inject emergency styles immediately
@@ -81,34 +42,13 @@ if (!rootElement) {
   console.error('Root element not found! Cannot mount React application.');
 } else {
   try {
-    // Important: Use the synchronous createRoot API to avoid any potential issues
-    const root = ReactDOM.createRoot(rootElement);
-    
-    root.render(
+    ReactDOM.createRoot(rootElement).render(
       <React.StrictMode>
-        <BrowserRouter>
-          <QueryClientProvider client={queryClient}>
-            <App />
-          </QueryClientProvider>
-        </BrowserRouter>
-      </React.StrictMode>
+        <App />
+      </React.StrictMode>,
     );
     console.log('React application successfully mounted');
-    
-    // Remove loading state once React has mounted
-    removeRootLoading();
   } catch (error) {
     console.error('Failed to mount React application:', error);
-    
-    // If React fails to mount, show an error message
-    rootElement.innerHTML = `
-      <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100vh; color: white;">
-        <h2>Unable to load application</h2>
-        <p>Please try refreshing the page</p>
-        <button onclick="window.location.reload()" style="background: #5B9BD5; border: none; color: white; padding: 10px 20px; border-radius: 4px; margin-top: 20px; cursor: pointer;">
-          Refresh
-        </button>
-      </div>
-    `;
   }
 }

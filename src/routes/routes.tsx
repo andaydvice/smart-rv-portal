@@ -1,39 +1,167 @@
 
-import React from 'react';
-import StorageFacilities from '@/pages/StorageFacilities';
-import MapDemoPage from '@/pages/MapDemoPage';
-import OpaqueMapExample from '@/pages/OpaqueMapExample';
-import Features from '@/pages/Features';
-import SmartAutomation from '@/pages/features/SmartAutomation';
-import NotFound from '@/pages/NotFound';
+import React from "react";
+import { RouteObject } from "react-router-dom";
 
-export const routes = [
+// Import pages
+import Index from "../pages/Index";
+import Models from "../pages/Models";
+import CompactModel from "../pages/models/CompactModel";
+import LuxuryModel from "../pages/models/LuxuryModel";
+import AdventureModel from "../pages/models/AdventureModel";
+import CompareModels from "../pages/models/CompareModels";
+import Features from "../pages/Features";
+import AudioSystem from "../pages/features/AudioSystem";
+import SmartTV from "../pages/features/SmartTV";
+import SmartKitchen from "../pages/features/SmartKitchen";
+import PowerManagement from "../pages/features/PowerManagement";
+import InternetConnectivity from "../pages/features/InternetConnectivity";
+import NavigationSystem from "../pages/features/NavigationSystem";
+import SecuritySystem from "../pages/features/SecuritySystem";
+import AutomatedDriving from "../pages/features/AutomatedDriving";
+import Technology from "../pages/Technology";
+import Contact from "../pages/Contact";
+import Blog from "../pages/Blog";
+import BlogPost from "../pages/BlogPost";
+import Documentation from "../pages/Documentation";
+import Auth from "../pages/Auth";
+import CompleteDocumentation from "../pages/documentation/CompleteDocumentation";
+import Calculators from "../pages/Calculators";
+import VoiceControl from "../pages/VoiceControl";
+import Troubleshooting from "../pages/Troubleshooting";
+import RVWeather from "../pages/RVWeather";
+import StoragePreparationChecklist from "../pages/StoragePreparationChecklist";
+import StorageFacilities from "../pages/StorageFacilities";
+import MapIconDemo from "../pages/MapIconDemo";
+import ScheduleDemo from "../pages/ScheduleDemo";
+import MapFacilityDemo from "../pages/MapFacilityDemo";
+
+// Define routes
+export const routes: RouteObject[] = [
   {
-    path: '/',
-    element: <StorageFacilities />
+    path: "/",
+    element: <Index />,
   },
   {
-    path: '/storage-facilities',
-    element: <StorageFacilities />
+    path: "/models",
+    element: <Models />,
   },
   {
-    path: '/map-demo',
-    element: <MapDemoPage />
+    path: "/models/compact",
+    element: <CompactModel />,
   },
   {
-    path: '/opaque-map-example',
-    element: <OpaqueMapExample />
+    path: "/models/luxury",
+    element: <LuxuryModel />,
   },
   {
-    path: '/features',
-    element: <Features />
+    path: "/models/adventure",
+    element: <AdventureModel />,
   },
   {
-    path: '/features/smart-automation',
-    element: <SmartAutomation />
+    path: "/models/compare",
+    element: <CompareModels />,
   },
   {
-    path: '*',
-    element: <NotFound />
-  }
+    path: "/features",
+    element: <Features />,
+  },
+  {
+    path: "/features/audio-system",
+    element: <AudioSystem />,
+  },
+  {
+    path: "/features/smart-tv",
+    element: <SmartTV />,
+  },
+  {
+    path: "/features/smart-kitchen",
+    element: <SmartKitchen />,
+  },
+  {
+    path: "/features/power-management",
+    element: <PowerManagement />,
+  },
+  {
+    path: "/features/internet-connectivity",
+    element: <InternetConnectivity />,
+  },
+  {
+    path: "/features/navigation-system",
+    element: <NavigationSystem />,
+  },
+  {
+    path: "/features/security-system",
+    element: <SecuritySystem />,
+  },
+  {
+    path: "/features/automated-driving",
+    element: <AutomatedDriving />,
+  },
+  {
+    path: "/technology",
+    element: <Technology />,
+  },
+  {
+    path: "/contact",
+    element: <Contact />,
+  },
+  {
+    path: "/blog",
+    element: <Blog />,
+  },
+  {
+    path: "/blog/:slug",
+    element: <BlogPost />,
+  },
+  {
+    path: "/documentation",
+    element: <Documentation />,
+  },
+  {
+    path: "/documentation/complete",
+    element: <CompleteDocumentation />,
+  },
+  {
+    path: "/auth",
+    element: <Auth />,
+  },
+  {
+    path: "/calculators",
+    element: <Calculators />,
+  },
+  {
+    path: "/voice-control",
+    element: <VoiceControl />,
+  },
+  {
+    path: "/troubleshooting",
+    element: <Troubleshooting />,
+  },
+  {
+    path: "/rv-weather",
+    element: <RVWeather />,
+  },
+  {
+    path: "/storage-checklist",
+    element: <StoragePreparationChecklist />,
+  },
+  {
+    path: "/storage-facilities",
+    element: <StorageFacilities />,
+  },
+  {
+    path: "/map-icon-demo",
+    element: <MapIconDemo />,
+  },
+  {
+    path: "/schedule-demo",
+    element: <ScheduleDemo />,
+  },
+  {
+    path: "/facility-map-demo",
+    element: <MapFacilityDemo />,
+  },
 ];
+
+// For backward compatibility
+export default routes;

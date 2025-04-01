@@ -13,7 +13,6 @@ interface GoogleMapFacilitiesViewProps {
   apiKey?: string;
   className?: string;
   selectedState?: string | null;
-  fullScreenMode?: boolean;
 }
 
 const GoogleMapFacilitiesView: React.FC<GoogleMapFacilitiesViewProps> = ({
@@ -22,8 +21,7 @@ const GoogleMapFacilitiesView: React.FC<GoogleMapFacilitiesViewProps> = ({
   onMarkerClick,
   apiKey,
   className = '',
-  selectedState,
-  fullScreenMode = false
+  selectedState
 }) => {
   const [currentZoom, setCurrentZoom] = useState<number>(4);
   
@@ -41,7 +39,7 @@ const GoogleMapFacilitiesView: React.FC<GoogleMapFacilitiesViewProps> = ({
   };
 
   return (
-    <Card className={`${fullScreenMode ? 'h-full' : 'h-[650px]'} bg-[#080F1F] relative overflow-hidden border-gray-700 ${className}`}>
+    <Card className={`h-[650px] bg-[#080F1F] relative overflow-hidden border-gray-700 ${className}`}>
       {!apiKey ? (
         <Alert variant="destructive" className="m-4">
           <AlertCircle className="h-4 w-4" />
@@ -63,7 +61,6 @@ const GoogleMapFacilitiesView: React.FC<GoogleMapFacilitiesViewProps> = ({
             zoom={currentZoom}
             onZoomChange={handleZoomChange}
             selectedState={selectedState}
-            fullScreenMode={fullScreenMode}
           />
           
           {missingCoordinates > 0 && (

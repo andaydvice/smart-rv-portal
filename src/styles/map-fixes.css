@@ -152,35 +152,3 @@ a.view-details {
   margin-top: 1rem !important;
   padding-top: 1rem !important;
 }
-
-/* Google Maps specific fixes */
-.gm-style-iw {
-  background-color: #131a2a !important;
-  color: white !important;
-}
-
-.gm-style-iw-d {
-  background-color: #131a2a !important;
-  overflow: hidden !important;
-}
-
-.gm-style-iw-c {
-  background-color: #131a2a !important;
-  padding: 0 !important;
-}
-
-/* Fix for Google Maps arrow indicator */
-.gm-style .gm-style-iw-t::after {
-  background: #131a2a !important;
-}
-
-/* Make sure the info window has a clear background */
-.gm-style .gm-style-iw-tc::after {
-  background-color: #131a2a !important;
-}
-
-/* Fix any transparency issues in Google Maps info windows */
-.gm-style-iw.gm-style-iw-c > *,
-.gm-style-iw-d > * {
-  background-color: #131a2a !important;
-}

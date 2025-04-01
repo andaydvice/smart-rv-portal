@@ -23,7 +23,7 @@ const FacilityList: React.FC<FacilityListProps> = ({
   const facilityRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
 
   return (
-    <div ref={scrollAreaRef} className="h-[600px] w-full">
+    <ScrollArea className="h-[600px] w-full" ref={scrollAreaRef}>
       <div className="p-4 space-y-4">
         {facilities.map(facility => (
           <FacilityCard
@@ -38,7 +38,7 @@ const FacilityList: React.FC<FacilityListProps> = ({
           />
         ))}
       </div>
-    </div>
+    </ScrollArea>
   );
 };
 

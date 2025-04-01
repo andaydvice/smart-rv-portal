@@ -1,63 +1,83 @@
-import React, { ReactNode, useEffect, useState } from 'react';
-import Footer from '../Footer';
-import GlobalAutoRefreshControl from '../ui/GlobalAutoRefreshControl';
-import { Spinner } from '../ui/spinner';
+
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
+import Footer2 from "../ui/Footer2";
+import Navbar from "@/components/Navbar";
 
 interface LayoutProps {
-  children: ReactNode;
-  className?: string;
-  hideFooter?: boolean;
+  children: React.ReactNode;
 }
 
-const Layout = ({ children, className = '', hideFooter = false }: LayoutProps) => {
-  const [contentLoaded, setContentLoaded] = useState(false);
+const Layout = ({ children }: LayoutProps) => {
+  const { pathname } = useLocation();
 
+  // We've removed the scrollToTop call here since it's now handled by the RouterProvider
   useEffect(() => {
-    // Mark content as loaded immediately if document is already complete
-    if (document.readyState === 'complete') {
-      setContentLoaded(true);
-    } else {
-      // Otherwise wait for the DOMContentLoaded event
-      const handleContentLoaded = () => {
-        setContentLoaded(true);
-      };
-      
-      // Set content as loaded after a short delay
-      const timer = setTimeout(() => {
-        setContentLoaded(true);
-      }, 800);
-      
-      window.addEventListener('DOMContentLoaded', handleContentLoaded);
-      
-      return () => {
-        clearTimeout(timer);
-        window.removeEventListener('DOMContentLoaded', handleContentLoaded);
-      };
-    }
-  }, []);
+    console.log('Layout component rendered for path:', pathname);
+  }, [pathname]);
 
+  // Define standardized footer links for all pages
+  const footerLinks = [
+    {
+      title: "Quick Links",
+      links: [
+        { text: "Home", href: "/" },
+        { text: "Features", href: "/features" },
+        { text: "Models", href: "/models" },
+        { text: "Technology", href: "/technology" },
+        { text: "Blog", href: "/blog" }
+      ]
+    },
+    {
+      title: "Features",
+      links: [
+        { text: "Navigation System", href: "/features/navigation-system" },
+        { text: "Security System", href: "/features/security-system" },
+        { text: "Power Management", href: "/features/power-management" },
+        { text: "Internet Connectivity", href: "/features/internet-connectivity" },
+        { text: "Smart Kitchen", href: "/features/smart-kitchen" }
+      ]
+    },
+    {
+      title: "Resources",
+      links: [
+        { text: "Calculators", href: "/calculators" },
+        { text: "Documentation", href: "/documentation" },
+        { text: "Weather", href: "/weather" },
+        { text: "Storage Facilities", href: "/storage-facilities" },
+        { text: "Storage Checklist", href: "/storage-preparation-checklist" }
+      ]
+    },
+    {
+      title: "Support",
+      links: [
+        { text: "Contact Us", href: "/contact" },
+        { text: "Troubleshooting", href: "/troubleshooting" },
+        { text: "Schedule Demo", href: "/schedule-demo" },
+        { text: "Voice Control", href: "/voice-control" }
+      ]
+    }
+  ];
+
+  const footerSocials = [
+    { icon: "facebook", href: "https://facebook.com" },
+    { icon: "twitter", href: "https://twitter.com" },
+    { icon: "instagram", href: "https://instagram.com" },
+    { icon: "youtube", href: "https://youtube.com" }
+  ];
+
+  console.log('Rendering Layout component');
   return (
-    <div className={`min-h-screen bg-[#080F1F] text-white ${className}`}>
-      <div className="h-screen overflow-y-auto">
-        {!contentLoaded ? (
-          <div className="flex items-center justify-center min-h-screen">
-            <div className="text-center">
-              <Spinner size="md" className="mx-auto mb-4" />
-              <p className="text-gray-300">Loading content...</p>
-            </div>
-          </div>
-        ) : (
-          <>
-            <main className="min-h-[calc(100vh-200px)]">
-              {children}
-            </main>
-            {!hideFooter && <Footer />}
-          </>
-        )}
-        
-        {/* Show auto-refresh control only after content is loaded */}
-        {contentLoaded && <GlobalAutoRefreshControl className="fixed bottom-4 right-4 z-50" />}
+    <div className="min-h-screen flex flex-col w-full max-w-full overflow-x-hidden bg-gray-900">
+      <Navbar />
+      <div className="flex-grow">
+        {children}
       </div>
+      <Footer2
+        links={footerLinks}
+        socials={footerSocials}
+        description="Revolutionizing the future of recreational vehicles with smart technology."
+      />
     </div>
   );
 };

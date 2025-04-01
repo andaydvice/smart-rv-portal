@@ -1,12 +1,12 @@
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useGoogleMaps } from './hooks/useGoogleMaps';
-import { GoogleMap, Marker } from '@react-google-maps/api';
+import { GoogleMap, Marker, InfoWindow } from '@react-google-maps/api';
+import { TypographyH3 } from "@/components/ui/typography";
 import { Loader2 } from "lucide-react";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { AlertCircle, MapPin, Phone } from "lucide-react";
 import { Container } from "@/components/ui/container";
-import CustomInfoWindow from './components/CustomInfoWindow';
 
 interface Location {
   lat: number;
@@ -26,7 +26,6 @@ interface ResponsiveFacilityMapProps {
   features?: Feature[];
   description?: string;
   apiKey?: string;
-  onMapLoad?: () => void;
 }
 
 const ResponsiveFacilityMap: React.FC<ResponsiveFacilityMapProps> = ({
@@ -36,16 +35,10 @@ const ResponsiveFacilityMap: React.FC<ResponsiveFacilityMapProps> = ({
   phoneNumber,
   features = [],
   description,
-  apiKey = "AIzaSyAGKkTg0DlZd7fCJlfkVNqkRkzPjeqKJ2o",
-  onMapLoad
+  apiKey = "AIzaSyAGKkTg0DlZd7fCJlfkVNqkRkzPjeqKJ2o" // Default API key
 }) => {
   const [showInfo, setShowInfo] = useState(false);
   const { isLoaded, error } = useGoogleMaps({ apiKey });
-  const mapRef = useRef<google.maps.Map | null>(null);
-  const infoWindowRef = useRef<HTMLDivElement>(null);
-  const markerRef = useRef<google.maps.Marker | null>(null);
-  const mapContainerRef = useRef<HTMLDivElement>(null);
-  const [infoPosition, setInfoPosition] = useState({ x: 0, y: 0 });
 
   const mapContainerStyle = {
     width: '100%',
@@ -83,139 +76,28 @@ const ResponsiveFacilityMap: React.FC<ResponsiveFacilityMapProps> = ({
     zoomControl: true,
   };
 
-  // Handle map loading and apply custom styles
-  const handleMapLoad = (map: google.maps.Map): void => {
-    mapRef.current = map;
-    
-    // Force map to be visible
-    setTimeout(() => {
-      if (mapRef.current) {
-        const div = mapRef.current.getDiv();
-        if (div) {
-          div.style.visibility = 'visible';
-          div.style.opacity = '1';
-          div.style.display = 'block';
-        }
-      }
-    }, 100);
-    
-    // Call the external onMapLoad handler if provided
-    if (onMapLoad) {
-      onMapLoad();
-    }
-    
-    // Create marker
-    const marker = new google.maps.Marker({
-      position: location,
-      map: map,
-      icon: {
-        path: google.maps.SymbolPath.CIRCLE,
-        scale: 12,
-        fillColor: '#5B9BD5',
-        fillOpacity: 1,
-        strokeColor: '#FFFFFF',
-        strokeWeight: 2,
-      }
-    });
-    markerRef.current = marker;
-    
-    // Add click handler
-    marker.addListener('click', () => {
-      setShowInfo(true);
-      positionCustomInfoWindow();
-    });
-    
-    // Listen for map movements to reposition info window
-    map.addListener('bounds_changed', () => {
-      if (showInfo) {
-        positionCustomInfoWindow();
-      }
-    });
-    
-    console.log('Map loaded successfully with marker');
-  };
-  
-  // Position custom info window based on marker position
-  const positionCustomInfoWindow = () => {
-    if (!mapRef.current || !markerRef.current) return;
-    
-    const map = mapRef.current;
-    const marker = markerRef.current;
-    
-    // Use overlay to get pixel coordinates
-    const overlay = new google.maps.OverlayView();
-    overlay.setMap(map);
-    
-    overlay.draw = () => {
-      const projection = overlay.getProjection();
-      if (!projection) return;
-      
-      const position = projection.fromLatLngToDivPixel(marker.getPosition() as google.maps.LatLng);
-      if (!position || !mapContainerRef.current) return;
-      
-      // Get map container bounds
-      const mapBounds = mapContainerRef.current.getBoundingClientRect();
-      
-      // Set the info position for the CustomInfoWindow
-      setInfoPosition({
-        x: position.x,
-        y: position.y
-      });
-    };
-    
-    overlay.draw();
-    overlay.setMap(null); // Clean up overlay
-  };
-
-  // Reposition info window when map is loaded or visibility changes
-  useEffect(() => {
-    if (isLoaded && showInfo) {
-      positionCustomInfoWindow();
-      
-      // Handle window resize
-      const handleResize = () => {
-        if (showInfo) {
-          positionCustomInfoWindow();
-        }
-      };
-      
-      window.addEventListener('resize', handleResize);
-      return () => {
-        window.removeEventListener('resize', handleResize);
-      };
-    }
-  }, [isLoaded, showInfo]);
-
-  // When the component mounts, force visibility on the map
+  // Remove unwanted UI elements when map is loaded
   useEffect(() => {
     if (isLoaded) {
-      // Set all parent containers to be visible
-      const forceVisibility = (element: HTMLElement | null) => {
-        if (!element) return;
-        
-        element.style.visibility = 'visible';
-        element.style.display = 'block';
-        element.style.opacity = '1';
-        element.style.height = '350px';
-        
-        if (element.parentElement) {
-          forceVisibility(element.parentElement);
-        }
+      const removeUnwantedElements = () => {
+        document.querySelectorAll('.gm-ui-hover-effect, .gm-style img[src*="arrow"]').forEach(el => {
+          if (el instanceof HTMLElement) {
+            el.style.display = 'none';
+            el.style.visibility = 'hidden';
+            el.style.opacity = '0';
+          }
+        });
       };
+
+      // Run repeatedly to ensure the elements are removed
+      const intervalId = setInterval(removeUnwantedElements, 300);
       
-      // Apply to map container
-      if (mapContainerRef.current) {
-        forceVisibility(mapContainerRef.current);
-      }
+      // Initial run
+      removeUnwantedElements();
       
-      console.log('Force visibility applied to map containers');
+      return () => clearInterval(intervalId);
     }
   }, [isLoaded]);
-
-  // Handle close info window
-  const handleCloseInfoWindow = () => {
-    setShowInfo(false);
-  };
 
   if (!isLoaded) {
     return (
@@ -244,17 +126,10 @@ const ResponsiveFacilityMap: React.FC<ResponsiveFacilityMapProps> = ({
       <div className="bg-[#091020] rounded-lg p-4 md:p-6 border border-[#1a202c] w-full">
         <div className="flex flex-col space-y-4">
           {/* Facility Name with Typography component - FIXED OVERFLOW ISSUE */}
-          <div className="text-center mb-2 px-4">
-            <h3 className="text-xl md:text-2xl font-bold text-[#5B9BD5] break-words whitespace-normal"
-                style={{ 
-                  overflowWrap: 'break-word',
-                  wordWrap: 'break-word',
-                  wordBreak: 'break-word',
-                  maxWidth: '100%',
-                  overflow: 'visible'
-                }}>
+          <div className="text-center mb-2">
+            <TypographyH3 className="text-[#5B9BD5] break-words overflow-hidden px-2">
               {name}
-            </h3>
+            </TypographyH3>
           </div>
           
           {/* Facility details section */}
@@ -294,60 +169,43 @@ const ResponsiveFacilityMap: React.FC<ResponsiveFacilityMapProps> = ({
           )}
           
           {/* Map container with enhanced styling */}
-          <div 
-            className="w-full overflow-hidden rounded-lg relative"
-            ref={mapContainerRef}
-            style={{
-              height: '350px',
-              visibility: 'visible',
-              display: 'block'
-            }}
-          >
+          <div className="w-full overflow-hidden rounded-lg relative">
             <GoogleMap
               mapContainerStyle={mapContainerStyle}
               center={location}
               zoom={14}
               options={mapOptions}
-              onLoad={handleMapLoad}
             >
-              {/* We're not using the built-in InfoWindow, using DOM-based instead */}
+              <Marker
+                position={location}
+                onClick={() => setShowInfo(!showInfo)}
+                icon={{
+                  path: window.google.maps.SymbolPath.CIRCLE,
+                  scale: 12,
+                  fillColor: '#5B9BD5',
+                  fillOpacity: 1,
+                  strokeColor: '#FFFFFF',
+                  strokeWeight: 2,
+                }}
+              />
+              
+              {showInfo && (
+                <InfoWindow
+                  position={location}
+                  onCloseClick={() => setShowInfo(false)}
+                  options={{
+                    pixelOffset: new window.google.maps.Size(0, -30),
+                    maxWidth: 300
+                  }}
+                >
+                  <div className="p-2 max-w-[250px]">
+                    <h3 className="text-lg font-semibold text-[#5B9BD5] break-words">{name}</h3>
+                    {address && <p className="text-sm mt-1 break-words">{address}</p>}
+                    {description && <p className="text-sm mt-2 text-gray-600 break-words">{description}</p>}
+                  </div>
+                </InfoWindow>
+              )}
             </GoogleMap>
-            
-            {/* Custom info window */}
-            {showInfo && (
-              <CustomInfoWindow
-                isVisible={showInfo}
-                onClose={handleCloseInfoWindow}
-                position={infoPosition}
-                title={name}
-              >
-                <div>
-                  {address && <p className="text-sm mb-2">{address}</p>}
-                  {phoneNumber && <p className="text-sm mb-2">{phoneNumber}</p>}
-                  
-                  {features && features.length > 0 && (
-                    <div className="mt-2">
-                      <p className="text-xs text-gray-400 uppercase mb-1">Facilities & Amenities</p>
-                      <div className="flex flex-wrap gap-1">
-                        {features
-                          .filter(feature => feature.available)
-                          .map((feature, idx) => (
-                            <span key={idx} className="bg-[#1d2434] text-[#5B9BD5] text-xs px-2 py-1 rounded">
-                              {feature.name}
-                            </span>
-                          ))}
-                      </div>
-                    </div>
-                  )}
-                  
-                  {description && (
-                    <p className="text-sm text-gray-300 mt-3 italic border-l-2 border-[#5B9BD5] pl-3">
-                      {description}
-                    </p>
-                  )}
-                </div>
-              </CustomInfoWindow>
-            )}
           </div>
           
           {/* Description section */}

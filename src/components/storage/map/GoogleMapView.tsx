@@ -1,7 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { GoogleMap, useLoadScript, MarkerF, InfoWindowF } from '@react-google-maps/api';
 import { StorageFacility } from '../types';
-import { fixInfoWindowVisibility } from './utils/infoWindowUtils';
 
 interface GoogleMapViewProps {
   facilities: StorageFacility[];
@@ -12,7 +11,6 @@ interface GoogleMapViewProps {
   zoom?: number;
   onZoomChange?: (zoom: number) => void;
   selectedState?: string | null;
-  fullScreenMode?: boolean;
 }
 
 const mapContainerStyle = {
@@ -49,8 +47,7 @@ const GoogleMapView: React.FC<GoogleMapViewProps> = ({
   center = { lat: 39.8283, lng: -98.5795 }, // Center of the US
   zoom = 4,
   onZoomChange,
-  selectedState,
-  fullScreenMode = false
+  selectedState
 }) => {
   const [selectedFacility, setSelectedFacility] = useState<StorageFacility | null>(null);
   const [mapRef, setMapRef] = useState<google.maps.Map | null>(null);
@@ -193,11 +190,6 @@ const GoogleMapView: React.FC<GoogleMapViewProps> = ({
         google.maps.event.removeListener(listener);
       });
     }
-    
-    // Call our helper function to fix info window styling after the map loads
-    setTimeout(() => {
-      fixInfoWindowVisibility();
-    }, 1000);
   };
 
   // Close info window when clicking on the map
@@ -244,28 +236,10 @@ const GoogleMapView: React.FC<GoogleMapViewProps> = ({
     );
   };
 
-  // Function to handle InfoWindow error
-  const handleInfoWindowError = () => {
-    console.error("Error loading facility information");
-    return (
-      <div className="p-3 bg-red-900/70 text-white rounded">
-        <p>Error loading facility details</p>
-      </div>
-    );
-  };
-
-  // Adjust container style for full-screen mode
-  const containerStyle = fullScreenMode ? {
-    width: '100%',
-    height: '100%',
-    borderRadius: '0',
-    overflow: 'hidden'
-  } : mapContainerStyle;
-
   return (
-    <div className={`relative ${fullScreenMode ? 'w-full h-full' : 'w-full h-[650px]'} overflow-hidden`}>
+    <div className="w-full h-[650px] relative rounded-lg overflow-hidden">
       <GoogleMap
-        mapContainerStyle={containerStyle}
+        mapContainerStyle={mapContainerStyle}
         center={mapCenter}
         zoom={mapZoom}
         onLoad={onMapLoad}
@@ -332,61 +306,56 @@ const GoogleMapView: React.FC<GoogleMapViewProps> = ({
             options={{
               pixelOffset: new google.maps.Size(0, -30),
               maxWidth: 320,
-              disableAutoPan: false,
             }}
           >
-            <div className="facility-info-window max-w-[300px] bg-[#131a2a] text-white p-4 rounded-lg shadow-lg border border-gray-700">
-              {selectedFacility ? (
-                <>
-                  <h3 className="text-lg font-semibold mb-1 text-[#5B9BD5] break-words whitespace-normal max-w-full overflow-visible">{selectedFacility.name}</h3>
-                  
-                  {/* Rating display */}
-                  {renderRatingStars(selectedFacility.avg_rating as number)}
-                  
-                  {/* Review count */}
-                  {selectedFacility.review_count && selectedFacility.review_count > 0 && (
-                    <p className="text-xs text-gray-400 mb-2">
-                      {selectedFacility.review_count} {selectedFacility.review_count === 1 ? 'review' : 'reviews'}
-                    </p>
-                  )}
-                  
-                  <div className="space-y-1 text-sm text-white">
-                    <p className="break-words">{selectedFacility.address}</p>
-                    <p>{selectedFacility.city}, {selectedFacility.state}</p>
-                    {selectedFacility.price_range && (
-                      <p className="mt-2 font-semibold text-[#F97316]">
-                        Price: ${selectedFacility.price_range.min} - ${selectedFacility.price_range.max}
-                      </p>
+            <div className="facility-info-window max-w-[300px]">
+              <h3 className="text-lg font-semibold mb-1 text-[#5B9BD5]">{selectedFacility.name}</h3>
+              
+              {/* Rating display */}
+              {renderRatingStars(selectedFacility.avg_rating as number)}
+              
+              {/* Review count */}
+              {selectedFacility.review_count && selectedFacility.review_count > 0 && (
+                <p className="text-xs text-gray-500 mb-2">
+                  {selectedFacility.review_count} {selectedFacility.review_count === 1 ? 'review' : 'reviews'}
+                </p>
+              )}
+              
+              <div className="space-y-1 text-sm">
+                <p>{selectedFacility.address}</p>
+                <p>{selectedFacility.city}, {selectedFacility.state}</p>
+                {selectedFacility.price_range && (
+                  <p className="mt-2 font-semibold text-[#F97316]">
+                    Price: ${selectedFacility.price_range.min} - ${selectedFacility.price_range.max}
+                  </p>
+                )}
+                {selectedFacility.contact_phone && (
+                  <p className="mt-1">Phone: {selectedFacility.contact_phone}</p>
+                )}
+              </div>
+              
+              {selectedFacility.features && Object.values(selectedFacility.features).some(v => v) && (
+                <div className="mt-2 border-t border-gray-300 pt-2">
+                  <p className="text-xs text-gray-600 mb-1">Features:</p>
+                  <div className="flex flex-wrap gap-1">
+                    {selectedFacility.features.indoor && (
+                      <span className="text-xs bg-[#e0f2ff] text-[#4285F4] px-2 py-0.5 rounded">Indoor</span>
                     )}
-                    {selectedFacility.contact_phone && (
-                      <p className="mt-1">Phone: {selectedFacility.contact_phone}</p>
+                    {selectedFacility.features.climate_controlled && (
+                      <span className="text-xs bg-[#e0f2ff] text-[#4285F4] px-2 py-0.5 rounded">Climate Controlled</span>
+                    )}
+                    {selectedFacility.features["24h_access"] && (
+                      <span className="text-xs bg-[#e0f2ff] text-[#4285F4] px-2 py-0.5 rounded">24/7 Access</span>
+                    )}
+                    {selectedFacility.features.security_system && (
+                      <span className="text-xs bg-[#e0f2ff] text-[#4285F4] px-2 py-0.5 rounded">Security</span>
+                    )}
+                    {selectedFacility.features.vehicle_washing && (
+                      <span className="text-xs bg-[#e0f2ff] text-[#4285F4] px-2 py-0.5 rounded">Vehicle Washing</span>
                     )}
                   </div>
-                  
-                  {selectedFacility.features && Object.values(selectedFacility.features).some(v => v) && (
-                    <div className="mt-2 border-t border-gray-700 pt-2">
-                      <p className="text-xs text-gray-400 mb-1">Features:</p>
-                      <div className="flex flex-wrap gap-1">
-                        {selectedFacility.features.indoor && (
-                          <span className="text-xs bg-[#1d2434] text-[#60A5FA] px-2 py-0.5 rounded">Indoor</span>
-                        )}
-                        {selectedFacility.features.climate_controlled && (
-                          <span className="text-xs bg-[#1d2434] text-[#60A5FA] px-2 py-0.5 rounded">Climate Controlled</span>
-                        )}
-                        {selectedFacility.features["24h_access"] && (
-                          <span className="text-xs bg-[#1d2434] text-[#60A5FA] px-2 py-0.5 rounded">24/7 Access</span>
-                        )}
-                        {selectedFacility.features.security_system && (
-                          <span className="text-xs bg-[#1d2434] text-[#60A5FA] px-2 py-0.5 rounded">Security</span>
-                        )}
-                        {selectedFacility.features.vehicle_washing && (
-                          <span className="text-xs bg-[#1d2434] text-[#60A5FA] px-2 py-0.5 rounded">Vehicle Washing</span>
-                        )}
-                      </div>
-                    </div>
-                  )}
-                </>
-              ) : handleInfoWindowError()}
+                </div>
+              )}
             </div>
           </InfoWindowF>
         )}

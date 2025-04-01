@@ -1,5 +1,5 @@
 
-/* Base Google Maps visibility enhancements */
+/* Google Maps visibility enhancements */
 .gm-style img[src*="marker"], 
 .gm-style div[role="button"] {
   visibility: visible !important;
@@ -16,337 +16,81 @@
   display: block !important;
 }
 
-/* ========== CRITICAL INFO WINDOW FIXES ========== */
-
-/* Reset all info window styles */
-.gm-style .gm-style-iw-c,
-body .gm-style .gm-style-iw-c,
-body .gm-style-iw.gm-style-iw-c {
+/* Ensure popup windows remain visible */
+.gm-style .gm-style-iw-c {
+  z-index: 1001 !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  display: block !important;
+  background-color: transparent !important;
   padding: 0 !important;
-  max-height: none !important;
-  max-width: none !important;
-  overflow: visible !important;
-  box-sizing: content-box !important;
   border-radius: 8px !important;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3) !important;
-  transform: none !important;
-  min-width: 0 !important;
-  width: auto !important;
-  transform-origin: center !important;
-  background-color: #131a2a !important; /* Set solid color */
+  overflow: visible !important;
+  max-width: 300px !important;
 }
 
-/* Reset all info window content styles */
-.gm-style .gm-style-iw-d,
-body .gm-style .gm-style-iw-d,
-body .gm-style-iw.gm-style-iw-c .gm-style-iw-d {
-  overflow: visible !important;
-  max-height: none !important;
+/* Style the info window content wrapper */
+.gm-style .gm-style-iw-d {
+  overflow: hidden !important;
   padding: 0 !important;
-  scrollbar-width: none !important;
-  -ms-overflow-style: none !important;
-  max-width: none !important;
-  box-sizing: content-box !important;
-  background-color: #131a2a !important; /* Set solid color */
+  max-width: 300px !important;
 }
 
-/* Hide scrollbars */
-.gm-style .gm-style-iw-d::-webkit-scrollbar,
-body .gm-style .gm-style-iw-d::-webkit-scrollbar {
-  display: none !important;
-  width: 0 !important;
-  height: 0 !important;
+/* Ensure the info window tip points to the correct location */
+.gm-style .gm-style-iw-t::after {
+  background: #091020 !important;
 }
 
-/* Fix text content within info windows */
-.gm-style-iw.gm-style-iw-c h3,
-.gm-style-iw.gm-style-iw-c p,
-.gm-style-iw.gm-style-iw-c span,
-.gm-style-iw.gm-style-iw-c div,
-.facility-name-heading,
-.facility-info h3,
-.facility-popup-content h3 {
-  white-space: normal !important;
-  overflow: visible !important;
-  text-overflow: clip !important;
-  word-break: break-word !important;
-  max-width: 100% !important;
-  overflow-wrap: break-word !important;
-  hyphens: auto !important;
-}
-
-/* Fix for info window parent container sizing */
-.gm-style-iw-tc,
-.gm-style-iw-c,
-.gm-style-iw-d {
-  overflow: visible !important;
-  max-height: none !important;
-  background-color: #131a2a !important; /* Set solid color */
-}
-
-/* Override Google's aggressive display restrictions */
-.gm-style-iw-c *,
-.gm-style-iw-d * {
-  overflow: visible !important;
-  max-height: none !important;
-  max-width: 100% !important;
-  white-space: normal !important;
-  color: white !important; /* Ensure text is white for readability */
-}
-
-/* Essential fix for facility popup title */
-.facility-info h3,
-.facility-popup-content h3,
-.gm-style-iw h3,
-.custom-info-window h3 {
-  display: block !important;
-  white-space: normal !important;
-  overflow: visible !important;
-  text-overflow: clip !important;
-  word-break: break-word !important;
-  max-width: 100% !important;
-  overflow-wrap: break-word !important;
-  text-align: left !important;
-  color: #5B9BD5 !important; /* Use blue for headings */
-}
-
-/* Ensure proper width for infowindow on all devices */
-@media (max-width: 640px) {
-  .gm-style-iw.gm-style-iw-c {
-    max-width: 260px !important;
-  }
-}
-
-/* Make sure the map container in the preview section has correct sizing */
-.map-container-persistent {
-  height: 300px;
-  width: 100%;
-  position: relative;
-  border-radius: 0.5rem;
-  overflow: hidden;
-}
-
-/* ========== CUSTOM INFO WINDOW STYLING ========== */
-
-.custom-info-window {
-  z-index: 10000 !important;
-  position: absolute !important;
-  transform: translate(-50%, -100%) !important;
-  background-color: #131a2a !important;
-  color: white !important;
-  border-radius: 8px !important;
-  padding: 0 !important;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.2) !important;
-  max-width: 400px !important;
-  width: auto !important;
-  min-width: 280px !important;
-  pointer-events: auto !important;
-  visibility: visible !important;
-  display: block !important;
+/* Improve close button styling for better visibility */
+.gm-style .gm-style-iw-t button.gm-ui-hover-effect {
+  background: #5B9BD5 !important;
   opacity: 1 !important;
-}
-
-.custom-info-window::after {
-  content: '' !important;
-  position: absolute !important;
-  left: 50% !important;
-  bottom: -10px !important;
-  transform: translateX(-50%) !important;
-  border-left: 10px solid transparent !important;
-  border-right: 10px solid transparent !important;
-  border-top: 10px solid #131a2a !important;
-}
-
-.custom-info-window h3 {
-  font-size: 1.1rem !important;
-  font-weight: 600 !important;
-  margin: 0 !important;
-  padding: 12px !important;
-  padding-right: 36px !important;
-  background-color: #091020 !important;
-  color: #5B9BD5 !important;
-  border-top-left-radius: 8px !important;
-  border-top-right-radius: 8px !important;
-  word-wrap: break-word !important;
-  word-break: break-word !important;
-  white-space: normal !important;
-  overflow-wrap: break-word !important;
-  hyphens: auto !important;
-  text-align: left !important;
-  max-width: 100% !important;
-  width: 100% !important;
-  box-sizing: border-box !important;
-  overflow: visible !important;
-  text-overflow: clip !important;
-  display: block !important;
-}
-
-.custom-info-window .info-content {
-  padding: 12px !important;
-  word-break: break-word !important;
-  overflow-wrap: break-word !important;
-  width: 100% !important; 
-  max-width: 100% !important;
-  box-sizing: border-box !important;
-}
-
-.custom-info-window .close-btn {
-  position: absolute !important;
-  right: 8px !important;
-  top: 8px !important;
-  background: rgba(0,0,0,0.2) !important;
-  border: none !important;
-  color: white !important;
-  width: 24px !important;
-  height: 24px !important;
-  border-radius: 50% !important;
-  font-size: 14px !important;
-  cursor: pointer !important;
+  top: 0 !important;
+  right: 0 !important;
+  width: 30px !important;
+  height: 30px !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
-  z-index: 10001 !important;
+  border-radius: 50% !important;
+  margin: 8px !important;
 }
 
-/* Responsive adjustments for mobile devices */
-@media (max-width: 480px) {
-  .custom-info-window {
-    max-width: 300px !important;
-    min-width: 250px !important;
-  }
-  
-  .custom-info-window h3 {
-    font-size: 0.95rem !important;
-    padding: 10px !important;
-    padding-right: 32px !important;
-  }
-  
-  .custom-info-window .info-content {
-    padding: 10px !important;
-  }
-  
-  .custom-info-window .close-btn {
-    width: 22px !important;
-    height: 22px !important;
-  }
-}
-
-/* Additional fixes for Google Maps info windows */
-.gm-style-iw {
-  background-color: #131a2a !important;
-}
-
-div.gm-style-iw-c {
-  background-color: #131a2a !important;
-  padding: 0 !important;
-}
-
-.gm-style-iw-d {
-  overflow: hidden !important;
-  background-color: #131a2a !important;
-}
-
-/* Fixes for facility-info-window to ensure opacity */
-.facility-info-window {
-  background-color: #131a2a !important;
-  color: white !important;
-  border-radius: 8px !important;
-  padding: 16px !important;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5) !important;
-  width: 100% !important;
-  max-width: 300px !important;
+/* Adjust the X icon in the close button */
+.gm-style .gm-style-iw-t button.gm-ui-hover-effect img {
+  width: 18px !important;
+  height: 18px !important;
+  margin: 0 !important;
   opacity: 1 !important;
-  border: 1px solid rgba(75, 85, 99, 0.5) !important;
+  filter: invert(1) !important;
 }
 
-/* Critical fixes to ensure Google Maps info windows have solid backgrounds */
-.gm-style > div:nth-child(1) > div:nth-child(3) > div:nth-child(2) > div:nth-child(4) > div,
-.gm-style > div:nth-child(1) > div:nth-child(3) > div:nth-child(2) > div:nth-child(4) > div:nth-child(1),
-.gm-style-iw.gm-style-iw-c {
-  background-color: #131a2a !important;
+/* Ensure markers stay on top of popups when needed */
+.gm-style .gm-style-iw + div {
+  z-index: 1002 !important;
 }
 
-.gm-style .gm-style-iw-t::after {
-  background: #131a2a !important;
-}
-
-/* Fix for the arrow that points to the marker */
-.gm-style .gm-style-iw-tc::after {
-  background-color: #131a2a !important;
-}
-
-/* Fix the background color of each element in the info window tree */
-.gm-style-iw.gm-style-iw-c > * {
-  background-color: #131a2a !important;
-}
-
-/* Fix for the outer container of the info window */
-.gm-style-iw-tc {
-  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.5)) !important;
-}
-
-/* Fix for the inner popup area */
-.facility-info-window {
-  background-color: #131a2a !important;
+/* Improve marker icon visibility */
+.gm-style img[src*="circle"], 
+.gm-style img[src*="marker"] {
+  transform: translate(-50%, -50%);
+  visibility: visible !important;
   opacity: 1 !important;
+  display: block !important;
+  pointer-events: all !important;
 }
 
-/* Add opaque border to ensure visibility */
-.gm-style-iw.gm-style-iw-c {
-  border: 2px solid rgba(75, 85, 99, 0.8) !important;
-}
-
-/* Fix for text contrast */
-.facility-info-window p {
-  color: #ffffff !important;
+/* Fix for SVG marker icons */
+.gm-style .gmnoprint div[role="button"],
+.gm-style .gmnoprint svg {
+  visibility: visible !important;
   opacity: 1 !important;
+  display: block !important;
 }
 
-/* Fix for the info window arrow pointer */
-.gm-style div[style*="background-color: rgb("] {
-  background-color: #131a2a !important;
-}
-
-/* Force background color in all parent elements */
-.gm-style-iw-a,
-.gm-style-iw-t,
-.gm-style-iw,
-.gm-style-iw-c,
-.gm-style-iw-d {
-  background-color: #131a2a !important;
-}
-
-/* Force all popup content to be visible */
-.gm-style-iw-c > div,
-.gm-style-iw-d > div {
-  background-color: #131a2a !important;
-  color: white !important;
-}
-
-/* Fix shadow and border */
-.gm-style-iw.gm-style-iw-c {
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6) !important;
-  border: 2px solid rgba(91, 155, 213, 0.4) !important;
-}
-
-/* Fix the tip that points to the marker */
-.gm-style-iw-tc::after,
-.gm-style .gm-style-iw-t::after {
-  background-color: #131a2a !important;
-  box-shadow: none !important;
-}
-
-/* Override any transparency that might be set elsewhere */
-.gm-style > div,
-.gm-style-iw-a,
-.gm-style-iw,
-.gm-style-iw-c,
-.gm-style-iw-d {
-  background-color: #131a2a !important;
-}
-
-/* Remove any background-color: transparent that might be set */
-.gm-style-iw-c *,
-.gm-style-iw-d * {
-  background-color: #131a2a !important;
+/* Fix for marker position */
+.gm-style .map-marker {
+  transform: translate(-50%, -50%);
+  position: absolute !important;
 }
