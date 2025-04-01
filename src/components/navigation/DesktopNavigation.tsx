@@ -1,9 +1,8 @@
-
 import { Link, useLocation } from "react-router-dom";
 import { 
   Home, Calculator, CloudSun, Warehouse, ClipboardCheck,
   Brain, Lightbulb, Eye, Search,
-  Cog, Layers, Activity, Network,
+  Cog, Layers, Activity, Network, Droplet,
   Car, Truck, Tent, LayoutTemplate,
   HelpCircle, MessageCircleQuestion, LifeBuoy, Phone 
 } from "lucide-react";
@@ -74,17 +73,17 @@ const DesktopNavigation = () => {
     { 
       text: "Water Systems", 
       href: "/features/water-systems",
-      icon: <Layers size={16} className="text-[#0EA5E9]" />
-    },
-    { 
-      text: "Climate Control", 
-      href: "/features/climate-control",
-      icon: <Activity size={16} className="text-[#10B981]" />
+      icon: <Droplet size={16} className="text-[#0EA5E9]" />
     },
     { 
       text: "Entertainment", 
       href: "/features/entertainment",
       icon: <Network size={16} className="text-[#8B5CF6]" />
+    },
+    { 
+      text: "Climate Control", 
+      href: "/features/climate-control",
+      icon: <Activity size={16} className="text-[#10B981]" />
     }
   ];
 

@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { Zap, Settings, Music, Wifi } from 'lucide-react';
+import { Zap, Settings, Music, Wifi, Droplet } from 'lucide-react';
 
 interface CoreSystemsLinksProps {
   className?: string;
@@ -24,6 +24,10 @@ const CoreSystemsLinks: React.FC<CoreSystemsLinksProps> = ({ className }) => (
     <NavLink to="/features/internet-connectivity" className="text-gray-300 hover:text-blue-400 transition-colors flex items-center gap-2">
       <Wifi className="h-4 w-4 text-[#10B981]" />
       <span>Internet Connectivity</span>
+    </NavLink>
+    <NavLink to="/features/water-systems" className="text-gray-300 hover:text-blue-400 transition-colors flex items-center gap-2">
+      <Droplet className="h-4 w-4 text-[#5B9BD5]" />
+      <span>Water Systems</span>
     </NavLink>
   </div>
 );
