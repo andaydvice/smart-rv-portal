@@ -1,3 +1,4 @@
+
 import React from "react";
 import { RouteObject } from "react-router-dom";
 import ErrorDisplay from "../components/error/ErrorDisplay";
@@ -19,9 +20,9 @@ import NavigationSystem from "../pages/features/NavigationSystem";
 import SecuritySystem from "../pages/features/SecuritySystem";
 import AutomatedDriving from "../pages/features/AutomatedDriving";
 import SmartAutomation from "../pages/features/SmartAutomation";
-import Entertainment from "../pages/Entertainment";
+import Entertainment from "../pages/features/Entertainment";
 import WaterSystems from "../pages/features/WaterSystems";
-import Technology from "../Technology";
+import Technology from "../pages/Technology";
 import Contact from "../pages/Contact";
 import Blog from "../pages/Blog";
 import BlogPost from "../pages/BlogPost";
@@ -33,7 +34,7 @@ import VoiceControl from "../pages/VoiceControl";
 import Troubleshooting from "../pages/Troubleshooting";
 import RVWeather from "../pages/RVWeather";
 import StoragePreparationChecklist from "../pages/StoragePreparationChecklist";
-import StorageFacilities from "../StorageFacilities";
+import StorageFacilities from "../pages/StorageFacilities";
 import MapIconDemo from "../pages/MapIconDemo";
 import ScheduleDemo from "../pages/ScheduleDemo";
 import MapFacilityDemo from "../pages/MapFacilityDemo";
