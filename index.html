@@ -10,17 +10,18 @@
     <!-- Include emergency markers script for guaranteed marker visibility -->
     <script src="/emergencyMarkers.js"></script>
     <!-- Add Google Maps API with the key -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAGKkTg0DlZd7fCJlfkVNqkRkzPjeqKJ2o&libraries=places" async defer></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAGKkTg0DlZd7fCJlfkVNqkRkzPjeqKJ2o&libraries=places" async></script>
     <!-- Initial page path detection -->
     <script>
       window.initialPath = window.location.pathname;
       console.log('Initial page load path:', window.initialPath);
+      
+      // Disable problematic auto-refresh functionality
+      window.disableAutoRefresh = true;
     </script>
   </head>
   <body>
     <div id="root"></div>
-    <!-- Add Lovable script tag for new features -->
-    <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

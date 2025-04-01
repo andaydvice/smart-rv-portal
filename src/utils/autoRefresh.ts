@@ -4,14 +4,14 @@
  */
 
 // Define refresh intervals (in milliseconds)
-const REFRESH_CHECK_INTERVAL = 10000; // Increased from 5s to 10s to reduce frequency
-const DEBOUNCE_TIMEOUT = 3000; // Increased from 2s to 3s
+const REFRESH_CHECK_INTERVAL = 30000; // Increased to 30s to reduce frequency
+const DEBOUNCE_TIMEOUT = 5000; // Increased to 5s
 
 // Track state for the auto-refresh system
 let lastRefreshTimestamp = Date.now();
 let changeDetected = false;
 let refreshTimer: number | null = null;
-let isEnabled = false; 
+let isEnabled = false; // Disabled by default
 
 // Store a hash of the last content state to detect changes
 let lastContentHash = '';
@@ -30,7 +30,7 @@ const generateContentHash = (): string => {
   const domSnapshot = document.body.innerHTML.length;
   const resourceCount = document.querySelectorAll('script, link, img').length;
   const windowSize = `${window.innerWidth}x${window.innerHeight}`;
-  return `${domSnapshot}-${resourceCount}-${windowSize}-${Date.now()}`;
+  return `${domSnapshot}-${resourceCount}-${windowSize}`;
 };
 
 /**
@@ -56,8 +56,8 @@ const performRefresh = () => {
     // Update timestamp before refresh
     lastRefreshTimestamp = Date.now();
     
-    // Perform the refresh
-    window.location.reload();
+    // Perform the refresh - DISABLED to prevent constant reloading
+    // window.location.reload();
     
     // Reset change flag
     changeDetected = false;
@@ -68,36 +68,8 @@ const performRefresh = () => {
  * Start checking for changes at regular intervals
  */
 export const startAutoRefresh = () => {
-  // Clear any existing timer
-  if (refreshTimer) {
-    window.clearInterval(refreshTimer);
-  }
-  
-  // Take initial content snapshot
-  lastContentHash = generateContentHash();
-  console.log('Auto refresh: Monitoring for changes started');
-  
-  // Enable the system
-  isEnabled = true;
-  
-  // Set up interval to check for changes
-  refreshTimer = window.setInterval(() => {
-    // Prevent refreshing during initial page load
-    if (document.readyState !== 'complete') {
-      return;
-    }
-    
-    // Check for content changes
-    if (hasContentChanged()) {
-      console.log('Auto refresh: Changes detected');
-      changeDetected = true;
-      
-      // Refresh with a slight delay to allow batched changes
-      setTimeout(performRefresh, DEBOUNCE_TIMEOUT);
-    }
-  }, REFRESH_CHECK_INTERVAL);
-  
-  // Return control function
+  // Do nothing - auto refresh is disabled to prevent issues
+  console.log('Auto refresh: Monitoring for changes is disabled');
   return {
     stop: stopAutoRefresh,
     toggle: toggleAutoRefresh
@@ -125,7 +97,8 @@ export const toggleAutoRefresh = (): boolean => {
     stopAutoRefresh();
     return false;
   } else {
-    startAutoRefresh();
-    return true;
+    // Don't actually start it - just log
+    console.log('Auto refresh: Would start monitoring but it is disabled');
+    return false;
   }
 };
