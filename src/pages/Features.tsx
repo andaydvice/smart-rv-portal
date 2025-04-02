@@ -2,7 +2,7 @@
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import { Link } from "react-router-dom";
-import { Navigation, Shield, Battery, Tv } from "lucide-react";
+import { Navigation, Shield, Battery, Tv, Droplet } from "lucide-react";
 import Layout from "@/components/layout/Layout";
 
 const Features = () => {
@@ -47,6 +47,14 @@ const Features = () => {
                 <Tv className="h-8 w-8 text-purple-500 mb-4" />
                 <h2 className="text-2xl font-semibold text-purple-400 mb-4">Smart TV System</h2>
                 <p className="text-gray-300">Premium entertainment system with 4K display, streaming integration, and voice control for the ultimate viewing experience in your RV.</p>
+              </div>
+            </Link>
+
+            <Link to="/features/water-systems" className="block">
+              <div className="bg-gray-800/50 p-6 rounded-lg border border-gray-700 hover:border-blue-500 transition-colors">
+                <Droplet className="h-8 w-8 text-blue-500 mb-4" />
+                <h2 className="text-2xl font-semibold text-blue-400 mb-4">Water Systems</h2>
+                <p className="text-gray-300">Advanced water management with real-time monitoring, filtration, and conservation features for both fresh and waste water systems.</p>
               </div>
             </Link>
           </div>

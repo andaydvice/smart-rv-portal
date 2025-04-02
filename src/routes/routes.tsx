@@ -34,133 +34,176 @@ import StorageFacilities from "../pages/StorageFacilities";
 import MapIconDemo from "../pages/MapIconDemo";
 import ScheduleDemo from "../pages/ScheduleDemo";
 import MapFacilityDemo from "../pages/MapFacilityDemo";
+import WaterSystems from "../pages/features/WaterSystems";
+import ErrorPage from "../pages/ErrorPage";
 
 // Define routes
 export const routes: RouteObject[] = [
   {
     path: "/",
     element: <Index />,
+    errorElement: <ErrorPage />,
   },
   {
     path: "/models",
     element: <Models />,
+    errorElement: <ErrorPage />,
   },
   {
     path: "/models/compact",
     element: <CompactModel />,
+    errorElement: <ErrorPage />,
   },
   {
     path: "/models/luxury",
     element: <LuxuryModel />,
+    errorElement: <ErrorPage />,
   },
   {
     path: "/models/adventure",
     element: <AdventureModel />,
+    errorElement: <ErrorPage />,
   },
   {
     path: "/models/compare",
     element: <CompareModels />,
+    errorElement: <ErrorPage />,
   },
   {
     path: "/features",
     element: <Features />,
+    errorElement: <ErrorPage />,
   },
   {
     path: "/features/audio-system",
     element: <AudioSystem />,
+    errorElement: <ErrorPage />,
   },
   {
     path: "/features/smart-tv",
     element: <SmartTV />,
+    errorElement: <ErrorPage />,
   },
   {
     path: "/features/smart-kitchen",
     element: <SmartKitchen />,
+    errorElement: <ErrorPage />,
   },
   {
     path: "/features/power-management",
     element: <PowerManagement />,
+    errorElement: <ErrorPage />,
   },
   {
     path: "/features/internet-connectivity",
     element: <InternetConnectivity />,
+    errorElement: <ErrorPage />,
   },
   {
     path: "/features/navigation-system",
     element: <NavigationSystem />,
+    errorElement: <ErrorPage />,
   },
   {
     path: "/features/security-system",
     element: <SecuritySystem />,
+    errorElement: <ErrorPage />,
   },
   {
     path: "/features/automated-driving",
     element: <AutomatedDriving />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/features/water-systems",
+    element: <WaterSystems />,
+    errorElement: <ErrorPage />,
   },
   {
     path: "/technology",
     element: <Technology />,
+    errorElement: <ErrorPage />,
   },
   {
     path: "/contact",
     element: <Contact />,
+    errorElement: <ErrorPage />,
   },
   {
     path: "/blog",
     element: <Blog />,
+    errorElement: <ErrorPage />,
   },
   {
     path: "/blog/:slug",
     element: <BlogPost />,
+    errorElement: <ErrorPage />,
   },
   {
     path: "/documentation",
     element: <Documentation />,
+    errorElement: <ErrorPage />,
   },
   {
     path: "/documentation/complete",
     element: <CompleteDocumentation />,
+    errorElement: <ErrorPage />,
   },
   {
     path: "/auth",
     element: <Auth />,
+    errorElement: <ErrorPage />,
   },
   {
     path: "/calculators",
     element: <Calculators />,
+    errorElement: <ErrorPage />,
   },
   {
     path: "/voice-control",
     element: <VoiceControl />,
+    errorElement: <ErrorPage />,
   },
   {
     path: "/troubleshooting",
     element: <Troubleshooting />,
+    errorElement: <ErrorPage />,
   },
   {
     path: "/rv-weather",
     element: <RVWeather />,
+    errorElement: <ErrorPage />,
   },
   {
     path: "/storage-checklist",
     element: <StoragePreparationChecklist />,
+    errorElement: <ErrorPage />,
   },
   {
     path: "/storage-facilities",
     element: <StorageFacilities />,
+    errorElement: <ErrorPage />,
   },
   {
     path: "/map-icon-demo",
     element: <MapIconDemo />,
+    errorElement: <ErrorPage />,
   },
   {
     path: "/schedule-demo",
     element: <ScheduleDemo />,
+    errorElement: <ErrorPage />,
   },
   {
     path: "/facility-map-demo",
     element: <MapFacilityDemo />,
+    errorElement: <ErrorPage />,
   },
+  // Add a catch-all route for 404 pages
+  {
+    path: "*",
+    element: <ErrorPage />,
+  }
 ];
 
 // For backward compatibility
