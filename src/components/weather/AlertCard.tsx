@@ -1,6 +1,8 @@
+
 import React from 'react';
 import { AlertTriangle, AlertCircle, Info } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { Card } from '@/components/ui/card';
 
 interface AlertCardProps {
   severity: 'high' | 'medium' | 'low';
@@ -36,7 +38,7 @@ const AlertCard: React.FC<AlertCardProps> = ({ severity, title, description }) =
   };
 
   return (
-    <div className={cn('p-4 rounded-lg border', getSeverityStyles())}>
+    <Card className={cn('p-4 border', getSeverityStyles())}>
       <div className="flex items-start gap-3">
         {getIcon()}
         <div>
@@ -44,7 +46,7 @@ const AlertCard: React.FC<AlertCardProps> = ({ severity, title, description }) =
           <p className="text-sm opacity-90">{description}</p>
         </div>
       </div>
-    </div>
+    </Card>
   );
 };
 

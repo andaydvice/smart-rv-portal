@@ -1,3 +1,4 @@
+
 export const weatherConfig = {
   oneCallApiKey: '',
   baseUrl: 'https://api.openweathermap.org/data/3.0',
