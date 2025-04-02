@@ -18,7 +18,7 @@ const Features = () => {
         <div className="max-w-7xl mx-auto px-4 pt-24 pb-12">
           <h1 className="text-4xl font-bold text-white mb-8">Smart RV Features</h1>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <Link to="/features/navigation" className="block">
+            <Link to="/features/navigation-system" className="block">
               <div className="bg-gray-800/50 p-6 rounded-lg border border-gray-700 hover:border-blue-500 transition-colors">
                 <Navigation className="h-8 w-8 text-blue-500 mb-4" />
                 <h2 className="text-2xl font-semibold text-blue-400 mb-4">Navigation System</h2>
@@ -26,7 +26,7 @@ const Features = () => {
               </div>
             </Link>
 
-            <Link to="/features/security" className="block">
+            <Link to="/features/security-system" className="block">
               <div className="bg-gray-800/50 p-6 rounded-lg border border-gray-700 hover:border-emerald-500 transition-colors">
                 <Shield className="h-8 w-8 text-emerald-500 mb-4" />
                 <h2 className="text-2xl font-semibold text-emerald-400 mb-4">Security System</h2>
@@ -34,7 +34,7 @@ const Features = () => {
               </div>
             </Link>
 
-            <Link to="/features/power" className="block">
+            <Link to="/features/power-management" className="block">
               <div className="bg-gray-800/50 p-6 rounded-lg border border-gray-700 hover:border-yellow-500 transition-colors">
                 <Battery className="h-8 w-8 text-yellow-500 mb-4" />
                 <h2 className="text-2xl font-semibold text-yellow-400 mb-4">Power Management</h2>
