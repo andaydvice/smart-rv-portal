@@ -16,9 +16,11 @@ export function mountReactApp(): void {
   
   try {
     ReactDOM.createRoot(rootElement).render(
-      <React.StrictMode>
-        <App />
-      </React.StrictMode>
+      React.createElement(
+        React.StrictMode,
+        null,
+        React.createElement(App)
+      )
     );
     console.log('React application successfully mounted');
   } catch (error) {
