@@ -9,7 +9,7 @@ import { Car, Cpu, Battery, ShieldCheck, Wifi, Ruler, AreaChart, Zap } from "luc
 const models = [
   {
     name: "Luxury Class",
-    image: "/lovable-uploads/Luxury_RV_Living-min.jpg",
+    image: "/lovable-uploads/Luxury-Class-RVs-min.jpg",
     price: "$1,300,000+",
     description: "Our flagship model with unparalleled luxury features and premium finishes for discerning travelers.",
     specs: {
@@ -124,11 +124,13 @@ const CompareModels = () => {
           className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-black/50 flex flex-col items-center justify-center">
-          <h1 className="text-5xl font-bold mb-6">Compare Models</h1>
-          <p className="text-xl max-w-3xl text-center px-4">
-            Find the perfect smart RV that matches your lifestyle. Compare features and 
-            specifications across our range of models.
-          </p>
+          <div className="max-w-3xl w-full text-left px-4">
+            <h1 className="text-5xl font-bold mb-6">Compare Models</h1>
+            <p className="text-xl">
+              Find the perfect smart RV that matches your lifestyle. Compare features and 
+              specifications across our range of models.
+            </p>
+          </div>
         </div>
       </div>
 
@@ -136,7 +138,7 @@ const CompareModels = () => {
       <div className="container mx-auto px-4 py-16">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
           {models.map((model) => (
-            <div key={model.name} className="bg-[#131a2a] rounded-xl overflow-hidden border border-gray-800 hover:border-[#5B9BD5] transition-all duration-300">
+            <div key={model.name} className="bg-[#131a2a] rounded-xl overflow-hidden border border-gray-800 hover:border-[#5B9BD5] transition-all duration-300 text-left">
               <div className="h-48 relative">
                 <img src={model.image} alt={model.name} className="w-full h-full object-cover" />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#131a2a] to-transparent"></div>
@@ -146,18 +148,18 @@ const CompareModels = () => {
                 <p className="text-[#5B9BD5] font-semibold mb-4">{model.price}</p>
                 <p className="text-gray-300 mb-6">{model.description}</p>
                 <Link 
-                to={`/models/${model.name.split(' ')[0].toLowerCase()}`} 
-                className="block text-center py-2 px-4 bg-[#5B9BD5] hover:bg-[#4B8FE3] rounded-lg transition-colors"
-              >
-                View Details
-              </Link>
+                  to={`/models/${model.name.split(' ')[0].toLowerCase()}`} 
+                  className="block text-center py-2 px-4 bg-[#5B9BD5] hover:bg-[#4B8FE3] rounded-lg transition-colors"
+                >
+                  View Details
+                </Link>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
         </div>
 
         {/* Specifications comparison */}
-        <h2 className="text-3xl font-bold mb-8 text-center">Technical Specifications</h2>
+        <h2 className="text-3xl font-bold mb-8 text-left">Technical Specifications</h2>
         <div className="overflow-x-auto">
           <table className="w-full border-collapse mb-16">
             <thead>
@@ -184,7 +186,7 @@ const CompareModels = () => {
         </div>
 
         {/* Features comparison */}
-        <h2 className="text-3xl font-bold mb-8 text-center">Features Comparison</h2>
+        <h2 className="text-3xl font-bold mb-8 text-left">Features Comparison</h2>
         <div className="overflow-x-auto">
           <table className="w-full border-collapse mb-16">
             <thead>
@@ -220,9 +222,9 @@ const CompareModels = () => {
         </div>
 
         {/* Call to action */}
-        <div className="text-center py-10 px-4 bg-[#1E2A3E] rounded-xl">
+        <div className="text-left py-10 px-4 bg-[#1E2A3E] rounded-xl">
           <h2 className="text-3xl font-bold mb-4">Ready to Experience Smart RV Living?</h2>
-          <p className="text-gray-300 mb-8 max-w-2xl mx-auto">
+          <p className="text-gray-300 mb-8 max-w-2xl">
             Schedule a personalized demo to see our smart RV technology in action and find the perfect model for your needs.
           </p>
           <Link to="/schedule-demo" className="inline-block py-3 px-8 bg-[#5B9BD5] hover:bg-[#4B8FE3] rounded-lg text-lg font-medium transition-colors">

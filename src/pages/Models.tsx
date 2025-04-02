@@ -1,3 +1,4 @@
+
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
@@ -102,10 +103,10 @@ const Models = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="text-center mb-16"
+            className="text-left mb-16"
           >
             <h1 className="text-5xl font-bold text-white mb-6">Our Models</h1>
-            <p className="text-xl text-gray-300 max-w-2xl mx-auto">
+            <p className="text-xl text-gray-300 max-w-2xl">
               Discover our range of luxury smart RVs, each designed to provide the ultimate blend of comfort and innovation
             </p>
           </motion.div>
@@ -117,7 +118,7 @@ const Models = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 + 0.4 }}
-                className="bg-gray-800/50 rounded-2xl overflow-hidden border border-gray-700 group hover:border-blue-500/50 transition-all duration-300"
+                className="bg-gray-800/50 rounded-2xl overflow-hidden border border-gray-700 group hover:border-blue-500/50 transition-all duration-300 text-left"
               >
                 <div className="relative h-48 overflow-hidden">
                   <img
@@ -157,7 +158,7 @@ const Models = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.8 }}
-            className="text-center mt-16"
+            className="text-left mt-16"
           >
             <Link to="/models/compare">
               <Button 

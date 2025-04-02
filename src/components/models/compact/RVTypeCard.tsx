@@ -1,3 +1,4 @@
+
 import { motion } from "framer-motion";
 import { LucideIcon } from "lucide-react";
 
@@ -23,7 +24,7 @@ const RVTypeCard = ({ title, icon: Icon, size, features, pros, brands, image, in
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
-      className="bg-gray-800/50 backdrop-blur-sm rounded-lg p-8 hover:bg-gray-800/60 transition-colors"
+      className="bg-gray-800/50 backdrop-blur-sm rounded-lg p-8 hover:bg-gray-800/60 transition-colors text-left"
     >
       {image && (
         <div className="mb-8 rounded-lg overflow-hidden bg-gray-900">
@@ -47,7 +48,7 @@ const RVTypeCard = ({ title, icon: Icon, size, features, pros, brands, image, in
       <div className="grid md:grid-cols-2 gap-8">
         <div className="space-y-4">
           <div>
-            <h3 className="text-xl font-semibold text-blue-400 mb-2">Size</h3>
+            <h3 className="text-xl font-semibold text-blue-400 mb-2">{`Size`}</h3>
             <p className="text-gray-300">{size}</p>
           </div>
           <div>
@@ -68,7 +69,7 @@ const RVTypeCard = ({ title, icon: Icon, size, features, pros, brands, image, in
                 <h4 className="text-lg font-medium text-white mb-2">USA</h4>
                 <ul className="list-disc list-inside text-gray-300 space-y-1">
                   {brands.usa.map((brand, idx) => (
-                    <li key={idx}>{brand}</li>
+                    <li key={idx} className="pl-0">{brand}</li>
                   ))}
                 </ul>
               </div>
@@ -76,7 +77,7 @@ const RVTypeCard = ({ title, icon: Icon, size, features, pros, brands, image, in
                 <h4 className="text-lg font-medium text-white mb-2">Australia</h4>
                 <ul className="list-disc list-inside text-gray-300 space-y-1">
                   {brands.australia.map((brand, idx) => (
-                    <li key={idx}>{brand}</li>
+                    <li key={idx} className="pl-0">{brand}</li>
                   ))}
                 </ul>
               </div>
