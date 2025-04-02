@@ -1,4 +1,3 @@
-
 /**
  * Utility to fix navigation issues and blank screens
  */
@@ -31,6 +30,22 @@ export const fixBlankScreen = () => {
     
     // Check if there's already a loading indicator
     const hasLoader = document.querySelector('.animate-spin');
+    
+    // If loader exists for more than 10 seconds, we should hide it
+    if (hasLoader) {
+      console.log('Found a loader, checking if it has been visible for too long');
+      
+      // Add a timeout to hide the loader after 10 seconds
+      setTimeout(() => {
+        const stillHasLoader = document.querySelector('.animate-spin');
+        if (stillHasLoader) {
+          console.warn('Loader has been visible for more than 10 seconds, hiding it');
+          if (stillHasLoader.parentElement) {
+            stillHasLoader.parentElement.style.display = 'none';
+          }
+        }
+      }, 10000);
+    }
     
     // Check if root is empty and add emergency content
     if (rootElement.children.length === 0 && !hasLoader) {
@@ -81,27 +96,7 @@ export const fixBlankScreen = () => {
   } catch (e) {
     console.error('Error triggering events:', e);
   }
-
-  // Special fix for WaterSystems page
-  const isWaterSystemsPage = window.location.pathname.includes('water-systems');
-  if (isWaterSystemsPage) {
-    console.log('Detected Water Systems page, applying special fix');
-    // Use the global function if available
-    if (typeof window !== 'undefined' && window.forceRouteUpdate) {
-      window.forceRouteUpdate('water-systems');
-    }
-    
-    // Force all layout containers to be visible
-    document.querySelectorAll('.layout, [data-main-content="true"]').forEach(container => {
-      if (container instanceof HTMLElement) {
-        container.style.opacity = '1';
-        container.style.visibility = 'visible';
-        container.style.backgroundColor = '#080F1F';
-        container.style.display = 'block';
-      }
-    });
-  }
-};
+}
 
 /**
  * Ensures navigation doesn't result in blank screens

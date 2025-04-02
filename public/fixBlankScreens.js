@@ -1,4 +1,3 @@
-
 // Emergency script to fix blank screens
 (function() {
   console.log('Emergency blank screen fix script loaded');
@@ -11,11 +10,50 @@
   const lastRefresh = sessionStorage.getItem('lastEmergencyRefresh');
   const now = Date.now();
   
-  // If page has been stuck for more than 8 seconds, force reload
-  if (lastRefresh && (now - parseInt(lastRefresh, 10)) > 8000) {
+  // If page has been stuck for more than 15 seconds, force reload
+  if (lastRefresh && (now - parseInt(lastRefresh, 10)) > 15000) {
     console.warn('Page appears stuck, forcing reload');
     sessionStorage.removeItem('lastEmergencyRefresh');
     window.location.reload();
+  }
+
+  // Stop any existing loading screens that have been showing for too long
+  function stopStuckLoaders() {
+    const loadingScreens = document.querySelectorAll('.loading-indicator, [class*="loading-"], [class*="loader-"]');
+    loadingScreens.forEach(screen => {
+      // Add data attribute to track when loader was first seen
+      if (!screen.dataset.seenAt) {
+        screen.dataset.seenAt = Date.now().toString();
+      } else {
+        // Check if loader has been visible for more than 10 seconds
+        const seenAt = parseInt(screen.dataset.seenAt, 10);
+        if ((Date.now() - seenAt) > 10000 && screen instanceof HTMLElement) {
+          console.warn('Loader has been visible for more than 10 seconds, hiding it');
+          screen.style.display = 'none';
+        }
+      }
+    });
+
+    // Add reload button if loading for too long
+    if (document.querySelector('.animate-spin') && !document.querySelector('#emergency-reload-btn')) {
+      const loaderParent = document.querySelector('.animate-spin').parentElement;
+      if (loaderParent) {
+        const reloadBtn = document.createElement('button');
+        reloadBtn.id = 'emergency-reload-btn';
+        reloadBtn.innerText = 'Reload Page';
+        reloadBtn.style.cssText = `
+          margin-top: 1rem;
+          background-color: #5B9BD5;
+          color: white;
+          padding: 8px 16px;
+          border-radius: 4px;
+          border: none;
+          cursor: pointer;
+        `;
+        reloadBtn.onclick = () => window.location.reload();
+        loaderParent.appendChild(reloadBtn);
+      }
+    }
   }
   
   // Run on load
@@ -26,6 +64,9 @@
   
   // Run immediately
   fixBlankScreen();
+  
+  // Run periodically
+  setInterval(stopStuckLoaders, 5000);
   
   // Run periodically but less aggressively
   const checkInterval = setInterval(() => {
@@ -52,13 +93,6 @@
     
     // Immediately fix blank screen issues
     fixBlankScreen();
-    
-    // Special handling for water-systems page
-    if (route === 'water-systems') {
-      console.log('Applied special fixes for water-systems page');
-      document.body.style.backgroundColor = '#080F1F';
-      document.documentElement.style.backgroundColor = '#080F1F';
-    }
     
     // Fix containers
     const allLayoutContainers = document.querySelectorAll('.layout, [data-main-content="true"], main, .min-h-screen');
@@ -125,13 +159,39 @@
       
       // Only add visible content if React hasn't mounted anything yet
       // and we've tried multiple times
-      if ((!rootElement || rootElement.children.length === 0) && fixAttempts > 2) {
+      if ((!rootElement || rootElement.children.length === 0) && fixAttempts > 1) {
         console.warn('Root is empty after multiple attempts, adding emergency content');
         
         // Don't add emergency content if there's a loading spinner already
         const hasLoader = document.querySelector('.animate-spin');
         if (hasLoader) {
           console.log('Loading spinner detected, not adding emergency content');
+          // If loader has been visible for more than 10 seconds, add reload button
+          if (!document.querySelector('#emergency-reload-btn')) {
+            setTimeout(() => {
+              const stillHasLoader = document.querySelector('.animate-spin');
+              if (stillHasLoader) {
+                const reloadBtn = document.createElement('button');
+                reloadBtn.id = 'emergency-reload-btn';
+                reloadBtn.innerText = 'Reload Page';
+                reloadBtn.style.cssText = `
+                  position: fixed;
+                  bottom: 20px;
+                  left: 50%;
+                  transform: translateX(-50%);
+                  background-color: #5B9BD5;
+                  color: white;
+                  padding: 8px 16px;
+                  border-radius: 4px;
+                  border: none;
+                  z-index: 10000;
+                  cursor: pointer;
+                `;
+                reloadBtn.onclick = () => window.location.reload();
+                document.body.appendChild(reloadBtn);
+              }
+            }, 10000);
+          }
           return;
         }
         
@@ -183,4 +243,13 @@
   
   // Allow manual triggering of fix
   window.fixBlankScreen = fixBlankScreen;
+  
+  // Create a failsafe that will force-reload the page after 45 seconds if still loading
+  setTimeout(() => {
+    const loaders = document.querySelectorAll('.animate-spin, .loading-indicator, [class*="loading-"]');
+    if (loaders.length > 0) {
+      console.warn('Page still loading after 45 seconds, forcing reload');
+      window.location.reload();
+    }
+  }, 45000);
 })();

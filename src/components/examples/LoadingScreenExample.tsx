@@ -1,15 +1,16 @@
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import LoadingScreen from "@/components/ui/LoadingScreen";
 import { toast } from "sonner";
+import useLoading from "@/hooks/useLoading";
 
 /**
  * This component demonstrates how to use the LoadingScreen component
  * with a simulated data loading process
  */
 const LoadingScreenExample: React.FC = () => {
-  const [isLoading, setIsLoading] = useState(true);
-  const [data, setData] = useState<string[]>([]);
+  const { isLoading, startLoading, stopLoading, resetLoading } = useLoading(true);
+  const [data, setData] = React.useState<string[]>([]);
 
   useEffect(() => {
     // Simulate a data fetching process
@@ -28,31 +29,44 @@ const LoadingScreenExample: React.FC = () => {
         ]);
         
         // Turn off loading state
-        setIsLoading(false);
+        stopLoading();
         
         // Show success notification
         toast.success("Data loaded successfully");
       } catch (error) {
         console.error("Error fetching data:", error);
         toast.error("Failed to load data");
-        setIsLoading(false);
+        
+        // Even on error, we stop loading
+        stopLoading();
       }
     };
 
+    // Start fetching data
     fetchData();
+
+    // Emergency reset of loading state after 10 seconds
+    const safetyTimeout = setTimeout(() => {
+      if (isLoading) {
+        console.warn("Emergency loading reset triggered");
+        resetLoading();
+        toast.error("Loading timeout reached. Data may be incomplete.");
+      }
+    }, 10000);
 
     // Cleanup function
     return () => {
-      // Cancel any pending requests or timers here if needed
+      clearTimeout(safetyTimeout);
     };
-  }, []);
+  }, [stopLoading, resetLoading, isLoading]);
 
   return (
     <div className="min-h-screen bg-[#080F1F] p-8 text-white">
-      {/* Loading Screen */}
+      {/* Loading Screen with timeout */}
       <LoadingScreen 
         isLoading={isLoading} 
         message="Loading your dashboard..." 
+        timeout={10000}
       />
       
       {/* Content that appears after loading */}
@@ -79,8 +93,8 @@ const LoadingScreenExample: React.FC = () => {
         <div className="mt-8">
           <button 
             onClick={() => {
-              setIsLoading(true);
-              setTimeout(() => setIsLoading(false), 2500);
+              startLoading();
+              setTimeout(() => stopLoading(), 2500);
             }}
             className="rounded bg-connectivity-accent px-4 py-2 font-medium text-white transition-colors hover:bg-blue-600"
           >
