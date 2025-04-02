@@ -5,7 +5,18 @@
 
   // Track failed attempts to avoid infinite loops
   let fixAttempts = 0;
-  const MAX_FIX_ATTEMPTS = 3; // Reduced from 5 to be less aggressive
+  const MAX_FIX_ATTEMPTS = 3;
+  
+  // Set last refreshed timestamp to track if we need a force reload
+  const lastRefresh = sessionStorage.getItem('lastEmergencyRefresh');
+  const now = Date.now();
+  
+  // If page has been stuck for more than 8 seconds, force reload
+  if (lastRefresh && (now - parseInt(lastRefresh, 10)) > 8000) {
+    console.warn('Page appears stuck, forcing reload');
+    sessionStorage.removeItem('lastEmergencyRefresh');
+    window.location.reload();
+  }
   
   // Run on load
   window.addEventListener('load', fixBlankScreen);
@@ -26,7 +37,7 @@
     }
     
     fixBlankScreen();
-  }, 8000); // Increased from 5000ms to be less aggressive
+  }, 8000);
   
   // Run on visibility change
   document.addEventListener('visibilitychange', function() {
@@ -34,6 +45,32 @@
       fixBlankScreen();
     }
   });
+  
+  // Create a function to force page update for specific routes
+  window.forceRouteUpdate = function(route) {
+    console.log(`Forcing update for route: ${route}`);
+    const allLayoutContainers = document.querySelectorAll('.layout, [data-main-content="true"]');
+    allLayoutContainers.forEach(container => {
+      if (container instanceof HTMLElement) {
+        container.style.opacity = '1';
+        container.style.visibility = 'visible';
+        container.style.backgroundColor = '#080F1F';
+      }
+    });
+    
+    // Set refresh timestamp
+    sessionStorage.setItem('lastEmergencyRefresh', Date.now().toString());
+    
+    // Reset any loading indicators
+    const loadingIndicators = document.querySelectorAll('.loading-indicator');
+    loadingIndicators.forEach(indicator => {
+      if (indicator instanceof HTMLElement) {
+        indicator.style.display = 'none';
+      }
+    });
+    
+    return true;
+  };
   
   function fixBlankScreen() {
     console.log('Running blank screen check');

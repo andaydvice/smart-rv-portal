@@ -54,6 +54,24 @@ export const fixBlankScreen = () => {
     }
   }
   
+  // Special fix for WaterSystems page
+  const isWaterSystemsPage = window.location.pathname.includes('water-systems');
+  if (isWaterSystemsPage) {
+    console.log('Detected Water Systems page, applying special fix');
+    // Force refresh the route if we're on the water systems page
+    if (typeof window !== 'undefined' && window.forceRouteUpdate) {
+      window.forceRouteUpdate('water-systems');
+    }
+    
+    // Force all layout containers to be visible
+    document.querySelectorAll('.layout, [data-main-content="true"]').forEach(container => {
+      if (container instanceof HTMLElement) {
+        container.style.opacity = '1';
+        container.style.visibility = 'visible';
+      }
+    });
+  }
+  
   // Force all direct children of root to be visible
   if (rootElement) {
     Array.from(rootElement.children).forEach(child => {
@@ -104,6 +122,13 @@ export const setupNavigationFixes = () => {
     if (document.visibilityState === 'visible') {
       console.log('Page became visible, ensuring content is displayed');
       fixBlankScreen();
+      
+      // Special handling for Water Systems page
+      if (window.location.pathname.includes('water-systems')) {
+        if (typeof window !== 'undefined' && window.forceRouteUpdate) {
+          window.forceRouteUpdate('water-systems');
+        }
+      }
     }
   });
   
@@ -133,6 +158,13 @@ export const setupNavigationFixes = () => {
         console.error('Multiple consecutive blank screens detected, attempting fix');
         fixBlankScreen();
         
+        // Special handling for Water Systems page
+        if (window.location.pathname.includes('water-systems')) {
+          if (typeof window !== 'undefined' && window.forceRouteUpdate) {
+            window.forceRouteUpdate('water-systems');
+          }
+        }
+        
         // Only reload as absolute last resort after multiple failures
         if (consecutiveBlankScreens > 8) {
           console.error('Critical: Multiple fixes failed, reloading page');
@@ -142,7 +174,7 @@ export const setupNavigationFixes = () => {
     } else {
       consecutiveBlankScreens = 0;
     }
-  }, 4000); // Increased from 2000ms to be less aggressive
+  }, 4000);
   
   // Clean up interval on unmount
   window.addEventListener('beforeunload', () => {
