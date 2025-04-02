@@ -1,9 +1,7 @@
-
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { TypographyH1, TypographyP } from "@/components/ui/typography";
 
 const DocumentationHeader = () => {
   return (
@@ -33,12 +31,10 @@ const DocumentationHeader = () => {
       </div>
 
       <div className="text-center mb-12">
-        <TypographyH1 className="text-[1.75rem] font-medium text-[#60A5FA] mb-4">
-          System Documentation
-        </TypographyH1>
-        <TypographyP className="text-sm text-gray-300 max-w-2xl mx-auto">
+        <h1 className="text-[1.75rem] font-medium text-[#60A5FA] mb-4">System Documentation</h1>
+        <p className="text-sm text-gray-300 max-w-2xl mx-auto">
           Complete documentation and technical specifications for your Smart RV system
-        </TypographyP>
+        </p>
       </div>
 
       <div className="mt-24 text-center">

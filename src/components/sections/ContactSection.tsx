@@ -1,8 +1,6 @@
-
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { TypographyH2, TypographyP } from "@/components/ui/typography";
 
 export const ContactSection = () => (
   <section className="relative py-32 px-4 overflow-hidden">
@@ -26,12 +24,10 @@ export const ContactSection = () => (
         <span className="inline-block px-4 py-2 mb-6 text-sm font-medium bg-white/10 backdrop-blur-sm rounded-full text-white border border-white/20">
           Get Started
         </span>
-        <TypographyH2 className="text-5xl font-bold mb-6 text-white border-none pb-0">
-          Ready to Transform Your Journey?
-        </TypographyH2>
-        <TypographyP className="text-xl mb-12 text-gray-300 max-w-2xl mx-auto">
+        <h2 className="text-5xl font-bold mb-6 text-white">Ready to Transform Your Journey?</h2>
+        <p className="text-xl mb-12 text-gray-300 max-w-2xl mx-auto">
           Connect with our team to learn more about Smart RV technology and begin your luxury travel experience
-        </TypographyP>
+        </p>
         <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
           <Link to="/contact">
             <Button 

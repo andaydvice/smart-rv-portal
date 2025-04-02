@@ -1,52 +1,31 @@
 
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import { Calculator, Cloud, Archive, ClipboardCheck } from 'lucide-react';
 
 interface RVToolsLinksProps {
-  onClick?: () => void;
+  className?: string;
 }
 
-const RVToolsLinks = ({ onClick }: RVToolsLinksProps) => {
-  return (
-    <div className="flex flex-col space-y-2">
-      <NavLink 
-        to="/calculators" 
-        className={({ isActive }) => 
-          isActive ? "text-[#5B9BD5] font-medium" : "text-gray-300 hover:text-white transition-colors"
-        }
-        onClick={onClick}
-      >
-        RV Calculators
-      </NavLink>
-      <NavLink 
-        to="/rv-weather" 
-        className={({ isActive }) => 
-          isActive ? "text-[#5B9BD5] font-medium" : "text-gray-300 hover:text-white transition-colors"
-        }
-        onClick={onClick}
-      >
-        RV Weather
-      </NavLink>
-      <NavLink 
-        to="/storage-facilities" 
-        className={({ isActive }) => 
-          isActive ? "text-[#5B9BD5] font-medium" : "text-gray-300 hover:text-white transition-colors"
-        }
-        onClick={onClick}
-      >
-        Storage Facilities
-      </NavLink>
-      <NavLink 
-        to="/storage-preparation-checklist" 
-        className={({ isActive }) => 
-          isActive ? "text-[#5B9BD5] font-medium" : "text-gray-300 hover:text-white transition-colors"
-        }
-        onClick={onClick}
-      >
-        Storage Checklist
-      </NavLink>
-    </div>
-  );
-};
+const RVToolsLinks: React.FC<RVToolsLinksProps> = ({ className }) => (
+  <div className={`grid gap-3 ${className || ''}`}>
+    <NavLink to="/calculators" className="text-gray-300 hover:text-blue-400 transition-colors flex items-center gap-2">
+      <Calculator className="h-4 w-4 text-[#F59E0B]" />
+      <span>RV Calculators</span>
+    </NavLink>
+    <NavLink to="/rv-weather" className="text-gray-300 hover:text-blue-400 transition-colors flex items-center gap-2">
+      <Cloud className="h-4 w-4 text-[#0EA5E9]" />
+      <span>RV Weather</span>
+    </NavLink>
+    <NavLink to="/storage-facilities" className="text-gray-300 hover:text-blue-400 transition-colors flex items-center gap-2">
+      <Archive className="h-4 w-4 text-[#8B5CF6]" />
+      <span>Storage Facilities</span>
+    </NavLink>
+    <NavLink to="/storage-preparation-checklist" className="text-gray-300 hover:text-blue-400 transition-colors flex items-center gap-2">
+      <ClipboardCheck className="h-4 w-4 text-[#D946EF]" />
+      <span>Storage Checklist</span>
+    </NavLink>
+  </div>
+);
 
 export default RVToolsLinks;

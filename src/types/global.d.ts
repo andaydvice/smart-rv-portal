@@ -8,7 +8,6 @@ declare global {
     isStorageFacilitiesPage?: boolean;
     mapInstance?: mapboxgl.Map;
     mapFacilities?: StorageFacility[];
-    forceRouteUpdate?: (route: string) => boolean;
   }
 }
 

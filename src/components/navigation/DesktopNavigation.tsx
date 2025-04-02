@@ -3,7 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { 
   Home, Calculator, CloudSun, Warehouse, ClipboardCheck,
   Brain, Lightbulb, Eye, Search,
-  Cog, Layers, Activity, Network, Droplet,
+  Cog, Layers, Activity, Network,
   Car, Truck, Tent, LayoutTemplate,
   HelpCircle, MessageCircleQuestion, LifeBuoy, Phone 
 } from "lucide-react";
@@ -74,40 +74,40 @@ const DesktopNavigation = () => {
     { 
       text: "Water Systems", 
       href: "/features/water-systems",
-      icon: <Droplet size={16} className="text-[#0EA5E9]" />
-    },
-    { 
-      text: "Entertainment", 
-      href: "/features/entertainment",
-      icon: <Network size={16} className="text-[#8B5CF6]" />
+      icon: <Layers size={16} className="text-[#0EA5E9]" />
     },
     { 
       text: "Climate Control", 
       href: "/features/climate-control",
       icon: <Activity size={16} className="text-[#10B981]" />
+    },
+    { 
+      text: "Entertainment", 
+      href: "/features/entertainment",
+      icon: <Network size={16} className="text-[#8B5CF6]" />
     }
   ];
 
-  // Define Models links with icons - Update paths to be consistent
+  // Define Models links with icons
   const modelsLinks = [
     { 
       text: "Luxury Models", 
-      href: "/models/luxury",
+      href: "/models/luxury-model",
       icon: <Car size={16} className="text-[#F59E0B]" />
     },
     { 
       text: "Compact Models", 
-      href: "/models/compact",
+      href: "/models/compact-model",
       icon: <Truck size={16} className="text-[#3B82F6]" />
     },
     { 
       text: "Adventure Models", 
-      href: "/models/adventure",
+      href: "/models/adventure-model",
       icon: <Tent size={16} className="text-[#10B981]" />
     },
     { 
       text: "Compare Models", 
-      href: "/models/compare",
+      href: "/models/compare-models",
       icon: <LayoutTemplate size={16} className="text-[#D946EF]" />
     }
   ];

@@ -1,8 +1,6 @@
-
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
-import { TypographyH1, TypographyP } from "@/components/ui/typography";
 
 const HeroSection = () => {
   return (
@@ -16,12 +14,10 @@ const HeroSection = () => {
       />
       <div className="absolute inset-0 bg-black/40" />
       <div className="absolute inset-0 flex flex-col justify-center items-center text-center px-4">
-        <TypographyH1 className="text-5xl md:text-6xl font-bold mb-6 text-white">
-          Compact RVs Guide
-        </TypographyH1>
-        <TypographyP className="text-xl md:text-2xl text-gray-200 max-w-2xl">
+        <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">Compact RVs Guide</h1>
+        <p className="text-xl md:text-2xl text-gray-200 max-w-2xl">
           Discover the perfect compact RV for your adventures
-        </TypographyP>
+        </p>
       </div>
       <div className="absolute top-8 left-0 w-full px-4">
         <div className="container mx-auto">

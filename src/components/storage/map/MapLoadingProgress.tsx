@@ -19,7 +19,7 @@ const MapLoadingProgress: React.FC<MapLoadingProgressProps> = ({
   infiniteLoading = false,
   forceComplete = false
 }) => {
-  const [displayPercent, setDisplayPercent] = useState(10); // Start at 10% 
+  const [displayPercent, setDisplayPercent] = useState(0);
   
   // Ensure progress always reaches 100%
   useEffect(() => {
@@ -27,7 +27,7 @@ const MapLoadingProgress: React.FC<MapLoadingProgressProps> = ({
     if (forceComplete && percentLoaded >= 95) {
       const timeout = setTimeout(() => {
         setDisplayPercent(100);
-      }, 200);
+      }, 300);
       
       return () => clearTimeout(timeout);
     }
@@ -44,16 +44,16 @@ const MapLoadingProgress: React.FC<MapLoadingProgressProps> = ({
     if (displayPercent < 95) {
       timeout = setTimeout(() => {
         // Gradually slow down as we approach 95%
-        const increment = displayPercent < 50 ? 5 : 
-                         displayPercent < 75 ? 3 : 
-                         displayPercent < 90 ? 2 : 1;
+        const increment = displayPercent < 50 ? 3 : 
+                         displayPercent < 75 ? 2 : 
+                         displayPercent < 90 ? 1 : 0.5;
         setDisplayPercent(prev => Math.min(95, prev + increment));
-      }, 50); // Reduced from 80ms to 50ms for faster animation
+      }, 80); // Reduced from 100ms to 80ms for faster animation
     } else if (percentLoaded >= 100 || forceComplete) {
       // When signaled to complete, jump to 100%
       timeout = setTimeout(() => {
         setDisplayPercent(100);
-      }, 80); // Reduced from 100ms to 80ms for faster completion
+      }, 100); // Reduced from 200ms to 100ms for faster completion
     }
     
     return () => {
@@ -68,7 +68,7 @@ const MapLoadingProgress: React.FC<MapLoadingProgressProps> = ({
   
   return (
     <div className={cn(
-      "absolute inset-0 flex flex-col items-center justify-center bg-[#080F1F]/90 z-50 animate-fade-in",
+      "absolute inset-0 flex flex-col items-center justify-center bg-[#080F1F]/80 z-50 animate-fade-in",
       displayPercent >= 100 ? "animate-fade-out" : "",
       className
     )}>

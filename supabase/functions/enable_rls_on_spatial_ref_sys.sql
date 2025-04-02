@@ -13,7 +13,7 @@ FROM
 -- Grant SELECT permission on the view to public (both authenticated and anonymous users)
 GRANT SELECT ON public.secure_spatial_ref_sys TO authenticated, anon;
 
--- Enable Row Level Security on the view with SECURITY INVOKER to respect querying user's permissions
+-- Enable Row Level Security on the view
 ALTER VIEW public.secure_spatial_ref_sys SECURITY INVOKER;
 
 COMMENT ON VIEW public.secure_spatial_ref_sys IS 
