@@ -1,145 +1,52 @@
 
-/* CRITICAL FIXES FOR MAP AND MARKER VISIBILITY */
-
-/* Ensure map canvas is always visible */
-.mapboxgl-canvas {
+/* Critical visibility fixes for all pages */
+html, body {
+  background-color: #080F1F !important;
+  min-height: 100vh;
+  color: white;
   visibility: visible !important;
-  display: block !important;
   opacity: 1 !important;
-  height: 100% !important;
-  width: 100% !important;
 }
 
-/* Force popup visibility and proper styling */
-.mapboxgl-popup {
-  z-index: 10000 !important;
-  visibility: visible !important;
+#root {
   display: block !important;
+  visibility: visible !important;
   opacity: 1 !important;
-  pointer-events: auto !important;
+  min-height: 100vh;
+  background-color: #080F1F;
 }
 
-.mapboxgl-popup-content {
-  background-color: #151A22 !important;
-  color: white !important;
-  border-radius: 8px !important;
-  padding: 15px !important;
-  border: 1px solid rgb(55 65 81) !important;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3) !important;
-  max-width: 300px !important;
-  min-width: 220px !important;
-  width: auto !important;
-  overflow: visible !important;
+.page-content,
+[data-main-content="true"],
+main, 
+.min-h-screen, 
+.layout-container {
   visibility: visible !important;
-}
-
-/* Fix popup close button */
-.mapboxgl-popup-close-button {
-  color: white !important;
-  font-size: 18px !important;
-  padding: 5px 8px !important;
-  right: 5px !important;
-  top: 5px !important;
-  background: none !important;
-  border: none !important;
-  cursor: pointer !important;
-  pointer-events: all !important;
-  z-index: 10001 !important;
-}
-
-/* Force marker visibility */
-.mapboxgl-marker,
-.custom-marker,
-.emergency-marker {
-  visibility: visible !important;
+  opacity: 1 !important;
   display: block !important;
-  opacity: 1 !important;
-  pointer-events: auto !important;
-  position: absolute !important;
-  z-index: 9999 !important;
-  
-  /* Force marker appearance */
-  width: 24px !important;
-  height: 24px !important;
-  border-radius: 50% !important;
-  background-color: #F97316 !important;
-  border: 2px solid white !important;
-  box-shadow: 0 0 10px rgba(0,0,0,0.5) !important;
-  cursor: pointer !important;
-  transform: translate(-50%, -50%) !important;
+  background-color: #080F1F;
 }
 
-/* Prevent hidden elements from affecting layout */
-.mapboxgl-map,
-.mapboxgl-canvas-container {
-  contain: layout paint style !important;
-  min-height: 600px !important;
-  overflow: visible !important;
-}
-
-/* Hide unwanted elements */
-.view-facility-btn,
-button.view-details,
-.fixed-orange-marker:not(.custom-marker):not(.mapboxgl-marker):not(.emergency-marker):not(.hero-marker) {
-  display: none !important;
-  visibility: hidden !important;
-  opacity: 0 !important;
-  pointer-events: none !important;
-}
-
-/* Fix highlighted (green) marker appearance */
-.mapboxgl-marker[data-highlighted="true"],
-.custom-marker[data-highlighted="true"],
-.emergency-marker[data-highlighted="true"] {
-  background-color: #10B981 !important;
-  box-shadow: 0 0 15px rgba(16, 185, 129, 0.8) !important;
-  transform: translate(-50%, -50%) scale(1.3) !important;
-  width: 28px !important;
-  height: 28px !important;
-  z-index: 10002 !important;
-  border: 2px solid white !important;
-}
-
-/* Prevent popup position issues */
-.mapboxgl-popup-anchor-top .mapboxgl-popup-tip,
-.mapboxgl-popup-anchor-top-left .mapboxgl-popup-tip,
-.mapboxgl-popup-anchor-top-right .mapboxgl-popup-tip {
-  border-bottom-color: #151A22 !important;
-}
-
-.mapboxgl-popup-anchor-bottom .mapboxgl-popup-tip,
-.mapboxgl-popup-anchor-bottom-left .mapboxgl-popup-tip,
-.mapboxgl-popup-anchor-bottom-right .mapboxgl-popup-tip {
-  border-top-color: #151A22 !important;
-}
-
-.mapboxgl-popup-anchor-left .mapboxgl-popup-tip {
-  border-right-color: #151A22 !important;
-}
-
-.mapboxgl-popup-anchor-right .mapboxgl-popup-tip {
-  border-left-color: #151A22 !important;
-}
-
-/* Force padding on map to prevent marker clipping */
-.mapboxgl-map {
-  padding: 30px !important;
-}
-
-/* Fix for markers being cut off */
-.h-\[600px\] {
-  min-height: 600px !important;
-  height: 600px !important;
-  overflow: visible !important;
-  position: relative !important;
-}
-
-/* Make all elements visible on hover, even if JavaScript fails */
-.mapboxgl-marker:hover,
-.custom-marker:hover,
-.emergency-marker:hover {
+/* Force all model pages to be visible */
+[id*="adventure"],
+[id*="luxury"],
+[id*="compact"],
+[class*="model-page"] {
   visibility: visible !important;
-  display: block !important;
   opacity: 1 !important;
-  z-index: 10000 !important;
+  display: block !important;
+  background-color: #080F1F;
+}
+
+/* Emergency recovery styles */
+.emergency-recovery-active {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  background-color: rgba(91, 155, 213, 0.9);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-size: 12px;
+  z-index: 9999;
 }

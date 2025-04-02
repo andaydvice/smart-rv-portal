@@ -65,34 +65,9 @@ function AppContent() {
       console.warn('Routes may not be properly configured');
     }
     
-    // Store map instance globally for emergency access
-    document.addEventListener('mapboxgl.map.created', (e: any) => {
-      (window as any).mapInstance = e.detail.map;
-    });
-    
-    // Create custom event dispatch system for map
-    (window as any).dispatchMapEvent = (eventName: string, detail: any) => {
-      document.dispatchEvent(new CustomEvent(eventName, { detail }));
-    };
-    
-    // Force-fix blank screen if it persists for 3 seconds
-    const blankScreenTimeout = setTimeout(() => {
-      const rootElement = document.getElementById('root');
-      if (rootElement && (rootElement.children.length === 0 || rootElement.style.opacity === '0')) {
-        console.warn('Detected potential blank screen after 3s, applying emergency fix');
-        document.body.style.visibility = 'visible';
-        document.body.style.display = 'block';
-        document.body.style.backgroundColor = '#080F1F';
-        rootElement.style.visibility = 'visible';
-        rootElement.style.display = 'block';
-        rootElement.style.backgroundColor = '#080F1F';
-      }
-    }, 3000);
-    
     return () => {
       window.removeEventListener('popstate', handleRouteChange);
       window.removeEventListener('lovable-navigation', handleRouteChange);
-      clearTimeout(blankScreenTimeout);
     };
   }, []);
 

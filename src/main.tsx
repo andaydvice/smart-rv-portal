@@ -8,8 +8,11 @@ import './styles/emergency-marker-fix.css'
 import './styles/map-optimizations.css'
 import './styles/navigation-fix.css'
 import './styles/pages/storage-checklist.css'
+import './styles/emergency-recovery.css'
+import './styles/force-markers.css'
 
 import { initializeApplication } from './utils/initialization/appInitializer';
 
 // Initialize the application
+console.log('Application initializing...');
 initializeApplication();

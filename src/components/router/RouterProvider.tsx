@@ -18,7 +18,14 @@ const ScheduleDemo = lazy(() => import('@/pages/ScheduleDemo'));
 const WaterSystems = lazy(() => import('@/pages/features/WaterSystems'));
 const PreviewDebugDemo = lazy(() => import('@/components/debug/PreviewDebugDemo'));
 
-// Simple loading component - no spinner
+// Import model pages with explicit imports to ensure they load
+const Models = lazy(() => import('@/pages/Models'));
+const CompactModel = lazy(() => import('@/pages/models/CompactModel'));
+const LuxuryModel = lazy(() => import('@/pages/models/LuxuryModel'));
+const AdventureModel = lazy(() => import('@/pages/models/AdventureModel'));
+const CompareModels = lazy(() => import('@/pages/models/CompareModels'));
+
+// Simple loading component without spinner
 const PageLoading = () => {
   return (
     <div className="flex items-center justify-center h-screen bg-[#080F1F] text-white">
@@ -38,6 +45,10 @@ const LocationTracker = () => {
     
     // Apply fixes for blank screens after route changes
     fixBlankScreen();
+    
+    // Force background color on every route change
+    document.body.style.backgroundColor = '#080F1F';
+    document.documentElement.style.backgroundColor = '#080F1F';
     
   }, [location]);
   
@@ -92,6 +103,14 @@ const RouterProvider: React.FC = () => {
           <Route path="/schedule-demo" element={<ScheduleDemo />} />
           <Route path="/features/water-systems" element={<WaterSystems />} />
           <Route path="/debug" element={<PreviewDebugDemo />} />
+          
+          {/* Models routes - explicitly defined */}
+          <Route path="/models" element={<Models />} />
+          <Route path="/models/compact" element={<CompactModel />} />
+          <Route path="/models/luxury" element={<LuxuryModel />} />
+          <Route path="/models/adventure" element={<AdventureModel />} />
+          <Route path="/models/compare" element={<CompareModels />} />
+          <Route path="/compare-models" element={<CompareModels />} />
           
           {/* Redirect all 404s to home page */}
           <Route path="*" element={<Navigate to="/" replace />} />
