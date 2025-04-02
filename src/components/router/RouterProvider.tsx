@@ -1,5 +1,5 @@
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { Suspense, lazy } from 'react';
 import { initNavigationDebugging } from '@/utils/diagnostics/navigationDebug';
@@ -19,34 +19,17 @@ const ScheduleDemo = lazy(() => import('@/pages/ScheduleDemo'));
 const WaterSystems = lazy(() => import('@/pages/features/WaterSystems'));
 const PreviewDebugDemo = lazy(() => import('@/components/debug/PreviewDebugDemo'));
 
-// Loading component with visibility enforcement and timeout
+// Simple loading component
 const PageLoading = () => {
-  const [isLongLoad, setIsLongLoad] = useState(false);
-
-  // Force document background color in loading state
-  useEffect(() => {
-    document.body.style.backgroundColor = '#080F1F';
-    document.documentElement.style.backgroundColor = '#080F1F';
-    
-    // Check if loading is taking too long
-    const timeoutId = setTimeout(() => {
-      setIsLongLoad(true);
-    }, 3000);
-    
-    return () => clearTimeout(timeoutId);
-  }, []);
-
   return (
     <CustomLoader 
       message="Loading page..." 
       isFullScreen={true}
-      showRefreshButton={isLongLoad}
-      onRefresh={() => window.location.reload()}
     />
   );
 };
 
-// This component will track and fix location changes
+// This component will track location changes
 const LocationTracker = () => {
   const location = useLocation();
   
@@ -54,9 +37,7 @@ const LocationTracker = () => {
     console.log('Route changed to:', location.pathname);
     
     // Apply fixes for blank screens after route changes
-    setTimeout(() => {
-      fixBlankScreen();
-    }, 100);
+    fixBlankScreen();
     
   }, [location]);
   
@@ -64,9 +45,6 @@ const LocationTracker = () => {
 };
 
 const RouterProvider: React.FC = () => {
-  const [isNavigating, setIsNavigating] = useState(false);
-  const [isInitialLoad, setIsInitialLoad] = useState(true);
-
   useEffect(() => {
     // Initialize navigation debugging
     initNavigationDebugging();
@@ -81,28 +59,6 @@ const RouterProvider: React.FC = () => {
     // Add class to body for styling during navigation
     document.body.classList.add('navigation-enabled');
     
-    // Listen for navigation events
-    const handleNavigation = () => {
-      console.log('Navigation detected');
-      setIsNavigating(true);
-      
-      // Reset navigation state after animation completes
-      setTimeout(() => {
-        setIsNavigating(false);
-        
-        // Fix blank screen after navigation
-        fixBlankScreen();
-      }, 300); // Reduced from 500ms for faster transitions
-    };
-    
-    window.addEventListener('popstate', handleNavigation);
-    window.addEventListener('lovable-navigation', handleNavigation);
-    document.addEventListener('recovery-attempted', () => {
-      // If recovery was attempted, we should restart the router
-      console.log('Recovery attempted, forcing router refresh');
-      setIsNavigating(prev => !prev); // Toggle to force re-render
-    });
-    
     // Apply emergency styles immediately
     const rootElement = document.getElementById('root');
     if (rootElement) {
@@ -112,30 +68,15 @@ const RouterProvider: React.FC = () => {
     }
     
     // Attempt to fix blank screen on initial load
-    setTimeout(() => {
-      fixBlankScreen();
-      setIsInitialLoad(false); // Mark initial load as complete
-    }, 800); // Increased to ensure enough time for initial render
+    fixBlankScreen();
     
     return () => {
       document.body.classList.remove('navigation-enabled');
-      window.removeEventListener('popstate', handleNavigation);
-      window.removeEventListener('lovable-navigation', handleNavigation);
-      document.removeEventListener('recovery-attempted', handleNavigation);
     };
   }, []);
 
   return (
     <Router>
-      {/* Navigation overlay that appears during page transitions */}
-      {isNavigating && (
-        <CustomLoader
-          message="Navigating..."
-          isFullScreen={true}
-          className="fixed inset-0 z-50"
-        />
-      )}
-      
       <LocationTracker />
       
       <Suspense fallback={<PageLoading />}>

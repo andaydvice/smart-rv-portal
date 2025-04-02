@@ -26,8 +26,7 @@ export const useLoading = (initialState: boolean = false): UseLoadingReturn => {
     async <T>(promise: Promise<T>): Promise<T> => {
       try {
         startLoading();
-        const result = await promise;
-        return result;
+        return await promise;
       } finally {
         stopLoading();
       }

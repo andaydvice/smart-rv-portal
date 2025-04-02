@@ -7,8 +7,6 @@ interface CustomLoaderProps {
   message?: string;
   isFullScreen?: boolean;
   className?: string;
-  showRefreshButton?: boolean;
-  onRefresh?: () => void;
   size?: 'sm' | 'md' | 'lg';
 }
 
@@ -19,8 +17,6 @@ const CustomLoader: React.FC<CustomLoaderProps> = ({
   message = "Loading...",
   isFullScreen = false,
   className,
-  showRefreshButton = false,
-  onRefresh = () => window.location.reload(),
   size = 'md'
 }) => {
   // Spinner sizes
@@ -59,15 +55,6 @@ const CustomLoader: React.FC<CustomLoaderProps> = ({
       
       <div className="mt-4 text-center">
         <p className="text-lg font-medium">{message}</p>
-        
-        {showRefreshButton && (
-          <button
-            onClick={onRefresh}
-            className="mt-4 rounded bg-connectivity-accent px-4 py-2 font-medium text-white transition-colors hover:bg-blue-600"
-          >
-            Reload Page
-          </button>
-        )}
       </div>
     </div>
   );

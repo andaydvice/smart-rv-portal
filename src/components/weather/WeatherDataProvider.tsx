@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 import { Location, WeatherData } from '@/types/weather';
 import { fetchWeatherData } from '@/utils/weatherAPI';
