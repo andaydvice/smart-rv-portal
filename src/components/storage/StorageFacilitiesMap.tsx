@@ -14,15 +14,15 @@ interface StorageFacilitiesMapProps {
 }
 
 const StorageFacilitiesMap: React.FC<StorageFacilitiesMapProps> = ({
-  facilities,
+  facilities = [], // Provide default empty array to prevent undefined
   isLoading,
   error
 }) => {
   const [mapLoaded, setMapLoaded] = useState(false);
   const [mapError, setMapError] = useState<string | null>(error);
   
-  // Convert StorageFacility objects to MapFacility objects
-  const mapFacilities: MapFacility[] = facilities.map(convertToMapFacility);
+  // Only convert facilities to MapFacility objects if facilities array exists
+  const mapFacilities: MapFacility[] = facilities ? facilities.map(convertToMapFacility) : [];
   
   // Update error state when prop changes
   useEffect(() => {
@@ -41,6 +41,11 @@ const StorageFacilitiesMap: React.FC<StorageFacilitiesMapProps> = ({
     setMapError(error);
   };
 
+  // Log facilities state for debugging
+  useEffect(() => {
+    console.log(`StorageFacilitiesMap rendering with ${facilities?.length || 0} facilities`);
+  }, [facilities]);
+
   return (
     <div className="relative h-full w-full bg-[#080F1F]">
       {/* Always render the loading state component but it will self-hide when not needed */}
@@ -48,11 +53,11 @@ const StorageFacilitiesMap: React.FC<StorageFacilitiesMapProps> = ({
         isInitializing={isLoading || !mapLoaded} 
         mapError={mapError}
         mapLoaded={mapLoaded}
-        facilitiesCount={facilities.length}
+        facilitiesCount={facilities?.length || 0}
       />
       
       {/* Error message when no facilities */}
-      {!isLoading && mapLoaded && facilities.length === 0 && !mapError && (
+      {!isLoading && mapLoaded && facilities?.length === 0 && !mapError && (
         <div className="absolute inset-0 flex items-center justify-center bg-[#080F1F]/80 z-40">
           <Alert variant="default" className="max-w-md bg-[#151A22] border-[#1E2A3E] text-white">
             <AlertCircle className="h-4 w-4 text-[#5B9BD5]" />

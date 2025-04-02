@@ -27,7 +27,7 @@ const StorageFacilities = () => {
   const [recentlyViewed, setRecentlyViewed] = useState<StorageFacility[]>([]);
   
   // Get facilities based on filters
-  const { facilities, isLoading, error } = useStorageFacilities(filters);
+  const { facilities = [], isLoading, error } = useStorageFacilities(filters);
   
   useEffect(() => {
     // Document title
@@ -38,10 +38,11 @@ const StorageFacilities = () => {
     
     // Add visibility debug message
     console.log('StorageFacilities component mounted, visible:', document.body.style.backgroundColor);
+    console.log(`Facilities loaded: ${facilities?.length || 0}`);
     
     // Scroll to top
     window.scrollTo(0, 0);
-  }, []);
+  }, [facilities?.length]);
   
   // Handle filter changes
   const handleFilterChange = (newFilters: FilterState) => {
@@ -51,7 +52,7 @@ const StorageFacilities = () => {
   // Handle facility click
   const handleFacilityClick = (facilityId: string) => {
     // Find the facility in the current list
-    const facility = facilities.find(f => f.id === facilityId);
+    const facility = facilities?.find(f => f.id === facilityId);
     
     if (facility) {
       // Add to recently viewed if not already there
@@ -80,7 +81,11 @@ const StorageFacilities = () => {
             
             {/* Map area */}
             <div className="rounded-lg overflow-hidden bg-[#151A22] border border-[#1E2A3E] shadow-lg h-[500px] md:h-[600px] lg:h-[700px]">
-              <StorageFacilitiesMap facilities={facilities} isLoading={isLoading} error={error?.message || null} />
+              <StorageFacilitiesMap 
+                facilities={facilities || []} 
+                isLoading={isLoading} 
+                error={error?.message || null} 
+              />
             </div>
             
             {/* Recently viewed */}
