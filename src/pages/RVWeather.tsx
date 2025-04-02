@@ -1,28 +1,20 @@
 
 import React, { useState, useEffect } from "react";
-import { AlertTriangle, LogIn } from "lucide-react";
 import { APIKeyInput } from "@/components/weather/APIKeyInput";
 import AlertCard from "@/components/weather/AlertCard";
 import SafetyInsights from "@/components/weather/SafetyInsights";
 import WeatherHeader from "@/components/weather/WeatherHeader";
 import LocationSearch from "@/components/weather/LocationSearch";
 import TripImpact from "@/components/weather/TripImpact";
-import { Alert, AlertDescription } from "@/components/ui/alert";
 import HeaderImage from "@/components/weather/HeaderImage";
 import WeatherDataProvider from "@/components/weather/WeatherDataProvider";
 import WeatherCardsSection from "@/components/weather/WeatherCardsSection";
 import { Location } from "@/types/weather";
 import { weatherConfig } from "@/utils/weatherAPI";
-import { useAuth } from "@/components/auth/AuthContext";
-import { Button } from "@/components/ui/button";
-import { useNavigate } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
 import { scrollToTop } from "@/utils/scrollToTop";
 
 const RVWeather = () => {
-  const { user } = useAuth();
-  const navigate = useNavigate();
-
   // Scroll to top on component mount
   useEffect(() => {
     console.log("RVWeather page - Scrolling to top");
@@ -60,35 +52,8 @@ const RVWeather = () => {
           />
 
           <WeatherDataProvider currentLocation={currentLocation}>
-            {({ weatherData, isLoading, error, isActivationError }) => (
+            {({ weatherData, isLoading, error }) => (
               <>
-                {!user && (
-                  <Alert className="mb-8 bg-blue-500/10 border-blue-500/50">
-                    <LogIn className="h-4 w-4 text-blue-500" />
-                    <AlertDescription className="text-blue-400 flex items-center justify-between">
-                      <span>Sign up for free to get personalized weather alerts and save your favorite locations.</span>
-                      <Button 
-                        variant="outline"
-                        onClick={() => navigate('/auth')}
-                        className="ml-4 bg-blue-600 text-white hover:bg-blue-700"
-                      >
-                        Sign Up
-                      </Button>
-                    </AlertDescription>
-                  </Alert>
-                )}
-
-                {isActivationError && (
-                  <Alert className="mb-8 bg-yellow-500/10 border-yellow-500/50">
-                    <AlertTriangle className="h-4 w-4 text-yellow-500" />
-                    <AlertDescription className="text-yellow-500">
-                      Your API key is not active yet. This can take up to 2 hours after creation. 
-                      The page will automatically update when the key is activated. 
-                      You can check your key status at openweathermap.org
-                    </AlertDescription>
-                  </Alert>
-                )}
-
                 <WeatherHeader 
                   locationName={currentLocation.name}
                   timestamp={weatherData?.timestamp}
