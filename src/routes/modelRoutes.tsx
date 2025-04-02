@@ -1,6 +1,6 @@
 
 import React from "react";
-import { RouteObject } from "react-router-dom";
+import { RouteObject, Navigate } from "react-router-dom";
 import ErrorPage from "@/pages/ErrorPage";
 
 // Model pages
@@ -24,6 +24,11 @@ export const modelRoutes: RouteObject[] = [
   {
     path: "/models/luxury",
     element: <LuxuryModel />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/models/luxury-model",
+    element: <Navigate to="/models/luxury" replace />,
     errorElement: <ErrorPage />,
   },
   {
