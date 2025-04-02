@@ -1,5 +1,4 @@
 
-
 -- Create a secure view over the spatial_ref_sys table
 CREATE OR REPLACE VIEW public.secure_spatial_ref_sys AS
 SELECT 
@@ -14,7 +13,7 @@ FROM
 -- Grant SELECT permission on the view to public (both authenticated and anonymous users)
 GRANT SELECT ON public.secure_spatial_ref_sys TO authenticated, anon;
 
--- Enable Row Level Security on the view
+-- Enable Row Level Security on the view with SECURITY INVOKER to respect querying user's permissions
 ALTER VIEW public.secure_spatial_ref_sys SECURITY INVOKER;
 
 COMMENT ON VIEW public.secure_spatial_ref_sys IS 
@@ -33,4 +32,3 @@ END $$;
 -- Ensure our map components will use the view by updating the relevant SQL calls
 -- This is a reminder - actual code changes would be needed in the application
 -- to use 'secure_spatial_ref_sys' instead of 'spatial_ref_sys'
-
