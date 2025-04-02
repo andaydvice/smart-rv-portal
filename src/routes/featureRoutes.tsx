@@ -1,0 +1,77 @@
+
+import React from "react";
+import { RouteObject } from "react-router-dom";
+import ErrorPage from "@/pages/ErrorPage";
+
+// Feature pages
+import Features from "@/pages/Features";
+import AudioSystem from "@/pages/features/AudioSystem";
+import SmartTV from "@/pages/features/SmartTV";
+import SmartKitchen from "@/pages/features/SmartKitchen";
+import PowerManagement from "@/pages/features/PowerManagement";
+import InternetConnectivity from "@/pages/features/InternetConnectivity";
+import NavigationSystem from "@/pages/features/NavigationSystem";
+import SecuritySystem from "@/pages/features/SecuritySystem";
+import AutomatedDriving from "@/pages/features/AutomatedDriving";
+import WaterSystems from "@/pages/features/WaterSystems";
+import SmartAutomation from "@/pages/features/SmartAutomation";
+
+export const featureRoutes: RouteObject[] = [
+  {
+    path: "/features",
+    element: <Features />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/features/audio-system",
+    element: <AudioSystem />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/features/smart-tv",
+    element: <SmartTV />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/features/smart-kitchen",
+    element: <SmartKitchen />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/features/power-management",
+    element: <PowerManagement />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/features/internet-connectivity",
+    element: <InternetConnectivity />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/features/navigation-system",
+    element: <NavigationSystem />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/features/security-system",
+    element: <SecuritySystem />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/features/automated-driving",
+    element: <AutomatedDriving />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/features/water-systems",
+    element: <WaterSystems />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/features/smart-automation",
+    element: <SmartAutomation />,
+    errorElement: <ErrorPage />,
+  }
+];
+
+export default featureRoutes;

@@ -27,7 +27,7 @@ const router = createBrowserRouter(
 
 // Modified structure to properly handle React Router Provider
 const RouterProvider = () => {
-  console.log('RouterProvider - Initialized with routes:', routes.map(route => route.path));
+  console.log('RouterProvider - Initialized with routes:', routes.length, 'total routes');
   console.log('RouterProvider - Current location:', window.location.pathname);
   
   // Log any missing route matches
