@@ -2,7 +2,7 @@
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import { Link } from "react-router-dom";
-import { Navigation, Shield, Battery, Tv, Droplet } from "lucide-react";
+import { Navigation, Shield, Battery, Tv, Droplet, Cog } from "lucide-react";
 import Layout from "@/components/layout/Layout";
 
 const Features = () => {
@@ -55,6 +55,14 @@ const Features = () => {
                 <Droplet className="h-8 w-8 text-blue-500 mb-4" />
                 <h2 className="text-2xl font-semibold text-blue-400 mb-4">Water Systems</h2>
                 <p className="text-gray-300">Advanced water management with real-time monitoring, filtration, and conservation features for both fresh and waste water systems.</p>
+              </div>
+            </Link>
+
+            <Link to="/features/smart-automation" className="block">
+              <div className="bg-gray-800/50 p-6 rounded-lg border border-gray-700 hover:border-teal-500 transition-colors">
+                <Cog className="h-8 w-8 text-teal-500 mb-4" />
+                <h2 className="text-2xl font-semibold text-teal-400 mb-4">Smart Automation</h2>
+                <p className="text-gray-300">Comprehensive home automation system for your RV with climate control, lighting, and energy management integration.</p>
               </div>
             </Link>
           </div>

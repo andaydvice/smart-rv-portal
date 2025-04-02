@@ -42,24 +42,20 @@ const RouterProvider = () => {
   
   if (!routeFound && currentPath !== '/') {
     console.warn(`No exact route match found for: ${currentPath}`);
-  }
-  
-  // Custom error handler for 404 and other routing errors
-  const handleRouteError = (error: any) => {
-    console.error('Route error:', error);
-    // Check if it's a 404 error
-    if (error.statusCode === 404 || error.status === 404 || error.message?.includes('Not Found')) {
-      return {
-        message: "The page you're looking for doesn't exist or has been moved",
-        statusCode: 404
-      };
+    
+    // Log potential partial matches for debugging
+    const potentialMatches = routes
+      .filter(route => {
+        if (currentPath.includes(route.path) && route.path !== '/' && route.path !== '*') 
+          return true;
+        return false;
+      })
+      .map(route => route.path);
+    
+    if (potentialMatches.length > 0) {
+      console.log('Potential partial matches:', potentialMatches);
     }
-    return {
-      message: error.message || 'An unexpected routing error occurred',
-      statusCode: error.statusCode || error.status || 500,
-      stack: error.stack
-    };
-  };
+  }
   
   return (
     <ErrorBoundary>

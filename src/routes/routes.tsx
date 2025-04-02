@@ -35,6 +35,7 @@ import MapIconDemo from "../pages/MapIconDemo";
 import ScheduleDemo from "../pages/ScheduleDemo";
 import MapFacilityDemo from "../pages/MapFacilityDemo";
 import WaterSystems from "../pages/features/WaterSystems";
+import SmartAutomation from "../pages/features/SmartAutomation";
 import ErrorPage from "../pages/ErrorPage";
 
 // Define routes
@@ -117,6 +118,11 @@ export const routes: RouteObject[] = [
   {
     path: "/features/water-systems",
     element: <WaterSystems />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/features/smart-automation",
+    element: <SmartAutomation />,
     errorElement: <ErrorPage />,
   },
   {

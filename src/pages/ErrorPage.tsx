@@ -1,15 +1,23 @@
 
-import React from 'react';
-import { useRouteError, isRouteErrorResponse, useNavigate } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { useRouteError, isRouteErrorResponse, useNavigate, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import Layout from '@/components/layout/Layout';
+import { AlertTriangle } from 'lucide-react';
 
 const ErrorPage = () => {
   const error = useRouteError();
   const navigate = useNavigate();
+  const location = useLocation();
   
   let errorMessage = "Something went wrong";
   let statusCode = 500;
+  
+  useEffect(() => {
+    // Log error for debugging
+    console.error("Route error encountered:", error);
+    console.log("Current path:", location.pathname);
+  }, [error, location.pathname]);
   
   if (isRouteErrorResponse(error)) {
     statusCode = error.status;
@@ -24,6 +32,9 @@ const ErrorPage = () => {
     <Layout>
       <div className="min-h-[70vh] flex items-center justify-center px-4">
         <div className="max-w-md w-full text-center">
+          <div className="mb-6 flex justify-center">
+            <AlertTriangle size={64} className="text-[#EF4444]" />
+          </div>
           <h1 className="text-5xl font-bold text-[#5B9BD5] mb-4">
             {is404 ? "404" : statusCode}
           </h1>
