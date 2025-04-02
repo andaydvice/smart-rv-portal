@@ -5,7 +5,7 @@
  */
 import React from 'react';
 import PreviewErrorDisplay from '@/components/debug/PreviewErrorDisplay';
-import { logPreviewError } from './previewDebugger';
+import { logPreviewError } from './previewErrorLogger';
 
 /**
  * Debug component wrapper that catches and displays rendering errors
