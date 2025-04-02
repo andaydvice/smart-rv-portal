@@ -1,10 +1,11 @@
+
 // Emergency script to fix blank screens
 (function() {
   console.log('Emergency blank screen fix script loaded');
 
   // Track failed attempts to avoid infinite loops
   let fixAttempts = 0;
-  const MAX_FIX_ATTEMPTS = 5;
+  const MAX_FIX_ATTEMPTS = 3; // Reduced from 5 to be less aggressive
   
   // Run on load
   window.addEventListener('load', fixBlankScreen);
@@ -25,7 +26,7 @@
     }
     
     fixBlankScreen();
-  }, 5000);
+  }, 8000); // Increased from 5000ms to be less aggressive
   
   // Run on visibility change
   document.addEventListener('visibilitychange', function() {
@@ -72,13 +73,20 @@
       if ((!rootElement || rootElement.children.length === 0) && fixAttempts > 2) {
         console.warn('Root is empty after multiple attempts, adding emergency content');
         
+        // Don't add emergency content if there's a loading spinner already
+        const hasLoader = document.querySelector('.animate-spin');
+        if (hasLoader) {
+          console.log('Loading spinner detected, not adding emergency content');
+          return;
+        }
+        
         // Create emergency content
         const emergencyContent = document.createElement('div');
         emergencyContent.className = 'emergency-content';
         emergencyContent.innerHTML = `
           <div style="position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; 
                       background-color: #080F1F; color: white; z-index: 9999; flex-direction: column;">
-            <h2 style="margin-bottom: 1rem; font-size: 1.5rem;">Loading Application...</h2>
+            <h2 style="margin-bottom: 1rem; font-size: 1.5rem;">Loading Smart RV Systems</h2>
             <div style="width: 3rem; height: 3rem; border: 4px solid rgba(75, 85, 99, 0.3); 
                         border-radius: 50%; border-top-color: #5B9BD5; animation: spin 1s linear infinite;"></div>
             <button onclick="window.location.reload()" 

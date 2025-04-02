@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'r
 import { Suspense, lazy } from 'react';
 import { initNavigationDebugging } from '@/utils/diagnostics/navigationDebug';
 import { fixBlankScreen } from '@/utils/navigation/fixNavigation';
+import CustomLoader from '@/components/ui/CustomLoader';
 
 // Import pages
 const Index = lazy(() => import('@/pages/Index'));
@@ -36,25 +37,12 @@ const PageLoading = () => {
   }, []);
 
   return (
-    <div className="flex items-center justify-center h-screen w-full bg-[#080F1F] text-white"
-         style={{ visibility: 'visible', opacity: 1, backgroundColor: '#080F1F' }}>
-      <div className="text-center">
-        <div className="w-12 h-12 border-t-4 border-blue-500 border-solid rounded-full animate-spin mx-auto mb-2"></div>
-        <p>Loading page...</p>
-        
-        {isLongLoad && (
-          <div className="mt-4">
-            <p className="text-sm text-gray-400">Taking longer than expected...</p>
-            <button 
-              onClick={() => window.location.reload()}
-              className="mt-2 bg-[#5B9BD5] text-white px-3 py-1 text-sm rounded hover:bg-blue-600"
-            >
-              Refresh page
-            </button>
-          </div>
-        )}
-      </div>
-    </div>
+    <CustomLoader 
+      message="Loading page..." 
+      isFullScreen={true}
+      showRefreshButton={isLongLoad}
+      onRefresh={() => window.location.reload()}
+    />
   );
 };
 
@@ -77,6 +65,7 @@ const LocationTracker = () => {
 
 const RouterProvider: React.FC = () => {
   const [isNavigating, setIsNavigating] = useState(false);
+  const [isInitialLoad, setIsInitialLoad] = useState(true);
 
   useEffect(() => {
     // Initialize navigation debugging
@@ -103,7 +92,7 @@ const RouterProvider: React.FC = () => {
         
         // Fix blank screen after navigation
         fixBlankScreen();
-      }, 500);
+      }, 300); // Reduced from 500ms for faster transitions
     };
     
     window.addEventListener('popstate', handleNavigation);
@@ -125,7 +114,8 @@ const RouterProvider: React.FC = () => {
     // Attempt to fix blank screen on initial load
     setTimeout(() => {
       fixBlankScreen();
-    }, 1000);
+      setIsInitialLoad(false); // Mark initial load as complete
+    }, 800); // Increased to ensure enough time for initial render
     
     return () => {
       document.body.classList.remove('navigation-enabled');
@@ -139,9 +129,11 @@ const RouterProvider: React.FC = () => {
     <Router>
       {/* Navigation overlay that appears during page transitions */}
       {isNavigating && (
-        <div className="fixed inset-0 bg-[#080F1F] z-50 flex items-center justify-center">
-          <div className="w-12 h-12 border-t-4 border-blue-500 border-solid rounded-full animate-spin"></div>
-        </div>
+        <CustomLoader
+          message="Navigating..."
+          isFullScreen={true}
+          className="fixed inset-0 z-50"
+        />
       )}
       
       <LocationTracker />

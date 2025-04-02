@@ -29,19 +29,22 @@ export const fixBlankScreen = () => {
     rootElement.style.backgroundColor = '#080F1F';
     rootElement.style.minHeight = '100vh';
     
+    // Check if there's already a loading indicator
+    const hasLoader = document.querySelector('.animate-spin');
+    
     // Check if root is empty and add emergency content
-    if (rootElement.children.length === 0) {
+    if (rootElement.children.length === 0 && !hasLoader) {
       console.error('Root element is empty, adding emergency content');
       const emergencyContent = document.createElement('div');
       emergencyContent.className = 'emergency-content';
       emergencyContent.innerHTML = `
         <div class="flex items-center justify-center h-screen w-full bg-[#080F1F] text-white">
           <div class="text-center">
-            <div class="w-12 h-12 border-t-4 border-blue-500 border-solid rounded-full animate-spin mx-auto mb-4"></div>
-            <p>Recovering application...</p>
+            <div class="w-12 h-12 border-t-4 border-[#5B9BD5] border-solid rounded-full animate-spin mx-auto mb-4"></div>
+            <p class="text-lg">Recovering application...</p>
             <button 
               onclick="window.location.reload()" 
-              class="mt-4 bg-blue-600 text-white px-4 py-2 rounded">
+              class="mt-4 bg-[#5B9BD5] text-white px-4 py-2 rounded hover:bg-[#4B8FE3] transition-colors">
               Reload Page
             </button>
           </div>
@@ -58,7 +61,6 @@ export const fixBlankScreen = () => {
         child.style.visibility = 'visible';
         child.style.opacity = '1';
         child.style.display = child.style.display === 'none' ? 'block' : child.style.display;
-        child.style.backgroundColor = '#080F1F';
       }
     });
   }
@@ -69,7 +71,6 @@ export const fixBlankScreen = () => {
       el.style.visibility = 'visible';
       el.style.display = 'block';
       el.style.opacity = '1';
-      el.style.backgroundColor = '#080F1F';
     }
   });
   
@@ -118,8 +119,9 @@ export const setupNavigationFixes = () => {
     setTimeout(fixBlankScreen, 100); // Slight delay to let React router process the change
   });
   
-  // Periodic check for blank screens
+  // Periodic check for blank screens - less aggressive
   const checkInterval = setInterval(() => {
+    // Check for content or a loader
     const hasContent = document.querySelector('main, .min-h-screen, .layout-container');
     const hasLoader = document.querySelector('.animate-spin');
     
@@ -131,8 +133,8 @@ export const setupNavigationFixes = () => {
         console.error('Multiple consecutive blank screens detected, attempting fix');
         fixBlankScreen();
         
-        // If still not fixed after multiple attempts, reload as last resort
-        if (consecutiveBlankScreens > 5) {
+        // Only reload as absolute last resort after multiple failures
+        if (consecutiveBlankScreens > 8) {
           console.error('Critical: Multiple fixes failed, reloading page');
           window.location.reload();
         }
@@ -140,7 +142,7 @@ export const setupNavigationFixes = () => {
     } else {
       consecutiveBlankScreens = 0;
     }
-  }, 2000);
+  }, 4000); // Increased from 2000ms to be less aggressive
   
   // Clean up interval on unmount
   window.addEventListener('beforeunload', () => {
