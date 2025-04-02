@@ -21,8 +21,11 @@ const StorageFacilitiesMap: React.FC<StorageFacilitiesMapProps> = ({
   const [mapLoaded, setMapLoaded] = useState(false);
   const [mapError, setMapError] = useState<string | null>(error);
   
-  // Only convert facilities to MapFacility objects if facilities array exists
-  const mapFacilities: MapFacility[] = facilities ? facilities.map(convertToMapFacility) : [];
+  // Ensure facilities is an array before attempting to map
+  // This prevents "Cannot read properties of undefined (reading 'map')" error
+  const mapFacilities: MapFacility[] = Array.isArray(facilities) 
+    ? facilities.map(convertToMapFacility) 
+    : [];
   
   // Update error state when prop changes
   useEffect(() => {

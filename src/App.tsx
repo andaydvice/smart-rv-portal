@@ -13,6 +13,16 @@ import './styles/animations.css';
 import './styles/map-loading.css';
 import './styles/map-preview.css'; 
 
+// Better error handling for dynamic imports
+window.addEventListener('error', function(event) {
+  console.error('Global error caught:', event.error);
+  if (event.error && event.error.message && event.error.message.includes('Failed to fetch dynamically imported module')) {
+    console.error('Module import failure detected - forcing page reload');
+    // Add a timestamp to prevent browser cache issues
+    window.location.href = window.location.pathname + '?reload=' + Date.now();
+  }
+});
+
 // Create a client with better error handling
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -64,6 +74,35 @@ function AppContent() {
     } else {
       console.warn('Routes may not be properly configured');
     }
+    
+    // Emergency handling for blank screens
+    const checkForBlankScreen = () => {
+      const mainContent = document.querySelector('main, .min-h-screen, .page-transition');
+      if (!mainContent) {
+        console.warn('Blank screen detected, forcing page initialization');
+        const rootElement = document.getElementById('root');
+        if (rootElement) {
+          rootElement.style.backgroundColor = '#080F1F';
+          rootElement.style.visibility = 'visible';
+          rootElement.style.opacity = '1';
+          
+          // Add emergency content if the screen is really blank
+          if (rootElement.children.length === 0 || rootElement.innerHTML.trim() === '') {
+            rootElement.innerHTML = `
+              <div class="flex items-center justify-center h-screen bg-[#080F1F] text-white">
+                <div class="text-center">
+                  <p class="text-xl mb-4">Loading content...</p>
+                  <p>If this message persists, please <a href="${window.location.pathname}?reload=${Date.now()}" class="text-blue-400 underline">click here to reload</a></p>
+                </div>
+              </div>
+            `;
+          }
+        }
+      }
+    };
+    
+    // Check for blank screen after a delay
+    setTimeout(checkForBlankScreen, 3000);
     
     return () => {
       window.removeEventListener('popstate', handleRouteChange);
