@@ -1,61 +1,9 @@
 
-import React, { useState, useEffect } from 'react';
-import { usePreviewDebugger } from '@/utils/debugging/previewDebugger';
-import { withPreviewDebugJSX } from '@/utils/debugging/previewDebuggerWithJSX';
+import React, { useState } from 'react';
 import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
-
-// Example component using the hook approach
-const HookDebugExample: React.FC = () => {
-  const { logError } = usePreviewDebugger('HookDebugExample', 'src/components/debug/PreviewDebugDemo.tsx');
-  const [hasError, setHasError] = useState(false);
-  
-  useEffect(() => {
-    if (hasError) {
-      try {
-        // This will throw an error
-        throw new Error('This is a test error from useEffect');
-      } catch (error) {
-        logError(error as Error, { location: 'useEffect', triggered: 'manually' });
-      }
-    }
-  }, [hasError, logError]);
-  
-  const triggerError = () => {
-    setHasError(true);
-  };
-  
-  return (
-    <div className="mb-6 p-4 bg-[#151A22] rounded-lg">
-      <h3 className="text-xl font-semibold mb-2 text-white">Hook-based Debug Example</h3>
-      <p className="text-gray-300 mb-4">Click the button to trigger and log an error using the hook approach</p>
-      <Button onClick={triggerError} variant="destructive">
-        Trigger Error
-      </Button>
-    </div>
-  );
-};
-
-// Example component that will throw an error when the flag is true
-const ErrorProne: React.FC<{ shouldError?: boolean }> = ({ shouldError = false }) => {
-  if (shouldError) {
-    throw new Error('This is a demonstration error from the ErrorProne component');
-  }
-  
-  return (
-    <div className="p-4 bg-[#151A22] rounded-lg">
-      <h3 className="text-xl font-semibold mb-2 text-white">Error Prone Component</h3>
-      <p className="text-gray-300">This component will throw an error when the flag is set to true</p>
-    </div>
-  );
-};
-
-// Wrap the error-prone component with our debug wrapper
-const DebuggableErrorProne = withPreviewDebugJSX(
-  ErrorProne, 
-  'ErrorProne', 
-  'src/components/debug/PreviewDebugDemo.tsx'
-);
+import HookDebugExample from './HookDebugExample';
+import DebuggableErrorProne from './DebuggableErrorProne';
 
 // Main demo component
 const PreviewDebugDemo: React.FC = () => {
