@@ -17,21 +17,57 @@ import './styles/pages/storage-checklist.css'
 console.log('Application starting, window.location:', window.location.href);
 console.log('Application path:', window.location.pathname);
 
+// Set up an emergency loading indicator if content takes too long
+let emergencyLoadingTimeout: number;
+document.addEventListener('DOMContentLoaded', () => {
+  // This will show an emergency loading message if nothing appears after 3 seconds
+  emergencyLoadingTimeout = window.setTimeout(() => {
+    const rootElement = document.getElementById('root');
+    if (!rootElement || rootElement.children.length === 0) {
+      console.warn('Emergency loading indicator activated due to blank screen');
+      
+      // Create and add emergency loading UI
+      const loadingIndicator = document.createElement('div');
+      loadingIndicator.className = 'emergency-loading-indicator';
+      loadingIndicator.innerHTML = `
+        <div style="position: fixed; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; background-color: #080F1F; color: white; z-index: 9999;">
+          <h2 style="margin-bottom: 1rem; font-size: 1.5rem;">Loading Smart RV Systems</h2>
+          <div style="width: 3rem; height: 3rem; border: 4px solid rgba(91, 155, 213, 0.3); border-radius: 50%; border-top-color: #5B9BD5; animation: spin 1s linear infinite;"></div>
+          <button onClick="window.location.reload()" style="margin-top: 1.5rem; background: #5B9BD5; color: white; border: none; padding: 0.5rem 1rem; border-radius: 0.25rem; cursor: pointer;">
+            Reload Page
+          </button>
+          <style>
+            @keyframes spin { to { transform: rotate(360deg); } }
+          </style>
+        </div>
+      `;
+      
+      // Add to document if root is empty
+      if (!rootElement) {
+        document.body.appendChild(loadingIndicator);
+      } else {
+        rootElement.appendChild(loadingIndicator);
+      }
+    }
+  }, 3000);
+});
+
 // Initialize navigation fixes
 setupNavigationFixes();
 
 // Force immediate style injection for emergency fixes
 const injectEmergencyStyles = () => {
-  // Force visibility of map markers
+  // Force visibility of map markers and critical content
   const style = document.createElement('style');
   style.textContent = `
-    .mapboxgl-marker, .map-marker, .marker, [class*="marker"] {
+    html, body {
+      background-color: #080F1F !important;
+      min-height: 100vh;
+      color: white;
       visibility: visible !important;
       opacity: 1 !important;
-      display: block !important;
     }
     
-    /* Ensure content is visible during navigation */
     #root {
       display: block !important;
       opacity: 1 !important;
@@ -40,7 +76,12 @@ const injectEmergencyStyles = () => {
       min-height: 100vh;
     }
     
-    /* Prevent flash of white screen during navigation */
+    .mapboxgl-marker, .map-marker, .marker, [class*="marker"] {
+      visibility: visible !important;
+      opacity: 1 !important;
+      display: block !important;
+    }
+    
     .page-transition-container {
       min-height: 100vh;
       background-color: #080F1F;
@@ -58,46 +99,21 @@ const injectEmergencyStyles = () => {
       opacity: 1 !important;
     }
     
-    /* Emergency styling for blank screens */
-    div, main, section {
+    /* Ensure layout elements are visible */
+    .layout, .layout > div, .layout-container, .min-h-screen {
       visibility: visible !important;
+      opacity: 1 !important;
       display: block !important;
     }
   `;
   document.head.appendChild(style);
   console.log('Injected emergency styles');
-
-  // Force dark background on all children of root
-  const observer = new MutationObserver((mutations) => {
-    mutations.forEach(() => {
-      document.querySelectorAll('#root > div').forEach(div => {
-        if (div instanceof HTMLElement) {
-          div.style.backgroundColor = '#080F1F';
-          div.style.visibility = 'visible';
-          div.style.opacity = '1';
-        }
-      });
-    });
-  });
-
-  observer.observe(document.getElementById('root') || document, {
-    childList: true,
-    subtree: true
-  });
-
-  // Create navigation listening system
-  window.addEventListener('popstate', () => {
-    console.log('Navigation occurred, ensuring visibility');
-    document.body.style.backgroundColor = '#080F1F';
-    document.documentElement.style.backgroundColor = '#080F1F';
-    fixBlankScreen();
-  });
 };
 
 // Inject emergency styles immediately
 injectEmergencyStyles();
 
-// Apply blank screen fix
+// Apply blank screen fix immediately
 fixBlankScreen();
 
 // Ensure emergency styles are loaded first
@@ -124,6 +140,9 @@ if (!rootElement) {
       </React.StrictMode>,
     );
     console.log('React application successfully mounted on created root element');
+    
+    // Clear emergency timeout since we've successfully mounted
+    clearTimeout(emergencyLoadingTimeout);
   } catch (error) {
     console.error('Failed to mount React application on created root element:', error);
   }
@@ -135,6 +154,9 @@ if (!rootElement) {
       </React.StrictMode>,
     );
     console.log('React application successfully mounted');
+    
+    // Clear emergency timeout since we've successfully mounted
+    clearTimeout(emergencyLoadingTimeout);
     
     // Add navigation event listener for debugging
     window.addEventListener('popstate', () => {

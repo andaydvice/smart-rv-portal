@@ -1,21 +1,46 @@
 
-import React, { useEffect } from "react";
+import React, { useEffect, useLayoutEffect } from "react";
 import { motion } from "framer-motion";
 import Layout from "@/components/layout/Layout";
 import { Droplet, RefreshCw, Filter, Waves } from "lucide-react";
+import { toast } from "sonner";
 
 const WaterSystems = () => {
+  // Using both useLayoutEffect and useEffect for maximum reliability
+  useLayoutEffect(() => {
+    console.log("WaterSystems useLayoutEffect - immediate visibility fixes");
+    
+    // Force document visibility, color and opacity immediately
+    document.body.style.backgroundColor = '#080F1F';
+    document.documentElement.style.backgroundColor = '#080F1F';
+    document.body.style.visibility = 'visible';
+    document.body.style.opacity = '1';
+    document.body.style.display = 'block';
+    
+    // Force root visibility
+    const root = document.getElementById('root');
+    if (root) {
+      root.style.visibility = 'visible';
+      root.style.opacity = '1';
+      root.style.backgroundColor = '#080F1F';
+    }
+  }, []);
+
   useEffect(() => {
-    // Force update and ensure page is visible
     console.log("WaterSystems page mounted - forcing update");
     
     // Scroll to top of page
     window.scrollTo(0, 0);
     
-    // Force background color and visibility
-    document.body.style.backgroundColor = '#080F1F';
-    document.body.style.visibility = 'visible';
-    document.body.style.opacity = '1';
+    // Force update using the global function if available
+    if (typeof window !== 'undefined' && window.forceRouteUpdate) {
+      window.forceRouteUpdate('water-systems');
+    }
+    
+    // Show toast to verify component is working
+    toast.success("Water Systems page loaded successfully", {
+      duration: 2000,
+    });
     
     // Log to console to verify component mounted
     console.log("Water Systems page fully rendered");

@@ -1,0 +1,85 @@
+
+/* Emergency recovery styles to prevent blank screens */
+
+/* Base visibility fixes */
+html, 
+body {
+  background-color: #080F1F !important;
+  color: white !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  min-height: 100vh !important;
+}
+
+/* Root element fixes */
+#root {
+  visibility: visible !important;
+  opacity: 1 !important;
+  display: block !important;
+  min-height: 100vh !important;
+  background-color: #080F1F !important;
+}
+
+/* Layout element fixes */
+.layout,
+.page-transition,
+.min-h-screen,
+main,
+section,
+[data-main-content="true"] {
+  visibility: visible !important;
+  opacity: 1 !important;
+  display: block !important;
+  background-color: #080F1F;
+}
+
+/* Force render wrapper styles */
+.force-render-wrapper {
+  min-height: 100vh;
+  visibility: visible !important;
+  opacity: 1 !important;
+  display: block !important;
+  background-color: #080F1F;
+}
+
+/* Emergency content */
+.emergency-content {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background-color: #080F1F;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+.emergency-loading {
+  width: 3rem;
+  height: 3rem;
+  border: 4px solid rgba(75, 85, 99, 0.3);
+  border-radius: 50%;
+  border-top-color: #5B9BD5;
+  animation: emergency-spin 1s linear infinite;
+  margin: 1rem auto;
+}
+
+@keyframes emergency-spin {
+  to { transform: rotate(360deg); }
+}
+
+.emergency-button {
+  background-color: #5B9BD5;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  margin-top: 1rem;
+}
+
+.emergency-button:hover {
+  background-color: #4B8FE3;
+}

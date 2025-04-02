@@ -9,6 +9,7 @@ import { ContactSection } from "@/components/sections/ContactSection";
 import PageTransition from "@/components/transitions/PageTransition";
 import { toast } from "sonner";
 import CustomLoader from "@/components/ui/CustomLoader";
+import ForceRender from "@/components/recovery/ForceRender";
 
 const Index = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -47,17 +48,19 @@ const Index = () => {
   }
 
   return (
-    <Layout>
-      <PageTransition>
-        <div className="min-h-screen bg-[#080F1F]">
-          <HeroSection />
-          <FeaturesSection />
-          <TechnologySection />
-          <SustainabilitySection />
-          <ContactSection />
-        </div>
-      </PageTransition>
-    </Layout>
+    <ForceRender pageName="index">
+      <Layout>
+        <PageTransition>
+          <div className="min-h-screen bg-[#080F1F]">
+            <HeroSection />
+            <FeaturesSection />
+            <TechnologySection />
+            <SustainabilitySection />
+            <ContactSection />
+          </div>
+        </PageTransition>
+      </Layout>
+    </ForceRender>
   );
 };
 

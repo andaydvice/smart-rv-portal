@@ -53,25 +53,7 @@ export const fixBlankScreen = () => {
       rootElement.appendChild(emergencyContent);
     }
   }
-  
-  // Special fix for WaterSystems page
-  const isWaterSystemsPage = window.location.pathname.includes('water-systems');
-  if (isWaterSystemsPage) {
-    console.log('Detected Water Systems page, applying special fix');
-    // Force refresh the route if we're on the water systems page
-    if (typeof window !== 'undefined' && window.forceRouteUpdate) {
-      window.forceRouteUpdate('water-systems');
-    }
-    
-    // Force all layout containers to be visible
-    document.querySelectorAll('.layout, [data-main-content="true"]').forEach(container => {
-      if (container instanceof HTMLElement) {
-        container.style.opacity = '1';
-        container.style.visibility = 'visible';
-      }
-    });
-  }
-  
+
   // Force all direct children of root to be visible
   if (rootElement) {
     Array.from(rootElement.children).forEach(child => {
@@ -96,16 +78,28 @@ export const fixBlankScreen = () => {
   try {
     // Trigger resize to force React to recalculate layouts
     window.dispatchEvent(new Event('resize'));
-    
-    // If we detect there's no index page showing, try to force navigation to home
-    const currentPath = window.location.pathname;
-    if (currentPath !== '/' && !document.querySelector('main')) {
-      console.log('No main content detected, forcing navigation to home');
-      window.history.pushState({}, '', '/');
-      window.dispatchEvent(new Event('popstate'));
-    }
   } catch (e) {
     console.error('Error triggering events:', e);
+  }
+
+  // Special fix for WaterSystems page
+  const isWaterSystemsPage = window.location.pathname.includes('water-systems');
+  if (isWaterSystemsPage) {
+    console.log('Detected Water Systems page, applying special fix');
+    // Use the global function if available
+    if (typeof window !== 'undefined' && window.forceRouteUpdate) {
+      window.forceRouteUpdate('water-systems');
+    }
+    
+    // Force all layout containers to be visible
+    document.querySelectorAll('.layout, [data-main-content="true"]').forEach(container => {
+      if (container instanceof HTMLElement) {
+        container.style.opacity = '1';
+        container.style.visibility = 'visible';
+        container.style.backgroundColor = '#080F1F';
+        container.style.display = 'block';
+      }
+    });
   }
 };
 
@@ -144,6 +138,42 @@ export const setupNavigationFixes = () => {
     setTimeout(fixBlankScreen, 100); // Slight delay to let React router process the change
   });
   
+  // Add manual fix button for debugging (removable in production)
+  const addFixButton = () => {
+    const fixButton = document.createElement('button');
+    fixButton.innerText = 'Force Fix';
+    fixButton.style.cssText = `
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 10000;
+      background-color: #5B9BD5;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-family: sans-serif;
+    `;
+    fixButton.onclick = () => {
+      console.log('Manual fix triggered');
+      fixBlankScreen();
+      
+      // Special handling for Water Systems page
+      if (window.location.pathname.includes('water-systems')) {
+        if (typeof window !== 'undefined' && window.forceRouteUpdate) {
+          window.forceRouteUpdate('water-systems');
+        }
+      }
+    };
+    document.body.appendChild(fixButton);
+  };
+  
+  // Only add in development
+  if (process.env.NODE_ENV === 'development') {
+    setTimeout(addFixButton, 2000);
+  }
+  
   // Periodic check for blank screens - less aggressive
   const checkInterval = setInterval(() => {
     // Check for content or a loader
@@ -163,12 +193,6 @@ export const setupNavigationFixes = () => {
           if (typeof window !== 'undefined' && window.forceRouteUpdate) {
             window.forceRouteUpdate('water-systems');
           }
-        }
-        
-        // Only reload as absolute last resort after multiple failures
-        if (consecutiveBlankScreens > 8) {
-          console.error('Critical: Multiple fixes failed, reloading page');
-          window.location.reload();
         }
       }
     } else {

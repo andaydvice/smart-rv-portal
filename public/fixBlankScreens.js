@@ -49,12 +49,25 @@
   // Create a function to force page update for specific routes
   window.forceRouteUpdate = function(route) {
     console.log(`Forcing update for route: ${route}`);
-    const allLayoutContainers = document.querySelectorAll('.layout, [data-main-content="true"]');
+    
+    // Immediately fix blank screen issues
+    fixBlankScreen();
+    
+    // Special handling for water-systems page
+    if (route === 'water-systems') {
+      console.log('Applied special fixes for water-systems page');
+      document.body.style.backgroundColor = '#080F1F';
+      document.documentElement.style.backgroundColor = '#080F1F';
+    }
+    
+    // Fix containers
+    const allLayoutContainers = document.querySelectorAll('.layout, [data-main-content="true"], main, .min-h-screen');
     allLayoutContainers.forEach(container => {
       if (container instanceof HTMLElement) {
         container.style.opacity = '1';
         container.style.visibility = 'visible';
         container.style.backgroundColor = '#080F1F';
+        container.style.display = 'block';
       }
     });
     
@@ -68,6 +81,11 @@
         indicator.style.display = 'none';
       }
     });
+    
+    // Dispatch an event that everything is updated
+    window.dispatchEvent(new CustomEvent('route-force-updated', { 
+      detail: { route } 
+    }));
     
     return true;
   };

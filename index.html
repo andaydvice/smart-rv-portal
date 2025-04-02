@@ -7,6 +7,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Smart RV Systems: Next-generation connectivity and control for your RV" />
     <title>Smart RV Systems</title>
+    <!-- Critical CSS to prevent blank screens -->
+    <style>
+      html, body {
+        background-color: #080F1F !important;
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+        color: white;
+        visibility: visible !important;
+        opacity: 1 !important;
+      }
+      #root {
+        min-height: 100vh;
+        background-color: #080F1F;
+        visibility: visible !important;
+        opacity: 1 !important;
+        display: block !important;
+      }
+      .loading-indicator {
+        position: fixed;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        background-color: #080F1F;
+        z-index: 9999;
+      }
+      @keyframes spin {
+        to { transform: rotate(360deg); }
+      }
+      .loading-spinner {
+        width: 3rem;
+        height: 3rem;
+        border: 4px solid rgba(91, 155, 213, 0.3);
+        border-radius: 50%;
+        border-top-color: #5B9BD5;
+        animation: spin 1s linear infinite;
+      }
+    </style>
     <!-- Emergency fixes - run before everything else -->
     <script>
       // Ensure background color is set immediately
@@ -20,11 +60,31 @@
           console.log('Page became visible, ensuring dark background');
         }
       });
+      
+      // Force blank screen check
+      window.addEventListener('DOMContentLoaded', function() {
+        if (!document.querySelector('main, .min-h-screen')) {
+          // Add loading indicator if nothing loaded yet
+          const loadingEl = document.createElement('div');
+          loadingEl.className = 'loading-indicator';
+          loadingEl.innerHTML = `
+            <h2 style="margin-bottom: 1rem;">Loading Smart RV Systems</h2>
+            <div class="loading-spinner"></div>
+            <button 
+              onclick="window.location.reload()" 
+              style="margin-top: 1.5rem; background: #5B9BD5; color: white; border: none; 
+                    padding: 0.5rem 1rem; border-radius: 0.25rem; cursor: pointer;">
+              Reload Page
+            </button>
+          `;
+          document.body.appendChild(loadingEl);
+        }
+      });
     </script>
     <!-- Emergency blank screen fix script -->
     <script src="/fixBlankScreens.js"></script>
     <!-- Include emergency markers script for guaranteed marker visibility -->
-    <script src="/emergencyMarkers.js"></script>
+    <script src="/markerFix.js"></script>
     <!-- Add Google Maps API with the key -->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAGKkTg0DlZd7fCJlfkVNqkRkzPjeqKJ2o&libraries=places" async defer></script>
     <!-- Initial page path detection -->
@@ -41,20 +101,6 @@
       document.documentElement.style.backgroundColor = '#080F1F';
       document.documentElement.style.minHeight = '100vh';
     </script>
-    <style>
-      /* Critical CSS to prevent flashing */
-      html, body {
-        background-color: #080F1F !important;
-        margin: 0;
-        padding: 0;
-        min-height: 100vh;
-        color: white;
-      }
-      #root {
-        min-height: 100vh;
-        background-color: #080F1F;
-      }
-    </style>
   </head>
   <body>
     <div id="root"></div>
