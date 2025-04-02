@@ -42,8 +42,8 @@ const SmartAutomation = () => {
                 Take control of your entire RV with our innovative home automation system. Control lighting, climate, entertainment, and security with intuitive voice commands or from your smartphone.
               </p>
               <ul className="list-disc list-inside space-y-3 text-[#E2E8FF] text-left">
-                <li>One-touch scene settings (morning, evening, away mode)</li>
-                <li>Voice-controlled system integration</li>
+                <li>One touch scene settings (morning, evening, away mode)</li>
+                <li>Voice controlled system integration</li>
                 <li>Custom scheduling for all devices</li>
                 <li>Energy usage optimization</li>
                 <li>Remote monitoring and control</li>
@@ -85,12 +85,12 @@ const SmartAutomation = () => {
               <div className="p-4 bg-gray-800/50 rounded-lg flex flex-col items-center">
                 <WifiIcon className="h-8 w-8 text-[#5B9BD5] mb-3" />
                 <h3 className="text-xl font-medium text-white mb-2">Connectivity</h3>
-                <p className="text-[#E2E8FF] text-left">Reliable connectivity with mobile app control and cloud-based management.</p>
+                <p className="text-[#E2E8FF] text-left">Reliable connectivity with mobile app control and cloud based management.</p>
               </div>
               <div className="p-4 bg-gray-800/50 rounded-lg flex flex-col items-center">
                 <BatteryCharging className="h-8 w-8 text-[#5B9BD5] mb-3" />
                 <h3 className="text-xl font-medium text-white mb-2">Power Management</h3>
-                <p className="text-[#E2E8FF] text-left">Intelligent power distribution with real-time monitoring and automated efficiency.</p>
+                <p className="text-[#E2E8FF] text-left">Intelligent power distribution with real time monitoring and automated efficiency.</p>
               </div>
             </div>
           </div>
