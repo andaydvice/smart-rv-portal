@@ -22,6 +22,11 @@ export const modelRoutes: RouteObject[] = [
     errorElement: <ErrorPage />,
   },
   {
+    path: "/models/compact-model",
+    element: <Navigate to="/models/compact" replace />,
+    errorElement: <ErrorPage />,
+  },
+  {
     path: "/models/luxury",
     element: <LuxuryModel />,
     errorElement: <ErrorPage />,
@@ -34,6 +39,11 @@ export const modelRoutes: RouteObject[] = [
   {
     path: "/models/adventure",
     element: <AdventureModel />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/models/adventure-model",
+    element: <Navigate to="/models/adventure" replace />,
     errorElement: <ErrorPage />,
   },
   {
