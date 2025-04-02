@@ -1,64 +1,37 @@
 
-import React, { useState, useEffect } from "react";
-import { APIKeyInput } from "@/components/weather/APIKeyInput";
-import AlertCard from "@/components/weather/AlertCard";
-import WeatherHeader from "@/components/weather/WeatherHeader";
-import LocationSearch from "@/components/weather/LocationSearch";
-import { Location } from "@/types/weather";
-import { weatherConfig } from "@/utils/weatherAPI";
+import React, { useEffect } from "react";
 import Layout from "@/components/layout/Layout";
 import { scrollToTop } from "@/utils/scrollToTop";
+import { Container } from "@/components/ui/container";
+import { TypographyH1, TypographyH2, TypographyH3, TypographyP } from "@/components/ui/typography";
 import { Card } from "@/components/ui/card";
-import { TypographyH2, TypographyH3, TypographyP } from "@/components/ui/typography";
-import { Cloud, Sun, CloudRain, Wind, Thermometer, Calendar, MapPin, Flag, Info, HelpCircle } from "lucide-react";
+import { Calendar, Cloud, Wind, AlertTriangle, Thermometer, Snowflake, MapPin, Flag, Sun } from "lucide-react";
 
 const RVWeather = () => {
-  // Scroll to top on component mount
   useEffect(() => {
-    console.log("RVWeather page - Scrolling to top");
     scrollToTop();
   }, []);
 
-  console.log("[RVWeather] Rendering");
-  const [currentLocation, setCurrentLocation] = useState<Location>(() => {
-    const savedLocation = localStorage.getItem('weatherLocation');
-    return savedLocation ? JSON.parse(savedLocation) : {
-      lat: 37.8651,
-      lon: -119.5383,
-      name: "Yosemite Valley, CA"
-    };
-  });
-  const [imageLoaded, setImageLoaded] = useState(false);
-
   return (
     <Layout>
-      {/* Enhanced Header Image - Larger and without white tint */}
+      {/* Hero Section */}
       <div className="relative w-full h-96 md:h-[500px] mb-8 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-transparent to-background z-10" />
         <img
           src="/lovable-uploads/Luxury_RV_Living-min.jpg"
           alt="RV in scenic location"
-          className={`w-full h-full object-cover transition-opacity duration-500 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
-          onLoad={() => setImageLoaded(true)}
+          className="w-full h-full object-cover"
         />
         <div className="absolute bottom-0 left-0 w-full p-6 z-20">
           <h1 className="text-4xl md:text-6xl font-bold text-white drop-shadow-lg">The Ultimate RV Weather Guide</h1>
           <p className="text-xl text-white drop-shadow-lg mt-2">Plan your travels with confidence</p>
         </div>
       </div>
-      
-      <div className="container mx-auto px-4 py-8 max-w-7xl flex-grow">
-        <div className="mb-8">
-          <APIKeyInput onKeySet={() => {
-            const oneCallKey = localStorage.getItem("oneCallAPIKey");
-            if (oneCallKey) {
-              weatherConfig.oneCallApiKey = oneCallKey;
-            }
-          }} />
-        </div>
 
+      <Container>
         <div className="grid gap-8 lg:grid-cols-3">
           <div className="lg:col-span-2 space-y-8">
+            {/* Why Weather Matters */}
             <section>
               <TypographyH2>Why Weather Matters for RV Travel</TypographyH2>
               <TypographyP>
@@ -68,6 +41,7 @@ const RVWeather = () => {
               </TypographyP>
             </section>
 
+            {/* Planning Your Trip */}
             <section>
               <div className="flex items-center gap-2 mb-4">
                 <Calendar className="h-6 w-6 text-connectivity-accent" />
@@ -134,55 +108,42 @@ const RVWeather = () => {
               </div>
             </section>
 
+            {/* Real-Time Weather Monitoring */}
             <section>
               <div className="flex items-center gap-2 mb-4">
                 <Cloud className="h-6 w-6 text-connectivity-accent" />
                 <TypographyH2>Real-Time Weather Monitoring</TypographyH2>
               </div>
               
-              <div className="space-y-4 mt-4">
-                <LocationSearch 
-                  onLocationSelect={(location) => setCurrentLocation(location)} 
-                />
-                
-                <Card className="p-4">
-                  <WeatherHeader 
-                    locationName={currentLocation.name}
-                  />
-                  <p className="text-sm opacity-70">Live weather data for your current or selected location</p>
-                </Card>
+              <TypographyH3 className="mt-6">Essential Weather Apps</TypographyH3>
+              <div className="grid md:grid-cols-2 gap-4 mt-4">
+                <div>
+                  <h4 className="font-bold">Comprehensive Weather Apps</h4>
+                  <ul className="list-disc list-inside space-y-1 pl-4 text-sm">
+                    <li><a href="https://radarscope.app/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">RadarScope</a> - Professional-grade radar data</li>
+                    <li><a href="https://www.wunderground.com/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">Weather Underground</a> - Detailed forecasts with PWS network</li>
+                    <li><a href="https://weather.com/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">The Weather Channel</a> - User-friendly with good severe weather alerts</li>
+                  </ul>
+                </div>
                 
                 <div>
-                  <TypographyH3>Essential Weather Apps</TypographyH3>
-                  <div className="grid md:grid-cols-2 gap-4 mt-4">
-                    <div>
-                      <h4 className="font-bold">Comprehensive Weather Apps</h4>
-                      <ul className="list-disc list-inside space-y-1 pl-4 text-sm">
-                        <li><a href="https://radarscope.app/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">RadarScope</a> - Professional-grade radar data</li>
-                        <li><a href="https://www.wunderground.com/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">Weather Underground</a> - Detailed forecasts with PWS network</li>
-                        <li><a href="https://weather.com/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">The Weather Channel</a> - User-friendly with good severe weather alerts</li>
-                      </ul>
-                    </div>
-                    
-                    <div>
-                      <h4 className="font-bold">RV-Specific Weather Tools</h4>
-                      <ul className="list-disc list-inside space-y-1 pl-4 text-sm">
-                        <li><a href="https://rvweather.com/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">RV Weather</a> - Weather forecasts specifically for RV routes</li>
-                        <li><a href="https://www.windy.com/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">Windy</a> - Essential for monitoring wind conditions</li>
-                        <li><a href="https://weatherradioapp.com/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">Weather Radio</a> - NOAA weather radio alerts</li>
-                      </ul>
-                    </div>
-                  </div>
+                  <h4 className="font-bold">RV-Specific Weather Tools</h4>
+                  <ul className="list-disc list-inside space-y-1 pl-4 text-sm">
+                    <li><a href="https://rvweather.com/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">RV Weather</a> - Weather forecasts specifically for RV routes</li>
+                    <li><a href="https://www.windy.com/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">Windy</a> - Essential for monitoring wind conditions</li>
+                    <li><a href="https://weatherradioapp.com/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">Weather Radio</a> - NOAA weather radio alerts</li>
+                  </ul>
                 </div>
               </div>
             </section>
             
+            {/* Understanding Weather Alerts */}
             <section>
               <div className="flex items-center gap-2 mb-4">
-                <AlertCard severity="medium" title="Weather Alerts" description="" />
+                <AlertTriangle className="h-6 w-6 text-connectivity-accent" />
+                <TypographyH2>Understanding Weather Alerts</TypographyH2>
               </div>
               
-              <TypographyH3>Understanding Weather Alerts</TypographyH3>
               <div className="overflow-x-auto mt-4">
                 <table className="min-w-full border-collapse">
                   <thead>
@@ -213,6 +174,7 @@ const RVWeather = () => {
               </div>
             </section>
             
+            {/* Weather Hazards for RVers */}
             <section>
               <div className="flex items-center gap-2 mb-4">
                 <Wind className="h-6 w-6 text-connectivity-accent" />
@@ -276,22 +238,110 @@ const RVWeather = () => {
                     </ul>
                   </div>
                 </Card>
+                
+                <Card className="p-5 bg-[#5B9BD5]/10 border-[#5B9BD5]/50">
+                  <h3 className="font-bold text-lg mb-2">Winter Conditions</h3>
+                  <p className="font-bold text-sm mb-2">Risk Level: <span className="text-yellow-500">High</span></p>
+                  <div>
+                    <h4 className="font-bold text-sm">Safety Measures:</h4>
+                    <ul className="list-disc list-inside space-y-1 text-sm">
+                      <li>Properly winterize your RV if traveling in freezing temperatures</li>
+                      <li>Use RV-specific antifreeze in plumbing systems</li>
+                      <li>Insulate water hoses and connections</li>
+                      <li>Carry tire chains when required</li>
+                      <li>Monitor propane levels for heating</li>
+                    </ul>
+                  </div>
+                </Card>
+              </div>
+            </section>
+            
+            {/* Weather-Related RV Maintenance */}
+            <section>
+              <div className="flex items-center gap-2 mb-4">
+                <Thermometer className="h-6 w-6 text-connectivity-accent" />
+                <TypographyH2>Weather-Related RV Maintenance</TypographyH2>
+              </div>
+              
+              <TypographyH3 className="mt-6">Seasonal Checklist</TypographyH3>
+              <div className="grid md:grid-cols-2 gap-4 mt-4">
+                <Card className="p-5 bg-[#5B9BD5]/10 border-[#5B9BD5]/50">
+                  <h4 className="font-bold mb-2">Spring</h4>
+                  <ul className="list-disc list-inside space-y-1 text-sm">
+                    <li>Check and reseal roof seams</li>
+                    <li>Inspect window and door seals</li>
+                    <li>Test air conditioning system</li>
+                  </ul>
+                </Card>
+                
+                <Card className="p-5 bg-[#5B9BD5]/10 border-[#5B9BD5]/50">
+                  <h4 className="font-bold mb-2">Summer</h4>
+                  <ul className="list-disc list-inside space-y-1 text-sm">
+                    <li>Check tire pressure regularly (heat increases pressure)</li>
+                    <li>Clean air conditioner filters monthly</li>
+                    <li>Inspect awnings and extend/retract mechanisms</li>
+                  </ul>
+                </Card>
+                
+                <Card className="p-5 bg-[#5B9BD5]/10 border-[#5B9BD5]/50">
+                  <h4 className="font-bold mb-2">Fall</h4>
+                  <ul className="list-disc list-inside space-y-1 text-sm">
+                    <li>Check furnace operation</li>
+                    <li>Inspect weather stripping</li>
+                    <li>Clean and check roof vents</li>
+                  </ul>
+                </Card>
+                
+                <Card className="p-5 bg-[#5B9BD5]/10 border-[#5B9BD5]/50">
+                  <h4 className="font-bold mb-2">Winter</h4>
+                  <ul className="list-disc list-inside space-y-1 text-sm">
+                    <li>Apply RV antifreeze to plumbing if needed</li>
+                    <li>Check propane system and detectors</li>
+                    <li>Inspect roof for snow load capacity</li>
+                  </ul>
+                </Card>
+              </div>
+              
+              <TypographyH3 className="mt-6">Weather Impact on RV Systems</TypographyH3>
+              <div className="overflow-x-auto mt-4">
+                <table className="min-w-full border-collapse">
+                  <thead>
+                    <tr>
+                      <th className="border border-[#1a202c] p-2 bg-[#131a2a]">Weather Condition</th>
+                      <th className="border border-[#1a202c] p-2 bg-[#131a2a]">Potential Impact</th>
+                      <th className="border border-[#1a202c] p-2 bg-[#131a2a]">Preventative Measure</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td className="border border-[#1a202c] p-2 font-bold">Extreme Heat</td>
+                      <td className="border border-[#1a202c] p-2">AC strain, refrigerator failure, tire damage</td>
+                      <td className="border border-[#1a202c] p-2">Park in shade, use tire covers, check refrigerator vents</td>
+                    </tr>
+                    <tr>
+                      <td className="border border-[#1a202c] p-2 font-bold">Freezing Temps</td>
+                      <td className="border border-[#1a202c] p-2">Plumbing damage, propane regulator issues</td>
+                      <td className="border border-[#1a202c] p-2">Winterize systems, insulate connections</td>
+                    </tr>
+                    <tr>
+                      <td className="border border-[#1a202c] p-2 font-bold">High Humidity</td>
+                      <td className="border border-[#1a202c] p-2">Mold/mildew growth, electrical issues</td>
+                      <td className="border border-[#1a202c] p-2">Use dehumidifiers, check for water intrusion</td>
+                    </tr>
+                    <tr>
+                      <td className="border border-[#1a202c] p-2 font-bold">UV Exposure</td>
+                      <td className="border border-[#1a202c] p-2">Rubber/sealant degradation, fading</td>
+                      <td className="border border-[#1a202c] p-2">Use UV protectants, cover RV when stored</td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
             </section>
           </div>
           
+          {/* Sidebar */}
           <div className="lg:col-span-1 space-y-8">
-            <Card className="p-5 bg-[#131a2a]">
-              <div className="flex items-center gap-2 mb-4">
-                <MapPin className="h-5 w-5 text-connectivity-accent" />
-                <h3 className="font-bold text-lg">Your Weather</h3>
-              </div>
-              
-              <LocationSearch 
-                onLocationSelect={(location) => setCurrentLocation(location)} 
-              />
-            </Card>
-            
+            {/* RV Weather Preparedness Checklist */}
             <Card className="p-5 bg-[#131a2a]">
               <div className="flex items-center gap-2 mb-4">
                 <Flag className="h-5 w-5 text-connectivity-accent" />
@@ -318,6 +368,14 @@ const RVWeather = () => {
                       <input type="checkbox" id="surge" className="w-4 h-4" />
                       <label htmlFor="surge" className="text-sm">Surge protector for hookups</label>
                     </li>
+                    <li className="flex items-center gap-2">
+                      <input type="checkbox" id="tiedowns" className="w-4 h-4" />
+                      <label htmlFor="tiedowns" className="text-sm">Additional tie-downs and stabilizers</label>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <input type="checkbox" id="sealants" className="w-4 h-4" />
+                      <label htmlFor="sealants" className="text-sm">Weather-appropriate sealants</label>
+                    </li>
                   </ul>
                 </div>
                 
@@ -340,51 +398,72 @@ const RVWeather = () => {
                       <input type="checkbox" id="firstaid" className="w-4 h-4" />
                       <label htmlFor="firstaid" className="text-sm">First aid kit</label>
                     </li>
+                    <li className="flex items-center gap-2">
+                      <input type="checkbox" id="battery" className="w-4 h-4" />
+                      <label htmlFor="battery" className="text-sm">Battery backup for cell phones</label>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <input type="checkbox" id="maps" className="w-4 h-4" />
+                      <label htmlFor="maps" className="text-sm">Paper maps with evacuation routes</label>
+                    </li>
                   </ul>
                 </div>
               </div>
             </Card>
             
+            {/* Climate Considerations by Region */}
             <Card className="p-5 bg-[#131a2a]">
               <div className="flex items-center gap-2 mb-4">
-                <Info className="h-5 w-5 text-connectivity-accent" />
-                <h3 className="font-bold text-lg">Climate Considerations</h3>
+                <MapPin className="h-5 w-5 text-connectivity-accent" />
+                <h3 className="font-bold text-lg">Climate Considerations by Region</h3>
               </div>
               
               <div className="space-y-3">
                 <div>
                   <h4 className="font-bold text-sm">Desert Southwest</h4>
+                  <p className="text-xs">Challenges: Extreme heat (100°F+), rapid temperature changes, dusty conditions</p>
                   <p className="text-xs">Best Seasons: October-April</p>
-                  <p className="text-xs">Challenges: Extreme heat, rapid temperature changes</p>
+                  <p className="text-xs">Tips: Carry extra water, use reflective covers, check air filters frequently</p>
                 </div>
                 
                 <div>
                   <h4 className="font-bold text-sm">Pacific Northwest</h4>
+                  <p className="text-xs">Challenges: Frequent rain, high humidity, cooler temperatures</p>
                   <p className="text-xs">Best Seasons: July-September</p>
-                  <p className="text-xs">Challenges: Frequent rain, high humidity</p>
+                  <p className="text-xs">Tips: Good waterproofing, dehumidifiers, proper ventilation</p>
                 </div>
                 
                 <div>
                   <h4 className="font-bold text-sm">Mountain Regions</h4>
+                  <p className="text-xs">Challenges: Rapid weather changes, altitude effects, early/late snow</p>
                   <p className="text-xs">Best Seasons: June-September</p>
-                  <p className="text-xs">Challenges: Rapid weather changes, altitude effects</p>
+                  <p className="text-xs">Tips: Layer clothing, prepare for overnight freezes even in summer</p>
                 </div>
                 
                 <div>
                   <h4 className="font-bold text-sm">Gulf Coast/Florida</h4>
+                  <p className="text-xs">Challenges: Hurricane season, high humidity, sudden thunderstorms</p>
                   <p className="text-xs">Best Seasons: November-May</p>
-                  <p className="text-xs">Challenges: Hurricane season, high humidity</p>
+                  <p className="text-xs">Tips: Monitor hurricane forecasts, have evacuation plan</p>
+                </div>
+                
+                <div>
+                  <h4 className="font-bold text-sm">Great Plains</h4>
+                  <p className="text-xs">Challenges: Severe thunderstorms, tornadoes, strong winds</p>
+                  <p className="text-xs">Best Seasons: September-October, April-May</p>
+                  <p className="text-xs">Tips: Know tornado shelter locations, monitor weather alerts carefully</p>
                 </div>
               </div>
             </Card>
             
+            {/* Weather Resources */}
             <Card className="p-5 bg-[#131a2a]">
               <div className="flex items-center gap-2 mb-4">
-                <HelpCircle className="h-5 w-5 text-connectivity-accent" />
-                <h3 className="font-bold text-lg">Weather Resources</h3>
+                <Sun className="h-5 w-5 text-connectivity-accent" />
+                <h3 className="font-bold text-lg">Weather Resources for RVers</h3>
               </div>
               
-              <div className="space-y-2">
+              <div className="space-y-3">
                 <div>
                   <h4 className="font-bold text-sm">Online Communities</h4>
                   <ul className="list-disc list-inside text-xs space-y-1">
@@ -400,6 +479,14 @@ const RVWeather = () => {
                     <li><a href="https://www.ready.gov/severe-weather" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">Ready.gov Severe Weather</a></li>
                   </ul>
                 </div>
+                
+                <div>
+                  <h4 className="font-bold text-sm">RV-Specific Weather Courses</h4>
+                  <ul className="list-disc list-inside text-xs space-y-1">
+                    <li><a href="https://rvlifestyle.com/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">RV Weather Safety Webinars</a></li>
+                    <li><a href="https://escapees.com/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">Escapees RV Club Weather Seminars</a></li>
+                  </ul>
+                </div>
               </div>
             </Card>
             
@@ -410,7 +497,7 @@ const RVWeather = () => {
             </div>
           </div>
         </div>
-      </div>
+      </Container>
     </Layout>
   );
 };
