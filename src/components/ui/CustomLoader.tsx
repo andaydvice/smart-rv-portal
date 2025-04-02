@@ -1,5 +1,5 @@
 
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Loader2 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -13,7 +13,7 @@ interface CustomLoaderProps {
 }
 
 /**
- * A reliable loading component that includes a fail-safe timeout
+ * A simple loading component
  */
 const CustomLoader: React.FC<CustomLoaderProps> = ({
   message = "Loading...",
@@ -23,17 +23,6 @@ const CustomLoader: React.FC<CustomLoaderProps> = ({
   onRefresh = () => window.location.reload(),
   size = 'md'
 }) => {
-  const [showTimeoutMessage, setShowTimeoutMessage] = useState(false);
-  
-  useEffect(() => {
-    // Show timeout message after 10 seconds
-    const timeoutId = setTimeout(() => {
-      setShowTimeoutMessage(true);
-    }, 10000);
-    
-    return () => clearTimeout(timeoutId);
-  }, []);
-  
   // Spinner sizes
   const spinnerSize = {
     sm: 'w-8 h-8',
@@ -71,13 +60,7 @@ const CustomLoader: React.FC<CustomLoaderProps> = ({
       <div className="mt-4 text-center">
         <p className="text-lg font-medium">{message}</p>
         
-        {showTimeoutMessage && (
-          <p className="mt-2 text-sm text-gray-400">
-            This is taking longer than expected...
-          </p>
-        )}
-        
-        {(showRefreshButton || showTimeoutMessage) && (
+        {showRefreshButton && (
           <button
             onClick={onRefresh}
             className="mt-4 rounded bg-connectivity-accent px-4 py-2 font-medium text-white transition-colors hover:bg-blue-600"

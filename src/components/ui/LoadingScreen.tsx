@@ -1,5 +1,5 @@
 
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Loader2 } from "lucide-react";
 import { motion } from "framer-motion";
 
@@ -7,47 +7,15 @@ interface LoadingScreenProps {
   isLoading: boolean;
   message?: string;
   showSpinner?: boolean;
-  timeout?: number; // Add timeout prop to auto-hide after certain period
 }
 
 const LoadingScreen: React.FC<LoadingScreenProps> = ({
   isLoading,
   message = "Loading data...",
   showSpinner = true,
-  timeout = 15000, // Default 15 second timeout
 }) => {
-  const [forceHide, setForceHide] = useState(false);
-  const [showRefreshButton, setShowRefreshButton] = useState(false);
-  
-  useEffect(() => {
-    // Reset states when loading state changes
-    if (isLoading) {
-      setForceHide(false);
-      setShowRefreshButton(false);
-      
-      // Show refresh button after 8 seconds of loading
-      const refreshTimer = setTimeout(() => {
-        if (isLoading) {
-          setShowRefreshButton(true);
-        }
-      }, 8000);
-      
-      // Force-hide the loading screen after timeout to prevent infinite loading
-      const timeoutTimer = setTimeout(() => {
-        console.log("Loading timeout reached, forcing hide");
-        setForceHide(true);
-      }, timeout);
-      
-      // Clean up timers
-      return () => {
-        clearTimeout(refreshTimer);
-        clearTimeout(timeoutTimer);
-      };
-    }
-  }, [isLoading, timeout]);
-
-  // Don't render if not loading or force hidden
-  if (!isLoading || forceHide) return null;
+  // Don't render if not loading
+  if (!isLoading) return null;
 
   return (
     <motion.div
@@ -76,16 +44,6 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({
           <p className="text-sm text-gray-300">
             Please wait while we load your content
           </p>
-          
-          {/* Show refresh button if loading takes too long */}
-          {showRefreshButton && (
-            <button
-              onClick={() => window.location.reload()}
-              className="mt-4 rounded bg-connectivity-accent px-4 py-2 font-medium text-white hover:bg-blue-600 transition-colors"
-            >
-              Reload Page
-            </button>
-          )}
         </div>
       </div>
 

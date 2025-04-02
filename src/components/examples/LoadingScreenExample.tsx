@@ -9,7 +9,7 @@ import useLoading from "@/hooks/useLoading";
  * with a simulated data loading process
  */
 const LoadingScreenExample: React.FC = () => {
-  const { isLoading, startLoading, stopLoading, resetLoading } = useLoading(true);
+  const { isLoading, startLoading, stopLoading } = useLoading(true);
   const [data, setData] = React.useState<string[]>([]);
 
   useEffect(() => {
@@ -44,29 +44,14 @@ const LoadingScreenExample: React.FC = () => {
 
     // Start fetching data
     fetchData();
-
-    // Emergency reset of loading state after 10 seconds
-    const safetyTimeout = setTimeout(() => {
-      if (isLoading) {
-        console.warn("Emergency loading reset triggered");
-        resetLoading();
-        toast.error("Loading timeout reached. Data may be incomplete.");
-      }
-    }, 10000);
-
-    // Cleanup function
-    return () => {
-      clearTimeout(safetyTimeout);
-    };
-  }, [stopLoading, resetLoading, isLoading]);
+  }, [stopLoading]);
 
   return (
     <div className="min-h-screen bg-[#080F1F] p-8 text-white">
-      {/* Loading Screen with timeout */}
+      {/* Loading Screen */}
       <LoadingScreen 
         isLoading={isLoading} 
         message="Loading your dashboard..." 
-        timeout={10000}
       />
       
       {/* Content that appears after loading */}
