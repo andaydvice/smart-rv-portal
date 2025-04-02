@@ -1,6 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
-import { usePreviewDebugger, withPreviewDebug } from '@/utils/debugging/previewDebugger';
+import { usePreviewDebugger } from '@/utils/debugging/previewDebugger';
+import { withPreviewDebugJSX } from '@/utils/debugging/previewDebuggerWithJSX';
 import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
 
@@ -50,7 +51,7 @@ const ErrorProne: React.FC<{ shouldError?: boolean }> = ({ shouldError = false }
 };
 
 // Wrap the error-prone component with our debug wrapper
-const DebuggableErrorProne = withPreviewDebug(
+const DebuggableErrorProne = withPreviewDebugJSX(
   ErrorProne, 
   'ErrorProne', 
   'src/components/debug/PreviewDebugDemo.tsx'
