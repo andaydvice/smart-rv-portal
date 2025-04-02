@@ -1,8 +1,8 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import Navbar from "@/components/Navbar";
 import Layout from "@/components/layout/Layout";
+import OptimizedImage from "@/components/ui/OptimizedImage";
 import { Droplet, RefreshCw, Filter, Waves } from "lucide-react";
 
 const WaterSystems = () => {
@@ -28,11 +28,10 @@ const WaterSystems = () => {
                     Using state-of-the-art sensors and automation, you'll have real-time insights into water levels, temperature, and quality metrics, ensuring you always have clean, safe water wherever your journey takes you.
                   </p>
                 </div>
-                <img
-                  src="/lovable-uploads/9ee8ff41-ea7b-4834-8683-d803cc65254a.png"
-                  alt="RV Smart Water System with Digital Water Monitor"
+                <OptimizedImage
+                  imageSrc="/lovable-uploads/3347398e-d04b-4c91-a703-24663fef7d92.png"
+                  alt="RV Smart Water System with Digital Water Monitor and control interface"
                   className="w-full h-auto object-cover rounded-lg mb-6"
-                  loading="eager"
                 />
                 <ul className="list-disc list-inside space-y-3 text-gray-300">
                   <li>Real-time tank level monitoring for fresh, gray, and black water</li>
