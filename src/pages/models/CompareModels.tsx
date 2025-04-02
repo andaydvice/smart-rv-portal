@@ -1,4 +1,3 @@
-
 import React, { useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Footer2 from "@/components/ui/Footer2";
@@ -248,7 +247,7 @@ const CompareModels = () => {
               { text: "Luxury Class", href: "/models/luxury" },
               { text: "Adventure Class", href: "/models/adventure" },
               { text: "Compact Smart", href: "/models/compact" },
-              { text: "Compare Models", href: "/compare-models" }
+              { text: "Compare Models", href: "/models/compare" }
             ]
           }
         ]}
