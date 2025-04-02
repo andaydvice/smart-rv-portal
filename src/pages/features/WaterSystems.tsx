@@ -2,7 +2,6 @@
 import React from "react";
 import { motion } from "framer-motion";
 import Layout from "@/components/layout/Layout";
-import OptimizedImage from "@/components/ui/OptimizedImage";
 import { Droplet, RefreshCw, Filter, Waves } from "lucide-react";
 
 const WaterSystems = () => {
@@ -18,30 +17,6 @@ const WaterSystems = () => {
             <h1 className="text-4xl font-bold text-white mb-8">RV Water Systems</h1>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-              <div className="bg-connectivity-darkBg p-8 rounded-lg border border-gray-700">
-                <h2 className="text-2xl font-semibold text-connectivity-accent mb-4">Smart Water Management System</h2>
-                <div className="space-y-4 text-gray-300 mb-6">
-                  <p>
-                    Our advanced Smart Water Management System offers comprehensive control and monitoring of your RV's water usage, storage, and quality.
-                  </p>
-                  <p>
-                    Using state-of-the-art sensors and automation, you'll have real-time insights into water levels, temperature, and quality metrics, ensuring you always have clean, safe water wherever your journey takes you.
-                  </p>
-                </div>
-                <OptimizedImage
-                  imageSrc="/lovable-uploads/3347398e-d04b-4c91-a703-24663fef7d92.png"
-                  alt="RV Smart Water System with Digital Water Monitor and control interface"
-                  className="w-full h-auto object-cover rounded-lg mb-6"
-                />
-                <ul className="list-disc list-inside space-y-3 text-gray-300">
-                  <li>Real-time tank level monitoring for fresh, gray, and black water</li>
-                  <li>Automated water purification and filtration system</li>
-                  <li>Temperature-controlled water heating and circulation</li>
-                  <li>Leak detection and automatic shut-off valves</li>
-                  <li>Water usage tracking and conservation recommendations</li>
-                </ul>
-              </div>
-
               <div className="space-y-6">
                 <div className="bg-connectivity-darkBg p-6 rounded-lg border border-gray-700">
                   <Droplet className="h-6 w-6 text-connectivity-accent mb-4" />
