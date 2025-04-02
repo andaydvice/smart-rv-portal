@@ -5,8 +5,8 @@ declare global {
   interface Window {
     _persistentMarkers?: Record<string, mapboxgl.Marker>;
     mapInstance?: mapboxgl.Map;
-    mapboxgl?: typeof mapboxgl;
     isStorageFacilitiesPage?: boolean;
+    forceRouteUpdate?: (route: string) => boolean;
   }
 }
 

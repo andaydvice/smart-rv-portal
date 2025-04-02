@@ -14,4 +14,5 @@ interface Window {
   mapFacilities?: any[];
   mapInstance?: mapboxgl.Map;
   isStorageFacilitiesPage?: boolean;
+  forceRouteUpdate?: (route: string) => boolean;
 }
