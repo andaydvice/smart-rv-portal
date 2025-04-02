@@ -15,6 +15,7 @@ const Contact = lazy(() => import('@/pages/Contact'));
 const StoragePreparationChecklist = lazy(() => import('@/pages/StoragePreparationChecklist'));
 const ScheduleDemo = lazy(() => import('@/pages/ScheduleDemo'));
 const WaterSystems = lazy(() => import('@/pages/features/WaterSystems'));
+const PreviewDebugDemo = lazy(() => import('@/components/debug/PreviewDebugDemo'));
 
 // Loading component
 const PageLoading = () => (
@@ -59,6 +60,7 @@ const RouterProvider: React.FC = () => {
           <Route path="/storage-preparation-checklist" element={<StoragePreparationChecklist />} />
           <Route path="/schedule-demo" element={<ScheduleDemo />} />
           <Route path="/features/water-systems" element={<WaterSystems />} />
+          <Route path="/debug" element={<PreviewDebugDemo />} />
           
           {/* Redirect all 404s to home page */}
           <Route path="*" element={<Navigate to="/" replace />} />
