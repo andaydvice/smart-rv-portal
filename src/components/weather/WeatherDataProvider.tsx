@@ -17,10 +17,18 @@ const WeatherDataProvider: React.FC<WeatherDataProviderProps> = ({
   children,
 }) => {
   const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<Error | null>(null);
 
   useEffect(() => {
+    const apiKey = localStorage.getItem('oneCallAPIKey');
+    if (!apiKey) {
+      // Don't attempt to fetch if no API key is available
+      setError(new Error('API key is required'));
+      setIsLoading(false);
+      return;
+    }
+
     const fetchData = async () => {
       try {
         setIsLoading(true);

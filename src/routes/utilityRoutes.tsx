@@ -8,6 +8,7 @@ import Calculators from "@/pages/Calculators";
 import VoiceControl from "@/pages/VoiceControl";
 import Troubleshooting from "@/pages/Troubleshooting";
 import WeatherDashboard from "@/pages/WeatherDashboard";
+import RVWeather from "@/pages/RVWeather";
 import StoragePreparationChecklist from "@/pages/StoragePreparationChecklist";
 import StorageFacilities from "@/pages/StorageFacilities";
 import MapIconDemo from "@/pages/MapIconDemo";
@@ -31,8 +32,13 @@ export const utilityRoutes: RouteObject[] = [
     errorElement: <ErrorPage />,
   },
   {
-    path: "/rv-weather",
+    path: "/weather-dashboard",
     element: <WeatherDashboard />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/rv-weather",
+    element: <RVWeather />,
     errorElement: <ErrorPage />,
   },
   {
