@@ -2,7 +2,7 @@
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import { Link } from "react-router-dom";
-import { Navigation, Shield, Battery, Tv, Droplet, Cog, Thermometer } from "lucide-react";
+import { Navigation, Shield, Battery, Tv, Droplet, Cog, Thermometer, Music } from "lucide-react";
 import Layout from "@/components/layout/Layout";
 
 const Features = () => {
@@ -54,7 +54,7 @@ const Features = () => {
               <div className="bg-gray-800/50 p-6 rounded-lg border border-gray-700 hover:border-blue-500 transition-colors">
                 <Droplet className="h-8 w-8 text-blue-500 mb-4" />
                 <h2 className="text-2xl font-semibold text-blue-400 mb-4">Water Systems</h2>
-                <p className="text-gray-300">Advanced water management with real-time monitoring, filtration, and conservation features for both fresh and waste water systems.</p>
+                <p className="text-gray-300">Advanced water management with real time monitoring, filtration, and conservation features for both fresh and waste water systems.</p>
               </div>
             </Link>
 
@@ -70,7 +70,15 @@ const Features = () => {
               <div className="bg-gray-800/50 p-6 rounded-lg border border-gray-700 hover:border-blue-500 transition-colors">
                 <Thermometer className="h-8 w-8 text-blue-500 mb-4" />
                 <h2 className="text-2xl font-semibold text-blue-400 mb-4">Climate Control</h2>
-                <p className="text-gray-300">Advanced multi-zone climate system with smart scheduling, humidity management, and air quality monitoring for ultimate comfort.</p>
+                <p className="text-gray-300">Advanced multi zone climate system with smart scheduling, humidity management, and air quality monitoring for ultimate comfort.</p>
+              </div>
+            </Link>
+            
+            <Link to="/features/entertainment" className="block">
+              <div className="bg-gray-800/50 p-6 rounded-lg border border-gray-700 hover:border-pink-500 transition-colors">
+                <Music className="h-8 w-8 text-pink-500 mb-4" />
+                <h2 className="text-2xl font-semibold text-pink-400 mb-4">Entertainment</h2>
+                <p className="text-gray-300">Comprehensive entertainment solution with premium audio, smart TV integration, and outdoor media options for the ultimate RV experience.</p>
               </div>
             </Link>
           </div>

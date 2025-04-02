@@ -40,6 +40,12 @@ const SmartFeaturesLinks = () => {
       >
         Climate Control
       </Link>
+      <Link
+        to="/features/entertainment"
+        className="text-gray-300 hover:text-[#5B9BD5] block px-3 py-2 rounded-md text-base font-medium"
+      >
+        Entertainment
+      </Link>
     </>
   );
 };
