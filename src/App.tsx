@@ -7,6 +7,7 @@ import { AuthProvider } from './components/auth/AuthContext';
 import { injectEmergencyStyles } from './utils/markers/styleInjection';
 import { forceMapMarkersVisible } from './utils/forceMapMarkers';
 import { preventRouteReload } from './utils/navigation/preventRouteReload';
+import EmergencyContentRecovery from './components/recovery/EmergencyContentRecovery';
 import './App.css';
 import './styles/animations.css';
 import './styles/map-loading.css';
@@ -44,6 +45,7 @@ function AppContent() {
     
     // Force the background color on the document body
     document.body.style.backgroundColor = '#080F1F';
+    document.documentElement.style.backgroundColor = '#080F1F';
     
     // Debug navigation events
     const handleRouteChange = () => {
@@ -64,7 +66,7 @@ function AppContent() {
     }
     
     // Store map instance globally for emergency access
-    document.addEventListener('mapboxgl.map.created', (e: CustomEvent) => {
+    document.addEventListener('mapboxgl.map.created', (e: any) => {
       (window as any).mapInstance = e.detail.map;
     });
     
@@ -73,9 +75,24 @@ function AppContent() {
       document.dispatchEvent(new CustomEvent(eventName, { detail }));
     };
     
+    // Force-fix blank screen if it persists for 3 seconds
+    const blankScreenTimeout = setTimeout(() => {
+      const rootElement = document.getElementById('root');
+      if (rootElement && (rootElement.children.length === 0 || rootElement.style.opacity === '0')) {
+        console.warn('Detected potential blank screen after 3s, applying emergency fix');
+        document.body.style.visibility = 'visible';
+        document.body.style.display = 'block';
+        document.body.style.backgroundColor = '#080F1F';
+        rootElement.style.visibility = 'visible';
+        rootElement.style.display = 'block';
+        rootElement.style.backgroundColor = '#080F1F';
+      }
+    }, 3000);
+    
     return () => {
       window.removeEventListener('popstate', handleRouteChange);
       window.removeEventListener('lovable-navigation', handleRouteChange);
+      clearTimeout(blankScreenTimeout);
     };
   }, []);
 
@@ -98,12 +115,20 @@ function App() {
   // Set routes available flag for debugging
   (window as any).routesAvailable = true;
   
+  // Important: Force document background color immediately
+  if (typeof document !== 'undefined') {
+    document.documentElement.style.backgroundColor = '#080F1F';
+    document.body.style.backgroundColor = '#080F1F';
+  }
+  
   return (
-    <QueryClientProvider client={queryClient}>
-      <AuthProvider>
-        <AppContent />
-      </AuthProvider>
-    </QueryClientProvider>
+    <EmergencyContentRecovery>
+      <QueryClientProvider client={queryClient}>
+        <AuthProvider>
+          <AppContent />
+        </AuthProvider>
+      </QueryClientProvider>
+    </EmergencyContentRecovery>
   );
 }
 

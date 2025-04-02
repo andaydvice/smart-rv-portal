@@ -7,15 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Smart RV Systems: Next-generation connectivity and control for your RV" />
     <title>Smart RV Systems</title>
-    <!-- Include emergency markers script for guaranteed marker visibility -->
-    <script src="/emergencyMarkers.js"></script>
-    <!-- Add Google Maps API with the key -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAGKkTg0DlZd7fCJlfkVNqkRkzPjeqKJ2o&libraries=places" async defer></script>
-    <!-- Initial page path detection -->
+    <!-- Emergency fixes - run before everything else -->
     <script>
-      window.initialPath = window.location.pathname;
-      console.log('Initial page load path:', window.initialPath);
-      
       // Ensure background color is set immediately
       document.documentElement.style.backgroundColor = '#080F1F';
       
@@ -27,6 +20,26 @@
           console.log('Page became visible, ensuring dark background');
         }
       });
+    </script>
+    <!-- Emergency blank screen fix script -->
+    <script src="/fixBlankScreens.js"></script>
+    <!-- Include emergency markers script for guaranteed marker visibility -->
+    <script src="/emergencyMarkers.js"></script>
+    <!-- Add Google Maps API with the key -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAGKkTg0DlZd7fCJlfkVNqkRkzPjeqKJ2o&libraries=places" async defer></script>
+    <!-- Initial page path detection -->
+    <script>
+      window.initialPath = window.location.pathname;
+      console.log('Initial page load path:', window.initialPath);
+      
+      // Track initial load data
+      window.initialLoadTime = Date.now();
+      window.initialScreenWidth = window.innerWidth;
+      window.initialScreenHeight = window.innerHeight;
+      
+      // Ensure background color is set immediately
+      document.documentElement.style.backgroundColor = '#080F1F';
+      document.documentElement.style.minHeight = '100vh';
     </script>
     <style>
       /* Critical CSS to prevent flashing */

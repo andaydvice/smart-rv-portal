@@ -1,5 +1,5 @@
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { Suspense, lazy } from 'react';
 import { initNavigationDebugging } from '@/utils/diagnostics/navigationDebug';
@@ -17,17 +17,28 @@ const ScheduleDemo = lazy(() => import('@/pages/ScheduleDemo'));
 const WaterSystems = lazy(() => import('@/pages/features/WaterSystems'));
 const PreviewDebugDemo = lazy(() => import('@/components/debug/PreviewDebugDemo'));
 
-// Loading component
-const PageLoading = () => (
-  <div className="flex items-center justify-center h-screen bg-[#080F1F] text-white">
-    <div className="text-center">
-      <div className="w-12 h-12 border-t-4 border-blue-500 border-solid rounded-full animate-spin mx-auto mb-2"></div>
-      <p>Loading page...</p>
+// Loading component with visibility enforcement
+const PageLoading = () => {
+  // Force document background color in loading state
+  useEffect(() => {
+    document.body.style.backgroundColor = '#080F1F';
+    document.documentElement.style.backgroundColor = '#080F1F';
+  }, []);
+
+  return (
+    <div className="flex items-center justify-center h-screen w-full bg-[#080F1F] text-white"
+         style={{ visibility: 'visible', opacity: 1, backgroundColor: '#080F1F' }}>
+      <div className="text-center">
+        <div className="w-12 h-12 border-t-4 border-blue-500 border-solid rounded-full animate-spin mx-auto mb-2"></div>
+        <p>Loading page...</p>
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 const RouterProvider: React.FC = () => {
+  const [isNavigating, setIsNavigating] = useState(false);
+
   useEffect(() => {
     // Initialize navigation debugging
     initNavigationDebugging();
@@ -37,17 +48,49 @@ const RouterProvider: React.FC = () => {
     
     // Force background color
     document.body.style.backgroundColor = '#080F1F';
+    document.documentElement.style.backgroundColor = '#080F1F';
     
     // Add class to body for styling during navigation
     document.body.classList.add('navigation-enabled');
     
+    // Listen for navigation events
+    const handleNavigation = () => {
+      console.log('Navigation detected');
+      setIsNavigating(true);
+      
+      // Reset navigation state after animation completes
+      setTimeout(() => {
+        setIsNavigating(false);
+      }, 500);
+    };
+    
+    window.addEventListener('popstate', handleNavigation);
+    window.addEventListener('lovable-navigation', handleNavigation);
+    
+    // Apply emergency styles immediately
+    const rootElement = document.getElementById('root');
+    if (rootElement) {
+      rootElement.style.backgroundColor = '#080F1F';
+      rootElement.style.visibility = 'visible';
+      rootElement.style.opacity = '1';
+    }
+    
     return () => {
       document.body.classList.remove('navigation-enabled');
+      window.removeEventListener('popstate', handleNavigation);
+      window.removeEventListener('lovable-navigation', handleNavigation);
     };
   }, []);
 
   return (
     <Router>
+      {/* Navigation overlay that appears during page transitions */}
+      {isNavigating && (
+        <div className="fixed inset-0 bg-[#080F1F] z-50 flex items-center justify-center">
+          <div className="w-12 h-12 border-t-4 border-blue-500 border-solid rounded-full animate-spin"></div>
+        </div>
+      )}
+      
       <Suspense fallback={<PageLoading />}>
         <Routes>
           <Route path="/" element={<Index />} />
