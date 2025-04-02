@@ -52,7 +52,7 @@ export const modelRoutes: RouteObject[] = [
     errorElement: <ErrorPage />,
   },
   {
-    path: "/compare-models",
+    path: "/models/compare-models",
     element: <Navigate to="/models/compare" replace />,
     errorElement: <ErrorPage />,
   }
