@@ -1,8 +1,9 @@
 
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { Suspense, lazy } from 'react';
 import { initNavigationDebugging } from '@/utils/diagnostics/navigationDebug';
+import { fixBlankScreen } from '@/utils/navigation/fixNavigation';
 
 // Import pages
 const Index = lazy(() => import('@/pages/Index'));
@@ -17,12 +18,21 @@ const ScheduleDemo = lazy(() => import('@/pages/ScheduleDemo'));
 const WaterSystems = lazy(() => import('@/pages/features/WaterSystems'));
 const PreviewDebugDemo = lazy(() => import('@/components/debug/PreviewDebugDemo'));
 
-// Loading component with visibility enforcement
+// Loading component with visibility enforcement and timeout
 const PageLoading = () => {
+  const [isLongLoad, setIsLongLoad] = useState(false);
+
   // Force document background color in loading state
   useEffect(() => {
     document.body.style.backgroundColor = '#080F1F';
     document.documentElement.style.backgroundColor = '#080F1F';
+    
+    // Check if loading is taking too long
+    const timeoutId = setTimeout(() => {
+      setIsLongLoad(true);
+    }, 3000);
+    
+    return () => clearTimeout(timeoutId);
   }, []);
 
   return (
@@ -31,9 +41,38 @@ const PageLoading = () => {
       <div className="text-center">
         <div className="w-12 h-12 border-t-4 border-blue-500 border-solid rounded-full animate-spin mx-auto mb-2"></div>
         <p>Loading page...</p>
+        
+        {isLongLoad && (
+          <div className="mt-4">
+            <p className="text-sm text-gray-400">Taking longer than expected...</p>
+            <button 
+              onClick={() => window.location.reload()}
+              className="mt-2 bg-[#5B9BD5] text-white px-3 py-1 text-sm rounded hover:bg-blue-600"
+            >
+              Refresh page
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );
+};
+
+// This component will track and fix location changes
+const LocationTracker = () => {
+  const location = useLocation();
+  
+  useEffect(() => {
+    console.log('Route changed to:', location.pathname);
+    
+    // Apply fixes for blank screens after route changes
+    setTimeout(() => {
+      fixBlankScreen();
+    }, 100);
+    
+  }, [location]);
+  
+  return null;
 };
 
 const RouterProvider: React.FC = () => {
@@ -61,11 +100,19 @@ const RouterProvider: React.FC = () => {
       // Reset navigation state after animation completes
       setTimeout(() => {
         setIsNavigating(false);
+        
+        // Fix blank screen after navigation
+        fixBlankScreen();
       }, 500);
     };
     
     window.addEventListener('popstate', handleNavigation);
     window.addEventListener('lovable-navigation', handleNavigation);
+    document.addEventListener('recovery-attempted', () => {
+      // If recovery was attempted, we should restart the router
+      console.log('Recovery attempted, forcing router refresh');
+      setIsNavigating(prev => !prev); // Toggle to force re-render
+    });
     
     // Apply emergency styles immediately
     const rootElement = document.getElementById('root');
@@ -75,10 +122,16 @@ const RouterProvider: React.FC = () => {
       rootElement.style.opacity = '1';
     }
     
+    // Attempt to fix blank screen on initial load
+    setTimeout(() => {
+      fixBlankScreen();
+    }, 1000);
+    
     return () => {
       document.body.classList.remove('navigation-enabled');
       window.removeEventListener('popstate', handleNavigation);
       window.removeEventListener('lovable-navigation', handleNavigation);
+      document.removeEventListener('recovery-attempted', handleNavigation);
     };
   }, []);
 
@@ -90,6 +143,8 @@ const RouterProvider: React.FC = () => {
           <div className="w-12 h-12 border-t-4 border-blue-500 border-solid rounded-full animate-spin"></div>
         </div>
       )}
+      
+      <LocationTracker />
       
       <Suspense fallback={<PageLoading />}>
         <Routes>

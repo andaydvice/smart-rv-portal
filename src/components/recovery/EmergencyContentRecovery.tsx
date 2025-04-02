@@ -17,33 +17,31 @@ const EmergencyContentRecovery: React.FC<EmergencyContentRecoveryProps> = ({ chi
 
   // Check for blank screen on mount and periodically
   useEffect(() => {
-    // Initial check
-    checkForBlankScreen();
+    // Delay initial check to give the app time to render
+    const initialCheckTimeout = setTimeout(() => {
+      checkForBlankScreen();
+    }, 2500);
     
-    // Periodic checks
-    const intervalId = setInterval(checkForBlankScreen, 2000);
+    // Less frequent periodic checks to reduce interference
+    const intervalId = setInterval(checkForBlankScreen, 5000);
     
-    // Force a recovery attempt after 5 seconds regardless
-    const forceRecoveryTimeout = setTimeout(() => {
-      attemptRecovery(true);
-    }, 5000);
+    // Don't force recovery automatically as it may interfere with normal loading
     
     return () => {
       clearInterval(intervalId);
-      clearTimeout(forceRecoveryTimeout);
+      clearTimeout(initialCheckTimeout);
     };
   }, []);
 
   // Check if the screen appears to be blank
   const checkForBlankScreen = () => {
-    if (document.body.children.length === 0) {
-      console.error("BLANK SCREEN: No children in body");
-      setHasDetectedBlankScreen(true);
-      attemptRecovery();
-      return;
-    }
+    // Only check if we haven't already detected a blank screen
+    if (recoveryAttempted) return;
     
+    // Check if we have any content in the main areas
     const rootElement = document.getElementById('root');
+    const mainContent = document.querySelector('main, .min-h-screen, .layout-container');
+    
     if (!rootElement || rootElement.children.length === 0) {
       console.error("BLANK SCREEN: Empty root element");
       setHasDetectedBlankScreen(true);
@@ -51,26 +49,24 @@ const EmergencyContentRecovery: React.FC<EmergencyContentRecoveryProps> = ({ chi
       return;
     }
     
-    // Check if main content containers exist but are empty or hidden
-    const contentContainers = document.querySelectorAll('main, [role="main"], .content, #content, .container');
-    let allEmpty = true;
-    let allHidden = true;
-    
-    contentContainers.forEach((container) => {
-      if (container.children.length > 0) {
-        allEmpty = false;
+    // If no main content and loader has been showing for too long
+    if (!mainContent && document.querySelector('.animate-spin')) {
+      const loaderElements = document.querySelectorAll('.animate-spin');
+      if (loaderElements.length > 0) {
+        console.log("Loader detected, waiting for content to appear");
+        // Only attempt recovery if the loader has been visible for too long
+        if (!recoveryAttempted) {
+          setTimeout(() => {
+            const stillHasLoader = document.querySelector('.animate-spin');
+            const hasContent = document.querySelector('main, .min-h-screen, .layout-container');
+            if (stillHasLoader && !hasContent) {
+              console.error("LOADER STUCK: Loader has been visible for too long");
+              setHasDetectedBlankScreen(true);
+              attemptRecovery();
+            }
+          }, 5000);
+        }
       }
-      
-      const style = window.getComputedStyle(container);
-      if (style.display !== 'none' && style.visibility !== 'hidden' && style.opacity !== '0') {
-        allHidden = false;
-      }
-    });
-    
-    if ((contentContainers.length > 0 && allEmpty) || allHidden) {
-      console.error("BLANK SCREEN: Content containers empty or hidden");
-      setHasDetectedBlankScreen(true);
-      attemptRecovery();
     }
   };
 
@@ -81,46 +77,37 @@ const EmergencyContentRecovery: React.FC<EmergencyContentRecoveryProps> = ({ chi
     console.log("RECOVERY: Attempting to recover from blank screen");
     setRecoveryAttempted(true);
     
-    // Force root element and body to be visible
-    document.body.style.backgroundColor = '#080F1F';
-    document.body.style.visibility = 'visible';
-    document.body.style.display = 'block';
-    document.body.style.opacity = '1';
-    
-    const rootElement = document.getElementById('root');
-    if (rootElement) {
-      rootElement.style.backgroundColor = '#080F1F';
-      rootElement.style.visibility = 'visible';
-      rootElement.style.display = 'block';
-      rootElement.style.opacity = '1';
-      rootElement.style.minHeight = '100vh';
-    }
-    
-    // Force all content elements to be visible
-    document.querySelectorAll('main, .container, .content, [role="main"], #content').forEach(el => {
-      if (el instanceof HTMLElement) {
-        el.style.visibility = 'visible';
-        el.style.display = 'block';
-        el.style.opacity = '1';
-        el.style.backgroundColor = '#080F1F';
+    try {
+      // Force background color
+      document.body.style.backgroundColor = '#080F1F';
+      document.documentElement.style.backgroundColor = '#080F1F';
+      
+      // Check if any React content has loaded
+      const app = document.querySelector('#root > div');
+      
+      if (!app || app.children.length === 0) {
+        // Force reload as a last resort
+        console.error("CRITICAL: No React app detected, forcing reload");
+        window.location.reload();
+        return;
       }
-    });
-    
-    // Force render React components by triggering a window resize event
-    try {
-      window.dispatchEvent(new Event('resize'));
-    } catch (e) {
-      console.error("RECOVERY: Error dispatching resize event", e);
-    }
-    
-    // Try reloading the route without refreshing the page
-    try {
-      const event = new CustomEvent('lovable-navigation', {
-        detail: { path: window.location.pathname }
+      
+      // Try to force show any hidden content
+      document.querySelectorAll('main, .container, .content, [role="main"], #content').forEach(el => {
+        if (el instanceof HTMLElement) {
+          el.style.visibility = 'visible';
+          el.style.display = 'block';
+          el.style.opacity = '1';
+        }
       });
-      document.dispatchEvent(event);
+      
+      // Trigger a resize event to potentially force React to update
+      window.dispatchEvent(new Event('resize'));
+      
+      // Dispatch a custom event to notify other components
+      document.dispatchEvent(new CustomEvent('recovery-attempted'));
     } catch (e) {
-      console.error("RECOVERY: Error dispatching navigation event", e);
+      console.error("Recovery attempt failed:", e);
     }
   };
 
@@ -134,7 +121,7 @@ const EmergencyContentRecovery: React.FC<EmergencyContentRecoveryProps> = ({ chi
       {/* Original content */}
       {children}
       
-      {/* Recovery UI that appears when blank screen is detected */}
+      {/* Recovery UI that appears only when blank screen is detected and confirmed */}
       {hasDetectedBlankScreen && (
         <div className="fixed inset-0 flex items-center justify-center z-[9999] bg-[#080F1F] bg-opacity-90">
           <div className="max-w-md w-full p-4">

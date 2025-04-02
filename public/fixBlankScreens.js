@@ -1,8 +1,11 @@
-
 // Emergency script to fix blank screens
 (function() {
   console.log('Emergency blank screen fix script loaded');
 
+  // Track failed attempts to avoid infinite loops
+  let fixAttempts = 0;
+  const MAX_FIX_ATTEMPTS = 5;
+  
   // Run on load
   window.addEventListener('load', fixBlankScreen);
   
@@ -12,8 +15,17 @@
   // Run immediately
   fixBlankScreen();
   
-  // Run periodically
-  setInterval(fixBlankScreen, 3000);
+  // Run periodically but less aggressively
+  const checkInterval = setInterval(() => {
+    // Only keep trying for the first minute
+    if (document.readyState === 'complete' && fixAttempts > MAX_FIX_ATTEMPTS) {
+      console.log('Max fix attempts reached, stopping automatic checks');
+      clearInterval(checkInterval);
+      return;
+    }
+    
+    fixBlankScreen();
+  }, 5000);
   
   // Run on visibility change
   document.addEventListener('visibilitychange', function() {
@@ -24,6 +36,14 @@
   
   function fixBlankScreen() {
     console.log('Running blank screen check');
+    fixAttempts++;
+    
+    // Check if React app is already loaded and displaying content
+    const hasContent = document.querySelector('main, .min-h-screen, .layout-container, .page-transition');
+    if (hasContent) {
+      console.log('Content already present, no emergency fix needed');
+      return;
+    }
     
     // Force dark background on HTML and body
     document.documentElement.style.backgroundColor = '#080F1F';
@@ -47,9 +67,10 @@
         `;
       }
       
-      // Add visible content if root is still empty
-      if (!rootElement || rootElement.children.length === 0) {
-        console.warn('Root is empty, adding emergency content');
+      // Only add visible content if React hasn't mounted anything yet
+      // and we've tried multiple times
+      if ((!rootElement || rootElement.children.length === 0) && fixAttempts > 2) {
+        console.warn('Root is empty after multiple attempts, adding emergency content');
         
         // Create emergency content
         const emergencyContent = document.createElement('div');
@@ -96,4 +117,7 @@
       });
     }
   }
+  
+  // Allow manual triggering of fix
+  window.fixBlankScreen = fixBlankScreen;
 })();
