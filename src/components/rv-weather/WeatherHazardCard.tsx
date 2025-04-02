@@ -1,6 +1,5 @@
 
 import React from "react";
-import { Card } from "@/components/ui/card";
 
 interface WeatherHazardCardProps {
   title: string;
@@ -12,26 +11,35 @@ interface WeatherHazardCardProps {
   avoidTravel?: string;
 }
 
-const WeatherHazardCard: React.FC<WeatherHazardCardProps> = ({ 
-  title, 
-  riskLevel, 
+const WeatherHazardCard: React.FC<WeatherHazardCardProps> = ({
+  title,
+  riskLevel,
   safetyMeasures,
-  avoidTravel 
+  avoidTravel,
 }) => {
   return (
-    <Card className="p-5 bg-[#5B9BD5]/10 border-[#5B9BD5]/50">
-      <h3 className="font-bold text-lg mb-2">{title}</h3>
-      <p className="font-bold text-sm mb-2">Risk Level: <span className={riskLevel.color}>{riskLevel.text}</span></p>
-      <div>
-        <h4 className="font-bold text-sm">Safety Measures:</h4>
-        <ul className="list-disc list-inside space-y-1 text-sm">
+    <div className="p-4 rounded-lg border border-[#1a202c] bg-[#080F1F]/70">
+      <div className="flex justify-between items-start">
+        <h4 className="font-bold text-xl">{title}</h4>
+        <span className={`text-sm font-medium ${riskLevel.color}`}>{riskLevel.text}</span>
+      </div>
+      
+      <div className="mt-3">
+        <h5 className="font-medium text-sm text-[#5B9BD5]">Safety Measures:</h5>
+        <ul className="mt-1 space-y-1 text-sm text-light-blue list-disc list-inside">
           {safetyMeasures.map((measure, index) => (
             <li key={index}>{measure}</li>
           ))}
         </ul>
       </div>
-      {avoidTravel && <p className="text-sm mt-2"><span className="font-bold">When to Avoid Travel:</span> {avoidTravel}</p>}
-    </Card>
+      
+      {avoidTravel && (
+        <div className="mt-3">
+          <h5 className="font-medium text-sm text-[#5B9BD5]">When to Avoid Travel:</h5>
+          <p className="mt-1 text-sm text-light-blue">{avoidTravel}</p>
+        </div>
+      )}
+    </div>
   );
 };
 

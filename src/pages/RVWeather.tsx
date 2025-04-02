@@ -10,6 +10,7 @@ import Sidebar from "@/components/rv-weather/Sidebar";
 const RVWeather = () => {
   useEffect(() => {
     scrollToTop();
+    console.log("RVWeather page mounted");
   }, []);
 
   return (

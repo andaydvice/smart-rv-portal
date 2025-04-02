@@ -1,78 +1,74 @@
 
 import React from "react";
-import { Card } from "@/components/ui/card";
-import { Flag } from "lucide-react";
+import { TypographyH4 } from "@/components/ui/typography";
+import { CheckSquare } from "lucide-react";
 
 const PreparednessChecklist = () => {
   return (
-    <Card className="p-5 bg-[#131a2a]">
+    <div className="p-6 rounded-lg bg-gradient-to-b from-connectivity-darkBg to-[#131a2a] border border-[#1a202c]">
       <div className="flex items-center gap-2 mb-4">
-        <Flag className="h-5 w-5 text-connectivity-accent" />
-        <h3 className="font-bold text-lg">Weather Preparedness Checklist</h3>
+        <CheckSquare className="h-5 w-5 text-connectivity-accent" />
+        <TypographyH4 className="border-none">Weather Preparedness Checklist</TypographyH4>
       </div>
       
       <div className="space-y-4">
         <div>
-          <h4 className="font-bold mb-2">Essential Weather Gear</h4>
-          <ul className="space-y-1">
-            <li className="flex items-center gap-2">
-              <input type="checkbox" id="radio" className="w-4 h-4" />
-              <label htmlFor="radio" className="text-sm">NOAA Weather Radio</label>
-            </li>
-            <li className="flex items-center gap-2">
-              <input type="checkbox" id="windmeter" className="w-4 h-4" />
-              <label htmlFor="windmeter" className="text-sm">Wind meter/anemometer</label>
-            </li>
-            <li className="flex items-center gap-2">
-              <input type="checkbox" id="reflective" className="w-4 h-4" />
-              <label htmlFor="reflective" className="text-sm">Reflective window coverings</label>
-            </li>
-            <li className="flex items-center gap-2">
-              <input type="checkbox" id="surge" className="w-4 h-4" />
-              <label htmlFor="surge" className="text-sm">Surge protector for hookups</label>
-            </li>
-            <li className="flex items-center gap-2">
-              <input type="checkbox" id="tiedowns" className="w-4 h-4" />
-              <label htmlFor="tiedowns" className="text-sm">Additional tie-downs and stabilizers</label>
-            </li>
-            <li className="flex items-center gap-2">
-              <input type="checkbox" id="sealants" className="w-4 h-4" />
-              <label htmlFor="sealants" className="text-sm">Weather-appropriate sealants</label>
-            </li>
-          </ul>
+          <h5 className="text-sm font-semibold text-[#5B9BD5] mb-1">Essential Weather Gear</h5>
+          <div className="space-y-1 text-light-blue">
+            <label className="flex items-center gap-2 text-sm">
+              <input type="checkbox" className="rounded border-[#1a202c]" />
+              <span>NOAA Weather Radio</span>
+            </label>
+            <label className="flex items-center gap-2 text-sm">
+              <input type="checkbox" className="rounded border-[#1a202c]" />
+              <span>Wind meter/anemometer</span>
+            </label>
+            <label className="flex items-center gap-2 text-sm">
+              <input type="checkbox" className="rounded border-[#1a202c]" />
+              <span>Reflective window coverings</span>
+            </label>
+            <label className="flex items-center gap-2 text-sm">
+              <input type="checkbox" className="rounded border-[#1a202c]" />
+              <span>Surge protector for electrical hookups</span>
+            </label>
+            <label className="flex items-center gap-2 text-sm">
+              <input type="checkbox" className="rounded border-[#1a202c]" />
+              <span>Additional tie-downs and stabilizers</span>
+            </label>
+          </div>
         </div>
         
         <div>
-          <h4 className="font-bold mb-2">Emergency Supplies</h4>
-          <ul className="space-y-1">
-            <li className="flex items-center gap-2">
-              <input type="checkbox" id="water" className="w-4 h-4" />
-              <label htmlFor="water" className="text-sm">3-day water supply</label>
-            </li>
-            <li className="flex items-center gap-2">
-              <input type="checkbox" id="food" className="w-4 h-4" />
-              <label htmlFor="food" className="text-sm">Non-perishable food</label>
-            </li>
-            <li className="flex items-center gap-2">
-              <input type="checkbox" id="flashlight" className="w-4 h-4" />
-              <label htmlFor="flashlight" className="text-sm">Flashlights and batteries</label>
-            </li>
-            <li className="flex items-center gap-2">
-              <input type="checkbox" id="firstaid" className="w-4 h-4" />
-              <label htmlFor="firstaid" className="text-sm">First aid kit</label>
-            </li>
-            <li className="flex items-center gap-2">
-              <input type="checkbox" id="battery" className="w-4 h-4" />
-              <label htmlFor="battery" className="text-sm">Battery backup for cell phones</label>
-            </li>
-            <li className="flex items-center gap-2">
-              <input type="checkbox" id="maps" className="w-4 h-4" />
-              <label htmlFor="maps" className="text-sm">Paper maps with evacuation routes</label>
-            </li>
-          </ul>
+          <h5 className="text-sm font-semibold text-[#5B9BD5] mb-1">Emergency Supplies</h5>
+          <div className="space-y-1 text-light-blue">
+            <label className="flex items-center gap-2 text-sm">
+              <input type="checkbox" className="rounded border-[#1a202c]" />
+              <span>3-day water supply (1 gal/person/day)</span>
+            </label>
+            <label className="flex items-center gap-2 text-sm">
+              <input type="checkbox" className="rounded border-[#1a202c]" />
+              <span>Non-perishable food</span>
+            </label>
+            <label className="flex items-center gap-2 text-sm">
+              <input type="checkbox" className="rounded border-[#1a202c]" />
+              <span>Flashlights and extra batteries</span>
+            </label>
+            <label className="flex items-center gap-2 text-sm">
+              <input type="checkbox" className="rounded border-[#1a202c]" />
+              <span>First aid kit</span>
+            </label>
+            <label className="flex items-center gap-2 text-sm">
+              <input type="checkbox" className="rounded border-[#1a202c]" />
+              <span>Battery backup for cell phones</span>
+            </label>
+            <label className="flex items-center gap-2 text-sm">
+              <input type="checkbox" className="rounded border-[#1a202c]" />
+              <span>Paper maps with evacuation routes</span>
+            </label>
+          </div>
         </div>
       </div>
-    </Card>
+    </div>
   );
 };
 
