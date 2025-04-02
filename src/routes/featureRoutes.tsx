@@ -15,6 +15,7 @@ import SecuritySystem from "@/pages/features/SecuritySystem";
 import AutomatedDriving from "@/pages/features/AutomatedDriving";
 import WaterSystems from "@/pages/features/WaterSystems";
 import SmartAutomation from "@/pages/features/SmartAutomation";
+import ClimateControl from "@/pages/features/ClimateControl";
 
 export const featureRoutes: RouteObject[] = [
   {
@@ -70,6 +71,11 @@ export const featureRoutes: RouteObject[] = [
   {
     path: "/features/smart-automation",
     element: <SmartAutomation />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/features/climate-control",
+    element: <ClimateControl />,
     errorElement: <ErrorPage />,
   }
 ];
