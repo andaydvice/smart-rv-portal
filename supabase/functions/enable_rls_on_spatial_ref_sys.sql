@@ -1,4 +1,5 @@
 
+
 -- Create a secure view over the spatial_ref_sys table
 CREATE OR REPLACE VIEW public.secure_spatial_ref_sys AS
 SELECT 
@@ -32,3 +33,4 @@ END $$;
 -- Ensure our map components will use the view by updating the relevant SQL calls
 -- This is a reminder - actual code changes would be needed in the application
 -- to use 'secure_spatial_ref_sys' instead of 'spatial_ref_sys'
+
