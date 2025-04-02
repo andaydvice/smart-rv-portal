@@ -38,10 +38,10 @@ const ClimateControl = () => {
                   className="absolute inset-0 w-full h-full object-cover rounded-lg"
                 />
               </div>
-              <p className="text-[#E2E8FF] mb-6">
+              <p className="text-[#E2E8FF] mb-6 text-left">
                 Experience unparalleled comfort with our precision climate control system. Dynamic temperature zones allow different areas of your RV to maintain independent climate settings, while smart sensors continuously optimize for energy efficiency.
               </p>
-              <ul className="list-disc list-inside space-y-3 text-[#E2E8FF]">
+              <ul className="list-disc list-inside space-y-3 text-[#E2E8FF] text-left">
                 <li>Multi-zone temperature control</li>
                 <li>Smart scheduling for pre-heating/cooling</li>
                 <li>Learning algorithms adapt to your preferences</li>
@@ -56,15 +56,15 @@ const ClimateControl = () => {
               </div>
               <div className="relative aspect-video mb-6">
                 <img 
-                  src="/lovable-uploads/c74fc5fd-d76a-4edf-9dad-d3349d6826a8.png"
+                  src="/lovable-uploads/9e2c5b7f-c03c-4d99-9997-0d3de18f61e1.png"
                   alt="Air Quality Monitor"
                   className="absolute inset-0 w-full h-full object-cover rounded-lg"
                 />
               </div>
-              <p className="text-[#E2E8FF] mb-6">
+              <p className="text-[#E2E8FF] mb-6 text-left">
                 Maintain the perfect atmospheric balance with intelligent humidity control and advanced air filtration. Our system automatically adjusts to prevent condensation and mold while ensuring allergens and pollutants are removed from your living space.
               </p>
-              <ul className="list-disc list-inside space-y-3 text-[#E2E8FF]">
+              <ul className="list-disc list-inside space-y-3 text-[#E2E8FF] text-left">
                 <li>Precision humidity level management</li>
                 <li>HEPA filtration system</li>
                 <li>Air quality monitoring with alerts</li>
@@ -77,20 +77,20 @@ const ClimateControl = () => {
           <div className="bg-gray-800/30 p-8 rounded-lg border border-gray-700 mb-12">
             <h2 className="text-2xl font-semibold text-[#5B9BD5] mb-6">System Features</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="p-4 bg-gray-800/50 rounded-lg flex flex-col items-center text-center">
+              <div className="p-4 bg-gray-800/50 rounded-lg flex flex-col items-center">
                 <Fan className="h-8 w-8 text-[#5B9BD5] mb-3" />
                 <h3 className="text-xl font-medium text-white mb-2">Energy Efficient</h3>
-                <p className="text-[#E2E8FF]">Smart algorithms optimize energy usage by up to 30% compared to traditional systems.</p>
+                <p className="text-[#E2E8FF] text-left">Smart algorithms optimize energy usage by up to 30% compared to traditional systems.</p>
               </div>
-              <div className="p-4 bg-gray-800/50 rounded-lg flex flex-col items-center text-center">
+              <div className="p-4 bg-gray-800/50 rounded-lg flex flex-col items-center">
                 <Clock className="h-8 w-8 text-[#5B9BD5] mb-3" />
                 <h3 className="text-xl font-medium text-white mb-2">Scheduling</h3>
-                <p className="text-[#E2E8FF]">Set climate preferences based on time, location, or activity patterns.</p>
+                <p className="text-[#E2E8FF] text-left">Set climate preferences based on time, location, or activity patterns.</p>
               </div>
-              <div className="p-4 bg-gray-800/50 rounded-lg flex flex-col items-center text-center">
+              <div className="p-4 bg-gray-800/50 rounded-lg flex flex-col items-center">
                 <Shield className="h-8 w-8 text-[#5B9BD5] mb-3" />
                 <h3 className="text-xl font-medium text-white mb-2">Health Protection</h3>
-                <p className="text-[#E2E8FF]">Advanced filtration removes allergens, bacteria, and VOCs for cleaner air.</p>
+                <p className="text-[#E2E8FF] text-left">Advanced filtration removes allergens, bacteria, and VOCs for cleaner air.</p>
               </div>
             </div>
           </div>
