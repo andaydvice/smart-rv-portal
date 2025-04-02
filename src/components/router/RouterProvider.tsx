@@ -4,7 +4,6 @@ import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'r
 import { Suspense, lazy } from 'react';
 import { initNavigationDebugging } from '@/utils/diagnostics/navigationDebug';
 import { fixBlankScreen } from '@/utils/navigation/fixNavigation';
-import CustomLoader from '@/components/ui/CustomLoader';
 
 // Import pages
 const Index = lazy(() => import('@/pages/Index'));
@@ -19,13 +18,14 @@ const ScheduleDemo = lazy(() => import('@/pages/ScheduleDemo'));
 const WaterSystems = lazy(() => import('@/pages/features/WaterSystems'));
 const PreviewDebugDemo = lazy(() => import('@/components/debug/PreviewDebugDemo'));
 
-// Simple loading component
+// Simple loading component - no spinner
 const PageLoading = () => {
   return (
-    <CustomLoader 
-      message="Loading page..." 
-      isFullScreen={true}
-    />
+    <div className="flex items-center justify-center h-screen bg-[#080F1F] text-white">
+      <div className="text-center">
+        <p className="text-lg">Loading page...</p>
+      </div>
+    </div>
   );
 };
 

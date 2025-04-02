@@ -100,8 +100,7 @@ function AppContent() {
     <Suspense fallback={
       <div className="flex items-center justify-center h-screen bg-[#080F1F] text-white">
         <div className="text-center">
-          <div className="w-16 h-16 border-t-4 border-blue-500 border-solid rounded-full animate-spin mx-auto mb-4"></div>
-          <p className="text-lg">Loading application...</p>
+          <p className="text-lg">Loading content...</p>
         </div>
       </div>
     }>
