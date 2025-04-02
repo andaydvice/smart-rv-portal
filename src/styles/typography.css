@@ -46,7 +46,7 @@ small, .text-small {
 
 /* Success text */
 .text-success {
-  @apply text-success-DEFAULT;
+  @apply text-green-500;
 }
 
 /* Focus states for interactive elements */
