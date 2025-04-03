@@ -10,7 +10,7 @@ const IntroSection = () => {
         <Cloud className="h-7 w-7 text-connectivity-accent" />
         <TypographyH2 className="border-none text-white">Why Weather Matters for RV Travel</TypographyH2>
       </div>
-      <TypographyP className="text-light-blue">
+      <TypographyP className="text-light-blue text-base sm:text-lg">
         Weather impacts every aspect of RV travel - from road conditions and driving safety to comfort 
         at your campsite and the longevity of your vehicle. Understanding how to track, plan for, 
         and respond to weather conditions is essential for every RV owner.

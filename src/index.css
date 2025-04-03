@@ -23,8 +23,35 @@
 /* Page-specific styles */
 @import './styles/pages/storage-checklist.css';
 
+/* Add a map preview styles import */
+@import './styles/map-preview.css';
+
+/* RV Weather page specific styles */
+.rv-weather-page {
+  color: #E2E8FF;
+}
+
 @layer utilities {
   .text-light-blue {
-    color: #E2E8FF;
+    color: #E2E8FF !important;
   }
+  
+  .text-connectivity-accent {
+    color: #5B9BD5 !important;
+  }
+}
+
+/* Force visibility of text in certain areas */
+.text-white {
+  color: white !important;
+}
+
+/* Ensure tables have appropriate text colors */
+table th, table td {
+  color: #E2E8FF !important;
+}
+
+/* Ensure all headings are visible */
+h1, h2, h3, h4, h5, h6 {
+  color: white !important;
 }

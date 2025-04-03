@@ -1,10 +1,25 @@
 
-import React from "react";
+import React, { useEffect, useRef } from "react";
 
 const WeatherAlertsTable = () => {
+  const tableRef = useRef<HTMLTableElement>(null);
+  
+  useEffect(() => {
+    // Force repaint of table elements
+    if (tableRef.current) {
+      tableRef.current.style.display = 'none';
+      setTimeout(() => {
+        if (tableRef.current) {
+          tableRef.current.style.display = 'table';
+          console.log("Table repainted for better rendering");
+        }
+      }, 50);
+    }
+  }, []);
+
   return (
     <div className="overflow-x-auto mt-4">
-      <table className="w-full text-sm">
+      <table ref={tableRef} className="w-full text-sm border-collapse">
         <thead className="bg-[#151A22]">
           <tr>
             <th className="p-3 text-left border-b border-[#1a202c] text-white">Alert Type</th>

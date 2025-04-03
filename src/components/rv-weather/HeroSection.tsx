@@ -1,8 +1,20 @@
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const HeroSection = () => {
   const [imageLoaded, setImageLoaded] = useState(false);
+  
+  // Force image to be visible after a timeout as backup
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (!imageLoaded) {
+        console.log("Force showing hero image after timeout");
+        setImageLoaded(true);
+      }
+    }, 1500);
+    
+    return () => clearTimeout(timer);
+  }, [imageLoaded]);
   
   return (
     <div className="relative w-full h-[500px] md:h-[600px] mb-8 overflow-hidden">
@@ -14,8 +26,15 @@ const HeroSection = () => {
       <img
         src="/lovable-uploads/Luxury_RV_Living-min.jpg"
         alt="RV in scenic location"
-        className={`w-full h-full object-cover transition-opacity duration-500 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
-        onLoad={() => setImageLoaded(true)}
+        className={`w-full h-full object-cover transition-opacity duration-300 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
+        onLoad={() => {
+          console.log("Hero image loaded");
+          setImageLoaded(true);
+        }}
+        onError={() => {
+          console.error("Hero image failed to load, showing anyway");
+          setImageLoaded(true);
+        }}
       />
       <div className="absolute inset-0 bg-gradient-to-b from-black/50 to-black/80 z-10" />
       <div className="absolute bottom-0 left-0 w-full p-6 md:p-10 z-20">
