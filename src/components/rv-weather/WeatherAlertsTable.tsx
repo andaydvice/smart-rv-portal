@@ -19,7 +19,7 @@ const WeatherAlertsTable = () => {
 
   return (
     <div className="overflow-x-auto mt-4">
-      <table ref={tableRef} className="w-full text-sm border-collapse">
+      <table ref={tableRef} className="w-full text-sm border-collapse text-left">
         <thead className="bg-[#151A22]">
           <tr>
             <th className="p-3 text-left border-b border-[#1a202c] text-white">Alert Type</th>

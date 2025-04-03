@@ -22,7 +22,7 @@ const RVWeather = () => {
 
   return (
     <Layout>
-      <div className="bg-[#080F1F] min-h-screen w-full overflow-x-hidden">
+      <div className="bg-[#080F1F] min-h-screen w-full overflow-x-hidden rv-weather-page">
         <HeroSection />
         <Container className="mb-12 px-4 sm:px-6 lg:px-8">
           <div className="grid gap-8 lg:grid-cols-3">

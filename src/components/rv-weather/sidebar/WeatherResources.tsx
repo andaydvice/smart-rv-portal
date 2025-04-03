@@ -8,10 +8,10 @@ const WeatherResources = () => {
     <Card className="p-5 bg-[#131a2a]">
       <div className="flex items-center gap-2 mb-4">
         <Sun className="h-5 w-5 text-connectivity-accent" />
-        <h3 className="font-bold text-lg">Weather Resources for RVers</h3>
+        <h3 className="font-bold text-lg text-left">Weather Resources for RVers</h3>
       </div>
       
-      <div className="space-y-3">
+      <div className="space-y-3 text-left">
         <div>
           <h4 className="font-bold text-sm">Online Communities</h4>
           <ul className="list-disc list-inside text-xs space-y-1">

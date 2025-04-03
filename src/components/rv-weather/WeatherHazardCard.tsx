@@ -20,13 +20,13 @@ const WeatherHazardCard: React.FC<WeatherHazardCardProps> = ({
   return (
     <div className="p-4 rounded-lg border border-[#1a202c] bg-[#080F1F]/70">
       <div className="flex justify-between items-start">
-        <h4 className="font-bold text-xl text-white">{title}</h4>
+        <h4 className="font-bold text-xl text-white text-left">{title}</h4>
         <span className={`text-sm font-medium ${riskLevel.color}`}>{riskLevel.text}</span>
       </div>
       
       <div className="mt-3">
-        <h5 className="font-medium text-sm text-[#5B9BD5]">Safety Measures:</h5>
-        <ul className="mt-1 space-y-1 text-sm text-light-blue list-disc list-inside">
+        <h5 className="font-medium text-sm text-[#5B9BD5] text-left">Safety Measures:</h5>
+        <ul className="mt-1 space-y-1 text-sm text-light-blue list-disc list-inside text-left">
           {safetyMeasures.map((measure, index) => (
             <li key={index}>{measure}</li>
           ))}
@@ -35,8 +35,8 @@ const WeatherHazardCard: React.FC<WeatherHazardCardProps> = ({
       
       {avoidTravel && (
         <div className="mt-3">
-          <h5 className="font-medium text-sm text-[#5B9BD5]">When to Avoid Travel:</h5>
-          <p className="mt-1 text-sm text-light-blue">{avoidTravel}</p>
+          <h5 className="font-medium text-sm text-[#5B9BD5] text-left">When to Avoid Travel:</h5>
+          <p className="mt-1 text-sm text-light-blue text-left">{avoidTravel}</p>
         </div>
       )}
     </div>
