@@ -7,9 +7,9 @@ const WeatherAlertsTable = () => {
       <table className="w-full text-sm">
         <thead className="bg-[#151A22]">
           <tr>
-            <th className="p-3 text-left border-b border-[#1a202c]">Alert Type</th>
-            <th className="p-3 text-left border-b border-[#1a202c]">What It Means</th>
-            <th className="p-3 text-left border-b border-[#1a202c]">RV Response</th>
+            <th className="p-3 text-left border-b border-[#1a202c] text-white">Alert Type</th>
+            <th className="p-3 text-left border-b border-[#1a202c] text-white">What It Means</th>
+            <th className="p-3 text-left border-b border-[#1a202c] text-white">RV Response</th>
           </tr>
         </thead>
         <tbody>

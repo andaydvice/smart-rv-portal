@@ -20,7 +20,7 @@ const WeatherHazardCard: React.FC<WeatherHazardCardProps> = ({
   return (
     <div className="p-4 rounded-lg border border-[#1a202c] bg-[#080F1F]/70">
       <div className="flex justify-between items-start">
-        <h4 className="font-bold text-xl">{title}</h4>
+        <h4 className="font-bold text-xl text-white">{title}</h4>
         <span className={`text-sm font-medium ${riskLevel.color}`}>{riskLevel.text}</span>
       </div>
       

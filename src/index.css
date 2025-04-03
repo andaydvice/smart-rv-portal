@@ -22,3 +22,9 @@
 
 /* Page-specific styles */
 @import './styles/pages/storage-checklist.css';
+
+@layer utilities {
+  .text-light-blue {
+    color: #E2E8FF;
+  }
+}

@@ -15,13 +15,15 @@ const RVWeather = () => {
 
   return (
     <Layout>
-      <HeroSection />
-      <Container>
-        <div className="grid gap-8 lg:grid-cols-3">
-          <MainContent />
-          <Sidebar />
-        </div>
-      </Container>
+      <div className="bg-[#080F1F] min-h-screen">
+        <HeroSection />
+        <Container className="mb-12">
+          <div className="grid gap-8 lg:grid-cols-3">
+            <MainContent />
+            <Sidebar />
+          </div>
+        </Container>
+      </div>
     </Layout>
   );
 };

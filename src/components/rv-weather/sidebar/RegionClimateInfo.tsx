@@ -1,53 +1,32 @@
 
 import React from "react";
-import { Card } from "@/components/ui/card";
-import { MapPin } from "lucide-react";
+import { Map } from "lucide-react";
 
 const RegionClimateInfo = () => {
   return (
-    <Card className="p-5 bg-[#131a2a]">
+    <div className="p-6 rounded-lg bg-gradient-to-b from-connectivity-darkBg to-[#131a2a] border border-[#1a202c]">
       <div className="flex items-center gap-2 mb-4">
-        <MapPin className="h-5 w-5 text-connectivity-accent" />
-        <h3 className="font-bold text-lg">Climate Considerations by Region</h3>
+        <Map className="h-5 w-5 text-connectivity-accent" />
+        <h3 className="font-bold text-lg text-white">Regional Climate Highlights</h3>
       </div>
       
-      <div className="space-y-3">
+      <div className="space-y-4">
         <div>
-          <h4 className="font-bold text-sm">Desert Southwest</h4>
-          <p className="text-xs">Challenges: Extreme heat (100°F+), rapid temperature changes, dusty conditions</p>
-          <p className="text-xs">Best Seasons: October-April</p>
-          <p className="text-xs">Tips: Carry extra water, use reflective covers, check air filters frequently</p>
+          <h4 className="font-semibold text-sm text-[#5B9BD5]">Southwest</h4>
+          <p className="text-sm text-light-blue">Hot, dry summers with monsoon season (July-Sept). Mild winters in lower elevations, snow at higher altitudes.</p>
         </div>
         
         <div>
-          <h4 className="font-bold text-sm">Pacific Northwest</h4>
-          <p className="text-xs">Challenges: Frequent rain, high humidity, cooler temperatures</p>
-          <p className="text-xs">Best Seasons: July-September</p>
-          <p className="text-xs">Tips: Good waterproofing, dehumidifiers, proper ventilation</p>
+          <h4 className="font-semibold text-sm text-[#5B9BD5]">Pacific Northwest</h4>
+          <p className="text-sm text-light-blue">Mild, wet winters and dry summers. Significant precipitation along the coast, less inland.</p>
         </div>
         
         <div>
-          <h4 className="font-bold text-sm">Mountain Regions</h4>
-          <p className="text-xs">Challenges: Rapid weather changes, altitude effects, early/late snow</p>
-          <p className="text-xs">Best Seasons: June-September</p>
-          <p className="text-xs">Tips: Layer clothing, prepare for overnight freezes even in summer</p>
-        </div>
-        
-        <div>
-          <h4 className="font-bold text-sm">Gulf Coast/Florida</h4>
-          <p className="text-xs">Challenges: Hurricane season, high humidity, sudden thunderstorms</p>
-          <p className="text-xs">Best Seasons: November-May</p>
-          <p className="text-xs">Tips: Monitor hurricane forecasts, have evacuation plan</p>
-        </div>
-        
-        <div>
-          <h4 className="font-bold text-sm">Great Plains</h4>
-          <p className="text-xs">Challenges: Severe thunderstorms, tornadoes, strong winds</p>
-          <p className="text-xs">Best Seasons: September-October, April-May</p>
-          <p className="text-xs">Tips: Know tornado shelter locations, monitor weather alerts carefully</p>
+          <h4 className="font-semibold text-sm text-[#5B9BD5]">Northeast</h4>
+          <p className="text-sm text-light-blue">Four distinct seasons with cold, snowy winters and warm, humid summers. Fall foliage is spectacular.</p>
         </div>
       </div>
-    </Card>
+    </div>
   );
 };
 

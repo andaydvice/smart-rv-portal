@@ -8,12 +8,12 @@ const MonitoringSection = () => {
     <section className="py-6 px-4 rounded-lg bg-gradient-to-b from-[#131a2a]/50 to-[#080F1F]/50 border border-[#1a202c]/40 backdrop-blur-sm">
       <div className="flex items-center gap-2 mb-6">
         <Smartphone className="h-7 w-7 text-connectivity-accent" />
-        <TypographyH2 className="border-none">Real-Time Weather Monitoring</TypographyH2>
+        <TypographyH2 className="border-none text-white">Real-Time Weather Monitoring</TypographyH2>
       </div>
       
       <div className="space-y-6">
         <div>
-          <TypographyH4>Essential Weather Apps</TypographyH4>
+          <TypographyH4 className="text-white">Essential Weather Apps</TypographyH4>
           <div className="grid gap-4 mt-4 md:grid-cols-2">
             <div className="p-4 rounded-lg border border-[#1a202c] bg-[#080F1F]/70">
               <h5 className="font-semibold text-[#5B9BD5]">Comprehensive Weather Apps</h5>
