@@ -55,7 +55,7 @@ const PlanningSection = () => {
                     <table className="w-full text-left">
                       <tbody>
                         <tr>
-                          <td className="py-1.5 pl-1 pr-3 text-light-blue" style={{verticalAlign: "top"}}>
+                          <td className="py-1.5 pl-1 pr-3 text-light-blue" style={{width: "30px", verticalAlign: "top"}}>
                             <span className="text-ocean-blue mr-2">•</span>
                           </td>
                           <td className="py-1.5 text-light-blue">
@@ -63,7 +63,7 @@ const PlanningSection = () => {
                           </td>
                         </tr>
                         <tr>
-                          <td className="py-1.5 pl-1 pr-3 text-light-blue" style={{verticalAlign: "top"}}>
+                          <td className="py-1.5 pl-1 pr-3 text-light-blue" style={{width: "30px", verticalAlign: "top"}}>
                             <span className="text-ocean-blue mr-2">•</span>
                           </td>
                           <td className="py-1.5 text-light-blue">
@@ -71,7 +71,7 @@ const PlanningSection = () => {
                           </td>
                         </tr>
                         <tr>
-                          <td className="py-1.5 pl-1 pr-3 text-light-blue" style={{verticalAlign: "top"}}>
+                          <td className="py-1.5 pl-1 pr-3 text-light-blue" style={{width: "30px", verticalAlign: "top"}}>
                             <span className="text-ocean-blue mr-2">•</span>
                           </td>
                           <td className="py-1.5 text-light-blue">
@@ -79,7 +79,7 @@ const PlanningSection = () => {
                           </td>
                         </tr>
                         <tr>
-                          <td className="py-1.5 pl-1 pr-3 text-light-blue" style={{verticalAlign: "top"}}>
+                          <td className="py-1.5 pl-1 pr-3 text-light-blue" style={{width: "30px", verticalAlign: "top"}}>
                             <span className="text-ocean-blue mr-2">•</span>
                           </td>
                           <td className="py-1.5 text-light-blue">
@@ -98,7 +98,7 @@ const PlanningSection = () => {
                     <table className="w-full text-left">
                       <tbody>
                         <tr>
-                          <td className="py-1.5 pl-1 pr-3 text-light-blue" style={{verticalAlign: "top"}}>
+                          <td className="py-1.5 pl-1 pr-3 text-light-blue" style={{width: "30px", verticalAlign: "top"}}>
                             <span className="text-ocean-blue mr-2">•</span>
                           </td>
                           <td className="py-1.5 text-light-blue">
@@ -106,7 +106,7 @@ const PlanningSection = () => {
                           </td>
                         </tr>
                         <tr>
-                          <td className="py-1.5 pl-1 pr-3 text-light-blue" style={{verticalAlign: "top"}}>
+                          <td className="py-1.5 pl-1 pr-3 text-light-blue" style={{width: "30px", verticalAlign: "top"}}>
                             <span className="text-ocean-blue mr-2">•</span>
                           </td>
                           <td className="py-1.5 text-light-blue">
@@ -114,7 +114,7 @@ const PlanningSection = () => {
                           </td>
                         </tr>
                         <tr>
-                          <td className="py-1.5 pl-1 pr-3 text-light-blue" style={{verticalAlign: "top"}}>
+                          <td className="py-1.5 pl-1 pr-3 text-light-blue" style={{width: "30px", verticalAlign: "top"}}>
                             <span className="text-ocean-blue mr-2">•</span>
                           </td>
                           <td className="py-1.5 text-light-blue">
@@ -122,7 +122,7 @@ const PlanningSection = () => {
                           </td>
                         </tr>
                         <tr>
-                          <td className="py-1.5 pl-1 pr-3 text-light-blue" style={{verticalAlign: "top"}}>
+                          <td className="py-1.5 pl-1 pr-3 text-light-blue" style={{width: "30px", verticalAlign: "top"}}>
                             <span className="text-ocean-blue mr-2">•</span>
                           </td>
                           <td className="py-1.5 text-light-blue">
