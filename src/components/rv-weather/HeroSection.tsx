@@ -38,8 +38,8 @@ const HeroSection = () => {
       
       {/* Hero image with parallax effect */}
       <img
-        src="/lovable-uploads/Luxury_RV_Living-min.jpg"
-        alt="RV in scenic location"
+        src="/lovable-uploads/ef520b9c-5686-45a7-8a0e-8f4fdd0d6718.png"
+        alt="RV in scenic location at sunset"
         className={`w-full h-full object-cover transition-opacity duration-300 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
         style={{ transform: `translateY(${parallaxOffset}px)` }}
         onLoad={() => setImageLoaded(true)}
@@ -51,8 +51,8 @@ const HeroSection = () => {
       
       {/* Hero text content */}
       <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-6 md:p-10 z-20">
-        <h1 className="text-4xl md:text-6xl font-bold text-white drop-shadow-lg">SmartRV</h1>
-        <h2 className="text-3xl md:text-5xl font-bold text-white drop-shadow-lg mt-2">Weather Guide</h2>
+        <h1 className="text-4xl md:text-6xl font-bold text-white drop-shadow-lg font-playfair">SmartRV</h1>
+        <h2 className="text-3xl md:text-5xl font-bold text-white drop-shadow-lg mt-2 font-playfair">The Ultimate Weather Guide</h2>
         <p className="text-xl text-white drop-shadow-lg mt-4 max-w-2xl">Plan your travels with confidence using our comprehensive weather resources for RV enthusiasts</p>
         
         <a 

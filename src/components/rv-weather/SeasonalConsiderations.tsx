@@ -1,45 +1,44 @@
 
 import React from "react";
-import { Card } from "@/components/ui/card";
 
 const SeasonalConsiderations = () => {
   return (
-    <div className="grid md:grid-cols-2 gap-4 mt-4">
-      <Card className="p-5 bg-[#5B9BD5]/10 border-[#5B9BD5]/50">
-        <h4 className="font-bold mb-2">Spring Travel (March-May)</h4>
-        <ul className="list-disc list-inside space-y-1 text-sm">
-          <li>Advantages: Smaller crowds, blooming landscapes, moderate temperatures</li>
-          <li>Challenges: Unpredictable rain, potential flooding in some regions</li>
-          <li>Best Regions: Southern states, desert Southwest, coastal areas</li>
+    <div className="space-y-4">
+      <div className="p-4 bg-[#080F1F] rounded-lg border border-[#5B9BD5]/20">
+        <h5 className="font-semibold text-[#5B9BD5] mb-2">Spring Travel (March-May)</h5>
+        <ul className="list-disc pl-4 space-y-1 text-sm text-[#E2E8FF]">
+          <li>Variable weather, warming temperatures</li>
+          <li>Watch for thunderstorms and flooding</li>
+          <li>Best for Southern states, desert Southwest</li>
         </ul>
-      </Card>
+      </div>
       
-      <Card className="p-5 bg-[#5B9BD5]/10 border-[#5B9BD5]/50">
-        <h4 className="font-bold mb-2">Summer Travel (June-August)</h4>
-        <ul className="list-disc list-inside space-y-1 text-sm">
-          <li>Advantages: Longer daylight hours, access to northern regions and high elevations</li>
-          <li>Challenges: Extreme heat, crowded destinations, higher prices</li>
-          <li>Best Regions: Mountain states, Pacific Northwest, Northern states, Canada</li>
+      <div className="p-4 bg-[#080F1F] rounded-lg border border-[#5B9BD5]/20">
+        <h5 className="font-semibold text-[#5B9BD5] mb-2">Summer Travel (June-August)</h5>
+        <ul className="list-disc pl-4 space-y-1 text-sm text-[#E2E8FF]">
+          <li>Hot weather, ideal for northern regions</li>
+          <li>Extreme heat, consider elevations</li>
+          <li>Best for Mountain states, Pacific Northwest</li>
         </ul>
-      </Card>
+      </div>
       
-      <Card className="p-5 bg-[#5B9BD5]/10 border-[#5B9BD5]/50">
-        <h4 className="font-bold mb-2">Fall Travel (September-November)</h4>
-        <ul className="list-disc list-inside space-y-1 text-sm">
-          <li>Advantages: Spectacular foliage, cooler temperatures, fewer crowds</li>
-          <li>Challenges: Variable weather patterns, shorter days</li>
-          <li>Best Regions: New England, Appalachian Mountains, Rocky Mountains</li>
+      <div className="p-4 bg-[#080F1F] rounded-lg border border-[#5B9BD5]/20">
+        <h5 className="font-semibold text-[#5B9BD5] mb-2">Fall Travel (September-November)</h5>
+        <ul className="list-disc pl-4 space-y-1 text-sm text-[#E2E8FF]">
+          <li>Spectacular foliage, cooler temperatures</li>
+          <li>Variable weather patterns, shorter days</li>
+          <li>Best for New England, Appalachian Mountains</li>
         </ul>
-      </Card>
+      </div>
       
-      <Card className="p-5 bg-[#5B9BD5]/10 border-[#5B9BD5]/50">
-        <h4 className="font-bold mb-2">Winter Travel (December-February)</h4>
-        <ul className="list-disc list-inside space-y-1 text-sm">
-          <li>Advantages: Solitude, unique winter landscapes, lower campground fees</li>
-          <li>Challenges: Cold temperatures, limited campground availability, winterization needs</li>
-          <li>Best Regions: Southwest deserts, Florida, Texas Gulf Coast</li>
+      <div className="p-4 bg-[#080F1F] rounded-lg border border-[#5B9BD5]/20">
+        <h5 className="font-semibold text-[#5B9BD5] mb-2">Winter Travel (December-February)</h5>
+        <ul className="list-disc pl-4 space-y-1 text-sm text-[#E2E8FF]">
+          <li>Solitude, unique winter landscapes</li>
+          <li>Limited campground availability</li>
+          <li>Best for Southwest deserts, Florida, Texas</li>
         </ul>
-      </Card>
+      </div>
     </div>
   );
 };

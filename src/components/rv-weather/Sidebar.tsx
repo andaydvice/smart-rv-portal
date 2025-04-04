@@ -1,6 +1,6 @@
 
 import React from "react";
-import { CheckSquare, CalendarDays, Map, CloudRain, AlertTriangle, Book } from "lucide-react";
+import { CheckSquare, CalendarDays, Map, CloudRain, AlertTriangle, Book, ExternalLink } from "lucide-react";
 
 const Sidebar = () => {
   return (
@@ -115,16 +115,20 @@ const Sidebar = () => {
         
         <div className="space-y-2">
           <a href="https://www.weather.gov/safety/" target="_blank" rel="noopener noreferrer" className="flex items-center text-[#5B9BD5] hover:underline">
-            <span className="text-xs">→ NOAA Weather Safety</span>
+            <ExternalLink className="h-3 w-3 mr-1.5" />
+            <span className="text-xs">NOAA Weather Safety</span>
           </a>
           <a href="https://www.ready.gov/severe-weather" target="_blank" rel="noopener noreferrer" className="flex items-center text-[#5B9BD5] hover:underline">
-            <span className="text-xs">→ Ready.gov Severe Weather</span>
+            <ExternalLink className="h-3 w-3 mr-1.5" />
+            <span className="text-xs">Ready.gov Severe Weather</span>
           </a>
           <a href="https://rvlifestyle.com/" target="_blank" rel="noopener noreferrer" className="flex items-center text-[#5B9BD5] hover:underline">
-            <span className="text-xs">→ RV Weather Safety Webinars</span>
+            <ExternalLink className="h-3 w-3 mr-1.5" />
+            <span className="text-xs">RV Weather Safety Webinars</span>
           </a>
           <a href="https://escapees.com/" target="_blank" rel="noopener noreferrer" className="flex items-center text-[#5B9BD5] hover:underline">
-            <span className="text-xs">→ Escapees RV Club Weather Seminars</span>
+            <ExternalLink className="h-3 w-3 mr-1.5" />
+            <span className="text-xs">Escapees RV Club Weather Seminars</span>
           </a>
         </div>
       </div>
