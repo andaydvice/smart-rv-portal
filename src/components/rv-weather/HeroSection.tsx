@@ -3,6 +3,18 @@ import React, { useState, useEffect } from "react";
 
 const HeroSection = () => {
   const [imageLoaded, setImageLoaded] = useState(false);
+  const [parallaxOffset, setParallaxOffset] = useState(0);
+  
+  // Handle parallax effect on scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY;
+      setParallaxOffset(scrollPosition * 0.5);
+    };
+    
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
   
   // Force image to be visible after a timeout as backup
   useEffect(() => {
@@ -17,7 +29,7 @@ const HeroSection = () => {
   }, [imageLoaded]);
   
   return (
-    <div className="relative w-full h-[500px] md:h-[600px] mb-8 overflow-hidden">
+    <div className="relative w-full h-[500px] md:h-[70vh] max-h-[700px] mb-8 overflow-hidden">
       {!imageLoaded && (
         <div className="absolute inset-0 flex items-center justify-center bg-[#080F1F]">
           <div className="w-10 h-10 border-4 border-[#5B9BD5] border-t-transparent rounded-full animate-spin"></div>
@@ -27,6 +39,7 @@ const HeroSection = () => {
         src="/lovable-uploads/Luxury_RV_Living-min.jpg"
         alt="RV in scenic location"
         className={`w-full h-full object-cover transition-opacity duration-300 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
+        style={{ transform: `translateY(${parallaxOffset}px)` }}
         onLoad={() => {
           console.log("Hero image loaded");
           setImageLoaded(true);
