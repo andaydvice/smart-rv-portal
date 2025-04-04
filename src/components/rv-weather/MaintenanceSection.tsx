@@ -1,6 +1,7 @@
 
 import React from "react";
 import { Container } from "@/components/ui/container";
+import { Wrench, Sun, CloudRain, Shield } from "lucide-react";
 
 const MaintenanceSection = () => {
   return (
@@ -13,13 +14,17 @@ const MaintenanceSection = () => {
         <div className="flex flex-col space-y-12 max-w-full">
           {/* Section 1: Seasonal Maintenance Checklist */}
           <div className="bg-dark-background p-6 md:p-8 rounded-lg shadow">
-            <h3 className="text-xl font-bold text-ocean-blue mb-6 text-left">
+            <h3 className="text-xl font-bold text-white mb-6 text-left flex items-center">
+              <Wrench className="h-6 w-6 text-[#5B9BD5] mr-3" />
               Seasonal Maintenance Checklist
             </h3>
             
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <div className="p-4 bg-deeper-background/80 border border-ocean-blue/30 rounded-lg">
-                <h4 className="font-semibold text-ocean-blue mb-2 text-left">Spring</h4>
+                <h4 className="font-bold text-white mb-2 text-left flex items-center">
+                  <Sun className="h-5 w-5 mr-2 text-[#8BC34A]" />
+                  Spring
+                </h4>
                 <ul className="space-y-2 text-light-blue text-left text-sm">
                   <li>• Check and reseal roof seams</li>
                   <li>• Inspect window and door seals</li>
@@ -29,7 +34,10 @@ const MaintenanceSection = () => {
               </div>
               
               <div className="p-4 bg-deeper-background/80 border border-ocean-blue/30 rounded-lg">
-                <h4 className="font-semibold text-ocean-blue mb-2 text-left">Summer</h4>
+                <h4 className="font-bold text-white mb-2 text-left flex items-center">
+                  <Sun className="h-5 w-5 mr-2 text-[#FF9800]" />
+                  Summer
+                </h4>
                 <ul className="space-y-2 text-light-blue text-left text-sm">
                   <li>• Check tire pressure regularly</li>
                   <li>• Clean air conditioner filters monthly</li>
@@ -39,7 +47,10 @@ const MaintenanceSection = () => {
               </div>
               
               <div className="p-4 bg-deeper-background/80 border border-ocean-blue/30 rounded-lg">
-                <h4 className="font-semibold text-ocean-blue mb-2 text-left">Fall</h4>
+                <h4 className="font-bold text-white mb-2 text-left flex items-center">
+                  <Shield className="h-5 w-5 mr-2 text-[#FF5722]" />
+                  Fall
+                </h4>
                 <ul className="space-y-2 text-light-blue text-left text-sm">
                   <li>• Check furnace operation</li>
                   <li>• Inspect weather stripping</li>
@@ -49,7 +60,10 @@ const MaintenanceSection = () => {
               </div>
               
               <div className="p-4 bg-deeper-background/80 border border-ocean-blue/30 rounded-lg">
-                <h4 className="font-semibold text-ocean-blue mb-2 text-left">Winter</h4>
+                <h4 className="font-bold text-white mb-2 text-left flex items-center">
+                  <CloudRain className="h-5 w-5 mr-2 text-[#03A9F4]" />
+                  Winter
+                </h4>
                 <ul className="space-y-2 text-light-blue text-left text-sm">
                   <li>• Apply RV antifreeze to plumbing</li>
                   <li>• Check propane system and detectors</li>
@@ -62,7 +76,8 @@ const MaintenanceSection = () => {
           
           {/* Section 2: Weather Impact & Prevention */}
           <div className="bg-dark-background p-6 md:p-8 rounded-lg shadow">
-            <h3 className="text-xl font-bold text-ocean-blue mb-6 text-left">
+            <h3 className="text-xl font-bold text-white mb-6 text-left flex items-center">
+              <Shield className="h-6 w-6 text-[#5B9BD5] mr-3" />
               Weather Impact & Prevention
             </h3>
             
@@ -70,8 +85,8 @@ const MaintenanceSection = () => {
               <table className="w-full">
                 <thead>
                   <tr className="border-b border-gray-700">
-                    <th className="text-left py-3 px-4 text-light-blue font-semibold">Weather Condition</th>
-                    <th className="text-left py-3 px-4 text-light-blue font-semibold">Preventative Measure</th>
+                    <th className="text-left py-3 px-4 text-white font-bold">Weather Condition</th>
+                    <th className="text-left py-3 px-4 text-white font-bold">Preventative Measure</th>
                   </tr>
                 </thead>
                 <tbody className="text-light-blue">
@@ -96,7 +111,7 @@ const MaintenanceSection = () => {
             </div>
             
             <div className="mt-6 p-4 md:p-6 bg-deeper-background/80 rounded-lg border border-ocean-blue/30">
-              <p className="italic text-light-blue text-left">
+              <p className="italic text-white text-left">
                 "Remember: Regular weather-related maintenance is cheaper than emergency repairs. 
                 Your RV's resilience to weather extremes depends on your preventative care."
               </p>
