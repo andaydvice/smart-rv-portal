@@ -1,24 +1,47 @@
 
-import React from "react";
+import React, { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
 const HeroSection = () => {
+  const [imageLoaded, setImageLoaded] = useState(false);
+  const [imageError, setImageError] = useState(false);
+
   return (
     <div className="relative w-full h-[600px] md:h-[80vh] max-h-[800px] overflow-hidden">
-      {/* Hero image */}
-      <div 
-        className="absolute inset-0 bg-cover bg-center"
-        style={{ 
-          backgroundImage: `url('/lovable-uploads/4988c602-a652-4527-93a8-765921a6d09f.png')`,
-        }}
-      />
+      {/* Background fallback color */}
+      <div className="absolute inset-0 bg-deeper-background" />
       
-      {/* Dark overlay - removed to show the image as provided */}
+      {/* Main image with error handling */}
+      {!imageError ? (
+        <img
+          src="/lovable-uploads/3efce4a3-d382-4b88-b33e-f96074fb7311.png"
+          alt="Mountain road with sunset sky for SmartRV Weather Guide"
+          className={cn(
+            "absolute inset-0 w-full h-full object-cover transition-opacity duration-500",
+            imageLoaded ? "opacity-100" : "opacity-0"
+          )}
+          onLoad={() => setImageLoaded(true)}
+          onError={() => setImageError(true)}
+        />
+      ) : (
+        /* Fallback image if main image fails to load */
+        <div 
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ 
+            backgroundImage: `url('/lovable-uploads/4988c602-a652-4527-93a8-765921a6d09f.png')`,
+          }}
+        />
+      )}
+      
+      {/* Semi-transparent overlay for better text readability */}
+      <div className="absolute inset-0 bg-black/20 z-10" />
       
       {/* Hero content */}
       <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-6 z-20">
-        <h1 className="text-6xl md:text-8xl font-bold text-white font-playfair mb-2">SmartRV</h1>
-        <h2 className="text-4xl md:text-6xl font-bold text-white font-playfair">THE ULTIMATE</h2>
-        <h2 className="text-6xl md:text-8xl font-bold text-white font-playfair mb-8">Weather Guide</h2>
+        <h1 className="text-6xl md:text-8xl font-bold text-white font-playfair mb-2 drop-shadow-lg">SmartRV</h1>
+        <h2 className="text-4xl md:text-6xl font-bold text-white font-playfair drop-shadow-lg">THE ULTIMATE</h2>
+        <h2 className="text-6xl md:text-8xl font-bold text-white font-playfair mb-8 drop-shadow-lg">Weather Guide</h2>
         
         <a 
           href="#weather-matters" 
@@ -26,6 +49,13 @@ const HeroSection = () => {
         >
           Learn More
         </a>
+
+        {/* Loading indicator */}
+        {!imageLoaded && !imageError && (
+          <div className="absolute inset-0 flex items-center justify-center bg-deeper-background/80 z-30">
+            <div className="w-12 h-12 border-4 border-ocean-blue border-t-transparent rounded-full animate-spin"></div>
+          </div>
+        )}
       </div>
     </div>
   );
