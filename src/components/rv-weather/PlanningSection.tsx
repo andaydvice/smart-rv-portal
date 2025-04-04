@@ -113,8 +113,8 @@ const PlanningSection = () => {
                 </ul>
               </div>
               
-              <div className="mt-6">
-                <h4 className="font-bold text-white mb-3 text-left">Weather Impact on RVs</h4>
+              <div>
+                <h4 className="font-bold text-white mb-3 text-center">Weather Impact on RVs</h4>
                 <div className="p-4 border border-ocean-blue/30 rounded-lg bg-deeper-background/80">
                   <div className="overflow-x-auto">
                     <table className="w-full text-sm">

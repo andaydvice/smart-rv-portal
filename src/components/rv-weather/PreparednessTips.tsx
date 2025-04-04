@@ -1,3 +1,4 @@
+
 import React from "react";
 import { CheckSquare, Compass, Battery, Radio } from "lucide-react";
 const PreparednessTips = () => {
@@ -31,7 +32,7 @@ const PreparednessTips = () => {
               </li>
               <li className="flex items-start">
                 <span className="text-ocean-blue mr-2">•</span>
-                <span>Check that all weather-related equipment is functioning</span>
+                <span>Check that all weather related equipment is functioning</span>
               </li>
               <li className="flex items-start">
                 <span className="text-ocean-blue mr-2">•</span>
@@ -71,7 +72,7 @@ const PreparednessTips = () => {
             </ul>
           </div>
           
-          <div className="Create a full-screen card component with the following styles:\n- Background color: dark\n- Padding: 6px\n- Border radius: large\n- Box shadow: present\n- Layout: flexbox column\n- Height: full height of parent container\n- Use Tailwind CSS classes">
+          <div className="bg-dark-background p-6 rounded-lg shadow flex flex-col h-full">
             <div className="flex items-center mb-4">
               <div className="p-2 bg-green-500/20 rounded-full">
                 <Battery className="h-5 w-5 text-green-500" />
@@ -81,7 +82,7 @@ const PreparednessTips = () => {
             <ul className="space-y-3 text-light-blue flex-grow text-left">
               <li className="flex items-start">
                 <span className="text-ocean-blue mr-2">•</span>
-                <span>Battery-powered or hand-crank NOAA weather radio</span>
+                <span>Battery powered or hand crank NOAA weather radio</span>
               </li>
               <li className="flex items-start">
                 <span className="text-ocean-blue mr-2">•</span>
@@ -97,7 +98,7 @@ const PreparednessTips = () => {
               </li>
               <li className="flex items-start">
                 <span className="text-ocean-blue mr-2">•</span>
-                <span>3-day supply of water and non-perishable food</span>
+                <span>3 day supply of water and non perishable food</span>
               </li>
             </ul>
           </div>
