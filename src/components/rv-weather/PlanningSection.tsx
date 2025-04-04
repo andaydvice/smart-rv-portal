@@ -49,7 +49,7 @@ const PlanningSection = () => {
               <TableBody>
                 <TableRow className="border-b border-[#1a202c] bg-[#151A22]">
                   <TableCell className="py-4 px-6 align-top" colSpan={2}>
-                    <h3 className="text-xl font-bold text-ocean-blue mb-3 text-left">
+                    <h3 className="text-xl font-bold text-white mb-3 text-left">
                       Pre Trip Planning
                     </h3>
                     <table className="w-full text-left">
@@ -92,7 +92,7 @@ const PlanningSection = () => {
                 </TableRow>
                 <TableRow className="bg-[#151A22]">
                   <TableCell className="py-4 px-6 align-top" colSpan={2}>
-                    <h3 className="text-xl font-bold text-ocean-blue mb-3 text-left">
+                    <h3 className="text-xl font-bold text-white mb-3 text-left">
                       En Route Adjustments
                     </h3>
                     <table className="w-full text-left">
