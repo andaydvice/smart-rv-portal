@@ -1,9 +1,8 @@
-
 import React, { useEffect } from "react";
 import Layout from "@/components/layout/Layout";
 import { scrollToTop } from "@/utils/scrollToTop";
 import { Container } from "@/components/ui/container";
-import { Cloud, Shield, Home, Tools } from "lucide-react";
+import { Cloud, Shield, Home, Wrench } from "lucide-react";
 
 const RVWeather = () => {
   useEffect(() => {
@@ -81,7 +80,7 @@ const RVWeather = () => {
               
               <div className="bg-[#f8fafc] p-6 rounded-lg shadow-sm transition-all duration-300 hover:transform hover:-translate-y-2 hover:shadow-md">
                 <div className="flex justify-center mb-4">
-                  <Tools className="h-10 w-10 text-[#3b82f6]" />
+                  <Wrench className="h-10 w-10 text-[#3b82f6]" />
                 </div>
                 <h3 className="text-xl font-bold mb-4 text-center font-playfair">Vehicle Longevity</h3>
                 <p className="text-[#4a5568] text-left">Extreme weather can cause accelerated wear and tear on your RV. UV damage, freezing temperatures, and humidity all affect different components of your vehicle.</p>
