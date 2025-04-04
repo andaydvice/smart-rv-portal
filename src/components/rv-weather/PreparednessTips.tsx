@@ -1,93 +1,108 @@
 
 import React from "react";
-import { CheckSquare } from "lucide-react";
+import { CheckSquare, Compass, Battery, Radio } from "lucide-react";
 
 const PreparednessTips = () => {
   return (
-    <section className="py-16">
-      <h2 className="text-3xl md:text-4xl font-bold text-white font-playfair text-center mb-4">
-        Weather Preparedness
-      </h2>
-      <div className="w-24 h-1 bg-ocean-blue mx-auto mb-10"></div>
-      
-      <div className="bg-dark-background p-8 rounded-lg shadow-lg">
-        <div className="flex items-center mb-6">
-          <div className="p-2 bg-ocean-blue/20 rounded-full mr-3">
-            <CheckSquare className="h-6 w-6 text-ocean-blue" />
-          </div>
-          <h3 className="text-xl font-bold text-white">Essential Preparation Checklist</h3>
-        </div>
+    <section className="py-16 bg-deeper-background">
+      <div className="container mx-auto px-4">
+        <h2 className="text-3xl md:text-4xl font-bold text-white font-playfair text-center mb-4">
+          Weather Hazards in the RVers
+        </h2>
+        <div className="w-24 h-1 bg-ocean-blue mx-auto mb-12"></div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="space-y-3">
-            <div className="flex items-start">
-              <div className="h-5 w-5 rounded border border-ocean-blue flex-shrink-0 mt-0.5"></div>
-              <span className="ml-3 text-light-blue">Download weather apps before traveling</span>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="bg-dark-background p-6 rounded-lg shadow flex flex-col h-full">
+            <div className="flex items-center mb-4">
+              <div className="p-2 bg-red-500/20 rounded-full">
+                <CheckSquare className="h-5 w-5 text-red-500" />
+              </div>
+              <h3 className="text-xl font-bold text-white ml-3">Before a Trip</h3>
             </div>
-            <div className="flex items-start">
-              <div className="h-5 w-5 rounded border border-ocean-blue flex-shrink-0 mt-0.5"></div>
-              <span className="ml-3 text-light-blue">Create emergency contact list</span>
-            </div>
-            <div className="flex items-start">
-              <div className="h-5 w-5 rounded border border-ocean-blue flex-shrink-0 mt-0.5"></div>
-              <span className="ml-3 text-light-blue">Pack emergency weather supplies</span>
-            </div>
-            <div className="flex items-start">
-              <div className="h-5 w-5 rounded border border-ocean-blue flex-shrink-0 mt-0.5"></div>
-              <span className="ml-3 text-light-blue">Know your RV's wind resistance limits</span>
-            </div>
+            <ul className="space-y-3 text-light-blue flex-grow text-left">
+              <li className="flex items-start">
+                <span className="text-ocean-blue mr-2">•</span>
+                <span>Research typical weather patterns for your destination</span>
+              </li>
+              <li className="flex items-start">
+                <span className="text-ocean-blue mr-2">•</span>
+                <span>Create an emergency contact list</span>
+              </li>
+              <li className="flex items-start">
+                <span className="text-ocean-blue mr-2">•</span>
+                <span>Download offline maps and weather apps</span>
+              </li>
+              <li className="flex items-start">
+                <span className="text-ocean-blue mr-2">•</span>
+                <span>Check that all weather-related equipment is functioning</span>
+              </li>
+              <li className="flex items-start">
+                <span className="text-ocean-blue mr-2">•</span>
+                <span>Plan alternate routes in case of weather disruptions</span>
+              </li>
+            </ul>
           </div>
           
-          <div className="space-y-3">
-            <div className="flex items-start">
-              <div className="h-5 w-5 rounded border border-ocean-blue flex-shrink-0 mt-0.5"></div>
-              <span className="ml-3 text-light-blue">Review evacuation routes for each stay</span>
+          <div className="bg-dark-background p-6 rounded-lg shadow flex flex-col h-full">
+            <div className="flex items-center mb-4">
+              <div className="p-2 bg-yellow-500/20 rounded-full">
+                <Compass className="h-5 w-5 text-yellow-500" />
+              </div>
+              <h3 className="text-xl font-bold text-white ml-3">On the Road</h3>
             </div>
-            <div className="flex items-start">
-              <div className="h-5 w-5 rounded border border-ocean-blue flex-shrink-0 mt-0.5"></div>
-              <span className="ml-3 text-light-blue">Keep emergency radio with backup batteries</span>
-            </div>
-            <div className="flex items-start">
-              <div className="h-5 w-5 rounded border border-ocean-blue flex-shrink-0 mt-0.5"></div>
-              <span className="ml-3 text-light-blue">Create a severe weather action plan</span>
-            </div>
-            <div className="flex items-start">
-              <div className="h-5 w-5 rounded border border-ocean-blue flex-shrink-0 mt-0.5"></div>
-              <span className="ml-3 text-light-blue">Keep important documents in waterproof container</span>
-            </div>
+            <ul className="space-y-3 text-light-blue flex-grow text-left">
+              <li className="flex items-start">
+                <span className="text-ocean-blue mr-2">•</span>
+                <span>Check weather forecasts every morning</span>
+              </li>
+              <li className="flex items-start">
+                <span className="text-ocean-blue mr-2">•</span>
+                <span>Have a designated weather radio or alert system</span>
+              </li>
+              <li className="flex items-start">
+                <span className="text-ocean-blue mr-2">•</span>
+                <span>Know locations of severe weather shelters along your route</span>
+              </li>
+              <li className="flex items-start">
+                <span className="text-ocean-blue mr-2">•</span>
+                <span>Keep fuel tank at least half full</span>
+              </li>
+              <li className="flex items-start">
+                <span className="text-ocean-blue mr-2">•</span>
+                <span>Have emergency supplies easily accessible</span>
+              </li>
+            </ul>
           </div>
-        </div>
-        
-        <div className="mt-8 p-6 bg-deeper-background rounded-lg border border-ocean-blue/30">
-          <h4 className="text-lg font-semibold text-white mb-4">Emergency Weather Kit for RVers</h4>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div>
-              <h5 className="font-medium text-ocean-blue mb-2">Communication</h5>
-              <ul className="space-y-1 text-light-blue">
-                <li>• Weather radio with backup batteries</li>
-                <li>• Portable phone charger/power bank</li>
-                <li>• Whistle for signaling</li>
-              </ul>
+          <div className="bg-dark-background p-6 rounded-lg shadow flex flex-col h-full">
+            <div className="flex items-center mb-4">
+              <div className="p-2 bg-green-500/20 rounded-full">
+                <Battery className="h-5 w-5 text-green-500" />
+              </div>
+              <h3 className="text-xl font-bold text-white ml-3">Emergency Kit</h3>
             </div>
-            
-            <div>
-              <h5 className="font-medium text-ocean-blue mb-2">Safety Items</h5>
-              <ul className="space-y-1 text-light-blue">
-                <li>• First aid kit</li>
-                <li>• Flashlights and extra batteries</li>
-                <li>• Emergency blankets</li>
-              </ul>
-            </div>
-            
-            <div>
-              <h5 className="font-medium text-ocean-blue mb-2">Essentials</h5>
-              <ul className="space-y-1 text-light-blue">
-                <li>• 3-day supply of water and food</li>
-                <li>• Weather-appropriate clothing</li>
-                <li>• Cash in small denominations</li>
-              </ul>
-            </div>
+            <ul className="space-y-3 text-light-blue flex-grow text-left">
+              <li className="flex items-start">
+                <span className="text-ocean-blue mr-2">•</span>
+                <span>Battery-powered or hand-crank NOAA weather radio</span>
+              </li>
+              <li className="flex items-start">
+                <span className="text-ocean-blue mr-2">•</span>
+                <span>Portable power bank for devices</span>
+              </li>
+              <li className="flex items-start">
+                <span className="text-ocean-blue mr-2">•</span>
+                <span>Flashlights and extra batteries</span>
+              </li>
+              <li className="flex items-start">
+                <span className="text-ocean-blue mr-2">•</span>
+                <span>First aid kit with emergency blankets</span>
+              </li>
+              <li className="flex items-start">
+                <span className="text-ocean-blue mr-2">•</span>
+                <span>3-day supply of water and non-perishable food</span>
+              </li>
+            </ul>
           </div>
         </div>
       </div>

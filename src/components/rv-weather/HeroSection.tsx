@@ -1,42 +1,24 @@
 
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 const HeroSection = () => {
-  const [imageLoaded, setImageLoaded] = useState(false);
-  const [parallaxOffset, setParallaxOffset] = useState(0);
-  
-  // Handle parallax effect on scroll
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY;
-      setParallaxOffset(scrollPosition * 0.4);
-    };
-    
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-  
   return (
-    <div className="relative w-full h-[500px] md:h-[70vh] max-h-[700px] overflow-hidden">
-      {/* Hero image with parallax effect */}
+    <div className="relative w-full h-[600px] md:h-[80vh] max-h-[800px] overflow-hidden">
+      {/* Hero image */}
       <div 
         className="absolute inset-0 bg-cover bg-center"
         style={{ 
-          backgroundImage: `url('/lovable-uploads/2d11a827-1f68-4742-ab75-4abaf4e35750.png')`,
-          transform: `translateY(${parallaxOffset}px)` 
+          backgroundImage: `url('/lovable-uploads/ad3dc693-42f4-4635-af2d-b2c4b1aafc43.png')`,
         }}
       />
       
       {/* Dark overlay */}
-      <div className="absolute inset-0 bg-black/60 z-10" />
+      <div className="absolute inset-0 bg-black/50 z-10" />
       
       {/* Hero content */}
       <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-6 z-20">
         <h1 className="text-4xl md:text-6xl font-bold text-white font-playfair mb-2">SmartRV</h1>
-        <h2 className="text-3xl md:text-5xl font-bold text-white font-playfair">The Ultimate Weather Guide</h2>
-        <p className="text-xl text-white mt-4 max-w-2xl font-montserrat">
-          Plan your travels with confidence using our comprehensive weather resources
-        </p>
+        <h2 className="text-2xl md:text-3xl font-bold text-white font-playfair">The Ultimate Weather Guide</h2>
         
         <a 
           href="#weather-matters" 

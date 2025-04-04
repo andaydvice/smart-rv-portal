@@ -3,7 +3,6 @@ import React, { useEffect } from "react";
 import { motion } from "framer-motion";
 import Layout from "@/components/layout/Layout";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Container } from "@/components/ui/container";
 import { scrollToTop } from "@/utils/scrollToTop";
 import HeroSection from "@/components/rv-weather/HeroSection";
 import WhyWeatherMatters from "@/components/rv-weather/WhyWeatherMatters";
@@ -37,20 +36,17 @@ const RVWeather = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
-          className="bg-deeper-background min-h-screen pb-16"
+          className="bg-deeper-background min-h-screen"
         >
           <HeroSection />
-          
-          <Container>
-            <WhyWeatherMatters />
-            <PlanningSection />
-            <SeasonalTips />
-            <RegionalClimate />
-            <WeatherMonitoring />
-            <WeatherAlerts />
-            <PreparednessTips />
-            <MaintenanceSection />
-          </Container>
+          <WhyWeatherMatters />
+          <PlanningSection />
+          <SeasonalTips />
+          <RegionalClimate />
+          <WeatherMonitoring />
+          <WeatherAlerts />
+          <PreparednessTips />
+          <MaintenanceSection />
         </motion.div>
       </ScrollArea>
     </Layout>
