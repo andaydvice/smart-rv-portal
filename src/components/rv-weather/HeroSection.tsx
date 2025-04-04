@@ -8,17 +8,18 @@ const HeroSection = () => {
       <div 
         className="absolute inset-0 bg-cover bg-center"
         style={{ 
-          backgroundImage: `url('/lovable-uploads/ad3dc693-42f4-4635-af2d-b2c4b1aafc43.png')`,
+          backgroundImage: `url('/lovable-uploads/7ef94cbe-bfc1-45b3-9297-55326f5c22fa.png')`,
         }}
       />
       
       {/* Dark overlay */}
-      <div className="absolute inset-0 bg-black/50 z-10" />
+      <div className="absolute inset-0 bg-black/30 z-10" />
       
       {/* Hero content */}
       <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-6 z-20">
-        <h1 className="text-4xl md:text-6xl font-bold text-white font-playfair mb-2">SmartRV</h1>
-        <h2 className="text-2xl md:text-3xl font-bold text-white font-playfair">The Ultimate Weather Guide</h2>
+        <h1 className="text-6xl md:text-8xl font-bold text-white font-playfair mb-2">SmartRV</h1>
+        <h2 className="text-4xl md:text-6xl font-bold text-white font-playfair">THE ULTIMATE</h2>
+        <h2 className="text-6xl md:text-8xl font-bold text-white font-playfair mb-8">Weather Guide</h2>
         
         <a 
           href="#weather-matters" 
