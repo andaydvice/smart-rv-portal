@@ -26,8 +26,8 @@ const PlanningSection = () => {
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
               <div className="p-4 border border-ocean-blue/30 rounded-lg bg-deeper-background/80">
-                <h4 className="font-semibold text-ocean-blue mb-2 text-left flex items-center">
-                  <Sun className="h-4 w-4 mr-2 text-[#FFA500]" />
+                <h4 className="text-white font-bold text-left flex items-center mb-2">
+                  <Sun className="h-5 w-5 mr-2 text-[#FFA500]" />
                   Spring Travel (Mar-May)
                 </h4>
                 <ul className="space-y-2 text-left text-sm ml-6">
@@ -38,8 +38,8 @@ const PlanningSection = () => {
               </div>
               
               <div className="p-4 border border-ocean-blue/30 rounded-lg bg-deeper-background/80">
-                <h4 className="font-semibold text-ocean-blue mb-2 text-left flex items-center">
-                  <Sun className="h-4 w-4 mr-2 text-[#FF4500]" />
+                <h4 className="text-white font-bold text-left flex items-center mb-2">
+                  <Sun className="h-5 w-5 mr-2 text-[#FF4500]" />
                   Summer Travel (Jun-Aug)
                 </h4>
                 <ul className="space-y-2 text-left text-sm ml-6">
@@ -50,8 +50,8 @@ const PlanningSection = () => {
               </div>
               
               <div className="p-4 border border-ocean-blue/30 rounded-lg bg-deeper-background/80">
-                <h4 className="font-semibold text-ocean-blue mb-2 text-left flex items-center">
-                  <Leaf className="h-4 w-4 mr-2 text-[#FF8C00]" />
+                <h4 className="text-white font-bold text-left flex items-center mb-2">
+                  <Leaf className="h-5 w-5 mr-2 text-[#FF8C00]" />
                   Fall Travel (Sep-Nov)
                 </h4>
                 <ul className="space-y-2 text-left text-sm ml-6">
@@ -62,8 +62,8 @@ const PlanningSection = () => {
               </div>
               
               <div className="p-4 border border-ocean-blue/30 rounded-lg bg-deeper-background/80">
-                <h4 className="font-semibold text-ocean-blue mb-2 text-left flex items-center">
-                  <Snowflake className="h-4 w-4 mr-2 text-[#ADD8E6]" />
+                <h4 className="text-white font-bold text-left flex items-center mb-2">
+                  <Snowflake className="h-5 w-5 mr-2 text-[#ADD8E6]" />
                   Winter Travel (Dec-Feb)
                 </h4>
                 <ul className="space-y-2 text-left text-sm ml-6">
@@ -86,7 +86,7 @@ const PlanningSection = () => {
             
             <div className="mt-4 space-y-6">
               <div>
-                <h4 className="font-semibold text-white mb-3 text-left">Long-Range Forecasts</h4>
+                <h4 className="font-bold text-white mb-3 text-left">Long-Range Forecasts</h4>
                 <ul className="space-y-3 text-left ml-4">
                   <li className="flex items-start">
                     <span className="text-ocean-blue mr-2 font-bold">•</span>
@@ -100,7 +100,7 @@ const PlanningSection = () => {
               </div>
               
               <div>
-                <h4 className="font-semibold text-white mb-3 text-left">Historical Weather Data</h4>
+                <h4 className="font-bold text-white mb-3 text-left">Historical Weather Data</h4>
                 <ul className="space-y-3 text-left ml-4">
                   <li className="flex items-start">
                     <span className="text-ocean-blue mr-2 font-bold">•</span>
@@ -114,7 +114,7 @@ const PlanningSection = () => {
               </div>
               
               <div className="mt-6 p-4 border border-ocean-blue/30 rounded-lg bg-deeper-background/80">
-                <h4 className="font-semibold text-ocean-blue mb-2 text-left">Weather Impact on RVs</h4>
+                <h4 className="font-bold text-white mb-2 text-left">Weather Impact on RVs</h4>
                 <div className="overflow-x-auto">
                   <table className="w-full text-sm">
                     <thead>
