@@ -8,12 +8,11 @@ const HeroSection = () => {
       <div 
         className="absolute inset-0 bg-cover bg-center"
         style={{ 
-          backgroundImage: `url('/lovable-uploads/7ef94cbe-bfc1-45b3-9297-55326f5c22fa.png')`,
+          backgroundImage: `url('/lovable-uploads/4988c602-a652-4527-93a8-765921a6d09f.png')`,
         }}
       />
       
-      {/* Dark overlay */}
-      <div className="absolute inset-0 bg-black/30 z-10" />
+      {/* Dark overlay - removed to show the image as provided */}
       
       {/* Hero content */}
       <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-6 z-20">
