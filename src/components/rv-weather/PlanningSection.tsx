@@ -14,7 +14,8 @@ const PlanningSection = () => {
         </h2>
         <div className="w-24 h-1 bg-ocean-blue mx-auto mb-10"></div>
         
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div className="flex flex-col gap-8 max-w-4xl mx-auto">
+          {/* Seasonal Considerations Section */}
           <div className="bg-dark-background/80 p-6 rounded-lg shadow backdrop-blur-sm">
             <div className="flex items-center mb-6">
               <div className="p-2 bg-ocean-blue/20 rounded-full mr-3">
@@ -62,6 +63,7 @@ const PlanningSection = () => {
             </div>
           </div>
           
+          {/* Route Planning Tools Section */}
           <div className="bg-dark-background/80 p-6 rounded-lg shadow backdrop-blur-sm">
             <div className="flex items-center mb-6">
               <div className="p-2 bg-ocean-blue/20 rounded-full mr-3">
