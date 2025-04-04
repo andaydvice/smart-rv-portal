@@ -54,7 +54,7 @@ const HeroSection = () => {
         <h1 className="text-4xl md:text-6xl font-bold text-white drop-shadow-lg">SmartRV</h1>
         <h2 className="text-3xl md:text-5xl font-bold text-white drop-shadow-lg mt-2">The Ultimate RV Weather Guide</h2>
         <p className="text-xl text-white drop-shadow-lg mt-4">Plan your travels with confidence</p>
-        <a href="#weather-matters" className="inline-flex items-center bg-[#3b82f6] text-white px-6 py-3 rounded-md font-semibold mt-8 hover:bg-[#2563eb] transition-all transform hover:-translate-y-1">
+        <a href="#weather-matters" className="inline-flex items-center bg-[#5B9BD5] text-white px-6 py-3 rounded-md font-semibold mt-8 hover:bg-[#4B8FE3] transition-all transform hover:-translate-y-1">
           Learn More
           <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
             <path fillRule="evenodd" d="M16.707 10.293a1 1 0 010 1.414l-6 6a1 1 0 01-1.414 0l-6-6a1 1 0 111.414-1.414L9 14.586V3a1 1 0 012 0v11.586l4.293-4.293a1 1 0 011.414 0z" clipRule="evenodd" />

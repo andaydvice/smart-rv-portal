@@ -10,7 +10,7 @@ const MainContent = () => {
       <div className="bg-white rounded-lg shadow p-6 mb-8">
         <h3 className="text-2xl font-bold mb-6 relative font-playfair text-left">
           Planning Your Trip Around Weather
-          <span className="absolute bottom-[-8px] left-0 w-12 h-1 bg-[#3b82f6]"></span>
+          <span className="absolute bottom-[-8px] left-0 w-12 h-1 bg-[#5B9BD5]"></span>
         </h3>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -40,7 +40,7 @@ const MainContent = () => {
             <h4 className="text-xl font-bold mb-4 font-playfair">Route Planning Tools</h4>
             
             <div className="flex items-start mb-4">
-              <Route className="h-5 w-5 text-[#3b82f6] mr-2 mt-1" />
+              <Route className="h-5 w-5 text-[#5B9BD5] mr-2 mt-1" />
               <div>
                 <h5 className="font-semibold">Long Range Forecasts</h5>
                 <p className="text-sm text-[#4a5568]">AccuWeather 15-day forecast - most reliable for trip planning</p>
@@ -48,7 +48,7 @@ const MainContent = () => {
             </div>
             
             <div className="flex items-start mb-4">
-              <Wind className="h-5 w-5 text-[#3b82f6] mr-2 mt-1" />
+              <Wind className="h-5 w-5 text-[#5B9BD5] mr-2 mt-1" />
               <div>
                 <h5 className="font-semibold">Wind Monitoring</h5>
                 <p className="text-sm text-[#4a5568]">Essential for RVs due to high profile - check forecasts</p>
@@ -56,7 +56,7 @@ const MainContent = () => {
             </div>
             
             <div className="flex items-start">
-              <CloudRain className="h-5 w-5 text-[#3b82f6] mr-2 mt-1" />
+              <CloudRain className="h-5 w-5 text-[#5B9BD5] mr-2 mt-1" />
               <div>
                 <h5 className="font-semibold">Precipitation Alerts</h5>
                 <p className="text-sm text-[#4a5568]">Set up for severe weather warnings along your route</p>
@@ -70,7 +70,7 @@ const MainContent = () => {
       <div className="bg-white rounded-lg shadow p-6">
         <h3 className="text-2xl font-bold mb-6 relative font-playfair text-left">
           Weather-Related RV Maintenance
-          <span className="absolute bottom-[-8px] left-0 w-12 h-1 bg-[#3b82f6]"></span>
+          <span className="absolute bottom-[-8px] left-0 w-12 h-1 bg-[#5B9BD5]"></span>
         </h3>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
