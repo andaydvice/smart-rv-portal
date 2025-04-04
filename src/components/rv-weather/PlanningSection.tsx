@@ -113,31 +113,33 @@ const PlanningSection = () => {
                 </ul>
               </div>
               
-              <div className="mt-6 p-4 border border-ocean-blue/30 rounded-lg bg-deeper-background/80">
-                <h4 className="font-bold text-white mb-2 text-left">Weather Impact on RVs</h4>
-                <div className="overflow-x-auto">
-                  <table className="w-full text-sm">
-                    <thead>
-                      <tr className="border-b border-gray-700">
-                        <th className="text-left py-2 font-bold text-white">Weather</th>
-                        <th className="text-left py-2 font-bold text-white">Impact</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr className="border-b border-gray-700">
-                        <td className="py-2 pr-4 font-bold text-white">Heat</td>
-                        <td className="py-2 font-bold text-white">AC strain, refrigerator issues</td>
-                      </tr>
-                      <tr className="border-b border-gray-700">
-                        <td className="py-2 pr-4 font-bold text-white">Freezing</td>
-                        <td className="py-2 font-bold text-white">Plumbing damage, propane issues</td>
-                      </tr>
-                      <tr>
-                        <td className="py-2 pr-4 font-bold text-white">High Humidity</td>
-                        <td className="py-2 font-bold text-white">Mold growth, electrical problems</td>
-                      </tr>
-                    </tbody>
-                  </table>
+              <div className="mt-6">
+                <h4 className="font-bold text-white mb-3 text-left">Weather Impact on RVs</h4>
+                <div className="p-4 border border-ocean-blue/30 rounded-lg bg-deeper-background/80">
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-sm">
+                      <thead>
+                        <tr className="border-b border-gray-700">
+                          <th className="text-left py-2 font-bold text-white">Weather</th>
+                          <th className="text-left py-2 font-bold text-white">Impact</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr className="border-b border-gray-700">
+                          <td className="py-2 pr-4 font-bold text-white">Heat</td>
+                          <td className="py-2 font-bold text-white">AC strain, refrigerator issues</td>
+                        </tr>
+                        <tr className="border-b border-gray-700">
+                          <td className="py-2 pr-4 font-bold text-white">Freezing</td>
+                          <td className="py-2 font-bold text-white">Plumbing damage, propane issues</td>
+                        </tr>
+                        <tr>
+                          <td className="py-2 pr-4 font-bold text-white">High Humidity</td>
+                          <td className="py-2 font-bold text-white">Mold growth, electrical problems</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
               </div>
             </div>
