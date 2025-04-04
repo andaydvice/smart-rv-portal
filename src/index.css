@@ -22,43 +22,41 @@
 
 /* Page-specific styles */
 @import './styles/pages/storage-checklist.css';
+@import './styles/pages/rv-weather.css';
 
 /* Add a map preview styles import */
 @import './styles/map-preview.css';
 
-/* RV Weather page specific styles */
-.rv-weather-page {
-  color: #4a5568;
+/* Custom colors for the site */
+:root {
+  --connectivity-accent: #5B9BD5;
+  --connectivity-darkBg: #151A22;
+  --deeper-background: #080F1F;
+}
+
+.text-connectivity-accent {
+  color: var(--connectivity-accent);
+}
+
+.bg-connectivity-accent {
+  background-color: var(--connectivity-accent);
+}
+
+.connectivity-darkBg {
+  background-color: var(--connectivity-darkBg);
+}
+
+.bg-deeper-background {
+  background-color: var(--deeper-background);
+}
+
+/* Font classes */
+.font-montserrat {
   font-family: 'Montserrat', sans-serif;
 }
 
-.rv-weather-page h1, 
-.rv-weather-page h2, 
-.rv-weather-page h3, 
-.rv-weather-page h4, 
-.rv-weather-page h5, 
-.rv-weather-page h6 {
-  font-family: 'Playfair Display', serif;
-  color: #1a202c !important;
-}
-
-/* Font family classes for direct application */
-.font-montserrat {
-  font-family: 'Montserrat', sans-serif !important;
-}
-
 .font-playfair {
-  font-family: 'Playfair Display', serif !important;
-}
-
-@layer utilities {
-  .text-light-blue {
-    color: #E2E8FF !important;
-  }
-  
-  .text-connectivity-accent {
-    color: #5B9BD5 !important;
-  }
+  font-family: 'Playfair Display', serif;
 }
 
 /* Force visibility of text in certain areas */
@@ -66,87 +64,7 @@
   color: white !important;
 }
 
-/* Ensure tables have appropriate text colors */
-table th, table td {
-  color: #4a5568 !important;
-}
-
 /* Ensure all headings are visible */
 h1, h2, h3, h4, h5, h6 {
   color: #1a202c !important;
-}
-
-/* Hero section text should remain centered */
-.rv-weather-page .hero-text {
-  text-align: center;
-}
-
-/* All other content should be left-aligned */
-.rv-weather-page p, 
-.rv-weather-page ul, 
-.rv-weather-page ol, 
-.rv-weather-page li,
-.rv-weather-page h1:not(.hero-text h1),
-.rv-weather-page h2:not(.hero-text h2),
-.rv-weather-page h3:not(.hero-text h3),
-.rv-weather-page h4:not(.hero-text h4),
-.rv-weather-page h5:not(.hero-text h5),
-.rv-weather-page h6:not(.hero-text h6) {
-  text-align: left;
-}
-
-/* Card hover effects */
-.rv-weather-page .card:hover,
-.rv-weather-page .feature-box:hover {
-  transform: translateY(-5px);
-  transition: all 0.3s ease;
-}
-
-/* Button styles */
-.rv-weather-page .btn {
-  display: inline-block;
-  padding: 12px 24px;
-  background-color: #5B9BD5;
-  color: white;
-  border-radius: 4px;
-  font-weight: 600;
-  transition: all 0.3s ease;
-}
-
-.rv-weather-page .btn:hover {
-  background-color: #4B8FE3;
-  transform: translateY(-2px);
-}
-
-/* Section title with underline */
-.rv-weather-page .section-title {
-  position: relative;
-  display: inline-block;
-  margin-bottom: 2rem;
-}
-
-.rv-weather-page .section-title:after {
-  content: "";
-  position: absolute;
-  bottom: -10px;
-  left: 0;
-  width: 60px;
-  height: 3px;
-  background-color: #5B9BD5;
-}
-
-/* Enhanced card styles */
-.rv-weather-page .card {
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-  transition: all 0.3s ease;
-}
-
-/* Parallax effect */
-.rv-weather-page .parallax-bg {
-  background-attachment: fixed;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
 }

@@ -1,0 +1,114 @@
+
+/* RV Weather page specific styles */
+.rv-weather-page {
+  font-family: 'Montserrat', sans-serif;
+}
+
+.rv-weather-page h1, 
+.rv-weather-page h2, 
+.rv-weather-page h3, 
+.rv-weather-page h4, 
+.rv-weather-page h5, 
+.rv-weather-page h6 {
+  font-family: 'Playfair Display', serif;
+}
+
+/* Font family classes for direct application */
+.font-montserrat {
+  font-family: 'Montserrat', sans-serif !important;
+}
+
+.font-playfair {
+  font-family: 'Playfair Display', serif !important;
+}
+
+/* Custom colors for the RV Weather page */
+:root {
+  --ocean-blue: #5B9BD5;
+  --dark-bg: #151A22;
+  --deeper-bg: #080F1F;
+  --light-blue: #E2E8FF;
+}
+
+.text-ocean-blue {
+  color: var(--ocean-blue);
+}
+
+.bg-ocean-blue {
+  background-color: var(--ocean-blue);
+}
+
+.text-light-blue {
+  color: var(--light-blue);
+}
+
+.bg-dark-background {
+  background-color: var(--dark-bg);
+}
+
+.bg-deeper-background {
+  background-color: var(--deeper-bg);
+}
+
+.border-ocean-blue {
+  border-color: var(--ocean-blue);
+}
+
+/* Section styling */
+.rv-weather-page section {
+  scroll-margin-top: 80px;
+}
+
+/* Card hover effects */
+.rv-weather-page .card:hover {
+  transform: translateY(-5px);
+  transition: all 0.3s ease;
+}
+
+/* Button styles */
+.rv-weather-page .btn {
+  display: inline-block;
+  padding: 12px 24px;
+  background-color: var(--ocean-blue);
+  color: white;
+  border-radius: 4px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.rv-weather-page .btn:hover {
+  background-color: #4B8FE3;
+  transform: translateY(-2px);
+}
+
+/* Ensure tables have appropriate text colors */
+.rv-weather-page table th, 
+.rv-weather-page table td {
+  color: var(--light-blue);
+}
+
+/* Hero image styling */
+.rv-weather-page .hero-bg {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* Parallax effect */
+.rv-weather-page .parallax-bg {
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .rv-weather-page h2 {
+    font-size: 1.75rem;
+  }
+  
+  .rv-weather-page .grid {
+    gap: 1rem;
+  }
+}
