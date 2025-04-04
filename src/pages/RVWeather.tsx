@@ -18,11 +18,22 @@ const RVWeather = () => {
       window.dispatchEvent(new Event('resize'));
       console.log("Triggered resize event for proper rendering");
     }, 100);
+
+    // Add custom fonts for the RV Weather page
+    const link = document.createElement('link');
+    link.href = 'https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;700&display=swap';
+    link.rel = 'stylesheet';
+    document.head.appendChild(link);
+    
+    return () => {
+      // Clean up the added font link when component unmounts
+      document.head.removeChild(link);
+    };
   }, []);
 
   return (
     <Layout>
-      <div className="bg-[#080F1F] min-h-screen w-full overflow-x-hidden rv-weather-page">
+      <div className="bg-[#f8fafc] min-h-screen w-full overflow-x-hidden rv-weather-page">
         <HeroSection />
         <Container className="mb-12 px-4 sm:px-6 lg:px-8">
           <div className="grid gap-8 lg:grid-cols-3">

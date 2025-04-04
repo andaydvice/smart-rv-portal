@@ -28,8 +28,22 @@
 
 /* RV Weather page specific styles */
 .rv-weather-page {
-  color: #E2E8FF;
+  color: #4a5568;
   text-align: left;
+}
+
+.rv-weather-page h1, 
+.rv-weather-page h2, 
+.rv-weather-page h3, 
+.rv-weather-page h4, 
+.rv-weather-page h5, 
+.rv-weather-page h6 {
+  font-family: 'Playfair Display', serif;
+  color: #1a202c !important;
+}
+
+.rv-weather-page {
+  font-family: 'Montserrat', sans-serif;
 }
 
 @layer utilities {
@@ -49,12 +63,12 @@
 
 /* Ensure tables have appropriate text colors */
 table th, table td {
-  color: #E2E8FF !important;
+  color: #4a5568 !important;
 }
 
 /* Ensure all headings are visible */
 h1, h2, h3, h4, h5, h6 {
-  color: white !important;
+  color: #1a202c !important;
 }
 
 /* Hero section text should remain centered */
@@ -76,3 +90,49 @@ h1, h2, h3, h4, h5, h6 {
   text-align: left;
 }
 
+/* Card hover effects */
+.rv-weather-page .card:hover,
+.rv-weather-page .feature-box:hover {
+  transform: translateY(-5px);
+  transition: all 0.3s ease;
+}
+
+/* Button styles */
+.rv-weather-page .btn {
+  display: inline-block;
+  padding: 12px 24px;
+  background-color: #3b82f6;
+  color: white;
+  border-radius: 4px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.rv-weather-page .btn:hover {
+  background-color: #2563eb;
+  transform: translateY(-2px);
+}
+
+/* Weather icon styles */
+.rv-weather-page .weather-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: #3b82f6;
+}
+
+/* Section title with underline */
+.rv-weather-page .section-title {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 2rem;
+}
+
+.rv-weather-page .section-title:after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  width: 60px;
+  height: 3px;
+  background-color: #3b82f6;
+}

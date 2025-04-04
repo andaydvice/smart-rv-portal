@@ -18,30 +18,30 @@ const WeatherAlertsTable = () => {
   }, []);
 
   return (
-    <div className="overflow-x-auto mt-4">
+    <div className="overflow-x-auto mt-4 border border-[#e2e8f0] rounded-lg">
       <table ref={tableRef} className="w-full text-sm border-collapse text-left">
-        <thead className="bg-[#151A22]">
+        <thead className="bg-gray-50">
           <tr>
-            <th className="p-3 text-left border-b border-[#1a202c] text-white">Alert Type</th>
-            <th className="p-3 text-left border-b border-[#1a202c] text-white">What It Means</th>
-            <th className="p-3 text-left border-b border-[#1a202c] text-white">RV Response</th>
+            <th className="p-4 text-left border-b border-[#e2e8f0] text-[#4a5568]">Alert Type</th>
+            <th className="p-4 text-left border-b border-[#e2e8f0] text-[#4a5568]">What It Means</th>
+            <th className="p-4 text-left border-b border-[#e2e8f0] text-[#4a5568]">RV Response</th>
           </tr>
         </thead>
         <tbody>
-          <tr className="border-b border-[#1a202c]">
-            <td className="p-3 font-semibold text-[#5B9BD5]">Watch</td>
-            <td className="p-3 text-light-blue">Conditions are favorable for severe weather</td>
-            <td className="p-3 text-light-blue">Monitor closely, prepare for possible relocation</td>
+          <tr className="border-b border-[#e2e8f0]">
+            <td className="p-4 font-semibold text-[#3b82f6]">Watch</td>
+            <td className="p-4 text-[#4a5568]">Conditions are favorable for severe weather</td>
+            <td className="p-4 text-[#4a5568]">Monitor closely, prepare for possible relocation</td>
           </tr>
-          <tr className="border-b border-[#1a202c]">
-            <td className="p-3 font-semibold text-[#5B9BD5]">Warning</td>
-            <td className="p-3 text-light-blue">Severe weather is imminent or occurring</td>
-            <td className="p-3 text-light-blue">Take immediate protective action</td>
+          <tr className="border-b border-[#e2e8f0]">
+            <td className="p-4 font-semibold text-[#3b82f6]">Warning</td>
+            <td className="p-4 text-[#4a5568]">Severe weather is imminent or occurring</td>
+            <td className="p-4 text-[#4a5568]">Take immediate protective action</td>
           </tr>
           <tr>
-            <td className="p-3 font-semibold text-[#5B9BD5]">Advisory</td>
-            <td className="p-3 text-light-blue">Less severe but potentially hazardous conditions</td>
-            <td className="p-3 text-light-blue">Use caution, possibly adjust travel plans</td>
+            <td className="p-4 font-semibold text-[#3b82f6]">Advisory</td>
+            <td className="p-4 text-[#4a5568]">Less severe but potentially hazardous conditions</td>
+            <td className="p-4 text-[#4a5568]">Use caution, possibly adjust travel plans</td>
           </tr>
         </tbody>
       </table>
