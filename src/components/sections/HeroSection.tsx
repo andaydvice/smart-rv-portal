@@ -1,3 +1,4 @@
+
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
@@ -25,7 +26,9 @@ export const HeroSection = () => (
         transition={{ duration: 0.6, delay: 0.6 }}
         className="text-6xl md:text-7xl font-bold mb-8 leading-tight relative z-10"
       >
-        The Future of <br />
+        <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-emerald-400">
+          The Future of
+        </span> <br />
         <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-emerald-400">
           Luxury Travel
         </span>
