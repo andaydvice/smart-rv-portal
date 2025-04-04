@@ -17,7 +17,7 @@ export const HeroSection = () => (
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, delay: 0.2 }}
-      className="relative text-center text-white px-4 max-w-5xl mx-auto"
+      className="relative text-left text-white px-4 max-w-5xl mx-auto"
     >
       <div className="absolute inset-0 bg-black/40 backdrop-blur-sm rounded-xl -bottom-8" />
       <motion.h1 
@@ -37,7 +37,7 @@ export const HeroSection = () => (
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.8 }}
-        className="text-xl md:text-2xl mb-12 max-w-2xl mx-auto text-gray-200 relative z-10"
+        className="text-xl md:text-2xl mb-12 max-w-2xl text-left text-gray-200 relative z-10"
       >
         Experience unparalleled luxury and innovation with cutting edge smart technology
       </motion.p>
@@ -45,7 +45,7 @@ export const HeroSection = () => (
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 1 }}
-        className="flex flex-col sm:flex-row gap-6 justify-center items-center relative z-10"
+        className="flex flex-col sm:flex-row gap-6 justify-start items-center relative z-10"
       >
         <Link to="/schedule-demo">
           <Button 
