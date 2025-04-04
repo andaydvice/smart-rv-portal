@@ -53,7 +53,7 @@ const Footer2 = ({
         )}>
           {/* Company Info */}
           <div className="space-y-4 flex flex-col items-center md:items-start">
-            <h3 className="text-2xl font-bold text-center md:text-left">{siteName}</h3>
+            <h3 className="text-2xl font-bold text-white text-center md:text-left">{siteName}</h3>
             {description && (
               <p className="text-gray-400 text-center md:text-left">
                 {description}
@@ -83,7 +83,7 @@ const Footer2 = ({
           {/* Link Groups */}
           {links.map((group, groupIndex) => (
             <div key={groupIndex} className="flex flex-col items-center md:items-start">
-              <h4 className="text-lg font-semibold mb-4 text-center md:text-left">{group.title}</h4>
+              <h4 className="text-lg font-semibold mb-4 text-white text-center md:text-left">{group.title}</h4>
               <ul className="space-y-2 w-full">
                 {group.links.map((link, linkIndex) => (
                   <li key={linkIndex} className="text-center md:text-left">
