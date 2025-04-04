@@ -28,7 +28,7 @@ const PlanningSection = () => {
               <div className="p-4 border border-ocean-blue/30 rounded-lg bg-deeper-background/80">
                 <h4 className="text-white font-bold text-left flex items-center mb-2">
                   <Sun className="h-5 w-5 mr-2 text-[#FFA500]" />
-                  Spring Travel (Mar-May)
+                  Spring Travel (Mar May)
                 </h4>
                 <ul className="space-y-2 text-left text-sm ml-6">
                   <li className="font-bold text-white">Variable weather, warming temperatures</li>
@@ -40,7 +40,7 @@ const PlanningSection = () => {
               <div className="p-4 border border-ocean-blue/30 rounded-lg bg-deeper-background/80">
                 <h4 className="text-white font-bold text-left flex items-center mb-2">
                   <Sun className="h-5 w-5 mr-2 text-[#FF4500]" />
-                  Summer Travel (Jun-Aug)
+                  Summer Travel (Jun Aug)
                 </h4>
                 <ul className="space-y-2 text-left text-sm ml-6">
                   <li className="font-bold text-white">Hot weather, ideal for northern regions</li>
@@ -52,7 +52,7 @@ const PlanningSection = () => {
               <div className="p-4 border border-ocean-blue/30 rounded-lg bg-deeper-background/80">
                 <h4 className="text-white font-bold text-left flex items-center mb-2">
                   <Leaf className="h-5 w-5 mr-2 text-[#FF8C00]" />
-                  Fall Travel (Sep-Nov)
+                  Fall Travel (Sep Nov)
                 </h4>
                 <ul className="space-y-2 text-left text-sm ml-6">
                   <li className="font-bold text-white">Spectacular foliage, cooler temperatures</li>
@@ -64,7 +64,7 @@ const PlanningSection = () => {
               <div className="p-4 border border-ocean-blue/30 rounded-lg bg-deeper-background/80">
                 <h4 className="text-white font-bold text-left flex items-center mb-2">
                   <Snowflake className="h-5 w-5 mr-2 text-[#ADD8E6]" />
-                  Winter Travel (Dec-Feb)
+                  Winter Travel (Dec Feb)
                 </h4>
                 <ul className="space-y-2 text-left text-sm ml-6">
                   <li className="font-bold text-white">Less crowded campgrounds</li>
@@ -86,15 +86,15 @@ const PlanningSection = () => {
             
             <div className="mt-4 space-y-6">
               <div>
-                <h4 className="font-bold text-white mb-3 text-left">Long-Range Forecasts</h4>
+                <h4 className="font-bold text-white mb-3 text-left">Long Range Forecasts</h4>
                 <ul className="space-y-3 text-left ml-4">
                   <li className="flex items-start">
                     <span className="text-ocean-blue mr-2 font-bold">•</span>
-                    <span className="font-bold text-white">Climate Prediction Center - 6-10 day, 8-14 day, and monthly outlooks</span>
+                    <span className="font-bold text-white">Climate Prediction Center  6 10 day, 8 14 day, and monthly outlooks</span>
                   </li>
                   <li className="flex items-start">
                     <span className="text-ocean-blue mr-2 font-bold">•</span>
-                    <span className="font-bold text-white">AccuWeather Long-Range - Monthly forecasts for planning ahead</span>
+                    <span className="font-bold text-white">AccuWeather Long Range  Monthly forecasts for planning ahead</span>
                   </li>
                 </ul>
               </div>
@@ -104,11 +104,11 @@ const PlanningSection = () => {
                 <ul className="space-y-3 text-left ml-4">
                   <li className="flex items-start">
                     <span className="text-ocean-blue mr-2 font-bold">•</span>
-                    <span className="font-bold text-white">Weather Underground Historical Data - Past weather patterns</span>
+                    <span className="font-bold text-white">Weather Underground Historical Data  Past weather patterns</span>
                   </li>
                   <li className="flex items-start">
                     <span className="text-ocean-blue mr-2 font-bold">•</span>
-                    <span className="font-bold text-white">NOAA Climate Data - Official historical records and averages</span>
+                    <span className="font-bold text-white">NOAA Climate Data  Official historical records and averages</span>
                   </li>
                 </ul>
               </div>

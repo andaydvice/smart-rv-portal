@@ -8,7 +8,7 @@ const MaintenanceSection = () => {
     <section className="py-16 bg-deeper-background">
       <Container>
         <h2 className="text-3xl md:text-4xl font-bold text-white font-playfair text-left mb-8">
-          Weather-Related RV Maintenance
+          Weather Related RV Maintenance
         </h2>
         
         <div className="flex flex-col space-y-12 max-w-full">
@@ -112,7 +112,7 @@ const MaintenanceSection = () => {
             
             <div className="mt-6 p-4 md:p-6 bg-deeper-background/80 rounded-lg border border-ocean-blue/30">
               <p className="italic text-white text-left">
-                "Remember: Regular weather-related maintenance is cheaper than emergency repairs. 
+                "Remember: Regular weather related maintenance is cheaper than emergency repairs. 
                 Your RV's resilience to weather extremes depends on your preventative care."
               </p>
             </div>
