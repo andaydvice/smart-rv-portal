@@ -1,5 +1,5 @@
 
-import React, { useEffect } from "react";
+import React from "react";
 import { motion } from "framer-motion";
 import Layout from "@/components/layout/Layout";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -15,7 +15,8 @@ import PreparednessTips from "@/components/rv-weather/PreparednessTips";
 import MaintenanceSection from "@/components/rv-weather/MaintenanceSection";
 
 const RVWeather = () => {
-  useEffect(() => {
+  // Use React.useEffect instead of useEffect directly
+  React.useEffect(() => {
     scrollToTop();
     
     // Load custom fonts
@@ -25,7 +26,10 @@ const RVWeather = () => {
     document.head.appendChild(link);
     
     return () => {
-      document.head.removeChild(link);
+      // Check if the link is still in the document before removing
+      if (document.head.contains(link)) {
+        document.head.removeChild(link);
+      }
     };
   }, []);
 

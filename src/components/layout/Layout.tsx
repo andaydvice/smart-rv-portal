@@ -1,5 +1,5 @@
 
-import { useEffect } from "react";
+import React from "react";
 import { useLocation } from "react-router-dom";
 import Footer2 from "../ui/Footer2";
 import Navbar from "@/components/Navbar";
@@ -9,12 +9,15 @@ interface LayoutProps {
 }
 
 const Layout = ({ children }: LayoutProps) => {
-  const { pathname } = useLocation();
-
-  // We've removed the scrollToTop call here since it's now handled by the RouterProvider
-  useEffect(() => {
+  // Using a try-catch to prevent errors if the component is rendered outside router context
+  let pathname = '/';
+  try {
+    const location = useLocation();
+    pathname = location.pathname;
     console.log('Layout component rendered for path:', pathname);
-  }, [pathname]);
+  } catch (error) {
+    console.warn('Layout rendered outside router context');
+  }
 
   // Define standardized footer links for all pages
   const footerLinks = [
