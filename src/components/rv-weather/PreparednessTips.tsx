@@ -1,10 +1,7 @@
-
 import React from "react";
 import { CheckSquare, Compass, Battery, Radio } from "lucide-react";
-
 const PreparednessTips = () => {
-  return (
-    <section className="py-16 bg-deeper-background">
+  return <section className="py-16 bg-deeper-background">
       <div className="container mx-auto px-4">
         <h2 className="text-3xl md:text-4xl font-bold text-white font-playfair text-center mb-4">
           Weather Hazards in the RVers
@@ -74,7 +71,7 @@ const PreparednessTips = () => {
             </ul>
           </div>
           
-          <div className="bg-dark-background p-6 rounded-lg shadow flex flex-col h-full">
+          <div className="Create a full-screen card component with the following styles:\n- Background color: dark\n- Padding: 6px\n- Border radius: large\n- Box shadow: present\n- Layout: flexbox column\n- Height: full height of parent container\n- Use Tailwind CSS classes">
             <div className="flex items-center mb-4">
               <div className="p-2 bg-green-500/20 rounded-full">
                 <Battery className="h-5 w-5 text-green-500" />
@@ -106,8 +103,6 @@ const PreparednessTips = () => {
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default PreparednessTips;
