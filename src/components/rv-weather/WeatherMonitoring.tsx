@@ -77,7 +77,7 @@ const WeatherMonitoring = () => {
             </ul>
             
             <div className="mt-8 p-4 bg-deeper-background border border-ocean-blue/30 rounded-lg">
-              <h4 className="font-semibold text-ocean-blue mb-3 text-left">Weather Monitoring Tips</h4>
+              <h4 className="font-semibold text-white mb-3 text-left">Weather Monitoring Tips</h4>
               <ul className="space-y-2 text-light-blue">
                 <li className="flex items-start">
                   <span className="text-ocean-blue mr-2">•</span>
