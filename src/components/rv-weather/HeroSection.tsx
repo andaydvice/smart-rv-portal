@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -37,12 +36,8 @@ const HeroSection = () => {
       {/* Semi-transparent overlay for better text readability */}
       <div className="absolute inset-0 bg-black/20 z-10" />
       
-      {/* Hero content */}
-      <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-6 z-20">
-        <h1 className="text-6xl md:text-8xl font-bold text-white font-playfair mb-2 drop-shadow-lg">SmartRV</h1>
-        <h2 className="text-4xl md:text-6xl font-bold text-white font-playfair drop-shadow-lg">THE ULTIMATE</h2>
-        <h2 className="text-6xl md:text-8xl font-bold text-white font-playfair mb-8 drop-shadow-lg">Weather Guide</h2>
-        
+      {/* Hero content - Text removed, only keeping the button */}
+      <div className="absolute inset-0 flex flex-col items-center justify-end text-center p-6 pb-12 z-20">
         <a 
           href="#weather-matters" 
           className="mt-8 bg-ocean-blue hover:bg-ocean-blue/90 text-white font-semibold px-8 py-3 rounded-md transition-all transform hover:-translate-y-1 shadow-lg"
