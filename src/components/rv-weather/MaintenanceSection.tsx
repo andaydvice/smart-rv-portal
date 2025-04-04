@@ -1,32 +1,26 @@
 
 import React from "react";
-import { Wrench } from "lucide-react";
+import { Container } from "@/components/ui/container";
 
 const MaintenanceSection = () => {
   return (
-    <section className="relative w-full py-16 bg-cover bg-center" style={{ backgroundImage: "url('/lovable-uploads/ad3dc693-42f4-4635-af2d-b2c4b1aafc43.png')" }}>
-      {/* Dark overlay */}
-      <div className="absolute inset-0 bg-black/70"></div>
-      
-      <div className="container mx-auto px-4 relative z-10">
-        <h2 className="text-3xl md:text-4xl font-bold text-white font-playfair text-center mb-4">
+    <section className="py-16 bg-deeper-background">
+      <Container>
+        <h2 className="text-3xl md:text-4xl font-bold text-white font-playfair text-left mb-8">
           Weather-Related RV Maintenance
         </h2>
-        <div className="w-24 h-1 bg-ocean-blue mx-auto mb-12"></div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div className="bg-dark-background/80 p-6 rounded-lg shadow backdrop-blur-sm">
-            <div className="flex items-center mb-6">
-              <div className="p-2 bg-ocean-blue/20 rounded-full mr-3">
-                <Wrench className="h-6 w-6 text-ocean-blue" />
-              </div>
-              <h3 className="text-xl font-bold text-white">Seasonal Maintenance Checklist</h3>
-            </div>
+        <div className="flex flex-col space-y-12 max-w-full">
+          {/* Section 1: Seasonal Maintenance Checklist */}
+          <div className="bg-dark-background p-6 md:p-8 rounded-lg shadow">
+            <h3 className="text-xl font-bold text-ocean-blue mb-6 text-left">
+              Seasonal Maintenance Checklist
+            </h3>
             
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <div className="p-4 bg-deeper-background/80 border border-ocean-blue/30 rounded-lg">
                 <h4 className="font-semibold text-ocean-blue mb-2 text-left">Spring</h4>
-                <ul className="space-y-2 text-light-blue text-sm text-left">
+                <ul className="space-y-2 text-light-blue text-left text-sm">
                   <li>• Check and reseal roof seams</li>
                   <li>• Inspect window and door seals</li>
                   <li>• Test air conditioning system</li>
@@ -36,7 +30,7 @@ const MaintenanceSection = () => {
               
               <div className="p-4 bg-deeper-background/80 border border-ocean-blue/30 rounded-lg">
                 <h4 className="font-semibold text-ocean-blue mb-2 text-left">Summer</h4>
-                <ul className="space-y-2 text-light-blue text-sm text-left">
+                <ul className="space-y-2 text-light-blue text-left text-sm">
                   <li>• Check tire pressure regularly</li>
                   <li>• Clean air conditioner filters monthly</li>
                   <li>• Inspect awnings and mechanisms</li>
@@ -46,7 +40,7 @@ const MaintenanceSection = () => {
               
               <div className="p-4 bg-deeper-background/80 border border-ocean-blue/30 rounded-lg">
                 <h4 className="font-semibold text-ocean-blue mb-2 text-left">Fall</h4>
-                <ul className="space-y-2 text-light-blue text-sm text-left">
+                <ul className="space-y-2 text-light-blue text-left text-sm">
                   <li>• Check furnace operation</li>
                   <li>• Inspect weather stripping</li>
                   <li>• Clean and check roof vents</li>
@@ -56,7 +50,7 @@ const MaintenanceSection = () => {
               
               <div className="p-4 bg-deeper-background/80 border border-ocean-blue/30 rounded-lg">
                 <h4 className="font-semibold text-ocean-blue mb-2 text-left">Winter</h4>
-                <ul className="space-y-2 text-light-blue text-sm text-left">
+                <ul className="space-y-2 text-light-blue text-left text-sm">
                   <li>• Apply RV antifreeze to plumbing</li>
                   <li>• Check propane system and detectors</li>
                   <li>• Inspect roof for snow load capacity</li>
@@ -66,11 +60,14 @@ const MaintenanceSection = () => {
             </div>
           </div>
           
-          <div className="bg-dark-background/80 p-6 rounded-lg shadow backdrop-blur-sm">
-            <h3 className="text-xl font-bold text-white mb-6 text-left">Weather Impact & Prevention</h3>
+          {/* Section 2: Weather Impact & Prevention */}
+          <div className="bg-dark-background p-6 md:p-8 rounded-lg shadow">
+            <h3 className="text-xl font-bold text-ocean-blue mb-6 text-left">
+              Weather Impact & Prevention
+            </h3>
             
             <div className="overflow-x-auto">
-              <table className="min-w-full">
+              <table className="w-full">
                 <thead>
                   <tr className="border-b border-gray-700">
                     <th className="text-left py-3 px-4 text-light-blue font-semibold">Weather Condition</th>
@@ -79,26 +76,26 @@ const MaintenanceSection = () => {
                 </thead>
                 <tbody className="text-light-blue">
                   <tr className="border-b border-gray-700">
-                    <td className="py-3 px-4 font-medium text-ocean-blue">Extreme Heat</td>
+                    <td className="py-3 px-4 font-medium text-ocean-blue text-left">Extreme Heat</td>
                     <td className="py-3 px-4 text-left">Park in shade, use tire covers, check refrigerator vents</td>
                   </tr>
                   <tr className="border-b border-gray-700">
-                    <td className="py-3 px-4 font-medium text-ocean-blue">Freezing Temps</td>
+                    <td className="py-3 px-4 font-medium text-ocean-blue text-left">Freezing Temps</td>
                     <td className="py-3 px-4 text-left">Winterize systems, insulate connections</td>
                   </tr>
                   <tr className="border-b border-gray-700">
-                    <td className="py-3 px-4 font-medium text-ocean-blue">High Humidity</td>
+                    <td className="py-3 px-4 font-medium text-ocean-blue text-left">High Humidity</td>
                     <td className="py-3 px-4 text-left">Use dehumidifiers, check for water intrusion</td>
                   </tr>
                   <tr>
-                    <td className="py-3 px-4 font-medium text-ocean-blue">UV Exposure</td>
+                    <td className="py-3 px-4 font-medium text-ocean-blue text-left">UV Exposure</td>
                     <td className="py-3 px-4 text-left">Use UV protectants, cover RV when stored</td>
                   </tr>
                 </tbody>
               </table>
             </div>
             
-            <div className="mt-6 p-6 bg-deeper-background/80 rounded-lg border border-ocean-blue/30">
+            <div className="mt-6 p-4 md:p-6 bg-deeper-background/80 rounded-lg border border-ocean-blue/30">
               <p className="italic text-light-blue text-left">
                 "Remember: Regular weather-related maintenance is cheaper than emergency repairs. 
                 Your RV's resilience to weather extremes depends on your preventative care."
@@ -106,7 +103,7 @@ const MaintenanceSection = () => {
             </div>
           </div>
         </div>
-      </div>
+      </Container>
     </section>
   );
 };
