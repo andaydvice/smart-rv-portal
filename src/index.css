@@ -29,7 +29,7 @@
 /* RV Weather page specific styles */
 .rv-weather-page {
   color: #4a5568;
-  text-align: left;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .rv-weather-page h1, 
@@ -42,8 +42,13 @@
   color: #1a202c !important;
 }
 
-.rv-weather-page {
-  font-family: 'Montserrat', sans-serif;
+/* Font family classes for direct application */
+.font-montserrat {
+  font-family: 'Montserrat', sans-serif !important;
+}
+
+.font-playfair {
+  font-family: 'Playfair Display', serif !important;
 }
 
 @layer utilities {
@@ -111,13 +116,6 @@ h1, h2, h3, h4, h5, h6 {
 .rv-weather-page .btn:hover {
   background-color: #2563eb;
   transform: translateY(-2px);
-}
-
-/* Weather icon styles */
-.rv-weather-page .weather-icon {
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
-  color: #3b82f6;
 }
 
 /* Section title with underline */
