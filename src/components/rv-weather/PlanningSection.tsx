@@ -1,25 +1,22 @@
-
 import React from "react";
 import { motion } from "framer-motion";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
-
 const PlanningSection = () => {
-  return (
-    <section id="trip-planning" className="py-12 md:py-16 bg-dark-background">
+  return <section id="trip-planning" className="py-12 md:py-16 bg-dark-background">
       <div className="container max-w-5xl mx-auto px-4">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="mb-8"
-        >
-          <AspectRatio ratio={16/9} className="mb-8 overflow-hidden rounded-lg shadow-xl">
-            <img 
-              src="/lovable-uploads/2f6b7370-f9de-4fed-91d7-a4d0822299c7.png" 
-              alt="Person planning RV trip with maps and weather data on computer" 
-              className="w-full h-full object-cover"
-            />
+        <motion.div initial={{
+        opacity: 0,
+        y: 20
+      }} whileInView={{
+        opacity: 1,
+        y: 0
+      }} transition={{
+        duration: 0.6
+      }} viewport={{
+        once: true
+      }} className="Add padding to the spacing utilities to include mb-8, mt-8, ml-8, mr-8, and p-8 with the padding utility classes.">
+          <AspectRatio ratio={16 / 9} className="mb-8 overflow-hidden rounded-lg shadow-xl">
+            <img src="/lovable-uploads/2f6b7370-f9de-4fed-91d7-a4d0822299c7.png" alt="Person planning RV trip with maps and weather data on computer" className="w-full h-full object-cover" />
           </AspectRatio>
           
           <h2 className="text-3xl md:text-4xl font-bold text-white font-playfair text-center mb-4">
@@ -81,8 +78,6 @@ const PlanningSection = () => {
           </div>
         </motion.div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default PlanningSection;
