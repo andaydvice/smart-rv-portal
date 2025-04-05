@@ -39,22 +39,12 @@ const HeroSection = () => {
       
       {/* Hero content */}
       <div className="absolute inset-0 z-30">
-        <div className="flex flex-col h-full justify-center items-center">
-          <div className="text-center max-w-5xl mx-auto px-6">
-            {/* Added a div for the headline text with large text and strong contrast */}
-            <div className="mb-16">
-              <h1 className="text-5xl md:text-7xl font-bold text-white leading-tight drop-shadow-lg mb-2">
-                THE ULTIMATE
-              </h1>
-              <h1 className="text-6xl md:text-8xl font-bold text-white leading-tight drop-shadow-lg mb-4">
-                Weather <br />Guide
-              </h1>
-            </div>
-            
-            {/* Button positioned below the text */}
+        <div className="flex flex-col h-full justify-end items-center pb-16">
+          <div className="text-center">
+            {/* Button positioned at bottom with good margin from any text in the image */}
             <a 
               href="#weather-matters" 
-              className="inline-block bg-ocean-blue hover:bg-ocean-blue/90 text-white font-semibold px-8 py-3 rounded-md transition-all transform hover:-translate-y-1 shadow-lg"
+              className="inline-block bg-ocean-blue hover:bg-ocean-blue/90 text-white font-semibold px-8 py-3 rounded-md transition-all transform hover:-translate-y-1 shadow-lg mt-4"
             >
               Learn More
             </a>
