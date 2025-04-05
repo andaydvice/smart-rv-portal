@@ -9,6 +9,12 @@ const HazardsSection = () => {
 
   return (
     <section className="py-6 px-4 rounded-lg bg-gradient-to-b from-[#131a2a]/50 to-[#080F1F]/50 border border-[#1a202c]/40 backdrop-blur-sm">
+      {/* Section heading first to ensure visibility */}
+      <div className="flex items-center gap-2 mb-6">
+        <Wind className="h-7 w-7 text-connectivity-accent" />
+        <TypographyH2 className="border-none text-white">Weather Hazards in the RVers</TypographyH2>
+      </div>
+      
       {/* Hero image for weather hazards */}
       <div className="mb-6 relative">
         {!imageLoaded && (
@@ -22,11 +28,6 @@ const HazardsSection = () => {
           className={`rounded-lg shadow-lg w-full object-cover max-h-[500px] ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
           onLoad={() => setImageLoaded(true)}
         />
-      </div>
-      
-      <div className="flex items-center gap-2 mb-6">
-        <Wind className="h-7 w-7 text-connectivity-accent" />
-        <TypographyH2 className="border-none">Weather Hazards in the RVers</TypographyH2>
       </div>
       
       <WeatherHazards />
