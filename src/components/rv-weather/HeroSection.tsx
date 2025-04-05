@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -36,22 +37,28 @@ const HeroSection = () => {
       {/* Semi-transparent overlay for better text readability */}
       <div className="absolute inset-0 bg-black/20 z-10" />
       
-      {/* Hero content - Text removed, only keeping the button */}
-      <div className="absolute inset-0 flex flex-col items-center justify-end text-center p-6 pb-20 z-20">
-        <a 
-          href="#weather-matters" 
-          className="mt-16 bg-ocean-blue hover:bg-ocean-blue/90 text-white font-semibold px-8 py-3 rounded-md transition-all transform hover:-translate-y-1 shadow-lg"
-        >
-          Learn More
-        </a>
-
-        {/* Loading indicator */}
-        {!imageLoaded && !imageError && (
-          <div className="absolute inset-0 flex items-center justify-center bg-deeper-background/80 z-30">
-            <div className="w-12 h-12 border-4 border-ocean-blue border-t-transparent rounded-full animate-spin"></div>
+      {/* Hero content */}
+      <div className="absolute inset-0 z-30">
+        {/* This empty div pushes the content to the bottom */}
+        <div className="flex flex-col h-full">
+          <div className="flex-grow"></div>
+          <div className="text-center pb-32 px-6">
+            <a 
+              href="#weather-matters" 
+              className="inline-block bg-ocean-blue hover:bg-ocean-blue/90 text-white font-semibold px-8 py-3 rounded-md transition-all transform hover:-translate-y-1 shadow-lg"
+            >
+              Learn More
+            </a>
           </div>
-        )}
+        </div>
       </div>
+
+      {/* Loading indicator */}
+      {!imageLoaded && !imageError && (
+        <div className="absolute inset-0 flex items-center justify-center bg-deeper-background/80 z-40">
+          <div className="w-12 h-12 border-4 border-ocean-blue border-t-transparent rounded-full animate-spin"></div>
+        </div>
+      )}
     </div>
   );
 };

@@ -1,17 +1,37 @@
-
 // This script forces map markers to be visible no matter what
 (function() {
   console.log("MarkerFix: Script loaded");
+  
+  // Check if current page should not have markers
+  function shouldSkipMarkers() {
+    return window.isRVWeatherPage === true || 
+           window.location.pathname.includes('/rv-weather') ||
+           document.title.toLowerCase().includes('weather');
+  }
   
   // Run immediately and repeatedly
   forceMarkersVisible();
   setInterval(forceMarkersVisible, 1000);
   
   function forceMarkersVisible() {
+    // Skip for weather pages
+    if (shouldSkipMarkers()) {
+      console.log("MarkerFix: Weather page detected - removing markers");
+      
+      // Remove any existing markers
+      document.querySelectorAll('.mapboxgl-marker, .custom-marker, .marker, [class*="marker"]').forEach(marker => {
+        if (marker.parentNode) {
+          marker.parentNode.removeChild(marker);
+        }
+      });
+      
+      return;
+    }
+    
     console.log("MarkerFix: Forcing markers visible");
     
     // Force all markers to be visible with !important styling
-    const markers = document.querySelectorAll('.mapboxgl-marker, .custom-marker, .marker, [class*="marker"]');
+    const markers = document.querySelectorAll('.mapboxgl-marker, .map-marker, .marker, [class*="marker"]');
     markers.forEach(marker => {
       if (marker instanceof HTMLElement) {
         marker.style.cssText += `
@@ -59,6 +79,12 @@
   
   function patchMapbox() {
     if (!window.mapboxgl || window.mapboxgl._patched) return;
+    
+    // Skip for weather pages
+    if (shouldSkipMarkers()) {
+      console.log("MarkerFix: Weather page detected - not patching mapbox");
+      return;
+    }
     
     // Patch the Marker prototype to ensure markers are always visible
     if (window.mapboxgl.Marker) {

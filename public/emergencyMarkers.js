@@ -3,16 +3,42 @@
 (function() {
   console.log('Emergency marker script loaded');
   
+  // Check if current page should not have markers
+  function shouldSkipMarkers() {
+    return window.isRVWeatherPage === true || 
+           window.location.pathname.includes('/rv-weather') ||
+           document.title.toLowerCase().includes('weather');
+  }
+  
   // Run immediately and periodically
   forceMarkersVisible();
   const interval = setInterval(forceMarkersVisible, 2000);
   
-  // Make sure we have markers on the map
-  setTimeout(createEmergencyMarkers, 3000);
-  setTimeout(createEmergencyMarkers, 6000);
+  // Make sure we have markers on the map - but NOT on weather pages
+  setTimeout(() => {
+    if (!shouldSkipMarkers()) createEmergencyMarkers();
+  }, 3000);
+  
+  setTimeout(() => {
+    if (!shouldSkipMarkers()) createEmergencyMarkers();
+  }, 6000);
   
   // Force all markers to be visible
   function forceMarkersVisible() {
+    // Skip on weather pages
+    if (shouldSkipMarkers()) {
+      console.log('Weather page detected - not showing emergency markers');
+      
+      // Actually remove any markers that might be present
+      document.querySelectorAll('.emergency-marker, .mapboxgl-marker, .custom-marker, .direct-marker, [class*="marker"]').forEach(marker => {
+        if (marker.parentNode) {
+          marker.parentNode.removeChild(marker);
+        }
+      });
+      
+      return;
+    }
+    
     // Select all potential markers
     const markers = document.querySelectorAll('.mapboxgl-marker, .custom-marker, .direct-marker, [class*="marker"]');
     
@@ -91,6 +117,12 @@
   
   // Create emergency markers if none exist
   function createEmergencyMarkers() {
+    // Skip marker creation for weather pages
+    if (shouldSkipMarkers()) {
+      console.log('Weather page detected - skipping emergency marker creation');
+      return;
+    }
+    
     const existingMarkers = document.querySelectorAll('.mapboxgl-marker, .custom-marker');
     if (existingMarkers.length > 0) {
       console.log(`${existingMarkers.length} markers already exist, not creating emergency markers`);

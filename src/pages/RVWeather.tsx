@@ -25,11 +25,31 @@ const RVWeather = () => {
     link.rel = 'stylesheet';
     document.head.appendChild(link);
     
+    // Set a flag to prevent marker creation on this page
+    window.isRVWeatherPage = true;
+    
+    // Remove any existing emergency markers
+    const removeExistingMarkers = () => {
+      document.querySelectorAll('.emergency-marker, .mapboxgl-marker').forEach(marker => {
+        if (marker.parentNode) {
+          marker.parentNode.removeChild(marker);
+        }
+      });
+    };
+    
+    // Run once and then periodically to ensure no markers appear
+    removeExistingMarkers();
+    const cleanupInterval = setInterval(removeExistingMarkers, 1000);
+    
     return () => {
       // Check if the link is still in the document before removing
       if (document.head.contains(link)) {
         document.head.removeChild(link);
       }
+      
+      // Remove the flag and stop the cleanup interval
+      window.isRVWeatherPage = false;
+      clearInterval(cleanupInterval);
     };
   }, []);
 
