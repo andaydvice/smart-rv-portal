@@ -14,6 +14,13 @@ import WeatherAlerts from "@/components/rv-weather/WeatherAlerts";
 import PreparednessTips from "@/components/rv-weather/PreparednessTips";
 import MaintenanceSection from "@/components/rv-weather/MaintenanceSection";
 
+// Extend Window interface to include our custom property
+declare global {
+  interface Window {
+    isRVWeatherPage?: boolean;
+  }
+}
+
 const RVWeather = () => {
   // Use React.useEffect instead of useEffect directly
   React.useEffect(() => {

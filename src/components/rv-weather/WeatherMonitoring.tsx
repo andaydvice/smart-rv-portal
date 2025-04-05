@@ -6,8 +6,17 @@ const WeatherMonitoring = () => {
   return (
     <section className="py-16 bg-deeper-background">
       <div className="container mx-auto px-4">
+        {/* Weather monitoring image above the heading */}
+        <div className="mb-8 flex justify-center">
+          <img 
+            src="/lovable-uploads/b5fe467f-f975-4847-97b3-6ae051921bfa.png" 
+            alt="Man monitoring weather radar in RV" 
+            className="rounded-lg shadow-lg max-w-full max-h-[500px] object-cover"
+          />
+        </div>
+        
         <h2 className="text-3xl md:text-4xl font-bold text-white font-playfair text-center mb-4">
-          Real time Weather Monitoring
+          Real Time Weather Monitoring
         </h2>
         <div className="w-24 h-1 bg-ocean-blue mx-auto mb-12"></div>
         
