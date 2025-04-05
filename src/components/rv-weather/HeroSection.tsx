@@ -37,10 +37,10 @@ const HeroSection = () => {
       <div className="absolute inset-0 bg-black/20 z-10" />
       
       {/* Hero content - Text removed, only keeping the button */}
-      <div className="absolute inset-0 flex flex-col items-center justify-end text-center p-6 pb-12 z-20">
+      <div className="absolute inset-0 flex flex-col items-center justify-end text-center p-6 pb-20 z-20">
         <a 
           href="#weather-matters" 
-          className="mt-8 bg-ocean-blue hover:bg-ocean-blue/90 text-white font-semibold px-8 py-3 rounded-md transition-all transform hover:-translate-y-1 shadow-lg"
+          className="mt-16 bg-ocean-blue hover:bg-ocean-blue/90 text-white font-semibold px-8 py-3 rounded-md transition-all transform hover:-translate-y-1 shadow-lg"
         >
           Learn More
         </a>
