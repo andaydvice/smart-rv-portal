@@ -1,4 +1,3 @@
-
 import React from "react";
 import { motion } from "framer-motion";
 import Layout from "@/components/layout/Layout";
@@ -13,6 +12,7 @@ import WeatherMonitoring from "@/components/rv-weather/WeatherMonitoring";
 import WeatherAlerts from "@/components/rv-weather/WeatherAlerts";
 import PreparednessTips from "@/components/rv-weather/PreparednessTips";
 import MaintenanceSection from "@/components/rv-weather/MaintenanceSection";
+import HazardsSection from "@/components/rv-weather/sections/HazardsSection";
 
 // Extend Window interface to include our custom property
 declare global {
@@ -76,6 +76,7 @@ const RVWeather = () => {
           <RegionalClimate />
           <WeatherMonitoring />
           <WeatherAlerts />
+          <HazardsSection />
           <PreparednessTips />
           <MaintenanceSection />
         </motion.div>

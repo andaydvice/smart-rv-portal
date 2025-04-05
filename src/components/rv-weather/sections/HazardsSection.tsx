@@ -17,7 +17,7 @@ const HazardsSection = () => {
           </div>
         )}
         <img 
-          src="/lovable-uploads/3880c7ce-5d12-4df2-93b8-ea2582f1485b.png" 
+          src="/lovable-uploads/2de9d956-ab52-477e-98d5-7711828ab90c.png" 
           alt="RV driving through stormy weather with lightning" 
           className={`rounded-lg shadow-lg w-full object-cover max-h-[500px] ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
           onLoad={() => setImageLoaded(true)}
