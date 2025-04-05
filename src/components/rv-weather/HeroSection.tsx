@@ -39,12 +39,12 @@ const HeroSection = () => {
       
       {/* Hero content */}
       <div className="absolute inset-0 z-30">
-        <div className="flex flex-col h-full justify-end items-center pb-16">
+        <div className="flex flex-col h-full justify-end items-center pb-4">
           <div className="text-center">
-            {/* Button positioned at bottom with good margin from any text in the image */}
+            {/* Button positioned much lower with significant bottom spacing */}
             <a 
               href="#weather-matters" 
-              className="inline-block bg-ocean-blue hover:bg-ocean-blue/90 text-white font-semibold px-8 py-3 rounded-md transition-all transform hover:-translate-y-1 shadow-lg mt-4"
+              className="inline-block bg-ocean-blue hover:bg-ocean-blue/90 text-white font-semibold px-8 py-3 rounded-md transition-all transform hover:-translate-y-1 shadow-lg mt-24"
             >
               Learn More
             </a>
