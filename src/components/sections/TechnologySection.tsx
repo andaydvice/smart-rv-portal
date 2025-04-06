@@ -1,3 +1,4 @@
+
 import { TechnologyHeader } from "./technology/TechnologyHeader";
 import { TechnologyGrid } from "./technology/TechnologyGrid";
 import { useNavigate } from "react-router-dom";
@@ -7,6 +8,7 @@ export const TechnologySection = () => {
 
   const handleCardClick = (link: string) => {
     console.log('Card clicked, navigating to:', link);
+    // Use navigate function to handle navigation
     navigate(link);
   };
 
