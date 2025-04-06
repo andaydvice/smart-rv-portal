@@ -1,3 +1,4 @@
+
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { LucideIcon } from "lucide-react";
@@ -16,7 +17,7 @@ interface TechnologyCardProps {
   onCardClick: (link: string) => void;
 }
 
-const CardContent = ({ system }: { system: SystemType }) => (
+const CardContent = ({ system, onCardClick }: { system: SystemType; onCardClick: (link: string) => void }) => (
   <>
     <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
     <div className="p-8">
@@ -28,7 +29,9 @@ const CardContent = ({ system }: { system: SystemType }) => (
         className="bg-white/5 text-white border-white/20 hover:bg-white/10 transition-colors"
         onClick={(e) => {
           e.stopPropagation();
-          window.location.href = "https://preview--smart-rv-portal.lovable.app/features/smart-kitchen";
+          if (system.link) {
+            onCardClick(system.link);
+          }
         }}
       >
         Learn More
@@ -48,6 +51,6 @@ export const TechnologyCard = ({ system, index, onCardClick }: TechnologyCardPro
     onClick={() => system.link && onCardClick(system.link)}
     style={{ backgroundColor: '#111827' }}
   >
-    <CardContent system={system} />
+    <CardContent system={system} onCardClick={onCardClick} />
   </motion.div>
 );
