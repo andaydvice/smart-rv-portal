@@ -1,3 +1,4 @@
+
 import { TechnologyCard } from "./TechnologyCard";
 import { Lock, Phone, Mic, Utensils } from "lucide-react";
 
@@ -7,7 +8,7 @@ const systems = [
     name: "Smart Security",
     description: "Advanced security systems with remote monitoring and smart locks",
     image: "/lovable-uploads/smart-security.jpg",
-    link: "/features/security"
+    link: "/features/security-system"
   },
   {
     icon: Phone,
