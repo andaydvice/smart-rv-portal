@@ -9,9 +9,10 @@ import { AlertCircle, Loader2 } from 'lucide-react';
 
 interface AuthFormsProps {
   onSuccess?: () => void;
+  onError?: (error: Error) => void;
 }
 
-export const AuthForms = ({ onSuccess }: AuthFormsProps) => {
+export const AuthForms = ({ onSuccess, onError }: AuthFormsProps) => {
   const [isSignUp, setIsSignUp] = useState(false);
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState('');
@@ -26,37 +27,44 @@ export const AuthForms = ({ onSuccess }: AuthFormsProps) => {
 
     try {
       if (isSignUp) {
-        const { error } = await supabase.auth.signUp({
+        const { error: signUpError } = await supabase.auth.signUp({
           email,
           password,
           options: {
             emailRedirectTo: window.location.origin + '/auth',
           }
         });
-        if (error) throw error;
+        
+        if (signUpError) throw signUpError;
+        
         toast({
           title: "Check your email",
           description: "We've sent you a verification link",
         });
       } else {
         console.log("Attempting to sign in with:", { email }); // Debug log
-        const { error, data } = await supabase.auth.signInWithPassword({
+        
+        const { error: signInError, data } = await supabase.auth.signInWithPassword({
           email,
           password,
         });
-        console.log("Sign in response:", { error, data }); // Debug log
-        if (error) throw error;
+        
+        console.log("Sign in response:", { error: signInError, data }); // Debug log
+        
+        if (signInError) throw signInError;
+        
         toast({
           title: "Welcome back!",
           description: "You've been successfully logged in",
         });
+        
         onSuccess?.();
       }
-    } catch (error: any) {
-      console.error("Auth error:", error); // Debug log
+    } catch (err: any) {
+      console.error("Auth error:", err); // Debug log
       
       // Provide more user-friendly error messages
-      let errorMessage = error.message || "An unexpected error occurred";
+      let errorMessage = err.message || "An unexpected error occurred";
       
       if (errorMessage.includes("User already registered")) {
         errorMessage = "This email is already registered. Please sign in instead.";
@@ -69,11 +77,17 @@ export const AuthForms = ({ onSuccess }: AuthFormsProps) => {
       }
       
       setError(errorMessage);
+      
       toast({
         title: "Authentication Error",
         description: errorMessage,
         variant: "destructive",
       });
+      
+      // Propagate error to parent component
+      if (onError) {
+        onError(err instanceof Error ? err : new Error(errorMessage));
+      }
     } finally {
       setLoading(false);
     }

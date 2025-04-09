@@ -8,15 +8,16 @@ import Navbar from '@/components/Navbar';
 import Layout from "@/components/layout/Layout";
 import { useErrorHandler } from '@/hooks/useErrorHandler';
 import ErrorDisplay from '@/components/error/ErrorDisplay';
+import { AlertTriangle } from 'lucide-react';
 
 const Auth = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { user } = useAuth();
+  const { user, loading, error: authError } = useAuth();
   const { error, handleError, resetError, isRecovering } = useErrorHandler();
   const [hasInitialized, setHasInitialized] = useState(false);
   
-  console.log("Auth page - Current user:", user); // Debug log
+  console.log("Auth page - Current auth state:", { user: user?.email || 'No user', loading, authError });
 
   const from = location.state?.from?.pathname || '/';
 
@@ -28,12 +29,49 @@ const Auth = () => {
     }
 
     if (user) {
-      console.log("Auth page - Redirecting authenticated user to:", from); // Debug log
+      console.log("Auth page - Redirecting authenticated user to:", from);
       navigate(from);
     }
   }, [user, navigate, from, hasInitialized]);
 
-  // If we have an error, show the error display
+  // If we're still loading, show a loading state
+  if (loading && !hasInitialized) {
+    return (
+      <Layout>
+        <Navbar />
+        <div className="flex-grow flex items-center justify-center px-4 py-12 pt-24">
+          <div className="w-full max-w-md text-center">
+            <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-[#5B9BD5] mx-auto mb-4"></div>
+            <p className="text-[#E2E8FF]">Checking authentication status...</p>
+          </div>
+        </div>
+      </Layout>
+    );
+  }
+
+  // If we have an error from AuthContext, show it
+  if (authError && hasInitialized) {
+    return (
+      <Layout>
+        <Navbar />
+        <div className="flex-grow flex items-center justify-center px-4 py-12 pt-24">
+          <ErrorDisplay
+            error={{
+              message: `Authentication error: ${authError.message}`,
+              statusCode: 500,
+              stack: process.env.NODE_ENV === 'development' ? authError.stack : undefined
+            }}
+            isRecovering={isRecovering}
+            onRetry={() => window.location.reload()}
+            onGoBack={() => navigate(-1)}
+            onGoHome={() => navigate('/')}
+          />
+        </div>
+      </Layout>
+    );
+  }
+
+  // If we have an error from error handler, show it
   if (error && hasInitialized) {
     return (
       <Layout>
@@ -86,7 +124,10 @@ const Auth = () => {
 
           <div className="flex flex-col space-y-6">
             <Card className="p-6 bg-[#131a2a] border-gray-700">
-              <AuthForms onSuccess={() => navigate(from)} />
+              <AuthForms 
+                onSuccess={() => navigate(from)} 
+                onError={(error) => handleError(error)}
+              />
             </Card>
             
             <div className="text-sm text-gray-400 px-4">

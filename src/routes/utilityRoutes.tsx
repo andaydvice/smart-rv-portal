@@ -1,71 +1,63 @@
 
 import React from "react";
 import { RouteObject } from "react-router-dom";
-import ErrorPage from "@/pages/ErrorPage";
 
-// Utility pages
-import Calculators from "@/pages/Calculators";
-import VoiceControl from "@/pages/VoiceControl";
-import Troubleshooting from "@/pages/Troubleshooting";
-import WeatherDashboard from "@/pages/WeatherDashboard";
-import RVWeather from "@/pages/RVWeather";
-import StoragePreparationChecklist from "@/pages/StoragePreparationChecklist";
-import StorageFacilities from "@/pages/StorageFacilities";
-import MapIconDemo from "@/pages/MapIconDemo";
-import ScheduleDemo from "@/pages/ScheduleDemo";
-import MapFacilityDemo from "@/pages/MapFacilityDemo";
+// Import utility pages
+import Auth from "../pages/Auth";
+import Calculators from "../pages/Calculators";
+import Contact from "../pages/Contact";
+import WeatherDashboard from "../pages/WeatherDashboard";
+import ScheduleDemo from "../pages/ScheduleDemo";
+import StorageFacilities from "../pages/StorageFacilities";
+import StoragePreparationChecklist from "../pages/StoragePreparationChecklist";
+import VoiceControl from "../pages/VoiceControl";
+import Documentation from "../pages/Documentation";
+import Troubleshooting from "../pages/Troubleshooting";
+import ErrorPage from "../pages/ErrorPage";
 
-export const utilityRoutes: RouteObject[] = [
+// Define utility routes
+const utilityRoutes: RouteObject[] = [
+  {
+    path: "/auth",
+    element: <Auth />,
+    errorElement: <ErrorPage />,
+  },
   {
     path: "/calculators",
     element: <Calculators />,
-    errorElement: <ErrorPage />,
   },
   {
-    path: "/voice-control",
-    element: <VoiceControl />,
-    errorElement: <ErrorPage />,
+    path: "/contact",
+    element: <Contact />,
   },
   {
-    path: "/troubleshooting",
-    element: <Troubleshooting />,
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: "/weather-dashboard",
+    path: "/weather",
     element: <WeatherDashboard />,
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: "/rv-weather",
-    element: <RVWeather />,
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: "/storage-checklist",
-    element: <StoragePreparationChecklist />,
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: "/storage-facilities",
-    element: <StorageFacilities />,
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: "/map-icon-demo",
-    element: <MapIconDemo />,
-    errorElement: <ErrorPage />,
   },
   {
     path: "/schedule-demo",
     element: <ScheduleDemo />,
-    errorElement: <ErrorPage />,
   },
   {
-    path: "/facility-map-demo",
-    element: <MapFacilityDemo />,
-    errorElement: <ErrorPage />,
-  }
+    path: "/storage-facilities",
+    element: <StorageFacilities />,
+  },
+  {
+    path: "/storage-preparation-checklist",
+    element: <StoragePreparationChecklist />,
+  },
+  {
+    path: "/voice-control",
+    element: <VoiceControl />,
+  },
+  {
+    path: "/documentation",
+    element: <Documentation />,
+  },
+  {
+    path: "/troubleshooting",
+    element: <Troubleshooting />,
+  },
 ];
 
 export default utilityRoutes;
