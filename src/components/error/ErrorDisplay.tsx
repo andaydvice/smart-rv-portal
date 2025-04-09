@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert';
-import { Loader2, AlertTriangle } from 'lucide-react';
+import { Loader2, AlertTriangle, Home, RefreshCcw } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 interface ErrorDisplayProps {
@@ -13,12 +13,14 @@ interface ErrorDisplayProps {
   isRecovering?: boolean;
   onRetry?: () => void;
   onGoHome?: () => void;
+  onGoBack?: () => void;
 }
 
 const ErrorDisplay: React.FC<ErrorDisplayProps> = ({
   error,
   isRecovering = false,
   onRetry,
+  onGoBack,
   onGoHome = () => window.location.href = '/'
 }) => {
   if (isRecovering) {
@@ -57,16 +59,29 @@ const ErrorDisplay: React.FC<ErrorDisplayProps> = ({
         {onRetry && (
           <Button 
             onClick={onRetry}
-            className="bg-[#5B9BD5] hover:bg-[#4B8FE3] text-white"
+            className="bg-[#5B9BD5] hover:bg-[#4B8FE3] text-white flex items-center justify-center"
           >
+            <RefreshCcw className="mr-2 h-4 w-4" />
             Try Again
           </Button>
         )}
+        
+        {onGoBack && (
+          <Button 
+            onClick={onGoBack}
+            variant="outline"
+            className="border-[#1a202c] text-[#E2E8FF] hover:bg-[#131a2a]"
+          >
+            Go Back
+          </Button>
+        )}
+        
         <Button 
           onClick={onGoHome}
           variant="outline"
-          className="border-[#1a202c] text-[#E2E8FF] hover:bg-[#131a2a]"
+          className="border-[#1a202c] text-[#E2E8FF] hover:bg-[#131a2a] flex items-center justify-center"
         >
+          <Home className="mr-2 h-4 w-4" />
           Return Home
         </Button>
       </div>

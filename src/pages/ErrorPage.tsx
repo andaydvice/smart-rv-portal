@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import { useRouteError, isRouteErrorResponse, useNavigate, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import Layout from '@/components/layout/Layout';
-import { AlertTriangle } from 'lucide-react';
+import { AlertTriangle, RefreshCcw, Home } from 'lucide-react';
 
 const ErrorPage = () => {
   const error = useRouteError();
@@ -49,16 +49,28 @@ const ErrorPage = () => {
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button 
+              onClick={() => window.location.reload()}
+              variant="default"
+              className="bg-[#5B9BD5] hover:bg-[#4B8FE3] text-white flex items-center"
+            >
+              <RefreshCcw className="mr-2 h-4 w-4" />
+              Try Again
+            </Button>
+            
+            <Button 
               onClick={() => navigate(-1)}
               variant="outline"
               className="border-[#1a202c] text-[#E2E8FF] hover:bg-[#131a2a]"
             >
               Go Back
             </Button>
+            
             <Button 
               onClick={() => navigate('/')}
-              className="bg-[#5B9BD5] hover:bg-[#4B8FE3] text-white"
+              variant="outline"
+              className="border-[#1a202c] text-[#E2E8FF] hover:bg-[#131a2a] flex items-center"
             >
+              <Home className="mr-2 h-4 w-4" />
               Return Home
             </Button>
           </div>

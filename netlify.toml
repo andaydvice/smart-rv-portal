@@ -35,6 +35,38 @@
   status = 301
   force = true
 
+# Legacy feature paths
+[[redirects]]
+  from = "/rv-intelligence/*"
+  to = "/features/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/rv-systems/*"
+  to = "/features/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/rv-tools/*"
+  to = "/calculators/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/support/*"
+  to = "/troubleshooting/:splat"
+  status = 301
+  force = true
+
+# Auth error handling
+[[redirects]]
+  from = "/auth/error"
+  to = "/auth"
+  status = 301
+  force = true
+
 # Build settings
 [build]
   command = "npm run build"
@@ -45,3 +77,4 @@
   for = "/*"
   [headers.values]
     Cache-Control = "public, max-age=0, must-revalidate"
+

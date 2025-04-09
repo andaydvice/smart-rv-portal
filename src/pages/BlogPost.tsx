@@ -3,7 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { Helmet } from "react-helmet";
 import Navbar from "@/components/Navbar";
 import { Button } from "@/components/ui/button";
-import { ChevronLeft } from "lucide-react";
+import { ChevronLeft, AlertTriangle } from "lucide-react";
 import { BlogPostHeader } from "@/components/blog/post/BlogPostHeader";
 import { BlogPostImage } from "@/components/blog/post/BlogPostImage";
 import { BlogPostContent } from "@/components/blog/post/BlogPostContent";
@@ -141,15 +141,19 @@ const BlogPost = () => {
     return (
       <div className="flex flex-col min-h-screen bg-[#080F1F] text-white">
         <Navbar />
-        <div className="container mx-auto px-4 py-8 pt-20 flex-grow">
-          <h1>Blog post not found</h1>
+        <div className="container mx-auto px-4 py-16 pt-32 flex-grow flex flex-col items-center justify-center text-center">
+          <AlertTriangle className="h-16 w-16 text-[#EF4444] mb-6" />
+          <h1 className="text-3xl font-bold mb-4">Blog Post Not Found</h1>
+          <p className="text-[#E2E8FF] max-w-lg mb-8">
+            We couldn't find the blog post you're looking for. It may have been moved or removed.
+          </p>
           <Button
-            variant="ghost"
+            variant="default"
+            className="bg-[#5B9BD5] hover:bg-[#4B8FE3] text-white"
             onClick={() => navigate('/blog')}
-            className="mt-4"
           >
             <ChevronLeft className="mr-2 h-4 w-4" />
-            Back to Blog
+            Back to Blog Posts
           </Button>
         </div>
         <Footer2 

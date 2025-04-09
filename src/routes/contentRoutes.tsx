@@ -1,6 +1,6 @@
 
 import React from "react";
-import { RouteObject } from "react-router-dom";
+import { RouteObject, Navigate } from "react-router-dom";
 
 // Import content pages
 import BlogIndex from "../pages/BlogIndex";
@@ -25,6 +25,11 @@ const contentRoutes: RouteObject[] = [
   {
     path: "/technology",
     element: <Technology />,
+  },
+  // Redirects for old blog post URLs
+  {
+    path: "/blog/solar-power-solutions-for-full-time-rvers",
+    element: <Navigate to="/blog/solar-power-solutions" replace />,
   },
 ];
 

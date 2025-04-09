@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
+import { AlertCircle } from 'lucide-react';
 
 interface AuthFormsProps {
   onSuccess?: () => void;
@@ -15,11 +16,13 @@ export const AuthForms = ({ onSuccess }: AuthFormsProps) => {
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState<string | null>(null);
   const { toast } = useToast();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
+    setError(null);
 
     try {
       if (isSignUp) {
@@ -48,9 +51,10 @@ export const AuthForms = ({ onSuccess }: AuthFormsProps) => {
       }
     } catch (error: any) {
       console.error("Auth error:", error); // Debug log
+      setError(error.message || "An unexpected error occurred");
       toast({
         title: "Error",
-        description: error.message,
+        description: error.message || "An unexpected error occurred",
         variant: "destructive",
       });
     } finally {
@@ -89,6 +93,13 @@ export const AuthForms = ({ onSuccess }: AuthFormsProps) => {
             : "Access your RV tools and saved preferences"}
         </p>
       </div>
+
+      {error && (
+        <div className="bg-red-900/30 border border-red-500/50 p-3 rounded-md flex items-start gap-2 mb-2">
+          <AlertCircle className="h-5 w-5 text-red-500 mt-0.5 flex-shrink-0" />
+          <p className="text-sm text-red-100">{error}</p>
+        </div>
+      )}
 
       <form onSubmit={handleSubmit} className="space-y-4">
         <div className="space-y-2">
