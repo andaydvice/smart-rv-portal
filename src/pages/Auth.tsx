@@ -8,7 +8,6 @@ import Navbar from '@/components/Navbar';
 import Layout from "@/components/layout/Layout";
 import { useErrorHandler } from '@/hooks/useErrorHandler';
 import ErrorDisplay from '@/components/error/ErrorDisplay';
-import { AlertTriangle } from 'lucide-react';
 
 const Auth = () => {
   const navigate = useNavigate();
@@ -57,8 +56,8 @@ const Auth = () => {
         <div className="flex-grow flex items-center justify-center px-4 py-12 pt-24">
           <ErrorDisplay
             error={{
-              message: `Authentication error: ${authError.message}`,
-              statusCode: 500,
+              message: `Authentication system issue: ${authError.message}`,
+              statusCode: 401,
               stack: process.env.NODE_ENV === 'development' ? authError.stack : undefined
             }}
             isRecovering={isRecovering}

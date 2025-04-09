@@ -20,7 +20,6 @@ const utilityRoutes: RouteObject[] = [
   {
     path: "/auth",
     element: <Auth />,
-    errorElement: <ErrorPage />,
   },
   {
     path: "/calculators",
