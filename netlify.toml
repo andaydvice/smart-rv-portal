@@ -21,6 +21,20 @@
   status = 200
   force = true
 
+# Blog post redirects
+[[redirects]]
+  from = "/blog/solar-power-solutions-for-full-time-rvers"
+  to = "/blog/solar-power-solutions"
+  status = 301
+  force = true
+
+# Legacy model paths
+[[redirects]]
+  from = "/models/luxury-class"
+  to = "/models/luxury"
+  status = 301
+  force = true
+
 # Build settings
 [build]
   command = "npm run build"

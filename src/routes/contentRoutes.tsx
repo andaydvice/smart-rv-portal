@@ -6,6 +6,7 @@ import { RouteObject } from "react-router-dom";
 import BlogIndex from "../pages/BlogIndex";
 import BlogPost from "../pages/BlogPost";
 import RVWeather from "../pages/RVWeather";
+import Technology from "../pages/Technology";
 
 // Define content routes
 const contentRoutes: RouteObject[] = [
@@ -20,6 +21,10 @@ const contentRoutes: RouteObject[] = [
   {
     path: "/rv-weather",
     element: <RVWeather />,
+  },
+  {
+    path: "/technology",
+    element: <Technology />,
   },
 ];
 

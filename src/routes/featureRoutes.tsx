@@ -1,6 +1,6 @@
 
 import React from "react";
-import { RouteObject } from "react-router-dom";
+import { RouteObject, Navigate } from "react-router-dom";
 import ErrorPage from "@/pages/ErrorPage";
 
 // Feature pages
@@ -24,6 +24,7 @@ export const featureRoutes: RouteObject[] = [
     element: <Features />,
     errorElement: <ErrorPage />,
   },
+  // Feature pages
   {
     path: "/features/audio-system",
     element: <AudioSystem />,
@@ -82,6 +83,27 @@ export const featureRoutes: RouteObject[] = [
   {
     path: "/features/entertainment",
     element: <Entertainment />,
+    errorElement: <ErrorPage />,
+  },
+  // Category redirects
+  {
+    path: "/rv-intelligence",
+    element: <Navigate to="/features" replace />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/rv-systems",
+    element: <Navigate to="/features" replace />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/rv-tools",
+    element: <Navigate to="/calculators" replace />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/support",
+    element: <Navigate to="/troubleshooting" replace />,
     errorElement: <ErrorPage />,
   }
 ];
