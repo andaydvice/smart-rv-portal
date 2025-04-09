@@ -101,7 +101,7 @@ export const AuthForms = ({ onSuccess, onError }: AuthFormsProps) => {
             type="button"
             variant={!isSignUp ? "default" : "outline"}
             onClick={() => setIsSignUp(false)}
-            className={`flex-1 ${!isSignUp ? "text-white" : "text-blue-400 hover:text-blue-300"}`}
+            className={`flex-1 ${!isSignUp ? "text-white" : "text-white hover:text-white"}`}
           >
             Sign In
           </Button>
@@ -109,7 +109,7 @@ export const AuthForms = ({ onSuccess, onError }: AuthFormsProps) => {
             type="button"
             variant={isSignUp ? "default" : "outline"}
             onClick={() => setIsSignUp(true)}
-            className={`flex-1 ${isSignUp ? "text-white" : "text-blue-400 hover:text-blue-300"}`}
+            className={`flex-1 ${isSignUp ? "text-white" : "text-white hover:text-white"}`}
           >
             Sign Up
           </Button>
@@ -118,7 +118,7 @@ export const AuthForms = ({ onSuccess, onError }: AuthFormsProps) => {
         <h2 className="text-2xl font-bold text-white text-left">
           {isSignUp ? "Create Your Account" : "Welcome Back"}
         </h2>
-        <p className="text-gray-400 text-left">
+        <p className="text-white text-left">
           {isSignUp 
             ? "Join our community of RV enthusiasts" 
             : "Access your RV tools and saved preferences"}
@@ -128,13 +128,13 @@ export const AuthForms = ({ onSuccess, onError }: AuthFormsProps) => {
       {error && (
         <div className="bg-red-900/30 border border-red-500/50 p-3 rounded-md flex items-start gap-2 mb-2">
           <AlertCircle className="h-5 w-5 text-red-500 mt-0.5 flex-shrink-0" />
-          <p className="text-sm text-red-100">{error}</p>
+          <p className="text-sm text-white">{error}</p>
         </div>
       )}
 
       <form onSubmit={handleSubmit} className="space-y-4">
         <div className="space-y-2">
-          <Label htmlFor="email">Email</Label>
+          <Label htmlFor="email" className="text-white">Email</Label>
           <Input
             id="email"
             type="email"
@@ -142,12 +142,12 @@ export const AuthForms = ({ onSuccess, onError }: AuthFormsProps) => {
             onChange={(e) => setEmail(e.target.value)}
             placeholder="your.email@example.com"
             required
-            className="bg-[#1a2235] border-gray-700"
+            className="bg-[#1a2235] border-gray-700 text-white"
             disabled={loading}
           />
         </div>
         <div className="space-y-2">
-          <Label htmlFor="password">Password</Label>
+          <Label htmlFor="password" className="text-white">Password</Label>
           <Input
             id="password"
             type="password"
@@ -155,11 +155,11 @@ export const AuthForms = ({ onSuccess, onError }: AuthFormsProps) => {
             onChange={(e) => setPassword(e.target.value)}
             placeholder={isSignUp ? "Create a secure password" : "Enter your password"}
             required
-            className="bg-[#1a2235] border-gray-700"
+            className="bg-[#1a2235] border-gray-700 text-white"
             disabled={loading}
           />
           {isSignUp && (
-            <p className="text-xs text-gray-400 mt-1">
+            <p className="text-xs text-white mt-1">
               Password must be at least 6 characters long
             </p>
           )}

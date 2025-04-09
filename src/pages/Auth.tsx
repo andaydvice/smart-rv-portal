@@ -41,7 +41,7 @@ const Auth = () => {
         <div className="flex-grow flex items-center justify-center px-4 py-12 pt-24">
           <div className="w-full max-w-md text-center">
             <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-[#5B9BD5] mx-auto mb-4"></div>
-            <p className="text-[#E2E8FF]">Checking authentication status...</p>
+            <p className="text-white">Checking authentication status...</p>
           </div>
         </div>
       </Layout>
@@ -99,10 +99,10 @@ const Auth = () => {
             </h1>
             
             <div className="space-y-4">
-              <h2 className="text-xl font-semibold text-[#5B9BD5]">
+              <h2 className="text-xl font-semibold text-white">
                 Why Create an Account?
               </h2>
-              <ul className="space-y-4 text-left text-[#E2E8FF]">
+              <ul className="space-y-4 text-left text-white">
                 <li className="flex items-start gap-3">
                   <span className="text-[#5B9BD5] text-lg">✓</span>
                   <span>Access exclusive RV calculators and tools to plan your trips better</span>
@@ -131,7 +131,7 @@ const Auth = () => {
               />
             </Card>
             
-            <div className="text-sm text-[#E2E8FF] px-4">
+            <div className="text-sm text-white px-4">
               <p>By creating an account, you'll get access to our premium features and tools designed specifically for RV enthusiasts. We respect your privacy and will never share your information.</p>
             </div>
           </div>
