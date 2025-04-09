@@ -1,26 +1,55 @@
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { AuthForms } from '@/components/auth/AuthForms';
 import { useAuth } from '@/components/auth/AuthContext';
 import { Card } from '@/components/ui/card';
 import Navbar from '@/components/Navbar';
 import Layout from "@/components/layout/Layout";
+import { useErrorHandler } from '@/hooks/useErrorHandler';
+import ErrorDisplay from '@/components/error/ErrorDisplay';
 
 const Auth = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { user } = useAuth();
+  const { error, handleError, resetError, isRecovering } = useErrorHandler();
+  const [hasInitialized, setHasInitialized] = useState(false);
+  
   console.log("Auth page - Current user:", user); // Debug log
 
   const from = location.state?.from?.pathname || '/';
 
   useEffect(() => {
+    // Mark as initialized after first render to prevent flash of error state
+    if (!hasInitialized) {
+      setHasInitialized(true);
+      return;
+    }
+
     if (user) {
       console.log("Auth page - Redirecting authenticated user to:", from); // Debug log
       navigate(from);
     }
-  }, [user, navigate, from]);
+  }, [user, navigate, from, hasInitialized]);
+
+  // If we have an error, show the error display
+  if (error && hasInitialized) {
+    return (
+      <Layout>
+        <Navbar />
+        <div className="flex-grow flex items-center justify-center px-4 py-12 pt-24">
+          <ErrorDisplay
+            error={error}
+            isRecovering={isRecovering}
+            onRetry={resetError}
+            onGoBack={() => navigate(-1)}
+            onGoHome={() => navigate('/')}
+          />
+        </div>
+      </Layout>
+    );
+  }
 
   return (
     <Layout>

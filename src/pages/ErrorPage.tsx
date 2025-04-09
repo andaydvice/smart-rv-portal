@@ -4,6 +4,7 @@ import { useRouteError, isRouteErrorResponse, useNavigate, useLocation } from 'r
 import { Button } from '@/components/ui/button';
 import Layout from '@/components/layout/Layout';
 import { AlertTriangle, RefreshCcw, Home } from 'lucide-react';
+import ErrorDisplay from '@/components/error/ErrorDisplay';
 
 const ErrorPage = () => {
   const error = useRouteError();
@@ -27,6 +28,27 @@ const ErrorPage = () => {
   }
 
   const is404 = statusCode === 404;
+  const isAuthError = location.pathname === '/auth' || location.pathname.startsWith('/auth/');
+
+  // For auth-related errors, provide more specific guidance
+  if (isAuthError) {
+    return (
+      <Layout>
+        <div className="min-h-[70vh] flex items-center justify-center px-4">
+          <ErrorDisplay 
+            error={{
+              message: "We're having trouble with the authentication system",
+              statusCode: statusCode,
+              stack: process.env.NODE_ENV === 'development' ? (error instanceof Error ? error.stack : undefined) : undefined
+            }}
+            onRetry={() => window.location.reload()}
+            onGoBack={() => navigate(-1)}
+            onGoHome={() => navigate('/')}
+          />
+        </div>
+      </Layout>
+    );
+  }
 
   return (
     <Layout>

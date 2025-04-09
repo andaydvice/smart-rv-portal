@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
-import { AlertCircle } from 'lucide-react';
+import { AlertCircle, Loader2 } from 'lucide-react';
 
 interface AuthFormsProps {
   onSuccess?: () => void;
@@ -29,6 +29,9 @@ export const AuthForms = ({ onSuccess }: AuthFormsProps) => {
         const { error } = await supabase.auth.signUp({
           email,
           password,
+          options: {
+            emailRedirectTo: window.location.origin + '/auth',
+          }
         });
         if (error) throw error;
         toast({
@@ -51,10 +54,24 @@ export const AuthForms = ({ onSuccess }: AuthFormsProps) => {
       }
     } catch (error: any) {
       console.error("Auth error:", error); // Debug log
-      setError(error.message || "An unexpected error occurred");
+      
+      // Provide more user-friendly error messages
+      let errorMessage = error.message || "An unexpected error occurred";
+      
+      if (errorMessage.includes("User already registered")) {
+        errorMessage = "This email is already registered. Please sign in instead.";
+      } else if (errorMessage.includes("Invalid login credentials")) {
+        errorMessage = "Invalid email or password. Please try again.";
+      } else if (errorMessage.includes("Email not confirmed")) {
+        errorMessage = "Please verify your email before signing in.";
+      } else if (errorMessage.includes("Password should be at least")) {
+        errorMessage = "Password must be at least 6 characters long.";
+      }
+      
+      setError(errorMessage);
       toast({
-        title: "Error",
-        description: error.message || "An unexpected error occurred",
+        title: "Authentication Error",
+        description: errorMessage,
         variant: "destructive",
       });
     } finally {
@@ -112,6 +129,7 @@ export const AuthForms = ({ onSuccess }: AuthFormsProps) => {
             placeholder="your.email@example.com"
             required
             className="bg-[#1a2235] border-gray-700"
+            disabled={loading}
           />
         </div>
         <div className="space-y-2">
@@ -124,6 +142,7 @@ export const AuthForms = ({ onSuccess }: AuthFormsProps) => {
             placeholder={isSignUp ? "Create a secure password" : "Enter your password"}
             required
             className="bg-[#1a2235] border-gray-700"
+            disabled={loading}
           />
           {isSignUp && (
             <p className="text-xs text-gray-400 mt-1">
@@ -136,7 +155,14 @@ export const AuthForms = ({ onSuccess }: AuthFormsProps) => {
           className="w-full"
           disabled={loading}
         >
-          {loading ? 'Loading...' : isSignUp ? 'Create Account' : 'Sign In'}
+          {loading ? (
+            <span className="flex items-center">
+              <Loader2 className="animate-spin mr-2 h-4 w-4" />
+              {isSignUp ? 'Creating Account...' : 'Signing In...'}
+            </span>
+          ) : (
+            isSignUp ? 'Create Account' : 'Sign In'
+          )}
         </Button>
       </form>
     </div>
