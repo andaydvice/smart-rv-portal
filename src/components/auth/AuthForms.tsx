@@ -166,7 +166,7 @@ export const AuthForms = ({ onSuccess, onError }: AuthFormsProps) => {
         </div>
         <Button
           type="submit"
-          className="w-full"
+          className="w-full bg-[#5B9BD5] hover:bg-[#4B8FE3] text-white font-medium"
           disabled={loading}
         >
           {loading ? (
