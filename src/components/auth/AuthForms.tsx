@@ -100,8 +100,7 @@ export const AuthForms = ({ onSuccess, onError }: AuthFormsProps) => {
             type="button"
             variant={!isSignUp ? "default" : "outline"}
             onClick={() => setIsSignUp(false)}
-            className={`flex-1 ${!isSignUp ? "text-white" : "text-white hover:text-white"}`}
-            style={{ color: 'white' }}
+            className="flex-1 font-medium"
           >
             Sign In
           </Button>
@@ -109,8 +108,7 @@ export const AuthForms = ({ onSuccess, onError }: AuthFormsProps) => {
             type="button"
             variant={isSignUp ? "default" : "outline"}
             onClick={() => setIsSignUp(true)}
-            className={`flex-1 ${isSignUp ? "text-white" : "text-white hover:text-white"}`}
-            style={{ color: 'white' }}
+            className="flex-1 font-medium"
           >
             Sign Up
           </Button>
@@ -167,8 +165,7 @@ export const AuthForms = ({ onSuccess, onError }: AuthFormsProps) => {
         </div>
         <Button
           type="submit"
-          className="w-full bg-[#5B9BD5] hover:bg-[#4B8FE3] text-white font-medium"
-          style={{ backgroundColor: '#5B9BD5', color: 'white' }}
+          className="w-full font-medium"
           disabled={loading}
         >
           {loading ? (
