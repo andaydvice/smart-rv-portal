@@ -98,17 +98,17 @@ export const AuthForms = ({ onSuccess, onError }: AuthFormsProps) => {
         <div className="flex items-center space-x-4 mb-2">
           <Button
             type="button"
-            variant={!isSignUp ? "default" : "outline"}
+            variant="default"
             onClick={() => setIsSignUp(false)}
-            className="flex-1 font-medium"
+            className={`flex-1 font-medium ${!isSignUp ? "opacity-100" : "opacity-80"}`}
           >
             Sign In
           </Button>
           <Button
             type="button"
-            variant={isSignUp ? "default" : "outline"}
+            variant="default"
             onClick={() => setIsSignUp(true)}
-            className="flex-1 font-medium"
+            className={`flex-1 font-medium ${isSignUp ? "opacity-100" : "opacity-80"}`}
           >
             Sign Up
           </Button>
