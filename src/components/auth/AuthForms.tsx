@@ -84,7 +84,6 @@ export const AuthForms = ({ onSuccess, onError }: AuthFormsProps) => {
         variant: "destructive",
       });
       
-      // Propagate error to parent component
       if (onError) {
         onError(err instanceof Error ? err : new Error(errorMessage));
       }
@@ -102,6 +101,7 @@ export const AuthForms = ({ onSuccess, onError }: AuthFormsProps) => {
             variant={!isSignUp ? "default" : "outline"}
             onClick={() => setIsSignUp(false)}
             className={`flex-1 ${!isSignUp ? "text-white" : "text-white hover:text-white"}`}
+            style={{ color: 'white' }}
           >
             Sign In
           </Button>
@@ -110,6 +110,7 @@ export const AuthForms = ({ onSuccess, onError }: AuthFormsProps) => {
             variant={isSignUp ? "default" : "outline"}
             onClick={() => setIsSignUp(true)}
             className={`flex-1 ${isSignUp ? "text-white" : "text-white hover:text-white"}`}
+            style={{ color: 'white' }}
           >
             Sign Up
           </Button>
@@ -167,6 +168,7 @@ export const AuthForms = ({ onSuccess, onError }: AuthFormsProps) => {
         <Button
           type="submit"
           className="w-full bg-[#5B9BD5] hover:bg-[#4B8FE3] text-white font-medium"
+          style={{ backgroundColor: '#5B9BD5', color: 'white' }}
           disabled={loading}
         >
           {loading ? (
