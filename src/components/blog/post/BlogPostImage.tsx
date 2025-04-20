@@ -1,3 +1,6 @@
+
+import { OptimizedImage } from './OptimizedImage';
+
 interface BlogPostImageProps {
   image: string;
   title: string;
@@ -6,7 +9,7 @@ interface BlogPostImageProps {
 export const BlogPostImage = ({ image, title }: BlogPostImageProps) => {
   return (
     <div className="rounded-3xl overflow-hidden">
-      <img 
+      <OptimizedImage 
         src={image} 
         alt={title}
         className="w-full h-[600px] object-cover"
@@ -14,3 +17,4 @@ export const BlogPostImage = ({ image, title }: BlogPostImageProps) => {
     </div>
   );
 };
+
