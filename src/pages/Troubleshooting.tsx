@@ -1,3 +1,4 @@
+
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
@@ -9,7 +10,6 @@ import ConnectivityGuide from "@/components/connectivity/ConnectivityGuide";
 import TroubleshootingFlowchart from "@/components/troubleshooting/TroubleshootingFlowchart";
 import Layout from "@/components/layout/Layout";
 import { scrollToTop } from "@/utils/scrollToTop";
-import { SearchDialog } from "@/components/troubleshooting/SearchDialog";
 
 const Troubleshooting = () => {
   useEffect(() => {
@@ -44,11 +44,6 @@ const Troubleshooting = () => {
           </motion.div>
         </div>
       </section>
-
-      {/* Search Section */}
-      <div className="container mx-auto px-4 mt-8 mb-4 max-w-2xl">
-        <SearchDialog />
-      </div>
 
       {/* Main Content */}
       <section className="py-8 container mx-auto px-4 flex-grow bg-[#080F1F]">
