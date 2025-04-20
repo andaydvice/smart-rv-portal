@@ -2,7 +2,7 @@
 import { useEffect, useCallback } from 'react';
 import { StorageFacility } from '../../../types';
 import { 
-  injectEmergencyMarkerStyles,
+  injectEmergencyStyles,
   createEmergencyMarkers,
   setupEmergencyMarkerListeners,
   removeViewDetailsButtons
@@ -24,7 +24,7 @@ export const useMarkerSetup = (
     if (!map || !mapLoaded || validFacilities.length === 0) return;
     
     // Inject emergency styles
-    injectEmergencyMarkerStyles();
+    injectEmergencyStyles();
     
     // Set map container to be explicitly visible
     const container = map.getContainer();

@@ -1,8 +1,6 @@
 
-import { injectEmergencyStyles } from './markers/styleInjection';
+/**
+ * Re-exporting the emergency style injection function for backward compatibility
+ */
+export { injectEmergencyStyles } from './markers/styleInjection';
 
-// Re-export for backward compatibility
-export const injectEmergencyStyles = injectEmergencyStyles;
-
-// Export the original function as well for consistency
-export { injectEmergencyStyles };

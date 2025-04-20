@@ -6,7 +6,7 @@
 /**
  * Inject emergency marker styles into the document
  */
-export function injectEmergencyMarkerStyles(): void {
+export function injectEmergencyStyles(): void {
   if (document.getElementById('emergency-marker-styles')) return;
   
   const style = document.createElement('style');

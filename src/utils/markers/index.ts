@@ -5,7 +5,7 @@ import { enableEdgeAwareMarkers } from './forcing/edge-aware';
 import { 
   createEmergencyMarkers,
   setupEmergencyMarkerListeners,
-  injectEmergencyMarkerStyles
+  injectEmergencyStyles
 } from './emergency';
 
 /**
@@ -87,5 +87,5 @@ export const ensureMarkersExist = (map: mapboxgl.Map, facilities: StorageFacilit
 export { 
   createEmergencyMarkers,
   setupEmergencyMarkerListeners, 
-  injectEmergencyMarkerStyles 
+  injectEmergencyStyles 
 } from './emergency';
