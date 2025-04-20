@@ -15,7 +15,7 @@ const SmartSystemGuide = () => {
     <div className="bg-[#0B1221] rounded-[32px] border border-gray-800/30 p-8 mt-8">
       <div className="space-y-6">
         <div className="space-y-2">
-          <h2 className="text-xl font-medium text-[#60A5FA] leading-tight">
+          <h2 className="text-xl font-bold text-white leading-tight">
             Smart System Integration Guide
           </h2>
           <p className="text-gray-300 text-sm">
