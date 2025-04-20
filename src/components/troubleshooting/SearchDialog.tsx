@@ -72,7 +72,7 @@ export function SearchDialog() {
             <CommandGroup 
               key={group.category} 
               heading={group.category}
-              className="text-[#5B9BD5] font-bold text-xl px-4 py-2 bg-[#151A22]"
+              className="text-[#5B9BD5] text-3xl font-medium tracking-wide px-4 py-3 bg-[#151A22]/80 uppercase"
             >
               {group.items.map((item) => (
                 <CommandItem
@@ -90,3 +90,4 @@ export function SearchDialog() {
     </>
   );
 }
+
