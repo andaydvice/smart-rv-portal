@@ -32,75 +32,70 @@
   --connectivity-accent: #5B9BD5;
   --connectivity-darkBg: #151A22;
   --deeper-background: #080F1F;
+  --headline-color: #8B5CF6;
 }
 
-.text-connectivity-accent {
-  color: var(--connectivity-accent);
+/* Text alignment for main content */
+.accordion-content p, 
+.accordion-content li,
+.card-description {
+  text-align: left !important;
+  line-height: 1.6;
+  color: #E2E8FF !important;
 }
 
-.bg-connectivity-accent {
-  background-color: var(--connectivity-accent);
-}
-
-.connectivity-darkBg {
-  background-color: var(--connectivity-darkBg);
-}
-
-.bg-deeper-background {
-  background-color: var(--deeper-background);
-}
-
-/* Font classes */
-.font-montserrat {
-  font-family: 'Montserrat', sans-serif;
-}
-
-.font-playfair {
-  font-family: 'Playfair Display', serif;
-}
-
-/* Force visibility of text in certain areas */
-.text-white {
-  color: white !important;
-}
-
-/* Ensure all headings are visible */
+/* Headline styling */
 h1, h2, h3, h4, h5, h6 {
-  color: white !important;
+  color: var(--headline-color) !important;
+  font-weight: 600 !important;
+  text-align: left !important;
+  margin-bottom: 1rem !important;
 }
 
-/* Ensure dropdown menu text is visible */
-.hover-dropdown-menu a,
+/* Dropdown and accordion text styling */
 .dropdown-menu a,
 .dropdown-menu-content a,
 [data-radix-popper-content-wrapper] * {
-  color: white !important;
+  color: #E2E8FF !important;
+  text-align: left !important;
 }
 
-/* Fix accordion texts */
+/* Fix accordion text styles */
 .accordion-item h4, 
-.accordion-content p, 
-.accordion-content li,
 .accordion-trigger {
-  color: white !important;
+  color: var(--headline-color) !important;
+  text-align: left !important;
 }
 
 /* Fix dropdown trigger text */
 button[aria-haspopup="true"] span {
-  color: white !important;
+  color: #E2E8FF !important;
 }
 
-/* Fix focus and active states for buttons */
+/* Button states */
 button:focus, 
 button:active, 
 a:focus, 
 a:active {
-  color: white !important;
+  color: #E2E8FF !important;
 }
 
-/* Ensure accordion content is visible */
+/* Ensure accordion content is visible and left-aligned */
 [data-state="open"] > div,
 [data-state="closed"] > div {
-  color: white !important;
+  color: #E2E8FF !important;
+  text-align: left !important;
+}
+
+/* Card description text */
+.card-description {
+  color: #E2E8FF !important;
+  opacity: 0.9;
+}
+
+/* Navigation menu text */
+.navigation-menu-item {
+  text-align: left !important;
+  color: #E2E8FF !important;
 }
 

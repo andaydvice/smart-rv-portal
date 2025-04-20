@@ -1,3 +1,4 @@
+
 import { Book, Server, Eye, Bell } from "lucide-react";
 import {
   Card,
@@ -16,14 +17,14 @@ import {
 const OverviewTab = () => {
   return (
     <Card className="bg-[#091020] border-gray-700">
-      <CardHeader className="space-y-2">
+      <CardHeader>
         <div className="flex items-center gap-2 mb-4">
           <div className="p-2 rounded-full bg-blue-500/10 border border-blue-500/20">
             <Book className="w-4 h-4 text-[#60A5FA]" />
           </div>
-          <CardTitle className="text-[1.75rem] font-medium text-[#60A5FA]">Smart RV System Guide</CardTitle>
+          <CardTitle className="text-[1.75rem] font-medium text-[#8B5CF6]">Smart RV System Guide</CardTitle>
         </div>
-        <CardDescription className="text-sm text-gray-300">Core Systems Overview</CardDescription>
+        <CardDescription className="text-[#E2E8FF] text-sm">Core Systems Overview</CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
         <Accordion type="single" collapsible className="space-y-4">
