@@ -40,7 +40,9 @@ const CompleteDocumentation = () => {
             />
             <div className="absolute inset-0 bg-black/50 backdrop-blur-sm"></div>
             <div className="absolute inset-0 flex flex-col justify-center items-center text-center p-8">
-              <h1 className="text-3xl font-bold text-[#0EA5E9] mb-3">Complete System Documentation</h1>
+              <h1 className="text-3xl font-bold text-white mb-3 image-overlay-headline">
+                Complete System Documentation
+              </h1>
               <p className="text-base text-gray-200 max-w-2xl mx-auto">
                 Comprehensive technical documentation covering all aspects of your Smart RV System
               </p>

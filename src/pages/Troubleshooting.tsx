@@ -38,7 +38,7 @@ const Troubleshooting = () => {
             transition={{ duration: 0.6 }}
             className="text-center px-4"
           >
-            <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
+            <h1 className="text-4xl md:text-5xl font-bold text-white mb-6 image-overlay-headline">
               Troubleshooting & Setup Guides
             </h1>
             <p className="text-xl text-gray-200 max-w-2xl mx-auto">
