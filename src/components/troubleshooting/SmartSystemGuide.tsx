@@ -1,3 +1,4 @@
+
 import { ChevronDown } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
@@ -8,6 +9,8 @@ import PowerSection from "./sections/PowerSection";
 import ConnectivitySection from "./sections/ConnectivitySection";
 
 const SmartSystemGuide = () => {
+  console.log("SmartSystemGuide component rendering"); // Debug logging
+
   return (
     <div className="bg-[#0B1221] rounded-[32px] border border-gray-800/30 p-8 mt-8">
       <div className="space-y-6">
@@ -21,7 +24,7 @@ const SmartSystemGuide = () => {
         </div>
 
         <div className="space-y-0 pt-2 border rounded-lg border-gray-800/50">
-          <Accordion type="single" collapsible>
+          <Accordion type="single" collapsible className="w-full">
             <BluetoothSection />
             <SoftwareSection />
             <PowerSection />

@@ -18,6 +18,8 @@ const Troubleshooting = () => {
     scrollToTop();
   }, []);
 
+  console.log("Rendering Troubleshooting page"); // Debug logging
+
   return (
     <Layout>
       <Navbar />
@@ -48,11 +50,12 @@ const Troubleshooting = () => {
 
       {/* Main Content */}
       <section className="py-16 container mx-auto px-4 flex-grow bg-[#080F1F]">
-        <div className="max-w-4xl mx-auto space-y-8">
+        <div className="max-w-4xl mx-auto space-y-16">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
+            transition={{ delay: 0.2, duration: 0.5 }}
+            className="border-2 border-[#1a202c]/50 rounded-[32px] overflow-hidden shadow-xl"
           >
             <SmartSystemGuide />
           </motion.div>
@@ -60,7 +63,7 @@ const Troubleshooting = () => {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
+            transition={{ delay: 0.3, duration: 0.5 }}
           >
             <TroubleshootingFlowchart />
           </motion.div>
@@ -68,7 +71,7 @@ const Troubleshooting = () => {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4 }}
+            transition={{ delay: 0.4, duration: 0.5 }}
           >
             <ConnectivityGuide />
           </motion.div>
@@ -76,7 +79,7 @@ const Troubleshooting = () => {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5 }}
+            transition={{ delay: 0.5, duration: 0.5 }}
             className="text-center mt-16"
           >
             <Link to="/contact">
