@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Search } from "lucide-react";
 import {
@@ -64,21 +63,21 @@ export function SearchDialog() {
         <DialogTitle className="sr-only">Troubleshooting Search</DialogTitle>
         <CommandInput 
           placeholder="Type to search..." 
-          className="text-white bg-[#151A22] border-b border-[#1a202c] text-lg"
+          className="text-white bg-[#151A22] border-b border-[#1a202c] text-lg px-6 py-4" 
         />
-        <CommandList className="bg-[#080F1F] border border-[#1a202c] text-white">
+        <CommandList className="bg-[#080F1F] border border-[#1a202c] text-white p-4">
           <CommandEmpty className="text-gray-400 p-4 text-base">No results found.</CommandEmpty>
           {troubleshootingTopics.map((group) => (
             <CommandGroup 
               key={group.category} 
               heading={group.category}
-              className="text-[#5B9BD5] text-3xl font-medium tracking-wide px-4 py-3 bg-[#151A22]/80 uppercase"
+              className="text-[#5B9BD5] text-2xl font-medium tracking-wide px-6 py-4 uppercase"
             >
               {group.items.map((item) => (
                 <CommandItem
                   key={item.title}
                   onSelect={() => handleSelect(item.link)}
-                  className="text-white hover:bg-[#1E2A3E] cursor-pointer px-4 py-3 text-base rounded-md"
+                  className="text-white hover:bg-[#1E2A3E] cursor-pointer px-6 py-3 text-base rounded-md transition-colors duration-200"
                 >
                   {item.title}
                 </CommandItem>
@@ -90,4 +89,3 @@ export function SearchDialog() {
     </>
   );
 }
-
