@@ -1,4 +1,3 @@
-
 /* Base imports and tailwind directives */
 @import './styles/base.css';
 
@@ -32,7 +31,7 @@
   --connectivity-accent: #5B9BD5;
   --connectivity-darkBg: #151A22;
   --deeper-background: #080F1F;
-  --headline-color: #8B5CF6;
+  --headline-color: #0EA5E9; // Changed from purple to Ocean Blue
 }
 
 /* Text alignment for main content */
@@ -98,4 +97,3 @@ a:active {
   text-align: left !important;
   color: #E2E8FF !important;
 }
-
