@@ -10,6 +10,7 @@ import {
   CommandList,
 } from "@/components/ui/command";
 import { Button } from "@/components/ui/button";
+import { DialogTitle } from "@/components/ui/dialog";
 
 const troubleshootingTopics = [
   {
@@ -53,23 +54,31 @@ export function SearchDialog() {
     <>
       <Button
         variant="outline"
-        className="w-full justify-start text-sm text-muted-foreground bg-white/5 border-white/20 hover:bg-white/10"
+        className="w-full justify-start text-sm text-white bg-[#131a2a] border-[#1a202c] hover:bg-[#1E2A3E]"
         onClick={() => setOpen(true)}
       >
-        <Search className="mr-2 h-4 w-4" />
+        <Search className="mr-2 h-4 w-4 text-[#5B9BD5]" />
         Search troubleshooting topics...
       </Button>
       <CommandDialog open={open} onOpenChange={setOpen}>
-        <CommandInput placeholder="Type to search..." />
-        <CommandList className="bg-[#091020] border border-gray-700">
-          <CommandEmpty>No results found.</CommandEmpty>
+        <DialogTitle className="sr-only">Troubleshooting Search</DialogTitle>
+        <CommandInput 
+          placeholder="Type to search..." 
+          className="text-white bg-[#131a2a] border-b border-[#1a202c]"
+        />
+        <CommandList className="bg-[#091020] border border-gray-700 text-white">
+          <CommandEmpty className="text-gray-400 p-4">No results found.</CommandEmpty>
           {troubleshootingTopics.map((group) => (
-            <CommandGroup key={group.category} heading={group.category}>
+            <CommandGroup 
+              key={group.category} 
+              heading={group.category}
+              className="text-[#5B9BD5] font-semibold"
+            >
               {group.items.map((item) => (
                 <CommandItem
                   key={item.title}
                   onSelect={() => handleSelect(item.link)}
-                  className="cursor-pointer hover:bg-white/5"
+                  className="text-white hover:bg-[#1E2A3E] cursor-pointer"
                 >
                   {item.title}
                 </CommandItem>
