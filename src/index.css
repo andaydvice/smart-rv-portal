@@ -66,5 +66,41 @@
 
 /* Ensure all headings are visible */
 h1, h2, h3, h4, h5, h6 {
-  color: #1a202c !important;
+  color: white !important;
 }
+
+/* Ensure dropdown menu text is visible */
+.hover-dropdown-menu a,
+.dropdown-menu a,
+.dropdown-menu-content a,
+[data-radix-popper-content-wrapper] * {
+  color: white !important;
+}
+
+/* Fix accordion texts */
+.accordion-item h4, 
+.accordion-content p, 
+.accordion-content li,
+.accordion-trigger {
+  color: white !important;
+}
+
+/* Fix dropdown trigger text */
+button[aria-haspopup="true"] span {
+  color: white !important;
+}
+
+/* Fix focus and active states for buttons */
+button:focus, 
+button:active, 
+a:focus, 
+a:active {
+  color: white !important;
+}
+
+/* Ensure accordion content is visible */
+[data-state="open"] > div,
+[data-state="closed"] > div {
+  color: white !important;
+}
+

@@ -15,7 +15,7 @@ const DocumentationHeader = () => {
       <Link to="/troubleshooting">
         <Button
           variant="outline"
-          className="bg-white/5 text-[#60A5FA] border-white/20 hover:bg-white/10 hover:text-[#60A5FA] text-sm"
+          className="bg-white/5 text-[#60A5FA] border-white/20 hover:bg-white/10 hover:text-white text-sm"
         >
           <ArrowLeft className="w-4 h-4 mr-2" />
           Back to Troubleshooting
@@ -42,7 +42,7 @@ const DocumentationHeader = () => {
         <Link to="/documentation/complete">
           <Button 
             variant="outline" 
-            className="bg-transparent border-gray-300 text-[#60A5FA] hover:text-[#60A5FA] hover:bg-[#60A5FA]/10 text-sm py-2 px-4 focus:text-[#60A5FA] active:text-[#60A5FA]"
+            className="bg-transparent border-gray-300 text-[#60A5FA] hover:text-white hover:bg-[#60A5FA]/25 text-sm py-2 px-4 focus:text-white active:text-white"
           >
             View Complete System Documentation
             <ChevronRight className="ml-2 h-4 w-4" />
