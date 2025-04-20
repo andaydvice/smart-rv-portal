@@ -43,12 +43,19 @@
   color: #E2E8FF !important;
 }
 
-/* Headline styling */
+/* Headline styling with improved visibility */
 h1, h2, h3, h4, h5, h6 {
-  color: var(--headline-color) !important;
-  font-weight: 600 !important;
+  color: #0EA5E9 !important; /* Ocean Blue for clear contrast */
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5) !important; /* Add text shadow for readability */
+  font-weight: 700 !important; /* Slightly bolder */
   text-align: left !important;
   margin-bottom: 1rem !important;
+}
+
+/* Additional contrast for headlines on images */
+.image-overlay-headline {
+  color: white !important;
+  text-shadow: 3px 3px 6px rgba(0,0,0,0.7) !important;
 }
 
 /* Dropdown and accordion text styling */
