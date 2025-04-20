@@ -33,10 +33,10 @@ const SmartSystemGuide = () => {
         </div>
 
         <div className="pt-4">
-          <Link to="/documentation">
+          <Link to="/documentation/complete">
             <Button 
               variant="outline" 
-              className="bg-transparent border-[#60A5FA] text-[#60A5FA] hover:bg-[#60A5FA]/25 hover:text-white text-sm py-2 px-4"
+              className="bg-transparent border-[#60A5FA] text-[#60A5FA] hover:bg-[#60A5FA]/25 hover:text-white text-sm py-2 px-4 focus:text-white active:text-white"
             >
               View Complete System Documentation
               <ChevronDown className="ml-2 h-4 w-4" />

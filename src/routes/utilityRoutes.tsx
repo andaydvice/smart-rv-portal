@@ -12,6 +12,7 @@ import StorageFacilities from "../pages/StorageFacilities";
 import StoragePreparationChecklist from "../pages/StoragePreparationChecklist";
 import VoiceControl from "../pages/VoiceControl";
 import Documentation from "../pages/Documentation";
+import CompleteDocumentation from "../pages/documentation/CompleteDocumentation";
 import Troubleshooting from "../pages/Troubleshooting";
 import ErrorPage from "../pages/ErrorPage";
 
@@ -52,6 +53,10 @@ const utilityRoutes: RouteObject[] = [
   {
     path: "/documentation",
     element: <Documentation />,
+  },
+  {
+    path: "/documentation/complete",
+    element: <CompleteDocumentation />,
   },
   {
     path: "/troubleshooting",
