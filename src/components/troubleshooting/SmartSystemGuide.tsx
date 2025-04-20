@@ -36,7 +36,7 @@ const SmartSystemGuide = () => {
           <Link to="/documentation">
             <Button 
               variant="outline" 
-              className="bg-transparent border-[#60A5FA] text-[#60A5FA] hover:bg-[#60A5FA]/10 text-sm py-2 px-4"
+              className="bg-transparent border-[#60A5FA] text-[#60A5FA] hover:bg-[#60A5FA]/25 hover:text-white text-sm py-2 px-4"
             >
               View Complete System Documentation
               <ChevronDown className="ml-2 h-4 w-4" />
