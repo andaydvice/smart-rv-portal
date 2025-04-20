@@ -54,7 +54,7 @@ export function SearchDialog() {
     <>
       <Button
         variant="outline"
-        className="w-full justify-start text-sm text-white bg-[#131a2a] border-[#1a202c] hover:bg-[#1E2A3E]"
+        className="w-full justify-start text-sm text-white bg-[#151A22] border-[#1a202c] hover:bg-[#1E2A3E]"
         onClick={() => setOpen(true)}
       >
         <Search className="mr-2 h-4 w-4 text-[#5B9BD5]" />
@@ -64,21 +64,21 @@ export function SearchDialog() {
         <DialogTitle className="sr-only">Troubleshooting Search</DialogTitle>
         <CommandInput 
           placeholder="Type to search..." 
-          className="text-white bg-[#131a2a] border-b border-[#1a202c]"
+          className="text-white bg-[#151A22] border-b border-[#1a202c] text-lg"
         />
-        <CommandList className="bg-[#091020] border border-gray-700 text-white">
-          <CommandEmpty className="text-gray-400 p-4">No results found.</CommandEmpty>
+        <CommandList className="bg-[#080F1F] border border-[#1a202c] text-white">
+          <CommandEmpty className="text-gray-400 p-4 text-base">No results found.</CommandEmpty>
           {troubleshootingTopics.map((group) => (
             <CommandGroup 
               key={group.category} 
               heading={group.category}
-              className="text-[#5B9BD5] font-semibold"
+              className="text-[#5B9BD5] font-bold text-xl px-4 py-2 bg-[#151A22]"
             >
               {group.items.map((item) => (
                 <CommandItem
                   key={item.title}
                   onSelect={() => handleSelect(item.link)}
-                  className="text-white hover:bg-[#1E2A3E] cursor-pointer"
+                  className="text-white hover:bg-[#1E2A3E] cursor-pointer px-4 py-3 text-base rounded-md"
                 >
                   {item.title}
                 </CommandItem>
