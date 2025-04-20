@@ -7,7 +7,7 @@
 export { 
   createEmergencyMarkers,
   setupEmergencyMarkerListeners,
-  injectEmergencyMarkerStyles
+  injectEmergencyStyles
 } from './directMarkerCreation';
 
 // Export types

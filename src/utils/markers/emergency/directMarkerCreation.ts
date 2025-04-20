@@ -1,7 +1,7 @@
 
 import mapboxgl from 'mapbox-gl';
 import { StorageFacility } from '../types';
-import { injectEmergencyMarkerStyles } from '../styleInjection';
+import { injectEmergencyStyles } from '../styleInjection';
 import { createMarkerElement, removeExistingEmergencyMarkers, createMarkerClickHandler, setupMarkerPositionUpdates } from './marker';
 import { createFacilityPopup, setupPopupCloseButton, closeAllPopupsExcept } from './popup';
 import { setupEmergencyMarkerListeners, storeHandlerReference } from './eventListeners';
@@ -19,7 +19,7 @@ export function createEmergencyMarkers(
   removeExistingEmergencyMarkers();
   
   // Add styles for emergency markers
-  injectEmergencyMarkerStyles();
+  injectEmergencyStyles();
   
   let count = 0;
   
@@ -73,6 +73,6 @@ export function createEmergencyMarkers(
 }
 
 // Re-export from utility modules for backward compatibility
-export { injectEmergencyMarkerStyles } from '../styleInjection';
+export { injectEmergencyStyles } from '../styleInjection';
 export { setupEmergencyMarkerListeners } from './eventListeners';
 
