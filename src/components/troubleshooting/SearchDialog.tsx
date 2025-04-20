@@ -1,15 +1,14 @@
+
 import { useState } from "react";
 import { Search } from "lucide-react";
 import {
   CommandDialog,
   CommandEmpty,
   CommandGroup,
-  CommandInput,
   CommandItem,
   CommandList,
 } from "@/components/ui/command";
 import { Button } from "@/components/ui/button";
-import { DialogTitle } from "@/components/ui/dialog";
 
 const troubleshootingTopics = [
   {
@@ -57,16 +56,11 @@ export function SearchDialog() {
         onClick={() => setOpen(true)}
       >
         <Search className="mr-2 h-4 w-4 text-[#5B9BD5]" />
-        Search troubleshooting topics...
+        Jump to Section
       </Button>
       <CommandDialog open={open} onOpenChange={setOpen}>
-        <DialogTitle className="sr-only">Troubleshooting Search</DialogTitle>
-        <CommandInput 
-          placeholder="Type to search..." 
-          className="text-white bg-[#151A22] border-b border-[#1a202c] text-lg px-6 py-4" 
-        />
         <CommandList className="bg-[#080F1F] border border-[#1a202c] text-white p-4">
-          <CommandEmpty className="text-gray-400 p-4 text-base">No results found.</CommandEmpty>
+          <CommandEmpty className="text-gray-400 p-4 text-base">No sections found.</CommandEmpty>
           {troubleshootingTopics.map((group) => (
             <CommandGroup 
               key={group.category} 
