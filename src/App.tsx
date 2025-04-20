@@ -9,11 +9,11 @@ import { forceMapMarkersVisible } from './utils/forceMapMarkers';
 import './App.css';
 import './styles/animations.css';
 import './styles/map-loading.css';
-import './styles/map-fixes.css';          // Import map fixes CSS
-import './styles/emergency-marker-fix.css'; // Import emergency marker fix CSS
-import './styles/map-optimizations.css';   // Import map optimizations CSS
-import './styles/force-markers.css';       // Import force markers CSS
-import './styles/google-maps.css';         // Import Google Maps CSS
+import './styles/map-fixes.css';          
+import './styles/emergency-marker-fix.css'; 
+import './styles/map-optimizations.css';   
+import './styles/force-markers.css';       
+import './styles/google-maps.css';         
 
 // Create a client with better error handling
 const queryClient = new QueryClient({
@@ -90,6 +90,7 @@ function AppContent() {
   );
 }
 
+// The main App component - proper function component wrapping
 function App() {
   // Set routes available flag for debugging
   (window as any).routesAvailable = true;
@@ -97,11 +98,13 @@ function App() {
   console.log('App rendering');
   
   return (
-    <QueryClientProvider client={queryClient}>
-      <AuthProvider>
-        <AppContent />
-      </AuthProvider>
-    </QueryClientProvider>
+    <React.StrictMode>
+      <QueryClientProvider client={queryClient}>
+        <AuthProvider>
+          <AppContent />
+        </AuthProvider>
+      </QueryClientProvider>
+    </React.StrictMode>
   );
 }
 
