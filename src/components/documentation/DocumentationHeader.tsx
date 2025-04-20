@@ -1,3 +1,4 @@
+
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowLeft, ChevronRight } from "lucide-react";
@@ -31,7 +32,7 @@ const DocumentationHeader = () => {
       </div>
 
       <div className="text-center mb-12">
-        <h1 className="text-[1.75rem] font-medium text-[#60A5FA] mb-4">System Documentation</h1>
+        <h1 className="text-[1.75rem] font-bold text-white mb-4">System Documentation</h1>
         <p className="text-sm text-gray-300 max-w-2xl mx-auto">
           Complete documentation and technical specifications for your Smart RV system
         </p>
