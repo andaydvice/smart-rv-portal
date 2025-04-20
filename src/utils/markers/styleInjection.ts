@@ -1,53 +1,72 @@
 
 /**
- * Inject CSS to ensure markers are visible
+ * This utility handles the emergency injection of CSS styles to ensure
+ * map markers are always visible regardless of other issues.
  */
-export function injectEmergencyMarkerStyles() {
-  // Check if styles are already injected
-  if (document.getElementById('markers-emergency-css')) {
-    return;
+
+export const injectEmergencyStyles = () => {
+  console.log('Injecting emergency styles for map markers');
+  
+  try {
+    // Create a style element
+    const style = document.createElement('style');
+    
+    // Critical CSS to force marker visibility
+    style.textContent = `
+      /* Force marker visibility */
+      .mapboxgl-marker,
+      .custom-marker,
+      .emergency-marker,
+      [class*="marker"],
+      .map-marker {
+        visibility: visible !important;
+        display: block !important;
+        opacity: 1 !important;
+        position: absolute !important;
+        z-index: 10000 !important;
+        pointer-events: auto !important;
+      }
+      
+      /* Fix map container */
+      .mapboxgl-map {
+        overflow: visible !important;
+      }
+      
+      /* Fix popup visibility */
+      .mapboxgl-popup {
+        z-index: 10001 !important;
+        visibility: visible !important;
+        display: block !important;
+        opacity: 1 !important;
+      }
+      
+      /* Fix blank page issues */
+      #root {
+        display: block !important;
+        visibility: visible !important;
+      }
+      
+      body {
+        overflow: auto !important;
+      }
+    `;
+    
+    // Append to document head
+    document.head.appendChild(style);
+    console.log('Emergency styles injected successfully');
+    
+    // Also apply styles directly to any existing markers
+    setTimeout(() => {
+      document.querySelectorAll('.mapboxgl-marker, .custom-marker, .emergency-marker').forEach(marker => {
+        if (marker instanceof HTMLElement) {
+          marker.style.visibility = 'visible';
+          marker.style.display = 'block';
+          marker.style.opacity = '1';
+          marker.style.zIndex = '9999';
+        }
+      });
+    }, 500);
+  } catch (err) {
+    console.error('Failed to inject emergency styles:', err);
   }
-  
-  // Create style element
-  const style = document.createElement('style');
-  style.id = 'markers-emergency-css';
-  style.textContent = `
-    .mapboxgl-marker,
-    .custom-marker,
-    .emergency-marker {
-      display: block !important;
-      visibility: visible !important;
-      opacity: 1 !important;
-      z-index: 9999 !important;
-      pointer-events: auto !important;
-      position: absolute !important;
-      cursor: pointer !important;
-    }
-    
-    .emergency-marker {
-      width: 30px !important;
-      height: 30px !important;
-      background-color: #F97316 !important;
-      border-radius: 50% !important;
-      border: 3px solid white !important;
-      box-shadow: 0 0 15px rgba(249,115,22,0.8) !important;
-      animation: emergency-pulse 1.5s infinite ease-in-out;
-    }
-    
-    @keyframes emergency-pulse {
-      0% { transform: scale(1) translate(-50%, -50%); box-shadow: 0 0 10px rgba(249, 115, 22, 0.8); }
-      50% { transform: scale(1.1) translate(-45%, -45%); box-shadow: 0 0 20px rgba(249, 115, 22, 0.9); }
-      100% { transform: scale(1) translate(-50%, -50%); box-shadow: 0 0 10px rgba(249, 115, 22, 0.8); }
-    }
-  `;
-  
-  // Add to document head
-  document.head.appendChild(style);
-  console.log('Injected emergency marker styles');
-}
-
-// Alias for backward compatibility
-export { injectEmergencyMarkerStyles as injectEmergencyStyles };
-
-// Run style injection immediately
-injectEmergencyMarkerStyles();
+};

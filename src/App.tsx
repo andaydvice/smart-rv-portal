@@ -9,6 +9,11 @@ import { forceMapMarkersVisible } from './utils/forceMapMarkers';
 import './App.css';
 import './styles/animations.css';
 import './styles/map-loading.css';
+import './styles/map-fixes.css';          // Import map fixes CSS
+import './styles/emergency-marker-fix.css'; // Import emergency marker fix CSS
+import './styles/map-optimizations.css';   // Import map optimizations CSS
+import './styles/force-markers.css';       // Import force markers CSS
+import './styles/google-maps.css';         // Import Google Maps CSS
 
 // Create a client with better error handling
 const queryClient = new QueryClient({
@@ -35,7 +40,7 @@ function AppContent() {
     injectEmergencyStyles();
     forceMapMarkersVisible();
     
-    // Log the current URL for debugging
+    // Debug current route
     console.log('Current URL:', window.location.href);
     console.log('Current pathname:', window.location.pathname);
     
@@ -49,12 +54,32 @@ function AppContent() {
     // Store map instance globally for emergency access
     document.addEventListener('mapboxgl.map.created', (e: CustomEvent) => {
       (window as any).mapInstance = e.detail.map;
+      console.log('Map instance stored globally');
     });
     
     // Create custom event dispatch system for map
     (window as any).dispatchMapEvent = (eventName: string, detail: any) => {
       document.dispatchEvent(new CustomEvent(eventName, { detail }));
+      console.log(`Map event dispatched: ${eventName}`);
     };
+    
+    // Force all markers to be visible
+    setTimeout(() => {
+      try {
+        const markers = document.querySelectorAll('.mapboxgl-marker, .custom-marker, .emergency-marker');
+        console.log(`Found ${markers.length} markers to make visible`);
+        markers.forEach(marker => {
+          if (marker instanceof HTMLElement) {
+            marker.style.visibility = 'visible';
+            marker.style.display = 'block';
+            marker.style.opacity = '1';
+            marker.style.zIndex = '1000';
+          }
+        });
+      } catch (err) {
+        console.error('Error forcing markers visible:', err);
+      }
+    }, 1000);
   }, []);
 
   return (
@@ -68,6 +93,8 @@ function AppContent() {
 function App() {
   // Set routes available flag for debugging
   (window as any).routesAvailable = true;
+  
+  console.log('App rendering');
   
   return (
     <QueryClientProvider client={queryClient}>
