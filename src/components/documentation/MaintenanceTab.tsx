@@ -1,3 +1,4 @@
+
 import { Wrench, Calendar, Repeat, Calendar as CalendarIcon, HelpCircle } from "lucide-react";
 import {
   Card,
@@ -21,7 +22,7 @@ const MaintenanceTab = () => {
           <div className="p-2 rounded-full bg-blue-500/10 border border-blue-500/20">
             <Wrench className="w-4 h-4 text-[#60A5FA]" />
           </div>
-          <CardTitle className="text-[1.75rem] font-medium text-[#60A5FA]">RV System Maintenance Guide</CardTitle>
+          <CardTitle className="text-[1.75rem] font-medium text-[#0EA5E9]">RV System Maintenance Guide</CardTitle>
         </div>
         <CardDescription className="text-sm text-gray-300">Comprehensive maintenance procedures and troubleshooting steps</CardDescription>
       </CardHeader>

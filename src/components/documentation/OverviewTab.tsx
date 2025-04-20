@@ -22,7 +22,7 @@ const OverviewTab = () => {
           <div className="p-2 rounded-full bg-blue-500/10 border border-blue-500/20">
             <Book className="w-4 h-4 text-[#60A5FA]" />
           </div>
-          <CardTitle className="text-[1.75rem] font-medium text-[#8B5CF6]">Smart RV System Guide</CardTitle>
+          <CardTitle className="text-[1.75rem] font-medium text-[#0EA5E9]">Smart RV System Guide</CardTitle>
         </div>
         <CardDescription className="text-[#E2E8FF] text-sm">Core Systems Overview</CardDescription>
       </CardHeader>
