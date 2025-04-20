@@ -1,6 +1,7 @@
+
 import React from 'react';
 import TrendingPostCard from './TrendingPostCard';
-import CategoryButtons from './CategoryButtons';
+import { motion } from 'framer-motion';
 
 interface TrendingPostsProps {
   activeCategory: 'all' | 'tech' | 'travel';
@@ -8,64 +9,61 @@ interface TrendingPostsProps {
 }
 
 const TrendingPosts = ({ activeCategory, onCategoryChange }: TrendingPostsProps) => {
-  const posts = [
-    {
-      title: "Top 10 Smart RV Upgrades",
-      excerpt: "Transform your RV into a smart home on wheels with these essential tech upgrades.",
-      category: "tech",
-      readTime: "8 min read",
-      image: "/lovable-uploads/d3b696f0-39e5-4cfa-b38c-6579325a495a.png",
-      slug: "top-10-smart-rv-upgrades"
-    },
-    {
-      title: "Solar Power Solutions for Full Time RVers",
-      excerpt: "Complete guide to planning and installing a solar power system in your RV.",
-      category: "tech",
-      readTime: "12 min read",
-      image: "/lovable-uploads/51ac2438-08c7-47ee-b56d-876aa3bbdc80.png",
-      slug: "solar-power-solutions"
-    },
-    {
-      title: "Remote Work from Your RV: Essential Setup Guide",
-      excerpt: "Create the perfect mobile office setup in your RV with these tips.",
-      category: "travel",
-      readTime: "10 min read",
-      image: "/lovable-uploads/ae930cf7-205f-41d3-9c9b-a4969e5c35e6.png",
-      slug: "remote-work-rv-setup"
-    }
+  const categories = [
+    { id: 'all', label: 'All Posts' },
+    { id: 'tech', label: 'Technology' },
+    { id: 'travel', label: 'Travel Tips' }
   ];
 
-  const filteredPosts = activeCategory === 'all' 
-    ? posts 
-    : posts.filter(post => post.category === activeCategory);
-
-  console.log("TrendingPosts - Active Category:", activeCategory);
-  console.log("TrendingPosts - Filtered Posts:", filteredPosts);
-
-  const getCategoryDisplay = (category: string) => {
-    return category.charAt(0).toUpperCase() + category.slice(1).toLowerCase();
-  };
-
   return (
-    <section className="space-y-8 p-6">
-      <div className="flex justify-between items-center">
-        <h2 className="text-3xl font-semibold text-white">Trending Posts</h2>
-        <CategoryButtons 
-          activeCategory={activeCategory} 
-          onCategoryChange={onCategoryChange} 
-        />
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {filteredPosts.map((post, index) => (
-          <TrendingPostCard
-            key={post.title}
-            post={post}
-            index={index}
-            getCategoryDisplay={getCategoryDisplay}
-          />
+    <section className="space-y-8">
+      <div className="flex flex-wrap gap-4 items-center justify-center sm:justify-start">
+        {categories.map((category) => (
+          <button
+            key={category.id}
+            onClick={() => onCategoryChange(category.id as 'all' | 'tech' | 'travel')}
+            className={`px-6 py-2 rounded-full transition-all ${
+              activeCategory === category.id
+                ? 'bg-[#5B9BD5] text-white'
+                : 'bg-[#151A22] text-white hover:bg-[#1E2A3E]'
+            }`}
+          >
+            {category.label}
+          </button>
         ))}
       </div>
+      
+      <motion.div 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5, delay: 0.2 }}
+        className="grid grid-cols-1 md:grid-cols-3 gap-6"
+      >
+        <TrendingPostCard 
+          post={{
+            category: 'tech',
+            title: 'Smart RV Security Systems',
+            description: 'Protect your RV with the latest security technology',
+            image: '/lovable-uploads/e9503bf4-354a-4790-8a83-fefea32abc5b.png'
+          }}
+        />
+        <TrendingPostCard 
+          post={{
+            category: 'travel',
+            title: 'Top 10 RV Parks in the USA',
+            description: 'Discover the most beautiful RV parks across the country',
+            image: '/lovable-uploads/e6619d24-bebf-439f-96b0-6aca2fb69380.png'
+          }}
+        />
+        <TrendingPostCard 
+          post={{
+            category: 'tech',
+            title: 'Solar Power for RVs',
+            description: 'Harness the power of the sun for your RV adventures',
+            image: '/lovable-uploads/80ea47f5-5b04-409f-8eb7-1da434a9e0de.png'
+          }}
+        />
+      </motion.div>
     </section>
   );
 };

@@ -1,63 +1,54 @@
-import React from 'react';
-import { motion } from "framer-motion";
-import { Card } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { useNavigate } from 'react-router-dom';
 
-interface TrendingPost {
-  title: string;
-  excerpt: string;
+import React from 'react';
+import { Link } from 'react-router-dom';
+
+interface Post {
   category: string;
-  readTime: string;
+  title: string;
+  description: string;
   image: string;
-  slug: string;
+  slug?: string;
 }
 
 interface TrendingPostCardProps {
-  post: TrendingPost;
-  index: number;
-  getCategoryDisplay: (category: string) => string;
+  post: Post;
 }
 
-const TrendingPostCard = ({ post, index, getCategoryDisplay }: TrendingPostCardProps) => {
-  const navigate = useNavigate();
-
-  const handleReadMore = () => {
-    console.log("Navigating to trending post:", post.slug);
-    navigate(`/blog/${post.slug}`);
-  };
-
+const TrendingPostCard: React.FC<TrendingPostCardProps> = ({ post }) => {
+  // Generate slug from title if not provided
+  const slug = post.slug || post.title.toLowerCase().replace(/\s+/g, '-');
+  
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
-    >
-      <Card className="overflow-hidden hover:border-[#00ffff]/40 transition-colors">
+    <div className="bg-[#080f20] rounded-2xl overflow-hidden border border-white/10 hover:border-white/30 transition-all hover:translate-y-[-5px]">
+      <div className="h-48 overflow-hidden">
         <img 
-          src={post.image} 
+          src={post.image}
           alt={post.title}
-          className="w-full h-48 object-cover"
+          className="w-full h-full object-cover transition-transform hover:scale-105"
         />
-        <div className="p-6 space-y-4">
-          <h3 className="text-xl font-semibold text-white">{post.title}</h3>
-          <p className="text-[#E2E8FF] text-sm">{post.excerpt}</p>
-          <div className="flex justify-between items-center text-sm">
-            <span className="bg-[#1B2028] text-white px-4 py-2 rounded-full">
-              {getCategoryDisplay(post.category)}
-            </span>
-            <span className="text-[#E2E8FF]/60">{post.readTime}</span>
-          </div>
-          <Button 
-            variant="ghost"
-            className="bg-[#00ffff] text-black hover:bg-[#00ffff]/80 hover:text-black px-8 py-2 rounded-full"
-            onClick={handleReadMore}
-          >
-            Read More
-          </Button>
+      </div>
+      
+      <div className="p-6 space-y-3">
+        <div className="bg-[#1B2028] text-white px-3 py-1 text-xs rounded-full inline-block">
+          {post.category.charAt(0).toUpperCase() + post.category.slice(1)}
         </div>
-      </Card>
-    </motion.div>
+        
+        <h3 className="text-xl font-semibold text-white">
+          {post.title}
+        </h3>
+        
+        <p className="text-[#E2E8FF] text-sm">
+          {post.description}
+        </p>
+        
+        <Link 
+          to={`/blog/${slug}`}
+          className="inline-block text-[#5B9BD5] hover:text-[#00ffff] text-sm font-medium"
+        >
+          Read More →
+        </Link>
+      </div>
+    </div>
   );
 };
 

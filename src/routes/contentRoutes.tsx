@@ -7,12 +7,13 @@ import BlogIndex from "../pages/BlogIndex";
 import BlogPost from "../pages/BlogPost";
 import RVWeather from "../pages/RVWeather";
 import Technology from "../pages/Technology";
+import Blog from "../pages/Blog"; // Import the Blog component 
 
 // Define content routes
 const contentRoutes: RouteObject[] = [
   {
     path: "/blog",
-    element: <BlogIndex />,
+    element: <Blog />, // Use the Blog component for /blog route
   },
   {
     path: "/blog/:slug",
