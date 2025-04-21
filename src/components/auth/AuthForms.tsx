@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
@@ -113,14 +114,14 @@ export const AuthForms = ({ onSuccess, onError }: AuthFormsProps) => {
 
         if (signInError) throw signInError;
 
-        // [CHG-1] -- Check for 2FA
+        // Check for 2FA
         // Check for user_metadata.twofactor_enabled - if present, require OTP
         const { user } = data || {};
         // Supabase returns user_metadata on the user object
         const twofactorEnabled = user?.user_metadata?.twofactor_enabled;
 
         if (twofactorEnabled) {
-          // [CHG-2]: If 2FA enabled, trigger otp flow
+          // If 2FA enabled, trigger otp flow
           // Supabase will have emailed OTP to user (or we can simulate)
           setPendingOtpSession(data?.session || null);
           setShowOtp(true);
@@ -169,7 +170,7 @@ export const AuthForms = ({ onSuccess, onError }: AuthFormsProps) => {
     }
   };
 
-  // UI: show OTP dialog if 2FA enabled [CHG-3]
+  // UI: show OTP dialog if 2FA enabled
   if (showOtp) {
     return (
       <OtpPrompt

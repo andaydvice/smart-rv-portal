@@ -93,4 +93,3 @@ const OtpPrompt = ({ email, onVerify, onCancel }: OtpPromptProps) => {
 };
 
 export default OtpPrompt;
-
