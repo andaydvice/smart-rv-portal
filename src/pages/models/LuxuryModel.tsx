@@ -138,6 +138,11 @@ const LuxuryModel = () => {
               />
             </div>
 
+            {/* MODIFIED: Added user guidance note above accordions */}
+            <p className="text-gray-300 mb-6 text-lg">
+              Click on the <span className="text-blue-400 font-semibold">blue model titles</span> below to expand and see detailed descriptions.
+            </p>
+
             <div className="space-y-8">
               {renderModelCategories()}
             </div>
