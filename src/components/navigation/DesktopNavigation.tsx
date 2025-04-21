@@ -1,3 +1,4 @@
+
 import { Link, useLocation } from "react-router-dom";
 import { 
   Home, Calculator, CloudSun, Warehouse, ClipboardCheck,
@@ -9,7 +10,6 @@ import {
 import AuthButtons from "./AuthButtons";
 import HoverDropdownMenu from "./HoverDropdownMenu";
 import HoverDropdownMenuV2 from "./HoverDropdownMenuV2";
-import { CoreSystemsLinks, SmartFeaturesLinks, VehicleSelectionLinks, SupportLinks, CustomerSupportLinks } from "./links";
 
 const DesktopNavigation = () => {
   const location = useLocation();
@@ -111,7 +111,7 @@ const DesktopNavigation = () => {
     }
   ];
 
-  // Define Support links with icons
+  // Define Support links with icons, only one FAQ entry and others cleanly listed
   const supportLinks = [
     { 
       text: "Troubleshooting", 
@@ -126,112 +126,7 @@ const DesktopNavigation = () => {
     { 
       text: "Technology FAQ", 
       href: "/technology",
-      icon: <HelpCircle size={16} className="text-[#5B9BD5]" /> 
-    },
-    { 
-      text: "Technology FAQ", 
-      href: "/technology",
-      icon: <HelpCircle size={16} className="text-[#5B9BD5]" /> 
-    },
-    { 
-      text: "Technology FAQ", 
-      href: "/technology",
-      icon: <HelpCircle size={16} className="text-[#5B9BD5]" /> 
-    },
-    { 
-      text: "Technology FAQ", 
-      href: "/technology",
-      icon: <HelpCircle size={16} className="text-[#5B9BD5]" /> 
-    },
-    { 
-      text: "Technology FAQ", 
-      href: "/technology",
-      icon: <HelpCircle size={16} className="text-[#5B9BD5]" /> 
-    },
-    { 
-      text: "Technology FAQ", 
-      href: "/technology",
-      icon: <HelpCircle size={16} className="text-[#5B9BD5]" /> 
-    },
-    { 
-      text: "Technology FAQ", 
-      href: "/technology",
-      icon: <HelpCircle size={16} className="text-[#5B9BD5]" /> 
-    },
-    { 
-      text: "Technology FAQ", 
-      href: "/technology",
-      icon: <HelpCircle size={16} className="text-[#5B9BD5]" /> 
-    },
-    { 
-      text: "Technology FAQ", 
-      href: "/technology",
-      icon: <HelpCircle size={16} className="text-[#5B9BD5]" /> 
-    },
-    { 
-      text: "Technology FAQ", 
-      href: "/technology",
-      icon: <HelpCircle size={16} className="text-[#5B9BD5]" /> 
-    },
-    { 
-      text: "Technology FAQ", 
-      href: "/technology",
-      icon: <HelpCircle size={16} className="text-[#5B9BD5]" /> 
-    },
-    { 
-      text: "Technology FAQ", 
-      href: "/technology",
-      icon: <HelpCircle size={16} className="text-[#5B9BD5]" /> 
-    },
-    { 
-      text: "Technology FAQ", 
-      href: "/technology",
-      icon: <HelpCircle size={16} className="text-[#5B9BD5]" /> 
-    },
-    { 
-      text: "Technology FAQ", 
-      href: "/technology",
-      icon: <HelpCircle size={16} className="text-[#5B9BD5]" /> 
-    },
-    { 
-      text: "Technology FAQ", 
-      href: "/technology",
-      icon: <HelpCircle size={16} className="text-[#5B9BD5]" /> 
-    },
-    { 
-      text: "Technology FAQ", 
-      href: "/technology",
-      icon: <HelpCircle size={16} className="text-[#5B9BD5]" /> 
-    },
-    { 
-      text: "Technology FAQ", 
-      href: "/technology",
-      icon: <HelpCircle size={16} className="text-[#5B9BD5]" /> 
-    },
-    { 
-      text: "Technology FAQ", 
-      href: "/technology",
-      icon: <HelpCircle size={16} className="text-[#5B9BD5]" /> 
-    },
-    { 
-      text: "Technology FAQ", 
-      href: "/technology",
-      icon: <HelpCircle size={16} className="text-[#5B9BD5]" /> 
-    },
-    { 
-      text: "Technology FAQ", 
-      href: "/technology",
-      icon: <HelpCircle size={16} className="text-[#5B9BD5]" /> 
-    },
-    { 
-      text: "Technology FAQ", 
-      href: "/technology",
-      icon: <HelpCircle size={16} className="text-[#5B9BD5]" /> 
-    },
-    { 
-      text: "Technology FAQ", 
-      href: "/technology",
-      icon: <HelpCircle size={16} className="text-[#5B9BD5]" /> 
+      icon: <HelpCircle size={16} className="text-[#5B9BD5]" />
     },
     { 
       text: "Schedule Demo", 
