@@ -8,7 +8,6 @@ import Layout from "@/components/layout/Layout";
 import TechnologyFAQ from "@/components/technology/TechnologyFAQ";
 import { useEffect } from "react";
 import { scrollToTop } from "@/utils/scrollToTop";
-import { AspectRatio } from "@/components/ui/aspect-ratio";
 
 const technologies = [
   {
@@ -59,18 +58,16 @@ const Technology = () => {
   return (
     <Layout>
       <div className="flex-grow bg-gradient-to-b from-gray-900 to-gray-800">
-        {/* For full page width image, allow container to be full width */}
+        {/* Full width container for the image */}
         <div className="w-full px-0 py-10">
-          {/* MAIN HEADER IMAGE - page wide full width */}
-          <div className="w-full rounded-2xl overflow-hidden mb-12 shadow-lg">
-            <AspectRatio ratio={21 / 9} className="bg-gray-800 w-full">
-              <img
-                src="/lovable-uploads/9ad50274-5f5b-47fa-8278-32599d734b3e.png"
-                alt="Technology Main Header"
-                className="w-full h-full object-cover"
-                loading="eager"
-              />
-            </AspectRatio>
+          {/* MAIN HEADER IMAGE - true full width with auto height */}
+          <div className="w-full max-h-[500px] rounded-2xl overflow-hidden mb-12 shadow-lg">
+            <img
+              src="/lovable-uploads/9ad50274-5f5b-47fa-8278-32599d734b3e.png"
+              alt="Technology Main Header"
+              className="w-full h-auto object-contain"
+              loading="eager"
+            />
           </div>
         </div>
 
@@ -138,4 +135,3 @@ const Technology = () => {
 };
 
 export default Technology;
-
