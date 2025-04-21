@@ -1,6 +1,7 @@
+
 import Calculators from "../pages/Calculators";
 import Documentation from "../pages/Documentation";
-import Weather from "../pages/Weather";
+import WeatherDashboard from "../pages/WeatherDashboard"; // MODIFIED: import correct component
 import StorageFacilities from "../pages/StorageFacilities";
 import StoragePreparationChecklist from "../pages/StoragePreparationChecklist";
 import Contact from "../pages/Contact";
@@ -20,7 +21,7 @@ const utilityRoutes = [
   },
   {
     path: "/weather",
-    element: <Weather />,
+    element: <WeatherDashboard />,  // MODIFIED: use correct component
   },
   {
     path: "/storage-facilities",
@@ -53,3 +54,4 @@ const utilityRoutes = [
 ];
 
 export default utilityRoutes;
+
