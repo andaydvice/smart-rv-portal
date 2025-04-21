@@ -14,39 +14,40 @@ const technologies = [
   {
     icon: Cpu,
     title: "AI Integration",
-    description: "Advanced artificial intelligence systems for smart automation and personalized experiences",
-    color: "text-cyan-400"
+    description:
+      "Advanced artificial intelligence systems for smart automation and personalized experiences",
+    color: "text-cyan-400",
   },
   {
     icon: Wifi,
     title: "Connected Systems",
     description: "Seamless integration of all RV components through our proprietary network",
-    color: "text-blue-400"
+    color: "text-blue-400",
   },
   {
     icon: Battery,
     title: "Smart Power",
     description: "Intelligent power management with solar integration and battery optimization",
-    color: "text-green-400"
+    color: "text-green-400",
   },
   {
     icon: Shield,
     title: "Security Suite",
     description: "State of the art security systems with biometric access and 24/7 monitoring",
-    color: "text-purple-400"
+    color: "text-purple-400",
   },
   {
     icon: Smartphone,
     title: "Mobile Control",
     description: "Complete control of your RV through our intuitive mobile application",
-    color: "text-pink-400"
+    color: "text-pink-400",
   },
   {
     icon: Bot,
     title: "Automation",
     description: "Smart automation for climate, lighting, and entertainment systems",
-    color: "text-orange-400"
-  }
+    color: "text-orange-400",
+  },
 ];
 
 const Technology = () => {
@@ -57,22 +58,23 @@ const Technology = () => {
 
   return (
     <Layout>
-      <div
-        className="flex-grow bg-gradient-to-b from-gray-900 to-gray-800"
-      >
-        <div className="max-w-7xl mx-auto px-4 py-10">
-          {/* MAIN HEADER IMAGE - using AspectRatio for better control */}
-          <div className="rounded-2xl overflow-hidden mb-12 shadow-lg">
-            <AspectRatio ratio={21/9} className="bg-gray-800">
+      <div className="flex-grow bg-gradient-to-b from-gray-900 to-gray-800">
+        {/* For full page width image, allow container to be full width */}
+        <div className="w-full px-0 py-10">
+          {/* MAIN HEADER IMAGE - page wide full width */}
+          <div className="w-full rounded-2xl overflow-hidden mb-12 shadow-lg">
+            <AspectRatio ratio={21 / 9} className="bg-gray-800 w-full">
               <img
                 src="/lovable-uploads/9ad50274-5f5b-47fa-8278-32599d734b3e.png"
-                alt="Our Technology Main Header"
-                className="w-full h-full object-contain"
+                alt="Technology Main Header"
+                className="w-full h-full object-cover"
                 loading="eager"
               />
             </AspectRatio>
           </div>
+        </div>
 
+        <div className="max-w-7xl mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -118,7 +120,8 @@ const Technology = () => {
               <div className="text-center p-8">
                 <h2 className="text-3xl font-bold text-white mb-4">Experience the Future Today</h2>
                 <p className="text-xl text-gray-300 mb-8 max-w-2xl">
-                  Our smart RVs combine cutting edge technology with luxurious comfort to create the ultimate travel experience
+                  Our smart RVs combine cutting edge technology with luxurious comfort to create
+                  the ultimate travel experience
                 </p>
                 <Link to="/schedule-demo">
                   <Button className="bg-blue-500 hover:bg-blue-600">
@@ -135,3 +138,4 @@ const Technology = () => {
 };
 
 export default Technology;
+
