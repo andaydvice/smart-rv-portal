@@ -1,4 +1,3 @@
-
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Cpu, Wifi, Battery, Shield, Smartphone, Bot, ArrowRight } from "lucide-react";
@@ -56,7 +55,7 @@ const Technology = () => {
 
   return (
     <Layout>
-      <div 
+      <div
         className="flex-grow bg-gradient-to-b from-gray-900 to-gray-800"
       >
         <div className="max-w-7xl mx-auto px-4 py-10">
@@ -84,7 +83,7 @@ const Technology = () => {
             className="text-center mb-16"
           >
             <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-              Discover the cutting edge technologies that power our smart RVs
+              Discover the cutting edge technologies that power the Smart RVs
             </p>
           </motion.div>
 
