@@ -1,11 +1,17 @@
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
 import { AlertCircle, Loader2 } from 'lucide-react';
+import { 
+  checkPasswordStrength, 
+  getPasswordStrengthLabel, 
+  getPasswordStrengthColor, 
+  isPasswordAcceptable 
+} from '@/utils/passwordUtils';
 
 interface AuthFormsProps {
   onSuccess?: () => void;
@@ -17,13 +23,28 @@ export const AuthForms = ({ onSuccess, onError }: AuthFormsProps) => {
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [passwordStrength, setPasswordStrength] = useState(0);
   const [error, setError] = useState<string | null>(null);
   const { toast } = useToast();
+
+  // Update password strength whenever password changes
+  useEffect(() => {
+    if (isSignUp) {
+      setPasswordStrength(checkPasswordStrength(password));
+    }
+  }, [password, isSignUp]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setError(null);
+
+    // Validate password for sign up
+    if (isSignUp && !isPasswordAcceptable(password)) {
+      setError("Password is too weak. Please use at least 8 characters with a mix of letters, numbers, and symbols.");
+      setLoading(false);
+      return;
+    }
 
     try {
       if (isSignUp) {
@@ -157,16 +178,29 @@ export const AuthForms = ({ onSuccess, onError }: AuthFormsProps) => {
             className="bg-[#1a2235] border-gray-700 text-white"
             disabled={loading}
           />
+          
           {isSignUp && (
-            <p className="text-xs text-white mt-1">
-              Password must be at least 6 characters long
-            </p>
+            <div className="mt-2 space-y-2">
+              <div className="flex items-center justify-between">
+                <span className="text-xs text-white">Password strength: </span>
+                <span className="text-xs font-semibold text-white">{getPasswordStrengthLabel(passwordStrength)}</span>
+              </div>
+              <div className="h-1.5 w-full bg-gray-700 rounded-full overflow-hidden">
+                <div 
+                  className={`h-full ${getPasswordStrengthColor(passwordStrength)} transition-all duration-300`} 
+                  style={{ width: `${(passwordStrength + 1) * 20}%` }} 
+                />
+              </div>
+              <p className="text-xs text-white mt-1">
+                Use at least 8 characters with a mix of letters, numbers, and symbols
+              </p>
+            </div>
           )}
         </div>
         <Button
           type="submit"
           className="w-full font-medium"
-          disabled={loading}
+          disabled={loading || (isSignUp && !isPasswordAcceptable(password))}
         >
           {loading ? (
             <span className="flex items-center">
