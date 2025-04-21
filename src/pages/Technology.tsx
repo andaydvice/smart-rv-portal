@@ -6,6 +6,8 @@ import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Layout from "@/components/layout/Layout";
 import TechnologyFAQ from "@/components/technology/TechnologyFAQ";
+import { useEffect } from "react";
+import { scrollToTop } from "@/utils/scrollToTop";
 
 const technologies = [
   {
@@ -47,28 +49,31 @@ const technologies = [
 ];
 
 const Technology = () => {
+  // Scroll to top when component mounts
+  useEffect(() => {
+    scrollToTop();
+  }, []);
+
   return (
     <Layout>
-      <Navbar />
-      <motion.div 
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.6 }}
+      <div 
         className="flex-grow bg-gradient-to-b from-gray-900 to-gray-800"
       >
         <div className="max-w-7xl mx-auto px-4 py-10">
-          {/* MAIN HEADER IMAGE - MODIFIED */}
+          {/* MAIN HEADER IMAGE - MODIFIED with improved container proportions */}
           <div className="relative rounded-2xl overflow-hidden mb-12">
-            <img
-              src="/lovable-uploads/9ad50274-5f5b-47fa-8278-32599d734b3e.png"
-              alt="Our Technology Main Header"
-              className="w-full h-72 md:h-96 object-cover rounded-2xl shadow-lg"
-              loading="eager"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/70 to-transparent flex items-center justify-start pl-12 md:pl-24">
-              <h1 className="text-5xl font-extrabold text-white drop-shadow-lg max-w-3xl">
-                Our Technology
-              </h1>
+            <div className="w-full aspect-[21/9] relative">
+              <img
+                src="/lovable-uploads/9ad50274-5f5b-47fa-8278-32599d734b3e.png"
+                alt="Our Technology Main Header"
+                className="w-full h-full object-cover rounded-2xl shadow-lg"
+                loading="eager"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/70 to-transparent flex items-center justify-start pl-12 md:pl-24">
+                <h1 className="text-5xl font-extrabold text-white drop-shadow-lg max-w-3xl image-overlay-headline">
+                  Our Technology
+                </h1>
+              </div>
             </div>
           </div>
 
@@ -128,7 +133,7 @@ const Technology = () => {
             </div>
           </motion.div>
         </div>
-      </motion.div>
+      </div>
     </Layout>
   );
 };
