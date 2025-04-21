@@ -1,42 +1,26 @@
-
-import React from "react";
-import { RouteObject } from "react-router-dom";
-
-// Import utility pages
-import Auth from "../pages/Auth";
 import Calculators from "../pages/Calculators";
-import Contact from "../pages/Contact";
-import WeatherDashboard from "../pages/WeatherDashboard";
-import ScheduleDemo from "../pages/ScheduleDemo";
+import Documentation from "../pages/Documentation";
+import Weather from "../pages/Weather";
 import StorageFacilities from "../pages/StorageFacilities";
 import StoragePreparationChecklist from "../pages/StoragePreparationChecklist";
-import VoiceControl from "../pages/VoiceControl";
-import Documentation from "../pages/Documentation";
-import CompleteDocumentation from "../pages/documentation/CompleteDocumentation";
+import Contact from "../pages/Contact";
 import Troubleshooting from "../pages/Troubleshooting";
-import ErrorPage from "../pages/ErrorPage";
+import ScheduleDemo from "../pages/ScheduleDemo";
+import VoiceControl from "../pages/VoiceControl";
+import AccountPage from "@/pages/Account";
 
-// Define utility routes
-const utilityRoutes: RouteObject[] = [
-  {
-    path: "/auth",
-    element: <Auth />,
-  },
+const utilityRoutes = [
   {
     path: "/calculators",
     element: <Calculators />,
   },
   {
-    path: "/contact",
-    element: <Contact />,
+    path: "/documentation",
+    element: <Documentation />,
   },
   {
     path: "/weather",
-    element: <WeatherDashboard />,
-  },
-  {
-    path: "/schedule-demo",
-    element: <ScheduleDemo />,
+    element: <Weather />,
   },
   {
     path: "/storage-facilities",
@@ -47,20 +31,24 @@ const utilityRoutes: RouteObject[] = [
     element: <StoragePreparationChecklist />,
   },
   {
-    path: "/voice-control",
-    element: <VoiceControl />,
-  },
-  {
-    path: "/documentation",
-    element: <Documentation />,
-  },
-  {
-    path: "/documentation/complete",
-    element: <CompleteDocumentation />,
+    path: "/contact",
+    element: <Contact />,
   },
   {
     path: "/troubleshooting",
     element: <Troubleshooting />,
+  },
+  {
+    path: "/schedule-demo",
+    element: <ScheduleDemo />,
+  },
+  {
+    path: "/voice-control",
+    element: <VoiceControl />,
+  },
+  {
+    path: "/account",
+    element: <AccountPage />,
   },
 ];
 
