@@ -5,7 +5,7 @@ import {
   Brain, Lightbulb, Eye, Search,
   Cog, Layers, Activity, Network,
   Car, Truck, Tent, LayoutTemplate,
-  HelpCircle, MessageCircleQuestion, LifeBuoy, Phone 
+  HelpCircle, MessageCircleQuestion, LifeBuoy, Phone, BookOpen
 } from "lucide-react";
 import AuthButtons from "./AuthButtons";
 import HoverDropdownMenu from "./HoverDropdownMenu";
@@ -125,6 +125,11 @@ const DesktopNavigation = () => {
       icon: <MessageCircleQuestion size={16} className="text-[#0EA5E9]" />
     },
     { 
+      text: "Technology FAQ", 
+      href: "/technology",
+      icon: <BookOpen size={16} className="text-[#5B9BD5]" />
+    },
+    { 
       text: "Contact Us", 
       href: "/contact",
       icon: <Phone size={16} className="text-[#10B981]" />
@@ -194,3 +199,4 @@ const DesktopNavigation = () => {
 };
 
 export default DesktopNavigation;
+
