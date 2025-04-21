@@ -5,6 +5,7 @@ import { Cpu, Wifi, Battery, Shield, Smartphone, Bot, ArrowRight } from "lucide-
 import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Layout from "@/components/layout/Layout";
+import TechnologyFAQ from "@/components/technology/TechnologyFAQ";
 
 const technologies = [
   {
@@ -83,6 +84,9 @@ const Technology = () => {
               </motion.div>
             ))}
           </div>
+
+          {/* Insert FAQ section here */}
+          <TechnologyFAQ />
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
