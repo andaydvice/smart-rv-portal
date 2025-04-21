@@ -56,14 +56,29 @@ const Technology = () => {
         transition={{ duration: 0.6 }}
         className="flex-grow bg-gradient-to-b from-gray-900 to-gray-800"
       >
-        <div className="max-w-7xl mx-auto px-4 py-20">
+        <div className="max-w-7xl mx-auto px-4 py-10">
+          {/* MAIN HEADER IMAGE - MODIFIED */}
+          <div className="relative rounded-2xl overflow-hidden mb-12">
+            <img
+              src="/lovable-uploads/9ad50274-5f5b-47fa-8278-32599d734b3e.png"
+              alt="Our Technology Main Header"
+              className="w-full h-72 md:h-96 object-cover rounded-2xl shadow-lg"
+              loading="eager"
+              priority
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/70 to-transparent flex items-center justify-start pl-12 md:pl-24">
+              <h1 className="text-5xl font-extrabold text-white drop-shadow-lg max-w-3xl">
+                Our Technology
+              </h1>
+            </div>
+          </div>
+
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
             className="text-center mb-16"
           >
-            <h1 className="text-5xl font-bold text-white mb-6">Our Technology</h1>
             <p className="text-xl text-gray-300 max-w-2xl mx-auto">
               Discover the cutting edge technologies that power our smart RVs
             </p>
