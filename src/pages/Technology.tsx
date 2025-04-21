@@ -64,7 +64,6 @@ const Technology = () => {
               alt="Our Technology Main Header"
               className="w-full h-72 md:h-96 object-cover rounded-2xl shadow-lg"
               loading="eager"
-              priority
             />
             <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/70 to-transparent flex items-center justify-start pl-12 md:pl-24">
               <h1 className="text-5xl font-extrabold text-white drop-shadow-lg max-w-3xl">
