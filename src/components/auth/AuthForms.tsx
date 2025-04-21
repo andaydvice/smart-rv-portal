@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
@@ -12,6 +11,7 @@ import {
   getPasswordStrengthColor, 
   isPasswordAcceptable 
 } from '@/utils/passwordUtils';
+import OtpPrompt from './OtpPrompt';
 
 interface AuthFormsProps {
   onSuccess?: () => void;
@@ -25,6 +25,8 @@ export const AuthForms = ({ onSuccess, onError }: AuthFormsProps) => {
   const [password, setPassword] = useState('');
   const [passwordStrength, setPasswordStrength] = useState(0);
   const [error, setError] = useState<string | null>(null);
+  const [showOtp, setShowOtp] = useState(false);
+  const [pendingOtpSession, setPendingOtpSession] = useState<any>(null);
   const { toast } = useToast();
 
   // Update password strength whenever password changes
@@ -33,6 +35,43 @@ export const AuthForms = ({ onSuccess, onError }: AuthFormsProps) => {
       setPasswordStrength(checkPasswordStrength(password));
     }
   }, [password, isSignUp]);
+
+  const handleOtpVerify = async (code: string) => {
+    setLoading(true);
+    setError(null);
+    // Try to verify the code using supabase.auth.verifyOtp
+    const { data, error: otpError } = await supabase.auth.verifyOtp({
+      email,
+      type: "email",
+      token: code,
+    });
+
+    if (otpError) {
+      setError("Invalid or expired code. Please try again.");
+      setLoading(false);
+      return false;
+    }
+
+    toast({
+      title: "Welcome back!",
+      description: "Two-factor authentication successful.",
+    });
+
+    setShowOtp(false);
+    setLoading(false);
+
+    // continue login flow, call onSuccess, clear session
+    setPendingOtpSession(null);
+    onSuccess?.();
+
+    return true;
+  };
+
+  const handleCancelOtp = () => {
+    setShowOtp(false);
+    setPendingOtpSession(null);
+    setLoading(false);
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -63,26 +102,43 @@ export const AuthForms = ({ onSuccess, onError }: AuthFormsProps) => {
           description: "We've sent you a verification link",
         });
       } else {
-        console.log("Attempting to sign in with:", { email }); // Debug log
-        
+        // Attempt sign in
+        console.log("Attempting to sign in with:", { email });
         const { error: signInError, data } = await supabase.auth.signInWithPassword({
           email,
           password,
         });
-        
-        console.log("Sign in response:", { error: signInError, data }); // Debug log
-        
+
+        console.log("Sign in response:", { error: signInError, data });
+
         if (signInError) throw signInError;
-        
+
+        // [CHG-1] -- Check for 2FA
+        // Check for user_metadata.twofactor_enabled - if present, require OTP
+        const { user } = data || {};
+        // Supabase returns user_metadata on the user object
+        const twofactorEnabled = user?.user_metadata?.twofactor_enabled;
+
+        if (twofactorEnabled) {
+          // [CHG-2]: If 2FA enabled, trigger otp flow
+          // Supabase will have emailed OTP to user (or we can simulate)
+          setPendingOtpSession(data?.session || null);
+          setShowOtp(true);
+          toast({
+            title: "2FA Required",
+            description: "Please check your email for a one-time passcode.",
+          });
+          return;
+        }
+
         toast({
           title: "Welcome back!",
           description: "You've been successfully logged in",
         });
-        
         onSuccess?.();
       }
     } catch (err: any) {
-      console.error("Auth error:", err); // Debug log
+      console.error("Auth error:", err);
       
       // Provide more user-friendly error messages
       let errorMessage = err.message || "An unexpected error occurred";
@@ -112,6 +168,17 @@ export const AuthForms = ({ onSuccess, onError }: AuthFormsProps) => {
       setLoading(false);
     }
   };
+
+  // UI: show OTP dialog if 2FA enabled [CHG-3]
+  if (showOtp) {
+    return (
+      <OtpPrompt
+        email={email}
+        onVerify={handleOtpVerify}
+        onCancel={handleCancelOtp}
+      />
+    );
+  }
 
   return (
     <div className="space-y-6">
