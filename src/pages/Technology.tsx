@@ -1,3 +1,4 @@
+
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Cpu, Wifi, Battery, Shield, Smartphone, Bot, ArrowRight } from "lucide-react";
@@ -59,7 +60,7 @@ const Technology = () => {
         className="flex-grow bg-gradient-to-b from-gray-900 to-gray-800"
       >
         <div className="max-w-7xl mx-auto px-4 py-10">
-          {/* MAIN HEADER IMAGE - MODIFIED with improved container proportions */}
+          {/* MAIN HEADER IMAGE - removed text overlay for full image display */}
           <div className="relative rounded-2xl overflow-hidden mb-12">
             <div className="w-full aspect-[21/9] relative">
               <img
@@ -68,11 +69,6 @@ const Technology = () => {
                 className="w-full h-full object-cover rounded-2xl shadow-lg"
                 loading="eager"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/70 to-transparent flex items-center justify-start pl-12 md:pl-24">
-                <h1 className="text-5xl font-extrabold text-white drop-shadow-lg max-w-3xl image-overlay-headline">
-                  Our Technology
-                </h1>
-              </div>
             </div>
           </div>
 
@@ -138,3 +134,4 @@ const Technology = () => {
 };
 
 export default Technology;
+
