@@ -58,14 +58,14 @@ const Technology = () => {
   return (
     <Layout>
       <div className="flex-grow bg-gradient-to-b from-gray-900 to-gray-800">
-        {/* Full width container for the image */}
-        <div className="w-full px-0 py-10">
-          {/* MAIN HEADER IMAGE - true full width with auto height */}
-          <div className="w-full max-h-[500px] rounded-2xl overflow-hidden mb-12 shadow-lg">
+        {/* Full width container with no padding constraints */}
+        <div className="w-full py-10">
+          {/* MAIN HEADER IMAGE - full width with proper sizing */}
+          <div className="w-full overflow-hidden mb-12 shadow-lg flex justify-center">
             <img
               src="/lovable-uploads/9ad50274-5f5b-47fa-8278-32599d734b3e.png"
               alt="Technology Main Header"
-              className="w-full h-auto object-contain"
+              className="w-full max-w-[1600px]"
               loading="eager"
             />
           </div>
