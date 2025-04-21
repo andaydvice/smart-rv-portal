@@ -111,8 +111,13 @@ const DesktopNavigation = () => {
     }
   ];
 
-  // Define Support links with icons, only one FAQ entry and others cleanly listed
+  // Define Support links with icons — include FAQ as one link plus others cleanly
   const supportLinks = [
+    { 
+      text: "Technology FAQ", 
+      href: "/technology",
+      icon: <HelpCircle size={16} className="text-[#5B9BD5]" /> 
+    },
     { 
       text: "Troubleshooting", 
       href: "/troubleshooting",
@@ -122,11 +127,6 @@ const DesktopNavigation = () => {
       text: "Documentation", 
       href: "/documentation",
       icon: <MessageCircleQuestion size={16} className="text-[#0EA5E9]" />
-    },
-    { 
-      text: "Technology FAQ", 
-      href: "/technology",
-      icon: <HelpCircle size={16} className="text-[#5B9BD5]" />
     },
     { 
       text: "Schedule Demo", 
@@ -193,3 +193,4 @@ const DesktopNavigation = () => {
 };
 
 export default DesktopNavigation;
+
