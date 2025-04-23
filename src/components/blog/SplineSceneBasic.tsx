@@ -1,10 +1,11 @@
 
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Application } from '@splinetool/runtime';
 import { motion } from 'framer-motion';
 
 export const SplineSceneBasic = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [loadingError, setLoadingError] = useState(false);
 
   useEffect(() => {
     if (!canvasRef.current) return;
@@ -17,9 +18,11 @@ export const SplineSceneBasic = () => {
       app.load('https://prod.spline.design/cLkW6ksd-j9PiXzR/scene.splinecode')
         .catch(error => {
           console.error('Error loading Spline scene:', error);
+          setLoadingError(true);
         });
     } catch (error) {
       console.error('Error initializing Spline scene:', error);
+      setLoadingError(true);
     }
     
     return () => {
@@ -30,8 +33,10 @@ export const SplineSceneBasic = () => {
   
   return (
     <div className="w-full h-[280px] md:h-[320px] overflow-hidden rounded-lg bg-gradient-to-r from-[#080F1F] to-[#151A22] relative">
-      {/* 3D Animation Canvas */}
-      <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" />
+      {/* 3D Animation Canvas - Hidden if there's an error */}
+      {!loadingError && (
+        <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" />
+      )}
       
       {/* Content overlay */}
       <div className="absolute inset-0 flex flex-col items-center justify-center p-8 z-10">
