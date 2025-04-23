@@ -56,23 +56,15 @@ const RVTypeCard: React.FC<RVTypeProps> = ({
             <p><span className="text-blue-400 font-medium">Pros:</span> {pros}</p>
             
             <div>
-              <h4 className="text-blue-400 font-medium mb-2">Popular Brands:</h4>
+              <h4 className="text-blue-400 font-medium mb-2">Popular Brands</h4>
               <div className="grid md:grid-cols-2 gap-4">
                 <div>
-                  <h5 className="text-sm font-medium text-gray-400 mb-1">USA</h5>
-                  <ul className="list-disc list-inside space-y-1">
-                    {brands.usa.map((brand, i) => (
-                      <li key={i} className="text-gray-300 text-sm">{brand}</li>
-                    ))}
-                  </ul>
+                  <h5 className="text-sm font-medium text-gray-400 mb-1">USA Brands</h5>
+                  <p className="text-gray-300 text-sm">{brands.usa.join(', ')}</p>
                 </div>
                 <div>
-                  <h5 className="text-sm font-medium text-gray-400 mb-1">Australia</h5>
-                  <ul className="list-disc list-inside space-y-1">
-                    {brands.australia.map((brand, i) => (
-                      <li key={i} className="text-gray-300 text-sm">{brand}</li>
-                    ))}
-                  </ul>
+                  <h5 className="text-sm font-medium text-gray-400 mb-1">Australia Brands</h5>
+                  <p className="text-gray-300 text-sm">{brands.australia.join(', ')}</p>
                 </div>
               </div>
             </div>
