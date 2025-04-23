@@ -6,7 +6,6 @@ import TrendingPosts from "@/components/blog/TrendingPosts";
 import BlogGrid from "@/components/blog/BlogGrid";
 import FeaturedCategories from "@/components/blog/FeaturedCategories";
 import NewsletterSection from "@/components/blog/NewsletterSection";
-import Navbar from "@/components/Navbar";
 import Layout from "@/components/layout/Layout";
 
 const Blog = () => {
@@ -28,6 +27,7 @@ const Blog = () => {
       <Helmet>
         <title>Smart RV Blog - Latest RV Tech & Travel Tips</title>
         <meta name="description" content="Discover the latest in RV technology, travel tips, and smart living solutions for modern RV enthusiasts." />
+        <link rel="preload" href="/lovable-uploads/f3ebf58c-7bbf-427f-9510-9c3b0aec6f6d.png" as="image" />
       </Helmet>
       
       <div className="container mx-auto px-4 py-8 space-y-12 pt-20 flex-grow">
