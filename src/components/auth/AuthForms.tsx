@@ -43,8 +43,6 @@ export const AuthForms = ({ onSuccess, onError }: AuthFormsProps) => {
 
   // Helper: fetch login attempts for the user by email
   const fetchLoginAttempts = async (email: string) => {
-    // We can't directly query users by email with the client API
-    // So we'll query the login_attempts table using the email as a reference
     const { data, error } = await supabase
       .from("login_attempts")
       .select("*")
