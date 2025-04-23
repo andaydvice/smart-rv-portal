@@ -45,16 +45,25 @@ export const generateImagePlaceholder = (
 };
 
 /**
- * Preloads critical images
+ * Preloads critical images with high priority
  * @param images Array of image URLs to preload
  */
 export const preloadCriticalImages = (images: string[]): void => {
   images.forEach(src => {
+    // Check if preload link already exists
+    const existingLink = document.querySelector(`link[rel="preload"][href="${src}"]`);
+    if (existingLink) return;
+    
     const link = document.createElement('link');
     link.rel = 'preload';
     link.as = 'image';
     link.href = src;
+    link.crossOrigin = 'anonymous';
     document.head.appendChild(link);
+    
+    // Also create an Image object to force browser to download
+    const img = new Image();
+    img.src = src;
   });
 };
 
@@ -98,4 +107,35 @@ export const setupLazyLoading = (): void => {
       lazyImages.forEach(img => imageObserver.observe(img));
     }
   }
+};
+
+/**
+ * Converts an image URL to WebP format if supported
+ * @param url Original image URL
+ * @returns WebP URL if supported, original URL otherwise
+ */
+export const getOptimizedImageUrl = (url: string): string => {
+  // If URL is already a WebP, return as is
+  if (url.endsWith('.webp')) return url;
+  
+  // If URL is from our own domain or a known CDN, try to append .webp
+  if (url.includes('/lovable-uploads/')) {
+    return `${url}.webp`;
+  }
+  
+  return url;
+};
+
+/**
+ * Inform browser about highest priority LCP image
+ * @param url Image URL
+ */
+export const markAsLCP = (url: string): void => {
+  // Create a high priority fetchpriority preload
+  const link = document.createElement('link');
+  link.rel = 'preload';
+  link.as = 'image';
+  link.href = url;
+  link.fetchPriority = 'high';
+  document.head.appendChild(link);
 };

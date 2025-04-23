@@ -12,11 +12,17 @@ import './styles/map-optimizations.css'
 import './styles/force-markers.css'
 import './styles/map-fixes.css'
 import './styles/google-maps.css'
-import { setupLazyLoading, deferOperation } from './utils/performance.ts'
+import { setupLazyLoading, deferOperation, preloadCriticalImages } from './utils/performance.ts'
 
 // Log the current deployed URL for debugging
 console.log('Application starting, window.location:', window.location.href);
 console.log('Application path:', window.location.pathname);
+
+// Preload critical homepage images immediately
+preloadCriticalImages([
+  '/lovable-uploads/f3ebf58c-7bbf-427f-9510-9c3b0aec6f6d.png', // Hero image
+  '/lovable-uploads/598a2cb5-ffcb-440a-9943-6c4440749b9f.png',  // Compact RV hero
+]);
 
 // Force immediate style injection for emergency fixes
 const injectEmergencyStyles = () => {
@@ -42,6 +48,16 @@ const injectEmergencyStyles = () => {
       visibility: visible !important;
       display: block !important;
     }
+    
+    /* Image loading optimizations */
+    img {
+      content-visibility: auto;
+    }
+    
+    /* Add a subtle background to image placeholders */
+    img:not([src]), img[src=""] {
+      background-color: #131a2a;
+    }
   `;
   document.head.appendChild(style);
   console.log('Injected emergency styles');
@@ -66,7 +82,7 @@ if (!rootElement) {
       // After app is rendered, setup lazy loading for images
       deferOperation(() => {
         setupLazyLoading();
-      }, 300);
+      }, 100);
     };
     
     // Check if browser is waiting for all resources or just critical ones

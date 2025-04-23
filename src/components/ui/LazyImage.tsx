@@ -28,15 +28,35 @@ export const LazyImage = ({
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(false);
   
+  // Preload images with high priority
+  useEffect(() => {
+    if (!src || error || fetchPriority !== 'high') return;
+    
+    const preloadLink = document.createElement('link');
+    preloadLink.rel = 'preload';
+    preloadLink.as = 'image';
+    preloadLink.href = src;
+    preloadLink.crossOrigin = 'anonymous';
+    document.head.appendChild(preloadLink);
+    
+    return () => {
+      document.head.removeChild(preloadLink);
+    };
+  }, [src, error, fetchPriority]);
+  
   // Decode image data in a separate thread when possible
   useEffect(() => {
     if (!src || error) return;
     
     const img = new Image();
     img.src = src;
-    img.decode().catch(() => {
-      // Silent catch - we'll handle errors in the onError handler
-    });
+    img.decode()
+      .then(() => {
+        setIsLoading(false);
+      })
+      .catch(() => {
+        // Silent catch - we'll handle errors in the onError handler
+      });
   }, [src, error]);
 
   // Detect WebP support
@@ -63,22 +83,27 @@ export const LazyImage = ({
     <div className="relative">
       {/* Blur placeholder */}
       {isLoading && blurDataURL && !error && (
-        <img
-          src={blurDataURL}
-          alt={alt || ''}
-          aria-hidden="true"
+        <div 
           className={cn(
             className,
-            "absolute inset-0 w-full h-full object-cover transition-opacity duration-500 blur-md scale-105 z-0"
+            "absolute inset-0 w-full h-full overflow-hidden z-0"
           )}
-          style={{ filter: 'blur(16px)' }}
-          draggable={false}
+          style={{ 
+            backgroundImage: `url(${blurDataURL})`, 
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            filter: 'blur(20px)',
+            transform: 'scale(1.1)'
+          }}
+          aria-hidden="true"
         />
       )}
+      
       {/* Skeleton fallback */}
       {isLoading && !blurDataURL && (
         <Skeleton className={cn('absolute inset-0', className)} />
       )}
+      
       {/* Actual Image (with WebP support) */}
       {!error ? (
         <picture>
@@ -96,10 +121,11 @@ export const LazyImage = ({
             className={cn(
               className,
               isLoading ? 'opacity-0' : 'opacity-100',
-              'transition-opacity duration-300'
+              'transition-opacity duration-300 z-10 relative'
             )}
             onLoad={() => setIsLoading(false)}
             onError={() => {
+              console.error(`Failed to load image: ${src}`);
               setError(true);
               setIsLoading(false);
             }}

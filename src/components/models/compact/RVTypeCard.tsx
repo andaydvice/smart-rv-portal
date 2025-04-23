@@ -31,6 +31,7 @@ const RVTypeCard: React.FC<RVTypeProps> = ({
 }) => {
   const isEven = index % 2 === 0;
   const placeholderSvg = generateImagePlaceholder(800, 500, '1a1f2b');
+  const isPriority = index < 2; // First two cards load with priority
 
   return (
     <motion.div 
@@ -78,8 +79,12 @@ const RVTypeCard: React.FC<RVTypeProps> = ({
               className="w-full h-full object-cover"
               blurDataURL={placeholderSvg}
               sizes="(max-width: 768px) 100vw, 50vw"
-              loading="lazy"
-              fetchPriority={index < 2 ? "high" : "auto"}
+              loading={isPriority ? "eager" : "lazy"}
+              fetchPriority={isPriority ? "high" : "auto"}
+              onError={(e) => {
+                console.error(`Failed to load image: ${image}`);
+                e.currentTarget.style.display = 'none';
+              }}
             />
           </div>
         )}

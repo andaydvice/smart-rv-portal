@@ -1,7 +1,7 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { LazyImage } from '@/components/ui/LazyImage';
-import { generateImagePlaceholder } from '@/utils/performance';
+import { generateImagePlaceholder, preloadCriticalImages } from '@/utils/performance';
 
 interface OptimizedImageProps {
   src: string;
@@ -9,6 +9,7 @@ interface OptimizedImageProps {
   className?: string;
   width?: number;
   height?: number;
+  priority?: boolean;
 }
 
 export const OptimizedImage = ({ 
@@ -16,8 +17,16 @@ export const OptimizedImage = ({
   alt, 
   className = '',
   width,
-  height
+  height,
+  priority = false
 }: OptimizedImageProps) => {
+  // Preload critical images immediately when priority is true
+  useEffect(() => {
+    if (priority && src) {
+      preloadCriticalImages([src]);
+    }
+  }, [priority, src]);
+
   // Generate a tiny SVG placeholder based on the image dimensions
   const aspectRatio = width && height ? (height / width) : 0.5625; // Default to 16:9
   const placeholderSvg = generateImagePlaceholder(
@@ -31,8 +40,8 @@ export const OptimizedImage = ({
     ? `(max-width: 640px) 100vw, (max-width: 768px) 75vw, ${width}px` 
     : '(max-width: 640px) 100vw, (max-width: 768px) 75vw, 50vw';
 
-  // Determine if this is a priority image (width > 0 means it's important enough to have dimensions specified)
-  const isPriority = Boolean(width && width > 0);
+  // Determine if this is a priority image (explicitly set or width > 0)
+  const isPriority = priority || (Boolean(width) && width > 0);
 
   return (
     <LazyImage
