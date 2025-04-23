@@ -7,14 +7,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Smart RV Systems: Next-generation connectivity and control for your RV" />
     <title>Smart RV Systems</title>
+    
+    <!-- Preconnect to domains for faster loading -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+    <link rel="preconnect" href="https://maps.googleapis.com" crossorigin />
+    <link rel="preconnect" href="https://maps.gstatic.com" crossorigin />
+    
+    <!-- Preload critical assets -->
+    <link rel="preload" href="/src/main.tsx" as="script" />
+    <link rel="preload" href="/src/App.tsx" as="script" />
+    <link rel="preload" href="/src/index.css" as="style" />
+    
+    <!-- Preload critical images (such as hero images) -->
+    <link rel="preload" href="/lovable-uploads/53093373-3df3-49cc-b4cc-91b800c53fa9.png" as="image" />
+    
     <!-- Include emergency markers script for guaranteed marker visibility -->
     <script src="/emergencyMarkers.js"></script>
+    
     <!-- Add Google Maps API with the key -->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAGKkTg0DlZd7fCJlfkVNqkRkzPjeqKJ2o&libraries=places" async defer></script>
+    
     <!-- Initial page path detection -->
     <script>
       window.initialPath = window.location.pathname;
       console.log('Initial page load path:', window.initialPath);
+      
+      // Add performance marker for monitoring
+      if (window.performance && window.performance.mark) {
+        window.performance.mark('initial_load_start');
+      }
     </script>
   </head>
   <body>
@@ -22,5 +43,23 @@
     <!-- Add Lovable script tag for new features -->
     <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
     <script type="module" src="/src/main.tsx"></script>
+    <script>
+      // Record when the page becomes visible to the user
+      document.addEventListener('DOMContentLoaded', function() {
+        if (window.performance && window.performance.mark) {
+          window.performance.mark('dom_content_loaded');
+          console.log('DOMContentLoaded event fired at:', new Date().getTime());
+        }
+      });
+      
+      // Record when all resources finished loading
+      window.addEventListener('load', function() {
+        if (window.performance && window.performance.mark) {
+          window.performance.mark('full_load_complete');
+          const loadTime = performance.now();
+          console.log('Page fully loaded in:', Math.round(loadTime), 'ms');
+        }
+      });
+    </script>
   </body>
 </html>

@@ -2,15 +2,15 @@
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
+import { LazyImage } from "@/components/ui/LazyImage";
 
 const HeroSection = () => {
   return (
     <div className="relative w-full h-[60vh] overflow-hidden bg-gray-900">
-      <img
+      <LazyImage
         src="/lovable-uploads/598a2cb5-ffcb-440a-9943-6c4440749b9f.png"
         alt="Compact RVs at sunset with campfires and string lights"
         className="w-full h-full object-cover"
-        loading="lazy"
         style={{ backgroundColor: '#111827' }}
       />
       <div className="absolute inset-0 bg-black/40" />

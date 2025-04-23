@@ -1,9 +1,11 @@
+
 import React from "react";
+import { LazyImage } from '@/components/ui/LazyImage';
 
 const CalculatorHeader = () => {
   return (
     <div className="relative w-full min-h-[400px] h-[400px] max-h-[400px] overflow-hidden">
-      <img
+      <LazyImage
         src="/lovable-uploads/53093373-3df3-49cc-b4cc-91b800c53fa9.png"
         alt="RV under starry night sky with ambient lighting"
         className="w-full h-full object-cover"

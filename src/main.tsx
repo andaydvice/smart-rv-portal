@@ -7,11 +7,12 @@ import './styles/animations.css'
 import './styles/forms.css'
 import './styles/layout.css'
 import './styles/base.css'
-import './styles/emergency-marker-fix.css'  // Add emergency marker styles globally
-import './styles/map-optimizations.css'     // Add map optimization styles globally
-import './styles/force-markers.css'         // Add force markers styles globally
-import './styles/map-fixes.css'             // Add map fixes styles globally
-import './styles/google-maps.css'           // Add Google Maps styles globally
+import './styles/emergency-marker-fix.css'
+import './styles/map-optimizations.css'
+import './styles/force-markers.css'
+import './styles/map-fixes.css'
+import './styles/google-maps.css'
+import { setupLazyLoading, deferOperation } from './utils/performance.ts'
 
 // Log the current deployed URL for debugging
 console.log('Application starting, window.location:', window.location.href);
@@ -56,10 +57,27 @@ if (!rootElement) {
   console.error('Root element not found! Cannot mount React application.');
 } else {
   try {
-    ReactDOM.createRoot(rootElement).render(
-      <App />
-    );
-    console.log('React application successfully mounted');
+    const renderApp = () => {
+      ReactDOM.createRoot(rootElement).render(
+        <App />
+      );
+      console.log('React application successfully mounted');
+      
+      // After app is rendered, setup lazy loading for images
+      deferOperation(() => {
+        setupLazyLoading();
+      }, 300);
+    };
+    
+    // Check if browser is waiting for all resources or just critical ones
+    if (document.readyState === 'complete' || document.readyState === 'interactive') {
+      // Resources already loaded, render immediately
+      renderApp();
+    } else {
+      // Wait for critical resources only
+      document.addEventListener('DOMContentLoaded', renderApp);
+    }
+    
   } catch (error) {
     console.error('Failed to mount React application:', error);
     

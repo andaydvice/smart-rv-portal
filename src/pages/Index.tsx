@@ -1,14 +1,30 @@
 
-import React, { useEffect } from "react";
+import React, { useEffect, lazy, Suspense } from "react";
 import Navbar from "@/components/Navbar";
 import Layout from "@/components/layout/Layout";
 import { HeroSection } from "@/components/sections/HeroSection";
-import { FeaturesSection } from "@/components/sections/FeaturesSection";
-import { TechnologySection } from "@/components/sections/TechnologySection";
-import { SustainabilitySection } from "@/components/sections/SustainabilitySection";
-import { ContactSection } from "@/components/sections/ContactSection";
 import { motion } from "framer-motion";
 import { toast } from "sonner";
+
+// Lazy load components that aren't needed immediately
+const FeaturesSection = lazy(() => import("@/components/sections/FeaturesSection").then(mod => ({ 
+  default: mod.FeaturesSection 
+})));
+const TechnologySection = lazy(() => import("@/components/sections/TechnologySection").then(mod => ({ 
+  default: mod.TechnologySection 
+})));
+const SustainabilitySection = lazy(() => import("@/components/sections/SustainabilitySection").then(mod => ({ 
+  default: mod.SustainabilitySection 
+})));
+const ContactSection = lazy(() => import("@/components/sections/ContactSection").then(mod => ({ 
+  default: mod.ContactSection 
+})));
+
+const LoadingFallback = () => (
+  <div className="w-full py-20 flex items-center justify-center">
+    <div className="animate-pulse h-64 w-full max-w-6xl bg-gray-200/10 rounded"></div>
+  </div>
+);
 
 const Index = () => {
   useEffect(() => {
@@ -30,10 +46,22 @@ const Index = () => {
       >
         <Navbar />
         <HeroSection />
-        <FeaturesSection />
-        <TechnologySection />
-        <SustainabilitySection />
-        <ContactSection />
+        
+        <Suspense fallback={<LoadingFallback />}>
+          <FeaturesSection />
+        </Suspense>
+        
+        <Suspense fallback={<LoadingFallback />}>
+          <TechnologySection />
+        </Suspense>
+        
+        <Suspense fallback={<LoadingFallback />}>
+          <SustainabilitySection />
+        </Suspense>
+        
+        <Suspense fallback={<LoadingFallback />}>
+          <ContactSection />
+        </Suspense>
       </motion.div>
     </Layout>
   );
