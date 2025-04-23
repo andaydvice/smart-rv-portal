@@ -57,7 +57,7 @@ const RVTypeCard: React.FC<RVTypeProps> = ({
             
             <div>
               <h4 className="text-blue-400 font-medium mb-2">Popular Brands</h4>
-              <div className="grid md:grid-cols-2 gap-4">
+              <div className="space-y-2">
                 <div>
                   <h5 className="text-sm font-medium text-gray-400 mb-1">USA Brands</h5>
                   <p className="text-gray-300 text-sm">{brands.usa.join(', ')}</p>
