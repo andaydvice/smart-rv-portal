@@ -9,15 +9,22 @@ export const SplineSceneBasic = () => {
   useEffect(() => {
     if (!canvasRef.current) return;
     
-    // Load the Spline scene
+    // Create a new Spline application instance
     const app = new Application(canvasRef.current);
-    app.load('https://prod.spline.design/cLkW6ksd-j9PiXzR/scene.splinecode');
+    
+    // Load the Spline scene with error handling
+    try {
+      app.load('https://prod.spline.design/cLkW6ksd-j9PiXzR/scene.splinecode')
+        .catch(error => {
+          console.error('Error loading Spline scene:', error);
+        });
+    } catch (error) {
+      console.error('Error initializing Spline scene:', error);
+    }
     
     return () => {
       // Clean up
-      if (app) {
-        app.dispose();
-      }
+      app.dispose();
     };
   }, []);
   

@@ -6,10 +6,20 @@ import { useNavigate } from 'react-router-dom';
 export const BlogPostHeader = () => {
   const navigate = useNavigate();
   
+  const handleNavigation = () => {
+    try {
+      navigate('/blog');
+    } catch (error) {
+      console.error('Navigation error:', error);
+      // Fallback in case of router issues
+      window.location.href = '/blog';
+    }
+  };
+  
   return (
     <Button
       variant="ghost"
-      onClick={() => navigate('/blog')}
+      onClick={handleNavigation}
       className="text-white hover:bg-connectivity-accent hover:text-white"
     >
       <ChevronLeft className="mr-2 h-4 w-4" />
