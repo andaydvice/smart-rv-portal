@@ -6,7 +6,6 @@ import TrendingPosts from "@/components/blog/TrendingPosts";
 import BlogGrid from "@/components/blog/BlogGrid";
 import FeaturedCategories from "@/components/blog/FeaturedCategories";
 import NewsletterSection from "@/components/blog/NewsletterSection";
-import Navbar from "@/components/Navbar";
 import Layout from "@/components/layout/Layout";
 
 const Blog = () => {

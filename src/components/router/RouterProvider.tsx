@@ -2,7 +2,6 @@
 import { createBrowserRouter, RouterProvider as ReactRouterProvider } from "react-router-dom";
 import { routes } from "@/routes/routes";
 import ErrorBoundary from "../error/ErrorBoundary";
-import ErrorDisplay from "../error/ErrorDisplay";
 import { useEffect, useState } from "react";
 import { scrollToTop } from "@/utils/scrollToTop";
 import ErrorPage from "@/pages/ErrorPage";
