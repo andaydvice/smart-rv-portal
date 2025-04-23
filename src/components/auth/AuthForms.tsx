@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
@@ -37,56 +36,84 @@ export const AuthForms = ({ onSuccess, onError }: AuthFormsProps) => {
     }
   }, [password, isSignUp]);
 
-  const handleOtpVerify = async (code: string) => {
-    setLoading(true);
-    setError(null);
-    // Try to verify the code using supabase.auth.verifyOtp
-    const { data, error: otpError } = await supabase.auth.verifyOtp({
-      email,
-      type: "email",
-      token: code,
-    });
+  // ------- [SECURE ACCOUNT LOCKOUT LOGIC] -------
+  const LOCKOUT_THRESHOLD = 5; // allowed attempts before lockout
+  const LOCKOUT_MINUTES = 15; // minutes account is locked out
 
-    if (otpError) {
-      setError("Invalid or expired code. Please try again.");
-      setLoading(false);
-      return false;
+  // Helper: fetch login attempts for the user by email
+  const fetchLoginAttempts = async (email: string) => {
+    // Get user_id by email from auth.users
+    const { data: userResponse, error: userError } = await supabase.auth.admin.getUserByEmail(email);
+
+    if (userError || !userResponse.user) {
+      return null;
     }
 
-    toast({
-      title: "Welcome back!",
-      description: "Two-factor authentication successful.",
-    });
+    const user_id = userResponse.user.id;
 
-    setShowOtp(false);
-    setLoading(false);
+    // Fetch from login_attempts
+    const { data, error } = await supabase
+      .from("login_attempts")
+      .select("*")
+      .eq("user_id", user_id)
+      .single();
 
-    // continue login flow, call onSuccess, clear session
-    setPendingOtpSession(null);
-    onSuccess?.();
-
-    return true;
+    if (error) return null;
+    return { ...data, user_id };
   };
 
-  const handleCancelOtp = () => {
-    setShowOtp(false);
-    setPendingOtpSession(null);
-    setLoading(false);
+  // Helper: update or insert login_attempts for user
+  const setLoginAttempts = async ({
+    user_id,
+    failed_attempts,
+    lockout_until,
+  }: {
+    user_id: string;
+    failed_attempts: number;
+    lockout_until: string | null;
+  }) => {
+    // Upsert login_attempts record
+    await supabase
+      .from("login_attempts")
+      .upsert([
+        {
+          user_id,
+          failed_attempts,
+          lockout_until,
+          last_attempt_at: new Date().toISOString(),
+        },
+      ]);
   };
 
+  // Handler for form submit (login)
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setError(null);
 
-    // Validate password for sign up
-    if (isSignUp && !isPasswordAcceptable(password)) {
-      setError("Password is too weak. Please use at least 8 characters with a mix of letters, numbers, and symbols.");
-      setLoading(false);
-      return;
-    }
-
     try {
+      // Account lockout protection (only on Sign In, not on Sign Up)
+      if (!isSignUp) {
+        // Step 1: Fetch login attempts
+        const loginAttempt = await fetchLoginAttempts(email);
+
+        if (loginAttempt && loginAttempt.lockout_until && new Date(loginAttempt.lockout_until) > new Date()) {
+          setError(
+            `Account locked due to multiple failed logins. Try again at ${new Date(
+              loginAttempt.lockout_until
+            ).toLocaleTimeString()}.`
+          );
+          setLoading(false);
+          return;
+        }
+      }
+
+      if (isSignUp && !isPasswordAcceptable(password)) {
+        setError("Password is too weak. Please use at least 8 characters with a mix of letters, numbers, and symbols.");
+        setLoading(false);
+        return;
+      }
+
       if (isSignUp) {
         const { error: signUpError } = await supabase.auth.signUp({
           email,
@@ -112,7 +139,49 @@ export const AuthForms = ({ onSuccess, onError }: AuthFormsProps) => {
 
         console.log("Sign in response:", { error: signInError, data });
 
-        if (signInError) throw signInError;
+        // Get user_id for login_attempts update
+        const loginAttempt = await fetchLoginAttempts(email);
+        const user_id = loginAttempt?.user_id;
+
+        if (signInError) {
+          // Increment failed attempts and lock out if exceeded
+          if (user_id) {
+            let failed_attempts = (loginAttempt?.failed_attempts || 0) + 1;
+            let lockout_until: string | null = null;
+
+            if (failed_attempts >= LOCKOUT_THRESHOLD) {
+              lockout_until = new Date(Date.now() + LOCKOUT_MINUTES * 60 * 1000).toISOString();
+              setError(
+                `Account locked after ${LOCKOUT_THRESHOLD} failed attempts. Try again at ${new Date(
+                  lockout_until
+                ).toLocaleTimeString()}.`
+              );
+            } else {
+              setError("Invalid email or password. Please try again.");
+            }
+
+            await setLoginAttempts({
+              user_id,
+              failed_attempts,
+              lockout_until,
+            });
+          } else {
+            // fallback: generic error if user_id not found
+            setError("Invalid email or password. Please try again.");
+          }
+
+          setLoading(false);
+          return;
+        }
+
+        // Successful login: reset attempts
+        if (user_id) {
+          await setLoginAttempts({
+            user_id,
+            failed_attempts: 0,
+            lockout_until: null,
+          });
+        }
 
         // Check for 2FA
         // Check for user_metadata.twofactor_enabled - if present, require OTP
