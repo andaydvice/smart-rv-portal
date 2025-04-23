@@ -43,10 +43,13 @@ export const AuthForms = ({ onSuccess, onError }: AuthFormsProps) => {
 
   // Helper: fetch login attempts for the user by email
   const fetchLoginAttempts = async (email: string) => {
+    // We're using a generated UUID based on the email as a consistent key
+    const user_id = btoa(email).slice(0, 22);
+    
     const { data, error } = await supabase
       .from("login_attempts")
       .select("*")
-      .eq("email", email)
+      .eq("user_id", user_id)
       .single();
 
     if (error) return null;
@@ -63,12 +66,15 @@ export const AuthForms = ({ onSuccess, onError }: AuthFormsProps) => {
     failed_attempts: number;
     lockout_until: string | null;
   }) => {
+    // Generate a consistent user_id from email
+    const user_id = btoa(email).slice(0, 22);
+    
     // Upsert login_attempts record
     await supabase
       .from("login_attempts")
       .upsert([
         {
-          email,
+          user_id,
           failed_attempts,
           lockout_until,
           last_attempt_at: new Date().toISOString(),
