@@ -30,6 +30,44 @@ export const prefetchResources = (urls: string[]): void => {
 };
 
 /**
+ * Generates a tiny SVG placeholder for an image
+ * @param width Image width
+ * @param height Image height
+ * @param color Background color (hex without #)
+ * @returns Base64 encoded SVG
+ */
+export const generateImagePlaceholder = (
+  width = 100, 
+  height = 100, 
+  color = '131a2a'
+): string => {
+  return `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 ${width} ${height}'%3E%3Crect width='${width}' height='${height}' fill='%23${color}'/%3E%3C/svg%3E`;
+};
+
+/**
+ * Preloads critical images
+ * @param images Array of image URLs to preload
+ */
+export const preloadCriticalImages = (images: string[]): void => {
+  images.forEach(src => {
+    const link = document.createElement('link');
+    link.rel = 'preload';
+    link.as = 'image';
+    link.href = src;
+    document.head.appendChild(link);
+  });
+};
+
+/**
+ * Determines appropriate image sizes attribute for responsive images
+ * @param defaultWidth Default width of the image in pixels
+ * @returns Sizes attribute string
+ */
+export const getResponsiveSizes = (defaultWidth = 800): string => {
+  return `(max-width: 640px) 100vw, (max-width: 768px) 75vw, (max-width: 1024px) 60vw, ${defaultWidth}px`;
+};
+
+/**
  * Lazy loads all images in the viewport
  */
 export const setupLazyLoading = (): void => {
