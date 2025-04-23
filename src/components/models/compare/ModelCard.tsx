@@ -1,8 +1,6 @@
 
 import React from "react";
 import { Link } from "react-router-dom";
-import { LazyImage } from "@/components/ui/LazyImage";
-import { generateImagePlaceholder } from "@/utils/performance";
 
 interface ModelCardProps {
   name: string;
@@ -12,19 +10,10 @@ interface ModelCardProps {
 }
 
 const ModelCard = ({ name, image, price, description }: ModelCardProps) => {
-  const placeholderSvg = generateImagePlaceholder(400, 250, '131a2a');
-  
   return (
     <div className="bg-[#131a2a] rounded-xl overflow-hidden border border-gray-800 hover:border-[#5B9BD5] transition-all duration-300 text-left">
       <div className="h-48 relative">
-        <LazyImage 
-          src={image} 
-          alt={name} 
-          className="w-full h-full object-cover"
-          blurDataURL={placeholderSvg}
-          sizes="(max-width: 768px) 100vw, 33vw"
-          fetchPriority="auto"
-        />
+        <img src={image} alt={name} className="w-full h-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-t from-[#131a2a] to-transparent"></div>
       </div>
       <div className="p-6">

@@ -3,7 +3,6 @@ import React from 'react';
 import { motion } from "framer-motion";
 import { LucideIcon } from "lucide-react";
 import { LazyImage } from "@/components/ui/LazyImage";
-import { generateImagePlaceholder } from "@/utils/performance";
 
 interface RVTypeProps {
   title: string;
@@ -30,8 +29,9 @@ const RVTypeCard: React.FC<RVTypeProps> = ({
   index
 }) => {
   const isEven = index % 2 === 0;
-  const placeholderSvg = generateImagePlaceholder(800, 500, '1a1f2b');
-  const isPriority = index < 2; // First two cards load with priority
+
+  // Small SVG placeholder for when image is loading
+  const placeholderSvg = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3Crect width='1' height='1' fill='%231a1f2b'/%3E%3C/svg%3E";
 
   return (
     <motion.div 
@@ -79,12 +79,6 @@ const RVTypeCard: React.FC<RVTypeProps> = ({
               className="w-full h-full object-cover"
               blurDataURL={placeholderSvg}
               sizes="(max-width: 768px) 100vw, 50vw"
-              loading={isPriority ? "eager" : "lazy"}
-              fetchPriority={isPriority ? "high" : "auto"}
-              onError={(e) => {
-                console.error(`Failed to load image: ${image}`);
-                e.currentTarget.style.display = 'none';
-              }}
             />
           </div>
         )}

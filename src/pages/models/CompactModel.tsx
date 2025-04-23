@@ -4,7 +4,6 @@ import { useEffect, lazy, Suspense } from "react";
 import Navbar from "@/components/Navbar";
 import Layout from "@/components/layout/Layout";
 import { rvTypes } from "@/data/rvTypes";
-import { preloadCriticalImages, deferOperation } from "@/utils/performance";
 
 // Lazy load components that are not immediately visible
 const HeroSection = lazy(() => import("@/components/models/compact/HeroSection"));
@@ -21,30 +20,21 @@ const LoadingPlaceholder = () => (
 
 const CompactModel = () => {
   useEffect(() => {
+    console.log("[CompactModel] Component mounted");
     window.scrollTo(0, 0);
     
-    // Immediately preload the hero image
-    preloadCriticalImages(["/lovable-uploads/598a2cb5-ffcb-440a-9943-6c4440749b9f.png"]);
+    // Preload images for better user experience
+    const preloadImages = () => {
+      rvTypes.forEach(type => {
+        if (type.image) {
+          const img = new Image();
+          img.src = type.image;
+        }
+      });
+    };
     
-    // Preload critical RV images (first 2)
-    const criticalImages = rvTypes
-      .slice(0, 2)
-      .map(type => type.image)
-      .filter(Boolean) as string[];
-    
-    preloadCriticalImages(criticalImages);
-    
-    // Defer non-critical images
-    deferOperation(() => {
-      const nonCriticalImages = rvTypes
-        .slice(2)
-        .map(type => type.image)
-        .filter(Boolean) as string[];
-      
-      if (nonCriticalImages.length > 0) {
-        preloadCriticalImages(nonCriticalImages);
-      }
-    }, 2000);
+    // Defer non-critical operations
+    setTimeout(preloadImages, 1000);
   }, []);
 
   return (

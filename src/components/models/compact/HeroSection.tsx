@@ -4,15 +4,13 @@ import { ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
 import { LazyImage } from "@/components/ui/LazyImage";
 import { useEffect, useState } from "react";
-import { preloadCriticalImages } from "@/utils/performance";
 
 const HeroSection = () => {
   const [isClient, setIsClient] = useState(false);
   
+  // Set client-side flag for hydration
   useEffect(() => {
     setIsClient(true);
-    // Preload the next images that will be needed
-    preloadCriticalImages(["/lovable-uploads/ad2ac002-7ec7-479f-b437-6bdaced7fc5e.png"]);
   }, []);
 
   const imageUrl = "/lovable-uploads/598a2cb5-ffcb-440a-9943-6c4440749b9f.png";
@@ -25,9 +23,8 @@ const HeroSection = () => {
         className="w-full h-full object-cover"
         style={{ backgroundColor: '#111827' }}
         sizes="100vw"
+        // Use a background color as a tiny placeholder until image loads
         blurDataURL="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3Crect width='1' height='1' fill='%23111827'/%3E%3C/svg%3E"
-        fetchPriority="high"
-        loading="eager"
       />
       <div className="absolute inset-0 bg-black/40" />
       <div className="absolute inset-0 flex flex-col justify-center items-center px-4">

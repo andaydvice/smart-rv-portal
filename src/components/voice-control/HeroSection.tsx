@@ -1,25 +1,13 @@
-
 import { Mic } from "lucide-react";
-import { LazyImage } from "@/components/ui/LazyImage";
-import { useEffect } from "react";
-import { preloadCriticalImages } from "@/utils/performance";
 
 export const HeroSection = () => {
-  useEffect(() => {
-    // Preload this critical image
-    preloadCriticalImages(["/lovable-uploads/ff43ed8a-b7cd-42f7-a45e-a3a706d39d07.png"]);
-  }, []);
-
   return (
     <section className="h-screen w-full relative overflow-hidden">
       <div className="absolute top-0 left-0 w-full h-full">
-        <LazyImage 
+        <img 
           src="/lovable-uploads/ff43ed8a-b7cd-42f7-a45e-a3a706d39d07.png"
           alt="Futuristic RV interior with smart display and mountain view"
           className="w-full h-full object-cover"
-          fetchPriority="high"
-          loading="eager"
-          blurDataURL="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1920 1080'%3E%3Crect width='1920' height='1080' fill='%23000000'/%3E%3C/svg%3E"
         />
         <div className="absolute inset-0 bg-black/50" />
       </div>

@@ -1,7 +1,6 @@
 
-import React, { useEffect } from 'react';
+import React from 'react';
 import { LazyImage } from '@/components/ui/LazyImage';
-import { generateImagePlaceholder, preloadCriticalImages } from '@/utils/performance';
 
 interface OptimizedImageProps {
   src: string;
@@ -9,7 +8,6 @@ interface OptimizedImageProps {
   className?: string;
   width?: number;
   height?: number;
-  priority?: boolean;
 }
 
 export const OptimizedImage = ({ 
@@ -17,31 +15,16 @@ export const OptimizedImage = ({
   alt, 
   className = '',
   width,
-  height,
-  priority = false
+  height
 }: OptimizedImageProps) => {
-  // Preload critical images immediately when priority is true
-  useEffect(() => {
-    if (priority && src) {
-      preloadCriticalImages([src]);
-    }
-  }, [priority, src]);
-
   // Generate a tiny SVG placeholder based on the image dimensions
   const aspectRatio = width && height ? (height / width) : 0.5625; // Default to 16:9
-  const placeholderSvg = generateImagePlaceholder(
-    width || 100,
-    height || Math.round((width || 100) * aspectRatio),
-    '131a2a'
-  );
+  const placeholderSvg = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 ${width || 100} ${height || Math.round((width || 100) * aspectRatio)}'%3E%3Crect width='${width || 100}' height='${height || Math.round((width || 100) * aspectRatio)}' fill='%23131a2a'/%3E%3C/svg%3E`;
 
   // Create responsive image sizes
   const sizes = width 
     ? `(max-width: 640px) 100vw, (max-width: 768px) 75vw, ${width}px` 
     : '(max-width: 640px) 100vw, (max-width: 768px) 75vw, 50vw';
-
-  // Determine if this is a priority image (explicitly set or width > 0)
-  const isPriority = priority || (Boolean(width) && width > 0);
 
   return (
     <LazyImage
@@ -52,8 +35,6 @@ export const OptimizedImage = ({
       sizes={sizes}
       width={width}
       height={height}
-      loading={isPriority ? "eager" : "lazy"}
-      fetchPriority={isPriority ? "high" : "auto"}
     />
   );
 };
