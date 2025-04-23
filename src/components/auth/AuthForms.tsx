@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
@@ -13,6 +12,9 @@ import {
   isPasswordAcceptable 
 } from '@/utils/passwordUtils';
 import OtpPrompt from './OtpPrompt';
+import AuthTabs from "./AuthTabs";
+import AuthErrorAlert from "./AuthErrorAlert";
+import { useLoginAttempt } from "./useLoginAttempt";
 
 interface AuthFormsProps {
   onSuccess?: () => void;
@@ -30,57 +32,14 @@ export const AuthForms = ({ onSuccess, onError }: AuthFormsProps) => {
   const [pendingOtpSession, setPendingOtpSession] = useState<any>(null);
   const { toast } = useToast();
 
+  const { fetchLoginAttempts, setLoginAttempts, LOCKOUT_THRESHOLD, LOCKOUT_MINUTES } = useLoginAttempt();
+
   // Update password strength whenever password changes
   useEffect(() => {
     if (isSignUp) {
       setPasswordStrength(checkPasswordStrength(password));
     }
   }, [password, isSignUp]);
-
-  // ------- [SECURE ACCOUNT LOCKOUT LOGIC] -------
-  const LOCKOUT_THRESHOLD = 5; // allowed attempts before lockout
-  const LOCKOUT_MINUTES = 15; // minutes account is locked out
-
-  // Helper: fetch login attempts for the user by email
-  const fetchLoginAttempts = async (email: string) => {
-    // We're using a generated UUID based on the email as a consistent key
-    const user_id = btoa(email).slice(0, 22);
-    
-    const { data, error } = await supabase
-      .from("login_attempts")
-      .select("*")
-      .eq("user_id", user_id)
-      .single();
-
-    if (error) return null;
-    return data;
-  };
-
-  // Helper: update or insert login_attempts for user
-  const setLoginAttempts = async ({
-    email,
-    failed_attempts,
-    lockout_until,
-  }: {
-    email: string;
-    failed_attempts: number;
-    lockout_until: string | null;
-  }) => {
-    // Generate a consistent user_id from email
-    const user_id = btoa(email).slice(0, 22);
-    
-    // Upsert login_attempts record
-    await supabase
-      .from("login_attempts")
-      .upsert([
-        {
-          user_id,
-          failed_attempts,
-          lockout_until,
-          last_attempt_at: new Date().toISOString(),
-        },
-      ]);
-  };
 
   // Handle OTP verification (2FA)
   const handleOtpVerify = async (code: string): Promise<boolean> => {
@@ -121,7 +80,6 @@ export const AuthForms = ({ onSuccess, onError }: AuthFormsProps) => {
     setError("Two-factor authentication was canceled");
   };
 
-  // Handler for form submit (login)
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
@@ -167,13 +125,10 @@ export const AuthForms = ({ onSuccess, onError }: AuthFormsProps) => {
         });
       } else {
         // Attempt sign in
-        console.log("Attempting to sign in with:", { email });
         const { error: signInError, data } = await supabase.auth.signInWithPassword({
           email,
           password,
         });
-
-        console.log("Sign in response:", { error: signInError, data });
 
         if (signInError) {
           // Increment failed attempts and lock out if exceeded
@@ -279,25 +234,7 @@ export const AuthForms = ({ onSuccess, onError }: AuthFormsProps) => {
   return (
     <div className="space-y-6">
       <div className="space-y-4">
-        <div className="flex items-center space-x-4 mb-2">
-          <Button
-            type="button"
-            variant="default"
-            onClick={() => setIsSignUp(false)}
-            className={`flex-1 font-medium ${!isSignUp ? "opacity-100" : "opacity-80"}`}
-          >
-            Sign In
-          </Button>
-          <Button
-            type="button"
-            variant="default"
-            onClick={() => setIsSignUp(true)}
-            className={`flex-1 font-medium ${isSignUp ? "opacity-100" : "opacity-80"}`}
-          >
-            Sign Up
-          </Button>
-        </div>
-        
+        <AuthTabs isSignUp={isSignUp} setIsSignUp={setIsSignUp} />
         <h2 className="text-2xl font-bold text-white text-left">
           {isSignUp ? "Create Your Account" : "Welcome Back"}
         </h2>
@@ -308,12 +245,7 @@ export const AuthForms = ({ onSuccess, onError }: AuthFormsProps) => {
         </p>
       </div>
 
-      {error && (
-        <div className="bg-red-900/30 border border-red-500/50 p-3 rounded-md flex items-start gap-2 mb-2">
-          <AlertCircle className="h-5 w-5 text-red-500 mt-0.5 flex-shrink-0" />
-          <p className="text-sm text-white">{error}</p>
-        </div>
-      )}
+      <AuthErrorAlert error={error} />
 
       <form onSubmit={handleSubmit} className="space-y-4">
         <div className="space-y-2">
