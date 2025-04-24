@@ -5,6 +5,7 @@ import MobileMenu from "./MobileMenu";
 import DesktopNavigation from "./DesktopNavigation";
 import { Logo } from "../Logo";
 import { Link } from "react-router-dom";
+import { SearchBar } from "../search";
 
 const ResponsiveNavbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -50,14 +51,19 @@ const ResponsiveNavbar = () => {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-4">
+          <div className="hidden md:flex items-center space-x-4">
             <DesktopNavigation />
-          </nav>
+          </div>
+
+          {/* Search Bar - Both Mobile and Desktop */}
+          <div className="flex items-center ml-auto md:ml-4">
+            <SearchBar />
+          </div>
           
           {/* Mobile menu button */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden inline-flex items-center justify-center p-2 rounded-md text-gray-300 hover:text-[#5B9BD5] focus:outline-none"
+            className="md:hidden inline-flex items-center justify-center p-2 ml-2 rounded-md text-gray-300 hover:text-[#5B9BD5] focus:outline-none"
             aria-expanded={isMenuOpen}
             aria-label="Toggle menu"
           >

@@ -1,7 +1,7 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Search, X, ChevronDown, ChevronUp, Info } from 'lucide-react';
+import { Search, X } from 'lucide-react';
 import { 
   Command,
   CommandEmpty,
@@ -23,6 +23,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { scrollToTop } from "@/utils/scrollToTop";
 import { useSearchHistory } from './useSearchHistory';
 import { useDebounce } from './useDebounce';
@@ -320,7 +321,7 @@ const SearchBar: React.FC = () => {
   };
   
   return (
-    <div className="relative" ref={searchRef}>
+    <div className="relative z-[60]" ref={searchRef}>
       {isMobileView ? (
         <>
           <Button 
@@ -358,7 +359,7 @@ const SearchBar: React.FC = () => {
                 <Search 
                   className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400 pointer-events-none" 
                 />
-                <input 
+                <Input 
                   type="text"
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
@@ -376,6 +377,7 @@ const SearchBar: React.FC = () => {
                   <button 
                     className="absolute right-10 top-1/2 transform -translate-y-1/2"
                     onClick={() => setQuery('')}
+                    type="button"
                   >
                     <X className="h-4 w-4 text-gray-400" />
                   </button>
@@ -384,7 +386,7 @@ const SearchBar: React.FC = () => {
                   <SelectTrigger className="w-[15px] h-9 border-none bg-transparent absolute right-2 top-0 focus:ring-0 focus:ring-offset-0 pointer-events-auto">
                     <SelectValue />
                   </SelectTrigger>
-                  <SelectContent className="bg-gray-900/95 backdrop-blur-sm text-white border-gray-700">
+                  <SelectContent className="bg-gray-900/95 backdrop-blur-sm text-white border-gray-700 z-[999]">
                     {CATEGORIES.map((cat) => (
                       <SelectItem key={cat.value} value={cat.value} className="focus:bg-gray-800 focus:text-white">
                         {cat.label}
@@ -395,7 +397,7 @@ const SearchBar: React.FC = () => {
               </div>
             </PopoverTrigger>
             <PopoverContent 
-              className="w-80 p-0 bg-gray-900/95 backdrop-blur-sm border border-gray-700 text-white shadow-lg"
+              className="w-80 p-0 bg-gray-900/95 backdrop-blur-sm border border-gray-700 text-white shadow-lg z-[999]"
               align="start"
             >
               <SearchResults 
@@ -506,7 +508,7 @@ const MobileSearchPanel: React.FC<MobileSearchPanelProps> = ({
   inputRef,
 }) => {
   return (
-    <div className="bg-gray-900/95 backdrop-blur-sm border border-gray-700 rounded-md shadow-lg overflow-hidden">
+    <div className="bg-gray-900/95 backdrop-blur-sm border border-gray-700 rounded-md shadow-lg overflow-hidden z-[999]">
       <div className="p-2 flex items-center border-b border-gray-700">
         <form onSubmit={onSubmit} className="flex-1 flex items-center">
           <Search className="h-4 w-4 text-gray-400 ml-1 mr-2" />
@@ -520,7 +522,7 @@ const MobileSearchPanel: React.FC<MobileSearchPanelProps> = ({
             ref={inputRef}
           />
         </form>
-        <button onClick={onClose} className="p-1 ml-2">
+        <button onClick={onClose} className="p-1 ml-2" type="button">
           <X className="h-5 w-5 text-gray-400" />
         </button>
       </div>
@@ -529,7 +531,7 @@ const MobileSearchPanel: React.FC<MobileSearchPanelProps> = ({
           <SelectTrigger className="w-full h-8 border border-gray-700 bg-gray-800">
             <SelectValue />
           </SelectTrigger>
-          <SelectContent className="bg-gray-900 text-white border-gray-700">
+          <SelectContent className="bg-gray-900 text-white border-gray-700 z-[999]">
             {CATEGORIES.map((cat) => (
               <SelectItem key={cat.value} value={cat.value} className="focus:bg-gray-800 focus:text-white">
                 {cat.label}
