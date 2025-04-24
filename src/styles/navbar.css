@@ -200,3 +200,25 @@ input[type="text"].search-field {
   background-color: #131a2a;
   border: 1px solid #1E2A3E;
 }
+
+/* Fix search input interaction issues */
+.search-bar-input {
+  pointer-events: all !important;
+  cursor: text !important;
+}
+
+/* Make sure popups stay on top */
+.search-results-popup {
+  z-index: 9999 !important;
+}
+
+/* Make sure search input text is visible */
+input.search-bar-input {
+  color: white !important;
+  caret-color: white !important;
+}
+
+/* Fix search icon positioning */
+.search-icon {
+  pointer-events: none !important;
+}

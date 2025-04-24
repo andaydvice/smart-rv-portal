@@ -5,6 +5,7 @@ import { RouteObject } from "react-router-dom";
 // Import root page
 import Index from "../pages/Index";
 import ErrorPage from "../pages/ErrorPage";
+import SearchResults from "../pages/SearchResults";
 
 // Import route groups
 import featureRoutes from "./featureRoutes";
@@ -17,6 +18,11 @@ export const routes: RouteObject[] = [
   {
     path: "/",
     element: <Index />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/search",
+    element: <SearchResults />,
     errorElement: <ErrorPage />,
   },
   ...modelRoutes,

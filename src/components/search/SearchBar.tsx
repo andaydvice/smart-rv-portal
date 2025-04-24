@@ -49,6 +49,22 @@ const CATEGORIES = [
 
 // Enhanced keyword mapping for better search prediction
 const KEYWORD_MAPPING: Record<string, string> = {
+  // Models related keywords (expanded)
+  'model': '/models',
+  'models': '/models',
+  'rv model': '/models',
+  'rv models': '/models',
+  'luxury': '/models/luxury',
+  'adventure': '/models/adventure',
+  'compact': '/models/compact',
+  'luxury model': '/models/luxury',
+  'luxury class': '/models/luxury',
+  'adventure model': '/models/adventure',
+  'adventure class': '/models/adventure',
+  'compact model': '/models/compact',
+  'compare': '/models/compare',
+  'compare models': '/models/compare',
+  
   // Tools related keywords
   'tools': '/calculators',
   'tool': '/calculators',
@@ -105,22 +121,17 @@ const KEYWORD_MAPPING: Record<string, string> = {
   'command': '/voice-control',
   'voice control': '/voice-control',
   
-  // Models
-  'model': '/models',
-  'models': '/models',
-  'rv model': '/models',
-  'rv type': '/models',
-  'type': '/models',
-  
   // Blog 
   'blog': '/blog',
   'post': '/blog',
   'article': '/blog'
 };
 
-// Mock search service with enhanced keyword matching
+// Mock search service with enhanced keyword matching and better results
 const mockSearch = (query: string, category: SearchCategory): SearchResult[] => {
-  if (!query) return [];
+  if (!query.trim()) return [];
+  
+  const lowercaseQuery = query.toLowerCase().trim();
   
   // Mock results based on the search query
   const allResults: SearchResult[] = [
@@ -179,6 +190,42 @@ const mockSearch = (query: string, category: SearchCategory): SearchResult[] => 
       description: 'Solutions for the most frequent RV system issues',
       category: 'maintenance',
       url: '/troubleshooting',
+    },
+    // Added models specific results
+    {
+      id: '9',
+      title: 'All RV Models',
+      description: 'Browse our complete lineup of smart RV models',
+      category: 'features',
+      url: '/models',
+    },
+    {
+      id: '10',
+      title: 'Luxury Class RVs',
+      description: 'Our premium luxury class smart RV lineup',
+      category: 'features',
+      url: '/models/luxury',
+    },
+    {
+      id: '11',
+      title: 'Adventure Class RVs',
+      description: 'Explore our off-road capable adventure RVs',
+      category: 'features',
+      url: '/models/adventure',
+    },
+    {
+      id: '12',
+      title: 'Compact Smart RVs',
+      description: 'Efficient and easy to maneuver compact RVs',
+      category: 'features',
+      url: '/models/compact',
+    },
+    {
+      id: '13',
+      title: 'Compare RV Models',
+      description: 'Compare features and specs across our RV lineup',
+      category: 'features',
+      url: '/models/compare',
     }
   ];
   
@@ -187,11 +234,15 @@ const mockSearch = (query: string, category: SearchCategory): SearchResult[] => 
     ? allResults 
     : allResults.filter(result => result.category === category);
   
-  // Filter by query text with enhanced relevance
+  // More flexible searching - match against partial words and phrases
   return filteredByCategory.filter(result => 
-    result.title.toLowerCase().includes(query.toLowerCase()) || 
-    result.description.toLowerCase().includes(query.toLowerCase())
-  ).slice(0, 5); // Limit to 5 results
+    result.title.toLowerCase().includes(lowercaseQuery) || 
+    result.description.toLowerCase().includes(lowercaseQuery) ||
+    lowercaseQuery.split(' ').some(word => 
+      result.title.toLowerCase().includes(word) || 
+      result.description.toLowerCase().includes(word)
+    )
+  ).slice(0, 6); // Limit to 6 results
 };
 
 const SearchBar: React.FC = () => {
@@ -256,6 +307,14 @@ const SearchBar: React.FC = () => {
     for (const [keyword, url] of Object.entries(KEYWORD_MAPPING)) {
       if (lowercaseSearchTerm.includes(keyword)) {
         return url;
+      }
+    }
+    
+    // Search for individual words in multi-word queries
+    const words = lowercaseSearchTerm.split(/\s+/);
+    for (const word of words) {
+      if (word.length > 2 && KEYWORD_MAPPING[word]) { // Only match words longer than 2 chars
+        return KEYWORD_MAPPING[word];
       }
     }
     
@@ -370,7 +429,7 @@ const SearchBar: React.FC = () => {
               onClick={() => setIsOpen(true)}
               onFocus={() => setIsOpen(true)}
               placeholder="Search RV resources..." 
-              className="h-9 w-60 rounded-md border border-gray-700 bg-[#131a2a] text-sm px-9 py-2 text-white placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-[#5B9BD5]"
+              className="h-9 w-60 rounded-md border border-gray-700 bg-[#131a2a] text-sm px-9 py-2 text-white placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-[#5B9BD5] z-50"
               onKeyDown={(e) => {
                 if (e.key === 'Enter') {
                   handleSearchSubmit();
@@ -380,7 +439,7 @@ const SearchBar: React.FC = () => {
             />
             {query && (
               <button 
-                className="absolute right-10 top-1/2 transform -translate-y-1/2"
+                className="absolute right-10 top-1/2 transform -translate-y-1/2 z-50"
                 onClick={() => setQuery('')}
                 type="button"
               >
@@ -432,6 +491,29 @@ const SearchResults: React.FC<SearchResultsProps> = ({
   onResultClick,
   searchHistory,
 }) => {
+  // Helper function to highlight matching text
+  const highlightMatch = (text: string, query: string) => {
+    if (!query) return text;
+    
+    const lowerText = text.toLowerCase();
+    const lowerQuery = query.toLowerCase();
+    
+    if (!lowerText.includes(lowerQuery)) return text;
+    
+    const index = lowerText.indexOf(lowerQuery);
+    const before = text.substring(0, index);
+    const match = text.substring(index, index + query.length);
+    const after = text.substring(index + query.length);
+    
+    return (
+      <>
+        {before}
+        <span className="bg-[#1E2A3E] text-[#5B9BD5]">{match}</span>
+        {after}
+      </>
+    );
+  };
+
   if (!query) {
     return (
       <div className="py-2">
@@ -442,7 +524,7 @@ const SearchResults: React.FC<SearchResultsProps> = ({
               <div 
                 key={index}
                 className="px-3 py-1.5 hover:bg-gray-800 cursor-pointer text-sm flex items-center"
-                onClick={() => onResultClick(`/search?search=${encodeURIComponent(term)}`)}
+                onClick={() => onResultClick(`/search?query=${encodeURIComponent(term)}`)}
               >
                 <Search className="h-3 w-3 mr-2 text-gray-400" />
                 {term}
@@ -462,6 +544,7 @@ const SearchResults: React.FC<SearchResultsProps> = ({
     return (
       <div className="py-6 text-center">
         <div className="text-sm text-gray-400">No results found</div>
+        <div className="text-xs text-gray-500 mt-1">Try different keywords or categories</div>
       </div>
     );
   }
@@ -474,8 +557,8 @@ const SearchResults: React.FC<SearchResultsProps> = ({
           className="px-3 py-2 border-b border-gray-800 last:border-0 hover:bg-gray-800 cursor-pointer"
           onClick={() => onResultClick(result.url)}
         >
-          <div className="text-sm font-medium">{result.title}</div>
-          <div className="text-xs text-gray-400 mt-0.5">{result.description}</div>
+          <div className="text-sm font-medium">{highlightMatch(result.title, query)}</div>
+          <div className="text-xs text-gray-400 mt-0.5">{highlightMatch(result.description, query)}</div>
           <div className="mt-1 flex items-center">
             <span className="text-xs uppercase bg-[#1E2A3E] px-1.5 py-0.5 rounded text-[#5B9BD5]">
               {result.category}
