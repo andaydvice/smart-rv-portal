@@ -165,107 +165,111 @@ const KEYWORD_MAPPING: Record<string, string> = {
   'news': '/blog'
 };
 
-// Mock search service with enhanced keyword matching and better results
-const mockSearch = (query: string, category: SearchCategory): SearchResult[] => {
-  if (!query.trim()) return [];
-  
-  const lowercaseQuery = query.toLowerCase().trim();
-  
-  // Mock results based on the search query
-  const allResults: SearchResult[] = [
+// Search results data - using a function to generate unique IDs
+const getSearchResults = (): SearchResult[] => {
+  return [
     {
-      id: 'security-feature-1',
+      id: `features-security-${Date.now()}-1`,
       title: 'Smart RV Security Systems',
       description: 'Learn about the latest in RV security technology',
       category: 'features',
       url: '/features/security-system',
     },
     {
-      id: 'power-feature-1',
+      id: `features-power-${Date.now()}-2`,
       title: 'Power Management Solutions',
       description: 'Optimize your RV power consumption and battery life',
       category: 'features',
       url: '/features/power-management',
     },
     {
-      id: 'winter-maintenance-1',
+      id: `maintenance-winter-${Date.now()}-3`,
       title: 'Winterization Checklist',
       description: 'Complete guide to preparing your RV for winter storage',
       category: 'maintenance',
       url: '/storage-preparation-checklist',
     },
     {
-      id: 'storage-facility-1',
+      id: `storage-facility-${Date.now()}-4`,
       title: 'Storage Facilities Finder',
       description: 'Find the best RV storage options near you',
       category: 'storage',
       url: '/storage-facilities',
     },
     {
-      id: 'weather-impact-1',
+      id: `weather-impact-${Date.now()}-5`,
       title: 'Weather Impact Calculator',
       description: 'Calculate how weather conditions affect your RV trip',
       category: 'weather',
       url: '/rv-weather',
     },
     {
-      id: 'calc-tools-1',
+      id: `calculators-tools-${Date.now()}-6`,
       title: 'RV Calculators & Tools',
       description: 'Essential tools for planning and managing your RV',
       category: 'calculators',
       url: '/calculators',
     },
     {
-      id: 'voice-control-1',
+      id: `features-voice-${Date.now()}-7`,
       title: 'Voice Control Systems',
       description: 'Guide to setting up and using voice commands in your RV',
       category: 'features',
       url: '/voice-control',
     },
     {
-      id: 'trouble-maintenance-1',
+      id: `maintenance-trouble-${Date.now()}-8`,
       title: 'Troubleshooting Common RV Problems',
       description: 'Solutions for the most frequent RV system issues',
       category: 'maintenance',
       url: '/troubleshooting',
     },
-    // Models specific results with guaranteed unique IDs
     {
-      id: 'model-all-1',
+      id: `features-model-all-${Date.now()}-9`,
       title: 'All RV Models',
       description: 'Browse our complete lineup of smart RV models',
       category: 'features',
       url: '/models',
     },
     {
-      id: 'model-luxury-1',
+      id: `features-luxury-${Date.now()}-10`,
       title: 'Luxury Class RVs',
       description: 'Our premium luxury class smart RV lineup',
       category: 'features',
       url: '/models/luxury',
     },
     {
-      id: 'model-adventure-1',
+      id: `features-adventure-${Date.now()}-11`,
       title: 'Adventure Class RVs',
       description: 'Explore our off-road capable adventure RVs',
       category: 'features',
       url: '/models/adventure',
     },
     {
-      id: 'model-compact-1',
+      id: `features-compact-${Date.now()}-12`,
       title: 'Compact Smart RVs',
       description: 'Efficient and easy to maneuver compact RVs',
       category: 'features',
       url: '/models/compact',
     },
     {
-      id: 'model-compare-1',
+      id: `features-compare-${Date.now()}-13`,
       title: 'Compare RV Models',
       description: 'Compare features and specs across our RV lineup',
       category: 'features',
       url: '/models/compare',
     }
   ];
+};
+
+// Mock search service with enhanced keyword matching and better results
+const mockSearch = (query: string, category: SearchCategory): SearchResult[] => {
+  if (!query.trim()) return [];
+  
+  const lowercaseQuery = query.toLowerCase().trim();
+  
+  // Get search results with dynamically generated IDs
+  const allResults = getSearchResults();
   
   // Filter by category if not 'all'
   const filteredByCategory = category === 'all' 
