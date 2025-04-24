@@ -10,6 +10,7 @@ import Documentation from "../pages/Documentation";
 import ScheduleDemo from "../pages/ScheduleDemo";
 import RVWeather from "../pages/RVWeather";
 import SearchResults from "../pages/SearchResults";
+import StoragePreparationChecklist from "../pages/StoragePreparationChecklist";
 
 const contentRoutes: RouteObject[] = [
   {
@@ -35,6 +36,10 @@ const contentRoutes: RouteObject[] = [
   {
     path: "/search",
     element: <SearchResults />,
+  },
+  {
+    path: "/storage-preparation-checklist",
+    element: <StoragePreparationChecklist />,
   },
 ];
 

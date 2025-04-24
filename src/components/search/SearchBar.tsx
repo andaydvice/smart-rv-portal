@@ -1,4 +1,3 @@
-
 import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Search, X, ChevronDown, ChevronUp, Info } from 'lucide-react';
@@ -46,7 +45,79 @@ const CATEGORIES = [
   { value: 'calculators', label: 'Calculators & Tools' },
 ];
 
-// Mock search service for demonstration
+// Enhanced keyword mapping for better search prediction
+const KEYWORD_MAPPING = {
+  // Tools related keywords
+  'tools': '/calculators',
+  'tool': '/calculators',
+  'calculator': '/calculators',
+  'calculators': '/calculators',
+  'calc': '/calculators',
+  'rv tools': '/calculators',
+  'rv calculator': '/calculators',
+  
+  // Weather related keywords
+  'weather': '/rv-weather',
+  'forecast': '/rv-weather',
+  'climate': '/rv-weather',
+  'temperature': '/rv-weather',
+  'rv weather': '/rv-weather',
+  
+  // Storage related keywords
+  'storage': '/storage-facilities',
+  'facility': '/storage-facilities',
+  'facilities': '/storage-facilities',
+  'store': '/storage-facilities',
+  'storing': '/storage-facilities',
+  'rv storage': '/storage-facilities',
+  
+  // Maintenance/troubleshooting
+  'maintenance': '/troubleshooting',
+  'fix': '/troubleshooting',
+  'repair': '/troubleshooting',
+  'issue': '/troubleshooting',
+  'troubleshoot': '/troubleshooting',
+  'problem': '/troubleshooting',
+  
+  // Features
+  'feature': '/features',
+  'features': '/features',
+  'system': '/features',
+  'rv feature': '/features',
+  'smart': '/features',
+  
+  // Specific features
+  'security': '/features/security-system',
+  'power': '/features/power-management',
+  'entertainment': '/features/entertainment',
+  'climate': '/features/climate-control',
+  'water': '/features/water-systems',
+  
+  // Storage preparation
+  'checklist': '/storage-preparation-checklist',
+  'preparation': '/storage-preparation-checklist',
+  'winterize': '/storage-preparation-checklist',
+  'winterization': '/storage-preparation-checklist',
+  
+  // Voice control
+  'voice': '/voice-control',
+  'command': '/voice-control',
+  'voice control': '/voice-control',
+  
+  // Models
+  'model': '/models',
+  'models': '/models',
+  'rv model': '/models',
+  'rv type': '/models',
+  'type': '/models',
+  
+  // Blog 
+  'blog': '/blog',
+  'post': '/blog',
+  'article': '/blog',
+};
+
+// Mock search service with enhanced keyword matching
 const mockSearch = (query: string, category: SearchCategory): SearchResult[] => {
   if (!query) return [];
   
@@ -89,8 +160,8 @@ const mockSearch = (query: string, category: SearchCategory): SearchResult[] => 
     },
     {
       id: '6',
-      title: 'Fuel Efficiency Calculator',
-      description: 'Estimate fuel costs for your next RV adventure',
+      title: 'RV Calculators & Tools',
+      description: 'Essential tools for planning and managing your RV',
       category: 'calculators',
       url: '/calculators',
     },
@@ -115,7 +186,7 @@ const mockSearch = (query: string, category: SearchCategory): SearchResult[] => 
     ? allResults 
     : allResults.filter(result => result.category === category);
   
-  // Filter by query text
+  // Filter by query text with enhanced relevance
   return filteredByCategory.filter(result => 
     result.title.toLowerCase().includes(query.toLowerCase()) || 
     result.description.toLowerCase().includes(query.toLowerCase())
@@ -168,6 +239,44 @@ const SearchBar: React.FC = () => {
       setResults([]);
     }
   }, [debouncedQuery, category]);
+
+  // Find the best matching page for a search term
+  const findBestMatchingPage = (searchTerm: string, selectedCategory: SearchCategory): string => {
+    const lowercaseSearchTerm = searchTerm.toLowerCase().trim();
+    
+    // Direct keyword match
+    if (KEYWORD_MAPPING[lowercaseSearchTerm]) {
+      return KEYWORD_MAPPING[lowercaseSearchTerm];
+    }
+    
+    // Try partial matches by checking if the search term contains a keyword
+    for (const [keyword, url] of Object.entries(KEYWORD_MAPPING)) {
+      if (lowercaseSearchTerm.includes(keyword)) {
+        return url;
+      }
+    }
+    
+    // Category-based fallback
+    switch (selectedCategory) {
+      case 'features':
+        return '/features';
+      case 'maintenance':
+        return '/troubleshooting';
+      case 'storage':
+        return '/storage-facilities';
+      case 'weather':
+        return '/rv-weather';
+      case 'calculators':
+        return '/calculators';
+      default:
+        // If there are results, use the first result's URL
+        if (results.length > 0) {
+          return results[0].url;
+        }
+        // Final fallback - search results page
+        return `/search?query=${encodeURIComponent(searchTerm)}&category=${selectedCategory}`;
+    }
+  };
   
   const handleSearchSubmit = (e?: React.FormEvent) => {
     if (e) e.preventDefault();
@@ -175,32 +284,9 @@ const SearchBar: React.FC = () => {
     if (query.trim()) {
       addToHistory(query);
       
-      // In a real implementation, you'd navigate to search results page
-      // For now, we'll navigate to a relevant page based on category
-      if (results.length > 0) {
-        navigate(results[0].url);
-      } else {
-        // Fallback navigation based on category
-        switch(category) {
-          case 'features':
-            navigate('/features');
-            break;
-          case 'maintenance':
-            navigate('/troubleshooting');
-            break;
-          case 'storage':
-            navigate('/storage-facilities');
-            break;
-          case 'weather':
-            navigate('/rv-weather');
-            break;
-          case 'calculators':
-            navigate('/calculators');
-            break;
-          default:
-            navigate('/blog'); // Fallback to blog which might have relevant content
-        }
-      }
+      // Route to the best matching page or search results page
+      const targetUrl = findBestMatchingPage(query, category);
+      navigate(targetUrl);
       
       setIsOpen(false);
       scrollToTop();
@@ -346,7 +432,7 @@ const SearchResults: React.FC<SearchResultsProps> = ({
               <div 
                 key={index}
                 className="px-3 py-1.5 hover:bg-gray-800 cursor-pointer text-sm flex items-center"
-                onClick={() => onResultClick(`/blog?search=${encodeURIComponent(term)}`)}
+                onClick={() => onResultClick(`/search?search=${encodeURIComponent(term)}`)}
               >
                 <Search className="h-3 w-3 mr-2 text-gray-400" />
                 {term}
