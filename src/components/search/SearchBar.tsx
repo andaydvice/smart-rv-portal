@@ -202,6 +202,7 @@ const SearchBar: React.FC = () => {
   const [isMobileView, setIsMobileView] = useState(window.innerWidth < 768);
   const searchRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const mobileInputRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
   const { searchHistory, addToHistory } = useSearchHistory();
   const debouncedQuery = useDebounce(query, 300);
@@ -291,6 +292,7 @@ const SearchBar: React.FC = () => {
       navigate(targetUrl);
       
       setIsOpen(false);
+      setQuery('');
       scrollToTop();
     }
   };
@@ -315,7 +317,11 @@ const SearchBar: React.FC = () => {
     setIsOpen(!isOpen);
     if (!isOpen) {
       setTimeout(() => {
-        inputRef.current?.focus();
+        if (isMobileView) {
+          mobileInputRef.current?.focus();
+        } else {
+          inputRef.current?.focus();
+        }
       }, 100);
     }
   };
@@ -335,7 +341,7 @@ const SearchBar: React.FC = () => {
           </Button>
           
           {isOpen && (
-            <div className="absolute right-0 top-full mt-2 w-80 z-50">
+            <div className="absolute right-0 top-full mt-2 w-80 z-[999]">
               <MobileSearchPanel 
                 query={query}
                 setQuery={setQuery}
@@ -346,59 +352,58 @@ const SearchBar: React.FC = () => {
                 onClose={() => setIsOpen(false)}
                 onSubmit={handleSearchSubmit}
                 searchHistory={searchHistory}
-                inputRef={inputRef}
+                inputRef={mobileInputRef}
               />
             </div>
           )}
         </>
       ) : (
         <div className="flex items-center">
-          <Popover open={isOpen} onOpenChange={setIsOpen}>
-            <PopoverTrigger asChild>
-              <div className="relative flex items-center">
-                <Search 
-                  className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400 pointer-events-none" 
-                />
-                <Input 
-                  type="text"
-                  value={query}
-                  onChange={(e) => setQuery(e.target.value)}
-                  onFocus={() => setIsOpen(true)}
-                  placeholder="Search RV resources..." 
-                  className="h-9 w-60 rounded-md border border-gray-700 bg-[#131a2a] text-sm px-9 py-2 text-white placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-[#5B9BD5]"
-                  onKeyDown={(e) => {
-                    if (e.key === 'Enter') {
-                      handleSearchSubmit();
-                    }
-                  }}
-                  ref={inputRef}
-                />
-                {query && (
-                  <button 
-                    className="absolute right-10 top-1/2 transform -translate-y-1/2"
-                    onClick={() => setQuery('')}
-                    type="button"
-                  >
-                    <X className="h-4 w-4 text-gray-400" />
-                  </button>
-                )}
-                <Select value={category} onValueChange={handleCategoryChange}>
-                  <SelectTrigger className="w-[15px] h-9 border-none bg-transparent absolute right-2 top-0 focus:ring-0 focus:ring-offset-0 pointer-events-auto">
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent className="bg-gray-900/95 backdrop-blur-sm text-white border-gray-700 z-[999]">
-                    {CATEGORIES.map((cat) => (
-                      <SelectItem key={cat.value} value={cat.value} className="focus:bg-gray-800 focus:text-white">
-                        {cat.label}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-            </PopoverTrigger>
-            <PopoverContent 
-              className="w-80 p-0 bg-gray-900/95 backdrop-blur-sm border border-gray-700 text-white shadow-lg z-[999]"
-              align="start"
+          <div className="relative flex items-center">
+            <Search 
+              className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400 pointer-events-none" 
+            />
+            <Input 
+              type="text"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              onClick={() => setIsOpen(true)}
+              onFocus={() => setIsOpen(true)}
+              placeholder="Search RV resources..." 
+              className="h-9 w-60 rounded-md border border-gray-700 bg-[#131a2a] text-sm px-9 py-2 text-white placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-[#5B9BD5]"
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  handleSearchSubmit();
+                }
+              }}
+              ref={inputRef}
+            />
+            {query && (
+              <button 
+                className="absolute right-10 top-1/2 transform -translate-y-1/2"
+                onClick={() => setQuery('')}
+                type="button"
+              >
+                <X className="h-4 w-4 text-gray-400" />
+              </button>
+            )}
+            <Select value={category} onValueChange={handleCategoryChange}>
+              <SelectTrigger className="w-[15px] h-9 border-none bg-transparent absolute right-2 top-0 focus:ring-0 focus:ring-offset-0 pointer-events-auto">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent className="bg-gray-900/95 backdrop-blur-sm text-white border-gray-700 z-[999]">
+                {CATEGORIES.map((cat) => (
+                  <SelectItem key={cat.value} value={cat.value} className="focus:bg-gray-800 focus:text-white">
+                    {cat.label}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+
+          {isOpen && (
+            <div 
+              className="absolute top-full right-0 mt-2 w-80 p-0 bg-gray-900/95 backdrop-blur-sm border border-gray-700 text-white shadow-lg z-[999] rounded-md"
             >
               <SearchResults 
                 results={results} 
@@ -406,8 +411,8 @@ const SearchBar: React.FC = () => {
                 onResultClick={handleResultClick} 
                 searchHistory={searchHistory}
               />
-            </PopoverContent>
-          </Popover>
+            </div>
+          )}
         </div>
       )}
     </div>
@@ -510,7 +515,10 @@ const MobileSearchPanel: React.FC<MobileSearchPanelProps> = ({
   return (
     <div className="bg-gray-900/95 backdrop-blur-sm border border-gray-700 rounded-md shadow-lg overflow-hidden z-[999]">
       <div className="p-2 flex items-center border-b border-gray-700">
-        <form onSubmit={onSubmit} className="flex-1 flex items-center">
+        <form onSubmit={(e) => {
+          e.preventDefault();
+          onSubmit(e);
+        }} className="flex-1 flex items-center">
           <Search className="h-4 w-4 text-gray-400 ml-1 mr-2" />
           <input
             type="text"
@@ -518,9 +526,9 @@ const MobileSearchPanel: React.FC<MobileSearchPanelProps> = ({
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search RV resources..."
             className="flex-1 bg-transparent border-none text-white text-sm p-1 focus:outline-none"
-            autoFocus
             ref={inputRef}
           />
+          <button type="submit" className="sr-only">Search</button>
         </form>
         <button onClick={onClose} className="p-1 ml-2" type="button">
           <X className="h-5 w-5 text-gray-400" />
