@@ -1,4 +1,3 @@
-
 import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Search, X } from 'lucide-react';
@@ -49,23 +48,52 @@ const CATEGORIES = [
 
 // Enhanced keyword mapping for better search prediction
 const KEYWORD_MAPPING: Record<string, string> = {
-  // Models related keywords (expanded)
+  // Models and Vehicle related keywords
   'model': '/models',
   'models': '/models',
+  'rv': '/models',
   'rv model': '/models',
   'rv models': '/models',
+  'vehicle': '/models',
+  'vehicles': '/models',
   'luxury': '/models/luxury',
   'adventure': '/models/adventure',
   'compact': '/models/compact',
   'luxury model': '/models/luxury',
   'luxury class': '/models/luxury',
+  'luxury rv': '/models/luxury',
   'adventure model': '/models/adventure',
   'adventure class': '/models/adventure',
+  'adventure rv': '/models/adventure',
   'compact model': '/models/compact',
+  'compact smart': '/models/compact',
+  'compact rv': '/models/compact',
   'compare': '/models/compare',
   'compare models': '/models/compare',
+  'comparison': '/models/compare',
   
-  // Tools related keywords
+  // Features & Systems
+  'features': '/features',
+  'feature': '/features',
+  'system': '/features',
+  'rv feature': '/features',
+  'smart': '/features',
+  'technology': '/technology',
+  'tech': '/technology',
+  'intelligence': '/features',
+  'rv intelligence': '/features',
+  'rv systems': '/features',
+  'smart features': '/features',
+  'automation': '/features/smart-automation',
+  
+  // Voice Control
+  'voice': '/voice-control',
+  'voice control': '/voice-control',
+  'voice command': '/voice-control',
+  'voice assistant': '/voice-control',
+  'commands': '/voice-control',
+  
+  // Tools & Calculators
   'tools': '/calculators',
   'tool': '/calculators',
   'calculator': '/calculators',
@@ -73,58 +101,68 @@ const KEYWORD_MAPPING: Record<string, string> = {
   'calc': '/calculators',
   'rv tools': '/calculators',
   'rv calculator': '/calculators',
+  'planning tools': '/calculators',
   
-  // Weather related keywords
+  // Weather
   'weather': '/rv-weather',
   'forecast': '/rv-weather',
   'climate': '/rv-weather',
   'temperature': '/rv-weather',
   'rv weather': '/rv-weather',
+  'conditions': '/rv-weather',
+  'alerts': '/rv-weather',
   
-  // Storage related keywords
+  // Storage
   'storage': '/storage-facilities',
   'facility': '/storage-facilities',
   'facilities': '/storage-facilities',
   'store': '/storage-facilities',
   'storing': '/storage-facilities',
   'rv storage': '/storage-facilities',
+  'parking': '/storage-facilities',
+  'checklist': '/storage-preparation-checklist',
+  'preparation': '/storage-preparation-checklist',
+  'winterize': '/storage-preparation-checklist',
+  'winterization': '/storage-preparation-checklist',
+  'storage guide': '/storage-preparation-checklist',
   
-  // Maintenance/troubleshooting
+  // Support & Troubleshooting
+  'support': '/troubleshooting',
+  'help': '/troubleshooting',
   'maintenance': '/troubleshooting',
   'fix': '/troubleshooting',
   'repair': '/troubleshooting',
   'issue': '/troubleshooting',
   'troubleshoot': '/troubleshooting',
   'problem': '/troubleshooting',
+  'guide': '/troubleshooting',
   
-  // Features
-  'feature': '/features',
-  'features': '/features',
-  'system': '/features',
-  'rv feature': '/features',
-  'smart': '/features',
-  
-  // Specific features
+  // Core Systems & Features
   'security': '/features/security-system',
   'power': '/features/power-management',
   'entertainment': '/features/entertainment',
   'water': '/features/water-systems',
+  'kitchen': '/features/smart-kitchen',
+  'audio': '/features/audio-system',
+  'wifi': '/features/internet-connectivity',
+  'internet': '/features/internet-connectivity',
+  'connectivity': '/features/internet-connectivity',
+  'navigation': '/features/navigation-system',
+  'climate': '/features/climate-control',
   
-  // Storage preparation
-  'checklist': '/storage-preparation-checklist',
-  'preparation': '/storage-preparation-checklist',
-  'winterize': '/storage-preparation-checklist',
-  'winterization': '/storage-preparation-checklist',
+  // Documentation & Support
+  'documentation': '/documentation',
+  'docs': '/documentation',
+  'manual': '/documentation',
+  'schedule': '/schedule-demo',
+  'demo': '/schedule-demo',
+  'contact': '/contact',
   
-  // Voice control
-  'voice': '/voice-control',
-  'command': '/voice-control',
-  'voice control': '/voice-control',
-  
-  // Blog 
+  // Blog & Content
   'blog': '/blog',
   'post': '/blog',
-  'article': '/blog'
+  'article': '/blog',
+  'news': '/blog'
 };
 
 // Mock search service with enhanced keyword matching and better results
@@ -135,6 +173,41 @@ const mockSearch = (query: string, category: SearchCategory): SearchResult[] => 
   
   // Mock results based on the search query
   const allResults: SearchResult[] = [
+    {
+      id: '1',
+      title: 'All RV Models',
+      description: 'Browse our complete lineup of smart RV models',
+      category: 'features',
+      url: '/models',
+    },
+    {
+      id: '2',
+      title: 'Luxury Class RVs',
+      description: 'Our premium luxury class smart RV lineup',
+      category: 'features',
+      url: '/models/luxury',
+    },
+    {
+      id: '3',
+      title: 'Adventure Class RVs',
+      description: 'Explore our off-road capable adventure RVs',
+      category: 'features',
+      url: '/models/adventure',
+    },
+    {
+      id: '4',
+      title: 'Compact Smart RVs',
+      description: 'Efficient and easy to maneuver compact RVs',
+      category: 'features',
+      url: '/models/compact',
+    },
+    {
+      id: '5',
+      title: 'Compare RV Models',
+      description: 'Compare features and specs across our RV lineup',
+      category: 'features',
+      url: '/models/compare',
+    },
     {
       id: '1',
       title: 'Smart RV Security Systems',
