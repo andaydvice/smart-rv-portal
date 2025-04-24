@@ -1,5 +1,5 @@
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import ResponsiveNavbar from "./navigation/ResponsiveNavbar";
 import { scrollToTop } from "@/utils/scrollToTop";

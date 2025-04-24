@@ -1,3 +1,4 @@
+
 import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Search, X, ChevronDown, ChevronUp, Info } from 'lucide-react';
@@ -46,7 +47,7 @@ const CATEGORIES = [
 ];
 
 // Enhanced keyword mapping for better search prediction
-const KEYWORD_MAPPING = {
+const KEYWORD_MAPPING: Record<string, string> = {
   // Tools related keywords
   'tools': '/calculators',
   'tool': '/calculators',
@@ -90,7 +91,6 @@ const KEYWORD_MAPPING = {
   'security': '/features/security-system',
   'power': '/features/power-management',
   'entertainment': '/features/entertainment',
-  'climate': '/features/climate-control',
   'water': '/features/water-systems',
   
   // Storage preparation
@@ -114,7 +114,7 @@ const KEYWORD_MAPPING = {
   // Blog 
   'blog': '/blog',
   'post': '/blog',
-  'article': '/blog',
+  'article': '/blog'
 };
 
 // Mock search service with enhanced keyword matching
@@ -200,6 +200,7 @@ const SearchBar: React.FC = () => {
   const [results, setResults] = useState<SearchResult[]>([]);
   const [isMobileView, setIsMobileView] = useState(window.innerWidth < 768);
   const searchRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
   const { searchHistory, addToHistory } = useSearchHistory();
   const debouncedQuery = useDebounce(query, 300);
@@ -313,7 +314,7 @@ const SearchBar: React.FC = () => {
     setIsOpen(!isOpen);
     if (!isOpen) {
       setTimeout(() => {
-        document.querySelector<HTMLInputElement>('.search-input')?.focus();
+        inputRef.current?.focus();
       }, 100);
     }
   };
@@ -344,6 +345,7 @@ const SearchBar: React.FC = () => {
                 onClose={() => setIsOpen(false)}
                 onSubmit={handleSearchSubmit}
                 searchHistory={searchHistory}
+                inputRef={inputRef}
               />
             </div>
           )}
@@ -362,12 +364,13 @@ const SearchBar: React.FC = () => {
                   onChange={(e) => setQuery(e.target.value)}
                   onFocus={() => setIsOpen(true)}
                   placeholder="Search RV resources..." 
-                  className="h-9 w-60 rounded-md border border-gray-700 bg-[#131a2a] text-sm px-9 py-2 text-white placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-[#5B9BD5] search-input"
+                  className="h-9 w-60 rounded-md border border-gray-700 bg-[#131a2a] text-sm px-9 py-2 text-white placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-[#5B9BD5]"
                   onKeyDown={(e) => {
                     if (e.key === 'Enter') {
                       handleSearchSubmit();
                     }
                   }}
+                  ref={inputRef}
                 />
                 {query && (
                   <button 
@@ -487,6 +490,7 @@ interface MobileSearchPanelProps {
   onClose: () => void;
   onSubmit: (e?: React.FormEvent) => void;
   searchHistory: string[];
+  inputRef: React.RefObject<HTMLInputElement>;
 }
 
 const MobileSearchPanel: React.FC<MobileSearchPanelProps> = ({
@@ -499,6 +503,7 @@ const MobileSearchPanel: React.FC<MobileSearchPanelProps> = ({
   onClose,
   onSubmit,
   searchHistory,
+  inputRef,
 }) => {
   return (
     <div className="bg-gray-900/95 backdrop-blur-sm border border-gray-700 rounded-md shadow-lg overflow-hidden">
@@ -510,8 +515,9 @@ const MobileSearchPanel: React.FC<MobileSearchPanelProps> = ({
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search RV resources..."
-            className="flex-1 bg-transparent border-none text-white text-sm p-1 focus:outline-none search-input"
+            className="flex-1 bg-transparent border-none text-white text-sm p-1 focus:outline-none"
             autoFocus
+            ref={inputRef}
           />
         </form>
         <button onClick={onClose} className="p-1 ml-2">
