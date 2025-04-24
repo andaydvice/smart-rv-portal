@@ -1,10 +1,11 @@
 
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { ChevronDown, ChevronUp } from "lucide-react";
+import { ChevronDown, ChevronUp, Search } from "lucide-react";
 import NavigationSection from "./NavigationSection";
 import AuthButtons from "./AuthButtons";
 import { SmartFeaturesLinks, CoreSystemsLinks, VehicleSelectionLinks, SupportLinks, RVToolsLinks } from "./links";
+import { SearchBar } from "@/components/search";
 
 interface MobileMenuProps {
   isOpen: boolean;
@@ -31,6 +32,11 @@ const MobileMenu = ({ isOpen }: MobileMenuProps) => {
   return (
     <div className="md:hidden">
       <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-gray-900 shadow-lg">
+        {/* Search Bar */}
+        <div className="px-3 py-2">
+          <SearchBar />
+        </div>
+        
         <Link
           to="/"
           className="text-gray-300 hover:text-[#5B9BD5] block px-3 py-2 rounded-md text-base font-medium"

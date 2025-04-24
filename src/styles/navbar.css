@@ -64,6 +64,46 @@ html {
   overflow-y: auto;
 }
 
+/* Search bar specific styles */
+.search-input:focus {
+  box-shadow: 0 0 0 2px rgba(91, 155, 213, 0.5);
+}
+
+/* Search result highlight */
+.search-highlight {
+  background-color: rgba(91, 155, 213, 0.2);
+  color: #5B9BD5;
+  padding: 0 2px;
+  border-radius: 2px;
+}
+
+/* Search categories badge */
+.search-category-badge {
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  padding: 0.15rem 0.5rem;
+  border-radius: 0.25rem;
+  background-color: #1a202c;
+  color: #5B9BD5;
+  font-weight: 500;
+}
+
+/* Command menu overrides for our theme */
+[cmdk-root] {
+  background-color: #131a2a !important;
+  border-color: #1a202c !important;
+}
+
+[cmdk-input] {
+  color: white !important;
+  background-color: transparent !important;
+}
+
+[cmdk-item][data-selected="true"] {
+  background-color: #1E2A3E !important;
+  color: white !important;
+}
+
 /* Popup edge prevention - ensures popups don't get cut off */
 .mapboxgl-popup {
   z-index: 1000 !important;

@@ -10,6 +10,7 @@ import {
 import AuthButtons from "./AuthButtons";
 import HoverDropdownMenu from "./HoverDropdownMenu";
 import HoverDropdownMenuV2 from "./HoverDropdownMenuV2";
+import { SearchBar } from "@/components/search";
 
 const DesktopNavigation = () => {
   const location = useLocation();
@@ -185,6 +186,11 @@ const DesktopNavigation = () => {
           trigger="Support" 
           links={supportLinks}
         />
+        
+        {/* Search Bar */}
+        <div className="ml-2">
+          <SearchBar />
+        </div>
       </div>
 
       <AuthButtons />
@@ -193,4 +199,3 @@ const DesktopNavigation = () => {
 };
 
 export default DesktopNavigation;
-
