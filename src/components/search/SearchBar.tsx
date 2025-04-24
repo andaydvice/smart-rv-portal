@@ -229,37 +229,37 @@ const mockSearch = (query: string, category: SearchCategory): SearchResult[] => 
       category: 'maintenance',
       url: '/troubleshooting',
     },
-    // Added models specific results
+    // Models specific results with guaranteed unique IDs
     {
-      id: 'model-1',
+      id: 'model-all',
       title: 'All RV Models',
       description: 'Browse our complete lineup of smart RV models',
       category: 'features',
       url: '/models',
     },
     {
-      id: 'model-2',
+      id: 'model-luxury',
       title: 'Luxury Class RVs',
       description: 'Our premium luxury class smart RV lineup',
       category: 'features',
       url: '/models/luxury',
     },
     {
-      id: 'model-3',
+      id: 'model-adventure',
       title: 'Adventure Class RVs',
       description: 'Explore our off-road capable adventure RVs',
       category: 'features',
       url: '/models/adventure',
     },
     {
-      id: 'model-4',
+      id: 'model-compact',
       title: 'Compact Smart RVs',
       description: 'Efficient and easy to maneuver compact RVs',
       category: 'features',
       url: '/models/compact',
     },
     {
-      id: 'model-5',
+      id: 'model-compare',
       title: 'Compare RV Models',
       description: 'Compare features and specs across our RV lineup',
       category: 'features',
