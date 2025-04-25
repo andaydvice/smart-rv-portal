@@ -5,7 +5,7 @@ import Layout from "@/components/layout/Layout";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { scrollToTop } from "@/utils/scrollToTop";
 import HeroSection from "@/components/rv-weather/HeroSection";
-import WhyWeatherMatters from "@/components/rv-weather/IntroSection";
+import IntroSection from "@/components/rv-weather/IntroSection";
 import PlanningSection from "@/components/rv-weather/PlanningSection";
 import SeasonalTips from "@/components/rv-weather/SeasonalConsiderations";
 import RegionalClimate from "@/components/rv-weather/RegionalClimate";
@@ -76,7 +76,7 @@ const RVWeather = () => {
           
           {/* Why Weather Matters Section */}
           <section id="weather-matters" className="container mx-auto px-4 py-12">
-            <WhyWeatherMatters />
+            <IntroSection />
           </section>
           
           {/* Planning Your Trip Section */}
