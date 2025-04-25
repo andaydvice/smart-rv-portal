@@ -10,10 +10,10 @@ const WeatherApps = () => {
       
       <div className="grid md:grid-cols-2 gap-8">
         <div className="bg-[#080F1F]/80 p-6 rounded-lg border border-[#1a202c]">
-          <h3 className="text-2xl font-bold text-ocean-blue mb-4 text-center">
+          <h3 className="text-2xl font-bold text-ocean-blue mb-4 text-left">
             Comprehensive Weather Apps
           </h3>
-          <ul className="space-y-4 text-center">
+          <ul className="space-y-4 text-left">
             <li className="text-light-blue">
               <a href="https://weather.com/" target="_blank" rel="noopener noreferrer" className="hover:underline">
                 AccuWeather
@@ -33,10 +33,10 @@ const WeatherApps = () => {
         </div>
         
         <div className="bg-[#080F1F]/80 p-6 rounded-lg border border-[#1a202c]">
-          <h3 className="text-2xl font-bold text-ocean-blue mb-4 text-center">
+          <h3 className="text-2xl font-bold text-ocean-blue mb-4 text-left">
             RV-Specific Weather Tools
           </h3>
-          <ul className="space-y-4 text-center">
+          <ul className="space-y-4 text-left">
             <li className="text-light-blue">
               <a href="https://rvweather.com/" target="_blank" rel="noopener noreferrer" className="hover:underline">
                 RV Weather
