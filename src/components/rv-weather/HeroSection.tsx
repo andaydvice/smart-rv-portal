@@ -36,24 +36,14 @@ const HeroSection = () => {
       {/* Semi-transparent overlay for better text readability */}
       <div className="absolute inset-0 bg-black/20 z-10" />
       
-      {/* Hero content */}
-      <div className="absolute inset-0 z-30 flex flex-col items-center justify-center text-white">
-        <h1 className="text-4xl md:text-6xl font-bold text-center font-playfair mb-4">
-          THE ULTIMATE<br />Weather Guide
-        </h1>
-        <p className="text-xl md:text-2xl text-center mb-12">
-          Why Weather Matters for RV Travel
-        </p>
-        
-        {/* Button positioned at the bottom */}
-        <div className="absolute bottom-8">
-          <a 
-            href="#weather-matters" 
-            className="inline-block bg-ocean-blue hover:bg-ocean-blue/90 text-white font-semibold px-8 py-3 rounded-md transition-all transform hover:-translate-y-1 shadow-lg"
-          >
-            Learn More
-          </a>
-        </div>
+      {/* Button positioned at the bottom */}
+      <div className="absolute bottom-8 z-30 w-full flex justify-center">
+        <a 
+          href="#weather-matters" 
+          className="inline-block bg-ocean-blue hover:bg-ocean-blue/90 text-white font-semibold px-8 py-3 rounded-md transition-all transform hover:-translate-y-1 shadow-lg"
+        >
+          Learn More
+        </a>
       </div>
 
       {/* Loading indicator */}

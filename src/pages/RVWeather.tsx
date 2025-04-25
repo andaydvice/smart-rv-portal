@@ -7,10 +7,11 @@ import { scrollToTop } from "@/utils/scrollToTop";
 import HeroSection from "@/components/rv-weather/HeroSection";
 import IntroSection from "@/components/rv-weather/IntroSection";
 import PlanningSection from "@/components/rv-weather/PlanningSection";
-import SeasonalTips from "@/components/rv-weather/SeasonalConsiderations";
+import SeasonalTips from "@/components/rv-weather/SeasonalTips";
+import SeasonalConsiderations from "@/components/rv-weather/SeasonalConsiderations";
 import RegionalClimate from "@/components/rv-weather/RegionalClimate";
 import WeatherMonitoring from "@/components/rv-weather/sections/MonitoringSection";
-import WeatherAlerts from "@/components/rv-weather/sections/AlertsSection";
+import AlertsSection from "@/components/rv-weather/sections/AlertsSection";
 import PreparednessTips from "@/components/rv-weather/PreparednessTips";
 import MaintenanceSection from "@/components/rv-weather/MaintenanceSection";
 import HazardsSection from "@/components/rv-weather/sections/HazardsSection";
@@ -71,7 +72,7 @@ const RVWeather = () => {
           transition={{ duration: 0.5 }}
           className="bg-deeper-background min-h-screen"
         >
-          {/* Hero Section with "The Ultimate Weather Guide" heading */}
+          {/* Hero Section */}
           <HeroSection />
           
           {/* Why Weather Matters Section */}
@@ -85,13 +86,21 @@ const RVWeather = () => {
           </section>
           
           {/* Seasonal Tips Section */}
-          <section className="container mx-auto px-4 py-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-white font-playfair text-center mb-8">
-              Seasonal Weather Tips
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <section className="py-12 bg-[#080F1F]">
+            <div className="container mx-auto px-4">
+              <h2 className="text-3xl md:text-4xl font-bold text-white font-playfair text-center mb-8">
+                Seasonal Weather Tips
+              </h2>
               <SeasonalTips />
             </div>
+          </section>
+          
+          {/* Seasonal Considerations - More Detailed Section */}
+          <section className="container mx-auto px-4 py-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-white font-playfair text-center mb-8">
+              Seasonal Weather Considerations
+            </h2>
+            <SeasonalConsiderations />
           </section>
           
           {/* Regional Climate Section */}
@@ -104,7 +113,7 @@ const RVWeather = () => {
           
           {/* Weather Alerts Section */}
           <section className="container mx-auto px-4 py-12">
-            <WeatherAlerts />
+            <AlertsSection />
           </section>
           
           {/* Weather Hazards Section */}
