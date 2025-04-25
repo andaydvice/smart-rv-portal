@@ -8,7 +8,7 @@ const MonitoringSection = () => {
     <section className="py-6 px-4 rounded-lg bg-gradient-to-b from-[#131a2a]/50 to-[#080F1F]/50 border border-[#1a202c]/40 backdrop-blur-sm">
       <div className="flex items-center gap-2 mb-6">
         <Smartphone className="h-7 w-7 text-connectivity-accent" />
-        <TypographyH2 className="border-none text-white">Real-Time Weather Monitoring</TypographyH2>
+        <TypographyH2 className="border-none text-white text-center">Real-Time Weather Monitoring</TypographyH2>
       </div>
       
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
@@ -23,11 +23,11 @@ const MonitoringSection = () => {
         
         <div className="space-y-6">
           <div>
-            <TypographyH4 className="text-white text-left mb-4">Essential Weather Apps</TypographyH4>
+            <TypographyH4 className="text-white text-center mb-4">Essential Weather Apps</TypographyH4>
             <div className="space-y-4">
               <div className="p-4 rounded-lg border border-[#1a202c] bg-[#080F1F]/70">
-                <h5 className="font-semibold text-[#5B9BD5] text-left mb-2">Comprehensive Weather Apps</h5>
-                <ul className="space-y-2 pl-4 text-sm text-[#E2E8FF] list-disc list-inside">
+                <h5 className="font-semibold text-[#5B9BD5] text-center mb-2">Comprehensive Weather Apps</h5>
+                <ul className="space-y-2 text-sm text-[#E2E8FF] list-disc pl-5">
                   <li>AccuWeather - 15-day forecast plus radar</li>
                   <li>Weather Underground - Detailed forecasts with PWS network</li>
                   <li>The Weather Channel - Live interactive radar</li>
@@ -35,8 +35,8 @@ const MonitoringSection = () => {
               </div>
               
               <div className="p-4 rounded-lg border border-[#1a202c] bg-[#080F1F]/70">
-                <h5 className="font-semibold text-[#5B9BD5] text-left mb-2">RV-Specific Weather Tools</h5>
-                <ul className="space-y-2 pl-4 text-sm text-[#E2E8FF] list-disc list-inside">
+                <h5 className="font-semibold text-[#5B9BD5] text-center mb-2">RV-Specific Weather Tools</h5>
+                <ul className="space-y-2 text-sm text-[#E2E8FF] list-disc pl-5">
                   <li>RV Weather - Weather for routes specifically</li>
                   <li>Wind Alerts - Warnings for wind/driving conditions</li>
                   <li>Weather Radio - NOAA weather radio alerts</li>
