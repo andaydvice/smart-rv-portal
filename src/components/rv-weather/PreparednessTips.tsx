@@ -17,25 +17,20 @@ const PreparednessTips = () => {
               </div>
               <h3 className="text-xl font-bold text-white ml-3">Before a Trip</h3>
             </div>
-            <ul className="space-y-3 text-light-blue flex-grow text-left">
-              <li className="flex items-start">
-                <span className="text-ocean-blue mr-2">•</span>
+            <ul className="space-y-3 text-light-blue flex-grow text-left pl-5 list-disc">
+              <li className="text-left">
                 <span>Research typical weather patterns for your destination</span>
               </li>
-              <li className="flex items-start">
-                <span className="text-ocean-blue mr-2">•</span>
+              <li className="text-left">
                 <span>Create an emergency contact list</span>
               </li>
-              <li className="flex items-start">
-                <span className="text-ocean-blue mr-2">•</span>
+              <li className="text-left">
                 <span>Download offline maps and weather apps</span>
               </li>
-              <li className="flex items-start">
-                <span className="text-ocean-blue mr-2">•</span>
+              <li className="text-left">
                 <span>Check that all weather related equipment is functioning</span>
               </li>
-              <li className="flex items-start">
-                <span className="text-ocean-blue mr-2">•</span>
+              <li className="text-left">
                 <span>Plan alternate routes in case of weather disruptions</span>
               </li>
             </ul>
@@ -48,25 +43,20 @@ const PreparednessTips = () => {
               </div>
               <h3 className="text-xl font-bold text-white ml-3">On the Road</h3>
             </div>
-            <ul className="space-y-3 text-light-blue flex-grow text-left">
-              <li className="flex items-start">
-                <span className="text-ocean-blue mr-2">•</span>
+            <ul className="space-y-3 text-light-blue flex-grow text-left pl-5 list-disc">
+              <li className="text-left">
                 <span>Check weather forecasts every morning</span>
               </li>
-              <li className="flex items-start">
-                <span className="text-ocean-blue mr-2">•</span>
+              <li className="text-left">
                 <span>Have a designated weather radio or alert system</span>
               </li>
-              <li className="flex items-start">
-                <span className="text-ocean-blue mr-2">•</span>
+              <li className="text-left">
                 <span>Know locations of severe weather shelters along your route</span>
               </li>
-              <li className="flex items-start">
-                <span className="text-ocean-blue mr-2">•</span>
+              <li className="text-left">
                 <span>Keep fuel tank at least half full</span>
               </li>
-              <li className="flex items-start">
-                <span className="text-ocean-blue mr-2">•</span>
+              <li className="text-left">
                 <span>Have emergency supplies easily accessible</span>
               </li>
             </ul>
@@ -79,25 +69,20 @@ const PreparednessTips = () => {
               </div>
               <h3 className="text-xl font-bold text-white ml-3">Emergency Kit</h3>
             </div>
-            <ul className="space-y-3 text-light-blue flex-grow text-left">
-              <li className="flex items-start">
-                <span className="text-ocean-blue mr-2">•</span>
+            <ul className="space-y-3 text-light-blue flex-grow text-left pl-5 list-disc">
+              <li className="text-left">
                 <span>Battery powered or hand crank NOAA weather radio</span>
               </li>
-              <li className="flex items-start">
-                <span className="text-ocean-blue mr-2">•</span>
+              <li className="text-left">
                 <span>Portable power bank for devices</span>
               </li>
-              <li className="flex items-start">
-                <span className="text-ocean-blue mr-2">•</span>
+              <li className="text-left">
                 <span>Flashlights and extra batteries</span>
               </li>
-              <li className="flex items-start">
-                <span className="text-ocean-blue mr-2">•</span>
+              <li className="text-left">
                 <span>First aid kit with emergency blankets</span>
               </li>
-              <li className="flex items-start">
-                <span className="text-ocean-blue mr-2">•</span>
+              <li className="text-left">
                 <span>3 day supply of water and non perishable food</span>
               </li>
             </ul>

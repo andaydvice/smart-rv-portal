@@ -11,7 +11,7 @@ const SeasonalWeatherTips = () => {
         <TypographyH4 className="border-none text-left">Seasonal Weather Tips</TypographyH4>
       </div>
       
-      <div className="space-y-4">
+      <div className="space-y-4 w-full">
         <div>
           <h5 className="text-sm font-semibold text-[#5B9BD5] mb-1 text-left">Spring</h5>
           <TypographyP className="text-sm text-light-blue mt-0 text-left">Watch for flash floods in desert areas. Thunderstorms can develop quickly.</TypographyP>

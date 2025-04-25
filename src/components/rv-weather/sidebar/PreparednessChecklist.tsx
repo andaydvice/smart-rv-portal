@@ -11,24 +11,24 @@ const PreparednessChecklist = () => {
         <TypographyH4 className="border-none text-[#1a202c] text-left">Weather Preparedness</TypographyH4>
       </div>
       
-      <ul className="space-y-3 text-sm">
-        <li className="flex items-start">
+      <ul className="space-y-3 text-sm w-full">
+        <li className="flex items-start text-left">
           <div className="min-w-4 h-4 mt-0.5 rounded border border-[#3b82f6] flex-shrink-0"></div>
           <span className="ml-2 text-[#4a5568] text-left">Download weather apps before traveling</span>
         </li>
-        <li className="flex items-start">
+        <li className="flex items-start text-left">
           <div className="min-w-4 h-4 mt-0.5 rounded border border-[#3b82f6] flex-shrink-0"></div>
           <span className="ml-2 text-[#4a5568] text-left">Create emergency contact list</span>
         </li>
-        <li className="flex items-start">
+        <li className="flex items-start text-left">
           <div className="min-w-4 h-4 mt-0.5 rounded border border-[#3b82f6] flex-shrink-0"></div>
           <span className="ml-2 text-[#4a5568] text-left">Pack emergency weather supplies</span>
         </li>
-        <li className="flex items-start">
+        <li className="flex items-start text-left">
           <div className="min-w-4 h-4 mt-0.5 rounded border border-[#3b82f6] flex-shrink-0"></div>
           <span className="ml-2 text-[#4a5568] text-left">Know your RV's wind resistance limits</span>
         </li>
-        <li className="flex items-start">
+        <li className="flex items-start text-left">
           <div className="min-w-4 h-4 mt-0.5 rounded border border-[#3b82f6] flex-shrink-0"></div>
           <span className="ml-2 text-[#4a5568] text-left">Review evacuation routes for each stay</span>
         </li>
