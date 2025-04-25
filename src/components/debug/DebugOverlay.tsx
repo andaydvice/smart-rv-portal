@@ -2,6 +2,15 @@
 import React, { useState, useEffect } from 'react';
 import { Monitor, RefreshCw } from 'lucide-react';
 
+// Extend the Performance interface to include the memory property
+interface ExtendedPerformance extends Performance {
+  memory?: {
+    usedJSHeapSize: number;
+    totalJSHeapSize: number;
+    jsHeapSizeLimit: number;
+  };
+}
+
 interface DebugInfo {
   lastUpdate: string;
   route: string;
@@ -28,13 +37,16 @@ const DebugOverlay = () => {
     if (!isVisible) return;
 
     const updateInterval = setInterval(() => {
+      // Cast performance to ExtendedPerformance to access memory property
+      const extendedPerformance = performance as ExtendedPerformance;
+      
       setDebugInfo(prev => ({
         ...prev,
         lastUpdate: new Date().toISOString(),
         screenSize: `${window.innerWidth}x${window.innerHeight}`,
         performance: {
           fps: Math.round(performance.now() / 1000),
-          memory: Math.round(performance?.memory?.usedJSHeapSize / 1048576 || 0)
+          memory: Math.round(extendedPerformance.memory?.usedJSHeapSize / 1048576 || 0)
         }
       }));
     }, 1000);
