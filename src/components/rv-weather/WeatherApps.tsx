@@ -9,8 +9,8 @@ const WeatherApps = () => {
       </h3>
       
       <div className="grid md:grid-cols-2 gap-8">
-        <div className="bg-[#080F1F]/80 p-6 rounded-lg border border-[#1a202c]">
-          <ul className="space-y-4 text-left list-disc pl-5">
+        <div className="bg-[#080F1F]/80 p-6 rounded-lg border border-[#1a202c] w-full">
+          <ul className="w-full space-y-4 text-left list-disc pl-5">
             <li className="text-light-blue">
               <a href="https://weather.com/" target="_blank" rel="noopener noreferrer" className="hover:underline">
                 AccuWeather
@@ -29,11 +29,11 @@ const WeatherApps = () => {
           </ul>
         </div>
         
-        <div className="bg-[#080F1F]/80 p-6 rounded-lg border border-[#1a202c]">
+        <div className="bg-[#080F1F]/80 p-6 rounded-lg border border-[#1a202c] w-full">
           <h3 className="text-2xl font-bold text-ocean-blue mb-4 text-center">
             RV-Specific Weather Tools
           </h3>
-          <ul className="space-y-4 text-left list-disc pl-5">
+          <ul className="w-full space-y-4 text-left list-disc pl-5">
             <li className="text-light-blue">
               <a href="https://rvweather.com/" target="_blank" rel="noopener noreferrer" className="hover:underline">
                 RV Weather
