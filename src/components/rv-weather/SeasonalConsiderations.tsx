@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Sun, Cloud, CloudSnow, Leaf } from "lucide-react";
 import { LazyImage } from "@/components/ui/LazyImage";
@@ -50,10 +49,10 @@ const SeasonalConsiderations = () => {
         </div>
         
         <LazyImage 
-          src="/lovable-uploads/9cb71164-7823-47a1-b788-5afc310ad5e5.png" 
-          alt="RV in snowy winter conditions" 
+          src="/lovable-uploads/d02155c8-4397-497a-b884-610341d5ba0f.png" 
+          alt="RV in dramatic winter sunset landscape" 
           className="w-full h-52 object-cover rounded-lg mb-4"
-          blurDataURL="/lovable-uploads/9cb71164-7823-47a1-b788-5afc310ad5e5.png"
+          blurDataURL="/lovable-uploads/d02155c8-4397-497a-b884-610341d5ba0f.png"
         />
         
         <ul className="space-y-2 text-light-blue">
