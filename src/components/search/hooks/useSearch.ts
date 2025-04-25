@@ -1,5 +1,5 @@
 
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { SearchCategory, SearchResult } from '../types';
 import { mockSearch } from '../searchUtils';
 import { useDebounce } from '../useDebounce';
@@ -50,8 +50,8 @@ export const useSearch = () => {
     }));
   }, [cache, isValidCache]);
   
-  // Update search results when debounced query or category changes
-  useState(() => {
+  // Fix: Changed useState to useEffect and removed the second argument from useState
+  useEffect(() => {
     if (debouncedQuery) {
       performSearch(debouncedQuery, category);
     } else {

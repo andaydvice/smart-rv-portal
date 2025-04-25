@@ -9,6 +9,7 @@ import { findBestMatchingPage } from './searchUtils';
 import { useSearch } from './hooks/useSearch';
 import MobileSearchPanel from './MobileSearchPanel';
 import DesktopSearch from './DesktopSearch';
+import { SearchCategory } from './types';
 
 const SearchBar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -69,6 +70,11 @@ const SearchBar: React.FC = () => {
     setIsOpen(!isOpen);
   };
   
+  // Fix: Create a type-safe category handler function
+  const handleCategoryChange = (newCategory: string) => {
+    setCategory(newCategory as SearchCategory);
+  };
+  
   return (
     <div className="relative z-[60]" ref={searchRef}>
       {isMobileView ? (
@@ -89,7 +95,7 @@ const SearchBar: React.FC = () => {
                 query={query}
                 setQuery={setQuery}
                 category={category}
-                setCategory={setCategory}
+                setCategory={handleCategoryChange}
                 results={results}
                 onResultClick={handleResultClick}
                 onClose={() => setIsOpen(false)}
@@ -105,7 +111,7 @@ const SearchBar: React.FC = () => {
           query={query}
           setQuery={setQuery}
           category={category}
-          setCategory={setCategory}
+          setCategory={handleCategoryChange}
           results={results}
           isOpen={isOpen}
           onResultClick={handleResultClick}
