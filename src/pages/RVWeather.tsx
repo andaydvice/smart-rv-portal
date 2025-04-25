@@ -1,4 +1,3 @@
-
 import React from "react";
 import { motion } from "framer-motion";
 import Layout from "@/components/layout/Layout";
@@ -87,12 +86,7 @@ const RVWeather = () => {
           
           {/* Seasonal Tips Section */}
           <section className="py-12 bg-[#080F1F]">
-            <div className="container mx-auto px-4">
-              <h2 className="text-3xl md:text-4xl font-bold text-white font-playfair text-center mb-8">
-                Seasonal Weather Tips
-              </h2>
-              <SeasonalTips />
-            </div>
+            <SeasonalTips />
           </section>
           
           {/* Seasonal Considerations - More Detailed Section */}
