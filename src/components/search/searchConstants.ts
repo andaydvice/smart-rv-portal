@@ -113,7 +113,7 @@ export const KEYWORD_MAPPING: Record<string, string> = {
   'internet': '/features/internet-connectivity',
   'connectivity': '/features/internet-connectivity',
   'navigation': '/features/navigation-system',
-  'climate': '/features/climate-control',
+  'climate control': '/features/climate-control',
   
   // Documentation & Support
   'documentation': '/documentation',
