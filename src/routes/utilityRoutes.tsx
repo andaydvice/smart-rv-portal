@@ -1,7 +1,7 @@
 
 import Calculators from "../pages/Calculators";
 import Documentation from "../pages/Documentation";
-import WeatherDashboard from "../pages/WeatherDashboard"; // MODIFIED: import correct component
+import WeatherDashboard from "../pages/WeatherDashboard"; 
 import StorageFacilities from "../pages/StorageFacilities";
 import StoragePreparationChecklist from "../pages/StoragePreparationChecklist";
 import Contact from "../pages/Contact";
@@ -9,6 +9,7 @@ import Troubleshooting from "../pages/Troubleshooting";
 import ScheduleDemo from "../pages/ScheduleDemo";
 import VoiceControl from "../pages/VoiceControl";
 import AccountPage from "@/pages/Account";
+import RVWeather from "../pages/RVWeather";
 
 const utilityRoutes = [
   {
@@ -21,7 +22,11 @@ const utilityRoutes = [
   },
   {
     path: "/weather",
-    element: <WeatherDashboard />,  // MODIFIED: use correct component
+    element: <WeatherDashboard />,
+  },
+  {
+    path: "/rv-weather",
+    element: <RVWeather />,
   },
   {
     path: "/storage-facilities",
@@ -54,4 +59,3 @@ const utilityRoutes = [
 ];
 
 export default utilityRoutes;
-

@@ -26,11 +26,10 @@ const HeroSection = () => {
         />
       ) : (
         /* Fallback image if main image fails to load */
-        <div 
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ 
-            backgroundImage: `url('/lovable-uploads/4988c602-a652-4527-93a8-765921a6d09f.png')`,
-          }}
+        <img 
+          src="/lovable-uploads/78ab2ab5-e50d-4f41-8046-ac79e38e44cb.png"
+          alt="Mountain road with sunset sky for SmartRV Weather Guide"
+          className="absolute inset-0 w-full h-full object-cover"
         />
       )}
       
@@ -38,17 +37,22 @@ const HeroSection = () => {
       <div className="absolute inset-0 bg-black/20 z-10" />
       
       {/* Hero content */}
-      <div className="absolute inset-0 z-30">
-        <div className="flex flex-col h-full justify-end items-center pb-4">
-          <div className="text-center">
-            {/* Button positioned much lower with significant bottom spacing */}
-            <a 
-              href="#weather-matters" 
-              className="inline-block bg-ocean-blue hover:bg-ocean-blue/90 text-white font-semibold px-8 py-3 rounded-md transition-all transform hover:-translate-y-1 shadow-lg mt-24"
-            >
-              Learn More
-            </a>
-          </div>
+      <div className="absolute inset-0 z-30 flex flex-col items-center justify-center text-white">
+        <h1 className="text-4xl md:text-6xl font-bold text-center font-playfair mb-4">
+          THE ULTIMATE<br />Weather Guide
+        </h1>
+        <p className="text-xl md:text-2xl text-center mb-12">
+          Why Weather Matters for RV Travel
+        </p>
+        
+        {/* Button positioned at the bottom */}
+        <div className="absolute bottom-8">
+          <a 
+            href="#weather-matters" 
+            className="inline-block bg-ocean-blue hover:bg-ocean-blue/90 text-white font-semibold px-8 py-3 rounded-md transition-all transform hover:-translate-y-1 shadow-lg"
+          >
+            Learn More
+          </a>
         </div>
       </div>
 
