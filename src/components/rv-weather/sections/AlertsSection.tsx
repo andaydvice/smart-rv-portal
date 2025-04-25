@@ -11,7 +11,7 @@ const AlertsSection = () => {
         <TypographyH2 className="border-none text-white">Understanding Weather Alerts</TypographyH2>
       </div>
       
-      <TypographyP className="mb-6 text-light-blue">
+      <TypographyP className="mb-6 text-light-blue text-left">
         Weather alerts can be critical for RV travelers. Understanding their meaning and appropriate responses can help keep you safe during severe weather events.
       </TypographyP>
       
