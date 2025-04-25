@@ -34,7 +34,9 @@ const HeroSection = () => {
       )}
       
       {/* Semi-transparent overlay for better text readability */}
-      <div className="absolute inset-0 bg-black/20 z-10" />
+      <div className="absolute inset-0 bg-black/30 z-10" />
+      
+      {/* Hero content - title is now removed as it's in the image */}
       
       {/* Button positioned at the bottom */}
       <div className="absolute bottom-8 z-30 w-full flex justify-center">

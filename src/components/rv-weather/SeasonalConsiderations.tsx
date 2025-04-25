@@ -1,6 +1,7 @@
 
 import React from "react";
 import { Sun, Cloud, CloudSnow, Leaf } from "lucide-react";
+import { LazyImage } from "@/components/ui/LazyImage";
 
 const SeasonalConsiderations = () => {
   return (
@@ -13,10 +14,11 @@ const SeasonalConsiderations = () => {
           <h3 className="text-xl font-bold text-white">Summer Preparation</h3>
         </div>
         
-        <img 
+        <LazyImage 
           src="/lovable-uploads/ae930cf7-205f-41d3-9c9b-a4969e5c35e6.png" 
           alt="RV parked at a summer campsite" 
-          className="w-full h-48 object-cover rounded-lg mb-4"
+          className="w-full h-52 object-cover rounded-lg mb-4"
+          blurDataURL="/lovable-uploads/ae930cf7-205f-41d3-9c9b-a4969e5c35e6.png"
         />
         
         <ul className="space-y-2 text-light-blue">
@@ -47,10 +49,11 @@ const SeasonalConsiderations = () => {
           <h3 className="text-xl font-bold text-white">Winter Considerations</h3>
         </div>
         
-        <img 
+        <LazyImage 
           src="/lovable-uploads/9cb71164-7823-47a1-b788-5afc310ad5e5.png" 
           alt="RV in snowy winter conditions" 
-          className="w-full h-48 object-cover rounded-lg mb-4"
+          className="w-full h-52 object-cover rounded-lg mb-4"
+          blurDataURL="/lovable-uploads/9cb71164-7823-47a1-b788-5afc310ad5e5.png"
         />
         
         <ul className="space-y-2 text-light-blue">
@@ -69,6 +72,76 @@ const SeasonalConsiderations = () => {
           <li className="flex items-start">
             <span className="text-[#5B9BD5] mr-2">•</span>
             <span>Keep propane tanks filled to at least 30%</span>
+          </li>
+        </ul>
+      </div>
+
+      <div className="bg-[#151A22] p-6 rounded-lg border border-[#1a202c]/40 shadow-lg">
+        <div className="flex items-center mb-4">
+          <div className="p-3 bg-orange-500/20 rounded-full mr-4">
+            <Leaf className="h-6 w-6 text-orange-500" />
+          </div>
+          <h3 className="text-xl font-bold text-white">Fall Planning</h3>
+        </div>
+        
+        <LazyImage 
+          src="/lovable-uploads/3175b015-a5c7-4df7-b8ca-b8a130b05519.png" 
+          alt="RV parked among fall foliage" 
+          className="w-full h-52 object-cover rounded-lg mb-4"
+          blurDataURL="/lovable-uploads/3175b015-a5c7-4df7-b8ca-b8a130b05519.png"
+        />
+        
+        <ul className="space-y-2 text-light-blue">
+          <li className="flex items-start">
+            <span className="text-[#5B9BD5] mr-2">•</span>
+            <span>Prepare for early frost and temperature fluctuations</span>
+          </li>
+          <li className="flex items-start">
+            <span className="text-[#5B9BD5] mr-2">•</span>
+            <span>Watch for slippery conditions from fallen leaves</span>
+          </li>
+          <li className="flex items-start">
+            <span className="text-[#5B9BD5] mr-2">•</span>
+            <span>Check heating systems before colder weather arrives</span>
+          </li>
+          <li className="flex items-start">
+            <span className="text-[#5B9BD5] mr-2">•</span>
+            <span>Monitor weather forecasts for changing conditions</span>
+          </li>
+        </ul>
+      </div>
+      
+      <div className="bg-[#151A22] p-6 rounded-lg border border-[#1a202c]/40 shadow-lg">
+        <div className="flex items-center mb-4">
+          <div className="p-3 bg-green-400/20 rounded-full mr-4">
+            <Cloud className="h-6 w-6 text-green-400" />
+          </div>
+          <h3 className="text-xl font-bold text-white">Spring Travel</h3>
+        </div>
+        
+        <LazyImage 
+          src="/lovable-uploads/989028bc-89ec-4ec4-841d-e38421cc7626.png" 
+          alt="RV in spring scenery with blooming flowers" 
+          className="w-full h-52 object-cover rounded-lg mb-4"
+          blurDataURL="/lovable-uploads/989028bc-89ec-4ec4-841d-e38421cc7626.png"
+        />
+        
+        <ul className="space-y-2 text-light-blue">
+          <li className="flex items-start">
+            <span className="text-[#5B9BD5] mr-2">•</span>
+            <span>Be prepared for sudden rain and flash flooding</span>
+          </li>
+          <li className="flex items-start">
+            <span className="text-[#5B9BD5] mr-2">•</span>
+            <span>Check roof seals after winter expansion/contraction</span>
+          </li>
+          <li className="flex items-start">
+            <span className="text-[#5B9BD5] mr-2">•</span>
+            <span>Monitor weather alerts for thunderstorms and tornadoes</span>
+          </li>
+          <li className="flex items-start">
+            <span className="text-[#5B9BD5] mr-2">•</span>
+            <span>Ensure drainage systems are clear of winter debris</span>
           </li>
         </ul>
       </div>
