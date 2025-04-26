@@ -1,8 +1,9 @@
 
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
 import { HelpCircle } from "lucide-react";
-import { Suspense, lazy } from "react";
+import { useState, useEffect } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
+import ErrorBoundary from "@/components/error/ErrorBoundary";
 
 const FAQS = [
   {
@@ -37,21 +38,17 @@ const FAQS = [
   },
 ];
 
-// ErrorBoundary component for the FAQ section
-const FAQErrorBoundary = ({ children }: { children: React.ReactNode }) => {
-  try {
-    return <>{children}</>;
-  } catch (error) {
-    console.error("Error in FAQ component:", error);
-    return (
-      <div className="p-8 bg-[#151A22] border border-red-500/30 rounded-3xl text-center">
-        <HelpCircle className="w-10 h-10 text-red-400 mx-auto mb-4" />
-        <h3 className="text-xl font-bold text-white">FAQ Section Unavailable</h3>
-        <p className="text-gray-300 mt-2">Please check back later</p>
+// FAQ Loading Skeleton
+const LoadingFallback = () => (
+  <div className="space-y-4">
+    {[1, 2, 3].map((i) => (
+      <div key={i} className="space-y-2">
+        <Skeleton className="h-10 w-full bg-[#151A22]/70" />
+        <Skeleton className="h-20 w-full bg-[#151A22]/50" />
       </div>
-    );
-  }
-};
+    ))}
+  </div>
+);
 
 // FAQ Content Component
 const FAQContent = () => (
@@ -69,19 +66,18 @@ const FAQContent = () => (
   </Accordion>
 );
 
-// Loading fallback
-const LoadingFallback = () => (
-  <div className="space-y-4">
-    {[1, 2, 3].map((i) => (
-      <div key={i} className="space-y-2">
-        <Skeleton className="h-10 w-full bg-[#151A22]/70" />
-        <Skeleton className="h-20 w-full bg-[#151A22]/50" />
-      </div>
-    ))}
-  </div>
-);
-
 export default function TechnologyFAQ() {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    // Simulate loading delay for smooth transition
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 500);
+    
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <section
       className="max-w-4xl mx-auto mb-16 bg-[#151A22] border border-[#1a202c]/60 rounded-3xl shadow-lg p-8"
@@ -97,11 +93,9 @@ export default function TechnologyFAQ() {
         Find answers to the most common questions about smart RV systems and features below.
       </p>
       
-      <FAQErrorBoundary>
-        <Suspense fallback={<LoadingFallback />}>
-          <FAQContent />
-        </Suspense>
-      </FAQErrorBoundary>
+      <ErrorBoundary>
+        {isLoading ? <LoadingFallback /> : <FAQContent />}
+      </ErrorBoundary>
     </section>
   );
 }

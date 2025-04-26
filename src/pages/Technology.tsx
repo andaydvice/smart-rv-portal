@@ -5,10 +5,9 @@ import { Cpu, Wifi, Battery, Shield, Smartphone, Bot, ArrowRight } from "lucide-
 import { Link } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
 import TechnologyFAQ from "@/components/technology/TechnologyFAQ";
-import { Suspense, useEffect, lazy } from "react";
+import { useEffect } from "react";
 import { scrollToTop } from "@/utils/scrollToTop";
 import { PageErrorBoundary } from "@/components/common/PageErrorBoundary";
-import { Skeleton } from "@/components/ui/skeleton";
 
 const technologies = [
   {
@@ -50,25 +49,6 @@ const technologies = [
   },
 ];
 
-// Loading fallback for FAQ section
-const FAQSkeleton = () => (
-  <div className="max-w-4xl mx-auto mb-16 bg-[#151A22] border border-[#1a202c]/60 rounded-3xl shadow-lg p-8">
-    <div className="flex items-center mb-6">
-      <Skeleton className="h-7 w-7 rounded-full mr-3" />
-      <Skeleton className="h-8 w-64" />
-    </div>
-    <Skeleton className="h-5 w-full max-w-2xl mb-8" />
-    <div className="space-y-4">
-      {[1, 2, 3].map((i) => (
-        <div key={i} className="space-y-2">
-          <Skeleton className="h-10 w-full" />
-          <Skeleton className="h-20 w-full" />
-        </div>
-      ))}
-    </div>
-  </div>
-);
-
 const Technology = () => {
   // Scroll to top when component mounts
   useEffect(() => {
@@ -95,6 +75,8 @@ const Technology = () => {
               alt="Technology Main Header"
               className="w-full max-w-[1600px]"
               loading="eager"
+              width="1600"
+              height="600"
             />
           </div>
         </div>
@@ -127,7 +109,7 @@ const Technology = () => {
             ))}
           </div>
 
-          {/* Insert FAQ section here with error handling */}
+          {/* Use simplified error handling for FAQ section */}
           <PageErrorBoundary>
             <TechnologyFAQ />
           </PageErrorBoundary>
@@ -143,6 +125,8 @@ const Technology = () => {
               alt="Technology Overview"
               className="w-full h-96 object-cover"
               loading="lazy"
+              width="1200"
+              height="600"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/50 to-transparent flex items-center justify-center">
               <div className="text-center p-8">
