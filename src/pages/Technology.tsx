@@ -7,7 +7,6 @@ import Layout from "@/components/layout/Layout";
 import TechnologyFAQ from "@/components/technology/TechnologyFAQ";
 import { useEffect } from "react";
 import { scrollToTop } from "@/utils/scrollToTop";
-import { PageErrorBoundary } from "@/components/common/PageErrorBoundary";
 
 const technologies = [
   {
@@ -50,24 +49,19 @@ const technologies = [
 ];
 
 const Technology = () => {
-  // Scroll to top when component mounts
   useEffect(() => {
     scrollToTop();
-    console.log("Technology page loaded");
   }, []);
 
   return (
     <Layout>
       <div className="flex-grow bg-gradient-to-b from-gray-900 to-gray-800">
-        {/* Full width container with no padding constraints */}
         <div className="w-full py-10">
-          {/* MAIN HEADER IMAGE - full width with proper sizing */}
           <div className="w-full overflow-hidden mb-12 shadow-lg flex justify-center">
             <img
               src="/lovable-uploads/9ad50274-5f5b-47fa-8278-32599d734b3e.png"
               alt="Technology Main Header"
               className="w-full max-w-[1600px]"
-              loading="eager"
               width="1600"
               height="600"
             />
@@ -102,10 +96,7 @@ const Technology = () => {
             ))}
           </div>
 
-          {/* FAQ section wrapped in error boundary */}
-          <div className="mb-16">
-            <TechnologyFAQ />
-          </div>
+          <TechnologyFAQ />
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}

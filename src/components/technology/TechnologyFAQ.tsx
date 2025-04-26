@@ -1,9 +1,6 @@
 
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
 import { HelpCircle } from "lucide-react";
-import { useState } from "react";
-import { Skeleton } from "@/components/ui/skeleton";
-import ErrorBoundary from "@/components/error/ErrorBoundary";
 
 const FAQS = [
   {
@@ -38,37 +35,7 @@ const FAQS = [
   },
 ];
 
-// FAQ Content Component - Define this before using it
-const FAQContent = () => (
-  <Accordion type="single" collapsible className="space-y-3">
-    {FAQS.map((faq) => (
-      <AccordionItem key={faq.question} value={faq.question}>
-        <AccordionTrigger className="text-blue-400 text-lg font-semibold hover:underline focus:underline">
-          {faq.question}
-        </AccordionTrigger>
-        <AccordionContent className="text-gray-200 text-base bg-[#080F1F]/50 rounded-b-2xl px-4 py-2">
-          {faq.answer}
-        </AccordionContent>
-      </AccordionItem>
-    ))}
-  </Accordion>
-);
-
-// Simple loading fallback
-const LoadingFallback = () => (
-  <div className="space-y-4">
-    {[1, 2, 3].map((i) => (
-      <div key={i} className="space-y-2">
-        <Skeleton className="h-10 w-full bg-[#151A22]/70" />
-        <Skeleton className="h-20 w-full bg-[#151A22]/50" />
-      </div>
-    ))}
-  </div>
-);
-
 export default function TechnologyFAQ() {
-  const [isLoading, setIsLoading] = useState(false);
-
   return (
     <section
       className="max-w-4xl mx-auto mb-16 bg-[#151A22] border border-[#1a202c]/60 rounded-3xl shadow-lg p-8"
@@ -84,9 +51,18 @@ export default function TechnologyFAQ() {
         Find answers to the most common questions about smart RV systems and features below.
       </p>
       
-      <ErrorBoundary>
-        {isLoading ? <LoadingFallback /> : <FAQContent />}
-      </ErrorBoundary>
+      <Accordion type="single" collapsible className="space-y-3">
+        {FAQS.map((faq) => (
+          <AccordionItem key={faq.question} value={faq.question}>
+            <AccordionTrigger className="text-blue-400 text-lg font-semibold hover:underline focus:underline">
+              {faq.question}
+            </AccordionTrigger>
+            <AccordionContent className="text-gray-200 text-base bg-[#080F1F]/50 rounded-b-2xl px-4 py-2">
+              {faq.answer}
+            </AccordionContent>
+          </AccordionItem>
+        ))}
+      </Accordion>
     </section>
   );
 }
