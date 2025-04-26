@@ -1,6 +1,5 @@
 
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { HelpCircle } from "lucide-react";
+import React from "react";
 
 const TechnologyFAQ = () => {
   const faqs = [
@@ -31,9 +30,8 @@ const TechnologyFAQ = () => {
   ];
 
   return (
-    <section className="max-w-4xl mx-auto mb-16 bg-[#151A22] border border-[#1a202c]/60 rounded-3xl shadow-lg p-8">
+    <div className="max-w-4xl mx-auto mb-16 bg-[#151A22] border border-[#1a202c]/60 rounded-3xl shadow-lg p-8">
       <div className="flex items-center mb-6">
-        <HelpCircle className="w-7 h-7 text-blue-400 mr-3" />
         <h2 className="text-white text-3xl font-bold">Technology FAQ</h2>
       </div>
       
@@ -41,9 +39,9 @@ const TechnologyFAQ = () => {
         Find answers to the most common questions about smart RV systems and features below.
       </p>
       
-      <div className="space-y-3">
+      <div className="space-y-4">
         {faqs.map((faq, index) => (
-          <div key={index} className="bg-[#080F1F]/30 rounded-lg overflow-hidden border border-[#1a202c]/40">
+          <div key={index} className="bg-[#080F1F]/30 rounded-lg overflow-hidden border border-[#1a202c]/40 mb-4">
             <div className="px-4 py-3 bg-[#080F1F]/50 text-blue-400 text-lg font-semibold">
               {faq.question}
             </div>
@@ -53,7 +51,7 @@ const TechnologyFAQ = () => {
           </div>
         ))}
       </div>
-    </section>
+    </div>
   );
 };
 

@@ -1,14 +1,13 @@
 
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import Layout from "@/components/layout/Layout";
 import { scrollToTop } from "@/utils/scrollToTop";
-
-// Import the simplified TechnologyFAQ component
 import TechnologyFAQ from "@/components/technology/TechnologyFAQ";
 
+// Simple version of Technology page without any complex components
 const Technology = () => {
   // Basic scroll to top effect
   useEffect(() => {
@@ -52,9 +51,9 @@ const Technology = () => {
   return (
     <Layout>
       <div className="flex-grow bg-gradient-to-b from-gray-900 to-gray-800">
-        {/* Header image */}
+        {/* Header section */}
         <div className="w-full py-10">
-          <div className="w-full overflow-hidden mb-12 shadow-lg flex justify-center">
+          <div className="w-full overflow-hidden mb-12 flex justify-center">
             <img
               src="/lovable-uploads/9ad50274-5f5b-47fa-8278-32599d734b3e.png"
               alt="Technology Main Header"
@@ -73,12 +72,12 @@ const Technology = () => {
             </p>
           </div>
 
-          {/* Technology cards - simplified with no animations */}
+          {/* Technology cards */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
             {technologies.map((tech, index) => (
               <div
                 key={tech.title}
-                className={`bg-gray-800/50 rounded-xl p-6 border border-gray-700 hover:border-blue-500/50 transition-all duration-300`}
+                className="bg-gray-800/50 rounded-xl p-6 border border-gray-700 hover:border-blue-500/50 transition-all duration-300"
               >
                 <h3 className={`text-xl font-bold ${tech.color} mb-2`}>{tech.title}</h3>
                 <p className="text-gray-300">{tech.description}</p>
@@ -86,7 +85,7 @@ const Technology = () => {
             ))}
           </div>
 
-          {/* Simplified FAQ component */}
+          {/* FAQ component */}
           <div className="mb-16">
             <TechnologyFAQ />
           </div>
