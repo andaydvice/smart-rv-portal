@@ -9,16 +9,16 @@ import TechnicalTab from "@/components/documentation/TechnicalTab";
 import MaintenanceTab from "@/components/documentation/MaintenanceTab";
 import PowerTab from "@/components/documentation/PowerTab";
 import Layout from "@/components/layout/Layout";
+import { Container } from "@/components/ui/container";
 
 const Documentation = () => {
   return (
     <Layout>
-      <Navbar />
       <div className="w-full flex-grow">
-        <div className="w-full px-4 py-8 -mt-32 relative z-10">
-          <div className="max-w-7xl mx-auto">
-            <DocumentationHeader />
-            
+        <div className="w-full py-8 relative z-10">
+          <DocumentationHeader />
+          
+          <Container>
             <Tabs defaultValue="overview" className="space-y-8">
               <TabsList className="bg-[#091020] p-2 mb-8">
                 <TabsTrigger 
@@ -67,7 +67,7 @@ const Documentation = () => {
                 <PowerTab />
               </TabsContent>
             </Tabs>
-          </div>
+          </Container>
         </div>
       </div>
     </Layout>

@@ -10,7 +10,7 @@ const DocumentationHeader = () => {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
-      className="space-y-8 mb-12 pt-24 max-w-7xl mx-auto px-4"
+      className="space-y-8 mb-12 pt-12 sm:pt-24 container max-w-6xl mx-auto px-4 sm:px-6"
     >
       <Link to="/troubleshooting">
         <Button
@@ -22,13 +22,16 @@ const DocumentationHeader = () => {
         </Button>
       </Link>
 
-      <div className="relative w-full max-w-6xl mx-auto h-[400px] rounded-xl overflow-hidden mb-8">
-        <img
-          src="/lovable-uploads/f72886c3-3677-4dfe-8d56-5a784197eda2.png"
-          alt="Complete System Documentation"
-          className="w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 bg-black/40"></div>
+      <div className="relative w-full rounded-xl overflow-hidden mb-8 border border-gray-800">
+        <div className="max-h-[400px] overflow-hidden">
+          <img
+            src="/lovable-uploads/f72886c3-3677-4dfe-8d56-5a784197eda2.png"
+            alt="Complete System Documentation"
+            className="w-full object-cover"
+            style={{ maxHeight: "400px" }}
+          />
+          <div className="absolute inset-0 bg-black/40"></div>
+        </div>
       </div>
 
       <div className="text-center mb-12">

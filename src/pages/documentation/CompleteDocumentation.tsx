@@ -10,13 +10,13 @@ import NetworkInfrastructureSection from "@/components/documentation/sections/Ne
 import PowerManagementSection from "@/components/documentation/sections/PowerManagementSection";
 import SecuritySection from "@/components/documentation/sections/SecuritySection";
 import Layout from "@/components/layout/Layout";
+import { Container } from "@/components/ui/container";
 
 const CompleteDocumentation = () => {
   return (
     <Layout>
-      <Navbar />
       <div className="w-full px-4 pt-24 pb-16">
-        <div className="max-w-7xl mx-auto">
+        <Container>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -33,7 +33,7 @@ const CompleteDocumentation = () => {
               </Button>
             </Link>
 
-            <div className="relative w-full h-[400px] rounded-xl overflow-hidden mb-12 border border-gray-700">
+            <div className="relative w-full max-w-5xl mx-auto h-[400px] rounded-xl overflow-hidden mb-12 border border-gray-700">
               <img
                 src="/lovable-uploads/846b5be5-043e-4645-a3d9-39614d63342c.png"
                 alt="Smart RV Complete System Documentation"
@@ -50,7 +50,7 @@ const CompleteDocumentation = () => {
               </div>
             </div>
 
-            <div className="border border-gray-700 rounded-lg p-6 bg-[#091020]">
+            <div className="border border-gray-700 rounded-lg p-6 bg-[#091020] max-w-5xl mx-auto">
               <Accordion type="single" collapsible className="space-y-6">
                 <SystemArchitectureSection />
                 <NetworkInfrastructureSection />
@@ -59,7 +59,7 @@ const CompleteDocumentation = () => {
               </Accordion>
             </div>
           </motion.div>
-        </div>
+        </Container>
       </div>
     </Layout>
   );
