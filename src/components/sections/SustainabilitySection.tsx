@@ -1,3 +1,4 @@
+
 import { motion } from "framer-motion";
 import { Sun, Leaf, MapPin, HeartHandshake } from "lucide-react";
 
@@ -5,26 +6,22 @@ const sustainability = [
   {
     icon: Sun,
     title: "Solar Power",
-    description: "Integrated solar panels for sustainable energy",
-    image: "/lovable-uploads/solar-power.jpg"
+    description: "Integrated solar panels for sustainable energy"
   },
   {
     icon: Leaf,
     title: "Eco-Materials",
-    description: "Sustainable materials and manufacturing processes",
-    image: "/lovable-uploads/eco-materials.jpg"
+    description: "Sustainable materials and manufacturing processes"
   },
   {
     icon: MapPin,
     title: "Green Routes",
-    description: "Eco-friendly route planning and charging stations",
-    image: "/lovable-uploads/green-routes.jpg"
+    description: "Eco-friendly route planning and charging stations"
   },
   {
     icon: HeartHandshake,
     title: "Carbon Neutral",
-    description: "Commitment to reducing environmental impact",
-    image: "/lovable-uploads/carbon-neutral.jpg"
+    description: "Commitment to reducing environmental impact"
   },
 ];
 
