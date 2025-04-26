@@ -49,12 +49,19 @@ const SeasonalConsiderations = () => {
           <h3 className="text-xl font-bold text-white">Winter Considerations</h3>
         </div>
         
-        <LazyImage 
-          src="/lovable-uploads/5f2f1aed-606d-4f1c-9909-9af71941168d.png" 
-          alt="RV in dramatic winter landscape with snow" 
-          className="w-full h-52 object-cover rounded-lg mb-4 border-2 border-blue-400/30"
-          blurDataURL="/lovable-uploads/5f2f1aed-606d-4f1c-9909-9af71941168d.png"
-        />
+        {/* Fixed winter image with error handling */}
+        <div className="relative w-full h-52 mb-4 rounded-lg border-2 border-blue-400/30 overflow-hidden">
+          <img 
+            src="/lovable-uploads/5f2f1aed-606d-4f1c-9909-9af71941168d.png" 
+            alt="RV in dramatic winter landscape with snow" 
+            className="w-full h-full object-cover"
+            onError={(e) => {
+              // Fallback to a different image or placeholder if the main one fails
+              e.currentTarget.src = "/lovable-uploads/ff43ed8a-b7cd-42f7-a45e-a3a706d39d07.png";
+              console.log("Winter image failed to load, using fallback");
+            }}
+          />
+        </div>
         
         <ul className="space-y-2 text-light-blue">
           <li className="flex items-start">
