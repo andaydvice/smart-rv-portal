@@ -19,10 +19,10 @@ const HazardsSection = () => {
       {/* Hero image with reduced spacing */}
       <div className="mb-8 relative mt-12">
         <LazyImage
-          src="/lovable-uploads/16b00b55-0f51-4227-9270-86b2571ac935.png"
-          alt="RV driving through stormy weather with lightning strikes"
+          src="/lovable-uploads/cf3a586f-ae68-4a54-953f-b83505056d0e.png"
+          alt="RV in stormy weather with lightning strikes"
           className="rounded-lg shadow-lg w-full object-cover max-h-[500px]"
-          blurDataURL="/lovable-uploads/16b00b55-0f51-4227-9270-86b2571ac935.png"
+          blurDataURL="/lovable-uploads/cf3a586f-ae68-4a54-953f-b83505056d0e.png"
         />
       </div>
       
