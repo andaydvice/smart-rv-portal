@@ -15,8 +15,8 @@ const HazardsSection = () => {
         <TypographyH2 className="border-none text-white text-3xl">Weather Hazards for RV Travel</TypographyH2>
       </div>
       
-      {/* Hero image with increased spacing and adjusted positioning */}
-      <div className="mb-8 relative mt-12">
+      {/* Hero image with significantly more top spacing to reveal the headline */}
+      <div className="mb-8 relative mt-28">
         {!imageLoaded && (
           <div className="absolute inset-0 flex items-center justify-center bg-[#080F1F]/70 rounded-lg">
             <div className="w-10 h-10 border-4 border-[#5B9BD5] border-t-transparent rounded-full animate-spin"></div>
@@ -36,4 +36,3 @@ const HazardsSection = () => {
 };
 
 export default HazardsSection;
-
