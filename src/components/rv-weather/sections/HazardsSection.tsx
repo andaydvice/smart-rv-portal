@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { Wind } from "lucide-react";
 import { TypographyH2 } from "@/components/ui/typography";
 import WeatherHazards from "../WeatherHazards";
+import { LazyImage } from "@/components/ui/LazyImage";
 
 const HazardsSection = () => {
   const [imageLoaded, setImageLoaded] = useState(false);
@@ -17,16 +18,11 @@ const HazardsSection = () => {
       
       {/* Hero image with reduced spacing */}
       <div className="mb-8 relative mt-12">
-        {!imageLoaded && (
-          <div className="absolute inset-0 flex items-center justify-center bg-[#080F1F]/70 rounded-lg">
-            <div className="w-10 h-10 border-4 border-[#5B9BD5] border-t-transparent rounded-full animate-spin"></div>
-          </div>
-        )}
-        <img 
-          src="/lovable-uploads/16b00b55-0f51-4227-9270-86b2571ac935.png" 
-          alt="RV driving through stormy weather with lightning strikes" 
-          className={`rounded-lg shadow-lg w-full object-cover max-h-[500px] ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
-          onLoad={() => setImageLoaded(true)}
+        <LazyImage
+          src="/lovable-uploads/16b00b55-0f51-4227-9270-86b2571ac935.png"
+          alt="RV driving through stormy weather with lightning strikes"
+          className="rounded-lg shadow-lg w-full object-cover max-h-[500px]"
+          blurDataURL="/lovable-uploads/16b00b55-0f51-4227-9270-86b2571ac935.png"
         />
       </div>
       
@@ -36,4 +32,3 @@ const HazardsSection = () => {
 };
 
 export default HazardsSection;
-

@@ -1,3 +1,4 @@
+
 import React from "react";
 import { Sun, Cloud, CloudSnow, Leaf } from "lucide-react";
 import { LazyImage } from "@/components/ui/LazyImage";
@@ -48,18 +49,12 @@ const SeasonalConsiderations = () => {
           <h3 className="text-xl font-bold text-white">Winter Considerations</h3>
         </div>
         
-        <div className="relative w-full h-52 mb-4 rounded-lg border-2 border-blue-400/30 overflow-hidden">
-          <img 
-            src="/lovable-uploads/5f2f1aed-606d-4f1c-9909-9af71941168d.png" 
-            alt="RV in dramatic winter landscape with snow" 
-            className="w-full h-full object-cover"
-            onError={(e) => {
-              // Fallback to Unsplash winter-like landscape
-              e.currentTarget.src = "https://images.unsplash.com/photo-1482938289607-e9573fc26ebb";
-              console.log("Winter image failed to load, using Unsplash fallback");
-            }}
-          />
-        </div>
+        <LazyImage 
+          src="/lovable-uploads/dee06c09-15b9-404e-a583-836e4a06d9d1.png" 
+          alt="RVs parked at sunset with dramatic winter sky" 
+          className="w-full h-52 object-cover rounded-lg mb-4"
+          blurDataURL="/lovable-uploads/dee06c09-15b9-404e-a583-836e4a06d9d1.png"
+        />
         
         <ul className="space-y-2 text-light-blue">
           <li className="flex items-start">
