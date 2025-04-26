@@ -1,7 +1,7 @@
 
 import { ChevronDown } from "lucide-react";
 import { Link } from "react-router-dom";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { Accordion } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
 import BluetoothSection from "./sections/BluetoothSection";
 import SoftwareSection from "./sections/SoftwareSection";
@@ -9,22 +9,20 @@ import PowerSection from "./sections/PowerSection";
 import ConnectivitySection from "./sections/ConnectivitySection";
 
 const SmartSystemGuide = () => {
-  console.log("SmartSystemGuide component rendering"); // Debug logging
-
   return (
-    <div className="bg-[#0B1221] rounded-[32px] border border-gray-800/30 p-8 mt-8">
+    <div className="bg-[#0B1221] rounded-[24px] border border-gray-800/30 p-8">
       <div className="space-y-6">
-        <div className="space-y-2">
-          <h2 className="text-xl font-bold text-white leading-tight">
+        <div className="space-y-3">
+          <h2 className="text-2xl font-bold text-white">
             Smart System Integration Guide
           </h2>
-          <p className="text-gray-300 text-sm">
+          <p className="text-gray-300">
             Complete setup and troubleshooting guide for your Smart RV systems
           </p>
         </div>
 
-        <div className="space-y-0 pt-2 border rounded-lg border-gray-800/50">
-          <Accordion type="single" collapsible className="w-full">
+        <div className="space-y-4">
+          <Accordion type="single" collapsible className="w-full space-y-2">
             <BluetoothSection />
             <SoftwareSection />
             <PowerSection />
@@ -32,11 +30,11 @@ const SmartSystemGuide = () => {
           </Accordion>
         </div>
 
-        <div className="pt-4">
+        <div className="pt-6">
           <Link to="/documentation/complete">
             <Button 
               variant="outline" 
-              className="bg-transparent border-[#60A5FA] text-[#60A5FA] hover:bg-[#60A5FA]/25 hover:text-white text-sm py-2 px-4 focus:text-white active:text-white"
+              className="bg-transparent border-[#60A5FA] text-[#60A5FA] hover:bg-[#60A5FA]/25 hover:text-white text-sm py-2 px-4 transition-all duration-300"
             >
               View Complete System Documentation
               <ChevronDown className="ml-2 h-4 w-4" />
