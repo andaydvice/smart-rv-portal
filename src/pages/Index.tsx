@@ -42,9 +42,8 @@ const Index = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6 }}
-        className="min-h-screen bg-gradient-to-b from-gray-50 to-white"
+        className="min-h-screen w-full bg-gradient-to-b from-gray-50 to-white"
       >
-        <Navbar />
         <HeroSection />
         
         <Suspense fallback={<LoadingFallback />}>

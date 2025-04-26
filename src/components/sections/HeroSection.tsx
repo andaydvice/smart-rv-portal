@@ -5,9 +5,9 @@ import { Link } from "react-router-dom";
 import { Container } from "@/components/ui/container";
 
 export const HeroSection = () => (
-  <section className="relative w-screen min-h-screen overflow-hidden -mx-4">
+  <section className="relative w-full min-h-screen overflow-hidden">
     {/* Full width image container */}
-    <div className="absolute inset-0">
+    <div className="absolute inset-0 left-0 right-0">
       <img
         src="/lovable-uploads/f3ebf58c-7bbf-427f-9510-9c3b0aec6f6d.png"
         alt="Luxury RV interior with panoramic windows and modern design"
@@ -76,4 +76,3 @@ export const HeroSection = () => (
     <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black/50 to-transparent" />
   </section>
 );
-

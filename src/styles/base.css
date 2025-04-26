@@ -20,6 +20,8 @@
 
   html, body {
     @apply w-full max-w-full overflow-x-hidden;
+    margin: 0;
+    padding: 0;
   }
 
   body {
@@ -27,6 +29,8 @@
     font-feature-settings: "ss01" on, "ss02" on, "cv01" on, "cv02" on;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     text-size-adjust: 100%;
+    margin: 0;
+    padding: 0;
   }
 
   .glass-card {
@@ -54,5 +58,12 @@
   #root > div {
     width: 100%;
     max-width: 100%;
+  }
+
+  /* New: Ensure no margin or padding on root level elements */
+  #root, #root > div {
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow-x: hidden !important;
   }
 }
