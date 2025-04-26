@@ -53,14 +53,7 @@ const Technology = () => {
   // Scroll to top when component mounts
   useEffect(() => {
     scrollToTop();
-    
-    // Performance logging
-    const startTime = performance.now();
-    
-    return () => {
-      const loadTime = performance.now() - startTime;
-      console.log(`Technology page loaded in ${Math.round(loadTime)}ms`);
-    };
+    console.log("Technology page loaded");
   }, []);
 
   return (
@@ -109,10 +102,10 @@ const Technology = () => {
             ))}
           </div>
 
-          {/* Use simplified error handling for FAQ section */}
-          <PageErrorBoundary>
+          {/* FAQ section wrapped in error boundary */}
+          <div className="mb-16">
             <TechnologyFAQ />
-          </PageErrorBoundary>
+          </div>
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}

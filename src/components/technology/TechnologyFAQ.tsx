@@ -1,7 +1,7 @@
 
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
 import { HelpCircle } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
 import ErrorBoundary from "@/components/error/ErrorBoundary";
 
@@ -38,19 +38,7 @@ const FAQS = [
   },
 ];
 
-// FAQ Loading Skeleton
-const LoadingFallback = () => (
-  <div className="space-y-4">
-    {[1, 2, 3].map((i) => (
-      <div key={i} className="space-y-2">
-        <Skeleton className="h-10 w-full bg-[#151A22]/70" />
-        <Skeleton className="h-20 w-full bg-[#151A22]/50" />
-      </div>
-    ))}
-  </div>
-);
-
-// FAQ Content Component
+// FAQ Content Component - Define this before using it
 const FAQContent = () => (
   <Accordion type="single" collapsible className="space-y-3">
     {FAQS.map((faq) => (
@@ -66,17 +54,20 @@ const FAQContent = () => (
   </Accordion>
 );
 
-export default function TechnologyFAQ() {
-  const [isLoading, setIsLoading] = useState(true);
+// Simple loading fallback
+const LoadingFallback = () => (
+  <div className="space-y-4">
+    {[1, 2, 3].map((i) => (
+      <div key={i} className="space-y-2">
+        <Skeleton className="h-10 w-full bg-[#151A22]/70" />
+        <Skeleton className="h-20 w-full bg-[#151A22]/50" />
+      </div>
+    ))}
+  </div>
+);
 
-  useEffect(() => {
-    // Simulate loading delay for smooth transition
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 500);
-    
-    return () => clearTimeout(timer);
-  }, []);
+export default function TechnologyFAQ() {
+  const [isLoading, setIsLoading] = useState(false);
 
   return (
     <section
