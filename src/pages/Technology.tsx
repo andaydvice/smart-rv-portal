@@ -1,61 +1,58 @@
 
-import { motion } from "framer-motion";
-import { Button } from "@/components/ui/button";
-import { Cpu, Wifi, Battery, Shield, Smartphone, Bot, ArrowRight } from "lucide-react";
-import { Link } from "react-router-dom";
-import Layout from "@/components/layout/Layout";
-import TechnologyFAQ from "@/components/technology/TechnologyFAQ";
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import { ArrowRight } from "lucide-react";
+import Layout from "@/components/layout/Layout";
 import { scrollToTop } from "@/utils/scrollToTop";
 
-const technologies = [
-  {
-    icon: Cpu,
-    title: "AI Integration",
-    description:
-      "Advanced artificial intelligence systems for smart automation and personalized experiences",
-    color: "text-cyan-400",
-  },
-  {
-    icon: Wifi,
-    title: "Connected Systems",
-    description: "Seamless integration of all RV components through our proprietary network",
-    color: "text-blue-400",
-  },
-  {
-    icon: Battery,
-    title: "Smart Power",
-    description: "Intelligent power management with solar integration and battery optimization",
-    color: "text-green-400",
-  },
-  {
-    icon: Shield,
-    title: "Security Suite",
-    description: "State of the art security systems with biometric access and 24/7 monitoring",
-    color: "text-purple-400",
-  },
-  {
-    icon: Smartphone,
-    title: "Mobile Control",
-    description: "Complete control of your RV through our intuitive mobile application",
-    color: "text-pink-400",
-  },
-  {
-    icon: Bot,
-    title: "Automation",
-    description: "Smart automation for climate, lighting, and entertainment systems",
-    color: "text-orange-400",
-  },
-];
+// Import the simplified TechnologyFAQ component
+import TechnologyFAQ from "@/components/technology/TechnologyFAQ";
 
 const Technology = () => {
+  // Basic scroll to top effect
   useEffect(() => {
     scrollToTop();
   }, []);
 
+  // Technology cards data
+  const technologies = [
+    {
+      title: "AI Integration",
+      description: "Advanced artificial intelligence systems for smart automation and personalized experiences",
+      color: "text-cyan-400",
+    },
+    {
+      title: "Connected Systems",
+      description: "Seamless integration of all RV components through our proprietary network",
+      color: "text-blue-400",
+    },
+    {
+      title: "Smart Power",
+      description: "Intelligent power management with solar integration and battery optimization",
+      color: "text-green-400",
+    },
+    {
+      title: "Security Suite",
+      description: "State of the art security systems with biometric access and 24/7 monitoring",
+      color: "text-purple-400",
+    },
+    {
+      title: "Mobile Control",
+      description: "Complete control of your RV through our intuitive mobile application",
+      color: "text-pink-400",
+    },
+    {
+      title: "Automation",
+      description: "Smart automation for climate, lighting, and entertainment systems",
+      color: "text-orange-400",
+    },
+  ];
+
   return (
     <Layout>
       <div className="flex-grow bg-gradient-to-b from-gray-900 to-gray-800">
+        {/* Header image */}
         <div className="w-full py-10">
           <div className="w-full overflow-hidden mb-12 shadow-lg flex justify-center">
             <img
@@ -69,46 +66,37 @@ const Technology = () => {
         </div>
 
         <div className="max-w-7xl mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="text-center mb-16"
-          >
+          {/* Intro text */}
+          <div className="text-center mb-16">
             <p className="text-xl text-gray-300 max-w-2xl mx-auto">
               Discover the cutting edge technologies that power the Smart RVs
             </p>
-          </motion.div>
+          </div>
 
+          {/* Technology cards - simplified with no animations */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
             {technologies.map((tech, index) => (
-              <motion.div
+              <div
                 key={tech.title}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.05 + 0.2 }}
-                className="bg-gray-800/50 rounded-xl p-6 border border-gray-700 hover:border-blue-500/50 transition-all duration-300"
+                className={`bg-gray-800/50 rounded-xl p-6 border border-gray-700 hover:border-blue-500/50 transition-all duration-300`}
               >
-                <tech.icon className={`w-12 h-12 mb-4 ${tech.color}`} />
-                <h3 className="text-xl font-bold text-white mb-2">{tech.title}</h3>
+                <h3 className={`text-xl font-bold ${tech.color} mb-2`}>{tech.title}</h3>
                 <p className="text-gray-300">{tech.description}</p>
-              </motion.div>
+              </div>
             ))}
           </div>
 
-          <TechnologyFAQ />
+          {/* Simplified FAQ component */}
+          <div className="mb-16">
+            <TechnologyFAQ />
+          </div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4 }}
-            className="relative rounded-2xl overflow-hidden mb-12"
-          >
+          {/* CTA section */}
+          <div className="relative rounded-2xl overflow-hidden mb-12">
             <img
               src="/lovable-uploads/db5f9104-32a0-458f-a2ca-5ecb38415ec9.png"
               alt="Technology Overview"
               className="w-full h-96 object-cover"
-              loading="lazy"
               width="1200"
               height="600"
             />
@@ -126,7 +114,7 @@ const Technology = () => {
                 </Link>
               </div>
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
     </Layout>
