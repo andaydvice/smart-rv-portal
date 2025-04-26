@@ -15,8 +15,8 @@ const HazardsSection = () => {
         <TypographyH2 className="border-none text-white">Weather Hazards in the RVers</TypographyH2>
       </div>
       
-      {/* Hero image for weather hazards */}
-      <div className="mb-6 relative">
+      {/* Hero image for weather hazards - moved down to prevent headline cut-off */}
+      <div className="mb-6 relative mt-4">
         {!imageLoaded && (
           <div className="absolute inset-0 flex items-center justify-center bg-[#080F1F]/70 rounded-lg">
             <div className="w-10 h-10 border-4 border-[#5B9BD5] border-t-transparent rounded-full animate-spin"></div>
