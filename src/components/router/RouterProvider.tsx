@@ -12,33 +12,6 @@ const RouterProvider = () => {
   console.log('RouterProvider - Initialized with routes:', routes.length, 'total routes');
   
   useEffect(() => {
-    // Log any missing route matches
-    const currentPath = window.location.pathname;
-    const routeFound = routes.some(route => {
-      if (route.path === '*') return false;
-      if (route.path === currentPath) return true;
-      // Handle parameterized routes
-      if (route.path?.includes(':') && currentPath.startsWith(route.path.split(':')[0])) return true;
-      return false;
-    });
-    
-    if (!routeFound && currentPath !== '/') {
-      console.warn(`No exact route match found for: ${currentPath}`);
-      
-      // Log potential partial matches for debugging
-      const potentialMatches = routes
-        .filter(route => {
-          if (route.path && currentPath.includes(route.path) && route.path !== '/' && route.path !== '*') 
-            return true;
-          return false;
-        })
-        .map(route => route.path);
-      
-      if (potentialMatches.length > 0) {
-        console.log('Potential partial matches:', potentialMatches);
-      }
-    }
-    
     // Create the router asynchronously to split loading code
     const initRouter = async () => {
       // Create the router from the routes array with better error handling

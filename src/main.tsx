@@ -57,26 +57,16 @@ if (!rootElement) {
   console.error('Root element not found! Cannot mount React application.');
 } else {
   try {
-    const renderApp = () => {
-      ReactDOM.createRoot(rootElement).render(
-        <App />
-      );
-      console.log('React application successfully mounted');
-      
-      // After app is rendered, setup lazy loading for images
-      deferOperation(() => {
-        setupLazyLoading();
-      }, 300);
-    };
+    console.log('Starting React application mount');
+    ReactDOM.createRoot(rootElement).render(
+      <App />
+    );
+    console.log('React application successfully mounted');
     
-    // Check if browser is waiting for all resources or just critical ones
-    if (document.readyState === 'complete' || document.readyState === 'interactive') {
-      // Resources already loaded, render immediately
-      renderApp();
-    } else {
-      // Wait for critical resources only
-      document.addEventListener('DOMContentLoaded', renderApp);
-    }
+    // After app is rendered, setup lazy loading for images
+    deferOperation(() => {
+      setupLazyLoading();
+    }, 300);
     
   } catch (error) {
     console.error('Failed to mount React application:', error);
