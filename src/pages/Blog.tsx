@@ -29,12 +29,14 @@ const Blog = () => {
         <meta name="description" content="Discover the latest in RV technology, travel tips, and smart living solutions for modern RV enthusiasts." />
       </Helmet>
       
-      <div className="container mx-auto px-4 py-8 space-y-12 pt-20 flex-grow">
-        <BlogHeader />
-        <TrendingPosts activeCategory={activeCategory} onCategoryChange={handleCategoryChange} />
-        <BlogGrid activeCategory={activeCategory} />
-        <FeaturedCategories />
-        <NewsletterSection />
+      <div className="w-full px-4 py-8 space-y-12 pt-20">
+        <div className="max-w-7xl mx-auto">
+          <BlogHeader />
+          <TrendingPosts activeCategory={activeCategory} onCategoryChange={handleCategoryChange} />
+          <BlogGrid activeCategory={activeCategory} />
+          <FeaturedCategories />
+          <NewsletterSection />
+        </div>
       </div>
     </Layout>
   );

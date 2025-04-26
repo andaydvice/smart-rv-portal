@@ -73,9 +73,9 @@ const CompareModels = () => {
         imageSrc="/lovable-uploads/Luxury-Class-RVs-min.jpg"
       />
 
-      <div className="container mx-auto px-4 py-16">
+      <div className="w-full px-4 py-16">
         {/* Model cards grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12 max-w-7xl mx-auto">
           {models.map((model) => (
             <ModelCard
               key={model.name}
@@ -88,18 +88,20 @@ const CompareModels = () => {
         </div>
 
         {/* Specifications comparison table */}
-        <SpecificationsTable models={models} />
+        <div className="max-w-7xl mx-auto">
+          <SpecificationsTable models={models} />
 
-        {/* Features comparison table */}
-        <FeaturesComparisonTable models={models} />
+          {/* Features comparison table */}
+          <FeaturesComparisonTable models={models} />
 
-        {/* Call to action */}
-        <CallToAction 
-          title="Ready to Experience Smart RV Living?"
-          description="Schedule a personalized demo to see our smart RV technology in action and find the perfect model for your needs."
-          buttonText="Schedule a Demo"
-          buttonLink="/schedule-demo"
-        />
+          {/* Call to action */}
+          <CallToAction 
+            title="Ready to Experience Smart RV Living?"
+            description="Schedule a personalized demo to see our smart RV technology in action and find the perfect model for your needs."
+            buttonText="Schedule a Demo"
+            buttonLink="/schedule-demo"
+          />
+        </div>
       </div>
 
       <Footer2 

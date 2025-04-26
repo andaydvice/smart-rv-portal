@@ -39,17 +39,19 @@ const CompactModel = () => {
 
   return (
     <Layout>
-      <div className="bg-gradient-to-b from-gray-900 to-gray-800">
+      <div className="bg-gradient-to-b from-gray-900 to-gray-800 w-full">
         <Navbar />
         <Suspense fallback={<LoadingPlaceholder />}>
           <HeroSection />
-          <div className="container mx-auto px-4 py-12 pb-24">
-            <div className="grid gap-12">
-              {rvTypes.map((type, index) => (
-                <Suspense key={type.title} fallback={<LoadingPlaceholder />}>
-                  <RVTypeCard key={index} {...type} index={index} />
-                </Suspense>
-              ))}
+          <div className="w-full px-4 py-12 pb-24">
+            <div className="max-w-7xl mx-auto">
+              <div className="grid gap-12">
+                {rvTypes.map((type, index) => (
+                  <Suspense key={type.title} fallback={<LoadingPlaceholder />}>
+                    <RVTypeCard key={index} {...type} index={index} />
+                  </Suspense>
+                ))}
+              </div>
             </div>
           </div>
         </Suspense>

@@ -12,7 +12,7 @@ const AudioSystem = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6 }}
-        className="flex-grow pt-24 px-4 bg-gradient-to-b from-gray-900 to-gray-800"
+        className="w-full pt-24 px-4 bg-gradient-to-b from-gray-900 to-gray-800"
       >
         <div className="max-w-7xl mx-auto">
           <div className="flex items-center gap-4 mb-8">

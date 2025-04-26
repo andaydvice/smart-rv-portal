@@ -109,60 +109,61 @@ const LuxuryModel = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6 }}
-        className="bg-gradient-to-b from-gray-900 to-gray-800"
+        className="bg-gradient-to-b from-gray-900 to-gray-800 w-full"
       >
         <Navbar />
         <LuxuryHero handleNavigation={handleNavigation} />
 
-        <div className="container mx-auto px-4 pt-12 pb-24 relative z-10">
-          <KeyFeatures />
+        <div className="w-full px-4 pt-12 pb-24 relative z-10">
+          <div className="max-w-7xl mx-auto">
+            <KeyFeatures />
 
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-            className="bg-gray-800/50 rounded-xl p-6 mt-4"
-          >
-            <h2 className="text-2xl font-bold text-white mb-6">Complete Guide to Luxury RVs: Authentic Owner Insights 2024</h2>
-            <p className="text-gray-300 mb-8 italic">
-              Note: Prices are approximate ranges based on 2024 models and can vary significantly based on options, customizations, and dealer location. 
-              Many of these manufacturers also offer custom builds that can exceed these ranges.
-            </p>
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 }}
+              className="bg-gray-800/50 rounded-xl p-6 mt-4"
+            >
+              <h2 className="text-2xl font-bold text-white mb-6">Complete Guide to Luxury RVs: Authentic Owner Insights 2024</h2>
+              <p className="text-gray-300 mb-8 italic">
+                Note: Prices are approximate ranges based on 2024 models and can vary significantly based on options, customizations, and dealer location. 
+                Many of these manufacturers also offer custom builds that can exceed these ranges.
+              </p>
 
-            <div className="relative w-full h-[500px] rounded-xl overflow-hidden bg-gray-900 mb-8">
-              <img 
-                src="/lovable-uploads/795a8cdd-cf65-487f-b550-4e4458d0aa9e.png"
-                alt="Luxury RV with slide-out overlooking coastal sunset"
-                className="w-full h-full object-cover"
-                loading="lazy"
-              />
-            </div>
+              <div className="relative w-full h-[500px] rounded-xl overflow-hidden bg-gray-900 mb-8">
+                <img 
+                  src="/lovable-uploads/795a8cdd-cf65-487f-b550-4e4458d0aa9e.png"
+                  alt="Luxury RV with slide-out overlooking coastal sunset"
+                  className="w-full h-full object-cover"
+                  loading="lazy"
+                />
+              </div>
 
-            {/* MODIFIED: Added user guidance note above accordions */}
-            <p className="text-gray-300 mb-6 text-lg">
-              Click on the <span className="text-blue-400 font-semibold">blue model titles</span> below to expand and see detailed descriptions.
-            </p>
+              <p className="text-gray-300 mb-6 text-lg">
+                Click on the <span className="text-blue-400 font-semibold">blue model titles</span> below to expand and see detailed descriptions.
+              </p>
 
-            <div className="space-y-8">
-              {renderModelCategories()}
-            </div>
-          </motion.div>
+              <div className="space-y-8">
+                {renderModelCategories()}
+              </div>
+            </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.8 }}
-            className="text-center mt-16"
-          >
-            <Link to="/models/compare">
-              <Button 
-                variant="outline" 
-                className="bg-transparent border-white text-white hover:bg-blue-500/50 hover:text-white"
-              >
-                Compare All Models <ArrowLeft className="w-4 h-4 ml-2" />
-              </Button>
-            </Link>
-          </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.8 }}
+              className="text-center mt-16"
+            >
+              <Link to="/models/compare">
+                <Button 
+                  variant="outline" 
+                  className="bg-transparent border-white text-white hover:bg-blue-500/50 hover:text-white"
+                >
+                  Compare All Models <ArrowLeft className="w-4 h-4 ml-2" />
+                </Button>
+              </Link>
+            </motion.div>
+          </div>
         </div>
       </motion.main>
     </Layout>

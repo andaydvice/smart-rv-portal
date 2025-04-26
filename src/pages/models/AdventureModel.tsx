@@ -16,14 +16,14 @@ const AdventureModel = () => {
 
   return (
     <Layout>
-      <div className="bg-gradient-to-b from-gray-900 to-gray-800">
+      <div className="bg-gradient-to-b from-gray-900 to-gray-800 w-full">
         <Navbar />
         <AdventureHero />
         <motion.div 
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6 }}
-          className="px-4 pb-24"
+          className="w-full px-4 pb-24"
           style={{ backgroundColor: "#1B2028" }}
         >
           <div className="max-w-7xl mx-auto pt-16">

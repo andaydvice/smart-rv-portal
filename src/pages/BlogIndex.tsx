@@ -19,32 +19,35 @@ const BlogIndex = () => {
 
   return (
     <Layout>
-      <ScrollArea className="h-full">
+      <ScrollArea className="h-full w-full">
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
+          className="w-full"
         >
-          <div className="container mx-auto px-4 py-10">
-            <BlogHeader />
-            
-            <div className="mt-16">
-              <TrendingPosts 
-                activeCategory={activeCategory} 
-                onCategoryChange={handleCategoryChange} 
-              />
-            </div>
-            
-            <div className="mt-16">
-              <FeaturedCategories />
-            </div>
-            
-            <div className="mt-16">
-              <BlogGrid activeCategory={activeCategory} />
-            </div>
-            
-            <div className="mt-16">
-              <NewsletterSection />
+          <div className="w-full px-4 py-10">
+            <div className="max-w-7xl mx-auto">
+              <BlogHeader />
+              
+              <div className="mt-16">
+                <TrendingPosts 
+                  activeCategory={activeCategory} 
+                  onCategoryChange={handleCategoryChange} 
+                />
+              </div>
+              
+              <div className="mt-16">
+                <FeaturedCategories />
+              </div>
+              
+              <div className="mt-16">
+                <BlogGrid activeCategory={activeCategory} />
+              </div>
+              
+              <div className="mt-16">
+                <NewsletterSection />
+              </div>
             </div>
           </div>
         </motion.div>
