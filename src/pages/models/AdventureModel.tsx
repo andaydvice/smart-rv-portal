@@ -6,6 +6,7 @@ import AdventureCategoryCard from "@/components/adventure/AdventureCategoryCard"
 import KeyFeaturesCard from "@/components/adventure/KeyFeaturesCard";
 import { adventureCategories, keyFeatures } from "@/data/adventure-data";
 import Layout from "@/components/layout/Layout";
+import { Container } from "@/components/ui/container";
 import { useEffect } from "react";
 
 const AdventureModel = () => {
@@ -17,7 +18,6 @@ const AdventureModel = () => {
   return (
     <Layout>
       <div className="bg-gradient-to-b from-gray-900 to-gray-800 w-full">
-        <Navbar />
         <AdventureHero />
         <motion.div 
           initial={{ opacity: 0 }}
@@ -26,7 +26,7 @@ const AdventureModel = () => {
           className="w-full px-4 pb-24"
           style={{ backgroundColor: "#1B2028" }}
         >
-          <div className="max-w-7xl mx-auto pt-16">
+          <Container className="pt-16">
             <h2 className="text-2xl mb-8 text-gray-300">
               Explore Our Off Road RV Collection
             </h2>
@@ -35,7 +35,7 @@ const AdventureModel = () => {
               <AdventureCategoryCard categories={adventureCategories} />
               <KeyFeaturesCard features={keyFeatures} />
             </div>
-          </div>
+          </Container>
         </motion.div>
       </div>
     </Layout>

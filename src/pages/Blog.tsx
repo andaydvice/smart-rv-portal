@@ -7,6 +7,7 @@ import BlogGrid from "@/components/blog/BlogGrid";
 import FeaturedCategories from "@/components/blog/FeaturedCategories";
 import NewsletterSection from "@/components/blog/NewsletterSection";
 import Layout from "@/components/layout/Layout";
+import { Container } from "@/components/ui/container";
 
 const Blog = () => {
   const [activeCategory, setActiveCategory] = useState<'all' | 'tech' | 'travel'>('all');
@@ -29,13 +30,13 @@ const Blog = () => {
       </Helmet>
       
       <div className="w-full py-8">
-        <div className="content-container">
+        <Container>
           <BlogHeader />
           <TrendingPosts activeCategory={activeCategory} onCategoryChange={handleCategoryChange} />
           <BlogGrid activeCategory={activeCategory} />
           <FeaturedCategories />
           <NewsletterSection />
-        </div>
+        </Container>
       </div>
     </Layout>
   );

@@ -9,6 +9,7 @@ const Navbar = () => {
 
   // Scroll to top when route changes
   useEffect(() => {
+    window.scrollTo(0, 0);
     scrollToTop();
   }, [location.pathname]);
 

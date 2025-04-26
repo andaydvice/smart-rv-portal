@@ -1,3 +1,4 @@
+
 import React, { useRef, useEffect, useState } from "react";
 import { Check, Info, ChevronDown } from "lucide-react";
 
@@ -13,13 +14,12 @@ const TroubleshootingTips = ({ tips }: TroubleshootingTipsProps) => {
     const checkIfScrollNeeded = () => {
       if (scrollContainerRef.current) {
         const { scrollHeight, clientHeight } = scrollContainerRef.current;
-        console.log('Scroll height:', scrollHeight, 'Client height:', clientHeight);
-        setShowScrollIndicator(scrollHeight > clientHeight);
+        setShowScrollIndicator(scrollHeight > clientHeight + 10); // Adding margin to avoid edge cases
       }
     };
 
     checkIfScrollNeeded();
-    // Re-check when tips change
+    // Re-check when tips change or window resizes
     window.addEventListener('resize', checkIfScrollNeeded);
     return () => window.removeEventListener('resize', checkIfScrollNeeded);
   }, [tips]);
@@ -55,16 +55,17 @@ const TroubleshootingTips = ({ tips }: TroubleshootingTipsProps) => {
         </div>
       </div>
       {showScrollIndicator && (
-        <div 
+        <button 
           className="absolute bottom-4 left-1/2 transform -translate-x-1/2 text-blue-400 animate-bounce cursor-pointer hover:text-blue-300 transition-colors bg-gray-800/50 rounded-full p-1"
           onClick={handleArrowClick}
           style={{ 
             bottom: '20px',
             zIndex: 10
           }}
+          aria-label="Scroll to see more tips"
         >
           <ChevronDown className="w-5 h-5" />
-        </div>
+        </button>
       )}
     </div>
   );

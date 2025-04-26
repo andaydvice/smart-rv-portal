@@ -1,11 +1,19 @@
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 const HeroSection = () => {
   const [imageLoaded, setImageLoaded] = useState(false);
   const [imageError, setImageError] = useState(false);
+
+  // Pre-load the image
+  useEffect(() => {
+    const preloadImage = new Image();
+    preloadImage.src = "/lovable-uploads/3efce4a3-d382-4b88-b33e-f96074fb7311.png";
+    preloadImage.onload = () => setImageLoaded(true);
+    preloadImage.onerror = () => setImageError(true);
+  }, []);
 
   return (
     <div className="relative w-full h-[600px] md:h-[80vh] max-h-[800px] overflow-hidden">
@@ -18,11 +26,9 @@ const HeroSection = () => {
           src="/lovable-uploads/3efce4a3-d382-4b88-b33e-f96074fb7311.png"
           alt="Mountain road with sunset sky for SmartRV Weather Guide"
           className={cn(
-            "absolute inset-0 w-full h-full object-cover transition-opacity duration-500",
+            "absolute inset-0 w-full h-full object-cover",
             imageLoaded ? "opacity-100" : "opacity-0"
           )}
-          onLoad={() => setImageLoaded(true)}
-          onError={() => setImageError(true)}
         />
       ) : (
         /* Fallback image if main image fails to load */
@@ -34,9 +40,7 @@ const HeroSection = () => {
       )}
       
       {/* Semi-transparent overlay for better text readability */}
-      <div className="absolute inset-0 bg-black/30 z-10" />
-      
-      {/* Hero content - title is now removed as it's in the image */}
+      <div className="absolute inset-0 bg-black/50 z-10" />
       
       {/* Button positioned at the bottom */}
       <div className="absolute bottom-8 z-30 w-full flex justify-center">

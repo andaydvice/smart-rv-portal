@@ -1,3 +1,4 @@
+
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
 @tailwind base;
@@ -59,6 +60,6 @@
   /* Ensure headlines on images are legible */
   .image-overlay-headline {
     @apply text-white font-bold;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.75);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9); /* Stronger text shadow for better visibility */
   }
 }

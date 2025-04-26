@@ -9,13 +9,13 @@ export const HeroSection = () => {
         alt="Futuristic RV interior with smart display and mountain view"
         className="hero-image"
       />
-      <div className="absolute inset-0 bg-black/50" />
+      <div className="absolute inset-0 bg-black/60" /> {/* Darkened overlay for better text contrast */}
       
       <div className="hero-content text-center">
-        <h1 className="text-4xl md:text-6xl font-bold mb-6 p-4 bg-black/30 backdrop-blur-sm rounded-lg text-white">
+        <h1 className="text-4xl md:text-6xl font-bold mb-6 p-4 bg-black/50 backdrop-blur-sm rounded-lg text-white image-overlay-headline">
           Voice Control for Smart RVs
         </h1>
-        <p className="text-xl text-white/90 mb-12 p-4 bg-black/30 backdrop-blur-sm rounded-lg max-w-4xl mx-auto">
+        <p className="text-xl text-white/90 mb-12 p-4 bg-black/50 backdrop-blur-sm rounded-lg max-w-4xl mx-auto">
           Experience RV living's future: Voice control technology for hands-free system operation
         </p>
         <button className="inline-flex items-center gap-2 px-6 py-3 bg-blue-500 hover:bg-blue-600 rounded-lg transition-colors">

@@ -8,6 +8,7 @@ import FeaturedCategories from '../components/blog/FeaturedCategories';
 import NewsletterSection from '../components/blog/NewsletterSection';
 import BlogGrid from '../components/blog/BlogGrid';
 import { ScrollArea } from '@/components/ui/scroll-area';
+import { Container } from '@/components/ui/container';
 
 const BlogIndex = () => {
   const [activeCategory, setActiveCategory] = useState<'all' | 'tech' | 'travel'>('all');
@@ -27,7 +28,7 @@ const BlogIndex = () => {
           className="w-full"
         >
           <div className="w-full px-4 py-10">
-            <div className="max-w-7xl mx-auto">
+            <Container>
               <BlogHeader />
               
               <div className="mt-16">
@@ -48,7 +49,7 @@ const BlogIndex = () => {
               <div className="mt-16">
                 <NewsletterSection />
               </div>
-            </div>
+            </Container>
           </div>
         </motion.div>
       </ScrollArea>

@@ -2,6 +2,7 @@
 /* Additional contrast for headlines on images */
 .image-overlay-headline {
   color: white !important;
-  text-shadow: 3px 3px 6px rgba(0,0,0,0.7) !important;
+  text-shadow: 3px 3px 6px rgba(0,0,0,0.9) !important;
   font-weight: 700 !important;
 }
+
