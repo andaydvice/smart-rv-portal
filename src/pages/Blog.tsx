@@ -12,7 +12,6 @@ const Blog = () => {
   const [activeCategory, setActiveCategory] = useState<'all' | 'tech' | 'travel'>('all');
   
   useEffect(() => {
-    // Scroll to top when component mounts
     window.scrollTo(0, 0);
     console.log("Blog page - Active Category:", activeCategory);
   }, []);
@@ -29,8 +28,8 @@ const Blog = () => {
         <meta name="description" content="Discover the latest in RV technology, travel tips, and smart living solutions for modern RV enthusiasts." />
       </Helmet>
       
-      <div className="w-full px-4 py-8 space-y-12 pt-20">
-        <div className="max-w-7xl mx-auto">
+      <div className="w-full py-8">
+        <div className="content-container">
           <BlogHeader />
           <TrendingPosts activeCategory={activeCategory} onCategoryChange={handleCategoryChange} />
           <BlogGrid activeCategory={activeCategory} />

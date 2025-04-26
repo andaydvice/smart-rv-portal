@@ -8,7 +8,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="min-h-screen bg-deeper-background overflow-x-hidden w-full">
       <Navbar />
-      <main className="w-full">
+      <main className="w-full pt-16"> {/* Added pt-16 to ensure content starts below navbar */}
         {children}
       </main>
       <Footer />
