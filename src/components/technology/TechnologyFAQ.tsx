@@ -1,6 +1,8 @@
 
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
 import { HelpCircle } from "lucide-react";
+import { Suspense, lazy } from "react";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const FAQS = [
   {
@@ -35,6 +37,50 @@ const FAQS = [
   },
 ];
 
+// ErrorBoundary component for the FAQ section
+const FAQErrorBoundary = ({ children }: { children: React.ReactNode }) => {
+  try {
+    return <>{children}</>;
+  } catch (error) {
+    console.error("Error in FAQ component:", error);
+    return (
+      <div className="p-8 bg-[#151A22] border border-red-500/30 rounded-3xl text-center">
+        <HelpCircle className="w-10 h-10 text-red-400 mx-auto mb-4" />
+        <h3 className="text-xl font-bold text-white">FAQ Section Unavailable</h3>
+        <p className="text-gray-300 mt-2">Please check back later</p>
+      </div>
+    );
+  }
+};
+
+// FAQ Content Component
+const FAQContent = () => (
+  <Accordion type="single" collapsible className="space-y-3">
+    {FAQS.map((faq) => (
+      <AccordionItem key={faq.question} value={faq.question}>
+        <AccordionTrigger className="text-blue-400 text-lg font-semibold hover:underline focus:underline">
+          {faq.question}
+        </AccordionTrigger>
+        <AccordionContent className="text-gray-200 text-base bg-[#080F1F]/50 rounded-b-2xl px-4 py-2">
+          {faq.answer}
+        </AccordionContent>
+      </AccordionItem>
+    ))}
+  </Accordion>
+);
+
+// Loading fallback
+const LoadingFallback = () => (
+  <div className="space-y-4">
+    {[1, 2, 3].map((i) => (
+      <div key={i} className="space-y-2">
+        <Skeleton className="h-10 w-full bg-[#151A22]/70" />
+        <Skeleton className="h-20 w-full bg-[#151A22]/50" />
+      </div>
+    ))}
+  </div>
+);
+
 export default function TechnologyFAQ() {
   return (
     <section
@@ -50,18 +96,12 @@ export default function TechnologyFAQ() {
       <p className="text-gray-200 mb-8 text-lg max-w-2xl">
         Find answers to the most common questions about smart RV systems and features below.
       </p>
-      <Accordion type="single" collapsible className="space-y-3">
-        {FAQS.map((faq, i) => (
-          <AccordionItem key={faq.question} value={faq.question}>
-            <AccordionTrigger className="text-blue-400 text-lg font-semibold hover:underline focus:underline">
-              {faq.question}
-            </AccordionTrigger>
-            <AccordionContent className="text-gray-200 text-base bg-[#080F1F]/50 rounded-b-2xl px-4 py-2">
-              {faq.answer}
-            </AccordionContent>
-          </AccordionItem>
-        ))}
-      </Accordion>
+      
+      <FAQErrorBoundary>
+        <Suspense fallback={<LoadingFallback />}>
+          <FAQContent />
+        </Suspense>
+      </FAQErrorBoundary>
     </section>
   );
 }

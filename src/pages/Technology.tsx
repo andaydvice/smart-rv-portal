@@ -3,11 +3,12 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Cpu, Wifi, Battery, Shield, Smartphone, Bot, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
-import Navbar from "@/components/Navbar";
 import Layout from "@/components/layout/Layout";
 import TechnologyFAQ from "@/components/technology/TechnologyFAQ";
-import { useEffect } from "react";
+import { Suspense, useEffect, lazy } from "react";
 import { scrollToTop } from "@/utils/scrollToTop";
+import { PageErrorBoundary } from "@/components/common/PageErrorBoundary";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const technologies = [
   {
@@ -49,10 +50,37 @@ const technologies = [
   },
 ];
 
+// Loading fallback for FAQ section
+const FAQSkeleton = () => (
+  <div className="max-w-4xl mx-auto mb-16 bg-[#151A22] border border-[#1a202c]/60 rounded-3xl shadow-lg p-8">
+    <div className="flex items-center mb-6">
+      <Skeleton className="h-7 w-7 rounded-full mr-3" />
+      <Skeleton className="h-8 w-64" />
+    </div>
+    <Skeleton className="h-5 w-full max-w-2xl mb-8" />
+    <div className="space-y-4">
+      {[1, 2, 3].map((i) => (
+        <div key={i} className="space-y-2">
+          <Skeleton className="h-10 w-full" />
+          <Skeleton className="h-20 w-full" />
+        </div>
+      ))}
+    </div>
+  </div>
+);
+
 const Technology = () => {
   // Scroll to top when component mounts
   useEffect(() => {
     scrollToTop();
+    
+    // Performance logging
+    const startTime = performance.now();
+    
+    return () => {
+      const loadTime = performance.now() - startTime;
+      console.log(`Technology page loaded in ${Math.round(loadTime)}ms`);
+    };
   }, []);
 
   return (
@@ -75,7 +103,7 @@ const Technology = () => {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
+            transition={{ delay: 0.1 }}
             className="text-center mb-16"
           >
             <p className="text-xl text-gray-300 max-w-2xl mx-auto">
@@ -89,7 +117,7 @@ const Technology = () => {
                 key={tech.title}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 + 0.4 }}
+                transition={{ delay: index * 0.05 + 0.2 }}
                 className="bg-gray-800/50 rounded-xl p-6 border border-gray-700 hover:border-blue-500/50 transition-all duration-300"
               >
                 <tech.icon className={`w-12 h-12 mb-4 ${tech.color}`} />
@@ -99,24 +127,27 @@ const Technology = () => {
             ))}
           </div>
 
-          {/* Insert FAQ section here */}
-          <TechnologyFAQ />
+          {/* Insert FAQ section here with error handling */}
+          <PageErrorBoundary>
+            <TechnologyFAQ />
+          </PageErrorBoundary>
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.8 }}
-            className="relative rounded-2xl overflow-hidden"
+            transition={{ delay: 0.4 }}
+            className="relative rounded-2xl overflow-hidden mb-12"
           >
             <img
               src="/lovable-uploads/db5f9104-32a0-458f-a2ca-5ecb38415ec9.png"
               alt="Technology Overview"
               className="w-full h-96 object-cover"
+              loading="lazy"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/50 to-transparent flex items-center justify-center">
               <div className="text-center p-8">
-                <h2 className="text-3xl font-bold text-white mb-4">Experience the Future Today</h2>
-                <p className="text-xl text-gray-300 mb-8 max-w-2xl">
+                <h2 className="text-3xl font-bold text-white mb-4 drop-shadow-lg">Experience the Future Today</h2>
+                <p className="text-xl text-gray-300 mb-8 max-w-2xl drop-shadow-md">
                   Our smart RVs combine cutting edge technology with luxurious comfort to create
                   the ultimate travel experience
                 </p>
