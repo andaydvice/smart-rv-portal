@@ -1,3 +1,4 @@
+
 import React from "react";
 import { motion } from "framer-motion";
 import Layout from "@/components/layout/Layout";
@@ -26,7 +27,11 @@ declare global {
 const RVWeather = () => {
   // Use React.useEffect instead of useEffect directly
   React.useEffect(() => {
+    console.log("RV Weather page loading - forcing content refresh");
     scrollToTop();
+    
+    // Force page to scroll to top on load
+    window.scrollTo(0, 0);
     
     // Load custom fonts
     const link = document.createElement('link');
@@ -50,6 +55,18 @@ const RVWeather = () => {
     removeExistingMarkers();
     const cleanupInterval = setInterval(removeExistingMarkers, 1000);
     
+    // Force a content refresh after a short delay
+    const refreshTimer = setTimeout(() => {
+      console.log("Forcing content refresh");
+      const contentContainer = document.querySelector('.rv-weather-page');
+      if (contentContainer) {
+        // Toggle a class to force re-render
+        contentContainer.classList.add('content-refreshed');
+        // Force layout recalculation
+        window.dispatchEvent(new Event('resize'));
+      }
+    }, 100);
+    
     return () => {
       // Check if the link is still in the document before removing
       if (document.head.contains(link)) {
@@ -59,6 +76,7 @@ const RVWeather = () => {
       // Remove the flag and stop the cleanup interval
       window.isRVWeatherPage = false;
       clearInterval(cleanupInterval);
+      clearTimeout(refreshTimer);
     };
   }, []);
 
@@ -70,6 +88,7 @@ const RVWeather = () => {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
           className="bg-deeper-background min-h-screen"
+          key="rv-weather-content" // Add key to force re-render
         >
           {/* Hero Section */}
           <HeroSection />

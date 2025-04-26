@@ -1,3 +1,4 @@
+
 import React from "react";
 import { Sun, Cloud, CloudSnow, Leaf } from "lucide-react";
 import { LazyImage } from "@/components/ui/LazyImage";
@@ -40,7 +41,7 @@ const SeasonalConsiderations = () => {
         </ul>
       </div>
       
-      <div className="bg-[#151A22] p-6 rounded-lg border border-[#1a202c]/40 shadow-lg">
+      <div className="bg-[#151A22] p-6 rounded-lg border border-[#1a202c]/40 shadow-lg transform hover:scale-[1.02] transition-all">
         <div className="flex items-center mb-4">
           <div className="p-3 bg-blue-400/20 rounded-full mr-4">
             <CloudSnow className="h-6 w-6 text-blue-400" />
@@ -49,10 +50,10 @@ const SeasonalConsiderations = () => {
         </div>
         
         <LazyImage 
-          src="/lovable-uploads/d02155c8-4397-497a-b884-610341d5ba0f.png" 
-          alt="RV in dramatic winter sunset landscape" 
-          className="w-full h-52 object-cover rounded-lg mb-4"
-          blurDataURL="/lovable-uploads/d02155c8-4397-497a-b884-610341d5ba0f.png"
+          src="/lovable-uploads/5f2f1aed-606d-4f1c-9909-9af71941168d.png" 
+          alt="RV in dramatic winter landscape with snow" 
+          className="w-full h-52 object-cover rounded-lg mb-4 border-2 border-blue-400/30"
+          blurDataURL="/lovable-uploads/5f2f1aed-606d-4f1c-9909-9af71941168d.png"
         />
         
         <ul className="space-y-2 text-light-blue">
