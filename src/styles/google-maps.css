@@ -112,13 +112,16 @@
 }
 
 /* Override feature tag styling for better readability */
-.facility-info-window span[class*="bg-[#131a2a]"],
-.facility-info-window div[class*="bg-[#e0f2ff]"] {
-  background-color: #1A1F2C !important;
-  color: #5B9BD5 !important;
-  padding: 0.25rem 0.5rem !important;
-  border-radius: 0.25rem !important;
-  margin: 0.125rem !important;
-  display: inline-block !important;
-  border: 1px solid #403E43 !important;
+.facility-info-window .text-xs.bg-[#1a2235],
+.facility-info-window span[class*="bg-[#1a2235]"] {
+  background-color: #1d2434 !important;
+  color: #60A5FA !important;
+  padding: 4px 8px !important;
+  border-radius: 4px !important;
+  margin: 2px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 4px !important;
+  font-weight: 500 !important;
+  border: 1px solid rgba(96, 165, 250, 0.2) !important;
 }
