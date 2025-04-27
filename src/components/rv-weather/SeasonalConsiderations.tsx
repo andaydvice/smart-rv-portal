@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Sun, Cloud, CloudSnow, Leaf } from "lucide-react";
 
@@ -18,7 +17,7 @@ const SeasonalConsiderations = () => {
           alt="RV parked at a summer campsite" 
           className="w-full h-52 object-cover rounded-lg mb-4"
           loading="eager"
-          fetchpriority="high"
+          fetchPriority="high"
         />
         
         <ul className="space-y-2 text-light-blue">
@@ -54,7 +53,7 @@ const SeasonalConsiderations = () => {
           alt="RVs parked at sunset with dramatic winter sky" 
           className="w-full h-52 object-cover rounded-lg mb-4"
           loading="eager"
-          fetchpriority="high"
+          fetchPriority="high"
         />
         
         <ul className="space-y-2 text-light-blue">
@@ -90,7 +89,7 @@ const SeasonalConsiderations = () => {
           alt="RV parked among fall foliage" 
           className="w-full h-52 object-cover rounded-lg mb-4"
           loading="eager"
-          fetchpriority="high"
+          fetchPriority="high"
         />
         
         <ul className="space-y-2 text-light-blue">
@@ -126,7 +125,7 @@ const SeasonalConsiderations = () => {
           alt="RV in spring scenery with blooming flowers" 
           className="w-full h-52 object-cover rounded-lg mb-4"
           loading="eager"
-          fetchpriority="high"
+          fetchPriority="high"
         />
         
         <ul className="space-y-2 text-light-blue">

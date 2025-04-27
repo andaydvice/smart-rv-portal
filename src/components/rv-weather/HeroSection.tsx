@@ -16,7 +16,7 @@ const HeroSection = () => {
         alt="Mountain road with sunset sky for SmartRV Weather Guide"
         className="absolute inset-0 w-full h-full object-cover"
         loading="eager"
-        fetchpriority="high"
+        fetchPriority="high"
       />
       
       {/* Semi-transparent overlay for better text readability */}
