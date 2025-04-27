@@ -111,7 +111,14 @@
   color: #E2E8FF !important;
 }
 
+/* Override feature tag styling for better readability */
+.facility-info-window span[class*="bg-[#131a2a]"],
 .facility-info-window div[class*="bg-[#e0f2ff]"] {
-  background-color: #1d2434 !important;
+  background-color: #1A1F2C !important;
   color: #5B9BD5 !important;
+  padding: 0.25rem 0.5rem !important;
+  border-radius: 0.25rem !important;
+  margin: 0.125rem !important;
+  display: inline-block !important;
+  border: 1px solid #403E43 !important;
 }
