@@ -64,26 +64,26 @@ const FacilityInfoWindow: React.FC<FacilityInfoWindowProps> = ({
                 {Array.isArray(facility.features) ? (
                   // Handle array of feature strings
                   facility.features.map((feature, idx) => (
-                    <span key={idx} className="facility-feature">{feature}</span>
+                    <span key={idx} className="facility-feature font-bold text-[#5B9BD5]">{feature}</span>
                   ))
                 ) : (
                   // Handle object with boolean flags
                   facility.features && (
                     <>
                       {facility.features.indoor && (
-                        <span className="facility-feature">Indoor</span>
+                        <span className="facility-feature font-bold text-[#5B9BD5]">Indoor</span>
                       )}
                       {facility.features.climate_controlled && (
-                        <span className="facility-feature">Climate Controlled</span>
+                        <span className="facility-feature font-bold text-[#5B9BD5]">Climate Controlled</span>
                       )}
                       {facility.features["24h_access"] && (
-                        <span className="facility-feature">24/7 Access</span>
+                        <span className="facility-feature font-bold text-[#5B9BD5]">24/7 Access</span>
                       )}
                       {facility.features.security_system && (
-                        <span className="facility-feature">Security</span>
+                        <span className="facility-feature font-bold text-[#5B9BD5]">Security</span>
                       )}
                       {facility.features.vehicle_washing && (
-                        <span className="facility-feature">Vehicle Washing</span>
+                        <span className="facility-feature font-bold text-[#5B9BD5]">Vehicle Washing</span>
                       )}
                     </>
                   )
