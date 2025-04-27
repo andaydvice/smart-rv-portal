@@ -1,3 +1,4 @@
+
 /* Google Maps visibility enhancements */
 .gm-style img[src*="marker"], 
 .gm-style div[role="button"] {
@@ -80,10 +81,28 @@
   display: inline-flex !important;
   align-items: center !important;
   gap: 4px !important;
-  font-weight: 700 !important; /* Made bolder */
+  font-weight: 700 !important;
   border: 1px solid rgba(91, 155, 213, 0.2) !important;
-  font-size: 0.75rem !important;
+  font-size: 0.875rem !important;
   text-align: center !important;
   justify-content: center !important;
   width: 100% !important;
+  text-transform: none !important;
+}
+
+/* Ensure all text in the info window is visible */
+.gm-style .gm-style-iw-d span,
+.gm-style .gm-style-iw-d p {
+  color: #ffffff !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Make headings and important text stand out */
+.gm-style .gm-style-iw-d h3,
+.gm-style .gm-style-iw-d h4 {
+  color: #5B9BD5 !important;
+  font-weight: 700 !important;
+  opacity: 1 !important;
+  visibility: visible !important;
 }
