@@ -7,12 +7,30 @@ const HeroSection = () => {
   const [imageLoaded, setImageLoaded] = useState(false);
   const [imageError, setImageError] = useState(false);
 
-  // Pre-load the image
+  // Pre-load the image with high priority
   useEffect(() => {
+    const imageSrc = "/lovable-uploads/3efce4a3-d382-4b88-b33e-f96074fb7311.png";
+    
+    // Method 1: Create high priority preload link
+    const link = document.createElement('link');
+    link.rel = 'preload';
+    link.as = 'image';
+    link.href = imageSrc;
+    link.fetchPriority = 'high';
+    document.head.appendChild(link);
+    
+    // Method 2: Use Image constructor for immediate loading
     const preloadImage = new Image();
-    preloadImage.src = "/lovable-uploads/3efce4a3-d382-4b88-b33e-f96074fb7311.png";
+    preloadImage.src = imageSrc;
+    preloadImage.fetchPriority = 'high';
     preloadImage.onload = () => setImageLoaded(true);
     preloadImage.onerror = () => setImageError(true);
+    
+    return () => {
+      if (document.head.contains(link)) {
+        document.head.removeChild(link);
+      }
+    };
   }, []);
 
   return (
@@ -29,6 +47,8 @@ const HeroSection = () => {
             "absolute inset-0 w-full h-full object-cover",
             imageLoaded ? "opacity-100" : "opacity-0"
           )}
+          loading="eager"
+          fetchPriority="high"
         />
       ) : (
         /* Fallback image if main image fails to load */
@@ -36,6 +56,8 @@ const HeroSection = () => {
           src="/lovable-uploads/78ab2ab5-e50d-4f41-8046-ac79e38e44cb.png"
           alt="Mountain road with sunset sky for SmartRV Weather Guide"
           className="absolute inset-0 w-full h-full object-cover"
+          loading="eager"
+          fetchPriority="high"
         />
       )}
       

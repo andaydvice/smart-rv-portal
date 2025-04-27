@@ -1,7 +1,31 @@
 
-import React from "react";
+import React, { useEffect } from "react";
 
 const RegionalClimate = () => {
+  // Preload the background image with high priority
+  useEffect(() => {
+    const backgroundImageSrc = '/lovable-uploads/ad3dc693-42f4-4635-af2d-b2c4b1aafc43.png';
+    
+    // Method 1: Create high priority preload link
+    const link = document.createElement('link');
+    link.rel = 'preload';
+    link.as = 'image';
+    link.href = backgroundImageSrc;
+    link.fetchPriority = 'high';
+    document.head.appendChild(link);
+    
+    // Method 2: Use Image constructor for immediate loading
+    const preloadImage = new Image();
+    preloadImage.src = backgroundImageSrc;
+    preloadImage.fetchPriority = 'high';
+    
+    return () => {
+      if (document.head.contains(link)) {
+        document.head.removeChild(link);
+      }
+    };
+  }, []);
+  
   return (
     <section className="relative w-full py-16 bg-cover bg-fixed" style={{ backgroundImage: "url('/lovable-uploads/ad3dc693-42f4-4635-af2d-b2c4b1aafc43.png')" }}>
       {/* Dark overlay */}

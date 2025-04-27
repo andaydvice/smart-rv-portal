@@ -42,13 +42,50 @@ const injectEmergencyStyles = () => {
       visibility: visible !important;
       display: block !important;
     }
+    
+    /* Optimize image loading */
+    img[fetchpriority="high"], img[loading="eager"] {
+      content-visibility: auto !important;
+    }
   `;
   document.head.appendChild(style);
   console.log('Injected emergency styles');
 };
 
+// Preload critical header images used across site
+const preloadCriticalHeaderImages = () => {
+  // List of all critical header images that should load instantly
+  const criticalImages = [
+    '/lovable-uploads/f72886c3-3677-4dfe-8d56-5a784197eda2.png', // Documentation header
+    '/lovable-uploads/846b5be5-043e-4645-a3d9-39614d63342c.png', // Complete documentation
+    '/lovable-uploads/f3ebf58c-7bbf-427f-9510-9c3b0aec6f6d.png', // Hero image
+    '/lovable-uploads/3efce4a3-d382-4b88-b33e-f96074fb7311.png', // RV Weather
+    '/lovable-uploads/ad3dc693-42f4-4635-af2d-b2c4b1aafc43.png', // Regional climate
+    '/lovable-uploads/53093373-3df3-49cc-b4cc-91b800c53fa9.png'  // Calculator header
+  ];
+  
+  // Create preload links for all critical images
+  criticalImages.forEach(src => {
+    const link = document.createElement('link');
+    link.rel = 'preload';
+    link.as = 'image';
+    link.href = src;
+    link.fetchPriority = 'high';
+    document.head.appendChild(link);
+    
+    // Also preload using Image constructor
+    const img = new Image();
+    img.src = src;
+  });
+  
+  console.log('Preloaded critical header images');
+};
+
 // Inject emergency styles immediately
 injectEmergencyStyles();
+
+// Preload critical header images immediately
+preloadCriticalHeaderImages();
 
 // Mount the application with error handling
 const rootElement = document.getElementById('root');

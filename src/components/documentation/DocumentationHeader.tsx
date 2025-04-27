@@ -5,8 +5,33 @@ import { ArrowLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { LazyImage } from "@/components/ui/LazyImage";
 import { generateImagePlaceholder } from "@/utils/performance";
+import { useEffect } from "react";
 
 const DocumentationHeader = () => {
+  // Preload header image immediately when component mounts
+  useEffect(() => {
+    const headerImageSrc = '/lovable-uploads/f72886c3-3677-4dfe-8d56-5a784197eda2.png';
+    
+    // Create and inject a preload link with high priority
+    const link = document.createElement('link');
+    link.rel = 'preload';
+    link.as = 'image';
+    link.href = headerImageSrc;
+    link.fetchPriority = 'high';
+    document.head.appendChild(link);
+    
+    // Also preload using Image constructor for immediate loading
+    const img = new Image();
+    img.src = headerImageSrc;
+    img.fetchPriority = 'high';
+    
+    return () => {
+      if (document.head.contains(link)) {
+        document.head.removeChild(link);
+      }
+    };
+  }, []);
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}

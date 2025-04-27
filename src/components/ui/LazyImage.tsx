@@ -30,7 +30,7 @@ export const LazyImage = ({
   // Preload the image if it's marked as priority
   useEffect(() => {
     if (priority && src) {
-      // For priority images, we can preload them with higher urgency
+      // Immediately create and inject a preload link in the document head
       const link = document.createElement('link');
       link.rel = 'preload';
       link.as = 'image';
@@ -38,8 +38,10 @@ export const LazyImage = ({
       link.fetchPriority = 'high';
       document.head.appendChild(link);
       
+      // Also preload using Image constructor for immediate loading
       const preloadImage = new Image();
       preloadImage.src = src;
+      preloadImage.fetchPriority = 'high'; // Modern browsers support this
       
       // Once the image is preloaded, update the loading state
       preloadImage.onload = () => {

@@ -16,11 +16,11 @@ import { useEffect } from "react";
 import { preloadCriticalImages } from "@/utils/performance";
 
 const CompleteDocumentation = () => {
-  // Preload critical image with high priority
+  // Preload critical image with multiple methods for guaranteed immediate loading
   useEffect(() => {
     const imageSrc = '/lovable-uploads/846b5be5-043e-4645-a3d9-39614d63342c.png';
     
-    // Create high priority preload link
+    // Method 1: Create high priority preload link
     const link = document.createElement('link');
     link.rel = 'preload';
     link.as = 'image';
@@ -28,11 +28,12 @@ const CompleteDocumentation = () => {
     link.fetchPriority = 'high';
     document.head.appendChild(link);
     
-    // Use the Image constructor to force browser to load immediately
+    // Method 2: Use the Image constructor to force browser to load immediately
     const img = new Image();
     img.src = imageSrc;
+    img.fetchPriority = 'high';
     
-    // Also use the performance utility
+    // Method 3: Also use the performance utility for redundancy
     preloadCriticalImages([imageSrc]);
     
     // Clean up function to remove the link when component unmounts
