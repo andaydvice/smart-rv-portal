@@ -59,7 +59,7 @@ const FacilityInfoWindow: React.FC<FacilityInfoWindowProps> = ({
           
           {hasFeatures() && (
             <div className="mb-5">
-              <h4 className="text-sm font-bold text-gray-400 uppercase text-center mb-3">FACILITIES & AMENITIES</h4>
+              <h4 className="text-sm font-bold text-[#5B9BD5] uppercase text-center mb-3">FACILITIES & AMENITIES</h4>
               <div className="grid grid-cols-2 gap-3">
                 {Array.isArray(facility.features) ? (
                   // Handle array of feature strings
