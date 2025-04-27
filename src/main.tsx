@@ -33,7 +33,9 @@ if (!rootElement) {
   try {
     console.log('Starting React application mount');
     ReactDOM.createRoot(rootElement).render(
-      <App />
+      <React.StrictMode>
+        <App />
+      </React.StrictMode>
     );
     console.log('React application successfully mounted');
     

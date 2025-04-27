@@ -5,13 +5,11 @@ import Layout from "@/components/layout/Layout";
 import { HeroSection } from "@/components/sections/HeroSection";
 import { motion } from "framer-motion";
 import { toast } from "sonner";
+import { TechnologySection } from "@/components/sections/TechnologySection";
 
 // Lazy load components that aren't needed immediately
 const FeaturesSection = lazy(() => import("@/components/sections/FeaturesSection").then(mod => ({ 
   default: mod.FeaturesSection 
-})));
-const TechnologySection = lazy(() => import("@/components/sections/TechnologySection").then(mod => ({ 
-  default: mod.TechnologySection 
 })));
 const SustainabilitySection = lazy(() => import("@/components/sections/SustainabilitySection").then(mod => ({ 
   default: mod.SustainabilitySection 
@@ -34,6 +32,9 @@ const Index = () => {
     setTimeout(() => {
       toast.success("Welcome to the Smart Road Portal");
     }, 1000);
+    
+    // Force scroll to top on page load
+    window.scrollTo(0, 0);
   }, []);
 
   return (
@@ -50,9 +51,8 @@ const Index = () => {
           <FeaturesSection />
         </Suspense>
         
-        <Suspense fallback={<LoadingFallback />}>
-          <TechnologySection />
-        </Suspense>
+        {/* Changed from lazy-loaded to direct import */}
+        <TechnologySection />
         
         <Suspense fallback={<LoadingFallback />}>
           <SustainabilitySection />
