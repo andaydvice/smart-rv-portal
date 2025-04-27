@@ -11,7 +11,7 @@ export interface Facility {
     "24h_access"?: boolean;
     security_system?: boolean;
     vehicle_washing?: boolean;
-  };
+  } | string[];
 }
 
 export interface MapStyle {

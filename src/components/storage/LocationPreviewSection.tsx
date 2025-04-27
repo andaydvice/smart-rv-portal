@@ -35,18 +35,18 @@ const LocationPreviewSection: React.FC<LocationPreviewSectionProps> = ({ mapToke
     );
   };
 
-  // Convert facility features to array of strings for the map component
-  const getFacilityFeatures = (featuredLocation?: StorageFacility): string[] => {
-    if (!featuredLocation || !featuredLocation.features) return [];
+  // Convert facility features for the map component
+  const getFacilityFeatures = (featuredLocation?: StorageFacility) => {
+    if (!featuredLocation || !featuredLocation.features) return {};
     
-    const features: string[] = [];
-    if (featuredLocation.features.indoor) features.push('Indoor Storage');
-    if (featuredLocation.features.climate_controlled) features.push('Climate Controlled');
-    if (featuredLocation.features["24h_access"]) features.push('24/7 Access');
-    if (featuredLocation.features.security_system) features.push('Security System');
-    if (featuredLocation.features.vehicle_washing) features.push('Vehicle Washing');
-    
-    return features;
+    // Return the features object directly instead of converting to string array
+    return {
+      indoor: featuredLocation.features.indoor || false,
+      climate_controlled: featuredLocation.features.climate_controlled || false,
+      "24h_access": featuredLocation.features["24h_access"] || false,
+      security_system: featuredLocation.features.security_system || false,
+      vehicle_washing: featuredLocation.features.vehicle_washing || false
+    };
   };
   
   // Handle map load event to ensure persistence of markers
