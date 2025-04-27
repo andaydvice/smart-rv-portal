@@ -1,7 +1,6 @@
 
 import React from "react";
 import { Sun, Cloud, CloudSnow, Leaf } from "lucide-react";
-import { LazyImage } from "@/components/ui/LazyImage";
 
 const SeasonalConsiderations = () => {
   return (
@@ -14,11 +13,12 @@ const SeasonalConsiderations = () => {
           <h3 className="text-xl font-bold text-white">Summer Preparation</h3>
         </div>
         
-        <LazyImage 
+        <img 
           src="/lovable-uploads/ae930cf7-205f-41d3-9c9b-a4969e5c35e6.png" 
           alt="RV parked at a summer campsite" 
           className="w-full h-52 object-cover rounded-lg mb-4"
-          blurDataURL="/lovable-uploads/ae930cf7-205f-41d3-9c9b-a4969e5c35e6.png"
+          loading="eager"
+          fetchpriority="high"
         />
         
         <ul className="space-y-2 text-light-blue">
@@ -49,11 +49,12 @@ const SeasonalConsiderations = () => {
           <h3 className="text-xl font-bold text-white">Winter Considerations</h3>
         </div>
         
-        <LazyImage 
+        <img 
           src="/lovable-uploads/dee06c09-15b9-404e-a583-836e4a06d9d1.png" 
           alt="RVs parked at sunset with dramatic winter sky" 
           className="w-full h-52 object-cover rounded-lg mb-4"
-          blurDataURL="/lovable-uploads/dee06c09-15b9-404e-a583-836e4a06d9d1.png"
+          loading="eager"
+          fetchpriority="high"
         />
         
         <ul className="space-y-2 text-light-blue">
@@ -84,11 +85,12 @@ const SeasonalConsiderations = () => {
           <h3 className="text-xl font-bold text-white">Fall Planning</h3>
         </div>
         
-        <LazyImage 
+        <img 
           src="/lovable-uploads/3175b015-a5c7-4df7-b8ca-b8a130b05519.png" 
           alt="RV parked among fall foliage" 
           className="w-full h-52 object-cover rounded-lg mb-4"
-          blurDataURL="/lovable-uploads/3175b015-a5c7-4df7-b8ca-b8a130b05519.png"
+          loading="eager"
+          fetchpriority="high"
         />
         
         <ul className="space-y-2 text-light-blue">
@@ -119,11 +121,12 @@ const SeasonalConsiderations = () => {
           <h3 className="text-xl font-bold text-white">Spring Travel</h3>
         </div>
         
-        <LazyImage 
+        <img 
           src="/lovable-uploads/989028bc-89ec-4ec4-841d-e38421cc7626.png" 
           alt="RV in spring scenery with blooming flowers" 
           className="w-full h-52 object-cover rounded-lg mb-4"
-          blurDataURL="/lovable-uploads/989028bc-89ec-4ec4-841d-e38421cc7626.png"
+          loading="eager"
+          fetchpriority="high"
         />
         
         <ul className="space-y-2 text-light-blue">

@@ -1,9 +1,14 @@
 
-import React from "react";
+import React, { useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 const HeroSection = () => {
+  // Ensure the page scrolls to top when component mounts
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className="relative w-full h-[600px] md:h-[80vh] max-h-[800px] overflow-hidden">
       <img
@@ -11,7 +16,7 @@ const HeroSection = () => {
         alt="Mountain road with sunset sky for SmartRV Weather Guide"
         className="absolute inset-0 w-full h-full object-cover"
         loading="eager"
-        fetchPriority="high"
+        fetchpriority="high"
       />
       
       {/* Semi-transparent overlay for better text readability */}

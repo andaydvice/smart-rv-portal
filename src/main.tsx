@@ -18,6 +18,12 @@ import { setupLazyLoading, deferOperation } from './utils/performance.ts'
 console.log('Application starting, window.location:', window.location.href);
 console.log('Application path:', window.location.pathname);
 
+// Force scroll to top on page load
+window.addEventListener('DOMContentLoaded', () => {
+  window.scrollTo(0, 0);
+  console.log('Forced scroll to top on page load');
+});
+
 // Mount the application with error handling
 const rootElement = document.getElementById('root');
 

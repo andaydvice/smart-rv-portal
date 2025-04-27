@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Toaster } from '@/components/ui/toaster';
 import { AuthProvider } from './components/auth/AuthContext';
@@ -14,34 +14,6 @@ import './styles/emergency-marker-fix.css';
 import './styles/map-optimizations.css';   
 import './styles/force-markers.css';       
 import './styles/google-maps.css';  
-
-// CRITICAL: Force all hero images to be visually present immediately
-const preloadHeaderImages = () => {
-  const criticalHeaderImages = [
-    '/lovable-uploads/3efce4a3-d382-4b88-b33e-f96074fb7311.png',
-    '/lovable-uploads/ad3dc693-42f4-4635-af2d-b2c4b1aafc43.png',
-    '/lovable-uploads/f72886c3-3677-4dfe-8d56-5a784197eda2.png',
-    '/lovable-uploads/846b5be5-043e-4645-a3d9-39614d63342c.png',
-    '/lovable-uploads/f3ebf58c-7bbf-427f-9510-9c3b0aec6f6d.png',
-    '/lovable-uploads/53093373-3df3-49cc-b4cc-91b800c53fa9.png',
-    '/lovable-uploads/ff43ed8a-b7cd-42f7-a45e-a3a706d39d07.png',
-    '/lovable-uploads/Luxury_RV_Living-min.jpg',
-    '/lovable-uploads/Luxury-Class-RVs-min.jpg'
-  ];
-  
-  // Create actual hidden image elements to force browser to load them
-  criticalHeaderImages.forEach(src => {
-    const img = new Image();
-    img.src = src;
-    img.style.position = 'absolute';
-    img.style.width = '1px';
-    img.style.height = '1px';
-    img.style.opacity = '0.01';
-    img.style.pointerEvents = 'none';
-    img.style.left = '-9999px';
-    document.body.appendChild(img);
-  });
-};
 
 // Create a client with better error handling
 const queryClient = new QueryClient({
@@ -61,11 +33,11 @@ const queryClient = new QueryClient({
 });
 
 function AppContent() {
-  React.useEffect(() => {
+  useEffect(() => {
     console.log('App component mounted');
     
-    // IMMEDIATE EXECUTION: Force header images to load
-    preloadHeaderImages();
+    // Force scroll to top on page load
+    window.scrollTo(0, 0);
     
     // Apply emergency fixes that bypass React
     injectEmergencyStyles();
