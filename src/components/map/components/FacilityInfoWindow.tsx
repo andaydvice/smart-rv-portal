@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { InfoWindowF } from '@react-google-maps/api';
 import { MapPin, Phone } from 'lucide-react';
@@ -44,21 +45,21 @@ const FacilityInfoWindow: React.FC<FacilityInfoWindowProps> = ({
         <div className="px-5 pt-4 pb-5">
           {facility.address && (
             <div className="flex items-center justify-center gap-2 mb-4">
-              <MapPin className="w-5 h-5 text-gray-400 flex-shrink-0" />
+              <MapPin className="w-5 h-5 text-[#5B9BD5] flex-shrink-0" />
               <span className="text-white font-medium text-center">{facility.address}</span>
             </div>
           )}
           
           {facility.phone && (
             <div className="flex items-center justify-center gap-2 mb-5">
-              <Phone className="w-5 h-5 text-gray-400" />
+              <Phone className="w-5 h-5 text-[#5B9BD5]" />
               <span className="text-white font-medium">{facility.phone}</span>
             </div>
           )}
           
           {hasFeatures() && (
             <div className="mb-5">
-              <h4 className="text-sm font-bold text-[#60A5FA] uppercase text-center mb-3">FACILITIES & AMENITIES</h4>
+              <h4 className="text-sm font-bold text-[#5B9BD5] uppercase text-center mb-3">FACILITIES & AMENITIES</h4>
               <div className="grid grid-cols-2 gap-3">
                 {Array.isArray(facility.features) ? (
                   // Handle array of feature strings
@@ -92,7 +93,7 @@ const FacilityInfoWindow: React.FC<FacilityInfoWindowProps> = ({
           )}
           
           {facility.description && (
-            <div className="border-l-2 border-[#5B9BD5] pl-3 italic text-gray-300 mb-2 mt-4 text-left">
+            <div className="border-l-2 border-[#5B9BD5] pl-3 italic text-white mb-2 mt-4 text-left">
               <p>{facility.description}</p>
             </div>
           )}
