@@ -1,20 +1,5 @@
 
-/* Google Maps visibility enhancements */
-.gm-style img[src*="marker"], 
-.gm-style div[role="button"] {
-  visibility: visible !important;
-  opacity: 1 !important;
-  display: block !important;
-  pointer-events: all !important;
-  z-index: 1000 !important;
-}
-
-/* Ensure the map container is visible */
-.gm-style {
-  visibility: visible !important;
-  opacity: 1 !important;
-  display: block !important;
-}
+/* ... keep existing code (Google Maps visibility enhancements and info window container styles) */
 
 /* Style the info window content wrapper */
 .gm-style .gm-style-iw-c {
@@ -30,49 +15,11 @@
   max-width: 300px !important;
 }
 
-.gm-style .gm-style-iw-d {
-  overflow: hidden !important;
-  padding: 0 !important;
-  max-width: 300px !important;
-  background-color: #131a2a !important;
-}
+/* ... keep existing code (info window tip and close button styles) */
 
-/* Ensure the info window tip points to the correct location */
-.gm-style .gm-style-iw-t::after {
-  background: #091020 !important;
-}
-
-/* Improve close button styling for better visibility */
-.gm-style .gm-style-iw-t button.gm-ui-hover-effect {
-  background: #5B9BD5 !important;
-  opacity: 1 !important;
-  top: 0 !important;
-  right: 0 !important;
-  width: 30px !important;
-  height: 30px !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  border-radius: 50% !important;
-  margin: 8px !important;
-}
-
-/* Adjust the X icon in the close button */
-.gm-style .gm-style-iw-t button.gm-ui-hover-effect img {
-  width: 18px !important;
-  height: 18px !important;
-  margin: 0 !important;
-  opacity: 1 !important;
-  filter: invert(1) !important;
-}
-
-/* Ensure markers stay on top of popups when needed */
-.gm-style .gm-style-iw + div {
-  z-index: 1002 !important;
-}
-
-/* Feature tag styling for better visibility and consistency */
-.facility-feature {
+/* Feature tag styling with more specific selectors */
+.gm-style .gm-style-iw-d .facility-feature,
+.gm-style-iw-d span.facility-feature {
   background-color: #1d2434 !important;
   color: #5B9BD5 !important;
   padding: 4px 8px !important;
@@ -86,8 +33,11 @@
   font-size: 0.875rem !important;
   text-align: center !important;
   justify-content: center !important;
-  width: 100% !important;
+  width: auto !important;
   text-transform: none !important;
+  font-family: system-ui, -apple-system, sans-serif !important;
+  visibility: visible !important;
+  opacity: 1 !important;
 }
 
 /* Ensure all text in the info window is visible */
@@ -96,6 +46,7 @@
   color: #ffffff !important;
   opacity: 1 !important;
   visibility: visible !important;
+  font-family: system-ui, -apple-system, sans-serif !important;
 }
 
 /* Make headings and important text stand out */
@@ -105,4 +56,21 @@
   font-weight: 700 !important;
   opacity: 1 !important;
   visibility: visible !important;
+  font-family: system-ui, -apple-system, sans-serif !important;
+  font-size: 1.25rem !important;
+  margin-bottom: 0.5rem !important;
 }
+
+/* Add specific styles for the features grid */
+.gm-style .gm-style-iw-d .grid-cols-2 {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 0.75rem !important;
+  margin-top: 0.5rem !important;
+}
+
+/* Ensure the feature tags container is visible */
+.gm-style .gm-style-iw-d .mb-5 {
+  margin-bottom: 1.25rem !important;
+}
+
