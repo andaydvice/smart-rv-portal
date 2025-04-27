@@ -42,10 +42,10 @@ const TechnologyFAQ = () => {
       <div className="space-y-4">
         {faqs.map((faq, index) => (
           <div key={index} className="bg-[#080F1F]/30 rounded-lg overflow-hidden border border-[#1a202c]/40 mb-4">
-            <div className="px-4 py-3 bg-[#080F1F]/50 text-blue-400 text-lg font-semibold">
+            <div className="px-4 py-3 bg-[#080F1F]/50 text-blue-400 text-lg font-semibold text-center">
               {faq.question}
             </div>
-            <div className="px-4 py-3 text-gray-200">
+            <div className="px-4 py-3 text-gray-200 text-left">
               {faq.answer}
             </div>
           </div>
