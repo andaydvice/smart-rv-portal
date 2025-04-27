@@ -15,6 +15,18 @@ const FacilityInfoWindow: React.FC<FacilityInfoWindowProps> = ({
   position, 
   onCloseClick 
 }) => {
+  // Helper function to determine if we should show amenities section
+  const hasFeatures = () => {
+    if (!facility.features) return false;
+    
+    // Handle both array and object formats
+    if (Array.isArray(facility.features)) {
+      return facility.features.length > 0;
+    } else {
+      return Object.values(facility.features).some(v => Boolean(v));
+    }
+  };
+
   return (
     <InfoWindowF
       position={position}
@@ -45,24 +57,36 @@ const FacilityInfoWindow: React.FC<FacilityInfoWindowProps> = ({
             </div>
           )}
           
-          {facility.features && Object.values(facility.features).some(v => v) && (
+          {hasFeatures() && (
             <div className="mb-5">
               <h4 className="text-sm font-bold text-gray-400 uppercase text-center mb-3">FACILITIES & AMENITIES</h4>
               <div className="grid grid-cols-2 gap-3">
-                {facility.features.indoor && (
-                  <span className="facility-feature">Indoor</span>
-                )}
-                {facility.features.climate_controlled && (
-                  <span className="facility-feature">Climate Controlled</span>
-                )}
-                {facility.features["24h_access"] && (
-                  <span className="facility-feature">24/7 Access</span>
-                )}
-                {facility.features.security_system && (
-                  <span className="facility-feature">Security</span>
-                )}
-                {facility.features.vehicle_washing && (
-                  <span className="facility-feature">Vehicle Washing</span>
+                {Array.isArray(facility.features) ? (
+                  // Handle array of feature strings
+                  facility.features.map((feature, idx) => (
+                    <span key={idx} className="facility-feature">{feature}</span>
+                  ))
+                ) : (
+                  // Handle object with boolean flags
+                  facility.features && (
+                    <>
+                      {facility.features.indoor && (
+                        <span className="facility-feature">Indoor</span>
+                      )}
+                      {facility.features.climate_controlled && (
+                        <span className="facility-feature">Climate Controlled</span>
+                      )}
+                      {facility.features["24h_access"] && (
+                        <span className="facility-feature">24/7 Access</span>
+                      )}
+                      {facility.features.security_system && (
+                        <span className="facility-feature">Security</span>
+                      )}
+                      {facility.features.vehicle_washing && (
+                        <span className="facility-feature">Vehicle Washing</span>
+                      )}
+                    </>
+                  )
                 )}
               </div>
             </div>
