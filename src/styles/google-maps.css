@@ -112,8 +112,7 @@
 }
 
 /* Override feature tag styling for better readability */
-.facility-info-window .text-xs.bg-[#1a2235],
-.facility-info-window span[class*="bg-[#1a2235]"] {
+.facility-info-window span[class*="text-xs bg-[#e0f2ff]"] {
   background-color: #1d2434 !important;
   color: #60A5FA !important;
   padding: 4px 8px !important;
@@ -124,4 +123,5 @@
   gap: 4px !important;
   font-weight: 500 !important;
   border: 1px solid rgba(96, 165, 250, 0.2) !important;
+  font-size: 0.75rem !important;
 }
