@@ -35,7 +35,7 @@ const TechnologyFAQ = () => {
         <h2 className="text-white text-3xl font-bold">Technology FAQ</h2>
       </div>
       
-      <p className="text-gray-200 mb-8 text-lg max-w-2xl">
+      <p className="text-gray-200 mb-8 text-lg max-w-2xl text-left">
         Find answers to the most common questions about smart RV systems and features below.
       </p>
       
