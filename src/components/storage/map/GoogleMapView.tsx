@@ -339,19 +339,19 @@ const GoogleMapView: React.FC<GoogleMapViewProps> = ({
                   <p className="text-xs text-gray-600 mb-1">Features:</p>
                   <div className="flex flex-wrap gap-1">
                     {selectedFacility.features.indoor && (
-                      <span className="text-xs bg-[#e0f2ff] text-[#4285F4] px-2 py-0.5 rounded">Indoor</span>
+                      <span className="text-xs bg-[#131a2a] text-[#5B9BD5] px-2 py-0.5 rounded border border-[#5B9BD5]/20">Indoor</span>
                     )}
                     {selectedFacility.features.climate_controlled && (
-                      <span className="text-xs bg-[#e0f2ff] text-[#4285F4] px-2 py-0.5 rounded">Climate Controlled</span>
+                      <span className="text-xs bg-[#131a2a] text-[#5B9BD5] px-2 py-0.5 rounded border border-[#5B9BD5]/20">Climate Controlled</span>
                     )}
                     {selectedFacility.features["24h_access"] && (
-                      <span className="text-xs bg-[#e0f2ff] text-[#4285F4] px-2 py-0.5 rounded">24/7 Access</span>
+                      <span className="text-xs bg-[#131a2a] text-[#5B9BD5] px-2 py-0.5 rounded border border-[#5B9BD5]/20">24/7 Access</span>
                     )}
                     {selectedFacility.features.security_system && (
-                      <span className="text-xs bg-[#e0f2ff] text-[#4285F4] px-2 py-0.5 rounded">Security</span>
+                      <span className="text-xs bg-[#131a2a] text-[#5B9BD5] px-2 py-0.5 rounded border border-[#5B9BD5]/20">Security</span>
                     )}
                     {selectedFacility.features.vehicle_washing && (
-                      <span className="text-xs bg-[#e0f2ff] text-[#4285F4] px-2 py-0.5 rounded">Vehicle Washing</span>
+                      <span className="text-xs bg-[#131a2a] text-[#5B9BD5] px-2 py-0.5 rounded border border-[#5B9BD5]/20">Vehicle Washing</span>
                     )}
                   </div>
                 </div>
