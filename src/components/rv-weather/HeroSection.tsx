@@ -1,20 +1,11 @@
 
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 const HeroSection = () => {
-  const [imageLoaded, setImageLoaded] = useState(false);
-  const [imageError, setImageError] = useState(false);
-  
-  useEffect(() => {
-    // Immediately set imageLoaded to true since we're now preloading in HTML/main.tsx
-    setImageLoaded(true);
-  }, []);
-
   return (
     <div className="relative w-full h-[600px] md:h-[80vh] max-h-[800px] overflow-hidden">
-      {/* Direct image loading with no delays */}
       <img
         src="/lovable-uploads/3efce4a3-d382-4b88-b33e-f96074fb7311.png"
         alt="Mountain road with sunset sky for SmartRV Weather Guide"
