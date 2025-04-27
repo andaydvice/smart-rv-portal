@@ -14,12 +14,49 @@ import { useEffect } from "react";
 import { preloadCriticalImages } from "@/utils/performance";
 
 const Documentation = () => {
-  // Preload critical images as soon as the component mounts
+  // Preload critical images immediately with high priority
   useEffect(() => {
-    preloadCriticalImages([
-      '/lovable-uploads/f72886c3-3677-4dfe-8d56-5a784197eda2.png',
-      '/lovable-uploads/846b5be5-043e-4645-a3d9-39614d63342c.png'
-    ]);
+    // Immediate preload for the critical header image
+    const headerImage = '/lovable-uploads/f72886c3-3677-4dfe-8d56-5a784197eda2.png';
+    const completionImage = '/lovable-uploads/846b5be5-043e-4645-a3d9-39614d63342c.png';
+    
+    // Create links with high fetchPriority
+    const createHighPriorityLink = (src: string) => {
+      const link = document.createElement('link');
+      link.rel = 'preload';
+      link.as = 'image';
+      link.href = src;
+      link.fetchPriority = 'high';
+      document.head.appendChild(link);
+      return link;
+    };
+    
+    // Create high priority preload links
+    const links = [
+      createHighPriorityLink(headerImage),
+      createHighPriorityLink(completionImage)
+    ];
+    
+    // Use the Image constructor to force browser to load these immediately
+    const preloadWithImage = (src: string) => {
+      const img = new Image();
+      img.src = src;
+    };
+    
+    preloadWithImage(headerImage);
+    preloadWithImage(completionImage);
+    
+    // Use the performance utility as well
+    preloadCriticalImages([headerImage, completionImage]);
+    
+    // Cleanup
+    return () => {
+      links.forEach(link => {
+        if (document.head.contains(link)) {
+          document.head.removeChild(link);
+        }
+      });
+    };
   }, []);
 
   return (

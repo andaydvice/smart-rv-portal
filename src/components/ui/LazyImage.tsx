@@ -8,8 +8,8 @@ interface LazyImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
   srcSetWebp?: string;
   srcSet?: string;
   sizes?: string;
-  blurDataURL?: string; // For blur-up placeholder (base64 or small image url)
-  priority?: boolean; // New prop for priority images that should load eagerly
+  blurDataURL?: string;
+  priority?: boolean;
 }
 
 export const LazyImage = ({
@@ -24,12 +24,20 @@ export const LazyImage = ({
   priority = false,
   ...props
 }: LazyImageProps) => {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(!priority);
   const [error, setError] = useState(false);
   
   // Preload the image if it's marked as priority
   useEffect(() => {
     if (priority && src) {
+      // For priority images, we can preload them with higher urgency
+      const link = document.createElement('link');
+      link.rel = 'preload';
+      link.as = 'image';
+      link.href = src;
+      link.fetchPriority = 'high';
+      document.head.appendChild(link);
+      
       const preloadImage = new Image();
       preloadImage.src = src;
       
@@ -41,6 +49,10 @@ export const LazyImage = ({
       preloadImage.onerror = () => {
         setError(true);
         setIsLoading(false);
+      };
+      
+      return () => {
+        document.head.removeChild(link);
       };
     }
   }, [priority, src]);
@@ -78,6 +90,7 @@ export const LazyImage = ({
             src={src}
             alt={alt || ''}
             loading={priority ? 'eager' : 'lazy'}
+            fetchPriority={priority ? 'high' : 'auto'}
             className={cn(
               className,
               isLoading ? 'opacity-0' : 'opacity-100',
