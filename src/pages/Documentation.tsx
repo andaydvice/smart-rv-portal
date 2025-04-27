@@ -10,8 +10,18 @@ import MaintenanceTab from "@/components/documentation/MaintenanceTab";
 import PowerTab from "@/components/documentation/PowerTab";
 import Layout from "@/components/layout/Layout";
 import { Container } from "@/components/ui/container";
+import { useEffect } from "react";
+import { preloadCriticalImages } from "@/utils/performance";
 
 const Documentation = () => {
+  // Preload critical images as soon as the component mounts
+  useEffect(() => {
+    preloadCriticalImages([
+      '/lovable-uploads/f72886c3-3677-4dfe-8d56-5a784197eda2.png',
+      '/lovable-uploads/846b5be5-043e-4645-a3d9-39614d63342c.png'
+    ]);
+  }, []);
+
   return (
     <Layout>
       <div className="w-full flex-grow">

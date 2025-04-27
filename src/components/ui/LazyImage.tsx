@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { cn } from '@/lib/utils';
 import { Skeleton } from '@/components/ui/skeleton';
 
@@ -9,6 +9,7 @@ interface LazyImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
   srcSet?: string;
   sizes?: string;
   blurDataURL?: string; // For blur-up placeholder (base64 or small image url)
+  priority?: boolean; // New prop for priority images that should load eagerly
 }
 
 export const LazyImage = ({
@@ -20,10 +21,29 @@ export const LazyImage = ({
   srcSet,
   sizes,
   blurDataURL,
+  priority = false,
   ...props
 }: LazyImageProps) => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(false);
+  
+  // Preload the image if it's marked as priority
+  useEffect(() => {
+    if (priority && src) {
+      const preloadImage = new Image();
+      preloadImage.src = src;
+      
+      // Once the image is preloaded, update the loading state
+      preloadImage.onload = () => {
+        setIsLoading(false);
+      };
+      
+      preloadImage.onerror = () => {
+        setError(true);
+        setIsLoading(false);
+      };
+    }
+  }, [priority, src]);
 
   return (
     <div className="relative">
@@ -57,7 +77,7 @@ export const LazyImage = ({
           <img
             src={src}
             alt={alt || ''}
-            loading="lazy"
+            loading={priority ? 'eager' : 'lazy'}
             className={cn(
               className,
               isLoading ? 'opacity-0' : 'opacity-100',

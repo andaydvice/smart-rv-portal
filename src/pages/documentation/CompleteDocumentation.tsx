@@ -12,8 +12,29 @@ import Layout from "@/components/layout/Layout";
 import { Container } from "@/components/ui/container";
 import { LazyImage } from "@/components/ui/LazyImage";
 import { generateImagePlaceholder } from "@/utils/performance";
+import { useEffect } from "react";
+import { preloadCriticalImages } from "@/utils/performance";
 
 const CompleteDocumentation = () => {
+  // Preload critical image as soon as component mounts
+  useEffect(() => {
+    preloadCriticalImages([
+      '/lovable-uploads/846b5be5-043e-4645-a3d9-39614d63342c.png'
+    ]);
+    
+    // Add link preload in the document head for instant loading
+    const link = document.createElement('link');
+    link.rel = 'preload';
+    link.as = 'image';
+    link.href = '/lovable-uploads/846b5be5-043e-4645-a3d9-39614d63342c.png';
+    document.head.appendChild(link);
+    
+    // Clean up function to remove the link when component unmounts
+    return () => {
+      document.head.removeChild(link);
+    };
+  }, []);
+
   return (
     <Layout>
       <div className="w-full px-4 pt-24 pb-16">
@@ -40,6 +61,7 @@ const CompleteDocumentation = () => {
                 alt="Smart RV Complete System Documentation"
                 className="w-full h-full object-cover"
                 blurDataURL={generateImagePlaceholder(800, 400)}
+                priority={true} // Mark this image as high priority
               />
               <div className="absolute inset-0 bg-black/50 backdrop-blur-sm"></div>
               <div className="absolute inset-0 flex flex-col justify-center items-center text-center p-8">

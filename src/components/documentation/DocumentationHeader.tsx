@@ -32,6 +32,7 @@ const DocumentationHeader = () => {
             className="w-full object-cover"
             style={{ maxHeight: "400px" }}
             blurDataURL={generateImagePlaceholder(800, 400)}
+            priority={true} // Mark this image as high priority
           />
           <div className="absolute inset-0 bg-black/40"></div>
         </div>
