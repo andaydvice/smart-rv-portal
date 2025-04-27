@@ -3,6 +3,8 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { LazyImage } from "@/components/ui/LazyImage";
+import { generateImagePlaceholder } from "@/utils/performance";
 
 const DocumentationHeader = () => {
   return (
@@ -24,11 +26,12 @@ const DocumentationHeader = () => {
 
       <div className="relative w-full rounded-xl overflow-hidden mb-8 border border-gray-800">
         <div className="max-h-[400px] overflow-hidden">
-          <img
+          <LazyImage
             src="/lovable-uploads/f72886c3-3677-4dfe-8d56-5a784197eda2.png"
             alt="Complete System Documentation"
             className="w-full object-cover"
             style={{ maxHeight: "400px" }}
+            blurDataURL={generateImagePlaceholder(800, 400)}
           />
           <div className="absolute inset-0 bg-black/40"></div>
         </div>

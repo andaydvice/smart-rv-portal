@@ -4,13 +4,14 @@ import { Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Accordion } from "@/components/ui/accordion";
-import Navbar from "@/components/Navbar";
 import SystemArchitectureSection from "@/components/documentation/sections/SystemArchitectureSection";
 import NetworkInfrastructureSection from "@/components/documentation/sections/NetworkInfrastructureSection";
 import PowerManagementSection from "@/components/documentation/sections/PowerManagementSection";
 import SecuritySection from "@/components/documentation/sections/SecuritySection";
 import Layout from "@/components/layout/Layout";
 import { Container } from "@/components/ui/container";
+import { LazyImage } from "@/components/ui/LazyImage";
+import { generateImagePlaceholder } from "@/utils/performance";
 
 const CompleteDocumentation = () => {
   return (
@@ -26,7 +27,7 @@ const CompleteDocumentation = () => {
             <Link to="/documentation">
               <Button
                 variant="outline"
-                className="bg-white/5 text-[#0EA5E9] border-white/20 hover:bg-white/10 hover:text-[#0EA5E9] focus:text-[#0EA5E9] active:text-[#0EA5E9]"
+                className="bg-white/5 text-[#0EA5E9] border-white/20 hover:bg-white/10 hover:text-white text-sm"
               >
                 <ArrowLeft className="w-4 h-4 mr-2" />
                 Back to Documentation Overview
@@ -34,10 +35,11 @@ const CompleteDocumentation = () => {
             </Link>
 
             <div className="relative w-full max-w-5xl mx-auto h-[400px] rounded-xl overflow-hidden mb-12 border border-gray-700">
-              <img
+              <LazyImage
                 src="/lovable-uploads/846b5be5-043e-4645-a3d9-39614d63342c.png"
                 alt="Smart RV Complete System Documentation"
                 className="w-full h-full object-cover"
+                blurDataURL={generateImagePlaceholder(800, 400)}
               />
               <div className="absolute inset-0 bg-black/50 backdrop-blur-sm"></div>
               <div className="absolute inset-0 flex flex-col justify-center items-center text-center p-8">
