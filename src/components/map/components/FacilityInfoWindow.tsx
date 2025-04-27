@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { InfoWindowF } from '@react-google-maps/api';
 import { MapPin, Phone } from 'lucide-react';
@@ -59,7 +58,7 @@ const FacilityInfoWindow: React.FC<FacilityInfoWindowProps> = ({
           
           {hasFeatures() && (
             <div className="mb-5">
-              <h4 className="text-sm font-bold text-[#5B9BD5] uppercase text-center mb-3">FACILITIES & AMENITIES</h4>
+              <h4 className="text-sm font-bold text-[#60A5FA] uppercase text-center mb-3">FACILITIES & AMENITIES</h4>
               <div className="grid grid-cols-2 gap-3">
                 {Array.isArray(facility.features) ? (
                   // Handle array of feature strings
