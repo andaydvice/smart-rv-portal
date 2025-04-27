@@ -6,60 +6,22 @@ import { cn } from "@/lib/utils";
 const HeroSection = () => {
   const [imageLoaded, setImageLoaded] = useState(false);
   const [imageError, setImageError] = useState(false);
-
-  // Pre-load the image with high priority
+  
   useEffect(() => {
-    const imageSrc = "/lovable-uploads/3efce4a3-d382-4b88-b33e-f96074fb7311.png";
-    
-    // Method 1: Create high priority preload link
-    const link = document.createElement('link');
-    link.rel = 'preload';
-    link.as = 'image';
-    link.href = imageSrc;
-    link.fetchPriority = 'high';
-    document.head.appendChild(link);
-    
-    // Method 2: Use Image constructor for immediate loading
-    const preloadImage = new Image();
-    preloadImage.src = imageSrc;
-    preloadImage.fetchPriority = 'high';
-    preloadImage.onload = () => setImageLoaded(true);
-    preloadImage.onerror = () => setImageError(true);
-    
-    return () => {
-      if (document.head.contains(link)) {
-        document.head.removeChild(link);
-      }
-    };
+    // Immediately set imageLoaded to true since we're now preloading in HTML/main.tsx
+    setImageLoaded(true);
   }, []);
 
   return (
     <div className="relative w-full h-[600px] md:h-[80vh] max-h-[800px] overflow-hidden">
-      {/* Background fallback color */}
-      <div className="absolute inset-0 bg-deeper-background" />
-      
-      {/* Main image with error handling */}
-      {!imageError ? (
-        <img
-          src="/lovable-uploads/3efce4a3-d382-4b88-b33e-f96074fb7311.png"
-          alt="Mountain road with sunset sky for SmartRV Weather Guide"
-          className={cn(
-            "absolute inset-0 w-full h-full object-cover",
-            imageLoaded ? "opacity-100" : "opacity-0"
-          )}
-          loading="eager"
-          fetchPriority="high"
-        />
-      ) : (
-        /* Fallback image if main image fails to load */
-        <img 
-          src="/lovable-uploads/78ab2ab5-e50d-4f41-8046-ac79e38e44cb.png"
-          alt="Mountain road with sunset sky for SmartRV Weather Guide"
-          className="absolute inset-0 w-full h-full object-cover"
-          loading="eager"
-          fetchPriority="high"
-        />
-      )}
+      {/* Direct image loading with no delays */}
+      <img
+        src="/lovable-uploads/3efce4a3-d382-4b88-b33e-f96074fb7311.png"
+        alt="Mountain road with sunset sky for SmartRV Weather Guide"
+        className="absolute inset-0 w-full h-full object-cover"
+        loading="eager"
+        fetchPriority="high"
+      />
       
       {/* Semi-transparent overlay for better text readability */}
       <div className="absolute inset-0 bg-black/50 z-10" />
@@ -73,13 +35,6 @@ const HeroSection = () => {
           Learn More
         </a>
       </div>
-
-      {/* Loading indicator */}
-      {!imageLoaded && !imageError && (
-        <div className="absolute inset-0 flex items-center justify-center bg-deeper-background/80 z-40">
-          <div className="w-12 h-12 border-4 border-ocean-blue border-t-transparent rounded-full animate-spin"></div>
-        </div>
-      )}
     </div>
   );
 };

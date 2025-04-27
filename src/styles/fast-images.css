@@ -1,0 +1,38 @@
+
+/* Critical styling for header images to ensure they appear immediately */
+.hero-section img,
+[class*="hero"] img,
+[class*="Header"] img,
+.rv-weather-page img:first-of-type,
+.documentation img:first-child,
+.luxury-hero img,
+[class*="header"] img,
+img[src*="3efce4a3-d382"],
+img[src*="ad3dc693-42f4"],
+img[src*="f72886c3-3677"],
+img[src*="846b5be5-043e"],
+img[src*="f3ebf58c-7bbf"],
+img[src*="53093373-3df3"],
+img[src*="ff43ed8a-b7cd"],
+img[src*="Luxury_RV_Living-min"],
+img[src*="Luxury-Class-RVs-min"] {
+  content-visibility: auto !important;
+  contain: paint !important;
+}
+
+/* Ensure immediate display of all hero images */
+.hero-image,
+img.hero-image,
+.header-image,
+img.header-image {
+  content-visibility: auto !important;
+  contain: paint !important;
+}
+
+/* Force immediate rendering of all priority images */
+img[loading="eager"],
+img[fetchpriority="high"],
+picture:first-child img {
+  content-visibility: auto !important;
+  contain: paint !important;
+}

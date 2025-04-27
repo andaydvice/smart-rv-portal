@@ -14,6 +14,35 @@ import './styles/map-fixes.css'
 import './styles/google-maps.css'
 import { setupLazyLoading, deferOperation } from './utils/performance.ts'
 
+// CRITICAL: Preload all header images immediately on page load
+// This ensures they display instantly on any page navigation
+document.addEventListener('DOMContentLoaded', () => {
+  const criticalHeaderImages = [
+    '/lovable-uploads/3efce4a3-d382-4b88-b33e-f96074fb7311.png', // RV Weather hero
+    '/lovable-uploads/ad3dc693-42f4-4635-af2d-b2c4b1aafc43.png', // Regional climate
+    '/lovable-uploads/f72886c3-3677-4dfe-8d56-5a784197eda2.png', // Documentation header
+    '/lovable-uploads/846b5be5-043e-4645-a3d9-39614d63342c.png', // Complete documentation
+    '/lovable-uploads/f3ebf58c-7bbf-427f-9510-9c3b0aec6f6d.png', // Main hero
+    '/lovable-uploads/53093373-3df3-49cc-b4cc-91b800c53fa9.png', // Calculator header
+    '/lovable-uploads/ff43ed8a-b7cd-42f7-a45e-a3a706d39d07.png', // Voice control
+    '/lovable-uploads/Luxury_RV_Living-min.jpg', // RV Living
+    '/lovable-uploads/Luxury-Class-RVs-min.jpg' // Luxury RVs
+  ];
+  
+  // Create and inject actual image elements (the most reliable way)
+  criticalHeaderImages.forEach(src => {
+    const img = new Image();
+    img.src = src;
+    img.style.position = 'absolute';
+    img.style.width = '1px';
+    img.style.height = '1px';
+    img.style.opacity = '0.01';
+    img.style.pointerEvents = 'none';
+    img.style.left = '-9999px';
+    document.body.appendChild(img);
+  });
+});
+
 // Log the current deployed URL for debugging
 console.log('Application starting, window.location:', window.location.href);
 console.log('Application path:', window.location.pathname);
