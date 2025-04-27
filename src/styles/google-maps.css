@@ -70,49 +70,8 @@
   z-index: 1002 !important;
 }
 
-/* Improve marker icon visibility */
-.gm-style img[src*="circle"], 
-.gm-style img[src*="marker"] {
-  transform: translate(-50%, -50%);
-  visibility: visible !important;
-  opacity: 1 !important;
-  display: block !important;
-  pointer-events: all !important;
-}
-
-/* Fix for SVG marker icons */
-.gm-style .gmnoprint div[role="button"],
-.gm-style .gmnoprint svg {
-  visibility: visible !important;
-  opacity: 1 !important;
-  display: block !important;
-}
-
-/* Fix for marker position */
-.gm-style .map-marker {
-  transform: translate(-50%, -50%);
-  position: absolute !important;
-}
-
-/* Add specific styling for facility info window content */
-.facility-info-window {
-  background-color: #131a2a !important;
-  color: white !important;
-  padding: 1rem !important;
-  border-radius: 8px !important;
-}
-
-.facility-info-window h3 {
-  color: #5B9BD5 !important;
-  margin-bottom: 0.5rem !important;
-}
-
-.facility-info-window .text-xs {
-  color: #E2E8FF !important;
-}
-
-/* Override feature tag styling for better readability */
-.facility-info-window span[class*="text-xs bg-[#e0f2ff]"] {
+/* Feature tag styling for better visibility and consistency */
+.facility-feature {
   background-color: #1d2434 !important;
   color: #60A5FA !important;
   padding: 4px 8px !important;
@@ -124,4 +83,7 @@
   font-weight: 500 !important;
   border: 1px solid rgba(96, 165, 250, 0.2) !important;
   font-size: 0.75rem !important;
+  text-align: center !important;
+  justify-content: center !important;
+  width: 100% !important;
 }

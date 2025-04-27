@@ -26,7 +26,6 @@ const FacilityInfoWindow: React.FC<FacilityInfoWindowProps> = ({
       }}
     >
       <div className="p-0 max-w-[300px] bg-[#131a2a] text-white rounded-lg">
-        {/* Title with bold text and proper spacing */}
         <div className="bg-[#091020] px-5 py-5 rounded-t-lg">
           <h3 className="text-xl font-bold text-[#5B9BD5] text-center">{facility.name}</h3>
         </div>
@@ -46,15 +45,25 @@ const FacilityInfoWindow: React.FC<FacilityInfoWindowProps> = ({
             </div>
           )}
           
-          {facility.features && facility.features.length > 0 && (
+          {facility.features && Object.values(facility.features).some(v => v) && (
             <div className="mb-5">
               <h4 className="text-sm font-bold text-gray-400 uppercase text-center mb-3">FACILITIES & AMENITIES</h4>
               <div className="grid grid-cols-2 gap-3">
-                {facility.features.map((feature, idx) => (
-                  <div key={idx} className="bg-[#1d2434] text-[#5B9BD5] text-sm font-medium px-3 py-2 rounded text-center">
-                    {feature}
-                  </div>
-                ))}
+                {facility.features.indoor && (
+                  <span className="facility-feature">Indoor</span>
+                )}
+                {facility.features.climate_controlled && (
+                  <span className="facility-feature">Climate Controlled</span>
+                )}
+                {facility.features["24h_access"] && (
+                  <span className="facility-feature">24/7 Access</span>
+                )}
+                {facility.features.security_system && (
+                  <span className="facility-feature">Security</span>
+                )}
+                {facility.features.vehicle_washing && (
+                  <span className="facility-feature">Vehicle Washing</span>
+                )}
               </div>
             </div>
           )}
