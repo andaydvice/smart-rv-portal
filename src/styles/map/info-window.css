@@ -1,0 +1,29 @@
+
+/* Info window styling */
+.gm-style .gm-style-iw-c {
+  z-index: 1001 !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  display: block !important;
+  background-color: #131a2a !important;
+  padding: 0 !important;
+  border-radius: 8px !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3) !important;
+  overflow: visible !important;
+  max-width: 300px !important;
+}
+
+.gm-style .gm-style-iw-d {
+  overflow: hidden !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  color: #ffffff !important;
+  background-color: #131a2a !important;
+  border-radius: 8px !important;
+}
+
+.gm-style .gm-style-iw-t::after {
+  background-color: transparent !important;
+  border: none !important;
+  border-top-color: #131a2a !important;
+}

@@ -1,0 +1,13 @@
+
+/* Base map container styles */
+.google-map-container {
+  width: 100% !important;
+  height: 650px !important;
+  border-radius: 0.5rem !important;
+  overflow: hidden !important;
+}
+
+.google-map-container > div {
+  height: 100% !important;
+  width: 100% !important;
+}

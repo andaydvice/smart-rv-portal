@@ -1,0 +1,23 @@
+
+/* Facility feature styles */
+.gm-style .gm-style-iw-d .facility-feature,
+.gm-style-iw-d span.facility-feature {
+  background-color: #1d2434 !important;
+  color: #5B9BD5 !important;
+  padding: 4px 8px !important;
+  border-radius: 4px !important;
+  margin: 2px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 4px !important;
+  font-weight: 700 !important;
+  border: 1px solid rgba(91, 155, 213, 0.2) !important;
+  font-size: 0.875rem !important;
+  text-align: center !important;
+  justify-content: center !important;
+  width: auto !important;
+  text-transform: none !important;
+  font-family: system-ui, -apple-system, sans-serif !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
