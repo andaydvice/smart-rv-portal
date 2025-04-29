@@ -4,3 +4,5 @@
 @import './close-button.css';
 @import './facility-features.css';
 @import './text-content.css';
+@import './map-components.css';  /* Added import for Google Maps components styling */
+

@@ -1,0 +1,41 @@
+
+/* Google Maps-specific styles */
+.gm-style img[src*="marker"] {
+  visibility: visible !important;
+  opacity: 1 !important;
+  display: block !important;
+  z-index: 1000 !important;
+}
+
+/* Google Maps InfoWindow styling */
+.gm-style .gm-style-iw-c {
+  padding: 12px !important;
+  background-color: #151A22 !important;
+  color: white !important;
+  border-radius: 8px !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5) !important;
+}
+
+.gm-style .gm-style-iw-t::after {
+  background: #151A22 !important;
+}
+
+.gm-style .gm-style-iw-d {
+  overflow: hidden !important;
+  max-height: none !important;
+}
+
+/* Ensure Google Maps controls are visible */
+.gm-control-active,
+.gm-svpc {
+  background-color: #151A22 !important;
+  border-radius: 4px !important;
+}
+
+/* Map container overrides for Google Maps */
+.map-container-google {
+  position: relative !important;
+  overflow: visible !important;
+  height: 650px !important;
+  width: 100% !important;
+}
