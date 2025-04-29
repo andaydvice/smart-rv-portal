@@ -11,7 +11,7 @@ import './styles/emergency-marker-fix.css'
 import './styles/map-optimizations.css'
 import './styles/force-markers.css'
 import './styles/map-fixes.css'
-import './styles/google-maps.css'
+import './styles/map/index.css' // Updated path to use the index file that imports all map styles
 import { setupLazyLoading, deferOperation } from './utils/performance.ts'
 
 // Log the current deployed URL for debugging
