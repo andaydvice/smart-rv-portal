@@ -17,7 +17,7 @@ const DocumentationHeader = () => {
     link.as = 'image';
     link.href = headerImageSrc;
     link.fetchPriority = 'high';
-    link.importance = 'high'; // Additional hint for browser priority
+    // Remove importance attribute as it's not supported in TypeScript
     document.head.appendChild(link);
     
     // Also preload using Image constructor for immediate loading

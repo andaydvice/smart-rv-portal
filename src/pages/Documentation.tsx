@@ -26,7 +26,7 @@ const preloadCriticalImage = (src: string) => {
   link.as = 'image';
   link.href = src;
   link.fetchPriority = 'high';
-  link.importance = 'high';
+  // Removed importance attribute as it's not supported in TypeScript
   document.head.appendChild(link);
   
   // Method 2: Image constructor

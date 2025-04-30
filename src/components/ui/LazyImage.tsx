@@ -47,7 +47,7 @@ export const LazyImage = ({
       link.as = 'image';
       link.href = src;
       link.fetchPriority = 'high';
-      link.importance = 'high'; // Additional browser hint
+      // Removed importance attribute as it's not supported in TypeScript
       document.head.appendChild(link);
       
       // Also preload using Image constructor for immediate loading
