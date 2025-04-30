@@ -1,7 +1,7 @@
 
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { ArrowLeft, ChevronRight } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { LazyImage } from "@/components/ui/LazyImage";
 import { generateImagePlaceholder } from "@/utils/performance";
@@ -57,24 +57,17 @@ const DocumentationHeader = () => {
 
       {/* Content container */}
       <div className="container max-w-6xl mx-auto px-4 sm:px-6 space-y-8">
-        <Link to="/troubleshooting">
-          <Button
-            variant="outline"
-            className="bg-white/5 text-[#0EA5E9] border-white/20 hover:bg-white/10 hover:text-white text-sm"
-          >
-            <ArrowLeft className="w-4 h-4 mr-2" />
-            Back to Troubleshooting
-          </Button>
-        </Link>
+        {/* Removed the "Back to Troubleshooting" button */}
 
-        <div className="text-center mb-12">
+        <div className="text-center mb-16">
           <h1 className="text-[1.75rem] font-bold text-[#0EA5E9] mb-4">System Documentation</h1>
           <p className="text-sm text-gray-300 max-w-2xl mx-auto">
             Complete documentation and technical specifications for your Smart RV system
           </p>
         </div>
 
-        <div className="mt-24 text-center">
+        {/* Added more vertical spacing with mt-32 (instead of mt-24) */}
+        <div className="mt-32 text-center mb-16">
           <Link to="/documentation/complete">
             <Button 
               variant="outline" 

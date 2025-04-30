@@ -66,54 +66,58 @@ const Documentation = () => {
           <DocumentationHeader />
           
           <Container>
-            <Tabs defaultValue="overview" className="space-y-8">
-              <TabsList className="bg-[#091020] p-2 mb-12">
-                <TabsTrigger 
-                  value="overview" 
-                  className="data-[state=active]:bg-[#60A5FA] data-[state=active]:text-white text-gray-300 hover:text-white font-semibold text-base px-6 py-4"
-                >
-                  <Book className="mr-2 h-4 w-4" />
-                  Overview
-                </TabsTrigger>
-                <TabsTrigger 
-                  value="technical" 
-                  className="data-[state=active]:bg-[#60A5FA] data-[state=active]:text-white text-gray-300 hover:text-white font-semibold text-base px-6 py-4 mt-4"
-                >
-                  <Cpu className="mr-2 h-4 w-4" />
-                  Technical
-                </TabsTrigger>
-                <TabsTrigger 
-                  value="maintenance" 
-                  className="data-[state=active]:bg-[#60A5FA] data-[state=active]:text-white text-gray-300 hover:text-white font-semibold text-base px-6 py-4 mt-4"
-                >
-                  <Wrench className="mr-2 h-4 w-4" />
-                  Maintenance
-                </TabsTrigger>
-                <TabsTrigger 
-                  value="power" 
-                  className="data-[state=active]:bg-[#60A5FA] data-[state=active]:text-white text-gray-300 hover:text-white font-semibold text-base px-6 py-4 mt-4"
-                >
-                  <Zap className="mr-2 h-4 w-4" />
-                  Power Systems
-                </TabsTrigger>
-              </TabsList>
+            {/* Added extra spacing above the tabs with mt-16 */}
+            <div className="mt-16">
+              <Tabs defaultValue="overview" className="space-y-8">
+                <TabsList className="bg-[#091020] p-2 mb-12">
+                  <TabsTrigger 
+                    value="overview" 
+                    className="data-[state=active]:bg-[#60A5FA] data-[state=active]:text-white text-gray-300 hover:text-white font-semibold text-base px-6 py-4"
+                  >
+                    <Book className="mr-2 h-4 w-4" />
+                    Overview
+                  </TabsTrigger>
+                  <TabsTrigger 
+                    value="technical" 
+                    className="data-[state=active]:bg-[#60A5FA] data-[state=active]:text-white text-gray-300 hover:text-white font-semibold text-base px-6 py-4 mt-4"
+                  >
+                    <Cpu className="mr-2 h-4 w-4" />
+                    Technical
+                  </TabsTrigger>
+                  <TabsTrigger 
+                    value="maintenance" 
+                    className="data-[state=active]:bg-[#60A5FA] data-[state=active]:text-white text-gray-300 hover:text-white font-semibold text-base px-6 py-4 mt-4"
+                  >
+                    <Wrench className="mr-2 h-4 w-4" />
+                    Maintenance
+                  </TabsTrigger>
+                  <TabsTrigger 
+                    value="power" 
+                    className="data-[state=active]:bg-[#60A5FA] data-[state=active]:text-white text-gray-300 hover:text-white font-semibold text-base px-6 py-4 mt-4"
+                  >
+                    <Zap className="mr-2 h-4 w-4" />
+                    Power Systems
+                  </TabsTrigger>
+                </TabsList>
 
-              <TabsContent value="overview" className="mt-10 mb-16">
-                <OverviewTab />
-              </TabsContent>
+                {/* Added extra bottom spacing with mb-20 */}
+                <TabsContent value="overview" className="mt-10 mb-20">
+                  <OverviewTab />
+                </TabsContent>
 
-              <TabsContent value="technical" className="mt-10 mb-16">
-                <TechnicalTab />
-              </TabsContent>
+                <TabsContent value="technical" className="mt-10 mb-20">
+                  <TechnicalTab />
+                </TabsContent>
 
-              <TabsContent value="maintenance" className="mt-10 mb-16">
-                <MaintenanceTab />
-              </TabsContent>
+                <TabsContent value="maintenance" className="mt-10 mb-20">
+                  <MaintenanceTab />
+                </TabsContent>
 
-              <TabsContent value="power" className="mt-10 mb-16">
-                <PowerTab />
-              </TabsContent>
-            </Tabs>
+                <TabsContent value="power" className="mt-10 mb-20">
+                  <PowerTab />
+                </TabsContent>
+              </Tabs>
+            </div>
           </Container>
         </div>
       </div>
