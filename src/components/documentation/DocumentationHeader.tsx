@@ -3,8 +3,7 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { LazyImage } from "@/components/ui/LazyImage";
-import { generateImagePlaceholder } from "@/utils/performance";
+import { OptimizedImage } from "@/components/blog/post/OptimizedImage";
 import { useEffect } from "react";
 
 const DocumentationHeader = () => {
@@ -18,6 +17,7 @@ const DocumentationHeader = () => {
     link.as = 'image';
     link.href = headerImageSrc;
     link.fetchPriority = 'high';
+    link.importance = 'high'; // Additional hint for browser priority
     document.head.appendChild(link);
     
     // Also preload using Image constructor for immediate loading
@@ -42,14 +42,12 @@ const DocumentationHeader = () => {
       {/* Full width header image section */}
       <div className="relative w-full mb-8 border-b border-gray-800">
         <div className="max-h-[400px] overflow-hidden">
-          <LazyImage
+          <OptimizedImage
             src="/lovable-uploads/f72886c3-3677-4dfe-8d56-5a784197eda2.png"
             alt="Complete System Documentation"
             className="w-full object-cover"
-            style={{ maxHeight: "400px" }}
-            blurDataURL={generateImagePlaceholder(800, 400)}
-            priority={true}
-            fetchPriority="high"
+            width={1920}
+            height={400}
           />
           <div className="absolute inset-0 bg-black/40"></div>
         </div>

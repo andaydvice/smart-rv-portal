@@ -11,47 +11,43 @@ import PowerTab from "@/components/documentation/PowerTab";
 import Layout from "@/components/layout/Layout";
 import { Container } from "@/components/ui/container";
 import { useEffect } from "react";
-import { preloadCriticalImages } from "@/utils/performance";
+
+// Preload these images as early as possible
+const CRITICAL_IMAGES = [
+  '/lovable-uploads/f72886c3-3677-4dfe-8d56-5a784197eda2.png',
+  '/lovable-uploads/846b5be5-043e-4645-a3d9-39614d63342c.png'
+];
+
+// Preload function that uses all available techniques
+const preloadCriticalImage = (src: string) => {
+  // Method 1: Preload link
+  const link = document.createElement('link');
+  link.rel = 'preload';
+  link.as = 'image';
+  link.href = src;
+  link.fetchPriority = 'high';
+  link.importance = 'high';
+  document.head.appendChild(link);
+  
+  // Method 2: Image constructor
+  const img = new Image();
+  img.src = src;
+  img.fetchPriority = 'high';
+  
+  return link; // Return for cleanup
+};
 
 const Documentation = () => {
-  // Preload critical images immediately with high priority
+  // Preload critical images immediately
   useEffect(() => {
-    // Immediate preload for the critical header image
-    const headerImage = '/lovable-uploads/f72886c3-3677-4dfe-8d56-5a784197eda2.png';
-    const completionImage = '/lovable-uploads/846b5be5-043e-4645-a3d9-39614d63342c.png';
+    console.log('Documentation page loaded - preloading critical images');
     
-    // Create links with high fetchPriority
-    const createHighPriorityLink = (src: string) => {
-      const link = document.createElement('link');
-      link.rel = 'preload';
-      link.as = 'image';
-      link.href = src;
-      link.fetchPriority = 'high';
-      document.head.appendChild(link);
-      return link;
-    };
-    
-    // Create high priority preload links
-    const links = [
-      createHighPriorityLink(headerImage),
-      createHighPriorityLink(completionImage)
-    ];
-    
-    // Use the Image constructor to force browser to load these immediately
-    const preloadWithImage = (src: string) => {
-      const img = new Image();
-      img.src = src;
-    };
-    
-    preloadWithImage(headerImage);
-    preloadWithImage(completionImage);
-    
-    // Use the performance utility as well
-    preloadCriticalImages([headerImage, completionImage]);
+    // Create all preload elements
+    const preloadLinks = CRITICAL_IMAGES.map(src => preloadCriticalImage(src));
     
     // Cleanup
     return () => {
-      links.forEach(link => {
+      preloadLinks.forEach(link => {
         if (document.head.contains(link)) {
           document.head.removeChild(link);
         }

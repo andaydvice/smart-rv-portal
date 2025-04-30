@@ -22,26 +22,40 @@ export const LazyImage = ({
   sizes,
   blurDataURL,
   priority = false,
+  width,
+  height,
   ...props
 }: LazyImageProps) => {
   const [isLoading, setIsLoading] = useState(!priority);
   const [error, setError] = useState(false);
   
+  // Check if this is a documentation image that should always be priority
+  const isDocumentationImage = src && typeof src === 'string' && (
+    src.includes('f72886c3-3677-4dfe-8d56-5a784197eda2') || 
+    src.includes('846b5be5-043e-4645-a3d9-39614d63342c')
+  );
+  
+  // Force priority for known critical images
+  const shouldPrioritize = priority || isDocumentationImage;
+  
   // Preload the image if it's marked as priority
   useEffect(() => {
-    if (priority && src) {
+    if (shouldPrioritize && src) {
       // Immediately create and inject a preload link in the document head
       const link = document.createElement('link');
       link.rel = 'preload';
       link.as = 'image';
       link.href = src;
       link.fetchPriority = 'high';
+      link.importance = 'high'; // Additional browser hint
       document.head.appendChild(link);
       
       // Also preload using Image constructor for immediate loading
       const preloadImage = new Image();
       preloadImage.src = src;
       preloadImage.fetchPriority = 'high'; // Modern browsers support this
+      if (width) preloadImage.width = Number(width);
+      if (height) preloadImage.height = Number(height);
       
       // Once the image is preloaded, update the loading state
       preloadImage.onload = () => {
@@ -54,10 +68,12 @@ export const LazyImage = ({
       };
       
       return () => {
-        document.head.removeChild(link);
+        if (document.head.contains(link)) {
+          document.head.removeChild(link);
+        }
       };
     }
-  }, [priority, src]);
+  }, [shouldPrioritize, src, width, height]);
 
   return (
     <div className="relative">
@@ -73,6 +89,8 @@ export const LazyImage = ({
           )}
           style={{ filter: 'blur(16px)' }}
           draggable={false}
+          width={width}
+          height={height}
         />
       )}
       {/* Skeleton fallback */}
@@ -91,8 +109,8 @@ export const LazyImage = ({
           <img
             src={src}
             alt={alt || ''}
-            loading={priority ? 'eager' : 'lazy'}
-            fetchPriority={priority ? 'high' : 'auto'}
+            loading={shouldPrioritize ? 'eager' : 'lazy'}
+            fetchPriority={shouldPrioritize ? 'high' : 'auto'}
             className={cn(
               className,
               isLoading ? 'opacity-0' : 'opacity-100',
@@ -105,6 +123,8 @@ export const LazyImage = ({
             }}
             srcSet={srcSet}
             sizes={sizes}
+            width={width}
+            height={height}
             {...props}
           />
         </picture>

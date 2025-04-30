@@ -12,7 +12,17 @@ import './styles/map-optimizations.css'
 import './styles/force-markers.css'
 import './styles/map-fixes.css'
 import './styles/map/index.css' // Updated path to use the index file that imports all map styles
-import { setupLazyLoading, deferOperation } from './utils/performance.ts'
+import { setupLazyLoading, deferOperation, preloadCriticalImages } from './utils/performance.ts'
+
+// Critical images to preload at application start
+const CRITICAL_APPLICATION_IMAGES = [
+  '/lovable-uploads/f72886c3-3677-4dfe-8d56-5a784197eda2.png', // Documentation header
+  '/lovable-uploads/846b5be5-043e-4645-a3d9-39614d63342c.png', // Completion image
+  '/lovable-uploads/a6746652-04f0-4f89-a55d-b241e7bd972a.png'  // Troubleshooting header
+];
+
+// Preload critical images as early as possible
+preloadCriticalImages(CRITICAL_APPLICATION_IMAGES);
 
 // Log the current deployed URL for debugging
 console.log('Application starting, window.location:', window.location.href);
