@@ -11,6 +11,7 @@ import PowerTab from "@/components/documentation/PowerTab";
 import Layout from "@/components/layout/Layout";
 import { Container } from "@/components/ui/container";
 import { useEffect } from "react";
+import EmergencyDebug from "@/components/debug/EmergencyDebug";
 
 // Preload these images as early as possible
 const CRITICAL_IMAGES = [
@@ -20,13 +21,14 @@ const CRITICAL_IMAGES = [
 
 // Preload function that uses all available techniques
 const preloadCriticalImage = (src: string) => {
+  console.log(`Preloading critical image: ${src}`);
+  
   // Method 1: Preload link
   const link = document.createElement('link');
   link.rel = 'preload';
   link.as = 'image';
   link.href = src;
   link.fetchPriority = 'high';
-  // Removed importance attribute as it's not supported in TypeScript
   document.head.appendChild(link);
   
   // Method 2: Image constructor
@@ -38,9 +40,24 @@ const preloadCriticalImage = (src: string) => {
 };
 
 const Documentation = () => {
+  console.log('Documentation component rendering');
+  
   // Preload critical images immediately
   useEffect(() => {
     console.log('Documentation page loaded - preloading critical images');
+    
+    // Force visibility of body and HTML
+    document.body.style.display = 'block';
+    document.body.style.visibility = 'visible';
+    document.documentElement.style.display = 'block';
+    document.documentElement.style.visibility = 'visible';
+    
+    // Force visibility of root element
+    const root = document.getElementById('root');
+    if (root) {
+      root.style.display = 'block';
+      root.style.visibility = 'visible';
+    }
     
     // Create all preload elements
     const preloadLinks = CRITICAL_IMAGES.map(src => preloadCriticalImage(src));
@@ -56,68 +73,71 @@ const Documentation = () => {
   }, []);
 
   return (
-    <Layout>
-      <div className="w-full flex-grow">
-        <div className="w-full py-8 relative z-10">
-          <DocumentationHeader />
-          
-          <Container>
-            {/* Added extra spacing above the tabs with mt-16 */}
-            <div className="mt-16">
-              <Tabs defaultValue="overview" className="space-y-8">
-                <TabsList className="bg-[#091020] p-2 mb-12">
-                  <TabsTrigger 
-                    value="overview" 
-                    className="data-[state=active]:bg-[#60A5FA] data-[state=active]:text-white text-gray-300 hover:text-white font-semibold text-base px-6 py-4"
-                  >
-                    <Book className="mr-2 h-4 w-4" />
-                    Overview
-                  </TabsTrigger>
-                  <TabsTrigger 
-                    value="technical" 
-                    className="data-[state=active]:bg-[#60A5FA] data-[state=active]:text-white text-gray-300 hover:text-white font-semibold text-base px-6 py-4 mt-4"
-                  >
-                    <Cpu className="mr-2 h-4 w-4" />
-                    Technical
-                  </TabsTrigger>
-                  <TabsTrigger 
-                    value="maintenance" 
-                    className="data-[state=active]:bg-[#60A5FA] data-[state=active]:text-white text-gray-300 hover:text-white font-semibold text-base px-6 py-4 mt-4"
-                  >
-                    <Wrench className="mr-2 h-4 w-4" />
-                    Maintenance
-                  </TabsTrigger>
-                  <TabsTrigger 
-                    value="power" 
-                    className="data-[state=active]:bg-[#60A5FA] data-[state=active]:text-white text-gray-300 hover:text-white font-semibold text-base px-6 py-4 mt-4"
-                  >
-                    <Zap className="mr-2 h-4 w-4" />
-                    Power Systems
-                  </TabsTrigger>
-                </TabsList>
+    <>
+      <EmergencyDebug />
+      <Layout>
+        <div className="w-full flex-grow">
+          <div className="w-full py-8 relative z-10">
+            <DocumentationHeader />
+            
+            <Container>
+              {/* Added extra spacing above the tabs with mt-16 */}
+              <div className="mt-16">
+                <Tabs defaultValue="overview" className="space-y-8">
+                  <TabsList className="bg-[#091020] p-2 mb-12">
+                    <TabsTrigger 
+                      value="overview" 
+                      className="data-[state=active]:bg-[#60A5FA] data-[state=active]:text-white text-gray-300 hover:text-white font-semibold text-base px-6 py-4"
+                    >
+                      <Book className="mr-2 h-4 w-4" />
+                      Overview
+                    </TabsTrigger>
+                    <TabsTrigger 
+                      value="technical" 
+                      className="data-[state=active]:bg-[#60A5FA] data-[state=active]:text-white text-gray-300 hover:text-white font-semibold text-base px-6 py-4 mt-4"
+                    >
+                      <Cpu className="mr-2 h-4 w-4" />
+                      Technical
+                    </TabsTrigger>
+                    <TabsTrigger 
+                      value="maintenance" 
+                      className="data-[state=active]:bg-[#60A5FA] data-[state=active]:text-white text-gray-300 hover:text-white font-semibold text-base px-6 py-4 mt-4"
+                    >
+                      <Wrench className="mr-2 h-4 w-4" />
+                      Maintenance
+                    </TabsTrigger>
+                    <TabsTrigger 
+                      value="power" 
+                      className="data-[state=active]:bg-[#60A5FA] data-[state=active]:text-white text-gray-300 hover:text-white font-semibold text-base px-6 py-4 mt-4"
+                    >
+                      <Zap className="mr-2 h-4 w-4" />
+                      Power Systems
+                    </TabsTrigger>
+                  </TabsList>
 
-                {/* Added extra bottom spacing with mb-20 */}
-                <TabsContent value="overview" className="mt-10 mb-20">
-                  <OverviewTab />
-                </TabsContent>
+                  {/* Added extra bottom spacing with mb-20 */}
+                  <TabsContent value="overview" className="mt-10 mb-20">
+                    <OverviewTab />
+                  </TabsContent>
 
-                <TabsContent value="technical" className="mt-10 mb-20">
-                  <TechnicalTab />
-                </TabsContent>
+                  <TabsContent value="technical" className="mt-10 mb-20">
+                    <TechnicalTab />
+                  </TabsContent>
 
-                <TabsContent value="maintenance" className="mt-10 mb-20">
-                  <MaintenanceTab />
-                </TabsContent>
+                  <TabsContent value="maintenance" className="mt-10 mb-20">
+                    <MaintenanceTab />
+                  </TabsContent>
 
-                <TabsContent value="power" className="mt-10 mb-20">
-                  <PowerTab />
-                </TabsContent>
-              </Tabs>
-            </div>
-          </Container>
+                  <TabsContent value="power" className="mt-10 mb-20">
+                    <PowerTab />
+                  </TabsContent>
+                </Tabs>
+              </div>
+            </Container>
+          </div>
         </div>
-      </div>
-    </Layout>
+      </Layout>
+    </>
   );
 };
 

@@ -41,19 +41,22 @@ export const LazyImage = ({
   // Preload the image if it's marked as priority
   useEffect(() => {
     if (shouldPrioritize && src) {
+      console.log(`LazyImage - Preloading priority image: ${src}`);
+      
       // Immediately create and inject a preload link in the document head
       const link = document.createElement('link');
       link.rel = 'preload';
       link.as = 'image';
       link.href = src;
-      link.fetchPriority = 'high';
-      // Removed importance attribute as it's not supported in TypeScript
+      // Use lowercase for HTML attributes in DOM API
+      link.setAttribute('fetchpriority', 'high');
       document.head.appendChild(link);
       
       // Also preload using Image constructor for immediate loading
       const preloadImage = new Image();
       preloadImage.src = src;
-      preloadImage.fetchPriority = 'high'; // Modern browsers support this
+      // Use setAttribute for fetchpriority to avoid TypeScript errors
+      preloadImage.setAttribute('fetchpriority', 'high');
       if (width) preloadImage.width = Number(width);
       if (height) preloadImage.height = Number(height);
       
@@ -110,7 +113,8 @@ export const LazyImage = ({
             src={src}
             alt={alt || ''}
             loading={shouldPrioritize ? 'eager' : 'lazy'}
-            fetchPriority={shouldPrioritize ? 'high' : 'auto'}
+            // Use setAttribute for fetchpriority to avoid React warnings
+            {...shouldPrioritize ? { 'fetchpriority': 'high' } : {}}
             className={cn(
               className,
               isLoading ? 'opacity-0' : 'opacity-100',

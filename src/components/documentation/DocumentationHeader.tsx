@@ -7,23 +7,30 @@ import { OptimizedImage } from "@/components/blog/post/OptimizedImage";
 import { useEffect } from "react";
 
 const DocumentationHeader = () => {
+  // Header image source
+  const headerImageSrc = '/lovable-uploads/f72886c3-3677-4dfe-8d56-5a784197eda2.png';
+  
   // Preload header image immediately when component mounts
   useEffect(() => {
-    const headerImageSrc = '/lovable-uploads/f72886c3-3677-4dfe-8d56-5a784197eda2.png';
+    console.log('DocumentationHeader - Preloading header image');
     
     // Create and inject a preload link with high priority
     const link = document.createElement('link');
     link.rel = 'preload';
     link.as = 'image';
     link.href = headerImageSrc;
-    link.fetchPriority = 'high';
-    // Remove importance attribute as it's not supported in TypeScript
+    // Use lowercase and setAttribute for DOM API
+    link.setAttribute('fetchpriority', 'high');
     document.head.appendChild(link);
     
     // Also preload using Image constructor for immediate loading
     const img = new Image();
     img.src = headerImageSrc;
-    img.fetchPriority = 'high';
+    // Use setAttribute for fetchpriority
+    img.setAttribute('fetchpriority', 'high');
+    
+    // Log success
+    console.log('DocumentationHeader - Preload link and image created for:', headerImageSrc);
     
     return () => {
       if (document.head.contains(link)) {
@@ -43,11 +50,12 @@ const DocumentationHeader = () => {
       <div className="relative w-full mb-8 border-b border-gray-800">
         <div className="max-h-[400px] overflow-hidden">
           <OptimizedImage
-            src="/lovable-uploads/f72886c3-3677-4dfe-8d56-5a784197eda2.png"
+            src={headerImageSrc}
             alt="Complete System Documentation"
             className="w-full object-cover"
             width={1920}
             height={400}
+            priority={true}
           />
           <div className="absolute inset-0 bg-black/40"></div>
         </div>
@@ -55,8 +63,6 @@ const DocumentationHeader = () => {
 
       {/* Content container */}
       <div className="container max-w-6xl mx-auto px-4 sm:px-6 space-y-8">
-        {/* Removed the "Back to Troubleshooting" button */}
-
         <div className="text-center mb-16">
           <h1 className="text-[1.75rem] font-bold text-[#0EA5E9] mb-4">System Documentation</h1>
           <p className="text-sm text-gray-300 max-w-2xl mx-auto">
