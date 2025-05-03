@@ -6,7 +6,6 @@ import { AuthProvider } from './components/auth/AuthContext';
 import { injectEmergencyStyles } from './utils/markers/styleInjection';
 import { forceMapMarkersVisible } from './utils/forceMapMarkers';
 import RouterProvider from './components/router/RouterProvider';
-import EmergencyDebug from './components/debug/EmergencyDebug';
 import './App.css';
 import './styles/animations.css';
 import './styles/map-loading.css';
@@ -95,7 +94,6 @@ function AppContent() {
         </div>
       </div>
     }>
-      <EmergencyDebug />
       <RouterProvider />
       <Toaster />
     </React.Suspense>
@@ -106,9 +104,6 @@ function AppContent() {
 function App() {
   // Set routes available flag for debugging
   (window as any).routesAvailable = true;
-  (window as any).allRoutes = window.location.pathname === '/documentation' ? 
-    [{path: '/'}, {path: '/documentation'}] :
-    [{path: '/'}];
   
   console.log('App rendering');
   
