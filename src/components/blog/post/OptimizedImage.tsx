@@ -8,6 +8,7 @@ interface OptimizedImageProps {
   className?: string;
   width?: number;
   height?: number;
+  priority?: boolean;  // Added the priority prop to the interface
 }
 
 export const OptimizedImage = ({ 
@@ -15,7 +16,8 @@ export const OptimizedImage = ({
   alt, 
   className = '',
   width,
-  height
+  height,
+  priority: explicitPriority
 }: OptimizedImageProps) => {
   // Generate a tiny SVG placeholder based on the image dimensions
   const aspectRatio = width && height ? (height / width) : 0.5625; // Default to 16:9
@@ -30,7 +32,7 @@ export const OptimizedImage = ({
   const isLikelyHeaderImage = src.includes('header') || width > 1000 || className?.includes('header');
   
   // Default to high priority for header-like images
-  const priority = isLikelyHeaderImage;
+  const priority = explicitPriority !== undefined ? explicitPriority : isLikelyHeaderImage;
 
   // If it's a documentation image, explicitly set priority to true
   const isDocumentationImage = src.includes('f72886c3-3677-4dfe-8d56-5a784197eda2') || 
