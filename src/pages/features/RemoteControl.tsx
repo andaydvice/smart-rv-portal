@@ -28,7 +28,7 @@ const RemoteControl = () => {
         />
         <div className="absolute inset-0 z-20">
           <div className="container h-full mx-auto px-6 relative">
-            <div className="absolute top-[30%] right-0 max-w-xs text-right">
+            <div className="absolute top-[15%] left-0 right-0 mx-auto max-w-md text-center">
               <h1 className="text-5xl font-bold text-white mb-4 image-overlay-headline">
                 Remote Control
               </h1>
