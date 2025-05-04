@@ -1,101 +1,39 @@
 
 /**
- * This utility provides emergency fixes for map marker visibility issues
- * by directly modifying the DOM after elements are rendered.
+ * Force map markers to be visible by periodically checking the DOM
+ * This helps resolve issues where markers are loaded but not visible
  */
-
 export const forceMapMarkersVisible = () => {
-  console.log('Setting up map marker visibility enforcement');
+  // Immediately try to make markers visible
+  fixMarkers();
   
-  // Run immediately
-  applyMarkerFixes();
+  // Set up a periodic check to ensure markers remain visible
+  const intervalId = setInterval(fixMarkers, 5000);
   
-  // Set up mutation observer to continuously fix markers
-  setupMutationObserver();
-  
-  // Set interval to periodically check for markers
-  setInterval(applyMarkerFixes, 2000);
+  // Clean up interval after 2 minutes
+  setTimeout(() => {
+    clearInterval(intervalId);
+  }, 120000);
 };
 
-const applyMarkerFixes = () => {
-  try {
-    // Force all markers to be visible
-    const markers = document.querySelectorAll('.mapboxgl-marker, .custom-marker, .emergency-marker, [class*="marker"]');
-    if (markers.length > 0) {
-      console.log(`Found and fixing ${markers.length} map markers`);
-      
-      markers.forEach(marker => {
-        if (marker instanceof HTMLElement) {
-          marker.style.visibility = 'visible';
-          marker.style.display = 'block';
-          marker.style.opacity = '1';
-          marker.style.zIndex = '9999';
-          marker.style.pointerEvents = 'auto';
-        }
-      });
-    } else {
-      console.log('No map markers found to fix');
+/**
+ * Fix marker visibility issues
+ */
+const fixMarkers = () => {
+  const markers = document.querySelectorAll('.mapboxgl-marker, .custom-marker, .emergency-marker');
+  console.log(`Found ${markers.length} markers to make visible`);
+  
+  if (markers.length === 0) {
+    console.log('No map markers found to fix');
+    return;
+  }
+  
+  markers.forEach(marker => {
+    if (marker instanceof HTMLElement) {
+      marker.style.visibility = 'visible';
+      marker.style.display = 'block';
+      marker.style.opacity = '1';
+      marker.style.zIndex = '1000';
     }
-    
-    // Force all popups to be visible
-    const popups = document.querySelectorAll('.mapboxgl-popup');
-    popups.forEach(popup => {
-      if (popup instanceof HTMLElement) {
-        popup.style.zIndex = '10000';
-        popup.style.visibility = 'visible';
-        popup.style.display = 'block';
-        popup.style.opacity = '1';
-      }
-    });
-    
-    // Fix map containers
-    const mapContainers = document.querySelectorAll('.mapboxgl-map, .map-container');
-    mapContainers.forEach(container => {
-      if (container instanceof HTMLElement) {
-        container.style.overflow = 'visible';
-      }
-    });
-  } catch (err) {
-    console.error('Error applying marker fixes:', err);
-  }
-};
-
-const setupMutationObserver = () => {
-  try {
-    // Create observer to watch for new markers being added to the DOM
-    const observer = new MutationObserver((mutations) => {
-      let shouldCheckMarkers = false;
-      
-      mutations.forEach(mutation => {
-        if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
-          mutation.addedNodes.forEach(node => {
-            if (node instanceof HTMLElement) {
-              if (
-                node.classList.contains('mapboxgl-marker') ||
-                node.classList.contains('custom-marker') ||
-                node.classList.contains('emergency-marker') ||
-                node.className.includes('marker')
-              ) {
-                shouldCheckMarkers = true;
-              }
-            }
-          });
-        }
-      });
-      
-      if (shouldCheckMarkers) {
-        applyMarkerFixes();
-      }
-    });
-    
-    // Start observing the document body
-    observer.observe(document.body, {
-      childList: true,
-      subtree: true
-    });
-    
-    console.log('Mutation observer set up for marker visibility');
-  } catch (err) {
-    console.error('Error setting up mutation observer:', err);
-  }
+  });
 };

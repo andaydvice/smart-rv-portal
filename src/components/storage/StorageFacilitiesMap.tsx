@@ -16,7 +16,8 @@ import NavigationHint from './map/components/NavigationHint';
 import MapToggleButton from './map/components/MapToggleButton';
 import MapViewContainer from './map/components/MapViewContainer';
 import { Button } from '@/components/ui/button';
-import { Star } from 'lucide-react';
+import { Star, AlertTriangle } from 'lucide-react';
+import { Alert, AlertDescription } from '@/components/ui/alert';
 
 interface StorageFacilitiesMapProps {
   onSelectFeaturedLocation?: (facility: StorageFacility | null) => void;
@@ -45,6 +46,10 @@ const StorageFacilitiesMap: React.FC<StorageFacilitiesMapProps> = ({ onSelectFea
     mapTokenError, 
     googleMapsKey 
   } = useMapView();
+  
+  // Debug states for marker issues
+  const [noMarkersForState, setNoMarkersForState] = useState<string | null>(null);
+  const [markersCount, setMarkersCount] = useState<number>(0);
   
   // Get recently viewed facility IDs for highlighting on the map
   const recentlyViewedIds = recentlyViewed.map(facility => facility.id);
@@ -75,10 +80,39 @@ const StorageFacilitiesMap: React.FC<StorageFacilitiesMapProps> = ({ onSelectFea
   
   const handleFilterChange = useCallback((newFilters: FilterState) => {
     console.log('Filter changed:', newFilters);
+    
+    // Log the selected state in various formats for debugging
+    if (newFilters.selectedState) {
+      const normalizedState = newFilters.selectedState;
+      let stateAbbr = "";
+      
+      // Get abbreviation for full state names
+      if (normalizedState === 'Arizona') stateAbbr = 'AZ';
+      else if (normalizedState === 'California') stateAbbr = 'CA';
+      else if (normalizedState === 'Colorado') stateAbbr = 'CO';
+      else if (normalizedState === 'Texas') stateAbbr = 'TX';
+      else if (normalizedState === 'Florida') stateAbbr = 'FL';
+      else if (normalizedState === 'Nevada') stateAbbr = 'NV';
+      else if (normalizedState === 'Georgia') stateAbbr = 'GA';
+      else if (normalizedState === 'Iowa') stateAbbr = 'IA';
+      else if (normalizedState === 'Minnesota') stateAbbr = 'MN';
+      else if (normalizedState === 'Wisconsin') stateAbbr = 'WI';
+      else if (normalizedState === 'Oregon') stateAbbr = 'OR';
+      else if (normalizedState === 'Pennsylvania') stateAbbr = 'PA';
+      else if (normalizedState === 'New York') stateAbbr = 'NY';
+      else if (normalizedState === 'Ohio') stateAbbr = 'OH';
+      else if (normalizedState === 'Indiana') stateAbbr = 'IN';
+      else stateAbbr = normalizedState;
+      
+      console.log(`Selected state: Full name = ${normalizedState}, Abbreviation = ${stateAbbr}`);
+    }
+    
     setFilters(prevFilters => {
       if (JSON.stringify(prevFilters) === JSON.stringify(newFilters)) {
         return prevFilters;
       }
+      // Reset no markers state when filters change
+      setNoMarkersForState(null);
       return newFilters;
     });
   }, []);
@@ -95,6 +129,28 @@ const StorageFacilitiesMap: React.FC<StorageFacilitiesMapProps> = ({ onSelectFea
       }
     }
   }, [filters.selectedState, highlightedFacility, allFacilities, handleFacilityClick]);
+  
+  // Check for marker count and update the no-markers warning
+  useEffect(() => {
+    if (filters.selectedState && allFacilities && allFacilities.length > 0) {
+      // Give time for markers to be created
+      const timer = setTimeout(() => {
+        const markers = document.querySelectorAll('.mapboxgl-marker, .custom-marker');
+        setMarkersCount(markers.length);
+        
+        if (markers.length === 0) {
+          setNoMarkersForState(filters.selectedState);
+          console.warn(`No markers created for state: ${filters.selectedState}`);
+        } else {
+          setNoMarkersForState(null);
+        }
+      }, 1000);
+      
+      return () => clearTimeout(timer);
+    } else {
+      setNoMarkersForState(null);
+    }
+  }, [filters.selectedState, allFacilities]);
   
   const onMarkerClick = useCallback((facilityId: string) => {
     console.log(`Marker clicked: ${facilityId}`);
@@ -148,6 +204,16 @@ const StorageFacilitiesMap: React.FC<StorageFacilitiesMapProps> = ({ onSelectFea
             toggleMapView={toggleMapView} 
           />
         </div>
+        
+        {/* Warning message when no markers are visible */}
+        {noMarkersForState && (
+          <Alert variant="warning" className="bg-amber-900/30 border-amber-800">
+            <AlertTriangle className="h-4 w-4 text-amber-400" />
+            <AlertDescription className="text-amber-200">
+              No markers visible for {noMarkersForState}. The data is loaded but markers may not be displaying correctly.
+            </AlertDescription>
+          </Alert>
+        )}
         
         {/* Map view container */}
         <MapViewContainer 

@@ -1,3 +1,4 @@
+
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
 import { StorageFacility, FilterState, DatabaseStorageFacility } from './types';
@@ -27,6 +28,26 @@ const normalizeStateName = (stateAbbr: string): string => {
          stateAbbr === 'IN' ? 'Indiana' :
          stateAbbr;
 };
+
+// Get abbreviation from full state name
+const getStateAbbreviation = (fullStateName: string): string => {
+  if (fullStateName === 'Arizona') return 'AZ';
+  if (fullStateName === 'California') return 'CA';
+  if (fullStateName === 'Colorado') return 'CO';
+  if (fullStateName === 'Texas') return 'TX';
+  if (fullStateName === 'Florida') return 'FL';
+  if (fullStateName === 'Nevada') return 'NV';
+  if (fullStateName === 'Georgia') return 'GA';
+  if (fullStateName === 'Iowa') return 'IA';
+  if (fullStateName === 'Minnesota') return 'MN';
+  if (fullStateName === 'Wisconsin') return 'WI';
+  if (fullStateName === 'Oregon') return 'OR';
+  if (fullStateName === 'Pennsylvania') return 'PA';
+  if (fullStateName === 'New York') return 'NY';
+  if (fullStateName === 'Ohio') return 'OH';
+  if (fullStateName === 'Indiana') return 'IN';
+  return fullStateName;
+}
 
 // Conversion function for consistent typing
 function convertToStorageFacility(facility: any): StorageFacility {
@@ -123,40 +144,44 @@ export const useStorageFacilities = (filters: FilterState) => {
         
         // Create an array of possible state values (full name and abbreviation)
         const stateValues = [];
-        if (filters.selectedState === 'Arizona') {
+        
+        // Convert full state name to abbreviation, or vice versa
+        if (filters.selectedState === 'Arizona' || filters.selectedState === 'AZ') {
           stateValues.push('AZ', 'Arizona');
-        } else if (filters.selectedState === 'California') {
+        } else if (filters.selectedState === 'California' || filters.selectedState === 'CA') {
           stateValues.push('CA', 'California');
-        } else if (filters.selectedState === 'Texas') {
+        } else if (filters.selectedState === 'Texas' || filters.selectedState === 'TX') {
           stateValues.push('TX', 'Texas');
-        } else if (filters.selectedState === 'Florida') {
+        } else if (filters.selectedState === 'Florida' || filters.selectedState === 'FL') {
           stateValues.push('FL', 'Florida');
-        } else if (filters.selectedState === 'Nevada') {
+        } else if (filters.selectedState === 'Nevada' || filters.selectedState === 'NV') {
           stateValues.push('NV', 'Nevada');
-        } else if (filters.selectedState === 'Georgia') {
+        } else if (filters.selectedState === 'Georgia' || filters.selectedState === 'GA') {
           stateValues.push('GA', 'Georgia');
-        } else if (filters.selectedState === 'Colorado') {
+        } else if (filters.selectedState === 'Colorado' || filters.selectedState === 'CO') {
           stateValues.push('CO', 'Colorado');
-        } else if (filters.selectedState === 'Iowa') {
+        } else if (filters.selectedState === 'Iowa' || filters.selectedState === 'IA') {
           stateValues.push('IA', 'Iowa');
-        } else if (filters.selectedState === 'Minnesota') {
+        } else if (filters.selectedState === 'Minnesota' || filters.selectedState === 'MN') {
           stateValues.push('MN', 'Minnesota');
-        } else if (filters.selectedState === 'Wisconsin') {
+        } else if (filters.selectedState === 'Wisconsin' || filters.selectedState === 'WI') {
           stateValues.push('WI', 'Wisconsin');
-        } else if (filters.selectedState === 'Oregon') {
+        } else if (filters.selectedState === 'Oregon' || filters.selectedState === 'OR') {
           stateValues.push('OR', 'Oregon');
-        } else if (filters.selectedState === 'Pennsylvania') {
+        } else if (filters.selectedState === 'Pennsylvania' || filters.selectedState === 'PA') {
           stateValues.push('PA', 'Pennsylvania');
-        } else if (filters.selectedState === 'New York') {
+        } else if (filters.selectedState === 'New York' || filters.selectedState === 'NY') {
           stateValues.push('NY', 'New York');
-        } else if (filters.selectedState === 'Ohio') {
+        } else if (filters.selectedState === 'Ohio' || filters.selectedState === 'OH') {
           stateValues.push('OH', 'Ohio');
-        } else if (filters.selectedState === 'Indiana') {
+        } else if (filters.selectedState === 'Indiana' || filters.selectedState === 'IN') {
           stateValues.push('IN', 'Indiana');
         } else {
           // For other states, use direct equality and add the state name
           stateValues.push(filters.selectedState);
         }
+        
+        console.log('Filtering for states:', stateValues);
         
         // Use in operator to match any of the possible state values
         query = query.in('state', stateValues);

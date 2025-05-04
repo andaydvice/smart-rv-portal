@@ -22,6 +22,26 @@ const normalizeStateName = (stateAbbr: string): string => {
          stateAbbr;
 };
 
+// Helper function to get state abbreviation
+const getStateAbbreviation = (fullStateName: string): string => {
+  if (fullStateName === 'Arizona') return 'AZ';
+  if (fullStateName === 'California') return 'CA';
+  if (fullStateName === 'Colorado') return 'CO';
+  if (fullStateName === 'Texas') return 'TX';
+  if (fullStateName === 'Florida') return 'FL';
+  if (fullStateName === 'Nevada') return 'NV';
+  if (fullStateName === 'Georgia') return 'GA';
+  if (fullStateName === 'Iowa') return 'IA';
+  if (fullStateName === 'Minnesota') return 'MN';
+  if (fullStateName === 'Wisconsin') return 'WI';
+  if (fullStateName === 'Oregon') return 'OR';
+  if (fullStateName === 'Pennsylvania') return 'PA';
+  if (fullStateName === 'New York') return 'NY';
+  if (fullStateName === 'Ohio') return 'OH';
+  if (fullStateName === 'Indiana') return 'IN';
+  return fullStateName;
+};
+
 /**
  * Creates a facility marker with proper visibility and positioning
  */
@@ -32,6 +52,7 @@ export const createFacilityMarker = (
   onMarkerClick: (facilityId: string) => void
 ): mapboxgl.Marker | null => {
   if (!map || !map.loaded() || !facility.latitude || !facility.longitude) {
+    console.warn(`Cannot create marker for facility ${facility.id}: Map not loaded or missing coordinates`);
     return null;
   }
   
@@ -43,6 +64,8 @@ export const createFacilityMarker = (
     console.warn(`Invalid coordinates for facility ${facility.id}: ${lat}, ${lng}`);
     return null;
   }
+  
+  console.log(`Creating marker for facility ${facility.id} - ${facility.name} (${facility.state}) at [${lng}, ${lat}]`);
   
   // Check if zoom level is close enough to show green markers
   const isZoomedIn = map.getZoom() > 10;
@@ -58,6 +81,7 @@ export const createFacilityMarker = (
   // Set data attributes for debugging and state filtering
   el.setAttribute('data-facility-id', facility.id);
   el.setAttribute('data-state', facility.state);
+  el.setAttribute('data-state-abbr', getStateAbbreviation(facility.state));
   el.setAttribute('data-highlighted', isHighlighted ? 'true' : 'false');
   el.setAttribute('data-zoomed', isZoomedIn ? 'true' : 'false');
   
@@ -108,12 +132,14 @@ export const createFacilityMarker = (
   
   // Add to map
   marker.addTo(map);
+  console.log(`Marker added to map for facility ${facility.id}`);
   
   // Add click handler
   el.addEventListener('click', (e) => {
     e.stopPropagation();
     // Call the onClick callback
     onMarkerClick(facility.id);
+    console.log(`Marker clicked for facility ${facility.id}`);
   });
   
   // Add zoom change handler to update marker colors
@@ -151,12 +177,35 @@ export const createMarkersForState = (
       }
     });
   
+  // If a state is specified, also check for its abbreviation
+  if (state) {
+    const stateAbbr = getStateAbbreviation(state);
+    document.querySelectorAll(`.mapboxgl-marker[data-state-abbr="${stateAbbr}"], .custom-marker[data-state-abbr="${stateAbbr}"]`)
+      .forEach(marker => {
+        if (marker.parentNode) {
+          marker.parentNode.removeChild(marker);
+        }
+      });
+  }
+  
   // Filter facilities by state if specified
-  const stateFacilities = state 
-    ? facilities.filter(f => f.state === state)
-    : facilities;
+  let stateFacilities = facilities;
+  
+  if (state) {
+    const stateAbbr = getStateAbbreviation(state);
+    const normalizedState = normalizeStateName(state);
+    
+    // Match by full name or abbreviation
+    stateFacilities = facilities.filter(f => 
+      f.state === state || 
+      f.state === normalizedState || 
+      getStateAbbreviation(f.state) === state || 
+      f.state === stateAbbr
+    );
+  }
   
   console.log(`Creating ${stateFacilities.length} markers for ${state || 'all states'}`);
+  console.log(`States in filtered facilities: ${[...new Set(stateFacilities.map(f => f.state))].join(', ')}`);
   
   // Create markers
   const markers: mapboxgl.Marker[] = [];
@@ -173,6 +222,8 @@ export const createMarkersForState = (
     }
   });
   
+  console.log(`Successfully created ${markers.length} markers out of ${stateFacilities.length} facilities`);
+  
   return markers;
 };
 
@@ -183,6 +234,25 @@ export const clearAllMarkers = () => {
   document.querySelectorAll('.mapboxgl-marker, .custom-marker').forEach(marker => {
     if (marker.parentNode) {
       marker.parentNode.removeChild(marker);
+    }
+  });
+};
+
+// Add debugging function to count markers on the map
+export const countMarkersOnMap = () => {
+  const markers = document.querySelectorAll('.mapboxgl-marker, .custom-marker');
+  console.log(`Total markers on map: ${markers.length}`);
+  return markers.length;
+};
+
+// Add function to force markers to be visible
+export const forceMarkersVisible = () => {
+  document.querySelectorAll('.mapboxgl-marker, .custom-marker').forEach(marker => {
+    if (marker instanceof HTMLElement) {
+      marker.style.visibility = 'visible';
+      marker.style.display = 'block';
+      marker.style.opacity = '1';
+      marker.style.zIndex = '999';
     }
   });
 };
