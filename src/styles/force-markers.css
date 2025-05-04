@@ -2,7 +2,10 @@
 /* CRITICAL VISIBILITY OVERRIDE - Absolute minimum CSS needed */
 .mapboxgl-marker,
 .custom-marker,
-.emergency-marker {
+.emergency-marker,
+.direct-marker,
+[data-marker="true"],
+.marker {
   visibility: visible !important;
   display: block !important;
   opacity: 1 !important;
@@ -16,6 +19,17 @@
   z-index: 9999 !important;
   transform: translate(-50%, -50%) !important;
   pointer-events: auto !important;
+}
+
+/* Specific AZ and CA marker overrides */
+[data-state="AZ"],
+[data-state="Arizona"],
+[data-state="CA"],
+[data-state="California"] {
+  z-index: 10001 !important; 
+  background-color: #F97316 !important;
+  box-shadow: 0 0 15px rgba(249,115,22,0.8) !important;
+  transform: translate(-50%, -50%) scale(1.1) !important;
 }
 
 /* Ensure map container is visible and correctly sized */

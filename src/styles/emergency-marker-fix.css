@@ -1,19 +1,47 @@
 
 /* CRITICAL FIXES FOR MAP AND MARKER VISIBILITY - State specific fixes */
 
-/* Ensure state-specific markers are always visible */
+/* Ensure state-specific markers are always visible, including direct-marker class */
+.mapboxgl-marker[data-state],
+.custom-marker[data-state],
+.emergency-marker[data-state],
+.direct-marker[data-state],
+[data-marker="true"][data-state],
+.marker[data-state] {
+  visibility: visible !important;
+  display: block !important;
+  opacity: 1 !important;
+  z-index: 9999 !important;
+  pointer-events: auto !important;
+}
+
+/* Ensure state-specific markers for Arizona are always visible */
 .mapboxgl-marker[data-state="Arizona"],
 .custom-marker[data-state="Arizona"],
 .emergency-marker[data-state="Arizona"],
+.direct-marker[data-state="Arizona"],
 .mapboxgl-marker[data-state="AZ"],
 .custom-marker[data-state="AZ"],
 .emergency-marker[data-state="AZ"],
+.direct-marker[data-state="AZ"] {
+  visibility: visible !important;
+  display: block !important;
+  opacity: 1 !important;
+  z-index: 10001 !important;
+  transform: translate(-50%, -50%) scale(1.2) !important;
+  box-shadow: 0 0 15px rgba(249,115,22,0.8) !important;
+  pointer-events: auto !important;
+}
+
+/* Ensure state-specific markers for California are always visible */
 .mapboxgl-marker[data-state="California"],
 .custom-marker[data-state="California"],
 .emergency-marker[data-state="California"],
+.direct-marker[data-state="California"],
 .mapboxgl-marker[data-state="CA"],
 .custom-marker[data-state="CA"],
-.emergency-marker[data-state="CA"] {
+.emergency-marker[data-state="CA"],
+.direct-marker[data-state="CA"] {
   visibility: visible !important;
   display: block !important;
   opacity: 1 !important;
@@ -40,7 +68,8 @@
 }
 
 /* Make emergency markers very visible */
-.emergency-marker {
+.emergency-marker,
+.direct-marker[data-emergency="true"] {
   visibility: visible !important;
   display: block !important;
   opacity: 1 !important;

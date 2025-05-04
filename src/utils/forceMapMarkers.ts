@@ -22,7 +22,10 @@ export const forceMapMarkersVisible = () => {
  * Fix marker visibility issues
  */
 const fixMarkers = () => {
-  const markers = document.querySelectorAll('.mapboxgl-marker, .custom-marker, .emergency-marker');
+  // Use a more comprehensive selector to find ALL marker types
+  const markers = document.querySelectorAll(
+    '.mapboxgl-marker, .custom-marker, .emergency-marker, .direct-marker, [data-marker="true"], .marker'
+  );
   console.log(`Found ${markers.length} markers to make visible`);
   
   if (markers.length === 0) {
@@ -30,14 +33,29 @@ const fixMarkers = () => {
     return;
   }
   
+  // Track how many markers we've modified
+  let modifiedCount = 0;
+  
   markers.forEach(marker => {
     if (marker instanceof HTMLElement) {
+      const wasVisible = marker.style.visibility === 'visible' && 
+                        marker.style.display === 'block' &&
+                        marker.style.opacity === '1';
+      
       marker.style.visibility = 'visible';
       marker.style.display = 'block';
       marker.style.opacity = '1';
       marker.style.zIndex = '1000';
+      
+      // Set data attribute to track that we've fixed this marker
+      if (!marker.hasAttribute('data-forced-visible')) {
+        marker.setAttribute('data-forced-visible', 'true');
+        modifiedCount++;
+      }
     }
   });
+  
+  console.log(`Modified visibility of ${modifiedCount} markers`);
   
   // Check for state-specific markers
   const selectedState = document.querySelector('[data-selected-state]')?.getAttribute('data-selected-state');
@@ -61,8 +79,10 @@ const checkStateSpecificMarkers = (selectedState: string) => {
   
   let stateMarkers = 0;
   
-  // Check all markers for state attribute
-  document.querySelectorAll('.mapboxgl-marker, .custom-marker, .emergency-marker').forEach(marker => {
+  // Use a more comprehensive selector to find ALL marker types
+  document.querySelectorAll(
+    '.mapboxgl-marker, .custom-marker, .emergency-marker, .direct-marker, [data-marker="true"], .marker'
+  ).forEach(marker => {
     if (marker instanceof HTMLElement) {
       const markerState = marker.getAttribute('data-state');
       
@@ -76,9 +96,20 @@ const checkStateSpecificMarkers = (selectedState: string) => {
         marker.style.opacity = '1';
         marker.style.zIndex = '10001';
         marker.style.transform = `${marker.style.transform || ''} scale(1.05)`;
+        
+        // Track that we've enhanced this state marker
+        if (!marker.hasAttribute('data-state-enhanced')) {
+          marker.setAttribute('data-state-enhanced', 'true');
+        }
       }
     }
   });
   
   console.log(`Found ${stateMarkers} markers specifically for state: ${selectedState}`);
+  
+  // Return the count so it can be used elsewhere
+  return stateMarkers;
 };
+
+// Export the checkStateSpecificMarkers function for use in other components
+export { checkStateSpecificMarkers };

@@ -52,6 +52,7 @@ const StorageFacilitiesMap: React.FC<StorageFacilitiesMapProps> = ({ onSelectFea
   // Debug states for marker issues
   const [noMarkersForState, setNoMarkersForState] = useState<string | null>(null);
   const [markersCount, setMarkersCount] = useState<number>(0);
+  const [markerCheckCompleted, setMarkerCheckCompleted] = useState<boolean>(false);
   
   // Get recently viewed facility IDs for highlighting on the map
   const recentlyViewedIds = recentlyViewed.map(facility => facility.id);
@@ -102,8 +103,9 @@ const StorageFacilitiesMap: React.FC<StorageFacilitiesMapProps> = ({ onSelectFea
       if (JSON.stringify(prevFilters) === JSON.stringify(newFilters)) {
         return prevFilters;
       }
-      // Reset no markers state when filters change
+      // Reset marker check state when filters change
       setNoMarkersForState(null);
+      setMarkerCheckCompleted(false);
       return newFilters;
     });
   }, []);
@@ -124,12 +126,16 @@ const StorageFacilitiesMap: React.FC<StorageFacilitiesMapProps> = ({ onSelectFea
   // Check for marker count and update the no-markers warning
   useEffect(() => {
     if (filters.selectedState && allFacilities && allFacilities.length > 0) {
+      // Reset state first
+      setMarkerCheckCompleted(false);
+      
       // Force markers visible first
       forceMapMarkersVisible();
       
-      // Give time for markers to be created
+      // Give more time for markers to be created (increased from 1000ms to 2500ms)
       const timer = setTimeout(() => {
-        const markers = document.querySelectorAll('.mapboxgl-marker, .custom-marker');
+        // Check for ALL possible marker classes
+        const markers = document.querySelectorAll('.mapboxgl-marker, .custom-marker, .direct-marker, .emergency-marker');
         setMarkersCount(markers.length);
         
         if (markers.length === 0) {
@@ -140,12 +146,17 @@ const StorageFacilitiesMap: React.FC<StorageFacilitiesMapProps> = ({ onSelectFea
           console.log('States in allFacilities:', [...new Set(allFacilities.map(f => f.state))]);
         } else {
           setNoMarkersForState(null);
+          console.log(`Found ${markers.length} markers on the map`);
         }
-      }, 1000);
+        
+        // Set check as completed regardless of result
+        setMarkerCheckCompleted(true);
+      }, 2500);
       
       return () => clearTimeout(timer);
     } else {
       setNoMarkersForState(null);
+      setMarkerCheckCompleted(true);
     }
   }, [filters.selectedState, allFacilities]);
   
@@ -221,8 +232,8 @@ const StorageFacilitiesMap: React.FC<StorageFacilitiesMapProps> = ({ onSelectFea
           />
         </div>
         
-        {/* Warning message when no markers are visible */}
-        {noMarkersForState && (
+        {/* Warning message when no markers are visible - only show when check is completed */}
+        {noMarkersForState && markerCheckCompleted && markersCount === 0 && (
           <Alert variant="default" className="bg-amber-900/30 border-amber-800">
             <AlertTriangle className="h-4 w-4 text-amber-400" />
             <AlertDescription className="text-amber-200">
