@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useCallback } from 'react';
 import { Card } from '@/components/ui/card';
 import FilterPanel from './FilterPanel';
@@ -17,6 +18,8 @@ import MapViewContainer from './map/components/MapViewContainer';
 import { Button } from '@/components/ui/button';
 import { Star, AlertTriangle } from 'lucide-react';
 import { Alert, AlertDescription } from '@/components/ui/alert';
+import { STATE_NAME_MAP } from '@/utils/stateNameUtils';
+import { forceMapMarkersVisible } from '@/utils/forceMapMarkers';
 
 interface StorageFacilitiesMapProps {
   onSelectFeaturedLocation?: (facility: StorageFacility | null) => void;
@@ -83,27 +86,16 @@ const StorageFacilitiesMap: React.FC<StorageFacilitiesMapProps> = ({ onSelectFea
     // Log the selected state in various formats for debugging
     if (newFilters.selectedState) {
       const normalizedState = newFilters.selectedState;
-      let stateAbbr = "";
+      let stateAbbr = STATE_NAME_MAP[normalizedState] || "";
       
-      // Get abbreviation for full state names
-      if (normalizedState === 'Arizona') stateAbbr = 'AZ';
-      else if (normalizedState === 'California') stateAbbr = 'CA';
-      else if (normalizedState === 'Colorado') stateAbbr = 'CO';
-      else if (normalizedState === 'Texas') stateAbbr = 'TX';
-      else if (normalizedState === 'Florida') stateAbbr = 'FL';
-      else if (normalizedState === 'Nevada') stateAbbr = 'NV';
-      else if (normalizedState === 'Georgia') stateAbbr = 'GA';
-      else if (normalizedState === 'Iowa') stateAbbr = 'IA';
-      else if (normalizedState === 'Minnesota') stateAbbr = 'MN';
-      else if (normalizedState === 'Wisconsin') stateAbbr = 'WI';
-      else if (normalizedState === 'Oregon') stateAbbr = 'OR';
-      else if (normalizedState === 'Pennsylvania') stateAbbr = 'PA';
-      else if (normalizedState === 'New York') stateAbbr = 'NY';
-      else if (normalizedState === 'Ohio') stateAbbr = 'OH';
-      else if (normalizedState === 'Indiana') stateAbbr = 'IN';
-      else stateAbbr = normalizedState;
-      
-      console.log(`Selected state: Full name = ${normalizedState}, Abbreviation = ${stateAbbr}`);
+      if (stateAbbr.length === 2) {
+        // We got an abbreviation, swap it
+        stateAbbr = normalizedState;
+        const fullState = STATE_NAME_MAP[normalizedState];
+        console.log(`Selected state: Full name = ${fullState}, Abbreviation = ${stateAbbr}`);
+      } else {
+        console.log(`Selected state: Full name = ${normalizedState}, Abbreviation = ${stateAbbr}`);
+      }
     }
     
     setFilters(prevFilters => {
@@ -132,6 +124,9 @@ const StorageFacilitiesMap: React.FC<StorageFacilitiesMapProps> = ({ onSelectFea
   // Check for marker count and update the no-markers warning
   useEffect(() => {
     if (filters.selectedState && allFacilities && allFacilities.length > 0) {
+      // Force markers visible first
+      forceMapMarkersVisible();
+      
       // Give time for markers to be created
       const timer = setTimeout(() => {
         const markers = document.querySelectorAll('.mapboxgl-marker, .custom-marker');
@@ -140,6 +135,9 @@ const StorageFacilitiesMap: React.FC<StorageFacilitiesMapProps> = ({ onSelectFea
         if (markers.length === 0) {
           setNoMarkersForState(filters.selectedState);
           console.warn(`No markers created for state: ${filters.selectedState}`);
+          
+          // Add additional logging for debugging
+          console.log('States in allFacilities:', [...new Set(allFacilities.map(f => f.state))]);
         } else {
           setNoMarkersForState(null);
         }
@@ -155,6 +153,25 @@ const StorageFacilitiesMap: React.FC<StorageFacilitiesMapProps> = ({ onSelectFea
     console.log(`Marker clicked: ${facilityId}`);
     handleFacilityClick(facilityId, allFacilities || []);
   }, [handleFacilityClick, allFacilities]);
+
+  // Get the state abbreviation and full name for display in warning
+  const getStateDisplayInfo = (state: string | null) => {
+    if (!state) return { display: '', abbr: '' };
+    
+    let fullName = state;
+    let abbreviation = STATE_NAME_MAP[state] || '';
+    
+    // If we got an abbreviation as the key, swap them
+    if (abbreviation.length === 2) {
+      abbreviation = state;
+      fullName = STATE_NAME_MAP[abbreviation] || state;
+    }
+    
+    return {
+      display: fullName,
+      abbr: abbreviation !== fullName ? ` (${abbreviation})` : ''
+    };
+  };
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 min-h-[800px] map-content-wrapper">
@@ -204,12 +221,13 @@ const StorageFacilitiesMap: React.FC<StorageFacilitiesMapProps> = ({ onSelectFea
           />
         </div>
         
-        {/* Warning message when no markers are visible - FIX: Changed variant from "warning" to "default" with custom styling */}
+        {/* Warning message when no markers are visible */}
         {noMarkersForState && (
           <Alert variant="default" className="bg-amber-900/30 border-amber-800">
             <AlertTriangle className="h-4 w-4 text-amber-400" />
             <AlertDescription className="text-amber-200">
-              No markers visible for {noMarkersForState}. The data is loaded but markers may not be displaying correctly.
+              No markers visible for {getStateDisplayInfo(noMarkersForState).display}
+              {getStateDisplayInfo(noMarkersForState).abbr}. The data is loaded but markers may not be displaying correctly.
             </AlertDescription>
           </Alert>
         )}

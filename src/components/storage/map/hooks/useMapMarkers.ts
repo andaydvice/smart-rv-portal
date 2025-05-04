@@ -4,6 +4,7 @@ import { StorageFacility } from '../../types';
 import mapboxgl from 'mapbox-gl';
 import { createDirectMarkers } from '../utils/direct-markers';
 import { createEdgeAwareClickHandler } from '@/utils/markers/forcing/edge-aware';
+import { areStatesEquivalent, getAllStateRepresentations } from '@/utils/stateNameUtils';
 
 /**
  * Hook for managing map markers for storage facilities
@@ -36,10 +37,26 @@ export const useMapMarkers = (
     
     // Filter facilities by selected state if applicable
     const filteredFacilities = selectedState 
-      ? facilities.filter(f => f.state === selectedState)
+      ? facilities.filter(f => {
+          // Get all possible representations of the selected state
+          const stateRepresentations = getAllStateRepresentations(selectedState);
+          
+          // Check if the facility's state matches any representation of the selected state
+          // This handles both abbreviation and full name matching
+          return stateRepresentations.some(stateRep => 
+            areStatesEquivalent(f.state, stateRep)
+          );
+        })
       : facilities;
     
-    console.log(`Creating ${filteredFacilities.length} markers after filtering`);
+    console.log(`Creating ${filteredFacilities.length} markers after filtering with state: ${selectedState}`);
+    console.log(`State representations: ${JSON.stringify(getAllStateRepresentations(selectedState))}`);
+    
+    // Log the filtered facilities' states for debugging
+    if (filteredFacilities.length === 0 && selectedState) {
+      console.warn(`No facilities found for state: ${selectedState}`);
+      console.log('Available states in facilities:', [...new Set(facilities.map(f => f.state))]);
+    }
     
     // Create direct markers
     try {

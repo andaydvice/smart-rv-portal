@@ -6,6 +6,8 @@ import { useMapMarkers } from '../hooks/useMapMarkers';
 import { useFacilityHighlight } from '../hooks/useFacilityHighlight';
 import { useMapSetup } from '../hooks/useMapSetup';
 import { enableEdgeAwareMarkers } from '@/utils/markers/forcing/edge-aware/index';
+import { forceMapMarkersVisible } from '@/utils/forceMapMarkers';
+import EmergencyMarkerRenderer from './EmergencyMarkerRenderer';
 
 interface MapInteractionsProps {
   map: mapboxgl.Map | null;
@@ -51,6 +53,26 @@ const MapInteractions: React.FC<MapInteractionsProps> = ({
     }
   }, [map, mapLoaded, markersCreated]);
   
+  // Force markers to be visible
+  useEffect(() => {
+    if (map && mapLoaded) {
+      // Force markers visible whenever the map changes
+      const timer = setTimeout(() => {
+        forceMapMarkersVisible();
+      }, 1000);
+      
+      // Store selected state for marker visibility enforcement
+      if (map && selectedState) {
+        const container = map.getContainer();
+        if (container) {
+          container.setAttribute('data-selected-state', selectedState);
+        }
+      }
+      
+      return () => clearTimeout(timer);
+    }
+  }, [map, mapLoaded, selectedState, facilities]);
+  
   // Setup key event listener to close popups with Escape key
   useEffect(() => {
     const handleKeyPress = (e: KeyboardEvent) => {
@@ -80,8 +102,18 @@ const MapInteractions: React.FC<MapInteractionsProps> = ({
     console.log(`MapInteractions: Markers created: ${markersCreated}`);
   }, [markersCreated]);
 
-  // This component doesn't render any UI
-  return null;
+  return (
+    <>
+      {/* Render emergency markers if needed */}
+      {map && mapLoaded && selectedState && (
+        <EmergencyMarkerRenderer 
+          map={map}
+          facilities={validFacilities}
+          selectedState={selectedState}
+        />
+      )}
+    </>
+  );
 };
 
 export default MapInteractions;
