@@ -17,11 +17,11 @@ const RemoteControl = () => {
   return (
     <Layout>
       {/* Full-width Header Image */}
-      <div className="w-full h-[70vh] md:h-[80vh] relative overflow-hidden">
+      <div className="w-screen h-[80vh] md:h-[90vh] relative overflow-hidden">
         <OptimizedImage 
-          src="/lovable-uploads/2c739868-18ef-4428-87d6-2823c9bdf474.png"
+          src="/lovable-uploads/e4dd3d27-5210-4b76-b8ec-a9d8bb1ffff8.png"
           alt="Physical remote control device for RV smart systems"
-          className="w-full h-full object-contain bg-gray-900"
+          className="w-full h-full object-cover object-center bg-gray-900"
         />
         {/* Dark gradient overlay with NO heading text */}
         <div className="absolute inset-0 bg-gradient-to-b from-transparent to-gray-900/70"></div>
