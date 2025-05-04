@@ -61,6 +61,18 @@ const MapLoadingProgress: React.FC<MapLoadingProgressProps> = ({
     };
   }, [infiniteLoading, percentLoaded, displayPercent, forceComplete]);
   
+  // Add a safety timeout to force completion after a delay
+  useEffect(() => {
+    // If we're showing progress and stuck at 95%, force completion after 5 seconds
+    if (showProgress && displayPercent >= 95 && displayPercent < 100) {
+      const forceCompleteTimeout = setTimeout(() => {
+        setDisplayPercent(100);
+      }, 5000); // Wait 5 seconds before forcing completion
+      
+      return () => clearTimeout(forceCompleteTimeout);
+    }
+  }, [showProgress, displayPercent]);
+  
   // Ensure percent is between 0-100
   const normalizedPercent = Math.min(100, Math.max(0, displayPercent));
   
