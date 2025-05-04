@@ -5,6 +5,8 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
 import { useEffect } from "react";
+import { OptimizedImage } from "@/components/blog/post/OptimizedImage";
+import { Container } from "@/components/ui/container";
 
 const RemoteControl = () => {
   useEffect(() => {
@@ -14,16 +16,30 @@ const RemoteControl = () => {
 
   return (
     <Layout>
+      {/* Full-width Header Image */}
+      <div className="w-full h-[40vh] md:h-[50vh] relative overflow-hidden">
+        <OptimizedImage 
+          src="/lovable-uploads/e789538d-bb24-4b1a-827c-be2f502faed5.png"
+          alt="RV remote control system with touchscreen interface showing control options for lights, climate, awning, and slides"
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-gray-900/70 flex items-end justify-center pb-8">
+          <h1 className="text-4xl md:text-5xl font-bold text-white image-overlay-headline">
+            Remote Control
+          </h1>
+        </div>
+      </div>
+
       <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6 }}
-        className="flex-grow pt-24 pb-16 px-4 bg-gradient-to-b from-gray-900 to-gray-800"
+        className="flex-grow py-16 px-4 bg-gradient-to-b from-gray-900 to-gray-800"
       >
-        <div className="max-w-7xl mx-auto">
+        <Container>
           <div className="flex items-center gap-4 mb-8">
             <Phone className="h-8 w-8 text-[#5B9BD5]" />
-            <h1 className="text-4xl font-bold text-white">Remote Control</h1>
+            <h2 className="text-3xl font-bold text-white">Complete RV Control At Your Fingertips</h2>
           </div>
 
           {/* Main Features Section */}
@@ -170,7 +186,7 @@ const RemoteControl = () => {
               </Button>
             </Link>
           </div>
-        </div>
+        </Container>
       </motion.div>
     </Layout>
   );
