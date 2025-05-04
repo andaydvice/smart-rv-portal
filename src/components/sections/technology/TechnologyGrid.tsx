@@ -20,7 +20,8 @@ const systems = [
     icon: Mic,
     name: "Voice Control",
     description: "Hands free control with virtual assistant integration",
-    image: "/lovable-uploads/voice-control.jpg"
+    image: "/lovable-uploads/voice-control.jpg",
+    link: "/voice-control" // Added link to voice control page
   },
   {
     icon: Utensils,
