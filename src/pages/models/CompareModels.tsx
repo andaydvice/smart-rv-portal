@@ -1,8 +1,7 @@
 
 import React, { useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import Navbar from "@/components/Navbar";
-import Footer2 from "@/components/ui/Footer2";
+import Layout from "@/components/layout/Layout";
 import CompareHero from "@/components/models/compare/CompareHero";
 import ModelCard from "@/components/models/compare/ModelCard";
 import SpecificationsTable from "@/components/models/compare/SpecificationsTable";
@@ -64,9 +63,7 @@ const CompareModels = () => {
   ];
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#080F1F] text-white">
-      <Navbar />
-      
+    <Layout>
       <CompareHero 
         title="Compare Models"
         description="Find the perfect smart RV that matches your lifestyle. Compare features and specifications across our range of models."
@@ -103,13 +100,7 @@ const CompareModels = () => {
           />
         </div>
       </div>
-
-      <Footer2 
-        links={footerLinks}
-        socials={footerSocials}
-        description="Compare our premium Smart RV lineup to find the perfect model for your lifestyle"
-      />
-    </div>
+    </Layout>
   );
 };
 

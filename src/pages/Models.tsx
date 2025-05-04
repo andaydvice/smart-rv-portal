@@ -1,7 +1,6 @@
-
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import Navbar from "@/components/Navbar";
+import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Battery, Navigation, Shield, Wifi } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
@@ -90,15 +89,14 @@ const Models = () => {
   ];
 
   return (
-    <div className="flex flex-col min-h-screen">
-      <Navbar />
+    <Layout>
       <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6 }}
         className="flex-grow bg-gradient-to-b from-gray-900 to-gray-800"
       >
-        <div className="max-w-7xl mx-auto px-4 py-20">
+        <div className="max-w-7xl mx-auto px-4 py-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -174,12 +172,7 @@ const Models = () => {
           </motion.div>
         </div>
       </motion.div>
-      <Footer2 
-        links={footerLinks}
-        socials={footerSocials}
-        description="Explore our premium Smart RV lineup - from compact to luxury class models"
-      />
-    </div>
+    </Layout>
   );
 };
 
