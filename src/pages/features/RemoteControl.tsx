@@ -25,7 +25,6 @@ const RemoteControl = () => {
           className="w-full h-full object-cover object-center"
           width={1920}
           height={500}
-          priority={true}
         />
         <div className="absolute inset-0 z-20 flex items-center justify-center">
           <div className="text-center">
