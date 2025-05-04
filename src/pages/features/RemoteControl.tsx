@@ -5,8 +5,6 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
 import { useEffect } from "react";
-import { OptimizedImage } from "@/components/blog/post/OptimizedImage";
-import { Container } from "@/components/ui/container";
 
 const RemoteControl = () => {
   useEffect(() => {
@@ -16,27 +14,16 @@ const RemoteControl = () => {
 
   return (
     <Layout>
-      {/* Full-width Header Image */}
-      <div className="w-screen h-[80vh] md:h-[90vh] relative overflow-hidden">
-        <OptimizedImage 
-          src="/lovable-uploads/e4dd3d27-5210-4b76-b8ec-a9d8bb1ffff8.png"
-          alt="Physical remote control device for RV smart systems"
-          className="w-full h-full object-cover object-center bg-gray-900"
-        />
-        {/* Dark gradient overlay with NO heading text */}
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-gray-900/70"></div>
-      </div>
-
       <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6 }}
-        className="flex-grow py-16 px-4 bg-gradient-to-b from-gray-900 to-gray-800"
+        className="flex-grow pt-24 pb-16 px-4 bg-gradient-to-b from-gray-900 to-gray-800"
       >
-        <Container>
+        <div className="max-w-7xl mx-auto">
           <div className="flex items-center gap-4 mb-8">
             <Phone className="h-8 w-8 text-[#5B9BD5]" />
-            <h2 className="text-3xl font-bold text-white">Complete RV Control At Your Fingertips</h2>
+            <h1 className="text-4xl font-bold text-white">Remote Control</h1>
           </div>
 
           {/* Main Features Section */}
@@ -183,7 +170,7 @@ const RemoteControl = () => {
               </Button>
             </Link>
           </div>
-        </Container>
+        </div>
       </motion.div>
     </Layout>
   );
