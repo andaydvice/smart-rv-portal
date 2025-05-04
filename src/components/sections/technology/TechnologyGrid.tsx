@@ -15,14 +15,14 @@ const systems = [
     name: "Remote Control",
     description: "Control all RV systems from your smartphone",
     image: "/lovable-uploads/remote-control.jpg",
-    link: "/features/remote-control"
+    link: "/features/remote-control"  // Ensuring this link is correct
   },
   {
     icon: Mic,
     name: "Voice Control",
     description: "Hands free control with virtual assistant integration",
     image: "/lovable-uploads/voice-control.jpg",
-    link: "/voice-control" // Added link to voice control page
+    link: "/voice-control" 
   },
   {
     icon: Utensils,
