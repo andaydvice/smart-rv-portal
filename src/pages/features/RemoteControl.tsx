@@ -26,14 +26,16 @@ const RemoteControl = () => {
           width={1920}
           height={600}
         />
-        <div className="absolute inset-0 z-20 flex items-center justify-center">
-          <div className="text-center">
-            <h1 className="text-5xl font-bold text-white mb-4 image-overlay-headline">
-              Remote Control
-            </h1>
-            <p className="text-xl text-white max-w-2xl mx-auto image-overlay-headline">
-              Take command of your RV systems from anywhere
-            </p>
+        <div className="absolute inset-0 z-20 flex items-center">
+          <div className="container mx-auto px-6">
+            <div className="max-w-md text-left">
+              <h1 className="text-5xl font-bold text-white mb-4 image-overlay-headline">
+                Remote Control
+              </h1>
+              <p className="text-xl text-white image-overlay-headline">
+                Take command of your RV systems from anywhere
+              </p>
+            </div>
           </div>
         </div>
       </div>
