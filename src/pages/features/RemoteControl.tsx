@@ -17,14 +17,14 @@ const RemoteControl = () => {
   return (
     <Layout>
       {/* Full width header image section */}
-      <div className="relative w-full h-[500px] overflow-hidden -mt-16">
-        <div className="absolute inset-0 w-full h-full bg-black/40 z-10"></div>
+      <div className="relative w-full h-[600px] overflow-hidden -mt-16">
+        <div className="absolute inset-0 w-full h-full bg-black/60 z-10"></div>
         <OptimizedImage
-          src="/lovable-uploads/7ecf1945-5dc0-400c-b9f1-23c3d9d9e648.png"
-          alt="Remote Control System"
+          src="/lovable-uploads/cdb72cba-3fb1-44e9-8aea-bde00743141a.png"
+          alt="RV Remote Control Device"
           className="w-full h-full object-cover object-center"
           width={1920}
-          height={500}
+          height={600}
         />
         <div className="absolute inset-0 z-20 flex items-center justify-center">
           <div className="text-center">
