@@ -10,13 +10,13 @@ const sustainability = [
   },
   {
     icon: Leaf,
-    title: "Eco-Materials",
+    title: "Eco Materials",
     description: "Sustainable materials and manufacturing processes"
   },
   {
     icon: MapPin,
     title: "Green Routes",
-    description: "Eco-friendly route planning and charging stations"
+    description: "Eco friendly route planning and charging stations"
   },
   {
     icon: HeartHandshake,
@@ -40,11 +40,11 @@ export const SustainabilitySection = () => (
         className="text-center mb-16"
       >
         <span className="inline-block px-3 py-1 mb-4 text-sm font-medium bg-emerald-400/10 text-emerald-300 rounded-full">
-          Eco-Friendly
+          Eco Friendly
         </span>
         <h2 className="text-4xl font-bold mb-4 text-white">Sustainable Innovation</h2>
         <p className="text-lg text-emerald-100/80 max-w-2xl mx-auto">
-          Leading the way in eco-friendly RV technology
+          Leading the way in eco friendly RV technology
         </p>
       </motion.div>
 
