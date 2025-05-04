@@ -20,7 +20,7 @@ interface TechnologyCardProps {
 const CardContent = ({ system, onCardClick }: { system: SystemType; onCardClick: (link: string) => void }) => (
   <>
     <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-    <div className="p-8">
+    <div className="p-8 text-left">
       <system.icon className="w-16 h-16 mb-4 text-blue-400" />
       <h3 className="text-2xl font-bold mb-2 text-white">{system.name}</h3>
       <p className="text-gray-300 mb-4">{system.description}</p>
