@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useCallback } from 'react';
 import { Card } from '@/components/ui/card';
 import FilterPanel from './FilterPanel';
@@ -205,9 +204,9 @@ const StorageFacilitiesMap: React.FC<StorageFacilitiesMapProps> = ({ onSelectFea
           />
         </div>
         
-        {/* Warning message when no markers are visible */}
+        {/* Warning message when no markers are visible - FIX: Changed variant from "warning" to "default" with custom styling */}
         {noMarkersForState && (
-          <Alert variant="warning" className="bg-amber-900/30 border-amber-800">
+          <Alert variant="default" className="bg-amber-900/30 border-amber-800">
             <AlertTriangle className="h-4 w-4 text-amber-400" />
             <AlertDescription className="text-amber-200">
               No markers visible for {noMarkersForState}. The data is loaded but markers may not be displaying correctly.
