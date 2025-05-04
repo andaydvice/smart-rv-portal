@@ -14,7 +14,8 @@ const systems = [
     icon: Phone,
     name: "Remote Control",
     description: "Control all RV systems from your smartphone",
-    image: "/lovable-uploads/remote-control.jpg"
+    image: "/lovable-uploads/remote-control.jpg",
+    link: "/features/remote-control"
   },
   {
     icon: Mic,

@@ -17,6 +17,7 @@ import WaterSystems from "@/pages/features/WaterSystems";
 import SmartAutomation from "@/pages/features/SmartAutomation";
 import ClimateControl from "@/pages/features/ClimateControl";
 import Entertainment from "@/pages/features/Entertainment";
+import RemoteControl from "@/pages/features/RemoteControl";
 
 export const featureRoutes: RouteObject[] = [
   {
@@ -83,6 +84,11 @@ export const featureRoutes: RouteObject[] = [
   {
     path: "/features/entertainment",
     element: <Entertainment />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/features/remote-control",
+    element: <RemoteControl />,
     errorElement: <ErrorPage />,
   },
   // Category redirects

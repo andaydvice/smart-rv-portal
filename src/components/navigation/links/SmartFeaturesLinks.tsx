@@ -46,6 +46,12 @@ const SmartFeaturesLinks = () => {
       >
         Entertainment
       </Link>
+      <Link
+        to="/features/remote-control"
+        className="text-gray-300 hover:text-[#5B9BD5] block px-3 py-2 rounded-md text-base font-medium"
+      >
+        Remote Control
+      </Link>
     </>
   );
 };
