@@ -5,6 +5,8 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
 import { useEffect } from "react";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
+import { OptimizedImage } from "@/components/blog/post/OptimizedImage";
 
 const RemoteControl = () => {
   useEffect(() => {
@@ -14,18 +16,36 @@ const RemoteControl = () => {
 
   return (
     <Layout>
+      {/* Full width header image section */}
+      <div className="relative w-full h-[500px] overflow-hidden -mt-16">
+        <div className="absolute inset-0 w-full h-full bg-black/40 z-10"></div>
+        <OptimizedImage
+          src="/lovable-uploads/7ecf1945-5dc0-400c-b9f1-23c3d9d9e648.png"
+          alt="Remote Control System"
+          className="w-full h-full object-cover object-center"
+          width={1920}
+          height={500}
+          priority={true}
+        />
+        <div className="absolute inset-0 z-20 flex items-center justify-center">
+          <div className="text-center">
+            <h1 className="text-5xl font-bold text-white mb-4 image-overlay-headline">
+              Remote Control
+            </h1>
+            <p className="text-xl text-white max-w-2xl mx-auto image-overlay-headline">
+              Take command of your RV systems from anywhere
+            </p>
+          </div>
+        </div>
+      </div>
+
       <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6 }}
-        className="flex-grow pt-24 pb-16 px-4 bg-gradient-to-b from-gray-900 to-gray-800"
+        className="flex-grow py-16 px-4 bg-gradient-to-b from-gray-900 to-gray-800"
       >
         <div className="max-w-7xl mx-auto">
-          <div className="flex items-center gap-4 mb-8">
-            <Phone className="h-8 w-8 text-[#5B9BD5]" />
-            <h1 className="text-4xl font-bold text-white">Remote Control</h1>
-          </div>
-
           {/* Main Features Section */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
             <div className="bg-gray-800/50 p-8 rounded-lg border border-gray-700 flex flex-col">
