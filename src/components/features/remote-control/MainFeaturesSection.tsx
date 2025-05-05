@@ -1,3 +1,4 @@
+
 import React from 'react';
 const MainFeaturesSection = () => {
   return <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
@@ -22,7 +23,7 @@ const MainFeaturesSection = () => {
           <h2 className="text-2xl font-semibold text-[#5B9BD5]">System Integration</h2>
         </div>
         <div className="relative aspect-video mb-6">
-          <img src="/lovable-uploads/51ac2438-08c7-47ee-b56d-876aa3bbdc80.png" alt="System Integration Diagram" className="absolute inset-0 w-full h-full object-cover rounded-lg" />
+          <img src="/lovable-uploads/af7df254-2b02-454a-a483-7e1e230dc571.png" alt="System Integration Dashboard" className="absolute inset-0 w-full h-full object-cover rounded-lg" />
         </div>
         <ul className="list-disc list-inside space-y-3 text-gray-300">
           <li>Seamless connection with all smart RV systems</li>
