@@ -10,7 +10,7 @@ const MainFeaturesSection = () => {
         </div>
         <div className="relative aspect-video mb-6">
           <img 
-            src="/lovable-uploads/1c1bb4c0-13a3-42f8-9b4d-f0aa74e2adb3.png"
+            src="/lovable-uploads/5f3ea3d8-5987-40c6-8162-18427bded29f.png"
             alt="Mobile App Interface"
             className="absolute inset-0 w-full h-full object-cover rounded-lg"
           />
