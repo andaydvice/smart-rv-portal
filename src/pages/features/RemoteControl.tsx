@@ -7,24 +7,33 @@ import Layout from "@/components/layout/Layout";
 import { useEffect } from "react";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { OptimizedImage } from "@/components/blog/post/OptimizedImage";
+import { PreloadedHeaderImage } from "@/components/ui/PreloadedHeaderImage";
+import { deferOperation, preloadCriticalImages } from "@/utils/performance";
 
 const RemoteControl = () => {
   useEffect(() => {
     // Scroll to top when component mounts
     window.scrollTo(0, 0);
+    
+    // Preload additional images that will be needed soon
+    deferOperation(() => {
+      preloadCriticalImages([
+        '/lovable-uploads/58df06da-2491-453e-9f4d-11154ddb1104.png',
+        '/lovable-uploads/51ac2438-08c7-47ee-b56d-876aa3bbdc80.png',
+        '/lovable-uploads/1c1bb4c0-13a3-42f8-9b4d-f0aa74e2adb3.png'
+      ]);
+    }, 200);
   }, []);
 
   return (
     <Layout>
-      {/* Full width header image section */}
+      {/* Full width header image section with optimized loading */}
       <div className="relative w-full h-[600px] overflow-hidden -mt-16">
         <div className="absolute inset-0 w-full h-full bg-black/60 z-10"></div>
-        <OptimizedImage
+        <PreloadedHeaderImage 
           src="/lovable-uploads/cdb72cba-3fb1-44e9-8aea-bde00743141a.png"
           alt="RV Remote Control Device"
           className="w-full h-full object-cover object-center"
-          width={1920}
-          height={600}
         />
         <div className="absolute inset-0 z-20">
           <div className="container h-full mx-auto px-6 relative">
