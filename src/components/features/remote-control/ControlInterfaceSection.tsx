@@ -16,6 +16,24 @@ const ControlInterfaceSection = () => {
               <li>Customizable layout</li>
               <li>Real time updates</li>
             </ul>
+            
+            <h3 className="text-xl font-semibold text-[#5B9BD5] mt-6 mb-4">Control Options</h3>
+            <ul className="list-disc list-inside space-y-3 text-gray-300">
+              <li>Touch screen interface</li>
+              <li>Voice command capability</li>
+              <li>Remote access via smartphone</li>
+              <li>Physical control panel backup</li>
+              <li>Programmable shortcuts</li>
+            </ul>
+            
+            <h3 className="text-xl font-semibold text-[#5B9BD5] mt-6 mb-4">Settings & Profiles</h3>
+            <ul className="list-disc list-inside space-y-3 text-gray-300">
+              <li>Multiple user profiles</li>
+              <li>Save favorite configurations</li>
+              <li>Automatic environment adjustments</li>
+              <li>Security access levels</li>
+              <li>Guest mode restrictions</li>
+            </ul>
           </div>
           <div className="col-span-2">
             <LazyImage 
