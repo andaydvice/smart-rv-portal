@@ -10,6 +10,8 @@ const HeroSection = () => {
         src="/lovable-uploads/cdb72cba-3fb1-44e9-8aea-bde00743141a.png"
         alt="RV Remote Control Device"
         className="w-full h-full object-cover object-center"
+        width={1920}
+        height={600}
       />
       <div className="absolute inset-0 z-20">
         <div className="container h-full mx-auto px-6 relative">

@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { LazyImage } from '@/components/ui/LazyImage';
 
 const ControlInterfaceSection = () => {
   return (
@@ -17,10 +18,13 @@ const ControlInterfaceSection = () => {
             </ul>
           </div>
           <div className="col-span-2">
-            <img 
+            <LazyImage 
               src="/lovable-uploads/58df06da-2491-453e-9f4d-11154ddb1104.png"
               alt="App Interface Dashboard" 
               className="w-full rounded-lg border border-gray-600"
+              width={800}
+              height={450}
+              priority={true}
             />
           </div>
         </div>
