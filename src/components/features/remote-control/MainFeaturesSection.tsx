@@ -1,19 +1,12 @@
-
 import React from 'react';
-
 const MainFeaturesSection = () => {
-  return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+  return <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
       <div className="bg-gray-800/50 p-8 rounded-lg border border-gray-700 flex flex-col">
         <div className="h-[72px]">
           <h2 className="text-2xl font-semibold text-[#5B9BD5]">Smartphone Control</h2>
         </div>
         <div className="relative aspect-video mb-6">
-          <img 
-            src="/lovable-uploads/5f3ea3d8-5987-40c6-8162-18427bded29f.png"
-            alt="Mobile App Interface"
-            className="absolute inset-0 w-full h-full object-cover rounded-lg"
-          />
+          <img alt="Mobile App Interface" className="absolute inset-0 w-full h-full object-cover rounded-lg" src="/lovable-uploads/1052608d-e42b-4079-9281-20406179ce4d.png" />
         </div>
         <ul className="list-disc list-inside space-y-3 text-gray-300">
           <li>Intuitive mobile app interface for iOS and Android</li>
@@ -29,11 +22,7 @@ const MainFeaturesSection = () => {
           <h2 className="text-2xl font-semibold text-[#5B9BD5]">System Integration</h2>
         </div>
         <div className="relative aspect-video mb-6">
-          <img 
-            src="/lovable-uploads/51ac2438-08c7-47ee-b56d-876aa3bbdc80.png"
-            alt="System Integration Diagram"
-            className="absolute inset-0 w-full h-full object-cover rounded-lg"
-          />
+          <img src="/lovable-uploads/51ac2438-08c7-47ee-b56d-876aa3bbdc80.png" alt="System Integration Diagram" className="absolute inset-0 w-full h-full object-cover rounded-lg" />
         </div>
         <ul className="list-disc list-inside space-y-3 text-gray-300">
           <li>Seamless connection with all smart RV systems</li>
@@ -43,8 +32,6 @@ const MainFeaturesSection = () => {
           <li>Offline mode for essential functions</li>
         </ul>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default MainFeaturesSection;
