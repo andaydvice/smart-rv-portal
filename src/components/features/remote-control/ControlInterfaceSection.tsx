@@ -19,7 +19,7 @@ const ControlInterfaceSection = () => {
           </div>
           <div className="col-span-2">
             <LazyImage 
-              src="/lovable-uploads/58df06da-2491-453e-9f4d-11154ddb1104.png"
+              src="/lovable-uploads/927988b5-f130-4e93-847b-20474831470d.png"
               alt="App Interface Dashboard" 
               className="w-full rounded-lg border border-gray-600"
               width={800}

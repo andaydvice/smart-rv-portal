@@ -22,7 +22,7 @@ const RemoteControl = () => {
       '/lovable-uploads/cdb72cba-3fb1-44e9-8aea-bde00743141a.png', // Hero image
       '/lovable-uploads/1052608d-e42b-4079-9281-20406179ce4d.png', // Smartphone control
       '/lovable-uploads/af7df254-2b02-454a-a483-7e1e230dc571.png', // System integration
-      '/lovable-uploads/58df06da-2491-453e-9f4d-11154ddb1104.png'  // Control interface
+      '/lovable-uploads/927988b5-f130-4e93-847b-20474831470d.png'  // Control interface - new image
     ];
     
     // Immediately preload critical images without delay
