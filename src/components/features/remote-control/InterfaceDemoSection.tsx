@@ -16,7 +16,7 @@ const InterfaceDemoSection = () => {
             priority={true}
             style={{ opacity: 1 }} // Force visible with inline style
           />
-          <p className="text-gray-400 text-center mt-3 text-sm">
+          <p className="text-gray-400 text-left mt-3 text-sm">
             Complete smart RV control system interface displaying climate control, system monitoring, remote diagnostics, and power management
           </p>
         </div>
