@@ -58,7 +58,7 @@ export const PreloadedHeaderImage = ({
         width={width}
         height={height}
         loading="eager"
-        fetchpriority="high"
+        fetchPriority="high"
         decoding="async"
         style={{ 
           position: 'relative', 
