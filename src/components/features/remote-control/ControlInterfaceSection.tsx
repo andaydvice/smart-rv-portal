@@ -25,6 +25,7 @@ const ControlInterfaceSection = () => {
               width={800}
               height={450}
               priority={true}
+              style={{ opacity: 1 }} // Force visible with inline style
             />
           </div>
         </div>

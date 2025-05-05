@@ -14,16 +14,29 @@ import CallToActionSection from "@/components/features/remote-control/CallToActi
 
 const RemoteControl = () => {
   useEffect(() => {
-    // Scroll to top when component mounts
+    // Force scroll to top when component mounts
     window.scrollTo(0, 0);
     
-    // Immediately preload critical images without delay
-    preloadCriticalImages([
+    // Critical images for this page
+    const criticalImages = [
       '/lovable-uploads/cdb72cba-3fb1-44e9-8aea-bde00743141a.png', // Hero image
       '/lovable-uploads/1052608d-e42b-4079-9281-20406179ce4d.png', // Smartphone control
       '/lovable-uploads/af7df254-2b02-454a-a483-7e1e230dc571.png', // System integration
       '/lovable-uploads/58df06da-2491-453e-9f4d-11154ddb1104.png'  // Control interface
-    ]);
+    ];
+    
+    // Immediately preload critical images without delay
+    console.log('Preloading critical images for Remote Control page');
+    preloadCriticalImages(criticalImages);
+    
+    // Also manually preload images to ensure they're cached
+    criticalImages.forEach(src => {
+      const img = new Image();
+      img.src = src;
+      img.fetchPriority = 'high';
+      img.onload = () => console.log(`Image preloaded: ${src}`);
+      img.onerror = () => console.error(`Failed to preload: ${src}`);
+    });
   }, []);
 
   return (

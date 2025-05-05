@@ -35,19 +35,38 @@ export const LazyImage = ({
     src.includes('846b5be5-043e-4645-a3d9-39614d63342c')
   );
   
+  // Check if this is a feature image for Remote Control page
+  const isFeatureImage = src && typeof src === 'string' && (
+    src.includes('1052608d-e42b-4079-9281-20406179ce4d') || 
+    src.includes('af7df254-2b02-454a-a483-7e1e230dc571') ||
+    src.includes('58df06da-2491-453e-9f4d-11154ddb1104')
+  );
+  
   // Force priority for known critical images
-  const shouldPrioritize = priority || isDocumentationImage;
+  const shouldPrioritize = priority || isDocumentationImage || isFeatureImage;
+  
+  // Add safety timeout to make images visible even if onLoad doesn't fire
+  useEffect(() => {
+    if (isLoading) {
+      const timer = setTimeout(() => {
+        setIsLoading(false);
+      }, 2000); // Failsafe: Make image visible after 2 seconds regardless
+      
+      return () => clearTimeout(timer);
+    }
+  }, [isLoading]);
   
   // Preload the image if it's marked as priority
   useEffect(() => {
     if (shouldPrioritize && src) {
+      console.log('Preloading image:', src);
+      
       // Immediately create and inject a preload link in the document head
       const link = document.createElement('link');
       link.rel = 'preload';
       link.as = 'image';
       link.href = src;
       link.fetchPriority = 'high';
-      // Removed importance attribute as it's not supported in TypeScript
       document.head.appendChild(link);
       
       // Also preload using Image constructor for immediate loading
@@ -59,10 +78,12 @@ export const LazyImage = ({
       
       // Once the image is preloaded, update the loading state
       preloadImage.onload = () => {
+        console.log('Image preloaded:', src);
         setIsLoading(false);
       };
       
       preloadImage.onerror = () => {
+        console.error('Failed to preload image:', src);
         setError(true);
         setIsLoading(false);
       };
@@ -113,13 +134,24 @@ export const LazyImage = ({
             fetchPriority={shouldPrioritize ? 'high' : 'auto'}
             className={cn(
               className,
-              isLoading ? 'opacity-0' : 'opacity-100',
+              shouldPrioritize ? 'opacity-100' : (isLoading ? 'opacity-0' : 'opacity-100'),
               'transition-opacity duration-300'
             )}
-            onLoad={() => setIsLoading(false)}
-            onError={() => {
+            style={{
+              // Add inline style to ensure opacity works even if class isn't applied
+              opacity: shouldPrioritize || !isLoading ? 1 : 0,
+              ...props.style
+            }}
+            onLoad={(e) => {
+              console.log('Image loaded:', src);
+              setIsLoading(false);
+              if (props.onLoad) props.onLoad(e);
+            }}
+            onError={(e) => {
+              console.error('Image failed to load:', src);
               setError(true);
               setIsLoading(false);
+              if (props.onError) props.onError(e);
             }}
             srcSet={srcSet}
             sizes={sizes}

@@ -12,10 +12,11 @@ const MainFeaturesSection = () => {
           <LazyImage 
             src="/lovable-uploads/1052608d-e42b-4079-9281-20406179ce4d.png"
             alt="Mobile App Interface" 
-            className="absolute inset-0 w-full h-full object-cover rounded-lg"
+            className="w-full h-full object-cover rounded-lg"
             width={640}
             height={360}
             priority={true}
+            style={{ opacity: 1 }} // Force visible with inline style
           />
         </div>
         <ul className="list-disc list-inside space-y-3 text-gray-300">
@@ -35,10 +36,11 @@ const MainFeaturesSection = () => {
           <LazyImage 
             src="/lovable-uploads/af7df254-2b02-454a-a483-7e1e230dc571.png"
             alt="System Integration Dashboard" 
-            className="absolute inset-0 w-full h-full object-cover rounded-lg"
+            className="w-full h-full object-cover rounded-lg"
             width={640}
             height={360}
             priority={true}
+            style={{ opacity: 1 }} // Force visible with inline style
           />
         </div>
         <ul className="list-disc list-inside space-y-3 text-gray-300">
