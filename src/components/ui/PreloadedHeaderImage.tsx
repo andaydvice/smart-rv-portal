@@ -62,7 +62,7 @@ export const PreloadedHeaderImage = ({
         }}
       />
       
-      {/* Actual image with high priority loading */}
+      {/* Actual image with high priority loading - LOWERED z-index from 5 to 1 */}
       <img
         src={src}
         alt={alt}
@@ -74,7 +74,7 @@ export const PreloadedHeaderImage = ({
         decoding="async"
         style={{ 
           position: 'relative', 
-          zIndex: 5,
+          zIndex: 1, // Changed from 5 to 1
           opacity: 1 // Force visible with inline style
         }}
         onLoad={(e) => {
