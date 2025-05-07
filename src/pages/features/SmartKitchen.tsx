@@ -1,10 +1,11 @@
 
 import { motion } from "framer-motion";
-import { Refrigerator, Droplet } from "lucide-react";
+import { Droplet } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
 import SmartKitchenHeader from "@/components/features/smart-kitchen/SmartKitchenHeader";
+import KitchenComparisonTable from "@/components/features/smart-kitchen/KitchenComparisonTable";
 import { useEffect } from "react";
 
 const SmartKitchen = () => {
@@ -76,6 +77,16 @@ const SmartKitchen = () => {
               </ul>
             </div>
           </div>
+
+          {/* Add the comparison table section */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.2 }}
+            className="mb-16"
+          >
+            <KitchenComparisonTable />
+          </motion.div>
 
           <div className="text-center">
             <Link to="/schedule-demo">
