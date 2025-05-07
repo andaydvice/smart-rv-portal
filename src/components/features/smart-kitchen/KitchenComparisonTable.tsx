@@ -1,10 +1,28 @@
 
 import React from 'react';
 import { Table, TableHeader, TableBody, TableHead, TableRow, TableCell } from "@/components/ui/table";
+import { OptimizedImage } from "@/components/blog/post/OptimizedImage";
+import { motion } from "framer-motion";
 
 const KitchenComparisonTable = () => {
   return (
     <div className="w-full max-w-7xl mx-auto space-y-10 px-4">
+      {/* Smart Kitchen Feature Image */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.7 }}
+        className="w-full max-w-5xl mx-auto mb-8"
+      >
+        <OptimizedImage
+          src="/lovable-uploads/8fbad7d4-f6a2-4af0-b5e4-1a3c5417cfcb.png"
+          alt="Smart RV Kitchen with Digital Controls and Mobile App Integration"
+          className="w-full rounded-xl shadow-lg"
+          width={1200}
+          height={800}
+        />
+      </motion.div>
+      
       <h2 className="text-3xl font-semibold text-center text-white mb-8">
         Traditional vs Smart RV Kitchen Comparison
       </h2>
