@@ -32,6 +32,11 @@ const SmartKitchenHeader = () => {
         height={800}
       />
       <div className="absolute inset-0 bg-gradient-to-b from-transparent to-gray-900/80" />
+      <div className="absolute inset-0 flex items-center justify-center">
+        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white text-center max-w-4xl px-4 image-overlay-headline">
+          The Future of RV Cooking Has Arrived
+        </h1>
+      </div>
       <div className="absolute bottom-0 left-0 w-full p-8">
         <div className="max-w-7xl mx-auto">
           <h1 className="text-4xl md:text-5xl font-bold text-white image-overlay-headline">
