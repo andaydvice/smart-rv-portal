@@ -1,5 +1,5 @@
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { generateImagePlaceholder } from '@/utils/performance';
 
 interface PreloadedHeaderImageProps {
@@ -8,6 +8,7 @@ interface PreloadedHeaderImageProps {
   className?: string;
   width?: number;
   height?: number;
+  onImageLoaded?: () => void; // Add callback prop
 }
 
 export const PreloadedHeaderImage = ({
@@ -15,8 +16,10 @@ export const PreloadedHeaderImage = ({
   alt,
   className = '',
   width = 1920,
-  height = 600
+  height = 600,
+  onImageLoaded // Add callback prop
 }: PreloadedHeaderImageProps) => {
+  const [imageLoaded, setImageLoaded] = useState(false);
   // Generate a simple color placeholder instead of a full image placeholder
   const placeholder = generateImagePlaceholder(width, height);
   
@@ -37,6 +40,10 @@ export const PreloadedHeaderImage = ({
     preloadImage.src = src;
     preloadImage.onload = () => {
       console.log('Header image loaded:', src);
+      setImageLoaded(true);
+      if (onImageLoaded) {
+        onImageLoaded();
+      }
     };
     preloadImage.onerror = () => {
       console.error('Failed to load header image:', src);
@@ -47,11 +54,11 @@ export const PreloadedHeaderImage = ({
         document.head.removeChild(link);
       }
     };
-  }, [src]);
+  }, [src, onImageLoaded]);
 
   return (
     <>
-      {/* Background placeholder that shows immediately - darker to match loaded image */}
+      {/* Dark background that shows during loading */}
       <div 
         className="absolute inset-0 bg-[#080F1F] z-0" 
         aria-hidden="true"
@@ -61,10 +68,6 @@ export const PreloadedHeaderImage = ({
           backgroundPosition: 'center'
         }}
       />
-      
-      {/* Placeholder overlay gradient to ensure text readability during loading */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-gray-900/60 to-gray-900/90 z-5" 
-           aria-hidden="true" />
       
       {/* Actual image with z-index lowered to ensure text is visible above it */}
       <img
@@ -79,13 +82,17 @@ export const PreloadedHeaderImage = ({
         style={{ 
           position: 'relative', 
           zIndex: 1, // Keep z-index low so text can appear above
-          opacity: 1 // Force visible with inline style
+          opacity: imageLoaded ? 1 : 0 // Show only when loaded
         }}
         onLoad={(e) => {
           console.log('Header image DOM loaded:', src);
           if (e.currentTarget) {
             // When image loads, make it fully visible
             e.currentTarget.style.opacity = '1';
+            setImageLoaded(true);
+            if (onImageLoaded) {
+              onImageLoaded();
+            }
           }
         }}
       />
