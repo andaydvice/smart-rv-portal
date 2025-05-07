@@ -1,6 +1,5 @@
 
 import { motion } from "framer-motion";
-import Navbar from "@/components/Navbar";
 import { Refrigerator, Droplet } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
@@ -21,9 +20,7 @@ const SmartKitchen = () => {
   
   return (
     <Layout>
-      <Navbar />
-      
-      {/* Full width header added at the top */}
+      {/* SmartKitchenHeader already has the header image and titles */}
       <SmartKitchenHeader />
       
       <motion.div 
@@ -33,8 +30,7 @@ const SmartKitchen = () => {
         className="flex-grow pb-16 px-4 bg-gradient-to-b from-gray-900 to-gray-800"
       >
         <div className="max-w-7xl mx-auto">
-          {/* Removed the previous title since it's now in the header */}
-
+          {/* Grid with kitchen features */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
             <div className="bg-gray-800/50 p-8 rounded-lg border border-gray-700 flex flex-col">
               <div className="h-[72px]">

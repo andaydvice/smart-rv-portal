@@ -31,13 +31,21 @@ const SmartKitchenHeader = () => {
         width={1920}
         height={800}
       />
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent to-gray-900/80 z-2" />
-      <div className="absolute inset-0 flex items-center justify-center z-5">
-        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white text-center max-w-4xl px-4 image-overlay-headline shadow-lg">
-          The Future of RV Cooking Has Arrived
-        </h1>
+      
+      {/* Enhanced gradient overlay with higher z-index */}
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-gray-900/60 to-gray-900/90 z-10" />
+      
+      {/* Main headline with increased z-index and better visibility */}
+      <div className="absolute inset-0 flex items-center justify-center z-20">
+        <div className="bg-gray-900/50 px-8 py-6 rounded-lg backdrop-blur-sm max-w-4xl">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white text-center image-overlay-headline shadow-lg">
+            The Future of RV Cooking Has Arrived
+          </h1>
+        </div>
       </div>
-      <div className="absolute bottom-0 left-0 w-full p-8 z-3">
+      
+      {/* Bottom headline section with increased z-index */}
+      <div className="absolute bottom-0 left-0 w-full p-8 z-15">
         <div className="max-w-7xl mx-auto">
           <h1 className="text-4xl md:text-5xl font-bold text-white image-overlay-headline">
             Smart Kitchen and Appliances
