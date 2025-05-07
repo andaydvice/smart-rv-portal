@@ -51,9 +51,9 @@ export const PreloadedHeaderImage = ({
 
   return (
     <>
-      {/* Background placeholder that shows immediately */}
+      {/* Background placeholder that shows immediately - darker to match loaded image */}
       <div 
-        className="absolute inset-0 bg-[#131a2a] z-0" 
+        className="absolute inset-0 bg-[#080F1F] z-0" 
         aria-hidden="true"
         style={{ 
           backgroundImage: `url(${placeholder})`,
@@ -61,6 +61,10 @@ export const PreloadedHeaderImage = ({
           backgroundPosition: 'center'
         }}
       />
+      
+      {/* Placeholder overlay gradient to ensure text readability during loading */}
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-gray-900/60 to-gray-900/90 z-5" 
+           aria-hidden="true" />
       
       {/* Actual image with z-index lowered to ensure text is visible above it */}
       <img
