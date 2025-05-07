@@ -5,7 +5,7 @@ import { PreloadedHeaderImage } from '@/components/ui/PreloadedHeaderImage';
 const SmartKitchenHeader = () => {
   // Preload image immediately when component mounts
   useEffect(() => {
-    const headerImageSrc = '/lovable-uploads/28815e7c-77df-4758-b609-d84355448eea.png';
+    const headerImageSrc = '/lovable-uploads/9b681f27-359c-4d90-8629-5b2b198abf0f.png';
     
     // Create and inject a preload link with high priority
     const link = document.createElement('link');
@@ -25,8 +25,8 @@ const SmartKitchenHeader = () => {
   return (
     <div className="relative w-full h-[50vh] overflow-hidden mb-12">
       <PreloadedHeaderImage 
-        src="/lovable-uploads/28815e7c-77df-4758-b609-d84355448eea.png"
-        alt="Modern Smart Kitchen with Connected Appliances"
+        src="/lovable-uploads/9b681f27-359c-4d90-8629-5b2b198abf0f.png"
+        alt="Luxury RV Kitchen with Wood Cabinets and Panoramic Windows"
         className="w-full h-full object-cover"
         width={1920}
         height={800}
