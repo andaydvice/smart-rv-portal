@@ -32,9 +32,9 @@ const KitchenComparisonTable = () => {
         <Table className="w-full bg-gray-800/50">
           <TableHeader className="bg-gray-800/80">
             <TableRow className="border-b border-gray-700">
-              <TableHead className="w-1/3 p-4 text-left text-white font-semibold">Feature</TableHead>
-              <TableHead className="w-1/3 p-4 text-left text-white font-semibold">Traditional RV Kitchen</TableHead>
-              <TableHead className="w-1/3 p-4 text-left text-white font-semibold">Smart RV Kitchen</TableHead>
+              <TableHead className="w-1/3 p-4 text-center text-white font-semibold">Feature</TableHead>
+              <TableHead className="w-1/3 p-4 text-center text-white font-semibold">Traditional RV Kitchen</TableHead>
+              <TableHead className="w-1/3 p-4 text-center text-white font-semibold">Smart RV Kitchen</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -81,9 +81,9 @@ const KitchenComparisonTable = () => {
         <Table className="w-full bg-gray-800/50">
           <TableHeader className="bg-gray-800/80">
             <TableRow className="border-b border-gray-700">
-              <TableHead className="w-1/3 p-4 text-left text-white font-semibold">Cost Factor</TableHead>
-              <TableHead className="w-1/3 p-4 text-left text-white font-semibold">Traditional RV Kitchen</TableHead>
-              <TableHead className="w-1/3 p-4 text-left text-white font-semibold">Smart RV Kitchen</TableHead>
+              <TableHead className="w-1/3 p-4 text-center text-white font-semibold">Cost Factor</TableHead>
+              <TableHead className="w-1/3 p-4 text-center text-white font-semibold">Traditional RV Kitchen</TableHead>
+              <TableHead className="w-1/3 p-4 text-center text-white font-semibold">Smart RV Kitchen</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
