@@ -15,46 +15,53 @@ export const BenefitsGrid = () => {
               <path d="M9 9H3V15H9V9Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
           </div>
-          {/* MODIFIED: Added text-white class */}
-          <h3 className="text-2xl font-semibold mb-4 text-white">Convenience & Hands-Free Control</h3>
-          <p className="text-gray-400">Control your RV systems without lifting a finger</p>
+          {/* MODIFIED: Changed "Hands-Free" to "Hands Free" and ensured text-white class */}
+          <h3 className="text-2xl font-semibold mb-4 text-white">Convenience & Hands Free Control</h3>
+          {/* MODIFIED: Added text-left class */}
+          <p className="text-gray-400 text-left">Control your RV systems without lifting a finger</p>
         </div>
 
         <div className="bg-[#151B2E] rounded-2xl p-8 flex flex-col items-start">
           <Shield className="text-[#3B82F6] mb-6 w-8 h-8" />
-          {/* MODIFIED: Added text-white class */}
+          {/* MODIFIED: Ensured text-white class */}
           <h3 className="text-2xl font-semibold mb-4 text-white">Enhanced Safety</h3>
-          <p className="text-gray-400">Keep your focus on driving and surroundings</p>
+          {/* MODIFIED: Added text-left class */}
+          <p className="text-gray-400 text-left">Keep your focus on driving and surroundings</p>
         </div>
 
         <div className="bg-[#151B2E] rounded-2xl p-8 flex flex-col items-start">
           <Cpu className="text-[#3B82F6] mb-6 w-8 h-8" />
-          {/* MODIFIED: Added text-white class */}
+          {/* MODIFIED: Ensured text-white class */}
           <h3 className="text-2xl font-semibold mb-4 text-white">Personalization</h3>
-          <p className="text-gray-400">Customize commands to your preferences</p>
+          {/* MODIFIED: Added text-left class */}
+          <p className="text-gray-400 text-left">Customize commands to your preferences</p>
         </div>
 
         <div className="bg-[#151B2E] rounded-2xl p-8 flex flex-col items-start">
           <Smartphone className="text-[#3B82F6] mb-6 w-8 h-8" />
-          {/* MODIFIED: Added text-white class */}
+          {/* MODIFIED: Ensured text-white class */}
           <h3 className="text-2xl font-semibold mb-4 text-white">Smart Device Integration</h3>
-          <p className="text-gray-400">Seamless connection with your devices</p>
+          {/* MODIFIED: Added text-left class */}
+          <p className="text-gray-400 text-left">Seamless connection with your devices</p>
         </div>
 
         <div className="bg-[#151B2E] rounded-2xl p-8 flex flex-col items-start">
           <Sun className="text-[#3B82F6] mb-6 w-8 h-8" />
-          {/* MODIFIED: Added text-white class */}
+          {/* MODIFIED: Ensured text-white class */}
           <h3 className="text-2xl font-semibold mb-4 text-white">Efficiency</h3>
-          <p className="text-gray-400">Streamline your RV management</p>
+          {/* MODIFIED: Added text-left class */}
+          <p className="text-gray-400 text-left">Streamline your RV management</p>
         </div>
 
         <div className="bg-[#151B2E] rounded-2xl p-8 flex flex-col items-start">
           <HomeIcon className="text-[#3B82F6] mb-6 w-8 h-8" />
-          {/* MODIFIED: Added text-white class */}
+          {/* MODIFIED: Ensured text-white class */}
           <h3 className="text-2xl font-semibold mb-4 text-white">Accessibility</h3>
-          <p className="text-gray-400">Make RV control easier for everyone</p>
+          {/* MODIFIED: Added text-left class */}
+          <p className="text-gray-400 text-left">Make RV control easier for everyone</p>
         </div>
       </div>
     </section>
   );
 };
+
