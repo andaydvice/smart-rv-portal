@@ -1,15 +1,16 @@
+
 import { motion } from "framer-motion";
-import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
+// Button and Link imports are removed as they are no longer used.
 
 export const ContactSection = () => (
-  <section className="relative py-32 px-4 overflow-hidden">
+  // MODIFIED: Changed py-32 to py-16 to reduce section height after content removal
+  <section className="relative py-16 px-4 overflow-hidden">
     <div className="absolute inset-0">
       <img
         src="/lovable-uploads/1c1bb4c0-13a3-42f8-9b4d-f0aa74e2adb3.png"
         alt="Modern Smart RV exterior with tablet displaying website"
         className="w-full h-full object-cover"
-        loading="eager"
+        loading="eager" // Keep eager loading as it might be visible on initial load for some users
       />
       <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/80 to-black/90" />
     </div>
@@ -19,32 +20,9 @@ export const ContactSection = () => (
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
-        className="space-y-8"
+        className="space-y-8" // This class is now less relevant but kept for structure
       >
-        <span className="inline-block px-4 py-2 mb-6 text-sm font-medium bg-white/10 backdrop-blur-sm rounded-full text-white border border-white/20">
-          Get Started
-        </span>
-        <h2 className="text-5xl font-bold mb-6 text-white">Ready to Transform Your Journey?</h2>
-        <p className="text-xl mb-12 text-gray-300 max-w-2xl mx-auto">
-          Connect with our team to learn more about Smart RV technology and begin your luxury travel experience
-        </p>
-        <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-          <Link to="/contact">
-            <Button 
-              size="lg"
-              className="bg-white text-black hover:bg-white/90 text-lg px-8 py-6 rounded-full transition-all duration-300 transform hover:scale-105"
-            >
-              Contact Sales
-            </Button>
-          </Link>
-          <Button 
-            variant="outline" 
-            size="lg"
-            className="border-2 border-white text-white bg-transparent hover:bg-white/10 text-lg px-8 py-6 rounded-full transition-all duration-300 transform hover:scale-105"
-          >
-            View Brochure
-          </Button>
-        </div>
+        {/* MODIFIED: All content (span, h2, p, and div with buttons) has been removed from here */}
       </motion.div>
     </div>
   </section>
