@@ -3,8 +3,8 @@ import { motion } from "framer-motion";
 // Button and Link imports are removed as they are no longer used.
 
 export const ContactSection = () => (
-  // MODIFIED: Changed py-32 to py-16 to reduce section height after content removal
-  <section className="relative py-16 px-4 overflow-hidden">
+  // MODIFIED: Changed py-16 back to py-32 to increase section height
+  <section className="relative py-32 px-4 overflow-hidden"> 
     <div className="absolute inset-0">
       <img
         src="/lovable-uploads/1c1bb4c0-13a3-42f8-9b4d-f0aa74e2adb3.png"
