@@ -11,7 +11,8 @@ interface CallToActionProps {
 
 const CallToAction = ({ title, description, buttonText, buttonLink }: CallToActionProps) => {
   return (
-    <div className="text-left py-10 px-4 bg-[#1E2A3E] rounded-xl">
+    // MODIFIED: Added text-white for better visibility of title
+    <div className="text-left py-10 px-4 bg-[#1E2A3E] rounded-xl text-white">
       <h2 className="text-3xl font-bold mb-4">{title}</h2>
       <p className="text-gray-300 mb-8 max-w-2xl">
         {description}
