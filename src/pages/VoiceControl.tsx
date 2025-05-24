@@ -4,8 +4,7 @@ import { VoiceControlSystems } from "../components/voice-control/VoiceControlSys
 import { VoiceIntroSections } from "../components/voice-control/VoiceIntroSections";
 import { BenefitsGrid } from "../components/voice-control/BenefitsGrid";
 import FeaturesSection from "../components/voice-control/FeaturesSection";
-import { Smartphone } from "lucide-react";
-import { Button } from "@/components/ui/button";
+// MODIFIED: Removed Smartphone and Button imports
 import Navbar from "@/components/Navbar";
 import Layout from "@/components/layout/Layout";
 
@@ -40,20 +39,13 @@ const VoiceControl = () => {
             <BenefitsGrid />
             <FeaturesSection />
             
-            {/* Ready to Upgrade Section */}
-            <section className="py-16 text-center">
-              <div className="flex justify-center mb-4">
-                <Smartphone className="text-[#2E7DFF] w-8 h-8" />
-              </div>
-              <h2 className="text-[#2E7DFF] text-3xl font-bold mb-4">Ready to Upgrade?</h2>
-              <p className="text-white text-lg mb-8 max-w-2xl mx-auto">
-                Discover what voice control can do for your RV adventures.
-              </p>
-              <Button 
-                className="bg-[#2E7DFF] hover:bg-[#2E7DFF]/90 text-white px-8 py-2 rounded-full text-lg"
-              >
-                Learn More
-              </Button>
+            {/* MODIFIED: Replaced content with an image */}
+            <section className="py-16">
+              <img
+                src="/lovable-uploads/35c8b551-66ab-42cc-ac02-3fe09d805dd5.png"
+                alt="Comfortable RV interior with passengers enjoying the smart features"
+                className="w-full max-w-5xl mx-auto h-auto rounded-lg shadow-lg"
+              />
             </section>
           </div>
         </div>
