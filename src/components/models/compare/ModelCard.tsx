@@ -17,7 +17,8 @@ const ModelCard = ({ name, image, price, description }: ModelCardProps) => {
         <div className="absolute inset-0 bg-gradient-to-t from-[#131a2a] to-transparent"></div>
       </div>
       <div className="p-6">
-        <h3 className="text-2xl font-bold mb-2">{name}</h3>
+        {/* MODIFIED: Added text-white for better visibility */}
+        <h3 className="text-2xl font-bold mb-2 text-white">{name}</h3>
         <p className="text-[#5B9BD5] font-semibold mb-4">{price}</p>
         <p className="text-gray-300 mb-6">{description}</p>
         <Link 
