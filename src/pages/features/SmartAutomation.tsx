@@ -1,8 +1,5 @@
-
 import { motion } from "framer-motion";
 import { Home, WifiIcon, Cog, BatteryCharging } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
 import { useEffect } from "react";
 
@@ -93,14 +90,6 @@ const SmartAutomation = () => {
                 <p className="text-[#E2E8FF] text-left">Intelligent power distribution with real time monitoring and automated efficiency.</p>
               </div>
             </div>
-          </div>
-
-          <div className="text-center">
-            <Link to="/schedule-demo">
-              <Button size="lg" className="bg-[#5B9BD5] hover:bg-[#4B8FE3] text-white text-lg py-6 px-8">
-                Schedule an Automation Demo
-              </Button>
-            </Link>
           </div>
         </div>
       </motion.div>
