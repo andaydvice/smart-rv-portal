@@ -17,8 +17,10 @@ const CompareHero = ({ title, description, imageSrc }: CompareHeroProps) => {
       />
       <div className="absolute inset-0 bg-black/50 flex flex-col items-center justify-center">
         <div className="max-w-3xl w-full text-left px-4">
-          <h1 className="text-5xl font-bold mb-6">{title}</h1>
-          <p className="text-xl">
+          {/* MODIFIED: Added text-white and image-overlay-headline for better visibility */}
+          <h1 className="text-5xl font-bold mb-6 text-white image-overlay-headline">{title}</h1>
+          {/* MODIFIED: Added text-white for better visibility */}
+          <p className="text-xl text-white">
             {description}
           </p>
         </div>
