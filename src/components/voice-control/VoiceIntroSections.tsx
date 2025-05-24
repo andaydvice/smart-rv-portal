@@ -1,3 +1,4 @@
+
 import { Mic, Server, Shield, Home, Phone } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 
@@ -38,6 +39,8 @@ export const VoiceIntroSections = () => {
         </div>
       </div>
 
+      {/* MODIFIED: Removed the Separator and the "Ready to Upgrade?" section */}
+      {/* 
       <div className="w-full max-w-2xl mx-auto text-center">
         <Separator className="mb-16 opacity-20" />
         <div className="flex flex-col items-center gap-4">
@@ -50,7 +53,8 @@ export const VoiceIntroSections = () => {
             </button>
           </div>
         </div>
-      </div>
+      </div> 
+      */}
     </div>
   );
 };
