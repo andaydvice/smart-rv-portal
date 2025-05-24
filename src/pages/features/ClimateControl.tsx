@@ -1,8 +1,7 @@
 
 import { motion } from "framer-motion";
 import { Thermometer, Droplet, Fan, Clock, Shield } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
+// MODIFIED: Removed Button and Link imports as they are no longer used
 import Layout from "@/components/layout/Layout";
 import { useEffect } from "react";
 
@@ -95,13 +94,7 @@ const ClimateControl = () => {
             </div>
           </div>
 
-          <div className="text-center">
-            <Link to="/schedule-demo">
-              <Button size="lg" className="bg-[#5B9BD5] hover:bg-[#4B8FE3] text-white text-lg py-6 px-8">
-                Schedule a Climate System Demo
-              </Button>
-            </Link>
-          </div>
+          {/* MODIFIED: Removed the CTA button section */}
         </div>
       </motion.div>
     </Layout>
