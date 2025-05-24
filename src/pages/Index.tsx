@@ -6,6 +6,8 @@ import { HeroSection } from "@/components/sections/HeroSection";
 import { motion } from "framer-motion";
 import { toast } from "sonner";
 import { TechnologySection } from "@/components/sections/TechnologySection";
+// MODIFIED: Direct import for ContactSection added
+import { ContactSection } from "@/components/sections/ContactSection";
 
 // Lazy load components that aren't needed immediately
 const FeaturesSection = lazy(() => import("@/components/sections/FeaturesSection").then(mod => ({ 
@@ -14,9 +16,10 @@ const FeaturesSection = lazy(() => import("@/components/sections/FeaturesSection
 const SustainabilitySection = lazy(() => import("@/components/sections/SustainabilitySection").then(mod => ({ 
   default: mod.SustainabilitySection 
 })));
-const ContactSection = lazy(() => import("@/components/sections/ContactSection").then(mod => ({ 
-  default: mod.ContactSection 
-})));
+// MODIFIED: Lazy import for ContactSection removed
+// const ContactSection = lazy(() => import("@/components/sections/ContactSection").then(mod => ({ 
+//   default: mod.ContactSection 
+// })));
 
 const LoadingFallback = () => (
   <div className="w-full py-20 flex items-center justify-center">
@@ -58,9 +61,8 @@ const Index = () => {
           <SustainabilitySection />
         </Suspense>
         
-        <Suspense fallback={<LoadingFallback />}>
-          <ContactSection />
-        </Suspense>
+        {/* MODIFIED: Suspense wrapper removed and ContactSection directly rendered */}
+        <ContactSection />
       </motion.div>
     </Layout>
   );
