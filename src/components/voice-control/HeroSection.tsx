@@ -18,11 +18,15 @@ export const HeroSection = () => {
         <p className="text-xl text-white/90 mb-12 p-4 bg-black/50 backdrop-blur-sm rounded-lg max-w-4xl mx-auto">
           Experience RV living's future: Voice control technology for hands-free system operation
         </p>
+        {/* MODIFIED: Removed the button below */}
+        {/* 
         <button className="inline-flex items-center gap-2 px-6 py-3 bg-blue-500 hover:bg-blue-600 rounded-lg transition-colors">
           <Mic className="w-6 h-6" />
           Start Voice Control
-        </button>
+        </button> 
+        */}
       </div>
     </section>
   );
 };
+
