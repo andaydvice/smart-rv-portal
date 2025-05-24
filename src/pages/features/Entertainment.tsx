@@ -1,8 +1,6 @@
-
 import { motion } from "framer-motion";
 import { Tv, Music, Smartphone, Gamepad } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
+// MODIFIED: Removed Button and Link imports as they are no longer used
 import Layout from "@/components/layout/Layout";
 import { useEffect } from "react";
 
@@ -27,6 +25,7 @@ const Entertainment = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+            
             <div className="bg-gray-800/50 p-8 rounded-lg border border-gray-700 flex flex-col">
               <div className="h-[72px]">
                 <h2 className="text-2xl font-semibold text-[#5B9BD5]">Smart TV System</h2>
@@ -50,6 +49,7 @@ const Entertainment = () => {
               </ul>
             </div>
 
+            
             <div className="bg-gray-800/50 p-8 rounded-lg border border-gray-700 flex flex-col">
               <div className="h-[72px]">
                 <h2 className="text-2xl font-semibold text-[#5B9BD5]">Premium Audio System</h2>
@@ -76,6 +76,7 @@ const Entertainment = () => {
 
           <div className="bg-gray-800/30 p-8 rounded-lg border border-gray-700 mb-12">
             <h2 className="text-2xl font-semibold text-[#5B9BD5] mb-6">Additional Features</h2>
+            
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="p-4 bg-gray-800/50 rounded-lg flex flex-col items-center">
                 <Gamepad className="h-8 w-8 text-[#5B9BD5] mb-3" />
@@ -95,13 +96,7 @@ const Entertainment = () => {
             </div>
           </div>
 
-          <div className="text-center">
-            <Link to="/schedule-demo">
-              <Button size="lg" className="bg-[#5B9BD5] hover:bg-[#4B8FE3] text-white text-lg py-6 px-8">
-                Schedule an Entertainment System Demo
-              </Button>
-            </Link>
-          </div>
+          
         </div>
       </motion.div>
     </Layout>
