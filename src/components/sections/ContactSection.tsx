@@ -1,21 +1,19 @@
-
-// MODIFIED: Removed motion and Button imports as they are no longer used
-// import { motion } from "framer-motion";
-// import { Button } from "@/components/ui/button";
+import { motion } from "framer-motion";
+import { Button } from "@/components/ui/button";
 
 export const ContactSection = () => (
   // Kept min-h-[70vh] and flex utilities to maintain section height and structure
   <section className="relative py-32 px-4 overflow-hidden min-h-[70vh] flex flex-col justify-center"> 
     <div className="absolute inset-0">
       <img
-        src="/lovable-uploads/1c1bb4c0-13a3-42f8-9b4d-f0aa74e2adb3.png"
-        alt="Modern Smart RV exterior with tablet displaying website"
+        src="/lovable-uploads/f88c014b-5b32-4db0-8742-f9e8b531654e.png" // MODIFIED: Updated image source
+        alt="Interior view of a Smart RV with a person using a smartphone" // MODIFIED: Updated alt text
         className="w-full h-full object-cover" // Kept: ensures image fills space
         loading="eager"
       />
       <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/80 to-black/90" />
     </div>
-    {/* MODIFIED: Removed the div containing the headline, paragraph, and button */}
+    {/* MODIFIED: Removed the div containing the headline, paragraph, and button (This was done in a previous step and remains removed) */}
     {/* 
     <div className="relative max-w-4xl mx-auto text-center w-full">
       <motion.div
@@ -45,4 +43,3 @@ export const ContactSection = () => (
     */}
   </section>
 );
-
