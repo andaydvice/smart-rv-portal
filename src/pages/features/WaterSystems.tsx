@@ -1,8 +1,6 @@
-
 import { motion } from "framer-motion";
 import { Droplet, WavesIcon } from "lucide-react";
-import { Link } from "react-router-dom";
-import { Button } from "@/components/ui/button";
+// MODIFIED: Removed Link and Button imports as they are no longer used after removing the CTA
 import Layout from "@/components/layout/Layout";
 import { useEffect } from "react";
 
@@ -86,13 +84,7 @@ const WaterSystems = () => {
             </div>
           </div>
 
-          <div className="text-center">
-            <Link to="/schedule-demo">
-              <Button size="lg" className="bg-blue-500 hover:bg-blue-600 text-lg py-8 px-12">
-                Schedule a Water Systems Demo
-              </Button>
-            </Link>
-          </div>
+          {/* MODIFIED: Removed the CTA button section */}
         </div>
       </motion.div>
     </Layout>
