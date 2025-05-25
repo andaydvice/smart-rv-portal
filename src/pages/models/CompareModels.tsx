@@ -6,7 +6,8 @@ import CompareHero from "@/components/models/compare/CompareHero";
 import ModelCard from "@/components/models/compare/ModelCard";
 import SpecificationsTable from "@/components/models/compare/SpecificationsTable";
 import FeaturesComparisonTable from "@/components/models/compare/FeaturesComparisonTable";
-import CallToAction from "@/components/models/compare/CallToAction";
+// MODIFIED: Removed CallToAction import
+// import CallToAction from "@/components/models/compare/CallToAction";
 import models from "@/components/models/compare/ModelComparisonData";
 
 // CRITICAL DEBUGGING LOGS
@@ -91,13 +92,15 @@ const CompareModels = () => {
           {/* Features comparison table */}
           <FeaturesComparisonTable models={models} />
 
-          {/* Call to action */}
+          {/* MODIFIED: Removed CallToAction component instance */}
+          {/* 
           <CallToAction 
             title="Ready to Experience Smart RV Living?"
             description="Schedule a personalized demo to see our smart RV technology in action and find the perfect model for your needs."
             buttonText="Schedule a Demo"
             buttonLink="/schedule-demo"
-          />
+          /> 
+          */}
         </div>
       </div>
     </Layout>
