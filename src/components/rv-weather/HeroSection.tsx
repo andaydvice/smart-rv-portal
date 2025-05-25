@@ -1,6 +1,8 @@
+
 import React, { useEffect } from "react";
-import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
+// import { Button } from "@/components/ui/button"; // Button component is not used directly in this file for the image
+import { cn } from "@/lib/utils"; // cn is not used but kept to avoid unrelated changes
+import { PreloadedHeaderImage } from "@/components/ui/PreloadedHeaderImage"; // MODIFIED: Import PreloadedHeaderImage
 
 const HeroSection = () => {
   // Ensure the page scrolls to top when component mounts
@@ -10,12 +12,13 @@ const HeroSection = () => {
 
   return (
     <div className="relative w-full h-[600px] md:h-[80vh] max-h-[800px] overflow-hidden">
-      <img
+      {/* MODIFIED: Replaced img tag with PreloadedHeaderImage component */}
+      <PreloadedHeaderImage
         src="/lovable-uploads/b1b0e81e-825c-4f31-aaab-5d7c50e67122.png"
         alt="Woman reading RV Weather Guide book with RV in background"
         className="absolute inset-0 w-full h-full object-cover"
-        loading="eager"
-        fetchPriority="high"
+        width={1920} // Representative width for preloading and placeholder
+        height={800}  // Representative max height for preloading and placeholder
       />
       
       {/* Button positioned at the bottom */}
@@ -32,3 +35,4 @@ const HeroSection = () => {
 };
 
 export default HeroSection;
+
