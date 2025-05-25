@@ -9,6 +9,30 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      app_spatial_ref_sys: {
+        Row: {
+          auth_name: string | null
+          auth_srid: number | null
+          proj4text: string | null
+          srid: number | null
+          srtext: string | null
+        }
+        Insert: {
+          auth_name?: string | null
+          auth_srid?: number | null
+          proj4text?: string | null
+          srid?: number | null
+          srtext?: string | null
+        }
+        Update: {
+          auth_name?: string | null
+          auth_srid?: number | null
+          proj4text?: string | null
+          srid?: number | null
+          srtext?: string | null
+        }
+        Relationships: []
+      }
       login_attempts: {
         Row: {
           failed_attempts: number
@@ -306,30 +330,6 @@ export type Database = {
       max_facility_price: {
         Row: {
           max_price: number | null
-        }
-        Relationships: []
-      }
-      secure_spatial_ref_sys: {
-        Row: {
-          auth_name: string | null
-          auth_srid: number | null
-          proj4text: string | null
-          srid: number | null
-          srtext: string | null
-        }
-        Insert: {
-          auth_name?: string | null
-          auth_srid?: number | null
-          proj4text?: string | null
-          srid?: number | null
-          srtext?: string | null
-        }
-        Update: {
-          auth_name?: string | null
-          auth_srid?: number | null
-          proj4text?: string | null
-          srid?: number | null
-          srtext?: string | null
         }
         Relationships: []
       }
@@ -823,6 +823,16 @@ export type Database = {
       get_proj4_from_srid: {
         Args: { "": number }
         Returns: string
+      }
+      get_spatial_ref_sys: {
+        Args: Record<PropertyKey, never>
+        Returns: {
+          srid: number
+          auth_name: string
+          auth_srid: number
+          srtext: string
+          proj4text: string
+        }[]
       }
       gettransactionid: {
         Args: Record<PropertyKey, never>

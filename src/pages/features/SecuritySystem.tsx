@@ -2,7 +2,7 @@
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Layout from "@/components/layout/Layout";
-import { Shield, Lock, Bell, Camera } from "lucide-react";
+import { Shield, Lock, Bell, Camera, Smartphone, MapPin, BatteryCharging, KeyRound, Wrench } from "lucide-react"; // MODIFIED: Added new icons
 
 const SecuritySystem = () => {
   return (
@@ -14,7 +14,7 @@ const SecuritySystem = () => {
         transition={{ duration: 0.6 }}
         className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800"
       >
-        <div className="max-w-7xl mx-auto px-4 pt-24">
+        <div className="max-w-7xl mx-auto px-4 pt-24 pb-12"> {/* MODIFIED: Added pb-12 for bottom padding */}
           <div className="flex items-center gap-4 mb-8">
             <Shield className="h-8 w-8 text-emerald-500" />
             <h1 className="text-4xl font-bold text-white">Security System</h1>
@@ -72,8 +72,54 @@ const SecuritySystem = () => {
                   HD cameras with night vision and motion detection for complete coverage.
                 </p>
               </div>
+
+              {/* MODIFIED: Added Mobile App Integration Section */}
+              <div className="bg-gray-800/50 p-6 rounded-lg border border-gray-700">
+                <Smartphone className="h-6 w-6 text-cyan-400 mb-4" />
+                <h3 className="text-xl font-semibold text-white mb-2">Mobile App Integration</h3>
+                <p className="text-gray-300">
+                  Stay in control wherever you roam. Effortlessly lock or unlock doors, monitor live camera feeds, and receive instant security alerts—all from a dedicated mobile app designed for your RV lifestyle.
+                </p>
+              </div>
+
+              {/* MODIFIED: Added Geofencing Capabilities Section */}
+              <div className="bg-gray-800/50 p-6 rounded-lg border border-gray-700">
+                <MapPin className="h-6 w-6 text-lime-400 mb-4" />
+                <h3 className="text-xl font-semibold text-white mb-2">Geofencing Capabilities</h3>
+                <p className="text-gray-300">
+                  Enjoy hands-free security with geofencing. Your system automatically locks, unlocks, and arms or disarms based on your location, ensuring your RV is always protected when you come and go.
+                </p>
+              </div>
             </div>
           </div>
+          
+          {/* MODIFIED: Added a new row for the remaining features */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="bg-gray-800/50 p-6 rounded-lg border border-gray-700">
+              <BatteryCharging className="h-6 w-6 text-green-400 mb-4" />
+              <h3 className="text-xl font-semibold text-white mb-2">Battery Backup and Reliability</h3>
+              <p className="text-gray-300">
+                Never worry about losing protection during a power outage. Our robust battery backup keeps your security system running smoothly, so your RV stays secure no matter what.
+              </p>
+            </div>
+
+            <div className="bg-gray-800/50 p-6 rounded-lg border border-gray-700">
+              <KeyRound className="h-6 w-6 text-purple-400 mb-4" />
+              <h3 className="text-xl font-semibold text-white mb-2">Privacy and Data Security</h3>
+              <p className="text-gray-300">
+                Your privacy is our priority. All video streams and data are encrypted and securely stored, giving you complete peace of mind that your information stays private.
+              </p>
+            </div>
+
+            <div className="bg-gray-800/50 p-6 rounded-lg border border-gray-700">
+              <Wrench className="h-6 w-6 text-orange-400 mb-4" />
+              <h3 className="text-xl font-semibold text-white mb-2">Easy Installation and Compatibility</h3>
+              <p className="text-gray-300">
+                Get started in minutes with our straightforward setup process. The system is compatible with most RV models and integrates seamlessly with existing equipment, making security upgrades hassle-free.
+              </p>
+            </div>
+          </div>
+
         </div>
       </motion.div>
     </Layout>
