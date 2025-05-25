@@ -23,13 +23,21 @@ const PowerManagement = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
             <div className="bg-gray-800/50 p-8 rounded-lg border border-gray-700">
               <h2 className="text-2xl font-semibold text-yellow-400 mb-4">Smart Power Features</h2>
-              <div className="space-y-4 text-gray-300 mb-6">
+              <div className="space-y-4 text-gray-300 mb-6 text-left">
                 <p>
-                  Our intelligent power management system optimizes energy usage and ensures 
-                  efficient power distribution throughout your RV.
+                  Our intelligent power management system optimizes energy usage.
                 </p>
                 <p>
-                  With solar integration and smart monitoring, you'll always have the power you need.
+                  It ensures efficient power distribution throughout your RV.
+                </p>
+                <p>
+                  With solar integration and smart monitoring, you will always have the power you need.
+                </p>
+                <p>
+                  This advanced system helps conserve energy.
+                </p>
+                <p>
+                  It also prolongs battery life for extended off grid adventures.
                 </p>
               </div>
               <img 
@@ -37,12 +45,14 @@ const PowerManagement = () => {
                 alt="Power Management System" 
                 className="w-full h-64 object-cover rounded-lg mb-6"
               />
-              <ul className="list-disc list-inside space-y-3 text-gray-300">
-                <li>Solar panel integration and monitoring</li>
-                <li>Battery level tracking and alerts</li>
-                <li>Automated power source switching</li>
-                <li>Energy consumption analytics</li>
-                <li>Smart appliance power management</li>
+              <ul className="list-disc list-inside space-y-3 text-gray-300 text-left">
+                <li>Solar panel integration and monitoring optimizes energy capture.</li>
+                <li>Battery level tracking and alerts keep you informed.</li>
+                <li>Automated power source switching ensures seamless transitions.</li>
+                <li>Energy consumption analytics provide valuable insights.</li>
+                <li>Smart appliance power management reduces waste.</li>
+                <li>Generator auto start and stop capabilities offer convenience.</li>
+                <li>Load shedding prioritizes critical systems during high demand.</li>
               </ul>
             </div>
 
@@ -50,25 +60,79 @@ const PowerManagement = () => {
               <div className="bg-gray-800/50 p-6 rounded-lg border border-gray-700">
                 <Sun className="h-6 w-6 text-orange-400 mb-4" />
                 <h3 className="text-xl font-semibold text-white mb-2">Solar Integration</h3>
-                <p className="text-gray-300">
-                  Efficient solar power collection and storage with real-time monitoring.
-                </p>
+                <div className="text-gray-300 space-y-2 text-left">
+                  <p>
+                    Maximize your sustainable energy potential with our advanced solar integration.
+                  </p>
+                  <p>
+                    Our system provides efficient solar power collection.
+                  </p>
+                  <p>
+                    It also manages energy storage with real time monitoring capabilities.
+                  </p>
+                  <p>
+                    Track your solar input and battery charge levels effortlessly.
+                  </p>
+                  <p>
+                    This ensures you make the most of available sunlight.
+                  </p>
+                  <p>
+                    Optimize panel performance through smart tracking and tilt adjustments where available.
+                  </p>
+                </div>
               </div>
 
               <div className="bg-gray-800/50 p-6 rounded-lg border border-gray-700">
                 <Zap className="h-6 w-6 text-blue-400 mb-4" />
                 <h3 className="text-xl font-semibold text-white mb-2">Smart Distribution</h3>
-                <p className="text-gray-300">
-                  Intelligent power routing and prioritization for essential systems.
-                </p>
+                <div className="text-gray-300 space-y-2 text-left">
+                  <p>
+                    Benefit from intelligent power routing that prioritizes essential systems.
+                  </p>
+                  <p>
+                    Our smart distribution ensures critical appliances always have power.
+                  </p>
+                  <p>
+                    It automatically manages loads to prevent overloads.
+                  </p>
+                  <p>
+                    You can customize power allocation based on your specific needs.
+                  </p>
+                  <p>
+                    This feature enhances safety and reliability of your RVs electrical system.
+                  </p>
+                  <p>
+                    Receive notifications for unusual power draws or potential issues.
+                  </p>
+                </div>
               </div>
 
               <div className="bg-gray-800/50 p-6 rounded-lg border border-gray-700">
                 <Activity className="h-6 w-6 text-green-400 mb-4" />
                 <h3 className="text-xl font-semibold text-white mb-2">Usage Analytics</h3>
-                <p className="text-gray-300">
-                  Detailed power consumption tracking and optimization recommendations.
-                </p>
+                <div className="text-gray-300 space-y-2 text-left">
+                  <p>
+                    Gain detailed insights into your power consumption patterns.
+                  </p>
+                  <p>
+                    Our usage analytics offer comprehensive tracking.
+                  </p>
+                  <p>
+                    It also provides actionable optimization recommendations.
+                  </p>
+                  <p>
+                    Understand which appliances consume the most energy.
+                  </p>
+                  <p>
+                    Identify opportunities to reduce power usage.
+                  </p>
+                  <p>
+                    Optimize your energy habits for longer off grid stays and lower utility costs.
+                  </p>
+                  <p>
+                    Access historical data to see trends and improvements over time.
+                  </p>
+                </div>
               </div>
             </div>
           </div>
