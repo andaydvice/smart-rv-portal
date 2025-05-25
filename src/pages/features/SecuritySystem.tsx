@@ -1,3 +1,4 @@
+
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Layout from "@/components/layout/Layout";
@@ -48,11 +49,11 @@ const SecuritySystem = () => {
                 className="w-full h-64 object-cover rounded-lg mb-6"
               />
               <ul className="list-disc list-inside space-y-3 text-gray-300 text-left">
-                <li>Smart door locks with remote access</li>
-                <li>Motion sensors and security cameras</li>
-                <li>Real time alerts to your mobile device</li>
-                <li>GPS tracking and geofencing</li>
-                <li>Emergency response integration</li>
+                <li className="text-left">Smart door locks with remote access allow you to control entry from anywhere, offering flexibility and convenience.</li>
+                <li className="text-left">Motion sensors and security cameras provide comprehensive surveillance, detecting any unusual activity around your RV.</li>
+                <li className="text-left">Real time alerts to your mobile device keep you informed of any security events, no matter where you are.</li>
+                <li className="text-left">GPS tracking and geofencing capabilities help you monitor your RV’s location and set virtual boundaries for added security.</li>
+                <li className="text-left">Emergency response integration ensures that help can be dispatched quickly if a critical situation arises.</li>
               </ul>
             </div>
 
@@ -60,41 +61,72 @@ const SecuritySystem = () => {
               <div className="bg-gray-800/50 p-6 rounded-lg border border-gray-700">
                 <Lock className="h-6 w-6 text-blue-400 mb-4" />
                 <h3 className="text-xl font-semibold text-white mb-2">Smart Locks</h3>
-                <p className="text-gray-300 text-left">
-                  Seamlessly manage access from your smartphone, whether you’re inside or away from your RV. Receive real time lock status updates and enjoy peace of mind with secure, encrypted control.
-                </p>
+                <div className="space-y-2">
+                  <p className="text-gray-300 text-left">
+                    Seamlessly manage access from your smartphone, whether you’re inside or away from your RV.
+                  </p>
+                  <p className="text-gray-300 text-left">
+                    Receive real time lock status updates and enjoy peace of mind with secure, encrypted control.
+                  </p>
+                </div>
               </div>
 
               <div className="bg-gray-800/50 p-6 rounded-lg border border-gray-700">
                 <Bell className="h-6 w-6 text-yellow-400 mb-4" />
                 <h3 className="text-xl font-semibold text-white mb-2">Alert System</h3>
-                <p className="text-gray-300 text-left">
-                  Stay informed wherever you are—alerts arrive instantly on your mobile device. Easily adjust notification preferences to fit your travel style and security needs.
-                </p>
+                <div className="space-y-2">
+                  <p className="text-gray-300 text-left">
+                    Stay informed wherever you are—alerts arrive instantly on your mobile device.
+                  </p>
+                  <p className="text-gray-300 text-left">
+                    Easily adjust notification preferences to fit your travel style and security needs.
+                  </p>
+                </div>
               </div>
 
               <div className="bg-gray-800/50 p-6 rounded-lg border border-gray-700">
                 <Camera className="h-6 w-6 text-red-400 mb-4" />
                 <h3 className="text-xl font-semibold text-white mb-2">Video Surveillance</h3>
-                <p className="text-gray-300 text-left">
-                  Check live camera feeds anytime through the mobile app for on the go monitoring. All footage is securely encrypted, ensuring your privacy while keeping your RV safe.
-                </p>
+                <div className="space-y-2">
+                  <p className="text-gray-300 text-left">
+                    Check live camera feeds anytime through the mobile app for on the go monitoring.
+                  </p>
+                  <p className="text-gray-300 text-left">
+                    All footage is securely encrypted, ensuring your privacy while keeping your RV safe.
+                  </p>
+                </div>
               </div>
 
               <div className="bg-gray-800/50 p-6 rounded-lg border border-gray-700">
                 <Smartphone className="h-6 w-6 text-cyan-400 mb-4" />
                 <h3 className="text-xl font-semibold text-white mb-2">Mobile App Integration</h3>
-                <p className="text-gray-300 text-left">
-                  Stay in control wherever you roam. Effortlessly lock or unlock doors, monitor live camera feeds, and receive instant security alerts—all from a dedicated mobile app designed for your RV lifestyle.
-                </p>
+                <div className="space-y-2">
+                  <p className="text-gray-300 text-left">
+                    Stay in control wherever you roam.
+                  </p>
+                  <p className="text-gray-300 text-left">
+                    Effortlessly lock or unlock doors, monitor live camera feeds, and receive instant security alerts.
+                  </p>
+                  <p className="text-gray-300 text-left">
+                    All from a dedicated mobile app designed for your RV lifestyle.
+                  </p>
+                </div>
               </div>
 
               <div className="bg-gray-800/50 p-6 rounded-lg border border-gray-700">
                 <MapPin className="h-6 w-6 text-lime-400 mb-4" />
                 <h3 className="text-xl font-semibold text-white mb-2">Geofencing Capabilities</h3>
-                <p className="text-gray-300 text-left">
-                  Enjoy hands free security with geofencing. Your system automatically locks, unlocks, and arms or disarms based on your location, ensuring your RV is always protected when you come and go.
-                </p>
+                <div className="space-y-2">
+                  <p className="text-gray-300 text-left">
+                    Enjoy hands free security with geofencing.
+                  </p>
+                  <p className="text-gray-300 text-left">
+                    Your system automatically locks, unlocks, and arms or disarms based on your location.
+                  </p>
+                  <p className="text-gray-300 text-left">
+                    This ensures your RV is always protected when you come and go.
+                  </p>
+                </div>
               </div>
             </div>
           </div>
@@ -103,25 +135,49 @@ const SecuritySystem = () => {
             <div className="bg-gray-800/50 p-6 rounded-lg border border-gray-700">
               <BatteryCharging className="h-6 w-6 text-green-400 mb-4" />
               <h3 className="text-xl font-semibold text-white mb-2">Battery Backup and Reliability</h3>
-              <p className="text-gray-300 text-left">
-                Never worry about losing protection during a power outage. Our robust battery backup keeps your security system running smoothly, so your RV stays secure no matter what.
-              </p>
+              <div className="space-y-2">
+                <p className="text-gray-300 text-left">
+                  Never worry about losing protection during a power outage.
+                </p>
+                <p className="text-gray-300 text-left">
+                  Our robust battery backup keeps your security system running smoothly.
+                </p>
+                <p className="text-gray-300 text-left">
+                  So your RV stays secure no matter what.
+                </p>
+              </div>
             </div>
 
             <div className="bg-gray-800/50 p-6 rounded-lg border border-gray-700">
               <KeyRound className="h-6 w-6 text-purple-400 mb-4" />
               <h3 className="text-xl font-semibold text-white mb-2">Privacy and Data Security</h3>
-              <p className="text-gray-300 text-left">
-                Your privacy is our priority. All video streams and data are encrypted and securely stored, giving you complete peace of mind that your information stays private.
-              </p>
+              <div className="space-y-2">
+                <p className="text-gray-300 text-left">
+                  Your privacy is our priority.
+                </p>
+                <p className="text-gray-300 text-left">
+                  All video streams and data are encrypted and securely stored.
+                </p>
+                <p className="text-gray-300 text-left">
+                  This gives you complete peace of mind that your information stays private.
+                </p>
+              </div>
             </div>
 
             <div className="bg-gray-800/50 p-6 rounded-lg border border-gray-700">
               <Wrench className="h-6 w-6 text-orange-400 mb-4" />
               <h3 className="text-xl font-semibold text-white mb-2">Easy Installation and Compatibility</h3>
-              <p className="text-gray-300 text-left">
-                Get started in minutes with our straightforward setup process. The system is compatible with most RV models and integrates seamlessly with existing equipment, making security upgrades hassle free.
-              </p>
+              <div className="space-y-2">
+                <p className="text-gray-300 text-left">
+                  Get started in minutes with our straightforward setup process.
+                </p>
+                <p className="text-gray-300 text-left">
+                  The system is compatible with most RV models and integrates seamlessly with existing equipment.
+                </p>
+                <p className="text-gray-300 text-left">
+                  This makes security upgrades hassle free.
+                </p>
+              </div>
             </div>
           </div>
 
@@ -132,3 +188,4 @@ const SecuritySystem = () => {
 };
 
 export default SecuritySystem;
+
