@@ -1,3 +1,4 @@
+
 export const adventureCategories = {
   "Rugged Class B Vans (Adventure Vans)": [
     { 
@@ -182,8 +183,18 @@ export const adventureCategories = {
     }
   ],
   "Truck Campers": [
-    { name: "Adventurer 901SB", price: "Price varies" },
-    { name: "Adventurer 910DB", price: "Price varies" }
+    { 
+      name: "Adventurer 901SB", 
+      price: "$43K - $72K", // MODIFIED: Updated price range based on provided data
+      highlight: "Designed for both short and long bed trucks, the 901SB features the industry’s largest wet bath, expansive counter space, and a residential queen bed for maximum comfort. Enjoy four season insulation, a full galley, and abundant storage, making it perfect for extended off grid adventures.", // MODIFIED: Added highlight
+      notes: "MSRP for new 2025 models is around $43,736–$71,176. Recent sale prices for new units range from $52,499 to $59,999." // MODIFIED: Added notes
+    },
+    { 
+      name: "Adventurer 910DB", 
+      price: "$52K - $84K", // MODIFIED: Updated price range based on provided data
+      highlight: "Built for long bed trucks, the 910DB offers a spacious single slide layout, a true dry bath, and a king bed for luxury on the road. Features include a large dinette, ample storage, four season insulation, and a high gloss fiberglass exterior for durability and style.", // MODIFIED: Added highlight
+      notes: "MSRP for new 2025 models is approximately $52,780–$83,900. Recent sale prices for new units are typically between $57,888 and $69,999." // MODIFIED: Added notes
+    }
   ]
 };
 
@@ -205,3 +216,4 @@ export const keyFeatures = [
   "Durable construction using high quality materials for harsh environments",
   "Flexible interior configurations for customizable living spaces"
 ];
+
