@@ -3,7 +3,7 @@ export const adventureCategories = {
     { 
       name: "Winnebago Revel 4x4", 
       price: "$185K - $210K",
-      highlight: "Built on a Mercedes-Benz Sprinter chassis, the Revel features true 4x4 capability, a power lift bed, and off-grid amenities for serious adventure seekers.",
+      highlight: "Built on a Mercedes Benz Sprinter chassis, the Revel features true 4x4 capability, a power lift bed, and off grid amenities for serious adventure seekers.",
       notes: "Confirmed for new 2025 models"
     },
     { 
@@ -15,7 +15,7 @@ export const adventureCategories = {
     { 
       name: "Outside Van Custom Builds", 
       price: "$180K - $350K",
-      highlight: "Fully customizable interiors and robust off-road upgrades let you create a van uniquely tailored to your travel style and terrain preferences.",
+      highlight: "Fully customizable interiors and robust off road upgrades let you create a van uniquely tailored to your travel style and terrain preferences.",
       notes: "Custom pricing varies by build and options"
     },
     { 
@@ -27,31 +27,31 @@ export const adventureCategories = {
     { 
       name: "Sportsmobile Classic 4x4", 
       price: "$175K - $250K",
-      highlight: "Legendary for its pop-top roof and heavy-duty 4WD system, the Classic is a favorite among overlanders seeking simplicity and durability.",
+      highlight: "Legendary for its pop top roof and heavy duty 4WD system, the Classic is a favorite among overlanders seeking simplicity and durability.",
       notes: "Consistent with current published prices"
     },
     { 
       name: "Winnebago EKKO AWD", 
       price: "$215K - $245K",
-      highlight: "Combines all-wheel drive with a compact footprint, full bathroom, and large gear garage—ideal for active adventurers.",
+      highlight: "Combines all wheel drive with a compact footprint, full bathroom, and large gear garage—ideal for active adventurers.",
       notes: "Matches current dealer listings"
     },
     { 
       name: "Tiger Adventure Vehicles", 
       price: "Price varies",
-      highlight: "Unique truck-based RVs with true off-road capability and customizable living spaces for remote exploration.",
+      highlight: "Unique truck based RVs with true off road capability and customizable living spaces for remote exploration.",
       notes: "Custom builds; pricing on request"
     },
     { 
       name: "27 North Venture 170", 
       price: "Price varies",
-      highlight: "Luxury meets performance in this Sprinter-based build, offering high-end finishes and advanced tech for discerning travelers.",
+      highlight: "Luxury meets performance in this Sprinter based build, offering high end finishes and advanced tech for discerning travelers.",
       notes: "Custom builds; pricing on request"
     },
     { 
       name: "Airstream Interstate 19X", 
       price: "Price varies",
-      highlight: "Iconic Airstream design in a nimble package, featuring off-road tires, all-terrain upgrades, and a versatile interior.",
+      highlight: "Iconic Airstream design in a nimble package, featuring off road tires, all terrain upgrades, and a versatile interior.",
       notes: "New model; pricing set by dealers/custom options"
     }
   ],
