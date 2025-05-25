@@ -81,17 +81,35 @@ const Entertainment = () => {
               <div className="p-4 bg-gray-800/50 rounded-lg flex flex-col items-center">
                 <Gamepad className="h-8 w-8 text-[#5B9BD5] mb-3" />
                 <h3 className="text-xl font-medium text-white mb-2">Gaming Support</h3>
-                <p className="text-[#E2E8FF] text-left">Connect your favorite gaming console with optimized display settings for responsive gameplay.</p>
+                {/* MODIFIED: Expanded content for Gaming Support */}
+                <div className="text-[#E2E8FF] text-left space-y-2">
+                  <p>Connect your favorite gaming console with optimized display settings for responsive gameplay.</p>
+                  <p>Our system minimizes input lag and motion blur for a competitive edge.</p>
+                  <p>Enjoy immersive sound through the premium audio system while you play.</p>
+                  <p>Multiple HDMI ports allow easy connection of various gaming devices.</p>
+                </div>
               </div>
               <div className="p-4 bg-gray-800/50 rounded-lg flex flex-col items-center">
                 <Smartphone className="h-8 w-8 text-[#5B9BD5] mb-3" />
                 <h3 className="text-xl font-medium text-white mb-2">Mobile Integration</h3>
-                <p className="text-[#E2E8FF] text-left">Stream content from your mobile devices with seamless screen mirroring and casting.</p>
+                {/* MODIFIED: Expanded content for Mobile Integration */}
+                <div className="text-[#E2E8FF] text-left space-y-2">
+                  <p>Stream content from your mobile devices with seamless screen mirroring and casting.</p>
+                  <p>Share photos, videos, and presentations directly to the Smart TV.</p>
+                  <p>Use your smartphone as a remote control for various entertainment functions.</p>
+                  <p>Dedicated apps enhance connectivity and content sharing capabilities.</p>
+                </div>
               </div>
               <div className="p-4 bg-gray-800/50 rounded-lg flex flex-col items-center">
                 <Music className="h-8 w-8 text-[#5B9BD5] mb-3" />
                 <h3 className="text-xl font-medium text-white mb-2">Outdoor Audio</h3>
-                <p className="text-[#E2E8FF] text-left">Weather resistant external speakers for entertainment around your campsite.</p>
+                {/* MODIFIED: Expanded content for Outdoor Audio */}
+                <div className="text-[#E2E8FF] text-left space-y-2">
+                  <p>Weather resistant external speakers allow entertainment around your campsite.</p>
+                  <p>Control outdoor audio zones independently from the main cabin system.</p>
+                  <p>Enjoy high fidelity sound even in open air environments.</p>
+                  <p>Durable construction ensures longevity against various weather conditions.</p>
+                </div>
               </div>
             </div>
           </div>
