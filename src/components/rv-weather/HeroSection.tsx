@@ -1,4 +1,3 @@
-
 import React, { useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -18,9 +17,6 @@ const HeroSection = () => {
         loading="eager"
         fetchPriority="high"
       />
-      
-      {/* Semi-transparent overlay for better text readability */}
-      <div className="absolute inset-0 bg-black/50 z-10" />
       
       {/* Button positioned at the bottom */}
       <div className="absolute bottom-8 z-30 w-full flex justify-center">
