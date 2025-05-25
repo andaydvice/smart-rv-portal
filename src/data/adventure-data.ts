@@ -1,4 +1,3 @@
-
 export const adventureCategories = {
   "Rugged Class B Vans (Adventure Vans)": [
     { 
@@ -34,7 +33,7 @@ export const adventureCategories = {
     { 
       name: "Winnebago EKKO AWD", 
       price: "$215K - $245K",
-      highlight: "Combines all wheel drive with a compact footprint, full bathroom, and large gear garage—ideal for active adventurers.",
+      highlight: "Combines all wheel drive with a compact footprint, full bathroom, and large gear garage ideal for active adventurers.",
       notes: "Matches current dealer listings"
     },
     { 
@@ -90,13 +89,13 @@ export const adventureCategories = {
     { 
       name: "Eclipse RV Overland Adventure Series Mojo 12BD", 
       price: "$29,995+",
-      highlight: "A compact toy hauler with a large garage, off road tires, and a versatile interior—ideal for bringing ATVs or bikes on your next adventure.",
+      highlight: "A compact toy hauler with a large garage, off road tires, and a versatile interior ideal for bringing ATVs or bikes on your next adventure.",
       notes: "Base MSRP for new models. Price varies with custom builds."
     },
     { 
       name: "inTech OVR Expedition", 
       price: "$67,096",
-      highlight: "Features a heated underbelly, all season insulation, solar power, and a spacious interior with a skylight—built for off grid comfort and durability.",
+      highlight: "Features a heated underbelly, all season insulation, solar power, and a spacious interior with a skylight built for off grid comfort and durability.",
       notes: "2025 models currently listed at this price."
     },
     { 
@@ -114,7 +113,7 @@ export const adventureCategories = {
     { 
       name: "nüCamp RV Tab S Teardrop Camper",
       price: "$31,523+",
-      highlight: "Compact and stylish, the Tab S offers off road tires, a comfortable sleeping area, and a fully equipped kitchen—perfect for couples or solo travelers.",
+      highlight: "Compact and stylish, the Tab S offers off road tires, a comfortable sleeping area, and a fully equipped kitchen perfect for couples or solo travelers.",
       notes: "2025 models start at this price. Special editions priced higher."
     }
   ],
@@ -157,10 +156,30 @@ export const adventureCategories = {
     }
   ],
   "Overlanding Fifth Wheels": [
-    { name: "Arctic Fox 27 5L", price: "$65K - $80K" },
-    { name: "Northwood Fox Mountain", price: "$60K - $75K" },
-    { name: "KZ Durango Half Ton", price: "$55K - $70K" },
-    { name: "Bruder EXP 7", price: "Price varies" }
+    { 
+      name: "Arctic Fox 27 5L", 
+      price: "$65K - $80K",
+      highlight: "Built for four season adventure, this rugged fifth wheel features an all weather insulated chassis, spacious rear kitchen, and up to 800W solar for true off grid comfort.",
+      notes: "2025 models are listed between $65,000 and $80,000, with current dealer sale prices (e.g., $79,995) confirming this range is accurate." 
+    },
+    { 
+      name: "Northwood Fox Mountain", 
+      price: "$60K - $75K",
+      highlight: "Combining a robust Ironhorse chassis with four season insulation, Fox Mountain offers contemporary interiors, solid surface countertops, and advanced suspension for reliable off road travel.",
+      notes: "New 2025 models are available from $60,000 to $75,000, with some dealer specials as low as $55,505 for well equipped units, confirming your range is current."
+    },
+    { 
+      name: "KZ Durango Half Ton", 
+      price: "$55K - $70K",
+      highlight: "Lightweight yet full featured, the Durango Half Ton is easy to tow and boasts modern cabinetry, washer/dryer prep, and all weather insulation for year round adventures.",
+      notes: "2025 models start at $55,000 and go up to $70,000, with recent sale prices (e.g., $64,999) matching your listed range."
+    },
+    { 
+      name: "Bruder EXP 7", 
+      price: "Price varies",
+      highlight: "This luxury off road camper blends a marine grade composite body, patented air suspension, and customizable interiors for unmatched comfort and capability on any terrain.",
+      notes: "The EXP 7 PT (pop top) starts at $160,250 and the GT (hard roof) just under $166,000; pricing varies with options, confirming the “Price varies” note is accurate for the USA."
+    }
   ],
   "Truck Campers": [
     { name: "Adventurer 901SB", price: "Price varies" },
