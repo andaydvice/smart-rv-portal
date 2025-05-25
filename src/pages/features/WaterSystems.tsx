@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Droplet, WavesIcon } from "lucide-react";
+import { Droplet } from "lucide-react"; // MODIFIED: Removed WavesIcon as it's not used.
 // MODIFIED: Removed Link and Button imports as they are no longer used after removing the CTA
 import Layout from "@/components/layout/Layout";
 import { useEffect } from "react";
@@ -37,10 +37,10 @@ const WaterSystems = () => {
                 />
               </div>
               <ul className="list-disc list-inside space-y-3 text-gray-300">
-                <li>Real-time tank level monitoring</li>
+                <li>Real time tank level monitoring</li>
                 <li>Smart water filtration with monitoring</li>
                 <li>Flow rate and usage analytics</li>
-                <li>Leak detection with automatic shut-off</li>
+                <li>Leak detection with automatic shut off</li>
                 <li>Conservation recommendations</li>
               </ul>
             </div>
@@ -71,15 +71,36 @@ const WaterSystems = () => {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="p-4 bg-gray-800/50 rounded-lg">
                 <h3 className="text-xl font-medium text-white mb-2">Smart Shower</h3>
-                <p className="text-gray-300">Pre-programmable temperature and flow settings with water conservation mode.</p>
+                {/* MODIFIED: Expanded content for Smart Shower, ensuring text-left and new lines per sentence */}
+                <div className="text-gray-300 space-y-2 text-left">
+                  <p>Enjoy pre programmable temperature and flow settings for a personalized experience.</p>
+                  <p>The system includes an intelligent water conservation mode to reduce waste.</p>
+                  <p>Create individual user profiles for customized shower preferences.</p>
+                  <p>Benefit from real time display of water usage to monitor consumption.</p>
+                  <p>A water recirculation feature can save water while it reaches your desired temperature.</p>
+                </div>
               </div>
               <div className="p-4 bg-gray-800/50 rounded-lg">
                 <h3 className="text-xl font-medium text-white mb-2">Water Quality</h3>
-                <p className="text-gray-300">Real-time water quality monitoring with alerts for impurities or contamination.</p>
+                {/* MODIFIED: Expanded content for Water Quality, ensuring text-left and new lines per sentence */}
+                <div className="text-gray-300 space-y-2 text-left">
+                  <p>Benefit from continuous real time water quality monitoring throughout your RV.</p>
+                  <p>Receive instant alerts for impurities, contaminants, or significant changes in water parameters.</p>
+                  <p>The system can track key indicators such as pH levels and total dissolved solids.</p>
+                  <p>Get timely notifications for water filter replacements based on usage and quality readings.</p>
+                  <p>Access historical water quality data to observe trends and ensure consistent safety.</p>
+                </div>
               </div>
               <div className="p-4 bg-gray-800/50 rounded-lg">
                 <h3 className="text-xl font-medium text-white mb-2">Winterization</h3>
-                <p className="text-gray-300">One-touch winterization process to protect your entire water system.</p>
+                {/* MODIFIED: Expanded content for Winterization, ensuring text-left and new lines per sentence */}
+                <div className="text-gray-300 space-y-2 text-left">
+                  <p>Activate a simplified one touch winterization process to protect your entire water system.</p>
+                  <p>This automated sequence helps prevent pipe damage from freezing temperatures.</p>
+                  <p>The system intelligently manages draining pipes and can guide antifreeze application if needed.</p>
+                  <p>Receive clear on screen prompts and confirmations for each step of the process.</p>
+                  <p>A corresponding de winterization mode facilitates an easy setup for the travel season.</p>
+                </div>
               </div>
             </div>
           </div>
