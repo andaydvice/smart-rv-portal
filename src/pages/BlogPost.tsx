@@ -1,3 +1,4 @@
+
 import { useParams, useNavigate } from 'react-router-dom';
 import { Helmet } from "react-helmet";
 import Navbar from "@/components/Navbar";
@@ -128,6 +129,19 @@ const BlogPost = () => {
       image: '/lovable-uploads/ae930cf7-205f-41d3-9c9b-a4969e5c35e6.png',
       slug: 'remote-work-rv-setup',
       content: 'Create the perfect mobile office setup in your RV with these essential tips. From connectivity solutions to workspace organization, learn how to maintain productivity while enjoying the freedom of RV living.'
+    },
+    // MODIFIED: Added new blog post for smart-rv-security-systems
+    {
+      category: 'tech',
+      author: {
+        initials: 'SS',
+        name: 'Security Specialist'
+      },
+      title: 'Smart RV Security Systems: Peace of Mind on the Road',
+      description: 'Explore the latest advancements in RV security to protect your mobile home.',
+      image: '/lovable-uploads/24586e9a-422f-45ee-aaaa-2ffa5f0e2274.png', // Using an existing relevant image
+      slug: 'smart-rv-security-systems',
+      content: 'Ensuring the security of your RV is paramount, whether you\'re on a remote adventure or parked at a bustling campsite. Modern smart RV security systems offer a range of features, from advanced surveillance cameras and motion detectors to smart locks and real-time alerts sent directly to your smartphone. Discover how these technologies can provide you with peace of mind, allowing you to fully enjoy your travels without worrying about the safety of your mobile home and belongings. We delve into the key components of a robust RV security setup, installation tips, and how to choose the system that best fits your needs and budget.'
     }
   ];
 
@@ -203,3 +217,4 @@ const BlogPost = () => {
 };
 
 export default BlogPost;
+
