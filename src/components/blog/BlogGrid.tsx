@@ -1,41 +1,21 @@
+
 import React from 'react';
 import BlogPostCard from './BlogPostCard';
+import { blogPosts } from '@/data/blogPosts'; // MODIFIED: Import blogPosts
+import { BlogPost } from '@/types/blog'; // MODIFIED: Import BlogPost type for consistency
 
 interface BlogGridProps {
   activeCategory: 'all' | 'tech' | 'travel';
 }
 
 const BlogGrid = ({ activeCategory }: BlogGridProps) => {
-  const posts = [
-    {
-      category: 'tech',
-      author: {
-        initials: 'JD',
-        name: 'John Doe'
-      },
-      title: 'The Future of Mobile Living',
-      description: 'Smart RVs are revolutionizing how we experience life on the road.',
-      image: '/lovable-uploads/80ea47f5-5b04-409f-8eb7-1da434a9e0de.png',
-      slug: 'future-of-mobile-living',
-      content: 'Smart RVs are revolutionizing how we experience life on the road. With advanced technology integration and innovative design solutions, the future of mobile living is here.'
-    },
-    {
-      category: 'travel',
-      author: {
-        initials: 'AS',
-        name: 'Alice Smith'
-      },
-      title: 'Sustainable Travel Redefined',
-      description: 'Where eco friendly design meets intelligent mobile home solutions.',
-      image: '/lovable-uploads/72144d64-5f93-4ee2-8187-e495f556f206.png',
-      slug: 'sustainable-travel-redefined',
-      content: 'The intersection of eco friendly design and intelligent mobile home solutions is creating a new paradigm in sustainable travel.'
-    }
-  ];
+  // MODIFIED: Use imported blogPosts instead of local definition
+  // const posts = [ ... ]; 
+  const posts: BlogPost[] = blogPosts; // Ensure 'posts' has the correct type
 
   const filteredPosts = activeCategory === 'all' 
     ? posts 
-    : posts.filter(post => post.category === activeCategory);
+    : posts.filter(post => post.category.toLowerCase() === activeCategory); // MODIFIED: Ensure category comparison is case-insensitive
 
   console.log("BlogGrid - Active Category:", activeCategory);
   console.log("BlogGrid - Filtered Posts:", filteredPosts);
@@ -44,12 +24,16 @@ const BlogGrid = ({ activeCategory }: BlogGridProps) => {
     <section className="space-y-8">
       <h2 className="text-3xl font-semibold text-white">Latest Posts</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {filteredPosts.map((post) => (
-          <BlogPostCard 
-            key={post.slug}
-            post={post}
-          />
-        ))}
+        {filteredPosts.length > 0 ? ( // MODIFIED: Add check for empty filteredPosts
+          filteredPosts.map((post) => (
+            <BlogPostCard 
+              key={post.slug}
+              post={post}
+            />
+          ))
+        ) : (
+          <p className="text-white/90 col-span-full text-center">No posts found in this category.</p>
+        )}
       </div>
     </section>
   );
