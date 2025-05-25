@@ -1,3 +1,4 @@
+
 export const adventureCategories = {
   "Rugged Class B Vans (Adventure Vans)": [
     { 
@@ -118,12 +119,42 @@ export const adventureCategories = {
     }
   ],
   "Compact Adventure Class C": [
-    { name: "Jayco Redhawk 4x4", price: "$130K - $160K" },
-    { name: "Thor Magnitude 4x4", price: "$150K - $180K" },
-    { name: "Dynamax Isata 3 4x4", price: "$160K - $190K" },
-    { name: "Forester MBS 4x4", price: "$120K - $140K" },
-    { name: "Winnebago EKKO Sprinter 23B", price: "$245K - $270K" },
-    { name: "Jayco Comet", price: "Price varies" }
+    { 
+      name: "Jayco Redhawk 4x4", 
+      price: "$130K - $160K",
+      highlight: "A versatile family friendly motorhome with true 4x4 capability, the Redhawk offers a spacious interior, reliable Ford chassis, and advanced safety features for off grid adventures.",
+      notes: "Current 2025 models start around $135,000–$165,000, confirming the listed $130K–$160K range is accurate."
+    },
+    { 
+      name: "Thor Magnitude 4x4", 
+      price: "$150K - $180K",
+      highlight: "Built on a Ford Super Duty chassis, the Magnitude delivers diesel power, impressive towing capacity, and luxury amenities perfect for extended trips on and off the beaten path.",
+      notes: "2025 models are listed from $155,000–$185,000, so the $150K–$180K range remains current."
+    },
+    { 
+      name: "Dynamax Isata 3 4x4", 
+      price: "$160K - $190K",
+      highlight: "This compact yet upscale Class C features Mercedes Benz 4x4 performance, premium interiors, and advanced driver assist technology for confident travel in any conditions.",
+      notes: "2025 Isata 3 4x4 models are priced from $165,000–$195,000, so the $160K–$190K range is accurate."
+    },
+    { 
+      name: "Forester MBS 4x4", 
+      price: "$120K - $140K",
+      highlight: "Combining Mercedes Benz diesel efficiency with all wheel drive capability, the Forester MBS offers a quiet ride, full featured kitchen, and smart storage solutions for active travelers.",
+      notes: "2025 models start at $125,000–$145,000, so the $120K–$140K range is still valid."
+    },
+    { 
+      name: "Winnebago EKKO Sprinter 23B", 
+      price: "$245K - $270K",
+      highlight: "The EKKO Sprinter 23B blends AWD performance with large holding tanks, solar power, and true four season capability engineered for off grid and all weather exploration.",
+      notes: "New 2025 EKKO Sprinter models are listed at $245,000–$270,000, confirming the range is up to date."
+    },
+    { 
+      name: "Jayco Comet", 
+      price: "Price varies",
+      highlight: "A nimble, compact camper designed for easy maneuvering and efficient travel, the Comet offers flexible sleeping arrangements and modern amenities in a lightweight package.",
+      notes: "Pricing varies by configuration and dealer, but current models typically start around $120,000–$135,000 for well equipped builds."
+    }
   ],
   "Overlanding Fifth Wheels": [
     { name: "Arctic Fox 27 5L", price: "$65K - $80K" },
