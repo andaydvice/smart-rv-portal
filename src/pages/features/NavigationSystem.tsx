@@ -21,7 +21,8 @@ const NavigationSystem = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-            <div className="bg-connectivity-darkBg p-8 rounded-lg border border-gray-700">
+            {/* MODIFIED: Added text-left to this div */}
+            <div className="bg-connectivity-darkBg p-8 rounded-lg border border-gray-700 text-left">
               <h2 className="text-2xl font-semibold text-blue-400 mb-4">Smart Navigation Features</h2>
               <div className="text-gray-300 mb-6 space-y-4">
                 <p>Experience next generation navigation with our advanced GPS system designed specifically for RVs.</p>
