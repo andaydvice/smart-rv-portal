@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Container } from "@/components/ui/container";
 import { Wrench, Sun, CloudRain, Shield } from "lucide-react";
@@ -111,7 +110,8 @@ const MaintenanceSection = () => {
             </div>
             
             <div className="mt-6 p-4 md:p-6 bg-deeper-background/80 rounded-lg border border-ocean-blue/30">
-              <p className="italic text-white text-center">
+              {/* MODIFIED: Changed text-center to text-left */}
+              <p className="italic text-white text-left">
                 "Remember: Regular weather related maintenance is cheaper than emergency repairs. 
                 Your RV's resilience to weather extremes depends on your preventative care."
               </p>
