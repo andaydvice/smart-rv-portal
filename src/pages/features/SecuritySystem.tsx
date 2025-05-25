@@ -1,3 +1,4 @@
+
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Layout from "@/components/layout/Layout";
@@ -52,7 +53,7 @@ const SecuritySystem = () => {
                 <Lock className="h-6 w-6 text-blue-400 mb-4" />
                 <h3 className="text-xl font-semibold text-white mb-2">Smart Locks</h3>
                 <p className="text-gray-300 text-left">
-                  Seamlessly manage access from your smartphone, whether you’re inside or away from your RV. Receive real-time lock status updates and enjoy peace of mind with secure, encrypted control.
+                  Seamlessly manage access from your smartphone, whether you’re inside or away from your RV. Receive real time lock status updates and enjoy peace of mind with secure, encrypted control.
                 </p>
               </div>
 
@@ -68,7 +69,7 @@ const SecuritySystem = () => {
                 <Camera className="h-6 w-6 text-red-400 mb-4" />
                 <h3 className="text-xl font-semibold text-white mb-2">Video Surveillance</h3>
                 <p className="text-gray-300 text-left">
-                  Check live camera feeds anytime through the mobile app for on-the-go monitoring. All footage is securely encrypted, ensuring your privacy while keeping your RV safe.
+                  Check live camera feeds anytime through the mobile app for on the go monitoring. All footage is securely encrypted, ensuring your privacy while keeping your RV safe.
                 </p>
               </div>
 
@@ -84,7 +85,7 @@ const SecuritySystem = () => {
                 <MapPin className="h-6 w-6 text-lime-400 mb-4" />
                 <h3 className="text-xl font-semibold text-white mb-2">Geofencing Capabilities</h3>
                 <p className="text-gray-300 text-left">
-                  Enjoy hands-free security with geofencing. Your system automatically locks, unlocks, and arms or disarms based on your location, ensuring your RV is always protected when you come and go.
+                  Enjoy hands free security with geofencing. Your system automatically locks, unlocks, and arms or disarms based on your location, ensuring your RV is always protected when you come and go.
                 </p>
               </div>
             </div>
@@ -111,7 +112,7 @@ const SecuritySystem = () => {
               <Wrench className="h-6 w-6 text-orange-400 mb-4" />
               <h3 className="text-xl font-semibold text-white mb-2">Easy Installation and Compatibility</h3>
               <p className="text-gray-300 text-left">
-                Get started in minutes with our straightforward setup process. The system is compatible with most RV models and integrates seamlessly with existing equipment, making security upgrades hassle-free.
+                Get started in minutes with our straightforward setup process. The system is compatible with most RV models and integrates seamlessly with existing equipment, making security upgrades hassle free.
               </p>
             </div>
           </div>
