@@ -1,14 +1,59 @@
 export const adventureCategories = {
   "Rugged Class B Vans (Adventure Vans)": [
-    { name: "Winnebago Revel 4x4", price: "$185K - $210K" },
-    { name: "Storyteller Overland MODE 4x4", price: "$190K - $225K" },
-    { name: "Outside Van Custom Builds", price: "$180K - $350K" },
-    { name: "Advanced RV Custom 4x4", price: "$250K - $400K" },
-    { name: "Sportsmobile Classic 4x4", price: "$175K - $250K" },
-    { name: "Winnebago EKKO AWD", price: "$215K - $245K" },
-    { name: "Tiger Adventure Vehicles", price: "Price varies" },
-    { name: "27 North Venture 170", price: "Price varies" },
-    { name: "Airstream Interstate 19X", price: "Price varies" }
+    { 
+      name: "Winnebago Revel 4x4", 
+      price: "$185K - $210K",
+      highlight: "Built on a Mercedes-Benz Sprinter chassis, the Revel features true 4x4 capability, a power lift bed, and off-grid amenities for serious adventure seekers.",
+      notes: "Confirmed for new 2025 models"
+    },
+    { 
+      name: "Storyteller Overland MODE 4x4", 
+      price: "$190K - $225K",
+      highlight: "Known for its flexible “garage” space and modular interior, the MODE 4x4 blends rugged performance with luxury touches and advanced power systems.",
+      notes: "Matches current MSRP for new builds"
+    },
+    { 
+      name: "Outside Van Custom Builds", 
+      price: "$180K - $350K",
+      highlight: "Fully customizable interiors and robust off-road upgrades let you create a van uniquely tailored to your travel style and terrain preferences.",
+      notes: "Custom pricing varies by build and options"
+    },
+    { 
+      name: "Advanced RV Custom 4x4", 
+      price: "$250K - $400K",
+      highlight: "Premium craftsmanship, advanced lithium battery systems, and bespoke interiors deliver unmatched comfort and autonomy for extended journeys.",
+      notes: "Bespoke pricing, aligns with current market"
+    },
+    { 
+      name: "Sportsmobile Classic 4x4", 
+      price: "$175K - $250K",
+      highlight: "Legendary for its pop-top roof and heavy-duty 4WD system, the Classic is a favorite among overlanders seeking simplicity and durability.",
+      notes: "Consistent with current published prices"
+    },
+    { 
+      name: "Winnebago EKKO AWD", 
+      price: "$215K - $245K",
+      highlight: "Combines all-wheel drive with a compact footprint, full bathroom, and large gear garage—ideal for active adventurers.",
+      notes: "Matches current dealer listings"
+    },
+    { 
+      name: "Tiger Adventure Vehicles", 
+      price: "Price varies",
+      highlight: "Unique truck-based RVs with true off-road capability and customizable living spaces for remote exploration.",
+      notes: "Custom builds; pricing on request"
+    },
+    { 
+      name: "27 North Venture 170", 
+      price: "Price varies",
+      highlight: "Luxury meets performance in this Sprinter-based build, offering high-end finishes and advanced tech for discerning travelers.",
+      notes: "Custom builds; pricing on request"
+    },
+    { 
+      name: "Airstream Interstate 19X", 
+      price: "Price varies",
+      highlight: "Iconic Airstream design in a nimble package, featuring off-road tires, all-terrain upgrades, and a versatile interior.",
+      notes: "New model; pricing set by dealers/custom options"
+    }
   ],
   "Off Road Travel Trailers": [
     { name: "Black Series HQ19", price: "$70K - $85K" },

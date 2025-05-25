@@ -4,6 +4,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 interface ModelInfo {
   name: string;
   price: string;
+  highlight?: string; // MODIFIED: Added optional highlight
+  notes?: string;     // MODIFIED: Added optional notes
 }
 
 interface CategoryData {
@@ -52,9 +54,21 @@ const AdventureCategoryCard = ({ categories }: AdventureCategoryCardProps) => {
                         <h3 className="text-lg font-medium text-blue-200">
                           {model.name}
                         </h3>
-                        <p className="text-gray-300 mt-1">
+                        {/* MODIFIED: Added highlight display */}
+                        {model.highlight && (
+                          <p className="text-gray-400 mt-1 text-sm">
+                            {model.highlight}
+                          </p>
+                        )}
+                        <p className="text-gray-300 mt-2">
                           Starting at {model.price}
                         </p>
+                        {/* MODIFIED: Added notes display */}
+                        {model.notes && (
+                          <p className="text-gray-500 mt-1 text-xs italic">
+                            Note: {model.notes}
+                          </p>
+                        )}
                       </div>
                     ))}
                   </div>
