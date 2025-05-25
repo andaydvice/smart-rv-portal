@@ -56,16 +56,66 @@ export const adventureCategories = {
     }
   ],
   "Off Road Travel Trailers": [
-    { name: "Black Series HQ19", price: "$70K - $85K" },
-    { name: "Bruder EXP 6", price: "$125K - $180K" },
-    { name: "Off Grid Trailers Expedition 2.0", price: "$45K - $65K" },
-    { name: "Taxa Outdoors Mantis", price: "$45K - $60K" },
-    { name: "Airstream Basecamp X", price: "$48K - $55K" },
-    { name: "Eclipse RV Overland Adventure Series Mojo 12BD", price: "Price varies" },
-    { name: "inTech OVR Expedition", price: "Price varies" },
-    { name: "Taxa Outdoors TigerMoth", price: "$27,900" },
-    { name: "Vorsheer XOC Extreme Overland Camper", price: "$49,995" },
-    { name: "nüCamp RV Tab S Teardrop Camper", price: "$31,523" }
+    { 
+      name: "Black Series HQ19", 
+      price: "$70K – $85K",
+      highlight: "Engineered for serious off road adventures, the HQ19 features a rugged galvanized chassis, independent suspension, and a luxury interior for comfort wherever you roam.",
+      notes: "New 2025 models."
+    },
+    { 
+      name: "Bruder EXP 6", 
+      price: "$125K – $180K",
+      highlight: "This premium expedition trailer offers high ground clearance, advanced suspension, and a lightweight composite body for smooth towing and superior off road performance.",
+      notes: "Custom options affecting final price."
+    },
+    { 
+      name: "Off Grid Trailers Expedition 2.0", 
+      price: "$45K – $65K",
+      highlight: "All metal construction, a drop down outdoor kitchen, queen bed, and robust off grid power make this trailer ideal for extended remote camping.",
+      notes: "New models list in this range. Used 2022 models sell for ~$27K."
+    },
+    { 
+      name: "Taxa Outdoors Mantis", 
+      price: "$45K – $60K",
+      highlight: "Lightweight, garage storable, and designed by a former NASA engineer, the Mantis comfortably sleeps four and features a pop up roof, full kitchen, and off road Overland Edition option.",
+      notes: "2025 models start at $45,750."
+    },
+    { 
+      name: "Airstream Basecamp X", 
+      price: "$48K – $55K",
+      highlight: "Compact yet rugged, the Basecamp X offers off road tires, all weather protection, and flexible lounge to bed conversions, perfect for explorers seeking versatility.",
+      notes: "2025 Basecamp 20X MSRP is $68,150; Basecamp X models typically start in this range."
+    },
+    { 
+      name: "Eclipse RV Overland Adventure Series Mojo 12BD", 
+      price: "$29,995+",
+      highlight: "A compact toy hauler with a large garage, off road tires, and a versatile interior—ideal for bringing ATVs or bikes on your next adventure.",
+      notes: "Base MSRP for new models. Price varies with custom builds."
+    },
+    { 
+      name: "inTech OVR Expedition", 
+      price: "$67,096",
+      highlight: "Features a heated underbelly, all season insulation, solar power, and a spacious interior with a skylight—built for off grid comfort and durability.",
+      notes: "2025 models currently listed at this price."
+    },
+    { 
+      name: "Taxa Outdoors TigerMoth", 
+      price: "$22,750 – $27,900",
+      highlight: "Ultra lightweight and towable by many 4 cylinder vehicles, the TigerMoth offers a flexible sleeping area and ample storage for minimalist adventurers.",
+      notes: "2025 base price. Some models start around $27,900."
+    },
+    { 
+      name: "Vorsheer XOC Extreme Overland Camper", 
+      price: "$32,920 – $49,995",
+      highlight: "Built for the toughest terrains, the XOC features aggressive off road tires, a robust steel frame, and customizable interiors for true overland capability.",
+      notes: "Recent listings for new and recent models."
+    },
+    { 
+      name: "nüCamp RV Tab S Teardrop Camper",
+      price: "$31,523+",
+      highlight: "Compact and stylish, the Tab S offers off road tires, a comfortable sleeping area, and a fully equipped kitchen—perfect for couples or solo travelers.",
+      notes: "2025 models start at this price. Special editions priced higher."
+    }
   ],
   "Compact Adventure Class C": [
     { name: "Jayco Redhawk 4x4", price: "$130K - $160K" },
