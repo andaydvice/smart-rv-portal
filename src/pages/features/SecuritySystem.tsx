@@ -1,4 +1,3 @@
-
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Layout from "@/components/layout/Layout";
@@ -25,13 +24,22 @@ const SecuritySystem = () => {
               <h2 className="text-2xl font-semibold text-emerald-400 mb-4">Advanced Security Features</h2>
               <div className="text-gray-300 mb-6 space-y-4">
                 <p className="text-left">
-                  Our comprehensive security system provides peace of mind with state of the art technology.
+                  Experience unparalleled peace of mind on every adventure with our cutting edge RV security system.
                 </p>
                 <p className="text-left">
-                  Round the clock monitoring ensures constant protection.
+                  This comprehensive solution integrates state of the art technology to safeguard your mobile home.
                 </p>
                 <p className="text-left">
-                  From smart locks to motion detection, your RV is protected wherever your journey takes you.
+                  Enjoy the confidence that comes with round the clock monitoring, providing constant vigilance over your valuable asset.
+                </p>
+                <p className="text-left">
+                  Our system intelligently combines features like smart locks, advanced motion detection, and high definition cameras.
+                </p>
+                <p className="text-left">
+                  This ensures robust protection whether you are parked at a bustling campsite or exploring remote landscapes.
+                </p>
+                <p className="text-left">
+                  Your RV remains secure, allowing you to fully immerse yourself in the journey ahead.
                 </p>
               </div>
               <img 
