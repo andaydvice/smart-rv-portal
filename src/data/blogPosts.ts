@@ -99,5 +99,31 @@ export const blogPosts: BlogPost[] = [
     image: '/lovable-uploads/24586e9a-422f-45ee-aaaa-2ffa5f0e2274.png',
     slug: 'smart-rv-security-systems',
     content: 'Ensuring the security of your RV is paramount, whether you\'re on a remote adventure or parked at a bustling campsite. Modern smart RV security systems offer a range of features, from advanced surveillance cameras and motion detectors to smart locks and real-time alerts sent directly to your smartphone. Discover how these technologies can provide you with peace of mind, allowing you to fully enjoy your travels without worrying about the safety of your mobile home and belongings. We delve into the key components of a robust RV security setup, installation tips, and how to choose the system that best fits your needs and budget.'
+  },
+  // MODIFIED: Added new blog post for top-10-rv-parks-in-the-usa
+  {
+    category: 'travel',
+    author: {
+      initials: 'TP',
+      name: 'Travel Planner'
+    },
+    title: 'Top 10 RV Parks in the USA',
+    description: 'Discover the best RV parks across the United States for your next adventure.',
+    image: '/lovable-uploads/1e3c2aa7-d13d-4cbd-a98a-37066b326f1d.png', // Placeholder image
+    slug: 'top-10-rv-parks-in-the-usa',
+    content: 'Planning your next RV trip? Explore our curated list of the top 10 RV parks in the USA, offering stunning views, excellent amenities, and unforgettable experiences. From coastal retreats to mountain getaways, find the perfect spot for your mobile home.'
+  },
+  // MODIFIED: Added new blog post for solar-power-for-rvs
+  {
+    category: 'tech',
+    author: {
+      initials: 'SE',
+      name: 'Solar Enthusiast'
+    },
+    title: 'Comprehensive Guide to Solar Power for RVs',
+    description: 'Everything you need to know about harnessing solar energy for your RV lifestyle.',
+    image: '/lovable-uploads/51ac2438-08c7-47ee-b56d-876aa3bbdc80.png', // Placeholder image (re-used existing solar image)
+    slug: 'solar-power-for-rvs',
+    content: 'Unlock the potential of solar power for your RV. This comprehensive guide covers panel types, battery systems, installation tips, and how to optimize your setup for off-grid adventures. Make your RV travels more sustainable and self-sufficient with solar energy.'
   }
 ];
