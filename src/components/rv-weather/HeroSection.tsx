@@ -12,8 +12,8 @@ const HeroSection = () => {
   return (
     <div className="relative w-full h-[600px] md:h-[80vh] max-h-[800px] overflow-hidden">
       <img
-        src="/lovable-uploads/3efce4a3-d382-4b88-b33e-f96074fb7311.png"
-        alt="Mountain road with sunset sky for SmartRV Weather Guide"
+        src="/lovable-uploads/b1b0e81e-825c-4f31-aaab-5d7c50e67122.png"
+        alt="Woman reading RV Weather Guide book with RV in background"
         className="absolute inset-0 w-full h-full object-cover"
         loading="eager"
         fetchPriority="high"
