@@ -12,10 +12,17 @@ interface BlogPostContentProps {
 }
 
 export const BlogPostContent = ({ category, title, author, content }: BlogPostContentProps) => {
-  // MODIFIED: Split content into paragraphs and render each in a <p> tag
-  // Assuming paragraphs are separated by one or more newline characters.
-  // We'll split by one or more newlines and filter out any empty strings that might result from multiple newlines together.
-  const paragraphs = content.split(/\n+/).filter(paragraph => paragraph.trim() !== '');
+  // MODIFIED: Split content into sentences and render each as a paragraph.
+  // 1. Replace all newline characters (and multiple spaces) with a single space to normalize the text.
+  const normalizedContent = content.replace(/[\n\r]+/g, ' ').replace(/\s{2,}/g, ' ');
+  
+  // 2. Split the content by sentence-ending punctuation (. ! ?).
+  // This regex tries to capture sentences including their terminators.
+  // It matches sequences of non-terminators followed by a terminator, OR a sequence of non-terminators at the end of the string.
+  const sentences = normalizedContent.match(/[^.?!]+[.?!]\s*|[^.?!]+$/g) || [];
+  
+  // 3. Trim whitespace from each sentence and filter out any empty strings.
+  const paragraphs = sentences.map(sentence => sentence.trim()).filter(sentence => sentence.length > 0);
 
   return (
     <div className="space-y-4">
@@ -36,7 +43,6 @@ export const BlogPostContent = ({ category, title, author, content }: BlogPostCo
         <span>{author.name}</span>
       </div>
 
-      {/* MODIFIED: Render content as paragraphs */}
       <div className="text-white/90 leading-relaxed space-y-4">
         {paragraphs.map((paragraph, index) => (
           <p key={index}>{paragraph}</p>
@@ -45,4 +51,3 @@ export const BlogPostContent = ({ category, title, author, content }: BlogPostCo
     </div>
   );
 };
-
