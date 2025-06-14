@@ -1,3 +1,4 @@
+
 interface Author {
   initials: string;
   name: string;
@@ -11,6 +12,11 @@ interface BlogPostContentProps {
 }
 
 export const BlogPostContent = ({ category, title, author, content }: BlogPostContentProps) => {
+  // MODIFIED: Split content into paragraphs and render each in a <p> tag
+  // Assuming paragraphs are separated by one or more newline characters.
+  // We'll split by one or more newlines and filter out any empty strings that might result from multiple newlines together.
+  const paragraphs = content.split(/\n+/).filter(paragraph => paragraph.trim() !== '');
+
   return (
     <div className="space-y-4">
       <div className="flex items-center gap-4">
@@ -30,9 +36,13 @@ export const BlogPostContent = ({ category, title, author, content }: BlogPostCo
         <span>{author.name}</span>
       </div>
 
-      <div className="text-white/90 leading-relaxed">
-        {content}
+      {/* MODIFIED: Render content as paragraphs */}
+      <div className="text-white/90 leading-relaxed space-y-4">
+        {paragraphs.map((paragraph, index) => (
+          <p key={index}>{paragraph}</p>
+        ))}
       </div>
     </div>
   );
 };
+
