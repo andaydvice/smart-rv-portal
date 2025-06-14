@@ -11,8 +11,8 @@ interface BlogPostContentProps {
 }
 
 export const BlogPostContent = ({ category, title, author, content }: BlogPostContentProps) => {
-  // Split content by one or more newline characters to respect paragraph breaks.
-  const paragraphs = content.split(/\n+/).filter(paragraph => paragraph.trim() !== '');
+  // Split content by double newlines to respect paragraph breaks as authored.
+  const paragraphs = content.split(/\n\n+/).filter(paragraph => paragraph.trim() !== '');
 
   return (
     <div className="space-y-4">
