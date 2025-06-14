@@ -1,4 +1,5 @@
 
+```typescript
 interface Author {
   initials: string;
   name: string;
@@ -12,17 +13,10 @@ interface BlogPostContentProps {
 }
 
 export const BlogPostContent = ({ category, title, author, content }: BlogPostContentProps) => {
-  // MODIFIED: Split content into sentences and render each as a paragraph.
-  // 1. Replace all newline characters (and multiple spaces) with a single space to normalize the text.
-  const normalizedContent = content.replace(/[\n\r]+/g, ' ').replace(/\s{2,}/g, ' ');
-  
-  // 2. Split the content by sentence-ending punctuation (. ! ?).
-  // This regex tries to capture sentences including their terminators.
-  // It matches sequences of non-terminators followed by a terminator, OR a sequence of non-terminators at the end of the string.
-  const sentences = normalizedContent.match(/[^.?!]+[.?!]\s*|[^.?!]+$/g) || [];
-  
-  // 3. Trim whitespace from each sentence and filter out any empty strings.
-  const paragraphs = sentences.map(sentence => sentence.trim()).filter(sentence => sentence.length > 0);
+  // MODIFIED: Split content by one or more newline characters to respect existing paragraph breaks.
+  // This will treat sequences of one or more newlines as a paragraph separator.
+  // Empty strings resulting from multiple newlines together are filtered out.
+  const paragraphs = content.split(/\n+/).filter(paragraph => paragraph.trim() !== '');
 
   return (
     <div className="space-y-4">
@@ -51,3 +45,5 @@ export const BlogPostContent = ({ category, title, author, content }: BlogPostCo
     </div>
   );
 };
+
+```
