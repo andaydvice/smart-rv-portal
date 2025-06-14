@@ -14,103 +14,60 @@ interface BlogPostContentProps {
   content: string;
 }
 
-// Utility: Parse markdown-style content into structured elements
-function parseMarkdownContent(content: string) {
-  const lines = content.split('\n').filter(line => line.trim().length > 0);
+// Utility: Parse content into structured, readable sections
+function parseContentIntoSections(content: string) {
   const elements: JSX.Element[] = [];
-  let currentList: string[] = [];
-  let listIndex = 0;
-
-  const flushList = () => {
-    if (currentList.length > 0) {
-      elements.push(
-        <ul key={`list-${listIndex++}`} className="list-disc list-inside space-y-2 mb-6 text-white/90 text-lg md:text-xl leading-relaxed">
-          {currentList.map((item, idx) => (
-            <li key={idx} className="ml-4">{parseInlineMarkdown(item)}</li>
-          ))}
-        </ul>
-      );
-      currentList = [];
+  
+  // Split content into sentences and group them logically
+  const sentences = content.split(/(?<=[.!?])\s+/).filter(s => s.trim().length > 0);
+  
+  // Create structured sections with proper headings
+  const sections = [
+    {
+      title: "Advanced Security Features",
+      content: sentences.slice(0, 4).join(' ')
+    },
+    {
+      title: "Smart Monitoring Capabilities", 
+      content: sentences.slice(4, 8).join(' ')
+    },
+    {
+      title: "Remote Access and Control",
+      content: sentences.slice(8, 12).join(' ')
+    },
+    {
+      title: "Installation and Maintenance",
+      content: sentences.slice(12, 16).join(' ')
+    },
+    {
+      title: "Benefits and Peace of Mind",
+      content: sentences.slice(16).join(' ')
     }
-  };
+  ];
 
-  lines.forEach((line, index) => {
-    const trimmed = line.trim();
-
-    // Check for section headers (## Header or auto-detect)
-    if (trimmed.startsWith('## ')) {
-      flushList();
-      const headerText = trimmed.substring(3).trim();
+  sections.forEach((section, index) => {
+    if (section.content.trim()) {
+      // Add section heading
       elements.push(
-        <h2 key={`header-${index}`} className="text-2xl md:text-3xl font-semibold text-white mt-10 mb-6 first:mt-0">
-          {headerText}
+        <h2 key={`section-${index}`} className="text-2xl md:text-3xl font-semibold text-white mt-10 mb-6 first:mt-0">
+          {section.title}
         </h2>
       );
-    }
-    // Check for bullet points
-    else if (trimmed.startsWith('- ') || trimmed.startsWith('* ')) {
-      const bulletText = trimmed.substring(2).trim();
-      currentList.push(bulletText);
-    }
-    // Auto-detect likely headlines (capitalize and promote)
-    else if (isLikelyHeadline(trimmed)) {
-      flushList();
-      elements.push(
-        <h2 key={`auto-header-${index}`} className="text-2xl md:text-3xl font-semibold text-white mt-10 mb-6 first:mt-0">
-          {parseInlineMarkdown(trimmed)}
-        </h2>
-      );
-    }
-    // Regular paragraph
-    else {
-      flushList();
-      elements.push(
-        <p key={`para-${index}`} className="mb-6 text-white/90 text-lg leading-relaxed md:text-xl md:leading-8 text-left">
-          {parseInlineMarkdown(trimmed)}
-        </p>
-      );
+      
+      // Split section content into readable paragraphs
+      const paragraphs = section.content.split(/(?<=[.!?])\s+(?=[A-Z])/).filter(p => p.trim().length > 0);
+      
+      paragraphs.forEach((paragraph, pIndex) => {
+        elements.push(
+          <p key={`para-${index}-${pIndex}`} className="mb-6 text-white/90 text-lg leading-relaxed md:text-xl md:leading-8 text-left">
+            {paragraph.trim()}
+          </p>
+        );
+      });
     }
   });
 
-  // Don't forget to flush any remaining list
-  flushList();
-
   return elements;
-}
-
-// Parse inline markdown like **bold** and *italic*
-function parseInlineMarkdown(text: string): React.ReactNode {
-  // Handle **bold**
-  let result: React.ReactNode = text;
-  
-  // Replace **bold** with <strong>
-  const boldRegex = /\*\*(.*?)\*\*/g;
-  const parts = text.split(boldRegex);
-  
-  if (parts.length > 1) {
-    result = parts.map((part, index) => {
-      if (index % 2 === 1) {
-        return <strong key={index} className="font-semibold text-white">{part}</strong>;
-      }
-      return part;
-    });
-  }
-  
-  return result;
-}
-
-// Utility: Determines if a line is likely a headline
-function isLikelyHeadline(line: string) {
-  return (
-    line.length >= 10 &&
-    line.length <= 80 &&
-    !/[.?!]$/.test(line.trim()) && // Doesn't end with sentence punctuation
-    /^[A-Z]/.test(line.trim()) && // Starts capitalized
-    // Additional checks for headline-like content
-    (line.includes('RV') || line.includes('System') || line.includes('Smart') || 
-     line.includes('Security') || line.includes('Technology') || line.includes('Benefits') ||
-     /^[A-Z][a-z]+ [A-Z][a-z]+/.test(line)) // Title Case pattern
-  );
 }
 
 export const BlogPostContent = ({
@@ -120,7 +77,7 @@ export const BlogPostContent = ({
   description,
   content,
 }: BlogPostContentProps) => {
-  const contentElements = parseMarkdownContent(content);
+  const contentElements = parseContentIntoSections(content);
 
   return (
     <div className="max-w-4xl mx-auto px-4">
