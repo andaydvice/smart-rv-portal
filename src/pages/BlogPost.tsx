@@ -204,6 +204,7 @@ const BlogPost = () => {
             category={post.category}
             title={post.title}
             author={post.author}
+            description={post.description} // Pass the subheadline
             content={post.content}
           />
         </div>
