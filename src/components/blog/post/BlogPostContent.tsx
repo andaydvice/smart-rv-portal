@@ -1,5 +1,3 @@
-
-```typescript
 interface Author {
   initials: string;
   name: string;
@@ -13,9 +11,7 @@ interface BlogPostContentProps {
 }
 
 export const BlogPostContent = ({ category, title, author, content }: BlogPostContentProps) => {
-  // MODIFIED: Split content by one or more newline characters to respect existing paragraph breaks.
-  // This will treat sequences of one or more newlines as a paragraph separator.
-  // Empty strings resulting from multiple newlines together are filtered out.
+  // Split content by one or more newline characters to respect paragraph breaks.
   const paragraphs = content.split(/\n+/).filter(paragraph => paragraph.trim() !== '');
 
   return (
@@ -45,5 +41,3 @@ export const BlogPostContent = ({ category, title, author, content }: BlogPostCo
     </div>
   );
 };
-
-```
