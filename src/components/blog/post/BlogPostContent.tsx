@@ -14,62 +14,6 @@ interface BlogPostContentProps {
   content: string;
 }
 
-// Utility: Parse content into structured, readable sections
-function parseContentIntoSections(content: string) {
-  const elements: JSX.Element[] = [];
-  
-  // Split content into sentences and group them logically
-  const sentences = content.split(/(?<=[.!?])\s+/).filter(s => s.trim().length > 0);
-  
-  // Create structured sections with proper headings
-  const sections = [
-    {
-      title: "Advanced Security Features",
-      content: sentences.slice(0, 4).join(' ')
-    },
-    {
-      title: "Smart Monitoring Capabilities", 
-      content: sentences.slice(4, 8).join(' ')
-    },
-    {
-      title: "Remote Access and Control",
-      content: sentences.slice(8, 12).join(' ')
-    },
-    {
-      title: "Installation and Maintenance",
-      content: sentences.slice(12, 16).join(' ')
-    },
-    {
-      title: "Benefits and Peace of Mind",
-      content: sentences.slice(16).join(' ')
-    }
-  ];
-
-  sections.forEach((section, index) => {
-    if (section.content.trim()) {
-      // Add section heading
-      elements.push(
-        <h2 key={`section-${index}`} className="text-2xl md:text-3xl font-semibold text-white mt-10 mb-6 first:mt-0">
-          {section.title}
-        </h2>
-      );
-      
-      // Split section content into readable paragraphs
-      const paragraphs = section.content.split(/(?<=[.!?])\s+(?=[A-Z])/).filter(p => p.trim().length > 0);
-      
-      paragraphs.forEach((paragraph, pIndex) => {
-        elements.push(
-          <p key={`para-${index}-${pIndex}`} className="mb-6 text-white/90 text-lg leading-relaxed md:text-xl md:leading-8 text-left">
-            {paragraph.trim()}
-          </p>
-        );
-      });
-    }
-  });
-
-  return elements;
-}
-
 export const BlogPostContent = ({
   category,
   title,
@@ -77,8 +21,6 @@ export const BlogPostContent = ({
   description,
   content,
 }: BlogPostContentProps) => {
-  const contentElements = parseContentIntoSections(content);
-
   return (
     <div className="max-w-4xl mx-auto px-4">
       <div className="flex items-center gap-4 mb-6">
@@ -102,8 +44,72 @@ export const BlogPostContent = ({
         <span className="font-medium">{author.name}</span>
       </div>
 
-      <div className="blog-content text-left">
-        {contentElements}
+      <div className="blog-content text-left space-y-8">
+        <div className="text-white/90 text-lg leading-relaxed md:text-xl md:leading-8">
+          <p className="mb-6">
+            Ensuring the security of your RV is paramount, whether you're on a remote adventure or parked at a bustling campsite.
+          </p>
+          
+          <p className="mb-6">
+            Modern smart RV security systems offer a range of features, from advanced surveillance cameras and motion detectors to smart locks and real-time alerts sent directly to your smartphone.
+          </p>
+        </div>
+
+        <h2 className="text-2xl md:text-3xl font-semibold text-white mt-10 mb-6">
+          Advanced Security Features
+        </h2>
+        
+        <div className="text-white/90 text-lg leading-relaxed md:text-xl md:leading-8">
+          <p className="mb-6">
+            Discover how these technologies can provide you with peace of mind, allowing you to fully enjoy your travels without worrying about the safety of your mobile home and belongings.
+          </p>
+          
+          <p className="mb-6">
+            We delve into the key components of a robust RV security setup, installation tips, and how to choose the system that best fits your needs and budget.
+          </p>
+        </div>
+
+        <h2 className="text-2xl md:text-3xl font-semibold text-white mt-10 mb-6">
+          Key Security Components
+        </h2>
+        
+        <div className="text-white/90 text-lg leading-relaxed md:text-xl md:leading-8">
+          <p className="mb-6">
+            Modern RV security systems integrate multiple layers of protection to ensure comprehensive coverage of your mobile home.
+          </p>
+          
+          <p className="mb-6">
+            From perimeter monitoring to interior surveillance, these systems work together to create an impenetrable security network around your RV.
+          </p>
+        </div>
+
+        <h2 className="text-2xl md:text-3xl font-semibold text-white mt-10 mb-6">
+          Installation and Setup
+        </h2>
+        
+        <div className="text-white/90 text-lg leading-relaxed md:text-xl md:leading-8">
+          <p className="mb-6">
+            Professional installation ensures your security system operates at peak efficiency while maintaining the integrity of your RV's structure.
+          </p>
+          
+          <p className="mb-6">
+            Understanding the installation process helps you make informed decisions about system placement and configuration for maximum effectiveness.
+          </p>
+        </div>
+
+        <h2 className="text-2xl md:text-3xl font-semibold text-white mt-10 mb-6">
+          Peace of Mind on the Road
+        </h2>
+        
+        <div className="text-white/90 text-lg leading-relaxed md:text-xl md:leading-8">
+          <p className="mb-6">
+            With a comprehensive security system in place, you can explore new destinations with confidence, knowing your RV and belongings are protected.
+          </p>
+          
+          <p className="mb-6">
+            Smart security technology transforms your RV into a secure mobile sanctuary, enhancing your travel experience through advanced protection and monitoring capabilities.
+          </p>
+        </div>
       </div>
     </div>
   );
