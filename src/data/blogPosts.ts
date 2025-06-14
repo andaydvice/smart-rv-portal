@@ -1,5 +1,4 @@
 
-
 import { BlogPost } from '@/types/blog';
 
 export const blogPosts: BlogPost[] = [
@@ -196,4 +195,3 @@ The peace of mind that comes from a comprehensive smart security system allows y
     content: 'Unlock the potential of solar power for your RV. This comprehensive guide covers panel types, battery systems, installation tips, and how to optimize your setup for off-grid adventures. Make your RV travels more sustainable and self-sufficient with solar energy.'
   }
 ];
-
