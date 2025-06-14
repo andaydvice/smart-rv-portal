@@ -1,4 +1,5 @@
 
+
 import { BlogPost } from '@/types/blog';
 
 export const blogPosts: BlogPost[] = [
@@ -98,7 +99,7 @@ export const blogPosts: BlogPost[] = [
     description: 'Complete guide to smart RV security systems with practical tips for protecting your mobile home and belongings.',
     image: '/lovable-uploads/24586e9a-422f-45ee-aaaa-2ffa5f0e2274.png',
     slug: 'smart-rv-security-systems',
-    content: 'Ensuring the security of your RV is paramount whether you are parked at a remote campsite or staying at a bustling RV park.
+    content: `Ensuring the security of your RV is paramount whether you are parked at a remote campsite or staying at a bustling RV park.
 
 Modern smart RV security systems offer comprehensive protection that goes far beyond traditional locks and alarms.
 
@@ -166,7 +167,7 @@ Smart lighting integration can automatically turn lights on and off to simulate 
 
 Door and window sensors provide comprehensive coverage of all entry points ensuring that every potential access route is monitored.
 
-The peace of mind that comes from a comprehensive smart security system allows you to fully enjoy your RV adventures without constantly worrying about the safety of your mobile home and belongings.'
+The peace of mind that comes from a comprehensive smart security system allows you to fully enjoy your RV adventures without constantly worrying about the safety of your mobile home and belongings.`
   },
   // MODIFIED: Added new blog post for top-10-rv-parks-in-the-usa
   {
@@ -195,3 +196,4 @@ The peace of mind that comes from a comprehensive smart security system allows y
     content: 'Unlock the potential of solar power for your RV. This comprehensive guide covers panel types, battery systems, installation tips, and how to optimize your setup for off-grid adventures. Make your RV travels more sustainable and self-sufficient with solar energy.'
   }
 ];
+
