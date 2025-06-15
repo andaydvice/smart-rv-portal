@@ -2,8 +2,8 @@ export const blogPosts = [
   {
     category: 'tech',
     author: {
-      initials: 'JD',
-      name: 'John Doe'
+      initials: 'TE',
+      name: 'Tech Editor'
     },
     title: 'The Future of Mobile Living',
     description: 'How smart technology is redefining convenience, safety, and connectivity for life on the road.',
@@ -42,7 +42,7 @@ The future of mobile living is intelligent, connected, and incredibly comfortabl
     content: `The intersection of eco friendly design and intelligent mobile home solutions is creating a new paradigm in sustainable travel.`
   },
   {
-    category: 'Culture',
+    category: 'culture',
     author: {
       initials: 'ST',
       name: 'Smart Tech'
@@ -56,7 +56,7 @@ The future of mobile living is intelligent, connected, and incredibly comfortabl
 Our innovative systems seamlessly integrate automation, monitoring, and control features to enhance every aspect of your RV experience.`
   },
   {
-    category: 'Technology',
+    category: 'tech',
     author: {
       initials: 'IS',
       name: 'Indoor Storage'
