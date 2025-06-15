@@ -6,12 +6,16 @@ interface OptimizedImageProps {
   src: string;
   alt: string;
   className?: string;
+  width?: number;
+  height?: number;
 }
 
 export const OptimizedImage: React.FC<OptimizedImageProps> = ({ 
   src, 
   alt, 
-  className = "" 
+  className = "",
+  width,
+  height
 }) => {
   return (
     <LazyImage 
@@ -19,7 +23,9 @@ export const OptimizedImage: React.FC<OptimizedImageProps> = ({
       alt={alt}
       className={className}
       loading="lazy"
-      fetchpriority="high"
+      fetchPriority="high"
+      width={width}
+      height={height}
     />
   );
 };
