@@ -1,3 +1,4 @@
+
 export const blogPosts = [
   {
     category: 'tech',
@@ -109,7 +110,7 @@ With your power audit complete, you can select components that match your needs.
 - **Rigid vs. Flexible:** Rigid panels are more durable and typically have a longer lifespan. Flexible panels are lightweight and can be mounted on curved roofs, but they are less durable and have a shorter warranty.
 
 ### Batteries
-- **Lead-Acid (AGM/Gel):** A proven, budget-friendly technology. However, they are heavy, have a shorter lifespan, and you should only use about 50% of their rated capacity to avoid damage.
+- **Lead Acid (AGM/Gel):** A proven, budget friendly technology. However, they are heavy, have a shorter lifespan, and you should only use about 50% of their rated capacity to avoid damage.
 - **Lithium (LiFePO4):** The premium choice. They are lightweight, have a much longer lifespan (10x or more), can be discharged up to 80-100% without damage, and maintain a more stable voltage. While the upfront cost is higher, they often have a lower total cost of ownership.
 
 ### Charge Controllers
@@ -117,16 +118,16 @@ With your power audit complete, you can select components that match your needs.
 - **MPPT (Maximum Power Point Tracking):** A more advanced and efficient controller that can convert excess voltage into more charging amps. MPPT controllers can boost your solar harvest by up to 30%, making them essential for most RV systems.
 
 ### Inverters
-- **Modified Sine Wave:** A budget option that works for simple electronics but can damage or cause issues with sensitive devices like microwaves, variable-speed tools, and some laptops.
-- **Pure Sine Wave:** Produces clean, high-quality AC power identical to what you get from a wall outlet at home. It's the recommended and safer choice for any modern RV setup to protect your valuable electronics.
+- **Modified Sine Wave:** A budget option that works for simple electronics but can cause issues with sensitive devices like microwaves, variable speed tools, and some laptops.
+- **Pure Sine Wave:** Produces clean, high quality AC power identical to what you get from a wall outlet at home. It's the recommended and safer choice for any modern RV setup to protect your valuable electronics.
 
 ## 4. Installation Best Practices
 
 Proper installation is key to a safe and efficient system. If you are not comfortable with electrical wiring, hire a professional.
 
 - **Panel Wiring:** Panels can be wired in series (increases voltage), parallel (increases amperage), or a combination of both. Your choice depends on your charge controller's specifications and your desired performance characteristics.
-- **Mounting:** Securely mount panels to your RV roof using appropriate brackets. Ensure there is a small air gap underneath rigid panels for cooling, as heat reduces efficiency. Seal all roof penetrations thoroughly with a high-quality RV sealant.
-- **Component Location:** Keep wire runs as short as possible, especially between the charge controller and batteries. Install batteries and inverters in a well-ventilated compartment.
+- **Mounting:** Securely mount panels to your RV roof using appropriate brackets. Ensure there is a small air gap underneath rigid panels for cooling, as heat reduces efficiency. Seal all roof penetrations thoroughly with a high quality RV sealant.
+- **Component Location:** Keep wire runs as short as possible, especially between the charge controller and batteries. Install batteries and inverters in a well ventilated compartment.
 - **Safety First:** Use correctly sized wires to handle the current. Install fuses or circuit breakers at key points: between panels and controller, controller and batteries, and batteries and inverter. A master battery disconnect switch is also highly recommended.
 
 ## 5. Getting the Most from Your Solar Setup
@@ -136,7 +137,7 @@ Your system is installed, but a few habits can maximize its performance.
 - **Park in the Sun:** It sounds obvious, but actively seek out sunny spots when camping.
 - **Keep Panels Clean:** A layer of dust, pollen, or bird droppings can significantly reduce output. Clean your panels regularly with water and a soft cloth.
 - **Tilt Your Panels:** If you have tiltable mounts, angling your panels directly towards the sun (especially in winter) can dramatically increase your power generation.
-- **Monitor Your System:** Use a battery monitor (like a Victron BMV or SmartShunt) to get an accurate reading of your battery's state of charge and your real-time power consumption. This helps you understand your usage patterns and live within your energy budget.
+- **Monitor Your System:** Use a battery monitor (like a Victron BMV or SmartShunt) to get an accurate reading of your battery's state of charge and your real time power consumption. This helps you understand your usage patterns and live within your energy budget.
 
 Investing in a solar power system is one of the most rewarding upgrades for any RVer. It unlocks a new level of freedom, allowing you to explore more remote and beautiful places without being tethered to a power pedestal. With careful planning and a quality installation, you can enjoy reliable, clean, and quiet power on all your adventures.`
   },
@@ -168,7 +169,7 @@ Investing in a solar power system is one of the most rewarding upgrades for any 
 
 RVs face unique security challenges compared to traditional homes. Their mobility, valuable contents, and often remote parking locations make them attractive targets for theft and vandalism.
 
-Common security threats include break-ins while parked in campgrounds, theft of external equipment like bikes and generators, catalytic converter theft, and unauthorized access when the RV is unattended for extended periods.
+Common security threats include break ins while parked in campgrounds, theft of external equipment like bikes and generators, catalytic converter theft, and unauthorized access when the RV is unattended for extended periods.
 
 The financial impact extends beyond replacing stolen items. Insurance claims, increased premiums, and the emotional stress of violation can significantly affect your RV lifestyle.
 
@@ -222,7 +223,7 @@ Automation features learn your routines and adjust security settings accordingly
 
 Emergency response services can dispatch security personnel, police, or emergency services based on the type of alert received.
 
-Monitoring costs typically range from $20-50 monthly but provide invaluable peace of mind, especially during extended travel or when RV is stored long term.
+Monitoring costs typically range from $20 to $50 monthly but provide invaluable peace of mind, especially during extended travel or when RV is stored long term.
 
 8. Maintenance and Updates
 
@@ -260,7 +261,7 @@ Located near the iconic Yellowstone National Park, this resort offers unparallel
 
 2. Disney's Fort Wilderness Resort, Florida  
 
-Experience the magic of Disney while enjoying spacious RV sites with full hookups. This family-friendly resort features pools, recreational activities, and direct access to Disney World parks. The combination of outdoor adventure and Disney magic creates unforgettable memories for families.
+Experience the magic of Disney while enjoying spacious RV sites with full hookups. This family friendly resort features pools, recreational activities, and direct access to Disney World parks. The combination of outdoor adventure and Disney magic creates unforgettable memories for families.
 
 3. Ocean Lakes Family Campground, South Carolina
 
@@ -276,7 +277,7 @@ Gateway to Zion National Park, this resort combines luxury accommodations with o
 
 6. Branson KOA Holiday, Missouri
 
-Located in the heart of Missouri's entertainment capital, this KOA provides easy access to Branson's theaters, attractions, and Silver Dollar City. Family-friendly amenities and spacious sites make it ideal for entertainment-focused vacations.
+Located in the heart of Missouri's entertainment capital, this KOA provides easy access to Branson's theaters, attractions, and Silver Dollar City. Family friendly amenities and spacious sites make it ideal for entertainment focused vacations.
 
 7. Grand Canyon Railway RV Park, Arizona
 
@@ -284,7 +285,7 @@ Experience the Grand Canyon while staying at this unique RV park connected to th
 
 8. Camping World Racing Resort, Florida
 
-This motorsports-themed resort offers luxury RV sites with a focus on racing entertainment. Located near Daytona International Speedway, it features premium amenities, racing simulators, and exclusive track access for motorsports enthusiasts.
+This motorsports themed resort offers luxury RV sites with a focus on racing entertainment. Located near Daytona International Speedway, it features premium amenities, racing simulators, and exclusive track access for motorsports enthusiasts.
 
 9. Lake George RV Park, New York
 
