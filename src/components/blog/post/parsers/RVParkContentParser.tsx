@@ -9,38 +9,49 @@ interface RVParkContentParserProps {
 export const RVParkContentParser: React.FC<RVParkContentParserProps> = ({ lines }) => {
   const elements: React.ReactNode[] = [];
   let currentSection: string[] = [];
-  let sectionCount = 0;
+  let elementCount = 0;
 
   const flushSection = () => {
     if (currentSection.length > 0) {
       elements.push(
-        <p key={`section_${sectionCount}`} className="mb-6 text-white/90 text-lg leading-relaxed md:text-xl md:leading-8">
-          {currentSection.join(' ')}
-        </p>
+        <div key={`section_${elementCount}`} className="mb-6">
+          {currentSection.map((paragraph, idx) => (
+            <p key={`para_${elementCount}_${idx}`} className="mb-4 text-white/90 text-lg leading-relaxed md:text-xl md:leading-8">
+              {paragraph}
+            </p>
+          ))}
+        </div>
       );
       currentSection = [];
-      sectionCount++;
+      elementCount++;
     }
   };
 
   lines.forEach((line, index) => {
-    if (isRVParkHeading(line)) {
-      // Flush any existing section content
+    const trimmedLine = line.trim();
+    
+    if (!trimmedLine) {
+      // Empty line - flush current section if it has content
+      if (currentSection.length > 0) {
+        flushSection();
+      }
+      return;
+    }
+
+    if (isRVParkHeading(trimmedLine)) {
+      // Flush any existing section content before adding heading
       flushSection();
       
-      // Create heading - remove number prefix if present
-      const cleanTitle = line.replace(/^\d{1,2}[.)]\s*/, '');
+      // Create heading - remove number prefix for cleaner display
+      const cleanTitle = trimmedLine.replace(/^\d{1,2}[.)]\s*/, '');
       elements.push(
-        <h2 key={`heading_${index}`} className="text-2xl md:text-3xl font-semibold text-white mt-8 mb-4 first:mt-0">
-          {cleanTitle}
+        <h2 key={`heading_${index}`} className="text-2xl md:text-3xl font-semibold text-white mt-10 mb-6 first:mt-0">
+          {trimmedLine}
         </h2>
       );
-    } else if (line.length > 0) {
-      // Add to current section
-      currentSection.push(line);
-    } else if (currentSection.length > 0) {
-      // Empty line - flush current section
-      flushSection();
+    } else {
+      // Regular content line - add to current section
+      currentSection.push(trimmedLine);
     }
   });
 

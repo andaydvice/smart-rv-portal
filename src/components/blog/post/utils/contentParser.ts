@@ -9,19 +9,13 @@ export interface ParsedContent {
  * Enhanced RV park name detection for "Top 10" style content
  */
 export const isRVParkHeading = (line: string): boolean => {
-  const lower = line.toLowerCase();
+  const trimmed = line.trim();
   
-  // Numbered entries (1. Park Name, 10) Park Name, etc.)
-  if (/^\d{1,2}[.)]\s*/.test(line)) return true;
+  // Numbered entries (1. Park Name, 10. Park Name, etc.)
+  if (/^\d{1,2}\.\s+/.test(trimmed)) return true;
   
-  // Park/Resort/Campground names
-  if (/(national park|state park|rv park|resort|campground|recreation area|koa)/i.test(line) && line.length < 80) return true;
-  
-  // Location-based names (City, State format)
-  if (/^[A-Z][a-zA-Z\s',.-]+,\s*[A-Z]{2}$/i.test(line)) return true;
-  
-  // Proper nouns that look like place names (2-6 words, starts with capital)
-  if (/^[A-Z][a-zA-Z\s'-]{10,60}$/.test(line) && line.split(' ').length <= 6 && !line.includes('.')) return true;
+  // Also check for numbered entries with parentheses: 1) Park Name
+  if (/^\d{1,2}\)\s+/.test(trimmed)) return true;
   
   return false;
 };
@@ -30,11 +24,13 @@ export const isRVParkHeading = (line: string): boolean => {
  * Check if content has RV park related content
  */
 export const hasRVParkContent = (content: string): boolean => {
-  return content.toLowerCase().includes('rv') && (
-    content.toLowerCase().includes('park') || 
-    content.toLowerCase().includes('campground') ||
-    content.toLowerCase().includes('resort')
-  );
+  const lower = content.toLowerCase();
+  
+  // Check for numbered list patterns AND RV/travel related keywords
+  const hasNumberedList = /^\d{1,2}[.)]\s+/m.test(content);
+  const hasRVKeywords = lower.includes('rv') || lower.includes('park') || lower.includes('campground') || lower.includes('resort');
+  
+  return hasNumberedList && hasRVKeywords;
 };
 
 /**
@@ -56,14 +52,18 @@ export const hasMarkdownContent = (lines: string[]): boolean => {
 export const extractSummary = (content: string, summary?: string): string => {
   if (summary) return summary;
   
-  const lines = content.trim().split('\n');
+  const lines = content.trim().split('\n').filter(line => line.trim().length > 0);
+  
+  // Find the first substantial paragraph (not a heading)
   for (let line of lines) {
-    if (line.trim().length > 40) {
-      return line.trim();
+    const trimmed = line.trim();
+    // Skip numbered headings and short lines
+    if (!isRVParkHeading(trimmed) && trimmed.length > 60) {
+      return trimmed;
     }
   }
   
-  // fallback: first 2 sentences if no long paragraph found
+  // Fallback: first 2 sentences if no long paragraph found
   const sentences = content.split(/[.?!]\s+/).filter(Boolean);
   return sentences.slice(0, 2).join('. ') + (sentences.length > 1 ? '.' : '');
 };
