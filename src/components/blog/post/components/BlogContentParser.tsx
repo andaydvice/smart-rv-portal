@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { RVParkContentParser } from '../parsers/RVParkContentParser';
 import { PlainTextContentParser } from '../parsers/PlainTextContentParser';
@@ -25,6 +24,7 @@ const parseInlineFormatting = (line: string): React.ReactNode => {
 const CustomMarkdownParser: React.FC<{ lines: string[] }> = ({ lines }) => {
   const elements: React.ReactNode[] = [];
   let listItems: string[] = [];
+  let orderedListItems: string[] = [];
 
   const flushList = () => {
     if (listItems.length > 0) {
@@ -39,17 +39,37 @@ const CustomMarkdownParser: React.FC<{ lines: string[] }> = ({ lines }) => {
     }
   };
 
+  const flushOrderedList = () => {
+    if (orderedListItems.length > 0) {
+      elements.push(
+        <ol key={`ol-${elements.length}`} className="list-decimal list-inside space-y-3 my-4 pl-4 text-light-blue leading-relaxed">
+          {orderedListItems.map((item, index) => (
+            <li key={index}>{parseInlineFormatting(item)}</li>
+          ))}
+        </ol>
+      );
+      orderedListItems = [];
+    }
+  };
+
   lines.forEach((line, index) => {
     if (/^##\s/.test(line)) {
       flushList();
+      flushOrderedList();
       elements.push(<h2 key={index} className="text-3xl font-bold mt-8 mb-4 text-white">{parseInlineFormatting(line.substring(3))}</h2>);
     } else if (/^###\s/.test(line)) {
       flushList();
+      flushOrderedList();
       elements.push(<h3 key={index} className="text-2xl font-bold mt-6 mb-3 text-[#E2E8FF]">{parseInlineFormatting(line.substring(4))}</h3>);
     } else if (/^\s*(-|\*)\s+/.test(line)) {
+      flushOrderedList();
       listItems.push(line.replace(/^\s*(-|\*)\s+/, ''));
+    } else if (/^\d+\.\s+/.test(line)) {
+      flushList();
+      orderedListItems.push(line.replace(/^\d+\.\s+/, ''));
     } else {
       flushList();
+      flushOrderedList();
       if (line.trim().length > 0) {
         const sentences = line.split(/(?<=[.?!])\s+/).filter(sentence => sentence.trim().length > 0);
         sentences.forEach((sentence, sIndex) => {
@@ -60,6 +80,7 @@ const CustomMarkdownParser: React.FC<{ lines: string[] }> = ({ lines }) => {
   });
 
   flushList(); // Render any remaining list items
+  flushOrderedList(); // Render any remaining ordered list items
 
   return <div className="prose prose-invert max-w-none">{elements}</div>;
 };

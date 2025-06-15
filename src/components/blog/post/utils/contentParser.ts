@@ -33,14 +33,14 @@ export const hasRVParkContent = (content: string): boolean => {
 };
 
 /**
- * Check if content has markdown formatting (headings, bullets)
+ * Check if content has markdown formatting (headings, bullets, numbered lists)
  */
 export const hasMarkdownContent = (lines: string[]): boolean => {
-  // We check for markdown first, so this can be more specific.
-  // We don't check for numbered lists here to avoid ambiguity with RV Park lists.
+  // This check now includes numbered lists to ensure they are handled by the main markdown parser.
   return lines.some(line =>
     /^#+\s+/.test(line) || // h1, h2, h3, etc.
-    /^\s*(-|\*)\s+/.test(line) // bullet points
+    /^\s*(-|\*)\s+/.test(line) || // bullet points
+    /^\d+\.\s+/.test(line) // numbered lists
   );
 };
 
