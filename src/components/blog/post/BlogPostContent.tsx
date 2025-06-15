@@ -1,3 +1,4 @@
+
 import React from 'react';
 
 interface Author {
@@ -37,12 +38,82 @@ export const BlogPostContent = ({
   };
 
   /**
-   * Enhanced parser: detects markdown OR automatically structures "Top 10"/plain text lists
+   * Enhanced parser for "Top 10" RV park content - detects park names and creates subheadings
    */
   const parseContent = (raw: string) => {
     const lines = raw.split('\n').map(line => line.trim()).filter(Boolean);
 
-    // If markdown is detected, use the old parser logic
+    // Check if this looks like a Top 10 RV parks post
+    const hasRVParkContent = raw.toLowerCase().includes('rv') && (
+      raw.toLowerCase().includes('park') || 
+      raw.toLowerCase().includes('campground') ||
+      raw.toLowerCase().includes('resort')
+    );
+
+    if (hasRVParkContent) {
+      const elements: React.ReactNode[] = [];
+      let currentSection: string[] = [];
+      let sectionCount = 0;
+
+      // Enhanced RV park name detection
+      const isRVParkHeading = (line: string) => {
+        const lower = line.toLowerCase();
+        
+        // Numbered entries (1. Park Name, 10) Park Name, etc.)
+        if (/^\d{1,2}[.)]\s*/.test(line)) return true;
+        
+        // Park/Resort/Campground names
+        if (/(national park|state park|rv park|resort|campground|recreation area|koa)/i.test(line) && line.length < 80) return true;
+        
+        // Location-based names (City, State format)
+        if (/^[A-Z][a-zA-Z\s',.-]+,\s*[A-Z]{2}$/i.test(line)) return true;
+        
+        // Proper nouns that look like place names (2-6 words, starts with capital)
+        if (/^[A-Z][a-zA-Z\s'-]{10,60}$/.test(line) && line.split(' ').length <= 6 && !line.includes('.')) return true;
+        
+        return false;
+      };
+
+      const flushSection = () => {
+        if (currentSection.length > 0) {
+          elements.push(
+            <p key={`section_${sectionCount}`} className="mb-6 text-white/90 text-lg leading-relaxed md:text-xl md:leading-8">
+              {currentSection.join(' ')}
+            </p>
+          );
+          currentSection = [];
+          sectionCount++;
+        }
+      };
+
+      lines.forEach((line, index) => {
+        if (isRVParkHeading(line)) {
+          // Flush any existing section content
+          flushSection();
+          
+          // Create heading - remove number prefix if present
+          const cleanTitle = line.replace(/^\d{1,2}[.)]\s*/, '');
+          elements.push(
+            <h2 key={`heading_${index}`} className="text-2xl md:text-3xl font-semibold text-white mt-8 mb-4 first:mt-0">
+              {cleanTitle}
+            </h2>
+          );
+        } else if (line.length > 0) {
+          // Add to current section
+          currentSection.push(line);
+        } else if (currentSection.length > 0) {
+          // Empty line - flush current section
+          flushSection();
+        }
+      });
+
+      // Flush any remaining content
+      flushSection();
+
+      return elements;
+    }
+
+    // Fallback to original parser for other content types
     const hasMarkdown =
       lines.some(line =>
         /^#\s+/.test(line) ||
@@ -177,101 +248,19 @@ export const BlogPostContent = ({
       return elements;
     }
 
-    // --------- New: Non-markdown fallback parser for "plain text" lists and headings -----------
-
+    // Basic fallback for plain text
     const elements: React.ReactNode[] = [];
     let paragraphBuffer: string[] = [];
 
-    // Heuristics:
-    // - Line starts with Top 10/Top 5/number. or number)
-    // - Line is ALL CAPS or Title Case and fairly short (park/state/section)
-    // - Else, treat as paragraph unless very short (skip e.g. empty lines)
-
-    const headingRegex = /^(\d{1,2}[.)]|Top\s+\d+|[A-Z][\w\s']{3,30})/;
-    const isLikelyHeading = (line: string) => {
-      // Top N or starts with number + . or )
-      if (/^\d{1,2}[.)]/.test(line)) return true;
-      if (/^Top \d+/i.test(line)) return true;
-      // Short, mostly starting upper, not a full sentence
-      if (
-        /^[A-Z][a-z' -]+(?:\s+[A-Z][a-z' -]+)*$/.test(line) &&
-        line.length < 40
-      ) return true;
-      // Park/state names often, e.g. "Yellowstone National Park"
-      if (line.split(' ').length < 7 && /^[A-Z]/.test(line) && !/[.?!]$/.test(line)) return true;
-      return false;
-    };
-
     lines.forEach((line, i) => {
-      if (isLikelyHeading(line)) {
-        // Flush existing paragraph
-        if (paragraphBuffer.length) {
+      if (line.length > 0) {
+        paragraphBuffer.push(line);
+      }
+      
+      if (line === '' || i === lines.length - 1) {
+        if (paragraphBuffer.length > 0) {
           elements.push(
             <p key={`para_${i}`} className="mb-6 text-white/90 text-lg leading-relaxed md:text-xl md:leading-8">
-              {paragraphBuffer.join(' ')}
-            </p>
-          );
-          paragraphBuffer = [];
-        }
-        // Add "heading"
-        elements.push(
-          <h2 key={`auto_h2_${i}`} className="text-2xl md:text-3xl font-semibold text-white mt-8 mb-3">
-            {line.replace(/^(\d+[.)]\s?)/, '')}
-          </h2>
-        );
-      } else if (/^(-|\*)\s+/.test(line)) {
-        // Bulleted list if dash/star present, even in plain text (rare, fallback)
-        if (
-          !elements.length ||
-          (elements[elements.length - 1] as any).type !== 'ul'
-        ) {
-          elements.push(
-            <ul key={`ul_auto_${i}`} className="mb-6 list-disc list-inside text-white/90 text-lg space-y-2 md:text-xl md:leading-8"></ul>
-          );
-        }
-        const ulIdx = elements.length - 1;
-        const currentUl = elements[ulIdx] as React.ReactElement;
-        const li = (
-          <li key={`li_auto_${i}`} className="ml-4">
-            {line.replace(/^(-|\*)\s+/, '')}
-          </li>
-        );
-        elements[ulIdx] = React.cloneElement(
-          currentUl,
-          {},
-          [...(currentUl.props.children || []), li]
-        );
-      } else if (/^\d+\.\s+/.test(line)) {
-        // Numbered lists if present (rare, fallback)
-        if (
-          !elements.length ||
-          (elements[elements.length - 1] as any).type !== 'ol'
-        ) {
-          elements.push(
-            <ol key={`ol_auto_${i}`} className="mb-6 list-decimal list-inside text-white/90 text-lg space-y-2 md:text-xl md:leading-8"></ol>
-          );
-        }
-        const olIdx = elements.length - 1;
-        const currentOl = elements[olIdx] as React.ReactElement;
-        const li = (
-          <li key={`oli_auto_${i}`} className="ml-4">
-            {line.replace(/^\d+\.\s+/, '')}
-          </li>
-        );
-        elements[olIdx] = React.cloneElement(
-          currentOl,
-          {},
-          [...(currentOl.props.children || []), li]
-        );
-      } else {
-        paragraphBuffer.push(line);
-        // End of section or last line, flush paragraph
-        if (
-          i === lines.length - 1 ||
-          (lines[i + 1] && isLikelyHeading(lines[i + 1]))
-        ) {
-          elements.push(
-            <p key={`p_fallback_${i}`} className="mb-6 text-white/90 text-lg leading-relaxed md:text-xl md:leading-8">
               {paragraphBuffer.join(' ')}
             </p>
           );
