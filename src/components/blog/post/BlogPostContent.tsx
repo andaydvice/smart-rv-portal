@@ -41,11 +41,11 @@ export const BlogPostContent = ({
       />
 
       {summarySentences.length > 0 && (
-        <div className="my-8 p-6 bg-connectivity-darkBg border-l-4 border-connectivity-accent rounded-r-lg shadow-lg">
+        <div className="my-8 p-6 bg-connectivity-darkBg border-l-4 border-connectivity-accent rounded-r-lg shadow-lg text-left">
           {summarySentences.map((sentence, index) => (
             <p
               key={index}
-              className="text-light-blue italic leading-relaxed md:text-lg [&:not(:last-child)]:mb-4"
+              className="text-light-blue leading-relaxed md:text-lg [&:not(:last-child)]:mb-4"
             >
               {sentence}
             </p>
