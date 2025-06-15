@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { RVParkContentParser } from '../parsers/RVParkContentParser';
 import { PlainTextContentParser } from '../parsers/PlainTextContentParser';
@@ -53,7 +54,11 @@ const CustomMarkdownParser: React.FC<{ lines: string[] }> = ({ lines }) => {
   };
 
   lines.forEach((line, index) => {
-    if (/^##\s/.test(line)) {
+    if (/^\d+\.\s+.+/.test(line) && (lines[index + 1] === '' || lines[index + 1] === undefined)) {
+      flushList();
+      flushOrderedList();
+      elements.push(<h2 key={index} className="text-3xl font-bold mt-8 mb-4 text-white">{parseInlineFormatting(line)}</h2>);
+    } else if (/^##\s/.test(line)) {
       flushList();
       flushOrderedList();
       elements.push(<h2 key={index} className="text-3xl font-bold mt-8 mb-4 text-white">{parseInlineFormatting(line.substring(3))}</h2>);
@@ -86,18 +91,20 @@ const CustomMarkdownParser: React.FC<{ lines: string[] }> = ({ lines }) => {
 };
 
 export const BlogContentParser: React.FC<BlogContentParserProps> = ({ content }) => {
-  const lines = content.split('\n').map(line => line.trim()).filter(Boolean);
+  const allLines = content.split('\n').map(line => line.trim());
+  const filteredLines = allLines.filter(Boolean);
 
   // Use the custom parser for content with markdown-like features.
-  if (hasMarkdownContent(lines)) {
-    return <CustomMarkdownParser lines={lines} />;
+  // The custom parser now needs all lines to detect context (like empty lines).
+  if (hasMarkdownContent(allLines)) {
+    return <CustomMarkdownParser lines={allLines} />;
   }
   
   // Check for RV Park list format if it's not markdown.
   if (hasRVParkContent(content)) {
-    return <RVParkContentParser lines={lines} />;
+    return <RVParkContentParser lines={filteredLines} />;
   }
 
   // Fallback for plain text.
-  return <PlainTextContentParser lines={lines} />;
+  return <PlainTextContentParser lines={filteredLines} />;
 };
