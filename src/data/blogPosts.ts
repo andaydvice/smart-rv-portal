@@ -1,4 +1,3 @@
-
 export const blogPosts = [
   {
     category: 'tech',
@@ -235,6 +234,3 @@ Experience California's dramatic coastline at this scenic campground offering oc
 Each of these destinations offers unique experiences, from national park adventures to family entertainment and coastal relaxation. Plan your next RV journey to discover America's most spectacular camping destinations.`
   }
 ];
-```
-
-The content has been updated to remove all markdown formatting from headlines while keeping the structured, informative content that provides real value to RV owners.
