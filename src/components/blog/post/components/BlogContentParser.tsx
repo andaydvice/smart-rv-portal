@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { RVParkContentParser } from '../parsers/RVParkContentParser';
 import { PlainTextContentParser } from '../parsers/PlainTextContentParser';
@@ -56,15 +57,15 @@ const CustomMarkdownParser: React.FC<{ lines: string[] }> = ({ lines }) => {
     if (/^\d+\.\s+.+/.test(line) && (lines[index + 1] === '' || lines[index + 1] === undefined || /^\d+\.\s+.+/.test(lines[index+1]))) {
       flushList();
       flushOrderedList();
-      elements.push(<h2 key={index} className="text-3xl font-bold mt-8 mb-4 text-white">{parseInlineFormatting(line)}</h2>);
+      elements.push(<h2 key={index} className="text-2xl font-bold mt-8 mb-4 text-white">{parseInlineFormatting(line)}</h2>);
     } else if (/^##\s/.test(line)) {
       flushList();
       flushOrderedList();
-      elements.push(<h2 key={index} className="text-3xl font-bold mt-8 mb-4 text-white">{parseInlineFormatting(line.substring(3))}</h2>);
+      elements.push(<h2 key={index} className="text-2xl font-bold mt-8 mb-4 text-white">{parseInlineFormatting(line.substring(3))}</h2>);
     } else if (/^###\s/.test(line)) {
       flushList();
       flushOrderedList();
-      elements.push(<h3 key={index} className="text-2xl font-bold mt-6 mb-3 text-[#E2E8FF]">{parseInlineFormatting(line.substring(4))}</h3>);
+      elements.push(<h3 key={index} className="text-xl font-bold mt-6 mb-3 text-[#E2E8FF]">{parseInlineFormatting(line.substring(4))}</h3>);
     } else if (/^\s*(-|\*)\s+/.test(line)) {
       flushOrderedList();
       listItems.push(line.replace(/^\s*(-|\*)\s+/, ''));
