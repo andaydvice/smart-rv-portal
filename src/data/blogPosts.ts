@@ -1,3 +1,4 @@
+
 export const blogPosts = [
   {
     category: 'tech',
@@ -9,7 +10,9 @@ export const blogPosts = [
     description: 'Smart RVs are revolutionizing how we experience life on the road.',
     image: '/lovable-uploads/80ea47f5-5b04-409f-8eb7-1da434a9e0de.png',
     slug: 'future-of-mobile-living',
-    content: `Smart RVs are revolutionizing how we experience life on the road. With advanced technology integration and innovative design solutions, the future of mobile living is here.`
+    content: `Smart RVs are revolutionizing how we experience life on the road.
+
+With advanced technology integration and innovative design solutions, the future of mobile living is here.`
   },
   {
     category: 'travel',
@@ -33,7 +36,9 @@ export const blogPosts = [
     description: 'Experience the future of RV living with cutting edge smart technology.',
     image: '/lovable-uploads/11a2f8d8-22f5-4ed7-83f9-28b08a64aeb5.png',
     slug: 'rv-smart-tech',
-    content: `Experience the future of RV living with cutting edge smart technology that transforms your mobile lifestyle. Our innovative systems seamlessly integrate automation, monitoring, and control features to enhance every aspect of your RV experience.`
+    content: `Experience the future of RV living with cutting edge smart technology that transforms your mobile lifestyle.
+
+Our innovative systems seamlessly integrate automation, monitoring, and control features to enhance every aspect of your RV experience.`
   },
   {
     category: 'Technology',
@@ -45,7 +50,9 @@ export const blogPosts = [
     description: 'Discover premium climate controlled indoor RV storage solutions.',
     image: '/lovable-uploads/c25a3800-323e-4e21-9402-72b27002e767.png',
     slug: 'indoor-rv-storage',
-    content: `Discover premium climate controlled indoor RV storage solutions that protect your investment year round. Our state of the art facilities offer advanced security systems and easy access, ensuring your RV stays in pristine condition between adventures.`
+    content: `Discover premium climate controlled indoor RV storage solutions that protect your investment year round.
+
+Our state of the art facilities offer advanced security systems and easy access, ensuring your RV stays in pristine condition between adventures.`
   },
   {
     category: 'tech',
@@ -57,7 +64,9 @@ export const blogPosts = [
     description: 'Transform your RV into a smart home on wheels with these essential tech upgrades.',
     image: '/lovable-uploads/d3b696f0-39e5-4cfa-b38c-6579325a495a.png',
     slug: 'top-10-smart-rv-upgrades',
-    content: `Transform your RV into a smart home on wheels with these essential tech upgrades. From automated systems to intelligent monitoring solutions, discover the latest innovations that are revolutionizing the RV experience.`
+    content: `Transform your RV into a smart home on wheels with these essential tech upgrades.
+
+From automated systems to intelligent monitoring solutions, discover the latest innovations that are revolutionizing the RV experience.`
   },
   {
     category: 'tech',
@@ -69,11 +78,17 @@ export const blogPosts = [
     description: 'Complete guide to planning and installing a solar power system in your RV.',
     image: '/lovable-uploads/51ac2438-08c7-47ee-b56d-876aa3bbdc80.png',
     slug: 'solar-power-for-rvs',
-    content: `Harnessing the sun's power is a game changer for RVers, offering unparalleled freedom and self sufficiency on the road. A well designed solar power system allows you to camp off grid for extended periods, reduce generator noise, and embrace a more sustainable travel lifestyle. This guide will walk you through everything you need to know to plan and install a solar power system for your RV.
+    content: `Harnessing the sun's power is a game changer for RVers, offering unparalleled freedom and self sufficiency on the road.
+
+A well designed solar power system allows you to camp off grid for extended periods, reduce generator noise, and embrace a more sustainable travel lifestyle.
+
+This guide will walk you through everything you need to know to plan and install a solar power system for your RV.
 
 ## 1. Understanding the Core Components
 
-An RV solar power system is more than just panels. It's a synergistic collection of components working together to safely generate, store, and deliver electricity.
+An RV solar power system is more than just panels.
+
+It's a synergistic collection of components working together to safely generate, store, and deliver electricity.
 
 - **Solar Panels:** These are the heart of your system, capturing sunlight and converting it into DC (Direct Current) electricity.
 - **Charge Controller:** This is the brain. It regulates the voltage and current coming from your solar panels to your batteries, preventing overcharging and ensuring battery health.
@@ -83,7 +98,9 @@ An RV solar power system is more than just panels. It's a synergistic collection
 
 ## 2. Sizing Your System: The Power Audit
 
-Before buying any components, you must determine your daily energy consumption. This is the most critical step.
+Before buying any components, you must determine your daily energy consumption.
+
+This is the most critical step.
 
 ### How to Conduct a Power Audit:
 1.  **List all DC and AC devices** you plan to use daily (lights, water pump, fans, laptops, TV, etc.).
@@ -98,7 +115,9 @@ Before buying any components, you must determine your daily energy consumption. 
 - Laptop (65W) for 3 hours: 65W * 3h = 195 Wh
 - **Total Daily Need:** 72 + 30 + 195 = 297 Wh
 
-It is wise to add a 20-25% buffer to your total to account for inefficiencies and unexpected needs. So, you would aim to generate around 370 Wh per day.
+It is wise to add a 20-25% buffer to your total to account for inefficiencies and unexpected needs.
+
+So, you would aim to generate around 370 Wh per day.
 
 ## 3. Choosing Your Components Wisely
 
@@ -122,7 +141,9 @@ With your power audit complete, you can select components that match your needs.
 
 ## 4. Installation Best Practices
 
-Proper installation is key to a safe and efficient system. If you are not comfortable with electrical wiring, hire a professional.
+Proper installation is key to a safe and efficient system.
+
+If you are not comfortable with electrical wiring, hire a professional.
 
 - **Panel Wiring:** Panels can be wired in series (increases voltage), parallel (increases amperage), or a combination of both. Your choice depends on your charge controller's specifications and your desired performance characteristics.
 - **Mounting:** Securely mount panels to your RV roof using appropriate brackets. Ensure there is a small air gap underneath rigid panels for cooling, as heat reduces efficiency. Seal all roof penetrations thoroughly with a high quality RV sealant.
@@ -138,7 +159,11 @@ Your system is installed, but a few habits can maximize its performance.
 - **Tilt Your Panels:** If you have tiltable mounts, angling your panels directly towards the sun (especially in winter) can dramatically increase your power generation.
 - **Monitor Your System:** Use a battery monitor (like a Victron BMV or SmartShunt) to get an accurate reading of your battery's state of charge and your real time power consumption. This helps you understand your usage patterns and live within your energy budget.
 
-Investing in a solar power system is one of the most rewarding upgrades for any RVer. It unlocks a new level of freedom, allowing you to explore more remote and beautiful places without being tethered to a power pedestal. With careful planning and a quality installation, you can enjoy reliable, clean, and quiet power on all your adventures.`
+Investing in a solar power system is one of the most rewarding upgrades for any RVer.
+
+It unlocks a new level of freedom, allowing you to explore more remote and beautiful places without being tethered to a power pedestal.
+
+With careful planning and a quality installation, you can enjoy reliable, clean, and quiet power on all your adventures.`
   },
   {
     category: 'tech',
@@ -301,7 +326,9 @@ From basic alarm systems to comprehensive monitoring solutions, today's technolo
     description: 'Create the perfect mobile office setup in your RV with these tips.',
     image: '/lovable-uploads/ae930cf7-205f-41d3-9c9b-a4969e5c35e6.png',
     slug: 'remote-work-rv-setup',
-    content: `Create the perfect mobile office setup in your RV with these essential tips. From connectivity solutions to workspace organization, learn how to maintain productivity while enjoying the freedom of RV living.`
+    content: `Create the perfect mobile office setup in your RV with these essential tips.
+
+From connectivity solutions to workspace organization, learn how to maintain productivity while enjoying the freedom of RV living.`
   },
   {
     category: 'travel',
@@ -313,48 +340,74 @@ From basic alarm systems to comprehensive monitoring solutions, today's technolo
     description: 'Discover America\'s premier RV destinations with luxury amenities and stunning locations.',
     image: '/lovable-uploads/80ea47f5-5b04-409f-8eb7-1da434a9e0de.png',
     slug: 'top-10-rv-parks-in-the-usa',
-    content: `America offers some of the world's most spectacular RV parks, combining natural beauty with modern amenities. Here are the top destinations every RV enthusiast should experience.
+    content: `America offers some of the world's most spectacular RV parks, combining natural beauty with modern amenities.
+
+Here are the top destinations every RV enthusiast should experience.
 
 1. Yellowstone National Park RV Resort, Wyoming
 
-Located near the iconic Yellowstone National Park, this resort offers unparalleled access to geysers, wildlife, and pristine wilderness. Full hookups, luxury amenities, and proximity to Old Faithful make this a premier destination for RV travelers seeking adventure and comfort.
+Located near the iconic Yellowstone National Park, this resort offers unparalleled access to geysers, wildlife, and pristine wilderness.
+
+Full hookups, luxury amenities, and proximity to Old Faithful make this a premier destination for RV travelers seeking adventure and comfort.
 
 2. Disney's Fort Wilderness Resort, Florida  
 
-Experience the magic of Disney while enjoying spacious RV sites with full hookups. This family friendly resort features pools, recreational activities, and direct access to Disney World parks. The combination of outdoor adventure and Disney magic creates unforgettable memories for families.
+Experience the magic of Disney while enjoying spacious RV sites with full hookups.
+
+This family friendly resort features pools, recreational activities, and direct access to Disney World parks.
+
+The combination of outdoor adventure and Disney magic creates unforgettable memories for families.
 
 3. Ocean Lakes Family Campground, South Carolina
 
-Stretching along pristine oceanfront, this massive campground offers direct beach access, water sports, and family entertainment. With over 800 sites, full amenities, and endless recreational opportunities, it's perfect for extended stays and beach lovers.
+Stretching along pristine oceanfront, this massive campground offers direct beach access, water sports, and family entertainment.
+
+With over 800 sites, full amenities, and endless recreational opportunities, it's perfect for extended stays and beach lovers.
 
 4. KOA Bar Harbor, Maine
 
-Nestled near Acadia National Park, this KOA offers stunning coastal views and easy access to Maine's rugged beauty. Enjoy lobster rolls, hiking trails, and picturesque lighthouse tours while staying in comfort with full hookups and modern amenities.
+Nestled near Acadia National Park, this KOA offers stunning coastal views and easy access to Maine's rugged beauty.
+
+Enjoy lobster rolls, hiking trails, and picturesque lighthouse tours while staying in comfort with full hookups and modern amenities.
 
 5. Zion River Resort, Utah
 
-Gateway to Zion National Park, this resort combines luxury accommodations with outdoor adventure. Premium sites offer mountain views, while the resort features pools, fitness facilities, and organized activities for exploring Utah's red rock country.
+Gateway to Zion National Park, this resort combines luxury accommodations with outdoor adventure.
+
+Premium sites offer mountain views, while the resort features pools, fitness facilities, and organized activities for exploring Utah's red rock country.
 
 6. Branson KOA Holiday, Missouri
 
-Located in the heart of Missouri's entertainment capital, this KOA provides easy access to Branson's theaters, attractions, and Silver Dollar City. Family friendly amenities and spacious sites make it ideal for entertainment focused vacations.
+Located in the heart of Missouri's entertainment capital, this KOA provides easy access to Branson's theaters, attractions, and Silver Dollar City.
+
+Family friendly amenities and spacious sites make it ideal for entertainment focused vacations.
 
 7. Grand Canyon Railway RV Park, Arizona
 
-Experience the Grand Canyon while staying at this unique RV park connected to the historic Grand Canyon Railway. Full hookups, stunning desert views, and convenient train access to the South Rim create an unforgettable southwestern adventure.
+Experience the Grand Canyon while staying at this unique RV park connected to the historic Grand Canyon Railway.
+
+Full hookups, stunning desert views, and convenient train access to the South Rim create an unforgettable southwestern adventure.
 
 8. Camping World Racing Resort, Florida
 
-This motorsports themed resort offers luxury RV sites with a focus on racing entertainment. Located near Daytona International Speedway, it features premium amenities, racing simulators, and exclusive track access for motorsports enthusiasts.
+This motorsports themed resort offers luxury RV sites with a focus on racing entertainment.
+
+Located near Daytona International Speedway, it features premium amenities, racing simulators, and exclusive track access for motorsports enthusiasts.
 
 9. Lake George RV Park, New York
 
-Situated on the shores of beautiful Lake George in the Adirondack Mountains, this park offers waterfront sites, boating activities, and mountain hiking. The combination of lake recreation and mountain scenery provides the perfect northeast getaway.
+Situated on the shores of beautiful Lake George in the Adirondack Mountains, this park offers waterfront sites, boating activities, and mountain hiking.
+
+The combination of lake recreation and mountain scenery provides the perfect northeast getaway.
 
 10. Big Sur Campground, California
 
-Experience California's dramatic coastline at this scenic campground offering ocean views and redwood forests. While more rustic than other destinations, the natural beauty and proximity to Highway 1's attractions make it a must-visit for nature lovers.
+Experience California's dramatic coastline at this scenic campground offering ocean views and redwood forests.
 
-Each of these destinations offers unique experiences, from national park adventures to family entertainment and coastal relaxation. Plan your next RV journey to discover America's most spectacular camping destinations.`
+While more rustic than other destinations, the natural beauty and proximity to Highway 1's attractions make it a must-visit for nature lovers.
+
+Each of these destinations offers unique experiences, from national park adventures to family entertainment and coastal relaxation.
+
+Plan your next RV journey to discover America's most spectacular camping destinations.`
   }
 ];
