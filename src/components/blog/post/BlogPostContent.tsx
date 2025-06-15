@@ -21,32 +21,51 @@ export const BlogPostContent = ({
   description,
   content,
 }: BlogPostContentProps) => {
-  // Split content into paragraphs and format properly
+  // Enhanced content formatting that properly breaks up large text blocks
   const formatContent = (text: string) => {
-    const paragraphs = text.split('\n\n').filter(p => p.trim().length > 0);
+    // Split by double line breaks first, then by single periods for sentence-by-sentence paragraphs
+    const sentences = text.split(/\.(?:\s+|$)/).filter(s => s.trim().length > 0);
     
-    return paragraphs.map((paragraph, index) => {
-      const trimmedParagraph = paragraph.trim();
+    return sentences.map((sentence, index) => {
+      const trimmedSentence = sentence.trim();
       
-      // Check if this looks like a heading (short line, often followed by content)
-      if (trimmedParagraph.length < 80 && 
-          !trimmedParagraph.endsWith('.') && 
-          !trimmedParagraph.endsWith('!') &&
-          !trimmedParagraph.includes('http') &&
-          index < paragraphs.length - 1) {
+      if (!trimmedSentence) return null;
+      
+      // Add period back if it doesn't end with punctuation
+      const formattedSentence = trimmedSentence.match(/[.!?]$/) 
+        ? trimmedSentence 
+        : trimmedSentence + '.';
+      
+      // Detect potential headlines (short sentences that introduce topics)
+      const isHeadline = (
+        trimmedSentence.length < 100 && 
+        (
+          trimmedSentence.toLowerCase().includes('guide to') ||
+          trimmedSentence.toLowerCase().includes('national park') ||
+          trimmedSentence.toLowerCase().includes('state park') ||
+          trimmedSentence.toLowerCase().includes('campground') ||
+          trimmedSentence.toLowerCase().includes('rv park') ||
+          trimmedSentence.toLowerCase().includes('features include') ||
+          trimmedSentence.toLowerCase().includes('benefits include') ||
+          trimmedSentence.toLowerCase().includes('considerations include') ||
+          (index > 0 && sentences[index - 1] && sentences[index - 1].trim().length < 80)
+        )
+      );
+      
+      if (isHeadline && index > 2) {
         return (
-          <h2 key={index} className="text-3xl md:text-4xl font-semibold text-white mt-16 mb-8 first:mt-0">
-            {trimmedParagraph}
+          <h2 key={index} className="text-2xl md:text-3xl font-semibold text-white mt-12 mb-6">
+            {formattedSentence}
           </h2>
         );
       }
       
       return (
-        <p key={index} className="mb-8 text-white/90 text-xl leading-relaxed md:text-2xl md:leading-10">
-          {trimmedParagraph}
+        <p key={index} className="mb-6 text-white/90 text-lg leading-relaxed md:text-xl md:leading-8">
+          {formattedSentence}
         </p>
       );
-    });
+    }).filter(Boolean);
   };
 
   return (
@@ -57,10 +76,10 @@ export const BlogPostContent = ({
         </span>
       </div>
 
-      <h1 className="text-5xl md:text-6xl font-bold text-white mb-6 text-left leading-tight">{title}</h1>
+      <h1 className="text-4xl md:text-5xl font-bold text-white mb-6 text-left leading-tight">{title}</h1>
 
       {description && (
-        <div className="text-[#E2E8FF] text-2xl md:text-3xl font-medium mb-12 text-left leading-relaxed">
+        <div className="text-[#E2E8FF] text-xl md:text-2xl font-medium mb-12 text-left leading-relaxed">
           {description}
         </div>
       )}
@@ -72,7 +91,7 @@ export const BlogPostContent = ({
         <span className="font-medium text-lg">{author.name}</span>
       </div>
 
-      <div className="blog-content text-left space-y-6">
+      <div className="blog-content text-left space-y-4">
         {formatContent(content)}
       </div>
     </div>
