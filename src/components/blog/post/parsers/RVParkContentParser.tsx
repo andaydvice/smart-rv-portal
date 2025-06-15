@@ -15,11 +15,16 @@ export const RVParkContentParser: React.FC<RVParkContentParserProps> = ({ lines 
     if (currentSection.length > 0) {
       elements.push(
         <div key={`section_${elementCount}`} className="mb-6">
-          {currentSection.map((paragraph, idx) => (
-            <p key={`para_${elementCount}_${idx}`} className="mb-4 text-white/90 text-lg leading-relaxed md:text-xl md:leading-8">
-              {paragraph}
-            </p>
-          ))}
+          {currentSection.flatMap((paragraph, paraIdx) => {
+            const sentences = paragraph
+              .split(/(?<=[.?!])\s+/)
+              .filter((sentence) => sentence.trim().length > 0);
+            return sentences.map((sentence, sentIdx) => (
+              <p key={`para_${elementCount}_${paraIdx}_${sentIdx}`} className="mb-4 text-white/90 text-lg leading-relaxed md:text-xl md:leading-8">
+                {sentence}
+              </p>
+            ));
+          })}
         </div>
       );
       currentSection = [];

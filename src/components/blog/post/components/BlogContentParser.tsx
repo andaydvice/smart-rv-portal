@@ -31,11 +31,19 @@ const CustomMarkdownParser: React.FC<{ lines: string[] }> = ({ lines }) => {
   const flushParagraph = () => {
     if (paragraphBuffer.length > 0) {
       const paragraphText = paragraphBuffer.join(' ');
-      elements.push(
-        <p key={`p-${elements.length}`} className="text-light-blue leading-relaxed mb-4">
-          {parseInlineFormatting(paragraphText)}
-        </p>
-      );
+      const sentences = paragraphText
+        .split(/(?<=[.?!])\s+/)
+        .filter((sentence) => sentence.trim().length > 0);
+
+      const baseKey = `p-${elements.length}`;
+      sentences.forEach((sentence, index) => {
+        elements.push(
+          <p key={`${baseKey}-${index}`} className="text-light-blue leading-relaxed mb-4">
+            {parseInlineFormatting(sentence)}
+          </p>
+        );
+      });
+
       paragraphBuffer = [];
     }
   };
