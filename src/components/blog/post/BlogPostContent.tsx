@@ -21,8 +21,33 @@ export const BlogPostContent = ({
   description,
   content,
 }: BlogPostContentProps) => {
-  // Split content into paragraphs for better formatting
-  const paragraphs = content.split('\n\n').filter(p => p.trim().length > 0);
+  // Split content into paragraphs and format properly
+  const formatContent = (text: string) => {
+    const paragraphs = text.split('\n\n').filter(p => p.trim().length > 0);
+    
+    return paragraphs.map((paragraph, index) => {
+      const trimmedParagraph = paragraph.trim();
+      
+      // Check if this looks like a heading (short line, often followed by content)
+      if (trimmedParagraph.length < 80 && 
+          !trimmedParagraph.endsWith('.') && 
+          !trimmedParagraph.endsWith('!') &&
+          !trimmedParagraph.includes('http') &&
+          index < paragraphs.length - 1) {
+        return (
+          <h2 key={index} className="text-3xl md:text-4xl font-semibold text-white mt-16 mb-8 first:mt-0">
+            {trimmedParagraph}
+          </h2>
+        );
+      }
+      
+      return (
+        <p key={index} className="mb-8 text-white/90 text-xl leading-relaxed md:text-2xl md:leading-10">
+          {trimmedParagraph}
+        </p>
+      );
+    });
+  };
 
   return (
     <div className="max-w-4xl mx-auto px-4">
@@ -48,13 +73,7 @@ export const BlogPostContent = ({
       </div>
 
       <div className="blog-content text-left space-y-6">
-        <div className="text-white/90 text-xl leading-relaxed md:text-2xl md:leading-10">
-          {paragraphs.map((paragraph, index) => (
-            <p key={index} className="mb-8">
-              {paragraph}
-            </p>
-          ))}
-        </div>
+        {formatContent(content)}
       </div>
     </div>
   );
