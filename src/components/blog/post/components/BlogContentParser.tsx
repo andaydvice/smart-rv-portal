@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { RVParkContentParser } from '../parsers/RVParkContentParser';
 import { PlainTextContentParser } from '../parsers/PlainTextContentParser';
@@ -53,7 +54,7 @@ const CustomMarkdownParser: React.FC<{ lines: string[] }> = ({ lines }) => {
   };
 
   lines.forEach((line, index) => {
-    if (/^\d+\.\s+.+/.test(line) && (lines[index + 1] === '' || lines[index + 1] === undefined)) {
+    if (/^\d+\.\s+.+/.test(line) && (lines[index + 1] === '' || lines[index + 1] === undefined || /^\d+\.\s+.+/.test(lines[index+1]))) {
       flushList();
       flushOrderedList();
       elements.push(<h2 key={index} className="text-3xl font-bold mt-8 mb-4 text-white">{parseInlineFormatting(line)}</h2>);
@@ -75,7 +76,10 @@ const CustomMarkdownParser: React.FC<{ lines: string[] }> = ({ lines }) => {
       flushList();
       flushOrderedList();
       if (line.trim().length > 0) {
-        elements.push(<p key={index} className="text-light-blue leading-relaxed mb-4">{parseInlineFormatting(line)}</p>);
+        const sentences = line.split(/(?<=[.?!])\s+/).filter(s => s.trim().length > 0);
+        sentences.forEach((sentence, sIndex) => {
+          elements.push(<p key={`${index}-${sIndex}`} className="text-light-blue leading-relaxed mb-4">{parseInlineFormatting(sentence)}</p>);
+        });
       }
     }
   });
