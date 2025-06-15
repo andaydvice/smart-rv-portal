@@ -37,10 +37,7 @@ export const BlogPostHeader: React.FC<BlogPostHeaderProps> = ({
         </div>
       )}
 
-      <div className="flex items-center gap-4 text-white/80 mb-12">
-        <div className="bg-[#1B2028] w-12 h-12 rounded-full flex items-center justify-center font-semibold text-lg">
-          {author.initials}
-        </div>
+      <div className="flex items-center text-white/80 mb-12">
         <span className="font-medium text-lg">{author.name}</span>
       </div>
     </>
