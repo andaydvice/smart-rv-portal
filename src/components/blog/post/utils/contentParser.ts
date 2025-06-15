@@ -29,8 +29,11 @@ export const hasRVParkContent = (content: string): boolean => {
   // Check for numbered list patterns AND RV/travel related keywords
   const hasNumberedList = /^\d{1,2}[.)]\s+/m.test(content);
   const hasRVKeywords = lower.includes('rv') || lower.includes('park') || lower.includes('campground') || lower.includes('resort');
+  // MODIFIED: This check ensures that posts with markdown headings (like '## Title') are
+  // correctly handled by the markdown parser instead of being misidentified as an RV park list.
+  const hasMarkdownHeadings = /^#+\s+/m.test(content);
   
-  return hasNumberedList && hasRVKeywords;
+  return hasNumberedList && hasRVKeywords && !hasMarkdownHeadings;
 };
 
 /**
