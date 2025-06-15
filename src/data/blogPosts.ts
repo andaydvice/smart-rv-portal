@@ -68,7 +68,7 @@ export const blogPosts = [
     title: 'Solar Power Solutions for Full Time RVers',
     description: 'Complete guide to planning and installing a solar power system in your RV.',
     image: '/lovable-uploads/51ac2438-08c7-47ee-b56d-876aa3bbdc80.png',
-    slug: 'solar-power-solutions',
+    slug: 'solar-power-for-rvs',
     content: 'Complete guide to planning and installing a solar power system in your RV. Learn about panel selection, battery storage, installation considerations, and how to maximize your solar setup for full-time RV living.'
   },
   {
