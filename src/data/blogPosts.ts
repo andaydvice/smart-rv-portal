@@ -1,12 +1,11 @@
-
 import { BlogPost } from '@/types/blog';
 
 export const blogPosts: BlogPost[] = [
   {
     category: 'tech',
     author: {
-      initials: 'JD',
-      name: 'John Doe'
+      initials: 'ML',
+      name: 'Mobile Living Expert'
     },
     title: 'The Future of Mobile Living',
     description: 'Smart RVs are revolutionizing how we experience life on the road.',
