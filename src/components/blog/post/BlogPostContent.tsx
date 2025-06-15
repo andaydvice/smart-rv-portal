@@ -1,7 +1,6 @@
 
 import React from 'react';
 import { BlogPostHeader } from './components/BlogPostHeader';
-import { BlogPostSummary } from './components/BlogPostSummary';
 import { BlogContentParser } from './components/BlogContentParser';
 import { extractSummary } from './utils/contentParser';
 
@@ -28,6 +27,9 @@ export const BlogPostContent = ({
   summary,
 }: BlogPostContentProps) => {
   const extractedSummary = extractSummary(content, summary);
+  const summarySentences = extractedSummary
+    .split(/(?<=[.?!])\s+/)
+    .filter((sentence) => sentence.trim().length > 0);
 
   return (
     <div className="max-w-4xl mx-auto px-4">
@@ -38,7 +40,18 @@ export const BlogPostContent = ({
         author={author}
       />
 
-      <BlogPostSummary summary={extractedSummary} />
+      {summarySentences.length > 0 && (
+        <div className="my-8 p-6 bg-connectivity-darkBg border-l-4 border-connectivity-accent rounded-r-lg shadow-lg">
+          {summarySentences.map((sentence, index) => (
+            <p
+              key={index}
+              className="text-light-blue italic leading-relaxed md:text-lg [&:not(:last-child)]:mb-4"
+            >
+              {sentence}
+            </p>
+          ))}
+        </div>
+      )}
 
       <div className="blog-content text-left space-y-4">
         <BlogContentParser content={content} />
