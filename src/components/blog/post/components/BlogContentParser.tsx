@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { RVParkContentParser } from '../parsers/RVParkContentParser';
 import { PlainTextContentParser } from '../parsers/PlainTextContentParser';
@@ -30,7 +29,7 @@ const CustomMarkdownParser: React.FC<{ lines: string[] }> = ({ lines }) => {
   const flushList = () => {
     if (listItems.length > 0) {
       elements.push(
-        <ul key={`ul-${elements.length}`} className="list-disc list-inside space-y-3 my-4 pl-4 text-light-blue leading-relaxed">
+        <ul key={`ul-${elements.length}`} className="list-disc list-outside space-y-3 my-4 pl-6 text-light-blue leading-relaxed">
           {listItems.map((item, index) => (
             <li key={index} className="text-balance">{parseInlineFormatting(item)}</li>
           ))}
@@ -43,7 +42,7 @@ const CustomMarkdownParser: React.FC<{ lines: string[] }> = ({ lines }) => {
   const flushOrderedList = () => {
     if (orderedListItems.length > 0) {
       elements.push(
-        <ol key={`ol-${elements.length}`} className="list-decimal list-inside space-y-3 my-4 pl-4 text-light-blue leading-relaxed">
+        <ol key={`ol-${elements.length}`} className="list-decimal list-outside space-y-3 my-4 pl-6 text-light-blue leading-relaxed">
           {orderedListItems.map((item, index) => (
             <li key={index} className="text-balance">{parseInlineFormatting(item)}</li>
           ))}
