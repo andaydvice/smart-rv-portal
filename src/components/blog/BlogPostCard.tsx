@@ -7,14 +7,6 @@ interface BlogPostCardProps {
   post: BlogPost;
 }
 
-const preventWidow = (text: string) => {
-  const lastSpace = text.lastIndexOf(' ');
-  if (lastSpace > 0) {
-    return `${text.substring(0, lastSpace)}\u00A0${text.substring(lastSpace + 1)}`;
-  }
-  return text;
-};
-
 const BlogPostCard = ({ post }: BlogPostCardProps) => {
   const getCategoryDisplay = (category: string) => {
     return category.charAt(0).toUpperCase() + category.slice(1).toLowerCase();
@@ -41,8 +33,8 @@ const BlogPostCard = ({ post }: BlogPostCardProps) => {
           <h3 className="text-2xl font-bold text-white">
             {post.title}
           </h3>
-          <p className="text-white/90">
-            {preventWidow(post.description)}
+          <p className="text-white/90 text-balance">
+            {post.description}
           </p>
           
           <Link 

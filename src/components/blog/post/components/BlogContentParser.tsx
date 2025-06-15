@@ -8,14 +8,6 @@ interface BlogContentParserProps {
   content: string;
 }
 
-const preventWidow = (text: string) => {
-  const lastSpace = text.lastIndexOf(' ');
-  if (lastSpace > 0) {
-    return `${text.substring(0, lastSpace)}\u00A0${text.substring(lastSpace + 1)}`;
-  }
-  return text;
-};
-
 // Helper to parse a single line for bold text using `<strong>` tags.
 const parseInlineFormatting = (line: string): React.ReactNode => {
     // Split the line by the bold markers (**...**)
@@ -40,7 +32,7 @@ const CustomMarkdownParser: React.FC<{ lines: string[] }> = ({ lines }) => {
       elements.push(
         <ul key={`ul-${elements.length}`} className="list-disc list-inside space-y-3 my-4 pl-4 text-light-blue leading-relaxed">
           {listItems.map((item, index) => (
-            <li key={index}>{parseInlineFormatting(preventWidow(item))}</li>
+            <li key={index} className="text-balance">{parseInlineFormatting(item)}</li>
           ))}
         </ul>
       );
@@ -53,7 +45,7 @@ const CustomMarkdownParser: React.FC<{ lines: string[] }> = ({ lines }) => {
       elements.push(
         <ol key={`ol-${elements.length}`} className="list-decimal list-inside space-y-3 my-4 pl-4 text-light-blue leading-relaxed">
           {orderedListItems.map((item, index) => (
-            <li key={index}>{parseInlineFormatting(preventWidow(item))}</li>
+            <li key={index} className="text-balance">{parseInlineFormatting(item)}</li>
           ))}
         </ol>
       );
@@ -86,7 +78,7 @@ const CustomMarkdownParser: React.FC<{ lines: string[] }> = ({ lines }) => {
       if (line.trim().length > 0) {
         const sentences = line.split(/(?<=[.?!])\s+/).filter(s => s.trim().length > 0);
         sentences.forEach((sentence, sIndex) => {
-          elements.push(<p key={`${index}-${sIndex}`} className="text-light-blue leading-relaxed mb-4">{parseInlineFormatting(preventWidow(sentence))}</p>);
+          elements.push(<p key={`${index}-${sIndex}`} className="text-light-blue leading-relaxed mb-4 text-balance">{parseInlineFormatting(sentence)}</p>);
         });
       }
     }

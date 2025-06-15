@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { BlogPostHeader } from './components/BlogPostHeader';
 import { BlogContentParser } from './components/BlogContentParser';
@@ -18,14 +17,6 @@ interface BlogPostContentProps {
   summary?: string;
 }
 
-const preventWidow = (text: string) => {
-  const lastSpace = text.lastIndexOf(' ');
-  if (lastSpace > 0) {
-    return `${text.substring(0, lastSpace)}\u00A0${text.substring(lastSpace + 1)}`;
-  }
-  return text;
-};
-
 export const BlogPostContent = ({
   category,
   title,
@@ -44,7 +35,7 @@ export const BlogPostContent = ({
       <BlogPostHeader
         category={category}
         title={title}
-        description={description ? preventWidow(description) : undefined}
+        description={description}
         author={author}
       />
 
@@ -53,9 +44,9 @@ export const BlogPostContent = ({
           {summarySentences.map((sentence, index) => (
             <p
               key={index}
-              className="text-light-blue leading-relaxed md:text-lg [&:not(:last-child)]:mb-4"
+              className="text-light-blue leading-relaxed md:text-lg [&:not(:last-child)]:mb-4 text-balance"
             >
-              {preventWidow(sentence)}
+              {sentence}
             </p>
           ))}
         </div>
