@@ -15,7 +15,8 @@ import {
 import {
   sustainableTravelRedefined,
   remoteWorkRvSetup,
-  top10RvParksUsa
+  top10RvParksUsa,
+  essentialRvPackingChecklist
 } from './travel';
 
 export const blogPosts: BlogPost[] = [
@@ -27,5 +28,6 @@ export const blogPosts: BlogPost[] = [
   solarPowerForRvs,
   smartRvSecuritySystems,
   remoteWorkRvSetup,
-  top10RvParksUsa
+  top10RvParksUsa,
+  essentialRvPackingChecklist
 ];
