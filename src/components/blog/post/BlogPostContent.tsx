@@ -12,6 +12,7 @@ interface BlogPostContentProps {
   author: Author;
   description?: string;
   content: string;
+  summary?: string; // Optional summary from blog post (future support)
 }
 
 export const BlogPostContent = ({
@@ -20,52 +21,160 @@ export const BlogPostContent = ({
   author,
   description,
   content,
+  summary,
 }: BlogPostContentProps) => {
-  // Enhanced content formatting that properly breaks up large text blocks
-  const formatContent = (text: string) => {
-    // Split by double line breaks first, then by single periods for sentence-by-sentence paragraphs
-    const sentences = text.split(/\.(?:\s+|$)/).filter(s => s.trim().length > 0);
-    
-    return sentences.map((sentence, index) => {
-      const trimmedSentence = sentence.trim();
-      
-      if (!trimmedSentence) return null;
-      
-      // Add period back if it doesn't end with punctuation
-      const formattedSentence = trimmedSentence.match(/[.!?]$/) 
-        ? trimmedSentence 
-        : trimmedSentence + '.';
-      
-      // Detect potential headlines (short sentences that introduce topics)
-      const isHeadline = (
-        trimmedSentence.length < 100 && 
-        (
-          trimmedSentence.toLowerCase().includes('guide to') ||
-          trimmedSentence.toLowerCase().includes('national park') ||
-          trimmedSentence.toLowerCase().includes('state park') ||
-          trimmedSentence.toLowerCase().includes('campground') ||
-          trimmedSentence.toLowerCase().includes('rv park') ||
-          trimmedSentence.toLowerCase().includes('features include') ||
-          trimmedSentence.toLowerCase().includes('benefits include') ||
-          trimmedSentence.toLowerCase().includes('considerations include') ||
-          (index > 0 && sentences[index - 1] && sentences[index - 1].trim().length < 80)
-        )
-      );
-      
-      if (isHeadline && index > 2) {
-        return (
-          <h2 key={index} className="text-2xl md:text-3xl font-semibold text-white mt-12 mb-6">
-            {formattedSentence}
-          </h2>
-        );
+  // Extract the summary: prefer summary prop, then first paragraph, then first 2 sentences
+  const getSummary = () => {
+    if (summary) return summary;
+    const lines = content.trim().split('\n');
+    for (let line of lines) {
+      if (line.trim().length > 40) {
+        return line.trim();
       }
-      
-      return (
-        <p key={index} className="mb-6 text-white/90 text-lg leading-relaxed md:text-xl md:leading-8">
-          {formattedSentence}
-        </p>
-      );
-    }).filter(Boolean);
+    }
+    // fallback: first 2 sentences if no long paragraph found
+    const sentences = content.split(/[.?!]\s+/).filter(Boolean);
+    return sentences.slice(0, 2).join('. ') + (sentences.length > 1 ? '.' : '');
+  };
+
+  // Lightweight markdown-ish parser to handle titles, bullets, and numbered lists
+  const parseContent = (raw: string) => {
+    const lines = raw.split('\n').filter(Boolean);
+
+    const elements: React.ReactNode[] = [];
+    let buffer: string[] = [];
+    let listType: 'ul' | 'ol' | null = null;
+
+    const flushBufferAsParagraph = () => {
+      if (buffer.length) {
+        elements.push(
+          <p key={'para_' + elements.length} className="mb-6 text-white/90 text-lg leading-relaxed md:text-xl md:leading-8">
+            {buffer.join(' ')}
+          </p>
+        );
+        buffer = [];
+      }
+    };
+
+    for (let i = 0; i < lines.length; i++) {
+      const line = lines[i].trim();
+
+      // Headings
+      if (/^#\s+/.test(line)) {
+        flushBufferAsParagraph();
+        elements.push(
+          <h1 key={'h1_' + elements.length} className="text-4xl md:text-5xl font-bold text-white mt-10 mb-5">{line.replace(/^#\s+/, '')}</h1>
+        );
+        continue;
+      }
+      if (/^##\s+/.test(line)) {
+        flushBufferAsParagraph();
+        elements.push(
+          <h2 key={'h2_' + elements.length} className="text-2xl md:text-3xl font-semibold text-white mt-8 mb-5">{line.replace(/^##\s+/, '')}</h2>
+        );
+        continue;
+      }
+      if (/^###\s+/.test(line)) {
+        flushBufferAsParagraph();
+        elements.push(
+          <h3 key={'h3_' + elements.length} className="text-xl md:text-2xl font-semibold text-white mt-6 mb-4">{line.replace(/^###\s+/, '')}</h3>
+        );
+        continue;
+      }
+
+      // Unordered List
+      if (/^(-|\*)\s+/.test(line)) {
+        if (listType !== 'ul') {
+          flushBufferAsParagraph();
+          listType = 'ul';
+          elements.push(
+            <ul key={'ul_' + elements.length} className="mb-6 list-disc list-inside text-white/90 text-lg space-y-2 md:text-xl md:leading-8">
+              {/* List items will be added here in-place below */}
+            </ul>
+          );
+        }
+        const lastIdx = elements.length - 1;
+        const currentUl =
+          elements[lastIdx] &&
+          (elements[lastIdx] as React.ReactElement).type === 'ul'
+            ? (elements[lastIdx] as React.ReactElement)
+            : null;
+        const li = (
+          <li key={'li_' + i} className="ml-4">
+            {line.replace(/^(-|\*)\s+/, '')}
+          </li>
+        );
+        // Add to the last <ul> element
+        if (currentUl) {
+          // Create new children array or append
+          const newUl = React.cloneElement(
+            currentUl,
+            {},
+            [...(currentUl.props.children || []), li]
+          );
+          elements[lastIdx] = newUl;
+        }
+        continue;
+      }
+
+      // Ordered List
+      if (/^\d+\.\s+/.test(line)) {
+        if (listType !== 'ol') {
+          flushBufferAsParagraph();
+          listType = 'ol';
+          elements.push(
+            <ol key={'ol_' + elements.length} className="mb-6 list-decimal list-inside text-white/90 text-lg space-y-2 md:text-xl md:leading-8">
+              {/* List items will be added here in-place below */}
+            </ol>
+          );
+        }
+        const lastIdx = elements.length - 1;
+        const currentOl =
+          elements[lastIdx] &&
+          (elements[lastIdx] as React.ReactElement).type === 'ol'
+            ? (elements[lastIdx] as React.ReactElement)
+            : null;
+        const li = (
+          <li key={'oli_' + i} className="ml-4">
+            {line.replace(/^\d+\.\s+/, '')}
+          </li>
+        );
+        // Add to the last <ol> element
+        if (currentOl) {
+          // Create new children array or append
+          const newOl = React.cloneElement(
+            currentOl,
+            {},
+            [...(currentOl.props.children || []), li]
+          );
+          elements[lastIdx] = newOl;
+        }
+        continue;
+      }
+
+      // Blank line resets (end lists if any)
+      if (line === '' || i === lines.length - 1) {
+        flushBufferAsParagraph();
+        listType = null;
+        if (i === lines.length - 1 && line.length > 0) {
+          buffer.push(line);
+          flushBufferAsParagraph();
+        }
+        continue;
+      }
+
+      // Fallback: buffer the line for paragraph
+      buffer.push(line);
+      // If last line, flush
+      if (i === lines.length - 1) {
+        flushBufferAsParagraph();
+      }
+      // End list when not in a list anymore
+      listType = null;
+    }
+    flushBufferAsParagraph();
+
+    return elements;
   };
 
   return (
@@ -79,10 +188,16 @@ export const BlogPostContent = ({
       <h1 className="text-4xl md:text-5xl font-bold text-white mb-6 text-left leading-tight">{title}</h1>
 
       {description && (
-        <div className="text-[#E2E8FF] text-xl md:text-2xl font-medium mb-12 text-left leading-relaxed">
+        <div className="text-[#E2E8FF] text-xl md:text-2xl font-medium mb-6 text-left leading-relaxed">
           {description}
         </div>
       )}
+
+      {/* Summary block */}
+      <div className="bg-[#131a2a] border-l-4 border-connectivity-accent mb-12 px-6 py-6 rounded-2xl text-left shadow-lg">
+        <h3 className="font-semibold text-connectivity-accent text-lg mb-2">Summary</h3>
+        <p className="text-white/90 text-base md:text-lg leading-relaxed">{getSummary()}</p>
+      </div>
 
       <div className="flex items-center gap-4 text-white/80 mb-12">
         <div className="bg-[#1B2028] w-12 h-12 rounded-full flex items-center justify-center font-semibold text-lg">
@@ -92,7 +207,7 @@ export const BlogPostContent = ({
       </div>
 
       <div className="blog-content text-left space-y-4">
-        {formatContent(content)}
+        {parseContent(content)}
       </div>
     </div>
   );
