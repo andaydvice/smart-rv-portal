@@ -1,4 +1,3 @@
-
 import { useParams, useNavigate } from 'react-router-dom';
 import { Helmet } from "react-helmet";
 import Navbar from "@/components/Navbar";
@@ -10,7 +9,7 @@ import { BlogPostContent } from "@/components/blog/post/BlogPostContent";
 import { PageErrorBoundary } from "@/components/common/PageErrorBoundary";
 import Footer2 from "@/components/ui/Footer2";
 import { useToast } from "@/hooks/use-toast";
-import { blogPosts } from '@/data/blogPosts';
+import { blogPosts } from '@/data/blog'; // MODIFIED: Updated import path
 
 // Define the footer links and socials for this page
 const footerLinks = [
@@ -102,7 +101,7 @@ const BlogPost = () => {
             category={post.category}
             title={post.title}
             author={post.author}
-            description={post.description} // Pass the subheadline
+            description={post.description}
             content={post.content}
           />
         </div>
