@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { RVParkContentParser } from '../parsers/RVParkContentParser';
 import { PlainTextContentParser } from '../parsers/PlainTextContentParser';
@@ -25,6 +26,19 @@ const CustomMarkdownParser: React.FC<{ lines: string[] }> = ({ lines }) => {
   const elements: React.ReactNode[] = [];
   let listItems: string[] = [];
   let orderedListItems: string[] = [];
+  let paragraphBuffer: string[] = [];
+
+  const flushParagraph = () => {
+    if (paragraphBuffer.length > 0) {
+      const paragraphText = paragraphBuffer.join(' ');
+      elements.push(
+        <p key={`p-${elements.length}`} className="text-light-blue leading-relaxed mb-4">
+          {parseInlineFormatting(paragraphText)}
+        </p>
+      );
+      paragraphBuffer = [];
+    }
+  };
 
   const flushList = () => {
     if (listItems.length > 0) {
@@ -54,33 +68,37 @@ const CustomMarkdownParser: React.FC<{ lines: string[] }> = ({ lines }) => {
 
   lines.forEach((line, index) => {
     if (/^##\s/.test(line)) {
+      flushParagraph();
       flushList();
       flushOrderedList();
       elements.push(<h2 key={index} className="text-2xl font-bold mt-8 mb-4 text-white">{parseInlineFormatting(line.substring(3))}</h2>);
     } else if (/^###\s/.test(line)) {
+      flushParagraph();
       flushList();
       flushOrderedList();
       elements.push(<h3 key={index} className="text-xl font-bold mt-6 mb-3 text-[#E2E8FF]">{parseInlineFormatting(line.substring(4))}</h3>);
     } else if (/^\s*(-|\*)\s+/.test(line)) {
+      flushParagraph();
       flushOrderedList();
       listItems.push(line.replace(/^\s*(-|\*)\s+/, ''));
     } else if (/^\d+\.\s+/.test(line)) {
+      flushParagraph();
       flushList();
       orderedListItems.push(line.replace(/^\d+\.\s+/, ''));
-    } else {
+    } else if (line.length > 0) {
       flushList();
       flushOrderedList();
-      if (line.trim().length > 0) {
-        const sentences = line.split(/(?<=[.?!])\s+/).filter(s => s.trim().length > 0);
-        sentences.forEach((sentence, sIndex) => {
-          elements.push(<p key={`${index}-${sIndex}`} className="text-light-blue leading-relaxed mb-4 text-balance">{parseInlineFormatting(sentence)}</p>);
-        });
-      }
+      paragraphBuffer.push(line);
+    } else { // Empty line
+      flushParagraph();
+      flushList();
+      flushOrderedList();
     }
   });
 
-  flushList(); // Render any remaining list items
-  flushOrderedList(); // Render any remaining ordered list items
+  flushParagraph();
+  flushList();
+  flushOrderedList();
 
   return <div className="prose prose-invert max-w-none">{elements}</div>;
 };

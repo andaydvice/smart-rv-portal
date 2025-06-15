@@ -44,7 +44,7 @@ export const BlogPostContent = ({
           {summarySentences.map((sentence, index) => (
             <p
               key={index}
-              className="text-light-blue leading-relaxed md:text-lg [&:not(:last-child)]:mb-4 text-balance"
+              className="text-light-blue leading-relaxed md:text-lg [&:not(:last-child)]:mb-4"
             >
               {sentence}
             </p>
