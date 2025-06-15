@@ -14,6 +14,14 @@ interface TrendingPostCardProps {
   post: Post;
 }
 
+const preventWidow = (text: string) => {
+  const lastSpace = text.lastIndexOf(' ');
+  if (lastSpace > 0) {
+    return `${text.substring(0, lastSpace)}\u00A0${text.substring(lastSpace + 1)}`;
+  }
+  return text;
+};
+
 const TrendingPostCard: React.FC<TrendingPostCardProps> = ({ post }) => {
   // Generate slug from title if not provided
   const slug = post.slug || post.title.toLowerCase().replace(/\s+/g, '-');
@@ -38,7 +46,7 @@ const TrendingPostCard: React.FC<TrendingPostCardProps> = ({ post }) => {
         </h3>
         
         <p className="text-[#E2E8FF] text-sm">
-          {post.description}
+          {preventWidow(post.description)}
         </p>
         
         <Link 

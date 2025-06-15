@@ -18,6 +18,14 @@ interface BlogPostContentProps {
   summary?: string;
 }
 
+const preventWidow = (text: string) => {
+  const lastSpace = text.lastIndexOf(' ');
+  if (lastSpace > 0) {
+    return `${text.substring(0, lastSpace)}\u00A0${text.substring(lastSpace + 1)}`;
+  }
+  return text;
+};
+
 export const BlogPostContent = ({
   category,
   title,
@@ -36,7 +44,7 @@ export const BlogPostContent = ({
       <BlogPostHeader
         category={category}
         title={title}
-        description={description}
+        description={description ? preventWidow(description) : undefined}
         author={author}
       />
 
@@ -47,7 +55,7 @@ export const BlogPostContent = ({
               key={index}
               className="text-light-blue leading-relaxed md:text-lg [&:not(:last-child)]:mb-4"
             >
-              {sentence}
+              {preventWidow(sentence)}
             </p>
           ))}
         </div>

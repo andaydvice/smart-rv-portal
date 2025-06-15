@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { BlogPost } from '@/types/blog';
@@ -5,6 +6,14 @@ import { BlogPost } from '@/types/blog';
 interface BlogPostCardProps {
   post: BlogPost;
 }
+
+const preventWidow = (text: string) => {
+  const lastSpace = text.lastIndexOf(' ');
+  if (lastSpace > 0) {
+    return `${text.substring(0, lastSpace)}\u00A0${text.substring(lastSpace + 1)}`;
+  }
+  return text;
+};
 
 const BlogPostCard = ({ post }: BlogPostCardProps) => {
   const getCategoryDisplay = (category: string) => {
@@ -33,7 +42,7 @@ const BlogPostCard = ({ post }: BlogPostCardProps) => {
             {post.title}
           </h3>
           <p className="text-white/90">
-            {post.description}
+            {preventWidow(post.description)}
           </p>
           
           <Link 
