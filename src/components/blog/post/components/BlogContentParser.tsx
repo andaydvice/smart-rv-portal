@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { RVParkContentParser } from '../parsers/RVParkContentParser';
 import { PlainTextContentParser } from '../parsers/PlainTextContentParser';
@@ -76,10 +75,7 @@ const CustomMarkdownParser: React.FC<{ lines: string[] }> = ({ lines }) => {
       flushList();
       flushOrderedList();
       if (line.trim().length > 0) {
-        const sentences = line.split(/(?<=[.?!])\s+/).filter(sentence => sentence.trim().length > 0);
-        sentences.forEach((sentence, sIndex) => {
-            elements.push(<p key={`${index}-${sIndex}`} className="text-light-blue leading-relaxed mb-4">{parseInlineFormatting(sentence)}</p>);
-        });
+        elements.push(<p key={index} className="text-light-blue leading-relaxed mb-4">{parseInlineFormatting(line)}</p>);
       }
     }
   });

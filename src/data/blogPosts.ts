@@ -141,18 +141,6 @@ Your system is installed, but a few habits can maximize its performance.
 Investing in a solar power system is one of the most rewarding upgrades for any RVer. It unlocks a new level of freedom, allowing you to explore more remote and beautiful places without being tethered to a power pedestal. With careful planning and a quality installation, you can enjoy reliable, clean, and quiet power on all your adventures.`
   },
   {
-    category: 'travel',
-    author: {
-      initials: 'RW',
-      name: 'Remote Worker'
-    },
-    title: 'Remote Work from Your RV: Essential Setup Guide',
-    description: 'Create the perfect mobile office setup in your RV with these tips.',
-    image: '/lovable-uploads/ae930cf7-205f-41d3-9c9b-a4969e5c35e6.png',
-    slug: 'remote-work-rv-setup',
-    content: `Create the perfect mobile office setup in your RV with these essential tips. From connectivity solutions to workspace organization, learn how to maintain productivity while enjoying the freedom of RV living.`
-  },
-  {
     category: 'tech',
     author: {
       initials: 'SS',
@@ -174,17 +162,14 @@ The financial impact extends beyond replacing stolen items. Insurance claims, in
 
 2. Modern Smart Security Solutions
 
-Integrated surveillance systems with high definition cameras and night vision capabilities provide 24/7 monitoring around your RV perimeter. These systems offer smartphone alerts, cloud storage, and two way audio communication.
+### Integrated Surveillance and Monitoring
+Integrated surveillance systems with high definition cameras and night vision capabilities provide 24/7 monitoring around your RV perimeter. These systems offer smartphone alerts, cloud storage, and two way audio communication. Advanced motion detection filters out false alarms from wind or small animals while immediately alerting you to genuine threats. Some systems include facial recognition to identify familiar faces versus potential intruders.
 
-Advanced motion detection filters out false alarms from wind or small animals while immediately alerting you to genuine threats. Some systems include facial recognition to identify familiar faces versus potential intruders.
+### Smart Lock and Access Control
+Smart lock technology eliminates the risk of lost keys while providing multiple access methods. Smartphone apps, numeric codes, and backup physical keys ensure you never get locked out. Remote locking capabilities allow you to secure your RV from anywhere, while access logs show exactly who entered and when. Temporary codes can be shared with trusted friends or service personnel.
 
-Smart lock technology eliminates the risk of lost keys while providing multiple access methods. Smartphone apps, numeric codes, and backup physical keys ensure you never get locked out.
-
-Remote locking capabilities allow you to secure your RV from anywhere, while access logs show exactly who entered and when. Temporary codes can be shared with trusted friends or service personnel.
-
-Comprehensive alarm systems integrate door sensors, window monitors, and motion detectors into a unified network. These systems connect to your smartphone for instant notifications regardless of your location.
-
-Battery backup ensures continued protection even when disconnected from shore power. Solar charging options provide sustainable operation during extended boondocking adventures.
+### Comprehensive Alarm and Power Systems
+Comprehensive alarm systems integrate door sensors, window monitors, and motion detectors into a unified network. These systems connect to your smartphone for instant notifications regardless of your location. Battery backup ensures continued protection even when disconnected from shore power. Solar charging options provide sustainable operation during extended boondocking adventures.
 
 3. GPS Tracking and Recovery
 
@@ -241,6 +226,18 @@ Insurance premium discounts often offset system costs over time. Many insurers o
 Peace of mind value cannot be quantified but significantly enhances the RV lifestyle experience. Knowing your home and belongings are protected allows fuller enjoyment of your adventures.
 
 Modern smart RV security systems represent a wise investment in protecting your mobile lifestyle. From basic alarm systems to comprehensive monitoring solutions, today's technology provides unprecedented protection and convenience for RV owners.`
+  },
+  {
+    category: 'travel',
+    author: {
+      initials: 'RW',
+      name: 'Remote Worker'
+    },
+    title: 'Remote Work from Your RV: Essential Setup Guide',
+    description: 'Create the perfect mobile office setup in your RV with these tips.',
+    image: '/lovable-uploads/ae930cf7-205f-41d3-9c9b-a4969e5c35e6.png',
+    slug: 'remote-work-rv-setup',
+    content: `Create the perfect mobile office setup in your RV with these essential tips. From connectivity solutions to workspace organization, learn how to maintain productivity while enjoying the freedom of RV living.`
   },
   {
     category: 'travel',
