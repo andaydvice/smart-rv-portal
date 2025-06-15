@@ -1,4 +1,3 @@
-
 import React from 'react';
 
 export interface ParsedContent {
@@ -29,23 +28,19 @@ export const hasRVParkContent = (content: string): boolean => {
   // Check for numbered list patterns AND RV/travel related keywords
   const hasNumberedList = /^\d{1,2}[.)]\s+/m.test(content);
   const hasRVKeywords = lower.includes('rv') || lower.includes('park') || lower.includes('campground') || lower.includes('resort');
-  // MODIFIED: This check ensures that posts with markdown headings (like '## Title') are
-  // correctly handled by the markdown parser instead of being misidentified as an RV park list.
-  const hasMarkdownHeadings = /^#+\s+/m.test(content);
-  
-  return hasNumberedList && hasRVKeywords && !hasMarkdownHeadings;
+  // This check is now simpler because hasMarkdownContent is checked first in the parser component.
+  return hasNumberedList && hasRVKeywords;
 };
 
 /**
- * Check if content has markdown formatting
+ * Check if content has markdown formatting (headings, bullets)
  */
 export const hasMarkdownContent = (lines: string[]): boolean => {
+  // We check for markdown first, so this can be more specific.
+  // We don't check for numbered lists here to avoid ambiguity with RV Park lists.
   return lines.some(line =>
-    /^#\s+/.test(line) ||
-    /^##\s+/.test(line) ||
-    /^###\s+/.test(line) ||
-    /^(-|\*)\s+/.test(line) ||
-    /^\d+\.\s+/.test(line)
+    /^#+\s+/.test(line) || // h1, h2, h3, etc.
+    /^\s*(-|\*)\s+/.test(line) // bullet points
   );
 };
 
