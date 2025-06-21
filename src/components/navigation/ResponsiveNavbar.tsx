@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import NavbarLinks from "./links/NavbarLinks";
-import MobileMenu from "./MobileMenu";
+import MobileNavigation from "./MobileNavigation";
 
 const ResponsiveNavbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -46,7 +46,7 @@ const ResponsiveNavbar = () => {
       </div>
 
       {/* Mobile Menu */}
-      <MobileMenu isOpen={isMobileMenuOpen} />
+      <MobileNavigation isOpen={isMobileMenuOpen} />
     </nav>
   );
 };
