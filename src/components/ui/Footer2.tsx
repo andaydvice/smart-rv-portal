@@ -48,20 +48,30 @@ const defaultLinks: FooterGroup[] = [
     ]
   },
   {
-    title: "Products",
+    title: "RV Intelligence",
     links: [
-      { text: "Models", href: "/models" },
-      { text: "Technology", href: "/technology" },
-      { text: "Features", href: "/features" },
-      { text: "Storage", href: "/storage-facilities" }
+      { text: "Voice Control", href: "/voice-control" },
+      { text: "Smart Automation", href: "/features/smart-automation" },
+      { text: "Security System", href: "/features/security-system" },
+      { text: "Navigation System", href: "/features/navigation-system" }
     ]
   },
   {
-    title: "Resources",
+    title: "RV Systems", 
     links: [
+      { text: "Power Management", href: "/features/power-management" },
+      { text: "Water Systems", href: "/features/water-systems" },
+      { text: "Climate Control", href: "/features/climate-control" },
+      { text: "Entertainment", href: "/features/entertainment" }
+    ]
+  },
+  {
+    title: "Models & Tools",
+    links: [
+      { text: "Models", href: "/models" },
       { text: "Calculators", href: "/calculators" },
-      { text: "Documentation", href: "/documentation" },
-      { text: "Support", href: "/troubleshooting" }
+      { text: "Storage Facilities", href: "/storage-facilities" },
+      { text: "Documentation", href: "/documentation" }
     ]
   }
 ];
@@ -77,8 +87,7 @@ const Footer2 = ({
   return (
     <footer className={cn("bg-gray-900 text-white mt-auto", className)}>
       <div className="max-w-7xl mx-auto px-4 py-12 sm:px-6 lg:px-8">
-        <div className={cn("grid grid-cols-1 md:grid-cols-4 gap-8", 
-          links.length === 0 ? "md:grid-cols-2" : `md:grid-cols-${Math.min(links.length + 1, 4)}`
+        <div className={cn("grid grid-cols-1 md:grid-cols-5 gap-8"
         )}>
           {/* Company Info */}
           <div className="space-y-4 flex flex-col items-center md:items-start">
