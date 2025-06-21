@@ -79,10 +79,10 @@ const About = () => {
                   <p className="text-white/80">Round the clock technical support and maintenance guidance</p>
                 </div>
                 
-                <div className="w-16 h-16 bg-[#5B9BD5] rounded-full flex items-center justify-center mx-auto mb-4">
-                  <span className="text-white font-bold text-2xl">∞</span>
-                </div>
                 <div className="text-center">
+                  <div className="w-16 h-16 bg-[#5B9BD5] rounded-full flex items-center justify-center mx-auto mb-4">
+                    <span className="text-white font-bold text-2xl">∞</span>
+                  </div>
                   <h4 className="text-xl font-bold text-white mb-2">Endless Adventure</h4>
                   <p className="text-white/80">Technology that enables unlimited exploration and discovery</p>
                 </div>

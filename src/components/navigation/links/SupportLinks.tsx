@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { BookOpen, AlertTriangle } from 'lucide-react';
+import { BookOpen, AlertTriangle, User, DollarSign } from 'lucide-react';
 
 interface SupportLinksProps {
   className?: string;
@@ -9,6 +9,14 @@ interface SupportLinksProps {
 
 const SupportLinks: React.FC<SupportLinksProps> = ({ className }) => (
   <div className={`grid gap-3 ${className || ''}`}>
+    <NavLink to="/about" className="text-white hover:text-blue-400 transition-colors flex items-center gap-2">
+      <User className="h-4 w-4 text-[#5B9BD5]" />
+      <span>About</span>
+    </NavLink>
+    <NavLink to="/pricing" className="text-white hover:text-blue-400 transition-colors flex items-center gap-2">
+      <DollarSign className="h-4 w-4 text-[#10B981]" />
+      <span>Pricing</span>
+    </NavLink>
     <NavLink to="/documentation" className="text-white hover:text-blue-400 transition-colors flex items-center gap-2">
       <BookOpen className="h-4 w-4 text-[#F97316]" />
       <span>Documentation</span>

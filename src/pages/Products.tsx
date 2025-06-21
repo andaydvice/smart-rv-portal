@@ -29,7 +29,7 @@ const Products = () => {
     {
       title: "Storage Solutions",
       description: "Premium indoor RV storage facilities with advanced security and climate control systems.",
-      image: "/lovable-uploads/c25a3800-323e-4e21-9402-72b27002e767.png",
+      image: "/lovable-uploads/598a2cb5-ffcb-440a-9943-6c4440749b9f.png",
       link: "/storage-facilities", 
       features: ["Climate Controlled", "24/7 Security", "Easy Access"]
     }
