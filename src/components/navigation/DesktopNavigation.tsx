@@ -5,7 +5,7 @@ import {
   Brain, Lightbulb, Eye, Search,
   Cog, Layers, Activity, Network,
   Car, Truck, Tent, LayoutTemplate,
-  HelpCircle, MessageCircleQuestion, LifeBuoy, Phone, BookOpen
+  HelpCircle, MessageCircleQuestion, LifeBuoy, Phone, BookOpen, User, DollarSign
 } from "lucide-react";
 import AuthButtons from "./AuthButtons";
 import HoverDropdownMenu from "./HoverDropdownMenu";
@@ -112,8 +112,23 @@ const DesktopNavigation = () => {
     }
   ];
 
-  // Define Support links with icons — include FAQ as one link plus others cleanly
+  // Define Support links with icons — FIXED to include About, Pricing, Contact
   const supportLinks = [
+    { 
+      text: "About", 
+      href: "/about",
+      icon: <User size={16} className="text-[#5B9BD5]" /> 
+    },
+    { 
+      text: "Pricing", 
+      href: "/pricing",
+      icon: <DollarSign size={16} className="text-[#10B981]" /> 
+    },
+    { 
+      text: "Contact", 
+      href: "/contact",
+      icon: <Phone size={16} className="text-[#0EA5E9]" /> 
+    },
     { 
       text: "Technology FAQ", 
       href: "/technology",
@@ -127,7 +142,7 @@ const DesktopNavigation = () => {
     { 
       text: "Documentation", 
       href: "/documentation",
-      icon: <MessageCircleQuestion size={16} className="text-[#0EA5E9]" />
+      icon: <BookOpen size={16} className="text-[#0EA5E9]" />
     },
     { 
       text: "Schedule Demo", 
@@ -181,7 +196,7 @@ const DesktopNavigation = () => {
           Blog
         </Link>
 
-        {/* Support Dropdown */}
+        {/* Support Dropdown - NOW INCLUDES ABOUT, PRICING, CONTACT */}
         <HoverDropdownMenuV2 
           trigger="Support" 
           links={supportLinks}
