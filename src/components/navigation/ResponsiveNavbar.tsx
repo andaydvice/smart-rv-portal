@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Menu, X } from "lucide-react";
-import NavbarLinks from "./links/NavbarLinks";
+import DesktopNavigation from "./DesktopNavigation";
 import MobileNavigation from "./MobileNavigation";
 
 const ResponsiveNavbar = () => {
@@ -25,7 +25,7 @@ const ResponsiveNavbar = () => {
 
           {/* Desktop Navigation */}
           <div className="hidden md:block">
-            <NavbarLinks />
+            <DesktopNavigation />
           </div>
 
           {/* Mobile menu button */}
