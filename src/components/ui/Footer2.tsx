@@ -37,10 +37,40 @@ const iconMap: Record<string, React.ComponentType<LucideProps>> = {
   mail: Mail
 };
 
+// MODIFIED: Updated default links to include working pages
+const defaultLinks: FooterGroup[] = [
+  {
+    title: "Company",
+    links: [
+      { text: "About", href: "/about" },
+      { text: "Contact", href: "/contact" },
+      { text: "Blog", href: "/blog" }
+    ]
+  },
+  {
+    title: "Products",
+    links: [
+      { text: "Models", href: "/models" },
+      { text: "Products", href: "/products" },
+      { text: "Technology", href: "/technology" },
+      { text: "Pricing", href: "/pricing" }
+    ]
+  },
+  {
+    title: "Resources",
+    links: [
+      { text: "Features", href: "/features" },
+      { text: "Documentation", href: "/documentation" },
+      { text: "Calculators", href: "/calculators" },
+      { text: "Storage", href: "/storage-facilities" }
+    ]
+  }
+];
+
 const Footer2 = ({
   siteName = "Smart RV",
   description = "Revolutionizing the future of recreational vehicles with smart technology.",
-  links = [],
+  links = defaultLinks, // MODIFIED: Use defaultLinks instead of empty array
   socials = [],
   year = new Date().getFullYear(),
   className

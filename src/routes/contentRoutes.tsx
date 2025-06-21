@@ -8,9 +8,11 @@ import Blog from "../pages/Blog";
 import Features from "../pages/Features";
 import Documentation from "../pages/Documentation";
 import CompleteDocumentation from "../pages/documentation/CompleteDocumentation";
-import BlogPost from "../pages/BlogPost"; // MODIFIED: Import BlogPost component
+import BlogPost from "../pages/BlogPost";
+import About from "../pages/About"; // MODIFIED: Added About page import
+import Products from "../pages/Products"; // MODIFIED: Added Products page import
+import Pricing from "../pages/Pricing"; // MODIFIED: Added Pricing page import
 
-// Note: Only importing pages that actually exist in the project
 const contentRoutes: RouteObject[] = [
   {
     path: "/technology",
@@ -22,7 +24,7 @@ const contentRoutes: RouteObject[] = [
     element: <Blog />,
     errorElement: <ErrorPage />,
   },
-  { // MODIFIED: Added route for individual blog posts
+  {
     path: "/blog/:slug",
     element: <BlogPost />,
     errorElement: <ErrorPage />,
@@ -40,6 +42,21 @@ const contentRoutes: RouteObject[] = [
   {
     path: "/documentation/complete",
     element: <CompleteDocumentation />,
+    errorElement: <ErrorPage />,
+  },
+  { // MODIFIED: Added About page route
+    path: "/about",
+    element: <About />,
+    errorElement: <ErrorPage />,
+  },
+  { // MODIFIED: Added Products page route
+    path: "/products", 
+    element: <Products />,
+    errorElement: <ErrorPage />,
+  },
+  { // MODIFIED: Added Pricing page route
+    path: "/pricing",
+    element: <Pricing />,
     errorElement: <ErrorPage />,
   },
 ];

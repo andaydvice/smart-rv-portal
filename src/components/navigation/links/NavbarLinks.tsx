@@ -89,6 +89,24 @@ const NavbarLinks: React.FC<NavbarLinksProps> = ({ className = "" }) => {
       >
         Blog
       </NavLink>
+      { /* MODIFIED: Added About link */ }
+      <NavLink 
+        to="/about" 
+        className={({ isActive }) => 
+          isActive ? "text-[#5B9BD5] font-medium" : "text-gray-300 hover:text-white transition-colors"
+        }
+      >
+        About
+      </NavLink>
+      { /* MODIFIED: Added Pricing link */ }
+      <NavLink 
+        to="/pricing" 
+        className={({ isActive }) => 
+          isActive ? "text-[#5B9BD5] font-medium" : "text-gray-300 hover:text-white transition-colors"
+        }
+      >
+        Pricing
+      </NavLink>
     </div>
   );
 };
