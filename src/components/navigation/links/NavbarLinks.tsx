@@ -26,14 +26,6 @@ const NavbarLinks: React.FC<NavbarLinksProps> = ({ className = "" }) => {
         Models
       </NavLink>
       <NavLink 
-        to="/compare-models" 
-        className={({ isActive }) => 
-          isActive ? "text-[#5B9BD5] font-medium" : "text-gray-300 hover:text-white transition-colors"
-        }
-      >
-        Compare Models
-      </NavLink>
-      <NavLink 
         to="/features" 
         className={({ isActive }) => 
           isActive ? "text-[#5B9BD5] font-medium" : "text-gray-300 hover:text-white transition-colors"
@@ -50,12 +42,12 @@ const NavbarLinks: React.FC<NavbarLinksProps> = ({ className = "" }) => {
         Technology
       </NavLink>
       <NavLink 
-        to="/voice-control" 
+        to="/calculators" 
         className={({ isActive }) => 
           isActive ? "text-[#5B9BD5] font-medium" : "text-gray-300 hover:text-white transition-colors"
         }
       >
-        Voice Control
+        Calculators
       </NavLink>
       <NavLink 
         to="/storage-facilities" 
@@ -66,22 +58,6 @@ const NavbarLinks: React.FC<NavbarLinksProps> = ({ className = "" }) => {
         Storage
       </NavLink>
       <NavLink 
-        to="/storage-preparation-checklist" 
-        className={({ isActive }) => 
-          isActive ? "text-[#5B9BD5] font-medium" : "text-gray-300 hover:text-white transition-colors"
-        }
-      >
-        Storage Checklist
-      </NavLink>
-      <NavLink 
-        to="/troubleshooting" 
-        className={({ isActive }) => 
-          isActive ? "text-[#5B9BD5] font-medium" : "text-gray-300 hover:text-white transition-colors"
-        }
-      >
-        Troubleshooting
-      </NavLink>
-      <NavLink 
         to="/blog" 
         className={({ isActive }) => 
           isActive ? "text-[#5B9BD5] font-medium" : "text-gray-300 hover:text-white transition-colors"
@@ -89,7 +65,6 @@ const NavbarLinks: React.FC<NavbarLinksProps> = ({ className = "" }) => {
       >
         Blog
       </NavLink>
-      { /* MODIFIED: Added About link */ }
       <NavLink 
         to="/about" 
         className={({ isActive }) => 
@@ -98,7 +73,6 @@ const NavbarLinks: React.FC<NavbarLinksProps> = ({ className = "" }) => {
       >
         About
       </NavLink>
-      { /* MODIFIED: Added Pricing link */ }
       <NavLink 
         to="/pricing" 
         className={({ isActive }) => 
@@ -106,6 +80,14 @@ const NavbarLinks: React.FC<NavbarLinksProps> = ({ className = "" }) => {
         }
       >
         Pricing
+      </NavLink>
+      <NavLink 
+        to="/contact" 
+        className={({ isActive }) => 
+          isActive ? "text-[#5B9BD5] font-medium" : "text-gray-300 hover:text-white transition-colors"
+        }
+      >
+        Contact
       </NavLink>
     </div>
   );

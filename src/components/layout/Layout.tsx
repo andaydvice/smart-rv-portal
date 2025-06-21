@@ -1,8 +1,7 @@
 
 import React from "react";
-import Footer from "../Footer";
+import Footer2 from "../ui/Footer2";
 import Navbar from "../Navbar";
-import DebugOverlay from "../debug/DebugOverlay";
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -11,8 +10,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
       <main className="w-full max-w-full pt-16 overflow-x-hidden"> {/* Added pt-16 to ensure content starts below navbar */}
         {children}
       </main>
-      <Footer />
-      <DebugOverlay />
+      <Footer2 />
     </div>
   );
 };
