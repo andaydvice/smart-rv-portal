@@ -3,6 +3,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { campsiteRates } from "./data/campsiteTypes";
 import TripInputs from "./components/TripInputs";
 import CostBreakdown from "./components/CostBreakdown";
+import AffiliateRecommendations from "./components/AffiliateRecommendations";
 import { calculateCosts } from "./utils/costCalculations";
 
 const RVCostCalculator = () => {
@@ -99,6 +100,12 @@ const RVCostCalculator = () => {
             seasonData={seasonData}
           />
           <CostBreakdown costs={costs} />
+          <AffiliateRecommendations 
+            rvType={rvType}
+            tripDistance={distance}
+            days={days}
+            totalCost={costs.total}
+          />
         </div>
       </CardContent>
     </Card>
