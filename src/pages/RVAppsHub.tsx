@@ -6,9 +6,9 @@ import AffiliateProductCard from '@/components/affiliate/AffiliateProductCard';
 import AffiliateComparisonTable from '@/components/affiliate/AffiliateComparisonTable';
 import AffiliateCTABanner from '@/components/affiliate/AffiliateCTABanner';
 import AffiliateDisclosure from '@/components/affiliate/AffiliateDisclosure';
-import MobileProductCarousel from '@/components/mobile/MobileProductCarousel';
-import MobileScrollHint from '@/components/mobile/MobileScrollHint';
-import MobileAnalytics from '@/components/mobile/MobileAnalytics';
+import { MobileProductCarousel, MobileScrollHint, MobileAnalytics, PullToRefresh, FloatingActionButtons, AppInstallPrompt } from '@/components/mobile';
+import PerformanceMonitor from '@/components/performance/PerformanceMonitor';
+import OptimizedImage from '@/components/performance/OptimizedImage';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Smartphone, Wifi, MapPin, Battery, Settings, Shield } from 'lucide-react';
 
@@ -176,6 +176,13 @@ const RVAppsHub = () => {
     ]
   };
 
+  const refreshDeals = async () => {
+    // Simulate API call to refresh affiliate deals
+    console.log('Refreshing RV app deals...');
+    await new Promise(resolve => setTimeout(resolve, 1500));
+    console.log('Deals refreshed!');
+  };
+
   return (
     <Layout>
       <Helmet>
@@ -183,7 +190,8 @@ const RVAppsHub = () => {
         <meta name="description" content="Discover the best mobile apps and digital tools for RV travel. GPS navigation, campsite finders, power monitoring, and connectivity solutions." />
       </Helmet>
 
-      <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 text-white">
+      <PullToRefresh onRefresh={refreshDeals}>
+        <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 text-white">
         <Container className="py-8">
           {/* Hero Section */}
           <div className="text-center mb-12">
@@ -344,8 +352,22 @@ const RVAppsHub = () => {
             className="mb-8"
           />
 
+          {/* Performance Monitoring */}
+          <PerformanceMonitor 
+            pageName="RVAppsHub"
+            enableCoreWebVitals={true}
+            enableResourceTiming={true}
+            enableNavigationTiming={true}
+          />
+
           {/* Mobile Scroll Hint */}
           <MobileScrollHint targetSection="featured-apps" text="Explore must-have apps" />
+          
+          {/* App Install Prompt */}
+          <AppInstallPrompt />
+          
+          {/* Floating Action Buttons */}
+          <FloatingActionButtons />
           
           {/* Mobile Analytics Tracking */}
           <MobileAnalytics 
@@ -357,6 +379,7 @@ const RVAppsHub = () => {
           <AffiliateDisclosure />
         </Container>
       </div>
+      </PullToRefresh>
     </Layout>
   );
 };
