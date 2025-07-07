@@ -3,6 +3,8 @@ import React, { useEffect } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Toaster } from '@/components/ui/toaster';
 import { AuthProvider } from './components/auth/AuthContext';
+import { ABTestingProvider } from './components/analytics/ABTestingProvider';
+import { WishlistProvider } from './components/personalization/WishlistProvider';
 import { injectEmergencyStyles } from './utils/markers/styleInjection';
 import { forceMapMarkersVisible } from './utils/forceMapMarkers';
 import RouterProvider from './components/router/RouterProvider';
@@ -111,7 +113,11 @@ function App() {
     <React.StrictMode>
       <QueryClientProvider client={queryClient}>
         <AuthProvider>
-          <AppContent />
+          <ABTestingProvider>
+            <WishlistProvider>
+              <AppContent />
+            </WishlistProvider>
+          </ABTestingProvider>
         </AuthProvider>
       </QueryClientProvider>
     </React.StrictMode>

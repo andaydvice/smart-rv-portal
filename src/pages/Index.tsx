@@ -7,8 +7,10 @@ import { motion } from "framer-motion";
 import { toast } from "sonner";
 import { NavLink } from "react-router-dom";
 import { TechnologySection } from "@/components/sections/TechnologySection";
-// MODIFIED: Direct import for ContactSection added
 import { ContactSection } from "@/components/sections/ContactSection";
+import CoreWebVitalsMonitor from "@/components/analytics/CoreWebVitalsMonitor";
+import ConversionTracker from "@/components/analytics/ConversionTracker";
+import RevenueAttribution from "@/components/analytics/RevenueAttribution";
 
 // Lazy load components that aren't needed immediately
 const FeaturesSection = lazy(() => import("@/components/sections/FeaturesSection").then(mod => ({ 
@@ -43,6 +45,17 @@ const Index = () => {
 
   return (
     <Layout>
+      <CoreWebVitalsMonitor pageName="homepage" enableDebugMode={false} />
+      <ConversionTracker pageName="homepage" affiliatePartners={['amazon', 'renogy', 'rvlife']} />
+      <RevenueAttribution 
+        pageName="homepage" 
+        category="affiliate_landing"
+        products={[
+          { id: 'rv-apps', name: 'RV Apps Hub', price: 0, partner: 'rvlife' },
+          { id: 'solar-guide', name: 'Solar Power Guide', price: 0, partner: 'renogy' },
+          { id: 'emergency-center', name: 'Emergency Center', price: 0, partner: 'amazon' }
+        ]}
+      />
       <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
