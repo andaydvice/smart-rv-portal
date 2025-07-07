@@ -80,6 +80,45 @@ export type Database = {
         }
         Relationships: []
       }
+      saved_searches: {
+        Row: {
+          category: string
+          created_at: string
+          filters: Json | null
+          id: string
+          last_used: string | null
+          query: string
+          saved_at: string
+          updated_at: string
+          use_count: number
+          user_id: string
+        }
+        Insert: {
+          category: string
+          created_at?: string
+          filters?: Json | null
+          id?: string
+          last_used?: string | null
+          query: string
+          saved_at?: string
+          updated_at?: string
+          use_count?: number
+          user_id: string
+        }
+        Update: {
+          category?: string
+          created_at?: string
+          filters?: Json | null
+          id?: string
+          last_used?: string | null
+          query?: string
+          saved_at?: string
+          updated_at?: string
+          use_count?: number
+          user_id?: string
+        }
+        Relationships: []
+      }
       spatial_ref_sys: {
         Row: {
           auth_name: string | null
@@ -285,6 +324,45 @@ export type Database = {
           id?: string
           last_name?: string | null
           updated_at?: string
+        }
+        Relationships: []
+      }
+      user_wishlists: {
+        Row: {
+          affiliate_link: string
+          category: string | null
+          created_at: string
+          id: string
+          image: string
+          name: string
+          partner: string
+          price: number
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          affiliate_link: string
+          category?: string | null
+          created_at?: string
+          id?: string
+          image: string
+          name: string
+          partner: string
+          price: number
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          affiliate_link?: string
+          category?: string | null
+          created_at?: string
+          id?: string
+          image?: string
+          name?: string
+          partner?: string
+          price?: number
+          updated_at?: string
+          user_id?: string
         }
         Relationships: []
       }
