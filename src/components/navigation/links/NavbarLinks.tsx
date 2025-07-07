@@ -66,6 +66,30 @@ const NavbarLinks: React.FC<NavbarLinksProps> = ({ className = "" }) => {
         Blog
       </NavLink>
       <NavLink 
+        to="/rv-apps-hub" 
+        className={({ isActive }) => 
+          isActive ? "text-[#5B9BD5] font-medium" : "text-gray-300 hover:text-white transition-colors"
+        }
+      >
+        Apps & Tools
+      </NavLink>
+      <NavLink 
+        to="/solar-power-guide" 
+        className={({ isActive }) => 
+          isActive ? "text-[#5B9BD5] font-medium" : "text-gray-300 hover:text-white transition-colors"
+        }
+      >
+        Solar Guide
+      </NavLink>
+      <NavLink 
+        to="/rv-emergency-center" 
+        className={({ isActive }) => 
+          isActive ? "text-[#5B9BD5] font-medium" : "text-gray-300 hover:text-white transition-colors"
+        }
+      >
+        Emergency
+      </NavLink>
+      <NavLink 
         to="/about" 
         className={({ isActive }) => 
           isActive ? "text-[#5B9BD5] font-medium" : "text-gray-300 hover:text-white transition-colors"

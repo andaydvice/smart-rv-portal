@@ -302,11 +302,11 @@ const SolarPowerGuide = () => {
               <TabsTrigger value="panels" className="text-[#60A5FA] data-[state=active]:bg-[#2D3748]">Solar Panels</TabsTrigger>
               <TabsTrigger value="batteries" className="text-[#60A5FA] data-[state=active]:bg-[#2D3748]">Batteries</TabsTrigger>
             </TabsList>
-
+            
             <TabsContent value="kits">
               <Card className="bg-[#0a0a0a] border-gray-800">
                 <CardHeader>
-                  <CardTitle className="text-2xl text-yellow-400 text-center">☀️ Complete Solar Kits</CardTitle>
+                  <CardTitle className="text-2xl text-yellow-400 text-center">🔋 Complete Solar Kits</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -321,54 +321,54 @@ const SolarPowerGuide = () => {
                 </CardContent>
               </Card>
             </TabsContent>
-
+            
             <TabsContent value="panels">
               <AffiliateComparisonTable
                 {...comparisonData}
               />
             </TabsContent>
-
+            
             <TabsContent value="batteries">
               <Card className="bg-[#091020] border-gray-700">
                 <CardHeader>
-                  <CardTitle className="text-2xl text-blue-400">🔋 Battery Storage Solutions</CardTitle>
+                  <CardTitle className="text-2xl text-yellow-400">🔋 Battery Storage Solutions</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                     <AffiliateProductCard
-                      title="Victron Energy 200Ah LiFePO4 Smart Battery"
-                      description="Premium lithium battery with Bluetooth monitoring and 10-year warranty."
-                      price="$1,899.99"
-                      originalPrice="$2,299.99"
+                      title="Battle Born 100Ah LiFePO4 Battery"
+                      description="Premium lithium battery with 10-year warranty, perfect for solar energy storage."
+                      price="$949.99"
+                      originalPrice="$1,199.99"
                       rating={4.9}
-                      reviewCount={892}
-                      image="/lovable-uploads/3175b015-a5c7-4df7-b8ca-b8a130b05519.png"
+                      reviewCount={2234}
+                      image="/lovable-uploads/846b5be5-043e-4645-a3d9-39614d63342c.png"
                       features={[
-                        "200Ah capacity",
-                        "Bluetooth monitoring",
+                        "100Ah LiFePO4 technology",
                         "10-year warranty",
-                        "Built-in safety systems"
+                        "Built-in BMS protection",
+                        "3000+ cycle life"
                       ]}
-                      affiliateLink="https://victronenergy.com/200ah-smart-battery"
-                      badges={["Premium", "Smart"]}
+                      affiliateLink="https://battleborn.com/100ah-lifepo4-battery"
+                      badges={["Premium", "10 Year Warranty"]}
                     />
                     
                     <AffiliateProductCard
-                      title="AIMS Power 100Ah LiFePO4 Battery"
-                      description="Affordable lithium option with excellent performance for budget-conscious RVers."
-                      price="$599.99"
-                      originalPrice="$799.99"
-                      rating={4.6}
-                      reviewCount={567}
-                      image="/lovable-uploads/23ce0af4-35ca-4e7f-af56-c1a7c6eae380.png"
+                      title="AIMS Power 200Ah Lithium Battery"
+                      description="High-capacity lithium battery for extended off-grid power storage."
+                      price="$1,299.99"
+                      originalPrice="$1,599.99"
+                      rating={4.7}
+                      reviewCount={892}
+                      image="/lovable-uploads/7b0c607c-52e6-47d2-b5fa-f5cbb912f20a.png"
                       features={[
-                        "100Ah LiFePO4",
-                        "2000+ cycles",
-                        "Lightweight design",
-                        "5-year warranty"
+                        "200Ah capacity",
+                        "Built-in Bluetooth monitoring",
+                        "8-year warranty",
+                        "Fast charging capability"
                       ]}
-                      affiliateLink="https://aimscorp.net/100ah-lifepo4"
-                      badges={["Budget", "Reliable"]}
+                      affiliateLink="https://aimscorp.net/200ah-lithium-battery"
+                      badges={["High Capacity"]}
                     />
                   </div>
                 </CardContent>
@@ -376,25 +376,24 @@ const SolarPowerGuide = () => {
             </TabsContent>
           </Tabs>
 
-          {/* Installation Services CTA */}
-          <Card className="bg-gradient-to-r from-blue-900/20 to-purple-900/20 border-blue-800 mb-12">
+          {/* Installation CTA */}
+          <Card className="bg-gradient-to-r from-green-900/20 to-blue-900/20 border-green-800 mb-12">
             <CardContent className="p-8">
               <div className="text-center">
-                <h3 className="text-2xl font-bold text-blue-300 mb-4">⚡ Professional Installation Available</h3>
+                <h3 className="text-2xl font-bold text-green-300 mb-4">⚡ Professional Installation Available</h3>
                 <p className="text-gray-300 mb-6 max-w-2xl mx-auto">
-                  Not ready to DIY? Get professional solar installation from certified RV solar specialists. 
-                  Nationwide service with warranties on parts and labor.
+                  Need help installing your solar system? Get connected with certified RV solar installers in your area.
                 </p>
                 
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <Button asChild className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg min-h-[48px] touch-manipulation">
-                    <a href="https://amsolar.com/installation" target="_blank" rel="noopener noreferrer">
-                      Get Installation Quote
+                  <Button asChild className="bg-green-600 hover:bg-green-700 text-white px-8 py-3 rounded-lg min-h-[48px] touch-manipulation">
+                    <a href="https://solar-power-with-will.com/rv-solar-installation/" target="_blank" rel="noopener noreferrer">
+                      Find Installers
                     </a>
                   </Button>
-                  <Button asChild variant="outline" className="border-blue-500 text-blue-300 hover:bg-blue-900/50 px-8 py-3 rounded-lg min-h-[48px] touch-manipulation">
-                    <a href="https://renogy.com/installation-guide" target="_blank" rel="noopener noreferrer">
-                      DIY Installation Guide
+                  <Button asChild variant="outline" className="border-green-500 text-green-300 hover:bg-green-900/50 px-8 py-3 rounded-lg min-h-[48px] touch-manipulation">
+                    <a href="https://renogy.com/diy-installation-guide/" target="_blank" rel="noopener noreferrer">
+                      DIY Guide
                     </a>
                   </Button>
                 </div>
@@ -405,10 +404,10 @@ const SolarPowerGuide = () => {
           {/* CTA Banner */}
           <AffiliateCTABanner
             title="Start Your Solar Journey Today"
-            description="Join thousands of RVers who've discovered the freedom of solar power. Shop the best deals on complete systems and individual components."
+            description="Join thousands of RVers who have achieved energy independence with solar power. Get the equipment and expertise you need for unlimited adventures."
             buttonText="Shop Solar Deals"
-            affiliateLink="https://amazon.com/rv-solar-equipment"
-            backgroundColor="bg-gradient-to-r from-yellow-600 to-orange-600"
+            affiliateLink="https://renogy.com/rv-solar-kits"
+            backgroundColor="bg-gradient-to-r from-yellow-500 to-orange-500"
             className="mb-8"
           />
 

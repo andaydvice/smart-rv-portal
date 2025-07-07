@@ -7,6 +7,11 @@ import Index from "../pages/Index";
 import ErrorPage from "../pages/ErrorPage";
 import SearchResults from "../pages/SearchResults";
 
+// Import affiliate pages
+import RVAppsHub from "../pages/RVAppsHub";
+import RVEmergencyCenter from "../pages/RVEmergencyCenter";
+import SolarPowerGuide from "../pages/SolarPowerGuide";
+
 // Import route groups
 import featureRoutes from "./featureRoutes";
 import modelRoutes from "./modelRoutes";
@@ -23,6 +28,22 @@ export const routes: RouteObject[] = [
   {
     path: "/search",
     element: <SearchResults />,
+    errorElement: <ErrorPage />,
+  },
+  // Affiliate revenue pages
+  {
+    path: "/rv-apps-hub",
+    element: <RVAppsHub />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/rv-emergency-center", 
+    element: <RVEmergencyCenter />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/solar-power-guide",
+    element: <SolarPowerGuide />,
     errorElement: <ErrorPage />,
   },
   ...modelRoutes,
