@@ -7,14 +7,16 @@ interface WishlistItem {
   price: number;
   image: string;
   partner: string;
-  affiliateLink: string;
-  addedAt: string;
+  affiliate_link: string;
+  created_at: string;
+  updated_at: string;
+  user_id: string;
   category?: string;
 }
 
 interface WishlistContextType {
   items: WishlistItem[];
-  addToWishlist: (item: Omit<WishlistItem, 'addedAt'>) => void;
+  addToWishlist: (item: Omit<WishlistItem, 'created_at' | 'updated_at' | 'user_id'>) => void;
   removeFromWishlist: (id: string) => void;
   isInWishlist: (id: string) => boolean;
   clearWishlist: () => void;
@@ -79,9 +81,15 @@ export const WishlistProvider = ({ children }: { children: React.ReactNode }) =>
           const { error } = await supabase
             .from('user_wishlists')
             .insert(newItems.map(item => ({
-              ...item,
+              id: item.id,
+              name: item.name,
+              price: item.price,
+              image: item.image,
+              partner: item.partner,
+              affiliate_link: item.affiliate_link,
+              category: item.category,
               user_id: user.id,
-              created_at: item.addedAt
+              created_at: item.created_at
             })));
 
           if (error) {
@@ -97,10 +105,12 @@ export const WishlistProvider = ({ children }: { children: React.ReactNode }) =>
     }
   };
 
-  const addToWishlist = (item: Omit<WishlistItem, 'addedAt'>) => {
-    const newItem = {
+  const addToWishlist = (item: Omit<WishlistItem, 'created_at' | 'updated_at' | 'user_id'>) => {
+    const newItem: WishlistItem = {
       ...item,
-      addedAt: new Date().toISOString()
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString(),
+      user_id: 'temp'
     };
 
     const newItems = [newItem, ...items.filter(existing => existing.id !== item.id)];

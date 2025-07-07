@@ -10,9 +10,12 @@ interface SavedSearch {
   query: string;
   filters: Record<string, any>;
   category: string;
-  savedAt: string;
-  lastUsed?: string;
-  useCount: number;
+  saved_at: string;
+  last_used?: string;
+  use_count: number;
+  created_at: string;
+  updated_at: string;
+  user_id: string;
 }
 
 interface SavedSearchesProps {
@@ -52,7 +55,10 @@ const SavedSearches = ({
         if (error) {
           console.error('Error loading saved searches:', error);
         } else {
-          setSavedSearches(data || []);
+          setSavedSearches(data?.map(item => ({
+            ...item,
+            filters: (item.filters as Record<string, any>) || {}
+          })) || []);
         }
       } else {
         // Load from localStorage for anonymous users
@@ -72,13 +78,13 @@ const SavedSearches = ({
   const saveCurrentSearch = async () => {
     if (!currentSearch.trim()) return;
 
-    const newSearch: SavedSearch = {
+    const newSearch = {
       id: Date.now().toString(),
       query: currentSearch,
       filters: currentFilters,
       category,
-      savedAt: new Date().toISOString(),
-      useCount: 1
+      saved_at: new Date().toISOString(),
+      use_count: 1
     };
 
     try {
@@ -98,9 +104,15 @@ const SavedSearches = ({
           return;
         }
       } else {
-        // Save to localStorage
+        // Save to localStorage  
         const key = `saved_searches_${category}`;
-        const updated = [newSearch, ...savedSearches.slice(0, 9)]; // Keep max 10
+        const localSearch: SavedSearch = {
+          ...newSearch,
+          created_at: new Date().toISOString(),
+          updated_at: new Date().toISOString(),
+          user_id: 'anonymous'
+        };
+        const updated = [localSearch, ...savedSearches.slice(0, 9)]; // Keep max 10
         setSavedSearches(updated);
         localStorage.setItem(key, JSON.stringify(updated));
       }
@@ -121,8 +133,8 @@ const SavedSearches = ({
     // Update use count and last used
     const updatedSearch = {
       ...search,
-      lastUsed: new Date().toISOString(),
-      useCount: search.useCount + 1
+      last_used: new Date().toISOString(),
+      use_count: search.use_count + 1
     };
 
     try {
@@ -132,8 +144,8 @@ const SavedSearches = ({
         await supabase
           .from('saved_searches')
           .update({
-            last_used: updatedSearch.lastUsed,
-            use_count: updatedSearch.useCount
+            last_used: updatedSearch.last_used,
+            use_count: updatedSearch.use_count
           })
           .eq('id', search.id);
       } else {
@@ -150,7 +162,7 @@ const SavedSearches = ({
       console.log('Saved Search Used:', {
         searchId: search.id,
         query: search.query,
-        useCount: updatedSearch.useCount,
+        useCount: updatedSearch.use_count,
         timestamp: new Date().toISOString()
       });
     } catch (error) {
@@ -241,9 +253,9 @@ const SavedSearches = ({
                     </div>
                     
                     <div className="flex items-center gap-2 text-xs text-gray-400">
-                      <span>Used {search.useCount} times</span>
-                      {search.lastUsed && (
-                        <span>• Last used {formatRelativeTime(search.lastUsed)}</span>
+                      <span>Used {search.use_count} times</span>
+                      {search.last_used && (
+                        <span>• Last used {formatRelativeTime(search.last_used)}</span>
                       )}
                     </div>
                     
