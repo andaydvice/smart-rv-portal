@@ -5,7 +5,8 @@ import {
   Brain, Lightbulb, Eye, Search,
   Cog, Layers, Activity, Network,
   Car, Truck, Tent, LayoutTemplate,
-  HelpCircle, MessageCircleQuestion, LifeBuoy, Phone, BookOpen, User, DollarSign
+  HelpCircle, MessageCircleQuestion, LifeBuoy, Phone, BookOpen, User, DollarSign,
+  Smartphone, AlertTriangle, Sun
 } from "lucide-react";
 import AuthButtons from "./AuthButtons";
 import HoverDropdownMenu from "./HoverDropdownMenu";
@@ -15,6 +16,30 @@ import { SearchBar } from "@/components/search";
 const DesktopNavigation = () => {
   const location = useLocation();
   const isHomePage = location.pathname === "/";
+
+  // Define Resources links with icons for affiliate-focused pages
+  const resourcesLinks = [
+    { 
+      text: "RV Apps & Tools Hub", 
+      href: "/rv-apps-hub", 
+      icon: <Smartphone size={16} className="text-[#5B9BD5]" /> 
+    },
+    { 
+      text: "RV Emergency Center", 
+      href: "/rv-emergency-center", 
+      icon: <AlertTriangle size={16} className="text-[#EF4444]" /> 
+    },
+    { 
+      text: "Solar Power Guide", 
+      href: "/solar-power-guide", 
+      icon: <Sun size={16} className="text-[#F59E0B]" /> 
+    },
+    { 
+      text: "RV Weather Dashboard", 
+      href: "/rv-weather", 
+      icon: <CloudSun size={16} className="text-[#3B82F6]" /> 
+    }
+  ];
 
   // Define RV Tools links for the hover dropdown with icons and specific colors
   const rvToolsLinks = [
@@ -195,6 +220,12 @@ const DesktopNavigation = () => {
         >
           Blog
         </Link>
+
+        {/* Resources Dropdown - NEW AFFILIATE-FOCUSED SECTION */}
+        <HoverDropdownMenuV2 
+          trigger="Resources" 
+          links={resourcesLinks}
+        />
 
         {/* Support Dropdown - NOW INCLUDES ABOUT, PRICING, CONTACT */}
         <HoverDropdownMenuV2 
