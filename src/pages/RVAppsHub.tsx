@@ -6,6 +6,9 @@ import AffiliateProductCard from '@/components/affiliate/AffiliateProductCard';
 import AffiliateComparisonTable from '@/components/affiliate/AffiliateComparisonTable';
 import AffiliateCTABanner from '@/components/affiliate/AffiliateCTABanner';
 import AffiliateDisclosure from '@/components/affiliate/AffiliateDisclosure';
+import MobileProductCarousel from '@/components/mobile/MobileProductCarousel';
+import MobileScrollHint from '@/components/mobile/MobileScrollHint';
+import MobileAnalytics from '@/components/mobile/MobileAnalytics';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Smartphone, Wifi, MapPin, Battery, Settings, Shield } from 'lucide-react';
 
@@ -210,13 +213,14 @@ const RVAppsHub = () => {
             ))}
           </div>
 
-          {/* Featured Apps */}
-          <Card className="bg-[#0a0a0a] border-gray-800 mb-12">
+          {/* Featured Apps - Mobile Optimized */}
+          <Card className="bg-[#0a0a0a] border-gray-800 mb-12" id="featured-apps">
             <CardHeader>
               <CardTitle className="text-2xl text-[#5B9BD5] text-center">⭐ Must-Have RV Apps</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+              {/* Desktop Grid */}
+              <div className="hidden lg:grid grid-cols-3 gap-6">
                 {featuredApps.map((app, index) => (
                   <AffiliateProductCard
                     key={index}
@@ -224,6 +228,14 @@ const RVAppsHub = () => {
                     className="h-full"
                   />
                 ))}
+              </div>
+              
+              {/* Mobile Carousel */}
+              <div className="lg:hidden">
+                <MobileProductCarousel 
+                  products={featuredApps}
+                  className="mb-4"
+                />
               </div>
             </CardContent>
           </Card>
@@ -234,13 +246,14 @@ const RVAppsHub = () => {
             className="mb-12"
           />
 
-          {/* Hardware Recommendations */}
-          <Card className="bg-[#091020] border-gray-700 mb-12">
+          {/* Hardware Recommendations - Mobile Optimized */}
+          <Card className="bg-[#091020] border-gray-700 mb-12" id="hardware">
             <CardHeader>
               <CardTitle className="text-2xl text-[#5B9BD5]">📱 Mobile Hardware for RVers</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              {/* Desktop Grid */}
+              <div className="hidden lg:grid grid-cols-2 gap-6">
                 <AffiliateProductCard
                   title="WeBoost Drive Reach RV Cell Signal Booster"
                   description="Boost your cell signal by up to 32x for better app performance and connectivity."
@@ -277,6 +290,48 @@ const RVAppsHub = () => {
                   badges={["Rugged", "RV Ready"]}
                 />
               </div>
+              
+              {/* Mobile Carousel */}
+              <div className="lg:hidden">
+                <MobileProductCarousel 
+                  products={[
+                    {
+                      title: "WeBoost Drive Reach RV Cell Signal Booster",
+                      description: "Boost your cell signal by up to 32x for better app performance and connectivity.",
+                      price: "$499.99",
+                      originalPrice: "$599.99",
+                      rating: 4.6,
+                      reviewCount: 1834,
+                      image: "/lovable-uploads/9b681f27-359c-4d90-8629-5b2b198abf0f.png",
+                      features: [
+                        "Works with all carriers",
+                        "Covers up to 5,000 sq ft",
+                        "Easy RV installation",
+                        "FCC approved"
+                      ],
+                      affiliateLink: "https://weboost.com/drive-reach-rv",
+                      badges: ["Signal Solution"]
+                    },
+                    {
+                      title: "Samsung Galaxy Tab Active4 Pro Rugged Tablet",
+                      description: "Rugged tablet perfect for RV navigation and entertainment in any weather.",
+                      price: "$649.99",
+                      originalPrice: "$799.99",
+                      rating: 4.4,
+                      reviewCount: 567,
+                      image: "/lovable-uploads/ee026535-e835-46ae-b779-be457eb8ff04.png",
+                      features: [
+                        "MIL-STD-810H certified",
+                        "IP68 water/dust resistant",
+                        "Replaceable battery",
+                        "S Pen included"
+                      ],
+                      affiliateLink: "https://samsung.com/tab-active4-pro",
+                      badges: ["Rugged", "RV Ready"]
+                    }
+                  ]}
+                />
+              </div>
             </CardContent>
           </Card>
 
@@ -287,6 +342,15 @@ const RVAppsHub = () => {
             buttonText="Shop RV Tech Deals"
             affiliateLink="https://amazon.com/rv-electronics"
             className="mb-8"
+          />
+
+          {/* Mobile Scroll Hint */}
+          <MobileScrollHint targetSection="featured-apps" text="Explore must-have apps" />
+          
+          {/* Mobile Analytics Tracking */}
+          <MobileAnalytics 
+            pageName="RVAppsHub" 
+            affiliatePartners={["RV LIFE", "Campendium", "Victron", "WeBoost", "Samsung"]}
           />
 
           {/* Affiliate Disclosure */}

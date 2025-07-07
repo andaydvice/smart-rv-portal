@@ -6,6 +6,7 @@ import AffiliateProductCard from '@/components/affiliate/AffiliateProductCard';
 import AffiliateComparisonTable from '@/components/affiliate/AffiliateComparisonTable';
 import AffiliateCTABanner from '@/components/affiliate/AffiliateCTABanner';
 import AffiliateDisclosure from '@/components/affiliate/AffiliateDisclosure';
+import { MobileProductCarousel, MobileScrollHint, MobileAnalytics } from '@/components/mobile';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -304,12 +305,13 @@ const SolarPowerGuide = () => {
             </TabsList>
             
             <TabsContent value="kits">
-              <Card className="bg-[#0a0a0a] border-gray-800">
+              <Card className="bg-[#0a0a0a] border-gray-800" id="solar-kits">
                 <CardHeader>
                   <CardTitle className="text-2xl text-yellow-400 text-center">🔋 Complete Solar Kits</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                  {/* Desktop Grid */}
+                  <div className="hidden lg:grid grid-cols-3 gap-6">
                     {solarKits.map((kit, index) => (
                       <AffiliateProductCard
                         key={index}
@@ -317,6 +319,14 @@ const SolarPowerGuide = () => {
                         className="h-full"
                       />
                     ))}
+                  </div>
+                  
+                  {/* Mobile Carousel */}
+                  <div className="lg:hidden">
+                    <MobileProductCarousel 
+                      products={solarKits}
+                      className="mb-4"
+                    />
                   </div>
                 </CardContent>
               </Card>
@@ -409,6 +419,15 @@ const SolarPowerGuide = () => {
             affiliateLink="https://renogy.com/rv-solar-kits"
             backgroundColor="bg-gradient-to-r from-yellow-500 to-orange-500"
             className="mb-8"
+          />
+
+          {/* Mobile Scroll Hint */}
+          <MobileScrollHint targetSection="solar-kits" text="Discover solar solutions" />
+          
+          {/* Mobile Analytics Tracking */}
+          <MobileAnalytics 
+            pageName="SolarPowerGuide" 
+            affiliatePartners={["Renogy", "Goal Zero", "Battle Born", "AIMS Power", "WindyNation", "Solar Power with Will"]}
           />
 
           {/* Affiliate Disclosure */}
