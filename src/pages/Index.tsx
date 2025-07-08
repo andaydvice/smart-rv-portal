@@ -13,6 +13,9 @@ import ConversionTracker from "@/components/analytics/ConversionTracker";
 import RevenueAttribution from "@/components/analytics/RevenueAttribution";
 import SEOHelmet from "@/components/seo/SEOHelmet";
 import StructuredData from "@/components/seo/StructuredData";
+import InternalLinkingSuggestions from "@/components/seo/InternalLinkingSuggestions";
+import EditorialGuidelines from "@/components/seo/EditorialGuidelines";
+import LocalSEOInfo from "@/components/seo/LocalSEOInfo";
 
 // Lazy load components that aren't needed immediately
 const FeaturesSection = lazy(() => import("@/components/sections/FeaturesSection").then(mod => ({ 
@@ -184,6 +187,15 @@ const Index = () => {
 
         {/* MODIFIED: Suspense wrapper removed and ContactSection directly rendered */}
         <ContactSection />
+        
+        {/* Internal Linking Suggestions */}
+        <InternalLinkingSuggestions currentPage="homepage" maxSuggestions={6} />
+        
+        {/* Editorial Guidelines */}
+        <EditorialGuidelines />
+        
+        {/* Local SEO Information */}
+        <LocalSEOInfo showSchema={true} />
       </motion.div>
     </Layout>
   );

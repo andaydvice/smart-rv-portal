@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import { motion } from "framer-motion";
 import Layout from "@/components/layout/Layout";
 import { scrollToTop } from "@/utils/scrollToTop";
+import InternalLinkingSuggestions from "@/components/seo/InternalLinkingSuggestions";
 
 const About = () => {
   useEffect(() => {
@@ -103,6 +104,9 @@ const About = () => {
             </div>
           </motion.div>
         </div>
+        
+        {/* Internal Linking Suggestions */}
+        <InternalLinkingSuggestions currentPage="about" maxSuggestions={4} />
       </motion.div>
     </Layout>
   );
