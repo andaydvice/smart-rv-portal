@@ -20,6 +20,10 @@ export const AuthForms = ({ onSuccess, onError }: AuthFormsProps) => {
     setEmail,
     password, 
     setPassword,
+    firstName,
+    setFirstName,
+    lastName,
+    setLastName,
     passwordStrength,
     error,
     showOtp,
@@ -55,6 +59,10 @@ export const AuthForms = ({ onSuccess, onError }: AuthFormsProps) => {
         setEmail={setEmail}
         password={password}
         setPassword={setPassword}
+        firstName={firstName}
+        setFirstName={setFirstName}
+        lastName={lastName}
+        setLastName={setLastName}
         passwordStrength={passwordStrength}
         onSubmit={handleSubmit}
       />

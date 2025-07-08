@@ -15,6 +15,8 @@ export const useAuthForm = ({ onSuccess, onError }: UseAuthFormProps) => {
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
   const [passwordStrength, setPasswordStrength] = useState(0);
   const [error, setError] = useState<string | null>(null);
   const [showOtp, setShowOtp] = useState(false);
@@ -103,6 +105,10 @@ export const useAuthForm = ({ onSuccess, onError }: UseAuthFormProps) => {
           password,
           options: {
             emailRedirectTo: window.location.origin + '/auth',
+            data: {
+              first_name: firstName,
+              last_name: lastName,
+            }
           }
         });
         
@@ -217,6 +223,10 @@ export const useAuthForm = ({ onSuccess, onError }: UseAuthFormProps) => {
     setEmail,
     password, 
     setPassword,
+    firstName,
+    setFirstName,
+    lastName,
+    setLastName,
     passwordStrength,
     error,
     showOtp,
