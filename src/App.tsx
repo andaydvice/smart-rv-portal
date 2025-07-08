@@ -2,7 +2,7 @@
 import React, { useEffect } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Toaster } from '@/components/ui/toaster';
-import { AuthProvider } from './components/auth/AuthContext';
+import { AuthProvider } from './components/auth/AuthProvider';
 import { ABTestingProvider } from './components/analytics/ABTestingProvider';
 import { WishlistProvider } from './components/personalization/WishlistProvider';
 import { injectEmergencyStyles } from './utils/markers/styleInjection';
