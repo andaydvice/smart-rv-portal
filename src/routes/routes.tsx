@@ -17,6 +17,7 @@ import EnterpriseIntelligence from "../pages/EnterpriseIntelligence";
 import AdminDashboard from "../pages/AdminDashboard";
 import AccountSettings from "../pages/AccountSettings";
 import UserManagement from "../pages/UserManagement";
+import SystemSettings from "../pages/SystemSettings";
 
 // Import affiliate pages
 import RVAppsHub from "../pages/RVAppsHub";
@@ -101,6 +102,11 @@ export const routes: RouteObject[] = [
   {
     path: "/admin/users",
     element: <UserManagement />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/admin/settings",
+    element: <SystemSettings />,
     errorElement: <ErrorPage />,
   },
   ...modelRoutes,
