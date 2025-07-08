@@ -3,8 +3,6 @@ import React, { useEffect } from "react";
 import { motion } from "framer-motion";
 import Layout from "@/components/layout/Layout";
 import { scrollToTop } from "@/utils/scrollToTop";
-import InternalLinkingSuggestions from "@/components/seo/InternalLinkingSuggestions";
-import SEOSuite from "@/components/seo/SEOSuite";
 
 const About = () => {
   useEffect(() => {
@@ -106,37 +104,6 @@ const About = () => {
           </motion.div>
         </div>
         
-        {/* Advanced SEO Components */}
-        <SEOSuite
-          pageType="guide"
-          pageTitle="About Smart RV Technology"
-          pageContent="Smart RV Technology is revolutionizing the recreational vehicle industry by integrating cutting edge technology with traditional RV experiences. We believe that the future of travel lies in intelligent, connected vehicles that enhance safety, comfort, and convenience for every journey."
-          customData={{
-            depthScore: 88,
-            wordCount: 1250,
-            lastUpdated: "2024-01-15",
-            relatedQuestions: [
-              "What makes Smart RV different from other companies?",
-              "How long has Smart RV Technology been in business?",
-              "What support services does Smart RV provide?",
-              "Where can I find Smart RV Technology products?"
-            ],
-            contentGaps: [
-              "Company history and milestones",
-              "Executive team profiles",
-              "Awards and certifications",
-              "Partnership information"
-            ],
-            relatedContent: [
-              { title: "Our Technology Features", url: "/features", type: "internal" },
-              { title: "Contact Our Team", url: "/contact", type: "internal" },
-              { title: "View Our Models", url: "/models", type: "internal" }
-            ]
-          }}
-        />
-        
-        {/* Internal Linking Suggestions */}
-        <InternalLinkingSuggestions currentPage="about" maxSuggestions={4} />
       </motion.div>
     </Layout>
   );
