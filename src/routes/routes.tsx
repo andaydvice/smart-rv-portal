@@ -10,6 +10,7 @@ import SearchResults from "../pages/SearchResults";
 // Import admin pages
 import SEODashboard from "../pages/admin/SEODashboard";
 import ContentAnalytics from "../pages/admin/ContentAnalytics";
+import MobileAnalyticsDashboard from "../pages/admin/MobileAnalyticsDashboard";
 
 // Import affiliate pages
 import RVAppsHub from "../pages/RVAppsHub";
@@ -59,6 +60,11 @@ export const routes: RouteObject[] = [
   {
     path: "/admin/analytics",
     element: <ContentAnalytics />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/admin/mobile-analytics",
+    element: <MobileAnalyticsDashboard />,
     errorElement: <ErrorPage />,
   },
   ...modelRoutes,

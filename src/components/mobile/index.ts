@@ -7,3 +7,8 @@ export { default as VoiceSearch } from './VoiceSearch';
 export { default as FloatingActionButtons } from './FloatingActionButtons';
 export { default as InfiniteScroll } from './InfiniteScroll';
 export { default as AppInstallPrompt } from './AppInstallPrompt';
+export { default as ABTestingProductCard } from './ABTestingProductCard';
+export { default as SmartNotificationCenter } from './SmartNotificationCenter';
+export { default as MobileConversionOptimizer } from './MobileConversionOptimizer';
+export { default as PersonalizationEngine } from './PersonalizationEngine';
+export { default as AdvancedAnalytics } from './AdvancedAnalytics';

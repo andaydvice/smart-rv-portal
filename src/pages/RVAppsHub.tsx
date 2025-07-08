@@ -7,7 +7,17 @@ import AffiliateComparisonTable from '@/components/affiliate/AffiliateComparison
 import AffiliateCTABanner from '@/components/affiliate/AffiliateCTABanner';
 import AffiliateDisclosure from '@/components/affiliate/AffiliateDisclosure';
 import CustomerReviewsSection from '@/components/affiliate/CustomerReviewsSection';
-import { MobileProductCarousel, MobileScrollHint, MobileAnalytics, PullToRefresh, FloatingActionButtons, AppInstallPrompt } from '@/components/mobile';
+import { 
+  MobileProductCarousel, 
+  MobileScrollHint, 
+  MobileAnalytics, 
+  PullToRefresh, 
+  FloatingActionButtons, 
+  AppInstallPrompt,
+  ABTestingProductCard,
+  SmartNotificationCenter,
+  MobileConversionOptimizer
+} from '@/components/mobile';
 import PerformanceMonitor from '@/components/performance/PerformanceMonitor';
 import OptimizedImage from '@/components/performance/OptimizedImage';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -222,16 +232,21 @@ const RVAppsHub = () => {
             ))}
           </div>
 
-          {/* Featured Apps - Mobile Optimized */}
+          {/* Smart Notifications */}
+          <div className="mb-8">
+            <SmartNotificationCenter />
+          </div>
+
+          {/* Featured Apps - Mobile Optimized with A/B Testing */}
           <Card className="bg-[#0a0a0a] border-gray-800 mb-12" id="featured-apps">
             <CardHeader>
               <CardTitle className="text-2xl text-[#5B9BD5] text-center">⭐ Must-Have RV Apps</CardTitle>
             </CardHeader>
             <CardContent>
-              {/* Desktop Grid */}
+              {/* Desktop Grid with A/B Testing */}
               <div className="hidden lg:grid grid-cols-3 gap-6">
                 {featuredApps.map((app, index) => (
-                  <AffiliateProductCard
+                  <ABTestingProductCard
                     key={index}
                     {...app}
                     affiliatePartner="rvlife"
@@ -241,11 +256,21 @@ const RVAppsHub = () => {
                 ))}
               </div>
               
-              {/* Mobile Carousel */}
+              {/* Mobile Conversion Optimizer */}
               <div className="lg:hidden">
-                <MobileProductCarousel 
+                <MobileConversionOptimizer
                   products={featuredApps}
-                  className="mb-4"
+                  onProductClick={(product) => window.open(product.affiliateLink, '_blank')}
+                  onWishlistAdd={(product) => console.log('Added to wishlist:', product.title)}
+                  onShare={(product) => {
+                    if (navigator.share) {
+                      navigator.share({
+                        title: product.title,
+                        text: product.description,
+                        url: product.affiliateLink
+                      });
+                    }
+                  }}
                 />
               </div>
             </CardContent>
