@@ -8,8 +8,10 @@ import CustomerJourneyOptimizer from '@/components/retention/CustomerJourneyOpti
 import MarketingAutomationPlatform from '@/components/automation/MarketingAutomationPlatform';
 import AIPersonalRVAssistant from '@/components/ai/AIPersonalRVAssistant';
 import AugmentedRealityFeatures from '@/components/ar/AugmentedRealityFeatures';
+import PerformanceIntelligence from '@/components/analytics/PerformanceIntelligence';
+import SocialCommerceHub from '@/components/social/SocialCommerceHub';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Brain, Shield, BarChart3, Route, Zap, Bot, Scan } from 'lucide-react';
+import { Brain, Shield, BarChart3, Route, Zap, Bot, Scan, Gauge, Users } from 'lucide-react';
 
 const EnterpriseIntelligence = () => {
   return (
@@ -28,7 +30,7 @@ const EnterpriseIntelligence = () => {
           </div>
 
           <Tabs defaultValue="revenue" className="space-y-8">
-            <TabsList className="grid w-full grid-cols-7 bg-[#091020] border border-gray-700">
+            <TabsList className="grid w-full grid-cols-9 bg-[#091020] border border-gray-700">
               <TabsTrigger 
                 value="revenue" 
                 className="flex items-center gap-2 data-[state=active]:bg-[#5B9BD5] data-[state=active]:text-white"
@@ -78,6 +80,20 @@ const EnterpriseIntelligence = () => {
                 <Scan className="h-4 w-4" />
                 AR Features
               </TabsTrigger>
+              <TabsTrigger 
+                value="performance" 
+                className="flex items-center gap-2 data-[state=active]:bg-[#5B9BD5] data-[state=active]:text-white"
+              >
+                <Gauge className="h-4 w-4" />
+                Performance
+              </TabsTrigger>
+              <TabsTrigger 
+                value="social" 
+                className="flex items-center gap-2 data-[state=active]:bg-[#5B9BD5] data-[state=active]:text-white"
+              >
+                <Users className="h-4 w-4" />
+                Social Commerce
+              </TabsTrigger>
             </TabsList>
 
             <TabsContent value="revenue">
@@ -106,6 +122,14 @@ const EnterpriseIntelligence = () => {
 
             <TabsContent value="ar-features">
               <AugmentedRealityFeatures />
+            </TabsContent>
+
+            <TabsContent value="performance">
+              <PerformanceIntelligence />
+            </TabsContent>
+
+            <TabsContent value="social">
+              <SocialCommerceHub />
             </TabsContent>
           </Tabs>
         </div>
