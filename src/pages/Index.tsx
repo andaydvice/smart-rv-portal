@@ -111,7 +111,9 @@ const Index = () => {
         transition={{ duration: 0.6 }}
         className="min-h-screen w-full bg-gradient-to-b from-gray-50 to-white"
       >
+        {/* International Banner - only shows for non-USA visitors */}
         <InternationalBanner />
+        {/* Hero Section starts immediately */}
         <HeroSection />
         
         <Suspense fallback={<LoadingFallback />}>

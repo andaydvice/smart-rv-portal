@@ -30,7 +30,7 @@ const InternationalBanner = () => {
   ];
 
   return (
-    <Alert className="bg-gradient-to-r from-[#5B9BD5]/10 to-[#4B8FE3]/10 border-[#5B9BD5]/30 mb-6">
+    <Alert className="bg-gradient-to-r from-[#5B9BD5]/10 to-[#4B8FE3]/10 border-[#5B9BD5]/30 mb-6 mx-4">
       <Globe className="h-4 w-4 text-[#5B9BD5]" />
       <AlertDescription className="flex items-center justify-between">
         <div className="flex-1">
