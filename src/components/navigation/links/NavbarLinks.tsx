@@ -50,6 +50,14 @@ const NavbarLinks: React.FC<NavbarLinksProps> = ({ className = "" }) => {
         Calculators
       </NavLink>
       <NavLink 
+        to="/advanced-search" 
+        className={({ isActive }) => 
+          isActive ? "text-[#5B9BD5] font-medium" : "text-gray-300 hover:text-white transition-colors"
+        }
+      >
+        Search
+      </NavLink>
+      <NavLink 
         to="/storage-facilities" 
         className={({ isActive }) => 
           isActive ? "text-[#5B9BD5] font-medium" : "text-gray-300 hover:text-white transition-colors"

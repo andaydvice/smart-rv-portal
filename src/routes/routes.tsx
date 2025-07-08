@@ -6,6 +6,7 @@ import { RouteObject } from "react-router-dom";
 import Index from "../pages/Index";
 import ErrorPage from "../pages/ErrorPage";
 import SearchResults from "../pages/SearchResults";
+import { AdvancedSearchHub as AdvancedSearch } from "../pages/AdvancedSearch";
 import Auth from "../pages/Auth";
 
 // Import admin pages
@@ -41,6 +42,11 @@ export const routes: RouteObject[] = [
   {
     path: "/search",
     element: <SearchResults />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/advanced-search",
+    element: <AdvancedSearch />,
     errorElement: <ErrorPage />,
   },
   {
