@@ -11,6 +11,8 @@ import { ContactSection } from "@/components/sections/ContactSection";
 import CoreWebVitalsMonitor from "@/components/analytics/CoreWebVitalsMonitor";
 import ConversionTracker from "@/components/analytics/ConversionTracker";
 import RevenueAttribution from "@/components/analytics/RevenueAttribution";
+import SEOHelmet from "@/components/seo/SEOHelmet";
+import StructuredData from "@/components/seo/StructuredData";
 
 // Lazy load components that aren't needed immediately
 const FeaturesSection = lazy(() => import("@/components/sections/FeaturesSection").then(mod => ({ 
@@ -45,6 +47,44 @@ const Index = () => {
 
   return (
     <Layout>
+      <SEOHelmet 
+        title="Smart RV Technology - Luxury RV Living & Mobile Home Solutions"
+        description="Discover the future of RV living with smart technology, luxury features, solar power solutions, emergency services, and innovative apps for modern mobile homes."
+        keywords="smart RV, luxury RV, RV technology, mobile living, RV apps, solar power, RV emergency, RV storage, smart home, recreational vehicle"
+        url={window.location.href}
+        type="website"
+        schema={{
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          "name": "Smart RV Technology",
+          "url": window.location.origin,
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": `${window.location.origin}/search?q={search_term_string}`,
+            "query-input": "required name=search_term_string"
+          }
+        }}
+      />
+      
+      <StructuredData 
+        type="Organization" 
+        data={{
+          name: "Smart RV Technology",
+          url: window.location.origin,
+          logo: `${window.location.origin}/logo.png`,
+          description: "Leading provider of smart RV technology, luxury mobile living solutions, solar power systems, and emergency services for recreational vehicles.",
+          contactPoint: {
+            telephone: "+1-800-SMART-RV",
+            contactType: "customer service"
+          },
+          sameAs: [
+            "https://facebook.com/smartrvtech",
+            "https://twitter.com/smartrvtech",
+            "https://linkedin.com/company/smartrvtech"
+          ]
+        }} 
+      />
+      
       <CoreWebVitalsMonitor pageName="homepage" enableDebugMode={false} />
       <ConversionTracker pageName="homepage" affiliatePartners={['amazon', 'renogy', 'rvlife']} />
       <RevenueAttribution 
