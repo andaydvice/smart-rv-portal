@@ -50,7 +50,7 @@ const ResponsiveNavbar = () => {
       </div>
 
       {/* Mobile Menu */}
-      <MobileNavigation isOpen={isMobileMenuOpen} />
+      <MobileNavigation isOpen={isMobileMenuOpen} onClose={() => setIsMobileMenuOpen(false)} />
     </nav>
   );
 };
