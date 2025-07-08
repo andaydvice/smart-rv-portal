@@ -5,6 +5,7 @@ import { Toaster } from '@/components/ui/toaster';
 import { AuthProvider } from './components/auth/AuthProvider';
 import { ABTestingProvider } from './components/analytics/ABTestingProvider';
 import { WishlistProvider } from './components/personalization/WishlistProvider';
+import { PWAProvider } from './components/pwa/PWAProvider';
 import PerformanceMonitor from './components/performance/PerformanceMonitor';
 import { injectEmergencyStyles } from './utils/markers/styleInjection';
 import { forceMapMarkersVisible } from './utils/forceMapMarkers';
@@ -117,7 +118,9 @@ function App() {
         <AuthProvider>
           <ABTestingProvider>
             <WishlistProvider>
-              <AppContent />
+              <PWAProvider>
+                <AppContent />
+              </PWAProvider>
             </WishlistProvider>
           </ABTestingProvider>
         </AuthProvider>

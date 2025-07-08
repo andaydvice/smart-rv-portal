@@ -3,149 +3,205 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Offline - RV Affiliate Hub</title>
+    <title>RV Hub - Offline</title>
     <style>
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, #091020 0%, #131a2a 100%);
-            color: white;
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #080F1F 0%, #151A22 100%);
+            color: white;
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
+            padding: 20px;
         }
         
         .container {
             text-align: center;
             max-width: 500px;
-            padding: 2rem;
         }
         
         .icon {
-            font-size: 4rem;
-            margin-bottom: 1rem;
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 30px;
+            background: #5B9BD5;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
         }
         
         h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
             color: #5B9BD5;
-            margin-bottom: 1rem;
-            font-size: 2rem;
         }
         
         p {
-            color: #E2E8FF;
-            margin-bottom: 2rem;
+            font-size: 1.1rem;
             line-height: 1.6;
+            margin-bottom: 30px;
+            color: #E2E8FF;
         }
         
         .features {
-            background: rgba(91, 155, 213, 0.1);
-            border: 1px solid rgba(91, 155, 213, 0.3);
-            border-radius: 8px;
-            padding: 1.5rem;
-            margin: 2rem 0;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 30px;
+            margin: 30px 0;
+            text-align: left;
         }
         
         .features h3 {
             color: #5B9BD5;
-            margin-bottom: 1rem;
+            margin-bottom: 15px;
+            text-align: center;
         }
         
-        .features ul {
+        .feature-list {
             list-style: none;
-            padding: 0;
-            text-align: left;
         }
         
-        .features li {
-            margin: 0.5rem 0;
-            padding-left: 1.5rem;
-            position: relative;
+        .feature-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
         
-        .features li::before {
+        .feature-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .feature-list li:before {
             content: "✓";
             color: #5B9BD5;
-            position: absolute;
-            left: 0;
+            margin-right: 10px;
+            font-weight: bold;
         }
         
         .button {
             background: #5B9BD5;
             color: white;
             border: none;
-            padding: 12px 24px;
-            border-radius: 6px;
+            padding: 12px 30px;
+            border-radius: 8px;
             font-size: 1rem;
             cursor: pointer;
-            transition: background 0.3s;
             text-decoration: none;
             display: inline-block;
+            transition: background 0.3s ease;
         }
         
         .button:hover {
-            background: #4B8FE3;
+            background: #4A8BC2;
         }
         
-        .retry-info {
-            margin-top: 2rem;
-            color: #A0AEC0;
+        .secondary-button {
+            background: transparent;
+            border: 1px solid #5B9BD5;
+            color: #5B9BD5;
+            margin-left: 10px;
+        }
+        
+        .secondary-button:hover {
+            background: rgba(91, 155, 213, 0.1);
+        }
+        
+        .status {
+            margin-top: 30px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
             font-size: 0.9rem;
+        }
+        
+        .online {
+            background: rgba(16, 185, 129, 0.2);
+            color: #10B981;
+        }
+        
+        .offline {
+            background: rgba(239, 68, 68, 0.2);
+            color: #EF4444;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="icon">🚐</div>
+        
         <h1>You're Offline</h1>
-        <p>No internet connection detected. But don't worry - you can still access key RV information that's been cached on your device!</p>
+        
+        <p>No internet connection detected, but you can still access many RV Hub features that work offline!</p>
         
         <div class="features">
-            <h3>Available Offline:</h3>
-            <ul>
-                <li>Previously viewed RV apps and tools</li>
-                <li>Cached emergency contact information</li>
-                <li>Solar power calculator (basic)</li>
-                <li>RV safety checklists</li>
-                <li>Essential RV maintenance guides</li>
+            <h3>Available Offline Features</h3>
+            <ul class="feature-list">
+                <li>RV Cost Calculator</li>
+                <li>Storage Preparation Checklist</li>
+                <li>Solar Panel Calculator</li>
+                <li>Power Management Tools</li>
+                <li>Saved Calculations & Checklists</li>
+                <li>Previously Viewed Content</li>
+                <li>Emergency Contact Information</li>
             </ul>
         </div>
         
-        <button class="button" onclick="retryConnection()">
-            Try Again
-        </button>
+        <div>
+            <button class="button" onclick="tryReconnect()">Try Again</button>
+            <a href="/" class="button secondary-button">Browse Offline</a>
+        </div>
         
-        <div class="retry-info">
-            Your submissions will be saved and synced when you're back online.
+        <div class="status" id="connectionStatus">
+            <span id="statusText">Connection Status: Offline</span>
         </div>
     </div>
 
     <script>
-        function retryConnection() {
+        function updateConnectionStatus() {
+            const statusEl = document.getElementById('connectionStatus');
+            const textEl = document.getElementById('statusText');
+            
             if (navigator.onLine) {
-                window.location.reload();
+                statusEl.className = 'status online';
+                textEl.textContent = 'Connection Status: Online - Redirecting...';
+                setTimeout(() => {
+                    window.location.href = '/';
+                }, 1000);
             } else {
-                alert('Still no internet connection. Please check your network settings.');
+                statusEl.className = 'status offline';
+                textEl.textContent = 'Connection Status: Offline';
             }
         }
         
-        // Auto-retry when connection is restored
-        window.addEventListener('online', () => {
-            setTimeout(() => {
-                window.location.reload();
-            }, 1000);
-        });
+        function tryReconnect() {
+            if (navigator.onLine) {
+                window.location.href = '/';
+            } else {
+                alert('Still offline. Please check your internet connection and try again.');
+            }
+        }
         
-        // Show connection status
-        window.addEventListener('offline', () => {
-            console.log('Connection lost');
-        });
+        // Listen for online/offline events
+        window.addEventListener('online', updateConnectionStatus);
+        window.addEventListener('offline', updateConnectionStatus);
         
-        window.addEventListener('online', () => {
-            console.log('Connection restored');
-        });
+        // Initial status check
+        updateConnectionStatus();
+        
+        // Periodic connection check
+        setInterval(() => {
+            if (navigator.onLine) {
+                updateConnectionStatus();
+            }
+        }, 5000);
     </script>
 </body>
 </html>
