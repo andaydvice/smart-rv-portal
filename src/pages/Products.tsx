@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
 import { scrollToTop } from "@/utils/scrollToTop";
 import InvisibleSEO from "@/components/seo/InvisibleSEO";
+import CustomerReviewsSection from "@/components/affiliate/CustomerReviewsSection";
 
 const Products = () => {
   useEffect(() => {
@@ -120,6 +121,19 @@ const Products = () => {
               </motion.div>
             ))}
           </div>
+
+          {/* Customer Reviews Section */}
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5, duration: 0.5 }}
+            className="mt-16"
+          >
+            <CustomerReviewsSection
+              productCategory="products"
+              className="mb-16"
+            />
+          </motion.div>
 
           <motion.div 
             initial={{ opacity: 0, y: 20 }}

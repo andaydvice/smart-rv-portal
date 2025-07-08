@@ -6,6 +6,7 @@ import AffiliateProductCard from '@/components/affiliate/AffiliateProductCard';
 import AffiliateComparisonTable from '@/components/affiliate/AffiliateComparisonTable';
 import AffiliateCTABanner from '@/components/affiliate/AffiliateCTABanner';
 import AffiliateDisclosure from '@/components/affiliate/AffiliateDisclosure';
+import CustomerReviewsSection from '@/components/affiliate/CustomerReviewsSection';
 import { MobileProductCarousel, MobileScrollHint, MobileAnalytics, PullToRefresh, FloatingActionButtons, AppInstallPrompt } from '@/components/mobile';
 import PerformanceMonitor from '@/components/performance/PerformanceMonitor';
 import OptimizedImage from '@/components/performance/OptimizedImage';
@@ -342,6 +343,13 @@ const RVAppsHub = () => {
               </div>
             </CardContent>
           </Card>
+
+          {/* Customer Reviews Section */}
+          <CustomerReviewsSection
+            productCategory="rv-apps"
+            affiliatePartner="rvlife"
+            className="mb-12"
+          />
 
           {/* CTA Banner */}
           <AffiliateCTABanner

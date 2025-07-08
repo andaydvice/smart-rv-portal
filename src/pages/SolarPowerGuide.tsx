@@ -6,6 +6,7 @@ import AffiliateProductCard from '@/components/affiliate/AffiliateProductCard';
 import AffiliateComparisonTable from '@/components/affiliate/AffiliateComparisonTable';
 import AffiliateCTABanner from '@/components/affiliate/AffiliateCTABanner';
 import AffiliateDisclosure from '@/components/affiliate/AffiliateDisclosure';
+import CustomerReviewsSection from '@/components/affiliate/CustomerReviewsSection';
 import { MobileProductCarousel, MobileScrollHint, MobileAnalytics } from '@/components/mobile';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -410,6 +411,13 @@ const SolarPowerGuide = () => {
               </div>
             </CardContent>
           </Card>
+
+          {/* Customer Reviews Section */}
+          <CustomerReviewsSection
+            productCategory="solar-equipment"
+            affiliatePartner="renogy"
+            className="mb-12"
+          />
 
           {/* CTA Banner */}
           <AffiliateCTABanner
