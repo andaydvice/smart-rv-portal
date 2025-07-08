@@ -10,8 +10,10 @@ import AIPersonalRVAssistant from '@/components/ai/AIPersonalRVAssistant';
 import AugmentedRealityFeatures from '@/components/ar/AugmentedRealityFeatures';
 import PerformanceIntelligence from '@/components/analytics/PerformanceIntelligence';
 import SocialCommerceHub from '@/components/social/SocialCommerceHub';
+import AdvancedAnalyticsDashboard from '@/components/analytics/AdvancedAnalyticsDashboard';
+import EnterpriseIntegrationHub from '@/components/enterprise/EnterpriseIntegrationHub';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Brain, Shield, BarChart3, Route, Zap, Bot, Scan, Gauge, Users } from 'lucide-react';
+import { Brain, Shield, BarChart3, Route, Zap, Bot, Scan, Gauge, Users, Database, Code } from 'lucide-react';
 
 const EnterpriseIntelligence = () => {
   return (
@@ -30,7 +32,7 @@ const EnterpriseIntelligence = () => {
           </div>
 
           <Tabs defaultValue="revenue" className="space-y-8">
-            <TabsList className="grid w-full grid-cols-9 bg-[#091020] border border-gray-700">
+            <TabsList className="grid w-full grid-cols-11 bg-[#091020] border border-gray-700">
               <TabsTrigger 
                 value="revenue" 
                 className="flex items-center gap-2 data-[state=active]:bg-[#5B9BD5] data-[state=active]:text-white"
@@ -92,7 +94,21 @@ const EnterpriseIntelligence = () => {
                 className="flex items-center gap-2 data-[state=active]:bg-[#5B9BD5] data-[state=active]:text-white"
               >
                 <Users className="h-4 w-4" />
-                Social Commerce
+                Social
+              </TabsTrigger>
+              <TabsTrigger 
+                value="advanced-analytics" 
+                className="flex items-center gap-2 data-[state=active]:bg-[#5B9BD5] data-[state=active]:text-white"
+              >
+                <Database className="h-4 w-4" />
+                Advanced Analytics
+              </TabsTrigger>
+              <TabsTrigger 
+                value="integrations" 
+                className="flex items-center gap-2 data-[state=active]:bg-[#5B9BD5] data-[state=active]:text-white"
+              >
+                <Code className="h-4 w-4" />
+                Integrations
               </TabsTrigger>
             </TabsList>
 
@@ -130,6 +146,14 @@ const EnterpriseIntelligence = () => {
 
             <TabsContent value="social">
               <SocialCommerceHub />
+            </TabsContent>
+
+            <TabsContent value="advanced-analytics">
+              <AdvancedAnalyticsDashboard />
+            </TabsContent>
+
+            <TabsContent value="integrations">
+              <EnterpriseIntegrationHub />
             </TabsContent>
           </Tabs>
         </div>
