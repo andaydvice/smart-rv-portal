@@ -5,8 +5,11 @@ import RevenueIntelligenceEngine from '@/components/revenue/RevenueIntelligenceE
 import CompetitiveIntelligence from '@/components/market/CompetitiveIntelligence';
 import EnterpriseAnalytics from '@/components/enterprise/EnterpriseAnalytics';
 import CustomerJourneyOptimizer from '@/components/retention/CustomerJourneyOptimizer';
+import MarketingAutomationPlatform from '@/components/automation/MarketingAutomationPlatform';
+import AIPersonalRVAssistant from '@/components/ai/AIPersonalRVAssistant';
+import AugmentedRealityFeatures from '@/components/ar/AugmentedRealityFeatures';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Brain, Shield, BarChart3, Route } from 'lucide-react';
+import { Brain, Shield, BarChart3, Route, Zap, Bot, Scan } from 'lucide-react';
 
 const EnterpriseIntelligence = () => {
   return (
@@ -25,7 +28,7 @@ const EnterpriseIntelligence = () => {
           </div>
 
           <Tabs defaultValue="revenue" className="space-y-8">
-            <TabsList className="grid w-full grid-cols-4 bg-[#091020] border border-gray-700">
+            <TabsList className="grid w-full grid-cols-7 bg-[#091020] border border-gray-700">
               <TabsTrigger 
                 value="revenue" 
                 className="flex items-center gap-2 data-[state=active]:bg-[#5B9BD5] data-[state=active]:text-white"
@@ -38,21 +41,42 @@ const EnterpriseIntelligence = () => {
                 className="flex items-center gap-2 data-[state=active]:bg-[#5B9BD5] data-[state=active]:text-white"
               >
                 <Shield className="h-4 w-4" />
-                Competitive Intel
+                Competitive
               </TabsTrigger>
               <TabsTrigger 
                 value="analytics" 
                 className="flex items-center gap-2 data-[state=active]:bg-[#5B9BD5] data-[state=active]:text-white"
               >
                 <BarChart3 className="h-4 w-4" />
-                Enterprise Analytics
+                Analytics
               </TabsTrigger>
               <TabsTrigger 
                 value="journey" 
                 className="flex items-center gap-2 data-[state=active]:bg-[#5B9BD5] data-[state=active]:text-white"
               >
                 <Route className="h-4 w-4" />
-                Customer Journey
+                Journey
+              </TabsTrigger>
+              <TabsTrigger 
+                value="automation" 
+                className="flex items-center gap-2 data-[state=active]:bg-[#5B9BD5] data-[state=active]:text-white"
+              >
+                <Zap className="h-4 w-4" />
+                Automation
+              </TabsTrigger>
+              <TabsTrigger 
+                value="ai-assistant" 
+                className="flex items-center gap-2 data-[state=active]:bg-[#5B9BD5] data-[state=active]:text-white"
+              >
+                <Bot className="h-4 w-4" />
+                AI Assistant
+              </TabsTrigger>
+              <TabsTrigger 
+                value="ar-features" 
+                className="flex items-center gap-2 data-[state=active]:bg-[#5B9BD5] data-[state=active]:text-white"
+              >
+                <Scan className="h-4 w-4" />
+                AR Features
               </TabsTrigger>
             </TabsList>
 
@@ -70,6 +94,18 @@ const EnterpriseIntelligence = () => {
 
             <TabsContent value="journey">
               <CustomerJourneyOptimizer />
+            </TabsContent>
+
+            <TabsContent value="automation">
+              <MarketingAutomationPlatform />
+            </TabsContent>
+
+            <TabsContent value="ai-assistant">
+              <AIPersonalRVAssistant />
+            </TabsContent>
+
+            <TabsContent value="ar-features">
+              <AugmentedRealityFeatures />
             </TabsContent>
           </Tabs>
         </div>
