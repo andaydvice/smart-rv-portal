@@ -13,6 +13,7 @@ import ConversionTracker from "@/components/analytics/ConversionTracker";
 import RevenueAttribution from "@/components/analytics/RevenueAttribution";
 import SEOHelmet from "@/components/seo/SEOHelmet";
 import StructuredData from "@/components/seo/StructuredData";
+import InvisibleSEO from "@/components/seo/InvisibleSEO";
 
 // Lazy load components that aren't needed immediately
 const FeaturesSection = lazy(() => import("@/components/sections/FeaturesSection").then(mod => ({ 
@@ -95,6 +96,13 @@ const Index = () => {
           { id: 'solar-guide', name: 'Solar Power Guide', price: 0, partner: 'renogy' },
           { id: 'emergency-center', name: 'Emergency Center', price: 0, partner: 'amazon' }
         ]}
+      />
+      
+      <InvisibleSEO 
+        pageType="homepage"
+        pageTitle="Smart RV Technology"
+        pageContent="Discover the future of RV living with smart technology, luxury features, solar power solutions, emergency services, and innovative apps for modern mobile homes."
+        category="technology"
       />
       <motion.div 
         initial={{ opacity: 0 }}

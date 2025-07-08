@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import { motion } from "framer-motion";
 import Layout from "@/components/layout/Layout";
 import { scrollToTop } from "@/utils/scrollToTop";
+import InvisibleSEO from "@/components/seo/InvisibleSEO";
 
 const About = () => {
   useEffect(() => {
@@ -12,6 +13,12 @@ const About = () => {
 
   return (
     <Layout>
+      <InvisibleSEO 
+        pageType="product"
+        pageTitle="About Smart RV"
+        pageContent="Smart RV is revolutionizing the recreational vehicle industry by integrating cutting edge technology with traditional RV experiences. We believe that the future of travel lies in intelligent, connected vehicles that enhance safety, comfort, and convenience for every journey."
+        category="about"
+      />
       <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

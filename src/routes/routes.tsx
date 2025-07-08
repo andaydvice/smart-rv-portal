@@ -7,6 +7,9 @@ import Index from "../pages/Index";
 import ErrorPage from "../pages/ErrorPage";
 import SearchResults from "../pages/SearchResults";
 
+// Import admin pages
+import SEODashboard from "../pages/admin/SEODashboard";
+
 // Import affiliate pages
 import RVAppsHub from "../pages/RVAppsHub";
 import RVEmergencyCenter from "../pages/RVEmergencyCenter";
@@ -44,6 +47,12 @@ export const routes: RouteObject[] = [
   {
     path: "/solar-power-guide",
     element: <SolarPowerGuide />,
+    errorElement: <ErrorPage />,
+  },
+  // Admin routes
+  {
+    path: "/admin/seo",
+    element: <SEODashboard />,
     errorElement: <ErrorPage />,
   },
   ...modelRoutes,

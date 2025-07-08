@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
 import { scrollToTop } from "@/utils/scrollToTop";
+import InvisibleSEO from "@/components/seo/InvisibleSEO";
 
 const Products = () => {
   useEffect(() => {
@@ -37,6 +38,12 @@ const Products = () => {
 
   return (
     <Layout>
+      <InvisibleSEO 
+        pageType="product"
+        pageTitle="Smart RV Products"
+        pageContent="Comprehensive range of smart RV solutions including intelligent recreational vehicles, technology packages, and premium storage facilities designed for modern mobile lifestyle."
+        category="products"
+      />
       <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

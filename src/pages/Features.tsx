@@ -4,10 +4,17 @@ import Navbar from "@/components/Navbar";
 import { Link } from "react-router-dom";
 import { Navigation, Shield, Battery, Tv, Droplet, Cog, Thermometer, Music } from "lucide-react";
 import Layout from "@/components/layout/Layout";
+import InvisibleSEO from "@/components/seo/InvisibleSEO";
 
 const Features = () => {
   return (
     <Layout>
+      <InvisibleSEO 
+        pageType="category"
+        pageTitle="Smart RV Features"
+        pageContent="Discover comprehensive smart RV features including navigation systems, security, power management, climate control, entertainment, and automation for the ultimate RV experience."
+        category="features"
+      />
       <Navbar />
       <motion.div 
         initial={{ opacity: 0 }}
