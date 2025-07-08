@@ -38,6 +38,81 @@ export type Database = {
         }
         Relationships: []
       }
+      customer_reviews: {
+        Row: {
+          affiliate_partner: string
+          affiliate_product_id: string | null
+          created_at: string
+          featured: boolean | null
+          helpful_count: number | null
+          id: string
+          images: string[] | null
+          moderator_notes: string | null
+          product_category: string
+          product_name: string
+          purchase_date: string | null
+          rating: number
+          recommended: boolean | null
+          review_text: string
+          reviewer_location: string | null
+          reviewer_name: string | null
+          status: string | null
+          title: string
+          updated_at: string
+          usage_duration: string | null
+          user_id: string | null
+          verified_purchase: boolean | null
+        }
+        Insert: {
+          affiliate_partner: string
+          affiliate_product_id?: string | null
+          created_at?: string
+          featured?: boolean | null
+          helpful_count?: number | null
+          id?: string
+          images?: string[] | null
+          moderator_notes?: string | null
+          product_category: string
+          product_name: string
+          purchase_date?: string | null
+          rating: number
+          recommended?: boolean | null
+          review_text: string
+          reviewer_location?: string | null
+          reviewer_name?: string | null
+          status?: string | null
+          title: string
+          updated_at?: string
+          usage_duration?: string | null
+          user_id?: string | null
+          verified_purchase?: boolean | null
+        }
+        Update: {
+          affiliate_partner?: string
+          affiliate_product_id?: string | null
+          created_at?: string
+          featured?: boolean | null
+          helpful_count?: number | null
+          id?: string
+          images?: string[] | null
+          moderator_notes?: string | null
+          product_category?: string
+          product_name?: string
+          purchase_date?: string | null
+          rating?: number
+          recommended?: boolean | null
+          review_text?: string
+          reviewer_location?: string | null
+          reviewer_name?: string | null
+          status?: string | null
+          title?: string
+          updated_at?: string
+          usage_duration?: string | null
+          user_id?: string | null
+          verified_purchase?: boolean | null
+        }
+        Relationships: []
+      }
       login_attempts: {
         Row: {
           failed_attempts: number
