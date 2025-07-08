@@ -15,6 +15,7 @@ import MobileAnalyticsDashboard from "../pages/admin/MobileAnalyticsDashboard";
 import VoiceCommercePage from "../pages/VoiceCommerce";
 import EnterpriseIntelligence from "../pages/EnterpriseIntelligence";
 import AdminDashboard from "../pages/AdminDashboard";
+import AccountSettings from "../pages/AccountSettings";
 
 // Import affiliate pages
 import RVAppsHub from "../pages/RVAppsHub";
@@ -89,6 +90,11 @@ export const routes: RouteObject[] = [
   {
     path: "/enterprise-intelligence",
     element: <EnterpriseIntelligence />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/account-settings",
+    element: <AccountSettings />,
     errorElement: <ErrorPage />,
   },
   ...modelRoutes,

@@ -77,9 +77,11 @@ const UserMenu = () => {
           </>
         )}
         
-        <DropdownMenuItem className="text-gray-300 hover:text-white hover:bg-[#131a2a]">
-          <Settings className="mr-2 h-4 w-4" />
-          <span>Account Settings</span>
+        <DropdownMenuItem asChild className="text-gray-300 hover:text-white hover:bg-[#131a2a]">
+          <Link to="/account-settings" className="flex items-center">
+            <Settings className="mr-2 h-4 w-4" />
+            <span>Account Settings</span>
+          </Link>
         </DropdownMenuItem>
         
         <DropdownMenuSeparator className="bg-gray-700" />
