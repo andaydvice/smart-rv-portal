@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import DesktopNavigation from "./DesktopNavigation";
 import MobileNavigation from "./MobileNavigation";
-import LocationSelector from '@/components/international/LocationSelector';
+import LocationIndicator from '@/components/international/LocationIndicator';
 
 const ResponsiveNavbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -27,7 +27,7 @@ const ResponsiveNavbar = () => {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-6">
             <DesktopNavigation />
-            <LocationSelector compact={true} />
+            <LocationIndicator />
           </div>
 
           {/* Mobile menu button */}

@@ -92,17 +92,21 @@ const LocationSelector = ({ compact = false, showCurrencyToggle = true }: Locati
             }
           }}
         >
-          <SelectTrigger className="w-32 h-8 text-sm border-gray-600 bg-[#131a2a]">
+          <SelectTrigger className="w-32 h-8 text-sm border-gray-600 bg-[#131a2a] text-white hover:bg-[#1a2332] focus:ring-2 focus:ring-[#5B9BD5] focus:border-[#5B9BD5]">
             <SelectValue>
               <div className="flex items-center gap-1">
                 <span>{SUPPORTED_REGIONS.find(r => r.countryCode === geoData.countryCode)?.flag}</span>
-                <span>{geoData.countryCode}</span>
+                <span className="text-white">{geoData.countryCode}</span>
               </div>
             </SelectValue>
           </SelectTrigger>
-          <SelectContent className="bg-[#131a2a] border-gray-600">
+          <SelectContent className="bg-[#131a2a] border-gray-600 z-[100] min-w-[200px]">
             {SUPPORTED_REGIONS.map((region) => (
-              <SelectItem key={region.countryCode} value={region.countryCode} className="text-white">
+              <SelectItem 
+                key={region.countryCode} 
+                value={region.countryCode} 
+                className="text-white hover:bg-[#1a2332] focus:bg-[#1a2332] cursor-pointer"
+              >
                 <div className="flex items-center gap-2">
                   <span>{region.flag}</span>
                   <span>{region.country}</span>
@@ -118,7 +122,7 @@ const LocationSelector = ({ compact = false, showCurrencyToggle = true }: Locati
             variant="ghost"
             size="sm"
             onClick={toggleCurrencyDisplay}
-            className="h-8 px-2 text-xs text-gray-400 hover:text-white"
+            className="h-8 px-2 text-xs text-gray-400 hover:text-white hover:bg-[#1a2332]"
           >
             <DollarSign className="h-3 w-3 mr-1" />
             {showSecondary ? 'Local' : 'USD'}
