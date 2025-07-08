@@ -14,6 +14,7 @@ import RevenueAttribution from "@/components/analytics/RevenueAttribution";
 import SEOHelmet from "@/components/seo/SEOHelmet";
 import StructuredData from "@/components/seo/StructuredData";
 import InvisibleSEO from "@/components/seo/InvisibleSEO";
+import InternationalBanner from "@/components/international/InternationalBanner";
 
 // Lazy load components that aren't needed immediately
 const FeaturesSection = lazy(() => import("@/components/sections/FeaturesSection").then(mod => ({ 
@@ -110,6 +111,9 @@ const Index = () => {
         transition={{ duration: 0.6 }}
         className="min-h-screen w-full bg-gradient-to-b from-gray-50 to-white"
       >
+        <div className="pt-16">
+          <InternationalBanner />
+        </div>
         <HeroSection />
         
         <Suspense fallback={<LoadingFallback />}>
