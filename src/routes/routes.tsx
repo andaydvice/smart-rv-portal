@@ -6,6 +6,7 @@ import { RouteObject } from "react-router-dom";
 import Index from "../pages/Index";
 import ErrorPage from "../pages/ErrorPage";
 import SearchResults from "../pages/SearchResults";
+import Auth from "../pages/Auth";
 
 // Import admin pages
 import SEODashboard from "../pages/admin/SEODashboard";
@@ -35,6 +36,11 @@ export const routes: RouteObject[] = [
   {
     path: "/search",
     element: <SearchResults />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/auth",
+    element: <Auth />,
     errorElement: <ErrorPage />,
   },
   // Affiliate revenue pages
