@@ -234,6 +234,8 @@ const RVAppsHub = () => {
                   <AffiliateProductCard
                     key={index}
                     {...app}
+                    affiliatePartner="rvlife"
+                    productCategory="rv-apps"
                     className="h-full"
                   />
                 ))}

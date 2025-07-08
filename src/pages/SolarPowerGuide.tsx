@@ -317,6 +317,8 @@ const SolarPowerGuide = () => {
                       <AffiliateProductCard
                         key={index}
                         {...kit}
+                        affiliatePartner="renogy"
+                        productCategory="solar-equipment"
                         className="h-full"
                       />
                     ))}
