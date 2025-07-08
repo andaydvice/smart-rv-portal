@@ -53,8 +53,8 @@ const Auth = () => {
       if (error) throw error;
       
       if (data.user) {
-        // Force page reload for clean state
-        window.location.href = '/';
+        // Redirect to admin dashboard for clean entry point
+        window.location.href = '/admin';
       }
     } catch (error: any) {
       setError(error.message || 'Failed to sign in');
