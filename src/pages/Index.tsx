@@ -112,8 +112,8 @@ const Index = () => {
         className="min-h-screen w-full bg-gradient-to-b from-gray-50 to-white"
       >
         <div className="pt-16">
-          <InternationalBanner />
         </div>
+        <InternationalBanner />
         <HeroSection />
         
         <Suspense fallback={<LoadingFallback />}>
