@@ -12,3 +12,4 @@ export { default as SmartNotificationCenter } from './SmartNotificationCenter';
 export { default as MobileConversionOptimizer } from './MobileConversionOptimizer';
 export { default as PersonalizationEngine } from './PersonalizationEngine';
 export { default as AdvancedAnalytics } from './AdvancedAnalytics';
+export { default as VoiceCommerce } from './VoiceCommerce';
