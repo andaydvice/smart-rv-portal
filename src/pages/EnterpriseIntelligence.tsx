@@ -12,8 +12,11 @@ import PerformanceIntelligence from '@/components/analytics/PerformanceIntellige
 import SocialCommerceHub from '@/components/social/SocialCommerceHub';
 import AdvancedAnalyticsDashboard from '@/components/analytics/AdvancedAnalyticsDashboard';
 import EnterpriseIntegrationHub from '@/components/enterprise/EnterpriseIntegrationHub';
+import MobileIntelligenceHub from '@/components/mobile/MobileIntelligenceHub';
+import SEOIntelligenceHub from '@/components/seo/SEOIntelligenceHub';
+import RetentionIntelligenceHub from '@/components/retention/RetentionIntelligenceHub';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Brain, Shield, BarChart3, Route, Zap, Bot, Scan, Gauge, Users, Database, Code } from 'lucide-react';
+import { Brain, Shield, BarChart3, Route, Zap, Bot, Scan, Gauge, Users, Database, Code, Smartphone, Search, Heart } from 'lucide-react';
 
 const EnterpriseIntelligence = () => {
   return (
@@ -32,7 +35,7 @@ const EnterpriseIntelligence = () => {
           </div>
 
           <Tabs defaultValue="revenue" className="space-y-8">
-            <TabsList className="grid w-full grid-cols-11 bg-[#091020] border border-gray-700">
+            <TabsList className="grid w-full grid-cols-7 lg:grid-cols-14 bg-[#091020] border border-gray-700">
               <TabsTrigger 
                 value="revenue" 
                 className="flex items-center gap-2 data-[state=active]:bg-[#5B9BD5] data-[state=active]:text-white"
@@ -110,6 +113,27 @@ const EnterpriseIntelligence = () => {
                 <Code className="h-4 w-4" />
                 Integrations
               </TabsTrigger>
+              <TabsTrigger 
+                value="mobile" 
+                className="flex items-center gap-2 data-[state=active]:bg-[#5B9BD5] data-[state=active]:text-white"
+              >
+                <Smartphone className="h-4 w-4" />
+                Mobile
+              </TabsTrigger>
+              <TabsTrigger 
+                value="seo" 
+                className="flex items-center gap-2 data-[state=active]:bg-[#5B9BD5] data-[state=active]:text-white"
+              >
+                <Search className="h-4 w-4" />
+                SEO
+              </TabsTrigger>
+              <TabsTrigger 
+                value="retention" 
+                className="flex items-center gap-2 data-[state=active]:bg-[#5B9BD5] data-[state=active]:text-white"
+              >
+                <Heart className="h-4 w-4" />
+                Retention
+              </TabsTrigger>
             </TabsList>
 
             <TabsContent value="revenue">
@@ -154,6 +178,18 @@ const EnterpriseIntelligence = () => {
 
             <TabsContent value="integrations">
               <EnterpriseIntegrationHub />
+            </TabsContent>
+
+            <TabsContent value="mobile">
+              <MobileIntelligenceHub />
+            </TabsContent>
+
+            <TabsContent value="seo">
+              <SEOIntelligenceHub />
+            </TabsContent>
+
+            <TabsContent value="retention">
+              <RetentionIntelligenceHub />
             </TabsContent>
           </Tabs>
         </div>
