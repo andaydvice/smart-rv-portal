@@ -3,6 +3,7 @@ import Layout from '@/components/layout/Layout';
 import Navbar from '@/components/Navbar';
 import AdminRoute from '@/components/auth/AdminRoute';
 import CompetitiveIntelligence from '@/components/market/CompetitiveIntelligence';
+import RevenueIntelligenceEngine from '@/components/revenue/RevenueIntelligenceEngine';
 import EnterpriseAnalytics from '@/components/enterprise/EnterpriseAnalytics';
 import CustomerJourneyOptimizer from '@/components/retention/CustomerJourneyOptimizer';
 import MarketingAutomationPlatform from '@/components/automation/MarketingAutomationPlatform';
