@@ -3,24 +3,20 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
 import './index.css'
+import './styles/animations.css'
+import './styles/forms.css'
+import './styles/layout.css'
+import './styles/base.css'
+import './styles/emergency-marker-fix.css'
+import './styles/map-optimizations.css'
+import './styles/force-markers.css'
+import './styles/map-fixes.css'
+import './styles/map/index.css'
 import { setupLazyLoading, deferOperation, preloadCriticalImages } from './utils/performance.ts'
 import { setupCaching } from './utils/caching.ts'
 import { optimizeCSSDelivery } from './utils/criticalCss.ts'
 import { preloadCriticalModules } from './utils/bundleOptimization.ts'
 import { setupPerformanceMonitoring } from './utils/performanceReport.ts'
-
-// Dynamically import non-critical CSS
-deferOperation(() => {
-  import('./styles/animations.css')
-  import('./styles/forms.css')
-  import('./styles/layout.css')
-  import('./styles/base.css')
-  import('./styles/emergency-marker-fix.css')
-  import('./styles/map-optimizations.css')
-  import('./styles/force-markers.css')
-  import('./styles/map-fixes.css')
-  import('./styles/map/index.css')
-}, 0)
 
 // Register service worker for PWA features
 if ('serviceWorker' in navigator) {
