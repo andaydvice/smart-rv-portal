@@ -1,7 +1,7 @@
 import React from 'react';
 import Layout from '@/components/layout/Layout';
 import Navbar from '@/components/Navbar';
-import RevenueIntelligenceEngine from '@/components/revenue/RevenueIntelligenceEngine';
+import AdminRoute from '@/components/auth/AdminRoute';
 import CompetitiveIntelligence from '@/components/market/CompetitiveIntelligence';
 import EnterpriseAnalytics from '@/components/enterprise/EnterpriseAnalytics';
 import CustomerJourneyOptimizer from '@/components/retention/CustomerJourneyOptimizer';
@@ -20,9 +20,10 @@ import { Brain, Shield, BarChart3, Route, Zap, Bot, Scan, Gauge, Users, Database
 
 const EnterpriseIntelligence = () => {
   return (
-    <Layout>
-      <Navbar />
-      <main className="relative w-full flex-grow bg-gradient-to-b from-[#080F1F] to-[#151A22] min-h-screen">
+    <AdminRoute>
+      <Layout>
+        <Navbar />
+        <main className="relative w-full flex-grow bg-gradient-to-b from-[#080F1F] to-[#151A22] min-h-screen">
         <div className="max-w-7xl mx-auto px-4 py-8">
           <div className="text-center mb-8">
             <h1 className="text-4xl font-bold text-white mb-4">
@@ -195,6 +196,7 @@ const EnterpriseIntelligence = () => {
         </div>
       </main>
     </Layout>
+    </AdminRoute>
   );
 };
 
