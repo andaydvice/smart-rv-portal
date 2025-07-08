@@ -18,6 +18,7 @@ import AdminDashboard from "../pages/AdminDashboard";
 import AccountSettings from "../pages/AccountSettings";
 import UserManagement from "../pages/UserManagement";
 import SystemSettings from "../pages/SystemSettings";
+import EnhancedAnalyticsDashboard from "../pages/EnhancedAnalyticsDashboard";
 
 // Import affiliate pages
 import RVAppsHub from "../pages/RVAppsHub";
@@ -107,6 +108,11 @@ export const routes: RouteObject[] = [
   {
     path: "/admin/settings",
     element: <SystemSettings />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/admin/enhanced-analytics",
+    element: <EnhancedAnalyticsDashboard />,
     errorElement: <ErrorPage />,
   },
   ...modelRoutes,
