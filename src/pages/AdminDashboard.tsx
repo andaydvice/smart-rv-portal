@@ -154,13 +154,15 @@ const AdminDashboard = () => {
         <div className="min-h-screen bg-gradient-to-b from-[#080F1F] to-[#151A22]">
           <div className="max-w-7xl mx-auto px-4 py-8">
             {/* Header */}
-            <div className="mb-8">
-              <h1 className="text-3xl font-bold text-white mb-2">
-                Admin Dashboard
-              </h1>
-              <p className="text-gray-300">
-                Welcome back, {user?.email}. Here's what's happening with your site.
-              </p>
+            <div className="mb-8 flex justify-between items-center">
+              <div>
+                <h1 className="text-3xl font-bold text-white mb-2">
+                  Admin Dashboard
+                </h1>
+                <p className="text-gray-300">
+                  Welcome back, {user?.email}. Here's what's happening with your site.
+                </p>
+              </div>
             </div>
 
             {/* Quick Stats */}
