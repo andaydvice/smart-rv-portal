@@ -38,6 +38,63 @@ export type Database = {
         }
         Relationships: []
       }
+      content_analysis: {
+        Row: {
+          ab_test_data: Json | null
+          affiliate_partner: string
+          content_id: string
+          content_type: string
+          conversion_metrics: Json | null
+          created_at: string
+          engagement_metrics: Json | null
+          id: string
+          last_analyzed: string | null
+          optimization_score: number | null
+          page_url: string
+          performance_trend: string | null
+          product_category: string
+          recommendations: string[] | null
+          seo_metrics: Json | null
+          updated_at: string
+        }
+        Insert: {
+          ab_test_data?: Json | null
+          affiliate_partner: string
+          content_id: string
+          content_type: string
+          conversion_metrics?: Json | null
+          created_at?: string
+          engagement_metrics?: Json | null
+          id?: string
+          last_analyzed?: string | null
+          optimization_score?: number | null
+          page_url: string
+          performance_trend?: string | null
+          product_category: string
+          recommendations?: string[] | null
+          seo_metrics?: Json | null
+          updated_at?: string
+        }
+        Update: {
+          ab_test_data?: Json | null
+          affiliate_partner?: string
+          content_id?: string
+          content_type?: string
+          conversion_metrics?: Json | null
+          created_at?: string
+          engagement_metrics?: Json | null
+          id?: string
+          last_analyzed?: string | null
+          optimization_score?: number | null
+          page_url?: string
+          performance_trend?: string | null
+          product_category?: string
+          recommendations?: string[] | null
+          seo_metrics?: Json | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
       customer_reviews: {
         Row: {
           affiliate_partner: string
