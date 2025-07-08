@@ -50,21 +50,60 @@ export default defineConfig(({ mode }) => ({
   },
   build: {
     sourcemap: mode === 'development',
-    minify: mode === 'development' ? false : 'esbuild',
+    minify: mode === 'development' ? false : 'terser',
     rollupOptions: {
       output: {
-        manualChunks: {
-          vendor: ['react', 'react-dom'],
-          mapbox: ['mapbox-gl'],
-          query: ['@tanstack/react-query'],
-          ui: ['lucide-react', '@radix-ui/react-dialog', '@radix-ui/react-popover']
+        manualChunks: (id) => {
+          // Core vendor chunk
+          if (id.includes('node_modules/react') || id.includes('node_modules/react-dom')) {
+            return 'vendor';
+          }
+          // Maps chunk
+          if (id.includes('mapbox') || id.includes('map')) {
+            return 'maps';
+          }
+          // UI components chunk
+          if (id.includes('@radix-ui') || id.includes('lucide-react')) {
+            return 'ui';
+          }
+          // Analytics chunk
+          if (id.includes('analytics') || id.includes('recharts')) {
+            return 'analytics';
+          }
+          // Utils chunk
+          if (id.includes('utils') && !id.includes('node_modules')) {
+            return 'utils';
+          }
+          // Large dependencies
+          if (id.includes('node_modules')) {
+            return 'vendor-libs';
+          }
         },
+        assetFileNames: (assetInfo) => {
+          const info = assetInfo.name?.split('.') || [];
+          const extType = info[info.length - 1];
+          if (/png|jpe?g|svg|gif|tiff|bmp|ico/i.test(extType || '')) {
+            return `assets/images/[name]-[hash][extname]`;
+          }
+          if (/css/i.test(extType || '')) {
+            return `assets/css/[name]-[hash][extname]`;
+          }
+          return `assets/[name]-[hash][extname]`;
+        },
+        chunkFileNames: 'assets/js/[name]-[hash].js',
+        entryFileNames: 'assets/js/[name]-[hash].js',
       },
+      treeshake: {
+        moduleSideEffects: false,
+        propertyReadSideEffects: false,
+        unknownGlobalSideEffects: false
+      }
     },
-    target: 'es2020', // Ensure consistent target with optimizeDeps
+    target: 'es2020',
     cssCodeSplit: true,
-    reportCompressedSize: false, // Disable compressed size reporting for faster builds
-    chunkSizeWarningLimit: 1000 // Increase chunk size warning limit
+    reportCompressedSize: false,
+    chunkSizeWarningLimit: 150, // Stricter chunk size limits
+    assetsInlineLimit: 4096 // Inline small assets
   },
   esbuild: {
     logOverride: { 'this-is-undefined-in-esm': 'silent' }

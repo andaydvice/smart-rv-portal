@@ -19,7 +19,7 @@ import {
   MobileConversionOptimizer
 } from '@/components/mobile';
 import PerformanceMonitor from '@/components/performance/PerformanceMonitor';
-import OptimizedImage from '@/components/performance/OptimizedImage';
+import { OptimizedImage } from '@/components/performance/OptimizedImage';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Smartphone, Wifi, MapPin, Battery, Settings, Shield } from 'lucide-react';
 
@@ -388,12 +388,7 @@ const RVAppsHub = () => {
           />
 
           {/* Performance Monitoring */}
-          <PerformanceMonitor 
-            pageName="RVAppsHub"
-            enableCoreWebVitals={true}
-            enableResourceTiming={true}
-            enableNavigationTiming={true}
-          />
+          <PerformanceMonitor />
 
           {/* Mobile Scroll Hint */}
           <MobileScrollHint targetSection="featured-apps" text="Explore must-have apps" />

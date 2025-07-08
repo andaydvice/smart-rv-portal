@@ -3,16 +3,24 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
 import './index.css'
-import './styles/animations.css'
-import './styles/forms.css'
-import './styles/layout.css'
-import './styles/base.css'
-import './styles/emergency-marker-fix.css'
-import './styles/map-optimizations.css'
-import './styles/force-markers.css'
-import './styles/map-fixes.css'
-import './styles/map/index.css' // Updated path to use the index file that imports all map styles
 import { setupLazyLoading, deferOperation, preloadCriticalImages } from './utils/performance.ts'
+import { setupCaching } from './utils/caching.ts'
+import { optimizeCSSDelivery } from './utils/criticalCss.ts'
+import { preloadCriticalModules } from './utils/bundleOptimization.ts'
+import { setupPerformanceMonitoring } from './utils/performanceReport.ts'
+
+// Dynamically import non-critical CSS
+deferOperation(() => {
+  import('./styles/animations.css')
+  import('./styles/forms.css')
+  import('./styles/layout.css')
+  import('./styles/base.css')
+  import('./styles/emergency-marker-fix.css')
+  import('./styles/map-optimizations.css')
+  import('./styles/force-markers.css')
+  import('./styles/map-fixes.css')
+  import('./styles/map/index.css')
+}, 0)
 
 // Register service worker for PWA features
 if ('serviceWorker' in navigator) {
@@ -50,6 +58,20 @@ const CRITICAL_APPLICATION_IMAGES = [
 // Preload critical images as early as possible
 preloadCriticalImages(CRITICAL_APPLICATION_IMAGES);
 
+// Setup caching for optimal performance
+setupCaching();
+
+// Optimize CSS delivery
+optimizeCSSDelivery();
+
+// Preload critical modules
+deferOperation(() => {
+  preloadCriticalModules();
+}, 200);
+
+// Setup comprehensive performance monitoring
+setupPerformanceMonitoring();
+
 // Log the current deployed URL for debugging
 console.log('Application starting, window.location:', window.location.href);
 console.log('Application path:', window.location.pathname);
@@ -79,6 +101,22 @@ if (!rootElement) {
     deferOperation(() => {
       setupLazyLoading();
     }, 300);
+    
+    // Monitor and log performance metrics
+    deferOperation(() => {
+      if (window.performance && window.performance.timing) {
+        const timing = window.performance.timing;
+        const loadTime = timing.loadEventEnd - timing.navigationStart;
+        const domReady = timing.domContentLoadedEventEnd - timing.navigationStart;
+        
+        console.log(`Page load time: ${loadTime}ms`);
+        console.log(`DOM ready time: ${domReady}ms`);
+        
+        if (loadTime > 3000) {
+          console.warn('Page load time exceeds 3s target:', loadTime);
+        }
+      }
+    }, 1000);
     
   } catch (error) {
     console.error('Failed to mount React application:', error);
