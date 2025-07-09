@@ -32,6 +32,7 @@ export const useChecklistAutoSave = (
       });
       return currentData !== lastSaveDataRef.current;
     } catch (error) {
+      console.error("Error checking for data changes:", error);
       return true; // If there's an error, assume data changed to be safe
     }
   }, [progress, startDate, endDate, notes]);
@@ -49,6 +50,7 @@ export const useChecklistAutoSave = (
     if (hasDataChanged()) {
       saveTimeoutRef.current = setTimeout(() => {
         try {
+          console.log("Executing debounced auto-save");
           const saveTime = saveDataWrapper(false);
           lastSavedTimeRef.current = saveTime;
           // Update last saved data reference
@@ -62,12 +64,14 @@ export const useChecklistAutoSave = (
           consecutiveFailuresRef.current = 0;
           pendingSaveRef.current = false;
         } catch (error) {
+          console.error("Error during debounced save:", error);
           // Increment failure counter
           consecutiveFailuresRef.current++;
           
           // If we've had multiple failures, try again with shorter timeout
           if (consecutiveFailuresRef.current < 3) {
             const retryDelay = 1000 * consecutiveFailuresRef.current;
+            console.log(`Retrying save in ${retryDelay}ms`);
             setTimeout(() => debouncedSave(), retryDelay);
           }
           pendingSaveRef.current = false;
@@ -89,6 +93,7 @@ export const useChecklistAutoSave = (
       const savedDate = new Date(lastSavedTimeRef.current);
       return `Last auto-saved: ${savedDate.toLocaleTimeString()}`;
     } catch (e) {
+      console.error("Error formatting saved time:", e);
       return "Last auto-saved: just now";
     }
   }, []);
@@ -97,6 +102,7 @@ export const useChecklistAutoSave = (
   const forceSaveData = useCallback(() => {
     try {
       if (hasDataChanged() || pendingSaveRef.current) {
+        console.log("Forcing immediate save");
         const saveTime = saveDataWrapper(true);
         lastSavedTimeRef.current = saveTime;
         lastSaveDataRef.current = JSON.stringify({ 
@@ -110,6 +116,7 @@ export const useChecklistAutoSave = (
       }
       return false;
     } catch (error) {
+      console.error("Error during forced save:", error);
       return false;
     }
   }, [saveDataWrapper, hasDataChanged, progress, startDate, endDate, notes]);
@@ -129,6 +136,7 @@ export const useChecklistAutoSave = (
     }
     
     if (hasDataChanged()) {
+      console.log("Auto-save effect triggered by state change");
       debouncedSave();
     }
     

@@ -1,7 +1,7 @@
 
 import React from "react";
 import TwoFactorSettings from "@/components/auth/TwoFactorSettings";
-import { useAuth } from "@/components/auth/AuthProvider";
+import { useAuth } from "@/components/auth/AuthContext";
 import PasswordStrengthSettings from "@/components/auth/PasswordStrengthSettings";
 import SecurityVerificationLogs from "@/components/auth/SecurityVerificationLogs";
 import { Shield, Lock, History } from "lucide-react";

@@ -183,9 +183,6 @@ const EnhancedFooter: React.FC = () => {
               <Link to="/sitemap" className="text-gray-400 hover:text-[#5B9BD5] text-sm transition-colors">
                 Sitemap
               </Link>
-              <Link to="/auth" className="text-gray-500 hover:text-[#5B9BD5] text-sm transition-colors">
-                Admin
-              </Link>
             </div>
 
             {/* Social Media */}

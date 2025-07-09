@@ -36,7 +36,7 @@ export const useMarkerHighlight = ({
           el.style.pointerEvents = 'all';
         }
         
-        
+        console.log(`Highlighted marker for facility ID: ${highlightedFacility}`);
         // Open popup for highlighted facility and ensure it stays open
         if (!highlightedMarker.getPopup().isOpen()) {
           highlightedMarker.togglePopup();

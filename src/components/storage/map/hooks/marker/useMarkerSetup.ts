@@ -34,8 +34,11 @@ export const useMarkerSetup = (
       container.style.display = 'block';
     }
     
+    console.log(`Creating ${validFacilities.length} markers for facilities...`);
+    
     // Create emergency markers and set up listeners
     const markerCount = createEmergencyMarkers(map, validFacilities);
+    console.log(`Created ${markerCount} emergency markers`);
     
     // Remove any view details buttons
     removeViewDetailsButtons();

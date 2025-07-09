@@ -28,7 +28,7 @@ const CoreWebVitalsMonitor = ({ pageName, enableDebugMode = false }: CoreWebVita
       timestamp: new Date().toISOString(),
       url: window.location.href,
       userAgent: navigator.userAgent,
-      connectionType: (navigator as Record<string, any>)?.connection?.effectiveType || 'unknown'
+      connectionType: (navigator as any)?.connection?.effectiveType || 'unknown'
     };
 
     // Track Largest Contentful Paint (LCP)
@@ -36,11 +36,14 @@ const CoreWebVitalsMonitor = ({ pageName, enableDebugMode = false }: CoreWebVita
       if ('PerformanceObserver' in window) {
         const lcpObserver = new PerformanceObserver((entryList) => {
           const entries = entryList.getEntries();
-          const lastEntry = entries[entries.length - 1] as Record<string, any>;
+          const lastEntry = entries[entries.length - 1] as any;
           
           if (lastEntry) {
             vitalsData.current.lcp = Math.round(lastEntry.startTime);
             
+            if (enableDebugMode) {
+              console.log('LCP:', vitalsData.current.lcp, 'ms');
+            }
             
             // Store and report if LCP is final
             if (lastEntry.startTime) {
@@ -52,7 +55,7 @@ const CoreWebVitalsMonitor = ({ pageName, enableDebugMode = false }: CoreWebVita
         try {
           lcpObserver.observe({ entryTypes: ['largest-contentful-paint'] });
         } catch (e) {
-          // LCP monitoring not supported
+          console.warn('LCP monitoring not supported');
         }
       }
     };
@@ -62,10 +65,13 @@ const CoreWebVitalsMonitor = ({ pageName, enableDebugMode = false }: CoreWebVita
       if ('PerformanceObserver' in window) {
         const fidObserver = new PerformanceObserver((entryList) => {
           const entries = entryList.getEntries();
-          entries.forEach((entry: Record<string, any>) => {
+          entries.forEach((entry: any) => {
             if (entry.processingStart && entry.startTime) {
               vitalsData.current.fid = Math.round(entry.processingStart - entry.startTime);
               
+              if (enableDebugMode) {
+                console.log('FID:', vitalsData.current.fid, 'ms');
+              }
               
               reportVitals('fid', vitalsData.current.fid);
             }
@@ -75,7 +81,7 @@ const CoreWebVitalsMonitor = ({ pageName, enableDebugMode = false }: CoreWebVita
         try {
           fidObserver.observe({ entryTypes: ['first-input'] });
         } catch (e) {
-          // FID monitoring not supported
+          console.warn('FID monitoring not supported');
         }
       }
     };
@@ -87,7 +93,7 @@ const CoreWebVitalsMonitor = ({ pageName, enableDebugMode = false }: CoreWebVita
         
         const clsObserver = new PerformanceObserver((entryList) => {
           const entries = entryList.getEntries();
-          entries.forEach((entry: Record<string, any>) => {
+          entries.forEach((entry: any) => {
             if (!entry.hadRecentInput) {
               clsValue += entry.value;
             }
@@ -95,13 +101,16 @@ const CoreWebVitalsMonitor = ({ pageName, enableDebugMode = false }: CoreWebVita
           
           vitalsData.current.cls = Math.round(clsValue * 1000) / 1000;
           
+          if (enableDebugMode) {
+            console.log('CLS:', vitalsData.current.cls);
+          }
         });
         
         try {
           clsObserver.observe({ entryTypes: ['layout-shift'] });
           observer.current = clsObserver;
         } catch (e) {
-          // CLS monitoring not supported
+          console.warn('CLS monitoring not supported');
         }
       }
     };
@@ -111,10 +120,13 @@ const CoreWebVitalsMonitor = ({ pageName, enableDebugMode = false }: CoreWebVita
       if ('PerformanceObserver' in window) {
         const fcpObserver = new PerformanceObserver((entryList) => {
           const entries = entryList.getEntries();
-          entries.forEach((entry: Record<string, any>) => {
+          entries.forEach((entry: any) => {
             if (entry.name === 'first-contentful-paint') {
               vitalsData.current.fcp = Math.round(entry.startTime);
               
+              if (enableDebugMode) {
+                console.log('FCP:', vitalsData.current.fcp, 'ms');
+              }
               
               reportVitals('fcp', vitalsData.current.fcp);
             }
@@ -124,7 +136,7 @@ const CoreWebVitalsMonitor = ({ pageName, enableDebugMode = false }: CoreWebVita
         try {
           fcpObserver.observe({ entryTypes: ['paint'] });
         } catch (e) {
-          // FCP monitoring not supported
+          console.warn('FCP monitoring not supported');
         }
       }
     };
@@ -132,10 +144,13 @@ const CoreWebVitalsMonitor = ({ pageName, enableDebugMode = false }: CoreWebVita
     // Track Time to First Byte (TTFB)
     const trackTTFB = () => {
       if ('performance' in window && 'timing' in performance) {
-        const navigation = performance.getEntriesByType('navigation')[0] as Record<string, any>;
+        const navigation = performance.getEntriesByType('navigation')[0] as any;
         if (navigation) {
           vitalsData.current.ttfb = Math.round(navigation.responseStart - navigation.requestStart);
           
+          if (enableDebugMode) {
+            console.log('TTFB:', vitalsData.current.ttfb, 'ms');
+          }
           
           reportVitals('ttfb', vitalsData.current.ttfb);
         }
@@ -149,13 +164,16 @@ const CoreWebVitalsMonitor = ({ pageName, enableDebugMode = false }: CoreWebVita
         
         const inpObserver = new PerformanceObserver((entryList) => {
           const entries = entryList.getEntries();
-          entries.forEach((entry: Record<string, any>) => {
+          entries.forEach((entry: any) => {
             if (entry.processingStart && entry.startTime) {
               const delay = entry.processingStart - entry.startTime;
               if (delay > maxDelay) {
                 maxDelay = delay;
                 vitalsData.current.inp = Math.round(delay);
                 
+                if (enableDebugMode) {
+                  console.log('INP:', vitalsData.current.inp, 'ms');
+                }
                 
                 reportVitals('inp', vitalsData.current.inp);
               }
@@ -210,7 +228,7 @@ const CoreWebVitalsMonitor = ({ pageName, enableDebugMode = false }: CoreWebVita
         allMetrics: vitalsData.current
       };
 
-      
+      console.log('Core Web Vital:', report);
       
       // Store in localStorage for analysis
       const vitals = JSON.parse(localStorage.getItem('core_web_vitals') || '[]');
@@ -254,7 +272,7 @@ const CoreWebVitalsMonitor = ({ pageName, enableDebugMode = false }: CoreWebVita
         loadTime: performance.now()
       };
       
-      
+      console.log('Final Core Web Vitals Report:', finalReport);
       
       const reports = JSON.parse(localStorage.getItem('vitals_reports') || '[]');
       reports.push(finalReport);

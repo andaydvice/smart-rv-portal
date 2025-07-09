@@ -1,267 +1,143 @@
-import React, { useState, useEffect } from 'react';
+
+import { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { supabase } from '@/integrations/supabase/client';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Loader2, LogIn, UserPlus, AlertCircle } from 'lucide-react';
-import { useAuth } from '@/components/auth/AuthProvider';
+import { AuthForms } from '@/components/auth/AuthForms';
+import { useAuth } from '@/components/auth/AuthContext';
+import { Card } from '@/components/ui/card';
+import Navbar from '@/components/Navbar';
+import Layout from "@/components/layout/Layout";
+import { useErrorHandler } from '@/hooks/useErrorHandler';
+import ErrorDisplay from '@/components/error/ErrorDisplay';
 
 const Auth = () => {
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const [success, setSuccess] = useState<string | null>(null);
-  const [formData, setFormData] = useState({
-    email: '',
-    password: '',
-    confirmPassword: ''
-  });
-
-  const { user } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
+  const { user, loading, error: authError } = useAuth();
+  const { error, handleError, resetError, isRecovering } = useErrorHandler();
+  const [hasInitialized, setHasInitialized] = useState(false);
+  
+  console.log("Auth page - Current auth state:", { user: user?.email || 'No user', loading, authError });
 
-  // Redirect if already authenticated
+  const from = location.state?.from?.pathname || '/';
+
   useEffect(() => {
+    // Mark as initialized after first render to prevent flash of error state
+    if (!hasInitialized) {
+      setHasInitialized(true);
+      return;
+    }
+
     if (user) {
-      const from = location.state?.from?.pathname || '/';
-      navigate(from, { replace: true });
+      console.log("Auth page - Redirecting authenticated user to:", from);
+      navigate(from);
     }
-  }, [user, navigate, location]);
+  }, [user, navigate, from, hasInitialized]);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-    setError(null);
-    setSuccess(null);
-  };
+  // If we're still loading, show a loading state
+  if (loading && !hasInitialized) {
+    return (
+      <Layout>
+        <Navbar />
+        <div className="flex-grow flex items-center justify-center px-4 py-12 pt-24">
+          <div className="w-full max-w-md text-center">
+            <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-[#5B9BD5] mx-auto mb-4"></div>
+            <p className="text-white">Checking authentication status...</p>
+          </div>
+        </div>
+      </Layout>
+    );
+  }
 
-  const handleSignIn = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsLoading(true);
-    setError(null);
+  // If we have an error from AuthContext, show it
+  if (authError && hasInitialized) {
+    return (
+      <Layout>
+        <Navbar />
+        <div className="flex-grow flex items-center justify-center px-4 py-12 pt-24">
+          <ErrorDisplay
+            error={{
+              message: `Authentication system issue: ${authError.message}`,
+              statusCode: 401,
+              stack: process.env.NODE_ENV === 'development' ? authError.stack : undefined
+            }}
+            isRecovering={isRecovering}
+            onRetry={() => window.location.reload()}
+            onGoBack={() => navigate(-1)}
+            onGoHome={() => navigate('/')}
+          />
+        </div>
+      </Layout>
+    );
+  }
 
-    try {
-      const { data, error } = await supabase.auth.signInWithPassword({
-        email: formData.email,
-        password: formData.password,
-      });
-
-      if (error) throw error;
-      
-      if (data.user) {
-        // Redirect to admin dashboard for clean entry point
-        window.location.href = '/admin';
-      }
-    } catch (error: any) {
-      setError(error.message || 'Failed to sign in');
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const handleSignUp = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsLoading(true);
-    setError(null);
-
-    if (formData.password !== formData.confirmPassword) {
-      setError('Passwords do not match');
-      setIsLoading(false);
-      return;
-    }
-
-    if (formData.password.length < 6) {
-      setError('Password must be at least 6 characters');
-      setIsLoading(false);
-      return;
-    }
-
-    try {
-      const redirectUrl = `${window.location.origin}/`;
-      
-      const { data, error } = await supabase.auth.signUp({
-        email: formData.email,
-        password: formData.password,
-        options: {
-          emailRedirectTo: redirectUrl
-        }
-      });
-
-      if (error) throw error;
-      
-      if (data.user) {
-        setSuccess('Account created successfully! Please check your email to verify your account.');
-        setFormData({ email: '', password: '', confirmPassword: '' });
-      }
-    } catch (error: any) {
-      if (error.message.includes('already registered')) {
-        setError('An account with this email already exists. Please sign in instead.');
-      } else {
-        setError(error.message || 'Failed to create account');
-      }
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  // If we have an error from error handler, show it
+  if (error && hasInitialized) {
+    return (
+      <Layout>
+        <Navbar />
+        <div className="flex-grow flex items-center justify-center px-4 py-12 pt-24">
+          <ErrorDisplay
+            error={error}
+            isRecovering={isRecovering}
+            onRetry={resetError}
+            onGoBack={() => navigate(-1)}
+            onGoHome={() => navigate('/')}
+          />
+        </div>
+      </Layout>
+    );
+  }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#080F1F] to-[#151A22] flex items-center justify-center p-4">
-      <Card className="w-full max-w-md bg-[#091020] border-gray-700">
-        <CardHeader className="text-center">
-          <CardTitle className="text-2xl font-bold text-white">
-            Welcome to RV Intelligence
-          </CardTitle>
-          <p className="text-gray-300 mt-2">
-            Sign in to access your account
-          </p>
-        </CardHeader>
-        <CardContent>
-          <Tabs defaultValue="signin" className="w-full">
-            <TabsList className="grid w-full grid-cols-2 bg-[#131a2a] border border-gray-700">
-              <TabsTrigger 
-                value="signin"
-                className="data-[state=active]:bg-[#5B9BD5] data-[state=active]:text-white"
-              >
-                <LogIn className="h-4 w-4 mr-2" />
-                Sign In
-              </TabsTrigger>
-              <TabsTrigger 
-                value="signup"
-                className="data-[state=active]:bg-[#5B9BD5] data-[state=active]:text-white"
-              >
-                <UserPlus className="h-4 w-4 mr-2" />
-                Sign Up
-              </TabsTrigger>
-            </TabsList>
+    <Layout>
+      <Navbar />
+      <div className="flex-grow flex items-center justify-center px-4 py-12 pt-24">
+        <div className="w-full max-w-4xl grid md:grid-cols-2 gap-8 items-start">
+          <div className="space-y-6">
+            <h1 className="text-3xl font-bold text-white">
+              Join Smart RV Living
+            </h1>
+            
+            <div className="space-y-4">
+              <h2 className="text-xl font-semibold text-white">
+                Why Create an Account?
+              </h2>
+              <ul className="space-y-4 text-left text-white">
+                <li className="flex items-start gap-3">
+                  <span className="text-[#5B9BD5] text-lg">✓</span>
+                  <span>Access exclusive RV calculators and tools to plan your trips better</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="text-[#5B9BD5] text-lg">✓</span>
+                  <span>Get personalized weather alerts and route recommendations</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="text-[#5B9BD5] text-lg">✓</span>
+                  <span>Save your favorite storage facilities and camping spots</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="text-[#5B9BD5] text-lg">✓</span>
+                  <span>Track your RV maintenance history and get reminders</span>
+                </li>
+              </ul>
+            </div>
+          </div>
 
-            {error && (
-              <Alert className="mt-4 border-red-600 bg-red-600/10">
-                <AlertCircle className="h-4 w-4 text-red-400" />
-                <AlertDescription className="text-red-300">
-                  {error}
-                </AlertDescription>
-              </Alert>
-            )}
-
-            {success && (
-              <Alert className="mt-4 border-green-600 bg-green-600/10">
-                <AlertCircle className="h-4 w-4 text-green-400" />
-                <AlertDescription className="text-green-300">
-                  {success}
-                </AlertDescription>
-              </Alert>
-            )}
-
-            <TabsContent value="signin" className="mt-6">
-              <form onSubmit={handleSignIn} className="space-y-4">
-                <div className="space-y-2">
-                  <Label htmlFor="email" className="text-white">Email</Label>
-                  <Input
-                    id="email"
-                    name="email"
-                    type="email"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    required
-                    className="bg-[#131a2a] border-gray-700 text-white placeholder:text-gray-400"
-                    placeholder="Enter your email"
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="password" className="text-white">Password</Label>
-                  <Input
-                    id="password"
-                    name="password"
-                    type="password"
-                    value={formData.password}
-                    onChange={handleInputChange}
-                    required
-                    className="bg-[#131a2a] border-gray-700 text-white placeholder:text-gray-400"
-                    placeholder="Enter your password"
-                  />
-                </div>
-                <Button
-                  type="submit"
-                  disabled={isLoading}
-                  className="w-full bg-[#5B9BD5] hover:bg-[#4B8FE3] text-white"
-                >
-                  {isLoading ? (
-                    <>
-                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                      Signing in...
-                    </>
-                  ) : (
-                    'Sign In'
-                  )}
-                </Button>
-              </form>
-            </TabsContent>
-
-            <TabsContent value="signup" className="mt-6">
-              <form onSubmit={handleSignUp} className="space-y-4">
-                <div className="space-y-2">
-                  <Label htmlFor="signup-email" className="text-white">Email</Label>
-                  <Input
-                    id="signup-email"
-                    name="email"
-                    type="email"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    required
-                    className="bg-[#131a2a] border-gray-700 text-white placeholder:text-gray-400"
-                    placeholder="Enter your email"
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="signup-password" className="text-white">Password</Label>
-                  <Input
-                    id="signup-password"
-                    name="password"
-                    type="password"
-                    value={formData.password}
-                    onChange={handleInputChange}
-                    required
-                    className="bg-[#131a2a] border-gray-700 text-white placeholder:text-gray-400"
-                    placeholder="Create a password (min 6 characters)"
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="confirm-password" className="text-white">Confirm Password</Label>
-                  <Input
-                    id="confirm-password"
-                    name="confirmPassword"
-                    type="password"
-                    value={formData.confirmPassword}
-                    onChange={handleInputChange}
-                    required
-                    className="bg-[#131a2a] border-gray-700 text-white placeholder:text-gray-400"
-                    placeholder="Confirm your password"
-                  />
-                </div>
-                <Button
-                  type="submit"
-                  disabled={isLoading}
-                  className="w-full bg-[#5B9BD5] hover:bg-[#4B8FE3] text-white"
-                >
-                  {isLoading ? (
-                    <>
-                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                      Creating account...
-                    </>
-                  ) : (
-                    'Create Account'
-                  )}
-                </Button>
-              </form>
-            </TabsContent>
-          </Tabs>
-        </CardContent>
-      </Card>
-    </div>
+          <div className="flex flex-col space-y-6">
+            <Card className="p-6 bg-[#131a2a] border-gray-700">
+              <AuthForms 
+                onSuccess={() => navigate(from)} 
+                onError={(error) => handleError(error)}
+              />
+            </Card>
+            
+            <div className="text-sm text-white px-4">
+              <p>By creating an account, you'll get access to our premium features and tools designed specifically for RV enthusiasts. We respect your privacy and will never share your information.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Layout>
   );
 };
 

@@ -71,6 +71,7 @@ export const usePopupClickHandler = () => {
     
     // Add handler for custom popup closed event
     const handlePopupClosed = () => {
+      console.log('Popup closed, ensuring map visibility');
       
       // Find map canvas
       const mapCanvas = document.querySelector('.mapboxgl-canvas');

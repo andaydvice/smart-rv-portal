@@ -30,7 +30,7 @@ const RevenueAttribution = ({ pageName, category, products = [] }: RevenueAttrib
       }))
     };
 
-    // Revenue attribution logging removed for production
+    console.log('Revenue Attribution - Page Visit:', visitData);
     
     // Store visit for attribution analysis
     const visits = JSON.parse(localStorage.getItem('revenue_attribution') || '[]');
@@ -58,7 +58,7 @@ const RevenueAttribution = ({ pageName, category, products = [] }: RevenueAttrib
                 viewportPosition: entry.intersectionRatio
               };
 
-              // Product impression logging removed for production
+              console.log('Product Impression:', impressionData);
               
               const impressions = JSON.parse(localStorage.getItem('product_impressions') || '[]');
               impressions.push(impressionData);

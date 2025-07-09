@@ -33,7 +33,7 @@ export const ContactSection = () => (
           <Button 
             size="lg" 
             variant="default"
-            onClick={() => {}}
+            onClick={() => console.log('Contact Us button clicked')}
           >
             Contact Us
           </Button>

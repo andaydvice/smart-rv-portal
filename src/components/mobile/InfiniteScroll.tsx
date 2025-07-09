@@ -38,7 +38,7 @@ function InfiniteScroll<T>({
     try {
       await loadMore();
     } catch (error) {
-      // Failed to load more items
+      console.error('Failed to load more items:', error);
     } finally {
       setIsLoading(false);
       loadingRef.current = false;

@@ -8,7 +8,8 @@ interface MenuButtonProps {
 }
 
 const MenuButton = ({ isOpen, onClick }: MenuButtonProps) => {
-  // Optimized component with minimal re-renders
+  // Remove unnecessary logging that could cause performance issues
+  // console.log("MenuButton rendered, isOpen:", isOpen);
   
   // Optimize the click handler with useCallback to prevent re-renders
   const handleClick = useCallback((e: React.MouseEvent) => {

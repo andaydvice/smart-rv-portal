@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/table";
 
 interface SpecificationsTableProps {
-  models: Record<string, any>[];
+  models: any[];
 }
 
 const SpecificationsTable = ({ models }: SpecificationsTableProps) => {

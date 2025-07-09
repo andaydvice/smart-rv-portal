@@ -18,7 +18,7 @@ export const useMarkerClickHandlers = () => {
       e.preventDefault();
       e.stopPropagation();
       
-      
+      console.log(`Marker clicked for: ${facilityName} (ID: ${facilityId})`);
       
       // Call the click handler first (this navigates or shows details)
       onMarkerClick(facilityId);

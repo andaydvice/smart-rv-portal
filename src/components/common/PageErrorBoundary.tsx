@@ -20,7 +20,7 @@ class ErrorBoundaryInner extends React.Component<Props, { hasError: boolean; err
   }
 
   componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
-    // Page error logged for debugging
+    console.error('Page error:', error, errorInfo);
   }
 
   render() {

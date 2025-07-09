@@ -1,42 +1,81 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { generateImagePlaceholder } from '@/utils/performance';
+import React, { useState, useCallback } from 'react';
+import { cn } from '@/lib/utils';
 
 interface OptimizedImageProps {
   src: string;
   alt: string;
-  className?: string;
   width?: number;
   height?: number;
-  priority?: boolean;
+  className?: string;
   sizes?: string;
-  quality?: number;
+  priority?: boolean;
+  onLoad?: () => void;
+  onError?: () => void;
 }
 
-export const OptimizedImage: React.FC<OptimizedImageProps> = ({
+const OptimizedImage = ({
   src,
   alt,
-  className = "",
-  width = 800,
-  height = 600,
+  width,
+  height,
+  className,
+  sizes = "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw",
   priority = false,
-  sizes = "(max-width: 640px) 100vw, (max-width: 768px) 75vw, (max-width: 1024px) 60vw, 800px",
-  quality = 85
-}) => {
+  onLoad,
+  onError
+}: OptimizedImageProps) => {
   const [isLoaded, setIsLoaded] = useState(false);
+  const [hasError, setHasError] = useState(false);
   const [isInView, setIsInView] = useState(priority);
-  const imgRef = useRef<HTMLImageElement>(null);
 
-  // Generate optimized image URLs
-  const generateSrcSet = (originalSrc: string) => {
-    const breakpoints = [320, 640, 768, 1024, 1280, 1920];
-    return breakpoints
-      .map(bp => `${originalSrc}?width=${bp}&quality=${quality}&format=webp ${bp}w`)
+  // Convert to WebP if supported
+  const getOptimizedSrc = useCallback((originalSrc: string) => {
+    // Check if browser supports WebP
+    const supportsWebP = (() => {
+      const canvas = document.createElement('canvas');
+      return canvas.toDataURL('image/webp').indexOf('data:image/webp') === 0;
+    })();
+
+    // If it's already a WebP or external URL, return as is
+    if (originalSrc.includes('.webp') || originalSrc.startsWith('http')) {
+      return originalSrc;
+    }
+
+    // Convert local images to WebP if supported
+    if (supportsWebP && originalSrc.startsWith('/')) {
+      return originalSrc.replace(/\.(jpg|jpeg|png)$/i, '.webp');
+    }
+
+    return originalSrc;
+  }, []);
+
+  // Generate responsive srcSet
+  const generateSrcSet = useCallback((originalSrc: string) => {
+    if (originalSrc.startsWith('http')) {
+      return originalSrc; // External images
+    }
+
+    const baseSrc = getOptimizedSrc(originalSrc);
+    const widths = [320, 640, 768, 1024, 1280, 1536];
+    
+    return widths
+      .map(w => `${baseSrc}?w=${w} ${w}w`)
       .join(', ');
-  };
+  }, [getOptimizedSrc]);
+
+  const handleLoad = useCallback(() => {
+    setIsLoaded(true);
+    onLoad?.();
+  }, [onLoad]);
+
+  const handleError = useCallback(() => {
+    setHasError(true);
+    onError?.();
+  }, [onError]);
 
   // Intersection Observer for lazy loading
-  useEffect(() => {
-    if (priority || !imgRef.current) return;
+  const imgRef = useCallback((node: HTMLImageElement | null) => {
+    if (!node || priority) return;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -48,48 +87,57 @@ export const OptimizedImage: React.FC<OptimizedImageProps> = ({
       { rootMargin: '50px' }
     );
 
-    observer.observe(imgRef.current);
+    observer.observe(node);
     return () => observer.disconnect();
   }, [priority]);
 
-  const shouldLoad = priority || isInView;
-  const placeholder = generateImagePlaceholder(width, height);
+  if (hasError) {
+    return (
+      <div 
+        className={cn(
+          "bg-gray-200 flex items-center justify-center text-gray-500",
+          className
+        )}
+        style={{ width, height }}
+      >
+        <span className="text-sm">Image failed to load</span>
+      </div>
+    );
+  }
 
   return (
-    <div className={`relative overflow-hidden ${className}`}>
-      {/* Placeholder */}
+    <div className={cn("relative overflow-hidden", className)}>
+      {/* Loading skeleton */}
       {!isLoaded && (
-        <img
-          src={placeholder}
-          alt=""
-          className="absolute inset-0 w-full h-full object-cover blur-sm"
-          style={{ 
-            filter: 'blur(8px)',
-            transform: 'scale(1.1)'
-          }}
+        <div 
+          className="absolute inset-0 bg-gray-200 animate-pulse"
+          style={{ width, height }}
         />
       )}
       
-      {/* Main image */}
-      <img
-        ref={imgRef}
-        src={shouldLoad ? src : undefined}
-        srcSet={shouldLoad ? generateSrcSet(src) : undefined}
-        sizes={shouldLoad ? sizes : undefined}
-        alt={alt}
-        width={width}
-        height={height}
-        loading={priority ? "eager" : "lazy"}
-        fetchPriority={priority ? "high" : "auto"}
-        decoding="async"
-        onLoad={() => setIsLoaded(true)}
-        className={`w-full h-full object-cover transition-opacity duration-300 ${
-          isLoaded ? 'opacity-100' : 'opacity-0'
-        }`}
-        style={{
-          aspectRatio: `${width}/${height}`,
-        }}
-      />
+      {/* Actual image */}
+      {isInView && (
+        <img
+          ref={imgRef}
+          src={getOptimizedSrc(src)}
+          srcSet={generateSrcSet(src)}
+          sizes={sizes}
+          alt={alt}
+          width={width}
+          height={height}
+          onLoad={handleLoad}
+          onError={handleError}
+          loading={priority ? "eager" : "lazy"}
+          decoding="async"
+          className={cn(
+            "transition-opacity duration-300",
+            isLoaded ? "opacity-100" : "opacity-0",
+            className
+          )}
+        />
+      )}
     </div>
   );
 };
+
+export default OptimizedImage;

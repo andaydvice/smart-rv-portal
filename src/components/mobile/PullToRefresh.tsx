@@ -67,7 +67,7 @@ const PullToRefresh = ({
       try {
         await onRefresh();
       } catch (error) {
-        // Refresh failed
+        console.error('Refresh failed:', error);
       } finally {
         setIsRefreshing(false);
       }

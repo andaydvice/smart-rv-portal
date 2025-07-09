@@ -6,9 +6,9 @@ import { StorageFacility } from '../../../types';
 import { createFacilityMarker } from '../../utils/markerCreation';
 import { calculateMarkerOffset, buildCoordinatesMap, hasValidCoordinates } from '../../utils/markerUtils';
 
-// Helper function to adapt facility-like object to the expected StorageFacility type
-const adaptFacility = (facility: StorageFacility): StorageFacility => {
-  return facility;
+// Helper function to adapt any facility-like object to the expected StorageFacility type
+const adaptFacility = (facility: any): StorageFacility => {
+  return facility as StorageFacility;
 };
 
 export const useCreateNewMarker = () => {
@@ -41,7 +41,7 @@ export const useCreateNewMarker = () => {
     map: mapboxgl.Map,
     isHighlighted: boolean,
     onMarkerClick: (facilityId: string) => void,
-    facilities: Record<string, any>[],
+    facilities: any[],
     index: number
   ): mapboxgl.Marker | null => {
     try {

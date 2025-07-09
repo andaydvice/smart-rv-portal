@@ -25,44 +25,26 @@ export default {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         primary: {
-          DEFAULT: "hsl(var(--primary))",
-          foreground: "hsl(var(--primary-foreground))",
+          DEFAULT: "#1A1A1A",
+          foreground: "#FFFFFF",
         },
         secondary: {
-          DEFAULT: "hsl(var(--secondary))",
-          foreground: "hsl(var(--secondary-foreground))",
-        },
-        destructive: {
-          DEFAULT: "hsl(var(--destructive))",
-          foreground: "hsl(var(--destructive-foreground))",
+          DEFAULT: "rgba(26, 31, 46, 0.95)",
+          foreground: "#E2E8FF",
         },
         muted: {
-          DEFAULT: "hsl(var(--muted))",
-          foreground: "hsl(var(--muted-foreground))",
+          DEFAULT: "#F0F0F0",
+          foreground: "#666666",
         },
         accent: {
-          DEFAULT: "hsl(var(--accent))",
-          foreground: "hsl(var(--accent-foreground))",
-        },
-        popover: {
-          DEFAULT: "hsl(var(--popover))",
-          foreground: "hsl(var(--popover-foreground))",
-        },
-        card: {
-          DEFAULT: "hsl(var(--card))",
-          foreground: "hsl(var(--card-foreground))",
+          DEFAULT: "#FAFAFA",
+          foreground: "#1A1A1A",
         },
         connectivity: {
-          bg: "hsl(var(--connectivity-darkBg))",
-          accent: "hsl(var(--connectivity-accent))",
-          darkBg: "hsl(var(--connectivity-darkBg))",
-          lightText: "hsl(var(--connectivity-lightText))"
-        },
-        "deeper-background": "hsl(var(--deeper-background))",
-        "connectivity-accent": "hsl(var(--connectivity-accent))",
-        "connectivity-darkBg": "hsl(var(--connectivity-darkBg))",
-        "connectivity-lightText": "hsl(var(--connectivity-lightText))",
-        "text-connectivity-accent": "hsl(var(--text-connectivity-accent))"
+          bg: "#1B2028",
+          accent: "#5B9BD5",
+          darkBg: "#151A22"
+        }
       },
       borderRadius: {
         lg: "1rem",

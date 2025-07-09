@@ -3,7 +3,7 @@ import { TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Battery, Calculator, Fuel, Scale, Settings } from "lucide-react";
 
 const CalculatorTabs = ({ activeTab, onTabChange }: { activeTab: string; onTabChange: (value: string) => void }) => {
-  // Tab tracking removed for production
+  console.log("Current active tab:", activeTab);
 
   const tabStyle = `
     relative 

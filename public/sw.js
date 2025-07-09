@@ -1,4 +1,4 @@
-const CACHE_NAME = 'rv-affiliate-v2';
+const CACHE_NAME = 'rv-affiliate-v1';
 const STATIC_ASSETS = [
   '/',
   '/manifest.json',
@@ -11,15 +11,6 @@ const AFFILIATE_PAGES = [
   '/solar-power-guide',
   '/calculators',
   '/blog'
-];
-
-const CRITICAL_RESOURCES = [
-  '/calculators',
-  '/storage-preparation-checklist',
-  '/documentation',
-  '/calculators/fuel',
-  '/calculators/power',
-  '/calculators/rv'
 ];
 
 // Install event - cache static assets
@@ -126,18 +117,15 @@ self.addEventListener('fetch', (event) => {
   }
 });
 
-// Enhanced background sync
+// Background sync for offline forms
 self.addEventListener('sync', (event) => {
   console.log('Background sync triggered:', event.tag);
   
   if (event.tag === 'affiliate-form-submission') {
-    event.waitUntil(syncOfflineForms());
-  } else if (event.tag === 'background-sync') {
-    event.waitUntil(syncOfflineData());
-  } else if (event.tag === 'calculator-results') {
-    event.waitUntil(syncCalculatorResults());
-  } else if (event.tag === 'checklist-progress') {
-    event.waitUntil(syncChecklistProgress());
+    event.waitUntil(
+      // Process offline form submissions
+      syncOfflineForms()
+    );
   }
 });
 
@@ -211,113 +199,3 @@ async function syncOfflineForms() {
     await cache.delete('/offline-forms');
   }
 }
-
-// Sync offline calculator results and checklist progress
-async function syncOfflineData() {
-  try {
-    // Get offline data from IndexedDB via message
-    const clients = await self.clients.matchAll();
-    if (clients.length > 0) {
-      clients[0].postMessage({ type: 'SYNC_OFFLINE_DATA' });
-    }
-  } catch (error) {
-    console.error('Failed to sync offline data:', error);
-  }
-}
-
-async function syncCalculatorResults() {
-  console.log('Syncing calculator results...');
-  // Implementation handled by main app background sync service
-}
-
-async function syncChecklistProgress() {
-  console.log('Syncing checklist progress...');
-  // Implementation handled by main app background sync service
-}
-
-// Enhanced push notification with action buttons
-self.addEventListener('push', (event) => {
-  console.log('Enhanced push notification received:', event);
-  
-  let notificationData = {};
-  if (event.data) {
-    try {
-      notificationData = event.data.json();
-    } catch (e) {
-      notificationData = { body: event.data.text() };
-    }
-  }
-
-  const options = {
-    body: notificationData.body || 'New RV deals and updates available!',
-    icon: '/icon-192x192.png',
-    badge: '/badge-72x72.png',
-    vibrate: [100, 50, 100, 50, 100],
-    data: {
-      url: notificationData.url || '/rv-apps-hub',
-      type: notificationData.type || 'general',
-      dateOfArrival: Date.now(),
-      ...notificationData.data
-    },
-    actions: [
-      {
-        action: 'view',
-        title: notificationData.actionText || 'View Details',
-        icon: '/icons/view.png'
-      },
-      {
-        action: 'dismiss',
-        title: 'Dismiss',
-        icon: '/icons/close.png'
-      }
-    ],
-    tag: notificationData.tag || 'rv-hub-notification',
-    renotify: true,
-    requireInteraction: notificationData.requireInteraction || false
-  };
-  
-  event.waitUntil(
-    self.registration.showNotification(notificationData.title || 'RV Affiliate Hub', options)
-  );
-});
-
-// Enhanced notification click handler
-self.addEventListener('notificationclick', (event) => {
-  console.log('Notification clicked:', event);
-  
-  event.notification.close();
-  
-  const urlToOpen = event.notification.data?.url || '/rv-apps-hub';
-  
-  if (event.action === 'view' || !event.action) {
-    event.waitUntil(
-      clients.matchAll({ type: 'window', includeUncontrolled: true })
-        .then(clientList => {
-          // Check if there's already a window/tab open with the target URL
-          for (const client of clientList) {
-            if (client.url === urlToOpen && 'focus' in client) {
-              return client.focus();
-            }
-          }
-          
-          // If no existing window, open a new one
-          if (clients.openWindow) {
-            return clients.openWindow(urlToOpen);
-          }
-        })
-    );
-  }
-  
-  // Track notification interaction
-  event.waitUntil(
-    fetch('/api/analytics/notification-click', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        action: event.action || 'click',
-        type: event.notification.data?.type || 'unknown',
-        timestamp: Date.now()
-      })
-    }).catch(() => {}) // Silently fail analytics
-  );
-});

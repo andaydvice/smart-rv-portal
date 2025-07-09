@@ -10,10 +10,12 @@ export const usePersistence = () => {
       const savedData = localStorage.getItem(STORAGE_KEY);
       
       if (!savedData) {
+        console.log("No saved data found");
         return null;
       }
       
       const parsed = JSON.parse(savedData);
+      console.log("Loading saved data:", parsed);
       
       // Convert date strings back to Date objects
       if (parsed.startDate) {
@@ -41,6 +43,7 @@ export const usePersistence = () => {
       
       return parsed;
     } catch (error) {
+      console.error('Error loading saved checklist data:', error);
       // Don't return null here - attempt to recover with an empty data structure
       return {
         progress: {},
@@ -79,13 +82,20 @@ export const usePersistence = () => {
       savedAt: currentTime
     };
     
+    if (manualSave) {
+      console.log("Manually saving data:", dataToSave);
+    } else {
+      console.log("Auto-saving data:", dataToSave);
+    }
     
     // Add retry mechanism for storage operations
     const saveWithRetry = (retries = 2) => {
       try {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(dataToSave));
+        console.log("Storage operation completed successfully");
         return true;
       } catch (err) {
+        console.error(`Error saving to localStorage (attempt ${3 - retries})`, err);
         
         if (retries > 0) {
           // Clear some potentially large items from localStorage before retrying
@@ -103,7 +113,7 @@ export const usePersistence = () => {
             }
             return saveWithRetry(retries - 1);
           } catch (cleanupErr) {
-            // Handle cleanup error silently
+            console.error("Error during storage cleanup:", cleanupErr);
           }
         }
         return false;
@@ -117,8 +127,9 @@ export const usePersistence = () => {
   const clearData = useCallback(() => {
     try {
       localStorage.removeItem(STORAGE_KEY);
+      console.log("Checklist data cleared successfully");
     } catch (err) {
-      // Handle error silently
+      console.error("Error clearing localStorage:", err);
     }
   }, []);
 

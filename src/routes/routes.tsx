@@ -6,22 +6,12 @@ import { RouteObject } from "react-router-dom";
 import Index from "../pages/Index";
 import ErrorPage from "../pages/ErrorPage";
 import SearchResults from "../pages/SearchResults";
-import AdvancedSearch from "../pages/AdvancedSearch";
-import Auth from "../pages/Auth";
 
 // Import admin pages
 import SEODashboard from "../pages/admin/SEODashboard";
 import ContentAnalytics from "../pages/admin/ContentAnalytics";
 import MobileAnalyticsDashboard from "../pages/admin/MobileAnalyticsDashboard";
 import VoiceCommercePage from "../pages/VoiceCommerce";
-import EnterpriseIntelligence from "../pages/EnterpriseIntelligence";
-import AdminDashboard from "../pages/AdminDashboard";
-import AccountSettings from "../pages/AccountSettings";
-import UserManagement from "../pages/UserManagement";
-import SystemSettings from "../pages/SystemSettings";
-import EnhancedAnalyticsDashboard from "../pages/EnhancedAnalyticsDashboard";
-import PersonalizationDashboard from "../pages/PersonalizationDashboard";
-import RevenueOptimizationDashboard from "../pages/RevenueOptimizationDashboard";
 
 // Import affiliate pages
 import RVAppsHub from "../pages/RVAppsHub";
@@ -44,16 +34,6 @@ export const routes: RouteObject[] = [
   {
     path: "/search",
     element: <SearchResults />,
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: "/advanced-search",
-    element: <AdvancedSearch />,
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: "/auth",
-    element: <Auth />,
     errorElement: <ErrorPage />,
   },
   // Affiliate revenue pages
@@ -91,46 +71,6 @@ export const routes: RouteObject[] = [
   {
     path: "/voice-commerce",
     element: <VoiceCommercePage />,
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: "/admin",
-    element: <AdminDashboard />,
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: "/enterprise-intelligence",
-    element: <EnterpriseIntelligence />,
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: "/account-settings",
-    element: <AccountSettings />,
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: "/admin/users",
-    element: <UserManagement />,
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: "/admin/settings",
-    element: <SystemSettings />,
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: "/admin/enhanced-analytics",
-    element: <EnhancedAnalyticsDashboard />,
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: "/personalization-dashboard",
-    element: <PersonalizationDashboard />,
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: "/revenue-optimization",
-    element: <RevenueOptimizationDashboard />,
     errorElement: <ErrorPage />,
   },
   ...modelRoutes,

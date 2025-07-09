@@ -1,5 +1,6 @@
 
 import React, { useEffect, lazy, Suspense } from "react";
+import Navbar from "@/components/Navbar";
 import Layout from "@/components/layout/Layout";
 import { HeroSection } from "@/components/sections/HeroSection";
 import { motion } from "framer-motion";
@@ -13,7 +14,6 @@ import RevenueAttribution from "@/components/analytics/RevenueAttribution";
 import SEOHelmet from "@/components/seo/SEOHelmet";
 import StructuredData from "@/components/seo/StructuredData";
 import InvisibleSEO from "@/components/seo/InvisibleSEO";
-import InternationalBanner from "@/components/international/InternationalBanner";
 
 // Lazy load components that aren't needed immediately
 const FeaturesSection = lazy(() => import("@/components/sections/FeaturesSection").then(mod => ({ 
@@ -22,6 +22,10 @@ const FeaturesSection = lazy(() => import("@/components/sections/FeaturesSection
 const SustainabilitySection = lazy(() => import("@/components/sections/SustainabilitySection").then(mod => ({ 
   default: mod.SustainabilitySection 
 })));
+// MODIFIED: Lazy import for ContactSection removed
+// const ContactSection = lazy(() => import("@/components/sections/ContactSection").then(mod => ({ 
+//   default: mod.ContactSection 
+// })));
 
 const LoadingFallback = () => (
   <div className="w-full py-20 flex items-center justify-center">
@@ -31,12 +35,14 @@ const LoadingFallback = () => (
 
 const Index = () => {
   useEffect(() => {
-    // Index component mounted
+    console.log("Index component mounted");
     
+    // Show a toast to confirm the page has loaded
     setTimeout(() => {
       toast.success("Welcome to the Smart Road Portal");
     }, 1000);
     
+    // Force scroll to top on page load
     window.scrollTo(0, 0);
   }, []);
 
@@ -46,16 +52,16 @@ const Index = () => {
         title="Smart RV Technology - Luxury RV Living & Mobile Home Solutions"
         description="Discover the future of RV living with smart technology, luxury features, solar power solutions, emergency services, and innovative apps for modern mobile homes."
         keywords="smart RV, luxury RV, RV technology, mobile living, RV apps, solar power, RV emergency, RV storage, smart home, recreational vehicle"
-        url="https://smartrvtech.com"
+        url={window.location.href}
         type="website"
         schema={{
           "@context": "https://schema.org",
           "@type": "WebSite",
           "name": "Smart RV Technology",
-          "url": "https://smartrvtech.com",
+          "url": window.location.origin,
           "potentialAction": {
             "@type": "SearchAction",
-            "target": "https://smartrvtech.com/search?q={search_term_string}",
+            "target": `${window.location.origin}/search?q={search_term_string}`,
             "query-input": "required name=search_term_string"
           }
         }}
@@ -65,8 +71,8 @@ const Index = () => {
         type="Organization" 
         data={{
           name: "Smart RV Technology",
-          url: "https://smartrvtech.com",
-          logo: "https://smartrvtech.com/logo.png",
+          url: window.location.origin,
+          logo: `${window.location.origin}/logo.png`,
           description: "Leading provider of smart RV technology, luxury mobile living solutions, solar power systems, and emergency services for recreational vehicles.",
           contactPoint: {
             telephone: "+1-800-SMART-RV",
@@ -104,13 +110,13 @@ const Index = () => {
         transition={{ duration: 0.6 }}
         className="min-h-screen w-full bg-gradient-to-b from-gray-50 to-white"
       >
-        <InternationalBanner />
         <HeroSection />
         
         <Suspense fallback={<LoadingFallback />}>
           <FeaturesSection />
         </Suspense>
         
+        {/* Changed from lazy-loaded to direct import */}
         <TechnologySection />
         
         <Suspense fallback={<LoadingFallback />}>
@@ -184,6 +190,7 @@ const Index = () => {
           </div>
         </section>
 
+        {/* MODIFIED: Suspense wrapper removed and ContactSection directly rendered */}
         <ContactSection />
       </motion.div>
     </Layout>

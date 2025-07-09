@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from "react";
-import { useAuth } from "@/components/auth/AuthProvider";
+import { useAuth } from "@/components/auth/AuthContext";
 import { AlertCircle, CheckCircle2, XCircle, Clock } from "lucide-react";
 import { format } from "date-fns";
 

@@ -95,6 +95,7 @@ const ClusterLayer: React.FC<ClusterLayerProps> = memo(({ map, facilities, highl
 
         initializedRef.current = true;
       } catch (err) {
+        console.error('Error initializing cluster layer:', err);
         // Only show error if development
         if (process.env.NODE_ENV === 'development') {
           toast.error(`Error initializing map clusters: ${err instanceof Error ? err.message : 'Unknown error'}`);
@@ -120,7 +121,7 @@ const ClusterLayer: React.FC<ClusterLayerProps> = memo(({ map, facilities, highl
           }
         }
       } catch (err) {
-        // Cleanup error handled silently
+        console.error('Error during cleanup:', err);
       }
     };
   }, [map, facilities, highlightedFacility]);

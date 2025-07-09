@@ -29,7 +29,7 @@ export interface MarkerError {
 }
 
 export interface UseMarkerErrorHandlingReturn {
-  addError: (facility: StorageFacility, error: Error, type: string) => void;
+  addError: (facility: any, error: Error, type: string) => void;
   hasErrorForFacility: (facilityId: string) => boolean;
   markErrorAsRecovered: (facilityId: string) => void;
   attemptErrorRecovery: (facilityId: string) => boolean;

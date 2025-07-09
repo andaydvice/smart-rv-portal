@@ -47,14 +47,16 @@ export const MapProvider: React.FC<MapProviderProps> = ({
   // Initialize the map when the component mounts
   useEffect(() => {
     if (!mapToken) {
+      console.error('No mapToken provided to MapProvider');
       return;
     }
 
     try {
       // Set Mapbox token
       mapboxgl.accessToken = mapToken;
+      console.log('Mapbox token set successfully');
     } catch (error) {
-      // Token setting failed
+      console.error('Failed to set Mapbox token:', error);
     }
   }, [mapToken]);
 
@@ -97,7 +99,9 @@ export const useMap = (): UseMapReturn => {
     if (!mapRef.current && mapContainer.current) {
       try {
         // Map will be initialized in MapContainer component
+        console.log('Map container ref is ready for initialization');
       } catch (error) {
+        console.error('Error preparing map container:', error);
         setMapError('Failed to initialize map');
       }
     }
@@ -108,6 +112,7 @@ export const useMap = (): UseMapReturn => {
     if (mapRef.current) {
       const checkMapLoaded = () => {
         if (mapRef.current?.loaded()) {
+          console.log('Map is now loaded');
           setMapLoaded(true);
           setIsInitializing(false);
           mapRef.current.off('render', checkMapLoaded);
@@ -115,11 +120,14 @@ export const useMap = (): UseMapReturn => {
       };
 
       if (mapRef.current.loaded()) {
+        console.log('Map was already loaded');
         setMapLoaded(true);
         setIsInitializing(false);
       } else {
+        console.log('Waiting for map to load...');
         mapRef.current.on('render', checkMapLoaded);
         mapRef.current.on('load', () => {
+          console.log('Map load event fired');
           setMapLoaded(true);
           setIsInitializing(false);
         });

@@ -4,11 +4,18 @@ import { ArrowLeft } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 
 const AdventureHero = () => {
+  console.log("[AdventureHero] Component rendered");
   const navigate = useNavigate();
+  console.log("[AdventureHero] useNavigate hook initialized");
 
   const handleNavigation = () => {
+    console.log("[AdventureHero] Navigation attempt started");
+    console.log("[AdventureHero] Current location:", window.location.pathname);
+    console.log("[AdventureHero] Target location: /models");
+    
     try {
       navigate("/models");
+      console.log("[AdventureHero] Navigation function called successfully");
     } catch (error) {
       console.error("[AdventureHero] Navigation error:", error);
     }
@@ -17,6 +24,9 @@ const AdventureHero = () => {
   return (
     <div 
       className="relative w-full h-[60vh] overflow-hidden"
+      onClick={(e) => {
+        console.log("[AdventureHero] Container clicked, target:", e.target);
+      }}
     >
       <img 
         src="/lovable-uploads/ae14102b-cf2e-443b-a722-7fe364e92e36.png"
@@ -30,6 +40,7 @@ const AdventureHero = () => {
           <motion.button
             onClick={(e) => {
               e.preventDefault();
+              console.log("[AdventureHero] Hero title button clicked");
               handleNavigation();
             }}
             initial={{ opacity: 0, y: 20 }}
@@ -49,6 +60,7 @@ const AdventureHero = () => {
               className="bg-white/10 backdrop-blur-sm text-white hover:text-white hover:bg-white/20 active:bg-white/30 border-blue-400"
               onClick={(e) => {
                 e.preventDefault();
+                console.log("[AdventureHero] Top 'Back to Models' button clicked");
                 handleNavigation();
               }}
             >

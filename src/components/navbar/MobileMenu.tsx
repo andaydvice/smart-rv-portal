@@ -4,10 +4,11 @@ import MobileMenuSection from "./MobileMenuSection";
 import { CoreSystemsLinks, SmartFeaturesLinks, VehicleSelectionLinks, SupportLinks, CustomerSupportLinks, RVToolsLinks } from "../NavbarLinks";
 import { Link } from "react-router-dom";
 import { Calculator, LogIn, Home } from "lucide-react";
-import { useAuth } from "@/components/auth/AuthProvider";
+import { useAuth } from "@/components/auth/AuthContext";
 import { LogOut } from "lucide-react";
 import { User } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 
 interface MobileMenuProps {
   isOpen: boolean;
@@ -20,17 +21,17 @@ export default function MobileMenu({
   openSections,
   toggleSection,
 }: MobileMenuProps) {
-  const { user, signOut } = useAuth();
+  const { user } = useAuth();
   const { toast } = useToast();
 
   const handleLogout = async () => {
     try {
-      await signOut();
+      await supabase.auth.signOut();
       toast({
         title: "Logged out successfully",
         description: "You have been logged out of your account",
       });
-    } catch {
+    } catch (error) {
       toast({
         title: "Error logging out",
         description: "There was a problem logging out. Please try again.",

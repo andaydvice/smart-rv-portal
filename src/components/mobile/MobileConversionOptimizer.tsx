@@ -6,10 +6,10 @@ import { Heart, Share2, Bookmark, TrendingUp, Zap, Timer } from 'lucide-react';
 import { useABTesting } from '@/hooks/useABTesting';
 
 interface MobileConversionOptimizerProps {
-  products: Record<string, any>[];
-  onProductClick: (product: Record<string, any>) => void;
-  onWishlistAdd: (product: Record<string, any>) => void;
-  onShare: (product: Record<string, any>) => void;
+  products: any[];
+  onProductClick: (product: any) => void;
+  onWishlistAdd: (product: any) => void;
+  onShare: (product: any) => void;
 }
 
 const MobileConversionOptimizer = ({
@@ -133,10 +133,10 @@ const SwipeableProductCard = ({
   onWishlistAdd, 
   onShare 
 }: {
-  product: Record<string, any>;
-  onProductClick: (product: Record<string, any>) => void;
-  onWishlistAdd: (product: Record<string, any>) => void;
-  onShare: (product: Record<string, any>) => void;
+  product: any;
+  onProductClick: (product: any) => void;
+  onWishlistAdd: (product: any) => void;
+  onShare: (product: any) => void;
 }) => {
   const [swipeOffset, setSwipeOffset] = useState(0);
   const [isWishlisted, setIsWishlisted] = useState(false);

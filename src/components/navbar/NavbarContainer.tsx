@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { Logo } from "../Logo";
 import DesktopNavigation from "../navigation/DesktopNavigation";
 import MenuButton from "../navigation/MenuButton";
+import { useAuth } from "../auth/AuthContext";
+import { useEffect } from "react";
 
 interface NavbarContainerProps {
   isOpen: boolean;
@@ -10,6 +12,11 @@ interface NavbarContainerProps {
 }
 
 const NavbarContainer = ({ isOpen, toggleMenu }: NavbarContainerProps) => {
+  const { user } = useAuth();
+  
+  useEffect(() => {
+    console.log("NavbarContainer effect - Menu state:", isOpen);
+  }, [isOpen]);
 
   return (
     <nav className="relative z-[9999] fixed top-0 left-0 right-0 bg-[#080F1F]/95 backdrop-blur-sm border-b border-[#1E2A3E]">

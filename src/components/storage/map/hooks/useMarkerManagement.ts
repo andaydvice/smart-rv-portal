@@ -47,19 +47,12 @@ export const useMarkerManagement = (
       
       return markerCount;
     } catch (error) {
-      const mockFacility: StorageFacility = {
-        id: 'batch-creation',
-        name: 'Batch Creation',
-        latitude: 0,
-        longitude: 0,
-        address: '',
-        city: '',
-        state: '',
-        features: { indoor: false, climate_controlled: false, "24h_access": false, security_system: false, vehicle_washing: false },
-        price_range: { min: 0, max: 0, currency: 'USD' },
-        verified_fields: { features: false, price_range: false, contact_info: false, location: false, business_hours: false }
-      };
-      addError(mockFacility, error instanceof Error ? error : new Error(String(error)), 'CREATION_ERROR');
+      console.error("Error creating markers:", error);
+      addError(
+        { id: 'batch-creation' } as StorageFacility, 
+        error instanceof Error ? error : new Error(String(error)), 
+        'CREATION_ERROR'
+      );
       return 0;
     }
   }, [map, mapLoaded, validFacilities, createMarkersBase, updateStats, addError]);

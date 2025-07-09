@@ -23,7 +23,7 @@ export const useMarkerClickHandlers = () => {
       e.preventDefault();
       e.stopPropagation();
       
-      
+      console.log(`Marker clicked for: ${facilityName} (ID: ${facilityId})`);
       
       // Call the click handler first (this navigates or shows details)
       onMarkerClick(facilityId);
@@ -50,7 +50,7 @@ export const useMarkerClickHandlers = () => {
               
               // Retry if within the max attempts
               if ((failedAttemptsRef.current[facilityId] || 0) <= MAX_RETRY_ATTEMPTS) {
-                
+                console.log(`Retry attempt ${failedAttemptsRef.current[facilityId]}/${MAX_RETRY_ATTEMPTS} for marker ${facilityId}`);
                 setTimeout(() => {
                   try {
                     marker.togglePopup();

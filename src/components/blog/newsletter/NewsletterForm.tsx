@@ -18,22 +18,24 @@ export const NewsletterForm = () => {
         throw new Error("Please enter a valid email address");
       }
 
-      // Email submission logging removed for production
+      console.log("Attempting to submit email to Supabase:", email);
 
       const { error } = await supabase
         .from('newsletter_subscribers')
         .insert([{ email }]);
 
       if (error) {
-        // Error handling for newsletter subscription
+        console.log("Supabase error response:", error);
         
         if (error.code === '23505') {
+          console.log("Duplicate email detected:", email);
           toast({
             title: "Already subscribed",
             description: "This email is already subscribed to our newsletter.",
             className: "bg-yellow-600 text-white",
           });
         } else {
+          console.error("Non-duplicate error occurred:", error);
           toast({
             title: "❌ Subscription failed",
             description: "Please try again later.",
@@ -41,7 +43,7 @@ export const NewsletterForm = () => {
           });
         }
       } else {
-        // Newsletter subscription successful
+        console.log("Successfully stored email in Supabase:", email);
         toast({
           title: "✅ Successfully subscribed!",
           description: "Thank you for subscribing to our newsletter.",
@@ -50,7 +52,7 @@ export const NewsletterForm = () => {
         setEmail("");
       }
     } catch (error: any) {
-      // Error handling for newsletter subscription
+      console.error('Error:', error);
       
       toast({
         variant: "destructive",

@@ -70,5 +70,3 @@ export const SustainabilitySection = () => (
     </div>
   </section>
 );
-
-export default SustainabilitySection;

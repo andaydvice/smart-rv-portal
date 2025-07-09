@@ -32,7 +32,7 @@ const HoverDropdownMenu: React.FC<HoverDropdownMenuProps> = ({
       setIsOpen(true);
       if (failedAttempts > 0) setFailedAttempts(0);
     } catch (error) {
-      // Failed to show dropdown
+      console.error("Failed to show dropdown:", error);
       setFailedAttempts(prev => prev + 1);
     }
   };

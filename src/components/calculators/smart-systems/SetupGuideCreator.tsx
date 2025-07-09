@@ -108,7 +108,7 @@ const SetupGuideCreator = () => {
   const currentStepData = steps.find(step => step.id === currentStep);
 
   const handleNext = () => {
-    // Moving to next step
+    console.log("Moving to next step:", currentStep + 1);
     if (currentStep < steps.length) {
       setCurrentStep(currentStep + 1);
       setShowTroubleshooting(false);
@@ -120,7 +120,7 @@ const SetupGuideCreator = () => {
   };
 
   const handlePrevious = () => {
-    // Moving to previous step
+    console.log("Moving to previous step:", currentStep - 1);
     if (currentStep > 1) {
       setCurrentStep(currentStep - 1);
       setShowTroubleshooting(false);
@@ -128,7 +128,7 @@ const SetupGuideCreator = () => {
   };
 
   const toggleTroubleshooting = () => {
-    // Toggling troubleshooting view
+    console.log("Toggling troubleshooting view");
     setShowTroubleshooting(!showTroubleshooting);
   };
 

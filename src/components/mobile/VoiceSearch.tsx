@@ -12,7 +12,12 @@ interface VoiceSearchProps {
   className?: string;
 }
 
-// Speech recognition types are now defined in global.d.ts
+declare global {
+  interface Window {
+    SpeechRecognition: any;
+    webkitSpeechRecognition: any;
+  }
+}
 
 const VoiceSearch = ({ onSearch, onClose, className = "" }: VoiceSearchProps) => {
   const [isListening, setIsListening] = useState(false);
@@ -124,7 +129,7 @@ const VoiceSearch = ({ onSearch, onClose, className = "" }: VoiceSearchProps) =>
     };
 
     recognition.onerror = (event) => {
-      // Speech recognition error
+      console.error('Speech recognition error:', event.error);
       setIsListening(false);
     };
 

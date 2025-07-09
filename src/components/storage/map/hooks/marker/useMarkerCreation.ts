@@ -20,6 +20,7 @@ export const useMarkerCreation = (
     
     try {
       // Create emergency markers - ensure we're creating the exact number of markers needed
+      console.log(`Creating markers for ${validFacilities.length} facilities`);
       
       // Force clear existing markers first to ensure accurate count
       document.querySelectorAll('.mapboxgl-marker, .custom-marker').forEach(marker => {

@@ -16,7 +16,7 @@ interface PersonalizedRecommendation {
   id: string;
   title: string;
   reason: string;
-  products: Record<string, any>[];
+  products: any[];
   priority: 'high' | 'medium' | 'low';
   category: string;
 }

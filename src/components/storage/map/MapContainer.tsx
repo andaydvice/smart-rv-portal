@@ -25,6 +25,12 @@ const MapContainer: React.FC<MapContainerProps> = ({
   const [markersCreated, setMarkersCreated] = useState<boolean>(false);
   const [loadingProgress, setLoadingProgress] = useState<number>(0);
   
+  // Log props for debugging
+  useEffect(() => {
+    console.log(`MapContainer received ${facilities?.length || 0} facilities`);
+    console.log(`Selected state: ${selectedState || 'none'}`);
+    console.log(`Map loaded: ${mapLoaded}, Map initialized: ${!isInitializing}`);
+  }, [facilities, selectedState, mapLoaded, isInitializing]);
 
   // Initialize map when the component mounts
   useEffect(() => {
@@ -33,6 +39,7 @@ const MapContainer: React.FC<MapContainerProps> = ({
     // Initialize Mapbox GL
     const isInitialized = initializeMapboxGL();
     if (!isInitialized) {
+      console.error('Failed to initialize MapboxGL');
       return;
     }
     
@@ -64,8 +71,11 @@ const MapContainer: React.FC<MapContainerProps> = ({
       // Configure map settings
       configureMapSettings(map);
       
+      console.log('Map instance created successfully');
+      
       // Clean up on unmount
       return () => {
+        console.log('Cleaning up map instance');
         map.remove();
         mapRef.current = null;
       };
@@ -77,6 +87,7 @@ const MapContainer: React.FC<MapContainerProps> = ({
   // Handler for marker creation status
   const handleMarkersCreated = (created: boolean) => {
     setMarkersCreated(created);
+    console.log(`Markers created status: ${created}`);
   };
 
   return (

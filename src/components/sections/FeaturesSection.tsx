@@ -80,5 +80,3 @@ export const FeaturesSection = () => (
     </div>
   </section>
 );
-
-export default FeaturesSection;

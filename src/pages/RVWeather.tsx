@@ -17,7 +17,12 @@ import MaintenanceSection from "@/components/rv-weather/MaintenanceSection";
 import HazardsSection from "@/components/rv-weather/sections/HazardsSection";
 import "../styles/pages/rv-weather.css";
 
-// Window interface extensions are now in global.d.ts
+// Extend Window interface to include our custom property
+declare global {
+  interface Window {
+    isRVWeatherPage?: boolean;
+  }
+}
 
 const RVWeather = () => {
   // Use React.useEffect instead of useEffect directly

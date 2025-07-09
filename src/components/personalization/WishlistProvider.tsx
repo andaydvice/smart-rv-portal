@@ -47,7 +47,7 @@ export const WishlistProvider = ({ children }: { children: React.ReactNode }) =>
           .order('created_at', { ascending: false });
 
         if (error) {
-          // Handle error silently
+          console.error('Error loading wishlist:', error);
         } else {
           setItems(data || []);
         }
@@ -59,7 +59,7 @@ export const WishlistProvider = ({ children }: { children: React.ReactNode }) =>
         }
       }
     } catch (error) {
-      // Handle error silently
+      console.error('Error loading wishlist:', error);
     } finally {
       setLoading(false);
     }
@@ -93,7 +93,7 @@ export const WishlistProvider = ({ children }: { children: React.ReactNode }) =>
             })));
 
           if (error) {
-            // Handle error silently
+            console.error('Error saving wishlist:', error);
           }
         }
       } else {
@@ -101,7 +101,7 @@ export const WishlistProvider = ({ children }: { children: React.ReactNode }) =>
         localStorage.setItem('wishlist', JSON.stringify(newItems));
       }
     } catch (error) {
-      // Handle error silently
+      console.error('Error saving wishlist:', error);
     }
   };
 
@@ -117,6 +117,14 @@ export const WishlistProvider = ({ children }: { children: React.ReactNode }) =>
     setItems(newItems);
     saveWishlist(newItems);
 
+    // Track wishlist addition
+    console.log('Wishlist Addition:', {
+      itemId: item.id,
+      itemName: item.name,
+      partner: item.partner,
+      price: item.price,
+      timestamp: new Date().toISOString()
+    });
   };
 
   const removeFromWishlist = (id: string) => {
@@ -124,6 +132,11 @@ export const WishlistProvider = ({ children }: { children: React.ReactNode }) =>
     setItems(newItems);
     saveWishlist(newItems);
 
+    // Track wishlist removal
+    console.log('Wishlist Removal:', {
+      itemId: id,
+      timestamp: new Date().toISOString()
+    });
   };
 
   const isInWishlist = (id: string) => {

@@ -12,12 +12,12 @@ const SmartSystemDecoder = () => {
   const { toast } = useToast();
 
   const handleSystemToggle = (systemId: string) => {
-    // Toggling system selection
+    console.log("Toggling system:", systemId);
     setSelectedSystems(current => {
       const updated = current.includes(systemId)
         ? current.filter(id => id !== systemId)
         : [...current, systemId];
-      // Updated selected systems
+      console.log("Updated selected systems:", updated);
       
       // Check compatibility with other selected systems
       const newSystem = systemsData[systemId];

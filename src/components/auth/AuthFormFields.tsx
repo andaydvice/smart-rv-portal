@@ -14,10 +14,6 @@ interface AuthFormFieldsProps {
   setEmail: (email: string) => void;
   password: string;
   setPassword: (password: string) => void;
-  firstName?: string;
-  setFirstName?: (firstName: string) => void;
-  lastName?: string;
-  setLastName?: (lastName: string) => void;
   passwordStrength: number;
   onSubmit: (e: React.FormEvent) => Promise<void>;
 }
@@ -29,44 +25,12 @@ const AuthFormFields = ({
   setEmail,
   password,
   setPassword,
-  firstName,
-  setFirstName,
-  lastName,
-  setLastName,
   passwordStrength,
   onSubmit,
 }: AuthFormFieldsProps) => {
   
   return (
     <form onSubmit={onSubmit} className="space-y-4">
-      {isSignUp && (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="space-y-2">
-            <Label htmlFor="firstName" className="text-white">First Name</Label>
-            <Input
-              id="firstName"
-              type="text"
-              value={firstName || ''}
-              onChange={(e) => setFirstName?.(e.target.value)}
-              placeholder="John"
-              className="bg-[#1a2235] border-gray-700 text-white"
-              disabled={loading}
-            />
-          </div>
-          <div className="space-y-2">
-            <Label htmlFor="lastName" className="text-white">Last Name</Label>
-            <Input
-              id="lastName"
-              type="text"
-              value={lastName || ''}
-              onChange={(e) => setLastName?.(e.target.value)}
-              placeholder="Doe"
-              className="bg-[#1a2235] border-gray-700 text-white"
-              disabled={loading}
-            />
-          </div>
-        </div>
-      )}
       <div className="space-y-2">
         <Label htmlFor="email" className="text-white">Email</Label>
         <Input
