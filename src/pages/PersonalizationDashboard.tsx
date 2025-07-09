@@ -8,6 +8,10 @@ import { PersonalizationEngine } from '@/components/personalization/Personalizat
 import { DynamicContentEngine } from '@/components/personalization/DynamicContentEngine';
 import { RealtimeRecommendationEngine } from '@/components/personalization/RealtimeRecommendationEngine';
 import BehavioralAnalytics from '@/components/analytics/BehavioralAnalytics';
+import { RevenueOptimizationEngine } from '@/components/revenue/RevenueOptimizationEngine';
+import { ABTestingFramework } from '@/components/revenue/ABTestingFramework';
+import { SmartRecommendationEngine } from '@/components/revenue/SmartRecommendationEngine';
+import { LeadGenerationOptimizer } from '@/components/revenue/LeadGenerationOptimizer';
 import { Brain, Zap, Target, TrendingUp } from 'lucide-react';
 import { scrollToTop } from '@/utils/scrollToTop';
 
