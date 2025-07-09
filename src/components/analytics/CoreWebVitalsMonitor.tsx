@@ -28,7 +28,7 @@ const CoreWebVitalsMonitor = ({ pageName, enableDebugMode = false }: CoreWebVita
       timestamp: new Date().toISOString(),
       url: window.location.href,
       userAgent: navigator.userAgent,
-      connectionType: (navigator as any)?.connection?.effectiveType || 'unknown'
+      connectionType: (navigator as Record<string, any>)?.connection?.effectiveType || 'unknown'
     };
 
     // Track Largest Contentful Paint (LCP)
@@ -36,7 +36,7 @@ const CoreWebVitalsMonitor = ({ pageName, enableDebugMode = false }: CoreWebVita
       if ('PerformanceObserver' in window) {
         const lcpObserver = new PerformanceObserver((entryList) => {
           const entries = entryList.getEntries();
-          const lastEntry = entries[entries.length - 1] as any;
+          const lastEntry = entries[entries.length - 1] as Record<string, any>;
           
           if (lastEntry) {
             vitalsData.current.lcp = Math.round(lastEntry.startTime);
@@ -65,7 +65,7 @@ const CoreWebVitalsMonitor = ({ pageName, enableDebugMode = false }: CoreWebVita
       if ('PerformanceObserver' in window) {
         const fidObserver = new PerformanceObserver((entryList) => {
           const entries = entryList.getEntries();
-          entries.forEach((entry: any) => {
+          entries.forEach((entry: Record<string, any>) => {
             if (entry.processingStart && entry.startTime) {
               vitalsData.current.fid = Math.round(entry.processingStart - entry.startTime);
               
@@ -93,7 +93,7 @@ const CoreWebVitalsMonitor = ({ pageName, enableDebugMode = false }: CoreWebVita
         
         const clsObserver = new PerformanceObserver((entryList) => {
           const entries = entryList.getEntries();
-          entries.forEach((entry: any) => {
+          entries.forEach((entry: Record<string, any>) => {
             if (!entry.hadRecentInput) {
               clsValue += entry.value;
             }
@@ -120,7 +120,7 @@ const CoreWebVitalsMonitor = ({ pageName, enableDebugMode = false }: CoreWebVita
       if ('PerformanceObserver' in window) {
         const fcpObserver = new PerformanceObserver((entryList) => {
           const entries = entryList.getEntries();
-          entries.forEach((entry: any) => {
+          entries.forEach((entry: Record<string, any>) => {
             if (entry.name === 'first-contentful-paint') {
               vitalsData.current.fcp = Math.round(entry.startTime);
               
@@ -144,7 +144,7 @@ const CoreWebVitalsMonitor = ({ pageName, enableDebugMode = false }: CoreWebVita
     // Track Time to First Byte (TTFB)
     const trackTTFB = () => {
       if ('performance' in window && 'timing' in performance) {
-        const navigation = performance.getEntriesByType('navigation')[0] as any;
+        const navigation = performance.getEntriesByType('navigation')[0] as Record<string, any>;
         if (navigation) {
           vitalsData.current.ttfb = Math.round(navigation.responseStart - navigation.requestStart);
           
@@ -164,7 +164,7 @@ const CoreWebVitalsMonitor = ({ pageName, enableDebugMode = false }: CoreWebVita
         
         const inpObserver = new PerformanceObserver((entryList) => {
           const entries = entryList.getEntries();
-          entries.forEach((entry: any) => {
+          entries.forEach((entry: Record<string, any>) => {
             if (entry.processingStart && entry.startTime) {
               const delay = entry.processingStart - entry.startTime;
               if (delay > maxDelay) {

@@ -16,7 +16,7 @@ interface TripInputsProps {
   setFuelPrice: (value: number) => void;
   campsiteType: string;
   setCampsiteType: (value: string) => void;
-  seasonData: any;
+  seasonData: Record<string, any>;
 }
 
 const TripInputs = ({
