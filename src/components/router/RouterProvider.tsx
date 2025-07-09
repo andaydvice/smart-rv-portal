@@ -7,8 +7,6 @@ import ErrorBoundary from "../error/ErrorBoundary";
 const router = createBrowserRouter(routes);
 
 const RouterProvider = () => {
-  console.log('RouterProvider - Rendering with routes:', routes.length, 'total routes');
-  
   return (
     <ErrorBoundary>
       <ReactRouterProvider router={router} />

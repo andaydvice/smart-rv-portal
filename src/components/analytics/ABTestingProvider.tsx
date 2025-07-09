@@ -54,12 +54,7 @@ export const ABTestingProvider = ({ children }: { children: React.ReactNode }) =
           newAssignments[test.id] = variant;
           
           // Track test assignment
-          console.log('AB Test Assignment:', {
-            testId: test.id,
-            variant,
-            timestamp: new Date().toISOString(),
-            userId: localStorage.getItem('user_id') || 'anonymous'
-          });
+          // AB Test Assignment logging removed for production
         }
       }
     });
@@ -85,7 +80,7 @@ export const ABTestingProvider = ({ children }: { children: React.ReactNode }) =
       page: window.location.pathname
     };
 
-    console.log('AB Test Conversion:', conversionData);
+    // AB Test conversion logging removed for production
     
     // Store conversion data
     const conversions = JSON.parse(localStorage.getItem('ab_conversions') || '[]');

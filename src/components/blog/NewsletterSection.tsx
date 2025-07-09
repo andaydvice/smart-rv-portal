@@ -8,7 +8,7 @@ const NewsletterSection = () => {
   const [subscriptionCount, setSubscriptionCount] = useState<number | null>(null);
 
   useEffect(() => {
-    console.log("Setting up real-time subscription listener");
+    // Real-time subscription listener setup
     
     const channel = supabase
       .channel('newsletter_count')
@@ -28,7 +28,7 @@ const NewsletterSection = () => {
     fetchSubscriptionCount();
 
     return () => {
-      console.log("Cleaning up subscription listener");
+      // Cleaning up subscription listener
       channel.unsubscribe();
     };
   }, []);
@@ -41,7 +41,7 @@ const NewsletterSection = () => {
       
       setSubscriptionCount(count || null);
     } catch (error) {
-      console.error('Error fetching subscription count:', error);
+      // Error fetching subscription count
       setSubscriptionCount(null);
     }
   };

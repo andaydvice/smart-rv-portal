@@ -46,7 +46,7 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
 
   componentDidCatch(error: Error, errorInfo: ErrorInfo) {
     // Log error to console in development
-    console.error('Error caught by ErrorBoundary:', error, errorInfo);
+    // Error caught by ErrorBoundary
   }
 
   handleRetry = () => {

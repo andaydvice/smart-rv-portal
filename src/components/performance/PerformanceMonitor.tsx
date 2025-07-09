@@ -95,8 +95,6 @@ const PerformanceMonitor = () => {
     // Report metrics after page load
     window.addEventListener('load', () => {
       setTimeout(() => {
-        
-        
         // Send to analytics if available
         if ((window as any).gtag) {
           (window as any).gtag('event', 'performance_metrics', {
@@ -108,7 +106,7 @@ const PerformanceMonitor = () => {
 
     // Cleanup on unmount
     return () => {
-      
+      // Cleanup code if needed
     };
   }, []);
 

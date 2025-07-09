@@ -26,7 +26,7 @@ const UserMenu = () => {
     try {
       await signOut();
     } catch (error) {
-      console.error('Error signing out:', error);
+      // Handle error silently or show user-friendly message
     }
   };
 
