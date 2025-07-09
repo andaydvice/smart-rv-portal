@@ -53,16 +53,16 @@ const Index = () => {
         title="Smart RV Technology - Luxury RV Living & Mobile Home Solutions"
         description="Discover the future of RV living with smart technology, luxury features, solar power solutions, emergency services, and innovative apps for modern mobile homes."
         keywords="smart RV, luxury RV, RV technology, mobile living, RV apps, solar power, RV emergency, RV storage, smart home, recreational vehicle"
-        url={window.location.href}
+        url="https://smartrvtech.com"
         type="website"
         schema={{
           "@context": "https://schema.org",
           "@type": "WebSite",
           "name": "Smart RV Technology",
-          "url": window.location.origin,
+          "url": "https://smartrvtech.com",
           "potentialAction": {
             "@type": "SearchAction",
-            "target": `${window.location.origin}/search?q={search_term_string}`,
+            "target": "https://smartrvtech.com/search?q={search_term_string}",
             "query-input": "required name=search_term_string"
           }
         }}
@@ -72,8 +72,8 @@ const Index = () => {
         type="Organization" 
         data={{
           name: "Smart RV Technology",
-          url: window.location.origin,
-          logo: `${window.location.origin}/logo.png`,
+          url: "https://smartrvtech.com",
+          logo: "https://smartrvtech.com/logo.png",
           description: "Leading provider of smart RV technology, luxury mobile living solutions, solar power systems, and emergency services for recreational vehicles.",
           contactPoint: {
             telephone: "+1-800-SMART-RV",
