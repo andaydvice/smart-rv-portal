@@ -20,7 +20,7 @@ export const useAuthForm = ({ onSuccess, onError }: UseAuthFormProps) => {
   const [passwordStrength, setPasswordStrength] = useState(0);
   const [error, setError] = useState<string | null>(null);
   const [showOtp, setShowOtp] = useState(false);
-  const [pendingOtpSession, setPendingOtpSession] = useState<any>(null);
+  const [pendingOtpSession, setPendingOtpSession] = useState<Record<string, any> | null>(null);
   const { toast } = useToast();
 
   const { fetchLoginAttempts, setLoginAttempts, LOCKOUT_THRESHOLD, LOCKOUT_MINUTES } = useLoginAttempt();

@@ -57,15 +57,15 @@ const mockProducts = [
 ];
 
 const VoiceCommercePage = () => {
-  const [cart, setCart] = useState<any[]>([]);
-  const [wishlist, setWishlist] = useState<any[]>([]);
+  const [cart, setCart] = useState<Record<string, any>[]>([]);
+  const [wishlist, setWishlist] = useState<Record<string, any>[]>([]);
 
-  const handleAddToCart = (product: any) => {
+  const handleAddToCart = (product: Record<string, any>) => {
     setCart(prev => [...prev, product]);
     console.log('Added to cart:', product.name);
   };
 
-  const handleWishlistAdd = (product: any) => {
+  const handleWishlistAdd = (product: Record<string, any>) => {
     setWishlist(prev => [...prev, product]);
     console.log('Added to wishlist:', product.name);
   };

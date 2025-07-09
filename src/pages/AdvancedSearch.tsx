@@ -10,14 +10,14 @@ import { Search, Sparkles, MapPin, TrendingUp, Filter } from 'lucide-react';
 
 interface AdvancedSearchHubProps {
   initialQuery?: string;
-  initialFilters?: any;
+  initialFilters?: Record<string, any>;
 }
 
 export const AdvancedSearchHub: React.FC<AdvancedSearchHubProps> = ({
   initialQuery = '',
   initialFilters = {}
 }) => {
-  const [searchResults, setSearchResults] = useState<any[]>([]);
+  const [searchResults, setSearchResults] = useState<Record<string, any>[]>([]);
   const [activeTab, setActiveTab] = useState('search');
   const [userBehavior, setUserBehavior] = useState({
     viewHistory: [],

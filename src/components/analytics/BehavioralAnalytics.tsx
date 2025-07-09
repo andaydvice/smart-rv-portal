@@ -42,7 +42,7 @@ interface HeatmapData {
 const BehavioralAnalytics = () => {
   const [behaviorData, setBehaviorData] = useState<UserBehavior | null>(null);
   const [heatmapData, setHeatmapData] = useState<HeatmapData[]>([]);
-  const [predictiveInsights, setPredictiveInsights] = useState<any>(null);
+  const [predictiveInsights, setPredictiveInsights] = useState<Record<string, any> | null>(null);
   const [isTracking, setIsTracking] = useState(false);
 
   // Initialize behavioral tracking
