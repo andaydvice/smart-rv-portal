@@ -270,3 +270,5 @@ export const AdvancedSearchHub: React.FC<AdvancedSearchHubProps> = ({
     </div>
   );
 };
+
+export default AdvancedSearchHub;
