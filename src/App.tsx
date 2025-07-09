@@ -39,69 +39,14 @@ const queryClient = new QueryClient({
 function AppContent() {
   useEffect(() => {
     console.log('App component mounted');
-    
-    // Force scroll to top on page load
     window.scrollTo(0, 0);
-    
-    // Apply emergency fixes that bypass React
-    injectEmergencyStyles();
-    forceMapMarkersVisible();
-    
-    // Debug current route
-    console.log('Current URL:', window.location.href);
-    console.log('Current pathname:', window.location.pathname);
-    
-    // Verify routes are available
-    if ((window as any).routesAvailable) {
-      console.log('Routes confirmed available');
-    } else {
-      console.warn('Routes may not be properly configured');
-    }
-    
-    // Store map instance globally for emergency access
-    document.addEventListener('mapboxgl.map.created', (e: CustomEvent) => {
-      (window as any).mapInstance = e.detail.map;
-      console.log('Map instance stored globally');
-    });
-    
-    // Create custom event dispatch system for map
-    (window as any).dispatchMapEvent = (eventName: string, detail: any) => {
-      document.dispatchEvent(new CustomEvent(eventName, { detail }));
-      console.log(`Map event dispatched: ${eventName}`);
-    };
-    
-    // Force all markers to be visible
-    setTimeout(() => {
-      try {
-        const markers = document.querySelectorAll('.mapboxgl-marker, .custom-marker, .emergency-marker');
-        console.log(`Found ${markers.length} markers to make visible`);
-        markers.forEach(marker => {
-          if (marker instanceof HTMLElement) {
-            marker.style.visibility = 'visible';
-            marker.style.display = 'block';
-            marker.style.opacity = '1';
-            marker.style.zIndex = '1000';
-          }
-        });
-      } catch (err) {
-        console.error('Error forcing markers visible:', err);
-      }
-    }, 1000);
   }, []);
 
   return (
-    <React.Suspense fallback={
-      <div className="flex items-center justify-center h-screen bg-[#080F1F] text-white">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#5B9BD5] mx-auto"></div>
-          <p className="mt-4">Loading application...</p>
-        </div>
-      </div>
-    }>
-      <PerformanceMonitor />
+    <div className="min-h-screen bg-[#080F1F] text-white">
       <RouterProvider />
       <Toaster />
-    </React.Suspense>
+    </div>
   );
 }
 
