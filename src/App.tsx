@@ -113,19 +113,17 @@ function App() {
   console.log('App rendering');
   
   return (
-    <React.StrictMode>
-      <QueryClientProvider client={queryClient}>
-        <AuthProvider>
-          <ABTestingProvider>
-            <WishlistProvider>
-              <PWAProvider>
-                <AppContent />
-              </PWAProvider>
-            </WishlistProvider>
-          </ABTestingProvider>
-        </AuthProvider>
-      </QueryClientProvider>
-    </React.StrictMode>
+    <QueryClientProvider client={queryClient}>
+      <AuthProvider>
+        <ABTestingProvider>
+          <WishlistProvider>
+            <PWAProvider>
+              <AppContent />
+            </PWAProvider>
+          </WishlistProvider>
+        </ABTestingProvider>
+      </AuthProvider>
+    </QueryClientProvider>
   );
 }
 
