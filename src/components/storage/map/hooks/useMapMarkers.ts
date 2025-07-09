@@ -29,11 +29,8 @@ export const useMapMarkers = (
     markersCreatedRef.current = false;
     
     if (!map || !mapLoaded || facilities.length === 0) {
-      console.log("Map not ready or no facilities available");
       return;
     }
-    
-    console.log(`Creating markers for ${facilities.length} facilities`);
     
     // Filter facilities by selected state if applicable
     const filteredFacilities = selectedState 
@@ -49,19 +46,10 @@ export const useMapMarkers = (
         })
       : facilities;
     
-    console.log(`Creating ${filteredFacilities.length} markers after filtering with state: ${selectedState}`);
-    console.log(`State representations: ${JSON.stringify(getAllStateRepresentations(selectedState))}`);
-    
-    // Log the filtered facilities' states for debugging
-    if (filteredFacilities.length === 0 && selectedState) {
-      console.warn(`No facilities found for state: ${selectedState}`);
-      console.log('Available states in facilities:', [...new Set(facilities.map(f => f.state))]);
-    }
     
     // Create direct markers
     try {
       const markerCount = createDirectMarkers(filteredFacilities, map);
-      console.log(`Created ${markerCount} markers`);
       
       // Add click handlers for any "View Details" buttons
       setTimeout(() => {
@@ -82,7 +70,7 @@ export const useMapMarkers = (
                 })(),
                 // Click handler
                 (e: MouseEvent) => {
-                  console.log(`View details clicked for facility ${facilityId}`);
+                  
                   e.preventDefault();
                   e.stopPropagation();
                   // Navigate or show details for this facility

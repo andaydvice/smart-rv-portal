@@ -52,9 +52,6 @@ export const useMapSetup = (
         });
       }
       
-      // Log information
-      console.log(`Map setup with ${facilities.length} facilities`);
-      console.log('Map bounds:', bounds);
       
       // Force map canvas visibility
       const canvas = map.getCanvas();
@@ -75,7 +72,6 @@ export const useMapSetup = (
       
       // For California, New York, and Georgia, ensure markers exist
       if (selectedState === 'California' || selectedState === 'New York' || selectedState === 'Georgia') {
-        console.log(`Ensuring markers exist for ${selectedState}`);
         // Fix: Pass both map and facilities to ensureMarkersExist
         ensureMarkersExist(map, facilities);
       }

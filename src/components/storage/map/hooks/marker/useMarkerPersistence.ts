@@ -43,10 +43,6 @@ export const useMarkerPersistence = ({ map }: UseMarkerPersistenceProps) => {
           }
         });
         
-        // Log only if we actually did something
-        if (readdedCount > 0) {
-          console.log(`Re-added ${readdedCount} markers to map`);
-        }
       }
     };
     
