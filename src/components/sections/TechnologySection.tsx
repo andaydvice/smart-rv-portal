@@ -7,7 +7,7 @@ export const TechnologySection = () => {
   const navigate = useNavigate();
 
   const handleCardClick = (link: string) => {
-    console.log('Card clicked, navigating to:', link);
+    // Navigation to link
     // Use navigate function to handle navigation
     navigate(link);
   };

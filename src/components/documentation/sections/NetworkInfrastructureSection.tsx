@@ -10,7 +10,7 @@ const NetworkInfrastructureSection = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
 
   const handleExpand = () => {
-    console.log("Network Infrastructure section expanded");
+    // Section expanded
     setTimeout(() => {
       if (sectionRef.current) {
         sectionRef.current.scrollIntoView({ behavior: "smooth", block: "start" });

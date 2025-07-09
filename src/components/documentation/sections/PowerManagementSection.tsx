@@ -10,7 +10,7 @@ const PowerManagementSection = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
 
   const handleExpand = () => {
-    console.log("Power Management section expanded");
+    // Section expanded
     setTimeout(() => {
       if (sectionRef.current) {
         sectionRef.current.scrollIntoView({ behavior: "smooth", block: "start" });

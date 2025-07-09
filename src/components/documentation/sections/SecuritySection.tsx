@@ -10,7 +10,7 @@ const SecuritySection = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
 
   const handleExpand = () => {
-    console.log("Security section expanded");
+    // Section expanded
     setTimeout(() => {
       if (sectionRef.current) {
         sectionRef.current.scrollIntoView({ behavior: "smooth", block: "start" });

@@ -1,17 +1,16 @@
 
 import { Link } from "react-router-dom";
 import { LogIn, User, LogOut } from "lucide-react";
-import { useAuth } from "@/components/auth/AuthContext";
-import { supabase } from "@/integrations/supabase/client";
+import { useAuth } from "@/components/auth/AuthProvider";
 import { useToast } from "@/hooks/use-toast";
 
 const AuthButtons = () => {
-  const { user } = useAuth();
+  const { user, signOut } = useAuth();
   const { toast } = useToast();
 
   const handleLogout = async () => {
     try {
-      await supabase.auth.signOut();
+      await signOut();
       toast({
         title: "Logged out successfully",
         description: "You have been logged out of your account",

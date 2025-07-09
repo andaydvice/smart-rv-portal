@@ -1,6 +1,6 @@
 
 import { useState } from "react";
-import { useAuth } from "@/components/auth/AuthContext";
+import { useAuth } from "@/components/auth/AuthProvider";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Loader2, ShieldCheck, ShieldX, AlertCircle } from "lucide-react";
