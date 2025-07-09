@@ -1,74 +1,23 @@
 
-import React, { useEffect } from 'react';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { Toaster } from '@/components/ui/toaster';
-import { AuthProvider } from './components/auth/AuthProvider';
-import { ABTestingProvider } from './components/analytics/ABTestingProvider';
-import { WishlistProvider } from './components/personalization/WishlistProvider';
-import { PWAProvider } from './components/pwa/PWAProvider';
-import PerformanceMonitor from './components/performance/PerformanceMonitor';
-import { injectEmergencyStyles } from './utils/markers/styleInjection';
-import { forceMapMarkersVisible } from './utils/forceMapMarkers';
-import RouterProvider from './components/router/RouterProvider';
-import './App.css';
-import './styles/animations.css';
-import './styles/map-loading.css';
-import './styles/map-fixes.css';          
-import './styles/emergency-marker-fix.css'; 
-import './styles/map-optimizations.css';   
-import './styles/force-markers.css';       
-import './styles/map/index.css';  // Updated path to use the index file that imports all map styles
+import React from 'react';
 
-// Create a client with better error handling
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      staleTime: 1000 * 60 * 5, // 5 minutes
-      refetchOnWindowFocus: false,
-      retry: 1,
-      // Using the correct error handling API for @tanstack/react-query v5+
-      meta: {
-        onError: (error: Error) => {
-          console.error('Query error:', error);
-        }
-      }
-    },
-  },
-});
+console.log('App.tsx loaded');
 
-function AppContent() {
-  useEffect(() => {
-    console.log('App component mounted');
-    window.scrollTo(0, 0);
-  }, []);
-
-  return (
-    <div className="min-h-screen bg-[#080F1F] text-white">
-      <RouterProvider />
-      <Toaster />
-    </div>
-  );
-}
-
-// The main App component - proper function component wrapping
 function App() {
-  // Set routes available flag for debugging
-  (window as any).routesAvailable = true;
-  
-  console.log('App rendering');
+  console.log('App component rendering');
   
   return (
-    <QueryClientProvider client={queryClient}>
-      <AuthProvider>
-        <ABTestingProvider>
-          <WishlistProvider>
-            <PWAProvider>
-              <AppContent />
-            </PWAProvider>
-          </WishlistProvider>
-        </ABTestingProvider>
-      </AuthProvider>
-    </QueryClientProvider>
+    <div className="min-h-screen bg-[#080F1F] text-white flex items-center justify-center">
+      <div className="text-center">
+        <h1 className="text-6xl font-bold text-[#5B9BD5] mb-4">🎯</h1>
+        <h2 className="text-4xl font-bold mb-4">App Working!</h2>
+        <p className="text-xl text-gray-300 mb-8">React is rendering successfully</p>
+        <div className="w-32 h-32 bg-gradient-to-r from-green-500 to-blue-500 rounded-full mx-auto mb-6 flex items-center justify-center">
+          <span className="text-4xl">✅</span>
+        </div>
+        <p className="text-green-400 text-lg font-semibold">Direct rendering test</p>
+      </div>
+    </div>
   );
 }
 
