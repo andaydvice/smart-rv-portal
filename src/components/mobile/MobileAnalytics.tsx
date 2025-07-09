@@ -10,16 +10,7 @@ const MobileAnalytics = ({ pageName, affiliatePartners }: MobileAnalyticsProps) 
     // Track mobile-specific page view
     const trackMobilePageView = () => {
       if (window.innerWidth < 768) {
-        console.log('Mobile Page View:', {
-          page: pageName,
-          timestamp: new Date().toISOString(),
-          userAgent: navigator.userAgent,
-          screenSize: `${window.screen.width}x${window.screen.height}`,
-          viewportSize: `${window.innerWidth}x${window.innerHeight}`,
-          affiliatePartners,
-          touchSupport: 'ontouchstart' in window,
-          connectionType: (navigator as any)?.connection?.effectiveType || 'unknown'
-        });
+        // Track mobile page view
       }
     };
 
@@ -31,13 +22,7 @@ const MobileAnalytics = ({ pageName, affiliatePartners }: MobileAnalyticsProps) 
       
       affiliateLinks.forEach(link => {
         const trackTouch = (event: Event) => {
-          console.log('Mobile Affiliate Link Touch:', {
-            url: (link as HTMLAnchorElement).href,
-            text: link.textContent?.trim(),
-            timestamp: new Date().toISOString(),
-            touchType: event.type,
-            page: pageName
-          });
+          // Track mobile affiliate touch
         };
 
         link.addEventListener('touchstart', trackTouch);
@@ -61,11 +46,7 @@ const MobileAnalytics = ({ pageName, affiliatePartners }: MobileAnalyticsProps) 
           
           // Track milestone scroll depths
           if ([25, 50, 75, 90].includes(scrollPercent)) {
-            console.log('Mobile Scroll Milestone:', {
-              page: pageName,
-              scrollDepth: scrollPercent,
-              timestamp: new Date().toISOString()
-            });
+            // Track mobile scroll milestone
           }
         }
       }

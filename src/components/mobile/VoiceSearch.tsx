@@ -124,7 +124,7 @@ const VoiceSearch = ({ onSearch, onClose, className = "" }: VoiceSearchProps) =>
     };
 
     recognition.onerror = (event) => {
-      console.error('Speech recognition error:', event.error);
+      // Speech recognition error
       setIsListening(false);
     };
 

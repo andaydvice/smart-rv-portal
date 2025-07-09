@@ -52,7 +52,7 @@ const CoreWebVitalsMonitor = ({ pageName, enableDebugMode = false }: CoreWebVita
         try {
           lcpObserver.observe({ entryTypes: ['largest-contentful-paint'] });
         } catch (e) {
-          console.warn('LCP monitoring not supported');
+          // LCP monitoring not supported
         }
       }
     };
@@ -75,7 +75,7 @@ const CoreWebVitalsMonitor = ({ pageName, enableDebugMode = false }: CoreWebVita
         try {
           fidObserver.observe({ entryTypes: ['first-input'] });
         } catch (e) {
-          console.warn('FID monitoring not supported');
+          // FID monitoring not supported
         }
       }
     };
@@ -101,7 +101,7 @@ const CoreWebVitalsMonitor = ({ pageName, enableDebugMode = false }: CoreWebVita
           clsObserver.observe({ entryTypes: ['layout-shift'] });
           observer.current = clsObserver;
         } catch (e) {
-          console.warn('CLS monitoring not supported');
+          // CLS monitoring not supported
         }
       }
     };
@@ -124,7 +124,7 @@ const CoreWebVitalsMonitor = ({ pageName, enableDebugMode = false }: CoreWebVita
         try {
           fcpObserver.observe({ entryTypes: ['paint'] });
         } catch (e) {
-          console.warn('FCP monitoring not supported');
+          // FCP monitoring not supported
         }
       }
     };

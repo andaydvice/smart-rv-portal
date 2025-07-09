@@ -17,8 +17,7 @@ const ErrorPage = () => {
   let statusCode = 500;
   
   useEffect(() => {
-    console.error("Route error encountered:", error);
-    console.log("Current path:", location.pathname);
+    // Route error encountered
   }, [error, location.pathname]);
   
   if (isRouteErrorResponse(error)) {

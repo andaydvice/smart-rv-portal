@@ -31,7 +31,7 @@ const LoadingFallback = () => (
 
 const Index = () => {
   useEffect(() => {
-    console.log("Index component mounted");
+    // Index component mounted
     
     setTimeout(() => {
       toast.success("Welcome to the Smart Road Portal");

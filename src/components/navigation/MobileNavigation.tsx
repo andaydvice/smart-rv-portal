@@ -23,7 +23,7 @@ const MobileNavigation = ({ isOpen, onClose }: MobileNavigationProps) => {
     try {
       await signOut();
     } catch (error) {
-      console.error('Error signing out:', error);
+      // Error signing out - redirect anyway
     }
   };
 

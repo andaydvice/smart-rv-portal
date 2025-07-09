@@ -45,7 +45,7 @@ export async function getStateCountsWithSQL() {
     .select('state');
   
   if (error || !data) {
-    console.error('Error fetching states:', error);
+    // Error fetching states
     return [];
   }
   
@@ -129,7 +129,7 @@ export default function StorageFacilities() {
   // Handle map load event
   const handleMapLoad = () => {
     setMapLoaded(true);
-    console.log("Map loaded successfully");
+    // Map loaded successfully
   };
 
   // Set a random featured location if none is selected
@@ -150,7 +150,7 @@ export default function StorageFacilities() {
             setFeaturedLocation(convertToStorageFacility(data[randomIndex]));
           }
         } catch (error) {
-          console.error('Error fetching random facility:', error);
+          // Error fetching random facility
         }
       }
     };

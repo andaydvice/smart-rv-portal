@@ -11,29 +11,27 @@ import FeaturesComparisonTable from "@/components/models/compare/FeaturesCompari
 import models from "@/components/models/compare/ModelComparisonData";
 
 // CRITICAL DEBUGGING LOGS
-console.log('CompareModels component loaded');
-console.log('Component file path: src/pages/models/CompareModels.tsx');
+// CompareModels component loaded
 
 const CompareModels = () => {
   const location = useLocation();
   
   useEffect(() => {
-    console.log("[CompareModels] Component mounted");
-    console.log("[CompareModels] Current location:", location.pathname);
+    // Component mounted
     // Ensure the page scrolls to top when mounted
     window.scrollTo(0, 0);
     
     // Log that we reached the component successfully
-    console.log("[CompareModels] Component successfully rendered");
+    // Component successfully rendered
     
     // Alert for debugging purposes on production
     if (window.location.hostname.includes('preview--smart-rv-portal') || 
         window.location.hostname.includes('lovable.app')) {
-      console.warn('COMPARE MODELS PAGE LOADED ON PRODUCTION');
+      // Production build loaded
     }
   }, [location]);
 
-  console.log("[CompareModels] Rendering component, current path:", location.pathname);
+  // Rendering component
 
   // Footer links configuration
   const footerLinks = [

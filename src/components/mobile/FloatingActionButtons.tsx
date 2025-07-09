@@ -128,7 +128,7 @@ const FloatingActionButtons = ({ className = "" }: FloatingActionButtonsProps) =
             <VoiceSearch
               onClose={() => setShowVoiceSearch(false)}
               onSearch={(query) => {
-                console.log('Voice search:', query);
+                // Voice search query received
                 setShowVoiceSearch(false);
               }}
             />

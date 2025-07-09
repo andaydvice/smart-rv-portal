@@ -21,7 +21,7 @@ const GasCalculator = () => {
       const totalCost = gallonsNeeded * price;
       const numOfFillUps = tankSize ? Math.ceil(gallonsNeeded / parseFloat(tankSize)) : 0;
       
-      console.log("Gas calculation:", { dist, price, mpg, gallonsNeeded, totalCost, numOfFillUps });
+      // Gas calculation completed
       
       toast({
         title: "Gas Cost Calculation",

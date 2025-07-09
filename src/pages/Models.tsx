@@ -53,11 +53,10 @@ const models = [
 const Models = () => {
   const { toast } = useToast();
 
-  console.log("[Models] Rendering Models page");
-  console.log("[Models] First model image path:", models[0].image);
+  // Rendering Models page
 
   const handleCompareModels = () => {
-    console.log('Navigating to compare models page');
+    // Navigating to compare models page
     window.location.href = '/models/compare';
   };
 
@@ -131,7 +130,7 @@ const Models = () => {
                     alt={model.name}
                     className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-300"
                     onError={(e) => {
-                      console.error(`[Models] Image failed to load:`, model.image);
+                      // Image failed to load
                       e.currentTarget.src = '/placeholder.svg';
                     }}
                   />
@@ -170,7 +169,7 @@ const Models = () => {
                 variant="outline" 
                 className="bg-transparent border-white text-white hover:bg-blue-500/50 hover:text-white"
                 onClick={() => {
-                  console.log('Compare models button clicked');
+                  // Compare models button clicked
                 }}
               >
                 Compare All Models <ArrowRight className="w-4 h-4 ml-2" />

@@ -32,13 +32,11 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         .rpc('is_admin', { _user_id: userId });
       
       if (error) {
-        console.error('Error checking admin status:', error);
         return false;
       }
       
       return data || false;
     } catch (error) {
-      console.error('Error checking admin status:', error);
       return false;
     }
   };
@@ -90,7 +88,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       setIsAdmin(false);
       window.location.href = '/auth';
     } catch (error) {
-      console.error('Error signing out:', error);
+      // Error signing out - redirect anyway for security
     }
   };
 

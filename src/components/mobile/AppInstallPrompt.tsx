@@ -42,7 +42,7 @@ const AppInstallPrompt = ({ className = "" }: AppInstallPromptProps) => {
       setIsInstalled(true);
       setShowPrompt(false);
       setDeferredPrompt(null);
-      console.log('PWA was installed');
+      // PWA was installed
     };
 
     window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
@@ -61,7 +61,7 @@ const AppInstallPrompt = ({ className = "" }: AppInstallPromptProps) => {
       await deferredPrompt.prompt();
       const { outcome } = await deferredPrompt.userChoice;
       
-      console.log(`User ${outcome} the install prompt`);
+      // User responded to install prompt
       
       if (outcome === 'accepted') {
         setIsInstalled(true);
@@ -70,7 +70,7 @@ const AppInstallPrompt = ({ className = "" }: AppInstallPromptProps) => {
       setDeferredPrompt(null);
       setShowPrompt(false);
     } catch (error) {
-      console.error('Error during install prompt:', error);
+      // Error during install prompt
     }
   };
 

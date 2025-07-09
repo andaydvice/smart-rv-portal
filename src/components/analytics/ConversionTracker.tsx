@@ -41,7 +41,7 @@ const ConversionTracker = ({ pageName, affiliatePartners = [] }: ConversionTrack
         isAffiliate: target.closest('a[href*="amazon.com"], a[href*="renogy.com"]') !== null
       };
 
-      console.log('Click Tracked:', clickData);
+      // Track click data
       
       // Store click data
       const clicks = JSON.parse(localStorage.getItem('click_tracking') || '[]');
@@ -62,12 +62,7 @@ const ConversionTracker = ({ pageName, affiliatePartners = [] }: ConversionTrack
         if ([25, 50, 75, 90, 100].includes(scrollPercent)) {
           scrollDepths.current.push(scrollPercent);
           
-          console.log('Scroll Depth Milestone:', {
-            page: pageName,
-            depth: scrollPercent,
-            timestamp: new Date().toISOString(),
-            timeOnPage: performance.now()
-          });
+          // Track scroll milestone
         }
       }
     };
@@ -85,7 +80,7 @@ const ConversionTracker = ({ pageName, affiliatePartners = [] }: ConversionTrack
         referrer: document.referrer
       };
 
-      console.log('Affiliate Click Tracked:', affiliateData);
+      // Track affiliate click
       
       // Store affiliate click data
       const affiliateClicks = JSON.parse(localStorage.getItem('affiliate_tracking') || '[]');
