@@ -8,7 +8,6 @@ import FeaturedCategories from "@/components/blog/FeaturedCategories";
 import NewsletterSection from "@/components/blog/NewsletterSection";
 import Layout from "@/components/layout/Layout";
 import { Container } from "@/components/ui/container";
-import InvisibleSEO from "@/components/seo/InvisibleSEO";
 
 const Blog = () => {
   const [activeCategory, setActiveCategory] = useState<'all' | 'tech' | 'travel'>('all');
@@ -29,13 +28,6 @@ const Blog = () => {
         <title>Smart RV Blog - Latest RV Tech & Travel Tips</title>
         <meta name="description" content="Discover the latest in RV technology, travel tips, and smart living solutions for modern RV enthusiasts." />
       </Helmet>
-      
-      <InvisibleSEO 
-        pageType="blog"
-        pageTitle="Smart RV Blog"
-        pageContent="Discover the latest in RV technology, travel tips, and smart living solutions for modern RV enthusiasts. Get expert insights on RV tech, solar power, emergency preparedness, and travel destinations."
-        category="blog"
-      />
       
       <div className="w-full py-8">
         <Container>

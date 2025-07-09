@@ -5,7 +5,6 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, Battery, Navigation, Shield, Wifi } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
 import Footer2 from "@/components/ui/Footer2";
-import InvisibleSEO from "@/components/seo/InvisibleSEO";
 
 // Model data
 const models = [
@@ -91,12 +90,6 @@ const Models = () => {
 
   return (
     <Layout>
-      <InvisibleSEO 
-        pageType="category"
-        pageTitle="Smart RV Models"
-        pageContent="Explore our luxury smart RV models including Luxury Class, Adventure Class, and Compact Smart RVs with advanced navigation, security, power management, and connectivity features."
-        category="models"
-      />
       <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

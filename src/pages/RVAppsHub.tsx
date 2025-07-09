@@ -6,20 +6,6 @@ import AffiliateProductCard from '@/components/affiliate/AffiliateProductCard';
 import AffiliateComparisonTable from '@/components/affiliate/AffiliateComparisonTable';
 import AffiliateCTABanner from '@/components/affiliate/AffiliateCTABanner';
 import AffiliateDisclosure from '@/components/affiliate/AffiliateDisclosure';
-import CustomerReviewsSection from '@/components/affiliate/CustomerReviewsSection';
-import { 
-  MobileProductCarousel, 
-  MobileScrollHint, 
-  MobileAnalytics, 
-  PullToRefresh, 
-  FloatingActionButtons, 
-  AppInstallPrompt,
-  ABTestingProductCard,
-  SmartNotificationCenter,
-  MobileConversionOptimizer
-} from '@/components/mobile';
-import PerformanceMonitor from '@/components/performance/PerformanceMonitor';
-import OptimizedImage from '@/components/performance/OptimizedImage';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Smartphone, Wifi, MapPin, Battery, Settings, Shield } from 'lucide-react';
 
@@ -187,13 +173,6 @@ const RVAppsHub = () => {
     ]
   };
 
-  const refreshDeals = async () => {
-    // Simulate API call to refresh affiliate deals
-    console.log('Refreshing RV app deals...');
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    console.log('Deals refreshed!');
-  };
-
   return (
     <Layout>
       <Helmet>
@@ -201,8 +180,7 @@ const RVAppsHub = () => {
         <meta name="description" content="Discover the best mobile apps and digital tools for RV travel. GPS navigation, campsite finders, power monitoring, and connectivity solutions." />
       </Helmet>
 
-      <PullToRefresh onRefresh={refreshDeals}>
-        <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 text-white">
+      <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 text-white">
         <Container className="py-8">
           {/* Hero Section */}
           <div className="text-center mb-12">
@@ -232,46 +210,20 @@ const RVAppsHub = () => {
             ))}
           </div>
 
-          {/* Smart Notifications */}
-          <div className="mb-8">
-            <SmartNotificationCenter />
-          </div>
-
-          {/* Featured Apps - Mobile Optimized with A/B Testing */}
-          <Card className="bg-[#0a0a0a] border-gray-800 mb-12" id="featured-apps">
+          {/* Featured Apps */}
+          <Card className="bg-[#0a0a0a] border-gray-800 mb-12">
             <CardHeader>
               <CardTitle className="text-2xl text-[#5B9BD5] text-center">⭐ Must-Have RV Apps</CardTitle>
             </CardHeader>
             <CardContent>
-              {/* Desktop Grid with A/B Testing */}
-              <div className="hidden lg:grid grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                 {featuredApps.map((app, index) => (
-                  <ABTestingProductCard
+                  <AffiliateProductCard
                     key={index}
                     {...app}
-                    affiliatePartner="rvlife"
-                    productCategory="rv-apps"
                     className="h-full"
                   />
                 ))}
-              </div>
-              
-              {/* Mobile Conversion Optimizer */}
-              <div className="lg:hidden">
-                <MobileConversionOptimizer
-                  products={featuredApps}
-                  onProductClick={(product) => window.open(product.affiliateLink, '_blank')}
-                  onWishlistAdd={(product) => console.log('Added to wishlist:', product.title)}
-                  onShare={(product) => {
-                    if (navigator.share) {
-                      navigator.share({
-                        title: product.title,
-                        text: product.description,
-                        url: product.affiliateLink
-                      });
-                    }
-                  }}
-                />
               </div>
             </CardContent>
           </Card>
@@ -282,19 +234,18 @@ const RVAppsHub = () => {
             className="mb-12"
           />
 
-          {/* Hardware Recommendations - Mobile Optimized */}
-          <Card className="bg-[#091020] border-gray-700 mb-12" id="hardware">
+          {/* Hardware Recommendations */}
+          <Card className="bg-[#091020] border-gray-700 mb-12">
             <CardHeader>
               <CardTitle className="text-2xl text-[#5B9BD5]">📱 Mobile Hardware for RVers</CardTitle>
             </CardHeader>
             <CardContent>
-              {/* Desktop Grid */}
-              <div className="hidden lg:grid grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 <AffiliateProductCard
                   title="WeBoost Drive Reach RV Cell Signal Booster"
                   description="Boost your cell signal by up to 32x for better app performance and connectivity."
-                  price="$499.99"
-                  originalPrice="$599.99"
+                  price: "$499.99"
+                  originalPrice: "$599.99"
                   rating={4.6}
                   reviewCount={1834}
                   image="/lovable-uploads/9b681f27-359c-4d90-8629-5b2b198abf0f.png"
@@ -311,8 +262,8 @@ const RVAppsHub = () => {
                 <AffiliateProductCard
                   title="Samsung Galaxy Tab Active4 Pro Rugged Tablet"
                   description="Rugged tablet perfect for RV navigation and entertainment in any weather."
-                  price="$649.99"
-                  originalPrice="$799.99"
+                  price: "$649.99"
+                  originalPrice: "$799.99"
                   rating={4.4}
                   reviewCount={567}
                   image="/lovable-uploads/ee026535-e835-46ae-b779-be457eb8ff04.png"
@@ -326,57 +277,8 @@ const RVAppsHub = () => {
                   badges={["Rugged", "RV Ready"]}
                 />
               </div>
-              
-              {/* Mobile Carousel */}
-              <div className="lg:hidden">
-                <MobileProductCarousel 
-                  products={[
-                    {
-                      title: "WeBoost Drive Reach RV Cell Signal Booster",
-                      description: "Boost your cell signal by up to 32x for better app performance and connectivity.",
-                      price: "$499.99",
-                      originalPrice: "$599.99",
-                      rating: 4.6,
-                      reviewCount: 1834,
-                      image: "/lovable-uploads/9b681f27-359c-4d90-8629-5b2b198abf0f.png",
-                      features: [
-                        "Works with all carriers",
-                        "Covers up to 5,000 sq ft",
-                        "Easy RV installation",
-                        "FCC approved"
-                      ],
-                      affiliateLink: "https://weboost.com/drive-reach-rv",
-                      badges: ["Signal Solution"]
-                    },
-                    {
-                      title: "Samsung Galaxy Tab Active4 Pro Rugged Tablet",
-                      description: "Rugged tablet perfect for RV navigation and entertainment in any weather.",
-                      price: "$649.99",
-                      originalPrice: "$799.99",
-                      rating: 4.4,
-                      reviewCount: 567,
-                      image: "/lovable-uploads/ee026535-e835-46ae-b779-be457eb8ff04.png",
-                      features: [
-                        "MIL-STD-810H certified",
-                        "IP68 water/dust resistant",
-                        "Replaceable battery",
-                        "S Pen included"
-                      ],
-                      affiliateLink: "https://samsung.com/tab-active4-pro",
-                      badges: ["Rugged", "RV Ready"]
-                    }
-                  ]}
-                />
-              </div>
             </CardContent>
           </Card>
-
-          {/* Customer Reviews Section */}
-          <CustomerReviewsSection
-            productCategory="rv-apps"
-            affiliatePartner="rvlife"
-            className="mb-12"
-          />
 
           {/* CTA Banner */}
           <AffiliateCTABanner
@@ -387,34 +289,10 @@ const RVAppsHub = () => {
             className="mb-8"
           />
 
-          {/* Performance Monitoring */}
-          <PerformanceMonitor 
-            pageName="RVAppsHub"
-            enableCoreWebVitals={true}
-            enableResourceTiming={true}
-            enableNavigationTiming={true}
-          />
-
-          {/* Mobile Scroll Hint */}
-          <MobileScrollHint targetSection="featured-apps" text="Explore must-have apps" />
-          
-          {/* App Install Prompt */}
-          <AppInstallPrompt />
-          
-          {/* Floating Action Buttons */}
-          <FloatingActionButtons />
-          
-          {/* Mobile Analytics Tracking */}
-          <MobileAnalytics 
-            pageName="RVAppsHub" 
-            affiliatePartners={["RV LIFE", "Campendium", "Victron", "WeBoost", "Samsung"]}
-          />
-
           {/* Affiliate Disclosure */}
           <AffiliateDisclosure />
         </Container>
       </div>
-      </PullToRefresh>
     </Layout>
   );
 };

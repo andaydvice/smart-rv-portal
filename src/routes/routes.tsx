@@ -7,17 +7,6 @@ import Index from "../pages/Index";
 import ErrorPage from "../pages/ErrorPage";
 import SearchResults from "../pages/SearchResults";
 
-// Import admin pages
-import SEODashboard from "../pages/admin/SEODashboard";
-import ContentAnalytics from "../pages/admin/ContentAnalytics";
-import MobileAnalyticsDashboard from "../pages/admin/MobileAnalyticsDashboard";
-import VoiceCommercePage from "../pages/VoiceCommerce";
-
-// Import affiliate pages
-import RVAppsHub from "../pages/RVAppsHub";
-import RVEmergencyCenter from "../pages/RVEmergencyCenter";
-import SolarPowerGuide from "../pages/SolarPowerGuide";
-
 // Import route groups
 import featureRoutes from "./featureRoutes";
 import modelRoutes from "./modelRoutes";
@@ -34,43 +23,6 @@ export const routes: RouteObject[] = [
   {
     path: "/search",
     element: <SearchResults />,
-    errorElement: <ErrorPage />,
-  },
-  // Affiliate revenue pages
-  {
-    path: "/rv-apps-hub",
-    element: <RVAppsHub />,
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: "/rv-emergency-center", 
-    element: <RVEmergencyCenter />,
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: "/solar-power-guide",
-    element: <SolarPowerGuide />,
-    errorElement: <ErrorPage />,
-  },
-  // Admin routes
-  {
-    path: "/admin/seo",
-    element: <SEODashboard />,
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: "/admin/analytics",
-    element: <ContentAnalytics />,
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: "/admin/mobile-analytics",
-    element: <MobileAnalyticsDashboard />,
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: "/voice-commerce",
-    element: <VoiceCommercePage />,
     errorElement: <ErrorPage />,
   },
   ...modelRoutes,

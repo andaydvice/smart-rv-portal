@@ -14,32 +14,6 @@ import './styles/map-fixes.css'
 import './styles/map/index.css' // Updated path to use the index file that imports all map styles
 import { setupLazyLoading, deferOperation, preloadCriticalImages } from './utils/performance.ts'
 
-// Register service worker for PWA features
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', async () => {
-    try {
-      const registration = await navigator.serviceWorker.register('/sw.js');
-      console.log('Service Worker registered successfully:', registration);
-      
-      // Check for updates
-      registration.addEventListener('updatefound', () => {
-        const newWorker = registration.installing;
-        if (newWorker) {
-          newWorker.addEventListener('statechange', () => {
-            if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-              console.log('New content available! Page will refresh...');
-              // Auto-refresh for better UX
-              setTimeout(() => window.location.reload(), 1000);
-            }
-          });
-        }
-      });
-    } catch (error) {
-      console.error('Service Worker registration failed:', error);
-    }
-  });
-}
-
 // Critical images to preload at application start
 const CRITICAL_APPLICATION_IMAGES = [
   '/lovable-uploads/f72886c3-3677-4dfe-8d56-5a784197eda2.png', // Documentation header

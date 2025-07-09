@@ -5,7 +5,6 @@ import { Container } from '@/components/ui/container';
 import AffiliateProductCard from '@/components/affiliate/AffiliateProductCard';
 import AffiliateCTABanner from '@/components/affiliate/AffiliateCTABanner';
 import AffiliateDisclosure from '@/components/affiliate/AffiliateDisclosure';
-import { MobileProductCarousel, MobileScrollHint, MobileAnalytics } from '@/components/mobile';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { 
@@ -255,14 +254,13 @@ const RVEmergencyCenter = () => {
             ))}
           </div>
 
-          {/* Emergency Services - Mobile Optimized */}
-          <Card className="bg-[#0a0a0a] border-gray-800 mb-12" id="emergency-services">
+          {/* Emergency Services */}
+          <Card className="bg-[#0a0a0a] border-gray-800 mb-12">
             <CardHeader>
               <CardTitle className="text-2xl text-red-400 text-center">🚗 Professional Emergency Services</CardTitle>
             </CardHeader>
             <CardContent>
-              {/* Desktop Grid */}
-              <div className="hidden lg:grid grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                 {emergencyServices.map((service, index) => (
                   <AffiliateProductCard
                     key={index}
@@ -270,14 +268,6 @@ const RVEmergencyCenter = () => {
                     className="h-full"
                   />
                 ))}
-              </div>
-              
-              {/* Mobile Carousel */}
-              <div className="lg:hidden">
-                <MobileProductCarousel 
-                  products={emergencyServices}
-                  className="mb-4"
-                />
               </div>
             </CardContent>
           </Card>
@@ -350,15 +340,6 @@ const RVEmergencyCenter = () => {
             affiliateLink="https://amazon.com/rv-emergency-supplies"
             backgroundColor="bg-gradient-to-r from-red-600 to-orange-600"
             className="mb-8"
-          />
-
-          {/* Mobile Scroll Hint */}
-          <MobileScrollHint targetSection="emergency-services" text="Explore emergency services" />
-          
-          {/* Mobile Analytics Tracking */}
-          <MobileAnalytics 
-            pageName="RVEmergencyCenter" 
-            affiliatePartners={["Good Sam", "FMCA", "Coach-Net", "First Aid Only", "Kidde", "Red Cross"]}
           />
 
           {/* Affiliate Disclosure */}

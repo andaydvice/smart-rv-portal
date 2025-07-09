@@ -2,7 +2,6 @@ import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Star, ExternalLink } from 'lucide-react';
-import AffiliateTracker from '@/components/analytics/AffiliateTracker';
 
 interface AffiliateProductCardProps {
   title: string;
@@ -16,8 +15,6 @@ interface AffiliateProductCardProps {
   affiliateLink: string;
   badges?: string[];
   className?: string;
-  affiliatePartner?: string;
-  productCategory?: string;
 }
 
 const AffiliateProductCard = ({
@@ -31,9 +28,7 @@ const AffiliateProductCard = ({
   features,
   affiliateLink,
   badges = [],
-  className = "",
-  affiliatePartner = "general",
-  productCategory = "general"
+  className = ""
 }: AffiliateProductCardProps) => {
   return (
     <Card className={`bg-[#091020] border-gray-700 text-white hover:border-[#5B9BD5]/50 transition-all duration-300 ${className}`}>
@@ -92,31 +87,20 @@ const AffiliateProductCard = ({
               )}
             </div>
             
-            <AffiliateTracker 
-              contentId={title.toLowerCase().replace(/\s+/g, '-')}
-              affiliatePartner={affiliatePartner}
+            <Button 
+              asChild
+              className="bg-[#5B9BD5] hover:bg-[#4B8FE3] text-white px-4 py-2 rounded-lg transition-colors min-h-[44px] touch-manipulation"
             >
-              <Button 
-                asChild
-                className="bg-[#5B9BD5] hover:bg-[#4B8FE3] text-white px-4 py-2 rounded-lg transition-all duration-200 min-h-[44px] touch-manipulation active:scale-95 hover:shadow-lg"
+              <a 
+                href={affiliateLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2"
               >
-                <a 
-                  href={affiliateLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2"
-                  onClick={() => {
-                    // Add haptic feedback for mobile
-                    if (navigator.vibrate) {
-                      navigator.vibrate(50);
-                    }
-                  }}
-                >
-                  View Deal
-                  <ExternalLink className="h-4 w-4" />
-                </a>
-              </Button>
-            </AffiliateTracker>
+                View Deal
+                <ExternalLink className="h-4 w-4" />
+              </a>
+            </Button>
           </div>
           
           <p className="text-xs text-gray-500 text-center">
