@@ -22,7 +22,7 @@ interface RevenueMetrics {
   customerLifetimeValue: number;
   conversionOptimization: number;
   marketPenetration: number;
-  seasonalTrends: any[];
+  seasonalTrends: Record<string, any>[];
 }
 
 interface MLModel {

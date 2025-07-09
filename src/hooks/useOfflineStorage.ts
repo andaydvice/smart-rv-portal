@@ -25,7 +25,7 @@ export const useOfflineStorage = () => {
     updateStorageInfo();
   };
 
-  const saveChecklistProgress = async (id: string, name: string, items: any[], progress: number) => {
+  const saveChecklistProgress = async (id: string, name: string, items: Record<string, any>[], progress: number) => {
     await offlineStorage.saveChecklistProgress(id, name, items, progress);
     updateStorageInfo();
   };
@@ -36,7 +36,7 @@ export const useOfflineStorage = () => {
     return id;
   };
 
-  const saveSearch = async (query: string, filters: any, results: any[]) => {
+  const saveSearch = async (query: string, filters: any, results: Record<string, any>[]) => {
     const id = await offlineStorage.saveSearch(query, filters, results);
     updateStorageInfo();
     return id;

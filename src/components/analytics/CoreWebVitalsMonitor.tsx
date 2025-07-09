@@ -41,9 +41,6 @@ const CoreWebVitalsMonitor = ({ pageName, enableDebugMode = false }: CoreWebVita
           if (lastEntry) {
             vitalsData.current.lcp = Math.round(lastEntry.startTime);
             
-            if (enableDebugMode) {
-              console.log('LCP:', vitalsData.current.lcp, 'ms');
-            }
             
             // Store and report if LCP is final
             if (lastEntry.startTime) {
@@ -69,9 +66,6 @@ const CoreWebVitalsMonitor = ({ pageName, enableDebugMode = false }: CoreWebVita
             if (entry.processingStart && entry.startTime) {
               vitalsData.current.fid = Math.round(entry.processingStart - entry.startTime);
               
-              if (enableDebugMode) {
-                console.log('FID:', vitalsData.current.fid, 'ms');
-              }
               
               reportVitals('fid', vitalsData.current.fid);
             }
@@ -101,9 +95,6 @@ const CoreWebVitalsMonitor = ({ pageName, enableDebugMode = false }: CoreWebVita
           
           vitalsData.current.cls = Math.round(clsValue * 1000) / 1000;
           
-          if (enableDebugMode) {
-            console.log('CLS:', vitalsData.current.cls);
-          }
         });
         
         try {
@@ -124,9 +115,6 @@ const CoreWebVitalsMonitor = ({ pageName, enableDebugMode = false }: CoreWebVita
             if (entry.name === 'first-contentful-paint') {
               vitalsData.current.fcp = Math.round(entry.startTime);
               
-              if (enableDebugMode) {
-                console.log('FCP:', vitalsData.current.fcp, 'ms');
-              }
               
               reportVitals('fcp', vitalsData.current.fcp);
             }
@@ -148,9 +136,6 @@ const CoreWebVitalsMonitor = ({ pageName, enableDebugMode = false }: CoreWebVita
         if (navigation) {
           vitalsData.current.ttfb = Math.round(navigation.responseStart - navigation.requestStart);
           
-          if (enableDebugMode) {
-            console.log('TTFB:', vitalsData.current.ttfb, 'ms');
-          }
           
           reportVitals('ttfb', vitalsData.current.ttfb);
         }
@@ -171,9 +156,6 @@ const CoreWebVitalsMonitor = ({ pageName, enableDebugMode = false }: CoreWebVita
                 maxDelay = delay;
                 vitalsData.current.inp = Math.round(delay);
                 
-                if (enableDebugMode) {
-                  console.log('INP:', vitalsData.current.inp, 'ms');
-                }
                 
                 reportVitals('inp', vitalsData.current.inp);
               }
@@ -228,7 +210,7 @@ const CoreWebVitalsMonitor = ({ pageName, enableDebugMode = false }: CoreWebVita
         allMetrics: vitalsData.current
       };
 
-      console.log('Core Web Vital:', report);
+      
       
       // Store in localStorage for analysis
       const vitals = JSON.parse(localStorage.getItem('core_web_vitals') || '[]');
@@ -272,7 +254,7 @@ const CoreWebVitalsMonitor = ({ pageName, enableDebugMode = false }: CoreWebVita
         loadTime: performance.now()
       };
       
-      console.log('Final Core Web Vitals Report:', finalReport);
+      
       
       const reports = JSON.parse(localStorage.getItem('vitals_reports') || '[]');
       reports.push(finalReport);

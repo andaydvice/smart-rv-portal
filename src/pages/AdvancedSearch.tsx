@@ -45,7 +45,7 @@ export const AdvancedSearchHub: React.FC<AdvancedSearchHubProps> = ({
     });
   };
 
-  const handleSearchResults = (results: any[]) => {
+  const handleSearchResults = (results: Record<string, any>[]) => {
     setSearchResults(results);
     setActiveTab('results');
   };

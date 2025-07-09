@@ -13,7 +13,7 @@ const ChecklistTabNavigation: React.FC<ChecklistTabNavigationProps> = ({ onTabCl
       <TabsList className="storage-preparation-checklist mb-6 grid grid-cols-5 md:grid-cols-10 min-w-[600px] gap-1">
         <ChecklistTabTrigger 
           value="rv-info" 
-          icon="Clipboard"
+          icon="Info"
           label="RV Info"
           onTabClick={onTabClick}
         />
@@ -25,13 +25,13 @@ const ChecklistTabNavigation: React.FC<ChecklistTabNavigationProps> = ({ onTabCl
         />
         <ChecklistTabTrigger 
           value="exterior" 
-          icon="Warehouse"
+          icon="ExternalLink"
           label="Exterior"
           onTabClick={onTabClick}
         />
         <ChecklistTabTrigger 
           value="mechanical" 
-          icon="Wrench"
+          icon="Settings"
           label="Mechanical"
           onTabClick={onTabClick}
         />
@@ -49,7 +49,7 @@ const ChecklistTabNavigation: React.FC<ChecklistTabNavigationProps> = ({ onTabCl
         />
         <ChecklistTabTrigger 
           value="tires" 
-          icon="Disc"
+          icon="CircleDashed"
           label="Tires"
           onTabClick={onTabClick}
         />
@@ -61,7 +61,7 @@ const ChecklistTabNavigation: React.FC<ChecklistTabNavigationProps> = ({ onTabCl
         />
         <ChecklistTabTrigger 
           value="security" 
-          icon="ShieldCheck"
+          icon="Lock"
           label="Security"
           onTabClick={onTabClick}
         />

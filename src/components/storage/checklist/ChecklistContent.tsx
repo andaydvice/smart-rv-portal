@@ -42,8 +42,6 @@ const ChecklistContent: React.FC<ChecklistContentProps> = ({
   
   // Force save whenever tab changes
   const handleTabValueChange = (newValue: string) => {
-    console.log(`Tab changed to ${newValue} - triggering save`);
-    
     // First save the current tab's data
     if (onTabChange) {
       onTabChange();
@@ -56,13 +54,11 @@ const ChecklistContent: React.FC<ChecklistContentProps> = ({
   // On component mount/unmount, force a save
   useEffect(() => {
     if (onTabChange) {
-      console.log("ChecklistContent mounted - initial save");
       onTabChange();
     }
     
     return () => {
       if (onTabChange) {
-        console.log("ChecklistContent unmounting - final save");
         onTabChange();
       }
     };

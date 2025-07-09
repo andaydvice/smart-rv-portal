@@ -1,10 +1,19 @@
 
 import React from 'react';
 import { TabsTrigger } from "@/components/ui/tabs";
-import * as LucideIcons from "lucide-react";
+import { 
+  Info, ExternalLink, Home, Droplets, Zap, Settings, CircleDashed, 
+  Bug, Lock, FileText, Clipboard, Warehouse, Wrench, Disc, ShieldCheck
+} from "lucide-react";
 
-// Define a type for icon names from lucide-react
-type IconName = keyof typeof LucideIcons;
+type IconName = 'Info' | 'ExternalLink' | 'Home' | 'Droplets' | 'Zap' | 'Settings' | 
+               'CircleDashed' | 'Bug' | 'Lock' | 'FileText' | 'Clipboard' | 'Warehouse' | 
+               'Wrench' | 'Disc' | 'ShieldCheck';
+
+const iconMap = {
+  Info, ExternalLink, Home, Droplets, Zap, Settings, CircleDashed,
+  Bug, Lock, FileText, Clipboard, Warehouse, Wrench, Disc, ShieldCheck
+};
 
 interface ChecklistTabTriggerProps {
   value: string;
@@ -61,19 +70,13 @@ const ChecklistTabTrigger: React.FC<ChecklistTabTriggerProps> = ({
 
   // Add a click handler to ensure focus is properly managed
   const handleTabClick = () => {
-    console.log(`Tab ${label} clicked - triggering save`);
     if (onTabClick) {
       onTabClick(); // Call the parent's onTabClick handler to trigger saves
     }
   };
   
-  // Use type assertion to get the icon component
-  const IconComponent = LucideIcons[icon] as React.ElementType;
-  
-  if (!IconComponent) {
-    console.error(`Icon ${icon} not found in lucide-react`);
-    return null;
-  }
+  // Get the icon component from the map
+  const IconComponent = iconMap[icon];
   
   return (
     <TabsTrigger 

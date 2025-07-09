@@ -19,9 +19,9 @@ interface UserProfile {
   behavior: {
     pageViews: string[];
     searchHistory: string[];
-    purchases: any[];
+    purchases: Record<string, any>[];
     timeSpent: { [page: string]: number };
-    clicks: any[];
+    clicks: Record<string, any>[];
   };
   demographics: {
     age?: number;

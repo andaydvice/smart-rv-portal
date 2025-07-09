@@ -11,7 +11,7 @@ interface Window {
   }>;
   viewFacility?: (id: string) => void;
   highlightedFacilityId?: string | null;
-  mapFacilities?: any[];
+  mapFacilities?: Record<string, any>[];
   mapInstance?: mapboxgl.Map;
   isStorageFacilitiesPage?: boolean;
 }

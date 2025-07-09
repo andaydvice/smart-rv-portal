@@ -25,7 +25,7 @@ interface SearchFilters {
 }
 
 interface FacetedSearchProps {
-  onResults?: (results: any[]) => void;
+  onResults?: (results: Record<string, any>[]) => void;
   className?: string;
 }
 

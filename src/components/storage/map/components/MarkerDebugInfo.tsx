@@ -5,7 +5,7 @@ import MarkerErrorDisplay from './MarkerErrorDisplay';
 import MarkerDebugOverlay from './MarkerDebugOverlay';
 
 interface MarkerDebugInfoProps {
-  facilities: any[];
+  facilities: Record<string, any>[];
   stats: {
     markersCreated: number;
     skippedFacilities: number;

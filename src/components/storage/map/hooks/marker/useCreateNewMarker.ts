@@ -41,7 +41,7 @@ export const useCreateNewMarker = () => {
     map: mapboxgl.Map,
     isHighlighted: boolean,
     onMarkerClick: (facilityId: string) => void,
-    facilities: any[],
+    facilities: Record<string, any>[],
     index: number
   ): mapboxgl.Marker | null => {
     try {

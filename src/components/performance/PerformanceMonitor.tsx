@@ -20,11 +20,6 @@ const PerformanceMonitor = () => {
           const entries = list.getEntries();
           const lastEntry = entries[entries.length - 1];
           metrics.lcp = lastEntry.startTime;
-          console.log('LCP:', metrics.lcp);
-          
-          if (metrics.lcp > 2500) {
-            console.warn('LCP is above threshold (2.5s):', metrics.lcp);
-          }
         });
         observer.observe({ entryTypes: ['largest-contentful-paint'] });
       }
@@ -38,11 +33,6 @@ const PerformanceMonitor = () => {
           entries.forEach((entry: any) => {
             if (entry.name === 'first-input-delay') {
               metrics.fid = entry.duration;
-              console.log('FID:', metrics.fid);
-              
-              if (metrics.fid > 100) {
-                console.warn('FID is above threshold (100ms):', metrics.fid);
-              }
             }
           });
         });
@@ -62,11 +52,6 @@ const PerformanceMonitor = () => {
             }
           });
           metrics.cls = clsValue;
-          console.log('CLS:', metrics.cls);
-          
-          if (metrics.cls > 0.1) {
-            console.warn('CLS is above threshold (0.1):', metrics.cls);
-          }
         });
         observer.observe({ entryTypes: ['layout-shift'] });
       }
@@ -80,11 +65,6 @@ const PerformanceMonitor = () => {
           entries.forEach((entry) => {
             if (entry.name === 'first-contentful-paint') {
               metrics.fcp = entry.startTime;
-              console.log('FCP:', metrics.fcp);
-              
-              if (metrics.fcp > 1500) {
-                console.warn('FCP is above threshold (1.5s):', metrics.fcp);
-              }
             }
           });
         });
@@ -99,11 +79,6 @@ const PerformanceMonitor = () => {
           const entries = list.getEntries();
           entries.forEach((entry: any) => {
             metrics.ttfb = entry.responseStart - entry.requestStart;
-            console.log('TTFB:', metrics.ttfb);
-            
-            if (metrics.ttfb > 600) {
-              console.warn('TTFB is above threshold (600ms):', metrics.ttfb);
-            }
           });
         });
         observer.observe({ entryTypes: ['navigation'] });
@@ -120,7 +95,7 @@ const PerformanceMonitor = () => {
     // Report metrics after page load
     window.addEventListener('load', () => {
       setTimeout(() => {
-        console.log('Performance Metrics Summary:', metrics);
+        
         
         // Send to analytics if available
         if ((window as any).gtag) {
@@ -133,7 +108,7 @@ const PerformanceMonitor = () => {
 
     // Cleanup on unmount
     return () => {
-      console.log('Performance monitoring stopped');
+      
     };
   }, []);
 
