@@ -32,7 +32,6 @@ export const useChecklistCore = () => {
       const savedData = loadData();
       
       if (savedData) {
-        console.log("Initializing checklist with saved data");
         
         // Handle progress data with type safety
         if (savedData.progress) {
@@ -63,8 +62,6 @@ export const useChecklistCore = () => {
         if (savedData.savedAt) {
           setLastSavedAt(savedData.savedAt);
         }
-      } else {
-        console.log("No saved data found, initializing with defaults");
       }
       
       setIsLoaded(true);
@@ -74,11 +71,8 @@ export const useChecklistCore = () => {
   // Core save function - uses refs for latest values
   const saveDataWrapper = useCallback((manualSave: boolean = false) => {
     if (!isLoadedRef.current) {
-      console.log("Not saving as data is still being loaded");
       return new Date().toISOString();
     }
-    
-    console.log("Saving data with refs, notes state:", notesRef.current);
     
     const currentTime = saveData(
       progressRef.current,

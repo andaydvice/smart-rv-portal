@@ -30,9 +30,9 @@ const PerformanceMonitor = () => {
       if ('PerformanceObserver' in window) {
         const observer = new PerformanceObserver((list) => {
           const entries = list.getEntries();
-          entries.forEach((entry: any) => {
-            if (entry.name === 'first-input-delay') {
-              metrics.fid = entry.duration;
+          entries.forEach((entry) => {
+            if ((entry as any).name === 'first-input-delay') {
+              metrics.fid = (entry as any).duration;
             }
           });
         });
@@ -46,9 +46,9 @@ const PerformanceMonitor = () => {
         let clsValue = 0;
         const observer = new PerformanceObserver((list) => {
           const entries = list.getEntries();
-          entries.forEach((entry: any) => {
-            if (!entry.hadRecentInput) {
-              clsValue += entry.value;
+          entries.forEach((entry) => {
+            if (!(entry as any).hadRecentInput) {
+              clsValue += (entry as any).value;
             }
           });
           metrics.cls = clsValue;
@@ -77,8 +77,8 @@ const PerformanceMonitor = () => {
       if ('PerformanceObserver' in window) {
         const observer = new PerformanceObserver((list) => {
           const entries = list.getEntries();
-          entries.forEach((entry: any) => {
-            metrics.ttfb = entry.responseStart - entry.requestStart;
+          entries.forEach((entry) => {
+            metrics.ttfb = (entry as any).responseStart - (entry as any).requestStart;
           });
         });
         observer.observe({ entryTypes: ['navigation'] });

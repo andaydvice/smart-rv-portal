@@ -5,7 +5,7 @@ interface SyncQueueItem {
   id: string;
   type: 'favorite' | 'search' | 'calculation' | 'checklist';
   action: 'create' | 'update' | 'delete';
-  data: any;
+  data: unknown;
   timestamp: number;
   retries: number;
 }
@@ -29,14 +29,12 @@ class BackgroundSyncService {
   private setupEventListeners() {
     // Online/offline event listeners
     window.addEventListener('online', () => {
-      console.log('Device went online, starting sync...');
       this.isOnline = true;
       this.processQueue();
       this.startPeriodicSync();
     });
 
     window.addEventListener('offline', () => {
-      console.log('Device went offline');
       this.isOnline = false;
       this.stopPeriodicSync();
     });
@@ -64,7 +62,7 @@ class BackgroundSyncService {
   }
 
   // Add item to sync queue
-  addToQueue(type: SyncQueueItem['type'], action: SyncQueueItem['action'], data: any): string {
+  addToQueue(type: SyncQueueItem['type'], action: SyncQueueItem['action'], data: unknown): string {
     const id = `sync_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
     
     const item: SyncQueueItem = {
@@ -94,22 +92,16 @@ class BackgroundSyncService {
     }
 
     this.syncInProgress = true;
-    console.log(`Processing sync queue with ${this.syncQueue.length} items`);
 
     const failedItems: SyncQueueItem[] = [];
 
     for (const item of this.syncQueue) {
       try {
         await this.syncItem(item);
-        console.log(`Successfully synced item ${item.id}`);
       } catch (error) {
-        console.error(`Failed to sync item ${item.id}:`, error);
-        
         item.retries++;
         if (item.retries < this.maxRetries) {
           failedItems.push(item);
-        } else {
-          console.error(`Max retries exceeded for item ${item.id}, dropping from queue`);
         }
       }
     }
@@ -118,8 +110,6 @@ class BackgroundSyncService {
     this.syncQueue = failedItems;
     this.saveSyncQueue();
     this.syncInProgress = false;
-
-    console.log(`Sync completed. ${failedItems.length} items remain in queue`);
   }
 
   private async syncItem(item: SyncQueueItem): Promise<void> {
@@ -143,28 +133,29 @@ class BackgroundSyncService {
 
   private async syncFavorite(item: SyncQueueItem): Promise<void> {
     const { action, data } = item;
+    const favoriteData = data as any;
 
     switch (action) {
       case 'create':
         // For now, store in localStorage until database tables are created
         const favorites = JSON.parse(localStorage.getItem('synced-favorites') || '[]');
         favorites.push({
-          userId: data.userId,
-          itemType: data.type,
-          itemId: data.itemId,
-          itemData: data.data,
+          userId: favoriteData.userId,
+          itemType: favoriteData.type,
+          itemId: favoriteData.itemId,
+          itemData: favoriteData.data,
           syncedAt: Date.now()
         });
         localStorage.setItem('synced-favorites', JSON.stringify(favorites));
         
         // Mark as synced in offline storage
-        await offlineStorage.markAsSynced('favorites', data.offlineId);
+        await offlineStorage.markAsSynced('favorites', favoriteData.offlineId);
         break;
 
       case 'delete':
         const existingFavorites = JSON.parse(localStorage.getItem('synced-favorites') || '[]');
         const filtered = existingFavorites.filter((fav: any) => 
-          !(fav.userId === data.userId && fav.itemId === data.itemId)
+          !(fav.userId === favoriteData.userId && fav.itemId === favoriteData.itemId)
         );
         localStorage.setItem('synced-favorites', JSON.stringify(filtered));
         break;
@@ -173,46 +164,49 @@ class BackgroundSyncService {
 
   private async syncSearch(item: SyncQueueItem): Promise<void> {
     const { action, data } = item;
+    const searchData = data as any;
 
     if (action === 'create') {
       const { error } = await supabase
         .from('saved_searches')
         .insert({
-          user_id: data.userId,
-          query: data.query,
-          filters: data.filters,
+          user_id: searchData.userId,
+          query: searchData.query,
+          filters: searchData.filters,
           category: 'general',
         });
       
       if (error) throw error;
       
       // Mark as synced in offline storage
-      await offlineStorage.markAsSynced('searches', data.offlineId);
+      await offlineStorage.markAsSynced('searches', searchData.offlineId);
     }
   }
 
   private async syncCalculation(item: SyncQueueItem): Promise<void> {
     const { action, data } = item;
+    const calcData = data as any;
 
     if (action === 'create') {
       // For now, store in localStorage until database tables are created
       const calculations = JSON.parse(localStorage.getItem('synced-calculations') || '[]');
       calculations.push({
-        userId: data.userId,
-        calculatorType: data.type,
-        inputs: data.inputs,
-        results: data.results,
+        userId: calcData.userId,
+        calculatorType: calcData.type,
+        inputs: calcData.inputs,
+        results: calcData.results,
         syncedAt: Date.now()
       });
       localStorage.setItem('synced-calculations', JSON.stringify(calculations));
       
       // Mark as synced in offline storage
-      await offlineStorage.markAsSynced('calculations', data.offlineId);
+      await offlineStorage.markAsSynced('calculations', calcData.offlineId);
     }
   }
 
   private async syncChecklist(item: SyncQueueItem): Promise<void> {
     const { action, data } = item;
+    const checklistInput = data as any;
 
     switch (action) {
       case 'create':
@@ -220,16 +214,16 @@ class BackgroundSyncService {
         // For now, store in localStorage until database tables are created
         const checklists = JSON.parse(localStorage.getItem('synced-checklists') || '[]');
         const existingIndex = checklists.findIndex((cl: any) => 
-          cl.userId === data.userId && cl.checklistId === data.checklistId
+          cl.userId === checklistInput.userId && cl.checklistId === checklistInput.checklistId
         );
         
         const checklistData = {
-          userId: data.userId,
-          checklistId: data.checklistId,
-          checklistName: data.name,
-          items: data.items,
-          progress: data.progress,
-          lastModified: data.lastModified,
+          userId: checklistInput.userId,
+          checklistId: checklistInput.checklistId,
+          checklistName: checklistInput.name,
+          items: checklistInput.items,
+          progress: checklistInput.progress,
+          lastModified: checklistInput.lastModified,
           syncedAt: Date.now()
         };
         
@@ -242,7 +236,7 @@ class BackgroundSyncService {
         localStorage.setItem('synced-checklists', JSON.stringify(checklists));
         
         // Mark as synced in offline storage
-        await offlineStorage.markAsSynced('checklists', data.offlineId);
+        await offlineStorage.markAsSynced('checklists', checklistInput.offlineId);
         break;
     }
   }

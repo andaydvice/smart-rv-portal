@@ -53,7 +53,7 @@ const SavedSearches = ({
           .order('saved_at', { ascending: false });
 
         if (error) {
-          console.error('Error loading saved searches:', error);
+          // Handle error silently
         } else {
           setSavedSearches(data?.map(item => ({
             ...item,
@@ -69,7 +69,7 @@ const SavedSearches = ({
         }
       }
     } catch (error) {
-      console.error('Error loading saved searches:', error);
+      // Handle error silently
     } finally {
       setLoading(false);
     }
@@ -100,7 +100,6 @@ const SavedSearches = ({
           });
 
         if (error) {
-          console.error('Error saving search:', error);
           return;
         }
       } else {
@@ -118,14 +117,8 @@ const SavedSearches = ({
       }
 
       await loadSavedSearches();
-      
-      console.log('Search Saved:', {
-        query: currentSearch,
-        category,
-        timestamp: new Date().toISOString()
-      });
     } catch (error) {
-      console.error('Error saving search:', error);
+      // Handle error silently
     }
   };
 
@@ -158,15 +151,8 @@ const SavedSearches = ({
       }
 
       onSearchSelect(updatedSearch);
-      
-      console.log('Saved Search Used:', {
-        searchId: search.id,
-        query: search.query,
-        useCount: updatedSearch.use_count,
-        timestamp: new Date().toISOString()
-      });
     } catch (error) {
-      console.error('Error updating search usage:', error);
+      // Handle error silently
     }
   };
 
@@ -188,7 +174,7 @@ const SavedSearches = ({
 
       await loadSavedSearches();
     } catch (error) {
-      console.error('Error removing search:', error);
+      // Handle error silently
     }
   };
 

@@ -11,12 +11,13 @@ export function useErrorHandler() {
   const [error, setError] = useState<ErrorState | null>(null);
   const [isRecovering, setIsRecovering] = useState(false);
 
-  const handleError = useCallback((err: any) => {
-    const statusCode = err.statusCode || err.status || 500;
+  const handleError = useCallback((err: unknown) => {
+    const error = err as any;
+    const statusCode = error?.statusCode || error?.status || 500;
     setError({
-      message: err.message || 'An unexpected error occurred',
+      message: error?.message || 'An unexpected error occurred',
       statusCode,
-      stack: err.stack
+      stack: error?.stack
     });
   }, []);
 

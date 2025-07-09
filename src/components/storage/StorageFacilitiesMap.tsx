@@ -82,22 +82,6 @@ const StorageFacilitiesMap: React.FC<StorageFacilitiesMapProps> = ({ onSelectFea
   }, [allFacilities, onSelectFeaturedLocation]);
   
   const handleFilterChange = useCallback((newFilters: FilterState) => {
-    console.log('Filter changed:', newFilters);
-    
-    // Log the selected state in various formats for debugging
-    if (newFilters.selectedState) {
-      const normalizedState = newFilters.selectedState;
-      let stateAbbr = STATE_NAME_MAP[normalizedState] || "";
-      
-      if (stateAbbr.length === 2) {
-        // We got an abbreviation, swap it
-        stateAbbr = normalizedState;
-        const fullState = STATE_NAME_MAP[normalizedState];
-        console.log(`Selected state: Full name = ${fullState}, Abbreviation = ${stateAbbr}`);
-      } else {
-        console.log(`Selected state: Full name = ${normalizedState}, Abbreviation = ${stateAbbr}`);
-      }
-    }
     
     setFilters(prevFilters => {
       if (JSON.stringify(prevFilters) === JSON.stringify(newFilters)) {
@@ -140,13 +124,8 @@ const StorageFacilitiesMap: React.FC<StorageFacilitiesMapProps> = ({ onSelectFea
         
         if (markers.length === 0) {
           setNoMarkersForState(filters.selectedState);
-          console.warn(`No markers created for state: ${filters.selectedState}`);
-          
-          // Add additional logging for debugging
-          console.log('States in allFacilities:', [...new Set(allFacilities.map(f => f.state))]);
         } else {
           setNoMarkersForState(null);
-          console.log(`Found ${markers.length} markers on the map`);
         }
         
         // Set check as completed regardless of result
@@ -161,7 +140,6 @@ const StorageFacilitiesMap: React.FC<StorageFacilitiesMapProps> = ({ onSelectFea
   }, [filters.selectedState, allFacilities]);
   
   const onMarkerClick = useCallback((facilityId: string) => {
-    console.log(`Marker clicked: ${facilityId}`);
     handleFacilityClick(facilityId, allFacilities || []);
   }, [handleFacilityClick, allFacilities]);
 
