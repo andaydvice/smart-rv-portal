@@ -244,8 +244,8 @@ const RVAppsHub = () => {
                 <AffiliateProductCard
                   title="WeBoost Drive Reach RV Cell Signal Booster"
                   description="Boost your cell signal by up to 32x for better app performance and connectivity."
-                  price: "$499.99"
-                  originalPrice: "$599.99"
+                   price="$499.99"
+                   originalPrice="$599.99"
                   rating={4.6}
                   reviewCount={1834}
                   image="/lovable-uploads/9b681f27-359c-4d90-8629-5b2b198abf0f.png"
@@ -262,8 +262,8 @@ const RVAppsHub = () => {
                 <AffiliateProductCard
                   title="Samsung Galaxy Tab Active4 Pro Rugged Tablet"
                   description="Rugged tablet perfect for RV navigation and entertainment in any weather."
-                  price: "$649.99"
-                  originalPrice: "$799.99"
+                   price="$649.99"
+                   originalPrice="$799.99"
                   rating={4.4}
                   reviewCount={567}
                   image="/lovable-uploads/ee026535-e835-46ae-b779-be457eb8ff04.png"

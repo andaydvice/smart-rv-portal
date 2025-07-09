@@ -7,6 +7,11 @@ export type Json =
   | Json[]
 
 export type Database = {
+  // Allows to automatically instanciate createClient with right options
+  // instead of createClient<Database, { PostgrestVersion: 'XX' }>(URL, KEY)
+  __InternalSupabase: {
+    PostgrestVersion: "12.2.3 (519615d)"
+  }
   public: {
     Tables: {
       app_spatial_ref_sys: {
@@ -30,6 +35,138 @@ export type Database = {
           proj4text?: string | null
           srid?: number | null
           srtext?: string | null
+        }
+        Relationships: []
+      }
+      content_analysis: {
+        Row: {
+          ab_test_data: Json | null
+          affiliate_partner: string
+          content_id: string
+          content_type: string
+          conversion_metrics: Json | null
+          created_at: string
+          engagement_metrics: Json | null
+          id: string
+          last_analyzed: string | null
+          optimization_score: number | null
+          page_url: string
+          performance_trend: string | null
+          product_category: string
+          recommendations: string[] | null
+          seo_metrics: Json | null
+          updated_at: string
+        }
+        Insert: {
+          ab_test_data?: Json | null
+          affiliate_partner: string
+          content_id: string
+          content_type: string
+          conversion_metrics?: Json | null
+          created_at?: string
+          engagement_metrics?: Json | null
+          id?: string
+          last_analyzed?: string | null
+          optimization_score?: number | null
+          page_url: string
+          performance_trend?: string | null
+          product_category: string
+          recommendations?: string[] | null
+          seo_metrics?: Json | null
+          updated_at?: string
+        }
+        Update: {
+          ab_test_data?: Json | null
+          affiliate_partner?: string
+          content_id?: string
+          content_type?: string
+          conversion_metrics?: Json | null
+          created_at?: string
+          engagement_metrics?: Json | null
+          id?: string
+          last_analyzed?: string | null
+          optimization_score?: number | null
+          page_url?: string
+          performance_trend?: string | null
+          product_category?: string
+          recommendations?: string[] | null
+          seo_metrics?: Json | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      customer_reviews: {
+        Row: {
+          affiliate_partner: string
+          affiliate_product_id: string | null
+          created_at: string
+          featured: boolean | null
+          helpful_count: number | null
+          id: string
+          images: string[] | null
+          moderator_notes: string | null
+          product_category: string
+          product_name: string
+          purchase_date: string | null
+          rating: number
+          recommended: boolean | null
+          review_text: string
+          reviewer_location: string | null
+          reviewer_name: string | null
+          status: string | null
+          title: string
+          updated_at: string
+          usage_duration: string | null
+          user_id: string | null
+          verified_purchase: boolean | null
+        }
+        Insert: {
+          affiliate_partner: string
+          affiliate_product_id?: string | null
+          created_at?: string
+          featured?: boolean | null
+          helpful_count?: number | null
+          id?: string
+          images?: string[] | null
+          moderator_notes?: string | null
+          product_category: string
+          product_name: string
+          purchase_date?: string | null
+          rating: number
+          recommended?: boolean | null
+          review_text: string
+          reviewer_location?: string | null
+          reviewer_name?: string | null
+          status?: string | null
+          title: string
+          updated_at?: string
+          usage_duration?: string | null
+          user_id?: string | null
+          verified_purchase?: boolean | null
+        }
+        Update: {
+          affiliate_partner?: string
+          affiliate_product_id?: string | null
+          created_at?: string
+          featured?: boolean | null
+          helpful_count?: number | null
+          id?: string
+          images?: string[] | null
+          moderator_notes?: string | null
+          product_category?: string
+          product_name?: string
+          purchase_date?: string | null
+          rating?: number
+          recommended?: boolean | null
+          review_text?: string
+          reviewer_location?: string | null
+          reviewer_name?: string | null
+          status?: string | null
+          title?: string
+          updated_at?: string
+          usage_duration?: string | null
+          user_id?: string | null
+          verified_purchase?: boolean | null
         }
         Relationships: []
       }
@@ -72,6 +209,45 @@ export type Database = {
           email?: string
           id?: string
           subscribed_at?: string
+        }
+        Relationships: []
+      }
+      saved_searches: {
+        Row: {
+          category: string
+          created_at: string
+          filters: Json | null
+          id: string
+          last_used: string | null
+          query: string
+          saved_at: string
+          updated_at: string
+          use_count: number
+          user_id: string
+        }
+        Insert: {
+          category: string
+          created_at?: string
+          filters?: Json | null
+          id?: string
+          last_used?: string | null
+          query: string
+          saved_at?: string
+          updated_at?: string
+          use_count?: number
+          user_id: string
+        }
+        Update: {
+          category?: string
+          created_at?: string
+          filters?: Json | null
+          id?: string
+          last_used?: string | null
+          query?: string
+          saved_at?: string
+          updated_at?: string
+          use_count?: number
+          user_id?: string
         }
         Relationships: []
       }
@@ -280,6 +456,66 @@ export type Database = {
           id?: string
           last_name?: string | null
           updated_at?: string
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          created_at: string
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
+      user_wishlists: {
+        Row: {
+          affiliate_link: string
+          category: string | null
+          created_at: string
+          id: string
+          image: string
+          name: string
+          partner: string
+          price: number
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          affiliate_link: string
+          category?: string | null
+          created_at?: string
+          id?: string
+          image: string
+          name: string
+          partner: string
+          price: number
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          affiliate_link?: string
+          category?: string | null
+          created_at?: string
+          id?: string
+          image?: string
+          name?: string
+          partner?: string
+          price?: number
+          updated_at?: string
+          user_id?: string
         }
         Relationships: []
       }
@@ -846,6 +1082,13 @@ export type Database = {
         Args: { "": unknown }
         Returns: unknown
       }
+      has_role: {
+        Args: {
+          _user_id: string
+          _role: Database["public"]["Enums"]["app_role"]
+        }
+        Returns: boolean
+      }
       http: {
         Args: { request: Database["public"]["CompositeTypes"]["http_request"] }
         Returns: Database["public"]["CompositeTypes"]["http_response"]
@@ -895,6 +1138,10 @@ export type Database = {
       }
       http_set_curlopt: {
         Args: { curlopt: string; value: string }
+        Returns: boolean
+      }
+      is_admin: {
+        Args: { _user_id: string }
         Returns: boolean
       }
       json: {
@@ -2196,6 +2443,7 @@ export type Database = {
       }
     }
     Enums: {
+      app_role: "admin" | "moderator" | "user"
       us_state:
         | "AL"
         | "AK"
@@ -2279,21 +2527,25 @@ export type Database = {
   }
 }
 
-type DefaultSchema = Database[Extract<keyof Database, "public">]
+type DatabaseWithoutInternals = Omit<Database, "__InternalSupabase">
+
+type DefaultSchema = DatabaseWithoutInternals[Extract<keyof Database, "public">]
 
 export type Tables<
   DefaultSchemaTableNameOrOptions extends
     | keyof (DefaultSchema["Tables"] & DefaultSchema["Views"])
-    | { schema: keyof Database },
+    | { schema: keyof DatabaseWithoutInternals },
   TableName extends DefaultSchemaTableNameOrOptions extends {
-    schema: keyof Database
+    schema: keyof DatabaseWithoutInternals
   }
-    ? keyof (Database[DefaultSchemaTableNameOrOptions["schema"]]["Tables"] &
-        Database[DefaultSchemaTableNameOrOptions["schema"]]["Views"])
+    ? keyof (DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"] &
+        DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Views"])
     : never = never,
-> = DefaultSchemaTableNameOrOptions extends { schema: keyof Database }
-  ? (Database[DefaultSchemaTableNameOrOptions["schema"]]["Tables"] &
-      Database[DefaultSchemaTableNameOrOptions["schema"]]["Views"])[TableName] extends {
+> = DefaultSchemaTableNameOrOptions extends {
+  schema: keyof DatabaseWithoutInternals
+}
+  ? (DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"] &
+      DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Views"])[TableName] extends {
       Row: infer R
     }
     ? R
@@ -2311,14 +2563,16 @@ export type Tables<
 export type TablesInsert<
   DefaultSchemaTableNameOrOptions extends
     | keyof DefaultSchema["Tables"]
-    | { schema: keyof Database },
+    | { schema: keyof DatabaseWithoutInternals },
   TableName extends DefaultSchemaTableNameOrOptions extends {
-    schema: keyof Database
+    schema: keyof DatabaseWithoutInternals
   }
-    ? keyof Database[DefaultSchemaTableNameOrOptions["schema"]]["Tables"]
+    ? keyof DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"]
     : never = never,
-> = DefaultSchemaTableNameOrOptions extends { schema: keyof Database }
-  ? Database[DefaultSchemaTableNameOrOptions["schema"]]["Tables"][TableName] extends {
+> = DefaultSchemaTableNameOrOptions extends {
+  schema: keyof DatabaseWithoutInternals
+}
+  ? DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"][TableName] extends {
       Insert: infer I
     }
     ? I
@@ -2334,14 +2588,16 @@ export type TablesInsert<
 export type TablesUpdate<
   DefaultSchemaTableNameOrOptions extends
     | keyof DefaultSchema["Tables"]
-    | { schema: keyof Database },
+    | { schema: keyof DatabaseWithoutInternals },
   TableName extends DefaultSchemaTableNameOrOptions extends {
-    schema: keyof Database
+    schema: keyof DatabaseWithoutInternals
   }
-    ? keyof Database[DefaultSchemaTableNameOrOptions["schema"]]["Tables"]
+    ? keyof DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"]
     : never = never,
-> = DefaultSchemaTableNameOrOptions extends { schema: keyof Database }
-  ? Database[DefaultSchemaTableNameOrOptions["schema"]]["Tables"][TableName] extends {
+> = DefaultSchemaTableNameOrOptions extends {
+  schema: keyof DatabaseWithoutInternals
+}
+  ? DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"][TableName] extends {
       Update: infer U
     }
     ? U
@@ -2357,14 +2613,16 @@ export type TablesUpdate<
 export type Enums<
   DefaultSchemaEnumNameOrOptions extends
     | keyof DefaultSchema["Enums"]
-    | { schema: keyof Database },
+    | { schema: keyof DatabaseWithoutInternals },
   EnumName extends DefaultSchemaEnumNameOrOptions extends {
-    schema: keyof Database
+    schema: keyof DatabaseWithoutInternals
   }
-    ? keyof Database[DefaultSchemaEnumNameOrOptions["schema"]]["Enums"]
+    ? keyof DatabaseWithoutInternals[DefaultSchemaEnumNameOrOptions["schema"]]["Enums"]
     : never = never,
-> = DefaultSchemaEnumNameOrOptions extends { schema: keyof Database }
-  ? Database[DefaultSchemaEnumNameOrOptions["schema"]]["Enums"][EnumName]
+> = DefaultSchemaEnumNameOrOptions extends {
+  schema: keyof DatabaseWithoutInternals
+}
+  ? DatabaseWithoutInternals[DefaultSchemaEnumNameOrOptions["schema"]]["Enums"][EnumName]
   : DefaultSchemaEnumNameOrOptions extends keyof DefaultSchema["Enums"]
     ? DefaultSchema["Enums"][DefaultSchemaEnumNameOrOptions]
     : never
@@ -2372,14 +2630,16 @@ export type Enums<
 export type CompositeTypes<
   PublicCompositeTypeNameOrOptions extends
     | keyof DefaultSchema["CompositeTypes"]
-    | { schema: keyof Database },
+    | { schema: keyof DatabaseWithoutInternals },
   CompositeTypeName extends PublicCompositeTypeNameOrOptions extends {
-    schema: keyof Database
+    schema: keyof DatabaseWithoutInternals
   }
-    ? keyof Database[PublicCompositeTypeNameOrOptions["schema"]]["CompositeTypes"]
+    ? keyof DatabaseWithoutInternals[PublicCompositeTypeNameOrOptions["schema"]]["CompositeTypes"]
     : never = never,
-> = PublicCompositeTypeNameOrOptions extends { schema: keyof Database }
-  ? Database[PublicCompositeTypeNameOrOptions["schema"]]["CompositeTypes"][CompositeTypeName]
+> = PublicCompositeTypeNameOrOptions extends {
+  schema: keyof DatabaseWithoutInternals
+}
+  ? DatabaseWithoutInternals[PublicCompositeTypeNameOrOptions["schema"]]["CompositeTypes"][CompositeTypeName]
   : PublicCompositeTypeNameOrOptions extends keyof DefaultSchema["CompositeTypes"]
     ? DefaultSchema["CompositeTypes"][PublicCompositeTypeNameOrOptions]
     : never
@@ -2387,6 +2647,7 @@ export type CompositeTypes<
 export const Constants = {
   public: {
     Enums: {
+      app_role: ["admin", "moderator", "user"],
       us_state: [
         "AL",
         "AK",
