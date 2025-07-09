@@ -38,12 +38,12 @@ export default defineConfig(({ mode }) => ({
     force: true,
     esbuildOptions: {
       target: 'es2020',
-      treeShaking: true // Enable tree shaking for dependencies
+      treeShaking: true
     }
   },
   build: {
     sourcemap: false,
-    minify: 'terser',
+    minify: 'esbuild',
     target: 'es2020',
     cssCodeSplit: true,
     reportCompressedSize: false,
