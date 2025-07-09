@@ -23,7 +23,6 @@ const queryClient = new QueryClient({
 
 function AppContent() {
   useEffect(() => {
-    console.log('App component mounted');
     window.scrollTo(0, 0);
   }, []);
 
@@ -44,8 +43,6 @@ function AppContent() {
 }
 
 function App() {
-  console.log('App rendering');
-  
   return (
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
