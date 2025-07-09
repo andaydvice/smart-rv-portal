@@ -21,6 +21,7 @@ import UserManagement from "../pages/UserManagement";
 import SystemSettings from "../pages/SystemSettings";
 import EnhancedAnalyticsDashboard from "../pages/EnhancedAnalyticsDashboard";
 import PersonalizationDashboard from "../pages/PersonalizationDashboard";
+import RevenueOptimizationDashboard from "../pages/RevenueOptimizationDashboard";
 
 // Import affiliate pages
 import RVAppsHub from "../pages/RVAppsHub";
@@ -125,6 +126,11 @@ export const routes: RouteObject[] = [
   {
     path: "/personalization-dashboard",
     element: <PersonalizationDashboard />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/revenue-optimization",
+    element: <RevenueOptimizationDashboard />,
     errorElement: <ErrorPage />,
   },
   ...modelRoutes,
