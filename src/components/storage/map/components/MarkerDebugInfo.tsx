@@ -4,8 +4,15 @@ import MarkerStats from './MarkerStats';
 import MarkerErrorDisplay from './MarkerErrorDisplay';
 import MarkerDebugOverlay from './MarkerDebugOverlay';
 
+interface StorageFacility {
+  id: string;
+  name: string;
+  latitude: number;
+  longitude: number;
+}
+
 interface MarkerDebugInfoProps {
-  facilities: any[];
+  facilities: StorageFacility[];
   stats: {
     markersCreated: number;
     skippedFacilities: number;
@@ -49,11 +56,13 @@ const MarkerDebugInfo: React.FC<MarkerDebugInfoProps> = ({
 
   return (
     <>
-      {/* Debug marker count */}
-      <div className="absolute top-2 left-2 z-50 bg-black/70 text-white p-2 rounded text-xs pointer-events-none">
-        {facilities.length} facilities | 
-        {document.querySelectorAll('.mapboxgl-marker, .custom-marker').length} markers
-      </div>
+      {/* Debug marker count - only in development */}
+      {process.env.NODE_ENV === 'development' && (
+        <div className="absolute top-2 left-2 z-50 bg-black/70 text-white p-2 rounded text-xs pointer-events-none">
+          {facilities.length} facilities | 
+          {document.querySelectorAll('.mapboxgl-marker, .custom-marker').length} markers
+        </div>
+      )}
       
       {/* Only show stats in development mode */}
       {process.env.NODE_ENV === 'development' && <MarkerStats stats={displayStats} />}
