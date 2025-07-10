@@ -3,44 +3,27 @@ import AffiliateProductCard from './AffiliateProductCard';
 const FeaturedProducts = () => {
   const products = [
     {
-      title: "RV Life Pro GPS & Trip Planning",
-      description: "The most comprehensive RV GPS and trip planning app with real-time traffic and RV-specific routing.",
-      price: "$199",
-      originalPrice: "$299",
+      title: "RV Life Pro Membership",
+      description: "Complete RV planning toolkit with GPS navigation, campground finder, and trip planning tools. 25% commission + 170-day cookie.",
+      price: "$39.95",
+      originalPrice: "$59.95",
       rating: 4.8,
       reviewCount: 1247,
       image: "/lovable-uploads/11a2f8d8-22f5-4ed7-83f9-28b08a64aeb5.png",
       features: [
-        "RV-specific routing and navigation",
+        "RV-specific GPS navigation",
         "Comprehensive campground database",
         "Trip planning with road conditions",
-        "Real-time traffic and weather updates"
+        "Maintenance tracking & reminders"
       ],
-      affiliateLink: "https://rvlife.com/pro-gps",
-      badges: ["Best Seller", "Staff Pick"]
+      affiliateLink: "https://rvlife.com/?ref=smartroadportal",
+      badges: ["25% Commission", "Best Value"]
     },
     {
-      title: "Victron Energy Smart Solar System",
-      description: "Complete solar monitoring and control system with smartphone app integration for optimal RV power management.",
-      price: "$189",
-      originalPrice: "$249",
-      rating: 4.9,
-      reviewCount: 892,
-      image: "/lovable-uploads/51ac2438-08c7-47ee-b56d-876aa3bbdc80.png",
-      features: [
-        "Remote monitoring via smartphone",
-        "Advanced battery protection",
-        "Solar optimization algorithms",
-        "Historical data tracking"
-      ],
-      affiliateLink: "https://victronenergy.com/solar-systems",
-      badges: ["Premium Choice"]
-    },
-    {
-      title: "RVShare Premium Rentals",
-      description: "Access thousands of premium RV rentals with smart technology features and 24/7 roadside assistance.",
-      price: "$89",
-      originalPrice: "$129",
+      title: "RVShare Premium RV Rentals",
+      description: "Rent smart RVs with advanced technology features. 45% commission on all bookings with high conversion rates.",
+      price: "From $99/night",
+      originalPrice: "$149/night",
       rating: 4.7,
       reviewCount: 2156,
       image: "/lovable-uploads/0a22c848-dff2-43f4-b1eb-800fa123a904.png",
@@ -50,8 +33,25 @@ const FeaturedProducts = () => {
         "Insurance coverage included",
         "Contactless pickup available"
       ],
-      affiliateLink: "https://rvshare.com/smart-rvs",
-      badges: ["Most Popular"]
+      affiliateLink: "https://rvshare.com/?ref=smartroadportal",
+      badges: ["45% Commission", "High Value"]
+    },
+    {
+      title: "TechnoRV Smart Systems",
+      description: "Advanced RV monitoring and control systems. GPS trackers, WiFi boosters, and smart appliances. 5-7% commission.",
+      price: "$199",
+      originalPrice: "$299",
+      rating: 4.9,
+      reviewCount: 892,
+      image: "/lovable-uploads/51ac2438-08c7-47ee-b56d-876aa3bbdc80.png",
+      features: [
+        "GPS tracking & security",
+        "WiFi signal boosters",
+        "Smart appliance controls",
+        "Remote monitoring apps"
+      ],
+      affiliateLink: "https://technorv.com/?ref=smartroadportal",
+      badges: ["Tech Leader", "Smart Choice"]
     }
   ];
 

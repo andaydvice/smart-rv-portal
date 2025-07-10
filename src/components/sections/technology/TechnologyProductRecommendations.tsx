@@ -3,60 +3,60 @@ import AffiliateProductCard from '@/components/affiliate/AffiliateProductCard';
 const TechnologyProductRecommendations = () => {
   const products = [
     {
-      title: "WeBoost Drive Reach RV",
-      description: "Powerful cellular signal booster designed specifically for RVs, extending your connectivity range significantly.",
-      price: "$499",
-      originalPrice: "$599", 
+      title: "TechnoRV Smart GPS Tracker",
+      description: "Professional GPS tracking system with real-time location monitoring and theft alerts. 5-7% commission program.",
+      price: "$199",
+      originalPrice: "$299", 
       rating: 4.8,
       reviewCount: 423,
       image: "/lovable-uploads/11a2f8d8-22f5-4ed7-83f9-28b08a64aeb5.png",
       features: [
-        "50x signal amplification",
-        "Works with all carriers",
-        "Easy RV installation",
-        "FCC approved"
+        "Real-time GPS tracking",
+        "Theft alert notifications",
+        "Smartphone app control",
+        "Long battery life"
       ],
-      affiliateLink: "https://weboost.com/rv-signal-boosters",
-      badges: ["Signal Expert Pick"]
+      affiliateLink: "https://technorv.com/gps-tracker?ref=smartroadportal",
+      badges: ["TechnoRV Partner"]
     },
     {
-      title: "Starlink for RVs",
-      description: "High-speed satellite internet designed for mobile use, perfect for remote RV locations.",
-      price: "$599",
-      originalPrice: "$699",
+      title: "TechnoRV WiFi Signal Booster",
+      description: "Boost your RV's WiFi signal strength for reliable internet connectivity anywhere you travel.",
+      price: "$149",
+      originalPrice: "$199",
       rating: 4.6,
       reviewCount: 1289,
       image: "/lovable-uploads/11a2f8d8-22f5-4ed7-83f9-28b08a64aeb5.png",
       features: [
-        "High-speed satellite internet",
-        "Mobile priority access",
-        "Easy setup and portability",
-        "Global coverage"
+        "5x signal amplification",
+        "Easy RV installation",
+        "Works with all carriers",
+        "Weather resistant design"
       ],
-      affiliateLink: "https://starlink.com/rv",
-      badges: ["Game Changer"]
+      affiliateLink: "https://technorv.com/wifi-booster?ref=smartroadportal",
+      badges: ["Connectivity Essential"]
     },
     {
-      title: "Tire Linc Tire Pressure Monitoring",
-      description: "Advanced TPMS system with smartphone alerts and real-time monitoring for all your RV tires.",
+      title: "RV Water Filter Store Premium System",
+      description: "Complete water filtration system with smart monitoring capabilities. 10-15% commission program.",
       price: "$299",
       originalPrice: "$399",
       rating: 4.7,
       reviewCount: 567,
       image: "/lovable-uploads/11a2f8d8-22f5-4ed7-83f9-28b08a64aeb5.png",
       features: [
-        "Real-time tire monitoring",
-        "Smartphone app alerts",
-        "Easy sensor installation",
-        "Temperature monitoring"
+        "Multi-stage filtration",
+        "Smart filter monitoring",
+        "Easy installation",
+        "NSF certified"
       ],
-      affiliateLink: "https://tirelinc.com/rv-tpms",
-      badges: ["Safety Essential"]
+      affiliateLink: "https://rvwaterfilterstore.com/?ref=smartroadportal",
+      badges: ["Water Safety"]
     },
     {
-      title: "TechnoRV Smart Water Monitor",
+      title: "TechnoRV Smart Tank Monitor",
       description: "Monitor all your RV tank levels remotely with precision sensors and smartphone integration.",
-      price: "$199",
+      price: "$179",
       originalPrice: "$249",
       rating: 4.5,
       reviewCount: 234,
@@ -67,8 +67,8 @@ const TechnologyProductRecommendations = () => {
         "Multiple tank support",
         "Low level alerts"
       ],
-      affiliateLink: "https://technorv.com/water-monitors",
-      badges: ["Tech Innovation"]
+      affiliateLink: "https://technorv.com/tank-monitor?ref=smartroadportal",
+      badges: ["Smart Monitoring"]
     }
   ];
 
