@@ -8,6 +8,7 @@ import { toast } from "sonner";
 import { TechnologySection } from "@/components/sections/TechnologySection";
 // MODIFIED: Direct import for ContactSection added
 import { ContactSection } from "@/components/sections/ContactSection";
+import FeaturedProducts from "@/components/affiliate/FeaturedProducts";
 
 // Lazy load components that aren't needed immediately
 const FeaturesSection = lazy(() => import("@/components/sections/FeaturesSection").then(mod => ({ 
@@ -56,6 +57,9 @@ const Index = () => {
         
         {/* Changed from lazy-loaded to direct import */}
         <TechnologySection />
+        
+        {/* Featured affiliate products */}
+        <FeaturedProducts />
         
         <Suspense fallback={<LoadingFallback />}>
           <SustainabilitySection />

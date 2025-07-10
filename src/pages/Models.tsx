@@ -4,6 +4,8 @@ import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Battery, Navigation, Shield, Wifi } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
+import AffiliateCTABanner from "@/components/affiliate/AffiliateCTABanner";
+import AffiliateProductCard from "@/components/affiliate/AffiliateProductCard";
 import Footer2 from "@/components/ui/Footer2";
 
 // Model data
@@ -169,6 +171,67 @@ const Models = () => {
                 Compare All Models <ArrowRight className="w-4 h-4 ml-2" />
               </Button>
             </Link>
+          </motion.div>
+          
+          {/* Affiliate CTA for RVShare rentals */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.0 }}
+            className="mt-16"
+          >
+            <AffiliateCTABanner
+              title="Experience These Models Before You Buy"
+              description="Rent similar smart RVs to test features and find your perfect match"
+              buttonText="Browse Smart RV Rentals"
+              affiliateLink="https://rvshare.com/smart-rvs"
+            />
+          </motion.div>
+
+          {/* RV Planning Tools */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.2 }}
+            className="mt-12"
+          >
+            <div className="grid md:grid-cols-2 gap-8">
+              <AffiliateProductCard
+                title="RV Life Pro - Model Planning"
+                description="Compare RV models, research features, and plan your purchase with comprehensive RV data and tools."
+                price="$199"
+                originalPrice="$299"
+                rating={4.8}
+                reviewCount={1247}
+                image="/lovable-uploads/11a2f8d8-22f5-4ed7-83f9-28b08a64aeb5.png"
+                features={[
+                  "Model comparison tools",
+                  "Feature research database",
+                  "Price tracking and alerts",
+                  "Dealer network access"
+                ]}
+                affiliateLink="https://rvlife.com/model-research"
+                badges={["Planning Essential"]}
+              />
+              
+              <AffiliateProductCard
+                title="Good Sam RV Financing"
+                description="Get pre-approved for RV financing with competitive rates and specialized RV loan expertise."
+                price="From 4.99%"
+                originalPrice="From 6.99%"
+                rating={4.6}
+                reviewCount={892}
+                image="/lovable-uploads/11a2f8d8-22f5-4ed7-83f9-28b08a64aeb5.png"
+                features={[
+                  "Competitive interest rates",
+                  "RV-specialized financing",
+                  "Quick pre-approval",
+                  "Extended loan terms"
+                ]}
+                affiliateLink="https://goodsam.com/rv-financing"
+                badges={["Financing Partner"]}
+              />
+            </div>
           </motion.div>
         </div>
       </motion.div>

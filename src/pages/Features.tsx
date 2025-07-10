@@ -4,6 +4,8 @@ import Navbar from "@/components/Navbar";
 import { Link } from "react-router-dom";
 import { Navigation, Shield, Battery, Tv, Droplet, Cog, Thermometer, Music } from "lucide-react";
 import Layout from "@/components/layout/Layout";
+import AffiliateCTABanner from "@/components/affiliate/AffiliateCTABanner";
+import AffiliateProductCard from "@/components/affiliate/AffiliateProductCard";
 
 const Features = () => {
   return (
@@ -82,6 +84,81 @@ const Features = () => {
               </div>
             </Link>
           </div>
+          
+          {/* Feature upgrade recommendations */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.8 }}
+            className="mt-16"
+          >
+            <h2 className="text-3xl font-bold text-white mb-8 text-center">
+              Upgrade Your RV with These Features
+            </h2>
+            
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+              <AffiliateProductCard
+                title="Victron Smart Power System"
+                description="Complete smart power management with remote monitoring and advanced battery protection."
+                price="$399"
+                originalPrice="$499"
+                rating={4.9}
+                reviewCount={567}
+                image="/lovable-uploads/51ac2438-08c7-47ee-b56d-876aa3bbdc80.png"
+                features={[
+                  "Smart battery monitoring",
+                  "Remote control via app",
+                  "Advanced power analytics",
+                  "Solar integration ready"
+                ]}
+                affiliateLink="https://victronenergy.com/power-systems"
+                badges={["Premium Power"]}
+              />
+              
+              <AffiliateProductCard
+                title="TechnoRV Security Suite"
+                description="Comprehensive RV security with cameras, sensors, and smartphone integration."
+                price="$449"
+                originalPrice="$599"
+                rating={4.8}
+                reviewCount={298}
+                image="/lovable-uploads/11a2f8d8-22f5-4ed7-83f9-28b08a64aeb5.png"
+                features={[
+                  "HD security cameras",
+                  "Motion & door sensors",
+                  "Mobile app alerts",
+                  "Cloud storage included"
+                ]}
+                affiliateLink="https://technorv.com/security-suite"
+                badges={["Security Pro"]}
+              />
+              
+              <AffiliateProductCard
+                title="Winegard ConnecT WiFi"
+                description="Powerful WiFi extender and cellular booster designed specifically for RVs."
+                price="$599"
+                originalPrice="$699"
+                rating={4.7}
+                reviewCount={423}
+                image="/lovable-uploads/11a2f8d8-22f5-4ed7-83f9-28b08a64aeb5.png"
+                features={[
+                  "WiFi range extension",
+                  "Cellular signal boost",
+                  "Easy installation",
+                  "Works with all carriers"
+                ]}
+                affiliateLink="https://winegard.com/connect-wifi"
+                badges={["Connectivity King"]}
+              />
+            </div>
+            
+            <AffiliateCTABanner
+              title="Ready to Upgrade Your RV?"
+              description="Transform your RV into a smart home on wheels with these proven technologies"
+              buttonText="Shop All RV Upgrades"
+              affiliateLink="https://rvlife.com/smart-upgrades"
+            />
+          </motion.div>
         </div>
       </motion.div>
     </Layout>

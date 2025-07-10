@@ -7,6 +7,7 @@ import BlogGrid from "@/components/blog/BlogGrid";
 import FeaturedCategories from "@/components/blog/FeaturedCategories";
 import NewsletterSection from "@/components/blog/NewsletterSection";
 import Layout from "@/components/layout/Layout";
+import AffiliateCTABanner from "@/components/affiliate/AffiliateCTABanner";
 import { Container } from "@/components/ui/container";
 
 const Blog = () => {
@@ -34,6 +35,15 @@ const Blog = () => {
           <BlogHeader />
           <TrendingPosts activeCategory={activeCategory} onCategoryChange={handleCategoryChange} />
           <BlogGrid activeCategory={activeCategory} />
+          
+          {/* Affiliate CTA for RV Life tools */}
+          <AffiliateCTABanner
+            title="Enhance Your RV Experience"
+            description="Get the tools and apps that make RV living easier, safer, and more enjoyable"
+            buttonText="Explore RV Tools & Apps"
+            affiliateLink="https://rvlife.com/smart-rv-tools"
+          />
+          
           <FeaturedCategories />
           <NewsletterSection />
         </Container>

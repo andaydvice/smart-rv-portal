@@ -8,6 +8,8 @@ import { BlogPostImage } from "@/components/blog/post/BlogPostImage";
 import { BlogPostContent } from "@/components/blog/post/BlogPostContent";
 import { PageErrorBoundary } from "@/components/common/PageErrorBoundary";
 import Footer2 from "@/components/ui/Footer2";
+import BlogAffiliateSection from "@/components/affiliate/BlogAffiliateSection";
+import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
 import { useToast } from "@/hooks/use-toast";
 import { blogPosts } from '@/data/blog'; // MODIFIED: Updated import path
 
@@ -104,6 +106,15 @@ const BlogPost = () => {
             description={post.description}
             content={post.content}
           />
+          
+          {/* Affiliate product recommendations */}
+          <BlogAffiliateSection 
+            category={post.category}
+            postSlug={post.slug}
+          />
+          
+          {/* Affiliate disclosure */}
+          <AffiliateDisclosure />
         </div>
         <Footer2 
           links={footerLinks}
