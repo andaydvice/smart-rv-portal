@@ -89,6 +89,94 @@ const About = () => {
               </div>
             </div>
 
+            {/* Recommended Partners Section */}
+            <div className="bg-black/20 backdrop-blur-md p-8 rounded-xl border border-white/10">
+              <h2 className="text-3xl font-bold text-white mb-6 text-center">Our Trusted Partners</h2>
+              <p className="text-white/90 text-center mb-8">
+                We partner with industry-leading companies to provide you with the best RV products and services.
+              </p>
+              
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div className="text-center p-4 border border-white/10 rounded-lg">
+                  <h4 className="text-lg font-bold text-white mb-2">RVShare</h4>
+                  <p className="text-white/80 text-sm mb-3">Premium RV rentals nationwide with 45% commission program</p>
+                  <a 
+                    href="https://rvshare.com/?ref=smartroadportal"
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-[#5B9BD5] hover:text-[#4A8AC4] font-medium"
+                  >
+                    Explore Rentals →
+                  </a>
+                </div>
+                
+                <div className="text-center p-4 border border-white/10 rounded-lg">
+                  <h4 className="text-lg font-bold text-white mb-2">TechnoRV</h4>
+                  <p className="text-white/80 text-sm mb-3">Smart RV technology and monitoring systems with 5-7% commission</p>
+                  <a 
+                    href="https://technorv.com/?ref=smartroadportal"
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-[#5B9BD5] hover:text-[#4A8AC4] font-medium"
+                  >
+                    Shop Technology →
+                  </a>
+                </div>
+                
+                <div className="text-center p-4 border border-white/10 rounded-lg">
+                  <h4 className="text-lg font-bold text-white mb-2">Good Sam</h4>
+                  <p className="text-white/80 text-sm mb-3">Roadside assistance and RV services for peace of mind</p>
+                  <a 
+                    href="https://www.goodsam.com/?ref=smartroadportal"
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-[#5B9BD5] hover:text-[#4A8AC4] font-medium"
+                  >
+                    Get Coverage →
+                  </a>
+                </div>
+                
+                <div className="text-center p-4 border border-white/10 rounded-lg">
+                  <h4 className="text-lg font-bold text-white mb-2">RV Water Filter Store</h4>
+                  <p className="text-white/80 text-sm mb-3">Premium water filtration systems with 10-15% commission</p>
+                  <a 
+                    href="https://rvwaterfilterstore.com/?ref=smartroadportal"
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-[#5B9BD5] hover:text-[#4A8AC4] font-medium"
+                  >
+                    Shop Filters →
+                  </a>
+                </div>
+                
+                <div className="text-center p-4 border border-white/10 rounded-lg">
+                  <h4 className="text-lg font-bold text-white mb-2">Outdoorsy</h4>
+                  <p className="text-white/80 text-sm mb-3">Luxury RV rentals and experiences with $60+ per booking</p>
+                  <a 
+                    href="https://outdoorsy.com/?ref=smartroadportal"
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-[#5B9BD5] hover:text-[#4A8AC4] font-medium"
+                  >
+                    Browse Luxury →
+                  </a>
+                </div>
+                
+                <div className="text-center p-4 border border-white/10 rounded-lg">
+                  <h4 className="text-lg font-bold text-white mb-2">RV Life</h4>
+                  <p className="text-white/80 text-sm mb-3">Trip planning tools and GPS navigation with 25% commission</p>
+                  <a 
+                    href="https://rvlife.com/?ref=smartroadportal"
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-[#5B9BD5] hover:text-[#4A8AC4] font-medium"
+                  >
+                    Plan Your Trip →
+                  </a>
+                </div>
+              </div>
+            </div>
+
             <div className="bg-black/20 backdrop-blur-md p-8 rounded-xl border border-white/10 text-center">
               <h2 className="text-3xl font-bold text-white mb-4">Ready to Start Your Smart RV Journey?</h2>
               <p className="text-white/90 text-lg mb-6">

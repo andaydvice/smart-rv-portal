@@ -8,6 +8,7 @@ import Layout from "@/components/layout/Layout";
 import SmartSystemGuide from "@/components/troubleshooting/SmartSystemGuide";
 import ConnectivityGuide from "@/components/connectivity/ConnectivityGuide";
 import TroubleshootingFlowchart from "@/components/troubleshooting/TroubleshootingFlowchart";
+import TroubleshootingAffiliateRecommendations from "@/components/troubleshooting/TroubleshootingAffiliateRecommendations";
 import { scrollToTop } from "@/utils/scrollToTop";
 
 const Troubleshooting = () => {
@@ -99,6 +100,14 @@ const Troubleshooting = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3, delay: 0.4 }}
+            >
+              <TroubleshootingAffiliateRecommendations />
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3, delay: 0.5 }}
               className="text-center pt-4 md:pt-8"
             >
               <Link to="/contact">

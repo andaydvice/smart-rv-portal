@@ -114,6 +114,108 @@ const Products = () => {
             ))}
           </div>
 
+          {/* Affiliate Product Recommendations */}
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5, duration: 0.5 }}
+            className="mt-16 space-y-8"
+          >
+            <h2 className="text-3xl font-bold text-white text-center mb-12">Shop Smart RV Products</h2>
+            
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {/* RVShare Rentals */}
+              <div className="bg-black/20 backdrop-blur-md p-6 rounded-xl border border-white/10">
+                <h3 className="text-xl font-bold text-white mb-4">RV Rentals</h3>
+                <p className="text-white/80 mb-4">Compare and book premium RV rentals nationwide. Perfect for trying before buying.</p>
+                <div className="text-[#5B9BD5] font-semibold mb-4">45% Commission Program</div>
+                <a 
+                  href="https://rvshare.com/?ref=smartroadportal"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block bg-[#5B9BD5] text-white hover:bg-[#4A8AC4] px-6 py-3 rounded-full font-medium transition-colors"
+                >
+                  Browse RV Rentals
+                </a>
+              </div>
+
+              {/* TechnoRV Products */}
+              <div className="bg-black/20 backdrop-blur-md p-6 rounded-xl border border-white/10">
+                <h3 className="text-xl font-bold text-white mb-4">Smart RV Tech</h3>
+                <p className="text-white/80 mb-4">Upgrade your RV with cutting-edge smart technology and monitoring systems.</p>
+                <div className="text-[#5B9BD5] font-semibold mb-4">5-7% Commission Program</div>
+                <a 
+                  href="https://technorv.com/?ref=smartroadportal"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block bg-[#5B9BD5] text-white hover:bg-[#4A8AC4] px-6 py-3 rounded-full font-medium transition-colors"
+                >
+                  Shop TechnoRV
+                </a>
+              </div>
+
+              {/* Good Sam Services */}
+              <div className="bg-black/20 backdrop-blur-md p-6 rounded-xl border border-white/10">
+                <h3 className="text-xl font-bold text-white mb-4">RV Services</h3>
+                <p className="text-white/80 mb-4">Essential roadside assistance, insurance, and maintenance services for RV owners.</p>
+                <div className="text-[#5B9BD5] font-semibold mb-4">Good Sam Partner</div>
+                <a 
+                  href="https://www.goodsam.com/?ref=smartroadportal"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block bg-[#5B9BD5] text-white hover:bg-[#4A8AC4] px-6 py-3 rounded-full font-medium transition-colors"
+                >
+                  Get Good Sam
+                </a>
+              </div>
+
+              {/* RV Water Filter Store */}
+              <div className="bg-black/20 backdrop-blur-md p-6 rounded-xl border border-white/10">
+                <h3 className="text-xl font-bold text-white mb-4">Water Systems</h3>
+                <p className="text-white/80 mb-4">Premium water filtration and purification systems for safe, clean water on the road.</p>
+                <div className="text-[#5B9BD5] font-semibold mb-4">10-15% Commission Program</div>
+                <a 
+                  href="https://rvwaterfilterstore.com/?ref=smartroadportal"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block bg-[#5B9BD5] text-white hover:bg-[#4A8AC4] px-6 py-3 rounded-full font-medium transition-colors"
+                >
+                  Shop Water Filters
+                </a>
+              </div>
+
+              {/* Outdoorsy Luxury */}
+              <div className="bg-black/20 backdrop-blur-md p-6 rounded-xl border border-white/10">
+                <h3 className="text-xl font-bold text-white mb-4">Luxury Rentals</h3>
+                <p className="text-white/80 mb-4">Book unique outdoor experiences and luxury RV rentals for premium adventures.</p>
+                <div className="text-[#5B9BD5] font-semibold mb-4">$60+ Per Booking</div>
+                <a 
+                  href="https://outdoorsy.com/?ref=smartroadportal"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block bg-[#5B9BD5] text-white hover:bg-[#4A8AC4] px-6 py-3 rounded-full font-medium transition-colors"
+                >
+                  Browse Outdoorsy
+                </a>
+              </div>
+
+              {/* RV Life Tools */}
+              <div className="bg-black/20 backdrop-blur-md p-6 rounded-xl border border-white/10">
+                <h3 className="text-xl font-bold text-white mb-4">Trip Planning</h3>
+                <p className="text-white/80 mb-4">Professional RV trip planning tools, GPS navigation, and campground guides.</p>
+                <div className="text-[#5B9BD5] font-semibold mb-4">25% Commission Program</div>
+                <a 
+                  href="https://rvlife.com/?ref=smartroadportal"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block bg-[#5B9BD5] text-white hover:bg-[#4A8AC4] px-6 py-3 rounded-full font-medium transition-colors"
+                >
+                  Get RV Life
+                </a>
+              </div>
+            </div>
+          </motion.div>
+
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}

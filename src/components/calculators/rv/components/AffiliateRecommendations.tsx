@@ -20,87 +20,66 @@ const AffiliateRecommendations = ({ rvType, tripDistance, days, totalCost }: Aff
 
     const recommendations = [];
 
-    // Essential RV accessories
-    if (isLongTrip) {
-      recommendations.push({
-        title: "Victron Energy Smart Battery Monitor",
-        description: "Track your RV's battery usage and health with precision monitoring for extended trips.",
-        price: "$199",
-        originalPrice: "$249",
-        rating: 4.8,
-        reviewCount: 1247,
-        image: "/lovable-uploads/3175b015-a5c7-4df7-b8ca-b8a130b05519.png",
-        features: [
-          "Bluetooth connectivity",
-          "Real-time battery monitoring",
-          "Historical data tracking",
-          "Easy smartphone app"
-        ],
-        affiliateLink: "https://amazon.com/victron-battery-monitor",
-        badges: ["Best Seller", "Long Trip Essential"]
-      });
-    }
+    // RVShare rental recommendations (45% commission)
+    recommendations.push({
+      title: "RVShare Premium RV Rentals",
+      description: "Compare and book premium RV rentals nationwide. Save on your trip by renting instead of buying.",
+      price: "$89/night",
+      originalPrice: "$129/night",
+      rating: 4.7,
+      reviewCount: 8429,
+      image: "/lovable-uploads/3175b015-a5c7-4df7-b8ca-b8a130b05519.png",
+      features: [
+        "45% affiliate commission",
+        "24/7 roadside assistance",
+        "Insurance included",
+        "Nationwide availability"
+      ],
+      affiliateLink: "https://rvshare.com/?ref=smartroadportal",
+      badges: ["RVShare Partner", "Best Value"]
+    });
 
-    // Fuel savings for long distance
-    if (isLongDistance) {
+    // Outdoorsy rentals ($60+ commission per booking)
+    if (isLongTrip || isLargeRV) {
       recommendations.push({
-        title: "FUELSHARK Fuel Saver Device",
-        description: "Improve your RV's fuel efficiency by up to 15% on long-distance trips.",
-        price: "$39.99",
-        originalPrice: "$59.99",
-        rating: 4.3,
-        reviewCount: 892,
+        title: "Outdoorsy Luxury RV Rentals",
+        description: "Book luxury RVs and unique outdoor experiences. Perfect for premium travel experiences.",
+        price: "$150/night",
+        originalPrice: "$200/night", 
+        rating: 4.8,
+        reviewCount: 5234,
         image: "/lovable-uploads/51ac2438-08c7-47ee-b56d-876aa3bbdc80.png",
         features: [
-          "Easy plug-in installation",
-          "Works with all engines",
-          "Up to 15% fuel savings",
-          "Money-back guarantee"
+          "$60+ commission per booking",
+          "Luxury RV selection",
+          "Unique experiences",
+          "Premium insurance"
         ],
-        affiliateLink: "https://amazon.com/fuelshark-device",
-        badges: ["Fuel Saver"]
+        affiliateLink: "https://outdoorsy.com/?ref=smartroadportal",
+        badges: ["Outdoorsy Partner", "Luxury"]
       });
     }
 
-    // Large RV specific
-    if (isLargeRV) {
+    // RV Life trip planning (25% commission)
+    if (isLongDistance) {
       recommendations.push({
-        title: "KING Jack Digital TV Antenna",
-        description: "Get crystal clear TV reception even in remote locations with this powerful directional antenna.",
-        price: "$399",
-        originalPrice: "$499",
+        title: "RV Life Trip Planning Tools",
+        description: "Plan your perfect RV route with GPS navigation, campground reviews, and trip planning tools.",
+        price: "$49/year",
+        originalPrice: "$69/year",
         rating: 4.6,
-        reviewCount: 623,
+        reviewCount: 3892,
         image: "/lovable-uploads/7b0008af-4737-468b-820b-1f3d6b92a458.png",
         features: [
-          "360° rotation",
-          "Built-in signal finder",
-          "Works with multiple TVs",
-          "Weather resistant"
+          "25% affiliate commission",
+          "RV-safe GPS navigation",
+          "Campground database",
+          "Trip planning tools"
         ],
-        affiliateLink: "https://amazon.com/king-jack-antenna",
-        badges: ["Large RV Recommended"]
+        affiliateLink: "https://rvlife.com/?ref=smartroadportal",
+        badges: ["RV Life Partner", "Trip Planning"]
       });
     }
-
-    // Always include popular essentials
-    recommendations.push({
-      title: "Progressive Industries EMS-HW30C Surge Protector",
-      description: "Protect your RV's electrical system from power surges and faulty campground wiring.",
-      price: "$299",
-      originalPrice: "$349",
-      rating: 4.9,
-      reviewCount: 2156,
-      image: "/lovable-uploads/9ad50274-5f5b-47fa-8278-32599d734b3e.png",
-      features: [
-        "50 amp surge protection",
-        "LED diagnostic display",
-        "Automatic shut-off",
-        "Weather resistant housing"
-      ],
-      affiliateLink: "https://amazon.com/progressive-ems-protector",
-      badges: ["Essential", "Top Rated"]
-    });
 
     return recommendations.slice(0, 3); // Return top 3 recommendations
   };
@@ -133,46 +112,47 @@ const AffiliateRecommendations = ({ rvType, tripDistance, days, totalCost }: Aff
         </CardContent>
       </Card>
 
-      {/* Cost savings CTA */}
+      {/* RVShare rental CTA */}
       <AffiliateCTABanner
-        title="Save on Your RV Trip Costs"
-        description={`Your estimated trip cost is $${totalCost}. Get exclusive discounts on RV essentials and services.`}
-        buttonText="View All Deals"
-        affiliateLink="https://rvshare.com/deals"
+        title="Save on Your RV Trip - Rent Instead of Buy"
+        description={`Your estimated trip cost is $${totalCost}. Compare rental prices and save thousands with RVShare.`}
+        buttonText="Compare RV Rentals"
+        affiliateLink="https://rvshare.com/?ref=smartroadportal"
         className="my-6"
       />
 
-      {/* Insurance recommendation */}
+      {/* Good Sam roadside assistance */}
       <Card className="bg-gradient-to-r from-green-900/20 to-blue-900/20 border-green-800 text-white">
         <CardContent className="p-6">
           <div className="flex flex-col md:flex-row items-start gap-4">
             <div className="flex-1">
-              <h3 className="text-lg font-semibold mb-2 text-green-300">🛡️ Protect Your Investment</h3>
+              <h3 className="text-lg font-semibold mb-2 text-green-300">🛡️ Good Sam Roadside Assistance</h3>
               <p className="text-gray-300 text-sm mb-3">
-                Don't let unexpected breakdowns ruin your trip. Get comprehensive RV insurance and roadside assistance.
+                Don't let unexpected breakdowns ruin your trip. Get comprehensive RV roadside assistance and services.
               </p>
               <ul className="text-sm text-gray-300 space-y-1">
-                <li>• 24/7 roadside assistance</li>
-                <li>• Nationwide towing coverage</li>
+                <li>• 24/7 RV-specific roadside assistance</li>
+                <li>• Unlimited distance towing</li>
                 <li>• Emergency repair services</li>
+                <li>• Trip interruption coverage</li>
               </ul>
             </div>
             <div className="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
               <a 
-                href="https://www.progressive.com/rv-insurance/"
+                href="https://www.goodsam.com/roadside-assistance/?ref=smartroadportal"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="bg-green-600 hover:bg-green-700 text-white px-4 py-3 rounded-lg font-medium transition-colors text-center min-h-[44px] flex items-center justify-center touch-manipulation"
               >
-                Get Quote
+                Get Good Sam Coverage
               </a>
               <a 
-                href="https://www.goodsam.com/roadside-assistance"
+                href="https://rvlife.com/?ref=smartroadportal"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-3 rounded-lg font-medium transition-colors text-center min-h-[44px] flex items-center justify-center touch-manipulation"
               >
-                Roadside Help
+                Plan Your Route
               </a>
             </div>
           </div>
