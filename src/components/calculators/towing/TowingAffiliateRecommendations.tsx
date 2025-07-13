@@ -30,6 +30,53 @@ const TowingAffiliateRecommendations = () => {
     }
   ];
 
+  const essentialServices = [
+    {
+      title: "RVShare",
+      description: "Rent properly equipped towing vehicles and trailers. Test different towing configurations before making expensive equipment purchases.",
+      link: "https://rvshare.com",
+      features: [
+        "Towing vehicle rentals",
+        "Trailer combinations",
+        "Test before buying",
+        "Expert configurations"
+      ]
+    },
+    {
+      title: "Outdoorsy",
+      description: "Book premium towing setups with professional hitching services. Experience luxury towing combinations with expert support included.",
+      link: "https://outdoorsy.com",
+      features: [
+        "Premium towing setups",
+        "Professional hitching",
+        "Luxury combinations",
+        "Expert support"
+      ]
+    },
+    {
+      title: "RV Life",
+      description: "Plan towing safe routes with bridge heights, weight restrictions, and road condition data. Navigate confidently with RV specific routing.",
+      link: "https://rvlife.com",
+      features: [
+        "Towing safe routes",
+        "Bridge height data",
+        "Weight restrictions",
+        "RV specific navigation"
+      ]
+    },
+    {
+      title: "Good Sam",
+      description: "Get emergency towing assistance and roadside support. Professional help when towing equipment fails or accidents happen.",
+      link: "https://goodsam.com",
+      features: [
+        "Emergency towing",
+        "Roadside assistance",
+        "Professional support",
+        "24/7 availability"
+      ]
+    }
+  ];
+
   return (
     <div className="space-y-6 mt-8">
       <Card className="bg-[#091020] border-gray-700 text-white">
@@ -67,6 +114,51 @@ const TowingAffiliateRecommendations = () => {
                       className="flex items-center justify-center gap-2"
                     >
                       Visit {product.title}
+                      <ExternalLink className="h-4 w-4" />
+                    </a>
+                  </Button>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </CardContent>
+      </Card>
+
+      <Card className="bg-[#091020] border-gray-700 text-white">
+        <CardHeader>
+          <CardTitle className="text-xl text-[#60A5FA] flex items-center gap-2">
+            🚐 Essential RV Services
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <p className="text-gray-300 mb-6">
+            Complete your RV experience with rental options, route planning, and emergency support services:
+          </p>
+          
+          <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-6">
+            {essentialServices.map((service, index) => (
+              <Card key={index} className="bg-[#131a2a] border-gray-600 h-full">
+                <CardContent className="p-6">
+                  <h3 className="text-lg font-semibold text-white mb-3">{service.title}</h3>
+                  <p className="text-gray-300 text-sm mb-4">{service.description}</p>
+                  
+                  <ul className="text-sm text-gray-300 space-y-1 mb-4">
+                    {service.features.map((feature, idx) => (
+                      <li key={idx}>• {feature}</li>
+                    ))}
+                  </ul>
+                  
+                  <Button 
+                    asChild
+                    className="w-full bg-[#60A5FA] hover:bg-[#4B8FE3] text-white"
+                  >
+                    <a 
+                      href={service.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-center gap-2"
+                    >
+                      Visit {service.title}
                       <ExternalLink className="h-4 w-4" />
                     </a>
                   </Button>
