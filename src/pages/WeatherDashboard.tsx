@@ -14,6 +14,7 @@ import LocationSearch from "@/components/weather/LocationSearch";
 import TripImpact from "@/components/weather/TripImpact";
 import HeaderImage from "@/components/weather/HeaderImage";
 import WeatherCardsSection from "@/components/weather/WeatherCardsSection";
+import WeatherAffiliateRecommendations from "@/components/affiliate/WeatherAffiliateRecommendations";
 
 const WeatherDashboard = () => {
   // Scroll to top on component mount
@@ -140,6 +141,8 @@ const WeatherDashboard = () => {
           </section>
 
           <SafetyInsights />
+          
+          <WeatherAffiliateRecommendations />
         </div>
       </div>
     </Layout>

@@ -195,7 +195,7 @@ const Models = () => {
             transition={{ delay: 1.2 }}
             className="mt-12"
           >
-            <div className="grid md:grid-cols-2 gap-8">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               <AffiliateProductCard
                 title="RV Life Pro - Model Planning"
                 description="Compare RV models, research features, and plan your purchase with comprehensive RV data and tools."
@@ -216,7 +216,7 @@ const Models = () => {
               
               <AffiliateProductCard
                 title="Good Sam RV Financing"
-                description="Get pre-approved for RV financing with competitive rates and specialized RV loan expertise."
+                description="Get pre-approved for RV financing with competitive rates and specialized RV loan expertise for your dream RV purchase."
                 price="From 4.99%"
                 originalPrice="From 6.99%"
                 rating={4.6}
@@ -225,11 +225,29 @@ const Models = () => {
                 features={[
                   "Competitive interest rates",
                   "RV-specialized financing",
-                  "Quick pre-approval",
+                  "Quick pre-approval process",
                   "Extended loan terms"
                 ]}
-                affiliateLink="https://goodsam.com/rv-financing"
+                affiliateLink="https://goodsam.com"
                 badges={["Financing Partner"]}
+              />
+              
+              <AffiliateProductCard
+                title="TechnoRV Model Upgrade Kits"
+                description="Smart technology upgrade packages to enhance any RV model with modern connectivity and monitoring systems."
+                price="$499"
+                originalPrice="$699"
+                rating={4.7}
+                reviewCount={423}
+                image="/lovable-uploads/11a2f8d8-22f5-4ed7-83f9-28b08a64aeb5.png"
+                features={[
+                  "Smart monitoring systems",
+                  "Professional installation",
+                  "Model-specific compatibility",
+                  "Technology upgrades"
+                ]}
+                affiliateLink="https://technorv.com"
+                badges={["Tech Upgrade"]}
               />
             </div>
           </motion.div>

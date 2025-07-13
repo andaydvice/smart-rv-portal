@@ -4,6 +4,7 @@ import Navbar from "@/components/Navbar";
 import Layout from "@/components/layout/Layout";
 import { Warehouse } from "lucide-react";
 import LocationPreviewSection from "@/components/storage/LocationPreviewSection";
+import StorageAffiliateRecommendations from "@/components/affiliate/StorageAffiliateRecommendations";
 import { useState, useEffect } from "react";
 import { StorageFacility } from "@/components/storage/types";
 import "../styles/force-markers.css"; // Only load the minimal, clean CSS
@@ -198,6 +199,11 @@ export default function StorageFacilities() {
       {/* Location Preview Section */}
       <div className="mt-8 mb-12">
         <LocationPreviewSection mapToken={mapToken} featuredLocation={featuredLocation} />
+      </div>
+      
+      {/* Storage Services and Recommendations */}
+      <div className="max-w-7xl mx-auto px-4">
+        <StorageAffiliateRecommendations />
       </div>
     </Layout>
   );

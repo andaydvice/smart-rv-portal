@@ -16,7 +16,7 @@ const TechnologyProductRecommendations = () => {
         "Smartphone app control",
         "Long battery life"
       ],
-      affiliateLink: "https://technorv.com/gps-tracker?ref=smartroadportal",
+      affiliateLink: "https://technorv.com",
       badges: ["TechnoRV Partner"]
     },
     {
@@ -33,7 +33,7 @@ const TechnologyProductRecommendations = () => {
         "Works with all carriers",
         "Weather resistant design"
       ],
-      affiliateLink: "https://technorv.com/wifi-booster?ref=smartroadportal",
+      affiliateLink: "https://technorv.com",
       badges: ["Connectivity Essential"]
     },
     {
@@ -50,25 +50,25 @@ const TechnologyProductRecommendations = () => {
         "Easy installation",
         "NSF certified"
       ],
-      affiliateLink: "https://rvwaterfilterstore.com/?ref=smartroadportal",
+      affiliateLink: "https://rvwaterfilterstore.com",
       badges: ["Water Safety"]
     },
     {
-      title: "TechnoRV Smart Tank Monitor",
-      description: "Monitor all your RV tank levels remotely with precision sensors and smartphone integration.",
-      price: "$179",
-      originalPrice: "$249",
+      title: "Good Sam RV Tech Support",
+      description: "Professional technical support and installation services for all your RV technology needs and upgrades.",
+      price: "$99",
+      originalPrice: "$149",
       rating: 4.5,
       reviewCount: 234,
       image: "/lovable-uploads/11a2f8d8-22f5-4ed7-83f9-28b08a64aeb5.png",
       features: [
-        "Precise tank level monitoring",
-        "Mobile app integration",
-        "Multiple tank support",
-        "Low level alerts"
+        "Professional tech support",
+        "Installation services",
+        "Upgrade consultations",
+        "24/7 help availability"
       ],
-      affiliateLink: "https://technorv.com/tank-monitor?ref=smartroadportal",
-      badges: ["Smart Monitoring"]
+      affiliateLink: "https://goodsam.com",
+      badges: ["Tech Support"]
     }
   ];
 

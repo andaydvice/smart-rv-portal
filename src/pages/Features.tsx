@@ -98,8 +98,8 @@ const Features = () => {
             
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
               <AffiliateProductCard
-                title="Victron Smart Power System"
-                description="Complete smart power management with remote monitoring and advanced battery protection."
+                title="TechnoRV Smart Power Monitor"
+                description="Complete smart power management with remote monitoring and advanced battery protection for your RV."
                 price="$399"
                 originalPrice="$499"
                 rating={4.9}
@@ -111,13 +111,13 @@ const Features = () => {
                   "Advanced power analytics",
                   "Solar integration ready"
                 ]}
-                affiliateLink="https://victronenergy.com/power-systems"
-                badges={["Premium Power"]}
+                affiliateLink="https://technorv.com"
+                badges={["Smart Power"]}
               />
               
               <AffiliateProductCard
                 title="TechnoRV Security Suite"
-                description="Comprehensive RV security with cameras, sensors, and smartphone integration."
+                description="Comprehensive RV security with cameras, sensors, and smartphone integration for complete peace of mind."
                 price="$449"
                 originalPrice="$599"
                 rating={4.8}
@@ -127,36 +127,36 @@ const Features = () => {
                   "HD security cameras",
                   "Motion & door sensors",
                   "Mobile app alerts",
-                  "Cloud storage included"
+                  "Professional monitoring"
                 ]}
-                affiliateLink="https://technorv.com/security-suite"
+                affiliateLink="https://technorv.com"
                 badges={["Security Pro"]}
               />
               
               <AffiliateProductCard
-                title="Winegard ConnecT WiFi"
-                description="Powerful WiFi extender and cellular booster designed specifically for RVs."
-                price="$599"
-                originalPrice="$699"
+                title="RV Water Filter Store Premium Kit"
+                description="Advanced water filtration and monitoring system for safe, clean water throughout your RV adventures."
+                price="$299"
+                originalPrice="$399"
                 rating={4.7}
                 reviewCount={423}
                 image="/lovable-uploads/11a2f8d8-22f5-4ed7-83f9-28b08a64aeb5.png"
                 features={[
-                  "WiFi range extension",
-                  "Cellular signal boost",
+                  "Multi-stage filtration",
+                  "Smart monitoring system",
                   "Easy installation",
-                  "Works with all carriers"
+                  "NSF certified components"
                 ]}
-                affiliateLink="https://winegard.com/connect-wifi"
-                badges={["Connectivity King"]}
+                affiliateLink="https://rvwaterfilterstore.com"
+                badges={["Water Safety"]}
               />
             </div>
             
             <AffiliateCTABanner
               title="Ready to Upgrade Your RV?"
-              description="Transform your RV into a smart home on wheels with these proven technologies"
+              description="Transform your RV into a smart home on wheels with these proven technologies from our trusted partners"
               buttonText="Shop All RV Upgrades"
-              affiliateLink="https://rvlife.com/smart-upgrades"
+              affiliateLink="https://rvlife.com"
             />
           </motion.div>
         </div>
