@@ -128,7 +128,7 @@ const Products = () => {
               <div className="bg-black/20 backdrop-blur-md p-6 rounded-xl border border-white/10">
                 <h3 className="text-xl font-bold text-white mb-4">RV Rentals</h3>
                 <p className="text-white/80 mb-4">Compare and book premium RV rentals nationwide. Perfect for trying before buying.</p>
-                <div className="text-[#5B9BD5] font-semibold mb-4">45% Commission Program</div>
+                <div className="text-[#5B9BD5] font-semibold mb-4">Nationwide Network • Insurance Included</div>
                 <a 
                   href="https://rvshare.com/?ref=smartroadportal"
                   target="_blank"
@@ -143,7 +143,7 @@ const Products = () => {
               <div className="bg-black/20 backdrop-blur-md p-6 rounded-xl border border-white/10">
                 <h3 className="text-xl font-bold text-white mb-4">Smart RV Tech</h3>
                 <p className="text-white/80 mb-4">Upgrade your RV with cutting-edge smart technology and monitoring systems.</p>
-                <div className="text-[#5B9BD5] font-semibold mb-4">5-7% Commission Program</div>
+                <div className="text-[#5B9BD5] font-semibold mb-4">Professional Installation • Warranty Included</div>
                 <a 
                   href="https://technorv.com/?ref=smartroadportal"
                   target="_blank"
@@ -173,7 +173,7 @@ const Products = () => {
               <div className="bg-black/20 backdrop-blur-md p-6 rounded-xl border border-white/10">
                 <h3 className="text-xl font-bold text-white mb-4">Water Systems</h3>
                 <p className="text-white/80 mb-4">Premium water filtration and purification systems for safe, clean water on the road.</p>
-                <div className="text-[#5B9BD5] font-semibold mb-4">10-15% Commission Program</div>
+                <div className="text-[#5B9BD5] font-semibold mb-4">Clean Water Guarantee • Easy Installation</div>
                 <a 
                   href="https://rvwaterfilterstore.com/?ref=smartroadportal"
                   target="_blank"
@@ -188,7 +188,7 @@ const Products = () => {
               <div className="bg-black/20 backdrop-blur-md p-6 rounded-xl border border-white/10">
                 <h3 className="text-xl font-bold text-white mb-4">Luxury Rentals</h3>
                 <p className="text-white/80 mb-4">Book unique outdoor experiences and luxury RV rentals for premium adventures.</p>
-                <div className="text-[#5B9BD5] font-semibold mb-4">$60+ Per Booking</div>
+                <div className="text-[#5B9BD5] font-semibold mb-4">Luxury Selection • Premium Service</div>
                 <a 
                   href="https://outdoorsy.com/?ref=smartroadportal"
                   target="_blank"
@@ -203,7 +203,7 @@ const Products = () => {
               <div className="bg-black/20 backdrop-blur-md p-6 rounded-xl border border-white/10">
                 <h3 className="text-xl font-bold text-white mb-4">Trip Planning</h3>
                 <p className="text-white/80 mb-4">Professional RV trip planning tools, GPS navigation, and campground guides.</p>
-                <div className="text-[#5B9BD5] font-semibold mb-4">25% Commission Program</div>
+                <div className="text-[#5B9BD5] font-semibold mb-4">RV-Safe Routes • Expert Reviews</div>
                 <a 
                   href="https://rvlife.com/?ref=smartroadportal"
                   target="_blank"

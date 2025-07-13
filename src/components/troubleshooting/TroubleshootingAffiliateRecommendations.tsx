@@ -32,7 +32,7 @@ const TroubleshootingAffiliateRecommendations = () => {
         "Real-time system diagnostics",
         "Step-by-step repair guides",
         "Professional troubleshooting",
-        "5-7% commission program"
+        "Professional support included"
       ],
       affiliateLink: "https://technorv.com/diagnostic-tool?ref=smartroadportal",
       badges: ["TechnoRV Partner", "Diagnostic"]
@@ -49,7 +49,7 @@ const TroubleshootingAffiliateRecommendations = () => {
         "Emergency water purification",
         "Portable filtration system",
         "Safe drinking water guarantee",
-        "10-15% commission program"
+        "Easy installation guide"
       ],
       affiliateLink: "https://rvwaterfilterstore.com/emergency-kit?ref=smartroadportal",
       badges: ["Water Safety", "Emergency Kit"]
