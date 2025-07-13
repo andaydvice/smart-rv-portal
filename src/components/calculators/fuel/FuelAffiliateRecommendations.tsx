@@ -1,0 +1,85 @@
+import React from 'react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { ExternalLink } from 'lucide-react';
+import AffiliateDisclosure from '@/components/affiliate/AffiliateDisclosure';
+
+const FuelAffiliateRecommendations = () => {
+  const recommendations = [
+    {
+      title: "Hot Shot's Secret",
+      description: "Extend your engine life and improve fuel efficiency with premium fuel additives trusted by professional truckers and RV enthusiasts. Advanced formulas protect your engine while maximizing every mile.",
+      link: "https://hotshotsecret.com",
+      features: [
+        "Premium fuel additives",
+        "Engine protection",
+        "Improved fuel efficiency",
+        "Professional grade quality"
+      ]
+    },
+    {
+      title: "RV LIFE Pro",
+      description: "Plan smarter routes, find the best fuel prices along your journey, and discover RV friendly stops nationwide. The most comprehensive trip planning app built specifically for RVers.",
+      link: "https://rvlife.com",
+      features: [
+        "Smart route planning",
+        "Best fuel prices",
+        "RV friendly stops",
+        "Trip planning tools"
+      ]
+    }
+  ];
+
+  return (
+    <div className="space-y-6 mt-8">
+      <Card className="bg-[#091020] border-gray-700 text-white">
+        <CardHeader>
+          <CardTitle className="text-xl text-[#60A5FA] flex items-center gap-2">
+            ⛽ Recommended Fuel Solutions
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <p className="text-gray-300 mb-6">
+            Maximize your fuel efficiency and plan better routes with these trusted RV fuel solutions:
+          </p>
+          
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            {recommendations.map((product, index) => (
+              <Card key={index} className="bg-[#131a2a] border-gray-600 h-full">
+                <CardContent className="p-6">
+                  <h3 className="text-lg font-semibold text-white mb-3">{product.title}</h3>
+                  <p className="text-gray-300 text-sm mb-4">{product.description}</p>
+                  
+                  <ul className="text-sm text-gray-300 space-y-1 mb-4">
+                    {product.features.map((feature, idx) => (
+                      <li key={idx}>• {feature}</li>
+                    ))}
+                  </ul>
+                  
+                  <Button 
+                    asChild
+                    className="w-full bg-[#60A5FA] hover:bg-[#4B8FE3] text-white"
+                  >
+                    <a 
+                      href={product.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-center gap-2"
+                    >
+                      Visit {product.title}
+                      <ExternalLink className="h-4 w-4" />
+                    </a>
+                  </Button>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </CardContent>
+      </Card>
+
+      <AffiliateDisclosure compact />
+    </div>
+  );
+};
+
+export default FuelAffiliateRecommendations;
