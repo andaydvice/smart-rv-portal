@@ -1,164 +1,88 @@
 import React from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { ExternalLink } from 'lucide-react';
-import AffiliateDisclosure from '@/components/affiliate/AffiliateDisclosure';
+import { OptimizedAffiliateGrid } from './OptimizedAffiliateGrid';
 
 const WeatherAffiliateRecommendations = () => {
-  const recommendations = [
+  const weatherRecommendations = [
     {
-      title: "RV Life",
-      description: "Get comprehensive weather data, route planning with weather consideration, and real-time conditions for safe RV travel planning.",
-      link: "https://rvlife.com",
+      partner: 'rvlife' as const,
+      title: "Weather-Smart Route Planning",
+      description: "Avoid dangerous weather conditions with intelligent route planning that considers real-time weather data and forecasts.",
       features: [
-        "Weather-aware route planning",
-        "Real-time conditions",
-        "Storm tracking alerts",
-        "Safe travel recommendations"
-      ]
+        "Real-time weather integration",
+        "Storm avoidance routing",
+        "Weather-safe campgrounds",
+        "Condition-based alerts"
+      ],
+      buttonText: "Plan Weather-Safe Routes"
     },
     {
-      title: "Good Sam",
-      description: "Emergency roadside assistance when weather creates travel problems. 24/7 support for weather-related breakdowns and emergencies.",
-      link: "https://goodsam.com",
+      partner: 'goodsam' as const,
+      title: "Weather Emergency Support",
+      description: "Get immediate help when severe weather threatens your safety with 24/7 emergency assistance and storm support.",
       features: [
-        "24/7 emergency assistance",
-        "Weather-related breakdowns",
-        "Storm damage support",
-        "Safe haven recommendations"
-      ]
+        "24/7 weather emergency help",
+        "Storm damage assistance",
+        "Safe shelter guidance",
+        "Emergency towing in severe weather"
+      ],
+      buttonText: "Get Weather Protection"
     }
   ];
 
-  const essentialServices = [
+  const weatherServices = [
     {
-      title: "RVShare",
-      description: "Rent weather-appropriate RVs for your trip. Choose models equipped for your destination's weather conditions.",
-      link: "https://rvshare.com",
+      partner: 'rvshare' as const,
+      title: "Weather-Appropriate RVs",
+      description: "Rent RVs specifically equipped for your destination's weather conditions - from desert heat to mountain snow.",
       features: [
-        "Weather-appropriate RVs",
-        "Climate-specific features",
-        "Seasonal availability",
+        "Climate-specific RV features",
+        "Seasonal equipment included",
+        "Weather-tested models",
         "Local weather expertise"
-      ]
+      ],
+      buttonText: "Find Weather-Ready RV"
     },
     {
-      title: "Outdoorsy",
-      description: "Book premium RVs with advanced weather monitoring systems and climate control for comfortable travel in any conditions.",
-      link: "https://outdoorsy.com",
+      partner: 'outdoorsy' as const,
+      title: "All-Weather Luxury RVs",
+      description: "Book premium RVs with advanced climate control and weather monitoring for comfortable travel in any conditions.",
       features: [
-        "Advanced climate control",
-        "Weather monitoring systems",
-        "Premium comfort features",
-        "All-season capabilities"
-      ]
+        "Advanced climate systems",
+        "Weather monitoring included",
+        "All-season capabilities",
+        "Premium comfort features"
+      ],
+      buttonText: "Book Weather-Ready Luxury"
     },
     {
-      title: "TechnoRV",
-      description: "Smart weather monitoring systems and sensors that provide real-time environmental data for your RV and surroundings.",
-      link: "https://technorv.com",
+      partner: 'technorv' as const,
+      title: "Smart Weather Monitoring",
+      description: "Stay ahead of weather changes with intelligent sensors that monitor conditions around your RV and alert you to threats.",
       features: [
-        "Weather monitoring systems",
-        "Environmental sensors",
-        "Real-time data tracking",
-        "Alert notifications"
-      ]
+        "Environmental sensor systems",
+        "Real-time weather alerts",
+        "Automatic storm warnings",
+        "Remote condition monitoring"
+      ],
+      buttonText: "Monitor Weather Conditions"
     }
   ];
 
   return (
-    <div className="space-y-6 mt-8">
-      <Card className="bg-[#091020] border-gray-700 text-white">
-        <CardHeader>
-          <CardTitle className="text-xl text-[#60A5FA] flex items-center gap-2">
-            🌤️ Weather Planning & Safety Tools
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <p className="text-gray-300 mb-6">
-            Stay safe on the road with these essential weather planning and emergency response services:
-          </p>
-          
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            {recommendations.map((product, index) => (
-              <Card key={index} className="bg-[#131a2a] border-gray-600 h-full">
-                <CardContent className="p-6">
-                  <h3 className="text-lg font-semibold text-white mb-3">{product.title}</h3>
-                  <p className="text-gray-300 text-sm mb-4">{product.description}</p>
-                  
-                  <ul className="text-sm text-gray-300 space-y-1 mb-4">
-                    {product.features.map((feature, idx) => (
-                      <li key={idx}>• {feature}</li>
-                    ))}
-                  </ul>
-                  
-                  <Button 
-                    asChild
-                    className="w-full bg-[#60A5FA] hover:bg-[#4B8FE3] text-white"
-                  >
-                    <a 
-                      href={product.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center justify-center gap-2"
-                    >
-                      Visit {product.title}
-                      <ExternalLink className="h-4 w-4" />
-                    </a>
-                  </Button>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </CardContent>
-      </Card>
-
-      <Card className="bg-[#091020] border-gray-700 text-white">
-        <CardHeader>
-          <CardTitle className="text-xl text-[#60A5FA] flex items-center gap-2">
-            🚐 Weather-Ready RV Services
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <p className="text-gray-300 mb-6">
-            Complete your weather-safe RV experience with these services and technology solutions:
-          </p>
-          
-          <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
-            {essentialServices.map((service, index) => (
-              <Card key={index} className="bg-[#131a2a] border-gray-600 h-full">
-                <CardContent className="p-6">
-                  <h3 className="text-lg font-semibold text-white mb-3">{service.title}</h3>
-                  <p className="text-gray-300 text-sm mb-4">{service.description}</p>
-                  
-                  <ul className="text-sm text-gray-300 space-y-1 mb-4">
-                    {service.features.map((feature, idx) => (
-                      <li key={idx}>• {feature}</li>
-                    ))}
-                  </ul>
-                  
-                  <Button 
-                    asChild
-                    className="w-full bg-[#60A5FA] hover:bg-[#4B8FE3] text-white"
-                  >
-                    <a 
-                      href={service.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center justify-center gap-2"
-                    >
-                      Visit {service.title}
-                      <ExternalLink className="h-4 w-4" />
-                    </a>
-                  </Button>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </CardContent>
-      </Card>
-
-      <AffiliateDisclosure compact />
+    <div className="space-y-8 mt-8">
+      <OptimizedAffiliateGrid
+        title="🌤️ Stay Safe in Any Weather"
+        subtitle="Protect yourself and your RV with weather-smart planning and emergency support that keeps you safe:"
+        partners={weatherRecommendations}
+        gridCols="2"
+      />
+      
+      <OptimizedAffiliateGrid
+        title="🚐 Weather-Ready RV Solutions"
+        subtitle="Experience confident travel with RVs and technology designed for any weather condition:"
+        partners={weatherServices}
+        gridCols="3"
+      />
     </div>
   );
 };

@@ -1,164 +1,88 @@
 import React from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { ExternalLink } from 'lucide-react';
-import AffiliateDisclosure from '@/components/affiliate/AffiliateDisclosure';
+import { OptimizedAffiliateGrid } from '@/components/affiliate/OptimizedAffiliateGrid';
 
 const FuelAffiliateRecommendations = () => {
-  const recommendations = [
+  const fuelRecommendations = [
     {
-      title: "RV Life",
-      description: "Plan fuel efficient routes, find the best fuel prices along your journey, and discover RV friendly stops nationwide. The most comprehensive trip planning app built specifically for RVers.",
-      link: "https://rvlife.com",
+      partner: 'rvlife' as const,
+      title: "Smart Route Planning",
+      description: "Save money on fuel with intelligent route planning that finds the cheapest gas stations and most fuel-efficient paths for your RV.",
       features: [
-        "Smart route planning",
-        "Best fuel prices nationwide",
-        "RV friendly stops",
-        "Fuel efficient routing"
-      ]
+        "Real-time fuel price comparison",
+        "RV-optimized fuel-efficient routes", 
+        "Gas station finder with RV access",
+        "Trip cost calculator"
+      ],
+      buttonText: "Start Saving on Fuel"
     },
     {
-      title: "Good Sam",
-      description: "Save on fuel costs with Good Sam membership fuel discounts at thousands of gas stations nationwide. Plus get emergency roadside assistance when you need it most.",
-      link: "https://goodsam.com",
+      partner: 'goodsam' as const,
+      title: "Fuel Discounts & Emergency Help",
+      description: "Get instant fuel savings at thousands of stations plus 24/7 roadside assistance when fuel-related problems strand you.",
       features: [
-        "Fuel discounts nationwide",
-        "Emergency roadside assistance",
-        "Member savings program",
-        "24/7 support availability"
-      ]
+        "Up to 8¢/gallon fuel discounts",
+        "Emergency fuel delivery service",
+        "24/7 roadside assistance", 
+        "Nationwide coverage"
+      ],
+      buttonText: "Save on Every Fill-Up"
     }
   ];
 
-  const essentialServices = [
+  const supportServices = [
     {
-      title: "RVShare",
-      description: "Rent fuel efficient RVs for your next adventure. Compare hundreds of well maintained RVs with detailed fuel consumption data nationwide.",
-      link: "https://rvshare.com",
+      partner: 'rvshare' as const,
+      title: "Test Fuel-Efficient RVs",
+      description: "Try different RV models to find the most fuel-efficient option for your travel style before making a purchase.",
       features: [
-        "Fuel efficient RV rentals",
-        "Detailed consumption data",
-        "Nationwide availability",
-        "Well maintained fleet"
-      ]
+        "Compare fuel economy across models",
+        "Real-world fuel consumption data",
+        "Try before you buy",
+        "Owner-reported efficiency ratings"
+      ],
+      buttonText: "Find Efficient RVs"
     },
     {
-      title: "Outdoorsy",
-      description: "Book premium RVs with superior fuel efficiency. Choose from luxury models that maximize every mile and minimize fuel costs.",
-      link: "https://outdoorsy.com",
+      partner: 'outdoorsy' as const,
+      title: "Premium Efficient Rentals", 
+      description: "Book newer, well-maintained RVs that offer better fuel efficiency and cost savings for your trips.",
       features: [
-        "Premium RV rentals",
-        "Superior fuel efficiency",
-        "Luxury models",
-        "Cost effective travel"
-      ]
+        "Newer, fuel-efficient models",
+        "Professional maintenance records",
+        "Fuel consumption estimates",
+        "Premium RV selection"
+      ],
+      buttonText: "Book Efficient RV"
     },
     {
-      title: "TechnoRV",
-      description: "Smart monitoring systems that help optimize fuel consumption and engine performance. Professional grade RV technology for better fuel efficiency.",
-      link: "https://technorv.com",
+      partner: 'technorv' as const,
+      title: "Smart Fuel Monitoring",
+      description: "Track your RV's fuel consumption in real-time and optimize your driving habits to maximize every gallon.",
       features: [
-        "Smart monitoring systems",
-        "Fuel consumption optimization",
-        "Engine performance tracking",
-        "Professional RV technology"
-      ]
+        "Real-time fuel monitoring",
+        "Driving efficiency coaching",
+        "Consumption tracking & alerts",
+        "Route optimization data"
+      ],
+      buttonText: "Monitor Fuel Usage"
     }
   ];
 
   return (
-    <div className="space-y-6 mt-8">
-      <Card className="bg-[#091020] border-gray-700 text-white">
-        <CardHeader>
-          <CardTitle className="text-xl text-[#60A5FA] flex items-center gap-2">
-            ⛽ Recommended Fuel Solutions
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <p className="text-gray-300 mb-6">
-            Maximize your fuel efficiency and plan better routes with these trusted RV fuel solutions:
-          </p>
-          
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            {recommendations.map((product, index) => (
-              <Card key={index} className="bg-[#131a2a] border-gray-600 h-full">
-                <CardContent className="p-6">
-                  <h3 className="text-lg font-semibold text-white mb-3">{product.title}</h3>
-                  <p className="text-gray-300 text-sm mb-4">{product.description}</p>
-                  
-                  <ul className="text-sm text-gray-300 space-y-1 mb-4">
-                    {product.features.map((feature, idx) => (
-                      <li key={idx}>• {feature}</li>
-                    ))}
-                  </ul>
-                  
-                  <Button 
-                    asChild
-                    className="w-full bg-[#60A5FA] hover:bg-[#4B8FE3] text-white"
-                  >
-                    <a 
-                      href={product.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center justify-center gap-2"
-                    >
-                      Visit {product.title}
-                      <ExternalLink className="h-4 w-4" />
-                    </a>
-                  </Button>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </CardContent>
-      </Card>
-
-      <Card className="bg-[#091020] border-gray-700 text-white">
-        <CardHeader>
-          <CardTitle className="text-xl text-[#60A5FA] flex items-center gap-2">
-            🚐 Essential RV Services
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <p className="text-gray-300 mb-6">
-            Complete your RV experience with rental options, roadside assistance, and support services:
-          </p>
-          
-          <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
-            {essentialServices.map((service, index) => (
-              <Card key={index} className="bg-[#131a2a] border-gray-600 h-full">
-                <CardContent className="p-6">
-                  <h3 className="text-lg font-semibold text-white mb-3">{service.title}</h3>
-                  <p className="text-gray-300 text-sm mb-4">{service.description}</p>
-                  
-                  <ul className="text-sm text-gray-300 space-y-1 mb-4">
-                    {service.features.map((feature, idx) => (
-                      <li key={idx}>• {feature}</li>
-                    ))}
-                  </ul>
-                  
-                  <Button 
-                    asChild
-                    className="w-full bg-[#60A5FA] hover:bg-[#4B8FE3] text-white"
-                  >
-                    <a 
-                      href={service.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center justify-center gap-2"
-                    >
-                      Visit {service.title}
-                      <ExternalLink className="h-4 w-4" />
-                    </a>
-                  </Button>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </CardContent>
-      </Card>
-
-      <AffiliateDisclosure compact />
+    <div className="space-y-8 mt-8">
+      <OptimizedAffiliateGrid
+        title="⛽ Save Money on RV Fuel"
+        subtitle="Reduce your fuel costs with smart planning tools and member discounts that put money back in your pocket:"
+        partners={fuelRecommendations}
+        gridCols="2"
+      />
+      
+      <OptimizedAffiliateGrid
+        title="🚐 Smart RV Solutions" 
+        subtitle="Maximize fuel efficiency with the right RV choice and smart monitoring technology:"
+        partners={supportServices}
+        gridCols="3"
+      />
     </div>
   );
 };
