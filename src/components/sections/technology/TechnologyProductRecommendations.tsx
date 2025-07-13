@@ -4,7 +4,7 @@ const TechnologyProductRecommendations = () => {
   const products = [
     {
       title: "TechnoRV Smart GPS Tracker",
-      description: "Professional GPS tracking system with real-time location monitoring and theft alerts. 5-7% commission program.",
+      description: "Professional GPS tracking system with real-time location monitoring and theft alerts for complete RV security.",
       price: "$199",
       originalPrice: "$299", 
       rating: 4.8,
@@ -38,7 +38,7 @@ const TechnologyProductRecommendations = () => {
     },
     {
       title: "RV Water Filter Store Premium System",
-      description: "Complete water filtration system with smart monitoring capabilities. 10-15% commission program.",
+      description: "Complete water filtration system with smart monitoring capabilities for safe, clean water anywhere.",
       price: "$299",
       originalPrice: "$399",
       rating: 4.7,

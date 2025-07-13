@@ -30,10 +30,10 @@ const AffiliateRecommendations = ({ rvType, tripDistance, days, totalCost }: Aff
       reviewCount: 8429,
       image: "/lovable-uploads/3175b015-a5c7-4df7-b8ca-b8a130b05519.png",
       features: [
-        "45% affiliate commission",
         "24/7 roadside assistance",
-        "Insurance included",
-        "Nationwide availability"
+        "Insurance included", 
+        "Nationwide availability",
+        "Instant booking"
       ],
       affiliateLink: "https://rvshare.com/?ref=smartroadportal",
       badges: ["RVShare Partner", "Best Value"]
@@ -50,10 +50,10 @@ const AffiliateRecommendations = ({ rvType, tripDistance, days, totalCost }: Aff
         reviewCount: 5234,
         image: "/lovable-uploads/51ac2438-08c7-47ee-b56d-876aa3bbdc80.png",
         features: [
-          "$60+ commission per booking",
           "Luxury RV selection",
-          "Unique experiences",
-          "Premium insurance"
+          "Unique experiences", 
+          "Premium insurance",
+          "Concierge service"
         ],
         affiliateLink: "https://outdoorsy.com/?ref=smartroadportal",
         badges: ["Outdoorsy Partner", "Luxury"]
@@ -71,10 +71,10 @@ const AffiliateRecommendations = ({ rvType, tripDistance, days, totalCost }: Aff
         reviewCount: 3892,
         image: "/lovable-uploads/7b0008af-4737-468b-820b-1f3d6b92a458.png",
         features: [
-          "25% affiliate commission",
           "RV-safe GPS navigation",
           "Campground database",
-          "Trip planning tools"
+          "Trip planning tools",
+          "Real-time traffic updates"
         ],
         affiliateLink: "https://rvlife.com/?ref=smartroadportal",
         badges: ["RV Life Partner", "Trip Planning"]
