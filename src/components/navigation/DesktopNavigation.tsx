@@ -1,7 +1,7 @@
 
 import { Link, useLocation } from "react-router-dom";
 import { 
-  Home, Calculator, CloudSun, Warehouse, ClipboardCheck,
+  Home, Calculator, CloudSun, Warehouse, ClipboardCheck, ShoppingBag,
   Brain, Lightbulb, Eye, Search,
   Cog, Layers, Activity, Network,
   Car, Truck, Tent, LayoutTemplate,
@@ -18,6 +18,11 @@ const DesktopNavigation = () => {
 
   // Define RV Tools links for the hover dropdown with icons and specific colors
   const rvToolsLinks = [
+    { 
+      text: "RV Products", 
+      href: "/products", 
+      icon: <ShoppingBag size={16} className="text-[#10B981]" /> 
+    },
     { 
       text: "RV Calculators", 
       href: "/calculators", 
