@@ -20,7 +20,7 @@ const AffiliateRecommendations = ({ rvType, tripDistance, days, totalCost }: Aff
 
     const recommendations = [];
 
-    // RVShare rental recommendations (45% commission)
+    // RVShare rental recommendations
     recommendations.push({
       title: "RVShare Premium RV Rentals",
       description: "Compare and book premium RV rentals nationwide. Save on your trip by renting instead of buying.",
@@ -39,7 +39,7 @@ const AffiliateRecommendations = ({ rvType, tripDistance, days, totalCost }: Aff
       badges: ["RVShare Partner", "Best Value"]
     });
 
-    // Outdoorsy rentals ($60+ commission per booking)
+    // Outdoorsy rentals for luxury trips
     if (isLongTrip || isLargeRV) {
       recommendations.push({
         title: "Outdoorsy Luxury RV Rentals",
@@ -60,7 +60,7 @@ const AffiliateRecommendations = ({ rvType, tripDistance, days, totalCost }: Aff
       });
     }
 
-    // RV Life trip planning (25% commission)
+    // RV Life trip planning for long distance
     if (isLongDistance) {
       recommendations.push({
         title: "RV Life Trip Planning Tools",

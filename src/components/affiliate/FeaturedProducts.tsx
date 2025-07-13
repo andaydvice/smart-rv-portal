@@ -4,7 +4,7 @@ const FeaturedProducts = () => {
   const products = [
     {
       title: "RV Life Pro Membership",
-      description: "Complete RV planning toolkit with GPS navigation, campground finder, and trip planning tools. 25% commission + 170-day cookie.",
+      description: "Complete RV planning toolkit with GPS navigation, campground finder, and trip planning tools for the ultimate RV experience.",
       price: "$39.95",
       originalPrice: "$59.95",
       rating: 4.8,
@@ -17,11 +17,11 @@ const FeaturedProducts = () => {
         "Maintenance tracking & reminders"
       ],
       affiliateLink: "https://rvlife.com/?ref=smartroadportal",
-      badges: ["25% Commission", "Best Value"]
+      badges: ["Editor's Choice", "Best Value"]
     },
     {
       title: "RVShare Premium RV Rentals",
-      description: "Rent smart RVs with advanced technology features. 45% commission on all bookings with high conversion rates.",
+      description: "Rent smart RVs with advanced technology features and nationwide availability for your perfect getaway.",
       price: "From $99/night",
       originalPrice: "$149/night",
       rating: 4.7,
@@ -34,11 +34,11 @@ const FeaturedProducts = () => {
         "Contactless pickup available"
       ],
       affiliateLink: "https://rvshare.com/?ref=smartroadportal",
-      badges: ["45% Commission", "High Value"]
+      badges: ["Most Popular", "High Value"]
     },
     {
       title: "TechnoRV Smart Systems",
-      description: "Advanced RV monitoring and control systems. GPS trackers, WiFi boosters, and smart appliances. 5-7% commission.",
+      description: "Advanced RV monitoring and control systems with GPS trackers, WiFi boosters, and smart appliances for the modern RVer.",
       price: "$199",
       originalPrice: "$299",
       rating: 4.9,

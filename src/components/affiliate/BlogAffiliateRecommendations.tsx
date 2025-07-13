@@ -14,14 +14,14 @@ export const BlogAffiliateRecommendations = ({ category }: BlogAffiliateRecommen
             title: "TechnoRV Smart Systems",
             description: "Upgrade your RV with GPS tracking, WiFi boosters, and smart monitoring systems mentioned in our tech articles.",
             link: "https://technorv.com/?ref=smartroadportal",
-            commission: "5-7%",
+            commission: "Tech Leader",
             cta: "Shop Smart RV Tech"
           },
           {
             title: "RV Water Filter Store",
             description: "Premium water filtration systems with smart monitoring capabilities for safer RV water.",
             link: "https://rvwaterfilterstore.com/?ref=smartroadportal", 
-            commission: "10-15%",
+            commission: "Premium Quality",
             cta: "Improve Your Water"
           }
         ];
@@ -31,14 +31,14 @@ export const BlogAffiliateRecommendations = ({ category }: BlogAffiliateRecommen
             title: "RVShare Premium Rentals",
             description: "Experience the RV destinations featured in our travel guides with smart, tech-equipped rentals.",
             link: "https://rvshare.com/?ref=smartroadportal",
-            commission: "45%",
+            commission: "Most Popular",
             cta: "Book Your RV Trip"
           },
           {
             title: "RV Life Pro",
             description: "Plan your routes using the campgrounds and destinations we recommend in our travel articles.",
             link: "https://rvlife.com/?ref=smartroadportal",
-            commission: "25%",
+            commission: "Editor's Choice",
             cta: "Plan Your Journey"
           }
         ];
@@ -48,14 +48,14 @@ export const BlogAffiliateRecommendations = ({ category }: BlogAffiliateRecommen
             title: "RV Life Pro Membership",
             description: "Complete RV planning toolkit with everything you need for smart RV living.",
             link: "https://rvlife.com/?ref=smartroadportal",
-            commission: "25%",
+            commission: "Best Value",
             cta: "Get Started"
           },
           {
             title: "Good Sam Protection",
             description: "Comprehensive RV insurance and roadside assistance for peace of mind on every journey.",
             link: "https://goodsam.com/?ref=smartroadportal",
-            commission: "$5-15",
+            commission: "Peace of Mind",
             cta: "Protect Your RV"
           }
         ];

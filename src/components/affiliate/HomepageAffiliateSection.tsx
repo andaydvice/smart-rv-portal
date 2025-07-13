@@ -15,11 +15,11 @@ export const HomepageAffiliateSection = () => {
         </div>
         
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {/* RVShare - 45% Commission */}
+          {/* RVShare */}
           <div className="bg-white/5 border border-white/10 rounded-xl p-6 hover:border-white/20 transition-colors">
             <div className="flex items-center gap-2 mb-4">
               <Star className="w-5 h-5 text-yellow-400 fill-current" />
-              <span className="text-sm text-green-400 font-medium">45% Commission</span>
+              <span className="text-sm text-blue-400 font-medium">Most Popular</span>
             </div>
             <h3 className="text-xl font-semibold text-white mb-3">RVShare Rentals</h3>
             <p className="text-gray-300 mb-4">
@@ -41,11 +41,11 @@ export const HomepageAffiliateSection = () => {
             </Button>
           </div>
 
-          {/* RV Life - 25% Commission */}
+          {/* RV Life */}
           <div className="bg-white/5 border border-white/10 rounded-xl p-6 hover:border-white/20 transition-colors">
             <div className="flex items-center gap-2 mb-4">
               <Star className="w-5 h-5 text-yellow-400 fill-current" />
-              <span className="text-sm text-green-400 font-medium">25% Commission + 170-day cookie</span>
+              <span className="text-sm text-blue-400 font-medium">Best Value</span>
             </div>
             <h3 className="text-xl font-semibold text-white mb-3">RV Life Pro</h3>
             <p className="text-gray-300 mb-4">
@@ -67,11 +67,11 @@ export const HomepageAffiliateSection = () => {
             </Button>
           </div>
 
-          {/* Good Sam - $5-15 Bonuses */}
+          {/* Good Sam */}
           <div className="bg-white/5 border border-white/10 rounded-xl p-6 hover:border-white/20 transition-colors">
             <div className="flex items-center gap-2 mb-4">
               <Star className="w-5 h-5 text-yellow-400 fill-current" />
-              <span className="text-sm text-green-400 font-medium">$5-15 Bonuses</span>
+              <span className="text-sm text-blue-400 font-medium">Peace of Mind</span>
             </div>
             <h3 className="text-xl font-semibold text-white mb-3">Good Sam Services</h3>
             <p className="text-gray-300 mb-4">
