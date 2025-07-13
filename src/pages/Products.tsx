@@ -70,6 +70,25 @@ const Products = () => {
 
   return (
     <Layout>
+      {/* Hero Image Section */}
+      <div className="w-full h-[60vh] relative overflow-hidden">
+        <img 
+          src="/lovable-uploads/e2566d0d-bbd0-4401-9293-2d105eea8105.png"
+          alt="RV Dealership Aerial View"
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
+          <div className="text-center">
+            <h1 className="text-6xl font-bold text-white mb-4 image-overlay-headline">
+              RV Marketplace
+            </h1>
+            <p className="text-xl text-white/90 max-w-2xl mx-auto px-4">
+              Your trusted source for premium RV products, services, and exclusive deals
+            </p>
+          </div>
+        </div>
+      </div>
+
       <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -77,16 +96,7 @@ const Products = () => {
         className="min-h-screen w-full bg-gradient-to-b from-[#080F1F] to-[#151A22]"
       >
         <div className="relative z-10 max-w-6xl mx-auto px-4 py-20">
-          <motion.h1 
-            initial={{ y: -20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.2, duration: 0.5 }}
-            className="text-5xl font-bold text-white mb-8 text-center"
-          >
-            RV Marketplace
-          </motion.h1>
-          
-          <motion.p 
+          <motion.p
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.3, duration: 0.5 }}
