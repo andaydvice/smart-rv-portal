@@ -7,25 +7,25 @@ import AffiliateDisclosure from '@/components/affiliate/AffiliateDisclosure';
 const FuelAffiliateRecommendations = () => {
   const recommendations = [
     {
-      title: "Hot Shot's Secret",
-      description: "Extend your engine life and improve fuel efficiency with premium fuel additives trusted by professional truckers and RV enthusiasts. Advanced formulas protect your engine while maximizing every mile.",
-      link: "https://hotshotsecret.com",
-      features: [
-        "Premium fuel additives",
-        "Engine protection",
-        "Improved fuel efficiency",
-        "Professional grade quality"
-      ]
-    },
-    {
-      title: "RV LIFE Pro",
-      description: "Plan smarter routes, find the best fuel prices along your journey, and discover RV friendly stops nationwide. The most comprehensive trip planning app built specifically for RVers.",
+      title: "RV Life",
+      description: "Plan fuel efficient routes, find the best fuel prices along your journey, and discover RV friendly stops nationwide. The most comprehensive trip planning app built specifically for RVers.",
       link: "https://rvlife.com",
       features: [
         "Smart route planning",
-        "Best fuel prices",
+        "Best fuel prices nationwide",
         "RV friendly stops",
-        "Trip planning tools"
+        "Fuel efficient routing"
+      ]
+    },
+    {
+      title: "Good Sam",
+      description: "Save on fuel costs with Good Sam membership fuel discounts at thousands of gas stations nationwide. Plus get emergency roadside assistance when you need it most.",
+      link: "https://goodsam.com",
+      features: [
+        "Fuel discounts nationwide",
+        "Emergency roadside assistance",
+        "Member savings program",
+        "24/7 support availability"
       ]
     }
   ];
@@ -54,14 +54,14 @@ const FuelAffiliateRecommendations = () => {
       ]
     },
     {
-      title: "Good Sam",
-      description: "Get roadside assistance and fuel discounts with Good Sam membership. Emergency help plus savings at thousands of gas stations.",
-      link: "https://goodsam.com",
+      title: "TechnoRV",
+      description: "Smart monitoring systems that help optimize fuel consumption and engine performance. Professional grade RV technology for better fuel efficiency.",
+      link: "https://technorv.com",
       features: [
-        "24/7 roadside assistance",
-        "Fuel discounts nationwide",
-        "Emergency support",
-        "Member savings program"
+        "Smart monitoring systems",
+        "Fuel consumption optimization",
+        "Engine performance tracking",
+        "Professional RV technology"
       ]
     }
   ];

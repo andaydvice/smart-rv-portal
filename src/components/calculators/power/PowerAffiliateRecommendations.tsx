@@ -7,58 +7,25 @@ import AffiliateDisclosure from '@/components/affiliate/AffiliateDisclosure';
 const PowerAffiliateRecommendations = () => {
   const recommendations = [
     {
-      title: "Solar Direct",
-      description: "Complete solar solutions designed specifically for RV living. From panels to installation guides, everything you need to power your off grid adventures.",
-      link: "https://solardirect.com",
+      title: "TechnoRV",
+      description: "Smart RV power monitoring and management systems for complete energy control. Monitor battery levels, solar output, and power consumption in real time.",
+      link: "https://technorv.com",
       features: [
-        "Complete solar solutions",
-        "RV specific designs",
-        "Installation guides",
-        "Off grid power systems"
+        "Smart power monitoring",
+        "Real time battery tracking",
+        "Solar output monitoring",
+        "Energy management systems"
       ]
     },
     {
-      title: "A1 SolarStore",
-      description: "Premium solar systems with expert support and comprehensive warranties. High quality components for reliable off grid power generation.",
-      link: "https://a1solarstore.com",
+      title: "Good Sam",
+      description: "Get technical support and installation assistance for RV power system upgrades. Expert guidance for solar, battery, and electrical system improvements.",
+      link: "https://goodsam.com",
       features: [
-        "Premium solar systems",
-        "Expert support",
-        "Comprehensive warranties",
-        "High quality components"
-      ]
-    },
-    {
-      title: "Renogy",
-      description: "Industry leading solar panels and battery systems with comprehensive warranties and expert support. Trusted by RVers worldwide for reliable off grid power.",
-      link: "https://renogy.com",
-      features: [
-        "Industry leading panels",
-        "Battery systems",
-        "Expert support",
-        "Worldwide trust"
-      ]
-    },
-    {
-      title: "Dakota Lithium",
-      description: "Lightweight, long lasting lithium batteries that outlast traditional batteries by 4x with comprehensive warranties. Professional grade power for serious RVers.",
-      link: "https://dakotalithium.com",
-      features: [
-        "Lightweight lithium batteries",
-        "4x longer lasting",
-        "Comprehensive warranties",
-        "Professional grade quality"
-      ]
-    },
-    {
-      title: "Butler Technik/Victron",
-      description: "Professional grade power monitoring and management systems for complete energy control. Monitor every amp and maximize your system efficiency.",
-      link: "https://butlertechnik.com",
-      features: [
-        "Power monitoring systems",
-        "Complete energy control",
-        "Amp monitoring",
-        "System efficiency"
+        "Technical support services",
+        "Installation assistance",
+        "Power system guidance",
+        "Expert consultation"
       ]
     }
   ];
@@ -123,7 +90,7 @@ const PowerAffiliateRecommendations = () => {
             Power your RV adventures with these trusted solar and battery solutions designed specifically for RV living:
           </p>
           
-          <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {recommendations.map((product, index) => (
               <Card key={index} className="bg-[#131a2a] border-gray-600 h-full">
                 <CardContent className="p-6">

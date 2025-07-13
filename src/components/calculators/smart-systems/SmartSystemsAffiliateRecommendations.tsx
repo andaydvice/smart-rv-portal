@@ -7,36 +7,25 @@ import AffiliateDisclosure from '@/components/affiliate/AffiliateDisclosure';
 const SmartSystemsAffiliateRecommendations = () => {
   const recommendations = [
     {
-      title: "TechnoRV Smart Systems",
-      description: "Smart RV systems and surge protection that safeguards your investment and enhances your experience. Professional grade protection and convenience features.",
+      title: "TechnoRV",
+      description: "Smart RV systems, surge protection, and monitoring technology that safeguards your investment and enhances your travel experience. Professional grade automation and convenience features.",
       link: "https://technorv.com",
       features: [
         "Smart RV systems",
         "Surge protection",
-        "Investment protection",
-        "Professional grade"
+        "Monitoring technology",
+        "Professional automation"
       ]
     },
     {
-      title: "Winegard",
-      description: "Stay connected everywhere with premium WiFi extenders and satellite internet solutions. Reliable connectivity for work and entertainment on the road.",
-      link: "https://winegard.com",
-      features: [
-        "WiFi extenders",
-        "Satellite internet",
-        "Reliable connectivity",
-        "Work and entertainment"
-      ]
-    },
-    {
-      title: "RV LIFE Pro",
-      description: "The most comprehensive RV trip planning and GPS navigation app built specifically for RVers. Plan routes, find campgrounds, and navigate safely.",
+      title: "RV Life",
+      description: "The most comprehensive RV trip planning and GPS navigation app built specifically for RVers. Plan routes, find campgrounds, and navigate safely with smart routing.",
       link: "https://rvlife.com",
       features: [
         "Trip planning app",
         "GPS navigation",
         "RV specific routes",
-        "Campground finder"
+        "Smart campground finder"
       ]
     }
   ];
@@ -74,6 +63,17 @@ const SmartSystemsAffiliateRecommendations = () => {
         "Troubleshooting",
         "Expert assistance"
       ]
+    },
+    {
+      title: "RV Water Filter Store",
+      description: "Smart water filtration systems and monitoring technology for your RV. Protect your water systems with intelligent filtration and quality monitoring.",
+      link: "https://rvwaterfilterstore.com",
+      features: [
+        "Smart water filtration",
+        "Quality monitoring",
+        "System protection",
+        "Intelligent technology"
+      ]
     }
   ];
 
@@ -90,7 +90,7 @@ const SmartSystemsAffiliateRecommendations = () => {
             Upgrade your RV with smart systems and connectivity solutions that enhance your travel experience:
           </p>
           
-          <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {recommendations.map((product, index) => (
               <Card key={index} className="bg-[#131a2a] border-gray-600 h-full">
                 <CardContent className="p-6">
@@ -135,7 +135,7 @@ const SmartSystemsAffiliateRecommendations = () => {
             Complete your RV experience with rental options, tech support, and professional services:
           </p>
           
-          <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-6">
             {essentialServices.map((service, index) => (
               <Card key={index} className="bg-[#131a2a] border-gray-600 h-full">
                 <CardContent className="p-6">

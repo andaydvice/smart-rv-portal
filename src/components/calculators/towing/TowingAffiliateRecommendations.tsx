@@ -7,25 +7,25 @@ import AffiliateDisclosure from '@/components/affiliate/AffiliateDisclosure';
 const TowingAffiliateRecommendations = () => {
   const recommendations = [
     {
-      title: "Blue Ox",
-      description: "Professional towing equipment trusted by RV manufacturers worldwide. Ensure safe, worry free travels with industry leading hitch systems and accessories.",
-      link: "https://blueox.com",
-      features: [
-        "Professional towing equipment",
-        "RV manufacturer trusted",
-        "Industry leading hitches",
-        "Safety accessories"
-      ]
-    },
-    {
-      title: "TechnoRV TPMS",
-      description: "Advanced tire pressure monitoring systems that prevent blowouts and extend tire life. Real time monitoring gives you peace of mind on every journey.",
+      title: "TechnoRV",
+      description: "Advanced tire pressure monitoring systems and smart towing technology that prevent blowouts and extend tire life. Real time monitoring gives you peace of mind on every journey.",
       link: "https://technorv.com",
       features: [
         "Tire pressure monitoring",
+        "Smart towing technology",
         "Blowout prevention",
-        "Extended tire life",
-        "Real time monitoring"
+        "Real time safety alerts"
+      ]
+    },
+    {
+      title: "Good Sam",
+      description: "Get emergency towing assistance and roadside support when towing equipment fails. Professional help available 24/7 for towing emergencies and breakdowns.",
+      link: "https://goodsam.com",
+      features: [
+        "Emergency towing assistance",
+        "24/7 roadside support",
+        "Professional technicians",
+        "Towing equipment help"
       ]
     }
   ];
@@ -65,14 +65,14 @@ const TowingAffiliateRecommendations = () => {
       ]
     },
     {
-      title: "Good Sam",
-      description: "Get emergency towing assistance and roadside support. Professional help when towing equipment fails or accidents happen.",
-      link: "https://goodsam.com",
+      title: "RV Water Filter Store",
+      description: "Protect your RV systems during travel with quality water filters and system protection. Essential maintenance products for towing season preparation.",
+      link: "https://rvwaterfilterstore.com",
       features: [
-        "Emergency towing",
-        "Roadside assistance",
-        "Professional support",
-        "24/7 availability"
+        "Quality water filters",
+        "System protection",
+        "Travel preparation",
+        "Maintenance products"
       ]
     }
   ];
