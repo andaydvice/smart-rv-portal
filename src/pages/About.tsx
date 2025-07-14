@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import { motion } from "framer-motion";
 import Layout from "@/components/layout/Layout";
 import { scrollToTop } from "@/utils/scrollToTop";
+import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
 
 const About = () => {
   useEffect(() => {
@@ -89,93 +90,49 @@ const About = () => {
               </div>
             </div>
 
-            {/* Recommended Partners Section */}
-            <div className="bg-black/20 backdrop-blur-md p-8 rounded-xl border border-white/10">
-              <h2 className="text-3xl font-bold text-white mb-6 text-center">Our Trusted Partners</h2>
-              <p className="text-white/90 text-center mb-8">
-                We partner with industry-leading companies to provide you with the best RV products and services.
-              </p>
-              
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div className="text-center p-4 border border-white/10 rounded-lg">
-                  <h4 className="text-lg font-bold text-white mb-2">RVShare</h4>
-                  <p className="text-white/80 text-sm mb-3">Premium RV rentals nationwide with instant booking and insurance included</p>
-                  <a 
-                    href="https://rvshare.com/?ref=smartroadportal"
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="text-[#5B9BD5] hover:text-[#4A8AC4] font-medium"
-                  >
-                    Explore Rentals →
-                  </a>
-                </div>
-                
-                <div className="text-center p-4 border border-white/10 rounded-lg">
-                  <h4 className="text-lg font-bold text-white mb-2">TechnoRV</h4>
-                  <p className="text-white/80 text-sm mb-3">Smart RV technology and monitoring systems with professional installation</p>
-                  <a 
-                    href="https://technorv.com/?ref=smartroadportal"
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="text-[#5B9BD5] hover:text-[#4A8AC4] font-medium"
-                  >
-                    Shop Technology →
-                  </a>
-                </div>
-                
-                <div className="text-center p-4 border border-white/10 rounded-lg">
-                  <h4 className="text-lg font-bold text-white mb-2">Good Sam</h4>
-                  <p className="text-white/80 text-sm mb-3">Roadside assistance and RV services for peace of mind</p>
-                  <a 
-                    href="https://www.goodsam.com/?ref=smartroadportal"
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="text-[#5B9BD5] hover:text-[#4A8AC4] font-medium"
-                  >
-                    Get Coverage →
-                  </a>
-                </div>
-                
-                <div className="text-center p-4 border border-white/10 rounded-lg">
-                  <h4 className="text-lg font-bold text-white mb-2">RV Water Filter Store</h4>
-                  <p className="text-white/80 text-sm mb-3">Premium water filtration systems with clean water guarantee</p>
-                  <a 
-                    href="https://rvwaterfilterstore.com/?ref=smartroadportal"
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="text-[#5B9BD5] hover:text-[#4A8AC4] font-medium"
-                  >
-                    Shop Filters →
-                  </a>
-                </div>
-                
-                <div className="text-center p-4 border border-white/10 rounded-lg">
-                  <h4 className="text-lg font-bold text-white mb-2">Outdoorsy</h4>
-                  <p className="text-white/80 text-sm mb-3">Luxury RV rentals and experiences with premium concierge service</p>
-                  <a 
-                    href="https://outdoorsy.com/?ref=smartroadportal"
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="text-[#5B9BD5] hover:text-[#4A8AC4] font-medium"
-                  >
-                    Browse Luxury →
-                  </a>
-                </div>
-                
-                <div className="text-center p-4 border border-white/10 rounded-lg">
-                  <h4 className="text-lg font-bold text-white mb-2">RV Life</h4>
-                  <p className="text-white/80 text-sm mb-3">Trip planning tools and GPS navigation with RV-safe routes</p>
-                  <a 
-                    href="https://rvlife.com/?ref=smartroadportal"
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="text-[#5B9BD5] hover:text-[#4A8AC4] font-medium"
-                  >
-                    Plan Your Trip →
-                  </a>
-                </div>
-              </div>
-            </div>
+            <OptimizedAffiliateGrid
+              title="Our Trusted Partners"
+              subtitle="We partner with industry-leading companies to provide you with the best RV products and services."
+              partners={[
+                {
+                  partner: 'rvshare',
+                  title: 'Premium RV Rentals',
+                  description: 'Nationwide RV rentals with instant booking and comprehensive insurance coverage',
+                  features: ['Instant booking', 'Insurance included', 'Nationwide coverage', '24/7 support']
+                },
+                {
+                  partner: 'technorv',
+                  title: 'Smart RV Technology',
+                  description: 'Advanced monitoring systems and smart technology for modern RV living',
+                  features: ['Professional installation', 'Smart monitoring', 'Remote control', 'Expert support']
+                },
+                {
+                  partner: 'goodsam',
+                  title: 'Roadside Assistance',
+                  description: 'Comprehensive RV services and emergency roadside assistance nationwide',
+                  features: ['24/7 roadside help', 'Emergency services', 'Nationwide coverage', 'Peace of mind']
+                },
+                {
+                  partner: 'rvwaterfilter',
+                  title: 'Water Filtration Systems',
+                  description: 'Premium water filtration with clean water guarantee for safe travel',
+                  features: ['Clean water guarantee', 'Easy installation', 'NSF certified', 'Health protection']
+                },
+                {
+                  partner: 'outdoorsy',
+                  title: 'Luxury RV Experiences',
+                  description: 'Premium RV rentals and concierge services for exceptional adventures',
+                  features: ['Luxury fleet', 'Concierge service', 'Premium experience', 'Quality guaranteed']
+                },
+                {
+                  partner: 'rvlife',
+                  title: 'Trip Planning Tools',
+                  description: 'GPS navigation and trip planning tools designed specifically for RVs',
+                  features: ['RV-safe routes', 'Trip planning', 'GPS navigation', 'Campground finder']
+                }
+              ]}
+              gridCols="3"
+            />
 
             <div className="bg-black/20 backdrop-blur-md p-8 rounded-xl border border-white/10 text-center">
               <h2 className="text-3xl font-bold text-white mb-4">Ready to Start Your Smart RV Journey?</h2>

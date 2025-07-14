@@ -5,6 +5,7 @@ import { Container } from "@/components/ui/container";
 import MapIconDemo from "@/components/storage/map/components/MapIconDemo";
 import MapWithResponsiveIcons from "@/components/storage/map/components/MapWithResponsiveIcons";
 import Layout from "@/components/layout/Layout";
+import { OptimizedAffiliateGrid } from '@/components/affiliate/OptimizedAffiliateGrid';
 
 // Sample data for the icons
 const demoIcons = [
@@ -119,6 +120,34 @@ const MapIconDemoPage = () => {
                 onLocationSelect={(locationId) => console.log(`Selected location: ${locationId}`)}
               />
             </div>
+          </div>
+          
+          <div className="mt-12">
+            <OptimizedAffiliateGrid
+              title="Mapping & GPS Technology"
+              subtitle="Enhance your RV navigation experience with these professional mapping and GPS solutions."
+              partners={[
+                {
+                  partner: 'rvlife',
+                  title: 'Professional GPS Navigation',
+                  description: 'RV-specific GPS with custom routing and comprehensive location database',
+                  features: ['RV-safe routing', 'Real-time updates', 'Custom waypoints', 'Offline maps']
+                },
+                {
+                  partner: 'technorv',
+                  title: 'Smart Mapping Systems',
+                  description: 'Advanced mapping technology with interactive displays and location tracking',
+                  features: ['Interactive displays', 'Location tracking', 'System integration', 'Real-time data']
+                },
+                {
+                  partner: 'goodsam',
+                  title: 'Location-Based Services',
+                  description: 'Comprehensive location services including emergency assistance and facility finder',
+                  features: ['Emergency assistance', 'Facility finder', 'Location services', 'Member benefits']
+                }
+              ]}
+              gridCols="3"
+            />
           </div>
         </Container>
       </div>

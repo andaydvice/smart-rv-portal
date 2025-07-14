@@ -7,6 +7,7 @@ import { AlertTriangle, Home, RefreshCcw } from 'lucide-react';
 import ErrorDisplay from '@/components/error/ErrorDisplay';
 import { Container } from '@/components/ui/container';
 import { TypographyH1, TypographyP } from '@/components/ui/typography';
+import { OptimizedAffiliateGrid } from '@/components/affiliate/OptimizedAffiliateGrid';
 
 const ErrorPage = () => {
   const error = useRouteError();
@@ -105,6 +106,35 @@ const ErrorPage = () => {
               </div>
             </div>
           )}
+          
+          <div className="mt-16 w-full max-w-4xl">
+            <OptimizedAffiliateGrid
+              title="Need Help Getting Back on Track?"
+              subtitle="While you're here, check out these trusted RV services and emergency support resources."
+              partners={[
+                {
+                  partner: 'goodsam',
+                  title: 'Emergency Roadside Assistance',
+                  description: 'Get immediate help when you need it most with 24/7 emergency services',
+                  features: ['24/7 emergency help', 'Nationwide coverage', 'Professional technicians', 'Peace of mind']
+                },
+                {
+                  partner: 'technorv',
+                  title: 'Technical Support',
+                  description: 'Expert technical support for RV systems and smart technology troubleshooting',
+                  features: ['Expert technicians', 'Remote diagnostics', 'System troubleshooting', 'Professional guidance']
+                },
+                {
+                  partner: 'rvlife',
+                  title: 'Trip Planning & Navigation',
+                  description: 'Get back on track with RV-specific GPS and comprehensive trip planning tools',
+                  features: ['RV-safe routes', 'Real-time navigation', 'Trip planning', 'Campground finder']
+                }
+              ]}
+              gridCols="3"
+              className="text-center"
+            />
+          </div>
         </div>
       </Container>
     </Layout>
