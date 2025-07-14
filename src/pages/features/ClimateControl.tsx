@@ -3,6 +3,7 @@ import { Thermometer, Droplet, Fan, Clock, Shield } from "lucide-react";
 // MODIFIED: Removed Button and Link imports as they are no longer used
 import Layout from "@/components/layout/Layout";
 import { useEffect } from "react";
+import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
 
 const ClimateControl = () => {
   useEffect(() => {
@@ -111,7 +112,26 @@ const ClimateControl = () => {
             </div>
           </div>
 
-          {/* MODIFIED: Removed the CTA button section */}
+          <OptimizedAffiliateGrid
+            title="Climate Control Solutions"
+            subtitle="Professional climate systems and monitoring for optimal comfort"
+            partners={[
+              {
+                partner: 'technorv',
+                title: 'TechnoRV Climate Monitoring',
+                description: 'Monitor and optimize your climate control systems for maximum efficiency.',
+                features: ['Temperature monitoring', 'Energy usage tracking', 'System diagnostics', 'Efficiency optimization']
+              },
+              {
+                partner: 'goodsam',
+                title: 'Good Sam HVAC Support',
+                description: 'Professional HVAC installation, maintenance, and emergency repair services.',
+                features: ['HVAC installation', 'Emergency repairs', 'Maintenance services', 'System consultation']
+              }
+            ]}
+            gridCols="2"
+            className="mt-16"
+          />
         </div>
       </motion.div>
     </Layout>

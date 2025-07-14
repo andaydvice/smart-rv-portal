@@ -3,6 +3,7 @@ import { Tv, Music, Smartphone, Gamepad } from "lucide-react";
 // MODIFIED: Removed Button and Link imports as they are no longer used
 import Layout from "@/components/layout/Layout";
 import { useEffect } from "react";
+import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
 
 const Entertainment = () => {
   useEffect(() => {
@@ -113,6 +114,33 @@ const Entertainment = () => {
               </div>
             </div>
           </div>
+          
+          <OptimizedAffiliateGrid
+            title="Entertainment & Lifestyle"
+            subtitle="Complete solutions for entertainment, connectivity, and the RV lifestyle"
+            partners={[
+              {
+                partner: 'rvshare',
+                title: 'RVshare Entertainment-Ready Rentals',
+                description: 'Rent RVs with premium entertainment systems for your next adventure.',
+                features: ['Entertainment-equipped RVs', 'Smart TV systems', 'Premium audio setups', 'Family-friendly options']
+              },
+              {
+                partner: 'outdoorsy',
+                title: 'Outdoorsy Adventure Rentals',
+                description: 'Find RVs with entertainment systems perfect for outdoor adventures.',
+                features: ['Outdoor entertainment setups', 'Adventure-ready RVs', 'Family entertainment', 'Premium amenities']
+              },
+              {
+                partner: 'rvlife',
+                title: 'RV Life Entertainment Guides',
+                description: 'Access entertainment guides, streaming tips, and campground entertainment reviews.',
+                features: ['Entertainment guides', 'Streaming connectivity tips', 'Campground reviews', 'Setup tutorials']
+              }
+            ]}
+            gridCols="3"
+            className="mt-16"
+          />
 
           
         </div>

@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Layout from "@/components/layout/Layout";
 import { Shield, Lock, Bell, Camera, Smartphone, MapPin, BatteryCharging, KeyRound, Wrench } from "lucide-react";
+import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
 
 const SecuritySystem = () => {
   return (
@@ -234,6 +235,27 @@ const SecuritySystem = () => {
               All listed prices are current as of 2025 and reflect standard retail rates in the USA[2][5][7].
             </p>
           </div>
+          
+          <OptimizedAffiliateGrid
+            title="Security & Monitoring Solutions"
+            subtitle="Protect your RV with professional security services and monitoring"
+            partners={[
+              {
+                partner: 'goodsam',
+                title: 'Good Sam Security Services',
+                description: 'Professional RV security consultation and emergency response services.',
+                features: ['Security system consultation', 'Emergency response', '24/7 monitoring support', 'Professional installation']
+              },
+              {
+                partner: 'technorv',
+                title: 'TechnoRV Security Monitoring',
+                description: 'Real-time monitoring of your RV security systems with instant alerts.',
+                features: ['Real-time security monitoring', 'Instant breach alerts', 'System health checks', 'Remote diagnostics']
+              }
+            ]}
+            gridCols="2"
+            className="mt-16"
+          />
 
         </div>
       </motion.div>

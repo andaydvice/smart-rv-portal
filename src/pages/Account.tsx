@@ -6,6 +6,7 @@ import PasswordStrengthSettings from "@/components/auth/PasswordStrengthSettings
 import SecurityVerificationLogs from "@/components/auth/SecurityVerificationLogs";
 import { Shield, Lock, History } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
 
 const AccountPage = () => {
   const { user } = useAuth();
@@ -58,6 +59,34 @@ const AccountPage = () => {
             </div>
           </TabsContent>
         </Tabs>
+        
+        <div className="mt-16">
+          <OptimizedAffiliateGrid
+            title="Partner Account Benefits"
+            subtitle="Link your accounts with our trusted partners for enhanced services"
+            partners={[
+              {
+                partner: 'goodsam',
+                title: 'Good Sam Account Integration',
+                description: 'Link your Good Sam account for enhanced emergency services and member benefits.',
+                features: ['Member discounts', 'Emergency services', 'Account integration', 'Enhanced support']
+              },
+              {
+                partner: 'rvlife',
+                title: 'RV Life Pro Account',
+                description: 'Upgrade to RV Life Pro for premium features and enhanced trip planning tools.',
+                features: ['Premium trip planning', 'Enhanced features', 'Priority support', 'Advanced tools']
+              },
+              {
+                partner: 'technorv',
+                title: 'TechnoRV Premium Monitoring',
+                description: 'Access premium monitoring features and priority technical support.',
+                features: ['Premium monitoring', 'Priority support', 'Advanced analytics', 'Enhanced features']
+              }
+            ]}
+            gridCols="3"
+          />
+        </div>
       </div>
     </div>
   );

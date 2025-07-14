@@ -4,6 +4,7 @@ import Navbar from "@/components/Navbar";
 import Layout from "@/components/layout/Layout";
 import { Wifi, Globe, Shield, Zap } from "lucide-react";
 import ConnectivityGuide from "@/components/connectivity/ConnectivityGuide";
+import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
 
 const InternetConnectivity = () => {
   return (
@@ -76,6 +77,27 @@ const InternetConnectivity = () => {
           </div>
 
           <ConnectivityGuide />
+          
+          <OptimizedAffiliateGrid
+            title="Connectivity Solutions"
+            subtitle="Get reliable internet access wherever your adventures take you"
+            partners={[
+              {
+                partner: 'technorv',
+                title: 'TechnoRV Internet Monitoring',
+                description: 'Monitor your connectivity status and optimize network performance.',
+                features: ['Real-time connection monitoring', 'Signal strength tracking', 'Network usage analytics']
+              },
+              {
+                partner: 'rvlife',
+                title: 'RV Life Trip Wizard',
+                description: 'Plan routes with connectivity hotspots and campground internet reviews.',
+                features: ['WiFi-enabled campground search', 'Connectivity planning tools', 'User internet reviews']
+              }
+            ]}
+            gridCols="2"
+            className="mt-16"
+          />
         </div>
       </motion.div>
     </Layout>

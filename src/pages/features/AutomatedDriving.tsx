@@ -5,6 +5,7 @@ import { Car, Navigation, Shield } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
+import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
 
 const AutomatedDriving = () => {
   return (
@@ -71,6 +72,27 @@ const AutomatedDriving = () => {
               </ul>
             </div>
           </div>
+
+          <OptimizedAffiliateGrid
+            title="Safety & Navigation Support"
+            subtitle="Enhanced safety systems and emergency assistance for automated driving"
+            partners={[
+              {
+                partner: 'technorv',
+                title: 'TechnoRV ADAS Monitoring',
+                description: 'Monitor and optimize your automated driving systems with real-time diagnostics.',
+                features: ['ADAS system monitoring', 'Performance analytics', 'Safety alerts', 'System diagnostics']
+              },
+              {
+                partner: 'goodsam',
+                title: 'Good Sam Emergency Response',
+                description: 'Emergency assistance and support when automated systems need human intervention.',
+                features: ['Emergency assistance', 'Technical support', 'Roadside help', '24/7 availability']
+              }
+            ]}
+            gridCols="2"
+            className="mb-16"
+          />
 
           <div className="text-center mb-16">
             <Link to="/schedule-demo">

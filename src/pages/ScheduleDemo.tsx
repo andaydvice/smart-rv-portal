@@ -17,6 +17,7 @@ import {
 } from "@/components/ui/popover";
 import { useToast } from "@/components/ui/use-toast";
 import Layout from "@/components/layout/Layout";
+import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
 
 const ScheduleDemo = () => {
   const [date, setDate] = useState<Date>();
@@ -170,6 +171,33 @@ const ScheduleDemo = () => {
                 Schedule Your Demo
               </Button>
             </form>
+          </motion.div>
+          
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="mt-16"
+          >
+            <OptimizedAffiliateGrid
+              title="Partner Consultations"
+              subtitle="Schedule consultations with our trusted partners for specialized services"
+              partners={[
+                {
+                  partner: 'goodsam',
+                  title: 'Good Sam Expert Consultation',
+                  description: 'Schedule technical consultations for RV systems, maintenance, and emergency preparedness.',
+                  features: ['Technical expertise', 'System consultation', 'Emergency planning', 'Professional guidance']
+                },
+                {
+                  partner: 'technorv',
+                  title: 'TechnoRV System Setup',
+                  description: 'Book professional consultation for smart RV system installation and configuration.',
+                  features: ['System setup consultation', 'Installation guidance', 'Configuration support', 'Technical training']
+                }
+              ]}
+              gridCols="2"
+            />
           </motion.div>
         </div>
       </div>

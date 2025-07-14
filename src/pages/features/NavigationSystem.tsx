@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import { Navigation, Map, Compass, Radar } from "lucide-react";
 import Layout from "@/components/layout/Layout";
+import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
 
 const NavigationSystem = () => {
   return (
@@ -71,6 +72,27 @@ const NavigationSystem = () => {
               </div>
             </div>
           </div>
+          
+          <OptimizedAffiliateGrid
+            title="Navigation & Trip Planning"
+            subtitle="Navigate safely with RV-specific routing and emergency backup"
+            partners={[
+              {
+                partner: 'rvlife',
+                title: 'RV Life Trip Wizard',
+                description: 'RV-specific GPS navigation with height/weight restrictions and campground database.',
+                features: ['RV-safe routing', 'Campground navigation', 'Offline maps', 'Trip planning tools']
+              },
+              {
+                partner: 'goodsam',
+                title: 'Good Sam Emergency Roadside',
+                description: 'Emergency assistance when navigation fails or you need roadside help.',
+                features: ['24/7 emergency routing', 'Roadside assistance', 'Emergency dispatch', 'Towing services']
+              }
+            ]}
+            gridCols="2"
+            className="mt-16"
+          />
         </div>
       </motion.div>
     </Layout>

@@ -10,6 +10,9 @@ import ScheduleDemo from "../pages/ScheduleDemo";
 import VoiceControl from "../pages/VoiceControl";
 import AccountPage from "@/pages/Account";
 import RVWeather from "../pages/RVWeather";
+import RVEmergencyCenter from "../pages/RVEmergencyCenter";
+import SolarPowerGuide from "../pages/SolarPowerGuide";
+import RVAppsHub from "../pages/RVAppsHub";
 
 const utilityRoutes = [
   {
@@ -55,6 +58,18 @@ const utilityRoutes = [
   {
     path: "/account",
     element: <AccountPage />,
+  },
+  {
+    path: "/rv-emergency-center",
+    element: <RVEmergencyCenter />,
+  },
+  {
+    path: "/solar-power-guide",
+    element: <SolarPowerGuide />,
+  },
+  {
+    path: "/rv-apps-hub",
+    element: <RVAppsHub />,
   },
 ];
 

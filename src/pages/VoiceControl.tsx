@@ -7,6 +7,7 @@ import FeaturesSection from "../components/voice-control/FeaturesSection";
 // MODIFIED: Removed Smartphone and Button imports
 import Navbar from "@/components/Navbar";
 import Layout from "@/components/layout/Layout";
+import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
 
 const VoiceControl = () => {
   console.log("VoiceControl component rendering");
@@ -47,6 +48,27 @@ const VoiceControl = () => {
                 className="w-full max-w-5xl mx-auto h-auto rounded-lg shadow-lg"
               />
             </section>
+            
+            <OptimizedAffiliateGrid
+              title="Voice Control Solutions"
+              subtitle="Integrate voice control with professional RV systems and support"
+              partners={[
+                {
+                  partner: 'technorv',
+                  title: 'TechnoRV Voice Integration',
+                  description: 'Professional voice control system integration and monitoring for your smart RV.',
+                  features: ['Voice system integration', 'Smart device connectivity', 'System monitoring', 'Technical support']
+                },
+                {
+                  partner: 'rvlife',
+                  title: 'RV Life Voice Features',
+                  description: 'Access voice-controlled features and tutorials through the RV Life platform.',
+                  features: ['Voice command guides', 'Smart RV tutorials', 'Feature demonstrations', 'User community']
+                }
+              ]}
+              gridCols="2"
+              className="py-16"
+            />
           </div>
         </div>
       </main>

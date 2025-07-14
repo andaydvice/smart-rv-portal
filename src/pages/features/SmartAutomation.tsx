@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Home, WifiIcon, Cog, BatteryCharging } from "lucide-react";
 import Layout from "@/components/layout/Layout";
 import { useEffect } from "react";
+import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
 
 const SmartAutomation = () => {
   useEffect(() => {
@@ -91,6 +92,33 @@ const SmartAutomation = () => {
               </div>
             </div>
           </div>
+          
+          <OptimizedAffiliateGrid
+            title="Smart Automation Solutions"
+            subtitle="Professional automation systems and monitoring for your smart RV"
+            partners={[
+              {
+                partner: 'technorv',
+                title: 'TechnoRV Smart Monitoring',
+                description: 'Advanced monitoring and control of all your RV automation systems.',
+                features: ['System integration monitoring', 'Energy optimization', 'Automated alerts', 'Remote diagnostics']
+              },
+              {
+                partner: 'rvlife',
+                title: 'RV Life Smart Features',
+                description: 'Access smart RV features and automation guides through the RV Life app.',
+                features: ['Smart RV guides', 'Automation tutorials', 'System recommendations', 'User community']
+              },
+              {
+                partner: 'goodsam',
+                title: 'Good Sam Technical Support',
+                description: 'Expert technical support for smart automation installations and troubleshooting.',
+                features: ['Installation support', 'Technical troubleshooting', 'System consultation', 'Professional guidance']
+              }
+            ]}
+            gridCols="3"
+            className="mt-16"
+          />
         </div>
       </motion.div>
     </Layout>
