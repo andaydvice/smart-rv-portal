@@ -96,7 +96,7 @@ export const HomepageAffiliateSection = () => {
 
         <div className="text-center mt-8">
           <div className="bg-blue-900/30 border border-blue-500/30 rounded-lg p-4 max-w-2xl mx-auto">
-            <p className="text-sm text-blue-200">
+            <p className="text-sm text-blue-200 text-left">
               <strong>Our Promise:</strong> These are our top recommended partners based on real user experiences and value. 
               Our affiliate partnerships help us provide free content while maintaining honest, unbiased reviews.
             </p>
