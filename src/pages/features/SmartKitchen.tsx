@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
 import SmartKitchenHeader from "@/components/features/smart-kitchen/SmartKitchenHeader";
 import KitchenComparisonTable from "@/components/features/smart-kitchen/KitchenComparisonTable";
+import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
 import { useEffect } from "react";
 
 const SmartKitchen = () => {
@@ -87,6 +88,49 @@ const SmartKitchen = () => {
           >
             <KitchenComparisonTable />
           </motion.div>
+
+          {/* Smart Kitchen Solutions */}
+          <OptimizedAffiliateGrid
+            title="Smart Kitchen Enhancement Solutions"
+            subtitle="Upgrade your RV kitchen with premium water filtration, appliance monitoring, and professional installation services."
+            partners={[
+              {
+                partner: 'rvwaterfilter',
+                title: 'Premium Water Filtration',
+                description: 'Advanced water filtration systems ensuring clean, safe water for all your kitchen needs with guaranteed quality.',
+                features: [
+                  'Multi-stage filtration',
+                  'NSF certified systems',
+                  'Easy installation',
+                  'Water quality guarantee'
+                ]
+              },
+              {
+                partner: 'technorv',
+                title: 'Smart Appliance Monitoring',
+                description: 'Professional monitoring systems for refrigerators, cooking appliances, and kitchen automation.',
+                features: [
+                  'Appliance health monitoring',
+                  'Temperature control alerts',
+                  'Energy usage tracking',
+                  'Professional installation'
+                ]
+              },
+              {
+                partner: 'goodsam',
+                title: 'Kitchen Installation Support',
+                description: 'Expert installation and support services for all your smart kitchen upgrades and maintenance needs.',
+                features: [
+                  'Professional installation',
+                  'System setup assistance',
+                  'Ongoing maintenance support',
+                  'Emergency service calls'
+                ]
+              }
+            ]}
+            gridCols="3"
+            className="mb-16"
+          />
 
           <div className="text-center">
             <Link to="/schedule-demo">

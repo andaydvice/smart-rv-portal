@@ -12,6 +12,7 @@ import UseCasesSection from "@/components/features/remote-control/UseCasesSectio
 import ControlInterfaceSection from "@/components/features/remote-control/ControlInterfaceSection";
 import CallToActionSection from "@/components/features/remote-control/CallToActionSection";
 import InterfaceDemoSection from "@/components/features/remote-control/InterfaceDemoSection";
+import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
 
 const RemoteControl = () => {
   useEffect(() => {
@@ -67,6 +68,49 @@ const RemoteControl = () => {
 
           {/* Control Interface Section */}
           <ControlInterfaceSection />
+
+          {/* Remote Control Solutions */}
+          <OptimizedAffiliateGrid
+            title="Professional Remote Control Solutions"
+            subtitle="Enhance your smart RV remote capabilities with professional monitoring and mobile app integration from our trusted partners."
+            partners={[
+              {
+                partner: 'technorv',
+                title: 'TechnoRV Smart Monitoring',
+                description: 'Professional remote monitoring systems with real-time alerts and diagnostics for complete peace of mind.',
+                features: [
+                  'Real-time system monitoring',
+                  'Mobile app integration',
+                  'Professional installation',
+                  'Expert technical support'
+                ]
+              },
+              {
+                partner: 'rvlife',
+                title: 'RV Life Mobile Apps',
+                description: 'Comprehensive mobile app suite for trip planning, navigation, and remote RV management.',
+                features: [
+                  'Trip planning tools',
+                  'RV-safe GPS navigation',
+                  'Remote system access',
+                  'Community features'
+                ]
+              },
+              {
+                partner: 'goodsam',
+                title: 'Good Sam Remote Support',
+                description: 'Professional technical support and emergency assistance for your smart RV systems.',
+                features: [
+                  '24/7 technical support',
+                  'Remote diagnostics',
+                  'Emergency assistance',
+                  'System troubleshooting'
+                ]
+              }
+            ]}
+            gridCols="3"
+            className="mb-16"
+          />
 
           {/* Call to Action Section */}
           <CallToActionSection />
