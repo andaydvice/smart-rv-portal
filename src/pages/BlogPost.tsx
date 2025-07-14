@@ -8,7 +8,7 @@ import { BlogPostImage } from "@/components/blog/post/BlogPostImage";
 import { BlogPostContent } from "@/components/blog/post/BlogPostContent";
 import { PageErrorBoundary } from "@/components/common/PageErrorBoundary";
 import Footer2 from "@/components/ui/Footer2";
-import BlogAffiliateSection from "@/components/affiliate/BlogAffiliateSection";
+import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
 import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
 import { useToast } from "@/hooks/use-toast";
 import { blogPosts } from '@/data/blog'; // MODIFIED: Updated import path
@@ -108,9 +108,15 @@ const BlogPost = () => {
           />
           
           {/* Affiliate product recommendations */}
-          <BlogAffiliateSection 
-            category={post.category}
-            postSlug={post.slug}
+          <OptimizedAffiliateGrid
+            title="Recommended RV Resources"
+            subtitle="Discover products and services that enhance your RV lifestyle and adventures."
+            partners={[
+              { partner: 'rvlife', title: 'RV Life Resources', description: 'Trip planning and RV lifestyle guides' },
+              { partner: 'technorv', title: 'RV Technology', description: 'Latest RV tech and equipment reviews' },
+              { partner: 'goodsam', title: 'RV Community', description: 'Join the largest RV community for tips and support' }
+            ]}
+            gridCols="3"
           />
           
           {/* Affiliate disclosure */}

@@ -10,6 +10,7 @@ import { TechnologySection } from "@/components/sections/TechnologySection";
 import { ContactSection } from "@/components/sections/ContactSection";
 import FeaturedProducts from "@/components/affiliate/FeaturedProducts";
 import { HomepageAffiliateSection } from "@/components/affiliate/HomepageAffiliateSection";
+import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
 
 // Lazy load components that aren't needed immediately
 const FeaturesSection = lazy(() => import("@/components/sections/FeaturesSection").then(mod => ({ 
@@ -64,6 +65,20 @@ const Index = () => {
         
         {/* Featured affiliate products */}
         <FeaturedProducts />
+        
+        {/* Main affiliate section for homepage */}
+        <OptimizedAffiliateGrid
+          title="Start Your Smart RV Journey"
+          subtitle="Everything you need to upgrade your RV with smart technology and enhance your travel experience."
+          partners={[
+            { partner: 'technorv', title: 'Smart RV Tech', description: 'Latest smart RV technology and automation systems' },
+            { partner: 'rvlife', title: 'Trip Planning', description: 'Plan your routes and discover amazing destinations' },
+            { partner: 'goodsam', title: 'RV Community', description: 'Join the largest RV community for support and tips' },
+            { partner: 'rvshare', title: 'RV Rentals', description: 'Rent an RV to try before you buy your smart RV' }
+          ]}
+          gridCols="2"
+          className="my-16"
+        />
         
         <Suspense fallback={<LoadingFallback />}>
           <SustainabilitySection />

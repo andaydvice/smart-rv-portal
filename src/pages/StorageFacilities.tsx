@@ -4,7 +4,7 @@ import Navbar from "@/components/Navbar";
 import Layout from "@/components/layout/Layout";
 import { Warehouse } from "lucide-react";
 import LocationPreviewSection from "@/components/storage/LocationPreviewSection";
-import StorageAffiliateRecommendations from "@/components/affiliate/StorageAffiliateRecommendations";
+import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
 import { useState, useEffect } from "react";
 import { StorageFacility } from "@/components/storage/types";
 import "../styles/force-markers.css"; // Only load the minimal, clean CSS
@@ -203,7 +203,16 @@ export default function StorageFacilities() {
       
       {/* Storage Services and Recommendations */}
       <div className="max-w-7xl mx-auto px-4">
-        <StorageAffiliateRecommendations />
+        <OptimizedAffiliateGrid
+          title="Recommended Storage Solutions"
+          subtitle="Professional RV storage facilities and services to keep your RV safe and secure when not in use."
+          partners={[
+            { partner: 'rvlife', title: 'RV Life Storage Guide', description: 'Comprehensive storage guides and facility reviews' },
+            { partner: 'goodsam', title: 'Good Sam Storage', description: 'Member discounts on storage facilities nationwide' },
+            { partner: 'technorv', title: 'Storage Equipment', description: 'Professional RV covers and storage accessories' }
+          ]}
+          gridCols="3"
+        />
       </div>
     </Layout>
   );
