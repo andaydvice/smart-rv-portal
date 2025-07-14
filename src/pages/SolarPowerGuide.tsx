@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Helmet } from 'react-helmet';
 import Layout from '@/components/layout/Layout';
 import { Container } from '@/components/ui/container';
-import AffiliateComparisonTable from '@/components/affiliate/AffiliateComparisonTable';
+
 import AffiliateDisclosure from '@/components/affiliate/AffiliateDisclosure';
 import { OptimizedAffiliateGrid } from '@/components/affiliate/OptimizedAffiliateGrid';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -334,8 +334,33 @@ const SolarPowerGuide = () => {
             </TabsContent>
 
             <TabsContent value="panels">
-              <AffiliateComparisonTable
-                {...comparisonData}
+              <OptimizedAffiliateGrid
+                title="☀️ Top RV Solar Panel Comparison"
+                subtitle="Compare the most popular solar panels designed specifically for RV installations."
+                partners={[
+                  {
+                    partner: 'technorv',
+                    title: 'Renogy 200W Monocrystalline - Best Overall',
+                    description: '21% efficiency monocrystalline panels with 25-year warranty and proven reliability.',
+                    features: ['200W Output', '21%+ Efficiency', 'Monocrystalline Tech', '25 Year Warranty', 'IP67 Rating'],
+                    buttonText: 'Shop Premium Panels'
+                  },
+                  {
+                    partner: 'goodsam',
+                    title: 'AIMS 160W Flexible - Most Versatile',
+                    description: 'Lightweight flexible panels perfect for curved RV roofs and unique installations.',
+                    features: ['160W Output', 'Flexible Design', 'Lightweight (8.8 lbs)', '5 Year Warranty', 'Easy Installation'],
+                    buttonText: 'Get Flexible Panels'
+                  },
+                  {
+                    partner: 'rvlife',
+                    title: 'WindyNation 100W - Budget Choice',
+                    description: 'Budget-friendly polycrystalline panels with good warranty and reliable performance.',
+                    features: ['100W Output', '17% Efficiency', 'Budget Friendly', '25 Year Warranty', 'Reliable Performance'],
+                    buttonText: 'Shop Budget Panels'
+                  }
+                ]}
+                gridCols="3"
               />
             </TabsContent>
 

@@ -2,7 +2,7 @@ import React from 'react';
 import { Helmet } from 'react-helmet';
 import Layout from '@/components/layout/Layout';
 import { Container } from '@/components/ui/container';
-import AffiliateComparisonTable from '@/components/affiliate/AffiliateComparisonTable';
+
 import AffiliateDisclosure from '@/components/affiliate/AffiliateDisclosure';
 import { OptimizedAffiliateGrid } from '@/components/affiliate/OptimizedAffiliateGrid';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -240,9 +240,34 @@ const RVAppsHub = () => {
             className="mb-12"
           />
 
-          {/* App Comparison */}
-          <AffiliateComparisonTable
-            {...comparisonData}
+          {/* GPS Apps Comparison */}
+          <OptimizedAffiliateGrid
+            title="🗺️ Top RV GPS Apps Comparison"
+            subtitle="Compare the most popular RV-specific GPS navigation apps to find the perfect one for your travel needs."
+            partners={[
+              {
+                partner: 'rvlife',
+                title: 'RV LIFE Pro GPS - Best Overall',
+                description: 'Most comprehensive RV GPS with custom routing for your specific RV dimensions.',
+                features: ['RV-Specific Routing', 'Offline Maps', '50,000+ Campgrounds', 'Real-Time Traffic', 'Weather Integration'],
+                buttonText: 'Get RV LIFE Pro'
+              },
+              {
+                partner: 'goodsam',
+                title: 'Good Sam Travel Guide - Best Value',
+                description: 'Great value GPS app with strong community reviews and campground database.',
+                features: ['30,000+ Campgrounds', 'Trip Planning', 'Community Reviews', 'Member Discounts'],
+                buttonText: 'Get Travel Guide'
+              },
+              {
+                partner: 'technorv',
+                title: 'Smart RV Navigation Systems',
+                description: 'Advanced navigation systems with smart RV integration and monitoring.',
+                features: ['Smart Integration', 'System Monitoring', 'Advanced Navigation', 'Professional Support'],
+                buttonText: 'Shop Navigation'
+              }
+            ]}
+            gridCols="3"
             className="mb-12"
           />
 
