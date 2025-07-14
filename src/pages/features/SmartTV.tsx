@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import { Tv, Cast, Smartphone, Gamepad } from "lucide-react";
 import Layout from "@/components/layout/Layout";
+import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
 
 const SmartTV = () => {
   return (
@@ -74,6 +75,33 @@ const SmartTV = () => {
                 </div>
               </div>
             </div>
+          </div>
+          
+          {/* Affiliate Recommendations */}
+          <div className="mt-12">
+            <OptimizedAffiliateGrid
+              title="Complete Your Entertainment Setup"
+              subtitle="Enhance your Smart TV experience with these recommended RV accessories and services"
+              partners={[
+                {
+                  partner: 'technorv',
+                  title: 'TechnoRV Entertainment Systems',
+                  description: 'Professional installation and setup of premium entertainment systems with smart integration',
+                  features: ['4K System Installation', 'Smart Home Integration', 'Professional Calibration', 'Warranty Coverage'],
+                  path: '/entertainment-installation',
+                  buttonText: 'Shop Entertainment Systems'
+                },
+                {
+                  partner: 'rvlife',
+                  title: 'RV Life Streaming Guide',
+                  description: 'Complete guide to streaming and entertainment apps optimized for RV travel',
+                  features: ['Streaming Setup Guide', 'Data Management Tips', 'App Recommendations', 'Troubleshooting'],
+                  path: '/streaming-guide',
+                  buttonText: 'Get Streaming Guide'
+                }
+              ]}
+              gridCols="2"
+            />
           </div>
         </div>
       </motion.div>

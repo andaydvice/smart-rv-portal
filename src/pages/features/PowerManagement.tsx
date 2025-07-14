@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import { Battery, Sun, Zap, Activity } from "lucide-react";
 import Layout from "@/components/layout/Layout";
+import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
 
 const PowerManagement = () => {
   return (
@@ -135,6 +136,33 @@ const PowerManagement = () => {
                 </div>
               </div>
             </div>
+          </div>
+          
+          {/* Affiliate Recommendations */}
+          <div className="mt-12">
+            <OptimizedAffiliateGrid
+              title="Professional Power System Installation"
+              subtitle="Get expert installation and monitoring for your RV power management system"
+              partners={[
+                {
+                  partner: 'technorv',
+                  title: 'TechnoRV Power Management Systems',
+                  description: 'Advanced power management systems with smart monitoring and automated energy optimization',
+                  features: ['Smart Power Distribution', 'Energy Monitoring', 'Automated Management', 'Professional Installation'],
+                  path: '/power-systems',
+                  buttonText: 'Shop Power Systems'
+                },
+                {
+                  partner: 'goodsam',
+                  title: 'Good Sam Electrical Support',
+                  description: 'Expert electrical system support and maintenance for RV power management',
+                  features: ['Electrical Diagnostics', 'System Maintenance', 'Emergency Repairs', 'Technical Support'],
+                  path: '/electrical-support',
+                  buttonText: 'Get Electrical Support'
+                }
+              ]}
+              gridCols="2"
+            />
           </div>
         </div>
       </motion.div>

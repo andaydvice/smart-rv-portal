@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { Check } from "lucide-react";
 import Layout from "@/components/layout/Layout";
 import { scrollToTop } from "@/utils/scrollToTop";
+import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
 
 const Pricing = () => {
   useEffect(() => {
@@ -183,6 +184,38 @@ const Pricing = () => {
                   Calculate Costs
                 </Link>
               </div>
+            </div>
+
+            {/* Partner Value Comparison */}
+            <div className="bg-black/20 backdrop-blur-md p-8 rounded-xl border border-white/10">
+              <h2 className="text-3xl font-bold text-white mb-6 text-center">Save More with Partner Benefits</h2>
+              <p className="text-white/90 text-center mb-8">
+                Our trusted partners offer exclusive discounts and value-added services for Smart RV customers
+              </p>
+              
+              <OptimizedAffiliateGrid
+                title=""
+                subtitle=""
+                partners={[
+                  {
+                    partner: 'goodsam',
+                    title: 'Good Sam Club Membership',
+                    description: 'Save 10¢/gallon on gas, get camping discounts, and emergency roadside assistance',
+                    features: ['Fuel Savings', 'Camping Discounts', 'Emergency Coverage', 'Travel Planning'],
+                    path: '/club-benefits',
+                    buttonText: 'Join Good Sam'
+                  },
+                  {
+                    partner: 'rvlife',
+                    title: 'RV Life Pro Membership',
+                    description: 'Professional trip planning tools with RV-safe routes and campground reviews',
+                    features: ['RV-Safe Routes', 'Trip Planning', 'Campground Reviews', 'Offline Maps'],
+                    path: '/pro-membership',
+                    buttonText: 'Go Pro'
+                  }
+                ]}
+                gridCols="2"
+              />
             </div>
           </motion.div>
         </div>

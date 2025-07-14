@@ -5,6 +5,7 @@ import { Container } from '@/components/ui/container';
 import AffiliateProductCard from '@/components/affiliate/AffiliateProductCard';
 import AffiliateCTABanner from '@/components/affiliate/AffiliateCTABanner';
 import AffiliateDisclosure from '@/components/affiliate/AffiliateDisclosure';
+import { OptimizedAffiliateGrid } from '@/components/affiliate/OptimizedAffiliateGrid';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { 
@@ -332,14 +333,36 @@ const RVEmergencyCenter = () => {
             </CardContent>
           </Card>
 
-          {/* CTA Banner */}
-          <AffiliateCTABanner
-            title="Be Prepared for Any Emergency"
-            description="Don't wait for an emergency to strike. Get equipped with professional services, essential equipment, and peace of mind for every RV journey."
-            buttonText="Shop Emergency Supplies"
-            affiliateLink="https://amazon.com/rv-emergency-supplies"
-            backgroundColor="bg-gradient-to-r from-red-600 to-orange-600"
-            className="mb-8"
+          <OptimizedAffiliateGrid
+            title="Emergency Services & Support"
+            subtitle="Be prepared with professional emergency services and safety equipment for your RV adventures"
+            partners={[
+              {
+                partner: 'goodsam',
+                title: 'Good Sam Emergency Roadside',
+                description: 'America\'s most trusted RV emergency service with 24/7 roadside assistance and technical support',
+                features: ['24/7 Emergency Response', 'Nationwide Coverage', 'RV-Specific Services', 'Towing & Recovery'],
+                path: '/emergency-roadside',
+                buttonText: 'Get Emergency Coverage'
+              },
+              {
+                partner: 'technorv',
+                title: 'TechnoRV Emergency Monitoring',
+                description: 'Advanced monitoring systems that alert you to potential emergencies before they happen',
+                features: ['Real-Time Alerts', 'Emergency Detection', 'Preventive Monitoring', 'Remote Diagnostics'],
+                path: '/emergency-monitoring',
+                buttonText: 'Shop Monitoring Systems'
+              },
+              {
+                partner: 'rvwaterfilter',
+                title: 'Emergency Water Filtration',
+                description: 'Essential water filtration systems for emergency situations and off-grid adventures',
+                features: ['Emergency Filtration', 'Portable Systems', 'Water Purification', 'Off-Grid Ready'],
+                path: '/emergency-water',
+                buttonText: 'Shop Emergency Filters'
+              }
+            ]}
+            gridCols="3"
           />
 
           {/* Affiliate Disclosure */}

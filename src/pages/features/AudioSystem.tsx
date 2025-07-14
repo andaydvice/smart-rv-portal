@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import { Music, Volume2, Radio, Mic2 } from "lucide-react";
 import Layout from "@/components/layout/Layout";
+import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
 
 const AudioSystem = () => {
   return (
@@ -66,6 +67,33 @@ const AudioSystem = () => {
                 </p>
               </div>
             </div>
+          </div>
+          
+          {/* Affiliate Recommendations */}
+          <div className="mt-12">
+            <OptimizedAffiliateGrid
+              title="Professional Audio Installation"
+              subtitle="Get expert installation and premium audio equipment for your RV sound system"
+              partners={[
+                {
+                  partner: 'technorv',
+                  title: 'TechnoRV Premium Audio Installation',
+                  description: 'Professional installation of high-end audio systems with custom tuning and integration',
+                  features: ['Premium Speaker Installation', 'Custom Audio Tuning', 'Smart Integration', 'Lifetime Support'],
+                  path: '/premium-audio',
+                  buttonText: 'Schedule Audio Installation'
+                },
+                {
+                  partner: 'goodsam',
+                  title: 'Good Sam Audio Maintenance',
+                  description: 'Expert maintenance and troubleshooting services for RV audio systems',
+                  features: ['System Diagnostics', 'Maintenance Plans', 'Emergency Repairs', 'Technical Support'],
+                  path: '/audio-maintenance',
+                  buttonText: 'Get Audio Support'
+                }
+              ]}
+              gridCols="2"
+            />
           </div>
         </div>
       </motion.div>

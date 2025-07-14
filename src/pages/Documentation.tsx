@@ -11,6 +11,7 @@ import PowerTab from "@/components/documentation/PowerTab";
 import Layout from "@/components/layout/Layout";
 import { Container } from "@/components/ui/container";
 import { useEffect } from "react";
+import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
 
 // Preload these images as early as possible
 const CRITICAL_IMAGES = [
@@ -113,6 +114,33 @@ const Documentation = () => {
                   <PowerTab />
                 </TabsContent>
               </Tabs>
+              
+              {/* Affiliate Partner Resources */}
+              <div className="mt-16">
+                <OptimizedAffiliateGrid
+                  title="Professional Installation & Support"
+                  subtitle="Get expert help implementing the systems covered in our documentation"
+                  partners={[
+                    {
+                      partner: 'technorv',
+                      title: 'TechnoRV Professional Installation',
+                      description: 'Certified technicians for professional smart RV system installation and configuration',
+                      features: ['Certified Installers', 'Smart System Setup', 'Training Included', 'Warranty Support'],
+                      path: '/professional-installation',
+                      buttonText: 'Schedule Installation'
+                    },
+                    {
+                      partner: 'goodsam',
+                      title: 'Good Sam Technical Support',
+                      description: 'Expert technical support and troubleshooting assistance for all RV systems',
+                      features: ['Expert Technicians', '24/7 Phone Support', 'Remote Diagnostics', 'System Optimization'],
+                      path: '/technical-support',
+                      buttonText: 'Get Tech Support'
+                    }
+                  ]}
+                  gridCols="2"
+                />
+              </div>
             </div>
           </Container>
         </div>

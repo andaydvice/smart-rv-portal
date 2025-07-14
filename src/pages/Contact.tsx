@@ -8,6 +8,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/components/ui/use-toast";
 import Layout from "@/components/layout/Layout";
 import { scrollToTop } from "@/utils/scrollToTop";
+import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
 
 const Contact = () => {
   const { toast } = useToast();
@@ -93,6 +94,30 @@ const Contact = () => {
               Send Message
             </Button>
           </motion.form>
+          
+          {/* Emergency Contact Partners */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5, duration: 0.5 }}
+            className="mt-12"
+          >
+            <OptimizedAffiliateGrid
+              title="Need Immediate Help?"
+              subtitle="Emergency support and urgent assistance when you can't wait for a response"
+              partners={[
+                {
+                  partner: 'goodsam',
+                  title: 'Good Sam Emergency Hotline',
+                  description: '24/7 emergency roadside assistance and immediate technical support for urgent RV issues',
+                  features: ['24/7 Emergency Line', 'Immediate Dispatch', 'Technical Hotline', 'Priority Response'],
+                  path: '/emergency-support',
+                  buttonText: 'Call Emergency Support'
+                }
+              ]}
+              gridCols="auto"
+            />
+          </motion.div>
         </div>
       </motion.div>
     </Layout>

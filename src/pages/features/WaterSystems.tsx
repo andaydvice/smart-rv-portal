@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
-import { Droplet } from "lucide-react"; // MODIFIED: Removed WavesIcon as it's not used.
-// MODIFIED: Removed Link and Button imports as they are no longer used after removing the CTA
+import { Droplet } from "lucide-react";
 import Layout from "@/components/layout/Layout";
+import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
 import { useEffect } from "react";
 
 const WaterSystems = () => {
@@ -105,7 +105,32 @@ const WaterSystems = () => {
             </div>
           </div>
 
-          {/* MODIFIED: Removed the CTA button section */}
+          {/* Affiliate Recommendations */}
+          <div className="mt-12">
+            <OptimizedAffiliateGrid
+              title="Premium Water Filtration Systems"
+              subtitle="Ensure clean, safe water throughout your RV adventures with professional-grade filtration"
+              partners={[
+                {
+                  partner: 'rvwaterfilter',
+                  title: 'RV Water Filter Store Premium Systems',
+                  description: 'Professional-grade water filtration systems designed specifically for RV use with guaranteed clean water',
+                  features: ['RV-Specific Filters', 'Professional Installation', 'Water Quality Guarantee', 'Maintenance Support'],
+                  path: '/premium-filters',
+                  buttonText: 'Shop Premium Filters'
+                },
+                {
+                  partner: 'technorv',
+                  title: 'TechnoRV Smart Water Monitoring',
+                  description: 'Advanced water monitoring systems that track quality, usage, and system health in real-time',
+                  features: ['Real-Time Monitoring', 'Quality Testing', 'Usage Tracking', 'Smart Alerts'],
+                  path: '/water-monitoring',
+                  buttonText: 'Shop Monitoring Systems'
+                }
+              ]}
+              gridCols="2"
+            />
+          </div>
         </div>
       </motion.div>
     </Layout>

@@ -6,6 +6,7 @@ import AffiliateProductCard from '@/components/affiliate/AffiliateProductCard';
 import AffiliateComparisonTable from '@/components/affiliate/AffiliateComparisonTable';
 import AffiliateCTABanner from '@/components/affiliate/AffiliateCTABanner';
 import AffiliateDisclosure from '@/components/affiliate/AffiliateDisclosure';
+import { OptimizedAffiliateGrid } from '@/components/affiliate/OptimizedAffiliateGrid';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Smartphone, Wifi, MapPin, Battery, Settings, Shield } from 'lucide-react';
 
@@ -280,13 +281,28 @@ const RVAppsHub = () => {
             </CardContent>
           </Card>
 
-          {/* CTA Banner */}
-          <AffiliateCTABanner
-            title="Start Your Digital RV Journey Today"
-            description="Get equipped with the essential apps and tools that will transform your RV adventures. Download the must-have apps and upgrade your RV tech setup."
-            buttonText="Shop RV Tech Deals"
-            affiliateLink="https://amazon.com/rv-electronics"
-            className="mb-8"
+          <OptimizedAffiliateGrid
+            title="Premium RV Apps & Tools"
+            subtitle="Upgrade your RV experience with professional apps and trip planning tools"
+            partners={[
+              {
+                partner: 'rvlife',
+                title: 'RV Life Pro Apps Suite',
+                description: 'Complete professional app suite with trip planning, navigation, and RV-specific tools',
+                features: ['RV-Safe Navigation', 'Trip Planning Tools', 'Campground Reviews', 'Offline Maps'],
+                path: '/pro-apps',
+                buttonText: 'Get RV Life Pro'
+              },
+              {
+                partner: 'goodsam',
+                title: 'Good Sam Travel Tools',
+                description: 'Essential travel apps with fuel savings, campground discounts, and emergency support',
+                features: ['Fuel Savings App', 'Campground Discounts', 'Emergency Support', 'Travel Planning'],
+                path: '/travel-tools',
+                buttonText: 'Download Travel Apps'
+              }
+            ]}
+            gridCols="2"
           />
 
           {/* Affiliate Disclosure */}

@@ -8,7 +8,7 @@ import Layout from "@/components/layout/Layout";
 import SmartSystemGuide from "@/components/troubleshooting/SmartSystemGuide";
 import ConnectivityGuide from "@/components/connectivity/ConnectivityGuide";
 import TroubleshootingFlowchart from "@/components/troubleshooting/TroubleshootingFlowchart";
-import TroubleshootingAffiliateRecommendations from "@/components/troubleshooting/TroubleshootingAffiliateRecommendations";
+import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
 import { scrollToTop } from "@/utils/scrollToTop";
 
 const Troubleshooting = () => {
@@ -101,7 +101,29 @@ const Troubleshooting = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3, delay: 0.4 }}
             >
-              <TroubleshootingAffiliateRecommendations />
+              <OptimizedAffiliateGrid
+                title="Expert Support & Emergency Services"
+                subtitle="Get professional help when you need it most with our trusted partners"
+                partners={[
+                  {
+                    partner: 'goodsam',
+                    title: 'Good Sam Emergency Roadside',
+                    description: 'Nation\'s most trusted RV roadside assistance with 24/7 emergency support and technical troubleshooting',
+                    features: ['24/7 Emergency Support', 'Technical Phone Support', 'Nationwide Coverage', 'RV-Specific Services'],
+                    path: '/emergency-roadside',
+                    buttonText: 'Get Emergency Coverage'
+                  },
+                  {
+                    partner: 'technorv',
+                    title: 'TechnoRV System Monitoring', 
+                    description: 'Advanced monitoring systems that prevent problems before they happen with real-time diagnostics',
+                    features: ['Real-Time Diagnostics', 'Preventive Alerts', 'Remote Monitoring', 'Expert Installation'],
+                    path: '/monitoring-systems',
+                    buttonText: 'Shop Monitoring Systems'
+                  }
+                ]}
+                gridCols="2"
+              />
             </motion.div>
 
             <motion.div

@@ -6,6 +6,7 @@ import AffiliateProductCard from '@/components/affiliate/AffiliateProductCard';
 import AffiliateComparisonTable from '@/components/affiliate/AffiliateComparisonTable';
 import AffiliateCTABanner from '@/components/affiliate/AffiliateCTABanner';
 import AffiliateDisclosure from '@/components/affiliate/AffiliateDisclosure';
+import { OptimizedAffiliateGrid } from '@/components/affiliate/OptimizedAffiliateGrid';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -402,14 +403,28 @@ const SolarPowerGuide = () => {
             </CardContent>
           </Card>
 
-          {/* CTA Banner */}
-          <AffiliateCTABanner
-            title="Start Your Solar Journey Today"
-            description="Join thousands of RVers who've discovered the freedom of solar power. Shop the best deals on complete systems and individual components."
-            buttonText="Shop Solar Deals"
-            affiliateLink="https://amazon.com/rv-solar-equipment"
-            backgroundColor="bg-gradient-to-r from-yellow-600 to-orange-600"
-            className="mb-8"
+          <OptimizedAffiliateGrid
+            title="Professional Solar Installation & Support"
+            subtitle="Get expert solar installation and monitoring systems for your RV power needs"
+            partners={[
+              {
+                partner: 'technorv',
+                title: 'TechnoRV Solar Installation',
+                description: 'Professional solar system installation with smart monitoring and energy management',
+                features: ['Professional Installation', 'Smart Monitoring', 'Energy Management', 'System Optimization'],
+                path: '/solar-installation',
+                buttonText: 'Schedule Solar Installation'
+              },
+              {
+                partner: 'goodsam',
+                title: 'Good Sam Solar Maintenance',
+                description: 'Expert maintenance and support services for RV solar power systems',
+                features: ['System Maintenance', 'Performance Optimization', 'Technical Support', 'Warranty Service'],
+                path: '/solar-maintenance',
+                buttonText: 'Get Solar Support'
+              }
+            ]}
+            gridCols="2"
           />
 
           {/* Affiliate Disclosure */}
