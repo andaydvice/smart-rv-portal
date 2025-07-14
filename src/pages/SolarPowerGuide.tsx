@@ -2,9 +2,7 @@ import React, { useState } from 'react';
 import { Helmet } from 'react-helmet';
 import Layout from '@/components/layout/Layout';
 import { Container } from '@/components/ui/container';
-import AffiliateProductCard from '@/components/affiliate/AffiliateProductCard';
 import AffiliateComparisonTable from '@/components/affiliate/AffiliateComparisonTable';
-import AffiliateCTABanner from '@/components/affiliate/AffiliateCTABanner';
 import AffiliateDisclosure from '@/components/affiliate/AffiliateDisclosure';
 import { OptimizedAffiliateGrid } from '@/components/affiliate/OptimizedAffiliateGrid';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -305,22 +303,34 @@ const SolarPowerGuide = () => {
             </TabsList>
 
             <TabsContent value="kits">
-              <Card className="bg-[#0a0a0a] border-gray-800">
-                <CardHeader>
-                  <CardTitle className="text-2xl text-yellow-400 text-center">☀️ Complete Solar Kits</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                    {solarKits.map((kit, index) => (
-                      <AffiliateProductCard
-                        key={index}
-                        {...kit}
-                        className="h-full"
-                      />
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
+              <OptimizedAffiliateGrid
+                title="☀️ Complete Solar Kits & Systems"
+                subtitle="Professional solar kits and systems designed specifically for RV installations with everything you need."
+                partners={[
+                  {
+                    partner: 'technorv',
+                    title: 'TechnoRV Solar Systems',
+                    description: 'Complete solar power systems with smart monitoring and professional installation support.',
+                    features: ['Complete Solar Kits', 'Smart Monitoring', 'Professional Installation', 'System Optimization'],
+                    buttonText: 'Shop Solar Systems'
+                  },
+                  {
+                    partner: 'goodsam',
+                    title: 'Good Sam Solar Solutions',
+                    description: 'Trusted solar installations with expert support and comprehensive warranties for RV solar systems.',
+                    features: ['Expert Installation', 'Comprehensive Warranties', 'Professional Support', 'System Maintenance'],
+                    buttonText: 'Get Solar Installation'
+                  },
+                  {
+                    partner: 'rvlife',
+                    title: 'RV Life Solar Planning',
+                    description: 'Solar system planning tools and expert guidance to design the perfect solar setup for your RV.',
+                    features: ['Solar Planning Tools', 'System Design', 'Expert Guidance', 'Installation Support'],
+                    buttonText: 'Plan Solar System'
+                  }
+                ]}
+                gridCols="3"
+              />
             </TabsContent>
 
             <TabsContent value="panels">
@@ -330,50 +340,27 @@ const SolarPowerGuide = () => {
             </TabsContent>
 
             <TabsContent value="batteries">
-              <Card className="bg-[#091020] border-gray-700">
-                <CardHeader>
-                  <CardTitle className="text-2xl text-blue-400">🔋 Battery Storage Solutions</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    <AffiliateProductCard
-                      title="Victron Energy 200Ah LiFePO4 Smart Battery"
-                      description="Premium lithium battery with Bluetooth monitoring and 10-year warranty."
-                      price="$1,899.99"
-                      originalPrice="$2,299.99"
-                      rating={4.9}
-                      reviewCount={892}
-                      image="/lovable-uploads/3175b015-a5c7-4df7-b8ca-b8a130b05519.png"
-                      features={[
-                        "200Ah capacity",
-                        "Bluetooth monitoring",
-                        "10-year warranty",
-                        "Built-in safety systems"
-                      ]}
-                      affiliateLink="https://victronenergy.com/200ah-smart-battery"
-                      badges={["Premium", "Smart"]}
-                    />
-                    
-                    <AffiliateProductCard
-                      title="AIMS Power 100Ah LiFePO4 Battery"
-                      description="Affordable lithium option with excellent performance for budget-conscious RVers."
-                      price="$599.99"
-                      originalPrice="$799.99"
-                      rating={4.6}
-                      reviewCount={567}
-                      image="/lovable-uploads/23ce0af4-35ca-4e7f-af56-c1a7c6eae380.png"
-                      features={[
-                        "100Ah LiFePO4",
-                        "2000+ cycles",
-                        "Lightweight design",
-                        "5-year warranty"
-                      ]}
-                      affiliateLink="https://aimscorp.net/100ah-lifepo4"
-                      badges={["Budget", "Reliable"]}
-                    />
-                  </div>
-                </CardContent>
-              </Card>
+              <OptimizedAffiliateGrid
+                title="🔋 Battery Storage & Power Solutions"
+                subtitle="High-quality battery systems and power management solutions for reliable RV solar energy storage."
+                partners={[
+                  {
+                    partner: 'technorv',
+                    title: 'TechnoRV Battery Systems',
+                    description: 'Advanced battery storage solutions with smart monitoring and energy management systems.',
+                    features: ['Smart Battery Systems', 'Energy Management', 'Monitoring Technology', 'Professional Installation'],
+                    buttonText: 'Shop Battery Systems'
+                  },
+                  {
+                    partner: 'goodsam',
+                    title: 'Good Sam Power Solutions',
+                    description: 'Complete power system support with installation, maintenance, and warranty coverage.',
+                    features: ['Professional Installation', 'System Maintenance', 'Warranty Coverage', 'Technical Support'],
+                    buttonText: 'Get Power Support'
+                  }
+                ]}
+                gridCols="2"
+              />
             </TabsContent>
           </Tabs>
 

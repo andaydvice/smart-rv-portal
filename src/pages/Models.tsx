@@ -4,8 +4,6 @@ import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Battery, Navigation, Shield, Wifi } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
-import AffiliateCTABanner from "@/components/affiliate/AffiliateCTABanner";
-import AffiliateProductCard from "@/components/affiliate/AffiliateProductCard";
 import Footer2 from "@/components/ui/Footer2";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
 
@@ -174,83 +172,41 @@ const Models = () => {
             </Link>
           </motion.div>
           
-          {/* Affiliate CTA for RVShare rentals */}
+          {/* Model Support and Services */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.0 }}
             className="mt-16"
           >
-            <AffiliateCTABanner
-              title="Experience These Models Before You Buy"
-              description="Rent similar smart RVs to test features and find your perfect match"
-              buttonText="Browse Smart RV Rentals"
-              affiliateLink="https://rvshare.com/smart-rvs"
+            <OptimizedAffiliateGrid
+              title="Experience and Support RV Models"
+              subtitle="Try different models through rentals, get financing support, and find technology upgrades for any RV type."
+              partners={[
+                {
+                  partner: 'rvshare',
+                  title: 'Experience Models Before Buying',
+                  description: 'Rent and test various RV models to find your perfect match. Compare features and layouts.',
+                  features: ['Model Testing', 'Feature Comparison', 'Real Experience', 'Owner Insights'],
+                  buttonText: 'Browse RV Rentals'
+                },
+                {
+                  partner: 'goodsam',
+                  title: 'RV Model Financing & Support',
+                  description: 'Get financing support, insurance, and professional services for any RV model purchase.',
+                  features: ['RV Financing', 'Insurance Options', 'Professional Support', 'Model Expertise'],
+                  buttonText: 'Get Model Support'
+                },
+                {
+                  partner: 'technorv',
+                  title: 'Model Technology Upgrades',
+                  description: 'Upgrade any RV model with smart technology, monitoring systems, and modern features.',
+                  features: ['Smart Upgrades', 'Model Compatibility', 'Professional Installation', 'Technology Enhancement'],
+                  buttonText: 'Shop Model Upgrades'
+                }
+              ]}
+              gridCols="3"
             />
-          </motion.div>
-
-          {/* RV Planning Tools */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.2 }}
-            className="mt-12"
-          >
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              <AffiliateProductCard
-                title="RV Life Pro - Model Planning"
-                description="Compare RV models, research features, and plan your purchase with comprehensive RV data and tools."
-                price="$199"
-                originalPrice="$299"
-                rating={4.8}
-                reviewCount={1247}
-                image="/lovable-uploads/11a2f8d8-22f5-4ed7-83f9-28b08a64aeb5.png"
-                features={[
-                  "Model comparison tools",
-                  "Feature research database",
-                  "Price tracking and alerts",
-                  "Dealer network access"
-                ]}
-                affiliateLink="https://rvlife.com/model-research"
-                badges={["Planning Essential"]}
-              />
-              
-              <AffiliateProductCard
-                title="Good Sam RV Financing"
-                description="Get pre-approved for RV financing with competitive rates and specialized RV loan expertise for your dream RV purchase."
-                price="From 4.99%"
-                originalPrice="From 6.99%"
-                rating={4.6}
-                reviewCount={892}
-                image="/lovable-uploads/11a2f8d8-22f5-4ed7-83f9-28b08a64aeb5.png"
-                features={[
-                  "Competitive interest rates",
-                  "RV-specialized financing",
-                  "Quick pre-approval process",
-                  "Extended loan terms"
-                ]}
-                affiliateLink="https://goodsam.com"
-                badges={["Financing Partner"]}
-              />
-              
-              <AffiliateProductCard
-                title="TechnoRV Model Upgrade Kits"
-                description="Smart technology upgrade packages to enhance any RV model with modern connectivity and monitoring systems."
-                price="$499"
-                originalPrice="$699"
-                rating={4.7}
-                reviewCount={423}
-                image="/lovable-uploads/11a2f8d8-22f5-4ed7-83f9-28b08a64aeb5.png"
-                features={[
-                  "Smart monitoring systems",
-                  "Professional installation",
-                  "Model-specific compatibility",
-                  "Technology upgrades"
-                ]}
-                affiliateLink="https://technorv.com"
-                badges={["Tech Upgrade"]}
-              />
-            </div>
           </motion.div>
           
           {/* RV Model Partners and Services */}

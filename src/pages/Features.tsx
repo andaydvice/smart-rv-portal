@@ -4,8 +4,7 @@ import Navbar from "@/components/Navbar";
 import { Link } from "react-router-dom";
 import { Navigation, Shield, Battery, Tv, Droplet, Cog, Thermometer, Music } from "lucide-react";
 import Layout from "@/components/layout/Layout";
-import AffiliateCTABanner from "@/components/affiliate/AffiliateCTABanner";
-import AffiliateProductCard from "@/components/affiliate/AffiliateProductCard";
+import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
 
 const Features = () => {
   return (
@@ -92,71 +91,33 @@ const Features = () => {
             transition={{ delay: 0.8 }}
             className="mt-16"
           >
-            <h2 className="text-3xl font-bold text-white mb-8 text-center">
-              Upgrade Your RV with These Features
-            </h2>
-            
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-              <AffiliateProductCard
-                title="TechnoRV Smart Power Monitor"
-                description="Complete smart power management with remote monitoring and advanced battery protection for your RV."
-                price="$399"
-                originalPrice="$499"
-                rating={4.9}
-                reviewCount={567}
-                image="/lovable-uploads/51ac2438-08c7-47ee-b56d-876aa3bbdc80.png"
-                features={[
-                  "Smart battery monitoring",
-                  "Remote control via app",
-                  "Advanced power analytics",
-                  "Solar integration ready"
-                ]}
-                affiliateLink="https://technorv.com"
-                badges={["Smart Power"]}
-              />
-              
-              <AffiliateProductCard
-                title="TechnoRV Security Suite"
-                description="Comprehensive RV security with cameras, sensors, and smartphone integration for complete peace of mind."
-                price="$449"
-                originalPrice="$599"
-                rating={4.8}
-                reviewCount={298}
-                image="/lovable-uploads/11a2f8d8-22f5-4ed7-83f9-28b08a64aeb5.png"
-                features={[
-                  "HD security cameras",
-                  "Motion & door sensors",
-                  "Mobile app alerts",
-                  "Professional monitoring"
-                ]}
-                affiliateLink="https://technorv.com"
-                badges={["Security Pro"]}
-              />
-              
-              <AffiliateProductCard
-                title="RV Water Filter Store Premium Kit"
-                description="Advanced water filtration and monitoring system for safe, clean water throughout your RV adventures."
-                price="$299"
-                originalPrice="$399"
-                rating={4.7}
-                reviewCount={423}
-                image="/lovable-uploads/11a2f8d8-22f5-4ed7-83f9-28b08a64aeb5.png"
-                features={[
-                  "Multi-stage filtration",
-                  "Smart monitoring system",
-                  "Easy installation",
-                  "NSF certified components"
-                ]}
-                affiliateLink="https://rvwaterfilterstore.com"
-                badges={["Water Safety"]}
-              />
-            </div>
-            
-            <AffiliateCTABanner
-              title="Ready to Upgrade Your RV?"
-              description="Transform your RV into a smart home on wheels with these proven technologies from our trusted partners"
-              buttonText="Shop All RV Upgrades"
-              affiliateLink="https://rvlife.com"
+            <OptimizedAffiliateGrid
+              title="Upgrade Your RV with Smart Features"
+              subtitle="Transform your RV into a smart home on wheels with these proven technologies from our trusted partners."
+              partners={[
+                {
+                  partner: 'technorv',
+                  title: 'Smart RV Technology Systems',
+                  description: 'Complete smart technology solutions for RV automation, monitoring, and control systems.',
+                  features: ['Smart Power Management', 'Security Systems', 'Automation Controls', 'Remote Monitoring'],
+                  buttonText: 'Shop Smart Tech'
+                },
+                {
+                  partner: 'rvwaterfilter',
+                  title: 'Advanced Water System Features',
+                  description: 'Premium water filtration and monitoring systems for safe, clean water in your smart RV.',
+                  features: ['Smart Water Monitoring', 'Multi-Stage Filtration', 'NSF Certified', 'Easy Installation'],
+                  buttonText: 'Shop Water Systems'
+                },
+                {
+                  partner: 'goodsam',
+                  title: 'Professional Feature Installation',
+                  description: 'Expert installation and support services for all your RV feature upgrades and smart systems.',
+                  features: ['Professional Installation', 'Expert Support', 'Warranty Coverage', 'System Integration'],
+                  buttonText: 'Get Installation Service'
+                }
+              ]}
+              gridCols="3"
             />
           </motion.div>
         </div>

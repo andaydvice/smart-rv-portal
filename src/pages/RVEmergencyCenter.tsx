@@ -2,8 +2,6 @@ import React from 'react';
 import { Helmet } from 'react-helmet';
 import Layout from '@/components/layout/Layout';
 import { Container } from '@/components/ui/container';
-import AffiliateProductCard from '@/components/affiliate/AffiliateProductCard';
-import AffiliateCTABanner from '@/components/affiliate/AffiliateCTABanner';
 import AffiliateDisclosure from '@/components/affiliate/AffiliateDisclosure';
 import { OptimizedAffiliateGrid } from '@/components/affiliate/OptimizedAffiliateGrid';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -255,57 +253,36 @@ const RVEmergencyCenter = () => {
             ))}
           </div>
 
-          {/* Emergency Services */}
-          <Card className="bg-[#0a0a0a] border-gray-800 mb-12">
-            <CardHeader>
-              <CardTitle className="text-2xl text-red-400 text-center">🚗 Professional Emergency Services</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                {emergencyServices.map((service, index) => (
-                  <AffiliateProductCard
-                    key={index}
-                    {...service}
-                    className="h-full"
-                  />
-                ))}
-              </div>
-            </CardContent>
-          </Card>
-
-          {/* Emergency Equipment */}
-          <Card className="bg-[#091020] border-gray-700 mb-12">
-            <CardHeader>
-              <CardTitle className="text-2xl text-orange-400">🛡️ Essential Emergency Equipment</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-                {emergencyEquipment.map((equipment, index) => (
-                  <AffiliateProductCard
-                    key={index}
-                    {...equipment}
-                    className="h-full"
-                  />
-                ))}
-              </div>
-              
-              {/* Emergency Apps */}
-              <div className="border-t border-gray-700 pt-8">
-                <h3 className="text-xl font-semibold text-white mb-6 text-center">📱 Essential Emergency Apps</h3>
-                <div className="flex justify-center">
-                  <div className="w-full max-w-md">
-                    {emergencyApps.map((app, index) => (
-                      <AffiliateProductCard
-                        key={index}
-                        {...app}
-                        className="h-full"
-                      />
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
+          {/* Emergency Services and Equipment */}
+          <OptimizedAffiliateGrid
+            title="🚗 Essential Emergency Services & Equipment"
+            subtitle="Professional emergency services, essential safety equipment, and emergency preparedness tools for complete RV safety."
+            partners={[
+              {
+                partner: 'goodsam',
+                title: 'Good Sam Emergency Roadside Service',
+                description: 'Comprehensive 24/7 roadside assistance specifically designed for RVs with unlimited distance towing.',
+                features: ['24/7 Emergency Response', 'Unlimited Towing', 'Lockout Service', 'Emergency Fuel Delivery'],
+                buttonText: 'Get Emergency Coverage'
+              },
+              {
+                partner: 'technorv',
+                title: 'TechnoRV Emergency Monitoring',
+                description: 'Advanced monitoring systems that detect and alert you to potential emergencies before they happen.',
+                features: ['Emergency Detection', 'Real-Time Alerts', 'Preventive Monitoring', 'Remote Diagnostics'],
+                buttonText: 'Shop Safety Systems'
+              },
+              {
+                partner: 'rvwaterfilter',
+                title: 'Emergency Water & Safety Systems',
+                description: 'Essential emergency water filtration and safety equipment for off-grid adventures and emergency situations.',
+                features: ['Emergency Filtration', 'Water Purification', 'Safety Equipment', 'Off-Grid Ready'],
+                buttonText: 'Shop Emergency Equipment'
+              }
+            ]}
+            gridCols="3"
+            className="mb-12"
+          />
 
           {/* Emergency Insurance CTA */}
           <Card className="bg-gradient-to-r from-purple-900/20 to-pink-900/20 border-purple-800 mb-12">

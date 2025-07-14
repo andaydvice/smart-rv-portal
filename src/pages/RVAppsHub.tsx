@@ -2,9 +2,7 @@ import React from 'react';
 import { Helmet } from 'react-helmet';
 import Layout from '@/components/layout/Layout';
 import { Container } from '@/components/ui/container';
-import AffiliateProductCard from '@/components/affiliate/AffiliateProductCard';
 import AffiliateComparisonTable from '@/components/affiliate/AffiliateComparisonTable';
-import AffiliateCTABanner from '@/components/affiliate/AffiliateCTABanner';
 import AffiliateDisclosure from '@/components/affiliate/AffiliateDisclosure';
 import { OptimizedAffiliateGrid } from '@/components/affiliate/OptimizedAffiliateGrid';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -211,23 +209,36 @@ const RVAppsHub = () => {
             ))}
           </div>
 
-          {/* Featured Apps */}
-          <Card className="bg-[#0a0a0a] border-gray-800 mb-12">
-            <CardHeader>
-              <CardTitle className="text-2xl text-[#5B9BD5] text-center">⭐ Must-Have RV Apps</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                {featuredApps.map((app, index) => (
-                  <AffiliateProductCard
-                    key={index}
-                    {...app}
-                    className="h-full"
-                  />
-                ))}
-              </div>
-            </CardContent>
-          </Card>
+          {/* Essential RV Apps */}
+          <OptimizedAffiliateGrid
+            title="⭐ Must-Have RV Apps"
+            subtitle="Professional mobile apps and digital tools designed specifically for the modern RVer lifestyle."
+            partners={[
+              {
+                partner: 'rvlife',
+                title: 'RV Life Pro GPS & Trip Planning',
+                description: 'Complete app suite with RV-safe GPS navigation, trip planning, and campground database.',
+                features: ['RV-Safe Navigation', 'Trip Planning', 'Campground Reviews', 'Offline Maps'],
+                buttonText: 'Get RV Life Pro'
+              },
+              {
+                partner: 'goodsam',
+                title: 'Good Sam Travel & Savings Apps',
+                description: 'Essential travel apps with fuel savings, campground discounts, and emergency support.',
+                features: ['Fuel Savings', 'Campground Discounts', 'Emergency Support', 'Member Benefits'],
+                buttonText: 'Download Travel Apps'
+              },
+              {
+                partner: 'technorv',
+                title: 'TechnoRV Smart Monitoring Apps',
+                description: 'Monitor your RV systems remotely with smart technology and real-time alerts.',
+                features: ['System Monitoring', 'Real-Time Alerts', 'Remote Control', 'Smart Diagnostics'],
+                buttonText: 'Get Monitoring Apps'
+              }
+            ]}
+            gridCols="3"
+            className="mb-12"
+          />
 
           {/* App Comparison */}
           <AffiliateComparisonTable
@@ -235,74 +246,33 @@ const RVAppsHub = () => {
             className="mb-12"
           />
 
-          {/* Hardware Recommendations */}
-          <Card className="bg-[#091020] border-gray-700 mb-12">
-            <CardHeader>
-              <CardTitle className="text-2xl text-[#5B9BD5]">📱 Mobile Hardware for RVers</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                <AffiliateProductCard
-                  title="WeBoost Drive Reach RV Cell Signal Booster"
-                  description="Boost your cell signal by up to 32x for better app performance and connectivity."
-                   price="$499.99"
-                   originalPrice="$599.99"
-                  rating={4.6}
-                  reviewCount={1834}
-                  image="/lovable-uploads/9b681f27-359c-4d90-8629-5b2b198abf0f.png"
-                  features={[
-                    "Works with all carriers",
-                    "Covers up to 5,000 sq ft",
-                    "Easy RV installation",
-                    "FCC approved"
-                  ]}
-                  affiliateLink="https://weboost.com/drive-reach-rv"
-                  badges={["Signal Solution"]}
-                />
-                
-                <AffiliateProductCard
-                  title="Samsung Galaxy Tab Active4 Pro Rugged Tablet"
-                  description="Rugged tablet perfect for RV navigation and entertainment in any weather."
-                   price="$649.99"
-                   originalPrice="$799.99"
-                  rating={4.4}
-                  reviewCount={567}
-                  image="/lovable-uploads/ee026535-e835-46ae-b779-be457eb8ff04.png"
-                  features={[
-                    "MIL-STD-810H certified",
-                    "IP68 water/dust resistant",
-                    "Replaceable battery",
-                    "S Pen included"
-                  ]}
-                  affiliateLink="https://samsung.com/tab-active4-pro"
-                  badges={["Rugged", "RV Ready"]}
-                />
-              </div>
-            </CardContent>
-          </Card>
-
           <OptimizedAffiliateGrid
-            title="Premium RV Apps & Tools"
-            subtitle="Upgrade your RV experience with professional apps and trip planning tools"
+            title="RV Apps, Hardware & Connectivity Solutions"
+            subtitle="Complete mobile solutions for RV living, from essential apps to connectivity hardware and professional services."
             partners={[
               {
                 partner: 'rvlife',
                 title: 'RV Life Pro Apps Suite',
-                description: 'Complete professional app suite with trip planning, navigation, and RV-specific tools',
+                description: 'Complete professional app suite with trip planning, navigation, and RV-specific tools for every journey.',
                 features: ['RV-Safe Navigation', 'Trip Planning Tools', 'Campground Reviews', 'Offline Maps'],
-                path: '/pro-apps',
                 buttonText: 'Get RV Life Pro'
               },
               {
                 partner: 'goodsam',
-                title: 'Good Sam Travel Tools',
-                description: 'Essential travel apps with fuel savings, campground discounts, and emergency support',
-                features: ['Fuel Savings App', 'Campground Discounts', 'Emergency Support', 'Travel Planning'],
-                path: '/travel-tools',
+                title: 'Good Sam Travel & Emergency Apps',
+                description: 'Essential travel apps with fuel savings, campground discounts, emergency support, and roadside assistance.',
+                features: ['Fuel Savings App', 'Emergency Support', 'Roadside Assistance', 'Travel Planning'],
                 buttonText: 'Download Travel Apps'
+              },
+              {
+                partner: 'technorv',
+                title: 'TechnoRV Connectivity Solutions',
+                description: 'Hardware and software solutions for better connectivity, including signal boosters and monitoring apps.',
+                features: ['Signal Boosters', 'Monitoring Apps', 'Connectivity Hardware', 'Smart Integration'],
+                buttonText: 'Shop Connectivity'
               }
             ]}
-            gridCols="2"
+            gridCols="3"
           />
 
           {/* Affiliate Disclosure */}
