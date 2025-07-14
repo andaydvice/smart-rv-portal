@@ -8,7 +8,7 @@ import { toast } from "sonner";
 import { TechnologySection } from "@/components/sections/TechnologySection";
 // MODIFIED: Direct import for ContactSection added
 import { ContactSection } from "@/components/sections/ContactSection";
-import FeaturedProducts from "@/components/affiliate/FeaturedProducts";
+
 import { HomepageAffiliateSection } from "@/components/affiliate/HomepageAffiliateSection";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
 
@@ -62,9 +62,6 @@ const Index = () => {
         
         {/* High-commission affiliate section */}
         <HomepageAffiliateSection />
-        
-        {/* Featured affiliate products */}
-        <FeaturedProducts />
         
         {/* Main affiliate section for homepage */}
         <OptimizedAffiliateGrid
