@@ -6,6 +6,7 @@ import { ArrowRight } from "lucide-react";
 import Layout from "@/components/layout/Layout";
 import { scrollToTop } from "@/utils/scrollToTop";
 import TechnologyFAQ from "@/components/technology/TechnologyFAQ";
+import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
 
 // Simple version of Technology page without any complex components
 const Technology = () => {
@@ -113,6 +114,38 @@ const Technology = () => {
                 </Link>
               </div>
             </div>
+          </div>
+
+          {/* Technology Partners and Solutions */}
+          <div className="mb-16">
+            <OptimizedAffiliateGrid
+              title="Smart RV Technology Partners"
+              subtitle="Get the latest RV technology, professional installation, and expert support to upgrade your travel experience."
+              partners={[
+                {
+                  partner: 'technorv',
+                  title: 'Smart RV Technology',
+                  description: 'Advanced monitoring systems, automation solutions, and connectivity upgrades for modern RVs.',
+                  features: ['Smart Monitoring Systems', 'Professional Installation', 'Expert Support', '2-Year Warranty'],
+                  buttonText: 'Shop TechnoRV'
+                },
+                {
+                  partner: 'goodsam',
+                  title: 'Technology Support Services',
+                  description: 'Professional installation, technical support, and warranty coverage for all your RV tech upgrades.',
+                  features: ['Expert Installation', '24/7 Tech Support', 'Warranty Coverage', 'Training Included'],
+                  buttonText: 'Get Professional Support'
+                },
+                {
+                  partner: 'rvlife',
+                  title: 'Smart Travel Planning',
+                  description: 'Advanced trip planning technology with GPS navigation, campground data, and real-time updates.',
+                  features: ['Smart Navigation', 'Real-Time Updates', 'Offline Maps', 'Community Reviews'],
+                  buttonText: 'Get Smart Planning Tools'
+                }
+              ]}
+              gridCols="3"
+            />
           </div>
         </div>
       </div>

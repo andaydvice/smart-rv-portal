@@ -7,6 +7,7 @@ import { useChecklistCore } from "./checklist/hooks/useChecklistCore";
 import { useTabManager } from "./checklist/hooks/useTabManager";
 import { useChecklistOperations } from "./checklist/hooks/useChecklistOperations";
 import { calculateCompletionPercentage } from "./checklist/utils/completionCalculator";
+import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
 
 const StoragePreparationChecklist = () => {
   // Load core checklist functionality
@@ -109,6 +110,38 @@ const StoragePreparationChecklist = () => {
               handleNotesChange={handleNotesChange}
             />
           </Tabs>
+        </div>
+        
+        {/* Storage and Preparation Services */}
+        <div className="mt-16">
+          <OptimizedAffiliateGrid
+            title="Professional Storage & Preparation Services"
+            subtitle="Expert services and quality products to properly prepare and store your RV for any season."
+            partners={[
+              {
+                partner: 'goodsam',
+                title: 'Professional RV Storage Services',
+                description: 'Find trusted storage facilities, winterization services, and maintenance support nationwide.',
+                features: ['Certified Storage Facilities', 'Winterization Services', 'Maintenance Support', 'Member Discounts'],
+                buttonText: 'Find Storage Services'
+              },
+              {
+                partner: 'technorv',
+                title: 'Smart Storage Monitoring',
+                description: 'Advanced monitoring systems to track your RV conditions while in storage.',
+                features: ['Remote Monitoring', 'Climate Tracking', 'Security Alerts', 'Battery Management'],
+                buttonText: 'Shop Monitoring Systems'
+              },
+              {
+                partner: 'rvwaterfilter',
+                title: 'Winterization & Water Systems',
+                description: 'Complete water system protection, winterization supplies, and storage preparation products.',
+                features: ['Winterization Kits', 'System Protection', 'Quality Products', 'Expert Guidance'],
+                buttonText: 'Shop Winterization Supplies'
+              }
+            ]}
+            gridCols="3"
+          />
         </div>
       </div>
     </div>

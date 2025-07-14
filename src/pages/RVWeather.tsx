@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import Layout from "@/components/layout/Layout";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { scrollToTop } from "@/utils/scrollToTop";
+import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
 import HeroSection from "@/components/rv-weather/HeroSection";
 import IntroSection from "@/components/rv-weather/IntroSection";
 import PlanningSection from "@/components/rv-weather/PlanningSection";
@@ -139,6 +140,38 @@ const RVWeather = () => {
           
           {/* Maintenance Section */}
           <MaintenanceSection />
+          
+          {/* Trusted Weather Tools and Services */}
+          <section className="container mx-auto px-4 py-12">
+            <OptimizedAffiliateGrid
+              title="Essential Weather Tools & Services"
+              subtitle="Get accurate forecasts, emergency assistance, and professional weather monitoring for safer RV travels."
+              partners={[
+                {
+                  partner: 'goodsam',
+                  title: 'Emergency Weather Support',
+                  description: 'Get 24/7 emergency roadside assistance and weather-related travel support when severe conditions hit.',
+                  features: ['24/7 Emergency Line', 'Severe Weather Assistance', 'Trip Interruption Coverage', 'Professional Guidance'],
+                  buttonText: 'Get Weather Protection'
+                },
+                {
+                  partner: 'rvlife',
+                  title: 'Advanced Weather Planning',
+                  description: 'Professional trip planning with detailed weather forecasts, route optimization, and real-time alerts.',
+                  features: ['Advanced Weather Radar', 'Route Weather Analysis', 'Real-Time Alerts', 'Historical Data'],
+                  buttonText: 'Plan Weather-Safe Routes'
+                },
+                {
+                  partner: 'technorv',
+                  title: 'Weather Monitoring Systems',
+                  description: 'Smart weather stations and monitoring equipment to track conditions around your RV in real-time.',
+                  features: ['Professional Weather Stations', 'Smart Monitoring', 'Mobile Alerts', 'Expert Installation'],
+                  buttonText: 'Shop Weather Tech'
+                }
+              ]}
+              gridCols="3"
+            />
+          </section>
         </motion.div>
       </ScrollArea>
     </Layout>

@@ -9,6 +9,7 @@ import FeaturesComparisonTable from "@/components/models/compare/FeaturesCompari
 // MODIFIED: Removed CallToAction import
 // import CallToAction from "@/components/models/compare/CallToAction";
 import models from "@/components/models/compare/ModelComparisonData";
+import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
 
 // CRITICAL DEBUGGING LOGS
 console.log('CompareModels component loaded');
@@ -92,15 +93,37 @@ const CompareModels = () => {
           {/* Features comparison table */}
           <FeaturesComparisonTable models={models} />
 
-          {/* MODIFIED: Removed CallToAction component instance */}
-          {/* 
-          <CallToAction 
-            title="Ready to Experience Smart RV Living?"
-            description="Schedule a personalized demo to see our smart RV technology in action and find the perfect model for your needs."
-            buttonText="Schedule a Demo"
-            buttonLink="/schedule-demo"
-          /> 
-          */}
+          {/* RV Model Comparison Services */}
+          <div className="mt-16">
+            <OptimizedAffiliateGrid
+              title="Make the Right RV Choice"
+              subtitle="Get expert advice, try different models, and find the perfect services to help you choose the right RV for your lifestyle."
+              partners={[
+                {
+                  partner: 'rvshare',
+                  title: 'Test Drive Different Models',
+                  description: 'Rent different RV models to compare features, layouts, and driving experience before making your decision.',
+                  features: ['Multiple Model Access', 'Real-World Testing', 'Compare Features', 'Owner Insights'],
+                  buttonText: 'Test Drive Models'
+                },
+                {
+                  partner: 'goodsam',
+                  title: 'Expert RV Buying Advice',
+                  description: 'Get professional guidance and advice on choosing the right RV model for your needs and budget.',
+                  features: ['Expert Consultation', 'Model Recommendations', 'Buying Guidance', 'Value Assessment'],
+                  buttonText: 'Get Expert Advice'
+                },
+                {
+                  partner: 'rvlife',
+                  title: 'Model Research Tools',
+                  description: 'Access comprehensive model reviews, comparisons, and user experiences to make informed decisions.',
+                  features: ['Detailed Reviews', 'User Experiences', 'Model Comparisons', 'Research Tools'],
+                  buttonText: 'Research Models'
+                }
+              ]}
+              gridCols="3"
+            />
+          </div>
         </div>
       </div>
     </Layout>

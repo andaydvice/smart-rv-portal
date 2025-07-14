@@ -4,6 +4,7 @@ import { useEffect, lazy, Suspense } from "react";
 import Navbar from "@/components/Navbar";
 import Layout from "@/components/layout/Layout";
 import { rvTypes } from "@/data/rvTypes";
+import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
 
 // Lazy load components that are not immediately visible
 const HeroSection = lazy(() => import("@/components/models/compact/HeroSection"));
@@ -53,6 +54,38 @@ const CompactModel = () => {
                 ))}
               </div>
             </div>
+          </div>
+          
+          {/* Compact RV Partners */}
+          <div className="max-w-7xl mx-auto px-4 py-16">
+            <OptimizedAffiliateGrid
+              title="Perfect Partners for Compact RV Living"
+              subtitle="Essential services and budget-friendly solutions designed specifically for compact RV adventures and weekend getaways."
+              partners={[
+                {
+                  partner: 'rvshare',
+                  title: 'Budget-Friendly RV Rentals',
+                  description: 'Affordable compact RV rentals perfect for trying before you buy or weekend adventures.',
+                  features: ['Compact RV Selection', 'Budget-Friendly Rates', 'Easy Booking', 'Insurance Included'],
+                  buttonText: 'Find Compact Rentals'
+                },
+                {
+                  partner: 'goodsam',
+                  title: 'Essential RV Services',
+                  description: 'Basic roadside assistance and insurance coverage perfect for new compact RV owners.',
+                  features: ['Roadside Assistance', 'Basic Coverage', 'New Owner Support', 'Affordable Plans'],
+                  buttonText: 'Get Basic Protection'
+                },
+                {
+                  partner: 'rvlife',
+                  title: 'Compact RV Trip Planning',
+                  description: 'Find campgrounds and routes perfectly sized for compact RVs with detailed planning tools.',
+                  features: ['Size-Appropriate Routes', 'Compact RV Campgrounds', 'Planning Tools', 'Community Tips'],
+                  buttonText: 'Plan Compact Adventures'
+                }
+              ]}
+              gridCols="3"
+            />
           </div>
         </Suspense>
       </div>

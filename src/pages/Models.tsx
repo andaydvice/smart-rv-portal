@@ -7,6 +7,7 @@ import { useToast } from "@/components/ui/use-toast";
 import AffiliateCTABanner from "@/components/affiliate/AffiliateCTABanner";
 import AffiliateProductCard from "@/components/affiliate/AffiliateProductCard";
 import Footer2 from "@/components/ui/Footer2";
+import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
 
 // Model data
 const models = [
@@ -250,6 +251,64 @@ const Models = () => {
                 badges={["Tech Upgrade"]}
               />
             </div>
+          </motion.div>
+          
+          {/* RV Model Partners and Services */}
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.8, duration: 0.5 }}
+            className="mt-20"
+          >
+            <OptimizedAffiliateGrid
+              title="Find Your Perfect RV Experience"
+              subtitle="Explore different models through rentals, get expert advice, and find the right technology upgrades for any RV type."
+              partners={[
+                {
+                  partner: 'rvshare',
+                  title: 'Try Different RV Models',
+                  description: 'Rent and test various RV models before making your purchase decision. Perfect for comparing features.',
+                  features: ['Multiple Model Types', 'Test Drive Experience', 'Owner Insights', 'Insurance Included'],
+                  buttonText: 'Browse RV Models'
+                },
+                {
+                  partner: 'outdoorsy',
+                  title: 'Luxury RV Experiences',
+                  description: 'Experience premium and luxury RV models with high-end amenities and concierge service.',
+                  features: ['Luxury Models', 'Premium Service', 'Unique Locations', 'White Glove Treatment'],
+                  buttonText: 'Book Luxury Experience'
+                },
+                {
+                  partner: 'technorv',
+                  title: 'RV Technology Upgrades',
+                  description: 'Upgrade any RV model with smart technology, monitoring systems, and automation features.',
+                  features: ['Model-Specific Upgrades', 'Professional Installation', 'Smart Monitoring', 'Compatibility Guaranteed'],
+                  buttonText: 'Shop Model Upgrades'
+                },
+                {
+                  partner: 'goodsam',
+                  title: 'RV Model Support & Services',
+                  description: 'Get expert advice, maintenance support, and protection plans for any RV model or type.',
+                  features: ['Model-Specific Advice', 'Maintenance Plans', 'Protection Coverage', 'Expert Support'],
+                  buttonText: 'Get Model Support'
+                },
+                {
+                  partner: 'rvlife',
+                  title: 'Model-Specific Trip Planning',
+                  description: 'Plan trips optimized for your specific RV model with route planning and campground compatibility.',
+                  features: ['Model-Based Routes', 'Size Restrictions', 'Compatibility Checks', 'Expert Reviews'],
+                  buttonText: 'Plan Model-Safe Routes'
+                },
+                {
+                  partner: 'rvwaterfilter',
+                  title: 'Model-Specific Water Systems',
+                  description: 'Get the right water filtration system designed specifically for your RV model and setup.',
+                  features: ['Model Compatibility', 'Custom Installation', 'Perfect Fit Guarantee', 'Expert Consultation'],
+                  buttonText: 'Find Model Systems'
+                }
+              ]}
+              gridCols="3"
+            />
           </motion.div>
         </div>
       </motion.div>

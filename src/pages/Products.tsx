@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
 import { scrollToTop } from "@/utils/scrollToTop";
+import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
 
 const Products = () => {
   useEffect(() => {
@@ -185,6 +186,64 @@ const Products = () => {
             >
               Contact Our Experts
             </Link>
+          </motion.div>
+
+          {/* Trusted RV Partners */}
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.7, duration: 0.5 }}
+            className="mt-20"
+          >
+            <OptimizedAffiliateGrid
+              title="Complete RV Solution Partners"
+              subtitle="Everything you need for the perfect RV experience - from rentals and technology to support and maintenance."
+              partners={[
+                {
+                  partner: 'rvshare',
+                  title: 'RV Rentals & Try Before You Buy',
+                  description: 'Rent premium RVs nationwide or try different models before making your purchase decision.',
+                  features: ['Nationwide Network', 'Insurance Included', 'Flexible Terms', 'Owner Support'],
+                  buttonText: 'Browse RV Rentals'
+                },
+                {
+                  partner: 'technorv',
+                  title: 'Smart RV Technology',
+                  description: 'Upgrade your RV with cutting-edge technology, monitoring systems, and automation solutions.',
+                  features: ['Smart Technology', 'Professional Installation', 'Expert Support', 'Warranty Coverage'],
+                  buttonText: 'Shop Smart Tech'
+                },
+                {
+                  partner: 'rvwaterfilter',
+                  title: 'Water Filtration Systems',
+                  description: 'Premium water filtration and purification systems for safe, clean water wherever you travel.',
+                  features: ['Clean Water Guarantee', 'Easy Installation', 'Multiple Options', 'Health Safety'],
+                  buttonText: 'Shop Water Systems'
+                },
+                {
+                  partner: 'goodsam',
+                  title: 'RV Services & Support',
+                  description: 'Essential roadside assistance, insurance, and maintenance services every RV owner needs.',
+                  features: ['24/7 Roadside Help', 'Insurance Options', 'Maintenance Support', 'Member Discounts'],
+                  buttonText: 'Get Good Sam Protection'
+                },
+                {
+                  partner: 'outdoorsy',
+                  title: 'Luxury RV Experiences',
+                  description: 'Book unique outdoor experiences and luxury RV rentals for premium adventures.',
+                  features: ['Luxury Selection', 'Premium Service', 'Unique Locations', 'Concierge Support'],
+                  buttonText: 'Explore Luxury Options'
+                },
+                {
+                  partner: 'rvlife',
+                  title: 'Trip Planning & Navigation',
+                  description: 'Professional RV trip planning tools, GPS navigation, and comprehensive guides.',
+                  features: ['RV-Safe Routes', 'Expert Reviews', 'Offline Maps', 'Community Support'],
+                  buttonText: 'Plan Better Trips'
+                }
+              ]}
+              gridCols="3"
+            />
           </motion.div>
         </div>
       </motion.div>
