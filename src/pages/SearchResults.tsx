@@ -5,6 +5,7 @@ import { Search as SearchIcon, Filter, MapPin, Calendar, Settings, Info } from '
 import { SearchCategory } from '@/components/search';
 import Layout from '@/components/layout/Layout';
 import { Button } from '@/components/ui/button';
+import { OptimizedAffiliateGrid } from '@/components/affiliate/OptimizedAffiliateGrid';
 
 interface SearchResultItem {
   id: string;
@@ -210,6 +211,38 @@ const SearchResults: React.FC = () => {
               </div>
             )}
           </div>
+        </div>
+
+        {/* Context-aware affiliate recommendations */}
+        <div className="mt-16">
+          <OptimizedAffiliateGrid
+            title="Find What You're Looking For"
+            subtitle="Discover the best RV resources, tools, and services to enhance your search results and RV experience."
+            partners={[
+              {
+                partner: 'rvshare',
+                title: 'RV Rentals & Experiences',
+                description: 'Find the perfect RV rental to test before you buy, or experience different RV types and features.',
+                features: ['Try before buying', 'Various RV types', 'Owner experiences'],
+                buttonText: 'Browse Rentals'
+              },
+              {
+                partner: 'rvlife',
+                title: 'RV Resources & Planning',
+                description: 'Comprehensive trip planning tools, campground reviews, and RV lifestyle resources.',
+                features: ['Trip planning tools', 'Campground database', 'RV community'],
+                buttonText: 'Plan Your Trip'
+              },
+              {
+                partner: 'goodsam',
+                title: 'RV Services & Support',
+                description: 'Emergency roadside assistance, discounts, and essential services for RV travelers.',
+                features: ['24/7 roadside help', 'Travel discounts', 'RV insurance'],
+                buttonText: 'Get Protected'
+              }
+            ]}
+            gridCols="3"
+          />
         </div>
       </div>
     </Layout>

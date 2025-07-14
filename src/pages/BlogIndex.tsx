@@ -9,6 +9,7 @@ import NewsletterSection from '../components/blog/NewsletterSection';
 import BlogGrid from '../components/blog/BlogGrid';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Container } from '@/components/ui/container';
+import { OptimizedAffiliateGrid } from '@/components/affiliate/OptimizedAffiliateGrid';
 
 const BlogIndex = () => {
   const [activeCategory, setActiveCategory] = useState<'all' | 'tech' | 'travel'>('all');
@@ -44,6 +45,37 @@ const BlogIndex = () => {
               
               <div className="mt-16">
                 <BlogGrid activeCategory={activeCategory} />
+              </div>
+              
+              <div className="mt-16">
+                <OptimizedAffiliateGrid
+                  title="Content Creator & RV Community Resources"
+                  subtitle="Essential tools and services for RV bloggers, content creators, and community builders sharing their adventures."
+                  partners={[
+                    {
+                      partner: 'rvlife',
+                      title: 'RV LIFE Content Partnership',
+                      description: 'Join the RV LIFE network of content creators with access to exclusive resources, trip data, and community features.',
+                      features: ['Content creator tools', 'Trip planning data', 'Community network'],
+                      buttonText: 'Join Creator Network'
+                    },
+                    {
+                      partner: 'outdoorsy',
+                      title: 'Influencer Collaboration Program',
+                      description: 'Partner with Outdoorsy for sponsored RV experiences, content opportunities, and brand collaborations.',
+                      features: ['Sponsored experiences', 'Brand partnerships', 'Content opportunities'],
+                      buttonText: 'Apply for Program'
+                    },
+                    {
+                      partner: 'goodsam',
+                      title: 'Good Sam Ambassador Program',
+                      description: 'Become a Good Sam ambassador and earn commissions while helping fellow RV enthusiasts save money.',
+                      features: ['Ambassador benefits', 'Commission opportunities', 'Exclusive access'],
+                      buttonText: 'Become Ambassador'
+                    }
+                  ]}
+                  gridCols="3"
+                />
               </div>
               
               <div className="mt-16">

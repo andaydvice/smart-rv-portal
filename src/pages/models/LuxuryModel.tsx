@@ -10,6 +10,7 @@ import { LuxuryHero } from "@/components/luxury-models/LuxuryHero";
 import { KeyFeatures } from "@/components/luxury-models/KeyFeatures";
 import { ModelCategory } from "@/components/luxury-models/ModelCategory";
 import { luxuryModels } from "@/data/luxury-models";
+import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
 
 const LuxuryModel = () => {
   const navigate = useNavigate();
@@ -146,6 +147,42 @@ const LuxuryModel = () => {
               <div className="space-y-8">
                 {renderModelCategories()}
               </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.6 }}
+              className="mt-16"
+            >
+              <OptimizedAffiliateGrid
+                title="Luxury RV Experience Partners"
+                subtitle="Experience luxury RV travel with premium rentals, high-end accessories, and exclusive membership benefits designed for discerning travelers."
+                partners={[
+                  {
+                    partner: 'outdoorsy',
+                    title: 'Premium Luxury RV Rentals',
+                    description: 'Access the finest luxury RVs with white-glove service and premium amenities for an unforgettable travel experience.',
+                    features: ['Verified luxury fleet', 'Concierge service', 'Premium insurance'],
+                    buttonText: 'Browse Luxury Rentals'
+                  },
+                  {
+                    partner: 'goodsam',
+                    title: 'Luxury RV Club Benefits',
+                    description: 'Exclusive membership perks including luxury campground access, premium roadside assistance, and VIP services.',
+                    features: ['Resort-style campgrounds', '24/7 premium support', 'Exclusive member rates'],
+                    buttonText: 'Join Premium Club'
+                  },
+                  {
+                    partner: 'technorv',
+                    title: 'High-End RV Technology',
+                    description: 'Advanced smart systems, premium electronics, and luxury automation solutions for the ultimate RV experience.',
+                    features: ['Smart home integration', 'Premium entertainment', 'Advanced monitoring'],
+                    buttonText: 'Explore Tech Solutions'
+                  }
+                ]}
+                gridCols="3"
+              />
             </motion.div>
 
             <motion.div
