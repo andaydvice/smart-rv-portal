@@ -49,7 +49,7 @@ const Index = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6 }}
-        className="min-h-screen w-full bg-gradient-to-b from-gray-50 to-white"
+        className="min-h-screen w-full"
       >
         <HeroSection />
         
@@ -64,18 +64,21 @@ const Index = () => {
         <HomepageAffiliateSection />
         
         {/* Main affiliate section for homepage */}
-        <OptimizedAffiliateGrid
-          title="Start Your Smart RV Journey"
-          subtitle="Everything you need to upgrade your RV with smart technology and enhance your travel experience."
-          partners={[
-            { partner: 'technorv', title: 'Smart RV Tech', description: 'Latest smart RV technology and automation systems' },
-            { partner: 'rvlife', title: 'Trip Planning', description: 'Plan your routes and discover amazing destinations' },
-            { partner: 'goodsam', title: 'RV Community', description: 'Join the largest RV community for support and tips' },
-            { partner: 'rvshare', title: 'RV Rentals', description: 'Rent an RV to try before you buy your smart RV' }
-          ]}
-          gridCols="2"
-          className="my-16"
-        />
+        <section className="py-16 px-4 bg-gradient-to-br from-connectivity-darkBg to-[#0A0F1A]">
+          <div className="max-w-6xl mx-auto">
+            <OptimizedAffiliateGrid
+              title="Start Your Smart RV Journey"
+              subtitle="Everything you need to upgrade your RV with smart technology and enhance your travel experience."
+              partners={[
+                { partner: 'technorv', title: 'Smart RV Tech', description: 'Latest smart RV technology and automation systems' },
+                { partner: 'rvlife', title: 'Trip Planning', description: 'Plan your routes and discover amazing destinations' },
+                { partner: 'goodsam', title: 'RV Community', description: 'Join the largest RV community for support and tips' },
+                { partner: 'rvshare', title: 'RV Rentals', description: 'Rent an RV to try before you buy your smart RV' }
+              ]}
+              gridCols="2"
+            />
+          </div>
+        </section>
         
         <Suspense fallback={<LoadingFallback />}>
           <SustainabilitySection />
