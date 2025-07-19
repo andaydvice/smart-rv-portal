@@ -1,4 +1,3 @@
-
 import React, { useEffect, lazy, Suspense } from "react";
 import Navbar from "@/components/Navbar";
 import Layout from "@/components/layout/Layout";
@@ -60,22 +59,22 @@ const Index = () => {
         {/* Changed from lazy-loaded to direct import */}
         <TechnologySection />
         
-        {/* High-commission affiliate section */}
+        {/* Premium affiliate section with new high-value partners */}
         <HomepageAffiliateSection />
         
-        {/* Main affiliate section for homepage */}
+        {/* Strategic affiliate partnerships */}
         <section className="py-16 px-4 bg-gradient-to-br from-connectivity-darkBg to-[#0A0F1A]">
           <div className="max-w-6xl mx-auto">
             <OptimizedAffiliateGrid
-              title="Start Your Smart RV Journey"
-              subtitle="Everything you need to upgrade your RV with smart technology and enhance your travel experience."
+              title="Complete RV Solutions Ecosystem"
+              subtitle="Everything you need for smart RV living - from solar power to connectivity, all with premium commission tracking."
               partners={[
-                { partner: 'technorv', title: 'Smart RV Tech', description: 'Latest smart RV technology and automation systems' },
-                { partner: 'rvlife', title: 'Trip Planning', description: 'Plan your routes and discover amazing destinations' },
-                { partner: 'goodsam', title: 'RV Community', description: 'Join the largest RV community for support and tips' },
-                { partner: 'rvshare', title: 'RV Rentals', description: 'Rent an RV to try before you buy your smart RV' }
+                { partner: 'renogy', title: 'Solar Power Leader', description: 'Most trusted solar brand with complete RV kits and 6% commission' },
+                { partner: 'victron', title: 'Power Management', description: 'Professional power monitoring and inverter systems (5% commission)' },
+                { partner: 'winegard', title: 'Internet Solutions', description: 'Starlink mounts and connectivity boosters (4.5% commission)' },
+                { partner: 'torklift', title: 'Towing Accessories', description: 'Premium tie-downs and RV accessories (8% commission)' }
               ]}
-              gridCols="2"
+              gridCols="4"
             />
           </div>
         </section>
@@ -84,7 +83,6 @@ const Index = () => {
           <SustainabilitySection />
         </Suspense>
         
-        {/* MODIFIED: Suspense wrapper removed and ContactSection directly rendered */}
         <ContactSection />
       </motion.div>
     </Layout>
