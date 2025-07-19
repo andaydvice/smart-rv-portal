@@ -23,8 +23,8 @@ export const HomepageAffiliateSection = () => {
               <span className="text-sm text-green-400 font-medium">Industry Leader</span>
             </div>
             <h3 className="text-xl font-semibold text-white mb-3">RV Life Pro</h3>
-            <p className="text-gray-300 mb-4">
-              Professional trip planning with RV-safe GPS navigation and comprehensive campground database.
+            <p className="text-gray-300 mb-4 text-left">
+              Professional trip planning with RV safe GPS navigation and comprehensive campground database.
             </p>
             <Button 
               asChild
@@ -49,7 +49,7 @@ export const HomepageAffiliateSection = () => {
               <span className="text-sm text-yellow-400 font-medium">Premium Marketplace</span>
             </div>
             <h3 className="text-xl font-semibold text-white mb-3">RVT Marketplace</h3>
-            <p className="text-gray-300 mb-4">
+            <p className="text-gray-300 mb-4 text-left">
               Premium RV marketplace connecting buyers with verified professional dealers nationwide.
             </p>
             <Button 
@@ -75,8 +75,8 @@ export const HomepageAffiliateSection = () => {
               <span className="text-sm text-blue-400 font-medium">Extended Support</span>
             </div>
             <h3 className="text-xl font-semibold text-white mb-3">Solar Direct</h3>
-            <p className="text-gray-300 mb-4">
-              Complete solar power solutions with industry-leading warranties and year-round support.
+            <p className="text-gray-300 mb-4 text-left">
+              Complete solar power solutions with industry leading warranties and year round support.
             </p>
             <Button 
               asChild
@@ -101,8 +101,8 @@ export const HomepageAffiliateSection = () => {
               <span className="text-sm text-green-400 font-medium">11-Year Warranty</span>
             </div>
             <h3 className="text-xl font-semibold text-white mb-3">Dakota Lithium</h3>
-            <p className="text-gray-300 mb-4">
-              Premium LiFePO4 batteries with industry-leading 11-year warranty and superior cold weather performance.
+            <p className="text-gray-300 mb-4 text-left">
+              Premium LiFePO4 batteries with industry leading 11 year warranty and superior cold weather performance.
             </p>
             <Button 
               asChild
@@ -127,8 +127,8 @@ export const HomepageAffiliateSection = () => {
               <span className="text-sm text-purple-400 font-medium">Professional Grade</span>
             </div>
             <h3 className="text-xl font-semibold text-white mb-3">Blue Ox Towing</h3>
-            <p className="text-gray-300 mb-4">
-              Professional-grade towing systems and accessories trusted by RV professionals worldwide.
+            <p className="text-gray-300 mb-4 text-left">
+              Professional grade towing systems and accessories trusted by RV professionals worldwide.
             </p>
             <Button 
               asChild
@@ -153,8 +153,8 @@ export const HomepageAffiliateSection = () => {
               <span className="text-sm text-cyan-400 font-medium">Unlimited Data</span>
             </div>
             <h3 className="text-xl font-semibold text-white mb-3">Nomad Internet</h3>
-            <p className="text-gray-300 mb-4">
-              Unlimited 5G internet plans designed specifically for full-time RV travelers and remote workers.
+            <p className="text-gray-300 mb-4 text-left">
+              Unlimited 5G internet plans designed specifically for full time RV travelers and remote workers.
             </p>
             <Button 
               asChild
