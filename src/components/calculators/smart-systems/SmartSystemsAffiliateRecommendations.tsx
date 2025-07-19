@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { OptimizedAffiliateGrid } from '@/components/affiliate/OptimizedAffiliateGrid';
 
@@ -17,8 +18,8 @@ const SmartSystemsAffiliateRecommendations = () => {
     },
     {
       partner: 'rvlife' as const,
-      title: "Smart Trip Planning",
-      description: "Plan smarter routes with GPS navigation that considers your RV's specific needs and real-time conditions.",
+      title: "Industry Leader Navigation",
+      description: "Plan smarter routes with the industry leading GPS navigation that considers your RV's specific needs and real-time conditions.",
       features: [
         "RV-specific GPS navigation",
         "Smart route optimization",
@@ -26,6 +27,33 @@ const SmartSystemsAffiliateRecommendations = () => {
         "Campground integration"
       ],
       buttonText: "Navigate Smarter"
+    }
+  ];
+
+  const connectivitySolutions = [
+    {
+      partner: 'winegard' as const,
+      title: "Connectivity Solutions",
+      description: "Stay connected anywhere with professional grade internet solutions including Starlink mounts and signal boosters for reliable RV connectivity.",
+      features: [
+        "Professional grade equipment",
+        "Starlink mount solutions",
+        "Signal enhancement",
+        "Reliable connectivity"
+      ],
+      buttonText: "Get Connected"
+    },
+    {
+      partner: 'nomadinternet' as const,
+      title: "Unlimited Data Plans",
+      description: "Unlimited 5G internet plans designed specifically for full time RV travelers and remote workers who need reliable connectivity.",
+      features: [
+        "Unlimited 5G data",
+        "RV traveler focused",
+        "Remote work ready",
+        "Nationwide coverage"
+      ],
+      buttonText: "Get Unlimited Data"
     }
   ];
 
@@ -86,6 +114,13 @@ const SmartSystemsAffiliateRecommendations = () => {
         title="📱 Smart RV Technology"
         subtitle="Transform your RV into an intelligent home on wheels with automated systems and smart controls:"
         partners={smartRecommendations}
+        gridCols="2"
+      />
+
+      <OptimizedAffiliateGrid
+        title="📶 Connectivity Solutions"
+        subtitle="Stay connected anywhere with professional grade internet and connectivity solutions for remote RV living:"
+        partners={connectivitySolutions}
         gridCols="2"
       />
       

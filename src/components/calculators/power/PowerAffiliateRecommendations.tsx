@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { OptimizedAffiliateGrid } from '@/components/affiliate/OptimizedAffiliateGrid';
 
@@ -26,6 +27,72 @@ const PowerAffiliateRecommendations = () => {
         "System upgrade guidance"
       ],
       buttonText: "Get Expert Help"
+    }
+  ];
+
+  const premiumPowerSolutions = [
+    {
+      partner: 'a1solarstore' as const,
+      title: "Complete Solar Systems",
+      description: "High-capacity solar systems for serious off-grid RV living with professional installation support and premium equipment.",
+      features: [
+        "Complete system packages",
+        "Professional installation",
+        "Premium solar panels",
+        "Extended warranties"
+      ],
+      buttonText: "Get Complete Solar Solution"
+    },
+    {
+      partner: 'solardirect' as const,
+      title: "Extended Support Solar",
+      description: "Complete solar power solutions with industry leading warranties and year round technical support for your RV.",
+      features: [
+        "Industry leading warranties",
+        "Year round support",
+        "Professional consultation",
+        "Quality components"
+      ],
+      buttonText: "Get Extended Support"
+    },
+    {
+      partner: 'renogy' as const,
+      title: "Most Trusted Solar Brand",
+      description: "Leading solar panel manufacturer with complete RV solar kits and proven reliability for off-grid adventures.",
+      features: [
+        "Proven reliability",
+        "Complete RV solar kits",
+        "Trusted brand reputation",
+        "Comprehensive warranties"
+      ],
+      buttonText: "Choose Trusted Brand"
+    }
+  ];
+
+  const batteryAndPowerSystems = [
+    {
+      partner: 'dakotalithium' as const,
+      title: "11 Year Warranty Batteries",
+      description: "Premium LiFePO4 batteries with industry leading 11 year warranty and superior cold weather performance for reliable RV power.",
+      features: [
+        "11 year warranty",
+        "Superior cold weather performance",
+        "Lightweight design",
+        "Fast charging capability"
+      ],
+      buttonText: "Get Premium Batteries"
+    },
+    {
+      partner: 'victron' as const,
+      title: "Professional Grade Power",
+      description: "Professional power monitoring and inverter systems trusted by RV professionals worldwide for reliable off-grid power.",
+      features: [
+        "Professional grade systems",
+        "Advanced monitoring",
+        "Reliable inverters",
+        "Worldwide support"
+      ],
+      buttonText: "Get Professional Power"
     }
   ];
 
@@ -74,6 +141,20 @@ const PowerAffiliateRecommendations = () => {
         title="⚡ Master Your RV's Power"
         subtitle="Gain complete control over your power systems and never worry about dead batteries again:"
         partners={powerRecommendations}
+        gridCols="2"
+      />
+
+      <OptimizedAffiliateGrid
+        title="☀️ Premium Solar Solutions"  
+        subtitle="Upgrade to professional grade solar systems with extended warranties and expert support:"
+        partners={premiumPowerSolutions}
+        gridCols="3"
+      />
+
+      <OptimizedAffiliateGrid
+        title="🔋 Advanced Battery & Power Systems"
+        subtitle="Invest in premium batteries and professional monitoring systems for reliable off-grid power:"
+        partners={batteryAndPowerSystems}
         gridCols="2"
       />
       

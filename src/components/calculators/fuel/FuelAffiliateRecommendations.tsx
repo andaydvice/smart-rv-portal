@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { OptimizedAffiliateGrid } from '@/components/affiliate/OptimizedAffiliateGrid';
 
@@ -26,6 +27,33 @@ const FuelAffiliateRecommendations = () => {
         "Nationwide coverage"
       ],
       buttonText: "Save on Every Fill-Up"
+    }
+  ];
+
+  const fuelEfficiencySolutions = [
+    {
+      partner: 'hotshotssecret' as const,
+      title: "Fuel Efficiency Additives",
+      description: "Premium fuel and oil additives for RV engines and generators that improve performance and fuel economy for long-term savings.",
+      features: [
+        "Improved fuel economy",
+        "Engine performance boost",
+        "Generator efficiency",
+        "Long-term savings"
+      ],
+      buttonText: "Boost Fuel Efficiency"
+    },
+    {
+      partner: 'nomadinternet' as const,
+      title: "Unlimited Data for Travel",
+      description: "Stay connected while finding the best fuel prices and navigating efficiently with unlimited 5G internet designed for RV travelers.",
+      features: [
+        "Real-time fuel price apps",
+        "Navigation assistance",
+        "Remote work capability",
+        "Unlimited connectivity"
+      ],
+      buttonText: "Stay Connected"
     }
   ];
 
@@ -65,6 +93,18 @@ const FuelAffiliateRecommendations = () => {
         "Route optimization data"
       ],
       buttonText: "Monitor Fuel Usage"
+    },
+    {
+      partner: 'mobilehomeparts' as const,
+      title: "Wide Selection Parts",
+      description: "Find fuel system components, efficiency upgrades, and maintenance parts to keep your RV running at peak fuel economy.",
+      features: [
+        "Fuel system components",
+        "Efficiency upgrade parts",
+        "Maintenance supplies",
+        "Quality replacement parts"
+      ],
+      buttonText: "Get Efficiency Parts"
     }
   ];
 
@@ -76,12 +116,19 @@ const FuelAffiliateRecommendations = () => {
         partners={fuelRecommendations}
         gridCols="2"
       />
+
+      <OptimizedAffiliateGrid
+        title="🚀 Fuel Efficiency Solutions"
+        subtitle="Maximize your fuel economy with proven additives and connectivity solutions for smart travel:"
+        partners={fuelEfficiencySolutions}
+        gridCols="2"
+      />
       
       <OptimizedAffiliateGrid
         title="🚐 Smart RV Solutions" 
-        subtitle="Maximize fuel efficiency with the right RV choice and smart monitoring technology:"
+        subtitle="Maximize fuel efficiency with the right RV choice, smart monitoring technology, and quality parts:"
         partners={supportServices}
-        gridCols="3"
+        gridCols="4"
       />
     </div>
   );

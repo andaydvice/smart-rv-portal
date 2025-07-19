@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { OptimizedAffiliateGrid } from '@/components/affiliate/OptimizedAffiliateGrid';
 
@@ -26,6 +27,45 @@ const TowingAffiliateRecommendations = () => {
         "Specialized RV towing"
       ],
       buttonText: "Get Towing Protection"
+    }
+  ];
+
+  const professionalTowingEquipment = [
+    {
+      partner: 'blueox' as const,
+      title: "Professional Grade Towing",
+      description: "Professional grade towing systems and accessories trusted by RV professionals worldwide for safe, reliable towing.",
+      features: [
+        "Professional grade systems",
+        "Proven reliability",
+        "Expert engineering",
+        "Professional installation support"
+      ],
+      buttonText: "Get Professional Equipment"
+    },
+    {
+      partner: 'torklift' as const,
+      title: "Premium Towing Accessories",
+      description: "Premium tie-downs, glow steps, and RV accessories with strong brand reputation and professional quality construction.",
+      features: [
+        "Premium construction",
+        "Professional quality",
+        "Innovative designs",
+        "Proven durability"
+      ],
+      buttonText: "Get Premium Accessories"
+    },
+    {
+      partner: 'guta' as const,
+      title: "Affordable Safety Monitoring",
+      description: "Budget friendly TPMS solutions that provide essential tire pressure monitoring for safer RV towing without breaking the bank.",
+      features: [
+        "Affordable pricing",
+        "Essential safety features",
+        "Easy installation",
+        "Reliable monitoring"
+      ],
+      buttonText: "Get Affordable Safety"
     }
   ];
 
@@ -87,6 +127,13 @@ const TowingAffiliateRecommendations = () => {
         subtitle="Prevent costly breakdowns and dangerous situations with professional towing safety solutions:"
         partners={towingRecommendations}
         gridCols="2"
+      />
+
+      <OptimizedAffiliateGrid
+        title="🔧 Professional Towing Equipment"
+        subtitle="Upgrade to professional grade towing systems and premium accessories trusted by RV professionals:"
+        partners={professionalTowingEquipment}
+        gridCols="3"
       />
       
       <OptimizedAffiliateGrid
