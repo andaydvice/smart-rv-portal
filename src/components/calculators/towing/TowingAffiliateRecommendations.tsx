@@ -7,10 +7,10 @@ const TowingAffiliateRecommendations = () => {
     {
       partner: 'technorv' as const,
       title: "Smart Towing Safety",
-      description: "Prevent costly tire blowouts and towing disasters with real-time monitoring that alerts you to problems before they happen.",
+      description: "Prevent costly tire blowouts and towing disasters with real time monitoring that alerts you to problems before they happen.",
       features: [
         "Tire pressure monitoring system",
-        "Real-time safety alerts",
+        "Real time safety alerts",
         "Blowout prevention technology",
         "Extended tire life"
       ],
@@ -22,7 +22,7 @@ const TowingAffiliateRecommendations = () => {
       description: "Never get stranded with professional emergency towing assistance available 24/7 for RV and towing emergencies.",
       features: [
         "24/7 emergency towing service",
-        "Professional heavy-duty assistance",
+        "Professional heavy duty assistance",
         "Nationwide coverage",
         "Specialized RV towing"
       ],
@@ -46,7 +46,7 @@ const TowingAffiliateRecommendations = () => {
     {
       partner: 'torklift' as const,
       title: "Premium Towing Accessories",
-      description: "Premium tie-downs, glow steps, and RV accessories with strong brand reputation and professional quality construction.",
+      description: "Premium tie downs, glow steps, and RV accessories with strong brand reputation and professional quality construction.",
       features: [
         "Premium construction",
         "Professional quality",
@@ -90,19 +90,19 @@ const TowingAffiliateRecommendations = () => {
         "Professional configurations",
         "Premium towing equipment",
         "Expert setup guidance",
-        "Safety-tested combinations"
+        "Safety tested combinations"
       ],
       buttonText: "Book Professional Setup"
     },
     {
       partner: 'rvlife' as const,
       title: "Safe Towing Routes",
-      description: "Plan towing-safe routes that avoid low bridges, weight restrictions, and challenging roads that could damage your RV.",
+      description: "Plan towing safe routes that avoid low bridges, weight restrictions, and challenging roads that could damage your RV.",
       features: [
-        "Towing-safe route planning",
+        "Towing safe route planning",
         "Bridge height clearance data",
         "Weight restriction alerts",
-        "RV-friendly road conditions"
+        "RV friendly road conditions"
       ],
       buttonText: "Plan Safe Routes"
     },
@@ -111,7 +111,7 @@ const TowingAffiliateRecommendations = () => {
       title: "System Protection",
       description: "Protect your RV's water and waste systems during transport with quality filters and maintenance products.",
       features: [
-        "Transport-safe filtration",
+        "Transport safe filtration",
         "System protection products",
         "Travel preparation kits",
         "Quality maintenance supplies"

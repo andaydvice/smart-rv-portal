@@ -19,11 +19,11 @@ const SmartSystemsAffiliateRecommendations = () => {
     {
       partner: 'rvlife' as const,
       title: "Industry Leader Navigation",
-      description: "Plan smarter routes with the industry leading GPS navigation that considers your RV's specific needs and real-time conditions.",
+      description: "Plan smarter routes with the industry leading GPS navigation that considers your RV's specific needs and real time conditions.",
       features: [
-        "RV-specific GPS navigation",
+        "RV specific GPS navigation",
         "Smart route optimization",
-        "Real-time traffic & weather",
+        "Real time traffic & weather",
         "Campground integration"
       ],
       buttonText: "Navigate Smarter"
@@ -61,10 +61,10 @@ const SmartSystemsAffiliateRecommendations = () => {
     {
       partner: 'rvshare' as const,
       title: "Experience Smart RVs",
-      description: "Try the latest smart RV technology without the investment - rent tech-equipped RVs to test features firsthand.",
+      description: "Try the latest smart RV technology without the investment - rent tech equipped RVs to test features firsthand.",
       features: [
         "Latest smart RV technology",
-        "Pre-installed automation",
+        "Pre installed automation",
         "Test advanced features",
         "No upfront investment"
       ],
@@ -73,9 +73,9 @@ const SmartSystemsAffiliateRecommendations = () => {
     {
       partner: 'outdoorsy' as const,
       title: "Luxury Smart RV Rentals",
-      description: "Experience cutting-edge RV automation and smart features in premium luxury RVs with full tech packages.",
+      description: "Experience cutting edge RV automation and smart features in premium luxury RVs with full tech packages.",
       features: [
-        "Cutting-edge automation",
+        "Cutting edge automation",
         "Premium smart features",
         "Luxury tech packages",
         "Full system integration"

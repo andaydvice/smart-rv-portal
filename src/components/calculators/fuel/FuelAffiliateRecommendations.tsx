@@ -7,10 +7,10 @@ const FuelAffiliateRecommendations = () => {
     {
       partner: 'rvlife' as const,
       title: "Smart Route Planning",
-      description: "Save money on fuel with intelligent route planning that finds the cheapest gas stations and most fuel-efficient paths for your RV.",
+      description: "Save money on fuel with intelligent route planning that finds the cheapest gas stations and most fuel efficient paths for your RV.",
       features: [
-        "Real-time fuel price comparison",
-        "RV-optimized fuel-efficient routes", 
+        "Real time fuel price comparison",
+        "RV optimized fuel efficient routes", 
         "Gas station finder with RV access",
         "Trip cost calculator"
       ],
@@ -19,7 +19,7 @@ const FuelAffiliateRecommendations = () => {
     {
       partner: 'goodsam' as const,
       title: "Fuel Discounts & Emergency Help",
-      description: "Get instant fuel savings at thousands of stations plus 24/7 roadside assistance when fuel-related problems strand you.",
+      description: "Get instant fuel savings at thousands of stations plus 24/7 roadside assistance when fuel related problems strand you.",
       features: [
         "Up to 8¢/gallon fuel discounts",
         "Emergency fuel delivery service",
@@ -34,12 +34,12 @@ const FuelAffiliateRecommendations = () => {
     {
       partner: 'hotshotssecret' as const,
       title: "Fuel Efficiency Additives",
-      description: "Premium fuel and oil additives for RV engines and generators that improve performance and fuel economy for long-term savings.",
+      description: "Premium fuel and oil additives for RV engines and generators that improve performance and fuel economy for long term savings.",
       features: [
         "Improved fuel economy",
         "Engine performance boost",
         "Generator efficiency",
-        "Long-term savings"
+        "Long term savings"
       ],
       buttonText: "Boost Fuel Efficiency"
     },
@@ -48,7 +48,7 @@ const FuelAffiliateRecommendations = () => {
       title: "Unlimited Data for Travel",
       description: "Stay connected while finding the best fuel prices and navigating efficiently with unlimited 5G internet designed for RV travelers.",
       features: [
-        "Real-time fuel price apps",
+        "Real time fuel price apps",
         "Navigation assistance",
         "Remote work capability",
         "Unlimited connectivity"
@@ -60,22 +60,22 @@ const FuelAffiliateRecommendations = () => {
   const supportServices = [
     {
       partner: 'rvshare' as const,
-      title: "Test Fuel-Efficient RVs",
-      description: "Try different RV models to find the most fuel-efficient option for your travel style before making a purchase.",
+      title: "Test Fuel Efficient RVs",
+      description: "Try different RV models to find the most fuel efficient option for your travel style before making a purchase.",
       features: [
         "Compare fuel economy across models",
-        "Real-world fuel consumption data",
+        "Real world fuel consumption data",
         "Try before you buy",
-        "Owner-reported efficiency ratings"
+        "Owner reported efficiency ratings"
       ],
       buttonText: "Find Efficient RVs"
     },
     {
       partner: 'outdoorsy' as const,
       title: "Premium Efficient Rentals", 
-      description: "Book newer, well-maintained RVs that offer better fuel efficiency and cost savings for your trips.",
+      description: "Book newer, well maintained RVs that offer better fuel efficiency and cost savings for your trips.",
       features: [
-        "Newer, fuel-efficient models",
+        "Newer, fuel efficient models",
         "Professional maintenance records",
         "Fuel consumption estimates",
         "Premium RV selection"
@@ -85,9 +85,9 @@ const FuelAffiliateRecommendations = () => {
     {
       partner: 'technorv' as const,
       title: "Smart Fuel Monitoring",
-      description: "Track your RV's fuel consumption in real-time and optimize your driving habits to maximize every gallon.",
+      description: "Track your RV's fuel consumption in real time and optimize your driving habits to maximize every gallon.",
       features: [
-        "Real-time fuel monitoring",
+        "Real time fuel monitoring",
         "Driving efficiency coaching",
         "Consumption tracking & alerts",
         "Route optimization data"

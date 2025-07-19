@@ -9,7 +9,7 @@ const PowerAffiliateRecommendations = () => {
       title: "Smart Power Management",
       description: "Take control of your RV's power with intelligent monitoring that prevents dead batteries and optimizes energy usage.",
       features: [
-        "Real-time battery monitoring",
+        "Real time battery monitoring",
         "Solar output optimization",
         "Power consumption alerts",
         "Remote system control"
@@ -34,7 +34,7 @@ const PowerAffiliateRecommendations = () => {
     {
       partner: 'a1solarstore' as const,
       title: "Complete Solar Systems",
-      description: "High-capacity solar systems for serious off-grid RV living with professional installation support and premium equipment.",
+      description: "High capacity solar systems for serious off grid RV living with professional installation support and premium equipment.",
       features: [
         "Complete system packages",
         "Professional installation",
@@ -58,7 +58,7 @@ const PowerAffiliateRecommendations = () => {
     {
       partner: 'renogy' as const,
       title: "Most Trusted Solar Brand",
-      description: "Leading solar panel manufacturer with complete RV solar kits and proven reliability for off-grid adventures.",
+      description: "Leading solar panel manufacturer with complete RV solar kits and proven reliability for off grid adventures.",
       features: [
         "Proven reliability",
         "Complete RV solar kits",
@@ -85,7 +85,7 @@ const PowerAffiliateRecommendations = () => {
     {
       partner: 'victron' as const,
       title: "Professional Grade Power",
-      description: "Professional power monitoring and inverter systems trusted by RV professionals worldwide for reliable off-grid power.",
+      description: "Professional power monitoring and inverter systems trusted by RV professionals worldwide for reliable off grid power.",
       features: [
         "Professional grade systems",
         "Advanced monitoring",
@@ -99,11 +99,11 @@ const PowerAffiliateRecommendations = () => {
   const essentialServices = [
     {
       partner: 'rvshare' as const,
-      title: "Solar-Equipped RV Rentals",
-      description: "Experience off-grid freedom by renting RVs with solar power systems already installed and optimized.",
+      title: "Solar Equipped RV Rentals",
+      description: "Experience off grid freedom by renting RVs with solar power systems already installed and optimized.",
       features: [
-        "Pre-installed solar systems",
-        "Off-grid capable RVs",
+        "Pre installed solar systems",
+        "Off grid capable RVs",
         "Battery backup included",
         "Learn before you invest"
       ],
@@ -111,27 +111,27 @@ const PowerAffiliateRecommendations = () => {
     },
     {
       partner: 'outdoorsy' as const,
-      title: "Premium Power-Ready RVs",
-      description: "Book luxury RVs equipped with advanced lithium batteries and high-capacity solar systems for extended boondocking.",
+      title: "Premium Power Ready RVs",
+      description: "Book luxury RVs equipped with advanced lithium batteries and high capacity solar systems for extended boondocking.",
       features: [
         "Lithium battery systems",
-        "High-capacity solar arrays",
+        "High capacity solar arrays",
         "Advanced inverter systems",
-        "Extended off-grid capability"
+        "Extended off grid capability"
       ],
-      buttonText: "Book Power-Ready RV"
+      buttonText: "Book Power Ready RV"
     },
     {
       partner: 'rvlife' as const,
-      title: "Off-Grid Trip Planning",
-      description: "Find the best boondocking spots and plan solar-friendly routes that maximize your off-grid adventures.",
+      title: "Off Grid Trip Planning",
+      description: "Find the best boondocking spots and plan solar friendly routes that maximize your off grid adventures.",
       features: [
         "Boondocking location finder",
         "Solar exposure mapping",
-        "Off-grid trip planning",
+        "Off grid trip planning",
         "Power requirement calculator"
       ],
-      buttonText: "Plan Off-Grid Adventures"
+      buttonText: "Plan Off Grid Adventures"
     }
   ];
 
@@ -153,14 +153,14 @@ const PowerAffiliateRecommendations = () => {
 
       <OptimizedAffiliateGrid
         title="🔋 Advanced Battery & Power Systems"
-        subtitle="Invest in premium batteries and professional monitoring systems for reliable off-grid power:"
+        subtitle="Invest in premium batteries and professional monitoring systems for reliable off grid power:"
         partners={batteryAndPowerSystems}
         gridCols="2"
       />
       
       <OptimizedAffiliateGrid
-        title="🚐 Power-Ready RV Solutions"
-        subtitle="Experience the freedom of reliable off-grid power with these proven solutions:"
+        title="🚐 Power Ready RV Solutions"
+        subtitle="Experience the freedom of reliable off grid power with these proven solutions:"
         partners={essentialServices}
         gridCols="3"
       />
