@@ -54,7 +54,7 @@ const AlertsSection = () => {
           
           <div className="p-4 rounded-lg border border-[#1a202c] bg-[#080F1F]/70">
             <h4 className="font-semibold text-ocean-blue mb-2">Weather Apps</h4>
-            <p className="text-light-blue text-sm">Apps like Weather Channel, AccuWeather, or NOAA app provide real-time alerts even when on the move.</p>
+            <p className="text-light-blue text-sm">Apps like Weather Channel, AccuWeather, or NOAA app provide real time alerts even when on the move.</p>
           </div>
           
           <div className="p-4 rounded-lg border border-[#1a202c] bg-[#080F1F]/70">

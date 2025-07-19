@@ -28,14 +28,14 @@ const MonitoringSection = () => {
               <div className="p-4 rounded-lg border border-[#1a202c] bg-[#080F1F]/70 w-full">
                 <h5 className="font-semibold text-[#5B9BD5] text-center mb-2">Comprehensive Weather Apps</h5>
                 <ul className="w-full space-y-2 text-left text-[#E2E8FF] list-disc pl-5">
-                  <li className="text-left">AccuWeather - 15-day forecast plus radar</li>
+                  <li className="text-left">AccuWeather - 15 day forecast plus radar</li>
                   <li className="text-left">Weather Underground - Detailed forecasts with PWS network</li>
                   <li className="text-left">The Weather Channel - Live interactive radar</li>
                 </ul>
               </div>
               
               <div className="p-4 rounded-lg border border-[#1a202c] bg-[#080F1F]/70 w-full">
-                <h5 className="font-semibold text-[#5B9BD5] text-center mb-2">RV-Specific Weather Tools</h5>
+                <h5 className="font-semibold text-[#5B9BD5] text-center mb-2">RV Specific Weather Tools</h5>
                 <ul className="w-full space-y-2 text-left text-[#E2E8FF] list-disc pl-5">
                   <li className="text-left">RV Weather - Weather for routes specifically</li>
                   <li className="text-left">Wind Alerts - Warnings for wind/driving conditions</li>
