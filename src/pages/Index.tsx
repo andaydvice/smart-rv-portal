@@ -5,9 +5,7 @@ import { HeroSection } from "@/components/sections/HeroSection";
 import { motion } from "framer-motion";
 import { toast } from "sonner";
 import { TechnologySection } from "@/components/sections/TechnologySection";
-// MODIFIED: Direct import for ContactSection added
 import { ContactSection } from "@/components/sections/ContactSection";
-
 import { HomepageAffiliateSection } from "@/components/affiliate/HomepageAffiliateSection";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
 
@@ -56,23 +54,22 @@ const Index = () => {
           <FeaturesSection />
         </Suspense>
         
-        {/* Changed from lazy-loaded to direct import */}
         <TechnologySection />
         
-        {/* Premium affiliate section with new high-value partners */}
+        {/* Premium affiliate section with customer-focused benefits */}
         <HomepageAffiliateSection />
         
-        {/* Strategic affiliate partnerships */}
+        {/* Strategic affiliate partnerships - customer focused */}
         <section className="py-16 px-4 bg-gradient-to-br from-connectivity-darkBg to-[#0A0F1A]">
           <div className="max-w-6xl mx-auto">
             <OptimizedAffiliateGrid
               title="Complete RV Solutions Ecosystem"
-              subtitle="Everything you need for smart RV living - from solar power to connectivity, all with premium commission tracking."
+              subtitle="Everything you need for smart RV living - from solar power to connectivity, all with proven quality and reliability."
               partners={[
-                { partner: 'renogy' as const, title: 'Solar Power Leader', description: 'Most trusted solar brand with complete RV kits and 6% commission' },
-                { partner: 'victron' as const, title: 'Power Management', description: 'Professional power monitoring and inverter systems (5% commission)' },
-                { partner: 'winegard' as const, title: 'Internet Solutions', description: 'Starlink mounts and connectivity boosters (4.5% commission)' },
-                { partner: 'torklift' as const, title: 'Towing Accessories', description: 'Premium tie-downs and RV accessories (8% commission)' }
+                { partner: 'renogy' as const, title: 'Solar Power Leader', description: 'Most trusted solar brand with complete RV kits and proven reliability' },
+                { partner: 'victron' as const, title: 'Power Management', description: 'Professional power monitoring and inverter systems trusted worldwide' },
+                { partner: 'winegard' as const, title: 'Internet Solutions', description: 'Starlink mounts and connectivity boosters for reliable internet anywhere' },
+                { partner: 'torklift' as const, title: 'Towing Accessories', description: 'Premium tie-downs and RV accessories trusted by professionals' }
               ]}
               gridCols="4"
             />

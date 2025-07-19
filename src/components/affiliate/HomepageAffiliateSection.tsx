@@ -1,6 +1,6 @@
 
 import { Button } from '@/components/ui/button';
-import { ArrowRight, Star, TrendingUp } from 'lucide-react';
+import { ArrowRight, Star, TrendingUp, Shield, Zap, Globe } from 'lucide-react';
 
 export const HomepageAffiliateSection = () => {
   return (
@@ -16,11 +16,11 @@ export const HomepageAffiliateSection = () => {
         </div>
         
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {/* RV Life Pro - Highest Commission */}
+          {/* RV Life Pro - Industry Leader */}
           <div className="bg-white/5 border border-white/10 rounded-xl p-6 hover:border-white/20 transition-colors">
             <div className="flex items-center gap-2 mb-4">
               <TrendingUp className="w-5 h-5 text-green-400" />
-              <span className="text-sm text-green-400 font-medium">25% Commission</span>
+              <span className="text-sm text-green-400 font-medium">Industry Leader</span>
             </div>
             <h3 className="text-xl font-semibold text-white mb-3">RV Life Pro</h3>
             <p className="text-gray-300 mb-4">
@@ -42,15 +42,15 @@ export const HomepageAffiliateSection = () => {
             </Button>
           </div>
 
-          {/* RVT.com - High Ticket Sales */}
+          {/* RVT.com - Premium Marketplace */}
           <div className="bg-white/5 border border-white/10 rounded-xl p-6 hover:border-white/20 transition-colors">
             <div className="flex items-center gap-2 mb-4">
               <Star className="w-5 h-5 text-yellow-400 fill-current" />
-              <span className="text-sm text-yellow-400 font-medium">Up to $1,000 Bonus</span>
+              <span className="text-sm text-yellow-400 font-medium">Premium Marketplace</span>
             </div>
             <h3 className="text-xl font-semibold text-white mb-3">RVT Marketplace</h3>
             <p className="text-gray-300 mb-4">
-              Premium RV marketplace connecting buyers with professional dealers nationwide.
+              Premium RV marketplace connecting buyers with verified professional dealers nationwide.
             </p>
             <Button 
               asChild
@@ -68,15 +68,15 @@ export const HomepageAffiliateSection = () => {
             </Button>
           </div>
 
-          {/* Solar Direct - Longest Cookie */}
+          {/* Solar Direct - Extended Support */}
           <div className="bg-white/5 border border-white/10 rounded-xl p-6 hover:border-white/20 transition-colors">
             <div className="flex items-center gap-2 mb-4">
-              <Star className="w-5 h-5 text-blue-400 fill-current" />
-              <span className="text-sm text-blue-400 font-medium">365-Day Cookie</span>
+              <Shield className="w-5 h-5 text-blue-400" />
+              <span className="text-sm text-blue-400 font-medium">Extended Support</span>
             </div>
             <h3 className="text-xl font-semibold text-white mb-3">Solar Direct</h3>
             <p className="text-gray-300 mb-4">
-              Complete solar power solutions with industry-leading warranties and year-long tracking.
+              Complete solar power solutions with industry-leading warranties and year-round support.
             </p>
             <Button 
               asChild
@@ -94,15 +94,15 @@ export const HomepageAffiliateSection = () => {
             </Button>
           </div>
 
-          {/* Dakota Lithium - Premium Batteries */}
+          {/* Dakota Lithium - 11-Year Warranty */}
           <div className="bg-white/5 border border-white/10 rounded-xl p-6 hover:border-white/20 transition-colors">
             <div className="flex items-center gap-2 mb-4">
-              <TrendingUp className="w-5 h-5 text-green-400" />
-              <span className="text-sm text-green-400 font-medium">7% Commission</span>
+              <Zap className="w-5 h-5 text-green-400" />
+              <span className="text-sm text-green-400 font-medium">11-Year Warranty</span>
             </div>
             <h3 className="text-xl font-semibold text-white mb-3">Dakota Lithium</h3>
             <p className="text-gray-300 mb-4">
-              Premium LiFePO4 batteries with 11-year warranty and superior cold weather performance.
+              Premium LiFePO4 batteries with industry-leading 11-year warranty and superior cold weather performance.
             </p>
             <Button 
               asChild
@@ -120,15 +120,15 @@ export const HomepageAffiliateSection = () => {
             </Button>
           </div>
 
-          {/* Blue Ox - Towing Solutions */}
+          {/* Blue Ox - Professional Grade */}
           <div className="bg-white/5 border border-white/10 rounded-xl p-6 hover:border-white/20 transition-colors">
             <div className="flex items-center gap-2 mb-4">
               <Star className="w-5 h-5 text-purple-400 fill-current" />
-              <span className="text-sm text-purple-400 font-medium">10% Commission</span>
+              <span className="text-sm text-purple-400 font-medium">Professional Grade</span>
             </div>
             <h3 className="text-xl font-semibold text-white mb-3">Blue Ox Towing</h3>
             <p className="text-gray-300 mb-4">
-              Professional-grade towing systems and accessories trusted by RV professionals.
+              Professional-grade towing systems and accessories trusted by RV professionals worldwide.
             </p>
             <Button 
               asChild
@@ -146,15 +146,15 @@ export const HomepageAffiliateSection = () => {
             </Button>
           </div>
 
-          {/* Nomad Internet - Connectivity */}
+          {/* Nomad Internet - Unlimited Data */}
           <div className="bg-white/5 border border-white/10 rounded-xl p-6 hover:border-white/20 transition-colors">
             <div className="flex items-center gap-2 mb-4">
-              <TrendingUp className="w-5 h-5 text-cyan-400" />
-              <span className="text-sm text-cyan-400 font-medium">$35 Per Sale</span>
+              <Globe className="w-5 h-5 text-cyan-400" />
+              <span className="text-sm text-cyan-400 font-medium">Unlimited Data</span>
             </div>
             <h3 className="text-xl font-semibold text-white mb-3">Nomad Internet</h3>
             <p className="text-gray-300 mb-4">
-              Unlimited 5G internet plans designed specifically for full-time RV travelers.
+              Unlimited 5G internet plans designed specifically for full-time RV travelers and remote workers.
             </p>
             <Button 
               asChild
@@ -176,7 +176,7 @@ export const HomepageAffiliateSection = () => {
         <div className="text-center mt-8">
           <div className="bg-blue-900/30 border border-blue-500/30 rounded-lg p-4 max-w-2xl mx-auto">
             <p className="text-sm text-blue-200 text-left">
-              <strong>Our Promise:</strong> These are our highest-performing affiliate partners with proven track records and competitive commission structures. 
+              <strong>Our Promise:</strong> These are carefully selected partners with proven track records of excellent customer service and quality products. 
               We only recommend products and services we personally use and trust for the RV community.
             </p>
           </div>
