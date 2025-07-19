@@ -8,7 +8,7 @@ const MonitoringSection = () => {
     <section className="py-6 px-4 rounded-lg bg-gradient-to-b from-[#131a2a]/50 to-[#080F1F]/50 border border-[#1a202c]/40 backdrop-blur-sm">
       <div className="flex items-center justify-center gap-2 mb-6">
         <Smartphone className="h-7 w-7 text-connectivity-accent" />
-        <TypographyH2 className="border-none text-white text-center">Real-Time Weather Monitoring</TypographyH2>
+        <TypographyH2 className="border-none text-white text-center">Real Time Weather Monitoring</TypographyH2>
       </div>
       
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
