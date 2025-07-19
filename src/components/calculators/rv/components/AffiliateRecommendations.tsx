@@ -20,7 +20,7 @@ const AffiliateRecommendations = ({ rvType, tripDistance, days, totalCost }: Aff
     partners.push({ 
       partner: 'rvshare', 
       title: 'RV Rental Savings', 
-      description: `Save money by renting for your ${days}-day trip instead of buying` 
+      description: `Save money by renting for your ${days} day trip instead of buying` 
     });
 
     // Add Outdoorsy for luxury trips
@@ -37,7 +37,7 @@ const AffiliateRecommendations = ({ rvType, tripDistance, days, totalCost }: Aff
       partners.push({ 
         partner: 'rvlife', 
         title: 'Trip Planning Tools', 
-        description: 'Plan your route and find RV-friendly stops for long distance travel' 
+        description: 'Plan your route and find RV friendly stops for long distance travel' 
       });
     }
 
@@ -45,7 +45,7 @@ const AffiliateRecommendations = ({ rvType, tripDistance, days, totalCost }: Aff
     partners.push({ 
       partner: 'goodsam', 
       title: 'Roadside Assistance', 
-      description: '24/7 RV-specific emergency assistance and peace of mind' 
+      description: '24/7 RV specific emergency assistance and peace of mind' 
     });
 
     return partners.slice(0, 3);
@@ -55,7 +55,7 @@ const AffiliateRecommendations = ({ rvType, tripDistance, days, totalCost }: Aff
     <div className="mt-8">
       <OptimizedAffiliateGrid
         title="💡 Recommended for Your Trip"
-        subtitle={`Based on your ${rvType} RV, ${days}-day trip covering ${tripDistance} miles (estimated cost: $${totalCost}), here are our top recommendations:`}
+        subtitle={`Based on your ${rvType} RV, ${days} day trip covering ${tripDistance} miles (estimated cost: $${totalCost}), here are our top recommendations:`}
         partners={getPartners()}
         gridCols="3"
         className="bg-[#091020] border-gray-700"
