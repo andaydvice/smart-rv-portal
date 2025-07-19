@@ -69,10 +69,10 @@ const Index = () => {
               title="Complete RV Solutions Ecosystem"
               subtitle="Everything you need for smart RV living - from solar power to connectivity, all with premium commission tracking."
               partners={[
-                { partner: 'renogy', title: 'Solar Power Leader', description: 'Most trusted solar brand with complete RV kits and 6% commission' },
-                { partner: 'victron', title: 'Power Management', description: 'Professional power monitoring and inverter systems (5% commission)' },
-                { partner: 'winegard', title: 'Internet Solutions', description: 'Starlink mounts and connectivity boosters (4.5% commission)' },
-                { partner: 'torklift', title: 'Towing Accessories', description: 'Premium tie-downs and RV accessories (8% commission)' }
+                { partner: 'renogy' as const, title: 'Solar Power Leader', description: 'Most trusted solar brand with complete RV kits and 6% commission' },
+                { partner: 'victron' as const, title: 'Power Management', description: 'Professional power monitoring and inverter systems (5% commission)' },
+                { partner: 'winegard' as const, title: 'Internet Solutions', description: 'Starlink mounts and connectivity boosters (4.5% commission)' },
+                { partner: 'torklift' as const, title: 'Towing Accessories', description: 'Premium tie-downs and RV accessories (8% commission)' }
               ]}
               gridCols="4"
             />

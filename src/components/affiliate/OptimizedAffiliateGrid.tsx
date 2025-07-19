@@ -7,7 +7,10 @@ interface OptimizedAffiliateGridProps {
   title: string;
   subtitle: string;
   partners: Array<{
-    partner: 'rvshare' | 'outdoorsy' | 'rvlife' | 'goodsam' | 'technorv' | 'rvwaterfilter';
+    partner: 'rvshare' | 'outdoorsy' | 'rvlife' | 'goodsam' | 'technorv' | 'rvwaterfilter' | 
+             'rvtcom' | 'solardirect' | 'a1solarstore' | 'renogy' | 'dakotalithium' | 'blueox' | 
+             'torklift' | 'guta' | 'victron' | 'winegard' | 'nomadinternet' | 'heatso' | 
+             'hotshotssecret' | 'mobilehomeparts';
     title?: string;
     description?: string;
     features?: string[];
