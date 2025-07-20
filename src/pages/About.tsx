@@ -38,7 +38,9 @@ const About = () => {
             <div className="bg-black/20 backdrop-blur-md p-8 rounded-xl border border-white/10 text-left">
               <h2 className="text-3xl font-bold text-white mb-6 text-left">Our Mission</h2>
               <p className="text-white/90 text-lg leading-relaxed text-left">
-                Smart RV is revolutionizing the recreational vehicle industry by integrating cutting edge technology with traditional RV experiences. 
+                Smart RV is revolutionizing the recreational vehicle industry by integrating cutting edge technology with traditional RV experiences.
+              </p>
+              <p className="text-white/90 text-lg leading-relaxed text-left">
                 We believe that the future of travel lies in intelligent, connected vehicles that enhance safety, comfort, and convenience for every journey.
               </p>
             </div>
@@ -47,7 +49,9 @@ const About = () => {
               <div className="bg-black/20 backdrop-blur-md p-8 rounded-xl border border-white/10 text-left">
                 <h3 className="text-2xl font-bold text-white mb-4 text-left">Innovation First</h3>
                 <p className="text-white/90 leading-relaxed text-left">
-                  Our team of engineers and designers work tirelessly to create smart systems that anticipate your needs and adapt to your lifestyle. 
+                  Our team of engineers and designers work tirelessly to create smart systems that anticipate your needs and adapt to your lifestyle.
+                </p>
+                <p className="text-white/90 leading-relaxed text-left">
                   From automated climate control to intelligent power management, every feature is designed with the modern traveler in mind.
                 </p>
               </div>
@@ -55,7 +59,9 @@ const About = () => {
               <div className="bg-black/20 backdrop-blur-md p-8 rounded-xl border border-white/10 text-left">
                 <h3 className="text-2xl font-bold text-white mb-4 text-left">Sustainability Focus</h3>
                 <p className="text-white/90 leading-relaxed text-left">
-                  We are committed to creating environmentally responsible RV solutions. 
+                  We are committed to creating environmentally responsible RV solutions.
+                </p>
+                <p className="text-white/90 leading-relaxed text-left">
                   Our solar integration systems, energy efficient appliances, and waste reduction technologies help minimize your environmental footprint while maximizing your adventure potential.
                 </p>
               </div>
