@@ -12,11 +12,11 @@ const About = () => {
   }, []);
 
   const handleVideoLoad = () => {
-    console.log("✅ Video iframe loaded successfully");
+    console.log("✅ Adilo video iframe loaded successfully");
   };
 
   const handleVideoError = () => {
-    console.error("❌ Video iframe failed to load");
+    console.error("❌ Adilo video iframe failed to load");
   };
 
   return (
@@ -25,24 +25,39 @@ const About = () => {
       <div className="relative w-full h-[70vh] min-h-[500px] overflow-hidden -mt-16">
         <div className="absolute inset-0 bg-black/30 z-10"></div>
         <div className="relative w-full h-full z-0">
-          <iframe 
-            title="Smart RV Introduction" 
-            src="https://player.vimeo.com/video/148751763?autoplay=1&muted=1&loop=1&background=1&controls=0"
-            className="w-full h-full"
+          {/* Adilo Video Embed */}
+          <div 
+            className="w-full h-full relative"
             style={{ 
-              border: 'none',
-              position: 'absolute',
-              top: 0,
-              left: 0,
-              width: '100%',
-              height: '100%'
+              width: '100%', 
+              height: 'null', 
+              position: 'relative', 
+              paddingTop: '52.67%' 
             }}
-            allow="autoplay; fullscreen; picture-in-picture"
-            allowFullScreen
-            loading="eager"
-            onLoad={handleVideoLoad}
-            onError={handleVideoError}
-          />
+          >
+            <iframe 
+              title="Smart RV Introduction"
+              style={{ 
+                position: 'absolute', 
+                top: 0, 
+                left: 0, 
+                width: '100%', 
+                height: '100%' 
+              }}
+              allowTransparency={true}
+              loading="lazy"
+              src="https://adilo.bigcommand.com/watch/p5fL_BPv"
+              frameBorder="0"
+              allowFullScreen
+              mozAllowFullScreen
+              webkitAllowFullScreen
+              oAllowFullScreen
+              msAllowFullScreen
+              scrolling="no"
+              onLoad={handleVideoLoad}
+              onError={handleVideoError}
+            />
+          </div>
           {/* Fallback background */}
           <div className="absolute inset-0 bg-gradient-to-br from-[#080F1F] to-[#151A22] -z-10"></div>
         </div>
@@ -68,6 +83,7 @@ const About = () => {
         </div>
       </div>
 
+      
       <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
