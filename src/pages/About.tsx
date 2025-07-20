@@ -124,26 +124,26 @@ const About = () => {
               <div className="grid md:grid-cols-3 gap-6">
                 <div className="text-center">
                   <div className="w-16 h-16 bg-[#5B9BD5] rounded-full flex items-center justify-center mx-auto mb-4">
-                    <span className="text-white font-bold text-2xl">AI</span>
+                    <span className="text-white font-bold text-2xl">📚</span>
                   </div>
-                  <h4 className="text-xl font-bold text-white mb-2">Smart Technology</h4>
-                  <p className="text-white/80">Advanced AI systems that learn and adapt to your preferences</p>
+                  <h4 className="text-xl font-bold text-white mb-2">Expert Education</h4>
+                  <p className="text-white/80">Comprehensive guides and tutorials from RV industry professionals</p>
                 </div>
                 
                 <div className="text-center">
                   <div className="w-16 h-16 bg-[#5B9BD5] rounded-full flex items-center justify-center mx-auto mb-4">
-                    <span className="text-white font-bold text-2xl">24/7</span>
+                    <span className="text-white font-bold text-2xl">✓</span>
                   </div>
-                  <h4 className="text-xl font-bold text-white mb-2">Expert Support</h4>
-                  <p className="text-white/80">Round the clock technical support and maintenance guidance</p>
+                  <h4 className="text-xl font-bold text-white mb-2">Trusted Reviews</h4>
+                  <p className="text-white/80">Honest, unbiased reviews and comparisons of RV products and services</p>
                 </div>
                 
                 <div className="text-center">
                   <div className="w-16 h-16 bg-[#5B9BD5] rounded-full flex items-center justify-center mx-auto mb-4">
-                    <span className="text-white font-bold text-2xl">∞</span>
+                    <span className="text-white font-bold text-2xl">🎯</span>
                   </div>
-                  <h4 className="text-xl font-bold text-white mb-2">Endless Adventure</h4>
-                  <p className="text-white/80">Technology that enables unlimited exploration and discovery</p>
+                  <h4 className="text-xl font-bold text-white mb-2">Practical Advice</h4>
+                  <p className="text-white/80">Real world tips and solutions for common RV challenges and maintenance</p>
                 </div>
               </div>
             </div>
