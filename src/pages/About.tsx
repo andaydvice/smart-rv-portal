@@ -37,7 +37,7 @@ const About = () => {
           >
             <div className="bg-black/20 backdrop-blur-md p-8 rounded-xl border border-white/10 text-left">
               <h2 className="text-3xl font-bold text-white mb-6 text-left">Our Mission</h2>
-              <p className="text-white/90 text-lg leading-relaxed text-left">
+              <p className="text-white/90 text-lg leading-relaxed text-left mb-4">
                 Smart RV is revolutionizing the recreational vehicle industry by integrating cutting edge technology with traditional RV experiences.
               </p>
               <p className="text-white/90 text-lg leading-relaxed text-left">
@@ -48,7 +48,7 @@ const About = () => {
             <div className="grid md:grid-cols-2 gap-8">
               <div className="bg-black/20 backdrop-blur-md p-8 rounded-xl border border-white/10 text-left">
                 <h3 className="text-2xl font-bold text-white mb-4 text-left">Innovation First</h3>
-                <p className="text-white/90 leading-relaxed text-left">
+                <p className="text-white/90 leading-relaxed text-left mb-4">
                   Our team of engineers and designers work tirelessly to create smart systems that anticipate your needs and adapt to your lifestyle.
                 </p>
                 <p className="text-white/90 leading-relaxed text-left">
@@ -58,7 +58,7 @@ const About = () => {
 
               <div className="bg-black/20 backdrop-blur-md p-8 rounded-xl border border-white/10 text-left">
                 <h3 className="text-2xl font-bold text-white mb-4 text-left">Sustainability Focus</h3>
-                <p className="text-white/90 leading-relaxed text-left">
+                <p className="text-white/90 leading-relaxed text-left mb-4">
                   We are committed to creating environmentally responsible RV solutions.
                 </p>
                 <p className="text-white/90 leading-relaxed text-left">
