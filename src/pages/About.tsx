@@ -44,16 +44,9 @@ const About = () => {
                 width: '100%', 
                 height: '100%' 
               }}
-              allowTransparency={true}
               loading="lazy"
               src="https://adilo.bigcommand.com/watch/p5fL_BPv"
-              frameBorder="0"
               allowFullScreen
-              mozAllowFullScreen
-              webkitAllowFullScreen
-              oAllowFullScreen
-              msAllowFullScreen
-              scrolling="no"
               onLoad={handleVideoLoad}
               onError={handleVideoError}
             />
