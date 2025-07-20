@@ -14,12 +14,14 @@ interface NavbarContainerProps {
 const NavbarContainer = ({ isOpen, toggleMenu }: NavbarContainerProps) => {
   const { user } = useAuth();
   
+  console.log("🔍 DEBUG: NavbarContainer rendering - isOpen:", isOpen);
+  
   useEffect(() => {
     console.log("NavbarContainer effect - Menu state:", isOpen);
   }, [isOpen]);
 
   return (
-    <nav className="relative z-[9999] fixed top-0 left-0 right-0 bg-[#080F1F]/95 backdrop-blur-sm border-b border-[#1E2A3E]">
+    <nav className="navbar-duplicate-fix relative z-[9999] fixed top-0 left-0 right-0 bg-[#080F1F]/95 backdrop-blur-sm border-b border-[#1E2A3E]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <Link to="/" className="hover-scale">

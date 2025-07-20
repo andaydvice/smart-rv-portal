@@ -9,6 +9,8 @@ const Navbar = () => {
   const location = useLocation();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
+  console.log("🔍 DEBUG: Navbar component rendering - pathname:", location.pathname);
+
   // Scroll to top when route changes
   useEffect(() => {
     window.scrollTo(0, 0);

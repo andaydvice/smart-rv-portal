@@ -1,7 +1,6 @@
 
 import { motion } from "framer-motion";
 import { useEffect } from "react";
-import Navbar from "@/components/Navbar";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -12,6 +11,8 @@ import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliat
 
 const Contact = () => {
   const { toast } = useToast();
+  
+  console.log("🔍 DEBUG: Contact page rendering");
   
   // Scroll to top on component mount
   useEffect(() => {
@@ -29,7 +30,7 @@ const Contact = () => {
 
   return (
     <Layout>
-      <Navbar />
+      {/* REMOVED: Extra Navbar component that was causing duplication */}
       <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
