@@ -1,14 +1,22 @@
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import Layout from "@/components/layout/Layout";
 import { scrollToTop } from "@/utils/scrollToTop";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
+import { generateImagePlaceholder, deferOperation } from "@/utils/performance";
 
 const About = () => {
+  const [videoLoaded, setVideoLoaded] = useState(false);
+
   useEffect(() => {
     console.log("About page - Scrolling to top");
     scrollToTop();
+    
+    // Defer video loading for better performance
+    deferOperation(() => {
+      setVideoLoaded(true);
+    }, 300);
   }, []);
 
   return (
@@ -17,14 +25,31 @@ const About = () => {
       <div className="relative w-full h-[70vh] min-h-[500px] overflow-hidden -mt-16">
         <div className="absolute inset-0 bg-black/20 z-10"></div>
         <div className="relative w-full h-full">
-          <iframe 
-            title="Smart RV Introduction" 
-            src="https://player.vimeo.com/video/1102867931?h=668d7ee63b&autoplay=1&muted=1&loop=1&background=1" 
-            className="w-full h-full object-cover"
-            style={{ border: 'none' }}
-            allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
-            allowFullScreen
-          />
+          {!videoLoaded ? (
+            <div 
+              className="w-full h-full flex items-center justify-center bg-gradient-to-br from-[#080F1F] to-[#151A22]"
+              style={{ 
+                backgroundImage: `url("${generateImagePlaceholder(1920, 1080, '131a2a')}")`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center'
+              }}
+            >
+              <div className="text-center">
+                <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-[#5B9BD5] mx-auto mb-4"></div>
+                <p className="text-white/80 text-lg">Loading video...</p>
+              </div>
+            </div>
+          ) : (
+            <iframe 
+              title="Smart RV Introduction" 
+              src="https://player.vimeo.com/video/1102867931?h=668d7ee63b&autoplay=1&muted=1&loop=1&background=1" 
+              className="w-full h-full object-cover"
+              style={{ border: 'none' }}
+              allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+              allowFullScreen
+              loading="lazy"
+            />
+          )}
         </div>
         <div className="absolute inset-0 z-20 flex items-center justify-center">
           <div className="text-center px-6">
