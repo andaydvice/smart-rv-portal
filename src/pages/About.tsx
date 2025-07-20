@@ -13,6 +13,41 @@ const About = () => {
 
   return (
     <Layout>
+      {/* Hero Video Section */}
+      <div className="relative w-full h-[70vh] min-h-[500px] overflow-hidden -mt-16">
+        <div className="absolute inset-0 bg-black/20 z-10"></div>
+        <div className="relative w-full h-full">
+          <iframe 
+            title="Smart RV Introduction" 
+            src="https://player.vimeo.com/video/1102867931?h=668d7ee63b&autoplay=1&muted=1&loop=1&background=1" 
+            className="w-full h-full object-cover"
+            style={{ border: 'none' }}
+            allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+            allowFullScreen
+          />
+        </div>
+        <div className="absolute inset-0 z-20 flex items-center justify-center">
+          <div className="text-center px-6">
+            <motion.h1 
+              initial={{ y: -20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.5, duration: 0.8 }}
+              className="text-6xl md:text-7xl font-bold text-white mb-4 drop-shadow-2xl"
+            >
+              About Smart RV
+            </motion.h1>
+            <motion.p 
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.7, duration: 0.8 }}
+              className="text-xl md:text-2xl text-white/90 drop-shadow-lg"
+            >
+              The Future of Intelligent Travel
+            </motion.p>
+          </div>
+        </div>
+      </div>
+
       <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -20,14 +55,6 @@ const About = () => {
         className="min-h-screen w-full bg-gradient-to-b from-[#080F1F] to-[#151A22]"
       >
         <div className="relative z-10 max-w-6xl mx-auto px-4 py-20">
-          <motion.h1 
-            initial={{ y: -20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.2, duration: 0.5 }}
-            className="text-5xl font-bold text-white mb-8 text-center"
-          >
-            About Smart RV
-          </motion.h1>
           
           <motion.div 
             initial={{ y: 20, opacity: 0 }}
