@@ -1,5 +1,4 @@
-
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { motion } from "framer-motion";
 import Layout from "@/components/layout/Layout";
 import { scrollToTop } from "@/utils/scrollToTop";
@@ -7,33 +6,45 @@ import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliat
 import { generateImagePlaceholder, deferOperation } from "@/utils/performance";
 
 const About = () => {
-  const [videoLoaded, setVideoLoaded] = useState(false);
-
   useEffect(() => {
     console.log("About page - Scrolling to top");
     scrollToTop();
-    
-    // Defer video loading for better performance
-    deferOperation(() => {
-      setVideoLoaded(true);
-    }, 300);
   }, []);
+
+  const handleVideoLoad = () => {
+    console.log("✅ Video iframe loaded successfully");
+  };
+
+  const handleVideoError = () => {
+    console.error("❌ Video iframe failed to load");
+  };
 
   return (
     <Layout>
       {/* Hero Video Section */}
       <div className="relative w-full h-[70vh] min-h-[500px] overflow-hidden -mt-16">
-        <div className="absolute inset-0 bg-black/20 z-10"></div>
-        <div className="relative w-full h-full">
+        <div className="absolute inset-0 bg-black/30 z-10"></div>
+        <div className="relative w-full h-full z-0">
           <iframe 
             title="Smart RV Introduction" 
-            src="https://player.vimeo.com/video/1102867931?h=668d7ee63b&autoplay=1&muted=1&loop=1&background=1" 
-            className="w-full h-full object-cover"
-            style={{ border: 'none' }}
-            allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+            src="https://player.vimeo.com/video/148751763?autoplay=1&muted=1&loop=1&background=1&controls=0"
+            className="w-full h-full"
+            style={{ 
+              border: 'none',
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              width: '100%',
+              height: '100%'
+            }}
+            allow="autoplay; fullscreen; picture-in-picture"
             allowFullScreen
             loading="eager"
+            onLoad={handleVideoLoad}
+            onError={handleVideoError}
           />
+          {/* Fallback background */}
+          <div className="absolute inset-0 bg-gradient-to-br from-[#080F1F] to-[#151A22] -z-10"></div>
         </div>
         <div className="absolute inset-0 z-20 flex items-center justify-center">
           <div className="text-center px-6">
