@@ -46,6 +46,7 @@ const About = () => {
               }}
               loading="lazy"
               src="https://adilo.bigcommand.com/watch/p5fL_BPv"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
               onLoad={handleVideoLoad}
               onError={handleVideoError}
