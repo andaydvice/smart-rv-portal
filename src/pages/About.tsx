@@ -1,4 +1,5 @@
-import React, { useEffect } from "react";
+
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import Layout from "@/components/layout/Layout";
 import { scrollToTop } from "@/utils/scrollToTop";
@@ -6,15 +7,21 @@ import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliat
 import { generateImagePlaceholder, deferOperation } from "@/utils/performance";
 
 const About = () => {
+  const [scriptLoaded, setScriptLoaded] = useState(false);
+  const [scriptError, setScriptError] = useState(false);
+
   useEffect(() => {
     console.log("About page - Scrolling to top");
     scrollToTop();
     
-    // Load Adilo script and initialize
+    // Load Adilo script with proper initialization
     const loadAdiloScript = () => {
+      console.log("🎬 Starting Adilo script load process");
+      
       // Remove existing script if any
       const existingScript = document.querySelector('script[src="https://cdn.bigcommand.com/dynamic-embed/js/inline.js"]');
       if (existingScript) {
+        console.log("🗑️ Removing existing Adilo script");
         existingScript.remove();
       }
       
@@ -23,18 +30,27 @@ const About = () => {
       script.async = true;
       
       script.onload = () => {
-        console.log("Adilo script loaded successfully");
-        // Give the script a moment to initialize
+        console.log("✅ Adilo script loaded successfully");
+        setScriptLoaded(true);
+        setScriptError(false);
+        
+        // Let Adilo handle its own initialization
         setTimeout(() => {
-          // Try to trigger any initialization function that might exist
-          if ((window as any).AdiloPlayer) {
-            (window as any).AdiloPlayer.init();
+          console.log("🎯 Adilo script should be ready for interaction");
+          // Check if any Adilo functions are available
+          if (typeof (window as any).AdiloPlayer !== 'undefined') {
+            console.log("🎬 AdiloPlayer is available:", (window as any).AdiloPlayer);
           }
-        }, 1000);
+          if (typeof (window as any).Adilo !== 'undefined') {
+            console.log("🎬 Adilo global is available:", (window as any).Adilo);
+          }
+        }, 500);
       };
       
       script.onerror = () => {
-        console.error("Failed to load Adilo script");
+        console.error("❌ Failed to load Adilo script");
+        setScriptError(true);
+        setScriptLoaded(false);
       };
       
       document.head.appendChild(script);
@@ -50,38 +66,49 @@ const About = () => {
     };
   }, []);
 
-  const handleVideoLoad = () => {
-    console.log("✅ Adilo video iframe loaded successfully");
-  };
-
-  const handleVideoError = () => {
-    console.error("❌ Adilo video iframe failed to load");
-  };
-
   return (
     <Layout>
-      {/* Hero Video Section */}
-      <div className="relative w-full h-[70vh] min-h-[500px] overflow-hidden -mt-16">
-        <div className="absolute inset-0 bg-black/30 z-10"></div>
-        <div className="relative w-full h-full z-0">
-          {/* Adilo JavaScript Video Embed */}
-          <div 
-            className="motion_popover w-full h-full relative"
-            data-id="osMojtq7" 
-            data-play-type="" 
-            style={{ width: '100%', height: '100%', paddingTop: '56.25%', position: 'relative' }} 
-            data-type="thumbnail"
-          ></div>
-          {/* Fallback background */}
-          <div className="absolute inset-0 bg-gradient-to-br from-[#080F1F] to-[#151A22] -z-10"></div>
+      {/* Hero Video Section - Simplified Structure */}
+      <div className="relative w-full h-[70vh] min-h-[500px] bg-gradient-to-br from-[#080F1F] to-[#151A22]">
+        {/* Video Container - No blocking overlays */}
+        <div className="absolute inset-0 w-full h-full">
+          {scriptLoaded && !scriptError ? (
+            <div 
+              className="motion_popover w-full h-full"
+              data-id="osMojtq7" 
+              data-play-type="" 
+              style={{ 
+                width: '100%', 
+                height: '100%', 
+                position: 'relative'
+              }} 
+              data-type="thumbnail"
+            />
+          ) : scriptError ? (
+            <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-[#080F1F] to-[#151A22]">
+              <div className="text-center text-white">
+                <p className="text-xl mb-4">Video temporarily unavailable</p>
+                <p className="text-white/70">Please refresh the page to try again</p>
+              </div>
+            </div>
+          ) : (
+            <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-[#080F1F] to-[#151A22]">
+              <div className="text-center text-white">
+                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white mx-auto mb-4"></div>
+                <p className="text-xl">Loading video...</p>
+              </div>
+            </div>
+          )}
         </div>
-        <div className="absolute inset-0 z-20 flex items-center justify-center">
+
+        {/* Title Overlay - Positioned to not block video interaction */}
+        <div className="absolute top-8 left-0 right-0 z-10 pointer-events-none">
           <div className="text-center px-6">
             <motion.h1 
               initial={{ y: -20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.5, duration: 0.8 }}
-              className="text-6xl md:text-7xl font-bold text-white mb-4 drop-shadow-2xl"
+              className="text-6xl md:text-7xl font-bold text-white mb-4 image-overlay-headline"
             >
               About Smart RV
             </motion.h1>
@@ -89,7 +116,7 @@ const About = () => {
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.7, duration: 0.8 }}
-              className="text-xl md:text-2xl text-white/90 drop-shadow-lg"
+              className="text-xl md:text-2xl text-white/90 image-overlay-headline"
             >
               The Future of Intelligent Travel
             </motion.p>
@@ -97,7 +124,7 @@ const About = () => {
         </div>
       </div>
 
-      
+      {/* Main Content */}
       <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -112,6 +139,7 @@ const About = () => {
             transition={{ delay: 0.3, duration: 0.5 }}
             className="space-y-12"
           >
+            {/* Mission Section */}
             <div className="bg-black/20 backdrop-blur-md p-8 rounded-xl border border-white/10 text-left">
               <h2 className="text-3xl font-bold text-white mb-6 text-left">Our Mission</h2>
               <p className="text-white/90 text-lg leading-relaxed text-left mb-4">
@@ -122,6 +150,7 @@ const About = () => {
               </p>
             </div>
 
+            {/* Innovation & Sustainability Grid */}
             <div className="grid md:grid-cols-2 gap-8">
               <div className="bg-black/20 backdrop-blur-md p-8 rounded-xl border border-white/10 text-left">
                 <h3 className="text-2xl font-bold text-white mb-4 text-left">Innovation First</h3>
@@ -144,6 +173,7 @@ const About = () => {
               </div>
             </div>
 
+            {/* Why Choose Smart RV */}
             <div className="bg-black/20 backdrop-blur-md p-8 rounded-xl border border-white/10">
               <h2 className="text-3xl font-bold text-white mb-6">Why Choose Smart RV</h2>
               <div className="grid md:grid-cols-3 gap-6">
@@ -173,6 +203,7 @@ const About = () => {
               </div>
             </div>
 
+            {/* Affiliate Partners Grid */}
             <OptimizedAffiliateGrid
               title="Our Trusted Partners"
               subtitle="We partner with industry-leading companies to provide you with the best RV products and services."
@@ -217,6 +248,7 @@ const About = () => {
               gridCols="3"
             />
 
+            {/* Call to Action */}
             <div className="bg-black/20 backdrop-blur-md p-8 rounded-xl border border-white/10 text-center">
               <h2 className="text-3xl font-bold text-white mb-4">Ready to Start Your Smart RV Journey?</h2>
               <p className="text-white/90 text-lg mb-6">
