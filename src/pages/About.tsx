@@ -10,14 +10,39 @@ const About = () => {
     console.log("About page - Scrolling to top");
     scrollToTop();
     
-    // Load Adilo script
-    const script = document.createElement('script');
-    script.src = 'https://cdn.bigcommand.com/dynamic-embed/js/inline.js';
-    script.async = true;
-    document.head.appendChild(script);
+    // Load Adilo script and initialize
+    const loadAdiloScript = () => {
+      // Remove existing script if any
+      const existingScript = document.querySelector('script[src="https://cdn.bigcommand.com/dynamic-embed/js/inline.js"]');
+      if (existingScript) {
+        existingScript.remove();
+      }
+      
+      const script = document.createElement('script');
+      script.src = 'https://cdn.bigcommand.com/dynamic-embed/js/inline.js';
+      script.async = true;
+      
+      script.onload = () => {
+        console.log("Adilo script loaded successfully");
+        // Give the script a moment to initialize
+        setTimeout(() => {
+          // Try to trigger any initialization function that might exist
+          if ((window as any).AdiloPlayer) {
+            (window as any).AdiloPlayer.init();
+          }
+        }, 1000);
+      };
+      
+      script.onerror = () => {
+        console.error("Failed to load Adilo script");
+      };
+      
+      document.head.appendChild(script);
+    };
+    
+    loadAdiloScript();
     
     return () => {
-      // Cleanup script when component unmounts
       const existingScript = document.querySelector('script[src="https://cdn.bigcommand.com/dynamic-embed/js/inline.js"]');
       if (existingScript) {
         existingScript.remove();
