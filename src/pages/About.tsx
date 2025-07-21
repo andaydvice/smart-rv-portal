@@ -25,32 +25,15 @@ const About = () => {
       <div className="relative w-full h-[70vh] min-h-[500px] overflow-hidden -mt-16">
         <div className="absolute inset-0 bg-black/30 z-10"></div>
         <div className="relative w-full h-full z-0">
-          {/* Adilo Video Embed */}
+          {/* Adilo JavaScript Video Embed */}
+          <script type="text/javascript" src="https://cdn.bigcommand.com/dynamic-embed/js/inline.js" async></script>
           <div 
-            className="w-full h-full relative"
-            style={{ 
-              width: '100%', 
-              height: 'null', 
-              position: 'relative', 
-              paddingTop: '52.67%' 
-            }}
-          >
-            <iframe 
-              title="Smart RV Introduction"
-              style={{ 
-                position: 'absolute', 
-                top: 0, 
-                left: 0, 
-                width: '100%', 
-                height: '100%' 
-              }}
-              loading="lazy"
-              src="https://adilo.bigcommand.com/watch/p5fL_BPv"
-              allowFullScreen
-              onLoad={handleVideoLoad}
-              onError={handleVideoError}
-            />
-          </div>
+            className="motion_popover w-full h-full relative"
+            data-id='osMojtq7' 
+            data-play-type='' 
+            style={{ width: '100%', height: '100%', paddingTop: '56.25%', position: 'relative' }} 
+            data-type='thumbnail'
+          ></div>
           {/* Fallback background */}
           <div className="absolute inset-0 bg-gradient-to-br from-[#080F1F] to-[#151A22] -z-10"></div>
         </div>
