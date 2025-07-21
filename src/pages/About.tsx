@@ -9,6 +9,20 @@ const About = () => {
   useEffect(() => {
     console.log("About page - Scrolling to top");
     scrollToTop();
+    
+    // Load Adilo script
+    const script = document.createElement('script');
+    script.src = 'https://cdn.bigcommand.com/dynamic-embed/js/inline.js';
+    script.async = true;
+    document.head.appendChild(script);
+    
+    return () => {
+      // Cleanup script when component unmounts
+      const existingScript = document.querySelector('script[src="https://cdn.bigcommand.com/dynamic-embed/js/inline.js"]');
+      if (existingScript) {
+        existingScript.remove();
+      }
+    };
   }, []);
 
   const handleVideoLoad = () => {
@@ -26,13 +40,12 @@ const About = () => {
         <div className="absolute inset-0 bg-black/30 z-10"></div>
         <div className="relative w-full h-full z-0">
           {/* Adilo JavaScript Video Embed */}
-          <script type="text/javascript" src="https://cdn.bigcommand.com/dynamic-embed/js/inline.js" async></script>
           <div 
             className="motion_popover w-full h-full relative"
-            data-id='osMojtq7' 
-            data-play-type='' 
+            data-id="osMojtq7" 
+            data-play-type="" 
             style={{ width: '100%', height: '100%', paddingTop: '56.25%', position: 'relative' }} 
-            data-type='thumbnail'
+            data-type="thumbnail"
           ></div>
           {/* Fallback background */}
           <div className="absolute inset-0 bg-gradient-to-br from-[#080F1F] to-[#151A22] -z-10"></div>
