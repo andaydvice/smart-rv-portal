@@ -11,10 +11,10 @@ const About = () => {
   const [scriptError, setScriptError] = useState(false);
 
   useEffect(() => {
-    console.log("About page - Scrolling to top");
+    console.log("🚀 About page loaded - Scrolling to top");
     scrollToTop();
     
-    // Load Adilo script with proper initialization
+    // Load Adilo script with enhanced debugging
     const loadAdiloScript = () => {
       console.log("🎬 Starting Adilo script load process");
       
@@ -34,17 +34,30 @@ const About = () => {
         setScriptLoaded(true);
         setScriptError(false);
         
-        // Let Adilo handle its own initialization
+        // Enhanced debugging and initialization
         setTimeout(() => {
-          console.log("🎯 Adilo script should be ready for interaction");
-          // Check if any Adilo functions are available
+          console.log("🔍 Checking Adilo initialization...");
+          console.log("Window object keys:", Object.keys(window));
+          
           if (typeof (window as any).AdiloPlayer !== 'undefined') {
-            console.log("🎬 AdiloPlayer is available:", (window as any).AdiloPlayer);
+            console.log("🎬 AdiloPlayer found:", (window as any).AdiloPlayer);
+          } else {
+            console.log("❌ AdiloPlayer not found");
           }
+          
           if (typeof (window as any).Adilo !== 'undefined') {
-            console.log("🎬 Adilo global is available:", (window as any).Adilo);
+            console.log("🎬 Adilo global found:", (window as any).Adilo);
+          } else {
+            console.log("❌ Adilo global not found");
           }
-        }, 500);
+          
+          // Check for any motion_popover elements
+          const videoElements = document.querySelectorAll('.motion_popover');
+          console.log("🎯 Found motion_popover elements:", videoElements.length);
+          videoElements.forEach((el, index) => {
+            console.log(`Element ${index}:`, el);
+          });
+        }, 1000);
       };
       
       script.onerror = () => {
@@ -54,6 +67,7 @@ const About = () => {
       };
       
       document.head.appendChild(script);
+      console.log("📜 Adilo script added to document head");
     };
     
     loadAdiloScript();
