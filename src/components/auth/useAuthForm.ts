@@ -30,10 +30,9 @@ export const useAuthForm = ({ onSuccess, onError }: UseAuthFormProps) => {
     }
   }, [password, isSignUp]);
 
-  // Handle OTP verification (2FA)
   const handleOtpVerify = async (code: string): Promise<boolean> => {
     try {
-      if (!pendingOtpSession) {
+      if (!pendingOtpSession || !email) {
         toast({
           title: "Error",
           description: "No active session for verification",
@@ -42,12 +41,23 @@ export const useAuthForm = ({ onSuccess, onError }: UseAuthFormProps) => {
         return false;
       }
 
-      // Verify the OTP code (in a real 2FA implementation, this would validate against the code)
-      // Here we're just simulating OTP verification since Supabase doesn't have a built-in OTP method
+      // Verify the OTP code using Supabase's built-in verification
+      const { error, data } = await supabase.auth.verifyOtp({
+        email: email,
+        token: code,
+        type: 'email'
+      });
       
-      // For a real implementation, you might call an API endpoint or use a third-party verification service
+      if (error) {
+        toast({
+          title: "Verification Failed",
+          description: "Invalid or expired verification code. Please try again.",
+          variant: "destructive",
+        });
+        return false;
+      }
       
-      // Simulate success - in a real app replace with actual verification
+      // Success
       setShowOtp(false);
       toast({
         title: "Authentication Successful",
@@ -58,6 +68,11 @@ export const useAuthForm = ({ onSuccess, onError }: UseAuthFormProps) => {
       return true;
     } catch (error) {
       console.error("OTP verification error:", error);
+      toast({
+        title: "Verification Error",
+        description: "An error occurred during verification. Please try again.",
+        variant: "destructive",
+      });
       return false;
     }
   };
@@ -128,22 +143,31 @@ export const useAuthForm = ({ onSuccess, onError }: UseAuthFormProps) => {
         // Note: Login attempt tracking is now handled after successful authentication
         // to ensure we have the user_id for proper security
 
-        // Check for 2FA
-        // Check for user_metadata.twofactor_enabled - if present, require OTP
+        // Check for 2FA - use Supabase's built-in email OTP
         const { user } = data || {};
-        // Supabase returns user_metadata on the user object
         const twofactorEnabled = user?.user_metadata?.twofactor_enabled;
 
         if (twofactorEnabled) {
-          // If 2FA enabled, trigger otp flow
-          // Supabase will have emailed OTP to user (or we can simulate)
-          setPendingOtpSession(data?.session || null);
-          setShowOtp(true);
-          toast({
-            title: "2FA Required",
-            description: "Please check your email for a one-time passcode.",
+          // Send OTP email using Supabase's built-in functionality
+          const { error: otpError } = await supabase.auth.signInWithOtp({
+            email: email,
+            options: {
+              shouldCreateUser: false // Don't create new user, just send OTP
+            }
           });
-          return;
+          
+          if (otpError) {
+            console.error("OTP send error:", otpError);
+            // Continue with normal login if OTP fails
+          } else {
+            setPendingOtpSession(data?.session || null);
+            setShowOtp(true);
+            toast({
+              title: "2FA Required",
+              description: "We've sent a verification code to your email. Please check your inbox.",
+            });
+            return;
+          }
         }
 
         toast({
