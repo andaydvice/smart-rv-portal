@@ -32,10 +32,10 @@ export const useAuthForm = ({ onSuccess, onError }: UseAuthFormProps) => {
 
   const handleOtpVerify = async (code: string): Promise<boolean> => {
     try {
-      if (!pendingOtpSession || !email) {
+      if (!email) {
         toast({
           title: "Error",
-          description: "No active session for verification",
+          description: "Email not found for verification",
           variant: "destructive",
         });
         return false;
@@ -57,13 +57,23 @@ export const useAuthForm = ({ onSuccess, onError }: UseAuthFormProps) => {
         return false;
       }
       
-      // Success
+      if (!data.session || !data.user) {
+        toast({
+          title: "Verification Failed",
+          description: "Failed to establish session after verification.",
+          variant: "destructive",
+        });
+        return false;
+      }
+      
+      // Success - user is now authenticated with 2FA
       setShowOtp(false);
+      setEmail("");
+      setPassword("");
       toast({
         title: "Authentication Successful",
-        description: "Your identity has been verified",
+        description: "You have been successfully logged in with 2FA.",
       });
-      
       onSuccess?.();
       return true;
     } catch (error) {
@@ -92,8 +102,9 @@ export const useAuthForm = ({ onSuccess, onError }: UseAuthFormProps) => {
     try {
       // Account lockout protection (only on Sign In, not on Sign Up)
       if (!isSignUp) {
-        // Step 1: Fetch login attempts
-        const loginAttempt = await fetchLoginAttempts(email);
+        // Note: Login attempt checking disabled for now due to security limitations
+        // In production, implement server-side rate limiting or IP-based restrictions
+        const loginAttempt = null;
 
         if (loginAttempt && loginAttempt.lockout_until && new Date(loginAttempt.lockout_until) > new Date()) {
           setError(
@@ -148,6 +159,9 @@ export const useAuthForm = ({ onSuccess, onError }: UseAuthFormProps) => {
         const twofactorEnabled = user?.user_metadata?.twofactor_enabled;
 
         if (twofactorEnabled) {
+          // Sign out the user first, then require OTP verification
+          await supabase.auth.signOut();
+          
           // Send OTP email using Supabase's built-in functionality
           const { error: otpError } = await supabase.auth.signInWithOtp({
             email: email,
@@ -158,16 +172,18 @@ export const useAuthForm = ({ onSuccess, onError }: UseAuthFormProps) => {
           
           if (otpError) {
             console.error("OTP send error:", otpError);
-            // Continue with normal login if OTP fails
-          } else {
-            setPendingOtpSession(data?.session || null);
-            setShowOtp(true);
-            toast({
-              title: "2FA Required",
-              description: "We've sent a verification code to your email. Please check your inbox.",
-            });
+            setError("Failed to send verification code. Please try again.");
             return;
           }
+          
+          // Store email for OTP verification (don't store session yet)
+          setPendingOtpSession(null);
+          setShowOtp(true);
+          toast({
+            title: "2FA Required",
+            description: "We've sent a verification code to your email. Please check your inbox.",
+          });
+          return;
         }
 
         toast({

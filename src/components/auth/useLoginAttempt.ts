@@ -12,18 +12,37 @@ type LoginAttemptData = {
 };
 
 export const useLoginAttempt = () => {
-  // Fetch login attempts for current user
-  const fetchLoginAttempts = async (email: string): Promise<LoginAttemptData | null> => {
-    // For security, we can only fetch login attempts for authenticated users
-    // This will be called after sign-in attempt, so we check by email first
-    // Note: This is a temporary approach - in production, you'd want to handle this differently
-    const { data, error } = await supabase
-      .from("login_attempts")
-      .select("*")
-      .eq("user_id", "auth.uid()")  // This will be replaced with actual user_id after auth
-      .single();
-    if (error) return null;
-    return data;
+  // Fetch login attempts for a specific user (only for authenticated requests)
+  const fetchLoginAttempts = async (user_id: string): Promise<LoginAttemptData | null> => {
+    try {
+      const { data, error } = await supabase
+        .from("login_attempts")
+        .select("*")
+        .eq("user_id", user_id)
+        .single();
+      
+      if (error) {
+        console.log("No login attempts found for user:", user_id);
+        return null;
+      }
+      return data;
+    } catch (err) {
+      console.error("Error fetching login attempts:", err);
+      return null;
+    }
+  };
+
+  // Check if user is currently locked out (used before authentication)
+  const checkUserLockout = async (email: string): Promise<{ isLockedOut: boolean; lockoutUntil: Date | null }> => {
+    try {
+      // Note: This is a security limitation - we can't easily check lockout by email without authentication
+      // In production, consider using a server-side check or rate limiting by IP
+      console.log("Checking lockout status for email:", email);
+      return { isLockedOut: false, lockoutUntil: null };
+    } catch (err) {
+      console.error("Error checking user lockout:", err);
+      return { isLockedOut: false, lockoutUntil: null };
+    }
   };
 
   // Set login attempts for authenticated user
@@ -48,6 +67,7 @@ export const useLoginAttempt = () => {
 
   return {
     fetchLoginAttempts,
+    checkUserLockout,
     setLoginAttempts,
     LOCKOUT_THRESHOLD,
     LOCKOUT_MINUTES,

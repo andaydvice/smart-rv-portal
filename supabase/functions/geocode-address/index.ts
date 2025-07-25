@@ -1,5 +1,6 @@
 
 import { serve } from 'https://deno.land/std@0.168.0/http/server.ts'
+import { createClient } from 'https://esm.sh/@supabase/supabase-js@2'
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -13,6 +14,16 @@ serve(async (req) => {
   }
 
   try {
+    // Get authorization header
+    const authHeader = req.headers.get('Authorization');
+    
+    // Initialize Supabase client for authentication
+    const supabaseUrl = Deno.env.get('SUPABASE_URL')!;
+    const supabaseKey = Deno.env.get('SUPABASE_ANON_KEY')!;
+    const supabase = createClient(supabaseUrl, supabaseKey, {
+      global: { headers: { Authorization: authHeader } }
+    });
+
     const mapboxToken = Deno.env.get('MAPBOX_TOKEN');
     console.log('Getting MAPBOX token...');
     
@@ -29,9 +40,23 @@ serve(async (req) => {
 
     const body = await req.json();
     
-    // Handle token requests
+    // Handle token requests - SECURED - require authentication
     if (body.type === 'getToken') {
-      console.log('Returning valid Mapbox token');
+      // Verify user is authenticated before returning token
+      const { data: { user }, error: authError } = await supabase.auth.getUser();
+      
+      if (authError || !user) {
+        console.log('Unauthorized token request');
+        return new Response(
+          JSON.stringify({ error: 'Authentication required' }),
+          { 
+            headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+            status: 401,
+          }
+        );
+      }
+      
+      console.log('Returning valid Mapbox token to authenticated user:', user.id);
       return new Response(
         JSON.stringify({ token: mapboxToken }),
         { 
