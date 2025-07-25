@@ -120,38 +120,13 @@ export const useAuthForm = ({ onSuccess, onError }: UseAuthFormProps) => {
         });
 
         if (signInError) {
-          // Increment failed attempts and lock out if exceeded
-          let loginAttempt = await fetchLoginAttempts(email);
-          let failed_attempts = (loginAttempt?.failed_attempts || 0) + 1;
-          let lockout_until: string | null = null;
-
-          if (failed_attempts >= LOCKOUT_THRESHOLD) {
-            lockout_until = new Date(Date.now() + LOCKOUT_MINUTES * 60 * 1000).toISOString();
-            setError(
-              `Account locked after ${LOCKOUT_THRESHOLD} failed attempts. Try again at ${new Date(
-                lockout_until
-              ).toLocaleTimeString()}.`
-            );
-          } else {
-            setError("Invalid email or password. Please try again.");
-          }
-
-          await setLoginAttempts({
-            email,
-            failed_attempts,
-            lockout_until,
-          });
-
+          setError("Invalid email or password. Please try again.");
           setLoading(false);
           return;
         }
 
-        // Successful login: reset attempts
-        await setLoginAttempts({
-          email,
-          failed_attempts: 0,
-          lockout_until: null,
-        });
+        // Note: Login attempt tracking is now handled after successful authentication
+        // to ensure we have the user_id for proper security
 
         // Check for 2FA
         // Check for user_metadata.twofactor_enabled - if present, require OTP

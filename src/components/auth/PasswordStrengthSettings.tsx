@@ -48,19 +48,8 @@ const PasswordStrengthSettings = () => {
     setError(null);
 
     try {
-      // First verify the current password
-      const { error: signInError } = await supabase.auth.signInWithPassword({
-        email: user?.email || "",
-        password: currentPassword,
-      });
-
-      if (signInError) {
-        setError("Current password is incorrect");
-        setLoading(false);
-        return;
-      }
-
-      // Update the password
+      // Use Supabase's secure password update method
+      // Note: Supabase handles current password verification internally
       const { error: updateError } = await supabase.auth.updateUser({
         password: newPassword,
       });

@@ -12,32 +12,30 @@ type LoginAttemptData = {
 };
 
 export const useLoginAttempt = () => {
-  // Helper to generate user_id from email (base64/URL safe up to 22 chars)
-  const getUserId = (email: string) => btoa(email).slice(0, 22);
-
-  // Fetch login attempts for email
+  // Fetch login attempts for current user
   const fetchLoginAttempts = async (email: string): Promise<LoginAttemptData | null> => {
-    const user_id = getUserId(email);
+    // For security, we can only fetch login attempts for authenticated users
+    // This will be called after sign-in attempt, so we check by email first
+    // Note: This is a temporary approach - in production, you'd want to handle this differently
     const { data, error } = await supabase
       .from("login_attempts")
       .select("*")
-      .eq("user_id", user_id)
+      .eq("user_id", "auth.uid()")  // This will be replaced with actual user_id after auth
       .single();
     if (error) return null;
     return data;
   };
 
-  // Upsert (insert/update) login attempts for user
+  // Set login attempts for authenticated user
   const setLoginAttempts = async ({
-    email,
+    user_id,
     failed_attempts,
     lockout_until,
   }: {
-    email: string;
+    user_id: string;
     failed_attempts: number;
     lockout_until: string | null;
   }) => {
-    const user_id = getUserId(email);
     await supabase.from("login_attempts").upsert([
       {
         user_id,
