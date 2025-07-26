@@ -72,9 +72,6 @@ const Index = () => {
                 { partner: 'torklift' as const, title: 'Towing Accessories', description: 'Premium tie-downs and RV accessories trusted by professionals' }
               ]}
               gridCols="4"
-              videoId="smart-rv-lifestyle"
-              videoTitle="Smart RV Living: Complete Solutions Demo"
-              priority="high"
             />
           </div>
         </section>
