@@ -19,6 +19,9 @@ export const HomepageAffiliateSection = () => {
             { partner: 'nomadinternet' as const, title: 'Nomad Internet', description: 'Unlimited 5G internet plans designed specifically for full time RV travelers and remote workers', buttonText: 'Get Connected' }
           ]}
           gridCols="3"
+          videoId="homepage-premium-solutions"
+          videoTitle="Premium RV Solutions Overview"
+          priority="high"
         />
         
         <div className="text-center mt-8">
