@@ -33,7 +33,6 @@ const Calculators = () => {
 
   return (
     <Layout>
-      <Navbar />
       <div className="pt-16 flex-grow">
         <CalculatorHeader />
         <CalculatorIntro />
