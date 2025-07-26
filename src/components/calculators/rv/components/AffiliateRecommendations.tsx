@@ -59,6 +59,9 @@ const AffiliateRecommendations = ({ rvType, tripDistance, days, totalCost }: Aff
         partners={getPartners()}
         gridCols="3"
         className="bg-[#091020] border-gray-700"
+        videoId="rv-trip-planning"
+        videoTitle="Smart RV Trip Planning Demo"
+        priority="high"
       />
     </div>
   );

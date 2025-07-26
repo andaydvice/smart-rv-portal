@@ -127,6 +127,9 @@ const TowingAffiliateRecommendations = () => {
         subtitle="Prevent costly breakdowns and dangerous situations with professional towing safety solutions:"
         partners={towingRecommendations}
         gridCols="2"
+        videoId="towing-safety-demo"
+        videoTitle="Towing Safety Technology Demo"
+        priority="high"
       />
 
       <OptimizedAffiliateGrid
@@ -134,6 +137,9 @@ const TowingAffiliateRecommendations = () => {
         subtitle="Upgrade to professional grade towing systems and premium accessories trusted by RV professionals:"
         partners={professionalTowingEquipment}
         gridCols="3"
+        videoId="blueox-towing-demo"
+        videoTitle="Blue Ox Professional Towing Safety Demo"
+        priority="high"
       />
       
       <OptimizedAffiliateGrid
