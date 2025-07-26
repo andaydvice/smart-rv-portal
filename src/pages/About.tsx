@@ -1,118 +1,32 @@
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { motion } from "framer-motion";
 import Layout from "@/components/layout/Layout";
 import { scrollToTop } from "@/utils/scrollToTop";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
-import { generateImagePlaceholder, deferOperation } from "@/utils/performance";
 
 const About = () => {
-  const [scriptLoaded, setScriptLoaded] = useState(false);
-  const [scriptError, setScriptError] = useState(false);
-
   useEffect(() => {
     console.log("🚀 About page loaded - Scrolling to top");
     scrollToTop();
-    
-    // Load Adilo script with enhanced debugging
-    const loadAdiloScript = () => {
-      console.log("🎬 Starting Adilo script load process");
-      
-      // Remove existing script if any
-      const existingScript = document.querySelector('script[src="https://cdn.bigcommand.com/dynamic-embed/js/inline.js"]');
-      if (existingScript) {
-        console.log("🗑️ Removing existing Adilo script");
-        existingScript.remove();
-      }
-      
-      const script = document.createElement('script');
-      script.src = 'https://cdn.bigcommand.com/dynamic-embed/js/inline.js';
-      script.async = true;
-      
-      script.onload = () => {
-        console.log("✅ Adilo script loaded successfully");
-        setScriptLoaded(true);
-        setScriptError(false);
-        
-        // Enhanced debugging and initialization
-        setTimeout(() => {
-          console.log("🔍 Checking Adilo initialization...");
-          console.log("Window object keys:", Object.keys(window));
-          
-          if (typeof (window as any).AdiloPlayer !== 'undefined') {
-            console.log("🎬 AdiloPlayer found:", (window as any).AdiloPlayer);
-          } else {
-            console.log("❌ AdiloPlayer not found");
-          }
-          
-          if (typeof (window as any).Adilo !== 'undefined') {
-            console.log("🎬 Adilo global found:", (window as any).Adilo);
-          } else {
-            console.log("❌ Adilo global not found");
-          }
-          
-          // Check for any motion_popover elements
-          const videoElements = document.querySelectorAll('.motion_popover');
-          console.log("🎯 Found motion_popover elements:", videoElements.length);
-          videoElements.forEach((el, index) => {
-            console.log(`Element ${index}:`, el);
-          });
-        }, 1000);
-      };
-      
-      script.onerror = () => {
-        console.error("❌ Failed to load Adilo script");
-        setScriptError(true);
-        setScriptLoaded(false);
-      };
-      
-      document.head.appendChild(script);
-      console.log("📜 Adilo script added to document head");
-    };
-    
-    loadAdiloScript();
-    
-    return () => {
-      const existingScript = document.querySelector('script[src="https://cdn.bigcommand.com/dynamic-embed/js/inline.js"]');
-      if (existingScript) {
-        existingScript.remove();
-      }
-    };
   }, []);
 
   return (
     <Layout>
       {/* Hero Video Section - Simplified Structure */}
       <div className="relative w-full h-[70vh] min-h-[500px] bg-gradient-to-br from-[#080F1F] to-[#151A22]">
-        {/* Video Container - No blocking overlays */}
+        {/* Video Container - Simple Iframe Embed */}
         <div className="absolute inset-0 w-full h-full">
-          {scriptLoaded && !scriptError ? (
-            <div 
-              className="motion_popover w-full h-full"
-              data-id="osMojtq7" 
-              data-play-type="" 
-              style={{ 
-                width: '100%', 
-                height: '100%', 
-                position: 'relative'
-              }} 
-              data-type="thumbnail"
+          <div className="w-full h-full relative" style={{ paddingTop: '56.25%' }}>
+            <iframe 
+              className="absolute top-0 left-0 w-full h-full"
+              loading='lazy'
+              src="https://adilo.bigcommand.com/watch/osMojtq7"
+              frameBorder="0"
+              allowFullScreen
+              scrolling="no"
             />
-          ) : scriptError ? (
-            <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-[#080F1F] to-[#151A22]">
-              <div className="text-center text-white">
-                <p className="text-xl mb-4">Video temporarily unavailable</p>
-                <p className="text-white/70">Please refresh the page to try again</p>
-              </div>
-            </div>
-          ) : (
-            <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-[#080F1F] to-[#151A22]">
-              <div className="text-center text-white">
-                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white mx-auto mb-4"></div>
-                <p className="text-xl">Loading video...</p>
-              </div>
-            </div>
-          )}
+          </div>
         </div>
 
         {/* Title Overlay - Positioned to not block video interaction */}
