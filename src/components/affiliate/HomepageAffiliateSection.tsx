@@ -9,7 +9,7 @@ export const HomepageAffiliateSection = () => {
       <div className="max-w-6xl mx-auto">
         <OptimizedAffiliateGrid
           title="Premium Smart RV Solutions & Services"
-          subtitle="Discover top-rated smart RV products and services that enhance your experience with proven results"
+          subtitle="Discover top-rated Smart RV products and services that enhance your experience with proven results"
           partners={[
             { partner: 'rvlife' as const, title: 'RV Life Pro', description: 'Professional smart RV trip planning with RV safe GPS navigation and comprehensive campground database', buttonText: 'Get RV Life Pro' },
             { partner: 'rvtcom' as const, title: 'RVT Marketplace', description: 'Premium smart RV marketplace connecting buyers with verified professional dealers nationwide', buttonText: 'Browse Premium Smart RVs' },
@@ -20,7 +20,7 @@ export const HomepageAffiliateSection = () => {
           ]}
           gridCols="3"
           videoId="homepage-premium-solutions"
-          videoTitle="Premium RV Solutions Overview"
+          videoTitle="Premium Smart RV Solutions Overview"
           priority="high"
         />
         

@@ -42,7 +42,7 @@ const DesktopSearch: React.FC<DesktopSearchProps> = ({
           type="text"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          placeholder="Search RV resources..." 
+          placeholder="Search Smart RV resources..." 
           className="h-9 w-60 rounded-md border border-gray-700 bg-[#131a2a] text-sm px-9 py-2 text-white placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-[#5B9BD5] z-50"
           onKeyDown={(e) => {
             if (e.key === 'Enter') {

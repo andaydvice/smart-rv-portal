@@ -193,8 +193,8 @@ const RVEmergencyCenter = () => {
   return (
     <Layout>
       <Helmet>
-        <title>RV Emergency Preparedness Center - Safety & Emergency Services</title>
-        <meta name="description" content="Complete RV emergency preparedness guide. Roadside assistance, emergency equipment, safety services, and emergency response resources for RV travelers." />
+        <title>Smart RV Emergency Preparedness Center</title>
+        <meta name="description" content="Complete Smart RV emergency preparedness guide. Roadside assistance, emergency equipment, safety services, and emergency response resources for Smart RV travelers." />
       </Helmet>
 
       <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 text-white">
@@ -204,11 +204,11 @@ const RVEmergencyCenter = () => {
             <div className="flex justify-center items-center gap-3 mb-6">
               <Shield className="h-12 w-12 text-red-400" />
               <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-red-400 to-orange-400 bg-clip-text text-transparent">
-                RV Emergency Center
+                Smart RV Emergency Center
               </h1>
             </div>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-              Stay safe on the road with comprehensive emergency preparedness resources, professional services, and essential safety equipment for every RV adventure.
+              Stay safe on the road with comprehensive emergency preparedness resources, professional services, and essential safety equipment for every Smart RV adventure.
             </p>
           </div>
 

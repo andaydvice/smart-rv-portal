@@ -43,7 +43,7 @@ const MobileSearchPanel: React.FC<MobileSearchPanelProps> = ({
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search RV resources..."
+            placeholder="Search Smart RV resources..."
             className="flex-1 bg-transparent border-none text-white text-sm p-1 focus:outline-none"
             ref={inputRef}
           />

@@ -27,7 +27,7 @@ const Blog = () => {
     <Layout>
       <Helmet>
         <title>Smart RV Blog - Latest RV Tech & Travel Tips</title>
-        <meta name="description" content="Discover the latest in RV technology, travel tips, and smart living solutions for modern RV enthusiasts." />
+        <meta name="description" content="Discover the latest in Smart RV technology, travel tips, and smart living solutions for modern Smart RV enthusiasts." />
       </Helmet>
       
       <div className="w-full py-8">

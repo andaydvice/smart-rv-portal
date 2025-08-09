@@ -20,7 +20,7 @@ export const SplineSceneBasic = () => {
             Smart RV Blog
           </h1>
           <p className="mt-4 text-neutral-300 max-w-lg">
-            Discover the latest insights, tips, and innovations for your connected RV lifestyle
+            Discover the latest insights, tips, and innovations for your Smart RV lifestyle
           </p>
         </div>
 

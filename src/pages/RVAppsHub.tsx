@@ -99,8 +99,8 @@ const RVAppsHub = () => {
   return (
     <Layout>
       <Helmet>
-        <title>Essential RV Apps & Tools Hub - Smart RV Technology Guide</title>
-        <meta name="description" content="Discover the best mobile apps and digital tools for RV travel. GPS navigation, campsite finders, power monitoring, and connectivity solutions." />
+        <title>Essential Smart RV Apps & Tools Hub</title>
+        <meta name="description" content="Discover the best mobile apps and digital tools for Smart RV travel. GPS navigation, campsite finders, power monitoring, and connectivity solutions." />
       </Helmet>
 
       <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 text-white">
@@ -110,11 +110,11 @@ const RVAppsHub = () => {
             <div className="flex justify-center items-center gap-3 mb-6">
               <Smartphone className="h-12 w-12 text-[#5B9BD5]" />
               <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-[#5B9BD5] to-[#4B8FE3] bg-clip-text text-transparent">
-                Essential RV Apps & Tools
+                Essential Smart RV Apps & Tools
               </h1>
             </div>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-              Transform your smartphone into the ultimate RV command center with our curated collection of apps and digital tools designed specifically for the modern RVer.
+              Transform your smartphone into the ultimate Smart RV command center with our curated collection of apps and digital tools designed specifically for the modern Smart RVer.
             </p>
           </div>
 

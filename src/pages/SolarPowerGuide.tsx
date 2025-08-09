@@ -121,8 +121,8 @@ const SolarPowerGuide = () => {
   return (
     <Layout>
       <Helmet>
-        <title>RV Solar Power Guide - Complete Solar Shopping & Installation Guide</title>
-        <meta name="description" content="Complete guide to RV solar power systems. Compare panels, batteries, and complete kits. Calculate your solar needs and find the best deals on solar equipment." />
+        <title>Smart RV Solar Power Guide</title>
+        <meta name="description" content="Complete guide to Smart RV solar power systems. Compare panels, batteries, and kits. Calculate your solar needs and find the best deals on equipment." />
       </Helmet>
 
       <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 text-white">
@@ -132,11 +132,11 @@ const SolarPowerGuide = () => {
             <div className="flex justify-center items-center gap-3 mb-6">
               <Sun className="h-12 w-12 text-yellow-400" />
               <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-yellow-400 to-orange-400 bg-clip-text text-transparent">
-                RV Solar Power Guide
+                Smart RV Solar Power Guide
               </h1>
             </div>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-              Harness the power of the sun for unlimited RV adventures. Complete shopping guide, installation tips, and expert recommendations for RV solar systems.
+              Harness the power of the sun for unlimited Smart RV adventures. Complete shopping guide, installation tips, and expert recommendations for Smart RV solar systems.
             </p>
           </div>
 
