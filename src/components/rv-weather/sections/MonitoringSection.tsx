@@ -15,7 +15,7 @@ const MonitoringSection = () => {
         <div className="relative overflow-hidden rounded-lg shadow-xl w-full">
           <img 
             src="/lovable-uploads/846b5be5-043e-4645-a3d9-39614d63342c.png"
-            alt="Person monitoring weather radar on computer"
+            alt="Smart RV weather radar on computer"
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-black/30"></div>
@@ -35,7 +35,7 @@ const MonitoringSection = () => {
               </div>
               
               <div className="p-4 rounded-lg border border-[#1a202c] bg-[#080F1F]/70 w-full">
-                <h5 className="font-semibold text-[#5B9BD5] text-center mb-2">RV Specific Weather Tools</h5>
+                <h5 className="font-semibold text-[#5B9BD5] text-center mb-2">Smart RV Specific Weather Tools</h5>
                 <ul className="w-full space-y-2 text-left text-[#E2E8FF] list-disc pl-5">
                   <li className="text-left">RV Weather - Weather for routes specifically</li>
                   <li className="text-left">Wind Alerts - Warnings for wind/driving conditions</li>

@@ -5,7 +5,7 @@ const PreparednessTips = () => {
   return <section className="py-16 bg-deeper-background">
       <div className="container mx-auto px-4">
         <h2 className="text-3xl md:text-4xl font-bold text-white font-playfair text-center mb-4">
-          Weather Hazards in the RVers
+          Weather Preparedness for Smart RVers
         </h2>
         <div className="w-24 h-1 bg-ocean-blue mx-auto mb-12"></div>
         

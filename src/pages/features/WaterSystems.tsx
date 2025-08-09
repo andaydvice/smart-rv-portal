@@ -24,6 +24,10 @@ const WaterSystems = () => {
             <h1 className="text-4xl font-bold text-white">Smart Water Systems</h1>
           </div>
 
+          <p className="text-gray-300 max-w-3xl mb-6">
+            Smart RV water systems provide real time monitoring, filtration, and intelligent conservation for cleaner, safer travel.
+          </p>
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
             <div className="bg-gray-800/50 p-8 rounded-lg border border-gray-700 flex flex-col">
               <div className="h-[72px]">
@@ -32,7 +36,7 @@ const WaterSystems = () => {
               <div className="relative aspect-video mb-6">
                 <img 
                   src="/lovable-uploads/3af8fc31-188d-477e-8ab5-b94bd8c4ec77.png"
-                  alt="Fresh Water Management System"
+                  alt="Smart RV Fresh Water Management System"
                   className="absolute inset-0 w-full h-full object-cover rounded-lg"
                 />
               </div>
@@ -52,7 +56,7 @@ const WaterSystems = () => {
               <div className="relative aspect-video mb-6">
                 <img 
                   src="/lovable-uploads/85e4d897-10d7-4f90-b231-597f7fcfdffc.png"
-                  alt="Waste Water Management System"
+                  alt="Smart RV Waste Water Management System"
                   className="absolute inset-0 w-full h-full object-cover rounded-lg"
                 />
               </div>

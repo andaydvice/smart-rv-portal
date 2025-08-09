@@ -15,7 +15,7 @@ const HeroSection = () => {
       {/* MODIFIED: Replaced img tag with PreloadedHeaderImage component */}
       <PreloadedHeaderImage
         src="/lovable-uploads/b1b0e81e-825c-4f31-aaab-5d7c50e67122.png"
-        alt="Woman reading RV Weather Guide book with RV in background"
+        alt="Woman reading Smart RV Weather Guide book with Smart RV in background"
         className="absolute inset-0 w-full h-full object-cover"
         width={1920} // Representative width for preloading and placeholder
         height={800}  // Representative max height for preloading and placeholder

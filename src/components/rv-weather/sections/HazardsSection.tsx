@@ -13,14 +13,14 @@ const HazardsSection = () => {
       {/* Section heading */}
       <div className="flex items-center gap-2 mb-8">
         <Wind className="h-8 w-8 text-[#F59E0B]" />
-        <TypographyH2 className="border-none text-white text-3xl">Weather Hazards for RV Travel</TypographyH2>
+        <TypographyH2 className="border-none text-white text-3xl">Weather Hazards for Smart RV Travel</TypographyH2>
       </div>
       
       {/* Hero image with reduced spacing */}
       <div className="mb-8 relative mt-12">
         <LazyImage
           src="/lovable-uploads/cf3a586f-ae68-4a54-953f-b83505056d0e.png"
-          alt="RV in stormy weather with lightning strikes"
+          alt="Smart RV in stormy weather with lightning strikes"
           className="rounded-lg shadow-lg w-full object-cover max-h-[500px]"
           blurDataURL="/lovable-uploads/cf3a586f-ae68-4a54-953f-b83505056d0e.png"
         />

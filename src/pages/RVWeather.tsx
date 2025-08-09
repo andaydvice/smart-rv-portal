@@ -145,7 +145,7 @@ const RVWeather = () => {
           <section className="container mx-auto px-4 py-12">
             <OptimizedAffiliateGrid
               title="Essential Weather Tools & Services"
-              subtitle="Get accurate forecasts, emergency assistance, and professional weather monitoring for safer RV travels."
+              subtitle="Get accurate forecasts, emergency assistance, and professional weather monitoring for safer Smart RV travels."
               partners={[
                 {
                   partner: 'goodsam',

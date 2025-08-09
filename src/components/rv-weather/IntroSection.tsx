@@ -8,12 +8,12 @@ const IntroSection = () => {
     <section id="weather-matters" className="py-6 px-4 rounded-lg bg-gradient-to-b from-[#131a2a]/50 to-[#080F1F]/50 border border-[#1a202c]/40 backdrop-blur-sm">
       <div className="flex items-center gap-2 mb-4">
         <Cloud className="h-7 w-7 text-[#5B9BD5]" />
-        <TypographyH2 className="border-none text-white text-left text-3xl font-playfair">Why Weather Matters for RV Travel</TypographyH2>
+        <TypographyH2 className="border-none text-white text-left text-3xl font-playfair">Why Weather Matters for Smart RV Travel</TypographyH2>
       </div>
       
       <TypographyP className="text-[#E2E8FF] text-base sm:text-lg text-left mb-8">
         Weather directly affects your safety on the road, comfort at your campsite and the longevity of your vehicle. 
-        Understanding how to track, plan for, and respond to weather is essential for every RV owner.
+        Understanding how to track, plan for, and respond to weather is essential for every smart RV owner.
       </TypographyP>
       
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -60,7 +60,7 @@ const IntroSection = () => {
       <div className="mt-8">
         <img 
           src="/lovable-uploads/c1732ddf-458c-4eeb-b6ad-7a817ae9ba17.png" 
-          alt="Person planning an RV trip while checking weather conditions" 
+          alt="Person planning a Smart RV trip while checking weather conditions" 
           className="rounded-lg shadow-lg w-full object-cover max-h-[400px]"
         />
       </div>
