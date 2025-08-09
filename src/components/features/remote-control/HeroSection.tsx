@@ -17,7 +17,7 @@ const HeroSection = () => {
         <div className="container h-full mx-auto px-6 relative">
           <div className="absolute top-[15%] left-0 right-0 mx-auto max-w-md text-center">
             <h1 className="text-5xl font-bold text-white mb-4 image-overlay-headline">
-              Remote Control
+              Smart RV Remote Control
             </h1>
             <p className="text-xl text-white image-overlay-headline">
               Take command of your RV systems from anywhere

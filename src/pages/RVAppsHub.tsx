@@ -225,7 +225,7 @@ const RVAppsHub = () => {
           />
 
           {/* Affiliate Disclosure */}
-          <AffiliateDisclosure />
+          <AffiliateDisclosure compact />
         </Container>
       </div>
     </Layout>

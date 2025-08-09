@@ -64,7 +64,7 @@ const Index = () => {
         <section className="py-16 px-4 bg-gradient-to-br from-connectivity-darkBg to-[#0A0F1A]">
           <div className="max-w-6xl mx-auto">
             <OptimizedAffiliateGrid
-              title="Complete RV Solutions Ecosystem"
+              title="Complete Smart RV Solutions Ecosystem"
               subtitle="Everything you need for smart RV living - from solar power to connectivity, all with proven quality and reliability."
               partners={[
                 { partner: 'renogy' as const, title: 'Solar Power Leader', description: 'Most trusted solar brand with complete RV kits and proven reliability' },

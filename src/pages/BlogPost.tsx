@@ -109,8 +109,8 @@ const BlogPost = () => {
           
           {/* Affiliate product recommendations */}
           <OptimizedAffiliateGrid
-            title="Recommended RV Resources"
-            subtitle="Discover products and services that enhance your RV lifestyle and adventures."
+            title="Recommended Smart RV Resources"
+            subtitle="Discover products and services that enhance your smart RV lifestyle and adventures."
             partners={[
               { partner: 'rvlife', title: 'RV Life Resources', description: 'Trip planning and RV lifestyle guides' },
               { partner: 'technorv', title: 'RV Technology', description: 'Latest RV tech and equipment reviews' },
@@ -120,7 +120,7 @@ const BlogPost = () => {
           />
           
           {/* Affiliate disclosure */}
-          <AffiliateDisclosure />
+          <AffiliateDisclosure compact />
         </div>
         <Footer2 
           links={footerLinks}

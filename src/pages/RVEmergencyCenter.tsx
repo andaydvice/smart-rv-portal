@@ -343,7 +343,7 @@ const RVEmergencyCenter = () => {
           />
 
           {/* Affiliate Disclosure */}
-          <AffiliateDisclosure />
+          <AffiliateDisclosure compact />
         </Container>
       </div>
     </Layout>

@@ -9,37 +9,37 @@ interface HighValueAffiliateRecommendationsProps {
 }
 
 const HighValueAffiliateRecommendations: React.FC<HighValueAffiliateRecommendationsProps> = ({
-  title = "💰 Maximum Value RV Solutions",
-  subtitle = "Our highest-performing affiliate partners with the best commissions and longest cookie durations:",
+  title = "💡 Maximum Value Smart RV Solutions",
+  subtitle = "Top-rated brands and solutions known for reliability, support, and real-world performance:",
   focusCategory = 'all'
 }) => {
   const getHighValuePartners = () => {
     const solarPartners = [
-      { partner: 'solardirect' as const, title: 'Solar Direct - 365 Day Cookie', description: 'Industry-leading 365-day tracking with reliable 5% commissions on complete solar systems' },
-      { partner: 'a1solarstore' as const, title: 'A1 Solar - Up to $250/Sale', description: 'Premium solar equipment with up to $250 commission per sale and 180-day cookie' },
-      { partner: 'renogy' as const, title: 'Renogy Solar Kits', description: 'Most trusted solar brand with 6% commission and proven conversion rates' }
+      { partner: 'solardirect' as const, title: 'Solar Direct', description: 'Complete RV solar systems with industry-leading warranties and expert support' },
+      { partner: 'a1solarstore' as const, title: 'A1 Solar', description: 'Premium solar equipment and guidance to build efficient RV solar setups' },
+      { partner: 'renogy' as const, title: 'Renogy Solar Kits', description: 'Trusted solar brand with complete RV kits and reliable performance' }
     ];
 
     const techPartners = [
-      { partner: 'rvlife' as const, title: 'RV Life Pro - 25% Commission', description: 'Highest percentage commission at 25% with 170-day cookie duration' },
-      { partner: 'dakotalithium' as const, title: 'Dakota Lithium Batteries', description: 'Premium LiFePO4 batteries with 7% commission and strong customer loyalty' },
-      { partner: 'guta' as const, title: 'GUTA TPMS Systems', description: 'Affordable safety monitoring with solid 10% commission rates' }
+      { partner: 'rvlife' as const, title: 'RV Life Pro', description: 'RV-safe GPS, trip planning, and campground data trusted by full-time travelers' },
+      { partner: 'dakotalithium' as const, title: 'Dakota Lithium Batteries', description: 'Premium LiFePO4 batteries with long warranties and cold-weather performance' },
+      { partner: 'guta' as const, title: 'GUTA TPMS Systems', description: 'Reliable tire monitoring systems for safer travel' }
     ];
 
     const towingPartners = [
-      { partner: 'blueox' as const, title: 'Blue Ox - 10% Commission', description: 'Professional towing systems with excellent 10% commission structure' },
-      { partner: 'torklift' as const, title: 'Torklift Accessories', description: 'Premium RV accessories with 8% commission and strong brand reputation' }
+      { partner: 'blueox' as const, title: 'Blue Ox Towing', description: 'Professional towing systems and accessories trusted by experts' },
+      { partner: 'torklift' as const, title: 'Torklift Accessories', description: 'Premium RV accessories with strong reputation and support' }
     ];
 
     const connectivityPartners = [
-      { partner: 'nomadinternet' as const, title: 'Nomad Internet - $35 CPA', description: 'Flat $35 commission per sale on 5G internet plans for RVers' },
-      { partner: 'winegard' as const, title: 'Winegard Connectivity', description: 'Starlink mounts and boosters with 4.5% commission structure' }
+      { partner: 'nomadinternet' as const, title: 'Nomad Internet', description: 'Reliable 5G internet plans and hardware for RVers' },
+      { partner: 'winegard' as const, title: 'Winegard Connectivity', description: 'Starlink mounts and boosters for dependable internet' }
     ];
 
     const premiumPartners = [
-      { partner: 'rvtcom' as const, title: 'RVT.com - Up to $1,000 Bonus', description: 'Premium RV marketplace with 20-30% commission plus bonuses up to $1,000' },
-      { partner: 'heatso' as const, title: 'Heatso Conversions', description: 'RV conversion products with up to 10% commission on high-ticket items' },
-      { partner: 'hotshotssecret' as const, title: 'Hot Shots Secret', description: 'Fuel additives with 8% commission and high repeat purchase rates' }
+      { partner: 'rvtcom' as const, title: 'RVT.com Marketplace', description: 'Premium RV marketplace connecting buyers with verified dealers' },
+      { partner: 'heatso' as const, title: 'Heatso Conversions', description: 'High-quality conversion components and heating systems' },
+      { partner: 'hotshotssecret' as const, title: 'Hot Shots Secret', description: 'Proven fuel additives with strong customer reviews' }
     ];
 
     switch (focusCategory) {
@@ -66,12 +66,12 @@ const HighValueAffiliateRecommendations: React.FC<HighValueAffiliateRecommendati
       
       {focusCategory === 'all' && (
         <OptimizedAffiliateGrid
-          title="🚀 Strategic Premium Partners"
-          subtitle="High-ticket and specialty products with excellent commission structures:"
+          title="🚀 Strategic Premium Solutions"
+          subtitle="High-performance and specialty products chosen for quality, support, and user satisfaction:"
           partners={[
-            { partner: 'rvtcom' as const, title: 'RVT Premium Marketplace', description: '20-30% commission on luxury RV sales with bonus opportunities' },
-            { partner: 'mobilehomeparts' as const, title: 'RV Parts & Accessories', description: '5% commission with 60-day cookie on wide product range' },
-            { partner: 'victron' as const, title: 'Victron Power Systems', description: 'Professional power monitoring with up to 5% commission' }
+            { partner: 'rvtcom' as const, title: 'RVT Premium Marketplace', description: 'Marketplace with verified dealers and high customer satisfaction' },
+            { partner: 'mobilehomeparts' as const, title: 'RV Parts & Accessories', description: 'Wide range of RV parts and accessories from trusted brands' },
+            { partner: 'victron' as const, title: 'Victron Power Systems', description: 'Professional-grade power monitoring and inverter systems' }
           ]}
           gridCols="3"
         />

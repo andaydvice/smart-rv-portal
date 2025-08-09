@@ -8,8 +8,8 @@ export const HomepageAffiliateSection = () => {
     <section className="py-16 px-4 bg-gradient-to-br from-connectivity-darkBg to-[#0A0F1A]">
       <div className="max-w-6xl mx-auto">
         <OptimizedAffiliateGrid
-          title="Premium RV Solutions & Services"
-          subtitle="Discover top-rated products and services that enhance your RV lifestyle with proven results"
+          title="Premium Smart RV Solutions & Services"
+          subtitle="Discover top-rated smart RV products and services that enhance your experience with proven results"
           partners={[
             { partner: 'rvlife' as const, title: 'RV Life Pro', description: 'Professional trip planning with RV safe GPS navigation and comprehensive campground database', buttonText: 'Get RV Life Pro' },
             { partner: 'rvtcom' as const, title: 'RVT Marketplace', description: 'Premium RV marketplace connecting buyers with verified professional dealers nationwide', buttonText: 'Browse Premium RVs' },
@@ -24,14 +24,6 @@ export const HomepageAffiliateSection = () => {
           priority="high"
         />
         
-        <div className="text-center mt-8">
-          <div className="bg-blue-900/30 border border-blue-500/30 rounded-lg p-4 max-w-2xl mx-auto">
-            <p className="text-sm text-blue-200 text-left">
-              <strong>Our Promise:</strong> These are carefully selected partners with proven track records of excellent customer service and quality products. 
-              We only recommend products and services we personally use and trust for the RV community.
-            </p>
-          </div>
-        </div>
       </div>
     </section>
   );

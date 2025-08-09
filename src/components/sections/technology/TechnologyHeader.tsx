@@ -11,9 +11,9 @@ export const TechnologyHeader = () => (
     <span className="inline-block px-3 py-1 mb-4 text-sm font-medium bg-white/10 text-white rounded-full">
       Smart Systems
     </span>
-    <h2 className="text-4xl font-bold mb-4 text-white">Cutting Edge Technology</h2>
+    <h2 className="text-4xl font-bold mb-4 text-white">Cutting Edge Smart RV Technology</h2>
     <p className="text-lg text-gray-300 max-w-2xl mx-auto">
-      Advanced systems for a smarter, more comfortable journey
+      Advanced systems for a smarter, more comfortable smart RV journey
     </p>
   </motion.div>
 );
