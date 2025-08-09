@@ -12,7 +12,7 @@ const AuthHeader = ({ isSignUp }: AuthHeaderProps) => {
       <p className="text-white text-left">
         {isSignUp 
           ? "Join our community of RV enthusiasts" 
-          : "Access your RV tools and saved preferences"}
+          : "Access your Smart RV tools and saved preferences"}
       </p>
     </div>
   );

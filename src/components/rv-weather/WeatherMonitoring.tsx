@@ -10,7 +10,7 @@ const WeatherMonitoring = () => {
         <div className="mb-8 flex justify-center">
           <img 
             src="/lovable-uploads/b5fe467f-f975-4847-97b3-6ae051921bfa.png" 
-            alt="Man monitoring weather radar in RV" 
+            alt="Man monitoring weather radar in a Smart RV" 
             className="rounded-lg shadow-lg max-w-full max-h-[500px] object-cover"
           />
         </div>

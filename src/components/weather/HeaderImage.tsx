@@ -8,11 +8,11 @@ const HeaderImage: React.FC = () => {
       <div className="absolute inset-0 bg-gradient-to-b from-transparent to-background z-10" />
       <LazyImage
         src="/lovable-uploads/Luxury_RV_Living-min.jpg"
-        alt="RV in scenic location"
+        alt="Smart RV in scenic location"
         className="w-full h-full object-cover"
       />
       <div className="absolute bottom-0 left-0 w-full p-6 z-20">
-        <h1 className="text-4xl md:text-5xl font-bold text-white drop-shadow-lg">RV Weather</h1>
+        <h1 className="text-4xl md:text-5xl font-bold text-white drop-shadow-lg">Smart RV Weather</h1>
         <p className="text-lg text-white drop-shadow-lg mt-2">Plan your travels with confidence</p>
       </div>
     </div>

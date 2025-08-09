@@ -40,7 +40,7 @@ const Contact = () => {
         <div className="absolute inset-0 z-0">
           <img
             src="/lovable-uploads/7d42772e-e96c-45cd-9a40-5e59be1c0a60.png"
-            alt="Luxury RV in mountain landscape"
+            alt="Luxury Smart RV in mountain landscape"
             className="w-full h-full object-cover filter brightness-75"
           />
           <div className="absolute inset-0 bg-gradient-to-br from-black/90 via-black/50 to-black/80 backdrop-blur-[2px]" />

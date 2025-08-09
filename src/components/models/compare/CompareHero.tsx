@@ -12,7 +12,7 @@ const CompareHero = ({ title, description, imageSrc }: CompareHeroProps) => {
     <div className="relative w-full h-96">
       <img 
         src={imageSrc} 
-        alt="RV models comparison" 
+        alt="Smart RV models comparison" 
         className="w-full h-full object-cover"
       />
       <div className="absolute inset-0 bg-black/50 flex flex-col items-center justify-center">

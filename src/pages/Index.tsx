@@ -34,7 +34,7 @@ const Index = () => {
     
     // Show a toast to confirm the page has loaded
     setTimeout(() => {
-      toast.success("Welcome to the Smart Road Portal");
+      toast.success("Welcome to the Smart RV Portal");
     }, 1000);
     
     // Force scroll to top on page load

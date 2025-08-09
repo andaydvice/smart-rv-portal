@@ -39,7 +39,7 @@ const Sidebar = () => {
             </span>
             <div>
               <span className="font-semibold text-sm text-white">RV Weather</span>
-              <p className="text-xs text-[#E2E8FF]">Made for RV travelers</p>
+              <p className="text-xs text-[#E2E8FF]">Made for Smart RV travelers</p>
             </div>
           </div>
         </div>

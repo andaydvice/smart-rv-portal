@@ -60,7 +60,7 @@ export const AFFILIATE_PARTNERS: Record<string, PartnerLink> = {
     baseUrl: "https://technorv.com",
     refCode: "smarttech",
     description: "Smart RV technology and monitoring systems for modern travelers",
-    primaryBenefit: "Upgrade your RV with professional-grade smart technology",
+    primaryBenefit: "Upgrade your Smart RV with professional-grade smart technology",
     commission: "5-7%",
     cookieDuration: "7 days",
     category: 'tech'

@@ -53,7 +53,7 @@ const FuelEfficiencyCalculator = ({ onAddMPGRecord }: FuelEfficiencyCalculatorPr
       <CardHeader>
         <CardTitle className="text-2xl text-[#60A5FA]">Fuel Efficiency Calculator</CardTitle>
         <CardDescription className="text-gray-400">
-          Track your RV's fuel efficiency and estimate costs for your upcoming trips.
+          Track your Smart RV's fuel efficiency and estimate costs for your upcoming trips.
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">

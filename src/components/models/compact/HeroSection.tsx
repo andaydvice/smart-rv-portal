@@ -19,7 +19,7 @@ const HeroSection = () => {
     <div className="relative w-full h-[60vh] overflow-hidden bg-gray-900">
       <LazyImage
         src={imageUrl}
-        alt="Compact RVs at sunset with campfires and string lights"
+        alt="Compact Smart RVs at sunset with campfires and string lights"
         className="w-full h-full object-cover"
         style={{ backgroundColor: '#111827' }}
         sizes="100vw"

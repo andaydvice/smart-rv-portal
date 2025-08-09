@@ -75,7 +75,7 @@ const Products = () => {
       <div className="w-full h-[60vh] relative overflow-hidden">
         <img 
           src="/lovable-uploads/e2566d0d-bbd0-4401-9293-2d105eea8105.png"
-          alt="RV Dealership Aerial View"
+          alt="Smart RV dealership aerial view"
           className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-black/40 flex items-center justify-center">

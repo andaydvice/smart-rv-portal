@@ -11,7 +11,7 @@ export const LuxuryHero = ({ handleNavigation }: LuxuryHeroProps) => {
     <section className="hero-section">
       <img
         src="/lovable-uploads/Luxury-Class-RVs-min.jpg"
-        alt="Luxury RV exterior"
+        alt="Luxury Smart RV exterior"
         className="hero-image"
       />
       <div className="absolute inset-0 bg-black/60" /> {/* Darkened overlay for better button visibility */}

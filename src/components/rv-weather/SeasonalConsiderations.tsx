@@ -14,7 +14,7 @@ const SeasonalConsiderations = () => {
         
         <img 
           src="/lovable-uploads/ae930cf7-205f-41d3-9c9b-a4969e5c35e6.png" 
-          alt="RV parked at a summer campsite" 
+          alt="Smart RV parked at a summer campsite" 
           className="w-full h-52 object-cover rounded-lg mb-4"
           loading="eager"
           fetchPriority="high"
@@ -23,7 +23,7 @@ const SeasonalConsiderations = () => {
         <ul className="space-y-2 text-light-blue">
           <li className="flex items-start">
             <span className="text-[#5B9BD5] mr-2">•</span>
-            <span>Keep your RV cool by parking in shade when possible</span>
+            <span>Keep your Smart RV cool by parking in shade when possible</span>
           </li>
           <li className="flex items-start">
             <span className="text-[#5B9BD5] mr-2">•</span>
@@ -50,7 +50,7 @@ const SeasonalConsiderations = () => {
         
         <img 
           src="/lovable-uploads/dee06c09-15b9-404e-a583-836e4a06d9d1.png" 
-          alt="RVs parked at sunset with dramatic winter sky" 
+          alt="Smart RVs parked at sunset with dramatic winter sky" 
           className="w-full h-52 object-cover rounded-lg mb-4"
           loading="eager"
           fetchPriority="high"
@@ -86,7 +86,7 @@ const SeasonalConsiderations = () => {
         
         <img 
           src="/lovable-uploads/3175b015-a5c7-4df7-b8ca-b8a130b05519.png" 
-          alt="RV parked among fall foliage" 
+          alt="Smart RV parked among fall foliage" 
           className="w-full h-52 object-cover rounded-lg mb-4"
           loading="eager"
           fetchPriority="high"
@@ -122,7 +122,7 @@ const SeasonalConsiderations = () => {
         
         <img 
           src="/lovable-uploads/989028bc-89ec-4ec4-841d-e38421cc7626.png" 
-          alt="RV in spring scenery with blooming flowers" 
+          alt="Smart RV in spring scenery with blooming flowers" 
           className="w-full h-52 object-cover rounded-lg mb-4"
           loading="eager"
           fetchPriority="high"
