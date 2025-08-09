@@ -67,7 +67,7 @@ const Sidebar = () => {
           </li>
           <li className="flex items-start">
             <div className="min-w-4 h-4 mt-0.5 rounded border border-[#5B9BD5] flex-shrink-0"></div>
-            <span className="ml-2 text-[#E2E8FF]">Know your RV's wind resistance limits</span>
+            <span className="ml-2 text-[#E2E8FF]">Know your Smart RV's wind resistance limits</span>
           </li>
           <li className="flex items-start">
             <div className="min-w-4 h-4 mt-0.5 rounded border border-[#5B9BD5] flex-shrink-0"></div>
@@ -91,7 +91,7 @@ const Sidebar = () => {
           
           <div>
             <h5 className="text-sm font-semibold text-[#5B9BD5] mb-1">Summer</h5>
-            <p className="text-xs text-[#E2E8FF]">Keep RV cool by parking in shade when possible. Use awnings and window covers to reduce solar gain.</p>
+            <p className="text-xs text-[#E2E8FF]">Keep your Smart RV cool by parking in shade when possible. Use awnings and window covers to reduce solar gain.</p>
           </div>
           
           <div>

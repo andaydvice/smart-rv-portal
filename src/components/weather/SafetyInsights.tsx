@@ -16,7 +16,7 @@ const SafetyInsights: React.FC = () => {
           <ul className="list-disc list-inside space-y-2 text-sm">
             <li>Monitor weather conditions regularly</li>
             <li>Keep emergency supplies stocked</li>
-            <li>Know your RV's wind resistance limits</li>
+            <li>Know your Smart RV's wind resistance limits</li>
             <li>Have an evacuation plan ready</li>
           </ul>
         </div>

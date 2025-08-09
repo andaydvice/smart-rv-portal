@@ -26,7 +26,7 @@ const PreparednessChecklist = () => {
         </li>
         <li className="flex items-start text-left">
           <div className="min-w-4 h-4 mt-0.5 rounded border border-[#3b82f6] flex-shrink-0"></div>
-          <span className="ml-2 text-[#4a5568] text-left">Know your RV's wind resistance limits</span>
+          <span className="ml-2 text-[#4a5568] text-left">Know your Smart RV's wind resistance limits</span>
         </li>
         <li className="flex items-start text-left">
           <div className="min-w-4 h-4 mt-0.5 rounded border border-[#3b82f6] flex-shrink-0"></div>
