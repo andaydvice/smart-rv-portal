@@ -5,7 +5,6 @@ import { VoiceIntroSections } from "../components/voice-control/VoiceIntroSectio
 import { BenefitsGrid } from "../components/voice-control/BenefitsGrid";
 import FeaturesSection from "../components/voice-control/FeaturesSection";
 // MODIFIED: Removed Smartphone and Button imports
-import Navbar from "@/components/Navbar";
 import Layout from "@/components/layout/Layout";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
 
@@ -14,7 +13,6 @@ const VoiceControl = () => {
   
   return (
     <Layout>
-      <Navbar />
       <main className="relative w-full flex-grow">
         <HeroSection />
         <div className="w-full">
