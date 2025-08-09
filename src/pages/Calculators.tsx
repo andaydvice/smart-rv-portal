@@ -23,6 +23,7 @@ import TowingAffiliateRecommendations from "@/components/calculators/towing/Towi
 import SmartSystemsAffiliateRecommendations from "@/components/calculators/smart-systems/SmartSystemsAffiliateRecommendations";
 import Navbar from "@/components/Navbar";
 import Layout from "@/components/layout/Layout";
+import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
 
 const Calculators = () => {
   const [historicalMPG, setHistoricalMPG] = useState<MPGRecord[]>([]);
@@ -116,6 +117,9 @@ const Calculators = () => {
               </div>
             </TabsContent>
           </Tabs>
+        </div>
+        <div className="px-4">
+          <AffiliateDisclosure compact className="max-w-6xl mx-auto my-8" />
         </div>
       </div>
     </Layout>

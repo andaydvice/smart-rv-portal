@@ -8,6 +8,7 @@ import { TechnologySection } from "@/components/sections/TechnologySection";
 import { ContactSection } from "@/components/sections/ContactSection";
 import { HomepageAffiliateSection } from "@/components/affiliate/HomepageAffiliateSection";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
+import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
 
 // Lazy load components that aren't needed immediately
 const FeaturesSection = lazy(() => import("@/components/sections/FeaturesSection").then(mod => ({ 
@@ -82,8 +83,10 @@ const Index = () => {
         <Suspense fallback={<LoadingFallback />}>
           <SustainabilitySection />
         </Suspense>
-        
         <ContactSection />
+        <div className="px-4">
+          <AffiliateDisclosure compact className="max-w-6xl mx-auto my-8" />
+        </div>
       </motion.div>
     </Layout>
   );

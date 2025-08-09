@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { AffiliatePartnerCard } from './AffiliatePartnerSystem';
-import AffiliateDisclosure from './AffiliateDisclosure';
+
 
 interface OptimizedAffiliateGridProps {
   title: string;
@@ -87,7 +87,7 @@ export const OptimizedAffiliateGrid: React.FC<OptimizedAffiliateGridProps> = ({
         </div>
       </div>
       
-      <AffiliateDisclosure compact />
+      
     </div>
   );
 };

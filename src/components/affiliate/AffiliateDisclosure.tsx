@@ -15,7 +15,7 @@ const AffiliateDisclosure = ({ className = "", compact = false }: AffiliateDiscl
     return (
       <div className={`text-xs text-gray-500 text-center p-2 bg-gray-900/50 rounded ${className}`}>
         <InfoIcon className="h-3 w-3 inline-block mr-1" />
-        This post contains affiliate links. We may earn a commission at no extra cost to you.
+        Disclosure: This page may contain affiliate links. If you purchase through them, we may earn a commission at no additional cost to you.
       </div>
     );
   }
@@ -28,7 +28,7 @@ const AffiliateDisclosure = ({ className = "", compact = false }: AffiliateDiscl
           <div className="flex-1">
             <h3 className="text-sm font-medium text-blue-300 mb-2">Affiliate Disclosure</h3>
             <p className="text-sm text-gray-300 mb-3">
-              This post contains affiliate links. When you purchase through these links, we may earn a 
+              This page may contain affiliate links. When you purchase through these links, we may earn a 
               commission at no additional cost to you. This helps support our content creation and allows 
               us to continue providing valuable RV information.
             </p>
