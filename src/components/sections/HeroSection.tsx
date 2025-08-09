@@ -36,7 +36,7 @@ export const HeroSection = () => {
       <div className="absolute inset-0 left-0 right-0">
         <img
           src="/lovable-uploads/f3ebf58c-7bbf-427f-9510-9c3b0aec6f6d.png"
-          alt="Luxury RV interior with panoramic windows and modern design"
+          alt="Luxury Smart RV interior with panoramic windows and modern intelligent design"
           className="h-full w-full object-cover"
           loading="eager"
           fetchPriority="high"
@@ -63,7 +63,7 @@ export const HeroSection = () => {
                 The Future of
               </span> <br />
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-emerald-400">
-                Luxury Travel
+                Smart RV Travel
               </span>
             </motion.h1>
             <motion.p 
@@ -72,7 +72,7 @@ export const HeroSection = () => {
               transition={{ duration: 0.6, delay: 0.8 }}
               className="text-xl md:text-2xl mb-12 text-gray-200"
             >
-              Experience unparalleled luxury and innovation with cutting edge smart technology
+              Experience unparalleled smart RV luxury and innovation with cutting edge intelligent technology
             </motion.p>
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
