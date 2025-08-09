@@ -114,7 +114,7 @@ const BlogPost = () => {
             partners={[
               { partner: 'rvlife', title: 'RV Life Resources', description: 'Trip planning and RV lifestyle guides' },
               { partner: 'technorv', title: 'RV Technology', description: 'Latest RV tech and equipment reviews' },
-              { partner: 'goodsam', title: 'RV Community', description: 'Join the largest RV community for tips and support' }
+              { partner: 'goodsam', title: 'Smart RV Community', description: 'Join the largest smart RV community for tips and support' }
             ]}
             gridCols="3"
           />

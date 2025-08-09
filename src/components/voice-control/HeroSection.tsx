@@ -16,7 +16,7 @@ export const HeroSection = () => {
           Voice Control for Smart RVs
         </h1>
         <p className="text-xl text-white/90 mb-12 p-4 bg-black/50 backdrop-blur-sm rounded-lg max-w-4xl mx-auto">
-          Experience RV living's future: Voice control technology for hands-free system operation
+          Experience smart RV living's future: Voice control technology for hands-free intelligent system operation
         </p>
         {/* MODIFIED: Removed the button below */}
         {/* 

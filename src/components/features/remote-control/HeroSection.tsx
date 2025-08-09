@@ -20,7 +20,7 @@ const HeroSection = () => {
               Smart RV Remote Control
             </h1>
             <p className="text-xl text-white image-overlay-headline">
-              Take command of your RV systems from anywhere
+              Take command of your smart RV systems from anywhere
             </p>
           </div>
         </div>

@@ -19,16 +19,16 @@ const AffiliateRecommendations = ({ rvType, tripDistance, days, totalCost }: Aff
     // Always include RVShare
     partners.push({ 
       partner: 'rvshare', 
-      title: 'RV Rental Savings', 
-      description: `Save money by renting for your ${days} day trip instead of buying` 
+      title: 'Smart RV Rental Savings', 
+      description: `Save money by renting smart RV equipped units for your ${days} day trip instead of buying` 
     });
 
     // Add Outdoorsy for luxury trips
     if (isLongTrip || isLargeRV) {
       partners.push({ 
         partner: 'outdoorsy', 
-        title: 'Luxury RV Rentals', 
-        description: 'Premium RV rentals for longer, more comfortable trips' 
+        title: 'Luxury Smart RV Rentals', 
+        description: 'Premium smart RV rentals with advanced technology for longer, more comfortable trips' 
       });
     }
 
@@ -36,16 +36,16 @@ const AffiliateRecommendations = ({ rvType, tripDistance, days, totalCost }: Aff
     if (isLongDistance) {
       partners.push({ 
         partner: 'rvlife', 
-        title: 'Trip Planning Tools', 
-        description: 'Plan your route and find RV friendly stops for long distance travel' 
+        title: 'Smart Trip Planning Tools', 
+        description: 'Plan your route and find smart RV friendly stops for long distance travel' 
       });
     }
 
     // Add Good Sam for safety
     partners.push({ 
       partner: 'goodsam', 
-      title: 'Roadside Assistance', 
-      description: '24/7 RV specific emergency assistance and peace of mind' 
+      title: 'Smart RV Roadside Assistance', 
+      description: '24/7 smart RV specific emergency assistance and peace of mind' 
     });
 
     return partners.slice(0, 3);
@@ -54,8 +54,8 @@ const AffiliateRecommendations = ({ rvType, tripDistance, days, totalCost }: Aff
   return (
     <div className="mt-8">
       <OptimizedAffiliateGrid
-        title="💡 Recommended for Your Trip"
-        subtitle={`Based on your ${rvType} RV, ${days} day trip covering ${tripDistance} miles (estimated cost: $${totalCost}), here are our top recommendations:`}
+        title="💡 Recommended for Your Smart RV Trip"
+        subtitle={`Based on your ${rvType} smart RV, ${days} day trip covering ${tripDistance} miles (estimated cost: $${totalCost}), here are our top recommendations:`}
         partners={getPartners()}
         gridCols="3"
         className="bg-[#091020] border-gray-700"

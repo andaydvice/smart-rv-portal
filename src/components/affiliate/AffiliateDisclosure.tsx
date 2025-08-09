@@ -49,7 +49,7 @@ const AffiliateDisclosure = ({ className = "", compact = false }: AffiliateDiscl
                 
                 <p>
                   <strong className="text-blue-300">Why We Use Affiliates:</strong> These partnerships help 
-                  us maintain our website, create new content, and provide free resources to the RV community. 
+                  us maintain our website, create new content, and provide free resources to the smart RV community. 
                   Your support through these links directly contributes to our ability to help fellow RVers.
                 </p>
                 

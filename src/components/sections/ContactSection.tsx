@@ -27,7 +27,7 @@ export const ContactSection = () => (
           Get in Touch
         </h2>
         <p className="text-lg leading-8 text-secondary-foreground sm:text-xl">
-          Have questions or ready to upgrade your RV experience? Contact us today! We're here to help you navigate the world of smart RV technology.
+          Have questions or ready to upgrade your smart RV experience? Contact us today! We're here to help you navigate the world of smart RV technology.
         </p>
         <div className="mt-10 flex items-center justify-center gap-x-6">
           <Button 

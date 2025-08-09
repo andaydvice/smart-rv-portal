@@ -48,7 +48,7 @@ export const VoiceControlSystems = () => {
               <p>Smart Assistant integrates traditional voice assistant technology into RVs, enabling users to control various aspects of their vehicle and access information through simple voice commands.</p>
               <p>This system leverages natural language processing to understand and respond to user queries effectively.</p>
               <p>Users can manage climate control, lighting, entertainment systems, and even access travel information or local points of interest.</p>
-              <p>The assistant can also provide weather updates, set reminders, and answer general questions, enhancing the overall RV experience.</p>
+              <p>The assistant can also provide weather updates, set reminders, and answer general questions, enhancing the overall smart RV experience.</p>
               <p>Unlike some proprietary systems, Smart Assistant often works with popular voice assistants like Amazon Alexa or Google Assistant, allowing for a familiar user experience and broader compatibility with smart devices.</p>
             </div>
           </div>

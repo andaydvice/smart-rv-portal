@@ -67,10 +67,10 @@ const Index = () => {
               title="Complete Smart RV Solutions Ecosystem"
               subtitle="Everything you need for smart RV living - from solar power to connectivity, all with proven quality and reliability."
               partners={[
-                { partner: 'renogy' as const, title: 'Solar Power Leader', description: 'Most trusted solar brand with complete RV kits and proven reliability' },
-                { partner: 'victron' as const, title: 'Power Management', description: 'Professional power monitoring and inverter systems trusted worldwide' },
-                { partner: 'winegard' as const, title: 'Internet Solutions', description: 'Starlink mounts and connectivity boosters for reliable internet anywhere' },
-                { partner: 'torklift' as const, title: 'Towing Accessories', description: 'Premium tie-downs and RV accessories trusted by professionals' }
+                { partner: 'renogy' as const, title: 'Solar Power Leader', description: 'Most trusted solar brand with complete smart RV kits and proven reliability for intelligent power management' },
+                { partner: 'victron' as const, title: 'Power Management', description: 'Professional smart RV power monitoring and inverter systems trusted worldwide for intelligent energy control' },
+                { partner: 'winegard' as const, title: 'Internet Solutions', description: 'Starlink mounts and connectivity boosters for reliable smart RV internet anywhere you travel' },
+                { partner: 'torklift' as const, title: 'Towing Accessories', description: 'Premium tie-downs and smart RV accessories trusted by professionals for safe intelligent travel' }
               ]}
               gridCols="4"
               videoId="complete-rv-ecosystem"

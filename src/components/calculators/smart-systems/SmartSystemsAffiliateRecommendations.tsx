@@ -132,7 +132,7 @@ const SmartSystemsAffiliateRecommendations = () => {
       
       <OptimizedAffiliateGrid
         title="🚐 Smart RV Experience"
-        subtitle="Discover the future of RV living with smart technology and expert support services:"
+        subtitle="Discover the future of smart RV living with smart technology and expert support services:"
         partners={essentialServices}
         gridCols="4"
       />
