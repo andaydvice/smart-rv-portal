@@ -112,7 +112,6 @@ const LuxuryModel = () => {
         transition={{ duration: 0.6 }}
         className="bg-gradient-to-b from-gray-900 to-gray-800 w-full"
       >
-        <Navbar />
         <LuxuryHero handleNavigation={handleNavigation} />
 
         <div className="w-full px-4 pt-12 pb-24 relative z-10">

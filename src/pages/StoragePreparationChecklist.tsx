@@ -7,7 +7,6 @@ import Layout from "@/components/layout/Layout";
 const StoragePreparationChecklistPage: React.FC = () => {
   return (
     <Layout>
-      <Navbar />
       <div className="storage-preparation-checklist flex-grow">
         <StoragePreparationChecklist />
       </div>

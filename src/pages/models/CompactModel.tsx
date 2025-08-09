@@ -41,7 +41,6 @@ const CompactModel = () => {
   return (
     <Layout>
       <div className="bg-gradient-to-b from-gray-900 to-gray-800 w-full">
-        <Navbar />
         <Suspense fallback={<LoadingPlaceholder />}>
           <HeroSection />
           <div className="w-full px-4 py-12 pb-24">

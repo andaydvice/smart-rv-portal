@@ -38,7 +38,6 @@ const Auth = () => {
   if (loading && !hasInitialized) {
     return (
       <Layout>
-        <Navbar />
         <div className="flex-grow flex items-center justify-center px-4 py-12 pt-24">
           <div className="w-full max-w-md text-center">
             <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-[#5B9BD5] mx-auto mb-4"></div>
@@ -53,7 +52,6 @@ const Auth = () => {
   if (authError && hasInitialized) {
     return (
       <Layout>
-        <Navbar />
         <div className="flex-grow flex items-center justify-center px-4 py-12 pt-24">
           <ErrorDisplay
             error={{
@@ -75,7 +73,6 @@ const Auth = () => {
   if (error && hasInitialized) {
     return (
       <Layout>
-        <Navbar />
         <div className="flex-grow flex items-center justify-center px-4 py-12 pt-24">
           <ErrorDisplay
             error={error}
@@ -91,7 +88,6 @@ const Auth = () => {
 
   return (
     <Layout>
-      <Navbar />
       <div className="flex-grow flex items-center justify-center px-4 py-12 pt-24">
         <div className="w-full max-w-4xl grid md:grid-cols-2 gap-8 items-start">
           <div className="space-y-6">

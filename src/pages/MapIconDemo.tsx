@@ -93,7 +93,6 @@ const mapLocations = [
 const MapIconDemoPage = () => {
   return (
     <Layout>
-      <Navbar />
       <div className="min-h-screen w-full bg-[#080F1F] text-white flex-grow">
         <Container className="py-10" fullWidth>
           <h1 className="text-3xl font-bold mb-6 text-center">Interactive Map Icons</h1>

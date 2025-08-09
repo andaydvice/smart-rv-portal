@@ -90,12 +90,12 @@ const BlogPost = () => {
   return (
     <PageErrorBoundary>
       <div className="flex flex-col min-h-screen bg-[#080F1F]">
+        <Navbar />
         <Helmet>
           <title>{post.title} - Smart RV Blog</title>
           <meta name="description" content={post.description} />
         </Helmet>
         
-        <Navbar />
         <div className="container mx-auto px-4 py-8 space-y-8 pt-20 flex-grow">
           <BackToBlogHeader />
           <BlogPostImage image={post.image} title={post.title} />

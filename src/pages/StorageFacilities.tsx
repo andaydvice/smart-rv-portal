@@ -161,7 +161,7 @@ export default function StorageFacilities() {
 
   return (
     <Layout>
-      <Navbar />
+      {/* Hero Header with Image */}
       {/* Hero Header with Image */}
       <div className="relative w-full h-[300px]">
         <img 
