@@ -13,9 +13,9 @@ const CustomerSupportLinks: React.FC<CustomerSupportLinksProps> = ({ className }
       <Phone className="h-4 w-4 text-[#0EA5E9]" />
       <span>Contact Support</span>
     </NavLink>
-    <NavLink to="/schedule-demo" className="text-gray-300 hover:text-blue-400 transition-colors flex items-center gap-2">
+    <NavLink to="/products" className="text-gray-300 hover:text-blue-400 transition-colors flex items-center gap-2">
       <Settings className="h-4 w-4 text-[#8B5CF6]" />
-      <span>Schedule Demo</span>
+      <span>Top Deals</span>
     </NavLink>
   </div>
 );

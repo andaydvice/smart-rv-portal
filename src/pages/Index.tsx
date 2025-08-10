@@ -11,6 +11,7 @@ import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliat
 import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
 import { Helmet } from "react-helmet-async";
 import { TrustStrip } from "@/components/sections/TrustStrip";
+import TestimonialsSection from "@/components/sections/testimonials/TestimonialsSection";
 // Lazy load components that aren't needed immediately
 const FeaturesSection = lazy(() => import("@/components/sections/FeaturesSection").then(mod => ({ 
   default: mod.FeaturesSection 
@@ -68,6 +69,7 @@ const Index = () => {
       >
         <HeroSection />
         <TrustStrip />
+        <TestimonialsSection />
         
         <Suspense fallback={<LoadingFallback />}>
           <FeaturesSection />

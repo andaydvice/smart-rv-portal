@@ -8,7 +8,39 @@ export type Testimonial = {
 };
 
 const testimonials: Testimonial[] = [
-  // Intentionally empty until fact-checked sources are added.
+  // Candidates for verification — hidden until verified is true
+  {
+    persona: 'Innovation Pioneers',
+    quote: '',
+    author: 'Industry Leader',
+    sourceName: 'RV LIFE',
+    sourceUrl: 'https://rvlife.com',
+    verified: false,
+  },
+  {
+    persona: 'Digital Nomads',
+    quote: '',
+    author: 'Full-time Traveler',
+    sourceName: 'Technomadia',
+    sourceUrl: 'https://www.technomadia.com',
+    verified: false,
+  },
+  {
+    persona: 'Families',
+    quote: '',
+    author: 'Family RVer',
+    sourceName: 'The Dyrt',
+    sourceUrl: 'https://thedyrt.com',
+    verified: false,
+  },
+  {
+    persona: 'Retirees',
+    quote: '',
+    author: 'Retired RVer',
+    sourceName: 'Escapees RV Club',
+    sourceUrl: 'https://escapees.com',
+    verified: false,
+  },
 ];
 
 export default testimonials;

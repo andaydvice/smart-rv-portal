@@ -119,8 +119,8 @@ export const KEYWORD_MAPPING: Record<string, string> = {
   'documentation': '/documentation',
   'docs': '/documentation',
   'manual': '/documentation',
-  'schedule': '/schedule-demo',
-  'demo': '/schedule-demo',
+  'schedule': '/products',
+  'demo': '/products',
   'contact': '/contact',
   
   // Blog & Content

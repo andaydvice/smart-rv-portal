@@ -107,9 +107,9 @@ const Technology = () => {
                   Our smart RVs combine cutting edge technology with luxurious comfort to create
                   the ultimate travel experience
                 </p>
-                <Link to="/schedule-demo">
+                <Link to="/products">
                   <Button className="bg-blue-500 hover:bg-blue-600">
-                    Schedule a Demo <ArrowRight className="w-4 h-4 ml-2" />
+                    Explore Top Deals <ArrowRight className="w-4 h-4 ml-2" />
                   </Button>
                 </Link>
               </div>

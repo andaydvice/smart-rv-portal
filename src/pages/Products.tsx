@@ -5,9 +5,10 @@ import { Link } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
 import { scrollToTop } from "@/utils/scrollToTop";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 import { AFFILIATE_PARTNERS } from "@/components/affiliate/AffiliatePartnerSystem";
 import TestimonialsSection from "@/components/sections/testimonials/TestimonialsSection";
+import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
 
 const Products = () => {
   useEffect(() => {
@@ -72,7 +73,7 @@ const Products = () => {
     }
   ];
 
-  const canonical = typeof window !== 'undefined' ? window.location.href : '';
+  const canonical = typeof window !== 'undefined' ? window.location.origin + "/products" : '';
 
   const itemListSchema = {
     "@context": "https://schema.org",
@@ -147,6 +148,15 @@ const Products = () => {
 
   return (
     <Layout>
+      <Helmet>
+        <title>RV Marketplace | Top Deals on Rentals, Tech, Services</title>
+        <meta name="description" content="Shop RV rentals, mobile internet, solar kits, and essential services from verified partners with exclusive savings." />
+        <link rel="canonical" href={canonical || (typeof window !== 'undefined' ? window.location.href : '')} />
+        <script type="application/ld+json">{JSON.stringify(itemListSchema)}</script>
+        {productSchemas.map((schema, i) => (
+          <script key={i} type="application/ld+json">{JSON.stringify(schema)}</script>
+        ))}
+      </Helmet>
       {/* Hero Image Section */}
       <div className="w-full h-[60vh] relative overflow-hidden">
         <img 
@@ -254,15 +264,15 @@ const Products = () => {
             transition={{ delay: 0.6, duration: 0.5 }}
             className="mt-20 bg-black/20 backdrop-blur-md p-8 rounded-xl border border-white/10 text-center"
           >
-            <h2 className="text-3xl font-bold text-white mb-4">Need Custom Solutions?</h2>
+            <h2 className="text-3xl font-bold text-white mb-4">Looking for personalized recommendations?</h2>
             <p className="text-white/90 text-lg mb-6">
-              Our engineering team can develop custom smart RV solutions tailored to your specific needs and requirements.
+              We curate the best RV gear and services based on real value and reliability so you can make confident choices faster.
             </p>
             <Link 
-              to="/contact"
-              className="inline-block bg-[#00ffff] text-black hover:bg-[#00ffff]/80 px-8 py-3 rounded-full font-medium transition-colors"
+              to="/products"
+              className="inline-block bg-[#5B9BD5] text-white hover:bg-[#4A8AC4] px-8 py-3 rounded-full font-medium transition-colors"
             >
-              Contact Our Experts
+              Explore Top Deals
             </Link>
           </motion.div>
 
@@ -323,6 +333,9 @@ const Products = () => {
               gridCols="3"
             />
           </motion.div>
+          <div className="px-4">
+            <AffiliateDisclosure compact className="max-w-6xl mx-auto my-8" />
+          </div>
         </div>
       </motion.div>
     </Layout>

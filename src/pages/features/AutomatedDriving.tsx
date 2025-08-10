@@ -94,9 +94,9 @@ const AutomatedDriving = () => {
           />
 
           <div className="text-center mb-16">
-            <Link to="/schedule-demo">
+            <Link to="/products">
               <Button className="bg-blue-500 hover:bg-blue-600">
-                Schedule a Demo
+                Explore Top Deals
               </Button>
             </Link>
           </div>

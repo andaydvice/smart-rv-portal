@@ -150,8 +150,8 @@ const DesktopNavigation = () => {
       icon: <BookOpen size={16} className="text-[#0EA5E9]" />
     },
     { 
-      text: "Schedule Demo", 
-      href: "/schedule-demo",
+      text: "Top Deals", 
+      href: "/products",
       icon: <LifeBuoy size={16} className="text-[#8B5CF6]" />
     }
   ];

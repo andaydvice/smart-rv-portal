@@ -149,7 +149,7 @@ export const AFFILIATE_PARTNERS: Record<string, PartnerLink> = {
     cookieDuration: "30 days",
     category: 'accessories'
   },
-  gutatpms: {
+  guta: {
     name: "GUTA TPMS",
     baseUrl: "https://gutatpms.com",
     refCode: "smartmonitoring",

@@ -133,9 +133,9 @@ const SmartKitchen = () => {
           />
 
           <div className="text-center">
-            <Link to="/schedule-demo">
+            <Link to="/products">
               <Button size="lg" className="bg-blue-500 hover:bg-blue-600 text-lg py-8 px-12">
-                Schedule a Demo
+                Explore Top Deals
               </Button>
             </Link>
           </div>
