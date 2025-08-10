@@ -1,7 +1,7 @@
 
-/* Ensure content is properly spaced below fixed navbar */
+/* Spacing handled by Layout main.pt-16; removed global body padding to avoid double spacing under fixed navbar */
 body {
-  padding-top: 4rem; /* Height of the navbar */
+  padding-top: 0; /* was 4rem; handled by Layout */
 }
 
 /* CRITICAL FIX: Ensure only one navbar is visible */
@@ -64,8 +64,9 @@ html {
 }
 
 /* Make sure content loads from top */
+/* Deprecated: spacing now handled in Layout */
 .page-content {
-  margin-top: 4rem; /* Should match navbar height */
+  margin-top: 0;
 }
 
 /* Ensure proper mobile menu positioning */
