@@ -2,12 +2,19 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 
-export const useMapToken = () => {
+export const useMapToken = (enabled: boolean = true) => {
   const [mapToken, setMapToken] = useState<string>('');
   const [mapTokenError, setMapTokenError] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
+    if (!enabled) {
+      setIsLoading(false);
+      setMapToken('');
+      setMapTokenError('');
+      return;
+    }
+
     const fetchMapboxToken = async () => {
       try {
         console.log('Fetching Mapbox token...');
@@ -44,7 +51,7 @@ export const useMapToken = () => {
     };
 
     fetchMapboxToken();
-  }, []);
+  }, [enabled]);
 
   return { mapToken, mapTokenError, isLoading };
 };

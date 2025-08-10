@@ -46,10 +46,10 @@ const MapViewContainer: React.FC<MapViewContainerProps> = ({
       ) : (
         <Card className="h-[650px] bg-[#080F1F] relative overflow-visible border-gray-700 map-container">
           {(!mapToken) ? (
-            <Alert variant="destructive" className="m-4">
+            <Alert variant={mapTokenError ? "default" : "destructive"} className="m-4">
               <AlertCircle className="h-4 w-4" />
               <AlertDescription>
-                {mapTokenError || 'Map configuration not loaded'}
+                {mapTokenError ? 'Switching to Google Maps due to Mapbox config. Please wait...' : 'Map configuration not loaded'}
               </AlertDescription>
             </Alert>
           ) : (

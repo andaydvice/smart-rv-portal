@@ -14,7 +14,7 @@ const useGoogleMapsKey = () => {
 export const useMapView = () => {
   // State to toggle between map views
   const [useGoogleMaps, setUseGoogleMaps] = useState<boolean>(false);
-  const { mapToken, mapTokenError } = useMapToken();
+  const { mapToken, mapTokenError, isLoading: tokenLoading } = useMapToken(!useGoogleMaps);
   const { apiKey: googleMapsKey, error: googleMapsError } = useGoogleMapsKey();
 
   // Toggle map view
@@ -22,6 +22,16 @@ export const useMapView = () => {
     setUseGoogleMaps(prev => !prev);
     toast.info(`Switched to ${!useGoogleMaps ? 'Google Maps' : 'Mapbox'} view`);
   }, [useGoogleMaps]);
+
+  // Auto-fallback to Google Maps if Mapbox token fails or is missing
+  useEffect(() => {
+    if (!useGoogleMaps && !tokenLoading && (!mapToken || mapTokenError)) {
+      setUseGoogleMaps(true);
+      if (import.meta.env.DEV) {
+        toast.warning('Using Google Maps fallback');
+      }
+    }
+  }, [useGoogleMaps, tokenLoading, mapToken, mapTokenError]);
 
   // Ensure window state for integration with map scripts
   useEffect(() => {
