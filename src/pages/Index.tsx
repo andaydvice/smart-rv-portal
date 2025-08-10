@@ -3,7 +3,7 @@ import Navbar from "@/components/Navbar";
 import Layout from "@/components/layout/Layout";
 import { HeroSection } from "@/components/sections/HeroSection";
 import { motion } from "framer-motion";
-import { TechnologySection } from "@/components/sections/TechnologySection";
+// TechnologySection lazy-loaded below
 import { ContactSection } from "@/components/sections/ContactSection";
 import { HomepageAffiliateSection } from "@/components/affiliate/HomepageAffiliateSection";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
@@ -17,6 +17,9 @@ const FeaturesSection = lazy(() => import("@/components/sections/FeaturesSection
 })));
 const SustainabilitySection = lazy(() => import("@/components/sections/SustainabilitySection").then(mod => ({ 
   default: mod.SustainabilitySection 
+})));
+const TechnologySection = lazy(() => import("@/components/sections/TechnologySection").then(mod => ({
+  default: mod.TechnologySection
 })));
 // MODIFIED: Lazy import for ContactSection removed
 // const ContactSection = lazy(() => import("@/components/sections/ContactSection").then(mod => ({ 
@@ -68,7 +71,7 @@ const Index = () => {
         </script>
       </Helmet>
       <motion.div 
-        transition={{ duration: 0.6 }}
+        initial={false}
         className="min-h-screen w-full"
       >
         <HeroSection />
@@ -79,8 +82,9 @@ const Index = () => {
           <FeaturesSection />
         </Suspense>
         
-        <TechnologySection />
-        
+        <Suspense fallback={<LoadingFallback />}>
+          <TechnologySection />
+        </Suspense>
         {/* Premium affiliate section with customer-focused benefits */}
         <HomepageAffiliateSection />
         

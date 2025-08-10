@@ -25,7 +25,7 @@ export const PreloadedHeaderImage = ({
   
   // Immediately preload the image with high priority when component mounts
   useEffect(() => {
-    console.log('Preloading header image:', src);
+    if (import.meta.env.DEV) console.log('Preloading header image:', src);
     
     // Create and inject a preload link element in the document head
     const link = document.createElement('link');
@@ -39,14 +39,14 @@ export const PreloadedHeaderImage = ({
     const preloadImage = new Image();
     preloadImage.src = src;
     preloadImage.onload = () => {
-      console.log('Header image loaded:', src);
+      if (import.meta.env.DEV) console.log('Header image loaded:', src);
       setImageLoaded(true);
       if (onImageLoaded) {
         onImageLoaded();
       }
     };
     preloadImage.onerror = () => {
-      console.error('Failed to load header image:', src);
+      if (import.meta.env.DEV) console.error('Failed to load header image:', src);
     };
     
     return () => {
@@ -78,14 +78,14 @@ export const PreloadedHeaderImage = ({
         height={height}
         loading="eager"
         fetchPriority="high"
-        decoding="sync"
+        decoding="async"
         style={{ 
           position: 'relative', 
           zIndex: 1, // Keep z-index low so text can appear above
           opacity: imageLoaded ? 1 : 0 // Show only when loaded
         }}
         onLoad={(e) => {
-          console.log('Header image DOM loaded:', src);
+          if (import.meta.env.DEV) console.log('Header image DOM loaded:', src);
           if (e.currentTarget) {
             // When image loads, make it fully visible
             e.currentTarget.style.opacity = '1';

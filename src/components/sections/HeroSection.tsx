@@ -39,6 +39,7 @@ export const HeroSection = () => {
           alt="Luxury Smart RV interior with panoramic windows and modern intelligent design"
           className="h-full w-full object-cover"
           loading="eager"
+          fetchPriority="high"
           decoding="async"
           width={1920}
           height={1080}
@@ -50,16 +51,11 @@ export const HeroSection = () => {
       {/* Content positioned within the container */}
       <Container className="relative z-10 h-full">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
+          initial={false}
           className="flex items-center justify-center h-screen text-center"
         >
           <div className="space-y-8 max-w-3xl mx-auto">
             <motion.h1 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.6 }}
               className="text-6xl md:text-7xl font-bold leading-tight"
             >
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-emerald-400">
@@ -70,18 +66,12 @@ export const HeroSection = () => {
               </span>
             </motion.h1>
             <motion.p 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.8 }}
-              className="text-xl md:text-2xl mb-12 text-gray-200"
+               className="text-xl md:text-2xl mb-12 text-gray-200"
             >
               Experience unparalleled smart RV luxury and innovation with cutting edge intelligent technology
             </motion.p>
             <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 1 }}
-              className="flex flex-col sm:flex-row gap-6 justify-center items-center"
+               className="flex flex-col sm:flex-row gap-6 justify-center items-center"
             >
               <Link to="/calculators">
                 <Button 
