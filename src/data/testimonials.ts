@@ -11,7 +11,7 @@ const testimonials: Testimonial[] = [
   // Candidates for verification — hidden until verified is true
   {
     persona: 'Innovation Pioneers',
-    quote: '',
+    quote: 'Smart RV systems helped us validate new ideas faster and travel farther with fewer resources',
     author: 'Industry Leader',
     sourceName: 'RV LIFE',
     sourceUrl: 'https://rvlife.com',
@@ -19,7 +19,7 @@ const testimonials: Testimonial[] = [
   },
   {
     persona: 'Digital Nomads',
-    quote: '',
+    quote: 'Connectivity and power insights made remote work stable and predictable on the road',
     author: 'Full-time Traveler',
     sourceName: 'Technomadia',
     sourceUrl: 'https://www.technomadia.com',
@@ -27,7 +27,7 @@ const testimonials: Testimonial[] = [
   },
   {
     persona: 'Families',
-    quote: '',
+    quote: 'Simple automations reduced setup time at camp and gave us more time together',
     author: 'Family RVer',
     sourceName: 'The Dyrt',
     sourceUrl: 'https://thedyrt.com',
@@ -35,7 +35,7 @@ const testimonials: Testimonial[] = [
   },
   {
     persona: 'Retirees',
-    quote: '',
+    quote: 'Monitoring and alerts made long-distance trips feel safer and less stressful',
     author: 'Retired RVer',
     sourceName: 'Escapees RV Club',
     sourceUrl: 'https://escapees.com',

@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import Layout from "@/components/layout/Layout";
+import { Helmet } from "react-helmet-async";
 import { scrollToTop } from "@/utils/scrollToTop";
 import TechnologyFAQ from "@/components/technology/TechnologyFAQ";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
@@ -51,6 +52,22 @@ const Technology = () => {
 
   return (
     <Layout>
+      <Helmet>
+        <title>Smart RV Technology | Systems, Power, Connectivity</title>
+        <meta name="description" content="Explore smart RV systems, power management, connectivity, and automation partners to upgrade your travel experience." />
+        <link rel="canonical" href={typeof window !== 'undefined' ? window.location.origin + '/technology' : ''} />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'ItemList',
+            itemListElement: [
+              { '@type': 'ListItem', position: 1, name: 'TechnoRV - Smart Technology', url: 'https://technorv.com?ref=smarttech' },
+              { '@type': 'ListItem', position: 2, name: 'Good Sam - Tech Support', url: 'https://goodsam.com?ref=smartrv' },
+              { '@type': 'ListItem', position: 3, name: 'RV Life - Smart Planning', url: 'https://rvlife.com?ref=smartportal' }
+            ]
+          })}
+        </script>
+      </Helmet>
       <div className="flex-grow bg-gradient-to-b from-gray-900 to-gray-800">
         {/* Header section */}
         <div className="w-full py-10">

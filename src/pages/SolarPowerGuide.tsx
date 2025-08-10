@@ -123,6 +123,17 @@ const SolarPowerGuide = () => {
       <Helmet>
         <title>Smart RV Solar Power Guide</title>
         <meta name="description" content="Complete guide to Smart RV solar power systems. Compare panels, batteries, and kits. Calculate your solar needs and find the best deals on equipment." />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'ItemList',
+            itemListElement: [
+              { '@type': 'ListItem', position: 1, name: 'TechnoRV Solar Systems', url: 'https://technorv.com?ref=smarttech' },
+              { '@type': 'ListItem', position: 2, name: 'Good Sam Solar Services', url: 'https://goodsam.com?ref=smartrv' },
+              { '@type': 'ListItem', position: 3, name: 'RV Life Solar Planning', url: 'https://rvlife.com?ref=smartportal' }
+            ]
+          })}
+        </script>
       </Helmet>
 
       <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 text-white">

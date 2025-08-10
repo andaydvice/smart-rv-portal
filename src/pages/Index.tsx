@@ -62,6 +62,18 @@ const Index = () => {
             }
           })}
         </script>
+        <script type="application/ld+json">
+          {JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'ItemList',
+            itemListElement: [
+              { '@type': 'ListItem', position: 1, name: 'Renogy - Solar Power Leader', url: 'https://renogy.com?ref=smartrenogy' },
+              { '@type': 'ListItem', position: 2, name: 'Victron Energy - Power Management', url: 'https://victronenergy.com?ref=smartpower' },
+              { '@type': 'ListItem', position: 3, name: 'Winegard - Internet Solutions', url: 'https://winegard.com?ref=smartconnect' },
+              { '@type': 'ListItem', position: 4, name: 'Torklift - Towing Accessories', url: 'https://torklift.com?ref=smartlift' }
+            ]
+          })}
+        </script>
       </Helmet>
       <motion.div 
         transition={{ duration: 0.6 }}

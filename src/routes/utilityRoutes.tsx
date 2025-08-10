@@ -6,7 +6,7 @@ import StorageFacilities from "../pages/StorageFacilities";
 import StoragePreparationChecklist from "../pages/StoragePreparationChecklist";
 import Contact from "../pages/Contact";
 import Troubleshooting from "../pages/Troubleshooting";
-import ScheduleDemo from "../pages/ScheduleDemo";
+
 import VoiceControl from "../pages/VoiceControl";
 import AccountPage from "@/pages/Account";
 import RVWeather from "../pages/RVWeather";
@@ -46,10 +46,6 @@ const utilityRoutes = [
   {
     path: "/troubleshooting",
     element: <Troubleshooting />,
-  },
-  {
-    path: "/schedule-demo",
-    element: <ScheduleDemo />,
   },
   {
     path: "/voice-control",

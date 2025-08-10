@@ -251,9 +251,9 @@ export const AffiliatePartnerButton: React.FC<AffiliatePartnerButtonProps> = ({
   const fullUrl = `${partnerData.baseUrl}${path}?ref=${partnerData.refCode}`;
 
   const sizeClasses = {
-    sm: 'px-3 py-2 text-sm',
-    md: 'px-4 py-2',
-    lg: 'px-6 py-3 text-lg'
+    sm: 'px-3 py-2 text-sm min-h-[40px] touch-manipulation',
+    md: 'px-4 py-2 min-h-[44px] sm:min-h-[48px] touch-manipulation',
+    lg: 'px-6 py-3 text-lg min-h-[48px] sm:min-h-[56px] touch-manipulation'
   };
 
   return (
@@ -265,7 +265,7 @@ export const AffiliatePartnerButton: React.FC<AffiliatePartnerButtonProps> = ({
       <a
         href={fullUrl}
         target="_blank"
-        rel="noopener noreferrer"
+        rel="nofollow sponsored noopener"
         className="flex items-center justify-center gap-2"
       >
         {children}

@@ -94,6 +94,17 @@ const BlogPost = () => {
         <Helmet>
           <title>{post.title} - Smart RV Blog</title>
           <meta name="description" content={post.description} />
+          <script type="application/ld+json">
+            {JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'ItemList',
+              itemListElement: [
+                { '@type': 'ListItem', position: 1, name: 'RV Life Resources', url: 'https://rvlife.com?ref=smartportal' },
+                { '@type': 'ListItem', position: 2, name: 'TechnoRV Technology', url: 'https://technorv.com?ref=smarttech' },
+                { '@type': 'ListItem', position: 3, name: 'Good Sam Services', url: 'https://goodsam.com?ref=smartrv' }
+              ]
+            })}
+          </script>
         </Helmet>
         
         <div className="container mx-auto px-4 py-8 space-y-8 pt-20 flex-grow">
