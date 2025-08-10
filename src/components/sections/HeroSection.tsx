@@ -39,7 +39,7 @@ export const HeroSection = () => {
           alt="Luxury Smart RV interior with panoramic windows and modern intelligent design"
           className="h-full w-full object-cover"
           loading="eager"
-          fetchPriority="high"
+          
         />
         <div className="absolute inset-0 bg-black/60" />
       </div>
@@ -80,21 +80,21 @@ export const HeroSection = () => {
               transition={{ duration: 0.6, delay: 1 }}
               className="flex flex-col sm:flex-row gap-6 justify-center items-center"
             >
-              <Link to="/schedule-demo">
+              <Link to="/calculators">
                 <Button 
                   size="lg" 
                   className="bg-white text-black hover:bg-white/90 text-lg px-8 py-6 rounded-full transition-all duration-300 transform hover:scale-105"
                 >
-                  Schedule Demo
+                  Calculate ROI
                 </Button>
               </Link>
-              <Link to="/models">
+              <Link to="/features">
                 <Button 
                   variant="outline" 
                   size="lg" 
                   className="border-2 border-white text-white bg-transparent hover:bg-blue-500 hover:border-blue-500 hover:text-white text-lg px-8 py-6 rounded-full transition-all duration-300 transform hover:scale-105"
                 >
-                  Explore Models
+                  See Smart Features
                 </Button>
               </Link>
             </motion.div>

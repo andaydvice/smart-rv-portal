@@ -9,7 +9,8 @@ import { ContactSection } from "@/components/sections/ContactSection";
 import { HomepageAffiliateSection } from "@/components/affiliate/HomepageAffiliateSection";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
 import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
-
+import { Helmet } from "react-helmet";
+import { TrustStrip } from "@/components/sections/TrustStrip";
 // Lazy load components that aren't needed immediately
 const FeaturesSection = lazy(() => import("@/components/sections/FeaturesSection").then(mod => ({ 
   default: mod.FeaturesSection 
@@ -43,13 +44,17 @@ const Index = () => {
 
   return (
     <Layout>
+      <Helmet>
+        <title>Smart RV Technology Hub | Connected, Safe, Efficient</title>
+        <meta name="description" content="Explore smart RV technology, connectivity, safety systems, and ROI tools for tech-savvy travelers and digital nomads." />
+        <link rel="canonical" href={window.location.origin + "/"} />
+      </Helmet>
       <motion.div 
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
         transition={{ duration: 0.6 }}
         className="min-h-screen w-full"
       >
         <HeroSection />
+        <TrustStrip />
         
         <Suspense fallback={<LoadingFallback />}>
           <FeaturesSection />
