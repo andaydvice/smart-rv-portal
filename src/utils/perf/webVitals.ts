@@ -22,7 +22,7 @@ export function registerWebVitals(budgets: Partial<WebVitalsBudget> = {}) {
     w.__wvRegistered = true;
   }
   const b = { ...DEFAULT_BUDGETS, ...budgets };
-  const showToast = !import.meta.env.DEV; // avoid noisy red toasts in dev
+  const showToast = import.meta.env.DEV; // show toasts only in dev
 
   try {
     onLCP((metric) => {

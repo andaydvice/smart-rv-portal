@@ -11,6 +11,7 @@ import './styles/animations.css';
 // ... keep existing code (app and general styles)
 
 import { applyAllEmergencyFixes } from './utils/emergency-styles/combined';
+import { useLocation } from 'react-router-dom';
 
 // Create a client with better error handling
 const queryClient = new QueryClient({
@@ -30,6 +31,7 @@ const queryClient = new QueryClient({
 });
 
 function AppContent() {
+  const location = useLocation();
   useEffect(() => {
     // Guard against StrictMode double-invoke in dev
     if ((window as any).__appEffectRan && import.meta.env.DEV) return;
@@ -38,9 +40,6 @@ function AppContent() {
     
     // Force scroll to top on page load
     window.scrollTo(0, 0);
-    
-    // Apply emergency fixes that bypass React
-    const cleanup = applyAllEmergencyFixes();
     
     // Wire up the map instance and helpers
     document.addEventListener('mapboxgl.map.created', (e: CustomEvent) => {
@@ -52,9 +51,20 @@ function AppContent() {
     };
 
     return () => {
-      if (typeof cleanup === 'function') cleanup();
+      // no-op
     };
   }, []);
+  // Conditionally apply emergency marker fixes only on map routes
+  useEffect(() => {
+    let cleanup: undefined | (() => void);
+    const isMapRoute = /storage|map|maps/i.test(location.pathname);
+    if (isMapRoute) {
+      cleanup = applyAllEmergencyFixes();
+    }
+    return () => {
+      if (cleanup) cleanup();
+    };
+  }, [location.pathname]);
 
   return (
     <React.Suspense fallback={

@@ -78,7 +78,7 @@ export const PreloadedHeaderImage = ({
         height={height}
         loading="eager"
         fetchPriority="high"
-        decoding="async"
+        decoding="sync"
         style={{ 
           position: 'relative', 
           zIndex: 1, // Keep z-index low so text can appear above
