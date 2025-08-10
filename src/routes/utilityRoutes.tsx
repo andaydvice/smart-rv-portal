@@ -1,18 +1,20 @@
 
-import Calculators from "../pages/Calculators";
-import Documentation from "../pages/Documentation";
-import WeatherDashboard from "../pages/WeatherDashboard"; 
-import StorageFacilities from "../pages/StorageFacilities";
-import StoragePreparationChecklist from "../pages/StoragePreparationChecklist";
-import Contact from "../pages/Contact";
-import Troubleshooting from "../pages/Troubleshooting";
+import React, { lazy, Suspense } from "react";
 
-import VoiceControl from "../pages/VoiceControl";
-import AccountPage from "@/pages/Account";
-import RVWeather from "../pages/RVWeather";
-import RVEmergencyCenter from "../pages/RVEmergencyCenter";
-import SolarPowerGuide from "../pages/SolarPowerGuide";
-import RVAppsHub from "../pages/RVAppsHub";
+const Calculators = lazy(() => import("../pages/Calculators"));
+const Documentation = lazy(() => import("../pages/Documentation"));
+const WeatherDashboard = lazy(() => import("../pages/WeatherDashboard")); 
+const StorageFacilities = lazy(() => import("../pages/StorageFacilities"));
+const StoragePreparationChecklist = lazy(() => import("../pages/StoragePreparationChecklist"));
+const Contact = lazy(() => import("../pages/Contact"));
+const Troubleshooting = lazy(() => import("../pages/Troubleshooting"));
+
+const VoiceControl = lazy(() => import("../pages/VoiceControl"));
+const AccountPage = lazy(() => import("@/pages/Account"));
+const RVWeather = lazy(() => import("../pages/RVWeather"));
+const RVEmergencyCenter = lazy(() => import("../pages/RVEmergencyCenter"));
+const SolarPowerGuide = lazy(() => import("../pages/SolarPowerGuide"));
+const RVAppsHub = lazy(() => import("../pages/RVAppsHub"));
 
 const utilityRoutes = [
   {

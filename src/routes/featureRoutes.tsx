@@ -1,23 +1,23 @@
 
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import { RouteObject, Navigate } from "react-router-dom";
 import ErrorPage from "@/pages/ErrorPage";
 
-// Feature pages
-import Features from "@/pages/Features";
-import AudioSystem from "@/pages/features/AudioSystem";
-import SmartTV from "@/pages/features/SmartTV";
-import SmartKitchen from "@/pages/features/SmartKitchen";
-import PowerManagement from "@/pages/features/PowerManagement";
-import InternetConnectivity from "@/pages/features/InternetConnectivity";
-import NavigationSystem from "@/pages/features/NavigationSystem";
-import SecuritySystem from "@/pages/features/SecuritySystem";
-import AutomatedDriving from "@/pages/features/AutomatedDriving";
-import WaterSystems from "@/pages/features/WaterSystems";
-import SmartAutomation from "@/pages/features/SmartAutomation";
-import ClimateControl from "@/pages/features/ClimateControl";
-import Entertainment from "@/pages/features/Entertainment";
-import RemoteControl from "@/pages/features/RemoteControl";
+// Feature pages (lazy)
+const Features = lazy(() => import("@/pages/Features"));
+const AudioSystem = lazy(() => import("@/pages/features/AudioSystem"));
+const SmartTV = lazy(() => import("@/pages/features/SmartTV"));
+const SmartKitchen = lazy(() => import("@/pages/features/SmartKitchen"));
+const PowerManagement = lazy(() => import("@/pages/features/PowerManagement"));
+const InternetConnectivity = lazy(() => import("@/pages/features/InternetConnectivity"));
+const NavigationSystem = lazy(() => import("@/pages/features/NavigationSystem"));
+const SecuritySystem = lazy(() => import("@/pages/features/SecuritySystem"));
+const AutomatedDriving = lazy(() => import("@/pages/features/AutomatedDriving"));
+const WaterSystems = lazy(() => import("@/pages/features/WaterSystems"));
+const SmartAutomation = lazy(() => import("@/pages/features/SmartAutomation"));
+const ClimateControl = lazy(() => import("@/pages/features/ClimateControl"));
+const Entertainment = lazy(() => import("@/pages/features/Entertainment"));
+const RemoteControl = lazy(() => import("@/pages/features/RemoteControl"));
 
 export const featureRoutes: RouteObject[] = [
   {

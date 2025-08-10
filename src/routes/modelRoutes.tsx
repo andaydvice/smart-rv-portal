@@ -1,14 +1,14 @@
 
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import { RouteObject, Navigate } from "react-router-dom";
 import ErrorPage from "@/pages/ErrorPage";
 
-// Model pages
-import Models from "@/pages/Models";
-import CompactModel from "@/pages/models/CompactModel";
-import LuxuryModel from "@/pages/models/LuxuryModel";
-import AdventureModel from "@/pages/models/AdventureModel";
-import CompareModels from "@/pages/models/CompareModels";
+// Model pages (lazy)
+const Models = lazy(() => import("@/pages/Models"));
+const CompactModel = lazy(() => import("@/pages/models/CompactModel"));
+const LuxuryModel = lazy(() => import("@/pages/models/LuxuryModel"));
+const AdventureModel = lazy(() => import("@/pages/models/AdventureModel"));
+const CompareModels = lazy(() => import("@/pages/models/CompareModels"));
 
 export const modelRoutes: RouteObject[] = [
   {

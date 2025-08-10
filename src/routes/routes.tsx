@@ -1,11 +1,11 @@
 
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import { RouteObject } from "react-router-dom";
 
-// Import root page
-import Index from "../pages/Index";
+// Import root page (lazy)
+const Index = lazy(() => import("../pages/Index"));
 import ErrorPage from "../pages/ErrorPage";
-import SearchResults from "../pages/SearchResults";
+const SearchResults = lazy(() => import("../pages/SearchResults"));
 
 // Import route groups
 import featureRoutes from "./featureRoutes";

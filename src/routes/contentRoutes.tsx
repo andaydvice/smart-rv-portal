@@ -1,17 +1,17 @@
 
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import { RouteObject } from "react-router-dom";
 
-import Technology from "../pages/Technology";
+const Technology = lazy(() => import("../pages/Technology"));
 import ErrorPage from "../pages/ErrorPage";
-import Blog from "../pages/Blog";
-import Features from "../pages/Features";
-import Documentation from "../pages/Documentation";
-import CompleteDocumentation from "../pages/documentation/CompleteDocumentation";
-import BlogPost from "../pages/BlogPost";
-import About from "../pages/About"; // MODIFIED: Added About page import
-import Products from "../pages/Products"; // MODIFIED: Added Products page import
-import Pricing from "../pages/Pricing"; // MODIFIED: Added Pricing page import
+const Blog = lazy(() => import("../pages/Blog"));
+const Features = lazy(() => import("../pages/Features"));
+const Documentation = lazy(() => import("../pages/Documentation"));
+const CompleteDocumentation = lazy(() => import("../pages/documentation/CompleteDocumentation"));
+const BlogPost = lazy(() => import("../pages/BlogPost"));
+const About = lazy(() => import("../pages/About")); // MODIFIED: Added About page import
+const Products = lazy(() => import("../pages/Products")); // MODIFIED: Added Products page import
+const Pricing = lazy(() => import("../pages/Pricing")); // MODIFIED: Added Pricing page import
 
 const contentRoutes: RouteObject[] = [
   {

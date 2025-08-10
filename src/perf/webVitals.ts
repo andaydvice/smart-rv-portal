@@ -1,4 +1,4 @@
-import { onCLS, onLCP, onINP, onTTFB, onFCP, type Metric } from 'web-vitals';
+import { onCLS, onLCP, onINP, onTTFB, onFCP, type Metric } from 'web-vitals/attribution';
 
 export type WebVitalsReport = {
   CLS?: number;

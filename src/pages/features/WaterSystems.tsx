@@ -36,8 +36,13 @@ const WaterSystems = () => {
               <div className="relative aspect-video mb-6">
                 <img 
                   src="/lovable-uploads/3af8fc31-188d-477e-8ab5-b94bd8c4ec77.png"
-                  alt="Smart RV Fresh Water Management System"
+                  alt="Smart RV fresh water management system hero image"
                   className="absolute inset-0 w-full h-full object-cover rounded-lg"
+                  width={1280}
+                  height={720}
+                  decoding="async"
+                  fetchPriority="high"
+                  sizes="(min-width: 768px) 50vw, 100vw"
                 />
               </div>
               <ul className="list-disc list-inside space-y-3 text-gray-300">
@@ -56,8 +61,13 @@ const WaterSystems = () => {
               <div className="relative aspect-video mb-6">
                 <img 
                   src="/lovable-uploads/85e4d897-10d7-4f90-b231-597f7fcfdffc.png"
-                  alt="Smart RV Waste Water Management System"
+                  alt="Smart RV waste water management system"
                   className="absolute inset-0 w-full h-full object-cover rounded-lg"
+                  width={1280}
+                  height={720}
+                  loading="lazy"
+                  decoding="async"
+                  sizes="(min-width: 768px) 50vw, 100vw"
                 />
               </div>
               <ul className="list-disc list-inside space-y-3 text-gray-300">

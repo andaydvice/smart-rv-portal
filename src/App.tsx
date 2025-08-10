@@ -8,12 +8,8 @@ import RouterProvider from './components/router/RouterProvider';
 import PerformanceReporter from './components/perf/PerformanceReporter';
 import './App.css';
 import './styles/animations.css';
-import './styles/map-loading.css';
-import './styles/map-fixes.css';          
-import './styles/emergency-marker-fix.css'; 
-import './styles/map-optimizations.css';   
-import './styles/force-markers.css';       
-import './styles/map/index.css';  // Updated path to use the index file that imports all map styles
+// ... keep existing code (app and general styles)
+
 import { applyAllEmergencyFixes } from './utils/emergency-styles/combined';
 
 // Create a client with better error handling

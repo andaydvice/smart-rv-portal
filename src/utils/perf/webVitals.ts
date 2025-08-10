@@ -1,6 +1,6 @@
 // Utility to register Web Vitals and report against budgets
 // Keeps runtime light and logs to console; shows toast if budgets are exceeded
-import { onCLS, onLCP, onINP } from 'web-vitals';
+import { onCLS, onLCP, onINP } from 'web-vitals/attribution';
 import { toast } from 'sonner';
 
 export type WebVitalsBudget = {
@@ -20,22 +20,32 @@ export function registerWebVitals(budgets: Partial<WebVitalsBudget> = {}) {
 
   try {
     onLCP((metric) => {
-      console.info(`[Web Vitals] LCP: ${metric.value.toFixed(0)}ms`);
-      if (metric.value > b.LCP) {
-        toast.warning(`LCP high: ${metric.value.toFixed(0)}ms (budget ${b.LCP}ms)`);
+      const v = metric.value;
+      console.info(`[Web Vitals] LCP: ${v.toFixed(0)}ms`, metric.attribution ?? {});
+      if (v > b.LCP) {
+        toast.warning(`LCP high: ${v.toFixed(0)}ms (budget ${b.LCP}ms)`);
       }
     });
 
     onINP((metric) => {
-      console.info(`[Web Vitals] INP: ${metric.value.toFixed(0)}ms`);
-      if (metric.value > b.INP) {
-        toast.warning(`INP high: ${metric.value.toFixed(0)}ms (budget ${b.INP}ms)`);
+      const v = metric.value;
+      const a: any = (metric as any).attribution || {};
+      console.info(`[Web Vitals] INP: ${v.toFixed(0)}ms`, {
+        eventType: a.eventType,
+        inputDelay: a.inputDelay,
+        processingDuration: a.processingDuration,
+        presentationDelay: a.presentationDelay,
+        target: a.eventTarget,
+      });
+      if (v > b.INP) {
+        toast.warning(`INP high: ${v.toFixed(0)}ms (budget ${b.INP}ms)`);
       }
     });
 
     onCLS((metric) => {
       const val = Number(metric.value.toFixed(3));
-      console.info(`[Web Vitals] CLS: ${val}`);
+      const a: any = (metric as any).attribution || {};
+      console.info(`[Web Vitals] CLS: ${val}`, { largestShiftTarget: a.largestShiftTarget, largestShiftValue: a.largestShiftValue });
       if (val > b.CLS) {
         toast.warning(`CLS high: ${val} (budget ${b.CLS})`);
       }
