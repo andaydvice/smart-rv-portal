@@ -8,6 +8,7 @@ import { Helmet } from "react-helmet-async";
 import { scrollToTop } from "@/utils/scrollToTop";
 import TechnologyFAQ from "@/components/technology/TechnologyFAQ";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
+import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
 
 // Simple version of Technology page without any complex components
 const Technology = () => {
@@ -163,6 +164,9 @@ const Technology = () => {
               ]}
               gridCols="3"
             />
+            <div className="px-4">
+              <AffiliateDisclosure compact className="max-w-7xl mx-auto my-8" />
+            </div>
           </div>
         </div>
       </div>

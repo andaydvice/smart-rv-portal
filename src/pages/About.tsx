@@ -4,15 +4,22 @@ import { motion } from "framer-motion";
 import Layout from "@/components/layout/Layout";
 import { scrollToTop } from "@/utils/scrollToTop";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
+import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
+import { Helmet } from "react-helmet-async";
 
 const About = () => {
   useEffect(() => {
-    console.log("🚀 About page loaded - Scrolling to top");
+    
     scrollToTop();
   }, []);
 
   return (
     <Layout>
+      <Helmet>
+        <title>About Smart RV | Mission, Values, Partners</title>
+        <meta name="description" content="Learn about Smart RV's mission, values, and trusted partners helping RVers travel smarter." />
+        <link rel="canonical" href={typeof window !== 'undefined' ? window.location.origin + '/about' : ''} />
+      </Helmet>
       {/* Hero Video Section - Simplified Structure */}
       <div className="relative w-full h-[70vh] min-h-[500px] bg-gradient-to-br from-[#080F1F] to-[#151A22]">
         {/* Video Container - Simple Iframe Embed */}
@@ -36,7 +43,7 @@ const About = () => {
               initial={{ y: -20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.5, duration: 0.8 }}
-              className="text-6xl md:text-7xl font-bold text-white mb-4 image-overlay-headline"
+              className="text-4xl sm:text-5xl md:text-7xl font-bold text-white mb-4 image-overlay-headline"
             >
               About Smart RV
             </motion.h1>
@@ -175,6 +182,9 @@ const About = () => {
               ]}
               gridCols="3"
             />
+            <div className="px-4">
+              <AffiliateDisclosure compact className="max-w-6xl mx-auto my-8" />
+            </div>
 
             {/* Call to Action */}
             <div className="bg-black/20 backdrop-blur-md p-8 rounded-xl border border-white/10 text-center">

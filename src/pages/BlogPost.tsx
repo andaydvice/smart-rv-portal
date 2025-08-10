@@ -45,11 +45,6 @@ const BlogPost = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
   
-  console.log({
-    pathname: window.location.pathname,
-    slug: useParams().slug,
-    postFound: blogPosts.some(p => p.slug === useParams().slug)
-  });
 
   const post = blogPosts.find(post => post.slug === slug);
 

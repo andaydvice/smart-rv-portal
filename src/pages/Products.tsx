@@ -12,7 +12,7 @@ import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
 
 const Products = () => {
   useEffect(() => {
-    console.log("Products page - Scrolling to top");
+    
     scrollToTop();
   }, []);
 
@@ -166,7 +166,7 @@ const Products = () => {
         />
         <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
           <div className="text-center">
-            <h1 className="text-6xl font-bold text-white mb-4 image-overlay-headline">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-4 image-overlay-headline">
               RV Marketplace
             </h1>
             <p className="text-xl text-white/90 max-w-2xl mx-auto px-4">
@@ -270,7 +270,7 @@ const Products = () => {
             </p>
             <Link 
               to="/products"
-              className="inline-block bg-[#5B9BD5] text-white hover:bg-[#4A8AC4] px-8 py-3 rounded-full font-medium transition-colors"
+              className="inline-block bg-[#5B9BD5] text-white hover:bg-[#4A8AC4] px-8 py-3 rounded-full font-medium transition-colors min-h-[44px] touch-manipulation"
             >
               Explore Top Deals
             </Link>

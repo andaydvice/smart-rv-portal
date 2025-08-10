@@ -18,7 +18,7 @@ import {
 import { useToast } from "@/components/ui/use-toast";
 import Layout from "@/components/layout/Layout";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 import { useNavigate } from "react-router-dom";
 
 const ScheduleDemo = () => {

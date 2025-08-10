@@ -5,10 +5,17 @@ import { Link } from "react-router-dom";
 import { Navigation, Shield, Battery, Tv, Droplet, Cog, Thermometer, Music } from "lucide-react";
 import Layout from "@/components/layout/Layout";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
+import { Helmet } from "react-helmet-async";
+import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
 
 const Features = () => {
   return (
     <Layout>
+      <Helmet>
+        <title>Smart RV Features | Systems And Capabilities</title>
+        <meta name="description" content="Explore Smart RV features including navigation, security, power management, water systems, and automation with trusted partners." />
+        <link rel="canonical" href={typeof window !== 'undefined' ? window.location.origin + '/features' : ''} />
+      </Helmet>
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

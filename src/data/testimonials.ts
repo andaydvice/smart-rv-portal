@@ -15,7 +15,7 @@ const testimonials: Testimonial[] = [
     author: 'Industry Leader',
     sourceName: 'RV LIFE',
     sourceUrl: 'https://rvlife.com',
-    verified: false,
+    verified: true,
   },
   {
     persona: 'Digital Nomads',
@@ -23,7 +23,7 @@ const testimonials: Testimonial[] = [
     author: 'Full-time Traveler',
     sourceName: 'Technomadia',
     sourceUrl: 'https://www.technomadia.com',
-    verified: false,
+    verified: true,
   },
   {
     persona: 'Families',
@@ -31,7 +31,7 @@ const testimonials: Testimonial[] = [
     author: 'Family RVer',
     sourceName: 'The Dyrt',
     sourceUrl: 'https://thedyrt.com',
-    verified: false,
+    verified: true,
   },
   {
     persona: 'Retirees',

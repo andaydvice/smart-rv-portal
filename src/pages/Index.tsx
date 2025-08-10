@@ -32,7 +32,7 @@ const LoadingFallback = () => (
 
 const Index = () => {
   useEffect(() => {
-    console.log("Index component mounted");
+    
     
     // Show a toast to confirm the page has loaded
     setTimeout(() => {

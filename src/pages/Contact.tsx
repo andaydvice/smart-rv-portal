@@ -8,15 +8,13 @@ import { useToast } from "@/components/ui/use-toast";
 import Layout from "@/components/layout/Layout";
 import { scrollToTop } from "@/utils/scrollToTop";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
+import { Helmet } from "react-helmet-async";
 
 const Contact = () => {
   const { toast } = useToast();
   
-  console.log("🔍 DEBUG: Contact page rendering");
-  
   // Scroll to top on component mount
   useEffect(() => {
-    console.log("Contact page - Scrolling to top");
     scrollToTop();
   }, []);
 
@@ -30,6 +28,11 @@ const Contact = () => {
 
   return (
     <Layout>
+      <Helmet>
+        <title>Contact Smart RV | Get Support And Advice</title>
+        <meta name="description" content="Contact Smart RV for questions, support, and expert advice on technology, power systems, and travel planning." />
+        <link rel="canonical" href={typeof window !== 'undefined' ? window.location.origin + '/contact' : ''} />
+      </Helmet>
       {/* REMOVED: Extra Navbar component that was causing duplication */}
       <motion.div 
         initial={{ opacity: 0 }}
