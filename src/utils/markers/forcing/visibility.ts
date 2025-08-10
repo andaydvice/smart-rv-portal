@@ -5,7 +5,7 @@ import mapboxgl from 'mapbox-gl';
  * Forces all map markers to be visible by setting their CSS styles
  */
 export function forceMapMarkersVisible() {
-  console.log('Forcing map markers to be visible');
+  if (import.meta.env.DEV) console.log('Forcing map markers to be visible');
   
   document.querySelectorAll('.mapboxgl-marker, .custom-marker, .emergency-marker').forEach(marker => {
     if (marker instanceof HTMLElement) {

@@ -3,7 +3,7 @@
  * Patch the Mapbox marker prototype if available
  */
 export function patchMapboxMarkerPrototype() {
-  console.log("Attempting to patch Mapbox Marker prototype");
+  if (import.meta.env.DEV) console.log("Attempting to patch Mapbox Marker prototype");
   
   if (window.mapboxgl && window.mapboxgl.Marker) {
     // Store original methods to call them later
@@ -12,7 +12,7 @@ export function patchMapboxMarkerPrototype() {
     
     // Patch the addTo method
     window.mapboxgl.Marker.prototype.addTo = function(map) {
-      console.log("Patched addTo called for marker");
+      if (import.meta.env.DEV) console.log("Patched addTo called for marker");
       // Store map instance globally for emergency access
       window.mapInstance = map;
       
@@ -21,7 +21,7 @@ export function patchMapboxMarkerPrototype() {
       
       // Ensure element is visible with direct style manipulation
       if (this._element) {
-        console.log("Forcing marker element visible");
+        if (import.meta.env.DEV) console.log("Forcing marker element visible");
         Object.assign(this._element.style, {
           visibility: 'visible',
           display: 'block',
@@ -41,7 +41,7 @@ export function patchMapboxMarkerPrototype() {
           
           this._element.addEventListener('click', (e) => {
             e.stopPropagation();
-            console.log('Marker clicked via patched handler');
+            if (import.meta.env.DEV) console.log('Marker clicked via patched handler');
             
             // Try to open popup
             if (this.getPopup && typeof this.getPopup === 'function' && !this.getPopup().isOpen()) {
@@ -76,9 +76,9 @@ export function patchMapboxMarkerPrototype() {
       return result;
     };
     
-    console.log('Mapbox Marker prototype successfully patched');
+    if (import.meta.env.DEV) console.log('Mapbox Marker prototype successfully patched');
   } else {
-    console.warn('Could not patch Mapbox Marker prototype - mapboxgl not available');
+    if (import.meta.env.DEV) console.warn('Could not patch Mapbox Marker prototype - mapboxgl not available');
     
     // Add a fallback to try again later after scripts may have loaded
     setTimeout(() => {

@@ -3,7 +3,7 @@
  * Core function to inject emergency marker styles with better performance
  */
 export function injectEmergencyStyles() {
-  console.log("Injecting emergency marker styles");
+  if (import.meta.env.DEV) console.log("Injecting emergency marker styles");
   
   // Check if styles already exist to avoid redundant operations
   if (document.getElementById('emergency-marker-fix')) {
@@ -90,5 +90,5 @@ export function injectEmergencyStyles() {
   `;
   
   document.head.appendChild(style);
-  console.log('Emergency marker styles injected successfully');
+  if (import.meta.env.DEV) console.log('Emergency marker styles injected successfully');
 }

@@ -7,7 +7,7 @@ import { patchMapboxMarkerPrototype, attemptMapboxPatchWithRetry } from './marke
  * Apply all emergency fixes for marker visibility
  */
 export function applyAllEmergencyFixes() {
-  console.log("Applying all emergency marker fixes");
+  if (import.meta.env.DEV) console.log("Applying all emergency marker fixes");
   
   // Add marker loading data attribute to body
   document.body.setAttribute('data-markers-loading', 'true');

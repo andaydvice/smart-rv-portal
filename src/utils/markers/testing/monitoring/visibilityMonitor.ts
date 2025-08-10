@@ -7,14 +7,14 @@ import { testMarkerVisibility } from '../core/testVisibility';
  * @returns A cleanup function to stop monitoring
  */
 export function monitorMarkerVisibility(interval = 5000) {
-  console.log(`Starting marker visibility monitoring (interval: ${interval}ms)`);
+  if (import.meta.env.DEV) console.log(`Starting marker visibility monitoring (interval: ${interval}ms)`);
   
   const timer = setInterval(() => {
     testMarkerVisibility();
   }, interval);
   
   return () => {
-    console.log('Stopping marker visibility monitoring');
+    if (import.meta.env.DEV) console.log('Stopping marker visibility monitoring');
     clearInterval(timer);
   };
 }

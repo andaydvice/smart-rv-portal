@@ -7,14 +7,14 @@ import { MarkerVisibilityTestResult, VisibilityIssueDetail } from '../types';
  * This is a last resort when normal visibility methods fail
  */
 export function forceMapMarkersVisible() {
-  console.log('Forcing map markers to be visible');
+  if (import.meta.env.DEV) console.log('Forcing map markers to be visible');
   
   // Check if we have a map instance
   if (typeof window !== 'undefined') {
     const markers = document.querySelectorAll('.mapboxgl-marker, .custom-marker');
     
     if (markers.length === 0) {
-      console.info('No markers found, will create emergency markers');
+      if (import.meta.env.DEV) console.info('No markers found, will create emergency markers');
       return false;
     }
     
@@ -29,7 +29,7 @@ export function forceMapMarkersVisible() {
       }
     });
     
-    console.log(`Applied forced visibility to ${markers.length} markers`);
+    if (import.meta.env.DEV) console.log(`Applied forced visibility to ${markers.length} markers`);
     return true;
   }
   
@@ -41,7 +41,7 @@ export function forceMapMarkersVisible() {
  */
 export function testMarkersVisibility(fixIssues: boolean = false): MarkerVisibilityTestResult {
   const markers = document.querySelectorAll('.mapboxgl-marker, .custom-marker');
-  console.log(`Testing visibility of ${markers.length} markers`);
+  if (import.meta.env.DEV) console.log(`Testing visibility of ${markers.length} markers`);
   
   const issues: VisibilityIssueDetail[] = [];
   let visibleCount = 0;
@@ -89,7 +89,7 @@ export function testMarkersVisibility(fixIssues: boolean = false): MarkerVisibil
     hiddenMarkers: hiddenCount
   };
   
-  console.log('Marker visibility test results:', result);
+  if (import.meta.env.DEV) console.log('Marker visibility test results:', result);
   return result;
 }
 
@@ -104,19 +104,19 @@ export function ensureMapVisible(mapContainerId: string = 'map') {
   mapContainer.style.display = 'block';
   mapContainer.style.opacity = '1';
   
-  console.log('Map container visibility enforced');
+  if (import.meta.env.DEV) console.log('Map container visibility enforced');
 }
 
 /**
  * Removes "View Details" buttons that might be covering markers
  */
 export function removeViewDetailsButtons() {
+  if (!import.meta.env.DEV) return;
   const detailButtons = document.querySelectorAll('.view-details-btn, .view-facility-btn');
   detailButtons.forEach(btn => {
     if (btn instanceof HTMLElement) {
       btn.style.display = 'none';
     }
   });
-  
-  console.log(`Removed ${detailButtons.length} detail buttons that may obscure markers`);
+  if (import.meta.env.DEV) console.log(`Removed ${detailButtons.length} detail buttons that may obscure markers`);
 }

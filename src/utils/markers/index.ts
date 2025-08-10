@@ -4,24 +4,24 @@ export * from './emergency/index';
 
 // Helper function to ensure markers exist
 export const ensureMarkersExist = (map: mapboxgl.Map, facilities: any[]) => {
-  console.log(`Ensuring markers exist for ${facilities.length} facilities`);
+  if (import.meta.env.DEV) console.log(`Ensuring markers exist for ${facilities.length} facilities`);
   
   // Check if markers already exist
   const existingMarkers = document.querySelectorAll('.mapboxgl-marker, .custom-marker');
   if (existingMarkers.length > 0) {
-    console.log(`Found ${existingMarkers.length} existing markers`);
+    if (import.meta.env.DEV) console.log(`Found ${existingMarkers.length} existing markers`);
     return;
   }
   
   // Wait a bit and force create markers if they don't exist
   setTimeout(() => {
     const markers = document.querySelectorAll('.mapboxgl-marker, .custom-marker');
-    console.log(`After delay: found ${markers.length} markers`);
+    if (import.meta.env.DEV) console.log(`After delay: found ${markers.length} markers`);
     
     if (markers.length === 0) {
       try {
         // Force create emergency markers
-        console.log('No markers found, creating emergency markers');
+        if (import.meta.env.DEV) console.log('No markers found, creating emergency markers');
         const { createEmergencyMarkers } = require('./emergency/directMarkerCreation');
         createEmergencyMarkers(map, facilities);
         
@@ -42,11 +42,7 @@ export const ensureMarkersExist = (map: mapboxgl.Map, facilities: any[]) => {
   }, 1000);
 };
 
-// Helper function to remove "View Details" buttons
+// Helper function to remove "View Details" buttons (no-op to avoid removing UI)
 export const removeViewDetailsButtons = () => {
-  document.querySelectorAll('.view-facility-btn, .view-details, button.view-details, a.view-details').forEach(btn => {
-    if (btn.parentNode) {
-      btn.parentNode.removeChild(btn);
-    }
-  });
+  // Intentionally left blank to prevent unintended UI removal
 };

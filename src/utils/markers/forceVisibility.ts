@@ -3,11 +3,11 @@
  * Core utility to force map markers to be visible
  */
 export function forceMapMarkersVisible() {
-  console.log("ForceMarkersNow: Attempting to make markers visible");
+  if (import.meta.env.DEV) console.log("ForceMarkersNow: Attempting to make markers visible");
   
   // Find all markers currently on the page
   const markers = document.querySelectorAll('.mapboxgl-marker, .custom-marker');
-  console.log(`Found ${markers.length} markers`);
+  if (import.meta.env.DEV) console.log(`Found ${markers.length} markers`);
   
   // If no markers exist yet, create emergency markers
   if (markers.length === 0) {
