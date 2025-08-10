@@ -16,7 +16,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
         {/* canonical managed per-page; removed from layout to prevent duplication */}
       </Helmet>
       <Navbar />
-      <main className="w-full max-w-full pt-16 overflow-x-hidden">
+      <main className="w-full max-w-full pt-16 overflow-x-hidden bg-deeper-background">
         {children}
       </main>
       <Footer2 />
