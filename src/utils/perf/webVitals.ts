@@ -22,12 +22,13 @@ export function registerWebVitals(budgets: Partial<WebVitalsBudget> = {}) {
     w.__wvRegistered = true;
   }
   const b = { ...DEFAULT_BUDGETS, ...budgets };
+  const showToast = !import.meta.env.DEV; // avoid noisy red toasts in dev
 
   try {
     onLCP((metric) => {
       const v = metric.value;
       console.info(`[Web Vitals] LCP: ${v.toFixed(0)}ms`, metric.attribution ?? {});
-      if (v > b.LCP) {
+      if (v > b.LCP && showToast) {
         toast({ description: `LCP high: ${v.toFixed(0)}ms (budget ${b.LCP}ms)`, variant: 'destructive' });
       }
     });
@@ -42,7 +43,7 @@ export function registerWebVitals(budgets: Partial<WebVitalsBudget> = {}) {
         presentationDelay: a.presentationDelay,
         target: a.eventTarget,
       });
-      if (v > b.INP) {
+      if (v > b.INP && showToast) {
         toast({ description: `INP high: ${v.toFixed(0)}ms (budget ${b.INP}ms)`, variant: 'destructive' });
       }
     });
@@ -51,7 +52,7 @@ export function registerWebVitals(budgets: Partial<WebVitalsBudget> = {}) {
       const val = Number(metric.value.toFixed(3));
       const a: any = (metric as any).attribution || {};
       console.info(`[Web Vitals] CLS: ${val}`, { largestShiftTarget: a.largestShiftTarget, largestShiftValue: a.largestShiftValue });
-      if (val > b.CLS) {
+      if (val > b.CLS && showToast) {
         toast({ description: `CLS high: ${val} (budget ${b.CLS})`, variant: 'destructive' });
       }
     });

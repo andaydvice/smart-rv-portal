@@ -56,7 +56,7 @@ export function startRUM(opts: RUMOptions = {}) {
       if (flushedForView) return;
       flushedForView = true;
 
-      const payload = {
+      const payload: any = {
         session_id: context.session_id,
         url: location.href,
         route: location.pathname,
@@ -68,7 +68,6 @@ export function startRUM(opts: RUMOptions = {}) {
         ttfb_ms: state.ttfb ?? null,
         nav_type: (nav as any)?.type ?? null,
         is_soft_nav: currentIsSoftNav,
-        route_paint_ms: currentIsSoftNav && softNavStart != null ? Math.round(performance.now() - softNavStart) : null,
         device_memory: context.device_memory ?? null,
         hardware_concurrency: context.hardware_concurrency ?? null,
         effective_type: state.effectiveType ?? null,
