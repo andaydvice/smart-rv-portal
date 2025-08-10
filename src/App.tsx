@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Toaster } from '@/components/ui/toaster';
@@ -44,7 +43,7 @@ function AppContent() {
     injectEmergencyStyles();
     forceMapMarkersVisible();
     
-    
+    // Wire up the map instance and helpers
     document.addEventListener('mapboxgl.map.created', (e: CustomEvent) => {
       (window as any).mapInstance = e.detail.map;
     });
@@ -52,22 +51,6 @@ function AppContent() {
     (window as any).dispatchMapEvent = (eventName: string, detail: any) => {
       document.dispatchEvent(new CustomEvent(eventName, { detail }));
     };
-    
-    setTimeout(() => {
-      try {
-        const markers = document.querySelectorAll('.mapboxgl-marker, .custom-marker, .emergency-marker');
-        markers.forEach(marker => {
-          if (marker instanceof HTMLElement) {
-            marker.style.visibility = 'visible';
-            marker.style.display = 'block';
-            marker.style.opacity = '1';
-            marker.style.zIndex = '1000';
-          }
-        });
-      } catch (err) {
-        console.error('Error forcing markers visible:', err);
-      }
-    }, 1000);
   }, []);
 
   return (
