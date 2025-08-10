@@ -1,10 +1,10 @@
 
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 import { Container } from '@/components/ui/container';
 import { StorageFacility } from './types';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { AlertCircle, MapPin, Phone, Star } from 'lucide-react';
-import EnhancedGoogleMap from '../map/EnhancedGoogleMap';
+const EnhancedGoogleMap = lazy(() => import('../map/EnhancedGoogleMap'));
 
 interface LocationPreviewSectionProps {
   mapToken: string;
@@ -125,22 +125,24 @@ const LocationPreviewSection: React.FC<LocationPreviewSectionProps> = ({ mapToke
             
             {/* Right side: Enhanced Google Map with persistent markers */}
             <div className="map-container-persistent">
-              <EnhancedGoogleMap 
-                apiKey={googleMapsKey}
-                location={{
-                  lat: featuredLocation.latitude,
-                  lng: featuredLocation.longitude
-                }}
-                onMapLoad={handleMapLoad}
-                facilities={[{
-                  name: featuredLocation.name,
-                  address: `${featuredLocation.address}, ${featuredLocation.city}, ${featuredLocation.state}`,
-                  rating: featuredLocation.avg_rating,
-                  phone: featuredLocation.contact_phone,
-                  description: "Premium indoor RV storage facility",
-                  features: getFacilityFeatures(featuredLocation)
-                }]}
-              />
+              <Suspense fallback={<div className="h-[350px] rounded-lg border border-[#1a202c] bg-[#091020]/60 flex items-center justify-center text-gray-400">Loading map…</div>}>
+                <EnhancedGoogleMap 
+                  apiKey={googleMapsKey}
+                  location={{
+                    lat: featuredLocation.latitude,
+                    lng: featuredLocation.longitude
+                  }}
+                  onMapLoad={handleMapLoad}
+                  facilities={[{
+                    name: featuredLocation.name,
+                    address: `${featuredLocation.address}, ${featuredLocation.city}, ${featuredLocation.state}`,
+                    rating: featuredLocation.avg_rating,
+                    phone: featuredLocation.contact_phone,
+                    description: "Premium indoor RV storage facility",
+                    features: getFacilityFeatures(featuredLocation)
+                  }]}
+                />
+              </Suspense>
             </div>
           </div>
         ) : (

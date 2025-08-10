@@ -1,13 +1,32 @@
-
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import { Battery, Sun, Zap, Activity } from "lucide-react";
 import Layout from "@/components/layout/Layout";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
+import { Helmet } from 'react-helmet-async';
 
 const PowerManagement = () => {
+  const canonicalUrl = typeof window !== 'undefined' ? `${window.location.origin}/features/power-management` : 'https://example.com/features/power-management';
+  const title = 'Power management for smart RVs | Optimize energy';
+  const description = 'Smart RV power management with solar integration, battery analytics, and smart distribution to optimize energy and extend off grid time.';
   return (
     <Layout>
+      <Helmet>
+        <title>{title}</title>
+        <meta name="description" content={description} />
+        <link rel="canonical" href={canonicalUrl} />
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={description} />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={canonicalUrl} />
+        <script type="application/ld+json">{JSON.stringify({
+          '@context': 'https://schema.org',
+          '@type': 'WebPage',
+          name: 'Power Management',
+          description,
+          url: canonicalUrl
+        })}</script>
+      </Helmet>
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -42,8 +61,9 @@ const PowerManagement = () => {
               </div>
               <img 
                 src="/lovable-uploads/078abbd1-5852-4d5a-a457-154a7421c673.png"
-                alt="Power Management System" 
+                alt="Smart RV power management system interface with solar and battery monitoring"
                 className="w-full h-64 object-cover rounded-lg mb-6"
+                loading="lazy"
               />
               <ul className="list-disc list-inside space-y-3 text-gray-300 text-left">
                 <li>Solar panel integration and monitoring optimizes energy capture.</li>

@@ -34,6 +34,9 @@ const queryClient = new QueryClient({
 
 function AppContent() {
   useEffect(() => {
+    // Guard against StrictMode double-invoke in dev
+    if ((window as any).__appEffectRan && import.meta.env.DEV) return;
+    (window as any).__appEffectRan = true;
     console.log('App component mounted');
     
     // Force scroll to top on page load

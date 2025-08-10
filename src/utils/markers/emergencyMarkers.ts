@@ -1,5 +1,5 @@
 
-import { applyForcedStyles } from './forceVisibility';
+
 
 /**
  * Create emergency markers when no markers exist
