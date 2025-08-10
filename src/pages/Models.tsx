@@ -6,6 +6,7 @@ import { ArrowRight, Battery, Navigation, Shield, Wifi } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
 import Footer2 from "@/components/ui/Footer2";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
+import { Helmet } from "react-helmet-async";
 
 // Model data
 const models = [
@@ -51,15 +52,6 @@ const models = [
 ];
 
 const Models = () => {
-  const { toast } = useToast();
-
-  console.log("[Models] Rendering Models page");
-  console.log("[Models] First model image path:", models[0].image);
-
-  const handleCompareModels = () => {
-    console.log('Navigating to compare models page');
-    window.location.href = '/models/compare';
-  };
 
   // Define the footer links and socials for this page
   const footerLinks = [
@@ -91,6 +83,11 @@ const Models = () => {
 
   return (
     <Layout>
+      <Helmet>
+        <title>Smart RV Models</title>
+        <meta name="description" content="Explore luxury, adventure, and compact smart RV models with advanced technology and comfort." />
+        <link rel="canonical" href={typeof window !== 'undefined' ? window.location.origin + '/models' : ''} />
+      </Helmet>
       <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -162,10 +159,7 @@ const Models = () => {
             <Link to="/models/compare">
               <Button 
                 variant="outline" 
-                className="bg-transparent border-white text-white hover:bg-blue-500/50 hover:text-white"
-                onClick={() => {
-                  console.log('Compare models button clicked');
-                }}
+                className="bg-transparent border-white text-white hover:bg-blue-500/50 hover:text-white min-h-[44px] touch-manipulation"
               >
                 Compare All Models <ArrowRight className="w-4 h-4 ml-2" />
               </Button>

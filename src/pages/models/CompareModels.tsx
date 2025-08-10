@@ -10,10 +10,8 @@ import FeaturesComparisonTable from "@/components/models/compare/FeaturesCompari
 // import CallToAction from "@/components/models/compare/CallToAction";
 import models from "@/components/models/compare/ModelComparisonData";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
+import { Helmet } from "react-helmet-async";
 
-// CRITICAL DEBUGGING LOGS
-console.log('CompareModels component loaded');
-console.log('Component file path: src/pages/models/CompareModels.tsx');
 
 const CompareModels = () => {
   const location = useLocation();

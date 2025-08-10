@@ -6,10 +6,10 @@ import { Check } from "lucide-react";
 import Layout from "@/components/layout/Layout";
 import { scrollToTop } from "@/utils/scrollToTop";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
+import { Helmet } from "react-helmet-async";
 
 const Pricing = () => {
   useEffect(() => {
-    console.log("Pricing page - Scrolling to top");
     scrollToTop();
   }, []);
 
@@ -61,6 +61,11 @@ const Pricing = () => {
 
   return (
     <Layout>
+      <Helmet>
+        <title>Smart RV Pricing</title>
+        <meta name="description" content="Transparent pricing for Smart RV upgrades including automation, power, security, and connectivity with professional installation." />
+        <link rel="canonical" href={typeof window !== 'undefined' ? window.location.origin + '/pricing' : ''} />
+      </Helmet>
       <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

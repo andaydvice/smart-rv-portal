@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar";
 import Layout from "@/components/layout/Layout";
 import { rvTypes } from "@/data/rvTypes";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
+import { Helmet } from "react-helmet-async";
 
 // Lazy load components that are not immediately visible
 const HeroSection = lazy(() => import("@/components/models/compact/HeroSection"));
@@ -21,7 +22,6 @@ const LoadingPlaceholder = () => (
 
 const CompactModel = () => {
   useEffect(() => {
-    console.log("[CompactModel] Component mounted");
     window.scrollTo(0, 0);
     
     // Preload images for better user experience
@@ -40,6 +40,11 @@ const CompactModel = () => {
 
   return (
     <Layout>
+      <Helmet>
+        <title>Compact Smart RV Models</title>
+        <meta name="description" content="Explore compact smart RV models ideal for city travel and weekend getaways with modern smart features." />
+        <link rel="canonical" href={typeof window !== 'undefined' ? window.location.origin + '/models/compact' : ''} />
+      </Helmet>
       <div className="bg-gradient-to-b from-gray-900 to-gray-800 w-full">
         <Suspense fallback={<LoadingPlaceholder />}>
           <HeroSection />

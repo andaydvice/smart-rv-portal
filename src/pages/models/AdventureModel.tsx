@@ -9,15 +9,20 @@ import Layout from "@/components/layout/Layout";
 import { Container } from "@/components/ui/container";
 import { useEffect } from "react";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
+import { Helmet } from "react-helmet-async";
 
 const AdventureModel = () => {
   useEffect(() => {
-    console.log("[AdventureModel] Component mounted");
     window.scrollTo(0, 0);
   }, []);
 
   return (
     <Layout>
+      <Helmet>
+        <title>Adventure Smart RV Models</title>
+        <meta name="description" content="Explore adventure-ready smart RV models built for off-grid travel with rugged capability and connected tech." />
+        <link rel="canonical" href={typeof window !== 'undefined' ? window.location.origin + '/models/adventure' : ''} />
+      </Helmet>
       <div className="bg-gradient-to-b from-gray-900 to-gray-800 w-full">
         <AdventureHero />
         <motion.div 

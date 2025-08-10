@@ -11,6 +11,7 @@ import { KeyFeatures } from "@/components/luxury-models/KeyFeatures";
 import { ModelCategory } from "@/components/luxury-models/ModelCategory";
 import { luxuryModels } from "@/data/luxury-models";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
+import { Helmet } from "react-helmet-async";
 
 const LuxuryModel = () => {
   const navigate = useNavigate();
@@ -21,13 +22,8 @@ const LuxuryModel = () => {
 
   const handleNavigation = (e: React.MouseEvent) => {
     e.preventDefault();
-    console.log("[LuxuryModel] Navigation attempt started");
-    console.log("[LuxuryModel] Current location:", window.location.pathname);
-    console.log("[LuxuryModel] Target location: /models");
-    
     try {
       navigate("/models");
-      console.log("[LuxuryModel] Navigation successful");
     } catch (error) {
       console.error("[LuxuryModel] Navigation failed:", error);
     }
@@ -106,6 +102,11 @@ const LuxuryModel = () => {
 
   return (
     <Layout>
+      <Helmet>
+        <title>Luxury Smart RV Models</title>
+        <meta name="description" content="Discover luxury smart RV models with premium features, automation, and high-end finishes." />
+        <link rel="canonical" href={typeof window !== 'undefined' ? window.location.origin + '/models/luxury' : ''} />
+      </Helmet>
       <motion.main 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
