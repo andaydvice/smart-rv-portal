@@ -1,6 +1,6 @@
 
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Navbar from "@/components/Navbar";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -18,6 +18,8 @@ import {
 import { useToast } from "@/components/ui/use-toast";
 import Layout from "@/components/layout/Layout";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
+import { Helmet } from "react-helmet";
+import { useNavigate } from "react-router-dom";
 
 const ScheduleDemo = () => {
   const [date, setDate] = useState<Date>();
@@ -28,6 +30,11 @@ const ScheduleDemo = () => {
     phone: "",
     message: "",
   });
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    navigate('/products', { replace: true });
+  }, [navigate]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -40,6 +47,10 @@ const ScheduleDemo = () => {
 
   return (
     <Layout>
+      <Helmet>
+        <meta name="robots" content="noindex,nofollow" />
+        <title>Redirecting to Products</title>
+      </Helmet>
       <div className="relative">
         <img
           src="/lovable-uploads/5ad3c360-419f-4662-8c19-3d5a3cffe23f.png"

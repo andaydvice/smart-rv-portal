@@ -5,6 +5,9 @@ import { Link } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
 import { scrollToTop } from "@/utils/scrollToTop";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
+import { Helmet } from "react-helmet";
+import { AFFILIATE_PARTNERS } from "@/components/affiliate/AffiliatePartnerSystem";
+import TestimonialsSection from "@/components/sections/testimonials/TestimonialsSection";
 
 const Products = () => {
   useEffect(() => {
@@ -68,6 +71,79 @@ const Products = () => {
       savings: "30-day free trial included"
     }
   ];
+
+  const canonical = typeof window !== 'undefined' ? window.location.href : '';
+
+  const itemListSchema = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    itemListElement: affiliateProducts.map((p, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: p.title,
+      url: p.url
+    }))
+  } as const;
+
+  const productSchemas = [
+    {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      name: "RV Rentals",
+      brand: { "@type": "Brand", name: AFFILIATE_PARTNERS.rvshare.name },
+      category: "Recreational Vehicles",
+      description: "Compare and book premium RV rentals nationwide.",
+      offers: {
+        "@type": "Offer",
+        url: `${AFFILIATE_PARTNERS.rvshare.baseUrl}?ref=${AFFILIATE_PARTNERS.rvshare.refCode}`,
+        priceCurrency: "USD",
+        availability: "https://schema.org/InStock"
+      },
+      additionalProperty: [{
+        "@type": "PropertyValue",
+        name: "isAffiliateLink",
+        value: true
+      }]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      name: "Mobile Internet Connectivity",
+      brand: { "@type": "Brand", name: AFFILIATE_PARTNERS.winegard?.name || "Winegard" },
+      category: "Networking",
+      description: "Stay connected on the road with RV internet connectivity solutions.",
+      offers: {
+        "@type": "Offer",
+        url: `${AFFILIATE_PARTNERS.winegard?.baseUrl || "https://winegard.com"}?ref=${AFFILIATE_PARTNERS.winegard?.refCode || "smartconnect"}`,
+        priceCurrency: "USD",
+        availability: "https://schema.org/InStock"
+      },
+      additionalProperty: [{
+        "@type": "PropertyValue",
+        name: "isAffiliateLink",
+        value: true
+      }]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      name: "RV Solar Kits",
+      brand: { "@type": "Brand", name: AFFILIATE_PARTNERS.renogy.name },
+      category: "SolarEnergy",
+      description: "Complete solar kits designed for RVs to power your adventures off-grid.",
+      offers: {
+        "@type": "Offer",
+        url: `${AFFILIATE_PARTNERS.renogy.baseUrl}?ref=${AFFILIATE_PARTNERS.renogy.refCode}`,
+        priceCurrency: "USD",
+        availability: "https://schema.org/InStock"
+      },
+      additionalProperty: [{
+        "@type": "PropertyValue",
+        name: "isAffiliateLink",
+        value: true
+      }]
+    }
+  ] as const;
 
   return (
     <Layout>
@@ -160,7 +236,7 @@ const Products = () => {
                   <a 
                     href={product.url}
                     target="_blank"
-                    rel="noopener noreferrer"
+                    rel="nofollow sponsored noopener"
                     className="block w-full text-center bg-[#5B9BD5] text-white hover:bg-[#4A8AC4] px-6 py-3 rounded-full font-medium transition-all duration-300 group-hover:scale-105"
                   >
                     {product.buttonText} →
@@ -169,6 +245,8 @@ const Products = () => {
               ))}
             </div>
           </motion.div>
+
+          <TestimonialsSection />
 
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
