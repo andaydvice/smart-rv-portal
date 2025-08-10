@@ -3,10 +3,30 @@ import Navbar from "@/components/Navbar";
 import Layout from "@/components/layout/Layout";
 import { Shield, Lock, Bell, Camera, Smartphone, MapPin, BatteryCharging, KeyRound, Wrench } from "lucide-react";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
+import { Helmet } from 'react-helmet-async';
 
 const SecuritySystem = () => {
+  const canonicalUrl = typeof window !== 'undefined' ? `${window.location.origin}/features/security-system` : 'https://example.com/features/security-system';
+  const title = 'Security system for smart RVs | Remote monitoring';
+  const description = 'Smart RV security system with cameras, smart locks, GPS, alerts, and 24/7 monitoring for complete protection.';
   return (
     <Layout>
+      <Helmet>
+        <title>{title}</title>
+        <meta name="description" content={description} />
+        <link rel="canonical" href={canonicalUrl} />
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={description} />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={canonicalUrl} />
+        <script type="application/ld+json">{JSON.stringify({
+          '@context': 'https://schema.org',
+          '@type': 'WebPage',
+          name: 'Security System',
+          description,
+          url: canonicalUrl
+        })}</script>
+      </Helmet>
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -44,8 +64,9 @@ const SecuritySystem = () => {
               </div>
               <img 
                 src="/lovable-uploads/24586e9a-422f-45ee-aaaa-2ffa5f0e2274.png"
-                alt="RV Security System Interface" 
+                alt="RV security system interface with cameras and smart locks" 
                 className="w-full h-64 object-cover rounded-lg mb-6"
+                loading="lazy"
               />
               <ul className="list-disc list-inside space-y-3 text-gray-300 text-left">
                 <li className="text-left">Smart door locks with remote access allow you to control entry from anywhere, offering flexibility and convenience.</li>

@@ -14,6 +14,7 @@ import './styles/emergency-marker-fix.css';
 import './styles/map-optimizations.css';   
 import './styles/force-markers.css';       
 import './styles/map/index.css';  // Updated path to use the index file that imports all map styles
+import { applyAllEmergencyFixes } from './utils/emergency-styles/combined';
 
 // Create a client with better error handling
 const queryClient = new QueryClient({
@@ -43,8 +44,7 @@ function AppContent() {
     window.scrollTo(0, 0);
     
     // Apply emergency fixes that bypass React
-    injectEmergencyStyles();
-    forceMapMarkersVisible();
+    const cleanup = applyAllEmergencyFixes();
     
     // Wire up the map instance and helpers
     document.addEventListener('mapboxgl.map.created', (e: CustomEvent) => {
@@ -53,6 +53,10 @@ function AppContent() {
     
     (window as any).dispatchMapEvent = (eventName: string, detail: any) => {
       document.dispatchEvent(new CustomEvent(eventName, { detail }));
+    };
+
+    return () => {
+      if (typeof cleanup === 'function') cleanup();
     };
   }, []);
 
