@@ -27,15 +27,6 @@ const CRITICAL_APPLICATION_IMAGES = [
 // Preload critical images as early as possible
 preloadCriticalImages(CRITICAL_APPLICATION_IMAGES);
 
-// Log the current deployed URL for debugging
-console.log('Application starting, window.location:', window.location.href);
-console.log('Application path:', window.location.pathname);
-
-// Force scroll to top on page load
-window.addEventListener('DOMContentLoaded', () => {
-  window.scrollTo(0, 0);
-  console.log('Forced scroll to top on page load');
-});
 
 // Mount the application with error handling
 const rootElement = document.getElementById('root');
@@ -44,7 +35,6 @@ if (!rootElement) {
   console.error('Root element not found! Cannot mount React application.');
 } else {
   try {
-    console.log('Starting React application mount');
     ReactDOM.createRoot(rootElement).render(
       <React.StrictMode>
         <HelmetProvider>
@@ -52,7 +42,6 @@ if (!rootElement) {
         </HelmetProvider>
       </React.StrictMode>
     );
-    console.log('React application successfully mounted');
     
     // Performance monitoring and budgets
     registerWebVitals({ LCP: 2500, INP: 200, CLS: 0.1 });
@@ -72,7 +61,6 @@ if (!rootElement) {
         ReactDOM.createRoot(rootElement).render(
           <App />
         );
-        console.log('Emergency mounting attempted without StrictMode');
       } catch (fallbackError) {
         console.error('Emergency mounting also failed:', fallbackError);
         

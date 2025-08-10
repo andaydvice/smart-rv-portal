@@ -43,34 +43,18 @@ function AppContent() {
     injectEmergencyStyles();
     forceMapMarkersVisible();
     
-    // Debug current route
-    console.log('Current URL:', window.location.href);
-    console.log('Current pathname:', window.location.pathname);
     
-    // Verify routes are available
-    if ((window as any).routesAvailable) {
-      console.log('Routes confirmed available');
-    } else {
-      console.warn('Routes may not be properly configured');
-    }
-    
-    // Store map instance globally for emergency access
     document.addEventListener('mapboxgl.map.created', (e: CustomEvent) => {
       (window as any).mapInstance = e.detail.map;
-      console.log('Map instance stored globally');
     });
     
-    // Create custom event dispatch system for map
     (window as any).dispatchMapEvent = (eventName: string, detail: any) => {
       document.dispatchEvent(new CustomEvent(eventName, { detail }));
-      console.log(`Map event dispatched: ${eventName}`);
     };
     
-    // Force all markers to be visible
     setTimeout(() => {
       try {
         const markers = document.querySelectorAll('.mapboxgl-marker, .custom-marker, .emergency-marker');
-        console.log(`Found ${markers.length} markers to make visible`);
         markers.forEach(marker => {
           if (marker instanceof HTMLElement) {
             marker.style.visibility = 'visible';
@@ -105,7 +89,7 @@ function App() {
   // Set routes available flag for debugging
   (window as any).routesAvailable = true;
   
-  console.log('App rendering');
+  
   
   return (
     <QueryClientProvider client={queryClient}>

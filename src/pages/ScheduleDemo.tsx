@@ -50,6 +50,7 @@ const ScheduleDemo = () => {
       <Helmet>
         <meta name="robots" content="noindex,nofollow" />
         <title>Redirecting to Products</title>
+        <link rel="canonical" href={typeof window !== 'undefined' ? window.location.origin + '/schedule-demo' : ''} />
       </Helmet>
       <div className="relative">
         <img
