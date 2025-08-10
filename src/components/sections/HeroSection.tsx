@@ -39,7 +39,10 @@ export const HeroSection = () => {
           alt="Luxury Smart RV interior with panoramic windows and modern intelligent design"
           className="h-full w-full object-cover"
           loading="eager"
-          
+          decoding="async"
+          width={1920}
+          height={1080}
+          sizes="100vw"
         />
         <div className="absolute inset-0 bg-black/60" />
       </div>

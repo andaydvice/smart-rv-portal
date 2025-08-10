@@ -3,7 +3,6 @@ import Navbar from "@/components/Navbar";
 import Layout from "@/components/layout/Layout";
 import { HeroSection } from "@/components/sections/HeroSection";
 import { motion } from "framer-motion";
-import { toast } from "sonner";
 import { TechnologySection } from "@/components/sections/TechnologySection";
 import { ContactSection } from "@/components/sections/ContactSection";
 import { HomepageAffiliateSection } from "@/components/affiliate/HomepageAffiliateSection";
@@ -32,13 +31,6 @@ const LoadingFallback = () => (
 
 const Index = () => {
   useEffect(() => {
-    
-    
-    // Show a toast to confirm the page has loaded
-    setTimeout(() => {
-      toast.success("Welcome to the Smart RV Portal");
-    }, 1000);
-    
     // Force scroll to top on page load
     window.scrollTo(0, 0);
   }, []);
