@@ -1,7 +1,7 @@
 // Utility to register Web Vitals and report against budgets
 // Keeps runtime light and logs to console; shows toast if budgets are exceeded
 import { onCLS, onLCP, onINP } from 'web-vitals/attribution';
-import { toast } from 'sonner';
+import { toast } from '@/hooks/use-toast';
 
 export type WebVitalsBudget = {
   LCP: number; // ms
@@ -28,7 +28,7 @@ export function registerWebVitals(budgets: Partial<WebVitalsBudget> = {}) {
       const v = metric.value;
       console.info(`[Web Vitals] LCP: ${v.toFixed(0)}ms`, metric.attribution ?? {});
       if (v > b.LCP) {
-        toast.warning(`LCP high: ${v.toFixed(0)}ms (budget ${b.LCP}ms)`);
+        toast({ description: `LCP high: ${v.toFixed(0)}ms (budget ${b.LCP}ms)`, variant: 'destructive' });
       }
     });
 
@@ -43,7 +43,7 @@ export function registerWebVitals(budgets: Partial<WebVitalsBudget> = {}) {
         target: a.eventTarget,
       });
       if (v > b.INP) {
-        toast.warning(`INP high: ${v.toFixed(0)}ms (budget ${b.INP}ms)`);
+        toast({ description: `INP high: ${v.toFixed(0)}ms (budget ${b.INP}ms)`, variant: 'destructive' });
       }
     });
 
@@ -52,7 +52,7 @@ export function registerWebVitals(budgets: Partial<WebVitalsBudget> = {}) {
       const a: any = (metric as any).attribution || {};
       console.info(`[Web Vitals] CLS: ${val}`, { largestShiftTarget: a.largestShiftTarget, largestShiftValue: a.largestShiftValue });
       if (val > b.CLS) {
-        toast.warning(`CLS high: ${val} (budget ${b.CLS})`);
+        toast({ description: `CLS high: ${val} (budget ${b.CLS})`, variant: 'destructive' });
       }
     });
   } catch (e) {

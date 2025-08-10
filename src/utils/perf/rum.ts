@@ -145,6 +145,8 @@ export function startRUM(opts: RUMOptions = {}) {
     flushedForView = false;
     currentIsSoftNav = true;
     softNavStart = performance.now();
+    // Fallback flush in case no metric events occur on this soft nav
+    window.setTimeout(() => flush(), 3000);
     // INP/CLS continue accumulating across soft navs
   });
 }
