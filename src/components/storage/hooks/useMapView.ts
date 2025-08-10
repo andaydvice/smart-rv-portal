@@ -12,21 +12,31 @@ const useGoogleMapsKey = () => {
 };
 
 export const useMapView = () => {
-  // State to toggle between map views
-  const [useGoogleMaps, setUseGoogleMaps] = useState<boolean>(false);
+  // Initialize provider from saved preference; default Mapbox
+  const [useGoogleMaps, setUseGoogleMaps] = useState<boolean>(() => {
+    if (typeof window === 'undefined') return false;
+    const saved = localStorage.getItem('map_provider');
+    return saved === 'google';
+  });
   const { mapToken, mapTokenError, isLoading: tokenLoading } = useMapToken(!useGoogleMaps);
   const { apiKey: googleMapsKey, error: googleMapsError } = useGoogleMapsKey();
 
-  // Toggle map view
   const toggleMapView = useCallback(() => {
-    setUseGoogleMaps(prev => !prev);
-    toast.info(`Switched to ${!useGoogleMaps ? 'Google Maps' : 'Mapbox'} view`);
+    const nextUse = !useGoogleMaps;
+    setUseGoogleMaps(nextUse);
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('map_provider', nextUse ? 'google' : 'mapbox');
+    }
+    toast.info(`Switched to ${nextUse ? 'Google Maps' : 'Mapbox'} view`);
   }, [useGoogleMaps]);
 
   // Auto-fallback to Google Maps if Mapbox token fails or is missing
   useEffect(() => {
     if (!useGoogleMaps && !tokenLoading && (!mapToken || mapTokenError)) {
       setUseGoogleMaps(true);
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('map_provider', 'google');
+      }
       if (import.meta.env.DEV) {
         toast.warning('Using Google Maps fallback');
       }
