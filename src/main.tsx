@@ -2,6 +2,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
+import { HelmetProvider } from 'react-helmet-async'
+import { registerWebVitals } from './utils/perf/webVitals'
+import { analyzeNetworkAfterLoad } from './utils/perf/networkReport'
 import './index.css'
 import './styles/animations.css'
 import './styles/forms.css'
@@ -44,10 +47,16 @@ if (!rootElement) {
     console.log('Starting React application mount');
     ReactDOM.createRoot(rootElement).render(
       <React.StrictMode>
-        <App />
+        <HelmetProvider>
+          <App />
+        </HelmetProvider>
       </React.StrictMode>
     );
     console.log('React application successfully mounted');
+    
+    // Performance monitoring and budgets
+    registerWebVitals({ LCP: 2500, INP: 200, CLS: 0.1 });
+    analyzeNetworkAfterLoad({ totalBundleKB: 200, jsKB: 150, cssKB: 50, imageMaxKB: 200, firstPartyTotalKB: 300 });
     
     // After app is rendered, setup lazy loading for images
     deferOperation(() => {

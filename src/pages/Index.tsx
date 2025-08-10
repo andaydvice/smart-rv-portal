@@ -9,7 +9,7 @@ import { ContactSection } from "@/components/sections/ContactSection";
 import { HomepageAffiliateSection } from "@/components/affiliate/HomepageAffiliateSection";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
 import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 import { TrustStrip } from "@/components/sections/TrustStrip";
 // Lazy load components that aren't needed immediately
 const FeaturesSection = lazy(() => import("@/components/sections/FeaturesSection").then(mod => ({ 
@@ -48,6 +48,19 @@ const Index = () => {
         <title>Smart RV Technology Hub | Connected, Safe, Efficient</title>
         <meta name="description" content="Explore smart RV technology, connectivity, safety systems, and ROI tools for tech-savvy travelers and digital nomads." />
         <link rel="canonical" href={window.location.origin + "/"} />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'WebSite',
+            name: 'Smart RV Technology Hub',
+            url: window.location.origin + '/',
+            potentialAction: {
+              '@type': 'SearchAction',
+              target: window.location.origin + '/search?q={search_term_string}',
+              'query-input': 'required name=search_term_string'
+            }
+          })}
+        </script>
       </Helmet>
       <motion.div 
         transition={{ duration: 0.6 }}

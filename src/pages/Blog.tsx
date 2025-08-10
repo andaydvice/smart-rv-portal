@@ -1,5 +1,5 @@
 
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 import { useState, useEffect } from "react";
 import BlogHeader from "@/components/blog/BlogHeader";
 import TrendingPosts from "@/components/blog/TrendingPosts";

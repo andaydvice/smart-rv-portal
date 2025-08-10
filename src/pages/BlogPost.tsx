@@ -1,5 +1,5 @@
 import { useParams, useNavigate } from 'react-router-dom';
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 import Navbar from "@/components/Navbar";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, AlertTriangle } from "lucide-react";
