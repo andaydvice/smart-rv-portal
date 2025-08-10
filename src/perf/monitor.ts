@@ -121,7 +121,8 @@ function maybeUpdateOverlay(state: any, budgets: PerfBudgets, enable: boolean) {
   const r = state.resources;
   const b = state.budgetStatus || {};
   el.innerHTML = `
-    <div><strong>Vitals</strong> LCP:${fmt(v.LCP)}s CLS:${fmt(v.CLS)} INP:${fmt(v.INP)}ms</div>
+    <div>Route: ${location.pathname}</div>
+    <div><strong>Vitals</strong> LCP:${(v.LCP != null ? (v.LCP/1000).toFixed(2) : '-')}s CLS:${v.CLS != null ? v.CLS : '-'} INP:${v.INP != null ? Number(v.INP).toFixed(0) : '-'}ms</div>
     <div><strong>Sizes</strong> JS:${fmtKB(r?.jsKB)}/${budgets.jsKB} CSS:${fmtKB(r?.cssKB)}/${budgets.cssKB} Total:${fmtKB(r?.totalKB)}/${budgets.totalBundleKB}</div>
     <div><strong>First-party</strong> ${fmtKB(r?.firstPartyKB)}/${budgets.firstPartyTotalKB} | Img max:${fmtKB(r?.imageMaxKB)}/${budgets.imageMaxKB}</div>
     <div style="opacity:.8">${bBadge('JS', b.js)} ${bBadge('CSS', b.css)} ${bBadge('Total', b.totalBundle)} ${bBadge('FP', b.firstPartyTotal)} ${bBadge('IMG', b.imageMax)}</div>

@@ -519,6 +519,90 @@ export type Database = {
         }
         Relationships: []
       }
+      web_vitals: {
+        Row: {
+          app_version: string | null
+          build_id: string | null
+          cls: number | null
+          created_at: string
+          device_memory: number | null
+          downlink: number | null
+          effective_type: string | null
+          fcp_ms: number | null
+          hardware_concurrency: number | null
+          id: string
+          inp_ms: number | null
+          is_soft_nav: boolean | null
+          lcp_ms: number | null
+          nav_type: string | null
+          referrer: string | null
+          route: string | null
+          rtt: number | null
+          sample_rate: number | null
+          session_id: string | null
+          ttfb_ms: number | null
+          url: string
+          user_agent: string | null
+          user_id: string | null
+          viewport_h: number | null
+          viewport_w: number | null
+        }
+        Insert: {
+          app_version?: string | null
+          build_id?: string | null
+          cls?: number | null
+          created_at?: string
+          device_memory?: number | null
+          downlink?: number | null
+          effective_type?: string | null
+          fcp_ms?: number | null
+          hardware_concurrency?: number | null
+          id?: string
+          inp_ms?: number | null
+          is_soft_nav?: boolean | null
+          lcp_ms?: number | null
+          nav_type?: string | null
+          referrer?: string | null
+          route?: string | null
+          rtt?: number | null
+          sample_rate?: number | null
+          session_id?: string | null
+          ttfb_ms?: number | null
+          url: string
+          user_agent?: string | null
+          user_id?: string | null
+          viewport_h?: number | null
+          viewport_w?: number | null
+        }
+        Update: {
+          app_version?: string | null
+          build_id?: string | null
+          cls?: number | null
+          created_at?: string
+          device_memory?: number | null
+          downlink?: number | null
+          effective_type?: string | null
+          fcp_ms?: number | null
+          hardware_concurrency?: number | null
+          id?: string
+          inp_ms?: number | null
+          is_soft_nav?: boolean | null
+          lcp_ms?: number | null
+          nav_type?: string | null
+          referrer?: string | null
+          route?: string | null
+          rtt?: number | null
+          sample_rate?: number | null
+          session_id?: string | null
+          ttfb_ms?: number | null
+          url?: string
+          user_agent?: string | null
+          user_id?: string | null
+          viewport_h?: number | null
+          viewport_w?: number | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       geography_columns: {

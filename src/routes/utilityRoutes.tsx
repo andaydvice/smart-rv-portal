@@ -15,6 +15,7 @@ const RVWeather = lazy(() => import("../pages/RVWeather"));
 const RVEmergencyCenter = lazy(() => import("../pages/RVEmergencyCenter"));
 const SolarPowerGuide = lazy(() => import("../pages/SolarPowerGuide"));
 const RVAppsHub = lazy(() => import("../pages/RVAppsHub"));
+const PerformanceDashboard = lazy(() => import("../pages/admin/PerformanceDashboard"));
 
 const utilityRoutes = [
   {
@@ -68,6 +69,10 @@ const utilityRoutes = [
   {
     path: "/rv-apps-hub",
     element: <RVAppsHub />,
+  },
+  {
+    path: "/admin/perf",
+    element: <PerformanceDashboard />,
   },
 ];
 
