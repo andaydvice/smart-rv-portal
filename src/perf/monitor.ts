@@ -23,11 +23,14 @@ const DEFAULT_BUDGETS: PerfBudgets = {
 
 export function initPerformanceMonitor(options: PerfOptions = {}) {
   if (typeof window === 'undefined') return;
+  const w = window as any;
+  if (w.__perfInit) return;
+  w.__perfInit = true;
   const budgets: PerfBudgets = { ...DEFAULT_BUDGETS, ...(options.budgets || {}) };
   const isDev = import.meta.env.DEV;
 
-  const perfState: any = (window as any).__perf || { vitals: {}, resources: {}, timings: {} };
-  (window as any).__perf = perfState;
+  const perfState: any = w.__perf || { vitals: {}, resources: {}, timings: {} };
+  w.__perf = perfState;
 
   // Web Vitals
   setupWebVitals((metric) => {

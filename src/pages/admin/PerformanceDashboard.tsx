@@ -9,7 +9,7 @@ function percentile(values: number[], p: number) {
   return sorted[k];
 }
 
-type Row = { route: string | null; lcp_ms: number | null; inp_ms: number | null; cls: number | null; created_at: string };
+type Row = { route: string | null; lcp_ms: number | null; inp_ms: number | null; cls: number | null; created_at: string; is_soft_nav: boolean | null; viewport_w: number | null };
 
 type Agg = { route: string; p75LCP: number | null; p75INP: number | null; p75CLS: number | null; count: number };
 
@@ -26,6 +26,8 @@ const PerformanceDashboard: React.FC = () => {
   const [rangeDays, setRangeDays] = useState(7);
   const [rows, setRows] = useState<Row[]>([]);
   const [loading, setLoading] = useState(true);
+  const [includeSoftNav, setIncludeSoftNav] = useState(true);
+  const [device, setDevice] = useState<'all' | 'mobile' | 'desktop'>('all');
 
   useEffect(() => {
     let isMounted = true;
@@ -35,7 +37,7 @@ const PerformanceDashboard: React.FC = () => {
         const since = new Date(Date.now() - rangeDays * 24 * 60 * 60 * 1000).toISOString();
         const { data, error } = await supabase
           .from('web_vitals')
-          .select('route,lcp_ms,inp_ms,cls,created_at')
+          .select('route,lcp_ms,inp_ms,cls,created_at,is_soft_nav,viewport_w')
           .gte('created_at', since)
           .order('created_at', { ascending: false })
           .limit(5000);
@@ -51,9 +53,17 @@ const PerformanceDashboard: React.FC = () => {
     return () => { isMounted = false; };
   }, [rangeDays]);
 
+  const filteredRows = useMemo(() => {
+    let r = rows;
+    if (!includeSoftNav) r = r.filter((row) => !row.is_soft_nav);
+    if (device === 'mobile') r = r.filter((row) => (row.viewport_w ?? 0) < 768);
+    if (device === 'desktop') r = r.filter((row) => (row.viewport_w ?? 0) >= 768);
+    return r;
+  }, [rows, includeSoftNav, device]);
+
   const agg = useMemo(() => {
     const byRoute = new Map<string, { lcp: number[]; inp: number[]; cls: number[]; count: number }>();
-    for (const r of rows) {
+    for (const r of filteredRows) {
       const key = r.route || '(unknown)';
       if (!byRoute.has(key)) byRoute.set(key, { lcp: [], inp: [], cls: [], count: 0 });
       const bucket = byRoute.get(key)!;
@@ -75,19 +85,19 @@ const PerformanceDashboard: React.FC = () => {
     // sort by worst LCP
     out.sort((a, b) => (b.p75LCP ?? 0) - (a.p75LCP ?? 0));
     return out;
-  }, [rows]);
+  }, [filteredRows]);
 
   const sitewide = useMemo(() => {
-    const lcp = rows.map(r => r.lcp_ms).filter((n): n is number => typeof n === 'number');
-    const inp = rows.map(r => r.inp_ms).filter((n): n is number => typeof n === 'number');
-    const cls = rows.map(r => r.cls).filter((n): n is number => typeof n === 'number');
+    const lcp = filteredRows.map(r => r.lcp_ms).filter((n): n is number => typeof n === 'number');
+    const inp = filteredRows.map(r => r.inp_ms).filter((n): n is number => typeof n === 'number');
+    const cls = filteredRows.map(r => r.cls).filter((n): n is number => typeof n === 'number');
     return {
       p75LCP: percentile(lcp, 75),
       p75INP: percentile(inp, 75),
       p75CLS: percentile(cls, 75),
-      count: rows.length,
+      count: filteredRows.length,
     };
-  }, [rows]);
+  }, [filteredRows]);
 
   return (
     <main className="min-h-screen px-4 py-8 md:px-8 bg-[hsl(var(--background))]">
@@ -113,6 +123,20 @@ const PerformanceDashboard: React.FC = () => {
           <option value={7}>7 days</option>
           <option value={14}>14 days</option>
           <option value={30}>30 days</option>
+        </select>
+        <label className="ml-4 flex items-center gap-2 text-sm text-[hsl(var(--foreground))]/70">
+          <input type="checkbox" checked={includeSoftNav} onChange={(e) => setIncludeSoftNav(e.target.checked)} />
+          Include soft navigations
+        </label>
+        <label className="ml-4 text-sm text-[hsl(var(--foreground))]/70">Device</label>
+        <select
+          value={device}
+          onChange={(e) => setDevice(e.target.value as any)}
+          className="rounded-md bg-[hsl(var(--background))] border border-[hsl(var(--border))] px-3 py-2 text-[hsl(var(--foreground))]"
+        >
+          <option value="all">All</option>
+          <option value="mobile">Mobile (&lt;768px)</option>
+          <option value="desktop">Desktop (≥768px)</option>
         </select>
       </section>
 

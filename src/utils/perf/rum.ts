@@ -49,6 +49,13 @@ export function startRUM(opts: RUMOptions = {}) {
 
   const flush = async () => {
     try {
+      if (flushTimer) {
+        clearTimeout(flushTimer);
+        flushTimer = undefined;
+      }
+      if (flushedForView) return;
+      flushedForView = true;
+
       const payload = {
         session_id: context.session_id,
         url: location.href,
@@ -60,7 +67,8 @@ export function startRUM(opts: RUMOptions = {}) {
         fcp_ms: state.fcp ?? null,
         ttfb_ms: state.ttfb ?? null,
         nav_type: (nav as any)?.type ?? null,
-        is_soft_nav: false,
+        is_soft_nav: currentIsSoftNav,
+        route_paint_ms: currentIsSoftNav && softNavStart != null ? Math.round(performance.now() - softNavStart) : null,
         device_memory: context.device_memory ?? null,
         hardware_concurrency: context.hardware_concurrency ?? null,
         effective_type: state.effectiveType ?? null,
@@ -81,8 +89,11 @@ export function startRUM(opts: RUMOptions = {}) {
   };
 
   let flushTimer: number | undefined;
+  let flushedForView = false;
+  let currentIsSoftNav = false;
+  let softNavStart: number | undefined;
   const scheduleFlush = () => {
-    if (flushTimer) return;
+    if (flushTimer || flushedForView) return;
     flushTimer = window.setTimeout(() => {
       flushTimer = undefined;
       flush();
@@ -120,7 +131,7 @@ export function startRUM(opts: RUMOptions = {}) {
   patchHistory();
 
   window.addEventListener('locationchange', () => {
-    // flush current route then reset state for next route
+    // finalize current view, then start a new soft navigation view
     flush();
     state.route = location.pathname;
     state.url = location.href;
@@ -129,8 +140,11 @@ export function startRUM(opts: RUMOptions = {}) {
     state.effectiveType = conn.effectiveType;
     state.downlink = conn.downlink;
     state.rtt = conn.rtt;
-    state.lcp = undefined; // will only be available on full navigations
+    state.lcp = undefined; // LCP/FCP only on full navigations
     state.fcp = undefined;
-    // INP/CLS continue accumulating
+    flushedForView = false;
+    currentIsSoftNav = true;
+    softNavStart = performance.now();
+    // INP/CLS continue accumulating across soft navs
   });
 }

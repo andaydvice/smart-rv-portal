@@ -16,6 +16,11 @@ const DEFAULT_BUDGETS: WebVitalsBudget = {
 };
 
 export function registerWebVitals(budgets: Partial<WebVitalsBudget> = {}) {
+  if (typeof window !== 'undefined') {
+    const w = window as any;
+    if (w.__wvRegistered) return;
+    w.__wvRegistered = true;
+  }
   const b = { ...DEFAULT_BUDGETS, ...budgets };
 
   try {
