@@ -1,6 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
-import { GoogleMap, useLoadScript, InfoWindowF } from '@react-google-maps/api';
+import { GoogleMap, InfoWindowF } from '@react-google-maps/api';
+import { useGoogleMaps } from '@/components/map/hooks/useGoogleMaps';
 import { StorageFacility } from '../types';
 import FacilityMarker from './components/FacilityMarker';
 import InfoWindow from './components/InfoWindow';
@@ -41,9 +42,7 @@ const GoogleMapView: React.FC<GoogleMapViewProps> = ({
   const [mapCenter, setMapCenter] = useState(center);
   const [mapZoom, setMapZoom] = useState(zoom);
 
-  const { isLoaded, loadError } = useLoadScript({
-    googleMapsApiKey: apiKey,
-  });
+  const { isLoaded, error } = useGoogleMaps({ apiKey });
 
   // Update map center and zoom when selectedState changes
   useEffect(() => {
@@ -127,10 +126,10 @@ const GoogleMapView: React.FC<GoogleMapViewProps> = ({
     }
   };
 
-  if (loadError) {
+  if (error) {
     return (
       <div className="w-full h-full flex items-center justify-center bg-[#080F1F] text-white p-4 rounded-lg">
-        <p>Error loading Google Maps. Please check your API key.</p>
+        <p>{error}</p>
       </div>
     );
   }

@@ -3,7 +3,8 @@ import React, { useRef, useState } from 'react';
 import { Loader2 } from 'lucide-react';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { AlertCircle, Star } from 'lucide-react';
-import { GoogleMap, useLoadScript, MarkerF, InfoWindowF } from '@react-google-maps/api';
+import { GoogleMap, MarkerF, InfoWindowF } from '@react-google-maps/api';
+import { useGoogleMaps } from '@/components/map/hooks/useGoogleMaps';
 
 interface Facility {
   name: string;
@@ -39,10 +40,8 @@ const StaticMapComponent: React.FC<StaticMapComponentProps> = ({
   const [selectedFacility, setSelectedFacility] = useState<Facility | null>(null);
   const mapRef = useRef<google.maps.Map | null>(null);
 
-  // Load Google Maps script
-  const { isLoaded, loadError } = useLoadScript({
-    googleMapsApiKey: apiKey,
-  });
+  // Load Google Maps script via shared hook
+  const { isLoaded, error: loadError } = useGoogleMaps({ apiKey });
 
   // Handle map load event
   const handleMapLoad = (map: google.maps.Map) => {
@@ -57,7 +56,7 @@ const StaticMapComponent: React.FC<StaticMapComponentProps> = ({
   // Handle map errors
   React.useEffect(() => {
     if (loadError) {
-      setError(`Error loading Google Maps: ${loadError.message}`);
+      setError(loadError);
     }
   }, [loadError]);
 

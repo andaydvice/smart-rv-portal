@@ -51,8 +51,9 @@ export const applyMapStyles = () => {
   // Add to document
   document.head.appendChild(styleElement);
   
-  console.log('Applied custom map styles for better marker visibility');
-  toast.info('Enhanced map marker visibility');
+  if (import.meta.env.DEV) {
+    toast.info('Enhanced map marker visibility');
+  }
   
   // Return cleanup function
   return () => {

@@ -26,10 +26,12 @@ const fixMarkers = () => {
   const markers = document.querySelectorAll(
     '.mapboxgl-marker, .custom-marker, .emergency-marker, .direct-marker, [data-marker="true"], .marker'
   );
-  console.log(`Found ${markers.length} markers to make visible`);
+  const isDev = import.meta.env.DEV;
+  if (isDev && markers.length > 0) {
+    console.log(`Found ${markers.length} markers to make visible`);
+  }
   
   if (markers.length === 0) {
-    console.log('No map markers found to fix');
     return;
   }
   
@@ -55,12 +57,16 @@ const fixMarkers = () => {
     }
   });
   
-  console.log(`Modified visibility of ${modifiedCount} markers`);
+  if (isDev && modifiedCount > 0) {
+    console.log(`Modified visibility of ${modifiedCount} markers`);
+  }
   
   // Check for state-specific markers
   const selectedState = document.querySelector('[data-selected-state]')?.getAttribute('data-selected-state');
   if (selectedState) {
-    console.log(`Checking markers for selected state: ${selectedState}`);
+    if (isDev) {
+      console.log(`Checking markers for selected state: ${selectedState}`);
+    }
     checkStateSpecificMarkers(selectedState);
   }
 };
@@ -75,7 +81,9 @@ const checkStateSpecificMarkers = (selectedState: string) => {
     allRepresentations.push(STATE_NAME_MAP[selectedState]);
   }
   
-  console.log(`Looking for markers with state attributes: ${allRepresentations.join(', ')}`);
+  if (import.meta.env.DEV) {
+    console.log(`Looking for markers with state attributes: ${allRepresentations.join(', ')}`);
+  }
   
   let stateMarkers = 0;
   
@@ -105,7 +113,9 @@ const checkStateSpecificMarkers = (selectedState: string) => {
     }
   });
   
-  console.log(`Found ${stateMarkers} markers specifically for state: ${selectedState}`);
+  if (import.meta.env.DEV) {
+    console.log(`Found ${stateMarkers} markers specifically for state: ${selectedState}`);
+  }
   
   // Return the count so it can be used elsewhere
   return stateMarkers;

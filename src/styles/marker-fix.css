@@ -109,10 +109,6 @@ header .emergency-marker,
   background-color: #10B981 !important;
 }
 
-/* Style marker buttons */
-.view-facility-btn {
-  display: none !important; /* Hidden as requested */
-}
 
 /* Fix for map container positioning */
 .h-\[650px\],

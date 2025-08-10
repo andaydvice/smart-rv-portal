@@ -25,14 +25,24 @@ export function applyAllEmergencyFixes() {
   // Enhance header markers
   enhanceHeaderMarkers();
   
-  // Set up an interval to continuously check and fix markers
-  const interval = setInterval(() => {
+  // Set up a MutationObserver to react to DOM changes affecting markers
+  const handleMutations = () => {
     forceExistingMarkersVisible();
     enhanceMarkerClickability();
-  }, 200);
+  };
+
+  const observer = new MutationObserver(() => {
+    requestAnimationFrame(handleMutations);
+  });
+
+  observer.observe(document.body, { childList: true, subtree: true });
+
+  // Fallback: slow interval for safety (avoid hot loop)
+  const interval = setInterval(handleMutations, 2000);
   
   // Return cleanup function
   return () => {
+    observer.disconnect();
     clearInterval(interval);
     document.body.removeAttribute('data-markers-loading');
   };

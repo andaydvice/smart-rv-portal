@@ -11,7 +11,7 @@ interface MarkerVisibilityEnhancerProps {
  */
 const MarkerVisibilityEnhancer: React.FC<MarkerVisibilityEnhancerProps> = ({
   enhanceVisibility,
-  interval = 1000
+  interval = 2000
 }) => {
   useEffect(() => {
     // Run once immediately
