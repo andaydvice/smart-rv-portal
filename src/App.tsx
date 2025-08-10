@@ -11,7 +11,6 @@ import './styles/animations.css';
 // ... keep existing code (app and general styles)
 
 import { applyAllEmergencyFixes } from './utils/emergency-styles/combined';
-import { useLocation } from 'react-router-dom';
 
 // Create a client with better error handling
 const queryClient = new QueryClient({
@@ -31,7 +30,7 @@ const queryClient = new QueryClient({
 });
 
 function AppContent() {
-  const location = useLocation();
+  
   useEffect(() => {
     // Guard against StrictMode double-invoke in dev
     if ((window as any).__appEffectRan && import.meta.env.DEV) return;
@@ -57,14 +56,25 @@ function AppContent() {
   // Conditionally apply emergency marker fixes only on map routes
   useEffect(() => {
     let cleanup: undefined | (() => void);
-    const isMapRoute = /storage|map|maps/i.test(location.pathname);
-    if (isMapRoute) {
-      cleanup = applyAllEmergencyFixes();
-    }
+    const apply = () => {
+      if (cleanup) { cleanup(); cleanup = undefined; }
+      const isMapRoute = /storage|map|maps/i.test(window.location.pathname);
+      if (isMapRoute) {
+        cleanup = applyAllEmergencyFixes();
+      }
+    };
+    apply();
+    const onNav = () => apply();
+    window.addEventListener('popstate', onNav);
+    window.addEventListener('hashchange', onNav);
+    window.addEventListener('locationchange', onNav as any);
     return () => {
+      window.removeEventListener('popstate', onNav);
+      window.removeEventListener('hashchange', onNav);
+      window.removeEventListener('locationchange', onNav as any);
       if (cleanup) cleanup();
     };
-  }, [location.pathname]);
+  }, []);
 
   return (
     <React.Suspense fallback={
