@@ -101,6 +101,7 @@ const RVAppsHub = () => {
       <Helmet>
         <title>Essential Smart RV Apps & Tools Hub</title>
         <meta name="description" content="Discover the best mobile apps and digital tools for Smart RV travel. GPS navigation, campsite finders, power monitoring, and connectivity solutions." />
+        <link rel="canonical" href={typeof window !== 'undefined' ? window.location.origin + '/rv-apps' : ''} />
       </Helmet>
 
       <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 text-white">

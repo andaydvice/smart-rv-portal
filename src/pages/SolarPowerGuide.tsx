@@ -123,6 +123,7 @@ const SolarPowerGuide = () => {
       <Helmet>
         <title>Smart RV Solar Power Guide</title>
         <meta name="description" content="Complete guide to Smart RV solar power systems. Compare panels, batteries, and kits. Calculate your solar needs and find the best deals on equipment." />
+        <link rel="canonical" href={typeof window !== 'undefined' ? window.location.origin + '/solar-power-guide' : ''} />
         <script type="application/ld+json">
           {JSON.stringify({
             '@context': 'https://schema.org',

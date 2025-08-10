@@ -12,6 +12,7 @@ import Layout from "@/components/layout/Layout";
 import { Container } from "@/components/ui/container";
 import { useEffect } from "react";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
+import { Helmet } from "react-helmet-async";
 
 // Preload these images as early as possible
 const CRITICAL_IMAGES = [
@@ -41,7 +42,7 @@ const preloadCriticalImage = (src: string) => {
 const Documentation = () => {
   // Preload critical images immediately
   useEffect(() => {
-    console.log('Documentation page loaded - preloading critical images');
+    // removed debug log for production cleanliness
     
     // Create all preload elements
     const preloadLinks = CRITICAL_IMAGES.map(src => preloadCriticalImage(src));
@@ -58,6 +59,11 @@ const Documentation = () => {
 
   return (
     <Layout>
+      <Helmet>
+        <title>Smart RV Documentation</title>
+        <meta name="description" content="Comprehensive Smart RV documentation including overview, technical specs, maintenance, and power systems." />
+        <link rel="canonical" href={typeof window !== 'undefined' ? window.location.origin + '/documentation' : ''} />
+      </Helmet>
       <div className="w-full flex-grow">
         <div className="w-full py-8 relative z-10">
           <DocumentationHeader />

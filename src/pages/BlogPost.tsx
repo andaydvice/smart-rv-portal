@@ -89,6 +89,7 @@ const BlogPost = () => {
         <Helmet>
           <title>{post.title} - Smart RV Blog</title>
           <meta name="description" content={post.description} />
+          <link rel="canonical" href={typeof window !== 'undefined' ? window.location.origin + window.location.pathname : ''} />
           <script type="application/ld+json">
             {JSON.stringify({
               '@context': 'https://schema.org',

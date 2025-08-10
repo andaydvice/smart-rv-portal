@@ -14,6 +14,7 @@ import { LazyImage } from "@/components/ui/LazyImage";
 import { generateImagePlaceholder } from "@/utils/performance";
 import { useEffect } from "react";
 import { preloadCriticalImages } from "@/utils/performance";
+import { Helmet } from "react-helmet-async";
 
 const CompleteDocumentation = () => {
   // Preload critical image with multiple methods for guaranteed immediate loading
@@ -46,6 +47,11 @@ const CompleteDocumentation = () => {
 
   return (
     <Layout>
+      <Helmet>
+        <title>Complete Smart RV Documentation</title>
+        <meta name="description" content="Full Smart RV system documentation including architecture, network, power, and security." />
+        <link rel="canonical" href={typeof window !== 'undefined' ? window.location.origin + '/documentation/complete' : ''} />
+      </Helmet>
       <div className="w-full px-4 pt-24 pb-16">
         <Container>
           <motion.div

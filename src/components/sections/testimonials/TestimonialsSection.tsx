@@ -22,7 +22,7 @@ const TestimonialsSection: React.FC = () => {
                 <a
                   href={t.sourceUrl}
                   target="_blank"
-                  rel="nofollow sponsored noopener"
+                  rel="noopener noreferrer"
                   className="underline decoration-dotted underline-offset-4"
                 >
                   {t.sourceName}

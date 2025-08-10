@@ -265,7 +265,7 @@ export const AffiliatePartnerButton: React.FC<AffiliatePartnerButtonProps> = ({
       <a
         href={fullUrl}
         target="_blank"
-        rel="nofollow sponsored noopener"
+        rel="nofollow sponsored noopener noreferrer"
         className="flex items-center justify-center gap-2"
       >
         {children}

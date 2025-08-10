@@ -195,6 +195,7 @@ const RVEmergencyCenter = () => {
       <Helmet>
         <title>Smart RV Emergency Preparedness Center</title>
         <meta name="description" content="Complete Smart RV emergency preparedness guide. Roadside assistance, emergency equipment, safety services, and emergency response resources for Smart RV travelers." />
+        <link rel="canonical" href={typeof window !== 'undefined' ? window.location.origin + '/emergency-center' : ''} />
       </Helmet>
 
       <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 text-white">

@@ -246,7 +246,7 @@ const Products = () => {
                   <a 
                     href={product.url}
                     target="_blank"
-                    rel="nofollow sponsored noopener"
+                    rel="nofollow sponsored noopener noreferrer"
                     className="block w-full text-center bg-[#5B9BD5] text-white hover:bg-[#4A8AC4] px-6 py-3 rounded-full font-medium transition-all duration-300 group-hover:scale-105 min-h-[44px] touch-manipulation"
                   >
                     {product.buttonText} →

@@ -30,11 +30,6 @@ const contentRoutes: RouteObject[] = [
     errorElement: <ErrorPage />,
   },
   {
-    path: "/features",
-    element: <Features />,
-    errorElement: <ErrorPage />,
-  },
-  {
     path: "/documentation",
     element: <Documentation />,
     errorElement: <ErrorPage />,

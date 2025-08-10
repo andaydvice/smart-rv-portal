@@ -24,6 +24,7 @@ import SmartSystemsAffiliateRecommendations from "@/components/calculators/smart
 import Navbar from "@/components/Navbar";
 import Layout from "@/components/layout/Layout";
 import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
+import { Helmet } from "react-helmet-async";
 
 const Calculators = () => {
   const [historicalMPG, setHistoricalMPG] = useState<MPGRecord[]>([]);
@@ -34,6 +35,11 @@ const Calculators = () => {
 
   return (
     <Layout>
+      <Helmet>
+        <title>RV Calculators & Tools</title>
+        <meta name="description" content="Plan smarter with our RV calculators for fuel, power, towing, and smart systems. Compare options and optimize your trips." />
+        <link rel="canonical" href={typeof window !== 'undefined' ? window.location.origin + '/calculators' : ''} />
+      </Helmet>
       <div className="pt-16 flex-grow">
         <CalculatorHeader />
         <CalculatorIntro />

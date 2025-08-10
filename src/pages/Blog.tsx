@@ -15,19 +15,17 @@ const Blog = () => {
   
   useEffect(() => {
     window.scrollTo(0, 0);
-    console.log("Blog page - Active Category:", activeCategory);
   }, []);
   
   const handleCategoryChange = (category: 'all' | 'tech' | 'travel') => {
-    console.log("Changing category to:", category);
     setActiveCategory(category);
   };
-  
   return (
     <Layout>
       <Helmet>
         <title>Smart RV Blog - Latest RV Tech & Travel Tips</title>
         <meta name="description" content="Discover the latest in Smart RV technology, travel tips, and smart living solutions for modern Smart RV enthusiasts." />
+        <link rel="canonical" href={typeof window !== 'undefined' ? window.location.origin + '/blog' : ''} />
       </Helmet>
       
       <div className="w-full py-8">
