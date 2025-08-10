@@ -244,13 +244,6 @@ const StorageFacilitiesMap: React.FC<StorageFacilitiesMapProps> = ({ onSelectFea
         )}
         
         {/* Dev-only diagnostics */}
-        {import.meta.env.DEV && (
-          <Alert variant="default" className="bg-[#091020] border-gray-700">
-            <AlertDescription className="text-gray-300 text-xs">
-              Provider: {useGoogleMaps ? 'Google Maps' : 'Mapbox'} | {useGoogleMaps ? 'Mapbox token: not required' : `Mapbox token: ${mapToken ? 'ok' : 'missing'}${mapTokenError ? ` | Error: ${mapTokenError}` : ''}`}
-            </AlertDescription>
-          </Alert>
-        )}
         
         {/* Map view container */}
         <MapViewContainer 
