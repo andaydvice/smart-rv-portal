@@ -32,6 +32,29 @@ export function initPerformanceMonitor(options: PerfOptions = {}) {
   const perfState: any = w.__perf || { vitals: {}, resources: {}, timings: {} };
   w.__perf = perfState;
 
+  // Track route start for per-route measurements
+  let routeStart = performance.now();
+
+  // SPA navigation detection - dispatch a unified 'locationchange' event
+  const dispatchLocationChange = () => window.dispatchEvent(new Event('locationchange'));
+  try {
+    const origPush = history.pushState;
+    history.pushState = function (...args: any[]) {
+      const ret = origPush.apply(this, args as any);
+      dispatchLocationChange();
+      return ret;
+    } as any;
+
+    const origReplace = history.replaceState;
+    history.replaceState = function (...args: any[]) {
+      const ret = origReplace.apply(this, args as any);
+      dispatchLocationChange();
+      return ret;
+    } as any;
+
+    window.addEventListener('popstate', dispatchLocationChange);
+  } catch {}
+
   // Web Vitals
   setupWebVitals((metric) => {
     perfState.vitals[metric.name] = Number(metric.value.toFixed(2));
@@ -49,22 +72,24 @@ export function initPerformanceMonitor(options: PerfOptions = {}) {
     };
   }
 
-  // Resource aggregation (approximate in dev)
+  // Resource aggregation per route (use transferSize only)
   const aggregate = () => {
     const resources = performance.getEntriesByType('resource') as PerformanceResourceTiming[];
     let js = 0, css = 0, imgMax = 0, total = 0, firstParty = 0;
     const origin = location.origin;
 
-    resources.forEach((r) => {
-      const size = (r.transferSize || r.decodedBodySize || 0);
-      total += size;
-      const isFirstParty = r.name.startsWith(origin) || r.name.startsWith('/') || r.name.includes(location.host);
-      if (isFirstParty) firstParty += size;
+    resources
+      .filter((r) => r.startTime >= routeStart)
+      .forEach((r) => {
+        const size = r.transferSize || 0;
+        total += size;
+        const isFirstParty = r.name.startsWith(origin) || r.name.startsWith('/') || r.name.includes(location.host);
+        if (isFirstParty) firstParty += size;
 
-      if (r.initiatorType === 'script') js += size;
-      else if (r.initiatorType === 'link' && /css/i.test(r.name)) css += size;
-      else if (r.initiatorType === 'img') imgMax = Math.max(imgMax, size);
-    });
+        if (r.initiatorType === 'script') js += size;
+        else if (r.initiatorType === 'link' && /css/i.test(r.name)) css += size;
+        else if (r.initiatorType === 'img') imgMax = Math.max(imgMax, size);
+      });
 
     perfState.resources = {
       totalKB: +(total / 1024).toFixed(1),
@@ -95,8 +120,21 @@ export function initPerformanceMonitor(options: PerfOptions = {}) {
     setTimeout(aggregate, 1500);
   };
 
+  // Route change handling - reset route-scoped metrics and recompute sizes
+  const onRouteChange = () => {
+    routeStart = performance.now();
+    delete perfState.vitals.LCP;
+    delete perfState.vitals.FCP;
+    maybeUpdateOverlay(perfState, budgets, options.enableOverlay ?? isDev);
+    aggregate();
+    setTimeout(aggregate, 1500);
+  };
+
   if (document.readyState === 'complete') onLoad();
   else window.addEventListener('load', onLoad, { once: true });
+
+  // Listen for SPA navigations
+  window.addEventListener('locationchange', onRouteChange);
 }
 
 function maybeUpdateOverlay(state: any, budgets: PerfBudgets, enable: boolean) {

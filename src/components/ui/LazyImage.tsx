@@ -95,7 +95,7 @@ export const LazyImage = ({
             src={src}
             alt={alt || ''}
             loading={shouldPrioritize ? 'eager' : 'lazy'}
-            fetchPriority={shouldPrioritize ? 'high' : 'auto'}
+            {...({ fetchpriority: shouldPrioritize ? 'high' : 'auto' } as any)}
             className={cn(
               className,
               shouldPrioritize ? 'opacity-100' : (isLoading ? 'opacity-0' : 'opacity-100'),
