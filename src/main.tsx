@@ -32,6 +32,16 @@ if (!rootElement) {
     deferOperation(() => {
       setupLazyLoading();
     }, 300);
+
+    // Idle prefetch select lazy routes to improve navigation speed
+    deferOperation(() => {
+      const idle = (cb: () => void) =>
+        (window as any).requestIdleCallback ? (window as any).requestIdleCallback(cb, { timeout: 5000 }) : setTimeout(cb, 2500);
+      idle(() => {
+        // Warm common lazy chunks without blocking the UI thread
+        import('./pages/SearchResults').catch(() => {});
+      });
+    }, 2000);
     
   } catch (error) {
     console.error('Failed to mount React application:', error);

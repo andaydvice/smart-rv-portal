@@ -76,20 +76,20 @@ export function initPerformanceMonitor(options: PerfOptions = {}) {
   const aggregate = () => {
     const resources = performance.getEntriesByType('resource') as PerformanceResourceTiming[];
     let js = 0, css = 0, imgMax = 0, total = 0, firstParty = 0;
+    let jsCount = 0, cssCount = 0, imgCount = 0;
     const origin = location.origin;
 
-    resources
-      .filter((r) => r.startTime >= routeStart)
-      .forEach((r) => {
-        const size = r.transferSize || 0;
-        total += size;
-        const isFirstParty = r.name.startsWith(origin) || r.name.startsWith('/') || r.name.includes(location.host);
-        if (isFirstParty) firstParty += size;
+    const filtered = resources.filter((r) => r.startTime >= routeStart);
+    filtered.forEach((r) => {
+      const size = r.transferSize || 0;
+      total += size;
+      const isFirstParty = r.name.startsWith(origin) || r.name.startsWith('/') || r.name.includes(location.host);
+      if (isFirstParty) firstParty += size;
 
-        if (r.initiatorType === 'script') js += size;
-        else if (r.initiatorType === 'link' && /css/i.test(r.name)) css += size;
-        else if (r.initiatorType === 'img') imgMax = Math.max(imgMax, size);
-      });
+      if (r.initiatorType === 'script') { js += size; jsCount++; }
+      else if (r.initiatorType === 'link' && /css/i.test(r.name)) { css += size; cssCount++; }
+      else if (r.initiatorType === 'img') { imgMax = Math.max(imgMax, size); imgCount++; }
+    });
 
     perfState.resources = {
       totalKB: +(total / 1024).toFixed(1),
@@ -97,6 +97,12 @@ export function initPerformanceMonitor(options: PerfOptions = {}) {
       cssKB: +(css / 1024).toFixed(1),
       imageMaxKB: +(imgMax / 1024).toFixed(1),
       firstPartyKB: +(firstParty / 1024).toFixed(1),
+      counts: {
+        total: filtered.length,
+        js: jsCount,
+        css: cssCount,
+        img: imgCount,
+      }
     };
 
     perfState.budgetStatus = {
@@ -164,9 +170,10 @@ function maybeUpdateOverlay(state: any, budgets: PerfBudgets, enable: boolean) {
   el.innerHTML = `
     <div>Route: ${location.pathname}</div>
     <div><strong>Vitals</strong> LCP:${(v.LCP != null ? (v.LCP/1000).toFixed(2) : '-')}s CLS:${v.CLS != null ? v.CLS : '-'} INP:${v.INP != null ? Number(v.INP).toFixed(0) : '-'}ms</div>
-    <div><strong>Sizes</strong> JS:${fmtKB(r?.jsKB)}/${budgets.jsKB} CSS:${fmtKB(r?.cssKB)}/${budgets.cssKB} Total:${fmtKB(r?.totalKB)}/${budgets.totalBundleKB}</div>
-    <div><strong>First-party</strong> ${fmtKB(r?.firstPartyKB)}/${budgets.firstPartyTotalKB} | Img max:${fmtKB(r?.imageMaxKB)}/${budgets.imageMaxKB}</div>
+    <div><strong>Sizes</strong> JS:${fmtKB(r?.jsKB)} (${r?.counts?.js || 0}) / ${budgets.jsKB} CSS:${fmtKB(r?.cssKB)} (${r?.counts?.css || 0}) / ${budgets.cssKB} Total:${fmtKB(r?.totalKB)} (${r?.counts?.total || 0}) / ${budgets.totalBundleKB}</div>
+    <div><strong>First-party</strong> ${fmtKB(r?.firstPartyKB)} / ${budgets.firstPartyTotalKB} | Img max:${fmtKB(r?.imageMaxKB)} (${r?.counts?.img || 0}) / ${budgets.imageMaxKB}</div>
     <div style="opacity:.8">${bBadge('JS', b.js)} ${bBadge('CSS', b.css)} ${bBadge('Total', b.totalBundle)} ${bBadge('FP', b.firstPartyTotal)} ${bBadge('IMG', b.imageMax)}</div>
+    <div style="opacity:.7;font-size:10px;margin-top:4px">Per-route since last navigation • Using transferSize only • Cached requests may show 0KB • Web Vitals update as new paints occur</div>
   `;
 }
 
