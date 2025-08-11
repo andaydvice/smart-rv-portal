@@ -9,18 +9,9 @@ import './styles/layout.css'
 import './styles/base.css'
 // ... keep existing code (global base styles)
 
-import { setupLazyLoading, deferOperation, preloadCriticalImages } from './utils/performance.ts'
+import { setupLazyLoading, deferOperation } from './utils/performance.ts'
 
-// Critical images to preload at application start
-const CRITICAL_APPLICATION_IMAGES = [
-  '/lovable-uploads/f72886c3-3677-4dfe-8d56-5a784197eda2.png', // Documentation header
-  '/lovable-uploads/846b5be5-043e-4645-a3d9-39614d63342c.png', // Completion image
-  '/lovable-uploads/a6746652-04f0-4f89-a55d-b241e7bd972a.png'  // Troubleshooting header
-];
-
-// Preload critical images as early as possible
-preloadCriticalImages(CRITICAL_APPLICATION_IMAGES);
-
+// Removed global image preloads; pages handle their own critical assets
 
 // Mount the application with error handling
 const rootElement = document.getElementById('root');

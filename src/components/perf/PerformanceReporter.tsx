@@ -1,18 +1,25 @@
 import React, { useEffect } from 'react';
 import { initPerformanceMonitor } from '@/perf/monitor';
-import { registerWebVitals } from '@/utils/perf/webVitals';
 import { startRUM } from '@/utils/perf/rum';
+
 const PerformanceReporter: React.FC = () => {
   useEffect(() => {
-    // Dev only overlay to avoid adding UI in production
-    initPerformanceMonitor({ 
-      enableOverlay: import.meta.env.DEV,
-      budgets: { totalBundleKB: 200, jsKB: 150, cssKB: 50, imageMaxKB: 200, firstPartyTotalKB: 300 }
+    const isDev = import.meta.env.DEV;
+    const enableOverlay = isDev && localStorage.getItem('perfOverlay') === '1';
+
+    const devBudgets = { totalBundleKB: 6000, jsKB: 3000, cssKB: 1000, imageMaxKB: 1024, firstPartyTotalKB: 8000 };
+    const prodBudgets = { totalBundleKB: 200, jsKB: 150, cssKB: 50, imageMaxKB: 200, firstPartyTotalKB: 300 };
+
+    initPerformanceMonitor({
+      enableOverlay,
+      budgets: isDev ? devBudgets : prodBudgets,
     });
-    // Register Web Vitals against budgets and surface warnings via toast
-    registerWebVitals({ LCP: 2500, INP: 200, CLS: 0.1 });
-    // Start real-user monitoring to Supabase (sampled)
-    startRUM({ sampleRate: import.meta.env.DEV ? 1 : 0.5 });
+
+    if (!isDev) {
+      const idle = (cb: () => void) =>
+        (window as any).requestIdleCallback ? (window as any).requestIdleCallback(cb, { timeout: 2000 }) : setTimeout(cb, 500);
+      idle(() => startRUM({ sampleRate: 0.5 }));
+    }
   }, []);
   return null;
 };

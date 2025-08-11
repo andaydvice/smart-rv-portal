@@ -56,45 +56,9 @@ export const LazyImage = ({
     }
   }, [isLoading]);
   
-  // Preload the image if it's marked as priority
   useEffect(() => {
-    if (shouldPrioritize && src) {
-      console.log('Preloading image:', src);
-      
-      // Immediately create and inject a preload link in the document head
-      const link = document.createElement('link');
-      link.rel = 'preload';
-      link.as = 'image';
-      link.href = src;
-      link.fetchPriority = 'high';
-      document.head.appendChild(link);
-      
-      // Also preload using Image constructor for immediate loading
-      const preloadImage = new Image();
-      preloadImage.src = src;
-      preloadImage.fetchPriority = 'high'; // Modern browsers support this
-      if (width) preloadImage.width = Number(width);
-      if (height) preloadImage.height = Number(height);
-      
-      // Once the image is preloaded, update the loading state
-      preloadImage.onload = () => {
-        console.log('Image preloaded:', src);
-        setIsLoading(false);
-      };
-      
-      preloadImage.onerror = () => {
-        console.error('Failed to preload image:', src);
-        setError(true);
-        setIsLoading(false);
-      };
-      
-      return () => {
-        if (document.head.contains(link)) {
-          document.head.removeChild(link);
-        }
-      };
-    }
-  }, [shouldPrioritize, src, width, height]);
+    // no-op: rely on native fetchPriority and browser scheduling
+  }, [shouldPrioritize, src]);
 
   return (
     <div className="relative">
@@ -143,12 +107,12 @@ export const LazyImage = ({
               ...props.style
             }}
             onLoad={(e) => {
-              console.log('Image loaded:', src);
+              if (import.meta.env.DEV) console.log('Image loaded:', src);
               setIsLoading(false);
               if (props.onLoad) props.onLoad(e);
             }}
             onError={(e) => {
-              console.error('Image failed to load:', src);
+              if (import.meta.env.DEV) console.error('Image failed to load:', src);
               setError(true);
               setIsLoading(false);
               if (props.onError) props.onError(e);

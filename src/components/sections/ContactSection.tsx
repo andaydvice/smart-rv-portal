@@ -3,13 +3,15 @@
 
 export const ContactSection = () => (
   // Kept min-h-[70vh] and flex utilities to maintain section height and structure
-  <section className="relative py-32 px-4 overflow-hidden min-h-[70vh] flex flex-col justify-center"> 
+  <section className="relative py-32 px-4 overflow-hidden min-h-[70vh] flex flex-col justify-center" style={{ contentVisibility: 'auto', containIntrinsicSize: '1200px 800px' }}> 
     <div className="absolute inset-0">
       <img
         src="/lovable-uploads/f88c014b-5b32-4db0-8742-f9e8b531654e.png"
         alt="Interior view of a Smart RV with a person using a smartphone"
         className="w-full h-full object-cover"
-        loading="eager"
+        loading="lazy"
+        decoding="async"
+        sizes="100vw"
       />
       {/* MODIFIED: Removed the dark gradient overlay div that was here */}
     </div>
