@@ -11,21 +11,16 @@ export const HeroSection = () => {
     <section className="relative w-full min-h-screen overflow-hidden">
       {/* Full width image container */}
       <div className="absolute inset-0 left-0 right-0">
-        <picture>
-          <source type="image/avif" srcSet="/lovable-uploads/hero.avif" />
-          <source type="image/webp" srcSet="/lovable-uploads/hero.webp" />
-          <img
-            src="/lovable-uploads/f3ebf58c-7bbf-427f-9510-9c3b0aec6f6d.png"
-            alt="Luxury Smart RV interior with panoramic windows and modern intelligent design"
-            className="h-full w-full object-cover"
-            loading="eager"
-            decoding="async"
-            fetchPriority="high"
-            width={1920}
-            height={1080}
-            sizes="100vw"
-          />
-        </picture>
+        <img
+          src="/lovable-uploads/f3ebf58c-7bbf-427f-9510-9c3b0aec6f6d.png"
+          alt="Luxury Smart RV interior with panoramic windows and modern intelligent design"
+          className="h-full w-full object-cover"
+          loading="eager"
+          decoding="async"
+          width={1920}
+          height={1080}
+          sizes="100vw"
+        />
         <div className="absolute inset-0 bg-black/60" />
       </div>
       
