@@ -5,10 +5,10 @@ import { startRUM } from '@/utils/perf/rum';
 const PerformanceReporter: React.FC = () => {
   useEffect(() => {
     const isDev = import.meta.env.DEV;
-    const enableOverlay = isDev && localStorage.getItem('perfOverlay') === '1';
+    const enableOverlay = isDev ? true : localStorage.getItem('perfOverlay') === '1';
 
-    const devBudgets = { totalBundleKB: 6000, jsKB: 3000, cssKB: 1000, imageMaxKB: 1024, firstPartyTotalKB: 8000 };
     const prodBudgets = { totalBundleKB: 200, jsKB: 150, cssKB: 50, imageMaxKB: 200, firstPartyTotalKB: 300 };
+    const devBudgets = prodBudgets;
 
     initPerformanceMonitor({
       enableOverlay,
