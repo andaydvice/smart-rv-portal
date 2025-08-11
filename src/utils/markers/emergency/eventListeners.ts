@@ -15,7 +15,7 @@ export function setupEmergencyMarkerListeners(
         // Add click handler to call the onMarkerClick callback
         const handleClick = (e: MouseEvent) => {
           e.stopPropagation();
-          console.log(`Direct marker clicked: ${facilityId}`);
+          if (import.meta.env.DEV) console.log(`Direct marker clicked: ${facilityId}`);
           onMarkerClick(facilityId, e);
         };
         

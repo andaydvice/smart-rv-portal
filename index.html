@@ -7,15 +7,25 @@
     <meta name="description" content="Smart RV Systems: Next-generation connectivity and control for your RV" />
     <title>Smart RV Systems</title>
     
-    <!-- Keep head lean: only critical preloads -->
-    <link rel="preload" href="/lovable-uploads/f3ebf58c-7bbf-427f-9510-9c3b0aec6f6d.png" as="image" fetchpriority="high" />
+    <!-- Performance-critical preloads -->
+    <link rel="preload" href="/lovable-uploads/f3ebf58c-7bbf-427f-9510-9c3b0aec6f6d.png" as="image" />
     
+    <!-- Non-blocking Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'" />
+    <noscript>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" />
+    </noscript>
+
     <!-- Initial page path detection -->
     <script>
       window.initialPath = window.location.pathname;
-      console.log('Initial page load path:', window.initialPath);
-      
-      // Add performance marker for monitoring
+      const __DEV__ = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
+      if (__DEV__) {
+        console.log('Initial page load path:', window.initialPath);
+      }
       if (window.performance && window.performance.mark) {
         window.performance.mark('initial_load_start');
       }
@@ -27,11 +37,14 @@
     <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
     <script type="module" src="/src/main.tsx"></script>
     <script>
+      const __DEV__ = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
       // Record when the page becomes visible to the user
       document.addEventListener('DOMContentLoaded', function() {
         if (window.performance && window.performance.mark) {
           window.performance.mark('dom_content_loaded');
-          console.log('DOMContentLoaded event fired at:', new Date().getTime());
+          if (__DEV__) {
+            console.log('DOMContentLoaded event fired at:', Date.now());
+          }
         }
       });
       
@@ -40,7 +53,9 @@
         if (window.performance && window.performance.mark) {
           window.performance.mark('full_load_complete');
           const loadTime = performance.now();
-          console.log('Page fully loaded in:', Math.round(loadTime), 'ms');
+          if (__DEV__) {
+            console.log('Page fully loaded in:', Math.round(loadTime), 'ms');
+          }
         }
       });
     </script>

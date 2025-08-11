@@ -89,7 +89,7 @@ const Index = () => {
         <HomepageAffiliateSection />
         
         {/* Strategic affiliate partnerships - customer focused */}
-        <section className="py-16 px-4 bg-gradient-to-br from-connectivity-darkBg to-[#0A0F1A]">
+        <section className="py-16 px-4 bg-gradient-to-br from-connectivity-darkBg to-[#0A0F1A]" style={{ contentVisibility: "auto", containIntrinsicSize: "1200px" }}>
           <div className="max-w-6xl mx-auto">
             <OptimizedAffiliateGrid
               title="Complete Smart RV Solutions Ecosystem"

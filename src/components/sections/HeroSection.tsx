@@ -3,32 +3,9 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { Container } from "@/components/ui/container";
-import { useEffect } from "react";
+
 
 export const HeroSection = () => {
-  // Preload hero image as soon as the component mounts
-  useEffect(() => {
-    const heroImageSrc = '/lovable-uploads/f3ebf58c-7bbf-427f-9510-9c3b0aec6f6d.png';
-    
-    // Method 1: Create high priority preload link
-    const link = document.createElement('link');
-    link.rel = 'preload';
-    link.as = 'image';
-    link.href = heroImageSrc;
-    link.fetchPriority = 'high';
-    document.head.appendChild(link);
-    
-    // Method 2: Use Image constructor for immediate loading
-    const preloadImage = new Image();
-    preloadImage.src = heroImageSrc;
-    preloadImage.fetchPriority = 'high';
-    
-    return () => {
-      if (document.head.contains(link)) {
-        document.head.removeChild(link);
-      }
-    };
-  }, []);
 
   return (
     <section className="relative w-full min-h-screen overflow-hidden">
@@ -39,7 +16,6 @@ export const HeroSection = () => {
           alt="Luxury Smart RV interior with panoramic windows and modern intelligent design"
           className="h-full w-full object-cover"
           loading="eager"
-          fetchPriority="high"
           decoding="async"
           width={1920}
           height={1080}

@@ -23,7 +23,7 @@ export function createEdgeAwareClickHandler(
       e.preventDefault();
     }
     
-    console.log(`Edge-aware click handler triggered for [${coordinates[0]}, ${coordinates[1]}]`);
+    if (import.meta.env.DEV) console.log(`Edge-aware click handler triggered for [${coordinates[0]}, ${coordinates[1]}]`);
     
     // Get the marker element
     const markerElement = e.currentTarget as HTMLElement;
@@ -39,7 +39,7 @@ export function createEdgeAwareClickHandler(
     // Call the original click callback after a short delay to ensure map has adjusted
     if (onClickCallback) {
       setTimeout(() => {
-        console.log('Executing click callback after map adjustment');
+        if (import.meta.env.DEV) console.log('Executing click callback after map adjustment');
         onClickCallback(e);
       }, 300);
     }

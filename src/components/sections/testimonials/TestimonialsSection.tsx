@@ -8,7 +8,7 @@ const TestimonialsSection: React.FC = () => {
   if (items.length === 0) return null;
 
   return (
-    <section className="py-16 px-4 bg-gradient-to-br from-connectivity-darkBg to-[#0A0F1A]">
+    <section className="py-16 px-4 bg-gradient-to-br from-connectivity-darkBg to-[#0A0F1A]" style={{ contentVisibility: "auto", containIntrinsicSize: "900px" }}>
       <div className="max-w-6xl mx-auto">
         <h2 className="text-3xl font-bold text-white mb-6 text-center">What smart RVers say</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">

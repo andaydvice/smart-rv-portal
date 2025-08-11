@@ -16,7 +16,7 @@ export function ensureMarkersExist(
   facilities: StorageFacility[]
 ): number {
   if (!map || !facilities?.length) {
-    console.warn('Cannot ensure markers: missing map or facilities');
+    if (import.meta.env.DEV) console.warn('Cannot ensure markers: missing map or facilities');
     return 0;
   }
 
@@ -25,11 +25,11 @@ export function ensureMarkersExist(
   
   // If we have a reasonable number of markers already, don't create emergency ones
   if (existingMarkers.length >= facilities.length * 0.7) {
-    console.log(`Found ${existingMarkers.length} existing markers, not creating emergency markers`);
+    if (import.meta.env.DEV) console.log(`Found ${existingMarkers.length} existing markers, not creating emergency markers`);
     return existingMarkers.length;
   }
   
-  console.log(`Not enough markers found (${existingMarkers.length}/${facilities.length}), creating emergency markers`);
+  if (import.meta.env.DEV) console.log(`Not enough markers found (${existingMarkers.length}/${facilities.length}), creating emergency markers`);
   
   // Create emergency markers directly in the DOM
   return createEmergencyMarkers(map, facilities);
