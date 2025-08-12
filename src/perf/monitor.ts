@@ -81,7 +81,7 @@ export function initPerformanceMonitor(options: PerfOptions = {}) {
 
     const filtered = resources.filter((r) => r.startTime >= routeStart);
     filtered.forEach((r) => {
-      const size = r.transferSize || 0;
+      const size = (r.transferSize && r.transferSize > 0 ? r.transferSize : (r.encodedBodySize || r.decodedBodySize || 0));
       total += size;
       const isFirstParty = r.name.startsWith(origin) || r.name.startsWith('/') || r.name.includes(location.host);
       if (isFirstParty) firstParty += size;
@@ -124,6 +124,7 @@ export function initPerformanceMonitor(options: PerfOptions = {}) {
   const onLoad = () => {
     aggregate();
     setTimeout(aggregate, 1500);
+    setTimeout(aggregate, 4000);
   };
 
   // Route change handling - reset route-scoped metrics and recompute sizes
@@ -131,9 +132,12 @@ export function initPerformanceMonitor(options: PerfOptions = {}) {
     routeStart = performance.now();
     delete perfState.vitals.LCP;
     delete perfState.vitals.FCP;
+    delete perfState.vitals.CLS;
+    delete perfState.vitals.INP;
     maybeUpdateOverlay(perfState, budgets, options.enableOverlay ?? isDev);
     aggregate();
     setTimeout(aggregate, 1500);
+    setTimeout(aggregate, 4000);
   };
 
   if (document.readyState === 'complete') onLoad();
@@ -173,7 +177,7 @@ function maybeUpdateOverlay(state: any, budgets: PerfBudgets, enable: boolean) {
     <div><strong>Sizes</strong> JS:${fmtKB(r?.jsKB)} (${r?.counts?.js || 0}) / ${budgets.jsKB} CSS:${fmtKB(r?.cssKB)} (${r?.counts?.css || 0}) / ${budgets.cssKB} Total:${fmtKB(r?.totalKB)} (${r?.counts?.total || 0}) / ${budgets.totalBundleKB}</div>
     <div><strong>First-party</strong> ${fmtKB(r?.firstPartyKB)} / ${budgets.firstPartyTotalKB} | Img max:${fmtKB(r?.imageMaxKB)} (${r?.counts?.img || 0}) / ${budgets.imageMaxKB}</div>
     <div style="opacity:.8">${bBadge('JS', b.js)} ${bBadge('CSS', b.css)} ${bBadge('Total', b.totalBundle)} ${bBadge('FP', b.firstPartyTotal)} ${bBadge('IMG', b.imageMax)}</div>
-    <div style="opacity:.7;font-size:10px;margin-top:4px">Per-route since last navigation • Using transferSize only • Cached requests may show 0KB • Web Vitals update as new paints occur</div>
+    <div style="opacity:.7;font-size:10px;margin-top:4px">Per-route since last navigation • Prefers transferSize, falls back to encodedBodySize for cached • Web Vitals update as new paints occur</div>
   `;
 }
 

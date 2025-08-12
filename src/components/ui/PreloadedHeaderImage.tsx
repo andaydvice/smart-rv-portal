@@ -1,5 +1,5 @@
 
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { generateImagePlaceholder } from '@/utils/performance';
 
 interface PreloadedHeaderImageProps {
@@ -8,6 +8,8 @@ interface PreloadedHeaderImageProps {
   className?: string;
   width?: number;
   height?: number;
+  sizes?: string;
+  priority?: 'high' | 'auto' | 'low';
   onImageLoaded?: () => void; // Add callback prop
 }
 
@@ -17,44 +19,16 @@ export const PreloadedHeaderImage = ({
   className = '',
   width = 1920,
   height = 600,
+  sizes,
+  priority = 'auto',
   onImageLoaded // Add callback prop
 }: PreloadedHeaderImageProps) => {
   const [imageLoaded, setImageLoaded] = useState(false);
   // Generate a simple color placeholder instead of a full image placeholder
   const placeholder = generateImagePlaceholder(width, height);
   
-  // Immediately preload the image with high priority when component mounts
-  useEffect(() => {
-    if (import.meta.env.DEV) console.log('Preloading header image:', src);
-    
-    // Create and inject a preload link element in the document head
-    const link = document.createElement('link');
-    link.rel = 'preload';
-    link.as = 'image';
-    link.href = src;
-    link.fetchPriority = 'high';
-    document.head.appendChild(link);
-    
-    // Also preload using Image constructor for immediate loading
-    const preloadImage = new Image();
-    preloadImage.src = src;
-    preloadImage.onload = () => {
-      if (import.meta.env.DEV) console.log('Header image loaded:', src);
-      setImageLoaded(true);
-      if (onImageLoaded) {
-        onImageLoaded();
-      }
-    };
-    preloadImage.onerror = () => {
-      if (import.meta.env.DEV) console.error('Failed to load header image:', src);
-    };
-    
-    return () => {
-      if (document.head.contains(link)) {
-        document.head.removeChild(link);
-      }
-    };
-  }, [src, onImageLoaded]);
+  // Streamlined: avoid duplicate preloads; rely on img attributes and browser scheduling
+
 
   return (
     <>
@@ -76,8 +50,9 @@ export const PreloadedHeaderImage = ({
         className={`${className} transition-opacity duration-300`}
         width={width}
         height={height}
-        loading="eager"
-        {...({ fetchpriority: 'high' } as any)}
+        sizes={sizes}
+        loading={priority === 'high' ? 'eager' : 'lazy'}
+        {...({ fetchpriority: priority } as any)}
         decoding="async"
         style={{ 
           position: 'relative', 

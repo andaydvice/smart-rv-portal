@@ -7,8 +7,8 @@ const PerformanceReporter: React.FC = () => {
     const isDev = import.meta.env.DEV;
     const enableOverlay = isDev ? true : localStorage.getItem('perfOverlay') === '1';
 
-    const prodBudgets = { totalBundleKB: 200, jsKB: 150, cssKB: 50, imageMaxKB: 200, firstPartyTotalKB: 300 };
-    const devBudgets = prodBudgets;
+const prodBudgets = { totalBundleKB: 200, jsKB: 150, cssKB: 50, imageMaxKB: 200, firstPartyTotalKB: 300 };
+const devBudgets = { totalBundleKB: 320, jsKB: 240, cssKB: 80, imageMaxKB: 300, firstPartyTotalKB: 480 };
 
     initPerformanceMonitor({
       enableOverlay,
