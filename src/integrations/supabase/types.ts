@@ -1140,6 +1140,10 @@ export type Database = {
         Args: Record<PropertyKey, never>
         Returns: number
       }
+      get_newsletter_count: {
+        Args: Record<PropertyKey, never>
+        Returns: number
+      }
       get_proj4_from_srid: {
         Args: { "": number }
         Returns: string
