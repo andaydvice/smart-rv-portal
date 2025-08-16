@@ -16,18 +16,13 @@ export default defineConfig(({ mode }) => ({
       host: '95549a04-cacd-4e64-a52b-ecc6aed8e361.lovableproject.com',
       overlay: true,
       protocol: 'wss',
-      // Add better reconnection handling
       reloadOnFailure: true
     },
     watch: {
       usePolling: true,
-      interval: 1000 // Increase interval to reduce CPU usage
+      interval: 1000
     },
-    open: false,
-    // SPA fallback for client-side routing
-    historyApiFallback: {
-      index: '/index.html'
-    }
+    open: false
   },
   plugins: [
     react(),

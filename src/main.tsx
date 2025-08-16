@@ -3,71 +3,35 @@ import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
 import { HelmetProvider } from 'react-helmet-async'
 import './index.css'
-import './styles/animations.css'
-import './styles/forms.css'
-import './styles/layout.css'
-import './styles/base.css'
-// ... keep existing code (global base styles)
 
-import { setupLazyLoading, deferOperation } from './utils/performance.ts'
-
-// Removed global image preloads; pages handle their own critical assets
-
-// Mount the application with error handling
-const rootElement = document.getElementById('root');
+// Mount the application with simplified error handling
+const rootElement = document.getElementById('root')
 
 if (!rootElement) {
-  console.error('Root element not found! Cannot mount React application.');
-  document.body.innerHTML = '<div style="padding: 20px; color: red;">ERROR: Root element not found</div>';
+  console.error('Root element not found!')
+  document.body.innerHTML = '<div style="padding: 20px; color: red;">ERROR: Root element not found</div>'
 } else {
-  console.log('Root element found, mounting React app...');
+  console.log('Mounting React app...')
   try {
-    const root = ReactDOM.createRoot(rootElement);
-    console.log('Creating React root...');
+    const root = ReactDOM.createRoot(rootElement)
     root.render(
       <React.StrictMode>
         <HelmetProvider>
           <App />
         </HelmetProvider>
       </React.StrictMode>
-    );
-    console.log('React app rendered successfully!');
-    
-    // After app is rendered, setup lazy loading for images
-    deferOperation(() => {
-      setupLazyLoading();
-    }, 300);
-
-    // Idle prefetch select lazy routes to improve navigation speed
-    deferOperation(() => {
-      const idle = (cb: () => void) =>
-        (window as any).requestIdleCallback ? (window as any).requestIdleCallback(cb, { timeout: 5000 }) : setTimeout(cb, 2500);
-      idle(() => {
-        // Warm common lazy chunks without blocking the UI thread
-        import('./pages/SearchResults').catch(() => {});
-      });
-    }, 2000);
-    
+    )
+    console.log('React app mounted successfully!')
   } catch (error) {
-    console.error('Failed to mount React application:', error);
-    
-    // Emergency recovery attempt
-    setTimeout(() => {
-      try {
-        ReactDOM.createRoot(rootElement).render(
-          <App />
-        );
-      } catch (fallbackError) {
-        console.error('Emergency mounting also failed:', fallbackError);
-        
-        // Display a basic error message
-        rootElement.innerHTML = `
-          <div style="padding: 20px; text-align: center;">
-            <h2>Something went wrong</h2>
-            <p>The application couldn't load properly. Please check the console for errors.</p>
-          </div>
-        `;
-      }
-    }, 1000);
+    console.error('Failed to mount React application:', error)
+    rootElement.innerHTML = `
+      <div style="padding: 20px; text-align: center; background: #080F1F; color: white; min-height: 100vh;">
+        <h2>App Failed to Load</h2>
+        <p>Error: ${error?.message || 'Unknown error'}</p>
+        <button onclick="window.location.reload()" style="padding: 10px 20px; margin-top: 10px; background: #5B9BD5; color: white; border: none; border-radius: 5px; cursor: pointer;">
+          Reload Page
+        </button>
+      </div>
+    `
   }
 }
