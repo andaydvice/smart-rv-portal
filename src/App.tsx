@@ -37,11 +37,32 @@ function AppContent() {
     (window as any).__appEffectRan = true;
     console.log('App component mounted');
     
-    // Inject critical CSS for immediate rendering
-    import('@/utils/critical-css').then(({ injectCriticalCSS, preloadCriticalFonts }) => {
+    // Initialize Phase 4 performance optimizations
+    const initPerformanceOptimizations = async () => {
+      // Inject critical CSS for immediate rendering
+      const { injectCriticalCSS, preloadCriticalFonts } = await import('@/utils/critical-css');
       injectCriticalCSS();
       preloadCriticalFonts();
-    });
+      
+      // Register service worker for caching
+      const { registerServiceWorker, preloadCriticalResources, trackServiceWorkerPerformance } = await import('@/utils/service-worker');
+      await registerServiceWorker();
+      preloadCriticalResources();
+      trackServiceWorkerPerformance();
+      
+      // Initialize bundle optimization
+      const { preloadCriticalRoutes, monitorBundleSize, addResourceHints, optimizeImages } = await import('@/utils/bundle-optimization');
+      preloadCriticalRoutes();
+      addResourceHints();
+      
+      // Monitor performance after a short delay
+      setTimeout(() => {
+        monitorBundleSize();
+        optimizeImages();
+      }, 2000);
+    };
+    
+    initPerformanceOptimizations().catch(console.error);
     
     // Force scroll to top on page load
     window.scrollTo(0, 0);
