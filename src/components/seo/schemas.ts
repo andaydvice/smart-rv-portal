@@ -278,3 +278,78 @@ export const techArticleSchema = (article: {
     '@id': article.url
   }
 });
+
+export const reviewSchema = (review: {
+  itemName: string;
+  reviewBody: string;
+  ratingValue: number;
+  bestRating?: number;
+  worstRating?: number;
+  author: string;
+  datePublished: string;
+  itemReviewed: {
+    name: string;
+    description: string;
+    image?: string;
+    brand?: string;
+    offers?: {
+      price: string;
+      priceCurrency: string;
+      availability: string;
+    };
+  };
+}) => ({
+  '@context': 'https://schema.org',
+  '@type': 'Review',
+  itemReviewed: {
+    '@type': 'Product',
+    name: review.itemReviewed.name,
+    description: review.itemReviewed.description,
+    image: review.itemReviewed.image,
+    brand: review.itemReviewed.brand ? {
+      '@type': 'Brand',
+      name: review.itemReviewed.brand
+    } : undefined,
+    offers: review.itemReviewed.offers ? {
+      '@type': 'Offer',
+      price: review.itemReviewed.offers.price,
+      priceCurrency: review.itemReviewed.offers.priceCurrency,
+      availability: review.itemReviewed.offers.availability
+    } : undefined
+  },
+  reviewRating: {
+    '@type': 'Rating',
+    ratingValue: review.ratingValue,
+    bestRating: review.bestRating || 5,
+    worstRating: review.worstRating || 1
+  },
+  name: `Review of ${review.itemName}`,
+  reviewBody: review.reviewBody,
+  author: {
+    '@type': 'Person',
+    name: review.author
+  },
+  datePublished: review.datePublished,
+  publisher: organizationSchema
+});
+
+export const videoSchema = (video: {
+  name: string;
+  description: string;
+  thumbnailUrl: string;
+  uploadDate: string;
+  duration?: string;
+  contentUrl?: string;
+  embedUrl?: string;
+}) => ({
+  '@context': 'https://schema.org',
+  '@type': 'VideoObject',
+  name: video.name,
+  description: video.description,
+  thumbnailUrl: video.thumbnailUrl,
+  uploadDate: video.uploadDate,
+  duration: video.duration,
+  contentUrl: video.contentUrl,
+  embedUrl: video.embedUrl,
+  publisher: organizationSchema
+});
