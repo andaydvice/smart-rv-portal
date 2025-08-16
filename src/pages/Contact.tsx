@@ -8,8 +8,7 @@ import { useToast } from "@/components/ui/use-toast";
 import Layout from "@/components/layout/Layout";
 import { scrollToTop } from "@/utils/scrollToTop";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
-import SEO from "@/components/seo/SEO";
-import { organizationSchema, breadcrumbSchema, faqSchema, localBusinessSchema } from "@/components/seo/schemas";
+import { Helmet } from "react-helmet-async";
 
 const Contact = () => {
   const { toast } = useToast();
@@ -27,52 +26,13 @@ const Contact = () => {
     });
   };
 
-  const contactFAQ = [
-    {
-      question: "How quickly do you respond to contact requests?",
-      answer: "We typically respond to all contact requests within 24 hours during business days. For urgent matters, we also provide emergency contact information."
-    },
-    {
-      question: "What types of support do you provide?",
-      answer: "We provide expert guidance on RV technology, product recommendations, installation support, and technical assistance for smart RV systems."
-    },
-    {
-      question: "Do you offer consultation services?",
-      answer: "Yes, we offer personalized consultations to help you choose the right smart RV technology solutions for your specific needs and budget."
-    }
-  ];
-
   return (
     <Layout>
-      <SEO
-        title="Contact Smart RV Technology Hub | Expert Support & Consultation"
-        description="Get in touch with Smart RV Technology Hub for expert guidance on RV technology, product recommendations, installation support, and technical assistance. Quick response guaranteed."
-        keywords="contact smart RV, RV technology support, RV consultation, smart RV expert, RV technology help, emergency RV assistance"
-        canonical={typeof window !== 'undefined' ? `${window.location.origin}/contact` : ''}
-        ogImage="/lovable-uploads/f88c014b-5b32-4db0-8742-f9e8b531654e.png"
-        ogImageAlt="Contact Smart RV Technology Hub for Expert Support"
-        twitterCard="summary_large_image"
-        openGraph={{
-          type: "website"
-        }}
-        structuredData={[
-          organizationSchema,
-          localBusinessSchema,
-          breadcrumbSchema([
-            { name: 'Home', url: typeof window !== 'undefined' ? window.location.origin : '' },
-            { name: 'Contact', url: typeof window !== 'undefined' ? `${window.location.origin}/contact` : '' }
-          ]),
-          faqSchema(contactFAQ),
-          {
-            '@context': 'https://schema.org',
-            '@type': 'ContactPage',
-            name: 'Contact Smart RV Technology Hub',
-            description: 'Get expert guidance on RV technology and smart systems',
-            url: typeof window !== 'undefined' ? `${window.location.origin}/contact` : '',
-            mainEntity: localBusinessSchema
-          }
-        ]}
-      />
+      <Helmet>
+        <title>Contact Smart RV | Get Support And Advice</title>
+        <meta name="description" content="Contact Smart RV for questions, support, and expert advice on technology, power systems, and travel planning." />
+        <link rel="canonical" href={typeof window !== 'undefined' ? window.location.origin + '/contact' : ''} />
+      </Helmet>
       {/* REMOVED: Extra Navbar component that was causing duplication */}
       <motion.div 
         initial={{ opacity: 0 }}

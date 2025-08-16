@@ -29,10 +29,6 @@ const Blog = () => {
         keywords="RV blog, RV technology, smart RV systems, digital nomad blog, RV solar power, RV connectivity, mobile internet, RV automation"
         ogImage="/og-image.svg"
         ogImageAlt="Smart RV Technology Blog - Latest insights and guides"
-        twitterCard="summary_large_image"
-        openGraph={{
-          type: "website"
-        }}
         structuredData={[
           organizationSchema,
           breadcrumbSchema([

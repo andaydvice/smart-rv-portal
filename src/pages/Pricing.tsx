@@ -6,8 +6,7 @@ import { Check } from "lucide-react";
 import Layout from "@/components/layout/Layout";
 import { scrollToTop } from "@/utils/scrollToTop";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
-import SEO from "@/components/seo/SEO";
-import { organizationSchema, productSchema, faqSchema, breadcrumbSchema, serviceSchema } from "@/components/seo/schemas";
+import { Helmet } from "react-helmet-async";
 
 const Pricing = () => {
   useEffect(() => {
@@ -60,75 +59,13 @@ const Pricing = () => {
     }
   ];
 
-  const pricingFAQ = [
-    {
-      question: "What's included in Smart RV pricing?",
-      answer: "All packages include professional installation, comprehensive training, 2-year warranty on hardware, and 30-day satisfaction guarantee."
-    },
-    {
-      question: "Are financing options available?",
-      answer: "Yes, we offer 0% APR for 12 months, extended payment plans up to 60 months, trade-in credit, and corporate discounts."
-    },
-    {
-      question: "How long does installation take?",
-      answer: "Installation typically takes 2-5 days depending on your selected package and RV complexity. Our certified technicians handle everything professionally."
-    }
-  ];
-
-  const productSchemas = pricingPlans.map((plan) => 
-    productSchema({
-      name: `Smart RV ${plan.name} Package`,
-      description: plan.description,
-      url: typeof window !== 'undefined' ? `${window.location.origin}/pricing#${plan.name.toLowerCase().replace(' ', '-')}` : '',
-      category: "RV Technology Package",
-      offers: {
-        price: plan.price.replace('$', '').replace(',', ''),
-        currency: "USD",
-        availability: "https://schema.org/InStock",
-        url: typeof window !== 'undefined' ? `${window.location.origin}/contact` : ''
-      }
-    })
-  );
-
-  const pricingServices = [
-    serviceSchema({
-      name: "Smart RV Installation Service",
-      description: "Professional installation of smart RV technology packages with certified technicians",
-      provider: "Smart RV Technology Hub",
-      serviceType: "Installation & Setup"
-    }),
-    serviceSchema({
-      name: "Smart RV Consultation",
-      description: "Expert consultation to determine the best smart RV package for your specific needs",
-      provider: "Smart RV Technology Hub", 
-      serviceType: "Technology Consulting"
-    })
-  ];
-
   return (
     <Layout>
-      <SEO
-        title="Smart RV Pricing | Professional Installation & Financing Available"
-        description="Transparent pricing for Smart RV upgrades including automation, power management, security, and connectivity systems. Professional installation, warranty, and financing options available."
-        keywords="smart RV pricing, RV automation cost, RV technology installation, smart RV packages, RV upgrade pricing, professional RV installation"
-        canonical={typeof window !== 'undefined' ? `${window.location.origin}/pricing` : ''}
-        ogImage="/og-image.svg"
-        ogImageAlt="Smart RV Technology Pricing Plans and Packages"
-        twitterCard="summary_large_image"
-        openGraph={{
-          type: "website"
-        }}
-        structuredData={[
-          organizationSchema,
-          breadcrumbSchema([
-            { name: 'Home', url: typeof window !== 'undefined' ? window.location.origin : '' },
-            { name: 'Pricing', url: typeof window !== 'undefined' ? `${window.location.origin}/pricing` : '' }
-          ]),
-          ...productSchemas,
-          ...pricingServices,
-          faqSchema(pricingFAQ)
-        ]}
-      />
+      <Helmet>
+        <title>Smart RV Pricing</title>
+        <meta name="description" content="Transparent pricing for Smart RV upgrades including automation, power, security, and connectivity with professional installation." />
+        <link rel="canonical" href={typeof window !== 'undefined' ? window.location.origin + '/pricing' : ''} />
+      </Helmet>
       <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

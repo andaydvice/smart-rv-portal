@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { initPerformanceMonitor } from '@/perf/monitor';
 import { startRUM } from '@/utils/perf/rum';
 import { handleBotOptimizations, isBot } from '@/utils/prerender';
-import { initializePerformanceMonitoring } from '@/utils/seo-performance-monitor';
 
 const PerformanceReporter: React.FC = () => {
   useEffect(() => {
@@ -107,20 +106,6 @@ const PerformanceReporter: React.FC = () => {
         console.log('Web Vitals library not available');
       });
     }
-
-    // Initialize comprehensive SEO & Performance monitoring (Phase 4)
-    const monitor = initializePerformanceMonitoring();
-    
-    // Report Phase 4 completion status after a delay
-    setTimeout(() => {
-      const phase4Status = monitor.getPhase4CompletionStatus();
-      console.log('🚀 Phase 4 Completion Status:', phase4Status);
-      
-      if (phase4Status.completed) {
-        console.log('🎉 Phase 4: Performance & Crawlability - COMPLETE!');
-        console.log('✅ All SEO phases completed successfully');
-      }
-    }, 5000);
 
     if (!isDev && !isBot()) {
       const idle = (cb: () => void) =>

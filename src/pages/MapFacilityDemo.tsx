@@ -1,33 +1,13 @@
 
 import React from 'react';
 import Layout from '@/components/layout/Layout';
+import Navbar from '@/components/Navbar';
 import FacilityMapExample from '@/components/map/FacilityMapExample';
 import { OptimizedAffiliateGrid } from '@/components/affiliate/OptimizedAffiliateGrid';
-import SEO from "@/components/seo/SEO";
-import { organizationSchema, breadcrumbSchema } from "@/components/seo/schemas";
 
 const MapFacilityDemo: React.FC = () => {
   return (
     <Layout>
-      <SEO
-        title="RV Facility Map Demo | Interactive Storage & Service Locations"
-        description="Explore our interactive RV facility map demo featuring storage locations, service centers, and location-based services for smart RV travel planning."
-        keywords="RV facility map, RV storage locations, RV service centers, interactive RV map, RV facility finder, location services"
-        canonical={typeof window !== 'undefined' ? `${window.location.origin}/map-facility-demo` : ''}
-        ogImage="/og-image.svg"
-        ogImageAlt="Interactive RV Facility Map Demo"
-        twitterCard="summary_large_image"
-        openGraph={{
-          type: "website"
-        }}
-        structuredData={[
-          organizationSchema,
-          breadcrumbSchema([
-            { name: 'Home', url: typeof window !== 'undefined' ? window.location.origin : '' },
-            { name: 'Map Demo', url: typeof window !== 'undefined' ? `${window.location.origin}/map-facility-demo` : '' }
-          ])
-        ]}
-      />
       <div className="container mx-auto px-4 py-8 mt-20">
         <FacilityMapExample />
         

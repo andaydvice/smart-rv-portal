@@ -7,8 +7,6 @@ export const organizationSchema = {
   url: typeof window !== 'undefined' ? window.location.origin : '',
   logo: typeof window !== 'undefined' ? `${window.location.origin}/og-image.svg` : '',
   description: 'Leading resource for smart RV technology, connectivity solutions, and digital nomad tools',
-  foundingDate: '2023',
-  knowsAbout: ['RV Technology', 'Smart Systems', 'Digital Nomad Living', 'RV Connectivity', 'Solar Power Systems'],
   sameAs: [
     'https://twitter.com/smartrvtech',
     'https://facebook.com/smartrvtech',
@@ -17,13 +15,7 @@ export const organizationSchema = {
   contactPoint: {
     '@type': 'ContactPoint',
     contactType: 'customer service',
-    availableLanguage: 'English',
-    areaServed: 'US'
-  },
-  address: {
-    '@type': 'PostalAddress',
-    addressCountry: 'US',
-    addressRegion: 'National'
+    availableLanguage: 'English'
   }
 };
 
@@ -146,88 +138,4 @@ export const howToSchema = (guide: {
     text: step.text,
     image: step.image
   }))
-});
-
-export const localBusinessSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'LocalBusiness',
-  '@id': typeof window !== 'undefined' ? `${window.location.origin}/#organization` : '',
-  name: 'Smart RV Technology Hub',
-  image: typeof window !== 'undefined' ? `${window.location.origin}/og-image.svg` : '',
-  description: 'Expert RV technology consulting, reviews, and smart system solutions for modern travelers',
-  url: typeof window !== 'undefined' ? window.location.origin : '',
-  telephone: '+1-800-SMART-RV',
-  priceRange: '$$',
-  address: {
-    '@type': 'PostalAddress',
-    addressCountry: 'US',
-    addressRegion: 'National Service'
-  },
-  geo: {
-    '@type': 'GeoCoordinates',
-    latitude: 39.8283,
-    longitude: -98.5795
-  },
-  openingHoursSpecification: {
-    '@type': 'OpeningHoursSpecification',
-    dayOfWeek: [
-      'Monday',
-      'Tuesday', 
-      'Wednesday',
-      'Thursday',
-      'Friday'
-    ],
-    opens: '09:00',
-    closes: '17:00'
-  },
-  serviceArea: {
-    '@type': 'Country',
-    name: 'United States'
-  }
-};
-
-export const serviceSchema = (service: {
-  name: string;
-  description: string;
-  provider: string;
-  areaServed?: string;
-  serviceType?: string;
-}) => ({
-  '@context': 'https://schema.org',
-  '@type': 'Service',
-  name: service.name,
-  description: service.description,
-  provider: {
-    '@type': 'Organization',
-    name: service.provider
-  },
-  areaServed: service.areaServed || 'United States',
-  serviceType: service.serviceType || 'Technology Consulting'
-});
-
-export const techArticleSchema = (article: {
-  headline: string;
-  description: string;
-  author: string;
-  publishedDate: string;
-  modifiedDate?: string;
-  image?: string;
-  url: string;
-}) => ({
-  '@context': 'https://schema.org',
-  '@type': 'TechArticle',
-  headline: article.headline,
-  description: article.description,
-  image: article.image || (typeof window !== 'undefined' ? `${window.location.origin}/og-image.svg` : ''),
-  datePublished: article.publishedDate,
-  dateModified: article.modifiedDate || article.publishedDate,
-  author: {
-    '@type': 'Person',
-    name: article.author
-  },
-  publisher: organizationSchema,
-  mainEntityOfPage: {
-    '@type': 'WebPage',
-    '@id': article.url
-  }
 });
