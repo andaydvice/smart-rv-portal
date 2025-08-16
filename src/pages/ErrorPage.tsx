@@ -8,6 +8,8 @@ import ErrorDisplay from '@/components/error/ErrorDisplay';
 import { Container } from '@/components/ui/container';
 import { TypographyH1, TypographyP } from '@/components/ui/typography';
 import { OptimizedAffiliateGrid } from '@/components/affiliate/OptimizedAffiliateGrid';
+import SEO from '@/components/seo/SEO';
+import { organizationSchema, breadcrumbSchema } from '@/components/seo/schemas';
 
 const ErrorPage = () => {
   const error = useRouteError();
@@ -33,6 +35,22 @@ const ErrorPage = () => {
 
   return (
     <Layout>
+      <SEO
+        title={is404 ? "Page Not Found (404) | Smart RV Technology Hub" : `Error (${statusCode}) | Smart RV Technology Hub`}
+        description={is404 
+          ? "The page you're looking for doesn't exist. Explore our smart RV technology guides, product reviews, and digital nomad resources instead."
+          : "We encountered an unexpected error. Please try again or explore our RV technology resources while we resolve the issue."
+        }
+        canonical={typeof window !== 'undefined' ? window.location.href : ''}
+        noIndex={true}
+        structuredData={[
+          organizationSchema,
+          breadcrumbSchema([
+            { name: 'Home', url: typeof window !== 'undefined' ? window.location.origin : '' },
+            { name: is404 ? 'Page Not Found' : 'Error', url: typeof window !== 'undefined' ? window.location.href : '' }
+          ])
+        ]}
+      />
       <Container>
         <div className="min-h-[80vh] flex flex-col items-center justify-center px-4 py-16 text-center">
           <div className="mb-8">
