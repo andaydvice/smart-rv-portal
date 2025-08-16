@@ -142,9 +142,6 @@ const PowerAffiliateRecommendations = () => {
         subtitle="Gain complete control over your power systems and never worry about dead batteries again:"
         partners={powerRecommendations}
         gridCols="2"
-        videoId="power-management-demo"
-        videoTitle="Smart Power Management Demo"
-        priority="high"
       />
 
       <OptimizedAffiliateGrid
@@ -152,9 +149,6 @@ const PowerAffiliateRecommendations = () => {
         subtitle="Upgrade to professional grade solar systems with extended warranties and expert support:"
         partners={premiumPowerSolutions}
         gridCols="3"
-        videoId="renogy-solar-demo"
-        videoTitle="Renogy Solar ROI Demonstration"
-        priority="high"
       />
 
       <OptimizedAffiliateGrid
@@ -162,9 +156,6 @@ const PowerAffiliateRecommendations = () => {
         subtitle="Invest in premium batteries and professional monitoring systems for reliable off grid power:"
         partners={batteryAndPowerSystems}
         gridCols="2"
-        videoId="dakota-lithium-demo"
-        videoTitle="Dakota Lithium Battery Comparison"
-        priority="high"
       />
       
       <OptimizedAffiliateGrid

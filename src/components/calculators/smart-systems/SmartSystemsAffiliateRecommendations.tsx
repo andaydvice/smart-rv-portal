@@ -115,9 +115,6 @@ const SmartSystemsAffiliateRecommendations = () => {
         subtitle="Transform your RV into an intelligent home on wheels with automated systems and smart controls:"
         partners={smartRecommendations}
         gridCols="2"
-        videoId="smart-systems-demo"
-        videoTitle="Smart RV Control Systems Demo"
-        priority="high"
       />
 
       <OptimizedAffiliateGrid
@@ -125,9 +122,6 @@ const SmartSystemsAffiliateRecommendations = () => {
         subtitle="Stay connected anywhere with professional grade internet and connectivity solutions for remote RV living:"
         partners={connectivitySolutions}
         gridCols="2"
-        videoId="connectivity-demo"
-        videoTitle="RV Internet Connectivity Solutions"
-        priority="medium"
       />
       
       <OptimizedAffiliateGrid

@@ -19,9 +19,6 @@ interface OptimizedAffiliateGridProps {
   }>;
   className?: string;
   gridCols?: 'auto' | '2' | '3' | '4';
-  videoId?: string;
-  videoTitle?: string;
-  priority?: 'high' | 'medium' | 'low';
 }
 
 export const OptimizedAffiliateGrid: React.FC<OptimizedAffiliateGridProps> = ({
@@ -29,10 +26,7 @@ export const OptimizedAffiliateGrid: React.FC<OptimizedAffiliateGridProps> = ({
   subtitle,
   partners,
   className = '',
-  gridCols = 'auto',
-  videoId,
-  videoTitle,
-  priority = 'low'
+  gridCols = 'auto'
 }) => {
   const getGridClass = () => {
     switch (gridCols) {
@@ -46,26 +40,6 @@ export const OptimizedAffiliateGrid: React.FC<OptimizedAffiliateGridProps> = ({
   return (
     <div className={`space-y-6 ${className}`}>
       <div className="bg-connectivity-darkBg border border-gray-700 rounded-lg p-6">
-        {videoId && (
-          <div className="mb-6">
-            <div className="relative w-full h-64 bg-gray-900 rounded-lg overflow-hidden">
-              <iframe
-                src={`https://iframe.adilo.bigcommand.com/video/${videoId}`}
-                className="w-full h-full"
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                loading="lazy"
-                title={videoTitle || title}
-              />
-            </div>
-            {priority === 'high' && (
-              <div className="mt-2 text-xs text-connectivity-accent font-medium">
-                🎯 High-Priority Recommendation
-              </div>
-            )}
-          </div>
-        )}
         
         <h2 className="text-xl text-connectivity-accent font-semibold mb-2">
           {title}
