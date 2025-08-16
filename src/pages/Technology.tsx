@@ -76,6 +76,10 @@ const Technology = () => {
         canonical={typeof window !== 'undefined' ? `${window.location.origin}/technology` : ''}
         ogImage="/lovable-uploads/9ad50274-5f5b-47fa-8278-32599d734b3e.png"
         ogImageAlt="Smart RV Technology Systems and Solutions"
+        twitterCard="summary_large_image"
+        openGraph={{
+          type: "article"
+        }}
         structuredData={[
           organizationSchema,
           breadcrumbSchema([

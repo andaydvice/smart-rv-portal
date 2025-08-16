@@ -47,6 +47,11 @@ const Index = () => {
         keywords="smart RV technology, RV connectivity, digital nomad, RV safety systems, mobile internet, solar power, RV automation, connected travel"
         ogImage="/og-image.svg"
         ogImageAlt="Smart RV Technology Hub - Connected Living Solutions"
+        twitterCard="summary_large_image"
+        openGraph={{
+          type: "website",
+          determiner: "the"
+        }}
         structuredData={[
           organizationSchema,
           websiteSchema,

@@ -171,6 +171,10 @@ const Products = () => {
         canonical={canonical}
         ogImage="/lovable-uploads/e2566d0d-bbd0-4401-9293-2d105eea8105.png"
         ogImageAlt="Smart RV dealership with premium technology solutions"
+        twitterCard="summary_large_image"
+        openGraph={{
+          type: "website"
+        }}
         structuredData={[
           organizationSchema,
           breadcrumbSchema([

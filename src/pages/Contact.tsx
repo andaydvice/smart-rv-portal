@@ -51,6 +51,10 @@ const Contact = () => {
         canonical={typeof window !== 'undefined' ? `${window.location.origin}/contact` : ''}
         ogImage="/lovable-uploads/f88c014b-5b32-4db0-8742-f9e8b531654e.png"
         ogImageAlt="Contact Smart RV Technology Hub for Expert Support"
+        twitterCard="summary_large_image"
+        openGraph={{
+          type: "website"
+        }}
         structuredData={[
           organizationSchema,
           localBusinessSchema,

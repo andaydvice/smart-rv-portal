@@ -44,6 +44,10 @@ const Features = () => {
         canonical={typeof window !== 'undefined' ? `${window.location.origin}/features` : ''}
         ogImage="/og-image.svg"
         ogImageAlt="Smart RV Features and System Capabilities"
+        twitterCard="summary_large_image"
+        openGraph={{
+          type: "website"
+        }}
         structuredData={[
           organizationSchema,
           breadcrumbSchema([

@@ -22,6 +22,10 @@ const About = () => {
         keywords="about smart RV, RV technology experts, digital nomad resources, RV tech reviews, connected travel solutions"
         ogImage="/og-image.svg"
         ogImageAlt="Smart RV Technology Hub team and mission"
+        twitterCard="summary_large_image"
+        openGraph={{
+          type: "website"
+        }}
         structuredData={[
           organizationSchema,
           breadcrumbSchema([

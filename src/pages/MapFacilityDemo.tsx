@@ -16,6 +16,10 @@ const MapFacilityDemo: React.FC = () => {
         canonical={typeof window !== 'undefined' ? `${window.location.origin}/map-facility-demo` : ''}
         ogImage="/og-image.svg"
         ogImageAlt="Interactive RV Facility Map Demo"
+        twitterCard="summary_large_image"
+        openGraph={{
+          type: "website"
+        }}
         structuredData={[
           organizationSchema,
           breadcrumbSchema([

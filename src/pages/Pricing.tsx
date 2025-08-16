@@ -114,6 +114,10 @@ const Pricing = () => {
         canonical={typeof window !== 'undefined' ? `${window.location.origin}/pricing` : ''}
         ogImage="/og-image.svg"
         ogImageAlt="Smart RV Technology Pricing Plans and Packages"
+        twitterCard="summary_large_image"
+        openGraph={{
+          type: "website"
+        }}
         structuredData={[
           organizationSchema,
           breadcrumbSchema([

@@ -23,6 +23,10 @@ const StoragePreparationChecklistPage: React.FC = () => {
         canonical={typeof window !== 'undefined' ? `${window.location.origin}/storage-preparation-checklist` : ''}
         ogImage="/og-image.svg"
         ogImageAlt="RV Storage Preparation Checklist Guide"
+        twitterCard="summary_large_image"
+        openGraph={{
+          type: "article"
+        }}
         structuredData={[
           organizationSchema,
           breadcrumbSchema([
