@@ -2,19 +2,8 @@ import React, { useEffect } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Toaster } from '@/components/ui/toaster';
 import { AuthProvider } from './components/auth/AuthContext';
-import { injectEmergencyStyles } from './utils/markers/styleInjection';
-import { forceMapMarkersVisible } from './utils/forceMapMarkers';
 import RouterProvider from './components/router/RouterProvider';
-import PerformanceReporter from './components/perf/PerformanceReporter';
 import './App.css';
-import './styles/animations.css';
-// ... keep existing code (app and general styles)
-
-import { applyAllEmergencyFixes } from './utils/emergency-styles/combined';
-import { initializePreloading } from '@/utils/route-preloading';
-import { registerServiceWorker } from '@/utils/service-worker';
-import { initializeCSSOptimizations } from '@/utils/css-optimization';
-import { injectTransitionStyles } from '@/components/transitions/PageTransition';
 
 // Create a client with better error handling
 const queryClient = new QueryClient({
@@ -36,108 +25,22 @@ const queryClient = new QueryClient({
 function AppContent() {
   
   useEffect(() => {
-    // Guard against StrictMode double-invoke in dev
-    if ((window as any).__appEffectRan && import.meta.env.DEV) return;
-    (window as any).__appEffectRan = true;
     console.log('App component mounted');
     
-    // Enhanced performance optimization sequence
-    const initEnhancedOptimizations = async () => {
-      try {
-        // Initialize service worker for offline capability
-        await registerServiceWorker();
-        
-        // Basic network monitoring
-        const handleOnline = () => console.log('✅ Network restored');
-        const handleOffline = () => console.log('⚠️ Network lost'); 
-        window.addEventListener('online', handleOnline);
-        window.addEventListener('offline', handleOffline);
-        const cleanupNetworkMonitoring = () => {
-          window.removeEventListener('online', handleOnline);
-          window.removeEventListener('offline', handleOffline);
-        };
-        
-        // Initialize CSS optimizations
-        initializeCSSOptimizations();
-        
-        // Inject transition styles
-        injectTransitionStyles();
-        
-        // Initialize route preloading
-        initializePreloading();
-        
-        // Legacy optimization imports for compatibility
-        const { injectCriticalCSS, preloadCriticalFonts } = await import('@/utils/critical-css').catch(() => ({
-          injectCriticalCSS: () => {},
-          preloadCriticalFonts: () => {}
-        }));
-        injectCriticalCSS();
-        preloadCriticalFonts();
-        
-        // Bundle optimization
-        const { preloadCriticalRoutes, monitorBundleSize, addResourceHints, optimizeImages } = await import('@/utils/bundle-optimization');
-        preloadCriticalRoutes();
-        addResourceHints();
-        
-        // Monitor performance after a short delay
-        setTimeout(() => {
-          monitorBundleSize();
-          optimizeImages();
-        }, 2000);
-        
-        // Performance monitoring
-        if (window.performance && window.performance.mark) {
-          window.performance.mark('app_initialization_complete');
-        }
-        
-        // Store cleanup function for unmount
-        return () => {
-          cleanupNetworkMonitoring();
-        };
-      } catch (error) {
-        console.warn('Some optimizations failed to initialize:', error);
+    // Simple, safe initialization
+    try {
+      // Force scroll to top on page load
+      window.scrollTo(0, 0);
+      
+      // Basic performance monitoring
+      if (window.performance && window.performance.mark) {
+        window.performance.mark('app_initialization_complete');
       }
-    };
-    
-    initEnhancedOptimizations();
-    
-    // Force scroll to top on page load
-    window.scrollTo(0, 0);
-    
-    // Wire up the map instance and helpers
-    document.addEventListener('mapboxgl.map.created', (e: CustomEvent) => {
-      (window as any).mapInstance = e.detail.map;
-    });
-    
-    (window as any).dispatchMapEvent = (eventName: string, detail: any) => {
-      document.dispatchEvent(new CustomEvent(eventName, { detail }));
-    };
-
-    return () => {
-      // no-op
-    };
-  }, []);
-  // Conditionally apply emergency marker fixes only on map routes
-  useEffect(() => {
-    let cleanup: undefined | (() => void);
-    const apply = () => {
-      if (cleanup) { cleanup(); cleanup = undefined; }
-      const isMapRoute = /storage|map|maps/i.test(window.location.pathname);
-      if (isMapRoute) {
-        cleanup = applyAllEmergencyFixes();
-      }
-    };
-    apply();
-    const onNav = () => apply();
-    window.addEventListener('popstate', onNav);
-    window.addEventListener('hashchange', onNav);
-    window.addEventListener('locationchange', onNav as any);
-    return () => {
-      window.removeEventListener('popstate', onNav);
-      window.removeEventListener('hashchange', onNav);
-      window.removeEventListener('locationchange', onNav as any);
-      if (cleanup) cleanup();
-    };
+      
+      console.log('App initialized successfully');
+    } catch (error) {
+      console.error('App initialization error:', error);
+    }
   }, []);
 
   return (
@@ -150,7 +53,6 @@ function AppContent() {
       </div>
     }>
       <RouterProvider />
-      <PerformanceReporter />
       <Toaster />
     </React.Suspense>
   );
