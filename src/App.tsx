@@ -158,6 +158,7 @@ function AppContent() {
 
 // The main App component - proper function component wrapping
 function App() {
+  console.log('App component rendering...');
   // Set routes available flag for debugging
   (window as any).routesAvailable = true;
   

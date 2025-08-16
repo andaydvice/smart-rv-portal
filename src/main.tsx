@@ -18,15 +18,20 @@ const rootElement = document.getElementById('root');
 
 if (!rootElement) {
   console.error('Root element not found! Cannot mount React application.');
+  document.body.innerHTML = '<div style="padding: 20px; color: red;">ERROR: Root element not found</div>';
 } else {
+  console.log('Root element found, mounting React app...');
   try {
-    ReactDOM.createRoot(rootElement).render(
+    const root = ReactDOM.createRoot(rootElement);
+    console.log('Creating React root...');
+    root.render(
       <React.StrictMode>
         <HelmetProvider>
           <App />
         </HelmetProvider>
       </React.StrictMode>
     );
+    console.log('React app rendered successfully!');
     
     // After app is rendered, setup lazy loading for images
     deferOperation(() => {
