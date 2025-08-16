@@ -206,28 +206,13 @@ export const criticalCSSOptimizer = new CriticalCSSOptimizer();
 
 // Initialize CSS optimizations
 export const initializeCSSOptimizations = () => {
-  if (typeof document === 'undefined') return;
-
-  // Run optimizations when DOM is ready
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', runOptimizations);
-  } else {
-    runOptimizations();
-  }
+  // Disabled to prevent loading issues
+  console.log('CSS optimizations disabled for stability');
+  return;
 };
 
 const runOptimizations = () => {
-  // Wait for layout to stabilize
-  requestAnimationFrame(() => {
-    setTimeout(() => {
-      criticalCSSOptimizer.inlineCriticalCSS();
-      criticalCSSOptimizer.deferNonCriticalCSS();
-      criticalCSSOptimizer.optimizeFontLoading();
-      
-      if (process.env.NODE_ENV === 'development') {
-        const metrics = criticalCSSOptimizer.getCSSMetrics();
-        console.log('🎨 CSS Optimization Metrics:', metrics);
-      }
-    }, 100);
-  });
+  // Disabled to prevent loading issues
+  console.log('CSS optimizations disabled for stability');
+  return;
 };
