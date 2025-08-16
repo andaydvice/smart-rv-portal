@@ -11,6 +11,10 @@ import './styles/animations.css';
 // ... keep existing code (app and general styles)
 
 import { applyAllEmergencyFixes } from './utils/emergency-styles/combined';
+import { initializePreloading } from '@/utils/route-preloading';
+import { registerServiceWorker } from '@/utils/service-worker';
+import { initializeCSSOptimizations } from '@/utils/css-optimization';
+import { injectTransitionStyles } from '@/components/transitions/PageTransition';
 
 // Create a client with better error handling
 const queryClient = new QueryClient({
@@ -37,32 +41,65 @@ function AppContent() {
     (window as any).__appEffectRan = true;
     console.log('App component mounted');
     
-    // Initialize Phase 4 performance optimizations
-    const initPerformanceOptimizations = async () => {
-      // Inject critical CSS for immediate rendering
-      const { injectCriticalCSS, preloadCriticalFonts } = await import('@/utils/critical-css');
-      injectCriticalCSS();
-      preloadCriticalFonts();
-      
-      // Register service worker for caching
-      const { registerServiceWorker, preloadCriticalResources, trackServiceWorkerPerformance } = await import('@/utils/service-worker');
-      await registerServiceWorker();
-      preloadCriticalResources();
-      trackServiceWorkerPerformance();
-      
-      // Initialize bundle optimization
-      const { preloadCriticalRoutes, monitorBundleSize, addResourceHints, optimizeImages } = await import('@/utils/bundle-optimization');
-      preloadCriticalRoutes();
-      addResourceHints();
-      
-      // Monitor performance after a short delay
-      setTimeout(() => {
-        monitorBundleSize();
-        optimizeImages();
-      }, 2000);
+    // Enhanced performance optimization sequence
+    const initEnhancedOptimizations = async () => {
+      try {
+        // Initialize service worker for offline capability
+        await registerServiceWorker();
+        
+        // Basic network monitoring
+        const handleOnline = () => console.log('✅ Network restored');
+        const handleOffline = () => console.log('⚠️ Network lost'); 
+        window.addEventListener('online', handleOnline);
+        window.addEventListener('offline', handleOffline);
+        const cleanupNetworkMonitoring = () => {
+          window.removeEventListener('online', handleOnline);
+          window.removeEventListener('offline', handleOffline);
+        };
+        
+        // Initialize CSS optimizations
+        initializeCSSOptimizations();
+        
+        // Inject transition styles
+        injectTransitionStyles();
+        
+        // Initialize route preloading
+        initializePreloading();
+        
+        // Legacy optimization imports for compatibility
+        const { injectCriticalCSS, preloadCriticalFonts } = await import('@/utils/critical-css').catch(() => ({
+          injectCriticalCSS: () => {},
+          preloadCriticalFonts: () => {}
+        }));
+        injectCriticalCSS();
+        preloadCriticalFonts();
+        
+        // Bundle optimization
+        const { preloadCriticalRoutes, monitorBundleSize, addResourceHints, optimizeImages } = await import('@/utils/bundle-optimization');
+        preloadCriticalRoutes();
+        addResourceHints();
+        
+        // Monitor performance after a short delay
+        setTimeout(() => {
+          monitorBundleSize();
+          optimizeImages();
+        }, 2000);
+        
+        // Performance monitoring
+        if (window.performance && window.performance.mark) {
+          window.performance.mark('app_initialization_complete');
+        }
+        
+        // Store cleanup function for unmount
+        return () => {
+          cleanupNetworkMonitoring();
+        };
+      } catch (error) {
+        console.warn('Some optimizations failed to initialize:', error);
+      }
     };
     
-    initPerformanceOptimizations().catch(console.error);
+    initEnhancedOptimizations();
     
     // Force scroll to top on page load
     window.scrollTo(0, 0);
