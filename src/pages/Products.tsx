@@ -6,7 +6,7 @@ import Layout from "@/components/layout/Layout";
 import { scrollToTop } from "@/utils/scrollToTop";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
 import SEO from "@/components/seo/SEO";
-import { organizationSchema, productSchema } from "@/components/seo/schemas";
+import { organizationSchema, productSchema, serviceSchema, breadcrumbSchema } from "@/components/seo/schemas";
 import { AFFILIATE_PARTNERS } from "@/components/affiliate/AffiliatePartnerSystem";
 import TestimonialsSection from "@/components/sections/testimonials/TestimonialsSection";
 import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
@@ -147,6 +147,21 @@ const Products = () => {
     }
   ] as const;
 
+  const serviceSchemas = [
+    serviceSchema({
+      name: "RV Technology Consultation",
+      description: "Expert consultation services for smart RV technology selection and implementation",
+      provider: "Smart RV Technology Hub",
+      serviceType: "Technology Consulting"
+    }),
+    serviceSchema({
+      name: "RV Product Curation",
+      description: "Curated marketplace of verified RV products and services from trusted partners",
+      provider: "Smart RV Technology Hub", 
+      serviceType: "Product Curation"
+    })
+  ];
+
   return (
     <Layout>
       <SEO
@@ -158,8 +173,13 @@ const Products = () => {
         ogImageAlt="Smart RV dealership with premium technology solutions"
         structuredData={[
           organizationSchema,
+          breadcrumbSchema([
+            { name: 'Home', url: typeof window !== 'undefined' ? window.location.origin : '' },
+            { name: 'Products', url: typeof window !== 'undefined' ? `${window.location.origin}/products` : '' }
+          ]),
           itemListSchema,
-          ...productSchemas
+          ...productSchemas,
+          ...serviceSchemas
         ]}
       />
       {/* Hero Image Section */}

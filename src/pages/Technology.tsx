@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import Layout from "@/components/layout/Layout";
 import SEO from "@/components/seo/SEO";
-import { organizationSchema, breadcrumbSchema, faqSchema } from "@/components/seo/schemas";
+import { organizationSchema, breadcrumbSchema, faqSchema, techArticleSchema, serviceSchema } from "@/components/seo/schemas";
 import { scrollToTop } from "@/utils/scrollToTop";
 import TechnologyFAQ from "@/components/technology/TechnologyFAQ";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
@@ -83,6 +83,19 @@ const Technology = () => {
             { name: 'Technology', url: typeof window !== 'undefined' ? `${window.location.origin}/technology` : '' }
           ]),
           faqSchema(technologyFAQ),
+          techArticleSchema({
+            headline: "Smart RV Technology Systems Guide",
+            description: "Comprehensive guide to smart RV technology including AI integration, power management, and automation systems",
+            author: "Smart RV Technology Hub",
+            publishedDate: "2024-01-01",
+            url: typeof window !== 'undefined' ? `${window.location.origin}/technology` : ''
+          }),
+          serviceSchema({
+            name: "Smart RV Technology Integration", 
+            description: "Professional consultation and guidance for smart RV technology implementation",
+            provider: "Smart RV Technology Hub",
+            serviceType: "Technology Integration"
+          }),
           {
             '@context': 'https://schema.org',
             '@type': 'ItemList',

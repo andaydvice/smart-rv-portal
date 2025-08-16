@@ -9,7 +9,7 @@ import Layout from "@/components/layout/Layout";
 import { scrollToTop } from "@/utils/scrollToTop";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
 import SEO from "@/components/seo/SEO";
-import { organizationSchema, breadcrumbSchema, faqSchema } from "@/components/seo/schemas";
+import { organizationSchema, breadcrumbSchema, faqSchema, localBusinessSchema } from "@/components/seo/schemas";
 
 const Contact = () => {
   const { toast } = useToast();
@@ -53,6 +53,7 @@ const Contact = () => {
         ogImageAlt="Contact Smart RV Technology Hub for Expert Support"
         structuredData={[
           organizationSchema,
+          localBusinessSchema,
           breadcrumbSchema([
             { name: 'Home', url: typeof window !== 'undefined' ? window.location.origin : '' },
             { name: 'Contact', url: typeof window !== 'undefined' ? `${window.location.origin}/contact` : '' }
@@ -63,7 +64,8 @@ const Contact = () => {
             '@type': 'ContactPage',
             name: 'Contact Smart RV Technology Hub',
             description: 'Get expert guidance on RV technology and smart systems',
-            url: typeof window !== 'undefined' ? `${window.location.origin}/contact` : ''
+            url: typeof window !== 'undefined' ? `${window.location.origin}/contact` : '',
+            mainEntity: localBusinessSchema
           }
         ]}
       />

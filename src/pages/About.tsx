@@ -6,7 +6,7 @@ import { scrollToTop } from "@/utils/scrollToTop";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
 import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
 import SEO from "@/components/seo/SEO";
-import { organizationSchema, faqSchema } from "@/components/seo/schemas";
+import { organizationSchema, faqSchema, breadcrumbSchema, serviceSchema } from "@/components/seo/schemas";
 
 const About = () => {
   useEffect(() => {
@@ -24,6 +24,10 @@ const About = () => {
         ogImageAlt="Smart RV Technology Hub team and mission"
         structuredData={[
           organizationSchema,
+          breadcrumbSchema([
+            { name: 'Home', url: typeof window !== 'undefined' ? window.location.origin : '' },
+            { name: 'About', url: typeof window !== 'undefined' ? `${window.location.origin}/about` : '' }
+          ]),
           faqSchema([
             {
               question: "What is Smart RV Technology Hub?",
@@ -37,7 +41,19 @@ const About = () => {
               question: "What types of products do you review?",
               answer: "We review smart RV technology including connectivity solutions, solar power systems, security devices, navigation tools, and automation systems."
             }
-          ])
+          ]),
+          serviceSchema({
+            name: "Smart RV Expert Reviews",
+            description: "Comprehensive reviews and testing of RV technology products and services",
+            provider: "Smart RV Technology Hub",
+            serviceType: "Product Review & Testing"
+          }),
+          serviceSchema({
+            name: "RV Technology Education",
+            description: "Educational content and guides for smart RV technology implementation",
+            provider: "Smart RV Technology Hub",
+            serviceType: "Educational Services"
+          })
         ]}
       />
       {/* Hero Video Section - Simplified Structure */}

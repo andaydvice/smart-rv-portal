@@ -7,7 +7,7 @@ import Layout from "@/components/layout/Layout";
 import { scrollToTop } from "@/utils/scrollToTop";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
 import SEO from "@/components/seo/SEO";
-import { organizationSchema, productSchema, faqSchema } from "@/components/seo/schemas";
+import { organizationSchema, productSchema, faqSchema, breadcrumbSchema, serviceSchema } from "@/components/seo/schemas";
 
 const Pricing = () => {
   useEffect(() => {
@@ -90,6 +90,21 @@ const Pricing = () => {
     })
   );
 
+  const pricingServices = [
+    serviceSchema({
+      name: "Smart RV Installation Service",
+      description: "Professional installation of smart RV technology packages with certified technicians",
+      provider: "Smart RV Technology Hub",
+      serviceType: "Installation & Setup"
+    }),
+    serviceSchema({
+      name: "Smart RV Consultation",
+      description: "Expert consultation to determine the best smart RV package for your specific needs",
+      provider: "Smart RV Technology Hub", 
+      serviceType: "Technology Consulting"
+    })
+  ];
+
   return (
     <Layout>
       <SEO
@@ -101,7 +116,12 @@ const Pricing = () => {
         ogImageAlt="Smart RV Technology Pricing Plans and Packages"
         structuredData={[
           organizationSchema,
+          breadcrumbSchema([
+            { name: 'Home', url: typeof window !== 'undefined' ? window.location.origin : '' },
+            { name: 'Pricing', url: typeof window !== 'undefined' ? `${window.location.origin}/pricing` : '' }
+          ]),
           ...productSchemas,
+          ...pricingServices,
           faqSchema(pricingFAQ)
         ]}
       />

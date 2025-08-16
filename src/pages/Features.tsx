@@ -5,7 +5,7 @@ import { Navigation, Shield, Battery, Tv, Droplet, Cog, Thermometer, Music } fro
 import Layout from "@/components/layout/Layout";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
 import SEO from "@/components/seo/SEO";
-import { organizationSchema, breadcrumbSchema, faqSchema } from "@/components/seo/schemas";
+import { organizationSchema, breadcrumbSchema, faqSchema, serviceSchema } from "@/components/seo/schemas";
 import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
 
 const Features = () => {
@@ -51,6 +51,12 @@ const Features = () => {
             { name: 'Features', url: typeof window !== 'undefined' ? `${window.location.origin}/features` : '' }
           ]),
           faqSchema(featuresFAQ),
+          serviceSchema({
+            name: "Smart RV Feature Installation",
+            description: "Professional installation and integration of smart RV features and systems",
+            provider: "Smart RV Technology Hub",
+            serviceType: "Installation Services"
+          }),
           {
             '@context': 'https://schema.org',
             '@type': 'ItemList',
