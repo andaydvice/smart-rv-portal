@@ -20,7 +20,7 @@
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" />
     </noscript>
 
-    <!-- Initial page path detection -->
+    <!-- Initial page path detection and performance monitoring -->
     <script>
       window.initialPath = window.location.pathname;
       const __DEV__ = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
@@ -42,20 +42,7 @@
           </div>
         `;
       });
-    </script>
-  </head>
-  <body>
-    <div id="root">
-      <div style="padding: 20px; text-align: center; background: #080F1F; color: white; min-height: 100vh;">
-        <h1>Loading Smart RV Technology Hub...</h1>
-        <p>If this message persists, please check your JavaScript is enabled.</p>
-      </div>
-    </div>
-    <!-- Add Lovable script tag for new features -->
-    <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
-    <script type="module" src="/src/main.tsx"></script>
-    <script>
-      const __DEV__ = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
+
       // Record when the page becomes visible to the user
       document.addEventListener('DOMContentLoaded', function() {
         if (window.performance && window.performance.mark) {
@@ -77,5 +64,16 @@
         }
       });
     </script>
+  </head>
+  <body>
+    <div id="root">
+      <div style="padding: 20px; text-align: center; background: #080F1F; color: white; min-height: 100vh;">
+        <h1>Loading Smart RV Technology Hub...</h1>
+        <p>If this message persists, please check your JavaScript is enabled.</p>
+      </div>
+    </div>
+    <!-- Add Lovable script tag for new features -->
+    <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
+    <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
