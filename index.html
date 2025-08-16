@@ -23,8 +23,8 @@
     <!-- Initial page path detection and performance monitoring -->
     <script>
       window.initialPath = window.location.pathname;
-      const __DEV__ = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
-      if (__DEV__) {
+      const isDev = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
+      if (isDev) {
         console.log('Initial page load path:', window.initialPath);
       }
       if (window.performance && window.performance.mark) {
@@ -47,7 +47,7 @@
       document.addEventListener('DOMContentLoaded', function() {
         if (window.performance && window.performance.mark) {
           window.performance.mark('dom_content_loaded');
-          if (__DEV__) {
+          if (isDev) {
             console.log('DOMContentLoaded event fired at:', Date.now());
           }
         }
@@ -58,7 +58,7 @@
         if (window.performance && window.performance.mark) {
           window.performance.mark('full_load_complete');
           const loadTime = performance.now();
-          if (__DEV__) {
+          if (isDev) {
             console.log('Page fully loaded in:', Math.round(loadTime), 'ms');
           }
         }
