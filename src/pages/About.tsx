@@ -6,7 +6,7 @@ import { scrollToTop } from "@/utils/scrollToTop";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
 import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
 import SEO from "@/components/seo/SEO";
-import { organizationSchema, faqSchema, breadcrumbSchema, serviceSchema, videoSchema } from "@/components/seo/schemas";
+import { organizationSchema, faqSchema, breadcrumbSchema, serviceSchema } from "@/components/seo/schemas";
 
 const About = () => {
   useEffect(() => {
@@ -57,14 +57,6 @@ const About = () => {
             description: "Educational content and guides for smart RV technology implementation",
             provider: "Smart RV Technology Hub",
             serviceType: "Educational Services"
-          }),
-          videoSchema({
-            name: "About Smart RV Technology Hub",
-            description: "Learn about our mission to revolutionize RV technology and connected travel",
-            thumbnailUrl: typeof window !== 'undefined' ? `${window.location.origin}/og-image.svg` : '',
-            uploadDate: "2024-01-01T12:00:00Z",
-            duration: "PT2M30S",
-            embedUrl: "https://adilo.bigcommand.com/watch/osMojtq7"
           })
         ]}
       />

@@ -6,7 +6,7 @@ import Layout from "@/components/layout/Layout";
 import { scrollToTop } from "@/utils/scrollToTop";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
 import SEO from "@/components/seo/SEO";
-import { organizationSchema, productSchema, serviceSchema, breadcrumbSchema, reviewSchema } from "@/components/seo/schemas";
+import { organizationSchema, productSchema, serviceSchema, breadcrumbSchema } from "@/components/seo/schemas";
 import { AFFILIATE_PARTNERS } from "@/components/affiliate/AffiliatePartnerSystem";
 import TestimonialsSection from "@/components/sections/testimonials/TestimonialsSection";
 import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
@@ -162,43 +162,6 @@ const Products = () => {
     })
   ];
 
-  const productReviews = [
-    reviewSchema({
-      itemName: "RV Solar Power Systems",
-      reviewBody: "Excellent selection of solar power solutions with detailed comparisons and expert recommendations. The installation guides are comprehensive and easy to follow.",
-      ratingValue: 5,
-      author: "John Smith",
-      datePublished: "2024-01-10",
-      itemReviewed: {
-        name: "RV Solar Power Systems",
-        description: "Complete solar power solutions for RVs",
-        brand: "Renogy",
-        offers: {
-          price: "299.99",
-          priceCurrency: "USD",
-          availability: "https://schema.org/InStock"
-        }
-      }
-    }),
-    reviewSchema({
-      itemName: "RV Internet Connectivity",
-      reviewBody: "Outstanding connectivity solutions comparison. Helped me choose the perfect internet setup for my digital nomad lifestyle.",
-      ratingValue: 5,
-      author: "Sarah Johnson",
-      datePublished: "2024-01-08",
-      itemReviewed: {
-        name: "RV Internet Connectivity Solutions",
-        description: "High-speed internet solutions for RVs",
-        brand: "Winegard",
-        offers: {
-          price: "199.99", 
-          priceCurrency: "USD",
-          availability: "https://schema.org/InStock"
-        }
-      }
-    })
-  ];
-
   return (
     <Layout>
       <SEO
@@ -220,8 +183,7 @@ const Products = () => {
           ]),
           itemListSchema,
           ...productSchemas,
-          ...serviceSchemas,
-          ...productReviews
+          ...serviceSchemas
         ]}
       />
       {/* Hero Image Section */}

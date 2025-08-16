@@ -4,7 +4,7 @@ import Layout from '@/components/layout/Layout';
 import FacilityMapExample from '@/components/map/FacilityMapExample';
 import { OptimizedAffiliateGrid } from '@/components/affiliate/OptimizedAffiliateGrid';
 import SEO from "@/components/seo/SEO";
-import { organizationSchema, breadcrumbSchema, localBusinessSchema, serviceSchema } from "@/components/seo/schemas";
+import { organizationSchema, breadcrumbSchema } from "@/components/seo/schemas";
 
 const MapFacilityDemo: React.FC = () => {
   return (
@@ -22,17 +22,10 @@ const MapFacilityDemo: React.FC = () => {
         }}
         structuredData={[
           organizationSchema,
-          localBusinessSchema,
           breadcrumbSchema([
             { name: 'Home', url: typeof window !== 'undefined' ? window.location.origin : '' },
             { name: 'Map Demo', url: typeof window !== 'undefined' ? `${window.location.origin}/map-facility-demo` : '' }
-          ]),
-          serviceSchema({
-            name: "RV Facility Location Services",
-            description: "Interactive mapping and location services for RV storage facilities and service centers",
-            provider: "Smart RV Technology Hub",
-            serviceType: "Location Services"
-          })
+          ])
         ]}
       />
       <div className="container mx-auto px-4 py-8 mt-20">

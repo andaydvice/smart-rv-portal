@@ -157,44 +157,17 @@ export const localBusinessSchema = {
   description: 'Expert RV technology consulting, reviews, and smart system solutions for modern travelers',
   url: typeof window !== 'undefined' ? window.location.origin : '',
   telephone: '+1-800-SMART-RV',
-  email: 'support@smartrvtech.com',
   priceRange: '$$',
-  currenciesAccepted: 'USD',
-  paymentAccepted: 'Cash, Credit Card, PayPal, Financing',
-  hasMap: typeof window !== 'undefined' ? `${window.location.origin}/map-facility-demo` : '',
   address: {
     '@type': 'PostalAddress',
     addressCountry: 'US',
-    addressRegion: 'National Service',
-    addressLocality: 'Nationwide'
+    addressRegion: 'National Service'
   },
   geo: {
     '@type': 'GeoCoordinates',
     latitude: 39.8283,
     longitude: -98.5795
   },
-  aggregateRating: {
-    '@type': 'AggregateRating',
-    ratingValue: '4.8',
-    reviewCount: '150',
-    bestRating: '5',
-    worstRating: '1'
-  },
-  review: [
-    {
-      '@type': 'Review',
-      reviewRating: {
-        '@type': 'Rating',
-        ratingValue: '5',
-        bestRating: '5'
-      },
-      author: {
-        '@type': 'Person',
-        name: 'Sarah Johnson'
-      },
-      reviewBody: 'Outstanding RV technology guidance and product recommendations. Professional service and expert knowledge.'
-    }
-  ],
   openingHoursSpecification: {
     '@type': 'OpeningHoursSpecification',
     dayOfWeek: [
@@ -205,32 +178,12 @@ export const localBusinessSchema = {
       'Friday'
     ],
     opens: '09:00',
-    closes: '17:00',
-    validFrom: '2024-01-01',
-    validThrough: '2024-12-31'
+    closes: '17:00'
   },
   serviceArea: {
     '@type': 'Country',
     name: 'United States'
-  },
-  areaServed: [
-    {
-      '@type': 'Country',
-      name: 'United States'
-    },
-    {
-      '@type': 'Country', 
-      name: 'Canada'
-    }
-  ],
-  knowsAbout: [
-    'RV Technology',
-    'Smart Systems',
-    'Solar Power',
-    'Connectivity Solutions',
-    'Digital Nomad Living'
-  ],
-  slogan: 'Connected, Safe, Efficient RV Living'
+  }
 };
 
 export const serviceSchema = (service: {
@@ -277,79 +230,4 @@ export const techArticleSchema = (article: {
     '@type': 'WebPage',
     '@id': article.url
   }
-});
-
-export const reviewSchema = (review: {
-  itemName: string;
-  reviewBody: string;
-  ratingValue: number;
-  bestRating?: number;
-  worstRating?: number;
-  author: string;
-  datePublished: string;
-  itemReviewed: {
-    name: string;
-    description: string;
-    image?: string;
-    brand?: string;
-    offers?: {
-      price: string;
-      priceCurrency: string;
-      availability: string;
-    };
-  };
-}) => ({
-  '@context': 'https://schema.org',
-  '@type': 'Review',
-  itemReviewed: {
-    '@type': 'Product',
-    name: review.itemReviewed.name,
-    description: review.itemReviewed.description,
-    image: review.itemReviewed.image,
-    brand: review.itemReviewed.brand ? {
-      '@type': 'Brand',
-      name: review.itemReviewed.brand
-    } : undefined,
-    offers: review.itemReviewed.offers ? {
-      '@type': 'Offer',
-      price: review.itemReviewed.offers.price,
-      priceCurrency: review.itemReviewed.offers.priceCurrency,
-      availability: review.itemReviewed.offers.availability
-    } : undefined
-  },
-  reviewRating: {
-    '@type': 'Rating',
-    ratingValue: review.ratingValue,
-    bestRating: review.bestRating || 5,
-    worstRating: review.worstRating || 1
-  },
-  name: `Review of ${review.itemName}`,
-  reviewBody: review.reviewBody,
-  author: {
-    '@type': 'Person',
-    name: review.author
-  },
-  datePublished: review.datePublished,
-  publisher: organizationSchema
-});
-
-export const videoSchema = (video: {
-  name: string;
-  description: string;
-  thumbnailUrl: string;
-  uploadDate: string;
-  duration?: string;
-  contentUrl?: string;
-  embedUrl?: string;
-}) => ({
-  '@context': 'https://schema.org',
-  '@type': 'VideoObject',
-  name: video.name,
-  description: video.description,
-  thumbnailUrl: video.thumbnailUrl,
-  uploadDate: video.uploadDate,
-  duration: video.duration,
-  contentUrl: video.contentUrl,
-  embedUrl: video.embedUrl,
-  publisher: organizationSchema
 });
