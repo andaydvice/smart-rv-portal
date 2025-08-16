@@ -1,21 +1,79 @@
 
 import { motion } from "framer-motion";
-import Navbar from "@/components/Navbar";
 import { Link } from "react-router-dom";
 import { Navigation, Shield, Battery, Tv, Droplet, Cog, Thermometer, Music } from "lucide-react";
 import Layout from "@/components/layout/Layout";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
-import { Helmet } from "react-helmet-async";
+import SEO from "@/components/seo/SEO";
+import { organizationSchema, breadcrumbSchema, faqSchema, serviceSchema } from "@/components/seo/schemas";
 import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
 
 const Features = () => {
+  const features = [
+    { name: "Navigation System", description: "Advanced GPS navigation specifically designed for RVs", icon: "Navigation" },
+    { name: "Security System", description: "Comprehensive security with smart locks, cameras, and sensors", icon: "Shield" },
+    { name: "Power Management", description: "Intelligent power distribution and optimization", icon: "Battery" },
+    { name: "Smart TV System", description: "Premium entertainment with 4K display and voice control", icon: "Tv" },
+    { name: "Water Systems", description: "Advanced water management with monitoring and filtration", icon: "Droplet" },
+    { name: "Smart Automation", description: "Comprehensive home automation for climate and lighting", icon: "Cog" },
+    { name: "Climate Control", description: "Advanced multi-zone climate with smart scheduling", icon: "Thermometer" },
+    { name: "Entertainment", description: "Premium audio and outdoor media solutions", icon: "Music" }
+  ];
+
+  const featuresFAQ = [
+    {
+      question: "What smart features are available for RVs?",
+      answer: "Smart RVs can include navigation systems, security features, power management, water systems, automation, climate control, entertainment, and smart TV systems."
+    },
+    {
+      question: "How do smart RV features enhance safety?",
+      answer: "Features like security systems with cameras and sensors, GPS navigation with RV-safe routes, and power management systems all contribute to safer RV travel."
+    },
+    {
+      question: "Can smart features be added to existing RVs?",
+      answer: "Yes, most smart features can be retrofitted to existing RVs through professional installation and system integration."
+    }
+  ];
+
   return (
     <Layout>
-      <Helmet>
-        <title>Smart RV Features | Systems And Capabilities</title>
-        <meta name="description" content="Explore Smart RV features including navigation, security, power management, water systems, and automation with trusted partners." />
-        <link rel="canonical" href={typeof window !== 'undefined' ? window.location.origin + '/features' : ''} />
-      </Helmet>
+      <SEO
+        title="Smart RV Features & Capabilities | Navigation, Security, Power & More"
+        description="Explore comprehensive Smart RV features including GPS navigation, security systems, power management, water systems, climate control, and entertainment. Professional installation available."
+        keywords="smart RV features, RV navigation system, RV security system, RV power management, smart water systems, RV automation, climate control, RV entertainment"
+        canonical={typeof window !== 'undefined' ? `${window.location.origin}/features` : ''}
+        ogImage="/og-image.svg"
+        ogImageAlt="Smart RV Features and System Capabilities"
+        twitterCard="summary_large_image"
+        openGraph={{
+          type: "website"
+        }}
+        structuredData={[
+          organizationSchema,
+          breadcrumbSchema([
+            { name: 'Home', url: typeof window !== 'undefined' ? window.location.origin : '' },
+            { name: 'Features', url: typeof window !== 'undefined' ? `${window.location.origin}/features` : '' }
+          ]),
+          faqSchema(featuresFAQ),
+          serviceSchema({
+            name: "Smart RV Feature Installation",
+            description: "Professional installation and integration of smart RV features and systems",
+            provider: "Smart RV Technology Hub",
+            serviceType: "Installation Services"
+          }),
+          {
+            '@context': 'https://schema.org',
+            '@type': 'ItemList',
+            name: 'Smart RV Features',
+            itemListElement: features.map((feature, index) => ({
+              '@type': 'ListItem',
+              position: index + 1,
+              name: feature.name,
+              description: feature.description
+            }))
+          }
+        ]}
+      />
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

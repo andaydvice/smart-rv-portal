@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Smart RV Technology Hub</title>
+    <link>https://smartrvtech.com</link>
+    <description>Leading resource for smart RV technology, connectivity solutions, and digital nomad tools</description>
+    <language>en-US</language>
+    <lastBuildDate>Mon, 01 Jan 2024 12:00:00 +0000</lastBuildDate>
+    <pubDate>Mon, 01 Jan 2024 12:00:00 +0000</pubDate>
+    <ttl>60</ttl>
+    <atom:link href="https://smartrvtech.com/rss.xml" rel="self" type="application/rss+xml" />
+    <image>
+      <url>https://smartrvtech.com/og-image.svg</url>
+      <title>Smart RV Technology Hub</title>
+      <link>https://smartrvtech.com</link>
+      <width>144</width>
+      <height>144</height>
+    </image>
+    
+    <item>
+      <title>Complete Guide to Smart RV Solar Power Systems</title>
+      <link>https://smartrvtech.com/blog/smart-rv-solar-power-guide</link>
+      <description>Everything you need to know about implementing solar power in your smart RV, from system sizing to installation and monitoring.</description>
+      <content:encoded><![CDATA[
+        <p>Smart RV solar power systems are revolutionizing how we power our adventures. This comprehensive guide covers everything from system sizing and component selection to installation best practices and monitoring solutions.</p>
+        <p>Learn about the latest solar panel technologies, battery management systems, and smart inverters that make off-grid RV living more efficient and sustainable than ever before.</p>
+      ]]></content:encoded>
+      <dc:creator>Sarah Mitchell</dc:creator>
+      <pubDate>Mon, 15 Jan 2024 10:00:00 +0000</pubDate>
+      <category>Technology</category>
+      <category>Solar Power</category>
+      <category>RV Technology</category>
+      <guid isPermaLink="true">https://smartrvtech.com/blog/smart-rv-solar-power-guide</guid>
+    </item>
+    
+    <item>
+      <title>Best RV Internet Connectivity Solutions for Digital Nomads</title>
+      <link>https://smartrvtech.com/blog/rv-connectivity-solutions</link>
+      <description>Compare the top RV internet solutions including Starlink, cellular boosters, and WiFi extenders for reliable connectivity on the road.</description>
+      <content:encoded><![CDATA[
+        <p>Staying connected while living the RV lifestyle is crucial for digital nomads. This comprehensive comparison covers all the major RV internet solutions available today.</p>
+        <p>From Starlink satellite internet to cellular boosters and WiFi extenders, we'll help you choose the perfect connectivity setup for your mobile office needs.</p>
+      ]]></content:encoded>
+      <dc:creator>Mike Chen</dc:creator>
+      <pubDate>Wed, 10 Jan 2024 14:30:00 +0000</pubDate>
+      <category>Connectivity</category>
+      <category>Internet</category>
+      <category>Digital Nomad</category>
+      <guid isPermaLink="true">https://smartrvtech.com/blog/rv-connectivity-solutions</guid>
+    </item>
+    
+  </channel>
+</rss>

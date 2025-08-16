@@ -4,7 +4,8 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import Layout from "@/components/layout/Layout";
-import { Helmet } from "react-helmet-async";
+import SEO from "@/components/seo/SEO";
+import { organizationSchema, breadcrumbSchema, faqSchema, techArticleSchema, serviceSchema } from "@/components/seo/schemas";
 import { scrollToTop } from "@/utils/scrollToTop";
 import TechnologyFAQ from "@/components/technology/TechnologyFAQ";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
@@ -51,24 +52,67 @@ const Technology = () => {
     },
   ];
 
+  const technologyFAQ = [
+    {
+      question: "What smart technologies are available for RVs?",
+      answer: "Modern RVs can be equipped with AI integration, connected systems, smart power management, security suites, mobile control apps, and comprehensive automation systems."
+    },
+    {
+      question: "How do smart RV systems improve the travel experience?",
+      answer: "Smart systems provide automated climate control, intelligent power management, enhanced security, remote monitoring, and seamless connectivity for safer, more comfortable travel."
+    },
+    {
+      question: "Can existing RVs be upgraded with smart technology?",
+      answer: "Yes, most RVs can be retrofitted with smart technology through professional installation of monitoring systems, automation controls, and connectivity solutions."
+    }
+  ];
+
   return (
     <Layout>
-      <Helmet>
-        <title>Smart RV Technology | Systems, Power, Connectivity</title>
-        <meta name="description" content="Explore smart RV systems, power management, connectivity, and automation partners to upgrade your travel experience." />
-        <link rel="canonical" href={typeof window !== 'undefined' ? window.location.origin + '/technology' : ''} />
-        <script type="application/ld+json">
-          {JSON.stringify({
+      <SEO
+        title="Smart RV Technology Hub | Advanced Systems, Power & Connectivity"
+        description="Discover cutting-edge smart RV technology including AI integration, power management, security systems, automation, and connectivity solutions. Expert reviews and trusted partners."
+        keywords="smart RV technology, RV automation systems, smart power management, RV connectivity, AI integration, RV security systems, mobile RV control, smart automation"
+        canonical={typeof window !== 'undefined' ? `${window.location.origin}/technology` : ''}
+        ogImage="/lovable-uploads/9ad50274-5f5b-47fa-8278-32599d734b3e.png"
+        ogImageAlt="Smart RV Technology Systems and Solutions"
+        twitterCard="summary_large_image"
+        openGraph={{
+          type: "article"
+        }}
+        structuredData={[
+          organizationSchema,
+          breadcrumbSchema([
+            { name: 'Home', url: typeof window !== 'undefined' ? window.location.origin : '' },
+            { name: 'Technology', url: typeof window !== 'undefined' ? `${window.location.origin}/technology` : '' }
+          ]),
+          faqSchema(technologyFAQ),
+          techArticleSchema({
+            headline: "Smart RV Technology Systems Guide",
+            description: "Comprehensive guide to smart RV technology including AI integration, power management, and automation systems",
+            author: "Smart RV Technology Hub",
+            publishedDate: "2024-01-01",
+            url: typeof window !== 'undefined' ? `${window.location.origin}/technology` : ''
+          }),
+          serviceSchema({
+            name: "Smart RV Technology Integration", 
+            description: "Professional consultation and guidance for smart RV technology implementation",
+            provider: "Smart RV Technology Hub",
+            serviceType: "Technology Integration"
+          }),
+          {
             '@context': 'https://schema.org',
             '@type': 'ItemList',
-            itemListElement: [
-              { '@type': 'ListItem', position: 1, name: 'TechnoRV - Smart Technology', url: 'https://technorv.com?ref=smarttech' },
-              { '@type': 'ListItem', position: 2, name: 'Good Sam - Tech Support', url: 'https://goodsam.com?ref=smartrv' },
-              { '@type': 'ListItem', position: 3, name: 'RV Life - Smart Planning', url: 'https://rvlife.com?ref=smartportal' }
-            ]
-          })}
-        </script>
-      </Helmet>
+            name: 'Smart RV Technology Solutions',
+            itemListElement: technologies.map((tech, index) => ({
+              '@type': 'ListItem',
+              position: index + 1,
+              name: tech.title,
+              description: tech.description
+            }))
+          }
+        ]}
+      />
       <div className="flex-grow bg-gradient-to-b from-gray-900 to-gray-800">
         {/* Header section */}
         <div className="w-full py-10">

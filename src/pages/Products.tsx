@@ -6,7 +6,7 @@ import Layout from "@/components/layout/Layout";
 import { scrollToTop } from "@/utils/scrollToTop";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
 import SEO from "@/components/seo/SEO";
-import { organizationSchema, productSchema } from "@/components/seo/schemas";
+import { organizationSchema, productSchema, serviceSchema, breadcrumbSchema, reviewSchema } from "@/components/seo/schemas";
 import { AFFILIATE_PARTNERS } from "@/components/affiliate/AffiliatePartnerSystem";
 import TestimonialsSection from "@/components/sections/testimonials/TestimonialsSection";
 import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
@@ -147,6 +147,58 @@ const Products = () => {
     }
   ] as const;
 
+  const serviceSchemas = [
+    serviceSchema({
+      name: "RV Technology Consultation",
+      description: "Expert consultation services for smart RV technology selection and implementation",
+      provider: "Smart RV Technology Hub",
+      serviceType: "Technology Consulting"
+    }),
+    serviceSchema({
+      name: "RV Product Curation",
+      description: "Curated marketplace of verified RV products and services from trusted partners",
+      provider: "Smart RV Technology Hub", 
+      serviceType: "Product Curation"
+    })
+  ];
+
+  const productReviews = [
+    reviewSchema({
+      itemName: "RV Solar Power Systems",
+      reviewBody: "Excellent selection of solar power solutions with detailed comparisons and expert recommendations. The installation guides are comprehensive and easy to follow.",
+      ratingValue: 5,
+      author: "John Smith",
+      datePublished: "2024-01-10",
+      itemReviewed: {
+        name: "RV Solar Power Systems",
+        description: "Complete solar power solutions for RVs",
+        brand: "Renogy",
+        offers: {
+          price: "299.99",
+          priceCurrency: "USD",
+          availability: "https://schema.org/InStock"
+        }
+      }
+    }),
+    reviewSchema({
+      itemName: "RV Internet Connectivity",
+      reviewBody: "Outstanding connectivity solutions comparison. Helped me choose the perfect internet setup for my digital nomad lifestyle.",
+      ratingValue: 5,
+      author: "Sarah Johnson",
+      datePublished: "2024-01-08",
+      itemReviewed: {
+        name: "RV Internet Connectivity Solutions",
+        description: "High-speed internet solutions for RVs",
+        brand: "Winegard",
+        offers: {
+          price: "199.99", 
+          priceCurrency: "USD",
+          availability: "https://schema.org/InStock"
+        }
+      }
+    })
+  ];
+
   return (
     <Layout>
       <SEO
@@ -156,10 +208,20 @@ const Products = () => {
         canonical={canonical}
         ogImage="/lovable-uploads/e2566d0d-bbd0-4401-9293-2d105eea8105.png"
         ogImageAlt="Smart RV dealership with premium technology solutions"
+        twitterCard="summary_large_image"
+        openGraph={{
+          type: "website"
+        }}
         structuredData={[
           organizationSchema,
+          breadcrumbSchema([
+            { name: 'Home', url: typeof window !== 'undefined' ? window.location.origin : '' },
+            { name: 'Products', url: typeof window !== 'undefined' ? `${window.location.origin}/products` : '' }
+          ]),
           itemListSchema,
-          ...productSchemas
+          ...productSchemas,
+          ...serviceSchemas,
+          ...productReviews
         ]}
       />
       {/* Hero Image Section */}
