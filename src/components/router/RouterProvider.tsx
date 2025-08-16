@@ -1,45 +1,69 @@
 
 import { createBrowserRouter, RouterProvider as ReactRouterProvider } from "react-router-dom";
 import { routes } from "@/routes/routes";
-import ErrorBoundary from "../error/ErrorBoundary";
+import EnhancedErrorBoundary from "../error/EnhancedErrorBoundary";
 import { useEffect, useState } from "react";
 import { scrollToTop } from "@/utils/scrollToTop";
-import ErrorPage from "@/pages/ErrorPage";
+import Enhanced404Page from "@/components/error/Enhanced404Page";
 import { isBot, shouldPrerender } from "@/utils/prerender";
+import LoadingStateManager from "@/components/loading/LoadingStateManager";
+import { performanceMonitor, measureLoadingTime } from "@/utils/performance-monitoring";
+import { safeGtag } from "@/types/analytics";
 
 const RouterProvider = () => {
   const [router, setRouter] = useState<ReturnType<typeof createBrowserRouter> | null>(null);
+  const [isInitializing, setIsInitializing] = useState(true);
   const botDetected = isBot();
   
   console.log('RouterProvider - Initialized with routes:', routes.length, 'total routes');
   
   useEffect(() => {
+    // Start performance monitoring
+    const loadingTimer = measureLoadingTime('router-initialization');
+    loadingTimer.start();
+
     // Create the router asynchronously to split loading code
     const initRouter = async () => {
-      // Create the router from the routes array with better error handling
-      const enhancedRoutes = routes.map(route => ({
-        ...route,
-        // Add a loader to each route to handle scrolling to top
-        loader: (args: any) => {
-          // Only scroll to top for new navigations, not for replacements
-          if (window.history.state?.type !== 'REPLACE') {
-            scrollToTop();
-          }
-          // Return null to not affect data loading
-          return null;
-        },
-        // Ensure all routes have error handling
-        errorElement: route.errorElement || <ErrorPage />
-      }));
-      
-      setRouter(createBrowserRouter(enhancedRoutes));
+      try {
+        // Create the router from the routes array with better error handling
+        const enhancedRoutes = routes.map(route => ({
+          ...route,
+          // Add a loader to each route to handle scrolling to top and analytics
+          loader: (args: any) => {
+            // Track route changes
+            performanceMonitor.trackRouteChange(route.path || 'unknown');
+            
+            // Only scroll to top for new navigations, not for replacements
+            if (window.history.state?.type !== 'REPLACE') {
+              scrollToTop();
+            }
+            // Return null to not affect data loading
+            return null;
+          },
+          // Use enhanced 404 page for better UX
+          errorElement: route.errorElement || (route.path === '*' ? <Enhanced404Page /> : <Enhanced404Page />)
+        }));
+        
+        setRouter(createBrowserRouter(enhancedRoutes));
+        loadingTimer.end();
+        
+        // Allow time for loading animation to complete
+        setTimeout(() => {
+          setIsInitializing(false);
+        }, 100);
+        
+      } catch (error) {
+        console.error('Router initialization failed:', error);
+        loadingTimer.end();
+        setIsInitializing(false);
+      }
     };
     
     initRouter();
   }, []);
   
   // For bots, show minimal loading or skip entirely
-  if (!router) {
+  if (!router || isInitializing) {
     if (botDetected || isBot()) {
       // Minimal loading for bots - they need immediate content access
       return (
@@ -60,30 +84,43 @@ const RouterProvider = () => {
       );
     }
 
+    // Enhanced loading experience for users
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#080F1F] text-white p-4">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-[#5B9BD5] mx-auto"></div>
-          <p className="mt-4">Loading routes...</p>
-        </div>
-      </div>
+      <LoadingStateManager
+        initialLoading={true}
+        onLoadingComplete={() => {
+          console.log('Initial loading completed');
+        }}
+      >
+        <div />
+      </LoadingStateManager>
     );
   }
   
   return (
-    <ErrorBoundary>
+    <EnhancedErrorBoundary
+      onError={(error, errorInfo) => {
+        console.error('Router error boundary triggered:', error);
+        
+        // Send to analytics
+        safeGtag('event', 'exception', {
+          description: error.message,
+          fatal: false
+        });
+      }}
+    >
       <ReactRouterProvider 
         router={router} 
         fallbackElement={
-          <div className="min-h-screen flex items-center justify-center bg-[#080F1F] text-white p-4">
-            <div className="text-center">
-              <h2 className="text-xl font-semibold mb-2">Loading application...</h2>
-              <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-[#5B9BD5] mx-auto"></div>
-            </div>
-          </div>
+          <LoadingStateManager
+            initialLoading={true}
+            showSkeleton={true}
+          >
+            <div />
+          </LoadingStateManager>
         }
       />
-    </ErrorBoundary>
+    </EnhancedErrorBoundary>
   );
 };
 
