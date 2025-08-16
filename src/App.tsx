@@ -37,6 +37,12 @@ function AppContent() {
     (window as any).__appEffectRan = true;
     console.log('App component mounted');
     
+    // Inject critical CSS for immediate rendering
+    import('@/utils/critical-css').then(({ injectCriticalCSS, preloadCriticalFonts }) => {
+      injectCriticalCSS();
+      preloadCriticalFonts();
+    });
+    
     // Force scroll to top on page load
     window.scrollTo(0, 0);
     

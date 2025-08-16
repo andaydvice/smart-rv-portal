@@ -5,9 +5,11 @@ import ErrorBoundary from "../error/ErrorBoundary";
 import { useEffect, useState } from "react";
 import { scrollToTop } from "@/utils/scrollToTop";
 import ErrorPage from "@/pages/ErrorPage";
+import { isBot, shouldPrerender } from "@/utils/prerender";
 
 const RouterProvider = () => {
   const [router, setRouter] = useState<ReturnType<typeof createBrowserRouter> | null>(null);
+  const botDetected = isBot();
   
   console.log('RouterProvider - Initialized with routes:', routes.length, 'total routes');
   
@@ -36,7 +38,28 @@ const RouterProvider = () => {
     initRouter();
   }, []);
   
+  // For bots, show minimal loading or skip entirely
   if (!router) {
+    if (botDetected || isBot()) {
+      // Minimal loading for bots - they need immediate content access
+      return (
+        <div className="min-h-screen bg-[#080F1F] text-white">
+          <div className="container mx-auto px-4 py-8">
+            <h1 className="text-2xl font-bold text-[#5B9BD5] mb-4">Smart RV Technology Hub</h1>
+            <p className="text-[#E2E8FF] mb-4">Loading content...</p>
+            <nav className="space-y-2">
+              <a href="/" className="block text-[#5B9BD5] hover:underline">Home</a>
+              <a href="/about" className="block text-[#5B9BD5] hover:underline">About</a>
+              <a href="/products" className="block text-[#5B9BD5] hover:underline">Products</a>
+              <a href="/blog" className="block text-[#5B9BD5] hover:underline">Blog</a>
+              <a href="/features" className="block text-[#5B9BD5] hover:underline">Features</a>
+              <a href="/models" className="block text-[#5B9BD5] hover:underline">Models</a>
+            </nav>
+          </div>
+        </div>
+      );
+    }
+
     return (
       <div className="min-h-screen flex items-center justify-center bg-[#080F1F] text-white p-4">
         <div className="text-center">
