@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
 import { HelmetProvider } from 'react-helmet-async'
 import './index.css'
+import './styles/base.css'
 
 // Mount the application with simplified error handling
 const rootElement = document.getElementById('root')
