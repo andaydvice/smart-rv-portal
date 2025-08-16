@@ -3,6 +3,7 @@ import React from "react";
 import Footer2 from "../ui/Footer2";
 import Navbar from "../Navbar";
 import { Helmet } from "react-helmet-async";
+import { RouteOptimizer } from "@/hooks/useRouteOptimization";
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   
@@ -36,6 +37,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
         <link rel="preload" as="image" href="/og-image.svg" />
       </Helmet>
       
+      <RouteOptimizer />
       <Navbar />
       <main 
         className="w-full max-w-full pt-16 overflow-x-hidden bg-deeper-background"

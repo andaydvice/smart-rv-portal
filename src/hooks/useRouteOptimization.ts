@@ -6,7 +6,21 @@ import { useLocation } from 'react-router-dom';
  * Handles canonical URLs, scroll restoration, and route change tracking
  */
 export const useRouteOptimization = (title?: string, canonical?: string) => {
-  const location = useLocation();
+  let location;
+  let isBot = false;
+
+  // Safely try to get location, handle case where Router context doesn't exist yet
+  try {
+    location = useLocation();
+  } catch (error) {
+    // If we're outside Router context, create a minimal location object
+    location = { pathname: '/', search: '', hash: '', state: null, key: 'default' };
+  }
+
+  // Detect bot outside of Router context
+  if (typeof navigator !== 'undefined') {
+    isBot = /bot|crawler|spider|crawling/i.test(navigator.userAgent);
+  }
 
   useEffect(() => {
     // Scroll to top on route change (unless hash is present)
@@ -57,12 +71,12 @@ export const useRouteOptimization = (title?: string, canonical?: string) => {
 
   }, [location, title, canonical]);
 
-  return { location, isBot: typeof navigator !== 'undefined' && /bot|crawler|spider|crawling/i.test(navigator.userAgent) };
+  return { location, isBot };
 };
 
 /**
  * Component to handle global route optimization
- * Should be placed at the root level of the app
+ * Should be placed inside Router context
  */
 export const RouteOptimizer = () => {
   useRouteOptimization();

@@ -6,11 +6,10 @@ import { useEffect, useState } from "react";
 import { scrollToTop } from "@/utils/scrollToTop";
 import ErrorPage from "@/pages/ErrorPage";
 import { isBot, shouldPrerender } from "@/utils/prerender";
-import { useRouteOptimization } from "@/hooks/useRouteOptimization";
 
 const RouterProvider = () => {
   const [router, setRouter] = useState<ReturnType<typeof createBrowserRouter> | null>(null);
-  const { isBot: botDetected } = useRouteOptimization();
+  const botDetected = isBot();
   
   console.log('RouterProvider - Initialized with routes:', routes.length, 'total routes');
   
