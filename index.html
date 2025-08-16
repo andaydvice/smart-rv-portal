@@ -3,9 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes, maximum-scale=5.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Smart RV Systems: Next-generation connectivity and control for your RV" />
-    <base href="/" />
     <title>Smart RV Systems</title>
     
     <!-- Performance-critical preloads -->
@@ -20,34 +19,30 @@
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" />
     </noscript>
 
-    <!-- Initial page path detection and performance monitoring -->
+    <!-- Initial page path detection -->
     <script>
       window.initialPath = window.location.pathname;
-      const isDev = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
-      if (isDev) {
+      const __DEV__ = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
+      if (__DEV__) {
         console.log('Initial page load path:', window.initialPath);
       }
       if (window.performance && window.performance.mark) {
         window.performance.mark('initial_load_start');
       }
-      
-      // Add error handling for module loading
-      window.addEventListener('error', function(e) {
-        console.error('JavaScript error:', e.error);
-        document.getElementById('root').innerHTML = `
-          <div style="padding: 20px; color: red; background: #080F1F; min-height: 100vh;">
-            <h2>JavaScript Error Detected</h2>
-            <p>Error: ${e.error?.message || 'Unknown error'}</p>
-            <p>Please refresh the page or check the console for details.</p>
-          </div>
-        `;
-      });
-
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <!-- Add Lovable script tag for new features -->
+    <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
+    <script type="module" src="/src/main.tsx"></script>
+    <script>
+      const __DEV__ = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
       // Record when the page becomes visible to the user
       document.addEventListener('DOMContentLoaded', function() {
         if (window.performance && window.performance.mark) {
           window.performance.mark('dom_content_loaded');
-          if (isDev) {
+          if (__DEV__) {
             console.log('DOMContentLoaded event fired at:', Date.now());
           }
         }
@@ -58,22 +53,11 @@
         if (window.performance && window.performance.mark) {
           window.performance.mark('full_load_complete');
           const loadTime = performance.now();
-          if (isDev) {
+          if (__DEV__) {
             console.log('Page fully loaded in:', Math.round(loadTime), 'ms');
           }
         }
       });
     </script>
-  </head>
-  <body>
-    <div id="root">
-      <div style="padding: 20px; text-align: center; background: #080F1F; color: white; min-height: 100vh;">
-        <h1>Loading Smart RV Technology Hub...</h1>
-        <p>If this message persists, please check your JavaScript is enabled.</p>
-      </div>
-    </div>
-    <!-- Add Lovable script tag for new features -->
-    <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
-    <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

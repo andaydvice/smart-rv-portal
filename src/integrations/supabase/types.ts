@@ -395,13 +395,6 @@ export type Database = {
             referencedRelation: "storage_facilities"
             referencedColumns: ["id"]
           },
-          {
-            foreignKeyName: "fk_facility"
-            columns: ["facility_id"]
-            isOneToOne: false
-            referencedRelation: "storage_facilities_public"
-            referencedColumns: ["id"]
-          },
         ]
       }
       storage_facility_reviews: {
@@ -435,13 +428,6 @@ export type Database = {
             columns: ["facility_id"]
             isOneToOne: false
             referencedRelation: "storage_facilities"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "storage_facility_reviews_facility_id_fkey"
-            columns: ["facility_id"]
-            isOneToOne: false
-            referencedRelation: "storage_facilities_public"
             referencedColumns: ["id"]
           },
         ]
@@ -699,66 +685,6 @@ export type Database = {
           min_lat: number | null
           min_lng: number | null
           state: string | null
-        }
-        Relationships: []
-      }
-      storage_facilities_public: {
-        Row: {
-          address: string | null
-          availability_status: string | null
-          avg_rating: number | null
-          basic_features: Json | null
-          city: string | null
-          created_at: string | null
-          description: string | null
-          id: string | null
-          images: string[] | null
-          latitude: number | null
-          longitude: number | null
-          name: string | null
-          price_category: string | null
-          review_count: number | null
-          state: string | null
-          updated_at: string | null
-          zip_code: string | null
-        }
-        Insert: {
-          address?: string | null
-          availability_status?: never
-          avg_rating?: number | null
-          basic_features?: never
-          city?: string | null
-          created_at?: string | null
-          description?: string | null
-          id?: string | null
-          images?: string[] | null
-          latitude?: number | null
-          longitude?: number | null
-          name?: string | null
-          price_category?: never
-          review_count?: number | null
-          state?: string | null
-          updated_at?: string | null
-          zip_code?: string | null
-        }
-        Update: {
-          address?: string | null
-          availability_status?: never
-          avg_rating?: number | null
-          basic_features?: never
-          city?: string | null
-          created_at?: string | null
-          description?: string | null
-          id?: string | null
-          images?: string[] | null
-          latitude?: number | null
-          longitude?: number | null
-          name?: string | null
-          price_category?: never
-          review_count?: number | null
-          state?: string | null
-          updated_at?: string | null
-          zip_code?: string | null
         }
         Relationships: []
       }
@@ -1233,28 +1159,6 @@ export type Database = {
       geomfromewkt: {
         Args: { "": string }
         Returns: unknown
-      }
-      get_facility_details: {
-        Args: { facility_id: string }
-        Returns: {
-          additional_services: Json
-          amenities: Json
-          availability: Json
-          business_hours: Json
-          cancellation_policy: string
-          contact_email: string
-          contact_phone: string
-          detailed_features: Json
-          dimensions: Json
-          full_address: string
-          id: string
-          insurance_requirements: Json
-          name: string
-          price_range: Json
-          security_details: Json
-          verified_fields: Json
-          website_url: string
-        }[]
       }
       get_max_facility_price: {
         Args: Record<PropertyKey, never>

@@ -2,8 +2,15 @@ import React, { useEffect } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Toaster } from '@/components/ui/toaster';
 import { AuthProvider } from './components/auth/AuthContext';
+import { injectEmergencyStyles } from './utils/markers/styleInjection';
+import { forceMapMarkersVisible } from './utils/forceMapMarkers';
 import RouterProvider from './components/router/RouterProvider';
+import PerformanceReporter from './components/perf/PerformanceReporter';
 import './App.css';
+import './styles/animations.css';
+// ... keep existing code (app and general styles)
+
+import { applyAllEmergencyFixes } from './utils/emergency-styles/combined';
 
 // Create a client with better error handling
 const queryClient = new QueryClient({
@@ -25,22 +32,48 @@ const queryClient = new QueryClient({
 function AppContent() {
   
   useEffect(() => {
+    // Guard against StrictMode double-invoke in dev
+    if ((window as any).__appEffectRan && import.meta.env.DEV) return;
+    (window as any).__appEffectRan = true;
     console.log('App component mounted');
     
-    // Simple, safe initialization
-    try {
-      // Force scroll to top on page load
-      window.scrollTo(0, 0);
-      
-      // Basic performance monitoring
-      if (window.performance && window.performance.mark) {
-        window.performance.mark('app_initialization_complete');
+    // Force scroll to top on page load
+    window.scrollTo(0, 0);
+    
+    // Wire up the map instance and helpers
+    document.addEventListener('mapboxgl.map.created', (e: CustomEvent) => {
+      (window as any).mapInstance = e.detail.map;
+    });
+    
+    (window as any).dispatchMapEvent = (eventName: string, detail: any) => {
+      document.dispatchEvent(new CustomEvent(eventName, { detail }));
+    };
+
+    return () => {
+      // no-op
+    };
+  }, []);
+  // Conditionally apply emergency marker fixes only on map routes
+  useEffect(() => {
+    let cleanup: undefined | (() => void);
+    const apply = () => {
+      if (cleanup) { cleanup(); cleanup = undefined; }
+      const isMapRoute = /storage|map|maps/i.test(window.location.pathname);
+      if (isMapRoute) {
+        cleanup = applyAllEmergencyFixes();
       }
-      
-      console.log('App initialized successfully');
-    } catch (error) {
-      console.error('App initialization error:', error);
-    }
+    };
+    apply();
+    const onNav = () => apply();
+    window.addEventListener('popstate', onNav);
+    window.addEventListener('hashchange', onNav);
+    window.addEventListener('locationchange', onNav as any);
+    return () => {
+      window.removeEventListener('popstate', onNav);
+      window.removeEventListener('hashchange', onNav);
+      window.removeEventListener('locationchange', onNav as any);
+      if (cleanup) cleanup();
+    };
   }, []);
 
   return (
@@ -53,6 +86,7 @@ function AppContent() {
       </div>
     }>
       <RouterProvider />
+      <PerformanceReporter />
       <Toaster />
     </React.Suspense>
   );
@@ -60,7 +94,6 @@ function AppContent() {
 
 // The main App component - proper function component wrapping
 function App() {
-  console.log('App component rendering...');
   // Set routes available flag for debugging
   (window as any).routesAvailable = true;
   
