@@ -118,12 +118,29 @@ const SEO: React.FC<SEOProps> = ({
         </>
       )}
       
-      {/* Additional SEO Meta Tags */}
+      {/* Additional Technical SEO Meta Tags */}
       <meta name="format-detection" content="telephone=no" />
       <meta name="mobile-web-app-capable" content="yes" />
       <meta name="apple-mobile-web-app-capable" content="yes" />
       <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
       <meta name="apple-mobile-web-app-title" content={siteName} />
+      <meta name="msapplication-TileColor" content="#5B9BD5" />
+      <meta name="msapplication-config" content="/browserconfig.xml" />
+      
+      {/* Language and Geographic Meta */}
+      <meta httpEquiv="Content-Language" content="en" />
+      <meta name="geo.region" content="US" />
+      <meta name="geo.placename" content="United States" />
+      <meta name="ICBM" content="39.8283, -98.5795" />
+      
+      {/* Content Classification */}
+      <meta name="rating" content="general" />
+      <meta name="distribution" content="global" />
+      <meta name="classification" content="Technology, RV, Travel" />
+      
+      {/* Additional Resource Hints */}
+      <link rel="preconnect" href="https://fonts.googleapis.com" />
+      <link rel="preconnect" href="https://www.google-analytics.com" />
       
       {/* Structured Data */}
       {structuredData.map((schema, index) => (

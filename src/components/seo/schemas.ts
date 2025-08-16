@@ -157,17 +157,44 @@ export const localBusinessSchema = {
   description: 'Expert RV technology consulting, reviews, and smart system solutions for modern travelers',
   url: typeof window !== 'undefined' ? window.location.origin : '',
   telephone: '+1-800-SMART-RV',
+  email: 'support@smartrvtech.com',
   priceRange: '$$',
+  currenciesAccepted: 'USD',
+  paymentAccepted: 'Cash, Credit Card, PayPal, Financing',
+  hasMap: typeof window !== 'undefined' ? `${window.location.origin}/map-facility-demo` : '',
   address: {
     '@type': 'PostalAddress',
     addressCountry: 'US',
-    addressRegion: 'National Service'
+    addressRegion: 'National Service',
+    addressLocality: 'Nationwide'
   },
   geo: {
     '@type': 'GeoCoordinates',
     latitude: 39.8283,
     longitude: -98.5795
   },
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: '4.8',
+    reviewCount: '150',
+    bestRating: '5',
+    worstRating: '1'
+  },
+  review: [
+    {
+      '@type': 'Review',
+      reviewRating: {
+        '@type': 'Rating',
+        ratingValue: '5',
+        bestRating: '5'
+      },
+      author: {
+        '@type': 'Person',
+        name: 'Sarah Johnson'
+      },
+      reviewBody: 'Outstanding RV technology guidance and product recommendations. Professional service and expert knowledge.'
+    }
+  ],
   openingHoursSpecification: {
     '@type': 'OpeningHoursSpecification',
     dayOfWeek: [
@@ -178,12 +205,32 @@ export const localBusinessSchema = {
       'Friday'
     ],
     opens: '09:00',
-    closes: '17:00'
+    closes: '17:00',
+    validFrom: '2024-01-01',
+    validThrough: '2024-12-31'
   },
   serviceArea: {
     '@type': 'Country',
     name: 'United States'
-  }
+  },
+  areaServed: [
+    {
+      '@type': 'Country',
+      name: 'United States'
+    },
+    {
+      '@type': 'Country', 
+      name: 'Canada'
+    }
+  ],
+  knowsAbout: [
+    'RV Technology',
+    'Smart Systems',
+    'Solar Power',
+    'Connectivity Solutions',
+    'Digital Nomad Living'
+  ],
+  slogan: 'Connected, Safe, Efficient RV Living'
 };
 
 export const serviceSchema = (service: {

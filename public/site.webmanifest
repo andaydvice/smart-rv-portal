@@ -1,0 +1,74 @@
+{
+  "name": "Smart RV Technology Hub",
+  "short_name": "Smart RV Tech",
+  "description": "Leading resource for smart RV technology, connectivity solutions, and digital nomad tools",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#151A22",
+  "theme_color": "#5B9BD5",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "en-US",
+  "dir": "ltr",
+  "categories": ["technology", "travel", "lifestyle"],
+  "screenshots": [
+    {
+      "src": "/og-image.svg",
+      "sizes": "1200x630",
+      "type": "image/svg+xml",
+      "platform": "wide",
+      "label": "Smart RV Technology Hub Homepage"
+    }
+  ],
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "any",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "/og-image.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Products",
+      "short_name": "Products",
+      "description": "Browse RV products and services",
+      "url": "/products",
+      "icons": [
+        {
+          "src": "/og-image.svg",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Technology",
+      "short_name": "Tech",
+      "description": "Explore RV technology solutions",
+      "url": "/technology",
+      "icons": [
+        {
+          "src": "/og-image.svg",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Blog",
+      "short_name": "Blog",
+      "description": "Read latest RV tech insights",
+      "url": "/blog",
+      "icons": [
+        {
+          "src": "/og-image.svg",
+          "sizes": "192x192"
+        }
+      ]
+    }
+  ]
+}
