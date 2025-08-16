@@ -24,6 +24,10 @@ export default defineConfig(({ mode }) => ({
       interval: 1000 // Increase interval to reduce CPU usage
     },
     open: false,
+    // SPA fallback for client-side routing
+    historyApiFallback: {
+      index: '/index.html'
+    }
   },
   plugins: [
     react(),
