@@ -32,9 +32,17 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
         <meta name="generator" content="Smart RV Technology Hub - Lovable Platform" />
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
         
-        {/* Security Headers */}
+        {/* Comprehensive Security Headers */}
+        <meta httpEquiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://fonts.googleapis.com https://cdn.jsdelivr.net https://www.google-analytics.com https://analytics.google.com https://adilo.bigcommand.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://fonts.gstatic.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https: blob:; media-src 'self' https:; object-src 'none'; frame-src 'self' https://adilo.bigcommand.com https://www.youtube.com; connect-src 'self' https://api.lovable.dev https://cdn.lovable.dev https://fonts.googleapis.com https://www.google-analytics.com; base-uri 'self'; form-action 'self'; frame-ancestors 'none';" />
         <meta httpEquiv="X-Content-Type-Options" content="nosniff" />
+        <meta httpEquiv="X-Frame-Options" content="DENY" />
+        <meta httpEquiv="X-XSS-Protection" content="1; mode=block" />
         <meta httpEquiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
+        <meta httpEquiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=(), payment=(), usb=(), magnetometer=(), accelerometer=(), gyroscope=()" />
+        <meta httpEquiv="Cross-Origin-Embedder-Policy" content="unsafe-none" />
+        <meta httpEquiv="Cross-Origin-Opener-Policy" content="same-origin" />
+        <meta httpEquiv="Cross-Origin-Resource-Policy" content="cross-origin" />
+        <meta httpEquiv="Strict-Transport-Security" content="max-age=31536000; includeSubDomains; preload" />
         
         {/* PWA and Mobile Optimization */}
         <meta name="mobile-web-app-capable" content="yes" />
