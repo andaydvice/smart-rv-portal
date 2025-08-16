@@ -1,5 +1,6 @@
 
-import { Helmet } from "react-helmet-async";
+import SEO from "@/components/seo/SEO";
+import { organizationSchema, breadcrumbSchema } from "@/components/seo/schemas";
 import { useState, useEffect } from "react";
 import BlogHeader from "@/components/blog/BlogHeader";
 import TrendingPosts from "@/components/blog/TrendingPosts";
@@ -22,11 +23,28 @@ const Blog = () => {
   };
   return (
     <Layout>
-      <Helmet>
-        <title>Smart RV Blog - Latest RV Tech & Travel Tips</title>
-        <meta name="description" content="Discover the latest in Smart RV technology, travel tips, and smart living solutions for modern Smart RV enthusiasts." />
-        <link rel="canonical" href={typeof window !== 'undefined' ? window.location.origin + '/blog' : ''} />
-      </Helmet>
+      <SEO
+        title="RV Tech Blog | Smart RV Living & Technology Insights"
+        description="Discover the latest in RV technology, smart systems, solar power, connectivity solutions, and digital nomad living. Expert reviews, guides, and insights for modern travelers."
+        keywords="RV blog, RV technology, smart RV systems, digital nomad blog, RV solar power, RV connectivity, mobile internet, RV automation"
+        ogImage="/og-image.svg"
+        ogImageAlt="Smart RV Technology Blog - Latest insights and guides"
+        structuredData={[
+          organizationSchema,
+          breadcrumbSchema([
+            { name: 'Home', url: typeof window !== 'undefined' ? window.location.origin : '' },
+            { name: 'Blog', url: typeof window !== 'undefined' ? `${window.location.origin}/blog` : '' }
+          ]),
+          {
+            '@context': 'https://schema.org',
+            '@type': 'Blog',
+            name: 'Smart RV Technology Blog',
+            description: 'Expert insights on RV technology, smart systems, and connected travel solutions',
+            url: typeof window !== 'undefined' ? `${window.location.origin}/blog` : '',
+            author: organizationSchema
+          }
+        ]}
+      />
       
       <div className="w-full py-8">
         <Container>

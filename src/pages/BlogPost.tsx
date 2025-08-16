@@ -1,5 +1,6 @@
 import { useParams, useNavigate } from 'react-router-dom';
-import { Helmet } from "react-helmet-async";
+import SEO from "@/components/seo/SEO";
+import { articleSchema, breadcrumbSchema } from "@/components/seo/schemas";
 import Navbar from "@/components/Navbar";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, AlertTriangle } from "lucide-react";
@@ -86,22 +87,46 @@ const BlogPost = () => {
     <PageErrorBoundary>
       <div className="flex flex-col min-h-screen bg-[#080F1F]">
         <Navbar />
-        <Helmet>
-          <title>{post.title} - Smart RV Blog</title>
-          <meta name="description" content={post.description} />
-          <link rel="canonical" href={typeof window !== 'undefined' ? window.location.origin + window.location.pathname : ''} />
-          <script type="application/ld+json">
-            {JSON.stringify({
+        <SEO
+          title={post.title}
+          description={post.description}
+          keywords={`RV technology, ${post.category}, smart RV, digital nomad, ${post.title.toLowerCase().replace(/\s+/g, ', ')}`}
+          author={post.author.name}
+          ogImage={post.image}
+          ogImageAlt={`${post.title} - Smart RV Technology Guide`}
+          article={{
+            publishedTime: new Date().toISOString(),
+            author: post.author.name,
+            section: post.category,
+            tags: [post.category, 'RV Technology', 'Smart RV', 'Digital Nomad']
+          }}
+          structuredData={[
+            articleSchema({
+              title: post.title,
+              description: post.description,
+              author: post.author.name,
+              publishedTime: new Date().toISOString(),
+              image: post.image,
+              url: typeof window !== 'undefined' ? window.location.href : '',
+              category: post.category
+            }),
+            breadcrumbSchema([
+              { name: 'Home', url: typeof window !== 'undefined' ? window.location.origin : '' },
+              { name: 'Blog', url: typeof window !== 'undefined' ? `${window.location.origin}/blog` : '' },
+              { name: post.title, url: typeof window !== 'undefined' ? window.location.href : '' }
+            ]),
+            {
               '@context': 'https://schema.org',
               '@type': 'ItemList',
+              name: 'Recommended Smart RV Resources',
               itemListElement: [
                 { '@type': 'ListItem', position: 1, name: 'RV Life Resources', url: 'https://rvlife.com?ref=smartportal' },
                 { '@type': 'ListItem', position: 2, name: 'TechnoRV Technology', url: 'https://technorv.com?ref=smarttech' },
                 { '@type': 'ListItem', position: 3, name: 'Good Sam Services', url: 'https://goodsam.com?ref=smartrv' }
               ]
-            })}
-          </script>
-        </Helmet>
+            }
+          ]}
+        />
         
         <div className="container mx-auto px-4 py-8 space-y-8 pt-20 flex-grow">
           <BackToBlogHeader />

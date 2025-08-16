@@ -5,7 +5,8 @@ import Layout from "@/components/layout/Layout";
 import { scrollToTop } from "@/utils/scrollToTop";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
 import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
-import { Helmet } from "react-helmet-async";
+import SEO from "@/components/seo/SEO";
+import { organizationSchema, faqSchema } from "@/components/seo/schemas";
 
 const About = () => {
   useEffect(() => {
@@ -15,11 +16,30 @@ const About = () => {
 
   return (
     <Layout>
-      <Helmet>
-        <title>About Smart RV | Mission, Values, Partners</title>
-        <meta name="description" content="Learn about Smart RV's mission, values, and trusted partners helping RVers travel smarter." />
-        <link rel="canonical" href={typeof window !== 'undefined' ? window.location.origin + '/about' : ''} />
-      </Helmet>
+      <SEO
+        title="About Smart RV Technology Hub | Leading RV Tech Resource"
+        description="Discover Smart RV Technology Hub's mission to empower modern travelers with expert RV technology guidance, comprehensive reviews, and innovative tools for connected living on the road."
+        keywords="about smart RV, RV technology experts, digital nomad resources, RV tech reviews, connected travel solutions"
+        ogImage="/og-image.svg"
+        ogImageAlt="Smart RV Technology Hub team and mission"
+        structuredData={[
+          organizationSchema,
+          faqSchema([
+            {
+              question: "What is Smart RV Technology Hub?",
+              answer: "Smart RV Technology Hub is the leading resource for RV technology, providing expert reviews, guides, and tools for modern travelers and digital nomads."
+            },
+            {
+              question: "Who can benefit from Smart RV Technology Hub?",
+              answer: "Our content serves tech-savvy travelers, digital nomads, RV enthusiasts, and anyone interested in connected mobile living solutions."
+            },
+            {
+              question: "What types of products do you review?",
+              answer: "We review smart RV technology including connectivity solutions, solar power systems, security devices, navigation tools, and automation systems."
+            }
+          ])
+        ]}
+      />
       {/* Hero Video Section - Simplified Structure */}
       <div className="relative w-full h-[70vh] min-h-[500px] bg-gradient-to-br from-[#080F1F] to-[#151A22]">
         {/* Video Container - Simple Iframe Embed */}

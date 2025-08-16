@@ -5,7 +5,8 @@ import { Link } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
 import { scrollToTop } from "@/utils/scrollToTop";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
-import { Helmet } from "react-helmet-async";
+import SEO from "@/components/seo/SEO";
+import { organizationSchema, productSchema } from "@/components/seo/schemas";
 import { AFFILIATE_PARTNERS } from "@/components/affiliate/AffiliatePartnerSystem";
 import TestimonialsSection from "@/components/sections/testimonials/TestimonialsSection";
 import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
@@ -148,15 +149,19 @@ const Products = () => {
 
   return (
     <Layout>
-      <Helmet>
-        <title>RV Marketplace | Top Deals on Rentals, Tech, Services</title>
-        <meta name="description" content="Shop RV rentals, mobile internet, solar kits, and essential services from verified partners with exclusive savings." />
-        <link rel="canonical" href={canonical || (typeof window !== 'undefined' ? window.location.href : '')} />
-        <script type="application/ld+json">{JSON.stringify(itemListSchema)}</script>
-        {productSchemas.map((schema, i) => (
-          <script key={i} type="application/ld+json">{JSON.stringify(schema)}</script>
-        ))}
-      </Helmet>
+      <SEO
+        title="RV Marketplace | Top Deals on Rentals, Tech & Services"
+        description="Shop premium RV rentals, mobile internet solutions, solar power kits, and essential services from verified partners. Exclusive savings and expert-tested products for smart RV living."
+        keywords="RV rentals, RV marketplace, mobile internet, solar kits, RV accessories, digital nomad gear, RV services"
+        canonical={canonical}
+        ogImage="/lovable-uploads/e2566d0d-bbd0-4401-9293-2d105eea8105.png"
+        ogImageAlt="Smart RV dealership with premium technology solutions"
+        structuredData={[
+          organizationSchema,
+          itemListSchema,
+          ...productSchemas
+        ]}
+      />
       {/* Hero Image Section */}
       <div className="w-full h-[60vh] relative overflow-hidden">
         <img 

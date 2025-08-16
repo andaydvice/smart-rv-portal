@@ -8,7 +8,8 @@ import { ContactSection } from "@/components/sections/ContactSection";
 import { HomepageAffiliateSection } from "@/components/affiliate/HomepageAffiliateSection";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
 import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
-import { Helmet } from "react-helmet-async";
+import SEO from "@/components/seo/SEO";
+import { organizationSchema, websiteSchema } from "@/components/seo/schemas";
 import { TrustStrip } from "@/components/sections/TrustStrip";
 import TestimonialsSection from "@/components/sections/testimonials/TestimonialsSection";
 // Lazy load components that aren't needed immediately
@@ -40,36 +41,28 @@ const Index = () => {
 
   return (
     <Layout>
-      <Helmet>
-        <title>Smart RV Technology Hub | Connected, Safe, Efficient</title>
-        <meta name="description" content="Explore smart RV technology, connectivity, safety systems, and ROI tools for tech-savvy travelers and digital nomads." />
-        <link rel="canonical" href={window.location.origin + "/"} />
-        <script type="application/ld+json">
-          {JSON.stringify({
-            '@context': 'https://schema.org',
-            '@type': 'WebSite',
-            name: 'Smart RV Technology Hub',
-            url: window.location.origin + '/',
-            potentialAction: {
-              '@type': 'SearchAction',
-              target: window.location.origin + '/search?q={search_term_string}',
-              'query-input': 'required name=search_term_string'
-            }
-          })}
-        </script>
-        <script type="application/ld+json">
-          {JSON.stringify({
+      <SEO
+        title="Smart RV Technology Hub | Connected, Safe, Efficient Living"
+        description="Discover cutting-edge smart RV technology, connectivity solutions, safety systems, and ROI calculators for tech-savvy travelers and digital nomads. Expert reviews, guides, and tools."
+        keywords="smart RV technology, RV connectivity, digital nomad, RV safety systems, mobile internet, solar power, RV automation, connected travel"
+        ogImage="/og-image.svg"
+        ogImageAlt="Smart RV Technology Hub - Connected Living Solutions"
+        structuredData={[
+          organizationSchema,
+          websiteSchema,
+          {
             '@context': 'https://schema.org',
             '@type': 'ItemList',
+            name: 'Featured RV Technology Partners',
             itemListElement: [
               { '@type': 'ListItem', position: 1, name: 'Renogy - Solar Power Leader', url: 'https://renogy.com?ref=smartrenogy' },
               { '@type': 'ListItem', position: 2, name: 'Victron Energy - Power Management', url: 'https://victronenergy.com?ref=smartpower' },
               { '@type': 'ListItem', position: 3, name: 'Winegard - Internet Solutions', url: 'https://winegard.com?ref=smartconnect' },
               { '@type': 'ListItem', position: 4, name: 'Torklift - Towing Accessories', url: 'https://torklift.com?ref=smartlift' }
             ]
-          })}
-        </script>
-      </Helmet>
+          }
+        ]}
+      />
       <motion.div 
         initial={false}
         className="min-h-screen w-full"
