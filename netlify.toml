@@ -67,7 +67,13 @@
   status = 301
   force = true
 
-# SPA fallback - must be last to avoid intercepting static files
+# Handle 404 redirects for invalid routes (detected by edge function)
+[[redirects]]
+  from = "/404-redirect"
+  to = "/index.html"
+  status = 404
+
+# SPA fallback for valid routes - must be last to avoid intercepting static files
 [[redirects]]
   from = "/*"
   to = "/index.html"

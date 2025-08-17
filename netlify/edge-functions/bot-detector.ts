@@ -1,5 +1,27 @@
 import { Context } from "@netlify/edge-functions";
 
+// Valid routes configuration for 404 handling
+const VALID_ROUTES = [
+  '/', '/features', '/models', '/models/compact', '/models/luxury', '/models/adventure',
+  '/models/compare', '/blog', '/about', '/products', '/pricing', '/contact', '/calculators',
+  '/documentation', '/weather', '/rv-weather', '/storage-facilities', '/storage-preparation-checklist',
+  '/troubleshooting', '/voice-control', '/account', '/rv-emergency-center', '/solar-power-guide',
+  '/rv-apps-hub', '/technology', '/documentation/complete', '/search', '/features/audio-system',
+  '/features/smart-tv', '/features/climate-control', '/features/security-system', '/features/energy-management',
+  '/features/water-management', '/features/connectivity', '/features/navigation', '/features/monitoring',
+  '/features/automation', '/features/maintenance', '/features/entertainment', '/features/lighting',
+  '/features/storage', '/features/safety', '/admin/perf'
+];
+
+const VALID_PATTERNS = [
+  /^\/blog\/[a-z0-9\-]+$/,
+];
+
+function isValidRoute(path: string): boolean {
+  if (VALID_ROUTES.includes(path)) return true;
+  return VALID_PATTERNS.some(pattern => pattern.test(path));
+}
+
 // Enhanced bot detection patterns
 const BOT_PATTERNS = [
   /googlebot/i,
@@ -33,6 +55,40 @@ const BOT_PATTERNS = [
 // Check if user agent matches bot patterns
 function isBot(userAgent: string): boolean {
   return BOT_PATTERNS.some(pattern => pattern.test(userAgent));
+}
+
+// Generate 404 HTML for bots with proper status
+function generate404HTML(path: string): string {
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Not Found (404) | Smart RV Technology Hub</title>
+    <meta name="description" content="The page you're looking for doesn't exist. Explore our smart RV technology guides, product reviews, and digital nomad resources instead.">
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="canonical" href="https://rv-tech-hub.lovable.app${path}">
+    <style>
+        body { font-family: system-ui, -apple-system, sans-serif; margin: 0; padding: 40px 20px; background: #080F1F; color: #E2E8FF; text-align: center; }
+        .container { max-width: 600px; margin: 0 auto; }
+        .error-code { font-size: 72px; font-weight: bold; color: #5B9BD5; margin: 0; }
+        .error-title { font-size: 24px; margin: 20px 0; color: #ffffff; }
+        .error-desc { font-size: 16px; line-height: 1.6; margin: 20px 0; opacity: 0.8; }
+        .btn { display: inline-block; padding: 12px 24px; background: #5B9BD5; color: white; text-decoration: none; border-radius: 6px; margin: 10px; }
+        .btn:hover { background: #4B8FE3; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="error-code">404</h1>
+        <h2 class="error-title">Page Not Found</h2>
+        <p class="error-desc">The page you're looking for doesn't exist or has been moved. Explore our smart RV technology guides and resources instead.</p>
+        <a href="/" class="btn">Go to Homepage</a>
+        <a href="/features" class="btn">Browse Features</a>
+        <a href="/blog" class="btn">Read Blog</a>
+    </div>
+</body>
+</html>`;
 }
 
 // Generate prerendered HTML for bots
@@ -183,6 +239,33 @@ export default async function botDetector(request: Request, context: Context) {
   // Skip for robots.txt and sitemap.xml
   if (path === '/robots.txt' || path === '/sitemap.xml') {
     return;
+  }
+
+  // Check if route is valid
+  if (!isValidRoute(path)) {
+    if (isBot(userAgent)) {
+      // Return 404 HTML for bots
+      const html = generate404HTML(path);
+      return new Response(html, {
+        status: 404,
+        headers: {
+          'Content-Type': 'text/html; charset=utf-8',
+          'Cache-Control': 'public, max-age=300',
+          'X-Bot-Detected': 'true',
+          'X-Frame-Options': 'DENY',
+          'X-Content-Type-Options': 'nosniff',
+        },
+      });
+    } else {
+      // Return 404 redirect for humans to let React Router handle it
+      return new Response(null, {
+        status: 404,
+        headers: {
+          'location': '/404-redirect',
+          'cache-control': 'no-cache',
+        },
+      });
+    }
   }
   
   // Check if this is a bot/crawler

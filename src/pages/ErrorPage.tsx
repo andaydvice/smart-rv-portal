@@ -1,6 +1,7 @@
 
 import React, { useEffect } from 'react';
 import { useRouteError, isRouteErrorResponse, useNavigate, useLocation } from 'react-router-dom';
+import { usePageStatus } from '@/hooks/usePageStatus';
 import { Button } from '@/components/ui/button';
 import Layout from '@/components/layout/Layout';
 import { AlertTriangle, Home, RefreshCcw } from 'lucide-react';
@@ -19,10 +20,26 @@ const ErrorPage = () => {
   let errorMessage = "Something went wrong";
   let statusCode = 500;
   
+  // Detect if this is a 404 from invalid route
+  const isInvalidRoute = location.pathname === '/404-redirect' || 
+                        (location.pathname !== '/' && !error);
+  
   useEffect(() => {
     console.error("Route error encountered:", error);
     console.log("Current path:", location.pathname);
-  }, [error, location.pathname]);
+    console.log("Is invalid route:", isInvalidRoute);
+    
+    // Track 404 errors for analytics
+    if (is404 || isInvalidRoute) {
+      // Analytics tracking for 404 errors
+      if (typeof window !== 'undefined' && (window as any).gtag) {
+        (window as any).gtag('event', 'page_not_found', {
+          'page_path': location.pathname,
+          'error_type': 'client_404'
+        });
+      }
+    }
+  }, [error, location.pathname, isInvalidRoute]);
   
   if (isRouteErrorResponse(error)) {
     statusCode = error.status;
@@ -31,7 +48,16 @@ const ErrorPage = () => {
     errorMessage = error.message;
   }
 
-  const is404 = statusCode === 404;
+  // Force 404 status for invalid routes
+  if (isInvalidRoute) {
+    statusCode = 404;
+    errorMessage = "Page not found";
+  }
+
+  const is404 = statusCode === 404 || isInvalidRoute;
+  
+  // Set proper HTTP status for SEO
+  usePageStatus(statusCode);
 
   return (
     <Layout>
