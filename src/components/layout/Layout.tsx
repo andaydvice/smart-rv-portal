@@ -40,7 +40,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
       <RouteOptimizer />
       <Navbar />
       <main 
-        className="w-full max-w-full overflow-x-hidden bg-deeper-background"
+        className="w-full max-w-full overflow-x-hidden"
         role="main"
         aria-label="Main content"
       >
