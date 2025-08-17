@@ -10,6 +10,10 @@ import './styles/base.css'
 // ... keep existing code (global base styles)
 
 import { setupLazyLoading, deferOperation } from './utils/performance.ts'
+import { handleBotOptimizations, isBot, isSocialBot } from './utils/prerender'
+
+// Enhanced bot detection
+const isBotAgent = isBot() || isSocialBot();
 
 // Removed global image preloads; pages handle their own critical assets
 
@@ -20,6 +24,12 @@ if (!rootElement) {
   console.error('Root element not found! Cannot mount React application.');
 } else {
   try {
+    // Apply bot optimizations before mounting
+    if (isBotAgent) {
+      handleBotOptimizations();
+      console.log('Bot detected, optimizations applied');
+    }
+
     ReactDOM.createRoot(rootElement).render(
       <React.StrictMode>
         <HelmetProvider>
@@ -28,10 +38,18 @@ if (!rootElement) {
       </React.StrictMode>
     );
     
-    // After app is rendered, setup lazy loading for images
-    deferOperation(() => {
-      setupLazyLoading();
-    }, 300);
+    // Performance optimizations for human users only
+    if (!isBotAgent) {
+      // After app is rendered, setup lazy loading for images
+      deferOperation(() => {
+        setupLazyLoading();
+      }, 300);
+    } else {
+      // For bots, ensure immediate content visibility
+      setTimeout(() => {
+        handleBotOptimizations();
+      }, 100);
+    }
 
     // Idle prefetch select lazy routes to improve navigation speed
     deferOperation(() => {

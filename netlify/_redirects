@@ -1,0 +1,19 @@
+# Netlify _redirects file for bot detection and prerendering
+
+# Bot-specific routing using user agent detection
+/*    /prerender/:splat   200   Conditions:User-Agent=*bot*,*crawler*,*spider*,*facebook*,*twitter*,*linkedin*,*slack*,*discord*,*whatsapp*,*telegram*
+
+# Static file serving (robots.txt, sitemap.xml, etc.)
+/robots.txt    /robots.txt    200
+/sitemap.xml   /sitemap.xml   200
+
+# Legacy redirects
+/compare-models    /models/compare    301
+/rv-intelligence/*  /features/:splat   301
+/rv-systems/*      /features/:splat   301
+/rv-tools/*        /calculators/:splat 301
+/support/*         /troubleshooting/:splat 301
+/auth/error        /auth              301
+
+# SPA fallback for human users - must be last
+/*    /index.html   200

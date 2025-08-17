@@ -1,7 +1,12 @@
 
-# Netlify configuration file
+# Netlify configuration file with bot detection and prerendering
 
 # Static files are served directly by default, no redirects needed for them
+
+# Enhanced bot detection and prerendering
+[[edge_functions]]
+  function = "bot-detector"
+  path = "/*"
 
 # Specific redirects for compare models pages (high priority)
 [[redirects]]
