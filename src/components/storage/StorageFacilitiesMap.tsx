@@ -191,8 +191,10 @@ const StorageFacilitiesMap: React.FC<StorageFacilitiesMapProps> = ({ onSelectFea
       {/* Mobile-first: Map container shows first */}
       <div className="order-1">
         {/* Navigation hint and map toggle button */}
-        <div className="flex justify-between items-center mb-4">
-          <NavigationHint />
+        <div className="flex justify-between items-start mb-4 gap-4">
+          <div className="flex-1 max-w-none">
+            <NavigationHint />
+          </div>
           <div className="flex items-center gap-2">
             <MapToggleButton 
               useGoogleMaps={useGoogleMaps} 
