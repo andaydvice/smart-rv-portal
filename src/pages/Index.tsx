@@ -1,5 +1,4 @@
 import React, { useEffect, lazy, Suspense } from "react";
-import Navbar from "@/components/Navbar";
 import Layout from "@/components/layout/Layout";
 import { HeroSection } from "@/components/sections/HeroSection";
 import { motion } from "framer-motion";
