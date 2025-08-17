@@ -49,7 +49,6 @@ const MapView: React.FC<MapViewProps> = ({
         mapError={mapError} 
         mapLoaded={mapLoaded} 
         facilitiesCount={facilities.length}
-        infiniteLoading={infiniteLoading}
       />
       
       {/* Debug overlay */}

@@ -111,10 +111,7 @@ const InfiniteLoadingMap: React.FC<InfiniteLoadingMapProps> = ({
       />
       
       <MapLoadingProgress 
-        percentLoaded={loadingPercent} 
         showProgress={loading} 
-        infiniteLoading={true}
-        forceComplete={true}
       />
     </div>
   );

@@ -40,52 +40,24 @@ export const ProgressiveLoader: React.FC<ProgressiveLoaderProps> = ({
 
   useEffect(() => {
     if (!isLoading) {
-      setProgress(100);
+      setProgress(0);
+      setCurrentStage(0);
       return;
     }
-
-    setProgress(0);
+    
+    // Simple stage progression without fake progress
+    let currentStageIndex = 0;
     setCurrentStage(0);
     
-    let totalElapsed = 0;
-    let currentStageIndex = 0;
-    
-    const progressInterval = setInterval(() => {
-      const currentStageData = stages[currentStageIndex];
-      if (!currentStageData) {
-        clearInterval(progressInterval);
-        return;
-      }
-
-      const stageProgress = Math.min(totalElapsed / currentStageData.duration, 1);
-      
-      // Calculate total progress based on completed stages + current stage progress
-      let totalProgress = 0;
-      for (let i = 0; i < currentStageIndex; i++) {
-        totalProgress += stages[i].weight * 100;
-      }
-      totalProgress += stageProgress * currentStageData.weight * 100;
-      
-      setProgress(Math.min(totalProgress, 95)); // Cap at 95% until complete
-      
-      // Update time remaining
-      if (estimatedTime) {
-        const remainingTime = Math.max(0, estimatedTime - (totalElapsed + (currentStageIndex * 100)));
-        setTimeRemaining(remainingTime);
-      }
-      
-      // Move to next stage if current is complete
-      if (stageProgress >= 1 && currentStageIndex < stages.length - 1) {
+    const stageInterval = setInterval(() => {
+      if (currentStageIndex < stages.length - 1) {
         currentStageIndex++;
         setCurrentStage(currentStageIndex);
-        totalElapsed = 0;
-      } else {
-        totalElapsed += 50; // 50ms intervals
       }
-    }, 50);
+    }, 800); // Switch stages every 800ms
 
-    return () => clearInterval(progressInterval);
-  }, [isLoading, stages, estimatedTime]);
+    return () => clearInterval(stageInterval);
+  }, [isLoading, stages]);
 
   if (!isLoading) return null;
 
@@ -114,31 +86,16 @@ export const ProgressiveLoader: React.FC<ProgressiveLoaderProps> = ({
         </h3>
       </div>
       
-      {/* Progress bar */}
-      <div className="w-full max-w-xs space-y-2">
-        <Progress 
-          value={progress} 
-          className="h-2 bg-muted"
-        />
-        
-        <div className="flex justify-between items-center text-sm text-muted-foreground">
-          <span>Loading...</span>
-          {showPercentage && (
-            <span className="font-medium">{Math.round(progress)}%</span>
-          )}
-        </div>
+      {/* Simple loading indicator */}
+      <div className="text-sm text-muted-foreground">
+        Please wait...
       </div>
 
       {/* Additional details for detailed variant */}
       {variant === 'detailed' && (
-        <div className="text-center space-y-1">
-          {timeRemaining > 0 && (
-            <p className="text-xs text-muted-foreground">
-              Estimated time: {Math.ceil(timeRemaining / 1000)}s
-            </p>
-          )}
+        <div className="text-center">
           <p className="text-xs text-muted-foreground">
-            Stage {currentStage + 1} of {stages.length}
+            Step {currentStage + 1} of {stages.length}
           </p>
         </div>
       )}

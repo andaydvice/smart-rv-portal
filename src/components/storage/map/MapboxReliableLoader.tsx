@@ -163,10 +163,7 @@ const MapboxReliableLoader: React.FC<MapboxReliableLoaderProps> = ({
       />
       
       <MapLoadingProgress 
-        percentLoaded={loadingPercent} 
         showProgress={loading} 
-        infiniteLoading={false}
-        forceComplete={true}
       />
       
       {loadingError && (

@@ -184,7 +184,7 @@ const StorageFacilitiesMap: React.FC<StorageFacilitiesMapProps> = ({ onSelectFea
     };
   };
 
-  const [showFilters, setShowFilters] = useState(false);
+  
 
   return (
     <div className="flex flex-col space-y-4">
@@ -198,15 +198,6 @@ const StorageFacilitiesMap: React.FC<StorageFacilitiesMapProps> = ({ onSelectFea
               useGoogleMaps={useGoogleMaps} 
               toggleMapView={toggleMapView} 
             />
-            {/* Mobile filter toggle */}
-            <Button
-              variant="outline"
-              size="sm"
-              className="lg:hidden bg-[#131a2a] text-[#5B9BD5] hover:bg-[#1d2739] border-gray-700"
-              onClick={() => setShowFilters(!showFilters)}
-            >
-              {showFilters ? 'Hide Filters' : 'Show Filters'}
-            </Button>
           </div>
         </div>
         
@@ -282,8 +273,8 @@ const StorageFacilitiesMap: React.FC<StorageFacilitiesMapProps> = ({ onSelectFea
         </div>
       </div>
 
-      {/* Mobile layout: Collapsible filters and list */}
-      <div className={`lg:hidden order-3 ${showFilters ? 'block' : 'hidden'}`}>
+      {/* Mobile layout: Filters and list */}
+      <div className="lg:hidden order-3">
         <div className="space-y-4">
           <FilterPanel onFilterChange={handleFilterChange} />
           <Card className="bg-[#080F1F] border-gray-700">
