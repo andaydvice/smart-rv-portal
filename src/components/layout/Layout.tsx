@@ -12,7 +12,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   const isBot = typeof navigator !== 'undefined' && /bot|crawler|spider|crawling/i.test(navigator.userAgent);
   
   return (
-    <div className="min-h-screen bg-deeper-background overflow-x-hidden w-full">
+    <div className="min-h-screen overflow-x-hidden w-full">
       <Helmet>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" content="#080F1F" />
