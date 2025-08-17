@@ -2,6 +2,9 @@ import React, { useEffect } from 'react';
 import { initPerformanceMonitor } from '@/perf/monitor';
 import { startRUM } from '@/utils/perf/rum';
 import { handleBotOptimizations, isBot } from '@/utils/prerender';
+import { analytics } from '@/utils/analytics';
+import { seoMonitor } from '@/utils/SEOMonitor';
+import { smartPreloader } from '@/utils/SmartPreloader';
 
 const PerformanceReporter: React.FC = () => {
   useEffect(() => {
@@ -112,6 +115,15 @@ const PerformanceReporter: React.FC = () => {
         (window as any).requestIdleCallback ? (window as any).requestIdleCallback(cb, { timeout: 2000 }) : setTimeout(cb, 500);
       idle(() => startRUM({ sampleRate: 0.5 }));
     }
+
+    // Initialize Phase 3 SEO enhancements
+    console.log('🚀 Phase 3 SEO systems initialized');
+    
+    // Generate initial SEO report
+    setTimeout(() => {
+      const report = seoMonitor.generateReport();
+      console.log('📊 Initial SEO Score:', report.score);
+    }, 1000);
   }, []);
   return null;
 };

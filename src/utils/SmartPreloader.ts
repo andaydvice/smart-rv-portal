@@ -1,0 +1,348 @@
+/**
+ * Smart Preloading System for SEO-aware resource optimization
+ * Preloads critical SEO resources and implements intelligent prefetching
+ */
+
+import { pageMetadata } from './static-generator';
+
+interface PreloadConfig {
+  enableIntersectionObserver?: boolean;
+  prefetchOnHover?: boolean;
+  prioritizeSEORoutes?: boolean;
+  maxConcurrentPreloads?: number;
+  delayMs?: number;
+}
+
+class SmartPreloader {
+  private preloadedResources = new Set<string>();
+  private intersectionObserver?: IntersectionObserver;
+  private hoverTimeouts = new Map<string, number>();
+  private config: Required<PreloadConfig>;
+  private preloadQueue: string[] = [];
+  private activePreloads = 0;
+
+  constructor(config: PreloadConfig = {}) {
+    this.config = {
+      enableIntersectionObserver: true,
+      prefetchOnHover: true,
+      prioritizeSEORoutes: true,
+      maxConcurrentPreloads: 3,
+      delayMs: 300,
+      ...config
+    };
+
+    this.init();
+  }
+
+  private init() {
+    if (typeof window === 'undefined') return;
+
+    // Preload critical SEO resources immediately
+    this.preloadCriticalSEOResources();
+
+    // Set up intersection observer for viewport-based preloading
+    if (this.config.enableIntersectionObserver) {
+      this.setupIntersectionObserver();
+    }
+
+    // Set up hover-based prefetching
+    if (this.config.prefetchOnHover) {
+      this.setupHoverPrefetching();
+    }
+
+    // Preload high-priority routes
+    if (this.config.prioritizeSEORoutes) {
+      this.preloadSEORoutes();
+    }
+  }
+
+  /**
+   * Preload critical SEO resources like sitemaps and structured data
+   */
+  private preloadCriticalSEOResources() {
+    const criticalResources = [
+      '/sitemap.xml',
+      '/robots.txt',
+      '/rss.xml',
+      '/manifest.json'
+    ];
+
+    criticalResources.forEach(resource => {
+      this.preloadResource(resource, 'fetch');
+    });
+  }
+
+  /**
+   * Set up intersection observer for lazy preloading
+   */
+  private setupIntersectionObserver() {
+    this.intersectionObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const link = entry.target as HTMLAnchorElement;
+          if (link.href && !this.preloadedResources.has(link.href)) {
+            this.queuePreload(link.href);
+          }
+        }
+      });
+    }, {
+      rootMargin: '100px' // Start preloading 100px before the link enters viewport
+    });
+
+    // Observe all internal links
+    this.observeLinks();
+  }
+
+  /**
+   * Set up hover-based prefetching
+   */
+  private setupHoverPrefetching() {
+    document.addEventListener('mouseover', (event) => {
+      const target = event.target as HTMLElement;
+      const link = target.closest('a') as HTMLAnchorElement;
+      
+      if (link && this.isInternalLink(link.href)) {
+        const href = link.href;
+        
+        // Clear any existing timeout for this link
+        const existingTimeout = this.hoverTimeouts.get(href);
+        if (existingTimeout) {
+          clearTimeout(existingTimeout);
+        }
+
+        // Set new timeout for delayed preloading
+        const timeout = window.setTimeout(() => {
+          this.queuePreload(href);
+          this.hoverTimeouts.delete(href);
+        }, this.config.delayMs);
+
+        this.hoverTimeouts.set(href, timeout);
+      }
+    });
+
+    // Cancel preload on mouse leave
+    document.addEventListener('mouseout', (event) => {
+      const target = event.target as HTMLElement;
+      const link = target.closest('a') as HTMLAnchorElement;
+      
+      if (link && this.isInternalLink(link.href)) {
+        const timeout = this.hoverTimeouts.get(link.href);
+        if (timeout) {
+          clearTimeout(timeout);
+          this.hoverTimeouts.delete(link.href);
+        }
+      }
+    });
+  }
+
+  /**
+   * Preload high-priority SEO routes
+   */
+  private preloadSEORoutes() {
+    const highPriorityRoutes = [
+      '/',
+      '/features',
+      '/models',
+      '/technology',
+      '/about'
+    ];
+
+    // Use idle time to preload high-priority routes
+    this.scheduleIdlePreloading(() => {
+      highPriorityRoutes.forEach(route => {
+        this.queuePreload(window.location.origin + route);
+      });
+    });
+  }
+
+  /**
+   * Queue a preload with concurrency control
+   */
+  private queuePreload(url: string) {
+    if (this.preloadedResources.has(url)) return;
+
+    this.preloadQueue.push(url);
+    this.processPreloadQueue();
+  }
+
+  /**
+   * Process the preload queue respecting concurrency limits
+   */
+  private processPreloadQueue() {
+    while (this.preloadQueue.length > 0 && this.activePreloads < this.config.maxConcurrentPreloads) {
+      const url = this.preloadQueue.shift()!;
+      this.preloadPage(url);
+    }
+  }
+
+  /**
+   * Preload a specific resource
+   */
+  private preloadResource(href: string, as: string = 'document') {
+    if (this.preloadedResources.has(href)) return;
+
+    const link = document.createElement('link');
+    link.rel = 'preload';
+    link.href = href;
+    link.as = as;
+    
+    // Add crossorigin for fetch requests
+    if (as === 'fetch') {
+      link.crossOrigin = 'anonymous';
+    }
+
+    document.head.appendChild(link);
+    this.preloadedResources.add(href);
+  }
+
+  /**
+   * Preload a page using various strategies
+   */
+  private async preloadPage(url: string) {
+    if (this.preloadedResources.has(url)) return;
+
+    this.activePreloads++;
+    this.preloadedResources.add(url);
+
+    try {
+      // Use prefetch for non-critical resources
+      const link = document.createElement('link');
+      link.rel = 'prefetch';
+      link.href = url;
+      document.head.appendChild(link);
+
+      // Also preload the page's critical CSS and JS if we know about it
+      const pathname = new URL(url).pathname;
+      const metadata = pageMetadata[pathname];
+      
+      if (metadata) {
+        // Preload critical resources for this route
+        // Page metadata doesn't include ogImage, so we'll preload standard assets
+        console.log('Preloading route resources for:', pathname);
+      }
+
+    } catch (error) {
+      console.warn('Failed to preload:', url, error);
+    } finally {
+      this.activePreloads--;
+      
+      // Process more items from the queue
+      setTimeout(() => this.processPreloadQueue(), 100);
+    }
+  }
+
+  /**
+   * Observe all internal links for intersection-based preloading
+   */
+  private observeLinks() {
+    if (!this.intersectionObserver) return;
+
+    const links = document.querySelectorAll('a[href]');
+    links.forEach(link => {
+      const anchor = link as HTMLAnchorElement;
+      if (this.isInternalLink(anchor.href)) {
+        this.intersectionObserver!.observe(anchor);
+      }
+    });
+  }
+
+  /**
+   * Check if a URL is an internal link
+   */
+  private isInternalLink(href: string): boolean {
+    try {
+      const url = new URL(href);
+      return url.origin === window.location.origin;
+    } catch {
+      return false;
+    }
+  }
+
+  /**
+   * Schedule preloading during idle time
+   */
+  private scheduleIdlePreloading(callback: () => void) {
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(callback, { timeout: 5000 });
+    } else {
+      setTimeout(callback, 2000);
+    }
+  }
+
+  /**
+   * Preload critical above-the-fold resources
+   */
+  preloadCriticalResources(resources: string[]) {
+    resources.forEach(resource => {
+      this.preloadResource(resource, this.getResourceType(resource));
+    });
+  }
+
+  /**
+   * Get appropriate resource type for preloading
+   */
+  private getResourceType(url: string): string {
+    const extension = url.split('.').pop()?.toLowerCase();
+    
+    switch (extension) {
+      case 'css':
+        return 'style';
+      case 'js':
+        return 'script';
+      case 'jpg':
+      case 'jpeg':
+      case 'png':
+      case 'webp':
+      case 'svg':
+        return 'image';
+      case 'woff':
+      case 'woff2':
+        return 'font';
+      case 'mp4':
+      case 'webm':
+        return 'video';
+      default:
+        return 'fetch';
+    }
+  }
+
+  /**
+   * Preload route-specific resources
+   */
+  preloadRoute(pathname: string) {
+    const metadata = pageMetadata[pathname];
+    if (!metadata) return;
+
+    const resources = [];
+    
+    // Add standard OG image
+    resources.push('/og-image.svg');
+
+    // Preload the route itself
+    resources.push(window.location.origin + pathname);
+
+    this.preloadCriticalResources(resources);
+  }
+
+  /**
+   * Clean up observers and timeouts
+   */
+  destroy() {
+    if (this.intersectionObserver) {
+      this.intersectionObserver.disconnect();
+    }
+
+    this.hoverTimeouts.forEach(timeout => {
+      clearTimeout(timeout);
+    });
+    this.hoverTimeouts.clear();
+  }
+}
+
+// Create singleton instance
+export const smartPreloader = new SmartPreloader();
+
+// Export convenience functions
+export const preloadRoute = smartPreloader.preloadRoute.bind(smartPreloader);
+export const preloadCriticalResources = smartPreloader.preloadCriticalResources.bind(smartPreloader);
+export const destroyPreloader = smartPreloader.destroy.bind(smartPreloader);
