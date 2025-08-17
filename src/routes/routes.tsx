@@ -2,8 +2,8 @@
 import React, { lazy, Suspense } from "react";
 import { RouteObject } from "react-router-dom";
 
-// Import root page (lazy)
-const Index = lazy(() => import("../pages/Index"));
+// Import root page synchronously for faster initial load
+import Index from "../pages/Index";
 import ErrorPage from "../pages/ErrorPage";
 const SearchResults = lazy(() => import("../pages/SearchResults"));
 
@@ -17,11 +17,7 @@ import contentRoutes from "./contentRoutes";
 export const routes: RouteObject[] = [
   {
     path: "/",
-    element: (
-      <Suspense fallback={<div className="min-h-screen bg-deeper-background flex items-center justify-center"><div className="animate-pulse h-64 w-full max-w-6xl bg-gray-200/10 rounded"></div></div>}>
-        <Index />
-      </Suspense>
-    ),
+    element: <Index />,
     errorElement: <ErrorPage />,
   },
   {

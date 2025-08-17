@@ -2,7 +2,6 @@ import React, { useEffect, lazy, Suspense } from "react";
 import Layout from "@/components/layout/Layout";
 import { HeroSection } from "@/components/sections/HeroSection";
 import { motion } from "framer-motion";
-// TechnologySection lazy-loaded below
 import { ContactSection } from "@/components/sections/ContactSection";
 import { HomepageAffiliateSection } from "@/components/affiliate/HomepageAffiliateSection";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
@@ -11,26 +10,19 @@ import SEO from "@/components/seo/SEO";
 import { organizationSchema, websiteSchema } from "@/components/seo/schemas";
 import { TrustStrip } from "@/components/sections/TrustStrip";
 import TestimonialsSection from "@/components/sections/testimonials/TestimonialsSection";
-// Lazy load components that aren't needed immediately
-const FeaturesSection = lazy(() => import("@/components/sections/FeaturesSection").then(mod => ({ 
-  default: mod.FeaturesSection 
-})));
+// Critical above-the-fold components are now imported synchronously
+import { FeaturesSection } from "@/components/sections/FeaturesSection";
+// Keep below-the-fold components lazy for performance
 const SustainabilitySection = lazy(() => import("@/components/sections/SustainabilitySection").then(mod => ({ 
   default: mod.SustainabilitySection 
 })));
 const TechnologySection = lazy(() => import("@/components/sections/TechnologySection").then(mod => ({
   default: mod.TechnologySection
 })));
-// MODIFIED: Lazy import for ContactSection removed
-// const ContactSection = lazy(() => import("@/components/sections/ContactSection").then(mod => ({ 
-//   default: mod.ContactSection 
-// })));
 
-const LoadingFallback = () => (
-  <div className="w-full py-20 flex items-center justify-center">
-    <div className="animate-pulse h-64 w-full max-w-6xl bg-gray-200/10 rounded"></div>
-  </div>
-);
+import { SectionSkeleton } from "@/components/ui/skeletons";
+
+const LoadingFallback = () => <SectionSkeleton height="h-80" />;
 
 const Index = () => {
   useEffect(() => {
@@ -70,9 +62,8 @@ const Index = () => {
         <TrustStrip />
         <TestimonialsSection />
         
-        <Suspense fallback={<LoadingFallback />}>
-          <FeaturesSection />
-        </Suspense>
+        {/* Critical above-the-fold content loads immediately */}
+        <FeaturesSection />
         
         <Suspense fallback={<LoadingFallback />}>
           <TechnologySection />

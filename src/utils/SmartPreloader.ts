@@ -26,8 +26,8 @@ class SmartPreloader {
       enableIntersectionObserver: true,
       prefetchOnHover: true,
       prioritizeSEORoutes: true,
-      maxConcurrentPreloads: 3,
-      delayMs: 300,
+      maxConcurrentPreloads: 5, // Increased for better performance
+      delayMs: 200, // Reduced delay for faster response
       ...config
     };
 
@@ -39,6 +39,9 @@ class SmartPreloader {
 
     // Preload critical SEO resources immediately
     this.preloadCriticalSEOResources();
+    
+    // Preload critical homepage assets for faster initial load
+    this.preloadHomepageAssets();
 
     // Set up intersection observer for viewport-based preloading
     if (this.config.enableIntersectionObserver) {
@@ -70,6 +73,35 @@ class SmartPreloader {
     criticalResources.forEach(resource => {
       this.preloadResource(resource, 'fetch');
     });
+  }
+
+  /**
+   * Preload critical homepage assets for faster initial render
+   */
+  private preloadHomepageAssets() {
+    // Only preload on homepage or when likely to navigate to homepage
+    const isHomepage = window.location.pathname === '/';
+    const isLikelyToVisitHomepage = document.referrer === '' || !document.referrer.includes(window.location.hostname);
+    
+    if (isHomepage || isLikelyToVisitHomepage) {
+      const homepageAssets = [
+        // Hero section background images
+        '/lovable-uploads/f3ebf58c-7bbf-427f-9510-9c3b0aec6f6d.png',
+        // Features section backgrounds
+        '/lovable-uploads/03ccf137-16cb-41a0-bfb5-2179fe20eb79.png',
+        // Technology section backgrounds
+        '/lovable-uploads/0a22c848-dff2-43f4-b1eb-800fa123a904.png',
+        // Sustainability section background
+        '/lovable-uploads/b6a46bec-1ca8-4f7b-89fa-37bb5415d9fa.png',
+      ];
+
+      homepageAssets.forEach(asset => {
+        this.preloadResource(asset, 'image');
+      });
+
+      // Preload Google Fonts for faster text rendering
+      this.preloadResource('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap', 'style');
+    }
   }
 
   /**
