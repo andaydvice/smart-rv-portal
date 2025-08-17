@@ -1,22 +1,7 @@
 
 # Netlify configuration file
 
-# Serve static files directly (sitemap, robots, assets)
-[[redirects]]
-  from = "/sitemap.xml"
-  to = "/sitemap.xml"
-  status = 200
-
-[[redirects]]
-  from = "/robots.txt"
-  to = "/robots.txt"
-  status = 200
-
-# Redirect all other routes to index.html for single-page application
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
+# Static files are served directly by default, no redirects needed for them
 
 # Specific redirects for compare models pages (high priority)
 [[redirects]]
@@ -76,6 +61,12 @@
   to = "/auth"
   status = 301
   force = true
+
+# SPA fallback - must be last to avoid intercepting static files
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
 
 # Build settings
 [build]
