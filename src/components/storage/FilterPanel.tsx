@@ -9,6 +9,26 @@ import { FeaturesFilter } from './filter-components/FeaturesFilter';
 import { PriceRangeFilter } from './filter-components/PriceRangeFilter';
 import { RatingFilter } from './filter-components/RatingFilter';
 
+// Helper function to normalize state names consistently
+const normalizeStateName = (stateAbbr: string): string => {
+  return stateAbbr === 'AZ' ? 'Arizona' : 
+         stateAbbr === 'CA' ? 'California' : 
+         stateAbbr === 'CO' ? 'Colorado' :
+         stateAbbr === 'TX' ? 'Texas' :
+         stateAbbr === 'FL' ? 'Florida' :
+         stateAbbr === 'NV' ? 'Nevada' :
+         stateAbbr === 'GA' ? 'Georgia' :
+         stateAbbr === 'IA' ? 'Iowa' :
+         stateAbbr === 'MN' ? 'Minnesota' :
+         stateAbbr === 'WI' ? 'Wisconsin' :
+         stateAbbr === 'OR' ? 'Oregon' :
+         stateAbbr === 'PA' ? 'Pennsylvania' :
+         stateAbbr === 'NY' ? 'New York' :
+         stateAbbr === 'OH' ? 'Ohio' :
+         stateAbbr === 'IN' ? 'Indiana' :
+         stateAbbr;
+};
+
 interface FilterPanelProps {
   onFilterChange: (filters: FilterState) => void;
 }
@@ -32,16 +52,31 @@ const FilterPanel = ({ onFilterChange }: FilterPanelProps) => {
 
   useEffect(() => {
     const fetchStates = async () => {
+      // Fetch all storage facilities and count by state
       const { data, error } = await supabase
-        .from('state_bounds')
-        .select('state, facility_count')
-        .order('state');
+        .from('storage_facilities')
+        .select('state');
 
       if (!error && data) {
-        setStates(data.map(item => ({
-          state: item.state,
-          count: item.facility_count
-        })));
+        // Count occurrences of each state using normalized state names
+        const stateCounts: Record<string, number> = {};
+        data.forEach(item => {
+          if (!item.state) return;
+          
+          // Normalize the state name
+          const normalizedState = normalizeStateName(item.state);
+          
+          // Add to counts with the normalized name
+          stateCounts[normalizedState] = (stateCounts[normalizedState] || 0) + 1;
+        });
+        
+        // Convert to array format and sort alphabetically
+        const statesArray = Object.entries(stateCounts).map(([state, count]) => ({
+          state,
+          count
+        })).sort((a, b) => a.state.localeCompare(b.state));
+        
+        setStates(statesArray);
       }
       setLoading(false);
     };
