@@ -8,10 +8,12 @@ import ErrorPage from "@/pages/ErrorPage";
 // High-traffic routes - synchronous imports
 import Models from "@/pages/Models";
 
-// Model detail pages (lazy)
-const CompactModel = lazy(() => import("@/pages/models/CompactModel"));
-const LuxuryModel = lazy(() => import("@/pages/models/LuxuryModel"));
-const AdventureModel = lazy(() => import("@/pages/models/AdventureModel"));
+// Popular model pages - synchronous for instant loading
+import CompactModel from "@/pages/models/CompactModel";
+import LuxuryModel from "@/pages/models/LuxuryModel";
+import AdventureModel from "@/pages/models/AdventureModel";
+
+// Less popular model pages (lazy)
 const CompareModels = lazy(() => import("@/pages/models/CompareModels"));
 
 export const modelRoutes: RouteObject[] = [
@@ -27,11 +29,9 @@ export const modelRoutes: RouteObject[] = [
   {
     path: "/models/compact",
     element: (
-      <Suspense fallback={<RouteSkeleton type="models" />}>
-        <RouteTransition>
-          <CompactModel />
-        </RouteTransition>
-      </Suspense>
+      <RouteTransition>
+        <CompactModel />
+      </RouteTransition>
     ),
     errorElement: <ErrorPage />,
   },
@@ -43,9 +43,9 @@ export const modelRoutes: RouteObject[] = [
   {
     path: "/models/luxury",
     element: (
-      <Suspense fallback={<div className="min-h-screen bg-deeper-background flex items-center justify-center"><div className="animate-pulse h-64 w-full max-w-6xl bg-gray-200/10 rounded"></div></div>}>
+      <RouteTransition>
         <LuxuryModel />
-      </Suspense>
+      </RouteTransition>
     ),
     errorElement: <ErrorPage />,
   },
@@ -62,9 +62,9 @@ export const modelRoutes: RouteObject[] = [
   {
     path: "/models/adventure",
     element: (
-      <Suspense fallback={<div className="min-h-screen bg-deeper-background flex items-center justify-center"><div className="animate-pulse h-64 w-full max-w-6xl bg-gray-200/10 rounded"></div></div>}>
+      <RouteTransition>
         <AdventureModel />
-      </Suspense>
+      </RouteTransition>
     ),
     errorElement: <ErrorPage />,
   },
@@ -76,8 +76,10 @@ export const modelRoutes: RouteObject[] = [
   {
     path: "/models/compare",
     element: (
-      <Suspense fallback={<div className="min-h-screen bg-deeper-background flex items-center justify-center"><div className="animate-pulse h-64 w-full max-w-6xl bg-gray-200/10 rounded"></div></div>}>
-        <CompareModels />
+      <Suspense fallback={<RouteSkeleton type="models" />}>
+        <RouteTransition>
+          <CompareModels />
+        </RouteTransition>
       </Suspense>
     ),
     errorElement: <ErrorPage />,

@@ -8,12 +8,14 @@ import ErrorPage from "@/pages/ErrorPage";
 // High-traffic routes - synchronous imports
 import Features from "@/pages/Features";
 
-// Feature detail pages (lazy)
-const AudioSystem = lazy(() => import("@/pages/features/AudioSystem"));
-const SmartTV = lazy(() => import("@/pages/features/SmartTV"));
+// Popular feature pages - synchronous for instant loading
+import AudioSystem from "@/pages/features/AudioSystem";
+import SmartTV from "@/pages/features/SmartTV";
+import InternetConnectivity from "@/pages/features/InternetConnectivity";
+import PowerManagement from "@/pages/features/PowerManagement";
+
+// Less popular feature detail pages (lazy)
 const SmartKitchen = lazy(() => import("@/pages/features/SmartKitchen"));
-const PowerManagement = lazy(() => import("@/pages/features/PowerManagement"));
-const InternetConnectivity = lazy(() => import("@/pages/features/InternetConnectivity"));
 const NavigationSystem = lazy(() => import("@/pages/features/NavigationSystem"));
 const SecuritySystem = lazy(() => import("@/pages/features/SecuritySystem"));
 const AutomatedDriving = lazy(() => import("@/pages/features/AutomatedDriving"));
@@ -37,28 +39,28 @@ export const featureRoutes: RouteObject[] = [
   {
     path: "/features/audio-system",
     element: (
-      <Suspense fallback={<RouteSkeleton type="features" />}>
-        <RouteTransition>
-          <AudioSystem />
-        </RouteTransition>
-      </Suspense>
+      <RouteTransition>
+        <AudioSystem />
+      </RouteTransition>
     ),
     errorElement: <ErrorPage />,
   },
   {
     path: "/features/smart-tv",
     element: (
-      <Suspense fallback={<div className="min-h-screen bg-deeper-background flex items-center justify-center"><div className="animate-pulse h-64 w-full max-w-6xl bg-gray-200/10 rounded"></div></div>}>
+      <RouteTransition>
         <SmartTV />
-      </Suspense>
+      </RouteTransition>
     ),
     errorElement: <ErrorPage />,
   },
   {
     path: "/features/smart-kitchen",
     element: (
-      <Suspense fallback={<div className="min-h-screen bg-deeper-background flex items-center justify-center"><div className="animate-pulse h-64 w-full max-w-6xl bg-gray-200/10 rounded"></div></div>}>
-        <SmartKitchen />
+      <Suspense fallback={<RouteSkeleton type="content" />}>
+        <RouteTransition>
+          <SmartKitchen />
+        </RouteTransition>
       </Suspense>
     ),
     errorElement: <ErrorPage />,
@@ -66,26 +68,28 @@ export const featureRoutes: RouteObject[] = [
   {
     path: "/features/power-management",
     element: (
-      <Suspense fallback={<div className="min-h-screen bg-deeper-background flex items-center justify-center"><div className="animate-pulse h-64 w-full max-w-6xl bg-gray-200/10 rounded"></div></div>}>
+      <RouteTransition>
         <PowerManagement />
-      </Suspense>
+      </RouteTransition>
     ),
     errorElement: <ErrorPage />,
   },
   {
     path: "/features/internet-connectivity",
     element: (
-      <Suspense fallback={<div className="min-h-screen bg-deeper-background flex items-center justify-center"><div className="animate-pulse h-64 w-full max-w-6xl bg-gray-200/10 rounded"></div></div>}>
+      <RouteTransition>
         <InternetConnectivity />
-      </Suspense>
+      </RouteTransition>
     ),
     errorElement: <ErrorPage />,
   },
   {
     path: "/features/navigation-system",
     element: (
-      <Suspense fallback={<div className="min-h-screen bg-deeper-background flex items-center justify-center"><div className="animate-pulse h-64 w-full max-w-6xl bg-gray-200/10 rounded"></div></div>}>
-        <NavigationSystem />
+      <Suspense fallback={<RouteSkeleton type="content" />}>
+        <RouteTransition>
+          <NavigationSystem />
+        </RouteTransition>
       </Suspense>
     ),
     errorElement: <ErrorPage />,
@@ -93,8 +97,10 @@ export const featureRoutes: RouteObject[] = [
   {
     path: "/features/security-system",
     element: (
-      <Suspense fallback={<div className="min-h-screen bg-deeper-background flex items-center justify-center"><div className="animate-pulse h-64 w-full max-w-6xl bg-gray-200/10 rounded"></div></div>}>
-        <SecuritySystem />
+      <Suspense fallback={<RouteSkeleton type="content" />}>
+        <RouteTransition>
+          <SecuritySystem />
+        </RouteTransition>
       </Suspense>
     ),
     errorElement: <ErrorPage />,
@@ -102,8 +108,10 @@ export const featureRoutes: RouteObject[] = [
   {
     path: "/features/automated-driving",
     element: (
-      <Suspense fallback={<div className="min-h-screen bg-deeper-background flex items-center justify-center"><div className="animate-pulse h-64 w-full max-w-6xl bg-gray-200/10 rounded"></div></div>}>
-        <AutomatedDriving />
+      <Suspense fallback={<RouteSkeleton type="content" />}>
+        <RouteTransition>
+          <AutomatedDriving />
+        </RouteTransition>
       </Suspense>
     ),
     errorElement: <ErrorPage />,
@@ -111,8 +119,10 @@ export const featureRoutes: RouteObject[] = [
   {
     path: "/features/water-systems",
     element: (
-      <Suspense fallback={<div className="min-h-screen bg-deeper-background flex items-center justify-center"><div className="animate-pulse h-64 w-full max-w-6xl bg-gray-200/10 rounded"></div></div>}>
-        <WaterSystems />
+      <Suspense fallback={<RouteSkeleton type="content" />}>
+        <RouteTransition>
+          <WaterSystems />
+        </RouteTransition>
       </Suspense>
     ),
     errorElement: <ErrorPage />,
@@ -120,8 +130,10 @@ export const featureRoutes: RouteObject[] = [
   {
     path: "/features/smart-automation",
     element: (
-      <Suspense fallback={<div className="min-h-screen bg-deeper-background flex items-center justify-center"><div className="animate-pulse h-64 w-full max-w-6xl bg-gray-200/10 rounded"></div></div>}>
-        <SmartAutomation />
+      <Suspense fallback={<RouteSkeleton type="content" />}>
+        <RouteTransition>
+          <SmartAutomation />
+        </RouteTransition>
       </Suspense>
     ),
     errorElement: <ErrorPage />,
@@ -129,8 +141,10 @@ export const featureRoutes: RouteObject[] = [
   {
     path: "/features/climate-control",
     element: (
-      <Suspense fallback={<div className="min-h-screen bg-deeper-background flex items-center justify-center"><div className="animate-pulse h-64 w-full max-w-6xl bg-gray-200/10 rounded"></div></div>}>
-        <ClimateControl />
+      <Suspense fallback={<RouteSkeleton type="content" />}>
+        <RouteTransition>
+          <ClimateControl />
+        </RouteTransition>
       </Suspense>
     ),
     errorElement: <ErrorPage />,
@@ -138,8 +152,10 @@ export const featureRoutes: RouteObject[] = [
   {
     path: "/features/entertainment",
     element: (
-      <Suspense fallback={<div className="min-h-screen bg-deeper-background flex items-center justify-center"><div className="animate-pulse h-64 w-full max-w-6xl bg-gray-200/10 rounded"></div></div>}>
-        <Entertainment />
+      <Suspense fallback={<RouteSkeleton type="content" />}>
+        <RouteTransition>
+          <Entertainment />
+        </RouteTransition>
       </Suspense>
     ),
     errorElement: <ErrorPage />,
@@ -147,8 +163,10 @@ export const featureRoutes: RouteObject[] = [
   {
     path: "/features/remote-control",
     element: (
-      <Suspense fallback={<div className="min-h-screen bg-deeper-background flex items-center justify-center"><div className="animate-pulse h-64 w-full max-w-6xl bg-gray-200/10 rounded"></div></div>}>
-        <RemoteControl />
+      <Suspense fallback={<RouteSkeleton type="content" />}>
+        <RouteTransition>
+          <RemoteControl />
+        </RouteTransition>
       </Suspense>
     ),
     errorElement: <ErrorPage />,

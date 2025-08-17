@@ -1,6 +1,7 @@
 
 import React, { lazy, Suspense } from "react";
 import { RouteObject } from "react-router-dom";
+import { RouteSkeleton } from "@/components/ui/skeletons";
 
 // Import root page synchronously for faster initial load
 import Index from "../pages/Index";
@@ -23,7 +24,7 @@ export const routes: RouteObject[] = [
   {
     path: "/search",
     element: (
-      <Suspense fallback={<div className="min-h-screen bg-deeper-background flex items-center justify-center"><div className="animate-pulse h-64 w-full max-w-6xl bg-gray-200/10 rounded"></div></div>}>
+      <Suspense fallback={<RouteSkeleton type="content" />}>
         <SearchResults />
       </Suspense>
     ),

@@ -7,9 +7,11 @@ import { RouteTransition } from "@/components/ui/transitions/RouteTransition";
 import Calculators from "../pages/Calculators";
 import Contact from "../pages/Contact";
 
+// Popular utility pages - synchronous for instant loading
+import Documentation from "../pages/Documentation";
+import WeatherDashboard from "../pages/WeatherDashboard";
+
 // Less common routes - lazy loaded
-const Documentation = lazy(() => import("../pages/Documentation"));
-const WeatherDashboard = lazy(() => import("../pages/WeatherDashboard")); 
 const StorageFacilities = lazy(() => import("../pages/StorageFacilities"));
 const StoragePreparationChecklist = lazy(() => import("../pages/StoragePreparationChecklist"));
 const Troubleshooting = lazy(() => import("../pages/Troubleshooting"));
@@ -34,42 +36,46 @@ const utilityRoutes = [
   {
     path: "/documentation",
     element: (
-      <Suspense fallback={<RouteSkeleton type="content" />}>
-        <RouteTransition>
-          <Documentation />
-        </RouteTransition>
-      </Suspense>
+      <RouteTransition>
+        <Documentation />
+      </RouteTransition>
     ),
   },
   {
     path: "/weather",
     element: (
-      <Suspense fallback={<div className="min-h-screen bg-deeper-background flex items-center justify-center"><div className="animate-pulse h-64 w-full max-w-6xl bg-gray-200/10 rounded"></div></div>}>
+      <RouteTransition>
         <WeatherDashboard />
-      </Suspense>
+      </RouteTransition>
     ),
   },
   {
     path: "/rv-weather",
     element: (
-      <Suspense fallback={<div className="min-h-screen bg-deeper-background flex items-center justify-center"><div className="animate-pulse h-64 w-full max-w-6xl bg-gray-200/10 rounded"></div></div>}>
-        <RVWeather />
+      <Suspense fallback={<RouteSkeleton type="content" />}>
+        <RouteTransition>
+          <RVWeather />
+        </RouteTransition>
       </Suspense>
     ),
   },
   {
     path: "/storage-facilities",
     element: (
-      <Suspense fallback={<div className="min-h-screen bg-deeper-background flex items-center justify-center"><div className="animate-pulse h-64 w-full max-w-6xl bg-gray-200/10 rounded"></div></div>}>
-        <StorageFacilities />
+      <Suspense fallback={<RouteSkeleton type="content" />}>
+        <RouteTransition>
+          <StorageFacilities />
+        </RouteTransition>
       </Suspense>
     ),
   },
   {
     path: "/storage-preparation-checklist",
     element: (
-      <Suspense fallback={<div className="min-h-screen bg-deeper-background flex items-center justify-center"><div className="animate-pulse h-64 w-full max-w-6xl bg-gray-200/10 rounded"></div></div>}>
-        <StoragePreparationChecklist />
+      <Suspense fallback={<RouteSkeleton type="content" />}>
+        <RouteTransition>
+          <StoragePreparationChecklist />
+        </RouteTransition>
       </Suspense>
     ),
   },
@@ -84,56 +90,70 @@ const utilityRoutes = [
   {
     path: "/troubleshooting",
     element: (
-      <Suspense fallback={<div className="min-h-screen bg-deeper-background flex items-center justify-center"><div className="animate-pulse h-64 w-full max-w-6xl bg-gray-200/10 rounded"></div></div>}>
-        <Troubleshooting />
+      <Suspense fallback={<RouteSkeleton type="content" />}>
+        <RouteTransition>
+          <Troubleshooting />
+        </RouteTransition>
       </Suspense>
     ),
   },
   {
     path: "/voice-control",
     element: (
-      <Suspense fallback={<div className="min-h-screen bg-deeper-background flex items-center justify-center"><div className="animate-pulse h-64 w-full max-w-6xl bg-gray-200/10 rounded"></div></div>}>
-        <VoiceControl />
+      <Suspense fallback={<RouteSkeleton type="content" />}>
+        <RouteTransition>
+          <VoiceControl />
+        </RouteTransition>
       </Suspense>
     ),
   },
   {
     path: "/account",
     element: (
-      <Suspense fallback={<div className="min-h-screen bg-deeper-background flex items-center justify-center"><div className="animate-pulse h-64 w-full max-w-6xl bg-gray-200/10 rounded"></div></div>}>
-        <AccountPage />
+      <Suspense fallback={<RouteSkeleton type="content" />}>
+        <RouteTransition>
+          <AccountPage />
+        </RouteTransition>
       </Suspense>
     ),
   },
   {
     path: "/rv-emergency-center",
     element: (
-      <Suspense fallback={<div className="min-h-screen bg-deeper-background flex items-center justify-center"><div className="animate-pulse h-64 w-full max-w-6xl bg-gray-200/10 rounded"></div></div>}>
-        <RVEmergencyCenter />
+      <Suspense fallback={<RouteSkeleton type="content" />}>
+        <RouteTransition>
+          <RVEmergencyCenter />
+        </RouteTransition>
       </Suspense>
     ),
   },
   {
     path: "/solar-power-guide",
     element: (
-      <Suspense fallback={<div className="min-h-screen bg-deeper-background flex items-center justify-center"><div className="animate-pulse h-64 w-full max-w-6xl bg-gray-200/10 rounded"></div></div>}>
-        <SolarPowerGuide />
+      <Suspense fallback={<RouteSkeleton type="content" />}>
+        <RouteTransition>
+          <SolarPowerGuide />
+        </RouteTransition>
       </Suspense>
     ),
   },
   {
     path: "/rv-apps-hub",
     element: (
-      <Suspense fallback={<div className="min-h-screen bg-deeper-background flex items-center justify-center"><div className="animate-pulse h-64 w-full max-w-6xl bg-gray-200/10 rounded"></div></div>}>
-        <RVAppsHub />
+      <Suspense fallback={<RouteSkeleton type="content" />}>
+        <RouteTransition>
+          <RVAppsHub />
+        </RouteTransition>
       </Suspense>
     ),
   },
   {
     path: "/admin/perf",
     element: (
-      <Suspense fallback={<div className="min-h-screen bg-deeper-background flex items-center justify-center"><div className="animate-pulse h-64 w-full max-w-6xl bg-gray-200/10 rounded"></div></div>}>
-        <PerformanceDashboard />
+      <Suspense fallback={<RouteSkeleton type="content" />}>
+        <RouteTransition>
+          <PerformanceDashboard />
+        </RouteTransition>
       </Suspense>
     ),
   },
