@@ -13,12 +13,20 @@ const CompareModels = lazy(() => import("@/pages/models/CompareModels"));
 export const modelRoutes: RouteObject[] = [
   {
     path: "/models",
-    element: <Models />,
+    element: (
+      <Suspense fallback={<div className="min-h-screen bg-deeper-background flex items-center justify-center"><div className="animate-pulse h-64 w-full max-w-6xl bg-gray-200/10 rounded"></div></div>}>
+        <Models />
+      </Suspense>
+    ),
     errorElement: <ErrorPage />,
   },
   {
     path: "/models/compact",
-    element: <CompactModel />,
+    element: (
+      <Suspense fallback={<div className="min-h-screen bg-deeper-background flex items-center justify-center"><div className="animate-pulse h-64 w-full max-w-6xl bg-gray-200/10 rounded"></div></div>}>
+        <CompactModel />
+      </Suspense>
+    ),
     errorElement: <ErrorPage />,
   },
   {
@@ -28,7 +36,11 @@ export const modelRoutes: RouteObject[] = [
   },
   {
     path: "/models/luxury",
-    element: <LuxuryModel />,
+    element: (
+      <Suspense fallback={<div className="min-h-screen bg-deeper-background flex items-center justify-center"><div className="animate-pulse h-64 w-full max-w-6xl bg-gray-200/10 rounded"></div></div>}>
+        <LuxuryModel />
+      </Suspense>
+    ),
     errorElement: <ErrorPage />,
   },
   {
@@ -43,7 +55,11 @@ export const modelRoutes: RouteObject[] = [
   },
   {
     path: "/models/adventure",
-    element: <AdventureModel />,
+    element: (
+      <Suspense fallback={<div className="min-h-screen bg-deeper-background flex items-center justify-center"><div className="animate-pulse h-64 w-full max-w-6xl bg-gray-200/10 rounded"></div></div>}>
+        <AdventureModel />
+      </Suspense>
+    ),
     errorElement: <ErrorPage />,
   },
   {
@@ -53,7 +69,11 @@ export const modelRoutes: RouteObject[] = [
   },
   {
     path: "/models/compare",
-    element: <CompareModels />,
+    element: (
+      <Suspense fallback={<div className="min-h-screen bg-deeper-background flex items-center justify-center"><div className="animate-pulse h-64 w-full max-w-6xl bg-gray-200/10 rounded"></div></div>}>
+        <CompareModels />
+      </Suspense>
+    ),
     errorElement: <ErrorPage />,
   },
   {

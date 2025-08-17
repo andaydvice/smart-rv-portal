@@ -22,73 +22,129 @@ const RemoteControl = lazy(() => import("@/pages/features/RemoteControl"));
 export const featureRoutes: RouteObject[] = [
   {
     path: "/features",
-    element: <Features />,
+    element: (
+      <Suspense fallback={<div className="min-h-screen bg-deeper-background flex items-center justify-center"><div className="animate-pulse h-64 w-full max-w-6xl bg-gray-200/10 rounded"></div></div>}>
+        <Features />
+      </Suspense>
+    ),
     errorElement: <ErrorPage />,
   },
   // Feature pages
   {
     path: "/features/audio-system",
-    element: <AudioSystem />,
+    element: (
+      <Suspense fallback={<div className="min-h-screen bg-deeper-background flex items-center justify-center"><div className="animate-pulse h-64 w-full max-w-6xl bg-gray-200/10 rounded"></div></div>}>
+        <AudioSystem />
+      </Suspense>
+    ),
     errorElement: <ErrorPage />,
   },
   {
     path: "/features/smart-tv",
-    element: <SmartTV />,
+    element: (
+      <Suspense fallback={<div className="min-h-screen bg-deeper-background flex items-center justify-center"><div className="animate-pulse h-64 w-full max-w-6xl bg-gray-200/10 rounded"></div></div>}>
+        <SmartTV />
+      </Suspense>
+    ),
     errorElement: <ErrorPage />,
   },
   {
     path: "/features/smart-kitchen",
-    element: <SmartKitchen />,
+    element: (
+      <Suspense fallback={<div className="min-h-screen bg-deeper-background flex items-center justify-center"><div className="animate-pulse h-64 w-full max-w-6xl bg-gray-200/10 rounded"></div></div>}>
+        <SmartKitchen />
+      </Suspense>
+    ),
     errorElement: <ErrorPage />,
   },
   {
     path: "/features/power-management",
-    element: <PowerManagement />,
+    element: (
+      <Suspense fallback={<div className="min-h-screen bg-deeper-background flex items-center justify-center"><div className="animate-pulse h-64 w-full max-w-6xl bg-gray-200/10 rounded"></div></div>}>
+        <PowerManagement />
+      </Suspense>
+    ),
     errorElement: <ErrorPage />,
   },
   {
     path: "/features/internet-connectivity",
-    element: <InternetConnectivity />,
+    element: (
+      <Suspense fallback={<div className="min-h-screen bg-deeper-background flex items-center justify-center"><div className="animate-pulse h-64 w-full max-w-6xl bg-gray-200/10 rounded"></div></div>}>
+        <InternetConnectivity />
+      </Suspense>
+    ),
     errorElement: <ErrorPage />,
   },
   {
     path: "/features/navigation-system",
-    element: <NavigationSystem />,
+    element: (
+      <Suspense fallback={<div className="min-h-screen bg-deeper-background flex items-center justify-center"><div className="animate-pulse h-64 w-full max-w-6xl bg-gray-200/10 rounded"></div></div>}>
+        <NavigationSystem />
+      </Suspense>
+    ),
     errorElement: <ErrorPage />,
   },
   {
     path: "/features/security-system",
-    element: <SecuritySystem />,
+    element: (
+      <Suspense fallback={<div className="min-h-screen bg-deeper-background flex items-center justify-center"><div className="animate-pulse h-64 w-full max-w-6xl bg-gray-200/10 rounded"></div></div>}>
+        <SecuritySystem />
+      </Suspense>
+    ),
     errorElement: <ErrorPage />,
   },
   {
     path: "/features/automated-driving",
-    element: <AutomatedDriving />,
+    element: (
+      <Suspense fallback={<div className="min-h-screen bg-deeper-background flex items-center justify-center"><div className="animate-pulse h-64 w-full max-w-6xl bg-gray-200/10 rounded"></div></div>}>
+        <AutomatedDriving />
+      </Suspense>
+    ),
     errorElement: <ErrorPage />,
   },
   {
     path: "/features/water-systems",
-    element: <WaterSystems />,
+    element: (
+      <Suspense fallback={<div className="min-h-screen bg-deeper-background flex items-center justify-center"><div className="animate-pulse h-64 w-full max-w-6xl bg-gray-200/10 rounded"></div></div>}>
+        <WaterSystems />
+      </Suspense>
+    ),
     errorElement: <ErrorPage />,
   },
   {
     path: "/features/smart-automation",
-    element: <SmartAutomation />,
+    element: (
+      <Suspense fallback={<div className="min-h-screen bg-deeper-background flex items-center justify-center"><div className="animate-pulse h-64 w-full max-w-6xl bg-gray-200/10 rounded"></div></div>}>
+        <SmartAutomation />
+      </Suspense>
+    ),
     errorElement: <ErrorPage />,
   },
   {
     path: "/features/climate-control",
-    element: <ClimateControl />,
+    element: (
+      <Suspense fallback={<div className="min-h-screen bg-deeper-background flex items-center justify-center"><div className="animate-pulse h-64 w-full max-w-6xl bg-gray-200/10 rounded"></div></div>}>
+        <ClimateControl />
+      </Suspense>
+    ),
     errorElement: <ErrorPage />,
   },
   {
     path: "/features/entertainment",
-    element: <Entertainment />,
+    element: (
+      <Suspense fallback={<div className="min-h-screen bg-deeper-background flex items-center justify-center"><div className="animate-pulse h-64 w-full max-w-6xl bg-gray-200/10 rounded"></div></div>}>
+        <Entertainment />
+      </Suspense>
+    ),
     errorElement: <ErrorPage />,
   },
   {
     path: "/features/remote-control",
-    element: <RemoteControl />,
+    element: (
+      <Suspense fallback={<div className="min-h-screen bg-deeper-background flex items-center justify-center"><div className="animate-pulse h-64 w-full max-w-6xl bg-gray-200/10 rounded"></div></div>}>
+        <RemoteControl />
+      </Suspense>
+    ),
     errorElement: <ErrorPage />,
   },
   // Category redirects
