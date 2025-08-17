@@ -3,7 +3,7 @@ import React from 'react';
 
 const NavigationHint: React.FC = () => {
   return (
-    <div className="text-white bg-[#F97316] px-3 py-2 rounded-md text-sm shadow-md border-2 border-white/20 animate-pulse font-medium flex items-center gap-2 max-w-[280px]">
+    <div className="text-white bg-[#F97316] px-4 py-3 rounded-md text-sm shadow-md border-2 border-white/20 animate-pulse font-medium flex items-start gap-3 min-h-fit w-auto">
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-move shrink-0">
         <polyline points="5 9 2 12 5 15" />
         <polyline points="9 5 12 2 15 5" />
