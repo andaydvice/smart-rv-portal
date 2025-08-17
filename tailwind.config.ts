@@ -25,26 +25,52 @@ export default {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         primary: {
-          DEFAULT: "#1A1A1A",
-          foreground: "#FFFFFF",
+          DEFAULT: "hsl(var(--primary))",
+          foreground: "hsl(var(--primary-foreground))",
         },
         secondary: {
-          DEFAULT: "rgba(26, 31, 46, 0.95)",
-          foreground: "#E2E8FF",
+          DEFAULT: "hsl(var(--secondary))",
+          foreground: "hsl(var(--secondary-foreground))",
+        },
+        destructive: {
+          DEFAULT: "hsl(var(--destructive))",
+          foreground: "hsl(var(--destructive-foreground))",
         },
         muted: {
-          DEFAULT: "#F0F0F0",
-          foreground: "#666666",
+          DEFAULT: "hsl(var(--muted))",
+          foreground: "hsl(var(--muted-foreground))",
         },
         accent: {
-          DEFAULT: "#FAFAFA",
-          foreground: "#1A1A1A",
+          DEFAULT: "hsl(var(--accent))",
+          foreground: "hsl(var(--accent-foreground))",
+        },
+        popover: {
+          DEFAULT: "hsl(var(--popover))",
+          foreground: "hsl(var(--popover-foreground))",
+        },
+        card: {
+          DEFAULT: "hsl(var(--card))",
+          foreground: "hsl(var(--card-foreground))",
         },
         connectivity: {
-          bg: "#1B2028",
-          accent: "#5B9BD5",
-          darkBg: "#151A22"
+          bg: "210 18 13", // HSL for #1B2028
+          accent: "211 52 59", // HSL for #5B9BD5
+          darkBg: "216 23 11" // HSL for #151A22
         }
+      },
+      spacing: {
+        'safe-top': 'var(--mobile-safe-area-top)',
+        'safe-bottom': 'var(--mobile-safe-area-bottom)',
+        'safe-left': 'var(--mobile-safe-area-left)',
+        'safe-right': 'var(--mobile-safe-area-right)',
+      },
+      minHeight: {
+        'touch': '44px',
+        'touch-large': '48px',
+      },
+      minWidth: {
+        'touch': '44px',
+        'touch-large': '48px',
       },
       borderRadius: {
         lg: "1rem",
