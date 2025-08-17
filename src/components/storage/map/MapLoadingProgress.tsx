@@ -93,12 +93,17 @@ const MapLoadingProgress: React.FC<MapLoadingProgressProps> = ({
         <div className="w-full space-y-2">
           <Progress 
             value={normalizedPercent} 
-            className="h-2 w-full bg-gray-700"
+            className="h-2 w-full bg-muted"
           />
-          <div className="flex justify-between items-center text-sm text-gray-300">
-            <span>Loading resources...</span>
+          <div className="flex justify-between items-center text-sm text-muted-foreground">
+            <span>Loading map resources...</span>
             <span className="font-medium">{Math.round(normalizedPercent)}%</span>
           </div>
+          {normalizedPercent < 100 && (
+            <div className="text-xs text-muted-foreground text-center">
+              Estimated time: {Math.ceil((100 - normalizedPercent) / 10)}s
+            </div>
+          )}
         </div>
       </div>
     </div>

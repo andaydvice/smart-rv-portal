@@ -1,7 +1,8 @@
 
 import React from 'react';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { AlertCircle, Loader2, Search } from 'lucide-react';
+import { AlertCircle, Search } from 'lucide-react';
+import { ProgressiveLoader } from '@/components/ui/ProgressiveLoader';
 
 interface LoadingStateDisplayProps {
   isLoading: boolean;
@@ -17,10 +18,17 @@ const LoadingStateDisplay: React.FC<LoadingStateDisplayProps> = ({
   if (isLoading) {
     return (
       <div className="flex items-center justify-center h-[600px]">
-        <div className="flex flex-col items-center space-y-4">
-          <Loader2 className="w-8 h-8 animate-spin text-blue-500" />
-          <p className="text-gray-400">Loading storage facilities...</p>
-        </div>
+        <ProgressiveLoader
+          isLoading={true}
+          variant="detailed"
+          estimatedTime={3000}
+          stages={[
+            { id: 'search', label: 'Searching storage facilities...', duration: 800, weight: 0.3 },
+            { id: 'filter', label: 'Applying filters...', duration: 600, weight: 0.2 },
+            { id: 'map', label: 'Loading map data...', duration: 900, weight: 0.3 },
+            { id: 'results', label: 'Preparing results...', duration: 700, weight: 0.2 }
+          ]}
+        />
       </div>
     );
   }
