@@ -687,6 +687,8 @@ export const generateSitemap = (): string => {
  * Generate robots.txt content
  */
 export const generateRobotsTxt = (): string => {
+  const currentDate = new Date().toISOString().split('T')[0];
+  
   return `User-agent: *
 Allow: /
 
@@ -699,5 +701,44 @@ Disallow: /search
 Sitemap: https://rv-tech-hub.lovable.app/sitemap.xml
 
 # Crawl delay for polite crawling
-Crawl-delay: 1`;
+Crawl-delay: 1
+
+# Last updated: ${currentDate}`;
+};
+
+/**
+ * Generate RSS feed content
+ */
+export const generateRSSFeed = (): string => {
+  const baseUrl = 'https://rv-tech-hub.lovable.app';
+  const currentDate = new Date().toISOString();
+  
+  // Filter pages that would be good for RSS (features, models, tools)
+  const rssPages = Object.values(pageMetadata).filter(page => 
+    page.path.startsWith('/features/') || 
+    page.path.startsWith('/models/') || 
+    page.path.startsWith('/tools/')
+  );
+
+  const items = rssPages.map(page => `
+    <item>
+      <title>${page.title}</title>
+      <link>${baseUrl}${page.path}</link>
+      <description>${page.description}</description>
+      <pubDate>${new Date(page.lastModified).toUTCString()}</pubDate>
+      <guid>${baseUrl}${page.path}</guid>
+    </item>`).join('');
+
+  return `<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Smart RV Systems - Latest Updates</title>
+    <link>${baseUrl}</link>
+    <description>Latest updates on smart RV technology, systems, and innovations</description>
+    <language>en-us</language>
+    <lastBuildDate>${currentDate}</lastBuildDate>
+    <atom:link href="${baseUrl}/rss.xml" rel="self" type="application/rss+xml"/>
+    ${items}
+  </channel>
+</rss>`;
 };

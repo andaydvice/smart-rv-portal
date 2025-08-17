@@ -29,7 +29,7 @@ const tempJsPath = join(__dirname, 'temp-static-generator.js');
 writeFileSync(tempJsPath, staticGeneratorContent);
 
 // Import the functions
-const { pageMetadata, generateStaticHTML, generateSitemap, generateRobotsTxt } = 
+const { pageMetadata, generateStaticHTML, generateSitemap, generateRobotsTxt, generateRSSFeed } = 
   await import(tempJsPath).catch(() => {
     console.error('Error importing static generator functions');
     process.exit(1);
@@ -48,6 +48,36 @@ function getFileModTime(filePath) {
 }
 
 /**
+ * Update page metadata with actual file modification times
+ */
+function updatePageMetadataWithFileTimes() {
+  const srcDir = join(projectRoot, 'src');
+  
+  Object.keys(pageMetadata).forEach(path => {
+    let filePath;
+    
+    // Map routes to likely source files
+    if (path === '/') {
+      filePath = join(srcDir, 'App.tsx');
+    } else if (path.startsWith('/models/')) {
+      filePath = join(srcDir, 'components/models');
+    } else if (path.startsWith('/features/')) {
+      filePath = join(srcDir, 'components/features');
+    } else if (path.startsWith('/tools/')) {
+      filePath = join(srcDir, 'components/tools');
+    } else {
+      filePath = join(srcDir, 'pages');
+    }
+    
+    // Get modification time and update metadata
+    if (existsSync(filePath)) {
+      const modTime = getFileModTime(filePath);
+      pageMetadata[path].lastModified = modTime;
+    }
+  });
+}
+
+/**
  * Generate static HTML files for all routes
  */
 function generateStaticFiles() {
@@ -57,6 +87,9 @@ function generateStaticFiles() {
   if (!existsSync(distDir)) {
     mkdirSync(distDir, { recursive: true });
   }
+
+  // Update metadata with actual file modification times
+  updatePageMetadataWithFileTimes();
 
   // Generate static HTML for each page
   Object.keys(pageMetadata).forEach(path => {
@@ -84,6 +117,11 @@ function generateStaticFiles() {
   const robots = generateRobotsTxt();
   writeFileSync(join(distDir, 'robots.txt'), robots);
   console.log('✅ Generated: robots.txt');
+
+  // Generate RSS feed
+  const rss = generateRSSFeed();
+  writeFileSync(join(distDir, 'rss.xml'), rss);
+  console.log('✅ Generated: rss.xml');
 
   // Clean up temp file
   try {
