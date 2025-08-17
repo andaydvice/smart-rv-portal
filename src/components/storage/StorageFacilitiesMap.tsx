@@ -184,9 +184,106 @@ const StorageFacilitiesMap: React.FC<StorageFacilitiesMapProps> = ({ onSelectFea
     };
   };
 
+  const [showFilters, setShowFilters] = useState(false);
+
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 min-h-[800px] map-content-wrapper">
-      <div className="lg:col-span-4">
+    <div className="flex flex-col space-y-4">
+      {/* Mobile-first: Map container shows first */}
+      <div className="order-1">
+        {/* Navigation hint and map toggle button */}
+        <div className="flex justify-between items-center mb-4">
+          <NavigationHint />
+          <div className="flex items-center gap-2">
+            <MapToggleButton 
+              useGoogleMaps={useGoogleMaps} 
+              toggleMapView={toggleMapView} 
+            />
+            {/* Mobile filter toggle */}
+            <Button
+              variant="outline"
+              size="sm"
+              className="lg:hidden bg-[#131a2a] text-[#5B9BD5] hover:bg-[#1d2739] border-gray-700"
+              onClick={() => setShowFilters(!showFilters)}
+            >
+              {showFilters ? 'Hide Filters' : 'Show Filters'}
+            </Button>
+          </div>
+        </div>
+        
+        {/* Warning message when no markers are visible - only show when check is completed */}
+        {noMarkersForState && markerCheckCompleted && markersCount === 0 && (
+          <Alert variant="default" className="bg-amber-900/30 border-amber-800 mb-4">
+            <AlertTriangle className="h-4 w-4 text-amber-400" />
+            <AlertDescription className="text-amber-200">
+              No markers visible for {getStateDisplayInfo(noMarkersForState).display}
+              {getStateDisplayInfo(noMarkersForState).abbr}. The data is loaded but markers may not be displaying correctly.
+            </AlertDescription>
+          </Alert>
+        )}
+        
+        {/* Map view container - mobile optimized height */}
+        <MapViewContainer 
+          useGoogleMaps={useGoogleMaps}
+          facilities={allFacilities || []}
+          recentlyViewedIds={recentlyViewedIds}
+          onMarkerClick={onMarkerClick}
+          highlightedFacility={highlightedFacility}
+          googleMapsKey={googleMapsKey}
+          mapToken={mapToken}
+          mapTokenError={mapTokenError}
+          selectedState={filters.selectedState}
+        />
+      </div>
+
+      {/* Desktop layout: Side-by-side */}
+      <div className="hidden lg:grid lg:grid-cols-12 gap-4 order-2">
+        <div className="lg:col-span-4">
+          <div className="space-y-4">
+            <FilterPanel onFilterChange={handleFilterChange} />
+            <Card className="bg-[#080F1F] border-gray-700">
+              <LoadingStateDisplay
+                isLoading={isLoading}
+                error={error}
+                hasResults={!!(allFacilities && allFacilities.length > 0)}
+              />
+              
+              {allFacilities && allFacilities.length > 0 && (
+                <FacilityList
+                  facilities={allFacilities}
+                  highlightedFacility={highlightedFacility}
+                  onFacilityClick={onMarkerClick}
+                  scrollAreaRef={scrollAreaRef}
+                  renderFacilityAction={(facilityId) => (
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="ml-2 bg-[#131a2a] text-[#5B9BD5] hover:bg-[#1d2739] border-gray-700"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleFeatureLocation(facilityId);
+                      }}
+                      title="Set as featured location"
+                    >
+                      <Star className="h-4 w-4" />
+                    </Button>
+                  )}
+                />
+              )}
+            </Card>
+          </div>
+        </div>
+        
+        <div className="lg:col-span-8">
+          <RecentlyViewedFacilities 
+            facilities={recentlyViewed}
+            onFacilityClick={onMarkerClick}
+            className="h-[180px]"
+          />
+        </div>
+      </div>
+
+      {/* Mobile layout: Collapsible filters and list */}
+      <div className={`lg:hidden order-3 ${showFilters ? 'block' : 'hidden'}`}>
         <div className="space-y-4">
           <FilterPanel onFilterChange={handleFilterChange} />
           <Card className="bg-[#080F1F] border-gray-700">
@@ -221,43 +318,9 @@ const StorageFacilitiesMap: React.FC<StorageFacilitiesMapProps> = ({ onSelectFea
           </Card>
         </div>
       </div>
-      
-      <div className="lg:col-span-8 flex flex-col space-y-4">
-        {/* Navigation hint and map toggle button */}
-        <div className="flex justify-between items-center">
-          <NavigationHint />
-          <MapToggleButton 
-            useGoogleMaps={useGoogleMaps} 
-            toggleMapView={toggleMapView} 
-          />
-        </div>
-        
-        {/* Warning message when no markers are visible - only show when check is completed */}
-        {noMarkersForState && markerCheckCompleted && markersCount === 0 && (
-          <Alert variant="default" className="bg-amber-900/30 border-amber-800">
-            <AlertTriangle className="h-4 w-4 text-amber-400" />
-            <AlertDescription className="text-amber-200">
-              No markers visible for {getStateDisplayInfo(noMarkersForState).display}
-              {getStateDisplayInfo(noMarkersForState).abbr}. The data is loaded but markers may not be displaying correctly.
-            </AlertDescription>
-          </Alert>
-        )}
-        
-        {/* Dev-only diagnostics */}
-        
-        {/* Map view container */}
-        <MapViewContainer 
-          useGoogleMaps={useGoogleMaps}
-          facilities={allFacilities || []}
-          recentlyViewedIds={recentlyViewedIds}
-          onMarkerClick={onMarkerClick}
-          highlightedFacility={highlightedFacility}
-          googleMapsKey={googleMapsKey}
-          mapToken={mapToken}
-          mapTokenError={mapTokenError}
-          selectedState={filters.selectedState}
-        />
-        
+
+      {/* Mobile recently viewed - always visible */}
+      <div className="lg:hidden order-4">
         <RecentlyViewedFacilities 
           facilities={recentlyViewed}
           onFacilityClick={onMarkerClick}

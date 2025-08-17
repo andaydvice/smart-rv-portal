@@ -39,7 +39,7 @@ const GoogleMapFacilitiesView: React.FC<GoogleMapFacilitiesViewProps> = ({
   };
 
   return (
-    <Card className={`h-[650px] bg-[#080F1F] relative overflow-hidden border-gray-700 ${className}`}>
+    <Card className={`h-[400px] md:h-[650px] bg-[#080F1F] relative overflow-hidden border-gray-700 ${className}`}>
       {!apiKey ? (
         <Alert variant="destructive" className="m-4">
           <AlertCircle className="h-4 w-4" />

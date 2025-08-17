@@ -44,7 +44,7 @@ const MapViewContainer: React.FC<MapViewContainerProps> = ({
           selectedState={selectedState}
         />
       ) : (
-        <Card className="h-[650px] bg-[#080F1F] relative overflow-visible border-gray-700 map-container">
+        <Card className="h-[400px] md:h-[650px] bg-[#080F1F] relative overflow-visible border-gray-700 map-container">
           {(!mapToken) ? (
             <Alert variant={mapTokenError ? "default" : "destructive"} className="m-4">
               <AlertCircle className="h-4 w-4" />

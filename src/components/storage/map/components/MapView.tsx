@@ -36,7 +36,8 @@ const MapView: React.FC<MapViewProps> = ({
         className="w-full h-full rounded-lg overflow-visible" 
         style={{ 
           overflow: 'visible', 
-          minHeight: '650px', 
+          minHeight: '400px',
+          height: 'min(650px, 70vh)',
           contain: 'layout paint',
           isolation: 'isolate'
         }}
