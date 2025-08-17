@@ -20,35 +20,67 @@ const PerformanceDashboard = lazy(() => import("../pages/admin/PerformanceDashbo
 const utilityRoutes = [
   {
     path: "/calculators",
-    element: <Calculators />,
+    element: (
+      <Suspense fallback={<div className="min-h-screen bg-deeper-background flex items-center justify-center"><div className="animate-pulse h-64 w-full max-w-6xl bg-gray-200/10 rounded"></div></div>}>
+        <Calculators />
+      </Suspense>
+    ),
   },
   {
     path: "/documentation",
-    element: <Documentation />,
+    element: (
+      <Suspense fallback={<div className="min-h-screen bg-deeper-background flex items-center justify-center"><div className="animate-pulse h-64 w-full max-w-6xl bg-gray-200/10 rounded"></div></div>}>
+        <Documentation />
+      </Suspense>
+    ),
   },
   {
     path: "/weather",
-    element: <WeatherDashboard />,
+    element: (
+      <Suspense fallback={<div className="min-h-screen bg-deeper-background flex items-center justify-center"><div className="animate-pulse h-64 w-full max-w-6xl bg-gray-200/10 rounded"></div></div>}>
+        <WeatherDashboard />
+      </Suspense>
+    ),
   },
   {
     path: "/rv-weather",
-    element: <RVWeather />,
+    element: (
+      <Suspense fallback={<div className="min-h-screen bg-deeper-background flex items-center justify-center"><div className="animate-pulse h-64 w-full max-w-6xl bg-gray-200/10 rounded"></div></div>}>
+        <RVWeather />
+      </Suspense>
+    ),
   },
   {
     path: "/storage-facilities",
-    element: <StorageFacilities />,
+    element: (
+      <Suspense fallback={<div className="min-h-screen bg-deeper-background flex items-center justify-center"><div className="animate-pulse h-64 w-full max-w-6xl bg-gray-200/10 rounded"></div></div>}>
+        <StorageFacilities />
+      </Suspense>
+    ),
   },
   {
     path: "/storage-preparation-checklist",
-    element: <StoragePreparationChecklist />,
+    element: (
+      <Suspense fallback={<div className="min-h-screen bg-deeper-background flex items-center justify-center"><div className="animate-pulse h-64 w-full max-w-6xl bg-gray-200/10 rounded"></div></div>}>
+        <StoragePreparationChecklist />
+      </Suspense>
+    ),
   },
   {
     path: "/contact",
-    element: <Contact />,
+    element: (
+      <Suspense fallback={<div className="min-h-screen bg-deeper-background flex items-center justify-center"><div className="animate-pulse h-64 w-full max-w-6xl bg-gray-200/10 rounded"></div></div>}>
+        <Contact />
+      </Suspense>
+    ),
   },
   {
     path: "/troubleshooting",
-    element: <Troubleshooting />,
+    element: (
+      <Suspense fallback={<div className="min-h-screen bg-deeper-background flex items-center justify-center"><div className="animate-pulse h-64 w-full max-w-6xl bg-gray-200/10 rounded"></div></div>}>
+        <Troubleshooting />
+      </Suspense>
+    ),
   },
   {
     path: "/voice-control",
@@ -60,23 +92,43 @@ const utilityRoutes = [
   },
   {
     path: "/account",
-    element: <AccountPage />,
+    element: (
+      <Suspense fallback={<div className="min-h-screen bg-deeper-background flex items-center justify-center"><div className="animate-pulse h-64 w-full max-w-6xl bg-gray-200/10 rounded"></div></div>}>
+        <AccountPage />
+      </Suspense>
+    ),
   },
   {
     path: "/rv-emergency-center",
-    element: <RVEmergencyCenter />,
+    element: (
+      <Suspense fallback={<div className="min-h-screen bg-deeper-background flex items-center justify-center"><div className="animate-pulse h-64 w-full max-w-6xl bg-gray-200/10 rounded"></div></div>}>
+        <RVEmergencyCenter />
+      </Suspense>
+    ),
   },
   {
     path: "/solar-power-guide",
-    element: <SolarPowerGuide />,
+    element: (
+      <Suspense fallback={<div className="min-h-screen bg-deeper-background flex items-center justify-center"><div className="animate-pulse h-64 w-full max-w-6xl bg-gray-200/10 rounded"></div></div>}>
+        <SolarPowerGuide />
+      </Suspense>
+    ),
   },
   {
     path: "/rv-apps-hub",
-    element: <RVAppsHub />,
+    element: (
+      <Suspense fallback={<div className="min-h-screen bg-deeper-background flex items-center justify-center"><div className="animate-pulse h-64 w-full max-w-6xl bg-gray-200/10 rounded"></div></div>}>
+        <RVAppsHub />
+      </Suspense>
+    ),
   },
   {
     path: "/admin/perf",
-    element: <PerformanceDashboard />,
+    element: (
+      <Suspense fallback={<div className="min-h-screen bg-deeper-background flex items-center justify-center"><div className="animate-pulse h-64 w-full max-w-6xl bg-gray-200/10 rounded"></div></div>}>
+        <PerformanceDashboard />
+      </Suspense>
+    ),
   },
 ];
 
