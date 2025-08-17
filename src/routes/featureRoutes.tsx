@@ -1,7 +1,7 @@
 
 import React, { lazy, Suspense } from "react";
 import { RouteObject, Navigate } from "react-router-dom";
-import { RouteSkeleton } from "@/components/ui/skeletons";
+import { MinimalLoader } from "@/components/ui/MinimalLoader";
 import { RouteTransition } from "@/components/ui/transitions/RouteTransition";
 import ErrorPage from "@/pages/ErrorPage";
 
@@ -57,7 +57,7 @@ export const featureRoutes: RouteObject[] = [
   {
     path: "/features/smart-kitchen",
     element: (
-      <Suspense fallback={<RouteSkeleton type="content" />}>
+      <Suspense fallback={<MinimalLoader />}>
         <RouteTransition>
           <SmartKitchen />
         </RouteTransition>
@@ -86,7 +86,7 @@ export const featureRoutes: RouteObject[] = [
   {
     path: "/features/navigation-system",
     element: (
-      <Suspense fallback={<RouteSkeleton type="content" />}>
+      <Suspense fallback={<MinimalLoader />}>
         <RouteTransition>
           <NavigationSystem />
         </RouteTransition>
@@ -97,7 +97,7 @@ export const featureRoutes: RouteObject[] = [
   {
     path: "/features/security-system",
     element: (
-      <Suspense fallback={<RouteSkeleton type="content" />}>
+      <Suspense fallback={<MinimalLoader />}>
         <RouteTransition>
           <SecuritySystem />
         </RouteTransition>
@@ -108,7 +108,7 @@ export const featureRoutes: RouteObject[] = [
   {
     path: "/features/automated-driving",
     element: (
-      <Suspense fallback={<RouteSkeleton type="content" />}>
+      <Suspense fallback={<MinimalLoader />}>
         <RouteTransition>
           <AutomatedDriving />
         </RouteTransition>
@@ -119,7 +119,7 @@ export const featureRoutes: RouteObject[] = [
   {
     path: "/features/water-systems",
     element: (
-      <Suspense fallback={<RouteSkeleton type="content" />}>
+      <Suspense fallback={<MinimalLoader />}>
         <RouteTransition>
           <WaterSystems />
         </RouteTransition>
@@ -130,7 +130,7 @@ export const featureRoutes: RouteObject[] = [
   {
     path: "/features/smart-automation",
     element: (
-      <Suspense fallback={<RouteSkeleton type="content" />}>
+      <Suspense fallback={<MinimalLoader />}>
         <RouteTransition>
           <SmartAutomation />
         </RouteTransition>
@@ -141,7 +141,7 @@ export const featureRoutes: RouteObject[] = [
   {
     path: "/features/climate-control",
     element: (
-      <Suspense fallback={<RouteSkeleton type="content" />}>
+      <Suspense fallback={<MinimalLoader />}>
         <RouteTransition>
           <ClimateControl />
         </RouteTransition>
@@ -152,7 +152,7 @@ export const featureRoutes: RouteObject[] = [
   {
     path: "/features/entertainment",
     element: (
-      <Suspense fallback={<RouteSkeleton type="content" />}>
+      <Suspense fallback={<MinimalLoader />}>
         <RouteTransition>
           <Entertainment />
         </RouteTransition>
@@ -163,7 +163,7 @@ export const featureRoutes: RouteObject[] = [
   {
     path: "/features/remote-control",
     element: (
-      <Suspense fallback={<RouteSkeleton type="content" />}>
+      <Suspense fallback={<MinimalLoader />}>
         <RouteTransition>
           <RemoteControl />
         </RouteTransition>

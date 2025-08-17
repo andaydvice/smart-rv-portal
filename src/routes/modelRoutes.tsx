@@ -1,7 +1,7 @@
 
 import React, { lazy, Suspense } from "react";
 import { RouteObject, Navigate } from "react-router-dom";
-import { RouteSkeleton } from "@/components/ui/skeletons";
+import { MinimalLoader } from "@/components/ui/MinimalLoader";
 import { RouteTransition } from "@/components/ui/transitions/RouteTransition";
 import ErrorPage from "@/pages/ErrorPage";
 
@@ -76,7 +76,7 @@ export const modelRoutes: RouteObject[] = [
   {
     path: "/models/compare",
     element: (
-      <Suspense fallback={<RouteSkeleton type="models" />}>
+      <Suspense fallback={<MinimalLoader />}>
         <RouteTransition>
           <CompareModels />
         </RouteTransition>

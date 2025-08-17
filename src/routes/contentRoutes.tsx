@@ -1,7 +1,7 @@
 
 import React, { lazy, Suspense } from "react";
 import { RouteObject } from "react-router-dom";
-import { RouteSkeleton } from "@/components/ui/skeletons";
+import { MinimalLoader } from "@/components/ui/MinimalLoader";
 import { RouteTransition } from "@/components/ui/transitions/RouteTransition";
 
 // High-traffic routes - synchronous imports for faster loading
@@ -22,7 +22,7 @@ const contentRoutes: RouteObject[] = [
   {
     path: "/technology",
     element: (
-      <Suspense fallback={<RouteSkeleton type="content" />}>
+      <Suspense fallback={<MinimalLoader />}>
         <RouteTransition>
           <Technology />
         </RouteTransition>
@@ -33,7 +33,7 @@ const contentRoutes: RouteObject[] = [
   {
     path: "/blog",
     element: (
-      <Suspense fallback={<RouteSkeleton type="content" />}>
+      <Suspense fallback={<MinimalLoader />}>
         <RouteTransition>
           <Blog />
         </RouteTransition>
@@ -44,7 +44,7 @@ const contentRoutes: RouteObject[] = [
   {
     path: "/blog/:slug",
     element: (
-      <Suspense fallback={<RouteSkeleton type="content" />}>
+      <Suspense fallback={<MinimalLoader />}>
         <RouteTransition>
           <BlogPost />
         </RouteTransition>
@@ -55,7 +55,7 @@ const contentRoutes: RouteObject[] = [
   {
     path: "/documentation",
     element: (
-      <Suspense fallback={<RouteSkeleton type="content" />}>
+      <Suspense fallback={<MinimalLoader />}>
         <RouteTransition>
           <Documentation />
         </RouteTransition>
@@ -66,7 +66,7 @@ const contentRoutes: RouteObject[] = [
   {
     path: "/documentation/complete",
     element: (
-      <Suspense fallback={<RouteSkeleton type="content" />}>
+      <Suspense fallback={<MinimalLoader />}>
         <RouteTransition>
           <CompleteDocumentation />
         </RouteTransition>

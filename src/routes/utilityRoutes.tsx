@@ -1,6 +1,6 @@
 
 import React, { lazy, Suspense } from "react";
-import { RouteSkeleton } from "@/components/ui/skeletons";
+import { MinimalLoader } from "@/components/ui/MinimalLoader";
 import { RouteTransition } from "@/components/ui/transitions/RouteTransition";
 
 // High-traffic routes - synchronous imports
@@ -52,7 +52,7 @@ const utilityRoutes = [
   {
     path: "/rv-weather",
     element: (
-      <Suspense fallback={<RouteSkeleton type="content" />}>
+      <Suspense fallback={<MinimalLoader />}>
         <RouteTransition>
           <RVWeather />
         </RouteTransition>
@@ -62,7 +62,7 @@ const utilityRoutes = [
   {
     path: "/storage-facilities",
     element: (
-      <Suspense fallback={<RouteSkeleton type="content" />}>
+      <Suspense fallback={<MinimalLoader />}>
         <RouteTransition>
           <StorageFacilities />
         </RouteTransition>
@@ -72,7 +72,7 @@ const utilityRoutes = [
   {
     path: "/storage-preparation-checklist",
     element: (
-      <Suspense fallback={<RouteSkeleton type="content" />}>
+      <Suspense fallback={<MinimalLoader />}>
         <RouteTransition>
           <StoragePreparationChecklist />
         </RouteTransition>
@@ -90,7 +90,7 @@ const utilityRoutes = [
   {
     path: "/troubleshooting",
     element: (
-      <Suspense fallback={<RouteSkeleton type="content" />}>
+      <Suspense fallback={<MinimalLoader />}>
         <RouteTransition>
           <Troubleshooting />
         </RouteTransition>
@@ -100,7 +100,7 @@ const utilityRoutes = [
   {
     path: "/voice-control",
     element: (
-      <Suspense fallback={<RouteSkeleton type="content" />}>
+      <Suspense fallback={<MinimalLoader />}>
         <RouteTransition>
           <VoiceControl />
         </RouteTransition>
@@ -110,7 +110,7 @@ const utilityRoutes = [
   {
     path: "/account",
     element: (
-      <Suspense fallback={<RouteSkeleton type="content" />}>
+      <Suspense fallback={<MinimalLoader />}>
         <RouteTransition>
           <AccountPage />
         </RouteTransition>
@@ -120,7 +120,7 @@ const utilityRoutes = [
   {
     path: "/rv-emergency-center",
     element: (
-      <Suspense fallback={<RouteSkeleton type="content" />}>
+      <Suspense fallback={<MinimalLoader />}>
         <RouteTransition>
           <RVEmergencyCenter />
         </RouteTransition>
@@ -130,7 +130,7 @@ const utilityRoutes = [
   {
     path: "/solar-power-guide",
     element: (
-      <Suspense fallback={<RouteSkeleton type="content" />}>
+      <Suspense fallback={<MinimalLoader />}>
         <RouteTransition>
           <SolarPowerGuide />
         </RouteTransition>
@@ -140,7 +140,7 @@ const utilityRoutes = [
   {
     path: "/rv-apps-hub",
     element: (
-      <Suspense fallback={<RouteSkeleton type="content" />}>
+      <Suspense fallback={<MinimalLoader />}>
         <RouteTransition>
           <RVAppsHub />
         </RouteTransition>
@@ -150,7 +150,7 @@ const utilityRoutes = [
   {
     path: "/admin/perf",
     element: (
-      <Suspense fallback={<RouteSkeleton type="content" />}>
+      <Suspense fallback={<MinimalLoader />}>
         <RouteTransition>
           <PerformanceDashboard />
         </RouteTransition>
