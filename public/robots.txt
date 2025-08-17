@@ -7,7 +7,7 @@ Disallow: /account
 Disallow: /search
 
 # Sitemap location
-Sitemap: https://yoursite.lovable.app/sitemap.xml
+Sitemap: https://rv-tech-hub.lovable.app/sitemap.xml
 
 # Crawl delay for polite crawling
 Crawl-delay: 1

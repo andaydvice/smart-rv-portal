@@ -1,12 +1,22 @@
 
 # Netlify configuration file
 
-# Redirect all routes to index.html for single-page application
+# Serve static files directly (sitemap, robots, assets)
+[[redirects]]
+  from = "/sitemap.xml"
+  to = "/sitemap.xml"
+  status = 200
+
+[[redirects]]
+  from = "/robots.txt"
+  to = "/robots.txt"
+  status = 200
+
+# Redirect all other routes to index.html for single-page application
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
-  force = true  # Make sure the redirect is forced
 
 # Specific redirects for compare models pages (high priority)
 [[redirects]]
@@ -73,6 +83,18 @@
   publish = "dist"
 
 # Add cache control for better performance
+[[headers]]
+  for = "/sitemap.xml"
+  [headers.values]
+    Content-Type = "application/xml"
+    Cache-Control = "public, max-age=3600"
+
+[[headers]]
+  for = "/robots.txt"
+  [headers.values]
+    Content-Type = "text/plain"
+    Cache-Control = "public, max-age=3600"
+
 [[headers]]
   for = "/*"
   [headers.values]
