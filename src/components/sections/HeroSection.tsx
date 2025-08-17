@@ -8,7 +8,7 @@ import { Container } from "@/components/ui/container";
 export const HeroSection = () => {
 
   return (
-    <section className="relative w-full min-h-[calc(100vh-4rem)] overflow-hidden mt-16">
+    <section className="relative w-full min-h-screen overflow-hidden -mt-16 pt-16">
       {/* Full width image container */}
       <div className="absolute inset-0 left-0 right-0">
         <img
@@ -29,7 +29,7 @@ export const HeroSection = () => {
       <Container className="relative z-10 h-full">
         <motion.div
           initial={false}
-          className="flex items-center justify-center h-[calc(100vh-4rem)] text-center"
+          className="flex items-center justify-center h-screen text-center"
         >
           <div className="space-y-8 max-w-3xl mx-auto">
             <motion.h1 
