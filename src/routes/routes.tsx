@@ -17,12 +17,20 @@ import contentRoutes from "./contentRoutes";
 export const routes: RouteObject[] = [
   {
     path: "/",
-    element: <Index />,
+    element: (
+      <Suspense fallback={<div className="min-h-screen bg-deeper-background flex items-center justify-center"><div className="animate-pulse h-64 w-full max-w-6xl bg-gray-200/10 rounded"></div></div>}>
+        <Index />
+      </Suspense>
+    ),
     errorElement: <ErrorPage />,
   },
   {
     path: "/search",
-    element: <SearchResults />,
+    element: (
+      <Suspense fallback={<div className="min-h-screen bg-deeper-background flex items-center justify-center"><div className="animate-pulse h-64 w-full max-w-6xl bg-gray-200/10 rounded"></div></div>}>
+        <SearchResults />
+      </Suspense>
+    ),
     errorElement: <ErrorPage />,
   },
   ...modelRoutes,
