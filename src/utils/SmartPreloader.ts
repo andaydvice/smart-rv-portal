@@ -171,19 +171,36 @@ class SmartPreloader {
    * Preload high-priority SEO routes
    */
   private preloadSEORoutes() {
+    // High-priority routes - now synchronous, so preload their assets
     const highPriorityRoutes = [
       '/',
       '/features',
       '/models',
-      '/technology',
-      '/about'
+      '/about',
+      '/products',
+      '/calculators',
+      '/contact',
+      '/pricing'
     ];
 
-    // Use idle time to preload high-priority routes
+    // Medium-priority routes for hover preloading
+    const mediumPriorityRoutes = [
+      '/blog',
+      '/documentation',
+      '/technology',
+      '/features/audio-system',
+      '/features/smart-tv',
+      '/models/compact',
+      '/models/luxury',
+      '/models/adventure'
+    ];
+
+    // Use idle time to preload high-priority route assets
     this.scheduleIdlePreloading(() => {
-      highPriorityRoutes.forEach(route => {
-        this.queuePreload(window.location.origin + route);
-      });
+      this.preloadRouteAssets();
+      
+      // Setup enhanced navigation hover preloading
+      this.setupNavigationHoverPreloading(mediumPriorityRoutes);
     });
   }
 
@@ -354,6 +371,44 @@ class SmartPreloader {
     resources.push(window.location.origin + pathname);
 
     this.preloadCriticalResources(resources);
+  }
+
+  /**
+   * Enhanced hover preloading specifically for navigation
+   */
+  private setupNavigationHoverPreloading(mediumPriorityRoutes: string[]) {
+    document.addEventListener('mouseover', (e) => {
+      const target = e.target as HTMLElement;
+      const link = target.closest('a[href]') as HTMLAnchorElement;
+      
+      if (link && this.isInternalLink(link.href)) {
+        const url = new URL(link.href).pathname;
+        
+        // Immediate preload for medium-priority routes on hover
+        if (mediumPriorityRoutes.includes(url)) {
+          this.queuePreload(link.href);
+        }
+      }
+    });
+  }
+
+  /**
+   * Preload assets specific to high-priority routes
+   */
+  private preloadRouteAssets() {
+    const routeAssets: Record<string, string[]> = {
+      '/calculators': ['/images/calculator-bg.webp'],
+      '/features': ['/images/features-hero.webp'],
+      '/models': ['/images/models-hero.webp'],
+      '/products': ['/images/products-hero.webp'],
+      '/contact': ['/images/contact-bg.webp']
+    };
+
+    Object.entries(routeAssets).forEach(([route, assets]) => {
+      assets.forEach(asset => {
+        this.preloadResource(asset, this.getResourceType(asset));
+      });
+    });
   }
 
   /**

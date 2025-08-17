@@ -1,10 +1,14 @@
 
 import React, { lazy, Suspense } from "react";
 import { RouteObject, Navigate } from "react-router-dom";
+import { RouteSkeleton } from "@/components/ui/skeletons";
+import { RouteTransition } from "@/components/ui/transitions/RouteTransition";
 import ErrorPage from "@/pages/ErrorPage";
 
-// Model pages (lazy)
-const Models = lazy(() => import("@/pages/Models"));
+// High-traffic routes - synchronous imports
+import Models from "@/pages/Models";
+
+// Model detail pages (lazy)
 const CompactModel = lazy(() => import("@/pages/models/CompactModel"));
 const LuxuryModel = lazy(() => import("@/pages/models/LuxuryModel"));
 const AdventureModel = lazy(() => import("@/pages/models/AdventureModel"));
@@ -14,17 +18,19 @@ export const modelRoutes: RouteObject[] = [
   {
     path: "/models",
     element: (
-      <Suspense fallback={<div className="min-h-screen bg-deeper-background flex items-center justify-center"><div className="animate-pulse h-64 w-full max-w-6xl bg-gray-200/10 rounded"></div></div>}>
+      <RouteTransition>
         <Models />
-      </Suspense>
+      </RouteTransition>
     ),
     errorElement: <ErrorPage />,
   },
   {
     path: "/models/compact",
     element: (
-      <Suspense fallback={<div className="min-h-screen bg-deeper-background flex items-center justify-center"><div className="animate-pulse h-64 w-full max-w-6xl bg-gray-200/10 rounded"></div></div>}>
-        <CompactModel />
+      <Suspense fallback={<RouteSkeleton type="models" />}>
+        <RouteTransition>
+          <CompactModel />
+        </RouteTransition>
       </Suspense>
     ),
     errorElement: <ErrorPage />,

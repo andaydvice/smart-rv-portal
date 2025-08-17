@@ -1,12 +1,17 @@
 
 import React, { lazy, Suspense } from "react";
+import { RouteSkeleton } from "@/components/ui/skeletons";
+import { RouteTransition } from "@/components/ui/transitions/RouteTransition";
 
-const Calculators = lazy(() => import("../pages/Calculators"));
+// High-traffic routes - synchronous imports
+import Calculators from "../pages/Calculators";
+import Contact from "../pages/Contact";
+
+// Less common routes - lazy loaded
 const Documentation = lazy(() => import("../pages/Documentation"));
 const WeatherDashboard = lazy(() => import("../pages/WeatherDashboard")); 
 const StorageFacilities = lazy(() => import("../pages/StorageFacilities"));
 const StoragePreparationChecklist = lazy(() => import("../pages/StoragePreparationChecklist"));
-const Contact = lazy(() => import("../pages/Contact"));
 const Troubleshooting = lazy(() => import("../pages/Troubleshooting"));
 
 const VoiceControl = lazy(() => import("../pages/VoiceControl"));
@@ -21,16 +26,18 @@ const utilityRoutes = [
   {
     path: "/calculators",
     element: (
-      <Suspense fallback={<div className="min-h-screen bg-deeper-background flex items-center justify-center"><div className="animate-pulse h-64 w-full max-w-6xl bg-gray-200/10 rounded"></div></div>}>
+      <RouteTransition>
         <Calculators />
-      </Suspense>
+      </RouteTransition>
     ),
   },
   {
     path: "/documentation",
     element: (
-      <Suspense fallback={<div className="min-h-screen bg-deeper-background flex items-center justify-center"><div className="animate-pulse h-64 w-full max-w-6xl bg-gray-200/10 rounded"></div></div>}>
-        <Documentation />
+      <Suspense fallback={<RouteSkeleton type="content" />}>
+        <RouteTransition>
+          <Documentation />
+        </RouteTransition>
       </Suspense>
     ),
   },
@@ -69,9 +76,9 @@ const utilityRoutes = [
   {
     path: "/contact",
     element: (
-      <Suspense fallback={<div className="min-h-screen bg-deeper-background flex items-center justify-center"><div className="animate-pulse h-64 w-full max-w-6xl bg-gray-200/10 rounded"></div></div>}>
+      <RouteTransition>
         <Contact />
-      </Suspense>
+      </RouteTransition>
     ),
   },
   {

@@ -1,10 +1,14 @@
 
 import React, { lazy, Suspense } from "react";
 import { RouteObject, Navigate } from "react-router-dom";
+import { RouteSkeleton } from "@/components/ui/skeletons";
+import { RouteTransition } from "@/components/ui/transitions/RouteTransition";
 import ErrorPage from "@/pages/ErrorPage";
 
-// Feature pages (lazy)
-const Features = lazy(() => import("@/pages/Features"));
+// High-traffic routes - synchronous imports
+import Features from "@/pages/Features";
+
+// Feature detail pages (lazy)
 const AudioSystem = lazy(() => import("@/pages/features/AudioSystem"));
 const SmartTV = lazy(() => import("@/pages/features/SmartTV"));
 const SmartKitchen = lazy(() => import("@/pages/features/SmartKitchen"));
@@ -23,9 +27,9 @@ export const featureRoutes: RouteObject[] = [
   {
     path: "/features",
     element: (
-      <Suspense fallback={<div className="min-h-screen bg-deeper-background flex items-center justify-center"><div className="animate-pulse h-64 w-full max-w-6xl bg-gray-200/10 rounded"></div></div>}>
+      <RouteTransition>
         <Features />
-      </Suspense>
+      </RouteTransition>
     ),
     errorElement: <ErrorPage />,
   },
@@ -33,8 +37,10 @@ export const featureRoutes: RouteObject[] = [
   {
     path: "/features/audio-system",
     element: (
-      <Suspense fallback={<div className="min-h-screen bg-deeper-background flex items-center justify-center"><div className="animate-pulse h-64 w-full max-w-6xl bg-gray-200/10 rounded"></div></div>}>
-        <AudioSystem />
+      <Suspense fallback={<RouteSkeleton type="features" />}>
+        <RouteTransition>
+          <AudioSystem />
+        </RouteTransition>
       </Suspense>
     ),
     errorElement: <ErrorPage />,
