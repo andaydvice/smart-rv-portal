@@ -8,7 +8,7 @@ import { Container } from "@/components/ui/container";
 export const HeroSection = () => {
 
   return (
-    <section className="relative w-full min-h-screen overflow-hidden mt-16">
+    <section className="relative w-full min-h-[calc(100vh-4rem)] overflow-hidden mt-16">
       {/* Full width image container */}
       <div className="absolute inset-0 left-0 right-0">
         <img
