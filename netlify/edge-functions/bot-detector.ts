@@ -92,11 +92,17 @@ function generateBotHTML(path: string, url: URL): string {
     <meta property="og:image" content="${baseUrl}/lovable-uploads/f3ebf58c-7bbf-427f-9510-9c3b0aec6f6d.png" />
     <meta property="og:site_name" content="Smart RV Systems" />
     
-    <!-- Twitter Card tags -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="${pageData.title}" />
-    <meta name="twitter:description" content="${pageData.description}" />
-    <meta name="twitter:image" content="${baseUrl}/lovable-uploads/f3ebf58c-7bbf-427f-9510-9c3b0aec6f6d.png" />
+     <!-- Security headers for bot responses -->
+     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'unsafe-inline'; img-src 'self' data: https:; script-src 'unsafe-inline';">
+     <meta http-equiv="X-Content-Type-Options" content="nosniff">
+     <meta http-equiv="X-Frame-Options" content="DENY">
+     <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+     
+     <!-- Twitter Card tags -->
+     <meta name="twitter:card" content="summary_large_image" />
+     <meta name="twitter:title" content="${pageData.title}" />
+     <meta name="twitter:description" content="${pageData.description}" />
+     <meta name="twitter:image" content="${baseUrl}/lovable-uploads/f3ebf58c-7bbf-427f-9510-9c3b0aec6f6d.png" />
     
     <!-- Structured Data -->
     <script type="application/ld+json">
@@ -190,7 +196,13 @@ export default async function botDetector(request: Request, context: Context) {
       headers: {
         'Content-Type': 'text/html; charset=utf-8',
         'Cache-Control': 'public, max-age=3600',
-        'X-Bot-Detected': 'true'
+        'X-Bot-Detected': 'true',
+        'X-Frame-Options': 'DENY',
+        'X-Content-Type-Options': 'nosniff',
+        'X-XSS-Protection': '1; mode=block',
+        'Referrer-Policy': 'strict-origin-when-cross-origin',
+        'Permissions-Policy': 'camera=(), microphone=(), geolocation=(), payment=()',
+        'Strict-Transport-Security': 'max-age=31536000; includeSubDomains'
       }
     });
   }
