@@ -3,6 +3,7 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
 import { componentTagger } from "lovable-tagger";
+import { staticGeneratorPlugin } from "./vite-plugins/static-generator";
 
 export default defineConfig(({ mode }) => ({
   server: {
@@ -28,6 +29,7 @@ export default defineConfig(({ mode }) => ({
   plugins: [
     react(),
     mode === 'development' && componentTagger(),
+    mode === 'production' && staticGeneratorPlugin(),
   ].filter(Boolean),
   resolve: {
     alias: {
