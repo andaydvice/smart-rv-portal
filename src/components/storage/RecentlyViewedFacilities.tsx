@@ -37,25 +37,25 @@ const RecentlyViewedFacilities = ({
         <Eye className="h-5 w-5 text-[#60A5FA]" />
         <h3 className="text-lg font-semibold text-white">Recently Viewed Facilities</h3>
       </div>
-      <div className="space-y-3">
+      <div className="space-y-2">
         {facilities.map(facility => (
           <div
             key={facility.id}
-            className="p-2 rounded hover:bg-[#131a2a] cursor-pointer border border-gray-800"
+            className="p-3 rounded-lg bg-[#131a2a] border border-gray-700 hover:border-gray-500 cursor-pointer transition-colors duration-200"
             onClick={() => onFacilityClick(facility.id)}
           >
             <div className="flex justify-between items-start">
-              <div>
-                <h4 className="font-medium text-white text-sm">{facility.name}</h4>
+              <div className="flex-1 min-w-0">
+                <h4 className="font-medium text-white text-base truncate">{facility.name}</h4>
                 <div className="flex items-center gap-1 text-gray-400 mt-1">
-                  <MapPin className="h-3 w-3" />
-                  <span className="text-xs truncate">{facility.city}, {facility.state}</span>
+                  <MapPin className="h-4 w-4 flex-shrink-0" />
+                  <span className="text-sm truncate">{facility.city}, {facility.state}</span>
                 </div>
               </div>
               <Button
                 variant="ghost"
                 size="sm"
-                className="h-7 text-[#60A5FA] hover:text-blue-300 hover:bg-blue-900/20 -mr-1"
+                className="h-8 px-3 text-[#60A5FA] hover:text-blue-300 hover:bg-blue-900/20 transition-colors flex-shrink-0 ml-2"
                 onClick={(e) => {
                   e.stopPropagation();
                   onFacilityClick(facility.id);
