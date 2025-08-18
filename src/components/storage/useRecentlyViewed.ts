@@ -27,18 +27,30 @@ export const useRecentlyViewed = () => {
 
   // Add a facility to recently viewed list
   const addToRecentlyViewed = (facility: StorageFacility) => {
+    console.log('🔵 AddToRecentlyViewed called with facility:', facility);
+    console.log('🔵 Current recentlyViewed before update:', recentlyViewed);
+    
     setRecentlyViewed(prev => {
+      console.log('🔵 Previous recentlyViewed in setter:', prev);
+      
       // Remove the facility if it already exists in the list
       const filtered = prev.filter(item => item.id !== facility.id);
+      console.log('🔵 After filtering existing:', filtered);
       
       // Add the facility to the beginning of the list
       const updated = [facility, ...filtered].slice(0, MAX_RECENT_ITEMS);
+      console.log('🔵 Updated recentlyViewed array:', updated);
       
       // Save to localStorage
       try {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
+        console.log('🔵 Successfully saved to localStorage');
+        
+        // Verify it was saved
+        const verification = localStorage.getItem(STORAGE_KEY);
+        console.log('🔵 Verification - localStorage contains:', verification);
       } catch (error) {
-        console.error('Error saving recently viewed facilities:', error);
+        console.error('❌ Error saving recently viewed facilities:', error);
       }
       
       return updated;

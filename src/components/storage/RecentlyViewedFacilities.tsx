@@ -17,6 +17,9 @@ const RecentlyViewedFacilities = ({
   onFacilityClick,
   className
 }: RecentlyViewedFacilitiesProps) => {
+  console.log('🟢 RecentlyViewedFacilities render - facilities count:', facilities?.length);
+  console.log('🟢 RecentlyViewedFacilities render - facilities data:', facilities);
+  
   if (facilities.length === 0) {
     return (
       <Card className={cn("bg-[#080F1F] border-gray-700 p-4", className)}>
@@ -26,6 +29,9 @@ const RecentlyViewedFacilities = ({
         </div>
         <p className="text-gray-400 text-sm">
           Facilities you view will appear here for quick access.
+        </p>
+        <p className="text-xs mt-2 text-gray-500">
+          Debug: {facilities ? `Array with ${facilities.length} items` : 'No facilities prop'}
         </p>
       </Card>
     );
