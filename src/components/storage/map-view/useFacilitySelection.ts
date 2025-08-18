@@ -12,12 +12,12 @@ export const useFacilitySelection = ({ addToRecentlyViewed }: UseFacilitySelecti
   const facilityRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
 
   const handleFacilityClick = (
-    facilityId: string, 
+    facilityId: string | null, 
     facilities: StorageFacility[] | undefined
   ) => {
     setHighlightedFacility(facilityId);
     
-    if (facilities) {
+    if (facilityId && facilities) {
       const facility = facilities.find(f => f.id === facilityId);
       if (facility) {
         addToRecentlyViewed(facility);
@@ -25,7 +25,7 @@ export const useFacilitySelection = ({ addToRecentlyViewed }: UseFacilitySelecti
     }
     
     setTimeout(() => {
-      if (facilityRefs.current[facilityId] && scrollAreaRef.current) {
+      if (facilityId && facilityRefs.current[facilityId] && scrollAreaRef.current) {
         const facilityElement = facilityRefs.current[facilityId];
         const scrollContainer = scrollAreaRef.current.querySelector('[data-radix-scroll-area-viewport]');
         
