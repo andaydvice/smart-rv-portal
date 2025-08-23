@@ -19,7 +19,7 @@ export const AFFILIATE_VIDEO_CONFIG: Record<string, VideoConfig> = {
     description: 'Demonstrates real-time battery monitoring and power optimization preventing costly dead battery situations',
     priority: 'high',
     placement: ['Power Calculator Results'],
-    affiliatePartners: ['technorv', 'renogy', 'dakotalithium'],
+    affiliatePartners: ['battleborn', 'rvlife', 'goodsam'],
     expectedConversionLift: '35-45%'
   },
   
@@ -29,7 +29,7 @@ export const AFFILIATE_VIDEO_CONFIG: Record<string, VideoConfig> = {
     description: 'Shows actual cost savings and payback period for Renogy solar systems on RVs',
     priority: 'high',
     placement: ['Power Calculator Results', 'Solar Guide'],
-    affiliatePartners: ['renogy', 'a1solarstore', 'solardirect'],
+    affiliatePartners: ['battleborn', 'rvlife', 'harvesthosts'],
     expectedConversionLift: '40-50%'
   },
 
@@ -39,7 +39,7 @@ export const AFFILIATE_VIDEO_CONFIG: Record<string, VideoConfig> = {
     description: 'Compares Dakota Lithium 11-year warranty batteries against standard batteries showing long-term value',
     priority: 'high', 
     placement: ['Power Calculator Results'],
-    affiliatePartners: ['dakotalithium', 'victron'],
+    affiliatePartners: ['battleborn', 'goodsam'],
     expectedConversionLift: '30-40%'
   },
 
@@ -49,7 +49,7 @@ export const AFFILIATE_VIDEO_CONFIG: Record<string, VideoConfig> = {
     description: 'Demonstrates professional-grade towing safety equipment preventing expensive breakdowns',
     priority: 'high',
     placement: ['Towing Calculator Results'],
-    affiliatePartners: ['blueox', 'torklift', 'guta'],
+    affiliatePartners: ['tireminder', 'goodsam', 'rvlife'],
     expectedConversionLift: '25-35%'
   },
 
@@ -70,7 +70,7 @@ export const AFFILIATE_VIDEO_CONFIG: Record<string, VideoConfig> = {
     description: 'Showcases automated RV systems and remote monitoring for investment protection',
     priority: 'high',
     placement: ['Smart Systems Calculator'],
-    affiliatePartners: ['technorv', 'rvlife'],
+    affiliatePartners: ['rvlife', 'goodsam'],
     expectedConversionLift: '25-35%'
   },
 
@@ -80,7 +80,7 @@ export const AFFILIATE_VIDEO_CONFIG: Record<string, VideoConfig> = {
     description: 'Demonstrates Starlink and cellular internet solutions for remote work and travel',
     priority: 'medium',
     placement: ['Smart Systems Calculator'],
-    affiliatePartners: ['winegard', 'nomadinternet'],
+    affiliatePartners: ['starlink', 'weboost'],
     expectedConversionLift: '20-30%'
   },
 
@@ -90,7 +90,7 @@ export const AFFILIATE_VIDEO_CONFIG: Record<string, VideoConfig> = {
     description: 'Shows tire pressure monitoring and safety alerts preventing blowouts and accidents',
     priority: 'high',
     placement: ['Towing Calculator'],
-    affiliatePartners: ['technorv', 'goodsam'],
+    affiliatePartners: ['tireminder', 'goodsam'],
     expectedConversionLift: '25-35%'
   }
 };

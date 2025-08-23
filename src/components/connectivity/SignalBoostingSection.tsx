@@ -47,12 +47,12 @@ export const SignalBoostingSection = () => {
               <Wrench className="h-4 w-4" />
               <span>Installation: DIY with basic tools</span>
             </div>
-            <h4 className="text-lg font-medium text-blue-200 mb-3">Winegard ConnecT 2.0</h4>
+            <h4 className="text-lg font-medium text-blue-200 mb-3">WeBoost Connect RV 65</h4>
             <ul className="space-y-2 text-sm list-disc list-inside">
-              <li>Wi-Fi range extender with built-in 4G LTE</li>
-              <li>Can switch between Wi-Fi and cellular data automatically</li>
-              <li>Roof mounted design for optimal signal capture</li>
-              <li>Weather resistant enclosure</li>
+              <li>Professional grade cellular signal booster</li>
+              <li>Works with all major carriers simultaneously</li>
+              <li>Roof mounted omnidirectional antenna design</li>
+              <li>FCC certified and carrier approved</li>
             </ul>
           </div>
 
