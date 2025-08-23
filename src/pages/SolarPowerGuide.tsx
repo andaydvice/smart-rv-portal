@@ -13,6 +13,8 @@ import {
   Sun, Battery, Zap, Calculator, 
   TrendingUp, Leaf, DollarSign, CheckCircle 
 } from 'lucide-react';
+import { AffiliatePartnerButton } from '@/components/affiliate/AffiliatePartnerSystem';
+import { ExternalLinkButton } from '@/components/ui/external-link-button';
 
 const SolarPowerGuide = () => {
   const [dailyUsage, setDailyUsage] = useState(3000);
@@ -33,62 +35,7 @@ const SolarPowerGuide = () => {
 
   const solarNeeds = calculateSolarNeeds();
 
-  const solarKits = [
-    {
-      title: "400W RV Solar Kit",
-      description: "Complete solar power system perfect for weekend RVers and light power usage.",
-      price: "$699.99",
-      originalPrice: "$899.99",
-      rating: 4.7,
-      reviewCount: 3421,
-      image: "/lovable-uploads/50e7b0c3-9d9a-4dae-bdb8-4c237aa4e3fe.png",
-      features: [
-        "4x 100W monocrystalline panels",
-        "40A MPPT charge controller",
-        "Complete wiring kit",
-        "Mounting hardware included",
-        "25-year panel warranty"
-      ],
-      affiliateLink: "https://rvlife.com/400w-rv-solar-kit",
-      badges: ["Best Seller", "Complete Kit"]
-    },
-    {
-      title: "Goal Zero Yeti 1500X Solar Generator",
-      description: "Portable solar power station with 1516Wh capacity, perfect for off-grid adventures.",
-      price: "$1,999.99",
-      originalPrice: "$2,499.99",
-      rating: 4.8,
-      reviewCount: 1876,
-      image: "/lovable-uploads/69d5ac06-d442-462c-8114-0761265710bd.png",
-      features: [
-        "1516Wh lithium battery",
-        "WiFi app monitoring",
-        "Multiple charging options",
-        "Silent operation",
-        "Expandable capacity"
-      ],
-      affiliateLink: "https://goalzero.com/yeti-1500x",
-      badges: ["Portable", "Premium"]
-    },
-    {
-      title: "Battle Born 100Ah LiFePO4 Battery",
-      description: "Premium lithium battery with 10-year warranty, perfect for solar energy storage.",
-      price: "$949.99",
-      originalPrice: "$1,199.99",
-      rating: 4.9,
-      reviewCount: 2234,
-      image: "/lovable-uploads/846b5be5-043e-4645-a3d9-39614d63342c.png",
-      features: [
-        "100Ah LiFePO4 technology",
-        "10-year warranty",
-        "Built-in BMS protection",
-        "3000+ cycle life",
-        "Drop-in replacement"
-      ],
-      affiliateLink: "https://battlebornbatteries.com/product/12v-100ah-lifepo4-deep-cycle-battery/",
-      badges: ["Premium", "10 Year Warranty"]
-    }
-  ];
+  // Removed hardcoded solar kits data - now using proper affiliate system
 
 
   const benefitCards = [
@@ -336,16 +283,20 @@ const SolarPowerGuide = () => {
                 </p>
                 
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <Button asChild className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg min-h-[48px] touch-manipulation">
-                    <a href="https://amsolar.com/installation" target="_blank" rel="noopener noreferrer">
-                      Get Installation Quote
-                    </a>
-                  </Button>
-                  <Button asChild variant="outline" className="border-blue-500 text-blue-300 hover:bg-blue-900/50 px-8 py-3 rounded-lg min-h-[48px] touch-manipulation">
-                    <a href="https://rvlife.com/installation-guide" target="_blank" rel="noopener noreferrer">
-                      DIY Installation Guide
-                    </a>
-                  </Button>
+                  <ExternalLinkButton 
+                    href="https://amsolar.com/installation"
+                    className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg min-h-[48px] touch-manipulation"
+                  >
+                    Get Installation Quote
+                  </ExternalLinkButton>
+                  <AffiliatePartnerButton 
+                    partner="rvlife" 
+                    path="/installation-guide"
+                    variant="outline" 
+                    className="border-blue-500 text-blue-300 hover:bg-blue-900/50 px-8 py-3 rounded-lg min-h-[48px] touch-manipulation"
+                  >
+                    DIY Installation Guide
+                  </AffiliatePartnerButton>
                 </div>
               </div>
             </CardContent>

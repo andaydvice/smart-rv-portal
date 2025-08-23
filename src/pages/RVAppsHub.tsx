@@ -42,58 +42,7 @@ const RVAppsHub = () => {
     }
   ];
 
-  const featuredApps = [
-    {
-      title: "RV LIFE Pro GPS Navigation",
-      description: "The ultimate RV-safe GPS with custom routing for your specific RV dimensions.",
-      price: "$49.99/year",
-      originalPrice: "$69.99/year",
-      rating: 4.8,
-      reviewCount: 15420,
-      image: "/lovable-uploads/245a19e1-8ec4-41fc-bedd-d6a440d9a381.png",
-      features: [
-        "RV-specific routing",
-        "Campground database",
-        "Offline maps",
-        "Real-time traffic"
-      ],
-      affiliateLink: "https://rvlife.com/pro-gps",
-      badges: ["Editor's Choice", "Most Popular"]
-    },
-    {
-      title: "Campendium Camping App",
-      description: "Discover amazing campsites with detailed reviews from fellow RVers.",
-      price: "$19.99/year",
-      originalPrice: "$29.99/year",
-      rating: 4.7,
-      reviewCount: 8932,
-      image: "/lovable-uploads/3af8fc31-188d-477e-8ab5-b94bd8c4ec77.png",
-      features: [
-        "50,000+ campsite reviews",
-        "Photo galleries",
-        "Offline access",
-        "Cell signal strength"
-      ],
-      affiliateLink: "https://campendium.com/premium",
-      badges: ["Best Value", "Community Choice"]
-    },
-    {
-      title: "Victron Connect",
-      description: "Monitor and control your Victron energy products remotely.",
-      price: "Free",
-      rating: 4.6,
-      reviewCount: 3421,
-      image: "/lovable-uploads/83016e8b-ff85-42b1-910f-4f4781ac341b.png",
-      features: [
-        "Battery monitoring",
-        "Solar system control",
-        "Historical data",
-        "Remote diagnostics"
-      ],
-      affiliateLink: "https://victronenergy.com/connect",
-      badges: ["Free", "Professional Grade"]
-    }
-  ];
+  // Removed hardcoded featured apps array - now using proper affiliate system
 
 
   return (

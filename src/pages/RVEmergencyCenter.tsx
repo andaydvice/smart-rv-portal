@@ -10,6 +10,8 @@ import {
   Shield, AlertTriangle, Phone, MapPin, Zap, 
   Wrench, Heart, Wind, Flame, Droplets 
 } from 'lucide-react';
+import { AffiliatePartnerButton } from '@/components/affiliate/AffiliatePartnerSystem';
+import { ExternalLinkButton } from '@/components/ui/external-link-button';
 
 const RVEmergencyCenter = () => {
   const emergencyCategories = [
@@ -43,119 +45,7 @@ const RVEmergencyCenter = () => {
     }
   ];
 
-  const emergencyServices = [
-    {
-      title: "Good Sam Emergency Road Service",
-      description: "Comprehensive 24/7 roadside assistance specifically designed for RVs with unlimited distance towing.",
-      price: "$89/year",
-      originalPrice: "$129/year",
-      rating: 4.7,
-      reviewCount: 12450,
-      image: "/lovable-uploads/cf3a586f-ae68-4a54-953f-b83505056d0e.png",
-      features: [
-        "Unlimited distance towing",
-        "24/7 emergency assistance",
-        "Lockout service",
-        "Emergency fuel delivery",
-        "Tire changes",
-        "Jump starts"
-      ],
-      affiliateLink: "https://goodsam.com/roadside-assistance",
-      badges: ["Most Popular", "RV Specific"]
-    },
-    {
-      title: "FMCA Emergency Road Service",
-      description: "Premium roadside assistance with specialized RV coverage and member benefits.",
-      price: "$149/year",
-      originalPrice: "$199/year",
-      rating: 4.8,
-      reviewCount: 8930,
-      image: "/lovable-uploads/b6a46bec-1ca8-4f7b-89fa-37bb5415d9fa.png",
-      features: [
-        "RV specialist technicians",
-        "Concierge services",
-        "Trip interruption coverage",
-        "Pet-friendly towing",
-        "Rental reimbursement"
-      ],
-      affiliateLink: "https://fmca.com/emergency-road-service",
-      badges: ["Premium Service"]
-    },
-    {
-      title: "Coach-Net RV Roadside Assistance",
-      description: "Specialized RV emergency services with comprehensive coverage for all RV types.",
-      price: "$119/year",
-      originalPrice: "$159/year",
-      rating: 4.6,
-      reviewCount: 6721,
-      image: "/lovable-uploads/28815e7c-77df-4758-b609-d84355448eea.png",
-      features: [
-        "RV-trained technicians",
-        "Emergency locksmith",
-        "Fluid delivery",
-        "Mobile RV repair",
-        "Alternate transportation"
-      ],
-      affiliateLink: "https://coach-net.com/roadside",
-      badges: ["RV Specialists"]
-    }
-  ];
-
-  const emergencyEquipment = [
-    {
-      title: "First Aid Only RV First Aid Kit",
-      description: "Comprehensive 298-piece first aid kit designed specifically for RV travelers.",
-      price: "$49.99",
-      originalPrice: "$69.99",
-      rating: 4.8,
-      reviewCount: 3421,
-      image: "/lovable-uploads/9e2c5b7f-c03c-4d99-9997-0d3de18f61e1.png",
-      features: [
-        "298 medical supplies",
-        "Compact RV storage",
-        "Emergency instructions",
-        "OSHA compliant"
-      ],
-      affiliateLink: "https://amazon.com/rv-first-aid-kit",
-      badges: ["Essential", "OSHA Approved"]
-    },
-    {
-      title: "Kidde RV Fire Extinguisher",
-      description: "Multi-purpose dry chemical fire extinguisher rated for RV use with mounting bracket.",
-      price: "$39.99",
-      originalPrice: "$54.99",
-      rating: 4.9,
-      reviewCount: 2156,
-      image: "/lovable-uploads/795a8cdd-cf65-487f-b550-4e4458d0aa9e.png",
-      features: [
-        "UL listed",
-        "Easy mount bracket",
-        "Pressure gauge",
-        "6-year warranty"
-      ],
-      affiliateLink: "https://amazon.com/kidde-rv-fire-extinguisher",
-      badges: ["Life Saver", "UL Listed"]
-    }
-  ];
-
-  const emergencyApps = [
-    {
-      title: "Red Cross Emergency App",
-      description: "Essential emergency information, alerts, and first aid guidance at your fingertips.",
-      price: "Free",
-      rating: 4.5,
-      reviewCount: 89234,
-      image: "/lovable-uploads/7d42772e-e96c-45cd-9a40-5e59be1c0a60.png",
-      features: [
-        "Real-time alerts",
-        "First aid instructions",
-        "Emergency checklist",
-        "Offline access"
-      ],
-      affiliateLink: "https://redcross.org/mobile-apps/emergency-app",
-      badges: ["Free", "Red Cross Official"]
-    }
-  ];
+  // Removed hardcoded emergency services data - now using proper affiliate system
 
   const quickActionCards = [
     {
@@ -296,16 +186,20 @@ const RVEmergencyCenter = () => {
                 </p>
                 
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <Button asChild className="bg-purple-600 hover:bg-purple-700 text-white px-8 py-3 rounded-lg min-h-[48px] touch-manipulation">
-                    <a href="https://progressive.com/rv-insurance/" target="_blank" rel="noopener noreferrer">
-                      Get RV Insurance Quote
-                    </a>
-                  </Button>
-                  <Button asChild variant="outline" className="border-purple-500 text-purple-300 hover:bg-purple-900/50 px-8 py-3 rounded-lg min-h-[48px] touch-manipulation">
-                    <a href="https://goodsam.com/emergency-assistance" target="_blank" rel="noopener noreferrer">
-                      Emergency Coverage
-                    </a>
-                  </Button>
+                  <ExternalLinkButton 
+                    href="https://progressive.com/rv-insurance/"
+                    className="bg-purple-600 hover:bg-purple-700 text-white px-8 py-3 rounded-lg min-h-[48px] touch-manipulation"
+                  >
+                    Get RV Insurance Quote
+                  </ExternalLinkButton>
+                  <AffiliatePartnerButton 
+                    partner="goodsam" 
+                    path="/emergency-assistance"
+                    variant="outline" 
+                    className="border-purple-500 text-purple-300 hover:bg-purple-900/50 px-8 py-3 rounded-lg min-h-[48px] touch-manipulation"
+                  >
+                    Emergency Coverage
+                  </AffiliatePartnerButton>
                 </div>
               </div>
             </CardContent>
