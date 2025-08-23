@@ -8,6 +8,7 @@ import { useToast } from "@/components/ui/use-toast";
 import Layout from "@/components/layout/Layout";
 import { scrollToTop } from "@/utils/scrollToTop";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
+import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
 import { Helmet } from "react-helmet-async";
 
 const Contact = () => {
@@ -121,6 +122,9 @@ const Contact = () => {
               ]}
               gridCols="auto"
             />
+            <div className="px-4">
+              <AffiliateDisclosure compact className="max-w-3xl mx-auto my-8" />
+            </div>
           </motion.div>
         </div>
       </motion.div>

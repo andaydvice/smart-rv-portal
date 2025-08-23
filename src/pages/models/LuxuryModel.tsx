@@ -11,6 +11,7 @@ import { KeyFeatures } from "@/components/luxury-models/KeyFeatures";
 import { ModelCategory } from "@/components/luxury-models/ModelCategory";
 import { luxuryModels } from "@/data/luxury-models";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
+import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
 import { Helmet } from "react-helmet-async";
 
 const LuxuryModel = () => {
@@ -183,6 +184,9 @@ const LuxuryModel = () => {
                 ]}
                 gridCols="3"
               />
+              <div className="px-4">
+                <AffiliateDisclosure compact className="max-w-7xl mx-auto my-8" />
+              </div>
             </motion.div>
 
             <motion.div

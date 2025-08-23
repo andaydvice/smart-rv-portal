@@ -5,6 +5,7 @@ import Layout from "@/components/layout/Layout";
 import { Warehouse } from "lucide-react";
 import LocationPreviewSection from "@/components/storage/LocationPreviewSection";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
+import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
 import { useState, useEffect } from "react";
 import { StorageFacility } from "@/components/storage/types";
 import "../styles/force-markers.css"; // Only load the minimal, clean CSS
@@ -213,6 +214,9 @@ export default function StorageFacilities() {
           ]}
           gridCols="3"
         />
+        <div className="px-4">
+          <AffiliateDisclosure compact className="max-w-7xl mx-auto my-8" />
+        </div>
       </div>
     </Layout>
   );

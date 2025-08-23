@@ -85,7 +85,7 @@ const PowerAffiliateRecommendations = () => {
     {
       partner: 'invertersrus' as const,
       title: "Professional Power Equipment",
-      description: "Premium power equipment retailer with Battle Born, Victron, and top brands for professional RV installations.",
+      description: "Premium power equipment retailer specializing in LiTime battery systems and professional RV installations.",
       features: [
         "Professional grade systems",
         "Advanced monitoring",

@@ -23,7 +23,7 @@ const HighValueAffiliateRecommendations: React.FC<HighValueAffiliateRecommendati
     const techPartners = [
       { partner: 'rvlife' as const, title: 'RV Life Pro', description: 'RV-safe GPS, trip planning, and campground data trusted by full-time travelers' },
       { partner: 'ecoflow' as const, title: 'EcoFlow Power', description: 'High-value portable power stations and solar generators for RV living' },
-      { partner: 'invertersrus' as const, title: 'Inverters R US', description: 'Premium power equipment retailer with Battle Born, Victron, and top brands' }
+      { partner: 'invertersrus' as const, title: 'Inverters R US', description: 'Premium power equipment retailer specializing in inverters, batteries, and solar components' }
     ];
 
     const towingPartners = [

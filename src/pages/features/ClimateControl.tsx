@@ -4,6 +4,7 @@ import { Thermometer, Droplet, Fan, Clock, Shield } from "lucide-react";
 import Layout from "@/components/layout/Layout";
 import { useEffect } from "react";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
+import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
 
 const ClimateControl = () => {
   useEffect(() => {
@@ -132,6 +133,9 @@ const ClimateControl = () => {
             gridCols="2"
             className="mt-16"
           />
+          <div className="px-4">
+            <AffiliateDisclosure compact className="max-w-7xl mx-auto my-8" />
+          </div>
         </div>
       </motion.div>
     </Layout>

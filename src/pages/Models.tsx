@@ -6,6 +6,7 @@ import { ArrowRight, Battery, Navigation, Shield, Wifi } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
 import Footer2 from "@/components/ui/Footer2";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
+import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
 import { Helmet } from "react-helmet-async";
 
 // Model data
@@ -260,6 +261,11 @@ const Models = () => {
               gridCols="3"
             />
           </motion.div>
+        </div>
+        
+        {/* Affiliate Disclosure */}
+        <div className="px-4">
+          <AffiliateDisclosure compact className="max-w-7xl mx-auto my-8" />
         </div>
       </motion.div>
     </Layout>

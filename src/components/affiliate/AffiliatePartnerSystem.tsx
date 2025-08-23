@@ -103,11 +103,31 @@ export const AFFILIATE_PARTNERS: Record<string, PartnerLink> = {
     name: "Inverters R US",
     baseUrl: "https://invertersrus.com",
     refCode: "smartrv",
-    description: "Premium power equipment retailer with Battle Born, Victron, and top brands",
-    primaryBenefit: "Verified retailer affiliate for Battle Born and Victron products",
+    description: "Premium power equipment retailer specializing in inverters, batteries, and solar components",
+    primaryBenefit: "Verified retailer affiliate for premium power equipment and components",
     commission: "5-8%",
     cookieDuration: "30 days",
     category: 'tech'
+  },
+  litime: {
+    name: "LiTime (Ampere Time)",
+    baseUrl: "https://www.litime.com",
+    refCode: "smartrv",
+    description: "Premium LiFePO4 battery systems with performance bonuses for high-volume affiliates",
+    primaryBenefit: "Comprehensive lithium battery lines with verified active program",
+    commission: "Up to 10%",
+    cookieDuration: "30 days",
+    category: 'tech'
+  },
+  technorv: {
+    name: "TechnoRV TPMS Systems",
+    baseUrl: "https://technorv.com",
+    refCode: "smartrv",
+    description: "Professional tire pressure monitoring systems through verified Affiliatly platform",
+    primaryBenefit: "Verified affiliate program for RV safety equipment",
+    commission: "5-7%",
+    cookieDuration: "7 days",
+    category: 'accessories'
   },
   starlinkinstallers: {
     name: "Starlink Installation Techs",

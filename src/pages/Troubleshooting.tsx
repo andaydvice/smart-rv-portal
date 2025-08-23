@@ -9,6 +9,7 @@ import SmartSystemGuide from "@/components/troubleshooting/SmartSystemGuide";
 import ConnectivityGuide from "@/components/connectivity/ConnectivityGuide";
 import TroubleshootingFlowchart from "@/components/troubleshooting/TroubleshootingFlowchart";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
+import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
 import { scrollToTop } from "@/utils/scrollToTop";
 
 const Troubleshooting = () => {
@@ -124,6 +125,9 @@ const Troubleshooting = () => {
                 ]}
                 gridCols="2"
               />
+              <div className="px-4">
+                <AffiliateDisclosure compact className="max-w-6xl mx-auto my-8" />
+              </div>
             </motion.div>
 
             <motion.div

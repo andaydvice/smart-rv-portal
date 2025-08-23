@@ -27,7 +27,7 @@ const TroubleshootingAffiliateRecommendations = () => {
             <div className="bg-black/20 p-4 rounded-lg border border-red-500/30">
               <h4 className="font-semibold text-red-300 mb-2">Power System Issues</h4>
               <p className="text-gray-300 text-sm mb-3">Battery monitoring, power management, and backup solutions</p>
-              <p className="text-orange-400 font-medium text-sm">Battle Born Batteries & Smart Systems →</p>
+              <p className="text-orange-400 font-medium text-sm">LiTime Battery Systems & Smart Power →</p>
             </div>
             <div className="bg-black/20 p-4 rounded-lg border border-red-500/30">
               <h4 className="font-semibold text-red-300 mb-2">Water System Problems</h4>
@@ -68,9 +68,9 @@ const TroubleshootingAffiliateRecommendations = () => {
             <div>
               <h4 className="font-semibold text-blue-300 mb-3">Preventive Maintenance</h4>
               <ul className="text-gray-300 space-y-2 text-sm">
-                <li>• Power system monitoring with Battle Born smart systems</li>
+                <li>• Power system monitoring with LiTime battery monitoring</li>
                 <li>• Water filtration maintenance and testing</li>
-                <li>• Tire pressure monitoring with TireMinder TPMS</li>
+                <li>• Tire pressure monitoring with TechnoRV TPMS Systems</li>
                 <li>• Good Sam maintenance scheduling and services</li>
               </ul>
             </div>
