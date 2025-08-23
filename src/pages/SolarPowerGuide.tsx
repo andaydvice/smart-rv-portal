@@ -85,7 +85,7 @@ const SolarPowerGuide = () => {
         "3000+ cycle life",
         "Drop-in replacement"
       ],
-      affiliateLink: "https://battleborn.com/100ah-lifepo4-battery",
+      affiliateLink: "https://battlebornbatteries.com/product/12v-100ah-lifepo4-deep-cycle-battery/",
       badges: ["Premium", "10 Year Warranty"]
     }
   ];
