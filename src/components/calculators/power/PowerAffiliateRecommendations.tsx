@@ -56,9 +56,9 @@ const PowerAffiliateRecommendations = () => {
       buttonText: "Get Extended Support"
     },
     {
-      partner: 'battlebornbatteries' as const,
-      title: "Most Trusted Solar Brand",
-      description: "Leading solar panel manufacturer with complete RV solar kits and proven reliability for off grid adventures.",
+      partner: 'overlandsolar' as const,
+      title: "Complete Off-Grid Solar",
+      description: "Complete off-grid solar solutions for adventure vehicles with premium quality and serious off-grid living focus.",
       features: [
         "Proven reliability",
         "Complete RV solar kits",
@@ -71,9 +71,9 @@ const PowerAffiliateRecommendations = () => {
 
   const batteryAndPowerSystems = [
     {
-      partner: 'battlebornbatteries' as const,
-      title: "10 Year Warranty Batteries",
-      description: "Premium LiFePO4 batteries with industry leading 11 year warranty and superior cold weather performance for reliable RV power.",
+      partner: 'ecoflow' as const,
+      title: "High-Value Power Stations",
+      description: "High-value portable power stations and solar generators designed for RV living with $1000+ average orders.",
       features: [
         "11 year warranty",
         "Superior cold weather performance",
@@ -83,9 +83,9 @@ const PowerAffiliateRecommendations = () => {
       buttonText: "Get Premium Batteries"
     },
     {
-      partner: 'victron' as const,
-      title: "Professional Grade Power",
-      description: "Professional power monitoring and inverter systems trusted by RV professionals worldwide for reliable off grid power.",
+      partner: 'invertersrus' as const,
+      title: "Professional Power Equipment",
+      description: "Premium power equipment retailer with Battle Born, Victron, and top brands for professional RV installations.",
       features: [
         "Professional grade systems",
         "Advanced monitoring",

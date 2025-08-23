@@ -12,11 +12,11 @@ export const HomepageAffiliateSection = () => {
           subtitle="Discover top-rated Smart RV products and services that enhance your experience with proven results"
           partners={[
             { partner: 'rvlife' as const, title: 'RV Life Pro', description: 'Professional smart RV trip planning with RV safe GPS navigation and comprehensive campground database', buttonText: 'Get RV Life Pro' },
-            { partner: 'rvtcom' as const, title: 'RVT Marketplace', description: 'Premium smart RV marketplace connecting buyers with verified professional dealers nationwide', buttonText: 'Browse Premium Smart RVs' },
-            { partner: 'solardirect' as const, title: 'Solar Direct', description: 'Complete smart RV solar power solutions with industry leading warranties and year round support', buttonText: 'Go Solar Today' },
-            { partner: 'battlebornbatteries' as const, title: 'Battle Born Batteries', description: 'American made premium LiFePO4 batteries with industry leading 10 year warranty and superior performance for smart RV systems', buttonText: 'Upgrade Batteries' },
+            { partner: 'overlandsolar' as const, title: 'Overland Solar', description: 'Complete off-grid solar solutions for adventure vehicles with premium quality and support', buttonText: 'Go Solar Today' },
+            { partner: 'ecoflow' as const, title: 'EcoFlow Power Stations', description: 'High-value portable power stations and solar generators designed for smart RV living', buttonText: 'Get Portable Power' },
+            { partner: 'cruiseamerica' as const, title: 'Cruise America Rentals', description: 'Experience smart RV features with America\'s largest professional RV rental company', buttonText: 'Book Professional RV' },
             { partner: 'starlinkinstallers' as const, title: 'Starlink Installation', description: 'Professional Starlink installation services for RVs with expert mounting and setup for reliable internet anywhere', buttonText: 'Get Professional Installation' },
-            { partner: 'harvesthosts' as const, title: 'Harvest Hosts', description: 'Unique overnight stays at farms wineries and attractions for memorable smart RV travel experiences', buttonText: 'Join Harvest Hosts' }
+            { partner: 'nomadinternet' as const, title: 'Nomad Internet', description: 'Unlimited 5G internet plans designed specifically for full-time RV travelers and remote workers', buttonText: 'Get Unlimited Data' }
           ]}
           gridCols="3"
         />

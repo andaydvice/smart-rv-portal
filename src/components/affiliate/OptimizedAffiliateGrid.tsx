@@ -6,10 +6,10 @@ import { AffiliatePartnerCard } from './AffiliatePartnerSystem';
 interface OptimizedAffiliateGridProps {
   title: string;
   subtitle: string;
-  partners: Array<{
+    partners: Array<{
     partner: 'rvshare' | 'outdoorsy' | 'rvlife' | 'goodsam' | 'rvwaterfilter' | 
-             'rvtcom' | 'solardirect' | 'a1solarstore' | 'battlebornbatteries' | 'starlinkinstallers' | 
-             'harvesthosts' | 'tiremindertpms' | 'victron' | 'weboost' | 'heatso' | 
+             'rvtcom' | 'solardirect' | 'a1solarstore' | 'invertersrus' | 'starlinkinstallers' | 
+             'harvesthosts' | 'overlandsolar' | 'cruiseamerica' | 'ecoflow' | 'nomadinternet' | 'weboost' | 'heatso' | 
              'hotshotssecret' | 'mobilehomeparts';
     title?: string;
     description?: string;

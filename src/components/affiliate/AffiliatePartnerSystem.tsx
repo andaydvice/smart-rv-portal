@@ -99,14 +99,14 @@ export const AFFILIATE_PARTNERS: Record<string, PartnerLink> = {
   },
 
   // Phase 2 (High-Commission Specialists) - VERIFIED PROGRAMS
-  battlebornbatteries: {
-    name: "Battle Born Batteries",
-    baseUrl: "https://battlebornbatteries.com",
+  invertersrus: {
+    name: "Inverters R US",
+    baseUrl: "https://invertersrus.com",
     refCode: "smartrv",
-    description: "Premium LiFePO4 batteries with industry-leading 10-year warranty",
-    primaryBenefit: "American-made lithium batteries trusted by professionals",
-    commission: "Verified active program",
-    cookieDuration: "90 days",
+    description: "Premium power equipment retailer with Battle Born, Victron, and top brands",
+    primaryBenefit: "Verified retailer affiliate for Battle Born and Victron products",
+    commission: "5-8%",
+    cookieDuration: "30 days",
     category: 'tech'
   },
   starlinkinstallers: {
@@ -149,27 +149,46 @@ export const AFFILIATE_PARTNERS: Record<string, PartnerLink> = {
     cookieDuration: "90 days",
     category: 'services'
   },
-  tiremindertpms: {
-    name: "TireMinder TPMS",
-    baseUrl: "https://miletechnology.com",
+  // Phase 3 (Strategic Partners) - NEW TIER 1 PROGRAMS
+  overlandsolar: {
+    name: "Overland Solar",
+    baseUrl: "https://overlandsolar.com",
     refCode: "smartrv",
-    description: "Professional-grade tire pressure monitoring systems",
-    primaryBenefit: "Industry-leading TPMS technology with verified program",
-    commission: "Verified active program",
-    cookieDuration: "45 days",
-    category: 'tech'
+    description: "Complete off-grid solar solutions for adventure vehicles",
+    primaryBenefit: "Premium solar systems designed for serious off-grid living",
+    commission: "10-15%",
+    cookieDuration: "60 days",
+    category: 'solar'
   },
-
-  // Phase 3 (Strategic Partners)
-  victron: {
-    name: "Victron Energy",
-    baseUrl: "https://victronenergy.com",
-    refCode: "smartpower",
-    description: "Professional power monitoring and inverter systems",
-    primaryBenefit: "Premium power solutions trusted by professionals worldwide",
-    commission: "Up to 5%",
+  cruiseamerica: {
+    name: "Cruise America",
+    baseUrl: "https://cruiseamerica.com",
+    refCode: "smartrv",
+    description: "America's largest RV rental company with nationwide locations",
+    primaryBenefit: "High-value rentals with $1,250+ average order value",
+    commission: "10% net",
+    cookieDuration: "30 days",
+    category: 'rental'
+  },
+  ecoflow: {
+    name: "EcoFlow",
+    baseUrl: "https://ecoflow.com",
+    refCode: "smartrv",
+    description: "Portable power stations and solar generators for RV living",
+    primaryBenefit: "High-value power solutions with $1000+ average orders",
+    commission: "5%",
     cookieDuration: "30 days",
     category: 'tech'
+  },
+  nomadinternet: {
+    name: "Nomad Internet",
+    baseUrl: "https://nomadinternet.com",
+    refCode: "smartrv",
+    description: "Unlimited 5G internet plans for full-time RV travelers",
+    primaryBenefit: "Flat $50 commission per sale with reliable payouts",
+    commission: "$50 per sale",
+    cookieDuration: "30 days",
+    category: 'connectivity'
   },
   weboost: {
     name: "WeBoost",
@@ -177,8 +196,8 @@ export const AFFILIATE_PARTNERS: Record<string, PartnerLink> = {
     refCode: "smartrv",
     description: "Professional cellular signal boosters for RVs and vehicles",
     primaryBenefit: "Verified cellular boosting technology with proven results",
-    commission: "Verified active program",
-    cookieDuration: "60 days",
+    commission: "5-10%",
+    cookieDuration: "30 days",
     category: 'connectivity'
   },
   mobilehomeparts: {
@@ -320,5 +339,5 @@ export const getPartnersByCategory = (category: string) => {
 
 // Helper function to get top commission partners - VERIFIED ONLY
 export const getTopCommissionPartners = () => {
-  return ['rvtcom', 'rvlife', 'solardirect', 'a1solarstore', 'starlinkinstallers', 'battlebornbatteries', 'harvesthosts'];
+  return ['rvlife', 'rvtcom', 'solardirect', 'a1solarstore', 'starlinkinstallers', 'overlandsolar', 'cruiseamerica', 'ecoflow', 'nomadinternet'];
 };

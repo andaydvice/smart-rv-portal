@@ -44,9 +44,9 @@ const TowingAffiliateRecommendations = () => {
       buttonText: "Get Professional Equipment"
     },
     {
-      partner: 'tiremindertpms' as const,
-      title: "Premium Towing Accessories",
-      description: "Premium tie downs, glow steps, and RV accessories with strong brand reputation and professional quality construction.",
+      partner: 'rvwaterfilter' as const,
+      title: "Premium Towing Safety",
+      description: "Premium water filtration and safety equipment designed for RV towing with professional quality construction.",
       features: [
         "Premium construction",
         "Professional quality",
@@ -56,9 +56,9 @@ const TowingAffiliateRecommendations = () => {
       buttonText: "Get Premium Accessories"
     },
     {
-      partner: 'tiremindertpms' as const,
-      title: "Professional Safety Monitoring",
-      description: "Budget friendly TPMS solutions that provide essential tire pressure monitoring for safer RV towing without breaking the bank.",
+      partner: 'goodsam' as const,
+      title: "Professional Safety Support",
+      description: "Professional roadside assistance and safety support for safer RV towing without breaking the bank.",
       features: [
         "Affordable pricing",
         "Essential safety features",

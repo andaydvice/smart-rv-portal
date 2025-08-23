@@ -16,30 +16,19 @@ const AffiliateRecommendations = ({ rvType, tripDistance, days, totalCost }: Aff
 
     const partners = [];
 
-    // Always include RVShare
+    // Always include RV Life Pro (highest commission)
     partners.push({ 
-      partner: 'rvshare', 
-      title: 'Smart RV Rental Savings', 
-      description: `Save money by renting smart RV equipped units for your ${days} day trip instead of buying` 
+      partner: 'rvlife', 
+      title: 'Smart Trip Planning Tools', 
+      description: `Plan your ${days} day smart RV route with GPS navigation designed for RVs` 
     });
 
-    // Add Outdoorsy for luxury trips
-    if (isLongTrip || isLargeRV) {
-      partners.push({ 
-        partner: 'outdoorsy', 
-        title: 'Luxury Smart RV Rentals', 
-        description: 'Premium smart RV rentals with advanced technology for longer, more comfortable trips' 
-      });
-    }
-
-    // Add RV Life for trip planning
-    if (isLongDistance) {
-      partners.push({ 
-        partner: 'rvlife', 
-        title: 'Smart Trip Planning Tools', 
-        description: 'Plan your route and find smart RV friendly stops for long distance travel' 
-      });
-    }
+    // Add Cruise America for rentals (high AOV)
+    partners.push({ 
+      partner: 'cruiseamerica', 
+      title: 'Professional RV Rentals', 
+      description: 'Experience smart RV features with America\'s largest rental company' 
+    });
 
     // Add Good Sam for safety
     partners.push({ 

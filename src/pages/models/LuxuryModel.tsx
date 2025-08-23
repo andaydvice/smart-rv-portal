@@ -174,7 +174,7 @@ const LuxuryModel = () => {
                     buttonText: 'Join Premium Club'
                   },
                   {
-                    partner: 'victron',
+                    partner: 'invertersrus',
                     title: 'High-End Power Technology',
                     description: 'Premium power monitoring and management systems for luxury RV living.',
                     features: ['Professional power systems', 'Smart monitoring', 'Remote control', 'Advanced automation'],

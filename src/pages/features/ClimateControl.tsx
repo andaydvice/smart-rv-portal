@@ -117,7 +117,7 @@ const ClimateControl = () => {
             subtitle="Professional climate systems and monitoring for optimal comfort"
             partners={[
               {
-                partner: 'victron',
+                partner: 'invertersrus',
                 title: 'Victron Climate Power Solutions',
                 description: 'Professional power monitoring and optimization for efficient climate control systems.',
                 features: ['Power usage monitoring', 'Energy optimization', 'Remote monitoring', 'System diagnostics']

@@ -57,7 +57,7 @@ const AdventureModel = () => {
                   buttonText: 'Book Adventure'
                 },
                 {
-                  partner: 'battlebornbatteries',
+                  partner: 'ecoflow',
                   title: 'Off-Grid Power Solutions',
                   description: 'Premium lithium batteries and power systems for extended off-grid adventures.',
                   features: ['Lithium Power Systems', 'Extended Runtime', 'Remote Monitoring', 'Off-Grid Reliability'],

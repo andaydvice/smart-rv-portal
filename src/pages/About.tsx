@@ -170,7 +170,7 @@ const About = () => {
                   features: ['Instant booking', 'Insurance included', 'Nationwide coverage', '24/7 support']
                 },
                 {
-                  partner: 'battlebornbatteries',
+                  partner: 'ecoflow',
                   title: 'Smart Power Technology',
                   description: 'Advanced lithium battery systems and power monitoring for modern RV living',
                   features: ['Professional installation', 'Smart monitoring', 'Remote control', 'Expert support']

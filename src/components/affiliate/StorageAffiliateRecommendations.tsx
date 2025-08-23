@@ -67,16 +67,16 @@ const StorageAffiliateRecommendations = () => {
       buttonText: "Find Storage Facilities"
     },
     {
-      partner: 'battlebornbatteries' as const,
-      title: "Storage Battery Management",
-      description: "Monitor your RV battery health during storage with smart battery systems that protect against damage.",
+      partner: 'ecoflow' as const,
+      title: "Portable Power for Storage",
+      description: "Maintain your RV systems during storage with portable power solutions that protect batteries and equipment.",
       features: [
-        "Remote battery monitoring",
-        "Storage mode optimization",
-        "Health alerts and tracking",
-        "Prevent deep discharge damage"
+        "Portable power stations",
+        "Battery maintenance charging",
+        "System protection",
+        "Easy storage setup"
       ],
-      buttonText: "Protect Battery Investment"
+      buttonText: "Get Portable Power"
     }
   ];
 

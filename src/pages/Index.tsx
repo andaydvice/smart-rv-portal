@@ -78,7 +78,7 @@ const Index = () => {
               title="Complete Smart RV Solutions Ecosystem"
               subtitle="Everything you need for smart RV living - from solar power to connectivity, all with proven quality and reliability."
               partners={[
-                { partner: 'battlebornbatteries' as const, title: 'Solar Power Leader', description: 'Most trusted battery brand with complete smart RV kits and proven reliability for intelligent power management' },
+                { partner: 'overlandsolar' as const, title: 'Solar Power Leader', description: 'Complete off-grid solar solutions with premium quality and proven reliability for intelligent power management' },
                 { partner: 'rvlife' as const, title: 'Smart Technology', description: 'Professional smart RV systems and digital tools trusted worldwide for intelligent RV control' },
                 { partner: 'weboost' as const, title: 'Cellular Boosters', description: 'Professional signal boosters for reliable cellular connectivity anywhere you travel' },
                 { partner: 'goodsam' as const, title: 'RV Services', description: 'Premium RV services and support trusted by professionals for safe intelligent travel' }

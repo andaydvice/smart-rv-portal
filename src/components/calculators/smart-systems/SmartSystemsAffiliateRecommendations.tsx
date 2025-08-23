@@ -32,20 +32,8 @@ const SmartSystemsAffiliateRecommendations = () => {
 
   const connectivitySolutions = [
     {
-      partner: 'weboost' as const,
-      title: "Signal Boosting Solutions",
-      description: "Stay connected anywhere with professional grade internet solutions including Starlink mounts and signal boosters for reliable RV connectivity.",
-      features: [
-        "Professional grade equipment",
-        "Starlink mount solutions",
-        "Signal enhancement",
-        "Reliable connectivity"
-      ],
-      buttonText: "Get Connected"
-    },
-    {
-      partner: 'starlinkinstallers' as const,
-      title: "Professional Installation",
+      partner: 'nomadinternet' as const,
+      title: "Unlimited 5G Internet",
       description: "Unlimited 5G internet plans designed specifically for full time RV travelers and remote workers who need reliable connectivity.",
       features: [
         "Unlimited 5G data",
@@ -54,33 +42,45 @@ const SmartSystemsAffiliateRecommendations = () => {
         "Nationwide coverage"
       ],
       buttonText: "Get Unlimited Data"
+    },
+    {
+      partner: 'starlinkinstallers' as const,
+      title: "Professional Starlink Installation",
+      description: "Professional Starlink installation services with high-value installations and expert technical support.",
+      features: [
+        "Professional grade installation",
+        "Starlink mount solutions",
+        "Expert technical support",
+        "High-value service"
+      ],
+      buttonText: "Get Professional Install"
     }
   ];
 
   const essentialServices = [
     {
-      partner: 'rvshare' as const,
-      title: "Experience Smart RVs",
-      description: "Try the latest smart RV technology without the investment - rent tech equipped RVs to test features firsthand.",
+      partner: 'ecoflow' as const,
+      title: "Portable Power Solutions",
+      description: "High-value portable power stations and solar generators designed for smart RV living and off-grid adventures.",
       features: [
-        "Latest smart RV technology",
-        "Pre installed automation",
-        "Test advanced features",
-        "No upfront investment"
+        "High-capacity power stations",
+        "Solar generator solutions",
+        "Smart RV integration",
+        "Off-grid ready systems"
       ],
-      buttonText: "Try Smart Features"
+      buttonText: "Get Portable Power"
     },
     {
-      partner: 'outdoorsy' as const,
-      title: "Luxury Smart RV Rentals",
-      description: "Experience cutting edge RV automation and smart features in premium luxury RVs with full tech packages.",
+      partner: 'cruiseamerica' as const,
+      title: "Professional RV Rentals",
+      description: "Experience smart RV features in professionally maintained vehicles from America's largest RV rental company.",
       features: [
-        "Cutting edge automation",
-        "Premium smart features",
-        "Luxury tech packages",
-        "Full system integration"
+        "Professional maintenance",
+        "Smart RV features",
+        "Nationwide locations",
+        "High-value rentals"
       ],
-      buttonText: "Book Smart Luxury"
+      buttonText: "Book Professional RV"
     },
     {
       partner: 'goodsam' as const,

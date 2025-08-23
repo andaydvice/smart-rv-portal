@@ -16,23 +16,23 @@ const HighValueAffiliateRecommendations: React.FC<HighValueAffiliateRecommendati
   const getHighValuePartners = () => {
     const solarPartners = [
       { partner: 'solardirect' as const, title: 'Solar Direct', description: 'Complete RV solar systems with industry-leading warranties and expert support' },
-      { partner: 'a1solarstore' as const, title: 'A1 Solar', description: 'Premium solar equipment and guidance to build efficient RV solar setups' },
-      { partner: 'battlebornbatteries' as const, title: 'Battle Born Solar Ready', description: 'Premium lithium batteries optimized for solar integration and reliable performance' }
+      { partner: 'overlandsolar' as const, title: 'Overland Solar', description: 'Complete off-grid solar solutions for adventure vehicles and serious off-grid living' },
+      { partner: 'a1solarstore' as const, title: 'A1 Solar', description: 'Premium solar equipment and guidance to build efficient RV solar setups' }
     ];
 
     const techPartners = [
       { partner: 'rvlife' as const, title: 'RV Life Pro', description: 'RV-safe GPS, trip planning, and campground data trusted by full-time travelers' },
-      { partner: 'battlebornbatteries' as const, title: 'Battle Born Batteries', description: 'Premium American-made LiFePO4 batteries with 10-year warranty and superior performance' },
-      { partner: 'tiremindertpms' as const, title: 'TireMinder TPMS Systems', description: 'Professional-grade tire monitoring systems for safer RV travel' }
+      { partner: 'ecoflow' as const, title: 'EcoFlow Power', description: 'High-value portable power stations and solar generators for RV living' },
+      { partner: 'invertersrus' as const, title: 'Inverters R US', description: 'Premium power equipment retailer with Battle Born, Victron, and top brands' }
     ];
 
     const towingPartners = [
       { partner: 'starlinkinstallers' as const, title: 'Starlink Installation Techs', description: 'Professional Starlink installation services for reliable RV internet anywhere' },
-      { partner: 'tiremindertpms' as const, title: 'TireMinder Safety Systems', description: 'Professional tire monitoring systems with proven safety record' }
+      { partner: 'goodsam' as const, title: 'Good Sam Towing', description: 'Professional roadside assistance and towing services for RV travelers' }
     ];
 
     const connectivityPartners = [
-      { partner: 'harvesthosts' as const, title: 'Harvest Hosts', description: 'Unique overnight stays at farms wineries and attractions for memorable travel' },
+      { partner: 'nomadinternet' as const, title: 'Nomad Internet', description: 'Unlimited 5G internet plans for full-time RV travelers and remote workers' },
       { partner: 'weboost' as const, title: 'WeBoost Signal Boosters', description: 'Professional cellular signal boosters for reliable connectivity anywhere' }
     ];
 
@@ -71,7 +71,7 @@ const HighValueAffiliateRecommendations: React.FC<HighValueAffiliateRecommendati
           partners={[
             { partner: 'rvtcom' as const, title: 'RVT Premium Marketplace', description: 'Marketplace with verified dealers and high customer satisfaction' },
             { partner: 'mobilehomeparts' as const, title: 'RV Parts & Accessories', description: 'Wide range of RV parts and accessories from trusted brands' },
-            { partner: 'victron' as const, title: 'Victron Power Systems', description: 'Professional-grade power monitoring and inverter systems' }
+            { partner: 'cruiseamerica' as const, title: 'Cruise America Rentals', description: 'America\'s largest RV rental company with professional maintenance' }
           ]}
           gridCols="3"
         />

@@ -106,7 +106,7 @@ const SmartKitchen = () => {
                 ]
               },
               {
-                partner: 'victron',
+                partner: 'invertersrus',
                 title: 'Smart Power Monitoring',
                 description: 'Professional power monitoring systems for refrigerators, cooking appliances, and kitchen automation.',
                 features: [

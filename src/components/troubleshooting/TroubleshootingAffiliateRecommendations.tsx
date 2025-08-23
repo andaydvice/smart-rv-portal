@@ -5,7 +5,7 @@ const TroubleshootingAffiliateRecommendations = () => {
   const emergencyPartners = [
     { partner: 'goodsam' as const, title: 'Emergency Roadside Assistance', description: '24/7 RV-specific emergency services and towing assistance' },
     { partner: 'rvwaterfilter' as const, title: 'Water System Solutions', description: 'Emergency water purification and system repair guidance' },
-    { partner: 'battlebornbatteries' as const, title: 'Power System Safety', description: 'Smart battery systems with emergency monitoring and alerts' },
+    { partner: 'ecoflow' as const, title: 'Portable Power Safety', description: 'Portable power stations with emergency backup and monitoring' },
     { partner: 'rvlife' as const, title: 'Emergency Planning', description: 'Digital tools and resources for emergency preparedness' }
   ];
 
@@ -89,7 +89,7 @@ const TroubleshootingAffiliateRecommendations = () => {
             title="Maintenance & Prevention Tools"
             subtitle="Keep your RV in top condition with these maintenance resources"
             partners={[
-              { partner: 'battlebornbatteries', title: 'Power Monitoring', description: 'Smart battery systems with monitoring and alerts for preventive maintenance' },
+              { partner: 'ecoflow', title: 'Power Monitoring', description: 'Portable power stations with monitoring and alerts for preventive maintenance' },
               { partner: 'rvwaterfilter', title: 'Water Safety', description: 'Filtration systems for preventing water contamination issues' },
               { partner: 'rvlife', title: 'Digital Maintenance', description: 'Apps and tools for tracking RV maintenance schedules' },
               { partner: 'goodsam', title: 'Service Network', description: 'Professional RV service and repair network access' }
