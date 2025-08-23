@@ -19,7 +19,7 @@ export const AFFILIATE_VIDEO_CONFIG: Record<string, VideoConfig> = {
     description: 'Demonstrates real-time battery monitoring and power optimization preventing costly dead battery situations',
     priority: 'high',
     placement: ['Power Calculator Results'],
-    affiliatePartners: ['battleborn', 'rvlife', 'goodsam'],
+    affiliatePartners: ['battlebornbatteries', 'rvlife', 'goodsam'],
     expectedConversionLift: '35-45%'
   },
   
@@ -29,7 +29,7 @@ export const AFFILIATE_VIDEO_CONFIG: Record<string, VideoConfig> = {
     description: 'Shows actual cost savings and payback period for solar systems on RVs',
     priority: 'high',
     placement: ['Power Calculator Results', 'Solar Guide'],
-    affiliatePartners: ['battleborn', 'rvlife', 'harvesthosts'],
+    affiliatePartners: ['battlebornbatteries', 'rvlife', 'harvesthosts'],
     expectedConversionLift: '40-50%'
   },
 
@@ -39,7 +39,7 @@ export const AFFILIATE_VIDEO_CONFIG: Record<string, VideoConfig> = {
     description: 'Compares lithium battery options against standard batteries showing long-term value',
     priority: 'high', 
     placement: ['Power Calculator Results'],
-    affiliatePartners: ['battleborn', 'goodsam'],
+    affiliatePartners: ['battlebornbatteries', 'goodsam'],
     expectedConversionLift: '30-40%'
   },
 
@@ -49,7 +49,7 @@ export const AFFILIATE_VIDEO_CONFIG: Record<string, VideoConfig> = {
     description: 'Demonstrates professional-grade towing safety equipment preventing expensive breakdowns',
     priority: 'high',
     placement: ['Towing Calculator Results'],
-    affiliatePartners: ['tireminder', 'goodsam', 'rvlife'],
+    affiliatePartners: ['tiremindertpms', 'goodsam', 'rvlife'],
     expectedConversionLift: '25-35%'
   },
 
@@ -80,7 +80,7 @@ export const AFFILIATE_VIDEO_CONFIG: Record<string, VideoConfig> = {
     description: 'Demonstrates Starlink and cellular internet solutions for remote work and travel',
     priority: 'medium',
     placement: ['Smart Systems Calculator'],
-    affiliatePartners: ['starlink', 'weboost'],
+    affiliatePartners: ['starlinkinstallers', 'weboost'],
     expectedConversionLift: '20-30%'
   },
 
@@ -90,7 +90,7 @@ export const AFFILIATE_VIDEO_CONFIG: Record<string, VideoConfig> = {
     description: 'Shows tire pressure monitoring and safety alerts preventing blowouts and accidents',
     priority: 'high',
     placement: ['Towing Calculator'],
-    affiliatePartners: ['tireminder', 'goodsam'],
+    affiliatePartners: ['tiremindertpms', 'goodsam'],
     expectedConversionLift: '25-35%'
   }
 };
