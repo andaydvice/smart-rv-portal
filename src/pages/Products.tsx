@@ -110,13 +110,13 @@ const Products = () => {
     {
       "@context": "https://schema.org",
       "@type": "Product",
-      name: "Mobile Internet Connectivity",
-      brand: { "@type": "Brand", name: AFFILIATE_PARTNERS.winegard?.name || "Winegard" },
+      name: "Cellular Signal Boosters",
+      brand: { "@type": "Brand", name: AFFILIATE_PARTNERS.weboost?.name || "WeBoost" },
       category: "Networking",
-      description: "Stay connected on the road with RV internet connectivity solutions.",
+      description: "Stay connected on the road with professional cellular signal boosters.",
       offers: {
         "@type": "Offer",
-        url: `${AFFILIATE_PARTNERS.winegard?.baseUrl || "https://winegard.com"}?ref=${AFFILIATE_PARTNERS.winegard?.refCode || "smartconnect"}`,
+        url: `${AFFILIATE_PARTNERS.weboost?.baseUrl || "https://weboost.com"}?ref=${AFFILIATE_PARTNERS.weboost?.refCode || "smartrv"}`,
         priceCurrency: "USD",
         availability: "https://schema.org/InStock"
       },

@@ -32,8 +32,8 @@ const TowingAffiliateRecommendations = () => {
 
   const professionalTowingEquipment = [
     {
-      partner: 'blueox' as const,
-      title: "Professional Grade Towing",
+      partner: 'starlinkinstallers' as const,
+      title: "Professional Installation Services",
       description: "Professional grade towing systems and accessories trusted by RV professionals worldwide for safe, reliable towing.",
       features: [
         "Professional grade systems",
@@ -56,8 +56,8 @@ const TowingAffiliateRecommendations = () => {
       buttonText: "Get Premium Accessories"
     },
     {
-      partner: 'guta' as const,
-      title: "Affordable Safety Monitoring",
+      partner: 'tiremindertpms' as const,
+      title: "Professional Safety Monitoring",
       description: "Budget friendly TPMS solutions that provide essential tire pressure monitoring for safer RV towing without breaking the bank.",
       features: [
         "Affordable pricing",

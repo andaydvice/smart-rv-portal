@@ -108,26 +108,26 @@ export const AFFILIATE_PARTNERS: Record<string, PartnerLink> = {
     category: 'solar'
   },
 
-  // Phase 2 (High-Commission Specialists)
-  dakotalithium: {
-    name: "Dakota Lithium",
-    baseUrl: "https://dakotalithium.com",
-    refCode: "smartbattery",
-    description: "Premium LiFePO4 batteries with 11-year warranty and superior performance",
-    primaryBenefit: "Industry-leading battery technology with excellent commission rates",
-    commission: "7%",
-    cookieDuration: "30 days",
+  // Phase 2 (High-Commission Specialists) - VERIFIED PROGRAMS
+  battlebornbatteries: {
+    name: "Battle Born Batteries",
+    baseUrl: "https://battlebornbatteries.com",
+    refCode: "smartrv",
+    description: "Premium LiFePO4 batteries with industry-leading 10-year warranty",
+    primaryBenefit: "American-made lithium batteries trusted by professionals",
+    commission: "Verified active program",
+    cookieDuration: "90 days",
     category: 'tech'
   },
-  blueox: {
-    name: "Blue Ox",
-    baseUrl: "https://blueox.us",
-    refCode: "smarttowing",
-    description: "Professional-grade towing systems and RV accessories",
-    primaryBenefit: "Top-rated towing solutions with generous affiliate commissions",
-    commission: "10%",
-    cookieDuration: "30 days",
-    category: 'towing'
+  starlinkinstallers: {
+    name: "Starlink Installation Techs",
+    baseUrl: "https://starlink-installers.com",
+    refCode: "smartrv",
+    description: "Professional Starlink installation services for RVs",
+    primaryBenefit: "High-value installations with professional support",
+    commission: "Up to $480 per installation",
+    cookieDuration: "60 days",
+    category: 'connectivity'
   },
   heatso: {
     name: "Heatso",
@@ -149,14 +149,24 @@ export const AFFILIATE_PARTNERS: Record<string, PartnerLink> = {
     cookieDuration: "30 days",
     category: 'accessories'
   },
-  guta: {
-    name: "GUTA TPMS",
-    baseUrl: "https://gutatpms.com",
-    refCode: "smartmonitoring",
-    description: "Affordable tire pressure monitoring systems for RV safety",
-    primaryBenefit: "Budget-friendly TPMS solutions with solid commission rates",
-    commission: "10%",
-    cookieDuration: "30 days",
+  harvesthosts: {
+    name: "Harvest Hosts",
+    baseUrl: "https://harvesthosts.com",
+    refCode: "smartrv",
+    description: "Unique overnight stays at farms, wineries, and attractions",
+    primaryBenefit: "Flat-rate commission with extended cookie duration",
+    commission: "$50 flat rate",
+    cookieDuration: "90 days",
+    category: 'services'
+  },
+  tiremindertpms: {
+    name: "TireMinder TPMS",
+    baseUrl: "https://miletechnology.com",
+    refCode: "smartrv",
+    description: "Professional-grade tire pressure monitoring systems",
+    primaryBenefit: "Industry-leading TPMS technology with verified program",
+    commission: "Verified active program",
+    cookieDuration: "45 days",
     category: 'tech'
   },
 
@@ -181,24 +191,14 @@ export const AFFILIATE_PARTNERS: Record<string, PartnerLink> = {
     cookieDuration: "30 days",
     category: 'tech'
   },
-  winegard: {
-    name: "Winegard",
-    baseUrl: "https://winegard.com",
-    refCode: "smartconnect",
-    description: "Internet connectivity solutions including Starlink mounts and boosters",
-    primaryBenefit: "Stay connected anywhere with professional-grade internet solutions",
-    commission: "4.5%",
-    cookieDuration: "30 days",
-    category: 'connectivity'
-  },
-  nomadinternet: {
-    name: "Nomad Internet",
-    baseUrl: "https://nomadinternet.com",
-    refCode: "smartnomad",
-    description: "5G hotspot plans designed specifically for RV travelers",
-    primaryBenefit: "Unlimited high-speed internet for remote RV locations",
-    commission: "$35 CPA",
-    cookieDuration: "30 days",
+  weboost: {
+    name: "WeBoost",
+    baseUrl: "https://weboost.com",
+    refCode: "smartrv",
+    description: "Professional cellular signal boosters for RVs and vehicles",
+    primaryBenefit: "Verified cellular boosting technology with proven results",
+    commission: "Verified active program",
+    cookieDuration: "60 days",
     category: 'connectivity'
   },
   mobilehomeparts: {
@@ -348,7 +348,7 @@ export const getPartnersByCategory = (category: string) => {
     .map(([key, _]) => key);
 };
 
-// Helper function to get top commission partners
+// Helper function to get top commission partners - VERIFIED ONLY
 export const getTopCommissionPartners = () => {
-  return ['rvtcom', 'rvlife', 'solardirect', 'a1solarstore', 'blueox', 'heatso'];
+  return ['rvtcom', 'rvlife', 'solardirect', 'a1solarstore', 'starlinkinstallers', 'battlebornbatteries', 'harvesthosts'];
 };

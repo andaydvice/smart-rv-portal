@@ -32,8 +32,8 @@ const SmartSystemsAffiliateRecommendations = () => {
 
   const connectivitySolutions = [
     {
-      partner: 'winegard' as const,
-      title: "Connectivity Solutions",
+      partner: 'weboost' as const,
+      title: "Signal Boosting Solutions",
       description: "Stay connected anywhere with professional grade internet solutions including Starlink mounts and signal boosters for reliable RV connectivity.",
       features: [
         "Professional grade equipment",
@@ -44,8 +44,8 @@ const SmartSystemsAffiliateRecommendations = () => {
       buttonText: "Get Connected"
     },
     {
-      partner: 'nomadinternet' as const,
-      title: "Unlimited Data Plans",
+      partner: 'starlinkinstallers' as const,
+      title: "Professional Installation",
       description: "Unlimited 5G internet plans designed specifically for full time RV travelers and remote workers who need reliable connectivity.",
       features: [
         "Unlimited 5G data",

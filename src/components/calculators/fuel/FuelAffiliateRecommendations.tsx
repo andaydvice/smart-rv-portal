@@ -44,8 +44,8 @@ const FuelAffiliateRecommendations = () => {
       buttonText: "Boost Fuel Efficiency"
     },
     {
-      partner: 'nomadinternet' as const,
-      title: "Unlimited Data for Travel",
+      partner: 'harvesthosts' as const,
+      title: "Unique Overnight Stays",
       description: "Stay connected while finding the best fuel prices and navigating efficiently with unlimited 5G internet designed for RV travelers.",
       features: [
         "Real time fuel price apps",

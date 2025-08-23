@@ -22,18 +22,18 @@ const HighValueAffiliateRecommendations: React.FC<HighValueAffiliateRecommendati
 
     const techPartners = [
       { partner: 'rvlife' as const, title: 'RV Life Pro', description: 'RV-safe GPS, trip planning, and campground data trusted by full-time travelers' },
-      { partner: 'dakotalithium' as const, title: 'Dakota Lithium Batteries', description: 'Premium LiFePO4 batteries with long warranties and cold-weather performance' },
-      { partner: 'guta' as const, title: 'GUTA TPMS Systems', description: 'Reliable tire monitoring systems for safer travel' }
+      { partner: 'battlebornbatteries' as const, title: 'Battle Born Batteries', description: 'Premium American-made LiFePO4 batteries with 10-year warranty and superior performance' },
+      { partner: 'tiremindertpms' as const, title: 'TireMinder TPMS Systems', description: 'Professional-grade tire monitoring systems for safer RV travel' }
     ];
 
     const towingPartners = [
-      { partner: 'blueox' as const, title: 'Blue Ox Towing', description: 'Professional towing systems and accessories trusted by experts' },
+      { partner: 'starlinkinstallers' as const, title: 'Starlink Installation Techs', description: 'Professional Starlink installation services for reliable RV internet anywhere' },
       { partner: 'torklift' as const, title: 'Torklift Accessories', description: 'Premium RV accessories with strong reputation and support' }
     ];
 
     const connectivityPartners = [
-      { partner: 'nomadinternet' as const, title: 'Nomad Internet', description: 'Reliable 5G internet plans and hardware for RVers' },
-      { partner: 'winegard' as const, title: 'Winegard Connectivity', description: 'Starlink mounts and boosters for dependable internet' }
+      { partner: 'harvesthosts' as const, title: 'Harvest Hosts', description: 'Unique overnight stays at farms wineries and attractions for memorable travel' },
+      { partner: 'weboost' as const, title: 'WeBoost Signal Boosters', description: 'Professional cellular signal boosters for reliable connectivity anywhere' }
     ];
 
     const premiumPartners = [

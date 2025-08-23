@@ -48,7 +48,7 @@ const Index = () => {
             itemListElement: [
               { '@type': 'ListItem', position: 1, name: 'Renogy - Solar Power Leader', url: 'https://renogy.com?ref=smartrenogy' },
               { '@type': 'ListItem', position: 2, name: 'Victron Energy - Power Management', url: 'https://victronenergy.com?ref=smartpower' },
-              { '@type': 'ListItem', position: 3, name: 'Winegard - Internet Solutions', url: 'https://winegard.com?ref=smartconnect' },
+              { '@type': 'ListItem', position: 3, name: 'WeBoost - Cellular Boosters', url: 'https://weboost.com?ref=smartrv' },
               { '@type': 'ListItem', position: 4, name: 'Torklift - Towing Accessories', url: 'https://torklift.com?ref=smartlift' }
             ]
           }
@@ -80,7 +80,7 @@ const Index = () => {
               partners={[
                 { partner: 'renogy' as const, title: 'Solar Power Leader', description: 'Most trusted solar brand with complete smart RV kits and proven reliability for intelligent power management' },
                 { partner: 'victron' as const, title: 'Power Management', description: 'Professional smart RV power monitoring and inverter systems trusted worldwide for intelligent energy control' },
-                { partner: 'winegard' as const, title: 'Internet Solutions', description: 'Starlink mounts and connectivity boosters for reliable smart RV internet anywhere you travel' },
+                { partner: 'weboost' as const, title: 'Cellular Boosters', description: 'Professional signal boosters for reliable cellular connectivity anywhere you travel' },
                 { partner: 'torklift' as const, title: 'Towing Accessories', description: 'Premium tie-downs and smart RV accessories trusted by professionals for safe intelligent travel' }
               ]}
               gridCols="4"

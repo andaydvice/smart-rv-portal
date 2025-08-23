@@ -8,8 +8,8 @@ interface OptimizedAffiliateGridProps {
   subtitle: string;
   partners: Array<{
     partner: 'rvshare' | 'outdoorsy' | 'rvlife' | 'goodsam' | 'technorv' | 'rvwaterfilter' | 
-             'rvtcom' | 'solardirect' | 'a1solarstore' | 'renogy' | 'dakotalithium' | 'blueox' | 
-             'torklift' | 'guta' | 'victron' | 'winegard' | 'nomadinternet' | 'heatso' | 
+             'rvtcom' | 'solardirect' | 'a1solarstore' | 'renogy' | 'battlebornbatteries' | 'starlinkinstallers' | 
+             'torklift' | 'harvesthosts' | 'tiremindertpms' | 'victron' | 'weboost' | 'heatso' | 
              'hotshotssecret' | 'mobilehomeparts';
     title?: string;
     description?: string;

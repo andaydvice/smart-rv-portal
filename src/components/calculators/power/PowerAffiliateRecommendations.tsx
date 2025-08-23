@@ -71,8 +71,8 @@ const PowerAffiliateRecommendations = () => {
 
   const batteryAndPowerSystems = [
     {
-      partner: 'dakotalithium' as const,
-      title: "11 Year Warranty Batteries",
+      partner: 'battlebornbatteries' as const,
+      title: "10 Year Warranty Batteries",
       description: "Premium LiFePO4 batteries with industry leading 11 year warranty and superior cold weather performance for reliable RV power.",
       features: [
         "11 year warranty",
