@@ -78,8 +78,8 @@ const AccountPage = () => {
                 features: ['Premium trip planning', 'Enhanced features', 'Priority support', 'Advanced tools']
               },
               {
-                partner: 'technorv',
-                title: 'TechnoRV Premium Monitoring',
+                partner: 'rvlife',
+                title: 'RV Life Premium Monitoring',
                 description: 'Access premium monitoring features and priority technical support.',
                 features: ['Premium monitoring', 'Priority support', 'Advanced analytics', 'Enhanced features']
               }

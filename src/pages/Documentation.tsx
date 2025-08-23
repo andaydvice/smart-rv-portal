@@ -128,8 +128,8 @@ const Documentation = () => {
                   subtitle="Get expert help implementing the systems covered in our documentation"
                   partners={[
                     {
-                      partner: 'technorv',
-                      title: 'TechnoRV Professional Installation',
+                      partner: 'rvlife',
+                      title: 'RV Life Professional Installation',
                       description: 'Certified technicians for professional smart RV system installation and configuration',
                       features: ['Certified Installers', 'Smart System Setup', 'Training Included', 'Warranty Support'],
                       path: '/professional-installation',

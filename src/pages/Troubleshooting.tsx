@@ -114,8 +114,8 @@ const Troubleshooting = () => {
                     buttonText: 'Get Emergency Coverage'
                   },
                   {
-                    partner: 'technorv',
-                    title: 'TechnoRV System Monitoring', 
+                    partner: 'rvlife',
+                    title: 'RV Life System Monitoring',
                     description: 'Advanced monitoring systems that prevent problems before they happen with real-time diagnostics',
                     features: ['Real-Time Diagnostics', 'Preventive Alerts', 'Remote Monitoring', 'Expert Installation'],
                     path: '/monitoring-systems',

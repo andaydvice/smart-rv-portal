@@ -32,8 +32,8 @@ const Products = () => {
       description: "Upgrade your RV with cutting-edge smart technology, monitoring systems, and automation solutions.",
       badge: "Tech Essentials",
       features: ["Professional Installation", "Warranty Included", "Expert Support"],
-      url: "https://technorv.com/?ref=smartroadportal",
-      buttonText: "Shop TechnoRV",
+      url: "https://rvlife.com/?ref=smartroadportal",
+      buttonText: "Shop RV Life",
       savings: "Free installation on orders $500+"
     },
     {
@@ -130,12 +130,12 @@ const Products = () => {
       "@context": "https://schema.org",
       "@type": "Product",
       name: "RV Solar Kits",
-      brand: { "@type": "Brand", name: AFFILIATE_PARTNERS.renogy.name },
+      brand: { "@type": "Brand", name: AFFILIATE_PARTNERS.rvlife.name },
       category: "SolarEnergy",
       description: "Complete solar kits designed for RVs to power your adventures off-grid.",
       offers: {
         "@type": "Offer",
-        url: `${AFFILIATE_PARTNERS.renogy.baseUrl}?ref=${AFFILIATE_PARTNERS.renogy.refCode}`,
+        url: `${AFFILIATE_PARTNERS.rvlife.baseUrl}?ref=${AFFILIATE_PARTNERS.rvlife.refCode}`,
         priceCurrency: "USD",
         availability: "https://schema.org/InStock"
       },
@@ -300,7 +300,7 @@ const Products = () => {
                   buttonText: 'Browse RV Rentals'
                 },
                 {
-                  partner: 'technorv',
+                  partner: 'rvlife',
                   title: 'Smart RV Technology',
                   description: 'Upgrade your RV with cutting-edge technology, monitoring systems, and automation solutions.',
                   features: ['Smart Technology', 'Professional Installation', 'Expert Support', 'Warranty Coverage'],

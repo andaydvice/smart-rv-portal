@@ -267,8 +267,8 @@ const RVEmergencyCenter = () => {
                 buttonText: 'Get Emergency Coverage'
               },
               {
-                partner: 'technorv',
-                title: 'TechnoRV Emergency Monitoring',
+                partner: 'rvlife',
+                title: 'RV Life Emergency Monitoring',
                 description: 'Advanced monitoring systems that detect and alert you to potential emergencies before they happen.',
                 features: ['Emergency Detection', 'Real-Time Alerts', 'Preventive Monitoring', 'Remote Diagnostics'],
                 buttonText: 'Shop Safety Systems'
@@ -324,8 +324,8 @@ const RVEmergencyCenter = () => {
                 buttonText: 'Get Emergency Coverage'
               },
               {
-                partner: 'technorv',
-                title: 'TechnoRV Emergency Monitoring',
+                partner: 'rvlife',
+                title: 'RV Life Emergency Monitoring',
                 description: 'Advanced monitoring systems that alert you to potential emergencies before they happen',
                 features: ['Real-Time Alerts', 'Emergency Detection', 'Preventive Monitoring', 'Remote Diagnostics'],
                 path: '/emergency-monitoring',

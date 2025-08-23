@@ -133,7 +133,7 @@ const MapIconDemoPage = () => {
                   features: ['RV-safe routing', 'Real-time updates', 'Custom waypoints', 'Offline maps']
                 },
                 {
-                  partner: 'technorv',
+                  partner: 'rvlife',
                   title: 'Smart Mapping Systems',
                   description: 'Advanced mapping technology with interactive displays and location tracking',
                   features: ['Interactive displays', 'Location tracking', 'System integration', 'Real-time data']

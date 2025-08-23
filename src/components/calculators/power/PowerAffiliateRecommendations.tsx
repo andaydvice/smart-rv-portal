@@ -5,7 +5,7 @@ import { OptimizedAffiliateGrid } from '@/components/affiliate/OptimizedAffiliat
 const PowerAffiliateRecommendations = () => {
   const powerRecommendations = [
     {
-      partner: 'technorv' as const,
+      partner: 'rvlife' as const,
       title: "Smart Power Management",
       description: "Take control of your RV's power with intelligent monitoring that prevents dead batteries and optimizes energy usage.",
       features: [
@@ -56,7 +56,7 @@ const PowerAffiliateRecommendations = () => {
       buttonText: "Get Extended Support"
     },
     {
-      partner: 'renogy' as const,
+      partner: 'battlebornbatteries' as const,
       title: "Most Trusted Solar Brand",
       description: "Leading solar panel manufacturer with complete RV solar kits and proven reliability for off grid adventures.",
       features: [

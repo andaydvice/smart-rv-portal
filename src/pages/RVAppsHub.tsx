@@ -154,8 +154,8 @@ const RVAppsHub = () => {
                 buttonText: 'Download Travel Apps'
               },
               {
-                partner: 'technorv',
-                title: 'TechnoRV Smart Monitoring Apps',
+                partner: 'rvlife',
+                title: 'RV Life Smart Monitoring Apps',
                 description: 'Monitor your RV systems remotely with smart technology and real-time alerts.',
                 features: ['System Monitoring', 'Real-Time Alerts', 'Remote Control', 'Smart Diagnostics'],
                 buttonText: 'Get Monitoring Apps'
@@ -185,7 +185,7 @@ const RVAppsHub = () => {
                 buttonText: 'Get Travel Guide'
               },
               {
-                partner: 'technorv',
+                partner: 'rvlife',
                 title: 'Smart RV Navigation Systems',
                 description: 'Advanced navigation systems with smart RV integration and monitoring.',
                 features: ['Smart Integration', 'System Monitoring', 'Advanced Navigation', 'Professional Support'],
@@ -215,8 +215,8 @@ const RVAppsHub = () => {
                 buttonText: 'Download Travel Apps'
               },
               {
-                partner: 'technorv',
-                title: 'TechnoRV Connectivity Solutions',
+                partner: 'rvlife',
+                title: 'RV Life Connectivity Solutions',
                 description: 'Hardware and software solutions for better connectivity, including signal boosters and monitoring apps.',
                 features: ['Signal Boosters', 'Monitoring Apps', 'Connectivity Hardware', 'Smart Integration'],
                 buttonText: 'Shop Connectivity'

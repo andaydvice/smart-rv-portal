@@ -29,7 +29,7 @@ const MapFacilityDemo: React.FC = () => {
                 features: ['Interactive maps', 'Location reviews', 'Facility ratings', 'Route planning']
               },
               {
-                partner: 'technorv',
+                partner: 'rvlife',
                 title: 'Storage Monitoring Systems',
                 description: 'Smart monitoring technology to keep track of your RV while in storage',
                 features: ['Remote monitoring', 'Security alerts', 'Climate tracking', 'Peace of mind']

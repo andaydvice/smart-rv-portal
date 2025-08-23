@@ -52,8 +52,8 @@ const VoiceControl = () => {
               subtitle="Integrate voice control with professional RV systems and support"
               partners={[
                 {
-                  partner: 'technorv',
-                  title: 'TechnoRV Voice Integration',
+                  partner: 'rvlife',
+                  title: 'RV Life Voice Integration',
                   description: 'Professional voice control system integration and monitoring for your smart RV.',
                   features: ['Voice system integration', 'Smart device connectivity', 'System monitoring', 'Technical support']
                 },

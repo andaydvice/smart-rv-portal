@@ -209,7 +209,7 @@ export default function StorageFacilities() {
           partners={[
             { partner: 'rvlife', title: 'RV Life Storage Guide', description: 'Comprehensive storage guides and facility reviews' },
             { partner: 'goodsam', title: 'Good Sam Storage', description: 'Member discounts on storage facilities nationwide' },
-            { partner: 'technorv', title: 'Storage Equipment', description: 'Professional RV covers and storage accessories' }
+            { partner: 'rvlife', title: 'Storage Equipment', description: 'Professional RV covers and storage accessories' }
           ]}
           gridCols="3"
         />

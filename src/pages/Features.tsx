@@ -102,7 +102,7 @@ const Features = () => {
               subtitle="Transform your RV into a smart home on wheels with these proven technologies from our trusted partners."
               partners={[
                 {
-                  partner: 'technorv',
+                  partner: 'rvlife',
                   title: 'Smart RV Technology Systems',
                   description: 'Complete smart technology solutions for RV automation, monitoring, and control systems.',
                   features: ['Smart Power Management', 'Security Systems', 'Automation Controls', 'Remote Monitoring'],

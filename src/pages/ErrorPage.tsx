@@ -163,7 +163,7 @@ const ErrorPage = () => {
                   features: ['24/7 emergency help', 'Nationwide coverage', 'Professional technicians', 'Peace of mind']
                 },
                 {
-                  partner: 'technorv',
+                  partner: 'rvlife',
                   title: 'Technical Support',
                   description: 'Expert technical support for RV systems and smart technology troubleshooting',
                   features: ['Expert technicians', 'Remote diagnostics', 'System troubleshooting', 'Professional guidance']

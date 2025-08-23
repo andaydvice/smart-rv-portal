@@ -162,7 +162,7 @@ const RVWeather = () => {
                   buttonText: 'Plan Weather-Safe Routes'
                 },
                 {
-                  partner: 'technorv',
+                  partner: 'rvlife',
                   title: 'Weather Monitoring Systems',
                   description: 'Smart weather stations and monitoring equipment to track conditions around your RV in real-time.',
                   features: ['Professional Weather Stations', 'Smart Monitoring', 'Mobile Alerts', 'Expert Installation'],

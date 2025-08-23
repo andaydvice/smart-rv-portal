@@ -83,7 +83,7 @@ const FuelAffiliateRecommendations = () => {
       buttonText: "Book Efficient RV"
     },
     {
-      partner: 'technorv' as const,
+      partner: 'rvlife' as const,
       title: "Smart Fuel Monitoring",
       description: "Track your RV's fuel consumption in real time and optimize your driving habits to maximize every gallon.",
       features: [

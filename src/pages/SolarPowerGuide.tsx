@@ -35,7 +35,7 @@ const SolarPowerGuide = () => {
 
   const solarKits = [
     {
-      title: "Renogy 400W RV Solar Kit",
+      title: "400W RV Solar Kit",
       description: "Complete solar power system perfect for weekend RVers and light power usage.",
       price: "$699.99",
       originalPrice: "$899.99",
@@ -49,7 +49,7 @@ const SolarPowerGuide = () => {
         "Mounting hardware included",
         "25-year panel warranty"
       ],
-      affiliateLink: "https://renogy.com/400w-rv-solar-kit",
+      affiliateLink: "https://rvlife.com/400w-rv-solar-kit",
       badges: ["Best Seller", "Complete Kit"]
     },
     {
@@ -129,7 +129,7 @@ const SolarPowerGuide = () => {
             '@context': 'https://schema.org',
             '@type': 'ItemList',
             itemListElement: [
-              { '@type': 'ListItem', position: 1, name: 'TechnoRV Solar Systems', url: 'https://technorv.com?ref=smarttech' },
+              { '@type': 'ListItem', position: 1, name: 'RV Life Solar Systems', url: 'https://rvlife.com?ref=smarttech' },
               { '@type': 'ListItem', position: 2, name: 'Good Sam Solar Services', url: 'https://goodsam.com?ref=smartrv' },
               { '@type': 'ListItem', position: 3, name: 'RV Life Solar Planning', url: 'https://rvlife.com?ref=smartportal' }
             ]
@@ -244,8 +244,8 @@ const SolarPowerGuide = () => {
                 subtitle="Professional solar kits and systems designed specifically for RV installations with everything you need."
                 partners={[
                   {
-                    partner: 'technorv',
-                    title: 'TechnoRV Solar Systems',
+                    partner: 'rvlife',
+                    title: 'RV Life Solar Systems',
                     description: 'Complete solar power systems with smart monitoring and professional installation support.',
                     features: ['Complete Solar Kits', 'Smart Monitoring', 'Professional Installation', 'System Optimization'],
                     buttonText: 'Shop Solar Systems'
@@ -275,8 +275,8 @@ const SolarPowerGuide = () => {
                 subtitle="Compare the most popular solar panels designed specifically for RV installations."
                 partners={[
                   {
-                    partner: 'technorv',
-                    title: 'Renogy 200W Monocrystalline - Best Overall',
+                    partner: 'rvlife',
+                    title: '200W Monocrystalline - Best Overall',
                     description: '21% efficiency monocrystalline panels with 25-year warranty and proven reliability.',
                     features: ['200W Output', '21%+ Efficiency', 'Monocrystalline Tech', '25 Year Warranty', 'IP67 Rating'],
                     buttonText: 'Shop Premium Panels'
@@ -306,8 +306,8 @@ const SolarPowerGuide = () => {
                 subtitle="High-quality battery systems and power management solutions for reliable RV solar energy storage."
                 partners={[
                   {
-                    partner: 'technorv',
-                    title: 'TechnoRV Battery Systems',
+                    partner: 'rvlife',
+                    title: 'RV Life Battery Systems',
                     description: 'Advanced battery storage solutions with smart monitoring and energy management systems.',
                     features: ['Smart Battery Systems', 'Energy Management', 'Monitoring Technology', 'Professional Installation'],
                     buttonText: 'Shop Battery Systems'
@@ -342,7 +342,7 @@ const SolarPowerGuide = () => {
                     </a>
                   </Button>
                   <Button asChild variant="outline" className="border-blue-500 text-blue-300 hover:bg-blue-900/50 px-8 py-3 rounded-lg min-h-[48px] touch-manipulation">
-                    <a href="https://renogy.com/installation-guide" target="_blank" rel="noopener noreferrer">
+                    <a href="https://rvlife.com/installation-guide" target="_blank" rel="noopener noreferrer">
                       DIY Installation Guide
                     </a>
                   </Button>
@@ -356,8 +356,8 @@ const SolarPowerGuide = () => {
             subtitle="Get expert solar installation and monitoring systems for your RV power needs"
             partners={[
               {
-                partner: 'technorv',
-                title: 'TechnoRV Solar Installation',
+                partner: 'rvlife',
+                title: 'RV Life Solar Installation',
                 description: 'Professional solar system installation with smart monitoring and energy management',
                 features: ['Professional Installation', 'Smart Monitoring', 'Energy Management', 'System Optimization'],
                 path: '/solar-installation',

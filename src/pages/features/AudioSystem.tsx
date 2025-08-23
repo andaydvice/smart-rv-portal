@@ -75,8 +75,8 @@ const AudioSystem = () => {
               subtitle="Get expert installation and premium audio equipment for your RV sound system"
               partners={[
                 {
-                  partner: 'technorv',
-                  title: 'TechnoRV Premium Audio Installation',
+                  partner: 'rvlife',
+                  title: 'RV Life Premium Audio Installation',
                   description: 'Professional installation of high-end audio systems with custom tuning and integration',
                   features: ['Premium Speaker Installation', 'Custom Audio Tuning', 'Smart Integration', 'Lifetime Support'],
                   path: '/premium-audio',

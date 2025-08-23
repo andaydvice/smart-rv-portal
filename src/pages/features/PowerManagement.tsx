@@ -164,8 +164,8 @@ const PowerManagement = () => {
               subtitle="Get expert installation and monitoring for your RV power management system"
               partners={[
                 {
-                  partner: 'technorv',
-                  title: 'TechnoRV Power Management Systems',
+                  partner: 'rvlife',
+                  title: 'RV Life Power Management Systems',
                   description: 'Advanced power management systems with smart monitoring and automated energy optimization',
                   features: ['Smart Power Distribution', 'Energy Monitoring', 'Automated Management', 'Professional Installation'],
                   path: '/power-systems',

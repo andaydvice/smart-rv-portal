@@ -121,7 +121,7 @@ const BlogPost = () => {
               name: 'Recommended Smart RV Resources',
               itemListElement: [
                 { '@type': 'ListItem', position: 1, name: 'RV Life Resources', url: 'https://rvlife.com?ref=smartportal' },
-                { '@type': 'ListItem', position: 2, name: 'TechnoRV Technology', url: 'https://technorv.com?ref=smarttech' },
+                { '@type': 'ListItem', position: 2, name: 'RV Life Technology', url: 'https://rvlife.com?ref=smarttech' },
                 { '@type': 'ListItem', position: 3, name: 'Good Sam Services', url: 'https://goodsam.com?ref=smartrv' }
               ]
             }
@@ -145,7 +145,7 @@ const BlogPost = () => {
             subtitle="Discover products and services that enhance your smart RV lifestyle and adventures."
             partners={[
               { partner: 'rvlife', title: 'RV Life Resources', description: 'Trip planning and RV lifestyle guides' },
-              { partner: 'technorv', title: 'RV Technology', description: 'Latest RV tech and equipment reviews' },
+              { partner: 'rvlife', title: 'RV Technology', description: 'Latest RV tech and equipment reviews' },
               { partner: 'goodsam', title: 'Smart RV Community', description: 'Join the largest smart RV community for tips and support' }
             ]}
             gridCols="3"

@@ -5,7 +5,7 @@ import { OptimizedAffiliateGrid } from '@/components/affiliate/OptimizedAffiliat
 const TowingAffiliateRecommendations = () => {
   const towingRecommendations = [
     {
-      partner: 'technorv' as const,
+      partner: 'rvlife' as const,
       title: "Smart Towing Safety",
       description: "Prevent costly tire blowouts and towing disasters with real time monitoring that alerts you to problems before they happen.",
       features: [
@@ -44,7 +44,7 @@ const TowingAffiliateRecommendations = () => {
       buttonText: "Get Professional Equipment"
     },
     {
-      partner: 'torklift' as const,
+      partner: 'tiremindertpms' as const,
       title: "Premium Towing Accessories",
       description: "Premium tie downs, glow steps, and RV accessories with strong brand reputation and professional quality construction.",
       features: [

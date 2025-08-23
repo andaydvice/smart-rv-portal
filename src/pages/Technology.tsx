@@ -62,7 +62,7 @@ const Technology = () => {
             '@context': 'https://schema.org',
             '@type': 'ItemList',
             itemListElement: [
-              { '@type': 'ListItem', position: 1, name: 'TechnoRV - Smart Technology', url: 'https://technorv.com?ref=smarttech' },
+              { '@type': 'ListItem', position: 1, name: 'RV Life - Smart Technology', url: 'https://rvlife.com?ref=smarttech' },
               { '@type': 'ListItem', position: 2, name: 'Good Sam - Tech Support', url: 'https://goodsam.com?ref=smartrv' },
               { '@type': 'ListItem', position: 3, name: 'RV Life - Smart Planning', url: 'https://rvlife.com?ref=smartportal' }
             ]
@@ -141,11 +141,11 @@ const Technology = () => {
               subtitle="Get the latest RV technology, professional installation, and expert support to upgrade your travel experience."
               partners={[
                 {
-                  partner: 'technorv',
+                  partner: 'rvlife',
                   title: 'Smart RV Technology',
                   description: 'Advanced monitoring systems, automation solutions, and connectivity upgrades for modern RVs.',
                   features: ['Smart Monitoring Systems', 'Professional Installation', 'Expert Support', '2-Year Warranty'],
-                  buttonText: 'Shop TechnoRV'
+                  buttonText: 'Shop RV Life'
                 },
                 {
                   partner: 'goodsam',

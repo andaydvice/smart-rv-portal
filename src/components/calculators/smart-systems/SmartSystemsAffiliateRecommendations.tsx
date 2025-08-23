@@ -5,7 +5,7 @@ import { OptimizedAffiliateGrid } from '@/components/affiliate/OptimizedAffiliat
 const SmartSystemsAffiliateRecommendations = () => {
   const smartRecommendations = [
     {
-      partner: 'technorv' as const,
+      partner: 'rvlife' as const,
       title: "Complete Smart RV Control",
       description: "Transform your RV into a smart home on wheels with automated systems that protect your investment and enhance comfort.",
       features: [

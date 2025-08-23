@@ -23,29 +23,29 @@ export const AFFILIATE_VIDEO_CONFIG: Record<string, VideoConfig> = {
     expectedConversionLift: '35-45%'
   },
   
-  'renogy-solar-demo': {
-    id: 'renogy-solar-demo', 
-    title: 'Renogy Solar ROI Demonstration',
-    description: 'Shows actual cost savings and payback period for Renogy solar systems on RVs',
+  'solar-power-demo': {
+    id: 'solar-power-demo', 
+    title: 'Solar Power ROI Demonstration',
+    description: 'Shows actual cost savings and payback period for solar systems on RVs',
     priority: 'high',
     placement: ['Power Calculator Results', 'Solar Guide'],
     affiliatePartners: ['battleborn', 'rvlife', 'harvesthosts'],
     expectedConversionLift: '40-50%'
   },
 
-  'dakota-lithium-demo': {
-    id: 'dakota-lithium-demo',
-    title: 'Dakota Lithium Battery Comparison',
-    description: 'Compares Dakota Lithium 11-year warranty batteries against standard batteries showing long-term value',
+  'battery-comparison-demo': {
+    id: 'battery-comparison-demo',
+    title: 'Lithium Battery Comparison',
+    description: 'Compares lithium battery options against standard batteries showing long-term value',
     priority: 'high', 
     placement: ['Power Calculator Results'],
     affiliatePartners: ['battleborn', 'goodsam'],
     expectedConversionLift: '30-40%'
   },
 
-  'blueox-towing-demo': {
-    id: 'blueox-towing-demo',
-    title: 'Blue Ox Professional Towing Safety Demo',
+  'towing-safety-demo': {
+    id: 'towing-safety-demo',
+    title: 'Professional Towing Safety Demo',
     description: 'Demonstrates professional-grade towing safety equipment preventing expensive breakdowns',
     priority: 'high',
     placement: ['Towing Calculator Results'],
@@ -84,9 +84,9 @@ export const AFFILIATE_VIDEO_CONFIG: Record<string, VideoConfig> = {
     expectedConversionLift: '20-30%'
   },
 
-  'towing-safety-demo': {
-    id: 'towing-safety-demo',
-    title: 'Towing Safety Technology Demo',
+  'tire-monitoring-demo': {
+    id: 'tire-monitoring-demo',
+    title: 'Tire Monitoring Technology Demo',
     description: 'Shows tire pressure monitoring and safety alerts preventing blowouts and accidents',
     priority: 'high',
     placement: ['Towing Calculator'],

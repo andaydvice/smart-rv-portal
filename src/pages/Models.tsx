@@ -192,7 +192,7 @@ const Models = () => {
                   buttonText: 'Get Model Support'
                 },
                 {
-                  partner: 'technorv',
+                  partner: 'rvlife',
                   title: 'Model Technology Upgrades',
                   description: 'Upgrade any RV model with smart technology, monitoring systems, and modern features.',
                   features: ['Smart Upgrades', 'Model Compatibility', 'Professional Installation', 'Technology Enhancement'],
@@ -229,7 +229,7 @@ const Models = () => {
                   buttonText: 'Book Luxury Experience'
                 },
                 {
-                  partner: 'technorv',
+                  partner: 'rvlife',
                   title: 'RV Technology Upgrades',
                   description: 'Upgrade any RV model with smart technology, monitoring systems, and automation features.',
                   features: ['Model-Specific Upgrades', 'Professional Installation', 'Smart Monitoring', 'Compatibility Guaranteed'],

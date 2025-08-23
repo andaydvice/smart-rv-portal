@@ -126,7 +126,7 @@ const StoragePreparationChecklist = () => {
                 buttonText: 'Find Storage Services'
               },
               {
-                partner: 'technorv',
+                partner: 'rvlife',
                 title: 'Smart Storage Monitoring',
                 description: 'Advanced monitoring systems to track your RV conditions while in storage.',
                 features: ['Remote Monitoring', 'Climate Tracking', 'Security Alerts', 'Battery Management'],

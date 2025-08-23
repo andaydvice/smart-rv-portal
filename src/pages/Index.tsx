@@ -46,10 +46,10 @@ const Index = () => {
             '@type': 'ItemList',
             name: 'Featured RV Technology Partners',
             itemListElement: [
-              { '@type': 'ListItem', position: 1, name: 'Renogy - Solar Power Leader', url: 'https://renogy.com?ref=smartrenogy' },
-              { '@type': 'ListItem', position: 2, name: 'Victron Energy - Power Management', url: 'https://victronenergy.com?ref=smartpower' },
+              { '@type': 'ListItem', position: 1, name: 'Battle Born Batteries - Solar Power Leader', url: 'https://battlebornbatteries.com?ref=smartpower' },
+              { '@type': 'ListItem', position: 2, name: 'RV Life - Smart Technology', url: 'https://rvlife.com?ref=smarttech' },
               { '@type': 'ListItem', position: 3, name: 'WeBoost - Cellular Boosters', url: 'https://weboost.com?ref=smartrv' },
-              { '@type': 'ListItem', position: 4, name: 'Torklift - Towing Accessories', url: 'https://torklift.com?ref=smartlift' }
+              { '@type': 'ListItem', position: 4, name: 'Good Sam - RV Services', url: 'https://goodsam.com?ref=smartrv' }
             ]
           }
         ]}
@@ -78,10 +78,10 @@ const Index = () => {
               title="Complete Smart RV Solutions Ecosystem"
               subtitle="Everything you need for smart RV living - from solar power to connectivity, all with proven quality and reliability."
               partners={[
-                { partner: 'renogy' as const, title: 'Solar Power Leader', description: 'Most trusted solar brand with complete smart RV kits and proven reliability for intelligent power management' },
-                { partner: 'victron' as const, title: 'Power Management', description: 'Professional smart RV power monitoring and inverter systems trusted worldwide for intelligent energy control' },
+                { partner: 'battlebornbatteries' as const, title: 'Solar Power Leader', description: 'Most trusted battery brand with complete smart RV kits and proven reliability for intelligent power management' },
+                { partner: 'rvlife' as const, title: 'Smart Technology', description: 'Professional smart RV systems and digital tools trusted worldwide for intelligent RV control' },
                 { partner: 'weboost' as const, title: 'Cellular Boosters', description: 'Professional signal boosters for reliable cellular connectivity anywhere you travel' },
-                { partner: 'torklift' as const, title: 'Towing Accessories', description: 'Premium tie-downs and smart RV accessories trusted by professionals for safe intelligent travel' }
+                { partner: 'goodsam' as const, title: 'RV Services', description: 'Premium RV services and support trusted by professionals for safe intelligent travel' }
               ]}
               gridCols="4"
             />
