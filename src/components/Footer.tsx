@@ -16,7 +16,7 @@ const Footer = () => {
           <div className="space-y-4 flex flex-col items-center md:items-start">
             <h3 className="text-2xl font-bold text-center md:text-left">Smart RV</h3>
             <p className="text-gray-400 text-center md:text-left">
-              Revolutionizing the future of recreational vehicles with smart technology.
+              Revolutionising the future of recreational vehicles with smart technology.
             </p>
             <div className="flex justify-center md:justify-start space-x-4">
               <a href="https://facebook.com" className="hover:text-blue-400 transition-colors">

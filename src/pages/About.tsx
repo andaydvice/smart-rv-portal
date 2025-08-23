@@ -98,7 +98,7 @@ const About = () => {
             <div className="bg-black/20 backdrop-blur-md p-8 rounded-xl border border-white/10 text-left">
               <h2 className="text-3xl font-bold text-white mb-6 text-left">Our Mission</h2>
               <p className="text-white/90 text-lg leading-relaxed text-left mb-4">
-                Smart RV is revolutionizing the recreational vehicle industry by integrating cutting edge technology with traditional smart RV experiences.
+                Smart RV is revolutionising the recreational vehicle industry by integrating cutting edge technology with traditional smart RV experiences.
               </p>
               <p className="text-white/90 text-lg leading-relaxed text-left">
                 We believe that the future of travel lies in intelligent, connected smart RVs that enhance safety, comfort, and convenience for every journey.
