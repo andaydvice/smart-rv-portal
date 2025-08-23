@@ -17,60 +17,49 @@ const Products = () => {
     scrollToTop();
   }, []);
 
-  const affiliateProducts = [
+  // Affiliate products now handled by OptimizedAffiliateGrid system for proper tracking
+  const featuredAffiliatePartners = [
     {
-      title: "RV Rentals",
-      description: "Compare and book premium RV rentals nationwide. Perfect for trying before buying or exploring new destinations.",
-      badge: "Most Popular",
-      features: ["Nationwide Network", "Insurance Included", "24/7 Support"],
-      url: "https://rvshare.com/?ref=smartroadportal",
-      buttonText: "Browse RV Rentals",
-      savings: "Save up to $200 on first booking"
+      partner: 'rvshare' as const,
+      title: 'RV Rentals',
+      description: 'Compare and book premium RV rentals nationwide. Perfect for trying before buying or exploring new destinations.',
+      features: ['Nationwide Network', 'Insurance Included', '24/7 Support'],
+      buttonText: 'Browse RV Rentals'
     },
     {
-      title: "Smart RV Technology",
-      description: "Upgrade your RV with cutting-edge smart technology, monitoring systems, and automation solutions.",
-      badge: "Tech Essentials",
-      features: ["Professional Installation", "Warranty Included", "Expert Support"],
-      url: "https://rvlife.com/?ref=smartroadportal",
-      buttonText: "Shop RV Life",
-      savings: "Free installation on orders $500+"
+      partner: 'rvlife' as const,
+      title: 'Smart RV Technology',
+      description: 'Upgrade your RV with cutting-edge smart technology, monitoring systems, and automation solutions.',
+      features: ['Professional Installation', 'Warranty Included', 'Expert Support'],
+      buttonText: 'Shop RV Life'
     },
     {
-      title: "RV Services & Insurance",
-      description: "Essential roadside assistance, insurance, and maintenance services every RV owner needs.",
-      badge: "Peace of Mind",
-      features: ["24/7 Roadside Assistance", "Nationwide Coverage", "Good Sam Partner"],
-      url: "https://www.goodsam.com/?ref=smartroadportal",
-      buttonText: "Get Good Sam",
-      savings: "First month free with annual plan"
+      partner: 'goodsam' as const,
+      title: 'RV Services & Insurance',
+      description: 'Essential roadside assistance, insurance, and maintenance services every RV owner needs.',
+      features: ['24/7 Roadside Assistance', 'Nationwide Coverage', 'Good Sam Partner'],
+      buttonText: 'Get Good Sam'
     },
     {
-      title: "Water Filtration Systems",
-      description: "Premium water filtration and purification systems for safe, clean water wherever you travel.",
-      badge: "Health Essential",
-      features: ["Clean Water Guarantee", "Easy Installation", "Multiple Filter Options"],
-      url: "https://rvwaterfilterstore.com/?ref=smartroadportal",
-      buttonText: "Shop Water Filters",
-      savings: "20% off complete systems"
+      partner: 'rvwaterfilter' as const,
+      title: 'Water Filtration Systems',
+      description: 'Premium water filtration and purification systems for safe, clean water wherever you travel.',
+      features: ['Clean Water Guarantee', 'Easy Installation', 'Multiple Filter Options'],
+      buttonText: 'Shop Water Filters'
     },
     {
-      title: "Luxury RV Experiences",
-      description: "Book unique outdoor experiences and luxury RV rentals for premium adventures and glamping.",
-      badge: "Luxury Choice",
-      features: ["Luxury Selection", "Premium Service", "Unique Locations"],
-      url: "https://outdoorsy.com/?ref=smartroadportal",
-      buttonText: "Browse Outdoorsy",
-      savings: "Exclusive luxury deals available"
+      partner: 'outdoorsy' as const,
+      title: 'Luxury RV Experiences',
+      description: 'Book unique outdoor experiences and luxury RV rentals for premium adventures and glamping.',
+      features: ['Luxury Selection', 'Premium Service', 'Unique Locations'],
+      buttonText: 'Browse Outdoorsy'
     },
     {
-      title: "Trip Planning Tools",
-      description: "Professional RV trip planning tools, GPS navigation, and comprehensive campground guides.",
-      badge: "Travel Smart",
-      features: ["RV-Safe Routes", "Expert Reviews", "Offline Maps"],
-      url: "https://rvlife.com/?ref=smartroadportal",
-      buttonText: "Get RV Life",
-      savings: "30-day free trial included"
+      partner: 'rvlife' as const,
+      title: 'Trip Planning Tools',
+      description: 'Professional RV trip planning tools, GPS navigation, and comprehensive campground guides.',
+      features: ['RV-Safe Routes', 'Expert Reviews', 'Offline Maps'],
+      buttonText: 'Get RV Life'
     }
   ];
 
@@ -79,11 +68,11 @@ const Products = () => {
   const itemListSchema = {
     "@context": "https://schema.org",
     "@type": "ItemList",
-    itemListElement: affiliateProducts.map((p, index) => ({
+    itemListElement: featuredAffiliatePartners.map((p, index) => ({
       "@type": "ListItem",
       position: index + 1,
       name: p.title,
-      url: p.url
+      url: `${AFFILIATE_PARTNERS[p.partner]?.baseUrl}?ref=${AFFILIATE_PARTNERS[p.partner]?.refCode}`
     }))
   } as const;
 
@@ -215,50 +204,13 @@ const Products = () => {
             transition={{ delay: 0.5, duration: 0.5 }}
             className="space-y-8"
           >            
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {affiliateProducts.map((product, index) => (
-                <motion.div
-                  key={product.title}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.6 + index * 0.1 }}
-                  className="bg-black/20 backdrop-blur-md p-6 rounded-xl border border-white/10 hover:border-[#5B9BD5]/50 transition-all duration-300 group"
-                >
-                  <div className="flex items-center justify-between mb-4">
-                    <h3 className="text-xl font-bold text-white">{product.title}</h3>
-                    <span className="px-3 py-1 bg-[#5B9BD5]/20 text-[#5B9BD5] text-sm font-medium rounded-full">
-                      {product.badge}
-                    </span>
-                  </div>
-                  
-                  <p className="text-white/80 mb-4 leading-relaxed">{product.description}</p>
-                  
-                  <div className="mb-4">
-                    <ul className="space-y-2">
-                      {product.features.map((feature, featureIndex) => (
-                        <li key={featureIndex} className="flex items-center text-white/70 text-sm">
-                          <div className="w-1.5 h-1.5 bg-[#5B9BD5] rounded-full mr-3"></div>
-                          {feature}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  <div className="bg-green-500/10 border border-green-500/20 rounded-lg p-3 mb-4">
-                    <p className="text-green-400 text-sm font-medium">💸 {product.savings}</p>
-                  </div>
-                  
-                  <a 
-                    href={product.url}
-                    target="_blank"
-                    rel="nofollow sponsored noopener noreferrer"
-                    className="block w-full text-center bg-[#5B9BD5] text-white hover:bg-[#4A8AC4] px-6 py-3 rounded-full font-medium transition-all duration-300 group-hover:scale-105 min-h-[44px] touch-manipulation"
-                  >
-                    {product.buttonText} →
-                  </a>
-                </motion.div>
-              ))}
-            </div>
+            <OptimizedAffiliateGrid
+              title="Featured RV Solutions"
+              subtitle="Shop premium RV products and services from verified partners with exclusive savings and expert-tested quality."
+              partners={featuredAffiliatePartners}
+              gridCols="3"
+              className="bg-transparent border-0"
+            />
           </motion.div>
 
           <TestimonialsSection />
