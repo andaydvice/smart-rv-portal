@@ -5,12 +5,24 @@
 
 import { generateStaticHTML, pageMetadata } from './static-generator';
 
-// More specific bot detection to avoid false positives
+// TEMPORARILY DISABLED BOT DETECTION FOR DEBUGGING
 export const isBot = (): boolean => {
   if (typeof navigator === 'undefined') return false;
   
   const userAgent = navigator.userAgent;
   
+  // DEBUG: Log user agent for analysis
+  console.log('Bot detection check:', {
+    userAgent: userAgent.substring(0, 150),
+    timestamp: new Date().toISOString(),
+    url: window.location.href
+  });
+  
+  // TEMPORARILY RETURN FALSE TO DISABLE BOT DETECTION
+  // This ensures all users get the full React app
+  return false;
+  
+  /* Original bot detection logic (commented out for debugging)
   // Exclude common browsers first
   const browserPatterns = [
     /chrome\/\d+\.\d+/i,
@@ -57,6 +69,7 @@ export const isBot = (): boolean => {
   ];
   
   return botPatterns.some(pattern => pattern.test(userAgent));
+  */
 };
 
 // Detect if this is a social media crawler

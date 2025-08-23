@@ -3,10 +3,10 @@
 
 # Static files are served directly by default, no redirects needed for them
 
-# Enhanced bot detection and prerendering
-[[edge_functions]]
-  function = "bot-detector"
-  path = "/*"
+# Enhanced bot detection and prerendering - TEMPORARILY DISABLED FOR DEBUGGING
+# [[edge_functions]]
+#   function = "bot-detector"
+#   path = "/*"
 
 # Specific redirects for compare models pages (high priority)
 [[redirects]]
