@@ -170,9 +170,9 @@ const About = () => {
                   features: ['Instant booking', 'Insurance included', 'Nationwide coverage', '24/7 support']
                 },
                 {
-                  partner: 'technorv',
-                  title: 'Smart RV Technology',
-                  description: 'Advanced monitoring systems and smart technology for modern RV living',
+                  partner: 'battlebornbatteries',
+                  title: 'Smart Power Technology',
+                  description: 'Advanced lithium battery systems and power monitoring for modern RV living',
                   features: ['Professional installation', 'Smart monitoring', 'Remote control', 'Expert support']
                 },
                 {

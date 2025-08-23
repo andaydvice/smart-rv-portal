@@ -77,10 +77,10 @@ const AutomatedDriving = () => {
             subtitle="Enhanced safety systems and emergency assistance for automated driving"
             partners={[
               {
-                partner: 'technorv',
-                title: 'TechnoRV ADAS Monitoring',
-                description: 'Monitor and optimize your automated driving systems with real-time diagnostics.',
-                features: ['ADAS system monitoring', 'Performance analytics', 'Safety alerts', 'System diagnostics']
+                partner: 'rvlife',
+                title: 'RV Life Safe Navigation',
+                description: 'Professional GPS navigation with advanced safety features and road condition alerts.',
+                features: ['RV-safe routing', 'Real-time traffic alerts', 'Road condition monitoring', 'Safety notifications']
               },
               {
                 partner: 'goodsam',

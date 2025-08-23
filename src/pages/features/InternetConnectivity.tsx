@@ -82,10 +82,10 @@ const InternetConnectivity = () => {
             subtitle="Get reliable internet access wherever your adventures take you"
             partners={[
               {
-                partner: 'technorv',
-                title: 'TechnoRV Internet Monitoring',
-                description: 'Monitor your connectivity status and optimize network performance.',
-                features: ['Real-time connection monitoring', 'Signal strength tracking', 'Network usage analytics']
+                partner: 'weboost',
+                title: 'WeBoost Signal Enhancement',
+                description: 'Professional cellular signal boosters to maximize your internet connectivity.',
+                features: ['Signal strength amplification', 'Multi-carrier support', 'Easy installation', 'Proven results']
               },
               {
                 partner: 'rvlife',

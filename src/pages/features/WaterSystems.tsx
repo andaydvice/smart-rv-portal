@@ -134,12 +134,12 @@ const WaterSystems = () => {
                   buttonText: 'Shop Premium Filters'
                 },
                 {
-                  partner: 'technorv',
-                  title: 'TechnoRV Smart Water Monitoring',
-                  description: 'Advanced water monitoring systems that track quality, usage, and system health in real-time',
-                  features: ['Real-Time Monitoring', 'Quality Testing', 'Usage Tracking', 'Smart Alerts'],
-                  path: '/water-monitoring',
-                  buttonText: 'Shop Monitoring Systems'
+                  partner: 'rvwaterfilter',
+                  title: 'RV Water Filter Smart Systems',
+                  description: 'Advanced water filtration and monitoring systems that ensure clean, safe water anywhere',
+                  features: ['NSF-certified filtration', 'Quality monitoring', 'Easy installation', 'System maintenance'],
+                  path: '/smart-filtration',
+                  buttonText: 'Shop Smart Filters'
                 }
               ]}
               gridCols="2"

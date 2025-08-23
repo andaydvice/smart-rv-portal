@@ -55,16 +55,6 @@ export const AFFILIATE_PARTNERS: Record<string, PartnerLink> = {
     cookieDuration: "10 days",
     category: 'services'
   },
-  technorv: {
-    name: "TechnoRV",
-    baseUrl: "https://technorv.com",
-    refCode: "smarttech",
-    description: "Smart RV technology and monitoring systems for modern travelers",
-    primaryBenefit: "Upgrade your Smart RV with professional-grade smart technology",
-    commission: "5-7%",
-    cookieDuration: "7 days",
-    category: 'tech'
-  },
   rvwaterfilter: {
     name: "RV Water Filter Store",
     baseUrl: "https://rvwaterfilterstore.com",
@@ -171,16 +161,6 @@ export const AFFILIATE_PARTNERS: Record<string, PartnerLink> = {
   },
 
   // Phase 3 (Strategic Partners)
-  renogy: {
-    name: "Renogy",
-    baseUrl: "https://renogy.com",
-    refCode: "smartrenogy",
-    description: "Leading solar panel manufacturer with complete RV solar kits",
-    primaryBenefit: "Most recognized solar brand with proven conversion rates",
-    commission: "6%",
-    cookieDuration: "30 days",
-    category: 'solar'
-  },
   victron: {
     name: "Victron Energy",
     baseUrl: "https://victronenergy.com",
@@ -211,16 +191,6 @@ export const AFFILIATE_PARTNERS: Record<string, PartnerLink> = {
     cookieDuration: "60 days",
     category: 'accessories'
   },
-  torklift: {
-    name: "Torklift",
-    baseUrl: "https://torklift.com",
-    refCode: "smartlift",
-    description: "Premium tie-downs, glow steps, and RV accessories",
-    primaryBenefit: "Professional-grade RV accessories with strong brand reputation",
-    commission: "8%",
-    cookieDuration: "30 days",
-    category: 'towing'
-  }
 };
 
 interface AffiliatePartnerButtonProps {

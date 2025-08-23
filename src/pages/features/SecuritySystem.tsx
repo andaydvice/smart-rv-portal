@@ -267,10 +267,10 @@ const SecuritySystem = () => {
                 features: ['Security system consultation', 'Emergency response', '24/7 monitoring support', 'Professional installation']
               },
               {
-                partner: 'technorv',
-                title: 'TechnoRV Security Monitoring',
-                description: 'Real-time monitoring of your RV security systems with instant alerts.',
-                features: ['Real-time security monitoring', 'Instant breach alerts', 'System health checks', 'Remote diagnostics']
+                partner: 'goodsam',
+                title: 'Good Sam Security Services',
+                description: 'Professional security monitoring and emergency response services for your RV.',
+                features: ['24/7 monitoring', 'Emergency response', 'Roadside assistance', 'Peace of mind']
               }
             ]}
             gridCols="2"

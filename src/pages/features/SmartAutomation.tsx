@@ -98,9 +98,9 @@ const SmartAutomation = () => {
             subtitle="Professional automation systems and monitoring for your smart RV"
             partners={[
               {
-                partner: 'technorv',
-                title: 'TechnoRV Smart Monitoring',
-                description: 'Advanced monitoring and control of all your RV automation systems.',
+                partner: 'victron',
+                title: 'Victron Smart Integration',
+                description: 'Advanced monitoring and control of all your RV power and automation systems.',
                 features: ['System integration monitoring', 'Energy optimization', 'Automated alerts', 'Remote diagnostics']
               },
               {

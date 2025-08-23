@@ -117,10 +117,10 @@ const ClimateControl = () => {
             subtitle="Professional climate systems and monitoring for optimal comfort"
             partners={[
               {
-                partner: 'technorv',
-                title: 'TechnoRV Climate Monitoring',
-                description: 'Monitor and optimize your climate control systems for maximum efficiency.',
-                features: ['Temperature monitoring', 'Energy usage tracking', 'System diagnostics', 'Efficiency optimization']
+                partner: 'victron',
+                title: 'Victron Climate Power Solutions',
+                description: 'Professional power monitoring and optimization for efficient climate control systems.',
+                features: ['Power usage monitoring', 'Energy optimization', 'Remote monitoring', 'System diagnostics']
               },
               {
                 partner: 'goodsam',

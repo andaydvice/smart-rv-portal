@@ -57,11 +57,11 @@ const AdventureModel = () => {
                   buttonText: 'Book Adventure'
                 },
                 {
-                  partner: 'technorv',
-                  title: 'Off-Grid Technology',
-                  description: 'Advanced solar systems, satellite connectivity, and monitoring for remote adventure travel.',
-                  features: ['Solar Solutions', 'Satellite Internet', 'Remote Monitoring', 'Off-Grid Power'],
-                  buttonText: 'Shop Adventure Tech'
+                  partner: 'battlebornbatteries',
+                  title: 'Off-Grid Power Solutions',
+                  description: 'Premium lithium batteries and power systems for extended off-grid adventures.',
+                  features: ['Lithium Power Systems', 'Extended Runtime', 'Remote Monitoring', 'Off-Grid Reliability'],
+                  buttonText: 'Shop Power Solutions'
                 },
                 {
                   partner: 'goodsam',

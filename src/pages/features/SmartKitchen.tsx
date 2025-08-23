@@ -106,13 +106,13 @@ const SmartKitchen = () => {
                 ]
               },
               {
-                partner: 'technorv',
-                title: 'Smart Appliance Monitoring',
-                description: 'Professional monitoring systems for refrigerators, cooking appliances, and kitchen automation.',
+                partner: 'victron',
+                title: 'Smart Power Monitoring',
+                description: 'Professional power monitoring systems for refrigerators, cooking appliances, and kitchen automation.',
                 features: [
-                  'Appliance health monitoring',
-                  'Temperature control alerts',
-                  'Energy usage tracking',
+                  'Power usage monitoring',
+                  'System health alerts',
+                  'Energy efficiency tracking',
                   'Professional installation'
                 ]
               },

@@ -7,9 +7,9 @@ interface OptimizedAffiliateGridProps {
   title: string;
   subtitle: string;
   partners: Array<{
-    partner: 'rvshare' | 'outdoorsy' | 'rvlife' | 'goodsam' | 'technorv' | 'rvwaterfilter' | 
-             'rvtcom' | 'solardirect' | 'a1solarstore' | 'renogy' | 'battlebornbatteries' | 'starlinkinstallers' | 
-             'torklift' | 'harvesthosts' | 'tiremindertpms' | 'victron' | 'weboost' | 'heatso' | 
+    partner: 'rvshare' | 'outdoorsy' | 'rvlife' | 'goodsam' | 'rvwaterfilter' | 
+             'rvtcom' | 'solardirect' | 'a1solarstore' | 'battlebornbatteries' | 'starlinkinstallers' | 
+             'harvesthosts' | 'tiremindertpms' | 'victron' | 'weboost' | 'heatso' | 
              'hotshotssecret' | 'mobilehomeparts' | 'battleborn' | 'tireminder' | 'starlink';
     title?: string;
     description?: string;

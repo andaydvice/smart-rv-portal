@@ -174,11 +174,11 @@ const LuxuryModel = () => {
                     buttonText: 'Join Premium Club'
                   },
                   {
-                    partner: 'technorv',
-                    title: 'High-End RV Technology',
-                    description: 'Advanced smart systems, premium electronics, and luxury automation solutions for the ultimate RV experience.',
-                    features: ['Smart home integration', 'Premium entertainment', 'Advanced monitoring'],
-                    buttonText: 'Explore Tech Solutions'
+                    partner: 'victron',
+                    title: 'High-End Power Technology',
+                    description: 'Premium power monitoring and management systems for luxury RV living.',
+                    features: ['Professional power systems', 'Smart monitoring', 'Remote control', 'Advanced automation'],
+                    buttonText: 'Explore Power Solutions'
                   }
                 ]}
                 gridCols="3"

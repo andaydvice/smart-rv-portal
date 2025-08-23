@@ -17,7 +17,7 @@ const HighValueAffiliateRecommendations: React.FC<HighValueAffiliateRecommendati
     const solarPartners = [
       { partner: 'solardirect' as const, title: 'Solar Direct', description: 'Complete RV solar systems with industry-leading warranties and expert support' },
       { partner: 'a1solarstore' as const, title: 'A1 Solar', description: 'Premium solar equipment and guidance to build efficient RV solar setups' },
-      { partner: 'renogy' as const, title: 'Renogy Solar Kits', description: 'Trusted solar brand with complete RV kits and reliable performance' }
+      { partner: 'battlebornbatteries' as const, title: 'Battle Born Solar Ready', description: 'Premium lithium batteries optimized for solar integration and reliable performance' }
     ];
 
     const techPartners = [
@@ -28,7 +28,7 @@ const HighValueAffiliateRecommendations: React.FC<HighValueAffiliateRecommendati
 
     const towingPartners = [
       { partner: 'starlinkinstallers' as const, title: 'Starlink Installation Techs', description: 'Professional Starlink installation services for reliable RV internet anywhere' },
-      { partner: 'torklift' as const, title: 'Torklift Accessories', description: 'Premium RV accessories with strong reputation and support' }
+      { partner: 'tiremindertpms' as const, title: 'TireMinder Safety Systems', description: 'Professional tire monitoring systems with proven safety record' }
     ];
 
     const connectivityPartners = [

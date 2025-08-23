@@ -75,8 +75,8 @@ const RemoteControl = () => {
             subtitle="Enhance your smart RV remote capabilities with professional monitoring and mobile app integration from our trusted partners."
             partners={[
               {
-                partner: 'technorv',
-                title: 'TechnoRV Smart Monitoring',
+                partner: 'victron',
+                title: 'Victron Smart Monitoring',
                 description: 'Professional remote monitoring systems with real-time alerts and diagnostics for complete peace of mind.',
                 features: [
                   'Real-time system monitoring',

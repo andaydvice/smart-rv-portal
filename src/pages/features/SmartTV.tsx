@@ -83,11 +83,11 @@ const SmartTV = () => {
               subtitle="Enhance your Smart TV experience with these recommended RV accessories and services"
               partners={[
                 {
-                  partner: 'technorv',
-                  title: 'TechnoRV Entertainment Systems',
-                  description: 'Professional installation and setup of premium entertainment systems with smart integration',
-                  features: ['4K System Installation', 'Smart Home Integration', 'Professional Calibration', 'Warranty Coverage'],
-                  path: '/entertainment-installation',
+                  partner: 'mobilehomeparts',
+                  title: 'RV Entertainment Systems',
+                  description: 'Professional entertainment system components and accessories for smart RV integration',
+                  features: ['Quality Components', 'Smart Integration', 'System Compatibility', 'Technical Support'],
+                  path: '/entertainment-systems',
                   buttonText: 'Shop Entertainment Systems'
                 },
                 {
