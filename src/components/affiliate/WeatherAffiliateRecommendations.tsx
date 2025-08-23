@@ -55,16 +55,16 @@ const WeatherAffiliateRecommendations = () => {
       buttonText: "Book Weather-Ready Luxury"
     },
     {
-      partner: 'technorv' as const,
-      title: "Smart Weather Monitoring",
-      description: "Stay ahead of weather changes with intelligent sensors that monitor conditions around your RV and alert you to threats.",
+      partner: 'rvlife' as const,
+      title: "Weather Planning Tools",
+      description: "Plan safer routes and avoid severe weather with intelligent planning tools and real-time weather data.",
       features: [
-        "Environmental sensor systems",
-        "Real-time weather alerts",
-        "Automatic storm warnings",
-        "Remote condition monitoring"
+        "Real-time weather tracking",
+        "Storm avoidance routing",
+        "Weather safety alerts",
+        "Emergency shelter locations"
       ],
-      buttonText: "Monitor Weather Conditions"
+      buttonText: "Plan Weather-Safe Travel"
     }
   ];
 

@@ -2,31 +2,11 @@ import { OptimizedAffiliateGrid } from '@/components/affiliate/OptimizedAffiliat
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 const TroubleshootingAffiliateRecommendations = () => {
-  const problemSolutions = [
-    {
-      problem: "Power System Issues",
-      description: "Battery not charging, inverter problems, or electrical failures",
-      solution: "TechnoRV Smart Monitoring Systems",
-      link: "https://technorv.com/power-monitoring?ref=smartroadportal"
-    },
-    {
-      problem: "Water System Problems", 
-      description: "Low water pressure, pump failures, or contaminated water",
-      solution: "RV Water Filter Store Solutions",
-      link: "https://rvwaterfilterstore.com/?ref=smartroadportal"
-    },
-    {
-      problem: "Connectivity Issues",
-      description: "Poor internet signal, failed WiFi, or communication problems",
-      solution: "TechnoRV Connectivity Boosters",
-      link: "https://technorv.com/connectivity?ref=smartroadportal"
-    },
-    {
-      problem: "Emergency Breakdown",
-      description: "Mechanical failure, tire blowout, or engine problems",
-      solution: "Good Sam Roadside Assistance",
-      link: "https://www.goodsam.com/roadside-assistance/?ref=smartroadportal"
-    }
+  const emergencyPartners = [
+    { partner: 'goodsam' as const, title: 'Emergency Roadside Assistance', description: '24/7 RV-specific emergency services and towing assistance' },
+    { partner: 'rvwaterfilter' as const, title: 'Water System Solutions', description: 'Emergency water purification and system repair guidance' },
+    { partner: 'battlebornbatteries' as const, title: 'Power System Safety', description: 'Smart battery systems with emergency monitoring and alerts' },
+    { partner: 'rvlife' as const, title: 'Emergency Planning', description: 'Digital tools and resources for emergency preparedness' }
   ];
 
   return (
@@ -44,31 +24,33 @@ const TroubleshootingAffiliateRecommendations = () => {
           </p>
           
           <div className="grid md:grid-cols-2 gap-4 mb-8">
-            {problemSolutions.map((item, index) => (
-              <div key={index} className="bg-black/20 p-4 rounded-lg border border-red-500/30">
-                <h4 className="font-semibold text-red-300 mb-2">{item.problem}</h4>
-                <p className="text-gray-300 text-sm mb-3">{item.description}</p>
-                <a 
-                  href={item.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-orange-400 hover:text-orange-300 font-medium text-sm"
-                >
-                  {item.solution} →
-                </a>
-              </div>
-            ))}
+            <div className="bg-black/20 p-4 rounded-lg border border-red-500/30">
+              <h4 className="font-semibold text-red-300 mb-2">Power System Issues</h4>
+              <p className="text-gray-300 text-sm mb-3">Battery monitoring, power management, and backup solutions</p>
+              <p className="text-orange-400 font-medium text-sm">Battle Born Batteries & Smart Systems →</p>
+            </div>
+            <div className="bg-black/20 p-4 rounded-lg border border-red-500/30">
+              <h4 className="font-semibold text-red-300 mb-2">Water System Problems</h4>
+              <p className="text-gray-300 text-sm mb-3">Filtration failures, contamination, and pressure issues</p>
+              <p className="text-orange-400 font-medium text-sm">Water Safety Solutions →</p>
+            </div>
+            <div className="bg-black/20 p-4 rounded-lg border border-red-500/30">
+              <h4 className="font-semibold text-red-300 mb-2">Connectivity Issues</h4>
+              <p className="text-gray-300 text-sm mb-3">Poor signal, failed internet, communication breakdowns</p>
+              <p className="text-orange-400 font-medium text-sm">WeBoost Signal Solutions →</p>
+            </div>
+            <div className="bg-black/20 p-4 rounded-lg border border-red-500/30">
+              <h4 className="font-semibold text-red-300 mb-2">Emergency Breakdown</h4>
+              <p className="text-gray-300 text-sm mb-3">Tire blowouts, mechanical failures, roadside emergencies</p>
+              <p className="text-orange-400 font-medium text-sm">Good Sam Emergency Service →</p>
+            </div>
           </div>
 
           <OptimizedAffiliateGrid
             title="Emergency Solutions & Tools"
             subtitle="Essential products and services for RV troubleshooting and emergency situations"
-            partners={[
-              { partner: 'goodsam', title: 'Emergency Assistance', description: '24/7 RV-specific roadside assistance and emergency services' },
-              { partner: 'technorv', title: 'Diagnostic Tools', description: 'Advanced diagnostic tools for troubleshooting RV systems' },
-              { partner: 'rvwaterfilter', title: 'Emergency Water', description: 'Emergency water purification and backup systems' }
-            ]}
-            gridCols="3"
+            partners={emergencyPartners}
+            gridCols="4"
             className="bg-black/20 border-red-500/30"
           />
         </CardContent>
@@ -86,19 +68,19 @@ const TroubleshootingAffiliateRecommendations = () => {
             <div>
               <h4 className="font-semibold text-blue-300 mb-3">Preventive Maintenance</h4>
               <ul className="text-gray-300 space-y-2 text-sm">
-                <li>• Regular system diagnostics with TechnoRV tools</li>
-                <li>• Water system maintenance and filter replacement</li>
-                <li>• Power system monitoring and battery care</li>
-                <li>• Good Sam maintenance reminders and services</li>
+                <li>• Power system monitoring with Battle Born smart systems</li>
+                <li>• Water filtration maintenance and testing</li>
+                <li>• Tire pressure monitoring with TireMinder TPMS</li>
+                <li>• Good Sam maintenance scheduling and services</li>
               </ul>
             </div>
             <div>
               <h4 className="font-semibold text-blue-300 mb-3">Emergency Preparedness</h4>
               <ul className="text-gray-300 space-y-2 text-sm">
-                <li>• 24/7 roadside assistance coverage</li>
-                <li>• Emergency water purification systems</li>
-                <li>• Backup power and communication systems</li>
-                <li>• Professional repair service networks</li>
+                <li>• 24/7 Good Sam roadside assistance coverage</li>
+                <li>• Emergency water purification backup systems</li>
+                <li>• WeBoost signal boosters for remote communication</li>
+                <li>• Harvest Hosts safe overnight parking network</li>
               </ul>
             </div>
           </div>
@@ -107,10 +89,12 @@ const TroubleshootingAffiliateRecommendations = () => {
             title="Maintenance & Prevention Tools"
             subtitle="Keep your RV in top condition with these maintenance resources"
             partners={[
-              { partner: 'rvlife', title: 'Maintenance Tools', description: 'Digital tools and apps for RV maintenance tracking' },
-              { partner: 'technorv', title: 'Monitoring Systems', description: 'Smart monitoring systems for preventive maintenance' }
+              { partner: 'battlebornbatteries', title: 'Power Monitoring', description: 'Smart battery systems with monitoring and alerts for preventive maintenance' },
+              { partner: 'rvwaterfilter', title: 'Water Safety', description: 'Filtration systems for preventing water contamination issues' },
+              { partner: 'rvlife', title: 'Digital Maintenance', description: 'Apps and tools for tracking RV maintenance schedules' },
+              { partner: 'goodsam', title: 'Service Network', description: 'Professional RV service and repair network access' }
             ]}
-            gridCols="2"
+            gridCols="4"
           />
         </CardContent>
       </Card>

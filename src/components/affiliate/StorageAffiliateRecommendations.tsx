@@ -67,16 +67,16 @@ const StorageAffiliateRecommendations = () => {
       buttonText: "Find Storage Facilities"
     },
     {
-      partner: 'technorv' as const,
-      title: "Remote Storage Monitoring",
-      description: "Keep watch over your stored RV with smart security and monitoring systems that alert you to any issues.",
+      partner: 'battlebornbatteries' as const,
+      title: "Storage Battery Management",
+      description: "Monitor your RV battery health during storage with smart battery systems that protect against damage.",
       features: [
-        "Remote security monitoring",
-        "Battery system tracking",
-        "Environmental sensors",
-        "Theft protection alerts"
+        "Remote battery monitoring",
+        "Storage mode optimization",
+        "Health alerts and tracking",
+        "Prevent deep discharge damage"
       ],
-      buttonText: "Monitor Your Stored RV"
+      buttonText: "Protect Battery Investment"
     }
   ];
 
