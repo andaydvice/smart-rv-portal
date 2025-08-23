@@ -1,7 +1,7 @@
 # Netlify _redirects file for bot detection and prerendering
 
-# Bot-specific routing using user agent detection
-/*    /prerender/:splat   200   Conditions:User-Agent=*bot*,*crawler*,*spider*,*facebook*,*twitter*,*linkedin*,*slack*,*discord*,*whatsapp*,*telegram*
+# Bot-specific routing using more specific user agent detection
+# Removed this line as edge functions handle bot detection more accurately
 
 # Static file serving (robots.txt, sitemap.xml, etc.)
 /robots.txt    /robots.txt    200

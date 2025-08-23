@@ -5,37 +5,58 @@
 
 import { generateStaticHTML, pageMetadata } from './static-generator';
 
-// Enhanced bot detection with more user agents
+// More specific bot detection to avoid false positives
 export const isBot = (): boolean => {
   if (typeof navigator === 'undefined') return false;
   
-  const botPatterns = [
-    /googlebot/i,
-    /bingbot/i,
-    /slurp/i,
-    /duckduckbot/i,
-    /baiduspider/i,
-    /yandexbot/i,
-    /sogou/i,
-    /twitterbot/i,
-    /facebookexternalhit/i,
-    /whatsapp/i,
-    /telegram/i,
-    /linkedinbot/i,
-    /slackbot/i,
-    /discordbot/i,
-    /applebot/i,
-    /crawler/i,
-    /spider/i,
-    /bot/i,
-    /crawling/i,
-    /headlesschrome/i,
-    /phantomjs/i,
-    /sitemapgenerator/i,
-    /preview/i
+  const userAgent = navigator.userAgent;
+  
+  // Exclude common browsers first
+  const browserPatterns = [
+    /chrome\/\d+\.\d+/i,
+    /firefox\/\d+\.\d+/i,
+    /safari\/\d+\.\d+/i,
+    /edge\/\d+\.\d+/i,
+    /opera\/\d+\.\d+/i
   ];
   
-  return botPatterns.some(pattern => pattern.test(navigator.userAgent));
+  // If it looks like a regular browser, check for bot indicators
+  if (browserPatterns.some(pattern => pattern.test(userAgent))) {
+    const specificBotPatterns = [
+      /googlebot\/\d+\.\d+/i,
+      /bingbot\/\d+\.\d+/i,
+      /headlesschrome/i,
+      /phantomjs/i
+    ];
+    return specificBotPatterns.some(pattern => pattern.test(userAgent));
+  }
+  
+  // More specific bot patterns
+  const botPatterns = [
+    /googlebot\/\d+\.\d+/i,
+    /bingbot\/\d+\.\d+/i,
+    /yahoo! slurp/i,
+    /duckduckbot-https\/\d+\.\d+/i,
+    /baiduspider\/\d+\.\d+/i,
+    /yandexbot\/\d+\.\d+/i,
+    /sogou\s+web\s+spider/i,
+    /twitterbot\/\d+\.\d+/i,
+    /facebookexternalhit\/\d+\.\d+/i,
+    /whatsapp\/\d+\.\d+/i,
+    /telegram.*bot/i,
+    /linkedinbot\/\d+\.\d+/i,
+    /slackbot.*link.*expanding/i,
+    /discordbot/i,
+    /applebot\/\d+\.\d+/i,
+    /\bcrawler\b.*\bbot\b/i,
+    /\bspider\b.*\bbot\b/i,
+    /sitemapgenerator.*bot/i,
+    /pinterestbot\/\d+\.\d+/i,
+    /redditbot\/\d+\.\d+/i,
+    /skypeuripreview/i
+  ];
+  
+  return botPatterns.some(pattern => pattern.test(userAgent));
 };
 
 // Detect if this is a social media crawler

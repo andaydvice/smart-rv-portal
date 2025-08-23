@@ -22,38 +22,53 @@ function isValidRoute(path: string): boolean {
   return VALID_PATTERNS.some(pattern => pattern.test(path));
 }
 
-// Enhanced bot detection patterns
+// More specific bot detection patterns to avoid false positives
 const BOT_PATTERNS = [
-  /googlebot/i,
-  /bingbot/i,
-  /slurp/i,
-  /duckduckbot/i,
-  /baiduspider/i,
-  /yandexbot/i,
-  /sogou/i,
-  /twitterbot/i,
-  /facebookexternalhit/i,
-  /whatsapp/i,
-  /telegram/i,
-  /linkedinbot/i,
-  /slackbot/i,
+  /googlebot\/\d+\.\d+/i,
+  /bingbot\/\d+\.\d+/i,
+  /yahoo! slurp/i,
+  /duckduckbot-https\/\d+\.\d+/i,
+  /baiduspider\/\d+\.\d+/i,
+  /yandexbot\/\d+\.\d+/i,
+  /sogou\s+web\s+spider/i,
+  /twitterbot\/\d+\.\d+/i,
+  /facebookexternalhit\/\d+\.\d+/i,
+  /whatsapp\/\d+\.\d+/i,
+  /telegram.*bot/i,
+  /linkedinbot\/\d+\.\d+/i,
+  /slackbot.*link.*expanding/i,
   /discordbot/i,
-  /applebot/i,
-  /crawler/i,
-  /spider/i,
-  /bot/i,
-  /crawling/i,
-  /headlesschrome/i,
-  /phantomjs/i,
-  /sitemapgenerator/i,
-  /preview/i,
-  /pinterestbot/i,
-  /redditbot/i,
-  /skypeuripreview/i
+  /applebot\/\d+\.\d+/i,
+  /\bcrawler\b.*\bbot\b/i,
+  /\bspider\b.*\bbot\b/i,
+  /headlesschrome\/\d+\.\d+/i,
+  /phantomjs\/\d+\.\d+/i,
+  /sitemapgenerator.*bot/i,
+  /pinterestbot\/\d+\.\d+/i,
+  /redditbot\/\d+\.\d+/i,
+  /skypeuripreview/i,
+  /^mozilla\/5\.0.*\+http/i // Detects crawlers that include URLs in user agent
 ];
 
-// Check if user agent matches bot patterns
+// Check if user agent matches bot patterns with additional checks
 function isBot(userAgent: string): boolean {
+  if (!userAgent || userAgent.length < 10) return false;
+  
+  // Exclude common browsers
+  const browserPatterns = [
+    /chrome\/\d+\.\d+/i,
+    /firefox\/\d+\.\d+/i,
+    /safari\/\d+\.\d+/i,
+    /edge\/\d+\.\d+/i,
+    /opera\/\d+\.\d+/i
+  ];
+  
+  // If it looks like a regular browser, it's not a bot
+  if (browserPatterns.some(pattern => pattern.test(userAgent))) {
+    // Double check - some bots masquerade as browsers but include bot indicators
+    return BOT_PATTERNS.some(pattern => pattern.test(userAgent));
+  }
+  
   return BOT_PATTERNS.some(pattern => pattern.test(userAgent));
 }
 
@@ -289,6 +304,9 @@ export default async function botDetector(request: Request, context: Context) {
       }
     });
   }
+  
+  // Debug log for non-bot requests to help identify false positives
+  console.log(`Human user detected: ${userAgent.substring(0, 100)} accessing ${path}`);
   
   // For human users, continue to normal SPA
   return;
