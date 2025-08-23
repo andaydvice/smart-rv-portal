@@ -1268,6 +1268,22 @@ export type Database = {
         Args: { "": number }
         Returns: string
       }
+      get_public_facility_data: {
+        Args: Record<PropertyKey, never>
+        Returns: {
+          address: string
+          avg_rating: number
+          basic_features: Json
+          city: string
+          id: string
+          latitude: number
+          longitude: number
+          name: string
+          price_category: string
+          review_count: number
+          state: string
+        }[]
+      }
       get_spatial_ref_sys: {
         Args: Record<PropertyKey, never>
         Returns: {
