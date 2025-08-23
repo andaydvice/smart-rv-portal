@@ -49,21 +49,31 @@ const getStateAbbreviation = (fullStateName: string): string => {
   return fullStateName;
 }
 
-// Conversion function for consistent typing
-function convertToStorageFacility(facility: any): StorageFacility {
-  // Create a properly typed features object
+// Conversion function for public data (non-sensitive info only)
+function convertToStorageFacilityFromPublic(facility: any): StorageFacility {
+  // Use basic features from the public function
   const features = {
-    indoor: Boolean(facility.features?.indoor),
-    climate_controlled: Boolean(facility.features?.climate_controlled),
-    "24h_access": Boolean(facility.features?.["24h_access"]),
-    security_system: Boolean(facility.features?.security_system),
-    vehicle_washing: Boolean(facility.features?.vehicle_washing)
+    indoor: Boolean(facility.basic_features?.indoor),
+    climate_controlled: Boolean(facility.basic_features?.climate_controlled),
+    "24h_access": false, // Not exposed in public view
+    security_system: Boolean(facility.basic_features?.security_system),
+    vehicle_washing: false // Not exposed in public view
   };
 
   // Normalize state names for display
   const normalizedState = normalizeStateName(facility.state);
+
+  // Convert price category back to approximate range
+  let priceRange = { min: 0, max: 0, currency: 'USD' };
+  if (facility.price_category === 'premium') {
+    priceRange = { min: 301, max: 500, currency: 'USD' };
+  } else if (facility.price_category === 'standard') {
+    priceRange = { min: 151, max: 300, currency: 'USD' };
+  } else if (facility.price_category === 'budget') {
+    priceRange = { min: 50, max: 150, currency: 'USD' };
+  }
          
-  // Return storage facility with proper typing
+  // Return storage facility with proper typing (no sensitive data)
   return {
     id: facility.id,
     name: facility.name,
@@ -73,21 +83,17 @@ function convertToStorageFacility(facility: any): StorageFacility {
     latitude: Number(facility.latitude),
     longitude: Number(facility.longitude),
     features: features,
-    price_range: {
-      min: Number(facility.price_range?.min) || 0,
-      max: Number(facility.price_range?.max) || 0,
-      currency: facility.price_range?.currency || 'USD'
-    },
-    contact_phone: facility.contact_phone,
-    contact_email: facility.contact_email,
+    price_range: priceRange,
+    contact_phone: undefined, // Not exposed in public view
+    contact_email: undefined, // Not exposed in public view
     avg_rating: facility.avg_rating,
     review_count: facility.review_count,
     verified_fields: {
-      features: Boolean(facility.verified_fields?.features),
-      price_range: Boolean(facility.verified_fields?.price_range),
-      contact_info: Boolean(facility.verified_fields?.contact_info),
-      location: Boolean(facility.verified_fields?.location),
-      business_hours: Boolean(facility.verified_fields?.business_hours)
+      features: false, // Not exposed in public view
+      price_range: false, // Not exposed in public view
+      contact_info: false, // Not exposed in public view
+      location: true, // Location is publicly visible
+      business_hours: false // Not exposed in public view
     }
   };
 }
@@ -96,17 +102,16 @@ export const useStorageFacilities = (filters: FilterState) => {
   const { data: maxPriceData } = useQuery({
     queryKey: ['max-facility-price'],
     queryFn: async () => {
-      const { data, error } = await supabase
-        .from('storage_facilities')
-        .select('price_range')
-        .order('price_range->max', { ascending: false })
-        .limit(1)
-        .single();
+      // Use the public function for getting max price data
+      const { data, error } = await supabase.rpc('get_public_facility_data');
       
-      if (error) return 1000;
+      if (error || !data) return 1000;
       
-      const priceRange = (data?.price_range as unknown) as PriceRange | null;
-      return priceRange?.max || 1000;
+      // Find max price from the price categories
+      const hasAnyPremium = data.some(f => f.price_category === 'premium');
+      const hasAnyStandard = data.some(f => f.price_category === 'standard');
+      
+      return hasAnyPremium ? 500 : hasAnyStandard ? 300 : 150;
     }
   });
 
@@ -114,24 +119,8 @@ export const useStorageFacilities = (filters: FilterState) => {
     queryKey: ['storage-facilities', filters],
     queryFn: async () => {
       
-      let query = supabase
-        .from('storage_facilities')
-        .select(`
-          id,
-          name,
-          address,
-          city,
-          state,
-          latitude,
-          longitude,
-          features,
-          price_range,
-          contact_phone,
-          contact_email,
-          avg_rating,
-          review_count,
-          verified_fields
-        `);
+      // Use the secure public function to get non-sensitive facility data
+      const { data: allData, error } = await supabase.rpc('get_public_facility_data');
       
       // Log query params for debugging
       console.log('Query params:', {
@@ -139,10 +128,16 @@ export const useStorageFacilities = (filters: FilterState) => {
         priceRange: filters.priceRange
       });
       
+      if (error) {
+        console.error('Supabase query error:', error);
+        throw error;
+      }
+      
+      if (!allData) return [];
+
       // Apply state filter if selected
+      let filteredData = allData;
       if (filters.selectedState) {
-        
-        // Create an array of possible state values (full name and abbreviation)
         const stateValues = [];
         
         // Convert full state name to abbreviation, or vice versa
@@ -177,31 +172,20 @@ export const useStorageFacilities = (filters: FilterState) => {
         } else if (filters.selectedState === 'Indiana' || filters.selectedState === 'IN') {
           stateValues.push('IN', 'Indiana');
         } else {
-          // For other states, use direct equality and add the state name
           stateValues.push(filters.selectedState);
         }
         
-        console.log('Filtering for states:', stateValues);
-        
-        // Use in operator to match any of the possible state values
-        query = query.in('state', stateValues);
+        filteredData = allData.filter(facility => 
+          stateValues.includes(facility.state)
+        );
       }
-
-      const { data, error } = await query;
-      
-      if (error) {
-        console.error('Supabase query error:', error);
-        throw error;
-      }
-      
-      if (!data) return [];
 
       // Log states returned for debugging
-      console.log('Total facilities fetched:', data.length);
-      console.log('States returned:', [...new Set(data.map(f => f.state))].sort());
+      console.log('Total facilities fetched:', filteredData.length);
+      console.log('States returned:', [...new Set(filteredData.map(f => f.state))].sort());
       
       // Map database results to StorageFacility objects using our conversion function
-      return data.map(facility => convertToStorageFacility(facility));
+      return filteredData.map(facility => convertToStorageFacilityFromPublic(facility));
     },
     refetchOnWindowFocus: false,
     staleTime: 300000 // 5 minute cache

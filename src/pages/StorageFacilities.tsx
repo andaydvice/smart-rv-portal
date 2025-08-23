@@ -41,10 +41,8 @@ const normalizeStateName = (stateAbbr: string): string => {
 export async function getStateCountsWithSQL() {
   const { supabase } = await import('@/integrations/supabase/client');
   
-  // Execute a plain SQL query
-  const { data, error } = await supabase
-    .from('storage_facilities')
-    .select('state');
+  // Use the secure public function to get states
+  const { data, error } = await supabase.rpc('get_public_facility_data');
   
   if (error || !data) {
     console.error('Error fetching states:', error);
@@ -70,34 +68,37 @@ export async function getStateCountsWithSQL() {
   })).sort((a, b) => a.state.localeCompare(b.state));
 }
 
-// Helper function to convert Supabase data to StorageFacility type
-function convertToStorageFacility(data: any): StorageFacility {
-  // Create a properly typed features object
+// Helper function to convert public data to StorageFacility type
+function convertToStorageFacilityFromPublic(data: any): StorageFacility {
+  // Create a properly typed features object from basic features
   const features = {
-    indoor: Boolean(data.features?.indoor),
-    climate_controlled: Boolean(data.features?.climate_controlled),
-    "24h_access": Boolean(data.features?.["24h_access"]),
-    security_system: Boolean(data.features?.security_system),
-    vehicle_washing: Boolean(data.features?.vehicle_washing)
+    indoor: Boolean(data.basic_features?.indoor),
+    climate_controlled: Boolean(data.basic_features?.climate_controlled),
+    "24h_access": false, // Not exposed in public view
+    security_system: Boolean(data.basic_features?.security_system),
+    vehicle_washing: false // Not exposed in public view
   };
   
-  // Create a properly typed price_range object
-  const priceRange = {
-    min: Number(data.price_range?.min) || 0,
-    max: Number(data.price_range?.max) || 0,
-    currency: data.price_range?.currency || 'USD'
-  };
+  // Convert price category to approximate range
+  let priceRange = { min: 0, max: 0, currency: 'USD' };
+  if (data.price_category === 'premium') {
+    priceRange = { min: 301, max: 500, currency: 'USD' };
+  } else if (data.price_category === 'standard') {
+    priceRange = { min: 151, max: 300, currency: 'USD' };
+  } else if (data.price_category === 'budget') {
+    priceRange = { min: 50, max: 150, currency: 'USD' };
+  }
   
-  // Create a properly typed verified_fields object
+  // Create a verified fields object (limited for public view)
   const verifiedFields = {
-    features: Boolean(data.verified_fields?.features),
-    price_range: Boolean(data.verified_fields?.price_range),
-    contact_info: Boolean(data.verified_fields?.contact_info),
-    location: Boolean(data.verified_fields?.location),
-    business_hours: Boolean(data.verified_fields?.business_hours)
+    features: false, // Not exposed in public view
+    price_range: false, // Not exposed in public view
+    contact_info: false, // Not exposed in public view
+    location: true, // Location is publicly available
+    business_hours: false // Not exposed in public view
   };
   
-  // Return a properly typed StorageFacility object
+  // Return a properly typed StorageFacility object (no sensitive data)
   return {
     id: data.id,
     name: data.name,
@@ -108,8 +109,8 @@ function convertToStorageFacility(data: any): StorageFacility {
     longitude: Number(data.longitude),
     features: features,
     price_range: priceRange,
-    contact_phone: data.contact_phone || undefined,
-    contact_email: data.contact_email || undefined,
+    contact_phone: undefined, // Not exposed in public view
+    contact_email: undefined, // Not exposed in public view
     avg_rating: data.avg_rating || undefined,
     review_count: data.review_count || undefined,
     verified_fields: verifiedFields
@@ -140,16 +141,13 @@ export default function StorageFacilities() {
       if (!featuredLocation) {
         try {
           const { supabase } = await import('@/integrations/supabase/client');
-          const { data, error } = await supabase
-            .from('storage_facilities')
-            .select('*')
-            .limit(5);
+          const { data, error } = await supabase.rpc('get_public_facility_data');
             
           if (data && data.length > 0) {
             // Pick a random facility from the fetched data
             const randomIndex = Math.floor(Math.random() * data.length);
-            // Convert the Supabase data to StorageFacility type
-            setFeaturedLocation(convertToStorageFacility(data[randomIndex]));
+            // Convert the public data to StorageFacility type
+            setFeaturedLocation(convertToStorageFacilityFromPublic(data[randomIndex]));
           }
         } catch (error) {
           console.error('Error fetching random facility:', error);
