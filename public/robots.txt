@@ -7,9 +7,9 @@ Disallow: /account
 Disallow: /search
 
 # Sitemap location
-Sitemap: https://rv-tech-hub.lovable.app/sitemap.xml
+Sitemap: https://smartrvsystems.lovable.app/sitemap.xml
 
 # Crawl delay for polite crawling
 Crawl-delay: 1
 
-# Last updated: 2025-01-17
+# Last updated: 2024-08-24
