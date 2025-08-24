@@ -28,7 +28,7 @@ const TechnologyBreakdownSection = () => {
         <div className="bg-gray-800/30 p-6 rounded-lg border border-gray-700">
           <Monitor className="h-10 w-10 text-[#5B9BD5] mb-4" />
           <h3 className="text-xl font-semibold text-white mb-3">Integration</h3>
-          <p className="text-gray-300 text-left">Compatible with all smart RV systems and major smart home platforms for extended functionality.</p>
+          <p className="text-gray-300 text-left">Compatible with all Smart RV Hub systems and major smart home platforms for extended functionality.</p>
         </div>
       </div>
     </div>

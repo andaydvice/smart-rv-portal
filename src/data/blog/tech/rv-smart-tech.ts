@@ -75,7 +75,7 @@ Load management systems prioritize critical systems during low power situations.
 
 ## Future Ready Technology
 
-Smart RV systems are designed to evolve with advancing technology through regular software updates.
+Smart RV Hub systems are designed to evolve with advancing technology through regular software updates.
 
 Over the air updates add new features and improve system performance without hardware changes.
 

@@ -55,7 +55,7 @@ const Technology = () => {
     <Layout>
       <Helmet>
         <title>Smart RV Technology | Systems, Power, Connectivity</title>
-        <meta name="description" content="Explore smart RV systems, power management, connectivity, and automation partners to upgrade your travel experience." />
+        <meta name="description" content="Explore Smart RV Hub systems, power management, connectivity, and automation partners to upgrade your travel experience." />
         <link rel="canonical" href={typeof window !== 'undefined' ? window.location.origin + '/technology' : ''} />
         <script type="application/ld+json">
           {JSON.stringify({

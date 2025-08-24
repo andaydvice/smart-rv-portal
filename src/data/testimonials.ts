@@ -11,7 +11,7 @@ const testimonials: Testimonial[] = [
   // Candidates for verification — hidden until verified is true
   {
     persona: 'Innovation Pioneers',
-    quote: 'Smart RV systems helped us validate new ideas faster and travel farther with fewer resources',
+    quote: 'Smart RV Hub helped us validate new ideas faster and travel farther with fewer resources',
     author: 'Industry Leader',
     sourceName: 'RV LIFE',
     sourceUrl: 'https://rvlife.com',

@@ -4,7 +4,7 @@ import { Container } from "@/components/ui/container";
 export const TrustStrip = () => {
   const items = [
     { icon: ShieldCheck, label: "Safety certified systems" },
-    { icon: Cpu, label: "Professional smart RV systems" },
+    { icon: Cpu, label: "Professional Smart RV Hub systems" },
     { icon: Wifi, label: "Starlink & 5G ready" },
     { icon: Sun, label: "Optimized solar integration" },
     { icon: Wrench, label: "Professional installer network" },

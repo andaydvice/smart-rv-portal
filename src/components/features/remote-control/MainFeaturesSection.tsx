@@ -44,7 +44,7 @@ const MainFeaturesSection = () => {
           />
         </div>
         <ul className="list-disc list-inside space-y-3 text-gray-300">
-          <li>Seamless connection with all smart RV systems</li>
+          <li>Seamless connection with all Smart RV Hub systems</li>
           <li>Central hub for comprehensive control</li>
           <li>Unified dashboard for system status</li>
           <li>Automatic sync between devices</li>

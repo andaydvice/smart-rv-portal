@@ -99,7 +99,7 @@ const RemoteControl = () => {
               {
                 partner: 'goodsam',
                 title: 'Good Sam Remote Support',
-                description: 'Professional technical support and emergency assistance for your smart RV systems.',
+                description: 'Professional technical support and emergency assistance for your Smart RV Hub systems.',
                 features: [
                   '24/7 technical support',
                   'Remote diagnostics',

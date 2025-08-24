@@ -26,7 +26,7 @@ const Blog = () => {
       <SEO
         title="RV Tech Blog | Smart RV Living & Technology Insights"
         description="Discover the latest in RV technology, smart systems, solar power, connectivity solutions, and digital nomad living. Expert reviews, guides, and insights for modern travelers."
-        keywords="RV blog, RV technology, smart RV systems, digital nomad blog, RV solar power, RV connectivity, mobile internet, RV automation"
+        keywords="RV blog, RV technology, Smart RV Hub, digital nomad blog, RV solar power, RV connectivity, mobile internet, RV automation"
         ogImage="/og-image.svg"
         ogImageAlt="Smart RV Technology Blog - Latest insights and guides"
         structuredData={[

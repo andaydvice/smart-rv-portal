@@ -17,7 +17,7 @@ const SmartSystemGuide = () => {
             Smart System Integration Guide
           </h2>
           <p className="text-gray-200 text-lg">
-            Complete setup and troubleshooting guide for your Smart RV systems
+            Complete setup and troubleshooting guide for your Smart RV Hub systems
           </p>
         </div>
 

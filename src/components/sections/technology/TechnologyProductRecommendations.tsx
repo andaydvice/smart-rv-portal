@@ -8,9 +8,9 @@ const TechnologyProductRecommendations = () => {
           title="Shop Smart RV Technology"
           subtitle="Transform your RV with cutting-edge smart technologies. Each product is vetted by our tech experts and highly rated by the smart RV community."
           partners={[
-            { partner: 'rvlife', title: 'Smart RV Systems', description: 'GPS tracking, WiFi boosters, and smart appliance controls for intelligent RV management' },
+            { partner: 'rvlife', title: 'Smart RV Hub', description: 'GPS tracking, WiFi boosters, and smart appliance controls for intelligent RV management' },
             { partner: 'rvwaterfilter', title: 'Water Safety Tech', description: 'Smart water filtration and monitoring systems for safe intelligent RV living' },
-            { partner: 'goodsam', title: 'Tech Support', description: 'Professional installation and technical support services for smart RV systems' },
+            { partner: 'goodsam', title: 'Tech Support', description: 'Professional installation and technical support services for Smart RV Hub systems' },
             { partner: 'rvlife', title: 'Digital Tools', description: 'Apps and digital tools for smart RV management and intelligent travel planning' }
           ]}
           gridCols="2"

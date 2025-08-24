@@ -9,7 +9,7 @@ const TechnologyFAQ = () => {
     },
     {
       question: "Can I control my RV with my phone?",
-      answer: "Yes. Most smart RV systems include mobile applications that allow you to monitor and manage temperature, lighting, security, and even check your battery status from nearly anywhere with an internet connection."
+      answer: "Yes. Most Smart RV Hub systems include mobile applications that allow you to monitor and manage temperature, lighting, security, and even check your battery status from nearly anywhere with an internet connection."
     },
     {
       question: "How does the smart security system work?",
@@ -36,7 +36,7 @@ const TechnologyFAQ = () => {
       </div>
       
       <p className="text-gray-200 mb-8 text-lg max-w-2xl text-left">
-        Find answers to the most common questions about smart RV systems and features below.
+        Find answers to the most common questions about Smart RV Hub systems and features below.
       </p>
       
       <div className="space-y-4">

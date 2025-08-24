@@ -78,7 +78,7 @@ export const pageMetadata: Record<string, PageMetadata> = {
   },
   '/pricing': {
     title: 'Smart RV Pricing - Affordable Technology Packages',
-    description: 'Transparent pricing for smart RV systems and technology packages. Choose the perfect solution for your budget and needs.',
+    description: 'Transparent pricing for Smart RV Hub systems and technology packages. Choose the perfect solution for your budget and needs.',
     keywords: ['rv pricing', 'smart rv cost', 'technology packages', 'rv upgrades cost'],
     path: '/pricing',
     priority: 0.8,
@@ -413,7 +413,7 @@ export const pageMetadata: Record<string, PageMetadata> = {
   },
   '/documentation/complete': {
     title: 'Complete RV Documentation - Full Technical Guide',
-    description: 'Complete technical documentation covering all aspects of smart RV systems, installation, and maintenance.',
+    description: 'Complete technical documentation covering all aspects of Smart RV Hub systems, installation, and maintenance.',
     keywords: ['complete rv guide', 'rv technical documentation', 'rv installation guide', 'rv system manual'],
     path: '/documentation/complete',
     priority: 0.5,
