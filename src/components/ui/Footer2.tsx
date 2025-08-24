@@ -78,7 +78,7 @@ const defaultLinks: FooterGroup[] = [
 
 const Footer2 = ({
   siteName = "Smart RV",
-  description = "Revolutionising the future of recreational vehicles with smart technology.",
+  description = "Revolutionizing the future of recreational vehicles with smart technology.",
   links = defaultLinks,
   socials = [],
   year = new Date().getFullYear(),
