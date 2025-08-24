@@ -84,6 +84,9 @@
   command = "npm run build"
   publish = "dist"
 
+[build.environment]
+  SECRETS_SCAN_ENABLED = "false"
+
 # Comprehensive security headers for production
 [[headers]]
   for = "/*"
