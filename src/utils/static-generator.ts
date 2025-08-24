@@ -32,16 +32,16 @@ export const pageMetadata: Record<string, PageMetadata> = {
           "@type": "Organization",
           "name": "Smart RV Technology Hub",
           "description": "Next-generation connectivity and control for your RV",
-          "url": "https://rv-tech-hub.lovable.app",
-          "logo": "https://rv-tech-hub.lovable.app/lovable-uploads/f3ebf58c-7bbf-427f-9510-9c3b0aec6f6d.png"
+          "url": "https://smartrvhub.com",
+          "logo": "https://smartrvhub.com/lovable-uploads/f3ebf58c-7bbf-427f-9510-9c3b0aec6f6d.png"
         },
         {
           "@type": "WebSite",
           "name": "Smart RV Technology Hub",
-          "url": "https://rv-tech-hub.lovable.app",
+          "url": "https://smartrvhub.com",
           "potentialAction": {
             "@type": "SearchAction",
-            "target": "https://rv-tech-hub.lovable.app/search?q={search_term_string}",
+            "target": "https://smartrvhub.com/search?q={search_term_string}",
             "query-input": "required name=search_term_string"
           }
         }
@@ -461,23 +461,23 @@ export const generateStaticHTML = (path: string): string => {
     <title>${metadata.title}</title>
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="https://rv-tech-hub.lovable.app${metadata.path}" />
+    <link rel="canonical" href="https://smartrvhub.com${metadata.path}" />
     
     <!-- Open Graph tags -->
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://rv-tech-hub.lovable.app${metadata.path}" />
+    <meta property="og:url" content="https://smartrvhub.com${metadata.path}" />
     <meta property="og:title" content="${metadata.title}" />
     <meta property="og:description" content="${metadata.description}" />
-    <meta property="og:image" content="https://rv-tech-hub.lovable.app/lovable-uploads/f3ebf58c-7bbf-427f-9510-9c3b0aec6f6d.png" />
-    <meta property="og:site_name" content="Smart RV Systems" />
+    <meta property="og:image" content="https://smartrvhub.com/lovable-uploads/f3ebf58c-7bbf-427f-9510-9c3b0aec6f6d.png" />
+    <meta property="og:site_name" content="Smart RV Hub" />
     <meta property="og:locale" content="en_US" />
     
     <!-- Twitter Card tags -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:url" content="https://rv-tech-hub.lovable.app${metadata.path}" />
+    <meta name="twitter:url" content="https://smartrvhub.com${metadata.path}" />
     <meta name="twitter:title" content="${metadata.title}" />
     <meta name="twitter:description" content="${metadata.description}" />
-    <meta name="twitter:image" content="https://rv-tech-hub.lovable.app/lovable-uploads/f3ebf58c-7bbf-427f-9510-9c3b0aec6f6d.png" />
+    <meta name="twitter:image" content="https://smartrvhub.com/lovable-uploads/f3ebf58c-7bbf-427f-9510-9c3b0aec6f6d.png" />
     
     <!-- Performance-critical preloads -->
     <link rel="preload" href="/lovable-uploads/f3ebf58c-7bbf-427f-9510-9c3b0aec6f6d.png" as="image" />
@@ -666,7 +666,7 @@ const generateFallbackHTML = (path: string): string => {
  * Generate sitemap.xml content
  */
 export const generateSitemap = (): string => {
-  const baseUrl = 'https://rv-tech-hub.lovable.app';
+  const baseUrl = 'https://smartrvhub.com';
   const currentDate = new Date().toISOString().split('T')[0];
   
   const urls = Object.values(pageMetadata).map(page => `
@@ -698,7 +698,7 @@ Disallow: /account
 Disallow: /search
 
 # Sitemap location
-Sitemap: https://rv-tech-hub.lovable.app/sitemap.xml
+Sitemap: https://smartrvhub.com/sitemap.xml
 
 # Crawl delay for polite crawling
 Crawl-delay: 1
@@ -710,7 +710,7 @@ Crawl-delay: 1
  * Generate RSS feed content
  */
 export const generateRSSFeed = (): string => {
-  const baseUrl = 'https://rv-tech-hub.lovable.app';
+  const baseUrl = 'https://smartrvhub.com';
   const currentDate = new Date().toISOString();
   
   // Filter pages that would be good for RSS (features, models, tools)

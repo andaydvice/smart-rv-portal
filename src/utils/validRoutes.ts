@@ -79,6 +79,6 @@ export function get404Metadata(path: string) {
     title: "Page Not Found (404) | Smart RV Technology Hub",
     description: "The page you're looking for doesn't exist. Explore our smart RV technology guides, product reviews, and digital nomad resources instead.",
     keywords: "404, page not found, smart RV technology, RV guides, RV products",
-    canonical: `https://rv-tech-hub.lovable.app${path}`,
+    canonical: `https://smartrvhub.com${path}`,
   };
 }

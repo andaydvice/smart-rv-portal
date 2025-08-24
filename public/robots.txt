@@ -7,7 +7,7 @@ Disallow: /account
 Disallow: /search
 
 # Sitemap location
-Sitemap: https://smartrvsystems.lovable.app/sitemap.xml
+Sitemap: https://smartrvhub.com/sitemap.xml
 
 # Crawl delay for polite crawling
 Crawl-delay: 1

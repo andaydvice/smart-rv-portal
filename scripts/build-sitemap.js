@@ -12,7 +12,7 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const DOMAIN = 'https://smartrvsystems.lovable.app';
+const DOMAIN = 'https://smartrvhub.com';
 const CURRENT_DATE = new Date().toISOString().split('T')[0];
 
 const routes = [
