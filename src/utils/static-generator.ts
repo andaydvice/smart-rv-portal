@@ -18,7 +18,7 @@ interface PageMetadata {
 export const pageMetadata: Record<string, PageMetadata> = {
   // Main Pages
   '/': {
-    title: 'Smart RV Systems - Next-Generation RV Technology',
+    title: 'Smart RV Hub - The Future of Smart RV Travel',
     description: 'Transform your RV with cutting-edge smart systems, connectivity solutions, and intelligent automation. Discover the future of mobile living.',
     keywords: ['smart rv', 'rv technology', 'rv systems', 'mobile living', 'rv connectivity'],
     path: '/',
@@ -657,8 +657,8 @@ const generatePageContent = (path: string, metadata: PageMetadata): string => {
  */
 const generateFallbackHTML = (path: string): string => {
   return generateStaticHTML('/').replace(
-    /Smart RV Systems - Next-Generation RV Technology/g,
-    `Smart RV Systems - ${path.replace('/', '').replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}`
+    /Smart RV Hub - The Future of Smart RV Travel/g,
+    `Smart RV Hub - ${path.replace('/', '').replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}`
   );
 };
 
@@ -732,7 +732,7 @@ export const generateRSSFeed = (): string => {
   return `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Smart RV Systems - Latest Updates</title>
+    <title>Smart RV Hub - Latest Updates</title>
     <link>${baseUrl}</link>
     <description>Latest updates on smart RV technology, systems, and innovations</description>
     <language>en-us</language>

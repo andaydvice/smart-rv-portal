@@ -25,7 +25,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
         {/* Mobile-specific optimizations */}
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-        <meta name="apple-mobile-web-app-title" content="Smart RV Systems" />
+        <meta name="apple-mobile-web-app-title" content="Smart RV Hub" />
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="msapplication-tap-highlight" content="no" />
         
