@@ -1,30 +1,14 @@
 <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Transform your RV with cutting-edge smart systems, connectivity solutions, and intelligent automation. Discover the future of mobile living." />
-    <meta name="keywords" content="smart rv, rv technology, rv systems, mobile living, rv connectivity, intelligent automation" />
+    <meta name="keywords" content="smart rv, rv technology, rv systems, mobile living, rv connectivity" />
     <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
-    <meta name="author" content="Smart RV Hub" />
     <title>Smart RV Hub - The Future of Smart RV Travel</title>
-    
-    <!-- Mobile optimization meta tags -->
-    <meta name="theme-color" content="#080F1F" />
-    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#FFFFFF" />
-    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#080F1F" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    <meta name="apple-mobile-web-app-title" content="Smart RV Hub" />
-    <meta name="mobile-web-app-capable" content="yes" />
-    <meta name="format-detection" content="telephone=no" />
-    <meta name="msapplication-tap-highlight" content="no" />
-    
-    <!-- Mobile-specific Open Graph tags -->
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Smart RV Hub - The Future of Smart RV Travel" />
     
     <!-- Canonical URL -->
     <link rel="canonical" href="https://smartrvhub.com/" />
@@ -44,76 +28,9 @@
     <meta name="twitter:title" content="Smart RV Hub - The Future of Smart RV Travel" />
     <meta name="twitter:description" content="Transform your RV with cutting-edge smart systems, connectivity solutions, and intelligent automation. Discover the future of mobile living." />
     <meta name="twitter:image" content="https://smartrvhub.com/lovable-uploads/f3ebf58c-7bbf-427f-9510-9c3b0aec6f6d.png" />
-    
-    <!-- Performance-critical preloads -->
-    <link rel="preload" href="/lovable-uploads/f3ebf58c-7bbf-427f-9510-9c3b0aec6f6d.png" as="image" />
-    
-    <!-- Non-blocking Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'" />
-    <noscript>
-      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" />
-    </noscript>
-
-    <!-- Google Analytics 4 -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-XXXXXXXXXX', {
-        page_title: document.title,
-        page_location: window.location.href,
-        custom_map: {
-          custom_parameter_1: 'seo_metric'
-        }
-      });
-    </script>
-
-    <!-- Google Search Console Verification -->
-    <meta name="google-site-verification" content="GOOGLE_SEARCH_CONSOLE_TOKEN" />
-
-    <!-- Initial page path detection -->
-    <script>
-      window.initialPath = window.location.pathname;
-      const __DEV__ = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
-      if (__DEV__) {
-        console.log('Initial page load path:', window.initialPath);
-      }
-      if (window.performance && window.performance.mark) {
-        window.performance.mark('initial_load_start');
-      }
-    </script>
   </head>
   <body>
     <div id="root"></div>
-    <!-- Add Lovable script tag for new features -->
-    <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
     <script type="module" src="/src/main.tsx"></script>
-    <script>
-      const __DEV__ = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
-      // Record when the page becomes visible to the user
-      document.addEventListener('DOMContentLoaded', function() {
-        if (window.performance && window.performance.mark) {
-          window.performance.mark('dom_content_loaded');
-          if (__DEV__) {
-            console.log('DOMContentLoaded event fired at:', Date.now());
-          }
-        }
-      });
-      
-      // Record when all resources finished loading
-      window.addEventListener('load', function() {
-        if (window.performance && window.performance.mark) {
-          window.performance.mark('full_load_complete');
-          const loadTime = performance.now();
-          if (__DEV__) {
-            console.log('Page fully loaded in:', Math.round(loadTime), 'ms');
-          }
-        }
-      });
-    </script>
   </body>
 </html>
