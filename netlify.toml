@@ -81,10 +81,11 @@
 
 # Build settings
 [build]
-  command = "npm run build"
+  command = "npm install && npm run build"
   publish = "dist"
-
+  
 [build.environment]
+  NODE_VERSION = "18"
   SECRETS_SCAN_ENABLED = "false"
 
 # Comprehensive security headers for production
