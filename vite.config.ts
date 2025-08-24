@@ -5,7 +5,7 @@ import path from "path";
 import { componentTagger } from "lovable-tagger";
 import { staticGeneratorPlugin } from "./vite-plugins/static-generator";
 
-// Force fresh deployment - updated branding 2024-08-24
+// Force fresh deployment - cache clear 2024-08-24
 export default defineConfig(({ mode }) => ({
   server: {
     host: '0.0.0.0',
