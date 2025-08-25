@@ -79,9 +79,9 @@
   to = "/index.html"
   status = 200
 
-# Build settings
+# Build settings  
 [build]
-  command = "npm install && npm run build"
+  command = "npm ci && npm run build"
   publish = "dist"
   
 [build.environment]
