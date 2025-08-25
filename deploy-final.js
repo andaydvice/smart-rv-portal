@@ -1,15 +1,15 @@
 #!/usr/bin/env node
 
-// FINAL DEPLOYMENT SCRIPT - Execute build and commit for production
+// EXECUTE BUILD AND FORCE PUSH TO GITHUB - FINAL FIX
 const fs = require('fs');
 const path = require('path');
 const { execSync } = require('child_process');
 
-console.log('🚀 FINAL DEPLOYMENT EXECUTION');
-console.log('=============================\n');
+console.log('🚀 EXECUTING BUILD AND FORCE PUSH TO GITHUB');
+console.log('===========================================\n');
 
 console.log('✅ .gitignore fixed - dist folder now allowed');
-console.log('🎯 About to build and commit JavaScript files for the FIRST TIME\n');
+console.log('🎯 Building and FORCING push to GitHub NOW\n');
 
 // Step 1: Clean build
 console.log('1️⃣ RUNNING: npm run build');
@@ -99,6 +99,14 @@ try {
   });
   console.log('✅ COMMIT SUCCESS');
   console.log(commitOutput);
+  
+  // FORCE PUSH to ensure GitHub gets the files
+  console.log('\n🚀 FORCE PUSHING to GitHub...');
+  const pushOutput = execSync('git push origin main --force', { 
+    encoding: 'utf8' 
+  });
+  console.log('✅ PUSH SUCCESS - JavaScript files now on GitHub!');
+  console.log(pushOutput);
   
 } catch (error) {
   console.log('❌ GIT COMMIT FAILED:');
