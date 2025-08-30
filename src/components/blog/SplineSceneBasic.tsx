@@ -24,12 +24,14 @@ export function SplineSceneBasic() {
           </p>
         </div>
 
-        {/* Right content */}
+        {/* Right content - Temporarily disabled due to corrupted Spline scene */}
         <div className="flex-1 relative">
-          <SplineScene 
-            scene="https://prod.spline.design/qVKzf5UhbVAJ8YpW/scene.splinecode"
-            className="w-full h-full"
-          />
+          <div className="w-full h-full flex items-center justify-center bg-gradient-to-r from-blue-600/20 to-purple-600/20 rounded-lg">
+            <div className="text-center">
+              <div className="text-4xl mb-2">🚐</div>
+              <p className="text-neutral-400">Smart RV Technology</p>
+            </div>
+          </div>
         </div>
       </div>
     </Card>
