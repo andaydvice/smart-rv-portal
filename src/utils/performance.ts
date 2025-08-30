@@ -41,7 +41,7 @@ export const generateImagePlaceholder = (
   height = 100, 
   color = '131a2a'
 ): string => {
-  return `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 ${width} ${height}'%3E%3Crect width='${width}' height='${height}' fill='%23${color}'/%3E%3C/svg%3E`;
+  return `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 ${width} ${height}'%3E%3Crect width='${width}' height='${width}' fill='%23${color}'/%3E%3C/svg%3E`;
 };
 
 /**
@@ -98,4 +98,54 @@ export const setupLazyLoading = (): void => {
       lazyImages.forEach(img => imageObserver.observe(img));
     }
   }
+};
+
+/**
+ * Optimized scroll handler that batches scroll events
+ */
+export const createOptimizedScrollHandler = (
+  callback: (scrollY: number) => void,
+  throttleMs = 16
+): (() => void) => {
+  let ticking = false;
+  let lastScrollY = 0;
+
+  const update = () => {
+    callback(lastScrollY);
+    ticking = false;
+  };
+
+  return () => {
+    lastScrollY = window.scrollY;
+    
+    if (!ticking) {
+      requestAnimationFrame(update);
+      ticking = true;
+    }
+  };
+};
+
+/**
+ * Prevents layout thrashing during animations
+ */
+export const batchDOMUpdates = (updates: (() => void)[]): void => {
+  requestAnimationFrame(() => {
+    updates.forEach(update => update());
+  });
+};
+
+/**
+ * Memory-efficient event listener with automatic cleanup
+ */
+export const addOptimizedEventListener = (
+  element: Element | Window,
+  event: string,
+  callback: EventListener,
+  options: AddEventListenerOptions = { passive: true }
+): (() => void) => {
+  element.addEventListener(event, callback, options);
+  
+  return () => {
+    element.removeEventListener(event, callback);
+  };
 };

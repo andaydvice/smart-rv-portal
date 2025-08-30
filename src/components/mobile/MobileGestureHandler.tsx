@@ -1,4 +1,6 @@
+
 import React, { useEffect, useRef, ReactNode } from 'react';
+import { createResizeHandler } from '@/utils/domPerformance';
 
 interface MobileGestureHandlerProps {
   children: ReactNode;
@@ -70,18 +72,22 @@ export const MobileGestureHandler: React.FC<MobileGestureHandlerProps> = ({
           onSwipeUp();
         }
 
-        // Pull to refresh (only if at top of container and pulling down)
+        // Pull to refresh - defer scroll position check to avoid forced reflow
         if (
           deltaY > refreshThreshold &&
-          container.scrollTop === 0 &&
           onPullToRefresh &&
           !isRefreshing
         ) {
-          isRefreshing = true;
-          onPullToRefresh();
-          setTimeout(() => {
-            isRefreshing = false;
-          }, 2000);
+          // Use requestAnimationFrame to check scroll position
+          requestAnimationFrame(() => {
+            if (container.scrollTop === 0) {
+              isRefreshing = true;
+              onPullToRefresh();
+              setTimeout(() => {
+                isRefreshing = false;
+              }, 2000);
+            }
+          });
         }
       }
 
@@ -89,10 +95,13 @@ export const MobileGestureHandler: React.FC<MobileGestureHandlerProps> = ({
     };
 
     const handleTouchMove = (e: TouchEvent) => {
-      // Add momentum scrolling for iOS
+      // Add momentum scrolling for iOS without querying dimensions
       const target = e.currentTarget as HTMLElement;
-      if (target && target.style) {
-        target.style.setProperty('-webkit-overflow-scrolling', 'touch');
+      if (target && target.style && !target.style.webkitOverflowScrolling) {
+        // Use requestAnimationFrame to defer style changes
+        requestAnimationFrame(() => {
+          target.style.setProperty('-webkit-overflow-scrolling', 'touch');
+        });
       }
     };
 
