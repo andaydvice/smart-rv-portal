@@ -52,22 +52,26 @@ export default defineConfig(({ mode }) => ({
     }
   },
   build: {
-    sourcemap: mode === 'development',
-    minify: mode === 'development' ? false : 'esbuild',
+    sourcemap: true, // Always enable sourcemaps for debugging
+    minify: false, // DISABLED: esbuild minification was creating corrupted JS
     rollupOptions: {
       output: {
-        manualChunks: {
-          vendor: ['react', 'react-dom'],
-          mapbox: ['mapbox-gl'],
-          query: ['@tanstack/react-query'],
-          ui: ['lucide-react', '@radix-ui/react-dialog', '@radix-ui/react-popover']
-        },
+        // DISABLED: Manual chunks were causing module loading issues
+        // manualChunks: undefined,
+        format: 'es',
+        entryFileNames: 'assets/[name]-[hash].js',
+        chunkFileNames: 'assets/[name]-[hash].js',
+        assetFileNames: 'assets/[name]-[hash].[ext]'
       },
     },
-    target: 'es2020', // Ensure consistent target with optimizeDeps
-    cssCodeSplit: true,
-    reportCompressedSize: false, // Disable compressed size reporting for faster builds
-    chunkSizeWarningLimit: 1000 // Increase chunk size warning limit
+    target: 'es2015', // More compatible target
+    cssCodeSplit: false, // Keep CSS in single file
+    reportCompressedSize: false,
+    chunkSizeWarningLimit: 2000, // Allow larger chunks for unminified code
+    modulePreload: {
+      polyfill: true // Ensure module loading works
+    },
+    assetsInlineLimit: 0 // Don't inline assets
   },
   esbuild: {
     logOverride: { 'this-is-undefined-in-esm': 'silent' }
