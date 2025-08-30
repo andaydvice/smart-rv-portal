@@ -24,42 +24,76 @@ export function SplineSceneBasic() {
           </p>
         </div>
 
-        {/* Right content - Enhanced visual */}
+        {/* Right content - Professional animated RV visual */}
         <div className="flex-1 relative">
-          <div className="w-full h-full relative overflow-hidden rounded-lg bg-gradient-to-br from-connectivity-accent/20 via-blue-600/30 to-purple-600/20">
-            {/* Animated background elements */}
-            <div className="absolute inset-0">
-              <div className="absolute top-1/4 left-1/4 w-32 h-32 bg-connectivity-accent/20 rounded-full blur-3xl animate-pulse"></div>
-              <div className="absolute bottom-1/4 right-1/4 w-24 h-24 bg-blue-500/20 rounded-full blur-2xl animate-pulse delay-1000"></div>
-              <div className="absolute top-1/2 right-1/3 w-16 h-16 bg-purple-500/20 rounded-full blur-xl animate-pulse delay-500"></div>
+          <div className="w-full h-full relative overflow-hidden rounded-lg bg-gradient-to-br from-connectivity-darkBg via-gray-900 to-black">
+            {/* Animated grid background */}
+            <div className="absolute inset-0 opacity-20">
+              <svg className="w-full h-full" viewBox="0 0 400 300">
+                <defs>
+                  <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+                    <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#5B9BD5" strokeWidth="1" opacity="0.3"/>
+                  </pattern>
+                </defs>
+                <rect width="100%" height="100%" fill="url(#grid)" />
+              </svg>
             </div>
             
-            {/* Main visual content */}
-            <div className="relative z-10 h-full flex items-center justify-center">
-              <div className="text-center space-y-4">
-                <div className="relative">
-                  <div className="text-6xl mb-4 filter drop-shadow-lg">🚐</div>
-                  <div className="absolute -inset-2 bg-connectivity-accent/20 rounded-full blur-xl animate-pulse"></div>
-                </div>
-                <div className="space-y-2">
-                  <h3 className="text-2xl font-bold text-white">Smart RV Tech</h3>
-                  <p className="text-connectivity-lightText max-w-xs">
-                    Advanced connectivity and automation for modern RV living
-                  </p>
+            {/* Floating tech elements */}
+            <div className="absolute inset-0">
+              <div className="absolute top-16 left-16 w-3 h-3 bg-connectivity-accent rounded-full animate-pulse"></div>
+              <div className="absolute top-32 right-20 w-2 h-2 bg-blue-400 rounded-full animate-pulse delay-300"></div>
+              <div className="absolute bottom-24 left-20 w-4 h-4 bg-green-400 rounded-full animate-pulse delay-700"></div>
+              <div className="absolute bottom-16 right-16 w-2 h-2 bg-purple-400 rounded-full animate-pulse delay-1000"></div>
+            </div>
+            
+            {/* Main RV silhouette */}
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="relative">
+                {/* RV Body - main rectangle */}
+                <div className="w-48 h-24 bg-gradient-to-r from-connectivity-accent/40 to-blue-500/40 rounded-lg border border-connectivity-accent/60 backdrop-blur-sm">
+                  {/* RV Windows */}
+                  <div className="flex justify-between items-center h-full px-4">
+                    <div className="w-6 h-8 bg-blue-200/30 rounded border border-blue-300/50"></div>
+                    <div className="w-8 h-10 bg-blue-200/30 rounded border border-blue-300/50"></div>
+                    <div className="w-6 h-8 bg-blue-200/30 rounded border border-blue-300/50"></div>
+                  </div>
+                  
+                  {/* Tech indicators on RV */}
+                  <div className="absolute -top-2 left-8 w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                  <div className="absolute -top-2 right-8 w-2 h-2 bg-connectivity-accent rounded-full animate-pulse delay-500"></div>
                 </div>
                 
-                {/* Tech indicators */}
-                <div className="flex justify-center space-x-4 mt-6">
-                  <div className="flex items-center space-x-2 px-3 py-1 bg-white/10 rounded-full backdrop-blur-sm">
-                    <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-                    <span className="text-xs text-white">Connected</span>
-                  </div>
-                  <div className="flex items-center space-x-2 px-3 py-1 bg-white/10 rounded-full backdrop-blur-sm">
-                    <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse delay-300"></div>
-                    <span className="text-xs text-white">Smart</span>
+                {/* RV Wheels */}
+                <div className="absolute -bottom-3 left-8">
+                  <div className="w-6 h-6 bg-gray-600 rounded-full border-2 border-gray-400"></div>
+                </div>
+                <div className="absolute -bottom-3 right-8">
+                  <div className="w-6 h-6 bg-gray-600 rounded-full border-2 border-gray-400"></div>
+                </div>
+                
+                {/* Connectivity waves */}
+                <div className="absolute -top-8 left-1/2 transform -translate-x-1/2">
+                  <div className="relative">
+                    <div className="w-8 h-8 border-2 border-connectivity-accent rounded-full animate-ping"></div>
+                    <div className="absolute inset-2 w-4 h-4 border border-blue-400 rounded-full animate-ping delay-300"></div>
+                    <div className="absolute inset-3 w-2 h-2 bg-connectivity-accent rounded-full"></div>
                   </div>
                 </div>
               </div>
+            </div>
+            
+            {/* Side tech panels */}
+            <div className="absolute left-4 top-1/2 transform -translate-y-1/2 space-y-2">
+              <div className="w-16 h-2 bg-connectivity-accent/50 rounded animate-pulse"></div>
+              <div className="w-12 h-2 bg-blue-400/50 rounded animate-pulse delay-200"></div>
+              <div className="w-14 h-2 bg-green-400/50 rounded animate-pulse delay-400"></div>
+            </div>
+            
+            <div className="absolute right-4 top-1/2 transform -translate-y-1/2 space-y-2">
+              <div className="w-14 h-2 bg-purple-400/50 rounded animate-pulse delay-100"></div>
+              <div className="w-16 h-2 bg-connectivity-accent/50 rounded animate-pulse delay-300"></div>
+              <div className="w-10 h-2 bg-blue-400/50 rounded animate-pulse delay-500"></div>
             </div>
           </div>
         </div>
