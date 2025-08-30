@@ -32,7 +32,8 @@ export default defineConfig(({ mode }) => ({
   plugins: [
     react(),
     mode === 'development' && componentTagger(),
-    mode === 'production' && staticGeneratorPlugin(),
+    // CRITICAL: Disabled static generator - it was replacing the React app with static HTML
+    // mode === 'production' && staticGeneratorPlugin(),
   ].filter(Boolean),
   resolve: {
     alias: {
