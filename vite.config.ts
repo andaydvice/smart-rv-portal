@@ -5,7 +5,7 @@ import path from "path";
 import { componentTagger } from "lovable-tagger";
 import { staticGeneratorPlugin } from "./vite-plugins/static-generator";
 
-// Force fresh deployment - cache clear 2024-08-24
+// Force fresh deployment - cache clear 2024-12-28-15:45 - NUCLEAR CACHE BUST
 export default defineConfig(({ mode }) => ({
   server: {
     host: '0.0.0.0',
@@ -59,9 +59,9 @@ export default defineConfig(({ mode }) => ({
         // DISABLED: Manual chunks were causing module loading issues
         // manualChunks: undefined,
         format: 'es',
-        entryFileNames: 'assets/[name]-[hash].js',
-        chunkFileNames: 'assets/[name]-[hash].js',
-        assetFileNames: 'assets/[name]-[hash].[ext]'
+        entryFileNames: 'assets/[name]-[hash]-v2.js',
+        chunkFileNames: 'assets/[name]-[hash]-v2.js',
+        assetFileNames: 'assets/[name]-[hash]-v2.[ext]'
       },
     },
     target: 'es2015', // More compatible target
