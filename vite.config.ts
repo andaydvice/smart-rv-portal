@@ -59,9 +59,10 @@ export default defineConfig(({ mode }) => ({
         // DISABLED: Manual chunks were causing module loading issues
         // manualChunks: undefined,
         format: 'es',
-        entryFileNames: 'assets/[name]-[hash]-v2.js',
-        chunkFileNames: 'assets/[name]-[hash]-v2.js',
-        assetFileNames: 'assets/[name]-[hash]-v2.[ext]'
+        // AGGRESSIVE CACHE BUSTING - timestamp in filename
+        entryFileNames: `assets/[name]-[hash]-${Date.now()}.js`,
+        chunkFileNames: `assets/[name]-[hash]-${Date.now()}.js`,
+        assetFileNames: `assets/[name]-[hash]-${Date.now()}.[ext]`
       },
     },
     target: 'es2015', // More compatible target
@@ -71,7 +72,9 @@ export default defineConfig(({ mode }) => ({
     modulePreload: {
       polyfill: true // Ensure module loading works
     },
-    assetsInlineLimit: 0 // Don't inline assets
+    assetsInlineLimit: 0, // Don't inline assets
+    // Force clean build
+    emptyOutDir: true
   },
   esbuild: {
     logOverride: { 'this-is-undefined-in-esm': 'silent' }
