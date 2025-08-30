@@ -1,7 +1,7 @@
 
 'use client'
 
-import { SplineScene } from "@/components/ui/spline";
+import { SplineScene } from "@/components/ui/splite";
 import { Card } from "@/components/ui/card"
 import { Spotlight } from "@/components/ui/spotlight"
  
@@ -28,7 +28,7 @@ export function SplineSceneBasic() {
         {/* Right content */}
         <div className="flex-1 relative">
           <SplineScene 
-            scene="https://prod.spline.design/U9O6K7fXziMEU7Wu/scene.splinecode"
+            scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
             className="w-full h-full"
           />
         </div>
