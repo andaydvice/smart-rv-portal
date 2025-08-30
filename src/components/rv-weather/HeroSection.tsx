@@ -5,10 +5,7 @@ import { cn } from "@/lib/utils"; // cn is not used but kept to avoid unrelated 
 import { PreloadedHeaderImage } from "@/components/ui/PreloadedHeaderImage"; // MODIFIED: Import PreloadedHeaderImage
 
 const HeroSection = () => {
-  // Ensure the page scrolls to top when component mounts
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+  // Note: Scroll behavior is handled by useRouteOptimization hook
 
   return (
     <div className="relative w-full h-[600px] md:h-[80vh] max-h-[800px] overflow-hidden">
