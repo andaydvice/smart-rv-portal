@@ -1,0 +1,5 @@
+# Force cache clearing redirect
+/clear-cache  /index.html  200!  Cache-Control=no-cache,no-store,must-revalidate
+
+# SPA fallback
+/*  /index.html  200
