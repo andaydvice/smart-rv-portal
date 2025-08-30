@@ -67,7 +67,7 @@ export const SplineSceneBasic = () => {
               </div>
             }>
               <SplineLazy 
-                scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
+                scene="https://prod.spline.design/UWoeqiir20o49Dah/scene.splinecode"
                 className="w-full h-full"
               />
             </Suspense>
