@@ -1,101 +1,92 @@
 import { motion } from "framer-motion";
+import smartRvHero from "@/assets/smart-rv-hero.jpg";
 
 const InteractiveRVHeader = () => {
   return (
-    <div className="relative w-full h-[600px] bg-gradient-to-br from-connectivity-darkBg to-[#0F1A2E] overflow-hidden rounded-2xl">
-      {/* Subtle background pattern */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(91,155,213,0.1),transparent_70%)]"></div>
+    <div className="relative w-full h-[600px] overflow-hidden rounded-2xl">
+      {/* Main hero image */}
+      <div className="absolute inset-0">
+        <img 
+          src={smartRvHero}
+          alt="Futuristic Smart RV with advanced technology"
+          className="w-full h-full object-cover"
+        />
+        
+        {/* Dark overlay for text readability */}
+        <div className="absolute inset-0 bg-black/40"></div>
+        
+        {/* Gradient overlay for enhanced visual appeal */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
       </div>
       
-      {/* Main content container */}
-      <div className="relative h-full flex items-center justify-center">
+      {/* Content overlay */}
+      <div className="relative h-full flex items-center justify-center text-center px-8">
         <motion.div
-          className="text-center space-y-8 px-8"
-          initial={{ opacity: 0, y: 20 }}
+          className="space-y-6 max-w-4xl"
+          initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
+          transition={{ duration: 1, ease: "easeOut" }}
         >
-          {/* Modern RV icon */}
-          <motion.div
-            className="mx-auto mb-8"
-            initial={{ scale: 0.8, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            <svg width="120" height="80" viewBox="0 0 120 80" className="mx-auto">
-              <defs>
-                <linearGradient id="rvGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" stopColor="#5B9BD5" />
-                  <stop offset="100%" stopColor="#60A5FA" />
-                </linearGradient>
-              </defs>
-              <rect x="15" y="25" width="90" height="30" rx="4" fill="url(#rvGrad)" />
-              <rect x="10" y="30" width="20" height="20" rx="3" fill="url(#rvGrad)" />
-              <rect x="25" y="30" width="12" height="8" rx="1" fill="white" fillOpacity="0.3" />
-              <rect x="45" y="30" width="12" height="8" rx="1" fill="white" fillOpacity="0.3" />
-              <rect x="65" y="30" width="12" height="8" rx="1" fill="white" fillOpacity="0.3" />
-              <rect x="85" y="30" width="12" height="8" rx="1" fill="white" fillOpacity="0.3" />
-              <circle cx="35" cy="62" r="6" fill="#333" stroke="#5B9BD5" strokeWidth="1" />
-              <circle cx="85" cy="62" r="6" fill="#333" stroke="#5B9BD5" strokeWidth="1" />
-              <rect x="35" y="22" width="50" height="3" rx="1" fill="#60A5FA" />
-            </svg>
-          </motion.div>
-
           {/* Main heading */}
           <motion.h1 
-            className="text-6xl md:text-7xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white via-connectivity-accent to-[#60A5FA] leading-tight"
+            className="text-6xl md:text-7xl font-bold text-white leading-tight"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
+            transition={{ duration: 1, delay: 0.3 }}
           >
             Smart RV Blog
           </motion.h1>
           
-          {/* Subtitle */}
+          {/* Subtitle with gradient text */}
           <motion.p 
-            className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed"
+            className="text-2xl md:text-3xl font-medium bg-clip-text text-transparent bg-gradient-to-r from-connectivity-accent to-[#60A5FA] leading-relaxed"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
+            transition={{ duration: 1, delay: 0.6 }}
           >
-            Discover cutting-edge technology, expert insights, and innovative solutions for the future of intelligent RV living
+            The Future of Intelligent RV Living
           </motion.p>
-
-          {/* Feature badges */}
-          <motion.div 
-            className="flex flex-wrap justify-center gap-3 mt-8"
+          
+          {/* Description */}
+          <motion.p 
+            className="text-xl text-gray-200 max-w-3xl mx-auto leading-relaxed"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.8 }}
+            transition={{ duration: 1, delay: 0.9 }}
           >
-            {['Smart Tech', 'Solar Power', 'Connected Living', 'Expert Reviews'].map((badge, index) => (
-              <div
-                key={badge}
-                className="px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full text-sm font-medium text-gray-200 border border-white/20"
-              >
-                {badge}
-              </div>
-            ))}
-          </motion.div>
+            Discover cutting-edge technology, expert insights, and innovative solutions that are revolutionizing the world of recreational vehicles
+          </motion.p>
 
           {/* CTA Button */}
           <motion.button
-            className="mt-8 px-8 py-4 bg-gradient-to-r from-connectivity-accent to-[#60A5FA] text-white font-semibold rounded-full text-lg shadow-lg hover:shadow-xl transition-all duration-300"
+            className="mt-8 px-8 py-4 bg-gradient-to-r from-connectivity-accent to-[#60A5FA] text-white font-semibold rounded-full text-lg shadow-2xl hover:shadow-xl transition-all duration-300"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 1 }}
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
+            transition={{ duration: 1, delay: 1.2 }}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
           >
             Explore Latest Articles
           </motion.button>
         </motion.div>
       </div>
 
-      {/* Subtle accent elements */}
-      <div className="absolute top-10 right-10 w-20 h-20 bg-connectivity-accent/5 rounded-full blur-xl"></div>
-      <div className="absolute bottom-10 left-10 w-32 h-32 bg-[#60A5FA]/5 rounded-full blur-xl"></div>
+      {/* Tech floating elements */}
+      <motion.div
+        className="absolute top-20 right-20 w-16 h-16 bg-connectivity-accent/20 backdrop-blur-sm rounded-full border border-connectivity-accent/30 flex items-center justify-center"
+        animate={{ y: [0, -10, 0] }}
+        transition={{ duration: 3, repeat: Infinity }}
+      >
+        <div className="w-2 h-2 bg-connectivity-accent rounded-full"></div>
+      </motion.div>
+      
+      <motion.div
+        className="absolute bottom-32 left-20 w-12 h-12 bg-[#60A5FA]/20 backdrop-blur-sm rounded-full border border-[#60A5FA]/30 flex items-center justify-center"
+        animate={{ y: [0, 10, 0] }}
+        transition={{ duration: 4, repeat: Infinity, delay: 1 }}
+      >
+        <div className="w-2 h-2 bg-[#60A5FA] rounded-full"></div>
+      </motion.div>
     </div>
   );
 };
