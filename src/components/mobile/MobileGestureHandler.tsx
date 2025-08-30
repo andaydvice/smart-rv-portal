@@ -1,60 +1,40 @@
 
-import { useEffect, useRef } from 'react';
+import React, { ReactNode, useEffect } from 'react';
+import { deferOperation } from '@/utils/performance';
 import { batchDOMReads, batchDOMWrites } from '@/utils/domPerformance';
 
-interface MobileGestureHandlerProps {
-  children: React.ReactNode;
+export interface MobileGestureHandlerProps {
+  children: ReactNode;
 }
 
-export const MobileGestureHandler = ({ children }: MobileGestureHandlerProps) => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const scrollTimeoutRef = useRef<NodeJS.Timeout>();
-
+export const MobileGestureHandler: React.FC<MobileGestureHandlerProps> = ({ children }) => {
   useEffect(() => {
-    if (!containerRef.current) return;
-
-    const container = containerRef.current;
-
-    const handleTouchStart = (e: TouchEvent) => {
-      // Enable momentum scrolling on iOS without TypeScript error
-      if (container.style) {
-        (container.style as any).webkitOverflowScrolling = 'touch';
-      }
+    // Defer scroll position checks to prevent forced reflows
+    const handleTouchMove = () => {
+      deferOperation(() => {
+        const body = document.body;
+        if (body) {
+          batchDOMReads([{
+            element: body,
+            property: 'scrollTop',
+            callback: (scrollTop) => {
+              if (scrollTop > 0) {
+                batchDOMWrites([{
+                  element: body,
+                  styles: { 
+                    '-webkit-overflow-scrolling': 'touch' 
+                  } as any
+                }]);
+              }
+            }
+          }]);
+        }
+      }, 100);
     };
 
-    const handleScroll = () => {
-      // Clear existing timeout
-      if (scrollTimeoutRef.current) {
-        clearTimeout(scrollTimeoutRef.current);
-      }
-
-      // Batch scroll position reads to prevent forced reflow
-      scrollTimeoutRef.current = setTimeout(() => {
-        batchDOMReads(() => {
-          const scrollY = window.scrollY;
-          // Process scroll position without causing reflow
-          if (scrollY > 100) {
-            // Handle scroll behavior
-          }
-        });
-      }, 16); // Throttle to ~60fps
-    };
-
-    container.addEventListener('touchstart', handleTouchStart, { passive: true });
-    window.addEventListener('scroll', handleScroll, { passive: true });
-
-    return () => {
-      container.removeEventListener('touchstart', handleTouchStart);
-      window.removeEventListener('scroll', handleScroll);
-      if (scrollTimeoutRef.current) {
-        clearTimeout(scrollTimeoutRef.current);
-      }
-    };
+    document.addEventListener('touchmove', handleTouchMove, { passive: true });
+    return () => document.removeEventListener('touchmove', handleTouchMove);
   }, []);
 
-  return (
-    <div ref={containerRef} className="w-full">
-      {children}
-    </div>
-  );
+  return <>{children}</>;
 };

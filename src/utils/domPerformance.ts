@@ -1,4 +1,3 @@
-
 /**
  * DOM Performance utilities to prevent forced reflows
  * Batches DOM reads and writes using requestAnimationFrame
@@ -120,6 +119,24 @@ class DOMBatcher {
 
 // Global DOM batcher instance
 export const domBatcher = new DOMBatcher();
+
+/**
+ * Batch DOM reads to prevent forced reflows
+ */
+export const batchDOMReads = (reads: Array<{ element: Element; property: string; callback: (value: any) => void }>) => {
+  reads.forEach(({ element, property, callback }) => {
+    domBatcher.read(element, property, callback);
+  });
+};
+
+/**
+ * Batch DOM writes to prevent forced reflows
+ */
+export const batchDOMWrites = (writes: Array<{ element: HTMLElement; styles: Record<string, string>; callback?: () => void }>) => {
+  writes.forEach(({ element, styles, callback }) => {
+    domBatcher.write(element, styles, callback);
+  });
+};
 
 /**
  * Utility functions for common DOM operations that prevent forced reflows
