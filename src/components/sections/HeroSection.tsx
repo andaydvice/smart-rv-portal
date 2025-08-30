@@ -36,7 +36,7 @@ export const HeroSection = () => {
               className="text-6xl md:text-7xl font-bold leading-tight"
             >
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-emerald-400">
-                The Future of
+                Revolutionising
               </span> <br />
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-emerald-400">
                 Smart RV Travel
