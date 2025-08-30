@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 
 /**
@@ -8,6 +8,7 @@ import { useLocation } from 'react-router-dom';
 export const useRouteOptimization = (title?: string, canonical?: string) => {
   let location;
   let isBot = false;
+  const previousPathnameRef = useRef<string>('');
 
   // Safely try to get location, handle case where Router context doesn't exist yet
   try {
@@ -23,17 +24,28 @@ export const useRouteOptimization = (title?: string, canonical?: string) => {
   }
 
   useEffect(() => {
-    // Scroll to top on route change (unless hash is present)
-    if (!location.hash) {
-      window.scrollTo(0, 0);
-    } else {
-      // Handle hash navigation after a brief delay to allow content to render
-      setTimeout(() => {
-        const element = document.getElementById(location.hash.substring(1));
-        if (element) {
-          element.scrollIntoView({ behavior: 'smooth' });
-        }
-      }, 100);
+    // Only scroll to top if the pathname actually changed (real route change)
+    const hasPathnameChanged = previousPathnameRef.current !== location.pathname;
+    
+    if (hasPathnameChanged) {
+      // Update the ref with the new pathname
+      previousPathnameRef.current = location.pathname;
+      
+      // Scroll to top on route change (unless hash is present)
+      if (!location.hash) {
+        // Small delay to prevent conflicts with user scrolling
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+        }, 50);
+      } else {
+        // Handle hash navigation after a brief delay to allow content to render
+        setTimeout(() => {
+          const element = document.getElementById(location.hash.substring(1));
+          if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+          }
+        }, 100);
+      }
     }
 
     // Update document title if provided
@@ -52,8 +64,8 @@ export const useRouteOptimization = (title?: string, canonical?: string) => {
       canonicalLink.href = canonical;
     }
 
-    // Track route changes for analytics (if available)
-    if (typeof window !== 'undefined' && (window as any).gtag) {
+    // Track route changes for analytics (if available) - only on actual route changes
+    if (hasPathnameChanged && typeof window !== 'undefined' && (window as any).gtag) {
       (window as any).gtag('config', 'GA_TRACKING_ID', {
         page_path: location.pathname + location.search
       });
@@ -69,7 +81,7 @@ export const useRouteOptimization = (title?: string, canonical?: string) => {
       });
     }
 
-  }, [location, title, canonical]);
+  }, [location.pathname, location.hash, title, canonical]);
 
   return { location, isBot };
 };
