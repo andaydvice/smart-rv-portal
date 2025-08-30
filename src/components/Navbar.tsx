@@ -11,7 +11,11 @@ const Navbar = () => {
 
   
 
-  // Note: Scroll behavior is handled by useRouteOptimization hook
+  // Scroll to top when route changes
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    scrollToTop();
+  }, [location.pathname]);
 
   // Close mobile menu when route changes
   useEffect(() => {

@@ -25,7 +25,10 @@ import { SectionSkeleton } from "@/components/ui/skeletons";
 const LoadingFallback = () => <SectionSkeleton height="h-80" />;
 
 const Index = () => {
-  // Note: Scroll behavior is handled by useRouteOptimization hook in Layout
+  useEffect(() => {
+    // Force scroll to top on page load
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <Layout>

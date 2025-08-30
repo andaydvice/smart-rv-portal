@@ -14,7 +14,9 @@ import { Container } from "@/components/ui/container";
 const Blog = () => {
   const [activeCategory, setActiveCategory] = useState<'all' | 'tech' | 'travel'>('all');
   
-  // Note: Scroll behavior is handled by useRouteOptimization hook
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   
   const handleCategoryChange = (category: 'all' | 'tech' | 'travel') => {
     setActiveCategory(category);

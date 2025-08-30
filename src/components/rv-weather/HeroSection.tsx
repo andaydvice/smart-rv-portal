@@ -5,7 +5,10 @@ import { cn } from "@/lib/utils"; // cn is not used but kept to avoid unrelated 
 import { PreloadedHeaderImage } from "@/components/ui/PreloadedHeaderImage"; // MODIFIED: Import PreloadedHeaderImage
 
 const HeroSection = () => {
-  // Note: Scroll behavior is handled by useRouteOptimization hook
+  // Ensure the page scrolls to top when component mounts
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <div className="relative w-full h-[600px] md:h-[80vh] max-h-[800px] overflow-hidden">
