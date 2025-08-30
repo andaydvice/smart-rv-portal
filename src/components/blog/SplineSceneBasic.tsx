@@ -57,9 +57,15 @@ export const SplineSceneBasic = () => {
         {/* Right content */}
         <div className="flex-1 relative">
           {!shouldLoad ? (
-            <div className="w-full h-full bg-white/5" aria-hidden="true" />
+            <div className="w-full h-full bg-white/5 flex items-center justify-center" aria-hidden="true">
+              <div className="w-16 h-16 border-4 border-connectivity-accent border-t-transparent rounded-full animate-spin"></div>
+            </div>
           ) : (
-            <Suspense fallback={<div className="w-full h-full bg-white/5" aria-hidden="true" /> }>
+            <Suspense fallback={
+              <div className="w-full h-full bg-white/5 flex items-center justify-center" aria-hidden="true">
+                <div className="w-16 h-16 border-4 border-connectivity-accent border-t-transparent rounded-full animate-spin"></div>
+              </div>
+            }>
               <SplineLazy 
                 scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
                 className="w-full h-full"

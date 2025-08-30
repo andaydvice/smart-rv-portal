@@ -1,6 +1,7 @@
 
 import { motion } from "framer-motion";
 import { SplineSceneBasic } from "./SplineSceneBasic";
+import SplineErrorBoundary from "./SplineErrorBoundary";
 
 const BlogHeader = () => {
   return (
@@ -10,7 +11,9 @@ const BlogHeader = () => {
       transition={{ duration: 0.5 }}
       className="text-center space-y-6 mb-12"
     >
-      <SplineSceneBasic />
+      <SplineErrorBoundary>
+        <SplineSceneBasic />
+      </SplineErrorBoundary>
     </motion.div>
   );
 };
