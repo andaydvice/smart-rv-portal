@@ -31,6 +31,7 @@ export const VALID_ROUTES = [
   '/technology',
   '/documentation/complete',
   '/search',
+  '/auth',
   
   // Feature pages
   '/features/audio-system',

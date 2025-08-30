@@ -10,6 +10,7 @@ import Contact from "../pages/Contact";
 // Popular utility pages - synchronous for instant loading
 import Documentation from "../pages/Documentation";
 import WeatherDashboard from "../pages/WeatherDashboard";
+import Auth from "../pages/Auth";
 
 // Less common routes - lazy loaded
 const StorageFacilities = lazy(() => import("../pages/StorageFacilities"));
@@ -84,6 +85,14 @@ const utilityRoutes = [
     element: (
       <RouteTransition>
         <Contact />
+      </RouteTransition>
+    ),
+  },
+  {
+    path: "/auth",
+    element: (
+      <RouteTransition>
+        <Auth />
       </RouteTransition>
     ),
   },
