@@ -4,6 +4,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { AuthForms } from '@/components/auth/AuthForms';
 import { useAuth } from '@/components/auth/AuthContext';
 import { Card } from '@/components/ui/card';
+import Navbar from '@/components/Navbar';
 import Layout from "@/components/layout/Layout";
 import { useErrorHandler } from '@/hooks/useErrorHandler';
 import ErrorDisplay from '@/components/error/ErrorDisplay';

@@ -8,7 +8,7 @@ export const TechnologySection = () => {
   const navigate = useNavigate();
 
   const handleCardClick = (link: string) => {
-    // Card clicked, navigating to link
+    if (import.meta.env.DEV) console.log('Card clicked, navigating to:', link);
     // Use navigate function to handle navigation
     navigate(link);
   };

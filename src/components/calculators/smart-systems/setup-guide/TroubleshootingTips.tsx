@@ -1,7 +1,6 @@
 
 import React, { useRef, useEffect, useState } from "react";
 import { Check, Info, ChevronDown } from "lucide-react";
-import { createResizeHandler, createViewportObserver } from "@/utils/domPerformance";
 
 interface TroubleshootingTipsProps {
   tips: string[];
@@ -12,62 +11,21 @@ const TroubleshootingTips = ({ tips }: TroubleshootingTipsProps) => {
   const [showScrollIndicator, setShowScrollIndicator] = useState(false);
 
   useEffect(() => {
-    if (!scrollContainerRef.current) return;
-
-    // Use IntersectionObserver to detect if content overflows
-    const observer = createViewportObserver(
-      (entries) => {
-        const entry = entries[0];
-        if (entry && entry.target === scrollContainerRef.current) {
-          // Check if content is scrollable by comparing scroll height vs client height
-          const container = scrollContainerRef.current;
-          if (container) {
-            // Use ResizeObserver instead of direct DOM queries to avoid forced reflow
-            const resizeObserver = new ResizeObserver((entries) => {
-              const entry = entries[0];
-              if (entry) {
-                const { contentRect } = entry;
-                const scrollHeight = container.scrollHeight;
-                setShowScrollIndicator(scrollHeight > contentRect.height + 10);
-              }
-            });
-            
-            resizeObserver.observe(container);
-            
-            return () => {
-              resizeObserver.disconnect();
-            };
-          }
-        }
-      },
-      { threshold: [0, 1] }
-    );
-
-    observer.observe(scrollContainerRef.current);
-
-    // Create debounced resize handler
-    const handleResize = createResizeHandler(() => {
+    const checkIfScrollNeeded = () => {
       if (scrollContainerRef.current) {
-        const container = scrollContainerRef.current;
-        // Defer the scroll check to avoid forced reflow
-        requestAnimationFrame(() => {
-          const hasOverflow = container.scrollHeight > container.clientHeight + 10;
-          setShowScrollIndicator(hasOverflow);
-        });
+        const { scrollHeight, clientHeight } = scrollContainerRef.current;
+        setShowScrollIndicator(scrollHeight > clientHeight + 10); // Adding margin to avoid edge cases
       }
-    }, 100);
-
-    window.addEventListener('resize', handleResize, { passive: true });
-    
-    return () => {
-      observer.disconnect();
-      window.removeEventListener('resize', handleResize);
     };
+
+    checkIfScrollNeeded();
+    // Re-check when tips change or window resizes
+    window.addEventListener('resize', checkIfScrollNeeded);
+    return () => window.removeEventListener('resize', checkIfScrollNeeded);
   }, [tips]);
 
   const handleArrowClick = () => {
     if (scrollContainerRef.current) {
-      // Use smooth scrolling without querying dimensions
       scrollContainerRef.current.scrollTo({
         top: scrollContainerRef.current.scrollHeight,
         behavior: 'smooth'

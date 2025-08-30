@@ -1,5 +1,6 @@
 
 import React from 'react';
+import Navbar from "@/components/Navbar";
 import { Container } from "@/components/ui/container";
 import MapIconDemo from "@/components/storage/map/components/MapIconDemo";
 import MapWithResponsiveIcons from "@/components/storage/map/components/MapWithResponsiveIcons";

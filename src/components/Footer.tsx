@@ -6,7 +6,7 @@ import { Facebook, Twitter, Instagram, Youtube, Mail } from "lucide-react";
 // It's kept for reference or fallback purposes
 
 const Footer = () => {
-  // DEPRECATED: Using old Footer component - use Layout with Footer2 instead
+  console.log("DEPRECATED: Using old Footer component - use Layout with Footer2 instead");
   
   return (
     <footer className="bg-gray-900 text-white mt-auto">

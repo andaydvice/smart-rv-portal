@@ -14,7 +14,10 @@ export const useFacilityAnalytics = (facilities: StorageFacility[] | undefined) 
         }
       });
       
-      // Facility counts by state analyzed
+      console.log('Facility counts by state:');
+      Array.from(stateMap.entries()).sort(([a], [b]) => a.localeCompare(b)).forEach(([state, count]) => {
+        console.log(`${state}: ${count} facilities`);
+      });
     }
   }, [facilities]);
 };

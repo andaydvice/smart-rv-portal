@@ -1,6 +1,7 @@
 
 import React from 'react';
 import Layout from '@/components/layout/Layout';
+import Navbar from '@/components/Navbar';
 import FacilityMapExample from '@/components/map/FacilityMapExample';
 import { OptimizedAffiliateGrid } from '@/components/affiliate/OptimizedAffiliateGrid';
 

@@ -1,5 +1,6 @@
 
 import { motion } from "framer-motion";
+import Navbar from "@/components/Navbar";
 import Layout from "@/components/layout/Layout";
 import { Wifi, Globe, Shield, Zap } from "lucide-react";
 import ConnectivityGuide from "@/components/connectivity/ConnectivityGuide";

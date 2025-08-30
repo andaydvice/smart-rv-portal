@@ -2,6 +2,7 @@
 import { motion } from "framer-motion";
 import { Book, Cpu, Wrench, Zap } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import Navbar from "@/components/Navbar";
 import DocumentationHeader from "@/components/documentation/DocumentationHeader";
 import OverviewTab from "@/components/documentation/OverviewTab";
 import TechnicalTab from "@/components/documentation/TechnicalTab";

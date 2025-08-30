@@ -74,8 +74,8 @@ const DesktopSearch: React.FC<DesktopSearchProps> = ({
         </Select>
       </div>
 
-      {isOpen && query && (
-        <div className="absolute top-full left-0 mt-2 w-80 p-0 bg-gray-900/95 backdrop-blur-sm border border-gray-700 text-white shadow-lg z-[999] rounded-md">
+      {isOpen && (
+        <div className="absolute top-full right-0 mt-2 w-80 p-0 bg-gray-900/95 backdrop-blur-sm border border-gray-700 text-white shadow-lg z-[999] rounded-md">
           <SearchResults 
             results={results} 
             query={query} 

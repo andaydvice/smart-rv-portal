@@ -1,5 +1,6 @@
 
 import { motion } from "framer-motion";
+import Navbar from "@/components/Navbar";
 import { Tv, Cast, Smartphone, Gamepad } from "lucide-react";
 import Layout from "@/components/layout/Layout";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";

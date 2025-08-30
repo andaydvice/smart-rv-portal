@@ -17,7 +17,7 @@ export const useMapToken = (enabled: boolean = true) => {
 
     const fetchMapboxToken = async () => {
       try {
-        // Fetching Mapbox token...
+        console.log('Fetching Mapbox token...');
         setIsLoading(true);
         
         const { data, error } = await supabase.functions.invoke('geocode-address', {
@@ -38,7 +38,7 @@ export const useMapToken = (enabled: boolean = true) => {
           return;
         }
         
-        // Successfully received valid Mapbox token
+        console.log('Successfully received valid Mapbox token');
         setMapToken(data.token);
         setMapTokenError('');
       } catch (err) {

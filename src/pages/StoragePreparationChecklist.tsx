@@ -1,5 +1,6 @@
 
 import React from 'react';
+import Navbar from '@/components/Navbar';
 import StoragePreparationChecklist from '@/components/storage/StoragePreparationChecklist';
 import Layout from "@/components/layout/Layout";
 

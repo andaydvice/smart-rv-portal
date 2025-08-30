@@ -82,7 +82,7 @@ const StorageFacilitiesMap: React.FC<StorageFacilitiesMapProps> = ({ onSelectFea
   }, [allFacilities, onSelectFeaturedLocation]);
   
   const handleFilterChange = useCallback((newFilters: FilterState) => {
-    // Filter changed
+    console.log('Filter changed:', newFilters);
     
     // Log the selected state in various formats for debugging
     if (newFilters.selectedState) {
@@ -93,9 +93,9 @@ const StorageFacilitiesMap: React.FC<StorageFacilitiesMapProps> = ({ onSelectFea
         // We got an abbreviation, swap it
         stateAbbr = normalizedState;
         const fullState = STATE_NAME_MAP[normalizedState];
-        // Selected state processed
+        console.log(`Selected state: Full name = ${fullState}, Abbreviation = ${stateAbbr}`);
       } else {
-        // Selected state normalized
+        console.log(`Selected state: Full name = ${normalizedState}, Abbreviation = ${stateAbbr}`);
       }
     }
     
@@ -143,10 +143,10 @@ const StorageFacilitiesMap: React.FC<StorageFacilitiesMapProps> = ({ onSelectFea
           console.warn(`No markers created for state: ${filters.selectedState}`);
           
           // Add additional logging for debugging
-          // States in allFacilities processed
+          console.log('States in allFacilities:', [...new Set(allFacilities.map(f => f.state))]);
         } else {
           setNoMarkersForState(null);
-          // Markers found on map
+          console.log(`Found ${markers.length} markers on the map`);
         }
         
         // Set check as completed regardless of result
@@ -161,7 +161,7 @@ const StorageFacilitiesMap: React.FC<StorageFacilitiesMapProps> = ({ onSelectFea
   }, [filters.selectedState, allFacilities]);
   
   const onMarkerClick = useCallback((facilityId: string) => {
-    // Marker clicked
+    console.log(`Marker clicked: ${facilityId}`);
     handleFacilityClick(facilityId, allFacilities || []);
   }, [handleFacilityClick, allFacilities]);
 

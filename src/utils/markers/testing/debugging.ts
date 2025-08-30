@@ -6,7 +6,7 @@ import { testMarkersVisibility } from './visibility';
  * Creates a debug overlay to display marker information
  */
 export function createMarkerDebugger(): () => void {
-  // Creating marker debugger overlay
+  console.log('Creating marker debugger overlay');
   
   // Run test to get marker visibility information
   const testResults = testMarkersVisibility(false);

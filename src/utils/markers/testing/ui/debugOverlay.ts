@@ -6,7 +6,7 @@ import { testMarkerVisibility } from '../core/testVisibility';
  * Create a debugger overlay to visualize marker issues
  */
 export function createMarkerDebugger() {
-  // Creating marker debugger overlay
+  console.log('Creating marker debugger overlay');
   
   // Create a container for the debugger
   const debuggerContainer = document.createElement('div');

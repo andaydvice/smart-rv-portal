@@ -56,7 +56,7 @@ const MapPreview: React.FC<MapPreviewProps> = ({
     // Handle map load event
     map.current.on('load', () => {
       setMapLoaded(true);
-      // Map preview loaded successfully
+      console.log('Map preview loaded successfully');
       createMarker();
       
       // Enable edge-aware behavior for markers
@@ -78,7 +78,7 @@ const MapPreview: React.FC<MapPreviewProps> = ({
     if (!map.current || !mapLoaded) {
       // Track failed attempts
       setFailedAttempts(prev => prev + 1);
-      // Failed attempt to create marker
+      console.log(`Failed attempt ${failedAttempts + 1} to create marker`);
       return;
     }
 
@@ -130,7 +130,7 @@ const MapPreview: React.FC<MapPreviewProps> = ({
         }, 1000);
       });
       
-      // Marker created successfully
+      console.log('Marker created successfully');
     } catch (error) {
       console.error('Error creating marker:', error);
       setFailedAttempts(prev => prev + 1);
@@ -141,7 +141,7 @@ const MapPreview: React.FC<MapPreviewProps> = ({
   useEffect(() => {
     if (failedAttempts > 0 && failedAttempts < 8 && mapLoaded) {
       const timer = setTimeout(() => {
-        // Retry attempt
+        console.log(`Retry attempt ${failedAttempts + 1}`);
         createMarker();
       }, 500 * failedAttempts); // Increasing backoff
       

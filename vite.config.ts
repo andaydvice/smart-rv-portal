@@ -8,7 +8,6 @@ import { staticGeneratorPlugin } from "./vite-plugins/static-generator";
 // ULTRA AGGRESSIVE CACHE BUSTING - Force fresh deployment 2025-08-30
 const timestamp = Date.now();
 const deploymentId = 'revolutionising-' + timestamp;
-
 export default defineConfig(({ mode }) => ({
   server: {
     host: '0.0.0.0',
@@ -57,27 +56,7 @@ export default defineConfig(({ mode }) => ({
   },
   build: {
     sourcemap: mode === 'development',
-    // ENHANCED MINIFICATION for SEO performance
-    minify: mode === 'production' ? 'terser' : false,
-    terserOptions: mode === 'production' ? {
-      compress: {
-        drop_console: true,
-        drop_debugger: true,
-        pure_funcs: ['console.log', 'console.info'],
-        remove_unused: true,
-        dead_code: true,
-        collapse_vars: true,
-        reduce_vars: true,
-        passes: 3 // Multiple passes for better compression
-      },
-      mangle: {
-        toplevel: true,
-        safari10: true
-      },
-      format: {
-        comments: false
-      }
-    } : undefined,
+    minify: mode === 'development' ? false : 'esbuild',
     rollupOptions: {
       output: {
         // ULTRA AGGRESSIVE CACHE BUSTING with deployment ID
@@ -101,12 +80,7 @@ export default defineConfig(({ mode }) => ({
     assetsInlineLimit: 0, // Never inline assets to ensure fresh URLs
   },
   esbuild: {
-    logOverride: { 'this-is-undefined-in-esm': 'silent' },
-    // Enhanced minification for development builds too
-    minifyIdentifiers: mode === 'production',
-    minifySyntax: mode === 'production',
-    minifyWhitespace: mode === 'production',
-    treeShaking: true
+    logOverride: { 'this-is-undefined-in-esm': 'silent' }
   },
   css: {
     devSourcemap: mode === 'development' // Enable sourcemaps for CSS in dev

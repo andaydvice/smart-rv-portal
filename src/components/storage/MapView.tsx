@@ -20,7 +20,7 @@ const MapView: React.FC<MapViewProps> = ({
   selectedState
 }) => {
   // Simple logging to confirm props being passed
-  // MapView rendering with facilities
+  console.log(`MapView rendering with ${facilities.length} facilities, selected state: ${selectedState}`);
   
   return (
     <div className="w-full h-full">

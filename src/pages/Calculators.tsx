@@ -21,6 +21,7 @@ import FuelAffiliateRecommendations from "@/components/calculators/fuel/FuelAffi
 import PowerAffiliateRecommendations from "@/components/calculators/power/PowerAffiliateRecommendations";
 import TowingAffiliateRecommendations from "@/components/calculators/towing/TowingAffiliateRecommendations";
 import SmartSystemsAffiliateRecommendations from "@/components/calculators/smart-systems/SmartSystemsAffiliateRecommendations";
+import Navbar from "@/components/Navbar";
 import Layout from "@/components/layout/Layout";
 import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
 import { Helmet } from "react-helmet-async";

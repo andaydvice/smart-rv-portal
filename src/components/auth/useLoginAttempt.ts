@@ -22,7 +22,7 @@ export const useLoginAttempt = () => {
         .single();
       
       if (error) {
-        // No login attempts found for user
+        console.log("No login attempts found for user:", user_id);
         return null;
       }
       return data;
@@ -37,7 +37,7 @@ export const useLoginAttempt = () => {
     try {
       // Note: This is a security limitation - we can't easily check lockout by email without authentication
       // In production, consider using a server-side check or rate limiting by IP
-      // Checking lockout status for email
+      console.log("Checking lockout status for email:", email);
       return { isLockedOut: false, lockoutUntil: null };
     } catch (err) {
       console.error("Error checking user lockout:", err);
