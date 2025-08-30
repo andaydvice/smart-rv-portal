@@ -5,7 +5,8 @@ import path from "path";
 import { componentTagger } from "lovable-tagger";
 import { staticGeneratorPlugin } from "./vite-plugins/static-generator";
 
-// Force fresh deployment - cache clear 2024-08-24
+// AGGRESSIVE CACHE BUSTING - Force fresh deployment 2025-08-30
+const timestamp = Date.now();
 export default defineConfig(({ mode }) => ({
   server: {
     host: '0.0.0.0',
@@ -56,6 +57,10 @@ export default defineConfig(({ mode }) => ({
     minify: mode === 'development' ? false : 'esbuild',
     rollupOptions: {
       output: {
+        // AGGRESSIVE CACHE BUSTING with timestamp
+        entryFileNames: `assets/[name]-[hash]-${timestamp}.js`,
+        chunkFileNames: `assets/[name]-[hash]-${timestamp}.js`,
+        assetFileNames: `assets/[name]-[hash]-${timestamp}.[ext]`,
         manualChunks: {
           vendor: ['react', 'react-dom'],
           mapbox: ['mapbox-gl'],
@@ -67,7 +72,9 @@ export default defineConfig(({ mode }) => ({
     target: 'es2020', // Ensure consistent target with optimizeDeps
     cssCodeSplit: true,
     reportCompressedSize: false, // Disable compressed size reporting for faster builds
-    chunkSizeWarningLimit: 1000 // Increase chunk size warning limit
+    chunkSizeWarningLimit: 1000, // Increase chunk size warning limit
+    // Force clean build directory
+    emptyOutDir: true
   },
   esbuild: {
     logOverride: { 'this-is-undefined-in-esm': 'silent' }
