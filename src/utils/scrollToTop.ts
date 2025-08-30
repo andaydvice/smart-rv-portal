@@ -5,18 +5,11 @@
  */
 export const scrollToTop = () => {
   try {
-    // Try to use smooth scrolling first
+    // Use smooth scrolling
     window.scrollTo({
       top: 0,
       behavior: 'smooth'
     });
-    
-    // Fallback for older browsers
-    setTimeout(() => {
-      if (window.scrollY > 0) {
-        window.scrollTo(0, 0);
-      }
-    }, 100);
   } catch (error) {
     // Direct scroll for browsers that don't support smooth scrolling
     window.scrollTo(0, 0);
