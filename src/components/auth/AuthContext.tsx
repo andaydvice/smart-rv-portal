@@ -24,11 +24,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [error, setError] = useState<Error | null>(null);
 
   useEffect(() => {
-    console.log("AuthProvider initializing...");
-    
     // Set up auth state change listener FIRST to prevent missing events
     const { data: { subscription } } = supabase.auth.onAuthStateChange((event, newSession) => {
-      console.log("Auth state changed:", { event, session: newSession?.user?.email || 'No user' });
       
       // Update state with the new session
       setSession(newSession);
@@ -49,7 +46,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
           // Don't throw here, just set the error state
           setError(sessionError);
         } else {
-          console.log("Initial session check:", data.session ? "Session found" : "No session");
+          // Initial session loaded
           setSession(data.session);
           setUser(data.session?.user ?? null);
         }

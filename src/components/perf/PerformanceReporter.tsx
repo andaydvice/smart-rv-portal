@@ -28,7 +28,7 @@ const PerformanceReporter: React.FC = () => {
         // Core Web Vitals for SEO ranking
         if (webVitals.onCLS) {
           webVitals.onCLS((metric) => {
-            console.log('CLS:', metric.value, metric.value <= 0.1 ? '✅ Good' : metric.value <= 0.25 ? '⚠️ Needs Improvement' : '❌ Poor');
+            // CLS metric tracked
             // Track for analytics
             if ((window as any).gtag) {
               (window as any).gtag('event', 'web_vitals', {
@@ -42,7 +42,7 @@ const PerformanceReporter: React.FC = () => {
         
         if (webVitals.onFCP) {
           webVitals.onFCP((metric) => {
-            console.log('FCP:', metric.value, 'ms', metric.value <= 1800 ? '✅ Good' : metric.value <= 3000 ? '⚠️ Needs Improvement' : '❌ Poor');
+            // FCP metric tracked
             if ((window as any).gtag) {
               (window as any).gtag('event', 'web_vitals', {
                 metric_name: 'FCP',
@@ -54,7 +54,7 @@ const PerformanceReporter: React.FC = () => {
         
         if (webVitals.onLCP) {
           webVitals.onLCP((metric) => {
-            console.log('LCP:', metric.value, 'ms', metric.value <= 2500 ? '✅ Good' : metric.value <= 4000 ? '⚠️ Needs Improvement' : '❌ Poor');
+            // LCP metric tracked
             if ((window as any).gtag) {
               (window as any).gtag('event', 'web_vitals', {
                 metric_name: 'LCP',
@@ -68,7 +68,7 @@ const PerformanceReporter: React.FC = () => {
         // INP (replacing FID)
         if (webVitals.onINP) {
           webVitals.onINP((metric) => {
-            console.log('INP:', metric.value, 'ms', metric.value <= 200 ? '✅ Good' : metric.value <= 500 ? '⚠️ Needs Improvement' : '❌ Poor');
+            // INP metric tracked
             if ((window as any).gtag) {
               (window as any).gtag('event', 'web_vitals', {
                 metric_name: 'INP',
@@ -81,7 +81,7 @@ const PerformanceReporter: React.FC = () => {
 
         if (webVitals.onTTFB) {
           webVitals.onTTFB((metric) => {
-            console.log('TTFB:', metric.value, 'ms', metric.value <= 800 ? '✅ Good' : '⚠️ Could be better');
+            // TTFB metric tracked
             if ((window as any).gtag) {
               (window as any).gtag('event', 'web_vitals', {
                 metric_name: 'TTFB',
@@ -94,7 +94,7 @@ const PerformanceReporter: React.FC = () => {
         // Legacy FID for older browsers
         if (webVitals.onFID) {
           webVitals.onFID((metric) => {
-            console.log('FID:', metric.value, 'ms', metric.value <= 100 ? '✅ Good' : metric.value <= 300 ? '⚠️ Needs Improvement' : '❌ Poor');
+            // FID metric tracked
             if ((window as any).gtag) {
               (window as any).gtag('event', 'web_vitals', {
                 metric_name: 'FID',
@@ -106,7 +106,7 @@ const PerformanceReporter: React.FC = () => {
         }
 
       }).catch(() => {
-        console.log('Web Vitals library not available');
+        // Web Vitals library not available
       });
     }
 
@@ -117,12 +117,12 @@ const PerformanceReporter: React.FC = () => {
     }
 
     // Initialize Phase 3 SEO enhancements
-    console.log('🚀 Phase 3 SEO systems initialized');
+    // Phase 3 SEO systems initialized
     
     // Generate initial SEO report
     setTimeout(() => {
       const report = seoMonitor.generateReport();
-      console.log('📊 Initial SEO Score:', report.score);
+      // Initial SEO Score tracked
     }, 1000);
   }, []);
   return null;

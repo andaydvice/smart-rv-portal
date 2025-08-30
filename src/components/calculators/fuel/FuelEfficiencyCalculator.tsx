@@ -31,7 +31,7 @@ const FuelEfficiencyCalculator = ({ onAddMPGRecord }: FuelEfficiencyCalculatorPr
         mpg: mpg
       };
       onAddMPGRecord(newRecord);
-      console.log("MPG record added:", newRecord);
+      // MPG record added
       toast({
         title: "MPG Record Added",
         description: `Added ${mpg.toFixed(2)} MPG to your history.`,
@@ -39,7 +39,7 @@ const FuelEfficiencyCalculator = ({ onAddMPGRecord }: FuelEfficiencyCalculatorPr
       setDistance("");
       setFuelUsed("");
     } else {
-      console.log("Cannot add MPG record: Please enter valid distance and fuel values");
+      // Cannot add MPG record: Please enter valid distance and fuel values
       toast({
         title: "Invalid Values",
         description: "Please enter valid distance and fuel values first",

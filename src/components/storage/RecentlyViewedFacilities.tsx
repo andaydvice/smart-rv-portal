@@ -17,8 +17,7 @@ const RecentlyViewedFacilities = ({
   onFacilityClick,
   className
 }: RecentlyViewedFacilitiesProps) => {
-  console.log('🟢 RecentlyViewedFacilities render - facilities count:', facilities?.length);
-  console.log('🟢 RecentlyViewedFacilities render - facilities data:', facilities);
+  // RecentlyViewedFacilities rendering
   
   if (facilities.length === 0) {
     return (

@@ -15,8 +15,7 @@ const BlogGrid = ({ activeCategory }: BlogGridProps) => {
     ? posts 
     : posts.filter(post => post.category.toLowerCase() === activeCategory);
 
-  console.log("BlogGrid - Active Category:", activeCategory);
-  console.log("BlogGrid - Filtered Posts:", filteredPosts);
+  // BlogGrid filtering logic
 
   return (
     <section className="space-y-8">

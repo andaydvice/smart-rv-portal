@@ -58,7 +58,7 @@ const ResponsiveMap: React.FC<ResponsiveMapProps> = ({
     // Handle map load event
     map.current.on('load', () => {
       setMapLoaded(true);
-      console.log('Map loaded successfully');
+      // Map loaded successfully
       
       // Enable edge-aware behavior for markers
       if (map.current) {

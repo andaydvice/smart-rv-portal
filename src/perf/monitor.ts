@@ -58,7 +58,7 @@ export function initPerformanceMonitor(options: PerfOptions = {}) {
   // Web Vitals
   setupWebVitals((metric) => {
     perfState.vitals[metric.name] = Number(metric.value.toFixed(2));
-    if (isDev) console.log(`[WebVital] ${metric.name}:`, perfState.vitals[metric.name]);
+    // WebVital tracked in dev mode
     maybeUpdateOverlay(perfState, budgets, options.enableOverlay ?? isDev);
   });
 
