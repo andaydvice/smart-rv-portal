@@ -11,7 +11,9 @@ const BlogHeader = () => {
       transition={{ duration: 0.5 }}
       className="text-center space-y-6 mb-12"
     >
-      <SplineSceneBasic />
+      <SplineErrorBoundary>
+        <SplineSceneBasic />
+      </SplineErrorBoundary>
     </motion.div>
   );
 };
