@@ -88,14 +88,17 @@
   NODE_VERSION = "18"
   SECRETS_SCAN_ENABLED = "false"
 
-# AGGRESSIVE CACHE CLEARING - Force fresh content
+# ULTRA AGGRESSIVE CACHE CLEARING - Force fresh content deployment
 [[headers]]
   for = "/*"
   [headers.values]
-    # NO CACHE - Force browsers to always fetch fresh content
-    Cache-Control = "no-cache, no-store, must-revalidate, max-age=0, s-maxage=0, proxy-revalidate"
+    # ZERO CACHE - Force browsers and CDNs to always fetch fresh content
+    Cache-Control = "no-cache, no-store, must-revalidate, max-age=0, s-maxage=0, proxy-revalidate, no-transform"
     Pragma = "no-cache"
     Expires = "0"
+    # Add deployment tracking
+    X-Deployment-Version = "revolutionising-20250830"
+    X-Cache-Buster = "force-refresh"
     # Content Security Policy - Allow necessary resources for RV tech site
     Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://tagmanager.google.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https: blob:; connect-src 'self' https://api.mapbox.com https://www.google-analytics.com https://analytics.google.com *.supabase.co; frame-src 'self' https://www.google.com; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self';"
     # Security headers

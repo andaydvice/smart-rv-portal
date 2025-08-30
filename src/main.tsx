@@ -11,6 +11,7 @@ import './styles/base.css'
 
 import { setupLazyLoading, deferOperation } from './utils/performance.ts'
 import { handleBotOptimizations, isBot, isSocialBot } from './utils/prerender'
+import { CacheManager } from './utils/cacheManager'
 
 // Enhanced bot detection
 const isBotAgent = isBot() || isSocialBot();
@@ -24,6 +25,9 @@ if (!rootElement) {
   console.error('Root element not found! Cannot mount React application.');
 } else {
   try {
+    // Initialize aggressive cache management
+    CacheManager.init();
+    
     // Apply bot optimizations before mounting
     if (isBotAgent) {
       handleBotOptimizations();
