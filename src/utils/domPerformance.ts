@@ -140,3 +140,25 @@ export const batchDOMWrites = (writes: Array<{ element: HTMLElement; styles: Rec
     domBatcher.write(element, styles, callback);
   });
 };
+
+/**
+ * Creates a debounced resize handler
+ */
+export const createResizeHandler = (callback: () => void, delay: number = 100) => {
+  let timeoutId: NodeJS.Timeout;
+  
+  return () => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(callback, delay);
+  };
+};
+
+/**
+ * Creates an IntersectionObserver with the given callback and options
+ */
+export const createViewportObserver = (
+  callback: IntersectionObserverCallback,
+  options?: IntersectionObserverInit
+) => {
+  return new IntersectionObserver(callback, options);
+};
