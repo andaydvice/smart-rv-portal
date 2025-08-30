@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import Navbar from "@/components/Navbar";
 import { Battery, Sun, Zap, Activity } from "lucide-react";
 import Layout from "@/components/layout/Layout";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";

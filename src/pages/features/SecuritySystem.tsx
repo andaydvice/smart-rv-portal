@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import Navbar from "@/components/Navbar";
 import Layout from "@/components/layout/Layout";
 import { Shield, Lock, Bell, Camera, Smartphone, MapPin, BatteryCharging, KeyRound, Wrench } from "lucide-react";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";

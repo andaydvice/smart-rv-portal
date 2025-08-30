@@ -1,6 +1,5 @@
 
 import { motion } from "framer-motion";
-import Navbar from "@/components/Navbar";
 import { Link } from "react-router-dom";
 import { Navigation, Shield, Battery, Tv, Droplet, Cog, Thermometer, Music } from "lucide-react";
 import Layout from "@/components/layout/Layout";

@@ -1,8 +1,8 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import SEO from "@/components/seo/SEO";
 import { articleSchema, breadcrumbSchema } from "@/components/seo/schemas";
-import Navbar from "@/components/Navbar";
 import { Button } from "@/components/ui/button";
+import Layout from "@/components/layout/Layout";
 import { ChevronLeft, AlertTriangle } from "lucide-react";
 import { BlogPostHeader as BackToBlogHeader } from "@/components/blog/post/BlogPostHeader";
 import { BlogPostImage } from "@/components/blog/post/BlogPostImage";
@@ -51,9 +51,8 @@ const BlogPost = () => {
 
   if (!post) {
     return (
-      <div className="flex flex-col min-h-screen bg-[#080F1F] text-white">
-        <Navbar />
-        <div className="container mx-auto px-4 py-16 pt-32 flex-grow flex flex-col items-center justify-center text-center">
+      <Layout>
+        <div className="container mx-auto px-4 py-16 flex-grow flex flex-col items-center justify-center text-center">
           <AlertTriangle className="h-16 w-16 text-[#EF4444] mb-6" />
           <h1 className="text-3xl font-bold mb-4">Blog Post Not Found</h1>
           <p className="text-[#E2E8FF] max-w-lg mb-8">
@@ -74,19 +73,13 @@ const BlogPost = () => {
             Back to Blog Posts
           </Button>
         </div>
-        <Footer2 
-          links={footerLinks}
-          socials={footerSocials}
-          description="Discover the latest in Smart RV technology and travel tips"
-        />
-      </div>
+      </Layout>
     );
   }
 
   return (
     <PageErrorBoundary>
-      <div className="flex flex-col min-h-screen bg-[#080F1F]">
-        <Navbar />
+      <Layout>
         <SEO
           title={post.title}
           description={post.description}
@@ -128,7 +121,7 @@ const BlogPost = () => {
           ]}
         />
         
-        <div className="container mx-auto px-4 py-8 space-y-8 pt-20 flex-grow">
+        <div className="container mx-auto px-4 py-8 space-y-8 flex-grow">
           <BackToBlogHeader />
           <BlogPostImage image={post.image} title={post.title} />
           <BlogPostContent 
@@ -154,12 +147,7 @@ const BlogPost = () => {
           {/* Affiliate disclosure */}
           <AffiliateDisclosure compact />
         </div>
-        <Footer2 
-          links={footerLinks}
-          socials={footerSocials}
-          description="Discover the latest in Smart RV technology and travel tips"
-        />
-      </div>
+      </Layout>
     </PageErrorBoundary>
   );
 };

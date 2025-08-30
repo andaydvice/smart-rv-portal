@@ -1,7 +1,6 @@
 
 import { motion } from "framer-motion";
 import { useEffect, lazy, Suspense } from "react";
-import Navbar from "@/components/Navbar";
 import Layout from "@/components/layout/Layout";
 import { rvTypes } from "@/data/rvTypes";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";

@@ -1,6 +1,5 @@
 
 import { motion } from "framer-motion";
-import Navbar from "@/components/Navbar";
 import AdventureHero from "@/components/adventure/AdventureHero";
 import AdventureCategoryCard from "@/components/adventure/AdventureCategoryCard";
 import KeyFeaturesCard from "@/components/adventure/KeyFeaturesCard";
