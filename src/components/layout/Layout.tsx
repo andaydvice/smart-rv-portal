@@ -2,7 +2,7 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { MobileGestureHandler } from '@/components/mobile/MobileGestureHandler';
-import { Header } from './Header';
+import Navbar from '@/components/Navbar';
 import { Footer } from './Footer';
 
 interface LayoutProps {
@@ -23,8 +23,8 @@ const Layout: React.FC<LayoutProps> = ({
           <title>{title}</title>
           <meta name="description" content={description} />
         </Helmet>
-        <Header />
-        <main className="relative">
+        <Navbar />
+        <main className="relative pt-16">
           {children}
         </main>
         <Footer />
