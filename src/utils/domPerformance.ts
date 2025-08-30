@@ -1,17 +1,16 @@
+
 /**
  * DOM Performance utilities to prevent forced reflows
  * Batches DOM reads and writes using requestAnimationFrame
  */
 
 interface DOMRead {
-  id: string;
   element: Element;
   property: string;
   callback: (value: any) => void;
 }
 
 interface DOMWrite {
-  id: string;
   element: HTMLElement;
   styles: Record<string, string>;
   callback?: () => void;
@@ -25,16 +24,16 @@ class DOMBatcher {
   /**
    * Schedule a DOM read operation
    */
-  read(element: Element, property: string, callback: (value: any) => void, id = Math.random().toString()): void {
-    this.reads.push({ id, element, property, callback });
+  read(element: Element, property: string, callback: (value: any) => void): void {
+    this.reads.push({ element, property, callback });
     this.schedule();
   }
 
   /**
    * Schedule a DOM write operation
    */
-  write(element: HTMLElement, styles: Record<string, string>, callback?: () => void, id = Math.random().toString()): void {
-    this.writes.push({ id, element, styles, callback });
+  write(element: HTMLElement, styles: Record<string, string>, callback?: () => void): void {
+    this.writes.push({ element, styles, callback });
     this.schedule();
   }
 
@@ -53,9 +52,9 @@ class DOMBatcher {
    */
   private flush(): void {
     // First, perform all reads
-    const readResults = new Map<string, any>();
+    const readResults: any[] = [];
     
-    this.reads.forEach(read => {
+    this.reads.forEach((read, index) => {
       try {
         let value;
         switch (read.property) {
@@ -74,12 +73,16 @@ class DOMBatcher {
           case 'scrollHeight':
             value = (read.element as HTMLElement).scrollHeight;
             break;
+          case 'scrollTop':
+            value = (read.element as HTMLElement).scrollTop;
+            break;
           default:
             value = (read.element as any)[read.property];
         }
-        readResults.set(read.id, value);
+        readResults[index] = value;
       } catch (error) {
         console.warn('DOM read error:', error);
+        readResults[index] = undefined;
       }
     });
 
@@ -94,8 +97,8 @@ class DOMBatcher {
     });
 
     // Finally, execute read callbacks
-    this.reads.forEach(read => {
-      const result = readResults.get(read.id);
+    this.reads.forEach((read, index) => {
+      const result = readResults[index];
       if (result !== undefined) {
         read.callback(result);
       }
@@ -136,93 +139,4 @@ export const batchDOMWrites = (writes: Array<{ element: HTMLElement; styles: Rec
   writes.forEach(({ element, styles, callback }) => {
     domBatcher.write(element, styles, callback);
   });
-};
-
-/**
- * Utility functions for common DOM operations that prevent forced reflows
- */
-
-/**
- * Get element dimensions without causing forced reflow
- */
-export const getDimensions = (element: Element): Promise<{ width: number; height: number }> => {
-  return new Promise((resolve) => {
-    domBatcher.read(element, 'getBoundingClientRect', (rect: DOMRect) => {
-      resolve({ width: rect.width, height: rect.height });
-    });
-  });
-};
-
-/**
- * Set styles without causing forced reflow
- */
-export const setStyles = (element: HTMLElement, styles: Record<string, string>): Promise<void> => {
-  return new Promise((resolve) => {
-    domBatcher.write(element, styles, () => resolve());
-  });
-};
-
-/**
- * Check if element is in viewport without forced reflow
- */
-export const isInViewport = (element: Element): Promise<boolean> => {
-  return new Promise((resolve) => {
-    domBatcher.read(element, 'getBoundingClientRect', (rect: DOMRect) => {
-      const isVisible = (
-        rect.top >= 0 &&
-        rect.left >= 0 &&
-        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-        rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-      );
-      resolve(isVisible);
-    });
-  });
-};
-
-/**
- * Measure text width without forced reflow
- */
-export const measureText = (text: string, font: string): Promise<number> => {
-  return new Promise((resolve) => {
-    const canvas = document.createElement('canvas');
-    const context = canvas.getContext('2d');
-    if (context) {
-      context.font = font;
-      const width = context.measureText(text).width;
-      resolve(width);
-    } else {
-      resolve(0);
-    }
-  });
-};
-
-/**
- * Debounced resize handler to prevent excessive reflow
- */
-export const createResizeHandler = (callback: () => void, delay = 16): (() => void) => {
-  let timeoutId: number;
-  
-  return () => {
-    clearTimeout(timeoutId);
-    timeoutId = window.setTimeout(() => {
-      requestAnimationFrame(callback);
-    }, delay);
-  };
-};
-
-/**
- * IntersectionObserver-based viewport detection (preferred method)
- */
-export const createViewportObserver = (
-  callback: (entries: IntersectionObserverEntry[]) => void,
-  options: IntersectionObserverInit = {}
-): IntersectionObserver => {
-  const defaultOptions: IntersectionObserverInit = {
-    root: null,
-    rootMargin: '0px',
-    threshold: 0.1,
-    ...options
-  };
-
-  return new IntersectionObserver(callback, defaultOptions);
 };
