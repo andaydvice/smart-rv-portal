@@ -7,7 +7,6 @@ import './styles/animations.css'
 import './styles/forms.css'
 import './styles/layout.css'
 import './styles/base.css'
-// FORCE REBUILD: timestamp 2024-12-28-15:45 - Nuclear cache bust
 // ... keep existing code (global base styles)
 
 import { setupLazyLoading, deferOperation } from './utils/performance.ts'

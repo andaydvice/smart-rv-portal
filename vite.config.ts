@@ -5,7 +5,7 @@ import path from "path";
 import { componentTagger } from "lovable-tagger";
 import { staticGeneratorPlugin } from "./vite-plugins/static-generator";
 
-// Force fresh deployment - cache clear 2024-12-28-15:45 - NUCLEAR CACHE BUST
+// Force fresh deployment - cache clear 2024-08-24
 export default defineConfig(({ mode }) => ({
   server: {
     host: '0.0.0.0',
@@ -52,29 +52,22 @@ export default defineConfig(({ mode }) => ({
     }
   },
   build: {
-    sourcemap: true, // Always enable sourcemaps for debugging
-    minify: false, // DISABLED: esbuild minification was creating corrupted JS
+    sourcemap: mode === 'development',
+    minify: mode === 'development' ? false : 'esbuild',
     rollupOptions: {
       output: {
-        // DISABLED: Manual chunks were causing module loading issues
-        // manualChunks: undefined,
-        format: 'es',
-        // AGGRESSIVE CACHE BUSTING - timestamp in filename
-        entryFileNames: `assets/[name]-[hash]-${Date.now()}.js`,
-        chunkFileNames: `assets/[name]-[hash]-${Date.now()}.js`,
-        assetFileNames: `assets/[name]-[hash]-${Date.now()}.[ext]`
+        manualChunks: {
+          vendor: ['react', 'react-dom'],
+          mapbox: ['mapbox-gl'],
+          query: ['@tanstack/react-query'],
+          ui: ['lucide-react', '@radix-ui/react-dialog', '@radix-ui/react-popover']
+        },
       },
     },
-    target: 'es2015', // More compatible target
-    cssCodeSplit: false, // Keep CSS in single file
-    reportCompressedSize: false,
-    chunkSizeWarningLimit: 2000, // Allow larger chunks for unminified code
-    modulePreload: {
-      polyfill: true // Ensure module loading works
-    },
-    assetsInlineLimit: 0, // Don't inline assets
-    // Force clean build
-    emptyOutDir: true
+    target: 'es2020', // Ensure consistent target with optimizeDeps
+    cssCodeSplit: true,
+    reportCompressedSize: false, // Disable compressed size reporting for faster builds
+    chunkSizeWarningLimit: 1000 // Increase chunk size warning limit
   },
   esbuild: {
     logOverride: { 'this-is-undefined-in-esm': 'silent' }
