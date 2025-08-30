@@ -59,7 +59,7 @@ const HoverDropdownMenu: React.FC<HoverDropdownMenuProps> = ({
     >
       <Button 
         variant="ghost" 
-        className="px-4 py-2 h-auto flex items-center gap-1 text-gray-300 hover:text-[#5B9BD5] hover:bg-transparent focus:bg-transparent"
+        className="px-2 py-2 h-auto flex items-center gap-1 text-gray-300 hover:text-[#5B9BD5] hover:bg-transparent focus:bg-transparent text-sm whitespace-nowrap"
         aria-expanded={isOpen}
         aria-haspopup="true"
       >
