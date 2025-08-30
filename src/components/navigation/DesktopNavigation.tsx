@@ -157,8 +157,8 @@ const DesktopNavigation = () => {
   ];
 
   return (
-    <div className="flex items-center justify-between w-full max-w-none overflow-hidden">
-      <div className="flex items-center space-x-1 flex-1 min-w-0 overflow-hidden">
+    <div className="flex items-center justify-between w-full max-w-none">
+      <div className="flex items-center space-x-1 flex-1 min-w-0">
         {!isHomePage && (
           <Link 
             to="/" 
