@@ -157,12 +157,12 @@ const DesktopNavigation = () => {
   ];
 
   return (
-    <div className="flex items-center justify-between w-full">
-      <div className="flex items-center space-x-2 flex-1 min-w-0">
+    <div className="flex items-center justify-between w-full max-w-none overflow-hidden">
+      <div className="flex items-center space-x-1 flex-1 min-w-0 overflow-hidden">
         {!isHomePage && (
           <Link 
             to="/" 
-            className="text-gray-300 hover:text-[#5B9BD5] transition-colors text-base flex items-center gap-2 px-4 py-2"
+            className="text-gray-300 hover:text-[#5B9BD5] transition-colors text-sm flex items-center gap-1 px-2 py-2 whitespace-nowrap"
           >
             <Home className="h-4 w-4" />
             Home
@@ -196,7 +196,7 @@ const DesktopNavigation = () => {
         {/* Blog Link */}
         <Link 
           to="/blog" 
-          className="text-gray-300 hover:text-[#5B9BD5] transition-colors text-base flex items-center gap-2 px-4 py-2"
+          className="text-gray-300 hover:text-[#5B9BD5] transition-colors text-sm flex items-center gap-1 px-2 py-2 whitespace-nowrap"
         >
           Blog
         </Link>
@@ -208,12 +208,12 @@ const DesktopNavigation = () => {
         />
         
         {/* Search Bar */}
-        <div className="ml-2">
+        <div className="ml-1 flex-shrink-0">
           <SearchBar />
         </div>
       </div>
 
-      <div className="flex-shrink-0 ml-4">
+      <div className="flex-shrink-0 ml-2">
         <AuthButtons />
       </div>
     </div>
