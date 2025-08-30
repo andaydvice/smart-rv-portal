@@ -157,8 +157,8 @@ const DesktopNavigation = () => {
   ];
 
   return (
-    <div className="flex items-center space-x-4">
-      <div className="flex items-center space-x-2 whitespace-nowrap">
+    <div className="flex items-center justify-between w-full">
+      <div className="flex items-center space-x-2 flex-1 min-w-0">
         {!isHomePage && (
           <Link 
             to="/" 
@@ -213,7 +213,9 @@ const DesktopNavigation = () => {
         </div>
       </div>
 
-      <AuthButtons />
+      <div className="flex-shrink-0 ml-4">
+        <AuthButtons />
+      </div>
     </div>
   );
 };
