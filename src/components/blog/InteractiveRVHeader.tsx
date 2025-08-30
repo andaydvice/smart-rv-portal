@@ -54,7 +54,7 @@ const InteractiveRVHeader = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.9 }}
           >
-            Discover cutting-edge technology, expert insights, and innovative solutions that are revolutionizing the world of recreational vehicles
+            Discover cutting edge technology, expert insights, and innovative solutions that are revolutionizing the world of recreational vehicles
           </motion.p>
 
           {/* CTA Button */}
@@ -66,27 +66,11 @@ const InteractiveRVHeader = () => {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            Explore Latest Articles
+            Read Smart RV Insights
           </motion.button>
         </motion.div>
       </div>
 
-      {/* Tech floating elements */}
-      <motion.div
-        className="absolute top-20 right-20 w-16 h-16 bg-connectivity-accent/20 backdrop-blur-sm rounded-full border border-connectivity-accent/30 flex items-center justify-center"
-        animate={{ y: [0, -10, 0] }}
-        transition={{ duration: 3, repeat: Infinity }}
-      >
-        <div className="w-2 h-2 bg-connectivity-accent rounded-full"></div>
-      </motion.div>
-      
-      <motion.div
-        className="absolute bottom-32 left-20 w-12 h-12 bg-[#60A5FA]/20 backdrop-blur-sm rounded-full border border-[#60A5FA]/30 flex items-center justify-center"
-        animate={{ y: [0, 10, 0] }}
-        transition={{ duration: 4, repeat: Infinity, delay: 1 }}
-      >
-        <div className="w-2 h-2 bg-[#60A5FA] rounded-full"></div>
-      </motion.div>
     </div>
   );
 };
