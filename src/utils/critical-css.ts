@@ -1,258 +1,198 @@
+const criticalCSS = `
+  /* Global Styles */
+  body {
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    background-color: #080f1f;
+    color: #fff;
+    line-height: 1.6;
+  }
 
-/**
- * Critical CSS injection for above-the-fold content
- * Improves First Contentful Paint and reduces layout shift
- */
+  /* Typography */
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 0.5rem;
+  }
 
-export const injectCriticalCSS = (): void => {
-  if (typeof document === 'undefined') return;
+  h1 {
+    font-size: 3rem;
+  }
 
-  const criticalCSS = `
-    /* Critical styles for immediate rendering */
-    html, body {
-      margin: 0;
-      padding: 0;
-      background-color: #080F1F;
-      color: #ffffff;
-      font-family: system-ui, -apple-system, sans-serif;
-      line-height: 1.5;
+  h2 {
+    font-size: 2.5rem;
+  }
+
+  h3 {
+    font-size: 2rem;
+  }
+
+  /* Layout */
+  .container {
+    width: 100%;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  /* Buttons */
+  .button {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    border-radius: 0.5rem;
+    transition: all 0.2s ease-in-out;
+  }
+
+  .button-primary {
+    background-color: #007bff;
+    color: #fff;
+  }
+
+  .button-primary:hover {
+    background-color: #0056b3;
+  }
+
+  /* Navigation */
+  nav {
+    background-color: #131a2a;
+    padding: 1rem 0;
+  }
+
+  nav .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+  }
+
+  nav li {
+    margin-left: 1.5rem;
+  }
+
+  nav a {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.2s ease-in-out;
+  }
+
+  nav a:hover {
+    color: #007bff;
+  }
+
+  /* Footer */
+  footer {
+    background-color: #131a2a;
+    color: #fff;
+    text-align: center;
+    padding: 1rem 0;
+    margin-top: 3rem;
+  }
+
+  /* Image Styles */
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* Form Styles */
+  input[type="text"],
+  input[type="email"],
+  textarea {
+    width: 100%;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    border: 1px solid #4a5568;
+    border-radius: 0.375rem;
+    background-color: #1a202c;
+    color: #fff;
+    transition: border-color 0.2s ease-in-out;
+  }
+
+  input[type="text"]:focus,
+  input[type="email"]:focus,
+  textarea:focus {
+    border-color: #007bff;
+    outline: none;
+  }
+
+  textarea {
+    resize: vertical;
+  }
+`;
+
+const deferNonCriticalCSS = (): void => {
+  const preloadLink = document.createElement('link');
+  preloadLink.href = '/index.css';
+  preloadLink.rel = 'preload';
+  preloadLink.as = 'style';
+  document.head.appendChild(preloadLink);
+
+  preloadLink.onload = () => {
+    const styleLink = document.createElement('link');
+    styleLink.href = '/index.css';
+    styleLink.rel = 'stylesheet';
+    document.head.appendChild(styleLink);
+  };
+};
+
+const injectCriticalCSS = (): void => {
+  const style = document.createElement('style');
+  style.textContent = criticalCSS;
+  document.head.appendChild(style);
+};
+
+export const injectLCPOptimizations = (): void => {
+  const style = document.createElement('style');
+  style.textContent = `
+    /* Critical LCP optimizations */
+    section.relative.w-full.min-h-screen {
+      contain: layout style paint;
     }
     
-    /* Navigation critical styles */
-    nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 50;
-      height: 64px;
-      background: rgba(8, 15, 31, 0.95);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid rgba(26, 32, 44, 0.5);
+    img[loading="eager"][fetchpriority="high"] {
+      content-visibility: auto;
     }
     
-    /* Main content area */
-    main {
-      padding-top: 64px;
-      min-height: calc(100vh - 64px);
-      background: #080F1F;
-    }
-    
-    /* Loading states */
-    .loading-fallback {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: #080F1F;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 9999;
-      opacity: 1;
-      transition: opacity 0.3s ease-out;
-    }
-    
-    .loading-fallback.loaded {
-      opacity: 0;
-      pointer-events: none;
-    }
-    
-    /* Critical typography */
-    h1, h2, h3 {
-      color: #5B9BD5;
-      margin: 0 0 1rem 0;
-      font-weight: 600;
-    }
-    
-    p {
-      color: #E2E8FF;
-      margin: 0 0 1rem 0;
-    }
-    
-    /* Button base styles */
-    button {
-      cursor: pointer;
-      border: none;
-      border-radius: 6px;
-      font-weight: 500;
-      transition: all 0.2s ease;
-    }
-    
-    /* Links */
-    a {
-      color: #5B9BD5;
-      text-decoration: none;
-      transition: color 0.2s ease;
-    }
-    
-    a:hover {
-      color: #4B8FE3;
-    }
-    
-    /* Container utilities */
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 1rem;
-    }
-    
-    /* Grid utilities */
-    .grid {
-      display: grid;
-    }
-    
-    .flex {
-      display: flex;
-    }
-    
-    .items-center {
-      align-items: center;
-    }
-    
-    .justify-center {
-      justify-content: center;
-    }
-    
-    /* Hide content for bots until loaded */
-    .bot-detected .loading-fallback {
-      display: none !important;
-    }
-    
-    /* Prevent layout shift */
-    img {
-      max-width: 100%;
-      height: auto;
-    }
-    
-    /* Critical responsive utilities */
-    @media (max-width: 768px) {
-      .container {
-        padding: 0 0.5rem;
-      }
-      
-      nav {
-        height: 56px;
-      }
-      
-      main {
-        padding-top: 56px;
-      }
+    /* Prevent layout shifts for hero section */
+    .min-h-screen {
+      min-height: 100vh;
+      min-height: 100dvh;
     }
   `;
-
-  // Check if critical CSS is already injected
-  if (document.querySelector('#critical-css')) return;
-
-  const style = document.createElement('style');
-  style.id = 'critical-css';
-  style.innerHTML = criticalCSS;
-  
-  // Insert at the beginning of head for highest priority
-  document.head.insertBefore(style, document.head.firstChild);
+  document.head.appendChild(style);
 };
 
-/**
- * Defers loading of non-critical stylesheets to prevent render blocking
- */
-export const deferNonCriticalCSS = (): void => {
-  if (typeof document === 'undefined') return;
-
-  // Find all stylesheets that might be render-blocking
-  const stylesheets = document.querySelectorAll('link[rel="stylesheet"]');
-  
-  stylesheets.forEach((link) => {
-    const linkElement = link as HTMLLinkElement;
-    
-    // Skip if already processed or is critical
-    if (linkElement.dataset.deferred || linkElement.id === 'critical-css') return;
-    
-    // Create a new link element for deferred loading
-    const deferredLink = document.createElement('link');
-    deferredLink.rel = 'preload';
-    deferredLink.as = 'style';
-    deferredLink.href = linkElement.href;
-    deferredLink.dataset.deferred = 'true';
-    
-    // Load stylesheet when preload is complete
-    deferredLink.onload = () => {
-      deferredLink.rel = 'stylesheet';
-    };
-    
-    // Fallback for browsers that don't support onload
-    setTimeout(() => {
-      if (deferredLink.rel !== 'stylesheet') {
-        deferredLink.rel = 'stylesheet';
-      }
-    }, 100);
-    
-    // Replace original link with deferred version
-    linkElement.parentNode?.replaceChild(deferredLink, linkElement);
-  });
-};
-
-/**
- * Remove critical CSS after main styles are loaded
- */
-export const removeCriticalCSS = (): void => {
-  if (typeof document === 'undefined') return;
-  
-  const criticalStyle = document.querySelector('#critical-css');
-  if (criticalStyle) {
-    // Wait longer to ensure main styles are loaded
-    setTimeout(() => {
-      criticalStyle.remove();
-    }, 2000);
-  }
-};
-
-/**
- * Preload critical fonts to prevent layout shift
- */
-export const preloadCriticalFonts = (): void => {
-  if (typeof document === 'undefined') return;
-
-  const fonts = [
-    'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap'
-  ];
-
-  fonts.forEach(fontUrl => {
-    // Check if already preloaded
-    if (document.querySelector(`link[href="${fontUrl}"]`)) return;
-    
-    const link = document.createElement('link');
-    link.rel = 'preload';
-    link.as = 'style';
-    link.href = fontUrl;
-    link.onload = () => {
-      link.rel = 'stylesheet';
-    };
-    document.head.appendChild(link);
-  });
-};
-
-/**
- * Initialize all critical CSS optimizations
- */
 export const initializeCriticalCSS = (): void => {
-  // Inject critical CSS immediately
-  injectCriticalCSS();
-  
-  // Defer non-critical CSS after DOM is ready
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => {
-      setTimeout(deferNonCriticalCSS, 0);
-    });
-  } else {
-    setTimeout(deferNonCriticalCSS, 0);
+  try {
+    // Inject critical CSS first
+    injectCriticalCSS();
+    
+    // Add LCP optimizations
+    injectLCPOptimizations();
+    
+    // Defer non-critical CSS loading
+    deferNonCriticalCSS();
+    
+    if (import.meta.env.DEV) {
+      console.log('Critical CSS and LCP optimizations initialized');
+    }
+  } catch (error) {
+    console.warn('Failed to initialize critical CSS:', error);
   }
-  
-  // Preload critical fonts
-  preloadCriticalFonts();
-  
-  // Remove critical CSS after main styles load
-  window.addEventListener('load', () => {
-    setTimeout(removeCriticalCSS, 1000);
-  });
 };

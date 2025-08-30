@@ -3,16 +3,35 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { Container } from "@/components/ui/container";
-
+import { useEffect } from "react";
 
 export const HeroSection = () => {
+  const heroImageSrc = "/lovable-uploads/f3ebf58c-7bbf-427f-9510-9c3b0aec6f6d.png";
+
+  useEffect(() => {
+    // Preload the LCP image with highest priority immediately
+    const link = document.createElement('link');
+    link.rel = 'preload';
+    link.as = 'image';
+    link.href = heroImageSrc;
+    link.fetchPriority = 'high';
+    
+    // Insert at the beginning of head for maximum priority
+    document.head.insertBefore(link, document.head.firstChild);
+    
+    return () => {
+      if (document.head.contains(link)) {
+        document.head.removeChild(link);
+      }
+    };
+  }, []);
 
   return (
     <section className="relative w-full min-h-screen overflow-hidden -mt-16 pt-16">
       {/* Full width image container */}
       <div className="absolute inset-0 left-0 right-0">
         <img
-          src="/lovable-uploads/f3ebf58c-7bbf-427f-9510-9c3b0aec6f6d.png"
+          src={heroImageSrc}
           alt="Luxury Smart RV interior with panoramic windows and modern intelligent design"
           className="h-full w-full object-cover"
           loading="eager"

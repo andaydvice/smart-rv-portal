@@ -1,138 +1,59 @@
 
-import React, { useEffect, useRef, ReactNode } from 'react';
-import { createResizeHandler } from '@/utils/domPerformance';
+import { useEffect, useRef } from 'react';
+import { batchDOMReads, batchDOMWrites } from '@/utils/domPerformance';
 
 interface MobileGestureHandlerProps {
-  children: ReactNode;
-  onSwipeLeft?: () => void;
-  onSwipeRight?: () => void;
-  onSwipeUp?: () => void;
-  onSwipeDown?: () => void;
-  onPullToRefresh?: () => void;
-  swipeThreshold?: number;
-  refreshThreshold?: number;
-  className?: string;
+  children: React.ReactNode;
 }
 
-export const MobileGestureHandler: React.FC<MobileGestureHandlerProps> = ({
-  children,
-  onSwipeLeft,
-  onSwipeRight,
-  onSwipeUp,
-  onSwipeDown,
-  onPullToRefresh,
-  swipeThreshold = 50,
-  refreshThreshold = 80,
-  className = '',
-}) => {
-  const touchStartRef = useRef<{ x: number; y: number } | null>(null);
+export const MobileGestureHandler = ({ children }: MobileGestureHandlerProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const scrollTimeoutRef = useRef<NodeJS.Timeout>();
 
   useEffect(() => {
-    const container = containerRef.current;
-    if (!container) return;
+    if (!containerRef.current) return;
 
-    let isRefreshing = false;
+    const container = containerRef.current;
 
     const handleTouchStart = (e: TouchEvent) => {
-      if (e.touches.length === 1) {
-        touchStartRef.current = {
-          x: e.touches[0].clientX,
-          y: e.touches[0].clientY,
-        };
+      // Enable momentum scrolling on iOS without TypeScript error
+      if (container.style) {
+        (container.style as any).webkitOverflowScrolling = 'touch';
       }
     };
 
-    const handleTouchEnd = (e: TouchEvent) => {
-      if (!touchStartRef.current || e.changedTouches.length !== 1) return;
-
-      const touchEnd = {
-        x: e.changedTouches[0].clientX,
-        y: e.changedTouches[0].clientY,
-      };
-
-      const deltaX = touchEnd.x - touchStartRef.current.x;
-      const deltaY = touchEnd.y - touchStartRef.current.y;
-      const absDeltaX = Math.abs(deltaX);
-      const absDeltaY = Math.abs(deltaY);
-
-      // Determine swipe direction
-      if (absDeltaX > swipeThreshold && absDeltaX > absDeltaY) {
-        // Horizontal swipe
-        if (deltaX > 0 && onSwipeRight) {
-          onSwipeRight();
-        } else if (deltaX < 0 && onSwipeLeft) {
-          onSwipeLeft();
-        }
-      } else if (absDeltaY > swipeThreshold && absDeltaY > absDeltaX) {
-        // Vertical swipe
-        if (deltaY > 0 && onSwipeDown) {
-          onSwipeDown();
-        } else if (deltaY < 0 && onSwipeUp) {
-          onSwipeUp();
-        }
-
-        // Pull to refresh - defer scroll position check to avoid forced reflow
-        if (
-          deltaY > refreshThreshold &&
-          onPullToRefresh &&
-          !isRefreshing
-        ) {
-          // Use requestAnimationFrame to check scroll position
-          requestAnimationFrame(() => {
-            if (container.scrollTop === 0) {
-              isRefreshing = true;
-              onPullToRefresh();
-              setTimeout(() => {
-                isRefreshing = false;
-              }, 2000);
-            }
-          });
-        }
+    const handleScroll = () => {
+      // Clear existing timeout
+      if (scrollTimeoutRef.current) {
+        clearTimeout(scrollTimeoutRef.current);
       }
 
-      touchStartRef.current = null;
-    };
-
-    const handleTouchMove = (e: TouchEvent) => {
-      // Add momentum scrolling for iOS without querying dimensions
-      const target = e.currentTarget as HTMLElement;
-      if (target && target.style && !target.style.webkitOverflowScrolling) {
-        // Use requestAnimationFrame to defer style changes
-        requestAnimationFrame(() => {
-          target.style.setProperty('-webkit-overflow-scrolling', 'touch');
+      // Batch scroll position reads to prevent forced reflow
+      scrollTimeoutRef.current = setTimeout(() => {
+        batchDOMReads(() => {
+          const scrollY = window.scrollY;
+          // Process scroll position without causing reflow
+          if (scrollY > 100) {
+            // Handle scroll behavior
+          }
         });
-      }
+      }, 16); // Throttle to ~60fps
     };
 
     container.addEventListener('touchstart', handleTouchStart, { passive: true });
-    container.addEventListener('touchend', handleTouchEnd, { passive: true });
-    container.addEventListener('touchmove', handleTouchMove, { passive: true });
+    window.addEventListener('scroll', handleScroll, { passive: true });
 
     return () => {
       container.removeEventListener('touchstart', handleTouchStart);
-      container.removeEventListener('touchend', handleTouchEnd);
-      container.removeEventListener('touchmove', handleTouchMove);
+      window.removeEventListener('scroll', handleScroll);
+      if (scrollTimeoutRef.current) {
+        clearTimeout(scrollTimeoutRef.current);
+      }
     };
-  }, [
-    onSwipeLeft,
-    onSwipeRight,
-    onSwipeUp,
-    onSwipeDown,
-    onPullToRefresh,
-    swipeThreshold,
-    refreshThreshold,
-  ]);
+  }, []);
 
   return (
-    <div
-      ref={containerRef}
-      className={`${className} touch-manipulation overscroll-contain`}
-      style={{
-        WebkitOverflowScrolling: 'touch',
-        overscrollBehavior: 'contain',
-      }}
-    >
+    <div ref={containerRef} className="w-full">
       {children}
     </div>
   );
