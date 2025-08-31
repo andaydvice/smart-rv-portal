@@ -55,7 +55,7 @@ const FilterPanel = ({ onFilterChange }: FilterPanelProps) => {
       // Fetch all storage facilities and count by state
       try {
         const { data, error } = await supabase
-          .from('storage_facilities_public_view')
+          .from('storage_facilities')
           .select('state');
 
         if (!error && data) {
