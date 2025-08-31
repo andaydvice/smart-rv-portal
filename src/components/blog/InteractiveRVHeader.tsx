@@ -1,3 +1,4 @@
+import React from "react";
 import { motion } from "framer-motion";
 import smartRvHero from "@/assets/smart-rv-hero.jpg";
 
