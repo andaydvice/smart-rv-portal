@@ -102,8 +102,10 @@ export const useStorageFacilities = (filters: FilterState) => {
   const { data: maxPriceData } = useQuery({
     queryKey: ['max-facility-price'],
     queryFn: async () => {
-      // Use the public function for getting max price data
-      const { data, error } = await supabase.rpc('get_public_facility_data');
+      // Use the public view for getting max price data
+      const { data, error } = await supabase
+        .from('storage_facilities_public_view')
+        .select('price_category');
       
       if (error || !data) return 1000;
       
@@ -119,8 +121,10 @@ export const useStorageFacilities = (filters: FilterState) => {
     queryKey: ['storage-facilities', filters],
     queryFn: async () => {
       
-      // Use the secure public function to get non-sensitive facility data
-      const { data: allData, error } = await supabase.rpc('get_public_facility_data');
+      // Use the public view to get non-sensitive facility data
+      const { data: allData, error } = await supabase
+        .from('storage_facilities_public_view')
+        .select('*');
       
       // Log query params for debugging
       console.log('Query params:', {

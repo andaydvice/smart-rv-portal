@@ -41,8 +41,10 @@ const normalizeStateName = (stateAbbr: string): string => {
 export async function getStateCountsWithSQL() {
   const { supabase } = await import('@/integrations/supabase/client');
   
-  // Use the secure public function to get states
-  const { data, error } = await supabase.rpc('get_public_facility_data');
+  // Use the public view to get states
+  const { data, error } = await supabase
+    .from('storage_facilities_public_view')
+    .select('state');
   
   if (error || !data) {
     console.error('Error fetching states:', error);
@@ -141,7 +143,9 @@ export default function StorageFacilities() {
       if (!featuredLocation) {
         try {
           const { supabase } = await import('@/integrations/supabase/client');
-          const { data, error } = await supabase.rpc('get_public_facility_data');
+          const { data, error } = await supabase
+            .from('storage_facilities_public_view')
+            .select('*');
             
           if (data && data.length > 0) {
             // Pick a random facility from the fetched data
