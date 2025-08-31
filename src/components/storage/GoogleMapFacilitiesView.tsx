@@ -4,6 +4,7 @@ import { Card } from '@/components/ui/card';
 import GoogleMapView from './map/GoogleMapView';
 import GoogleMapViewDirect from './map/GoogleMapViewDirect';
 import OpenStreetMapView from './map/OpenStreetMapView';
+import SimpleMapView from './map/SimpleMapView';
 import { StorageFacility } from './types';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { AlertCircle, MapPin } from 'lucide-react';
@@ -26,8 +27,8 @@ const GoogleMapFacilitiesView: React.FC<GoogleMapFacilitiesViewProps> = ({
   selectedState
 }) => {
   const [currentZoom, setCurrentZoom] = useState<number>(4);
-  // Start with Google Maps since we have a valid unrestricted API key
-  const [mapProvider, setMapProvider] = useState<'google' | 'google-direct' | 'osm'>('google');
+  // Start with simple map that doesn't need external resources
+  const [mapProvider, setMapProvider] = useState<'google' | 'google-direct' | 'osm' | 'simple'>('simple');
   const [loadAttempts, setLoadAttempts] = useState(0);
   const [mapError, setMapError] = useState(false);
   
@@ -68,7 +69,31 @@ const GoogleMapFacilitiesView: React.FC<GoogleMapFacilitiesViewProps> = ({
   return (
     <Card className={`h-[400px] md:h-[650px] bg-[#080F1F] relative overflow-hidden border-gray-700 ${className}`}>
       {/* Map provider toggle button */}
-      <div className="absolute top-4 left-4 z-10 flex gap-2">
+      <div className="absolute top-4 left-4 z-10 flex gap-2 flex-wrap">
+        <button
+          onClick={() => setMapProvider('simple')}
+          className={`px-3 py-1 rounded-lg text-sm font-medium transition-colors ${
+            mapProvider === 'simple' 
+              ? 'bg-green-600 text-white' 
+              : 'bg-black/70 text-white hover:bg-black/80'
+          }`}
+        >
+          <MapPin className="inline-block w-4 h-4 mr-1" />
+          Simple Map
+        </button>
+        <button
+          onClick={() => {
+            setMapProvider('google');
+            setLoadAttempts(0);
+          }}
+          className={`px-3 py-1 rounded-lg text-sm font-medium transition-colors ${
+            mapProvider === 'google' || mapProvider === 'google-direct'
+              ? 'bg-blue-600 text-white' 
+              : 'bg-black/70 text-white hover:bg-black/80'
+          }`}
+        >
+          Google Maps
+        </button>
         <button
           onClick={() => setMapProvider('osm')}
           className={`px-3 py-1 rounded-lg text-sm font-medium transition-colors ${
@@ -77,21 +102,7 @@ const GoogleMapFacilitiesView: React.FC<GoogleMapFacilitiesViewProps> = ({
               : 'bg-black/70 text-white hover:bg-black/80'
           }`}
         >
-          <MapPin className="inline-block w-4 h-4 mr-1" />
           OpenStreetMap
-        </button>
-        <button
-          onClick={() => {
-            setMapProvider('google');
-            setLoadAttempts(0);
-          }}
-          className={`px-3 py-1 rounded-lg text-sm font-medium transition-colors ${
-            mapProvider !== 'osm' 
-              ? 'bg-blue-600 text-white' 
-              : 'bg-black/70 text-white hover:bg-black/80'
-          }`}
-        >
-          Google Maps
         </button>
       </div>
       {!apiKey ? (
@@ -107,7 +118,12 @@ const GoogleMapFacilitiesView: React.FC<GoogleMapFacilitiesViewProps> = ({
         </div>
       ) : (
         <>
-          {mapProvider === 'osm' ? (
+          {mapProvider === 'simple' ? (
+            <SimpleMapView
+              facilities={validFacilities}
+              onMarkerClick={onMarkerClick}
+            />
+          ) : mapProvider === 'osm' ? (
             <OpenStreetMapView
               facilities={validFacilities}
               onMarkerClick={onMarkerClick}
