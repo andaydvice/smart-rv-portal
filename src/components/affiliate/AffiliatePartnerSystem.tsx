@@ -337,7 +337,7 @@ export const AffiliatePartnerCard: React.FC<AffiliatePartnerCardProps> = ({
         </ul>
       )}
       
-      <div className="mt-auto">
+      <div className="mt-auto pt-4 px-2">
         <AffiliatePartnerButton
           partner={partner}
           path={path}
