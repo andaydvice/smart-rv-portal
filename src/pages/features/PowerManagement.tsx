@@ -165,11 +165,11 @@ const PowerManagement = () => {
               partners={[
                 {
                   partner: 'rvlife',
-                  title: 'RV Life Power Management Systems',
-                  description: 'Advanced power management systems with smart monitoring and automated energy optimization',
-                  features: ['Smart Power Distribution', 'Energy Monitoring', 'Automated Management', 'Professional Installation'],
-                  path: '/power-systems',
-                  buttonText: 'Shop Power Systems'
+                  title: 'RV Life Pro GPS Navigation',
+                  description: 'Essential RV trip planning and GPS navigation app with power management route optimization',
+                  features: ['RV-Safe Routes', 'Campground Info', 'Trip Planning', 'Power Management Tips'],
+                  path: '',
+                  buttonText: 'Get RV Life Pro'
                 },
                 {
                   partner: 'goodsam',
