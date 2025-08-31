@@ -45,7 +45,7 @@ const About = () => {
       <div className="relative w-full h-[70vh] min-h-[500px] overflow-hidden">
         {/* ADILIO Background Video */}
         <iframe
-          src="https://adilo.bigcommand.com/watch/DVjquwNK?autoplay=1&muted=1&loop=1&controls=0"
+          src="https://adilo.bigcommand.com/watch/INGQY9i5?autoplay=1&muted=1&loop=1&controls=0"
           title="Smart RV Technology Hub - About Us"
           className="absolute inset-0 w-full h-full border-0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
