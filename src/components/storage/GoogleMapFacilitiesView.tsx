@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Card } from '@/components/ui/card';
 import GoogleMapView from './map/GoogleMapView';
 import GoogleMapViewDirect from './map/GoogleMapViewDirect';
-import OpenStreetMapView from './map/OpenStreetMapView';
+
 import SimpleMapView from './map/SimpleMapView';
 import { StorageFacility } from './types';
 import { Alert, AlertDescription } from '@/components/ui/alert';
@@ -27,27 +27,27 @@ const GoogleMapFacilitiesView: React.FC<GoogleMapFacilitiesViewProps> = ({
   selectedState
 }) => {
   const [currentZoom, setCurrentZoom] = useState<number>(4);
-  // Start with simple map that doesn't need external resources
-  const [mapProvider, setMapProvider] = useState<'google' | 'google-direct' | 'osm' | 'simple'>('simple');
+  // Start with Google Maps, fallback to Mapbox if needed
+  const [mapProvider, setMapProvider] = useState<'google' | 'google-direct' | 'mapbox' | 'simple'>('google');
   const [loadAttempts, setLoadAttempts] = useState(0);
   const [mapError, setMapError] = useState(false);
   
-  // Auto-fallback strategy: Google -> Direct Google -> OpenStreetMap
+  // Auto-fallback strategy: Google -> Direct Google -> Mapbox
   useEffect(() => {
     if (mapProvider === 'google' && loadAttempts === 0) {
       const timer = setTimeout(() => {
         console.log('Google Maps taking too long, trying direct loader...');
         setMapProvider('google-direct');
         setLoadAttempts(1);
-      }, 2000); // Reduced to 2 seconds for faster fallback
+      }, 3000);
       
       return () => clearTimeout(timer);
     } else if (mapProvider === 'google-direct' && loadAttempts === 1) {
       const timer = setTimeout(() => {
-        console.log('Direct loader failed, switching to OpenStreetMap...');
-        setMapProvider('osm');
+        console.log('Direct loader failed, switching to Mapbox...');
+        setMapProvider('mapbox');
         setLoadAttempts(2);
-      }, 2000); // Reduced to 2 seconds for faster fallback
+      }, 3000);
       
       return () => clearTimeout(timer);
     }
@@ -95,14 +95,14 @@ const GoogleMapFacilitiesView: React.FC<GoogleMapFacilitiesViewProps> = ({
           Google Maps
         </button>
         <button
-          onClick={() => setMapProvider('osm')}
+          onClick={() => setMapProvider('mapbox')}
           className={`px-3 py-1 rounded-lg text-sm font-medium transition-colors ${
-            mapProvider === 'osm' 
+            mapProvider === 'mapbox' 
               ? 'bg-blue-600 text-white' 
               : 'bg-black/70 text-white hover:bg-black/80'
           }`}
         >
-          OpenStreetMap
+          Mapbox
         </button>
       </div>
       {!apiKey ? (
@@ -123,11 +123,10 @@ const GoogleMapFacilitiesView: React.FC<GoogleMapFacilitiesViewProps> = ({
               facilities={validFacilities}
               onMarkerClick={onMarkerClick}
             />
-          ) : mapProvider === 'osm' ? (
-            <OpenStreetMapView
+          ) : mapProvider === 'mapbox' ? (
+            <SimpleMapView
               facilities={validFacilities}
               onMarkerClick={onMarkerClick}
-              selectedState={selectedState}
             />
           ) : mapProvider === 'google-direct' ? (
             <GoogleMapViewDirect
