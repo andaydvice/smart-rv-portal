@@ -30,7 +30,7 @@ const GoogleMapView: React.FC<GoogleMapViewProps> = ({
   facilities,
   recentlyViewedFacilityIds,
   onMarkerClick,
-  apiKey = process.env.VITE_GOOGLE_MAPS_API_KEY,
+  apiKey = 'AIzaSyAGKkTg0DlZd7fCJlfkVNqkRkzPjeqKJ2o',
   center = { lat: 39.8283, lng: -98.5795 },
   zoom = 4,
   onZoomChange,
@@ -42,6 +42,11 @@ const GoogleMapView: React.FC<GoogleMapViewProps> = ({
   const [mapCenter, setMapCenter] = useState(center);
   const [mapZoom, setMapZoom] = useState(zoom);
 
+  // Debug API key
+  useEffect(() => {
+    console.log('GoogleMapView - API Key:', apiKey ? 'Present' : 'Missing', apiKey?.substring(0, 10) + '...');
+  }, [apiKey]);
+  
   const { isLoaded, error } = useGoogleMaps({ apiKey });
 
   // Update map center and zoom when selectedState changes

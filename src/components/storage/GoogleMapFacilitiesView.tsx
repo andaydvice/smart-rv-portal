@@ -44,7 +44,7 @@ const GoogleMapFacilitiesView: React.FC<GoogleMapFacilitiesViewProps> = ({
         <Alert variant="destructive" className="m-4">
           <AlertCircle className="h-4 w-4" />
           <AlertDescription>
-            Google Maps API key is not configured
+            Google Maps API key is not configured. Please check the configuration.
           </AlertDescription>
         </Alert>
       ) : validFacilities.length === 0 ? (
