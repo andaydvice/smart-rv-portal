@@ -2,7 +2,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
 import { StorageFacility, FilterState, DatabaseStorageFacility } from './types';
-import { emergencyFacilityData, getEmergencyMaxPrice } from './EmergencyFallbackData';
+import { fallbackStorageFacilities, fallbackPriceRange } from '@/data/fallbackFacilities';
 
 interface PriceRange {
   min: number;
@@ -98,13 +98,13 @@ export const useStorageFacilities = (filters: FilterState) => {
         console.log('Max price query result:', { data: data?.length, error });
         
         if (error) {
-          console.warn('Failed to fetch max price from Supabase, using emergency fallback:', error);
-          return getEmergencyMaxPrice();
+          console.warn('Failed to fetch max price from Supabase, using fallback:', error);
+          return fallbackPriceRange.max;
         }
         
         if (!data || data.length === 0) {
-          console.warn('No price data found, using emergency fallback');
-          return getEmergencyMaxPrice();
+          console.warn('No price data found, using fallback');
+          return fallbackPriceRange.max;
         }
         
         // Find max price from the price ranges
@@ -112,10 +112,10 @@ export const useStorageFacilities = (filters: FilterState) => {
           const priceRange = f.price_range as any;
           return priceRange?.max || 0;
         }));
-        return maxPrice || getEmergencyMaxPrice();
+        return maxPrice || fallbackPriceRange.max;
       } catch (err) {
-        console.error('Emergency: Max price query failed completely, using fallback:', err);
-        return getEmergencyMaxPrice();
+        console.error('Max price query failed completely, using fallback:', err);
+        return fallbackPriceRange.max;
       }
     }
   });
@@ -147,13 +147,13 @@ export const useStorageFacilities = (filters: FilterState) => {
         });
         
         if (error) {
-          console.warn('Supabase query failed, using emergency fallback data:', error);
-          return convertToStorageFacilityArray(emergencyFacilityData, filters);
+          console.warn('Supabase query failed, using fallback data:', error);
+          return convertToStorageFacilityArray(fallbackStorageFacilities, filters);
         }
         
         if (!allData || allData.length === 0) {
-          console.warn('No data returned from Supabase, using emergency fallback');
-          return convertToStorageFacilityArray(emergencyFacilityData, filters);
+          console.warn('No data returned from Supabase, using fallback');
+          return convertToStorageFacilityArray(fallbackStorageFacilities, filters);
         }
 
       // Apply state filter if selected
@@ -208,8 +208,8 @@ export const useStorageFacilities = (filters: FilterState) => {
         // Map database results to StorageFacility objects
         return filteredData.map(facility => convertToStorageFacility(facility));
       } catch (err) {
-        console.error('Emergency: Complete query failure, using fallback data:', err);
-        return convertToStorageFacilityArray(emergencyFacilityData, filters);
+        console.error('Complete query failure, using fallback data:', err);
+        return convertToStorageFacilityArray(fallbackStorageFacilities, filters);
       }
     },
     refetchOnWindowFocus: false,
@@ -227,7 +227,7 @@ export const useStorageFacilities = (filters: FilterState) => {
     facilities: filteredFacilities,
     isLoading,
     error,
-    maxPrice: maxPriceData || getEmergencyMaxPrice()
+    maxPrice: maxPriceData || fallbackPriceRange.max
   };
 };
 
