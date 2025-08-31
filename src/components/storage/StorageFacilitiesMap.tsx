@@ -50,8 +50,12 @@ const StorageFacilitiesMap: React.FC<StorageFacilitiesMapProps> = ({ onSelectFea
     googleMapsKey 
   } = useMapView();
   
-  // Debug logging
+  // Enhanced debug logging with visual indicators
   React.useEffect(() => {
+    console.log('%c🗺️ STORAGE FACILITIES MAP UPDATE 🗺️', 
+      'background: linear-gradient(45deg, #ff6b6b, #4ecdc4); color: white; font-size: 18px; padding: 8px; font-weight: bold;'
+    );
+    console.log('%cMap component rendered at:', 'color: #5B9BD5; font-size: 14px; font-weight: bold;', new Date().toISOString());
     console.log('StorageFacilitiesMap state:', {
       facilitiesCount: allFacilities?.length || 0,
       isLoading,
@@ -59,7 +63,8 @@ const StorageFacilitiesMap: React.FC<StorageFacilitiesMapProps> = ({ onSelectFea
       useGoogleMaps,
       mapToken: mapToken ? 'present' : 'missing',
       mapTokenError,
-      googleMapsKey: googleMapsKey ? 'present' : 'missing'
+      googleMapsKey: googleMapsKey ? 'present' : 'missing',
+      buildTime: Date.now()
     });
   }, [allFacilities, isLoading, error, useGoogleMaps, mapToken, mapTokenError, googleMapsKey]);
   
@@ -202,7 +207,26 @@ const StorageFacilitiesMap: React.FC<StorageFacilitiesMapProps> = ({ onSelectFea
 
   return (
     <ErrorBoundary>
-      <div className="flex flex-col space-y-4">
+      <div className="flex flex-col space-y-4" style={{ position: 'relative' }}>
+        {/* FLOATING UPDATE INDICATOR */}
+        <div style={{
+          position: 'fixed',
+          bottom: '20px',
+          right: '20px',
+          background: 'linear-gradient(45deg, #ff4757, #3742fa)',
+          color: 'white',
+          padding: '15px',
+          borderRadius: '15px',
+          zIndex: 99999,
+          fontSize: '16px',
+          fontWeight: 'bold',
+          animation: 'spin 2s linear infinite',
+          border: '3px solid #fff',
+          boxShadow: '0 0 30px rgba(255, 71, 87, 0.7)'
+        }}>
+          🔄 UPDATE: {new Date().toLocaleTimeString()}
+          <br />BUILD: {Date.now().toString().slice(-4)}
+        </div>
       {/* Mobile-first: Map container shows first */}
       <div className="order-1">
         {/* Navigation hint and map toggle button */}

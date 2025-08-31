@@ -6,7 +6,7 @@ import { Warehouse } from "lucide-react";
 import LocationPreviewSection from "@/components/storage/LocationPreviewSection";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
 import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { StorageFacility } from "@/components/storage/types";
 import "../styles/force-markers.css"; // Only load the minimal, clean CSS
 import "../styles/map-fixes.css"; // Add our marker edge-clipping fixes
@@ -162,8 +162,46 @@ export default function StorageFacilities() {
     fetchRandomLocation();
   }, [featuredLocation]);
 
+  // Add console verification with styling
+  React.useEffect(() => {
+    console.log('%c🚨 STORAGE FACILITIES UPDATE VERIFICATION 🚨', 
+      'background: linear-gradient(45deg, #ff0000, #00ff00); color: white; font-size: 20px; padding: 10px; font-weight: bold;'
+    );
+    console.log('%cComponent rendered at:', 'color: #5B9BD5; font-size: 16px; font-weight: bold;', new Date().toISOString());
+    console.log('%cBuild version:', 'color: #5B9BD5; font-size: 16px; font-weight: bold;', Date.now());
+  }, []);
+
   return (
     <Layout>
+      {/* FORCE VISIBLE UPDATE BANNER */}
+      <div style={{
+        background: 'linear-gradient(45deg, #ff0000, #00ff00, #0000ff)',
+        color: 'white',
+        padding: '20px',
+        fontSize: '24px',
+        textAlign: 'center',
+        fontWeight: 'bold',
+        animation: 'pulse 2s infinite',
+        position: 'sticky',
+        top: 0,
+        zIndex: 9999,
+        boxShadow: '0 4px 20px rgba(255, 0, 0, 0.5)'
+      }}>
+        🚨 UPDATES WORKING - {new Date().toLocaleTimeString()} - BUILD: {Date.now()} 🚨
+      </div>
+      
+      <style>{`
+        @keyframes pulse {
+          0% { opacity: 1; transform: scale(1); }
+          50% { opacity: 0.7; transform: scale(1.02); }
+          100% { opacity: 1; transform: scale(1); }
+        }
+        @keyframes rotate {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+        }
+      `}</style>
+      
       {/* Hero Header with Image */}
       {/* Hero Header with Image */}
       <div className="relative w-full h-[300px]">
@@ -194,7 +232,31 @@ export default function StorageFacilities() {
       
       {/* Main map container */}
       <Container fullWidth className="px-2 md:px-4 overflow-hidden max-w-[1920px] mx-auto flex-grow">
-        <div className="py-4 storage-facilities-map">
+        <div className="py-4 storage-facilities-map" style={{
+          border: '10px solid #ff00ff',
+          boxShadow: '0 0 50px rgba(255, 0, 255, 0.5)',
+          position: 'relative',
+          borderRadius: '15px'
+        }}>
+          {/* VISIBLE MAP UPDATE OVERLAY */}
+          <div style={{
+            position: 'absolute',
+            top: '20px',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            background: 'rgba(255, 255, 0, 0.95)',
+            color: 'black',
+            padding: '15px 30px',
+            fontSize: '20px',
+            fontWeight: 'bold',
+            zIndex: 1000,
+            borderRadius: '10px',
+            border: '3px solid red',
+            animation: 'bounce 2s infinite'
+          }}>
+            📍 MAP UPDATED: {new Date().toLocaleTimeString()}
+          </div>
+          
           <StorageFacilitiesMap onSelectFeaturedLocation={handleSelectFeaturedLocation} />
         </div>
       </Container>

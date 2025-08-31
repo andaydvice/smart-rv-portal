@@ -42,6 +42,21 @@
     <div id="root"></div>
     <script type="module" src="/src/main.tsx?v=20250830-revolutionising&cb=" + Date.now()></script>
     
+    <!-- Force cache busting with timestamp -->
+    <script>
+      console.log('%c🎯 HTML INDEX UPDATED 🎯', 
+        'background: linear-gradient(45deg, #ff9a9e, #fecfef); color: black; font-size: 22px; padding: 12px; font-weight: bold;'
+      );
+      console.log('HTML loaded at:', new Date().toISOString());
+      console.log('Cache buster:', Date.now());
+      
+      // Add cache-busting meta tag
+      const meta = document.createElement('meta');
+      meta.name = 'cache-buster';
+      meta.content = Date.now().toString();
+      document.head.appendChild(meta);
+    </script>
+    
     <!-- AGGRESSIVE Cache Clearing and Version Management -->
     <script>
       const CURRENT_VERSION = 'map-fixes-20250831';
