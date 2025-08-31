@@ -7,7 +7,7 @@ import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliat
 import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
 import SEO from "@/components/seo/SEO";
 import { organizationSchema, faqSchema } from "@/components/seo/schemas";
-import { VideoWithFallback } from "@/components/ui/VideoWithFallback";
+
 
 const About = () => {
   useEffect(() => {
@@ -41,22 +41,14 @@ const About = () => {
           ])
         ]}
       />
-      {/* Hero Section with Video Background */}
+      {/* Hero Section with Background Image */}
       <div className="relative w-full h-[70vh] min-h-[500px] overflow-hidden">
-        {/* Hero Video */}
-        <VideoWithFallback
-          sources={[
-            { 
-              type: 'youtube', 
-              src: 'dQw4w9WgXcQ', // Demo video - replace with actual RV video
-              poster: '/lovable-uploads/Luxury_RV_Living-min.jpg'
-            }
-          ]}
-          fallbackImage="/lovable-uploads/Luxury_RV_Living-min.jpg"
-          title="Smart RV Technology Hub - About Us"
+        {/* Hero Image */}
+        <img
+          src="/lovable-uploads/Luxury_RV_Living-min.jpg"
+          alt="Smart RV Technology Hub - About Us"
           className="absolute inset-0 w-full h-full object-cover"
-          autoPlay={true}
-          muted={true}
+          loading="eager"
         />
         
         {/* Dark overlay for text readability */}
