@@ -20,6 +20,7 @@ import { Star, AlertTriangle } from 'lucide-react';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { STATE_NAME_MAP } from '@/utils/stateNameUtils';
 import { forceMapMarkersVisible } from '@/utils/forceMapMarkers';
+import { ErrorBoundary } from './ErrorBoundary';
 
 interface StorageFacilitiesMapProps {
   onSelectFeaturedLocation?: (facility: StorageFacility | null) => void;
@@ -200,7 +201,8 @@ const StorageFacilitiesMap: React.FC<StorageFacilitiesMapProps> = ({ onSelectFea
   
 
   return (
-    <div className="flex flex-col space-y-4">
+    <ErrorBoundary>
+      <div className="flex flex-col space-y-4">
       {/* Mobile-first: Map container shows first */}
       <div className="order-1">
         {/* Navigation hint and map toggle button */}
@@ -334,6 +336,7 @@ const StorageFacilitiesMap: React.FC<StorageFacilitiesMapProps> = ({ onSelectFea
         />
       </div>
     </div>
+    </ErrorBoundary>
   );
 };
 

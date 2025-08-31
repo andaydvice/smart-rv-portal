@@ -2,6 +2,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
 import { StorageFacility, FilterState, DatabaseStorageFacility } from './types';
+import { emergencyFacilityData, getEmergencyMaxPrice } from './EmergencyFallbackData';
 
 interface PriceRange {
   min: number;
@@ -88,21 +89,34 @@ export const useStorageFacilities = (filters: FilterState) => {
     queryKey: ['max-facility-price'],
     queryFn: async () => {
       console.log('Fetching max price data...');
-      // Direct query to storage facilities table with SELECT access
-      const { data, error } = await supabase
-        .from('storage_facilities')
-        .select('price_range');
-      
-      console.log('Max price query result:', { data: data?.length, error });
-      
-      if (error || !data) return 1000;
-      
-      // Find max price from the price ranges
-      const maxPrice = Math.max(...data.map(f => {
-        const priceRange = f.price_range as any;
-        return priceRange?.max || 0;
-      }));
-      return maxPrice || 1000;
+      try {
+        // Direct query to storage facilities table with SELECT access
+        const { data, error } = await supabase
+          .from('storage_facilities')
+          .select('price_range');
+        
+        console.log('Max price query result:', { data: data?.length, error });
+        
+        if (error) {
+          console.warn('Failed to fetch max price from Supabase, using emergency fallback:', error);
+          return getEmergencyMaxPrice();
+        }
+        
+        if (!data || data.length === 0) {
+          console.warn('No price data found, using emergency fallback');
+          return getEmergencyMaxPrice();
+        }
+        
+        // Find max price from the price ranges
+        const maxPrice = Math.max(...data.map(f => {
+          const priceRange = f.price_range as any;
+          return priceRange?.max || 0;
+        }));
+        return maxPrice || getEmergencyMaxPrice();
+      } catch (err) {
+        console.error('Emergency: Max price query failed completely, using fallback:', err);
+        return getEmergencyMaxPrice();
+      }
     }
   });
 
@@ -111,35 +125,36 @@ export const useStorageFacilities = (filters: FilterState) => {
     queryFn: async () => {
       console.log('Fetching storage facilities...');
       
-      // Direct query to storage facilities table
-      const { data: allData, error } = await supabase
-        .from('storage_facilities') 
-        .select(`
-          id, name, address, city, state, latitude, longitude,
-          features, price_range, avg_rating, review_count
-        `);
-      
-      // Log query params for debugging
-      console.log('Query params:', {
-        selectedState: filters.selectedState,
-        priceRange: filters.priceRange
-      });
-      
-      console.log('Facilities query result:', { 
-        dataLength: allData?.length, 
-        error: error?.message || error,
-        firstFacility: allData?.[0]
-      });
-      
-      if (error) {
-        console.error('Supabase query error:', error);
-        throw error;
-      }
-      
-      if (!allData) {
-        console.log('No data returned from query');
-        return [];
-      }
+      try {
+        // Direct query to storage facilities table
+        const { data: allData, error } = await supabase
+          .from('storage_facilities') 
+          .select(`
+            id, name, address, city, state, latitude, longitude,
+            features, price_range, avg_rating, review_count
+          `);
+        
+        // Log query params for debugging
+        console.log('Query params:', {
+          selectedState: filters.selectedState,
+          priceRange: filters.priceRange
+        });
+        
+        console.log('Facilities query result:', { 
+          dataLength: allData?.length, 
+          error: error?.message || error,
+          firstFacility: allData?.[0]
+        });
+        
+        if (error) {
+          console.warn('Supabase query failed, using emergency fallback data:', error);
+          return convertToStorageFacilityArray(emergencyFacilityData, filters);
+        }
+        
+        if (!allData || allData.length === 0) {
+          console.warn('No data returned from Supabase, using emergency fallback');
+          return convertToStorageFacilityArray(emergencyFacilityData, filters);
+        }
 
       // Apply state filter if selected
       let filteredData = allData;
@@ -190,8 +205,12 @@ export const useStorageFacilities = (filters: FilterState) => {
       console.log('Total facilities fetched:', filteredData.length);
       console.log('States returned:', [...new Set(filteredData.map(f => f.state))].sort());
       
-      // Map database results to StorageFacility objects
-      return filteredData.map(facility => convertToStorageFacility(facility));
+        // Map database results to StorageFacility objects
+        return filteredData.map(facility => convertToStorageFacility(facility));
+      } catch (err) {
+        console.error('Emergency: Complete query failure, using fallback data:', err);
+        return convertToStorageFacilityArray(emergencyFacilityData, filters);
+      }
     },
     refetchOnWindowFocus: false,
     staleTime: 300000 // 5 minute cache
@@ -204,10 +223,35 @@ export const useStorageFacilities = (filters: FilterState) => {
     return facilityMaxPrice >= filters.priceRange[0] && facilityMaxPrice <= filters.priceRange[1];
   });
   
-  return { 
+  return {
     facilities: filteredFacilities,
     isLoading,
     error,
-    maxPrice: maxPriceData || 1000
+    maxPrice: maxPriceData || getEmergencyMaxPrice()
   };
 };
+
+// Helper function to filter emergency data
+function convertToStorageFacilityArray(data: StorageFacility[], filters: FilterState): StorageFacility[] {
+  let filteredData = [...data];
+  
+  // Apply state filter if selected
+  if (filters.selectedState && filters.selectedState !== 'all') {
+    const normalizedFilterState = normalizeStateName(filters.selectedState);
+    filteredData = filteredData.filter(facility => 
+      normalizeStateName(facility.state) === normalizedFilterState
+    );
+  }
+  
+  // Apply price range filter
+  if (filters.priceRange) {
+    filteredData = filteredData.filter(facility => {
+      const facilityMaxPrice = facility.price_range?.max || 0;
+      const facilityMinPrice = facility.price_range?.min || 0;
+      return facilityMaxPrice >= filters.priceRange[0] && 
+             facilityMinPrice <= filters.priceRange[1];
+    });
+  }
+  
+  return filteredData;
+}
