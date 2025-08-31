@@ -53,11 +53,10 @@ const FilterPanel = ({ onFilterChange }: FilterPanelProps) => {
   useEffect(() => {
     const fetchStates = async () => {
       // Fetch all storage facilities and count by state
-      const { data, error } = await supabase
-        .from('storage_facilities')
-        .select('state');
+      try {
+        const { data, error } = await supabase.rpc('get_public_facility_data');
 
-      if (!error && data) {
+        if (!error && data) {
         // Count occurrences of each state using normalized state names
         const stateCounts: Record<string, number> = {};
         data.forEach(item => {
@@ -76,7 +75,10 @@ const FilterPanel = ({ onFilterChange }: FilterPanelProps) => {
           count
         })).sort((a, b) => a.state.localeCompare(b.state));
         
-        setStates(statesArray);
+          setStates(statesArray);
+        }
+      } catch (err) {
+        console.error('Error fetching states:', err);
       }
       setLoading(false);
     };
