@@ -3,9 +3,9 @@ import { useState, useEffect, useCallback } from 'react';
 import { toast } from "sonner";
 import { useMapToken } from '../map-view/useMapToken';
 
-// Create a helper hook to get Google Maps API key - hardcoded for reliability
+// Create a helper hook to get Google Maps API key from environment
 const useGoogleMapsKey = () => {
-  const [apiKey, setApiKey] = useState<string>('AIzaSyAGKkTg0DlZd7fCJlfkVNqkRkzPjeqKJ2o');
+  const [apiKey, setApiKey] = useState<string>(import.meta.env.VITE_GOOGLE_MAPS_API_KEY || '');
   const [error, setError] = useState<string | null>(null);
 
   return { apiKey, error };
