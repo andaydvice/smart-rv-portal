@@ -3,6 +3,7 @@ import { Droplet } from "lucide-react";
 import Layout from "@/components/layout/Layout";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
 import { useEffect } from "react";
+import { VideoSection } from "@/components/ui/VideoSection";
 
 const WaterSystems = () => {
   useEffect(() => {
@@ -33,18 +34,12 @@ const WaterSystems = () => {
               <div className="h-[72px]">
                 <h2 className="text-2xl font-semibold text-blue-400">Fresh Water Management</h2>
               </div>
-              <div className="relative aspect-video mb-6">
-                <img 
-                  src="/lovable-uploads/3af8fc31-188d-477e-8ab5-b94bd8c4ec77.png"
-                  alt="Smart RV fresh water management system hero image"
-                  className="absolute inset-0 w-full h-full object-cover rounded-lg"
-                  width={1280}
-                  height={720}
-                  decoding="async"
-                  fetchPriority="high"
-                  sizes="(min-width: 768px) 50vw, 100vw"
-                />
-              </div>
+              <VideoSection
+                videoId="smart-systems-demo"
+                title="Fresh Water Management Demo"
+                description="See real-time monitoring and smart conservation in action"
+                className="mb-6"
+              />
               <ul className="list-disc list-inside space-y-3 text-gray-300">
                 <li>Real time tank level monitoring</li>
                 <li>Smart water filtration with monitoring</li>
@@ -58,18 +53,12 @@ const WaterSystems = () => {
               <div className="h-[72px]">
                 <h2 className="text-2xl font-semibold text-blue-400">Waste Water Management</h2>
               </div>
-              <div className="relative aspect-video mb-6">
-                <img 
-                  src="/lovable-uploads/85e4d897-10d7-4f90-b231-597f7fcfdffc.png"
-                  alt="Smart RV waste water management system"
-                  className="absolute inset-0 w-full h-full object-cover rounded-lg"
-                  width={1280}
-                  height={720}
-                  loading="lazy"
-                  decoding="async"
-                  sizes="(min-width: 768px) 50vw, 100vw"
-                />
-              </div>
+              <VideoSection
+                videoId="connectivity-demo"
+                title="Waste Water Management Demo"
+                description="Experience intelligent waste monitoring and automated management"
+                className="mb-6"
+              />
               <ul className="list-disc list-inside space-y-3 text-gray-300">
                 <li>Grey and black water tank level monitoring</li>
                 <li>Automated tank treatment dosing</li>

@@ -5,6 +5,7 @@ import Layout from "@/components/layout/Layout";
 import { useEffect } from "react";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
 import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
+import { VideoSection } from "@/components/ui/VideoSection";
 
 const ClimateControl = () => {
   useEffect(() => {
@@ -31,13 +32,12 @@ const ClimateControl = () => {
               <div className="h-[72px]">
                 <h2 className="text-2xl font-semibold text-[#5B9BD5]">Advanced Temperature Management</h2>
               </div>
-              <div className="relative aspect-video mb-6">
-                <img 
-                  src="/lovable-uploads/ae14102b-cf2e-443b-a722-7fe364e92e36.png" 
-                  alt="Climate Control Dashboard"
-                  className="absolute inset-0 w-full h-full object-cover rounded-lg"
-                />
-              </div>
+              <VideoSection
+                videoId="smart-systems-demo"
+                title="Temperature Management Demo"
+                description="See how smart climate control maintains perfect comfort automatically"
+                className="mb-6"
+              />
               <p className="text-[#E2E8FF] mb-6 text-left">
                 Experience unparalleled comfort with our precision climate control system. Dynamic temperature zones allow different areas of your RV to maintain independent climate settings, while smart sensors continuously optimize for energy efficiency.
               </p>
@@ -54,13 +54,12 @@ const ClimateControl = () => {
               <div className="h-[72px]">
                 <h2 className="text-2xl font-semibold text-[#5B9BD5]">Humidity Control & Air Quality</h2>
               </div>
-              <div className="relative aspect-video mb-6">
-                <img 
-                  src="/lovable-uploads/9e2c5b7f-c03c-4d99-9997-0d3de18f61e1.png"
-                  alt="Air Quality Monitor"
-                  className="absolute inset-0 w-full h-full object-cover rounded-lg"
-                />
-              </div>
+              <VideoSection
+                videoId="connectivity-demo"
+                title="Air Quality Control Demo"
+                description="Experience intelligent air filtration and humidity management"
+                className="mb-6"
+              />
               <p className="text-[#E2E8FF] mb-6 text-left">
                 Maintain the perfect atmospheric balance with intelligent humidity control and advanced air filtration. Our system automatically adjusts to prevent condensation and mold while ensuring allergens and pollutants are removed from your living space.
               </p>

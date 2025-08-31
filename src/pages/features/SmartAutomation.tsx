@@ -3,6 +3,7 @@ import { Home, WifiIcon, Cog, BatteryCharging } from "lucide-react";
 import Layout from "@/components/layout/Layout";
 import { useEffect } from "react";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
+import { VideoSection } from "@/components/ui/VideoSection";
 
 const SmartAutomation = () => {
   useEffect(() => {
@@ -29,13 +30,12 @@ const SmartAutomation = () => {
               <div className="h-[72px]">
                 <h2 className="text-2xl font-semibold text-[#5B9BD5]">Home Automation</h2>
               </div>
-              <div className="relative aspect-video mb-6">
-                <img 
-                  src="/lovable-uploads/ee026535-e835-46ae-b779-be457eb8ff04.png" 
-                  alt="Home Automation Interface"
-                  className="absolute inset-0 w-full h-full object-cover rounded-lg"
-                />
-              </div>
+              <VideoSection
+                videoId="smart-systems-demo"
+                title="Home Automation Demo"
+                description="Experience complete RV control with voice commands and smart scheduling"
+                className="mb-6"
+              />
               <p className="text-[#E2E8FF] mb-6 text-left">
                 Take control of your entire RV with our innovative home automation system. Control lighting, climate, entertainment, and security with intuitive voice commands or from your smartphone.
               </p>
@@ -52,13 +52,12 @@ const SmartAutomation = () => {
               <div className="h-[72px]">
                 <h2 className="text-2xl font-semibold text-[#5B9BD5]">Smart Energy Management</h2>
               </div>
-              <div className="relative aspect-video mb-6">
-                <img 
-                  src="/lovable-uploads/b6a46bec-1ca8-4f7b-89fa-37bb5415d9fa.png"
-                  alt="Energy Management Dashboard"
-                  className="absolute inset-0 w-full h-full object-cover rounded-lg"
-                />
-              </div>
+              <VideoSection
+                videoId="power-management-demo"
+                title="Energy Management Demo"
+                description="See intelligent power optimization and battery monitoring in action"
+                className="mb-6"
+              />
               <p className="text-[#E2E8FF] mb-6 text-left">
                 Maximize power efficiency with intelligent energy management. Our system automatically balances power loads, prioritizes essential systems, and provides detailed consumption analytics.
               </p>

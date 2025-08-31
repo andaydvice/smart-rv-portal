@@ -8,6 +8,7 @@ import SmartKitchenHeader from "@/components/features/smart-kitchen/SmartKitchen
 import KitchenComparisonTable from "@/components/features/smart-kitchen/KitchenComparisonTable";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
 import { useEffect } from "react";
+import { VideoSection } from "@/components/ui/VideoSection";
 
 const SmartKitchen = () => {
   // Force scroll to top when component mounts
@@ -38,13 +39,12 @@ const SmartKitchen = () => {
               <div className="h-[72px]">
                 <h2 className="text-2xl font-semibold text-blue-400">Connected Refrigerators and Cooking Appliances</h2>
               </div>
-              <div className="relative aspect-video mb-6">
-                <img 
-                  src="/lovable-uploads/28815e7c-77df-4758-b609-d84355448eea.png"
-                  alt="Smart Kitchen Appliances"
-                  className="absolute inset-0 w-full h-full object-cover rounded-lg"
-                />
-              </div>
+              <VideoSection
+                videoId="smart-systems-demo"
+                title="Smart Kitchen Appliances Demo"
+                description="Experience connected appliances and intelligent cooking systems"
+                className="mb-6"
+              />
               <ul className="list-disc list-inside space-y-3 text-gray-300">
                 <li>Remote monitoring and control of appliances</li>
                 <li>Smart temperature and freshness management</li>
@@ -62,13 +62,12 @@ const SmartKitchen = () => {
                   <span className="text-white">Smart Water Solutions</span>
                 </div>
               </div>
-              <div className="relative aspect-video mb-6">
-                <img 
-                  src="/lovable-uploads/3af8fc31-188d-477e-8ab5-b94bd8c4ec77.png"
-                  alt="Water Management System"
-                  className="absolute inset-0 w-full h-full object-cover rounded-lg"
-                />
-              </div>
+              <VideoSection
+                videoId="connectivity-demo"
+                title="Kitchen Water Management Demo"
+                description="See smart water monitoring and conservation in action"
+                className="mb-6"
+              />
               <ul className="list-disc list-inside space-y-3 text-gray-300">
                 <li>Real time water usage monitoring</li>
                 <li>Advanced water purification systems</li>
