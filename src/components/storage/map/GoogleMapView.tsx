@@ -42,9 +42,22 @@ const GoogleMapView: React.FC<GoogleMapViewProps> = ({
   const [mapCenter, setMapCenter] = useState(center);
   const [mapZoom, setMapZoom] = useState(zoom);
 
-  // Debug API key
+  // Debug API key and check for issues
   useEffect(() => {
     console.log('GoogleMapView - API Key:', apiKey ? 'Present' : 'Missing', apiKey?.substring(0, 10) + '...');
+    
+    // Check if running on localhost or production
+    const isLocalhost = window.location.hostname === 'localhost' || 
+                       window.location.hostname === '127.0.0.1';
+    const isDevelopment = window.location.hostname.includes('lovable') || 
+                         window.location.hostname.includes('preview');
+    
+    console.log('GoogleMapView - Environment:', {
+      hostname: window.location.hostname,
+      isLocalhost,
+      isDevelopment,
+      protocol: window.location.protocol
+    });
   }, [apiKey]);
   
   const { isLoaded, error } = useGoogleMaps({ apiKey });
@@ -134,7 +147,23 @@ const GoogleMapView: React.FC<GoogleMapViewProps> = ({
   if (error) {
     return (
       <div className="w-full h-full flex items-center justify-center bg-[#080F1F] text-white p-4 rounded-lg">
-        <p>{error}</p>
+        <div className="text-center space-y-4">
+          <p className="text-red-400">{error}</p>
+          <div className="text-sm text-gray-400">
+            <p>Possible causes:</p>
+            <ul className="list-disc list-inside mt-2 space-y-1">
+              <li>API key restrictions (domain not allowed)</li>
+              <li>API key quota exceeded</li>
+              <li>Network connectivity issues</li>
+            </ul>
+          </div>
+          <button 
+            onClick={() => window.location.reload()} 
+            className="px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors"
+          >
+            Retry Loading Map
+          </button>
+        </div>
       </div>
     );
   }

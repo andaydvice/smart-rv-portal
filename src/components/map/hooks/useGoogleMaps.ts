@@ -21,12 +21,29 @@ export const useGoogleMaps = ({ apiKey }: UseGoogleMapsProps) => {
   // Handle map errors
   useEffect(() => {
     if (loadError) {
-      console.error('Google Maps Load Error:', loadError);
+      console.error('Google Maps Load Error Details:', {
+        error: loadError,
+        type: typeof loadError,
+        isEvent: loadError instanceof Event,
+        apiKey: apiKey ? 'Present' : 'Missing'
+      });
+      
       // Handle different error types safely
-      const errorMessage = loadError.message || 
-                          loadError.toString() || 
-                          'Failed to load Google Maps';
-      setError(`Error loading Google Maps: ${errorMessage}`);
+      let errorMessage = 'Failed to load Google Maps';
+      
+      if (loadError instanceof Event) {
+        // Script load error - likely network or API key issue
+        errorMessage = 'Failed to load Google Maps script. Please check your connection and API key.';
+      } else if (typeof loadError === 'object' && loadError !== null) {
+        // Try to extract meaningful error info
+        errorMessage = (loadError as any).message || 
+                      (loadError as any).error || 
+                      JSON.stringify(loadError);
+      } else if (typeof loadError === 'string') {
+        errorMessage = loadError;
+      }
+      
+      setError(errorMessage);
     } else if (!apiKey) {
       setError('Google Maps API key is missing');
     }

@@ -1,7 +1,8 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card } from '@/components/ui/card';
 import GoogleMapView from './map/GoogleMapView';
+import GoogleMapViewDirect from './map/GoogleMapViewDirect';
 import { StorageFacility } from './types';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { AlertCircle } from 'lucide-react';
@@ -24,6 +25,21 @@ const GoogleMapFacilitiesView: React.FC<GoogleMapFacilitiesViewProps> = ({
   selectedState
 }) => {
   const [currentZoom, setCurrentZoom] = useState<number>(4);
+  const [useDirectLoader, setUseDirectLoader] = useState(false);
+  const [loadAttempts, setLoadAttempts] = useState(0);
+  
+  // Auto-fallback to direct loader after 3 seconds if map hasn't loaded
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (!useDirectLoader && loadAttempts === 0) {
+        console.log('Switching to direct Google Maps loader due to load delay');
+        setUseDirectLoader(true);
+        setLoadAttempts(1);
+      }
+    }, 3000);
+    
+    return () => clearTimeout(timer);
+  }, [useDirectLoader, loadAttempts]);
   
   // Validate facilities before rendering
   const validFacilities = facilities.filter(
@@ -53,15 +69,23 @@ const GoogleMapFacilitiesView: React.FC<GoogleMapFacilitiesViewProps> = ({
         </div>
       ) : (
         <>
-          <GoogleMapView
-            facilities={validFacilities}
-            recentlyViewedFacilityIds={recentlyViewedFacilityIds}
-            onMarkerClick={onMarkerClick}
-            apiKey={apiKey}
-            zoom={currentZoom}
-            onZoomChange={handleZoomChange}
-            selectedState={selectedState}
-          />
+          {useDirectLoader ? (
+            <GoogleMapViewDirect
+              facilities={validFacilities}
+              apiKey={apiKey}
+              onMarkerClick={onMarkerClick}
+            />
+          ) : (
+            <GoogleMapView
+              facilities={validFacilities}
+              recentlyViewedFacilityIds={recentlyViewedFacilityIds}
+              onMarkerClick={onMarkerClick}
+              apiKey={apiKey}
+              zoom={currentZoom}
+              onZoomChange={handleZoomChange}
+              selectedState={selectedState}
+            />
+          )}
           
           {missingCoordinates > 0 && (
             <div className="absolute bottom-2 right-2 bg-black/60 text-white text-xs px-2 py-1 rounded">
