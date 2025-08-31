@@ -37,8 +37,25 @@ export const useGoogleMapsScript = ({ apiKey }: UseGoogleMapsScriptProps) => {
     // Handle load errors
     script.onerror = (event) => {
       console.error('Google Maps script load error:', event);
-      setError('Failed to load Google Maps. Please check API key and domain restrictions.');
+      // More specific error message
+      setError('Failed to load Google Maps. The Maps JavaScript API may not be enabled for this project.');
       setIsLoaded(false);
+      
+      // Try to get more info about the error
+      fetch(`https://maps.googleapis.com/maps/api/js?key=${apiKey}`)
+        .then(response => response.text())
+        .then(text => {
+          if (text.includes('ApiNotActivatedMapError')) {
+            setError('Maps JavaScript API is not activated. Please enable it in Google Cloud Console.');
+          } else if (text.includes('InvalidKeyMapError')) {
+            setError('Invalid API key. Please check your Google Maps API key.');
+          } else if (text.includes('RefererNotAllowedMapError')) {
+            setError('This domain is not allowed. Please check API key restrictions.');
+          }
+        })
+        .catch(() => {
+          // Ignore fetch errors, keep original error message
+        });
     };
 
     // Add script to document

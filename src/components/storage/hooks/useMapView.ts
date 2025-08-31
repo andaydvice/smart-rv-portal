@@ -3,10 +3,19 @@ import { useState, useEffect, useCallback } from 'react';
 import { toast } from "sonner";
 import { useMapToken } from '../map-view/useMapToken';
 
-// Create a helper hook to get Google Maps API key from environment
+// Create a helper hook to get Google Maps API key - using the unrestricted key from Google Cloud Console
 const useGoogleMapsKey = () => {
-  const [apiKey, setApiKey] = useState<string>(import.meta.env.VITE_GOOGLE_MAPS_API_KEY || '');
+  // This API key has no restrictions as confirmed in Google Cloud Console
+  const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY || 'AIzaSyAGKkTg0DlZd7fCJlfkVNqkRkzPjeqKJ2o';
   const [error, setError] = useState<string | null>(null);
+  
+  useEffect(() => {
+    console.log('Google Maps API Key check:', {
+      hasKey: !!apiKey,
+      firstChars: apiKey?.substring(0, 10) + '...',
+      source: import.meta.env.VITE_GOOGLE_MAPS_API_KEY ? 'env' : 'hardcoded'
+    });
+  }, []);
 
   return { apiKey, error };
 };

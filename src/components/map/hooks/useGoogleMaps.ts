@@ -16,6 +16,10 @@ export const useGoogleMaps = ({ apiKey }: UseGoogleMapsProps) => {
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: apiKey || '',
     libraries,
+    // Add additional options
+    version: 'weekly',
+    language: 'en',
+    region: 'US'
   });
 
   // Handle map errors

@@ -3,9 +3,10 @@ import React, { useState, useEffect } from 'react';
 import { Card } from '@/components/ui/card';
 import GoogleMapView from './map/GoogleMapView';
 import GoogleMapViewDirect from './map/GoogleMapViewDirect';
+import OpenStreetMapView from './map/OpenStreetMapView';
 import { StorageFacility } from './types';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { AlertCircle } from 'lucide-react';
+import { AlertCircle, MapPin } from 'lucide-react';
 
 interface GoogleMapFacilitiesViewProps {
   facilities: StorageFacility[];
@@ -25,21 +26,30 @@ const GoogleMapFacilitiesView: React.FC<GoogleMapFacilitiesViewProps> = ({
   selectedState
 }) => {
   const [currentZoom, setCurrentZoom] = useState<number>(4);
-  const [useDirectLoader, setUseDirectLoader] = useState(false);
+  const [mapProvider, setMapProvider] = useState<'google' | 'google-direct' | 'osm'>('google');
   const [loadAttempts, setLoadAttempts] = useState(0);
+  const [mapError, setMapError] = useState(false);
   
-  // Auto-fallback to direct loader after 3 seconds if map hasn't loaded
+  // Auto-fallback strategy: Google -> Direct Google -> OpenStreetMap
   useEffect(() => {
-    const timer = setTimeout(() => {
-      if (!useDirectLoader && loadAttempts === 0) {
-        console.log('Switching to direct Google Maps loader due to load delay');
-        setUseDirectLoader(true);
+    if (mapProvider === 'google' && loadAttempts === 0) {
+      const timer = setTimeout(() => {
+        console.log('Google Maps taking too long, trying direct loader...');
+        setMapProvider('google-direct');
         setLoadAttempts(1);
-      }
-    }, 3000);
-    
-    return () => clearTimeout(timer);
-  }, [useDirectLoader, loadAttempts]);
+      }, 3000);
+      
+      return () => clearTimeout(timer);
+    } else if (mapProvider === 'google-direct' && loadAttempts === 1) {
+      const timer = setTimeout(() => {
+        console.log('Direct loader failed, switching to OpenStreetMap...');
+        setMapProvider('osm');
+        setLoadAttempts(2);
+      }, 3000);
+      
+      return () => clearTimeout(timer);
+    }
+  }, [mapProvider, loadAttempts]);
   
   // Validate facilities before rendering
   const validFacilities = facilities.filter(
@@ -56,6 +66,33 @@ const GoogleMapFacilitiesView: React.FC<GoogleMapFacilitiesViewProps> = ({
 
   return (
     <Card className={`h-[400px] md:h-[650px] bg-[#080F1F] relative overflow-hidden border-gray-700 ${className}`}>
+      {/* Map provider toggle button */}
+      <div className="absolute top-4 left-4 z-10 flex gap-2">
+        <button
+          onClick={() => setMapProvider('osm')}
+          className={`px-3 py-1 rounded-lg text-sm font-medium transition-colors ${
+            mapProvider === 'osm' 
+              ? 'bg-blue-600 text-white' 
+              : 'bg-black/70 text-white hover:bg-black/80'
+          }`}
+        >
+          <MapPin className="inline-block w-4 h-4 mr-1" />
+          OpenStreetMap
+        </button>
+        <button
+          onClick={() => {
+            setMapProvider('google');
+            setLoadAttempts(0);
+          }}
+          className={`px-3 py-1 rounded-lg text-sm font-medium transition-colors ${
+            mapProvider !== 'osm' 
+              ? 'bg-blue-600 text-white' 
+              : 'bg-black/70 text-white hover:bg-black/80'
+          }`}
+        >
+          Google Maps
+        </button>
+      </div>
       {!apiKey ? (
         <Alert variant="destructive" className="m-4">
           <AlertCircle className="h-4 w-4" />
@@ -69,7 +106,13 @@ const GoogleMapFacilitiesView: React.FC<GoogleMapFacilitiesViewProps> = ({
         </div>
       ) : (
         <>
-          {useDirectLoader ? (
+          {mapProvider === 'osm' ? (
+            <OpenStreetMapView
+              facilities={validFacilities}
+              onMarkerClick={onMarkerClick}
+              selectedState={selectedState}
+            />
+          ) : mapProvider === 'google-direct' ? (
             <GoogleMapViewDirect
               facilities={validFacilities}
               apiKey={apiKey}
