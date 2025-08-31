@@ -786,7 +786,7 @@ export type Database = {
           latitude: number | null
           longitude: number | null
           name: string | null
-          price_category: string | null
+          price_range: Json | null
           review_count: number | null
           state: string | null
         }
@@ -799,7 +799,7 @@ export type Database = {
           latitude?: number | null
           longitude?: number | null
           name?: string | null
-          price_category?: never
+          price_range?: Json | null
           review_count?: number | null
           state?: string | null
         }
@@ -812,7 +812,7 @@ export type Database = {
           latitude?: number | null
           longitude?: number | null
           name?: string | null
-          price_category?: never
+          price_range?: Json | null
           review_count?: number | null
           state?: string | null
         }
