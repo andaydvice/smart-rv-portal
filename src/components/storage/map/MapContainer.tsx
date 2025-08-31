@@ -13,13 +13,15 @@ interface MapContainerProps {
   highlightedFacility: string | null;
   onMarkerClick: (facilityId: string) => void;
   selectedState: string | null;
+  mapToken: string;
 }
 
 const MapContainer: React.FC<MapContainerProps> = ({
   facilities,
   highlightedFacility,
   onMarkerClick,
-  selectedState
+  selectedState,
+  mapToken
 }) => {
   const { mapContainer, mapLoaded, isInitializing, mapError } = useMap();
   const { mapRef } = useMapContext();
@@ -34,11 +36,18 @@ const MapContainer: React.FC<MapContainerProps> = ({
     console.log(`Map loaded: ${mapLoaded}, Map initialized: ${!isInitializing}`);
   }, [facilities, selectedState, mapLoaded, isInitializing]);
 
-  // Initialize map when the component mounts (singleton pattern)
+  // Initialize map when the component mounts - wait for token to be available
   useEffect(() => {
     if (!mapContainer.current || mapRef.current || initializationRef.current) return;
     
+    // Don't initialize if token is not available
+    if (!mapToken || mapToken === 'null' || mapToken === 'undefined') {
+      console.log('Waiting for Mapbox token before initialization...');
+      return;
+    }
+    
     initializationRef.current = true;
+    console.log('Starting map initialization with valid token');
     
     // Initialize Mapbox GL
     const isInitialized = initializeMapboxGL();
@@ -48,10 +57,10 @@ const MapContainer: React.FC<MapContainerProps> = ({
     }
     
     try {
-      // Create map instance
+      // Create map instance with the provided token
       const map = createMapInstance(
         mapContainer.current,
-        mapboxgl.accessToken,
+        mapToken,
         [-98.5795, 39.8283], // Center of US
         3 // Initial zoom level
       );
@@ -89,7 +98,7 @@ const MapContainer: React.FC<MapContainerProps> = ({
     } catch (error) {
       console.error('Error creating map instance:', error);
     }
-  }, [mapContainer.current]);
+  }, [mapContainer.current, mapToken]);
 
   // Handler for marker creation status
   const handleMarkersCreated = (created: boolean) => {

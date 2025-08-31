@@ -73,6 +73,7 @@ export const useMapView = () => {
     toggleMapView,
     mapToken,
     mapTokenError,
+    isLoading: tokenLoading,
     googleMapsKey,
     googleMapsError
   };

@@ -18,6 +18,7 @@ interface MapViewContainerProps {
   googleMapsKey: string;
   mapToken: string;
   mapTokenError: string | null;
+  isLoading: boolean;
   selectedState: string | null;
 }
 
@@ -30,6 +31,7 @@ const MapViewContainer: React.FC<MapViewContainerProps> = ({
   googleMapsKey,
   mapToken,
   mapTokenError,
+  isLoading,
   selectedState
 }) => {
   return (
@@ -48,11 +50,25 @@ const MapViewContainer: React.FC<MapViewContainerProps> = ({
         />
       ) : (
         <Card className="h-[400px] md:h-[650px] bg-[#080F1F] relative overflow-visible border-gray-700 map-container">
-          {(!mapToken) ? (
-            <Alert variant={mapTokenError ? "default" : "destructive"} className="m-4">
+          {isLoading ? (
+            <div className="flex items-center justify-center h-full bg-card rounded-lg">
+              <div className="text-center">
+                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-4"></div>
+                <p className="text-muted-foreground">Loading Mapbox...</p>
+              </div>
+            </div>
+          ) : mapTokenError ? (
+            <Alert variant="destructive" className="m-4">
               <AlertCircle className="h-4 w-4" />
               <AlertDescription>
-                {mapTokenError ? 'Switching to Google Maps due to Mapbox config. Please wait...' : 'Map configuration not loaded'}
+                {mapTokenError}
+              </AlertDescription>
+            </Alert>
+          ) : !mapToken ? (
+            <Alert variant="destructive" className="m-4">
+              <AlertCircle className="h-4 w-4" />
+              <AlertDescription>
+                No map configuration available
               </AlertDescription>
             </Alert>
           ) : (

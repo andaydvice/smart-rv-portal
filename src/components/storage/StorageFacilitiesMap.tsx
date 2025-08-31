@@ -47,6 +47,7 @@ const StorageFacilitiesMap: React.FC<StorageFacilitiesMapProps> = ({ onSelectFea
     toggleMapView, 
     mapToken, 
     mapTokenError, 
+    isLoading: mapTokenLoading,
     googleMapsKey 
   } = useMapView();
   
@@ -227,6 +228,7 @@ const StorageFacilitiesMap: React.FC<StorageFacilitiesMapProps> = ({ onSelectFea
           googleMapsKey={googleMapsKey}
           mapToken={mapToken}
           mapTokenError={mapTokenError}
+          isLoading={mapTokenLoading}
           selectedState={filters.selectedState}
         />
       </div>

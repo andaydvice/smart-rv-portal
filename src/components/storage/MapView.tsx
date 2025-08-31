@@ -33,6 +33,7 @@ const MapView: React.FC<MapViewProps> = ({
           highlightedFacility={highlightedFacility}
           onMarkerClick={onMarkerClick}
           selectedState={selectedState}
+          mapToken={mapToken}
         />
       </MapProvider>
     </div>
