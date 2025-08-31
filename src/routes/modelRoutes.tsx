@@ -12,9 +12,9 @@ import Models from "@/pages/Models";
 import CompactModel from "@/pages/models/CompactModel";
 import LuxuryModel from "@/pages/models/LuxuryModel";
 import AdventureModel from "@/pages/models/AdventureModel";
+import CompareModels from "@/pages/models/CompareModels";
 
-// Less popular model pages (lazy)
-const CompareModels = lazy(() => import("@/pages/models/CompareModels"));
+// Less popular model pages (lazy) - now empty
 
 export const modelRoutes: RouteObject[] = [
   {
@@ -76,11 +76,9 @@ export const modelRoutes: RouteObject[] = [
   {
     path: "/models/compare",
     element: (
-      <Suspense fallback={<MinimalLoader />}>
-        <RouteTransition>
-          <CompareModels />
-        </RouteTransition>
-      </Suspense>
+      <RouteTransition>
+        <CompareModels />
+      </RouteTransition>
     ),
     errorElement: <ErrorPage />,
   },

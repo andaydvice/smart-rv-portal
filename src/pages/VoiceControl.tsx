@@ -1,5 +1,5 @@
 
-import { HeroSection } from "../components/voice-control/HeroSection";
+import { VoiceControlHero } from "../components/voice-control/VoiceControlHero";
 import { VoiceControlSystems } from "../components/voice-control/VoiceControlSystems";
 import { VoiceIntroSections } from "../components/voice-control/VoiceIntroSections";
 import { BenefitsGrid } from "../components/voice-control/BenefitsGrid";
@@ -14,7 +14,7 @@ const VoiceControl = () => {
   return (
     <Layout>
       <main className="relative w-full flex-grow">
-        <HeroSection />
+        <VoiceControlHero />
         <div className="w-full">
           <div className="max-w-7xl mx-auto px-4">
             <h2 className="text-4xl font-bold text-white text-center mt-16 mb-8">

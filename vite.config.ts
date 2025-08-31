@@ -5,9 +5,8 @@ import path from "path";
 import { componentTagger } from "lovable-tagger";
 import { staticGeneratorPlugin } from "./vite-plugins/static-generator";
 
-// ULTRA AGGRESSIVE CACHE BUSTING - Force fresh deployment 2025-08-30
-const timestamp = Date.now();
-const deploymentId = 'revolutionising-' + timestamp;
+// Stable build configuration
+const buildHash = process.env.NODE_ENV === 'production' ? '[hash:8]' : 'dev';
 export default defineConfig(({ mode }) => ({
   server: {
     host: '0.0.0.0',
@@ -59,10 +58,10 @@ export default defineConfig(({ mode }) => ({
     minify: mode === 'development' ? false : 'esbuild',
     rollupOptions: {
       output: {
-        // ULTRA AGGRESSIVE CACHE BUSTING with deployment ID
-        entryFileNames: `assets/[name]-${deploymentId}-[hash].js`,
-        chunkFileNames: `assets/[name]-${deploymentId}-[hash].js`,
-        assetFileNames: `assets/[name]-${deploymentId}-[hash].[ext]`,
+        // Stable naming with proper hashing
+        entryFileNames: `assets/[name]-${buildHash}.js`,
+        chunkFileNames: `assets/[name]-${buildHash}.js`,
+        assetFileNames: `assets/[name]-${buildHash}.[ext]`,
         manualChunks: {
           vendor: ['react', 'react-dom'],
           mapbox: ['mapbox-gl'],
@@ -75,9 +74,8 @@ export default defineConfig(({ mode }) => ({
     cssCodeSplit: true,
     reportCompressedSize: false, // Disable compressed size reporting for faster builds
     chunkSizeWarningLimit: 1000, // Increase chunk size warning limit
-    // Force clean build directory and aggressive cache busting
     emptyOutDir: true,
-    assetsInlineLimit: 0, // Never inline assets to ensure fresh URLs
+    assetsInlineLimit: 4096, // Standard inline limit for small assets
   },
   esbuild: {
     logOverride: { 'this-is-undefined-in-esm': 'silent' }

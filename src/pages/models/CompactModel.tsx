@@ -8,7 +8,7 @@ import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliat
 import { Helmet } from "react-helmet-async";
 
 // Lazy load components that are not immediately visible
-const HeroSection = lazy(() => import("@/components/models/compact/HeroSection"));
+const CompactModelHero = lazy(() => import("@/components/models/compact/CompactModelHero"));
 const RVTypeCard = lazy(() => import("@/components/models/compact/RVTypeCard"));
 
 // Loading placeholder
@@ -47,7 +47,7 @@ const CompactModel = () => {
       </Helmet>
       <div className="bg-gradient-to-b from-gray-900 to-gray-800 w-full">
         <Suspense fallback={<LoadingPlaceholder />}>
-          <HeroSection />
+          <CompactModelHero />
           <div className="w-full px-4 py-12 pb-24">
             <div className="max-w-7xl mx-auto">
               <div className="grid gap-12">
