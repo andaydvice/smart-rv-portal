@@ -58,7 +58,7 @@ const HoverDropdownMenuV2: React.FC<HoverDropdownMenuV2Props> = ({
     >
       <Button 
         variant="ghost" 
-        className="px-4 py-2 h-auto flex items-center gap-1 text-gray-300 hover:text-[#5B9BD5] hover:bg-transparent focus:bg-transparent"
+        className="px-2 py-2 h-auto flex items-center gap-1 text-gray-300 hover:text-[#5B9BD5] hover:bg-transparent focus:bg-transparent text-sm whitespace-nowrap"
         aria-expanded={isOpen}
         aria-haspopup="true"
       >
@@ -72,7 +72,7 @@ const HoverDropdownMenuV2: React.FC<HoverDropdownMenuV2Props> = ({
 
       {isOpen && (
         <div 
-          className={`hover-dropdown-menu absolute min-w-[200px] w-[400px] bg-gray-900/95 backdrop-blur-sm rounded-lg border ${borderColor} shadow-lg p-6 z-[9999] left-1/2 transform -translate-x-1/2`}
+          className={`hover-dropdown-menu absolute top-full left-1/2 transform -translate-x-1/2 min-w-[240px] bg-gray-900 border border-gray-700 rounded-lg shadow-xl p-4 z-[10000] mt-1`}
           role="menu"
           aria-orientation="vertical"
         >

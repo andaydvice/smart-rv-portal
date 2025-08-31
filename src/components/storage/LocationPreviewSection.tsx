@@ -14,7 +14,7 @@ interface LocationPreviewSectionProps {
 const LocationPreviewSection: React.FC<LocationPreviewSectionProps> = ({ mapToken, featuredLocation }) => {
   // Validate that we have required fields for the featured location
   const isValidFeaturedLocation = featuredLocation && featuredLocation.id && featuredLocation.name;
-  const googleMapsKey = "AIzaSyAGKkTg0DlZd7fCJlfkVNqkRkzPjeqKJ2o"; // Google Maps API key
+  const googleMapsKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
 
   // Render star rating display
   const renderRating = (rating?: number) => {

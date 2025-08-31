@@ -2,6 +2,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
 import { StorageFacility, FilterState, DatabaseStorageFacility } from './types';
+import { emergencyFacilityData, getEmergencyMaxPrice } from './EmergencyFallbackData';
 
 interface PriceRange {
   min: number;
@@ -49,31 +50,10 @@ const getStateAbbreviation = (fullStateName: string): string => {
   return fullStateName;
 }
 
-// Conversion function for public data (non-sensitive info only)
-function convertToStorageFacilityFromPublic(facility: any): StorageFacility {
-  // Use basic features from the public function
-  const features = {
-    indoor: Boolean(facility.basic_features?.indoor),
-    climate_controlled: Boolean(facility.basic_features?.climate_controlled),
-    "24h_access": false, // Not exposed in public view
-    security_system: Boolean(facility.basic_features?.security_system),
-    vehicle_washing: false // Not exposed in public view
-  };
-
-  // Normalize state names for display
+// Convert direct database results to StorageFacility format  
+function convertToStorageFacility(facility: any): StorageFacility {
   const normalizedState = normalizeStateName(facility.state);
-
-  // Convert price category back to approximate range
-  let priceRange = { min: 0, max: 0, currency: 'USD' };
-  if (facility.price_category === 'premium') {
-    priceRange = { min: 301, max: 500, currency: 'USD' };
-  } else if (facility.price_category === 'standard') {
-    priceRange = { min: 151, max: 300, currency: 'USD' };
-  } else if (facility.price_category === 'budget') {
-    priceRange = { min: 50, max: 150, currency: 'USD' };
-  }
-         
-  // Return storage facility with proper typing (no sensitive data)
+  
   return {
     id: facility.id,
     name: facility.name,
@@ -82,18 +62,24 @@ function convertToStorageFacilityFromPublic(facility: any): StorageFacility {
     state: normalizedState,
     latitude: Number(facility.latitude),
     longitude: Number(facility.longitude),
-    features: features,
-    price_range: priceRange,
+    features: facility.features || {
+      indoor: false,
+      climate_controlled: false,
+      "24h_access": false,
+      security_system: false,
+      vehicle_washing: false
+    },
+    price_range: facility.price_range || { min: 0, max: 0, currency: 'USD' },
     contact_phone: undefined, // Not exposed in public view
     contact_email: undefined, // Not exposed in public view
     avg_rating: facility.avg_rating,
     review_count: facility.review_count,
     verified_fields: {
-      features: false, // Not exposed in public view
-      price_range: false, // Not exposed in public view
-      contact_info: false, // Not exposed in public view
-      location: true, // Location is publicly visible
-      business_hours: false // Not exposed in public view
+      features: false,
+      price_range: false,
+      contact_info: false,
+      location: true,
+      business_hours: false
     }
   };
 }
@@ -102,38 +88,73 @@ export const useStorageFacilities = (filters: FilterState) => {
   const { data: maxPriceData } = useQuery({
     queryKey: ['max-facility-price'],
     queryFn: async () => {
-      // Use the public function for getting max price data
-      const { data, error } = await supabase.rpc('get_public_facility_data');
-      
-      if (error || !data) return 1000;
-      
-      // Find max price from the price categories
-      const hasAnyPremium = data.some(f => f.price_category === 'premium');
-      const hasAnyStandard = data.some(f => f.price_category === 'standard');
-      
-      return hasAnyPremium ? 500 : hasAnyStandard ? 300 : 150;
+      console.log('Fetching max price data...');
+      try {
+        // Direct query to storage facilities table with SELECT access
+        const { data, error } = await supabase
+          .from('storage_facilities')
+          .select('price_range');
+        
+        console.log('Max price query result:', { data: data?.length, error });
+        
+        if (error) {
+          console.warn('Failed to fetch max price from Supabase, using emergency fallback:', error);
+          return getEmergencyMaxPrice();
+        }
+        
+        if (!data || data.length === 0) {
+          console.warn('No price data found, using emergency fallback');
+          return getEmergencyMaxPrice();
+        }
+        
+        // Find max price from the price ranges
+        const maxPrice = Math.max(...data.map(f => {
+          const priceRange = f.price_range as any;
+          return priceRange?.max || 0;
+        }));
+        return maxPrice || getEmergencyMaxPrice();
+      } catch (err) {
+        console.error('Emergency: Max price query failed completely, using fallback:', err);
+        return getEmergencyMaxPrice();
+      }
     }
   });
 
   const { data: facilities, isLoading, error } = useQuery({
     queryKey: ['storage-facilities', filters],
     queryFn: async () => {
+      console.log('Fetching storage facilities...');
       
-      // Use the secure public function to get non-sensitive facility data
-      const { data: allData, error } = await supabase.rpc('get_public_facility_data');
-      
-      // Log query params for debugging
-      console.log('Query params:', {
-        selectedState: filters.selectedState,
-        priceRange: filters.priceRange
-      });
-      
-      if (error) {
-        console.error('Supabase query error:', error);
-        throw error;
-      }
-      
-      if (!allData) return [];
+      try {
+        // Direct query to storage facilities table
+        const { data: allData, error } = await supabase
+          .from('storage_facilities') 
+          .select(`
+            id, name, address, city, state, latitude, longitude,
+            features, price_range, avg_rating, review_count
+          `);
+        
+        // Log query params for debugging
+        console.log('Query params:', {
+          selectedState: filters.selectedState,
+          priceRange: filters.priceRange
+        });
+        
+        console.log('Facilities query result:', { 
+          dataLength: allData?.length, 
+          error: error?.message || error,
+          firstFacility: allData?.[0]
+        });
+        
+        if (error) {
+          console.warn('Supabase query failed, using emergency fallback data:', error);
+          return convertToStorageFacilityArray(emergencyFacilityData, filters);
+        }
+        
+        if (!allData || allData.length === 0) {
+          console.warn('No data returned from Supabase, using emergency fallback');
+          return convertToStorageFacilityArray(emergencyFacilityData, filters);
+        }
 
       // Apply state filter if selected
       let filteredData = allData;
@@ -184,8 +205,12 @@ export const useStorageFacilities = (filters: FilterState) => {
       console.log('Total facilities fetched:', filteredData.length);
       console.log('States returned:', [...new Set(filteredData.map(f => f.state))].sort());
       
-      // Map database results to StorageFacility objects using our conversion function
-      return filteredData.map(facility => convertToStorageFacilityFromPublic(facility));
+        // Map database results to StorageFacility objects
+        return filteredData.map(facility => convertToStorageFacility(facility));
+      } catch (err) {
+        console.error('Emergency: Complete query failure, using fallback data:', err);
+        return convertToStorageFacilityArray(emergencyFacilityData, filters);
+      }
     },
     refetchOnWindowFocus: false,
     staleTime: 300000 // 5 minute cache
@@ -198,10 +223,35 @@ export const useStorageFacilities = (filters: FilterState) => {
     return facilityMaxPrice >= filters.priceRange[0] && facilityMaxPrice <= filters.priceRange[1];
   });
   
-  return { 
+  return {
     facilities: filteredFacilities,
     isLoading,
     error,
-    maxPrice: maxPriceData || 1000
+    maxPrice: maxPriceData || getEmergencyMaxPrice()
   };
 };
+
+// Helper function to filter emergency data
+function convertToStorageFacilityArray(data: StorageFacility[], filters: FilterState): StorageFacility[] {
+  let filteredData = [...data];
+  
+  // Apply state filter if selected
+  if (filters.selectedState && filters.selectedState !== 'all') {
+    const normalizedFilterState = normalizeStateName(filters.selectedState);
+    filteredData = filteredData.filter(facility => 
+      normalizeStateName(facility.state) === normalizedFilterState
+    );
+  }
+  
+  // Apply price range filter
+  if (filters.priceRange) {
+    filteredData = filteredData.filter(facility => {
+      const facilityMaxPrice = facility.price_range?.max || 0;
+      const facilityMinPrice = facility.price_range?.min || 0;
+      return facilityMaxPrice >= filters.priceRange[0] && 
+             facilityMinPrice <= filters.priceRange[1];
+    });
+  }
+  
+  return filteredData;
+}

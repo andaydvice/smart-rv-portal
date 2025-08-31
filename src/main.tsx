@@ -1,3 +1,4 @@
+
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
@@ -7,16 +8,17 @@ import './styles/animations.css'
 import './styles/forms.css'
 import './styles/layout.css'
 import './styles/base.css'
-// ... keep existing code (global base styles)
 
 import { setupLazyLoading, deferOperation } from './utils/performance.ts'
 import { handleBotOptimizations, isBot, isSocialBot } from './utils/prerender'
 import { CacheManager } from './utils/cacheManager'
+import { initializeCriticalCSS } from './utils/critical-css'
+
+// Initialize critical CSS immediately to prevent render blocking
+initializeCriticalCSS();
 
 // Enhanced bot detection
 const isBotAgent = isBot() || isSocialBot();
-
-// Removed global image preloads; pages handle their own critical assets
 
 // Mount the application with error handling
 const rootElement = document.getElementById('root');

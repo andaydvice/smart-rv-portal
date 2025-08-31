@@ -20,6 +20,7 @@ import { Star, AlertTriangle } from 'lucide-react';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { STATE_NAME_MAP } from '@/utils/stateNameUtils';
 import { forceMapMarkersVisible } from '@/utils/forceMapMarkers';
+import { ErrorBoundary } from './ErrorBoundary';
 
 interface StorageFacilitiesMapProps {
   onSelectFeaturedLocation?: (facility: StorageFacility | null) => void;
@@ -48,6 +49,19 @@ const StorageFacilitiesMap: React.FC<StorageFacilitiesMapProps> = ({ onSelectFea
     mapTokenError, 
     googleMapsKey 
   } = useMapView();
+  
+  // Debug logging
+  React.useEffect(() => {
+    console.log('StorageFacilitiesMap state:', {
+      facilitiesCount: allFacilities?.length || 0,
+      isLoading,
+      error: error?.message || error,
+      useGoogleMaps,
+      mapToken: mapToken ? 'present' : 'missing',
+      mapTokenError,
+      googleMapsKey: googleMapsKey ? 'present' : 'missing'
+    });
+  }, [allFacilities, isLoading, error, useGoogleMaps, mapToken, mapTokenError, googleMapsKey]);
   
   // Debug states for marker issues
   const [noMarkersForState, setNoMarkersForState] = useState<string | null>(null);
@@ -187,7 +201,8 @@ const StorageFacilitiesMap: React.FC<StorageFacilitiesMapProps> = ({ onSelectFea
   
 
   return (
-    <div className="flex flex-col space-y-4">
+    <ErrorBoundary>
+      <div className="flex flex-col space-y-4">
       {/* Mobile-first: Map container shows first */}
       <div className="order-1">
         {/* Navigation hint and map toggle button */}
@@ -321,6 +336,7 @@ const StorageFacilitiesMap: React.FC<StorageFacilitiesMapProps> = ({ onSelectFea
         />
       </div>
     </div>
+    </ErrorBoundary>
   );
 };
 

@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
+import { VideoSection } from "@/components/ui/VideoSection";
 
 const AutomatedDriving = () => {
   return (
@@ -31,13 +32,12 @@ const AutomatedDriving = () => {
                   <span className="text-white">Safety Features</span>
                 </div>
               </div>
-              <div className="relative aspect-video mt-4 mb-6">
-                <img 
-                  src="/lovable-uploads/23827d7d-a275-4073-9c09-3b69d2d10348.png"
-                  alt="ADAS Interface"
-                  className="absolute inset-0 w-full h-full object-cover rounded-lg"
-                />
-              </div>
+              <VideoSection
+                videoId="towing-safety-demo"
+                title="ADAS Safety Features Demo"
+                description="Experience advanced driver assistance systems protecting your RV journey"
+                className="mt-4 mb-6"
+              />
               <ul className="list-disc list-inside space-y-3 text-gray-300">
                 <li>Adaptive cruise control for maintaining safe distances</li>
                 <li>Lane keeping assist with haptic feedback</li>
@@ -55,13 +55,12 @@ const AutomatedDriving = () => {
                   <span className="text-white">Smart Navigation</span>
                 </div>
               </div>
-              <div className="relative aspect-video mt-4 mb-6">
-                <img 
-                  src="/lovable-uploads/f72886c3-3677-4dfe-8d56-5a784197eda2.png"
-                  alt="Navigation System"
-                  className="absolute inset-0 w-full h-full object-cover rounded-lg"
-                />
-              </div>
+              <VideoSection
+                videoId="rv-trip-planning"
+                title="Smart Navigation Demo"
+                description="See RV-specific navigation with real-time traffic and route optimization"
+                className="mt-4 mb-6"
+              />
               <ul className="list-disc list-inside space-y-3 text-gray-300">
                 <li>Real time traffic updates and route optimization</li>
                 <li>RV specific route planning considering vehicle dimensions</li>

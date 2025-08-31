@@ -10,15 +10,16 @@ import Contact from "../pages/Contact";
 // Popular utility pages - synchronous for instant loading
 import Documentation from "../pages/Documentation";
 import WeatherDashboard from "../pages/WeatherDashboard";
+import Auth from "../pages/Auth";
+import StorageFacilities from "../pages/StorageFacilities";
+import RVWeather from "../pages/RVWeather";
 
 // Less common routes - lazy loaded
-const StorageFacilities = lazy(() => import("../pages/StorageFacilities"));
 const StoragePreparationChecklist = lazy(() => import("../pages/StoragePreparationChecklist"));
 const Troubleshooting = lazy(() => import("../pages/Troubleshooting"));
 
 const VoiceControl = lazy(() => import("../pages/VoiceControl"));
 const AccountPage = lazy(() => import("@/pages/Account"));
-const RVWeather = lazy(() => import("../pages/RVWeather"));
 const RVEmergencyCenter = lazy(() => import("../pages/RVEmergencyCenter"));
 const SolarPowerGuide = lazy(() => import("../pages/SolarPowerGuide"));
 const RVAppsHub = lazy(() => import("../pages/RVAppsHub"));
@@ -52,21 +53,17 @@ const utilityRoutes = [
   {
     path: "/rv-weather",
     element: (
-      <Suspense fallback={<MinimalLoader />}>
-        <RouteTransition>
-          <RVWeather />
-        </RouteTransition>
-      </Suspense>
+      <RouteTransition>
+        <RVWeather />
+      </RouteTransition>
     ),
   },
   {
     path: "/storage-facilities",
     element: (
-      <Suspense fallback={<MinimalLoader />}>
-        <RouteTransition>
-          <StorageFacilities />
-        </RouteTransition>
-      </Suspense>
+      <RouteTransition>
+        <StorageFacilities />
+      </RouteTransition>
     ),
   },
   {
@@ -84,6 +81,14 @@ const utilityRoutes = [
     element: (
       <RouteTransition>
         <Contact />
+      </RouteTransition>
+    ),
+  },
+  {
+    path: "/auth",
+    element: (
+      <RouteTransition>
+        <Auth />
       </RouteTransition>
     ),
   },

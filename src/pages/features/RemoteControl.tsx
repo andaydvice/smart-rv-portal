@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import { preloadCriticalImages } from "@/utils/performance";
 
 // Import our new components
-import HeroSection from "@/components/features/remote-control/HeroSection";
+import RemoteControlHero from "@/components/features/remote-control/RemoteControlHero";
 import MainFeaturesSection from "@/components/features/remote-control/MainFeaturesSection";
 import TechnologyBreakdownSection from "@/components/features/remote-control/TechnologyBreakdownSection";
 import UseCasesSection from "@/components/features/remote-control/UseCasesSection";
@@ -45,7 +45,7 @@ const RemoteControl = () => {
   return (
     <Layout>
       {/* Hero Section */}
-      <HeroSection />
+      <RemoteControlHero />
 
       <motion.div 
         initial={{ opacity: 0 }}

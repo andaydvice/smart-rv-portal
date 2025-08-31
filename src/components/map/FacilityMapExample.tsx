@@ -30,7 +30,7 @@ const FacilityMapExample: React.FC = () => {
         phoneNumber="(725) 555-0123"
         features={facilityFeatures}
         description="Explore our premium indoor RV storage facility with climate control and 24/7 security."
-        apiKey="AIzaSyAGKkTg0DlZd7fCJlfkVNqkRkzPjeqKJ2o"
+        apiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}
       />
     </div>
   );

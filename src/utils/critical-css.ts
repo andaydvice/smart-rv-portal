@@ -1,3 +1,4 @@
+
 /**
  * Critical CSS injection for above-the-fold content
  * Improves First Contentful Paint and reduces layout shift
@@ -153,6 +154,45 @@ export const injectCriticalCSS = (): void => {
 };
 
 /**
+ * Defers loading of non-critical stylesheets to prevent render blocking
+ */
+export const deferNonCriticalCSS = (): void => {
+  if (typeof document === 'undefined') return;
+
+  // Find all stylesheets that might be render-blocking
+  const stylesheets = document.querySelectorAll('link[rel="stylesheet"]');
+  
+  stylesheets.forEach((link) => {
+    const linkElement = link as HTMLLinkElement;
+    
+    // Skip if already processed or is critical
+    if (linkElement.dataset.deferred || linkElement.id === 'critical-css') return;
+    
+    // Create a new link element for deferred loading
+    const deferredLink = document.createElement('link');
+    deferredLink.rel = 'preload';
+    deferredLink.as = 'style';
+    deferredLink.href = linkElement.href;
+    deferredLink.dataset.deferred = 'true';
+    
+    // Load stylesheet when preload is complete
+    deferredLink.onload = () => {
+      deferredLink.rel = 'stylesheet';
+    };
+    
+    // Fallback for browsers that don't support onload
+    setTimeout(() => {
+      if (deferredLink.rel !== 'stylesheet') {
+        deferredLink.rel = 'stylesheet';
+      }
+    }, 100);
+    
+    // Replace original link with deferred version
+    linkElement.parentNode?.replaceChild(deferredLink, linkElement);
+  });
+};
+
+/**
  * Remove critical CSS after main styles are loaded
  */
 export const removeCriticalCSS = (): void => {
@@ -160,10 +200,10 @@ export const removeCriticalCSS = (): void => {
   
   const criticalStyle = document.querySelector('#critical-css');
   if (criticalStyle) {
-    // Wait a bit to ensure main styles are loaded
+    // Wait longer to ensure main styles are loaded
     setTimeout(() => {
       criticalStyle.remove();
-    }, 1000);
+    }, 2000);
   }
 };
 
@@ -178,6 +218,9 @@ export const preloadCriticalFonts = (): void => {
   ];
 
   fonts.forEach(fontUrl => {
+    // Check if already preloaded
+    if (document.querySelector(`link[href="${fontUrl}"]`)) return;
+    
     const link = document.createElement('link');
     link.rel = 'preload';
     link.as = 'style';
@@ -186,5 +229,30 @@ export const preloadCriticalFonts = (): void => {
       link.rel = 'stylesheet';
     };
     document.head.appendChild(link);
+  });
+};
+
+/**
+ * Initialize all critical CSS optimizations
+ */
+export const initializeCriticalCSS = (): void => {
+  // Inject critical CSS immediately
+  injectCriticalCSS();
+  
+  // Defer non-critical CSS after DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+      setTimeout(deferNonCriticalCSS, 0);
+    });
+  } else {
+    setTimeout(deferNonCriticalCSS, 0);
+  }
+  
+  // Preload critical fonts
+  preloadCriticalFonts();
+  
+  // Remove critical CSS after main styles load
+  window.addEventListener('load', () => {
+    setTimeout(removeCriticalCSS, 1000);
   });
 };

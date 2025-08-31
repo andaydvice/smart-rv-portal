@@ -8,6 +8,7 @@ import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
 import SEO from "@/components/seo/SEO";
 import { organizationSchema, faqSchema } from "@/components/seo/schemas";
 
+
 const About = () => {
   useEffect(() => {
     
@@ -40,29 +41,31 @@ const About = () => {
           ])
         ]}
       />
-      {/* Hero Video Section - Simplified Structure */}
-      <div className="relative w-full h-[70vh] min-h-[500px] bg-gradient-to-br from-[#080F1F] to-[#151A22]">
-        {/* Video Container - Simple Iframe Embed */}
-        <div className="absolute inset-0 w-full h-full">
-          <div className="w-full h-full relative" style={{ paddingTop: '56.25%' }}>
-            <iframe 
-              className="absolute top-0 left-0 w-full h-full"
-              loading='lazy'
-              src="https://adilo.bigcommand.com/watch/osMojtq7"
-              frameBorder="0"
-              allowFullScreen
-              scrolling="no"
-            />
-          </div>
-        </div>
+      {/* Hero Section with Background Video */}
+      <div className="relative w-full h-[70vh] min-h-[500px] overflow-hidden">
+        {/* ADILIO Background Video */}
+        <iframe
+          src="https://adilo.bigcommand.com/watch/INGQY9i5?autoplay=1&muted=1&loop=1&controls=0"
+          title="Smart RV Technology Hub - About Us"
+          className="absolute inset-0 w-full h-full border-0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowFullScreen
+          style={{ border: 'none', background: 'transparent' }}
+        />
+        
+        {/* Dark overlay for text readability */}
+        <div className="absolute inset-0 bg-black/40"></div>
+        
+        {/* Gradient overlay for better text contrast */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30"></div>
 
-        {/* Title Overlay - Positioned to not block video interaction */}
-        <div className="absolute top-8 left-0 right-0 z-10 pointer-events-none">
-          <div className="text-center px-6">
+        {/* Content Overlay */}
+        <div className="absolute inset-0 flex items-center justify-center z-10">
+          <div className="text-center px-6 max-w-4xl">
             <motion.h1 
               initial={{ y: -20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.5, duration: 0.8 }}
+              transition={{ delay: 0.3, duration: 0.8 }}
               className="text-4xl sm:text-5xl md:text-7xl font-bold text-white mb-4 image-overlay-headline"
             >
               About Smart RV
@@ -70,7 +73,7 @@ const About = () => {
             <motion.p 
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.7, duration: 0.8 }}
+              transition={{ delay: 0.5, duration: 0.8 }}
               className="text-xl md:text-2xl text-white/90 image-overlay-headline"
             >
               The Future of Intelligent Travel

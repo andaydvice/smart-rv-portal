@@ -35,7 +35,7 @@ const ResponsiveFacilityMap: React.FC<ResponsiveFacilityMapProps> = ({
   phoneNumber,
   features = [],
   description,
-  apiKey = "AIzaSyAGKkTg0DlZd7fCJlfkVNqkRkzPjeqKJ2o" // Default API key
+  apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY
 }) => {
   const [showInfo, setShowInfo] = useState(false);
   const { isLoaded, error } = useGoogleMaps({ apiKey });

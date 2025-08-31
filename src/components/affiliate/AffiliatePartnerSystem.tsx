@@ -275,7 +275,7 @@ export const AffiliatePartnerButton: React.FC<AffiliatePartnerButtonProps> = ({
         href={fullUrl}
         target="_blank"
         rel="nofollow sponsored noopener noreferrer"
-        className="flex items-center justify-center gap-2"
+        className="flex items-center justify-center gap-1"
       >
         {children}
         {showIcon && <ExternalLink className="h-4 w-4" />}
@@ -316,7 +316,7 @@ export const AffiliatePartnerCard: React.FC<AffiliatePartnerCardProps> = ({
   const displayButtonText = buttonText || `Visit ${partnerData.name}`;
 
   return (
-    <div className={`bg-[#131a2a] border border-gray-600 rounded-lg p-6 h-full flex flex-col ${className}`}>
+    <div className={`bg-[#131a2a] border border-gray-600 rounded-lg p-6 pb-8 h-full flex flex-col ${className}`}>
       <h3 className="text-lg font-semibold text-white mb-3">{displayTitle}</h3>
       <p className="text-gray-300 text-sm mb-4 flex-grow">{displayDescription}</p>
       
@@ -337,7 +337,7 @@ export const AffiliatePartnerCard: React.FC<AffiliatePartnerCardProps> = ({
         </ul>
       )}
       
-      <div className="mt-auto">
+      <div className="mt-auto pt-2">
         <AffiliatePartnerButton
           partner={partner}
           path={path}

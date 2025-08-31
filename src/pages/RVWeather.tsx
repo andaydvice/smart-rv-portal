@@ -5,7 +5,7 @@ import Layout from "@/components/layout/Layout";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { scrollToTop } from "@/utils/scrollToTop";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
-import HeroSection from "@/components/rv-weather/HeroSection";
+import RVWeatherHero from "@/components/rv-weather/RVWeatherHero";
 import IntroSection from "@/components/rv-weather/IntroSection";
 import PlanningSection from "@/components/rv-weather/PlanningSection";
 import SeasonalTips from "@/components/rv-weather/SeasonalTips";
@@ -92,7 +92,7 @@ const RVWeather = () => {
           key="rv-weather-content" // Add key to force re-render
         >
           {/* Hero Section */}
-          <HeroSection />
+          <RVWeatherHero />
           
           {/* Why Weather Matters Section */}
           <section id="weather-matters" className="container mx-auto px-4 py-12">

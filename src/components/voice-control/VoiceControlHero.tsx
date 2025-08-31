@@ -1,7 +1,7 @@
 
 import { Mic } from "lucide-react";
 
-export const HeroSection = () => {
+export const VoiceControlHero = () => {
   return (
     <section className="hero-section">
       <img 

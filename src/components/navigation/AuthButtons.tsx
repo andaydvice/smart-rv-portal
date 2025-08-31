@@ -26,28 +26,28 @@ const AuthButtons = () => {
   };
 
   return (
-    <div className="flex items-center space-x-4 ml-4">
+    <div className="flex items-center">
       {user ? (
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-3">
           <div className="hidden lg:flex items-center gap-2 text-gray-300">
-            <User className="h-4 w-4 flex-shrink-0" />
-            <span className="text-sm truncate max-w-[150px]">{user.email}</span>
+            <User className="h-4 w-4" />
+            <span className="text-sm max-w-[120px] truncate">{user.email}</span>
           </div>
           <button
             onClick={handleLogout}
-            className="text-gray-300 hover:text-[#5B9BD5] transition-colors text-sm flex items-center gap-2 whitespace-nowrap px-3 py-2"
+            className="text-gray-300 hover:text-connectivity-accent transition-colors text-sm flex items-center gap-2 px-3 py-2 rounded-md"
           >
             <LogOut className="h-4 w-4" />
-            <span className="hidden sm:inline">Logout</span>
+            <span>Logout</span>
           </button>
         </div>
       ) : (
         <Link
           to="/auth"
-          className="text-gray-300 hover:text-[#5B9BD5] transition-colors text-sm flex items-center gap-2 whitespace-nowrap px-3 py-2"
+          className="text-gray-300 hover:text-connectivity-accent transition-colors text-sm flex items-center gap-2 px-3 py-2 rounded-md"
         >
           <LogIn className="h-4 w-4" />
-          <span className="hidden sm:inline">Login</span>
+          <span>Login</span>
         </Link>
       )}
     </div>

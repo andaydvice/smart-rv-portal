@@ -30,7 +30,7 @@ const GoogleMapView: React.FC<GoogleMapViewProps> = ({
   facilities,
   recentlyViewedFacilityIds,
   onMarkerClick,
-  apiKey = 'AIzaSyAGKkTg0DlZd7fCJlfkVNqkRkzPjeqKJ2o',
+  apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY || 'AIzaSyAGKkTg0DlZd7fCJlfkVNqkRkzPjeqKJ2o',
   center = { lat: 39.8283, lng: -98.5795 },
   zoom = 4,
   onZoomChange,

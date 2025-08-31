@@ -13,16 +13,16 @@ import AudioSystem from "@/pages/features/AudioSystem";
 import SmartTV from "@/pages/features/SmartTV";
 import InternetConnectivity from "@/pages/features/InternetConnectivity";
 import PowerManagement from "@/pages/features/PowerManagement";
+import ClimateControl from "@/pages/features/ClimateControl";
+import Entertainment from "@/pages/features/Entertainment";
+import WaterSystems from "@/pages/features/WaterSystems";
 
 // Less popular feature detail pages (lazy)
 const SmartKitchen = lazy(() => import("@/pages/features/SmartKitchen"));
 const NavigationSystem = lazy(() => import("@/pages/features/NavigationSystem"));
 const SecuritySystem = lazy(() => import("@/pages/features/SecuritySystem"));
 const AutomatedDriving = lazy(() => import("@/pages/features/AutomatedDriving"));
-const WaterSystems = lazy(() => import("@/pages/features/WaterSystems"));
 const SmartAutomation = lazy(() => import("@/pages/features/SmartAutomation"));
-const ClimateControl = lazy(() => import("@/pages/features/ClimateControl"));
-const Entertainment = lazy(() => import("@/pages/features/Entertainment"));
 const RemoteControl = lazy(() => import("@/pages/features/RemoteControl"));
 
 export const featureRoutes: RouteObject[] = [
@@ -119,11 +119,9 @@ export const featureRoutes: RouteObject[] = [
   {
     path: "/features/water-systems",
     element: (
-      <Suspense fallback={<MinimalLoader />}>
-        <RouteTransition>
-          <WaterSystems />
-        </RouteTransition>
-      </Suspense>
+      <RouteTransition>
+        <WaterSystems />
+      </RouteTransition>
     ),
     errorElement: <ErrorPage />,
   },
@@ -141,22 +139,18 @@ export const featureRoutes: RouteObject[] = [
   {
     path: "/features/climate-control",
     element: (
-      <Suspense fallback={<MinimalLoader />}>
-        <RouteTransition>
-          <ClimateControl />
-        </RouteTransition>
-      </Suspense>
+      <RouteTransition>
+        <ClimateControl />
+      </RouteTransition>
     ),
     errorElement: <ErrorPage />,
   },
   {
     path: "/features/entertainment",
     element: (
-      <Suspense fallback={<MinimalLoader />}>
-        <RouteTransition>
-          <Entertainment />
-        </RouteTransition>
-      </Suspense>
+      <RouteTransition>
+        <Entertainment />
+      </RouteTransition>
     ),
     errorElement: <ErrorPage />,
   },

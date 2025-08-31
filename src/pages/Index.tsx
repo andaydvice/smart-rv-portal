@@ -13,12 +13,8 @@ import TestimonialsSection from "@/components/sections/testimonials/Testimonials
 // Critical above-the-fold components are now imported synchronously
 import { FeaturesSection } from "@/components/sections/FeaturesSection";
 // Keep below-the-fold components lazy for performance
-const SustainabilitySection = lazy(() => import("@/components/sections/SustainabilitySection").then(mod => ({ 
-  default: mod.SustainabilitySection 
-})));
-const TechnologySection = lazy(() => import("@/components/sections/TechnologySection").then(mod => ({
-  default: mod.TechnologySection
-})));
+const SustainabilitySection = lazy(() => import("@/components/sections/SustainabilitySection"));
+const TechnologySection = lazy(() => import("@/components/sections/TechnologySection"));
 
 import { SectionSkeleton } from "@/components/ui/skeletons";
 

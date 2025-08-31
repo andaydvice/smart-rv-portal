@@ -402,6 +402,13 @@ export type Database = {
             referencedRelation: "storage_facilities_public"
             referencedColumns: ["id"]
           },
+          {
+            foreignKeyName: "fk_facility"
+            columns: ["facility_id"]
+            isOneToOne: false
+            referencedRelation: "storage_facilities_public_view"
+            referencedColumns: ["id"]
+          },
         ]
       }
       storage_facility_reviews: {
@@ -442,6 +449,13 @@ export type Database = {
             columns: ["facility_id"]
             isOneToOne: false
             referencedRelation: "storage_facilities_public"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "storage_facility_reviews_facility_id_fkey"
+            columns: ["facility_id"]
+            isOneToOne: false
+            referencedRelation: "storage_facilities_public_view"
             referencedColumns: ["id"]
           },
         ]
@@ -759,6 +773,48 @@ export type Database = {
           state?: string | null
           updated_at?: string | null
           zip_code?: string | null
+        }
+        Relationships: []
+      }
+      storage_facilities_public_view: {
+        Row: {
+          address: string | null
+          avg_rating: number | null
+          basic_features: Json | null
+          city: string | null
+          id: string | null
+          latitude: number | null
+          longitude: number | null
+          name: string | null
+          price_range: Json | null
+          review_count: number | null
+          state: string | null
+        }
+        Insert: {
+          address?: string | null
+          avg_rating?: number | null
+          basic_features?: never
+          city?: string | null
+          id?: string | null
+          latitude?: number | null
+          longitude?: number | null
+          name?: string | null
+          price_range?: Json | null
+          review_count?: number | null
+          state?: string | null
+        }
+        Update: {
+          address?: string | null
+          avg_rating?: number | null
+          basic_features?: never
+          city?: string | null
+          id?: string | null
+          latitude?: number | null
+          longitude?: number | null
+          name?: string | null
+          price_range?: Json | null
+          review_count?: number | null
+          state?: string | null
         }
         Relationships: []
       }

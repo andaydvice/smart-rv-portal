@@ -9,10 +9,10 @@ import About from "../pages/About";
 import Products from "../pages/Products";
 import Pricing from "../pages/Pricing";
 import ErrorPage from "../pages/ErrorPage";
+import Blog from "../pages/Blog";
 
 // Less common routes - lazy loaded
 const Technology = lazy(() => import("../pages/Technology"));
-const Blog = lazy(() => import("../pages/Blog"));
 const Features = lazy(() => import("../pages/Features"));
 const Documentation = lazy(() => import("../pages/Documentation"));
 const CompleteDocumentation = lazy(() => import("../pages/documentation/CompleteDocumentation"));
@@ -33,11 +33,9 @@ const contentRoutes: RouteObject[] = [
   {
     path: "/blog",
     element: (
-      <Suspense fallback={<MinimalLoader />}>
-        <RouteTransition>
-          <Blog />
-        </RouteTransition>
-      </Suspense>
+      <RouteTransition>
+        <Blog />
+      </RouteTransition>
     ),
     errorElement: <ErrorPage />,
   },

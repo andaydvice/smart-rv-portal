@@ -13,7 +13,7 @@ const AffiliateDisclosure = ({ className = "", compact = false }: AffiliateDiscl
 
   if (compact) {
     return (
-      <div className={`text-xs text-gray-500 text-center p-2 bg-gray-900/50 rounded ${className}`}>
+      <div className={`text-xs text-white font-bold text-left p-2 bg-gray-900/50 rounded ${className}`}>
         <InfoIcon className="h-3 w-3 inline-block mr-1" />
         Disclosure: This page may contain affiliate links. If you purchase through them, we may earn a commission at no additional cost to you.
       </div>

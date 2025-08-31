@@ -4,6 +4,7 @@ import { Tv, Music, Smartphone, Gamepad } from "lucide-react";
 import Layout from "@/components/layout/Layout";
 import { useEffect } from "react";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
+import { VideoSection } from "@/components/ui/VideoSection";
 
 const Entertainment = () => {
   useEffect(() => {
@@ -31,13 +32,12 @@ const Entertainment = () => {
               <div className="h-[72px]">
                 <h2 className="text-2xl font-semibold text-[#5B9BD5]">Smart TV System</h2>
               </div>
-              <div className="relative aspect-video mb-6">
-                <img 
-                  src="/lovable-uploads/831c3ac9-7ade-4fe3-a460-affbfc4123f7.png" 
-                  alt="4K Smart TV System"
-                  className="absolute inset-0 w-full h-full object-cover rounded-lg"
-                />
-              </div>
+              <VideoSection
+                videoId="smart-systems-demo"
+                title="Smart TV System Demo"
+                description="Experience 4K entertainment and smart TV features in your RV"
+                className="mb-6"
+              />
               <p className="text-[#E2E8FF] mb-6 text-left">
                 Experience cinema quality entertainment in your RV with our advanced Smart TV system featuring 4K OLED display with HDR support for stunning visuals and immersive entertainment wherever your journey takes you.
               </p>
@@ -55,13 +55,12 @@ const Entertainment = () => {
               <div className="h-[72px]">
                 <h2 className="text-2xl font-semibold text-[#5B9BD5]">Premium Audio System</h2>
               </div>
-              <div className="relative aspect-video mb-6">
-                <img 
-                  src="/lovable-uploads/5f18c537-149c-494e-9adf-6a1c096e3e3a.png"
-                  alt="Premium Audio System"
-                  className="absolute inset-0 w-full h-full object-cover rounded-lg"
-                />
-              </div>
+              <VideoSection
+                videoId="connectivity-demo"
+                title="Premium Audio Demo"
+                description="Hear the difference with premium surround sound and audio distribution"
+                className="mb-6"
+              />
               <p className="text-[#E2E8FF] mb-6 text-left">
                 Transform your RV into a concert hall with our premium audio system featuring studio quality sound, multizone audio distribution, and seamless integration with streaming services for the ultimate listening experience.
               </p>
