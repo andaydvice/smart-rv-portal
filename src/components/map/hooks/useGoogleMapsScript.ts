@@ -10,6 +10,13 @@ export const useGoogleMapsScript = ({ apiKey }: UseGoogleMapsScriptProps) => {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    // Set up a global callback function to prevent errors
+    if (!(window as any).initMap) {
+      (window as any).initMap = () => {
+        console.log('Google Maps initialized via callback');
+      };
+    }
+    
     // Check if already loaded
     if (window.google?.maps) {
       setIsLoaded(true);
@@ -21,9 +28,9 @@ export const useGoogleMapsScript = ({ apiKey }: UseGoogleMapsScriptProps) => {
       return;
     }
 
-    // Create script element
+    // Create script element WITHOUT callback parameter
     const script = document.createElement('script');
-    script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places,geometry`;
+    script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places,geometry&v=weekly`;
     script.async = true;
     script.defer = true;
 

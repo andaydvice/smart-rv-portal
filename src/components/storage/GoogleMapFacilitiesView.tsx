@@ -26,8 +26,8 @@ const GoogleMapFacilitiesView: React.FC<GoogleMapFacilitiesViewProps> = ({
   selectedState
 }) => {
   const [currentZoom, setCurrentZoom] = useState<number>(4);
-  // Start with OpenStreetMap since Google Maps is having 503 errors
-  const [mapProvider, setMapProvider] = useState<'google' | 'google-direct' | 'osm'>('osm');
+  // Start with Google Maps since we have a valid unrestricted API key
+  const [mapProvider, setMapProvider] = useState<'google' | 'google-direct' | 'osm'>('google');
   const [loadAttempts, setLoadAttempts] = useState(0);
   const [mapError, setMapError] = useState(false);
   

@@ -16,6 +16,8 @@ export const useGoogleMaps = ({ apiKey }: UseGoogleMapsProps) => {
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: apiKey || '',
     libraries,
+    // Remove callback that's causing issues
+    preventGoogleFontsLoading: true,
     // Add additional options
     version: 'weekly',
     language: 'en',
