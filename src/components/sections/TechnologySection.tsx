@@ -4,7 +4,7 @@ import { TechnologyGrid } from "./technology/TechnologyGrid";
 import TechnologyProductRecommendations from "./technology/TechnologyProductRecommendations";
 import { useNavigate } from "react-router-dom";
 
-export const TechnologySection = () => {
+const TechnologySection = () => {
   const navigate = useNavigate();
 
   const handleCardClick = (link: string) => {
@@ -28,3 +28,5 @@ export const TechnologySection = () => {
     </>
   );
 };
+
+export default TechnologySection;
