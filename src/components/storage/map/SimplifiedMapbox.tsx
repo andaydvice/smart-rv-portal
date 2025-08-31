@@ -22,6 +22,42 @@ export const SimplifiedMapbox: React.FC<SimplifiedMapboxProps> = ({
   const markersRef = useRef<mapboxgl.Marker[]>([]);
 
   useEffect(() => {
+    // Add global styles for popups
+    const styleId = 'facility-popup-styles';
+    if (!document.getElementById(styleId)) {
+      const style = document.createElement('style');
+      style.id = styleId;
+      style.innerHTML = `
+        .facility-popup .mapboxgl-popup-content {
+          background: #131a2a !important;
+          border-radius: 8px !important;
+          box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5) !important;
+          border: 1px solid rgba(91, 155, 213, 0.3) !important;
+          padding: 0 !important;
+          min-width: 300px !important;
+          max-width: 400px !important;
+        }
+        
+        .facility-popup .mapboxgl-popup-close-button {
+          background: #5B9BD5 !important;
+          color: white !important;
+          border-radius: 50% !important;
+          width: 24px !important;
+          height: 24px !important;
+          font-size: 16px !important;
+          top: 8px !important;
+          right: 8px !important;
+        }
+        
+        .facility-popup .mapboxgl-popup-tip {
+          border-top-color: #131a2a !important;
+        }
+      `;
+      document.head.appendChild(style);
+    }
+  }, []);
+
+  useEffect(() => {
     if (!mapContainer.current || map.current) return;
 
     // Get token from props or environment
@@ -106,11 +142,52 @@ export const SimplifiedMapbox: React.FC<SimplifiedMapboxProps> = ({
       })
         .setLngLat([facility.longitude, facility.latitude])
         .setPopup(
-          new mapboxgl.Popup({ offset: 25 }).setHTML(`
-            <div class="p-2">
-              <h3 class="font-semibold text-sm">${facility.name}</h3>
-              <p class="text-xs text-gray-600">${facility.address}</p>
-              <p class="text-xs text-gray-500 mt-1">${facility.city}, ${facility.state}</p>
+          new mapboxgl.Popup({ 
+            offset: 25,
+            maxWidth: '400px',
+            className: 'facility-popup'
+          }).setHTML(`
+            <div class="facility-popup-content" style="min-width: 300px; max-width: 400px; padding: 16px;">
+              <div style="border-bottom: 2px solid #5B9BD5; padding-bottom: 12px; margin-bottom: 12px;">
+                <h3 style="font-size: 18px; font-weight: bold; color: #5B9BD5; margin: 0;">${facility.name}</h3>
+              </div>
+              
+              <div style="margin-bottom: 8px;">
+                <p style="margin: 0; color: #E2E8FF; font-size: 14px; line-height: 1.4;">📍 ${facility.address}</p>
+              </div>
+              
+              <div style="margin-bottom: 12px;">
+                <p style="margin: 0; color: #E2E8FF; font-size: 14px;">📍 ${facility.city}, ${facility.state}</p>
+              </div>
+              
+              ${facility.features ? `
+                <div style="margin-top: 16px;">
+                  <h4 style="font-size: 12px; font-weight: bold; color: #5B9BD5; text-transform: uppercase; margin: 0 0 8px 0; letter-spacing: 0.5px;">Features</h4>
+                  <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+                    ${Array.isArray(facility.features) ? 
+                      facility.features.map(feature => 
+                        `<span style="background: rgba(91, 155, 213, 0.2); color: #5B9BD5; padding: 4px 8px; border-radius: 12px; font-size: 11px; border: 1px solid rgba(91, 155, 213, 0.3);">${feature}</span>`
+                      ).join('') : 
+                      Object.entries(facility.features).filter(([key, value]) => value).map(([key, value]) => {
+                        const featureNames = {
+                          'indoor': 'Indoor',
+                          'climate_controlled': 'Climate Controlled',
+                          '24h_access': '24/7 Access',
+                          'security_system': 'Security',
+                          'vehicle_washing': 'Vehicle Washing'
+                        };
+                        return `<span style="background: rgba(91, 155, 213, 0.2); color: #5B9BD5; padding: 4px 8px; border-radius: 12px; font-size: 11px; border: 1px solid rgba(91, 155, 213, 0.3);">${featureNames[key] || key}</span>`;
+                      }).join('')
+                    }
+                  </div>
+                </div>
+              ` : ''}
+              
+              <div style="margin-top: 16px; padding-top: 12px; border-top: 1px solid rgba(91, 155, 213, 0.2);">
+                <button onclick="window.location.href='/storage-facilities/${facility.id}'" style="background: #5B9BD5; color: white; border: none; padding: 8px 16px; border-radius: 6px; font-size: 14px; cursor: pointer; width: 100%;">
+                  View Details
+                </button>
+              </div>
             </div>
           `)
         );
