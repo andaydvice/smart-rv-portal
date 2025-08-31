@@ -17,8 +17,8 @@ serve(async (req) => {
     // Public function: no auth required for token retrieval
 
 
-    const mapboxToken = Deno.env.get('MAPBOX_PUBLIC_TOKEN');
-    console.log('Getting MAPBOX token...');
+    const mapboxToken = Deno.env.get('Mapbox');
+    console.log('Getting Mapbox token...');
     
     if (!mapboxToken || typeof mapboxToken !== 'string' || !mapboxToken.startsWith('pk.')) {
       console.error('Invalid or missing Mapbox token in edge function secrets');
