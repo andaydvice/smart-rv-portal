@@ -34,7 +34,8 @@ const MapContainer: React.FC<MapContainerProps> = ({
     console.log(`MapContainer received ${facilities?.length || 0} facilities`);
     console.log(`Selected state: ${selectedState || 'none'}`);
     console.log(`Map loaded: ${mapLoaded}, Map initialized: ${!isInitializing}`);
-  }, [facilities, selectedState, mapLoaded, isInitializing]);
+    console.log(`MapToken available: ${!!mapToken}, MapToken value: ${mapToken ? mapToken.substring(0, 10) + '...' : 'none'}`);
+  }, [facilities, selectedState, mapLoaded, isInitializing, mapToken]);
 
   // Initialize map when the component mounts - wait for token to be available
   useEffect(() => {
@@ -42,7 +43,7 @@ const MapContainer: React.FC<MapContainerProps> = ({
     
     // Don't initialize if token is not available
     if (!mapToken || mapToken === 'null' || mapToken === 'undefined') {
-      console.log('Waiting for Mapbox token before initialization...');
+      console.log('MapContainer: Waiting for Mapbox token before initialization... Token:', mapToken);
       return;
     }
     

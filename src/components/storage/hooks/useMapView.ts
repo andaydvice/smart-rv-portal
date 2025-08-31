@@ -30,7 +30,7 @@ export const useMapView = () => {
     const saved = localStorage.getItem('map_provider');
     return saved === 'google';
   });
-  const { mapToken, mapTokenError, isLoading: tokenLoading } = useMapToken(!useGoogleMaps);
+  const { mapToken, mapTokenError, isLoading: tokenLoading, retryFetch } = useMapToken(!useGoogleMaps);
   const { apiKey: googleMapsKey, error: googleMapsError } = useGoogleMapsKey();
 
   const toggleMapView = useCallback(() => {
@@ -42,7 +42,19 @@ export const useMapView = () => {
     toast.info(`Switched to ${nextUse ? 'Google Maps' : 'Mapbox'} view`);
   }, [useGoogleMaps]);
 
-  // Auto-fallback to Google Maps if Mapbox token fails or is missing
+  // Debug the token loading process
+  useEffect(() => {
+    console.log('useMapView state:', {
+      useGoogleMaps,
+      tokenLoading,
+      mapToken: mapToken ? mapToken.substring(0, 10) + '...' : 'none',
+      mapTokenError
+    });
+  }, [useGoogleMaps, tokenLoading, mapToken, mapTokenError]);
+
+  // Auto-fallback to Google Maps if Mapbox token fails or is missing - DISABLED FOR NOW
+  // Remove automatic fallback to let user manually switch if needed
+  /*
   useEffect(() => {
     if (!useGoogleMaps && !tokenLoading && (!mapToken || mapTokenError)) {
       setUseGoogleMaps(true);
@@ -54,6 +66,7 @@ export const useMapView = () => {
       }
     }
   }, [useGoogleMaps, tokenLoading, mapToken, mapTokenError]);
+  */
 
   // Ensure window state for integration with map scripts
   useEffect(() => {

@@ -38,10 +38,11 @@ export const useMapToken = (enabled: boolean = true) => {
         return;
       }
       
-      console.log('Successfully received valid Mapbox token');
-      setMapToken(data.token);
-      setMapTokenError('');
-      setRetryCount(0);
+        console.log('Successfully received valid Mapbox token');
+        setMapToken(data.token);
+        setMapTokenError('');
+        setRetryCount(0);
+        setIsLoading(false); // Set loading to false immediately when token is received
     } catch (err) {
       console.error(`Failed to fetch Mapbox token (attempt ${attempt}):`, err);
       if (attempt < 3) {
@@ -49,12 +50,11 @@ export const useMapToken = (enabled: boolean = true) => {
         setTimeout(() => fetchMapboxToken(attempt + 1), 2000);
         return;
       }
-      setMapTokenError('Failed to load map configuration after 3 attempts');
-      setMapToken('');
-    } finally {
-      if (attempt >= 3) {
-        setIsLoading(false);
-      }
+        setMapTokenError('Failed to load map configuration after 3 attempts');
+        setMapToken('');
+        setIsLoading(false); // Ensure loading is set to false on final failure
+      } finally {
+        // Remove the finally block that was interfering with loading state
     }
   };
 
