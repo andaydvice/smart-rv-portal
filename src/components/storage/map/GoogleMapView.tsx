@@ -30,7 +30,7 @@ const GoogleMapView: React.FC<GoogleMapViewProps> = ({
   facilities,
   recentlyViewedFacilityIds,
   onMarkerClick,
-  apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY || 'AIzaSyAGKkTg0DlZd7fCJlfkVNqkRkzPjeqKJ2o',
+  apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY,
   center = { lat: 39.8283, lng: -98.5795 },
   zoom = 4,
   onZoomChange,
@@ -144,17 +144,19 @@ const GoogleMapView: React.FC<GoogleMapViewProps> = ({
     }
   };
 
-  if (error) {
+  if (error || !apiKey) {
+    const errorMsg = !apiKey ? 'Google Maps API key missing' : error;
     return (
       <div className="w-full h-full flex items-center justify-center bg-[#080F1F] text-white p-4 rounded-lg">
         <div className="text-center space-y-4">
-          <p className="text-red-400">{error}</p>
+          <p className="text-red-400">{errorMsg}</p>
           <div className="text-sm text-gray-400">
-            <p>Possible causes:</p>
+            <p>Possible solutions:</p>
             <ul className="list-disc list-inside mt-2 space-y-1">
-              <li>API key restrictions (domain not allowed)</li>
-              <li>API key quota exceeded</li>
-              <li>Network connectivity issues</li>
+              <li>Set VITE_GOOGLE_MAPS_API_KEY environment variable</li>
+              <li>Add current domain to API key restrictions</li>
+              <li>Verify API key has Maps JavaScript API enabled</li>
+              <li>Check billing is enabled in Google Cloud Console</li>
             </ul>
           </div>
           <button 

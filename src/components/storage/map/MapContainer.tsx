@@ -1,11 +1,12 @@
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useMap, useMapContext } from './MapContext';
 import { StorageFacility } from '../types';
 import MapView from './components/MapView';
 import MapInteractions from './components/MapInteractions';
 import { createMapInstance, initializeMapboxGL, configureMapSettings } from './utils/mapboxInit';
 import mapboxgl from 'mapbox-gl';
+import 'mapbox-gl/dist/mapbox-gl.css';
 
 interface MapContainerProps {
   facilities: StorageFacility[];
@@ -24,6 +25,7 @@ const MapContainer: React.FC<MapContainerProps> = ({
   const { mapRef } = useMapContext();
   const [markersCreated, setMarkersCreated] = useState<boolean>(false);
   const [loadingProgress, setLoadingProgress] = useState<number>(0);
+  const initializationRef = useRef<boolean>(false);
   
   // Log props for debugging
   useEffect(() => {
@@ -32,9 +34,11 @@ const MapContainer: React.FC<MapContainerProps> = ({
     console.log(`Map loaded: ${mapLoaded}, Map initialized: ${!isInitializing}`);
   }, [facilities, selectedState, mapLoaded, isInitializing]);
 
-  // Initialize map when the component mounts
+  // Initialize map when the component mounts (singleton pattern)
   useEffect(() => {
-    if (!mapContainer.current || mapRef.current) return;
+    if (!mapContainer.current || mapRef.current || initializationRef.current) return;
+    
+    initializationRef.current = true;
     
     // Initialize Mapbox GL
     const isInitialized = initializeMapboxGL();
@@ -76,8 +80,11 @@ const MapContainer: React.FC<MapContainerProps> = ({
       // Clean up on unmount
       return () => {
         console.log('Cleaning up map instance');
-        map.remove();
+        if (map && map.remove) {
+          map.remove();
+        }
         mapRef.current = null;
+        initializationRef.current = false;
       };
     } catch (error) {
       console.error('Error creating map instance:', error);

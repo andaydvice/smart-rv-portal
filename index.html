@@ -34,6 +34,9 @@
     <meta name="twitter:title" content="Smart RV Hub - The Future of Smart RV Travel" />
     <meta name="twitter:description" content="Transform your RV with cutting-edge smart systems, connectivity solutions, and intelligent automation. Discover the future of mobile living." />
     <meta name="twitter:image" content="https://smartrvhub.com/lovable-uploads/f3ebf58c-7bbf-427f-9510-9c3b0aec6f6d.png" />
+    
+    <!-- Mapbox CSS for proper map styling -->
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css' rel='stylesheet' />
   </head>
   <body>
     <div id="root"></div>
@@ -41,7 +44,7 @@
     
     <!-- AGGRESSIVE Cache Clearing and Version Management -->
     <script>
-      const CURRENT_VERSION = '20250830-revolutionising';
+      const CURRENT_VERSION = 'map-fixes-20250831';
       const FORCE_CLEAR_KEY = 'force-clear-v' + CURRENT_VERSION;
       
       // Clear everything immediately

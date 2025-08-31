@@ -10,7 +10,7 @@ const useGoogleMapsKey = () => {
   
   useEffect(() => {
     if (!apiKey) {
-      setError('Google Maps API key not configured in environment variables');
+      setError('Google Maps API key not configured. Please set VITE_GOOGLE_MAPS_API_KEY environment variable.');
       console.warn('VITE_GOOGLE_MAPS_API_KEY not found in environment');
     } else {
       console.log('Google Maps API Key loaded from environment:', {

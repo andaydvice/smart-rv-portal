@@ -7,6 +7,7 @@ import MapView from '../../MapView';
 import GoogleMapFacilitiesView from '../../GoogleMapFacilitiesView';
 import { StorageFacility } from '../../types';
 import FacilityCountBadge from './FacilityCountBadge';
+import { ErrorBoundary } from '../../../ErrorBoundary';
 
 interface MapViewContainerProps {
   useGoogleMaps: boolean;
@@ -32,10 +33,11 @@ const MapViewContainer: React.FC<MapViewContainerProps> = ({
   selectedState
 }) => {
   return (
-    <div className="relative">
-      <FacilityCountBadge count={facilities?.length || 0} />
-      
-      {useGoogleMaps ? (
+    <ErrorBoundary>
+      <div className="relative">
+        <FacilityCountBadge count={facilities?.length || 0} />
+        
+        {useGoogleMaps ? (
         <GoogleMapFacilitiesView
           facilities={facilities || []}
           recentlyViewedFacilityIds={recentlyViewedIds}
@@ -63,7 +65,8 @@ const MapViewContainer: React.FC<MapViewContainerProps> = ({
           )}
         </Card>
       )}
-    </div>
+      </div>
+    </ErrorBoundary>
   );
 };
 
