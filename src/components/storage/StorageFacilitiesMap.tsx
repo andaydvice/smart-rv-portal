@@ -49,6 +49,19 @@ const StorageFacilitiesMap: React.FC<StorageFacilitiesMapProps> = ({ onSelectFea
     googleMapsKey 
   } = useMapView();
   
+  // Debug logging
+  React.useEffect(() => {
+    console.log('StorageFacilitiesMap state:', {
+      facilitiesCount: allFacilities?.length || 0,
+      isLoading,
+      error: error?.message || error,
+      useGoogleMaps,
+      mapToken: mapToken ? 'present' : 'missing',
+      mapTokenError,
+      googleMapsKey: googleMapsKey ? 'present' : 'missing'
+    });
+  }, [allFacilities, isLoading, error, useGoogleMaps, mapToken, mapTokenError, googleMapsKey]);
+  
   // Debug states for marker issues
   const [noMarkersForState, setNoMarkersForState] = useState<string | null>(null);
   const [markersCount, setMarkersCount] = useState<number>(0);

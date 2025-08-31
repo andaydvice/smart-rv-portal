@@ -87,10 +87,13 @@ export const useStorageFacilities = (filters: FilterState) => {
   const { data: maxPriceData } = useQuery({
     queryKey: ['max-facility-price'],
     queryFn: async () => {
+      console.log('Fetching max price data...');
       // Direct query to storage facilities table with SELECT access
       const { data, error } = await supabase
         .from('storage_facilities')
         .select('price_range');
+      
+      console.log('Max price query result:', { data: data?.length, error });
       
       if (error || !data) return 1000;
       
@@ -106,6 +109,7 @@ export const useStorageFacilities = (filters: FilterState) => {
   const { data: facilities, isLoading, error } = useQuery({
     queryKey: ['storage-facilities', filters],
     queryFn: async () => {
+      console.log('Fetching storage facilities...');
       
       // Direct query to storage facilities table
       const { data: allData, error } = await supabase
@@ -121,12 +125,21 @@ export const useStorageFacilities = (filters: FilterState) => {
         priceRange: filters.priceRange
       });
       
+      console.log('Facilities query result:', { 
+        dataLength: allData?.length, 
+        error: error?.message || error,
+        firstFacility: allData?.[0]
+      });
+      
       if (error) {
         console.error('Supabase query error:', error);
         throw error;
       }
       
-      if (!allData) return [];
+      if (!allData) {
+        console.log('No data returned from query');
+        return [];
+      }
 
       // Apply state filter if selected
       let filteredData = allData;
