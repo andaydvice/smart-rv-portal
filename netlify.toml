@@ -100,9 +100,9 @@
     X-Deployment-Version = "revolutionising-20250830"
     X-Cache-Buster = "force-refresh"
     # Content Security Policy - Allow necessary resources for RV tech site
-    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://tagmanager.google.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https: blob:; connect-src 'self' https://api.mapbox.com https://www.google-analytics.com https://analytics.google.com *.supabase.co; frame-src 'self' https://www.google.com; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self';"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://tagmanager.google.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https: blob:; connect-src 'self' https://api.mapbox.com https://www.google-analytics.com https://analytics.google.com *.supabase.co; frame-src 'self' https://www.google.com https://adilo.bigcommand.com; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self';"
     # Security headers
-    X-Frame-Options = "DENY"
+    X-Frame-Options = "SAMEORIGIN"
     X-Content-Type-Options = "nosniff"
     X-XSS-Protection = "1; mode=block"
     Referrer-Policy = "strict-origin-when-cross-origin"
