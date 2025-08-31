@@ -128,8 +128,11 @@ export const removeUnwantedMapElements = () => {
       });
     });
     
-    // Log count of found elements for debugging
-    console.log(`Found ${document.querySelectorAll('.gm-style img[src*="marker"]').length} markers to make visible`);
+    // Log count of found elements for debugging (only if count changed)
+    const markerCount = document.querySelectorAll('.gm-style img[src*="marker"]').length;
+    if (markerCount > 0) {
+      console.log(`Found ${markerCount} markers to make visible`);
+    }
   };
   
   // Run immediately and also set interval to catch any dynamically added elements

@@ -1,4 +1,3 @@
-
 import { STATE_NAME_MAP, areStatesEquivalent } from './stateNameUtils';
 
 /**
@@ -18,57 +17,70 @@ export const forceMapMarkersVisible = () => {
   }, 120000);
 };
 
+// Add debounce to prevent spam
+let markerFixTimeout: NodeJS.Timeout | null = null;
+let lastMarkerCount = -1;
+
 /**
- * Fix marker visibility issues
+ * Fix marker visibility issues with debouncing
  */
 const fixMarkers = () => {
-  // Use a more comprehensive selector to find ALL marker types
-  const markers = document.querySelectorAll(
-    '.mapboxgl-marker, .custom-marker, .emergency-marker, .direct-marker, [data-marker="true"], .marker'
-  );
-  const isDev = import.meta.env.DEV;
-  if (isDev && markers.length > 0) {
-    console.log(`Found ${markers.length} markers to make visible`);
+  // Debounce the function to prevent spam
+  if (markerFixTimeout) {
+    clearTimeout(markerFixTimeout);
   }
   
-  if (markers.length === 0) {
-    return;
-  }
-  
-  // Track how many markers we've modified
-  let modifiedCount = 0;
-  
-  markers.forEach(marker => {
-    if (marker instanceof HTMLElement) {
-      const wasVisible = marker.style.visibility === 'visible' && 
-                        marker.style.display === 'block' &&
-                        marker.style.opacity === '1';
-      
-      marker.style.visibility = 'visible';
-      marker.style.display = 'block';
-      marker.style.opacity = '1';
-      marker.style.zIndex = '1000';
-      
-      // Set data attribute to track that we've fixed this marker
-      if (!marker.hasAttribute('data-forced-visible')) {
-        marker.setAttribute('data-forced-visible', 'true');
-        modifiedCount++;
+  markerFixTimeout = setTimeout(() => {
+    // Use a more comprehensive selector to find ALL marker types
+    const markers = document.querySelectorAll(
+      '.mapboxgl-marker, .custom-marker, .emergency-marker, .direct-marker, [data-marker="true"], .marker'
+    );
+    
+    // Only log if count changed to reduce spam
+    if (markers.length !== lastMarkerCount && markers.length > 0) {
+      console.log(`Found ${markers.length} markers to make visible`);
+      lastMarkerCount = markers.length;
+    }
+    
+    if (markers.length === 0) {
+      return;
+    }
+    
+    // Track how many markers we've modified
+    let modifiedCount = 0;
+
+    markers.forEach(marker => {
+      if (marker instanceof HTMLElement) {
+        marker.style.visibility = 'visible';
+        marker.style.display = 'block';
+        marker.style.opacity = '1';
+        marker.style.zIndex = '1000';
+        
+        // Set data attribute to track that we've fixed this marker
+        if (!marker.hasAttribute('data-forced-visible')) {
+          marker.setAttribute('data-forced-visible', 'true');
+          modifiedCount++;
+        }
       }
+    });
+    
+    const isDev = import.meta.env.DEV;
+    if (isDev && modifiedCount > 0) {
+      console.log(`Modified visibility of ${modifiedCount} markers`);
     }
-  });
-  
-  if (isDev && modifiedCount > 0) {
-    console.log(`Modified visibility of ${modifiedCount} markers`);
-  }
-  
-  // Check for state-specific markers
-  const selectedState = document.querySelector('[data-selected-state]')?.getAttribute('data-selected-state');
-  if (selectedState) {
-    if (isDev) {
-      console.log(`Checking markers for selected state: ${selectedState}`);
-    }
-    checkStateSpecificMarkers(selectedState);
-  }
+    
+    // Check for state-specific markers after a delay
+    setTimeout(() => {
+      const selectedState = document.querySelector('[data-selected-state]')?.getAttribute('data-selected-state');
+      if (selectedState) {
+        const isDev = import.meta.env.DEV;
+        if (isDev) {
+          console.log(`Checking markers for selected state: ${selectedState}`);
+        }
+        checkStateSpecificMarkers(selectedState);
+      }
+    }, 150);
+  }, 100); // Debounce by 100ms
 };
 
 /**

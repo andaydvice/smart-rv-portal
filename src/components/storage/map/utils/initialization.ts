@@ -45,7 +45,15 @@ export const createMapInstance = (
   center: [number, number] = [-98.5795, 39.8283],
   zoom: number = 3
 ): mapboxgl.Map => {
-  console.log('Setting up mapbox with token', mapToken.substring(0, 5) + '...');
+  // Validate token first to prevent substring errors
+  if (!mapToken || mapToken === 'null' || mapToken === 'undefined' || typeof mapToken !== 'string') {
+    console.error('Invalid Mapbox token:', mapToken);
+    throw new Error('Mapbox token is required and must be a valid string');
+  }
+  
+  // Safe token preview for logging
+  const tokenPreview = mapToken.substring(0, 5) + '...';
+  console.log('Setting up mapbox with token', tokenPreview);
   
   // Set the token
   mapboxgl.accessToken = mapToken;
