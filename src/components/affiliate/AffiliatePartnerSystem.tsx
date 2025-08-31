@@ -316,7 +316,7 @@ export const AffiliatePartnerCard: React.FC<AffiliatePartnerCardProps> = ({
   const displayButtonText = buttonText || `Visit ${partnerData.name}`;
 
   return (
-    <div className={`bg-[#131a2a] border border-gray-600 rounded-lg p-6 h-full flex flex-col ${className}`}>
+    <div className={`bg-[#131a2a] border border-gray-600 rounded-lg p-6 pb-8 h-full flex flex-col ${className}`}>
       <h3 className="text-lg font-semibold text-white mb-3">{displayTitle}</h3>
       <p className="text-gray-300 text-sm mb-4 flex-grow">{displayDescription}</p>
       
