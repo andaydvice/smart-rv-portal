@@ -50,12 +50,16 @@ const OpenStreetMapView: React.FC<OpenStreetMapViewProps> = ({
       if (!mapRef.current || mapInstanceRef.current) return;
 
       // Initialize map centered on USA
-      const map = window.L.map(mapRef.current).setView([39.8283, -98.5795], 4);
+      const map = window.L.map(mapRef.current, {
+        zoomControl: true,
+        scrollWheelZoom: true
+      }).setView([39.8283, -98.5795], 4);
 
-      // Add OpenStreetMap tiles
-      window.L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '© OpenStreetMap contributors',
-        maxZoom: 19
+      // Use CartoDB dark theme tiles for better aesthetics
+      window.L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+        attribution: '© OpenStreetMap contributors, © CartoDB',
+        maxZoom: 19,
+        subdomains: 'abcd'
       }).addTo(map);
 
       mapInstanceRef.current = map;
@@ -71,6 +75,23 @@ const OpenStreetMapView: React.FC<OpenStreetMapViewProps> = ({
       });
       markersRef.current = [];
 
+      // Create custom marker icon
+      const customIcon = window.L.divIcon({
+        className: 'custom-marker',
+        html: `<div style="
+          background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+          width: 30px;
+          height: 30px;
+          border-radius: 50% 50% 50% 0;
+          transform: rotate(-45deg);
+          border: 2px solid white;
+          box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        "></div>`,
+        iconSize: [30, 30],
+        iconAnchor: [15, 30],
+        popupAnchor: [0, -30]
+      });
+
       // Add facility markers
       facilities.forEach(facility => {
         if (!facility.latitude || !facility.longitude) return;
@@ -78,7 +99,7 @@ const OpenStreetMapView: React.FC<OpenStreetMapViewProps> = ({
         const marker = window.L.marker([
           Number(facility.latitude),
           Number(facility.longitude)
-        ]).addTo(mapInstanceRef.current);
+        ], { icon: customIcon }).addTo(mapInstanceRef.current);
 
         // Create popup content
         const popupContent = `
@@ -131,6 +152,23 @@ const OpenStreetMapView: React.FC<OpenStreetMapViewProps> = ({
       });
       markersRef.current = [];
 
+      // Create custom marker icon for updates
+      const customIcon = window.L.divIcon({
+        className: 'custom-marker',
+        html: `<div style="
+          background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+          width: 30px;
+          height: 30px;
+          border-radius: 50% 50% 50% 0;
+          transform: rotate(-45deg);
+          border: 2px solid white;
+          box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        "></div>`,
+        iconSize: [30, 30],
+        iconAnchor: [15, 30],
+        popupAnchor: [0, -30]
+      });
+
       // Add new markers
       facilities.forEach(facility => {
         if (!facility.latitude || !facility.longitude) return;
@@ -138,7 +176,7 @@ const OpenStreetMapView: React.FC<OpenStreetMapViewProps> = ({
         const marker = window.L.marker([
           Number(facility.latitude),
           Number(facility.longitude)
-        ]).addTo(mapInstanceRef.current);
+        ], { icon: customIcon }).addTo(mapInstanceRef.current);
 
         const popupContent = `
           <div style="min-width: 200px;">

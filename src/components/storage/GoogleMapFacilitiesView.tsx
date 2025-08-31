@@ -26,7 +26,8 @@ const GoogleMapFacilitiesView: React.FC<GoogleMapFacilitiesViewProps> = ({
   selectedState
 }) => {
   const [currentZoom, setCurrentZoom] = useState<number>(4);
-  const [mapProvider, setMapProvider] = useState<'google' | 'google-direct' | 'osm'>('google');
+  // Start with OpenStreetMap since Google Maps is having 503 errors
+  const [mapProvider, setMapProvider] = useState<'google' | 'google-direct' | 'osm'>('osm');
   const [loadAttempts, setLoadAttempts] = useState(0);
   const [mapError, setMapError] = useState(false);
   
@@ -37,7 +38,7 @@ const GoogleMapFacilitiesView: React.FC<GoogleMapFacilitiesViewProps> = ({
         console.log('Google Maps taking too long, trying direct loader...');
         setMapProvider('google-direct');
         setLoadAttempts(1);
-      }, 3000);
+      }, 2000); // Reduced to 2 seconds for faster fallback
       
       return () => clearTimeout(timer);
     } else if (mapProvider === 'google-direct' && loadAttempts === 1) {
@@ -45,7 +46,7 @@ const GoogleMapFacilitiesView: React.FC<GoogleMapFacilitiesViewProps> = ({
         console.log('Direct loader failed, switching to OpenStreetMap...');
         setMapProvider('osm');
         setLoadAttempts(2);
-      }, 3000);
+      }, 2000); // Reduced to 2 seconds for faster fallback
       
       return () => clearTimeout(timer);
     }
