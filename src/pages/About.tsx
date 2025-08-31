@@ -7,6 +7,7 @@ import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliat
 import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
 import SEO from "@/components/seo/SEO";
 import { organizationSchema, faqSchema } from "@/components/seo/schemas";
+import { ADILIOEmbed } from "@/components/ui/ADILIOEmbed";
 
 
 const About = () => {
@@ -41,14 +42,17 @@ const About = () => {
           ])
         ]}
       />
-      {/* Hero Section with Background Image */}
+      {/* Hero Section with Background Video */}
       <div className="relative w-full h-[70vh] min-h-[500px] overflow-hidden">
-        {/* Hero Image */}
-        <img
-          src="/lovable-uploads/Luxury_RV_Living-min.jpg"
-          alt="Smart RV Technology Hub - About Us"
-          className="absolute inset-0 w-full h-full object-cover"
-          loading="eager"
+        {/* ADILIO Background Video */}
+        <ADILIOEmbed
+          embedUrl="https://adilo.bigcommand.com/watch/DVjquwNK"
+          title="Smart RV Technology Hub - About Us"
+          className="absolute inset-0 w-full h-full"
+          autoPlay={true}
+          muted={true}
+          loop={true}
+          fallbackImage="/lovable-uploads/Luxury_RV_Living-min.jpg"
         />
         
         {/* Dark overlay for text readability */}
