@@ -44,6 +44,7 @@ const MapViewContainer: React.FC<MapViewContainerProps> = ({
           onMarkerClick={onMarkerClick}
           apiKey={googleMapsKey}
           selectedState={selectedState}
+          useGoogleMaps={useGoogleMaps}
         />
       ) : (
         <Card className="h-[400px] md:h-[650px] bg-[#080F1F] relative overflow-visible border-gray-700 map-container">
