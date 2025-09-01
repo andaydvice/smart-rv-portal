@@ -15,6 +15,7 @@ import TripImpact from "@/components/weather/TripImpact";
 import HeaderImage from "@/components/weather/HeaderImage";
 import WeatherCardsSection from "@/components/weather/WeatherCardsSection";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
+import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
 
 const WeatherDashboard = () => {
   // Scroll to top on component mount
@@ -152,6 +153,8 @@ const WeatherDashboard = () => {
             ]}
             gridCols="3"
           />
+          
+          <AffiliateDisclosure className="mt-8" />
         </div>
       </div>
     </Layout>

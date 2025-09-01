@@ -7,6 +7,7 @@ import SecurityVerificationLogs from "@/components/auth/SecurityVerificationLogs
 import { Shield, Lock, History } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
+import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
 
 const AccountPage = () => {
   const { user } = useAuth();
@@ -87,6 +88,8 @@ const AccountPage = () => {
             gridCols="3"
           />
         </div>
+        
+        <AffiliateDisclosure className="mt-8" />
       </div>
     </div>
   );

@@ -7,6 +7,7 @@ import FeaturesSection from "../components/voice-control/FeaturesSection";
 // MODIFIED: Removed Smartphone and Button imports
 import Layout from "@/components/layout/Layout";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
+import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
 
 const VoiceControl = () => {
   console.log("VoiceControl component rendering");
@@ -67,6 +68,8 @@ const VoiceControl = () => {
               gridCols="2"
               className="py-16"
             />
+            
+            <AffiliateDisclosure className="py-8" />
           </div>
         </div>
       </main>
