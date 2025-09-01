@@ -1,7 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { ArrowLeft, Home, Calculator, MapPin, Cloud } from "lucide-react";
+import { ArrowLeft, Home, Calculator, MapPin, Cloud, LogOut } from "lucide-react";
 import { useAuth } from "@/components/auth/AuthContext";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
 
 interface DashboardHeaderProps {
   title: string;
@@ -11,6 +13,23 @@ interface DashboardHeaderProps {
 
 const DashboardHeader = ({ title, description, showBackToMain = true }: DashboardHeaderProps) => {
   const { user } = useAuth();
+  const { toast } = useToast();
+
+  const handleLogout = async () => {
+    try {
+      await supabase.auth.signOut();
+      toast({
+        title: "Logged out successfully",
+        description: "You have been logged out of your account",
+      });
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to log out. Please try again.",
+        variant: "destructive",
+      });
+    }
+  };
 
   return (
     <div className="mb-8">
@@ -35,6 +54,13 @@ const DashboardHeader = ({ title, description, showBackToMain = true }: Dashboar
             <Home className="h-4 w-4" />
             <span className="hidden sm:inline">Dashboard Home</span>
           </Link>
+          <button
+            onClick={handleLogout}
+            className="flex items-center gap-2 text-[#E2E8FF] hover:text-connectivity-accent transition-colors text-sm px-3 py-2 rounded-md"
+          >
+            <LogOut className="h-4 w-4" />
+            <span>Logout</span>
+          </button>
         </div>
       </div>
 

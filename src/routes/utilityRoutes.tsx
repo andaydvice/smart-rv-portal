@@ -29,9 +29,9 @@ const RVAppsHub = lazy(() => import("../pages/RVAppsHub"));
 const PerformanceDashboard = lazy(() => import("../pages/admin/PerformanceDashboard"));
 
 // Protected user areas
-const UserDashboard = lazy(() => import("@/pages/user/Dashboard"));
-const SavedCalculations = lazy(() => import("@/pages/user/SavedCalculations"));
-const UserFavorites = lazy(() => import("@/pages/user/UserFavorites"));
+const UserDashboard = lazy(() => import("../pages/user/Dashboard"));
+const SavedCalculations = lazy(() => import("../pages/user/SavedCalculations"));
+const UserFavorites = lazy(() => import("../pages/user/UserFavorites"));
 
 const utilityRoutes = [
   {
