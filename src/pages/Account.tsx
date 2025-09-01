@@ -6,8 +6,6 @@ import PasswordStrengthSettings from "@/components/auth/PasswordStrengthSettings
 import SecurityVerificationLogs from "@/components/auth/SecurityVerificationLogs";
 import { Shield, Lock, History } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
-import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
 
 const AccountPage = () => {
   const { user } = useAuth();
@@ -60,36 +58,6 @@ const AccountPage = () => {
             </div>
           </TabsContent>
         </Tabs>
-        
-        <div className="mt-16">
-          <OptimizedAffiliateGrid
-            title="Recommended RV Services"
-            subtitle="These are partner recommendations to help enhance your RV experience"
-            partners={[
-              {
-                partner: 'goodsam',
-                title: 'Good Sam Membership',
-                description: 'Save on camping, fuel, and RV services while getting 24/7 roadside assistance.',
-                features: ['10% camping discounts', '24/7 roadside assistance', 'Fuel savings', 'Emergency support']
-              },
-              {
-                partner: 'rvlife',
-                title: 'RV LIFE Pro',
-                description: 'Premium trip planning tools and exclusive campground access for serious RV travelers.',
-                features: ['Advanced trip planner', 'Exclusive campgrounds', 'Expert travel tips', 'Route optimization']
-              },
-              {
-                partner: 'rvshare',
-                title: 'RVshare Hosting',
-                description: 'Earn income by renting your RV when not in use, with full insurance coverage.',
-                features: ['Earn extra income', 'Insurance included', 'Easy booking system', 'Host support']
-              }
-            ]}
-            gridCols="3"
-          />
-        </div>
-        
-        <AffiliateDisclosure className="mt-8" />
       </div>
     </div>
   );
