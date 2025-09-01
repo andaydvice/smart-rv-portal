@@ -1,10 +1,25 @@
 
-import React, { Suspense, lazy } from 'react';
+import React, { Suspense, lazy, useState } from 'react';
 import { Container } from '@/components/ui/container';
 import { StorageFacility } from './types';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { AlertCircle, MapPin, Phone, Star } from 'lucide-react';
-const EnhancedGoogleMap = lazy(() => import('../map/EnhancedGoogleMap'));
+import MapFallback from '../map/MapFallback';
+
+// Enhanced error boundary for map loading
+const EnhancedGoogleMap = lazy(() => 
+  import('../map/EnhancedGoogleMap')
+    .then(module => ({ default: module.default }))
+    .catch((error) => {
+      console.error('Failed to load EnhancedGoogleMap:', error);
+      // Return a fallback component
+      return { 
+        default: ({ location, ...props }: any) => (
+          <MapFallback location={location} error={error} />
+        )
+      };
+    })
+);
 
 interface LocationPreviewSectionProps {
   mapToken: string;
@@ -12,6 +27,8 @@ interface LocationPreviewSectionProps {
 }
 
 const LocationPreviewSection: React.FC<LocationPreviewSectionProps> = ({ mapToken, featuredLocation }) => {
+  const [mapError, setMapError] = useState<Error | null>(null);
+  
   // Validate that we have required fields for the featured location
   const isValidFeaturedLocation = featuredLocation && featuredLocation.id && featuredLocation.name;
   const googleMapsKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
@@ -125,23 +142,30 @@ const LocationPreviewSection: React.FC<LocationPreviewSectionProps> = ({ mapToke
             
             {/* Right side: Enhanced Google Map with persistent markers */}
             <div className="map-container-persistent">
-              <Suspense fallback={<div className="h-[350px] rounded-lg border border-[#1a202c] bg-[#091020]/60 flex items-center justify-center text-gray-400">Loading map…</div>}>
-                <EnhancedGoogleMap 
-                  apiKey={googleMapsKey}
-                  location={{
-                    lat: featuredLocation.latitude,
-                    lng: featuredLocation.longitude
-                  }}
-                  onMapLoad={handleMapLoad}
-                  facilities={[{
-                    name: featuredLocation.name,
-                    address: `${featuredLocation.address}, ${featuredLocation.city}, ${featuredLocation.state}`,
-                    rating: featuredLocation.avg_rating,
-                    phone: featuredLocation.contact_phone,
-                    description: "Premium indoor RV storage facility",
-                    features: getFacilityFeatures(featuredLocation)
-                  }]}
-                />
+              <Suspense fallback={<MapFallback location={{ lat: featuredLocation.latitude, lng: featuredLocation.longitude }} />}>
+                {googleMapsKey ? (
+                  <EnhancedGoogleMap 
+                    apiKey={googleMapsKey}
+                    location={{
+                      lat: featuredLocation.latitude,
+                      lng: featuredLocation.longitude
+                    }}
+                    onMapLoad={handleMapLoad}
+                    facilities={[{
+                      name: featuredLocation.name,
+                      address: `${featuredLocation.address}, ${featuredLocation.city}, ${featuredLocation.state}`,
+                      rating: featuredLocation.avg_rating,
+                      phone: featuredLocation.contact_phone,
+                      description: "Premium indoor RV storage facility",
+                      features: getFacilityFeatures(featuredLocation)
+                    }]}
+                  />
+                ) : (
+                  <MapFallback 
+                    location={{ lat: featuredLocation.latitude, lng: featuredLocation.longitude }} 
+                    error={new Error('Google Maps API key not configured')}
+                  />
+                )}
               </Suspense>
             </div>
           </div>
