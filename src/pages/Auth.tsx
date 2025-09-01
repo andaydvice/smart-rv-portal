@@ -29,7 +29,7 @@ const Auth = () => {
     // Check if this is a password reset link and redirect immediately
     if (code && type === 'recovery') {
       console.log("Password reset detected, redirecting to reset page");
-      navigate(`/reset-password?code=${encodeURIComponent(code)}&type=${encodeURIComponent(type)}`);
+      navigate(`/reset-password?code=${encodeURIComponent(code)}&type=${encodeURIComponent(type)}`, { replace: true });
       return;
     }
     
