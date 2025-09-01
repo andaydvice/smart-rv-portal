@@ -5,7 +5,6 @@ import Navbar from "../Navbar";
 import { RouteOptimizer } from "@/hooks/useRouteOptimization";
 import { MobileGestureHandler } from "../mobile/MobileGestureHandler";
 import { useMobileOptimization } from "@/hooks/useMobileOptimization";
-import AffiliateDisclosure from "../affiliate/AffiliateDisclosure";
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   const { isMobile, isTouch } = useMobileOptimization();
@@ -28,7 +27,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
       >
         {children}
       </main>
-      <AffiliateDisclosure compact className="mx-4 mb-4" />
+      
       <Footer2 />
     </MobileGestureHandler>
   );
