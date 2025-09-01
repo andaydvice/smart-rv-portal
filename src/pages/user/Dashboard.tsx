@@ -5,6 +5,7 @@ import { Calculator, Heart, Settings, Activity } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useCalculatorHistory } from "@/hooks/useCalculatorHistory";
 import { useFavorites } from "@/components/storage/useFavorites";
+import DashboardHeader from "@/components/dashboard/DashboardHeader";
 
 const UserDashboard = () => {
   const { user } = useAuth();
@@ -14,14 +15,13 @@ const UserDashboard = () => {
   const recentCalculations = history.slice(0, 3);
 
   return (
-    <div className="min-h-screen bg-[#080F1F] py-12 px-4">
+    <div className="py-8 px-4">
       <div className="max-w-6xl mx-auto">
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-white mb-2">
-            Welcome back, {user?.email?.split('@')[0]}!
-          </h1>
-          <p className="text-[#E2E8FF]">Your personalized RV dashboard</p>
-        </div>
+        <DashboardHeader 
+          title={`Welcome back, ${user?.email?.split('@')[0]}!`}
+          description="Your personalized RV dashboard"
+          showBackToMain={true}
+        />
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           <Card className="bg-[#091020] border-gray-700">

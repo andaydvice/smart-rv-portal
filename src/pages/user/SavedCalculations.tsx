@@ -4,6 +4,7 @@ import { Calculator, Trash2, Calendar, Filter } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import DashboardHeader from "@/components/dashboard/DashboardHeader";
 
 const SavedCalculations = () => {
   const { history, deleteCalculation, isDeleting } = useCalculatorHistory();
@@ -30,12 +31,12 @@ const SavedCalculations = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#080F1F] py-12 px-4">
+    <div className="py-8 px-4">
       <div className="max-w-6xl mx-auto">
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-white mb-2">Saved Calculations</h1>
-          <p className="text-[#E2E8FF]">View and manage your calculation history</p>
-        </div>
+        <DashboardHeader 
+          title="Saved Calculations"
+          description="View and manage your calculation history"
+        />
 
         <div className="flex flex-col sm:flex-row gap-4 mb-6">
           <div className="flex items-center gap-2">

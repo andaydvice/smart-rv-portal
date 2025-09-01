@@ -3,6 +3,7 @@ import React, { lazy, Suspense } from "react";
 import { MinimalLoader } from "@/components/ui/MinimalLoader";
 import { RouteTransition } from "@/components/ui/transitions/RouteTransition";
 import ProtectedRoute from "@/components/auth/ProtectedRoute";
+import Layout from "@/components/layout/Layout";
 
 // High-traffic routes - synchronous imports
 import Calculators from "../pages/Calculators";
@@ -30,7 +31,7 @@ const PerformanceDashboard = lazy(() => import("../pages/admin/PerformanceDashbo
 // Protected user areas
 const UserDashboard = lazy(() => import("@/pages/user/Dashboard"));
 const SavedCalculations = lazy(() => import("@/pages/user/SavedCalculations"));
-const UserFavorites = lazy(() => import("@/pages/user/Favorites"));
+const UserFavorites = lazy(() => import("@/pages/user/UserFavorites"));
 
 const utilityRoutes = [
   {
@@ -143,37 +144,43 @@ const utilityRoutes = [
   {
     path: "/dashboard",
     element: (
-      <Suspense fallback={<MinimalLoader />}>
-        <RouteTransition>
-          <ProtectedRoute>
-            <UserDashboard />
-          </ProtectedRoute>
-        </RouteTransition>
-      </Suspense>
+      <ProtectedRoute>
+        <Layout>
+          <RouteTransition>
+            <Suspense fallback={<MinimalLoader />}>
+              <UserDashboard />
+            </Suspense>
+          </RouteTransition>
+        </Layout>
+      </ProtectedRoute>
     ),
   },
   {
     path: "/user/calculations",
     element: (
-      <Suspense fallback={<MinimalLoader />}>
-        <RouteTransition>
-          <ProtectedRoute>
-            <SavedCalculations />
-          </ProtectedRoute>
-        </RouteTransition>
-      </Suspense>
+      <ProtectedRoute>
+        <Layout>
+          <RouteTransition>
+            <Suspense fallback={<MinimalLoader />}>
+              <SavedCalculations />
+            </Suspense>
+          </RouteTransition>
+        </Layout>
+      </ProtectedRoute>
     ),
   },
   {
     path: "/user/favorites",
     element: (
-      <Suspense fallback={<MinimalLoader />}>
-        <RouteTransition>
-          <ProtectedRoute>
-            <UserFavorites />
-          </ProtectedRoute>
-        </RouteTransition>
-      </Suspense>
+      <ProtectedRoute>
+        <Layout>
+          <RouteTransition>
+            <Suspense fallback={<MinimalLoader />}>
+              <UserFavorites />
+            </Suspense>
+          </RouteTransition>
+        </Layout>
+      </ProtectedRoute>
     ),
   },
   {
