@@ -101,15 +101,19 @@ const Auth = () => {
               <ul className="space-y-4 text-left text-white">
                 <li className="flex items-start gap-3">
                   <span className="text-[#5B9BD5] text-lg">✓</span>
-                  <span>Secure account management and password protection</span>
+                  <span>Save calculator results and access them anywhere</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="text-[#5B9BD5] text-lg">✓</span>
-                  <span>Two-factor authentication for enhanced security</span>
+                  <span>Personal preferences and default units</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="text-[#5B9BD5] text-lg">✓</span>
-                  <span>Account security settings and password management</span>
+                  <span>Bookmark favorite storage facilities and locations</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="text-[#5B9BD5] text-lg">✓</span>
+                  <span>Secure account with 2FA protection</span>
                 </li>
               </ul>
             </div>
@@ -124,7 +128,7 @@ const Auth = () => {
             </Card>
             
             <div className="text-sm text-white px-4">
-              <p>All RV calculators and tools are available to everyone. Registration provides basic account security features. We respect your privacy and will never share your information.</p>
+              <p>All RV calculators and tools are available to everyone. Registration unlocks data persistence, saved preferences, and personalized features. We respect your privacy and will never share your information.</p>
             </div>
           </div>
         </div>

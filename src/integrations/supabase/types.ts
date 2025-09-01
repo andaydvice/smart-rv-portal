@@ -38,6 +38,36 @@ export type Database = {
         }
         Relationships: []
       }
+      calculator_history: {
+        Row: {
+          calculator_type: string
+          created_at: string
+          id: string
+          inputs: Json
+          results: Json
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          calculator_type: string
+          created_at?: string
+          id?: string
+          inputs: Json
+          results: Json
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          calculator_type?: string
+          created_at?: string
+          id?: string
+          inputs?: Json
+          results?: Json
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       content_analysis: {
         Row: {
           ab_test_data: Json | null
@@ -525,6 +555,36 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      user_preferences: {
+        Row: {
+          created_at: string
+          default_units: Json | null
+          id: string
+          notifications: Json | null
+          updated_at: string
+          user_id: string
+          weather_locations: Json | null
+        }
+        Insert: {
+          created_at?: string
+          default_units?: Json | null
+          id?: string
+          notifications?: Json | null
+          updated_at?: string
+          user_id: string
+          weather_locations?: Json | null
+        }
+        Update: {
+          created_at?: string
+          default_units?: Json | null
+          id?: string
+          notifications?: Json | null
+          updated_at?: string
+          user_id?: string
+          weather_locations?: Json | null
+        }
+        Relationships: []
       }
       user_profiles: {
         Row: {
