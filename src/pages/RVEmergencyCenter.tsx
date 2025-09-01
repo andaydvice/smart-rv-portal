@@ -238,7 +238,7 @@ const RVEmergencyCenter = () => {
           />
 
           {/* Affiliate Disclosure */}
-          <AffiliateDisclosure compact />
+          <AffiliateDisclosure />
         </Container>
       </div>
     </Layout>

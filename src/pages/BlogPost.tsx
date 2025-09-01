@@ -152,7 +152,7 @@ const BlogPost = () => {
           />
           
           {/* Affiliate disclosure */}
-          <AffiliateDisclosure compact />
+          <AffiliateDisclosure />
         </div>
         <Footer2 
           links={footerLinks}

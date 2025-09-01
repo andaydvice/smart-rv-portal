@@ -206,7 +206,7 @@ const About = () => {
               gridCols="3"
             />
             <div className="px-4">
-              <AffiliateDisclosure compact className="max-w-6xl mx-auto my-8" />
+              <AffiliateDisclosure className="max-w-6xl mx-auto my-8" />
             </div>
 
             {/* Call to Action */}

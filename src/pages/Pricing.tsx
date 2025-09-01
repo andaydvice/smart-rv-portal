@@ -223,7 +223,7 @@ const Pricing = () => {
                 gridCols="2"
               />
               <div className="px-4">
-                <AffiliateDisclosure compact className="max-w-6xl mx-auto my-8" />
+                <AffiliateDisclosure className="max-w-6xl mx-auto my-8" />
               </div>
             </div>
           </motion.div>

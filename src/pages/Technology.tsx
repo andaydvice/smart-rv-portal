@@ -165,7 +165,7 @@ const Technology = () => {
               gridCols="3"
             />
             <div className="px-4">
-              <AffiliateDisclosure compact className="max-w-7xl mx-auto my-8" />
+              <AffiliateDisclosure className="max-w-7xl mx-auto my-8" />
             </div>
           </div>
         </div>

@@ -327,7 +327,7 @@ const SolarPowerGuide = () => {
           />
 
           {/* Affiliate Disclosure */}
-          <AffiliateDisclosure compact />
+          <AffiliateDisclosure />
         </Container>
       </div>
     </Layout>
