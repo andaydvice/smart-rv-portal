@@ -4,33 +4,16 @@ import { useAuth } from '@/components/auth/AuthContext';
 
 interface UserPreferences {
   id?: string;
-  weather_locations: Array<{
-    name: string;
-    lat: number;
-    lon: number;
-    country?: string;
-  }>;
-  default_units: {
-    distance: 'miles' | 'kilometers';
-    weight: 'lbs' | 'kg';
-    temperature: 'fahrenheit' | 'celsius';
-  };
-  notifications: {
-    email: boolean;
-    browser: boolean;
+  calculator_preferences: {
+    auto_save: boolean;
+    show_tips: boolean;
   };
 }
 
 const defaultPreferences: UserPreferences = {
-  weather_locations: [],
-  default_units: {
-    distance: 'miles',
-    weight: 'lbs',
-    temperature: 'fahrenheit'
-  },
-  notifications: {
-    email: true,
-    browser: false
+  calculator_preferences: {
+    auto_save: true,
+    show_tips: true
   }
 };
 
@@ -92,37 +75,10 @@ export const useUserPreferences = () => {
     }
   });
 
-  // Add weather location
-  const addWeatherLocation = (location: { name: string; lat: number; lon: number; country?: string }) => {
-    const currentLocations = preferences.weather_locations || [];
-    const exists = currentLocations.some(loc => 
-      loc.lat === location.lat && loc.lon === location.lon
-    );
-    
-    if (!exists) {
-      updatePreferences.mutate({
-        weather_locations: [...currentLocations, location]
-      });
-    }
-  };
-
-  // Remove weather location
-  const removeWeatherLocation = (locationToRemove: { lat: number; lon: number }) => {
-    const updatedLocations = (preferences.weather_locations || []).filter(loc => 
-      !(loc.lat === locationToRemove.lat && loc.lon === locationToRemove.lon)
-    );
-    
-    updatePreferences.mutate({
-      weather_locations: updatedLocations
-    });
-  };
-
   return {
     preferences,
     isLoading,
     updatePreferences: updatePreferences.mutate,
-    addWeatherLocation,
-    removeWeatherLocation,
     isUpdating: updatePreferences.isPending,
     isAuthenticated: !!user
   };

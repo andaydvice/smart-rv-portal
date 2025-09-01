@@ -29,7 +29,7 @@ const AccountPage = () => {
         <p className="text-[#E2E8FF] mb-8">Manage your security preferences and account information</p>
 
         <Tabs defaultValue="data" className="w-full">
-          <TabsList className="grid grid-cols-6 mb-8">
+          <TabsList className="grid grid-cols-4 mb-8">
             <TabsTrigger value="data" className="flex items-center gap-2">
               <Calculator className="h-4 w-4" />
               <span>My Data</span>
@@ -45,14 +45,6 @@ const AccountPage = () => {
             <TabsTrigger value="security" className="flex items-center gap-2">
               <Shield className="h-4 w-4" />
               <span>Security</span>
-            </TabsTrigger>
-            <TabsTrigger value="password" className="flex items-center gap-2">
-              <Lock className="h-4 w-4" />
-              <span>Password</span>
-            </TabsTrigger>
-            <TabsTrigger value="activity" className="flex items-center gap-2">
-              <History className="h-4 w-4" />
-              <span>Activity</span>
             </TabsTrigger>
           </TabsList>
           
@@ -90,17 +82,7 @@ const AccountPage = () => {
           <TabsContent value="security">
             <div className="space-y-6">
               <TwoFactorSettings />
-            </div>
-          </TabsContent>
-          
-          <TabsContent value="password">
-            <div className="space-y-6">
               <PasswordStrengthSettings />
-            </div>
-          </TabsContent>
-          
-          <TabsContent value="activity">
-            <div className="space-y-6">
               <SecurityVerificationLogs />
             </div>
           </TabsContent>
