@@ -1,6 +1,6 @@
 
 import { useEffect, useState } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation, useSearchParams } from 'react-router-dom';
 import { AuthForms } from '@/components/auth/AuthForms';
 import { useAuth } from '@/components/auth/AuthContext';
 import { Card } from '@/components/ui/card';
@@ -12,6 +12,7 @@ import ErrorDisplay from '@/components/error/ErrorDisplay';
 const Auth = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const [searchParams] = useSearchParams();
   const { user, loading, error: authError } = useAuth();
   const { error, handleError, resetError, isRecovering } = useErrorHandler();
   const [hasInitialized, setHasInitialized] = useState(false);
@@ -19,8 +20,19 @@ const Auth = () => {
   console.log("Auth page - Current auth state:", { user: user?.email || 'No user', loading, authError });
 
   const from = location.state?.from?.pathname || '/';
+  
+  // Check for password reset parameters
+  const code = searchParams.get('code');
+  const type = searchParams.get('type');
 
   useEffect(() => {
+    // Check if this is a password reset link and redirect immediately
+    if (code && type === 'recovery') {
+      console.log("Password reset detected, redirecting to reset page");
+      navigate(`/reset-password?code=${encodeURIComponent(code)}&type=${encodeURIComponent(type)}`);
+      return;
+    }
+    
     // Mark as initialized after first render to prevent flash of error state
     if (!hasInitialized) {
       setHasInitialized(true);
@@ -31,7 +43,7 @@ const Auth = () => {
       console.log("Auth page - Redirecting authenticated user to:", from);
       navigate(from);
     }
-  }, [user, navigate, from, hasInitialized]);
+  }, [user, navigate, from, hasInitialized, code, type]);
 
   // If we're still loading, show a loading state
   if (loading && !hasInitialized) {
