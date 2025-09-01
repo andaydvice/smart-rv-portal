@@ -3,6 +3,7 @@ import Navbar from "@/components/Navbar";
 import Layout from "@/components/layout/Layout";
 import { Shield, Lock, Bell, Camera, Smartphone, MapPin, BatteryCharging, KeyRound, Wrench } from "lucide-react";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
+import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
 import { Helmet } from 'react-helmet-async';
 
 const SecuritySystem = () => {
@@ -276,6 +277,8 @@ const SecuritySystem = () => {
             gridCols="2"
             className="mt-16"
           />
+          
+          <AffiliateDisclosure className="mt-8" />
 
         </div>
       </motion.div>
