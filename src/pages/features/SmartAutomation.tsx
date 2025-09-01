@@ -3,6 +3,7 @@ import { Home, WifiIcon, Cog, BatteryCharging } from "lucide-react";
 import Layout from "@/components/layout/Layout";
 import { useEffect } from "react";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
+import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
 import { VideoSection } from "@/components/ui/VideoSection";
 
 const SmartAutomation = () => {
@@ -118,6 +119,8 @@ const SmartAutomation = () => {
             gridCols="3"
             className="mt-16"
           />
+          
+          <AffiliateDisclosure className="mt-8" />
         </div>
       </motion.div>
     </Layout>

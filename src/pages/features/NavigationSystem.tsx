@@ -4,6 +4,7 @@ import Navbar from "@/components/Navbar";
 import { Navigation, Map, Compass, Radar } from "lucide-react";
 import Layout from "@/components/layout/Layout";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
+import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
 
 const NavigationSystem = () => {
   return (
@@ -92,6 +93,8 @@ const NavigationSystem = () => {
             gridCols="2"
             className="mt-16"
           />
+          
+          <AffiliateDisclosure className="mt-8" />
         </div>
       </motion.div>
     </Layout>

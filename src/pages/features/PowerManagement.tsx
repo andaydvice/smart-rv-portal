@@ -3,6 +3,7 @@ import Navbar from "@/components/Navbar";
 import { Battery, Sun, Zap, Activity } from "lucide-react";
 import Layout from "@/components/layout/Layout";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
+import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
 import { Helmet } from 'react-helmet-async';
 
 const PowerManagement = () => {
@@ -182,6 +183,8 @@ const PowerManagement = () => {
               ]}
               gridCols="2"
             />
+            
+            <AffiliateDisclosure className="mt-8" />
           </div>
         </div>
       </motion.div>

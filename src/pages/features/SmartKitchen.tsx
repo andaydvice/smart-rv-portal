@@ -7,6 +7,7 @@ import Layout from "@/components/layout/Layout";
 import SmartKitchenHeader from "@/components/features/smart-kitchen/SmartKitchenHeader";
 import KitchenComparisonTable from "@/components/features/smart-kitchen/KitchenComparisonTable";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
+import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
 import { useEffect } from "react";
 import { VideoSection } from "@/components/ui/VideoSection";
 
@@ -130,6 +131,8 @@ const SmartKitchen = () => {
             gridCols="3"
             className="mb-16"
           />
+          
+          <AffiliateDisclosure className="mb-8" />
 
           <div className="text-center">
             <Link to="/products">

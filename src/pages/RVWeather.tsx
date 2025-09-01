@@ -5,6 +5,7 @@ import Layout from "@/components/layout/Layout";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { scrollToTop } from "@/utils/scrollToTop";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
+import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
 import RVWeatherHero from "@/components/rv-weather/RVWeatherHero";
 import IntroSection from "@/components/rv-weather/IntroSection";
 import PlanningSection from "@/components/rv-weather/PlanningSection";
@@ -171,6 +172,8 @@ const RVWeather = () => {
               ]}
               gridCols="3"
             />
+            
+            <AffiliateDisclosure className="mt-8" />
           </section>
         </motion.div>
       </ScrollArea>

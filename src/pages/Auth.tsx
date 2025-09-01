@@ -9,6 +9,7 @@ import Layout from "@/components/layout/Layout";
 import { useErrorHandler } from '@/hooks/useErrorHandler';
 import ErrorDisplay from '@/components/error/ErrorDisplay';
 import { OptimizedAffiliateGrid } from '@/components/affiliate/OptimizedAffiliateGrid';
+import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
 
 const Auth = () => {
   const navigate = useNavigate();
@@ -165,6 +166,8 @@ const Auth = () => {
               ]}
               gridCols="3"
             />
+            
+            <AffiliateDisclosure className="mt-8" />
           </div>
         </div>
       </div>

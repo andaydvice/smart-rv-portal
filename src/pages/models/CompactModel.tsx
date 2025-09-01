@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar";
 import Layout from "@/components/layout/Layout";
 import { rvTypes } from "@/data/rvTypes";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
+import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
 import { Helmet } from "react-helmet-async";
 
 // Lazy load components that are not immediately visible
@@ -90,6 +91,8 @@ const CompactModel = () => {
               ]}
               gridCols="3"
             />
+            
+            <AffiliateDisclosure className="mt-8" />
           </div>
         </Suspense>
       </div>

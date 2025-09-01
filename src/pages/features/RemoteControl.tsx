@@ -13,6 +13,7 @@ import ControlInterfaceSection from "@/components/features/remote-control/Contro
 import CallToActionSection from "@/components/features/remote-control/CallToActionSection";
 import InterfaceDemoSection from "@/components/features/remote-control/InterfaceDemoSection";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
+import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
 
 const RemoteControl = () => {
   useEffect(() => {
@@ -111,6 +112,8 @@ const RemoteControl = () => {
             gridCols="3"
             className="mb-16"
           />
+          
+          <AffiliateDisclosure className="mb-8" />
 
           {/* Call to Action Section */}
           <CallToActionSection />

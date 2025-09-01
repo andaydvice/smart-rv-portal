@@ -4,6 +4,7 @@ import Navbar from "@/components/Navbar";
 import { Tv, Cast, Smartphone, Gamepad } from "lucide-react";
 import Layout from "@/components/layout/Layout";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
+import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
 
 const SmartTV = () => {
   return (
@@ -101,6 +102,8 @@ const SmartTV = () => {
               ]}
               gridCols="2"
             />
+            
+            <AffiliateDisclosure className="mt-8" />
           </div>
         </div>
       </motion.div>

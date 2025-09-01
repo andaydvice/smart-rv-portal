@@ -5,6 +5,7 @@ import Layout from "@/components/layout/Layout";
 import { Wifi, Globe, Shield, Zap } from "lucide-react";
 import ConnectivityGuide from "@/components/connectivity/ConnectivityGuide";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
+import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
 
 const InternetConnectivity = () => {
   return (
@@ -97,6 +98,8 @@ const InternetConnectivity = () => {
             gridCols="2"
             className="mt-16"
           />
+          
+          <AffiliateDisclosure className="mt-8" />
         </div>
       </motion.div>
     </Layout>

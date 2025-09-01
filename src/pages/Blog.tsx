@@ -8,6 +8,7 @@ import BlogGrid from "@/components/blog/BlogGrid";
 import FeaturedCategories from "@/components/blog/FeaturedCategories";
 import NewsletterSection from "@/components/blog/NewsletterSection";
 import Layout from "@/components/layout/Layout";
+import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
 
 import { Container } from "@/components/ui/container";
 
@@ -55,6 +56,8 @@ const Blog = () => {
           
           <FeaturedCategories />
           <NewsletterSection />
+          
+          <AffiliateDisclosure className="mt-8" />
         </Container>
       </div>
     </Layout>

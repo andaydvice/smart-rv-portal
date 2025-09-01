@@ -6,6 +6,7 @@ import { SearchCategory } from '@/components/search';
 import Layout from '@/components/layout/Layout';
 import { Button } from '@/components/ui/button';
 import { OptimizedAffiliateGrid } from '@/components/affiliate/OptimizedAffiliateGrid';
+import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
 
 interface SearchResultItem {
   id: string;
@@ -243,6 +244,8 @@ const SearchResults: React.FC = () => {
             ]}
             gridCols="3"
           />
+          
+          <AffiliateDisclosure className="mt-8" />
         </div>
       </div>
     </Layout>

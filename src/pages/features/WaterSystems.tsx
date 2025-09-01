@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Droplet } from "lucide-react";
 import Layout from "@/components/layout/Layout";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
+import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
 import { useEffect } from "react";
 import { VideoSection } from "@/components/ui/VideoSection";
 
@@ -133,6 +134,8 @@ const WaterSystems = () => {
               ]}
               gridCols="2"
             />
+            
+            <AffiliateDisclosure className="mt-8" />
           </div>
         </div>
       </motion.div>

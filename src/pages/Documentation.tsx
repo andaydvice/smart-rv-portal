@@ -12,6 +12,7 @@ import Layout from "@/components/layout/Layout";
 import { Container } from "@/components/ui/container";
 import { useEffect } from "react";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
+import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
 import { Helmet } from "react-helmet-async";
 
 // Preload these images as early as possible
@@ -146,6 +147,8 @@ const Documentation = () => {
                   ]}
                   gridCols="2"
                 />
+                
+                <AffiliateDisclosure className="mt-8" />
               </div>
             </div>
           </Container>

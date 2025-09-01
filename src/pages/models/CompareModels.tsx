@@ -10,6 +10,7 @@ import FeaturesComparisonTable from "@/components/models/compare/FeaturesCompari
 // import CallToAction from "@/components/models/compare/CallToAction";
 import models from "@/components/models/compare/ModelComparisonData";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
+import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
 import { Helmet } from "react-helmet-async";
 
 
@@ -116,6 +117,8 @@ const CompareModels = () => {
                 ]}
                 gridCols="3"
               />
+              
+              <AffiliateDisclosure className="mt-8" />
             </div>
           </div>
         </div>

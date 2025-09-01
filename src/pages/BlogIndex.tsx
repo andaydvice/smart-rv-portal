@@ -10,6 +10,7 @@ import BlogGrid from '../components/blog/BlogGrid';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Container } from '@/components/ui/container';
 import { OptimizedAffiliateGrid } from '@/components/affiliate/OptimizedAffiliateGrid';
+import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
 
 const BlogIndex = () => {
   const [activeCategory, setActiveCategory] = useState<'all' | 'tech' | 'travel'>('all');
@@ -81,6 +82,8 @@ const BlogIndex = () => {
               <div className="mt-16">
                 <NewsletterSection />
               </div>
+              
+              <AffiliateDisclosure className="mt-8" />
             </Container>
           </div>
         </motion.div>

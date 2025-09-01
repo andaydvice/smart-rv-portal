@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
+import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
 import { VideoSection } from "@/components/ui/VideoSection";
 
 const AutomatedDriving = () => {
@@ -91,6 +92,8 @@ const AutomatedDriving = () => {
             gridCols="2"
             className="mb-16"
           />
+          
+          <AffiliateDisclosure className="mb-8" />
 
           <div className="text-center mb-16">
             <Link to="/products">
