@@ -172,22 +172,22 @@ export type Database = {
       }
       login_attempts: {
         Row: {
+          email: string
           failed_attempts: number
           last_attempt_at: string
           lockout_until: string | null
-          user_id: string
         }
         Insert: {
+          email: string
           failed_attempts?: number
           last_attempt_at?: string
           lockout_until?: string | null
-          user_id: string
         }
         Update: {
+          email?: string
           failed_attempts?: number
           last_attempt_at?: string
           lockout_until?: string | null
-          user_id?: string
         }
         Relationships: []
       }
@@ -209,6 +209,36 @@ export type Database = {
           email?: string
           id?: string
           subscribed_at?: string
+        }
+        Relationships: []
+      }
+      rate_limits: {
+        Row: {
+          created_at: string | null
+          endpoint: string
+          id: string
+          ip_address: unknown | null
+          request_count: number | null
+          user_id: string | null
+          window_start: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          endpoint: string
+          id?: string
+          ip_address?: unknown | null
+          request_count?: number | null
+          user_id?: string | null
+          window_start?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          endpoint?: string
+          id?: string
+          ip_address?: unknown | null
+          request_count?: number | null
+          user_id?: string | null
+          window_start?: string | null
         }
         Relationships: []
       }
@@ -248,6 +278,42 @@ export type Database = {
           updated_at?: string
           use_count?: number
           user_id?: string
+        }
+        Relationships: []
+      }
+      security_events: {
+        Row: {
+          created_at: string | null
+          details: Json | null
+          event_type: string
+          id: string
+          ip_address: unknown | null
+          severity: string | null
+          user_agent: string | null
+          user_email: string | null
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          details?: Json | null
+          event_type: string
+          id?: string
+          ip_address?: unknown | null
+          severity?: string | null
+          user_agent?: string | null
+          user_email?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          details?: Json | null
+          event_type?: string
+          id?: string
+          ip_address?: unknown | null
+          severity?: string | null
+          user_agent?: string | null
+          user_email?: string | null
+          user_id?: string | null
         }
         Relationships: []
       }
@@ -1424,6 +1490,10 @@ export type Database = {
         Args: { _user_id: string }
         Returns: boolean
       }
+      is_admin_or_moderator: {
+        Args: Record<PropertyKey, never>
+        Returns: boolean
+      }
       json: {
         Args: { "": unknown }
         Returns: Json
@@ -1431,6 +1501,10 @@ export type Database = {
       jsonb: {
         Args: { "": unknown }
         Returns: Json
+      }
+      log_security_event: {
+        Args: { details?: Json; event_type: string; severity?: string }
+        Returns: undefined
       }
       longtransactionsenabled: {
         Args: Record<PropertyKey, never>
