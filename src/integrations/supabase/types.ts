@@ -859,7 +859,7 @@ export type Database = {
         Insert: {
           address?: string | null
           avg_rating?: number | null
-          basic_features?: never
+          basic_features?: Json | null
           city?: string | null
           id?: string | null
           latitude?: number | null
@@ -872,7 +872,7 @@ export type Database = {
         Update: {
           address?: string | null
           avg_rating?: number | null
-          basic_features?: never
+          basic_features?: Json | null
           city?: string | null
           id?: string | null
           latitude?: number | null
