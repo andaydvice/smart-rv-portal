@@ -8,8 +8,6 @@ import Navbar from '@/components/Navbar';
 import Layout from "@/components/layout/Layout";
 import { useErrorHandler } from '@/hooks/useErrorHandler';
 import ErrorDisplay from '@/components/error/ErrorDisplay';
-import { OptimizedAffiliateGrid } from '@/components/affiliate/OptimizedAffiliateGrid';
-import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
 
 const Auth = () => {
   const navigate = useNavigate();
@@ -107,15 +105,11 @@ const Auth = () => {
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="text-[#5B9BD5] text-lg">✓</span>
-                  <span>Monitor your account activity and security logs</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="text-[#5B9BD5] text-lg">✓</span>
                   <span>Two-factor authentication for enhanced security</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="text-[#5B9BD5] text-lg">✓</span>
-                  <span>Early access to new features as they become available</span>
+                  <span>Account security settings and password management</span>
                 </li>
               </ul>
             </div>
@@ -130,46 +124,11 @@ const Auth = () => {
             </Card>
             
             <div className="text-sm text-white px-4">
-              <p>All RV calculators and tools are available to everyone. Registration provides account security features and early access to new functionality. We respect your privacy and will never share your information.</p>
+              <p>All RV calculators and tools are available to everyone. Registration provides basic account security features. We respect your privacy and will never share your information.</p>
             </div>
           </div>
         </div>
 
-        {/* Member benefits and affiliate partnerships */}
-        <div className="mt-16 px-4">
-          <div className="max-w-4xl mx-auto">
-            <OptimizedAffiliateGrid
-              title="Unlock Premium RV Benefits"
-              subtitle="Join thousands of RV enthusiasts who save money and enhance their travel experience with these trusted partner benefits."
-              partners={[
-                {
-                  partner: 'goodsam',
-                  title: 'Good Sam Membership Perks',
-                  description: 'Save on camping, fuel, and RV services while getting 24/7 roadside assistance and emergency support.',
-                  features: ['10% camping discounts', '24/7 roadside assistance', 'Fuel savings'],
-                  buttonText: 'Join Good Sam'
-                },
-                {
-                  partner: 'rvlife',
-                  title: 'RV LIFE Pro Membership',
-                  description: 'Premium trip planning tools, exclusive campground access, and professional travel resources.',
-                  features: ['Advanced trip planner', 'Exclusive campgrounds', 'Expert travel tips'],
-                  buttonText: 'Get RV LIFE Pro'
-                },
-                {
-                  partner: 'rvshare',
-                  title: 'RVshare Host Benefits',
-                  description: 'Turn your RV into income when not in use, with insurance coverage and booking management tools.',
-                  features: ['Earn extra income', 'Insurance included', 'Easy booking system'],
-                  buttonText: 'Start Hosting'
-                }
-              ]}
-              gridCols="3"
-            />
-            
-            <AffiliateDisclosure className="mt-8" />
-          </div>
-        </div>
       </div>
     </Layout>
   );

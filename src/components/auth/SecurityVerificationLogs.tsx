@@ -21,63 +21,11 @@ const SecurityVerificationLogs = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Simulate loading logs from an API
-    const loadLogs = () => {
-      setLoading(true);
-      
-      // Mock data for demonstration purposes
-      // In a real app, this would be fetched from Supabase or another backend
-      setTimeout(() => {
-        const mockLogs: AuthLog[] = [
-          {
-            id: "1",
-            timestamp: new Date(),
-            event: "signin",
-            success: true,
-            ipAddress: "192.168.1.1",
-            device: "Chrome on Windows"
-          },
-          {
-            id: "2",
-            timestamp: new Date(Date.now() - 1000 * 60 * 60 * 24),
-            event: "verification",
-            success: true,
-            ipAddress: "192.168.1.1",
-            device: "Firefox on MacOS"
-          },
-          {
-            id: "3",
-            timestamp: new Date(Date.now() - 1000 * 60 * 60 * 24 * 2),
-            event: "password_update",
-            success: true,
-            ipAddress: "192.168.1.1",
-            device: "Safari on iOS"
-          },
-          {
-            id: "4",
-            timestamp: new Date(Date.now() - 1000 * 60 * 60 * 24 * 3),
-            event: "signin",
-            success: false,
-            ipAddress: "203.0.113.1",
-            device: "Unknown Device"
-          },
-          {
-            id: "5",
-            timestamp: new Date(Date.now() - 1000 * 60 * 60 * 24 * 4),
-            event: "twofactor_toggle",
-            success: true,
-            ipAddress: "192.168.1.1",
-            device: "Chrome on Windows"
-          }
-        ];
-        
-        setLogs(mockLogs);
-        setLoading(false);
-      }, 1000);
-    };
-    
+    // Real activity logging is not yet implemented
+    // This will show when actual security logging is added
     if (user) {
-      loadLogs();
+      setLoading(false);
+      setLogs([]); // No logs until real implementation
     }
   }, [user]);
 
@@ -132,7 +80,8 @@ const SecurityVerificationLogs = () => {
         </div>
       ) : logs.length === 0 ? (
         <div className="text-center py-8 text-gray-400">
-          <p>No activity recorded yet</p>
+          <p>Activity logging is not yet implemented</p>
+          <p className="text-sm mt-2">We're working on adding real security monitoring features</p>
         </div>
       ) : (
         <div className="overflow-hidden">
@@ -180,8 +129,8 @@ const SecurityVerificationLogs = () => {
             </table>
           </div>
           <div className="mt-4 text-xs text-gray-400">
-            <p>For security purposes, we store information about recent account activity.</p>
-            <p>If you notice any suspicious activity, please change your password immediately.</p>
+            <p>Activity logging will be available when we implement real security monitoring.</p>
+            <p>Currently, only basic account security features are available.</p>
           </div>
         </div>
       )}

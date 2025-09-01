@@ -11,8 +11,8 @@ const AuthHeader = ({ isSignUp }: AuthHeaderProps) => {
       </h2>
       <p className="text-white text-left">
         {isSignUp 
-          ? "Secure your account and preferences" 
-          : "Access your account settings and security features"}
+          ? "Create a secure account with password protection and 2FA" 
+          : "Access your account security settings"}
       </p>
     </div>
   );
