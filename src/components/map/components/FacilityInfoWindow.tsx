@@ -25,15 +25,27 @@ const FacilityInfoWindow: React.FC<FacilityInfoWindowProps> = ({
     }
   };
 
+  // Only access google.maps objects when component renders
+  const getInfoWindowOptions = () => {
+    if (typeof google === 'undefined' || !google.maps) {
+      return {
+        maxWidth: 320,
+        zIndex: 999
+      };
+    }
+    
+    return {
+      pixelOffset: new google.maps.Size(0, -10),
+      maxWidth: 320,
+      zIndex: 999
+    };
+  };
+
   return (
     <InfoWindowF
       position={position}
       onCloseClick={onCloseClick}
-      options={{
-        pixelOffset: new google.maps.Size(0, -10),
-        maxWidth: 320,
-        zIndex: 999
-      }}
+      options={getInfoWindowOptions()}
     >
       <div className="p-0 max-w-[300px] bg-[#131a2a]">
         <div className="bg-[#091020] px-5 py-5">

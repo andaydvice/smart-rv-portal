@@ -6,10 +6,14 @@ import { Alert, AlertDescription } from '@/components/ui/alert';
 import { AlertCircle, MapPin, Phone, Star } from 'lucide-react';
 import MapFallback from '../map/MapFallback';
 
-// Enhanced error boundary for map loading
-const EnhancedGoogleMap = lazy(() => 
-  import('../map/EnhancedGoogleMap')
-    .then(module => ({ default: module.default }))
+// Enhanced error boundary for map loading with console logging
+const EnhancedGoogleMap = lazy(() => {
+  console.log('Starting to load EnhancedGoogleMap...');
+  return import('../map/EnhancedGoogleMap')
+    .then(module => {
+      console.log('EnhancedGoogleMap loaded successfully');
+      return { default: module.default };
+    })
     .catch((error) => {
       console.error('Failed to load EnhancedGoogleMap:', error);
       // Return a fallback component
@@ -18,8 +22,8 @@ const EnhancedGoogleMap = lazy(() =>
           <MapFallback location={location} error={error} />
         )
       };
-    })
-);
+    });
+});
 
 interface LocationPreviewSectionProps {
   mapToken: string;
