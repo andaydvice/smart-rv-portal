@@ -15,6 +15,8 @@ export const AuthForms = ({ onSuccess, onError }: AuthFormsProps) => {
   const {
     isSignUp,
     setIsSignUp,
+    isPasswordReset,
+    setIsPasswordReset,
     loading,
     email,
     setEmail,
@@ -24,6 +26,7 @@ export const AuthForms = ({ onSuccess, onError }: AuthFormsProps) => {
     error,
     showOtp,
     handleSubmit,
+    handlePasswordReset,
     handleOtpVerify,
     handleCancelOtp
   } = useAuthForm({ onSuccess, onError });
@@ -42,21 +45,27 @@ export const AuthForms = ({ onSuccess, onError }: AuthFormsProps) => {
   return (
     <div className="space-y-6">
       <div className="space-y-4">
-        <AuthTabs isSignUp={isSignUp} setIsSignUp={setIsSignUp} />
-        <AuthHeader isSignUp={isSignUp} />
+        <AuthTabs 
+          isSignUp={isSignUp} 
+          setIsSignUp={setIsSignUp}
+          isPasswordReset={isPasswordReset}
+          setIsPasswordReset={setIsPasswordReset}
+        />
+        <AuthHeader isSignUp={isSignUp} isPasswordReset={isPasswordReset} />
       </div>
 
       <AuthErrorAlert error={error} />
 
       <AuthFormFields
         isSignUp={isSignUp}
+        isPasswordReset={isPasswordReset}
         loading={loading}
         email={email}
         setEmail={setEmail}
         password={password}
         setPassword={setPassword}
         passwordStrength={passwordStrength}
-        onSubmit={handleSubmit}
+        onSubmit={isPasswordReset ? handlePasswordReset : handleSubmit}
       />
     </div>
   );

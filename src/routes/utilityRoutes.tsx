@@ -12,6 +12,7 @@ import Contact from "../pages/Contact";
 import Documentation from "../pages/Documentation";
 import WeatherDashboard from "../pages/WeatherDashboard";
 import Auth from "../pages/Auth";
+import ResetPassword from "../pages/ResetPassword";
 import StorageFacilities from "../pages/StorageFacilities";
 import RVWeather from "../pages/RVWeather";
 
@@ -95,6 +96,14 @@ const utilityRoutes = [
     element: (
       <RouteTransition>
         <Auth />
+      </RouteTransition>
+    ),
+  },
+  {
+    path: "/reset-password",
+    element: (
+      <RouteTransition>
+        <ResetPassword />
       </RouteTransition>
     ),
   },

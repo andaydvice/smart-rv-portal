@@ -12,6 +12,7 @@ interface UseAuthFormProps {
 
 export const useAuthForm = ({ onSuccess, onError }: UseAuthFormProps) => {
   const [isSignUp, setIsSignUp] = useState(false);
+  const [isPasswordReset, setIsPasswordReset] = useState(false);
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -92,6 +93,44 @@ export const useAuthForm = ({ onSuccess, onError }: UseAuthFormProps) => {
     setShowOtp(false);
     setPendingOtpSession(null);
     setError("Two-factor authentication was canceled");
+  };
+
+  // Handle password reset
+  const handlePasswordReset = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    setError(null);
+
+    try {
+      const { error } = await supabase.auth.resetPasswordForEmail(email, {
+        redirectTo: `${window.location.origin}/reset-password`,
+      });
+
+      if (error) throw error;
+
+      toast({
+        title: "Reset email sent",
+        description: "Check your email for the password reset link",
+      });
+      
+      setIsPasswordReset(false);
+    } catch (err: any) {
+      console.error("Password reset error:", err);
+      
+      let errorMessage = err.message || "Failed to send reset email";
+      if (errorMessage.includes("User not found")) {
+        errorMessage = "No account found with this email address";
+      }
+      
+      setError(errorMessage);
+      toast({
+        title: "Reset failed",
+        description: errorMessage,
+        variant: "destructive",
+      });
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -254,6 +293,8 @@ export const useAuthForm = ({ onSuccess, onError }: UseAuthFormProps) => {
   return {
     isSignUp,
     setIsSignUp,
+    isPasswordReset,
+    setIsPasswordReset,
     loading,
     email,
     setEmail,
@@ -263,6 +304,7 @@ export const useAuthForm = ({ onSuccess, onError }: UseAuthFormProps) => {
     error,
     showOtp,
     handleSubmit,
+    handlePasswordReset,
     handleOtpVerify,
     handleCancelOtp
   };

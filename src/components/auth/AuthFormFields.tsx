@@ -9,6 +9,7 @@ import { isPasswordAcceptable } from '@/utils/passwordUtils';
 
 interface AuthFormFieldsProps {
   isSignUp: boolean;
+  isPasswordReset: boolean;
   loading: boolean;
   email: string;
   setEmail: (email: string) => void;
@@ -20,6 +21,7 @@ interface AuthFormFieldsProps {
 
 const AuthFormFields = ({
   isSignUp,
+  isPasswordReset,
   loading,
   email,
   setEmail,
@@ -44,21 +46,25 @@ const AuthFormFields = ({
           disabled={loading}
         />
       </div>
-      <div className="space-y-2">
-        <Label htmlFor="password" className="text-white">Password</Label>
-        <Input
-          id="password"
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder={isSignUp ? "Create a secure password" : "Enter your password"}
-          required
-          className="bg-[#1a2235] border-gray-700 text-white"
-          disabled={loading}
-        />
-        
-        {isSignUp && <PasswordStrengthMeter passwordStrength={passwordStrength} />}
-      </div>
+      
+      {!isPasswordReset && (
+        <div className="space-y-2">
+          <Label htmlFor="password" className="text-white">Password</Label>
+          <Input
+            id="password"
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder={isSignUp ? "Create a secure password" : "Enter your password"}
+            required
+            className="bg-[#1a2235] border-gray-700 text-white"
+            disabled={loading}
+          />
+          
+          {isSignUp && <PasswordStrengthMeter passwordStrength={passwordStrength} />}
+        </div>
+      )}
+      
       <Button
         type="submit"
         className="w-full font-medium"
@@ -67,10 +73,10 @@ const AuthFormFields = ({
         {loading ? (
           <span className="flex items-center">
             <Loader2 className="animate-spin mr-2 h-4 w-4" />
-            {isSignUp ? 'Creating Account...' : 'Signing In...'}
+            {isPasswordReset ? 'Sending Reset Email...' : isSignUp ? 'Creating Account...' : 'Signing In...'}
           </span>
         ) : (
-          isSignUp ? 'Create Account' : 'Sign In'
+          isPasswordReset ? 'Send Reset Email' : isSignUp ? 'Create Account' : 'Sign In'
         )}
       </Button>
     </form>
