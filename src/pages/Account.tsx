@@ -3,10 +3,9 @@ import React from "react";
 import TwoFactorSettings from "@/components/auth/TwoFactorSettings";
 import { useAuth } from "@/components/auth/AuthContext";
 import PasswordStrengthSettings from "@/components/auth/PasswordStrengthSettings";
-import SecurityVerificationLogs from "@/components/auth/SecurityVerificationLogs";
 import SavedCalculations from "@/components/account/SavedCalculations";
-import UserPreferences from "@/components/account/UserPreferences";
-import { Shield, Lock, History, Calculator, Settings, Heart } from "lucide-react";
+import AccountInfo from "@/components/account/AccountInfo";
+import { Shield, Calculator, Heart } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useFavorites } from "@/components/storage/useFavorites";
 
@@ -29,14 +28,10 @@ const AccountPage = () => {
         <p className="text-[#E2E8FF] mb-8">Manage your security preferences and account information</p>
 
         <Tabs defaultValue="data" className="w-full">
-          <TabsList className="grid grid-cols-4 mb-8">
+          <TabsList className="grid grid-cols-3 mb-8">
             <TabsTrigger value="data" className="flex items-center gap-2">
               <Calculator className="h-4 w-4" />
               <span>My Data</span>
-            </TabsTrigger>
-            <TabsTrigger value="preferences" className="flex items-center gap-2">
-              <Settings className="h-4 w-4" />
-              <span>Preferences</span>
             </TabsTrigger>
             <TabsTrigger value="favorites" className="flex items-center gap-2">
               <Heart className="h-4 w-4" />
@@ -50,10 +45,6 @@ const AccountPage = () => {
           
           <TabsContent value="data">
             <SavedCalculations />
-          </TabsContent>
-          
-          <TabsContent value="preferences">
-            <UserPreferences />
           </TabsContent>
           
           <TabsContent value="favorites">
@@ -74,16 +65,23 @@ const AccountPage = () => {
                   </button>
                 </div>
               ) : (
-                <p className="text-gray-400">Your favorited storage facilities will be displayed here with enhanced features coming soon.</p>
+                <div className="space-y-4">
+                  {favorites.map((facilityId) => (
+                    <div key={facilityId} className="p-4 bg-[#131a2a] rounded-lg border border-gray-600">
+                      <p className="text-white">Storage Facility ID: {facilityId}</p>
+                      <p className="text-gray-400 text-sm">Enhanced facility details coming soon</p>
+                    </div>
+                  ))}
+                </div>
               )}
             </div>
           </TabsContent>
           
           <TabsContent value="security">
             <div className="space-y-6">
+              <AccountInfo />
               <TwoFactorSettings />
               <PasswordStrengthSettings />
-              <SecurityVerificationLogs />
             </div>
           </TabsContent>
         </Tabs>
