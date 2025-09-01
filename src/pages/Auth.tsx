@@ -101,19 +101,15 @@ const Auth = () => {
               <ul className="space-y-4 text-left text-white">
                 <li className="flex items-start gap-3">
                   <span className="text-[#5B9BD5] text-lg">✓</span>
-                  <span>Save calculator results and access them anywhere</span>
+                  <span>Save and sync your RV fuel calculations across devices</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="text-[#5B9BD5] text-lg">✓</span>
-                  <span>Personal preferences and default units</span>
+                  <span>Bookmark your favorite RV storage facilities for quick access</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="text-[#5B9BD5] text-lg">✓</span>
-                  <span>Bookmark favorite storage facilities and locations</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="text-[#5B9BD5] text-lg">✓</span>
-                  <span>Secure account with 2FA protection</span>
+                  <span>Protect your account with email-based two-factor authentication</span>
                 </li>
               </ul>
             </div>
