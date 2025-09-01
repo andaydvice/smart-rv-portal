@@ -121,7 +121,7 @@ const Auth = () => {
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="text-[#5B9BD5] text-lg">✓</span>
-                  <span>Protect your account with email-based two-factor authentication</span>
+                  <span>Protect your account with email based two-factor authentication</span>
                 </li>
               </ul>
             </div>
