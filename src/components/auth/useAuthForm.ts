@@ -21,7 +21,7 @@ export const useAuthForm = ({ onSuccess, onError }: UseAuthFormProps) => {
   const [pendingOtpSession, setPendingOtpSession] = useState<any>(null);
   const { toast } = useToast();
 
-  const { fetchLoginAttempts, setLoginAttempts, LOCKOUT_THRESHOLD, LOCKOUT_MINUTES } = useLoginAttempt();
+  const { checkUserLockout, recordFailedAttempt, recordSuccessfulLogin, logSecurityEvent, LOCKOUT_THRESHOLD, LOCKOUT_MINUTES } = useLoginAttempt();
 
   // Update password strength whenever password changes
   useEffect(() => {
@@ -102,18 +102,17 @@ export const useAuthForm = ({ onSuccess, onError }: UseAuthFormProps) => {
     try {
       // Account lockout protection (only on Sign In, not on Sign Up)
       if (!isSignUp) {
-        // Note: Login attempt checking disabled for now due to security limitations
-        // In production, implement server-side rate limiting or IP-based restrictions
-        const loginAttempt = null;
-
-        if (loginAttempt && loginAttempt.lockout_until && new Date(loginAttempt.lockout_until) > new Date()) {
-          setError(
-            `Account locked due to multiple failed logins. Try again at ${new Date(
-              loginAttempt.lockout_until
-            ).toLocaleTimeString()}.`
-          );
+        const lockoutCheck = await checkUserLockout(email);
+        if (lockoutCheck.isLockedOut) {
+          const lockoutTime = lockoutCheck.lockoutUntil;
+          const remainingTime = lockoutTime ? Math.ceil((lockoutTime.getTime() - Date.now()) / 60000) : 0;
+          setError(`Account is locked due to too many failed attempts. Please try again in ${remainingTime} minutes.`);
           setLoading(false);
           return;
+        }
+
+        if (lockoutCheck.remainingAttempts <= 2 && lockoutCheck.remainingAttempts > 0) {
+          setError(`Warning: ${lockoutCheck.remainingAttempts} login attempts remaining before account lockout.`);
         }
       }
 
@@ -146,10 +145,25 @@ export const useAuthForm = ({ onSuccess, onError }: UseAuthFormProps) => {
         });
 
         if (signInError) {
-          setError("Invalid email or password. Please try again.");
+          // Record failed attempt
+          try {
+            const failedAttemptResult = await recordFailedAttempt(email);
+            if (failedAttemptResult.isLockedOut) {
+              setError(`Account locked due to too many failed attempts. Please try again in ${LOCKOUT_MINUTES} minutes.`);
+            } else {
+              const remaining = LOCKOUT_THRESHOLD - failedAttemptResult.failedAttempts;
+              setError(`Invalid email or password. ${remaining} attempts remaining before account lockout.`);
+            }
+          } catch (attemptError) {
+            console.error('Failed to record login attempt:', attemptError);
+            setError("Invalid email or password. Please try again.");
+          }
           setLoading(false);
           return;
         }
+
+        // Record successful login
+        await recordSuccessfulLogin(email);
 
         // Note: Login attempt tracking is now handled after successful authentication
         // to ensure we have the user_id for proper security

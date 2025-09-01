@@ -2,6 +2,7 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import { User, Session } from '@supabase/supabase-js';
 import { supabase } from '@/integrations/supabase/client';
+import { SecurityEnhancements, setupCSPViolationReporting, enhanceSessionSecurity } from './SecurityEnhancements';
 
 interface AuthContextType {
   user: User | null;
@@ -26,13 +27,50 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   useEffect(() => {
     console.log("AuthProvider initializing...");
     
+    // Initialize security enhancements
+    setupCSPViolationReporting();
+    const { startSessionMonitoring, stopSessionMonitoring } = enhanceSessionSecurity();
+    
     // Set up auth state change listener FIRST to prevent missing events
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, newSession) => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, newSession) => {
       console.log("Auth state changed:", { event, session: newSession?.user?.email || 'No user' });
       
       // Update state with the new session
       setSession(newSession);
       setUser(newSession?.user ?? null);
+      
+      // Manage session monitoring based on auth state
+      if (newSession) {
+        startSessionMonitoring();
+        // Log successful session establishment
+        (async () => {
+          try {
+            await supabase.rpc('log_security_event', {
+              event_type: 'session_established',
+              severity: 'low',
+              details: { event, user_id: newSession.user.id }
+            });
+          } catch (error) {
+            console.error('Failed to log security event:', error);
+          }
+        })();
+      } else {
+        stopSessionMonitoring();
+        // Log session termination
+        if (event === 'SIGNED_OUT') {
+          (async () => {
+            try {
+              await supabase.rpc('log_security_event', {
+                event_type: 'session_terminated',
+                severity: 'low',
+                details: { event }
+              });
+            } catch (error) {
+              console.error('Failed to log security event:', error);
+            }
+          })();
+        }
+      }
       
       // Clear any errors on successful auth state change
       setError(null);
@@ -52,6 +90,11 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
           console.log("Initial session check:", data.session ? "Session found" : "No session");
           setSession(data.session);
           setUser(data.session?.user ?? null);
+          
+          // Start session monitoring if user is authenticated
+          if (data.session) {
+            startSessionMonitoring();
+          }
         }
       } catch (err) {
         console.error("Error getting initial auth state:", err);
@@ -66,12 +109,14 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
     // Cleanup subscription
     return () => {
+      stopSessionMonitoring();
       subscription.unsubscribe();
     };
   }, []);
 
   return (
     <AuthContext.Provider value={{ user, session, loading, error }}>
+      <SecurityEnhancements />
       {children}
     </AuthContext.Provider>
   );

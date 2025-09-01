@@ -1091,6 +1091,14 @@ export type Database = {
         Args: { lat1: number; lat2: number; lon1: number; lon2: number }
         Returns: number
       }
+      check_rate_limit: {
+        Args: {
+          endpoint_name: string
+          max_requests?: number
+          window_minutes?: number
+        }
+        Returns: boolean
+      }
       create_storage_facility_with_geocoding: {
         Args: {
           facility_address: string
