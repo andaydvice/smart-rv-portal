@@ -1,10 +1,15 @@
 import { useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Save } from "lucide-react";
 import { campsiteRates } from "./data/campsiteTypes";
 import TripInputs from "./components/TripInputs";
 import CostBreakdown from "./components/CostBreakdown";
 import AffiliateRecommendations from "./components/AffiliateRecommendations";
 import { calculateCosts } from "./utils/costCalculations";
+import { useCalculatorHistory } from "@/hooks/useCalculatorHistory";
+import { useAuth } from "@/components/auth/AuthContext";
+import { useToast } from "@/hooks/use-toast";
 
 const RVCostCalculator = () => {
   const [rvType, setRvType] = useState('small');
@@ -13,6 +18,9 @@ const RVCostCalculator = () => {
   const [season, setSeason] = useState('regular');
   const [fuelPrice, setFuelPrice] = useState(4);
   const [campsiteType, setCampsiteType] = useState('state');
+
+  const { saveCalculation, isAuthenticated } = useCalculatorHistory();
+  const { toast } = useToast();
 
   const seasonData = {
     peak: {
@@ -74,6 +82,31 @@ const RVCostCalculator = () => {
     campsiteRates[campsiteType]
   );
 
+  const handleSaveCalculation = () => {
+    if (!isAuthenticated) {
+      toast({
+        title: "Sign in required",
+        description: "Please sign in to save your calculations",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    const inputs = { rvType, distance, days, season, fuelPrice, campsiteType };
+    const results = { costs };
+    
+    saveCalculation({
+      calculatorType: "rv_cost",
+      inputs,
+      results
+    });
+
+    toast({
+      title: "Calculation saved!",
+      description: "Your RV cost calculation has been saved to your history."
+    });
+  };
+
   return (
     <Card className="w-full max-w-3xl mx-auto bg-[#091020] border-gray-700 text-white">
       <CardHeader>
@@ -100,6 +133,20 @@ const RVCostCalculator = () => {
             seasonData={seasonData}
           />
           <CostBreakdown costs={costs} />
+          {isAuthenticated && (
+            <Button
+              onClick={handleSaveCalculation}
+              className="w-full bg-[#5B9BD5] hover:bg-[#4A8BC2] text-white"
+            >
+              <Save className="w-4 h-4 mr-2" />
+              Save Calculation
+            </Button>
+          )}
+          {!isAuthenticated && (
+            <p className="text-sm text-gray-400 text-center">
+              Sign in to save your calculations
+            </p>
+          )}
           <AffiliateRecommendations 
             rvType={rvType}
             tripDistance={distance}

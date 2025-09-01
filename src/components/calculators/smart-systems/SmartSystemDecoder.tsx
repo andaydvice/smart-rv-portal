@@ -1,15 +1,19 @@
 import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Settings, Info } from "lucide-react";
-import { useToast } from "@/components/ui/use-toast";
+import { Settings, Info, Save } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 import { SystemDetails } from "./components/SystemDetails";
 import { systemsData } from "./data/systemsData";
+import { useCalculatorHistory } from "@/hooks/useCalculatorHistory";
+import { useAuth } from "@/components/auth/AuthContext";
 
 const SmartSystemDecoder = () => {
   const [selectedSystems, setSelectedSystems] = useState<string[]>([]);
   const { toast } = useToast();
+  const { saveCalculation, isAuthenticated } = useCalculatorHistory();
 
   const handleSystemToggle = (systemId: string) => {
     console.log("Toggling system:", systemId);
@@ -36,6 +40,41 @@ const SmartSystemDecoder = () => {
       });
       
       return updated;
+    });
+  };
+
+  const handleSaveCalculation = () => {
+    if (!isAuthenticated) {
+      toast({
+        title: "Sign in required",
+        description: "Please sign in to save your calculations",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    if (selectedSystems.length === 0) {
+      toast({
+        title: "No systems selected",
+        description: "Please select at least one system to save",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    const inputs = { selectedSystems };
+    const systemNames = selectedSystems.map(id => systemsData[id].name);
+    const results = { selectedSystemNames: systemNames };
+    
+    saveCalculation({
+      calculatorType: "smart_system_decoder",
+      inputs,
+      results
+    });
+
+    toast({
+      title: "Configuration saved!",
+      description: "Your smart system configuration has been saved to your history."
     });
   };
 
@@ -72,6 +111,25 @@ const SmartSystemDecoder = () => {
             </div>
           ))}
         </div>
+
+        {selectedSystems.length > 0 && (
+          <div className="space-y-3">
+            {isAuthenticated && (
+              <Button
+                onClick={handleSaveCalculation}
+                className="w-full bg-[#5B9BD5] hover:bg-[#4A8BC2] text-white"
+              >
+                <Save className="w-4 h-4 mr-2" />
+                Save Configuration
+              </Button>
+            )}
+            {!isAuthenticated && (
+              <p className="text-sm text-gray-400 text-center">
+                Sign in to save your system configurations
+              </p>
+            )}
+          </div>
+        )}
 
         <ScrollArea className="h-[400px] rounded-md border border-gray-700 p-4">
           {selectedSystems.length > 0 ? (

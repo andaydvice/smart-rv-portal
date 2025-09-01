@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { MessageCircle, Zap, Shield, Settings, Wrench, Bell } from "lucide-react";
+import { MessageCircle, Zap, Shield, Settings, Wrench, Bell, Save } from "lucide-react";
 import { alertDatabase } from "./data/alertDatabase";
 import { AlertCard } from "./components/AlertCard";
 import {
@@ -12,9 +13,14 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { AlertInfo } from "./types/AlertTypes";
+import { useCalculatorHistory } from "@/hooks/useCalculatorHistory";
+import { useAuth } from "@/components/auth/AuthContext";
+import { useToast } from "@/hooks/use-toast";
 
 const SmartAlertTranslator = () => {
   const [searchTerm, setSearchTerm] = useState("");
+  const { saveCalculation, isAuthenticated } = useCalculatorHistory();
+  const { toast } = useToast();
 
   // Pre-defined categories with their proper display names
   const categories = {
@@ -104,6 +110,41 @@ const SmartAlertTranslator = () => {
     return acc;
   }, {} as GroupedAlerts);
 
+  const handleSaveSearch = () => {
+    if (!isAuthenticated) {
+      toast({
+        title: "Sign in required",
+        description: "Please sign in to save your searches",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    if (!searchTerm.trim()) {
+      toast({
+        title: "No search term",
+        description: "Please enter a search term to save",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    const inputs = { searchTerm };
+    const resultsCount = Object.values(filteredAlerts).reduce((sum, alerts) => sum + alerts.length, 0);
+    const results = { searchTerm, resultsFound: resultsCount };
+    
+    saveCalculation({
+      calculatorType: "smart_alert_translator",
+      inputs,
+      results
+    });
+
+    toast({
+      title: "Search saved!",
+      description: "Your alert search has been saved to your history."
+    });
+  };
+
   return (
     <Card className="bg-[#091020] border-gray-700 text-white">
       <CardHeader>
@@ -116,12 +157,33 @@ const SmartAlertTranslator = () => {
         </p>
       </CardHeader>
       <CardContent className="space-y-6">
-        <Input
-          placeholder="Search alerts by code or description..."
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          className="bg-gray-800/50 border-gray-700 text-white placeholder:text-gray-400"
-        />
+        <div className="space-y-3">
+          <Input
+            placeholder="Search alerts by code or description..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="bg-gray-800/50 border-gray-700 text-white placeholder:text-gray-400"
+          />
+          {searchTerm.trim() && (
+            <div className="flex justify-end">
+              {isAuthenticated && (
+                <Button
+                  onClick={handleSaveSearch}
+                  size="sm"
+                  className="bg-[#5B9BD5] hover:bg-[#4A8BC2] text-white"
+                >
+                  <Save className="w-4 h-4 mr-2" />
+                  Save Search
+                </Button>
+              )}
+              {!isAuthenticated && (
+                <p className="text-sm text-gray-400">
+                  Sign in to save searches
+                </p>
+              )}
+            </div>
+          )}
+        </div>
         
         <ScrollArea className="h-[500px] pr-4">
           <div className="space-y-4">

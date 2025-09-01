@@ -1,17 +1,21 @@
 import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { useToast } from "@/components/ui/use-toast";
+import { Button } from "@/components/ui/button";
+import { useToast } from "@/hooks/use-toast";
 import { 
   Smartphone,
   Bluetooth, 
   WifiHigh,
   Power,
   Settings,
-  Shield
+  Shield,
+  Save
 } from "lucide-react";
 import StepIndicator from "./setup-guide/StepIndicator";
 import StepContent from "./setup-guide/StepContent";
 import NavigationButtons from "./setup-guide/NavigationButtons";
+import { useCalculatorHistory } from "@/hooks/useCalculatorHistory";
+import { useAuth } from "@/components/auth/AuthContext";
 
 const steps = [
   {
@@ -104,6 +108,7 @@ const SetupGuideCreator = () => {
   const [currentStep, setCurrentStep] = useState(1);
   const [showTroubleshooting, setShowTroubleshooting] = useState(false);
   const { toast } = useToast();
+  const { saveCalculation, isAuthenticated } = useCalculatorHistory();
 
   const currentStepData = steps.find(step => step.id === currentStep);
 
@@ -132,6 +137,32 @@ const SetupGuideCreator = () => {
     setShowTroubleshooting(!showTroubleshooting);
   };
 
+  const handleSaveProgress = () => {
+    if (!isAuthenticated) {
+      toast({
+        title: "Sign in required",
+        description: "Please sign in to save your setup progress",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    const inputs = { currentStep, completedSteps: currentStep - 1 };
+    const stepTitle = currentStepData?.title || "";
+    const results = { currentStepTitle: stepTitle, progress: `${currentStep}/${steps.length}` };
+    
+    saveCalculation({
+      calculatorType: "setup_guide",
+      inputs,
+      results
+    });
+
+    toast({
+      title: "Progress saved!",
+      description: "Your setup progress has been saved to your history."
+    });
+  };
+
   return (
     <Card className="bg-[#091020] border-gray-700 text-white">
       <CardHeader>
@@ -158,12 +189,29 @@ const SetupGuideCreator = () => {
           />
         )}
 
-        <NavigationButtons
-          currentStep={currentStep}
-          totalSteps={steps.length}
-          onPrevious={handlePrevious}
-          onNext={handleNext}
-        />
+        <div className="space-y-4">
+          <NavigationButtons
+            currentStep={currentStep}
+            totalSteps={steps.length}
+            onPrevious={handlePrevious}
+            onNext={handleNext}
+          />
+          
+          {isAuthenticated && (
+            <Button
+              onClick={handleSaveProgress}
+              className="w-full bg-[#5B9BD5] hover:bg-[#4A8BC2] text-white"
+            >
+              <Save className="w-4 h-4 mr-2" />
+              Save Progress
+            </Button>
+          )}
+          {!isAuthenticated && (
+            <p className="text-sm text-gray-400 text-center">
+              Sign in to save your setup progress
+            </p>
+          )}
+        </div>
       </CardContent>
     </Card>
   );

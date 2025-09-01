@@ -2,8 +2,11 @@ import { useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { Save } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { MPGRecord } from "./MPGTrackingSystem";
+import { useCalculatorHistory } from "@/hooks/useCalculatorHistory";
+import { useAuth } from "@/components/auth/AuthContext";
 
 interface FuelEfficiencyCalculatorProps {
   onAddMPGRecord: (record: MPGRecord) => void;
@@ -13,6 +16,7 @@ const FuelEfficiencyCalculator = ({ onAddMPGRecord }: FuelEfficiencyCalculatorPr
   const [distance, setDistance] = useState("");
   const [fuelUsed, setFuelUsed] = useState("");
   const { toast } = useToast();
+  const { saveCalculation, isAuthenticated } = useCalculatorHistory();
 
   const calculateMPG = () => {
     const dist = parseFloat(distance);
@@ -46,6 +50,31 @@ const FuelEfficiencyCalculator = ({ onAddMPGRecord }: FuelEfficiencyCalculatorPr
         variant: "destructive",
       });
     }
+  };
+
+  const handleSaveCalculation = () => {
+    if (!isAuthenticated) {
+      toast({
+        title: "Sign in required",
+        description: "Please sign in to save your calculations",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    const inputs = { distance, fuelUsed };
+    const results = { mpg: calculateMPG() };
+    
+    saveCalculation({
+      calculatorType: "fuel_efficiency",
+      inputs,
+      results
+    });
+
+    toast({
+      title: "Calculation saved!",
+      description: "Your fuel efficiency calculation has been saved to your history."
+    });
   };
 
   return (
@@ -83,12 +112,28 @@ const FuelEfficiencyCalculator = ({ onAddMPGRecord }: FuelEfficiencyCalculatorPr
           <p className="text-lg font-semibold text-[#60A5FA]">
             Miles Per Gallon: {calculateMPG()} MPG
           </p>
-          <Button 
-            onClick={addMPGRecord}
-            className="mt-4 bg-[#60A5FA] text-white hover:bg-[#4B8FE3]"
-          >
-            Add Current MPG to History
-          </Button>
+          <div className="flex gap-2 mt-4">
+            <Button 
+              onClick={addMPGRecord}
+              className="flex-1 bg-[#60A5FA] text-white hover:bg-[#4B8FE3]"
+            >
+              Add Current MPG to History
+            </Button>
+            {isAuthenticated && (
+              <Button
+                onClick={handleSaveCalculation}
+                className="flex-1 bg-[#5B9BD5] hover:bg-[#4A8BC2] text-white"
+              >
+                <Save className="w-4 h-4 mr-2" />
+                Save Calculation
+              </Button>
+            )}
+          </div>
+          {!isAuthenticated && (
+            <p className="text-sm text-gray-400 text-center mt-2">
+              Sign in to save your calculations
+            </p>
+          )}
         </div>
       </CardContent>
     </Card>

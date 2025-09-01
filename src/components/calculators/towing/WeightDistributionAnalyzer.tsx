@@ -2,12 +2,16 @@ import { useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { Save } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { useCalculatorHistory } from "@/hooks/useCalculatorHistory";
+import { useAuth } from "@/components/auth/AuthContext";
 
 const WeightDistributionAnalyzer = () => {
   const [tongueWeight, setTongueWeight] = useState("");
   const [trailerWeight, setTrailerWeight] = useState("");
   const { toast } = useToast();
+  const { saveCalculation, isAuthenticated } = useCalculatorHistory();
 
   const analyzeDistribution = () => {
     const tongue = parseFloat(tongueWeight);
@@ -32,6 +36,34 @@ const WeightDistributionAnalyzer = () => {
         variant: status === "Warning" ? "destructive" : "default",
       });
     }
+  };
+
+  const handleSaveCalculation = () => {
+    if (!isAuthenticated) {
+      toast({
+        title: "Sign in required",
+        description: "Please sign in to save your calculations",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    const inputs = { tongueWeight, trailerWeight };
+    const tongue = parseFloat(tongueWeight);
+    const trailer = parseFloat(trailerWeight);
+    const percentage = (tongue / trailer) * 100;
+    const results = { tongueWeightPercentage: percentage.toFixed(1) };
+    
+    saveCalculation({
+      calculatorType: "weight_distribution",
+      inputs,
+      results
+    });
+
+    toast({
+      title: "Calculation saved!",
+      description: "Your weight distribution analysis has been saved to your history."
+    });
   };
 
   return (
@@ -63,12 +95,28 @@ const WeightDistributionAnalyzer = () => {
             className="bg-[#131a2a] border-gray-700 text-white"
           />
         </div>
-        <Button 
-          onClick={analyzeDistribution}
-          className="w-full bg-blue-600 hover:bg-blue-700"
-        >
-          Analyze Distribution
-        </Button>
+        <div className="space-y-3">
+          <Button 
+            onClick={analyzeDistribution}
+            className="w-full bg-blue-600 hover:bg-blue-700"
+          >
+            Analyze Distribution
+          </Button>
+          {isAuthenticated && (
+            <Button
+              onClick={handleSaveCalculation}
+              className="w-full bg-[#5B9BD5] hover:bg-[#4A8BC2] text-white"
+            >
+              <Save className="w-4 h-4 mr-2" />
+              Save Calculation
+            </Button>
+          )}
+          {!isAuthenticated && (
+            <p className="text-sm text-gray-400 text-center">
+              Sign in to save your calculations
+            </p>
+          )}
+        </div>
       </CardContent>
     </Card>
   );
