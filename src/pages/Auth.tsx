@@ -135,8 +135,10 @@ const Auth = () => {
               />
             </Card>
             
-            <div className="text-sm text-white px-4">
-              <p>All RV calculators and tools are available to everyone. Registration unlocks data persistence, saved preferences, and personalized features. We respect your privacy and will never share your information.</p>
+            <div className="text-sm text-white px-4 space-y-2">
+              <p>All RV calculators and tools are available to everyone.</p>
+              <p>Registration unlocks data persistence, saved preferences, and personalized features.</p>
+              <p>We respect your privacy and will never share your information.</p>
             </div>
           </div>
         </div>
