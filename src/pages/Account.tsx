@@ -63,26 +63,26 @@ const AccountPage = () => {
         
         <div className="mt-16">
           <OptimizedAffiliateGrid
-            title="Partner Account Benefits"
-            subtitle="Link your accounts with our trusted partners for enhanced services"
+            title="Recommended RV Services"
+            subtitle="These are partner recommendations to help enhance your RV experience"
             partners={[
               {
                 partner: 'goodsam',
-                title: 'Good Sam Account Integration',
-                description: 'Link your Good Sam account for enhanced emergency services and member benefits.',
-                features: ['Member discounts', 'Emergency services', 'Account integration', 'Enhanced support']
+                title: 'Good Sam Membership',
+                description: 'Save on camping, fuel, and RV services while getting 24/7 roadside assistance.',
+                features: ['10% camping discounts', '24/7 roadside assistance', 'Fuel savings', 'Emergency support']
               },
               {
                 partner: 'rvlife',
-                title: 'RV Life Pro Account',
-                description: 'Upgrade to RV Life Pro for premium features and enhanced trip planning tools.',
-                features: ['Premium trip planning', 'Enhanced features', 'Priority support', 'Advanced tools']
+                title: 'RV LIFE Pro',
+                description: 'Premium trip planning tools and exclusive campground access for serious RV travelers.',
+                features: ['Advanced trip planner', 'Exclusive campgrounds', 'Expert travel tips', 'Route optimization']
               },
               {
-                partner: 'rvlife',
-                title: 'RV Life Premium Monitoring',
-                description: 'Access premium monitoring features and priority technical support.',
-                features: ['Premium monitoring', 'Priority support', 'Advanced analytics', 'Enhanced features']
+                partner: 'rvshare',
+                title: 'RVshare Hosting',
+                description: 'Earn income by renting your RV when not in use, with full insurance coverage.',
+                features: ['Earn extra income', 'Insurance included', 'Easy booking system', 'Host support']
               }
             ]}
             gridCols="3"

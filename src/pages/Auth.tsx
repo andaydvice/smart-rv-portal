@@ -103,19 +103,19 @@ const Auth = () => {
               <ul className="space-y-4 text-left text-white">
                 <li className="flex items-start gap-3">
                   <span className="text-[#5B9BD5] text-lg">✓</span>
-                  <span>Access exclusive RV calculators and tools to plan your trips better</span>
+                  <span>Secure account management and password protection</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="text-[#5B9BD5] text-lg">✓</span>
-                  <span>Get personalized weather alerts and route recommendations</span>
+                  <span>Monitor your account activity and security logs</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="text-[#5B9BD5] text-lg">✓</span>
-                  <span>Save your favorite storage facilities and camping spots</span>
+                  <span>Two-factor authentication for enhanced security</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="text-[#5B9BD5] text-lg">✓</span>
-                  <span>Track your RV maintenance history and get reminders</span>
+                  <span>Early access to new features as they become available</span>
                 </li>
               </ul>
             </div>
@@ -130,7 +130,7 @@ const Auth = () => {
             </Card>
             
             <div className="text-sm text-white px-4">
-              <p>By creating an account, you'll get access to our premium features and tools designed specifically for RV enthusiasts. We respect your privacy and will never share your information.</p>
+              <p>All RV calculators and tools are available to everyone. Registration provides account security features and early access to new functionality. We respect your privacy and will never share your information.</p>
             </div>
           </div>
         </div>
