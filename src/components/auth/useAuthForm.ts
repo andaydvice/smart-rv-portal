@@ -123,11 +123,24 @@ export const useAuthForm = ({ onSuccess, onError }: UseAuthFormProps) => {
       }
 
       if (isSignUp) {
+        // Determine the correct redirect URL based on environment
+        const getRedirectUrl = () => {
+          const currentOrigin = window.location.origin;
+          
+          // If we're on the production domain, always redirect to production
+          if (currentOrigin.includes('smartrvhub.com')) {
+            return 'https://smartrvhub.com/auth';
+          }
+          
+          // For development/preview environments, use current origin
+          return currentOrigin + '/auth';
+        };
+
         const { error: signUpError } = await supabase.auth.signUp({
           email,
           password,
           options: {
-            emailRedirectTo: window.location.origin + '/auth',
+            emailRedirectTo: getRedirectUrl(),
           }
         });
         
