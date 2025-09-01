@@ -131,13 +131,15 @@ const utilityRoutes = [
   {
     path: "/account",
     element: (
-      <Suspense fallback={<MinimalLoader />}>
-        <RouteTransition>
-          <ProtectedRoute>
-            <AccountPage />
-          </ProtectedRoute>
-        </RouteTransition>
-      </Suspense>
+      <ProtectedRoute>
+        <Layout>
+          <RouteTransition>
+            <Suspense fallback={<MinimalLoader />}>
+              <AccountPage />
+            </Suspense>
+          </RouteTransition>
+        </Layout>
+      </ProtectedRoute>
     ),
   },
   // Protected user dashboard routes

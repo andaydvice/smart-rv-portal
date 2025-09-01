@@ -5,6 +5,7 @@ import { useAuth } from "@/components/auth/AuthContext";
 import PasswordStrengthSettings from "@/components/auth/PasswordStrengthSettings";
 import SavedCalculations from "@/components/account/SavedCalculations";
 import AccountInfo from "@/components/account/AccountInfo";
+import DashboardHeader from "@/components/dashboard/DashboardHeader";
 import { Shield, Calculator, Heart } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useFavorites } from "@/components/storage/useFavorites";
@@ -22,10 +23,12 @@ const AccountPage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-[#080F1F] flex flex-col items-center py-12 px-4">
-      <div className="w-full max-w-4xl">
-        <h1 className="text-3xl font-bold text-white mb-2">Account Settings</h1>
-        <p className="text-[#E2E8FF] mb-8">Manage your security preferences and account information</p>
+    <div className="min-h-screen bg-[#080F1F] flex flex-col py-12 px-4">
+      <div className="w-full max-w-4xl mx-auto">
+        <DashboardHeader 
+          title="Account Settings" 
+          description="Manage your security preferences and account information"
+        />
 
         <Tabs defaultValue="data" className="w-full">
           <TabsList className="grid grid-cols-3 mb-8">
