@@ -2,6 +2,7 @@
 import React, { lazy, Suspense } from "react";
 import { MinimalLoader } from "@/components/ui/MinimalLoader";
 import { RouteTransition } from "@/components/ui/transitions/RouteTransition";
+import ProtectedRoute from "@/components/auth/ProtectedRoute";
 
 // High-traffic routes - synchronous imports
 import Calculators from "../pages/Calculators";
@@ -24,6 +25,11 @@ const RVEmergencyCenter = lazy(() => import("../pages/RVEmergencyCenter"));
 const SolarPowerGuide = lazy(() => import("../pages/SolarPowerGuide"));
 const RVAppsHub = lazy(() => import("../pages/RVAppsHub"));
 const PerformanceDashboard = lazy(() => import("../pages/admin/PerformanceDashboard"));
+
+// Protected user areas
+const UserDashboard = lazy(() => import("../pages/user/Dashboard"));
+const SavedCalculations = lazy(() => import("../pages/user/SavedCalculations"));
+const UserFavorites = lazy(() => import("../pages/user/Favorites"));
 
 const utilityRoutes = [
   {
@@ -117,7 +123,46 @@ const utilityRoutes = [
     element: (
       <Suspense fallback={<MinimalLoader />}>
         <RouteTransition>
-          <AccountPage />
+          <ProtectedRoute>
+            <AccountPage />
+          </ProtectedRoute>
+        </RouteTransition>
+      </Suspense>
+    ),
+  },
+  // Protected user dashboard routes
+  {
+    path: "/dashboard",
+    element: (
+      <Suspense fallback={<MinimalLoader />}>
+        <RouteTransition>
+          <ProtectedRoute>
+            <UserDashboard />
+          </ProtectedRoute>
+        </RouteTransition>
+      </Suspense>
+    ),
+  },
+  {
+    path: "/user/calculations",
+    element: (
+      <Suspense fallback={<MinimalLoader />}>
+        <RouteTransition>
+          <ProtectedRoute>
+            <SavedCalculations />
+          </ProtectedRoute>
+        </RouteTransition>
+      </Suspense>
+    ),
+  },
+  {
+    path: "/user/favorites",
+    element: (
+      <Suspense fallback={<MinimalLoader />}>
+        <RouteTransition>
+          <ProtectedRoute>
+            <UserFavorites />
+          </ProtectedRoute>
         </RouteTransition>
       </Suspense>
     ),
@@ -152,12 +197,15 @@ const utilityRoutes = [
       </Suspense>
     ),
   },
+  // Protected admin routes
   {
     path: "/admin/perf",
     element: (
       <Suspense fallback={<MinimalLoader />}>
         <RouteTransition>
-          <PerformanceDashboard />
+          <ProtectedRoute>
+            <PerformanceDashboard />
+          </ProtectedRoute>
         </RouteTransition>
       </Suspense>
     ),

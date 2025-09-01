@@ -137,7 +137,7 @@ const Auth = () => {
             
             <div className="text-sm text-white px-4 space-y-2">
               <p>All RV calculators and tools are available to everyone.</p>
-              <p>Registration unlocks data persistence, saved preferences, and personalized features.</p>
+              <p><strong>Login unlocks:</strong> Personal dashboard, saved calculations, storage facility favorites, account security settings, and personalized preferences.</p>
               <p>We respect your privacy and will never share your information.</p>
             </div>
           </div>

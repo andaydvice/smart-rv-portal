@@ -1,6 +1,6 @@
 
 import { Link } from "react-router-dom";
-import { LogIn, User, LogOut } from "lucide-react";
+import { LogIn, User, LogOut, LayoutDashboard } from "lucide-react";
 import { useAuth } from "@/components/auth/AuthContext";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
@@ -28,11 +28,18 @@ const AuthButtons = () => {
   return (
     <div className="flex items-center">
       {user ? (
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2">
           <div className="hidden lg:flex items-center gap-2 text-gray-300">
             <User className="h-4 w-4" />
             <span className="text-sm max-w-[120px] truncate">{user.email}</span>
           </div>
+          <Link
+            to="/dashboard"
+            className="text-gray-300 hover:text-connectivity-accent transition-colors text-sm flex items-center gap-2 px-3 py-2 rounded-md"
+          >
+            <LayoutDashboard className="h-4 w-4" />
+            <span className="hidden md:inline">Dashboard</span>
+          </Link>
           <button
             onClick={handleLogout}
             className="text-gray-300 hover:text-connectivity-accent transition-colors text-sm flex items-center gap-2 px-3 py-2 rounded-md"
