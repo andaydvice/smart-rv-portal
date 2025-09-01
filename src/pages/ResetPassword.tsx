@@ -22,16 +22,18 @@ const ResetPassword = () => {
   const [success, setSuccess] = useState(false);
   const [passwordStrength, setPasswordStrength] = useState(0);
 
-  // Check for access token in URL
-  const accessToken = searchParams.get('access_token');
-  const refreshToken = searchParams.get('refresh_token');
+  // Check for code and type in URL (Supabase reset format)
+  const code = searchParams.get('code');
+  const type = searchParams.get('type');
 
   useEffect(() => {
     setPasswordStrength(checkPasswordStrength(password));
   }, [password]);
 
   useEffect(() => {
-    if (!accessToken || !refreshToken) {
+    console.log('Reset password URL params:', { code, type, allParams: Object.fromEntries(searchParams) });
+    
+    if (!code || type !== 'recovery') {
       toast({
         title: "Invalid Reset Link",
         description: "This password reset link is invalid or has expired.",
@@ -39,7 +41,7 @@ const ResetPassword = () => {
       });
       navigate('/auth');
     }
-  }, [accessToken, refreshToken, navigate, toast]);
+  }, [code, type, searchParams, navigate, toast]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -59,13 +61,15 @@ const ResetPassword = () => {
         return;
       }
 
-      // Set the session using the tokens from the URL
-      const { error: sessionError } = await supabase.auth.setSession({
-        access_token: accessToken!,
-        refresh_token: refreshToken!,
-      });
+      // Exchange the code for a session (Supabase reset flow)
+      const { data, error: sessionError } = await supabase.auth.exchangeCodeForSession(code!);
 
-      if (sessionError) throw sessionError;
+      if (sessionError) {
+        console.error('Session exchange error:', sessionError);
+        throw sessionError;
+      }
+
+      console.log('Session established successfully:', data?.session?.user?.email);
 
       // Update the password
       const { error: updateError } = await supabase.auth.updateUser({
