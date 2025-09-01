@@ -1,12 +1,19 @@
 import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { Sun } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Sun, Save } from "lucide-react";
+import { useCalculatorHistory } from "@/hooks/useCalculatorHistory";
+import { useAuth } from "@/components/auth/AuthContext";
+import { useToast } from "@/hooks/use-toast";
 
 const SolarPanelCalculator = () => {
   const [dailyUsage, setDailyUsage] = useState("");
   const [sunHours, setSunHours] = useState("");
   const [efficiency, setEfficiency] = useState("80");
+
+  const { saveCalculation, isAuthenticated } = useCalculatorHistory();
+  const { toast } = useToast();
 
   const calculateSolarNeeds = () => {
     const usage = parseFloat(dailyUsage) || 0;
@@ -15,6 +22,31 @@ const SolarPanelCalculator = () => {
     
     const required = (usage / hours) / (eff / 100);
     return required.toFixed(2);
+  };
+
+  const handleSaveCalculation = () => {
+    if (!isAuthenticated) {
+      toast({
+        title: "Sign in required",
+        description: "Please sign in to save your calculations",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    const inputs = { dailyUsage, sunHours, efficiency };
+    const results = { requiredCapacity: calculateSolarNeeds() };
+    
+    saveCalculation({
+      calculatorType: "solar_panel",
+      inputs,
+      results
+    });
+
+    toast({
+      title: "Calculation saved!",
+      description: "Your solar panel calculation has been saved to your history."
+    });
   };
 
   return (
@@ -56,10 +88,24 @@ const SolarPanelCalculator = () => {
             className="bg-[#131a2a] border-gray-700 text-white"
           />
         </div>
-        <div className="pt-4">
+        <div className="pt-4 space-y-3">
           <p className="text-lg font-semibold text-[#60A5FA]">
             Required Solar Panel Capacity: {calculateSolarNeeds()} watts
           </p>
+          {isAuthenticated && (
+            <Button
+              onClick={handleSaveCalculation}
+              className="w-full bg-[#5B9BD5] hover:bg-[#4A8BC2] text-white"
+            >
+              <Save className="w-4 h-4 mr-2" />
+              Save Calculation
+            </Button>
+          )}
+          {!isAuthenticated && (
+            <p className="text-sm text-gray-400 text-center">
+              Sign in to save your calculations
+            </p>
+          )}
         </div>
       </CardContent>
     </Card>

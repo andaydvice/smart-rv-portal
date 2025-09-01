@@ -1,7 +1,11 @@
 import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { Battery } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Battery, Save } from "lucide-react";
+import { useCalculatorHistory } from "@/hooks/useCalculatorHistory";
+import { useAuth } from "@/components/auth/AuthContext";
+import { useToast } from "@/hooks/use-toast";
 
 const PowerConsumptionCalculator = () => {
   const [appliances, setAppliances] = useState({
@@ -11,10 +15,38 @@ const PowerConsumptionCalculator = () => {
     other: ""
   });
 
+  const { saveCalculation, isAuthenticated } = useCalculatorHistory();
+  const { toast } = useToast();
+
   const calculateTotalConsumption = () => {
     const total = Object.values(appliances)
       .reduce((sum, value) => sum + (Number(value) || 0), 0);
     return total.toFixed(2);
+  };
+
+  const handleSaveCalculation = () => {
+    if (!isAuthenticated) {
+      toast({
+        title: "Sign in required",
+        description: "Please sign in to save your calculations",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    const inputs = { appliances };
+    const results = { totalConsumption: calculateTotalConsumption() };
+    
+    saveCalculation({
+      calculatorType: "power_consumption",
+      inputs,
+      results
+    });
+
+    toast({
+      title: "Calculation saved!",
+      description: "Your power consumption calculation has been saved to your history."
+    });
   };
 
   return (
@@ -66,10 +98,24 @@ const PowerConsumptionCalculator = () => {
             className="bg-[#131a2a] border-gray-700 text-white"
           />
         </div>
-        <div className="pt-4">
+        <div className="pt-4 space-y-3">
           <p className="text-lg font-semibold text-[#60A5FA]">
             Total Power Consumption: {calculateTotalConsumption()} watts
           </p>
+          {isAuthenticated && (
+            <Button
+              onClick={handleSaveCalculation}
+              className="w-full bg-[#5B9BD5] hover:bg-[#4A8BC2] text-white"
+            >
+              <Save className="w-4 h-4 mr-2" />
+              Save Calculation
+            </Button>
+          )}
+          {!isAuthenticated && (
+            <p className="text-sm text-gray-400 text-center">
+              Sign in to save your calculations
+            </p>
+          )}
         </div>
       </CardContent>
     </Card>

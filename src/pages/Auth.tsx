@@ -101,11 +101,23 @@ const Auth = () => {
               <ul className="space-y-4 text-left text-white">
                 <li className="flex items-start gap-3">
                   <span className="text-[#5B9BD5] text-lg">✓</span>
-                  <span>Save and sync your RV fuel calculations across devices</span>
+                  <span>Save and sync calculations from 15+ RV calculators across devices</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="text-[#5B9BD5] text-lg">✓</span>
-                  <span>Bookmark your favorite RV storage facilities for quick access</span>
+                  <span>Track your RV's performance with historical fuel and power data</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="text-[#5B9BD5] text-lg">✓</span>
+                  <span>Bookmark favorite storage facilities and save custom searches</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="text-[#5B9BD5] text-lg">✓</span>
+                  <span>Create wishlists for RV products and store your RV specifications</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="text-[#5B9BD5] text-lg">✓</span>
+                  <span>Plan and save custom trip routes with detailed cost analysis</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="text-[#5B9BD5] text-lg">✓</span>
