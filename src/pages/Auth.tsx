@@ -21,18 +21,7 @@ const Auth = () => {
 
   const from = location.state?.from?.pathname || '/';
   
-  // Check for password reset parameters
-  const code = searchParams.get('code');
-  const type = searchParams.get('type');
-
   useEffect(() => {
-    // Check if this is a password reset link and redirect immediately
-    if (code && type === 'recovery') {
-      console.log("Password reset detected, redirecting to reset page");
-      window.location.href = `/reset-password?code=${encodeURIComponent(code)}&type=${encodeURIComponent(type)}`;
-      return;
-    }
-    
     // Mark as initialized after first render to prevent flash of error state
     if (!hasInitialized) {
       setHasInitialized(true);
@@ -43,7 +32,7 @@ const Auth = () => {
       console.log("Auth page - Redirecting authenticated user to:", from);
       navigate(from);
     }
-  }, [user, navigate, from, hasInitialized, code, type]);
+  }, [user, navigate, from, hasInitialized]);
 
   // If we're still loading, show a loading state
   if (loading && !hasInitialized) {
