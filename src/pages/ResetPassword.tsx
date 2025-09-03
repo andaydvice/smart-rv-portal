@@ -31,15 +31,33 @@ const ResetPassword = () => {
   }, [password]);
 
   useEffect(() => {
-    console.log('Reset password URL params:', { code, type, allParams: Object.fromEntries(searchParams) });
+    const currentUrl = window.location.href;
+    console.log('Reset password URL params:', { 
+      code, 
+      type, 
+      allParams: Object.fromEntries(searchParams),
+      currentUrl,
+      searchString: window.location.search
+    });
+    
+    // Add more detailed logging
+    if (!code) {
+      console.log('❌ No code parameter found');
+    }
+    if (type !== 'recovery') {
+      console.log('❌ Type is not recovery, got:', type);
+    }
     
     if (!code || type !== 'recovery') {
+      console.log('🚨 Redirecting to /auth due to missing/invalid parameters');
       toast({
         title: "Invalid Reset Link",
-        description: "This password reset link is invalid or has expired.",
+        description: `This password reset link is invalid or has expired. Code: ${code ? 'present' : 'missing'}, Type: ${type || 'missing'}`,
         variant: "destructive",
       });
       navigate('/auth');
+    } else {
+      console.log('✅ Valid reset parameters detected');
     }
   }, [code, type, searchParams, navigate, toast]);
 
