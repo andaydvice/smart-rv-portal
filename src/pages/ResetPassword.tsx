@@ -61,6 +61,30 @@ const ResetPassword = () => {
     }
   }, [code, type, searchParams, navigate, toast]);
 
+  const handleRequestNewLink = async () => {
+    const email = prompt("Please enter your email address to receive a new reset link:");
+    if (!email) return;
+
+    try {
+      const { error } = await supabase.auth.resetPasswordForEmail(email, {
+        redirectTo: `${window.location.origin}/reset-password`
+      });
+
+      if (error) throw error;
+
+      toast({
+        title: "Reset Link Sent",
+        description: "A new password reset link has been sent to your email.",
+      });
+    } catch (err: any) {
+      toast({
+        title: "Failed to Send Reset Link",
+        description: err.message || "Please try again later.",
+        variant: "destructive",
+      });
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
@@ -84,6 +108,19 @@ const ResetPassword = () => {
 
       if (sessionError) {
         console.error('Session exchange error:', sessionError);
+        
+        // Handle specific token errors with better messaging
+        if (sessionError.message.includes("invalid") || sessionError.message.includes("expired")) {
+          setError("This reset link has expired or is invalid. Please request a new one.");
+          toast({
+            title: "Reset Link Expired",
+            description: "Please request a new password reset link.",
+            variant: "destructive",
+          });
+          setLoading(false);
+          return;
+        }
+        
         throw sessionError;
       }
 
@@ -113,6 +150,8 @@ const ResetPassword = () => {
       let errorMessage = err.message || "Failed to update password";
       if (errorMessage.includes("New password should be different")) {
         errorMessage = "New password must be different from your current password";
+      } else if (errorMessage.includes("token") || errorMessage.includes("expired")) {
+        errorMessage = "This reset link has expired. Please request a new one.";
       }
       
       setError(errorMessage);
@@ -155,6 +194,17 @@ const ResetPassword = () => {
           {error && (
             <div className="bg-red-900/30 border border-red-500/50 p-3 rounded-md mb-4">
               <p className="text-sm text-white">{error}</p>
+              {(error.includes("expired") || error.includes("invalid")) && (
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="sm"
+                  onClick={handleRequestNewLink}
+                  className="mt-2 w-full text-white border-gray-600 hover:bg-gray-800"
+                >
+                  Request New Reset Link
+                </Button>
+              )}
             </div>
           )}
           
