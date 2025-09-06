@@ -1258,6 +1258,10 @@ export type Database = {
         Args: { lat1: number; lat2: number; lon1: number; lon2: number }
         Returns: number
       }
+      can_access_sensitive_facility_data: {
+        Args: Record<PropertyKey, never>
+        Returns: boolean
+      }
       check_login_attempt_status: {
         Args: { check_email: string }
         Returns: {
