@@ -505,6 +505,13 @@ export type Database = {
             referencedRelation: "storage_facilities_public_view"
             referencedColumns: ["id"]
           },
+          {
+            foreignKeyName: "fk_facility"
+            columns: ["facility_id"]
+            isOneToOne: false
+            referencedRelation: "storage_facilities_safe"
+            referencedColumns: ["id"]
+          },
         ]
       }
       storage_facility_reviews: {
@@ -552,6 +559,13 @@ export type Database = {
             columns: ["facility_id"]
             isOneToOne: false
             referencedRelation: "storage_facilities_public_view"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "storage_facility_reviews_facility_id_fkey"
+            columns: ["facility_id"]
+            isOneToOne: false
+            referencedRelation: "storage_facilities_safe"
             referencedColumns: ["id"]
           },
         ]
@@ -941,6 +955,99 @@ export type Database = {
           price_range?: Json | null
           review_count?: number | null
           state?: string | null
+        }
+        Relationships: []
+      }
+      storage_facilities_safe: {
+        Row: {
+          additional_services: Json | null
+          address: string | null
+          amenities: Json | null
+          availability: Json | null
+          avg_rating: number | null
+          business_hours: Json | null
+          cancellation_policy: string | null
+          city: string | null
+          contact_email: string | null
+          contact_phone: string | null
+          created_at: string | null
+          description: string | null
+          dimensions: Json | null
+          features: Json | null
+          id: string | null
+          images: string[] | null
+          insurance_requirements: Json | null
+          latitude: number | null
+          longitude: number | null
+          name: string | null
+          price_range: Json | null
+          review_count: number | null
+          security_details: Json | null
+          state: string | null
+          updated_at: string | null
+          verified_fields: Json | null
+          website_url: string | null
+          zip_code: string | null
+        }
+        Insert: {
+          additional_services?: Json | null
+          address?: string | null
+          amenities?: Json | null
+          availability?: Json | null
+          avg_rating?: number | null
+          business_hours?: Json | null
+          cancellation_policy?: never
+          city?: string | null
+          contact_email?: never
+          contact_phone?: never
+          created_at?: string | null
+          description?: string | null
+          dimensions?: Json | null
+          features?: Json | null
+          id?: string | null
+          images?: string[] | null
+          insurance_requirements?: Json | null
+          latitude?: number | null
+          longitude?: number | null
+          name?: string | null
+          price_range?: Json | null
+          review_count?: number | null
+          security_details?: Json | null
+          state?: string | null
+          updated_at?: string | null
+          verified_fields?: Json | null
+          website_url?: string | null
+          zip_code?: string | null
+        }
+        Update: {
+          additional_services?: Json | null
+          address?: string | null
+          amenities?: Json | null
+          availability?: Json | null
+          avg_rating?: number | null
+          business_hours?: Json | null
+          cancellation_policy?: never
+          city?: string | null
+          contact_email?: never
+          contact_phone?: never
+          created_at?: string | null
+          description?: string | null
+          dimensions?: Json | null
+          features?: Json | null
+          id?: string | null
+          images?: string[] | null
+          insurance_requirements?: Json | null
+          latitude?: number | null
+          longitude?: number | null
+          name?: string | null
+          price_range?: Json | null
+          review_count?: number | null
+          security_details?: Json | null
+          state?: string | null
+          updated_at?: string | null
+          verified_fields?: Json | null
+          website_url?: string | null
+          zip_code?: string | null
         }
         Relationships: []
       }
