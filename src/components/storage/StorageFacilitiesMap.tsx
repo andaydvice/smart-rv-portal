@@ -83,6 +83,11 @@ const StorageFacilitiesMap: React.FC<StorageFacilitiesMapProps> = ({ onSelectFea
       }
     }
   }, [allFacilities, onSelectFeaturedLocation]);
+
+  // Handle facility viewing (navigate to detail page)
+  const handleFacilityView = useCallback((facilityId: string) => {
+    window.open(`/facility/${facilityId}`, '_blank');
+  }, []);
   
   const handleFilterChange = useCallback((newFilters: FilterState) => {
     console.log('Filter changed:', newFilters);
@@ -275,6 +280,7 @@ const StorageFacilitiesMap: React.FC<StorageFacilitiesMapProps> = ({ onSelectFea
           <RecentlyViewedFacilities 
             facilities={recentlyViewed}
             onFacilityClick={onMarkerClick}
+            onFacilityView={handleFacilityView}
             className="h-[180px]"
           />
         </div>
@@ -322,6 +328,7 @@ const StorageFacilitiesMap: React.FC<StorageFacilitiesMapProps> = ({ onSelectFea
         <RecentlyViewedFacilities 
           facilities={recentlyViewed}
           onFacilityClick={onMarkerClick}
+          onFacilityView={handleFacilityView}
           className="h-[180px]"
         />
       </div>

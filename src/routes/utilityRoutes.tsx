@@ -17,6 +17,9 @@ import ResetPassword from "../pages/ResetPassword";
 import StorageFacilities from "../pages/StorageFacilities";
 import RVWeather from "../pages/RVWeather";
 
+// Facility detail page - lazy loaded
+const FacilityDetail = lazy(() => import("../pages/FacilityDetail"));
+
 // Less common routes - lazy loaded
 const StoragePreparationChecklist = lazy(() => import("../pages/StoragePreparationChecklist"));
 const Troubleshooting = lazy(() => import("../pages/Troubleshooting"));
@@ -72,6 +75,16 @@ const utilityRoutes = [
       <RouteTransition>
         <StorageFacilities />
       </RouteTransition>
+    ),
+  },
+  {
+    path: "/facility/:facilityId",
+    element: (
+      <Suspense fallback={<MinimalLoader />}>
+        <RouteTransition>
+          <FacilityDetail />
+        </RouteTransition>
+      </Suspense>
     ),
   },
   {

@@ -9,12 +9,14 @@ import { cn } from '@/lib/utils';
 interface RecentlyViewedFacilitiesProps {
   facilities: StorageFacility[];
   onFacilityClick: (facilityId: string) => void;
+  onFacilityView?: (facilityId: string) => void;
   className?: string;
 }
 
 const RecentlyViewedFacilities = ({
   facilities,
   onFacilityClick,
+  onFacilityView,
   className
 }: RecentlyViewedFacilitiesProps) => {
   console.log('🟢 RecentlyViewedFacilities render - facilities count:', facilities?.length);
@@ -64,7 +66,11 @@ const RecentlyViewedFacilities = ({
                 className="h-8 px-3 text-[#60A5FA] hover:text-blue-300 hover:bg-blue-900/20 transition-colors flex-shrink-0 ml-2"
                 onClick={(e) => {
                   e.stopPropagation();
-                  onFacilityClick(facility.id);
+                  if (onFacilityView) {
+                    onFacilityView(facility.id);
+                  } else {
+                    onFacilityClick(facility.id);
+                  }
                 }}
               >
                 View
