@@ -36,38 +36,37 @@ const normalizeStateName = (stateAbbr: string): string => {
          stateAbbr;
 };
 
-// Create a function to count facilities by state without relying on RPC
-// This runs client-side when the Supabase RPC is not available
-export async function getStateCountsWithSQL() {
-  const { supabase } = await import('@/integrations/supabase/client');
-  
-  // Use the public view to get states
-  const { data, error } = await supabase
-    .from('storage_facilities_public_view')
-    .select('state');
-  
-  if (error || !data) {
-    console.error('Error fetching states:', error);
-    return [];
+// Create a function to count facilities by state using secure function
+async function getStateCountsWithSQL() {
+  try {
+    // Use the secure public function instead of direct table access
+    const { supabase } = await import('@/integrations/supabase/client');
+    const { data, error } = await supabase.rpc('get_public_facility_data');
+    
+    if (error) {
+      console.error('Error fetching storage facilities for state counts:', error);
+      return {};
+    }
+
+    if (!data || data.length === 0) {
+      console.warn('No facilities found for state counts');
+      return {};
+    }
+
+    // Group by state and count
+    const stateCounts: { [key: string]: number } = {};
+    data.forEach(facility => {
+      if (facility.state) {
+        const normalizedState = normalizeStateName(facility.state);
+        stateCounts[normalizedState] = (stateCounts[normalizedState] || 0) + 1;
+      }
+    });
+
+    return stateCounts;
+  } catch (error) {
+    console.error('Error in getStateCountsWithSQL:', error);
+    return {};
   }
-  
-  // Count occurrences of each state using normalized state names
-  const stateCounts: Record<string, number> = {};
-  data.forEach(item => {
-    if (!item.state) return;
-    
-    // Normalize the state name
-    const normalizedState = normalizeStateName(item.state);
-    
-    // Add to counts with the normalized name
-    stateCounts[normalizedState] = (stateCounts[normalizedState] || 0) + 1;
-  });
-  
-  // Convert to array format
-  return Object.entries(stateCounts).map(([state, count]) => ({
-    state,
-    count
-  })).sort((a, b) => a.state.localeCompare(b.state));
 }
 
 // Helper function to convert public data to StorageFacility type
@@ -111,8 +110,8 @@ function convertToStorageFacilityFromPublic(data: any): StorageFacility {
     longitude: Number(data.longitude),
     features: features,
     price_range: priceRange,
-    contact_phone: undefined, // Not exposed in public view
-    contact_email: undefined, // Not exposed in public view
+    contact_phone: undefined, // Contact info not exposed in public view
+    contact_email: undefined, // Contact info not exposed in public view
     avg_rating: data.avg_rating || undefined,
     review_count: data.review_count || undefined,
     verified_fields: verifiedFields
@@ -137,15 +136,14 @@ export default function StorageFacilities() {
     console.log("Map loaded successfully");
   };
 
-  // Set a random featured location if none is selected
+  // Set a random featured location if none is selected using secure function
   useEffect(() => {
     const fetchRandomLocation = async () => {
       if (!featuredLocation) {
         try {
           const { supabase } = await import('@/integrations/supabase/client');
-          const { data, error } = await supabase
-            .from('storage_facilities_public_view')
-            .select('*');
+          // Use the secure public function instead of direct table access
+          const { data, error } = await supabase.rpc('get_public_facility_data');
             
           if (data && data.length > 0) {
             // Pick a random facility from the fetched data

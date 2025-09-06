@@ -50,9 +50,29 @@ const getStateAbbreviation = (fullStateName: string): string => {
   return fullStateName;
 }
 
-// Convert direct database results to StorageFacility format  
+// Convert secure function results to StorageFacility format  
 function convertToStorageFacility(facility: any): StorageFacility {
   const normalizedState = normalizeStateName(facility.state);
+  
+  // Ensure features is properly typed
+  const features = {
+    indoor: Boolean(facility.basic_features?.indoor || false),
+    climate_controlled: Boolean(facility.basic_features?.climate_controlled || false),
+    "24h_access": false, // Not available in public data
+    security_system: Boolean(facility.basic_features?.security_system || false),
+    vehicle_washing: false // Not available in public data
+  };
+
+  // Convert price category to range
+  const price_range = (() => {
+    if (facility.price_category === 'premium') {
+      return { min: 301, max: 500, currency: 'USD' };
+    } else if (facility.price_category === 'standard') {
+      return { min: 151, max: 300, currency: 'USD' };
+    } else {
+      return { min: 50, max: 150, currency: 'USD' };
+    }
+  })();
   
   return {
     id: facility.id,
@@ -62,16 +82,10 @@ function convertToStorageFacility(facility: any): StorageFacility {
     state: normalizedState,
     latitude: Number(facility.latitude),
     longitude: Number(facility.longitude),
-    features: facility.features || {
-      indoor: false,
-      climate_controlled: false,
-      "24h_access": false,
-      security_system: false,
-      vehicle_washing: false
-    },
-    price_range: facility.price_range || { min: 0, max: 0, currency: 'USD' },
-    contact_phone: undefined, // Not exposed in public view
-    contact_email: undefined, // Not exposed in public view
+    features: features,
+    price_range: price_range,
+    contact_phone: undefined, // Contact info not available in public data
+    contact_email: undefined, // Contact info not available in public data
     avg_rating: facility.avg_rating,
     review_count: facility.review_count,
     verified_fields: {
@@ -85,15 +99,14 @@ function convertToStorageFacility(facility: any): StorageFacility {
 }
 
 export const useStorageFacilities = (filters: FilterState) => {
+  // Fetch max price using secure function
   const { data: maxPriceData } = useQuery({
     queryKey: ['max-facility-price'],
     queryFn: async () => {
       console.log('Fetching max price data...');
       try {
-        // Direct query to storage facilities table with SELECT access
-        const { data, error } = await supabase
-          .from('storage_facilities')
-          .select('price_range');
+        // Use the secure public function instead of direct table access
+        const { data, error } = await supabase.rpc('get_public_facility_data');
         
         console.log('Max price query result:', { data: data?.length, error });
         
@@ -107,12 +120,13 @@ export const useStorageFacilities = (filters: FilterState) => {
           return fallbackPriceRange.max;
         }
         
-        // Find max price from the price ranges
-        const maxPrice = Math.max(...data.map(f => {
-          const priceRange = f.price_range as any;
-          return priceRange?.max || 0;
-        }));
-        return maxPrice || fallbackPriceRange.max;
+        // Estimate max price from price categories
+        const hasPremiuim = data.some(f => f.price_category === 'premium');
+        const hasStandard = data.some(f => f.price_category === 'standard');
+        
+        if (hasPremiuim) return 500;
+        if (hasStandard) return 300;
+        return 150; // budget category
       } catch (err) {
         console.error('Max price query failed completely, using fallback:', err);
         return fallbackPriceRange.max;
@@ -120,25 +134,15 @@ export const useStorageFacilities = (filters: FilterState) => {
     }
   });
 
+  // Fetch facilities using secure public function
   const { data: facilities, isLoading, error } = useQuery({
-    queryKey: ['storage-facilities', filters],
+    queryKey: ['storage-facilities', filters.selectedState],
     queryFn: async () => {
       console.log('Fetching storage facilities...');
       
       try {
-        // Direct query to storage facilities table
-        const { data: allData, error } = await supabase
-          .from('storage_facilities') 
-          .select(`
-            id, name, address, city, state, latitude, longitude,
-            features, price_range, avg_rating, review_count
-          `);
-        
-        // Log query params for debugging
-        console.log('Query params:', {
-          selectedState: filters.selectedState,
-          priceRange: filters.priceRange
-        });
+        // Use the secure function that only returns non-sensitive data
+        const { data: allData, error } = await supabase.rpc('get_public_facility_data');
         
         console.log('Facilities query result:', { 
           dataLength: allData?.length, 
@@ -156,56 +160,55 @@ export const useStorageFacilities = (filters: FilterState) => {
           return convertToStorageFacilityArray(fallbackStorageFacilities, filters);
         }
 
-      // Apply state filter if selected
-      let filteredData = allData;
-      if (filters.selectedState) {
-        const stateValues = [];
-        
-        // Convert full state name to abbreviation, or vice versa
-        if (filters.selectedState === 'Arizona' || filters.selectedState === 'AZ') {
-          stateValues.push('AZ', 'Arizona');
-        } else if (filters.selectedState === 'California' || filters.selectedState === 'CA') {
-          stateValues.push('CA', 'California');
-        } else if (filters.selectedState === 'Texas' || filters.selectedState === 'TX') {
-          stateValues.push('TX', 'Texas');
-        } else if (filters.selectedState === 'Florida' || filters.selectedState === 'FL') {
-          stateValues.push('FL', 'Florida');
-        } else if (filters.selectedState === 'Nevada' || filters.selectedState === 'NV') {
-          stateValues.push('NV', 'Nevada');
-        } else if (filters.selectedState === 'Georgia' || filters.selectedState === 'GA') {
-          stateValues.push('GA', 'Georgia');
-        } else if (filters.selectedState === 'Colorado' || filters.selectedState === 'CO') {
-          stateValues.push('CO', 'Colorado');
-        } else if (filters.selectedState === 'Iowa' || filters.selectedState === 'IA') {
-          stateValues.push('IA', 'Iowa');
-        } else if (filters.selectedState === 'Minnesota' || filters.selectedState === 'MN') {
-          stateValues.push('MN', 'Minnesota');
-        } else if (filters.selectedState === 'Wisconsin' || filters.selectedState === 'WI') {
-          stateValues.push('WI', 'Wisconsin');
-        } else if (filters.selectedState === 'Oregon' || filters.selectedState === 'OR') {
-          stateValues.push('OR', 'Oregon');
-        } else if (filters.selectedState === 'Pennsylvania' || filters.selectedState === 'PA') {
-          stateValues.push('PA', 'Pennsylvania');
-        } else if (filters.selectedState === 'New York' || filters.selectedState === 'NY') {
-          stateValues.push('NY', 'New York');
-        } else if (filters.selectedState === 'Ohio' || filters.selectedState === 'OH') {
-          stateValues.push('OH', 'Ohio');
-        } else if (filters.selectedState === 'Indiana' || filters.selectedState === 'IN') {
-          stateValues.push('IN', 'Indiana');
-        } else {
-          stateValues.push(filters.selectedState);
+        // Apply state filter if selected
+        let filteredData = allData;
+        if (filters.selectedState) {
+          const stateValues = [];
+          
+          // Convert full state name to abbreviation, or vice versa
+          if (filters.selectedState === 'Arizona' || filters.selectedState === 'AZ') {
+            stateValues.push('AZ', 'Arizona');
+          } else if (filters.selectedState === 'California' || filters.selectedState === 'CA') {
+            stateValues.push('CA', 'California');
+          } else if (filters.selectedState === 'Texas' || filters.selectedState === 'TX') {
+            stateValues.push('TX', 'Texas');
+          } else if (filters.selectedState === 'Florida' || filters.selectedState === 'FL') {
+            stateValues.push('FL', 'Florida');
+          } else if (filters.selectedState === 'Nevada' || filters.selectedState === 'NV') {
+            stateValues.push('NV', 'Nevada');
+          } else if (filters.selectedState === 'Georgia' || filters.selectedState === 'GA') {
+            stateValues.push('GA', 'Georgia');
+          } else if (filters.selectedState === 'Colorado' || filters.selectedState === 'CO') {
+            stateValues.push('CO', 'Colorado');
+          } else if (filters.selectedState === 'Iowa' || filters.selectedState === 'IA') {
+            stateValues.push('IA', 'Iowa');
+          } else if (filters.selectedState === 'Minnesota' || filters.selectedState === 'MN') {
+            stateValues.push('MN', 'Minnesota');
+          } else if (filters.selectedState === 'Wisconsin' || filters.selectedState === 'WI') {
+            stateValues.push('WI', 'Wisconsin');
+          } else if (filters.selectedState === 'Oregon' || filters.selectedState === 'OR') {
+            stateValues.push('OR', 'Oregon');
+          } else if (filters.selectedState === 'Pennsylvania' || filters.selectedState === 'PA') {
+            stateValues.push('PA', 'Pennsylvania');
+          } else if (filters.selectedState === 'New York' || filters.selectedState === 'NY') {
+            stateValues.push('NY', 'New York');
+          } else if (filters.selectedState === 'Ohio' || filters.selectedState === 'OH') {
+            stateValues.push('OH', 'Ohio');
+          } else if (filters.selectedState === 'Indiana' || filters.selectedState === 'IN') {
+            stateValues.push('IN', 'Indiana');
+          } else {
+            stateValues.push(filters.selectedState);
+          }
+          
+          filteredData = allData.filter(facility => 
+            stateValues.includes(facility.state)
+          );
         }
-        
-        filteredData = allData.filter(facility => 
-          stateValues.includes(facility.state)
-        );
-      }
 
-      // Log states returned for debugging
-      console.log('Total facilities fetched:', filteredData.length);
-      console.log('States returned:', [...new Set(filteredData.map(f => f.state))].sort());
-      
-        // Map database results to StorageFacility objects
+        console.log('Total facilities fetched:', filteredData.length);
+        console.log('States returned:', [...new Set(filteredData.map(f => f.state))].sort());
+        
+        // Map secure function results to StorageFacility objects using the converter
         return filteredData.map(facility => convertToStorageFacility(facility));
       } catch (err) {
         console.error('Complete query failure, using fallback data:', err);
