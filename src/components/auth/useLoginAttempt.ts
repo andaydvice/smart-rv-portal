@@ -28,28 +28,29 @@ export const useLoginAttempt = () => {
   // Check if user is currently locked out (used before authentication)
   const checkUserLockout = async (email: string): Promise<{ isLockedOut: boolean; lockoutUntil: Date | null; remainingAttempts: number }> => {
     try {
+      // Use the secure function instead of direct table access to prevent email harvesting
       const { data, error } = await supabase
-        .from("login_attempts")
-        .select("*")
-        .eq("email", email.toLowerCase())
-        .maybeSingle();
+        .rpc('check_login_attempt_status', { check_email: email.toLowerCase() });
       
       if (error) {
         console.error("Error checking user lockout:", error);
         return { isLockedOut: false, lockoutUntil: null, remainingAttempts: LOCKOUT_THRESHOLD };
       }
 
-      if (!data) {
+      // Function returns an array, get first result or null if no records
+      const attemptData = data && data.length > 0 ? data[0] : null;
+      
+      if (!attemptData) {
         return { isLockedOut: false, lockoutUntil: null, remainingAttempts: LOCKOUT_THRESHOLD };
       }
 
       // Check if currently locked out
-      if (data.lockout_until) {
-        const lockoutTime = new Date(data.lockout_until);
+      if (attemptData.lockout_until) {
+        const lockoutTime = new Date(attemptData.lockout_until);
         const now = new Date();
         
         if (lockoutTime > now) {
-          await logSecurityEvent('login_attempt_during_lockout', 'high', { email, lockout_until: data.lockout_until });
+          await logSecurityEvent('login_attempt_during_lockout', 'high', { email, lockout_until: attemptData.lockout_until });
           return { 
             isLockedOut: true, 
             lockoutUntil: lockoutTime,
@@ -62,7 +63,7 @@ export const useLoginAttempt = () => {
         }
       }
 
-      const remainingAttempts = Math.max(0, LOCKOUT_THRESHOLD - data.failed_attempts);
+      const remainingAttempts = Math.max(0, LOCKOUT_THRESHOLD - attemptData.failed_attempts);
       return { 
         isLockedOut: false, 
         lockoutUntil: null,

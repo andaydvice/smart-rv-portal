@@ -1151,6 +1151,15 @@ export type Database = {
         Args: { lat1: number; lat2: number; lon1: number; lon2: number }
         Returns: number
       }
+      check_login_attempt_status: {
+        Args: { check_email: string }
+        Returns: {
+          email: string
+          failed_attempts: number
+          last_attempt_at: string
+          lockout_until: string
+        }[]
+      }
       check_rate_limit: {
         Args: {
           endpoint_name: string
