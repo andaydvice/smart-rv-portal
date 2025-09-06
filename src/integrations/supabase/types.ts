@@ -793,6 +793,28 @@ export type Database = {
         }
         Relationships: []
       }
+      safe_geography_columns: {
+        Row: {
+          coord_dimension: number | null
+          f_geography_column: string | null
+          f_table_name: string | null
+          f_table_schema: string | null
+          srid: number | null
+          type: string | null
+        }
+        Relationships: []
+      }
+      safe_geometry_columns: {
+        Row: {
+          coord_dimension: number | null
+          f_geometry_column: string | null
+          f_table_name: string | null
+          f_table_schema: string | null
+          srid: number | null
+          type: string | null
+        }
+        Relationships: []
+      }
       secure_spatial_ref_sys: {
         Row: {
           auth_name: string | null
