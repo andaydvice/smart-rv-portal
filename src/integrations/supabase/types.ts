@@ -1435,6 +1435,24 @@ export type Database = {
           state: string
         }[]
       }
+      get_public_reviews: {
+        Args: Record<PropertyKey, never>
+        Returns: {
+          affiliate_partner: string
+          created_at: string
+          featured: boolean
+          helpful_count: number
+          id: string
+          product_category: string
+          product_name: string
+          rating: number
+          recommended: boolean
+          review_text: string
+          title: string
+          usage_duration: string
+          verified_purchase: boolean
+        }[]
+      }
       get_spatial_ref_sys: {
         Args: Record<PropertyKey, never>
         Returns: {
