@@ -222,7 +222,7 @@ const SecuritySystem = () => {
           </div>
 
           {/* Pricing Header Image */}
-          <div className="relative w-full h-96 md:h-[500px] mb-12">
+          <div className="relative w-full h-96 md:h-[500px] mb-12 mt-16">
             <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-gray-900 z-10" />
             <img 
               src="/pricing-header.jpg"
