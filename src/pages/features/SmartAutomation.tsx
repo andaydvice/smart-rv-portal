@@ -93,6 +93,14 @@ const SmartAutomation = () => {
             </div>
           </div>
           
+          <div className="mb-8">
+            <img 
+              src="/src/assets/smart-automation-hero.jpg" 
+              alt="Smart RV automation control center with multiple digital displays" 
+              className="w-full h-64 md:h-80 object-cover rounded-lg shadow-lg"
+            />
+          </div>
+          
           <OptimizedAffiliateGrid
             title="Smart Automation Solutions"
             subtitle="Professional automation systems and monitoring for your smart RV"
