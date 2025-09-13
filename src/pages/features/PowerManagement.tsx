@@ -28,17 +28,34 @@ const PowerManagement = () => {
           url: canonicalUrl
         })}</script>
       </Helmet>
+      {/* Hero Image Section */}
+      <div className="relative w-full h-[600px] md:h-[80vh] max-h-[800px] overflow-hidden">
+        <img
+          src="/lovable-uploads/rv-power-management.jpg"
+          alt="Advanced RV power management system with digital display showing battery levels and energy distribution"
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-black/50" />
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="text-center px-6">
+            <div className="flex items-center justify-center gap-4 mb-6">
+              <Battery className="h-12 w-12 text-yellow-500" />
+              <h1 className="text-5xl md:text-6xl font-bold text-white">Power Management</h1>
+            </div>
+            <p className="text-xl text-white/90 max-w-3xl mx-auto">
+              Intelligent energy optimization with solar integration, smart distribution, and real-time analytics for extended off-grid adventures
+            </p>
+          </div>
+        </div>
+      </div>
+
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6 }}
-        className="w-full pt-24 px-4 bg-gradient-to-b from-gray-900 to-gray-800"
+        className="w-full px-4 bg-gradient-to-b from-gray-900 to-gray-800"
       >
-        <div className="max-w-7xl mx-auto">
-          <div className="flex items-center gap-4 mb-8">
-            <Battery className="h-8 w-8 text-yellow-500" />
-            <h1 className="text-4xl font-bold text-white">Power Management</h1>
-          </div>
+        <div className="max-w-7xl mx-auto pt-12">
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
             <div className="bg-gray-800/50 p-8 rounded-lg border border-gray-700">
