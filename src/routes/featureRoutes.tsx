@@ -16,10 +16,10 @@ import PowerManagement from "@/pages/features/PowerManagement";
 import ClimateControl from "@/pages/features/ClimateControl";
 import Entertainment from "@/pages/features/Entertainment";
 import WaterSystems from "@/pages/features/WaterSystems";
+import NavigationSystem from "@/pages/features/NavigationSystem";
 
 // Less popular feature detail pages (lazy)
 const SmartKitchen = lazy(() => import("@/pages/features/SmartKitchen"));
-const NavigationSystem = lazy(() => import("@/pages/features/NavigationSystem"));
 const SecuritySystem = lazy(() => import("@/pages/features/SecuritySystem"));
 const AutomatedDriving = lazy(() => import("@/pages/features/AutomatedDriving"));
 const SmartAutomation = lazy(() => import("@/pages/features/SmartAutomation"));
@@ -86,11 +86,9 @@ export const featureRoutes: RouteObject[] = [
   {
     path: "/features/navigation-system",
     element: (
-      <Suspense fallback={<MinimalLoader />}>
-        <RouteTransition>
-          <NavigationSystem />
-        </RouteTransition>
-      </Suspense>
+      <RouteTransition>
+        <NavigationSystem />
+      </RouteTransition>
     ),
     errorElement: <ErrorPage />,
   },
