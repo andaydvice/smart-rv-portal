@@ -34,11 +34,26 @@ const SecuritySystem = () => {
         transition={{ duration: 0.6 }}
         className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800"
       >
-        <div className="max-w-7xl mx-auto px-4 pt-24 pb-12">
-          <div className="flex items-center gap-4 mb-8">
-            <Shield className="h-8 w-8 text-emerald-500" />
-            <h1 className="text-4xl font-bold text-white">Security System</h1>
+        {/* Page-wide Header Image */}
+        <div className="relative w-full h-96 md:h-[500px] mb-12">
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-gray-900 z-10" />
+          <img 
+            src="/security-system-hero.jpg"
+            alt="RV security command center with multiple monitoring displays and control panels" 
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute bottom-0 left-0 w-full p-8 z-20">
+            <div className="max-w-7xl mx-auto px-4">
+              <div className="flex items-center gap-4 mb-4">
+                <Shield className="h-8 w-8 text-emerald-500" />
+                <h1 className="text-4xl md:text-5xl font-bold text-white drop-shadow-lg">Security System</h1>
+              </div>
+              <p className="text-lg text-white drop-shadow-lg">Complete protection and monitoring for your RV</p>
+            </div>
           </div>
+        </div>
+
+        <div className="max-w-7xl mx-auto px-4 pb-12">
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
             <div className="bg-gray-800/50 p-8 rounded-lg border border-gray-700">
