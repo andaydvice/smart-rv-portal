@@ -21,6 +21,8 @@ const NavigationSystem = () => {
               src="/lovable-uploads/navigation-hero.jpg"
               alt="RV Navigation System Dashboard Interface" 
               className="w-full h-full object-cover"
+              onLoad={() => console.log('Navigation hero image loaded successfully')}
+              onError={() => console.log('Navigation hero image failed to load')}
             />
             <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
               <div className="text-center">
