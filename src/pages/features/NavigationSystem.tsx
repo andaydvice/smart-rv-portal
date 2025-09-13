@@ -89,6 +89,15 @@ const NavigationSystem = () => {
             </div>
           </div>
           
+          {/* Trip Planning Image Section */}
+          <div className="w-full mb-16">
+            <img 
+              src="/lovable-uploads/navigation-trip-planning.jpg"
+              alt="RV Navigation and Trip Planning Setup" 
+              className="w-full h-96 object-cover rounded-lg"
+            />
+          </div>
+          
           <OptimizedAffiliateGrid
             title="Navigation & Trip Planning"
             subtitle="Navigate safely with RV-specific routing and emergency backup"
