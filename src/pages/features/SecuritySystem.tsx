@@ -221,8 +221,23 @@ const SecuritySystem = () => {
             </div>
           </div>
 
+          {/* Pricing Header Image */}
+          <div className="relative w-full h-96 md:h-[500px] mb-12">
+            <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-gray-900 z-10" />
+            <img 
+              src="/pricing-header.jpg"
+              alt="Modern RV in showroom displaying current USA pricing for 2025" 
+              className="w-full h-full object-cover"
+              loading="lazy"
+            />
+            <div className="absolute inset-0 flex items-center justify-center z-20">
+              <h2 className="text-4xl md:text-6xl font-bold text-white drop-shadow-2xl text-center">
+                Current USA Pricing (2025)
+              </h2>
+            </div>
+          </div>
+
           <div className="bg-gray-800/50 p-8 rounded-lg border border-gray-700 mb-12">
-            <h2 className="text-2xl font-semibold text-white mb-6 text-left">Current USA Pricing (2025)</h2>
             
             <div className="overflow-x-auto mb-6">
               <table className="min-w-full divide-y divide-gray-700">
