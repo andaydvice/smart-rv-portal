@@ -95,6 +95,8 @@ const NavigationSystem = () => {
               src="/lovable-uploads/navigation-trip-planning.jpg"
               alt="RV Navigation and Trip Planning Setup" 
               className="w-full h-96 object-cover rounded-lg"
+              onLoad={() => console.log('Trip planning image loaded successfully')}
+              onError={(e) => console.log('Trip planning image failed to load:', e)}
             />
           </div>
           
