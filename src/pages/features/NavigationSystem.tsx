@@ -32,8 +32,8 @@ const NavigationSystem = () => {
                 <p>We ensure the safest and most efficient route to your destination.</p>
               </div>
               <img 
-                src="/lovable-uploads/9b875f9e-6d50-4ecf-b12a-caafbb8ea530.png"
-                alt="RV Navigation System Interface" 
+                src="/lovable-uploads/navigation-hero.jpg"
+                alt="RV Navigation System Dashboard Interface" 
                 className="w-full h-64 object-cover rounded-lg mb-6"
               />
               <ul className="list-disc list-inside space-y-3 text-gray-300">
