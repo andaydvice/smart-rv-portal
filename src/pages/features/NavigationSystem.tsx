@@ -15,9 +15,24 @@ const NavigationSystem = () => {
         className="flex-grow bg-gradient-to-b from-gray-900 to-gray-800"
       >
         <div className="max-w-7xl mx-auto px-4 pt-24 pb-12">
-          <div className="flex items-center gap-4 mb-8">
-            <Navigation className="h-8 w-8 text-connectivity-accent" />
-            <h1 className="text-4xl font-bold text-white">Navigation System</h1>
+          {/* Hero Section */}
+          <div className="relative h-96 mb-16 rounded-lg overflow-hidden">
+            <img 
+              src="/lovable-uploads/navigation-hero.jpg"
+              alt="RV Navigation System Dashboard Interface" 
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
+              <div className="text-center">
+                <div className="flex items-center justify-center gap-4 mb-6">
+                  <Navigation className="h-12 w-12 text-connectivity-accent" />
+                  <h1 className="text-5xl font-bold text-white">Navigation System</h1>
+                </div>
+                <p className="text-xl text-white/90 max-w-2xl">
+                  Advanced GPS navigation designed specifically for RVs with real-time updates and route optimization
+                </p>
+              </div>
+            </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
@@ -32,8 +47,8 @@ const NavigationSystem = () => {
                 <p>We ensure the safest and most efficient route to your destination.</p>
               </div>
               <img 
-                src="/lovable-uploads/navigation-hero.jpg"
-                alt="RV Navigation System Dashboard Interface" 
+                src="/lovable-uploads/9b875f9e-6d50-4ecf-b12a-caafbb8ea530.png"
+                alt="RV Navigation System Interface" 
                 className="w-full h-64 object-cover rounded-lg mb-6"
               />
               <ul className="list-disc list-inside space-y-3 text-gray-300">
