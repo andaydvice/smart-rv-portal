@@ -16,6 +16,7 @@ const PowerManagement = () => {
         <title>{title}</title>
         <meta name="description" content={description} />
         <link rel="canonical" href={canonicalUrl} />
+        <link rel="preload" as="image" href="/lovable-uploads/rv-power-management.jpg" fetchPriority="high" />
         <meta property="og:title" content={title} />
         <meta property="og:description" content={description} />
         <meta property="og:type" content="website" />
@@ -34,6 +35,10 @@ const PowerManagement = () => {
           src="/lovable-uploads/rv-power-management.jpg"
           alt="Advanced RV power management system with digital display showing battery levels and energy distribution"
           className="absolute inset-0 w-full h-full object-cover"
+          loading="eager"
+          fetchPriority="high"
+          onLoad={() => console.log('Power management hero image loaded successfully')}
+          onError={(e) => console.error('Power management hero image failed to load:', e)}
         />
         <div className="absolute inset-0 bg-black/50" />
         <div className="absolute inset-0 flex items-center justify-center">
