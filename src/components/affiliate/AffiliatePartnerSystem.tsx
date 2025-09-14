@@ -42,7 +42,7 @@ export const AFFILIATE_PARTNERS: Record<string, PartnerLink> = {
     description: "The most comprehensive RV trip planning and GPS navigation app",
     primaryBenefit: "Plan safer, smarter routes with RV-specific navigation and data",
     commission: "25%",
-    cookieDuration: "170 days",
+    cookieDuration: "180 days",
     category: 'tools'
   },
   goodsam: {
@@ -66,17 +66,8 @@ export const AFFILIATE_PARTNERS: Record<string, PartnerLink> = {
     category: 'accessories'
   },
 
-  // NEW HIGH-VALUE PROGRAMS - Phase 1 (Top Tier)
-  rvtcom: {
-    name: "RVT.com",
-    baseUrl: "https://rvt.com",
-    refCode: "smartrvdeals",
-    description: "Premium RV marketplace with professional dealers and high-ticket sales",
-    primaryBenefit: "Earn top commissions on luxury RV sales with professional support",
-    commission: "20-30% + up to $1,000 bonus",
-    cookieDuration: "45 days",
-    category: 'services'
-  },
+  // REMOVED: rvtcom - Inactive program on FlexOffers
+  
   solardirect: {
     name: "Solar Direct",
     baseUrl: "https://solardirect.com",
@@ -92,8 +83,8 @@ export const AFFILIATE_PARTNERS: Record<string, PartnerLink> = {
     baseUrl: "https://a1solarstore.com",
     refCode: "smartsolar180",
     description: "High-capacity solar systems for serious off-grid RV living",
-    primaryBenefit: "Earn up to $250 per sale on premium solar equipment",
-    commission: "Up to $250/sale (~6%)",
+    primaryBenefit: "6% commission capped at $250 on premium solar equipment",
+    commission: "6% (max $250)",
     cookieDuration: "180 days",
     category: 'solar'
   },
@@ -115,7 +106,7 @@ export const AFFILIATE_PARTNERS: Record<string, PartnerLink> = {
     refCode: "smartrv",
     description: "Premium LiFePO4 battery systems with performance bonuses for high-volume affiliates",
     primaryBenefit: "Comprehensive lithium battery lines with verified active program",
-    commission: "Up to 10%",
+    commission: "5-6%",
     cookieDuration: "30 days",
     category: 'tech'
   },
@@ -134,8 +125,8 @@ export const AFFILIATE_PARTNERS: Record<string, PartnerLink> = {
     baseUrl: "https://starlink-installers.com",
     refCode: "smartrv",
     description: "Professional Starlink installation services for RVs",
-    primaryBenefit: "High-value installations with professional support",
-    commission: "Up to $480 per installation",
+    primaryBenefit: "12% commission on high-value installation services",
+    commission: "12%",
     cookieDuration: "60 days",
     category: 'connectivity'
   },
@@ -159,16 +150,9 @@ export const AFFILIATE_PARTNERS: Record<string, PartnerLink> = {
     cookieDuration: "30 days",
     category: 'accessories'
   },
-  harvesthosts: {
-    name: "Harvest Hosts",
-    baseUrl: "https://harvesthosts.com",
-    refCode: "smartrv",
-    description: "Unique overnight stays at farms, wineries, and attractions",
-    primaryBenefit: "Flat-rate commission with extended cookie duration",
-    commission: "$50 flat rate",
-    cookieDuration: "90 days",
-    category: 'services'
-  },
+  
+  // REMOVED: harvesthosts - Customer referral program, not affiliate marketing
+  
   // Phase 3 (Strategic Partners) - NEW TIER 1 PROGRAMS
   overlandsolar: {
     name: "Overland Solar",
@@ -177,7 +161,7 @@ export const AFFILIATE_PARTNERS: Record<string, PartnerLink> = {
     description: "Complete off-grid solar solutions for adventure vehicles",
     primaryBenefit: "Premium solar systems designed for serious off-grid living",
     commission: "10-15%",
-    cookieDuration: "60 days",
+    cookieDuration: "30 days",
     category: 'solar'
   },
   cruiseamerica: {
@@ -197,7 +181,7 @@ export const AFFILIATE_PARTNERS: Record<string, PartnerLink> = {
     description: "Portable power stations and solar generators for RV living",
     primaryBenefit: "High-value power solutions with $1000+ average orders",
     commission: "5%",
-    cookieDuration: "30 days",
+    cookieDuration: "7 days",
     category: 'tech'
   },
   nomadinternet: {
@@ -359,5 +343,5 @@ export const getPartnersByCategory = (category: string) => {
 
 // Helper function to get top commission partners - VERIFIED ONLY
 export const getTopCommissionPartners = () => {
-  return ['rvlife', 'rvtcom', 'solardirect', 'a1solarstore', 'starlinkinstallers', 'overlandsolar', 'cruiseamerica', 'ecoflow', 'nomadinternet'];
+  return ['rvlife', 'solardirect', 'a1solarstore', 'starlinkinstallers', 'overlandsolar', 'cruiseamerica', 'ecoflow', 'nomadinternet'];
 };
