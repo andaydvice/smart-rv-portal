@@ -23,14 +23,13 @@ const SmartAutomation = () => {
       >
         {/* Hero Image Section */}
         <div className="relative w-full h-[400px] md:h-[600px] mb-12 overflow-hidden rounded-lg">
-          <PreloadedHeaderImage
-            src="/lovable-uploads/smart-automation-hero.jpg"
+          <img
+            src="/lovable-uploads/smart-automation-hero.jpg?v=1"
             alt="Smart RV interior with automated lighting, smart displays, and modern automation technology"
             className="absolute inset-0 w-full h-full object-cover"
-            width={1920}
-            height={600}
-            priority="high"
-            onImageLoaded={() => console.log('Smart automation hero image loaded successfully')}
+            loading="eager"
+            onLoad={() => console.log('Smart automation hero image loaded successfully')}
+            onError={(e) => console.error('Hero image failed to load:', e)}
           />
           <div className="absolute inset-0 bg-black/30"></div>
           <div className="absolute inset-0 flex items-center justify-center">
