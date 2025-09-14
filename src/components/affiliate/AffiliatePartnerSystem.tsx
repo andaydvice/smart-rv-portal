@@ -51,7 +51,7 @@ export const AFFILIATE_PARTNERS: Record<string, PartnerLink> = {
     refCode: "smartrv",
     description: "America's leading RV membership organization with 2M+ members",
     primaryBenefit: "Save money and get peace of mind with roadside assistance and discounts",
-    commission: "Up to 15% / $5-$15 per sale",
+    commission: "Up to 15%",
     cookieDuration: "10 days",
     category: 'services'
   },
@@ -145,7 +145,7 @@ export const AFFILIATE_PARTNERS: Record<string, PartnerLink> = {
     baseUrl: "https://hotshotssecret.com",
     refCode: "smartadditives",
     description: "Premium fuel and oil additives for RV engines and generators",
-    primaryBenefit: "Recurring customer purchases with strong brand loyalty",
+    primaryBenefit: "Migrated to Awin platform (August 15, 2025) - apply through Awin",
     commission: "8%",
     cookieDuration: "30 days",
     category: 'accessories'
@@ -189,8 +189,8 @@ export const AFFILIATE_PARTNERS: Record<string, PartnerLink> = {
     baseUrl: "https://nomadinternet.com",
     refCode: "smartrv",
     description: "Unlimited 5G internet plans for full-time RV travelers",
-    primaryBenefit: "Flat $50 commission per sale with reliable payouts",
-    commission: "$50 per sale",
+    primaryBenefit: "Two active programs: $50 Partner Program (primary) and $35 CJ Affiliate (backup)",
+    commission: "$50 Partner / $35 CJ",
     cookieDuration: "30 days",
     category: 'connectivity'
   },
