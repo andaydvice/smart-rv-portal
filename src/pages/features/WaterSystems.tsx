@@ -70,6 +70,18 @@ const WaterSystems = () => {
             </div>
           </div>
 
+          {/* Smart Water Systems Image */}
+          <div className="mt-12 mb-8">
+            <img 
+              src="/lovable-uploads/smart-water-systems.jpg?v=1"
+              alt="Modern RV bathroom with smart water system featuring digital shower controls and water monitoring displays"
+              className="w-full h-64 md:h-80 object-cover rounded-lg"
+              loading="lazy"
+              onLoad={() => console.log('Smart water systems image loaded successfully')}
+              onError={(e) => console.error('Smart water systems image failed to load:', e)}
+            />
+          </div>
+
           <div className="bg-gray-800/30 p-8 rounded-lg border border-gray-700 mb-12">
             <h2 className="text-2xl font-semibold text-blue-400 mb-4">Advanced Features</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
