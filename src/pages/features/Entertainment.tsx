@@ -142,6 +142,15 @@ const Entertainment = () => {
             </div>
           </div>
           
+          {/* Entertainment & Lifestyle Section Image */}
+          <div className="mb-8">
+            <img 
+              src="/entertainment-lifestyle.jpg"
+              alt="Luxury RV interior with premium entertainment system featuring multiple screens, comfortable seating, and panoramic views"
+              className="w-full h-auto rounded-lg"
+            />
+          </div>
+          
           <OptimizedAffiliateGrid
             title="Entertainment & Lifestyle"
             subtitle="Complete solutions for entertainment, connectivity, and the RV lifestyle"
