@@ -180,8 +180,18 @@ const PowerManagement = () => {
             </div>
           </div>
           
+          {/* Professional Installation Image */}
+          <div className="mt-12 mb-8">
+            <img 
+              src="/lovable-uploads/professional-power-installation.jpg"
+              alt="Professional technician installing RV power management system with solar panels and battery monitoring equipment"
+              className="w-full h-64 md:h-80 object-cover rounded-lg"
+              loading="lazy"
+            />
+          </div>
+
           {/* Affiliate Recommendations */}
-          <div className="mt-12">
+          <div className="mt-8">
             <OptimizedAffiliateGrid
               title="Professional Power System Installation"
               subtitle="Get expert installation and monitoring for your RV power management system"
