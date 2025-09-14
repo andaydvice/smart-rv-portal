@@ -22,9 +22,28 @@ const ClimateControl = () => {
         className="flex-grow pt-24 pb-16 px-4 bg-gradient-to-b from-gray-900 to-gray-800"
       >
         <div className="max-w-7xl mx-auto">
-          <div className="flex items-center gap-4 mb-8">
-            <Thermometer className="h-8 w-8 text-[#5B9BD5]" />
-            <h1 className="text-4xl font-bold text-white">Smart Climate Control</h1>
+          {/* Header Image with Text Overlay */}
+          <div className="mb-12 relative">
+            <div className="relative w-full h-[400px] md:h-[500px] rounded-lg overflow-hidden">
+              <img
+                src="/smart-climate-control-hero.jpeg"
+                alt="Smart climate control system interface with family in luxury RV interior showing temperature monitoring and HVAC controls"
+                className="w-full h-full object-cover object-center"
+                style={{ objectPosition: '50% 30%' }}
+              />
+              {/* Text Overlay */}
+              <div className="absolute inset-0 bg-black/50 flex items-center justify-center z-10">
+                <div className="text-center px-6 max-w-4xl">
+                  <div className="flex items-center justify-center gap-4 mb-6">
+                    <Thermometer className="h-10 w-10 md:h-12 md:w-12 text-[#5B9BD5]" />
+                    <h1 className="text-4xl md:text-6xl font-bold text-white drop-shadow-lg">Smart Climate Control</h1>
+                  </div>
+                  <p className="text-lg md:text-xl text-gray-200 max-w-3xl mx-auto leading-relaxed drop-shadow-lg">
+                    Advanced temperature management with intelligent humidity control and air filtration for perfect comfort automatically.
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
