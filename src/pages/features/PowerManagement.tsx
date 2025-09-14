@@ -32,7 +32,7 @@ const PowerManagement = () => {
       {/* Hero Image Section */}
       <div className="relative w-full h-[600px] md:h-[80vh] max-h-[800px] overflow-hidden">
         <img
-          src="/lovable-uploads/power-management-header.jpg?v=2"
+          src="/lovable-uploads/power-management-header.jpg?v=3"
           alt="Modern RV interior with advanced power management dashboard showing battery levels, solar input, and electrical distribution controls"
           className="absolute inset-0 w-full h-full object-cover"
           loading="eager"
