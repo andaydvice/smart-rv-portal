@@ -813,6 +813,22 @@ export type Database = {
           srid: number | null
           type: string | null
         }
+        Insert: {
+          coord_dimension?: number | null
+          f_geometry_column?: never
+          f_table_name?: never
+          f_table_schema?: never
+          srid?: number | null
+          type?: never
+        }
+        Update: {
+          coord_dimension?: number | null
+          f_geometry_column?: never
+          f_table_name?: never
+          f_table_schema?: never
+          srid?: number | null
+          type?: never
+        }
         Relationships: []
       }
       secure_spatial_ref_sys: {
