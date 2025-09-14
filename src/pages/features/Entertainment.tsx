@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
 import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
 import { VideoSection } from "@/components/ui/VideoSection";
+import { PreloadedHeaderImage } from "@/components/ui/PreloadedHeaderImage";
 
 const Entertainment = () => {
   useEffect(() => {
@@ -15,17 +16,46 @@ const Entertainment = () => {
 
   return (
     <Layout>
+      {/* Hero Section with Header Image */}
+      <section className="relative min-h-[80vh] flex items-center justify-center overflow-hidden">
+        <PreloadedHeaderImage
+          src="/entertainment-hero.jpeg"
+          alt="Luxury RV interior with family enjoying entertainment system, featuring large TV, premium audio speakers, and comfortable seating"
+          className="absolute inset-0 w-full h-full object-cover"
+          priority="high"
+          width={1920}
+          height={1080}
+        />
+        
+        {/* Dark overlay for better text readability */}
+        <div className="absolute inset-0 bg-black/40 z-10" />
+        
+        {/* Content overlay */}
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="relative z-20 text-center px-4 max-w-4xl mx-auto"
+        >
+          <div className="flex items-center justify-center gap-4 mb-6">
+            <Tv className="h-12 w-12 text-white" />
+            <h1 className="text-5xl md:text-6xl font-bold text-white">
+              Entertainment System
+            </h1>
+          </div>
+          <p className="text-xl md:text-2xl text-white/90 mb-8 leading-relaxed">
+            Advanced entertainment technology with premium audio and visual systems for perfect comfort and enjoyment on the road.
+          </p>
+        </motion.div>
+      </section>
+
       <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6 }}
-        className="flex-grow pt-24 pb-16 px-4 bg-gradient-to-b from-gray-900 to-gray-800"
+        className="flex-grow py-16 px-4 bg-gradient-to-b from-gray-900 to-gray-800"
       >
         <div className="max-w-7xl mx-auto">
-          <div className="flex items-center gap-4 mb-8">
-            <Tv className="h-8 w-8 text-[#5B9BD5]" />
-            <h1 className="text-4xl font-bold text-white">Entertainment System</h1>
-          </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
             
