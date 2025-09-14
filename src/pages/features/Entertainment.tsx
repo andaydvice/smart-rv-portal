@@ -143,13 +143,19 @@ const Entertainment = () => {
           </div>
           
           {/* Entertainment & Lifestyle Section Image */}
-          <div className="mb-8">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="mb-12"
+          >
             <img 
               src="/entertainment-lifestyle.jpg"
               alt="Luxury RV interior with premium entertainment system featuring multiple screens, comfortable seating, and panoramic views"
-              className="w-full h-auto rounded-lg"
+              className="w-full h-auto rounded-xl shadow-2xl border border-gray-700/50"
+              loading="lazy"
             />
-          </div>
+          </motion.div>
           
           <OptimizedAffiliateGrid
             title="Entertainment & Lifestyle"
