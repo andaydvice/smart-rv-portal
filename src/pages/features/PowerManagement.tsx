@@ -16,7 +16,7 @@ const PowerManagement = () => {
         <title>{title}</title>
         <meta name="description" content={description} />
         <link rel="canonical" href={canonicalUrl} />
-        <link rel="preload" as="image" href="/lovable-uploads/rv-power-management.jpg" fetchPriority="high" />
+        <link rel="preload" as="image" href="/lovable-uploads/power-management-header.jpg" fetchPriority="high" />
         <meta property="og:title" content={title} />
         <meta property="og:description" content={description} />
         <meta property="og:type" content="website" />
@@ -32,7 +32,7 @@ const PowerManagement = () => {
       {/* Hero Image Section */}
       <div className="relative w-full h-[600px] md:h-[80vh] max-h-[800px] overflow-hidden">
         <img
-          src="/lovable-uploads/rv-power-management.jpg"
+          src="/lovable-uploads/power-management-header.jpg"
           alt="Advanced RV power management system with digital display showing battery levels and energy distribution"
           className="absolute inset-0 w-full h-full object-cover"
           loading="eager"
