@@ -32,13 +32,13 @@ const PowerManagement = () => {
       {/* Hero Image Section */}
       <div className="relative w-full h-[600px] md:h-[80vh] max-h-[800px] overflow-hidden">
         <img
-          src="/lovable-uploads/power-management-header.jpg"
-          alt="Advanced RV power management system with digital display showing battery levels and energy distribution"
+          src="/lovable-uploads/power-management-header.jpg?v=2"
+          alt="Modern RV interior with advanced power management dashboard showing battery levels, solar input, and electrical distribution controls"
           className="absolute inset-0 w-full h-full object-cover"
           loading="eager"
           fetchPriority="high"
-          onLoad={() => console.log('Power management hero image loaded successfully')}
-          onError={(e) => console.error('Power management hero image failed to load:', e)}
+          onLoad={() => console.log('NEW Power management header image loaded successfully')}
+          onError={(e) => console.error('NEW Power management header image failed to load:', e)}
         />
         <div className="absolute inset-0 bg-black/50" />
         <div className="absolute inset-0 flex items-center justify-center">
