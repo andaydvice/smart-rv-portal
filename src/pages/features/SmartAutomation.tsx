@@ -116,12 +116,15 @@ const SmartAutomation = () => {
           
           
           {/* Smart Automation Image */}
-          <div className="mb-12">
-            <img
+          <div className="mb-12 relative">
+            <PreloadedHeaderImage
               src="/smart-automation-hero.jpeg"
               alt="Futuristic RV control center with blue LED lighting, multiple screens displaying automation systems, and advanced monitoring interfaces"
               className="w-full h-[400px] md:h-[500px] object-cover rounded-lg"
-              loading="lazy"
+              width={1920}
+              height={500}
+              priority="high"
+              onImageLoaded={() => console.log('Smart automation section PreloadedHeaderImage loaded successfully')}
             />
           </div>
           
