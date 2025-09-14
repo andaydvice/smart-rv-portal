@@ -183,10 +183,12 @@ const PowerManagement = () => {
           {/* Professional Installation Image */}
           <div className="mt-12 mb-8">
             <img 
-              src="/lovable-uploads/professional-power-installation.jpg"
+              src="/lovable-uploads/professional-power-installation.jpg?v=1"
               alt="Professional technician installing RV power management system with solar panels and battery monitoring equipment"
               className="w-full h-64 md:h-80 object-cover rounded-lg"
               loading="lazy"
+              onLoad={() => console.log('Professional installation image loaded successfully')}
+              onError={(e) => console.error('Professional installation image failed to load:', e)}
             />
           </div>
 
