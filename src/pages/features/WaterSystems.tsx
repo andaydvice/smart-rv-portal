@@ -24,25 +24,24 @@ const WaterSystems = () => {
         <div className="max-w-7xl mx-auto">
           {/* Header Image with Text Overlay */}
           <div className="mb-12 relative">
-            <PreloadedHeaderImage
-              src="/smart-water-systems-hero.jpeg"
-              alt="Smart water system control interface with couple in RV examining water filtration monitoring displays and water quality metrics"
-              className="w-full h-[400px] md:h-[500px] object-cover rounded-lg"
-              width={1920}
-              height={500}
-              priority="high"
-              onImageLoaded={() => console.log("Smart water systems header image loaded successfully")}
-            />
-            {/* Text Overlay */}
-            <div className="absolute inset-0 bg-black/40 rounded-lg flex items-center justify-center">
-              <div className="text-center px-6 max-w-4xl">
-                <div className="flex items-center justify-center gap-4 mb-6">
-                  <Droplet className="h-10 w-10 md:h-12 md:w-12 text-blue-400" />
-                  <h1 className="text-4xl md:text-6xl font-bold text-white">Smart Water Systems</h1>
+            <div className="relative w-full h-[400px] md:h-[500px] rounded-lg overflow-hidden">
+              <img
+                src="/smart-water-systems-hero.jpeg"
+                alt="Smart water system control interface with couple in RV examining water filtration monitoring displays and water quality metrics"
+                className="w-full h-full object-cover object-center"
+                style={{ objectPosition: '50% 30%' }}
+              />
+              {/* Text Overlay */}
+              <div className="absolute inset-0 bg-black/50 flex items-center justify-center z-10">
+                <div className="text-center px-6 max-w-4xl">
+                  <div className="flex items-center justify-center gap-4 mb-6">
+                    <Droplet className="h-10 w-10 md:h-12 md:w-12 text-blue-400" />
+                    <h1 className="text-4xl md:text-6xl font-bold text-white drop-shadow-lg">Smart Water Systems</h1>
+                  </div>
+                  <p className="text-lg md:text-xl text-gray-200 max-w-3xl mx-auto leading-relaxed drop-shadow-lg">
+                    Smart RV water systems provide real time monitoring, filtration, and intelligent conservation for cleaner, safer travel.
+                  </p>
                 </div>
-                <p className="text-lg md:text-xl text-gray-200 max-w-3xl mx-auto leading-relaxed">
-                  Smart RV water systems provide real time monitoring, filtration, and intelligent conservation for cleaner, safer travel.
-                </p>
               </div>
             </div>
           </div>
