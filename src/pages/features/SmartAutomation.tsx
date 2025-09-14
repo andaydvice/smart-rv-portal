@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
 import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
 import { VideoSection } from "@/components/ui/VideoSection";
+import { PreloadedHeaderImage } from "@/components/ui/PreloadedHeaderImage";
 
 const SmartAutomation = () => {
   useEffect(() => {
@@ -20,11 +21,32 @@ const SmartAutomation = () => {
         transition={{ duration: 0.6 }}
         className="flex-grow pt-24 pb-16 px-4 bg-gradient-to-b from-gray-900 to-gray-800"
       >
-        <div className="max-w-7xl mx-auto">
-          <div className="flex items-center gap-4 mb-8">
-            <Cog className="h-8 w-8 text-[#5B9BD5]" />
-            <h1 className="text-4xl font-bold text-white">Smart Automation</h1>
+        {/* Hero Image Section */}
+        <div className="relative w-full h-[400px] md:h-[600px] mb-12 overflow-hidden rounded-lg">
+          <PreloadedHeaderImage
+            src="/lovable-uploads/smart-automation-hero.jpg"
+            alt="Smart RV interior with automated lighting, smart displays, and modern automation technology"
+            className="absolute inset-0 w-full h-full object-cover"
+            width={1920}
+            height={600}
+            priority="high"
+            onImageLoaded={() => console.log('Smart automation hero image loaded successfully')}
+          />
+          <div className="absolute inset-0 bg-black/30"></div>
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="text-center">
+              <div className="flex items-center justify-center gap-4 mb-4">
+                <Cog className="h-12 w-12 text-[#5B9BD5]" />
+                <h1 className="text-5xl md:text-6xl font-bold text-white">Smart Automation</h1>
+              </div>
+              <p className="text-xl text-[#E2E8FF] max-w-2xl mx-auto px-4">
+                Experience the future of RV living with intelligent automation systems
+              </p>
+            </div>
           </div>
+        </div>
+
+        <div className="max-w-7xl mx-auto">
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
             <div className="bg-gray-800/50 p-8 rounded-lg border border-gray-700 flex flex-col">
@@ -93,13 +115,6 @@ const SmartAutomation = () => {
             </div>
           </div>
           
-          <div className="mb-8">
-            <img 
-              src="/smart-automation-hero.jpg"
-              alt="Smart RV automation control center with multiple digital displays" 
-              className="w-full h-auto object-contain rounded-lg shadow-lg"
-            />
-          </div>
           
           <OptimizedAffiliateGrid
             title="Smart Automation Solutions"
