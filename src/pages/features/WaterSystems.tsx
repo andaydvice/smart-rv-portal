@@ -5,6 +5,7 @@ import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliat
 import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
 import { useEffect } from "react";
 import { VideoSection } from "@/components/ui/VideoSection";
+import { PreloadedHeaderImage } from "@/components/ui/PreloadedHeaderImage";
 
 const WaterSystems = () => {
   useEffect(() => {
@@ -72,13 +73,14 @@ const WaterSystems = () => {
 
           {/* Smart Water Systems Image */}
           <div className="mt-12 mb-8">
-            <img 
-              src="/lovable-uploads/smart-water-systems.jpg?v=1"
+            <PreloadedHeaderImage
+              src="/lovable-uploads/smart-water-systems.jpg"
               alt="Modern RV bathroom with smart water system featuring digital shower controls and water monitoring displays"
               className="w-full h-64 md:h-80 object-cover rounded-lg"
-              loading="lazy"
-              onLoad={() => console.log('Smart water systems image loaded successfully')}
-              onError={(e) => console.error('Smart water systems image failed to load:', e)}
+              width={800}
+              height={320}
+              priority="low"
+              onImageLoaded={() => console.log('Smart water systems image loaded successfully')}
             />
           </div>
 
