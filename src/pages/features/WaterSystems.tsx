@@ -22,6 +22,19 @@ const WaterSystems = () => {
         className="flex-grow pt-24 pb-16 px-4 bg-gradient-to-b from-gray-900 to-gray-800"
       >
         <div className="max-w-7xl mx-auto">
+          {/* Header Image */}
+          <div className="mb-12 relative">
+            <PreloadedHeaderImage
+              src="/smart-water-systems-hero.jpeg"
+              alt="Smart water system control interface with couple in RV examining water filtration monitoring displays and water quality metrics"
+              className="w-full h-[400px] md:h-[500px] object-cover rounded-lg"
+              width={1920}
+              height={500}
+              priority="high"
+              onImageLoaded={() => console.log('Smart water systems header image loaded successfully')}
+            />
+          </div>
+
           <div className="flex items-center gap-4 mb-8">
             <Droplet className="h-8 w-8 text-blue-400" />
             <h1 className="text-4xl font-bold text-white">Smart Water Systems</h1>
