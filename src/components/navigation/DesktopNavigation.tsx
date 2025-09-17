@@ -24,11 +24,6 @@ const DesktopNavigation = () => {
       icon: <ShoppingBag size={16} className="text-[#10B981]" /> 
     },
     { 
-      text: "RV Comfort Guide", 
-      href: "/rv-comfort-guide", 
-      icon: <Bed size={16} className="text-[#EC4899]" /> 
-    },
-    { 
       text: "RV Calculators", 
       href: "/calculators", 
       icon: <Calculator size={16} className="text-[#F59E0B]" /> 
@@ -135,6 +130,11 @@ const DesktopNavigation = () => {
       icon: <DollarSign size={16} className="text-[#10B981]" /> 
     },
     { 
+      text: "RV Comfort Guide", 
+      href: "/rv-comfort-guide",
+      icon: <Bed size={16} className="text-[#EC4899]" /> 
+    },
+    { 
       text: "Contact", 
       href: "/contact",
       icon: <Phone size={16} className="text-[#0EA5E9]" /> 
@@ -206,7 +206,7 @@ const DesktopNavigation = () => {
           Blog
         </Link>
 
-        {/* Support Dropdown - NOW INCLUDES ABOUT, PRICING, CONTACT */}
+        {/* Support Dropdown - NOW INCLUDES ABOUT, PRICING, CONTACT, RV COMFORT */}
         <HoverDropdownMenuV2 
           trigger="Support" 
           links={supportLinks}
