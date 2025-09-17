@@ -130,11 +130,6 @@ const DesktopNavigation = () => {
       icon: <DollarSign size={16} className="text-[#10B981]" /> 
     },
     { 
-      text: "RV Comfort Guide", 
-      href: "/rv-comfort-guide",
-      icon: <Bed size={16} className="text-[#EC4899]" /> 
-    },
-    { 
       text: "Contact", 
       href: "/contact",
       icon: <Phone size={16} className="text-[#0EA5E9]" /> 
@@ -199,14 +194,23 @@ const DesktopNavigation = () => {
         />
 
         {/* Blog Link */}
-        <Link 
-          to="/blog" 
-          className="text-gray-300 hover:text-[#5B9BD5] transition-colors text-sm flex items-center gap-1 px-2 py-2 whitespace-nowrap"
-        >
-          Blog
-        </Link>
+        <HoverDropdownMenuV2 
+          trigger="Blog & Guides" 
+          links={[
+            { 
+              text: "Blog Posts", 
+              href: "/blog",
+              icon: <BookOpen size={16} className="text-[#5B9BD5]" /> 
+            },
+            { 
+              text: "RV Comfort Guide", 
+              href: "/rv-comfort-guide",
+              icon: <Bed size={16} className="text-[#EC4899]" /> 
+            }
+          ]}
+        />
 
-        {/* Support Dropdown - NOW INCLUDES ABOUT, PRICING, CONTACT, RV COMFORT */}
+        {/* Support Dropdown */}
         <HoverDropdownMenuV2 
           trigger="Support" 
           links={supportLinks}

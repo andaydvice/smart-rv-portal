@@ -50,15 +50,6 @@ const MobileNavigation = ({ isOpen }: MobileNavigationProps) => {
           Technology
         </Link>
 
-        {/* RV Comfort */}
-        <Link
-          to="/rv-comfort-guide"
-          className="flex items-center gap-3 text-gray-300 hover:text-[#5B9BD5] px-3 py-3 rounded-md text-base font-medium transition-colors"
-        >
-          <Bed className="h-5 w-5" />
-          RV Comfort Guide
-        </Link>
-
         {/* Calculators */}
         <Link
           to="/calculators"
@@ -84,6 +75,15 @@ const MobileNavigation = ({ isOpen }: MobileNavigationProps) => {
         >
           <BookOpen className="h-5 w-5" />
           Blog
+        </Link>
+
+        {/* RV Comfort Guide */}
+        <Link
+          to="/rv-comfort-guide"
+          className="flex items-center gap-3 text-gray-300 hover:text-[#5B9BD5] px-3 py-3 rounded-md text-base font-medium transition-colors"
+        >
+          <Bed className="h-5 w-5" />
+          RV Comfort Guide
         </Link>
 
         {/* About */}
