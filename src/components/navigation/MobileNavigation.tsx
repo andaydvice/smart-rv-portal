@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Link } from "react-router-dom";
-import { Home, Zap, Car, Calculator, HelpCircle, Phone, BookOpen, DollarSign, User } from "lucide-react";
+import { Home, Zap, Car, Calculator, HelpCircle, Phone, BookOpen, DollarSign, User, Bed } from "lucide-react";
 
 interface MobileNavigationProps {
   isOpen: boolean;
@@ -48,6 +48,15 @@ const MobileNavigation = ({ isOpen }: MobileNavigationProps) => {
         >
           <Zap className="h-5 w-5" />
           Technology
+        </Link>
+
+        {/* RV Comfort */}
+        <Link
+          to="/rv-comfort-guide"
+          className="flex items-center gap-3 text-gray-300 hover:text-[#5B9BD5] px-3 py-3 rounded-md text-base font-medium transition-colors"
+        >
+          <Bed className="h-5 w-5" />
+          RV Comfort Guide
         </Link>
 
         {/* Calculators */}

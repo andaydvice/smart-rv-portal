@@ -5,7 +5,7 @@ import {
   Brain, Lightbulb, Eye, Search,
   Cog, Layers, Activity, Network,
   Car, Truck, Tent, LayoutTemplate,
-  HelpCircle, MessageCircleQuestion, LifeBuoy, Phone, BookOpen, User, DollarSign
+  HelpCircle, MessageCircleQuestion, LifeBuoy, Phone, BookOpen, User, DollarSign, Bed
 } from "lucide-react";
 import AuthButtons from "./AuthButtons";
 import HoverDropdownMenu from "./HoverDropdownMenu";
@@ -22,6 +22,11 @@ const DesktopNavigation = () => {
       text: "RV Products", 
       href: "/products", 
       icon: <ShoppingBag size={16} className="text-[#10B981]" /> 
+    },
+    { 
+      text: "RV Comfort Guide", 
+      href: "/rv-comfort-guide", 
+      icon: <Bed size={16} className="text-[#EC4899]" /> 
     },
     { 
       text: "RV Calculators", 
