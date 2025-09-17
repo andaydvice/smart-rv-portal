@@ -193,7 +193,7 @@ const DesktopNavigation = () => {
           links={rvToolsLinks}
         />
 
-        {/* Blog Link */}
+        {/* Blog & Guides Dropdown */}
         <HoverDropdownMenuV2 
           trigger="Blog & Guides" 
           links={[
