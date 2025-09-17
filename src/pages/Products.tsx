@@ -20,46 +20,32 @@ const Products = () => {
   // Affiliate products now handled by OptimizedAffiliateGrid system for proper tracking
   const featuredAffiliatePartners = [
     {
+      partner: 'rvtcom' as const,
+      title: 'RV Marketplace - New & Used',
+      description: 'Browse thousands of RVs from dealers and private sellers. Find your perfect motorhome, travel trailer, or fifth wheel with financing options.',
+      features: ['New & Used RVs', 'Dealer Listings', 'Private Party Sales', 'Financing Options'],
+      buttonText: 'Browse RVs for Sale'
+    },
+    {
       partner: 'rvshare' as const,
-      title: 'RV Rentals',
-      description: 'Compare and book premium RV rentals nationwide. Perfect for trying before buying or exploring new destinations.',
-      features: ['Nationwide Network', 'Insurance Included', '24/7 Support'],
-      buttonText: 'Browse RV Rentals'
-    },
-    {
-      partner: 'rvlife' as const,
-      title: 'Smart RV Technology',
-      description: 'Upgrade your RV with cutting-edge smart technology, monitoring systems, and automation solutions.',
-      features: ['Professional Installation', 'Warranty Included', 'Expert Support'],
-      buttonText: 'Shop RV Life'
-    },
-    {
-      partner: 'goodsam' as const,
-      title: 'RV Services & Insurance',
-      description: 'Essential roadside assistance, insurance, and maintenance services every RV owner needs.',
-      features: ['24/7 Roadside Assistance', 'Nationwide Coverage', 'Good Sam Partner'],
-      buttonText: 'Get Good Sam'
-    },
-    {
-      partner: 'rvwaterfilter' as const,
-      title: 'Water Filtration Systems',
-      description: 'Premium water filtration and purification systems for safe, clean water wherever you travel.',
-      features: ['Clean Water Guarantee', 'Easy Installation', 'Multiple Filter Options'],
-      buttonText: 'Shop Water Filters'
+      title: 'RV Rentals - Try Before You Buy',
+      description: 'Experience different RV types through America\'s largest rental marketplace before making your purchase decision.',
+      features: ['Nationwide Rentals', 'Try Different Models', 'Verified Hosts', 'Insurance Included'],
+      buttonText: 'Find RV Rentals'
     },
     {
       partner: 'outdoorsy' as const,
-      title: 'Luxury RV Experiences',
-      description: 'Book unique outdoor experiences and luxury RV rentals for premium adventures and glamping.',
-      features: ['Luxury Selection', 'Premium Service', 'Unique Locations'],
-      buttonText: 'Browse Outdoorsy'
+      title: 'Premium RV Experiences',
+      description: 'Luxury RV rentals with high-end amenities and professional hosts for the ultimate RV experience.',
+      features: ['Luxury Models', 'Premium Service', 'Professional Hosts', 'Concierge Support'],
+      buttonText: 'Book Premium RV'
     },
     {
       partner: 'rvlife' as const,
-      title: 'Trip Planning Tools',
-      description: 'Professional RV trip planning tools, GPS navigation, and comprehensive campground guides.',
-      features: ['RV-Safe Routes', 'Expert Reviews', 'Offline Maps'],
-      buttonText: 'Get RV Life'
+      title: 'RV Life Pro - Essential Tools',
+      description: 'Complete RV trip planning with GPS navigation, campground database, and maintenance tracking for safe travels.',
+      features: ['RV-Safe GPS', 'Trip Planning', 'Campground Database', 'Maintenance Tracking'],
+      buttonText: 'Get RV Life Pro'
     }
   ];
 

@@ -10,7 +10,7 @@ interface PartnerLink {
   primaryBenefit: string;
   commission: string;
   cookieDuration: string;
-  category: 'rental' | 'tools' | 'tech' | 'solar' | 'towing' | 'accessories' | 'services' | 'connectivity';
+  category: 'rental' | 'tools' | 'tech' | 'solar' | 'towing' | 'accessories' | 'services' | 'connectivity' | 'marketplace' | 'comfort';
 }
 
 export const AFFILIATE_PARTNERS: Record<string, PartnerLink> = {
@@ -66,7 +66,16 @@ export const AFFILIATE_PARTNERS: Record<string, PartnerLink> = {
     category: 'accessories'
   },
 
-  // REMOVED: rvtcom - Inactive program on FlexOffers
+  rvtcom: {
+    name: "RVT.com",
+    baseUrl: "https://rvt.com",
+    refCode: "smartrv",
+    description: "RV marketplace connecting buyers/sellers of new & used motorhomes, travel trailers, fifth wheels",
+    primaryBenefit: "Comprehensive marketplace with dealer and private party listings plus financing options",
+    commission: "Variable commission",
+    cookieDuration: "30 days",
+    category: 'marketplace'
+  },
   
   solardirect: {
     name: "Solar Direct",
@@ -82,11 +91,22 @@ export const AFFILIATE_PARTNERS: Record<string, PartnerLink> = {
     name: "A1 SolarStore",
     baseUrl: "https://a1solarstore.com",
     refCode: "smartsolar180",
-    description: "High-capacity solar systems for serious off-grid RV living",
-    primaryBenefit: "6% commission capped at $250 on premium solar equipment",
+    description: "Solar panels, battery banks, power stations, solar generators, wind turbines, and complete off-grid electrical systems",
+    primaryBenefit: "180-day cookie with 90% confirmation rate - industry leading performance",
     commission: "6% (max $250)",
     cookieDuration: "180 days",
     category: 'solar'
+  },
+
+  brentwoodhome: {
+    name: "Brentwood Home",
+    baseUrl: "https://brentwoodhome.com",
+    refCode: "smartrv",
+    description: "Premium memory foam mattresses, organic bedding, pillows, and sleep accessories designed for comfort in compact RV spaces",
+    primaryBenefit: "120-day cookie duration with premium comfort products for RV living",
+    commission: "8-12%",
+    cookieDuration: "120 days",
+    category: 'comfort'
   },
 
   // Phase 2 (High-Commission Specialists) - VERIFIED PROGRAMS
