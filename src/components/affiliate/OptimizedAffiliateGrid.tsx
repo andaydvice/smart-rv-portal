@@ -10,7 +10,7 @@ interface OptimizedAffiliateGridProps {
     partner: 'rvshare' | 'outdoorsy' | 'rvlife' | 'goodsam' | 'rvwaterfilter' | 
              'rvtcom' | 'solardirect' | 'a1solarstore' | 'invertersrus' | 'starlinkinstallers' | 
              'harvesthosts' | 'overlandsolar' | 'cruiseamerica' | 'ecoflow' | 'nomadinternet' | 'weboost' | 'heatso' | 
-             'hotshotssecret' | 'mobilehomeparts';
+             'hotshotssecret' | 'mobilehomeparts' | 'brentwoodhome';
     title?: string;
     description?: string;
     features?: string[];

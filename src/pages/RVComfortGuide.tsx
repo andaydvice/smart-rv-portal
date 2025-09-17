@@ -137,18 +137,18 @@ const RVComfortGuide = () => {
             subtitle="Curated comfort products designed specifically for RV living, featuring premium memory foam mattresses and organic bedding."
             partners={[
               {
-                partner: 'rvlife',
-                title: 'RV Life Sleep Solutions',
-                description: 'Complete guide to RV sleep comfort with product recommendations and installation tips for better rest.',
-                features: ['Sleep Comfort Guide', 'Product Reviews', 'Installation Tips', 'Expert Recommendations'],
-                buttonText: 'Get Sleep Guide'
+                partner: 'brentwoodhome',
+                title: 'Premium Memory Foam Mattresses',
+                description: 'Premium memory foam mattresses designed for comfort in compact RV spaces with organic materials and superior support.',
+                features: ['Memory Foam Technology', 'Organic Materials', 'RV-Specific Sizing', 'Superior Support', '120-Day Cookie'],
+                buttonText: 'Shop Brentwood Mattresses'
               },
               {
-                partner: 'goodsam',
-                title: 'Good Sam RV Comfort',
-                description: 'Premium RV comfort accessories and bedding solutions with member discounts and expert support.',
-                features: ['Member Discounts', 'Premium Comfort', 'Expert Support', 'Quality Guarantee'],
-                buttonText: 'Shop Comfort Solutions'
+                partner: 'brentwoodhome',
+                title: 'Organic Bedding & Sleep Accessories',
+                description: 'Organic bedding, pillows, and sleep accessories designed specifically for RV living and compact spaces.',
+                features: ['Organic Bedding', 'RV Pillows', 'Sleep Accessories', 'Compact Design', 'Premium Comfort'],
+                buttonText: 'Shop Organic Bedding'
               }
             ]}
             gridCols="2"

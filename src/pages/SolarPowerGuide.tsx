@@ -191,25 +191,25 @@ const SolarPowerGuide = () => {
                 subtitle="Professional solar kits and systems designed specifically for RV installations with everything you need."
                 partners={[
                   {
-                    partner: 'rvlife',
-                    title: 'RV Life Solar Systems',
-                    description: 'Complete solar power systems with smart monitoring and professional installation support.',
-                    features: ['Complete Solar Kits', 'Smart Monitoring', 'Professional Installation', 'System Optimization'],
-                    buttonText: 'Shop Solar Systems'
+                    partner: 'a1solarstore',
+                    title: 'Complete Solar Systems & Equipment',
+                    description: 'Premium solar panels, battery banks, power stations, and complete off-grid electrical systems with 180-day cookie.',
+                    features: ['Complete Solar Kits', 'Off-Grid Systems', 'Power Stations', '180-Day Cookie', '90% Confirmation Rate'],
+                    buttonText: 'Shop A1 Solar Systems'
                   },
                   {
-                    partner: 'goodsam',
-                    title: 'Good Sam Solar Solutions',
-                    description: 'Trusted solar installations with expert support and comprehensive warranties for RV solar systems.',
-                    features: ['Expert Installation', 'Comprehensive Warranties', 'Professional Support', 'System Maintenance'],
-                    buttonText: 'Get Solar Installation'
+                    partner: 'solardirect',
+                    title: 'Solar Direct Complete Solutions',
+                    description: 'Complete solar panel systems, lithium batteries, charge controllers, and inverters with industry-leading 365-day cookie.',
+                    features: ['Complete Systems', 'Lithium Batteries', 'Charge Controllers', '365-Day Cookie', 'Industry Leading Warranties'],
+                    buttonText: 'Get Solar Direct'
                   },
                   {
-                    partner: 'rvlife',
-                    title: 'RV Life Solar Planning',
-                    description: 'Solar system planning tools and expert guidance to design the perfect solar setup for your RV.',
-                    features: ['Solar Planning Tools', 'System Design', 'Expert Guidance', 'Installation Support'],
-                    buttonText: 'Plan Solar System'
+                    partner: 'a1solarstore',
+                    title: 'Wind Turbines & Alternative Power',
+                    description: 'Solar generators, wind turbines, and hybrid power solutions for complete off-grid RV electrical systems.',
+                    features: ['Wind Turbines', 'Solar Generators', 'Hybrid Systems', 'Off-Grid Solutions', 'Professional Support'],
+                    buttonText: 'Explore Alternative Power'
                   }
                 ]}
                 gridCols="3"
@@ -222,25 +222,25 @@ const SolarPowerGuide = () => {
                 subtitle="Compare the most popular solar panels designed specifically for RV installations."
                 partners={[
                   {
-                    partner: 'rvlife',
-                    title: '200W Monocrystalline - Best Overall',
-                    description: '21% efficiency monocrystalline panels with 25-year warranty and proven reliability.',
-                    features: ['200W Output', '21%+ Efficiency', 'Monocrystalline Tech', '25 Year Warranty', 'IP67 Rating'],
-                    buttonText: 'Shop Premium Panels'
+                    partner: 'a1solarstore',
+                    title: '200W Monocrystalline - Premium Performance',
+                    description: 'High-efficiency monocrystalline panels with premium warranties from A1 SolarStore\'s curated selection.',
+                    features: ['200W+ Output', '21%+ Efficiency', 'Monocrystalline Tech', 'Premium Warranties', 'Curated Selection'],
+                    buttonText: 'Shop A1 Premium Panels'
                   },
                   {
-                    partner: 'goodsam',
-                    title: 'AIMS 160W Flexible - Most Versatile',
-                    description: 'Lightweight flexible panels perfect for curved RV roofs and unique installations.',
-                    features: ['160W Output', 'Flexible Design', 'Lightweight (8.8 lbs)', '5 Year Warranty', 'Easy Installation'],
-                    buttonText: 'Get Flexible Panels'
+                    partner: 'solardirect',
+                    title: 'Flexible Solar Panels - Versatile Installation',
+                    description: 'Professional-grade flexible solar panels perfect for curved RV roofs with Solar Direct\'s quality guarantee.',
+                    features: ['Flexible Design', 'Professional Grade', 'Curved Roof Compatible', 'Quality Guarantee', '365-Day Support'],
+                    buttonText: 'Get Solar Direct Panels'
                   },
                   {
-                    partner: 'rvlife',
-                    title: 'WindyNation 100W - Budget Choice',
-                    description: 'Budget-friendly polycrystalline panels with good warranty and reliable performance.',
-                    features: ['100W Output', '17% Efficiency', 'Budget Friendly', '25 Year Warranty', 'Reliable Performance'],
-                    buttonText: 'Shop Budget Panels'
+                    partner: 'a1solarstore',
+                    title: '100W Budget Solutions - Reliable Value',
+                    description: 'Cost-effective solar panels with proven reliability and comprehensive support from A1 SolarStore.',
+                    features: ['100W Output', 'Budget Friendly', 'Proven Reliability', 'Comprehensive Support', '180-Day Cookie'],
+                    buttonText: 'Shop Budget Solar'
                   }
                 ]}
                 gridCols="3"
@@ -253,18 +253,18 @@ const SolarPowerGuide = () => {
                 subtitle="High-quality battery systems and power management solutions for reliable RV solar energy storage."
                 partners={[
                   {
-                    partner: 'rvlife',
-                    title: 'RV Life Battery Systems',
-                    description: 'Advanced battery storage solutions with smart monitoring and energy management systems.',
-                    features: ['Smart Battery Systems', 'Energy Management', 'Monitoring Technology', 'Professional Installation'],
-                    buttonText: 'Shop Battery Systems'
+                    partner: 'a1solarstore',
+                    title: 'Premium Battery Banks & Power Stations',
+                    description: 'High-capacity lithium battery banks and portable power stations designed for serious off-grid RV living.',
+                    features: ['Lithium Battery Banks', 'Portable Power Stations', 'High Capacity Storage', 'Off-Grid Ready', '180-Day Cookie'],
+                    buttonText: 'Shop A1 Battery Systems'
                   },
                   {
-                    partner: 'goodsam',
-                    title: 'Good Sam Power Solutions',
-                    description: 'Complete power system support with installation, maintenance, and warranty coverage.',
-                    features: ['Professional Installation', 'System Maintenance', 'Warranty Coverage', 'Technical Support'],
-                    buttonText: 'Get Power Support'
+                    partner: 'solardirect',
+                    title: 'Complete Battery & Inverter Solutions',
+                    description: 'Professional lithium batteries, charge controllers, and inverters with Solar Direct\'s industry-leading support.',
+                    features: ['Lithium Batteries', 'Charge Controllers', 'Quality Inverters', 'Professional Support', '365-Day Cookie'],
+                    buttonText: 'Get Complete Power Systems'
                   }
                 ]}
                 gridCols="2"
@@ -307,20 +307,20 @@ const SolarPowerGuide = () => {
             subtitle="Get expert solar installation and monitoring systems for your RV power needs"
             partners={[
               {
-                partner: 'rvlife',
-                title: 'RV Life Solar Installation',
-                description: 'Professional solar system installation with smart monitoring and energy management',
-                features: ['Professional Installation', 'Smart Monitoring', 'Energy Management', 'System Optimization'],
+                partner: 'a1solarstore',
+                title: 'A1 Solar Installation & Support',
+                description: 'Complete off-grid electrical systems with professional installation guidance and technical support from A1 SolarStore.',
+                features: ['Complete Systems Design', 'Installation Guidance', 'Technical Support', '90% Confirmation Rate', '180-Day Cookie'],
                 path: '/solar-installation',
-                buttonText: 'Schedule Solar Installation'
+                buttonText: 'Get A1 Solar Support'
               },
               {
-                partner: 'goodsam',
-                title: 'Good Sam Solar Maintenance',
-                description: 'Expert maintenance and support services for RV solar power systems',
-                features: ['System Maintenance', 'Performance Optimization', 'Technical Support', 'Warranty Service'],
+                partner: 'solardirect',
+                title: 'Solar Direct Professional Services',
+                description: 'Expert solar system design and installation support with Solar Direct\'s comprehensive warranty coverage.',
+                features: ['Professional Design', 'Installation Support', 'Comprehensive Warranties', 'Year-Round Support', '365-Day Cookie'],
                 path: '/solar-maintenance',
-                buttonText: 'Get Solar Support'
+                buttonText: 'Get Solar Direct Services'
               }
             ]}
             gridCols="2"
