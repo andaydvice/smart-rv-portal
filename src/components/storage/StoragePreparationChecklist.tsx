@@ -119,21 +119,24 @@ const StoragePreparationChecklist = () => {
             subtitle="Expert services and quality products to properly prepare and store your RV for any season."
             partners={[
               {
-                partner: 'goodsam',
+                name: 'Good Sam',
+                url: 'https://goodsam.com',
                 title: 'Professional RV Storage Services',
                 description: 'Find trusted storage facilities, winterization services, and maintenance support nationwide.',
                 features: ['Certified Storage Facilities', 'Winterization Services', 'Maintenance Support', 'Member Discounts'],
                 buttonText: 'Find Storage Services'
               },
               {
-                partner: 'rvlife',
+                name: 'RV Life',
+                url: 'https://rvlife.com',
                 title: 'Smart Storage Monitoring',
                 description: 'Advanced monitoring systems to track your RV conditions while in storage.',
                 features: ['Remote Monitoring', 'Climate Tracking', 'Security Alerts', 'Battery Management'],
                 buttonText: 'Shop Monitoring Systems'
               },
               {
-                partner: 'rvwaterfilter',
+                name: 'RV Water Filter Store',
+                url: 'https://rvwaterfilterstore.com',
                 title: 'Winterization & Water Systems',
                 description: 'Complete water system protection, winterization supplies, and storage preparation products.',
                 features: ['Winterization Kits', 'System Protection', 'Quality Products', 'Expert Guidance'],

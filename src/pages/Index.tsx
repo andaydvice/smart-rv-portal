@@ -90,22 +90,7 @@ const Index = () => {
         {/* Premium affiliate section with customer-focused benefits */}
         <HomepageAffiliateSection />
         
-        {/* Strategic affiliate partnerships - customer focused */}
-        <section className="py-16 px-4 bg-gradient-to-br from-connectivity-darkBg to-[#0A0F1A]" style={{ contentVisibility: "auto", containIntrinsicSize: "1200px" }}>
-          <div className="max-w-6xl mx-auto">
-            <OptimizedAffiliateGrid
-              title="Complete Smart RV Solutions Ecosystem"
-              subtitle="Everything you need for smart RV living - from solar power to connectivity, all with proven quality and reliability."
-              partners={[
-                { partner: 'overlandsolar' as const, title: 'Solar Power Leader', description: 'Complete off-grid solar solutions with premium quality and proven reliability for intelligent power management' },
-                { partner: 'rvlife' as const, title: 'Smart Technology', description: 'Professional Smart RV Hub systems and digital tools trusted worldwide for intelligent RV control' },
-                { partner: 'weboost' as const, title: 'Cellular Boosters', description: 'Professional signal boosters for reliable cellular connectivity anywhere you travel' },
-                { partner: 'goodsam' as const, title: 'RV Services', description: 'Premium RV services and support trusted by professionals for safe intelligent travel' }
-              ]}
-              gridCols="4"
-            />
-          </div>
-        </section>
+        {/* Affiliate sections removed during cleanup */}
         
         <Suspense fallback={<LoadingFallback />}>
           <SustainabilitySection />

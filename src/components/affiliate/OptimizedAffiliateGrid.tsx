@@ -1,20 +1,18 @@
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { AffiliatePartnerCard } from './AffiliatePartnerSystem';
+import { Button } from '@/components/ui/button';
+import { ExternalLink } from 'lucide-react';
 
 
 interface OptimizedAffiliateGridProps {
   title: string;
   subtitle: string;
-    partners: Array<{
-    partner: 'rvshare' | 'outdoorsy' | 'rvlife' | 'goodsam' | 'rvwaterfilter' | 
-             'rvtcom' | 'solardirect' | 'a1solarstore' | 'invertersrus' | 'starlinkinstallers' | 
-             'harvesthosts' | 'overlandsolar' | 'cruiseamerica' | 'ecoflow' | 'nomadinternet' | 'weboost' | 'heatso' | 
-             'hotshotssecret' | 'mobilehomeparts' | 'brentwoodhome';
+  partners: Array<{
+    name: string;
+    url: string;
     title?: string;
     description?: string;
     features?: string[];
-    path?: string;
     buttonText?: string;
   }>;
   className?: string;
@@ -48,15 +46,36 @@ export const OptimizedAffiliateGrid: React.FC<OptimizedAffiliateGridProps> = ({
         
         <div className={`grid ${getGridClass()} gap-6`}>
           {partners.map((partnerConfig, index) => (
-            <AffiliatePartnerCard
-              key={index}
-              partner={partnerConfig.partner}
-              title={partnerConfig.title}
-              customDescription={partnerConfig.description}
-              features={partnerConfig.features}
-              path={partnerConfig.path}
-              buttonText={partnerConfig.buttonText}
-            />
+            <div key={index} className="bg-[#131a2a] border border-gray-600 rounded-lg p-6 pb-8 h-full flex flex-col">
+              <h3 className="text-lg font-semibold text-white mb-3">
+                {partnerConfig.title || partnerConfig.name}
+              </h3>
+              <p className="text-gray-300 text-sm mb-4 flex-grow">
+                {partnerConfig.description}
+              </p>
+              
+              {partnerConfig.features && partnerConfig.features.length > 0 && (
+                <ul className="text-sm text-gray-300 space-y-1 mb-4">
+                  {partnerConfig.features.map((feature, idx) => (
+                    <li key={idx}>• {feature}</li>
+                  ))}
+                </ul>
+              )}
+              
+              <div className="mt-auto pt-2">
+                <Button asChild className="w-full bg-[#60A5FA] hover:bg-[#4B8FE3] text-white">
+                  <a
+                    href={partnerConfig.url}
+                    target="_blank"
+                    rel="nofollow noopener noreferrer"
+                    className="flex items-center justify-center gap-1"
+                  >
+                    {partnerConfig.buttonText || `Visit ${partnerConfig.name}`}
+                    <ExternalLink className="h-4 w-4" />
+                  </a>
+                </Button>
+              </div>
+            </div>
           ))}
         </div>
       </div>

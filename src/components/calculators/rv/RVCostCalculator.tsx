@@ -5,7 +5,7 @@ import { Save } from "lucide-react";
 import { campsiteRates } from "./data/campsiteTypes";
 import TripInputs from "./components/TripInputs";
 import CostBreakdown from "./components/CostBreakdown";
-import AffiliateRecommendations from "./components/AffiliateRecommendations";
+// Removed fake affiliate system
 import { calculateCosts } from "./utils/costCalculations";
 import { useCalculatorHistory } from "@/hooks/useCalculatorHistory";
 import { useAuth } from "@/components/auth/AuthContext";
@@ -147,12 +147,7 @@ const RVCostCalculator = () => {
               Sign in to save your calculations
             </p>
           )}
-          <AffiliateRecommendations 
-            rvType={rvType}
-            tripDistance={distance}
-            days={days}
-            totalCost={costs.total}
-          />
+          {/* Affiliate recommendations removed */}
         </div>
       </CardContent>
     </Card>

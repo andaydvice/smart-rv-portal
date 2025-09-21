@@ -10,7 +10,7 @@ import {
   Shield, AlertTriangle, Phone, MapPin, Zap, 
   Wrench, Heart, Wind, Flame, Droplets 
 } from 'lucide-react';
-import { AffiliatePartnerButton } from '@/components/affiliate/AffiliatePartnerSystem';
+// Removed fake affiliate system
 import { ExternalLinkButton } from '@/components/ui/external-link-button';
 
 const RVEmergencyCenter = () => {

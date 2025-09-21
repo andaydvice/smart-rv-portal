@@ -26,7 +26,6 @@ import {
   RefreshCw
 } from 'lucide-react';
 import { runSEOAudit, analyzeTestResults } from '@/utils/SEOTestingFramework';
-import { getSessionAnalytics } from '@/utils/AffiliateTracker';
 
 interface SEODashboardProps {
   className?: string;
@@ -88,8 +87,7 @@ export const SEODashboard: React.FC<SEODashboardProps> = ({ className = '' }) =>
       const audit = await runSEOAudit();
       setAuditResults(audit);
 
-      // Get affiliate analytics
-      const affiliateData = getSessionAnalytics();
+      // Analytics removed - no affiliate tracking
 
       // Simulate comprehensive metrics (in production, this would come from multiple APIs)
       const dashboardMetrics: SEOMetrics = {
@@ -119,15 +117,10 @@ export const SEODashboard: React.FC<SEODashboardProps> = ({ className = '' }) =>
           missingMetaData: 5
         },
         affiliatePerformance: {
-          totalClicks: affiliateData.clickCount,
-          conversions: affiliateData.conversionCount,
-          revenue: affiliateData.totalValue,
-          topPerformers: affiliateData.topAffiliates.slice(0, 5).map(aff => ({
-            name: `Product ${aff.affiliateId.slice(-4)}`,
-            clicks: aff.clicks,
-            conversions: aff.conversions,
-            revenue: aff.value
-          }))
+          totalClicks: 0,
+          conversions: 0,
+          revenue: 0,
+          topPerformers: []
         }
       };
 

@@ -7,7 +7,7 @@ import { scrollToTop } from "@/utils/scrollToTop";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
 import SEO from "@/components/seo/SEO";
 import { organizationSchema, productSchema } from "@/components/seo/schemas";
-import { AFFILIATE_PARTNERS } from "@/components/affiliate/AffiliatePartnerSystem";
+// Removed fake affiliate system
 import TestimonialsSection from "@/components/sections/testimonials/TestimonialsSection";
 import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
 

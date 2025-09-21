@@ -13,7 +13,7 @@ import {
   Sun, Battery, Zap, Calculator, 
   TrendingUp, Leaf, DollarSign, CheckCircle 
 } from 'lucide-react';
-import { AffiliatePartnerButton } from '@/components/affiliate/AffiliatePartnerSystem';
+// Removed fake affiliate system
 import { ExternalLinkButton } from '@/components/ui/external-link-button';
 
 const SolarPowerGuide = () => {
