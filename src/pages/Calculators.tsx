@@ -17,10 +17,6 @@ import SmartSystemDecoder from "@/components/calculators/smart-systems/SmartSyst
 import SmartAlertTranslator from "@/components/calculators/smart-systems/SmartAlertTranslator";
 import SetupGuideCreator from "@/components/calculators/smart-systems/SetupGuideCreator";
 import RVCostCalculator from "@/components/calculators/rv/RVCostCalculator";
-import FuelAffiliateRecommendations from "@/components/calculators/fuel/FuelAffiliateRecommendations";
-import PowerAffiliateRecommendations from "@/components/calculators/power/PowerAffiliateRecommendations";
-import TowingAffiliateRecommendations from "@/components/calculators/towing/TowingAffiliateRecommendations";
-import SmartSystemsAffiliateRecommendations from "@/components/calculators/smart-systems/SmartSystemsAffiliateRecommendations";
 import Navbar from "@/components/Navbar";
 import Layout from "@/components/layout/Layout";
 import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
@@ -92,7 +88,7 @@ const Calculators = () => {
                 <FuelEfficiencyCalculator onAddMPGRecord={handleAddMPGRecord} />
                 <MPGTrackingSystem historicalMPG={historicalMPG} />
                 <TripEfficiencyPlanner />
-                <FuelAffiliateRecommendations />
+                
               </div>
             </TabsContent>
 
@@ -101,7 +97,7 @@ const Calculators = () => {
                 <BatteryCapacityCalculator />
                 <PowerConsumptionCalculator />
                 <SolarPanelCalculator />
-                <PowerAffiliateRecommendations />
+                
               </div>
             </TabsContent>
 
@@ -110,7 +106,7 @@ const Calculators = () => {
                 <TowingSafetyCalculator />
                 <WeightDistributionAnalyzer />
                 <TirePressureOptimizer />
-                <TowingAffiliateRecommendations />
+                
               </div>
             </TabsContent>
 
@@ -119,7 +115,7 @@ const Calculators = () => {
                 <SmartSystemDecoder />
                 <SmartAlertTranslator />
                 <SetupGuideCreator />
-                <SmartSystemsAffiliateRecommendations />
+                
               </div>
             </TabsContent>
           </Tabs>

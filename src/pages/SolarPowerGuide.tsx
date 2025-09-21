@@ -2,19 +2,14 @@ import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import Layout from '@/components/layout/Layout';
 import { Container } from '@/components/ui/container';
-
 import AffiliateDisclosure from '@/components/affiliate/AffiliateDisclosure';
-import { OptimizedAffiliateGrid } from '@/components/affiliate/OptimizedAffiliateGrid';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { ExternalLinkButton } from '@/components/ui/external-link-button';
 import { 
   Sun, Battery, Zap, Calculator, 
-  TrendingUp, Leaf, DollarSign, CheckCircle 
+  TrendingUp, Leaf, DollarSign 
 } from 'lucide-react';
-import { AffiliatePartnerButton } from '@/components/affiliate/AffiliatePartnerSystem';
-import { ExternalLinkButton } from '@/components/ui/external-link-button';
 
 const SolarPowerGuide = () => {
   const [dailyUsage, setDailyUsage] = useState(3000);
@@ -35,9 +30,6 @@ const SolarPowerGuide = () => {
 
   const solarNeeds = calculateSolarNeeds();
 
-  // Removed hardcoded solar kits data - now using proper affiliate system
-
-
   const benefitCards = [
     {
       icon: <DollarSign className="h-8 w-8" />,
@@ -47,7 +39,7 @@ const SolarPowerGuide = () => {
     },
     {
       icon: <Leaf className="h-8 w-8" />,
-      title: "Eco-Friendly",
+      title: "Eco-Friendly", 
       description: "Clean, renewable energy reduces your carbon footprint",
       color: "text-green-400"
     },
@@ -71,17 +63,6 @@ const SolarPowerGuide = () => {
         <title>Smart RV Solar Power Guide</title>
         <meta name="description" content="Complete guide to Smart RV solar power systems. Compare panels, batteries, and kits. Calculate your solar needs and find the best deals on equipment." />
         <link rel="canonical" href={typeof window !== 'undefined' ? window.location.origin + '/solar-power-guide' : ''} />
-        <script type="application/ld+json">
-          {JSON.stringify({
-            '@context': 'https://schema.org',
-            '@type': 'ItemList',
-            itemListElement: [
-              { '@type': 'ListItem', position: 1, name: 'RV Life Solar Systems', url: 'https://rvlife.com?ref=smarttech' },
-              { '@type': 'ListItem', position: 2, name: 'Good Sam Solar Services', url: 'https://goodsam.com?ref=smartrv' },
-              { '@type': 'ListItem', position: 3, name: 'RV Life Solar Planning', url: 'https://rvlife.com?ref=smartportal' }
-            ]
-          })}
-        </script>
       </Helmet>
 
       <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 text-white">
@@ -177,100 +158,42 @@ const SolarPowerGuide = () => {
             ))}
           </div>
 
-          {/* Product Tabs */}
-          <Tabs defaultValue="kits" className="mb-12">
-            <TabsList className="grid w-full grid-cols-3 bg-[#1a202c] mb-8">
-              <TabsTrigger value="kits" className="text-[#60A5FA] data-[state=active]:bg-[#2D3748]">Complete Kits</TabsTrigger>
-              <TabsTrigger value="panels" className="text-[#60A5FA] data-[state=active]:bg-[#2D3748]">Solar Panels</TabsTrigger>
-              <TabsTrigger value="batteries" className="text-[#60A5FA] data-[state=active]:bg-[#2D3748]">Batteries</TabsTrigger>
-            </TabsList>
+          {/* Solar Equipment Links */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+            <Card className="bg-[#091020] border-gray-700">
+              <CardHeader>
+                <CardTitle className="text-xl text-yellow-400">Solar Systems & Equipment</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-gray-300 mb-6">
+                  Complete solar panels, battery banks, power stations, and off-grid electrical systems for RV installations.
+                </p>
+                <ExternalLinkButton 
+                  href="https://a1solarstore.com"
+                  className="w-full bg-yellow-600 hover:bg-yellow-700 text-white"
+                >
+                  Shop A1 Solar Systems
+                </ExternalLinkButton>
+              </CardContent>
+            </Card>
 
-            <TabsContent value="kits">
-              <OptimizedAffiliateGrid
-                title="☀️ Complete Solar Kits & Systems"
-                subtitle="Professional solar kits and systems designed specifically for RV installations with everything you need."
-                partners={[
-                  {
-                    partner: 'a1solarstore',
-                    title: 'Complete Solar Systems & Equipment',
-                    description: 'Premium solar panels, battery banks, power stations, and complete off-grid electrical systems with 180-day cookie.',
-                    features: ['Complete Solar Kits', 'Off-Grid Systems', 'Power Stations', '180-Day Cookie', '90% Confirmation Rate'],
-                    buttonText: 'Shop A1 Solar Systems'
-                  },
-                  {
-                    partner: 'solardirect',
-                    title: 'Solar Direct Complete Solutions',
-                    description: 'Complete solar panel systems, lithium batteries, charge controllers, and inverters with industry-leading 365-day cookie.',
-                    features: ['Complete Systems', 'Lithium Batteries', 'Charge Controllers', '365-Day Cookie', 'Industry Leading Warranties'],
-                    buttonText: 'Get Solar Direct'
-                  },
-                  {
-                    partner: 'a1solarstore',
-                    title: 'Wind Turbines & Alternative Power',
-                    description: 'Solar generators, wind turbines, and hybrid power solutions for complete off-grid RV electrical systems.',
-                    features: ['Wind Turbines', 'Solar Generators', 'Hybrid Systems', 'Off-Grid Solutions', 'Professional Support'],
-                    buttonText: 'Explore Alternative Power'
-                  }
-                ]}
-                gridCols="3"
-              />
-            </TabsContent>
-
-            <TabsContent value="panels">
-              <OptimizedAffiliateGrid
-                title="☀️ Top RV Solar Panel Comparison"
-                subtitle="Compare the most popular solar panels designed specifically for RV installations."
-                partners={[
-                  {
-                    partner: 'a1solarstore',
-                    title: '200W Monocrystalline - Premium Performance',
-                    description: 'High-efficiency monocrystalline panels with premium warranties from A1 SolarStore\'s curated selection.',
-                    features: ['200W+ Output', '21%+ Efficiency', 'Monocrystalline Tech', 'Premium Warranties', 'Curated Selection'],
-                    buttonText: 'Shop A1 Premium Panels'
-                  },
-                  {
-                    partner: 'solardirect',
-                    title: 'Flexible Solar Panels - Versatile Installation',
-                    description: 'Professional-grade flexible solar panels perfect for curved RV roofs with Solar Direct\'s quality guarantee.',
-                    features: ['Flexible Design', 'Professional Grade', 'Curved Roof Compatible', 'Quality Guarantee', '365-Day Support'],
-                    buttonText: 'Get Solar Direct Panels'
-                  },
-                  {
-                    partner: 'a1solarstore',
-                    title: '100W Budget Solutions - Reliable Value',
-                    description: 'Cost-effective solar panels with proven reliability and comprehensive support from A1 SolarStore.',
-                    features: ['100W Output', 'Budget Friendly', 'Proven Reliability', 'Comprehensive Support', '180-Day Cookie'],
-                    buttonText: 'Shop Budget Solar'
-                  }
-                ]}
-                gridCols="3"
-              />
-            </TabsContent>
-
-            <TabsContent value="batteries">
-              <OptimizedAffiliateGrid
-                title="🔋 Battery Storage & Power Solutions"
-                subtitle="High-quality battery systems and power management solutions for reliable RV solar energy storage."
-                partners={[
-                  {
-                    partner: 'a1solarstore',
-                    title: 'Premium Battery Banks & Power Stations',
-                    description: 'High-capacity lithium battery banks and portable power stations designed for serious off-grid RV living.',
-                    features: ['Lithium Battery Banks', 'Portable Power Stations', 'High Capacity Storage', 'Off-Grid Ready', '180-Day Cookie'],
-                    buttonText: 'Shop A1 Battery Systems'
-                  },
-                  {
-                    partner: 'solardirect',
-                    title: 'Complete Battery & Inverter Solutions',
-                    description: 'Professional lithium batteries, charge controllers, and inverters with Solar Direct\'s industry-leading support.',
-                    features: ['Lithium Batteries', 'Charge Controllers', 'Quality Inverters', 'Professional Support', '365-Day Cookie'],
-                    buttonText: 'Get Complete Power Systems'
-                  }
-                ]}
-                gridCols="2"
-              />
-            </TabsContent>
-          </Tabs>
+            <Card className="bg-[#091020] border-gray-700">
+              <CardHeader>
+                <CardTitle className="text-xl text-yellow-400">Solar Power Solutions</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-gray-300 mb-6">
+                  Solar panels, lithium batteries, charge controllers, and complete power system components with industry warranties.
+                </p>
+                <ExternalLinkButton 
+                  href="https://solardirect.com"
+                  className="w-full bg-yellow-600 hover:bg-yellow-700 text-white"
+                >
+                  Get Solar Direct
+                </ExternalLinkButton>
+              </CardContent>
+            </Card>
+          </div>
 
           {/* Installation Services CTA */}
           <Card className="bg-gradient-to-r from-blue-900/20 to-purple-900/20 border-blue-800 mb-12">
@@ -289,42 +212,17 @@ const SolarPowerGuide = () => {
                   >
                     Get Installation Quote
                   </ExternalLinkButton>
-                  <AffiliatePartnerButton 
-                    partner="rvlife" 
-                    path="/installation-guide"
+                  <ExternalLinkButton 
+                    href="https://rvlife.com"
                     variant="outline" 
                     className="border-blue-500 text-blue-300 hover:bg-blue-900/50 px-8 py-3 rounded-lg min-h-[48px] touch-manipulation"
                   >
                     DIY Installation Guide
-                  </AffiliatePartnerButton>
+                  </ExternalLinkButton>
                 </div>
               </div>
             </CardContent>
           </Card>
-
-          <OptimizedAffiliateGrid
-            title="Professional Solar Installation & Support"
-            subtitle="Get expert solar installation and monitoring systems for your RV power needs"
-            partners={[
-              {
-                partner: 'a1solarstore',
-                title: 'A1 Solar Installation & Support',
-                description: 'Complete off-grid electrical systems with professional installation guidance and technical support from A1 SolarStore.',
-                features: ['Complete Systems Design', 'Installation Guidance', 'Technical Support', '90% Confirmation Rate', '180-Day Cookie'],
-                path: '/solar-installation',
-                buttonText: 'Get A1 Solar Support'
-              },
-              {
-                partner: 'solardirect',
-                title: 'Solar Direct Professional Services',
-                description: 'Expert solar system design and installation support with Solar Direct\'s comprehensive warranty coverage.',
-                features: ['Professional Design', 'Installation Support', 'Comprehensive Warranties', 'Year-Round Support', '365-Day Cookie'],
-                path: '/solar-maintenance',
-                buttonText: 'Get Solar Direct Services'
-              }
-            ]}
-            gridCols="2"
-          />
 
           {/* Affiliate Disclosure */}
           <AffiliateDisclosure />
