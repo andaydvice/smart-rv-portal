@@ -76,7 +76,8 @@ const RemoteControl = () => {
             subtitle="Enhance your smart RV remote capabilities with professional monitoring and mobile app integration from our trusted partners."
             partners={[
               {
-                partner: 'invertersrus',
+                name: 'Inverters R Us',
+                url: 'https://invertersrus.com',
                 title: 'Victron Smart Monitoring',
                 description: 'Professional remote monitoring systems with real-time alerts and diagnostics for complete peace of mind.',
                 features: [
@@ -87,7 +88,8 @@ const RemoteControl = () => {
                 ]
               },
               {
-                partner: 'rvlife',
+                name: 'RV Life',
+                url: 'https://rvlife.com',
                 title: 'RV Life Mobile Apps',
                 description: 'Comprehensive mobile app suite for trip planning, navigation, and remote RV management.',
                 features: [
@@ -98,7 +100,8 @@ const RemoteControl = () => {
                 ]
               },
               {
-                partner: 'goodsam',
+                name: 'Good Sam',
+                url: 'https://goodsam.com',
                 title: 'Good Sam Remote Support',
                 description: 'Professional technical support and emergency assistance for your Smart RV Hub systems.',
                 features: [

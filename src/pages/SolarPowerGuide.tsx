@@ -191,21 +191,24 @@ const SolarPowerGuide = () => {
                 subtitle="Professional solar kits and systems designed specifically for RV installations with everything you need."
                 partners={[
                   {
-                    partner: 'a1solarstore',
+                    name: 'A1 Solar Store',
+                    url: 'https://a1solarstore.com',
                     title: 'Complete Solar Systems & Equipment',
                     description: 'Premium solar panels, battery banks, power stations, and complete off-grid electrical systems with 180-day cookie.',
                     features: ['Complete Solar Kits', 'Off-Grid Systems', 'Power Stations', '180-Day Cookie', '90% Confirmation Rate'],
                     buttonText: 'Shop A1 Solar Systems'
                   },
                   {
-                    partner: 'solardirect',
+                    name: 'Solar Direct',
+                    url: 'https://solardirect.com',
                     title: 'Solar Direct Complete Solutions',
                     description: 'Complete solar panel systems, lithium batteries, charge controllers, and inverters with industry-leading 365-day cookie.',
                     features: ['Complete Systems', 'Lithium Batteries', 'Charge Controllers', '365-Day Cookie', 'Industry Leading Warranties'],
                     buttonText: 'Get Solar Direct'
                   },
                   {
-                    partner: 'a1solarstore',
+                    name: 'A1 Solar Store',
+                    url: 'https://a1solarstore.com',
                     title: 'Wind Turbines & Alternative Power',
                     description: 'Solar generators, wind turbines, and hybrid power solutions for complete off-grid RV electrical systems.',
                     features: ['Wind Turbines', 'Solar Generators', 'Hybrid Systems', 'Off-Grid Solutions', 'Professional Support'],
@@ -222,21 +225,24 @@ const SolarPowerGuide = () => {
                 subtitle="Compare the most popular solar panels designed specifically for RV installations."
                 partners={[
                   {
-                    partner: 'a1solarstore',
+                    name: 'A1 Solar Store',
+                    url: 'https://a1solarstore.com',
                     title: '200W Monocrystalline - Premium Performance',
                     description: 'High-efficiency monocrystalline panels with premium warranties from A1 SolarStore\'s curated selection.',
                     features: ['200W+ Output', '21%+ Efficiency', 'Monocrystalline Tech', 'Premium Warranties', 'Curated Selection'],
                     buttonText: 'Shop A1 Premium Panels'
                   },
                   {
-                    partner: 'solardirect',
+                    name: 'Solar Direct',
+                    url: 'https://solardirect.com',
                     title: 'Flexible Solar Panels - Versatile Installation',
                     description: 'Professional-grade flexible solar panels perfect for curved RV roofs with Solar Direct\'s quality guarantee.',
                     features: ['Flexible Design', 'Professional Grade', 'Curved Roof Compatible', 'Quality Guarantee', '365-Day Support'],
                     buttonText: 'Get Solar Direct Panels'
                   },
                   {
-                    partner: 'a1solarstore',
+                    name: 'A1 Solar Store',
+                    url: 'https://a1solarstore.com',
                     title: '100W Budget Solutions - Reliable Value',
                     description: 'Cost-effective solar panels with proven reliability and comprehensive support from A1 SolarStore.',
                     features: ['100W Output', 'Budget Friendly', 'Proven Reliability', 'Comprehensive Support', '180-Day Cookie'],
@@ -253,14 +259,16 @@ const SolarPowerGuide = () => {
                 subtitle="High-quality battery systems and power management solutions for reliable RV solar energy storage."
                 partners={[
                   {
-                    partner: 'a1solarstore',
+                    name: 'A1 Solar Store',
+                    url: 'https://a1solarstore.com',
                     title: 'Premium Battery Banks & Power Stations',
                     description: 'High-capacity lithium battery banks and portable power stations designed for serious off-grid RV living.',
                     features: ['Lithium Battery Banks', 'Portable Power Stations', 'High Capacity Storage', 'Off-Grid Ready', '180-Day Cookie'],
                     buttonText: 'Shop A1 Battery Systems'
                   },
                   {
-                    partner: 'solardirect',
+                    name: 'Solar Direct',
+                    url: 'https://solardirect.com',
                     title: 'Complete Battery & Inverter Solutions',
                     description: 'Professional lithium batteries, charge controllers, and inverters with Solar Direct\'s industry-leading support.',
                     features: ['Lithium Batteries', 'Charge Controllers', 'Quality Inverters', 'Professional Support', '365-Day Cookie'],
@@ -289,14 +297,12 @@ const SolarPowerGuide = () => {
                   >
                     Get Installation Quote
                   </ExternalLinkButton>
-                  <AffiliatePartnerButton 
-                    partner="rvlife" 
-                    path="/installation-guide"
-                    variant="outline" 
+                  <ExternalLinkButton 
+                    href="https://rvlife.com"
                     className="border-blue-500 text-blue-300 hover:bg-blue-900/50 px-8 py-3 rounded-lg min-h-[48px] touch-manipulation"
                   >
                     DIY Installation Guide
-                  </AffiliatePartnerButton>
+                  </ExternalLinkButton>
                 </div>
               </div>
             </CardContent>
@@ -307,19 +313,19 @@ const SolarPowerGuide = () => {
             subtitle="Get expert solar installation and monitoring systems for your RV power needs"
             partners={[
               {
-                partner: 'a1solarstore',
+                name: 'A1 Solar Store',
+                url: 'https://a1solarstore.com',
                 title: 'A1 Solar Installation & Support',
                 description: 'Complete off-grid electrical systems with professional installation guidance and technical support from A1 SolarStore.',
                 features: ['Complete Systems Design', 'Installation Guidance', 'Technical Support', '90% Confirmation Rate', '180-Day Cookie'],
-                path: '/solar-installation',
                 buttonText: 'Get A1 Solar Support'
               },
               {
-                partner: 'solardirect',
+                name: 'Solar Direct',
+                url: 'https://solardirect.com',
                 title: 'Solar Direct Professional Services',
                 description: 'Expert solar system design and installation support with Solar Direct\'s comprehensive warranty coverage.',
                 features: ['Professional Design', 'Installation Support', 'Comprehensive Warranties', 'Year-Round Support', '365-Day Cookie'],
-                path: '/solar-maintenance',
                 buttonText: 'Get Solar Direct Services'
               }
             ]}

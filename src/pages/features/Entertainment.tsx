@@ -162,19 +162,22 @@ const Entertainment = () => {
             subtitle="Complete solutions for entertainment, connectivity, and the RV lifestyle"
             partners={[
               {
-                partner: 'rvshare',
+                name: 'RV Share',
+                url: 'https://rvshare.com',
                 title: 'RVshare Entertainment-Ready Rentals',
                 description: 'Rent RVs with premium entertainment systems for your next adventure.',
                 features: ['Entertainment-equipped RVs', 'Smart TV systems', 'Premium audio setups', 'Family-friendly options']
               },
               {
-                partner: 'outdoorsy',
+                name: 'Outdoorsy',
+                url: 'https://outdoorsy.com',
                 title: 'Outdoorsy Adventure Rentals',
                 description: 'Find RVs with entertainment systems perfect for outdoor adventures.',
                 features: ['Outdoor entertainment setups', 'Adventure-ready RVs', 'Family entertainment', 'Premium amenities']
               },
               {
-                partner: 'rvlife',
+                name: 'RV Life',
+                url: 'https://rvlife.com',
                 title: 'RV Life Entertainment Guides',
                 description: 'Access entertainment guides, streaming tips, and campground entertainment reviews.',
                 features: ['Entertainment guides', 'Streaming connectivity tips', 'Campground reviews', 'Setup tutorials']

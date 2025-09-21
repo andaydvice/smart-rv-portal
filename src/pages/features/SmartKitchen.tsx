@@ -95,7 +95,8 @@ const SmartKitchen = () => {
             subtitle="Upgrade your RV kitchen with premium water filtration, appliance monitoring, and professional installation services."
             partners={[
               {
-                partner: 'rvwaterfilter',
+                name: 'RV Water Filter Store',
+                url: 'https://rvwaterfilterstore.com',
                 title: 'Premium Water Filtration',
                 description: 'Advanced water filtration systems ensuring clean, safe water for all your kitchen needs with guaranteed quality.',
                 features: [
@@ -106,7 +107,8 @@ const SmartKitchen = () => {
                 ]
               },
               {
-                partner: 'invertersrus',
+                name: 'Inverters R Us',
+                url: 'https://invertersrus.com',
                 title: 'Smart Power Monitoring',
                 description: 'Professional power monitoring systems for refrigerators, cooking appliances, and kitchen automation.',
                 features: [
@@ -117,7 +119,8 @@ const SmartKitchen = () => {
                 ]
               },
               {
-                partner: 'goodsam',
+                name: 'Good Sam',
+                url: 'https://goodsam.com',
                 title: 'Kitchen Installation Support',
                 description: 'Expert installation and support services for all your smart kitchen upgrades and maintenance needs.',
                 features: [

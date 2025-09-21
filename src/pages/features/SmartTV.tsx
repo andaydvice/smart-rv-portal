@@ -84,19 +84,19 @@ const SmartTV = () => {
               subtitle="Enhance your Smart TV experience with these recommended RV accessories and services"
               partners={[
                 {
-                  partner: 'mobilehomeparts',
+                  name: 'Mobile Home Parts Store',
+                  url: 'https://mobilehomeparts.com',
                   title: 'RV Entertainment Systems',
                   description: 'Professional entertainment system components and accessories for smart RV integration',
                   features: ['Quality Components', 'Smart Integration', 'System Compatibility', 'Technical Support'],
-                  path: '/entertainment-systems',
                   buttonText: 'Shop Entertainment Systems'
                 },
                 {
-                  partner: 'rvlife',
+                  name: 'RV Life',
+                  url: 'https://rvlife.com',
                   title: 'RV Life Streaming Guide',
                   description: 'Complete guide to streaming and entertainment apps optimized for RV travel',
                   features: ['Streaming Setup Guide', 'Data Management Tips', 'App Recommendations', 'Troubleshooting'],
-                  path: '/streaming-guide',
                   buttonText: 'Get Streaming Guide'
                 }
               ]}

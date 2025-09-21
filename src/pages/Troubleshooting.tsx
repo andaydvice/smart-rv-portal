@@ -107,19 +107,19 @@ const Troubleshooting = () => {
                 subtitle="Get professional help when you need it most with our trusted partners"
                 partners={[
                   {
-                    partner: 'goodsam',
+                    name: 'Good Sam',
+                    url: 'https://goodsam.com',
                     title: 'Good Sam Emergency Roadside',
                     description: 'Nation\'s most trusted RV roadside assistance with 24/7 emergency support and technical troubleshooting',
                     features: ['24/7 Emergency Support', 'Technical Phone Support', 'Nationwide Coverage', 'RV-Specific Services'],
-                    path: '/emergency-roadside',
                     buttonText: 'Get Emergency Coverage'
                   },
                   {
-                    partner: 'rvlife',
+                    name: 'RV Life',
+                    url: 'https://rvlife.com',
                     title: 'RV Life System Monitoring',
                     description: 'Advanced monitoring systems that prevent problems before they happen with real-time diagnostics',
                     features: ['Real-Time Diagnostics', 'Preventive Alerts', 'Remote Monitoring', 'Expert Installation'],
-                    path: '/monitoring-systems',
                     buttonText: 'Shop Monitoring Systems'
                   }
                 ]}

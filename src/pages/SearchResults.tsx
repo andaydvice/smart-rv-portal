@@ -221,21 +221,24 @@ const SearchResults: React.FC = () => {
             subtitle="Discover the best RV resources, tools, and services to enhance your search results and RV experience."
             partners={[
               {
-                partner: 'rvshare',
+                name: 'RV Share',
+                url: 'https://rvshare.com',
                 title: 'RV Rentals & Experiences',
                 description: 'Find the perfect RV rental to test before you buy, or experience different RV types and features.',
                 features: ['Try before buying', 'Various RV types', 'Owner experiences'],
                 buttonText: 'Browse Rentals'
               },
               {
-                partner: 'rvlife',
+                name: 'RV Life',
+                url: 'https://rvlife.com',
                 title: 'RV Resources & Planning',
                 description: 'Comprehensive trip planning tools, campground reviews, and RV lifestyle resources.',
                 features: ['Trip planning tools', 'Campground database', 'RV community'],
                 buttonText: 'Plan Your Trip'
               },
               {
-                partner: 'goodsam',
+                name: 'Good Sam',
+                url: 'https://goodsam.com',
                 title: 'RV Services & Support',
                 description: 'Emergency roadside assistance, discounts, and essential services for RV travelers.',
                 features: ['24/7 roadside help', 'Travel discounts', 'RV insurance'],

@@ -150,21 +150,24 @@ const RVEmergencyCenter = () => {
             subtitle="Professional emergency services, essential safety equipment, and emergency preparedness tools for complete RV safety."
             partners={[
               {
-                partner: 'goodsam',
+                name: 'Good Sam',
+                url: 'https://goodsam.com',
                 title: 'Good Sam Emergency Roadside Service',
                 description: 'Comprehensive 24/7 roadside assistance specifically designed for RVs with unlimited distance towing.',
                 features: ['24/7 Emergency Response', 'Unlimited Towing', 'Lockout Service', 'Emergency Fuel Delivery'],
                 buttonText: 'Get Emergency Coverage'
               },
               {
-                partner: 'rvlife',
+                name: 'RV Life',
+                url: 'https://rvlife.com',
                 title: 'RV Life Emergency Monitoring',
                 description: 'Advanced monitoring systems that detect and alert you to potential emergencies before they happen.',
                 features: ['Emergency Detection', 'Real-Time Alerts', 'Preventive Monitoring', 'Remote Diagnostics'],
                 buttonText: 'Shop Safety Systems'
               },
               {
-                partner: 'rvwaterfilter',
+                name: 'RV Water Filter Store',
+                url: 'https://rvwaterfilterstore.com',
                 title: 'Emergency Water & Safety Systems',
                 description: 'Essential emergency water filtration and safety equipment for off-grid adventures and emergency situations.',
                 features: ['Emergency Filtration', 'Water Purification', 'Safety Equipment', 'Off-Grid Ready'],
@@ -192,14 +195,12 @@ const RVEmergencyCenter = () => {
                   >
                     Get RV Insurance Quote
                   </ExternalLinkButton>
-                  <AffiliatePartnerButton 
-                    partner="goodsam" 
-                    path="/emergency-assistance"
-                    variant="outline" 
+                  <ExternalLinkButton 
+                    href="https://goodsam.com"
                     className="border-purple-500 text-purple-300 hover:bg-purple-900/50 px-8 py-3 rounded-lg min-h-[48px] touch-manipulation"
                   >
                     Emergency Coverage
-                  </AffiliatePartnerButton>
+                  </ExternalLinkButton>
                 </div>
               </div>
             </CardContent>
@@ -210,27 +211,27 @@ const RVEmergencyCenter = () => {
             subtitle="Be prepared with professional emergency services and safety equipment for your RV adventures"
             partners={[
               {
-                partner: 'goodsam',
+                name: 'Good Sam',
+                url: 'https://goodsam.com',
                 title: 'Good Sam Emergency Roadside',
                 description: 'America\'s most trusted RV emergency service with 24/7 roadside assistance and technical support',
                 features: ['24/7 Emergency Response', 'Nationwide Coverage', 'RV-Specific Services', 'Towing & Recovery'],
-                path: '/emergency-roadside',
                 buttonText: 'Get Emergency Coverage'
               },
               {
-                partner: 'rvlife',
+                name: 'RV Life',
+                url: 'https://rvlife.com',
                 title: 'RV Life Emergency Monitoring',
                 description: 'Advanced monitoring systems that alert you to potential emergencies before they happen',
                 features: ['Real-Time Alerts', 'Emergency Detection', 'Preventive Monitoring', 'Remote Diagnostics'],
-                path: '/emergency-monitoring',
                 buttonText: 'Shop Monitoring Systems'
               },
               {
-                partner: 'rvwaterfilter',
+                name: 'RV Water Filter Store',
+                url: 'https://rvwaterfilterstore.com',
                 title: 'Emergency Water Filtration',
                 description: 'Essential water filtration systems for emergency situations and off-grid adventures',
                 features: ['Emergency Filtration', 'Portable Systems', 'Water Purification', 'Off-Grid Ready'],
-                path: '/emergency-water',
                 buttonText: 'Shop Emergency Filters'
               }
             ]}

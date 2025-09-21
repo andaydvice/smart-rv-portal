@@ -76,19 +76,19 @@ const AudioSystem = () => {
               subtitle="Get expert installation and premium audio equipment for your RV sound system"
               partners={[
                 {
-                  partner: 'rvlife',
+                  name: 'RV Life',
+                  url: 'https://rvlife.com',
                   title: 'RV Life Premium Audio Installation',
                   description: 'Professional installation of high-end audio systems with custom tuning and integration',
                   features: ['Premium Speaker Installation', 'Custom Audio Tuning', 'Smart Integration', 'Lifetime Support'],
-                  path: '/premium-audio',
                   buttonText: 'Schedule Audio Installation'
                 },
                 {
-                  partner: 'goodsam',
+                  name: 'Good Sam',
+                  url: 'https://goodsam.com',
                   title: 'Good Sam Audio Maintenance',
                   description: 'Expert maintenance and troubleshooting services for RV audio systems',
                   features: ['System Diagnostics', 'Maintenance Plans', 'Emergency Repairs', 'Technical Support'],
-                  path: '/audio-maintenance',
                   buttonText: 'Get Audio Support'
                 }
               ]}

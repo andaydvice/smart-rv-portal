@@ -77,13 +77,15 @@ const AutomatedDriving = () => {
             subtitle="Enhanced safety systems and emergency assistance for automated driving"
             partners={[
               {
-                partner: 'rvlife',
+                name: 'RV Life',
+                url: 'https://rvlife.com',
                 title: 'RV Life Safe Navigation',
                 description: 'Professional GPS navigation with advanced safety features and road condition alerts.',
                 features: ['RV-safe routing', 'Real-time traffic alerts', 'Road condition monitoring', 'Safety notifications']
               },
               {
-                partner: 'goodsam',
+                name: 'Good Sam',
+                url: 'https://goodsam.com',
                 title: 'Good Sam Emergency Response',
                 description: 'Emergency assistance and support when automated systems need human intervention.',
                 features: ['Emergency assistance', 'Technical support', 'Roadside help', '24/7 availability']

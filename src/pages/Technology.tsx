@@ -141,21 +141,24 @@ const Technology = () => {
               subtitle="Get the latest RV technology, professional installation, and expert support to upgrade your travel experience."
               partners={[
                 {
-                  partner: 'rvlife',
+                  name: 'RV Life',
+                  url: 'https://rvlife.com',
                   title: 'Smart RV Technology',
                   description: 'Advanced monitoring systems, automation solutions, and connectivity upgrades for modern RVs.',
                   features: ['Smart Monitoring Systems', 'Professional Installation', 'Expert Support', '2-Year Warranty'],
                   buttonText: 'Shop RV Life'
                 },
                 {
-                  partner: 'goodsam',
+                  name: 'Good Sam',
+                  url: 'https://goodsam.com',
                   title: 'Technology Support Services',
                   description: 'Professional installation, technical support, and warranty coverage for all your RV tech upgrades.',
                   features: ['Expert Installation', '24/7 Tech Support', 'Warranty Coverage', 'Training Included'],
                   buttonText: 'Get Professional Support'
                 },
                 {
-                  partner: 'rvlife',
+                  name: 'RV Life',
+                  url: 'https://rvlife.com',
                   title: 'Smart Travel Planning',
                   description: 'Advanced trip planning technology with GPS navigation, campground data, and real-time updates.',
                   features: ['Smart Navigation', 'Real-Time Updates', 'Offline Maps', 'Community Reviews'],

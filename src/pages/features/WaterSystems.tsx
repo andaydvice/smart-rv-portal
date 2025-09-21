@@ -145,19 +145,19 @@ const WaterSystems = () => {
               subtitle="Ensure clean, safe water throughout your RV adventures with professional-grade filtration"
               partners={[
                 {
-                  partner: 'rvwaterfilter',
+                  name: 'RV Water Filter Store',
+                  url: 'https://rvwaterfilterstore.com',
                   title: 'RV Water Filter Store Premium Systems',
                   description: 'Professional-grade water filtration systems designed specifically for RV use with guaranteed clean water',
                   features: ['RV-Specific Filters', 'Professional Installation', 'Water Quality Guarantee', 'Maintenance Support'],
-                  path: '/premium-filters',
                   buttonText: 'Shop Premium Filters'
                 },
                 {
-                  partner: 'rvwaterfilter',
+                  name: 'RV Water Filter Store',
+                  url: 'https://rvwaterfilterstore.com',
                   title: 'RV Water Filter Smart Systems',
                   description: 'Advanced water filtration and monitoring systems that ensure clean, safe water anywhere',
                   features: ['NSF-certified filtration', 'Quality monitoring', 'Easy installation', 'System maintenance'],
-                  path: '/smart-filtration',
                   buttonText: 'Shop Smart Filters'
                 }
               ]}

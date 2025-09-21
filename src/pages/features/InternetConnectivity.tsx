@@ -83,13 +83,15 @@ const InternetConnectivity = () => {
             subtitle="Get reliable internet access wherever your adventures take you"
             partners={[
               {
-                partner: 'weboost',
+                name: 'WeBoost',
+                url: 'https://weboost.com',
                 title: 'WeBoost Signal Enhancement',
                 description: 'Professional cellular signal boosters to maximize your internet connectivity.',
                 features: ['Signal strength amplification', 'Multi-carrier support', 'Easy installation', 'Proven results']
               },
               {
-                partner: 'rvlife',
+                name: 'RV Life',
+                url: 'https://rvlife.com',
                 title: 'RV Life Trip Wizard',
                 description: 'Plan routes with connectivity hotspots and campground internet reviews.',
                 features: ['WiFi-enabled campground search', 'Connectivity planning tools', 'User internet reviews']

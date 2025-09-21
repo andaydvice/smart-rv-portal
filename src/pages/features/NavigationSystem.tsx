@@ -105,13 +105,15 @@ const NavigationSystem = () => {
             subtitle="Navigate safely with RV-specific routing and emergency backup"
             partners={[
               {
-                partner: 'rvlife',
+                name: 'RV Life',
+                url: 'https://rvlife.com',
                 title: 'RV Life Trip Wizard',
                 description: 'RV-specific GPS navigation with height/weight restrictions and campground database.',
                 features: ['RV-safe routing', 'Campground navigation', 'Offline maps', 'Trip planning tools']
               },
               {
-                partner: 'goodsam',
+                name: 'Good Sam',
+                url: 'https://goodsam.com',
                 title: 'Good Sam Emergency Roadside',
                 description: 'Emergency assistance when navigation fails or you need roadside help.',
                 features: ['24/7 emergency routing', 'Roadside assistance', 'Emergency dispatch', 'Towing services']

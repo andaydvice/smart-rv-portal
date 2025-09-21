@@ -296,13 +296,15 @@ const SecuritySystem = () => {
             subtitle="Protect your RV with professional security services and monitoring"
             partners={[
               {
-                partner: 'goodsam',
+                name: 'Good Sam',
+                url: 'https://goodsam.com',
                 title: 'Good Sam Security Services',
                 description: 'Professional RV security consultation and emergency response services.',
                 features: ['Security system consultation', 'Emergency response', '24/7 monitoring support', 'Professional installation']
               },
               {
-                partner: 'goodsam',
+                name: 'Good Sam',
+                url: 'https://goodsam.com',
                 title: 'Good Sam Security Services',
                 description: 'Professional security monitoring and emergency response services for your RV.',
                 features: ['24/7 monitoring', 'Emergency response', 'Roadside assistance', 'Peace of mind']

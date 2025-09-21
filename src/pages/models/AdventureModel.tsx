@@ -51,42 +51,48 @@ const AdventureModel = () => {
               subtitle="Gear up for off-grid adventures with specialized equipment, expert guidance, and adventure-ready services."
               partners={[
                 {
-                  partner: 'outdoorsy',
+                  name: 'Outdoorsy',
+                  url: 'https://outdoorsy.com',
                   title: 'Adventure RV Experiences',
                   description: 'Book unique outdoor adventures and specialized off-road RV experiences in stunning locations.',
                   features: ['Adventure Locations', 'Off-Grid Experiences', 'Specialized RVs', 'Expert Guides'],
                   buttonText: 'Book Adventure'
                 },
                 {
-                  partner: 'ecoflow',
+                  name: 'EcoFlow',
+                  url: 'https://ecoflow.com',
                   title: 'Off-Grid Power Solutions',
                   description: 'Premium lithium batteries and power systems for extended off-grid adventures.',
                   features: ['Lithium Power Systems', 'Extended Runtime', 'Remote Monitoring', 'Off-Grid Reliability'],
                   buttonText: 'Shop Power Solutions'
                 },
                 {
-                  partner: 'goodsam',
+                  name: 'Good Sam',
+                  url: 'https://goodsam.com',
                   title: 'Adventure Support Services',
                   description: 'Specialized roadside assistance and emergency support for remote and off-grid adventures.',
                   features: ['Remote Area Support', 'Emergency Services', 'Adventure Coverage', 'Expert Assistance'],
                   buttonText: 'Get Adventure Protection'
                 },
                 {
-                  partner: 'rvlife',
+                  name: 'RV Life',
+                  url: 'https://rvlife.com',
                   title: 'Adventure Route Planning',
                   description: 'Discover off-grid destinations, boondocking spots, and adventure routes perfect for exploration.',
                   features: ['Boondocking Locations', 'Off-Grid Routes', 'Adventure Planning', 'Community Insights'],
                   buttonText: 'Plan Adventures'
                 },
                 {
-                  partner: 'rvshare',
+                  name: 'RV Share',
+                  url: 'https://rvshare.com',
                   title: 'Adventure RV Rentals',
                   description: 'Rent adventure-ready RVs equipped for off-grid exploration and outdoor adventures.',
                   features: ['Adventure-Ready RVs', 'Off-Grid Equipment', 'Flexible Rentals', 'Adventure Support'],
                   buttonText: 'Rent Adventure RV'
                 },
                 {
-                  partner: 'rvwaterfilter',
+                  name: 'RV Water Filter Store',
+                  url: 'https://rvwaterfilterstore.com',
                   title: 'Adventure Water Solutions',
                   description: 'Portable water filtration and purification systems for safe drinking water anywhere.',
                   features: ['Portable Filtration', 'Off-Grid Solutions', 'Pure Water Anywhere', 'Adventure Proven'],

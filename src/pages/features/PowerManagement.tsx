@@ -199,19 +199,19 @@ const PowerManagement = () => {
               subtitle="Get expert installation and monitoring for your RV power management system"
               partners={[
                 {
-                  partner: 'rvlife',
+                  name: 'RV Life',
+                  url: 'https://rvlife.com',
                   title: 'RV Life Pro GPS Navigation',
                   description: 'Essential RV trip planning and GPS navigation app with power management route optimization',
                   features: ['RV-Safe Routes', 'Campground Info', 'Trip Planning', 'Power Management Tips'],
-                  path: '',
                   buttonText: 'Get RV Life Pro'
                 },
                 {
-                  partner: 'goodsam',
+                  name: 'Good Sam',
+                  url: 'https://goodsam.com',
                   title: 'Good Sam Electrical Support',
                   description: 'Expert electrical system support and maintenance for RV power management',
                   features: ['Electrical Diagnostics', 'System Maintenance', 'Emergency Repairs', 'Technical Support'],
-                  path: '/electrical-support',
                   buttonText: 'Get Electrical Support'
                 }
               ]}

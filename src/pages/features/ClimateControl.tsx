@@ -136,13 +136,15 @@ const ClimateControl = () => {
             subtitle="Professional climate systems and monitoring for optimal comfort"
             partners={[
               {
-                partner: 'invertersrus',
+                name: 'Inverters R Us',
+                url: 'https://invertersrus.com',
                 title: 'Victron Climate Power Solutions',
                 description: 'Professional power monitoring and optimization for efficient climate control systems.',
                 features: ['Power usage monitoring', 'Energy optimization', 'Remote monitoring', 'System diagnostics']
               },
               {
-                partner: 'goodsam',
+                name: 'Good Sam',
+                url: 'https://goodsam.com',
                 title: 'Good Sam HVAC Support',
                 description: 'Professional HVAC installation, maintenance, and emergency repair services.',
                 features: ['HVAC installation', 'Emergency repairs', 'Maintenance services', 'System consultation']

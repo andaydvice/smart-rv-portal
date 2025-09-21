@@ -133,19 +133,22 @@ const SmartAutomation = () => {
             subtitle="Professional automation systems and monitoring for your smart RV"
             partners={[
               {
-                partner: 'invertersrus',
+                name: 'Inverters R Us',
+                url: 'https://invertersrus.com',
                 title: 'Victron Smart Integration',
                 description: 'Advanced monitoring and control of all your RV power and automation systems.',
                 features: ['System integration monitoring', 'Energy optimization', 'Automated alerts', 'Remote diagnostics']
               },
               {
-                partner: 'rvlife',
+                name: 'RV Life',
+                url: 'https://rvlife.com',
                 title: 'RV Life Smart Features',
                 description: 'Access smart RV features and automation guides through the RV Life app.',
                 features: ['Smart RV guides', 'Automation tutorials', 'System recommendations', 'User community']
               },
               {
-                partner: 'goodsam',
+                name: 'Good Sam',
+                url: 'https://goodsam.com',
                 title: 'Good Sam Technical Support',
                 description: 'Expert technical support for smart automation installations and troubleshooting.',
                 features: ['Installation support', 'Technical troubleshooting', 'System consultation', 'Professional guidance']

@@ -149,21 +149,24 @@ const RVWeather = () => {
               subtitle="Get accurate forecasts, emergency assistance, and professional weather monitoring for safer Smart RV travels."
               partners={[
                 {
-                  partner: 'goodsam',
+                  name: 'Good Sam',
+                  url: 'https://goodsam.com',
                   title: 'Emergency Weather Support',
                   description: 'Get 24/7 emergency roadside assistance and weather-related travel support when severe conditions hit.',
                   features: ['24/7 Emergency Line', 'Severe Weather Assistance', 'Trip Interruption Coverage', 'Professional Guidance'],
                   buttonText: 'Get Weather Protection'
                 },
                 {
-                  partner: 'rvlife',
+                  name: 'RV Life',
+                  url: 'https://rvlife.com',
                   title: 'Advanced Weather Planning',
                   description: 'Professional trip planning with detailed weather forecasts, route optimization, and real-time alerts.',
                   features: ['Advanced Weather Radar', 'Route Weather Analysis', 'Real-Time Alerts', 'Historical Data'],
                   buttonText: 'Plan Weather-Safe Routes'
                 },
                 {
-                  partner: 'rvlife',
+                  name: 'RV Life',
+                  url: 'https://rvlife.com',
                   title: 'Weather Monitoring Systems',
                   description: 'Smart weather stations and monitoring equipment to track conditions around your RV in real-time.',
                   features: ['Professional Weather Stations', 'Smart Monitoring', 'Mobile Alerts', 'Expert Installation'],
