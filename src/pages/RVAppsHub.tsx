@@ -4,7 +4,7 @@ import Layout from '@/components/layout/Layout';
 import { Container } from '@/components/ui/container';
 
 import AffiliateDisclosure from '@/components/affiliate/AffiliateDisclosure';
-import { OptimizedAffiliateGrid } from '@/components/affiliate/OptimizedAffiliateGrid';
+
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Smartphone, Wifi, MapPin, Battery, Settings, Shield } from 'lucide-react';
 

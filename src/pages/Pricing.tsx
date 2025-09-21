@@ -5,8 +5,6 @@ import { Link } from "react-router-dom";
 import { Check } from "lucide-react";
 import Layout from "@/components/layout/Layout";
 import { scrollToTop } from "@/utils/scrollToTop";
-import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
-import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
 import { Helmet } from "react-helmet-async";
 
 const Pricing = () => {

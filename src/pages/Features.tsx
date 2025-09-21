@@ -4,9 +4,7 @@ import Navbar from "@/components/Navbar";
 import { Link } from "react-router-dom";
 import { Navigation, Shield, Battery, Tv, Droplet, Cog, Thermometer, Music } from "lucide-react";
 import Layout from "@/components/layout/Layout";
-import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
 import { Helmet } from "react-helmet-async";
-import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
 
 const Features = () => {
   return (
@@ -91,44 +89,6 @@ const Features = () => {
           </div>
           
           {/* Feature upgrade recommendations */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.8 }}
-            className="mt-16"
-          >
-            <OptimizedAffiliateGrid
-              title="Upgrade Your RV with Smart Features"
-              subtitle="Transform your RV into a smart home on wheels with these proven technologies from our trusted partners."
-              partners={[
-                {
-                  partner: 'rvlife',
-                  title: 'Smart RV Technology Systems',
-                  description: 'Complete smart technology solutions for RV automation, monitoring, and control systems.',
-                  features: ['Smart Power Management', 'Security Systems', 'Automation Controls', 'Remote Monitoring'],
-                  buttonText: 'Shop Smart Tech'
-                },
-                {
-                  partner: 'rvwaterfilter',
-                  title: 'Advanced Water System Features',
-                  description: 'Premium water filtration and monitoring systems for safe, clean water in your smart RV.',
-                  features: ['Smart Water Monitoring', 'Multi-Stage Filtration', 'NSF Certified', 'Easy Installation'],
-                  buttonText: 'Shop Water Systems'
-                },
-                {
-                  partner: 'goodsam',
-                  title: 'Professional Feature Installation',
-                  description: 'Expert installation and support services for all your RV feature upgrades and smart systems.',
-                  features: ['Professional Installation', 'Expert Support', 'Warranty Coverage', 'System Integration'],
-                  buttonText: 'Get Installation Service'
-                }
-              ]}
-              gridCols="3"
-            />
-            <div className="px-4">
-              <AffiliateDisclosure className="max-w-7xl mx-auto my-8" />
-            </div>
-          </motion.div>
         </div>
       </motion.div>
     </Layout>

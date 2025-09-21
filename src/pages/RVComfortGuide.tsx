@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet';
 import { motion } from 'framer-motion';
 import { Bed, Moon, Thermometer, Wind, Heart, Star } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
-import { OptimizedAffiliateGrid } from '@/components/affiliate/OptimizedAffiliateGrid';
+
 import Layout from '@/components/layout/Layout';
 import { Container } from '@/components/ui/container';
 import AffiliateDisclosure from '@/components/affiliate/AffiliateDisclosure';
