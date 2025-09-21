@@ -139,20 +139,7 @@ const BlogPost = () => {
             content={post.content}
           />
           
-          {/* Affiliate product recommendations */}
-          <OptimizedAffiliateGrid
-            title="Recommended Smart RV Resources"
-            subtitle="Discover products and services that enhance your smart RV lifestyle and adventures."
-            partners={[
-              { partner: 'rvlife', title: 'RV Life Resources', description: 'Trip planning and RV lifestyle guides' },
-              { partner: 'rvlife', title: 'RV Technology', description: 'Latest RV tech and equipment reviews' },
-              { partner: 'goodsam', title: 'Smart RV Community', description: 'Join the largest smart RV community for tips and support' }
-            ]}
-            gridCols="3"
-          />
-          
-          {/* Affiliate disclosure */}
-          <AffiliateDisclosure />
+          {/* Affiliate recommendations removed */}
         </div>
         <Footer2 
           links={footerLinks}

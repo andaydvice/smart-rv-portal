@@ -204,22 +204,7 @@ export default function StorageFacilities() {
         <LocationPreviewSection mapToken={mapToken} featuredLocation={featuredLocation} />
       </div>
       
-      {/* Storage Services and Recommendations */}
-      <div className="max-w-7xl mx-auto px-4">
-        <OptimizedAffiliateGrid
-          title="Recommended Storage Solutions"
-          subtitle="Professional RV storage facilities and services to keep your RV safe and secure when not in use."
-          partners={[
-            { partner: 'rvlife', title: 'RV Life Storage Guide', description: 'Comprehensive storage guides and facility reviews' },
-            { partner: 'goodsam', title: 'Good Sam Storage', description: 'Member discounts on storage facilities nationwide' },
-            { partner: 'rvlife', title: 'Storage Equipment', description: 'Professional RV covers and storage accessories' }
-          ]}
-          gridCols="3"
-        />
-        <div className="px-4">
-          <AffiliateDisclosure className="max-w-7xl mx-auto my-8" />
-        </div>
-      </div>
+      {/* Storage recommendations removed */}
     </Layout>
   );
 }

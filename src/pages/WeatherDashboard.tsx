@@ -143,18 +143,7 @@ const WeatherDashboard = () => {
 
           <SafetyInsights />
           
-          <OptimizedAffiliateGrid
-            title="Weather Monitoring Solutions"
-            subtitle="Professional weather stations and monitoring equipment to keep your RV safe in all conditions."
-            partners={[
-              { partner: 'rvlife', title: 'Weather Monitoring', description: 'Advanced weather stations and sensors for RVs' },
-              { partner: 'rvlife', title: 'Weather Apps', description: 'Best weather apps and resources for RV travel' },
-              { partner: 'goodsam', title: 'Emergency Services', description: 'Roadside assistance and weather emergency support' }
-            ]}
-            gridCols="3"
-          />
-          
-          <AffiliateDisclosure className="mt-8" />
+          {/* Weather monitoring recommendations removed */}
         </div>
       </div>
     </Layout>

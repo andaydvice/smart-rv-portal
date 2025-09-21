@@ -172,32 +172,7 @@ const Models = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.0 }}
-            className="mt-16"
-          >
-            <OptimizedAffiliateGrid
-              title="Experience and Support RV Models"
-              subtitle="Try different models through rentals, get financing support, and find technology upgrades for any RV type."
-              partners={[
-                {
-                  partner: 'rvshare',
-                  title: 'Experience Models Before Buying',
-                  description: 'Rent and test various RV models to find your perfect match. Compare features and layouts.',
-                  features: ['Model Testing', 'Feature Comparison', 'Real Experience', 'Owner Insights'],
-                  buttonText: 'Browse RV Rentals'
-                },
-                {
-                  partner: 'goodsam',
-                  title: 'RV Model Financing & Support',
-                  description: 'Get financing support, insurance, and professional services for any RV model purchase.',
-                  features: ['RV Financing', 'Insurance Options', 'Professional Support', 'Model Expertise'],
-                  buttonText: 'Get Model Support'
-                },
-                {
-                  partner: 'rvlife',
-                  title: 'Model Technology Upgrades',
-                  description: 'Upgrade any RV model with smart technology, monitoring systems, and modern features.',
-                  features: ['Smart Upgrades', 'Model Compatibility', 'Professional Installation', 'Technology Enhancement'],
-                  buttonText: 'Shop Model Upgrades'
+            {/* Model affiliate sections removed */}
                 }
               ]}
               gridCols="3"

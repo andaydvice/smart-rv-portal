@@ -161,50 +161,7 @@ const About = () => {
               </div>
             </div>
 
-            {/* Affiliate Partners Grid */}
-            <OptimizedAffiliateGrid
-              title="Our Trusted Partners"
-              subtitle="We partner with industry-leading companies to provide you with the best RV products and services."
-              partners={[
-                {
-                  partner: 'rvshare',
-                  title: 'Premium RV Rentals',
-                  description: 'Nationwide RV rentals with instant booking and comprehensive insurance coverage',
-                  features: ['Instant booking', 'Insurance included', 'Nationwide coverage', '24/7 support']
-                },
-                {
-                  partner: 'ecoflow',
-                  title: 'Smart Power Technology',
-                  description: 'Advanced lithium battery systems and power monitoring for modern RV living',
-                  features: ['Professional installation', 'Smart monitoring', 'Remote control', 'Expert support']
-                },
-                {
-                  partner: 'goodsam',
-                  title: 'Roadside Assistance',
-                  description: 'Comprehensive RV services and emergency roadside assistance nationwide',
-                  features: ['24/7 roadside help', 'Emergency services', 'Nationwide coverage', 'Peace of mind']
-                },
-                {
-                  partner: 'rvwaterfilter',
-                  title: 'Water Filtration Systems',
-                  description: 'Premium water filtration with clean water guarantee for safe travel',
-                  features: ['Clean water guarantee', 'Easy installation', 'NSF certified', 'Health protection']
-                },
-                {
-                  partner: 'outdoorsy',
-                  title: 'Luxury RV Experiences',
-                  description: 'Premium RV rentals and concierge services for exceptional adventures',
-                  features: ['Luxury fleet', 'Concierge service', 'Premium experience', 'Quality guaranteed']
-                },
-                {
-                  partner: 'rvlife',
-                  title: 'Trip Planning Tools',
-                  description: 'GPS navigation and trip planning tools designed specifically for RVs',
-                  features: ['RV-safe routes', 'Trip planning', 'GPS navigation', 'Campground finder']
-                }
-              ]}
-              gridCols="3"
-            />
+            {/* Affiliate section removed during cleanup */}
             <div className="px-4">
               <AffiliateDisclosure className="max-w-6xl mx-auto my-8" />
             </div>

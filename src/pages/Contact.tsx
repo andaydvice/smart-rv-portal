@@ -107,24 +107,7 @@ const Contact = () => {
             transition={{ delay: 0.5, duration: 0.5 }}
             className="mt-12"
           >
-            <OptimizedAffiliateGrid
-              title="Need Immediate Help?"
-              subtitle="Emergency support and urgent assistance when you can't wait for a response"
-              partners={[
-                {
-                  partner: 'goodsam',
-                  title: 'Good Sam Emergency Hotline',
-                  description: '24/7 emergency roadside assistance and immediate technical support for urgent RV issues',
-                  features: ['24/7 Emergency Line', 'Immediate Dispatch', 'Technical Hotline', 'Priority Response'],
-                  path: '/emergency-support',
-                  buttonText: 'Call Emergency Support'
-                }
-              ]}
-              gridCols="auto"
-            />
-            <div className="px-4">
-              <AffiliateDisclosure className="max-w-3xl mx-auto my-8" />
-            </div>
+            {/* Emergency support affiliate section removed */}
           </motion.div>
         </div>
       </motion.div>
