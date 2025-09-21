@@ -167,17 +167,7 @@ const Models = () => {
             </Link>
           </motion.div>
           
-          {/* Model Support and Services */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.0 }}
-            {/* Model affiliate sections removed */}
-                }
-              ]}
-              gridCols="3"
-            />
-          </motion.div>
+          {/* RV Model Partners and Services */}
           
           {/* RV Model Partners and Services */}
           <motion.div 
@@ -191,42 +181,48 @@ const Models = () => {
               subtitle="Explore different models through rentals, get expert advice, and find the right technology upgrades for any RV type."
               partners={[
                 {
-                  partner: 'rvshare',
+                  name: 'RVShare',
+                  url: 'https://rvshare.com',
                   title: 'Try Different RV Models',
                   description: 'Rent and test various RV models before making your purchase decision. Perfect for comparing features.',
                   features: ['Multiple Model Types', 'Test Drive Experience', 'Owner Insights', 'Insurance Included'],
                   buttonText: 'Browse RV Models'
                 },
                 {
-                  partner: 'outdoorsy',
+                  name: 'Outdoorsy',
+                  url: 'https://outdoorsy.com',
                   title: 'Luxury RV Experiences',
                   description: 'Experience premium and luxury RV models with high-end amenities and concierge service.',
                   features: ['Luxury Models', 'Premium Service', 'Unique Locations', 'White Glove Treatment'],
                   buttonText: 'Book Luxury Experience'
                 },
                 {
-                  partner: 'rvlife',
+                  name: 'RV Life',
+                  url: 'https://rvlife.com',
                   title: 'RV Technology Upgrades',
                   description: 'Upgrade any RV model with smart technology, monitoring systems, and automation features.',
                   features: ['Model-Specific Upgrades', 'Professional Installation', 'Smart Monitoring', 'Compatibility Guaranteed'],
                   buttonText: 'Shop Model Upgrades'
                 },
                 {
-                  partner: 'goodsam',
+                  name: 'Good Sam',
+                  url: 'https://goodsam.com',
                   title: 'RV Model Support & Services',
                   description: 'Get expert advice, maintenance support, and protection plans for any RV model or type.',
                   features: ['Model-Specific Advice', 'Maintenance Plans', 'Protection Coverage', 'Expert Support'],
                   buttonText: 'Get Model Support'
                 },
                 {
-                  partner: 'rvlife',
+                  name: 'RV Trip Wizard',
+                  url: 'https://rvtripwizard.com',
                   title: 'Model-Specific Trip Planning',
                   description: 'Plan trips optimized for your specific RV model with route planning and campground compatibility.',
                   features: ['Model-Based Routes', 'Size Restrictions', 'Compatibility Checks', 'Expert Reviews'],
                   buttonText: 'Plan Model-Safe Routes'
                 },
                 {
-                  partner: 'rvwaterfilter',
+                  name: 'RV Water Filter Store',
+                  url: 'https://rvwaterfilterstore.com',
                   title: 'Model-Specific Water Systems',
                   description: 'Get the right water filtration system designed specifically for your RV model and setup.',
                   features: ['Model Compatibility', 'Custom Installation', 'Perfect Fit Guarantee', 'Expert Consultation'],
