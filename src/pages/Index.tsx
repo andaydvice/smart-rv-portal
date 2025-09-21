@@ -1,10 +1,12 @@
 import React, { useEffect, lazy, Suspense } from "react";
 import Layout from "@/components/layout/Layout";
 import { HeroSection } from "@/components/sections/HeroSection";
+import { FeaturesSection } from "@/components/sections/FeaturesSection";
 import { motion } from "framer-motion";
 import { ContactSection } from "@/components/sections/ContactSection";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
 import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
+import TestimonialsSection from "@/components/sections/testimonials/TestimonialsSection";
 import SEO from "@/components/seo/SEO";
 import { organizationSchema, websiteSchema } from "@/components/seo/schemas";
 import { scrollToTop } from "@/utils/scrollToTop";
@@ -30,6 +32,9 @@ const Index = () => {
       <div className="space-y-0">
         {/* Hero Section */}
         <HeroSection />
+
+        {/* Features Section */}
+        <FeaturesSection />
 
         {/* Technology Section */}
         <Suspense fallback={<div className="min-h-[50vh] bg-gray-900" />}>
@@ -68,6 +73,9 @@ const Index = () => {
             />
           </div>
         </motion.section>
+
+        {/* Testimonials Section */}
+        <TestimonialsSection />
 
         {/* Contact Section */}
         <ContactSection />
