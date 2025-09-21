@@ -1,8 +1,12 @@
 import React from 'react';
 
-const AffiliateDisclosure = () => {
+interface AffiliateDisclosureProps {
+  className?: string;
+}
+
+const AffiliateDisclosure: React.FC<AffiliateDisclosureProps> = ({ className = '' }) => {
   return (
-    <div className="bg-gray-800 border border-gray-700 rounded-lg p-6 mt-16">
+    <div className={`bg-gray-800 border border-gray-700 rounded-lg p-6 mt-16 ${className}`}>
       <h3 className="text-lg font-semibold text-white mb-3">💡 Product Information</h3>
       <p className="text-gray-300 text-sm">
         We provide information about helpful RV products and services. When you click on external links, 

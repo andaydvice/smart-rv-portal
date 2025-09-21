@@ -1,7 +1,7 @@
 
 import { TechnologyHeader } from "./technology/TechnologyHeader";
 import { TechnologyGrid } from "./technology/TechnologyGrid";
-import TechnologyProductRecommendations from "./technology/TechnologyProductRecommendations";
+
 import { useNavigate } from "react-router-dom";
 
 const TechnologySection = () => {
@@ -23,8 +23,6 @@ const TechnologySection = () => {
         </div>
       </section>
       
-      {/* Technology product recommendations */}
-      <TechnologyProductRecommendations />
     </>
   );
 };
