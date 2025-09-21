@@ -192,37 +192,10 @@ const Pricing = () => {
 
             {/* Partner Value Comparison */}
             <div className="bg-black/20 backdrop-blur-md p-8 rounded-xl border border-white/10">
-              <h2 className="text-3xl font-bold text-white mb-6 text-center">Save More with Partner Benefits</h2>
+              <h2 className="text-3xl font-bold text-white mb-6 text-center">Value & Savings</h2>
               <p className="text-white/90 text-center mb-8">
-                Our trusted partners offer exclusive discounts and value-added services for Smart RV customers
+                Smart RV technology provides long-term value through enhanced comfort, security, and efficiency.
               </p>
-              
-              <OptimizedAffiliateGrid
-                title=""
-                subtitle=""
-                partners={[
-                  {
-                    partner: 'goodsam',
-                    title: 'Good Sam Club Membership',
-                    description: 'Save 10¢/gallon on gas, get camping discounts, and emergency roadside assistance',
-                    features: ['Fuel Savings', 'Camping Discounts', 'Emergency Coverage', 'Travel Planning'],
-                    path: '/club-benefits',
-                    buttonText: 'Join Good Sam'
-                  },
-                  {
-                    partner: 'rvlife',
-                    title: 'RV Life Pro Membership',
-                    description: 'Professional trip planning tools with RV-safe routes and campground reviews',
-                    features: ['RV-Safe Routes', 'Trip Planning', 'Campground Reviews', 'Offline Maps'],
-                    path: '/pro-membership',
-                    buttonText: 'Go Pro'
-                  }
-                ]}
-                gridCols="2"
-              />
-              <div className="px-4">
-                <AffiliateDisclosure className="max-w-6xl mx-auto my-8" />
-              </div>
             </div>
           </motion.div>
         </div>

@@ -1,182 +1,197 @@
 import React from 'react';
-import { Helmet } from 'react-helmet-async';
+import { motion } from 'framer-motion';
 import Layout from '@/components/layout/Layout';
-import { Container } from '@/components/ui/container';
-
-import AffiliateDisclosure from '@/components/affiliate/AffiliateDisclosure';
-
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Smartphone, Wifi, MapPin, Battery, Settings, Shield } from 'lucide-react';
+import { Helmet } from 'react-helmet-async';
+import { Smartphone, Wifi, Navigation, Settings, Battery, Shield } from 'lucide-react';
 
 const RVAppsHub = () => {
   const appCategories = [
     {
-      icon: <MapPin className="h-6 w-6" />,
-      title: "Navigation & Travel",
-      description: "GPS apps designed specifically for RV travel with height/weight restrictions",
-      color: "text-blue-400"
+      icon: Navigation,
+      title: "Navigation & GPS",
+      description: "RV-safe routing and trip planning",
+      apps: [
+        "RV-specific GPS navigation",
+        "Trip planning tools", 
+        "Campground databases",
+        "Real-time traffic updates"
+      ]
     },
     {
-      icon: <Wifi className="h-6 w-6" />,
+      icon: Wifi,
       title: "Connectivity",
-      description: "Stay connected on the road with internet and communication tools",
-      color: "text-green-400"
+      description: "Internet and communication tools",
+      apps: [
+        "Signal strength monitoring",
+        "Hotspot management",
+        "Data usage tracking",
+        "Network optimization"
+      ]
     },
     {
-      icon: <Battery className="h-6 w-6" />,
-      title: "Power Management",
-      description: "Monitor and optimize your RV's electrical systems",
-      color: "text-yellow-400"
+      icon: Settings,
+      title: "RV Management",
+      description: "Monitor and control your RV systems",
+      apps: [
+        "System monitoring",
+        "Maintenance tracking",
+        "Diagnostic tools",
+        "Service reminders"
+      ]
     },
     {
-      icon: <Settings className="h-6 w-6" />,
-      title: "Maintenance",
-      description: "Track maintenance schedules and system diagnostics",
-      color: "text-purple-400"
+      icon: Battery,
+      title: "Power & Solar",
+      description: "Energy management applications",
+      apps: [
+        "Battery monitoring",
+        "Solar panel tracking",
+        "Power consumption analysis",
+        "Generator management"
+      ]
     },
     {
-      icon: <Shield className="h-6 w-6" />,
+      icon: Shield,
       title: "Safety & Security",
-      description: "Emergency services and security monitoring apps",
-      color: "text-red-400"
+      description: "Emergency and security applications",
+      apps: [
+        "Emergency services",
+        "Weather alerts",
+        "Security monitoring",
+        "Location sharing"
+      ]
+    },
+    {
+      icon: Smartphone,
+      title: "Lifestyle Apps",
+      description: "Enhance your RV living experience",
+      apps: [
+        "Local discoveries",
+        "Weather forecasting",
+        "Entertainment options",
+        "Social networking"
+      ]
     }
   ];
-
-  // Removed hardcoded featured apps array - now using proper affiliate system
-
 
   return (
     <Layout>
       <Helmet>
-        <title>Essential Smart RV Apps & Tools Hub</title>
-        <meta name="description" content="Discover the best mobile apps and digital tools for Smart RV travel. GPS navigation, campsite finders, power monitoring, and connectivity solutions." />
-        <link rel="canonical" href={typeof window !== 'undefined' ? window.location.origin + '/rv-apps' : ''} />
+        <title>Essential RV Apps Hub | Smart RV Portal</title>
+        <meta name="description" content="Discover must-have mobile apps for RV living, from navigation and connectivity to system monitoring and lifestyle enhancement." />
+        <meta name="keywords" content="RV apps, mobile apps for RVers, RV navigation apps, RV technology, camping apps" />
+        <link rel="canonical" href={typeof window !== 'undefined' ? window.location.origin + '/rv-apps-hub' : ''} />
       </Helmet>
 
-      <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 text-white">
-        <Container className="py-8">
-          {/* Hero Section */}
-          <div className="text-center mb-12">
-            <div className="flex justify-center items-center gap-3 mb-6">
-              <Smartphone className="h-12 w-12 text-[#5B9BD5]" />
-              <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-[#5B9BD5] to-[#4B8FE3] bg-clip-text text-transparent">
-                Essential Smart RV Apps & Tools
-              </h1>
-            </div>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-              Transform your smartphone into the ultimate Smart RV command center with our curated collection of apps and digital tools designed specifically for the modern Smart RVer.
+      <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800">
+        <div className="max-w-7xl mx-auto px-4 py-20">
+          
+          {/* Header */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-16"
+          >
+            <h1 className="text-5xl font-bold text-white mb-6">
+              Essential RV Apps Hub
+            </h1>
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+              Discover the best mobile applications designed specifically for the modern RV lifestyle. 
+              From navigation and connectivity to system monitoring and lifestyle enhancement.
             </p>
-          </div>
+          </motion.div>
 
-          {/* App Categories */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+          {/* App Categories Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
             {appCategories.map((category, index) => (
-              <Card key={index} className="bg-[#091020] border-gray-700 hover:border-[#5B9BD5]/50 transition-all duration-300">
-                <CardContent className="p-6 text-center">
-                  <div className={`flex justify-center mb-4 ${category.color}`}>
-                    {category.icon}
+              <motion.div
+                key={category.title}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 + 0.2 }}
+                className="bg-gradient-to-br from-[#151A22] to-[#1a202c] p-8 rounded-2xl border border-gray-700 hover:border-blue-500/50 transition-all duration-300"
+              >
+                <div className="flex items-center mb-6">
+                  <div className="bg-blue-500/20 p-3 rounded-lg mr-4">
+                    <category.icon className="w-8 h-8 text-blue-400" />
                   </div>
-                  <h3 className="text-lg font-semibold text-white mb-2">{category.title}</h3>
-                  <p className="text-gray-400 text-sm">{category.description}</p>
-                </CardContent>
-              </Card>
+                  <div>
+                    <h3 className="text-xl font-bold text-white">{category.title}</h3>
+                    <p className="text-gray-400 text-sm">{category.description}</p>
+                  </div>
+                </div>
+                
+                <ul className="space-y-2">
+                  {category.apps.map((app, appIndex) => (
+                    <li key={appIndex} className="text-gray-300 flex items-center">
+                      <div className="w-2 h-2 bg-blue-400 rounded-full mr-3 flex-shrink-0"></div>
+                      {app}
+                    </li>
+                  ))}
+                </ul>
+              </motion.div>
             ))}
           </div>
 
-          {/* Essential RV Apps */}
-          <OptimizedAffiliateGrid
-            title="⭐ Must-Have RV Apps"
-            subtitle="Professional mobile apps and digital tools designed specifically for the modern RVer lifestyle."
-            partners={[
-              {
-                partner: 'rvlife',
-                title: 'RV Life Pro GPS & Trip Planning',
-                description: 'Complete app suite with RV-safe GPS navigation, trip planning, and campground database.',
-                features: ['RV-Safe Navigation', 'Trip Planning', 'Campground Reviews', 'Offline Maps'],
-                buttonText: 'Get RV Life Pro'
-              },
-              {
-                partner: 'goodsam',
-                title: 'Good Sam Travel & Savings Apps',
-                description: 'Essential travel apps with fuel savings, campground discounts, and emergency support.',
-                features: ['Fuel Savings', 'Campground Discounts', 'Emergency Support', 'Member Benefits'],
-                buttonText: 'Download Travel Apps'
-              },
-              {
-                partner: 'rvlife',
-                title: 'RV Life Smart Monitoring Apps',
-                description: 'Monitor your RV systems remotely with smart technology and real-time alerts.',
-                features: ['System Monitoring', 'Real-Time Alerts', 'Remote Control', 'Smart Diagnostics'],
-                buttonText: 'Get Monitoring Apps'
-              }
-            ]}
-            gridCols="3"
-            className="mb-12"
-          />
-
-          {/* GPS Apps Comparison */}
-          <OptimizedAffiliateGrid
-            title="🗺️ Top RV GPS Apps Comparison"
-            subtitle="Compare the most popular RV-specific GPS navigation apps to find the perfect one for your travel needs."
-            partners={[
-              {
-                partner: 'rvlife',
-                title: 'RV LIFE Pro GPS - Best Overall',
-                description: 'Most comprehensive RV GPS with custom routing for your specific RV dimensions.',
-                features: ['RV-Specific Routing', 'Offline Maps', '50,000+ Campgrounds', 'Real-Time Traffic', 'Weather Integration'],
-                buttonText: 'Get RV LIFE Pro'
-              },
-              {
-                partner: 'goodsam',
-                title: 'Good Sam Travel Guide - Best Value',
-                description: 'Great value GPS app with strong community reviews and campground database.',
-                features: ['30,000+ Campgrounds', 'Trip Planning', 'Community Reviews', 'Member Discounts'],
-                buttonText: 'Get Travel Guide'
-              },
-              {
-                partner: 'rvlife',
-                title: 'Smart RV Navigation Systems',
-                description: 'Advanced navigation systems with smart RV integration and monitoring.',
-                features: ['Smart Integration', 'System Monitoring', 'Advanced Navigation', 'Professional Support'],
-                buttonText: 'Shop Navigation'
-              }
-            ]}
-            gridCols="3"
-            className="mb-12"
-          />
-
-          <OptimizedAffiliateGrid
-            title="RV Apps, Hardware & Connectivity Solutions"
-            subtitle="Complete mobile solutions for RV living, from essential apps to connectivity hardware and professional services."
-            partners={[
-              {
-                partner: 'rvlife',
-                title: 'RV Life Pro Apps Suite',
-                description: 'Complete professional app suite with trip planning, navigation, and RV-specific tools for every journey.',
-                features: ['RV-Safe Navigation', 'Trip Planning Tools', 'Campground Reviews', 'Offline Maps'],
-                buttonText: 'Get RV Life Pro'
-              },
-              {
-                partner: 'goodsam',
-                title: 'Good Sam Travel & Emergency Apps',
-                description: 'Essential travel apps with fuel savings, campground discounts, emergency support, and roadside assistance.',
-                features: ['Fuel Savings App', 'Emergency Support', 'Roadside Assistance', 'Travel Planning'],
-                buttonText: 'Download Travel Apps'
-              },
-              {
-                partner: 'rvlife',
-                title: 'RV Life Connectivity Solutions',
-                description: 'Hardware and software solutions for better connectivity, including signal boosters and monitoring apps.',
-                features: ['Signal Boosters', 'Monitoring Apps', 'Connectivity Hardware', 'Smart Integration'],
-                buttonText: 'Shop Connectivity'
-              }
-            ]}
-            gridCols="3"
-          />
-
-          {/* Affiliate Disclosure */}
-          <AffiliateDisclosure />
-        </Container>
+          {/* App Selection Tips */}
+          <motion.section
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.8 }}
+            className="bg-gradient-to-r from-blue-600/20 to-purple-600/20 rounded-2xl p-8 border border-blue-500/30"
+          >
+            <h2 className="text-3xl font-bold text-white mb-6 text-center">
+              App Selection Tips
+            </h2>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div>
+                <h3 className="text-xl font-semibold text-white mb-4">Essential Features to Look For</h3>
+                <ul className="space-y-3 text-gray-300">
+                  <li className="flex items-start">
+                    <span className="text-green-400 mr-2">✓</span>
+                    Offline functionality for areas with poor connectivity
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-green-400 mr-2">✓</span>
+                    RV-specific routing that considers height and weight restrictions
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-green-400 mr-2">✓</span>
+                    Regular updates and active developer support
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-green-400 mr-2">✓</span>
+                    Integration with other RV systems and apps
+                  </li>
+                </ul>
+              </div>
+              
+              <div>
+                <h3 className="text-xl font-semibold text-white mb-4">Optimization Tips</h3>
+                <ul className="space-y-3 text-gray-300">
+                  <li className="flex items-start">
+                    <span className="text-blue-400 mr-2">•</span>
+                    Download maps and content before traveling to remote areas
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-blue-400 mr-2">•</span>
+                    Keep apps updated for the latest features and bug fixes
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-blue-400 mr-2">•</span>
+                    Test critical apps before departing on long trips
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-blue-400 mr-2">•</span>
+                    Have backup solutions for essential functions
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </motion.section>
+        </div>
       </div>
     </Layout>
   );
