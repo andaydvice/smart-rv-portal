@@ -42,10 +42,10 @@ const Index = () => {
             '@type': 'ItemList',
             name: 'Featured RV Technology Partners',
             itemListElement: [
-              { '@type': 'ListItem', position: 1, name: 'LiTime Battery Systems - Lithium Power Leader', url: 'https://www.litime.com?ref=smartpower' },
-              { '@type': 'ListItem', position: 2, name: 'RV Life - Smart Technology', url: 'https://rvlife.com?ref=smarttech' },
-              { '@type': 'ListItem', position: 3, name: 'WeBoost - Cellular Boosters', url: 'https://weboost.com?ref=smartrv' },
-              { '@type': 'ListItem', position: 4, name: 'Good Sam - RV Services', url: 'https://goodsam.com?ref=smartrv' }
+              { '@type': 'ListItem', position: 1, name: 'RV Life - Smart Technology', url: 'https://rvlife.com' },
+              { '@type': 'ListItem', position: 2, name: 'WeBoost - Cellular Boosters', url: 'https://weboost.com' },
+              { '@type': 'ListItem', position: 3, name: 'Good Sam - RV Services', url: 'https://goodsam.com' },
+              { '@type': 'ListItem', position: 4, name: 'Outdoorsy - RV Rentals', url: 'https://outdoorsy.com' }
             ]
           }
         ]}
