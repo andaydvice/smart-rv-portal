@@ -94,21 +94,24 @@ const CompareModels = () => {
                 subtitle="Get expert advice, try different models, and find the perfect services to help you choose the right RV for your lifestyle."
                 partners={[
                   {
-                    partner: 'rvshare',
+                    name: 'RVshare',
+                    url: 'https://rvshare.com',
                     title: 'Test Drive Different Models',
                     description: 'Rent different RV models to compare features, layouts, and driving experience before making your decision.',
                     features: ['Multiple Model Access', 'Real-World Testing', 'Compare Features', 'Owner Insights'],
                     buttonText: 'Test Drive Models'
                   },
                   {
-                    partner: 'goodsam',
+                    name: 'Good Sam',
+                    url: 'https://goodsam.com',
                     title: 'Expert RV Buying Advice',
                     description: 'Get professional guidance and advice on choosing the right RV model for your needs and budget.',
                     features: ['Expert Consultation', 'Model Recommendations', 'Buying Guidance', 'Value Assessment'],
                     buttonText: 'Get Expert Advice'
                   },
                   {
-                    partner: 'rvlife',
+                    name: 'RV LIFE',
+                    url: 'https://rvlife.com',
                     title: 'Model Research Tools',
                     description: 'Access comprehensive model reviews, comparisons, and user experiences to make informed decisions.',
                     features: ['Detailed Reviews', 'User Experiences', 'Model Comparisons', 'Research Tools'],

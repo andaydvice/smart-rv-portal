@@ -68,21 +68,24 @@ const CompactModel = () => {
               subtitle="Essential services and budget-friendly solutions designed specifically for compact RV adventures and weekend getaways."
               partners={[
                 {
-                  partner: 'rvshare',
+                  name: 'RVshare',
+                  url: 'https://rvshare.com',
                   title: 'Budget-Friendly RV Rentals',
                   description: 'Affordable compact RV rentals perfect for trying before you buy or weekend adventures.',
                   features: ['Compact RV Selection', 'Budget-Friendly Rates', 'Easy Booking', 'Insurance Included'],
                   buttonText: 'Find Compact Rentals'
                 },
                 {
-                  partner: 'goodsam',
+                  name: 'Good Sam',
+                  url: 'https://goodsam.com',
                   title: 'Essential RV Services',
                   description: 'Basic roadside assistance and insurance coverage perfect for new compact RV owners.',
                   features: ['Roadside Assistance', 'Basic Coverage', 'New Owner Support', 'Affordable Plans'],
                   buttonText: 'Get Basic Protection'
                 },
                 {
-                  partner: 'rvlife',
+                  name: 'RV LIFE',
+                  url: 'https://rvlife.com',
                   title: 'Compact RV Trip Planning',
                   description: 'Find campgrounds and routes perfectly sized for compact RVs with detailed planning tools.',
                   features: ['Size-Appropriate Routes', 'Compact RV Campgrounds', 'Planning Tools', 'Community Tips'],

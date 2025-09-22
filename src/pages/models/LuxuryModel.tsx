@@ -161,21 +161,24 @@ const LuxuryModel = () => {
                 subtitle="Experience luxury RV travel with premium rentals, high-end accessories, and exclusive membership benefits designed for discerning travelers."
                 partners={[
                   {
-                    partner: 'outdoorsy',
+                    name: 'Outdoorsy',
+                    url: 'https://outdoorsy.com',
                     title: 'Premium Luxury RV Rentals',
                     description: 'Access the finest luxury RVs with white-glove service and premium amenities for an unforgettable travel experience.',
                     features: ['Verified luxury fleet', 'Concierge service', 'Premium insurance'],
                     buttonText: 'Browse Luxury Rentals'
                   },
                   {
-                    partner: 'goodsam',
+                    name: 'Good Sam',
+                    url: 'https://goodsam.com',
                     title: 'Luxury RV Club Benefits',
                     description: 'Exclusive membership perks including luxury campground access, premium roadside assistance, and VIP services.',
                     features: ['Resort-style campgrounds', '24/7 premium support', 'Exclusive member rates'],
                     buttonText: 'Join Premium Club'
                   },
                   {
-                    partner: 'invertersrus',
+                    name: 'Inverters R Us',
+                    url: 'https://invertersrus.com',
                     title: 'High-End Power Technology',
                     description: 'Premium power monitoring and management systems for luxury RV living.',
                     features: ['Professional power systems', 'Smart monitoring', 'Remote control', 'Advanced automation'],
