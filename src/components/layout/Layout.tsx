@@ -28,7 +28,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
         {children}
       </main>
       
-      <Footer2 />
+      <Footer2 siteName="Smart RV 2025" />
     </MobileGestureHandler>
   );
 };
