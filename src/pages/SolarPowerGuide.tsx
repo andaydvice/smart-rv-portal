@@ -76,9 +76,9 @@ const SolarPowerGuide = () => {
             '@context': 'https://schema.org',
             '@type': 'ItemList',
             itemListElement: [
-              { '@type': 'ListItem', position: 1, name: 'RV Life Solar Systems', url: 'https://rvlife.com' },
-              { '@type': 'ListItem', position: 2, name: 'Good Sam Solar Services', url: 'https://goodsam.com' },
-              { '@type': 'ListItem', position: 3, name: 'RV Life Solar Planning', url: 'https://rvlife.com' }
+              { '@type': 'ListItem', position: 1, name: 'RV Life Solar Systems', url: 'https://rvlife.com?ref=smarttech' },
+              { '@type': 'ListItem', position: 2, name: 'Good Sam Solar Services', url: 'https://goodsam.com?ref=smartrv' },
+              { '@type': 'ListItem', position: 3, name: 'RV Life Solar Planning', url: 'https://rvlife.com?ref=smartportal' }
             ]
           })}
         </script>

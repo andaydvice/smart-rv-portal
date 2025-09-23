@@ -120,9 +120,9 @@ const BlogPost = () => {
               '@type': 'ItemList',
               name: 'Recommended Smart RV Resources',
               itemListElement: [
-                { '@type': 'ListItem', position: 1, name: 'RV Life Resources', url: 'https://rvlife.com' },
-                { '@type': 'ListItem', position: 2, name: 'RV Life Technology', url: 'https://rvlife.com' },
-                { '@type': 'ListItem', position: 3, name: 'Good Sam Services', url: 'https://goodsam.com' }
+                { '@type': 'ListItem', position: 1, name: 'RV Life Resources', url: 'https://rvlife.com?ref=smartportal' },
+                { '@type': 'ListItem', position: 2, name: 'RV Life Technology', url: 'https://rvlife.com?ref=smarttech' },
+                { '@type': 'ListItem', position: 3, name: 'Good Sam Services', url: 'https://goodsam.com?ref=smartrv' }
               ]
             }
           ]}
