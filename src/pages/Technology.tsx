@@ -62,9 +62,9 @@ const Technology = () => {
             '@context': 'https://schema.org',
             '@type': 'ItemList',
             itemListElement: [
-              { '@type': 'ListItem', position: 1, name: 'RV Life - Smart Technology', url: 'https://rvlife.com?ref=smarttech' },
-              { '@type': 'ListItem', position: 2, name: 'Good Sam - Tech Support', url: 'https://goodsam.com?ref=smartrv' },
-              { '@type': 'ListItem', position: 3, name: 'RV Life - Smart Planning', url: 'https://rvlife.com?ref=smartportal' }
+              { '@type': 'ListItem', position: 1, name: 'RV Life - Smart Technology', url: 'https://rvlife.com' },
+              { '@type': 'ListItem', position: 2, name: 'Good Sam - Tech Support', url: 'https://goodsam.com' },
+              { '@type': 'ListItem', position: 3, name: 'RV Life - Smart Planning', url: 'https://rvlife.com' }
             ]
           })}
         </script>
