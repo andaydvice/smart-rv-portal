@@ -4,6 +4,7 @@ import Layout from '@/components/layout/Layout';
 import { Helmet } from 'react-helmet-async';
 import { Bed, Thermometer, Wind, Lightbulb, Coffee, Bath } from 'lucide-react';
 import heroImage from '@/assets/rv-comfort-hero.jpg';
+import advancedComfortImage from '@/assets/rv-advanced-comfort.jpg';
 
 const RVComfortGuide = () => {
   const comfortAreas = [
@@ -172,6 +173,23 @@ const RVComfortGuide = () => {
               </motion.div>
             ))}
           </div>
+
+          {/* Advanced Comfort Showcase Image */}
+          <motion.section
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.6 }}
+            className="mb-16"
+          >
+            <div className="relative w-full h-[400px] md:h-[500px] lg:h-[600px] rounded-2xl overflow-hidden">
+              <img 
+                src={advancedComfortImage} 
+                alt="Modern RV interior showcasing advanced comfort optimization techniques"
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+            </div>
+          </motion.section>
 
           {/* Additional Comfort Tips */}
           <motion.section
