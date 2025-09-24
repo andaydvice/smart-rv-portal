@@ -6,6 +6,7 @@ import { Check } from "lucide-react";
 import Layout from "@/components/layout/Layout";
 import { scrollToTop } from "@/utils/scrollToTop";
 import { Helmet } from "react-helmet-async";
+import smartRvPricingHero from '@/assets/smart-rv-pricing-hero.jpg';
 
 const Pricing = () => {
   useEffect(() => {
@@ -71,25 +72,35 @@ const Pricing = () => {
         transition={{ duration: 0.6 }}
         className="min-h-screen w-full bg-gradient-to-b from-[#080F1F] to-[#151A22]"
       >
-        <div className="relative z-10 max-w-6xl mx-auto px-4 py-20">
-          <motion.h1 
-            initial={{ y: -20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.2, duration: 0.5 }}
-            className="text-5xl font-bold text-white mb-8 text-center"
-          >
-            Smart RV Pricing
-          </motion.h1>
-          
-          <motion.p 
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.3, duration: 0.5 }}
-            className="text-xl text-white/80 text-center mb-16 max-w-3xl mx-auto"
-          >
-            Choose the perfect smart RV package that fits your lifestyle and budget. All plans include professional installation and training.
-          </motion.p>
+        {/* Hero Image Section */}
+        <div className="relative w-full h-[50vh] md:h-[60vh] lg:h-[70vh] mb-16">
+          <img 
+            src={smartRvPricingHero}
+            alt="Smart RV technology and professional installation systems"
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-black/40"></div>
+          <div className="absolute inset-0 flex flex-col justify-center items-center text-center px-4">
+            <motion.h1 
+              initial={{ y: -20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.2, duration: 0.5 }}
+              className="text-4xl md:text-6xl font-bold text-white mb-6 drop-shadow-lg"
+            >
+              Smart RV Pricing
+            </motion.h1>
+            <motion.p 
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.3, duration: 0.5 }}
+              className="text-lg md:text-xl text-white/90 max-w-3xl mx-auto drop-shadow-lg"
+            >
+              Choose the perfect smart RV package that fits your lifestyle and budget. All plans include professional installation and training.
+            </motion.p>
+          </div>
+        </div>
 
+        <div className="relative z-10 max-w-6xl mx-auto px-4 py-20">
           <div className="grid md:grid-cols-3 gap-8 mb-16">
             {pricingPlans.map((plan, index) => (
               <motion.div
