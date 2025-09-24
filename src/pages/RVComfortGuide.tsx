@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import Layout from '@/components/layout/Layout';
 import { Helmet } from 'react-helmet-async';
 import { Bed, Thermometer, Wind, Lightbulb, Coffee, Bath } from 'lucide-react';
+import heroImage from '@/assets/rv-comfort-hero.jpg';
 
 const RVComfortGuide = () => {
   const comfortAreas = [
@@ -114,23 +115,31 @@ const RVComfortGuide = () => {
       </Helmet>
 
       <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800">
+        {/* Hero Banner */}
+        <div 
+          className="relative w-full h-[60vh] min-h-[400px] max-h-[720px] bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: `url(${heroImage})` }}
+        >
+          <div className="absolute inset-0 bg-black/40"></div>
+          <div className="relative z-10 flex items-center justify-start h-full max-w-7xl mx-auto px-4">
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+              className="max-w-2xl"
+            >
+              <h1 className="text-6xl md:text-7xl font-bold text-white mb-6 leading-tight" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.7)' }}>
+                RV Comfort Guide
+              </h1>
+              <p className="text-xl md:text-2xl text-white/90 leading-relaxed" style={{ textShadow: '1px 1px 3px rgba(0,0,0,0.7)' }}>
+                Transform your RV into a comfortable home on wheels with expert tips and solutions 
+                for maximizing comfort, efficiency, and livability in your mobile space.
+              </p>
+            </motion.div>
+          </div>
+        </div>
+
         <div className="max-w-7xl mx-auto px-4 py-20">
-          
-          {/* Header */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-16"
-          >
-            <h1 className="text-5xl font-bold text-white mb-6">
-              RV Comfort Guide
-            </h1>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              Transform your RV into a comfortable home on wheels with expert tips and solutions 
-              for maximizing comfort, efficiency, and livability in your mobile space.
-            </p>
-          </motion.div>
 
           {/* Comfort Areas Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
