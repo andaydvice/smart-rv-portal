@@ -3,8 +3,6 @@ import { motion } from 'framer-motion';
 import Layout from '@/components/layout/Layout';
 import { Helmet } from 'react-helmet-async';
 import { Bed, Thermometer, Wind, Lightbulb, Coffee, Bath } from 'lucide-react';
-import { LazyImage } from '@/components/ui/LazyImage';
-import comfortGuideHero from '@/assets/comfort-guide-hero.jpg';
 
 const RVComfortGuide = () => {
   const comfortAreas = [
@@ -115,36 +113,24 @@ const RVComfortGuide = () => {
         <link rel="canonical" href={typeof window !== 'undefined' ? window.location.origin + '/rv-comfort-guide' : ''} />
       </Helmet>
 
-      {/* Hero Header Image */}
-      <div className="relative w-full h-96 md:h-[500px] mt-16">
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background z-10" />
-        <LazyImage
-          src={comfortGuideHero}
-          alt="Luxury RV setup with outdoor living space by mountain lake"
-          className="w-full h-full object-cover"
-        />
-        <div className="absolute bottom-0 left-0 w-full p-8 z-20">
-          <div className="max-w-7xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="text-left"
-            >
-              <h1 className="text-5xl md:text-6xl font-bold text-white drop-shadow-lg mb-4">
-                RV Comfort Guide
-              </h1>
-              <p className="text-xl text-white drop-shadow-lg max-w-3xl">
-                Transform your RV into a comfortable home on wheels with expert tips and solutions 
-                for maximizing comfort, efficiency, and livability in your mobile space.
-              </p>
-            </motion.div>
-          </div>
-        </div>
-      </div>
-
-      <div className="bg-gradient-to-b from-gray-900 to-gray-800">
-        <div className="max-w-7xl mx-auto px-4 pb-20">
+      <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800">
+        <div className="max-w-7xl mx-auto px-4 py-20">
+          
+          {/* Header */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-16"
+          >
+            <h1 className="text-5xl font-bold text-white mb-6">
+              RV Comfort Guide
+            </h1>
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+              Transform your RV into a comfortable home on wheels with expert tips and solutions 
+              for maximizing comfort, efficiency, and livability in your mobile space.
+            </p>
+          </motion.div>
 
           {/* Comfort Areas Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
