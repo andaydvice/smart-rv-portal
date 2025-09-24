@@ -116,7 +116,7 @@ const RVComfortGuide = () => {
       </Helmet>
 
       {/* Hero Header Image */}
-      <div className="relative w-full h-96 md:h-[500px] pt-16">
+      <div className="relative w-full h-96 md:h-[500px] mt-16">
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background z-10" />
         <LazyImage
           src={comfortGuideHero}
