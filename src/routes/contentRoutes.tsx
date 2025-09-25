@@ -18,6 +18,7 @@ const Documentation = lazy(() => import("../pages/Documentation"));
 const CompleteDocumentation = lazy(() => import("../pages/documentation/CompleteDocumentation"));
 const BlogPost = lazy(() => import("../pages/BlogPost"));
 const RVComfortGuide = lazy(() => import("../pages/RVComfortGuide"));
+const RVMarketplace = lazy(() => import("../pages/RVMarketplace"));
 
 const contentRoutes: RouteObject[] = [
   {
@@ -106,6 +107,17 @@ const contentRoutes: RouteObject[] = [
       <Suspense fallback={<MinimalLoader />}>
         <RouteTransition>
           <RVComfortGuide />
+        </RouteTransition>
+      </Suspense>
+    ),
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/rv-marketplace",
+    element: (
+      <Suspense fallback={<MinimalLoader />}>
+        <RouteTransition>
+          <RVMarketplace />
         </RouteTransition>
       </Suspense>
     ),

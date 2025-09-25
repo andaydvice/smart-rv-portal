@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { Calculator, Cloud, Archive, ClipboardCheck, ShoppingBag } from 'lucide-react';
+import { Calculator, Cloud, Archive, ClipboardCheck, ShoppingBag, Store } from 'lucide-react';
 
 interface RVToolsLinksProps {
   className?: string;
@@ -9,6 +9,10 @@ interface RVToolsLinksProps {
 
 const RVToolsLinks: React.FC<RVToolsLinksProps> = ({ className }) => (
   <div className={`grid gap-3 ${className || ''}`}>
+    <NavLink to="/rv-marketplace" className="text-gray-300 hover:text-blue-400 transition-colors flex items-center gap-2">
+      <Store className="h-4 w-4 text-[#5B9BD5]" />
+      <span>RV Marketplace</span>
+    </NavLink>
     <NavLink to="/products" className="text-gray-300 hover:text-blue-400 transition-colors flex items-center gap-2">
       <ShoppingBag className="h-4 w-4 text-[#10B981]" />
       <span>RV Products</span>
