@@ -139,59 +139,88 @@ const RVMarketplace = () => {
 
       <main className="min-h-screen bg-gradient-to-b from-[#080F1F] to-[#151A22]">
         {/* Hero Section */}
-        <section className="relative py-20 md:py-32 overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-r from-[#080F1F] via-[#151A22] to-[#080F1F] opacity-90"></div>
+        <section 
+          className="relative w-full h-[70vh] m-0 p-0 flex items-center justify-center"
+          style={{
+            backgroundImage: "url('/assets/rv-hero-image.jpg')",
+            backgroundSize: 'cover',
+            backgroundPosition: 'center center',
+            backgroundRepeat: 'no-repeat',
+          }}
+        >
+          {/* Dark Overlay */}
+          <div 
+            className="absolute top-0 left-0 w-full h-full z-[5]"
+            style={{
+              background: 'linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3))'
+            }}
+          />
           
-          <Container className="relative z-10">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="text-center max-w-4xl mx-auto"
+          {/* Text Overlay */}
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="absolute z-10 text-center text-white p-5 max-w-[800px]"
+            style={{
+              textShadow: '2px 2px 4px rgba(0,0,0,0.7)'
+            }}
+          >
+            <motion.h1 
+              initial={{ y: 30, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.2, duration: 0.8 }}
+              className="text-4xl md:text-6xl font-bold mb-6"
             >
-              <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6">
-                Find Your Perfect RV
-              </h1>
-              <p className="text-xl md:text-2xl text-[#E2E8FF] mb-8 leading-relaxed">
-                Discover America's trusted RV marketplace with thousands of listings, verified dealers, and expert tools to buy, sell, and connect with confidence.
-              </p>
-              
-              <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-                <ExternalLinkButton 
-                  href="https://www.rvt.com/buy/"
-                  variant="default"
-                  size="lg"
-                  className="bg-[#5B9BD5] hover:bg-[#4B8FE3] text-white px-8 py-4 text-lg font-semibold"
-                >
-                  Browse RVs Now
-                </ExternalLinkButton>
-                <ExternalLinkButton 
-                  href="https://www.rvt.com/sell-rv.php"
-                  variant="outline"
-                  size="lg"
-                  className="border-[#5B9BD5] text-[#5B9BD5] hover:bg-[#5B9BD5] hover:text-white px-8 py-4 text-lg font-semibold"
-                >
-                  List Your RV
-                </ExternalLinkButton>
-              </div>
-
-              {/* Trust Indicators */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-16">
-                {trustStats.map((stat, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.2 + index * 0.1, duration: 0.5 }}
-                    className="text-center"
-                  >
-                    <div className="text-2xl md:text-3xl font-bold text-[#5B9BD5] mb-2">{stat.number}</div>
-                    <div className="text-sm md:text-base text-[#E2E8FF]">{stat.label}</div>
-                  </motion.div>
-                ))}
-              </div>
+              Find Your Perfect RV
+            </motion.h1>
+            <motion.p 
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.4, duration: 0.8 }}
+              className="text-xl md:text-2xl mb-8"
+            >
+              Buy, Sell & Connect with Confidence on America's Trusted RV Marketplace
+            </motion.p>
+            <motion.div 
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.6, duration: 0.8 }}
+              className="flex flex-col sm:flex-row gap-4 justify-center"
+            >
+              <ExternalLinkButton 
+                href="https://www.rvt.com/buy/"
+                variant="default"
+                size="lg" 
+                className="bg-gradient-to-r from-[#5B9BD5] to-[#4B8FE3] hover:from-[#4B8FE3] hover:to-[#3A7BD5] text-white px-8 py-4 text-lg"
+              >
+                Browse RVs Now
+              </ExternalLinkButton>
+              <ExternalLinkButton 
+                href="https://www.rvt.com/sell-rv.php"
+                variant="outline" 
+                size="lg"
+                className="border-white text-white hover:bg-white hover:text-[#080F1F] px-8 py-4 text-lg"
+              >
+                List Your RV
+              </ExternalLinkButton>
             </motion.div>
-          </Container>
+            
+            {/* Trust Indicators */}
+            <motion.div 
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.8, duration: 0.8 }}
+              className="mt-12 grid grid-cols-1 md:grid-cols-4 gap-6 max-w-2xl mx-auto"
+            >
+              {trustStats.map((stat, index) => (
+                <div key={index} className="text-center">
+                  <div className="text-2xl font-bold text-[#5B9BD5]">{stat.number}</div>
+                  <div className="text-sm">{stat.label}</div>
+                </div>
+              ))}
+            </motion.div>
+          </motion.div>
         </section>
 
         {/* Services Section */}
