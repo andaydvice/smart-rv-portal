@@ -508,6 +508,8 @@ export type Database = {
           rating: number
           review_text: string | null
           reviewer_name: string | null
+          status: string | null
+          user_id: string | null
         }
         Insert: {
           created_at?: string
@@ -516,6 +518,8 @@ export type Database = {
           rating: number
           review_text?: string | null
           reviewer_name?: string | null
+          status?: string | null
+          user_id?: string | null
         }
         Update: {
           created_at?: string
@@ -524,6 +528,8 @@ export type Database = {
           rating?: number
           review_text?: string | null
           reviewer_name?: string | null
+          status?: string | null
+          user_id?: string | null
         }
         Relationships: [
           {
@@ -1449,6 +1455,16 @@ export type Database = {
           price_category: string
           review_count: number
           state: string
+        }[]
+      }
+      get_public_facility_reviews: {
+        Args: Record<PropertyKey, never>
+        Returns: {
+          created_at: string
+          facility_id: string
+          id: string
+          rating: number
+          review_text: string
         }[]
       }
       get_public_reviews: {
