@@ -16,6 +16,7 @@ import rvTechComparisonImage from '@/assets/rv-technology-comparison-dashboard.j
 import rvCategoryComparisonImage from '@/assets/rv-category-comparison.png';
 import rvDealershipBackground from '@/assets/rv-dealership-background.jpg';
 import rvTechnologyPlanningImage from '@/assets/rv-technology-planning.png';
+import rvTechnologyDecisionsImage from '@/assets/rv-technology-decisions.png';
 import { BlogPostImage } from '@/components/blog/post/BlogPostImage';
 
 const RVTechnologyGuide = () => {
@@ -929,6 +930,12 @@ const RVTechnologyGuide = () => {
         <section className="py-16 px-4 bg-[#151A22]/50">
           <Container>
             <div className="max-w-6xl mx-auto">
+              <div className="mb-12">
+                <BlogPostImage 
+                  image={rvTechnologyDecisionsImage}
+                  title="Making Informed RV Technology Decisions"
+                />
+              </div>
               <h2 className="text-3xl md:text-4xl font-bold mb-8 text-white text-center">Making Informed Technology Decisions</h2>
 
               <div className="mb-12">
