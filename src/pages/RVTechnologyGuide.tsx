@@ -506,32 +506,32 @@ const RVTechnologyGuide = () => {
               </div>
 
               <div className="grid md:grid-cols-3 gap-8 mb-12">
-                <div className="bg-[#091020] p-6 rounded-lg">
+                <div className="bg-[#091020] p-6 rounded-lg border border-gray-700">
                   <h3 className="text-xl font-semibold text-white mb-4">Class A Motorhomes</h3>
-                  <p className="text-[#E2E8FF] mb-4 leading-relaxed">
+                  <p className="text-gray-300 mb-4 leading-relaxed">
                     Large motorhomes often feature the most comprehensive technology packages.
                   </p>
-                  <p className="text-[#E2E8FF] leading-relaxed">
+                  <p className="text-gray-300 leading-relaxed">
                     These may include integrated entertainment systems and advanced power management.
                   </p>
                 </div>
 
-                <div className="bg-[#091020] p-6 rounded-lg">
+                <div className="bg-[#091020] p-6 rounded-lg border border-gray-700">
                   <h3 className="text-xl font-semibold text-white mb-4">Class B/C Motorhomes</h3>
-                  <p className="text-[#E2E8FF] mb-4 leading-relaxed">
+                  <p className="text-gray-300 mb-4 leading-relaxed">
                     Smaller motorhomes typically focus on efficient space utilisation.
                   </p>
-                  <p className="text-[#E2E8FF] leading-relaxed">
+                  <p className="text-gray-300 leading-relaxed">
                     Technology integration may prioritise essential functions over luxury features.
                   </p>
                 </div>
 
-                <div className="bg-[#091020] p-6 rounded-lg">
+                <div className="bg-[#091020] p-6 rounded-lg border border-gray-700">
                   <h3 className="text-xl font-semibold text-white mb-4">Travel Trailers and Fifth Wheels</h3>
-                  <p className="text-[#E2E8FF] mb-4 leading-relaxed">
+                  <p className="text-gray-300 mb-4 leading-relaxed">
                     Towable RVs increasingly offer technology packages comparable to motorhomes.
                   </p>
-                  <p className="text-[#E2E8FF] leading-relaxed">
+                  <p className="text-gray-300 leading-relaxed">
                     Power management becomes particularly important without an engine alternator.
                   </p>
                 </div>
@@ -541,23 +541,23 @@ const RVTechnologyGuide = () => {
                 <h3 className="text-2xl font-bold mb-6 text-white">Considerations by Usage Type</h3>
                 
                 <div className="grid md:grid-cols-3 gap-6">
-                  <div className="bg-[#091020] p-6 rounded-lg">
+                  <div className="bg-[#091020] p-6 rounded-lg border border-gray-700">
                     <h4 className="text-lg font-semibold text-white mb-3">Weekend Recreation</h4>
-                    <p className="text-[#E2E8FF] leading-relaxed">
+                    <p className="text-gray-300 leading-relaxed">
                       Occasional users might prioritise simplicity and reliability over advanced features.
                     </p>
                   </div>
 
-                  <div className="bg-[#091020] p-6 rounded-lg">
+                  <div className="bg-[#091020] p-6 rounded-lg border border-gray-700">
                     <h4 className="text-lg font-semibold text-white mb-3">Extended Travel</h4>
-                    <p className="text-[#E2E8FF] leading-relaxed">
+                    <p className="text-gray-300 leading-relaxed">
                       Frequent travellers often benefit from robust connectivity and power independence.
                     </p>
                   </div>
 
-                  <div className="bg-[#091020] p-6 rounded-lg">
+                  <div className="bg-[#091020] p-6 rounded-lg border border-gray-700">
                     <h4 className="text-lg font-semibold text-white mb-3">Full-Time Living</h4>
-                    <p className="text-[#E2E8FF] leading-relaxed">
+                    <p className="text-gray-300 leading-relaxed">
                       Those living in RVs year-round typically need the most comprehensive technology solutions.
                     </p>
                   </div>
