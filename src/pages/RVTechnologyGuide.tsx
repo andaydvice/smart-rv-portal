@@ -13,7 +13,7 @@ import RVPowerManagementHero from '@/components/rv-technology/RVPowerManagementH
 import RVControlMonitoringHero from '@/components/rv-technology/RVControlMonitoringHero';
 import RVTechnologyTiersHero from '@/components/rv-technology/RVTechnologyTiersHero';
 import rvTechComparisonImage from '@/assets/rv-technology-comparison-dashboard.jpg';
-import rvCategoryComparisonImage from '@/assets/rv-category-technology-comparison.jpg';
+import rvCategoryComparisonImage from '@/assets/rv-category-comparison.png';
 
 const RVTechnologyGuide = () => {
   return (
@@ -492,6 +492,18 @@ const RVTechnologyGuide = () => {
           <Container>
             <div className="max-w-6xl mx-auto">
               <h2 className="text-3xl md:text-4xl font-bold mb-8 text-white text-center">Evaluating Technology by RV Category</h2>
+
+              {/* RV Category Comparison Image */}
+              <div className="relative w-full mb-12 rounded-2xl overflow-hidden">
+                <PreloadedHeaderImage 
+                  src={rvCategoryComparisonImage}
+                  alt="Comprehensive comparison of RV categories showing Class A Motorhome, Class B Campervan, Class C Motorhome, Travel Trailer, and Fifth Wheel with technology ratings and features"
+                  className="w-full h-auto"
+                  width={1920}
+                  height={1080}
+                  priority="high"
+                />
+              </div>
 
               <div className="grid md:grid-cols-3 gap-8 mb-12">
                 <div className="bg-[#091020] p-6 rounded-lg border border-gray-700">
