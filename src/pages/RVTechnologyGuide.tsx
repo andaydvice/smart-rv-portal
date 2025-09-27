@@ -2,6 +2,7 @@ import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Container } from '@/components/ui/container';
 import { ExternalLinkButton } from '@/components/ui/external-link-button';
+import { PreloadedHeaderImage } from '@/components/ui/PreloadedHeaderImage';
 import { Cpu, Wifi, Battery, Smartphone, Monitor, Shield, Zap, Signal, CheckCircle, AlertTriangle, Users } from 'lucide-react';
 import SpecificationsTable from '@/components/models/compare/SpecificationsTable';
 import FeaturesComparisonTable from '@/components/models/compare/FeaturesComparisonTable';
@@ -11,6 +12,7 @@ import RVConnectivityHero from '@/components/rv-technology/RVConnectivityHero';
 import RVPowerManagementHero from '@/components/rv-technology/RVPowerManagementHero';
 import RVControlMonitoringHero from '@/components/rv-technology/RVControlMonitoringHero';
 import RVTechnologyTiersHero from '@/components/rv-technology/RVTechnologyTiersHero';
+import rvTechComparisonImage from '@/assets/rv-technology-comparison-dashboard.jpg';
 
 const RVTechnologyGuide = () => {
   return (
@@ -433,18 +435,37 @@ const RVTechnologyGuide = () => {
           </Container>
         </section>
 
+        {/* Futuristic Technology Comparison Hero */}
+        <div className="relative w-full h-[500px] md:h-[600px] overflow-hidden my-12">
+          <PreloadedHeaderImage 
+            src={rvTechComparisonImage}
+            alt="Futuristic holographic dashboard displaying RV technology comparison data with floating interfaces and digital specifications"
+            className="w-full h-full object-cover"
+            width={1920}
+            height={832}
+            priority="high"
+          />
+          
+          {/* Enhanced gradient overlay for better text readability */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/60 to-black/80 z-10" />
+          
+          {/* Content overlay */}
+          <div className="absolute inset-0 flex items-center justify-center z-20">
+            <div className="text-center max-w-5xl px-6">
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 image-overlay-headline">
+                Compare Popular RV Technology Packages
+              </h2>
+              <p className="text-lg md:text-xl text-white/80 max-w-4xl mx-auto image-overlay-headline">
+                See how leading RV models stack up in terms of technology features and specifications to help guide your decision making process.
+              </p>
+            </div>
+          </div>
+        </div>
+
         {/* Model Comparison Tables */}
         <section className="py-16 px-4">
           <Container>
             <div className="max-w-7xl mx-auto">
-              <div className="text-center mb-12">
-                <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">
-                  Compare Popular RV Technology Packages
-                </h2>
-                <p className="text-xl text-[#E2E8FF] max-w-3xl mx-auto">
-                  See how leading RV models stack up in terms of technology features and specifications to help guide your decision making process.
-                </p>
-              </div>
               
               {/* Specifications Table */}
               <SpecificationsTable models={models} />
