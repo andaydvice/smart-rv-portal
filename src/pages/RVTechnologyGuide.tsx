@@ -14,6 +14,7 @@ import RVControlMonitoringHero from '@/components/rv-technology/RVControlMonitor
 import RVTechnologyTiersHero from '@/components/rv-technology/RVTechnologyTiersHero';
 import rvTechComparisonImage from '@/assets/rv-technology-comparison-dashboard.jpg';
 import rvCategoryComparisonImage from '@/assets/rv-category-comparison.png';
+import rvDealershipBackground from '@/assets/rv-dealership-background.jpg';
 
 const RVTechnologyGuide = () => {
   return (
@@ -568,8 +569,21 @@ const RVTechnologyGuide = () => {
         </section>
 
         {/* Dealer Questions */}
-        <section className="py-16 px-4">
-          <Container>
+        <section className="py-16 px-4 relative">
+          {/* Background Image */}
+          <div className="absolute inset-0">
+            <PreloadedHeaderImage 
+              src={rvDealershipBackground}
+              alt="Professional RV dealer consultation showing customers examining RVs in a modern showroom"
+              className="w-full h-full object-cover"
+              width={1920}
+              height={1080}
+              priority="low"
+            />
+            <div className="absolute inset-0 bg-[#080F1F]/85"></div>
+          </div>
+
+          <Container className="relative z-10">
             <div className="max-w-6xl mx-auto">
               <h2 className="text-3xl md:text-4xl font-bold mb-8 text-white text-center">What to Ask Dealers and Manufacturers</h2>
 
