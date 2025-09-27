@@ -10,6 +10,7 @@ import RVTechnologyHeader from '@/components/rv-technology/RVTechnologyHeader';
 import RVConnectivityHero from '@/components/rv-technology/RVConnectivityHero';
 import RVPowerManagementHero from '@/components/rv-technology/RVPowerManagementHero';
 import RVControlMonitoringHero from '@/components/rv-technology/RVControlMonitoringHero';
+import RVTechnologyTiersHero from '@/components/rv-technology/RVTechnologyTiersHero';
 
 const RVTechnologyGuide = () => {
   return (
@@ -332,21 +333,12 @@ const RVTechnologyGuide = () => {
         </section>
 
         {/* Technology Tiers and Research Guidance */}
+        <RVTechnologyTiersHero />
+        
         <section className="py-16 px-4">
           <Container>
             <div className="max-w-6xl mx-auto">
-              <div className="flex items-center mb-8">
-                <div className="p-3 bg-[#5B9BD5]/10 rounded-full mr-4">
-                  <Users className="h-8 w-8 text-[#5B9BD5]" />
-                </div>
-                <h2 className="text-3xl md:text-4xl font-bold text-white">Technology Tiers and Research Guidance</h2>
-              </div>
-
               <div className="mb-12">
-                <h3 className="text-2xl font-bold mb-6 text-white">Understanding Technology Levels by Usage Type</h3>
-                <p className="text-[#E2E8FF] text-lg mb-8 leading-relaxed">
-                  Different RV buyers have different technology needs. This framework can help guide your research priorities.
-                </p>
 
                 <div className="grid lg:grid-cols-2 gap-8">
                   <div className="bg-[#091020] p-6 rounded-lg">
