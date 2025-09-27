@@ -580,7 +580,6 @@ const RVTechnologyGuide = () => {
               height={1080}
               priority="low"
             />
-            <div className="absolute inset-0 bg-[#080F1F]/85"></div>
           </div>
 
           <Container className="relative z-10">
