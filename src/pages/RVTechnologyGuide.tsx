@@ -6,6 +6,7 @@ import { Cpu, Wifi, Battery, Smartphone, Monitor, Shield, Zap, Signal, CheckCirc
 import SpecificationsTable from '@/components/models/compare/SpecificationsTable';
 import FeaturesComparisonTable from '@/components/models/compare/FeaturesComparisonTable';
 import models from '@/components/models/compare/ModelComparisonData';
+import RVTechnologyHeader from '@/components/rv-technology/RVTechnologyHeader';
 
 const RVTechnologyGuide = () => {
   return (
@@ -24,8 +25,11 @@ const RVTechnologyGuide = () => {
       </Helmet>
 
       <div className="min-h-screen bg-gradient-to-br from-[#080F1F] to-[#151A22] text-white">
+        {/* Header Image */}
+        <RVTechnologyHeader />
+
         {/* Hero Section */}
-        <section className="pt-24 pb-16 px-4">
+        <section className="py-16 px-4">
           <Container>
             <div className="max-w-4xl mx-auto text-center">
               <div className="flex justify-center mb-6">
@@ -33,11 +37,8 @@ const RVTechnologyGuide = () => {
                   <Cpu className="h-12 w-12 text-[#5B9BD5]" />
                 </div>
               </div>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 bg-gradient-to-r from-white to-[#E2E8FF] bg-clip-text text-transparent">
-                RV Technology Buyer's Education Guide
-              </h1>
               <p className="text-xl md:text-2xl text-[#E2E8FF] mb-8 leading-relaxed">
-                Understanding Modern RV Technology Options and What Questions to Ask
+                Your comprehensive guide to navigating the complex world of RV technology features and making informed purchasing decisions.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <ExternalLinkButton 
