@@ -492,18 +492,6 @@ const RVTechnologyGuide = () => {
           <Container>
             <div className="max-w-6xl mx-auto">
               <h2 className="text-3xl md:text-4xl font-bold mb-8 text-white text-center">Evaluating Technology by RV Category</h2>
-              
-              {/* RV Category Technology Comparison Infographic */}
-              <div className="relative w-full h-[500px] md:h-[600px] overflow-hidden mb-12 rounded-2xl">
-                <PreloadedHeaderImage 
-                  src={rvCategoryComparisonImage}
-                  alt="Infographic showing five RV categories with technology features comparison - Class A motorhome, Class B campervan, Class C motorhome, travel trailer, and fifth wheel with highlighted tech specifications"
-                  className="w-full h-full object-cover"
-                  width={1920}
-                  height={832}
-                  priority="high"
-                />
-              </div>
 
               <div className="grid md:grid-cols-3 gap-8 mb-12">
                 <div className="bg-[#091020] p-6 rounded-lg border border-gray-700">
