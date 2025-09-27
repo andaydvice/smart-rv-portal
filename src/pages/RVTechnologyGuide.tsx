@@ -7,6 +7,7 @@ import SpecificationsTable from '@/components/models/compare/SpecificationsTable
 import FeaturesComparisonTable from '@/components/models/compare/FeaturesComparisonTable';
 import models from '@/components/models/compare/ModelComparisonData';
 import RVTechnologyHeader from '@/components/rv-technology/RVTechnologyHeader';
+import RVConnectivityHero from '@/components/rv-technology/RVConnectivityHero';
 
 const RVTechnologyGuide = () => {
   return (
@@ -84,21 +85,12 @@ const RVTechnologyGuide = () => {
         </section>
 
         {/* Connectivity Technology Section */}
+        <RVConnectivityHero />
+        
         <section className="py-16 px-4 bg-[#151A22]/50">
           <Container>
             <div className="max-w-6xl mx-auto">
-              <div className="flex items-center mb-8">
-                <div className="p-3 bg-[#5B9BD5]/10 rounded-full mr-4">
-                  <Wifi className="h-8 w-8 text-[#5B9BD5]" />
-                </div>
-                <h2 className="text-3xl md:text-4xl font-bold text-white">Understanding RV Connectivity Technology</h2>
-              </div>
-
               <div className="mb-12">
-                <h3 className="text-2xl font-bold mb-6 text-white">Historical Development of Connectivity Solutions</h3>
-                <p className="text-[#E2E8FF] text-lg mb-8 leading-relaxed">
-                  Understanding how connectivity technology has evolved can help buyers ask informed questions about current capabilities.
-                </p>
                 
                 <div className="grid md:grid-cols-3 gap-6 mb-12">
                   <div className="bg-[#091020] p-6 rounded-lg">
