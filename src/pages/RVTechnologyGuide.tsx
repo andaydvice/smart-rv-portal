@@ -3,6 +3,9 @@ import { Helmet } from 'react-helmet-async';
 import { Container } from '@/components/ui/container';
 import { ExternalLinkButton } from '@/components/ui/external-link-button';
 import { Cpu, Wifi, Battery, Smartphone, Monitor, Shield, Zap, Signal, CheckCircle, AlertTriangle, Users } from 'lucide-react';
+import SpecificationsTable from '@/components/models/compare/SpecificationsTable';
+import FeaturesComparisonTable from '@/components/models/compare/FeaturesComparisonTable';
+import models from '@/components/models/compare/ModelComparisonData';
 
 const RVTechnologyGuide = () => {
   return (
@@ -1053,6 +1056,28 @@ const RVTechnologyGuide = () => {
                   <p><strong>Independent Content:</strong> This guide is not sponsored by or affiliated with any RV manufacturer mentioned. All company and product names are trademarks of their respective owners.</p>
                 </div>
               </div>
+            </div>
+          </Container>
+        </section>
+
+        {/* Model Comparison Tables */}
+        <section className="py-16 px-4">
+          <Container>
+            <div className="max-w-7xl mx-auto">
+              <div className="text-center mb-12">
+                <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">
+                  Compare Popular RV Technology Packages
+                </h2>
+                <p className="text-xl text-[#E2E8FF] max-w-3xl mx-auto">
+                  See how leading RV models stack up in terms of technology features and specifications to help guide your decision making process.
+                </p>
+              </div>
+              
+              {/* Specifications Table */}
+              <SpecificationsTable models={models} />
+              
+              {/* Features Comparison Table */}
+              <FeaturesComparisonTable models={models} />
             </div>
           </Container>
         </section>
