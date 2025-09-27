@@ -588,18 +588,18 @@ const RVTechnologyGuide = () => {
 
               <div className="grid lg:grid-cols-2 gap-8 mb-12">
                 <div className="space-y-6">
-                  <div className="bg-[#091020]/70 backdrop-blur-sm p-6 rounded-lg border border-white/10">
-                    <h3 className="text-xl font-semibold text-white mb-4">Connectivity Questions</h3>
-                    <ul className="text-[#E2E8FF] space-y-2">
+                  <div className="p-6 rounded-lg">
+                    <h3 className="text-xl font-semibold text-white mb-4 drop-shadow-lg">Connectivity Questions</h3>
+                    <ul className="text-white space-y-2 drop-shadow-lg">
                       <li>• What internet options work in remote locations?</li>
                       <li>• How much data do typical streaming and work activities consume?</li>
                       <li>• What backup connectivity options exist?</li>
                     </ul>
                   </div>
 
-                  <div className="bg-[#091020]/70 backdrop-blur-sm p-6 rounded-lg border border-white/10">
-                    <h3 className="text-xl font-semibold text-white mb-4">Power Management Questions</h3>
-                    <ul className="text-[#E2E8FF] space-y-2">
+                  <div className="p-6 rounded-lg">
+                    <h3 className="text-xl font-semibold text-white mb-4 drop-shadow-lg">Power Management Questions</h3>
+                    <ul className="text-white space-y-2 drop-shadow-lg">
                       <li>• How long can the system operate without external power?</li>
                       <li>• What appliances can run on battery power?</li>
                       <li>• How quickly do batteries recharge from different sources?</li>
@@ -608,18 +608,18 @@ const RVTechnologyGuide = () => {
                 </div>
 
                 <div className="space-y-6">
-                  <div className="bg-[#091020]/70 backdrop-blur-sm p-6 rounded-lg border border-white/10">
-                    <h3 className="text-xl font-semibold text-white mb-4">Control Systems Questions</h3>
-                    <ul className="text-[#E2E8FF] space-y-2">
+                  <div className="p-6 rounded-lg">
+                    <h3 className="text-xl font-semibold text-white mb-4 drop-shadow-lg">Control Systems Questions</h3>
+                    <ul className="text-white space-y-2 drop-shadow-lg">
                       <li>• What training is provided on digital systems?</li>
                       <li>• How do you override automatic systems if needed?</li>
                       <li>• What ongoing software updates are available?</li>
                     </ul>
                   </div>
 
-                  <div className="bg-[#091020]/70 backdrop-blur-sm p-6 rounded-lg border border-white/10">
-                    <h3 className="text-xl font-semibold text-white mb-4">Support and Service Questions</h3>
-                    <ul className="text-[#E2E8FF] space-y-2">
+                  <div className="p-6 rounded-lg">
+                    <h3 className="text-xl font-semibold text-white mb-4 drop-shadow-lg">Support and Service Questions</h3>
+                    <ul className="text-white space-y-2 drop-shadow-lg">
                       <li>• Which dealers can service these technology systems?</li>
                       <li>• What warranty coverage applies to electronic components?</li>
                       <li>• How do you troubleshoot common issues?</li>
