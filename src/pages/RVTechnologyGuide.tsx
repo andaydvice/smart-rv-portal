@@ -15,6 +15,8 @@ import RVTechnologyTiersHero from '@/components/rv-technology/RVTechnologyTiersH
 import rvTechComparisonImage from '@/assets/rv-technology-comparison-dashboard.jpg';
 import rvCategoryComparisonImage from '@/assets/rv-category-comparison.png';
 import rvDealershipBackground from '@/assets/rv-dealership-background.jpg';
+import rvTechnologyPlanningImage from '@/assets/rv-technology-planning.png';
+import { BlogPostImage } from '@/components/blog/post/BlogPostImage';
 
 const RVTechnologyGuide = () => {
   return (
@@ -773,6 +775,12 @@ const RVTechnologyGuide = () => {
         <section className="py-16 px-4 bg-[#151A22]/50">
           <Container>
             <div className="max-w-6xl mx-auto">
+              <div className="mb-12">
+                <BlogPostImage 
+                  image={rvTechnologyPlanningImage}
+                  title="RV Technology Planning and Setup"
+                />
+              </div>
               <h2 className="text-3xl md:text-4xl font-bold mb-8 text-white text-center">Planning for Technology Needs</h2>
 
               <div className="grid lg:grid-cols-2 gap-8 mb-12">
