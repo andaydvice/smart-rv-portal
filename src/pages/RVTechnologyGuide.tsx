@@ -461,6 +461,38 @@ const RVTechnologyGuide = () => {
           </Container>
         </section>
 
+        {/* Model Comparison Tables */}
+        <section className="py-16 px-4">
+          <Container>
+            <div className="max-w-7xl mx-auto">
+              <div className="text-center mb-12">
+                <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">
+                  Compare Popular RV Technology Packages
+                </h2>
+                <p className="text-xl text-[#E2E8FF] max-w-3xl mx-auto">
+                  See how leading RV models stack up in terms of technology features and specifications to help guide your decision making process.
+                </p>
+              </div>
+              
+              {/* Specifications Table */}
+              <SpecificationsTable models={models} />
+              
+              {/* Features Comparison Table */}
+              <FeaturesComparisonTable models={models} />
+
+              <div className="text-center mt-12">
+                <ExternalLinkButton 
+                  href="https://www.rvt.com/buy/" 
+                  variant="default" 
+                  size="lg"
+                >
+                  Research These Models on RVT.com
+                </ExternalLinkButton>
+              </div>
+            </div>
+          </Container>
+        </section>
+
         {/* RV Category Evaluation */}
         <section className="py-16 px-4 bg-[#151A22]/50">
           <Container>
@@ -1060,27 +1092,6 @@ const RVTechnologyGuide = () => {
           </Container>
         </section>
 
-        {/* Model Comparison Tables */}
-        <section className="py-16 px-4">
-          <Container>
-            <div className="max-w-7xl mx-auto">
-              <div className="text-center mb-12">
-                <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">
-                  Compare Popular RV Technology Packages
-                </h2>
-                <p className="text-xl text-[#E2E8FF] max-w-3xl mx-auto">
-                  See how leading RV models stack up in terms of technology features and specifications to help guide your decision making process.
-                </p>
-              </div>
-              
-              {/* Specifications Table */}
-              <SpecificationsTable models={models} />
-              
-              {/* Features Comparison Table */}
-              <FeaturesComparisonTable models={models} />
-            </div>
-          </Container>
-        </section>
       </div>
     </>
   );
