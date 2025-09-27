@@ -9,6 +9,7 @@ import models from '@/components/models/compare/ModelComparisonData';
 import RVTechnologyHeader from '@/components/rv-technology/RVTechnologyHeader';
 import RVConnectivityHero from '@/components/rv-technology/RVConnectivityHero';
 import RVPowerManagementHero from '@/components/rv-technology/RVPowerManagementHero';
+import RVControlMonitoringHero from '@/components/rv-technology/RVControlMonitoringHero';
 
 const RVTechnologyGuide = () => {
   return (
@@ -234,18 +235,12 @@ const RVTechnologyGuide = () => {
         </section>
 
         {/* Control and Monitoring Systems */}
+        <RVControlMonitoringHero />
+        
         <section className="py-16 px-4 bg-[#151A22]/50">
           <Container>
             <div className="max-w-6xl mx-auto">
-              <div className="flex items-center mb-8">
-                <div className="p-3 bg-[#5B9BD5]/10 rounded-full mr-4">
-                  <Monitor className="h-8 w-8 text-[#5B9BD5]" />
-                </div>
-                <h2 className="text-3xl md:text-4xl font-bold text-white">Control and Monitoring Systems</h2>
-              </div>
-
               <div className="mb-12">
-                <h3 className="text-2xl font-bold mb-6 text-white">Technology Reality Check</h3>
                 
                 <div className="grid md:grid-cols-2 gap-8 mb-12">
                   <div className="bg-[#091020] p-6 rounded-lg">
