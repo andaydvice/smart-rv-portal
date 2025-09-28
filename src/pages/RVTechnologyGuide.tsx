@@ -347,46 +347,48 @@ const RVTechnologyGuide = () => {
             <div className="max-w-6xl mx-auto">
               <div className="mb-12">
 
-                <div className="grid lg:grid-cols-2 gap-8">
-                   <div className="bg-[#091020] p-6 rounded-lg">
-                     <h4 className="text-xl font-semibold text-white mb-4">Tech Enthusiast</h4>
-                     <div className="space-y-3">
-                       <p className="text-[#E2E8FF]"><strong>Technology Research Focus:</strong> Latest Available Features</p>
-                       <p className="text-[#E2E8FF]"><strong>Features to Prioritise:</strong> Connectivity, automation, integration</p>
-                       <p className="text-[#E2E8FF]"><strong>Manufacturer Research Areas:</strong> Premium manufacturers</p>
-                       <p className="text-[#E2E8FF]"><strong>Research Budget Range:</strong> $150K+</p>
-                    </div>
-                  </div>
-
-                  <div className="bg-[#091020] p-6 rounded-lg">
-                    <h4 className="text-xl font-semibold text-white mb-4">Family Safety Focus</h4>
-                    <div className="space-y-3">
-                       <p className="text-[#E2E8FF]"><strong>Technology Research Focus:</strong> Proven, reliable systems</p>
-                       <p className="text-[#E2E8FF]"><strong>Features to Prioritise:</strong> Monitoring, basic smart controls</p>
-                       <p className="text-[#E2E8FF]"><strong>Manufacturer Research Areas:</strong> Established brands with support</p>
-                       <p className="text-[#E2E8FF]"><strong>Research Budget Range:</strong> $80K–150K</p>
-                    </div>
-                  </div>
-
-                  <div className="bg-[#091020] p-6 rounded-lg">
-                    <h4 className="text-xl font-semibold text-white mb-4">Budget Conscious</h4>
-                    <div className="space-y-3">
-                       <p className="text-[#E2E8FF]"><strong>Technology Research Focus:</strong> Essential functions</p>
-                       <p className="text-[#E2E8FF]"><strong>Features to Prioritise:</strong> Core features, manual backups</p>
-                       <p className="text-[#E2E8FF]"><strong>Manufacturer Research Areas:</strong> Value focused manufacturers</p>
-                       <p className="text-[#E2E8FF]"><strong>Research Budget Range:</strong> $40K–80K</p>
-                    </div>
-                  </div>
-
-                  <div className="bg-[#091020] p-6 rounded-lg">
-                    <h4 className="text-xl font-semibold text-white mb-4">Luxury Comfort</h4>
-                    <div className="space-y-3">
-                       <p className="text-[#E2E8FF]"><strong>Technology Research Focus:</strong> Premium integration</p>
-                       <p className="text-[#E2E8FF]"><strong>Features to Prioritise:</strong> Automated systems, premium support</p>
-                       <p className="text-[#E2E8FF]"><strong>Manufacturer Research Areas:</strong> Luxury manufacturers</p>
-                       <p className="text-[#E2E8FF]"><strong>Research Budget Range:</strong> $200K+</p>
-                    </div>
-                  </div>
+                <div className="overflow-x-auto">
+                  <table className="w-full bg-[#091020] rounded-lg overflow-hidden">
+                    <thead>
+                      <tr className="border-b border-[#1a202c]">
+                        <th className="text-left p-4 text-white font-semibold">Buyer Type</th>
+                        <th className="text-left p-4 text-white font-semibold">Tech Enthusiast</th>
+                        <th className="text-left p-4 text-white font-semibold">Family Safety Focus</th>
+                        <th className="text-left p-4 text-white font-semibold">Budget Conscious</th>
+                        <th className="text-left p-4 text-white font-semibold">Luxury Comfort</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr className="border-b border-[#1a202c]">
+                        <td className="p-4 text-[#E2E8FF] font-medium">Technology Research Focus</td>
+                        <td className="p-4 text-[#E2E8FF]">Latest Available Features</td>
+                        <td className="p-4 text-[#E2E8FF]">Proven, reliable systems</td>
+                        <td className="p-4 text-[#E2E8FF]">Essential functions</td>
+                        <td className="p-4 text-[#E2E8FF]">Premium integration</td>
+                      </tr>
+                      <tr className="border-b border-[#1a202c]">
+                        <td className="p-4 text-[#E2E8FF] font-medium">Features to Prioritise</td>
+                        <td className="p-4 text-[#E2E8FF]">Connectivity, automation, integration</td>
+                        <td className="p-4 text-[#E2E8FF]">Monitoring, basic smart controls</td>
+                        <td className="p-4 text-[#E2E8FF]">Core features, manual backups</td>
+                        <td className="p-4 text-[#E2E8FF]">Automated systems, premium support</td>
+                      </tr>
+                      <tr className="border-b border-[#1a202c]">
+                        <td className="p-4 text-[#E2E8FF] font-medium">Manufacturer Research Areas</td>
+                        <td className="p-4 text-[#E2E8FF]">Premium manufacturers</td>
+                        <td className="p-4 text-[#E2E8FF]">Established brands with support</td>
+                        <td className="p-4 text-[#E2E8FF]">Value focused manufacturers</td>
+                        <td className="p-4 text-[#E2E8FF]">Luxury manufacturers</td>
+                      </tr>
+                      <tr>
+                        <td className="p-4 text-[#E2E8FF] font-medium">Research Budget Range</td>
+                        <td className="p-4 text-[#E2E8FF]">$150K+</td>
+                        <td className="p-4 text-[#E2E8FF]">$80K–150K</td>
+                        <td className="p-4 text-[#E2E8FF]">$40K–80K</td>
+                        <td className="p-4 text-[#E2E8FF]">$200K+</td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </div>
 
                 <p className="text-sm text-[#E2E8FF] mt-6 italic">
