@@ -23,6 +23,10 @@ import rvDealershipBackground from '@/assets/rv-dealership-background.jpg';
 import rvTechnologyPlanningImage from '@/assets/rv-technology-planning.png';
 import rvTechnologyDecisionsImage from '@/assets/rv-technology-decisions.png';
 import { BlogPostImage } from '@/components/blog/post/BlogPostImage';
+import { TechnologyReadinessQuiz } from '@/components/rv-technology/interactive/TechnologyReadinessQuiz';
+import { FeatureMatcher } from '@/components/rv-technology/interactive/FeatureMatcher';
+import { TechnologyChecklist } from '@/components/rv-technology/interactive/TechnologyChecklist';
+import { LifestylePlanner } from '@/components/rv-technology/interactive/LifestylePlanner';
 
 const RVTechnologyGuide = () => {
   return (
@@ -82,6 +86,57 @@ const RVTechnologyGuide = () => {
           </Container>
         </section>
 
+        {/* Interactive Technology Assessment */}
+        <section className="py-16 px-4 relative">
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#151A22]/20 to-transparent" />
+          <Container>
+            <div className="max-w-6xl mx-auto relative z-10">
+              <div className="text-center mb-12">
+                <div className="inline-flex items-center gap-3 mb-6">
+                  <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#5B9BD5]" />
+                  <Smartphone className="h-8 w-8 text-[#5B9BD5]" />
+                  <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#5B9BD5]" />
+                </div>
+                <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white bg-gradient-to-r from-white to-[#E2E8FF] bg-clip-text text-transparent">
+                  Find Your Perfect RV Technology Match
+                </h2>
+                <p className="text-xl text-[#E2E8FF] leading-relaxed">
+                  Take our quick assessment to discover RV technology features that match your needs and preferences.
+                </p>
+              </div>
+              
+              <TechnologyReadinessQuiz />
+            </div>
+          </Container>
+        </section>
+
+        {/* Smart Feature Matcher */}
+        <section className="py-16 px-4 relative">
+          <Container>
+            <div className="max-w-6xl mx-auto">
+              <FeatureMatcher />
+            </div>
+          </Container>
+        </section>
+
+        {/* Lifestyle Technology Planner */}
+        <section className="py-16 px-4 relative">
+          <Container>
+            <div className="max-w-6xl mx-auto">
+              <LifestylePlanner />
+            </div>
+          </Container>
+        </section>
+
+        {/* Technology Research Checklist */}
+        <section className="py-16 px-4 relative">
+          <Container>
+            <div className="max-w-6xl mx-auto">
+              <TechnologyChecklist />
+            </div>
+          </Container>
+        </section>
+
         {/* Introduction with Enhanced Design */}
         <section className="py-16 px-4 relative">
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#151A22]/20 to-transparent" />
@@ -94,7 +149,7 @@ const RVTechnologyGuide = () => {
                   <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#5B9BD5]" />
                 </div>
                 <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white bg-gradient-to-r from-white to-[#E2E8FF] bg-clip-text text-transparent">
-                  Introduction: How RV Technology Has Evolved
+                  Understanding Modern RV Technology
                 </h2>
               </div>
               
