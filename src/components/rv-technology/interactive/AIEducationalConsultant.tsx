@@ -97,23 +97,24 @@ export const AIEducationalConsultant = () => {
             <AlertTriangle className="h-4 w-4 text-yellow-500" />
             <AlertDescription className="text-yellow-200">
               <strong>Educational Use Only</strong> - This assistant provides educational information about RV technology concepts. 
-              It does not make recommendations, financial advice, or purchasing guidance.
+              <br />
+              It does not make recommendations, give financial advice, or provide purchasing guidance.
             </AlertDescription>
           </Alert>
 
           <div className="space-y-4">
             <h3 className="text-white font-semibold">What this assistant can help you understand:</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-              <Badge variant="outline" className="justify-start p-3 border-connectivity-accent text-connectivity-lightText">
+              <Badge variant="outline" className="justify-start p-3 border-connectivity-accent text-white bg-connectivity-accent/10">
                 Technology concepts and how they work
               </Badge>
-              <Badge variant="outline" className="justify-start p-3 border-connectivity-accent text-connectivity-lightText">
+              <Badge variant="outline" className="justify-start p-3 border-connectivity-accent text-white bg-connectivity-accent/10">
                 General considerations for different usage scenarios
               </Badge>
-              <Badge variant="outline" className="justify-start p-3 border-connectivity-accent text-connectivity-lightText">
+              <Badge variant="outline" className="justify-start p-3 border-connectivity-accent text-white bg-connectivity-accent/10">
                 Educational explanations of features and capabilities
               </Badge>
-              <Badge variant="outline" className="justify-start p-3 border-connectivity-accent text-connectivity-lightText">
+              <Badge variant="outline" className="justify-start p-3 border-connectivity-accent text-white bg-connectivity-accent/10">
                 Learning resources and research guidance
               </Badge>
             </div>
