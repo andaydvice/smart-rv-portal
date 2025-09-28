@@ -1269,7 +1269,7 @@ const RVTechnologyGuide = () => {
               
               <div className="prose prose-invert prose-lg max-w-none mb-12">
                 <p className="text-[#E2E8FF] text-lg leading-relaxed mb-6">
-                  Understanding RV technology options empowers better decision-making throughout the buying process.
+                  Understanding RV technology options empowers better decision making throughout the buying process.
                 </p>
                 <p className="text-[#E2E8FF] text-lg leading-relaxed mb-6">
                   The key is matching technology capabilities with your actual usage patterns and comfort level.
@@ -1321,17 +1321,40 @@ const RVTechnologyGuide = () => {
               </div>
 
               <div className="bg-[#091020] p-8 rounded-lg mb-8">
-                <h3 className="text-xl font-bold mb-4 text-white">About This Guide</h3>
-                <p className="text-[#E2E8FF] leading-relaxed mb-4">
-                  This educational guide provides general information about RV technology categories and suggests questions for further research. 
-                  It is designed to help buyers become more informed consumers. All technology features, availability, and pricing should be 
-                  verified directly with manufacturers and dealers. Information current as of September 2025.
-                </p>
-                <p className="text-[#E2E8FF] text-sm">
-                  <strong>Document Purpose:</strong> Educational resource for RV technology research<br/>
-                  <strong>Content Type:</strong> General information and buyer guidance<br/>
-                  <strong>Last Updated:</strong> September 2025
-                </p>
+                <h3 className="text-xl font-bold mb-6 text-white">About This Guide</h3>
+                
+                <div className="text-[#E2E8FF] leading-relaxed space-y-4">
+                  <p>
+                    This educational guide provides general information about RV technology categories and suggests questions for further research.
+                  </p>
+                  
+                  <p>
+                    It is designed to help buyers become more informed consumers. All technology features, availability, and pricing should be verified directly with manufacturers and dealers. Information current as of September 2025.
+                  </p>
+                  
+                  <div className="mt-6 pt-4 border-t border-gray-600">
+                    <p className="text-sm mb-2">
+                      <strong>Document Purpose:</strong>
+                    </p>
+                    <p className="text-sm mb-4">
+                      Educational resource for RV technology research
+                    </p>
+                    
+                    <p className="text-sm mb-2">
+                      <strong>Content Type:</strong>
+                    </p>
+                    <p className="text-sm mb-4">
+                      General information and buyer guidance
+                    </p>
+                    
+                    <p className="text-sm mb-2">
+                      <strong>Last Updated:</strong>
+                    </p>
+                    <p className="text-sm">
+                      September 2025
+                    </p>
+                  </div>
+                </div>
               </div>
 
               <div className="bg-yellow-900/20 border border-yellow-600/30 rounded-lg p-6">
