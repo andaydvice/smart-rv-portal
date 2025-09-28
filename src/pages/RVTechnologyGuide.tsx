@@ -23,9 +23,8 @@ import rvDealershipBackground from '@/assets/rv-dealership-background.jpg';
 import rvTechnologyPlanningImage from '@/assets/rv-technology-planning.png';
 import rvTechnologyDecisionsImage from '@/assets/rv-technology-decisions.png';
 import { BlogPostImage } from '@/components/blog/post/BlogPostImage';
-import { TechnologyReadinessQuiz } from '@/components/rv-technology/interactive/TechnologyReadinessQuiz';
-
-import { TechnologyChecklist } from '@/components/rv-technology/interactive/TechnologyChecklist';
+import { AITechnologyReadinessAssessment } from '@/components/rv-technology/interactive/AITechnologyReadinessAssessment';
+import { AITechnologyChecklist } from '@/components/rv-technology/interactive/AITechnologyChecklist';
 import { AILifestylePlanner } from '@/components/rv-technology/interactive/AILifestylePlanner';
 import { RVTechNavigation } from '@/components/rv-technology/RVTechNavigation';
 import { RVTechSummary } from '@/components/rv-technology/RVTechSummary';
@@ -117,7 +116,7 @@ const RVTechnologyGuide = () => {
                 </p>
               </div>
               
-              <TechnologyReadinessQuiz />
+              <AITechnologyReadinessAssessment />
             </div>
           </Container>
         </section>
@@ -187,7 +186,7 @@ const RVTechnologyGuide = () => {
         <section className="py-16 px-4 relative">
           <Container>
             <div className="max-w-6xl mx-auto">
-              <TechnologyChecklist />
+              <AITechnologyChecklist />
             </div>
           </Container>
         </section>
