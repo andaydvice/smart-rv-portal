@@ -24,11 +24,21 @@ interface LifestyleAnalysis {
     category: string;
     recommendations: string[];
     reasoning: string;
-    rvtSearchUrl?: string;
+    searchUrls?: {
+      buyUrl: string;
+      reviewsUrl: string;
+      dealersUrl: string;
+    };
   }[];
   educationalGuidance: string;
   budgetConsiderations: string;
   nextSteps: string[];
+  searchUrls: {
+    buyUrl: string;
+    reviewsUrl: string;
+    dealersUrl: string;
+    priceCheckerUrl: string;
+  };
 }
 
 serve(async (req) => {
@@ -77,12 +87,23 @@ serve(async (req) => {
         {
           "category": "System Category Name",
           "recommendations": ["Specific feature 1", "Specific feature 2"],
-          "reasoning": "Educational explanation of why this category matters for their lifestyle"
+          "reasoning": "Educational explanation of why this category matters for their lifestyle",
+          "searchUrls": {
+            "buyUrl": "generate specific search URL for this system type",
+            "reviewsUrl": "generate reviews URL for this technology",
+            "dealersUrl": "https://www.rvt.com/dealersearch.php"
+          }
         }
       ],
       "educationalGuidance": "Educational information about these technology categories and what to learn about",
       "budgetConsiderations": "Realistic budget guidance and cost considerations",
-      "nextSteps": ["Step 1", "Step 2", "Step 3"]
+      "nextSteps": ["Step 1", "Step 2", "Step 3"],
+      "searchUrls": {
+        "buyUrl": "generate search URL based on lifestyle and technology needs",
+        "reviewsUrl": "generate reviews URL for recommended technologies",
+        "dealersUrl": "https://www.rvt.com/dealersearch.php",
+        "priceCheckerUrl": "https://www.rvt.com/price-checker/"
+      }
     }
 
     Keep the tone educational and helpful. Focus on teaching about technology categories rather than specific brands or products.`;
@@ -119,18 +140,27 @@ serve(async (req) => {
     try {
       analysis = JSON.parse(aiResponse);
       
-      // Enhance analysis with targeted RVT.com links
-      analysis.recommendedSystems = analysis.recommendedSystems.map(system => {
-        let rvtSearchUrl = "https://www.rvt.com/buy/";
-        
-        // Use legitimate RVT.com URLs for all technology categories
-        rvtSearchUrl = "https://www.rvt.com/buy/";
-        
-        return {
+      // Ensure searchUrls are present for each system and main response
+      if (Array.isArray(analysis.recommendedSystems)) {
+        analysis.recommendedSystems = analysis.recommendedSystems.map(system => ({
           ...system,
-          rvtSearchUrl
+          searchUrls: system.searchUrls || {
+            buyUrl: 'https://www.rvt.com/buy/',
+            reviewsUrl: 'https://www.rvinsider.com/',
+            dealersUrl: 'https://www.rvt.com/dealersearch.php'
+          }
+        }));
+      }
+
+      // Ensure main searchUrls are present
+      if (!analysis.searchUrls) {
+        analysis.searchUrls = {
+          buyUrl: 'https://www.rvt.com/buy/',
+          reviewsUrl: 'https://www.rvinsider.com/',
+          dealersUrl: 'https://www.rvt.com/dealersearch.php',
+          priceCheckerUrl: 'https://www.rvt.com/price-checker/'
         };
-      });
+      }
       
     } catch (parseError) {
       console.error('Failed to parse AI response as JSON:', parseError);
@@ -143,18 +173,32 @@ serve(async (req) => {
             category: "Power Systems",
             recommendations: ["Solar panels for off grid capability", "Lithium batteries for extended power", "Inverter systems for AC power"],
             reasoning: "Understanding power management is essential for any RV lifestyle. Learn about different battery types, charging methods, and power consumption.",
-            rvtSearchUrl: "https://www.rvt.com/buy/"
+            searchUrls: {
+              buyUrl: 'https://www.rvt.com/buy/',
+              reviewsUrl: 'https://www.rvinsider.com/',
+              dealersUrl: 'https://www.rvt.com/dealersearch.php'
+            }
           },
           {
             category: "Connectivity",
             recommendations: ["Cellular signal boosters", "WiFi systems", "Satellite internet preparation"],
             reasoning: "Modern RVing often requires staying connected. Learn about different internet options and what works best in various locations.",
-            rvtSearchUrl: "https://www.rvt.com/buy/"
+            searchUrls: {
+              buyUrl: 'https://www.rvt.com/buy/',
+              reviewsUrl: 'https://www.rvinsider.com/',
+              dealersUrl: 'https://www.rvt.com/dealersearch.php'
+            }
           }
         ],
         educationalGuidance: "I recommend learning about the major RV technology categories: power management, connectivity, climate control, and monitoring systems. Each category has different options depending on your specific needs and budget.",
         budgetConsiderations: "RV technology can range from basic to very advanced. Start by understanding what features are essential for your lifestyle versus nice to have extras.",
-        nextSteps: ["Visit RV dealers to see technology demonstrations", "Ask specific questions about each system", "Research user reviews and experiences", "Consider starting with basic systems and upgrading later"]
+        nextSteps: ["Visit RV dealers to see technology demonstrations", "Ask specific questions about each system", "Research user reviews and experiences", "Consider starting with basic systems and upgrading later"],
+        searchUrls: {
+          buyUrl: 'https://www.rvt.com/buy/',
+          reviewsUrl: 'https://www.rvinsider.com/',
+          dealersUrl: 'https://www.rvt.com/dealersearch.php',
+          priceCheckerUrl: 'https://www.rvt.com/price-checker/'
+        }
       };
     }
 

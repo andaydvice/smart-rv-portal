@@ -18,7 +18,12 @@ interface AIChecklistResult {
   summary: string;
   budgetConsiderations: string;
   dealerQuestions: string[];
-  rvtLink: string;
+  searchUrls: {
+    buyUrl: string;
+    reviewsUrl: string;
+    dealersUrl: string;
+    priceCheckerUrl: string;
+  };
 }
 
 serve(async (req) => {
@@ -66,7 +71,12 @@ Please provide a comprehensive checklist formatted as JSON with this structure:
   "summary": "Brief summary of their needs and this checklist's focus",
   "budgetConsiderations": "Realistic budget guidance for their technology needs",
   "dealerQuestions": ["General question 1", "General question 2", "General question 3"],
-  "rvtLink": "https://www.rvt.com/buy/"
+  "searchUrls": {
+    "buyUrl": "generate specific RV search URL based on checklist priorities",
+    "reviewsUrl": "generate reviews URL for high-priority features",
+    "dealersUrl": "https://www.rvt.com/dealersearch.php",
+    "priceCheckerUrl": "https://www.rvt.com/price-checker/"
+  }
 }
 
 Guidelines:
@@ -108,8 +118,15 @@ Guidelines:
     let checklist: AIChecklistResult;
     try {
       checklist = JSON.parse(aiResponse);
-      // Ensure we use the legitimate RVT.com URL
-      checklist.rvtLink = "https://www.rvt.com/buy/";
+      // Ensure searchUrls are present
+      if (!checklist.searchUrls) {
+        checklist.searchUrls = {
+          buyUrl: 'https://www.rvt.com/buy/',
+          reviewsUrl: 'https://www.rvinsider.com/',
+          dealersUrl: 'https://www.rvt.com/dealersearch.php',
+          priceCheckerUrl: 'https://www.rvt.com/price-checker/'
+        };
+      }
       
     } catch (parseError) {
       console.error('Failed to parse AI response as JSON:', parseError);
@@ -159,7 +176,12 @@ Guidelines:
           "Can you demonstrate all the technology features?",
           "Are there additional training resources available?"
         ],
-        rvtLink: "https://www.rvt.com/buy/"
+        searchUrls: {
+          buyUrl: 'https://www.rvt.com/buy/',
+          reviewsUrl: 'https://www.rvinsider.com/',
+          dealersUrl: 'https://www.rvt.com/dealersearch.php',
+          priceCheckerUrl: 'https://www.rvt.com/price-checker/'
+        }
       };
     }
 

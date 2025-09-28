@@ -9,17 +9,30 @@ import { Loader2, Brain, Zap, ExternalLink, Users, Info } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { ExternalLinkButton } from '@/components/ui/external-link-button';
 
+interface RecommendedSystem {
+  category: string;
+  recommendations: string[];
+  reasoning: string;
+  searchUrls?: {
+    buyUrl: string;
+    reviewsUrl: string;
+    dealersUrl: string;
+  };
+}
+
 interface LifestyleAnalysis {
   primaryUsage: string;
   keyTechnologyNeeds: string[];
-  recommendedSystems: {
-    category: string;
-    recommendations: string[];
-    reasoning: string;
-  }[];
+  recommendedSystems: RecommendedSystem[];
   educationalGuidance: string;
   budgetConsiderations: string;
   nextSteps: string[];
+  searchUrls: {
+    buyUrl: string;
+    reviewsUrl: string;
+    dealersUrl: string;
+    priceCheckerUrl: string;
+  };
 }
 
 interface LifestyleRequirements {
@@ -130,15 +143,25 @@ export const AILifestylePlanner: React.FC = () => {
               <div key={index} className="bg-[#151A22]/50 rounded-lg p-6 border border-[#1a202c]">
                 <div className="flex items-start justify-between mb-3">
                   <h5 className="font-semibold text-white">{system.category}</h5>
-                  {(system as any).rvtSearchUrl && (
-                    <ExternalLinkButton 
-                      href={(system as any).rvtSearchUrl}
-                      variant="outline"
-                      size="sm"
-                      className="border-[#5B9BD5]/50 text-[#5B9BD5] hover:bg-[#5B9BD5]/10"
-                    >
-                      Shop {system.category}
-                    </ExternalLinkButton>
+                  {system.searchUrls && (
+                    <div className="flex gap-2">
+                      <ExternalLinkButton 
+                        href={system.searchUrls.buyUrl}
+                        variant="outline"
+                        size="sm"
+                        className="border-[#5B9BD5]/50 text-[#5B9BD5] hover:bg-[#5B9BD5]/10"
+                      >
+                        Buy
+                      </ExternalLinkButton>
+                      <ExternalLinkButton 
+                        href={system.searchUrls.reviewsUrl}
+                        variant="outline"
+                        size="sm"
+                        className="border-[#5B9BD5]/50 text-[#5B9BD5] hover:bg-[#5B9BD5]/10"
+                      >
+                        Reviews
+                      </ExternalLinkButton>
+                    </div>
                   )}
                 </div>
                 <p className="text-[#E2E8FF] mb-4 leading-relaxed">{system.reasoning}</p>
@@ -184,20 +207,36 @@ export const AILifestylePlanner: React.FC = () => {
           {/* Action Buttons */}
           <div className="grid md:grid-cols-2 gap-4">
             <ExternalLinkButton 
-              href="https://www.rvt.com/buy/"
+              href={analysis.searchUrls.buyUrl}
               variant="default"
               size="lg"
               className="bg-gradient-to-r from-[#5B9BD5] to-[#60A5FA] hover:from-[#4B8FE3] hover:to-[#5B9BD5]"
             >
-              Browse RVs at RVT.com
+              Browse Matching RVs
             </ExternalLinkButton>
             <ExternalLinkButton 
-              href="https://www.rvt.com/dealersearch.php"
+              href={analysis.searchUrls.reviewsUrl}
+              variant="outline"
+              size="lg"
+              className="border-[#5B9BD5]/50 text-[#5B9BD5] hover:bg-[#5B9BD5]/10"
+            >
+              Read Reviews
+            </ExternalLinkButton>
+            <ExternalLinkButton 
+              href={analysis.searchUrls.dealersUrl}
               variant="outline"
               size="lg"
               className="border-[#5B9BD5]/50 text-[#5B9BD5] hover:bg-[#5B9BD5]/10"
             >
               Find Local Dealers
+            </ExternalLinkButton>
+            <ExternalLinkButton 
+              href={analysis.searchUrls.priceCheckerUrl}
+              variant="outline"
+              size="lg"
+              className="border-[#5B9BD5]/50 text-[#5B9BD5] hover:bg-[#5B9BD5]/10"
+            >
+              Check Prices
             </ExternalLinkButton>
           </div>
         </div>

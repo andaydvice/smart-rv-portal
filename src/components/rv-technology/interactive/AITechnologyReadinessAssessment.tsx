@@ -14,7 +14,12 @@ interface AIAssessmentResult {
   recommendedFeatures: string[];
   budgetGuidance: string;
   nextSteps: string[];
-  rvtLink: string;
+  searchUrls: {
+    buyUrl: string;
+    reviewsUrl: string;
+    dealersUrl: string;
+    priceCheckerUrl: string;
+  };
 }
 
 export const AITechnologyReadinessAssessment: React.FC = () => {
@@ -98,14 +103,30 @@ export const AITechnologyReadinessAssessment: React.FC = () => {
           </div>
         </div>
 
-        <div className="flex flex-col sm:flex-row gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           <ExternalLinkButton 
-            href={result.rvtLink}
+            href={result.searchUrls.buyUrl}
             variant="default"
             size="lg"
-            className="flex-1 bg-gradient-to-r from-[#5B9BD5] to-[#60A5FA] hover:from-[#4B8FE3] hover:to-[#5B9BD5]"
+            className="bg-gradient-to-r from-[#5B9BD5] to-[#60A5FA] hover:from-[#4B8FE3] hover:to-[#5B9BD5]"
           >
             Browse Matching RVs
+          </ExternalLinkButton>
+          <ExternalLinkButton 
+            href={result.searchUrls.reviewsUrl}
+            variant="outline"
+            size="lg"
+            className="border-[#5B9BD5]/50 text-[#5B9BD5] hover:bg-[#5B9BD5]/10"
+          >
+            Read Reviews
+          </ExternalLinkButton>
+          <ExternalLinkButton 
+            href={result.searchUrls.dealersUrl}
+            variant="outline"
+            size="lg"
+            className="border-[#5B9BD5]/50 text-[#5B9BD5] hover:bg-[#5B9BD5]/10"
+          >
+            Find Dealers
           </ExternalLinkButton>
           <Button 
             onClick={resetAssessment}

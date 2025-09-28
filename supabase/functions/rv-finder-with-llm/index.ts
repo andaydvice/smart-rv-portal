@@ -24,9 +24,10 @@ interface RVRecommendation {
   recommendedModels: string[];
   technologyFeatures: string[];
   searchUrls: {
-    rvtrader: string;
-    rvt: string;
-    rvusa: string;
+    buyUrl: string;
+    reviewsUrl: string;
+    dealersUrl: string;
+    priceCheckerUrl: string;
   };
   educationalContent: string;
   budgetConsiderations: string;
@@ -101,7 +102,33 @@ serve(async (req) => {
       body: JSON.stringify({
         model: 'gpt-4o-mini',
         messages: [
-          { role: 'system', content: systemPrompt },
+          { 
+            role: 'system', 
+            content: `You are an expert RV consultant. Based on user requirements, recommend the best RV type and provide specific advice. 
+
+Your response must be valid JSON with this exact structure:
+{
+  "rvType": "string",
+  "reasoning": "detailed explanation",
+  "priceRange": "estimated price range",
+  "recommendedModels": ["model1", "model2"],
+  "technologyFeatures": ["feature1", "feature2"],
+  "searchUrls": {
+    "buyUrl": "generate filtered RV search URL with specific parameters",
+    "reviewsUrl": "generate URL for reviews of recommended RV type",
+    "dealersUrl": "https://www.rvt.com/dealersearch.php",
+    "priceCheckerUrl": "https://www.rvt.com/price-checker/"
+  },
+  "educationalContent": "helpful tips and considerations",
+  "budgetConsiderations": "budget-related guidance"
+}
+
+For searchUrls, generate specific, contextual URLs:
+- buyUrl: Create filtered search on rvtrader.com based on RV type, price range, and features
+- reviewsUrl: Link to specific RV type reviews on rvinsider.com
+
+Focus on practical recommendations based on the user's specific needs, experience level, and budget.` 
+          },
           { role: 'user', content: userPrompt }
         ],
         temperature: 0.3,
@@ -123,13 +150,7 @@ serve(async (req) => {
     try {
       const parsed = JSON.parse(aiResponse);
       
-      // Generate search URLs based on AI recommendations
-      const searchUrls = generateSearchUrls(parsed, requirements);
-      
-      recommendation = {
-        ...parsed,
-        searchUrls
-      };
+      recommendation = parsed;
     } catch (parseError) {
       console.error('Failed to parse AI response as JSON:', parseError);
       // Fallback response if JSON parsing fails
@@ -139,7 +160,12 @@ serve(async (req) => {
         priceRange: "Analysis provided in reasoning section",
         recommendedModels: ["Please see detailed analysis"],
         technologyFeatures: requirements.mustHaveFeatures,
-        searchUrls: generateSearchUrls({ rvType: "Class C" }, requirements),
+        searchUrls: {
+          buyUrl: "https://www.rvtrader.com/rvs-for-sale",
+          reviewsUrl: "https://www.rvinsider.com/",
+          dealersUrl: "https://www.rvt.com/dealersearch.php",
+          priceCheckerUrl: "https://www.rvt.com/price-checker/"
+        },
         educationalContent: "Detailed analysis provided in the reasoning section.",
         budgetConsiderations: "Budget considerations included in the analysis."
       };
@@ -164,14 +190,6 @@ serve(async (req) => {
   }
 });
 
-function generateSearchUrls(aiRecommendation: any, requirements: UserRequirements) {
-  // Use legitimate affiliate URLs instead of fake search parameters
-  return {
-    rvtrader: 'https://www.rvtrader.com/rvs-for-sale',
-    rvt: 'https://www.rvt.com/buy/',
-    rvusa: 'https://www.rvt.com/dealersearch.php'
-  };
-}
 
 function parseBudgetRange(budget: string): { min: number, max: number } {
   // Parse budget string and return reasonable ranges

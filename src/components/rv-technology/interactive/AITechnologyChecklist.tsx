@@ -19,7 +19,12 @@ interface AIChecklistResult {
   summary: string;
   budgetConsiderations: string;
   dealerQuestions: string[];
-  rvtLink: string;
+  searchUrls: {
+    buyUrl: string;
+    reviewsUrl: string;
+    dealersUrl: string;
+    priceCheckerUrl: string;
+  };
 }
 
 export const AITechnologyChecklist: React.FC = () => {
@@ -168,14 +173,32 @@ export const AITechnologyChecklist: React.FC = () => {
             <Download className="h-4 w-4 mr-2" />
             Download Checklist
           </Button>
-          <ExternalLinkButton 
-            href={result.rvtLink}
-            variant="default"
-            size="lg"
-            className="flex-1 bg-gradient-to-r from-[#5B9BD5] to-[#60A5FA] hover:from-[#4B8FE3] hover:to-[#5B9BD5]"
-          >
-            Research RVs with These Features
-          </ExternalLinkButton>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <ExternalLinkButton 
+              href={result.searchUrls.buyUrl}
+              variant="default"
+              size="lg"
+              className="bg-gradient-to-r from-[#5B9BD5] to-[#60A5FA] hover:from-[#4B8FE3] hover:to-[#5B9BD5]"
+            >
+              Browse Matching RVs
+            </ExternalLinkButton>
+            <ExternalLinkButton 
+              href={result.searchUrls.reviewsUrl}
+              variant="outline"
+              size="lg"
+              className="border-[#5B9BD5]/50 text-[#5B9BD5] hover:bg-[#5B9BD5]/10"
+            >
+              Read Reviews
+            </ExternalLinkButton>
+            <ExternalLinkButton 
+              href={result.searchUrls.priceCheckerUrl}
+              variant="outline"
+              size="lg"
+              className="border-[#5B9BD5]/50 text-[#5B9BD5] hover:bg-[#5B9BD5]/10"
+            >
+              Check Prices
+            </ExternalLinkButton>
+          </div>
           <Button 
             onClick={resetChecklist}
             variant="outline"
