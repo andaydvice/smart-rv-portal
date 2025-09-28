@@ -548,6 +548,66 @@ export type Database = {
           },
         ]
       }
+      training_documents: {
+        Row: {
+          approved_at: string | null
+          approved_by: string | null
+          content_type: string
+          created_at: string | null
+          document_type: string
+          extracted_content: string | null
+          file_name: string
+          file_path: string
+          file_size: number
+          id: string
+          metadata: Json | null
+          status: string
+          tags: string[] | null
+          title: string
+          updated_at: string | null
+          uploaded_by: string | null
+          version: number
+        }
+        Insert: {
+          approved_at?: string | null
+          approved_by?: string | null
+          content_type: string
+          created_at?: string | null
+          document_type: string
+          extracted_content?: string | null
+          file_name: string
+          file_path: string
+          file_size: number
+          id?: string
+          metadata?: Json | null
+          status?: string
+          tags?: string[] | null
+          title: string
+          updated_at?: string | null
+          uploaded_by?: string | null
+          version?: number
+        }
+        Update: {
+          approved_at?: string | null
+          approved_by?: string | null
+          content_type?: string
+          created_at?: string | null
+          document_type?: string
+          extracted_content?: string | null
+          file_name?: string
+          file_path?: string
+          file_size?: number
+          id?: string
+          metadata?: Json | null
+          status?: string
+          tags?: string[] | null
+          title?: string
+          updated_at?: string | null
+          uploaded_by?: string | null
+          version?: number
+        }
+        Relationships: []
+      }
       user_preferences: {
         Row: {
           created_at: string
@@ -1493,6 +1553,17 @@ export type Database = {
           proj4text: string
           srid: number
           srtext: string
+        }[]
+      }
+      get_training_content: {
+        Args: { doc_type?: string }
+        Returns: {
+          content: string
+          document_type: string
+          id: string
+          metadata: Json
+          tags: string[]
+          title: string
         }[]
       }
       gettransactionid: {

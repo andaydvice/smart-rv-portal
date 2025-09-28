@@ -1,5 +1,6 @@
 
 project_id = "xsypxtfjffgihnmcjfgc"
+
 [functions.geocode-address]
 verify_jwt = false
 
@@ -7,4 +8,7 @@ verify_jwt = false
 verify_jwt = false
 
 [functions.enhanced-feature-matcher]
+verify_jwt = false
+
+[functions.document-processor]
 verify_jwt = false

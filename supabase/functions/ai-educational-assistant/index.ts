@@ -33,6 +33,21 @@ serve(async (req) => {
       timestamp: new Date().toISOString()
     });
 
+    // Load training content from database
+    let trainingContent = '';
+    try {
+      const { data: trainingData, error: trainingError } = await supabase
+        .rpc('get_training_content', { doc_type: 'knowledge_base' });
+      
+      if (!trainingError && trainingData) {
+        trainingContent = trainingData.map((doc: any) => 
+          `Title: ${doc.title}\nContent: ${doc.content}\nTags: ${doc.tags?.join(', ') || 'none'}\n---`
+        ).join('\n\n');
+      }
+    } catch (error) {
+      console.error('Error loading training content:', error);
+    }
+
     // System prompt ensures liability-free responses
     const systemPrompt = `You are an educational assistant for RV technology concepts. Your role is strictly educational - you help users understand technology concepts but never make recommendations, financial claims, or purchasing advice.
 
@@ -51,7 +66,10 @@ Response style:
 - End with "This is general educational information only. Please consult with RV professionals for specific advice regarding your situation."
 - Use phrases like "to help you understand" and "for educational purposes"
 
-Your goal is to educate users so they can make their own informed decisions.`;
+TRAINING CONTENT:
+${trainingContent}
+
+Your goal is to educate users so they can make their own informed decisions using the training content above for accurate information.`;
 
     const response = await fetch('https://api.openai.com/v1/chat/completions', {
       method: 'POST',

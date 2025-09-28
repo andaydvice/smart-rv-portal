@@ -12,32 +12,94 @@ const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS
 
 const supabase = createClient(supabaseUrl, supabaseKey);
 
-// Controlled feature database for liability-free matching
-const FEATURE_DATABASE = {
-  connectivity: [
-    { id: 'cellular-booster', name: 'Cellular Signal Booster', keywords: ['internet', 'cell', 'data', 'connectivity', 'remote work'], education: 'Amplifies cellular signals for better data connectivity' },
-    { id: 'wifi-extender', name: 'WiFi Range Extender', keywords: ['wifi', 'internet', 'campground', 'signal'], education: 'Extends WiFi range from campground or hotspot sources' },
-    { id: 'satellite-internet', name: 'Satellite Internet Ready', keywords: ['starlink', 'satellite', 'remote', 'internet'], education: 'Mounting and power provisions for satellite internet systems' }
-  ],
-  power: [
-    { id: 'solar-ready', name: 'Solar Panel Ready', keywords: ['solar', 'green', 'eco', 'battery', 'boondocking'], education: 'Pre-wiring and mounting points for solar panel installation' },
-    { id: 'lithium-battery', name: 'Lithium Battery System', keywords: ['battery', 'power', 'lightweight', 'fast charging'], education: 'Advanced battery technology for extended off-grid capability' },
-    { id: 'inverter-system', name: 'Pure Sine Wave Inverter', keywords: ['power', 'appliances', '120v', 'electronics'], education: 'Converts battery power to household-compatible AC power' }
-  ],
-  comfort: [
-    { id: 'climate-control', name: 'Smart Climate Control', keywords: ['temperature', 'comfort', 'hvac', 'energy efficient'], education: 'Automated temperature management for optimal comfort and efficiency' },
-    { id: 'led-lighting', name: 'LED Lighting System', keywords: ['lights', 'energy', 'efficient', 'bright'], education: 'Energy-efficient lighting throughout the RV' }
-  ],
-  safety: [
-    { id: 'monitoring-system', name: 'RV System Monitor', keywords: ['monitor', 'alerts', 'safety', 'systems'], education: 'Real-time monitoring of RV systems and alerts' },
-    { id: 'backup-camera', name: 'Backup Camera System', keywords: ['safety', 'driving', 'camera', 'visibility'], education: 'Enhanced visibility for safe maneuvering' }
-  ]
+// Define types
+interface Feature {
+  id: string;
+  name: string;
+  keywords: string[];
+  education: string;
+}
+
+interface FeatureDatabase {
+  connectivity: Feature[];
+  power: Feature[];
+  comfort: Feature[];
+  safety: Feature[];
+  [key: string]: Feature[];
+}
+
+// Load dynamic feature database from training documents
+let FEATURE_DATABASE: FeatureDatabase = {
+  connectivity: [],
+  power: [],
+  comfort: [],
+  safety: []
 };
+
+async function loadFeatureDatabase() {
+  try {
+    const { data: trainingData, error } = await supabase
+      .rpc('get_training_content', { doc_type: 'product_info' });
+    
+    if (!error && trainingData && trainingData.length > 0) {
+      // Build feature database from training documents
+      FEATURE_DATABASE = {
+        connectivity: [],
+        power: [],
+        comfort: [],
+        safety: []
+      };
+      
+      trainingData.forEach((doc: any) => {
+        const category = doc.tags?.find((tag: string) => 
+          ['connectivity', 'power', 'comfort', 'safety'].includes(tag.toLowerCase())
+        )?.toLowerCase() || 'general';
+        
+        if (FEATURE_DATABASE[category]) {
+          FEATURE_DATABASE[category].push({
+            id: doc.id,
+            name: doc.title,
+            keywords: doc.tags || [],
+            education: doc.content.substring(0, 200) + '...'
+          });
+        }
+      });
+    } else {
+      throw new Error('No training data available');
+    }
+  } catch (error) {
+    console.error('Error loading training content, using fallback:', error);
+    // Fallback to static database
+    FEATURE_DATABASE = {
+      connectivity: [
+        { id: 'cellular-booster', name: 'Cellular Signal Booster', keywords: ['internet', 'cell', 'data', 'connectivity', 'remote work'], education: 'Amplifies cellular signals for better data connectivity' },
+        { id: 'wifi-extender', name: 'WiFi Range Extender', keywords: ['wifi', 'internet', 'campground', 'signal'], education: 'Extends WiFi range from campground or hotspot sources' },
+        { id: 'satellite-internet', name: 'Satellite Internet Ready', keywords: ['starlink', 'satellite', 'remote', 'internet'], education: 'Mounting and power provisions for satellite internet systems' }
+      ],
+      power: [
+        { id: 'solar-ready', name: 'Solar Panel Ready', keywords: ['solar', 'green', 'eco', 'battery', 'boondocking'], education: 'Pre-wiring and mounting points for solar panel installation' },
+        { id: 'lithium-battery', name: 'Lithium Battery System', keywords: ['battery', 'power', 'lightweight', 'fast charging'], education: 'Advanced battery technology for extended off-grid capability' },
+        { id: 'inverter-system', name: 'Pure Sine Wave Inverter', keywords: ['power', 'appliances', '120v', 'electronics'], education: 'Converts battery power to household-compatible AC power' }
+      ],
+      comfort: [
+        { id: 'climate-control', name: 'Smart Climate Control', keywords: ['temperature', 'comfort', 'hvac', 'energy efficient'], education: 'Automated temperature management for optimal comfort and efficiency' },
+        { id: 'led-lighting', name: 'LED Lighting System', keywords: ['lights', 'energy', 'efficient', 'bright'], education: 'Energy-efficient lighting throughout the RV' }
+      ],
+      safety: [
+        { id: 'monitoring-system', name: 'RV System Monitor', keywords: ['monitor', 'alerts', 'safety', 'systems'], education: 'Real-time monitoring of RV systems and alerts' },
+        { id: 'backup-camera', name: 'Backup Camera System', keywords: ['safety', 'driving', 'camera', 'visibility'], education: 'Enhanced visibility for safe maneuvering' }
+      ]
+    };
+  }
+}
 
 serve(async (req) => {
   if (req.method === 'OPTIONS') {
     return new Response(null, { headers: corsHeaders });
   }
+
+  // Load feature database on each request to get latest content
+  await loadFeatureDatabase();
 
   try {
     const openAIApiKey = Deno.env.get('OPENAI_API_KEY');
@@ -93,8 +155,8 @@ Return ONLY a JSON object with this structure:
     }
 
     // Match features based on keywords
-    const matchedFeatures = [];
-    const allFeatures = Object.values(FEATURE_DATABASE).flat();
+    const matchedFeatures: any[] = [];
+    const allFeatures: Feature[] = Object.values(FEATURE_DATABASE).flat();
 
     for (const feature of allFeatures) {
       const keywordMatches = analysis.keywords.filter((keyword: string) => 
