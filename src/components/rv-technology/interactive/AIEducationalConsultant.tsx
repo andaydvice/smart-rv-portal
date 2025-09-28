@@ -88,7 +88,7 @@ export const AIEducationalConsultant = () => {
             <Shield className="h-6 w-6 text-green-500" />
           </div>
           <CardTitle className="text-white">RV Technology Educational Assistant</CardTitle>
-          <CardDescription className="text-connectivity-lightText">
+          <CardDescription className="text-[#E2E8FF]">
             AI-powered educational guidance for understanding RV technology concepts
           </CardDescription>
         </CardHeader>
@@ -122,7 +122,7 @@ export const AIEducationalConsultant = () => {
 
           <div className="space-y-4">
             <h3 className="text-white font-semibold">Important disclaimers:</h3>
-            <ul className="text-sm text-connectivity-lightText space-y-2">
+            <ul className="text-sm text-[#E2E8FF] space-y-2">
               <li>• All information is for educational purposes only</li>
               <li>• No recommendations or purchasing advice will be provided</li>
               <li>• Always consult with RV professionals for specific guidance</li>
@@ -149,14 +149,14 @@ export const AIEducationalConsultant = () => {
           <MessageCircle className="h-6 w-6 text-connectivity-accent" />
           <CardTitle className="text-white">RV Technology Educational Assistant</CardTitle>
         </div>
-        <CardDescription className="text-connectivity-lightText">
+        <CardDescription className="text-[#E2E8FF]">
           Ask questions about RV technology concepts for educational understanding
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
         <div className="h-96 overflow-y-auto space-y-4 p-4 bg-black/20 rounded-lg">
           {messages.length === 0 && (
-            <div className="text-center text-connectivity-lightText">
+            <div className="text-center text-[#E2E8FF]">
               <BookOpen className="h-12 w-12 mx-auto mb-4 text-connectivity-accent" />
               <p className="mb-2">Welcome to your educational technology consultant!</p>
               <p className="text-sm">Ask me about RV technology concepts like solar power, connectivity options, or battery systems.</p>
@@ -172,7 +172,7 @@ export const AIEducationalConsultant = () => {
                 className={`max-w-xs lg:max-w-md px-4 py-2 rounded-lg ${
                   message.role === 'user'
                     ? 'bg-connectivity-accent text-white'
-                    : 'bg-gray-700 text-connectivity-lightText'
+                    : 'bg-gray-700 text-[#E2E8FF]'
                 }`}
               >
                 <p className="text-sm">{message.content}</p>
@@ -192,7 +192,7 @@ export const AIEducationalConsultant = () => {
                     <div className="w-2 h-2 bg-connectivity-accent rounded-full"></div>
                     <div className="w-2 h-2 bg-connectivity-accent rounded-full"></div>
                   </div>
-                  <span className="text-sm text-connectivity-lightText">Thinking...</span>
+                  <span className="text-sm text-[#E2E8FF]">Thinking...</span>
                 </div>
               </div>
             </div>
@@ -201,7 +201,7 @@ export const AIEducationalConsultant = () => {
 
         <Alert className="border-connectivity-accent bg-connectivity-accent/10">
           <Shield className="h-4 w-4 text-connectivity-accent" />
-          <AlertDescription className="text-connectivity-lightText text-sm">
+          <AlertDescription className="text-[#E2E8FF] text-sm">
             Remember: This is educational information only. Always consult RV professionals for specific advice.
           </AlertDescription>
         </Alert>
