@@ -104,7 +104,7 @@ export const useAuthForm = ({ onSuccess, onError }: UseAuthFormProps) => {
 
     try {
       const { error } = await supabase.auth.resetPasswordForEmail(email, {
-        redirectTo: `${window.location.origin}/reset-password`,
+        redirectTo: `${window.location.origin}/dashboard`,
       });
 
       if (error) throw error;
@@ -169,11 +169,11 @@ export const useAuthForm = ({ onSuccess, onError }: UseAuthFormProps) => {
           
           // If we're on the production domain, always redirect to production
           if (currentOrigin.includes('smartrvhub.com')) {
-            return 'https://smartrvhub.com/auth';
+            return 'https://smartrvhub.com/dashboard';
           }
           
           // For development/preview environments, use current origin
-          return currentOrigin + '/auth';
+          return currentOrigin + '/dashboard';
         };
 
         const { error: signUpError } = await supabase.auth.signUp({

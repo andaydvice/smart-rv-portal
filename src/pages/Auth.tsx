@@ -19,7 +19,7 @@ const Auth = () => {
   
   console.log("Auth page - Current auth state:", { user: user?.email || 'No user', loading, authError });
 
-  const from = location.state?.from?.pathname || '/';
+  const from = location.state?.from?.pathname || '/dashboard';
   
   useEffect(() => {
     // Mark as initialized after first render to prevent flash of error state
