@@ -94,9 +94,9 @@ export const AIEducationalConsultant = () => {
 
       {/* Full Width Chat Interface */}
       <div className="bg-gradient-to-br from-[#091020] to-[#131a2a] border border-[#1a202c] rounded-lg p-8">
-        <div className="h-[600px] overflow-y-auto space-y-4 p-6 bg-black/20 rounded-lg mb-6">
+        <div className="min-h-[400px] max-h-[70vh] overflow-y-auto space-y-4 p-6 bg-black/20 rounded-lg mb-6 flex flex-col">
           {messages.length === 0 && (
-            <div className="text-center text-[#E2E8FF] py-24">
+            <div className="text-center text-[#E2E8FF] py-8 flex-1 flex flex-col justify-center">
               <BookOpen className="h-16 w-16 mx-auto mb-6 text-[#5B9BD5]" />
               <p className="text-xl mb-4">Welcome to your educational technology consultant!</p>
               <p className="text-lg">Ask me about RV technology concepts like solar power, connectivity options, or battery systems.</p>
