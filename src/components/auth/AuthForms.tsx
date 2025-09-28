@@ -5,6 +5,7 @@ import AuthErrorAlert from './AuthErrorAlert';
 import OtpPrompt from './OtpPrompt';
 import AuthHeader from './AuthHeader';
 import AuthFormFields from './AuthFormFields';
+import AuthSuccess from './AuthSuccess';
 
 interface AuthFormsProps {
   onSuccess?: () => void;
@@ -25,6 +26,8 @@ export const AuthForms = ({ onSuccess, onError }: AuthFormsProps) => {
     passwordStrength,
     error,
     showOtp,
+    showSuccessMessage,
+    setShowSuccessMessage,
     handleSubmit,
     handlePasswordReset,
     handleOtpVerify,
@@ -38,6 +41,19 @@ export const AuthForms = ({ onSuccess, onError }: AuthFormsProps) => {
         email={email}
         onVerify={handleOtpVerify}
         onCancel={handleCancelOtp}
+      />
+    );
+  }
+
+  // UI: show success message after signup
+  if (showSuccessMessage) {
+    return (
+      <AuthSuccess
+        email={email}
+        onBackToSignIn={() => {
+          setShowSuccessMessage(false);
+          setIsSignUp(false);
+        }}
       />
     );
   }

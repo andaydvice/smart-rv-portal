@@ -20,6 +20,7 @@ export const useAuthForm = ({ onSuccess, onError }: UseAuthFormProps) => {
   const [error, setError] = useState<string | null>(null);
   const [showOtp, setShowOtp] = useState(false);
   const [pendingOtpSession, setPendingOtpSession] = useState<any>(null);
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
   const { toast } = useToast();
 
   const { checkUserLockout, recordFailedAttempt, recordSuccessfulLogin, logSecurityEvent, LOCKOUT_THRESHOLD, LOCKOUT_MINUTES } = useLoginAttempt();
@@ -185,6 +186,11 @@ export const useAuthForm = ({ onSuccess, onError }: UseAuthFormProps) => {
         
         if (signUpError) throw signUpError;
         
+        // Clear form fields and show success message
+        setEmail("");
+        setPassword("");
+        setShowSuccessMessage(true);
+        
         toast({
           title: "Check your email",
           description: "We've sent you a verification link",
@@ -303,6 +309,8 @@ export const useAuthForm = ({ onSuccess, onError }: UseAuthFormProps) => {
     passwordStrength,
     error,
     showOtp,
+    showSuccessMessage,
+    setShowSuccessMessage,
     handleSubmit,
     handlePasswordReset,
     handleOtpVerify,
