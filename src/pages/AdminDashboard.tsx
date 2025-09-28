@@ -5,6 +5,7 @@ import { FileText, Upload, Settings, BarChart3 } from "lucide-react";
 import DocumentUpload from "@/components/admin/DocumentUpload";
 import DocumentManager from "@/components/admin/DocumentManager";
 import AdminSettings from "@/components/admin/AdminSettings";
+import AdminAnalytics from "@/components/admin/AdminAnalytics";
 
 const AdminDashboard = () => {
   return (
@@ -46,19 +47,7 @@ const AdminDashboard = () => {
           </TabsContent>
 
           <TabsContent value="analytics">
-            <Card>
-              <CardHeader>
-                <CardTitle>Training Document Analytics</CardTitle>
-                <CardDescription>
-                  Usage statistics and performance metrics for training documents
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="text-center py-8 text-muted-foreground">
-                  Analytics dashboard coming soon...
-                </div>
-              </CardContent>
-            </Card>
+            <AdminAnalytics />
           </TabsContent>
 
           <TabsContent value="settings">
