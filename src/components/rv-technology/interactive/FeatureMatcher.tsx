@@ -112,8 +112,21 @@ export const FeatureMatcher: React.FC = () => {
     : techFeatures;
 
   const generateRVTLink = () => {
-    const featureParams = Array.from(selectedFeatures).join(',');
-    return `https://www.rvt.com/buy/?features=${featureParams}`;
+    if (selectedFeatures.size === 0) return '#';
+    
+    // Map selected features to relevant RV types and generate working RVT.com URL
+    const featureArray = Array.from(selectedFeatures);
+    const hasHighTechFeatures = featureArray.some(feature => 
+      ['solar-panels', 'satellite-internet', 'wifi-booster', 'smart-rv-systems', 'lithium-batteries'].includes(feature)
+    );
+    
+    // For high-tech features, search for newer Class A and Class C RVs
+    if (hasHighTechFeatures) {
+      return 'https://www.rvt.com/buy/?q=(And.Year.range(2018..2025)._.RvType.inlist(Class%20A,Class%20C).)';
+    }
+    
+    // For other features, search for all newer RVs  
+    return 'https://www.rvt.com/buy/?q=(And.Year.range(2015..2025).)';
   };
 
   return (
