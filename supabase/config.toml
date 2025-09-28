@@ -1,17 +1,17 @@
 
 project_id = "xsypxtfjffgihnmcjfgc"
 
-[functions.geocode-address]
-verify_jwt = false
-
 [functions.ai-educational-assistant]
 verify_jwt = false
 
 [functions.enhanced-feature-matcher]
 verify_jwt = false
 
-[functions.document-processor]
+[functions.lifestyle-tech-analyzer]
 verify_jwt = false
 
-[functions.lifestyle-tech-analyzer]
+[functions.ai-technology-readiness]
+verify_jwt = false
+
+[functions.ai-technology-checklist]
 verify_jwt = false
