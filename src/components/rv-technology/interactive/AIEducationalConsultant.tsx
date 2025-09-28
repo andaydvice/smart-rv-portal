@@ -96,7 +96,8 @@ export const AIEducationalConsultant = () => {
           <Alert className="border-yellow-500 bg-yellow-500/10">
             <AlertTriangle className="h-4 w-4 text-yellow-500" />
             <AlertDescription className="text-yellow-200">
-              <strong>Educational Use Only</strong> - This assistant provides educational information about RV technology concepts. 
+              <strong>Educational Use Only</strong> - This assistant provides educational information about RV technology concepts.
+              <br />
               <br />
               It does not make recommendations, give financial advice, or provide purchasing guidance.
             </AlertDescription>
