@@ -39,25 +39,37 @@ const RVTechnologyGuide = () => {
         {/* Header Image */}
         <RVTechnologyHeader />
 
-        {/* Hero Section */}
-        <section className="py-16 px-4">
+        {/* Hero Section with Enhanced Visuals */}
+        <section className="py-16 px-4 relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-r from-[#5B9BD5]/5 via-transparent to-[#5B9BD5]/5" />
           <Container>
-            <div className="max-w-4xl mx-auto text-center">
-              <div className="flex justify-center mb-6">
-                <div className="p-4 bg-[#5B9BD5]/10 rounded-full">
-                  <Cpu className="h-12 w-12 text-[#5B9BD5]" />
+            <div className="max-w-4xl mx-auto text-center relative z-10">
+              <div className="flex justify-center mb-8 animate-fade-in">
+                <div className="relative group">
+                  <div className="absolute -inset-4 bg-gradient-to-r from-[#5B9BD5]/30 to-[#60A5FA]/30 rounded-full blur-xl group-hover:blur-2xl transition-all duration-500" />
+                  <div className="relative p-6 bg-gradient-to-br from-[#5B9BD5]/20 to-[#60A5FA]/20 rounded-full border border-[#5B9BD5]/30 backdrop-blur-sm hover:scale-110 transition-transform duration-300">
+                    <Cpu className="h-16 w-16 text-[#5B9BD5] animate-pulse" />
+                  </div>
                 </div>
               </div>
-              <p className="text-xl md:text-2xl text-[#E2E8FF] mb-8 leading-relaxed">
+              
+              <div className="mb-6 space-y-2">
+                <div className="h-1 w-24 bg-gradient-to-r from-[#5B9BD5] to-[#60A5FA] mx-auto rounded-full" />
+                <div className="h-0.5 w-12 bg-[#5B9BD5]/50 mx-auto rounded-full" />
+              </div>
+              
+              <p className="text-xl md:text-2xl text-[#E2E8FF] mb-10 leading-relaxed animate-fade-in" style={{ animationDelay: '0.2s' }}>
                 Your comprehensive guide to navigating the complex world of RV technology features and making informed purchasing decisions.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              
+              <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in" style={{ animationDelay: '0.4s' }}>
                 <ExternalLinkButton 
                   href="https://www.rvt.com/buy/" 
                   variant="default" 
                   size="lg"
-                  className="text-lg"
+                  className="text-lg bg-gradient-to-r from-[#5B9BD5] to-[#60A5FA] hover:from-[#4B8FE3] hover:to-[#5B9BD5] transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-[#5B9BD5]/25"
                 >
+                  <Zap className="mr-2 h-5 w-5" />
                   Research Current Options
                 </ExternalLinkButton>
               </div>
@@ -65,27 +77,62 @@ const RVTechnologyGuide = () => {
           </Container>
         </section>
 
-        {/* Introduction */}
-        <section className="py-16 px-4">
+        {/* Introduction with Enhanced Design */}
+        <section className="py-16 px-4 relative">
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#151A22]/20 to-transparent" />
           <Container>
-            <div className="max-w-4xl mx-auto">
-              <h2 className="text-3xl md:text-4xl font-bold mb-8 text-white">Introduction: How RV Technology Has Evolved</h2>
-              <div className="prose prose-invert prose-lg max-w-none">
-                <p className="text-[#E2E8FF] text-lg leading-relaxed mb-6">
-                  The recreational vehicle industry has seen significant technological advancement over the past decade.
-                </p>
-                <p className="text-[#E2E8FF] text-lg leading-relaxed mb-6">
-                  Modern RVs increasingly offer connectivity solutions, power management systems, and digital control interfaces that were uncommon in earlier models.
-                </p>
-                <p className="text-[#E2E8FF] text-lg leading-relaxed mb-8">
-                  This educational guide helps potential RV buyers understand technology categories and learn what questions to ask when evaluating different options.
-                </p>
+            <div className="max-w-4xl mx-auto relative z-10">
+              <div className="text-center mb-12">
+                <div className="inline-flex items-center gap-3 mb-6">
+                  <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#5B9BD5]" />
+                  <Monitor className="h-8 w-8 text-[#5B9BD5]" />
+                  <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#5B9BD5]" />
+                </div>
+                <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white bg-gradient-to-r from-white to-[#E2E8FF] bg-clip-text text-transparent">
+                  Introduction: How RV Technology Has Evolved
+                </h2>
+              </div>
+              
+              <div className="grid gap-8">
+                <div className="bg-gradient-to-br from-[#091020] to-[#151A22] p-8 rounded-2xl border border-[#5B9BD5]/20 shadow-xl hover:shadow-[#5B9BD5]/10 transition-all duration-300 hover:border-[#5B9BD5]/40">
+                  <div className="space-y-6">
+                    <div className="flex items-start gap-4">
+                      <div className="p-2 bg-[#5B9BD5]/20 rounded-lg">
+                        <Signal className="h-6 w-6 text-[#5B9BD5]" />
+                      </div>
+                      <p className="text-[#E2E8FF] text-lg leading-relaxed">
+                        The recreational vehicle industry has seen significant technological advancement over the past decade.
+                      </p>
+                    </div>
+                    
+                    <div className="flex items-start gap-4">
+                      <div className="p-2 bg-[#60A5FA]/20 rounded-lg">
+                        <Smartphone className="h-6 w-6 text-[#60A5FA]" />
+                      </div>
+                      <p className="text-[#E2E8FF] text-lg leading-relaxed">
+                        Modern RVs increasingly offer connectivity solutions, power management systems, and digital control interfaces that were uncommon in earlier models.
+                      </p>
+                    </div>
+                    
+                    <div className="flex items-start gap-4">
+                      <div className="p-2 bg-[#5B9BD5]/20 rounded-lg">
+                        <Shield className="h-6 w-6 text-[#5B9BD5]" />
+                      </div>
+                      <p className="text-[#E2E8FF] text-lg leading-relaxed">
+                        This educational guide helps potential RV buyers understand technology categories and learn what questions to ask when evaluating different options.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                
                 <div className="text-center">
                   <ExternalLinkButton 
                     href="https://www.rvt.com/buy/" 
                     variant="outline" 
                     size="md"
+                    className="border-[#5B9BD5]/50 text-[#5B9BD5] hover:bg-[#5B9BD5]/10 hover:border-[#5B9BD5] transition-all duration-300"
                   >
+                    <Wifi className="mr-2 h-4 w-4" />
                     Browse available RV inventory at RVT.com
                   </ExternalLinkButton>
                 </div>
@@ -103,17 +150,25 @@ const RVTechnologyGuide = () => {
               <div className="mb-12">
                 
                 <div className="grid md:grid-cols-3 gap-6 mb-12">
-                  <div className="bg-[#091020] p-6 rounded-lg">
-                    <h4 className="text-xl font-semibold text-white mb-4">WiFi Signal Enhancement</h4>
+                  <div className="group bg-gradient-to-br from-[#091020] to-[#151A22] p-6 rounded-xl border border-[#5B9BD5]/20 hover:border-[#5B9BD5]/40 transition-all duration-300 hover:shadow-lg hover:shadow-[#5B9BD5]/10 hover:-translate-y-1">
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="p-2 bg-[#5B9BD5]/20 rounded-lg group-hover:bg-[#5B9BD5]/30 transition-colors duration-300">
+                        <Wifi className="h-6 w-6 text-[#5B9BD5]" />
+                      </div>
+                      <h4 className="text-xl font-semibold text-white">WiFi Signal Enhancement</h4>
+                    </div>
                     <p className="text-[#E2E8FF] mb-4 leading-relaxed">
                       Most newer RVs include some form of WiFi signal boosting capability.
                     </p>
-                    <p className="text-[#E2E8FF] leading-relaxed">
+                    <p className="text-[#E2E8FF] leading-relaxed mb-4">
                       These systems typically use external antennas to improve reception from campground networks or cellular data.
                     </p>
-                    <div className="mt-4 space-y-2">
-                      <h5 className="font-semibold text-white">Questions to ask dealers:</h5>
-                      <ul className="text-[#E2E8FF] text-sm space-y-1">
+                    <div className="mt-4 space-y-2 p-4 bg-[#5B9BD5]/5 rounded-lg border-l-4 border-[#5B9BD5]/50">
+                      <h5 className="font-semibold text-white flex items-center gap-2">
+                        <CheckCircle className="h-4 w-4 text-[#5B9BD5]" />
+                        Questions to ask dealers:
+                      </h5>
+                      <ul className="text-[#E2E8FF] text-sm space-y-1 ml-6">
                         <li>• What type of antenna system is included?</li>
                         <li>• Does the system support multiple device connections?</li>
                         <li>• How does the system handle signal switching between sources?</li>
@@ -121,17 +176,25 @@ const RVTechnologyGuide = () => {
                     </div>
                   </div>
 
-                  <div className="bg-[#091020] p-6 rounded-lg">
-                    <h4 className="text-xl font-semibold text-white mb-4">Cellular Data Integration</h4>
+                  <div className="group bg-gradient-to-br from-[#091020] to-[#151A22] p-6 rounded-xl border border-[#60A5FA]/20 hover:border-[#60A5FA]/40 transition-all duration-300 hover:shadow-lg hover:shadow-[#60A5FA]/10 hover:-translate-y-1">
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="p-2 bg-[#60A5FA]/20 rounded-lg group-hover:bg-[#60A5FA]/30 transition-colors duration-300">
+                        <Smartphone className="h-6 w-6 text-[#60A5FA]" />
+                      </div>
+                      <h4 className="text-xl font-semibold text-white">Cellular Data Integration</h4>
+                    </div>
                     <p className="text-[#E2E8FF] mb-4 leading-relaxed">
                       Many manufacturers now offer factory-installed cellular capabilities.
                     </p>
-                    <p className="text-[#E2E8FF] leading-relaxed">
+                    <p className="text-[#E2E8FF] leading-relaxed mb-4">
                       These systems may include built-in modems and data plans from various carriers.
                     </p>
-                    <div className="mt-4 space-y-2">
-                      <h5 className="font-semibold text-white">Questions to explore with dealers:</h5>
-                      <ul className="text-[#E2E8FF] text-sm space-y-1">
+                    <div className="mt-4 space-y-2 p-4 bg-[#60A5FA]/5 rounded-lg border-l-4 border-[#60A5FA]/50">
+                      <h5 className="font-semibold text-white flex items-center gap-2">
+                        <CheckCircle className="h-4 w-4 text-[#60A5FA]" />
+                        Questions to explore with dealers:
+                      </h5>
+                      <ul className="text-[#E2E8FF] text-sm space-y-1 ml-6">
                         <li>• Which cellular carriers are supported?</li>
                         <li>• What are the ongoing data plan costs and options?</li>
                         <li>• Can the system be used while driving?</li>
@@ -139,17 +202,25 @@ const RVTechnologyGuide = () => {
                     </div>
                   </div>
 
-                  <div className="bg-[#091020] p-6 rounded-lg">
-                    <h4 className="text-xl font-semibold text-white mb-4">Satellite Internet Preparation</h4>
+                  <div className="group bg-gradient-to-br from-[#091020] to-[#151A22] p-6 rounded-xl border border-[#5B9BD5]/20 hover:border-[#5B9BD5]/40 transition-all duration-300 hover:shadow-lg hover:shadow-[#5B9BD5]/10 hover:-translate-y-1">
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="p-2 bg-[#5B9BD5]/20 rounded-lg group-hover:bg-[#5B9BD5]/30 transition-colors duration-300">
+                        <Signal className="h-6 w-6 text-[#5B9BD5]" />
+                      </div>
+                      <h4 className="text-xl font-semibold text-white">Satellite Internet Preparation</h4>
+                    </div>
                     <p className="text-[#E2E8FF] mb-4 leading-relaxed">
                       Some models include preparation for satellite internet systems like Starlink.
                     </p>
-                    <p className="text-[#E2E8FF] leading-relaxed">
+                    <p className="text-[#E2E8FF] leading-relaxed mb-4">
                       This typically means pre-installed mounting points and cable routing.
                     </p>
-                    <div className="mt-4 space-y-2">
-                      <h5 className="font-semibold text-white">Consider asking:</h5>
-                      <ul className="text-[#E2E8FF] text-sm space-y-1">
+                    <div className="mt-4 space-y-2 p-4 bg-[#5B9BD5]/5 rounded-lg border-l-4 border-[#5B9BD5]/50">
+                      <h5 className="font-semibold text-white flex items-center gap-2">
+                        <CheckCircle className="h-4 w-4 text-[#5B9BD5]" />
+                        Consider asking:
+                      </h5>
+                      <ul className="text-[#E2E8FF] text-sm space-y-1 ml-6">
                         <li>• What satellite systems are supported?</li>
                         <li>• What additional equipment would be needed?</li>
                         <li>• Are installation services available?</li>
@@ -163,7 +234,9 @@ const RVTechnologyGuide = () => {
                     href="https://www.rvt.com/buy/" 
                     variant="default" 
                     size="lg"
+                    className="bg-gradient-to-r from-[#5B9BD5] to-[#60A5FA] hover:from-[#4B8FE3] hover:to-[#5B9BD5] transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-[#5B9BD5]/25"
                   >
+                    <Wifi className="mr-2 h-5 w-5" />
                     Explore Connectivity Options
                   </ExternalLinkButton>
                 </div>
