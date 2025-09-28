@@ -868,9 +868,9 @@ const RVTechnologyGuide = () => {
                         <Play className="w-6 h-6 text-[#5B9BD5] group-hover:scale-110 transition-transform duration-300" />
                         <h4 className="text-lg font-semibold text-white group-hover:text-[#5B9BD5] transition-colors duration-300">Dealer Demonstrations</h4>
                       </div>
-                      <p className="text-[#E2E8FF]/90 leading-relaxed">
-                        Hands-on experience with systems can reveal usability and interface design.
-                      </p>
+                       <p className="text-[#E2E8FF]/90 leading-relaxed">
+                        Hands On Experience
+                       </p>
                     </div>
                   </div>
                 </div>
@@ -970,7 +970,8 @@ const RVTechnologyGuide = () => {
                   Planning for Technology Needs
                 </h2>
                 <p className="text-lg text-[#E2E8FF]/80 max-w-2xl mx-auto">
-                  Strategic planning ensures your technology investment aligns with your RV lifestyle
+                  Strategic planning ensures your technology investment <br />
+                  aligns with your RV lifestyle
                 </p>
               </div>
 
@@ -1233,7 +1234,7 @@ const RVTechnologyGuide = () => {
                     </div>
 
                     <div className="bg-[#091020] p-6 rounded-lg">
-                      <h4 className="text-lg font-semibold text-white mb-3">Hands-On Experience</h4>
+                      <h4 className="text-lg font-semibold text-white mb-3">Hands On Experience</h4>
                       <p className="text-[#E2E8FF] leading-relaxed">
                         Prioritise opportunities to actually use systems rather than just hearing descriptions.
                       </p>
