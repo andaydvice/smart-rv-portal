@@ -29,6 +29,7 @@ import { TechnologyChecklist } from '@/components/rv-technology/interactive/Tech
 import { LifestylePlanner } from '@/components/rv-technology/interactive/LifestylePlanner';
 import { RVTechNavigation } from '@/components/rv-technology/RVTechNavigation';
 import { RVTechSummary } from '@/components/rv-technology/RVTechSummary';
+import { ScrollToTopButton } from '@/components/rv-technology/ScrollToTopButton';
 
 const RVTechnologyGuide = () => {
   return (
@@ -1469,7 +1470,8 @@ const RVTechnologyGuide = () => {
           </Container>
         </section>
         </div>
-
+        
+        <ScrollToTopButton />
       </div>
     </>
   );
