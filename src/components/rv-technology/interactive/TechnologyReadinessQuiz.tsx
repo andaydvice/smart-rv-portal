@@ -98,7 +98,7 @@ const quizResults: Record<string, QuizResult> = {
     features: [
       'Full home automation and smartphone control',
       'Advanced solar and lithium battery systems',
-      'High-speed internet and connectivity solutions',
+      'High speed internet and connectivity solutions',
       'Comprehensive monitoring and alert systems'
     ],
     rvtLink: 'https://www.rvt.com/buy/?filter=premium-technology'

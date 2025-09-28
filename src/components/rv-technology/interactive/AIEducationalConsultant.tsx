@@ -62,7 +62,7 @@ export const AIEducationalConsultant = () => {
       const errorMessage: Message = {
         id: (Date.now() + 1).toString(),
         role: 'assistant',
-        content: 'I apologize, but the educational assistant is temporarily unavailable. For RV technology guidance, please consult with dealers or RV professionals who can provide hands-on demonstrations and specific advice.',
+        content: 'I apologize, but the educational assistant is temporarily unavailable. For RV technology guidance, please consult with dealers or RV professionals who can provide hands on demonstrations and specific advice.',
         timestamp: new Date()
       };
 
@@ -89,7 +89,7 @@ export const AIEducationalConsultant = () => {
           </div>
           <CardTitle className="text-white">RV Technology Educational Assistant</CardTitle>
           <CardDescription className="text-[#E2E8FF]">
-            AI-powered educational guidance for understanding RV technology concepts
+            AI powered educational guidance for understanding RV technology concepts
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-6">

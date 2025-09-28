@@ -30,7 +30,7 @@ const lifestyleScenarios: LifestyleScenario[] = [
       {
         category: 'Connectivity',
         features: [
-          'High-speed internet capability (cellular boosters, WiFi prep)',
+          'High speed internet capability (cellular boosters, WiFi prep)',
           'Multiple device charging stations',
           'External antenna mounting points'
         ]
@@ -99,15 +99,15 @@ const lifestyleScenarios: LifestyleScenario[] = [
   },
   {
     id: 'off-grid',
-    title: 'Off-Grid & Boondocking',
-    description: 'Explore remote locations with self-sufficient power and water systems',
+    title: 'Off Grid & Boondocking',
+    description: 'Explore remote locations with self sufficient power and water systems',
     icon: <Mountain className="h-8 w-8" />,
     techNeeds: [
       {
         category: 'Power Independence',
         features: [
           'Large solar array capacity',
-          'High-capacity lithium battery bank',
+          'High capacity lithium battery bank',
           'Efficient inverter system'
         ]
       },
@@ -131,20 +131,20 @@ const lifestyleScenarios: LifestyleScenario[] = [
     rvSuggestions: [
       'Class B vans with solar packages',
       'Truck campers for remote access',
-      'Small travel trailers with off-grid packages'
+      'Small travel trailers with off grid packages'
     ],
     rvtFilter: 'https://www.rvt.com/buy/'
   },
   {
     id: 'full-time',
-    title: 'Full-Time Living',
-    description: 'Make your RV a comfortable permanent home with residential-quality features',
+    title: 'Full Time Living',
+    description: 'Make your RV a comfortable permanent home with residential quality features',
     icon: <Home className="h-8 w-8" />,
     techNeeds: [
       {
         category: 'Residential Comfort',
         features: [
-          'Full-size appliances with smart features',
+          'Full size appliances with smart features',
           'Residential furniture and fixtures',
           'Advanced climate control systems'
         ]
@@ -152,7 +152,7 @@ const lifestyleScenarios: LifestyleScenario[] = [
       {
         category: 'Connectivity & Work',
         features: [
-          'Professional-grade internet setup',
+          'Professional grade internet setup',
           'Dedicated office space with tech integration',
           'Multiple communication options'
         ]

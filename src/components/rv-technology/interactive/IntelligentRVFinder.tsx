@@ -118,7 +118,7 @@ export default function IntelligentRVFinder() {
           Intelligent RV Finder
         </CardTitle>
         <p className="text-[#E2E8FF]">
-          Tell us about your RV needs and get AI-powered recommendations with real search results
+          Tell us about your RV needs and get AI powered recommendations with real search results
         </p>
       </CardHeader>
       <CardContent className="space-y-6 bg-gradient-to-br from-[#091020] to-[#131a2a] p-6">
@@ -269,7 +269,7 @@ export default function IntelligentRVFinder() {
           ) : (
             <>
               <Brain className="h-4 w-4 mr-2" />
-              Get AI-Powered RV Recommendations
+              Get AI Powered RV Recommendations
             </>
           )}
         </Button>

@@ -16,7 +16,7 @@ export const RVTechSummary = () => {
     {
       icon: <BookOpen className="h-5 w-5" />,
       title: '12 Major Sections',
-      description: 'Comprehensive coverage from basics to advanced decision-making'
+      description: 'Comprehensive coverage from basics to advanced decision making'
     },
     {
       icon: <CheckCircle2 className="h-5 w-5" />,
