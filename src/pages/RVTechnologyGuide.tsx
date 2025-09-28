@@ -182,20 +182,20 @@ const RVTechnologyGuide = () => {
 
                 <div className="grid md:grid-cols-3 gap-6 mb-12">
                   <div className="bg-[#091020] p-6 rounded-lg">
-                    <h4 className="text-xl font-semibold text-white mb-4">Traditional Lead-Acid Systems</h4>
-                    <p className="text-[#E2E8FF] mb-4 leading-relaxed">
-                      Entry-level RVs typically include lead-acid or AGM battery systems.
-                    </p>
+                     <h4 className="text-xl font-semibold text-white mb-4">Traditional Lead Acid Systems</h4>
+                     <p className="text-[#E2E8FF] mb-4 leading-relaxed">
+                       Entry level RVs typically include lead acid or AGM battery systems.
+                     </p>
                     <p className="text-[#E2E8FF] leading-relaxed">
                       These provide basic power storage with established charging patterns.
                     </p>
                   </div>
 
                   <div className="bg-[#091020] p-6 rounded-lg">
-                    <h4 className="text-xl font-semibold text-white mb-4">Lithium Battery Integration</h4>
-                    <p className="text-[#E2E8FF] mb-4 leading-relaxed">
-                      Higher-end models increasingly feature lithium battery systems.
-                    </p>
+                     <h4 className="text-xl font-semibold text-white mb-4">Lithium Battery Integration</h4>
+                     <p className="text-[#E2E8FF] mb-4 leading-relaxed">
+                       Higher end models increasingly feature lithium battery systems.
+                     </p>
                     <p className="text-[#E2E8FF] leading-relaxed">
                       These generally offer longer cycle life and faster charging capabilities.
                     </p>
@@ -254,14 +254,14 @@ const RVTechnologyGuide = () => {
                   <div className="bg-[#091020] p-6 rounded-lg">
                     <div className="flex items-center mb-4">
                       <CheckCircle className="h-6 w-6 text-green-400 mr-3" />
-                      <h4 className="text-xl font-semibold text-white">Actually Available in Most 2025 Models</h4>
-                    </div>
-                    <ul className="text-[#E2E8FF] space-y-2">
-                      <li>• Mobile app control (varying reliability)</li>
-                      <li>• Remote monitoring (premium models)</li>
-                      <li>• Tank and battery monitoring (standard)</li>
-                      <li>• Basic climate control automation</li>
-                      <li>• GPS tracking (select models)</li>
+                       <h4 className="text-xl font-semibold text-white">Actually Available in Most 2025 Models</h4>
+                     </div>
+                     <ul className="text-[#E2E8FF] space-y-2">
+                       <li>• Mobile app control (varying reliability)</li>
+                       <li>• Remote monitoring (premium models)</li>
+                       <li>• Tank and battery monitoring (standard)</li>
+                       <li>• Basic climate control automation</li>
+                       <li>• GPS tracking (select models)</li>
                     </ul>
                   </div>
 
@@ -270,13 +270,13 @@ const RVTechnologyGuide = () => {
                       <AlertTriangle className="h-6 w-6 text-yellow-400 mr-3" />
                       <h4 className="text-xl font-semibold text-white">Marketing Claims vs Reality</h4>
                     </div>
-                    <ul className="text-[#E2E8FF] space-y-2">
-                      <li>• Voice control integration (minimal actual implementation)</li>
-                      <li>• Advanced AI automation (basic at best)</li>
-                      <li>• Smart home integration (very limited)</li>
-                      <li>• Predictive maintenance (not widely available)</li>
-                      <li>• Advanced security features (mostly basic encryption)</li>
-                    </ul>
+                     <ul className="text-[#E2E8FF] space-y-2">
+                       <li>• Voice control integration (minimal actual implementation)</li>
+                       <li>• Advanced AI automation (basic at best)</li>
+                       <li>• Smart home integration (very limited)</li>
+                       <li>• Predictive maintenance (not widely available)</li>
+                       <li>• Advanced security features (mostly basic encryption)</li>
+                     </ul>
                   </div>
                 </div>
 
@@ -289,9 +289,9 @@ const RVTechnologyGuide = () => {
                       <p className="text-[#E2E8FF] mb-4 leading-relaxed">
                         Standard RVs typically include touchscreen interfaces for basic functions.
                       </p>
-                      <p className="text-[#E2E8FF] leading-relaxed">
-                        These may control lighting, slide-outs, and awning operation.
-                      </p>
+                       <p className="text-[#E2E8FF] leading-relaxed">
+                         These may control lighting, slide outs, and awning operation.
+                       </p>
                     </div>
 
                     <div className="bg-[#091020] p-6 rounded-lg">
@@ -348,43 +348,43 @@ const RVTechnologyGuide = () => {
               <div className="mb-12">
 
                 <div className="grid lg:grid-cols-2 gap-8">
-                  <div className="bg-[#091020] p-6 rounded-lg">
-                    <h4 className="text-xl font-semibold text-white mb-4">Tech Enthusiast</h4>
-                    <div className="space-y-3">
-                      <p className="text-[#E2E8FF]"><strong>Technology Research Focus:</strong> Latest Available Features</p>
-                      <p className="text-[#E2E8FF]"><strong>Features to Prioritise:</strong> Connectivity, automation, integration</p>
-                      <p className="text-[#E2E8FF]"><strong>Manufacturer Research Areas:</strong> Premium manufacturers</p>
-                      <p className="text-[#E2E8FF]"><strong>Research Budget Range:</strong> $150K+</p>
+                   <div className="bg-[#091020] p-6 rounded-lg">
+                     <h4 className="text-xl font-semibold text-white mb-4">Tech Enthusiast</h4>
+                     <div className="space-y-3">
+                       <p className="text-[#E2E8FF]"><strong>Technology Research Focus:</strong> Latest Available Features</p>
+                       <p className="text-[#E2E8FF]"><strong>Features to Prioritise:</strong> Connectivity, automation, integration</p>
+                       <p className="text-[#E2E8FF]"><strong>Manufacturer Research Areas:</strong> Premium manufacturers</p>
+                       <p className="text-[#E2E8FF]"><strong>Research Budget Range:</strong> $150K+</p>
                     </div>
                   </div>
 
                   <div className="bg-[#091020] p-6 rounded-lg">
                     <h4 className="text-xl font-semibold text-white mb-4">Family Safety Focus</h4>
                     <div className="space-y-3">
-                      <p className="text-[#E2E8FF]"><strong>Technology Research Focus:</strong> Proven, reliable systems</p>
-                      <p className="text-[#E2E8FF]"><strong>Features to Prioritise:</strong> Monitoring, basic smart controls</p>
-                      <p className="text-[#E2E8FF]"><strong>Manufacturer Research Areas:</strong> Established brands with support</p>
-                      <p className="text-[#E2E8FF]"><strong>Research Budget Range:</strong> $80K-150K</p>
+                       <p className="text-[#E2E8FF]"><strong>Technology Research Focus:</strong> Proven, reliable systems</p>
+                       <p className="text-[#E2E8FF]"><strong>Features to Prioritise:</strong> Monitoring, basic smart controls</p>
+                       <p className="text-[#E2E8FF]"><strong>Manufacturer Research Areas:</strong> Established brands with support</p>
+                       <p className="text-[#E2E8FF]"><strong>Research Budget Range:</strong> $80K–150K</p>
                     </div>
                   </div>
 
                   <div className="bg-[#091020] p-6 rounded-lg">
                     <h4 className="text-xl font-semibold text-white mb-4">Budget Conscious</h4>
                     <div className="space-y-3">
-                      <p className="text-[#E2E8FF]"><strong>Technology Research Focus:</strong> Essential functions</p>
-                      <p className="text-[#E2E8FF]"><strong>Features to Prioritise:</strong> Core features, manual backups</p>
-                      <p className="text-[#E2E8FF]"><strong>Manufacturer Research Areas:</strong> Value-focused manufacturers</p>
-                      <p className="text-[#E2E8FF]"><strong>Research Budget Range:</strong> $40K-80K</p>
+                       <p className="text-[#E2E8FF]"><strong>Technology Research Focus:</strong> Essential functions</p>
+                       <p className="text-[#E2E8FF]"><strong>Features to Prioritise:</strong> Core features, manual backups</p>
+                       <p className="text-[#E2E8FF]"><strong>Manufacturer Research Areas:</strong> Value focused manufacturers</p>
+                       <p className="text-[#E2E8FF]"><strong>Research Budget Range:</strong> $40K–80K</p>
                     </div>
                   </div>
 
                   <div className="bg-[#091020] p-6 rounded-lg">
                     <h4 className="text-xl font-semibold text-white mb-4">Luxury Comfort</h4>
                     <div className="space-y-3">
-                      <p className="text-[#E2E8FF]"><strong>Technology Research Focus:</strong> Premium integration</p>
-                      <p className="text-[#E2E8FF]"><strong>Features to Prioritise:</strong> Automated systems, premium support</p>
-                      <p className="text-[#E2E8FF]"><strong>Manufacturer Research Areas:</strong> Luxury manufacturers</p>
-                      <p className="text-[#E2E8FF]"><strong>Research Budget Range:</strong> $200K+</p>
+                       <p className="text-[#E2E8FF]"><strong>Technology Research Focus:</strong> Premium integration</p>
+                       <p className="text-[#E2E8FF]"><strong>Features to Prioritise:</strong> Automated systems, premium support</p>
+                       <p className="text-[#E2E8FF]"><strong>Manufacturer Research Areas:</strong> Luxury manufacturers</p>
+                       <p className="text-[#E2E8FF]"><strong>Research Budget Range:</strong> $200K+</p>
                     </div>
                   </div>
                 </div>
@@ -401,27 +401,27 @@ const RVTechnologyGuide = () => {
                   <div className="bg-[#091020] p-6 rounded-lg">
                     <h4 className="text-xl font-semibold text-white mb-4">Connectivity Research Questions:</h4>
                     <ul className="text-[#E2E8FF] space-y-2">
-                      <li>• Need reliable internet for work? → Research dual-carrier 4G LTE + satellite preparation options</li>
-                      <li>• Casual social media use? → Research basic WiFi enhancement systems</li>
-                      <li>• International travel? → Research premium models with multi-carrier capabilities</li>
+                       <li>• Need reliable internet for work? → Research dual carrier 4G LTE + satellite preparation options</li>
+                       <li>• Casual social media use? → Research basic WiFi enhancement systems</li>
+                       <li>• International travel? → Research premium models with multi carrier capabilities</li>
                     </ul>
                   </div>
 
                   <div className="bg-[#091020] p-6 rounded-lg">
                     <h4 className="text-xl font-semibold text-white mb-4">Power Management Research Questions:</h4>
                     <ul className="text-[#E2E8FF] space-y-2">
-                      <li>• Extended off-grid camping? → Research lithium + large solar array combinations</li>
-                      <li>• Mostly campground stays? → Research standard power systems</li>
-                      <li>• Full-time living? → Research advanced battery monitoring and management</li>
+                       <li>• Extended off grid camping? → Research lithium + large solar array combinations</li>
+                       <li>• Mostly campground stays? → Research standard power systems</li>
+                       <li>• Full time living? → Research advanced battery monitoring and management</li>
                     </ul>
                   </div>
 
                   <div className="bg-[#091020] p-6 rounded-lg">
                     <h4 className="text-xl font-semibold text-white mb-4">Control System Research Questions:</h4>
                     <ul className="text-[#E2E8FF] space-y-2">
-                      <li>• Tech-savvy family? → Research available automation options (note: voice control not widely available)</li>
-                      <li>• Simple operation preferred? → Research digital controls with manual backups</li>
-                      <li>• Smart home integration? → Research available APIs (note: very limited options currently)</li>
+                       <li>• Tech savvy family? → Research available automation options (note: voice control not widely available)</li>
+                       <li>• Simple operation preferred? → Research digital controls with manual backups</li>
+                       <li>• Smart home integration? → Research available APIs (note: very limited options currently)</li>
                     </ul>
                   </div>
                 </div>
@@ -521,23 +521,23 @@ const RVTechnologyGuide = () => {
                 </div>
 
                 <div className="bg-[#091020] p-6 rounded-lg border border-gray-700">
-                  <h3 className="text-xl font-semibold text-white mb-4">Class B/C Motorhomes</h3>
-                  <p className="text-gray-300 mb-4 leading-relaxed">
-                    Smaller motorhomes typically focus on efficient space utilisation.
-                  </p>
-                  <p className="text-gray-300 leading-relaxed">
-                    Technology integration may prioritise essential functions over luxury features.
-                  </p>
+                 <h3 className="text-xl font-semibold text-white mb-4">Class B/C Motorhomes</h3>
+                 <p className="text-gray-300 mb-4 leading-relaxed">
+                   Smaller motorhomes typically focus on efficient space utilisation.
+                 </p>
+                 <p className="text-gray-300 leading-relaxed">
+                   Technology integration may prioritise essential functions over luxury features.
+                 </p>
                 </div>
 
                 <div className="bg-[#091020] p-6 rounded-lg border border-gray-700">
-                  <h3 className="text-xl font-semibold text-white mb-4">Travel Trailers and Fifth Wheels</h3>
-                  <p className="text-gray-300 mb-4 leading-relaxed">
-                    Towable RVs increasingly offer technology packages comparable to motorhomes.
-                  </p>
-                  <p className="text-gray-300 leading-relaxed">
-                    Power management becomes particularly important without an engine alternator.
-                  </p>
+                 <h3 className="text-xl font-semibold text-white mb-4">Travel Trailers and Fifth Wheels</h3>
+                 <p className="text-gray-300 mb-4 leading-relaxed">
+                   Towable RVs increasingly offer technology packages comparable to motorhomes.
+                 </p>
+                 <p className="text-gray-300 leading-relaxed">
+                   Power management becomes particularly important without an engine alternator.
+                 </p>
                 </div>
               </div>
 
@@ -560,10 +560,10 @@ const RVTechnologyGuide = () => {
                   </div>
 
                   <div className="bg-[#091020] p-6 rounded-lg border border-gray-700">
-                    <h4 className="text-lg font-semibold text-white mb-3">Full-Time Living</h4>
-                    <p className="text-gray-300 leading-relaxed">
-                      Those living in RVs year-round typically need the most comprehensive technology solutions.
-                    </p>
+                     <h4 className="text-lg font-semibold text-white mb-3">Full Time Living</h4>
+                     <p className="text-gray-300 leading-relaxed">
+                       Those living in RVs year round typically need the most comprehensive technology solutions.
+                     </p>
                   </div>
                 </div>
               </div>
@@ -648,7 +648,7 @@ const RVTechnologyGuide = () => {
         <section className="py-16 px-4 bg-[#151A22]/50">
           <Container>
             <div className="max-w-6xl mx-auto">
-              <h2 className="text-3xl md:text-4xl font-bold mb-8 text-white text-center">Understanding Technology Trade-offs</h2>
+              <h2 className="text-3xl md:text-4xl font-bold mb-8 text-white text-center">Understanding Technology Trade offs</h2>
 
               <div className="grid md:grid-cols-2 gap-8 mb-12">
                 <div className="bg-[#091020] p-6 rounded-lg">
@@ -667,9 +667,9 @@ const RVTechnologyGuide = () => {
 
                 <div className="bg-[#091020] p-6 rounded-lg">
                   <h3 className="text-xl font-semibold text-white mb-4">Integration vs Flexibility</h3>
-                  <p className="text-[#E2E8FF] leading-relaxed">
-                    Factory-integrated systems may offer seamless operation but can be more difficult to modify or upgrade later.
-                  </p>
+                   <p className="text-[#E2E8FF] leading-relaxed">
+                     Factory integrated systems may offer seamless operation but can be more difficult to modify or upgrade later.
+                   </p>
                 </div>
 
                 <div className="bg-[#091020] p-6 rounded-lg">
@@ -709,10 +709,10 @@ const RVTechnologyGuide = () => {
                     </div>
 
                     <div className="bg-[#091020] p-6 rounded-lg">
-                      <h4 className="text-lg font-semibold text-white mb-3">Owner Forums and Communities</h4>
-                      <p className="text-[#E2E8FF] leading-relaxed">
-                        Existing RV owners share real-world experiences with different technology systems.
-                      </p>
+                       <h4 className="text-lg font-semibold text-white mb-3">Owner Forums and Communities</h4>
+                       <p className="text-[#E2E8FF] leading-relaxed">
+                         Existing RV owners share real world experiences with different technology systems.
+                       </p>
                     </div>
 
                     <div className="bg-[#091020] p-6 rounded-lg">
@@ -1019,17 +1019,17 @@ const RVTechnologyGuide = () => {
 
                   <div className="space-y-6">
                     <div className="bg-[#091020] p-6 rounded-lg">
-                      <h4 className="text-lg font-semibold text-white mb-3">Real-World Conditions</h4>
-                      <p className="text-[#E2E8FF] leading-relaxed">
-                        Consider how systems perform in actual camping conditions, not just showroom demonstrations.
-                      </p>
+                       <h4 className="text-lg font-semibold text-white mb-3">Real World Conditions</h4>
+                       <p className="text-[#E2E8FF] leading-relaxed">
+                         Consider how systems perform in actual camping conditions, not just showroom demonstrations.
+                       </p>
                     </div>
 
                     <div className="bg-[#091020] p-6 rounded-lg">
-                      <h4 className="text-lg font-semibold text-white mb-3">Long-Term Perspective</h4>
-                      <p className="text-[#E2E8FF] leading-relaxed">
-                        Think beyond initial excitement to long-term ownership experience.
-                      </p>
+                       <h4 className="text-lg font-semibold text-white mb-3">Long Term Perspective</h4>
+                       <p className="text-[#E2E8FF] leading-relaxed">
+                         Think beyond initial excitement to long term ownership experience.
+                       </p>
                     </div>
                   </div>
                 </div>
@@ -1114,12 +1114,12 @@ const RVTechnologyGuide = () => {
               <div className="bg-yellow-900/20 border border-yellow-600/30 rounded-lg p-6">
                 <h3 className="text-xl font-bold mb-4 text-yellow-300">DISCLAIMER</h3>
                 <div className="text-left text-sm text-yellow-100 space-y-3">
-                  <p><strong>Educational Purposes Only:</strong> This guide is provided for informational and educational purposes only. It does not constitute professional advice and should not be relied upon as the sole basis for purchasing decisions.</p>
-                  <p><strong>No Warranties:</strong> We make no warranties or guarantees regarding the accuracy, completeness, or currency of information presented. Technology specifications, availability, and pricing change frequently.</p>
-                  <p><strong>Verification Required:</strong> Always verify all information directly with manufacturers, authorised dealers, and qualified professionals before making any purchasing decisions.</p>
-                  <p><strong>Limitation of Liability:</strong> We assume no responsibility for financial losses, product performance issues, or other damages that may result from decisions based on this information.</p>
-                  <p><strong>Affiliate Disclosure:</strong> This guide contains affiliate links to RVT.com, RVInsider.com, and RVTrader.com. We may receive compensation for referrals, but this does not influence the educational content provided.</p>
-                  <p><strong>Independent Content:</strong> This guide is not sponsored by or affiliated with any RV manufacturer mentioned. All company and product names are trademarks of their respective owners.</p>
+                   <p><strong>Educational Purposes Only:</strong> This guide is provided for informational and educational purposes only. It does not constitute professional advice and should not be relied upon as the sole basis for purchasing decisions.</p>
+                   <p><strong>No Warranties:</strong> We make no warranties or guarantees regarding the accuracy, completeness, or currency of information presented. Technology specifications, availability, and pricing change frequently.</p>
+                   <p><strong>Verification Required:</strong> Always verify all information directly with manufacturers, authorised dealers, and qualified professionals before making any purchasing decisions.</p>
+                   <p><strong>Limitation of Liability:</strong> We assume no responsibility for financial losses, product performance issues, or other damages that may result from decisions based on this information.</p>
+                   <p><strong>Affiliate Disclosure:</strong> This guide contains affiliate links to RVT.com, RVInsider.com, and RVTrader.com. We may receive compensation for referrals, but this does not influence the educational content provided.</p>
+                   <p><strong>Independent Content:</strong> This guide is not sponsored by or affiliated with any RV manufacturer mentioned. All company and product names are trademarks of their respective owners.</p>
                 </div>
               </div>
             </div>
