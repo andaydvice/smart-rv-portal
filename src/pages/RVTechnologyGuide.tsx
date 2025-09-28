@@ -259,27 +259,40 @@ const RVTechnologyGuide = () => {
               <div className="mb-12">
 
                 <div className="grid md:grid-cols-3 gap-6 mb-12">
-                  <div className="bg-[#091020] p-6 rounded-lg">
-                     <h4 className="text-xl font-semibold text-white mb-4">Traditional Lead Acid Systems</h4>
-                     <p className="text-[#E2E8FF] mb-4 leading-relaxed">
-                       Entry level RVs typically include lead acid or AGM battery systems.
-                     </p>
+                  <div className="group bg-gradient-to-br from-[#091020] to-[#151A22] p-6 rounded-xl border border-[#5B9BD5]/20 hover:border-[#5B9BD5]/40 transition-all duration-300 hover:shadow-lg hover:shadow-[#5B9BD5]/10 hover:-translate-y-1">
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="p-2 bg-[#5B9BD5]/20 rounded-lg group-hover:bg-[#5B9BD5]/30 transition-colors duration-300">
+                        <Battery className="h-6 w-6 text-[#5B9BD5]" />
+                      </div>
+                      <h4 className="text-xl font-semibold text-white">Traditional Lead Acid Systems</h4>
+                    </div>
+                    <p className="text-[#E2E8FF] mb-4 leading-relaxed">
+                      Entry level RVs typically include lead acid or AGM battery systems.
+                    </p>
                     <p className="text-[#E2E8FF] leading-relaxed">
                       These provide basic power storage with established charging patterns.
                     </p>
                   </div>
 
-                  <div className="bg-[#091020] p-6 rounded-lg">
-                     <h4 className="text-xl font-semibold text-white mb-4">Lithium Battery Integration</h4>
-                     <p className="text-[#E2E8FF] mb-4 leading-relaxed">
-                       Higher end models increasingly feature lithium battery systems.
-                     </p>
-                    <p className="text-[#E2E8FF] leading-relaxed">
+                  <div className="group bg-gradient-to-br from-[#091020] to-[#151A22] p-6 rounded-xl border border-[#60A5FA]/20 hover:border-[#60A5FA]/40 transition-all duration-300 hover:shadow-lg hover:shadow-[#60A5FA]/10 hover:-translate-y-1">
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="p-2 bg-[#60A5FA]/20 rounded-lg group-hover:bg-[#60A5FA]/30 transition-colors duration-300">
+                        <Zap className="h-6 w-6 text-[#60A5FA]" />
+                      </div>
+                      <h4 className="text-xl font-semibold text-white">Lithium Battery Integration</h4>
+                    </div>
+                    <p className="text-[#E2E8FF] mb-4 leading-relaxed">
+                      Higher end models increasingly feature lithium battery systems.
+                    </p>
+                    <p className="text-[#E2E8FF] leading-relaxed mb-4">
                       These generally offer longer cycle life and faster charging capabilities.
                     </p>
-                    <div className="mt-4 space-y-2">
-                      <h5 className="font-semibold text-white">Questions to discuss with manufacturers:</h5>
-                      <ul className="text-[#E2E8FF] text-sm space-y-1">
+                    <div className="mt-4 space-y-2 p-4 bg-[#60A5FA]/5 rounded-lg border-l-4 border-[#60A5FA]/50">
+                      <h5 className="font-semibold text-white flex items-center gap-2">
+                        <CheckCircle className="h-4 w-4 text-[#60A5FA]" />
+                        Questions to discuss with manufacturers:
+                      </h5>
+                      <ul className="text-[#E2E8FF] text-sm space-y-1 ml-6">
                         <li>• What type of battery monitoring is included?</li>
                         <li>• How does the system handle charging from multiple sources?</li>
                         <li>• What warranty coverage applies to the battery system?</li>
@@ -287,17 +300,25 @@ const RVTechnologyGuide = () => {
                     </div>
                   </div>
 
-                  <div className="bg-[#091020] p-6 rounded-lg">
-                    <h4 className="text-xl font-semibold text-white mb-4">Solar Power Integration</h4>
+                  <div className="group bg-gradient-to-br from-[#091020] to-[#151A22] p-6 rounded-xl border border-[#5B9BD5]/20 hover:border-[#5B9BD5]/40 transition-all duration-300 hover:shadow-lg hover:shadow-[#5B9BD5]/10 hover:-translate-y-1">
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="p-2 bg-[#5B9BD5]/20 rounded-lg group-hover:bg-[#5B9BD5]/30 transition-colors duration-300">
+                        <Plug className="h-6 w-6 text-[#5B9BD5]" />
+                      </div>
+                      <h4 className="text-xl font-semibold text-white">Solar Power Integration</h4>
+                    </div>
                     <p className="text-[#E2E8FF] mb-4 leading-relaxed">
                       Many RVs now include solar panel preparation or factory installations.
                     </p>
-                    <p className="text-[#E2E8FF] leading-relaxed">
+                    <p className="text-[#E2E8FF] leading-relaxed mb-4">
                       Solar systems can supplement charging when adequate sunlight is available.
                     </p>
-                    <div className="mt-4 space-y-2">
-                      <h5 className="font-semibold text-white">Consider exploring:</h5>
-                      <ul className="text-[#E2E8FF] text-sm space-y-1">
+                    <div className="mt-4 space-y-2 p-4 bg-[#5B9BD5]/5 rounded-lg border-l-4 border-[#5B9BD5]/50">
+                      <h5 className="font-semibold text-white flex items-center gap-2">
+                        <CheckCircle className="h-4 w-4 text-[#5B9BD5]" />
+                        Consider exploring:
+                      </h5>
+                      <ul className="text-[#E2E8FF] text-sm space-y-1 ml-6">
                         <li>• What solar capacity is included or can be added?</li>
                         <li>• How does solar integrate with other charging sources?</li>
                         <li>• What monitoring capabilities are provided?</li>
@@ -311,7 +332,9 @@ const RVTechnologyGuide = () => {
                     href="https://www.rvt.com/buy/" 
                     variant="default" 
                     size="lg"
+                    className="bg-gradient-to-r from-[#5B9BD5] to-[#60A5FA] hover:from-[#4B8FE3] hover:to-[#5B9BD5] transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-[#5B9BD5]/25"
                   >
+                    <Battery className="mr-2 h-5 w-5" />
                     Compare Power Options
                   </ExternalLinkButton>
                 </div>
