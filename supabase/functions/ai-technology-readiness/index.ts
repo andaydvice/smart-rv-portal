@@ -61,8 +61,8 @@ Please provide a comprehensive assessment formatted as JSON with this structure:
   "budgetGuidance": "Realistic budget considerations for their readiness level",
   "nextSteps": ["Step 1", "Step 2", "Step 3"],
   "searchUrls": {
-    "buyUrl": "generate specific RV search URL based on readiness level",
-    "reviewsUrl": "generate reviews URL for recommended features",
+    "buyUrl": "https://www.rvt.com/buy/",
+    "reviewsUrl": "https://www.rvinsider.com/",
     "dealersUrl": "https://www.rvt.com/dealersearch.php",
     "priceCheckerUrl": "https://www.rvt.com/price-checker/"
   }
@@ -105,7 +105,7 @@ Guidelines:
     let assessment: AIAssessmentResult;
     try {
       assessment = JSON.parse(aiResponse);
-      // Ensure searchUrls are present
+      // Ensure searchUrls are present with exact URLs
       if (!assessment.searchUrls) {
         assessment.searchUrls = {
           buyUrl: 'https://www.rvt.com/buy/',

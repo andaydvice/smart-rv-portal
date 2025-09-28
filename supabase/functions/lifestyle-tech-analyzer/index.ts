@@ -89,8 +89,8 @@ serve(async (req) => {
           "recommendations": ["Specific feature 1", "Specific feature 2"],
           "reasoning": "Educational explanation of why this category matters for their lifestyle",
           "searchUrls": {
-            "buyUrl": "generate specific search URL for this system type",
-            "reviewsUrl": "generate reviews URL for this technology",
+            "buyUrl": "https://www.rvt.com/buy/",
+            "reviewsUrl": "https://www.rvinsider.com/",
             "dealersUrl": "https://www.rvt.com/dealersearch.php"
           }
         }
@@ -99,8 +99,8 @@ serve(async (req) => {
       "budgetConsiderations": "Realistic budget guidance and cost considerations",
       "nextSteps": ["Step 1", "Step 2", "Step 3"],
       "searchUrls": {
-        "buyUrl": "generate search URL based on lifestyle and technology needs",
-        "reviewsUrl": "generate reviews URL for recommended technologies",
+        "buyUrl": "https://www.rvt.com/buy/",
+        "reviewsUrl": "https://www.rvinsider.com/",
         "dealersUrl": "https://www.rvt.com/dealersearch.php",
         "priceCheckerUrl": "https://www.rvt.com/price-checker/"
       }

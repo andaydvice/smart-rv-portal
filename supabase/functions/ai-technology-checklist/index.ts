@@ -72,8 +72,8 @@ Please provide a comprehensive checklist formatted as JSON with this structure:
   "budgetConsiderations": "Realistic budget guidance for their technology needs",
   "dealerQuestions": ["General question 1", "General question 2", "General question 3"],
   "searchUrls": {
-    "buyUrl": "generate specific RV search URL based on checklist priorities",
-    "reviewsUrl": "generate reviews URL for high-priority features",
+    "buyUrl": "https://www.rvt.com/buy/",
+    "reviewsUrl": "https://www.rvinsider.com/",
     "dealersUrl": "https://www.rvt.com/dealersearch.php",
     "priceCheckerUrl": "https://www.rvt.com/price-checker/"
   }

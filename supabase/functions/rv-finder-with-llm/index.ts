@@ -114,8 +114,8 @@ Your response must be valid JSON with this exact structure:
   "recommendedModels": ["model1", "model2"],
   "technologyFeatures": ["feature1", "feature2"],
   "searchUrls": {
-    "buyUrl": "generate filtered RV search URL with specific parameters",
-    "reviewsUrl": "generate URL for reviews of recommended RV type",
+        "buyUrl": "https://www.rvt.com/buy/",
+        "reviewsUrl": "https://www.rvinsider.com/",
     "dealersUrl": "https://www.rvt.com/dealersearch.php",
     "priceCheckerUrl": "https://www.rvt.com/price-checker/"
   },
@@ -161,7 +161,7 @@ Focus on practical recommendations based on the user's specific needs, experienc
         recommendedModels: ["Please see detailed analysis"],
         technologyFeatures: requirements.mustHaveFeatures,
         searchUrls: {
-          buyUrl: "https://www.rvtrader.com/rvs-for-sale",
+          buyUrl: "https://www.rvt.com/buy/",
           reviewsUrl: "https://www.rvinsider.com/",
           dealersUrl: "https://www.rvt.com/dealersearch.php",
           priceCheckerUrl: "https://www.rvt.com/price-checker/"
