@@ -191,6 +191,21 @@ export const TechnologyChecklist: React.FC = () => {
     URL.revokeObjectURL(url);
   };
 
+  const generateTargetedRVTLink = () => {
+    const selectedItems = checklistItems.filter(item => checkedItems.has(item.id));
+    const categories = selectedItems.map(item => item.category);
+    
+    if (categories.includes('Power Systems')) {
+      return 'https://www.rvt.com/buy/?q=(And.Year.range(2020..2025)._.Features.contains(Solar).)';
+    } else if (categories.includes('Connectivity')) {
+      return 'https://www.rvt.com/buy/?q=(And.Year.range(2018..2025)._.Features.contains(WiFi).)';
+    } else if (categories.includes('Monitoring & Control')) {
+      return 'https://www.rvt.com/buy/?q=(And.Year.range(2019..2025)._.RvType.inlist(Class%20A,Class%20C).)';
+    }
+    
+    return 'https://www.rvt.com/buy/?q=(And.Year.range(2015..2025).)';
+  };
+
   return (
     <Card className="p-8 bg-gradient-to-br from-[#091020] to-[#131a2a] border-[#1a202c] text-white">
       <div className="text-center mb-8">
@@ -313,13 +328,13 @@ export const TechnologyChecklist: React.FC = () => {
         {checkedItems.size > 0 ? (
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <ExternalLinkButton 
-              href="https://www.rvt.com/buy/"
+              href={generateTargetedRVTLink()}
               variant="default"
               size="lg"
               className="bg-gradient-to-r from-[#5B9BD5] to-[#60A5FA] hover:from-[#4B8FE3] hover:to-[#5B9BD5] text-lg px-8"
             >
               <ShoppingCart className="mr-2 h-5 w-5" />
-              Start Shopping with Your Checklist
+              Shop RVs with Selected Features
             </ExternalLinkButton>
           </div>
         ) : (

@@ -128,7 +128,19 @@ export const AILifestylePlanner: React.FC = () => {
             <h4 className="text-xl font-semibold text-[#60A5FA]">Recommended Technology Systems</h4>
             {analysis.recommendedSystems.map((system, index) => (
               <div key={index} className="bg-[#151A22]/50 rounded-lg p-6 border border-[#1a202c]">
-                <h5 className="font-semibold text-white mb-3">{system.category}</h5>
+                <div className="flex items-start justify-between mb-3">
+                  <h5 className="font-semibold text-white">{system.category}</h5>
+                  {(system as any).rvtSearchUrl && (
+                    <ExternalLinkButton 
+                      href={(system as any).rvtSearchUrl}
+                      variant="outline"
+                      size="sm"
+                      className="border-[#5B9BD5]/50 text-[#5B9BD5] hover:bg-[#5B9BD5]/10"
+                    >
+                      Shop {system.category}
+                    </ExternalLinkButton>
+                  )}
+                </div>
                 <p className="text-[#E2E8FF] mb-4 leading-relaxed">{system.reasoning}</p>
                 <ul className="space-y-2">
                   {system.recommendations.map((rec, recIndex) => (
