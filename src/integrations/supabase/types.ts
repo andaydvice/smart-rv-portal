@@ -14,6 +14,45 @@ export type Database = {
   }
   public: {
     Tables: {
+      admin_settings: {
+        Row: {
+          created_at: string
+          data_type: string
+          description: string | null
+          id: string
+          is_sensitive: boolean
+          setting_category: string
+          setting_key: string
+          setting_value: Json
+          updated_at: string
+          updated_by: string | null
+        }
+        Insert: {
+          created_at?: string
+          data_type?: string
+          description?: string | null
+          id?: string
+          is_sensitive?: boolean
+          setting_category: string
+          setting_key: string
+          setting_value?: Json
+          updated_at?: string
+          updated_by?: string | null
+        }
+        Update: {
+          created_at?: string
+          data_type?: string
+          description?: string | null
+          id?: string
+          is_sensitive?: boolean
+          setting_category?: string
+          setting_key?: string
+          setting_value?: Json
+          updated_at?: string
+          updated_by?: string | null
+        }
+        Relationships: []
+      }
       app_spatial_ref_sys: {
         Row: {
           auth_name: string | null

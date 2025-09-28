@@ -4,6 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { FileText, Upload, Settings, BarChart3 } from "lucide-react";
 import DocumentUpload from "@/components/admin/DocumentUpload";
 import DocumentManager from "@/components/admin/DocumentManager";
+import AdminSettings from "@/components/admin/AdminSettings";
 
 const AdminDashboard = () => {
   return (
@@ -61,19 +62,7 @@ const AdminDashboard = () => {
           </TabsContent>
 
           <TabsContent value="settings">
-            <Card>
-              <CardHeader>
-                <CardTitle>System Settings</CardTitle>
-                <CardDescription>
-                  Configure AI behavior and document processing settings
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="text-center py-8 text-muted-foreground">
-                  Settings panel coming soon...
-                </div>
-              </CardContent>
-            </Card>
+            <AdminSettings />
           </TabsContent>
         </Tabs>
       </div>
