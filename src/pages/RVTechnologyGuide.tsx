@@ -27,6 +27,8 @@ import { TechnologyReadinessQuiz } from '@/components/rv-technology/interactive/
 import { FeatureMatcher } from '@/components/rv-technology/interactive/FeatureMatcher';
 import { TechnologyChecklist } from '@/components/rv-technology/interactive/TechnologyChecklist';
 import { LifestylePlanner } from '@/components/rv-technology/interactive/LifestylePlanner';
+import { RVTechNavigation } from '@/components/rv-technology/RVTechNavigation';
+import { RVTechSummary } from '@/components/rv-technology/RVTechSummary';
 
 const RVTechnologyGuide = () => {
   return (
@@ -47,6 +49,12 @@ const RVTechnologyGuide = () => {
       <div className="min-h-screen bg-gradient-to-br from-[#080F1F] to-[#151A22] text-white">
         {/* Header Image */}
         <RVTechnologyHeader />
+
+        {/* Sticky Navigation */}
+        <RVTechNavigation />
+
+        {/* Content Summary */}
+        <RVTechSummary />
 
         {/* Hero Section with Enhanced Visuals */}
         <section className="py-16 px-4 relative overflow-hidden">
@@ -87,7 +95,7 @@ const RVTechnologyGuide = () => {
         </section>
 
         {/* Interactive Technology Assessment */}
-        <section className="py-16 px-4 relative">
+        <section id="technology-assessment" className="py-16 px-4 relative">
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#151A22]/20 to-transparent" />
           <Container>
             <div className="max-w-6xl mx-auto relative z-10">
@@ -137,8 +145,8 @@ const RVTechnologyGuide = () => {
           </Container>
         </section>
 
-        {/* Introduction with Enhanced Design */}
-        <section className="py-16 px-4 relative">
+        {/* Understanding Modern RV Technology */}
+        <section id="understanding-technology" className="py-16 px-4 relative">
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#151A22]/20 to-transparent" />
           <Container>
             <div className="max-w-4xl mx-auto relative z-10">
@@ -202,9 +210,10 @@ const RVTechnologyGuide = () => {
         </section>
 
         {/* Connectivity Technology Section */}
-        <RVConnectivityHero />
+        <div id="connectivity">
+          <RVConnectivityHero />
         
-        <section className="py-16 px-4 bg-[#151A22]/50">
+          <section className="py-16 px-4 bg-[#151A22]/50">
           <Container>
             <div className="max-w-6xl mx-auto">
               <div className="mb-12">
@@ -305,10 +314,13 @@ const RVTechnologyGuide = () => {
           </Container>
         </section>
 
+        </div>
+
         {/* Power Management Section */}
-        <RVPowerManagementHero />
+        <div id="power-management">
+          <RVPowerManagementHero />
         
-        <section className="py-16 px-4">
+          <section className="py-16 px-4">
           <Container>
             <div className="max-w-6xl mx-auto">
               <div className="mb-12">
@@ -399,9 +411,10 @@ const RVTechnologyGuide = () => {
         </section>
 
         {/* Control and Monitoring Systems */}
-        <RVControlMonitoringHero />
+        <div id="control-monitoring">
+          <RVControlMonitoringHero />
         
-        <section className="py-16 px-4 bg-[#151A22]/50">
+          <section className="py-16 px-4 bg-[#151A22]/50">
           <Container>
             <div className="max-w-6xl mx-auto">
               <div className="mb-12">
@@ -495,10 +508,13 @@ const RVTechnologyGuide = () => {
           </Container>
         </section>
 
+        </div>
+
         {/* Technology Tiers and Research Guidance */}
-        <RVTechnologyTiersHero />
+        <div id="technology-tiers">
+          <RVTechnologyTiersHero />
         
-        <section className="py-16 px-4">
+          <section className="py-16 px-4">
           <Container>
             <div className="max-w-6xl mx-auto">
               <div className="mb-12">
@@ -656,8 +672,10 @@ const RVTechnologyGuide = () => {
           </Container>
         </section>
 
+        </div>
+
         {/* RV Category Evaluation */}
-        <section className="py-16 px-4 bg-[#151A22]/50">
+        <section id="rv-categories" className="py-16 px-4 bg-[#151A22]/50">
           <Container>
             <div className="max-w-6xl mx-auto">
               <h2 className="text-3xl md:text-4xl font-bold mb-8 text-white text-center">Evaluating Technology by RV Category</h2>
@@ -737,7 +755,7 @@ const RVTechnologyGuide = () => {
         </section>
 
         {/* Dealer Questions */}
-        <section className="py-16 px-4 relative">
+        <section id="dealer-questions" className="py-16 px-4 relative">
           {/* Background Image */}
           <div className="absolute inset-0">
             <PreloadedHeaderImage 
@@ -810,7 +828,7 @@ const RVTechnologyGuide = () => {
         </section>
 
         {/* Technology Trade-offs */}
-        <section className="py-20 px-4 bg-gradient-to-br from-[#151A22]/60 to-[#091020]/40 relative overflow-hidden">
+        <section id="technology-tradeoffs" className="py-20 px-4 bg-gradient-to-br from-[#151A22]/60 to-[#091020]/40 relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-l from-[#5B9BD5]/5 to-transparent"></div>
           <Container>
             <div className="max-w-6xl mx-auto relative z-10">
@@ -882,7 +900,7 @@ const RVTechnologyGuide = () => {
         </section>
 
         {/* Research Strategies */}
-        <section className="py-20 px-4 bg-gradient-to-br from-[#080F1F] to-[#151A22] relative overflow-hidden">
+        <section id="research-strategies" className="py-20 px-4 bg-gradient-to-br from-[#080F1F] to-[#151A22] relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-r from-[#5B9BD5]/5 to-transparent"></div>
           <Container>
             <div className="max-w-6xl mx-auto relative z-10">
@@ -1153,7 +1171,7 @@ const RVTechnologyGuide = () => {
         </section>
 
         {/* Educational Resources */}
-        <section className="py-16 px-4">
+        <section id="resources" className="py-16 px-4">
           <Container>
             <div className="max-w-6xl mx-auto">
               <h2 className="text-3xl md:text-4xl font-bold mb-8 text-white text-center">Educational Resources and Research Tools</h2>
@@ -1229,7 +1247,7 @@ const RVTechnologyGuide = () => {
         </section>
 
         {/* Decision Framework */}
-        <section className="py-16 px-4 bg-[#151A22]/50">
+        <section id="decision-framework" className="py-16 px-4 bg-[#151A22]/50">
           <Container>
             <div className="max-w-6xl mx-auto">
               <div className="mb-12">
@@ -1450,6 +1468,7 @@ const RVTechnologyGuide = () => {
             </div>
           </Container>
         </section>
+        </div>
 
       </div>
     </>
