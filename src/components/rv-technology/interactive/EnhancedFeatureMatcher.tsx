@@ -55,25 +55,7 @@ export const EnhancedFeatureMatcher = () => {
   };
 
   const generateRVTLink = () => {
-    if (matchedFeatures.length === 0) return "https://www.rvt.com/";
-    
-    // Map AI-matched features to relevant RV search parameters
-    const topFeatures = matchedFeatures.slice(0, 5);
-    const hasHighTechFeatures = topFeatures.some(feature => 
-      feature.name.toLowerCase().includes('solar') ||
-      feature.name.toLowerCase().includes('satellite') ||
-      feature.name.toLowerCase().includes('wifi') ||
-      feature.name.toLowerCase().includes('smart') ||
-      feature.name.toLowerCase().includes('lithium')
-    );
-    
-    // For high-tech features, search for newer Class A and Class C RVs
-    if (hasHighTechFeatures) {
-      return 'https://www.rvt.com/buy/?q=(And.Year.range(2018..2025)._.RvType.inlist(Class%20A,Class%20C).)';
-    }
-    
-    // For other features, search for all newer RVs
-    return 'https://www.rvt.com/buy/?q=(And.Year.range(2015..2025).)';
+    return "https://www.rvt.com/buy/";
   };
 
   return (

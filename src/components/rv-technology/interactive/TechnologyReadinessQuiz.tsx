@@ -77,7 +77,7 @@ const quizResults: Record<string, QuizResult> = {
       'Reliable battery monitoring with easy-to-read displays',
       'Traditional appliances with digital upgrades'
     ],
-    rvtLink: 'https://www.rvt.com/buy/?filter=basic-technology'
+    rvtLink: 'https://www.rvt.com/buy/'
   },
   intermediate: {
     level: 'intermediate',
@@ -89,7 +89,7 @@ const quizResults: Record<string, QuizResult> = {
       'WiFi preparation and cellular signal boosters',
       'Smart appliances with manual backup controls'
     ],
-    rvtLink: 'https://www.rvt.com/buy/?filter=smart-features'
+    rvtLink: 'https://www.rvt.com/buy/'
   },
   advanced: {
     level: 'advanced',
@@ -101,7 +101,7 @@ const quizResults: Record<string, QuizResult> = {
       'High speed internet and connectivity solutions',
       'Comprehensive monitoring and alert systems'
     ],
-    rvtLink: 'https://www.rvt.com/buy/?filter=premium-technology'
+    rvtLink: 'https://www.rvt.com/buy/'
   }
 };
 

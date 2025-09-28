@@ -123,14 +123,8 @@ serve(async (req) => {
       analysis.recommendedSystems = analysis.recommendedSystems.map(system => {
         let rvtSearchUrl = "https://www.rvt.com/buy/";
         
-        // Generate targeted search URLs based on technology needs
-        if (system.category.toLowerCase().includes('power') || system.category.toLowerCase().includes('solar')) {
-          rvtSearchUrl = "https://www.rvt.com/buy/?q=(And.Year.range(2020..2025)._.Features.contains(Solar).)";
-        } else if (system.category.toLowerCase().includes('connectivity') || system.category.toLowerCase().includes('internet')) {
-          rvtSearchUrl = "https://www.rvt.com/buy/?q=(And.Year.range(2018..2025)._.Features.contains(WiFi).)";
-        } else if (system.category.toLowerCase().includes('monitoring') || system.category.toLowerCase().includes('smart')) {
-          rvtSearchUrl = "https://www.rvt.com/buy/?q=(And.Year.range(2019..2025)._.RvType.inlist(Class%20A,Class%20C).)";
-        }
+        // Use legitimate RVT.com URLs for all technology categories
+        rvtSearchUrl = "https://www.rvt.com/buy/";
         
         return {
           ...system,
@@ -149,13 +143,13 @@ serve(async (req) => {
             category: "Power Systems",
             recommendations: ["Solar panels for off grid capability", "Lithium batteries for extended power", "Inverter systems for AC power"],
             reasoning: "Understanding power management is essential for any RV lifestyle. Learn about different battery types, charging methods, and power consumption.",
-            rvtSearchUrl: "https://www.rvt.com/buy/?q=(And.Year.range(2020..2025)._.Features.contains(Solar).)"
+            rvtSearchUrl: "https://www.rvt.com/buy/"
           },
           {
             category: "Connectivity",
             recommendations: ["Cellular signal boosters", "WiFi systems", "Satellite internet preparation"],
             reasoning: "Modern RVing often requires staying connected. Learn about different internet options and what works best in various locations.",
-            rvtSearchUrl: "https://www.rvt.com/buy/?q=(And.Year.range(2018..2025)._.Features.contains(WiFi).)"
+            rvtSearchUrl: "https://www.rvt.com/buy/"
           }
         ],
         educationalGuidance: "I recommend learning about the major RV technology categories: power management, connectivity, climate control, and monitoring systems. Each category has different options depending on your specific needs and budget.",

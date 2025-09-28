@@ -192,18 +192,7 @@ export const TechnologyChecklist: React.FC = () => {
   };
 
   const generateTargetedRVTLink = () => {
-    const selectedItems = checklistItems.filter(item => checkedItems.has(item.id));
-    const categories = selectedItems.map(item => item.category);
-    
-    if (categories.includes('Power Systems')) {
-      return 'https://www.rvt.com/buy/?q=(And.Year.range(2020..2025)._.Features.contains(Solar).)';
-    } else if (categories.includes('Connectivity')) {
-      return 'https://www.rvt.com/buy/?q=(And.Year.range(2018..2025)._.Features.contains(WiFi).)';
-    } else if (categories.includes('Monitoring & Control')) {
-      return 'https://www.rvt.com/buy/?q=(And.Year.range(2019..2025)._.RvType.inlist(Class%20A,Class%20C).)';
-    }
-    
-    return 'https://www.rvt.com/buy/?q=(And.Year.range(2015..2025).)';
+    return 'https://www.rvt.com/buy/';
   };
 
   return (
