@@ -26,7 +26,7 @@ import { BlogPostImage } from '@/components/blog/post/BlogPostImage';
 import { TechnologyReadinessQuiz } from '@/components/rv-technology/interactive/TechnologyReadinessQuiz';
 
 import { TechnologyChecklist } from '@/components/rv-technology/interactive/TechnologyChecklist';
-import { LifestylePlanner } from '@/components/rv-technology/interactive/LifestylePlanner';
+import { AILifestylePlanner } from '@/components/rv-technology/interactive/AILifestylePlanner';
 import { RVTechNavigation } from '@/components/rv-technology/RVTechNavigation';
 import { RVTechSummary } from '@/components/rv-technology/RVTechSummary';
 import { ScrollToTopButton } from '@/components/rv-technology/ScrollToTopButton';
@@ -178,7 +178,7 @@ const RVTechnologyGuide = () => {
         <section className="py-16 px-4 relative">
           <Container>
             <div className="max-w-6xl mx-auto">
-              <LifestylePlanner />
+              <AILifestylePlanner />
             </div>
           </Container>
         </section>
