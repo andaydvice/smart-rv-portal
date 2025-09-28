@@ -2,3 +2,9 @@
 project_id = "xsypxtfjffgihnmcjfgc"
 [functions.geocode-address]
 verify_jwt = false
+
+[functions.ai-educational-assistant]
+verify_jwt = false
+
+[functions.enhanced-feature-matcher]
+verify_jwt = false

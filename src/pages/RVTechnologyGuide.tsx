@@ -30,6 +30,8 @@ import { LifestylePlanner } from '@/components/rv-technology/interactive/Lifesty
 import { RVTechNavigation } from '@/components/rv-technology/RVTechNavigation';
 import { RVTechSummary } from '@/components/rv-technology/RVTechSummary';
 import { ScrollToTopButton } from '@/components/rv-technology/ScrollToTopButton';
+import { AIEducationalConsultant } from '@/components/rv-technology/interactive/AIEducationalConsultant';
+import { EnhancedFeatureMatcher } from '@/components/rv-technology/interactive/EnhancedFeatureMatcher';
 
 const RVTechnologyGuide = () => {
   return (
@@ -119,8 +121,42 @@ const RVTechnologyGuide = () => {
           </Container>
         </section>
 
-        {/* Smart Feature Matcher */}
+        {/* AI Educational Consultant */}
+        <section className="py-16 px-4 relative bg-[#080F1F]/50">
+          <Container>
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+                AI Educational Consultant
+              </h2>
+              <p className="text-xl text-connectivity-lightText max-w-3xl mx-auto">
+                Get personalized educational guidance about RV technology concepts through our liability-free AI assistant.
+              </p>
+            </div>
+            <div className="max-w-6xl mx-auto">
+              <AIEducationalConsultant />
+            </div>
+          </Container>
+        </section>
+
+        {/* Enhanced Feature Matcher */}
         <section className="py-16 px-4 relative">
+          <Container>
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+                AI-Enhanced Feature Matcher
+              </h2>
+              <p className="text-xl text-connectivity-lightText max-w-3xl mx-auto">
+                Describe your RV plans and get educational insights about relevant technology features.
+              </p>
+            </div>
+            <div className="max-w-6xl mx-auto">
+              <EnhancedFeatureMatcher />
+            </div>
+          </Container>
+        </section>
+
+        {/* Smart Feature Matcher */}
+        <section className="py-16 px-4 relative bg-[#080F1F]/50">
           <Container>
             <div className="max-w-6xl mx-auto">
               <FeatureMatcher />
