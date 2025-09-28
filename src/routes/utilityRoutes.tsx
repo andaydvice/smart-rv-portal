@@ -26,6 +26,7 @@ const Troubleshooting = lazy(() => import("../pages/Troubleshooting"));
 
 const VoiceControl = lazy(() => import("../pages/VoiceControl"));
 const AccountPage = lazy(() => import("@/pages/Account"));
+const AdminDashboard = lazy(() => import("../pages/AdminDashboard"));
 const RVEmergencyCenter = lazy(() => import("../pages/RVEmergencyCenter"));
 const SolarPowerGuide = lazy(() => import("../pages/SolarPowerGuide"));
 const RVAppsHub = lazy(() => import("../pages/RVAppsHub"));
@@ -229,6 +230,18 @@ const utilityRoutes = [
     ),
   },
   // Protected admin routes
+  {
+    path: "/admin",
+    element: (
+      <Suspense fallback={<MinimalLoader />}>
+        <RouteTransition>
+          <ProtectedRoute>
+            <AdminDashboard />
+          </ProtectedRoute>
+        </RouteTransition>
+      </Suspense>
+    ),
+  },
   {
     path: "/admin/perf",
     element: (
