@@ -18,10 +18,9 @@ export const AIEducationalConsultant = () => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [hasAcceptedTerms, setHasAcceptedTerms] = useState(false);
 
   const handleSendMessage = async () => {
-    if (!input.trim() || isLoading || !hasAcceptedTerms) return;
+    if (!input.trim() || isLoading) return;
 
     const userMessage: Message = {
       id: Date.now().toString(),
@@ -78,70 +77,6 @@ export const AIEducationalConsultant = () => {
       handleSendMessage();
     }
   };
-
-  if (!hasAcceptedTerms) {
-    return (
-      <Card className="w-full max-w-2xl mx-auto bg-connectivity-darkBg border-gray-700">
-        <CardHeader className="text-center">
-          <div className="flex items-center justify-center gap-2 mb-4">
-            <BookOpen className="h-8 w-8 text-connectivity-accent" />
-            <Shield className="h-6 w-6 text-green-500" />
-          </div>
-          <CardTitle className="text-white">RV Technology Educational Assistant</CardTitle>
-          <CardDescription className="text-[#E2E8FF]">
-            AI powered educational guidance for understanding RV technology concepts
-          </CardDescription>
-        </CardHeader>
-        <CardContent className="space-y-6">
-          <Alert className="border-yellow-500 bg-yellow-500/10">
-            <AlertTriangle className="h-4 w-4 text-yellow-500" />
-            <AlertDescription className="text-yellow-200">
-              <strong>Educational Use Only</strong> - This assistant provides educational information about RV technology concepts.
-              <br />
-              <br />
-              It does not make recommendations, give financial advice, or provide purchasing guidance.
-            </AlertDescription>
-          </Alert>
-
-          <div className="space-y-4">
-            <h3 className="text-white font-semibold">What this assistant can help you understand:</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-              <Badge variant="outline" className="justify-start p-3 border-connectivity-accent text-white bg-connectivity-accent/10">
-                Technology concepts and how they work
-              </Badge>
-              <Badge variant="outline" className="justify-start p-3 border-connectivity-accent text-white bg-connectivity-accent/10">
-                General considerations for different usage scenarios
-              </Badge>
-              <Badge variant="outline" className="justify-start p-3 border-connectivity-accent text-white bg-connectivity-accent/10">
-                Educational explanations of features and capabilities
-              </Badge>
-              <Badge variant="outline" className="justify-start p-3 border-connectivity-accent text-white bg-connectivity-accent/10">
-                Learning resources and research guidance
-              </Badge>
-            </div>
-          </div>
-
-          <div className="space-y-4">
-            <h3 className="text-white font-semibold">Important disclaimers:</h3>
-            <ul className="text-sm text-[#E2E8FF] space-y-2">
-              <li>• All information is for educational purposes only</li>
-              <li>• No recommendations or purchasing advice will be provided</li>
-              <li>• Always consult with RV professionals for specific guidance</li>
-              <li>• Technology specifications should be verified with manufacturers</li>
-              <li>• This tool does not guarantee any outcomes or performance</li>
-            </ul>
-          </div>
-
-          <Button 
-            onClick={() => setHasAcceptedTerms(true)}
-            className="w-full bg-connectivity-accent hover:bg-blue-600 text-white"
-          >
-            I Understand - Start Educational Session
-          </Button>
-        </CardContent>
-      </Card>
-    );
-  }
 
   return (
     <div className="w-full max-w-2xl mx-auto">
@@ -203,6 +138,14 @@ export const AIEducationalConsultant = () => {
             </div>
           )}
         </div>
+
+        {/* Disclaimer moved to bottom */}
+        <Alert className="border-yellow-500 bg-yellow-500/10 mb-4">
+          <AlertTriangle className="h-4 w-4 text-yellow-500" />
+          <AlertDescription className="text-yellow-200">
+            <strong>Educational Use Only</strong> - This assistant provides educational information about RV technology concepts. It does not make recommendations, give financial advice, or provide purchasing guidance. Always consult with RV professionals for specific guidance.
+          </AlertDescription>
+        </Alert>
 
         <Alert className="border-[#5B9BD5]/30 bg-[#5B9BD5]/10 mb-4">
           <Shield className="h-4 w-4 text-[#5B9BD5]" />
