@@ -67,7 +67,7 @@ export const EnhancedFeatureMatcher = () => {
       <CardHeader>
         <div className="flex items-center gap-2">
           <Wand2 className="h-6 w-6 text-connectivity-accent" />
-          <CardTitle className="text-white">AI-Enhanced Feature Matcher</CardTitle>
+          <CardTitle className="text-white">AI Enhanced Feature Matcher</CardTitle>
         </div>
         <CardDescription className="text-connectivity-lightText">
           Describe your RV usage plans and get educational information about relevant technology features
