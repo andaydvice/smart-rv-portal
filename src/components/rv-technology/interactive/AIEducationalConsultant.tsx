@@ -99,7 +99,34 @@ export const AIEducationalConsultant = () => {
             <div className="text-center text-[#E2E8FF] py-8 flex-1 flex flex-col justify-center">
               <BookOpen className="h-16 w-16 mx-auto mb-6 text-[#5B9BD5]" />
               <p className="text-xl mb-4">Welcome to your educational technology consultant!</p>
-              <p className="text-lg">Ask me about RV technology concepts like solar power, connectivity options, or battery systems.</p>
+              <p className="text-lg mb-6">Ask me about RV technology concepts like solar power, connectivity options, or battery systems.</p>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 max-w-2xl mx-auto">
+                <button
+                  onClick={() => setInput("How do solar panels work in RVs?")}
+                  className="text-left p-4 bg-[#151A22] border border-[#1a202c] rounded-lg hover:bg-[#1a202c] transition-colors"
+                >
+                  <span className="text-[#5B9BD5] font-medium">How do solar panels work in RVs?</span>
+                </button>
+                <button
+                  onClick={() => setInput("What are the different types of RV batteries?")}
+                  className="text-left p-4 bg-[#151A22] border border-[#1a202c] rounded-lg hover:bg-[#1a202c] transition-colors"
+                >
+                  <span className="text-[#5B9BD5] font-medium">What are the different types of RV batteries?</span>
+                </button>
+                <button
+                  onClick={() => setInput("Explain RV electrical systems basics")}
+                  className="text-left p-4 bg-[#151A22] border border-[#1a202c] rounded-lg hover:bg-[#1a202c] transition-colors"
+                >
+                  <span className="text-[#5B9BD5] font-medium">Explain RV electrical systems basics</span>
+                </button>
+                <button
+                  onClick={() => setInput("What internet options are available for RVs?")}
+                  className="text-left p-4 bg-[#151A22] border border-[#1a202c] rounded-lg hover:bg-[#1a202c] transition-colors"
+                >
+                  <span className="text-[#5B9BD5] font-medium">What internet options are available for RVs?</span>
+                </button>
+              </div>
             </div>
           )}
           
