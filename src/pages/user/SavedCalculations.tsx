@@ -26,8 +26,57 @@ const SavedCalculations = () => {
     return Object.entries(inputs)
       .filter(([_, value]) => value !== null && value !== undefined && value !== '')
       .slice(0, 3)
-      .map(([key, value]) => `${key}: ${value}`)
+      .map(([key, value]) => {
+        if (typeof value === 'number') {
+          return `${key}: ${value}`;
+        }
+        if (typeof value === 'string' && !isNaN(parseFloat(value))) {
+          return `${key}: ${parseFloat(value)}`;
+        }
+        return `${key}: ${value}`;
+      })
       .join(', ');
+  };
+
+  const formatResults = (type: string, results: Record<string, any>) => {
+    // Check for pre-formatted results first
+    if (results.totalCostFormatted) return results.totalCostFormatted;
+    if (results.efficiencyRatingFormatted) return results.efficiencyRatingFormatted;
+    if (results.gallonsNeededFormatted && results.totalCostFormatted) {
+      return `${results.gallonsNeededFormatted}, ${results.totalCostFormatted}`;
+    }
+    
+    // Fallback formatting for older data
+    switch (type) {
+      case 'rv_cost':
+        if (typeof results.totalCost === 'number') {
+          return `Total: $${results.totalCost.toFixed(2)}`;
+        }
+        break;
+      case 'gas_cost':
+      case 'gas-calculator':
+        if (typeof results.totalCost === 'number' && typeof results.gallonsNeeded === 'number') {
+          return `${results.gallonsNeeded.toFixed(2)} gallons, $${results.totalCost.toFixed(2)}`;
+        }
+        break;
+      case 'trip_efficiency':
+        if (typeof results.efficiencyRating === 'number') {
+          return `${results.efficiencyRating.toFixed(1)}% efficiency`;
+        }
+        break;
+      default:
+        // Generic fallback for any numeric result
+        const firstNumericResult = Object.entries(results).find(([_, value]) => typeof value === 'number');
+        if (firstNumericResult) {
+          return `${firstNumericResult[0]}: ${firstNumericResult[1]}`;
+        }
+    }
+    
+    // Last resort - show first non-object value
+    const firstValidResult = Object.entries(results).find(([_, value]) => 
+      typeof value !== 'object' && value !== null && value !== undefined
+    );
+    return firstValidResult ? `${firstValidResult[0]}: ${firstValidResult[1]}` : 'No valid results';
   };
 
   return (
@@ -121,14 +170,9 @@ const SavedCalculations = () => {
                   {calculation.results && Object.keys(calculation.results).length > 0 && (
                     <div>
                       <h4 className="text-white font-medium mb-2">Results:</h4>
-                      <div className="space-y-1">
-                        {Object.entries(calculation.results).slice(0, 3).map(([key, value]) => (
-                          <div key={key} className="flex justify-between text-sm">
-                            <span className="text-gray-400 capitalize">{key.replace('_', ' ')}:</span>
-                            <span className="text-white">{String(value)}</span>
-                          </div>
-                        ))}
-                      </div>
+                      <p className="text-[#60A5FA] text-sm font-medium">
+                        {formatResults(calculation.calculator_type, calculation.results)}
+                      </p>
                     </div>
                   )}
                 </CardContent>

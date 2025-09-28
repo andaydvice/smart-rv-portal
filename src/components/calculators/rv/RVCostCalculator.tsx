@@ -92,8 +92,35 @@ const RVCostCalculator = () => {
       return;
     }
 
-    const inputs = { rvType, distance, days, season, fuelPrice, campsiteType };
-    const results = { costs };
+    // Validate inputs before saving
+    if (!distance || distance <= 0 || !days || days <= 0 || !fuelPrice || fuelPrice <= 0) {
+      toast({
+        title: "Invalid inputs",
+        description: "Please enter valid distance, days, and fuel price before saving.",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    const inputs = { 
+      rvType, 
+      distance: Number(distance), 
+      days: Number(days), 
+      season, 
+      fuelPrice: Number(fuelPrice), 
+      campsiteType 
+    };
+    
+    // Flatten the results object for better display
+    const results = {
+      totalCost: costs.total,
+      fuelCost: costs.fuel,
+      rentalCost: costs.rental,
+      campsiteCost: costs.campsite,
+      miscCost: costs.misc,
+      totalCostFormatted: `$${costs.total.toFixed(2)}`,
+      breakdown: `Fuel: $${costs.fuel.toFixed(2)}, Rental: $${costs.rental.toFixed(2)}, Campsite: $${costs.campsite.toFixed(2)}, Misc: $${costs.misc.toFixed(2)}`
+    };
     
     saveCalculation({
       calculatorType: "rv_cost",

@@ -34,8 +34,28 @@ const TripEfficiencyPlanner = () => {
       return;
     }
 
-    const inputs = { tripDistance, avgSpeed };
-    const results = { efficiencyRating: calculateTripEfficiency() };
+    // Validate inputs before saving
+    const distance = parseFloat(tripDistance);
+    const speed = parseFloat(avgSpeed);
+    
+    if (!distance || distance <= 0 || !speed || speed <= 0) {
+      toast({
+        title: "Invalid inputs",
+        description: "Please enter valid trip distance and average speed before saving.",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    const efficiency = calculateTripEfficiency();
+    const inputs = { 
+      tripDistance: distance, 
+      avgSpeed: speed 
+    };
+    const results = { 
+      efficiencyRating: parseFloat(efficiency),
+      efficiencyRatingFormatted: `${efficiency}%`
+    };
     
     saveCalculation({
       calculatorType: "trip_efficiency",

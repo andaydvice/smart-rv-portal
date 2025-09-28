@@ -47,19 +47,57 @@ const GasCalculator = () => {
   };
 
   const handleSaveCalculation = () => {
-    if (!results) return;
+    if (!isAuthenticated) {
+      toast({
+        title: "Sign in required",
+        description: "Please sign in to save your calculations",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    // Validate inputs before saving
+    const distanceNum = parseFloat(distance);
+    const gasPriceNum = parseFloat(gasPrice);
+    const avgMPGNum = parseFloat(avgMPG);
+    const tankSizeNum = tankSize ? parseFloat(tankSize) : 0;
     
+    if (!distanceNum || distanceNum <= 0 || !gasPriceNum || gasPriceNum <= 0 || !avgMPGNum || avgMPGNum <= 0) {
+      toast({
+        title: "Invalid inputs",
+        description: "Please enter valid distance, gas price, and average MPG before saving.",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    if (!results) {
+      toast({
+        title: "No calculation to save",
+        description: "Please calculate first before saving.",
+        variant: "destructive"
+      });
+      return;
+    }
+
     const inputs = {
-      distance: parseFloat(distance),
-      gasPrice: parseFloat(gasPrice),
-      tankSize: tankSize ? parseFloat(tankSize) : null,
-      avgMPG: parseFloat(avgMPG)
+      distance: distanceNum,
+      gasPrice: gasPriceNum,
+      tankSize: tankSizeNum || null,
+      avgMPG: avgMPGNum
+    };
+
+    const enhancedResults = {
+      ...results,
+      gallonsNeededFormatted: `${results.gallonsNeeded.toFixed(2)} gallons`,
+      totalCostFormatted: `$${results.totalCost.toFixed(2)}`,
+      fillUpsFormatted: tankSizeNum > 0 ? `${results.numOfFillUps} fill-ups` : "N/A"
     };
     
     saveCalculation({
-      calculatorType: 'gas-calculator',
+      calculatorType: 'gas_cost',
       inputs,
-      results
+      results: enhancedResults
     });
     
     toast({
