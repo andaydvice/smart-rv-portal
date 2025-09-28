@@ -1290,33 +1290,33 @@ const RVTechnologyGuide = () => {
                   href="https://www.rvt.com/buy/" 
                   variant="default" 
                   size="md"
-                  className="w-full"
+                  className="w-full whitespace-normal text-center min-h-[60px] flex items-center justify-center"
                 >
-                  Browse current RV inventory
+                  Browse Current RV Inventory
                 </ExternalLinkButton>
                 <ExternalLinkButton 
                   href="https://www.rvinsider.com/" 
                   variant="outline" 
                   size="md"
-                  className="w-full"
+                  className="w-full whitespace-normal text-center min-h-[60px] flex items-center justify-center"
                 >
-                  Read detailed RV reviews
+                  Read Detailed RV Reviews
                 </ExternalLinkButton>
                 <ExternalLinkButton 
                   href="https://www.rvt.com/price-checker/" 
                   variant="outline" 
                   size="md"
-                  className="w-full"
+                  className="w-full whitespace-normal text-center min-h-[60px] flex items-center justify-center"
                 >
-                  Compare pricing across models
+                  Compare Model Pricing
                 </ExternalLinkButton>
                 <ExternalLinkButton 
                   href="https://www.rvt.com/dealersearch.php" 
                   variant="outline" 
                   size="md"
-                  className="w-full"
+                  className="w-full whitespace-normal text-center min-h-[60px] flex items-center justify-center"
                 >
-                  Find authorised dealers
+                  Find Authorized Dealers
                 </ExternalLinkButton>
               </div>
 
