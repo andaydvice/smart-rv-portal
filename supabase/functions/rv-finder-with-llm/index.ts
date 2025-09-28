@@ -1,0 +1,212 @@
+import "https://deno.land/x/xhr@0.1.0/mod.ts";
+import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
+
+const corsHeaders = {
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
+};
+
+interface UserRequirements {
+  travelStyle: string;
+  experienceLevel: string;
+  budget: string;
+  groupSize: string;
+  mustHaveFeatures: string[];
+  travelDuration: string;
+  comfortLevel: string;
+  additionalRequirements: string;
+}
+
+interface RVRecommendation {
+  rvType: string;
+  reasoning: string;
+  priceRange: string;
+  recommendedModels: string[];
+  technologyFeatures: string[];
+  searchUrls: {
+    rvtrader: string;
+    rvt: string;
+    rvusa: string;
+  };
+  educationalContent: string;
+  budgetConsiderations: string;
+}
+
+serve(async (req) => {
+  if (req.method === 'OPTIONS') {
+    return new Response(null, { headers: corsHeaders });
+  }
+
+  try {
+    const openAIApiKey = Deno.env.get('OPENAI_API_KEY');
+    if (!openAIApiKey) {
+      throw new Error('OpenAI API key not configured');
+    }
+
+    const { requirements }: { requirements: UserRequirements } = await req.json();
+    
+    console.log('Processing RV finder request:', requirements);
+
+    // Create comprehensive prompt for LLM analysis
+    const systemPrompt = `You are an expert RV consultant with decades of experience helping people find the perfect RV. Analyze the user's requirements and provide detailed, practical recommendations.
+
+    Consider:
+    - RV types (Class A, B, C, Travel Trailers, Fifth Wheels)
+    - Size and weight considerations
+    - Technology requirements and compatibility
+    - Budget realities including hidden costs
+    - Learning curve for different RV types
+    - Maintenance and reliability factors
+
+    Provide actionable advice with specific model recommendations and realistic expectations.`;
+
+    const userPrompt = `Please analyze these RV requirements and provide comprehensive recommendations:
+
+    Travel Style: ${requirements.travelStyle}
+    Experience Level: ${requirements.experienceLevel}
+    Budget: ${requirements.budget}
+    Group Size: ${requirements.groupSize}
+    Must-Have Features: ${requirements.mustHaveFeatures.join(', ')}
+    Travel Duration: ${requirements.travelDuration}
+    Comfort Level: ${requirements.comfortLevel}
+    Additional Requirements: ${requirements.additionalRequirements}
+
+    Please provide:
+    1. Best RV type(s) for their needs with detailed reasoning
+    2. Realistic price range including total cost of ownership
+    3. Specific model recommendations (3-5 models)
+    4. Technology features that match their requirements
+    5. Educational content about their recommended RV type
+    6. Budget considerations and hidden costs
+    7. Search parameters for finding these RVs online
+
+    Format your response as JSON matching this structure:
+    {
+      "rvType": "Primary recommended RV type",
+      "reasoning": "Detailed explanation of why this type suits their needs",
+      "priceRange": "Realistic price range with reasoning",
+      "recommendedModels": ["Model 1", "Model 2", "Model 3"],
+      "technologyFeatures": ["Feature 1", "Feature 2", "Feature 3"],
+      "educationalContent": "Educational information about this RV type",
+      "budgetConsiderations": "Important budget and cost considerations"
+    }`;
+
+    // Call OpenAI API
+    const response = await fetch('https://api.openai.com/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${openAIApiKey}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        model: 'gpt-4o-mini',
+        messages: [
+          { role: 'system', content: systemPrompt },
+          { role: 'user', content: userPrompt }
+        ],
+        temperature: 0.3,
+        max_tokens: 2000,
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error(`OpenAI API error: ${response.status}`);
+    }
+
+    const aiData = await response.json();
+    const aiResponse = aiData.choices[0].message.content;
+    
+    console.log('AI Response received:', aiResponse);
+
+    // Parse AI response
+    let recommendation: RVRecommendation;
+    try {
+      const parsed = JSON.parse(aiResponse);
+      
+      // Generate search URLs based on AI recommendations
+      const searchUrls = generateSearchUrls(parsed, requirements);
+      
+      recommendation = {
+        ...parsed,
+        searchUrls
+      };
+    } catch (parseError) {
+      console.error('Failed to parse AI response as JSON:', parseError);
+      // Fallback response if JSON parsing fails
+      recommendation = {
+        rvType: "Class C Motorhome",
+        reasoning: aiResponse,
+        priceRange: "Analysis provided in reasoning section",
+        recommendedModels: ["Please see detailed analysis"],
+        technologyFeatures: requirements.mustHaveFeatures,
+        searchUrls: generateSearchUrls({ rvType: "Class C" }, requirements),
+        educationalContent: "Detailed analysis provided in the reasoning section.",
+        budgetConsiderations: "Budget considerations included in the analysis."
+      };
+    }
+
+    return new Response(JSON.stringify({ recommendation }), {
+      headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+    });
+
+  } catch (error) {
+    console.error('Error in rv-finder-with-llm function:', error);
+    return new Response(
+      JSON.stringify({ 
+        error: 'Failed to process RV recommendations',
+        details: error.message 
+      }), 
+      {
+        status: 500,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      }
+    );
+  }
+});
+
+function generateSearchUrls(aiRecommendation: any, requirements: UserRequirements) {
+  const rvType = aiRecommendation.rvType || "Class C";
+  const budgetRange = parseBudgetRange(requirements.budget);
+  
+  // Map RV type to search parameters
+  const rvTypeMap: Record<string, string> = {
+    "Class A": "Class%20A",
+    "Class B": "Class%20B", 
+    "Class C": "Class%20C",
+    "Travel Trailer": "Travel%20Trailer",
+    "Fifth Wheel": "Fifth%20Wheel"
+  };
+  
+  const mappedRvType = Object.keys(rvTypeMap).find(key => 
+    rvType.toLowerCase().includes(key.toLowerCase())
+  ) || "Class C";
+  
+  const encodedRvType = rvTypeMap[mappedRvType];
+  
+  // Generate working search URLs
+  const baseYear = new Date().getFullYear() - 10; // Last 10 years
+  const currentYear = new Date().getFullYear();
+  
+  return {
+    rvtrader: `https://www.rvtrader.com/search-results?type=Motor%20Home%7C${encodedRvType}&condition=used&zip=&radius=500&price=${budgetRange.min}%3A${budgetRange.max}&year=${baseYear}%3A${currentYear}`,
+    rvt: `https://www.rvt.com/buy/?q=(And.Year.range(${baseYear}..${currentYear})._.RvType.inlist(${encodedRvType})._.Price.range(${budgetRange.min}..${budgetRange.max}).)`,
+    rvusa: `https://www.rvusa.com/rv-search?category=${encodedRvType}&price_min=${budgetRange.min}&price_max=${budgetRange.max}&year_min=${baseYear}&year_max=${currentYear}`
+  };
+}
+
+function parseBudgetRange(budget: string): { min: number, max: number } {
+  // Parse budget string and return reasonable ranges
+  const budgetLower = budget.toLowerCase();
+  
+  if (budgetLower.includes('under') || budgetLower.includes('50')) {
+    return { min: 10000, max: 50000 };
+  } else if (budgetLower.includes('50') && budgetLower.includes('100')) {
+    return { min: 50000, max: 100000 };
+  } else if (budgetLower.includes('100') && budgetLower.includes('200')) {
+    return { min: 100000, max: 200000 };
+  } else if (budgetLower.includes('200')) {
+    return { min: 200000, max: 500000 };
+  } else {
+    return { min: 20000, max: 150000 }; // Default range
+  }
+}
