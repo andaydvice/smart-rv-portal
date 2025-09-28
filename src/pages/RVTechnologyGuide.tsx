@@ -24,7 +24,7 @@ import rvTechnologyPlanningImage from '@/assets/rv-technology-planning.png';
 import rvTechnologyDecisionsImage from '@/assets/rv-technology-decisions.png';
 import { BlogPostImage } from '@/components/blog/post/BlogPostImage';
 import { TechnologyReadinessQuiz } from '@/components/rv-technology/interactive/TechnologyReadinessQuiz';
-import { FeatureMatcher } from '@/components/rv-technology/interactive/FeatureMatcher';
+
 import { TechnologyChecklist } from '@/components/rv-technology/interactive/TechnologyChecklist';
 import { LifestylePlanner } from '@/components/rv-technology/interactive/LifestylePlanner';
 import { RVTechNavigation } from '@/components/rv-technology/RVTechNavigation';
@@ -173,14 +173,6 @@ const RVTechnologyGuide = () => {
           </Container>
         </section>
 
-        {/* Smart Feature Matcher */}
-        <section className="py-16 px-4 relative bg-[#080F1F]/50">
-          <Container>
-            <div className="max-w-6xl mx-auto">
-              <FeatureMatcher />
-            </div>
-          </Container>
-        </section>
 
         {/* Lifestyle Technology Planner */}
         <section className="py-16 px-4 relative">
