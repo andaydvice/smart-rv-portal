@@ -55,7 +55,8 @@ export default {
         connectivity: {
           bg: "210 18 13", // HSL for #1B2028
           accent: "211 52 59", // HSL for #5B9BD5
-          darkBg: "216 23 11" // HSL for #151A22
+          darkBg: "216 23 11", // HSL for #151A22
+          lightText: "226 232 255" // HSL for #E2E8FF
         }
       },
       spacing: {
