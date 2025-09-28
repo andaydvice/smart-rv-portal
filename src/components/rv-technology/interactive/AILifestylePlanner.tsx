@@ -70,7 +70,8 @@ export const AILifestylePlanner: React.FC = () => {
       setAnalysis(data.analysis);
     } catch (err) {
       console.error('Lifestyle analysis error:', err);
-      setError(err instanceof Error ? err.message : 'Failed to analyze lifestyle requirements');
+      const errorMessage = err instanceof Error ? err.message : 'Unknown error occurred';
+      setError(`Failed to analyze lifestyle requirements: ${errorMessage}. Please try again.`);
     } finally {
       setIsAnalyzing(false);
     }

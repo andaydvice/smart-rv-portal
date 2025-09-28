@@ -12,3 +12,6 @@ verify_jwt = false
 
 [functions.document-processor]
 verify_jwt = false
+
+[functions.lifestyle-tech-analyzer]
+verify_jwt = false
