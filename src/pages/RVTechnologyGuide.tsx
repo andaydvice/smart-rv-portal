@@ -346,46 +346,53 @@ const RVTechnologyGuide = () => {
           <Container>
             <div className="max-w-6xl mx-auto">
               <div className="mb-12">
+                <div className="text-center mb-8">
+                  <h3 className="text-3xl font-bold text-white mb-4">RV Buyer Technology Profiles</h3>
+                  <p className="text-lg text-[#E2E8FF] max-w-3xl mx-auto">
+                    Choose your research approach based on your priorities, budget, and technology preferences. 
+                    This comparison helps match your needs with the right RV technology level.
+                  </p>
+                </div>
 
-                <div className="overflow-x-auto">
-                  <table className="w-full bg-[#091020] rounded-lg overflow-hidden">
-                    <thead>
-                      <tr className="border-b border-[#1a202c]">
-                        <th className="text-left p-4 text-white font-semibold">Buyer Type</th>
-                        <th className="text-left p-4 text-white font-semibold">Tech Enthusiast</th>
-                        <th className="text-left p-4 text-white font-semibold">Family Safety Focus</th>
-                        <th className="text-left p-4 text-white font-semibold">Budget Conscious</th>
-                        <th className="text-left p-4 text-white font-semibold">Luxury Comfort</th>
+                <div className="overflow-x-auto shadow-2xl rounded-xl">
+                  <table className="w-full bg-gradient-to-br from-[#091020] to-[#0a1428] rounded-xl overflow-hidden border border-[#1a202c]">
+                    <thead className="bg-gradient-to-r from-[#60A5FA] to-[#4B8FE3]">
+                      <tr>
+                        <th className="text-left p-6 text-white font-bold text-lg border-r border-white/20">Buyer Profile</th>
+                        <th className="text-center p-6 text-white font-bold text-lg border-r border-white/20">Tech Enthusiast</th>
+                        <th className="text-center p-6 text-white font-bold text-lg border-r border-white/20">Family Safety Focus</th>
+                        <th className="text-center p-6 text-white font-bold text-lg border-r border-white/20">Budget Conscious</th>
+                        <th className="text-center p-6 text-white font-bold text-lg">Luxury Comfort</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr className="border-b border-[#1a202c]">
-                        <td className="p-4 text-[#E2E8FF] font-medium">Technology Research Focus</td>
-                        <td className="p-4 text-[#E2E8FF]">Latest Available Features</td>
-                        <td className="p-4 text-[#E2E8FF]">Proven, reliable systems</td>
-                        <td className="p-4 text-[#E2E8FF]">Essential functions</td>
-                        <td className="p-4 text-[#E2E8FF]">Premium integration</td>
+                      <tr className="border-b border-[#1a202c] hover:bg-[#0f1a2e] transition-colors">
+                        <td className="p-6 text-[#60A5FA] font-semibold text-lg bg-[#0a1428]/50">Technology Research Focus</td>
+                        <td className="p-6 text-[#E2E8FF] text-center">Latest Available Features</td>
+                        <td className="p-6 text-[#E2E8FF] text-center">Proven, reliable systems</td>
+                        <td className="p-6 text-[#E2E8FF] text-center">Essential functions</td>
+                        <td className="p-6 text-[#E2E8FF] text-center">Premium integration</td>
                       </tr>
-                      <tr className="border-b border-[#1a202c]">
-                        <td className="p-4 text-[#E2E8FF] font-medium">Features to Prioritise</td>
-                        <td className="p-4 text-[#E2E8FF]">Connectivity, automation, integration</td>
-                        <td className="p-4 text-[#E2E8FF]">Monitoring, basic smart controls</td>
-                        <td className="p-4 text-[#E2E8FF]">Core features, manual backups</td>
-                        <td className="p-4 text-[#E2E8FF]">Automated systems, premium support</td>
+                      <tr className="border-b border-[#1a202c] hover:bg-[#0f1a2e] transition-colors">
+                        <td className="p-6 text-[#60A5FA] font-semibold text-lg bg-[#0a1428]/50">Features to Prioritise</td>
+                        <td className="p-6 text-[#E2E8FF] text-center">Connectivity, automation, integration</td>
+                        <td className="p-6 text-[#E2E8FF] text-center">Monitoring, basic smart controls</td>
+                        <td className="p-6 text-[#E2E8FF] text-center">Core features, manual backups</td>
+                        <td className="p-6 text-[#E2E8FF] text-center">Automated systems, premium support</td>
                       </tr>
-                      <tr className="border-b border-[#1a202c]">
-                        <td className="p-4 text-[#E2E8FF] font-medium">Manufacturer Research Areas</td>
-                        <td className="p-4 text-[#E2E8FF]">Premium manufacturers</td>
-                        <td className="p-4 text-[#E2E8FF]">Established brands with support</td>
-                        <td className="p-4 text-[#E2E8FF]">Value focused manufacturers</td>
-                        <td className="p-4 text-[#E2E8FF]">Luxury manufacturers</td>
+                      <tr className="border-b border-[#1a202c] hover:bg-[#0f1a2e] transition-colors">
+                        <td className="p-6 text-[#60A5FA] font-semibold text-lg bg-[#0a1428]/50">Manufacturer Research Areas</td>
+                        <td className="p-6 text-[#E2E8FF] text-center">Premium manufacturers</td>
+                        <td className="p-6 text-[#E2E8FF] text-center">Established brands with support</td>
+                        <td className="p-6 text-[#E2E8FF] text-center">Value focused manufacturers</td>
+                        <td className="p-6 text-[#E2E8FF] text-center">Luxury manufacturers</td>
                       </tr>
-                      <tr>
-                        <td className="p-4 text-[#E2E8FF] font-medium">Research Budget Range</td>
-                        <td className="p-4 text-[#E2E8FF]">$150K+</td>
-                        <td className="p-4 text-[#E2E8FF]">$80K–150K</td>
-                        <td className="p-4 text-[#E2E8FF]">$40K–80K</td>
-                        <td className="p-4 text-[#E2E8FF]">$200K+</td>
+                      <tr className="hover:bg-[#0f1a2e] transition-colors">
+                        <td className="p-6 text-[#60A5FA] font-semibold text-lg bg-[#0a1428]/50">Research Budget Range</td>
+                        <td className="p-6 text-[#E2E8FF] text-center font-semibold">$150K+</td>
+                        <td className="p-6 text-[#E2E8FF] text-center font-semibold">$80K–150K</td>
+                        <td className="p-6 text-[#E2E8FF] text-center font-semibold">$40K–80K</td>
+                        <td className="p-6 text-[#E2E8FF] text-center font-semibold">$200K+</td>
                       </tr>
                     </tbody>
                   </table>
