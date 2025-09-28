@@ -145,11 +145,12 @@ export const AIEducationalConsultant = () => {
 
   return (
     <Card className="w-full max-w-2xl mx-auto bg-connectivity-darkBg border-gray-700">
-      <CardHeader>
-        <div className="flex items-center gap-2">
+      <CardHeader className="text-center">
+        <div className="flex items-center justify-center gap-2 mb-4">
+          <BookOpen className="h-8 w-8 text-connectivity-accent" />
           <MessageCircle className="h-6 w-6 text-connectivity-accent" />
-          <CardTitle className="text-white">RV Technology Educational Assistant</CardTitle>
         </div>
+        <CardTitle className="text-white">RV Technology Educational Assistant</CardTitle>
         <CardDescription className="text-[#E2E8FF]">
           Ask questions about RV technology concepts for educational understanding
         </CardDescription>
