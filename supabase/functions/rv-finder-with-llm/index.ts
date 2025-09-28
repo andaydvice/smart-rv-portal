@@ -154,7 +154,7 @@ serve(async (req) => {
     return new Response(
       JSON.stringify({ 
         error: 'Failed to process RV recommendations',
-        details: error.message 
+        details: error instanceof Error ? error.message : 'Unknown error'
       }), 
       {
         status: 500,
@@ -165,32 +165,11 @@ serve(async (req) => {
 });
 
 function generateSearchUrls(aiRecommendation: any, requirements: UserRequirements) {
-  const rvType = aiRecommendation.rvType || "Class C";
-  const budgetRange = parseBudgetRange(requirements.budget);
-  
-  // Map RV type to search parameters
-  const rvTypeMap: Record<string, string> = {
-    "Class A": "Class%20A",
-    "Class B": "Class%20B", 
-    "Class C": "Class%20C",
-    "Travel Trailer": "Travel%20Trailer",
-    "Fifth Wheel": "Fifth%20Wheel"
-  };
-  
-  const mappedRvType = Object.keys(rvTypeMap).find(key => 
-    rvType.toLowerCase().includes(key.toLowerCase())
-  ) || "Class C";
-  
-  const encodedRvType = rvTypeMap[mappedRvType];
-  
-  // Generate working search URLs
-  const baseYear = new Date().getFullYear() - 10; // Last 10 years
-  const currentYear = new Date().getFullYear();
-  
+  // Use legitimate affiliate URLs instead of fake search parameters
   return {
-    rvtrader: `https://www.rvtrader.com/search-results?type=Motor%20Home%7C${encodedRvType}&condition=used&zip=&radius=500&price=${budgetRange.min}%3A${budgetRange.max}&year=${baseYear}%3A${currentYear}`,
-    rvt: `https://www.rvt.com/buy/?q=(And.Year.range(${baseYear}..${currentYear})._.RvType.inlist(${encodedRvType})._.Price.range(${budgetRange.min}..${budgetRange.max}).)`,
-    rvusa: `https://www.rvusa.com/rv-search?category=${encodedRvType}&price_min=${budgetRange.min}&price_max=${budgetRange.max}&year_min=${baseYear}&year_max=${currentYear}`
+    rvtrader: 'https://www.rvtrader.com/rvs-for-sale',
+    rvt: 'https://www.rvt.com/buy/',
+    rvusa: 'https://www.rvt.com/dealersearch.php'
   };
 }
 

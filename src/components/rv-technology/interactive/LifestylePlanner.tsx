@@ -57,7 +57,7 @@ const lifestyleScenarios: LifestyleScenario[] = [
       'Travel trailers with slide-out workspaces',
       'Fifth wheels with residential-style interiors'
     ],
-    rvtFilter: 'remote-work-friendly'
+    rvtFilter: 'https://www.rvt.com/buy/'
   },
   {
     id: 'family-entertainment',
@@ -95,7 +95,7 @@ const lifestyleScenarios: LifestyleScenario[] = [
       'Large travel trailers with bunk rooms',
       'Fifth wheels with theater seating'
     ],
-    rvtFilter: 'family-entertainment'
+    rvtFilter: 'https://www.rvt.com/buy/'
   },
   {
     id: 'off-grid',
@@ -133,7 +133,7 @@ const lifestyleScenarios: LifestyleScenario[] = [
       'Truck campers for remote access',
       'Small travel trailers with off-grid packages'
     ],
-    rvtFilter: 'off-grid-ready'
+    rvtFilter: 'https://www.rvt.com/buy/'
   },
   {
     id: 'full-time',
@@ -171,7 +171,7 @@ const lifestyleScenarios: LifestyleScenario[] = [
       'Luxury fifth wheels with smart home features',
       'Custom coach conversions'
     ],
-    rvtFilter: 'full-time-living'
+    rvtFilter: 'https://www.rvt.com/buy/'
   }
 ];
 
@@ -248,7 +248,7 @@ export const LifestylePlanner: React.FC = () => {
         {/* Action Button */}
         <div className="mt-8 text-center">
           <ExternalLinkButton 
-            href={`https://www.rvt.com/buy/?lifestyle=${scenario.rvtFilter}`}
+            href={scenario.rvtFilter}
             variant="default"
             size="lg"
             className="bg-gradient-to-r from-[#5B9BD5] to-[#60A5FA] hover:from-[#4B8FE3] hover:to-[#5B9BD5] text-lg px-8"
