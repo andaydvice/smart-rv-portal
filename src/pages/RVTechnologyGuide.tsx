@@ -18,6 +18,8 @@ import RVPowerManagementHero from '@/components/rv-technology/RVPowerManagementH
 import RVControlMonitoringHero from '@/components/rv-technology/RVControlMonitoringHero';
 import RVTechnologyTiersHero from '@/components/rv-technology/RVTechnologyTiersHero';
 import rvTechComparisonImage from '@/assets/rv-technology-comparison-dashboard.jpg';
+import aiEducationalConsultantHero from '@/assets/ai-educational-consultant-hero.png';
+import intelligentRvFinderHero from '@/assets/intelligent-rv-finder-hero.jpg';
 import rvCategoryComparisonImage from '@/assets/rv-category-comparison.png';
 import rvDealershipBackground from '@/assets/rv-dealership-background.jpg';
 import rvTechnologyPlanningImage from '@/assets/rv-technology-planning.png';
@@ -143,7 +145,7 @@ const RVTechnologyGuide = () => {
             <div className="text-center mb-12">
               <div className="mb-8">
                 <img 
-                  src="/src/assets/ai-educational-consultant-hero.png" 
+                  src={aiEducationalConsultantHero} 
                   alt="AI Educational Consultant - Futuristic RV technology interface" 
                   className="w-full max-w-4xl mx-auto rounded-2xl shadow-2xl"
                 />
@@ -167,7 +169,7 @@ const RVTechnologyGuide = () => {
             <div className="text-center mb-12">
               <div className="mb-8">
                 <img 
-                  src="/src/assets/intelligent-rv-finder-hero.jpg" 
+                  src={intelligentRvFinderHero} 
                   alt="Intelligent RV Finder - Multiple RVs on digital interface platform" 
                   className="w-full max-w-4xl mx-auto rounded-2xl shadow-2xl"
                 />
