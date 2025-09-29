@@ -130,12 +130,12 @@ export default function IntelligentRVFinder() {
               <SelectValue placeholder="How do you plan to use your RV?" className="text-[#E2E8FF]" />
             </SelectTrigger>
             <SelectContent className="bg-[#131a2a] border border-[#1a202c] shadow-lg z-50">
-              <SelectItem value="full-time-living" className="text-white hover:bg-[#1a202c] focus:bg-[#1a202c]">Full-time living on the road</SelectItem>
-              <SelectItem value="extended-travel" className="text-white hover:bg-[#1a202c] focus:bg-[#1a202c]">Extended travel (months at a time)</SelectItem>
-              <SelectItem value="weekend-trips" className="text-white hover:bg-[#1a202c] focus:bg-[#1a202c]">Weekend getaways</SelectItem>
-              <SelectItem value="seasonal-camping" className="text-white hover:bg-[#1a202c] focus:bg-[#1a202c]">Seasonal camping</SelectItem>
-              <SelectItem value="cross-country" className="text-white hover:bg-[#1a202c] focus:bg-[#1a202c]">Cross-country road trips</SelectItem>
-              <SelectItem value="remote-work" className="text-white hover:bg-[#1a202c] focus:bg-[#1a202c]">Remote work while traveling</SelectItem>
+              <SelectItem value="full time living" className="text-white hover:bg-[#1a202c] focus:bg-[#1a202c]">Full time living on the road</SelectItem>
+              <SelectItem value="extended travel" className="text-white hover:bg-[#1a202c] focus:bg-[#1a202c]">Extended travel (months at a time)</SelectItem>
+              <SelectItem value="weekend trips" className="text-white hover:bg-[#1a202c] focus:bg-[#1a202c]">Weekend getaways</SelectItem>
+              <SelectItem value="seasonal camping" className="text-white hover:bg-[#1a202c] focus:bg-[#1a202c]">Seasonal camping</SelectItem>
+              <SelectItem value="cross country" className="text-white hover:bg-[#1a202c] focus:bg-[#1a202c]">Cross country road trips</SelectItem>
+              <SelectItem value="remote work" className="text-white hover:bg-[#1a202c] focus:bg-[#1a202c]">Remote work while traveling</SelectItem>
             </SelectContent>
           </Select>
         </div>
@@ -148,8 +148,8 @@ export default function IntelligentRVFinder() {
               <SelectValue placeholder="Your experience with RVs" className="text-[#E2E8FF]" />
             </SelectTrigger>
             <SelectContent className="bg-[#131a2a] border border-[#1a202c] shadow-lg z-50">
-              <SelectItem value="complete-beginner" className="text-white hover:bg-[#1a202c] focus:bg-[#1a202c]">Complete beginner</SelectItem>
-              <SelectItem value="some-experience" className="text-white hover:bg-[#1a202c] focus:bg-[#1a202c]">Some camping/RV experience</SelectItem>
+              <SelectItem value="complete beginner" className="text-white hover:bg-[#1a202c] focus:bg-[#1a202c]">Complete beginner</SelectItem>
+              <SelectItem value="some experience" className="text-white hover:bg-[#1a202c] focus:bg-[#1a202c]">Some camping/RV experience</SelectItem>
               <SelectItem value="experienced" className="text-white hover:bg-[#1a202c] focus:bg-[#1a202c]">Experienced RVer</SelectItem>
               <SelectItem value="expert" className="text-white hover:bg-[#1a202c] focus:bg-[#1a202c]">RV expert/mechanic</SelectItem>
             </SelectContent>
@@ -164,10 +164,10 @@ export default function IntelligentRVFinder() {
               <SelectValue placeholder="Your budget for purchasing an RV" className="text-[#E2E8FF]" />
             </SelectTrigger>
             <SelectContent className="bg-[#131a2a] border border-[#1a202c] shadow-lg z-50">
-              <SelectItem value="under-50k" className="text-white hover:bg-[#1a202c] focus:bg-[#1a202c]">Under $50,000</SelectItem>
-              <SelectItem value="50k-100k" className="text-white hover:bg-[#1a202c] focus:bg-[#1a202c]">$50,000 - $100,000</SelectItem>
-              <SelectItem value="100k-200k" className="text-white hover:bg-[#1a202c] focus:bg-[#1a202c]">$100,000 - $200,000</SelectItem>
-              <SelectItem value="200k-plus" className="text-white hover:bg-[#1a202c] focus:bg-[#1a202c]">$200,000+</SelectItem>
+              <SelectItem value="under 50k" className="text-white hover:bg-[#1a202c] focus:bg-[#1a202c]">Under $50,000</SelectItem>
+              <SelectItem value="50k 100k" className="text-white hover:bg-[#1a202c] focus:bg-[#1a202c]">$50,000 - $100,000</SelectItem>
+              <SelectItem value="100k 200k" className="text-white hover:bg-[#1a202c] focus:bg-[#1a202c]">$100,000 - $200,000</SelectItem>
+              <SelectItem value="200k plus" className="text-white hover:bg-[#1a202c] focus:bg-[#1a202c]">$200,000+</SelectItem>
             </SelectContent>
           </Select>
         </div>
@@ -182,8 +182,8 @@ export default function IntelligentRVFinder() {
             <SelectContent className="bg-[#131a2a] border border-[#1a202c] shadow-lg z-50">
               <SelectItem value="solo" className="text-white hover:bg-[#1a202c] focus:bg-[#1a202c]">Solo traveler</SelectItem>
               <SelectItem value="couple" className="text-white hover:bg-[#1a202c] focus:bg-[#1a202c]">Couple</SelectItem>
-              <SelectItem value="small-family" className="text-white hover:bg-[#1a202c] focus:bg-[#1a202c]">Small family (3-4 people)</SelectItem>
-              <SelectItem value="large-family" className="text-white hover:bg-[#1a202c] focus:bg-[#1a202c]">Large family (5+ people)</SelectItem>
+              <SelectItem value="small family" className="text-white hover:bg-[#1a202c] focus:bg-[#1a202c]">Small family (3 4 people)</SelectItem>
+              <SelectItem value="large family" className="text-white hover:bg-[#1a202c] focus:bg-[#1a202c]">Large family (5+ people)</SelectItem>
               <SelectItem value="group" className="text-white hover:bg-[#1a202c] focus:bg-[#1a202c]">Group of friends</SelectItem>
             </SelectContent>
           </Select>
@@ -197,11 +197,11 @@ export default function IntelligentRVFinder() {
               <SelectValue placeholder="How long are your typical trips?" className="text-[#E2E8FF]" />
             </SelectTrigger>
             <SelectContent className="bg-[#131a2a] border border-[#1a202c] shadow-lg z-50">
-              <SelectItem value="weekend" className="text-white hover:bg-[#1a202c] focus:bg-[#1a202c]">Weekend trips (2-3 days)</SelectItem>
-              <SelectItem value="week" className="text-white hover:bg-[#1a202c] focus:bg-[#1a202c]">Week-long trips</SelectItem>
-              <SelectItem value="month" className="text-white hover:bg-[#1a202c] focus:bg-[#1a202c]">Month-long adventures</SelectItem>
+              <SelectItem value="weekend" className="text-white hover:bg-[#1a202c] focus:bg-[#1a202c]">Weekend trips (2 3 days)</SelectItem>
+              <SelectItem value="week" className="text-white hover:bg-[#1a202c] focus:bg-[#1a202c]">Week long trips</SelectItem>
+              <SelectItem value="month" className="text-white hover:bg-[#1a202c] focus:bg-[#1a202c]">Month long adventures</SelectItem>
               <SelectItem value="extended" className="text-white hover:bg-[#1a202c] focus:bg-[#1a202c]">Extended travel (2+ months)</SelectItem>
-              <SelectItem value="full-time" className="text-white hover:bg-[#1a202c] focus:bg-[#1a202c]">Full-time living</SelectItem>
+              <SelectItem value="full time" className="text-white hover:bg-[#1a202c] focus:bg-[#1a202c]">Full time living</SelectItem>
             </SelectContent>
           </Select>
         </div>
@@ -216,8 +216,8 @@ export default function IntelligentRVFinder() {
             <SelectContent className="bg-[#131a2a] border border-[#1a202c] shadow-lg z-50">
               <SelectItem value="basic" className="text-white hover:bg-[#1a202c] focus:bg-[#1a202c]">Basic camping comfort</SelectItem>
               <SelectItem value="moderate" className="text-white hover:bg-[#1a202c] focus:bg-[#1a202c]">Moderate comfort with some amenities</SelectItem>
-              <SelectItem value="luxury" className="text-white hover:bg-[#1a202c] focus:bg-[#1a202c]">Luxury home-like comfort</SelectItem>
-              <SelectItem value="hotel-style" className="text-white hover:bg-[#1a202c] focus:bg-[#1a202c]">Hotel-style amenities</SelectItem>
+              <SelectItem value="luxury" className="text-white hover:bg-[#1a202c] focus:bg-[#1a202c]">Luxury home like comfort</SelectItem>
+              <SelectItem value="hotel style" className="text-white hover:bg-[#1a202c] focus:bg-[#1a202c]">Hotel style amenities</SelectItem>
             </SelectContent>
           </Select>
         </div>
