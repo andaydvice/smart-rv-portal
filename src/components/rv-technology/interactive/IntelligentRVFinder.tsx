@@ -27,9 +27,10 @@ interface RVRecommendation {
   recommendedModels: string[];
   technologyFeatures: string[];
   searchUrls: {
-    rvtrader: string;
-    rvt: string;
-    rvusa: string;
+    buyUrl: string;
+    reviewsUrl: string;
+    dealersUrl: string;
+    priceCheckerUrl: string;
   };
   educationalContent: string;
   budgetConsiderations: string;
@@ -48,14 +49,15 @@ const availableFeatures = [
   'Residential Refrigerator',
   'King Size Bed',
   'Fireplace',
-  'Outdoor Kitchen',
-  'Generator (Quiet)',
   'Slide-outs (Multiple)',
-  'Full Bathroom',
-  'Office Space/Desk Area'
+  'Office Space/Desk Area',
+  'Generator (Onboard)',
+  'Air Conditioning (Multiple Zones)',
+  'Composting Toilet',
+  'Water Filtration System'
 ];
 
-export default function IntelligentRVFinder() {
+export const IntelligentRVFinder: React.FC = () => {
   const [requirements, setRequirements] = useState<UserRequirements>({
     travelStyle: '',
     experienceLevel: '',
@@ -123,135 +125,133 @@ export default function IntelligentRVFinder() {
           Intelligent RV Finder
         </CardTitle>
         <p className="text-[#E2E8FF]">
-          Tell us about your RV needs and get AI powered recommendations with real search results
+          Answer a few questions and get personalized RV recommendations with technology features that match your needs
         </p>
       </CardHeader>
-      <CardContent className="space-y-6 bg-gradient-to-br from-[#091020] to-[#131a2a] p-6">
+
+      <CardContent className="p-6 space-y-6">
         {/* Travel Style */}
-        <div className="space-y-2">
-          <Label htmlFor="travelStyle" className="text-white font-medium">Travel Style *</Label>
-          <Select onValueChange={(value) => setRequirements(prev => ({ ...prev, travelStyle: value }))}>
-            <SelectTrigger className="w-full bg-[#131a2a] border-[#1a202c] text-white focus:border-[#5B9BD5] focus:ring-1 focus:ring-[#5B9BD5]">
-              <SelectValue placeholder="How do you plan to use your RV?" className="text-[#E2E8FF]" />
+        <div>
+          <Label className="text-white font-medium mb-3 block">Travel Style *</Label>
+          <Select value={requirements.travelStyle} onValueChange={(value) => setRequirements(prev => ({ ...prev, travelStyle: value }))}>
+            <SelectTrigger className="w-full bg-[#131a2a] border-[#1a202c] text-white">
+              <SelectValue placeholder="How do you plan to use your RV?" />
             </SelectTrigger>
-            <SelectContent className="bg-[#131a2a] border border-[#1a202c] shadow-lg z-50">
-              <SelectItem value="full time living" className="text-white hover:bg-[#1a202c] focus:bg-[#1a202c]">Full time living on the road</SelectItem>
-              <SelectItem value="extended travel" className="text-white hover:bg-[#1a202c] focus:bg-[#1a202c]">Extended travel (months at a time)</SelectItem>
-              <SelectItem value="weekend trips" className="text-white hover:bg-[#1a202c] focus:bg-[#1a202c]">Weekend getaways</SelectItem>
-              <SelectItem value="seasonal camping" className="text-white hover:bg-[#1a202c] focus:bg-[#1a202c]">Seasonal camping</SelectItem>
-              <SelectItem value="cross country" className="text-white hover:bg-[#1a202c] focus:bg-[#1a202c]">Cross country road trips</SelectItem>
-              <SelectItem value="remote work" className="text-white hover:bg-[#1a202c] focus:bg-[#1a202c]">Remote work while traveling</SelectItem>
+            <SelectContent className="bg-[#131a2a] border-[#1a202c]">
+              <SelectItem value="weekend trips" className="text-white hover:bg-[#1a202c]">Weekend Trips</SelectItem>
+              <SelectItem value="extended travel" className="text-white hover:bg-[#1a202c]">Extended Travel (weeks/months)</SelectItem>
+              <SelectItem value="full time living" className="text-white hover:bg-[#1a202c]">Full Time Living</SelectItem>
+              <SelectItem value="seasonal camping" className="text-white hover:bg-[#1a202c]">Seasonal Camping</SelectItem>
             </SelectContent>
           </Select>
         </div>
 
         {/* Experience Level */}
-        <div className="space-y-2">
-          <Label htmlFor="experienceLevel" className="text-white font-medium">RV Experience Level *</Label>
-          <Select onValueChange={(value) => setRequirements(prev => ({ ...prev, experienceLevel: value }))}>
-            <SelectTrigger className="w-full bg-[#131a2a] border-[#1a202c] text-white focus:border-[#5B9BD5] focus:ring-1 focus:ring-[#5B9BD5]">
-              <SelectValue placeholder="Your experience with RVs" className="text-[#E2E8FF]" />
+        <div>
+          <Label className="text-white font-medium mb-3 block">RV Experience Level *</Label>
+          <Select value={requirements.experienceLevel} onValueChange={(value) => setRequirements(prev => ({ ...prev, experienceLevel: value }))}>
+            <SelectTrigger className="w-full bg-[#131a2a] border-[#1a202c] text-white">
+              <SelectValue placeholder="What's your RV experience?" />
             </SelectTrigger>
-            <SelectContent className="bg-[#131a2a] border border-[#1a202c] shadow-lg z-50">
-              <SelectItem value="complete beginner" className="text-white hover:bg-[#1a202c] focus:bg-[#1a202c]">Complete beginner</SelectItem>
-              <SelectItem value="some experience" className="text-white hover:bg-[#1a202c] focus:bg-[#1a202c]">Some camping/RV experience</SelectItem>
-              <SelectItem value="experienced" className="text-white hover:bg-[#1a202c] focus:bg-[#1a202c]">Experienced RVer</SelectItem>
-              <SelectItem value="expert" className="text-white hover:bg-[#1a202c] focus:bg-[#1a202c]">RV expert/mechanic</SelectItem>
+            <SelectContent className="bg-[#131a2a] border-[#1a202c]">
+              <SelectItem value="first time buyer" className="text-white hover:bg-[#1a202c]">First Time Buyer</SelectItem>
+              <SelectItem value="some experience" className="text-white hover:bg-[#1a202c]">Some Experience</SelectItem>
+              <SelectItem value="experienced" className="text-white hover:bg-[#1a202c]">Experienced RVer</SelectItem>
+              <SelectItem value="expert" className="text-white hover:bg-[#1a202c]">Expert/Full Timer</SelectItem>
             </SelectContent>
           </Select>
         </div>
 
         {/* Budget */}
-        <div className="space-y-2">
-          <Label htmlFor="budget" className="text-white font-medium">Budget Range *</Label>
-          <Select onValueChange={(value) => setRequirements(prev => ({ ...prev, budget: value }))}>
-            <SelectTrigger className="w-full bg-[#131a2a] border-[#1a202c] text-white focus:border-[#5B9BD5] focus:ring-1 focus:ring-[#5B9BD5]">
-              <SelectValue placeholder="Your budget for purchasing an RV" className="text-[#E2E8FF]" />
+        <div>
+          <Label className="text-white font-medium mb-3 block">Budget Range *</Label>
+          <Select value={requirements.budget} onValueChange={(value) => setRequirements(prev => ({ ...prev, budget: value }))}>
+            <SelectTrigger className="w-full bg-[#131a2a] border-[#1a202c] text-white">
+              <SelectValue placeholder="What's your budget range?" />
             </SelectTrigger>
-            <SelectContent className="bg-[#131a2a] border border-[#1a202c] shadow-lg z-50">
-              <SelectItem value="under 50k" className="text-white hover:bg-[#1a202c] focus:bg-[#1a202c]">Under $50,000</SelectItem>
-              <SelectItem value="50k 100k" className="text-white hover:bg-[#1a202c] focus:bg-[#1a202c]">$50,000 - $100,000</SelectItem>
-              <SelectItem value="100k 200k" className="text-white hover:bg-[#1a202c] focus:bg-[#1a202c]">$100,000 - $200,000</SelectItem>
-              <SelectItem value="200k plus" className="text-white hover:bg-[#1a202c] focus:bg-[#1a202c]">$200,000+</SelectItem>
+            <SelectContent className="bg-[#131a2a] border-[#1a202c]">
+              <SelectItem value="under 50k" className="text-white hover:bg-[#1a202c]">Under $50,000</SelectItem>
+              <SelectItem value="50k 100k" className="text-white hover:bg-[#1a202c]">$50,000 - $100,000</SelectItem>
+              <SelectItem value="100k 200k" className="text-white hover:bg-[#1a202c]">$100,000 - $200,000</SelectItem>
+              <SelectItem value="200k plus" className="text-white hover:bg-[#1a202c]">$200,000+</SelectItem>
             </SelectContent>
           </Select>
         </div>
 
         {/* Group Size */}
-        <div className="space-y-2">
-          <Label htmlFor="groupSize" className="text-white font-medium">Group Size</Label>
-          <Select onValueChange={(value) => setRequirements(prev => ({ ...prev, groupSize: value }))}>
-            <SelectTrigger className="w-full bg-[#131a2a] border-[#1a202c] text-white focus:border-[#5B9BD5] focus:ring-1 focus:ring-[#5B9BD5]">
-              <SelectValue placeholder="How many people will travel?" className="text-[#E2E8FF]" />
+        <div>
+          <Label className="text-white font-medium mb-3 block">Group Size</Label>
+          <Select value={requirements.groupSize} onValueChange={(value) => setRequirements(prev => ({ ...prev, groupSize: value }))}>
+            <SelectTrigger className="w-full bg-[#131a2a] border-[#1a202c] text-white">
+              <SelectValue placeholder="How many people will be traveling?" />
             </SelectTrigger>
-            <SelectContent className="bg-[#131a2a] border border-[#1a202c] shadow-lg z-50">
-              <SelectItem value="solo" className="text-white hover:bg-[#1a202c] focus:bg-[#1a202c]">Solo traveler</SelectItem>
-              <SelectItem value="couple" className="text-white hover:bg-[#1a202c] focus:bg-[#1a202c]">Couple</SelectItem>
-              <SelectItem value="small family" className="text-white hover:bg-[#1a202c] focus:bg-[#1a202c]">Small family (3 4 people)</SelectItem>
-              <SelectItem value="large family" className="text-white hover:bg-[#1a202c] focus:bg-[#1a202c]">Large family (5+ people)</SelectItem>
-              <SelectItem value="group" className="text-white hover:bg-[#1a202c] focus:bg-[#1a202c]">Group of friends</SelectItem>
-            </SelectContent>
-          </Select>
-        </div>
-
-        {/* Travel Duration */}
-        <div className="space-y-2">
-          <Label htmlFor="travelDuration" className="text-white font-medium">Typical Trip Duration</Label>
-          <Select onValueChange={(value) => setRequirements(prev => ({ ...prev, travelDuration: value }))}>
-            <SelectTrigger className="w-full bg-[#131a2a] border-[#1a202c] text-white focus:border-[#5B9BD5] focus:ring-1 focus:ring-[#5B9BD5]">
-              <SelectValue placeholder="How long are your typical trips?" className="text-[#E2E8FF]" />
-            </SelectTrigger>
-            <SelectContent className="bg-[#131a2a] border border-[#1a202c] shadow-lg z-50">
-              <SelectItem value="weekend" className="text-white hover:bg-[#1a202c] focus:bg-[#1a202c]">Weekend trips (2 3 days)</SelectItem>
-              <SelectItem value="week" className="text-white hover:bg-[#1a202c] focus:bg-[#1a202c]">Week long trips</SelectItem>
-              <SelectItem value="month" className="text-white hover:bg-[#1a202c] focus:bg-[#1a202c]">Month long adventures</SelectItem>
-              <SelectItem value="extended" className="text-white hover:bg-[#1a202c] focus:bg-[#1a202c]">Extended travel (2+ months)</SelectItem>
-              <SelectItem value="full time" className="text-white hover:bg-[#1a202c] focus:bg-[#1a202c]">Full time living</SelectItem>
-            </SelectContent>
-          </Select>
-        </div>
-
-        {/* Comfort Level */}
-        <div className="space-y-2">
-          <Label htmlFor="comfortLevel" className="text-white font-medium">Comfort Preferences</Label>
-          <Select onValueChange={(value) => setRequirements(prev => ({ ...prev, comfortLevel: value }))}>
-            <SelectTrigger className="w-full bg-[#131a2a] border-[#1a202c] text-white focus:border-[#5B9BD5] focus:ring-1 focus:ring-[#5B9BD5]">
-              <SelectValue placeholder="Your comfort expectations" className="text-[#E2E8FF]" />
-            </SelectTrigger>
-            <SelectContent className="bg-[#131a2a] border border-[#1a202c] shadow-lg z-50">
-              <SelectItem value="basic" className="text-white hover:bg-[#1a202c] focus:bg-[#1a202c]">Basic camping comfort</SelectItem>
-              <SelectItem value="moderate" className="text-white hover:bg-[#1a202c] focus:bg-[#1a202c]">Moderate comfort with some amenities</SelectItem>
-              <SelectItem value="luxury" className="text-white hover:bg-[#1a202c] focus:bg-[#1a202c]">Luxury home like comfort</SelectItem>
-              <SelectItem value="hotel style" className="text-white hover:bg-[#1a202c] focus:bg-[#1a202c]">Hotel style amenities</SelectItem>
+            <SelectContent className="bg-[#131a2a] border-[#1a202c]">
+              <SelectItem value="solo" className="text-white hover:bg-[#1a202c]">Solo Traveler</SelectItem>
+              <SelectItem value="couple" className="text-white hover:bg-[#1a202c]">Couple</SelectItem>
+              <SelectItem value="small family" className="text-white hover:bg-[#1a202c]">Small Family (3-4 people)</SelectItem>
+              <SelectItem value="large family" className="text-white hover:bg-[#1a202c]">Large Family (5+ people)</SelectItem>
             </SelectContent>
           </Select>
         </div>
 
         {/* Must-Have Features */}
-        <div className="space-y-3">
-          <Label className="text-white font-medium">Must-Have Features</Label>
-          <div className="grid grid-cols-2 gap-3">
+        <div>
+          <Label className="text-white font-medium mb-3 block">Must Have Features</Label>
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
             {availableFeatures.map((feature) => (
               <div key={feature} className="flex items-center space-x-2">
                 <Checkbox
                   id={feature}
                   checked={requirements.mustHaveFeatures.includes(feature)}
                   onCheckedChange={() => handleFeatureToggle(feature)}
-                  className="border-[#1a202c] text-[#5B9BD5] focus:ring-[#5B9BD5] data-[state=checked]:bg-[#5B9BD5] data-[state=checked]:border-[#5B9BD5]"
+                  className="border-[#1a202c] data-[state=checked]:bg-[#5B9BD5]"
                 />
-                <Label htmlFor={feature} className="text-sm font-normal text-[#E2E8FF] cursor-pointer">
-                  {feature}
+                <Label 
+                  htmlFor={feature} 
+                  className="text-sm text-[#E2E8FF] cursor-pointer"
+                >
+                  {feature.replace(/-/g, ' ')}
                 </Label>
               </div>
             ))}
           </div>
         </div>
 
+        {/* Travel Duration */}
+        <div>
+          <Label className="text-white font-medium mb-3 block">Typical Trip Duration</Label>
+          <Select value={requirements.travelDuration} onValueChange={(value) => setRequirements(prev => ({ ...prev, travelDuration: value }))}>
+            <SelectTrigger className="w-full bg-[#131a2a] border-[#1a202c] text-white">
+              <SelectValue placeholder="How long are your typical trips?" />
+            </SelectTrigger>
+            <SelectContent className="bg-[#131a2a] border-[#1a202c]">
+              <SelectItem value="weekend" className="text-white hover:bg-[#1a202c]">Weekend (2-3 days)</SelectItem>
+              <SelectItem value="week" className="text-white hover:bg-[#1a202c]">Week (4-7 days)</SelectItem>
+              <SelectItem value="extended" className="text-white hover:bg-[#1a202c]">Extended (2+ weeks)</SelectItem>
+              <SelectItem value="seasonal" className="text-white hover:bg-[#1a202c]">Seasonal (months)</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
+
+        {/* Comfort Level */}
+        <div>
+          <Label className="text-white font-medium mb-3 block">Comfort Preferences</Label>
+          <Select value={requirements.comfortLevel} onValueChange={(value) => setRequirements(prev => ({ ...prev, comfortLevel: value }))}>
+            <SelectTrigger className="w-full bg-[#131a2a] border-[#1a202c] text-white">
+              <SelectValue placeholder="What level of comfort do you prefer?" />
+            </SelectTrigger>
+            <SelectContent className="bg-[#131a2a] border-[#1a202c]">
+              <SelectItem value="basic" className="text-white hover:bg-[#1a202c]">Basic (Simple amenities)</SelectItem>
+              <SelectItem value="moderate" className="text-white hover:bg-[#1a202c]">Moderate (Some luxuries)</SelectItem>
+              <SelectItem value="luxury" className="text-white hover:bg-[#1a202c]">Luxury (High end amenities)</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
+
         {/* Additional Requirements */}
-        <div className="space-y-2">
-          <Label htmlFor="additionalRequirements" className="text-white font-medium">Additional Requirements or Preferences</Label>
+        <div>
+          <Label className="text-white font-medium mb-3 block">Additional Requirements</Label>
           <Textarea
-            id="additionalRequirements"
             placeholder="Describe any specific needs, concerns, or preferences (towing capacity, pets, accessibility, etc.)"
             value={requirements.additionalRequirements}
             onChange={(e) => setRequirements(prev => ({ ...prev, additionalRequirements: e.target.value }))}
@@ -274,7 +274,7 @@ export default function IntelligentRVFinder() {
           ) : (
             <>
               <Brain className="h-4 w-4 mr-2" />
-              Get AI Powered RV Recommendations
+              Find My Perfect RV
             </>
           )}
         </Button>
@@ -310,8 +310,8 @@ export default function IntelligentRVFinder() {
 
                   {/* Recommended Models */}
                   {recommendation.recommendedModels.length > 0 && (
-                     <div className="mb-4">
-                       <h4 className="font-medium mb-2 text-white">Recommended Models:</h4>
+                    <div className="mb-4">
+                      <h4 className="font-medium mb-2 text-white">Recommended Models:</h4>
                       <ul className="list-disc list-inside text-sm text-white space-y-1">
                         {recommendation.recommendedModels.map((model, index) => (
                           <li key={index}>{model}</li>
@@ -322,8 +322,8 @@ export default function IntelligentRVFinder() {
 
                   {/* Technology Features */}
                   {recommendation.technologyFeatures.length > 0 && (
-                     <div className="mb-4">
-                       <h4 className="font-medium mb-2 text-white">Technology Features to Look For:</h4>
+                    <div className="mb-4">
+                      <h4 className="font-medium mb-2 text-white">Technology Features to Look For:</h4>
                       <div className="flex flex-wrap gap-2">
                         {recommendation.technologyFeatures.map((feature, index) => (
                           <span
@@ -340,7 +340,7 @@ export default function IntelligentRVFinder() {
               </Card>
 
               {/* Search Links */}
-               <Card className="mb-4 bg-[#091020] border-[#1a202c]">
+              <Card className="mb-4 bg-[#091020] border-[#1a202c]">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2 text-white">
                     <MapPin className="h-5 w-5 text-[#5B9BD5]" />
@@ -353,38 +353,38 @@ export default function IntelligentRVFinder() {
                   </p>
                   <div className="grid gap-3">
                     <a
-                      href={recommendation.searchUrls.rvtrader}
+                      href={recommendation.searchUrls.buyUrl}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex items-center justify-between p-3 border border-[#1a202c] rounded-lg hover:bg-[#1a202c]/50 transition-colors"
                     >
                       <div>
-                        <div className="font-medium text-white">RV Trader</div>
-                        <div className="text-sm text-white/80">Large selection of RVs nationwide</div>
+                        <div className="font-medium text-white">Browse RVs</div>
+                        <div className="text-sm text-white/80">Search current RV inventory</div>
                       </div>
                       <ExternalLink className="h-4 w-4 text-[#5B9BD5]" />
                     </a>
                     <a
-                      href={recommendation.searchUrls.rvt}
+                      href={recommendation.searchUrls.reviewsUrl}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex items-center justify-between p-3 border border-[#1a202c] rounded-lg hover:bg-[#1a202c]/50 transition-colors"
                     >
                       <div>
-                        <div className="font-medium text-white">RVT.com</div>
-                        <div className="text-sm text-white/80">Comprehensive RV marketplace</div>
+                        <div className="font-medium text-white">Read Reviews</div>
+                        <div className="text-sm text-white/80">RV reviews and insights</div>
                       </div>
                       <ExternalLink className="h-4 w-4 text-[#5B9BD5]" />
                     </a>
                     <a
-                      href={recommendation.searchUrls.rvusa}
+                      href={recommendation.searchUrls.dealersUrl}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex items-center justify-between p-3 border border-[#1a202c] rounded-lg hover:bg-[#1a202c]/50 transition-colors"
                     >
                       <div>
-                        <div className="font-medium text-white">RVUSA</div>
-                        <div className="text-sm text-white/80">Dealer network and listings</div>
+                        <div className="font-medium text-white">Find Dealers</div>
+                        <div className="text-sm text-white/80">Locate RV dealers near you</div>
                       </div>
                       <ExternalLink className="h-4 w-4 text-[#5B9BD5]" />
                     </a>
@@ -432,4 +432,6 @@ export default function IntelligentRVFinder() {
       </CardContent>
     </Card>
   );
-}
+};
+
+export default IntelligentRVFinder;
