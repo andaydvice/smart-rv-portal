@@ -92,17 +92,6 @@ export const AIEducationalConsultant = () => {
 
   return (
     <div className="w-full max-w-4xl mx-auto">
-      {/* Header */}
-      <div className="mb-8 text-center">
-        <div className="flex items-center justify-center gap-3 mb-4">
-          <BookOpen className="h-10 w-10 text-[#5B9BD5]" />
-          <MessageCircle className="h-8 w-8 text-[#60A5FA]" />
-        </div>
-        <h1 className="text-4xl font-bold text-white mb-3">RV Technology Educational Assistant</h1>
-        <p className="text-[#E2E8FF] text-xl">
-          AI powered educational guidance for understanding RV technology concepts
-        </p>
-      </div>
 
       {/* Full Width Chat Interface */}
       <div className="bg-gradient-to-br from-[#091020] to-[#131a2a] border border-[#1a202c] rounded-lg p-8">
