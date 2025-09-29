@@ -300,7 +300,7 @@ export default function IntelligentRVFinder() {
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="bg-gradient-to-br from-[#5B9BD5]/10 to-[#60A5FA]/10">
-                  <p className="text-[#E2E8FF] mb-4">{recommendation.reasoning}</p>
+                  <p className="text-white mb-4 leading-relaxed">{recommendation.reasoning}</p>
                   
                   {/* Price Range */}
                   <div className="flex items-center gap-2 mb-3">
@@ -312,7 +312,7 @@ export default function IntelligentRVFinder() {
                   {recommendation.recommendedModels.length > 0 && (
                     <div className="mb-4">
                       <h4 className="font-medium mb-2 text-white">Recommended Models:</h4>
-                      <ul className="list-disc list-inside text-sm text-[#E2E8FF]">
+                      <ul className="list-disc list-inside text-sm text-white space-y-1">
                         {recommendation.recommendedModels.map((model, index) => (
                           <li key={index}>{model}</li>
                         ))}
@@ -328,7 +328,7 @@ export default function IntelligentRVFinder() {
                         {recommendation.technologyFeatures.map((feature, index) => (
                           <span
                             key={index}
-                            className="px-2 py-1 bg-[#5B9BD5]/20 text-[#5B9BD5] border border-[#5B9BD5]/30 rounded text-sm"
+                            className="px-3 py-1 bg-[#5B9BD5]/30 text-white border border-[#5B9BD5]/50 rounded-full text-sm font-medium"
                           >
                             {feature}
                           </span>
@@ -348,7 +348,7 @@ export default function IntelligentRVFinder() {
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-[#E2E8FF] mb-4">
+                  <p className="text-white mb-4">
                     These links will take you to actual RV listings based on your requirements:
                   </p>
                   <div className="grid gap-3">
@@ -360,7 +360,7 @@ export default function IntelligentRVFinder() {
                     >
                       <div>
                         <div className="font-medium text-white">RV Trader</div>
-                        <div className="text-sm text-[#E2E8FF]">Large selection of RVs nationwide</div>
+                        <div className="text-sm text-white/80">Large selection of RVs nationwide</div>
                       </div>
                       <ExternalLink className="h-4 w-4 text-[#5B9BD5]" />
                     </a>
@@ -372,7 +372,7 @@ export default function IntelligentRVFinder() {
                     >
                       <div>
                         <div className="font-medium text-white">RVT.com</div>
-                        <div className="text-sm text-[#E2E8FF]">Comprehensive RV marketplace</div>
+                        <div className="text-sm text-white/80">Comprehensive RV marketplace</div>
                       </div>
                       <ExternalLink className="h-4 w-4 text-[#5B9BD5]" />
                     </a>
@@ -384,7 +384,7 @@ export default function IntelligentRVFinder() {
                     >
                       <div>
                         <div className="font-medium text-white">RVUSA</div>
-                        <div className="text-sm text-[#E2E8FF]">Dealer network and listings</div>
+                        <div className="text-sm text-white/80">Dealer network and listings</div>
                       </div>
                       <ExternalLink className="h-4 w-4 text-[#5B9BD5]" />
                     </a>
@@ -401,7 +401,7 @@ export default function IntelligentRVFinder() {
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-[#E2E8FF]">{recommendation.educationalContent}</p>
+                  <p className="text-white leading-relaxed">{recommendation.educationalContent}</p>
                 </CardContent>
               </Card>
 
@@ -414,7 +414,7 @@ export default function IntelligentRVFinder() {
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-[#E2E8FF]">{recommendation.budgetConsiderations}</p>
+                  <p className="text-white leading-relaxed">{recommendation.budgetConsiderations}</p>
                 </CardContent>
               </Card>
             </div>
