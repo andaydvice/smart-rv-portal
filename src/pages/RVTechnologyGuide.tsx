@@ -21,6 +21,7 @@ import rvTechComparisonImage from '@/assets/rv-technology-comparison-dashboard.j
 import aiEducationalConsultantHero from '@/assets/ai-educational-consultant-hero.png';
 import intelligentRvFinderHero from '@/assets/intelligent-rv-finder-hero.jpg';
 import aiEnhancedFeatureMatcherHero from '@/assets/ai-enhanced-feature-matcher-hero.jpg';
+import aiLifestyleTechnologyPlannerHero from '@/assets/ai-lifestyle-technology-planner-hero.png';
 import rvCategoryComparisonImage from '@/assets/rv-category-comparison.png';
 import rvDealershipBackground from '@/assets/rv-dealership-background.jpg';
 import rvTechnologyPlanningImage from '@/assets/rv-technology-planning.png';
@@ -216,6 +217,15 @@ const RVTechnologyGuide = () => {
         {/* Lifestyle Technology Planner */}
         <section className="py-16 px-4 relative">
           <Container>
+            <div className="text-center mb-12">
+              <div className="mb-8">
+                <img 
+                  src={aiLifestyleTechnologyPlannerHero} 
+                  alt="AI Lifestyle Technology Planner - Modern RV interior with smart display showing lifestyle planning options" 
+                  className="w-full max-w-4xl mx-auto rounded-2xl shadow-2xl"
+                />
+              </div>
+            </div>
             <div className="max-w-6xl mx-auto">
               <AILifestylePlanner />
             </div>
