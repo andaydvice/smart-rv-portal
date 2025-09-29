@@ -300,7 +300,7 @@ export default function IntelligentRVFinder() {
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="bg-[#091020] p-6">
-                  <p className="text-white mb-4 leading-relaxed">{recommendation.reasoning}</p>
+                  <div className="text-white mb-4 leading-relaxed whitespace-pre-line">{recommendation.reasoning}</div>
                   
                   {/* Price Range */}
                   <div className="flex items-center gap-2 mb-3">
@@ -344,7 +344,7 @@ export default function IntelligentRVFinder() {
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2 text-white">
                     <MapPin className="h-5 w-5 text-[#5B9BD5]" />
-                    Find Your RV - Real Search Results
+                    Find Your RV Real Search Results
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
@@ -401,7 +401,7 @@ export default function IntelligentRVFinder() {
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-white leading-relaxed">{recommendation.educationalContent}</p>
+                  <div className="text-white leading-relaxed whitespace-pre-line">{recommendation.educationalContent}</div>
                 </CardContent>
               </Card>
 
@@ -410,11 +410,11 @@ export default function IntelligentRVFinder() {
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2 text-white">
                     <DollarSign className="h-5 w-5 text-[#5B9BD5]" />
-                    Budget & Cost Considerations
+                    Budget Cost Considerations
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-white leading-relaxed">{recommendation.budgetConsiderations}</p>
+                  <div className="text-white leading-relaxed whitespace-pre-line">{recommendation.budgetConsiderations}</div>
                 </CardContent>
               </Card>
             </div>
