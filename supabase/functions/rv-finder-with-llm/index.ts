@@ -114,8 +114,8 @@ Your response must be valid JSON with this exact structure:
   "recommendedModels": ["model1", "model2"],
   "technologyFeatures": ["feature1", "feature2"],
   "searchUrls": {
-        "buyUrl": "https://www.rvt.com/buy/",
-        "reviewsUrl": "https://www.rvinsider.com/",
+    "buyUrl": "https://www.rvt.com/buy/",
+    "reviewsUrl": "https://www.rvinsider.com/",
     "dealersUrl": "https://www.rvt.com/dealersearch.php",
     "priceCheckerUrl": "https://www.rvt.com/price-checker/"
   },
@@ -123,9 +123,11 @@ Your response must be valid JSON with this exact structure:
   "budgetConsiderations": "budget-related guidance"
 }
 
-For searchUrls, generate specific, contextual URLs:
-- buyUrl: Create filtered search on rvtrader.com based on RV type, price range, and features
-- reviewsUrl: Link to specific RV type reviews on rvinsider.com
+For searchUrls, always use these exact URLs:
+- buyUrl: "https://www.rvt.com/buy/"
+- reviewsUrl: "https://www.rvinsider.com/"
+- dealersUrl: "https://www.rvt.com/dealersearch.php"  
+- priceCheckerUrl: "https://www.rvt.com/price-checker/"
 
 Focus on practical recommendations based on the user's specific needs, experience level, and budget.` 
           },

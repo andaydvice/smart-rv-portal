@@ -353,38 +353,74 @@ export const IntelligentRVFinder: React.FC = () => {
                   </p>
                   <div className="grid gap-3">
                     <a
-                      href={recommendation.searchUrls.buyUrl}
+                      href="https://www.rvt.com/buy/"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex items-center justify-between p-3 border border-[#1a202c] rounded-lg hover:bg-[#1a202c]/50 transition-colors"
                     >
                       <div>
-                        <div className="font-medium text-white">Browse RVs</div>
-                        <div className="text-sm text-white/80">Search current RV inventory</div>
+                        <div className="font-medium text-white">RVs for Sale</div>
+                        <div className="text-sm text-white/80">Browse current RV inventory</div>
                       </div>
                       <ExternalLink className="h-4 w-4 text-[#5B9BD5]" />
                     </a>
                     <a
-                      href={recommendation.searchUrls.reviewsUrl}
+                      href="https://www.rvtrader.com/rvs-for-sale"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex items-center justify-between p-3 border border-[#1a202c] rounded-lg hover:bg-[#1a202c]/50 transition-colors"
                     >
                       <div>
-                        <div className="font-medium text-white">Read Reviews</div>
-                        <div className="text-sm text-white/80">RV reviews and insights</div>
+                        <div className="font-medium text-white">RV Trader Search</div>
+                        <div className="text-sm text-white/80">Large selection of RVs nationwide</div>
                       </div>
                       <ExternalLink className="h-4 w-4 text-[#5B9BD5]" />
                     </a>
                     <a
-                      href={recommendation.searchUrls.dealersUrl}
+                      href="https://www.rvinsider.com/"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex items-center justify-between p-3 border border-[#1a202c] rounded-lg hover:bg-[#1a202c]/50 transition-colors"
                     >
                       <div>
-                        <div className="font-medium text-white">Find Dealers</div>
-                        <div className="text-sm text-white/80">Locate RV dealers near you</div>
+                        <div className="font-medium text-white">RV Reviews</div>
+                        <div className="text-sm text-white/80">Professional RV reviews and insights</div>
+                      </div>
+                      <ExternalLink className="h-4 w-4 text-[#5B9BD5]" />
+                    </a>
+                    <a
+                      href="https://www.rvinsider.com/Dealerships"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-between p-3 border border-[#1a202c] rounded-lg hover:bg-[#1a202c]/50 transition-colors"
+                    >
+                      <div>
+                        <div className="font-medium text-white">Dealership Reviews</div>
+                        <div className="text-sm text-white/80">Research RV dealership reviews</div>
+                      </div>
+                      <ExternalLink className="h-4 w-4 text-[#5B9BD5]" />
+                    </a>
+                    <a
+                      href="https://www.rvt.com/dealersearch.php"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-between p-3 border border-[#1a202c] rounded-lg hover:bg-[#1a202c]/50 transition-colors"
+                    >
+                      <div>
+                        <div className="font-medium text-white">Find RV Dealers</div>
+                        <div className="text-sm text-white/80">Locate authorized RV dealers near you</div>
+                      </div>
+                      <ExternalLink className="h-4 w-4 text-[#5B9BD5]" />
+                    </a>
+                    <a
+                      href="https://www.rvt.com/price-checker/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-between p-3 border border-[#1a202c] rounded-lg hover:bg-[#1a202c]/50 transition-colors"
+                    >
+                      <div>
+                        <div className="font-medium text-white">RV Price Checker</div>
+                        <div className="text-sm text-white/80">Check current RV market values</div>
                       </div>
                       <ExternalLink className="h-4 w-4 text-[#5B9BD5]" />
                     </a>
