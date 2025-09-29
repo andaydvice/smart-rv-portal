@@ -141,6 +141,13 @@ const RVTechnologyGuide = () => {
         <section className="py-16 px-4 relative bg-[#080F1F]/50">
           <Container>
             <div className="text-center mb-12">
+              <div className="mb-8">
+                <img 
+                  src="/src/assets/ai-educational-consultant-hero.png" 
+                  alt="AI Educational Consultant - Futuristic RV technology interface" 
+                  className="w-full max-w-4xl mx-auto rounded-2xl shadow-2xl"
+                />
+              </div>
               <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
                 AI Educational Consultant
               </h2>
