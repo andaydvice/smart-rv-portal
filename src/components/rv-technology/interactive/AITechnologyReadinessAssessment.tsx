@@ -132,7 +132,7 @@ export const AITechnologyReadinessAssessment: React.FC = () => {
             onClick={resetAssessment}
             variant="outline"
             size="lg"
-            className="border-[#1a202c] text-[#E2E8FF] hover:bg-[#151A22]"
+            className="border-[#1a202c] text-[#E2E8FF] hover:bg-[#151A22] hover:text-[#E2E8FF]"
           >
             New Assessment
           </Button>
