@@ -81,8 +81,13 @@ export default function IntelligentRVFinder() {
   };
 
   const handleAnalyze = async () => {
+    console.log('handleAnalyze called');
+    console.log('Requirements:', requirements);
+    console.log('isFormValid:', isFormValid);
+    
     // Validate required fields
     if (!requirements.travelStyle || !requirements.experienceLevel || !requirements.budget) {
+      console.log('Validation failed');
       setError('Please fill in all required fields (Travel Style, Experience Level, and Budget)');
       return;
     }
