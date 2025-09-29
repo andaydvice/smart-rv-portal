@@ -114,7 +114,24 @@ Guidelines:
         cleanedResponse = cleanedResponse.replace(/^```\s*/, '').replace(/\s*```$/, '');
       }
       
-      assessment = JSON.parse(cleanedResponse);
+      const parsed = JSON.parse(cleanedResponse);
+      
+      // Clean up the response - remove hyphens and improve readability
+      const cleanText = (text: string): string => {
+        return text
+          .replace(/-/g, ' ') // Remove all hyphens
+          .replace(/\. /g, '.\n\n') // Add paragraph breaks after sentences
+          .trim();
+      };
+      
+      assessment = {
+        ...parsed,
+        description: cleanText(parsed.description || ''),
+        budgetGuidance: cleanText(parsed.budgetGuidance || ''),
+        recommendedFeatures: parsed.recommendedFeatures?.map((feature: string) => cleanText(feature)) || [],
+        nextSteps: parsed.nextSteps?.map((step: string) => cleanText(step)) || []
+      };
+      
       // Ensure searchUrls are present with exact URLs
       if (!assessment.searchUrls) {
         assessment.searchUrls = {
@@ -138,14 +155,14 @@ Guidelines:
         assessment = {
           readinessLevel: 'beginner',
           title: "Audio System Seeker",
-          description: "You're looking for quality audio systems in your RV. This suggests you value entertainment and sound quality for your travels.",
+          description: "You're looking for quality audio systems in your RV.\n\nThis suggests you value entertainment and sound quality for your travels.",
           recommendedFeatures: [
             "High quality RV audio system with Bluetooth connectivity",
             "Multiple speaker zones for indoor and outdoor entertainment", 
             "Amplifier systems designed for RV environments",
             "Sound dampening materials for better acoustics"
           ],
-          budgetGuidance: "Audio systems can range from $500-$3000 depending on quality and features. Professional installation recommended.",
+          budgetGuidance: "Audio systems can range from $500 $3000 depending on quality and features.\n\nProfessional installation recommended.",
           nextSteps: [
             "Research RV specific audio equipment and brands",
             "Visit RV shows to hear different audio setups",

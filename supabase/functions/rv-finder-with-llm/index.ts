@@ -150,16 +150,38 @@ Focus on practical recommendations based on the user's specific needs, experienc
     try {
       const parsed = JSON.parse(aiResponse);
       
-      recommendation = parsed;
+      // Clean up the response - remove hyphens and improve readability
+      const cleanText = (text: string): string => {
+        return text
+          .replace(/-/g, ' ') // Remove all hyphens
+          .replace(/\. /g, '.\n\n') // Add paragraph breaks after sentences
+          .trim();
+      };
+      
+      recommendation = {
+        ...parsed,
+        reasoning: cleanText(parsed.reasoning || ''),
+        priceRange: cleanText(parsed.priceRange || ''),
+        educationalContent: cleanText(parsed.educationalContent || ''),
+        budgetConsiderations: cleanText(parsed.budgetConsiderations || ''),
+        recommendedModels: parsed.recommendedModels?.map((model: string) => cleanText(model)) || [],
+        technologyFeatures: parsed.technologyFeatures?.map((feature: string) => cleanText(feature)) || []
+      };
     } catch (parseError) {
       console.error('Failed to parse AI response as JSON:', parseError);
+      
+      // Clean up the raw response text for fallback
+      const cleanedResponse = aiResponse
+        .replace(/-/g, ' ') // Remove all hyphens
+        .replace(/\. /g, '.\n\n'); // Add paragraph breaks after sentences
+      
       // Fallback response if JSON parsing fails
       recommendation = {
         rvType: "Class C Motorhome",
-        reasoning: aiResponse,
+        reasoning: cleanedResponse,
         priceRange: "Analysis provided in reasoning section",
         recommendedModels: ["Please see detailed analysis"],
-        technologyFeatures: requirements.mustHaveFeatures,
+        technologyFeatures: requirements.mustHaveFeatures.map(feature => feature.replace(/-/g, ' ')),
         searchUrls: {
           buyUrl: "https://www.rvt.com/buy/",
           reviewsUrl: "https://www.rvinsider.com/",
