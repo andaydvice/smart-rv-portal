@@ -152,13 +152,6 @@ export const AITechnologyReadinessAssessment: React.FC = () => {
 
   return (
     <Card ref={assessmentRef} className="p-8 bg-gradient-to-br from-[#091020] to-[#131a2a] border-[#1a202c] text-white">
-      <div className="text-center mb-8">
-        <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-[#5B9BD5] to-[#60A5FA] rounded-full mb-4">
-          <Brain className="h-8 w-8 text-white" />
-        </div>
-        <h3 className="text-2xl font-bold text-white mb-2">AI Technology Readiness Assessment</h3>
-        <p className="text-[#E2E8FF] text-lg">Get personalized RV technology recommendations based on your experience and needs</p>
-      </div>
 
       <Alert className="mb-6 border-[#5B9BD5]/30 bg-[#5B9BD5]/10">
         <AlertCircle className="h-4 w-4 text-[#5B9BD5]" />
