@@ -71,6 +71,18 @@ export const AIEducationalConsultant = () => {
     }
   };
 
+  const formatAssistantMessage = (content: string) => {
+    const sentences = content
+      .split(/(?<=[.!?])\s+/)
+      .filter(sentence => sentence.trim().length > 0);
+    
+    return sentences.map((sentence, index) => (
+      <p key={index} className="text-base leading-relaxed mb-3 last:mb-0">
+        {sentence.trim()}
+      </p>
+    ));
+  };
+
   const handleKeyPress = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
@@ -142,7 +154,11 @@ export const AIEducationalConsultant = () => {
                     : 'bg-gray-700 text-[#E2E8FF]'
                 }`}
               >
-                <p className="text-base leading-relaxed">{message.content}</p>
+                {message.role === 'assistant' ? (
+                  <div>{formatAssistantMessage(message.content)}</div>
+                ) : (
+                  <p className="text-base leading-relaxed">{message.content}</p>
+                )}
                 <p className="text-xs opacity-70 mt-2">
                   {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                 </p>
