@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { ExternalLinkButton } from '@/components/ui/external-link-button';
@@ -27,6 +27,7 @@ export const AITechnologyReadinessAssessment: React.FC = () => {
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [result, setResult] = useState<AIAssessmentResult | null>(null);
   const [error, setError] = useState('');
+  const assessmentRef = useRef<HTMLDivElement>(null);
 
   const handleAssessment = async () => {
     if (!userInput.trim()) return;
@@ -56,11 +57,19 @@ export const AITechnologyReadinessAssessment: React.FC = () => {
     setUserInput('');
     setResult(null);
     setError('');
+    
+    // Scroll to top of the assessment
+    if (assessmentRef.current) {
+      assessmentRef.current.scrollIntoView({ 
+        behavior: 'smooth', 
+        block: 'start' 
+      });
+    }
   };
 
   if (result) {
     return (
-      <Card className="p-8 bg-gradient-to-br from-[#091020] to-[#131a2a] border-[#1a202c] text-white">
+      <Card ref={assessmentRef} className="p-8 bg-gradient-to-br from-[#091020] to-[#131a2a] border-[#1a202c] text-white">
         <div className="text-center mb-8">
           <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-[#5B9BD5] to-[#60A5FA] rounded-full mb-4">
             <Star className="h-8 w-8 text-white" />
@@ -142,7 +151,7 @@ export const AITechnologyReadinessAssessment: React.FC = () => {
   }
 
   return (
-    <Card className="p-8 bg-gradient-to-br from-[#091020] to-[#131a2a] border-[#1a202c] text-white">
+    <Card ref={assessmentRef} className="p-8 bg-gradient-to-br from-[#091020] to-[#131a2a] border-[#1a202c] text-white">
       <div className="text-center mb-8">
         <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-[#5B9BD5] to-[#60A5FA] rounded-full mb-4">
           <Brain className="h-8 w-8 text-white" />
