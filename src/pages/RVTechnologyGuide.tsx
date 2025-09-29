@@ -22,6 +22,7 @@ import rvCategoryComparisonImage from '@/assets/rv-category-comparison.png';
 import rvDealershipBackground from '@/assets/rv-dealership-background.jpg';
 import rvTechnologyPlanningImage from '@/assets/rv-technology-planning.png';
 import rvTechnologyDecisionsImage from '@/assets/rv-technology-decisions.png';
+import rvTechnologyGuideHero from '@/assets/rv-technology-guide-hero.jpg';
 import { BlogPostImage } from '@/components/blog/post/BlogPostImage';
 import { AITechnologyReadinessAssessment } from '@/components/rv-technology/interactive/AITechnologyReadinessAssessment';
 import { AITechnologyChecklist } from '@/components/rv-technology/interactive/AITechnologyChecklist';
@@ -76,6 +77,21 @@ const RVTechnologyGuide = () => {
               <div className="mb-6 space-y-2">
                 <div className="h-1 w-24 bg-gradient-to-r from-[#5B9BD5] to-[#60A5FA] mx-auto rounded-full" />
                 <div className="h-0.5 w-12 bg-[#5B9BD5]/50 mx-auto rounded-full" />
+              </div>
+              
+              {/* Hero Image */}
+              <div className="mb-8 animate-fade-in" style={{ animationDelay: '0.1s' }}>
+                <div className="relative rounded-2xl overflow-hidden border border-[#5B9BD5]/20 shadow-2xl">
+                  <PreloadedHeaderImage 
+                    src={rvTechnologyGuideHero}
+                    alt="Modern RV interior with advanced technology dashboard and smart control systems"
+                    className="w-full h-[400px] md:h-[500px] object-cover"
+                    width={1920}
+                    height={1080}
+                    priority="high"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
+                </div>
               </div>
               
               <p className="text-xl md:text-2xl text-[#E2E8FF] mb-10 leading-relaxed animate-fade-in" style={{ animationDelay: '0.2s' }}>
