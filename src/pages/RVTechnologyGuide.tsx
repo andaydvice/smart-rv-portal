@@ -145,7 +145,7 @@ const RVTechnologyGuide = () => {
                 AI Educational Consultant
               </h2>
               <p className="text-xl text-connectivity-lightText max-w-3xl mx-auto">
-                Get personalized educational guidance about RV technology concepts through our liability-free AI assistant.
+                Get personalized educational guidance about RV technology concepts through our liability free AI assistant.
               </p>
             </div>
             <div className="max-w-6xl mx-auto">
