@@ -29,13 +29,13 @@ export const ExternalLinkButton: React.FC<ExternalLinkButtonProps> = ({
     <Button
       asChild
       variant={variant}
-      className={`${sizeClasses[size]} ${className}`}
+      className={`${sizeClasses[size]} ${className} hover:text-white`}
     >
       <a
         href={href}
         target="_blank"
         rel="noopener noreferrer"
-        className="flex items-center justify-center gap-2"
+        className="flex items-center justify-center gap-2 hover:text-white"
       >
         {children}
         {showIcon && <ExternalLink className="h-4 w-4" />}
