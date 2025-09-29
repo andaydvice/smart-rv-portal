@@ -20,6 +20,7 @@ import RVTechnologyTiersHero from '@/components/rv-technology/RVTechnologyTiersH
 import rvTechComparisonImage from '@/assets/rv-technology-comparison-dashboard.jpg';
 import aiEducationalConsultantHero from '@/assets/ai-educational-consultant-hero.png';
 import intelligentRvFinderHero from '@/assets/intelligent-rv-finder-hero.jpg';
+import aiEnhancedFeatureMatcherHero from '@/assets/ai-enhanced-feature-matcher-hero.jpg';
 import rvCategoryComparisonImage from '@/assets/rv-category-comparison.png';
 import rvDealershipBackground from '@/assets/rv-dealership-background.jpg';
 import rvTechnologyPlanningImage from '@/assets/rv-technology-planning.png';
@@ -191,6 +192,13 @@ const RVTechnologyGuide = () => {
         <section className="py-16 px-4 relative">
           <Container>
             <div className="text-center mb-12">
+              <div className="mb-8">
+                <img 
+                  src={aiEnhancedFeatureMatcherHero} 
+                  alt="AI Enhanced Feature Matcher - AI brain analyzing RV technology features" 
+                  className="w-full max-w-4xl mx-auto rounded-2xl shadow-2xl"
+                />
+              </div>
               <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
                 AI Enhanced Feature Matcher
               </h2>
