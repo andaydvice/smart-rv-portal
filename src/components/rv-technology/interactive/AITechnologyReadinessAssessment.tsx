@@ -79,7 +79,7 @@ export const AITechnologyReadinessAssessment: React.FC = () => {
               {result.recommendedFeatures.map((feature, index) => (
                 <div key={index} className="flex items-start gap-3 p-3 bg-[#151A22]/50 rounded-lg border border-[#1a202c]">
                   <CheckCircle className="h-5 w-5 text-[#5B9BD5] flex-shrink-0 mt-0.5" />
-                  <span className="text-[#E2E8FF]">{feature}</span>
+                  <span className="text-[#E2E8FF]">{feature.replace(/-/g, ' ')}</span>
                 </div>
               ))}
             </div>
