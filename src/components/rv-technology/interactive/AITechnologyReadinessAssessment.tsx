@@ -65,7 +65,7 @@ export const AITechnologyReadinessAssessment: React.FC = () => {
           <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-[#5B9BD5] to-[#60A5FA] rounded-full mb-4">
             <Star className="h-8 w-8 text-white" />
           </div>
-          <h3 className="text-2xl font-bold text-white mb-2">{result.title}</h3>
+          <h3 className="text-2xl font-bold text-white mb-2">{result.title.replace(/-/g, ' ')}</h3>
           <p className="text-[#E2E8FF] text-lg leading-relaxed">{result.description}</p>
         </div>
 
