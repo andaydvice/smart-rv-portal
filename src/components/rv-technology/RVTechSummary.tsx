@@ -134,7 +134,7 @@ export const RVTechSummary = () => {
               </ExternalLinkButton>
             </div>
             <p className="text-[#E2E8FF]/80 text-sm">
-              Ready to start shopping? Use this guide to ask the right questions when evaluating RV technology options.
+              Use this comprehensive guide to understand RV technology features and make informed decisions that match your travel lifestyle.
             </p>
           </div>
         </div>
