@@ -52,6 +52,8 @@ Always emphasize that this is educational guidance and users should consult with
 
 "${userDescription}"
 
+Focus specifically on their stated interests and needs. If they mention audio, focus on audio systems. If they mention connectivity, focus on internet options. Tailor your response to their specific request.
+
 Please provide a comprehensive assessment formatted as JSON with this structure:
 {
   "readinessLevel": "beginner|intermediate|advanced",
@@ -104,7 +106,15 @@ Guidelines:
 
     let assessment: AIAssessmentResult;
     try {
-      assessment = JSON.parse(aiResponse);
+      // Clean the response to handle markdown code blocks
+      let cleanedResponse = aiResponse.trim();
+      if (cleanedResponse.startsWith('```json')) {
+        cleanedResponse = cleanedResponse.replace(/^```json\s*/, '').replace(/\s*```$/, '');
+      } else if (cleanedResponse.startsWith('```')) {
+        cleanedResponse = cleanedResponse.replace(/^```\s*/, '').replace(/\s*```$/, '');
+      }
+      
+      assessment = JSON.parse(cleanedResponse);
       // Ensure searchUrls are present with exact URLs
       if (!assessment.searchUrls) {
         assessment.searchUrls = {
@@ -117,31 +127,64 @@ Guidelines:
       
     } catch (parseError) {
       console.error('Failed to parse AI response as JSON:', parseError);
-      // Fallback response
-      assessment = {
-        readinessLevel: 'intermediate',
-        title: "Technology-Aware RV Buyer",
-        description: "Based on your description, you have a balanced approach to technology - you want useful features without unnecessary complexity.",
-        recommendedFeatures: [
-          "Reliable power management systems with digital monitoring",
-          "Internet connectivity options for staying connected",
-          "Basic automation for convenience with manual backup controls",
-          "User-friendly interfaces and smartphone integration"
-        ],
-        budgetGuidance: "Expect to invest in mid-range technology packages. Focus on proven systems with good support rather than cutting-edge features.",
-        nextSteps: [
-          "Visit RV dealers to see technology demonstrations",
-          "Ask about system reliability and support options",
-          "Research user reviews for technology features you're considering",
-          "Plan your technology budget as part of your overall RV purchase"
-        ],
-        searchUrls: {
-          buyUrl: 'https://www.rvt.com/buy/',
-          reviewsUrl: 'https://www.rvinsider.com/',
-          dealersUrl: 'https://www.rvt.com/dealersearch.php',
-          priceCheckerUrl: 'https://www.rvt.com/price-checker/'
-        }
-      };
+      console.error('Raw AI response:', aiResponse);
+      
+      // Create a contextual fallback based on user input
+      const isAudioRelated = userDescription.toLowerCase().includes('audio') || 
+                           userDescription.toLowerCase().includes('sound') || 
+                           userDescription.toLowerCase().includes('music');
+      
+      if (isAudioRelated) {
+        assessment = {
+          readinessLevel: 'beginner',
+          title: "Audio System Seeker",
+          description: "You're looking for quality audio systems in your RV. This suggests you value entertainment and sound quality for your travels.",
+          recommendedFeatures: [
+            "High quality RV audio system with Bluetooth connectivity",
+            "Multiple speaker zones for indoor and outdoor entertainment", 
+            "Amplifier systems designed for RV environments",
+            "Sound dampening materials for better acoustics"
+          ],
+          budgetGuidance: "Audio systems can range from $500-$3000 depending on quality and features. Professional installation recommended.",
+          nextSteps: [
+            "Research RV specific audio equipment and brands",
+            "Visit RV shows to hear different audio setups",
+            "Consider outdoor speaker options for camping",
+            "Plan wiring requirements during RV purchase or retrofit"
+          ],
+          searchUrls: {
+            buyUrl: 'https://www.rvt.com/buy/',
+            reviewsUrl: 'https://www.rvinsider.com/',
+            dealersUrl: 'https://www.rvt.com/dealersearch.php',
+            priceCheckerUrl: 'https://www.rvt.com/price-checker/'
+          }
+        };
+      } else {
+        assessment = {
+          readinessLevel: 'intermediate',
+          title: "Technology Interested RV Buyer", 
+          description: "Based on your description, you're interested in RV technology to enhance your travel experience.",
+          recommendedFeatures: [
+            "User friendly technology with reliable performance",
+            "Systems that match your stated interests and needs",
+            "Professional installation and support options",
+            "Technology that enhances rather than complicates your RV experience"
+          ],
+          budgetGuidance: "Budget for technology should align with your specific needs and comfort level with different systems.",
+          nextSteps: [
+            "Research the specific technology categories you mentioned",
+            "Visit RV dealers to see demonstrations",
+            "Read reviews from other RVers with similar interests",
+            "Consider professional consultation for complex installations"
+          ],
+          searchUrls: {
+            buyUrl: 'https://www.rvt.com/buy/',
+            reviewsUrl: 'https://www.rvinsider.com/',
+            dealersUrl: 'https://www.rvt.com/dealersearch.php',
+            priceCheckerUrl: 'https://www.rvt.com/price-checker/'
+          }
+        };
+      }
     }
 
     return new Response(JSON.stringify({ assessment }), {
