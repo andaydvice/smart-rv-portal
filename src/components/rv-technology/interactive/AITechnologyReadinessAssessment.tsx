@@ -87,7 +87,7 @@ export const AITechnologyReadinessAssessment: React.FC = () => {
 
           <div className="p-4 bg-[#151A22]/50 rounded-lg border border-[#1a202c]">
             <h4 className="text-lg font-semibold text-[#60A5FA] mb-2">Budget Guidance</h4>
-            <p className="text-[#E2E8FF]">{result.budgetGuidance}</p>
+            <p className="text-[#E2E8FF]">{result.budgetGuidance.replace(/-/g, ' ')}</p>
           </div>
 
           <div>
