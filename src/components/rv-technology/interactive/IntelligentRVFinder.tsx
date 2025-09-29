@@ -293,13 +293,13 @@ export default function IntelligentRVFinder() {
               <h3 className="text-xl font-semibold mb-4 text-white">Your Personalized RV Recommendations</h3>
               
               {/* Main Recommendation */}
-              <Card className="mb-4 bg-gradient-to-br from-[#5B9BD5]/20 to-[#60A5FA]/20 border-[#5B9BD5]/30">
-                <CardHeader className="bg-gradient-to-r from-[#5B9BD5]/10 to-[#60A5FA]/10">
+              <Card className="mb-4 bg-[#091020] border-[#5B9BD5]/30">
+                <CardHeader className="bg-[#151A22] border-b border-[#1a202c]">
                   <CardTitle className="text-lg text-[#5B9BD5]">
                     Recommended: {recommendation.rvType}
                   </CardTitle>
                 </CardHeader>
-                <CardContent className="bg-gradient-to-br from-[#5B9BD5]/10 to-[#60A5FA]/10">
+                <CardContent className="bg-[#091020] p-6">
                   <p className="text-white mb-4 leading-relaxed">{recommendation.reasoning}</p>
                   
                   {/* Price Range */}
@@ -310,8 +310,8 @@ export default function IntelligentRVFinder() {
 
                   {/* Recommended Models */}
                   {recommendation.recommendedModels.length > 0 && (
-                    <div className="mb-4">
-                      <h4 className="font-medium mb-2 text-white">Recommended Models:</h4>
+                     <div className="mb-4">
+                       <h4 className="font-medium mb-2 text-white">Recommended Models:</h4>
                       <ul className="list-disc list-inside text-sm text-white space-y-1">
                         {recommendation.recommendedModels.map((model, index) => (
                           <li key={index}>{model}</li>
@@ -322,15 +322,15 @@ export default function IntelligentRVFinder() {
 
                   {/* Technology Features */}
                   {recommendation.technologyFeatures.length > 0 && (
-                    <div className="mb-4">
-                      <h4 className="font-medium mb-2 text-white">Technology Features to Look For:</h4>
+                     <div className="mb-4">
+                       <h4 className="font-medium mb-2 text-white">Technology Features to Look For:</h4>
                       <div className="flex flex-wrap gap-2">
                         {recommendation.technologyFeatures.map((feature, index) => (
                           <span
                             key={index}
-                            className="px-3 py-1 bg-[#5B9BD5]/30 text-white border border-[#5B9BD5]/50 rounded-full text-sm font-medium"
+                            className="px-3 py-1 bg-[#5B9BD5] text-white border border-[#5B9BD5] rounded-full text-sm font-medium"
                           >
-                            {feature}
+                            {feature.replace(/-/g, ' ')}
                           </span>
                         ))}
                       </div>
@@ -340,7 +340,7 @@ export default function IntelligentRVFinder() {
               </Card>
 
               {/* Search Links */}
-              <Card className="mb-4 bg-gradient-to-br from-[#091020] to-[#131a2a] border-[#1a202c]">
+               <Card className="mb-4 bg-[#091020] border-[#1a202c]">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2 text-white">
                     <MapPin className="h-5 w-5 text-[#5B9BD5]" />
@@ -393,7 +393,7 @@ export default function IntelligentRVFinder() {
               </Card>
 
               {/* Educational Content */}
-              <Card className="mb-4 bg-gradient-to-br from-[#091020] to-[#131a2a] border-[#1a202c]">
+              <Card className="mb-4 bg-[#091020] border-[#1a202c]">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2 text-white">
                     <Info className="h-5 w-5 text-[#5B9BD5]" />
@@ -406,7 +406,7 @@ export default function IntelligentRVFinder() {
               </Card>
 
               {/* Budget Considerations */}
-              <Card className="bg-gradient-to-br from-[#091020] to-[#131a2a] border-[#1a202c]">
+              <Card className="bg-[#091020] border-[#1a202c]">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2 text-white">
                     <DollarSign className="h-5 w-5 text-[#5B9BD5]" />
