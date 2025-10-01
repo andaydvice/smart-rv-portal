@@ -442,6 +442,8 @@ const RVTechnologyGuide = () => {
           </Container>
         </section>
 
+        </div>
+
         {/* Control and Monitoring Systems */}
         <div id="control-monitoring">
           <RVControlMonitoringHero />
@@ -653,6 +655,8 @@ const RVTechnologyGuide = () => {
           </Container>
         </section>
 
+        </div>
+
         {/* Futuristic Technology Comparison Hero */}
         <div className="relative w-full h-[500px] md:h-[600px] overflow-hidden my-12">
           <PreloadedHeaderImage 
@@ -703,8 +707,6 @@ const RVTechnologyGuide = () => {
             </div>
           </Container>
         </section>
-
-        </div>
 
         {/* RV Category Evaluation */}
         <section id="rv-categories" className="py-16 px-4 bg-[#151A22]/50">
@@ -1500,7 +1502,6 @@ const RVTechnologyGuide = () => {
             </div>
           </Container>
         </section>
-        </div>
         
         <ScrollToTopButton />
       </div>
