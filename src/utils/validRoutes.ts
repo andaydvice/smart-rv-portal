@@ -29,7 +29,6 @@ export const VALID_ROUTES = [
   '/solar-power-guide',
   '/rv-apps-hub',
   '/rv-technology-guide',
-  '/rv-tools',
   '/technology',
   '/documentation/complete',
   '/search',

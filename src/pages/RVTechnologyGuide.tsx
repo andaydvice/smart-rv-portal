@@ -18,23 +18,26 @@ import RVPowerManagementHero from '@/components/rv-technology/RVPowerManagementH
 import RVControlMonitoringHero from '@/components/rv-technology/RVControlMonitoringHero';
 import RVTechnologyTiersHero from '@/components/rv-technology/RVTechnologyTiersHero';
 import rvTechComparisonImage from '@/assets/rv-technology-comparison-dashboard.jpg';
+import aiEducationalConsultantHero from '@/assets/ai-educational-consultant-hero.png';
+import intelligentRvFinderHero from '@/assets/intelligent-rv-finder-hero.jpg';
+import aiEnhancedFeatureMatcherHero from '@/assets/ai-enhanced-feature-matcher-hero.jpg';
+import aiLifestyleTechnologyPlannerHero from '@/assets/ai-lifestyle-technology-planner-hero.png';
+import aiTechnologyResearchChecklistHero from '@/assets/ai-technology-research-checklist-hero.jpg';
 import rvCategoryComparisonImage from '@/assets/rv-category-comparison.png';
 import rvDealershipBackground from '@/assets/rv-dealership-background.jpg';
 import rvTechnologyPlanningImage from '@/assets/rv-technology-planning.png';
 import rvTechnologyDecisionsImage from '@/assets/rv-technology-decisions.png';
 import rvTechnologyGuideHero from '@/assets/rv-technology-guide-hero.jpg';
 import { BlogPostImage } from '@/components/blog/post/BlogPostImage';
+import { AITechnologyReadinessAssessment } from '@/components/rv-technology/interactive/AITechnologyReadinessAssessment';
+import { AITechnologyChecklist } from '@/components/rv-technology/interactive/AITechnologyChecklist';
+import { AILifestylePlanner } from '@/components/rv-technology/interactive/AILifestylePlanner';
 import { RVTechNavigation } from '@/components/rv-technology/RVTechNavigation';
 import { RVTechSummary } from '@/components/rv-technology/RVTechSummary';
 import { ScrollToTopButton } from '@/components/rv-technology/ScrollToTopButton';
-import { Button } from '@/components/ui/button';
-import { AITechnologyReadinessAssessment } from '@/components/rv-technology/interactive/AITechnologyReadinessAssessment';
-import { EnhancedFeatureMatcher } from '@/components/rv-technology/interactive/EnhancedFeatureMatcher';
 import { AIEducationalConsultant } from '@/components/rv-technology/interactive/AIEducationalConsultant';
-import { TechnologyReadinessQuiz } from '@/components/rv-technology/interactive/TechnologyReadinessQuiz';
-import { LifestylePlanner } from '@/components/rv-technology/interactive/LifestylePlanner';
-import { AITechnologyChecklist } from '@/components/rv-technology/interactive/AITechnologyChecklist';
-import { TechnologyChecklist } from '@/components/rv-technology/interactive/TechnologyChecklist';
+import { EnhancedFeatureMatcher } from '@/components/rv-technology/interactive/EnhancedFeatureMatcher';
+import IntelligentRVFinder from '@/components/rv-technology/interactive/IntelligentRVFinder';
 
 const RVTechnologyGuide = () => {
   return (
@@ -115,66 +118,135 @@ const RVTechnologyGuide = () => {
           </Container>
         </section>
 
-        {/* Interactive Tools Section */}
-        <section id="interactive-tools" className="py-20 px-4 relative bg-[#080F1F]/50">
-          <div className="absolute inset-0 bg-gradient-to-r from-[#5B9BD5]/5 via-transparent to-[#5B9BD5]/5" />
+        {/* Interactive Technology Assessment */}
+        <section id="technology-assessment" className="py-16 px-4 relative">
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#151A22]/20 to-transparent" />
           <Container>
             <div className="max-w-6xl mx-auto relative z-10">
-              <div className="text-center mb-16">
-                <div className="flex justify-center mb-6">
-                  <div className="relative">
-                    <div className="absolute -inset-3 bg-gradient-to-r from-[#5B9BD5]/30 to-[#60A5FA]/30 rounded-full blur-lg" />
-                    <div className="relative p-4 bg-gradient-to-br from-[#5B9BD5]/20 to-[#60A5FA]/20 rounded-full border border-[#5B9BD5]/30">
-                      <Brain className="h-12 w-12 text-[#5B9BD5]" />
-                    </div>
-                  </div>
+              <div className="text-center mb-12">
+                <div className="inline-flex items-center gap-3 mb-6">
+                  <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#5B9BD5]" />
+                  <Smartphone className="h-8 w-8 text-[#5B9BD5]" />
+                  <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#5B9BD5]" />
                 </div>
-                
-                <h2 className="text-3xl md:text-5xl font-bold mb-6 text-white bg-gradient-to-r from-white to-[#E2E8FF] bg-clip-text text-transparent">
-                  Interactive RV Technology Tools
+                <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white bg-gradient-to-r from-white to-[#E2E8FF] bg-clip-text text-transparent">
+                  Find Your Perfect RV Technology Match
                 </h2>
-                
-                <p className="text-xl text-[#E2E8FF] max-w-3xl mx-auto leading-relaxed">
-                  Use our suite of AI-powered tools to assess your technology needs, find the perfect RV, match features to your lifestyle, and create personalized research checklists.
+                <p className="text-xl text-[#E2E8FF] leading-relaxed">
+                  Take our quick assessment to discover RV technology features that match your needs and preferences.
                 </p>
               </div>
+              
+              <AITechnologyReadinessAssessment />
+            </div>
+          </Container>
+        </section>
 
-              <div className="space-y-12">
-                {/* AI Technology Readiness Assessment */}
-                <div className="bg-gradient-to-br from-[#091020] to-[#151A22] p-8 rounded-2xl border border-[#5B9BD5]/20 shadow-xl">
-                  <AITechnologyReadinessAssessment />
-                </div>
-
-                {/* Enhanced Feature Matcher */}
-                <div className="bg-gradient-to-br from-[#091020] to-[#151A22] p-8 rounded-2xl border border-[#60A5FA]/20 shadow-xl">
-                  <EnhancedFeatureMatcher />
-                </div>
-
-                {/* AI Educational Consultant */}
-                <div className="bg-gradient-to-br from-[#091020] to-[#151A22] p-8 rounded-2xl border border-[#5B9BD5]/20 shadow-xl">
-                  <AIEducationalConsultant />
-                </div>
-
-                {/* Technology Readiness Quiz */}
-                <div className="bg-gradient-to-br from-[#091020] to-[#151A22] p-8 rounded-2xl border border-[#60A5FA]/20 shadow-xl">
-                  <TechnologyReadinessQuiz />
-                </div>
-
-                {/* Lifestyle Planner */}
-                <div className="bg-gradient-to-br from-[#091020] to-[#151A22] p-8 rounded-2xl border border-[#5B9BD5]/20 shadow-xl">
-                  <LifestylePlanner />
-                </div>
-
-                {/* AI Technology Checklist */}
-                <div className="bg-gradient-to-br from-[#091020] to-[#151A22] p-8 rounded-2xl border border-[#60A5FA]/20 shadow-xl">
-                  <AITechnologyChecklist />
-                </div>
-
-                {/* Manual Technology Checklist */}
-                <div className="bg-gradient-to-br from-[#091020] to-[#151A22] p-8 rounded-2xl border border-[#5B9BD5]/20 shadow-xl">
-                  <TechnologyChecklist />
-                </div>
+        {/* AI Educational Consultant */}
+        <section className="py-16 px-4 relative bg-[#080F1F]/50">
+          <Container>
+            <div className="text-center mb-12">
+              <div className="mb-8">
+                <img 
+                  src={aiEducationalConsultantHero} 
+                  alt="AI Educational Consultant - Futuristic RV technology interface" 
+                  className="w-full max-w-4xl mx-auto rounded-2xl shadow-2xl"
+                />
               </div>
+              <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+                AI Educational Consultant
+              </h2>
+              <p className="text-xl text-connectivity-lightText max-w-3xl mx-auto">
+                Get personalized educational guidance about RV technology concepts through our liability free AI assistant.
+              </p>
+            </div>
+            <div className="max-w-6xl mx-auto">
+              <AIEducationalConsultant />
+            </div>
+          </Container>
+        </section>
+
+        {/* Intelligent RV Finder */}
+        <section className="py-16 px-4 relative bg-[#151A22]/90">
+          <Container>
+            <div className="text-center mb-12">
+              <div className="mb-8">
+                <img 
+                  src={intelligentRvFinderHero} 
+                  alt="Intelligent RV Finder - Multiple RVs on digital interface platform" 
+                  className="w-full max-w-4xl mx-auto rounded-2xl shadow-2xl"
+                />
+              </div>
+              <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+                Intelligent RV Finder
+              </h2>
+              <p className="text-xl text-connectivity-lightText max-w-3xl mx-auto">
+                Get personalized RV recommendations based on your lifestyle and needs, with real search results.
+              </p>
+            </div>
+            <div className="max-w-6xl mx-auto">
+              <IntelligentRVFinder />
+            </div>
+          </Container>
+        </section>
+
+        {/* Enhanced Feature Matcher */}
+        <section className="py-16 px-4 relative">
+          <Container>
+            <div className="text-center mb-12">
+              <div className="mb-8">
+                <img 
+                  src={aiEnhancedFeatureMatcherHero} 
+                  alt="AI Enhanced Feature Matcher - AI brain analyzing RV technology features" 
+                  className="w-full max-w-4xl mx-auto rounded-2xl shadow-2xl"
+                />
+              </div>
+              <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+                AI Enhanced Feature Matcher
+              </h2>
+              <p className="text-xl text-connectivity-lightText max-w-3xl mx-auto">
+                Describe your RV plans and get educational insights about relevant technology features.
+              </p>
+            </div>
+            <div className="max-w-6xl mx-auto">
+              <EnhancedFeatureMatcher />
+            </div>
+          </Container>
+        </section>
+
+
+        {/* Lifestyle Technology Planner */}
+        <section className="py-16 px-4 relative">
+          <Container>
+            <div className="text-center mb-12">
+              <div className="mb-8">
+                <img 
+                  src={aiLifestyleTechnologyPlannerHero} 
+                  alt="AI Lifestyle Technology Planner - Modern RV interior with smart display showing lifestyle planning options" 
+                  className="w-full max-w-4xl mx-auto rounded-2xl shadow-2xl"
+                />
+              </div>
+            </div>
+            <div className="max-w-6xl mx-auto">
+              <AILifestylePlanner />
+            </div>
+          </Container>
+        </section>
+
+        {/* Technology Research Checklist */}
+        <section className="py-16 px-4 relative">
+          <Container>
+            <div className="text-center mb-12">
+              <div className="mb-8">
+                <img 
+                  src={aiTechnologyResearchChecklistHero} 
+                  alt="AI Technology Research Checklist - Digital checklist interface with AI research capabilities" 
+                  className="w-full max-w-4xl mx-auto rounded-2xl shadow-2xl"
+                />
+              </div>
+            </div>
+            <div className="max-w-6xl mx-auto">
+              <AITechnologyChecklist />
             </div>
           </Container>
         </section>
@@ -444,8 +516,6 @@ const RVTechnologyGuide = () => {
           </Container>
         </section>
 
-        </div>
-
         {/* Control and Monitoring Systems */}
         <div id="control-monitoring">
           <RVControlMonitoringHero />
@@ -657,8 +727,6 @@ const RVTechnologyGuide = () => {
           </Container>
         </section>
 
-        </div>
-
         {/* Futuristic Technology Comparison Hero */}
         <div className="relative w-full h-[500px] md:h-[600px] overflow-hidden my-12">
           <PreloadedHeaderImage 
@@ -709,6 +777,8 @@ const RVTechnologyGuide = () => {
             </div>
           </Container>
         </section>
+
+        </div>
 
         {/* RV Category Evaluation */}
         <section id="rv-categories" className="py-16 px-4 bg-[#151A22]/50">
@@ -1504,6 +1574,7 @@ const RVTechnologyGuide = () => {
             </div>
           </Container>
         </section>
+        </div>
         
         <ScrollToTopButton />
       </div>
