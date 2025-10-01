@@ -27,6 +27,7 @@ import { BlogPostImage } from '@/components/blog/post/BlogPostImage';
 import { RVTechNavigation } from '@/components/rv-technology/RVTechNavigation';
 import { RVTechSummary } from '@/components/rv-technology/RVTechSummary';
 import { ScrollToTopButton } from '@/components/rv-technology/ScrollToTopButton';
+import { Button } from '@/components/ui/button';
 
 const RVTechnologyGuide = () => {
   return (
@@ -102,6 +103,74 @@ const RVTechnologyGuide = () => {
                   <Zap className="mr-2 h-5 w-5" />
                   Research Current Options
                 </ExternalLinkButton>
+              </div>
+            </div>
+          </Container>
+        </section>
+
+        {/* Interactive Tools CTA Section */}
+        <section className="py-20 px-4 relative bg-[#080F1F]/50">
+          <div className="absolute inset-0 bg-gradient-to-r from-[#5B9BD5]/5 via-transparent to-[#5B9BD5]/5" />
+          <Container>
+            <div className="max-w-5xl mx-auto relative z-10">
+              <div className="bg-gradient-to-br from-[#091020] to-[#151A22] p-12 rounded-3xl border border-[#5B9BD5]/30 shadow-2xl">
+                <div className="text-center mb-8">
+                  <div className="flex justify-center mb-6">
+                    <div className="relative">
+                      <div className="absolute -inset-3 bg-gradient-to-r from-[#5B9BD5]/30 to-[#60A5FA]/30 rounded-full blur-lg" />
+                      <div className="relative p-4 bg-gradient-to-br from-[#5B9BD5]/20 to-[#60A5FA]/20 rounded-full border border-[#5B9BD5]/30">
+                        <Brain className="h-12 w-12 text-[#5B9BD5]" />
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <h2 className="text-3xl md:text-5xl font-bold mb-6 text-white bg-gradient-to-r from-white to-[#E2E8FF] bg-clip-text text-transparent">
+                    Try Our Interactive RV Technology Tools
+                  </h2>
+                  
+                  <p className="text-xl text-[#E2E8FF] mb-8 leading-relaxed max-w-3xl mx-auto">
+                    Use our suite of AI-powered tools to assess your technology needs, find the perfect RV, match features to your lifestyle, and create personalized research checklists.
+                  </p>
+                  
+                  <div className="grid md:grid-cols-3 gap-4 mb-10 max-w-4xl mx-auto">
+                    <div className="bg-[#091020]/50 p-4 rounded-xl border border-[#5B9BD5]/20">
+                      <Cpu className="h-6 w-6 text-[#5B9BD5] mx-auto mb-2" />
+                      <p className="text-white font-semibold mb-1">Technology Assessment</p>
+                      <p className="text-[#E2E8FF] text-sm">Find your perfect match</p>
+                    </div>
+                    <div className="bg-[#091020]/50 p-4 rounded-xl border border-[#5B9BD5]/20">
+                      <Search className="h-6 w-6 text-[#60A5FA] mx-auto mb-2" />
+                      <p className="text-white font-semibold mb-1">Intelligent RV Finder</p>
+                      <p className="text-[#E2E8FF] text-sm">AI-powered recommendations</p>
+                    </div>
+                    <div className="bg-[#091020]/50 p-4 rounded-xl border border-[#5B9BD5]/20">
+                      <ClipboardCheck className="h-6 w-6 text-[#10B981] mx-auto mb-2" />
+                      <p className="text-white font-semibold mb-1">Research Checklist</p>
+                      <p className="text-[#E2E8FF] text-sm">Personalized planning</p>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                  <ExternalLinkButton 
+                    href="https://www.rvt.com/buy/" 
+                    variant="default" 
+                    size="lg"
+                    className="text-lg bg-gradient-to-r from-[#5B9BD5] to-[#60A5FA] hover:from-[#4B8FE3] hover:to-[#5B9BD5] transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-[#5B9BD5]/25 px-8 py-6"
+                  >
+                    <Brain className="mr-2 h-5 w-5" />
+                    Browse RV Inventory
+                  </ExternalLinkButton>
+                  <ExternalLinkButton
+                    href="https://www.rvt.com/buy/" 
+                    variant="outline" 
+                    size="lg"
+                    className="text-lg border-[#5B9BD5]/50 text-[#5B9BD5] hover:bg-[#5B9BD5]/10 hover:border-[#5B9BD5] px-8 py-6"
+                  >
+                    <Search className="mr-2 h-5 w-5" />
+                    Browse RV Inventory
+                  </ExternalLinkButton>
+                </div>
               </div>
             </div>
           </Container>
