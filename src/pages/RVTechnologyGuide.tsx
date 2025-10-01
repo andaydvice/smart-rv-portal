@@ -27,7 +27,6 @@ import { BlogPostImage } from '@/components/blog/post/BlogPostImage';
 import { RVTechNavigation } from '@/components/rv-technology/RVTechNavigation';
 import { RVTechSummary } from '@/components/rv-technology/RVTechSummary';
 import { ScrollToTopButton } from '@/components/rv-technology/ScrollToTopButton';
-import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 
 const RVTechnologyGuide = () => {
@@ -153,16 +152,16 @@ const RVTechnologyGuide = () => {
                 </div>
                 
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <Link to="/rv-tools">
-                    <Button
-                      size="lg"
-                      className="text-lg bg-gradient-to-r from-[#5B9BD5] to-[#60A5FA] hover:from-[#4B8FE3] hover:to-[#5B9BD5] transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-[#5B9BD5]/25 px-8 py-6"
-                    >
-                      <Brain className="mr-2 h-5 w-5" />
-                      Explore Interactive Tools
-                    </Button>
-                  </Link>
                   <ExternalLinkButton 
+                    href="https://www.rvt.com/buy/" 
+                    variant="default" 
+                    size="lg"
+                    className="text-lg bg-gradient-to-r from-[#5B9BD5] to-[#60A5FA] hover:from-[#4B8FE3] hover:to-[#5B9BD5] transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-[#5B9BD5]/25 px-8 py-6"
+                  >
+                    <Brain className="mr-2 h-5 w-5" />
+                    Browse RV Inventory
+                  </ExternalLinkButton>
+                  <ExternalLinkButton
                     href="https://www.rvt.com/buy/" 
                     variant="outline" 
                     size="lg"
