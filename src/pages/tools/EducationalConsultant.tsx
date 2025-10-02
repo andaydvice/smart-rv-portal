@@ -21,7 +21,7 @@ const EducationalConsultant: React.FC = () => {
             { label: 'Educational Consultant' }
           ]} />
 
-          <div className="relative mb-8 rounded-2xl overflow-hidden max-w-4xl mx-auto">
+          <div className="relative mb-8 rounded-2xl overflow-hidden">
             <img 
               src={aiEducationalConsultantHero} 
               alt="AI Educational Consultant"

@@ -21,7 +21,7 @@ const LifestylePlanner: React.FC = () => {
             { label: 'Lifestyle Planner' }
           ]} />
 
-          <div className="relative mb-8 rounded-2xl overflow-hidden max-w-4xl mx-auto">
+          <div className="relative mb-8 rounded-2xl overflow-hidden">
             <img 
               src={aiLifestyleTechnologyPlannerHero} 
               alt="AI Lifestyle Planner"

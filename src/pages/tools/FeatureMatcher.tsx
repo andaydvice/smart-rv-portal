@@ -21,7 +21,7 @@ const FeatureMatcher: React.FC = () => {
             { label: 'Feature Matcher' }
           ]} />
 
-          <div className="relative mb-8 rounded-2xl overflow-hidden max-w-4xl mx-auto">
+          <div className="relative mb-8 rounded-2xl overflow-hidden">
             <img 
               src={aiEnhancedFeatureMatcherHero} 
               alt="Enhanced Feature Matcher"

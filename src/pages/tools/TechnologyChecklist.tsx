@@ -21,7 +21,7 @@ const TechnologyChecklist: React.FC = () => {
             { label: 'Technology Checklist' }
           ]} />
 
-          <div className="relative mb-8 rounded-2xl overflow-hidden max-w-4xl mx-auto">
+          <div className="relative mb-8 rounded-2xl overflow-hidden">
             <img 
               src={aiTechnologyResearchChecklistHero} 
               alt="AI Technology Checklist"

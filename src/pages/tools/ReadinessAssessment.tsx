@@ -25,7 +25,7 @@ const ReadinessAssessment: React.FC = () => {
             { label: 'Readiness Assessment' }
           ]} />
 
-          <div className="relative mb-8 rounded-2xl overflow-hidden max-w-4xl mx-auto">
+          <div className="relative mb-8 rounded-2xl overflow-hidden">
             <img 
               src={rvTechnologyPlanningImage} 
               alt="AI Technology Readiness Assessment"
