@@ -1,4 +1,9 @@
 import { Brain, Search, Lightbulb, CheckSquare, Compass } from 'lucide-react';
+import rvTechnologyPlanningImage from '@/assets/rv-technology-planning.png';
+import aiEducationalConsultantHero from '@/assets/ai-educational-consultant-hero.png';
+import aiEnhancedFeatureMatcherHero from '@/assets/ai-enhanced-feature-matcher-hero.jpg';
+import aiLifestyleTechnologyPlannerHero from '@/assets/ai-lifestyle-technology-planner-hero.png';
+import aiTechnologyResearchChecklistHero from '@/assets/ai-technology-research-checklist-hero.jpg';
 
 export const availableTools = [
   {
@@ -7,7 +12,9 @@ export const availableTools = [
     description: 'Get personalized RV technology recommendations based on your experience level and travel goals',
     icon: Brain,
     color: 'text-[#5B9BD5]',
-    path: '/tools/readiness-assessment'
+    path: '/tools/readiness-assessment',
+    image: rvTechnologyPlanningImage,
+    imageAlt: 'AI Technology Readiness Assessment tool interface'
   },
   {
     id: 'feature-matcher',
@@ -15,7 +22,9 @@ export const availableTools = [
     description: 'Describe your RV usage plans and discover which technology features match your needs',
     icon: Search,
     color: 'text-[#10B981]',
-    path: '/tools/feature-matcher'
+    path: '/tools/feature-matcher',
+    image: aiEnhancedFeatureMatcherHero,
+    imageAlt: 'AI Enhanced Feature Matcher interface'
   },
   {
     id: 'educational-consultant',
@@ -23,7 +32,9 @@ export const availableTools = [
     description: 'Ask questions and get detailed information about RV technology from our AI assistant',
     icon: Lightbulb,
     color: 'text-[#F59E0B]',
-    path: '/tools/educational-consultant'
+    path: '/tools/educational-consultant',
+    image: aiEducationalConsultantHero,
+    imageAlt: 'AI Educational Consultant interface'
   },
   {
     id: 'technology-checklist',
@@ -31,7 +42,9 @@ export const availableTools = [
     description: 'Generate a personalized research checklist for your RV technology needs',
     icon: CheckSquare,
     color: 'text-[#8B5CF6]',
-    path: '/tools/technology-checklist'
+    path: '/tools/technology-checklist',
+    image: aiTechnologyResearchChecklistHero,
+    imageAlt: 'AI Technology Research Checklist interface'
   },
   {
     id: 'lifestyle-planner',
@@ -39,6 +52,8 @@ export const availableTools = [
     description: 'Discover the perfect RV technology setup for your specific lifestyle and travel plans',
     icon: Compass,
     color: 'text-[#0EA5E9]',
-    path: '/tools/lifestyle-planner'
+    path: '/tools/lifestyle-planner',
+    image: aiLifestyleTechnologyPlannerHero,
+    imageAlt: 'AI Lifestyle Planner interface'
   }
 ];

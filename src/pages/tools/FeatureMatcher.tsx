@@ -4,6 +4,7 @@ import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 import { RelatedTools } from '@/components/rv-technology/RelatedTools';
 import { EnhancedFeatureMatcher } from '@/components/rv-technology/interactive/EnhancedFeatureMatcher';
 import { availableTools } from '@/lib/toolsData';
+import aiEnhancedFeatureMatcherHero from '@/assets/ai-enhanced-feature-matcher-hero.jpg';
 
 const FeatureMatcher: React.FC = () => {
   return (
@@ -20,13 +21,21 @@ const FeatureMatcher: React.FC = () => {
             { label: 'Feature Matcher' }
           ]} />
 
-          <div className="text-center mb-8">
-            <h1 className="text-3xl md:text-4xl font-bold text-white mb-3">
-              Enhanced Feature Matcher
-            </h1>
-            <p className="text-lg text-[#E2E8FF] max-w-2xl mx-auto">
-              Discover which technology features match your specific RV usage plans
-            </p>
+          <div className="relative mb-8 rounded-2xl overflow-hidden max-w-4xl mx-auto">
+            <img 
+              src={aiEnhancedFeatureMatcherHero} 
+              alt="Enhanced Feature Matcher"
+              className="w-full h-64 object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#080F1F] via-[#080F1F]/50 to-transparent"></div>
+            <div className="absolute bottom-0 left-0 right-0 p-8 text-center">
+              <h1 className="text-3xl md:text-4xl font-bold text-white mb-3">
+                Enhanced Feature Matcher
+              </h1>
+              <p className="text-lg text-[#E2E8FF] max-w-2xl mx-auto">
+                Discover which technology features match your specific RV usage plans
+              </p>
+            </div>
           </div>
 
           <EnhancedFeatureMatcher />

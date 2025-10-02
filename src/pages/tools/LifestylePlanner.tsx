@@ -4,6 +4,7 @@ import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 import { RelatedTools } from '@/components/rv-technology/RelatedTools';
 import { AILifestylePlanner } from '@/components/rv-technology/interactive/AILifestylePlanner';
 import { availableTools } from '@/lib/toolsData';
+import aiLifestyleTechnologyPlannerHero from '@/assets/ai-lifestyle-technology-planner-hero.png';
 
 const LifestylePlanner: React.FC = () => {
   return (
@@ -20,13 +21,21 @@ const LifestylePlanner: React.FC = () => {
             { label: 'Lifestyle Planner' }
           ]} />
 
-          <div className="text-center mb-8">
-            <h1 className="text-3xl md:text-4xl font-bold text-white mb-3">
-              AI Lifestyle Planner
-            </h1>
-            <p className="text-lg text-[#E2E8FF] max-w-2xl mx-auto">
-              Find the ideal RV technology setup for your unique lifestyle
-            </p>
+          <div className="relative mb-8 rounded-2xl overflow-hidden max-w-4xl mx-auto">
+            <img 
+              src={aiLifestyleTechnologyPlannerHero} 
+              alt="AI Lifestyle Planner"
+              className="w-full h-64 object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#080F1F] via-[#080F1F]/50 to-transparent"></div>
+            <div className="absolute bottom-0 left-0 right-0 p-8 text-center">
+              <h1 className="text-3xl md:text-4xl font-bold text-white mb-3">
+                AI Lifestyle Planner
+              </h1>
+              <p className="text-lg text-[#E2E8FF] max-w-2xl mx-auto">
+                Find the ideal RV technology setup for your unique lifestyle
+              </p>
+            </div>
           </div>
 
           <AILifestylePlanner />

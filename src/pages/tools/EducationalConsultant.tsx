@@ -4,6 +4,7 @@ import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 import { RelatedTools } from '@/components/rv-technology/RelatedTools';
 import { AIEducationalConsultant } from '@/components/rv-technology/interactive/AIEducationalConsultant';
 import { availableTools } from '@/lib/toolsData';
+import aiEducationalConsultantHero from '@/assets/ai-educational-consultant-hero.png';
 
 const EducationalConsultant: React.FC = () => {
   return (
@@ -20,13 +21,21 @@ const EducationalConsultant: React.FC = () => {
             { label: 'Educational Consultant' }
           ]} />
 
-          <div className="text-center mb-8">
-            <h1 className="text-3xl md:text-4xl font-bold text-white mb-3">
-              AI Educational Consultant
-            </h1>
-            <p className="text-lg text-[#E2E8FF] max-w-2xl mx-auto">
-              Get expert answers to your RV technology questions
-            </p>
+          <div className="relative mb-8 rounded-2xl overflow-hidden max-w-4xl mx-auto">
+            <img 
+              src={aiEducationalConsultantHero} 
+              alt="AI Educational Consultant"
+              className="w-full h-64 object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#080F1F] via-[#080F1F]/50 to-transparent"></div>
+            <div className="absolute bottom-0 left-0 right-0 p-8 text-center">
+              <h1 className="text-3xl md:text-4xl font-bold text-white mb-3">
+                AI Educational Consultant
+              </h1>
+              <p className="text-lg text-[#E2E8FF] max-w-2xl mx-auto">
+                Get expert answers to your RV technology questions
+              </p>
+            </div>
           </div>
 
           <AIEducationalConsultant />

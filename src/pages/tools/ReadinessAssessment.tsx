@@ -6,6 +6,7 @@ import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 import { RelatedTools } from '@/components/rv-technology/RelatedTools';
 import { AITechnologyReadinessAssessment } from '@/components/rv-technology/interactive/AITechnologyReadinessAssessment';
 import { availableTools } from '@/lib/toolsData';
+import rvTechnologyPlanningImage from '@/assets/rv-technology-planning.png';
 
 const ReadinessAssessment: React.FC = () => {
   const navigate = useNavigate();
@@ -24,13 +25,21 @@ const ReadinessAssessment: React.FC = () => {
             { label: 'Readiness Assessment' }
           ]} />
 
-          <div className="text-center mb-8">
-            <h1 className="text-3xl md:text-4xl font-bold text-white mb-3">
-              AI Technology Readiness Assessment
-            </h1>
-            <p className="text-lg text-[#E2E8FF] max-w-2xl mx-auto">
-              Get personalized technology recommendations based on your experience and goals
-            </p>
+          <div className="relative mb-8 rounded-2xl overflow-hidden max-w-4xl mx-auto">
+            <img 
+              src={rvTechnologyPlanningImage} 
+              alt="AI Technology Readiness Assessment"
+              className="w-full h-64 object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#080F1F] via-[#080F1F]/50 to-transparent"></div>
+            <div className="absolute bottom-0 left-0 right-0 p-8 text-center">
+              <h1 className="text-3xl md:text-4xl font-bold text-white mb-3">
+                AI Technology Readiness Assessment
+              </h1>
+              <p className="text-lg text-[#E2E8FF] max-w-2xl mx-auto">
+                Get personalized technology recommendations based on your experience and goals
+              </p>
+            </div>
           </div>
 
           <AITechnologyReadinessAssessment />

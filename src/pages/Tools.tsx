@@ -34,11 +34,19 @@ const Tools: React.FC = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
             {availableTools.map((tool) => (
-              <Card key={tool.id} className="bg-[#091020] border-[#1a202c] hover:border-[#5B9BD5] transition-all duration-300 group">
-                <CardHeader>
-                  <div className="flex items-center gap-3 mb-2">
-                    <tool.icon className={`h-8 w-8 ${tool.color}`} />
+              <Card key={tool.id} className="bg-[#091020] border-[#1a202c] hover:border-[#5B9BD5] transition-all duration-300 group overflow-hidden">
+                <div className="relative h-48 overflow-hidden">
+                  <img 
+                    src={tool.image} 
+                    alt={tool.imageAlt}
+                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#091020] via-[#091020]/50 to-transparent"></div>
+                  <div className="absolute top-4 left-4">
+                    <tool.icon className={`h-10 w-10 ${tool.color} drop-shadow-lg`} />
                   </div>
+                </div>
+                <CardHeader>
                   <CardTitle className="text-xl text-white group-hover:text-[#5B9BD5] transition-colors">{tool.title}</CardTitle>
                   <CardDescription className="text-[#E2E8FF]">
                     {tool.description}
