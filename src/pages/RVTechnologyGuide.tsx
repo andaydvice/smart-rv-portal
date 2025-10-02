@@ -34,6 +34,7 @@ import { RVTechSummary } from '@/components/rv-technology/RVTechSummary';
 import { ScrollToTopButton } from '@/components/rv-technology/ScrollToTopButton';
 import { ToolPreviewCard } from '@/components/rv-technology/ToolPreviewCard';
 import IntelligentRVFinder from '@/components/rv-technology/interactive/IntelligentRVFinder';
+import { Button } from '@/components/ui/button';
 
 const RVTechnologyGuide = () => {
   return (
@@ -133,7 +134,7 @@ const RVTechnologyGuide = () => {
                 </p>
               </div>
               
-              <div className="grid md:grid-cols-2 gap-8">
+              <div className="grid md:grid-cols-2 gap-8 mb-8">
                 <ToolPreviewCard
                   title="AI Technology Readiness Assessment"
                   description="Get personalized RV technology recommendations based on your experience level and travel goals. Our AI analyzes your needs and suggests the perfect technology features."
@@ -151,27 +152,63 @@ const RVTechnologyGuide = () => {
                   icon={ClipboardCheck}
                 />
               </div>
+              
+              <div className="text-center">
+                <Button
+                  onClick={() => window.location.href = '/tools'}
+                  className="bg-gradient-to-r from-[#5B9BD5] to-[#60A5FA] hover:from-[#4B8FE3] hover:to-[#5B9BD5] text-white text-lg px-8 py-6"
+                >
+                  View All RV Technology Tools
+                </Button>
+              </div>
             </div>
           </Container>
         </section>
 
-        {/* AI Educational Consultant */}
+        {/* Additional Tools Section */}
         <section className="py-16 px-4 relative bg-[#080F1F]/50">
           <Container>
-            <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+                More Interactive Tools
+              </h2>
+              <p className="text-xl text-[#E2E8FF] max-w-2xl mx-auto">
+                Explore additional AI-powered tools to help you research and plan your RV technology setup
+              </p>
+            </div>
+            
+            <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
               <ToolPreviewCard
                 title="AI Educational Consultant"
-                description="Ask questions and get detailed information about RV technology from our AI assistant. Get personalized educational guidance about connectivity, power systems, and more."
+                description="Ask questions and get detailed information about RV technology from our AI assistant."
                 imageSrc={aiEducationalConsultantHero}
-                imageAlt="AI Educational Consultant - Futuristic RV technology interface"
+                imageAlt="AI Educational Consultant interface"
                 toolPath="/tools/educational-consultant"
                 icon={GraduationCap}
+              />
+              
+              <ToolPreviewCard
+                title="AI Feature Matcher"
+                description="Describe your RV usage plans and discover which technology features match your needs."
+                imageSrc={aiEnhancedFeatureMatcherHero}
+                imageAlt="AI Enhanced Feature Matcher interface"
+                toolPath="/tools/feature-matcher"
+                icon={Target}
+              />
+              
+              <ToolPreviewCard
+                title="AI Lifestyle Planner"
+                description="Discover the perfect RV technology setup for your specific lifestyle and travel plans."
+                imageSrc={aiLifestyleTechnologyPlannerHero}
+                imageAlt="AI Lifestyle Planner interface"
+                toolPath="/tools/lifestyle-planner"
+                icon={Heart}
               />
             </div>
           </Container>
         </section>
 
-        {/* Intelligent RV Finder */}
+        {/* Intelligent RV Finder - Full Featured Tool */}
         <section className="py-16 px-4 relative bg-[#151A22]/90">
           <Container>
             <div className="text-center mb-12">
@@ -185,8 +222,11 @@ const RVTechnologyGuide = () => {
               <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
                 Intelligent RV Finder
               </h2>
-              <p className="text-xl text-connectivity-lightText max-w-3xl mx-auto">
+              <p className="text-xl text-connectivity-lightText max-w-3xl mx-auto mb-6">
                 Get personalized RV recommendations based on your lifestyle and needs, with real search results.
+              </p>
+              <p className="text-[#E2E8FF] max-w-2xl mx-auto">
+                This interactive tool analyzes your requirements and provides tailored RV suggestions from real inventory, helping you find the perfect match for your travel plans.
               </p>
             </div>
             <div className="max-w-6xl mx-auto">
@@ -195,38 +235,6 @@ const RVTechnologyGuide = () => {
           </Container>
         </section>
 
-        {/* Enhanced Feature Matcher */}
-        <section className="py-16 px-4 relative">
-          <Container>
-            <div className="max-w-4xl mx-auto">
-              <ToolPreviewCard
-                title="AI Enhanced Feature Matcher"
-                description="Describe your RV usage plans and discover which technology features match your needs. Get educational insights about connectivity, power, and control systems."
-                imageSrc={aiEnhancedFeatureMatcherHero}
-                imageAlt="AI Enhanced Feature Matcher - AI brain analyzing RV technology features"
-                toolPath="/tools/feature-matcher"
-                icon={Target}
-              />
-            </div>
-          </Container>
-        </section>
-
-
-        {/* Lifestyle Technology Planner */}
-        <section className="py-16 px-4 relative bg-[#080F1F]/50">
-          <Container>
-            <div className="max-w-4xl mx-auto">
-              <ToolPreviewCard
-                title="AI Lifestyle Planner"
-                description="Discover the perfect RV technology setup for your specific lifestyle and travel plans. Get recommendations tailored to remote work, family entertainment, off-grid living, and more."
-                imageSrc={aiLifestyleTechnologyPlannerHero}
-                imageAlt="AI Lifestyle Technology Planner - Modern RV interior with smart display"
-                toolPath="/tools/lifestyle-planner"
-                icon={Heart}
-              />
-            </div>
-          </Container>
-        </section>
 
 
         {/* Understanding Modern RV Technology */}
