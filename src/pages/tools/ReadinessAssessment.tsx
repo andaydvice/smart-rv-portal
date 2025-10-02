@@ -26,11 +26,11 @@ const ReadinessAssessment: React.FC = () => {
           ]} />
         </div>
 
-        <div className="relative w-full min-h-[400px] overflow-hidden my-12 flex items-center justify-center bg-[#080F1F]">
+        <div className="relative w-full my-12">
           <img 
             src={rvTechnologyPlanningImage} 
             alt="AI Technology Readiness Assessment"
-            className="w-full h-auto object-contain"
+            className="w-full h-auto"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/60 to-black/80 z-10" />
           <div className="absolute inset-0 flex items-center justify-center z-20">
