@@ -34,24 +34,28 @@ const IntelligentRVFinder = () => {
             { label: 'Tools', href: '/tools' },
             { label: 'Intelligent RV Finder' }
           ]} />
+        </div>
 
-          <div className="relative mb-12 rounded-2xl overflow-hidden">
-            <img 
-              src={intelligentRvFinderHero} 
-              alt="Intelligent RV Finder"
-              className="w-full h-80 object-cover object-top"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#080F1F] via-[#080F1F]/50 to-transparent"></div>
-            <div className="absolute bottom-0 left-0 right-0 p-8 text-center">
-              <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
+        <div className="relative w-full h-[500px] md:h-[600px] overflow-hidden my-12">
+          <img 
+            src={intelligentRvFinderHero} 
+            alt="Intelligent RV Finder"
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/60 to-black/80 z-10" />
+          <div className="absolute inset-0 flex items-center justify-center z-20">
+            <div className="text-center max-w-5xl px-6">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 image-overlay-headline">
                 Intelligent RV Finder
               </h1>
-              <p className="text-xl text-[#E2E8FF] max-w-3xl mx-auto">
+              <p className="text-lg md:text-xl text-white/80 max-w-4xl mx-auto image-overlay-headline">
                 Get personalized RV recommendations based on your lifestyle and needs, with real search results.
               </p>
             </div>
           </div>
+        </div>
 
+        <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <IntelligentRVFinderComponent />
           </div>
