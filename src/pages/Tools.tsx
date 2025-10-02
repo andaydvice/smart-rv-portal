@@ -41,7 +41,7 @@ const Tools: React.FC = () => {
           <Breadcrumbs items={[{ label: 'Tools' }]} />
           
           <div className="text-center mb-12 mt-8">
-            <p className="text-[#E2E8FF] text-lg max-w-2xl mx-auto">
+            <p className="text-[#E2E8FF] text-lg max-w-2xl text-left">
               Each tool is designed to help you make informed decisions about RV technology features, from connectivity and power management to control systems and entertainment.
             </p>
           </div>
