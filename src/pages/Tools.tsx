@@ -35,11 +35,11 @@ const Tools: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
             {availableTools.map((tool) => (
               <Card key={tool.id} className="bg-[#091020] border-[#1a202c] hover:border-[#5B9BD5] transition-all duration-300 group overflow-hidden">
-                <div className="relative h-48 overflow-hidden">
+                <div className="relative h-64 overflow-hidden">
                   <img 
                     src={tool.image} 
                     alt={tool.imageAlt}
-                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                    className="w-full h-full object-cover object-top transition-transform duration-300 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#091020] via-[#091020]/50 to-transparent"></div>
                   <div className="absolute top-4 left-4">

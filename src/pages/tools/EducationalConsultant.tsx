@@ -25,7 +25,7 @@ const EducationalConsultant: React.FC = () => {
             <img 
               src={aiEducationalConsultantHero} 
               alt="AI Educational Consultant"
-              className="w-full h-64 object-cover"
+              className="w-full h-80 object-cover object-top"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-[#080F1F] via-[#080F1F]/50 to-transparent"></div>
             <div className="absolute bottom-0 left-0 right-0 p-8 text-center">
