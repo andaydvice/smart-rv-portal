@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 import { RelatedTools } from '@/components/rv-technology/RelatedTools';
@@ -7,6 +7,10 @@ import { availableTools } from '@/lib/toolsData';
 import aiEnhancedFeatureMatcherHero from '@/assets/ai-enhanced-feature-matcher-hero.jpg';
 
 const FeatureMatcher: React.FC = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <>
       <Helmet>

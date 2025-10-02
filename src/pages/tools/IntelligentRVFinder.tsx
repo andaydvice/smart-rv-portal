@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 import { RelatedTools } from '@/components/rv-technology/RelatedTools';
@@ -7,6 +7,10 @@ import intelligentRvFinderHero from '@/assets/intelligent-rv-finder-hero.jpg';
 import IntelligentRVFinderComponent from '@/components/rv-technology/interactive/IntelligentRVFinder';
 
 const IntelligentRVFinder = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const relatedTools = availableTools
     .filter(tool => tool.id !== 'intelligent-rv-finder')
     .map(tool => ({
