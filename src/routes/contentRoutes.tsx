@@ -22,6 +22,10 @@ const RVMarketplace = lazy(() => import("../pages/RVMarketplace"));
 const RVTechnologyGuide = lazy(() => import("../pages/RVTechnologyGuide"));
 const Tools = lazy(() => import("../pages/Tools"));
 const ReadinessAssessment = lazy(() => import("../pages/tools/ReadinessAssessment"));
+const FeatureMatcher = lazy(() => import("../pages/tools/FeatureMatcher"));
+const EducationalConsultant = lazy(() => import("../pages/tools/EducationalConsultant"));
+const TechnologyChecklist = lazy(() => import("../pages/tools/TechnologyChecklist"));
+const LifestylePlanner = lazy(() => import("../pages/tools/LifestylePlanner"));
 
 const contentRoutes: RouteObject[] = [
   {
@@ -154,6 +158,50 @@ const contentRoutes: RouteObject[] = [
       <Suspense fallback={<MinimalLoader />}>
         <RouteTransition>
           <ReadinessAssessment />
+        </RouteTransition>
+      </Suspense>
+    ),
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/tools/feature-matcher",
+    element: (
+      <Suspense fallback={<MinimalLoader />}>
+        <RouteTransition>
+          <FeatureMatcher />
+        </RouteTransition>
+      </Suspense>
+    ),
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/tools/educational-consultant",
+    element: (
+      <Suspense fallback={<MinimalLoader />}>
+        <RouteTransition>
+          <EducationalConsultant />
+        </RouteTransition>
+      </Suspense>
+    ),
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/tools/technology-checklist",
+    element: (
+      <Suspense fallback={<MinimalLoader />}>
+        <RouteTransition>
+          <TechnologyChecklist />
+        </RouteTransition>
+      </Suspense>
+    ),
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/tools/lifestyle-planner",
+    element: (
+      <Suspense fallback={<MinimalLoader />}>
+        <RouteTransition>
+          <LifestylePlanner />
         </RouteTransition>
       </Suspense>
     ),
