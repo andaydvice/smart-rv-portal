@@ -10,7 +10,7 @@ export const availableTools = [
   {
     id: 'readiness-assessment',
     title: 'AI Technology Readiness Assessment',
-    description: 'Get personalized RV technology recommendations based on your experience level and travel goals',
+    description: 'Get personalized RV technology recommendations based on your experience level and travel goals to build the perfect setup',
     icon: Brain,
     color: 'text-[#5B9BD5]',
     path: '/tools/readiness-assessment',
@@ -20,7 +20,7 @@ export const availableTools = [
   {
     id: 'feature-matcher',
     title: 'Enhanced Feature Matcher',
-    description: 'Describe your RV usage plans and discover which technology features match your needs',
+    description: 'Describe your RV usage plans and discover which technology features match your needs for connectivity and entertainment',
     icon: Search,
     color: 'text-[#10B981]',
     path: '/tools/feature-matcher',
@@ -30,7 +30,7 @@ export const availableTools = [
   {
     id: 'educational-consultant',
     title: 'AI Educational Consultant',
-    description: 'Ask questions and get detailed information about RV technology from our AI assistant',
+    description: 'Ask questions and get detailed information about RV technology from our AI assistant for informed purchasing decisions',
     icon: Lightbulb,
     color: 'text-[#F59E0B]',
     path: '/tools/educational-consultant',
