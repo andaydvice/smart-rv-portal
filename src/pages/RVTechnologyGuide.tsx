@@ -19,7 +19,7 @@ import RVControlMonitoringHero from '@/components/rv-technology/RVControlMonitor
 import RVTechnologyTiersHero from '@/components/rv-technology/RVTechnologyTiersHero';
 import rvTechComparisonImage from '@/assets/rv-technology-comparison-dashboard.jpg';
 import aiEducationalConsultantHero from '@/assets/ai-educational-consultant-hero.png';
-
+import intelligentRvFinderHero from '@/assets/intelligent-rv-finder-hero.jpg';
 import aiEnhancedFeatureMatcherHero from '@/assets/ai-enhanced-feature-matcher-hero.jpg';
 import aiLifestyleTechnologyPlannerHero from '@/assets/ai-lifestyle-technology-planner-hero.png';
 import aiTechnologyResearchChecklistHero from '@/assets/ai-technology-research-checklist-hero.jpg';
@@ -177,7 +177,16 @@ const RVTechnologyGuide = () => {
               </p>
             </div>
             
-            <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
+              <ToolPreviewCard
+                title="Intelligent RV Finder"
+                description="Discover your perfect RV with AI-powered recommendations based on your lifestyle and budget."
+                imageSrc={intelligentRvFinderHero}
+                imageAlt="Intelligent RV Finder interface showing personalized recommendations"
+                toolPath="/tools/intelligent-rv-finder"
+                icon={Target}
+              />
+              
               <ToolPreviewCard
                 title="AI Educational Consultant"
                 description="Ask questions and get detailed information about RV technology from our AI assistant."
@@ -193,7 +202,7 @@ const RVTechnologyGuide = () => {
                 imageSrc={aiEnhancedFeatureMatcherHero}
                 imageAlt="AI Enhanced Feature Matcher interface"
                 toolPath="/tools/feature-matcher"
-                icon={Target}
+                icon={Search}
               />
               
               <ToolPreviewCard
