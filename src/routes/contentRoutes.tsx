@@ -26,6 +26,7 @@ const FeatureMatcher = lazy(() => import("../pages/tools/FeatureMatcher"));
 const EducationalConsultant = lazy(() => import("../pages/tools/EducationalConsultant"));
 const TechnologyChecklist = lazy(() => import("../pages/tools/TechnologyChecklist"));
 const LifestylePlanner = lazy(() => import("../pages/tools/LifestylePlanner"));
+const IntelligentRVFinder = lazy(() => import("../pages/tools/IntelligentRVFinder"));
 
 const contentRoutes: RouteObject[] = [
   {
@@ -202,6 +203,17 @@ const contentRoutes: RouteObject[] = [
       <Suspense fallback={<MinimalLoader />}>
         <RouteTransition>
           <LifestylePlanner />
+        </RouteTransition>
+      </Suspense>
+    ),
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/tools/intelligent-rv-finder",
+    element: (
+      <Suspense fallback={<MinimalLoader />}>
+        <RouteTransition>
+          <IntelligentRVFinder />
         </RouteTransition>
       </Suspense>
     ),

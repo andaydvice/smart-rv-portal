@@ -19,7 +19,7 @@ import RVControlMonitoringHero from '@/components/rv-technology/RVControlMonitor
 import RVTechnologyTiersHero from '@/components/rv-technology/RVTechnologyTiersHero';
 import rvTechComparisonImage from '@/assets/rv-technology-comparison-dashboard.jpg';
 import aiEducationalConsultantHero from '@/assets/ai-educational-consultant-hero.png';
-import intelligentRvFinderHero from '@/assets/intelligent-rv-finder-hero.jpg';
+
 import aiEnhancedFeatureMatcherHero from '@/assets/ai-enhanced-feature-matcher-hero.jpg';
 import aiLifestyleTechnologyPlannerHero from '@/assets/ai-lifestyle-technology-planner-hero.png';
 import aiTechnologyResearchChecklistHero from '@/assets/ai-technology-research-checklist-hero.jpg';
@@ -33,7 +33,7 @@ import { RVTechNavigation } from '@/components/rv-technology/RVTechNavigation';
 import { RVTechSummary } from '@/components/rv-technology/RVTechSummary';
 import { ScrollToTopButton } from '@/components/rv-technology/ScrollToTopButton';
 import { ToolPreviewCard } from '@/components/rv-technology/ToolPreviewCard';
-import IntelligentRVFinder from '@/components/rv-technology/interactive/IntelligentRVFinder';
+
 import { Button } from '@/components/ui/button';
 
 const RVTechnologyGuide = () => {
@@ -208,32 +208,6 @@ const RVTechnologyGuide = () => {
           </Container>
         </section>
 
-        {/* Intelligent RV Finder - Full Featured Tool */}
-        <section className="py-16 px-4 relative bg-[#151A22]/90">
-          <Container>
-            <div className="text-center mb-12">
-              <div className="mb-8">
-                <img 
-                  src={intelligentRvFinderHero} 
-                  alt="Intelligent RV Finder - Multiple RVs on digital interface platform" 
-                  className="w-full max-w-4xl mx-auto rounded-2xl shadow-2xl"
-                />
-              </div>
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
-                Intelligent RV Finder
-              </h2>
-              <p className="text-xl text-connectivity-lightText max-w-3xl mx-auto mb-6">
-                Get personalized RV recommendations based on your lifestyle and needs, with real search results.
-              </p>
-              <p className="text-[#E2E8FF] max-w-2xl mx-auto">
-                This interactive tool analyzes your requirements and provides tailored RV suggestions from real inventory, helping you find the perfect match for your travel plans.
-              </p>
-            </div>
-            <div className="max-w-6xl mx-auto">
-              <IntelligentRVFinder />
-            </div>
-          </Container>
-        </section>
 
 
 

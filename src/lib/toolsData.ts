@@ -1,9 +1,10 @@
-import { Brain, Search, Lightbulb, CheckSquare, Compass } from 'lucide-react';
+import { Brain, Search, Lightbulb, CheckSquare, Compass, Target } from 'lucide-react';
 import rvTechnologyPlanningImage from '@/assets/rv-technology-planning.png';
 import aiEducationalConsultantHero from '@/assets/ai-educational-consultant-hero.png';
 import aiEnhancedFeatureMatcherHero from '@/assets/ai-enhanced-feature-matcher-hero.jpg';
 import aiLifestyleTechnologyPlannerHero from '@/assets/ai-lifestyle-technology-planner-hero.png';
 import aiTechnologyResearchChecklistHero from '@/assets/ai-technology-research-checklist-hero.jpg';
+import intelligentRvFinderHero from '@/assets/intelligent-rv-finder-hero.jpg';
 
 export const availableTools = [
   {
@@ -55,5 +56,15 @@ export const availableTools = [
     path: '/tools/lifestyle-planner',
     image: aiLifestyleTechnologyPlannerHero,
     imageAlt: 'AI Lifestyle Planner interface'
+  },
+  {
+    id: 'intelligent-rv-finder',
+    title: 'Intelligent RV Finder',
+    description: 'Get personalized RV recommendations based on your lifestyle and needs, with real search results',
+    icon: Target,
+    color: 'text-[#EC4899]',
+    path: '/tools/intelligent-rv-finder',
+    image: intelligentRvFinderHero,
+    imageAlt: 'Intelligent RV Finder - Multiple RVs on digital interface platform'
   }
 ];
