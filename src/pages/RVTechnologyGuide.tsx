@@ -29,14 +29,10 @@ import rvTechnologyPlanningImage from '@/assets/rv-technology-planning.png';
 import rvTechnologyDecisionsImage from '@/assets/rv-technology-decisions.png';
 import rvTechnologyGuideHero from '@/assets/rv-technology-guide-hero.jpg';
 import { BlogPostImage } from '@/components/blog/post/BlogPostImage';
-import { AITechnologyReadinessAssessment } from '@/components/rv-technology/interactive/AITechnologyReadinessAssessment';
-import { AITechnologyChecklist } from '@/components/rv-technology/interactive/AITechnologyChecklist';
-import { AILifestylePlanner } from '@/components/rv-technology/interactive/AILifestylePlanner';
 import { RVTechNavigation } from '@/components/rv-technology/RVTechNavigation';
 import { RVTechSummary } from '@/components/rv-technology/RVTechSummary';
 import { ScrollToTopButton } from '@/components/rv-technology/ScrollToTopButton';
-import { AIEducationalConsultant } from '@/components/rv-technology/interactive/AIEducationalConsultant';
-import { EnhancedFeatureMatcher } from '@/components/rv-technology/interactive/EnhancedFeatureMatcher';
+import { ToolPreviewCard } from '@/components/rv-technology/ToolPreviewCard';
 import IntelligentRVFinder from '@/components/rv-technology/interactive/IntelligentRVFinder';
 
 const RVTechnologyGuide = () => {
@@ -130,14 +126,31 @@ const RVTechnologyGuide = () => {
                   <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#5B9BD5]" />
                 </div>
                 <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white bg-gradient-to-r from-white to-[#E2E8FF] bg-clip-text text-transparent">
-                  Find Your Perfect RV Technology Match
+                  Interactive RV Technology Tools
                 </h2>
                 <p className="text-xl text-[#E2E8FF] leading-relaxed">
-                  Take our quick assessment to discover RV technology features that match your needs and preferences.
+                  Use our free AI-powered tools to discover the perfect RV technology setup for your needs.
                 </p>
               </div>
               
-              <AITechnologyReadinessAssessment />
+              <div className="grid md:grid-cols-2 gap-8">
+                <ToolPreviewCard
+                  title="AI Technology Readiness Assessment"
+                  description="Get personalized RV technology recommendations based on your experience level and travel goals. Our AI analyzes your needs and suggests the perfect technology features."
+                  imageSrc={rvTechnologyPlanningImage}
+                  imageAlt="AI Technology Readiness Assessment tool interface"
+                  toolPath="/tools/readiness-assessment"
+                  icon={Brain}
+                />
+                <ToolPreviewCard
+                  title="AI Technology Checklist"
+                  description="Generate a personalized research checklist for your RV technology needs. Get downloadable checklists with questions to ask dealers and features to evaluate."
+                  imageSrc={aiTechnologyResearchChecklistHero}
+                  imageAlt="AI Technology Research Checklist interface"
+                  toolPath="/tools/technology-checklist"
+                  icon={ClipboardCheck}
+                />
+              </div>
             </div>
           </Container>
         </section>
@@ -145,23 +158,15 @@ const RVTechnologyGuide = () => {
         {/* AI Educational Consultant */}
         <section className="py-16 px-4 relative bg-[#080F1F]/50">
           <Container>
-            <div className="text-center mb-12">
-              <div className="mb-8">
-                <img 
-                  src={aiEducationalConsultantHero} 
-                  alt="AI Educational Consultant - Futuristic RV technology interface" 
-                  className="w-full max-w-4xl mx-auto rounded-2xl shadow-2xl"
-                />
-              </div>
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
-                AI Educational Consultant
-              </h2>
-              <p className="text-xl text-connectivity-lightText max-w-3xl mx-auto">
-                Get personalized educational guidance about RV technology concepts through our liability free AI assistant.
-              </p>
-            </div>
-            <div className="max-w-6xl mx-auto">
-              <AIEducationalConsultant />
+            <div className="max-w-4xl mx-auto">
+              <ToolPreviewCard
+                title="AI Educational Consultant"
+                description="Ask questions and get detailed information about RV technology from our AI assistant. Get personalized educational guidance about connectivity, power systems, and more."
+                imageSrc={aiEducationalConsultantHero}
+                imageAlt="AI Educational Consultant - Futuristic RV technology interface"
+                toolPath="/tools/educational-consultant"
+                icon={GraduationCap}
+              />
             </div>
           </Container>
         </section>
@@ -193,63 +198,36 @@ const RVTechnologyGuide = () => {
         {/* Enhanced Feature Matcher */}
         <section className="py-16 px-4 relative">
           <Container>
-            <div className="text-center mb-12">
-              <div className="mb-8">
-                <img 
-                  src={aiEnhancedFeatureMatcherHero} 
-                  alt="AI Enhanced Feature Matcher - AI brain analyzing RV technology features" 
-                  className="w-full max-w-4xl mx-auto rounded-2xl shadow-2xl"
-                />
-              </div>
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
-                AI Enhanced Feature Matcher
-              </h2>
-              <p className="text-xl text-connectivity-lightText max-w-3xl mx-auto">
-                Describe your RV plans and get educational insights about relevant technology features.
-              </p>
-            </div>
-            <div className="max-w-6xl mx-auto">
-              <EnhancedFeatureMatcher />
+            <div className="max-w-4xl mx-auto">
+              <ToolPreviewCard
+                title="AI Enhanced Feature Matcher"
+                description="Describe your RV usage plans and discover which technology features match your needs. Get educational insights about connectivity, power, and control systems."
+                imageSrc={aiEnhancedFeatureMatcherHero}
+                imageAlt="AI Enhanced Feature Matcher - AI brain analyzing RV technology features"
+                toolPath="/tools/feature-matcher"
+                icon={Target}
+              />
             </div>
           </Container>
         </section>
 
 
         {/* Lifestyle Technology Planner */}
-        <section className="py-16 px-4 relative">
+        <section className="py-16 px-4 relative bg-[#080F1F]/50">
           <Container>
-            <div className="text-center mb-12">
-              <div className="mb-8">
-                <img 
-                  src={aiLifestyleTechnologyPlannerHero} 
-                  alt="AI Lifestyle Technology Planner - Modern RV interior with smart display showing lifestyle planning options" 
-                  className="w-full max-w-4xl mx-auto rounded-2xl shadow-2xl"
-                />
-              </div>
-            </div>
-            <div className="max-w-6xl mx-auto">
-              <AILifestylePlanner />
+            <div className="max-w-4xl mx-auto">
+              <ToolPreviewCard
+                title="AI Lifestyle Planner"
+                description="Discover the perfect RV technology setup for your specific lifestyle and travel plans. Get recommendations tailored to remote work, family entertainment, off-grid living, and more."
+                imageSrc={aiLifestyleTechnologyPlannerHero}
+                imageAlt="AI Lifestyle Technology Planner - Modern RV interior with smart display"
+                toolPath="/tools/lifestyle-planner"
+                icon={Heart}
+              />
             </div>
           </Container>
         </section>
 
-        {/* Technology Research Checklist */}
-        <section className="py-16 px-4 relative">
-          <Container>
-            <div className="text-center mb-12">
-              <div className="mb-8">
-                <img 
-                  src={aiTechnologyResearchChecklistHero} 
-                  alt="AI Technology Research Checklist - Digital checklist interface with AI research capabilities" 
-                  className="w-full max-w-4xl mx-auto rounded-2xl shadow-2xl"
-                />
-              </div>
-            </div>
-            <div className="max-w-6xl mx-auto">
-              <AITechnologyChecklist />
-            </div>
-          </Container>
-        </section>
 
         {/* Understanding Modern RV Technology */}
         <section id="understanding-technology" className="py-16 px-4 relative">
