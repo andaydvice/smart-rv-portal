@@ -22,11 +22,11 @@ const TechnologyChecklist: React.FC = () => {
           ]} />
         </div>
 
-        <div className="relative w-full h-[500px] md:h-[600px] overflow-hidden my-12">
+        <div className="relative w-full min-h-[400px] overflow-hidden my-12 flex items-center justify-center bg-[#080F1F]">
           <img 
             src={aiTechnologyResearchChecklistHero} 
             alt="AI Technology Checklist"
-            className="absolute inset-0 w-full h-full object-cover"
+            className="w-full h-auto object-contain"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/60 to-black/80 z-10" />
           <div className="absolute inset-0 flex items-center justify-center z-20">
