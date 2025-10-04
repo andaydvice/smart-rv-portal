@@ -264,18 +264,21 @@ export type Database = {
         Row: {
           created_at: string
           email: string
+          first_name: string | null
           id: string
           subscribed_at: string
         }
         Insert: {
           created_at?: string
           email: string
+          first_name?: string | null
           id?: string
           subscribed_at?: string
         }
         Update: {
           created_at?: string
           email?: string
+          first_name?: string | null
           id?: string
           subscribed_at?: string
         }
@@ -586,6 +589,51 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      tool_usage_metrics: {
+        Row: {
+          completion_status: string | null
+          converted_to_subscriber: boolean | null
+          created_at: string
+          first_used_at: string
+          id: string
+          last_used_at: string
+          query_count: number
+          time_spent_seconds: number | null
+          tool_id: string
+          tool_name: string
+          updated_at: string
+          user_email: string | null
+        }
+        Insert: {
+          completion_status?: string | null
+          converted_to_subscriber?: boolean | null
+          created_at?: string
+          first_used_at?: string
+          id?: string
+          last_used_at?: string
+          query_count?: number
+          time_spent_seconds?: number | null
+          tool_id: string
+          tool_name: string
+          updated_at?: string
+          user_email?: string | null
+        }
+        Update: {
+          completion_status?: string | null
+          converted_to_subscriber?: boolean | null
+          created_at?: string
+          first_used_at?: string
+          id?: string
+          last_used_at?: string
+          query_count?: number
+          time_spent_seconds?: number | null
+          tool_id?: string
+          tool_name?: string
+          updated_at?: string
+          user_email?: string | null
+        }
+        Relationships: []
       }
       training_documents: {
         Row: {
