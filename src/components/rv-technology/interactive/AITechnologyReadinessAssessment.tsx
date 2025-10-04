@@ -7,6 +7,19 @@ import { Alert, AlertDescription } from '@/components/ui/alert';
 import { CheckCircle, Smartphone, Settings, Star, AlertCircle, Brain, Zap } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 
+interface ToolAccessHook {
+  queriesUsed: number;
+  queriesRemaining: number;
+  hasAccess: boolean;
+  userEmail: string | null;
+  firstName: string | null;
+  incrementQueryCount: () => void;
+  grantAccess: (email: string, firstName: string) => void;
+  canMakeQuery: () => boolean;
+  shouldShowOptIn: () => boolean;
+  trackToolUsage: (toolId: string, toolName: string) => Promise<void>;
+}
+
 interface AIAssessmentResult {
   readinessLevel: 'beginner' | 'intermediate' | 'advanced';
   title: string;
@@ -22,7 +35,12 @@ interface AIAssessmentResult {
   };
 }
 
-export const AITechnologyReadinessAssessment: React.FC = () => {
+interface Props {
+  toolAccess: ToolAccessHook;
+  onShowOptIn: () => void;
+}
+
+export const AITechnologyReadinessAssessment: React.FC<Props> = ({ toolAccess, onShowOptIn }) => {
   const [userInput, setUserInput] = useState('');
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [result, setResult] = useState<AIAssessmentResult | null>(null);
@@ -32,11 +50,20 @@ export const AITechnologyReadinessAssessment: React.FC = () => {
   const handleAssessment = async () => {
     if (!userInput.trim()) return;
 
+    // Check if user can make a query
+    if (!toolAccess.canMakeQuery()) {
+      onShowOptIn();
+      return;
+    }
+
     setIsAnalyzing(true);
     setError('');
     setResult(null);
 
     try {
+      // Track tool usage
+      await toolAccess.trackToolUsage('readiness-assessment', 'AI Technology Readiness Assessment');
+      
       const { data, error } = await supabase.functions.invoke('ai-technology-readiness', {
         body: { userDescription: userInput.trim() }
       });
@@ -44,6 +71,9 @@ export const AITechnologyReadinessAssessment: React.FC = () => {
       if (error) throw error;
 
       setResult(data.assessment);
+      
+      // Increment query count after successful query
+      toolAccess.incrementQueryCount();
 
     } catch (error) {
       console.error('AI Assessment error:', error);

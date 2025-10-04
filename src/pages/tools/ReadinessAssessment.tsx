@@ -7,13 +7,23 @@ import { RelatedTools } from '@/components/rv-technology/RelatedTools';
 import { AITechnologyReadinessAssessment } from '@/components/rv-technology/interactive/AITechnologyReadinessAssessment';
 import { availableTools } from '@/lib/toolsData';
 import rvTechnologyPlanningImage from '@/assets/rv-technology-planning.png';
+import { useToolAccess } from '@/hooks/useToolAccess';
+import { QueryCounter } from '@/components/tools/QueryCounter';
+import { ToolAccessGate } from '@/components/tools/ToolAccessGate';
 
 const ReadinessAssessment: React.FC = () => {
   const navigate = useNavigate();
+  const toolAccess = useToolAccess();
+  const [showOptInModal, setShowOptInModal] = React.useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  const handleOptIn = (email: string, firstName: string) => {
+    toolAccess.grantAccess(email, firstName);
+    setShowOptInModal(false);
+  };
 
   return (
     <>
@@ -50,13 +60,29 @@ const ReadinessAssessment: React.FC = () => {
         </div>
 
         <div className="container mx-auto px-4">
-          <AITechnologyReadinessAssessment />
+          <div className="max-w-6xl mx-auto">
+            <QueryCounter 
+              queriesUsed={toolAccess.queriesUsed}
+              queriesRemaining={toolAccess.queriesRemaining}
+              hasAccess={toolAccess.hasAccess}
+            />
+          </div>
+          
+          <AITechnologyReadinessAssessment 
+            toolAccess={toolAccess}
+            onShowOptIn={() => setShowOptInModal(true)}
+          />
           
           <div className="max-w-6xl mx-auto mt-12">
             <RelatedTools tools={availableTools} currentToolId="readiness-assessment" />
           </div>
         </div>
       </div>
+
+      <ToolAccessGate 
+        isOpen={showOptInModal}
+        onOptIn={handleOptIn}
+      />
     </>
   );
 };
