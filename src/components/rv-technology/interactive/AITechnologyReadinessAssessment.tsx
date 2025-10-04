@@ -193,7 +193,7 @@ export const AITechnologyReadinessAssessment: React.FC<Props> = ({ toolAccess, o
       <div className="space-y-6">
         <div>
           <label className="block text-white font-medium mb-3">
-            Describe your experience with technology and what you hope to achieve with RV technology:
+            Describe your tech experience and what you hope to achieve with your RV:
           </label>
           <Textarea
             value={userInput}
