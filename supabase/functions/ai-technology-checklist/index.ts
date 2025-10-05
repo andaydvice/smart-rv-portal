@@ -200,12 +200,16 @@ QUALITY CHECK BEFORE RETURNING:
 
     let checklist: AIChecklistResult;
     try {
-      // Strip markdown code blocks if present
+      // Extract JSON from markdown code blocks
       let cleanedResponse = aiResponse.trim();
-      if (cleanedResponse.startsWith('```json')) {
-        cleanedResponse = cleanedResponse.replace(/^```json\s*/, '').replace(/\s*```$/, '');
+      
+      // Remove markdown code fences more robustly
+      const jsonMatch = cleanedResponse.match(/```(?:json)?\s*([\s\S]*?)\s*```/);
+      if (jsonMatch) {
+        cleanedResponse = jsonMatch[1].trim();
       } else if (cleanedResponse.startsWith('```')) {
-        cleanedResponse = cleanedResponse.replace(/^```\s*/, '').replace(/\s*```$/, '');
+        // Handle cases where there's only opening fence
+        cleanedResponse = cleanedResponse.replace(/^```(?:json)?\s*/, '').replace(/```\s*$/, '').trim();
       }
       
       checklist = JSON.parse(cleanedResponse);
