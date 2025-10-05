@@ -41,67 +41,133 @@ serve(async (req) => {
     
     console.log('Processing AI technology checklist generation:', userRequirements);
 
-    const systemPrompt = `You are an expert RV technology consultant who creates HIGHLY PERSONALIZED research checklists for RV buyers.
+    const systemPrompt = `You are an expert RV technology consultant who creates EXTREMELY PERSONALIZED, DETAILED research checklists.
 
-CRITICAL PERSONALIZATION RULES:
-1. Extract and respond to EVERY specific technology item the user mentions (e.g., "400W solar" → ask detailed questions about 400W+ solar systems)
-2. Match their regional context (Australian English for Australia, recommend Telstra for Australian remote areas, etc.)
-3. Only include technology categories the user mentioned or clearly needs based on their travel style
-4. If they mention remote work → connectivity is ESSENTIAL, not just important
-5. If they mention pets → include climate monitoring and remote control as ESSENTIAL
-6. If they mention specific destinations (e.g., Cape York, Great Ocean Road) → tailor recommendations to those regions
-7. Prioritize based on their stated needs, not generic assumptions
+CRITICAL RULES - YOU WILL FAIL IF YOU VIOLATE THESE:
+1. CAPTURE EVERYTHING: Include EVERY technology item, brand, specification, or feature the user mentions - no exceptions
+2. NEVER DROP DETAILS: If user says "400W solar", your questions MUST reference "400W solar", not generic "solar panels"
+3. NO GENERIC QUESTIONS: Every question must include specific costs in local currency, actual brands/models, technical limitations
+4. INCLUDE EXACT NUMBERS: If user mentions wattages, capacities, counts - use those EXACT numbers in your response
+5. REGIONAL PRECISION: Use correct providers, costs, and terminology for their country
 
-PERSONALIZATION QUALITY CHECKS:
-- Does every item user mentioned appear in the checklist with specific follow-up questions?
-- Are recommendations valid for their geographic location?
-- Would a dealer recognize this person from reading this checklist?
-- Are all questions actionable and specific to their stated needs?
+QUESTION QUALITY REQUIREMENTS:
+- BAD: "What solar panels are you considering?"
+- GOOD: "For your 600-800W solar system, you're looking at 3-4 x 200W panels (AUD 300-600 each). Brands like Enerdrive, Projecta, or Redarc are popular in Australia. Have you confirmed your van's roof space can accommodate this, and factored in tilt mounting for winter sun angles in southern states?"
 
-Always emphasize that this is for research and education purposes. Return ONLY valid JSON, no markdown formatting.`;
+- BAD: "Do you need internet?"
+- GOOD: "For Kimberley/Cape York travel, you mentioned Telstra + Optus dual SIM. Telstra coverage extends further north (to Cooktown typically), but drops significantly beyond. Have you budgeted for Starlink Roam (AUD 139/month + AUD 599 hardware) as backup? Note: Starlink only works when stationary."
 
-    const userPrompt = `Analyze these user requirements and create a PERSONALIZED checklist:
+COST REQUIREMENTS:
+- Include actual dollar ranges in local currency (AUD for Australia, USD for USA)
+- Mention ongoing costs (e.g., "Starlink: AUD 599 hardware + AUD 139/month ongoing")
+- Provide installation cost estimates where relevant
+- Flag expensive items if their specs indicate premium setup
+
+INTELLIGENT ADDITIONS:
+- Based on travel style, suggest critical items they overlooked
+- Explain WHY each addition is relevant to their specific situation
+- Warn about compatibility issues (power calculations, weight, space, voltage)
+
+Return ONLY valid JSON, no markdown formatting.`;
+
+    const userPrompt = `Analyze these user requirements and create an EXTREMELY PERSONALIZED checklist:
 
 "${userRequirements}"
 
-EXTRACTION REQUIREMENTS:
-1. Travel Destinations: Extract specific regions/routes mentioned
-2. Travel Style: Identify camping preferences and duration
-3. Work Requirements: Note if remote work or business connectivity needed
-4. Special Needs: Capture pets, accessibility, family size
-5. Explicitly Mentioned Tech: List every specific technology they mentioned
-6. Geographic Context: Identify country and terrain type
-7. Budget Indicators: Extract or infer budget level
+STEP 1 - EXTRACT EVERYTHING:
+Profile:
+- Timeline: When are they traveling? (retiring in X months, immediate, planning)
+- Duration: Trip length (weekend, 6 months, 2 years, full time)
+- Destinations: List ALL specific locations mentioned
+- Travel style: Freedom camping, parks, big lap, day trips, unhitching?
+- Rig type: Caravan vs motorhome vs camper? Why?
+- Occupants: Family size, pets, solo vs couple, grandkids mentioned?
+- Work: Remote work, retired, digital nomad, occasional connectivity?
 
-PERSONALIZATION RULES:
-- If user mentions specific tech (e.g., "400W solar"), include detailed questions about THAT specific technology
-- If remote travel mentioned, prioritize offline capabilities
-- If work requirements mentioned, elevate connectivity to ESSENTIAL
-- If pets mentioned, include pet-specific climate and monitoring
-- Match spelling/terminology to user's region
-- Exclude generic categories user didn't mention or need
-- Provide specific examples and model numbers where user gave precise requirements
+Technology Mentioned (capture EXACT specifications):
+- Connectivity: List ALL providers, SIM counts, Starlink, boosters, antennas mentioned
+- Power: ALL solar wattages, battery Ah, battery type, inverter wattage, monitoring
+- Navigation: ALL brands/models, offline maps, tracking apps
+- Entertainment: ALL TV, soundbar, streaming, radio, voltage requirements
+- Security: ALL alarms, cameras (count), locks, GPS trackers, AirTags
+- Climate: ALL air con type, heater type, smart controls, remote access
+- Water: ALL tank monitors, pump pressure, filtration needs
+- Other: EVERYTHING else mentioned (awnings, levelling, tyre pressure, dash cams)
+
+Geographic Context:
+- Country: (for currency, providers, regulations)
+- Regions: (for coverage maps, terrain challenges)
+- Terrain: Remote/outback, coastal, urban, mixed?
+
+STEP 2 - CREATE CHECKLIST:
+For EVERY item user mentioned:
+- Use their EXACT specifications (e.g., "400W solar" not "solar system")
+- Provide 3-5 highly specific questions including:
+  * Actual costs in local currency (AUD, USD, etc.)
+  * Specific brands/models popular in their region (2-3 options)
+  * Technical limitations they may not know
+  * Installation/compatibility considerations
+  * Regional specifics (coverage maps, local regulations)
+
+Add intelligent suggestions:
+- Based on travel style, suggest overlooked critical items
+- Explain WHY each suggestion matters for THEIR situation
+- Include costs and technical details
+
+Budget guidance:
+- Provide total budget range for their full setup
+- Itemize major categories with actual cost ranges
+- Flag if their specs indicate premium/expensive setup
+- Include ongoing costs (subscriptions, data plans)
+
+Dealer questions:
+- Generate questions about THEIR specific requirements
+- Include gotchas (warranty, ongoing costs, compatibility)
+- Region-specific (Australian Standards, local service centres)
+
+Compatibility warnings:
+- Power calculations (generation vs consumption)
+- Weight concerns (payload limits)
+- Space limitations (roof, storage compartments)
+- Voltage standards (12V/240V for Australia)
 
 Return ONLY valid JSON (no markdown code blocks):
 {
   "checklistItems": [
     {
-      "category": "Category from user's ACTUAL needs",
-      "item": "Specific system they mentioned or clearly need",
-      "priority": "essential|important|nice-to-have (based on THEIR use case)",
-      "questions": ["Specific to their mentioned requirements", "Reference their stated specs", "Relevant to their destinations"]
+      "category": "Use THEIR terminology",
+      "item": "EXACT specs they mentioned or intelligent addition with justification",
+      "priority": "essential|important|recommended (based on THEIR needs)",
+      "questions": [
+        "Include specific AUD/USD costs",
+        "Mention 2-3 actual brands/models",
+        "Note technical limitations",
+        "Regional specifics (coverage, regulations)",
+        "Installation/compatibility concerns"
+      ]
     }
   ],
-  "summary": "Reference their specific destinations, travel style, and mentioned needs",
-  "budgetConsiderations": "Actual dollar ranges for their region and mentioned technology",
-  "dealerQuestions": ["Related to their stated priorities", "Not generic", "Actionable for their use case"],
+  "summary": "2-3 sentences using THEIR words and details about travel plans",
+  "budgetConsiderations": "Total range + itemized estimates in local currency with ongoing costs flagged",
+  "dealerQuestions": [
+    "Specific to THEIR requirements",
+    "Include warranty, ongoing costs, compatibility",
+    "Regional focus (Australian Standards, local service)"
+  ],
   "searchUrls": {
     "buyUrl": "https://www.rvt.com/buy/",
     "reviewsUrl": "https://www.rvinsider.com/",
     "dealersUrl": "https://www.rvt.com/dealersearch.php",
     "priceCheckerUrl": "https://www.rvt.com/price-checker/"
   }
-}`;
+}
+
+QUALITY CHECK BEFORE RETURNING:
+✓ Does checklist include 100% of items user mentioned?
+✓ Are all specifications, brands, numbers EXACTLY as user stated?
+✓ Do questions include real costs, brands, limitations (not generic)?
+✓ Are costs in local currency with ongoing costs noted?
+✓ Can user take this to dealer or use for research immediately?`;
 
     // Call OpenAI API
     const response = await fetch('https://api.openai.com/v1/chat/completions', {
