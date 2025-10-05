@@ -47,7 +47,20 @@ export const AITechnologyChecklist: React.FC = () => {
 
       if (error) throw error;
 
-      setResult(data.checklist);
+      console.log('Full response data:', data);
+      
+      // The edge function returns { checklist: AIChecklistResult }
+      const checklistData = data?.checklist || data;
+      
+      console.log('Checklist data:', checklistData);
+      
+      // Validate the data structure
+      if (!checklistData || !checklistData.checklistItems || !Array.isArray(checklistData.checklistItems)) {
+        console.error('Invalid checklist structure:', checklistData);
+        throw new Error('Invalid response format from AI service');
+      }
+
+      setResult(checklistData);
 
     } catch (error) {
       console.error('AI Checklist error:', error);
