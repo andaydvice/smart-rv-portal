@@ -256,47 +256,45 @@ export const AITechnologyChecklist: React.FC = () => {
           </div>
         </div>
 
-        <div className="flex flex-col sm:flex-row gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
           <Button 
             onClick={generateDownload}
             variant="outline"
             size="lg"
-            className="border-[#1a202c] text-[#E2E8FF] hover:bg-[#151A22] hover:text-white"
+            className="border-[#1a202c] text-[#E2E8FF] hover:bg-[#151A22] hover:text-white w-full"
           >
             <Download className="h-4 w-4 mr-2" />
             Download Checklist
           </Button>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-            <ExternalLinkButton 
-              href={result.searchUrls.buyUrl}
-              variant="default"
-              size="lg"
-              className="bg-gradient-to-r from-[#5B9BD5] to-[#60A5FA] hover:from-[#4B8FE3] hover:to-[#5B9BD5]"
-            >
-              Browse Matching RVs
-            </ExternalLinkButton>
-            <ExternalLinkButton 
-              href={result.searchUrls.reviewsUrl}
-              variant="outline"
-              size="lg"
-              className="border-[#5B9BD5]/50 text-[#5B9BD5] hover:bg-[#5B9BD5]/10"
-            >
-              Read Reviews
-            </ExternalLinkButton>
-            <ExternalLinkButton 
-              href={result.searchUrls.priceCheckerUrl}
-              variant="outline"
-              size="lg"
-              className="border-[#5B9BD5]/50 text-[#5B9BD5] hover:bg-[#5B9BD5]/10"
-            >
-              Check Prices
-            </ExternalLinkButton>
-          </div>
+          <ExternalLinkButton 
+            href={result.searchUrls.buyUrl}
+            variant="default"
+            size="lg"
+            className="bg-gradient-to-r from-[#5B9BD5] to-[#60A5FA] hover:from-[#4B8FE3] hover:to-[#5B9BD5] w-full"
+          >
+            Browse Matching RVs
+          </ExternalLinkButton>
+          <ExternalLinkButton 
+            href={result.searchUrls.reviewsUrl}
+            variant="outline"
+            size="lg"
+            className="border-[#5B9BD5]/50 text-[#5B9BD5] hover:bg-[#5B9BD5]/10 w-full"
+          >
+            Read Reviews
+          </ExternalLinkButton>
+          <ExternalLinkButton 
+            href={result.searchUrls.priceCheckerUrl}
+            variant="outline"
+            size="lg"
+            className="border-[#5B9BD5]/50 text-[#5B9BD5] hover:bg-[#5B9BD5]/10 w-full"
+          >
+            Check Prices
+          </ExternalLinkButton>
           <Button 
             onClick={resetChecklist}
             variant="outline"
             size="lg"
-            className="border-[#1a202c] text-[#E2E8FF] hover:bg-[#151A22] hover:text-white"
+            className="border-[#1a202c] text-[#E2E8FF] hover:bg-[#151A22] hover:text-white w-full"
           >
             New Checklist
           </Button>
