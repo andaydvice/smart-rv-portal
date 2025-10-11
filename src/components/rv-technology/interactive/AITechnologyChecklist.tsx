@@ -6,11 +6,6 @@ import { Textarea } from '@/components/ui/textarea';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { CheckCircle, ClipboardCheck, Download, AlertCircle, Brain, Zap } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
-import pdfMake from 'pdfmake/build/pdfmake';
-import * as pdfFonts from 'pdfmake/build/vfs_fonts';
-
-// Initialize fonts
-(pdfMake as any).vfs = pdfFonts;
 
 interface ChecklistItem {
   category: string;
@@ -132,14 +127,29 @@ export const AITechnologyChecklist: React.FC = () => {
     }));
   };
 
-  const generateDownload = () => {
+  const generateDownload = async () => {
     if (!result) return;
 
-    const priorityColors: Record<string, string> = {
-      'essential': '#EF4444',
-      'important': '#F59E0B',
-      'nice-to-have': '#10B981'
-    };
+    try {
+      // Dynamic import to avoid vfs initialization issues in Vite
+      const pdfMakeModule = await import('pdfmake/build/pdfmake');
+      const pdfMake = pdfMakeModule.default;
+      
+      // Define fonts using CDN URLs (works better with Vite)
+      pdfMake.fonts = {
+        Roboto: {
+          normal: "https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.66/fonts/Roboto/Roboto-Regular.ttf",
+          bold: "https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.66/fonts/Roboto/Roboto-Medium.ttf",
+          italics: "https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.66/fonts/Roboto/Roboto-Italic.ttf",
+          bolditalics: "https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.66/fonts/Roboto/Roboto-MediumItalic.ttf",
+        },
+      };
+
+      const priorityColors: Record<string, string> = {
+        'essential': '#EF4444',
+        'important': '#F59E0B',
+        'nice-to-have': '#10B981'
+      };
 
     // Cover Page
     const coverPage = [
@@ -511,8 +521,12 @@ export const AITechnologyChecklist: React.FC = () => {
       })
     };
 
-    const timestamp = new Date().getTime();
-    pdfMake.createPdf(docDefinition).download(`rv-technology-checklist-${timestamp}.pdf`);
+      const timestamp = new Date().getTime();
+      pdfMake.createPdf(docDefinition).download(`rv-technology-checklist-${timestamp}.pdf`);
+    } catch (error) {
+      console.error('PDF generation error:', error);
+      alert('Failed to generate PDF. Please try again.');
+    }
   };
 
   const resetChecklist = () => {
