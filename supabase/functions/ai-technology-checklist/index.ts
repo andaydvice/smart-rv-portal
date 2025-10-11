@@ -230,7 +230,7 @@ QUALITY CHECK BEFORE RETURNING:
       }
       
       checklist = JSON.parse(cleanedResponse);
-      // Ensure searchUrls are present
+      // Ensure ALL searchUrls are present (AI sometimes omits dealersUrl)
       if (!checklist.searchUrls) {
         checklist.searchUrls = {
           buyUrl: 'https://www.rvt.com/buy/',
@@ -238,6 +238,12 @@ QUALITY CHECK BEFORE RETURNING:
           dealersUrl: 'https://www.rvt.com/dealersearch.php',
           priceCheckerUrl: 'https://www.rvt.com/price-checker/'
         };
+      } else {
+        // Ensure each individual URL is present (in case AI only returns partial searchUrls)
+        checklist.searchUrls.buyUrl = checklist.searchUrls.buyUrl || 'https://www.rvt.com/buy/';
+        checklist.searchUrls.reviewsUrl = checklist.searchUrls.reviewsUrl || 'https://www.rvinsider.com/';
+        checklist.searchUrls.dealersUrl = checklist.searchUrls.dealersUrl || 'https://www.rvt.com/dealersearch.php';
+        checklist.searchUrls.priceCheckerUrl = checklist.searchUrls.priceCheckerUrl || 'https://www.rvt.com/price-checker/';
       }
       
     } catch (parseError) {
