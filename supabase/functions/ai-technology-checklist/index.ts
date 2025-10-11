@@ -183,7 +183,7 @@ QUALITY CHECK BEFORE RETURNING:
           { role: 'user', content: userPrompt }
         ],
         temperature: 0.3,
-        max_tokens: 4000,
+        max_tokens: 8000, // Increased to prevent truncation of detailed personalized responses
       }),
     });
 
@@ -197,6 +197,13 @@ QUALITY CHECK BEFORE RETURNING:
     const aiResponse = aiData.choices[0].message.content;
     
     console.log('AI Checklist Response received:', aiResponse);
+    
+    // Check if response appears truncated
+    const responseLength = aiResponse.length;
+    const appearsTruncated = !aiResponse.trim().endsWith('}') && !aiResponse.trim().endsWith(']');
+    if (appearsTruncated) {
+      console.warn(`⚠️ AI response may be truncated (length: ${responseLength}, ends with: "${aiResponse.trim().slice(-50)}")`);
+    }
 
     let checklist: AIChecklistResult;
     try {
@@ -225,7 +232,48 @@ QUALITY CHECK BEFORE RETURNING:
       
     } catch (parseError) {
       console.error('Failed to parse AI response as JSON:', parseError);
-      // Fallback response
+      console.error('Response length:', aiResponse.length);
+      console.error('Last 200 chars:', aiResponse.slice(-200));
+      
+      // Attempt to heal truncated JSON before falling back
+      let healedResponse = aiResponse.trim();
+      
+      // Remove markdown if present
+      const jsonMatch = healedResponse.match(/```(?:json)?\s*([\s\S]*?)(?:\s*```)?$/);
+      if (jsonMatch) {
+        healedResponse = jsonMatch[1].trim();
+      }
+      
+      // Try to close unclosed structures
+      let attempts = 0;
+      while (attempts < 10) {
+        try {
+          JSON.parse(healedResponse);
+          console.log('✅ Successfully healed truncated JSON');
+          checklist = JSON.parse(healedResponse);
+          break;
+        } catch {
+          // Count open vs closed brackets
+          const openBraces = (healedResponse.match(/{/g) || []).length;
+          const closeBraces = (healedResponse.match(/}/g) || []).length;
+          const openBrackets = (healedResponse.match(/\[/g) || []).length;
+          const closeBrackets = (healedResponse.match(/]/g) || []).length;
+          
+          if (openBraces > closeBraces) {
+            healedResponse += '\n}';
+          } else if (openBrackets > closeBrackets) {
+            healedResponse += '\n]';
+          } else {
+            break; // Can't heal further
+          }
+          attempts++;
+        }
+      }
+      
+      // If healing didn't work, use fallback
+      if (!checklist) {
+        console.error('❌ Could not heal JSON, using generic fallback');
+        // Fallback response
       checklist = {
         checklistItems: [
           {
