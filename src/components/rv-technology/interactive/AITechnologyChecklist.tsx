@@ -130,8 +130,35 @@ export const AITechnologyChecklist: React.FC = () => {
         </div>
 
         <div className="space-y-6 mb-8">
+          {/* Critical Points Summary */}
+          <div className="mb-6 p-5 bg-gradient-to-br from-red-500/10 to-orange-500/10 rounded-lg border-2 border-red-500/30">
+            <div className="flex items-center gap-3 mb-4">
+              <AlertCircle className="h-6 w-6 text-red-400" />
+              <h4 className="text-xl font-semibold text-red-300">Critical Points - Must Address</h4>
+            </div>
+            <div className="space-y-3">
+              {result.checklistItems
+                .filter(item => item.priority === 'essential')
+                .slice(0, 5)
+                .map((item, index) => (
+                  <div key={index} className="flex items-start gap-3 p-3 bg-[#151A22]/50 rounded border border-red-500/20">
+                    <span className="text-red-400 font-bold text-lg flex-shrink-0">{index + 1}.</span>
+                    <div className="flex-1">
+                      <p className="font-semibold text-white mb-1">{item.item}</p>
+                      <p className="text-sm text-[#E2E8FF]/80 italic">
+                        {item.questions[0] ? item.questions[0].split('.')[0] + '.' : item.category}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+            </div>
+            <p className="text-xs text-[#E2E8FF]/60 mt-4 italic">
+              ⬇️ Scroll down for complete details on all items, budget breakdown, and dealer questions
+            </p>
+          </div>
+
           <div className="p-4 bg-[#151A22]/50 rounded-lg border border-[#1a202c]">
-            <h4 className="text-lg font-semibold text-[#60A5FA] mb-2">Budget Considerations</h4>
+            <h4 className="text-xl font-semibold text-[#60A5FA] mb-2">Budget Considerations</h4>
             <div className="text-[#E2E8FF]">{formatTextWithParagraphs(result.budgetConsiderations)}</div>
           </div>
 
