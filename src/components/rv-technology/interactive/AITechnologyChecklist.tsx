@@ -27,6 +27,15 @@ interface AIChecklistResult {
   };
 }
 
+const formatTextWithParagraphs = (text: string): React.ReactNode => {
+  const sentences = text.match(/[^.!?]+[.!?]+(?=\s|$)/g) || [text];
+  return sentences.map((sentence, index) => (
+    <p key={index} className="mb-4 last:mb-0">
+      {sentence.trim()}
+    </p>
+  ));
+};
+
 export const AITechnologyChecklist: React.FC = () => {
   const [userInput, setUserInput] = useState('');
   const [isGenerating, setIsGenerating] = useState(false);
@@ -117,13 +126,13 @@ export const AITechnologyChecklist: React.FC = () => {
             <ClipboardCheck className="h-8 w-8 text-white" />
           </div>
           <h3 className="text-2xl font-bold text-white mb-2">Your Personalized RV Technology Checklist</h3>
-          <p className="text-[#E2E8FF] text-lg">{result.summary}</p>
+          <div className="text-[#E2E8FF] text-lg">{formatTextWithParagraphs(result.summary)}</div>
         </div>
 
         <div className="space-y-6 mb-8">
           <div className="p-4 bg-[#151A22]/50 rounded-lg border border-[#1a202c]">
             <h4 className="text-lg font-semibold text-[#60A5FA] mb-2">Budget Considerations</h4>
-            <p className="text-[#E2E8FF]">{result.budgetConsiderations}</p>
+            <div className="text-[#E2E8FF]">{formatTextWithParagraphs(result.budgetConsiderations)}</div>
           </div>
 
           <div>
@@ -149,9 +158,11 @@ export const AITechnologyChecklist: React.FC = () => {
                         <p className="text-sm text-[#E2E8FF]/80 mb-2">Questions to ask:</p>
                         <ul className="space-y-1">
                           {item.questions.map((question, qIndex) => (
-                            <li key={qIndex} className="text-sm text-[#E2E8FF] flex items-start gap-2">
-                              <span className="text-[#60A5FA] flex-shrink-0">•</span>
-                              {question}
+                            <li key={qIndex} className="text-sm text-[#E2E8FF]">
+                              <div className="flex items-start gap-2">
+                                <span className="text-[#60A5FA] flex-shrink-0 mt-1">•</span>
+                                <div className="flex-1">{formatTextWithParagraphs(question)}</div>
+                              </div>
                             </li>
                           ))}
                         </ul>
@@ -167,9 +178,11 @@ export const AITechnologyChecklist: React.FC = () => {
             <h4 className="text-lg font-semibold text-[#60A5FA] mb-3">General Questions for Any RV Dealer</h4>
             <ul className="space-y-2">
               {result.dealerQuestions.map((question, index) => (
-                <li key={index} className="flex items-start gap-2 text-[#E2E8FF]">
-                  <span className="text-[#5B9BD5] flex-shrink-0">•</span>
-                  {question}
+                <li key={index} className="text-[#E2E8FF]">
+                  <div className="flex items-start gap-2">
+                    <span className="text-[#5B9BD5] flex-shrink-0 mt-1">•</span>
+                    <div className="flex-1">{formatTextWithParagraphs(question)}</div>
+                  </div>
                 </li>
               ))}
             </ul>
