@@ -114,7 +114,10 @@ export const AITechnologyChecklist: React.FC = () => {
 
   // Helper to split text into sentence-based paragraphs for pdfmake
   const splitIntoParagraphs = (text: string) => {
-    const sentences = text
+    // Remove all hyphens from the text first
+    const cleanText = text.replace(/-/g, '');
+    
+    const sentences = cleanText
       .split(/\.[\s\n]+/)
       .map(s => s.trim())
       .filter(s => s.length > 0)
@@ -343,14 +346,14 @@ export const AITechnologyChecklist: React.FC = () => {
             {
               stack: [
                 {
-                  text: item.item,
+                  text: item.item.replace(/-/g, ''),
                   fontSize: 16,
                   bold: true,
                   color: '#151A22',
                   margin: [0, 10, 0, 5]
                 },
                 {
-                  text: item.category,
+                  text: item.category.replace(/-/g, ''),
                   fontSize: 11,
                   italics: true,
                   color: '#6B7280',
