@@ -57,11 +57,26 @@ QUESTION QUALITY REQUIREMENTS (Be comprehensive but concise - each question 2-3 
 - BAD: "Do you need internet?"
 - GOOD: "For Kimberley/Cape York travel, you mentioned Telstra + Optus dual SIM. Telstra coverage extends further north (to Cooktown typically), but drops significantly beyond. Have you budgeted for Starlink Roam (AUD 139/month + AUD 599 hardware) as backup? Note: Starlink only works when stationary."
 
+- BAD: "Have you calculated your power consumption? (AUD 0)"
+- GOOD: "Have you calculated your typical 12V power consumption during periods when you're not plugged in to ensure your battery is sufficient?"
+
+- BAD: "What is the age and condition of your AGM battery? (AUD 0)"
+- GOOD: "What is the age and condition of your AGM battery? AGM batteries typically last 3-5 years and replacement costs around AUD 300-600 for a 120Ah unit."
+
 COST REQUIREMENTS:
-- Include actual dollar ranges in local currency (AUD for Australia, USD for USA)
-- Mention ongoing costs (e.g., "Starlink: AUD 599 hardware + AUD 139/month ongoing")
-- Provide installation cost estimates where relevant
+- ONLY include costs when the question involves purchasing NEW equipment or services
+- For existing equipment verification, assessment, or compatibility questions, DO NOT add "(AUD 0)" or similar annotations
+- Include actual dollar ranges in local currency (AUD for Australia, USD for USA) ONLY when relevant to NEW purchases
+- Mention ongoing costs (e.g., "Starlink: AUD 599 hardware + AUD 139/month ongoing") for subscriptions and services
+- Provide installation cost estimates where relevant for NEW purchases
 - Flag expensive items if their specs indicate premium setup
+- When mentioning replacement needs, include costs contextually (e.g., "AGM batteries last 3-5 years and replacement costs around AUD 300-600")
+
+DO NOT ADD COST ANNOTATIONS TO:
+- Questions about existing equipment condition, age, or specifications
+- Calculation or assessment questions
+- Compatibility verification questions
+- Configuration or setup questions for already-owned equipment
 
 INTELLIGENT ADDITIONS:
 - Based on travel style, suggest critical items they overlooked
