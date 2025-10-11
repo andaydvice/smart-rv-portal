@@ -72,13 +72,27 @@ export const AIEducationalConsultant = () => {
   };
 
   const formatAssistantMessage = (content: string) => {
-    const sentences = content
-      .split(/(?<=[.!?])\s+/)
-      .filter(sentence => sentence.trim().length > 0);
+    if (!content) return null;
     
-    return sentences.map((sentence, index) => (
-      <p key={index} className="text-base leading-relaxed mb-3 last:mb-0">
-        {sentence.trim()}
+    // Step 1: Remove markdown bold formatting
+    let cleanText = content.replace(/\*\*/g, '');
+    
+    // Step 2: Add line breaks before bullet points if not already present
+    cleanText = cleanText.replace(/([^\n])\s*•\s*/g, '$1\n\n• ');
+    
+    // Step 3: Add line breaks after lines ending with colon if followed by non-whitespace
+    cleanText = cleanText.replace(/:\s*([^\s])/g, ':\n\n$1');
+    
+    // Step 4: Split on double newlines (including our injected ones)
+    const paragraphs = cleanText
+      .split(/\n\n+/)
+      .map(p => p.trim())
+      .filter(p => p.length > 0);
+    
+    // Step 5: Render with proper spacing
+    return paragraphs.map((para, index) => (
+      <p key={index} className="text-base leading-relaxed mb-4 last:mb-0">
+        {para}
       </p>
     ));
   };

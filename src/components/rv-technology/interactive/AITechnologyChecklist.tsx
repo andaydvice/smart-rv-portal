@@ -27,14 +27,39 @@ interface AIChecklistResult {
   };
 }
 
-const formatTextWithParagraphs = (text: string): React.ReactNode => {
-  // Split on double newlines to preserve AI-generated paragraph structure
-  const paragraphs = text.split(/\n\n+/).filter(p => p.trim().length > 0);
-  return paragraphs.map((para, index) => (
-    <p key={index} className="mb-3 last:mb-0">
-      {para.trim()}
-    </p>
-  ));
+const formatTextWithParagraphs = (text: string, inline: boolean = false): React.ReactNode => {
+  if (!text) return null;
+  
+  // Step 1: Remove markdown bold formatting
+  let cleanText = text.replace(/\*\*/g, '');
+  
+  // For inline mode (inside bullet lists), return clean text without extra paragraphs
+  if (inline) {
+    return <span className="leading-relaxed">{cleanText}</span>;
+  }
+  
+  // Step 2: Add line breaks before bullet points if not already present
+  cleanText = cleanText.replace(/([^\n])\s*•\s*/g, '$1\n\n• ');
+  
+  // Step 3: Add line breaks after lines ending with colon if followed by non-whitespace
+  cleanText = cleanText.replace(/:\s*([^\s])/g, ':\n\n$1');
+  
+  // Step 4: Split on double newlines (including our injected ones)
+  const paragraphs = cleanText
+    .split(/\n\n+/)
+    .map(p => p.trim())
+    .filter(p => p.length > 0);
+  
+  // Step 5: Render with proper spacing
+  return (
+    <div className="space-y-4">
+      {paragraphs.map((para, index) => (
+        <p key={index} className="leading-relaxed">
+          {para}
+        </p>
+      ))}
+    </div>
+  );
 };
 
 export const AITechnologyChecklist: React.FC = () => {
@@ -184,12 +209,12 @@ export const AITechnologyChecklist: React.FC = () => {
                       <p className="text-sm text-[#E2E8FF]/70 mb-3">{item.category}</p>
                       <div>
                         <p className="text-sm text-[#E2E8FF]/80 mb-2">Questions to ask:</p>
-                        <ul className="space-y-1">
+                        <ul className="space-y-4">
                           {item.questions.map((question, qIndex) => (
                             <li key={qIndex} className="text-sm text-[#E2E8FF]">
                               <div className="flex items-start gap-2">
                                 <span className="text-[#60A5FA] flex-shrink-0 mt-1">•</span>
-                                <div className="flex-1">{formatTextWithParagraphs(question)}</div>
+                                <div className="flex-1">{formatTextWithParagraphs(question, true)}</div>
                               </div>
                             </li>
                           ))}
@@ -204,12 +229,12 @@ export const AITechnologyChecklist: React.FC = () => {
 
           <div>
             <h4 className="text-lg font-semibold text-[#60A5FA] mb-3">General Questions for Any RV Dealer</h4>
-            <ul className="space-y-2">
+            <ul className="space-y-4">
               {result.dealerQuestions.map((question, index) => (
                 <li key={index} className="text-[#E2E8FF]">
                   <div className="flex items-start gap-2">
                     <span className="text-[#5B9BD5] flex-shrink-0 mt-1">•</span>
-                    <div className="flex-1">{formatTextWithParagraphs(question)}</div>
+                    <div className="flex-1">{formatTextWithParagraphs(question, true)}</div>
                   </div>
                 </li>
               ))}
