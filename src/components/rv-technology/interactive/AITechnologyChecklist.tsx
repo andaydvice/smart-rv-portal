@@ -30,7 +30,7 @@ interface AIChecklistResult {
 const formatTextWithParagraphs = (text: string): React.ReactNode => {
   const sentences = text.match(/[^.!?]+[.!?]+(?=\s|$)/g) || [text];
   return sentences.map((sentence, index) => (
-    <p key={index} className="mb-4 last:mb-0">
+    <p key={index} className="mb-2 last:mb-0">
       {sentence.trim()}
     </p>
   ));
