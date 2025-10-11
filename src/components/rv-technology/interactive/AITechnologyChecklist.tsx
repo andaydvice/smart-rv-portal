@@ -339,65 +339,67 @@ export const AITechnologyChecklist: React.FC = () => {
 
   return (
     <Card className="p-8 bg-gradient-to-br from-[#091020] to-[#131a2a] border-[#1a202c] text-white">
-      <div className="text-center mb-8">
-        <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-[#5B9BD5] to-[#60A5FA] rounded-full mb-4">
-          <Brain className="h-8 w-8 text-white" />
+      {isGenerating ? (
+        <div className="flex flex-col items-center justify-center py-16 space-y-6">
+          <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-[#5B9BD5] to-[#60A5FA] rounded-full">
+            <div className="animate-spin w-8 h-8 border-3 border-white border-t-transparent rounded-full" />
+          </div>
+          <div className="text-center space-y-2">
+            <h3 className="text-xl font-semibold text-white">Generating Your Personal Checklist...</h3>
+            <p className="text-[#E2E8FF] text-sm">⏱️ This typically takes 20-40 seconds for detailed requirements</p>
+            <p className="text-[#E2E8FF]/70 text-xs mt-4">Analyzing your needs and creating a customized research plan</p>
+          </div>
         </div>
-        <h3 className="text-2xl font-bold text-white mb-2">AI Technology Research Checklist</h3>
-        <p className="text-[#E2E8FF] text-lg">Get a personalized checklist of technology features to research based on your specific needs</p>
-      </div>
-
-      <Alert className="mb-6 border-[#5B9BD5]/30 bg-[#5B9BD5]/10">
-        <AlertCircle className="h-4 w-4 text-[#5B9BD5]" />
-        <AlertDescription className="text-[#E2E8FF]">
-          This AI tool creates a custom research checklist to help you ask the right questions when shopping for RVs.
-        </AlertDescription>
-      </Alert>
-
-      <div className="space-y-6">
-        <div>
-          <label className="block text-white font-medium mb-3">
-            Describe your RV plans, travel style, and what technology features you think you might need:
-          </label>
-          <Textarea
-            value={userInput}
-            onChange={(e) => setUserInput(e.target.value)}
-            placeholder="Example: We plan to travel full-time and work remotely from the RV. We'll stay in both campgrounds and boondock frequently. I need reliable internet, good power management for my equipment, and want to monitor systems while away from the RV..."
-            className="min-h-32 bg-[#151A22] border-[#1a202c] text-white placeholder-[#E2E8FF]/50"
-            disabled={isGenerating}
-          />
-        </div>
-
-        <Button
-          onClick={handleGenerate}
-          disabled={!userInput.trim() || isGenerating}
-          className="w-full bg-gradient-to-r from-[#5B9BD5] to-[#60A5FA] hover:from-[#4B8FE3] hover:to-[#5B9BD5] text-lg py-6"
-        >
-          {isGenerating ? (
-            <div className="flex flex-col items-center gap-2">
-              <div className="flex items-center gap-2">
-                <div className="animate-spin w-5 h-5 border-2 border-white border-t-transparent rounded-full" />
-                <span>Generating Your Personal Checklist...</span>
-              </div>
-              <span className="text-xs text-white/70">⏱️ This typically takes 20-40 seconds for detailed requirements</span>
+      ) : (
+        <>
+          <div className="text-center mb-8">
+            <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-[#5B9BD5] to-[#60A5FA] rounded-full mb-4">
+              <Brain className="h-8 w-8 text-white" />
             </div>
-          ) : (
-            <>
-              <Zap className="mr-2 h-5 w-5" />
-              Generate My AI Research Checklist
-            </>
-          )}
-        </Button>
+            <h3 className="text-2xl font-bold text-white mb-2">AI Technology Research Checklist</h3>
+            <p className="text-[#E2E8FF] text-lg">Get a personalized checklist of technology features to research based on your specific needs</p>
+          </div>
 
-        {error && (
-          <Alert className="border-red-500 bg-red-500/10">
-            <AlertCircle className="h-4 w-4 text-red-500" />
-            <AlertDescription className="text-red-200">
-              {error}
+          <Alert className="mb-6 border-[#5B9BD5]/30 bg-[#5B9BD5]/10">
+            <AlertCircle className="h-4 w-4 text-[#5B9BD5]" />
+            <AlertDescription className="text-[#E2E8FF]">
+              This AI tool creates a custom research checklist to help you ask the right questions when shopping for RVs.
             </AlertDescription>
           </Alert>
-        )}
-      </div>
+
+          <div className="space-y-6">
+            <div>
+              <label className="block text-white font-medium mb-3">
+                Describe your RV plans, travel style, and what technology features you think you might need:
+              </label>
+              <Textarea
+                value={userInput}
+                onChange={(e) => setUserInput(e.target.value)}
+                placeholder="Example: We plan to travel full-time and work remotely from the RV. We'll stay in both campgrounds and boondock frequently. I need reliable internet, good power management for my equipment, and want to monitor systems while away from the RV..."
+                className="min-h-32 bg-[#151A22] border-[#1a202c] text-white placeholder-[#E2E8FF]/50"
+              />
+            </div>
+
+            <Button
+              onClick={handleGenerate}
+              disabled={!userInput.trim()}
+              className="w-full bg-gradient-to-r from-[#5B9BD5] to-[#60A5FA] hover:from-[#4B8FE3] hover:to-[#5B9BD5] text-lg py-6"
+            >
+              <Zap className="mr-2 h-5 w-5" />
+              Generate My AI Research Checklist
+            </Button>
+
+            {error && (
+              <Alert className="border-red-500 bg-red-500/10">
+                <AlertCircle className="h-4 w-4 text-red-500" />
+                <AlertDescription className="text-red-200">
+                  {error}
+                </AlertDescription>
+              </Alert>
+            )}
+          </div>
+        </>
+      )}
     </Card>
   );
 };
