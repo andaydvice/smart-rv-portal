@@ -366,10 +366,13 @@ export const AITechnologyChecklist: React.FC = () => {
           className="w-full bg-gradient-to-r from-[#5B9BD5] to-[#60A5FA] hover:from-[#4B8FE3] hover:to-[#5B9BD5] text-lg py-6"
         >
           {isGenerating ? (
-            <>
-              <div className="animate-spin mr-2 w-5 h-5 border-2 border-white border-t-transparent rounded-full" />
-              Generating Your Personal Checklist...
-            </>
+            <div className="flex flex-col items-center gap-2">
+              <div className="flex items-center gap-2">
+                <div className="animate-spin w-5 h-5 border-2 border-white border-t-transparent rounded-full" />
+                <span>Generating Your Personal Checklist...</span>
+              </div>
+              <span className="text-xs text-white/70">⏱️ This typically takes 20-40 seconds for detailed requirements</span>
+            </div>
           ) : (
             <>
               <Zap className="mr-2 h-5 w-5" />

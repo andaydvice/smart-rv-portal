@@ -177,13 +177,13 @@ QUALITY CHECK BEFORE RETURNING:
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        model: 'google/gemini-2.5-flash',
+        model: 'google/gemini-2.5-flash-lite',
         messages: [
           { role: 'system', content: systemPrompt },
           { role: 'user', content: userPrompt }
         ],
-        temperature: 0.3,
-        max_tokens: 16000, // Dramatically increased to handle highly detailed personalized scenarios
+        temperature: 0.7,
+        max_tokens: 8000, // Optimized for faster generation while maintaining quality
       }),
     });
 
