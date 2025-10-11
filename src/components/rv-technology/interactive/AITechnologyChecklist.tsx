@@ -200,7 +200,12 @@ export const AITechnologyChecklist: React.FC = () => {
           <div>
             <h4 className="text-xl font-semibold text-[#60A5FA] mb-4">Technology Items to Research</h4>
             <div className="space-y-4">
-              {result.checklistItems.map((item, index) => (
+          {result.checklistItems
+            .sort((a, b) => {
+              const priorityOrder = { 'essential': 1, 'important': 2, 'nice-to-have': 3 };
+              return priorityOrder[a.priority] - priorityOrder[b.priority];
+            })
+            .map((item, index) => (
                 <div key={index} className="p-4 bg-[#151A22]/50 rounded-lg border border-[#1a202c]">
                   <div className="flex items-start gap-3 mb-3">
                     <CheckCircle className="h-5 w-5 text-[#5B9BD5] flex-shrink-0 mt-0.5" />
