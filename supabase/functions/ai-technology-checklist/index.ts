@@ -50,7 +50,7 @@ CRITICAL RULES - YOU WILL FAIL IF YOU VIOLATE THESE:
 4. INCLUDE EXACT NUMBERS: If user mentions wattages, capacities, counts - use those EXACT numbers in your response
 5. REGIONAL PRECISION: Use correct providers, costs, and terminology for their country
 
-QUESTION QUALITY REQUIREMENTS:
+QUESTION QUALITY REQUIREMENTS (Be comprehensive but concise - each question 2-3 sentences maximum):
 - BAD: "What solar panels are you considering?"
 - GOOD: "For your 600-800W solar system, you're looking at 3-4 x 200W panels (AUD 300-600 each). Brands like Enerdrive, Projecta, or Redarc are popular in Australia. Have you confirmed your van's roof space can accommodate this, and factored in tilt mounting for winter sun angles in southern states?"
 
@@ -183,7 +183,7 @@ QUALITY CHECK BEFORE RETURNING:
           { role: 'user', content: userPrompt }
         ],
         temperature: 0.3,
-        max_tokens: 8000, // Increased to prevent truncation of detailed personalized responses
+        max_tokens: 16000, // Dramatically increased to handle highly detailed personalized scenarios
       }),
     });
 
@@ -198,11 +198,21 @@ QUALITY CHECK BEFORE RETURNING:
     
     console.log('AI Checklist Response received:', aiResponse);
     
-    // Check if response appears truncated
+    // Monitor response size and detect truncation
     const responseLength = aiResponse.length;
+    const tokenEstimate = Math.ceil(responseLength / 4); // Rough estimate: 1 token ≈ 4 characters
+    const tokenLimit = 16000;
+    const tokenUsagePercent = (tokenEstimate / tokenLimit * 100).toFixed(1);
+    
+    console.log(`📊 Response size: ${responseLength} chars (~${tokenEstimate} tokens, ${tokenUsagePercent}% of ${tokenLimit} limit)`);
+    
+    if (tokenEstimate > tokenLimit * 0.8) {
+      console.warn(`⚠️ Approaching token limit! Using ${tokenUsagePercent}% of available tokens.`);
+    }
+    
     const appearsTruncated = !aiResponse.trim().endsWith('}') && !aiResponse.trim().endsWith(']');
     if (appearsTruncated) {
-      console.warn(`⚠️ AI response may be truncated (length: ${responseLength}, ends with: "${aiResponse.trim().slice(-50)}")`);
+      console.warn(`⚠️ AI response appears truncated (length: ${responseLength}, ends with: "${aiResponse.trim().slice(-50)}")`);
     }
 
     let checklist: AIChecklistResult | undefined;
@@ -266,6 +276,23 @@ QUALITY CHECK BEFORE RETURNING:
             break; // Can't heal further
           }
           attempts++;
+        }
+      }
+      
+      // If healing failed but response appears truncated, try to extract partial personalized results
+      if (!checklist && appearsTruncated) {
+        console.log('🔧 Attempting to extract partial personalized content from truncated response...');
+        try {
+          // Find the last complete checklist item before truncation
+          const itemMatches = healedResponse.match(/"checklistItems"\s*:\s*\[([\s\S]*?)(?:,\s*{[^}]*)?$/);
+          if (itemMatches) {
+            // Try to extract completed items
+            const partialJson = `{"checklistItems":[${itemMatches[1]}],"summary":"Partial results due to extensive personalization. Response was truncated.","budgetConsiderations":"See partial checklist items above.","dealerQuestions":[],"searchUrls":{"buyUrl":"https://www.rvt.com/buy/","reviewsUrl":"https://www.rvinsider.com/","dealersUrl":"https://www.rvt.com/dealersearch.php","priceCheckerUrl":"https://www.rvt.com/price-checker/"}}`;
+            checklist = JSON.parse(partialJson);
+            console.log('✅ Extracted partial personalized content:', checklist.checklistItems.length, 'items');
+          }
+        } catch (extractError) {
+          console.error('Could not extract partial content:', extractError);
         }
       }
     }
