@@ -309,6 +309,14 @@ export const AITechnologyChecklist: React.FC = () => {
             Read Reviews
           </ExternalLinkButton>
           <ExternalLinkButton 
+            href={result.searchUrls.dealersUrl}
+            variant="outline"
+            size="lg"
+            className="border-[#5B9BD5]/50 text-[#5B9BD5] hover:bg-[#5B9BD5]/10 w-full"
+          >
+            Find Dealers
+          </ExternalLinkButton>
+          <ExternalLinkButton 
             href={result.searchUrls.priceCheckerUrl}
             variant="outline"
             size="lg"
