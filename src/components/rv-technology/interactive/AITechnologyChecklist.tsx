@@ -241,6 +241,32 @@ export const AITechnologyChecklist: React.FC = () => {
             </div>
           </div>
 
+          <div className="p-6 bg-gradient-to-br from-blue-500/10 to-purple-500/10 rounded-lg border-2 border-blue-500/30">
+            <div className="flex items-center gap-3 mb-4">
+              <Zap className="h-6 w-6 text-blue-400" />
+              <h4 className="text-xl font-semibold text-blue-300">Key Takeaways - Most Important Answers</h4>
+            </div>
+            <div className="space-y-3">
+              {result.checklistItems
+                .filter(item => item.priority === 'essential' || item.priority === 'important')
+                .slice(0, 6)
+                .map((item, index) => (
+                  <div key={index} className="flex items-start gap-3 p-3 bg-[#151A22]/50 rounded border border-blue-500/20">
+                    <span className="text-blue-400 font-bold text-lg flex-shrink-0">{index + 1}.</span>
+                    <div className="flex-1">
+                      <p className="font-semibold text-white mb-1">{item.item}</p>
+                      <p className="text-sm text-[#E2E8FF]/90">
+                        {item.questions[0] || item.category}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+            </div>
+            <p className="text-xs text-[#E2E8FF]/60 mt-4 italic">
+              💡 These are the most critical technology considerations based on your requirements
+            </p>
+          </div>
+
           <div>
             <h4 className="text-lg font-semibold text-[#60A5FA] mb-3">General Questions for Any RV Dealer</h4>
             <ul className="space-y-4">
