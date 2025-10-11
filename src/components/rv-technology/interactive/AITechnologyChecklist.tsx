@@ -6,7 +6,11 @@ import { Textarea } from '@/components/ui/textarea';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { CheckCircle, ClipboardCheck, Download, AlertCircle, Brain, Zap } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
-import jsPDF from 'jspdf';
+import pdfMake from 'pdfmake/build/pdfmake';
+import * as pdfFonts from 'pdfmake/build/vfs_fonts';
+
+// Initialize fonts
+(pdfMake as any).vfs = pdfFonts;
 
 interface ChecklistItem {
   category: string;
@@ -113,602 +117,402 @@ export const AITechnologyChecklist: React.FC = () => {
     }
   };
 
-  // Helper functions for sentence-aware paragraph formatting
-  const formatTextAsParagraphs = (text: string, maxWidth: number, doc: any) => {
+  // Helper to split text into sentence-based paragraphs for pdfmake
+  const splitIntoParagraphs = (text: string) => {
     const sentences = text
-      .split(/\.\s+|\.\n+/)
+      .split(/\.[\s\n]+/)
       .map(s => s.trim())
-      .filter(s => s.length > 0);
-    
-    const paragraphs: string[][] = [];
-    
-    sentences.forEach(sentence => {
-      if (sentence.trim()) {
-        const fullSentence = sentence.trim().endsWith('.') ? sentence.trim() : sentence.trim() + '.';
-        const wrapped = doc.splitTextToSize(fullSentence, maxWidth);
-        paragraphs.push(wrapped);
-      }
-    });
-    
-    return paragraphs;
-  };
+      .filter(s => s.length > 0)
+      .map(s => s.endsWith('.') ? s : s + '.');
 
-  const drawParagraphs = (
-    doc: any,
-    paragraphs: string[][],
-    x: number,
-    y: number,
-    lineHeight: number = 5,
-    paragraphSpacing: number = 8
-  ) => {
-    let currentY = y;
-    
-    paragraphs.forEach((paragraph, index) => {
-      doc.text(paragraph, x, currentY);
-      currentY += paragraph.length * lineHeight;
-      
-      if (index < paragraphs.length - 1) {
-        currentY += paragraphSpacing;
-      }
-    });
-    
-    return currentY;
+    return sentences.map((sentence, index) => ({
+      text: sentence,
+      margin: index < sentences.length - 1 ? [0, 0, 0, 8] : [0, 0, 0, 0],
+      style: 'body'
+    }));
   };
 
   const generateDownload = () => {
     if (!result) return;
-    
-    const doc = new jsPDF();
-    const pageWidth = doc.internal.pageSize.width;
-    const pageHeight = doc.internal.pageSize.height;
-    const margin = 15;
-    let yPosition = 20;
 
-    // Helper to add page break if needed
-    const checkPageBreak = (requiredSpace: number) => {
-      if (yPosition + requiredSpace > pageHeight - 20) {
-        doc.addPage();
-        yPosition = 20;
-        return true;
-      }
-      return false;
+    const priorityColors: Record<string, string> = {
+      'essential': '#EF4444',
+      'important': '#F59E0B',
+      'nice-to-have': '#10B981'
     };
 
-    // Helper to add footer with gradient bar
-    const addFooter = () => {
-      const pageNumber = (doc as any).internal.getNumberOfPages();
-      
-      // Gradient bar at top of footer
-      for (let i = 0; i < 2; i++) {
-        const alpha = 150 - (i * 40);
-        doc.setDrawColor(91, 155, 213);
-        doc.setLineWidth(0.3);
-        doc.line(margin, pageHeight - 15 - i * 0.3, pageWidth - margin, pageHeight - 15 - i * 0.3);
+    // Cover Page
+    const coverPage = [
+      {
+        canvas: [
+          {
+            type: 'rect',
+            x: 0, y: 0,
+            w: 595, h: 842,
+            color: '#080F1F'
+          }
+        ],
+        absolutePosition: { x: 0, y: 0 }
+      },
+      {
+        stack: [
+          {
+            text: 'Smart RV Hub',
+            fontSize: 32,
+            bold: true,
+            color: '#FFFFFF',
+            margin: [0, 250, 0, 20]
+          },
+          {
+            text: 'AI Technology Research Checklist',
+            fontSize: 28,
+            color: '#E2E8FF',
+            margin: [0, 0, 0, 10]
+          },
+          {
+            text: 'Personalized for Your RV Lifestyle',
+            fontSize: 14,
+            italics: true,
+            color: '#9CA3AF',
+            margin: [0, 0, 0, 40]
+          },
+          {
+            canvas: [
+              {
+                type: 'rect',
+                x: 150, y: 0,
+                w: 250, h: 4,
+                color: '#5B9BD5'
+              }
+            ],
+            margin: [0, 0, 0, 40]
+          },
+          {
+            text: new Date().toLocaleDateString('en-US', {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric'
+            }),
+            fontSize: 12,
+            color: '#6B7280'
+          }
+        ],
+        alignment: 'center'
       }
-      
-      // Footer background
-      doc.setFillColor(248, 249, 250);
-      doc.rect(0, pageHeight - 14, pageWidth, 14, 'F');
-      
-      // Footer text
-      doc.setFontSize(8);
-      doc.setTextColor(100, 100, 100);
-      doc.text(new Date().toLocaleDateString(), margin, pageHeight - 8);
-      doc.text('Generated by Smart RV Hub AI Technology Consultant', pageWidth / 2, pageHeight - 8, { align: 'center' });
-      doc.setTextColor(91, 155, 213);
-      doc.text(`Page ${pageNumber}`, pageWidth - margin, pageHeight - 8, { align: 'right' });
-    };
+    ];
 
-    // STUNNING COVER PAGE
-    // Deep gradient background
-    for (let i = 0; i < pageHeight; i += 2) {
-      const ratio = i / pageHeight;
-      const r = Math.round(8 + (21 - 8) * ratio);
-      const g = Math.round(15 + (26 - 15) * ratio);
-      const b = Math.round(31 + (34 - 31) * ratio);
-      doc.setFillColor(r, g, b);
-      doc.rect(0, i, pageWidth, 2, 'F');
-    }
-    
-    // Hero section with modern typography
-    yPosition = 70;
-    
-    // Decorative accent bar
-    doc.setFillColor(91, 155, 213);
-    doc.roundedRect(pageWidth / 2 - 40, yPosition - 10, 80, 4, 2, 2, 'F');
-    
-    doc.setTextColor(255, 255, 255);
-    doc.setFontSize(32);
-    doc.setFont('helvetica', 'bold');
-    doc.text('Smart RV Hub', pageWidth / 2, yPosition, { align: 'center' });
-    
-    doc.setFontSize(28);
-    doc.setFont('helvetica', 'normal');
-    doc.text('AI Technology Research', pageWidth / 2, yPosition + 18, { align: 'center' });
-    doc.text('Checklist', pageWidth / 2, yPosition + 33, { align: 'center' });
-    
-    // Subtitle
-    doc.setFontSize(14);
-    doc.setFont('helvetica', 'italic');
-    doc.setTextColor(226, 232, 255);
-    doc.text('Personalized for Your RV Lifestyle', pageWidth / 2, yPosition + 50, { align: 'center' });
-    
-    // Gradient accent bar
-    for (let i = 0; i < 3; i++) {
-      const startColor = [91, 155, 213];
-      const endColor = [96, 165, 250];
-      doc.setDrawColor(
-        startColor[0] + (endColor[0] - startColor[0]) * (i / 3),
-        startColor[1] + (endColor[1] - startColor[1]) * (i / 3),
-        startColor[2] + (endColor[2] - startColor[2]) * (i / 3)
-      );
-      doc.setLineWidth(1);
-      doc.line(pageWidth / 2 - 60, yPosition + 60 + i, pageWidth / 2 + 60, yPosition + 60 + i);
-    }
-    
-    // Date in elegant small caps
-    doc.setFontSize(11);
-    doc.setFont('helvetica', 'normal');
-    doc.setTextColor(200, 200, 200);
-    doc.text(`Generated: ${new Date().toLocaleDateString()}`, pageWidth / 2, pageHeight - 30, { align: 'center' });
-    
-    // EXECUTIVE SUMMARY - Magazine Style
-    doc.addPage();
-    yPosition = margin + 10;
-    
-    // Lightbulb icon (using text)
-    doc.setFontSize(16);
-    doc.setTextColor(96, 165, 250);
-    doc.text('💡', margin, yPosition);
-    
-    doc.setFontSize(18);
-    doc.setFont('helvetica', 'bold');
-    doc.setTextColor(31, 41, 55);
-    doc.text('Executive Summary', margin + 10, yPosition);
-    yPosition += 3;
-    
-    // Colored accent bar
-    for (let i = 0; i < 3; i++) {
-      doc.setDrawColor(91, 155, 213);
-      doc.setLineWidth(0.5);
-      doc.line(margin, yPosition + i * 0.8, pageWidth - margin, yPosition + i * 0.8);
-    }
-    yPosition += 8;
-    
-    // Light blue background box with rounded corners
-    const summaryBoxTop = yPosition;
-    doc.setFillColor(226, 232, 255);
-    doc.roundedRect(margin, summaryBoxTop, pageWidth - 2 * margin, 0, 5, 5, 'F');
-    
-    // Side accent stripe
-    doc.setFillColor(91, 155, 213);
-    doc.roundedRect(margin, summaryBoxTop, 3, 0, 1.5, 1.5, 'F');
-    
-    yPosition += 10;
-    
-    // Sentence-aware paragraphs
-    doc.setFontSize(10);
-    doc.setFont('helvetica', 'normal');
-    doc.setTextColor(31, 41, 55);
-    const summaryParagraphs = formatTextAsParagraphs(result.summary, pageWidth - 2 * margin - 20, doc);
-    const summaryEndY = drawParagraphs(doc, summaryParagraphs, margin + 10, yPosition, 5, 10);
-    
-    // Complete the background box
-    const summaryBoxHeight = summaryEndY - summaryBoxTop + 10;
-    doc.setFillColor(226, 232, 255);
-    doc.roundedRect(margin, summaryBoxTop, pageWidth - 2 * margin, summaryBoxHeight, 5, 5, 'F');
-    
-    // Redraw side accent stripe
-    doc.setFillColor(91, 155, 213);
-    doc.roundedRect(margin, summaryBoxTop, 3, summaryBoxHeight, 1.5, 1.5, 'F');
-    
-    // Redraw text on top
-    yPosition = summaryBoxTop + 10;
-    doc.setTextColor(31, 41, 55);
-    drawParagraphs(doc, summaryParagraphs, margin + 10, yPosition, 5, 10);
-    
-    yPosition = summaryEndY + 20;
-    
-    // BUDGET CONSIDERATIONS - Alert Style
-    checkPageBreak(40);
-    
-    // Dollar icon
-    doc.setFontSize(16);
-    doc.setTextColor(245, 158, 11);
-    doc.text('💵', margin, yPosition);
-    
-    doc.setFontSize(18);
-    doc.setFont('helvetica', 'bold');
-    doc.setTextColor(31, 41, 55);
-    doc.text('Budget Considerations', margin + 10, yPosition);
-    yPosition += 8;
-    
-    // Orange background box
-    const budgetBoxTop = yPosition;
-    doc.setFillColor(254, 243, 199);
-    doc.roundedRect(margin, budgetBoxTop, pageWidth - 2 * margin, 0, 5, 5, 'F');
-    
-    // Bold left border
-    doc.setFillColor(245, 158, 11);
-    doc.roundedRect(margin, budgetBoxTop, 4, 0, 2, 2, 'F');
-    
-    yPosition += 10;
-    
-    // Sentence-aware paragraphs
-    doc.setFontSize(10);
-    doc.setFont('helvetica', 'normal');
-    doc.setTextColor(31, 41, 55);
-    const budgetParagraphs = formatTextAsParagraphs(result.budgetConsiderations, pageWidth - 2 * margin - 20, doc);
-    const budgetEndY = drawParagraphs(doc, budgetParagraphs, margin + 10, yPosition, 5, 10);
-    
-    // Complete the background box
-    const budgetBoxHeight = budgetEndY - budgetBoxTop + 10;
-    doc.setFillColor(254, 243, 199);
-    doc.roundedRect(margin, budgetBoxTop, pageWidth - 2 * margin, budgetBoxHeight, 5, 5, 'F');
-    
-    // Redraw left border
-    doc.setFillColor(245, 158, 11);
-    doc.roundedRect(margin, budgetBoxTop, 4, budgetBoxHeight, 2, 2, 'F');
-    
-    // Redraw text on top
-    yPosition = budgetBoxTop + 10;
-    doc.setTextColor(31, 41, 55);
-    drawParagraphs(doc, budgetParagraphs, margin + 10, yPosition, 5, 10);
-    
-    yPosition = budgetEndY + 15;
-
-    addFooter();
-
-    // TECHNOLOGY CHECKLIST - Premium Card Design
-    doc.addPage();
-    yPosition = margin + 10;
-    
-    // Clipboard icon
-    doc.setFontSize(16);
-    doc.setTextColor(91, 155, 213);
-    doc.text('📋', margin, yPosition);
-    
-    doc.setFontSize(18);
-    doc.setFont('helvetica', 'bold');
-    doc.setTextColor(31, 41, 55);
-    doc.text('Technology Checklist', margin + 10, yPosition);
-    yPosition += 3;
-    
-    // Gradient accent bar
-    for (let i = 0; i < 3; i++) {
-      doc.setDrawColor(91, 155, 213);
-      doc.setLineWidth(0.5);
-      doc.line(margin, yPosition + i * 0.8, pageWidth - margin, yPosition + i * 0.8);
-    }
-    yPosition += 15;
-
-    // Sort by priority
-    const sortedItems = [...result.checklistItems].sort((a, b) => {
-      const priorityOrder = { 'essential': 1, 'important': 2, 'nice-to-have': 3 };
-      return priorityOrder[a.priority] - priorityOrder[b.priority];
-    });
-
-    // Draw each item as a premium card
-    sortedItems.forEach((item, index) => {
-      const cardPadding = 8;
-      const cardStartY = yPosition;
-      let cardContentY = yPosition + cardPadding;
-      
-      // Check if we need a page break
-      const estimatedHeight = 70;
-      if (cardContentY + estimatedHeight > pageHeight - margin - 20) {
-        addFooter();
-        doc.addPage();
-        yPosition = margin + 10;
-        cardContentY = yPosition + cardPadding;
+    // Executive Summary
+    const executiveSummary = [
+      {
+        columns: [
+          {
+            width: 20,
+            svg: '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="#60A5FA"><path d="M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7z"/></svg>'
+          },
+          {
+            width: '*',
+            text: 'Executive Summary',
+            fontSize: 18,
+            bold: true,
+            color: '#151A22'
+          }
+        ],
+        margin: [0, 0, 0, 5]
+      },
+      {
+        canvas: [
+          {
+            type: 'rect',
+            x: 0, y: 0,
+            w: 515, h: 3,
+            color: '#5B9BD5'
+          }
+        ],
+        margin: [0, 0, 0, 15]
+      },
+      {
+        table: {
+          widths: ['*'],
+          body: [
+            [
+              {
+                stack: splitIntoParagraphs(result.summary),
+                fillColor: '#E8F0FE',
+                border: [true, true, true, true]
+              }
+            ]
+          ]
+        },
+        layout: {
+          paddingLeft: () => 15,
+          paddingRight: () => 15,
+          paddingTop: () => 15,
+          paddingBottom: () => 15,
+          hLineWidth: () => 2,
+          vLineWidth: () => 2,
+          hLineColor: () => '#5B9BD5',
+          vLineColor: () => '#5B9BD5'
+        },
+        margin: [0, 0, 0, 20]
       }
-      
-      // Card background with subtle gradient (simulated with layers)
-      doc.setFillColor(250, 251, 252);
-      doc.roundedRect(margin, cardStartY, pageWidth - 2 * margin, 0, 6, 6, 'F');
-      
-      // 3pt border in brand blue
-      doc.setDrawColor(91, 155, 213);
-      doc.setLineWidth(0.8);
-      doc.roundedRect(margin, cardStartY, pageWidth - 2 * margin, 0, 6, 6, 'S');
-      
-      // Enhanced Priority Badge - Top Right with gradient
-      const badgeWidth = 70;
-      const badgeHeight = 24;
-      const badgeX = pageWidth - margin - badgeWidth - cardPadding;
-      const badgeY = cardContentY;
-      
-      const priorityColors: { [key: string]: [number, number, number][] } = {
-        'essential': [[239, 68, 68], [220, 38, 38]],
-        'important': [[245, 158, 11], [234, 88, 12]],
-        'nice-to-have': [[16, 185, 129], [5, 150, 105]]
-      };
-      
-      const [color1, color2] = priorityColors[item.priority];
-      
-      // Gradient background for badge (simulated)
-      for (let i = 0; i < badgeHeight; i++) {
-        const ratio = i / badgeHeight;
-        const r = Math.round(color1[0] + (color2[0] - color1[0]) * ratio);
-        const g = Math.round(color1[1] + (color2[1] - color1[1]) * ratio);
-        const b = Math.round(color1[2] + (color2[2] - color1[2]) * ratio);
-        doc.setFillColor(r, g, b);
-        doc.roundedRect(badgeX, badgeY + i, badgeWidth, 1, 4, 4, 'F');
+    ];
+
+    // Budget Considerations
+    const budgetSection = [
+      {
+        columns: [
+          {
+            width: 20,
+            svg: '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="#F59E0B"><path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/></svg>'
+          },
+          {
+            width: '*',
+            text: 'Budget Considerations',
+            fontSize: 18,
+            bold: true,
+            color: '#151A22'
+          }
+        ],
+        margin: [0, 20, 0, 5]
+      },
+      {
+        canvas: [
+          {
+            type: 'rect',
+            x: 0, y: 0,
+            w: 515, h: 3,
+            color: '#F59E0B'
+          }
+        ],
+        margin: [0, 0, 0, 15]
+      },
+      {
+        table: {
+          widths: ['*'],
+          body: [
+            [
+              {
+                stack: splitIntoParagraphs(result.budgetConsiderations),
+                fillColor: '#FEF3C7',
+                border: [true, true, true, true]
+              }
+            ]
+          ]
+        },
+        layout: {
+          paddingLeft: () => 15,
+          paddingRight: () => 15,
+          paddingTop: () => 15,
+          paddingBottom: () => 15,
+          hLineWidth: () => 2,
+          vLineWidth: () => 2,
+          hLineColor: () => '#F59E0B',
+          vLineColor: () => '#F59E0B'
+        },
+        margin: [0, 0, 0, 20]
       }
-      
-      const priorityText = 
-        item.priority === 'essential' ? 'ESSENTIAL' :
-        item.priority === 'important' ? 'IMPORTANT' :
-        'NICE TO HAVE';
-      
-      doc.setFontSize(9);
-      doc.setFont('helvetica', 'bold');
-      doc.setTextColor(255, 255, 255);
-      doc.text(priorityText, badgeX + badgeWidth / 2, badgeY + 15, { align: 'center' });
-      
-      cardContentY += 8;
-      
-      // Checkmark icon + Item Title
-      doc.setFontSize(14);
-      doc.setTextColor(91, 155, 213);
-      doc.text('✓', margin + cardPadding, cardContentY);
-      
-      doc.setFontSize(16);
-      doc.setFont('helvetica', 'bold');
-      doc.setTextColor(21, 26, 34);
-      const titleMaxWidth = pageWidth - 2 * margin - 2 * cardPadding - badgeWidth - 15;
-      const titleLines = doc.splitTextToSize(item.item, titleMaxWidth);
-      doc.text(titleLines, margin + cardPadding + 8, cardContentY);
-      cardContentY += titleLines.length * 7 + 5;
-      
-      // Category with light separator
-      doc.setFontSize(11);
-      doc.setFont('helvetica', 'italic');
-      doc.setTextColor(107, 114, 128);
-      doc.text(item.category, margin + cardPadding, cardContentY);
-      cardContentY += 8;
-      
-      // Light separator line
-      doc.setDrawColor(229, 231, 235);
-      doc.setLineWidth(0.3);
-      doc.line(margin + cardPadding, cardContentY, pageWidth - margin - cardPadding, cardContentY);
-      cardContentY += 8;
-      
-      // "Key Questions to Ask" Section with icon
-      doc.setFontSize(12);
-      doc.setFont('helvetica', 'bold');
-      doc.setTextColor(31, 41, 55);
-      doc.text('❓', margin + cardPadding, cardContentY);
-      doc.text('Key Questions to Ask:', margin + cardPadding + 8, cardContentY);
-      cardContentY += 10;
-      
-      // Light blue background for questions area (will redraw after calculating height)
-      const questionsStartY = cardContentY;
-      
-      // Questions with proper formatting
-      doc.setFontSize(10);
-      doc.setFont('helvetica', 'normal');
-      doc.setTextColor(31, 41, 55);
-      
-      item.questions.forEach((question, qIndex) => {
-        // Check for page break
-        if (cardContentY + 20 > pageHeight - margin - 20) {
-          // Complete current card
-          const currentCardHeight = cardContentY - cardStartY + cardPadding;
-          doc.setFillColor(250, 251, 252);
-          doc.roundedRect(margin, cardStartY, pageWidth - 2 * margin, currentCardHeight, 6, 6, 'F');
-          doc.setDrawColor(91, 155, 213);
-          doc.setLineWidth(0.8);
-          doc.roundedRect(margin, cardStartY, pageWidth - 2 * margin, currentCardHeight, 6, 6, 'S');
-          
-          addFooter();
-          doc.addPage();
-          yPosition = margin + 10;
-          cardContentY = yPosition + cardPadding;
+    ];
+
+    // Technology Checklist Cards
+    const checklistCards = result.checklistItems.map(item => ({
+      table: {
+        widths: ['*'],
+        body: [
+          [
+            {
+              text: item.priority.toUpperCase(),
+              fillColor: priorityColors[item.priority] || '#6B7280',
+              color: '#FFFFFF',
+              bold: true,
+              alignment: 'center',
+              fontSize: 10,
+              margin: [5, 5, 5, 5]
+            }
+          ],
+          [
+            {
+              stack: [
+                {
+                  text: item.item,
+                  fontSize: 16,
+                  bold: true,
+                  color: '#151A22',
+                  margin: [0, 10, 0, 5]
+                },
+                {
+                  text: item.category,
+                  fontSize: 11,
+                  italics: true,
+                  color: '#6B7280',
+                  margin: [0, 0, 0, 10]
+                },
+                {
+                  canvas: [
+                    { type: 'line', x1: 0, y1: 0, x2: 465, y2: 0, lineWidth: 1, lineColor: '#E5E7EB' }
+                  ],
+                  margin: [0, 0, 0, 10]
+                },
+                {
+                  text: 'Key Questions to Ask:',
+                  fontSize: 12,
+                  bold: true,
+                  color: '#151A22',
+                  margin: [0, 0, 0, 8]
+                },
+                ...item.questions.map(q => ({
+                  table: {
+                    widths: ['*'],
+                    body: [
+                      [
+                        {
+                          stack: splitIntoParagraphs(q),
+                          fillColor: '#F0F7FF',
+                          border: [false, false, false, false]
+                        }
+                      ]
+                    ]
+                  },
+                  layout: {
+                    paddingLeft: () => 10,
+                    paddingRight: () => 10,
+                    paddingTop: () => 8,
+                    paddingBottom: () => 8,
+                    hLineWidth: () => 0,
+                    vLineWidth: () => 0
+                  },
+                  margin: [0, 0, 0, 6]
+                }))
+              ],
+              fillColor: '#FAFBFC',
+              margin: [15, 10, 15, 15]
+            }
+          ]
+        ]
+      },
+      layout: {
+        hLineWidth: () => 2,
+        vLineWidth: () => 2,
+        hLineColor: () => '#5B9BD5',
+        vLineColor: () => '#5B9BD5',
+        paddingLeft: () => 0,
+        paddingRight: () => 0,
+        paddingTop: () => 0,
+        paddingBottom: () => 0
+      },
+      margin: [0, 0, 0, 15]
+    }));
+
+    // Dealer Questions
+    const dealerQuestions = [
+      {
+        text: 'Questions for Dealers',
+        fontSize: 18,
+        bold: true,
+        color: '#151A22',
+        margin: [0, 20, 0, 5]
+      },
+      {
+        canvas: [
+          {
+            type: 'rect',
+            x: 0, y: 0,
+            w: 515, h: 3,
+            color: '#5B9BD5'
+          }
+        ],
+        margin: [0, 0, 0, 15]
+      },
+      {
+        table: {
+          widths: [20, '*'],
+          body: result.dealerQuestions.map((question, index) => [
+            {
+              text: (index + 1).toString(),
+              fillColor: '#5B9BD5',
+              color: '#FFFFFF',
+              bold: true,
+              alignment: 'center',
+              fontSize: 10,
+              margin: [0, 5, 0, 5]
+            },
+            {
+              stack: splitIntoParagraphs(question),
+              fillColor: '#F9FAFB',
+              margin: [10, 8, 10, 8]
+            }
+          ])
+        },
+        layout: {
+          paddingLeft: () => 5,
+          paddingRight: () => 5,
+          paddingTop: () => 5,
+          paddingBottom: () => 5,
+          hLineWidth: () => 1,
+          vLineWidth: () => 1,
+          hLineColor: () => '#E5E7EB',
+          vLineColor: () => '#E5E7EB'
+        },
+        margin: [0, 0, 0, 20]
+      }
+    ];
+
+    // Complete Document Definition
+    const docDefinition: any = {
+      pageSize: 'A4',
+      pageMargins: [40, 40, 40, 60],
+      content: [
+        ...coverPage,
+        { text: '', pageBreak: 'after' },
+        ...executiveSummary,
+        ...budgetSection,
+        { 
+          text: 'Technology Checklist', 
+          fontSize: 18,
+          bold: true,
+          color: '#151A22',
+          margin: [0, 20, 0, 15] 
+        },
+        ...checklistCards,
+        ...dealerQuestions
+      ],
+      defaultStyle: {
+        font: 'Roboto',
+        fontSize: 10,
+        lineHeight: 1.5,
+        color: '#1F2937'
+      },
+      styles: {
+        body: {
+          fontSize: 10,
+          color: '#1F2937',
+          lineHeight: 1.6
         }
-        
-        // Blue bullet
-        doc.setTextColor(91, 155, 213);
-        doc.setFontSize(12);
-        doc.text('•', margin + cardPadding + 5, cardContentY);
-        
-        // Question text with sentence-aware formatting
-        doc.setTextColor(31, 41, 55);
-        doc.setFontSize(10);
-        const questionMaxWidth = pageWidth - 2 * margin - 2 * cardPadding - 15;
-        const questionParagraphs = formatTextAsParagraphs(question, questionMaxWidth, doc);
-        const questionEndY = drawParagraphs(doc, questionParagraphs, margin + cardPadding + 10, cardContentY, 5, 6);
-        
-        cardContentY = questionEndY + 10;
-      });
-      
-      // Complete the card with all backgrounds and borders
-      const cardHeight = cardContentY - cardStartY + cardPadding;
-      
-      // Redraw card background
-      doc.setFillColor(250, 251, 252);
-      doc.roundedRect(margin, cardStartY, pageWidth - 2 * margin, cardHeight, 6, 6, 'F');
-      
-      // Light blue background for questions area
-      const questionsHeight = cardContentY - questionsStartY;
-      if (questionsHeight > 0) {
-        doc.setFillColor(239, 246, 255);
-        doc.roundedRect(margin + cardPadding, questionsStartY - 2, pageWidth - 2 * margin - 2 * cardPadding, questionsHeight + 2, 3, 3, 'F');
-      }
-      
-      // Redraw border
-      doc.setDrawColor(91, 155, 213);
-      doc.setLineWidth(0.8);
-      doc.roundedRect(margin, cardStartY, pageWidth - 2 * margin, cardHeight, 6, 6, 'S');
-      
-      // Redraw all text content on top
-      cardContentY = cardStartY + cardPadding;
-      
-      // Redraw priority badge
-      for (let i = 0; i < badgeHeight; i++) {
-        const ratio = i / badgeHeight;
-        const r = Math.round(color1[0] + (color2[0] - color1[0]) * ratio);
-        const g = Math.round(color1[1] + (color2[1] - color1[1]) * ratio);
-        const b = Math.round(color1[2] + (color2[2] - color1[2]) * ratio);
-        doc.setFillColor(r, g, b);
-        doc.roundedRect(badgeX, badgeY + i, badgeWidth, 1, 4, 4, 'F');
-      }
-      doc.setFontSize(9);
-      doc.setFont('helvetica', 'bold');
-      doc.setTextColor(255, 255, 255);
-      doc.text(priorityText, badgeX + badgeWidth / 2, badgeY + 15, { align: 'center' });
-      
-      cardContentY += 8;
-      
-      // Redraw title
-      doc.setFontSize(14);
-      doc.setTextColor(91, 155, 213);
-      doc.text('✓', margin + cardPadding, cardContentY);
-      doc.setFontSize(16);
-      doc.setFont('helvetica', 'bold');
-      doc.setTextColor(21, 26, 34);
-      doc.text(titleLines, margin + cardPadding + 8, cardContentY);
-      cardContentY += titleLines.length * 7 + 5;
-      
-      // Redraw category
-      doc.setFontSize(11);
-      doc.setFont('helvetica', 'italic');
-      doc.setTextColor(107, 114, 128);
-      doc.text(item.category, margin + cardPadding, cardContentY);
-      cardContentY += 8;
-      
-      // Redraw separator
-      doc.setDrawColor(229, 231, 235);
-      doc.setLineWidth(0.3);
-      doc.line(margin + cardPadding, cardContentY, pageWidth - margin - cardPadding, cardContentY);
-      cardContentY += 8;
-      
-      // Redraw questions header
-      doc.setFontSize(12);
-      doc.setFont('helvetica', 'bold');
-      doc.setTextColor(31, 41, 55);
-      doc.text('❓', margin + cardPadding, cardContentY);
-      doc.text('Key Questions to Ask:', margin + cardPadding + 8, cardContentY);
-      cardContentY += 10;
-      
-      // Redraw questions
-      doc.setFontSize(10);
-      doc.setFont('helvetica', 'normal');
-      item.questions.forEach((question) => {
-        doc.setTextColor(91, 155, 213);
-        doc.setFontSize(12);
-        doc.text('•', margin + cardPadding + 5, cardContentY);
-        
-        doc.setTextColor(31, 41, 55);
-        doc.setFontSize(10);
-        const questionMaxWidth = pageWidth - 2 * margin - 2 * cardPadding - 15;
-        const questionParagraphs = formatTextAsParagraphs(question, questionMaxWidth, doc);
-        cardContentY = drawParagraphs(doc, questionParagraphs, margin + cardPadding + 10, cardContentY, 5, 6) + 10;
-      });
-      
-      // Decorative gradient separator between cards
-      yPosition = cardContentY + cardPadding + 5;
-      for (let i = 0; i < 2; i++) {
-        doc.setDrawColor(91, 155, 213);
-        doc.setLineWidth(0.2);
-        doc.line(margin + 30, yPosition + i * 0.5, pageWidth - margin - 30, yPosition + i * 0.5);
-      }
-      
-      yPosition += 15;
-    });
+      },
+      footer: (currentPage: number, pageCount: number) => ({
+        columns: [
+          {
+            text: new Date().toLocaleDateString(),
+            alignment: 'left',
+            margin: [40, 0, 0, 0]
+          },
+          {
+            text: 'Generated by Smart RV Hub AI Technology Consultant',
+            alignment: 'center'
+          },
+          {
+            text: `Page ${currentPage} of ${pageCount}`,
+            alignment: 'right',
+            margin: [0, 0, 40, 0]
+          }
+        ],
+        margin: [0, 10, 0, 0],
+        fontSize: 8,
+        color: '#6B7280'
+      })
+    };
 
-    // DEALER QUESTIONS - Interactive Checklist Style
-    checkPageBreak(50);
-    if (yPosition < margin + 30) {
-      addFooter();
-      doc.addPage();
-      yPosition = margin + 10;
-    }
-    
-    // Message circle icon
-    doc.setFontSize(16);
-    doc.setTextColor(91, 155, 213);
-    doc.text('📋', margin, yPosition);
-    
-    doc.setFontSize(18);
-    doc.setFont('helvetica', 'bold');
-    doc.setTextColor(31, 41, 55);
-    doc.text('Questions for RV Dealers', margin + 10, yPosition);
-    yPosition += 3;
-    
-    // Gradient blue header bar
-    for (let i = 0; i < 5; i++) {
-      const ratio = i / 5;
-      const r = Math.round(91 + (96 - 91) * ratio);
-      const g = Math.round(155 + (165 - 155) * ratio);
-      const b = Math.round(213 + (250 - 213) * ratio);
-      doc.setDrawColor(r, g, b);
-      doc.setLineWidth(0.5);
-      doc.line(margin, yPosition + i * 0.6, pageWidth - margin, yPosition + i * 0.6);
-    }
-    yPosition += 15;
-
-    result.dealerQuestions.forEach((question, index) => {
-      checkPageBreak(25);
-      
-      // Light gray box for each question
-      const boxStartY = yPosition;
-      doc.setFillColor(243, 244, 246);
-      doc.roundedRect(margin, boxStartY, pageWidth - 2 * margin, 20, 4, 4, 'F');
-      
-      // Checkbox
-      doc.setDrawColor(91, 155, 213);
-      doc.setLineWidth(0.5);
-      doc.rect(margin + 5, yPosition + 3, 4, 4);
-      
-      // Question number in blue circle badge
-      doc.setFillColor(91, 155, 213);
-      doc.circle(margin + 15, yPosition + 5, 3, 'F');
-      doc.setFontSize(8);
-      doc.setFont('helvetica', 'bold');
-      doc.setTextColor(255, 255, 255);
-      doc.text(`${index + 1}`, margin + 15, yPosition + 6.5, { align: 'center' });
-      
-      // Question text with sentence-aware formatting
-      doc.setFontSize(10);
-      doc.setFont('helvetica', 'normal');
-      doc.setTextColor(31, 41, 55);
-      const questionMaxWidth = pageWidth - 2 * margin - 28;
-      const questionParagraphs = formatTextAsParagraphs(question, questionMaxWidth, doc);
-      const questionEndY = drawParagraphs(doc, questionParagraphs, margin + 22, yPosition + 5, 5, 6);
-      
-      // Update box height based on actual content
-      const boxHeight = questionEndY - boxStartY + 5;
-      doc.setFillColor(243, 244, 246);
-      doc.roundedRect(margin, boxStartY, pageWidth - 2 * margin, boxHeight, 4, 4, 'F');
-      
-      // Redraw checkbox
-      doc.setDrawColor(91, 155, 213);
-      doc.setLineWidth(0.5);
-      doc.rect(margin + 5, boxStartY + 3, 4, 4);
-      
-      // Redraw badge
-      doc.setFillColor(91, 155, 213);
-      doc.circle(margin + 15, boxStartY + 5, 3, 'F');
-      doc.setFontSize(8);
-      doc.setFont('helvetica', 'bold');
-      doc.setTextColor(255, 255, 255);
-      doc.text(`${index + 1}`, margin + 15, boxStartY + 6.5, { align: 'center' });
-      
-      // Redraw question text
-      doc.setFontSize(10);
-      doc.setFont('helvetica', 'normal');
-      doc.setTextColor(31, 41, 55);
-      drawParagraphs(doc, questionParagraphs, margin + 22, boxStartY + 5, 5, 6);
-      
-      yPosition = boxStartY + boxHeight + 8;
-    });
-
-    addFooter();
-
-    // Save PDF
     const timestamp = new Date().getTime();
-    doc.save(`rv-technology-checklist-${timestamp}.pdf`);
+    pdfMake.createPdf(docDefinition).download(`rv-technology-checklist-${timestamp}.pdf`);
   };
 
   const resetChecklist = () => {
