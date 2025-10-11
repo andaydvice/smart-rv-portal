@@ -274,58 +274,59 @@ QUALITY CHECK BEFORE RETURNING:
       if (!checklist) {
         console.error('❌ Could not heal JSON, using generic fallback');
         // Fallback response
-      checklist = {
-        checklistItems: [
-          {
-            category: "Power Management",
-            item: "Battery system and charging capabilities",
-            priority: "essential",
-            questions: [
-              "What type of batteries are included (lithium vs lead-acid)?",
-              "What is the total amp-hour capacity?",
-              "Is the system expandable for additional batteries?",
-              "What charging methods are available (shore power, solar, generator)?"
-            ]
-          },
-          {
-            category: "Connectivity",
-            item: "Internet and communication systems",
-            priority: "important",
-            questions: [
-              "What internet connectivity options are available?",
-              "Is there cellular signal boosting capability?",
-              "Are there provisions for external antennas?",
-              "How many devices can connect simultaneously?"
-            ]
-          },
-          {
-            category: "Monitoring & Control",
-            item: "System monitoring and automation",
-            priority: "important",
-            questions: [
-              "What systems can be monitored remotely?",
-              "Is there a smartphone app for system control?",
-              "What alerts and notifications are available?",
-              "Are there manual backup controls for all automated systems?"
-            ]
+        checklist = {
+          checklistItems: [
+            {
+              category: "Power Management",
+              item: "Battery system and charging capabilities",
+              priority: "essential",
+              questions: [
+                "What type of batteries are included (lithium vs lead-acid)?",
+                "What is the total amp-hour capacity?",
+                "Is the system expandable for additional batteries?",
+                "What charging methods are available (shore power, solar, generator)?"
+              ]
+            },
+            {
+              category: "Connectivity",
+              item: "Internet and communication systems",
+              priority: "important",
+              questions: [
+                "What internet connectivity options are available?",
+                "Is there cellular signal boosting capability?",
+                "Are there provisions for external antennas?",
+                "How many devices can connect simultaneously?"
+              ]
+            },
+            {
+              category: "Monitoring & Control",
+              item: "System monitoring and automation",
+              priority: "important",
+              questions: [
+                "What systems can be monitored remotely?",
+                "Is there a smartphone app for system control?",
+                "What alerts and notifications are available?",
+                "Are there manual backup controls for all automated systems?"
+              ]
+            }
+          ],
+          summary: "A basic technology research checklist focusing on essential systems for modern RV living.",
+          budgetConsiderations: "Budget for mid-range technology packages. Prioritize proven, reliable systems over cutting-edge features.",
+          dealerQuestions: [
+            "What ongoing support is available for the technology systems?",
+            "Are there firmware updates and how are they handled?",
+            "What warranty coverage applies to technology components?",
+            "Can you demonstrate all the technology features?",
+            "Are there additional training resources available?"
+          ],
+          searchUrls: {
+            buyUrl: 'https://www.rvt.com/buy/',
+            reviewsUrl: 'https://www.rvinsider.com/',
+            dealersUrl: 'https://www.rvt.com/dealersearch.php',
+            priceCheckerUrl: 'https://www.rvt.com/price-checker/'
           }
-        ],
-        summary: "A basic technology research checklist focusing on essential systems for modern RV living.",
-        budgetConsiderations: "Budget for mid-range technology packages. Prioritize proven, reliable systems over cutting-edge features.",
-        dealerQuestions: [
-          "What ongoing support is available for the technology systems?",
-          "Are there firmware updates and how are they handled?",
-          "What warranty coverage applies to technology components?",
-          "Can you demonstrate all the technology features?",
-          "Are there additional training resources available?"
-        ],
-        searchUrls: {
-          buyUrl: 'https://www.rvt.com/buy/',
-          reviewsUrl: 'https://www.rvinsider.com/',
-          dealersUrl: 'https://www.rvt.com/dealersearch.php',
-          priceCheckerUrl: 'https://www.rvt.com/price-checker/'
-        }
-      };
+        };
+      }
     }
 
     return new Response(JSON.stringify({ checklist }), {
