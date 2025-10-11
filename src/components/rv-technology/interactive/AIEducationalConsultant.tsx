@@ -77,11 +77,18 @@ export const AIEducationalConsultant = () => {
     // Step 1: Remove markdown bold formatting
     let cleanText = content.replace(/\*\*/g, '');
     
+    // Step 1.5: Remove hyphens between words (but preserve in numbers/codes)
+    cleanText = cleanText.replace(/([a-zA-Z])-([a-zA-Z])/g, '$1 $2');
+    
     // Step 2: Add line breaks before bullet points if not already present
     cleanText = cleanText.replace(/([^\n])\s*•\s*/g, '$1\n\n• ');
     
     // Step 3: Add line breaks after lines ending with colon if followed by non-whitespace
     cleanText = cleanText.replace(/:\s*([^\s])/g, ':\n\n$1');
+    
+    // Step 3.5: Add line breaks after sentence-ending punctuation (. ! ?)
+    // Only break when followed by space and capital letter (start of new sentence)
+    cleanText = cleanText.replace(/([.!?])(\s+)(?=[A-Z])/g, '$1\n\n');
     
     // Step 4: Split on double newlines (including our injected ones)
     const paragraphs = cleanText
