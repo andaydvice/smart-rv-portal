@@ -7,7 +7,6 @@ import { Alert, AlertDescription } from '@/components/ui/alert';
 import { CheckCircle, ClipboardCheck, Download, AlertCircle, Brain, Zap } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import jsPDF from 'jspdf';
-import autoTable from 'jspdf-autotable';
 
 interface ChecklistItem {
   category: string;
@@ -201,52 +200,101 @@ export const AITechnologyChecklist: React.FC = () => {
       return priorityOrder[a.priority] - priorityOrder[b.priority];
     });
 
-    // Create table data
-    const tableData = sortedItems.map(item => {
-      const priorityColor: [number, number, number] = 
+    // Draw each item as a card
+    sortedItems.forEach((item, index) => {
+      const cardPadding = 5;
+      const cardStartY = yPosition;
+      let cardContentY = yPosition + cardPadding;
+      
+      // Calculate card height first to check if we need a page break
+      const estimatedHeight = 60; // Conservative estimate
+      if (cardContentY + estimatedHeight > pageHeight - margin - 20) {
+        doc.addPage();
+        yPosition = margin;
+        addFooter();
+        cardContentY = yPosition + cardPadding;
+      }
+      
+      // Draw priority badge
+      const priorityBgColor: [number, number, number] = 
         item.priority === 'essential' ? [239, 68, 68] :
         item.priority === 'important' ? [245, 158, 11] :
         [16, 185, 129];
       
-      const questions = item.questions.map(q => `• ${q}`).join('\n');
+      const priorityText = 
+        item.priority === 'essential' ? 'ESSENTIAL' :
+        item.priority === 'important' ? 'IMPORTANT' :
+        'NICE TO HAVE';
       
-      return [
-        { content: item.priority.toUpperCase(), styles: { textColor: priorityColor, fontStyle: 'bold' as const } },
-        item.category,
-        item.item,
-        questions
-      ];
-    });
-
-    autoTable(doc, {
-      startY: yPosition,
-      head: [['Priority', 'Category', 'Item', 'Key Questions']],
-      body: tableData,
-      theme: 'striped',
-      headStyles: {
-        fillColor: [91, 155, 213],
-        textColor: [255, 255, 255],
-        fontStyle: 'bold',
-        fontSize: 10
-      },
-      bodyStyles: {
-        fontSize: 9,
-        cellPadding: 5
-      },
-      columnStyles: {
-        0: { cellWidth: 25 },
-        1: { cellWidth: 30 },
-        2: { cellWidth: 40 },
-        3: { cellWidth: 85 }
-      },
-      margin: { left: margin, right: margin },
-      didDrawPage: (data) => {
-        addFooter();
-      }
+      doc.setFillColor(...priorityBgColor);
+      doc.roundedRect(margin + cardPadding, cardContentY, 50, 8, 2, 2, 'F');
+      doc.setFontSize(8);
+      doc.setFont('helvetica', 'bold');
+      doc.setTextColor(255, 255, 255);
+      doc.text(priorityText, margin + cardPadding + 25, cardContentY + 5.5, { align: 'center' });
+      cardContentY += 13;
+      
+      // Item name
+      doc.setFontSize(12);
+      doc.setFont('helvetica', 'bold');
+      doc.setTextColor(0, 0, 0);
+      doc.text(item.item, margin + cardPadding, cardContentY);
+      cardContentY += 8;
+      
+      // Category
+      doc.setFontSize(10);
+      doc.setFont('helvetica', 'italic');
+      doc.setTextColor(100, 100, 100);
+      doc.text(`Category: ${item.category}`, margin + cardPadding, cardContentY);
+      cardContentY += 10;
+      
+      // Key Questions header
+      doc.setFontSize(10);
+      doc.setFont('helvetica', 'bold');
+      doc.setTextColor(0, 0, 0);
+      doc.text('Key Questions to Ask:', margin + cardPadding, cardContentY);
+      cardContentY += 7;
+      
+      // Questions with proper spacing
+      doc.setFontSize(9);
+      doc.setFont('helvetica', 'normal');
+      doc.setTextColor(40, 40, 40);
+      
+      item.questions.forEach((question, qIndex) => {
+        const questionMaxWidth = pageWidth - 2 * margin - 2 * cardPadding - 8;
+        const wrappedQuestion = doc.splitTextToSize(`• ${question}`, questionMaxWidth);
+        
+        // Check if we need a new page
+        if (cardContentY + wrappedQuestion.length * 5 > pageHeight - margin - 20) {
+          // Draw bottom border for current card
+          const currentCardHeight = cardContentY - cardStartY;
+          doc.setDrawColor(229, 231, 235);
+          doc.setLineWidth(0.5);
+          doc.rect(margin, cardStartY, pageWidth - 2 * margin, currentCardHeight + cardPadding);
+          
+          // Start new page
+          doc.addPage();
+          yPosition = margin;
+          addFooter();
+          cardContentY = yPosition + cardPadding;
+        }
+        
+        doc.text(wrappedQuestion, margin + cardPadding + 3, cardContentY);
+        cardContentY += wrappedQuestion.length * 5 + 5;
+      });
+      
+      // Draw card border
+      const cardHeight = cardContentY - cardStartY + cardPadding;
+      doc.setDrawColor(229, 231, 235);
+      doc.setLineWidth(0.5);
+      doc.rect(margin, cardStartY, pageWidth - 2 * margin, cardHeight);
+      
+      // Update yPosition for next card
+      yPosition = cardContentY + cardPadding + 10;
     });
 
     // Dealer Questions
-    yPosition = (doc as any).lastAutoTable.finalY + 15;
+    yPosition += 5;
     checkPageBreak(30);
     
     doc.setFontSize(14);
