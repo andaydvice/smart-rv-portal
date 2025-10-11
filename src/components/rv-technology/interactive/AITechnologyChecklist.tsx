@@ -49,7 +49,7 @@ const formatTextWithParagraphs = (text: string, inline: boolean = false): React.
   
   // Step 3.5: Add line breaks after sentence-ending punctuation (. ! ?)
   // Only break when followed by space and capital letter (start of new sentence)
-  cleanText = cleanText.replace(/([.!?])(\s+)(?=[A-Z])/g, '$1\n\n');
+  cleanText = cleanText.replace(/([.!?])\s*(?=[A-Z])/g, '$1\n\n');
   
   // Step 4: Split on double newlines (including our injected ones)
   const paragraphs = cleanText
@@ -154,11 +154,13 @@ export const AITechnologyChecklist: React.FC = () => {
   if (result) {
     return (
       <Card className="p-8 bg-gradient-to-br from-[#091020] to-[#131a2a] border-[#1a202c] text-white">
-        <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-[#5B9BD5] to-[#60A5FA] rounded-full mb-4">
-            <ClipboardCheck className="h-8 w-8 text-white" />
+        <div className="mb-8">
+          <div className="text-center mb-4">
+            <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-[#5B9BD5] to-[#60A5FA] rounded-full mb-4">
+              <ClipboardCheck className="h-8 w-8 text-white" />
+            </div>
+            <h3 className="text-2xl font-bold text-white mb-2">Your Personalized RV Technology Checklist</h3>
           </div>
-          <h3 className="text-2xl font-bold text-white mb-2">Your Personalized RV Technology Checklist</h3>
           <div className="text-[#E2E8FF] text-lg">{formatTextWithParagraphs(result.summary)}</div>
         </div>
 

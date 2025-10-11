@@ -88,7 +88,7 @@ export const AIEducationalConsultant = () => {
     
     // Step 3.5: Add line breaks after sentence-ending punctuation (. ! ?)
     // Only break when followed by space and capital letter (start of new sentence)
-    cleanText = cleanText.replace(/([.!?])(\s+)(?=[A-Z])/g, '$1\n\n');
+    cleanText = cleanText.replace(/([.!?])\s*(?=[A-Z])/g, '$1\n\n');
     
     // Step 4: Split on double newlines (including our injected ones)
     const paragraphs = cleanText
