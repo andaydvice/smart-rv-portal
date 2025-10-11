@@ -28,10 +28,11 @@ interface AIChecklistResult {
 }
 
 const formatTextWithParagraphs = (text: string): React.ReactNode => {
-  const sentences = text.match(/[^.!?]+[.!?]+(?=\s|$)/g) || [text];
-  return sentences.map((sentence, index) => (
-    <p key={index} className="mb-2 last:mb-0">
-      {sentence.trim()}
+  // Split on double newlines to preserve AI-generated paragraph structure
+  const paragraphs = text.split(/\n\n+/).filter(p => p.trim().length > 0);
+  return paragraphs.map((para, index) => (
+    <p key={index} className="mb-3 last:mb-0">
+      {para.trim()}
     </p>
   ));
 };
