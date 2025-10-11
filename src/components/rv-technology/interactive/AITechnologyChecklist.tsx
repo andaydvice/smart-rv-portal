@@ -261,7 +261,7 @@ export const AITechnologyChecklist: React.FC = () => {
             onClick={generateDownload}
             variant="outline"
             size="lg"
-            className="border-[#1a202c] text-[#E2E8FF] hover:bg-[#151A22]"
+            className="border-[#1a202c] text-[#E2E8FF] hover:bg-[#151A22] hover:text-white"
           >
             <Download className="h-4 w-4 mr-2" />
             Download Checklist
@@ -296,7 +296,7 @@ export const AITechnologyChecklist: React.FC = () => {
             onClick={resetChecklist}
             variant="outline"
             size="lg"
-            className="border-[#1a202c] text-[#E2E8FF] hover:bg-[#151A22]"
+            className="border-[#1a202c] text-[#E2E8FF] hover:bg-[#151A22] hover:text-white"
           >
             New Checklist
           </Button>
