@@ -204,7 +204,7 @@ export const IntelligentRVFinder: React.FC = () => {
                   id={feature}
                   checked={requirements.mustHaveFeatures.includes(feature)}
                   onCheckedChange={() => handleFeatureToggle(feature)}
-                  className="border-[#1a202c] data-[state=checked]:bg-[#5B9BD5]"
+                  className="border-2 border-[#5B9BD5] data-[state=checked]:bg-[#5B9BD5] data-[state=checked]:border-[#5B9BD5]"
                 />
                 <Label 
                   htmlFor={feature} 
