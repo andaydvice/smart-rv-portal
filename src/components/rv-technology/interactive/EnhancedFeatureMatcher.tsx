@@ -65,7 +65,7 @@ export const EnhancedFeatureMatcher = () => {
           <Wand2 className="h-6 w-6 text-connectivity-accent" />
           <CardTitle className="text-white">AI Enhanced Feature Matcher</CardTitle>
         </div>
-        <CardDescription className="text-connectivity-lightText">
+        <CardDescription className="text-white/90">
           Describe your RV usage plans and get educational information about relevant technology features
         </CardDescription>
       </CardHeader>
