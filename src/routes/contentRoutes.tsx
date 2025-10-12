@@ -20,6 +20,8 @@ const BlogPost = lazy(() => import("../pages/BlogPost"));
 const RVComfortGuide = lazy(() => import("../pages/RVComfortGuide"));
 const RVMarketplace = lazy(() => import("../pages/RVMarketplace"));
 const RVTechnologyGuide = lazy(() => import("../pages/RVTechnologyGuide"));
+const RVTechnologyGuideControlSystems = lazy(() => import("../pages/RVTechnologyGuideControlSystems"));
+const RVTechnologyGuideResearch = lazy(() => import("../pages/RVTechnologyGuideResearch"));
 const Tools = lazy(() => import("../pages/Tools"));
 const ReadinessAssessment = lazy(() => import("../pages/tools/ReadinessAssessment"));
 const FeatureMatcher = lazy(() => import("../pages/tools/FeatureMatcher"));
@@ -137,6 +139,28 @@ const contentRoutes: RouteObject[] = [
       <Suspense fallback={<MinimalLoader />}>
         <RouteTransition>
           <RVTechnologyGuide />
+        </RouteTransition>
+      </Suspense>
+    ),
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/rv-technology-guide/control-systems",
+    element: (
+      <Suspense fallback={<MinimalLoader />}>
+        <RouteTransition>
+          <RVTechnologyGuideControlSystems />
+        </RouteTransition>
+      </Suspense>
+    ),
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/rv-technology-guide/research-decisions",
+    element: (
+      <Suspense fallback={<MinimalLoader />}>
+        <RouteTransition>
+          <RVTechnologyGuideResearch />
         </RouteTransition>
       </Suspense>
     ),

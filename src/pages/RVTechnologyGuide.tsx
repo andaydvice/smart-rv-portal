@@ -35,6 +35,8 @@ import { ScrollToTopButton } from '@/components/rv-technology/ScrollToTopButton'
 import { ToolPreviewCard } from '@/components/rv-technology/ToolPreviewCard';
 
 import { Button } from '@/components/ui/button';
+import { ChevronRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const RVTechnologyGuide = () => {
   return (
