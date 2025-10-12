@@ -19,6 +19,11 @@ const DesktopNavigation = () => {
   // Define RV Tools links for the hover dropdown with icons and specific colors
   const rvToolsLinks = [
     { 
+      text: "RV Technology Guide", 
+      href: "/rv-technology-guide", 
+      icon: <BookOpen size={16} className="text-[#EC4899]" /> 
+    },
+    { 
       text: "RV Products", 
       href: "/products", 
       icon: <ShoppingBag size={16} className="text-[#10B981]" /> 
