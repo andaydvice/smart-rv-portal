@@ -1,6 +1,7 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
+import Layout from '@/components/layout/Layout';
 import { Container } from '@/components/ui/container';
 import { ExternalLinkButton } from '@/components/ui/external-link-button';
 import { Button } from '@/components/ui/button';
@@ -16,7 +17,7 @@ import { ScrollToTopButton } from '@/components/rv-technology/ScrollToTopButton'
 
 const RVTechnologyGuideResearch = () => {
   return (
-    <>
+    <Layout>
       <Helmet>
         <title>RV Technology Research & Decision Framework | Smart RV Technology Hub</title>
         <meta 
@@ -763,7 +764,7 @@ All company and product names are trademarks of their respective owners.</p>
         
         <ScrollToTopButton />
       </div>
-    </>
+    </Layout>
   );
 };
 

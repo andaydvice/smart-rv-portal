@@ -1,6 +1,7 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
+import Layout from '@/components/layout/Layout';
 import { Container } from '@/components/ui/container';
 import { ExternalLinkButton } from '@/components/ui/external-link-button';
 import { PreloadedHeaderImage } from '@/components/ui/PreloadedHeaderImage';
@@ -20,7 +21,7 @@ import { ScrollToTopButton } from '@/components/rv-technology/ScrollToTopButton'
 
 const RVTechnologyGuideControlSystems = () => {
   return (
-    <>
+    <Layout>
       <Helmet>
         <title>RV Control Systems & Technology Tiers | Smart RV Technology Hub</title>
         <meta 
@@ -506,7 +507,7 @@ Actual pricing varies significantly by model, region, dealer, and market conditi
         
         <ScrollToTopButton />
       </div>
-    </>
+    </Layout>
   );
 };
 
