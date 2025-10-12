@@ -6,12 +6,13 @@ import { Button } from '@/components/ui/button';
 import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 import { availableTools } from '@/lib/toolsData';
 import rvTechToolsHero from '@/assets/rv-technology-tools-hero.png';
+import Layout from '@/components/layout/Layout';
 
 const Tools: React.FC = () => {
   const navigate = useNavigate();
 
   return (
-    <>
+    <Layout>
       <Helmet>
         <title>RV Technology Tools - Interactive Planning & Assessment | RV Connectivity</title>
         <meta name="description" content="Free interactive tools to help you plan and assess RV technology needs. Get personalized recommendations, checklists, and expert guidance for your RV setup." />
@@ -79,7 +80,7 @@ const Tools: React.FC = () => {
           </div>
         </div>
       </div>
-    </>
+    </Layout>
   );
 };
 
