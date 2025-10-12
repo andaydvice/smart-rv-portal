@@ -95,7 +95,7 @@ export const EnhancedFeatureMatcher = () => {
           <Button
             onClick={handleAnalyzeDescription}
             disabled={!description.trim() || isAnalyzing}
-            className="bg-connectivity-accent hover:bg-blue-600 text-white"
+            className="bg-[#5B9BD5] hover:bg-[#4B8FE3] text-white"
           >
             {isAnalyzing ? (
               <>
