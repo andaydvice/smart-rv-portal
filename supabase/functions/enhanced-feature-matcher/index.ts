@@ -93,6 +93,17 @@ async function loadFeatureDatabase() {
   }
 }
 
+function cleanOpenAIResponse(content: string): string {
+  // Remove markdown code blocks if present
+  let cleaned = content.trim();
+  if (cleaned.startsWith('```json')) {
+    cleaned = cleaned.replace(/^```json\s*/, '').replace(/\s*```$/, '');
+  } else if (cleaned.startsWith('```')) {
+    cleaned = cleaned.replace(/^```\s*/, '').replace(/\s*```$/, '');
+  }
+  return cleaned.trim();
+}
+
 serve(async (req) => {
   if (req.method === 'OPTIONS') {
     return new Response(null, { headers: corsHeaders });
@@ -148,7 +159,8 @@ Return ONLY a JSON object with this structure:
     let analysis;
     
     try {
-      analysis = JSON.parse(analysisData.choices[0].message.content);
+      const cleanedContent = cleanOpenAIResponse(analysisData.choices[0].message.content);
+      analysis = JSON.parse(cleanedContent);
     } catch (parseError) {
       console.error('Analysis parsing failed:', parseError);
       analysis = { keywords: [], primary_usage: userDescription, technology_categories: [] };
@@ -181,9 +193,15 @@ Return ONLY a JSON object with this structure:
     // Generate educational explanation
     const explanationPrompt = `Based on this RV usage pattern: "${analysis.primary_usage}", provide a brief educational explanation of why these technology features might be relevant to consider: ${matchedFeatures.slice(0, 3).map(f => f.name).join(', ')}.
 
-Keep it factual and educational. Start with "Based on your described usage, here are some technology concepts to understand:" and end with "These are educational considerations only - please research specific options that suit your needs."
+IMPORTANT FORMATTING RULES:
+- Write in plain, professional paragraphs
+- Start a NEW paragraph after each sentence
+- DO NOT use markdown formatting (no **, no ##, no lists)
+- DO NOT use numbered or bulleted lists
+- Keep it conversational and easy to read
+- Maximum 200 words
 
-Maximum 200 words.`;
+Start with "Based on your described usage, here are some technology concepts to understand:" and end with "These are educational considerations only - please research specific options that suit your needs."`;
 
     const explanationResponse = await fetch('https://api.openai.com/v1/chat/completions', {
       method: 'POST',
