@@ -128,10 +128,13 @@ export const EnhancedFeatureMatcher = () => {
               
               {analysis.keywords.length > 0 && (
                 <div>
-                  <p className="text-sm text-connectivity-lightText mb-2">Identified keywords:</p>
+                  <p className="text-sm text-white/80 mb-2">Identified keywords:</p>
                   <div className="flex flex-wrap gap-2">
                     {analysis.keywords.map((keyword, index) => (
-                      <Badge key={index} variant="outline" className="border-connectivity-accent text-connectivity-accent">
+                      <Badge 
+                        key={index} 
+                        className="bg-connectivity-accent/20 text-connectivity-accent border border-connectivity-accent/50 px-3 py-1"
+                      >
                         {keyword}
                       </Badge>
                     ))}
@@ -162,11 +165,14 @@ export const EnhancedFeatureMatcher = () => {
                             {Math.round(feature.relevanceScore * 100)}% match
                           </Badge>
                         </div>
-                        <p className="text-connectivity-lightText text-sm mb-2">{feature.education}</p>
+                        <p className="text-white/90 text-sm mb-2 leading-relaxed">{feature.education}</p>
                         {feature.matchedKeywords.length > 0 && (
                           <div className="flex flex-wrap gap-1">
                             {feature.matchedKeywords.map((keyword, index) => (
-                              <Badge key={index} variant="secondary" className="text-xs">
+                              <Badge 
+                                key={index} 
+                                className="bg-gray-700 text-white/90 border border-gray-600 text-xs px-2 py-0.5"
+                              >
                                 {keyword}
                               </Badge>
                             ))}
