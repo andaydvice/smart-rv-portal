@@ -133,7 +133,7 @@ export const EnhancedFeatureMatcher = () => {
                     {analysis.keywords.map((keyword, index) => (
                       <Badge 
                         key={index} 
-                        className="bg-connectivity-accent/20 text-connectivity-accent border border-connectivity-accent/50 px-3 py-1"
+                        className="bg-blue-500/20 text-blue-300 border border-blue-400/50 px-3 py-1"
                       >
                         {keyword}
                       </Badge>
