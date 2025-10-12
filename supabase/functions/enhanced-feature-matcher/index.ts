@@ -104,6 +104,18 @@ function cleanOpenAIResponse(content: string): string {
   return cleaned.trim();
 }
 
+function removeHyphensFromContent(text: string): string {
+  // Remove hyphens from compound words but preserve them in numbers and dates
+  return text.replace(/(\w+)-(\w+)/g, (match, before, after) => {
+    // Keep hyphens in things that look like dates or codes (e.g., "2024-01-01" or "id-123")
+    if (/^\d+$/.test(before) || /^\d+$/.test(after)) {
+      return match;
+    }
+    // Remove hyphen from compound words
+    return before + after;
+  });
+}
+
 serve(async (req) => {
   if (req.method === 'OPTIONS') {
     return new Response(null, { headers: corsHeaders });
@@ -130,13 +142,14 @@ serve(async (req) => {
 
 User description: "${userDescription}"
 
+CRITICAL: DO NOT use hyphens in compound words. Write "offgrid" not "off-grid", "realtime" not "real-time", "fulltime" not "full-time", etc.
+
 Return ONLY a JSON object with this structure:
 {
   "keywords": ["keyword1", "keyword2", ...],
   "primary_usage": "brief factual summary",
   "technology_categories": ["connectivity", "power", "comfort", "safety"]
 }`;
-
     const analysisResponse = await fetch('https://api.openai.com/v1/chat/completions', {
       method: 'POST',
       headers: {
@@ -161,6 +174,14 @@ Return ONLY a JSON object with this structure:
     try {
       const cleanedContent = cleanOpenAIResponse(analysisData.choices[0].message.content);
       analysis = JSON.parse(cleanedContent);
+      
+      // Remove hyphens from analysis text
+      if (analysis.primary_usage) {
+        analysis.primary_usage = removeHyphensFromContent(analysis.primary_usage);
+      }
+      if (analysis.keywords) {
+        analysis.keywords = analysis.keywords.map((kw: string) => removeHyphensFromContent(kw));
+      }
     } catch (parseError) {
       console.error('Analysis parsing failed:', parseError);
       analysis = { keywords: [], primary_usage: userDescription, technology_categories: [] };
@@ -198,6 +219,7 @@ IMPORTANT FORMATTING RULES:
 - Start a NEW paragraph after each sentence
 - DO NOT use markdown formatting (no **, no ##, no lists)
 - DO NOT use numbered or bulleted lists
+- DO NOT use hyphens in compound words (write "offgrid" not "off-grid", "realtime" not "real-time", "highspeed" not "high-speed", etc.)
 - Keep it conversational and easy to read
 - Maximum 200 words
 
@@ -221,7 +243,7 @@ Start with "Based on your described usage, here are some technology concepts to 
     
     if (explanationResponse.ok) {
       const explanationData = await explanationResponse.json();
-      explanation = explanationData.choices[0].message.content;
+      explanation = removeHyphensFromContent(explanationData.choices[0].message.content);
     }
 
     // Log interaction
