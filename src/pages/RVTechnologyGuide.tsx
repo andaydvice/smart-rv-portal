@@ -62,6 +62,19 @@ const RVTechnologyGuide = () => {
         {/* Sticky Navigation */}
         <RVTechNavigation />
 
+        {/* Page Indicator */}
+        <section className="py-4 px-4 bg-[#151A22]/50 border-b border-[#5B9BD5]/20">
+          <Container>
+            <div className="flex items-center justify-end max-w-6xl mx-auto">
+              <div className="flex items-center gap-2 text-xs text-[#E2E8FF]">
+                <span className="px-3 py-1 bg-[#5B9BD5]/20 rounded-full border border-[#5B9BD5]/40">
+                  Page 1 of 3
+                </span>
+              </div>
+            </div>
+          </Container>
+        </section>
+
         {/* Content Summary */}
         <RVTechSummary />
 
