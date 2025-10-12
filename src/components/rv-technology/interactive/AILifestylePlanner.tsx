@@ -270,7 +270,7 @@ export const AILifestylePlanner: React.FC = () => {
               <SelectValue placeholder="Select your primary RV usage" />
             </SelectTrigger>
             <SelectContent className="bg-[#131a2a] border border-[#1a202c] shadow-lg z-50">
-              <SelectItem value="full-time-living" className="text-white hover:bg-[#1a202c] focus:bg-[#1a202c]">Full time living</SelectItem>
+              <SelectItem value="full-time-living" className="text-white hover:bg-[#1a202c] focus:bg-[#1a202c]">Fulltime living</SelectItem>
               <SelectItem value="extended-travel" className="text-white hover:bg-[#1a202c] focus:bg-[#1a202c]">Extended travel (months)</SelectItem>
               <SelectItem value="seasonal-camping" className="text-white hover:bg-[#1a202c] focus:bg-[#1a202c]">Seasonal camping</SelectItem>
               <SelectItem value="weekend-trips" className="text-white hover:bg-[#1a202c] focus:bg-[#1a202c]">Weekend trips</SelectItem>
@@ -288,7 +288,7 @@ export const AILifestylePlanner: React.FC = () => {
               <SelectValue placeholder="Select travel frequency" />
             </SelectTrigger>
             <SelectContent className="bg-[#131a2a] border border-[#1a202c] shadow-lg z-50">
-              <SelectItem value="full-time" className="text-white hover:bg-[#1a202c] focus:bg-[#1a202c]">Full time (year round)</SelectItem>
+              <SelectItem value="full-time" className="text-white hover:bg-[#1a202c] focus:bg-[#1a202c]">Fulltime (year round)</SelectItem>
               <SelectItem value="monthly" className="text-white hover:bg-[#1a202c] focus:bg-[#1a202c]">Monthly trips</SelectItem>
               <SelectItem value="seasonal" className="text-white hover:bg-[#1a202c] focus:bg-[#1a202c]">Seasonal (spring/summer)</SelectItem>
               <SelectItem value="weekends" className="text-white hover:bg-[#1a202c] focus:bg-[#1a202c]">Weekends and holidays</SelectItem>

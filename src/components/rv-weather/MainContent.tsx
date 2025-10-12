@@ -166,7 +166,7 @@ const MainContent = () => {
               </li>
               <li className="flex items-start">
                 <div className="min-w-3 h-3 mt-1.5 rounded-full bg-[#5B9BD5] flex-shrink-0"></div>
-                <span className="ml-2 text-sm text-[#E2E8FF]">Use RV-specific antifreeze where needed</span>
+                <span className="ml-2 text-sm text-[#E2E8FF]">Use RV specific antifreeze where needed</span>
               </li>
             </ul>
           </div>

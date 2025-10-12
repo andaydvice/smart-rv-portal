@@ -215,7 +215,7 @@ const RVEmergencyCenter = () => {
                 url: 'https://goodsam.com',
                 title: 'Good Sam Emergency Roadside',
                 description: 'America\'s most trusted RV emergency service with 24/7 roadside assistance and technical support',
-                features: ['24/7 Emergency Response', 'Nationwide Coverage', 'RV-Specific Services', 'Towing & Recovery'],
+                features: ['24/7 Emergency Response', 'Nationwide Coverage', 'RV Specific Services', 'Towing & Recovery'],
                 buttonText: 'Get Emergency Coverage'
               },
               {

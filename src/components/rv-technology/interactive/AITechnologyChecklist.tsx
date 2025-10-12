@@ -762,7 +762,7 @@ export const AITechnologyChecklist: React.FC = () => {
               <Textarea
                 value={userInput}
                 onChange={(e) => setUserInput(e.target.value)}
-                placeholder="Example: We plan to travel full-time and work remotely from the RV. We'll stay in both campgrounds and boondock frequently. I need reliable internet, good power management for my equipment, and want to monitor systems while away from the RV..."
+                placeholder="Example: We plan to travel fulltime and work remotely from the RV. We'll stay in both campgrounds and boondock frequently. I need reliable internet, good power management for my equipment, and want to monitor systems while away from the RV..."
                 className="min-h-32 bg-[#151A22] border-[#1a202c] text-white placeholder-[#E2E8FF]/50"
               />
             </div>

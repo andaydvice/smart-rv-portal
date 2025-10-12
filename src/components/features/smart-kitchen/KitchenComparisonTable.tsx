@@ -56,12 +56,12 @@ const KitchenComparisonTable = () => {
             <TableRow className="border-b border-gray-700 hover:bg-gray-700/30">
               <TableCell className="p-4 text-gray-300">Water System</TableCell>
               <TableCell className="p-4 text-gray-300">Basic plumbing with manual monitoring</TableCell>
-              <TableCell className="p-4 text-blue-400">Real-time water usage tracking and leak detection</TableCell>
+              <TableCell className="p-4 text-blue-400">Realtime water usage tracking and leak detection</TableCell>
             </TableRow>
             <TableRow className="border-b border-gray-700 hover:bg-gray-700/30">
               <TableCell className="p-4 text-gray-300">Energy Usage</TableCell>
               <TableCell className="p-4 text-gray-300">Difficult to monitor</TableCell>
-              <TableCell className="p-4 text-blue-400">Real-time energy consumption tracking and optimization</TableCell>
+              <TableCell className="p-4 text-blue-400">Realtime energy consumption tracking and optimization</TableCell>
             </TableRow>
             <TableRow className="hover:bg-gray-700/30">
               <TableCell className="p-4 text-gray-300">Convenience</TableCell>

@@ -9,12 +9,12 @@ const RVAppsHub = () => {
     {
       icon: Navigation,
       title: "Navigation & GPS",
-      description: "RV-safe routing and trip planning",
+      description: "RV safe routing and trip planning",
       apps: [
-        "RV-specific GPS navigation",
+        "RV specific GPS navigation",
         "Trip planning tools", 
         "Campground databases",
-        "Real-time traffic updates"
+        "Realtime traffic updates"
       ]
     },
     {
@@ -155,7 +155,7 @@ const RVAppsHub = () => {
                   </li>
                   <li className="flex items-start">
                     <span className="text-green-400 mr-2">✓</span>
-                    RV-specific routing that considers height and weight restrictions
+                    RV specific routing that considers height and weight restrictions
                   </li>
                   <li className="flex items-start">
                     <span className="text-green-400 mr-2">✓</span>

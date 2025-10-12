@@ -102,7 +102,7 @@ const Products = () => {
             >
               <h3 className="text-2xl font-bold text-white mb-4">Essential Gear</h3>
               <p className="text-gray-300 mb-6">
-                High-quality accessories and equipment for comfort, safety, and convenience.
+                High quality accessories and equipment for comfort, safety, and convenience.
               </p>
               <ul className="text-gray-400 space-y-2">
                 <li>• Solar power systems</li>

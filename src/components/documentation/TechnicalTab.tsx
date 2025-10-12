@@ -42,7 +42,7 @@ const TechnicalTab = () => {
                 The system is powered by a Dual-core ARM processor running at 2.0 GHz per core, specifically designed for RV operations in extreme temperatures from -20°C to 60°C.
               </p>
               <p>
-                This processor balances performance with power efficiency, essential for both plugged-in and off-grid operation.
+                This processor balances performance with power efficiency, essential for both pluggedin and offgrid operation.
               </p>
               <p>
                 Memory and storage include 8GB RAM to ensure smooth operation of multiple systems simultaneously.
@@ -79,7 +79,7 @@ const TechnicalTab = () => {
                 The custom RV operating system is built on a Linux foundation, specifically engineered for RV operations.
               </p>
               <p>
-                It includes an intuitive dashboard interface and intelligent power management features for extended off-grid use.
+                It includes an intuitive dashboard interface and intelligent power management features for extended offgrid use.
               </p>
               <p>
                 Security is handled through continuous system monitoring and threat detection.

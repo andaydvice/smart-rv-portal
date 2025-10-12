@@ -111,7 +111,7 @@ const Troubleshooting = () => {
                     url: 'https://goodsam.com',
                     title: 'Good Sam Emergency Roadside',
                     description: 'Nation\'s most trusted RV roadside assistance with 24/7 emergency support and technical troubleshooting',
-                    features: ['24/7 Emergency Support', 'Technical Phone Support', 'Nationwide Coverage', 'RV-Specific Services'],
+                    features: ['24/7 Emergency Support', 'Technical Phone Support', 'Nationwide Coverage', 'RV Specific Services'],
                     buttonText: 'Get Emergency Coverage'
                   },
                   {

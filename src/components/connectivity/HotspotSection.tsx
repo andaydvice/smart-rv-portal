@@ -51,8 +51,8 @@ export const HotspotSection = () => {
             <h4 className="text-lg font-medium text-blue-200 mb-2">GL.iNet Beryl</h4>
             <p className="text-sm mb-3">Best For: Privacy-focused users, tech enthusiasts</p>
             <ul className="space-y-2 text-sm list-disc list-inside">
-              <li>Built-in VPN support</li>
-              <li>Open-source firmware for customization</li>
+              <li>Builtin VPN support</li>
+              <li>Opensource firmware for customization</li>
               <li>Tor network compatibility</li>
               <li>Advanced security features</li>
             </ul>

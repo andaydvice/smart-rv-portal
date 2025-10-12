@@ -77,16 +77,16 @@ async function loadFeatureDatabase() {
         { id: 'satellite-internet', name: 'Satellite Internet Ready', keywords: ['starlink', 'satellite', 'remote', 'internet'], education: 'Mounting and power provisions for satellite internet systems' }
       ],
       power: [
-        { id: 'solar-ready', name: 'Solar Panel Ready', keywords: ['solar', 'green', 'eco', 'battery', 'boondocking'], education: 'Pre-wiring and mounting points for solar panel installation' },
-        { id: 'lithium-battery', name: 'Lithium Battery System', keywords: ['battery', 'power', 'lightweight', 'fast charging'], education: 'Advanced battery technology for extended off-grid capability' },
-        { id: 'inverter-system', name: 'Pure Sine Wave Inverter', keywords: ['power', 'appliances', '120v', 'electronics'], education: 'Converts battery power to household-compatible AC power' }
+        { id: 'solar-ready', name: 'Solar Panel Ready', keywords: ['solar', 'green', 'eco', 'battery', 'boondocking'], education: 'Prewiring and mounting points for solar panel installation' },
+        { id: 'lithium-battery', name: 'Lithium Battery System', keywords: ['battery', 'power', 'lightweight', 'fast charging'], education: 'Advanced battery technology for extended offgrid capability' },
+        { id: 'inverter-system', name: 'Pure Sine Wave Inverter', keywords: ['power', 'appliances', '120v', 'electronics'], education: 'Converts battery power to household compatible AC power' }
       ],
       comfort: [
         { id: 'climate-control', name: 'Smart Climate Control', keywords: ['temperature', 'comfort', 'hvac', 'energy efficient'], education: 'Automated temperature management for optimal comfort and efficiency' },
         { id: 'led-lighting', name: 'LED Lighting System', keywords: ['lights', 'energy', 'efficient', 'bright'], education: 'Energy-efficient lighting throughout the RV' }
       ],
       safety: [
-        { id: 'monitoring-system', name: 'RV System Monitor', keywords: ['monitor', 'alerts', 'safety', 'systems'], education: 'Real-time monitoring of RV systems and alerts' },
+        { id: 'monitoring-system', name: 'RV System Monitor', keywords: ['monitor', 'alerts', 'safety', 'systems'], education: 'Realtime monitoring of RV systems and alerts' },
         { id: 'backup-camera', name: 'Backup Camera System', keywords: ['safety', 'driving', 'camera', 'visibility'], education: 'Enhanced visibility for safe maneuvering' }
       ]
     };

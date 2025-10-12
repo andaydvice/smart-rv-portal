@@ -5,7 +5,7 @@ const features = [
   {
     icon: Car,
     title: "Smart Navigation",
-    description: "AI-powered route planning and real-time traffic updates",
+    description: "AI powered route planning and realtime traffic updates",
     image: "https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07",
   },
   {

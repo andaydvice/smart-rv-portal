@@ -16,7 +16,7 @@ export const AFFILIATE_VIDEO_CONFIG: Record<string, VideoConfig> = {
   'power-management-demo': {
     id: 'power-management-demo',
     title: 'Smart Power Management Demo',
-    description: 'Demonstrates real-time battery monitoring and power optimization preventing costly dead battery situations',
+    description: 'Demonstrates realtime battery monitoring and power optimization preventing costly dead battery situations',
     priority: 'high',
     placement: ['Power Calculator Results'],
     affiliatePartners: ['RV Life', 'Good Sam'],

@@ -70,7 +70,7 @@ const lifestyleScenarios: LifestyleScenario[] = [
         features: [
           'Large smart TV with streaming capabilities',
           'Gaming console compatibility',
-          'High-quality sound system'
+          'High quality sound system'
         ]
       },
       {
@@ -131,13 +131,13 @@ const lifestyleScenarios: LifestyleScenario[] = [
     rvSuggestions: [
       'Class B vans with solar packages',
       'Truck campers for remote access',
-      'Small travel trailers with off grid packages'
+      'Small travel trailers with offgrid packages'
     ],
     rvtFilter: 'https://www.rvt.com/buy/'
   },
   {
     id: 'full-time',
-    title: 'Full Time Living',
+    title: 'Fulltime Living',
     description: 'Make your RV a comfortable permanent home with residential quality features',
     icon: <Home className="h-8 w-8" />,
     techNeeds: [

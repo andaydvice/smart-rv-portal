@@ -63,7 +63,7 @@ const SeasonalConsiderations = () => {
           </li>
           <li className="flex items-start">
             <span className="text-[#5B9BD5] mr-2">•</span>
-            <span>Use RV-specific antifreeze in plumbing systems</span>
+            <span>Use RV specific antifreeze in plumbing systems</span>
           </li>
           <li className="flex items-start">
             <span className="text-[#5B9BD5] mr-2">•</span>

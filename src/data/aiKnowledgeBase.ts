@@ -92,7 +92,7 @@ export const RV_TECH_KNOWLEDGE_BASE = {
     smart_monitoring: {
       concept: "Digital systems monitor and control various RV systems remotely.",
       educational_points: [
-        "Real-time monitoring helps prevent problems",
+        "Realtime monitoring helps prevent problems",
         "Remote control adds convenience and security",
         "Integration varies by manufacturer and aftermarket options",
         "Learning curve varies by technical comfort level"
@@ -126,7 +126,7 @@ export const RV_TECH_KNOWLEDGE_BASE = {
     },
     boondocking: {
       technology_needs: [
-        "Adequate battery capacity for extended off-grid periods",
+        "Adequate battery capacity for extended offgrid periods",
         "Solar or generator power generation",
         "Water conservation monitoring",
         "Efficient appliances to minimize power consumption"

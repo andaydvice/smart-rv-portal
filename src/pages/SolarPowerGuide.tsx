@@ -256,13 +256,13 @@ const SolarPowerGuide = () => {
             <TabsContent value="batteries">
               <OptimizedAffiliateGrid
                 title="🔋 Battery Storage & Power Solutions"
-                subtitle="High-quality battery systems and power management solutions for reliable RV solar energy storage."
+                subtitle="High quality battery systems and power management solutions for reliable RV solar energy storage."
                 partners={[
                   {
                     name: 'A1 Solar Store',
                     url: 'https://a1solarstore.com',
                     title: 'Premium Battery Banks & Power Stations',
-                    description: 'High-capacity lithium battery banks and portable power stations designed for serious off-grid RV living.',
+                    description: 'High-capacity lithium battery banks and portable power stations designed for serious offgrid RV living.',
                     features: ['Lithium Battery Banks', 'Portable Power Stations', 'High Capacity Storage', 'Off-Grid Ready', '180-Day Cookie'],
                     buttonText: 'Shop A1 Battery Systems'
                   },
