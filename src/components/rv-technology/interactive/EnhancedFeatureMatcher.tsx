@@ -6,6 +6,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Badge } from '@/components/ui/badge';
 import { supabase } from '@/integrations/supabase/client';
+import { FeatureMatcherTextParser } from './FeatureMatcherTextParser';
 
 interface MatchedFeature {
   id: string;
@@ -123,7 +124,7 @@ export const EnhancedFeatureMatcher = () => {
           <div className="space-y-6">
             <div className="space-y-3">
               <h3 className="text-white font-semibold">Usage Analysis:</h3>
-              <p className="text-connectivity-lightText">{analysis.primary_usage}</p>
+              <FeatureMatcherTextParser text={analysis.primary_usage} className="text-white/90" />
               
               {analysis.keywords.length > 0 && (
                 <div>
@@ -142,9 +143,9 @@ export const EnhancedFeatureMatcher = () => {
             {explanation && (
               <div className="space-y-3">
                 <h3 className="text-white font-semibold">Educational Insights:</h3>
-                <div className="bg-gray-800/50 p-4 rounded-lg">
-                  <p className="text-connectivity-lightText">{explanation}</p>
-                </div>
+            <div className="bg-gray-800/50 p-4 rounded-lg">
+              <FeatureMatcherTextParser text={explanation} className="text-white/90" />
+            </div>
               </div>
             )}
 
