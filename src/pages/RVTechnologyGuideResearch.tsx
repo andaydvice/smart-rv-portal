@@ -14,6 +14,7 @@ import rvTechnologyPlanningImage from '@/assets/rv-technology-planning.png';
 import rvTechnologyDecisionsImage from '@/assets/rv-technology-decisions.png';
 import { BlogPostImage } from '@/components/blog/post/BlogPostImage';
 import { ScrollToTopButton } from '@/components/rv-technology/ScrollToTopButton';
+import RVTechnologyHeader from '@/components/rv-technology/RVTechnologyHeader';
 
 const RVTechnologyGuideResearch = () => {
   return (
@@ -56,6 +57,9 @@ const RVTechnologyGuideResearch = () => {
             </div>
           </Container>
         </section>
+
+        {/* Hero Header */}
+        <RVTechnologyHeader />
 
         {/* Technology Trade-offs */}
         <section id="technology-tradeoffs" className="py-20 px-4 bg-gradient-to-br from-[#151A22]/60 to-[#091020]/40 relative overflow-hidden">
