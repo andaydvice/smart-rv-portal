@@ -60,7 +60,7 @@ const GoogleMapView: React.FC<GoogleMapViewProps> = ({
     });
   }, [apiKey]);
   
-  const { isLoaded, error } = useGoogleMaps({ apiKey });
+  const { isLoaded, error, detailedError } = useGoogleMaps({ apiKey });
 
   // Update map center and zoom when selectedState changes
   useEffect(() => {
@@ -145,26 +145,108 @@ const GoogleMapView: React.FC<GoogleMapViewProps> = ({
   };
 
   if (error || !apiKey) {
-    const errorMsg = !apiKey ? 'Google Maps API key missing' : error;
     return (
-      <div className="w-full h-full flex items-center justify-center bg-[#080F1F] text-white p-4 rounded-lg">
-        <div className="text-center space-y-4">
-          <p className="text-red-400">{errorMsg}</p>
-          <div className="text-sm text-gray-400">
-            <p>Possible solutions:</p>
-            <ul className="list-disc list-inside mt-2 space-y-1">
-              <li>Set VITE_GOOGLE_MAPS_API_KEY environment variable</li>
-              <li>Add current domain to API key restrictions</li>
-              <li>Verify API key has Maps JavaScript API enabled</li>
-              <li>Check billing is enabled in Google Cloud Console</li>
-            </ul>
+      <div className="w-full h-full flex items-center justify-center bg-[#080F1F] text-white p-6 rounded-lg border-2 border-red-500/30">
+        <div className="max-w-2xl space-y-6">
+          {/* Error Header */}
+          <div className="text-center space-y-2">
+            <div className="inline-flex items-center justify-center w-16 h-16 bg-red-500/20 rounded-full mb-2">
+              <svg className="w-8 h-8 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+              </svg>
+            </div>
+            <h3 className="text-xl font-bold text-red-400">Google Maps Failed to Load</h3>
+            <p className="text-gray-300">{error || 'Unknown error occurred'}</p>
           </div>
-          <button 
-            onClick={() => window.location.reload()} 
-            className="px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors"
-          >
-            Retry Loading Map
-          </button>
+
+          {/* Detailed Error Info */}
+          {detailedError && (
+            <div className="bg-[#151A22] rounded-lg p-4 space-y-3 border border-[#5B9BD5]/20">
+              <div className="grid grid-cols-2 gap-3 text-sm">
+                <div>
+                  <span className="text-gray-400">Error Type:</span>
+                  <span className="ml-2 text-white font-mono">{detailedError.type}</span>
+                </div>
+                <div>
+                  <span className="text-gray-400">Current Domain:</span>
+                  <span className="ml-2 text-white font-mono">{detailedError.hostname}</span>
+                </div>
+                <div>
+                  <span className="text-gray-400">API Key:</span>
+                  <span className="ml-2 text-white font-mono">
+                    {detailedError.apiKeyPresent ? '✓ Present' : '✗ Missing'}
+                  </span>
+                </div>
+                <div>
+                  <span className="text-gray-400">API Key Value:</span>
+                  <span className="ml-2 text-white font-mono text-xs">
+                    {apiKey ? apiKey.substring(0, 20) + '...' : 'Not set'}
+                  </span>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Solutions */}
+          <div className="bg-[#151A22] rounded-lg p-4 space-y-3 border border-yellow-500/30">
+            <h4 className="font-semibold text-yellow-400 flex items-center gap-2">
+              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              How to Fix This
+            </h4>
+            <ol className="list-decimal list-inside space-y-2 text-sm text-gray-300">
+              <li>
+                <strong className="text-white">Enable Maps JavaScript API</strong>
+                <p className="ml-5 mt-1 text-xs text-gray-400">
+                  Go to APIs & Services → Library → Search "Maps JavaScript API" → Enable
+                </p>
+              </li>
+              <li>
+                <strong className="text-white">Add Domain to API Key Restrictions</strong>
+                <p className="ml-5 mt-1 text-xs text-gray-400">
+                  Add: <code className="bg-[#080F1F] px-1 py-0.5 rounded">*.lovable.app/*</code>, 
+                  <code className="bg-[#080F1F] px-1 py-0.5 rounded ml-1">*.lovable.dev/*</code>, 
+                  <code className="bg-[#080F1F] px-1 py-0.5 rounded ml-1">localhost:*</code>
+                </p>
+              </li>
+              <li>
+                <strong className="text-white">Enable Billing</strong>
+                <p className="ml-5 mt-1 text-xs text-gray-400">
+                  Google Maps requires billing to be enabled (includes free tier)
+                </p>
+              </li>
+              <li>
+                <strong className="text-white">Check API Quotas</strong>
+                <p className="ml-5 mt-1 text-xs text-gray-400">
+                  Verify you haven't exceeded daily API limits
+                </p>
+              </li>
+            </ol>
+          </div>
+
+          {/* Action Buttons */}
+          <div className="flex gap-3 justify-center">
+            <a
+              href="https://console.cloud.google.com/google/maps-apis/credentials"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-4 py-2 bg-[#5B9BD5] hover:bg-[#4B8FE3] text-white rounded-lg transition-colors font-medium"
+            >
+              Open Google Cloud Console
+            </a>
+            <button 
+              onClick={() => window.location.reload()} 
+              className="px-4 py-2 bg-[#151A22] hover:bg-[#1d2434] text-white border border-[#5B9BD5]/40 rounded-lg transition-colors"
+            >
+              Retry Loading Map
+            </button>
+          </div>
+
+          {/* Fallback Notice */}
+          <div className="text-center text-xs text-gray-500">
+            <p>The app will automatically use Mapbox as a fallback map provider</p>
+          </div>
         </div>
       </div>
     );
