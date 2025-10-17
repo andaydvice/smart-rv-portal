@@ -1,13 +1,13 @@
 import React from 'react';
 import { PreloadedHeaderImage } from '@/components/ui/PreloadedHeaderImage';
-import rvTechHeaderImage from '@/assets/rv-technology-guide-header.jpg';
+import rvTechHeaderImage from '@/assets/rv-technology-tradeoffs-header.jpg';
 
 const RVTechnologyHeader = () => {
   return (
     <div className="relative w-full h-[600px] md:h-[70vh] max-h-[700px] overflow-hidden">
       <PreloadedHeaderImage 
         src={rvTechHeaderImage}
-        alt="Modern RV interior with advanced technology features and smart displays"
+        alt="Modern RV cockpit with advanced technology dashboard overlooking scenic mountain landscape, representing technology tradeoffs in RV decision-making"
         className="w-full h-full object-cover"
         width={1920}
         height={800}
