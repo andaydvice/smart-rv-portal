@@ -69,7 +69,7 @@ const RVTechnologyGuideResearch = () => {
                   <div className="h-px bg-gradient-to-r from-transparent via-[#5B9BD5] to-transparent flex-1"></div>
                 </div>
                 <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-white to-[#E2E8FF] bg-clip-text text-transparent">
-                  Understanding Technology Trade-offs
+                  Understanding Technology Tradeoffs
                 </h2>
                 <p className="text-lg text-[#E2E8FF]/80 max-w-2xl mx-auto">
                   Every technology decision involves balancing competing priorities
