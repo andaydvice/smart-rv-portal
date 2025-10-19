@@ -5,6 +5,7 @@ import { RelatedTools } from '@/components/rv-technology/RelatedTools';
 import { availableTools } from '@/lib/toolsData';
 import intelligentRvFinderHero from '@/assets/intelligent-rv-finder-hero.jpg';
 import IntelligentRVFinderComponent from '@/components/rv-technology/interactive/IntelligentRVFinder';
+import AffiliateDisclosure from '@/components/affiliate/AffiliateDisclosure';
 
 const IntelligentRVFinder = () => {
   useEffect(() => {
@@ -65,6 +66,10 @@ const IntelligentRVFinder = () => {
           </div>
 
           <RelatedTools tools={relatedTools} currentToolId="intelligent-rv-finder" />
+
+          <div className="max-w-6xl mx-auto mt-8">
+            <AffiliateDisclosure compact={true} />
+          </div>
         </div>
       </div>
     </>

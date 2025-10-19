@@ -5,6 +5,7 @@ import { RelatedTools } from '@/components/rv-technology/RelatedTools';
 import { EnhancedFeatureMatcher } from '@/components/rv-technology/interactive/EnhancedFeatureMatcher';
 import { availableTools } from '@/lib/toolsData';
 import aiEnhancedFeatureMatcherHero from '@/assets/ai-enhanced-feature-matcher-hero.jpg';
+import AffiliateDisclosure from '@/components/affiliate/AffiliateDisclosure';
 
 const FeatureMatcher: React.FC = () => {
   useEffect(() => {
@@ -50,6 +51,10 @@ const FeatureMatcher: React.FC = () => {
           
           <div className="max-w-6xl mx-auto mt-12">
             <RelatedTools tools={availableTools} currentToolId="feature-matcher" />
+          </div>
+
+          <div className="max-w-6xl mx-auto mt-8">
+            <AffiliateDisclosure compact={true} />
           </div>
         </div>
       </div>

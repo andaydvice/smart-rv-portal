@@ -10,6 +10,7 @@ import rvTechnologyPlanningImage from '@/assets/rv-technology-planning.png';
 import { useToolAccess } from '@/hooks/useToolAccess';
 import { QueryCounter } from '@/components/tools/QueryCounter';
 import { ToolAccessGate } from '@/components/tools/ToolAccessGate';
+import AffiliateDisclosure from '@/components/affiliate/AffiliateDisclosure';
 
 const ReadinessAssessment: React.FC = () => {
   const navigate = useNavigate();
@@ -76,10 +77,14 @@ const ReadinessAssessment: React.FC = () => {
           <div className="max-w-6xl mx-auto mt-12">
             <RelatedTools tools={availableTools} currentToolId="readiness-assessment" />
           </div>
+
+          <div className="max-w-6xl mx-auto mt-8">
+            <AffiliateDisclosure compact={true} />
+          </div>
         </div>
       </div>
 
-      <ToolAccessGate 
+      <ToolAccessGate
         isOpen={showOptInModal}
         onOptIn={handleOptIn}
       />

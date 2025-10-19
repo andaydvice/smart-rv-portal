@@ -5,6 +5,7 @@ import { RelatedTools } from '@/components/rv-technology/RelatedTools';
 import { AITechnologyChecklist } from '@/components/rv-technology/interactive/AITechnologyChecklist';
 import { availableTools } from '@/lib/toolsData';
 import aiTechnologyResearchChecklistHero from '@/assets/ai-technology-research-checklist-hero.jpg';
+import AffiliateDisclosure from '@/components/affiliate/AffiliateDisclosure';
 
 const TechnologyChecklist: React.FC = () => {
   useEffect(() => {
@@ -50,6 +51,10 @@ const TechnologyChecklist: React.FC = () => {
           
           <div className="max-w-6xl mx-auto mt-12">
             <RelatedTools tools={availableTools} currentToolId="technology-checklist" />
+          </div>
+
+          <div className="max-w-6xl mx-auto mt-8">
+            <AffiliateDisclosure compact={true} />
           </div>
         </div>
       </div>

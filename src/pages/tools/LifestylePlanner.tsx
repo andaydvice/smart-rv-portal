@@ -5,6 +5,7 @@ import { RelatedTools } from '@/components/rv-technology/RelatedTools';
 import { AILifestylePlanner } from '@/components/rv-technology/interactive/AILifestylePlanner';
 import { availableTools } from '@/lib/toolsData';
 import aiLifestyleTechnologyPlannerHero from '@/assets/ai-lifestyle-technology-planner-hero.png';
+import AffiliateDisclosure from '@/components/affiliate/AffiliateDisclosure';
 
 const LifestylePlanner: React.FC = () => {
   useEffect(() => {
@@ -50,6 +51,10 @@ const LifestylePlanner: React.FC = () => {
           
           <div className="max-w-6xl mx-auto mt-12">
             <RelatedTools tools={availableTools} currentToolId="lifestyle-planner" />
+          </div>
+
+          <div className="max-w-6xl mx-auto mt-8">
+            <AffiliateDisclosure compact={true} />
           </div>
         </div>
       </div>

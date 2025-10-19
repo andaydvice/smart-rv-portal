@@ -5,6 +5,7 @@ import { RelatedTools } from '@/components/rv-technology/RelatedTools';
 import { AIEducationalConsultant } from '@/components/rv-technology/interactive/AIEducationalConsultant';
 import { availableTools } from '@/lib/toolsData';
 import aiEducationalConsultantHero from '@/assets/ai-educational-consultant-hero.png';
+import AffiliateDisclosure from '@/components/affiliate/AffiliateDisclosure';
 
 const EducationalConsultant: React.FC = () => {
   useEffect(() => {
@@ -50,6 +51,10 @@ const EducationalConsultant: React.FC = () => {
           
           <div className="max-w-6xl mx-auto mt-12">
             <RelatedTools tools={availableTools} currentToolId="educational-consultant" />
+          </div>
+
+          <div className="max-w-6xl mx-auto mt-8">
+            <AffiliateDisclosure compact={true} />
           </div>
         </div>
       </div>
