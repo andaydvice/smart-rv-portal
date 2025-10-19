@@ -66,7 +66,7 @@ const IntelligentRVFinder = () => {
           </div>
 
           <div className="max-w-6xl mx-auto mt-8">
-            <AffiliateDisclosure compact={true} />
+            <AffiliateDisclosure />
           </div>
 
           <RelatedTools tools={relatedTools} currentToolId="intelligent-rv-finder" />

@@ -75,7 +75,7 @@ const ReadinessAssessment: React.FC = () => {
           />
           
           <div className="max-w-6xl mx-auto mt-8">
-            <AffiliateDisclosure compact={true} />
+            <AffiliateDisclosure />
           </div>
 
           <div className="max-w-6xl mx-auto mt-12">
