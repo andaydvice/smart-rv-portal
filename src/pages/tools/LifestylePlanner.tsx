@@ -49,12 +49,12 @@ const LifestylePlanner: React.FC = () => {
         <div className="container mx-auto px-4">
           <AILifestylePlanner />
           
-          <div className="max-w-6xl mx-auto mt-12">
-            <RelatedTools tools={availableTools} currentToolId="lifestyle-planner" />
-          </div>
-
           <div className="max-w-6xl mx-auto mt-8">
             <AffiliateDisclosure compact={true} />
+          </div>
+
+          <div className="max-w-6xl mx-auto mt-12">
+            <RelatedTools tools={availableTools} currentToolId="lifestyle-planner" />
           </div>
         </div>
       </div>

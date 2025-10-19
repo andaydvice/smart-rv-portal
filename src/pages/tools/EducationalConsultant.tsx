@@ -49,12 +49,12 @@ const EducationalConsultant: React.FC = () => {
         <div className="container mx-auto px-4">
           <AIEducationalConsultant />
           
-          <div className="max-w-6xl mx-auto mt-12">
-            <RelatedTools tools={availableTools} currentToolId="educational-consultant" />
-          </div>
-
           <div className="max-w-6xl mx-auto mt-8">
             <AffiliateDisclosure compact={true} />
+          </div>
+
+          <div className="max-w-6xl mx-auto mt-12">
+            <RelatedTools tools={availableTools} currentToolId="educational-consultant" />
           </div>
         </div>
       </div>

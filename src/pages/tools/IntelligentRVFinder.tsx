@@ -65,11 +65,11 @@ const IntelligentRVFinder = () => {
             <IntelligentRVFinderComponent />
           </div>
 
-          <RelatedTools tools={relatedTools} currentToolId="intelligent-rv-finder" />
-
           <div className="max-w-6xl mx-auto mt-8">
             <AffiliateDisclosure compact={true} />
           </div>
+
+          <RelatedTools tools={relatedTools} currentToolId="intelligent-rv-finder" />
         </div>
       </div>
     </>
