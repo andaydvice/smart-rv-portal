@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { MessageCircle, Send, BookOpen, Shield, AlertTriangle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { ExternalLinkButton } from '@/components/ui/external-link-button';
 import { Input } from '@/components/ui/input';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Badge } from '@/components/ui/badge';
@@ -210,6 +211,53 @@ export const AIEducationalConsultant = () => {
           </Button>
         </div>
       </div>
+
+      {/* Helpful Resources - Shows after engagement */}
+      {messages.length >= 2 && (
+        <div className="mt-6">
+          <Card className="bg-gradient-to-br from-[#091020] to-[#131a2a] border border-[#5B9BD5]/30">
+            <CardContent className="p-6">
+              <div className="flex items-start gap-3 mb-4">
+                <BookOpen className="h-5 w-5 text-[#5B9BD5] mt-1 flex-shrink-0" />
+                <div>
+                  <h3 className="text-white font-semibold text-lg mb-2">
+                    Ready to See These Features in Action?
+                  </h3>
+                  <p className="text-[#E2E8FF] text-sm">
+                    Now that you understand the concepts, explore real RVs and read detailed reviews to see how these technologies work in practice.
+                  </p>
+                </div>
+              </div>
+              
+              <div className="grid gap-3">
+                <ExternalLinkButton 
+                  href="https://www.rvt.com/buy/"
+                  variant="default"
+                  className="w-full"
+                >
+                  Browse RVs by Technology Features
+                </ExternalLinkButton>
+                
+                <div className="grid md:grid-cols-2 gap-3">
+                  <ExternalLinkButton 
+                    href="https://www.rvinsider.com/"
+                    variant="outline"
+                  >
+                    Read In-Depth Reviews
+                  </ExternalLinkButton>
+                  
+                  <ExternalLinkButton 
+                    href="https://www.rvt.com/dealersearch.php"
+                    variant="outline"
+                  >
+                    Find Local Dealers
+                  </ExternalLinkButton>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      )}
 
       {/* Disclaimers at bottom */}
       <div className="mt-6 space-y-4">

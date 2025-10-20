@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Search, Wand2, AlertCircle, ExternalLink } from 'lucide-react';
+import { Search, Wand2, AlertCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { ExternalLinkButton } from '@/components/ui/external-link-button';
 import { Textarea } from '@/components/ui/textarea';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Badge } from '@/components/ui/badge';
@@ -55,9 +56,6 @@ export const EnhancedFeatureMatcher = () => {
     }
   };
 
-  const generateRVTLink = () => {
-    return "https://www.rvt.com/buy/";
-  };
 
   return (
     <Card className="w-full max-w-4xl mx-auto bg-connectivity-darkBg border-gray-700">
@@ -183,15 +181,48 @@ export const EnhancedFeatureMatcher = () => {
                   ))}
                 </div>
 
-                <div className="text-center pt-4">
-                  <Button
-                    onClick={() => window.open(generateRVTLink(), '_blank')}
-                    className="bg-[#5B9BD5] hover:bg-[#4B8FE3] text-white"
-                  >
-                    <ExternalLink className="mr-2 h-4 w-4" />
-                    Research RVs with Similar Features on RVT.com
-                  </Button>
-                </div>
+                <Card className="bg-gray-800 border-[#5B9BD5] mt-6">
+                  <CardContent className="p-6">
+                    <h3 className="text-white font-semibold text-lg mb-3">
+                      Next Steps: Research Your Options
+                    </h3>
+                    <p className="text-white/90 mb-4 text-sm">
+                      Based on your technology needs, explore these resources to find RVs with matching features.
+                    </p>
+                    <div className="grid gap-3">
+                      <ExternalLinkButton 
+                        href="https://www.rvt.com/buy/"
+                        variant="default"
+                        className="w-full"
+                      >
+                        Browse RVs with Similar Features
+                      </ExternalLinkButton>
+                      
+                      <div className="grid md:grid-cols-3 gap-3">
+                        <ExternalLinkButton 
+                          href="https://www.rvinsider.com/"
+                          variant="outline"
+                        >
+                          Read Expert Reviews
+                        </ExternalLinkButton>
+                        
+                        <ExternalLinkButton 
+                          href="https://www.rvt.com/price-checker/"
+                          variant="outline"
+                        >
+                          Check Market Prices
+                        </ExternalLinkButton>
+                        
+                        <ExternalLinkButton 
+                          href="https://www.rvt.com/dealersearch.php"
+                          variant="outline"
+                        >
+                          Find Local Dealers
+                        </ExternalLinkButton>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
               </div>
             )}
 
