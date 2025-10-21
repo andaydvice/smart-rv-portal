@@ -1,13 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Loader2, Brain, Zap, ExternalLink, Users, Info } from 'lucide-react';
+import { Loader2, Brain, Zap, ExternalLink, Users, Info, RotateCcw } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { ExternalLinkButton } from '@/components/ui/external-link-button';
+import { ProgressMessage } from '../ProgressMessage';
+import { CrossToolRecommendations } from '../CrossToolRecommendations';
 
 interface RecommendedSystem {
   category: string;
@@ -61,6 +63,7 @@ export const AILifestylePlanner: React.FC = () => {
   const [analysis, setAnalysis] = useState<LifestyleAnalysis | null>(null);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const topRef = useRef<HTMLDivElement>(null);
 
   const handleAnalyze = async () => {
     if (!requirements.rvUsage || !requirements.travelFrequency || !requirements.destinations) {
@@ -92,17 +95,36 @@ export const AILifestylePlanner: React.FC = () => {
 
   const isFormValid = requirements.rvUsage && requirements.travelFrequency && requirements.destinations;
 
+  const handleReset = () => {
+    setAnalysis(null);
+    setRequirements({
+      rvUsage: '',
+      travelFrequency: '',
+      destinations: '',
+      workRequirements: '',
+      groupSize: '',
+      comfortLevel: '',
+      techComfort: '',
+      specificNeeds: ''
+    });
+    setError(null);
+    
+    // Smooth scroll to top
+    topRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
   if (analysis) {
     return (
-      <Card className="p-8 bg-gradient-to-br from-[#091020] to-[#131a2a] border-[#1a202c] text-white">
+      <Card ref={topRef} className="p-8 bg-gradient-to-br from-[#091020] to-[#131a2a] border-[#1a202c] text-white">
         <div className="mb-6">
           <Button
-            onClick={() => { setAnalysis(null); setRequirements({ rvUsage: '', travelFrequency: '', destinations: '', workRequirements: '', groupSize: '', comfortLevel: '', techComfort: '', specificNeeds: '' }); }}
+            onClick={handleReset}
             variant="ghost"
             size="sm"
             className="text-[#60A5FA] hover:text-white mb-4"
           >
-            ← Start New Analysis
+            <RotateCcw className="h-4 w-4 mr-2" />
+            Start New Analysis
           </Button>
           
           <div className="flex items-center gap-4 mb-6">
@@ -236,16 +258,18 @@ export const AILifestylePlanner: React.FC = () => {
               size="lg"
               className="border-[#5B9BD5]/50 text-[#5B9BD5] hover:bg-[#5B9BD5]/10"
             >
-              Check Prices
+            Check Prices
             </ExternalLinkButton>
           </div>
         </div>
+
+        <CrossToolRecommendations currentToolId="lifestyle-planner" />
       </Card>
     );
   }
 
   return (
-    <Card className="p-8 bg-gradient-to-br from-[#091020] to-[#131a2a] border-[#1a202c] text-white">
+    <Card ref={topRef} className="p-8 bg-gradient-to-br from-[#091020] to-[#131a2a] border-[#1a202c] text-white">
       <div className="text-center mb-8">
         <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-[#5B9BD5] to-[#60A5FA] rounded-full mb-4">
           <Brain className="h-8 w-8 text-white" />
@@ -395,23 +419,22 @@ export const AILifestylePlanner: React.FC = () => {
         </div>
 
         {/* Analyze Button */}
-        <Button
-          onClick={handleAnalyze}
-          disabled={!isFormValid || isAnalyzing}
-          className="w-full bg-gradient-to-r from-[#5B9BD5] to-[#60A5FA] hover:from-[#4B8FE3] hover:to-[#5B9BD5] text-white font-medium py-3 disabled:opacity-50"
-        >
-          {isAnalyzing ? (
-            <>
-              <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-              Analyzing Your Lifestyle...
-            </>
-          ) : (
-            <>
-              <Brain className="h-4 w-4 mr-2" />
-              Get Personalized Technology Plan
-            </>
-          )}
-        </Button>
+        {isAnalyzing && (
+          <div className="my-6">
+            <ProgressMessage stage="analyzing" customMessage="Analyzing your lifestyle and travel plans..." />
+          </div>
+        )}
+
+        {!isAnalyzing && (
+          <Button
+            onClick={handleAnalyze}
+            disabled={!isFormValid}
+            className="w-full bg-gradient-to-r from-[#5B9BD5] to-[#60A5FA] hover:from-[#4B8FE3] hover:to-[#5B9BD5] text-white font-medium py-3 disabled:opacity-50"
+          >
+            <Brain className="h-4 w-4 mr-2" />
+            Get Personalized Technology Plan
+          </Button>
+        )}
 
         {/* Error Display */}
         {error && (

@@ -4,8 +4,10 @@ import { Button } from '@/components/ui/button';
 import { ExternalLinkButton } from '@/components/ui/external-link-button';
 import { Textarea } from '@/components/ui/textarea';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { CheckCircle, Smartphone, Settings, Star, AlertCircle, Brain, Zap } from 'lucide-react';
+import { CheckCircle, Smartphone, Settings, Star, AlertCircle, Brain, Zap, RotateCcw } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
+import { ProgressMessage } from '../ProgressMessage';
+import { CrossToolRecommendations } from '../CrossToolRecommendations';
 
 interface ToolAccessHook {
   queriesUsed: number;
@@ -173,9 +175,12 @@ export const AITechnologyReadinessAssessment: React.FC<Props> = ({ toolAccess, o
             size="lg"
             className="border-[#1a202c] text-[#E2E8FF] hover:bg-[#151A22] hover:text-[#E2E8FF]"
           >
+            <RotateCcw className="h-4 w-4 mr-2" />
             New Assessment
           </Button>
         </div>
+
+        <CrossToolRecommendations currentToolId="readiness-assessment" />
       </Card>
     );
   }
@@ -204,23 +209,22 @@ export const AITechnologyReadinessAssessment: React.FC<Props> = ({ toolAccess, o
           />
         </div>
 
-        <Button
-          onClick={handleAssessment}
-          disabled={!userInput.trim() || isAnalyzing}
-          className="w-full bg-gradient-to-r from-[#5B9BD5] to-[#60A5FA] hover:from-[#4B8FE3] hover:to-[#5B9BD5] text-lg py-6"
-        >
-          {isAnalyzing ? (
-            <>
-              <div className="animate-spin mr-2 w-5 h-5 border-2 border-white border-t-transparent rounded-full" />
-              Analyzing Your Technology Readiness...
-            </>
-          ) : (
-            <>
-              <Zap className="mr-2 h-5 w-5" />
-              Get My AI Technology Assessment
-            </>
-          )}
-        </Button>
+        {isAnalyzing && (
+          <div className="my-6">
+            <ProgressMessage stage="analyzing" customMessage="Assessing your technology readiness..." />
+          </div>
+        )}
+
+        {!isAnalyzing && (
+          <Button
+            onClick={handleAssessment}
+            disabled={!userInput.trim()}
+            className="w-full bg-gradient-to-r from-[#5B9BD5] to-[#60A5FA] hover:from-[#4B8FE3] hover:to-[#5B9BD5] text-lg py-6"
+          >
+            <Zap className="mr-2 h-5 w-5" />
+            Get My AI Technology Assessment
+          </Button>
+        )}
 
         {error && (
           <Alert className="border-red-500 bg-red-500/10">

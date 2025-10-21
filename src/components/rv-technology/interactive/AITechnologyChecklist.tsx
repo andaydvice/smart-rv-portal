@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { ExternalLinkButton } from '@/components/ui/external-link-button';
@@ -6,6 +6,8 @@ import { Textarea } from '@/components/ui/textarea';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { CheckCircle, ClipboardCheck, Download, AlertCircle, Brain, Zap } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
+import { ProgressMessage } from '../ProgressMessage';
+import { CrossToolRecommendations } from '../CrossToolRecommendations';
 
 interface ChecklistItem {
   category: string;
@@ -74,6 +76,7 @@ export const AITechnologyChecklist: React.FC = () => {
   const [isGenerating, setIsGenerating] = useState(false);
   const [result, setResult] = useState<AIChecklistResult | null>(null);
   const [error, setError] = useState('');
+  const topRef = useRef<HTMLDivElement>(null);
 
   const handleGenerate = async () => {
     if (!userInput.trim()) return;
@@ -536,11 +539,14 @@ export const AITechnologyChecklist: React.FC = () => {
     setUserInput('');
     setResult(null);
     setError('');
+    
+    // Smooth scroll to top
+    topRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
   if (result) {
     return (
-      <Card className="p-8 bg-gradient-to-br from-[#091020] to-[#131a2a] border-[#1a202c] text-white">
+      <Card ref={topRef} className="p-8 bg-gradient-to-br from-[#091020] to-[#131a2a] border-[#1a202c] text-white">
         <div className="mb-8">
           <div className="text-center mb-4">
             <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-[#5B9BD5] to-[#60A5FA] rounded-full mb-4">
@@ -720,22 +726,18 @@ export const AITechnologyChecklist: React.FC = () => {
             New Checklist
           </Button>
         </div>
+
+        <CrossToolRecommendations currentToolId="technology-checklist" />
       </Card>
     );
   }
 
   return (
-    <Card className="p-8 bg-gradient-to-br from-[#091020] to-[#131a2a] border-[#1a202c] text-white">
+    <Card ref={topRef} className="p-8 bg-gradient-to-br from-[#091020] to-[#131a2a] border-[#1a202c] text-white">
       {isGenerating ? (
-        <div className="flex flex-col items-center justify-center py-16 space-y-6">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-[#5B9BD5] to-[#60A5FA] rounded-full">
-            <div className="animate-spin w-8 h-8 border-3 border-white border-t-transparent rounded-full" />
-          </div>
-          <div className="text-center space-y-2">
-            <h3 className="text-xl font-semibold text-white">Generating Your Personal Checklist...</h3>
-            <p className="text-[#E2E8FF] text-sm">⏱️ This typically takes 20-40 seconds for detailed requirements</p>
-            <p className="text-[#E2E8FF]/70 text-xs mt-4">Analyzing your needs and creating a customized research plan</p>
-          </div>
+        <div className="py-12">
+          <ProgressMessage stage="generating" customMessage="Creating your personalized research checklist..." />
+          <p className="text-center text-[#E2E8FF]/70 text-xs mt-6">This typically takes 20 to 40 seconds</p>
         </div>
       ) : (
         <>

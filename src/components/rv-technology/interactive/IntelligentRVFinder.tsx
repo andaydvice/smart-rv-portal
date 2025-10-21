@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
@@ -6,8 +6,10 @@ import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Loader2, ExternalLink, Brain, MapPin, DollarSign, Info } from 'lucide-react';
+import { Loader2, ExternalLink, Brain, MapPin, DollarSign, Info, RotateCcw } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
+import { ProgressMessage } from '../ProgressMessage';
+import { CrossToolRecommendations } from '../CrossToolRecommendations';
 
 interface UserRequirements {
   travelStyle: string;
@@ -72,6 +74,7 @@ export const IntelligentRVFinder: React.FC = () => {
   const [recommendation, setRecommendation] = useState<RVRecommendation | null>(null);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const topRef = useRef<HTMLDivElement>(null);
 
   const handleFeatureToggle = (feature: string) => {
     setRequirements(prev => ({
@@ -117,8 +120,26 @@ export const IntelligentRVFinder: React.FC = () => {
 
   const isFormValid = requirements.travelStyle && requirements.experienceLevel && requirements.budget;
 
+  const handleReset = () => {
+    setRecommendation(null);
+    setRequirements({
+      travelStyle: '',
+      experienceLevel: '',
+      budget: '',
+      groupSize: '',
+      mustHaveFeatures: [],
+      travelDuration: '',
+      comfortLevel: '',
+      additionalRequirements: ''
+    });
+    setError(null);
+    
+    // Smooth scroll to top
+    topRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
   return (
-    <Card className="w-full max-w-4xl mx-auto bg-gradient-to-br from-[#091020] to-[#131a2a] border-[#1a202c] shadow-2xl">
+    <Card ref={topRef} className="w-full max-w-4xl mx-auto bg-gradient-to-br from-[#091020] to-[#131a2a] border-[#1a202c] shadow-2xl">
       <CardHeader className="bg-gradient-to-r from-[#091020] to-[#151A22] border-b border-[#1a202c]">
         <CardTitle className="flex items-center gap-2 text-white">
           <Brain className="h-6 w-6 text-[#5B9BD5]" />
@@ -261,23 +282,22 @@ export const IntelligentRVFinder: React.FC = () => {
         </div>
 
         {/* Analyze Button */}
-        <Button
-          onClick={handleAnalyze}
-          disabled={!isFormValid || isAnalyzing}
-          className="w-full bg-gradient-to-r from-[#5B9BD5] to-[#60A5FA] hover:from-[#4B8FE3] hover:to-[#5B9BD5] text-white font-medium py-3 disabled:opacity-50"
-        >
-          {isAnalyzing ? (
-            <>
-              <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-              Analyzing Your Requirements...
-            </>
-          ) : (
-            <>
-              <Brain className="h-4 w-4 mr-2" />
-              Find My Perfect RV
-            </>
-          )}
-        </Button>
+        {isAnalyzing && (
+          <div className="my-6">
+            <ProgressMessage stage="analyzing" customMessage="Finding your perfect RV match..." />
+          </div>
+        )}
+
+        {!isAnalyzing && (
+          <Button
+            onClick={handleAnalyze}
+            disabled={!isFormValid}
+            className="w-full bg-gradient-to-r from-[#5B9BD5] to-[#60A5FA] hover:from-[#4B8FE3] hover:to-[#5B9BD5] text-white font-medium py-3 disabled:opacity-50"
+          >
+            <Brain className="h-4 w-4 mr-2" />
+            Find My Perfect RV
+          </Button>
+        )}
 
         {/* Error Display */}
         {error && (
@@ -290,7 +310,18 @@ export const IntelligentRVFinder: React.FC = () => {
         {recommendation && (
           <div className="space-y-4 mt-6">
             <div className="border-t border-[#1a202c] pt-6">
-              <h3 className="text-xl font-semibold mb-4 text-white">Your Personalized RV Recommendations</h3>
+              <div className="flex justify-between items-center mb-4">
+                <h3 className="text-xl font-semibold text-white">Your Personalized RV Recommendations</h3>
+                <Button
+                  onClick={handleReset}
+                  variant="outline"
+                  size="sm"
+                  className="border-[#1a202c] text-[#E2E8FF] hover:bg-[#151A22]"
+                >
+                  <RotateCcw className="h-4 w-4 mr-2" />
+                  New Search
+                </Button>
+              </div>
               
               {/* Main Recommendation */}
               <Card className="mb-4 bg-[#091020] border-[#5B9BD5]/30">
@@ -453,6 +484,8 @@ export const IntelligentRVFinder: React.FC = () => {
                   <div className="text-white leading-relaxed whitespace-pre-line">{recommendation.budgetConsiderations}</div>
                 </CardContent>
               </Card>
+
+              <CrossToolRecommendations currentToolId="intelligent-rv-finder" />
             </div>
           </div>
         )}

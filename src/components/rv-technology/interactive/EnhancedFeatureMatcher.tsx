@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Search, Wand2, AlertCircle } from 'lucide-react';
+import React, { useState, useRef } from 'react';
+import { Search, Wand2, AlertCircle, RotateCcw } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { ExternalLinkButton } from '@/components/ui/external-link-button';
@@ -8,6 +8,8 @@ import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Badge } from '@/components/ui/badge';
 import { supabase } from '@/integrations/supabase/client';
 import { FeatureMatcherTextParser } from './FeatureMatcherTextParser';
+import { ProgressMessage } from '../ProgressMessage';
+import { CrossToolRecommendations } from '../CrossToolRecommendations';
 
 interface MatchedFeature {
   id: string;
@@ -30,6 +32,7 @@ export const EnhancedFeatureMatcher = () => {
   const [matchedFeatures, setMatchedFeatures] = useState<MatchedFeature[]>([]);
   const [explanation, setExplanation] = useState('');
   const [error, setError] = useState('');
+  const topRef = useRef<HTMLDivElement>(null);
 
   const handleAnalyzeDescription = async () => {
     if (!description.trim()) return;
@@ -56,9 +59,19 @@ export const EnhancedFeatureMatcher = () => {
     }
   };
 
+  const handleReset = () => {
+    setDescription('');
+    setAnalysis(null);
+    setMatchedFeatures([]);
+    setExplanation('');
+    setError('');
+    
+    // Smooth scroll to top
+    topRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
 
   return (
-    <Card className="w-full max-w-4xl mx-auto bg-connectivity-darkBg border-gray-700">
+    <Card ref={topRef} className="w-full max-w-4xl mx-auto bg-connectivity-darkBg border-gray-700">
       <CardHeader>
         <div className="flex items-center gap-2">
           <Wand2 className="h-6 w-6 text-connectivity-accent" />
@@ -118,8 +131,25 @@ export const EnhancedFeatureMatcher = () => {
           </Alert>
         )}
 
+        {isAnalyzing && (
+          <ProgressMessage stage="analyzing" customMessage="Matching features to your needs..." />
+        )}
+
         {analysis && (
           <div className="space-y-6">
+            <div className="flex justify-between items-center">
+              <h3 className="text-white font-semibold text-xl">Your Results</h3>
+              <Button
+                onClick={handleReset}
+                variant="outline"
+                size="sm"
+                className="border-[#1a202c] text-[#E2E8FF] hover:bg-[#151A22]"
+              >
+                <RotateCcw className="h-4 w-4 mr-2" />
+                New Analysis
+              </Button>
+            </div>
+
             <div className="space-y-3">
               <h3 className="text-white font-semibold">Usage Analysis:</h3>
               <FeatureMatcherTextParser text={analysis.primary_usage} className="text-white/90" />
@@ -223,6 +253,8 @@ export const EnhancedFeatureMatcher = () => {
                     </div>
                   </CardContent>
                 </Card>
+
+                <CrossToolRecommendations currentToolId="feature-matcher" />
               </div>
             )}
 

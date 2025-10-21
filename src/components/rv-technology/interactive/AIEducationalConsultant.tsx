@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { MessageCircle, Send, BookOpen, Shield, AlertTriangle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -7,6 +7,9 @@ import { Input } from '@/components/ui/input';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Badge } from '@/components/ui/badge';
 import { supabase } from '@/integrations/supabase/client';
+import { StarterQuestions } from '../StarterQuestions';
+import { ProgressMessage } from '../ProgressMessage';
+import { CrossToolRecommendations } from '../CrossToolRecommendations';
 
 interface Message {
   id: string;
@@ -15,18 +18,28 @@ interface Message {
   timestamp: Date;
 }
 
+const starterQuestions = [
+  { text: "What's the difference between WiFi boosters and cellular signal boosters?" },
+  { text: "How much solar power do I need for full time RV living?" },
+  { text: "What are the pros and cons of lithium vs AGM batteries?" },
+  { text: "Do I need a pure sine wave inverter, and what size should I get?" },
+  { text: "What's the best internet solution for remote work while traveling?" }
+];
+
 export const AIEducationalConsultant = () => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const topRef = useRef<HTMLDivElement>(null);
 
-  const handleSendMessage = async () => {
-    if (!input.trim() || isLoading) return;
+  const handleSendMessage = async (questionText?: string) => {
+    const messageText = questionText || input.trim();
+    if (!messageText || isLoading) return;
 
     const userMessage: Message = {
       id: Date.now().toString(),
       role: 'user',
-      content: input.trim(),
+      content: messageText,
       timestamp: new Date()
     };
 
@@ -112,8 +125,12 @@ export const AIEducationalConsultant = () => {
     }
   };
 
+  const scrollToTop = () => {
+    topRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
   return (
-    <div className="w-full max-w-4xl mx-auto">
+    <div ref={topRef} className="w-full max-w-4xl mx-auto">
 
       {/* Full Width Chat Interface */}
       <div className="bg-gradient-to-br from-[#091020] to-[#131a2a] border border-[#1a202c] rounded-lg p-8">
@@ -124,31 +141,11 @@ export const AIEducationalConsultant = () => {
               <p className="text-xl mb-4">Welcome to your educational technology consultant!</p>
               <p className="text-lg mb-6">Ask me about RV technology concepts like solar power, connectivity options, or battery systems.</p>
               
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 max-w-2xl mx-auto">
-                <button
-                  onClick={() => setInput("How do solar panels work in RVs?")}
-                  className="text-left p-4 bg-[#151A22] border border-[#1a202c] rounded-lg hover:bg-[#1a202c] transition-colors"
-                >
-                  <span className="text-[#5B9BD5] font-medium">How do solar panels work in RVs?</span>
-                </button>
-                <button
-                  onClick={() => setInput("What are the different types of RV batteries?")}
-                  className="text-left p-4 bg-[#151A22] border border-[#1a202c] rounded-lg hover:bg-[#1a202c] transition-colors"
-                >
-                  <span className="text-[#5B9BD5] font-medium">What are the different types of RV batteries?</span>
-                </button>
-                <button
-                  onClick={() => setInput("Explain RV electrical systems basics")}
-                  className="text-left p-4 bg-[#151A22] border border-[#1a202c] rounded-lg hover:bg-[#1a202c] transition-colors"
-                >
-                  <span className="text-[#5B9BD5] font-medium">Explain RV electrical systems basics</span>
-                </button>
-                <button
-                  onClick={() => setInput("What internet options are available for RVs?")}
-                  className="text-left p-4 bg-[#151A22] border border-[#1a202c] rounded-lg hover:bg-[#1a202c] transition-colors"
-                >
-                  <span className="text-[#5B9BD5] font-medium">What internet options are available for RVs?</span>
-                </button>
+              <div className="mb-6">
+                <StarterQuestions 
+                  questions={starterQuestions}
+                  onQuestionClick={(question) => handleSendMessage(question)}
+                />
               </div>
             </div>
           )}
@@ -180,14 +177,7 @@ export const AIEducationalConsultant = () => {
           {isLoading && (
             <div className="flex justify-start">
               <div className="max-w-3xl px-6 py-4 rounded-lg bg-gray-700">
-                <div className="flex items-center space-x-2">
-                  <div className="animate-pulse flex space-x-1">
-                    <div className="w-3 h-3 bg-[#5B9BD5] rounded-full"></div>
-                    <div className="w-3 h-3 bg-[#5B9BD5] rounded-full"></div>
-                    <div className="w-3 h-3 bg-[#5B9BD5] rounded-full"></div>
-                  </div>
-                  <span className="text-base text-[#E2E8FF]">Thinking...</span>
-                </div>
+                <ProgressMessage stage="analyzing" customMessage="Researching your question..." />
               </div>
             </div>
           )}
@@ -203,7 +193,7 @@ export const AIEducationalConsultant = () => {
             className="flex-1 h-14 text-lg bg-[#151A22] border-[#1a202c] text-white placeholder-[#E2E8FF]/50"
           />
           <Button
-            onClick={handleSendMessage}
+            onClick={() => handleSendMessage()}
             disabled={!input.trim() || isLoading}
             className="h-14 px-8 bg-[#5B9BD5] hover:bg-[#4B8FE3] text-white text-lg"
           >
@@ -257,6 +247,10 @@ export const AIEducationalConsultant = () => {
             </CardContent>
           </Card>
         </div>
+      )}
+
+      {messages.length >= 2 && (
+        <CrossToolRecommendations currentToolId="educational-consultant" />
       )}
 
       {/* Disclaimers at bottom */}
