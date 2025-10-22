@@ -8,6 +8,7 @@ import { CheckCircle, ClipboardCheck, Download, AlertCircle, Brain, Zap } from '
 import { supabase } from '@/integrations/supabase/client';
 import { ProgressMessage } from '../ProgressMessage';
 import { CrossToolRecommendations } from '../CrossToolRecommendations';
+import { ShareResultsButton } from '../ShareResultsButton';
 
 interface ChecklistItem {
   category: string;
@@ -329,7 +330,7 @@ export const AITechnologyChecklist: React.FC = () => {
       }
     ];
 
-    // Technology Checklist Cards
+    // Technology Checklist Cards with Checkboxes and Notes
     const checklistCards = result.checklistItems.map(item => ({
       table: {
         widths: ['*'],
@@ -376,28 +377,65 @@ export const AITechnologyChecklist: React.FC = () => {
                   margin: [0, 0, 0, 8]
                 },
                 ...item.questions.map(q => ({
+                  columns: [
+                    {
+                      width: 15,
+                      canvas: [
+                        { type: 'rect', x: 0, y: 2, w: 10, h: 10, lineWidth: 1, lineColor: '#5B9BD5' }
+                      ]
+                    },
+                    {
+                      width: '*',
+                      table: {
+                        widths: ['*'],
+                        body: [
+                          [
+                            {
+                              stack: splitIntoParagraphs(q),
+                              fillColor: '#F0F7FF',
+                              border: [false, false, false, false]
+                            }
+                          ]
+                        ]
+                      },
+                      layout: {
+                        paddingLeft: () => 10,
+                        paddingRight: () => 10,
+                        paddingTop: () => 8,
+                        paddingBottom: () => 8,
+                        hLineWidth: () => 0,
+                        vLineWidth: () => 0
+                      }
+                    }
+                  ],
+                  margin: [0, 0, 0, 6]
+                })),
+                {
+                  canvas: [
+                    { type: 'line', x1: 0, y1: 10, x2: 465, y2: 10, lineWidth: 1, lineColor: '#E5E7EB', dash: { length: 3 } }
+                  ],
+                  margin: [0, 10, 0, 5]
+                },
+                {
+                  text: 'Notes & Comparisons:',
+                  fontSize: 10,
+                  bold: true,
+                  color: '#6B7280',
+                  margin: [0, 0, 0, 5]
+                },
+                {
                   table: {
                     widths: ['*'],
-                    body: [
-                      [
-                        {
-                          stack: splitIntoParagraphs(q),
-                          fillColor: '#F0F7FF',
-                          border: [false, false, false, false]
-                        }
-                      ]
-                    ]
+                    heights: [60],
+                    body: [[{ text: '', fillColor: '#FFFFFF' }]]
                   },
                   layout: {
-                    paddingLeft: () => 10,
-                    paddingRight: () => 10,
-                    paddingTop: () => 8,
-                    paddingBottom: () => 8,
-                    hLineWidth: () => 0,
-                    vLineWidth: () => 0
-                  },
-                  margin: [0, 0, 0, 6]
-                }))
+                    hLineWidth: () => 1,
+                    vLineWidth: () => 1,
+                    hLineColor: () => '#D1D5DB',
+                    vLineColor: () => '#D1D5DB'
+                  }
+                }
               ],
               fillColor: '#FAFBFC',
               margin: [15, 10, 15, 15]
@@ -545,15 +583,41 @@ export const AITechnologyChecklist: React.FC = () => {
   };
 
   if (result) {
+    const checklistSummary = `${result.summary}\n\nTotal Items: ${result.checklistItems.length}\nEssential: ${result.checklistItems.filter(i => i.priority === 'essential').length}, Important: ${result.checklistItems.filter(i => i.priority === 'important').length}`;
+    
     return (
       <Card ref={topRef} className="p-8 bg-gradient-to-br from-[#091020] to-[#131a2a] border-[#1a202c] text-white">
         <div className="mb-8">
-          <div className="text-center mb-4">
+          <div className="text-center mb-6">
             <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-[#5B9BD5] to-[#60A5FA] rounded-full mb-4">
               <ClipboardCheck className="h-8 w-8 text-white" />
             </div>
             <h3 className="text-2xl font-bold text-white mb-2">Your Personalized RV Technology Checklist</h3>
           </div>
+          
+          <div className="flex flex-wrap justify-center gap-3 mb-6">
+            <Button
+              onClick={generateDownload}
+              className="bg-gradient-to-r from-[#5B9BD5] to-[#60A5FA] hover:from-[#4B8FE3] hover:to-[#5B9BD5] text-white"
+            >
+              <Download className="h-4 w-4 mr-2" />
+              Download PDF
+            </Button>
+            
+            <ShareResultsButton 
+              title="My RV Technology Checklist"
+              summary={checklistSummary}
+            />
+            
+            <Button
+              onClick={resetChecklist}
+              variant="outline"
+              className="border-[#5B9BD5]/50 text-[#5B9BD5] hover:bg-[#5B9BD5]/10"
+            >
+              New Checklist
+            </Button>
+          </div>
+          
           <div className="text-[#E2E8FF] text-lg">{formatTextWithParagraphs(result.summary)}</div>
         </div>
 
@@ -675,16 +739,7 @@ export const AITechnologyChecklist: React.FC = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-          <Button 
-            onClick={generateDownload}
-            variant="outline"
-            size="lg"
-            className="border-[#1a202c] text-[#E2E8FF] hover:bg-[#151A22] hover:text-white w-full"
-          >
-            <Download className="h-4 w-4 mr-2" />
-            Download Checklist
-          </Button>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
           <ExternalLinkButton 
             href={result.searchUrls.buyUrl}
             variant="default"
@@ -717,14 +772,6 @@ export const AITechnologyChecklist: React.FC = () => {
           >
             Check Prices
           </ExternalLinkButton>
-          <Button 
-            onClick={resetChecklist}
-            variant="outline"
-            size="lg"
-            className="border-[#1a202c] text-[#E2E8FF] hover:bg-[#151A22] hover:text-white w-full"
-          >
-            New Checklist
-          </Button>
         </div>
 
         <CrossToolRecommendations currentToolId="technology-checklist" />

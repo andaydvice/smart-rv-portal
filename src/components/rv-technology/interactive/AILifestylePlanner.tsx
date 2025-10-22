@@ -5,11 +5,12 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Loader2, Brain, Zap, ExternalLink, Users, Info, RotateCcw } from 'lucide-react';
+import { Loader2, Brain, Zap, ExternalLink, Users, Info, RotateCcw, TrendingUp, DollarSign } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { ExternalLinkButton } from '@/components/ui/external-link-button';
 import { ProgressMessage } from '../ProgressMessage';
 import { CrossToolRecommendations } from '../CrossToolRecommendations';
+import { ShareResultsButton } from '../ShareResultsButton';
 
 interface RecommendedSystem {
   category: string;
@@ -117,15 +118,23 @@ export const AILifestylePlanner: React.FC = () => {
     return (
       <Card ref={topRef} className="p-8 bg-gradient-to-br from-[#091020] to-[#131a2a] border-[#1a202c] text-white">
         <div className="mb-6">
-          <Button
-            onClick={handleReset}
-            variant="ghost"
-            size="sm"
-            className="text-[#60A5FA] hover:text-white mb-4"
-          >
-            <RotateCcw className="h-4 w-4 mr-2" />
-            Start New Analysis
-          </Button>
+          <div className="flex justify-between items-start mb-4">
+            <Button
+              onClick={handleReset}
+              variant="ghost"
+              size="sm"
+              className="text-[#60A5FA] hover:text-white"
+            >
+              <RotateCcw className="h-4 w-4 mr-2" />
+              Start New Analysis
+            </Button>
+            
+            <ShareResultsButton 
+              title="My RV Technology Plan"
+              summary={`${analysis.primaryUsage}\n\nKey Technologies: ${analysis.keyTechnologyNeeds.join(', ')}`}
+              size="sm"
+            />
+          </div>
           
           <div className="flex items-center gap-4 mb-6">
             <div className="p-3 bg-gradient-to-br from-[#5B9BD5] to-[#60A5FA] rounded-lg">
@@ -134,6 +143,24 @@ export const AILifestylePlanner: React.FC = () => {
             <div>
               <h3 className="text-2xl font-bold text-white">Your Personalized Technology Plan</h3>
               <p className="text-[#E2E8FF]">AI analyzed recommendations for your RV lifestyle</p>
+            </div>
+          </div>
+          
+          {/* Quick Summary Card */}
+          <div className="bg-gradient-to-r from-[#5B9BD5]/20 to-[#60A5FA]/20 border border-[#5B9BD5]/30 rounded-lg p-6 mb-6">
+            <h4 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+              <TrendingUp className="h-5 w-5 text-[#60A5FA]" />
+              Quick Summary
+            </h4>
+            <div className="grid md:grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <p className="text-xs text-[#E2E8FF]/70 uppercase tracking-wide">Priority Technologies</p>
+                <p className="text-white font-medium">{analysis.keyTechnologyNeeds.length} essential categories identified</p>
+              </div>
+              <div className="space-y-2">
+                <p className="text-xs text-[#E2E8FF]/70 uppercase tracking-wide">Systems Recommended</p>
+                <p className="text-white font-medium">{analysis.recommendedSystems.length} technology solutions</p>
+              </div>
             </div>
           </div>
         </div>

@@ -10,6 +10,7 @@ import { supabase } from '@/integrations/supabase/client';
 import { FeatureMatcherTextParser } from './FeatureMatcherTextParser';
 import { ProgressMessage } from '../ProgressMessage';
 import { CrossToolRecommendations } from '../CrossToolRecommendations';
+import { ShareResultsButton } from '../ShareResultsButton';
 
 interface MatchedFeature {
   id: string;
@@ -137,17 +138,24 @@ export const EnhancedFeatureMatcher = () => {
 
         {analysis && (
           <div className="space-y-6">
-            <div className="flex justify-between items-center">
+            <div className="flex flex-wrap justify-between items-center gap-3">
               <h3 className="text-white font-semibold text-xl">Your Results</h3>
-              <Button
-                onClick={handleReset}
-                variant="outline"
-                size="sm"
-                className="border-[#1a202c] text-[#E2E8FF] hover:bg-[#151A22]"
-              >
-                <RotateCcw className="h-4 w-4 mr-2" />
-                New Analysis
-              </Button>
+              <div className="flex gap-2">
+                <ShareResultsButton 
+                  title="Feature Match Results"
+                  summary={`${analysis.primary_usage}\n\nMatched Features: ${matchedFeatures.map(f => f.name).join(', ')}`}
+                  size="sm"
+                />
+                <Button
+                  onClick={handleReset}
+                  variant="outline"
+                  size="sm"
+                  className="border-[#1a202c] text-[#E2E8FF] hover:bg-[#151A22]"
+                >
+                  <RotateCcw className="h-4 w-4 mr-2" />
+                  New Analysis
+                </Button>
+              </div>
             </div>
 
             <div className="space-y-3">
@@ -187,25 +195,30 @@ export const EnhancedFeatureMatcher = () => {
                   {matchedFeatures.map((feature) => (
                     <Card key={feature.id} className="bg-gray-800 border-gray-600">
                       <CardContent className="p-4">
-                        <div className="flex justify-between items-start mb-2">
-                          <h4 className="text-white font-medium">{feature.name}</h4>
+                        <div className="flex justify-between items-start mb-3">
+                          <h4 className="text-white font-medium text-lg">{feature.name}</h4>
                           <Badge variant="outline" className="border-green-500 text-green-400">
                             {Math.round(feature.relevanceScore * 100)}% match
                           </Badge>
                         </div>
-                        <p className="text-white/90 text-sm mb-2 leading-relaxed">{feature.education}</p>
+                        
                         {feature.matchedKeywords.length > 0 && (
-                          <div className="flex flex-wrap gap-1">
-                            {feature.matchedKeywords.map((keyword, index) => (
-                              <Badge 
-                                key={index} 
-                                className="bg-gray-700 text-white/90 border border-gray-600 text-xs px-2 py-0.5"
-                              >
-                                {keyword}
-                              </Badge>
-                            ))}
+                          <div className="mb-3 p-3 bg-blue-500/10 border border-blue-500/30 rounded-lg">
+                            <p className="text-xs text-blue-300 mb-2 font-medium">Why this matches your needs:</p>
+                            <div className="flex flex-wrap gap-1">
+                              {feature.matchedKeywords.map((keyword, index) => (
+                                <Badge 
+                                  key={index} 
+                                  className="bg-blue-500/20 text-blue-300 border border-blue-400/50 text-xs px-2 py-1"
+                                >
+                                  {keyword}
+                                </Badge>
+                              ))}
+                            </div>
                           </div>
                         )}
+                        
+                        <p className="text-white/90 text-sm leading-relaxed">{feature.education}</p>
                       </CardContent>
                     </Card>
                   ))}
