@@ -5,71 +5,59 @@
 
 import { generateStaticHTML, pageMetadata } from './static-generator';
 
-// TEMPORARILY DISABLED BOT DETECTION FOR DEBUGGING
+/**
+ * Enhanced bot detection for SEO optimization
+ * Re-enabled to serve optimized content to search engines
+ */
 export const isBot = (): boolean => {
   if (typeof navigator === 'undefined') return false;
-  
+
   const userAgent = navigator.userAgent;
-  
-  // DEBUG: Log user agent for analysis
-  console.log('Bot detection check:', {
-    userAgent: userAgent.substring(0, 150),
-    timestamp: new Date().toISOString(),
-    url: window.location.href
-  });
-  
-  // TEMPORARILY RETURN FALSE TO DISABLE BOT DETECTION
-  // This ensures all users get the full React app
-  return false;
-  
-  /* Original bot detection logic (commented out for debugging)
-  // Exclude common browsers first
-  const browserPatterns = [
-    /chrome\/\d+\.\d+/i,
-    /firefox\/\d+\.\d+/i,
-    /safari\/\d+\.\d+/i,
-    /edge\/\d+\.\d+/i,
-    /opera\/\d+\.\d+/i
-  ];
-  
-  // If it looks like a regular browser, check for bot indicators
-  if (browserPatterns.some(pattern => pattern.test(userAgent))) {
-    const specificBotPatterns = [
-      /googlebot\/\d+\.\d+/i,
-      /bingbot\/\d+\.\d+/i,
-      /headlesschrome/i,
-      /phantomjs/i
-    ];
-    return specificBotPatterns.some(pattern => pattern.test(userAgent));
-  }
-  
-  // More specific bot patterns
+
+  // Comprehensive bot patterns for major search engines and crawlers
   const botPatterns = [
-    /googlebot\/\d+\.\d+/i,
-    /bingbot\/\d+\.\d+/i,
+    // Major search engines
+    /googlebot/i,
+    /bingbot/i,
     /yahoo! slurp/i,
-    /duckduckbot-https\/\d+\.\d+/i,
-    /baiduspider\/\d+\.\d+/i,
-    /yandexbot\/\d+\.\d+/i,
+    /duckduckbot/i,
+    /baiduspider/i,
+    /yandexbot/i,
     /sogou\s+web\s+spider/i,
-    /twitterbot\/\d+\.\d+/i,
-    /facebookexternalhit\/\d+\.\d+/i,
-    /whatsapp\/\d+\.\d+/i,
+
+    // Social media crawlers (handled separately, but detected here too)
+    /twitterbot/i,
+    /facebookexternalhit/i,
+    /whatsapp/i,
     /telegram.*bot/i,
-    /linkedinbot\/\d+\.\d+/i,
-    /slackbot.*link.*expanding/i,
+    /linkedinbot/i,
+    /slackbot/i,
     /discordbot/i,
-    /applebot\/\d+\.\d+/i,
-    /\bcrawler\b.*\bbot\b/i,
-    /\bspider\b.*\bbot\b/i,
-    /sitemapgenerator.*bot/i,
-    /pinterestbot\/\d+\.\d+/i,
-    /redditbot\/\d+\.\d+/i,
-    /skypeuripreview/i
+    /pinterestbot/i,
+    /redditbot/i,
+    /skypeuripreview/i,
+
+    // Other crawlers
+    /applebot/i,
+    /crawler/i,
+    /spider/i,
+    /bot/i,
+    /headlesschrome/i,
+    /phantomjs/i,
   ];
-  
-  return botPatterns.some(pattern => pattern.test(userAgent));
-  */
+
+  // Check if user agent matches any bot pattern
+  const isDetectedBot = botPatterns.some(pattern => pattern.test(userAgent));
+
+  // Optional: Log bot detection in development
+  if (isDetectedBot && import.meta.env.DEV) {
+    console.log('🤖 Bot detected:', {
+      userAgent: userAgent.substring(0, 100),
+      url: window.location.href
+    });
+  }
+
+  return isDetectedBot;
 };
 
 // Detect if this is a social media crawler
