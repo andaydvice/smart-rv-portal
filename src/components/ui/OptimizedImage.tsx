@@ -9,23 +9,26 @@
  * - Lazy loading for performance
  * - Retina display support (2x images)
  * - Prevents layout shift with aspect ratio
+ * - SEO-optimized alt text and keywords
+ * - Automatic image schema markup
  *
  * Usage:
  *   <OptimizedImage
  *     src="image-name.jpg"
- *     alt="Description"
+ *     alt="Description"  // Optional - auto-generated from SEO mapping
  *     sizes="(max-width: 768px) 100vw, 50vw"
  *   />
  */
 
 import React from 'react';
+import { getImageSEO } from '@/utils/imageSeoMapping';
 
 interface OptimizedImageProps {
   /** Original image filename (e.g., "hero-image.jpg") */
   src: string;
 
-  /** Alt text for accessibility */
-  alt: string;
+  /** Alt text for accessibility (auto-generated from SEO mapping if not provided) */
+  alt?: string;
 
   /** Image width (used for aspect ratio calculation) */
   width?: number;
@@ -95,6 +98,11 @@ export const OptimizedImage: React.FC<OptimizedImageProps> = ({
 }) => {
   const paths = getImagePaths(src);
 
+  // Get SEO metadata for automatic alt text and keywords
+  const seoData = getImageSEO(src);
+  const finalAlt = alt || seoData.alt;
+  const imageTitle = seoData.title || finalAlt;
+
   // Calculate aspect ratio for preventing layout shift
   const aspectRatio = width && height ? (height / width) * 100 : undefined;
 
@@ -117,10 +125,11 @@ export const OptimizedImage: React.FC<OptimizedImageProps> = ({
         sizes={sizes}
       />
 
-      {/* Final fallback img element */}
+      {/* Final fallback img element with SEO-optimized attributes */}
       <img
         src={paths.originalFallback}
-        alt={alt}
+        alt={finalAlt}
+        title={imageTitle}
         loading={loadingStrategy}
         decoding={priority ? 'sync' : 'async'}
         width={width}

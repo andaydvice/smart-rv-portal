@@ -11,15 +11,16 @@ export const HeroSection = () => {
 
   return (
     <section className="relative w-full min-h-screen overflow-hidden -mt-16 pt-16">
-      {/* Full width image container - HIGH-QUALITY OPTIMIZED IMAGE */}
+      {/* Full width image container - HIGH-QUALITY OPTIMIZED IMAGE with SEO */}
       <div className="absolute inset-0 left-0 right-0">
         <HighQualityHeroImage
           src="f3ebf58c-7bbf-427f-9510-9c3b0aec6f6d.png"
-          alt="Luxury Smart RV interior with panoramic windows and modern intelligent design"
           width={1920}
           height={1080}
           sizes="100vw"
           className="h-full w-full object-cover"
+          // Alt text auto-generated from SEO mapping:
+          // "Luxury smart RV interior with panoramic windows, modern intelligent design, and advanced technology systems"
         />
         <div className="absolute inset-0 bg-black/60" />
       </div>
