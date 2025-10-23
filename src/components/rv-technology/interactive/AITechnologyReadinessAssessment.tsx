@@ -8,6 +8,7 @@ import { CheckCircle, Smartphone, Settings, Star, AlertCircle, Brain, Zap, Rotat
 import { supabase } from '@/integrations/supabase/client';
 import { ProgressMessage } from '../ProgressMessage';
 import { CrossToolRecommendations } from '../CrossToolRecommendations';
+import { ShareResultsButton } from '../ShareResultsButton';
 
 interface ToolAccessHook {
   queriesUsed: number;
@@ -142,6 +143,13 @@ export const AITechnologyReadinessAssessment: React.FC<Props> = ({ toolAccess, o
               ))}
             </ul>
           </div>
+        </div>
+
+        <div className="mb-6">
+          <ShareResultsButton
+            title={result.title}
+            summary={`${result.description}\n\nRecommended Features:\n${result.recommendedFeatures.join('\n')}\n\nBudget Guidance: ${result.budgetGuidance}\n\nNext Steps:\n${result.nextSteps.join('\n')}`}
+          />
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">

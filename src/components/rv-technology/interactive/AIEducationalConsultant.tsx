@@ -10,6 +10,7 @@ import { supabase } from '@/integrations/supabase/client';
 import { StarterQuestions } from '../StarterQuestions';
 import { ProgressMessage } from '../ProgressMessage';
 import { CrossToolRecommendations } from '../CrossToolRecommendations';
+import { ShareResultsButton } from '../ShareResultsButton';
 
 interface Message {
   id: string;
@@ -202,11 +203,20 @@ export const AIEducationalConsultant = () => {
         </div>
       </div>
 
-      {/* Helpful Resources - Shows after engagement */}
+      {/* Share Conversation - Shows after engagement */}
       {messages.length >= 2 && (
         <div className="mt-6">
           <Card className="bg-gradient-to-br from-[#091020] to-[#131a2a] border border-[#5B9BD5]/30">
             <CardContent className="p-6">
+              <div className="mb-4">
+                <ShareResultsButton
+                  title="My RV Technology Questions & Answers"
+                  summary={messages
+                    .map(m => `${m.role === 'user' ? 'Q' : 'A'}: ${m.content}`)
+                    .join('\n\n')
+                  }
+                />
+              </div>
               <div className="flex items-start gap-3 mb-4">
                 <BookOpen className="h-5 w-5 text-[#5B9BD5] mt-1 flex-shrink-0" />
                 <div>

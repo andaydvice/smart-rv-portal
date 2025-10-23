@@ -10,6 +10,7 @@ import { Loader2, ExternalLink, Brain, MapPin, DollarSign, Info, RotateCcw } fro
 import { supabase } from '@/integrations/supabase/client';
 import { ProgressMessage } from '../ProgressMessage';
 import { CrossToolRecommendations } from '../CrossToolRecommendations';
+import { ShareResultsButton } from '../ShareResultsButton';
 
 interface UserRequirements {
   travelStyle: string;
@@ -321,6 +322,13 @@ export const IntelligentRVFinder: React.FC = () => {
                   <RotateCcw className="h-4 w-4 mr-2" />
                   New Search
                 </Button>
+              </div>
+
+              <div className="mb-6">
+                <ShareResultsButton
+                  title={`RV Recommendation: ${recommendation.rvType}`}
+                  summary={`${recommendation.reasoning}\n\nPrice Range: ${recommendation.priceRange}\n\nRecommended Models:\n${recommendation.recommendedModels.join('\n')}\n\nTechnology Features:\n${recommendation.technologyFeatures.join(', ')}`}
+                />
               </div>
               
               {/* Main Recommendation */}
