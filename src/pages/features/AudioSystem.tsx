@@ -5,6 +5,8 @@ import { Music, Volume2, Radio, Mic2 } from "lucide-react";
 import Layout from "@/components/layout/Layout";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
 import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
+import { LazyImage } from '@/components/ui/LazyImage';
+import { getOptimizedImageProps } from '@/utils/imageOptimization';
 
 const AudioSystem = () => {
   return (
@@ -28,10 +30,14 @@ const AudioSystem = () => {
                 <p>Immerse yourself in crystal clear audio with our premium sound system.</p>
                 <p>Featuring high fidelity speakers and advanced acoustic tuning, experience music like never before in your mobile sanctuary.</p>
               </div>
-              <img 
-                src="/lovable-uploads/9e2c5b7f-c03c-4d99-9997-0d3de18f61e1.png" 
-                alt="Premium Audio System" 
+              <LazyImage
+                {...getOptimizedImageProps({
+                  src: "/lovable-uploads/9e2c5b7f-c03c-4d99-9997-0d3de18f61e1.png",
+                  alt: "Premium Audio System",
+                  type: "feature"
+                })}
                 className="w-full h-64 object-cover rounded-lg my-6"
+                priority={false}
               />
               <ul className="list-disc list-inside space-y-3 text-gray-300">
                 <li>Multi zone audio control</li>

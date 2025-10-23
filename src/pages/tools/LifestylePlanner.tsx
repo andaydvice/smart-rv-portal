@@ -4,6 +4,8 @@ import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 import { RelatedTools } from '@/components/rv-technology/RelatedTools';
 import { AILifestylePlanner } from '@/components/rv-technology/interactive/AILifestylePlanner';
 import { availableTools } from '@/lib/toolsData';
+import { LazyImage } from '@/components/ui/LazyImage';
+import { getOptimizedImageProps } from '@/utils/imageOptimization';
 import aiLifestyleTechnologyPlannerHero from '@/assets/ai-lifestyle-technology-planner-hero.png';
 import AffiliateDisclosure from '@/components/affiliate/AffiliateDisclosure';
 
@@ -28,9 +30,13 @@ const LifestylePlanner: React.FC = () => {
         </div>
 
         <div className="relative w-full my-12">
-          <img 
-            src={aiLifestyleTechnologyPlannerHero} 
-            alt="AI Lifestyle Planner"
+          <LazyImage
+            {...getOptimizedImageProps(
+              aiLifestyleTechnologyPlannerHero,
+              "AI Lifestyle Planner",
+              "hero",
+              true
+            )}
             className="w-full h-auto"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/60 to-black/80 z-10" />

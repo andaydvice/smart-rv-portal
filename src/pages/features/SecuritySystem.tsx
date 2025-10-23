@@ -5,6 +5,8 @@ import { Shield, Lock, Bell, Camera, Smartphone, MapPin, BatteryCharging, KeyRou
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
 import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
 import { Helmet } from 'react-helmet-async';
+import { LazyImage } from "@/components/ui/LazyImage";
+import { getOptimizedImageProps } from "@/utils/imageOptimization";
 
 const SecuritySystem = () => {
   const canonicalUrl = typeof window !== 'undefined' ? `${window.location.origin}/features/security-system` : 'https://example.com/features/security-system';
@@ -37,9 +39,13 @@ const SecuritySystem = () => {
         {/* Full-width Hero Header */}
         <div className="relative w-full h-screen">
           <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-gray-900 z-10" />
-          <img 
-            src="/security-system-hero.jpg"
-            alt="RV security command center with multiple monitoring displays and control panels" 
+          <LazyImage
+            {...getOptimizedImageProps(
+              "/security-system-hero.jpg",
+              "RV security command center with multiple monitoring displays and control panels",
+              "hero",
+              true
+            )}
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 flex items-center justify-center z-20">

@@ -2,6 +2,8 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, LucideIcon } from 'lucide-react';
+import { LazyImage } from '@/components/ui/LazyImage';
+import { getOptimizedImageProps } from '@/utils/imageOptimization';
 
 interface ToolPreviewCardProps {
   title: string;
@@ -25,11 +27,14 @@ export const ToolPreviewCard: React.FC<ToolPreviewCardProps> = ({
   return (
     <div className="bg-gradient-to-br from-[#091020] to-[#151A22] rounded-2xl border border-[#5B9BD5]/20 hover:border-[#5B9BD5]/40 transition-all duration-300 overflow-hidden group">
       <div className="mb-6">
-        <img 
-          src={imageSrc} 
-          alt={imageAlt} 
+        <LazyImage
+          {...getOptimizedImageProps(
+            imageSrc,
+            imageAlt,
+            "card",
+            false
+          )}
           className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500"
-          loading="lazy"
         />
       </div>
       

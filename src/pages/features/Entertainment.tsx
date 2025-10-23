@@ -7,6 +7,8 @@ import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliat
 import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
 import { VideoSection } from "@/components/ui/VideoSection";
 import { PreloadedHeaderImage } from "@/components/ui/PreloadedHeaderImage";
+import { LazyImage } from '@/components/ui/LazyImage';
+import { getOptimizedImageProps } from '@/utils/imageOptimization';
 
 const Entertainment = () => {
   useEffect(() => {
@@ -149,11 +151,14 @@ const Entertainment = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="mb-12"
           >
-            <img 
-              src="/entertainment-lifestyle.jpg"
-              alt="Luxury RV interior with premium entertainment system featuring multiple screens, comfortable seating, and panoramic views"
+            <LazyImage
+              {...getOptimizedImageProps({
+                src: "/entertainment-lifestyle.jpg",
+                alt: "Luxury RV interior with premium entertainment system featuring multiple screens, comfortable seating, and panoramic views",
+                type: "feature"
+              })}
               className="w-full h-auto rounded-xl shadow-2xl border border-gray-700/50"
-              loading="lazy"
+              priority={false}
             />
           </motion.div>
           

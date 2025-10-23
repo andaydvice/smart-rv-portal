@@ -4,6 +4,8 @@ import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 import { RelatedTools } from '@/components/rv-technology/RelatedTools';
 import { AITechnologyChecklist } from '@/components/rv-technology/interactive/AITechnologyChecklist';
 import { availableTools } from '@/lib/toolsData';
+import { LazyImage } from '@/components/ui/LazyImage';
+import { getOptimizedImageProps } from '@/utils/imageOptimization';
 import aiTechnologyResearchChecklistHero from '@/assets/ai-technology-research-checklist-hero.jpg';
 import AffiliateDisclosure from '@/components/affiliate/AffiliateDisclosure';
 
@@ -28,9 +30,13 @@ const TechnologyChecklist: React.FC = () => {
         </div>
 
         <div className="relative w-full my-12">
-          <img 
-            src={aiTechnologyResearchChecklistHero} 
-            alt="AI Technology Checklist"
+          <LazyImage
+            {...getOptimizedImageProps(
+              aiTechnologyResearchChecklistHero,
+              "AI Technology Checklist",
+              "hero",
+              true
+            )}
             className="w-full h-auto"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/60 to-black/80 z-10" />

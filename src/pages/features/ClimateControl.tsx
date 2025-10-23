@@ -6,6 +6,8 @@ import { useEffect } from "react";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
 import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
 import { VideoSection } from "@/components/ui/VideoSection";
+import { LazyImage } from '@/components/ui/LazyImage';
+import { getOptimizedImageProps } from '@/utils/imageOptimization';
 
 const ClimateControl = () => {
   useEffect(() => {
@@ -25,11 +27,15 @@ const ClimateControl = () => {
           {/* Header Image with Text Overlay */}
           <div className="mb-12 relative">
             <div className="relative w-full h-[400px] md:h-[500px] rounded-lg overflow-hidden">
-              <img
-                src="/smart-climate-control-hero.jpeg?v=2"
-                alt="Smart climate control system interface with family in luxury RV interior showing temperature monitoring and HVAC controls"
+              <LazyImage
+                {...getOptimizedImageProps({
+                  src: "/smart-climate-control-hero.jpeg?v=2",
+                  alt: "Smart climate control system interface with family in luxury RV interior showing temperature monitoring and HVAC controls",
+                  type: "hero"
+                })}
                 className="w-full h-full object-cover object-center"
                 style={{ objectPosition: '50% 30%' }}
+                priority={true}
               />
               {/* Text Overlay */}
               <div className="absolute inset-0 bg-black/50 flex items-center justify-center z-10">

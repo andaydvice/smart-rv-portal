@@ -1,6 +1,8 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { LazyImage } from '@/components/ui/LazyImage';
+import { getOptimizedImageProps } from '@/utils/imageOptimization';
 
 interface Post {
   category: string;
@@ -21,9 +23,13 @@ const TrendingPostCard: React.FC<TrendingPostCardProps> = ({ post }) => {
   return (
     <div className="bg-[#080f20] rounded-2xl overflow-hidden border border-white/10 hover:border-white/30 transition-all hover:translate-y-[-5px]">
       <div className="h-48 overflow-hidden">
-        <img 
-          src={post.image}
-          alt={post.title}
+        <LazyImage
+          {...getOptimizedImageProps(
+            post.image,
+            post.title,
+            "thumbnail",
+            false
+          )}
           className="w-full h-full object-cover transition-transform hover:scale-105"
         />
       </div>

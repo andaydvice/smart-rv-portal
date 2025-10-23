@@ -1,5 +1,7 @@
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { LazyImage } from "@/components/ui/LazyImage";
+import { getOptimizedImageProps } from "@/utils/imageOptimization";
 
 interface ModelInfo {
   name: string;
@@ -26,11 +28,14 @@ const AdventureCategoryCard = ({ categories }: AdventureCategoryCardProps) => {
       </CardHeader>
       <CardContent>
         <div className="relative w-full h-[500px] rounded-xl overflow-hidden bg-gray-900 mb-6">
-          <img 
-            src="/lovable-uploads/c1732ddf-458c-4eeb-b6ad-7a817ae9ba17.png"
-            alt="Adventure Smart RV at sunset with campfire"
+          <LazyImage
+            {...getOptimizedImageProps(
+              "/lovable-uploads/c1732ddf-458c-4eeb-b6ad-7a817ae9ba17.png",
+              "Adventure Smart RV at sunset with campfire",
+              "feature",
+              false
+            )}
             className="w-full h-full object-cover"
-            loading="lazy"
           />
         </div>
         
@@ -76,41 +81,53 @@ const AdventureCategoryCard = ({ categories }: AdventureCategoryCardProps) => {
               </AccordionItem>
               {category === "Rugged Class B Vans (Adventure Vans)" && (
                 <div key={`image-${category}`} className="relative w-full h-[500px] rounded-xl overflow-hidden bg-gray-900 mb-6">
-                  <img 
-                    src="/lovable-uploads/3e50571f-8a07-463a-a6a9-6ae4b820bc44.png"
-                    alt="Adventure Smart RV at sunset by mountain stream"
+                  <LazyImage
+                    {...getOptimizedImageProps(
+                      "/lovable-uploads/3e50571f-8a07-463a-a6a9-6ae4b820bc44.png",
+                      "Adventure Smart RV at sunset by mountain stream",
+                      "feature",
+                      false
+                    )}
                     className="w-full h-full object-cover"
-                    loading="lazy"
                   />
                 </div>
               )}
               {category === "Off Road Travel Trailers" && (
                 <div key={`image-${category}`} className="relative w-full h-[500px] rounded-xl overflow-hidden bg-gray-900 mb-6">
-                  <img 
-                    src="/lovable-uploads/fc3d60d2-5d4e-41d4-8db6-ec11fd0a45b9.png"
-                    alt="Adventure Smart RV in desert setting with bike rack"
+                  <LazyImage
+                    {...getOptimizedImageProps(
+                      "/lovable-uploads/fc3d60d2-5d4e-41d4-8db6-ec11fd0a45b9.png",
+                      "Adventure Smart RV in desert setting with bike rack",
+                      "feature",
+                      false
+                    )}
                     className="w-full h-full object-cover"
-                    loading="lazy"
                   />
                 </div>
               )}
               {category === "Compact Adventure Class C" && (
                 <div key={`image-${category}`} className="relative w-full h-[500px] rounded-xl overflow-hidden bg-gray-900 mb-6">
-                  <img 
-                    src="/lovable-uploads/23ce0af4-35ca-4e7f-af56-c1a7c6eae380.png"
-                    alt="Adventure Smart RV at night in desert landscape"
+                  <LazyImage
+                    {...getOptimizedImageProps(
+                      "/lovable-uploads/23ce0af4-35ca-4e7f-af56-c1a7c6eae380.png",
+                      "Adventure Smart RV at night in desert landscape",
+                      "feature",
+                      false
+                    )}
                     className="w-full h-full object-cover"
-                    loading="lazy"
                   />
                 </div>
               )}
               {category === "Overlanding Fifth Wheels" && (
                 <div key={`image-${category}`} className="relative w-full h-[500px] rounded-xl overflow-hidden bg-gray-900 mb-6">
-                  <img 
-                    src="/lovable-uploads/85e4d897-10d7-4f90-b231-597f7fcfdffc.png"
-                    alt="Adventure Smart RV with campfire at sunset in mountain setting"
+                  <LazyImage
+                    {...getOptimizedImageProps(
+                      "/lovable-uploads/85e4d897-10d7-4f90-b231-597f7fcfdffc.png",
+                      "Adventure Smart RV with campfire at sunset in mountain setting",
+                      "feature",
+                      false
+                    )}
                     className="w-full h-full object-cover"
-                    loading="lazy"
                   />
                 </div>
               )}

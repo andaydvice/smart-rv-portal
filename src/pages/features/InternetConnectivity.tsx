@@ -6,6 +6,8 @@ import { Wifi, Globe, Shield, Zap } from "lucide-react";
 import ConnectivityGuide from "@/components/connectivity/ConnectivityGuide";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
 import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
+import { LazyImage } from '@/components/ui/LazyImage';
+import { getOptimizedImageProps } from '@/utils/imageOptimization';
 
 const InternetConnectivity = () => {
   return (
@@ -32,10 +34,14 @@ const InternetConnectivity = () => {
                 <br /><br />
                 Never lose touch with what matters most.
               </p>
-              <img 
-                src="/lovable-uploads/15afbf27-62c7-496b-8042-b625eb5543e5.png" 
-                alt="Mobile Internet Connectivity" 
+              <LazyImage
+                {...getOptimizedImageProps({
+                  src: "/lovable-uploads/15afbf27-62c7-496b-8042-b625eb5543e5.png",
+                  alt: "Mobile Internet Connectivity",
+                  type: "feature"
+                })}
                 className="w-full h-64 object-cover rounded-lg mb-6"
+                priority={false}
               />
               <ul className="list-disc list-inside space-y-3 text-gray-300">
                 <li>High speed 5G connectivity</li>

@@ -5,6 +5,8 @@ import { Tv, Cast, Smartphone, Gamepad } from "lucide-react";
 import Layout from "@/components/layout/Layout";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
 import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
+import { LazyImage } from '@/components/ui/LazyImage';
+import { getOptimizedImageProps } from '@/utils/imageOptimization';
 
 const SmartTV = () => {
   return (
@@ -34,10 +36,14 @@ const SmartTV = () => {
                     and immersive entertainment wherever your journey takes you.
                   </p>
                 </div>
-                <img 
-                  src="/lovable-uploads/831c3ac9-7ade-4fe3-a460-affbfc4123f7.png" 
-                  alt="Luxury RV Smart TV Setup" 
+                <LazyImage
+                  {...getOptimizedImageProps({
+                    src: "/lovable-uploads/831c3ac9-7ade-4fe3-a460-affbfc4123f7.png",
+                    alt: "Luxury RV Smart TV Setup",
+                    type: "feature"
+                  })}
                   className="w-full h-64 object-cover rounded-lg mb-6"
+                  priority={false}
                 />
                 <ul className="list-disc list-inside space-y-3 text-gray-300">
                   <li>4K Ultra HD Display with HDR Support</li>

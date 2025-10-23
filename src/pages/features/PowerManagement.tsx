@@ -5,6 +5,8 @@ import Layout from "@/components/layout/Layout";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
 import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
 import { Helmet } from 'react-helmet-async';
+import { LazyImage } from '@/components/ui/LazyImage';
+import { getOptimizedImageProps } from '@/utils/imageOptimization';
 
 const PowerManagement = () => {
   const canonicalUrl = typeof window !== 'undefined' ? `${window.location.origin}/features/power-management` : 'https://example.com/features/power-management';
@@ -31,12 +33,14 @@ const PowerManagement = () => {
       </Helmet>
       {/* Hero Image Section */}
       <div className="relative w-full h-[600px] md:h-[80vh] max-h-[800px] overflow-hidden">
-        <img
-          src="/lovable-uploads/power-management-header.jpg?v=3"
-          alt="Modern RV interior with advanced power management dashboard showing battery levels, solar input, and electrical distribution controls"
+        <LazyImage
+          {...getOptimizedImageProps({
+            src: "/lovable-uploads/power-management-header.jpg?v=3",
+            alt: "Modern RV interior with advanced power management dashboard showing battery levels, solar input, and electrical distribution controls",
+            type: "hero"
+          })}
           className="absolute inset-0 w-full h-full object-cover"
-          loading="eager"
-          fetchPriority="high"
+          priority={true}
           onLoad={() => console.log('NEW Power management header image loaded successfully')}
           onError={(e) => console.error('NEW Power management header image failed to load:', e)}
         />
@@ -82,11 +86,14 @@ const PowerManagement = () => {
                   It also prolongs battery life for extended off grid adventures.
                 </p>
               </div>
-              <img 
-                src="/lovable-uploads/078abbd1-5852-4d5a-a457-154a7421c673.png"
-                alt="Smart RV power management system interface with solar and battery monitoring"
+              <LazyImage
+                {...getOptimizedImageProps({
+                  src: "/lovable-uploads/078abbd1-5852-4d5a-a457-154a7421c673.png",
+                  alt: "Smart RV power management system interface with solar and battery monitoring",
+                  type: "feature"
+                })}
                 className="w-full h-64 object-cover rounded-lg mb-6"
-                loading="lazy"
+                priority={false}
               />
               <ul className="list-disc list-inside space-y-3 text-gray-300 text-left">
                 <li>Solar panel integration and monitoring optimizes energy capture.</li>
@@ -182,11 +189,14 @@ const PowerManagement = () => {
           
           {/* Professional Installation Image */}
           <div className="mt-12 mb-8">
-            <img 
-              src="/lovable-uploads/professional-power-installation.jpg?v=1"
-              alt="Professional technician installing RV power management system with solar panels and battery monitoring equipment"
+            <LazyImage
+              {...getOptimizedImageProps({
+                src: "/lovable-uploads/professional-power-installation.jpg?v=1",
+                alt: "Professional technician installing RV power management system with solar panels and battery monitoring equipment",
+                type: "feature"
+              })}
               className="w-full h-64 md:h-80 object-cover rounded-lg"
-              loading="lazy"
+              priority={false}
               onLoad={() => console.log('Professional installation image loaded successfully')}
               onError={(e) => console.error('Professional installation image failed to load:', e)}
             />

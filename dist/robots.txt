@@ -1,0 +1,15 @@
+User-agent: *
+Allow: /
+
+# Block admin and internal routes
+Disallow: /admin/
+Disallow: /account
+Disallow: /search
+
+# Sitemap location
+Sitemap: https://smartrvhub.com/sitemap.xml
+
+# Crawl delay for polite crawling
+Crawl-delay: 1
+
+# Last updated: 2024-08-24

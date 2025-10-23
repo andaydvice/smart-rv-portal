@@ -2,6 +2,8 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
+import { LazyImage } from "@/components/ui/LazyImage";
+import { getOptimizedImageProps } from "@/utils/imageOptimization";
 
 interface LuxuryHeroProps {
   handleNavigation: (e: React.MouseEvent) => void;
@@ -10,9 +12,13 @@ interface LuxuryHeroProps {
 export const LuxuryHero = ({ handleNavigation }: LuxuryHeroProps) => {
   return (
     <div className="relative w-full h-[60vh] overflow-hidden">
-      <img
-        src="/lovable-uploads/Luxury-Class-RVs-min.jpg"
-        alt="Luxury Class RV with slide-out in mountain setting"
+      <LazyImage
+        {...getOptimizedImageProps(
+          "/lovable-uploads/Luxury-Class-RVs-min.jpg",
+          "Luxury Class RV with slide-out in mountain setting",
+          "hero",
+          true
+        )}
         className="w-full h-full object-cover"
       />
       <div className="absolute inset-0 bg-black/40" />

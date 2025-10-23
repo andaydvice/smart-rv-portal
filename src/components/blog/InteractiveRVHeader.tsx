@@ -1,15 +1,21 @@
 import React from "react";
 import { motion } from "framer-motion";
 import smartRvHero from "@/assets/smart-rv-hero.jpg";
+import { LazyImage } from "@/components/ui/LazyImage";
+import { getOptimizedImageProps } from "@/utils/imageOptimization";
 
 const InteractiveRVHeader = () => {
   return (
     <div className="relative w-full h-[600px] overflow-hidden rounded-2xl">
       {/* Main hero image */}
       <div className="absolute inset-0">
-        <img 
-          src={smartRvHero}
-          alt="Futuristic Smart RV with advanced technology"
+        <LazyImage
+          {...getOptimizedImageProps(
+            smartRvHero,
+            "Futuristic Smart RV with advanced technology",
+            "hero",
+            true
+          )}
           className="w-full h-full object-cover"
         />
         

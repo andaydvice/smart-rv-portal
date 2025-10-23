@@ -7,6 +7,8 @@ import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 import { availableTools } from '@/lib/toolsData';
 import rvTechToolsHero from '@/assets/rv-technology-tools-hero.png';
 import Layout from '@/components/layout/Layout';
+import { LazyImage } from '@/components/ui/LazyImage';
+import { getOptimizedImageProps } from '@/utils/imageOptimization';
 
 const Tools: React.FC = () => {
   const navigate = useNavigate();
@@ -21,9 +23,13 @@ const Tools: React.FC = () => {
       <div className="min-h-screen bg-gradient-to-b from-[#080F1F] to-[#151A22]">
         {/* Hero Header Section */}
         <div className="relative w-full h-[300px] md:h-[400px] overflow-hidden">
-          <img 
-            src={rvTechToolsHero} 
-            alt="Smart RV with technology overlay at sunset" 
+          <LazyImage
+            {...getOptimizedImageProps(
+              rvTechToolsHero,
+              "Smart RV with technology overlay at sunset",
+              "hero",
+              true
+            )}
             className="absolute inset-0 w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-[#080F1F]" />
@@ -51,9 +57,13 @@ const Tools: React.FC = () => {
             {availableTools.map((tool) => (
               <Card key={tool.id} className="bg-[#091020] border-[#1a202c] hover:border-[#5B9BD5] transition-all duration-300 group overflow-hidden">
                 <div className="relative h-64 overflow-hidden">
-                  <img 
-                    src={tool.image} 
-                    alt={tool.imageAlt}
+                  <LazyImage
+                    {...getOptimizedImageProps(
+                      tool.image,
+                      tool.imageAlt,
+                      "card",
+                      false
+                    )}
                     className="w-full h-full object-cover object-top transition-transform duration-300 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#091020] via-[#091020]/50 to-transparent"></div>

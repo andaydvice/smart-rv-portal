@@ -6,6 +6,8 @@ import { availableTools } from '@/lib/toolsData';
 import intelligentRvFinderHero from '@/assets/intelligent-rv-finder-hero.jpg';
 import IntelligentRVFinderComponent from '@/components/rv-technology/interactive/IntelligentRVFinder';
 import AffiliateDisclosure from '@/components/affiliate/AffiliateDisclosure';
+import { LazyImage } from '@/components/ui/LazyImage';
+import { getOptimizedImageProps } from '@/utils/imageOptimization';
 
 const IntelligentRVFinder = () => {
   useEffect(() => {
@@ -42,9 +44,13 @@ const IntelligentRVFinder = () => {
         </div>
 
         <div className="relative w-full my-12">
-          <img 
-            src={intelligentRvFinderHero} 
-            alt="Intelligent RV Finder"
+          <LazyImage
+            {...getOptimizedImageProps(
+              intelligentRvFinderHero,
+              "Intelligent RV Finder",
+              "hero",
+              true
+            )}
             className="w-full h-auto"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/60 to-black/80 z-10" />

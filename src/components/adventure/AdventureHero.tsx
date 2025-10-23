@@ -2,6 +2,8 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
+import { LazyImage } from "@/components/ui/LazyImage";
+import { getOptimizedImageProps } from "@/utils/imageOptimization";
 
 const AdventureHero = () => {
   console.log("[AdventureHero] Component rendered");
@@ -22,15 +24,19 @@ const AdventureHero = () => {
   };
 
   return (
-    <div 
+    <div
       className="relative w-full h-[60vh] overflow-hidden"
       onClick={(e) => {
         console.log("[AdventureHero] Container clicked, target:", e.target);
       }}
     >
-      <img 
-        src="/lovable-uploads/ae14102b-cf2e-443b-a722-7fe364e92e36.png"
-        alt="Line up of luxury adventure Smart RVs"
+      <LazyImage
+        {...getOptimizedImageProps(
+          "/lovable-uploads/ae14102b-cf2e-443b-a722-7fe364e92e36.png",
+          "Line up of luxury adventure Smart RVs",
+          "hero",
+          true
+        )}
         className="w-full h-full object-cover"
       />
       <div className="absolute inset-0 bg-black/40" />

@@ -6,6 +6,8 @@ import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 import { RelatedTools } from '@/components/rv-technology/RelatedTools';
 import { AITechnologyReadinessAssessment } from '@/components/rv-technology/interactive/AITechnologyReadinessAssessment';
 import { availableTools } from '@/lib/toolsData';
+import { LazyImage } from '@/components/ui/LazyImage';
+import { getOptimizedImageProps } from '@/utils/imageOptimization';
 import rvTechnologyPlanningImage from '@/assets/rv-technology-planning.png';
 import { useToolAccess } from '@/hooks/useToolAccess';
 import { QueryCounter } from '@/components/tools/QueryCounter';
@@ -42,9 +44,13 @@ const ReadinessAssessment: React.FC = () => {
         </div>
 
         <div className="relative w-full my-12">
-          <img 
-            src={rvTechnologyPlanningImage} 
-            alt="AI Technology Readiness Assessment"
+          <LazyImage
+            {...getOptimizedImageProps(
+              rvTechnologyPlanningImage,
+              "AI Technology Readiness Assessment",
+              "hero",
+              true
+            )}
             className="w-full h-auto"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/60 to-black/80 z-10" />

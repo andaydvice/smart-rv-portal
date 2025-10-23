@@ -2,6 +2,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { BlogPost } from '@/types/blog';
+import { LazyImage } from '@/components/ui/LazyImage';
+import { getOptimizedImageProps } from '@/utils/imageOptimization';
 
 interface BlogPostCardProps {
   post: BlogPost;
@@ -15,9 +17,13 @@ const BlogPostCard = ({ post }: BlogPostCardProps) => {
   return (
     <div className="space-y-4">
       <div className="rounded-3xl overflow-hidden">
-        <img 
-          src={post.image} 
-          alt={post.title}
+        <LazyImage
+          {...getOptimizedImageProps(
+            post.image,
+            post.title,
+            "card",
+            false
+          )}
           className="w-full h-[300px] object-cover"
         />
       </div>

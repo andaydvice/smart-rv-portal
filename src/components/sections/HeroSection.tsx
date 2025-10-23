@@ -4,6 +4,8 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { Container } from "@/components/ui/container";
+import { LazyImage } from "@/components/ui/LazyImage";
+import { getOptimizedImageProps } from "@/utils/imageOptimization";
 
 
 export const HeroSection = () => {
@@ -12,16 +14,14 @@ export const HeroSection = () => {
     <section className="relative w-full min-h-screen overflow-hidden -mt-16 pt-16">
       {/* Full width image container */}
       <div className="absolute inset-0 left-0 right-0">
-        <img
-          src="/lovable-uploads/f3ebf58c-7bbf-427f-9510-9c3b0aec6f6d.png"
-          alt="Luxury Smart RV interior with panoramic windows and modern intelligent design"
+        <LazyImage
+          {...getOptimizedImageProps(
+            "/lovable-uploads/f3ebf58c-7bbf-427f-9510-9c3b0aec6f6d.png",
+            "Luxury Smart RV interior with panoramic windows and modern intelligent design",
+            "hero",
+            true
+          )}
           className="h-full w-full object-cover"
-          loading="eager"
-          decoding="sync"
-          width={1920}
-          height={1080}
-          sizes="100vw"
-          fetchPriority="high"
         />
         <div className="absolute inset-0 bg-black/60" />
       </div>

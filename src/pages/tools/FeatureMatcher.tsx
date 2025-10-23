@@ -6,6 +6,8 @@ import { EnhancedFeatureMatcher } from '@/components/rv-technology/interactive/E
 import { availableTools } from '@/lib/toolsData';
 import aiEnhancedFeatureMatcherHero from '@/assets/ai-enhanced-feature-matcher-hero.jpg';
 import AffiliateDisclosure from '@/components/affiliate/AffiliateDisclosure';
+import { LazyImage } from '@/components/ui/LazyImage';
+import { getOptimizedImageProps } from '@/utils/imageOptimization';
 
 const FeatureMatcher: React.FC = () => {
   useEffect(() => {
@@ -28,9 +30,13 @@ const FeatureMatcher: React.FC = () => {
         </div>
 
         <div className="relative w-full my-12">
-          <img 
-            src={aiEnhancedFeatureMatcherHero} 
-            alt="Enhanced Feature Matcher"
+          <LazyImage
+            {...getOptimizedImageProps(
+              aiEnhancedFeatureMatcherHero,
+              "Enhanced Feature Matcher",
+              "hero",
+              true
+            )}
             className="w-full h-auto"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/60 to-black/80 z-10" />

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cache Invalidation - Smart RV Hub</title>
+    <meta http-equiv="cache-control" content="no-cache, no-store, must-revalidate, max-age=0">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="expires" content="0">
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: system-ui, -apple-system, sans-serif;
+            background: linear-gradient(135deg, #080F1F, #151A22);
+            color: white;
+            text-align: center;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            max-width: 600px;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+        }
+        .spinner {
+            width: 60px;
+            height: 60px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-top: 3px solid #5B9BD5;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .progress {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            height: 8px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+        .progress-bar {
+            background: linear-gradient(90deg, #5B9BD5, #60A5FA);
+            height: 100%;
+            width: 0%;
+            animation: progress 3s ease-in-out;
+        }
+        @keyframes progress {
+            0% { width: 0%; }
+            100% { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="spinner"></div>
+        <h1>Invalidating All Caches</h1>
+        <p>Clearing browser caches, service workers, and forcing fresh content...</p>
+        <div class="progress">
+            <div class="progress-bar"></div>
+        </div>
+        <p id="status">Initializing cache clearing...</p>
+    </div>
+
+    <script>
+        const status = document.getElementById('status');
+        
+        async function invalidateAllCaches() {
+            const steps = [
+                'Unregistering service workers...',
+                'Clearing browser caches...',
+                'Purging local storage...',
+                'Clearing session data...',
+                'Forcing fresh content reload...',
+                'Redirecting to updated site...'
+            ];
+            
+            for (let i = 0; i < steps.length; i++) {
+                status.textContent = steps[i];
+                await new Promise(resolve => setTimeout(resolve, 500));
+                
+                switch (i) {
+                    case 0:
+                        // Unregister all service workers
+                        if ('serviceWorker' in navigator) {
+                            const registrations = await navigator.serviceWorker.getRegistrations();
+                            await Promise.all(registrations.map(reg => reg.unregister()));
+                        }
+                        break;
+                    case 1:
+                        // Clear all caches
+                        if ('caches' in window) {
+                            const cacheNames = await caches.keys();
+                            await Promise.all(cacheNames.map(name => caches.delete(name)));
+                        }
+                        break;
+                    case 2:
+                        // Clear localStorage (keep essential data)
+                        if (localStorage) {
+                            const keysToKeep = ['user-preferences'];
+                            const keys = Object.keys(localStorage);
+                            keys.forEach(key => {
+                                if (!keysToKeep.includes(key)) {
+                                    localStorage.removeItem(key);
+                                }
+                            });
+                        }
+                        break;
+                    case 3:
+                        // Clear sessionStorage
+                        if (sessionStorage) sessionStorage.clear();
+                        break;
+                    case 4:
+                        // Set force reload markers
+                        localStorage.setItem('force-cache-clear', Date.now().toString());
+                        localStorage.setItem('smartrv-version', 'revolutionising-20250830');
+                        break;
+                }
+            }
+            
+            // Redirect with cache busting
+            const targetUrl = new URL('/', window.location.origin);
+            targetUrl.searchParams.set('cache-cleared', Date.now());
+            targetUrl.searchParams.set('v', 'revolutionising-20250830');
+            
+            window.location.replace(targetUrl.toString());
+        }
+        
+        // Start the invalidation process
+        invalidateAllCaches().catch(error => {
+            console.error('Cache invalidation error:', error);
+            status.textContent = 'Cache clearing completed with some errors. Redirecting...';
+            setTimeout(() => {
+                window.location.replace('/?force-reload=' + Date.now());
+            }, 2000);
+        });
+    </script>
+</body>
+</html>

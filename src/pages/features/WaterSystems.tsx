@@ -6,6 +6,8 @@ import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
 import { useEffect } from "react";
 import { VideoSection } from "@/components/ui/VideoSection";
 import { PreloadedHeaderImage } from "@/components/ui/PreloadedHeaderImage";
+import { LazyImage } from '@/components/ui/LazyImage';
+import { getOptimizedImageProps } from '@/utils/imageOptimization';
 
 const WaterSystems = () => {
   useEffect(() => {
@@ -25,11 +27,15 @@ const WaterSystems = () => {
           {/* Header Image with Text Overlay */}
           <div className="mb-12 relative">
             <div className="relative w-full h-[400px] md:h-[500px] rounded-lg overflow-hidden">
-              <img
-                src="/smart-water-systems-hero.jpeg"
-                alt="Smart water system control interface with couple in RV examining water filtration monitoring displays and water quality metrics"
+              <LazyImage
+                {...getOptimizedImageProps({
+                  src: "/smart-water-systems-hero.jpeg",
+                  alt: "Smart water system control interface with couple in RV examining water filtration monitoring displays and water quality metrics",
+                  type: "hero"
+                })}
                 className="w-full h-full object-cover object-center"
                 style={{ objectPosition: '50% 30%' }}
+                priority={true}
               />
               {/* Text Overlay */}
               <div className="absolute inset-0 bg-black/50 flex items-center justify-center z-10">
