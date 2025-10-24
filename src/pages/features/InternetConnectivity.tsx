@@ -26,6 +26,8 @@ const InternetConnectivity = () => {
   return (
     <Layout>
       <Helmet>
+        <title>Smart RV Internet Connectivity Solutions | Stay Connected Anywhere</title>
+        <meta name="description" content="Stay connected anywhere with smart RV internet solutions. Starlink delivers 50-100 Mbps with 99% uptime. Compare mobile hotspots, WiFi boosters, and satellite options." />
         <script type="application/ld+json">
           {JSON.stringify(schemaData)}
         </script>

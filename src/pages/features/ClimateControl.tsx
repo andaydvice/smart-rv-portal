@@ -31,6 +31,8 @@ const ClimateControl = () => {
   return (
     <Layout>
       <Helmet>
+        <title>Smart RV Climate Control | Optimize Temperature & Save Energy</title>
+        <meta name="description" content="Control and optimize your RV climate with smart HVAC systems. Save 10-15% on energy costs with intelligent temperature management, automated scheduling, and remote monitoring." />
         <script type="application/ld+json">
           {JSON.stringify(schemaData)}
         </script>

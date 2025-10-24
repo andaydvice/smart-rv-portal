@@ -6,6 +6,7 @@ import { BenefitsGrid } from "../components/voice-control/BenefitsGrid";
 import FeaturesSection from "../components/voice-control/FeaturesSection";
 // MODIFIED: Removed Smartphone and Button imports
 import Layout from "@/components/layout/Layout";
+import { Helmet } from "react-helmet-async";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
 import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
 
@@ -14,6 +15,10 @@ const VoiceControl = () => {
   
   return (
     <Layout>
+      <Helmet>
+        <title>Smart RV Voice Control | Control Your RV With Voice Commands</title>
+        <meta name="description" content="Control your entire RV with voice commands. Manage lights, climate, security, and entertainment hands-free. Compatible with Alexa, Google Assistant, and Siri." />
+      </Helmet>
       <main className="relative w-full flex-grow">
         <VoiceControlHero />
         <div className="w-full">

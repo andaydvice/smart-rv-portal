@@ -31,6 +31,8 @@ const SmartAutomation = () => {
   return (
     <Layout>
       <Helmet>
+        <title>Smart RV Automation Systems | Control & Manage Everything</title>
+        <meta name="description" content="Automate and control your entire RV with intelligent systems. Save 5-22% on energy, respond to power events in 25ms, and manage everything with voice or app control." />
         <script type="application/ld+json">
           {JSON.stringify(schemaData)}
         </script>

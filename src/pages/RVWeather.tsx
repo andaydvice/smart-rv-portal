@@ -2,6 +2,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import Layout from "@/components/layout/Layout";
+import { Helmet } from "react-helmet-async";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { scrollToTop } from "@/utils/scrollToTop";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
@@ -84,6 +85,10 @@ const RVWeather = () => {
 
   return (
     <Layout>
+      <Helmet>
+        <title>Smart RV Weather Planning & Safety Guide | Monitor Conditions & Travel Safe</title>
+        <meta name="description" content="Plan safe RV travel with real-time weather monitoring and alerts. Get seasonal tips, regional climate guides, and smart weather preparedness for your RV adventures." />
+      </Helmet>
       <ScrollArea className="h-full rv-weather-page">
         <motion.div
           initial={{ opacity: 0 }}
