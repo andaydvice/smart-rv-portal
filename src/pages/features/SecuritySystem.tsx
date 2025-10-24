@@ -5,6 +5,7 @@ import { Shield, Lock, Bell, Camera, Smartphone, MapPin, BatteryCharging, KeyRou
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
 import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
 import { Helmet } from 'react-helmet-async';
+import { FeatureNavigationLinks } from "@/components/navigation/FeatureNavigationLinks";
 
 const SecuritySystem = () => {
   const canonicalUrl = typeof window !== 'undefined' ? `${window.location.origin}/features/security-system` : 'https://example.com/features/security-system';
@@ -315,6 +316,16 @@ const SecuritySystem = () => {
           />
           
           <AffiliateDisclosure className="mt-8" />
+
+          {/* Feature Navigation Links */}
+          <FeatureNavigationLinks
+            className="mt-12 mb-8"
+            relatedFeatures={[
+              { href: '/features/navigation-system', title: 'Navigation System', description: 'GPS tracking integrated with your security setup' },
+              { href: '/features/remote-control', title: 'Remote Control', description: 'Monitor and control security from anywhere' },
+              { href: '/features/internet-connectivity', title: 'Internet Connectivity', description: 'Connected cameras and real-time security alerts' }
+            ]}
+          />
 
           </div>
         </div>

@@ -14,6 +14,7 @@ import CallToActionSection from "@/components/features/remote-control/CallToActi
 import InterfaceDemoSection from "@/components/features/remote-control/InterfaceDemoSection";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
 import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
+import { FeatureNavigationLinks } from "@/components/navigation/FeatureNavigationLinks";
 
 const RemoteControl = () => {
   useEffect(() => {
@@ -117,6 +118,16 @@ const RemoteControl = () => {
           />
           
           <AffiliateDisclosure className="mb-8" />
+
+          {/* Feature Navigation Links */}
+          <FeatureNavigationLinks
+            className="mt-12 mb-8"
+            relatedFeatures={[
+              { href: '/features/smart-automation', title: 'Smart Automation', description: 'Full home automation with remote management' },
+              { href: '/features/climate-control', title: 'Climate Control', description: 'Adjust temperature and climate remotely' },
+              { href: '/features/security-system', title: 'Security System', description: 'Remote security monitoring and control' }
+            ]}
+          />
 
           {/* Call to Action Section */}
           <CallToActionSection />

@@ -10,6 +10,7 @@ import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliat
 import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
 import { useEffect } from "react";
 import { VideoSection } from "@/components/ui/VideoSection";
+import { FeatureNavigationLinks } from "@/components/navigation/FeatureNavigationLinks";
 
 const SmartKitchen = () => {
   // Force scroll to top when component mounts
@@ -137,13 +138,35 @@ const SmartKitchen = () => {
           
           <AffiliateDisclosure className="mb-8" />
 
-          <div className="text-center">
+          <div className="text-center mb-12">
             <Link to="/products">
               <Button size="lg" className="bg-blue-500 hover:bg-blue-600 text-lg py-8 px-12">
                 Explore Top Deals
               </Button>
             </Link>
           </div>
+
+          {/* Feature Navigation Links */}
+          <FeatureNavigationLinks
+            className="mt-12 mb-8"
+            relatedFeatures={[
+              {
+                title: "Water Systems",
+                path: "/features/water-systems",
+                description: "Smart water monitoring and filtration for your kitchen"
+              },
+              {
+                title: "Power Management",
+                path: "/features/power-management",
+                description: "Optimize power for kitchen appliances and refrigeration"
+              },
+              {
+                title: "Smart Automation",
+                path: "/features/smart-automation",
+                description: "Automate kitchen tasks and appliance control"
+              }
+            ]}
+          />
         </div>
       </motion.div>
     </Layout>

@@ -6,6 +6,7 @@ import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliat
 import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
 import { VideoSection } from "@/components/ui/VideoSection";
 import { PreloadedHeaderImage } from "@/components/ui/PreloadedHeaderImage";
+import { FeatureNavigationLinks } from "@/components/navigation/FeatureNavigationLinks";
 
 const SmartAutomation = () => {
   useEffect(() => {
@@ -157,8 +158,30 @@ const SmartAutomation = () => {
             gridCols="3"
             className="mt-16"
           />
-          
+
           <AffiliateDisclosure className="mt-8" />
+
+          {/* Feature Navigation Links */}
+          <FeatureNavigationLinks
+            className="mt-12 mb-8"
+            relatedFeatures={[
+              {
+                title: "Power Management",
+                path: "/features/power-management",
+                description: "Intelligent energy optimization with solar integration and analytics"
+              },
+              {
+                title: "Remote Control",
+                path: "/features/remote-control",
+                description: "Control your RV systems from anywhere with smart remote access"
+              },
+              {
+                title: "Climate Control",
+                path: "/features/climate-control",
+                description: "Automated temperature management for perfect comfort"
+              }
+            ]}
+          />
         </div>
       </motion.div>
     </Layout>

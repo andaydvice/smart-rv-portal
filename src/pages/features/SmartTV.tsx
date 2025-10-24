@@ -5,6 +5,7 @@ import { Tv, Cast, Smartphone, Gamepad } from "lucide-react";
 import Layout from "@/components/layout/Layout";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
 import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
+import { FeatureNavigationLinks } from "@/components/navigation/FeatureNavigationLinks";
 
 const SmartTV = () => {
   return (
@@ -102,8 +103,30 @@ const SmartTV = () => {
               ]}
               gridCols="2"
             />
-            
+
             <AffiliateDisclosure className="mt-8" />
+
+            {/* Feature Navigation Links */}
+            <FeatureNavigationLinks
+              className="mt-12 mb-8"
+              relatedFeatures={[
+                {
+                  title: "Entertainment",
+                  path: "/features/entertainment",
+                  description: "Complete entertainment hub with gaming and streaming"
+                },
+                {
+                  title: "Audio System",
+                  path: "/features/audio-system",
+                  description: "Premium audio integration for your viewing experience"
+                },
+                {
+                  title: "Internet Connectivity",
+                  path: "/features/internet-connectivity",
+                  description: "Fast internet for seamless streaming and downloads"
+                }
+              ]}
+            />
           </div>
         </div>
       </motion.div>

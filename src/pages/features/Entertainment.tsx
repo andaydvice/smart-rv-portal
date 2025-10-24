@@ -7,6 +7,7 @@ import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliat
 import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
 import { VideoSection } from "@/components/ui/VideoSection";
 import { PreloadedHeaderImage } from "@/components/ui/PreloadedHeaderImage";
+import { FeatureNavigationLinks } from "@/components/navigation/FeatureNavigationLinks";
 
 const Entertainment = () => {
   useEffect(() => {
@@ -189,7 +190,17 @@ const Entertainment = () => {
           
           <AffiliateDisclosure className="mt-8" />
 
-          
+          {/* Feature Navigation Links */}
+          <FeatureNavigationLinks
+            className="mt-12 mb-8"
+            relatedFeatures={[
+              { href: '/features/smart-tv', title: 'Smart TV', description: 'Premium TV integration for your entertainment hub' },
+              { href: '/features/audio-system', title: 'Audio System', description: 'Immersive sound for movies, music, and gaming' },
+              { href: '/features/internet-connectivity', title: 'Internet Connectivity', description: 'Fast streaming for all your entertainment needs' }
+            ]}
+          />
+
+
         </div>
       </motion.div>
     </Layout>

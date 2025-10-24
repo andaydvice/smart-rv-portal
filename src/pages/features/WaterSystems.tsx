@@ -6,6 +6,7 @@ import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
 import { useEffect } from "react";
 import { VideoSection } from "@/components/ui/VideoSection";
 import { PreloadedHeaderImage } from "@/components/ui/PreloadedHeaderImage";
+import { FeatureNavigationLinks } from "@/components/navigation/FeatureNavigationLinks";
 
 const WaterSystems = () => {
   useEffect(() => {
@@ -163,8 +164,30 @@ const WaterSystems = () => {
               ]}
               gridCols="2"
             />
-            
+
             <AffiliateDisclosure className="mt-8" />
+
+            {/* Feature Navigation Links */}
+            <FeatureNavigationLinks
+              className="mt-12 mb-8"
+              relatedFeatures={[
+                {
+                  title: "Smart Kitchen",
+                  path: "/features/smart-kitchen",
+                  description: "Connected appliances with water management integration"
+                },
+                {
+                  title: "Power Management",
+                  path: "/features/power-management",
+                  description: "Efficient power for water pumps and heating systems"
+                },
+                {
+                  title: "Smart Automation",
+                  path: "/features/smart-automation",
+                  description: "Automated water monitoring and conservation"
+                }
+              ]}
+            />
           </div>
         </div>
       </motion.div>

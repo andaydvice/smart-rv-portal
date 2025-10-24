@@ -6,6 +6,7 @@ import { Wifi, Globe, Shield, Zap } from "lucide-react";
 import ConnectivityGuide from "@/components/connectivity/ConnectivityGuide";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
 import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
+import { FeatureNavigationLinks } from "@/components/navigation/FeatureNavigationLinks";
 
 const InternetConnectivity = () => {
   return (
@@ -100,8 +101,30 @@ const InternetConnectivity = () => {
             gridCols="2"
             className="mt-16"
           />
-          
+
           <AffiliateDisclosure className="mt-8" />
+
+          {/* Feature Navigation Links */}
+          <FeatureNavigationLinks
+            className="mt-12 mb-8"
+            relatedFeatures={[
+              {
+                title: "Smart TV",
+                path: "/features/smart-tv",
+                description: "Stream content with fast, reliable internet connectivity"
+              },
+              {
+                title: "Remote Control",
+                path: "/features/remote-control",
+                description: "Control your RV remotely with internet access"
+              },
+              {
+                title: "Security System",
+                path: "/features/security-system",
+                description: "Monitor your RV security with connected cameras"
+              }
+            ]}
+          />
         </div>
       </motion.div>
     </Layout>

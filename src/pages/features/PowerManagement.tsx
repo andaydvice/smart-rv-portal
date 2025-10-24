@@ -5,6 +5,7 @@ import Layout from "@/components/layout/Layout";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
 import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
 import { Helmet } from 'react-helmet-async';
+import { FeatureNavigationLinks } from "@/components/navigation/FeatureNavigationLinks";
 
 const PowerManagement = () => {
   const canonicalUrl = typeof window !== 'undefined' ? `${window.location.origin}/features/power-management` : 'https://example.com/features/power-management';
@@ -217,9 +218,31 @@ const PowerManagement = () => {
               ]}
               gridCols="2"
             />
-            
+
             <AffiliateDisclosure className="mt-8" />
           </div>
+
+          {/* Feature Navigation Links */}
+          <FeatureNavigationLinks
+            className="mt-12 mb-8"
+            relatedFeatures={[
+              {
+                title: "Smart Automation",
+                path: "/features/smart-automation",
+                description: "Automate your RV's energy management for optimal efficiency"
+              },
+              {
+                title: "Climate Control",
+                path: "/features/climate-control",
+                description: "Smart temperature management optimized for power consumption"
+              },
+              {
+                title: "Water Systems",
+                path: "/features/water-systems",
+                description: "Efficient water heating and pumping with power monitoring"
+              }
+            ]}
+          />
         </div>
       </motion.div>
     </Layout>

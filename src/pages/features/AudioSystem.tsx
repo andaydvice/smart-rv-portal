@@ -5,6 +5,7 @@ import { Music, Volume2, Radio, Mic2 } from "lucide-react";
 import Layout from "@/components/layout/Layout";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
 import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
+import { FeatureNavigationLinks } from "@/components/navigation/FeatureNavigationLinks";
 
 const AudioSystem = () => {
   return (
@@ -94,8 +95,30 @@ const AudioSystem = () => {
               ]}
               gridCols="2"
             />
-            
+
             <AffiliateDisclosure className="mt-8" />
+
+            {/* Feature Navigation Links */}
+            <FeatureNavigationLinks
+              className="mt-12 mb-8"
+              relatedFeatures={[
+                {
+                  title: "Entertainment",
+                  path: "/features/entertainment",
+                  description: "Complete entertainment system with streaming and gaming"
+                },
+                {
+                  title: "Smart TV",
+                  path: "/features/smart-tv",
+                  description: "Advanced smart TV integration and streaming capabilities"
+                },
+                {
+                  title: "Remote Control",
+                  path: "/features/remote-control",
+                  description: "Control your audio system remotely from your device"
+                }
+              ]}
+            />
           </div>
         </div>
       </motion.div>

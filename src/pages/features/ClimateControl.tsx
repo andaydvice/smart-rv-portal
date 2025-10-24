@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
 import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
 import { VideoSection } from "@/components/ui/VideoSection";
+import { FeatureNavigationLinks } from "@/components/navigation/FeatureNavigationLinks";
 
 const ClimateControl = () => {
   useEffect(() => {
@@ -156,6 +157,28 @@ const ClimateControl = () => {
           <div className="px-4">
             <AffiliateDisclosure className="max-w-7xl mx-auto my-8" />
           </div>
+
+          {/* Feature Navigation Links */}
+          <FeatureNavigationLinks
+            className="mt-12 mb-8"
+            relatedFeatures={[
+              {
+                title: "Power Management",
+                path: "/features/power-management",
+                description: "Optimize energy usage for efficient climate control"
+              },
+              {
+                title: "Smart Automation",
+                path: "/features/smart-automation",
+                description: "Automate your climate settings for perfect comfort"
+              },
+              {
+                title: "Remote Control",
+                path: "/features/remote-control",
+                description: "Adjust temperature and climate from anywhere"
+              }
+            ]}
+          />
         </div>
       </motion.div>
     </Layout>

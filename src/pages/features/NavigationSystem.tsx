@@ -4,6 +4,7 @@ import { Navigation, Map, Compass, Radar } from "lucide-react";
 import Layout from "@/components/layout/Layout";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
 import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
+import { FeatureNavigationLinks } from "@/components/navigation/FeatureNavigationLinks";
 
 const NavigationSystem = () => {
   return (
@@ -124,6 +125,16 @@ const NavigationSystem = () => {
           />
           
           <AffiliateDisclosure className="mt-8" />
+
+          {/* Feature Navigation Links */}
+          <FeatureNavigationLinks
+            className="mt-12 mb-8"
+            relatedFeatures={[
+              { href: '/features/automated-driving', title: 'Automated Driving', description: 'Advanced self-driving features with smart navigation integration' },
+              { href: '/features/security-system', title: 'Security System', description: 'Enhanced security with GPS tracking and monitoring' },
+              { href: '/features/internet-connectivity', title: 'Internet Connectivity', description: 'Real-time map updates and connected navigation' }
+            ]}
+          />
         </div>
       </motion.div>
     </Layout>

@@ -11,6 +11,7 @@ import { useEffect } from "react";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
 import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
 import { Helmet } from "react-helmet-async";
+import { ModelNavigationLinks } from "@/components/navigation/ModelNavigationLinks";
 
 const AdventureModel = () => {
   useEffect(() => {
@@ -101,8 +102,11 @@ const AdventureModel = () => {
               ]}
               gridCols="3"
             />
-            
+
             <AffiliateDisclosure className="mt-8" />
+
+            {/* Model Navigation Links */}
+            <ModelNavigationLinks className="mt-12 mb-8" />
           </Container>
         </motion.div>
       </div>

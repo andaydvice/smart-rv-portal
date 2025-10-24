@@ -13,6 +13,7 @@ import { luxuryModels } from "@/data/luxury-models";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
 import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
 import { Helmet } from "react-helmet-async";
+import { ModelNavigationLinks } from "@/components/navigation/ModelNavigationLinks";
 
 const LuxuryModel = () => {
   const navigate = useNavigate();
@@ -192,21 +193,8 @@ const LuxuryModel = () => {
               </div>
             </motion.div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.8 }}
-              className="text-center mt-16"
-            >
-              <Link to="/models/compare">
-                <Button 
-                  variant="outline" 
-                  className="bg-transparent border-white text-white hover:bg-blue-500/50 hover:text-white"
-                >
-                  Compare All Models <ArrowLeft className="w-4 h-4 ml-2" />
-                </Button>
-              </Link>
-            </motion.div>
+            {/* Model Navigation Links */}
+            <ModelNavigationLinks className="mt-16 mb-8" />
           </div>
         </div>
       </motion.main>

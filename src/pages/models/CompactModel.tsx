@@ -7,6 +7,7 @@ import { rvTypes } from "@/data/rvTypes";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
 import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
 import { Helmet } from "react-helmet-async";
+import { ModelNavigationLinks } from "@/components/navigation/ModelNavigationLinks";
 
 // Lazy load components that are not immediately visible
 const CompactModelHero = lazy(() => import("@/components/models/compact/CompactModelHero"));
@@ -94,8 +95,11 @@ const CompactModel = () => {
               ]}
               gridCols="3"
             />
-            
+
             <AffiliateDisclosure className="mt-8" />
+
+            {/* Model Navigation Links */}
+            <ModelNavigationLinks className="mt-12 mb-8" />
           </div>
         </Suspense>
       </div>
