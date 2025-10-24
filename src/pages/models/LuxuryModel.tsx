@@ -13,6 +13,7 @@ import { luxuryModels } from "@/data/luxury-models";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
 import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
 import { Helmet } from "react-helmet-async";
+import { PageSummary } from "@/components/ui/PageSummary";
 
 const LuxuryModel = () => {
   const navigate = useNavigate();
@@ -115,6 +116,25 @@ const LuxuryModel = () => {
         className="bg-gradient-to-b from-gray-900 to-gray-800 w-full"
       >
         <LuxuryHero handleNavigation={handleNavigation} />
+
+        {/* Model Overview */}
+        <div className="w-full px-4 py-8 bg-gray-900/50">
+          <div className="max-w-7xl mx-auto">
+            <PageSummary
+              question="What luxury RV models are available?"
+              answer="Premium RV models starting at $1.3M featuring advanced automation, high-end finishes, and full-time living amenities. Explore Class A diesel pushers, premium motorhomes, luxury fifth wheels, and high-end travel trailers with extended range power and premium security suites."
+              keyPoints={[
+                "Class A Diesel Pushers - Flagship models $300K-$1M+ with rear diesel engines, air ride suspension, residential amenities",
+                "Premium Class A Diesel - Ultimate luxury $500K-$2M+ with custom interiors, washer/dryer, king beds, outdoor entertainment",
+                "Luxury Fifth Wheels - Towable luxury $80K-$200K+ with residential appliances, multiple slide-outs, spacious layouts",
+                "Premium Travel Trailers - High-end towables $50K-$150K with luxury finishes, smart technology, full kitchens",
+                "Advanced Technology - All models include navigation systems, security suites, high-speed internet, power management",
+                "Full-Time Living - Residential refrigerators, king beds, washer/dryer, ample storage for extended travel"
+              ]}
+              readingTime="10 min read"
+            />
+          </div>
+        </div>
 
         <div className="w-full px-4 pt-12 pb-24 relative z-10">
           <div className="max-w-7xl mx-auto">

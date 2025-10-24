@@ -8,6 +8,7 @@ import Footer2 from "@/components/ui/Footer2";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
 import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
 import { Helmet } from "react-helmet-async";
+import { PageSummary } from "@/components/ui/PageSummary";
 
 // Model data
 const models = [
@@ -107,6 +108,23 @@ const Models = () => {
               Discover our range of luxury smart RVs, each designed to provide the ultimate blend of comfort and innovation
             </p>
           </motion.div>
+
+          {/* Models Overview */}
+          <div className="mb-12">
+            <PageSummary
+              question="What Smart RV models are available?"
+              answer="Three distinct RV model categories designed for different lifestyles and budgets. Choose from luxury class for premium full-time living, adventure class for off-grid exploration, or compact smart for efficient weekend travel. All models include advanced technology and smart features."
+              keyPoints={[
+                "Luxury Class - Premium flagship starting at $1.3M with advanced automation, high-speed internet, extended range power",
+                "Adventure Class - Off-grid explorer starting at $50K with solar power, all-terrain monitoring, satellite connectivity",
+                "Compact Smart - Efficient weekender starting at $20K with city navigation, efficient power, 4G/5G connectivity",
+                "Smart Technology - All models include navigation systems, security suites, power management, and internet connectivity",
+                "Customization - Configure each model with additional features and technology packages to match your needs",
+                "Compare Models - Use our comparison tool to see detailed specs and features side-by-side"
+              ]}
+              readingTime="5 min read"
+            />
+          </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {models.map((model, index) => (

@@ -12,6 +12,7 @@ import models from "@/components/models/compare/ModelComparisonData";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
 import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
 import { Helmet } from "react-helmet-async";
+import { PageSummary } from "@/components/ui/PageSummary";
 
 
 const CompareModels = () => {
@@ -60,11 +61,30 @@ const CompareModels = () => {
         <link rel="canonical" href="/models/compare" />
       </Helmet>
       <Layout>
-        <CompareHero 
+        <CompareHero
           title="Compare Models"
           description="Find the perfect smart RV that matches your lifestyle. Compare features and specifications across our range of models."
           imageSrc="/lovable-uploads/Luxury-Class-RVs-min.jpg"
         />
+
+        {/* Comparison Overview */}
+        <div className="w-full px-4 py-8 bg-gray-900/50">
+          <div className="max-w-7xl mx-auto">
+            <PageSummary
+              question="How do you compare RV models?"
+              answer="Side-by-side comparison of three RV model categories across specifications, features, technology, and pricing. Compare dimensions, sleeping capacity, power systems, smart features, and amenities to find the perfect RV for your lifestyle and budget."
+              keyPoints={[
+                "Specifications Table - Compare dimensions, weight, sleeping capacity, tank capacities, and towing requirements",
+                "Features Comparison - Side-by-side analysis of smart systems, automation, connectivity, and premium amenities",
+                "Technology Packages - Compare navigation systems, security features, power management, and internet options",
+                "Price Comparison - Starting prices from $20K (Compact) to $50K (Adventure) to $1.3M (Luxury)",
+                "Use Case Matching - Identify which model best fits weekend trips, off-grid adventures, or full-time living",
+                "Test Before Buying - Try rental models to experience features, layouts, and driving dynamics firsthand"
+              ]}
+              readingTime="6 min read"
+            />
+          </div>
+        </div>
 
         <div className="w-full px-4 py-16">
           {/* Model cards grid */}

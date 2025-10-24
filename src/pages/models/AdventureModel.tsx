@@ -11,6 +11,7 @@ import { useEffect } from "react";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
 import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
 import { Helmet } from "react-helmet-async";
+import { PageSummary } from "@/components/ui/PageSummary";
 
 const AdventureModel = () => {
   useEffect(() => {
@@ -26,7 +27,27 @@ const AdventureModel = () => {
       </Helmet>
       <div className="bg-gradient-to-b from-gray-900 to-gray-800 w-full">
         <AdventureHero />
-        <motion.div 
+
+        {/* Model Overview */}
+        <div className="w-full px-4 py-8 bg-gray-900/50">
+          <div className="max-w-7xl mx-auto">
+            <PageSummary
+              question="What adventure RV models are available?"
+              answer="Rugged off-grid RVs starting at $50K built for remote exploration and boondocking. Explore off-road trailers, overland vehicles, toy haulers, truck campers, and adventure-ready Class Cs with solar power integration, all-terrain monitoring, and satellite connectivity."
+              keyPoints={[
+                "Off-Road Trailers - Rugged towables $30K-$80K with off-road suspension, solar power, and water filtration for remote camping",
+                "Overland Vehicles - 4x4 capable RVs $80K-$200K+ with lifted suspension, aggressive tires, and expedition equipment",
+                "Toy Haulers - Adventure RVs $50K-$150K with built-in garages for bikes, ATVs, and outdoor gear",
+                "Truck Campers - Removable units $20K-$60K that fit pickup beds for ultimate off-road access and flexibility",
+                "Adventure Class C - Off-road motorhomes $100K-$250K with 4x4 capability, solar power, and boondocking amenities",
+                "Off-Grid Technology - Solar power integration, satellite connectivity, water filtration, all-terrain monitoring systems"
+              ]}
+              readingTime="8 min read"
+            />
+          </div>
+        </div>
+
+        <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6 }}

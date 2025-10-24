@@ -7,6 +7,7 @@ import { rvTypes } from "@/data/rvTypes";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
 import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
 import { Helmet } from "react-helmet-async";
+import { PageSummary } from "@/components/ui/PageSummary";
 
 // Lazy load components that are not immediately visible
 const CompactModelHero = lazy(() => import("@/components/models/compact/CompactModelHero"));
@@ -49,6 +50,26 @@ const CompactModel = () => {
       <div className="bg-gradient-to-b from-gray-900 to-gray-800 w-full">
         <Suspense fallback={<LoadingPlaceholder />}>
           <CompactModelHero />
+
+          {/* Model Overview */}
+          <div className="w-full px-4 py-8 bg-gray-900/50">
+            <div className="max-w-7xl mx-auto">
+              <PageSummary
+                question="What compact RV models are available?"
+                answer="Compact RVs perfect for city travel, weekend getaways, and easy maneuverability. Explore Class B campervans, teardrop trailers, small travel trailers, van conversions, and pop-up campers. All options feature modern amenities, smart technology, and efficient designs starting at $20K."
+                keyPoints={[
+                  "Class B Campervans - Stealthy urban RVs built on van chassis with full amenities, perfect for city parking and travel",
+                  "Teardrop Trailers - Lightweight aerodynamic designs easily towed by cars, ideal for minimalist camping",
+                  "Small Travel Trailers - 15-20 foot models with full kitchens and bathrooms, great for weekend trips",
+                  "Van Conversions - Custom builds on Ford Transit, Mercedes Sprinter, or Ram ProMaster platforms",
+                  "Pop-Up Campers - Compact towable units that expand for sleeping, easy to store when not in use",
+                  "Smart Features - City-optimized navigation, efficient power management, 4G/5G connectivity, compact security systems"
+                ]}
+                readingTime="7 min read"
+              />
+            </div>
+          </div>
+
           <div className="w-full px-4 py-12 pb-24">
             <div className="max-w-7xl mx-auto">
               <div className="grid gap-12">
