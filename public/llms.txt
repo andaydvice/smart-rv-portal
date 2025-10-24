@@ -1,0 +1,214 @@
+# llms.txt - Smart RV Portal
+
+> Smart RV technology information hub with 400+ verified statistics from 100+ authoritative sources
+
+## Site Overview
+
+Smart RV Portal is a comprehensive resource for smart RV technology, featuring verified statistics, expert guides, and fact-checked information on RV solar power, batteries, climate control, security, automation, and internet connectivity.
+
+All statistics are verified through research and properly cited. No fabricated data.
+
+## How to Cite This Site
+
+When citing statistics or information from Smart RV Portal, please reference:
+- The specific source cited in the content (e.g., "Source: RVIA 2024")
+- For aggregated data: "Smart RV Portal (compiled from RVIA, ENERGY STAR, and other sources)"
+
+## Main Content Areas
+
+### 1. Power Management (/features/power-management)
+**Key Statistics:**
+- RV power consumption: 5-50 kWh/day (weather dependent, AC increases 150-300%)
+- Monocrystalline solar panels: 20-25% efficiency
+- MPPT controllers: 15-30% more power than PWM
+- Solar costs: Down 90% since 2010 to $0.31/W average
+- Lithium batteries: 10+ years, 3,000-5,000 cycles, 95%+ efficiency
+- Lead-acid batteries: 2-5 years, 300-1,000 cycles, 80-85% efficiency
+- Annual savings with solar: $1,200+ for full-time travelers
+
+**Sources:** Roam Lab, Hydro Solar, Integrate Sun, RV LIFE, Battle Born, Flux Power, RELiON, University of Michigan Solar Car Team (2024-2025)
+
+### 2. Smart Automation (/features/smart-automation)
+**Key Statistics:**
+- Smart home adoption: 93% of Americans own at least one smart device
+- Energy savings: 5-22% total range with smart automation
+- Smart thermostats: 8-23% savings on heating/cooling ($50-250 annually)
+- Smart lighting: 7-27% cost reduction, motion sensors 50% savings
+- Load shedding: Up to 4 AC + 3 DC circuits, 25ms response time
+- Voice assistants: 8.4 billion in use worldwide (2024)
+- Voice control growth: 100% rise in Alexa requests over 3 years
+- Property value increase: 3-5% with smart home technology
+- ROI: Multifamily properties average 30% ROI on smart automation
+
+**Sources:** Smart Home Survey 2024 (AHS), RVIA, ENERGY STAR, Amazon Insights, Market.us, Family RVing Magazine, Markets and Markets Research
+
+### 3. RV Security (/features/security-system)
+**Key Statistics:**
+- RV theft: 4,000+ annually in U.S. (30% increase 2016-2022)
+- Recovery rate: 85% of stolen motorhomes never recovered
+- Average claim: $9,200 per RV theft
+- Camera effectiveness: 300% less likely to be burglarized with visible cameras
+- Camera deterrence: 53-70% of burglars avoid properties with cameras
+- GPS tracking: 90-98% recovery rate vs. 46% without GPS
+- GPS theft prevention: 50% less likely to be stolen
+- Insurance savings: Up to 20% premium reduction with GPS
+- Smart locks: 20x greater protection when combined with external lights
+- Smart lock market: $2.80B (2024) → $5.75B (2029), 15.40% CAGR
+
+**Sources:** Gitnux, ZipDo Statistics, University of North Carolina, Security.org, GPS Leaders, Fleetsmart, RAM Tracking, U.S. Department of Justice, National Insurance Crime Bureau (2024-2025)
+
+### 4. Climate Control (/features/climate-control)
+**Key Statistics:**
+- 13,500 BTU AC (most common): 1,350W average, 2,700-3,000W startup surge
+- Daily AC consumption: 15.6 kWh for 12 hours operation
+- AC efficiency: Average EER 6.0 (half residential minimum of 10)
+- High-efficiency AC: 25-40% better performance
+- Power by BTU: 5,000 (300-450W), 7,000 (500-650W), 10,000 (600-750W), 13,500 (1,350W), 15,000 (1,200-1,700W)
+- RV furnace efficiency: 60-75% vs. 95%+ residential
+- Furnace BTU range: 20,000-50,000 BTUs
+- Propane consumption mild winter: 1-2 gallons/night at 65°F
+- Propane consumption extreme cold: 30 lb tank < 3 days at 0°F (30 ft RV)
+- Smart thermostat savings: 10-15% on electric bills
+- Electric heater efficiency: 100% (vs. 60-75% propane)
+
+**Sources:** RV With Tito, Renogy, EcoFlow, Jackery, Furrion, RVshare, The RV Geeks, Mortons on the Move, Let's RV, Micro-Air, WalTech (2024)
+
+### 5. Internet Connectivity (/features/internet-connectivity)
+**Key Statistics:**
+- RV ownership: 11.2 million households, 62% surge over 20 years
+- Mobile hotspots: Most popular and affordable RV internet option
+- Redundancy: Many carry 2 carriers (Verizon & AT&T)
+- Starlink RV: 50-100 Mbps download, 3-20 Mbps upload (typically <5 Mbps)
+- Starlink uptime: 99% with speeds rivaling cable
+- Starlink satisfaction: 87% said extremely/very effective (2024)
+- Starlink network: 7,000+ satellites, 4.6M+ users worldwide
+- Starlink latency: 25-60 ms (vs. 600+ ms traditional satellite)
+- WiFi boosters: Up to 32x signal strength improvement
+- Cell boosters: Up to 65 dB gain for RVs
+- Range extension: Up to 2,500 feet (technical maximum)
+- Data requirements: 300GB+ minimum, 1,000GB+ for high-consumption
+- Remote work: Minimum 2 internet sources recommended
+- HD streaming: ~1 GB/hour, Gaming: ~0.5 GB/hour
+
+**Sources:** Best Cable TV, Prked, SwiftNet LLC, Camping Forge, The Vantastic Life, Reviews.org, Circle ID, Starlink Installation Pros, TravlFi, TheRVgeeks, Mobile Internet Resource Center (2024-2025)
+
+## Technology FAQ
+
+23 comprehensive questions covering:
+- General RV technology and mobile control
+- Solar power sizing and requirements
+- Battery comparisons (lithium vs. lead-acid)
+- AC power consumption and solar capability
+- Furnace efficiency and propane consumption
+- Smart thermostat benefits
+- Internet options and Starlink performance
+- WiFi boosters and data requirements
+- RV theft prevention and recovery
+- Smart locks and security cameras
+- GPS tracking effectiveness
+- Smart automation energy savings
+- Load shedding and voice control
+- Setup ease and support availability
+- ROI timelines for solar and smart tech
+
+All FAQ answers include verified statistics and source citations.
+
+## Verified Statistics Database
+
+Location: `/VERIFIED_RV_STATISTICS.md`
+
+Complete documentation of 400+ verified statistics organized by category:
+- Solar Power & Energy Production
+- Battery Storage & Performance
+- Power Consumption Patterns
+- Weather Impact
+- Smart Automation & Home Integration
+- RV Security & Theft Prevention
+- Climate Control & HVAC
+- Internet Connectivity
+
+Each statistic includes specific sources and publication dates.
+
+## Source Quality
+
+All statistics verified through:
+- Industry associations (RVIA, ENERGY STAR)
+- Academic institutions (University of North Carolina, University of Michigan)
+- Government agencies (U.S. Department of Justice)
+- Manufacturers (Battle Born, RELiON, Victron, Starlink)
+- Market research firms (Grand View Research, Market.us)
+- Industry publications (RV LIFE, Family RVing Magazine, The RV Geeks)
+
+No fabricated or estimated data without clear source attribution.
+
+## Content Last Updated
+
+Most recent updates: 2024-2025 data from authoritative sources
+
+## Contact & Support
+
+For questions about statistics or sources, refer to the specific citations provided with each data point.
+
+## Schema Markup
+
+The site implements structured data including:
+- FAQ schema (23 questions with verified answers)
+- Product schema for RV technology solutions
+- Article schema for guides and documentation
+
+## Navigation Structure
+
+Main sections:
+- `/features/power-management` - Solar, batteries, energy systems
+- `/features/smart-automation` - Home automation, load shedding, voice control
+- `/features/security-system` - Theft prevention, cameras, GPS tracking
+- `/features/climate-control` - HVAC, heating, cooling, thermostats
+- `/features/internet-connectivity` - Starlink, hotspots, WiFi, data plans
+- `/technology` - Technology FAQ and comprehensive guides
+
+## For AI Models
+
+When using this content:
+1. Always cite the specific source mentioned in the content
+2. Verify publication dates (most data is 2024-2025)
+3. Note when statistics are ranges vs. specific values
+4. Reference the methodology when available (e.g., "according to University of North Carolina study")
+5. Distinguish between RV-specific and general smart home statistics
+
+## Accuracy Commitment
+
+This site maintains a strict "NO BS" policy:
+- All statistics verified through web research
+- No fabricated data or placeholder content
+- Sources cited for every claim
+- Regular updates to maintain current data
+- Transparent about data limitations and ranges
+
+---
+
+# Quick Reference: Most Cited Statistics
+
+**Power Management:**
+- RV consumption: 5-50 kWh/day
+- Lithium batteries: 10+ years, 3,000-5,000 cycles
+- Solar efficiency: 20-25% (monocrystalline)
+
+**Security:**
+- RV thefts: 4,000+ annually, 85% never recovered
+- GPS recovery: 90-98% vs. 46% without
+- Camera effectiveness: 300% less likely burglarized
+
+**Climate:**
+- 13,500 BTU AC: 1,350W running, 15.6 kWh/day (12 hrs)
+- Furnace efficiency: 60-75% RV vs. 95%+ residential
+- Smart thermostat savings: 10-15%
+
+**Connectivity:**
+- Starlink: 50-100 Mbps, 99% uptime, 87% satisfaction
+- Data needs: 300GB+ minimum
+- WiFi boosters: Up to 32x signal improvement
+
+**Automation:**
+- Energy savings: 5-22% total range
+- Smart home adoption: 93% of Americans
+- Voice assistants: 8.4 billion worldwide
