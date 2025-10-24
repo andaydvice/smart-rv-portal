@@ -33,8 +33,8 @@ const Calculators = () => {
   return (
     <Layout>
       <Helmet>
-        <title>RV Calculators & Tools</title>
-        <meta name="description" content="Plan smarter with our RV calculators for fuel, power, towing, and smart systems. Compare options and optimize your trips." />
+        <title>Calculate RV Costs & Energy Usage | Free RV Planning Tools</title>
+        <meta name="description" content="Calculate fuel costs, power consumption, solar needs, and towing capacity with free RV tools. Plan smarter trips, optimize energy usage, and compare system options for your RV." />
         <link rel="canonical" href={typeof window !== 'undefined' ? window.location.origin + '/calculators' : ''} />
       </Helmet>
       <div className="pt-16 flex-grow">

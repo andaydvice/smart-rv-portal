@@ -29,9 +29,9 @@ const Index = () => {
   return (
     <Layout>
       <SEO
-        title="Smart RV Technology Hub | Connected, Safe, Efficient Living"
-        description="Discover cutting-edge smart RV technology, connectivity solutions, safety systems, and ROI calculators for tech-savvy travelers and digital nomads. Expert reviews, guides, and tools."
-        keywords="smart RV technology, RV connectivity, digital nomad, RV safety systems, mobile internet, solar power, RV automation, connected travel"
+        title="Smart RV Technology Hub | Discover, Compare & Shop Connected RV Solutions"
+        description="Discover and shop cutting-edge smart RV technology. Compare connectivity solutions, explore safety systems, calculate solar needs, and find expert guides for tech-savvy travelers and digital nomads."
+        keywords="smart RV technology, RV connectivity, digital nomad, RV safety systems, mobile internet, solar power, RV automation, connected travel, shop RV tech"
         ogImage="/og-image.svg"
         ogImageAlt="Smart RV Technology Hub - Connected Living Solutions"
         structuredData={[

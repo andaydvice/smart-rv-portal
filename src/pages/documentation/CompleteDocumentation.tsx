@@ -48,8 +48,8 @@ const CompleteDocumentation = () => {
   return (
     <Layout>
       <Helmet>
-        <title>Complete Smart RV Documentation</title>
-        <meta name="description" content="Full Smart RV system documentation including architecture, network, power, and security." />
+        <title>Complete Smart RV Documentation | Learn System Architecture & Setup</title>
+        <meta name="description" content="Learn your complete Smart RV system with detailed architecture documentation. Get network infrastructure guides, power management specs, security protocols, and comprehensive setup instructions." />
         <link rel="canonical" href={typeof window !== 'undefined' ? window.location.origin + '/documentation/complete' : ''} />
       </Helmet>
       <div className="w-full px-4 pt-24 pb-16">

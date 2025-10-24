@@ -10,8 +10,8 @@ const Features = () => {
   return (
     <Layout>
       <Helmet>
-        <title>Smart RV Features | Systems And Capabilities</title>
-        <meta name="description" content="Explore Smart RV features including navigation, security, power management, water systems, and automation with trusted partners." />
+        <title>Explore Smart RV Features & Systems | Discover Advanced Capabilities</title>
+        <meta name="description" content="Explore and discover smart RV features including navigation systems, security monitoring, power management, climate control, and automation. Compare capabilities and find trusted partners for your RV upgrade." />
         <link rel="canonical" href={typeof window !== 'undefined' ? window.location.origin + '/features' : ''} />
       </Helmet>
       <motion.div
