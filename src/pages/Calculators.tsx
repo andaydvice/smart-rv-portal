@@ -22,6 +22,7 @@ import Navbar from "@/components/Navbar";
 import Layout from "@/components/layout/Layout";
 import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
 import { Helmet } from "react-helmet-async";
+import { PageSummary } from "@/components/ui/PageSummary";
 
 const Calculators = () => {
   const [historicalMPG, setHistoricalMPG] = useState<MPGRecord[]>([]);
@@ -41,7 +42,23 @@ const Calculators = () => {
         <CalculatorHeader />
         <CalculatorIntro />
         <ScrollHint />
-        
+
+        {/* Quick Overview of All Calculators */}
+        <div className="container mx-auto px-4 mt-8 mb-8">
+          <PageSummary
+            question="What can you calculate with our RV tools?"
+            answer="Access 13 free RV calculators organized into 5 categories. Plan your costs, optimize fuel efficiency, size your power systems, ensure towing safety, and decode smart system alerts. All calculators save your results for future reference."
+            keyPoints={[
+              "Cost Calculator - Total ownership costs, financing, and budget planning for your RV investment",
+              "Fuel Calculators (4 tools) - Gas costs, fuel efficiency, MPG tracking, and trip efficiency planning",
+              "Power Calculators (3 tools) - Battery capacity sizing, power consumption analysis, and solar panel requirements",
+              "Towing Calculators (3 tools) - Safety ratings, weight distribution, and tire pressure optimization",
+              "Smart System Tools (3 tools) - System decoder, alert translator, and custom setup guide creator"
+            ]}
+            readingTime="Use any calculator instantly"
+          />
+        </div>
+
         <div className="container mx-auto px-4 mt-8">
           <Tabs defaultValue="cost" className="w-full">
             <TabsList className="w-full h-[60px] flex overflow-x-auto no-scrollbar bg-[#1a202c] p-1 rounded-lg mb-6">

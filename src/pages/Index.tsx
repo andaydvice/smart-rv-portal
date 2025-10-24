@@ -12,6 +12,7 @@ import { TrustStrip } from "@/components/sections/TrustStrip";
 import TestimonialsSection from "@/components/sections/testimonials/TestimonialsSection";
 // Critical above-the-fold components are now imported synchronously
 import { FeaturesSection } from "@/components/sections/FeaturesSection";
+import { PageSummary } from "@/components/ui/PageSummary";
 // Keep below-the-fold components lazy for performance
 const SustainabilitySection = lazy(() => import("@/components/sections/SustainabilitySection"));
 const TechnologySection = lazy(() => import("@/components/sections/TechnologySection"));
@@ -50,12 +51,29 @@ const Index = () => {
           }
         ]}
       />
-      <motion.div 
+      <motion.div
         initial={false}
         className="min-h-screen w-full"
       >
         <HeroSection />
-        
+
+        {/* Search Intent Summary - Immediate Value */}
+        <div className="bg-gradient-to-b from-[#080F1F] to-[#0F1729] py-12 px-4">
+          <div className="max-w-6xl mx-auto">
+            <PageSummary
+              answer="Smart RV Technology Hub is your complete resource for RV technology education, planning tools, and expert guidance. Whether you're upgrading your current RV or planning your first smart RV setup, we provide everything you need to make informed decisions."
+              keyPoints={[
+                "Expert Guides - Comprehensive tutorials on connectivity, solar power, climate control, security systems, and more",
+                "Interactive Tools - 6 AI-powered calculators and planning tools for fuel, power, towing, and system optimization",
+                "Product Reviews - Honest, detailed reviews of RV technology products and services",
+                "Community Support - Connect with fellow RV enthusiasts and technology experts",
+                "Storage Solutions - Find and compare 196+ RV storage facilities nationwide"
+              ]}
+              readingTime="Browse at your pace"
+            />
+          </div>
+        </div>
+
         {/* Quick Navigation to Storage Facilities Map */}
         <div className="bg-connectivity-darkBg py-8 px-4 border-t border-b border-gray-700">
           <div className="max-w-6xl mx-auto text-center">

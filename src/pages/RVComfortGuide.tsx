@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import Layout from '@/components/layout/Layout';
 import { Helmet } from 'react-helmet-async';
 import { Bed, Thermometer, Wind, Lightbulb, Coffee, Bath } from 'lucide-react';
+import { PageSummary } from '@/components/ui/PageSummary';
 import heroImage from '@/assets/rv-comfort-hero.jpg';
 import advancedComfortImage from '@/assets/rv-advanced-comfort.jpg';
 
@@ -141,6 +142,24 @@ const RVComfortGuide = () => {
         </div>
 
         <div className="max-w-7xl mx-auto px-4 py-20">
+
+          {/* Quick Guide Overview */}
+          <div className="mb-16">
+            <PageSummary
+              question="How can you make your RV more comfortable?"
+              answer="Transform your RV into a comfortable home on wheels with our comprehensive guide covering 6 essential comfort areas plus seasonal tips, space optimization strategies, and noise reduction techniques. Learn how to improve sleep quality, climate control, air quality, lighting, and more."
+              keyPoints={[
+                "Sleep Quality - Mattress selection, blackout curtains, white noise, optimal temperature (65-68°F)",
+                "Climate Control - Air circulation, thermal coverings, humidity management, mini-split systems",
+                "Air Quality - HEPA filtration, exhaust fans, proper ventilation, filter maintenance",
+                "Lighting Optimization - LED efficiency, dimmer switches, task lighting, smart color bulbs",
+                "Kitchen Comfort - Space-saving storage, quality cookware, ventilation, comfortable seating",
+                "Bathroom Comfort - Shower organizers, mirror lighting, composting toilets, moisture control"
+              ]}
+              readingTime="10 min read"
+              lastUpdated="October 2025"
+            />
+          </div>
 
           {/* Comfort Areas Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">

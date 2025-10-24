@@ -7,6 +7,7 @@ import Layout from '@/components/layout/Layout';
 import { Button } from '@/components/ui/button';
 import { OptimizedAffiliateGrid } from '@/components/affiliate/OptimizedAffiliateGrid';
 import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
+import { PageSummary } from '@/components/ui/PageSummary';
 
 interface SearchResultItem {
   id: string;
@@ -146,6 +147,37 @@ const SearchResults: React.FC = () => {
             {results.length} results found in {category === 'all' ? 'all categories' : category}
           </p>
         </div>
+
+        {/* Quick Search Helper */}
+        {results.length > 0 && (
+          <div className="mb-8">
+            <PageSummary
+              answer="Browse results below or use the category filters to narrow your search. Popular topics include RV calculators, smart features, troubleshooting guides, storage facilities, and maintenance checklists."
+              keyPoints={[
+                "Calculators - Fuel, power, towing, and cost planning tools",
+                "Smart Features - Climate control, security, automation, and connectivity",
+                "Guides - Setup tutorials, comfort tips, and technology planning",
+                "Storage - 196+ facilities nationwide with interactive map",
+                "Troubleshooting - Step-by-step solutions for common RV issues"
+              ]}
+            />
+          </div>
+        )}
+
+        {results.length === 0 && query && (
+          <div className="mb-8">
+            <PageSummary
+              answer="No results found for your search. Try these popular topics instead:"
+              keyPoints={[
+                "RV Calculators - Plan fuel costs, power needs, and budget",
+                "Smart RV Features - Explore automation and connectivity options",
+                "Troubleshooting - Find solutions to common RV problems",
+                "Storage Facilities - Locate RV storage near you",
+                "Comfort Guide - Tips for improving RV livability"
+              ]}
+            />
+          </div>
+        )}
 
         <div className="flex flex-col md:flex-row gap-6">
           {/* Filters sidebar */}

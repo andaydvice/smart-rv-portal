@@ -7,6 +7,7 @@ import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 import { availableTools } from '@/lib/toolsData';
 import rvTechToolsHero from '@/assets/rv-technology-tools-hero.png';
 import Layout from '@/components/layout/Layout';
+import { PageSummary } from '@/components/ui/PageSummary';
 
 const Tools: React.FC = () => {
   const navigate = useNavigate();
@@ -40,7 +41,24 @@ const Tools: React.FC = () => {
 
         <div className="container mx-auto px-4 py-16">
           <Breadcrumbs items={[{ label: 'Tools' }]} />
-          
+
+          {/* Quick Overview of All Tools */}
+          <div className="mt-8 mb-12">
+            <PageSummary
+              question="What RV technology tools are available?"
+              answer="Access 6 free AI-powered tools to help you plan, assess, and optimize your RV technology setup. Get personalized recommendations, expert guidance, and custom checklists tailored to your specific needs and travel style."
+              keyPoints={[
+                "Technology Readiness Assessment - Evaluate your experience level and get personalized recommendations",
+                "Feature Matcher - Discover which smart RV features match your usage patterns and travel goals",
+                "Educational Consultant - Ask questions and get detailed explanations about any RV technology",
+                "Technology Checklist - Generate a custom research checklist for your specific RV tech needs",
+                "Lifestyle Planner - Find the perfect technology setup for your unique lifestyle and travel plans",
+                "Intelligent RV Finder - Get personalized RV recommendations with real marketplace search results"
+              ]}
+              readingTime="Each tool takes 5-10 minutes"
+            />
+          </div>
+
           <div className="text-center mb-12 mt-8">
             <p className="text-[#E2E8FF] text-lg max-w-2xl text-left">
               Each tool is designed to help you make informed decisions about RV technology features, from connectivity and power management to control systems and entertainment.

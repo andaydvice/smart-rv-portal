@@ -11,6 +11,7 @@ import TroubleshootingFlowchart from "@/components/troubleshooting/Troubleshooti
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
 import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
 import { scrollToTop } from "@/utils/scrollToTop";
+import { PageSummary } from "@/components/ui/PageSummary";
 
 const Troubleshooting = () => {
   useEffect(() => {
@@ -73,6 +74,27 @@ const Troubleshooting = () => {
         {/* Main Content */}
         <section className="w-full bg-[#080F1F] py-8 md:py-12">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 space-y-8 md:space-y-12">
+            {/* Quick Problem Finder */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3 }}
+            >
+              <PageSummary
+                question="What RV problems can you troubleshoot here?"
+                answer="Find solutions for common smart RV issues including connectivity problems, power management, climate control, and system errors. Our guides cover both basic troubleshooting and advanced diagnostics with step-by-step instructions."
+                keyPoints={[
+                  "Smart System Issues - Sensor errors, automation failures, connectivity problems, and system resets",
+                  "Power Problems - Battery issues, solar charging, shore power connections, and inverter troubleshooting",
+                  "Climate Control - HVAC not working, temperature sensor errors, and ventilation problems",
+                  "Connectivity Troubleshooting - WiFi setup, cellular boosters, satellite systems, and network issues",
+                  "Interactive Flowchart - Step-by-step diagnosis tool to identify and fix your specific problem",
+                  "Professional Support - Links to emergency roadside assistance and expert installation services"
+                ]}
+                readingTime="Solutions in 5-15 minutes"
+              />
+            </motion.div>
+
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
