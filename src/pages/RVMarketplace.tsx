@@ -19,6 +19,7 @@ import {
   TrendingUp,
   FileText
 } from 'lucide-react';
+import { PageSummary } from '@/components/ui/PageSummary';
 
 const RVMarketplace = () => {
   useEffect(() => {
@@ -221,6 +222,25 @@ const RVMarketplace = () => {
               ))}
             </motion.div>
           </motion.div>
+        </section>
+
+        {/* Marketplace Overview */}
+        <section className="py-12 bg-[#080F1F]">
+          <Container>
+            <PageSummary
+              question="What can you do on the RV Marketplace?"
+              answer="America's most trusted RV marketplace with 500K+ listings, 10K+ verified dealers, and 2M+ monthly visitors. Buy new or used RVs, sell your RV to millions of buyers, find local dealers, check fair market prices, read reviews, and get expert support throughout your transaction."
+              keyPoints={[
+                "Buy RVs - Browse the largest inventory of new and used motorhomes, travel trailers, and fifth wheels",
+                "Sell Your RV - List your RV with professional tools to reach millions of qualified buyers nationwide",
+                "Find Dealers - Connect with 10K+ verified RV dealers for sales, service, parts, and support",
+                "Price Checks - Access real-time market data and pricing tools to get fair value estimates",
+                "Reviews & Ratings - Read verified customer reviews and ratings for dealers and specific RV models",
+                "Secure Transactions - Safe payment processing with buyer and seller protection plus expert guidance"
+              ]}
+              readingTime="8 min read"
+            />
+          </Container>
         </section>
 
         {/* Services Section */}

@@ -15,6 +15,7 @@ import {
 } from 'lucide-react';
 // Removed fake affiliate system
 import { ExternalLinkButton } from '@/components/ui/external-link-button';
+import { PageSummary } from '@/components/ui/PageSummary';
 
 const SolarPowerGuide = () => {
   const [dailyUsage, setDailyUsage] = useState(3000);
@@ -97,6 +98,23 @@ const SolarPowerGuide = () => {
             <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
               Harness the power of the sun for unlimited Smart RV adventures. Complete shopping guide, installation tips, and expert recommendations for Smart RV solar systems.
             </p>
+          </div>
+
+          {/* Guide Overview */}
+          <div className="mb-12">
+            <PageSummary
+              question="What does the Solar Power Guide cover?"
+              answer="Complete guide to RV solar power systems including sizing calculators, panel comparisons, battery options, installation tips, and cost estimates. Learn how to calculate your power needs, choose the right equipment, and achieve energy independence for boondocking."
+              keyPoints={[
+                "Solar Calculator - Calculate exact wattage needed based on your daily power consumption",
+                "Panel Selection - Compare monocrystalline vs polycrystalline panels and portable vs fixed mounting",
+                "Battery Systems - Lithium vs AGM comparison, capacity sizing, and charging requirements",
+                "Installation Guide - DIY installation steps, professional installation costs, and maintenance tips",
+                "Cost Analysis - Complete breakdown of equipment costs, ROI timeline, and money-saving strategies",
+                "System Examples - Pre-configured solar kits for small (200-400W), medium (400-800W), and large (800W+) setups"
+              ]}
+              readingTime="12 min read"
+            />
           </div>
 
           {/* Solar Calculator */}

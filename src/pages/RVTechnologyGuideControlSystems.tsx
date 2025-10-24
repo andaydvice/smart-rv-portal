@@ -18,6 +18,7 @@ import rvTechComparisonImage from '@/assets/rv-technology-comparison-dashboard.j
 import rvCategoryComparisonImage from '@/assets/rv-category-comparison.png';
 import rvDealershipBackground from '@/assets/rv-dealership-background.jpg';
 import { ScrollToTopButton } from '@/components/rv-technology/ScrollToTopButton';
+import { PageSummary } from '@/components/ui/PageSummary';
 
 const RVTechnologyGuideControlSystems = () => {
   return (
@@ -64,7 +65,29 @@ const RVTechnologyGuideControlSystems = () => {
         {/* Control and Monitoring Systems */}
         <div id="control-monitoring">
           <RVControlMonitoringHero />
-        
+
+          {/* Page Overview */}
+          <section className="py-12 px-4 bg-[#080F1F]">
+            <Container>
+              <div className="max-w-6xl mx-auto">
+                <PageSummary
+                  question="What control systems and technology tiers should you know about?"
+                  answer="Learn about RV control and monitoring systems, understand technology tier differences (basic, intermediate, advanced), compare RV categories, and discover what questions to ask dealers. Includes model comparisons and practical buying guidance."
+                  keyPoints={[
+                    "Control Systems - Mobile app control, touchscreen panels, sensor networks, and smart automation options",
+                    "Technology Tiers - Compare basic, intermediate, and advanced tech packages with pricing guidance",
+                    "RV Categories - Class A, B, C motorhomes vs travel trailers and fifth wheels technology comparison",
+                    "Model Comparisons - Side-by-side spec and feature comparisons of popular RV models",
+                    "Dealer Questions - Essential questions to ask about technology, warranty, and service support",
+                    "Future-Proofing - How to choose upgradeable systems and avoid obsolete technology"
+                  ]}
+                  readingTime="18 min read"
+                  lastUpdated="October 2025"
+                />
+              </div>
+            </Container>
+          </section>
+
           <section className="py-16 px-4 bg-[#151A22]/50">
           <Container>
             <div className="max-w-6xl mx-auto">

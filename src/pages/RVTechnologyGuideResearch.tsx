@@ -15,6 +15,7 @@ import rvTechnologyDecisionsImage from '@/assets/rv-technology-decisions.png';
 import { BlogPostImage } from '@/components/blog/post/BlogPostImage';
 import { ScrollToTopButton } from '@/components/rv-technology/ScrollToTopButton';
 import RVTechnologyHeader from '@/components/rv-technology/RVTechnologyHeader';
+import { PageSummary } from '@/components/ui/PageSummary';
 
 const RVTechnologyGuideResearch = () => {
   return (
@@ -60,6 +61,28 @@ const RVTechnologyGuideResearch = () => {
 
         {/* Hero Header */}
         <RVTechnologyHeader />
+
+        {/* Page Overview */}
+        <section className="py-12 px-4 bg-[#080F1F]">
+          <Container>
+            <div className="max-w-6xl mx-auto">
+              <PageSummary
+                question="How do you research and evaluate RV technology?"
+                answer="Comprehensive framework for researching RV technology, understanding trade-offs, making informed decisions, and using our AI-powered planning tools. Learn to balance cost vs features, complexity vs capability, and future needs vs current budget."
+                keyPoints={[
+                  "Technology Trade-offs - Balance cost, complexity, reliability, upgradability, and battery life",
+                  "Research Framework - Systematic approach to evaluate features, compare options, and prioritize needs",
+                  "Decision Process - Step-by-step guide from initial research through dealer negotiations to purchase",
+                  "AI Planning Tools - 6 interactive tools to match your lifestyle, budget, and technical requirements",
+                  "Common Mistakes - What to avoid when buying RV technology and how to prevent regret",
+                  "Expert Resources - Recommended websites, forums, YouTube channels, and professional services"
+                ]}
+                readingTime="20 min read"
+                lastUpdated="October 2025"
+              />
+            </div>
+          </Container>
+        </section>
 
         {/* Technology Trade-offs */}
         <section id="technology-tradeoffs" className="py-20 px-4 bg-gradient-to-br from-[#151A22]/60 to-[#091020]/40 relative overflow-hidden">

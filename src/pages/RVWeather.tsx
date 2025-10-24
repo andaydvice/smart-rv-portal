@@ -18,6 +18,7 @@ import PreparednessTips from "@/components/rv-weather/PreparednessTips";
 import MaintenanceSection from "@/components/rv-weather/MaintenanceSection";
 import HazardsSection from "@/components/rv-weather/sections/HazardsSection";
 import "../styles/pages/rv-weather.css";
+import { PageSummary } from "@/components/ui/PageSummary";
 
 // Extend Window interface to include our custom property
 declare global {
@@ -94,7 +95,26 @@ const RVWeather = () => {
         >
           {/* Hero Section */}
           <RVWeatherHero />
-          
+
+          {/* Weather Guide Overview */}
+          <div className="py-12 px-4 bg-[#0a1628]">
+            <div className="max-w-6xl mx-auto">
+              <PageSummary
+                question="What weather information do RVers need?"
+                answer="Complete weather planning and preparedness guide for RV travelers covering seasonal considerations, regional climate patterns, severe weather alerts, monitoring tools, and safety strategies. Learn how to plan trips around weather, prepare for extreme conditions, and protect your RV year-round."
+                keyPoints={[
+                  "Seasonal Planning - Best and worst times to travel by region plus seasonal preparation checklists",
+                  "Regional Climate - Detailed climate guides for different US regions with temperature and weather patterns",
+                  "Weather Monitoring - Real-time weather apps, radar tools, and alert systems for travelers",
+                  "Severe Weather Prep - Tornado, hurricane, winter storm, and heat wave preparation and response",
+                  "RV Protection - Weatherization tips, maintenance schedules, and storage strategies by season",
+                  "Safety Protocols - Emergency procedures, evacuation planning, and severe weather safety guidelines"
+                ]}
+                readingTime="12 min read"
+              />
+            </div>
+          </div>
+
           {/* Why Weather Matters Section */}
           <section id="weather-matters" className="container mx-auto px-4 py-12">
             <IntroSection />

@@ -34,6 +34,7 @@ import { RVTechNavigation } from '@/components/rv-technology/RVTechNavigation';
 import { RVTechSummary } from '@/components/rv-technology/RVTechSummary';
 import { ScrollToTopButton } from '@/components/rv-technology/ScrollToTopButton';
 import { ToolPreviewCard } from '@/components/rv-technology/ToolPreviewCard';
+import { PageSummary } from '@/components/ui/PageSummary';
 
 import { Button } from '@/components/ui/button';
 import { ChevronRight } from 'lucide-react';
@@ -77,6 +78,28 @@ const RVTechnologyGuide = () => {
 
         {/* Content Summary */}
         <RVTechSummary />
+
+        {/* Quick Guide Overview */}
+        <section className="py-8 px-4">
+          <Container>
+            <div className="max-w-6xl mx-auto">
+              <PageSummary
+                question="What does the RV Technology Guide cover?"
+                answer="Complete buyer's education guide covering all aspects of modern RV technology. Learn about connectivity options, power management systems, control and monitoring features, and how to choose the right technology level for your travel style and budget."
+                keyPoints={[
+                  "Connectivity Solutions - WiFi, cellular boosters, satellite internet, and mobile hotspots for staying connected",
+                  "Power Management - Solar systems, battery monitoring, inverters, and energy optimization strategies",
+                  "Control & Monitoring - Smart home automation, remote access, sensor networks, and system integration",
+                  "Technology Tiers - Understanding basic, intermediate, and advanced RV tech packages",
+                  "Interactive Tools - 6 AI-powered planning tools to match technology to your specific needs",
+                  "Buying Guide - How to evaluate RV tech features, avoid overpaying, and future-proof your setup"
+                ]}
+                readingTime="15 min read"
+                lastUpdated="October 2025"
+              />
+            </div>
+          </Container>
+        </section>
 
         {/* Hero Section with Enhanced Visuals */}
         <section className="py-16 px-4 relative overflow-hidden">

@@ -12,6 +12,7 @@ import {
 } from 'lucide-react';
 // Removed fake affiliate system
 import { ExternalLinkButton } from '@/components/ui/external-link-button';
+import { PageSummary } from '@/components/ui/PageSummary';
 
 const RVEmergencyCenter = () => {
   const emergencyCategories = [
@@ -101,6 +102,23 @@ const RVEmergencyCenter = () => {
             <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
               Stay safe on the road with comprehensive emergency preparedness resources, professional services, and essential safety equipment for every Smart RV adventure.
             </p>
+          </div>
+
+          {/* Emergency Center Overview */}
+          <div className="mb-12">
+            <PageSummary
+              question="What emergency resources are available for RVers?"
+              answer="Comprehensive emergency preparedness center with 24/7 roadside assistance contacts, quick troubleshooting guides, safety checklists, and professional emergency service recommendations. Be prepared for breakdowns, medical emergencies, severe weather, and technical issues."
+              keyPoints={[
+                "Emergency Contacts - 24/7 roadside assistance from Good Sam, Coach-Net, FMCA, and emergency services",
+                "Quick Troubleshooting - Immediate fixes for common RV issues like electrical, propane, water, and HVAC problems",
+                "Safety Services - Professional RV towing, mobile repair, tire service, and emergency medical access",
+                "Weather Preparedness - Severe weather alerts, shelter information, and evacuation planning resources",
+                "Emergency Kits - Complete checklists for first aid, tools, spare parts, and emergency supplies",
+                "Mobile Apps - Essential emergency apps for offline maps, weather radar, and first aid guides"
+              ]}
+              readingTime="10 min read"
+            />
           </div>
 
           {/* Quick Action Cards */}

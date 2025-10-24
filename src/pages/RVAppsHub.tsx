@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import Layout from '@/components/layout/Layout';
 import { Helmet } from 'react-helmet-async';
 import { Smartphone, Wifi, Navigation, Settings, Battery, Shield } from 'lucide-react';
+import { PageSummary } from '@/components/ui/PageSummary';
 
 const RVAppsHub = () => {
   const appCategories = [
@@ -101,6 +102,23 @@ const RVAppsHub = () => {
               From navigation and connectivity to system monitoring and lifestyle enhancement.
             </p>
           </motion.div>
+
+          {/* Guide Overview */}
+          <div className="mb-12">
+            <PageSummary
+              question="What apps are essential for RV living?"
+              answer="Comprehensive collection of mobile apps organized into 6 categories to enhance every aspect of RV life. From RV-specific GPS navigation and connectivity tools to system monitoring, power management, safety apps, and lifestyle enhancements."
+              keyPoints={[
+                "Navigation & GPS - RV-safe routing, trip planning, campground databases, and real-time traffic updates",
+                "Connectivity Tools - Signal strength monitoring, hotspot management, data tracking, and network optimization",
+                "RV System Management - Monitor tanks, batteries, diagnostics, maintenance tracking, and service reminders",
+                "Power & Solar Apps - Battery monitoring, solar tracking, power consumption analysis, and generator control",
+                "Safety & Security - Emergency services, weather alerts, security monitoring, and location sharing",
+                "Lifestyle Apps - Local discoveries, weather forecasting, entertainment options, and RV social networks"
+              ]}
+              readingTime="8 min read"
+            />
+          </div>
 
           {/* App Categories Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
