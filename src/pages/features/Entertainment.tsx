@@ -7,6 +7,7 @@ import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliat
 import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
 import { VideoSection } from "@/components/ui/VideoSection";
 import { PreloadedHeaderImage } from "@/components/ui/PreloadedHeaderImage";
+import { PageSummary } from "@/components/ui/PageSummary";
 
 const Entertainment = () => {
   useEffect(() => {
@@ -53,6 +54,23 @@ const Entertainment = () => {
         className="flex-grow py-16 px-4 bg-gradient-to-b from-gray-900 to-gray-800"
       >
         <div className="max-w-7xl mx-auto">
+
+          {/* Feature Overview */}
+          <div className="mb-12">
+            <PageSummary
+              question="What entertainment systems are available in smart RVs?"
+              answer="Smart RV entertainment includes 4K Smart TVs with streaming services, premium multi-zone audio systems, gaming consoles, and mobile device casting. Enjoy cinema-quality visuals, immersive sound, and seamless connectivity throughout your RV."
+              keyPoints={[
+                "4K Smart TV - OLED displays with HDR, voice control, and streaming app integration",
+                "Premium Audio - Multi-zone sound system with high-fidelity speakers and subwoofers",
+                "Streaming Integration - Netflix, Hulu, Disney+, Amazon Prime, and more built-in",
+                "Mobile Casting - AirPlay and Chromecast support for easy content sharing",
+                "Gaming Support - Low-latency gaming mode with console connectivity",
+                "Multi-Room Control - Synchronized or independent entertainment zones throughout RV"
+              ]}
+              readingTime="6 min read"
+            />
+          </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
             

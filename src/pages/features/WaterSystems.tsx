@@ -6,6 +6,7 @@ import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
 import { useEffect } from "react";
 import { VideoSection } from "@/components/ui/VideoSection";
 import { PreloadedHeaderImage } from "@/components/ui/PreloadedHeaderImage";
+import { PageSummary } from "@/components/ui/PageSummary";
 
 const WaterSystems = () => {
   useEffect(() => {
@@ -44,6 +45,23 @@ const WaterSystems = () => {
                 </div>
               </div>
             </div>
+          </div>
+
+          {/* Feature Overview */}
+          <div className="mb-12">
+            <PageSummary
+              question="What do Smart RV Water Systems include?"
+              answer="Smart water systems monitor fresh and waste water tanks in real-time, provide advanced filtration, detect leaks with automatic shutoff, and offer conservation recommendations. Ensure safe, clean water while maximizing efficiency and preventing costly water damage."
+              keyPoints={[
+                "Tank Monitoring - Real-time level tracking for fresh, grey, and black water tanks with alerts",
+                "Smart Filtration - Multi-stage purification with filter life monitoring and replacement alerts",
+                "Leak Detection - Automatic water shutoff when leaks detected to prevent damage",
+                "Usage Analytics - Track consumption patterns and receive personalized conservation tips",
+                "Quality Monitoring - Test water purity and safety with real-time quality metrics",
+                "Pump Control - Smart pump management optimizes pressure and energy consumption"
+              ]}
+              readingTime="6 min read"
+            />
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">

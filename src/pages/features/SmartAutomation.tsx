@@ -6,6 +6,7 @@ import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliat
 import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
 import { VideoSection } from "@/components/ui/VideoSection";
 import { PreloadedHeaderImage } from "@/components/ui/PreloadedHeaderImage";
+import { PageSummary } from "@/components/ui/PageSummary";
 
 const SmartAutomation = () => {
   useEffect(() => {
@@ -46,6 +47,23 @@ const SmartAutomation = () => {
         </div>
 
         <div className="max-w-7xl mx-auto">
+
+          {/* Feature Overview */}
+          <div className="mb-12">
+            <PageSummary
+              question="What is Smart RV Automation?"
+              answer="Intelligent automation systems control lighting, climate, entertainment, security, and energy management from a single interface. Use voice commands, smartphone apps, or custom schedules to automate your entire RV for maximum convenience and efficiency."
+              keyPoints={[
+                "Scene Control - One-touch presets for morning, evening, away mode, and custom scenarios",
+                "Voice Integration - Control all systems hands-free with Alexa, Google Assistant, or Siri",
+                "Smart Scheduling - Automate routines based on time, location, or sensor triggers",
+                "Energy Optimization - AI learns usage patterns to minimize power consumption automatically",
+                "Remote Access - Monitor and control your RV from anywhere via smartphone app",
+                "System Integration - Unified control of lighting, climate, security, entertainment, and appliances"
+              ]}
+              readingTime="7 min read"
+            />
+          </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
             <div className="bg-gray-800/50 p-8 rounded-lg border border-gray-700 flex flex-col">

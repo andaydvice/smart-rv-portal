@@ -8,6 +8,7 @@ import Layout from "@/components/layout/Layout";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
 import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
 import { VideoSection } from "@/components/ui/VideoSection";
+import { PageSummary } from "@/components/ui/PageSummary";
 
 const AutomatedDriving = () => {
   return (
@@ -22,6 +23,23 @@ const AutomatedDriving = () => {
           <div className="flex items-center gap-4 mb-8">
             <Car className="h-8 w-8 text-blue-400" />
             <h1 className="text-4xl font-bold text-white">Automated Driving Assistance</h1>
+          </div>
+
+          {/* Feature Overview */}
+          <div className="mb-12">
+            <PageSummary
+              question="What driving assistance features are available for RVs?"
+              answer="Advanced Driver Assistance Systems (ADAS) provide adaptive cruise control, lane keeping assist, collision avoidance, blind spot monitoring, and 360° parking cameras. Combined with RV-specific GPS navigation for safer, more relaxed long-distance travel."
+              keyPoints={[
+                "Adaptive Cruise Control - Automatically maintains safe following distance on highways",
+                "Lane Keeping Assist - Haptic feedback and steering assistance prevent unintentional lane departures",
+                "Collision Avoidance - Emergency braking system detects obstacles and prevents accidents",
+                "Blind Spot Monitoring - Alerts for vehicles in blind spots with visual and audio warnings",
+                "360° Parking Cameras - Bird's-eye view and multi-angle cameras for easy parking and maneuvering",
+                "RV-Specific Navigation - Route planning considering vehicle height, weight, and bridge clearances"
+              ]}
+              readingTime="6 min read"
+            />
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">

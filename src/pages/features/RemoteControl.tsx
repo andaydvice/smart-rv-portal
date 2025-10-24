@@ -14,6 +14,7 @@ import CallToActionSection from "@/components/features/remote-control/CallToActi
 import InterfaceDemoSection from "@/components/features/remote-control/InterfaceDemoSection";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
 import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
+import { PageSummary } from "@/components/ui/PageSummary";
 
 const RemoteControl = () => {
   useEffect(() => {
@@ -55,6 +56,23 @@ const RemoteControl = () => {
         className="flex-grow py-16 px-4 bg-gradient-to-b from-gray-900 to-gray-800"
       >
         <div className="max-w-7xl mx-auto">
+          {/* Feature Overview */}
+          <div className="mb-12">
+            <PageSummary
+              question="What can you control remotely in a smart RV?"
+              answer="Control all RV systems from anywhere using smartphone apps, voice commands, or smartwatch. Monitor and adjust climate, lighting, security, power, water, and entertainment systems remotely. Receive real-time alerts and automate routines for convenience."
+              keyPoints={[
+                "Complete System Control - Manage climate, lights, locks, appliances, and entertainment from one app",
+                "Real-Time Monitoring - View battery levels, water tanks, energy usage, and system status live",
+                "Voice Integration - Control systems hands-free with Alexa, Google Assistant, or Siri",
+                "Geofencing Automation - Trigger actions automatically based on location (arrive/depart)",
+                "Security Alerts - Instant notifications for doors, windows, motion, and system anomalies",
+                "Schedule & Scenes - Pre-set routines for morning, evening, travel, and camping scenarios"
+              ]}
+              readingTime="8 min read"
+            />
+          </div>
+
           {/* Main Features Section */}
           <MainFeaturesSection />
 

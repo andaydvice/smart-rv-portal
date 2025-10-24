@@ -5,6 +5,7 @@ import { Music, Volume2, Radio, Mic2 } from "lucide-react";
 import Layout from "@/components/layout/Layout";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
 import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
+import { PageSummary } from "@/components/ui/PageSummary";
 
 const AudioSystem = () => {
   return (
@@ -19,6 +20,23 @@ const AudioSystem = () => {
           <div className="flex items-center gap-4 mb-8">
             <Music className="h-8 w-8 text-pink-500" />
             <h1 className="text-4xl font-bold text-white">Audio System</h1>
+          </div>
+
+          {/* Feature Overview */}
+          <div className="mb-12">
+            <PageSummary
+              question="What audio systems are available for smart RVs?"
+              answer="Premium multi-zone audio systems with high-fidelity speakers, wireless connectivity, and smart volume control. Enjoy immersive surround sound inside and outdoor speakers for campsite entertainment, all controlled via smartphone or voice commands."
+              keyPoints={[
+                "Multi-Zone Control - Independent audio zones for bedroom, living area, and outdoor spaces",
+                "High-Fidelity Speakers - Premium audio components with advanced acoustic tuning",
+                "Wireless Integration - Bluetooth, AirPlay, and Chromecast support for easy streaming",
+                "Surround Sound - Immersive audio experience with subwoofer and satellite speakers",
+                "Smart Volume Control - Automatic adjustment based on ambient noise and time of day",
+                "Voice Commands - Hands-free control via Alexa, Google Assistant, or Siri"
+              ]}
+              readingTime="5 min read"
+            />
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">

@@ -5,6 +5,7 @@ import { Tv, Cast, Smartphone, Gamepad } from "lucide-react";
 import Layout from "@/components/layout/Layout";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
 import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
+import { PageSummary } from "@/components/ui/PageSummary";
 
 const SmartTV = () => {
   return (
@@ -20,6 +21,23 @@ const SmartTV = () => {
             <div className="flex items-center gap-4 mb-8">
               <Tv className="h-8 w-8 text-purple-500" />
               <h1 className="text-4xl font-bold text-white">Smart TV System</h1>
+            </div>
+
+            {/* Feature Overview */}
+            <div className="mb-12">
+              <PageSummary
+                question="What Smart TV features are available in RVs?"
+                answer="4K OLED Smart TVs with HDR support, built-in streaming apps, voice control, and mobile casting. Enjoy cinema-quality entertainment with multi-room support, gaming mode, and seamless connectivity to all major streaming services."
+                keyPoints={[
+                  "4K Ultra HD Display - OLED screen with HDR for stunning picture quality and deep blacks",
+                  "Streaming Apps - Netflix, Hulu, Disney+, Amazon Prime, YouTube, and more built-in",
+                  "Voice Control - Hands-free operation with Alexa, Google Assistant, or Siri integration",
+                  "Mobile Casting - AirPlay and Chromecast support for easy content sharing from devices",
+                  "Gaming Mode - Low latency and adaptive refresh rate for console gaming",
+                  "Multi-Room Support - Synchronize or control multiple TVs independently throughout RV"
+                ]}
+                readingTime="5 min read"
+              />
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">

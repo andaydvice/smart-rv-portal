@@ -10,6 +10,7 @@ import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliat
 import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
 import { useEffect } from "react";
 import { VideoSection } from "@/components/ui/VideoSection";
+import { PageSummary } from "@/components/ui/PageSummary";
 
 const SmartKitchen = () => {
   // Force scroll to top when component mounts
@@ -34,6 +35,23 @@ const SmartKitchen = () => {
         className="flex-grow pb-16 px-4 bg-gradient-to-b from-gray-900 to-gray-800"
       >
         <div className="max-w-7xl mx-auto">
+          {/* Feature Overview */}
+          <div className="mb-12">
+            <PageSummary
+              question="What features are in Smart RV Kitchens?"
+              answer="Smart RV kitchens integrate connected appliances, intelligent cooking systems, and water management technology. Control refrigerators, ovens, and water systems remotely while monitoring energy and water usage for efficient, sustainable cooking on the road."
+              keyPoints={[
+                "Connected Appliances - Remote control of refrigerators, ovens, and cooking devices with smartphone integration",
+                "Smart Food Management - Track freshness, get recipe suggestions, and automated grocery ordering",
+                "Water Monitoring - Real-time usage tracking with leak detection and conservation recommendations",
+                "Energy Optimization - Intelligent power management reduces energy consumption during cooking",
+                "Voice Control Integration - Hands-free operation of kitchen appliances and systems",
+                "Advanced Purification - Multi-stage water filtration ensures safe, clean drinking water"
+              ]}
+              readingTime="5 min read"
+            />
+          </div>
+
           {/* Grid with kitchen features */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
             <div className="bg-gray-800/50 p-8 rounded-lg border border-gray-700 flex flex-col">
