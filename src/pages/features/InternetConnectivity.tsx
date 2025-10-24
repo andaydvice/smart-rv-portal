@@ -24,15 +24,65 @@ const InternetConnectivity = () => {
             <h1 className="text-4xl font-bold text-white">Internet Connectivity</h1>
           </div>
 
+          {/* Internet Connectivity Statistics Section */}
+          <div className="bg-gray-800/30 p-8 rounded-lg border border-cyan-500/30 mb-12">
+            <h2 className="text-3xl font-semibold text-cyan-400 mb-6 text-center">RV Internet: Speed, Reliability & Market Data</h2>
+            <p className="text-gray-300 text-lg mb-6 text-left">
+              With 11.2 million households owning RVs and a 62% surge in ownership over 20 years, reliable internet connectivity is essential. Mobile hotspots remain the most popular and affordable option for RVers, with many carrying two different carriers (Verizon & AT&T) for redundancy (Source: Best Cable TV, Prked, SwiftNet 2024-2025).
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
+              <div className="bg-gray-900/50 p-6 rounded-lg text-center border border-gray-700">
+                <div className="text-4xl font-bold text-cyan-400 mb-2">50-100</div>
+                <p className="text-gray-300">Mbps average download (Starlink RV)</p>
+                <p className="text-gray-500 text-sm mt-2">(Camping Forge 2024)</p>
+              </div>
+              <div className="bg-gray-900/50 p-6 rounded-lg text-center border border-gray-700">
+                <div className="text-4xl font-bold text-cyan-400 mb-2">99%</div>
+                <p className="text-gray-300">Starlink uptime with speeds rivaling cable</p>
+                <p className="text-gray-500 text-sm mt-2">(Reviews.org 2024)</p>
+              </div>
+              <div className="bg-gray-900/50 p-6 rounded-lg text-center border border-gray-700">
+                <div className="text-4xl font-bold text-cyan-400 mb-2">32x</div>
+                <p className="text-gray-300">Signal strength improvement with WiFi boosters</p>
+                <p className="text-gray-500 text-sm mt-2">(TravlFi 2024)</p>
+              </div>
+              <div className="bg-gray-900/50 p-6 rounded-lg text-center border border-gray-700">
+                <div className="text-4xl font-bold text-cyan-400 mb-2">300GB+</div>
+                <p className="text-gray-300">Minimum data plan for comfortable RV travel</p>
+                <p className="text-gray-500 text-sm mt-2">(Mobile Internet RC 2024)</p>
+              </div>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="bg-gray-900/50 p-6 rounded-lg border border-gray-700">
+                <h3 className="text-xl font-semibold text-cyan-400 mb-4">Starlink Performance Data</h3>
+                <ul className="space-y-2 text-gray-300 text-sm">
+                  <li><strong>Download speeds:</strong> 25-220 Mbps range (RV avg: 50-100 Mbps)</li>
+                  <li><strong>Upload speeds:</strong> 3-20 Mbps (typically {'<'}5 Mbps)</li>
+                  <li><strong>Latency:</strong> 25-60 ms (vs. 600+ ms traditional satellite)</li>
+                  <li><strong>User satisfaction:</strong> 87% said extremely/very effective (2024)</li>
+                  <li><strong>Network size:</strong> 7,000+ satellites, 4.6M+ users worldwide</li>
+                </ul>
+                <p className="text-gray-500 text-xs mt-4">(Circle ID, EcoFlow, Starlink Installation Pros 2024)</p>
+              </div>
+              <div className="bg-gray-900/50 p-6 rounded-lg border border-gray-700">
+                <h3 className="text-xl font-semibold text-cyan-400 mb-4">Mobile Hotspot & WiFi Booster Data</h3>
+                <ul className="space-y-2 text-gray-300 text-sm">
+                  <li><strong>Cell boosters:</strong> Up to 65 dB gain for RVs (100 dB max)</li>
+                  <li><strong>WiFi boosters:</strong> Up to 32x signal strength improvement</li>
+                  <li><strong>Range extension:</strong> Up to 2,500 feet (technical max)</li>
+                  <li><strong>Real-world test:</strong> 167 Mbps down, 29 Mbps up at 2,000 ft</li>
+                  <li><strong>Campground WiFi:</strong> "Hit-or-miss at best" - overcrowded networks</li>
+                </ul>
+                <p className="text-gray-500 text-xs mt-4">(TravlFi, TheRVgeeks, Home Owner guide 2024-2025)</p>
+              </div>
+            </div>
+          </div>
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
             <div className="bg-gray-800/50 p-8 rounded-lg border border-gray-700">
               <h2 className="text-2xl font-semibold text-cyan-400 mb-4">Always Connected</h2>
               <p className="text-gray-300 mb-6">
-                Stay connected wherever your journey takes you with our advanced internet connectivity solutions.
-                <br /><br />
-                Featuring high speed 5G capabilities and reliable satellite backup.
-                <br /><br />
-                Never lose touch with what matters most.
+                Mobile hotspots are the most popular and flexible option for RVers, described as "the most affordable and effective method to gain Internet access while traveling." Remote workers should maintain minimum 2 internet sources (cellular + WiFi/Starlink) with 300GB+ data plans for comfortable travel, or 1,000GB+ for high-consumption users (Source: Prked, SwiftNet, Mobile Internet Resource Center 2024-2025).
               </p>
               <LazyImage
                 {...getOptimizedImageProps({

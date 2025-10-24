@@ -24,6 +24,70 @@ const ClimateControl = () => {
         className="flex-grow pt-24 pb-16 px-4 bg-gradient-to-b from-gray-900 to-gray-800"
       >
         <div className="max-w-7xl mx-auto">
+
+          {/* Climate Control Statistics Section */}
+          <div className="bg-gray-800/30 p-8 rounded-lg border border-[#5B9BD5]/30 mb-12">
+            <h2 className="text-3xl font-semibold text-[#5B9BD5] mb-6 text-center">RV Climate Control: Power & Efficiency Data</h2>
+            <p className="text-[#E2E8FF] text-lg mb-6 text-left">
+              Understanding your RV's climate system power consumption is critical for energy management. The most common 13,500 BTU air conditioner uses approximately 1,350 watts running (1,500-1,800W range), with startup surge of 2,700-3,000 watts—that's 2-3x normal operation (Source: RV With Tito, Renogy, Jackery 2024).
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
+              <div className="bg-gray-900/50 p-6 rounded-lg text-center border border-gray-700">
+                <div className="text-4xl font-bold text-[#5B9BD5] mb-2">15.6 kWh</div>
+                <p className="text-[#E2E8FF]">Daily AC consumption (13,500 BTU @ 12 hrs)</p>
+                <p className="text-gray-400 text-sm mt-2">(SlashPlan 2024)</p>
+              </div>
+              <div className="bg-gray-900/50 p-6 rounded-lg text-center border border-gray-700">
+                <div className="text-4xl font-bold text-[#5B9BD5] mb-2">25-40%</div>
+                <p className="text-[#E2E8FF]">Better efficiency in high-performance AC models</p>
+                <p className="text-gray-400 text-sm mt-2">(Furrion 2024)</p>
+              </div>
+              <div className="bg-gray-900/50 p-6 rounded-lg text-center border border-gray-700">
+                <div className="text-4xl font-bold text-[#5B9BD5] mb-2">60-75%</div>
+                <p className="text-[#E2E8FF]">RV propane furnace efficiency (vs 95%+ residential)</p>
+                <p className="text-gray-400 text-sm mt-2">(RVshare 2024)</p>
+              </div>
+              <div className="bg-gray-900/50 p-6 rounded-lg text-center border border-gray-700">
+                <div className="text-4xl font-bold text-[#5B9BD5] mb-2">10-15%</div>
+                <p className="text-[#E2E8FF]">Savings on electric bill with smart thermostats</p>
+                <p className="text-gray-400 text-sm mt-2">(RVshare 2024)</p>
+              </div>
+            </div>
+            <div className="bg-gray-900/50 p-6 rounded-lg border border-gray-700">
+              <h3 className="text-xl font-semibold text-[#5B9BD5] mb-4">AC Power Requirements by BTU Rating</h3>
+              <div className="grid grid-cols-2 md:grid-cols-5 gap-4 text-center">
+                <div>
+                  <div className="text-2xl font-bold text-white">5,000</div>
+                  <div className="text-sm text-gray-400">BTU</div>
+                  <div className="text-[#5B9BD5]">300-450W</div>
+                </div>
+                <div>
+                  <div className="text-2xl font-bold text-white">7,000</div>
+                  <div className="text-sm text-gray-400">BTU</div>
+                  <div className="text-[#5B9BD5]">500-650W</div>
+                </div>
+                <div>
+                  <div className="text-2xl font-bold text-white">10,000</div>
+                  <div className="text-sm text-gray-400">BTU</div>
+                  <div className="text-[#5B9BD5]">600-750W</div>
+                </div>
+                <div>
+                  <div className="text-2xl font-bold text-white">13,500</div>
+                  <div className="text-sm text-gray-400">BTU (common)</div>
+                  <div className="text-[#5B9BD5]">1,350W avg</div>
+                </div>
+                <div>
+                  <div className="text-2xl font-bold text-white">15,000</div>
+                  <div className="text-sm text-gray-400">BTU</div>
+                  <div className="text-[#5B9BD5]">1,200-1,700W</div>
+                </div>
+              </div>
+              <p className="text-gray-400 text-sm mt-4 text-left">
+                <strong>Important:</strong> Average RV AC EER rating is 6.0 (half the legal minimum for residential systems at EER 10). High-efficiency models offer 25-40% better performance (Source: RV With Tito, EcoFlow, Growatt 2024).
+              </p>
+            </div>
+          </div>
+
           {/* Header Image with Text Overlay */}
           <div className="mb-12 relative">
             <div className="relative w-full h-[400px] md:h-[500px] rounded-lg overflow-hidden">
@@ -64,15 +128,20 @@ const ClimateControl = () => {
                 className="mb-6"
               />
               <p className="text-[#E2E8FF] mb-6 text-left">
-                Experience unparalleled comfort with our precision climate control system. Dynamic temperature zones allow different areas of your RV to maintain independent climate settings, while smart sensors continuously optimize for energy efficiency.
+                Smart thermostats can save 10-15% on electric bills through automated scheduling. Modern systems use 12-volt DC power (vs. 24-volt AC residential) with WiFi and Bluetooth connectivity for remote monitoring of temperature, humidity, and even fridge temperatures (Source: RVshare, Micro-Air, WalTech 2024).
               </p>
               <ul className="list-disc list-inside space-y-3 text-[#E2E8FF] text-left">
-                <li>Multi zone temperature control</li>
-                <li>Smart scheduling for pre heating/cooling</li>
-                <li>Learning algorithms adapt to your preferences</li>
-                <li>Voice command integration</li>
-                <li>Remote control via smartphone app</li>
+                <li>Multi-zone temperature control with independent climate settings</li>
+                <li>Smart scheduling: 10-15% energy savings while away</li>
+                <li>Learning algorithms adapt to your preferences over time</li>
+                <li>Voice command integration for hands-free control</li>
+                <li>Remote control via smartphone app from anywhere globally</li>
               </ul>
+              <div className="mt-4 p-4 bg-gray-900/50 rounded-lg border border-gray-600">
+                <p className="text-[#E2E8FF] text-sm text-left">
+                  <strong className="text-[#5B9BD5]">Winter Heating Data:</strong> RV propane furnaces (20,000-50,000 BTUs) operate at 60-75% efficiency vs. 95%+ for residential furnaces, with up to 35% heat loss through exhaust. In mild winter (65°F setting): 1-2 gallons/night. In extreme cold (0°F): 30 lb tank lasts less than 3 days on 30 ft RV. Electric space heaters are 100% efficient, making them cost-effective when shore power is available (Source: RVshare, The RV Geeks, Let's RV 2024).
+                </p>
+              </div>
             </div>
 
             <div className="bg-gray-800/50 p-8 rounded-lg border border-gray-700 flex flex-col">

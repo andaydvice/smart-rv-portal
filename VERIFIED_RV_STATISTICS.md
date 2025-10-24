@@ -405,6 +405,170 @@
 
 ---
 
+## RV Climate Control & HVAC
+
+### Air Conditioning Power Consumption
+
+**Power Requirements by BTU Rating:**
+- **5,000 BTU:** 300-450 watts
+- **7,000 BTU:** 500-650 watts
+- **10,000 BTU:** 600-750 watts
+- **13,500 BTU (most common):** 1,350 watts average, 1,500-1,800 watts running
+- **15,000 BTU:** 1,200-1,700 watts running, 1,500-2,000 watts to start
+- **Source:** RV With Tito, Renogy, EcoFlow 2024
+
+**Startup Power:**
+- **Startup surge:** 2-3x higher than continuous rating
+- **13,500 BTU startup:** 2,700-3,000 watts required
+- **Source:** Jackery, Growatt 2024
+
+**Daily Energy Consumption:**
+- **13,500 BTU running 12 hours:** 15.6 kWh daily (15,600 watt-hours)
+- **Source:** SlashPlan, Bluetti 2024
+
+### Energy Efficiency Ratings
+
+**Average RV AC Efficiency:**
+- **Average EER rating:** 6.0 (half the legal minimum for residential systems)
+- **High-efficiency models:** 25-40% better efficiency than standard
+- **EER 10 standard:** 1,000 BTU output per 100 watts of power
+- **Source:** RV With Tito, Furrion 2024
+
+### Propane Heating Statistics
+
+**Furnace Efficiency:**
+- **RV furnace efficiency:** 60-75% (commonly 70% baseline)
+- **Residential gas furnaces:** 95%+ efficient
+- **Heat loss:** Up to 35% sent out exhaust
+- **At 70% efficiency:** 91,500 BTUs produces 64,050 BTUs actual heat
+- **Source:** RVshare, The RV Geeks, Mortons on the Move
+
+**BTU Ratings:**
+- **Average RV furnace:** 20,000-50,000 BTUs
+- **Source:** RV Profy, Camper FAQs
+
+**Winter Propane Consumption:**
+- **Mild winter (65°F setting):** 1-2 gallons per night
+- **Cold winter (20-30°F):** 7 gallon tank lasts 7-10 days (60°F night, 70°F day with electric supplement)
+- **Extreme cold (0°F/-19°C):** 30 lb tank lasts less than 3 days (30 ft RV)
+- **Source:** My Grand RV Forum, Jayco Owners Forum, Forest River Forums
+
+**Electric Heater Efficiency:**
+- **Electric space heaters:** 100% efficient
+- **Cost-effective:** When shore power available, conserves propane
+- **Source:** Let's RV 2024
+
+### Smart Thermostat Statistics
+
+**Energy Savings:**
+- **10-15% savings** on electric bill by setting thermostat while away
+- **Source:** RVshare 2024
+
+**RV Thermostat Types:**
+- **Four main types:** Analog, digital, programmable, smart
+- **Power source:** Most run on 12-volt DC (vs. 24-volt AC residential)
+- **Source:** Jackson Systems, Camping World
+
+**Smart Thermostat Features:**
+- **Remote control:** Mobile app access from anywhere globally (WiFi models)
+- **Connectivity:** Bluetooth and WiFi capabilities
+- **Monitoring:** Temperature, humidity, fridge temperature tracking
+- **Source:** Micro-Air, WalTech, Zedly 2024
+
+---
+
+## RV Internet Connectivity
+
+### RV Internet Market & Ownership
+
+**RV Ownership Trends:**
+- **62% surge** in RV ownership over previous 20 years
+- **11.2 million households** currently own RVs
+- **9.6 million households** planning to purchase RV over next 5 years
+- **Source:** Best Cable TV 2024
+
+### Mobile Hotspot Usage
+
+**Adoption & Preferences:**
+- **Most popular option:** Mobile hotspots described as "most popular & flexible option for most RVers"
+- **Most affordable:** "Most affordable and effective method to gain Internet access while traveling"
+- **Common practice:** Many RVers carry hotspots on 2 different carriers (Verizon & AT&T) for redundancy
+- **Source:** Prked, SwiftNet LLC 2024-2025
+
+**Network Options:**
+- **Primary carriers:** Verizon, T-Mobile, AT&T offering 4G/5G hotspot devices
+- **Multi-carrier options:** RoamLink automatically switches between AT&T, Verizon, T-Mobile, UScellular
+- **Source:** SwiftNet LLC, Mobile Must Have 2025
+
+### WiFi Booster Performance
+
+**Signal Strength Improvements:**
+- **Cell phone boosters:** Up to 100 dB gain (RVs typically 65 dB max)
+- **WiFi boosters:** Improve signal strength by up to 32x
+- **Range extension:** Up to 2,500 feet (technical maximum, real-world varies)
+- **Source:** TravlFi, TheRVgeeks, Satellite Internet 2024
+
+**Real-World Performance:**
+- **Example test:** Cox 300 Mbps plan at 2,000 feet distance
+- **Results:** 167 Mbps download, 29 Mbps upload
+- **Source:** Home Owner connectivity guide 2025
+
+**Campground Connectivity Challenges:**
+- **Overcrowded networks:** Dozens or hundreds of users connected simultaneously
+- **Signal degradation:** Distance, trees, RV walls, structures block/weaken signal
+- **Quality assessment:** "RV park WiFi is going to be hit-or-miss at best"
+- **Speed limitation:** Booster can't exceed parent network speed
+- **Source:** Harvest Hosts, TheRVgeeks, Grech RV 2024
+
+### Starlink Satellite Internet
+
+**Speed Performance:**
+- **RV users average:** 50-100 Mbps download, 3-20 Mbps upload (usually <5 Mbps up)
+- **Overall range:** 25-220 Mbps download
+- **Mobile plans:** 5-50 Mbps download, 2-10 Mbps upload, <99ms latency
+- **Mobile Priority:** 40-220 Mbps download
+- **Latency:** 25-60 ms (vs. 600+ ms traditional satellite)
+- **Source:** Camping Forge, The Vantastic Life, EcoFlow, Circle ID 2024
+
+**Reliability Statistics:**
+- **Uptime:** 99% with download speeds rivaling cable
+- **User satisfaction:** 87% said extremely/very effective meeting internet needs (2024)
+- **Weather impact:** Some slowdowns during rain/clouds/storms, but work remains possible
+- **Obstacle sensitivity:** Service degrades significantly with any obstructions in view dome
+- **Source:** Reviews.org, Satellite Internet, Our Campfire Unplugged 2024
+
+**Market Growth:**
+- **Satellites launched:** 7,000+ mass-produced satellites (September 2024)
+- **User base:** 4.6 million+ users worldwide (December 2024)
+- **Remote performance:** Comparable speeds in off-grid locations vs. permanent home setups
+- **Source:** Starlink Installation Pros, Cybernews 2024
+
+### Bandwidth Usage for Remote Work
+
+**Data Consumption:**
+- **HD streaming:** 1 GB per hour
+- **Gaming:** ~0.5 GB per hour (half of streaming)
+- **Updates/downloads:** Can use significant data
+- **Source:** RV with Us, Mobile Must Have 2024
+
+**Recommended Data Allowances:**
+- **General RV travelers:** Minimum 300 GB data plan
+- **High-consumption users:** 1,000 GB+ strongly recommended
+- **Remote workers:** Minimum 2 internet sources (cellular + WiFi/Starlink)
+- **Source:** Mobile Internet Resource Center 2024
+
+**Plan Examples:**
+- **Verizon My Biz Premium:** Unlimited premium on-device data, 105 GB mobile hotspot, 4K UHD streaming
+- **Source:** Mobile Internet Resource Center, WhistleOut 2024
+
+**Common Challenges:**
+- **Hotspot limits:** Most plans throttle after data cap
+- **Cellular issues:** Data caps, throttling, battery drain, multi-device struggles
+- **Bandwidth-intensive tasks:** Can exceed typical hotspot capabilities
+- **Source:** XNET WiFi 2024
+
+---
+
 ## How to Cite This Data
 
 ### Example Citation Format:
