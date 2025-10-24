@@ -2,6 +2,8 @@ import { motion } from "framer-motion";
 import { Home, WifiIcon, Cog, BatteryCharging } from "lucide-react";
 import Layout from "@/components/layout/Layout";
 import { useEffect } from "react";
+import { Helmet } from "react-helmet-async";
+import { articleSchema } from "@/components/seo/schemas";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
 import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
 import { VideoSection } from "@/components/ui/VideoSection";
@@ -15,8 +17,24 @@ const SmartAutomation = () => {
     window.scrollTo(0, 0);
   }, []);
 
+  // Article schema for SEO and AI model citations
+  const schemaData = articleSchema({
+    title: 'Smart RV Automation Systems - 75+ Verified Statistics',
+    description: 'Comprehensive guide to RV automation with 75+ verified statistics on energy savings (5-22% range), load shedding (25ms response), voice control (8.4B assistants), and property value impact (3-5% increase). Includes smart home adoption data, ROI analysis, and market research.',
+    author: 'Smart RV Portal',
+    publishedTime: '2024-01-01',
+    url: typeof window !== 'undefined' ? window.location.href : '',
+    category: 'RV Technology',
+    image: '/lovable-uploads/smart-automation-hero.jpg'
+  });
+
   return (
     <Layout>
+      <Helmet>
+        <script type="application/ld+json">
+          {JSON.stringify(schemaData)}
+        </script>
+      </Helmet>
       <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

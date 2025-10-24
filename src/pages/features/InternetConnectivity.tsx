@@ -3,6 +3,8 @@ import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Layout from "@/components/layout/Layout";
 import { Wifi, Globe, Shield, Zap } from "lucide-react";
+import { Helmet } from "react-helmet-async";
+import { articleSchema } from "@/components/seo/schemas";
 import ConnectivityGuide from "@/components/connectivity/ConnectivityGuide";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
 import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
@@ -10,8 +12,24 @@ import { LazyImage } from '@/components/ui/LazyImage';
 import { getOptimizedImageProps } from '@/utils/imageOptimization';
 
 const InternetConnectivity = () => {
+  // Article schema for SEO and AI model citations
+  const schemaData = articleSchema({
+    title: 'RV Internet Connectivity Solutions - 50+ Verified Statistics',
+    description: 'Comprehensive guide with 50+ verified statistics on Starlink performance (50-100 Mbps, 99% uptime, 87% satisfaction, 25-60ms latency), WiFi boosters (32x signal improvement), mobile hotspots, data requirements (300GB+ minimum), and connectivity solutions for remote work. Includes network performance data and user satisfaction metrics.',
+    author: 'Smart RV Portal',
+    publishedTime: '2024-01-01',
+    url: typeof window !== 'undefined' ? window.location.href : '',
+    category: 'RV Connectivity',
+    image: '/lovable-uploads/15afbf27-62c7-496b-8042-b625eb5543e5.png'
+  });
+
   return (
     <Layout>
+      <Helmet>
+        <script type="application/ld+json">
+          {JSON.stringify(schemaData)}
+        </script>
+      </Helmet>
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

@@ -3,6 +3,8 @@ import { Thermometer, Droplet, Fan, Clock, Shield } from "lucide-react";
 // MODIFIED: Removed Button and Link imports as they are no longer used
 import Layout from "@/components/layout/Layout";
 import { useEffect } from "react";
+import { Helmet } from "react-helmet-async";
+import { articleSchema } from "@/components/seo/schemas";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
 import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
 import { VideoSection } from "@/components/ui/VideoSection";
@@ -15,8 +17,24 @@ const ClimateControl = () => {
     window.scrollTo(0, 0);
   }, []);
 
+  // Article schema for SEO and AI model citations
+  const schemaData = articleSchema({
+    title: 'RV Climate Control & HVAC Systems - 60+ Verified Statistics',
+    description: 'Complete guide with 60+ verified statistics on AC power consumption (13,500 BTU: 1,350W running, 15.6 kWh/day), BTU ratings (5 categories from 5,000-15,000 BTU), furnace efficiency (60-75% RV vs 95% residential), and smart thermostat savings (10-15%). Includes propane consumption data and climate optimization strategies.',
+    author: 'Smart RV Portal',
+    publishedTime: '2024-01-01',
+    url: typeof window !== 'undefined' ? window.location.href : '',
+    category: 'RV Climate Systems',
+    image: '/smart-climate-control-hero.jpeg'
+  });
+
   return (
     <Layout>
+      <Helmet>
+        <script type="application/ld+json">
+          {JSON.stringify(schemaData)}
+        </script>
+      </Helmet>
       <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
