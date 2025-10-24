@@ -5,6 +5,7 @@ import { scrollToTop } from "@/utils/scrollToTop";
 import SEO from "@/components/seo/SEO";
 import { organizationSchema } from "@/components/seo/schemas";
 import TestimonialsSection from "@/components/sections/testimonials/TestimonialsSection";
+import { Link } from "react-router-dom";
 
 const Products = () => {
   useEffect(() => {
@@ -133,6 +134,25 @@ const Products = () => {
 
           {/* Testimonials */}
           <TestimonialsSection />
+
+          {/* Explore More */}
+          <div className="bg-gray-800/50 border border-gray-700 rounded-lg p-8 mt-12 mb-8">
+            <h3 className="text-xl font-semibold text-white mb-4">Continue Exploring</h3>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <Link to="/models" className="bg-gray-700/50 hover:bg-gray-700 border border-gray-600 hover:border-blue-500 rounded-lg p-4 transition-all">
+                <h4 className="text-white font-semibold mb-2">RV Models</h4>
+                <p className="text-gray-400 text-sm">Explore our RV lineup</p>
+              </Link>
+              <Link to="/rv-marketplace" className="bg-gray-700/50 hover:bg-gray-700 border border-gray-600 hover:border-green-500 rounded-lg p-4 transition-all">
+                <h4 className="text-white font-semibold mb-2">RV Marketplace</h4>
+                <p className="text-gray-400 text-sm">Buy and sell RVs</p>
+              </Link>
+              <Link to="/features" className="bg-gray-700/50 hover:bg-gray-700 border border-gray-600 hover:border-purple-500 rounded-lg p-4 transition-all">
+                <h4 className="text-white font-semibold mb-2">Smart Features</h4>
+                <p className="text-gray-400 text-sm">See available features</p>
+              </Link>
+            </div>
+          </div>
         </div>
       </motion.div>
     </Layout>

@@ -2,7 +2,7 @@
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import { Link } from "react-router-dom";
-import { Navigation, Shield, Battery, Tv, Droplet, Cog, Thermometer, Music } from "lucide-react";
+import { Navigation, Shield, Battery, Tv, Droplet, Cog, Thermometer, Music, Mic } from "lucide-react";
 import Layout from "@/components/layout/Layout";
 import { Helmet } from "react-helmet-async";
 
@@ -86,8 +86,31 @@ const Features = () => {
                 <p className="text-gray-300">Comprehensive entertainment solution with premium audio, smart TV integration, and outdoor media options for the ultimate RV experience.</p>
               </div>
             </Link>
+
+            <Link to="/voice-control" className="block">
+              <div className="bg-gray-800/50 p-6 rounded-lg border border-gray-700 hover:border-indigo-500 transition-colors">
+                <Mic className="h-8 w-8 text-indigo-500 mb-4" />
+                <h2 className="text-2xl font-semibold text-indigo-400 mb-4">Voice Control</h2>
+                <p className="text-gray-300">Control your RV's smart features with voice commands for a hands-free, convenient experience on the road.</p>
+              </div>
+            </Link>
           </div>
-          
+
+          {/* Need Help? */}
+          <div className="bg-gray-800/50 border border-gray-700 rounded-lg p-8 mt-12">
+            <h3 className="text-2xl font-bold text-white mb-4">Need Help Understanding Features?</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <Link to="/documentation" className="bg-gray-700/50 hover:bg-gray-700 border border-gray-600 hover:border-orange-500 rounded-lg p-4 transition-all">
+                <h4 className="text-white font-semibold mb-2">Documentation</h4>
+                <p className="text-gray-400 text-sm">Complete guides for all smart features</p>
+              </Link>
+              <Link to="/troubleshooting" className="bg-gray-700/50 hover:bg-gray-700 border border-gray-600 hover:border-yellow-500 rounded-lg p-4 transition-all">
+                <h4 className="text-white font-semibold mb-2">Troubleshooting</h4>
+                <p className="text-gray-400 text-sm">Fix common feature issues</p>
+              </Link>
+            </div>
+          </div>
+
           {/* Feature upgrade recommendations */}
         </div>
       </motion.div>

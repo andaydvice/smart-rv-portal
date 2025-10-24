@@ -438,6 +438,19 @@ const RVMarketplace = () => {
           </Container>
         </section>
 
+        {/* Related Shopping */}
+        <section className="py-8">
+          <Container>
+            <div className="bg-gray-800/50 border border-gray-700 rounded-lg p-8 mt-12">
+              <h3 className="text-xl font-semibold text-white mb-4">Browse RV Products</h3>
+              <Link to="/products" className="bg-gray-700/50 hover:bg-gray-700 border border-gray-600 hover:border-green-500 rounded-lg p-4 transition-all block">
+                <h4 className="text-white font-semibold mb-2">RV Products & Accessories</h4>
+                <p className="text-gray-400 text-sm">Shop premium RV products and upgrades</p>
+              </Link>
+            </div>
+          </Container>
+        </section>
+
         {/* Affiliate Disclosure */}
         <section className="py-8 bg-[#151A22]">
           <Container>

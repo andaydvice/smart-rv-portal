@@ -8,6 +8,7 @@ import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliat
 import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
 import React, { useState, useEffect } from "react";
 import { StorageFacility } from "@/components/storage/types";
+import { Link } from "react-router-dom";
 import "../styles/force-markers.css"; // Only load the minimal, clean CSS
 import "../styles/map-fixes.css"; // Add our marker edge-clipping fixes
 import "../styles/marker-fix.css"; // Additional critical marker fixes
@@ -203,7 +204,18 @@ export default function StorageFacilities() {
       <div className="mt-8 mb-12">
         <LocationPreviewSection mapToken={mapToken} featuredLocation={featuredLocation} />
       </div>
-      
+
+      {/* Storage Preparation */}
+      <Container fullWidth className="px-4 max-w-7xl mx-auto">
+        <div className="bg-blue-900/20 border border-blue-700/50 rounded-lg p-8 mt-12 mb-12">
+          <h3 className="text-2xl font-bold text-white mb-4">Preparing Your RV for Storage?</h3>
+          <p className="text-gray-300 mb-6">Use our comprehensive checklist to ensure your RV is properly winterized and stored</p>
+          <Link to="/storage-preparation-checklist" className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-all">
+            View Storage Checklist →
+          </Link>
+        </div>
+      </Container>
+
       {/* Storage recommendations removed */}
     </Layout>
   );

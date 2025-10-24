@@ -4,6 +4,8 @@ import { scrollToTop } from "@/utils/scrollToTop";
 import Layout from "@/components/layout/Layout";
 import { Location } from "@/types/weather";
 import { weatherConfig } from "@/utils/weatherAPI";
+import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
 
 // Import weather components
 import { APIKeyInput } from "@/components/weather/APIKeyInput";
@@ -142,7 +144,24 @@ const WeatherDashboard = () => {
           </section>
 
           <SafetyInsights />
-          
+
+          {/* Related Tools */}
+          <div className="bg-gray-800/50 border border-gray-700 rounded-lg p-8 mt-12 mb-8">
+            <h3 className="text-xl font-semibold text-white mb-4">More Planning Tools</h3>
+            <div className="flex flex-col sm:flex-row gap-4">
+              <Link to="/rv-weather">
+                <Button variant="outline" className="bg-transparent border-cyan-500 text-cyan-400 hover:bg-cyan-500/20">
+                  RV Weather
+                </Button>
+              </Link>
+              <Link to="/tools">
+                <Button variant="outline" className="bg-transparent border-blue-500 text-blue-400 hover:bg-blue-500/20">
+                  All Planning Tools
+                </Button>
+              </Link>
+            </div>
+          </div>
+
           {/* Weather monitoring recommendations removed */}
         </div>
       </div>

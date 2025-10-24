@@ -242,7 +242,7 @@ const Models = () => {
           >
             <h2 className="text-2xl font-bold text-white mb-4">Essential RV Guides</h2>
             <p className="text-gray-300 mb-6">Explore our comprehensive guides to help you choose the perfect RV</p>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <Link to="/rv-comfort-guide" className="bg-gray-700/50 hover:bg-gray-700 border border-gray-600 hover:border-blue-500 rounded-lg p-4 transition-all">
                 <h3 className="text-white font-semibold mb-2">RV Comfort Guide</h3>
                 <p className="text-gray-400 text-sm">Discover comfort features across different RV models</p>
@@ -250,6 +250,10 @@ const Models = () => {
               <Link to="/rv-marketplace" className="bg-gray-700/50 hover:bg-gray-700 border border-gray-600 hover:border-blue-500 rounded-lg p-4 transition-all">
                 <h3 className="text-white font-semibold mb-2">RV Marketplace</h3>
                 <p className="text-gray-400 text-sm">Browse and compare RVs from trusted sellers</p>
+              </Link>
+              <Link to="/products" className="bg-gray-700/50 hover:bg-gray-700 border border-gray-600 hover:border-blue-500 rounded-lg p-4 transition-all">
+                <h3 className="text-white font-semibold mb-2">RV Products & Accessories</h3>
+                <p className="text-gray-400 text-sm">Shop essential products and upgrades for your RV</p>
               </Link>
             </div>
           </motion.div>

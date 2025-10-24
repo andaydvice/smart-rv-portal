@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
+import { Link } from 'react-router-dom';
 import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 import { RelatedTools } from '@/components/rv-technology/RelatedTools';
 import { AIEducationalConsultant } from '@/components/rv-technology/interactive/AIEducationalConsultant';
@@ -51,6 +52,28 @@ const EducationalConsultant: React.FC = () => {
           
           <div className="max-w-6xl mx-auto mt-8">
             <AffiliateDisclosure />
+          </div>
+
+          {/* Related Resources */}
+          <div className="max-w-6xl mx-auto">
+            <div className="bg-gray-800/50 border border-gray-700 rounded-lg p-8 mt-12">
+              <h3 className="text-xl font-semibold text-white mb-4">Continue Your Research</h3>
+              <p className="text-gray-300 mb-6">Explore additional resources to help make your decision</p>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <Link to="/rv-technology-guide" className="bg-gray-700/50 hover:bg-gray-700 border border-gray-600 hover:border-blue-500 rounded-lg p-4 transition-all">
+                  <h4 className="text-white font-semibold mb-2">Technology Guide</h4>
+                  <p className="text-gray-400 text-sm">Learn about RV technology systems</p>
+                </Link>
+                <Link to="/models" className="bg-gray-700/50 hover:bg-gray-700 border border-gray-600 hover:border-purple-500 rounded-lg p-4 transition-all">
+                  <h4 className="text-white font-semibold mb-2">View Models</h4>
+                  <p className="text-gray-400 text-sm">Compare RV models and features</p>
+                </Link>
+                <Link to="/features" className="bg-gray-700/50 hover:bg-gray-700 border border-gray-600 hover:border-cyan-500 rounded-lg p-4 transition-all">
+                  <h4 className="text-white font-semibold mb-2">Smart Features</h4>
+                  <p className="text-gray-400 text-sm">Explore available smart systems</p>
+                </Link>
+              </div>
+            </div>
           </div>
 
           <div className="max-w-6xl mx-auto mt-12">

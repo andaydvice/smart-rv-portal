@@ -12,6 +12,7 @@ import Layout from "@/components/layout/Layout";
 import { Container } from "@/components/ui/container";
 import { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
+import { Link } from "react-router-dom";
 
 // Preload these images as early as possible
 const CRITICAL_IMAGES = [
@@ -119,7 +120,22 @@ const Documentation = () => {
                   <PowerTab />
                 </TabsContent>
               </Tabs>
-              
+
+              {/* Related Resources */}
+              <div className="bg-gray-800/50 border border-gray-700 rounded-lg p-8 mt-12 mb-8">
+                <h3 className="text-xl font-semibold text-white mb-4">Related Resources</h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <Link to="/features" className="bg-gray-700/50 hover:bg-gray-700 border border-gray-600 hover:border-blue-500 rounded-lg p-4 transition-all">
+                    <h4 className="text-white font-semibold mb-2">Smart Features</h4>
+                    <p className="text-gray-400 text-sm">Browse all RV features</p>
+                  </Link>
+                  <Link to="/troubleshooting" className="bg-gray-700/50 hover:bg-gray-700 border border-gray-600 hover:border-yellow-500 rounded-lg p-4 transition-all">
+                    <h4 className="text-white font-semibold mb-2">Troubleshooting</h4>
+                    <p className="text-gray-400 text-sm">Fix common issues</p>
+                  </Link>
+                </div>
+              </div>
+
             </div>
           </Container>
         </div>

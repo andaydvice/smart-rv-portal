@@ -8,6 +8,9 @@ import FeaturesSection from "../components/voice-control/FeaturesSection";
 import Layout from "@/components/layout/Layout";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
 import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
+import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import { ArrowLeft } from "lucide-react";
 
 const VoiceControl = () => {
   console.log("VoiceControl component rendering");
@@ -70,8 +73,26 @@ const VoiceControl = () => {
               gridCols="2"
               className="py-16"
             />
-            
+
             <AffiliateDisclosure className="py-8" />
+
+            {/* Explore More Features */}
+            <div className="bg-gray-800/50 border border-gray-700 rounded-lg p-8 mt-12 mb-8">
+              <h3 className="text-xl font-semibold text-white mb-4">Explore Related Features</h3>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Link to="/features">
+                  <Button variant="outline" className="bg-transparent border-blue-500 text-blue-400 hover:bg-blue-500/20">
+                    <ArrowLeft className="w-4 h-4 mr-2" />
+                    All Smart Features
+                  </Button>
+                </Link>
+                <Link to="/features/smart-automation">
+                  <Button variant="outline" className="bg-transparent border-purple-500 text-purple-400 hover:bg-purple-500/20">
+                    Smart Automation
+                  </Button>
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
       </main>

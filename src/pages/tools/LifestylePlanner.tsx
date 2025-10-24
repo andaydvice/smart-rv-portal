@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
+import { Link } from 'react-router-dom';
 import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 import { RelatedTools } from '@/components/rv-technology/RelatedTools';
 import { AILifestylePlanner } from '@/components/rv-technology/interactive/AILifestylePlanner';
@@ -51,6 +52,28 @@ const LifestylePlanner: React.FC = () => {
           
           <div className="max-w-6xl mx-auto mt-8">
             <AffiliateDisclosure />
+          </div>
+
+          {/* Plan Your Setup */}
+          <div className="max-w-6xl mx-auto">
+            <div className="bg-gray-800/50 border border-gray-700 rounded-lg p-8 mt-12">
+              <h3 className="text-xl font-semibold text-white mb-4">Ready to Plan Your Perfect RV?</h3>
+              <p className="text-gray-300 mb-6">Use these tools to continue planning your ideal RV lifestyle</p>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <Link to="/calculators" className="bg-gray-700/50 hover:bg-gray-700 border border-gray-600 hover:border-yellow-500 rounded-lg p-4 transition-all">
+                  <h4 className="text-white font-semibold mb-2">RV Calculators</h4>
+                  <p className="text-gray-400 text-sm">Calculate costs, fuel, and power needs</p>
+                </Link>
+                <Link to="/rv-comfort-guide" className="bg-gray-700/50 hover:bg-gray-700 border border-gray-600 hover:border-pink-500 rounded-lg p-4 transition-all">
+                  <h4 className="text-white font-semibold mb-2">Comfort Guide</h4>
+                  <p className="text-gray-400 text-sm">Plan for maximum comfort on the road</p>
+                </Link>
+                <Link to="/models" className="bg-gray-700/50 hover:bg-gray-700 border border-gray-600 hover:border-blue-500 rounded-lg p-4 transition-all">
+                  <h4 className="text-white font-semibold mb-2">View Models</h4>
+                  <p className="text-gray-400 text-sm">Find the perfect RV for your lifestyle</p>
+                </Link>
+              </div>
+            </div>
           </div>
 
           <div className="max-w-6xl mx-auto mt-12">
