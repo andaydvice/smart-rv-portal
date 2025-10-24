@@ -85,8 +85,8 @@ const Models = () => {
   return (
     <Layout>
       <Helmet>
-        <title>Smart RV Models</title>
-        <meta name="description" content="Explore luxury, adventure, and compact smart RV models with advanced technology and comfort." />
+        <title>Browse & Compare Smart RV Models | Find Your Perfect RV</title>
+        <meta name="description" content="Browse and compare luxury, adventure, and compact smart RV models. Find your perfect RV with advanced technology, premium features, and competitive pricing from $20,000 to $1.3M." />
         <link rel="canonical" href={typeof window !== 'undefined' ? window.location.origin + '/models' : ''} />
       </Helmet>
       <motion.div 

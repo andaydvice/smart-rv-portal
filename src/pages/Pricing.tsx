@@ -62,8 +62,8 @@ const Pricing = () => {
   return (
     <Layout>
       <Helmet>
-        <title>Smart RV Pricing</title>
-        <meta name="description" content="Transparent pricing for Smart RV upgrades including automation, power, security, and connectivity with professional installation." />
+        <title>Smart RV Pricing Plans | Get Your Quote Today</title>
+        <meta name="description" content="Get transparent pricing for Smart RV upgrades. Compare plans from $15,000 to $65,000 including automation, power management, security systems, and professional installation. Request your custom quote today." />
         <link rel="canonical" href={typeof window !== 'undefined' ? window.location.origin + '/pricing' : ''} />
       </Helmet>
       <motion.div 

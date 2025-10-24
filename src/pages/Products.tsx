@@ -18,9 +18,9 @@ const Products = () => {
   return (
     <Layout>
       <SEO
-        title="RV Products & Services | Smart RV Portal"
-        description="Discover premium RV products and services for your smart RV lifestyle. From rentals to technology upgrades, find everything you need."
-        keywords="RV rentals, RV marketplace, mobile internet, solar kits, RV accessories, digital nomad gear, RV services"
+        title="Shop RV Products & Services | Premium Smart RV Solutions"
+        description="Shop premium RV products and services for your smart RV lifestyle. Browse technology upgrades, solar kits, mobile internet solutions, and essential RV accessories. Get trusted brands and expert support."
+        keywords="shop RV products, RV marketplace, mobile internet, solar kits, RV accessories, digital nomad gear, RV services, buy RV technology"
         canonical={canonical}
         ogImage="/lovable-uploads/e2566d0d-bbd0-4401-9293-2d105eea8105.png"
         ogImageAlt="Smart RV dealership with premium technology solutions"

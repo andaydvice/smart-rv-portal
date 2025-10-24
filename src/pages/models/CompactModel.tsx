@@ -42,8 +42,8 @@ const CompactModel = () => {
   return (
     <Layout>
       <Helmet>
-        <title>Compact Smart RV Models</title>
-        <meta name="description" content="Explore compact smart RV models ideal for city travel and weekend getaways with modern smart features." />
+        <title>Browse Compact Smart RV Models | Class B, C & Travel Trailers</title>
+        <meta name="description" content="Browse compact smart RV models ideal for city travel and weekend getaways. Find efficient Class B vans, Class C motorhomes, and small travel trailers with modern smart features and easy maneuverability." />
         <link rel="canonical" href={typeof window !== 'undefined' ? window.location.origin + '/models/compact' : ''} />
       </Helmet>
       <div className="bg-gradient-to-b from-gray-900 to-gray-800 w-full">

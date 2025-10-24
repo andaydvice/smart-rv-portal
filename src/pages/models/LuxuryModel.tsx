@@ -104,8 +104,8 @@ const LuxuryModel = () => {
   return (
     <Layout>
       <Helmet>
-        <title>Luxury Smart RV Models</title>
-        <meta name="description" content="Discover luxury smart RV models with premium features, automation, and high-end finishes." />
+        <title>Browse Luxury Smart RV Models | Premium Class A & Fifth Wheels</title>
+        <meta name="description" content="Browse luxury smart RV models including Class A diesel pushers, premium fifth wheels, and high-end travel trailers. Discover premium features, advanced automation, and luxury finishes from top manufacturers." />
         <link rel="canonical" href={typeof window !== 'undefined' ? window.location.origin + '/models/luxury' : ''} />
       </Helmet>
       <motion.main 

@@ -20,8 +20,8 @@ const AdventureModel = () => {
   return (
     <Layout>
       <Helmet>
-        <title>Adventure Smart RV Models</title>
-        <meta name="description" content="Explore adventure-ready smart RV models built for off-grid travel with rugged capability and connected tech." />
+        <title>Discover Adventure Smart RV Models | Off-Road & Off-Grid Ready</title>
+        <meta name="description" content="Discover adventure-ready smart RV models built for off-grid exploration. Find rugged Class B camper vans, off-road trailers, and overlanding rigs with advanced solar, connectivity, and smart technology." />
         <link rel="canonical" href={typeof window !== 'undefined' ? window.location.origin + '/models/adventure' : ''} />
       </Helmet>
       <div className="bg-gradient-to-b from-gray-900 to-gray-800 w-full">
