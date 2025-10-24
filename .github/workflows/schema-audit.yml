@@ -70,8 +70,8 @@ jobs:
           name: schema-audit-reports-${{ github.run_number }}
           path: |
             reports/schema-audit.json
+            reports/schema-audit.html
             reports/schema-audit.md
-            reports/missing-schema.csv
           retention-days: 90
 
       - name: Commit audit reports to repository

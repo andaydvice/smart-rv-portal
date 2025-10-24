@@ -73,8 +73,8 @@ node scripts/schema-audit.js
 The script generates three files in the `reports/` directory:
 
 1. **schema-audit.json** - Full JSON report with all data
-2. **schema-audit.md** - Markdown report for easy reading
-3. **missing-schema.csv** - CSV list of pages missing schema
+2. **schema-audit.html** - Beautiful visual HTML report with charts and recommendations
+3. **schema-audit.md** - Markdown report for easy reading
 
 ### Example Output
 
@@ -111,11 +111,28 @@ Pages Missing Schema (38):
   ...
 
 ✓ Report saved to: reports/schema-audit.json
+✓ HTML report saved to: reports/schema-audit.html
 ✓ Markdown report saved to: reports/schema-audit.md
-✓ CSV report saved to: reports/missing-schema.csv
 ```
 
 ## Report Files
+
+### schema-audit.html ⭐ Recommended
+
+**Beautiful visual report** with interactive elements:
+
+- **Visual Stats Cards** - Total pages, excellent, needs work, missing schema
+- **Progress Bars** - Coverage percentage with color coding
+- **Detailed Table** - All pages with:
+  - Clickable page URLs
+  - Color-coded status badges (Excellent, Good, Needs Work, Missing)
+  - Current schema tags
+  - Missing and recommended schema tags with specific types
+- **Category Breakdown** - Health percentages by section
+- **Schema Types Usage** - Visual grid of schema types in use
+- **Action Items** - Prioritized next steps
+
+Open this file in your browser for the best viewing experience!
 
 ### schema-audit.json
 
@@ -150,16 +167,6 @@ Complete audit data in JSON format:
 ### schema-audit.md
 
 Human-readable markdown report with tables and statistics.
-
-### missing-schema.csv
-
-CSV file for easy import into spreadsheets:
-
-```csv
-Route,File Path
-/auth,"src/pages/Auth.tsx"
-/reset-password,"src/pages/ResetPassword.tsx"
-```
 
 ## GitHub Actions Integration
 
