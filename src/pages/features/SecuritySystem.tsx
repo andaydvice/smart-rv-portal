@@ -65,6 +65,42 @@ const SecuritySystem = () => {
         <div className="bg-gradient-to-b from-gray-900 to-gray-800">
           <div className="max-w-7xl mx-auto px-4 py-12">
 
+          {/* Security Statistics Section */}
+          <div className="bg-gray-800/30 p-8 rounded-lg border border-emerald-500/30 mb-12">
+            <h2 className="text-3xl font-semibold text-emerald-400 mb-6 text-center">The Critical Need for RV Security</h2>
+            <p className="text-gray-300 text-lg mb-6 text-left">
+              RV theft is a growing concern across the United States. Over 4,000 RVs are stolen annually, with a 30% increase in thefts from 2016 to 2022. Most alarmingly, 85% of stolen motorhomes are never recovered, resulting in average insurance claims of $9,200 (Source: Gitnux, ZipDo Statistics 2025).
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
+              <div className="bg-gray-900/50 p-6 rounded-lg text-center border border-gray-700">
+                <div className="text-4xl font-bold text-red-400 mb-2">4,000+</div>
+                <p className="text-gray-300">RVs stolen annually in the U.S.</p>
+                <p className="text-gray-500 text-sm mt-2">(Gitnux 2025)</p>
+              </div>
+              <div className="bg-gray-900/50 p-6 rounded-lg text-center border border-gray-700">
+                <div className="text-4xl font-bold text-red-400 mb-2">85%</div>
+                <p className="text-gray-300">Of stolen motorhomes never recovered</p>
+                <p className="text-gray-500 text-sm mt-2">(ZipDo 2025)</p>
+              </div>
+              <div className="bg-gray-900/50 p-6 rounded-lg text-center border border-gray-700">
+                <div className="text-4xl font-bold text-emerald-400 mb-2">90-98%</div>
+                <p className="text-gray-300">Recovery rate with GPS tracking</p>
+                <p className="text-gray-500 text-sm mt-2">(GPS Leaders 2024)</p>
+              </div>
+              <div className="bg-gray-900/50 p-6 rounded-lg text-center border border-gray-700">
+                <div className="text-4xl font-bold text-emerald-400 mb-2">300%</div>
+                <p className="text-gray-300">Less likely to be burglarized with cameras</p>
+                <p className="text-gray-500 text-sm mt-2">(UNC Study 2024)</p>
+              </div>
+            </div>
+            <p className="text-gray-300 text-lg text-left mb-4">
+              Security cameras prove highly effective: homes with visible cameras are 300% less likely to be burglarized, with 60-70% of burglars actively avoiding properties with security systems (Source: University of North Carolina, Security.org 2024).
+            </p>
+            <p className="text-gray-300 text-lg text-left">
+              GPS tracking provides exceptional protection with 90-98% recovery rates for stolen vehicles, compared to just 46% overall U.S. vehicle recovery rate without GPS. Additionally, GPS-equipped vehicles are 50% less likely to be stolen and may qualify for up to 20% insurance premium reductions (Source: GPS Leaders, Fleetsmart, RAM Tracking 2024).
+            </p>
+          </div>
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
             <div className="bg-gray-800/50 p-8 rounded-lg border border-gray-700">
               <h2 className="text-2xl font-semibold text-emerald-400 mb-4">Advanced Security Features</h2>
@@ -109,10 +145,13 @@ const SecuritySystem = () => {
                 <h3 className="text-xl font-semibold text-white mb-2">Smart Locks</h3>
                 <div className="text-gray-300 space-y-2 text-left">
                   <p>
-                    Unlock and secure your RV with a personalized code or your smartphone—no more fumbling for keys.
+                    Smart locks are critical when 70% of people forget to lock their doors when leaving home and 30% of burglars enter through unlocked doors or windows (Source: Coolest Gadgets, SecuriTeam 2024).
                   </p>
                   <p>
-                    Enjoy remote access, real time activity logs, and integration with other smart devices for a seamless, secure experience[8][10][12].
+                    Door/window locks combined with external lights provide at least 20x greater protection against burglary. The smart lock market is growing at 15.40% annually, driven by rising security concerns (Source: Security Journal, Market.us 2024).
+                  </p>
+                  <p className="text-sm text-gray-400">
+                    <strong>RVLock V4/Ultra ES Pro:</strong> $100-$250 with keyless entry, remote control, DIY installation.
                   </p>
                 </div>
               </div>
@@ -122,10 +161,10 @@ const SecuritySystem = () => {
                 <h3 className="text-xl font-semibold text-white mb-2">Alert System</h3>
                 <div className="text-gray-300 space-y-2 text-left">
                   <p>
-                    Get instant, customizable alerts sent directly to your phone, so you’re always in the know.
+                    Real-time alerts are critical as 55% of RV thefts occur in parking lots at commercial establishments and campgrounds, with summer break-ins spiking 30% from May-September (Source: Gitnux, SafeHome.org 2024).
                   </p>
                   <p>
-                    Wireless sensors on doors and windows, plus optional sirens, ensure you’re alerted to any unauthorized entry—no matter where you are[3][9][11].
+                    Over 80% of security camera users value remote monitoring via mobile apps. With 39 million U.S. households using alarm systems and 13 million new installations expected in 2024, instant mobile alerts are becoming standard (Source: SafeHome.org, Consumer Affairs 2024).
                   </p>
                 </div>
               </div>
@@ -135,10 +174,10 @@ const SecuritySystem = () => {
                 <h3 className="text-xl font-semibold text-white mb-2">Video Surveillance</h3>
                 <div className="text-gray-300 space-y-2 text-left">
                   <p>
-                    Monitor your RV in real time from anywhere with high definition cameras featuring night vision and motion detection.
+                    Video surveillance is proven effective: visible cameras deter 53% of burglars, while businesses experience up to 50% decrease in employee theft and 25% reduction in retail theft (Source: Security.org, Journal of Electronic Security 2024).
                   </p>
                   <p>
-                    Footage is securely stored and accessible via an app, providing peace of mind and valuable evidence if needed[4][9][11].
+                    Over 50% of homes now have at least one security camera (2024). Active monitoring systems generate larger crime reduction effects than passive systems, with combined CCTV + lighting + security guards proving most effective (Source: SafeHome.org, U.S. DOJ 40-year review).
                   </p>
                 </div>
               </div>
@@ -148,35 +187,101 @@ const SecuritySystem = () => {
                 <h3 className="text-xl font-semibold text-white mb-2">Mobile App Integration</h3>
                 <div className="space-y-2">
                   <p className="text-gray-300 text-left">
-                    Stay in control wherever you roam.
+                    The smart home security market is projected to grow from $33.9 billion (2024) to $82.1 billion by 2030, driven by remote monitoring demand and IoT advancements (Source: Grand View Research 2024).
                   </p>
                   <p className="text-gray-300 text-left">
-                    Effortlessly lock or unlock doors, monitor live camera feeds, and receive instant security alerts.
-                  </p>
-                  <p className="text-gray-300 text-left">
-                    All from a dedicated mobile app designed for your RV lifestyle.
+                    With 72% of U.S. homeowners now using some form of home security and cloud-based systems providing real-time alerts and notifications, mobile app control has become the standard for modern RV security (Source: Consumer Affairs, Research Nester 2024).
                   </p>
                 </div>
               </div>
 
               <div className="bg-gray-800/50 p-6 rounded-lg border border-gray-700">
                 <MapPin className="h-6 w-6 text-lime-400 mb-4" />
-                <h3 className="text-xl font-semibold text-white mb-2">Geofencing Capabilities</h3>
+                <h3 className="text-xl font-semibold text-white mb-2">GPS Tracking & Geofencing</h3>
                 <div className="space-y-2">
                   <p className="text-gray-300 text-left">
-                    Enjoy hands free security with geofencing.
+                    GPS tracking delivers exceptional results with 90-98% recovery rates for stolen vehicles, compared to just 46% for vehicles without GPS. Vehicles with GPS are 50% less likely to be stolen (Source: GPS Leaders, Fleetsmart 2024).
                   </p>
                   <p className="text-gray-300 text-left">
-                    Your system automatically locks, unlocks, and arms or disarms based on your location.
-                  </p>
-                  <p className="text-gray-300 text-left">
-                    This ensures your RV is always protected when you come and go.
+                    LoJack reports over 90% recovery rate, with many vehicles recovered within hours. Insurance companies commonly offer up to 20% premium reductions for GPS-equipped vehicles (Source: GPS Leaders, RAM Tracking 2024).
                   </p>
                 </div>
               </div>
             </div>
           </div>
-          
+
+          {/* Security Effectiveness Comparison Table */}
+          <div className="bg-gray-800/30 p-8 rounded-lg border border-emerald-500/30 mb-12">
+            <h2 className="text-2xl font-semibold text-emerald-400 mb-6">Security Component Effectiveness</h2>
+            <p className="text-gray-300 mb-6 text-left">
+              Research from the University of North Carolina, U.S. Department of Justice, and leading security organizations demonstrates the measurable effectiveness of each security component. Here's how each feature protects your RV:
+            </p>
+            <div className="overflow-x-auto">
+              <table className="w-full text-left border-collapse">
+                <thead>
+                  <tr className="bg-gray-900/50">
+                    <th className="p-4 text-emerald-400 border border-gray-600">Security Component</th>
+                    <th className="p-4 text-emerald-400 border border-gray-600">Effectiveness</th>
+                    <th className="p-4 text-emerald-400 border border-gray-600">Key Benefit</th>
+                    <th className="p-4 text-emerald-400 border border-gray-600">Source</th>
+                  </tr>
+                </thead>
+                <tbody className="text-gray-300">
+                  <tr className="hover:bg-gray-800/30">
+                    <td className="p-4 border border-gray-600">Visible Security Cameras</td>
+                    <td className="p-4 border border-gray-600">300% less likely to be burglarized</td>
+                    <td className="p-4 border border-gray-600">Deters 53% of burglars</td>
+                    <td className="p-4 border border-gray-600 text-sm">UNC, Security.org 2024</td>
+                  </tr>
+                  <tr className="hover:bg-gray-800/30">
+                    <td className="p-4 border border-gray-600">GPS Tracking System</td>
+                    <td className="p-4 border border-gray-600">90-98% recovery rate</td>
+                    <td className="p-4 border border-gray-600">50% less likely to be stolen</td>
+                    <td className="p-4 border border-gray-600 text-sm">GPS Leaders 2024</td>
+                  </tr>
+                  <tr className="hover:bg-gray-800/30">
+                    <td className="p-4 border border-gray-600">Smart Locks + External Lights</td>
+                    <td className="p-4 border border-gray-600">20x greater protection</td>
+                    <td className="p-4 border border-gray-600">Prevents 30% entry methods</td>
+                    <td className="p-4 border border-gray-600 text-sm">Security Journal 2024</td>
+                  </tr>
+                  <tr className="hover:bg-gray-800/30">
+                    <td className="p-4 border border-gray-600">Active Monitoring System</td>
+                    <td className="p-4 border border-gray-600">50% crime reduction</td>
+                    <td className="p-4 border border-gray-600">Real-time response capability</td>
+                    <td className="p-4 border border-gray-600 text-sm">CCTV Security Pros</td>
+                  </tr>
+                  <tr className="hover:bg-gray-800/30">
+                    <td className="p-4 border border-gray-600">Alarm Systems</td>
+                    <td className="p-4 border border-gray-600">39M households protected</td>
+                    <td className="p-4 border border-gray-600">Immediate alert notification</td>
+                    <td className="p-4 border border-gray-600 text-sm">SafeHome.org 2023</td>
+                  </tr>
+                  <tr className="hover:bg-gray-800/30">
+                    <td className="p-4 border border-gray-600">Mobile App Monitoring</td>
+                    <td className="p-4 border border-gray-600">80%+ user satisfaction</td>
+                    <td className="p-4 border border-gray-600">Remote access anywhere</td>
+                    <td className="p-4 border border-gray-600 text-sm">Grand View Research 2024</td>
+                  </tr>
+                  <tr className="hover:bg-gray-800/30 bg-emerald-900/10">
+                    <td className="p-4 border border-gray-600 font-bold">Combined Security System</td>
+                    <td className="p-4 border border-gray-600 font-bold">Highest protection level</td>
+                    <td className="p-4 border border-gray-600 font-bold">Up to 20% insurance discount</td>
+                    <td className="p-4 border border-gray-600 text-sm">U.S. DOJ, RAM Tracking</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div className="mt-6 p-4 bg-gray-900/50 rounded-lg border border-gray-700">
+              <p className="text-gray-300 text-sm text-left mb-2">
+                <strong className="text-emerald-400">RV Theft Context:</strong> With 4,000+ RVs stolen annually and 85% never recovered, comprehensive security is not optional. The average theft results in a $9,200 insurance claim, and 40% of victims don't have adequate coverage (Source: Gitnux, ZipDo 2025).
+              </p>
+              <p className="text-gray-300 text-sm text-left">
+                <strong className="text-emerald-400">ROI Protection:</strong> GPS tracking alone justifies the investment with up to 20% insurance savings and 90-98% recovery rates. Combined systems provide the highest protection level recognized by the U.S. Department of Justice 40-year systematic review.
+              </p>
+            </div>
+          </div>
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
             <div className="bg-gray-800/50 p-6 rounded-lg border border-gray-700">
               <BatteryCharging className="h-6 w-6 text-green-400 mb-4" />
