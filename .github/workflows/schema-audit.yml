@@ -1,0 +1,186 @@
+name: Weekly Schema Audit
+
+on:
+  # Run every Monday at 9:00 AM UTC
+  schedule:
+    - cron: '0 9 * * 1'
+
+  # Allow manual trigger
+  workflow_dispatch:
+
+  # Run on push to main (for testing)
+  push:
+    branches:
+      - main
+    paths:
+      - 'src/pages/**'
+      - 'scripts/schema-audit.js'
+      - '.github/workflows/schema-audit.yml'
+
+jobs:
+  schema-audit:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run schema audit
+        id: audit
+        run: |
+          node scripts/schema-audit.js
+          echo "audit_complete=true" >> $GITHUB_OUTPUT
+        continue-on-error: true
+
+      - name: Read audit results
+        id: results
+        run: |
+          if [ -f "reports/schema-audit.json" ]; then
+            TOTAL=$(jq -r '.totalPages' reports/schema-audit.json)
+            WITH_SCHEMA=$(jq -r '.pagesWithSchema' reports/schema-audit.json)
+            WITHOUT_SCHEMA=$(jq -r '.pagesWithoutSchema' reports/schema-audit.json)
+            COVERAGE=$(jq -r '(.pagesWithSchema / .totalPages * 100) | floor' reports/schema-audit.json)
+
+            echo "total_pages=$TOTAL" >> $GITHUB_OUTPUT
+            echo "with_schema=$WITH_SCHEMA" >> $GITHUB_OUTPUT
+            echo "without_schema=$WITHOUT_SCHEMA" >> $GITHUB_OUTPUT
+            echo "coverage=$COVERAGE" >> $GITHUB_OUTPUT
+          else
+            echo "Audit report not found"
+            exit 1
+          fi
+
+      - name: Upload audit reports as artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: schema-audit-reports-${{ github.run_number }}
+          path: |
+            reports/schema-audit.json
+            reports/schema-audit.md
+            reports/missing-schema.csv
+          retention-days: 90
+
+      - name: Commit audit reports to repository
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+
+          # Create reports directory if it doesn't exist
+          mkdir -p reports/history
+
+          # Copy current report to history with timestamp
+          TIMESTAMP=$(date +%Y-%m-%d)
+          if [ -f "reports/schema-audit.json" ]; then
+            cp reports/schema-audit.json "reports/history/schema-audit-$TIMESTAMP.json"
+          fi
+
+          # Add and commit
+          git add reports/
+          git diff --quiet && git diff --staged --quiet || git commit -m "chore: Update schema audit reports [skip ci]"
+          git push
+        continue-on-error: true
+
+      - name: Create issue if coverage drops below threshold
+        if: steps.results.outputs.coverage < 80
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const coverage = ${{ steps.results.outputs.coverage }};
+            const withoutSchema = ${{ steps.results.outputs.without_schema }};
+            const total = ${{ steps.results.outputs.total_pages }};
+
+            // Check if there's already an open issue
+            const issues = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              labels: 'schema-audit,automated'
+            });
+
+            if (issues.data.length > 0) {
+              // Update existing issue
+              const issue = issues.data[0];
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                body: `## Schema Audit Update - ${new Date().toLocaleDateString()}
+
+                ⚠️ Schema coverage is **${coverage}%** (below 80% threshold)
+
+                - Total pages: ${total}
+                - Pages with schema: ${{ steps.results.outputs.with_schema }}
+                - **Pages missing schema: ${withoutSchema}**
+
+                📊 [View detailed report](https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId})
+                `
+              });
+            } else {
+              // Create new issue
+              await github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title: '⚠️ Schema Coverage Below Threshold',
+                body: `## Schema Audit Alert
+
+                The automated schema audit has detected that schema coverage has dropped below the 80% threshold.
+
+                ### Current Status
+                - **Coverage:** ${coverage}%
+                - **Total pages:** ${total}
+                - **Pages with schema:** ${{ steps.results.outputs.with_schema }}
+                - **Pages missing schema:** ${withoutSchema}
+
+                ### Action Required
+                Please review the pages missing schema.org structured data and add appropriate markup.
+
+                ### Reports
+                - 📊 [View detailed audit report](https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId})
+                - 📄 Download the audit artifacts for full details
+
+                ### How to Fix
+                1. Check the \`reports/missing-schema.csv\` file for the list of pages
+                2. Add schema.org JSON-LD markup using the Helmet component
+                3. Follow schema.org best practices for each page type
+                4. Run \`node scripts/schema-audit.js\` locally to verify
+
+                ---
+                *This issue was automatically created by the schema audit workflow.*
+                `,
+                labels: ['schema-audit', 'automated', 'seo', 'enhancement']
+              });
+            }
+
+      - name: Post summary to workflow
+        if: always()
+        run: |
+          echo "## Schema Audit Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "- **Total Pages:** ${{ steps.results.outputs.total_pages }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Pages with Schema:** ${{ steps.results.outputs.with_schema }} ✅" >> $GITHUB_STEP_SUMMARY
+          echo "- **Pages without Schema:** ${{ steps.results.outputs.without_schema }} ⚠️" >> $GITHUB_STEP_SUMMARY
+          echo "- **Coverage:** ${{ steps.results.outputs.coverage }}%" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+
+          if [ "${{ steps.results.outputs.coverage }}" -ge "80" ]; then
+            echo "✅ **Status:** Coverage meets threshold (≥80%)" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "⚠️ **Status:** Coverage below threshold (<80%)" >> $GITHUB_STEP_SUMMARY
+          fi
+
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "📊 View detailed reports in the workflow artifacts." >> $GITHUB_STEP_SUMMARY
