@@ -4,6 +4,7 @@ import { Navigation, Map, Compass, Radar } from "lucide-react";
 import Layout from "@/components/layout/Layout";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
 import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
+import { PageSummary } from "@/components/ui/PageSummary";
 
 const NavigationSystem = () => {
   return (
@@ -35,6 +36,23 @@ const NavigationSystem = () => {
                 </p>
               </div>
             </div>
+          </div>
+
+          {/* Feature Overview */}
+          <div className="mb-12">
+            <PageSummary
+              question="What features are included in RV Navigation Systems?"
+              answer="RV-specific GPS navigation systems provide route planning that accounts for vehicle height, weight, and width restrictions. Get real-time traffic updates, offline maps, campground integration, and voice-guided directions optimized for safe RV travel."
+              keyPoints={[
+                "RV-Specific Routing - Plans routes considering vehicle dimensions, bridge clearances, and weight restrictions",
+                "Real-Time Traffic - Live updates and automatic rerouting to avoid delays and road closures",
+                "Offline Maps - Downloaded maps work without internet connection in remote areas",
+                "Campground Integration - Built-in database of RV parks, campgrounds, and overnight parking locations",
+                "3D Terrain & Satellite Views - Advanced mapping with elevation data and satellite imagery",
+                "Voice Guidance - Hands-free navigation with customizable alerts for turns and hazards"
+              ]}
+              readingTime="6 min read"
+            />
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
