@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import CalculatorHeader from "@/components/calculator-layout/CalculatorHeader";
 import CalculatorIntro from "@/components/calculator-layout/CalculatorIntro";
@@ -123,6 +124,28 @@ const Calculators = () => {
         </div>
         <div className="px-4">
           <AffiliateDisclosure className="max-w-6xl mx-auto my-8" />
+        </div>
+
+        {/* Learn More About RV Systems */}
+        <div className="container mx-auto px-4 mb-12">
+          <div className="bg-gray-800/50 border border-gray-700 rounded-lg p-8">
+            <h2 className="text-2xl font-bold text-white mb-4">Learn More About RV Systems</h2>
+            <p className="text-gray-300 mb-6">Explore our comprehensive guides to understand the systems behind these calculations</p>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <Link to="/features/power-management" className="bg-gray-700/50 hover:bg-gray-700 border border-gray-600 hover:border-yellow-500 rounded-lg p-4 transition-all">
+                <h3 className="text-white font-semibold mb-2">Power Management</h3>
+                <p className="text-gray-400 text-sm">Learn about solar integration, battery systems, and smart power distribution</p>
+              </Link>
+              <Link to="/solar-power-guide" className="bg-gray-700/50 hover:bg-gray-700 border border-gray-600 hover:border-orange-500 rounded-lg p-4 transition-all">
+                <h3 className="text-white font-semibold mb-2">Solar Power Guide</h3>
+                <p className="text-gray-400 text-sm">Complete guide to solar power systems for your RV</p>
+              </Link>
+              <Link to="/features/smart-automation" className="bg-gray-700/50 hover:bg-gray-700 border border-gray-600 hover:border-purple-500 rounded-lg p-4 transition-all">
+                <h3 className="text-white font-semibold mb-2">Smart Automation</h3>
+                <p className="text-gray-400 text-sm">Discover how automation can optimize your RV's systems</p>
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
     </Layout>

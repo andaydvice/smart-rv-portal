@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
+import { Link } from 'react-router-dom';
 import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 import { RelatedTools } from '@/components/rv-technology/RelatedTools';
 import { AITechnologyChecklist } from '@/components/rv-technology/interactive/AITechnologyChecklist';
@@ -55,6 +56,24 @@ const TechnologyChecklist: React.FC = () => {
 
           <div className="max-w-6xl mx-auto mt-12">
             <RelatedTools tools={availableTools} currentToolId="technology-checklist" />
+          </div>
+
+          {/* Related Features */}
+          <div className="max-w-6xl mx-auto mt-12">
+            <div className="bg-gray-800/50 border border-gray-700 rounded-lg p-8">
+              <h3 className="text-xl font-semibold text-white mb-4">Explore Technology Features</h3>
+              <p className="text-gray-300 mb-6">Deep dive into the technology behind your checklist</p>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <Link to="/rv-technology-guide" className="bg-gray-700/50 hover:bg-gray-700 border border-gray-600 hover:border-blue-500 rounded-lg p-4 transition-all">
+                  <h4 className="text-white font-semibold mb-2">RV Technology Guide</h4>
+                  <p className="text-gray-400 text-sm">Complete technology overview</p>
+                </Link>
+                <Link to="/features" className="bg-gray-700/50 hover:bg-gray-700 border border-gray-600 hover:border-purple-500 rounded-lg p-4 transition-all">
+                  <h4 className="text-white font-semibold mb-2">Smart Features</h4>
+                  <p className="text-gray-400 text-sm">Browse all feature details</p>
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
       </div>

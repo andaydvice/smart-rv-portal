@@ -7,6 +7,7 @@ import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
 import { VideoSection } from "@/components/ui/VideoSection";
 import { PreloadedHeaderImage } from "@/components/ui/PreloadedHeaderImage";
 import { FeatureNavigationLinks } from "@/components/navigation/FeatureNavigationLinks";
+import { Link } from "react-router-dom";
 
 const SmartAutomation = () => {
   useEffect(() => {
@@ -182,6 +183,22 @@ const SmartAutomation = () => {
               }
             ]}
           />
+
+          {/* Explore Automation Tools */}
+          <div className="bg-gradient-to-r from-purple-900/30 to-pink-900/30 border border-purple-700/50 rounded-lg p-8 mt-8">
+            <h3 className="text-2xl font-bold text-white mb-4">Discover Your Automation Needs</h3>
+            <p className="text-gray-300 mb-6">Use our tools to identify the best automation features for you</p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <Link to="/tools/feature-matcher" className="bg-purple-600/20 hover:bg-purple-600/30 border border-purple-500 rounded-lg p-4 transition-all">
+                <h4 className="text-white font-semibold mb-2">Feature Matcher</h4>
+                <p className="text-gray-400 text-sm">Find which automation features you need</p>
+              </Link>
+              <Link to="/tools/readiness-assessment" className="bg-pink-600/20 hover:bg-pink-600/30 border border-pink-500 rounded-lg p-4 transition-all">
+                <h4 className="text-white font-semibold mb-2">Readiness Assessment</h4>
+                <p className="text-gray-400 text-sm">Assess your smart RV readiness level</p>
+              </Link>
+            </div>
+          </div>
         </div>
       </motion.div>
     </Layout>

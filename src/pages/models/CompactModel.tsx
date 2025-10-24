@@ -1,6 +1,7 @@
 
 import { motion } from "framer-motion";
 import { useEffect, lazy, Suspense } from "react";
+import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Layout from "@/components/layout/Layout";
 import { rvTypes } from "@/data/rvTypes";
@@ -97,6 +98,26 @@ const CompactModel = () => {
             />
 
             <AffiliateDisclosure className="mt-8" />
+
+            {/* Featured Smart Systems */}
+            <div className="mt-16 bg-gray-800/50 border border-gray-700 rounded-lg p-8">
+              <h2 className="text-2xl font-bold text-white mb-4">Compact Smart Features</h2>
+              <p className="text-gray-300 mb-6">Efficient smart systems designed for weekend adventures</p>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <Link to="/features/power-management" className="bg-gray-700/50 hover:bg-gray-700 border border-gray-600 hover:border-yellow-500 rounded-lg p-4 transition-all">
+                  <h3 className="text-white font-semibold mb-2">Efficient Power</h3>
+                  <p className="text-gray-400 text-sm">Optimized power systems for weekend trips</p>
+                </Link>
+                <Link to="/features/smart-kitchen" className="bg-gray-700/50 hover:bg-gray-700 border border-gray-600 hover:border-blue-500 rounded-lg p-4 transition-all">
+                  <h3 className="text-white font-semibold mb-2">Smart Kitchen</h3>
+                  <p className="text-gray-400 text-sm">Connected appliances in a compact space</p>
+                </Link>
+                <Link to="/features/internet-connectivity" className="bg-gray-700/50 hover:bg-gray-700 border border-gray-600 hover:border-cyan-500 rounded-lg p-4 transition-all">
+                  <h3 className="text-white font-semibold mb-2">4G/5G Connectivity</h3>
+                  <p className="text-gray-400 text-sm">Fast internet for streaming and work</p>
+                </Link>
+              </div>
+            </div>
 
             {/* Model Navigation Links */}
             <ModelNavigationLinks className="mt-12 mb-8" />

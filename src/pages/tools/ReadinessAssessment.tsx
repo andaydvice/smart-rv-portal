@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 import { RelatedTools } from '@/components/rv-technology/RelatedTools';
@@ -80,6 +80,28 @@ const ReadinessAssessment: React.FC = () => {
 
           <div className="max-w-6xl mx-auto mt-12">
             <RelatedTools tools={availableTools} currentToolId="readiness-assessment" />
+          </div>
+
+          {/* Explore Smart Features */}
+          <div className="max-w-6xl mx-auto mt-12">
+            <div className="bg-gray-800/50 border border-gray-700 rounded-lg p-8">
+              <h3 className="text-xl font-semibold text-white mb-4">Learn About Smart RV Features</h3>
+              <p className="text-gray-300 mb-6">Discover what makes an RV truly smart</p>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <Link to="/features" className="bg-gray-700/50 hover:bg-gray-700 border border-gray-600 hover:border-blue-500 rounded-lg p-4 transition-all">
+                  <h4 className="text-white font-semibold mb-2">Smart Features Hub</h4>
+                  <p className="text-gray-400 text-sm">Explore all available smart systems</p>
+                </Link>
+                <Link to="/features/internet-connectivity" className="bg-gray-700/50 hover:bg-gray-700 border border-gray-600 hover:border-cyan-500 rounded-lg p-4 transition-all">
+                  <h4 className="text-white font-semibold mb-2">Connectivity</h4>
+                  <p className="text-gray-400 text-sm">Stay connected anywhere</p>
+                </Link>
+                <Link to="/features/security-system" className="bg-gray-700/50 hover:bg-gray-700 border border-gray-600 hover:border-red-500 rounded-lg p-4 transition-all">
+                  <h4 className="text-white font-semibold mb-2">Security Systems</h4>
+                  <p className="text-gray-400 text-sm">Protect your investment</p>
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
       </div>

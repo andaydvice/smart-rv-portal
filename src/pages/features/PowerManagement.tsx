@@ -6,6 +6,7 @@ import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliat
 import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
 import { Helmet } from 'react-helmet-async';
 import { FeatureNavigationLinks } from "@/components/navigation/FeatureNavigationLinks";
+import { Link } from "react-router-dom";
 
 const PowerManagement = () => {
   const canonicalUrl = typeof window !== 'undefined' ? `${window.location.origin}/features/power-management` : 'https://example.com/features/power-management';
@@ -248,6 +249,22 @@ const PowerManagement = () => {
               }
             ]}
           />
+
+          {/* Plan Your Setup */}
+          <div className="bg-gradient-to-r from-blue-900/30 to-purple-900/30 border border-blue-700/50 rounded-lg p-8 mt-8">
+            <h3 className="text-2xl font-bold text-white mb-4">Plan Your Power System</h3>
+            <p className="text-gray-300 mb-6">Use our interactive tools to calculate your power needs and find the perfect setup</p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <Link to="/calculators" className="bg-blue-600/20 hover:bg-blue-600/30 border border-blue-500 rounded-lg p-4 transition-all">
+                <h4 className="text-white font-semibold mb-2">Power Calculators</h4>
+                <p className="text-gray-400 text-sm">Calculate battery capacity and solar panel requirements</p>
+              </Link>
+              <Link to="/tools/technology-checklist" className="bg-purple-600/20 hover:bg-purple-600/30 border border-purple-500 rounded-lg p-4 transition-all">
+                <h4 className="text-white font-semibold mb-2">Technology Checklist</h4>
+                <p className="text-gray-400 text-sm">Ensure you have all power system components</p>
+              </Link>
+            </div>
+          </div>
         </div>
       </motion.div>
     </Layout>

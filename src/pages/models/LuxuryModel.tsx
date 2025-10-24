@@ -193,6 +193,31 @@ const LuxuryModel = () => {
               </div>
             </motion.div>
 
+            {/* Featured Smart Systems */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.7 }}
+              className="mt-16 bg-gray-800/50 border border-gray-700 rounded-lg p-8"
+            >
+              <h2 className="text-2xl font-bold text-white mb-4">Luxury Smart Features</h2>
+              <p className="text-gray-300 mb-6">Explore the premium smart systems available in luxury RV models</p>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <Link to="/features/power-management" className="bg-gray-700/50 hover:bg-gray-700 border border-gray-600 hover:border-yellow-500 rounded-lg p-4 transition-all">
+                  <h3 className="text-white font-semibold mb-2">Advanced Power Management</h3>
+                  <p className="text-gray-400 text-sm">Extended range power systems with solar integration</p>
+                </Link>
+                <Link to="/features/smart-automation" className="bg-gray-700/50 hover:bg-gray-700 border border-gray-600 hover:border-purple-500 rounded-lg p-4 transition-all">
+                  <h3 className="text-white font-semibold mb-2">Premium Automation</h3>
+                  <p className="text-gray-400 text-sm">Full smart home automation for luxury living</p>
+                </Link>
+                <Link to="/features/entertainment" className="bg-gray-700/50 hover:bg-gray-700 border border-gray-600 hover:border-pink-500 rounded-lg p-4 transition-all">
+                  <h3 className="text-white font-semibold mb-2">Entertainment Suite</h3>
+                  <p className="text-gray-400 text-sm">High-end audio, video, and gaming systems</p>
+                </Link>
+              </div>
+            </motion.div>
+
             {/* Model Navigation Links */}
             <ModelNavigationLinks className="mt-16 mb-8" />
           </div>

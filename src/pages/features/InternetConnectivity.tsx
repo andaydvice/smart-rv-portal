@@ -7,6 +7,7 @@ import ConnectivityGuide from "@/components/connectivity/ConnectivityGuide";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
 import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
 import { FeatureNavigationLinks } from "@/components/navigation/FeatureNavigationLinks";
+import { Link } from "react-router-dom";
 
 const InternetConnectivity = () => {
   return (
@@ -125,6 +126,22 @@ const InternetConnectivity = () => {
               }
             ]}
           />
+
+          {/* Plan Your Connectivity */}
+          <div className="bg-gradient-to-r from-cyan-900/30 to-blue-900/30 border border-cyan-700/50 rounded-lg p-8 mt-8">
+            <h3 className="text-2xl font-bold text-white mb-4">Plan Your Connectivity Setup</h3>
+            <p className="text-gray-300 mb-6">Find the right internet solution for your travel style</p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <Link to="/tools/lifestyle-planner" className="bg-cyan-600/20 hover:bg-cyan-600/30 border border-cyan-500 rounded-lg p-4 transition-all">
+                <h4 className="text-white font-semibold mb-2">Lifestyle Planner</h4>
+                <p className="text-gray-400 text-sm">Match connectivity solutions to your travel plans</p>
+              </Link>
+              <Link to="/tools/feature-matcher" className="bg-blue-600/20 hover:bg-blue-600/30 border border-blue-500 rounded-lg p-4 transition-all">
+                <h4 className="text-white font-semibold mb-2">Feature Matcher</h4>
+                <p className="text-gray-400 text-sm">Compare connectivity features across models</p>
+              </Link>
+            </div>
+          </div>
         </div>
       </motion.div>
     </Layout>

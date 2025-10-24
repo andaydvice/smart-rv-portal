@@ -1,5 +1,6 @@
 
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import AdventureHero from "@/components/adventure/AdventureHero";
 import AdventureCategoryCard from "@/components/adventure/AdventureCategoryCard";
@@ -104,6 +105,26 @@ const AdventureModel = () => {
             />
 
             <AffiliateDisclosure className="mt-8" />
+
+            {/* Featured Smart Systems */}
+            <div className="mt-16 bg-gray-800/50 border border-gray-700 rounded-lg p-8">
+              <h2 className="text-2xl font-bold text-white mb-4">Adventure-Ready Features</h2>
+              <p className="text-gray-300 mb-6">Discover the rugged smart systems built for off-grid exploration</p>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <Link to="/features/power-management" className="bg-gray-700/50 hover:bg-gray-700 border border-gray-600 hover:border-yellow-500 rounded-lg p-4 transition-all">
+                  <h3 className="text-white font-semibold mb-2">Off-Grid Power</h3>
+                  <p className="text-gray-400 text-sm">Solar and battery systems for extended adventures</p>
+                </Link>
+                <Link to="/features/navigation-system" className="bg-gray-700/50 hover:bg-gray-700 border border-gray-600 hover:border-blue-500 rounded-lg p-4 transition-all">
+                  <h3 className="text-white font-semibold mb-2">Off-Road Navigation</h3>
+                  <p className="text-gray-400 text-sm">GPS and mapping for remote terrain</p>
+                </Link>
+                <Link to="/features/internet-connectivity" className="bg-gray-700/50 hover:bg-gray-700 border border-gray-600 hover:border-cyan-500 rounded-lg p-4 transition-all">
+                  <h3 className="text-white font-semibold mb-2">Satellite Connectivity</h3>
+                  <p className="text-gray-400 text-sm">Stay connected anywhere you explore</p>
+                </Link>
+              </div>
+            </div>
 
             {/* Model Navigation Links */}
             <ModelNavigationLinks className="mt-12 mb-8" />
