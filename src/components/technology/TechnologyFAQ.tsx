@@ -1,5 +1,7 @@
 
 import React from "react";
+import { Helmet } from "react-helmet-async";
+import { faqSchema } from "@/components/seo/schemas";
 
 const TechnologyFAQ = () => {
   const faqs = [
@@ -29,8 +31,17 @@ const TechnologyFAQ = () => {
     }
   ];
 
+  // Generate FAQ schema from existing content
+  const faqSchemaData = faqSchema(faqs);
+
   return (
-    <div className="max-w-4xl mx-auto mb-16 bg-[#151A22] border border-[#1a202c]/60 rounded-3xl shadow-lg p-8">
+    <>
+      <Helmet>
+        <script type="application/ld+json">
+          {JSON.stringify(faqSchemaData)}
+        </script>
+      </Helmet>
+      <div className="max-w-4xl mx-auto mb-16 bg-[#151A22] border border-[#1a202c]/60 rounded-3xl shadow-lg p-8">
       <div className="flex items-center mb-6">
         <h2 className="text-white text-3xl font-bold">Technology FAQ</h2>
       </div>
@@ -52,6 +63,7 @@ const TechnologyFAQ = () => {
         ))}
       </div>
     </div>
+    </>
   );
 };
 
