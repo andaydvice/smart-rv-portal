@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
 import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
 import { VideoSection } from "@/components/ui/VideoSection";
+import { PageSummary } from "@/components/ui/PageSummary";
 
 const ClimateControl = () => {
   useEffect(() => {
@@ -44,6 +45,23 @@ const ClimateControl = () => {
                 </div>
               </div>
             </div>
+          </div>
+
+          {/* Feature Overview */}
+          <div className="mb-12">
+            <PageSummary
+              question="What is Smart Climate Control for RVs?"
+              answer="Smart Climate Control is an automated HVAC system that maintains perfect temperature and humidity throughout your RV using AI-powered scheduling, multi-zone control, and energy optimization. Save up to 30% on energy costs while enjoying automatic comfort management."
+              keyPoints={[
+                "Multi-Zone Temperature Control - Independent climate settings for different RV areas with smart sensors",
+                "Intelligent Scheduling - Pre-heat or pre-cool before arrival with geofencing and custom schedules",
+                "Advanced Air Quality - HEPA filtration removes allergens, bacteria, and VOCs with real-time monitoring",
+                "Humidity Management - Automated control prevents condensation and mold while maintaining ideal 30-50% levels",
+                "Energy Efficiency - AI algorithms reduce power consumption by 30% compared to traditional systems",
+                "Voice & Remote Control - Manage climate via smartphone app or voice commands from anywhere"
+              ]}
+              readingTime="5 min read"
+            />
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">

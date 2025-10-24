@@ -6,6 +6,7 @@ import { Wifi, Globe, Shield, Zap } from "lucide-react";
 import ConnectivityGuide from "@/components/connectivity/ConnectivityGuide";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
 import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
+import { PageSummary } from "@/components/ui/PageSummary";
 
 const InternetConnectivity = () => {
   return (
@@ -20,6 +21,23 @@ const InternetConnectivity = () => {
           <div className="flex items-center gap-4 mb-8">
             <Wifi className="h-8 w-8 text-cyan-500" />
             <h1 className="text-4xl font-bold text-white">Internet Connectivity</h1>
+          </div>
+
+          {/* Feature Overview */}
+          <div className="mb-12">
+            <PageSummary
+              question="What Internet Connectivity options are available for RVs?"
+              answer="Stay connected anywhere with high-speed 5G, dual-band WiFi, signal boosters, and satellite backup. Smart RV connectivity provides reliable internet for remote work, streaming, and staying in touch while traveling."
+              keyPoints={[
+                "5G & Cellular - High-speed mobile internet with automatic carrier switching and signal boosters",
+                "WiFi Systems - Dual-band routers supporting multiple devices with extended range",
+                "Satellite Backup - Starlink and other satellite options for remote areas without cell coverage",
+                "Signal Boosters - Amplify weak cellular signals for better coverage in rural locations",
+                "Enterprise Security - VPN support and encrypted connections protect your data on public networks",
+                "Bandwidth Management - Smart optimization prioritizes critical applications and manages data usage"
+              ]}
+              readingTime="7 min read"
+            />
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">

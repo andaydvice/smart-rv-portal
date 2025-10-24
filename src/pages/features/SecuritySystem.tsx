@@ -5,6 +5,7 @@ import { Shield, Lock, Bell, Camera, Smartphone, MapPin, BatteryCharging, KeyRou
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
 import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
 import { Helmet } from 'react-helmet-async';
+import { PageSummary } from "@/components/ui/PageSummary";
 
 const SecuritySystem = () => {
   const canonicalUrl = typeof window !== 'undefined' ? `${window.location.origin}/features/security-system` : 'https://example.com/features/security-system';
@@ -58,6 +59,23 @@ const SecuritySystem = () => {
         {/* Content Section */}
         <div className="bg-gradient-to-b from-gray-900 to-gray-800">
           <div className="max-w-7xl mx-auto px-4 py-12">
+
+          {/* Feature Overview */}
+          <div className="mb-12">
+            <PageSummary
+              question="What is included in RV Security Systems?"
+              answer="Comprehensive RV security systems integrate smart locks, HD cameras, motion sensors, GPS tracking, and 24/7 monitoring to protect your RV whether parked or traveling. Control everything remotely via smartphone app with instant alerts for any security events."
+              keyPoints={[
+                "Smart Locks - Keyless entry with personalized codes, remote access, and activity logs ($100-$250)",
+                "Video Surveillance - HD cameras with night vision, motion detection, and cloud storage (from $200 kits)",
+                "Real-Time Alerts - Instant notifications for doors, windows, motion, and unauthorized entry",
+                "GPS Tracking & Geofencing - Monitor location and set virtual boundaries for automatic security",
+                "Mobile App Control - Lock/unlock doors, view live feeds, and receive alerts from anywhere",
+                "Professional Monitoring - Optional 24/7 monitoring services ($9.99-$19.99/month)"
+              ]}
+              readingTime="8 min read"
+            />
+          </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
             <div className="bg-gray-800/50 p-8 rounded-lg border border-gray-700">

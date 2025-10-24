@@ -5,6 +5,7 @@ import Layout from "@/components/layout/Layout";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
 import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
 import { Helmet } from 'react-helmet-async';
+import { PageSummary } from "@/components/ui/PageSummary";
 
 const PowerManagement = () => {
   const canonicalUrl = typeof window !== 'undefined' ? `${window.location.origin}/features/power-management` : 'https://example.com/features/power-management';
@@ -61,6 +62,23 @@ const PowerManagement = () => {
         className="w-full px-4 bg-gradient-to-b from-gray-900 to-gray-800"
       >
         <div className="max-w-7xl mx-auto pt-12">
+
+          {/* Feature Overview */}
+          <div className="mb-12">
+            <PageSummary
+              question="What is Smart Power Management for RVs?"
+              answer="Intelligent power management system that optimizes energy usage through solar integration, battery monitoring, and automated power distribution. Extends off-grid capability while reducing energy costs with real-time analytics and smart appliance control."
+              keyPoints={[
+                "Solar Integration - Maximize solar panel efficiency with real-time monitoring and optimization",
+                "Battery Analytics - Track battery levels, health, and capacity with automated alerts",
+                "Smart Distribution - Automated power source switching between solar, battery, shore, and generator",
+                "Energy Monitoring - Real-time consumption analytics identify power-hungry devices",
+                "Load Management - Prioritize critical systems and shed non-essential loads during high demand",
+                "Generator Control - Auto-start/stop based on battery levels and power needs"
+              ]}
+              readingTime="6 min read"
+            />
+          </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
             <div className="bg-gray-800/50 p-8 rounded-lg border border-gray-700">
