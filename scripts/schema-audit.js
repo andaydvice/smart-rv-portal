@@ -10,9 +10,14 @@
  * - Actionable next steps
  */
 
-const fs = require('fs');
-const path = require('path');
-const glob = require('glob');
+import fs from 'fs';
+import path from 'path';
+import { glob } from 'glob';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 // Schema recommendations by page type
 const schemaRecommendations = {
@@ -99,17 +104,17 @@ class SchemaAuditor {
   /**
    * Find all page components
    */
-  findPages() {
+  async findPages() {
     const patterns = [
       'src/pages/**/*.tsx',
       'src/pages/**/*.jsx',
     ];
 
     const pages = [];
-    patterns.forEach(pattern => {
-      const files = glob.sync(pattern, { cwd: process.cwd() });
+    for (const pattern of patterns) {
+      const files = await glob(pattern, { cwd: process.cwd() });
       pages.push(...files);
-    });
+    }
 
     return pages;
   }
@@ -204,7 +209,7 @@ class SchemaAuditor {
   async runAudit() {
     console.log('\n🔍 Running comprehensive schema audit...\n');
 
-    const pages = this.findPages();
+    const pages = await this.findPages();
     this.results.totalPages = pages.length;
 
     for (const page of pages) {
