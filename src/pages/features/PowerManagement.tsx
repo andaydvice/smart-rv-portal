@@ -71,19 +71,16 @@ const PowerManagement = () => {
               <h2 className="text-2xl font-semibold text-yellow-400 mb-4">Smart Power Features</h2>
               <div className="space-y-4 text-gray-300 mb-6 text-left">
                 <p>
-                  Our intelligent power management system optimizes energy usage.
+                  Modern RV power systems consume between 5-50 kWh per day depending on weather conditions, with air conditioning alone increasing usage by 150-300% (Source: Roam Lab, Solar Tech Online 2024).
                 </p>
                 <p>
-                  It ensures efficient power distribution throughout your RV.
+                  Smart power management helps you monitor and optimize this consumption in real-time, ensuring efficient power distribution throughout your RV.
                 </p>
                 <p>
-                  With solar integration and smart monitoring, you will always have the power you need.
+                  With solar integration and intelligent load management, you can reduce annual operating costs by $1,200+ while gaining unlimited boondocking freedom (Source: Integrate Sun 2025).
                 </p>
                 <p>
-                  This advanced system helps conserve energy.
-                </p>
-                <p>
-                  It also prolongs battery life for extended off grid adventures.
+                  Advanced battery technology plays a crucial role: lithium batteries offer 95%+ charge efficiency compared to 80-85% for lead-acid, meaning less wasted energy (Source: Mowgli Adventures, Flux Power 2024).
                 </p>
               </div>
               <LazyImage
@@ -112,22 +109,19 @@ const PowerManagement = () => {
                 <h3 className="text-xl font-semibold text-white mb-2">Solar Integration</h3>
                 <div className="text-gray-300 space-y-2 text-left">
                   <p>
-                    Maximize your sustainable energy potential with our advanced solar integration.
+                    Modern monocrystalline solar panels achieve 20-25% efficiency, converting sunlight into usable power for your RV (Source: Hydro Solar, University of Michigan 2024).
                   </p>
                   <p>
-                    Our system provides efficient solar power collection.
+                    The choice of charge controller matters significantly: MPPT controllers extract 15-30% more power from identical panels compared to PWM controllers (Source: Integrate Sun 2025).
                   </p>
                   <p>
-                    It also manages energy storage with real time monitoring capabilities.
+                    According to the RV Industry Association, there has been a 15% increase in demand for RVs equipped with solar panels, reflecting growing adoption of sustainable energy solutions.
                   </p>
                   <p>
-                    Track your solar input and battery charge levels effortlessly.
+                    Solar panel costs have dropped 90% since 2010, with average module prices reaching $0.31/W_dc in Q2 2024, making solar more accessible than ever (Source: EnergySage 2024).
                   </p>
                   <p>
-                    This ensures you make the most of available sunlight.
-                  </p>
-                  <p>
-                    Optimize panel performance through smart tracking and tilt adjustments where available.
+                    Most solar-equipped RVs achieve return on investment within 2-3 years of full-time travel through reduced campground and generator fuel costs (Source: Integrate Sun 2025).
                   </p>
                 </div>
               </div>
@@ -137,22 +131,19 @@ const PowerManagement = () => {
                 <h3 className="text-xl font-semibold text-white mb-2">Smart Distribution</h3>
                 <div className="text-gray-300 space-y-2 text-left">
                   <p>
-                    Benefit from intelligent power routing that prioritizes essential systems.
+                    Intelligent power routing prioritizes essential systems and automatically switches off circuits when power draw exceeds incoming capacity, following a predetermined order set for your coach's needs (Source: Family RVing Magazine).
                   </p>
                   <p>
-                    Our smart distribution ensures critical appliances always have power.
+                    The average RV draws 30 amps per hour at 110V, equal to approximately 330 watts/hour baseline consumption (Source: e RV Solar 2024).
                   </p>
                   <p>
-                    It automatically manages loads to prevent overloads.
+                    Smart load management prevents overloads while ensuring critical appliances maintain power during high-demand periods.
                   </p>
                   <p>
-                    You can customize power allocation based on your specific needs.
+                    Customizable power allocation allows you to set priorities based on your specific usage patterns and needs.
                   </p>
                   <p>
-                    This feature enhances safety and reliability of your RVs electrical system.
-                  </p>
-                  <p>
-                    Receive notifications for unusual power draws or potential issues.
+                    Real-time monitoring provides instant notifications for unusual power draws or potential electrical issues before they become problems.
                   </p>
                 </div>
               </div>
@@ -187,6 +178,66 @@ const PowerManagement = () => {
             </div>
           </div>
           
+          {/* Battery Technology Comparison */}
+          <div className="mt-12 mb-8 bg-gray-800/50 p-8 rounded-lg border border-gray-700">
+            <h2 className="text-3xl font-bold text-white mb-6">Battery Technology Comparison</h2>
+            <p className="text-gray-300 mb-8">
+              Choosing the right battery technology significantly impacts your RV's performance and operating costs. Here's how lithium and lead-acid batteries compare based on industry data:
+            </p>
+
+            <div className="overflow-x-auto">
+              <table className="w-full text-left border-collapse">
+                <thead>
+                  <tr className="border-b border-gray-600">
+                    <th className="py-3 px-4 text-yellow-400 font-semibold">Specification</th>
+                    <th className="py-3 px-4 text-yellow-400 font-semibold">Lead-Acid</th>
+                    <th className="py-3 px-4 text-yellow-400 font-semibold">Lithium (LiFePO4)</th>
+                  </tr>
+                </thead>
+                <tbody className="text-gray-300">
+                  <tr className="border-b border-gray-700">
+                    <td className="py-3 px-4 font-medium">Lifespan</td>
+                    <td className="py-3 px-4">2-5 years</td>
+                    <td className="py-3 px-4 text-green-400">10+ years</td>
+                  </tr>
+                  <tr className="border-b border-gray-700">
+                    <td className="py-3 px-4 font-medium">Cycle Life</td>
+                    <td className="py-3 px-4">300-1,000 cycles</td>
+                    <td className="py-3 px-4 text-green-400">3,000-5,000 cycles</td>
+                  </tr>
+                  <tr className="border-b border-gray-700">
+                    <td className="py-3 px-4 font-medium">Charge Efficiency</td>
+                    <td className="py-3 px-4">80-85%</td>
+                    <td className="py-3 px-4 text-green-400">95%+</td>
+                  </tr>
+                  <tr className="border-b border-gray-700">
+                    <td className="py-3 px-4 font-medium">Daily Cycle Performance</td>
+                    <td className="py-3 px-4">Less than 2 years</td>
+                    <td className="py-3 px-4 text-green-400">14+ years</td>
+                  </tr>
+                  <tr className="border-b border-gray-700">
+                    <td className="py-3 px-4 font-medium">Safe Depth of Discharge</td>
+                    <td className="py-3 px-4">50% (lifespan reduced below)</td>
+                    <td className="py-3 px-4 text-green-400">80-100%</td>
+                  </tr>
+                  <tr className="border-b border-gray-700">
+                    <td className="py-3 px-4 font-medium">Energy Waste</td>
+                    <td className="py-3 px-4">15-20% (increases with age)</td>
+                    <td className="py-3 px-4 text-green-400">Less than 5%</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div className="mt-6 p-4 bg-blue-900/20 border border-blue-500/30 rounded-lg">
+              <p className="text-sm text-gray-300">
+                <strong className="text-blue-400">Key Finding:</strong> Lithium batteries provide 10x the cycle life of lead-acid batteries under most conditions. With daily cycling, lithium can last 14+ years compared to less than 2 years for standard lead-acid batteries.
+                <br /><br />
+                <em>Sources: RV LIFE, Battle Born Batteries, Flux Power, RELiON, Mowgli Adventures 2024</em>
+              </p>
+            </div>
+          </div>
+
           {/* Professional Installation Image */}
           <div className="mt-12 mb-8">
             <LazyImage

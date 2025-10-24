@@ -1,0 +1,1 @@
+import{j as e}from"./query-DgI8Fk8U.js";import{c as r}from"./index-78aV_s-_.js";const m=({image:o,title:s})=>e.jsx("div",{className:"rounded-3xl overflow-hidden",children:e.jsx(r,{src:o,alt:s,className:"w-full h-[600px] object-cover"})});export{m as B};
