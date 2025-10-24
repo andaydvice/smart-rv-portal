@@ -1,0 +1,2219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Schema Audit Report - Smart RV Portal</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      padding: 2rem;
+      line-height: 1.6;
+    }
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      overflow: hidden;
+    }
+    .header {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 3rem;
+      text-align: center;
+    }
+    .header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+      font-weight: 700;
+    }
+    .header p {
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
+    .timestamp {
+      font-size: 0.9rem;
+      opacity: 0.8;
+      margin-top: 1rem;
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      padding: 2rem;
+      background: #f8f9fa;
+    }
+    .stat-card {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      text-align: center;
+      transition: transform 0.2s;
+    }
+    .stat-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    .stat-number {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    .stat-label {
+      color: #6c757d;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .excellent { color: #28a745; }
+    .good { color: #17a2b8; }
+    .warning { color: #ffc107; }
+    .danger { color: #dc3545; }
+
+    .progress-bar {
+      width: 100%;
+      height: 30px;
+      background: #e9ecef;
+      border-radius: 15px;
+      overflow: hidden;
+      margin: 1rem 0;
+    }
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #28a745, #20c997);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 600;
+      transition: width 1s ease;
+    }
+
+    .content {
+      padding: 2rem;
+    }
+    .section {
+      margin-bottom: 3rem;
+    }
+    .section-title {
+      font-size: 1.8rem;
+      margin-bottom: 1.5rem;
+      color: #2d3748;
+      border-bottom: 3px solid #667eea;
+      padding-bottom: 0.5rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    thead {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+    }
+    th {
+      padding: 1rem;
+      text-align: left;
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+      letter-spacing: 0.5px;
+    }
+    td {
+      padding: 1rem;
+      border-bottom: 1px solid #e9ecef;
+    }
+    tr:hover {
+      background: #f8f9fa;
+    }
+
+    .status-badge {
+      display: inline-block;
+      padding: 0.4rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+    .status-excellent {
+      background: #d4edda;
+      color: #155724;
+    }
+    .status-good {
+      background: #d1ecf1;
+      color: #0c5460;
+    }
+    .status-needs-improvement {
+      background: #fff3cd;
+      color: #856404;
+    }
+    .status-missing {
+      background: #f8d7da;
+      color: #721c24;
+    }
+
+    .schema-tag {
+      display: inline-block;
+      background: #e7f3ff;
+      color: #0066cc;
+      padding: 0.3rem 0.6rem;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      margin: 0.2rem;
+      font-family: 'Courier New', monospace;
+    }
+    .missing-tag {
+      background: #ffe0e0;
+      color: #cc0000;
+    }
+    .recommended-tag {
+      background: #fff4e0;
+      color: #cc8800;
+    }
+
+    .url-link {
+      color: #667eea;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .url-link:hover {
+      text-decoration: underline;
+    }
+
+    .file-path {
+      color: #6c757d;
+      font-size: 0.85rem;
+      font-family: 'Courier New', monospace;
+    }
+
+    .chart-container {
+      margin: 2rem 0;
+      padding: 2rem;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .action-card {
+      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      color: white;
+      padding: 2rem;
+      border-radius: 12px;
+      margin: 2rem 0;
+    }
+    .action-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    .action-card ul {
+      list-style: none;
+      padding-left: 0;
+    }
+    .action-card li {
+      padding: 0.5rem 0;
+      padding-left: 1.5rem;
+      position: relative;
+    }
+    .action-card li:before {
+      content: "→";
+      position: absolute;
+      left: 0;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>🔍 Schema Audit Report</h1>
+      <p>Smart RV Portal - Comprehensive Schema.org Analysis</p>
+      <div class="timestamp">Generated: 10/24/2025, 4:44:18 AM</div>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-number">68</div>
+        <div class="stat-label">Total Pages</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number excellent">0</div>
+        <div class="stat-label">Excellent</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number warning">0</div>
+        <div class="stat-label">Needs Work</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number danger">68</div>
+        <div class="stat-label">Missing Schema</div>
+      </div>
+    </div>
+
+    <div class="content">
+      <div class="section">
+        <h2 class="section-title">📊 Overall Coverage</h2>
+        <div class="progress-bar">
+          <div class="progress-fill" style="width: 0%">
+            0% Coverage
+          </div>
+        </div>
+        <p style="margin-top: 1rem; color: #6c757d;">
+          0 of 68 pages have schema markup
+        </p>
+      </div>
+
+      
+      <div class="section">
+        <h2 class="section-title">📄 Page Details</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Page URL</th>
+              <th>Status</th>
+              <th>Current Schema</th>
+              <th>Missing / Recommended</th>
+            </tr>
+          </thead>
+          <tbody>
+    
+        <tr>
+          <td>
+            <a href="https://smartrvhub.com/_document" class="url-link" target="_blank">/_document</a>
+            <div class="file-path">src/pages/_document.tsx</div>
+          </td>
+          <td>
+            <span class="status-badge status-missing">✗ Missing</span>
+          </td>
+          <td>
+            <span style="color: #999;">None</span>
+          </td>
+          <td>
+            <span class="schema-tag missing-tag">Missing: WebPage</span>
+            <span class="schema-tag recommended-tag">Add: BreadcrumbList</span>
+            
+          </td>
+        </tr>
+      
+        <tr>
+          <td>
+            <a href="https://smartrvhub.com/weather-dashboard" class="url-link" target="_blank">/weather-dashboard</a>
+            <div class="file-path">src/pages/WeatherDashboard.tsx</div>
+          </td>
+          <td>
+            <span class="status-badge status-missing">✗ Missing</span>
+          </td>
+          <td>
+            <span style="color: #999;">None</span>
+          </td>
+          <td>
+            <span class="schema-tag missing-tag">Missing: WebPage</span>
+            <span class="schema-tag recommended-tag">Add: BreadcrumbList</span>
+            
+          </td>
+        </tr>
+      
+        <tr>
+          <td>
+            <a href="https://smartrvhub.com/voice-control" class="url-link" target="_blank">/voice-control</a>
+            <div class="file-path">src/pages/VoiceControl.tsx</div>
+          </td>
+          <td>
+            <span class="status-badge status-missing">✗ Missing</span>
+          </td>
+          <td>
+            <span style="color: #999;">None</span>
+          </td>
+          <td>
+            <span class="schema-tag missing-tag">Missing: WebPage</span>
+            <span class="schema-tag recommended-tag">Add: BreadcrumbList</span>
+            
+          </td>
+        </tr>
+      
+        <tr>
+          <td>
+            <a href="https://smartrvhub.com/troubleshooting" class="url-link" target="_blank">/troubleshooting</a>
+            <div class="file-path">src/pages/Troubleshooting.tsx</div>
+          </td>
+          <td>
+            <span class="status-badge status-missing">✗ Missing</span>
+          </td>
+          <td>
+            <span style="color: #999;">None</span>
+          </td>
+          <td>
+            <span class="schema-tag missing-tag">Missing: WebPage</span>
+            <span class="schema-tag recommended-tag">Add: BreadcrumbList</span>
+            
+          </td>
+        </tr>
+      
+        <tr>
+          <td>
+            <a href="https://smartrvhub.com/tools" class="url-link" target="_blank">/tools</a>
+            <div class="file-path">src/pages/Tools.tsx</div>
+          </td>
+          <td>
+            <span class="status-badge status-missing">✗ Missing</span>
+          </td>
+          <td>
+            <span style="color: #999;">None</span>
+          </td>
+          <td>
+            <span class="schema-tag missing-tag">Missing: WebPage</span> <span class="schema-tag missing-tag">Missing: SoftwareApplication</span>
+            <span class="schema-tag recommended-tag">Add: HowTo</span>
+            
+          </td>
+        </tr>
+      
+        <tr>
+          <td>
+            <a href="https://smartrvhub.com/technology" class="url-link" target="_blank">/technology</a>
+            <div class="file-path">src/pages/Technology.tsx</div>
+          </td>
+          <td>
+            <span class="status-badge status-missing">✗ Missing</span>
+          </td>
+          <td>
+            <span style="color: #999;">None</span>
+          </td>
+          <td>
+            <span class="schema-tag missing-tag">Missing: WebPage</span>
+            <span class="schema-tag recommended-tag">Add: BreadcrumbList</span>
+            
+          </td>
+        </tr>
+      
+        <tr>
+          <td>
+            <a href="https://smartrvhub.com/storage-preparation-checklist" class="url-link" target="_blank">/storage-preparation-checklist</a>
+            <div class="file-path">src/pages/StoragePreparationChecklist.tsx</div>
+          </td>
+          <td>
+            <span class="status-badge status-missing">✗ Missing</span>
+          </td>
+          <td>
+            <span style="color: #999;">None</span>
+          </td>
+          <td>
+            <span class="schema-tag missing-tag">Missing: WebPage</span>
+            <span class="schema-tag recommended-tag">Add: BreadcrumbList</span>
+            
+          </td>
+        </tr>
+      
+        <tr>
+          <td>
+            <a href="https://smartrvhub.com/storage-facilities" class="url-link" target="_blank">/storage-facilities</a>
+            <div class="file-path">src/pages/StorageFacilities.tsx</div>
+          </td>
+          <td>
+            <span class="status-badge status-missing">✗ Missing</span>
+          </td>
+          <td>
+            <span style="color: #999;">None</span>
+          </td>
+          <td>
+            <span class="schema-tag missing-tag">Missing: WebPage</span>
+            <span class="schema-tag recommended-tag">Add: BreadcrumbList</span>
+            
+          </td>
+        </tr>
+      
+        <tr>
+          <td>
+            <a href="https://smartrvhub.com/solar-power-guide" class="url-link" target="_blank">/solar-power-guide</a>
+            <div class="file-path">src/pages/SolarPowerGuide.tsx</div>
+          </td>
+          <td>
+            <span class="status-badge status-missing">✗ Missing</span>
+          </td>
+          <td>
+            <span style="color: #999;">None</span>
+          </td>
+          <td>
+            <span class="schema-tag missing-tag">Missing: WebPage</span>
+            <span class="schema-tag recommended-tag">Add: BreadcrumbList</span>
+            
+          </td>
+        </tr>
+      
+        <tr>
+          <td>
+            <a href="https://smartrvhub.com/search-results" class="url-link" target="_blank">/search-results</a>
+            <div class="file-path">src/pages/SearchResults.tsx</div>
+          </td>
+          <td>
+            <span class="status-badge status-missing">✗ Missing</span>
+          </td>
+          <td>
+            <span style="color: #999;">None</span>
+          </td>
+          <td>
+            <span class="schema-tag missing-tag">Missing: WebPage</span>
+            <span class="schema-tag recommended-tag">Add: BreadcrumbList</span>
+            
+          </td>
+        </tr>
+      
+        <tr>
+          <td>
+            <a href="https://smartrvhub.com/schedule-demo" class="url-link" target="_blank">/schedule-demo</a>
+            <div class="file-path">src/pages/ScheduleDemo.tsx</div>
+          </td>
+          <td>
+            <span class="status-badge status-missing">✗ Missing</span>
+          </td>
+          <td>
+            <span style="color: #999;">None</span>
+          </td>
+          <td>
+            <span class="schema-tag missing-tag">Missing: WebPage</span>
+            <span class="schema-tag recommended-tag">Add: BreadcrumbList</span>
+            
+          </td>
+        </tr>
+      
+        <tr>
+          <td>
+            <a href="https://smartrvhub.com/reset-password" class="url-link" target="_blank">/reset-password</a>
+            <div class="file-path">src/pages/ResetPassword.tsx</div>
+          </td>
+          <td>
+            <span class="status-badge status-missing">✗ Missing</span>
+          </td>
+          <td>
+            <span style="color: #999;">None</span>
+          </td>
+          <td>
+            <span class="schema-tag missing-tag">Missing: WebPage</span>
+            <span class="schema-tag recommended-tag">Add: BreadcrumbList</span>
+            
+          </td>
+        </tr>
+      
+        <tr>
+          <td>
+            <a href="https://smartrvhub.com/r-v-weather" class="url-link" target="_blank">/r-v-weather</a>
+            <div class="file-path">src/pages/RVWeather.tsx</div>
+          </td>
+          <td>
+            <span class="status-badge status-missing">✗ Missing</span>
+          </td>
+          <td>
+            <span style="color: #999;">None</span>
+          </td>
+          <td>
+            <span class="schema-tag missing-tag">Missing: WebPage</span>
+            <span class="schema-tag recommended-tag">Add: BreadcrumbList</span>
+            
+          </td>
+        </tr>
+      
+        <tr>
+          <td>
+            <a href="https://smartrvhub.com/r-v-technology-guide-research" class="url-link" target="_blank">/r-v-technology-guide-research</a>
+            <div class="file-path">src/pages/RVTechnologyGuideResearch.tsx</div>
+          </td>
+          <td>
+            <span class="status-badge status-missing">✗ Missing</span>
+          </td>
+          <td>
+            <span style="color: #999;">None</span>
+          </td>
+          <td>
+            <span class="schema-tag missing-tag">Missing: WebPage</span>
+            <span class="schema-tag recommended-tag">Add: BreadcrumbList</span>
+            
+          </td>
+        </tr>
+      
+        <tr>
+          <td>
+            <a href="https://smartrvhub.com/r-v-technology-guide-control-systems" class="url-link" target="_blank">/r-v-technology-guide-control-systems</a>
+            <div class="file-path">src/pages/RVTechnologyGuideControlSystems.tsx</div>
+          </td>
+          <td>
+            <span class="status-badge status-missing">✗ Missing</span>
+          </td>
+          <td>
+            <span style="color: #999;">None</span>
+          </td>
+          <td>
+            <span class="schema-tag missing-tag">Missing: WebPage</span>
+            <span class="schema-tag recommended-tag">Add: BreadcrumbList</span>
+            
+          </td>
+        </tr>
+      
+        <tr>
+          <td>
+            <a href="https://smartrvhub.com/r-v-technology-guide" class="url-link" target="_blank">/r-v-technology-guide</a>
+            <div class="file-path">src/pages/RVTechnologyGuide.tsx</div>
+          </td>
+          <td>
+            <span class="status-badge status-missing">✗ Missing</span>
+          </td>
+          <td>
+            <span style="color: #999;">None</span>
+          </td>
+          <td>
+            <span class="schema-tag missing-tag">Missing: WebPage</span>
+            <span class="schema-tag recommended-tag">Add: BreadcrumbList</span>
+            
+          </td>
+        </tr>
+      
+        <tr>
+          <td>
+            <a href="https://smartrvhub.com/r-v-marketplace" class="url-link" target="_blank">/r-v-marketplace</a>
+            <div class="file-path">src/pages/RVMarketplace.tsx</div>
+          </td>
+          <td>
+            <span class="status-badge status-missing">✗ Missing</span>
+          </td>
+          <td>
+            <span style="color: #999;">None</span>
+          </td>
+          <td>
+            <span class="schema-tag missing-tag">Missing: WebPage</span>
+            <span class="schema-tag recommended-tag">Add: BreadcrumbList</span>
+            
+          </td>
+        </tr>
+      
+        <tr>
+          <td>
+            <a href="https://smartrvhub.com/r-v-emergency-center" class="url-link" target="_blank">/r-v-emergency-center</a>
+            <div class="file-path">src/pages/RVEmergencyCenter.tsx</div>
+          </td>
+          <td>
+            <span class="status-badge status-missing">✗ Missing</span>
+          </td>
+          <td>
+            <span style="color: #999;">None</span>
+          </td>
+          <td>
+            <span class="schema-tag missing-tag">Missing: WebPage</span>
+            <span class="schema-tag recommended-tag">Add: BreadcrumbList</span>
+            
+          </td>
+        </tr>
+      
+        <tr>
+          <td>
+            <a href="https://smartrvhub.com/r-v-comfort-guide" class="url-link" target="_blank">/r-v-comfort-guide</a>
+            <div class="file-path">src/pages/RVComfortGuide.tsx</div>
+          </td>
+          <td>
+            <span class="status-badge status-missing">✗ Missing</span>
+          </td>
+          <td>
+            <span style="color: #999;">None</span>
+          </td>
+          <td>
+            <span class="schema-tag missing-tag">Missing: WebPage</span>
+            <span class="schema-tag recommended-tag">Add: BreadcrumbList</span>
+            
+          </td>
+        </tr>
+      
+        <tr>
+          <td>
+            <a href="https://smartrvhub.com/r-v-apps-hub" class="url-link" target="_blank">/r-v-apps-hub</a>
+            <div class="file-path">src/pages/RVAppsHub.tsx</div>
+          </td>
+          <td>
+            <span class="status-badge status-missing">✗ Missing</span>
+          </td>
+          <td>
+            <span style="color: #999;">None</span>
+          </td>
+          <td>
+            <span class="schema-tag missing-tag">Missing: WebPage</span>
+            <span class="schema-tag recommended-tag">Add: BreadcrumbList</span>
+            
+          </td>
+        </tr>
+      
+        <tr>
+          <td>
+            <a href="https://smartrvhub.com/products" class="url-link" target="_blank">/products</a>
+            <div class="file-path">src/pages/Products.tsx</div>
+          </td>
+          <td>
+            <span class="status-badge status-missing">✗ Missing</span>
+          </td>
+          <td>
+            <span style="color: #999;">None</span>
+          </td>
+          <td>
+            <span class="schema-tag missing-tag">Missing: WebPage</span>
+            <span class="schema-tag recommended-tag">Add: BreadcrumbList</span>
+            
+          </td>
+        </tr>
+      
+        <tr>
+          <td>
+            <a href="https://smartrvhub.com/pricing" class="url-link" target="_blank">/pricing</a>
+            <div class="file-path">src/pages/Pricing.tsx</div>
+          </td>
+          <td>
+            <span class="status-badge status-missing">✗ Missing</span>
+          </td>
+          <td>
+            <span style="color: #999;">None</span>
+          </td>
+          <td>
+            <span class="schema-tag missing-tag">Missing: WebPage</span>
+            <span class="schema-tag recommended-tag">Add: BreadcrumbList</span>
+            
+          </td>
+        </tr>
+      
+        <tr>
+          <td>
+            <a href="https://smartrvhub.com/models" class="url-link" target="_blank">/models</a>
+            <div class="file-path">src/pages/Models.tsx</div>
+          </td>
+          <td>
+            <span class="status-badge status-missing">✗ Missing</span>
+          </td>
+          <td>
+            <span style="color: #999;">None</span>
+          </td>
+          <td>
+            <span class="schema-tag missing-tag">Missing: ItemList</span> <span class="schema-tag missing-tag">Missing: WebPage</span>
+            <span class="schema-tag recommended-tag">Add: Product</span>
+            
+          </td>
+        </tr>
+      
+        <tr>
+          <td>
+            <a href="https://smartrvhub.com/map-icon-demo" class="url-link" target="_blank">/map-icon-demo</a>
+            <div class="file-path">src/pages/MapIconDemo.tsx</div>
+          </td>
+          <td>
+            <span class="status-badge status-missing">✗ Missing</span>
+          </td>
+          <td>
+            <span style="color: #999;">None</span>
+          </td>
+          <td>
+            <span class="schema-tag missing-tag">Missing: WebPage</span>
+            <span class="schema-tag recommended-tag">Add: BreadcrumbList</span>
+            
+          </td>
+        </tr>
+      
+        <tr>
+          <td>
+            <a href="https://smartrvhub.com/map-facility-demo" class="url-link" target="_blank">/map-facility-demo</a>
+            <div class="file-path">src/pages/MapFacilityDemo.tsx</div>
+          </td>
+          <td>
+            <span class="status-badge status-missing">✗ Missing</span>
+          </td>
+          <td>
+            <span style="color: #999;">None</span>
+          </td>
+          <td>
+            <span class="schema-tag missing-tag">Missing: WebPage</span>
+            <span class="schema-tag recommended-tag">Add: BreadcrumbList</span>
+            
+          </td>
+        </tr>
+      
+        <tr>
+          <td>
+            <a href="https://smartrvhub.com/" class="url-link" target="_blank">/</a>
+            <div class="file-path">src/pages/Index.tsx</div>
+          </td>
+          <td>
+            <span class="status-badge status-missing">✗ Missing</span>
+          </td>
+          <td>
+            <span style="color: #999;">None</span>
+          </td>
+          <td>
+            <span class="schema-tag missing-tag">Missing: Organization</span> <span class="schema-tag missing-tag">Missing: WebSite</span>
+            <span class="schema-tag recommended-tag">Add: BreadcrumbList</span>
+            
+          </td>
+        </tr>
+      
+        <tr>
+          <td>
+            <a href="https://smartrvhub.com/features" class="url-link" target="_blank">/features</a>
+            <div class="file-path">src/pages/Features.tsx</div>
+          </td>
+          <td>
+            <span class="status-badge status-missing">✗ Missing</span>
+          </td>
+          <td>
+            <span style="color: #999;">None</span>
+          </td>
+          <td>
+            <span class="schema-tag missing-tag">Missing: WebPage</span>
+            <span class="schema-tag recommended-tag">Add: Product</span> <span class="schema-tag recommended-tag">Add: ItemList</span>
+            
+          </td>
+        </tr>
+      
+        <tr>
+          <td>
+            <a href="https://smartrvhub.com/facility-detail" class="url-link" target="_blank">/facility-detail</a>
+            <div class="file-path">src/pages/FacilityDetail.tsx</div>
+          </td>
+          <td>
+            <span class="status-badge status-missing">✗ Missing</span>
+          </td>
+          <td>
+            <span style="color: #999;">None</span>
+          </td>
+          <td>
+            <span class="schema-tag missing-tag">Missing: WebPage</span>
+            <span class="schema-tag recommended-tag">Add: BreadcrumbList</span>
+            
+          </td>
+        </tr>
+      
+        <tr>
+          <td>
+            <a href="https://smartrvhub.com/error-page" class="url-link" target="_blank">/error-page</a>
+            <div class="file-path">src/pages/ErrorPage.tsx</div>
+          </td>
+          <td>
+            <span class="status-badge status-missing">✗ Missing</span>
+          </td>
+          <td>
+            <span style="color: #999;">None</span>
+          </td>
+          <td>
+            <span class="schema-tag missing-tag">Missing: WebPage</span>
+            <span class="schema-tag recommended-tag">Add: BreadcrumbList</span>
+            
+          </td>
+        </tr>
+      
+        <tr>
+          <td>
+            <a href="https://smartrvhub.com/documentation" class="url-link" target="_blank">/documentation</a>
+            <div class="file-path">src/pages/Documentation.tsx</div>
+          </td>
+          <td>
+            <span class="status-badge status-missing">✗ Missing</span>
+          </td>
+          <td>
+            <span style="color: #999;">None</span>
+          </td>
+          <td>
+            <span class="schema-tag missing-tag">Missing: WebPage</span>
+            <span class="schema-tag recommended-tag">Add: BreadcrumbList</span>
+            
+          </td>
+        </tr>
+      
+        <tr>
+          <td>
+            <a href="https://smartrvhub.com/contact" class="url-link" target="_blank">/contact</a>
+            <div class="file-path">src/pages/Contact.tsx</div>
+          </td>
+          <td>
+            <span class="status-badge status-missing">✗ Missing</span>
+          </td>
+          <td>
+            <span style="color: #999;">None</span>
+          </td>
+          <td>
+            <span class="schema-tag missing-tag">Missing: WebPage</span>
+            <span class="schema-tag recommended-tag">Add: BreadcrumbList</span>
+            
+          </td>
+        </tr>
+      
+        <tr>
+          <td>
+            <a href="https://smartrvhub.com/calculators" class="url-link" target="_blank">/calculators</a>
+            <div class="file-path">src/pages/Calculators.tsx</div>
+          </td>
+          <td>
+            <span class="status-badge status-missing">✗ Missing</span>
+          </td>
+          <td>
+            <span style="color: #999;">None</span>
+          </td>
+          <td>
+            <span class="schema-tag missing-tag">Missing: WebPage</span> <span class="schema-tag missing-tag">Missing: WebApplication</span>
+            <span class="schema-tag recommended-tag">Add: HowTo</span>
+            
+          </td>
+        </tr>
+      
+        <tr>
+          <td>
+            <a href="https://smartrvhub.com/blog-post" class="url-link" target="_blank">/blog-post</a>
+            <div class="file-path">src/pages/BlogPost.tsx</div>
+          </td>
+          <td>
+            <span class="status-badge status-missing">✗ Missing</span>
+          </td>
+          <td>
+            <span style="color: #999;">None</span>
+          </td>
+          <td>
+            <span class="schema-tag missing-tag">Missing: WebPage</span>
+            <span class="schema-tag recommended-tag">Add: BreadcrumbList</span>
+            
+          </td>
+        </tr>
+      
+        <tr>
+          <td>
+            <a href="https://smartrvhub.com/blog-index" class="url-link" target="_blank">/blog-index</a>
+            <div class="file-path">src/pages/BlogIndex.tsx</div>
+          </td>
+          <td>
+            <span class="status-badge status-missing">✗ Missing</span>
+          </td>
+          <td>
+            <span style="color: #999;">None</span>
+          </td>
+          <td>
+            <span class="schema-tag missing-tag">Missing: WebPage</span>
+            <span class="schema-tag recommended-tag">Add: BreadcrumbList</span>
+            
+          </td>
+        </tr>
+      
+        <tr>
+          <td>
+            <a href="https://smartrvhub.com/blog" class="url-link" target="_blank">/blog</a>
+            <div class="file-path">src/pages/Blog.tsx</div>
+          </td>
+          <td>
+            <span class="status-badge status-missing">✗ Missing</span>
+          </td>
+          <td>
+            <span style="color: #999;">None</span>
+          </td>
+          <td>
+            <span class="schema-tag missing-tag">Missing: Blog</span> <span class="schema-tag missing-tag">Missing: ItemList</span>
+            <span class="schema-tag recommended-tag">Add: WebPage</span>
+            
+          </td>
+        </tr>
+      
+        <tr>
+          <td>
+            <a href="https://smartrvhub.com/auth" class="url-link" target="_blank">/auth</a>
+            <div class="file-path">src/pages/Auth.tsx</div>
+          </td>
+          <td>
+            <span class="status-badge status-missing">✗ Missing</span>
+          </td>
+          <td>
+            <span style="color: #999;">None</span>
+          </td>
+          <td>
+            <span class="schema-tag missing-tag">Missing: WebPage</span>
+            <span class="schema-tag recommended-tag">Add: BreadcrumbList</span>
+            
+          </td>
+        </tr>
+      
+        <tr>
+          <td>
+            <a href="https://smartrvhub.com/admin-dashboard" class="url-link" target="_blank">/admin-dashboard</a>
+            <div class="file-path">src/pages/AdminDashboard.tsx</div>
+          </td>
+          <td>
+            <span class="status-badge status-missing">✗ Missing</span>
+          </td>
+          <td>
+            <span style="color: #999;">None</span>
+          </td>
+          <td>
+            <span class="schema-tag missing-tag">Missing: WebPage</span>
+            <span class="schema-tag recommended-tag">Add: BreadcrumbList</span>
+            
+          </td>
+        </tr>
+      
+        <tr>
+          <td>
+            <a href="https://smartrvhub.com/account" class="url-link" target="_blank">/account</a>
+            <div class="file-path">src/pages/Account.tsx</div>
+          </td>
+          <td>
+            <span class="status-badge status-missing">✗ Missing</span>
+          </td>
+          <td>
+            <span style="color: #999;">None</span>
+          </td>
+          <td>
+            <span class="schema-tag missing-tag">Missing: WebPage</span>
+            <span class="schema-tag recommended-tag">Add: BreadcrumbList</span>
+            
+          </td>
+        </tr>
+      
+        <tr>
+          <td>
+            <a href="https://smartrvhub.com/about" class="url-link" target="_blank">/about</a>
+            <div class="file-path">src/pages/About.tsx</div>
+          </td>
+          <td>
+            <span class="status-badge status-missing">✗ Missing</span>
+          </td>
+          <td>
+            <span style="color: #999;">None</span>
+          </td>
+          <td>
+            <span class="schema-tag missing-tag">Missing: WebPage</span>
+            <span class="schema-tag recommended-tag">Add: BreadcrumbList</span>
+            
+          </td>
+        </tr>
+      
+        <tr>
+          <td>
+            <a href="https://smartrvhub.com/user/-user-favorites" class="url-link" target="_blank">/user/-user-favorites</a>
+            <div class="file-path">src/pages/user/UserFavorites.tsx</div>
+          </td>
+          <td>
+            <span class="status-badge status-missing">✗ Missing</span>
+          </td>
+          <td>
+            <span style="color: #999;">None</span>
+          </td>
+          <td>
+            <span class="schema-tag missing-tag">Missing: WebPage</span>
+            <span class="schema-tag recommended-tag">Add: BreadcrumbList</span>
+            
+          </td>
+        </tr>
+      
+        <tr>
+          <td>
+            <a href="https://smartrvhub.com/user/-saved-calculations" class="url-link" target="_blank">/user/-saved-calculations</a>
+            <div class="file-path">src/pages/user/SavedCalculations.tsx</div>
+          </td>
+          <td>
+            <span class="status-badge status-missing">✗ Missing</span>
+          </td>
+          <td>
+            <span style="color: #999;">None</span>
+          </td>
+          <td>
+            <span class="schema-tag missing-tag">Missing: WebPage</span>
+            <span class="schema-tag recommended-tag">Add: BreadcrumbList</span>
+            
+          </td>
+        </tr>
+      
+        <tr>
+          <td>
+            <a href="https://smartrvhub.com/user/-favorites" class="url-link" target="_blank">/user/-favorites</a>
+            <div class="file-path">src/pages/user/Favorites.tsx</div>
+          </td>
+          <td>
+            <span class="status-badge status-missing">✗ Missing</span>
+          </td>
+          <td>
+            <span style="color: #999;">None</span>
+          </td>
+          <td>
+            <span class="schema-tag missing-tag">Missing: WebPage</span>
+            <span class="schema-tag recommended-tag">Add: BreadcrumbList</span>
+            
+          </td>
+        </tr>
+      
+        <tr>
+          <td>
+            <a href="https://smartrvhub.com/user/-dashboard" class="url-link" target="_blank">/user/-dashboard</a>
+            <div class="file-path">src/pages/user/Dashboard.tsx</div>
+          </td>
+          <td>
+            <span class="status-badge status-missing">✗ Missing</span>
+          </td>
+          <td>
+            <span style="color: #999;">None</span>
+          </td>
+          <td>
+            <span class="schema-tag missing-tag">Missing: WebPage</span>
+            <span class="schema-tag recommended-tag">Add: BreadcrumbList</span>
+            
+          </td>
+        </tr>
+      
+        <tr>
+          <td>
+            <a href="https://smartrvhub.com/tools/-technology-checklist" class="url-link" target="_blank">/tools/-technology-checklist</a>
+            <div class="file-path">src/pages/tools/TechnologyChecklist.tsx</div>
+          </td>
+          <td>
+            <span class="status-badge status-missing">✗ Missing</span>
+          </td>
+          <td>
+            <span style="color: #999;">None</span>
+          </td>
+          <td>
+            <span class="schema-tag missing-tag">Missing: WebPage</span>
+            <span class="schema-tag recommended-tag">Add: BreadcrumbList</span>
+            
+          </td>
+        </tr>
+      
+        <tr>
+          <td>
+            <a href="https://smartrvhub.com/tools/-readiness-assessment" class="url-link" target="_blank">/tools/-readiness-assessment</a>
+            <div class="file-path">src/pages/tools/ReadinessAssessment.tsx</div>
+          </td>
+          <td>
+            <span class="status-badge status-missing">✗ Missing</span>
+          </td>
+          <td>
+            <span style="color: #999;">None</span>
+          </td>
+          <td>
+            <span class="schema-tag missing-tag">Missing: WebPage</span>
+            <span class="schema-tag recommended-tag">Add: BreadcrumbList</span>
+            
+          </td>
+        </tr>
+      
+        <tr>
+          <td>
+            <a href="https://smartrvhub.com/tools/-lifestyle-planner" class="url-link" target="_blank">/tools/-lifestyle-planner</a>
+            <div class="file-path">src/pages/tools/LifestylePlanner.tsx</div>
+          </td>
+          <td>
+            <span class="status-badge status-missing">✗ Missing</span>
+          </td>
+          <td>
+            <span style="color: #999;">None</span>
+          </td>
+          <td>
+            <span class="schema-tag missing-tag">Missing: WebPage</span>
+            <span class="schema-tag recommended-tag">Add: BreadcrumbList</span>
+            
+          </td>
+        </tr>
+      
+        <tr>
+          <td>
+            <a href="https://smartrvhub.com/tools/-intelligent-r-v-finder" class="url-link" target="_blank">/tools/-intelligent-r-v-finder</a>
+            <div class="file-path">src/pages/tools/IntelligentRVFinder.tsx</div>
+          </td>
+          <td>
+            <span class="status-badge status-missing">✗ Missing</span>
+          </td>
+          <td>
+            <span style="color: #999;">None</span>
+          </td>
+          <td>
+            <span class="schema-tag missing-tag">Missing: WebPage</span>
+            <span class="schema-tag recommended-tag">Add: BreadcrumbList</span>
+            
+          </td>
+        </tr>
+      
+        <tr>
+          <td>
+            <a href="https://smartrvhub.com/tools/-feature-matcher" class="url-link" target="_blank">/tools/-feature-matcher</a>
+            <div class="file-path">src/pages/tools/FeatureMatcher.tsx</div>
+          </td>
+          <td>
+            <span class="status-badge status-missing">✗ Missing</span>
+          </td>
+          <td>
+            <span style="color: #999;">None</span>
+          </td>
+          <td>
+            <span class="schema-tag missing-tag">Missing: WebPage</span>
+            <span class="schema-tag recommended-tag">Add: BreadcrumbList</span>
+            
+          </td>
+        </tr>
+      
+        <tr>
+          <td>
+            <a href="https://smartrvhub.com/tools/-educational-consultant" class="url-link" target="_blank">/tools/-educational-consultant</a>
+            <div class="file-path">src/pages/tools/EducationalConsultant.tsx</div>
+          </td>
+          <td>
+            <span class="status-badge status-missing">✗ Missing</span>
+          </td>
+          <td>
+            <span style="color: #999;">None</span>
+          </td>
+          <td>
+            <span class="schema-tag missing-tag">Missing: WebPage</span>
+            <span class="schema-tag recommended-tag">Add: BreadcrumbList</span>
+            
+          </td>
+        </tr>
+      
+        <tr>
+          <td>
+            <a href="https://smartrvhub.com/features/-water-systems" class="url-link" target="_blank">/features/-water-systems</a>
+            <div class="file-path">src/pages/features/WaterSystems.tsx</div>
+          </td>
+          <td>
+            <span class="status-badge status-missing">✗ Missing</span>
+          </td>
+          <td>
+            <span style="color: #999;">None</span>
+          </td>
+          <td>
+            <span class="schema-tag missing-tag">Missing: WebPage</span>
+            <span class="schema-tag recommended-tag">Add: BreadcrumbList</span>
+            
+          </td>
+        </tr>
+      
+        <tr>
+          <td>
+            <a href="https://smartrvhub.com/features/-smart-t-v" class="url-link" target="_blank">/features/-smart-t-v</a>
+            <div class="file-path">src/pages/features/SmartTV.tsx</div>
+          </td>
+          <td>
+            <span class="status-badge status-missing">✗ Missing</span>
+          </td>
+          <td>
+            <span style="color: #999;">None</span>
+          </td>
+          <td>
+            <span class="schema-tag missing-tag">Missing: WebPage</span>
+            <span class="schema-tag recommended-tag">Add: BreadcrumbList</span>
+            
+          </td>
+        </tr>
+      
+        <tr>
+          <td>
+            <a href="https://smartrvhub.com/features/-smart-kitchen" class="url-link" target="_blank">/features/-smart-kitchen</a>
+            <div class="file-path">src/pages/features/SmartKitchen.tsx</div>
+          </td>
+          <td>
+            <span class="status-badge status-missing">✗ Missing</span>
+          </td>
+          <td>
+            <span style="color: #999;">None</span>
+          </td>
+          <td>
+            <span class="schema-tag missing-tag">Missing: WebPage</span>
+            <span class="schema-tag recommended-tag">Add: BreadcrumbList</span>
+            
+          </td>
+        </tr>
+      
+        <tr>
+          <td>
+            <a href="https://smartrvhub.com/features/-smart-automation" class="url-link" target="_blank">/features/-smart-automation</a>
+            <div class="file-path">src/pages/features/SmartAutomation.tsx</div>
+          </td>
+          <td>
+            <span class="status-badge status-missing">✗ Missing</span>
+          </td>
+          <td>
+            <span style="color: #999;">None</span>
+          </td>
+          <td>
+            <span class="schema-tag missing-tag">Missing: WebPage</span>
+            <span class="schema-tag recommended-tag">Add: BreadcrumbList</span>
+            
+          </td>
+        </tr>
+      
+        <tr>
+          <td>
+            <a href="https://smartrvhub.com/features/-security-system" class="url-link" target="_blank">/features/-security-system</a>
+            <div class="file-path">src/pages/features/SecuritySystem.tsx</div>
+          </td>
+          <td>
+            <span class="status-badge status-missing">✗ Missing</span>
+          </td>
+          <td>
+            <span style="color: #999;">None</span>
+          </td>
+          <td>
+            <span class="schema-tag missing-tag">Missing: WebPage</span>
+            <span class="schema-tag recommended-tag">Add: BreadcrumbList</span>
+            
+          </td>
+        </tr>
+      
+        <tr>
+          <td>
+            <a href="https://smartrvhub.com/features/-remote-control" class="url-link" target="_blank">/features/-remote-control</a>
+            <div class="file-path">src/pages/features/RemoteControl.tsx</div>
+          </td>
+          <td>
+            <span class="status-badge status-missing">✗ Missing</span>
+          </td>
+          <td>
+            <span style="color: #999;">None</span>
+          </td>
+          <td>
+            <span class="schema-tag missing-tag">Missing: WebPage</span>
+            <span class="schema-tag recommended-tag">Add: BreadcrumbList</span>
+            
+          </td>
+        </tr>
+      
+        <tr>
+          <td>
+            <a href="https://smartrvhub.com/features/-power-management" class="url-link" target="_blank">/features/-power-management</a>
+            <div class="file-path">src/pages/features/PowerManagement.tsx</div>
+          </td>
+          <td>
+            <span class="status-badge status-missing">✗ Missing</span>
+          </td>
+          <td>
+            <span style="color: #999;">None</span>
+          </td>
+          <td>
+            <span class="schema-tag missing-tag">Missing: WebPage</span>
+            <span class="schema-tag recommended-tag">Add: BreadcrumbList</span>
+            
+          </td>
+        </tr>
+      
+        <tr>
+          <td>
+            <a href="https://smartrvhub.com/features/-navigation-system" class="url-link" target="_blank">/features/-navigation-system</a>
+            <div class="file-path">src/pages/features/NavigationSystem.tsx</div>
+          </td>
+          <td>
+            <span class="status-badge status-missing">✗ Missing</span>
+          </td>
+          <td>
+            <span style="color: #999;">None</span>
+          </td>
+          <td>
+            <span class="schema-tag missing-tag">Missing: WebPage</span>
+            <span class="schema-tag recommended-tag">Add: BreadcrumbList</span>
+            
+          </td>
+        </tr>
+      
+        <tr>
+          <td>
+            <a href="https://smartrvhub.com/features/-internet-connectivity" class="url-link" target="_blank">/features/-internet-connectivity</a>
+            <div class="file-path">src/pages/features/InternetConnectivity.tsx</div>
+          </td>
+          <td>
+            <span class="status-badge status-missing">✗ Missing</span>
+          </td>
+          <td>
+            <span style="color: #999;">None</span>
+          </td>
+          <td>
+            <span class="schema-tag missing-tag">Missing: WebPage</span>
+            <span class="schema-tag recommended-tag">Add: BreadcrumbList</span>
+            
+          </td>
+        </tr>
+      
+        <tr>
+          <td>
+            <a href="https://smartrvhub.com/features/-entertainment" class="url-link" target="_blank">/features/-entertainment</a>
+            <div class="file-path">src/pages/features/Entertainment.tsx</div>
+          </td>
+          <td>
+            <span class="status-badge status-missing">✗ Missing</span>
+          </td>
+          <td>
+            <span style="color: #999;">None</span>
+          </td>
+          <td>
+            <span class="schema-tag missing-tag">Missing: WebPage</span>
+            <span class="schema-tag recommended-tag">Add: BreadcrumbList</span>
+            
+          </td>
+        </tr>
+      
+        <tr>
+          <td>
+            <a href="https://smartrvhub.com/features/-climate-control" class="url-link" target="_blank">/features/-climate-control</a>
+            <div class="file-path">src/pages/features/ClimateControl.tsx</div>
+          </td>
+          <td>
+            <span class="status-badge status-missing">✗ Missing</span>
+          </td>
+          <td>
+            <span style="color: #999;">None</span>
+          </td>
+          <td>
+            <span class="schema-tag missing-tag">Missing: WebPage</span>
+            <span class="schema-tag recommended-tag">Add: BreadcrumbList</span>
+            
+          </td>
+        </tr>
+      
+        <tr>
+          <td>
+            <a href="https://smartrvhub.com/features/-automated-driving" class="url-link" target="_blank">/features/-automated-driving</a>
+            <div class="file-path">src/pages/features/AutomatedDriving.tsx</div>
+          </td>
+          <td>
+            <span class="status-badge status-missing">✗ Missing</span>
+          </td>
+          <td>
+            <span style="color: #999;">None</span>
+          </td>
+          <td>
+            <span class="schema-tag missing-tag">Missing: WebPage</span>
+            <span class="schema-tag recommended-tag">Add: BreadcrumbList</span>
+            
+          </td>
+        </tr>
+      
+        <tr>
+          <td>
+            <a href="https://smartrvhub.com/features/-audio-system" class="url-link" target="_blank">/features/-audio-system</a>
+            <div class="file-path">src/pages/features/AudioSystem.tsx</div>
+          </td>
+          <td>
+            <span class="status-badge status-missing">✗ Missing</span>
+          </td>
+          <td>
+            <span style="color: #999;">None</span>
+          </td>
+          <td>
+            <span class="schema-tag missing-tag">Missing: WebPage</span>
+            <span class="schema-tag recommended-tag">Add: BreadcrumbList</span>
+            
+          </td>
+        </tr>
+      
+        <tr>
+          <td>
+            <a href="https://smartrvhub.com/models/-luxury-model" class="url-link" target="_blank">/models/-luxury-model</a>
+            <div class="file-path">src/pages/models/LuxuryModel.tsx</div>
+          </td>
+          <td>
+            <span class="status-badge status-missing">✗ Missing</span>
+          </td>
+          <td>
+            <span style="color: #999;">None</span>
+          </td>
+          <td>
+            <span class="schema-tag missing-tag">Missing: Product</span>
+            <span class="schema-tag recommended-tag">Add: AggregateRating</span> <span class="schema-tag recommended-tag">Add: Offer</span>
+            
+          </td>
+        </tr>
+      
+        <tr>
+          <td>
+            <a href="https://smartrvhub.com/models/-compare-models" class="url-link" target="_blank">/models/-compare-models</a>
+            <div class="file-path">src/pages/models/CompareModels.tsx</div>
+          </td>
+          <td>
+            <span class="status-badge status-missing">✗ Missing</span>
+          </td>
+          <td>
+            <span style="color: #999;">None</span>
+          </td>
+          <td>
+            <span class="schema-tag missing-tag">Missing: Product</span>
+            <span class="schema-tag recommended-tag">Add: AggregateRating</span> <span class="schema-tag recommended-tag">Add: Offer</span>
+            
+          </td>
+        </tr>
+      
+        <tr>
+          <td>
+            <a href="https://smartrvhub.com/models/-compact-model" class="url-link" target="_blank">/models/-compact-model</a>
+            <div class="file-path">src/pages/models/CompactModel.tsx</div>
+          </td>
+          <td>
+            <span class="status-badge status-missing">✗ Missing</span>
+          </td>
+          <td>
+            <span style="color: #999;">None</span>
+          </td>
+          <td>
+            <span class="schema-tag missing-tag">Missing: Product</span>
+            <span class="schema-tag recommended-tag">Add: AggregateRating</span> <span class="schema-tag recommended-tag">Add: Offer</span>
+            
+          </td>
+        </tr>
+      
+        <tr>
+          <td>
+            <a href="https://smartrvhub.com/models/-adventure-model" class="url-link" target="_blank">/models/-adventure-model</a>
+            <div class="file-path">src/pages/models/AdventureModel.tsx</div>
+          </td>
+          <td>
+            <span class="status-badge status-missing">✗ Missing</span>
+          </td>
+          <td>
+            <span style="color: #999;">None</span>
+          </td>
+          <td>
+            <span class="schema-tag missing-tag">Missing: Product</span>
+            <span class="schema-tag recommended-tag">Add: AggregateRating</span> <span class="schema-tag recommended-tag">Add: Offer</span>
+            
+          </td>
+        </tr>
+      
+        <tr>
+          <td>
+            <a href="https://smartrvhub.com/admin/-performance-dashboard" class="url-link" target="_blank">/admin/-performance-dashboard</a>
+            <div class="file-path">src/pages/admin/PerformanceDashboard.tsx</div>
+          </td>
+          <td>
+            <span class="status-badge status-missing">✗ Missing</span>
+          </td>
+          <td>
+            <span style="color: #999;">None</span>
+          </td>
+          <td>
+            <span class="schema-tag missing-tag">Missing: WebPage</span>
+            <span class="schema-tag recommended-tag">Add: BreadcrumbList</span>
+            
+          </td>
+        </tr>
+      
+        <tr>
+          <td>
+            <a href="https://smartrvhub.com/documentation/-complete-documentation" class="url-link" target="_blank">/documentation/-complete-documentation</a>
+            <div class="file-path">src/pages/documentation/CompleteDocumentation.tsx</div>
+          </td>
+          <td>
+            <span class="status-badge status-missing">✗ Missing</span>
+          </td>
+          <td>
+            <span style="color: #999;">None</span>
+          </td>
+          <td>
+            <span class="schema-tag missing-tag">Missing: WebPage</span>
+            <span class="schema-tag recommended-tag">Add: BreadcrumbList</span>
+            
+          </td>
+        </tr>
+      
+          </tbody>
+        </table>
+      </div>
+    
+
+      
+      <div class="section">
+        <h2 class="section-title">📁 By Category</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Category</th>
+              <th>Total</th>
+              <th>Excellent</th>
+              <th>Good</th>
+              <th>Needs Work</th>
+              <th>Missing</th>
+              <th>Health</th>
+            </tr>
+          </thead>
+          <tbody>
+    
+          <tr>
+            <td><strong>features</strong></td>
+            <td>14</td>
+            <td><span class="excellent">0</span></td>
+            <td><span class="good">0</span></td>
+            <td><span class="warning">0</span></td>
+            <td><span class="danger">14</span></td>
+            <td>
+              <div style="background: #e9ecef; border-radius: 10px; overflow: hidden; height: 20px;">
+                <div style="background: #dc3545; width: 0%; height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.75rem; font-weight: 600;">
+                  0%
+                </div>
+              </div>
+            </td>
+          </tr>
+        
+          <tr>
+            <td><strong>tools</strong></td>
+            <td>7</td>
+            <td><span class="excellent">0</span></td>
+            <td><span class="good">0</span></td>
+            <td><span class="warning">0</span></td>
+            <td><span class="danger">7</span></td>
+            <td>
+              <div style="background: #e9ecef; border-radius: 10px; overflow: hidden; height: 20px;">
+                <div style="background: #dc3545; width: 0%; height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.75rem; font-weight: 600;">
+                  0%
+                </div>
+              </div>
+            </td>
+          </tr>
+        
+          <tr>
+            <td><strong>models</strong></td>
+            <td>5</td>
+            <td><span class="excellent">0</span></td>
+            <td><span class="good">0</span></td>
+            <td><span class="warning">0</span></td>
+            <td><span class="danger">5</span></td>
+            <td>
+              <div style="background: #e9ecef; border-radius: 10px; overflow: hidden; height: 20px;">
+                <div style="background: #dc3545; width: 0%; height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.75rem; font-weight: 600;">
+                  0%
+                </div>
+              </div>
+            </td>
+          </tr>
+        
+          <tr>
+            <td><strong>user</strong></td>
+            <td>4</td>
+            <td><span class="excellent">0</span></td>
+            <td><span class="good">0</span></td>
+            <td><span class="warning">0</span></td>
+            <td><span class="danger">4</span></td>
+            <td>
+              <div style="background: #e9ecef; border-radius: 10px; overflow: hidden; height: 20px;">
+                <div style="background: #dc3545; width: 0%; height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.75rem; font-weight: 600;">
+                  0%
+                </div>
+              </div>
+            </td>
+          </tr>
+        
+          <tr>
+            <td><strong>documentation</strong></td>
+            <td>2</td>
+            <td><span class="excellent">0</span></td>
+            <td><span class="good">0</span></td>
+            <td><span class="warning">0</span></td>
+            <td><span class="danger">2</span></td>
+            <td>
+              <div style="background: #e9ecef; border-radius: 10px; overflow: hidden; height: 20px;">
+                <div style="background: #dc3545; width: 0%; height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.75rem; font-weight: 600;">
+                  0%
+                </div>
+              </div>
+            </td>
+          </tr>
+        
+          <tr>
+            <td><strong>_document</strong></td>
+            <td>1</td>
+            <td><span class="excellent">0</span></td>
+            <td><span class="good">0</span></td>
+            <td><span class="warning">0</span></td>
+            <td><span class="danger">1</span></td>
+            <td>
+              <div style="background: #e9ecef; border-radius: 10px; overflow: hidden; height: 20px;">
+                <div style="background: #dc3545; width: 0%; height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.75rem; font-weight: 600;">
+                  0%
+                </div>
+              </div>
+            </td>
+          </tr>
+        
+          <tr>
+            <td><strong>weather-dashboard</strong></td>
+            <td>1</td>
+            <td><span class="excellent">0</span></td>
+            <td><span class="good">0</span></td>
+            <td><span class="warning">0</span></td>
+            <td><span class="danger">1</span></td>
+            <td>
+              <div style="background: #e9ecef; border-radius: 10px; overflow: hidden; height: 20px;">
+                <div style="background: #dc3545; width: 0%; height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.75rem; font-weight: 600;">
+                  0%
+                </div>
+              </div>
+            </td>
+          </tr>
+        
+          <tr>
+            <td><strong>voice-control</strong></td>
+            <td>1</td>
+            <td><span class="excellent">0</span></td>
+            <td><span class="good">0</span></td>
+            <td><span class="warning">0</span></td>
+            <td><span class="danger">1</span></td>
+            <td>
+              <div style="background: #e9ecef; border-radius: 10px; overflow: hidden; height: 20px;">
+                <div style="background: #dc3545; width: 0%; height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.75rem; font-weight: 600;">
+                  0%
+                </div>
+              </div>
+            </td>
+          </tr>
+        
+          <tr>
+            <td><strong>troubleshooting</strong></td>
+            <td>1</td>
+            <td><span class="excellent">0</span></td>
+            <td><span class="good">0</span></td>
+            <td><span class="warning">0</span></td>
+            <td><span class="danger">1</span></td>
+            <td>
+              <div style="background: #e9ecef; border-radius: 10px; overflow: hidden; height: 20px;">
+                <div style="background: #dc3545; width: 0%; height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.75rem; font-weight: 600;">
+                  0%
+                </div>
+              </div>
+            </td>
+          </tr>
+        
+          <tr>
+            <td><strong>technology</strong></td>
+            <td>1</td>
+            <td><span class="excellent">0</span></td>
+            <td><span class="good">0</span></td>
+            <td><span class="warning">0</span></td>
+            <td><span class="danger">1</span></td>
+            <td>
+              <div style="background: #e9ecef; border-radius: 10px; overflow: hidden; height: 20px;">
+                <div style="background: #dc3545; width: 0%; height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.75rem; font-weight: 600;">
+                  0%
+                </div>
+              </div>
+            </td>
+          </tr>
+        
+          <tr>
+            <td><strong>storage-preparation-checklist</strong></td>
+            <td>1</td>
+            <td><span class="excellent">0</span></td>
+            <td><span class="good">0</span></td>
+            <td><span class="warning">0</span></td>
+            <td><span class="danger">1</span></td>
+            <td>
+              <div style="background: #e9ecef; border-radius: 10px; overflow: hidden; height: 20px;">
+                <div style="background: #dc3545; width: 0%; height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.75rem; font-weight: 600;">
+                  0%
+                </div>
+              </div>
+            </td>
+          </tr>
+        
+          <tr>
+            <td><strong>storage-facilities</strong></td>
+            <td>1</td>
+            <td><span class="excellent">0</span></td>
+            <td><span class="good">0</span></td>
+            <td><span class="warning">0</span></td>
+            <td><span class="danger">1</span></td>
+            <td>
+              <div style="background: #e9ecef; border-radius: 10px; overflow: hidden; height: 20px;">
+                <div style="background: #dc3545; width: 0%; height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.75rem; font-weight: 600;">
+                  0%
+                </div>
+              </div>
+            </td>
+          </tr>
+        
+          <tr>
+            <td><strong>solar-power-guide</strong></td>
+            <td>1</td>
+            <td><span class="excellent">0</span></td>
+            <td><span class="good">0</span></td>
+            <td><span class="warning">0</span></td>
+            <td><span class="danger">1</span></td>
+            <td>
+              <div style="background: #e9ecef; border-radius: 10px; overflow: hidden; height: 20px;">
+                <div style="background: #dc3545; width: 0%; height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.75rem; font-weight: 600;">
+                  0%
+                </div>
+              </div>
+            </td>
+          </tr>
+        
+          <tr>
+            <td><strong>search-results</strong></td>
+            <td>1</td>
+            <td><span class="excellent">0</span></td>
+            <td><span class="good">0</span></td>
+            <td><span class="warning">0</span></td>
+            <td><span class="danger">1</span></td>
+            <td>
+              <div style="background: #e9ecef; border-radius: 10px; overflow: hidden; height: 20px;">
+                <div style="background: #dc3545; width: 0%; height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.75rem; font-weight: 600;">
+                  0%
+                </div>
+              </div>
+            </td>
+          </tr>
+        
+          <tr>
+            <td><strong>schedule-demo</strong></td>
+            <td>1</td>
+            <td><span class="excellent">0</span></td>
+            <td><span class="good">0</span></td>
+            <td><span class="warning">0</span></td>
+            <td><span class="danger">1</span></td>
+            <td>
+              <div style="background: #e9ecef; border-radius: 10px; overflow: hidden; height: 20px;">
+                <div style="background: #dc3545; width: 0%; height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.75rem; font-weight: 600;">
+                  0%
+                </div>
+              </div>
+            </td>
+          </tr>
+        
+          <tr>
+            <td><strong>reset-password</strong></td>
+            <td>1</td>
+            <td><span class="excellent">0</span></td>
+            <td><span class="good">0</span></td>
+            <td><span class="warning">0</span></td>
+            <td><span class="danger">1</span></td>
+            <td>
+              <div style="background: #e9ecef; border-radius: 10px; overflow: hidden; height: 20px;">
+                <div style="background: #dc3545; width: 0%; height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.75rem; font-weight: 600;">
+                  0%
+                </div>
+              </div>
+            </td>
+          </tr>
+        
+          <tr>
+            <td><strong>r-v-weather</strong></td>
+            <td>1</td>
+            <td><span class="excellent">0</span></td>
+            <td><span class="good">0</span></td>
+            <td><span class="warning">0</span></td>
+            <td><span class="danger">1</span></td>
+            <td>
+              <div style="background: #e9ecef; border-radius: 10px; overflow: hidden; height: 20px;">
+                <div style="background: #dc3545; width: 0%; height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.75rem; font-weight: 600;">
+                  0%
+                </div>
+              </div>
+            </td>
+          </tr>
+        
+          <tr>
+            <td><strong>r-v-technology-guide-research</strong></td>
+            <td>1</td>
+            <td><span class="excellent">0</span></td>
+            <td><span class="good">0</span></td>
+            <td><span class="warning">0</span></td>
+            <td><span class="danger">1</span></td>
+            <td>
+              <div style="background: #e9ecef; border-radius: 10px; overflow: hidden; height: 20px;">
+                <div style="background: #dc3545; width: 0%; height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.75rem; font-weight: 600;">
+                  0%
+                </div>
+              </div>
+            </td>
+          </tr>
+        
+          <tr>
+            <td><strong>r-v-technology-guide-control-systems</strong></td>
+            <td>1</td>
+            <td><span class="excellent">0</span></td>
+            <td><span class="good">0</span></td>
+            <td><span class="warning">0</span></td>
+            <td><span class="danger">1</span></td>
+            <td>
+              <div style="background: #e9ecef; border-radius: 10px; overflow: hidden; height: 20px;">
+                <div style="background: #dc3545; width: 0%; height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.75rem; font-weight: 600;">
+                  0%
+                </div>
+              </div>
+            </td>
+          </tr>
+        
+          <tr>
+            <td><strong>r-v-technology-guide</strong></td>
+            <td>1</td>
+            <td><span class="excellent">0</span></td>
+            <td><span class="good">0</span></td>
+            <td><span class="warning">0</span></td>
+            <td><span class="danger">1</span></td>
+            <td>
+              <div style="background: #e9ecef; border-radius: 10px; overflow: hidden; height: 20px;">
+                <div style="background: #dc3545; width: 0%; height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.75rem; font-weight: 600;">
+                  0%
+                </div>
+              </div>
+            </td>
+          </tr>
+        
+          <tr>
+            <td><strong>r-v-marketplace</strong></td>
+            <td>1</td>
+            <td><span class="excellent">0</span></td>
+            <td><span class="good">0</span></td>
+            <td><span class="warning">0</span></td>
+            <td><span class="danger">1</span></td>
+            <td>
+              <div style="background: #e9ecef; border-radius: 10px; overflow: hidden; height: 20px;">
+                <div style="background: #dc3545; width: 0%; height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.75rem; font-weight: 600;">
+                  0%
+                </div>
+              </div>
+            </td>
+          </tr>
+        
+          <tr>
+            <td><strong>r-v-emergency-center</strong></td>
+            <td>1</td>
+            <td><span class="excellent">0</span></td>
+            <td><span class="good">0</span></td>
+            <td><span class="warning">0</span></td>
+            <td><span class="danger">1</span></td>
+            <td>
+              <div style="background: #e9ecef; border-radius: 10px; overflow: hidden; height: 20px;">
+                <div style="background: #dc3545; width: 0%; height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.75rem; font-weight: 600;">
+                  0%
+                </div>
+              </div>
+            </td>
+          </tr>
+        
+          <tr>
+            <td><strong>r-v-comfort-guide</strong></td>
+            <td>1</td>
+            <td><span class="excellent">0</span></td>
+            <td><span class="good">0</span></td>
+            <td><span class="warning">0</span></td>
+            <td><span class="danger">1</span></td>
+            <td>
+              <div style="background: #e9ecef; border-radius: 10px; overflow: hidden; height: 20px;">
+                <div style="background: #dc3545; width: 0%; height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.75rem; font-weight: 600;">
+                  0%
+                </div>
+              </div>
+            </td>
+          </tr>
+        
+          <tr>
+            <td><strong>r-v-apps-hub</strong></td>
+            <td>1</td>
+            <td><span class="excellent">0</span></td>
+            <td><span class="good">0</span></td>
+            <td><span class="warning">0</span></td>
+            <td><span class="danger">1</span></td>
+            <td>
+              <div style="background: #e9ecef; border-radius: 10px; overflow: hidden; height: 20px;">
+                <div style="background: #dc3545; width: 0%; height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.75rem; font-weight: 600;">
+                  0%
+                </div>
+              </div>
+            </td>
+          </tr>
+        
+          <tr>
+            <td><strong>products</strong></td>
+            <td>1</td>
+            <td><span class="excellent">0</span></td>
+            <td><span class="good">0</span></td>
+            <td><span class="warning">0</span></td>
+            <td><span class="danger">1</span></td>
+            <td>
+              <div style="background: #e9ecef; border-radius: 10px; overflow: hidden; height: 20px;">
+                <div style="background: #dc3545; width: 0%; height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.75rem; font-weight: 600;">
+                  0%
+                </div>
+              </div>
+            </td>
+          </tr>
+        
+          <tr>
+            <td><strong>pricing</strong></td>
+            <td>1</td>
+            <td><span class="excellent">0</span></td>
+            <td><span class="good">0</span></td>
+            <td><span class="warning">0</span></td>
+            <td><span class="danger">1</span></td>
+            <td>
+              <div style="background: #e9ecef; border-radius: 10px; overflow: hidden; height: 20px;">
+                <div style="background: #dc3545; width: 0%; height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.75rem; font-weight: 600;">
+                  0%
+                </div>
+              </div>
+            </td>
+          </tr>
+        
+          <tr>
+            <td><strong>map-icon-demo</strong></td>
+            <td>1</td>
+            <td><span class="excellent">0</span></td>
+            <td><span class="good">0</span></td>
+            <td><span class="warning">0</span></td>
+            <td><span class="danger">1</span></td>
+            <td>
+              <div style="background: #e9ecef; border-radius: 10px; overflow: hidden; height: 20px;">
+                <div style="background: #dc3545; width: 0%; height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.75rem; font-weight: 600;">
+                  0%
+                </div>
+              </div>
+            </td>
+          </tr>
+        
+          <tr>
+            <td><strong>map-facility-demo</strong></td>
+            <td>1</td>
+            <td><span class="excellent">0</span></td>
+            <td><span class="good">0</span></td>
+            <td><span class="warning">0</span></td>
+            <td><span class="danger">1</span></td>
+            <td>
+              <div style="background: #e9ecef; border-radius: 10px; overflow: hidden; height: 20px;">
+                <div style="background: #dc3545; width: 0%; height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.75rem; font-weight: 600;">
+                  0%
+                </div>
+              </div>
+            </td>
+          </tr>
+        
+          <tr>
+            <td><strong>home</strong></td>
+            <td>1</td>
+            <td><span class="excellent">0</span></td>
+            <td><span class="good">0</span></td>
+            <td><span class="warning">0</span></td>
+            <td><span class="danger">1</span></td>
+            <td>
+              <div style="background: #e9ecef; border-radius: 10px; overflow: hidden; height: 20px;">
+                <div style="background: #dc3545; width: 0%; height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.75rem; font-weight: 600;">
+                  0%
+                </div>
+              </div>
+            </td>
+          </tr>
+        
+          <tr>
+            <td><strong>facility-detail</strong></td>
+            <td>1</td>
+            <td><span class="excellent">0</span></td>
+            <td><span class="good">0</span></td>
+            <td><span class="warning">0</span></td>
+            <td><span class="danger">1</span></td>
+            <td>
+              <div style="background: #e9ecef; border-radius: 10px; overflow: hidden; height: 20px;">
+                <div style="background: #dc3545; width: 0%; height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.75rem; font-weight: 600;">
+                  0%
+                </div>
+              </div>
+            </td>
+          </tr>
+        
+          <tr>
+            <td><strong>error-page</strong></td>
+            <td>1</td>
+            <td><span class="excellent">0</span></td>
+            <td><span class="good">0</span></td>
+            <td><span class="warning">0</span></td>
+            <td><span class="danger">1</span></td>
+            <td>
+              <div style="background: #e9ecef; border-radius: 10px; overflow: hidden; height: 20px;">
+                <div style="background: #dc3545; width: 0%; height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.75rem; font-weight: 600;">
+                  0%
+                </div>
+              </div>
+            </td>
+          </tr>
+        
+          <tr>
+            <td><strong>contact</strong></td>
+            <td>1</td>
+            <td><span class="excellent">0</span></td>
+            <td><span class="good">0</span></td>
+            <td><span class="warning">0</span></td>
+            <td><span class="danger">1</span></td>
+            <td>
+              <div style="background: #e9ecef; border-radius: 10px; overflow: hidden; height: 20px;">
+                <div style="background: #dc3545; width: 0%; height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.75rem; font-weight: 600;">
+                  0%
+                </div>
+              </div>
+            </td>
+          </tr>
+        
+          <tr>
+            <td><strong>calculators</strong></td>
+            <td>1</td>
+            <td><span class="excellent">0</span></td>
+            <td><span class="good">0</span></td>
+            <td><span class="warning">0</span></td>
+            <td><span class="danger">1</span></td>
+            <td>
+              <div style="background: #e9ecef; border-radius: 10px; overflow: hidden; height: 20px;">
+                <div style="background: #dc3545; width: 0%; height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.75rem; font-weight: 600;">
+                  0%
+                </div>
+              </div>
+            </td>
+          </tr>
+        
+          <tr>
+            <td><strong>blog-post</strong></td>
+            <td>1</td>
+            <td><span class="excellent">0</span></td>
+            <td><span class="good">0</span></td>
+            <td><span class="warning">0</span></td>
+            <td><span class="danger">1</span></td>
+            <td>
+              <div style="background: #e9ecef; border-radius: 10px; overflow: hidden; height: 20px;">
+                <div style="background: #dc3545; width: 0%; height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.75rem; font-weight: 600;">
+                  0%
+                </div>
+              </div>
+            </td>
+          </tr>
+        
+          <tr>
+            <td><strong>blog-index</strong></td>
+            <td>1</td>
+            <td><span class="excellent">0</span></td>
+            <td><span class="good">0</span></td>
+            <td><span class="warning">0</span></td>
+            <td><span class="danger">1</span></td>
+            <td>
+              <div style="background: #e9ecef; border-radius: 10px; overflow: hidden; height: 20px;">
+                <div style="background: #dc3545; width: 0%; height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.75rem; font-weight: 600;">
+                  0%
+                </div>
+              </div>
+            </td>
+          </tr>
+        
+          <tr>
+            <td><strong>blog</strong></td>
+            <td>1</td>
+            <td><span class="excellent">0</span></td>
+            <td><span class="good">0</span></td>
+            <td><span class="warning">0</span></td>
+            <td><span class="danger">1</span></td>
+            <td>
+              <div style="background: #e9ecef; border-radius: 10px; overflow: hidden; height: 20px;">
+                <div style="background: #dc3545; width: 0%; height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.75rem; font-weight: 600;">
+                  0%
+                </div>
+              </div>
+            </td>
+          </tr>
+        
+          <tr>
+            <td><strong>auth</strong></td>
+            <td>1</td>
+            <td><span class="excellent">0</span></td>
+            <td><span class="good">0</span></td>
+            <td><span class="warning">0</span></td>
+            <td><span class="danger">1</span></td>
+            <td>
+              <div style="background: #e9ecef; border-radius: 10px; overflow: hidden; height: 20px;">
+                <div style="background: #dc3545; width: 0%; height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.75rem; font-weight: 600;">
+                  0%
+                </div>
+              </div>
+            </td>
+          </tr>
+        
+          <tr>
+            <td><strong>admin-dashboard</strong></td>
+            <td>1</td>
+            <td><span class="excellent">0</span></td>
+            <td><span class="good">0</span></td>
+            <td><span class="warning">0</span></td>
+            <td><span class="danger">1</span></td>
+            <td>
+              <div style="background: #e9ecef; border-radius: 10px; overflow: hidden; height: 20px;">
+                <div style="background: #dc3545; width: 0%; height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.75rem; font-weight: 600;">
+                  0%
+                </div>
+              </div>
+            </td>
+          </tr>
+        
+          <tr>
+            <td><strong>account</strong></td>
+            <td>1</td>
+            <td><span class="excellent">0</span></td>
+            <td><span class="good">0</span></td>
+            <td><span class="warning">0</span></td>
+            <td><span class="danger">1</span></td>
+            <td>
+              <div style="background: #e9ecef; border-radius: 10px; overflow: hidden; height: 20px;">
+                <div style="background: #dc3545; width: 0%; height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.75rem; font-weight: 600;">
+                  0%
+                </div>
+              </div>
+            </td>
+          </tr>
+        
+          <tr>
+            <td><strong>about</strong></td>
+            <td>1</td>
+            <td><span class="excellent">0</span></td>
+            <td><span class="good">0</span></td>
+            <td><span class="warning">0</span></td>
+            <td><span class="danger">1</span></td>
+            <td>
+              <div style="background: #e9ecef; border-radius: 10px; overflow: hidden; height: 20px;">
+                <div style="background: #dc3545; width: 0%; height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.75rem; font-weight: 600;">
+                  0%
+                </div>
+              </div>
+            </td>
+          </tr>
+        
+          <tr>
+            <td><strong>admin</strong></td>
+            <td>1</td>
+            <td><span class="excellent">0</span></td>
+            <td><span class="good">0</span></td>
+            <td><span class="warning">0</span></td>
+            <td><span class="danger">1</span></td>
+            <td>
+              <div style="background: #e9ecef; border-radius: 10px; overflow: hidden; height: 20px;">
+                <div style="background: #dc3545; width: 0%; height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.75rem; font-weight: 600;">
+                  0%
+                </div>
+              </div>
+            </td>
+          </tr>
+        
+          </tbody>
+        </table>
+      </div>
+    
+
+      
+      <div class="section">
+        <h2 class="section-title">🏷️ Schema Types in Use</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem;">
+    
+        </div>
+      </div>
+    
+
+      
+      <div class="action-card">
+        <h3>🎯 Next Steps</h3>
+        <ul>
+          <li><strong>Priority 1:</strong> Add schema to 10 pages without any markup</li>
+          
+          <li><strong>Review:</strong> Check recommended schema types for better SEO results</li>
+          <li><strong>Test:</strong> Validate schema with Google Rich Results Test</li>
+          <li><strong>Monitor:</strong> This audit runs automatically every Monday</li>
+        </ul>
+      </div>
+    
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,1884 @@
+{
+  "totalPages": 68,
+  "pagesWithSchema": 0,
+  "pagesWithoutSchema": 68,
+  "pagesWithCorrectSchema": 0,
+  "pagesNeedingImprovement": 0,
+  "pageDetails": [
+    {
+      "filePath": "src/pages/_document.tsx",
+      "route": "/_document",
+      "url": "https://smartrvhub.com/_document",
+      "hasSchema": false,
+      "schemaTypes": [],
+      "status": "missing",
+      "recommendations": {
+        "required": [
+          "WebPage"
+        ],
+        "recommended": [
+          "BreadcrumbList"
+        ],
+        "description": "All pages should at minimum have WebPage schema"
+      },
+      "missingTypes": [
+        "WebPage"
+      ],
+      "additionalRecommendations": [
+        "BreadcrumbList"
+      ]
+    },
+    {
+      "filePath": "src/pages/WeatherDashboard.tsx",
+      "route": "/weather-dashboard",
+      "url": "https://smartrvhub.com/weather-dashboard",
+      "hasSchema": false,
+      "schemaTypes": [],
+      "status": "missing",
+      "recommendations": {
+        "required": [
+          "WebPage"
+        ],
+        "recommended": [
+          "BreadcrumbList"
+        ],
+        "description": "All pages should at minimum have WebPage schema"
+      },
+      "missingTypes": [
+        "WebPage"
+      ],
+      "additionalRecommendations": [
+        "BreadcrumbList"
+      ]
+    },
+    {
+      "filePath": "src/pages/VoiceControl.tsx",
+      "route": "/voice-control",
+      "url": "https://smartrvhub.com/voice-control",
+      "hasSchema": false,
+      "schemaTypes": [],
+      "status": "missing",
+      "recommendations": {
+        "required": [
+          "WebPage"
+        ],
+        "recommended": [
+          "BreadcrumbList"
+        ],
+        "description": "All pages should at minimum have WebPage schema"
+      },
+      "missingTypes": [
+        "WebPage"
+      ],
+      "additionalRecommendations": [
+        "BreadcrumbList"
+      ]
+    },
+    {
+      "filePath": "src/pages/Troubleshooting.tsx",
+      "route": "/troubleshooting",
+      "url": "https://smartrvhub.com/troubleshooting",
+      "hasSchema": false,
+      "schemaTypes": [],
+      "status": "missing",
+      "recommendations": {
+        "required": [
+          "WebPage"
+        ],
+        "recommended": [
+          "BreadcrumbList"
+        ],
+        "description": "All pages should at minimum have WebPage schema"
+      },
+      "missingTypes": [
+        "WebPage"
+      ],
+      "additionalRecommendations": [
+        "BreadcrumbList"
+      ]
+    },
+    {
+      "filePath": "src/pages/Tools.tsx",
+      "route": "/tools",
+      "url": "https://smartrvhub.com/tools",
+      "hasSchema": false,
+      "schemaTypes": [],
+      "status": "missing",
+      "recommendations": {
+        "required": [
+          "WebPage",
+          "SoftwareApplication"
+        ],
+        "recommended": [
+          "HowTo"
+        ],
+        "description": "Interactive tools should use SoftwareApplication schema"
+      },
+      "missingTypes": [
+        "WebPage",
+        "SoftwareApplication"
+      ],
+      "additionalRecommendations": [
+        "HowTo"
+      ]
+    },
+    {
+      "filePath": "src/pages/Technology.tsx",
+      "route": "/technology",
+      "url": "https://smartrvhub.com/technology",
+      "hasSchema": false,
+      "schemaTypes": [],
+      "status": "missing",
+      "recommendations": {
+        "required": [
+          "WebPage"
+        ],
+        "recommended": [
+          "BreadcrumbList"
+        ],
+        "description": "All pages should at minimum have WebPage schema"
+      },
+      "missingTypes": [
+        "WebPage"
+      ],
+      "additionalRecommendations": [
+        "BreadcrumbList"
+      ]
+    },
+    {
+      "filePath": "src/pages/StoragePreparationChecklist.tsx",
+      "route": "/storage-preparation-checklist",
+      "url": "https://smartrvhub.com/storage-preparation-checklist",
+      "hasSchema": false,
+      "schemaTypes": [],
+      "status": "missing",
+      "recommendations": {
+        "required": [
+          "WebPage"
+        ],
+        "recommended": [
+          "BreadcrumbList"
+        ],
+        "description": "All pages should at minimum have WebPage schema"
+      },
+      "missingTypes": [
+        "WebPage"
+      ],
+      "additionalRecommendations": [
+        "BreadcrumbList"
+      ]
+    },
+    {
+      "filePath": "src/pages/StorageFacilities.tsx",
+      "route": "/storage-facilities",
+      "url": "https://smartrvhub.com/storage-facilities",
+      "hasSchema": false,
+      "schemaTypes": [],
+      "status": "missing",
+      "recommendations": {
+        "required": [
+          "WebPage"
+        ],
+        "recommended": [
+          "BreadcrumbList"
+        ],
+        "description": "All pages should at minimum have WebPage schema"
+      },
+      "missingTypes": [
+        "WebPage"
+      ],
+      "additionalRecommendations": [
+        "BreadcrumbList"
+      ]
+    },
+    {
+      "filePath": "src/pages/SolarPowerGuide.tsx",
+      "route": "/solar-power-guide",
+      "url": "https://smartrvhub.com/solar-power-guide",
+      "hasSchema": false,
+      "schemaTypes": [],
+      "status": "missing",
+      "recommendations": {
+        "required": [
+          "WebPage"
+        ],
+        "recommended": [
+          "BreadcrumbList"
+        ],
+        "description": "All pages should at minimum have WebPage schema"
+      },
+      "missingTypes": [
+        "WebPage"
+      ],
+      "additionalRecommendations": [
+        "BreadcrumbList"
+      ]
+    },
+    {
+      "filePath": "src/pages/SearchResults.tsx",
+      "route": "/search-results",
+      "url": "https://smartrvhub.com/search-results",
+      "hasSchema": false,
+      "schemaTypes": [],
+      "status": "missing",
+      "recommendations": {
+        "required": [
+          "WebPage"
+        ],
+        "recommended": [
+          "BreadcrumbList"
+        ],
+        "description": "All pages should at minimum have WebPage schema"
+      },
+      "missingTypes": [
+        "WebPage"
+      ],
+      "additionalRecommendations": [
+        "BreadcrumbList"
+      ]
+    },
+    {
+      "filePath": "src/pages/ScheduleDemo.tsx",
+      "route": "/schedule-demo",
+      "url": "https://smartrvhub.com/schedule-demo",
+      "hasSchema": false,
+      "schemaTypes": [],
+      "status": "missing",
+      "recommendations": {
+        "required": [
+          "WebPage"
+        ],
+        "recommended": [
+          "BreadcrumbList"
+        ],
+        "description": "All pages should at minimum have WebPage schema"
+      },
+      "missingTypes": [
+        "WebPage"
+      ],
+      "additionalRecommendations": [
+        "BreadcrumbList"
+      ]
+    },
+    {
+      "filePath": "src/pages/ResetPassword.tsx",
+      "route": "/reset-password",
+      "url": "https://smartrvhub.com/reset-password",
+      "hasSchema": false,
+      "schemaTypes": [],
+      "status": "missing",
+      "recommendations": {
+        "required": [
+          "WebPage"
+        ],
+        "recommended": [
+          "BreadcrumbList"
+        ],
+        "description": "All pages should at minimum have WebPage schema"
+      },
+      "missingTypes": [
+        "WebPage"
+      ],
+      "additionalRecommendations": [
+        "BreadcrumbList"
+      ]
+    },
+    {
+      "filePath": "src/pages/RVWeather.tsx",
+      "route": "/r-v-weather",
+      "url": "https://smartrvhub.com/r-v-weather",
+      "hasSchema": false,
+      "schemaTypes": [],
+      "status": "missing",
+      "recommendations": {
+        "required": [
+          "WebPage"
+        ],
+        "recommended": [
+          "BreadcrumbList"
+        ],
+        "description": "All pages should at minimum have WebPage schema"
+      },
+      "missingTypes": [
+        "WebPage"
+      ],
+      "additionalRecommendations": [
+        "BreadcrumbList"
+      ]
+    },
+    {
+      "filePath": "src/pages/RVTechnologyGuideResearch.tsx",
+      "route": "/r-v-technology-guide-research",
+      "url": "https://smartrvhub.com/r-v-technology-guide-research",
+      "hasSchema": false,
+      "schemaTypes": [],
+      "status": "missing",
+      "recommendations": {
+        "required": [
+          "WebPage"
+        ],
+        "recommended": [
+          "BreadcrumbList"
+        ],
+        "description": "All pages should at minimum have WebPage schema"
+      },
+      "missingTypes": [
+        "WebPage"
+      ],
+      "additionalRecommendations": [
+        "BreadcrumbList"
+      ]
+    },
+    {
+      "filePath": "src/pages/RVTechnologyGuideControlSystems.tsx",
+      "route": "/r-v-technology-guide-control-systems",
+      "url": "https://smartrvhub.com/r-v-technology-guide-control-systems",
+      "hasSchema": false,
+      "schemaTypes": [],
+      "status": "missing",
+      "recommendations": {
+        "required": [
+          "WebPage"
+        ],
+        "recommended": [
+          "BreadcrumbList"
+        ],
+        "description": "All pages should at minimum have WebPage schema"
+      },
+      "missingTypes": [
+        "WebPage"
+      ],
+      "additionalRecommendations": [
+        "BreadcrumbList"
+      ]
+    },
+    {
+      "filePath": "src/pages/RVTechnologyGuide.tsx",
+      "route": "/r-v-technology-guide",
+      "url": "https://smartrvhub.com/r-v-technology-guide",
+      "hasSchema": false,
+      "schemaTypes": [],
+      "status": "missing",
+      "recommendations": {
+        "required": [
+          "WebPage"
+        ],
+        "recommended": [
+          "BreadcrumbList"
+        ],
+        "description": "All pages should at minimum have WebPage schema"
+      },
+      "missingTypes": [
+        "WebPage"
+      ],
+      "additionalRecommendations": [
+        "BreadcrumbList"
+      ]
+    },
+    {
+      "filePath": "src/pages/RVMarketplace.tsx",
+      "route": "/r-v-marketplace",
+      "url": "https://smartrvhub.com/r-v-marketplace",
+      "hasSchema": false,
+      "schemaTypes": [],
+      "status": "missing",
+      "recommendations": {
+        "required": [
+          "WebPage"
+        ],
+        "recommended": [
+          "BreadcrumbList"
+        ],
+        "description": "All pages should at minimum have WebPage schema"
+      },
+      "missingTypes": [
+        "WebPage"
+      ],
+      "additionalRecommendations": [
+        "BreadcrumbList"
+      ]
+    },
+    {
+      "filePath": "src/pages/RVEmergencyCenter.tsx",
+      "route": "/r-v-emergency-center",
+      "url": "https://smartrvhub.com/r-v-emergency-center",
+      "hasSchema": false,
+      "schemaTypes": [],
+      "status": "missing",
+      "recommendations": {
+        "required": [
+          "WebPage"
+        ],
+        "recommended": [
+          "BreadcrumbList"
+        ],
+        "description": "All pages should at minimum have WebPage schema"
+      },
+      "missingTypes": [
+        "WebPage"
+      ],
+      "additionalRecommendations": [
+        "BreadcrumbList"
+      ]
+    },
+    {
+      "filePath": "src/pages/RVComfortGuide.tsx",
+      "route": "/r-v-comfort-guide",
+      "url": "https://smartrvhub.com/r-v-comfort-guide",
+      "hasSchema": false,
+      "schemaTypes": [],
+      "status": "missing",
+      "recommendations": {
+        "required": [
+          "WebPage"
+        ],
+        "recommended": [
+          "BreadcrumbList"
+        ],
+        "description": "All pages should at minimum have WebPage schema"
+      },
+      "missingTypes": [
+        "WebPage"
+      ],
+      "additionalRecommendations": [
+        "BreadcrumbList"
+      ]
+    },
+    {
+      "filePath": "src/pages/RVAppsHub.tsx",
+      "route": "/r-v-apps-hub",
+      "url": "https://smartrvhub.com/r-v-apps-hub",
+      "hasSchema": false,
+      "schemaTypes": [],
+      "status": "missing",
+      "recommendations": {
+        "required": [
+          "WebPage"
+        ],
+        "recommended": [
+          "BreadcrumbList"
+        ],
+        "description": "All pages should at minimum have WebPage schema"
+      },
+      "missingTypes": [
+        "WebPage"
+      ],
+      "additionalRecommendations": [
+        "BreadcrumbList"
+      ]
+    },
+    {
+      "filePath": "src/pages/Products.tsx",
+      "route": "/products",
+      "url": "https://smartrvhub.com/products",
+      "hasSchema": false,
+      "schemaTypes": [],
+      "status": "missing",
+      "recommendations": {
+        "required": [
+          "WebPage"
+        ],
+        "recommended": [
+          "BreadcrumbList"
+        ],
+        "description": "All pages should at minimum have WebPage schema"
+      },
+      "missingTypes": [
+        "WebPage"
+      ],
+      "additionalRecommendations": [
+        "BreadcrumbList"
+      ]
+    },
+    {
+      "filePath": "src/pages/Pricing.tsx",
+      "route": "/pricing",
+      "url": "https://smartrvhub.com/pricing",
+      "hasSchema": false,
+      "schemaTypes": [],
+      "status": "missing",
+      "recommendations": {
+        "required": [
+          "WebPage"
+        ],
+        "recommended": [
+          "BreadcrumbList"
+        ],
+        "description": "All pages should at minimum have WebPage schema"
+      },
+      "missingTypes": [
+        "WebPage"
+      ],
+      "additionalRecommendations": [
+        "BreadcrumbList"
+      ]
+    },
+    {
+      "filePath": "src/pages/Models.tsx",
+      "route": "/models",
+      "url": "https://smartrvhub.com/models",
+      "hasSchema": false,
+      "schemaTypes": [],
+      "status": "missing",
+      "recommendations": {
+        "required": [
+          "ItemList",
+          "WebPage"
+        ],
+        "recommended": [
+          "Product"
+        ],
+        "description": "Model listing pages should use ItemList schema"
+      },
+      "missingTypes": [
+        "ItemList",
+        "WebPage"
+      ],
+      "additionalRecommendations": [
+        "Product"
+      ]
+    },
+    {
+      "filePath": "src/pages/MapIconDemo.tsx",
+      "route": "/map-icon-demo",
+      "url": "https://smartrvhub.com/map-icon-demo",
+      "hasSchema": false,
+      "schemaTypes": [],
+      "status": "missing",
+      "recommendations": {
+        "required": [
+          "WebPage"
+        ],
+        "recommended": [
+          "BreadcrumbList"
+        ],
+        "description": "All pages should at minimum have WebPage schema"
+      },
+      "missingTypes": [
+        "WebPage"
+      ],
+      "additionalRecommendations": [
+        "BreadcrumbList"
+      ]
+    },
+    {
+      "filePath": "src/pages/MapFacilityDemo.tsx",
+      "route": "/map-facility-demo",
+      "url": "https://smartrvhub.com/map-facility-demo",
+      "hasSchema": false,
+      "schemaTypes": [],
+      "status": "missing",
+      "recommendations": {
+        "required": [
+          "WebPage"
+        ],
+        "recommended": [
+          "BreadcrumbList"
+        ],
+        "description": "All pages should at minimum have WebPage schema"
+      },
+      "missingTypes": [
+        "WebPage"
+      ],
+      "additionalRecommendations": [
+        "BreadcrumbList"
+      ]
+    },
+    {
+      "filePath": "src/pages/Index.tsx",
+      "route": "/",
+      "url": "https://smartrvhub.com/",
+      "hasSchema": false,
+      "schemaTypes": [],
+      "status": "missing",
+      "recommendations": {
+        "required": [
+          "Organization",
+          "WebSite"
+        ],
+        "recommended": [
+          "BreadcrumbList"
+        ],
+        "description": "Homepage should identify your organization and website"
+      },
+      "missingTypes": [
+        "Organization",
+        "WebSite"
+      ],
+      "additionalRecommendations": [
+        "BreadcrumbList"
+      ]
+    },
+    {
+      "filePath": "src/pages/Features.tsx",
+      "route": "/features",
+      "url": "https://smartrvhub.com/features",
+      "hasSchema": false,
+      "schemaTypes": [],
+      "status": "missing",
+      "recommendations": {
+        "required": [
+          "WebPage"
+        ],
+        "recommended": [
+          "Product",
+          "ItemList"
+        ],
+        "description": "Feature pages benefit from Product or WebPage schema"
+      },
+      "missingTypes": [
+        "WebPage"
+      ],
+      "additionalRecommendations": [
+        "Product",
+        "ItemList"
+      ]
+    },
+    {
+      "filePath": "src/pages/FacilityDetail.tsx",
+      "route": "/facility-detail",
+      "url": "https://smartrvhub.com/facility-detail",
+      "hasSchema": false,
+      "schemaTypes": [],
+      "status": "missing",
+      "recommendations": {
+        "required": [
+          "WebPage"
+        ],
+        "recommended": [
+          "BreadcrumbList"
+        ],
+        "description": "All pages should at minimum have WebPage schema"
+      },
+      "missingTypes": [
+        "WebPage"
+      ],
+      "additionalRecommendations": [
+        "BreadcrumbList"
+      ]
+    },
+    {
+      "filePath": "src/pages/ErrorPage.tsx",
+      "route": "/error-page",
+      "url": "https://smartrvhub.com/error-page",
+      "hasSchema": false,
+      "schemaTypes": [],
+      "status": "missing",
+      "recommendations": {
+        "required": [
+          "WebPage"
+        ],
+        "recommended": [
+          "BreadcrumbList"
+        ],
+        "description": "All pages should at minimum have WebPage schema"
+      },
+      "missingTypes": [
+        "WebPage"
+      ],
+      "additionalRecommendations": [
+        "BreadcrumbList"
+      ]
+    },
+    {
+      "filePath": "src/pages/Documentation.tsx",
+      "route": "/documentation",
+      "url": "https://smartrvhub.com/documentation",
+      "hasSchema": false,
+      "schemaTypes": [],
+      "status": "missing",
+      "recommendations": {
+        "required": [
+          "WebPage"
+        ],
+        "recommended": [
+          "BreadcrumbList"
+        ],
+        "description": "All pages should at minimum have WebPage schema"
+      },
+      "missingTypes": [
+        "WebPage"
+      ],
+      "additionalRecommendations": [
+        "BreadcrumbList"
+      ]
+    },
+    {
+      "filePath": "src/pages/Contact.tsx",
+      "route": "/contact",
+      "url": "https://smartrvhub.com/contact",
+      "hasSchema": false,
+      "schemaTypes": [],
+      "status": "missing",
+      "recommendations": {
+        "required": [
+          "WebPage"
+        ],
+        "recommended": [
+          "BreadcrumbList"
+        ],
+        "description": "All pages should at minimum have WebPage schema"
+      },
+      "missingTypes": [
+        "WebPage"
+      ],
+      "additionalRecommendations": [
+        "BreadcrumbList"
+      ]
+    },
+    {
+      "filePath": "src/pages/Calculators.tsx",
+      "route": "/calculators",
+      "url": "https://smartrvhub.com/calculators",
+      "hasSchema": false,
+      "schemaTypes": [],
+      "status": "missing",
+      "recommendations": {
+        "required": [
+          "WebPage",
+          "WebApplication"
+        ],
+        "recommended": [
+          "HowTo"
+        ],
+        "description": "Calculator tools should use WebApplication schema"
+      },
+      "missingTypes": [
+        "WebPage",
+        "WebApplication"
+      ],
+      "additionalRecommendations": [
+        "HowTo"
+      ]
+    },
+    {
+      "filePath": "src/pages/BlogPost.tsx",
+      "route": "/blog-post",
+      "url": "https://smartrvhub.com/blog-post",
+      "hasSchema": false,
+      "schemaTypes": [],
+      "status": "missing",
+      "recommendations": {
+        "required": [
+          "WebPage"
+        ],
+        "recommended": [
+          "BreadcrumbList"
+        ],
+        "description": "All pages should at minimum have WebPage schema"
+      },
+      "missingTypes": [
+        "WebPage"
+      ],
+      "additionalRecommendations": [
+        "BreadcrumbList"
+      ]
+    },
+    {
+      "filePath": "src/pages/BlogIndex.tsx",
+      "route": "/blog-index",
+      "url": "https://smartrvhub.com/blog-index",
+      "hasSchema": false,
+      "schemaTypes": [],
+      "status": "missing",
+      "recommendations": {
+        "required": [
+          "WebPage"
+        ],
+        "recommended": [
+          "BreadcrumbList"
+        ],
+        "description": "All pages should at minimum have WebPage schema"
+      },
+      "missingTypes": [
+        "WebPage"
+      ],
+      "additionalRecommendations": [
+        "BreadcrumbList"
+      ]
+    },
+    {
+      "filePath": "src/pages/Blog.tsx",
+      "route": "/blog",
+      "url": "https://smartrvhub.com/blog",
+      "hasSchema": false,
+      "schemaTypes": [],
+      "status": "missing",
+      "recommendations": {
+        "required": [
+          "Blog",
+          "ItemList"
+        ],
+        "recommended": [
+          "WebPage"
+        ],
+        "description": "Blog listing should use Blog and ItemList schemas"
+      },
+      "missingTypes": [
+        "Blog",
+        "ItemList"
+      ],
+      "additionalRecommendations": [
+        "WebPage"
+      ]
+    },
+    {
+      "filePath": "src/pages/Auth.tsx",
+      "route": "/auth",
+      "url": "https://smartrvhub.com/auth",
+      "hasSchema": false,
+      "schemaTypes": [],
+      "status": "missing",
+      "recommendations": {
+        "required": [
+          "WebPage"
+        ],
+        "recommended": [
+          "BreadcrumbList"
+        ],
+        "description": "All pages should at minimum have WebPage schema"
+      },
+      "missingTypes": [
+        "WebPage"
+      ],
+      "additionalRecommendations": [
+        "BreadcrumbList"
+      ]
+    },
+    {
+      "filePath": "src/pages/AdminDashboard.tsx",
+      "route": "/admin-dashboard",
+      "url": "https://smartrvhub.com/admin-dashboard",
+      "hasSchema": false,
+      "schemaTypes": [],
+      "status": "missing",
+      "recommendations": {
+        "required": [
+          "WebPage"
+        ],
+        "recommended": [
+          "BreadcrumbList"
+        ],
+        "description": "All pages should at minimum have WebPage schema"
+      },
+      "missingTypes": [
+        "WebPage"
+      ],
+      "additionalRecommendations": [
+        "BreadcrumbList"
+      ]
+    },
+    {
+      "filePath": "src/pages/Account.tsx",
+      "route": "/account",
+      "url": "https://smartrvhub.com/account",
+      "hasSchema": false,
+      "schemaTypes": [],
+      "status": "missing",
+      "recommendations": {
+        "required": [
+          "WebPage"
+        ],
+        "recommended": [
+          "BreadcrumbList"
+        ],
+        "description": "All pages should at minimum have WebPage schema"
+      },
+      "missingTypes": [
+        "WebPage"
+      ],
+      "additionalRecommendations": [
+        "BreadcrumbList"
+      ]
+    },
+    {
+      "filePath": "src/pages/About.tsx",
+      "route": "/about",
+      "url": "https://smartrvhub.com/about",
+      "hasSchema": false,
+      "schemaTypes": [],
+      "status": "missing",
+      "recommendations": {
+        "required": [
+          "WebPage"
+        ],
+        "recommended": [
+          "BreadcrumbList"
+        ],
+        "description": "All pages should at minimum have WebPage schema"
+      },
+      "missingTypes": [
+        "WebPage"
+      ],
+      "additionalRecommendations": [
+        "BreadcrumbList"
+      ]
+    },
+    {
+      "filePath": "src/pages/user/UserFavorites.tsx",
+      "route": "/user/-user-favorites",
+      "url": "https://smartrvhub.com/user/-user-favorites",
+      "hasSchema": false,
+      "schemaTypes": [],
+      "status": "missing",
+      "recommendations": {
+        "required": [
+          "WebPage"
+        ],
+        "recommended": [
+          "BreadcrumbList"
+        ],
+        "description": "All pages should at minimum have WebPage schema"
+      },
+      "missingTypes": [
+        "WebPage"
+      ],
+      "additionalRecommendations": [
+        "BreadcrumbList"
+      ]
+    },
+    {
+      "filePath": "src/pages/user/SavedCalculations.tsx",
+      "route": "/user/-saved-calculations",
+      "url": "https://smartrvhub.com/user/-saved-calculations",
+      "hasSchema": false,
+      "schemaTypes": [],
+      "status": "missing",
+      "recommendations": {
+        "required": [
+          "WebPage"
+        ],
+        "recommended": [
+          "BreadcrumbList"
+        ],
+        "description": "All pages should at minimum have WebPage schema"
+      },
+      "missingTypes": [
+        "WebPage"
+      ],
+      "additionalRecommendations": [
+        "BreadcrumbList"
+      ]
+    },
+    {
+      "filePath": "src/pages/user/Favorites.tsx",
+      "route": "/user/-favorites",
+      "url": "https://smartrvhub.com/user/-favorites",
+      "hasSchema": false,
+      "schemaTypes": [],
+      "status": "missing",
+      "recommendations": {
+        "required": [
+          "WebPage"
+        ],
+        "recommended": [
+          "BreadcrumbList"
+        ],
+        "description": "All pages should at minimum have WebPage schema"
+      },
+      "missingTypes": [
+        "WebPage"
+      ],
+      "additionalRecommendations": [
+        "BreadcrumbList"
+      ]
+    },
+    {
+      "filePath": "src/pages/user/Dashboard.tsx",
+      "route": "/user/-dashboard",
+      "url": "https://smartrvhub.com/user/-dashboard",
+      "hasSchema": false,
+      "schemaTypes": [],
+      "status": "missing",
+      "recommendations": {
+        "required": [
+          "WebPage"
+        ],
+        "recommended": [
+          "BreadcrumbList"
+        ],
+        "description": "All pages should at minimum have WebPage schema"
+      },
+      "missingTypes": [
+        "WebPage"
+      ],
+      "additionalRecommendations": [
+        "BreadcrumbList"
+      ]
+    },
+    {
+      "filePath": "src/pages/tools/TechnologyChecklist.tsx",
+      "route": "/tools/-technology-checklist",
+      "url": "https://smartrvhub.com/tools/-technology-checklist",
+      "hasSchema": false,
+      "schemaTypes": [],
+      "status": "missing",
+      "recommendations": {
+        "required": [
+          "WebPage"
+        ],
+        "recommended": [
+          "BreadcrumbList"
+        ],
+        "description": "All pages should at minimum have WebPage schema"
+      },
+      "missingTypes": [
+        "WebPage"
+      ],
+      "additionalRecommendations": [
+        "BreadcrumbList"
+      ]
+    },
+    {
+      "filePath": "src/pages/tools/ReadinessAssessment.tsx",
+      "route": "/tools/-readiness-assessment",
+      "url": "https://smartrvhub.com/tools/-readiness-assessment",
+      "hasSchema": false,
+      "schemaTypes": [],
+      "status": "missing",
+      "recommendations": {
+        "required": [
+          "WebPage"
+        ],
+        "recommended": [
+          "BreadcrumbList"
+        ],
+        "description": "All pages should at minimum have WebPage schema"
+      },
+      "missingTypes": [
+        "WebPage"
+      ],
+      "additionalRecommendations": [
+        "BreadcrumbList"
+      ]
+    },
+    {
+      "filePath": "src/pages/tools/LifestylePlanner.tsx",
+      "route": "/tools/-lifestyle-planner",
+      "url": "https://smartrvhub.com/tools/-lifestyle-planner",
+      "hasSchema": false,
+      "schemaTypes": [],
+      "status": "missing",
+      "recommendations": {
+        "required": [
+          "WebPage"
+        ],
+        "recommended": [
+          "BreadcrumbList"
+        ],
+        "description": "All pages should at minimum have WebPage schema"
+      },
+      "missingTypes": [
+        "WebPage"
+      ],
+      "additionalRecommendations": [
+        "BreadcrumbList"
+      ]
+    },
+    {
+      "filePath": "src/pages/tools/IntelligentRVFinder.tsx",
+      "route": "/tools/-intelligent-r-v-finder",
+      "url": "https://smartrvhub.com/tools/-intelligent-r-v-finder",
+      "hasSchema": false,
+      "schemaTypes": [],
+      "status": "missing",
+      "recommendations": {
+        "required": [
+          "WebPage"
+        ],
+        "recommended": [
+          "BreadcrumbList"
+        ],
+        "description": "All pages should at minimum have WebPage schema"
+      },
+      "missingTypes": [
+        "WebPage"
+      ],
+      "additionalRecommendations": [
+        "BreadcrumbList"
+      ]
+    },
+    {
+      "filePath": "src/pages/tools/FeatureMatcher.tsx",
+      "route": "/tools/-feature-matcher",
+      "url": "https://smartrvhub.com/tools/-feature-matcher",
+      "hasSchema": false,
+      "schemaTypes": [],
+      "status": "missing",
+      "recommendations": {
+        "required": [
+          "WebPage"
+        ],
+        "recommended": [
+          "BreadcrumbList"
+        ],
+        "description": "All pages should at minimum have WebPage schema"
+      },
+      "missingTypes": [
+        "WebPage"
+      ],
+      "additionalRecommendations": [
+        "BreadcrumbList"
+      ]
+    },
+    {
+      "filePath": "src/pages/tools/EducationalConsultant.tsx",
+      "route": "/tools/-educational-consultant",
+      "url": "https://smartrvhub.com/tools/-educational-consultant",
+      "hasSchema": false,
+      "schemaTypes": [],
+      "status": "missing",
+      "recommendations": {
+        "required": [
+          "WebPage"
+        ],
+        "recommended": [
+          "BreadcrumbList"
+        ],
+        "description": "All pages should at minimum have WebPage schema"
+      },
+      "missingTypes": [
+        "WebPage"
+      ],
+      "additionalRecommendations": [
+        "BreadcrumbList"
+      ]
+    },
+    {
+      "filePath": "src/pages/features/WaterSystems.tsx",
+      "route": "/features/-water-systems",
+      "url": "https://smartrvhub.com/features/-water-systems",
+      "hasSchema": false,
+      "schemaTypes": [],
+      "status": "missing",
+      "recommendations": {
+        "required": [
+          "WebPage"
+        ],
+        "recommended": [
+          "BreadcrumbList"
+        ],
+        "description": "All pages should at minimum have WebPage schema"
+      },
+      "missingTypes": [
+        "WebPage"
+      ],
+      "additionalRecommendations": [
+        "BreadcrumbList"
+      ]
+    },
+    {
+      "filePath": "src/pages/features/SmartTV.tsx",
+      "route": "/features/-smart-t-v",
+      "url": "https://smartrvhub.com/features/-smart-t-v",
+      "hasSchema": false,
+      "schemaTypes": [],
+      "status": "missing",
+      "recommendations": {
+        "required": [
+          "WebPage"
+        ],
+        "recommended": [
+          "BreadcrumbList"
+        ],
+        "description": "All pages should at minimum have WebPage schema"
+      },
+      "missingTypes": [
+        "WebPage"
+      ],
+      "additionalRecommendations": [
+        "BreadcrumbList"
+      ]
+    },
+    {
+      "filePath": "src/pages/features/SmartKitchen.tsx",
+      "route": "/features/-smart-kitchen",
+      "url": "https://smartrvhub.com/features/-smart-kitchen",
+      "hasSchema": false,
+      "schemaTypes": [],
+      "status": "missing",
+      "recommendations": {
+        "required": [
+          "WebPage"
+        ],
+        "recommended": [
+          "BreadcrumbList"
+        ],
+        "description": "All pages should at minimum have WebPage schema"
+      },
+      "missingTypes": [
+        "WebPage"
+      ],
+      "additionalRecommendations": [
+        "BreadcrumbList"
+      ]
+    },
+    {
+      "filePath": "src/pages/features/SmartAutomation.tsx",
+      "route": "/features/-smart-automation",
+      "url": "https://smartrvhub.com/features/-smart-automation",
+      "hasSchema": false,
+      "schemaTypes": [],
+      "status": "missing",
+      "recommendations": {
+        "required": [
+          "WebPage"
+        ],
+        "recommended": [
+          "BreadcrumbList"
+        ],
+        "description": "All pages should at minimum have WebPage schema"
+      },
+      "missingTypes": [
+        "WebPage"
+      ],
+      "additionalRecommendations": [
+        "BreadcrumbList"
+      ]
+    },
+    {
+      "filePath": "src/pages/features/SecuritySystem.tsx",
+      "route": "/features/-security-system",
+      "url": "https://smartrvhub.com/features/-security-system",
+      "hasSchema": false,
+      "schemaTypes": [],
+      "status": "missing",
+      "recommendations": {
+        "required": [
+          "WebPage"
+        ],
+        "recommended": [
+          "BreadcrumbList"
+        ],
+        "description": "All pages should at minimum have WebPage schema"
+      },
+      "missingTypes": [
+        "WebPage"
+      ],
+      "additionalRecommendations": [
+        "BreadcrumbList"
+      ]
+    },
+    {
+      "filePath": "src/pages/features/RemoteControl.tsx",
+      "route": "/features/-remote-control",
+      "url": "https://smartrvhub.com/features/-remote-control",
+      "hasSchema": false,
+      "schemaTypes": [],
+      "status": "missing",
+      "recommendations": {
+        "required": [
+          "WebPage"
+        ],
+        "recommended": [
+          "BreadcrumbList"
+        ],
+        "description": "All pages should at minimum have WebPage schema"
+      },
+      "missingTypes": [
+        "WebPage"
+      ],
+      "additionalRecommendations": [
+        "BreadcrumbList"
+      ]
+    },
+    {
+      "filePath": "src/pages/features/PowerManagement.tsx",
+      "route": "/features/-power-management",
+      "url": "https://smartrvhub.com/features/-power-management",
+      "hasSchema": false,
+      "schemaTypes": [],
+      "status": "missing",
+      "recommendations": {
+        "required": [
+          "WebPage"
+        ],
+        "recommended": [
+          "BreadcrumbList"
+        ],
+        "description": "All pages should at minimum have WebPage schema"
+      },
+      "missingTypes": [
+        "WebPage"
+      ],
+      "additionalRecommendations": [
+        "BreadcrumbList"
+      ]
+    },
+    {
+      "filePath": "src/pages/features/NavigationSystem.tsx",
+      "route": "/features/-navigation-system",
+      "url": "https://smartrvhub.com/features/-navigation-system",
+      "hasSchema": false,
+      "schemaTypes": [],
+      "status": "missing",
+      "recommendations": {
+        "required": [
+          "WebPage"
+        ],
+        "recommended": [
+          "BreadcrumbList"
+        ],
+        "description": "All pages should at minimum have WebPage schema"
+      },
+      "missingTypes": [
+        "WebPage"
+      ],
+      "additionalRecommendations": [
+        "BreadcrumbList"
+      ]
+    },
+    {
+      "filePath": "src/pages/features/InternetConnectivity.tsx",
+      "route": "/features/-internet-connectivity",
+      "url": "https://smartrvhub.com/features/-internet-connectivity",
+      "hasSchema": false,
+      "schemaTypes": [],
+      "status": "missing",
+      "recommendations": {
+        "required": [
+          "WebPage"
+        ],
+        "recommended": [
+          "BreadcrumbList"
+        ],
+        "description": "All pages should at minimum have WebPage schema"
+      },
+      "missingTypes": [
+        "WebPage"
+      ],
+      "additionalRecommendations": [
+        "BreadcrumbList"
+      ]
+    },
+    {
+      "filePath": "src/pages/features/Entertainment.tsx",
+      "route": "/features/-entertainment",
+      "url": "https://smartrvhub.com/features/-entertainment",
+      "hasSchema": false,
+      "schemaTypes": [],
+      "status": "missing",
+      "recommendations": {
+        "required": [
+          "WebPage"
+        ],
+        "recommended": [
+          "BreadcrumbList"
+        ],
+        "description": "All pages should at minimum have WebPage schema"
+      },
+      "missingTypes": [
+        "WebPage"
+      ],
+      "additionalRecommendations": [
+        "BreadcrumbList"
+      ]
+    },
+    {
+      "filePath": "src/pages/features/ClimateControl.tsx",
+      "route": "/features/-climate-control",
+      "url": "https://smartrvhub.com/features/-climate-control",
+      "hasSchema": false,
+      "schemaTypes": [],
+      "status": "missing",
+      "recommendations": {
+        "required": [
+          "WebPage"
+        ],
+        "recommended": [
+          "BreadcrumbList"
+        ],
+        "description": "All pages should at minimum have WebPage schema"
+      },
+      "missingTypes": [
+        "WebPage"
+      ],
+      "additionalRecommendations": [
+        "BreadcrumbList"
+      ]
+    },
+    {
+      "filePath": "src/pages/features/AutomatedDriving.tsx",
+      "route": "/features/-automated-driving",
+      "url": "https://smartrvhub.com/features/-automated-driving",
+      "hasSchema": false,
+      "schemaTypes": [],
+      "status": "missing",
+      "recommendations": {
+        "required": [
+          "WebPage"
+        ],
+        "recommended": [
+          "BreadcrumbList"
+        ],
+        "description": "All pages should at minimum have WebPage schema"
+      },
+      "missingTypes": [
+        "WebPage"
+      ],
+      "additionalRecommendations": [
+        "BreadcrumbList"
+      ]
+    },
+    {
+      "filePath": "src/pages/features/AudioSystem.tsx",
+      "route": "/features/-audio-system",
+      "url": "https://smartrvhub.com/features/-audio-system",
+      "hasSchema": false,
+      "schemaTypes": [],
+      "status": "missing",
+      "recommendations": {
+        "required": [
+          "WebPage"
+        ],
+        "recommended": [
+          "BreadcrumbList"
+        ],
+        "description": "All pages should at minimum have WebPage schema"
+      },
+      "missingTypes": [
+        "WebPage"
+      ],
+      "additionalRecommendations": [
+        "BreadcrumbList"
+      ]
+    },
+    {
+      "filePath": "src/pages/models/LuxuryModel.tsx",
+      "route": "/models/-luxury-model",
+      "url": "https://smartrvhub.com/models/-luxury-model",
+      "hasSchema": false,
+      "schemaTypes": [],
+      "status": "missing",
+      "recommendations": {
+        "required": [
+          "Product"
+        ],
+        "recommended": [
+          "AggregateRating",
+          "Offer"
+        ],
+        "description": "Individual model pages should use Product schema with offers"
+      },
+      "missingTypes": [
+        "Product"
+      ],
+      "additionalRecommendations": [
+        "AggregateRating",
+        "Offer"
+      ]
+    },
+    {
+      "filePath": "src/pages/models/CompareModels.tsx",
+      "route": "/models/-compare-models",
+      "url": "https://smartrvhub.com/models/-compare-models",
+      "hasSchema": false,
+      "schemaTypes": [],
+      "status": "missing",
+      "recommendations": {
+        "required": [
+          "Product"
+        ],
+        "recommended": [
+          "AggregateRating",
+          "Offer"
+        ],
+        "description": "Individual model pages should use Product schema with offers"
+      },
+      "missingTypes": [
+        "Product"
+      ],
+      "additionalRecommendations": [
+        "AggregateRating",
+        "Offer"
+      ]
+    },
+    {
+      "filePath": "src/pages/models/CompactModel.tsx",
+      "route": "/models/-compact-model",
+      "url": "https://smartrvhub.com/models/-compact-model",
+      "hasSchema": false,
+      "schemaTypes": [],
+      "status": "missing",
+      "recommendations": {
+        "required": [
+          "Product"
+        ],
+        "recommended": [
+          "AggregateRating",
+          "Offer"
+        ],
+        "description": "Individual model pages should use Product schema with offers"
+      },
+      "missingTypes": [
+        "Product"
+      ],
+      "additionalRecommendations": [
+        "AggregateRating",
+        "Offer"
+      ]
+    },
+    {
+      "filePath": "src/pages/models/AdventureModel.tsx",
+      "route": "/models/-adventure-model",
+      "url": "https://smartrvhub.com/models/-adventure-model",
+      "hasSchema": false,
+      "schemaTypes": [],
+      "status": "missing",
+      "recommendations": {
+        "required": [
+          "Product"
+        ],
+        "recommended": [
+          "AggregateRating",
+          "Offer"
+        ],
+        "description": "Individual model pages should use Product schema with offers"
+      },
+      "missingTypes": [
+        "Product"
+      ],
+      "additionalRecommendations": [
+        "AggregateRating",
+        "Offer"
+      ]
+    },
+    {
+      "filePath": "src/pages/admin/PerformanceDashboard.tsx",
+      "route": "/admin/-performance-dashboard",
+      "url": "https://smartrvhub.com/admin/-performance-dashboard",
+      "hasSchema": false,
+      "schemaTypes": [],
+      "status": "missing",
+      "recommendations": {
+        "required": [
+          "WebPage"
+        ],
+        "recommended": [
+          "BreadcrumbList"
+        ],
+        "description": "All pages should at minimum have WebPage schema"
+      },
+      "missingTypes": [
+        "WebPage"
+      ],
+      "additionalRecommendations": [
+        "BreadcrumbList"
+      ]
+    },
+    {
+      "filePath": "src/pages/documentation/CompleteDocumentation.tsx",
+      "route": "/documentation/-complete-documentation",
+      "url": "https://smartrvhub.com/documentation/-complete-documentation",
+      "hasSchema": false,
+      "schemaTypes": [],
+      "status": "missing",
+      "recommendations": {
+        "required": [
+          "WebPage"
+        ],
+        "recommended": [
+          "BreadcrumbList"
+        ],
+        "description": "All pages should at minimum have WebPage schema"
+      },
+      "missingTypes": [
+        "WebPage"
+      ],
+      "additionalRecommendations": [
+        "BreadcrumbList"
+      ]
+    }
+  ],
+  "pagesByCategory": {
+    "_document": {
+      "total": 1,
+      "excellent": 0,
+      "good": 0,
+      "needsImprovement": 0,
+      "missing": 1
+    },
+    "weather-dashboard": {
+      "total": 1,
+      "excellent": 0,
+      "good": 0,
+      "needsImprovement": 0,
+      "missing": 1
+    },
+    "voice-control": {
+      "total": 1,
+      "excellent": 0,
+      "good": 0,
+      "needsImprovement": 0,
+      "missing": 1
+    },
+    "troubleshooting": {
+      "total": 1,
+      "excellent": 0,
+      "good": 0,
+      "needsImprovement": 0,
+      "missing": 1
+    },
+    "tools": {
+      "total": 7,
+      "excellent": 0,
+      "good": 0,
+      "needsImprovement": 0,
+      "missing": 7
+    },
+    "technology": {
+      "total": 1,
+      "excellent": 0,
+      "good": 0,
+      "needsImprovement": 0,
+      "missing": 1
+    },
+    "storage-preparation-checklist": {
+      "total": 1,
+      "excellent": 0,
+      "good": 0,
+      "needsImprovement": 0,
+      "missing": 1
+    },
+    "storage-facilities": {
+      "total": 1,
+      "excellent": 0,
+      "good": 0,
+      "needsImprovement": 0,
+      "missing": 1
+    },
+    "solar-power-guide": {
+      "total": 1,
+      "excellent": 0,
+      "good": 0,
+      "needsImprovement": 0,
+      "missing": 1
+    },
+    "search-results": {
+      "total": 1,
+      "excellent": 0,
+      "good": 0,
+      "needsImprovement": 0,
+      "missing": 1
+    },
+    "schedule-demo": {
+      "total": 1,
+      "excellent": 0,
+      "good": 0,
+      "needsImprovement": 0,
+      "missing": 1
+    },
+    "reset-password": {
+      "total": 1,
+      "excellent": 0,
+      "good": 0,
+      "needsImprovement": 0,
+      "missing": 1
+    },
+    "r-v-weather": {
+      "total": 1,
+      "excellent": 0,
+      "good": 0,
+      "needsImprovement": 0,
+      "missing": 1
+    },
+    "r-v-technology-guide-research": {
+      "total": 1,
+      "excellent": 0,
+      "good": 0,
+      "needsImprovement": 0,
+      "missing": 1
+    },
+    "r-v-technology-guide-control-systems": {
+      "total": 1,
+      "excellent": 0,
+      "good": 0,
+      "needsImprovement": 0,
+      "missing": 1
+    },
+    "r-v-technology-guide": {
+      "total": 1,
+      "excellent": 0,
+      "good": 0,
+      "needsImprovement": 0,
+      "missing": 1
+    },
+    "r-v-marketplace": {
+      "total": 1,
+      "excellent": 0,
+      "good": 0,
+      "needsImprovement": 0,
+      "missing": 1
+    },
+    "r-v-emergency-center": {
+      "total": 1,
+      "excellent": 0,
+      "good": 0,
+      "needsImprovement": 0,
+      "missing": 1
+    },
+    "r-v-comfort-guide": {
+      "total": 1,
+      "excellent": 0,
+      "good": 0,
+      "needsImprovement": 0,
+      "missing": 1
+    },
+    "r-v-apps-hub": {
+      "total": 1,
+      "excellent": 0,
+      "good": 0,
+      "needsImprovement": 0,
+      "missing": 1
+    },
+    "products": {
+      "total": 1,
+      "excellent": 0,
+      "good": 0,
+      "needsImprovement": 0,
+      "missing": 1
+    },
+    "pricing": {
+      "total": 1,
+      "excellent": 0,
+      "good": 0,
+      "needsImprovement": 0,
+      "missing": 1
+    },
+    "models": {
+      "total": 5,
+      "excellent": 0,
+      "good": 0,
+      "needsImprovement": 0,
+      "missing": 5
+    },
+    "map-icon-demo": {
+      "total": 1,
+      "excellent": 0,
+      "good": 0,
+      "needsImprovement": 0,
+      "missing": 1
+    },
+    "map-facility-demo": {
+      "total": 1,
+      "excellent": 0,
+      "good": 0,
+      "needsImprovement": 0,
+      "missing": 1
+    },
+    "home": {
+      "total": 1,
+      "excellent": 0,
+      "good": 0,
+      "needsImprovement": 0,
+      "missing": 1
+    },
+    "features": {
+      "total": 14,
+      "excellent": 0,
+      "good": 0,
+      "needsImprovement": 0,
+      "missing": 14
+    },
+    "facility-detail": {
+      "total": 1,
+      "excellent": 0,
+      "good": 0,
+      "needsImprovement": 0,
+      "missing": 1
+    },
+    "error-page": {
+      "total": 1,
+      "excellent": 0,
+      "good": 0,
+      "needsImprovement": 0,
+      "missing": 1
+    },
+    "documentation": {
+      "total": 2,
+      "excellent": 0,
+      "good": 0,
+      "needsImprovement": 0,
+      "missing": 2
+    },
+    "contact": {
+      "total": 1,
+      "excellent": 0,
+      "good": 0,
+      "needsImprovement": 0,
+      "missing": 1
+    },
+    "calculators": {
+      "total": 1,
+      "excellent": 0,
+      "good": 0,
+      "needsImprovement": 0,
+      "missing": 1
+    },
+    "blog-post": {
+      "total": 1,
+      "excellent": 0,
+      "good": 0,
+      "needsImprovement": 0,
+      "missing": 1
+    },
+    "blog-index": {
+      "total": 1,
+      "excellent": 0,
+      "good": 0,
+      "needsImprovement": 0,
+      "missing": 1
+    },
+    "blog": {
+      "total": 1,
+      "excellent": 0,
+      "good": 0,
+      "needsImprovement": 0,
+      "missing": 1
+    },
+    "auth": {
+      "total": 1,
+      "excellent": 0,
+      "good": 0,
+      "needsImprovement": 0,
+      "missing": 1
+    },
+    "admin-dashboard": {
+      "total": 1,
+      "excellent": 0,
+      "good": 0,
+      "needsImprovement": 0,
+      "missing": 1
+    },
+    "account": {
+      "total": 1,
+      "excellent": 0,
+      "good": 0,
+      "needsImprovement": 0,
+      "missing": 1
+    },
+    "about": {
+      "total": 1,
+      "excellent": 0,
+      "good": 0,
+      "needsImprovement": 0,
+      "missing": 1
+    },
+    "user": {
+      "total": 4,
+      "excellent": 0,
+      "good": 0,
+      "needsImprovement": 0,
+      "missing": 4
+    },
+    "admin": {
+      "total": 1,
+      "excellent": 0,
+      "good": 0,
+      "needsImprovement": 0,
+      "missing": 1
+    }
+  },
+  "schemaTypeUsage": {},
+  "timestamp": "2025-10-24T04:44:18.348Z"
+}
