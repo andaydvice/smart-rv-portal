@@ -1,6 +1,6 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
@@ -77,6 +77,25 @@ const Tools: React.FC = () => {
                 </CardContent>
               </Card>
             ))}
+          </div>
+
+          {/* Related Resources */}
+          <div className="mt-16 bg-gray-800/50 border border-gray-700 rounded-lg p-8">
+            <h2 className="text-2xl font-bold text-white mb-4">More RV Resources</h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <Link to="/rv-apps-hub" className="bg-gray-700/50 hover:bg-gray-700 border border-gray-600 hover:border-blue-500 rounded-lg p-4 transition-all">
+                <h3 className="text-white font-semibold mb-2">RV Apps Hub</h3>
+                <p className="text-gray-400 text-sm">Essential mobile apps for RV travel</p>
+              </Link>
+              <Link to="/rv-weather" className="bg-gray-700/50 hover:bg-gray-700 border border-gray-600 hover:border-blue-500 rounded-lg p-4 transition-all">
+                <h3 className="text-white font-semibold mb-2">RV Weather</h3>
+                <p className="text-gray-400 text-sm">Weather forecasts and planning tools</p>
+              </Link>
+              <Link to="/rv-marketplace" className="bg-gray-700/50 hover:bg-gray-700 border border-gray-600 hover:border-blue-500 rounded-lg p-4 transition-all">
+                <h3 className="text-white font-semibold mb-2">RV Marketplace</h3>
+                <p className="text-gray-400 text-sm">Buy and sell RV equipment</p>
+              </Link>
+            </div>
           </div>
         </div>
       </div>

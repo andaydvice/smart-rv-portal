@@ -232,8 +232,29 @@ const Models = () => {
               gridCols="3"
             />
           </motion.div>
+
+          {/* RV Guides Section */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.0 }}
+            className="mt-16 bg-gray-800/50 border border-gray-700 rounded-lg p-8"
+          >
+            <h2 className="text-2xl font-bold text-white mb-4">Essential RV Guides</h2>
+            <p className="text-gray-300 mb-6">Explore our comprehensive guides to help you choose the perfect RV</p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <Link to="/rv-comfort-guide" className="bg-gray-700/50 hover:bg-gray-700 border border-gray-600 hover:border-blue-500 rounded-lg p-4 transition-all">
+                <h3 className="text-white font-semibold mb-2">RV Comfort Guide</h3>
+                <p className="text-gray-400 text-sm">Discover comfort features across different RV models</p>
+              </Link>
+              <Link to="/rv-marketplace" className="bg-gray-700/50 hover:bg-gray-700 border border-gray-600 hover:border-blue-500 rounded-lg p-4 transition-all">
+                <h3 className="text-white font-semibold mb-2">RV Marketplace</h3>
+                <p className="text-gray-400 text-sm">Browse and compare RVs from trusted sellers</p>
+              </Link>
+            </div>
+          </motion.div>
         </div>
-        
+
         {/* Affiliate Disclosure */}
         <div className="px-4">
           <AffiliateDisclosure className="max-w-7xl mx-auto my-8" />

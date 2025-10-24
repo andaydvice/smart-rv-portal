@@ -1,8 +1,11 @@
 
 import React from "react";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { Button } from "@/components/ui/button";
+import { ArrowLeft } from "lucide-react";
 import { scrollToTop } from "@/utils/scrollToTop";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
 import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
@@ -175,8 +178,33 @@ const RVWeather = () => {
               ]}
               gridCols="3"
             />
-            
+
             <AffiliateDisclosure className="mt-8" />
+
+            {/* Related Navigation */}
+            <div className="bg-gray-800/50 border border-gray-700 rounded-lg p-8 mt-12 mb-8">
+              <h3 className="text-xl font-semibold text-white mb-4">Explore More</h3>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Link to="/tools">
+                  <Button variant="outline" className="bg-transparent border-blue-500 text-blue-400 hover:bg-blue-500/20">
+                    <ArrowLeft className="w-4 h-4 mr-2" />
+                    Planning Tools
+                  </Button>
+                </Link>
+                <Link to="/storage-facilities">
+                  <Button variant="outline" className="bg-transparent border-blue-500 text-blue-400 hover:bg-blue-500/20">
+                    <ArrowLeft className="w-4 h-4 mr-2" />
+                    Storage Facilities
+                  </Button>
+                </Link>
+                <Link to="/calculators">
+                  <Button variant="outline" className="bg-transparent border-blue-500 text-blue-400 hover:bg-blue-500/20">
+                    <ArrowLeft className="w-4 h-4 mr-2" />
+                    RV Calculators
+                  </Button>
+                </Link>
+              </div>
+            </div>
           </section>
         </motion.div>
       </ScrollArea>

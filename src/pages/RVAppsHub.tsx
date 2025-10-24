@@ -1,8 +1,10 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { Link } from "react-router-dom";
 import Layout from '@/components/layout/Layout';
 import { Helmet } from 'react-helmet-async';
-import { Smartphone, Wifi, Navigation, Settings, Battery, Shield } from 'lucide-react';
+import { Smartphone, Wifi, Navigation, Settings, Battery, Shield, ArrowLeft } from 'lucide-react';
+import { Button } from "@/components/ui/button";
 
 const RVAppsHub = () => {
   const appCategories = [
@@ -191,6 +193,31 @@ const RVAppsHub = () => {
               </div>
             </div>
           </motion.section>
+
+          {/* Related Navigation */}
+          <div className="bg-gray-800/50 border border-gray-700 rounded-lg p-8 mt-12 mb-8">
+            <h3 className="text-xl font-semibold text-white mb-4">Explore More</h3>
+            <div className="flex flex-col sm:flex-row gap-4">
+              <Link to="/tools">
+                <Button variant="outline" className="bg-transparent border-blue-500 text-blue-400 hover:bg-blue-500/20">
+                  <ArrowLeft className="w-4 h-4 mr-2" />
+                  Interactive Tools
+                </Button>
+              </Link>
+              <Link to="/features">
+                <Button variant="outline" className="bg-transparent border-blue-500 text-blue-400 hover:bg-blue-500/20">
+                  <ArrowLeft className="w-4 h-4 mr-2" />
+                  Smart Features
+                </Button>
+              </Link>
+              <Link to="/rv-technology-guide">
+                <Button variant="outline" className="bg-transparent border-blue-500 text-blue-400 hover:bg-blue-500/20">
+                  <ArrowLeft className="w-4 h-4 mr-2" />
+                  Technology Guide
+                </Button>
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
     </Layout>

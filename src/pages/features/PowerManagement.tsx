@@ -240,6 +240,11 @@ const PowerManagement = () => {
                 title: "Water Systems",
                 path: "/features/water-systems",
                 description: "Efficient water heating and pumping with power monitoring"
+              },
+              {
+                title: "Solar Power Guide",
+                path: "/solar-power-guide",
+                description: "Complete guide to solar power systems for your RV"
               }
             ]}
           />
