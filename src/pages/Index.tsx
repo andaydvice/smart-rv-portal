@@ -80,7 +80,248 @@ const Index = () => {
         </div>
         <TrustStrip />
         <TestimonialsSection />
-        
+
+        {/* Featured Tools & Resources Section */}
+        <div className="bg-connectivity-darkBg py-16 px-4">
+          <div className="max-w-6xl mx-auto">
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 text-center">Popular RV Technology Tools</h2>
+            <p className="text-gray-300 text-lg text-center mb-12 max-w-3xl mx-auto">
+              Free AI-powered tools to help you plan, assess, and optimize your RV technology setup.
+            </p>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+              <motion.a
+                href="/tools/readiness-assessment"
+                whileHover={{ scale: 1.03 }}
+                className="bg-gradient-to-br from-[#151A22] to-[#1a202c] p-6 rounded-xl border border-gray-700 hover:border-blue-500 transition-all group"
+              >
+                <div className="text-4xl mb-3">🎯</div>
+                <h3 className="text-xl font-semibold text-white mb-2 group-hover:text-blue-400 transition-colors">
+                  Readiness Assessment
+                </h3>
+                <p className="text-gray-400 text-sm">
+                  Personalized RV technology recommendations based on your experience and goals.
+                </p>
+              </motion.a>
+
+              <motion.a
+                href="/tools/feature-matcher"
+                whileHover={{ scale: 1.03 }}
+                className="bg-gradient-to-br from-[#151A22] to-[#1a202c] p-6 rounded-xl border border-gray-700 hover:border-green-500 transition-all group"
+              >
+                <div className="text-4xl mb-3">🔍</div>
+                <h3 className="text-xl font-semibold text-white mb-2 group-hover:text-green-400 transition-colors">
+                  Feature Matcher
+                </h3>
+                <p className="text-gray-400 text-sm">
+                  Discover which technology features match your specific RV usage plans.
+                </p>
+              </motion.a>
+
+              <motion.a
+                href="/calculators"
+                whileHover={{ scale: 1.03 }}
+                className="bg-gradient-to-br from-[#151A22] to-[#1a202c] p-6 rounded-xl border border-gray-700 hover:border-yellow-500 transition-all group"
+              >
+                <div className="text-4xl mb-3">🧮</div>
+                <h3 className="text-xl font-semibold text-white mb-2 group-hover:text-yellow-400 transition-colors">
+                  Cost Calculators
+                </h3>
+                <p className="text-gray-400 text-sm">
+                  Calculate costs for solar, power, internet, and complete RV technology systems.
+                </p>
+              </motion.a>
+
+              <motion.a
+                href="/tools/intelligent-rv-finder"
+                whileHover={{ scale: 1.03 }}
+                className="bg-gradient-to-br from-[#151A22] to-[#1a202c] p-6 rounded-xl border border-gray-700 hover:border-purple-500 transition-all group"
+              >
+                <div className="text-4xl mb-3">🚐</div>
+                <h3 className="text-xl font-semibold text-white mb-2 group-hover:text-purple-400 transition-colors">
+                  RV Finder
+                </h3>
+                <p className="text-gray-400 text-sm">
+                  AI-powered recommendations to find your perfect RV based on lifestyle and budget.
+                </p>
+              </motion.a>
+            </div>
+
+            <div className="text-center">
+              <motion.a
+                href="/tools"
+                whileHover={{ scale: 1.05 }}
+                className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold transition-all"
+              >
+                View All Tools
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                </svg>
+              </motion.a>
+            </div>
+          </div>
+        </div>
+
+        {/* Latest RV Technology Guides */}
+        <div className="bg-gradient-to-b from-gray-900 to-gray-800 py-16 px-4">
+          <div className="max-w-6xl mx-auto">
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 text-center">Latest RV Technology Guides</h2>
+            <p className="text-gray-300 text-lg text-center mb-12 max-w-3xl mx-auto">
+              Expert insights and practical guides for smart RV living, connectivity, and technology.
+            </p>
+
+            <div className="grid md:grid-cols-3 gap-8 mb-12">
+              <motion.a
+                href="/blog/top-10-smart-rv-upgrades"
+                whileHover={{ scale: 1.03 }}
+                className="bg-gradient-to-br from-[#151A22] to-[#1a202c] rounded-xl overflow-hidden border border-gray-700 hover:border-blue-500 transition-all group"
+              >
+                <div className="p-6">
+                  <div className="text-sm text-blue-400 font-semibold mb-2">TECH GUIDE</div>
+                  <h3 className="text-xl font-bold text-white mb-3 group-hover:text-blue-400 transition-colors">
+                    Top 10 Smart RV Upgrades
+                  </h3>
+                  <p className="text-gray-400 text-sm mb-4">
+                    Essential technology upgrades that transform any RV into a smart home on wheels.
+                  </p>
+                  <div className="text-blue-400 text-sm font-semibold flex items-center gap-1">
+                    Read Guide
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </div>
+                </div>
+              </motion.a>
+
+              <motion.a
+                href="/blog/solar-power-for-rvs"
+                whileHover={{ scale: 1.03 }}
+                className="bg-gradient-to-br from-[#151A22] to-[#1a202c] rounded-xl overflow-hidden border border-gray-700 hover:border-green-500 transition-all group"
+              >
+                <div className="p-6">
+                  <div className="text-sm text-green-400 font-semibold mb-2">POWER GUIDE</div>
+                  <h3 className="text-xl font-bold text-white mb-3 group-hover:text-green-400 transition-colors">
+                    Solar Power for RVs
+                  </h3>
+                  <p className="text-gray-400 text-sm mb-4">
+                    Complete guide to solar power systems, sizing, installation, and maximizing energy independence.
+                  </p>
+                  <div className="text-green-400 text-sm font-semibold flex items-center gap-1">
+                    Read Guide
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </div>
+                </div>
+              </motion.a>
+
+              <motion.a
+                href="/blog/smart-rv-security-systems"
+                whileHover={{ scale: 1.03 }}
+                className="bg-gradient-to-br from-[#151A22] to-[#1a202c] rounded-xl overflow-hidden border border-gray-700 hover:border-purple-500 transition-all group"
+              >
+                <div className="p-6">
+                  <div className="text-sm text-purple-400 font-semibold mb-2">SECURITY GUIDE</div>
+                  <h3 className="text-xl font-bold text-white mb-3 group-hover:text-purple-400 transition-colors">
+                    Smart RV Security Systems
+                  </h3>
+                  <p className="text-gray-400 text-sm mb-4">
+                    Protect your RV investment with modern security cameras, GPS tracking, and smart alarms.
+                  </p>
+                  <div className="text-purple-400 text-sm font-semibold flex items-center gap-1">
+                    Read Guide
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </div>
+                </div>
+              </motion.a>
+            </div>
+
+            <div className="text-center">
+              <motion.a
+                href="/blog"
+                whileHover={{ scale: 1.05 }}
+                className="inline-flex items-center gap-2 bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white px-8 py-3 rounded-lg font-semibold transition-all"
+              >
+                View All Articles
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                </svg>
+              </motion.a>
+            </div>
+          </div>
+        </div>
+
+        {/* Quick Access to Services */}
+        <div className="bg-connectivity-darkBg py-16 px-4">
+          <div className="max-w-6xl mx-auto">
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-12 text-center">Get Started with Smart RV Technology</h2>
+
+            <div className="grid md:grid-cols-3 gap-8">
+              <motion.a
+                href="/pricing"
+                whileHover={{ scale: 1.03 }}
+                className="bg-gradient-to-br from-blue-600/20 to-blue-800/20 p-8 rounded-xl border border-blue-500/30 hover:border-blue-500 transition-all group"
+              >
+                <div className="text-5xl mb-4">💰</div>
+                <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-blue-400 transition-colors">
+                  View Pricing
+                </h3>
+                <p className="text-gray-300 mb-4">
+                  Explore our transparent pricing packages from $15k to $65k with professional installation included.
+                </p>
+                <div className="text-blue-400 font-semibold flex items-center gap-2">
+                  See Packages
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                  </svg>
+                </div>
+              </motion.a>
+
+              <motion.a
+                href="/products"
+                whileHover={{ scale: 1.03 }}
+                className="bg-gradient-to-br from-green-600/20 to-green-800/20 p-8 rounded-xl border border-green-500/30 hover:border-green-500 transition-all group"
+              >
+                <div className="text-5xl mb-4">🛒</div>
+                <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-green-400 transition-colors">
+                  Browse Products
+                </h3>
+                <p className="text-gray-300 mb-4">
+                  Premium RV technology products from trusted brands with expert installation and support.
+                </p>
+                <div className="text-green-400 font-semibold flex items-center gap-2">
+                  Shop Now
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                  </svg>
+                </div>
+              </motion.a>
+
+              <motion.a
+                href="/contact"
+                whileHover={{ scale: 1.03 }}
+                className="bg-gradient-to-br from-purple-600/20 to-purple-800/20 p-8 rounded-xl border border-purple-500/30 hover:border-purple-500 transition-all group"
+              >
+                <div className="text-5xl mb-4">📞</div>
+                <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-purple-400 transition-colors">
+                  Schedule Consultation
+                </h3>
+                <p className="text-gray-300 mb-4">
+                  Free 30-minute consultation with RV technology experts. Virtual or in-person available.
+                </p>
+                <div className="text-purple-400 font-semibold flex items-center gap-2">
+                  Contact Us
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                  </svg>
+                </div>
+              </motion.a>
+            </div>
+          </div>
+        </div>
+
         {/* Critical above-the-fold content loads immediately */}
         <FeaturesSection />
         
