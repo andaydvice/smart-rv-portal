@@ -6,10 +6,29 @@ import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliat
 import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
 import { FeatureNavigationLinks } from "@/components/navigation/FeatureNavigationLinks";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
+import { Helmet } from "react-helmet-async";
+import { productSchema } from "@/components/seo/schemas";
 
 const NavigationSystem = () => {
+  const canonicalUrl = typeof window !== 'undefined' ? `${window.location.origin}/features/navigation-system` : '';
   return (
     <Layout>
+      <Helmet>
+        <title>Smart Navigation for RVs | GPS & Route Planning</title>
+        <meta name="description" content="RV specific navigation system with GPS routing, height and weight restrictions, real time traffic, weather integration, and campground database for safe and efficient travel." />
+        <link rel="canonical" href={canonicalUrl} />
+        <script type="application/ld+json">{JSON.stringify(productSchema({
+          name: 'Smart RV Navigation System',
+          description: 'Advanced GPS navigation designed specifically for RVs with route planning that accounts for vehicle dimensions, real time traffic and weather updates, and integrated campground information.',
+          url: canonicalUrl,
+          brand: 'Smart RV Hub',
+          category: 'Smart RV Navigation',
+          offers: {
+            url: typeof window !== 'undefined' ? `${window.location.origin}/pricing` : '',
+            availability: 'InStock'
+          }
+        }))}</script>
+      </Helmet>
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

@@ -9,10 +9,29 @@ import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
 import { FeatureNavigationLinks } from "@/components/navigation/FeatureNavigationLinks";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
+import { productSchema } from "@/components/seo/schemas";
 
 const InternetConnectivity = () => {
+  const canonicalUrl = typeof window !== 'undefined' ? `${window.location.origin}/features/internet-connectivity` : '';
   return (
     <Layout>
+      <Helmet>
+        <title>Internet Connectivity for RVs | Stay Connected Anywhere</title>
+        <meta name="description" content="Advanced internet connectivity for RVs with cellular boosters, WiFi extenders, satellite internet, and multi network bonding for reliable connectivity anywhere you travel." />
+        <link rel="canonical" href={canonicalUrl} />
+        <script type="application/ld+json">{JSON.stringify(productSchema({
+          name: 'Smart RV Internet Connectivity System',
+          description: 'Comprehensive internet solution for RVs featuring cellular signal boosters, WiFi range extenders, satellite internet integration, and intelligent multi source connectivity management.',
+          url: canonicalUrl,
+          brand: 'Smart RV Hub',
+          category: 'Smart RV Connectivity',
+          offers: {
+            url: typeof window !== 'undefined' ? `${window.location.origin}/pricing` : '',
+            availability: 'InStock'
+          }
+        }))}</script>
+      </Helmet>
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

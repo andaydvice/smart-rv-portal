@@ -9,8 +9,11 @@ import { VideoSection } from "@/components/ui/VideoSection";
 import { PreloadedHeaderImage } from "@/components/ui/PreloadedHeaderImage";
 import { FeatureNavigationLinks } from "@/components/navigation/FeatureNavigationLinks";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
+import { Helmet } from "react-helmet-async";
+import { productSchema } from "@/components/seo/schemas";
 
 const Entertainment = () => {
+  const canonicalUrl = typeof window !== 'undefined' ? `${window.location.origin}/features/entertainment` : '';
   useEffect(() => {
     // Scroll to top when component mounts
     window.scrollTo(0, 0);
@@ -18,6 +21,22 @@ const Entertainment = () => {
 
   return (
     <Layout>
+      <Helmet>
+        <title>RV Entertainment System | Smart Audio & Video</title>
+        <meta name="description" content="Complete entertainment solution for RVs with smart TV, premium audio, streaming services, gaming integration, and multi zone control for the ultimate mobile entertainment experience." />
+        <link rel="canonical" href={canonicalUrl} />
+        <script type="application/ld+json">{JSON.stringify(productSchema({
+          name: 'Smart RV Entertainment System',
+          description: 'Comprehensive entertainment platform for RVs featuring smart TVs, premium sound systems, streaming integration, gaming capabilities, and intelligent multi zone audio and video distribution.',
+          url: canonicalUrl,
+          brand: 'Smart RV Hub',
+          category: 'Smart RV Entertainment',
+          offers: {
+            url: typeof window !== 'undefined' ? `${window.location.origin}/pricing` : '',
+            availability: 'InStock'
+          }
+        }))}</script>
+      </Helmet>
       {/* Hero Section with Header Image */}
       <section className="relative min-h-[80vh] flex items-center justify-center overflow-hidden">
         <div 

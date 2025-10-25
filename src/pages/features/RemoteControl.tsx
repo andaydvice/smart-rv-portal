@@ -16,8 +16,11 @@ import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliat
 import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
 import { FeatureNavigationLinks } from "@/components/navigation/FeatureNavigationLinks";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
+import { Helmet } from "react-helmet-async";
+import { productSchema } from "@/components/seo/schemas";
 
 const RemoteControl = () => {
+  const canonicalUrl = typeof window !== 'undefined' ? `${window.location.origin}/features/remote-control` : '';
   useEffect(() => {
     // Force scroll to top when component mounts
     window.scrollTo(0, 0);
@@ -47,6 +50,22 @@ const RemoteControl = () => {
 
   return (
     <Layout>
+      <Helmet>
+        <title>Remote Control for RVs | Mobile App Management</title>
+        <meta name="description" content="Control your entire RV remotely with smartphone app integration, voice commands, automated routines, and real time monitoring from anywhere with internet access." />
+        <link rel="canonical" href={canonicalUrl} />
+        <script type="application/ld+json">{JSON.stringify(productSchema({
+          name: 'Smart RV Remote Control System',
+          description: 'Complete remote management solution for RVs with mobile app control, voice assistant integration, automated routines, and comprehensive remote monitoring capabilities.',
+          url: canonicalUrl,
+          brand: 'Smart RV Hub',
+          category: 'Smart RV Control',
+          offers: {
+            url: typeof window !== 'undefined' ? `${window.location.origin}/pricing` : '',
+            availability: 'InStock'
+          }
+        }))}</script>
+      </Helmet>
       {/* Hero Section */}
       <RemoteControlHero />
 

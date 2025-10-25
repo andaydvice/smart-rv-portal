@@ -8,8 +8,11 @@ import { VideoSection } from "@/components/ui/VideoSection";
 import { PreloadedHeaderImage } from "@/components/ui/PreloadedHeaderImage";
 import { FeatureNavigationLinks } from "@/components/navigation/FeatureNavigationLinks";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
+import { Helmet } from "react-helmet-async";
+import { productSchema } from "@/components/seo/schemas";
 
 const WaterSystems = () => {
+  const canonicalUrl = typeof window !== 'undefined' ? `${window.location.origin}/features/water-systems` : '';
   useEffect(() => {
     // Scroll to top when component mounts
     window.scrollTo(0, 0);
@@ -17,6 +20,22 @@ const WaterSystems = () => {
 
   return (
     <Layout>
+      <Helmet>
+        <title>Smart Water Systems for RVs | Monitoring & Filtration</title>
+        <meta name="description" content="Intelligent water management for RVs with real time tank monitoring, advanced filtration, leak detection, pressure regulation, and conservation analytics." />
+        <link rel="canonical" href={canonicalUrl} />
+        <script type="application/ld+json">{JSON.stringify(productSchema({
+          name: 'Smart RV Water Management System',
+          description: 'Advanced water system for RVs with precise tank level monitoring, multi stage filtration, automatic leak detection, pressure management, and intelligent water conservation features.',
+          url: canonicalUrl,
+          brand: 'Smart RV Hub',
+          category: 'Smart RV Water',
+          offers: {
+            url: typeof window !== 'undefined' ? `${window.location.origin}/pricing` : '',
+            availability: 'InStock'
+          }
+        }))}</script>
+      </Helmet>
       <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

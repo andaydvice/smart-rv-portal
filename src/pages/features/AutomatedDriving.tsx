@@ -10,10 +10,29 @@ import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
 import { VideoSection } from "@/components/ui/VideoSection";
 import { FeatureNavigationLinks } from "@/components/navigation/FeatureNavigationLinks";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
+import { Helmet } from "react-helmet-async";
+import { productSchema } from "@/components/seo/schemas";
 
 const AutomatedDriving = () => {
+  const canonicalUrl = typeof window !== 'undefined' ? `${window.location.origin}/features/automated-driving` : '';
   return (
     <Layout>
+      <Helmet>
+        <title>Automated Driving for RVs | Advanced Driver Assistance</title>
+        <meta name="description" content="Advanced driver assistance systems for RVs with adaptive cruise control, lane keeping, collision avoidance, blind spot monitoring, and automated parking for safer travel." />
+        <link rel="canonical" href={canonicalUrl} />
+        <script type="application/ld+json">{JSON.stringify(productSchema({
+          name: 'Smart RV Driver Assistance System',
+          description: 'Comprehensive ADAS for RVs featuring adaptive cruise control, lane keeping assistance, collision avoidance, 360 degree cameras, blind spot detection, and automated parking capabilities.',
+          url: canonicalUrl,
+          brand: 'Smart RV Hub',
+          category: 'Smart RV Safety',
+          offers: {
+            url: typeof window !== 'undefined' ? `${window.location.origin}/pricing` : '',
+            availability: 'InStock'
+          }
+        }))}</script>
+      </Helmet>
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

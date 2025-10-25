@@ -9,8 +9,11 @@ import { PreloadedHeaderImage } from "@/components/ui/PreloadedHeaderImage";
 import { FeatureNavigationLinks } from "@/components/navigation/FeatureNavigationLinks";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
+import { productSchema } from "@/components/seo/schemas";
 
 const SmartAutomation = () => {
+  const canonicalUrl = typeof window !== 'undefined' ? `${window.location.origin}/features/smart-automation` : '';
   useEffect(() => {
     // Scroll to top when component mounts
     window.scrollTo(0, 0);
@@ -18,6 +21,22 @@ const SmartAutomation = () => {
 
   return (
     <Layout>
+      <Helmet>
+        <title>Smart Automation for RVs | Intelligent Control</title>
+        <meta name="description" content="Complete home automation for RVs with intelligent routines, voice control, sensor based automation, and seamless integration of all smart systems for effortless living." />
+        <link rel="canonical" href={canonicalUrl} />
+        <script type="application/ld+json">{JSON.stringify(productSchema({
+          name: 'Smart RV Automation Platform',
+          description: 'Comprehensive automation system for RVs featuring intelligent routines, voice assistant integration, sensor based automation, and unified control of all smart RV systems.',
+          url: canonicalUrl,
+          brand: 'Smart RV Hub',
+          category: 'Smart RV Automation',
+          offers: {
+            url: typeof window !== 'undefined' ? `${window.location.origin}/pricing` : '',
+            availability: 'InStock'
+          }
+        }))}</script>
+      </Helmet>
       <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
