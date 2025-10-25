@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { ArrowLeft, ArrowRight, DollarSign, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 interface RelatedFeature {
@@ -27,6 +27,28 @@ export const FeatureNavigationLinks = ({ relatedFeatures, className = "" }: Feat
             Back to Features Hub
           </Button>
         </Link>
+      </div>
+
+      {/* Call-to-Action Section */}
+      <div className="mb-8 p-6 bg-gradient-to-r from-blue-600/20 to-purple-600/20 rounded-lg border border-blue-500/30">
+        <h3 className="text-xl font-semibold text-white mb-3">Ready to Upgrade Your RV?</h3>
+        <p className="text-gray-300 mb-4">
+          Explore our technology packages and get personalized pricing for your smart RV upgrade.
+        </p>
+        <div className="flex flex-col sm:flex-row gap-3">
+          <Link to="/pricing">
+            <Button className="bg-blue-600 hover:bg-blue-700 text-white">
+              <DollarSign className="w-4 h-4 mr-2" />
+              View Pricing & Packages
+            </Button>
+          </Link>
+          <Link to="/contact">
+            <Button variant="outline" className="border-blue-500 text-blue-400 hover:bg-blue-500/20">
+              <Phone className="w-4 h-4 mr-2" />
+              Schedule Consultation
+            </Button>
+          </Link>
+        </div>
       </div>
 
       {/* Related Features */}
