@@ -46,7 +46,7 @@ const SmartAutomation = () => {
         {/* Hero Image Section */}
         <div className="relative w-full h-[400px] md:h-[600px] mb-12 overflow-hidden rounded-lg">
           <img
-            src="/lovable-uploads/smart-automation-hero.jpg?v=1"
+            src="/lovable-uploads/smart-automation-hero.webp?v=1"
             alt="Smart RV interior with automated lighting, smart displays, and modern automation technology"
             className="absolute inset-0 w-full h-full object-cover"
             loading="eager"

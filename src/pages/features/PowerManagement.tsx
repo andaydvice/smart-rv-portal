@@ -35,7 +35,7 @@ const PowerManagement = () => {
         <script type="application/ld+json">{JSON.stringify(productSchema({
           name: 'Smart RV Power Management System',
           description: 'Advanced power management solution for RVs with solar integration, battery monitoring, and intelligent energy distribution for extended off grid capabilities.',
-          image: typeof window !== 'undefined' ? `${window.location.origin}/lovable-uploads/power-management-header.jpg` : '',
+          image: typeof window !== 'undefined' ? `${window.location.origin}/lovable-uploads/power-management-header.webp` : '',
           url: canonicalUrl,
           brand: 'Smart RV Hub',
           category: 'Smart RV Technology',
@@ -53,7 +53,7 @@ const PowerManagement = () => {
       {/* Hero Image Section */}
       <div className="relative w-full h-[600px] md:h-[80vh] max-h-[800px] overflow-hidden">
         <img
-          src="/lovable-uploads/power-management-header.jpg?v=3"
+          src="/lovable-uploads/power-management-header.webp?v=3"
           alt="Modern RV interior with advanced power management dashboard showing battery levels, solar input, and electrical distribution controls"
           className="absolute inset-0 w-full h-full object-cover"
           loading="eager"
@@ -204,7 +204,7 @@ const PowerManagement = () => {
           {/* Professional Installation Image */}
           <div className="mt-12 mb-8">
             <img 
-              src="/lovable-uploads/professional-power-installation.jpg?v=1"
+              src="/lovable-uploads/professional-power-installation.webp?v=1"
               alt="Professional technician installing RV power management system with solar panels and battery monitoring equipment"
               className="w-full h-64 md:h-80 object-cover rounded-lg"
               loading="lazy"
