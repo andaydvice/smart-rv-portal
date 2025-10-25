@@ -1,6 +1,6 @@
 import React from 'react';
 import { PreloadedHeaderImage } from '@/components/ui/PreloadedHeaderImage';
-import rvConnectivityImage from '@/assets/rv-connectivity-technology-hero.jpg';
+import rvConnectivityImage from '@/assets/rv-connectivity-technology-hero.webp';
 
 const RVConnectivityHero = () => {
   return (

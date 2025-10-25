@@ -7,7 +7,7 @@ const HeaderImage: React.FC = () => {
     <div className="relative w-full h-64 md:h-80 mb-8">
       <div className="absolute inset-0 bg-gradient-to-b from-transparent to-background z-10" />
       <LazyImage
-        src="/lovable-uploads/Luxury_RV_Living-min.jpg"
+        src="/lovable-uploads/Luxury_RV_Living-min.webp"
         alt="Smart RV in scenic location"
         className="w-full h-full object-cover"
       />

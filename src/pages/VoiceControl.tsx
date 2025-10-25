@@ -31,7 +31,7 @@ const VoiceControl = () => {
           <div className="w-full py-16 bg-[#1A1F2E33]">
             <div className="max-w-6xl mx-auto px-4">
               <img 
-                src="/lovable-uploads/ab7d2423-0ab6-4868-83b1-c84f220e5736.png"
+                src="/lovable-uploads/ab7d2423-0ab6-4868-83b1-c84f220e5736.webp"
                 alt="Smart RV voice control system visualization showing various connected features"
                 className="w-full h-auto rounded-lg shadow-lg"
               />
@@ -45,7 +45,7 @@ const VoiceControl = () => {
             {/* MODIFIED: Replaced content with an image */}
             <section className="py-16">
               <img
-                src="/lovable-uploads/35c8b551-66ab-42cc-ac02-3fe09d805dd5.png"
+                src="/lovable-uploads/35c8b551-66ab-42cc-ac02-3fe09d805dd5.webp"
                 alt="Comfortable RV interior with passengers enjoying the smart features"
                 className="w-full max-w-5xl mx-auto h-auto rounded-lg shadow-lg"
               />

@@ -86,13 +86,13 @@ class SmartPreloader {
     if (isHomepage || isLikelyToVisitHomepage) {
       const homepageAssets = [
         // Hero section background images
-        '/lovable-uploads/f3ebf58c-7bbf-427f-9510-9c3b0aec6f6d.png',
+        '/lovable-uploads/f3ebf58c-7bbf-427f-9510-9c3b0aec6f6d.webp',
         // Features section backgrounds
-        '/lovable-uploads/03ccf137-16cb-41a0-bfb5-2179fe20eb79.png',
+        '/lovable-uploads/03ccf137-16cb-41a0-bfb5-2179fe20eb79.webp',
         // Technology section backgrounds
-        '/lovable-uploads/0a22c848-dff2-43f4-b1eb-800fa123a904.png',
+        '/lovable-uploads/0a22c848-dff2-43f4-b1eb-800fa123a904.webp',
         // Sustainability section background
-        '/lovable-uploads/b6a46bec-1ca8-4f7b-89fa-37bb5415d9fa.png',
+        '/lovable-uploads/b6a46bec-1ca8-4f7b-89fa-37bb5415d9fa.webp',
       ];
 
       homepageAssets.forEach(asset => {

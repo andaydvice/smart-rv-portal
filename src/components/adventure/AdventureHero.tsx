@@ -29,7 +29,7 @@ const AdventureHero = () => {
       }}
     >
       <img 
-        src="/lovable-uploads/ae14102b-cf2e-443b-a722-7fe364e92e36.png"
+        src="/lovable-uploads/ae14102b-cf2e-443b-a722-7fe364e92e36.webp"
         alt="Line up of luxury adventure Smart RVs"
         className="w-full h-full object-cover"
       />

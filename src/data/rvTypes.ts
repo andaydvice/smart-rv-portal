@@ -28,7 +28,7 @@ export const rvTypes: RVType[] = [
   {
     title: "Class C Motorhomes (Mini Motorhomes)",
     icon: Home,
-    image: "/lovable-uploads/ad2ac002-7ec7-479f-b437-6bdaced7fc5e.png",
+    image: "/lovable-uploads/ad2ac002-7ec7-479f-b437-6bdaced7fc5e.webp",
     size: "20-26 feet long",
     features: "Built on a truck chassis with over-cab sleeping area, kitchenette, and bathroom",
     pros: "Compact enough for most parking spaces but more spacious than Class B",
@@ -40,7 +40,7 @@ export const rvTypes: RVType[] = [
   {
     title: "Teardrop Trailers",
     icon: Car,
-    image: "/lovable-uploads/989028bc-89ec-4ec4-841d-e38421cc7626.png",
+    image: "/lovable-uploads/989028bc-89ec-4ec4-841d-e38421cc7626.webp",
     size: "8-15 feet long",
     features: "Lightweight and towable by small vehicles, with sleeping area and basic kitchen",
     pros: "Affordable, easy to tow, and perfect for minimalist campers",
@@ -52,7 +52,7 @@ export const rvTypes: RVType[] = [
   {
     title: "Compact Travel Trailers",
     icon: Car,
-    image: "/lovable-uploads/46dcd85e-d26f-4d08-afc1-5f5818266116.png",
+    image: "/lovable-uploads/46dcd85e-d26f-4d08-afc1-5f5818266116.webp",
     size: "Typically under 20 feet long",
     features: "Include more amenities than teardrop trailers, such as a kitchen, bathroom, and dining area",
     pros: "Still lightweight and easy to tow",
@@ -78,7 +78,7 @@ export const rvTypes: RVType[] = [
   {
     title: "Pop Up Campers",
     icon: Tent,
-    image: "/lovable-uploads/e8141652-de4b-49aa-b99c-ad70b8523e3f.png",
+    image: "/lovable-uploads/e8141652-de4b-49aa-b99c-ad70b8523e3f.webp",
     size: "Collapsible, often 8-16 feet when folded",
     features: "Expandable canvas sides, sleeping areas, and basic kitchen amenities",
     pros: "Easy to store and tow; affordable",

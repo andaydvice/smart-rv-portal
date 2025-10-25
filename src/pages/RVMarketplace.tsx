@@ -144,7 +144,7 @@ const RVMarketplace = () => {
         <section 
           className="relative w-full h-[70vh] m-0 p-0 flex items-center justify-center"
           style={{
-            backgroundImage: "url('/assets/rv-hero-image.jpg')",
+            backgroundImage: "url('/assets/rv-hero-image.webp')",
             backgroundSize: 'cover',
             backgroundPosition: 'center center',
             backgroundRepeat: 'no-repeat',

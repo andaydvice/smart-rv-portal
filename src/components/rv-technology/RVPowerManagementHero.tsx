@@ -1,6 +1,6 @@
 import React from 'react';
 import { PreloadedHeaderImage } from '@/components/ui/PreloadedHeaderImage';
-import rvPowerImage from '@/assets/rv-power-management-hero.jpg';
+import rvPowerImage from '@/assets/rv-power-management-hero.webp';
 
 const RVPowerManagementHero = () => {
   return (

@@ -14,7 +14,7 @@ const MonitoringSection = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
         <div className="relative overflow-hidden rounded-lg shadow-xl w-full">
           <img 
-            src="/lovable-uploads/846b5be5-043e-4645-a3d9-39614d63342c.png"
+            src="/lovable-uploads/846b5be5-043e-4645-a3d9-39614d63342c.webp"
             alt="Smart RV weather radar on computer"
             className="w-full h-full object-cover"
           />

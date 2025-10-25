@@ -112,7 +112,7 @@ const Contact = () => {
       >
         <div className="absolute inset-0 z-0">
           <img
-            src="/lovable-uploads/7d42772e-e96c-45cd-9a40-5e59be1c0a60.png"
+            src="/lovable-uploads/7d42772e-e96c-45cd-9a40-5e59be1c0a60.webp"
             alt="Luxury Smart RV in mountain landscape"
             className="w-full h-full object-cover filter brightness-75"
           />

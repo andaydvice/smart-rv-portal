@@ -160,7 +160,7 @@ function generateBotHTML(path: string, url: URL): string {
     <meta property="og:url" content="${baseUrl}${path}" />
     <meta property="og:title" content="${pageData.title}" />
     <meta property="og:description" content="${pageData.description}" />
-    <meta property="og:image" content="${baseUrl}/lovable-uploads/f3ebf58c-7bbf-427f-9510-9c3b0aec6f6d.png" />
+    <meta property="og:image" content="${baseUrl}/lovable-uploads/f3ebf58c-7bbf-427f-9510-9c3b0aec6f6d.webp" />
     <meta property="og:site_name" content="Smart RV Systems" />
     
      <!-- Security headers for bot responses -->
@@ -173,7 +173,7 @@ function generateBotHTML(path: string, url: URL): string {
      <meta name="twitter:card" content="summary_large_image" />
      <meta name="twitter:title" content="${pageData.title}" />
      <meta name="twitter:description" content="${pageData.description}" />
-     <meta name="twitter:image" content="${baseUrl}/lovable-uploads/f3ebf58c-7bbf-427f-9510-9c3b0aec6f6d.png" />
+     <meta name="twitter:image" content="${baseUrl}/lovable-uploads/f3ebf58c-7bbf-427f-9510-9c3b0aec6f6d.webp" />
     
     <!-- Structured Data -->
     <script type="application/ld+json">
@@ -183,7 +183,7 @@ function generateBotHTML(path: string, url: URL): string {
       "name": "Smart RV Systems",
       "description": "Next-generation connectivity and control for your RV",
       "url": "${baseUrl}",
-      "logo": "${baseUrl}/lovable-uploads/f3ebf58c-7bbf-427f-9510-9c3b0aec6f6d.png"
+      "logo": "${baseUrl}/lovable-uploads/f3ebf58c-7bbf-427f-9510-9c3b0aec6f6d.webp"
     }
     </script>
     

@@ -74,7 +74,7 @@ const Technology = () => {
         <div className="w-full py-10">
           <div className="w-full overflow-hidden mb-12 flex justify-center">
             <img
-              src="/lovable-uploads/9ad50274-5f5b-47fa-8278-32599d734b3e.png"
+              src="/lovable-uploads/9ad50274-5f5b-47fa-8278-32599d734b3e.webp"
               alt="Technology Main Header"
               className="w-full max-w-[1600px]"
               width="1600"
@@ -112,7 +112,7 @@ const Technology = () => {
           {/* CTA section */}
           <div className="relative rounded-2xl overflow-hidden mb-12">
             <img
-              src="/lovable-uploads/db5f9104-32a0-458f-a2ca-5ecb38415ec9.png"
+              src="/lovable-uploads/db5f9104-32a0-458f-a2ca-5ecb38415ec9.webp"
               alt="Technology Overview"
               className="w-full h-96 object-cover"
               width="1200"

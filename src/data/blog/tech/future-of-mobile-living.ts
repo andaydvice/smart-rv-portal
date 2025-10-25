@@ -7,7 +7,7 @@ export const futureOfMobileLiving = {
   },
   title: 'The Future of Mobile Living',
   description: 'How smart technology is redefining convenience, safety, and connectivity for life on the road.',
-  image: '/lovable-uploads/80ea47f5-5b04-409f-8eb7-1da434a9e0de.png',
+  image: '/lovable-uploads/80ea47f5-5b04-409f-8eb7-1da434a9e0de.webp',
   slug: 'future-of-mobile-living',
   content: `The concept of mobile living is undergoing a radical transformation, driven by the rapid integration of smart technology into recreational vehicles. No longer just a means for a rustic getaway, modern RVs are evolving into intelligent, connected homes on wheels that offer a level of comfort and convenience previously unimaginable. This shift is not just changing how we travel; it's redefining the very essence of life on the road.
 

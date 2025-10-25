@@ -7,7 +7,7 @@ export const smartRvSecuritySystems = {
   },
   title: 'Smart RV Security Systems: Peace of Mind on the Road',
   description: 'Explore the latest advancements in RV security to protect your mobile home.',
-  image: '/lovable-uploads/24586e9a-422f-45ee-aaaa-2ffa5f0e2274.png',
+  image: '/lovable-uploads/24586e9a-422f-45ee-aaaa-2ffa5f0e2274.webp',
   slug: 'smart-rv-security-systems',
   content: `Protecting your RV investment requires a comprehensive security approach that addresses both traditional threats and modern challenges.
 

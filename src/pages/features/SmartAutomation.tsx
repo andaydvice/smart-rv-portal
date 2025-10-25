@@ -142,7 +142,7 @@ const SmartAutomation = () => {
           {/* Smart Automation Image */}
           <div className="mb-12 relative">
             <PreloadedHeaderImage
-              src="/smart-automation-hero.jpeg"
+              src="/smart-automation-hero.webp"
               alt="Futuristic RV control center with blue LED lighting, multiple screens displaying automation systems, and advanced monitoring interfaces"
               className="w-full h-[400px] md:h-[500px] object-cover rounded-lg"
               width={1920}

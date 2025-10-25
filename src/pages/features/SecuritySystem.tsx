@@ -58,7 +58,7 @@ const SecuritySystem = () => {
         <div className="relative w-full h-screen">
           <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-gray-900 z-10" />
           <img 
-            src="/security-system-hero.jpg"
+            src="/security-system-hero.webp"
             alt="RV security command center with multiple monitoring displays and control panels" 
             className="w-full h-full object-cover"
           />
@@ -103,7 +103,7 @@ const SecuritySystem = () => {
                 </p>
               </div>
               <img 
-                src="/lovable-uploads/24586e9a-422f-45ee-aaaa-2ffa5f0e2274.png"
+                src="/lovable-uploads/24586e9a-422f-45ee-aaaa-2ffa5f0e2274.webp"
                 alt="RV security system interface with cameras and smart locks" 
                 className="w-full h-64 object-cover rounded-lg mb-6"
                 loading="lazy"
@@ -245,7 +245,7 @@ const SecuritySystem = () => {
           <div className="relative w-full h-96 md:h-[500px] mb-12 mt-16">
             <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-gray-900 z-10" />
             <img 
-              src="/pricing-header.jpg"
+              src="/pricing-header.webp"
               alt="Modern RV in showroom displaying current USA pricing for 2025" 
               className="w-full h-full object-cover"
               loading="lazy"

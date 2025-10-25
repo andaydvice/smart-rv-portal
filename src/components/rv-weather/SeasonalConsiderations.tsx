@@ -13,7 +13,7 @@ const SeasonalConsiderations = () => {
         </div>
         
         <img 
-          src="/lovable-uploads/ae930cf7-205f-41d3-9c9b-a4969e5c35e6.png" 
+          src="/lovable-uploads/ae930cf7-205f-41d3-9c9b-a4969e5c35e6.webp" 
           alt="Smart RV parked at a summer campsite" 
           className="w-full h-52 object-cover rounded-lg mb-4"
           loading="eager"
@@ -49,7 +49,7 @@ const SeasonalConsiderations = () => {
         </div>
         
         <img 
-          src="/lovable-uploads/dee06c09-15b9-404e-a583-836e4a06d9d1.png" 
+          src="/lovable-uploads/dee06c09-15b9-404e-a583-836e4a06d9d1.webp" 
           alt="Smart RVs parked at sunset with dramatic winter sky" 
           className="w-full h-52 object-cover rounded-lg mb-4"
           loading="eager"
@@ -85,7 +85,7 @@ const SeasonalConsiderations = () => {
         </div>
         
         <img 
-          src="/lovable-uploads/3175b015-a5c7-4df7-b8ca-b8a130b05519.png" 
+          src="/lovable-uploads/3175b015-a5c7-4df7-b8ca-b8a130b05519.webp" 
           alt="Smart RV parked among fall foliage" 
           className="w-full h-52 object-cover rounded-lg mb-4"
           loading="eager"
@@ -121,7 +121,7 @@ const SeasonalConsiderations = () => {
         </div>
         
         <img 
-          src="/lovable-uploads/989028bc-89ec-4ec4-841d-e38421cc7626.png" 
+          src="/lovable-uploads/989028bc-89ec-4ec4-841d-e38421cc7626.webp" 
           alt="Smart RV in spring scenery with blooming flowers" 
           className="w-full h-52 object-cover rounded-lg mb-4"
           loading="eager"

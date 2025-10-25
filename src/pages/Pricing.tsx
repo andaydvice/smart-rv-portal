@@ -8,7 +8,7 @@ import { scrollToTop } from "@/utils/scrollToTop";
 import { Helmet } from "react-helmet-async";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { faqSchema } from "@/components/seo/schemas";
-import smartRvPricingHero from '@/assets/smart-rv-pricing-hero.jpg';
+import smartRvPricingHero from '@/assets/smart-rv-pricing-hero.webp';
 
 const Pricing = () => {
   useEffect(() => {

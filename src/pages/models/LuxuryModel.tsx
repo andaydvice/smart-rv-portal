@@ -42,7 +42,7 @@ const LuxuryModel = () => {
             <ModelCategory {...category} /> 
             <div className="relative w-full h-[500px] rounded-xl overflow-hidden bg-gray-900 my-8">
               <img 
-                src="/lovable-uploads/Luxury-Class-RVs-min.jpg"
+                src="/lovable-uploads/Luxury-Class-RVs-min.webp"
                 alt="Luxury RV with outdoor lounge setup at sunset Test"
                 className="w-full h-full object-cover"
                 loading="lazy"
@@ -58,7 +58,7 @@ const LuxuryModel = () => {
             <ModelCategory {...category} />
             <div className="relative w-full h-[500px] rounded-xl overflow-hidden bg-gray-900 my-8">
               <img 
-                src="/lovable-uploads/5f18c537-149c-494e-9adf-6a1c096e3e3a.png"
+                src="/lovable-uploads/5f18c537-149c-494e-9adf-6a1c096e3e3a.webp"
                 alt="Luxury RV with outdoor setup by the lake at sunset"
                 className="w-full h-full object-cover"
                 loading="lazy"
@@ -74,7 +74,7 @@ const LuxuryModel = () => {
             <ModelCategory {...category} />
             <div className="relative w-full h-[500px] rounded-xl overflow-hidden bg-gray-900 my-8">
               <img 
-                src="/lovable-uploads/Luxury_RV_Living-min.jpg"
+                src="/lovable-uploads/Luxury_RV_Living-min.webp"
                 alt="Luxury RV with outdoor setup by the lake at sunset"
                 className="w-full h-full object-cover"
                 loading="lazy"
@@ -90,7 +90,7 @@ const LuxuryModel = () => {
             <ModelCategory {...category} />
             <div className="relative w-full h-[500px] rounded-xl overflow-hidden bg-gray-900 my-8">
               <img 
-                src="/lovable-uploads/Premium-Travel-Trailers-min.jpg"
+                src="/lovable-uploads/Premium-Travel-Trailers-min.webp"
                 alt="Luxury RV with outdoor setup by the lake at sunset"
                 className="w-full h-full object-cover"
                 loading="lazy"
@@ -138,7 +138,7 @@ const LuxuryModel = () => {
 
               <div className="relative w-full h-[500px] rounded-xl overflow-hidden bg-gray-900 mb-8">
                 <img 
-                  src="/lovable-uploads/795a8cdd-cf65-487f-b550-4e4458d0aa9e.png"
+                  src="/lovable-uploads/795a8cdd-cf65-487f-b550-4e4458d0aa9e.webp"
                   alt="Luxury RV with slide-out overlooking coastal sunset"
                   className="w-full h-full object-cover"
                   loading="lazy"

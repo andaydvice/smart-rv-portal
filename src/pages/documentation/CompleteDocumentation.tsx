@@ -19,7 +19,7 @@ import { Helmet } from "react-helmet-async";
 const CompleteDocumentation = () => {
   // Preload critical image with multiple methods for guaranteed immediate loading
   useEffect(() => {
-    const imageSrc = '/lovable-uploads/846b5be5-043e-4645-a3d9-39614d63342c.png';
+    const imageSrc = '/lovable-uploads/846b5be5-043e-4645-a3d9-39614d63342c.webp';
     
     // Method 1: Create high priority preload link
     const link = document.createElement('link');
@@ -72,7 +72,7 @@ const CompleteDocumentation = () => {
 
             <div className="relative w-full max-w-5xl mx-auto h-[400px] rounded-xl overflow-hidden mb-12 border border-gray-700">
               <LazyImage
-                src="/lovable-uploads/846b5be5-043e-4645-a3d9-39614d63342c.png"
+                src="/lovable-uploads/846b5be5-043e-4645-a3d9-39614d63342c.webp"
                 alt="Smart RV Complete System Documentation"
                 className="w-full h-full object-cover"
                 blurDataURL={generateImagePlaceholder(800, 400)}

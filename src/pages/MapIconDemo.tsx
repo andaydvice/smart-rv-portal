@@ -12,11 +12,11 @@ const demoIcons = [
   {
     id: 'rv-storage',
     icon: {
-      src: '/lovable-uploads/5ad3c360-419f-4662-8c19-3d5a3cffe23f.png',
+      src: '/lovable-uploads/5ad3c360-419f-4662-8c19-3d5a3cffe23f.webp',
       alt: 'RV Storage'
     },
     marker: {
-      src: '/lovable-uploads/c25a3800-323e-4e21-9402-72b27002e767.png',
+      src: '/lovable-uploads/c25a3800-323e-4e21-9402-72b27002e767.webp',
       alt: 'Location Pin'
     },
     details: 'RV Storage Facility'
@@ -24,11 +24,11 @@ const demoIcons = [
   {
     id: 'campground',
     icon: {
-      src: '/lovable-uploads/1c1bb4c0-13a3-42f8-9b4d-f0aa74e2adb3.png',
+      src: '/lovable-uploads/1c1bb4c0-13a3-42f8-9b4d-f0aa74e2adb3.webp',
       alt: 'Campground'
     },
     marker: {
-      src: '/lovable-uploads/c25a3800-323e-4e21-9402-72b27002e767.png',
+      src: '/lovable-uploads/c25a3800-323e-4e21-9402-72b27002e767.webp',
       alt: 'Location Pin'
     },
     details: 'Campground'
@@ -36,11 +36,11 @@ const demoIcons = [
   {
     id: 'service-center',
     icon: {
-      src: '/lovable-uploads/3175b015-a5c7-4df7-b8ca-b8a130b05519.png',
+      src: '/lovable-uploads/3175b015-a5c7-4df7-b8ca-b8a130b05519.webp',
       alt: 'Service Center'
     },
     marker: {
-      src: '/lovable-uploads/c25a3800-323e-4e21-9402-72b27002e767.png',
+      src: '/lovable-uploads/c25a3800-323e-4e21-9402-72b27002e767.webp',
       alt: 'Location Pin'
     },
     details: 'RV Service Center'
@@ -54,11 +54,11 @@ const mapLocations = [
     coordinates: [-122.4194, 37.7749] as [number, number], // San Francisco - explicitly typed as tuple
     details: 'San Francisco RV Storage',
     icon: {
-      src: '/lovable-uploads/5ad3c360-419f-4662-8c19-3d5a3cffe23f.png',
+      src: '/lovable-uploads/5ad3c360-419f-4662-8c19-3d5a3cffe23f.webp',
       alt: 'RV Storage'
     },
     marker: {
-      src: '/lovable-uploads/c25a3800-323e-4e21-9402-72b27002e767.png',
+      src: '/lovable-uploads/c25a3800-323e-4e21-9402-72b27002e767.webp',
       alt: 'Location Pin'
     }
   },
@@ -67,11 +67,11 @@ const mapLocations = [
     coordinates: [-118.2437, 34.0522] as [number, number], // Los Angeles - explicitly typed as tuple
     details: 'Los Angeles Campground',
     icon: {
-      src: '/lovable-uploads/1c1bb4c0-13a3-42f8-9b4d-f0aa74e2adb3.png',
+      src: '/lovable-uploads/1c1bb4c0-13a3-42f8-9b4d-f0aa74e2adb3.webp',
       alt: 'Campground'
     },
     marker: {
-      src: '/lovable-uploads/c25a3800-323e-4e21-9402-72b27002e767.png',
+      src: '/lovable-uploads/c25a3800-323e-4e21-9402-72b27002e767.webp',
       alt: 'Location Pin'
     }
   },
@@ -80,11 +80,11 @@ const mapLocations = [
     coordinates: [-74.0060, 40.7128] as [number, number], // New York - explicitly typed as tuple
     details: 'NYC Service Center',
     icon: {
-      src: '/lovable-uploads/3175b015-a5c7-4df7-b8ca-b8a130b05519.png',
+      src: '/lovable-uploads/3175b015-a5c7-4df7-b8ca-b8a130b05519.webp',
       alt: 'Service Center'
     },
     marker: {
-      src: '/lovable-uploads/c25a3800-323e-4e21-9402-72b27002e767.png',
+      src: '/lovable-uploads/c25a3800-323e-4e21-9402-72b27002e767.webp',
       alt: 'Location Pin'
     }
   }

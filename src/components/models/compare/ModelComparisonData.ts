@@ -5,7 +5,7 @@ import { Car, Cpu, Battery, ShieldCheck, Wifi, Ruler, AreaChart, Zap } from "luc
 export const models = [
   {
     name: "Luxury Class",
-    image: "/lovable-uploads/Luxury-Class-RVs-min.jpg",
+    image: "/lovable-uploads/Luxury-Class-RVs-min.webp",
     price: "$1,300,000+",
     description: "Our flagship model with unparalleled luxury features and premium finishes for discerning travelers.",
     specs: {
@@ -31,7 +31,7 @@ export const models = [
   },
   {
     name: "Adventure Class",
-    image: "/lovable-uploads/2935caf5-f345-40a6-8676-0f20817c6d6e.png",
+    image: "/lovable-uploads/2935caf5-f345-40a6-8676-0f20817c6d6e.webp",
     price: "$550,000+",
     description: "Designed for explorers who want to venture off the beaten path without sacrificing technology.",
     specs: {
@@ -57,7 +57,7 @@ export const models = [
   },
   {
     name: "Compact Smart",
-    image: "/lovable-uploads/e6619d24-bebf-439f-96b0-6aca2fb69380.png",
+    image: "/lovable-uploads/e6619d24-bebf-439f-96b0-6aca2fb69380.webp",
     price: "$220,000+",
     description: "Perfect for weekend getaways with smart technology in an efficient, easy-to-maneuver package.",
     specs: {

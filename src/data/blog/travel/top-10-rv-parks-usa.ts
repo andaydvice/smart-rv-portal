@@ -7,7 +7,7 @@ export const top10RvParksUsa = {
   },
   title: 'Top 10 RV Parks in the USA',
   description: 'Discover America\'s premier RV destinations with luxury amenities and stunning locations.',
-  image: '/lovable-uploads/80ea47f5-5b04-409f-8eb7-1da434a9e0de.png',
+  image: '/lovable-uploads/80ea47f5-5b04-409f-8eb7-1da434a9e0de.webp',
   slug: 'top-10-rv-parks-in-the-usa',
   content: `America offers some of the world's most spectacular RV parks, combining natural beauty with modern amenities.
 

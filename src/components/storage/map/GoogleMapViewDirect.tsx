@@ -66,7 +66,7 @@ const GoogleMapViewDirect: React.FC<GoogleMapViewDirectProps> = ({
         map: map,
         title: facility.name,
         icon: {
-          url: 'https://maps.google.com/mapfiles/ms/icons/red-dot.png'
+          url: 'https://maps.google.com/mapfiles/ms/icons/red-dot.webp'
         }
       });
 

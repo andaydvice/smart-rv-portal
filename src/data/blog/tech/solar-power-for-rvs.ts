@@ -7,7 +7,7 @@ export const solarPowerForRvs = {
   },
   title: 'Solar Power Solutions for Full Time RVers',
   description: 'Complete guide to planning and installing a solar power system in your RV.',
-  image: '/lovable-uploads/51ac2438-08c7-47ee-b56d-876aa3bbdc80.png',
+  image: '/lovable-uploads/51ac2438-08c7-47ee-b56d-876aa3bbdc80.webp',
   slug: 'solar-power-for-rvs',
   content: `Harnessing the sun's power is a game changer for RVers, offering unparalleled freedom and self sufficiency on the road.
 

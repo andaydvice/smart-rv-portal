@@ -23,7 +23,7 @@ const SmartKitchen = () => {
     
     // Preload kitchen image for better performance
     const imagePreload = new Image();
-    imagePreload.src = "/lovable-uploads/9b681f27-359c-4d90-8629-5b2b198abf0f.png";
+    imagePreload.src = "/lovable-uploads/9b681f27-359c-4d90-8629-5b2b198abf0f.webp";
     imagePreload.fetchPriority = 'high';
   }, []);
 

@@ -9,7 +9,7 @@ import { useEffect } from "react";
 const DocumentationHeader = () => {
   // Preload header image immediately when component mounts
   useEffect(() => {
-    const headerImageSrc = '/lovable-uploads/f72886c3-3677-4dfe-8d56-5a784197eda2.png';
+    const headerImageSrc = '/lovable-uploads/f72886c3-3677-4dfe-8d56-5a784197eda2.webp';
     
     // Create and inject a preload link with high priority
     const link = document.createElement('link');
@@ -43,7 +43,7 @@ const DocumentationHeader = () => {
       <div className="relative w-full mb-8 border-b border-gray-800">
         <div className="max-h-[400px] overflow-hidden">
           <OptimizedImage
-            src="/lovable-uploads/f72886c3-3677-4dfe-8d56-5a784197eda2.png"
+            src="/lovable-uploads/f72886c3-3677-4dfe-8d56-5a784197eda2.webp"
             alt="Complete System Documentation"
             className="w-full object-cover"
             width={1920}

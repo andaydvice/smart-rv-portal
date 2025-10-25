@@ -119,7 +119,7 @@ const WeatherDashboard = () => {
               </div>
             )}
             <img 
-              src="/lovable-uploads/250845cf-7e19-45a5-a1e0-138f24126cfa.png"
+              src="/lovable-uploads/250845cf-7e19-45a5-a1e0-138f24126cfa.webp"
               alt="Smart RV in neon lighting"
               className={`w-full h-full rounded-lg object-cover shadow-lg transition-opacity duration-300 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
               loading="lazy"

@@ -3,7 +3,7 @@ import React from "react";
 
 const RegionalClimate = () => {
   return (
-    <section className="relative w-full py-16 bg-cover bg-fixed" style={{ backgroundImage: "url('/lovable-uploads/ad3dc693-42f4-4635-af2d-b2c4b1aafc43.png')" }}>
+    <section className="relative w-full py-16 bg-cover bg-fixed" style={{ backgroundImage: "url('/lovable-uploads/ad3dc693-42f4-4635-af2d-b2c4b1aafc43.webp')" }}>
       {/* Dark overlay */}
       <div className="absolute inset-0 bg-black/80"></div>
       

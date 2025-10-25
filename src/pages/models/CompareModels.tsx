@@ -63,7 +63,7 @@ const CompareModels = () => {
         <CompareHero 
           title="Compare Models"
           description="Find the perfect smart RV that matches your lifestyle. Compare features and specifications across our range of models."
-          imageSrc="/lovable-uploads/Luxury-Class-RVs-min.jpg"
+          imageSrc="/lovable-uploads/Luxury-Class-RVs-min.webp"
         />
 
         <div className="w-full px-4 py-16">

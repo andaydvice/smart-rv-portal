@@ -4,7 +4,7 @@ import { PreloadedHeaderImage } from '@/components/ui/PreloadedHeaderImage';
 
 const SmartKitchenHeader = () => {
   const [imageLoaded, setImageLoaded] = useState(false);
-  const headerImageSrc = '/lovable-uploads/9b681f27-359c-4d90-8629-5b2b198abf0f.png';
+  const headerImageSrc = '/lovable-uploads/9b681f27-359c-4d90-8629-5b2b198abf0f.webp';
   
   // Preload image immediately when component mounts
   useEffect(() => {

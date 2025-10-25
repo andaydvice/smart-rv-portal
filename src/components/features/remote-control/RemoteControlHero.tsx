@@ -7,7 +7,7 @@ const HeroSection = () => {
     <div className="relative w-full h-[600px] overflow-hidden -mt-16">
       <div className="absolute inset-0 w-full h-full bg-black/60 z-10"></div>
       <PreloadedHeaderImage 
-        src="/lovable-uploads/cdb72cba-3fb1-44e9-8aea-bde00743141a.png"
+        src="/lovable-uploads/cdb72cba-3fb1-44e9-8aea-bde00743141a.webp"
         alt="RV Remote Control Device"
         className="w-full h-full object-cover object-center"
         width={1920}

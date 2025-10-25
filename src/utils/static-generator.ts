@@ -33,7 +33,7 @@ export const pageMetadata: Record<string, PageMetadata> = {
           "name": "Smart RV Technology Hub",
           "description": "Next-generation connectivity and control for your RV",
           "url": "https://smartrvhub.com",
-          "logo": "https://smartrvhub.com/lovable-uploads/f3ebf58c-7bbf-427f-9510-9c3b0aec6f6d.png"
+          "logo": "https://smartrvhub.com/lovable-uploads/f3ebf58c-7bbf-427f-9510-9c3b0aec6f6d.webp"
         },
         {
           "@type": "WebSite",
@@ -468,7 +468,7 @@ export const generateStaticHTML = (path: string): string => {
     <meta property="og:url" content="https://smartrvhub.com${metadata.path}" />
     <meta property="og:title" content="${metadata.title}" />
     <meta property="og:description" content="${metadata.description}" />
-    <meta property="og:image" content="https://smartrvhub.com/lovable-uploads/f3ebf58c-7bbf-427f-9510-9c3b0aec6f6d.png" />
+    <meta property="og:image" content="https://smartrvhub.com/lovable-uploads/f3ebf58c-7bbf-427f-9510-9c3b0aec6f6d.webp" />
     <meta property="og:site_name" content="Smart RV Hub" />
     <meta property="og:locale" content="en_US" />
     
@@ -477,10 +477,10 @@ export const generateStaticHTML = (path: string): string => {
     <meta name="twitter:url" content="https://smartrvhub.com${metadata.path}" />
     <meta name="twitter:title" content="${metadata.title}" />
     <meta name="twitter:description" content="${metadata.description}" />
-    <meta name="twitter:image" content="https://smartrvhub.com/lovable-uploads/f3ebf58c-7bbf-427f-9510-9c3b0aec6f6d.png" />
+    <meta name="twitter:image" content="https://smartrvhub.com/lovable-uploads/f3ebf58c-7bbf-427f-9510-9c3b0aec6f6d.webp" />
     
     <!-- Performance-critical preloads -->
-    <link rel="preload" href="/lovable-uploads/f3ebf58c-7bbf-427f-9510-9c3b0aec6f6d.png" as="image" />
+    <link rel="preload" href="/lovable-uploads/f3ebf58c-7bbf-427f-9510-9c3b0aec6f6d.webp" as="image" />
     
     <!-- Non-blocking Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />

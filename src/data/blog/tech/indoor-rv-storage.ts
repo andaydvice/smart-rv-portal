@@ -7,7 +7,7 @@ export const indoorRvStorage = {
   },
   title: 'Indoor RV Storage',
   description: 'Discover premium climate controlled indoor RV storage solutions.',
-  image: '/lovable-uploads/c25a3800-323e-4e21-9402-72b27002e767.png',
+  image: '/lovable-uploads/c25a3800-323e-4e21-9402-72b27002e767.webp',
   slug: 'indoor-rv-storage',
   content: `Discover premium climate controlled indoor RV storage solutions that protect your investment year round.
 

@@ -13,7 +13,7 @@ const HeroSection = () => {
     setIsClient(true);
   }, []);
 
-  const imageUrl = "/lovable-uploads/598a2cb5-ffcb-440a-9943-6c4440749b9f.png";
+  const imageUrl = "/lovable-uploads/598a2cb5-ffcb-440a-9943-6c4440749b9f.webp";
   
   return (
     <div className="relative w-full h-[60vh] overflow-hidden bg-gray-900">

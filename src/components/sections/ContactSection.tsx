@@ -6,7 +6,7 @@ export const ContactSection = () => (
   <section className="relative py-32 px-4 overflow-hidden min-h-[70vh] flex flex-col justify-center" style={{ contentVisibility: 'auto', containIntrinsicSize: '1200px 800px' }}> 
     <div className="absolute inset-0">
       <img
-        src="/lovable-uploads/f88c014b-5b32-4db0-8742-f9e8b531654e.png"
+        src="/lovable-uploads/f88c014b-5b32-4db0-8742-f9e8b531654e.webp"
         alt="Interior view of a Smart RV with a person using a smartphone"
         className="w-full h-full object-cover"
         loading="lazy"
