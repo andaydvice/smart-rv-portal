@@ -52,6 +52,27 @@ Validates:
 ./schema-validator.sh
 ```
 
+### 5. **Lighthouse Performance Monitoring**
+Runs comprehensive performance audits on the live site:
+- Performance score (bundle size, load time, rendering)
+- Accessibility score (ARIA labels, color contrast, screen reader support)
+- Best Practices score (HTTPS, console errors, dependencies)
+- SEO score (meta tags, structured data, crawlability)
+
+**Thresholds:**
+- ✅ Good: Score ≥ 85
+- ⚠️  Warning: Score 75-84
+- ❌ Fail: Score < 75
+
+**Runs automatically:** After every deployment to main (via GitHub Actions)
+
+**Run manually:**
+```bash
+./lighthouse-check.sh https://smartrvhub.com
+```
+
+**Note:** Requires Chrome/Chromium installed for local runs. Automatically available in GitHub Actions.
+
 ---
 
 ## 🔄 Enhanced Pre-Commit Workflow
