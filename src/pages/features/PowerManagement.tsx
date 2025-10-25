@@ -8,6 +8,7 @@ import { Helmet } from 'react-helmet-async';
 import { FeatureNavigationLinks } from "@/components/navigation/FeatureNavigationLinks";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { Link } from "react-router-dom";
+import { productSchema } from "@/components/seo/schemas";
 
 const PowerManagement = () => {
   const canonicalUrl = typeof window !== 'undefined' ? `${window.location.origin}/features/power-management` : 'https://example.com/features/power-management';
@@ -31,6 +32,18 @@ const PowerManagement = () => {
           description,
           url: canonicalUrl
         })}</script>
+        <script type="application/ld+json">{JSON.stringify(productSchema({
+          name: 'Smart RV Power Management System',
+          description: 'Advanced power management solution for RVs with solar integration, battery monitoring, and intelligent energy distribution for extended off grid capabilities.',
+          image: typeof window !== 'undefined' ? `${window.location.origin}/lovable-uploads/power-management-header.jpg` : '',
+          url: canonicalUrl,
+          brand: 'Smart RV Hub',
+          category: 'Smart RV Technology',
+          offers: {
+            url: typeof window !== 'undefined' ? `${window.location.origin}/pricing` : '',
+            availability: 'InStock'
+          }
+        }))}</script>
       </Helmet>
       {/* Hero Image Section */}
       <div className="relative w-full h-[600px] md:h-[80vh] max-h-[800px] overflow-hidden">

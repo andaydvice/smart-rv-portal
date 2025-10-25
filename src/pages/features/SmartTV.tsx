@@ -7,10 +7,29 @@ import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliat
 import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
 import { FeatureNavigationLinks } from "@/components/navigation/FeatureNavigationLinks";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
+import { Helmet } from "react-helmet-async";
+import { productSchema } from "@/components/seo/schemas";
 
 const SmartTV = () => {
+  const canonicalUrl = typeof window !== 'undefined' ? `${window.location.origin}/features/smart-tv` : '';
   return (
     <Layout>
+      <Helmet>
+        <title>Smart TV for RVs | Streaming Entertainment</title>
+        <meta name="description" content="Advanced smart TV system for RVs with 4K streaming, voice control, multi room casting, and seamless integration with your favorite entertainment services." />
+        <link rel="canonical" href={canonicalUrl} />
+        <script type="application/ld+json">{JSON.stringify(productSchema({
+          name: 'Smart RV Television System',
+          description: 'Integrated smart TV solution for RVs with streaming capabilities, voice control, casting features, and access to all major entertainment platforms.',
+          url: canonicalUrl,
+          brand: 'Smart RV Hub',
+          category: 'Smart RV Entertainment',
+          offers: {
+            url: typeof window !== 'undefined' ? `${window.location.origin}/pricing` : '',
+            availability: 'InStock'
+          }
+        }))}</script>
+      </Helmet>
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

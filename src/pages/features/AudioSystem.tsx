@@ -7,10 +7,29 @@ import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliat
 import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
 import { FeatureNavigationLinks } from "@/components/navigation/FeatureNavigationLinks";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
+import { Helmet } from "react-helmet-async";
+import { productSchema } from "@/components/seo/schemas";
 
 const AudioSystem = () => {
+  const canonicalUrl = typeof window !== 'undefined' ? `${window.location.origin}/features/audio-system` : '';
   return (
     <Layout>
+      <Helmet>
+        <title>Smart RV Audio System | Premium Sound</title>
+        <meta name="description" content="Premium smart audio system for RVs with multi zone control, wireless integration, surround sound, and outdoor speakers for the ultimate mobile entertainment experience." />
+        <link rel="canonical" href={canonicalUrl} />
+        <script type="application/ld+json">{JSON.stringify(productSchema({
+          name: 'Smart RV Audio System',
+          description: 'High fidelity audio system for RVs with multi zone control, wireless speaker integration, Bluetooth connectivity, surround sound capability, and outdoor entertainment options.',
+          url: canonicalUrl,
+          brand: 'Smart RV Hub',
+          category: 'Smart RV Entertainment',
+          offers: {
+            url: typeof window !== 'undefined' ? `${window.location.origin}/pricing` : '',
+            availability: 'InStock'
+          }
+        }))}</script>
+      </Helmet>
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

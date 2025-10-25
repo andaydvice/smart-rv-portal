@@ -8,8 +8,11 @@ import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
 import { VideoSection } from "@/components/ui/VideoSection";
 import { FeatureNavigationLinks } from "@/components/navigation/FeatureNavigationLinks";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
+import { Helmet } from "react-helmet-async";
+import { productSchema } from "@/components/seo/schemas";
 
 const ClimateControl = () => {
+  const canonicalUrl = typeof window !== 'undefined' ? `${window.location.origin}/features/climate-control` : '';
   useEffect(() => {
     // Scroll to top when component mounts
     window.scrollTo(0, 0);
@@ -17,6 +20,22 @@ const ClimateControl = () => {
 
   return (
     <Layout>
+      <Helmet>
+        <title>Smart Climate Control for RVs | Temperature Management</title>
+        <meta name="description" content="Intelligent climate control for RVs with zone based temperature management, humidity control, air quality monitoring, and energy efficient automation." />
+        <link rel="canonical" href={canonicalUrl} />
+        <script type="application/ld+json">{JSON.stringify(productSchema({
+          name: 'Smart RV Climate Control System',
+          description: 'Advanced climate management solution for RVs with multi zone temperature control, automated humidity regulation, air quality monitoring, and intelligent energy optimization.',
+          url: canonicalUrl,
+          brand: 'Smart RV Hub',
+          category: 'Smart RV Comfort',
+          offers: {
+            url: typeof window !== 'undefined' ? `${window.location.origin}/pricing` : '',
+            availability: 'InStock'
+          }
+        }))}</script>
+      </Helmet>
       <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

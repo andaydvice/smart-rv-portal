@@ -7,6 +7,7 @@ import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
 import { Helmet } from 'react-helmet-async';
 import { FeatureNavigationLinks } from "@/components/navigation/FeatureNavigationLinks";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
+import { productSchema } from "@/components/seo/schemas";
 
 const SecuritySystem = () => {
   const canonicalUrl = typeof window !== 'undefined' ? `${window.location.origin}/features/security-system` : 'https://example.com/features/security-system';
@@ -29,6 +30,17 @@ const SecuritySystem = () => {
           description,
           url: canonicalUrl
         })}</script>
+        <script type="application/ld+json">{JSON.stringify(productSchema({
+          name: 'Smart RV Security System',
+          description: 'Comprehensive security solution for RVs with HD cameras, smart locks, GPS tracking, motion sensors, and 24/7 remote monitoring for complete protection.',
+          url: canonicalUrl,
+          brand: 'Smart RV Hub',
+          category: 'Smart RV Security',
+          offers: {
+            url: typeof window !== 'undefined' ? `${window.location.origin}/pricing` : '',
+            availability: 'InStock'
+          }
+        }))}</script>
       </Helmet>
       <motion.div
         initial={{ opacity: 0 }}

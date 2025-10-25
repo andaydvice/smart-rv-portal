@@ -12,8 +12,11 @@ import { useEffect } from "react";
 import { VideoSection } from "@/components/ui/VideoSection";
 import { FeatureNavigationLinks } from "@/components/navigation/FeatureNavigationLinks";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
+import { Helmet } from "react-helmet-async";
+import { productSchema } from "@/components/seo/schemas";
 
 const SmartKitchen = () => {
+  const canonicalUrl = typeof window !== 'undefined' ? `${window.location.origin}/features/smart-kitchen` : '';
   // Force scroll to top when component mounts
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -23,9 +26,25 @@ const SmartKitchen = () => {
     imagePreload.src = "/lovable-uploads/9b681f27-359c-4d90-8629-5b2b198abf0f.png";
     imagePreload.fetchPriority = 'high';
   }, []);
-  
+
   return (
     <Layout>
+      <Helmet>
+        <title>Smart Kitchen for RVs | Connected Appliances</title>
+        <meta name="description" content="Smart kitchen system for RVs with connected appliances, induction cooking, smart refrigeration, and automated meal planning for gourmet mobile living." />
+        <link rel="canonical" href={canonicalUrl} />
+        <script type="application/ld+json">{JSON.stringify(productSchema({
+          name: 'Smart RV Kitchen System',
+          description: 'Comprehensive smart kitchen solution for RVs featuring connected appliances, induction cooktops, smart refrigerators, and integrated meal planning technology.',
+          url: canonicalUrl,
+          brand: 'Smart RV Hub',
+          category: 'Smart RV Living',
+          offers: {
+            url: typeof window !== 'undefined' ? `${window.location.origin}/pricing` : '',
+            availability: 'InStock'
+          }
+        }))}</script>
+      </Helmet>
       {/* SmartKitchenHeader already has the header image and titles */}
       <SmartKitchenHeader />
       
