@@ -1,10 +1,13 @@
 name: Auto-Deploy to Production
 
 on:
-  # Triggers when code is pushed to feature branches starting with 'claude/'
   push:
     branches:
       - 'claude/**'
+
+permissions:
+  contents: write
+  pull-requests: write
 
 jobs:
   auto-deploy:
@@ -42,8 +45,6 @@ jobs:
           if [ -d "dist" ]; then
             BUNDLE_SIZE=$(du -sh dist | cut -f1)
             echo "Bundle size: $BUNDLE_SIZE"
-
-            # Check if bundle is over 10MB (warning threshold)
             SIZE_BYTES=$(du -sb dist | cut -f1)
             if [ $SIZE_BYTES -gt 10485760 ]; then
               echo "::warning::Bundle size is large: $BUNDLE_SIZE"
@@ -54,38 +55,30 @@ jobs:
         id: create-pr
         run: |
           # Check if PR already exists
-          EXISTING_PR=$(gh pr list --head "${{ github.ref_name }}" --base main --json number --jq '.[0].number' || echo "")
+          EXISTING_PR=$(gh pr list --head "${{ github.ref_name }}" --base main --json number --jq '.[0].number' 2>/dev/null || echo "")
 
           if [ -n "$EXISTING_PR" ]; then
-            echo "PR already exists: #$EXISTING_PR"
+            echo "✅ PR already exists: #$EXISTING_PR"
             echo "pr-number=$EXISTING_PR" >> $GITHUB_OUTPUT
           else
-            # Create new PR
-            PR_URL=$(gh pr create \
+            echo "Creating new PR..."
+            gh pr create \
               --base main \
               --head "${{ github.ref_name }}" \
               --title "Auto-deploy: ${{ github.event.head_commit.message }}" \
-              --body "## 🤖 Automated Deployment
+              --body "Automated deployment from ${{ github.ref_name }}" \
+              --fill > pr_output.txt 2>&1
 
-**Branch:** \`${{ github.ref_name }}\`
-**Commit:** ${{ github.sha }}
-
-### ✅ Pre-deployment Checks Passed:
-- SEO verification complete
-- Build test successful
-- Performance checks passed
-
-### 📦 Changes:
-${{ github.event.head_commit.message }}
-
----
-
-This PR was automatically created and will auto-merge if all checks pass." \
-              --label auto-deploy)
-
-            PR_NUMBER=$(echo "$PR_URL" | grep -o '[0-9]*$')
-            echo "Created PR #$PR_NUMBER"
-            echo "pr-number=$PR_NUMBER" >> $GITHUB_OUTPUT
+            if [ $? -eq 0 ]; then
+              PR_URL=$(cat pr_output.txt)
+              PR_NUMBER=$(echo "$PR_URL" | grep -o '[0-9]\+$')
+              echo "✅ Created PR #$PR_NUMBER"
+              echo "pr-number=$PR_NUMBER" >> $GITHUB_OUTPUT
+            else
+              echo "❌ Failed to create PR. Output:"
+              cat pr_output.txt
+              exit 1
+            fi
           fi
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -93,6 +86,7 @@ This PR was automatically created and will auto-merge if all checks pass." \
       - name: Enable auto-merge
         if: steps.create-pr.outputs.pr-number
         run: |
+          echo "Enabling auto-merge for PR #${{ steps.create-pr.outputs.pr-number }}..."
           gh pr merge ${{ steps.create-pr.outputs.pr-number }} \
             --auto \
             --squash \
@@ -104,5 +98,5 @@ This PR was automatically created and will auto-merge if all checks pass." \
         if: success()
         run: |
           echo "✅ Auto-deployment initiated!"
-          echo "PR created and will auto-merge when checks pass"
+          echo "PR #${{ steps.create-pr.outputs.pr-number }} will auto-merge when checks pass"
           echo "Netlify will deploy automatically after merge"
