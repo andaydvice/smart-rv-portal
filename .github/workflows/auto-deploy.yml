@@ -1,0 +1,95 @@
+name: Auto-Deploy to Production
+
+on:
+  # Triggers when code is pushed to feature branches starting with 'claude/'
+  push:
+    branches:
+      - 'claude/**'
+
+jobs:
+  auto-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run QC checks
+        run: |
+          echo "Running quality control checks..."
+          chmod +x ./verify-seo-changes.sh
+          ./verify-seo-changes.sh
+
+      - name: Run build test
+        run: |
+          echo "Testing production build..."
+          npm run build
+
+      - name: Performance checks
+        run: |
+          echo "Checking bundle size..."
+          if [ -d "dist" ]; then
+            BUNDLE_SIZE=$(du -sh dist | cut -f1)
+            echo "Bundle size: $BUNDLE_SIZE"
+
+            # Check if bundle is over 10MB (warning threshold)
+            SIZE_BYTES=$(du -sb dist | cut -f1)
+            if [ $SIZE_BYTES -gt 10485760 ]; then
+              echo "::warning::Bundle size is large: $BUNDLE_SIZE"
+            fi
+          fi
+
+      - name: Create Pull Request
+        id: create-pr
+        uses: peter-evans/create-pull-request@v5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref_name }}
+          base: main
+          title: "Auto-deploy: ${{ github.event.head_commit.message }}"
+          body: |
+            ## 🤖 Automated Deployment
+
+            **Branch:** `${{ github.ref_name }}`
+            **Commit:** ${{ github.sha }}
+
+            ### ✅ Pre-deployment Checks Passed:
+            - SEO verification complete
+            - Build test successful
+            - Performance checks passed
+
+            ### 📦 Changes:
+            ${{ github.event.head_commit.message }}
+
+            ---
+
+            This PR was automatically created and will auto-merge if all checks pass.
+          labels: auto-deploy
+
+      - name: Enable auto-merge
+        if: steps.create-pr.outputs.pull-request-number
+        run: |
+          gh pr merge ${{ steps.create-pr.outputs.pull-request-number }} \
+            --auto \
+            --squash \
+            --delete-branch
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Notify success
+        if: success()
+        run: |
+          echo "✅ Auto-deployment initiated!"
+          echo "PR created and will auto-merge when checks pass"
+          echo "Netlify will deploy automatically after merge"
