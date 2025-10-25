@@ -61,28 +61,11 @@ jobs:
             echo "pr-number=$EXISTING_PR" >> $GITHUB_OUTPUT
           else
             # Create new PR
-            PR_BODY="## 🤖 Automated Deployment
-
-**Branch:** \`${{ github.ref_name }}\`
-**Commit:** ${{ github.sha }}
-
-### ✅ Pre-deployment Checks Passed:
-- SEO verification complete
-- Build test successful
-- Performance checks passed
-
-### 📦 Changes:
-${{ github.event.head_commit.message }}
-
----
-
-This PR was automatically created and will auto-merge if all checks pass."
-
             PR_URL=$(gh pr create \
               --base main \
               --head "${{ github.ref_name }}" \
               --title "Auto-deploy: ${{ github.event.head_commit.message }}" \
-              --body "$PR_BODY" \
+              --body "Automated deployment from branch ${{ github.ref_name }}" \
               --label auto-deploy)
 
             PR_NUMBER=$(echo "$PR_URL" | grep -o '[0-9]*$')
