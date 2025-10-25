@@ -54,23 +54,27 @@ jobs:
         id: create-pr
         run: |
           # Check if PR already exists
-          EXISTING_PR=$(gh pr list --head "${{ github.ref_name }}" --base main --json number --jq '.[0].number' || echo "")
+          EXISTING_PR=$(gh pr list --head "${{ github.ref_name }}" --base main --json number --jq '.[0].number' 2>/dev/null || echo "")
 
           if [ -n "$EXISTING_PR" ]; then
             echo "PR already exists: #$EXISTING_PR"
             echo "pr-number=$EXISTING_PR" >> $GITHUB_OUTPUT
           else
             # Create new PR
+            echo "Creating PR for branch ${{ github.ref_name }}..."
             PR_URL=$(gh pr create \
               --base main \
               --head "${{ github.ref_name }}" \
               --title "Auto-deploy: ${{ github.event.head_commit.message }}" \
-              --body "Automated deployment from branch ${{ github.ref_name }}" \
-              --label auto-deploy)
+              --body "Automated deployment from branch ${{ github.ref_name }}" || true)
 
-            PR_NUMBER=$(echo "$PR_URL" | grep -o '[0-9]*$')
-            echo "Created PR #$PR_NUMBER"
-            echo "pr-number=$PR_NUMBER" >> $GITHUB_OUTPUT
+            if [ -n "$PR_URL" ]; then
+              PR_NUMBER=$(echo "$PR_URL" | grep -o '[0-9]*$')
+              echo "Created PR #$PR_NUMBER: $PR_URL"
+              echo "pr-number=$PR_NUMBER" >> $GITHUB_OUTPUT
+            else
+              echo "Failed to create PR, but continuing..."
+            fi
           fi
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
