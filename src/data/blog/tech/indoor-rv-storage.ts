@@ -25,7 +25,7 @@ Year round climate stability ensures your RV remains in pristine condition regar
 
 ## Advanced Security Systems
 
-State of the art security measures provide comprehensive protection for your valuable investment.
+State of the art security measures provide comprehensive protection for your valuable investment. For RVs in storage, our [security products](/products) offer additional peace of mind with GPS tracking and remote monitoring.
 
 24/7 surveillance monitoring with high definition cameras covers all facility areas and access points.
 
@@ -85,7 +85,7 @@ Peace of mind value comes from knowing your investment is protected by professio
 
 ## Choosing the Right Storage Facility
 
-Selecting the optimal indoor storage facility requires careful consideration of location, features, and service quality.
+Selecting the optimal indoor storage facility requires careful consideration of location, features, and service quality. If you need assistance evaluating storage options or want to discuss smart monitoring solutions for your stored RV, [contact us](/contact) for expert guidance.
 
 Proximity to your home reduces travel time and transportation costs for storage and retrieval.
 

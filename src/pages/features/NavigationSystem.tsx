@@ -5,6 +5,7 @@ import Layout from "@/components/layout/Layout";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
 import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
 import { FeatureNavigationLinks } from "@/components/navigation/FeatureNavigationLinks";
+import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 
 const NavigationSystem = () => {
   return (

@@ -25,7 +25,7 @@ Smart thermostats provide remote control through mobile apps, allowing you to pr
 
 ## 2. Intelligent Power Management
 
-Comprehensive power management systems monitor and optimize energy consumption across all RV systems.
+Comprehensive power management systems monitor and optimize energy consumption across all RV systems. For a complete selection of power management [products](/products), visit our technology catalog.
 
 Battery monitoring displays real time charge levels, consumption rates, and estimated remaining power for informed energy decisions.
 
@@ -127,7 +127,7 @@ Regular software updates maintain security and add new features to your smart RV
 
 Smart RV upgrades typically pay for themselves through energy savings, reduced maintenance costs, and enhanced resale value.
 
-Phased installation allows you to spread costs over time while immediately benefiting from each upgrade.
+Phased installation allows you to spread costs over time while immediately benefiting from each upgrade. To explore detailed [smart RV technology packages](/pricing) tailored to different budgets and upgrade levels, check our comprehensive pricing guide.
 
 Insurance discounts may be available for RVs equipped with security and monitoring systems.
 

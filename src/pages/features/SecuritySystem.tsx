@@ -6,6 +6,7 @@ import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliat
 import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
 import { Helmet } from 'react-helmet-async';
 import { FeatureNavigationLinks } from "@/components/navigation/FeatureNavigationLinks";
+import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 
 const SecuritySystem = () => {
   const canonicalUrl = typeof window !== 'undefined' ? `${window.location.origin}/features/security-system` : 'https://example.com/features/security-system';

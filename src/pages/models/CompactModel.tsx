@@ -9,6 +9,7 @@ import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliat
 import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
 import { Helmet } from "react-helmet-async";
 import { ModelNavigationLinks } from "@/components/navigation/ModelNavigationLinks";
+import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 
 // Lazy load components that are not immediately visible
 const CompactModelHero = lazy(() => import("@/components/models/compact/CompactModelHero"));

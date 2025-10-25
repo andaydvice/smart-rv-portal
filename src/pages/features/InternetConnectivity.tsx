@@ -7,6 +7,7 @@ import ConnectivityGuide from "@/components/connectivity/ConnectivityGuide";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
 import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
 import { FeatureNavigationLinks } from "@/components/navigation/FeatureNavigationLinks";
+import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { Link } from "react-router-dom";
 
 const InternetConnectivity = () => {
@@ -19,6 +20,8 @@ const InternetConnectivity = () => {
         className="min-h-screen pt-24 px-4 bg-gradient-to-b from-gray-900 to-gray-800"
       >
         <div className="max-w-7xl mx-auto">
+          <Breadcrumbs items={[{ label: 'Features', href: '/features' }, { label: 'Internet Connectivity' }]} />
+
           <div className="flex items-center gap-4 mb-8">
             <Wifi className="h-8 w-8 text-cyan-500" />
             <h1 className="text-4xl font-bold text-white">Internet Connectivity</h1>

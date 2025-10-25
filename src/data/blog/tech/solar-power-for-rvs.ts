@@ -52,7 +52,7 @@ So, you would aim to generate around 370 Wh per day.
 
 ## 3. Choosing Your Components Wisely
 
-With your power audit complete, you can select components that match your needs.
+With your power audit complete, you can select components that match your needs. Browse our selection of [solar power products](/products) to find quality components for your RV solar system.
 
 ### Solar Panels
 - **Monocrystalline vs. Polycrystalline:** Monocrystalline panels are more efficient and perform better in low light, making them the preferred choice for RVs where space is limited.
@@ -108,5 +108,5 @@ Quality components from reputable manufacturers will provide years of reliable s
 
 Professional installation can ensure optimal performance and proper safety measures, while DIY installation can save money for those with electrical experience.
 
-The freedom and peace of mind that comes with solar power makes it one of the most valuable investments for any serious RVer.`
+The freedom and peace of mind that comes with solar power makes it one of the most valuable investments for any serious RVer. [Get started](/contact) with a consultation to discuss your solar power needs and receive a customized installation quote.`
 };

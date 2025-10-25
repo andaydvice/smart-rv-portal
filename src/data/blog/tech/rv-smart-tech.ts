@@ -95,5 +95,7 @@ Popular first upgrades include smart thermostats, water monitoring systems, and 
 
 Most systems are designed for DIY installation, though professional installation ensures optimal performance and warranty coverage.
 
-The investment in smart RV technology pays dividends in convenience, safety, and energy efficiency throughout your travels.`
+The investment in smart RV technology pays dividends in convenience, safety, and energy efficiency throughout your travels.
+
+Ready to get started? View our [pricing](/pricing) for complete smart RV packages or [explore individual products](/products) to build your custom system.`
 };

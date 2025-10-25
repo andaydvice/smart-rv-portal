@@ -13,6 +13,7 @@ import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliat
 import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
 import { Helmet } from "react-helmet-async";
 import { ModelNavigationLinks } from "@/components/navigation/ModelNavigationLinks";
+import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 
 const AdventureModel = () => {
   useEffect(() => {

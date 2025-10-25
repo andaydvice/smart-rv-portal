@@ -51,7 +51,7 @@ Personal hygiene supplies including biodegradable soaps for environmentally cons
 
 ## Electronics and Entertainment
 
-Modern technology enhances safety, communication, and entertainment during RV adventures.
+Modern technology enhances safety, communication, and entertainment during RV adventures. Browse our [products](/products) for essential RV electronics and smart technology solutions.
 
 GPS navigation system with RV specific routing for height and weight restrictions.
 
@@ -147,7 +147,7 @@ Local specialties and fresh produce purchased at destinations to reduce travel w
 
 ## Technology and Communication
 
-Modern communication technology keeps you connected and safe during remote adventures.
+Modern communication technology keeps you connected and safe during remote adventures. For personalized recommendations on communication and safety equipment, [contact our experts](/contact) for guidance.
 
 Two way radios for communication when cell service is unavailable.
 

@@ -6,6 +6,7 @@ import Layout from "@/components/layout/Layout";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
 import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
 import { FeatureNavigationLinks } from "@/components/navigation/FeatureNavigationLinks";
+import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 
 const AudioSystem = () => {
   return (
@@ -17,7 +18,9 @@ const AudioSystem = () => {
         className="w-full pt-24 px-4 bg-gradient-to-b from-gray-900 to-gray-800"
       >
         <div className="max-w-7xl mx-auto">
-          <div className="flex items-center gap-4 mb-8">
+          <Breadcrumbs items={[{ label: 'Features', href: '/features' }, { label: 'Audio System' }]} />
+
+          <div className="flex items-center gap-4 mb-8 mt-4">
             <Music className="h-8 w-8 text-pink-500" />
             <h1 className="text-4xl font-bold text-white">Audio System</h1>
           </div>

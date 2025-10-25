@@ -6,6 +6,7 @@ import Layout from "@/components/layout/Layout";
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
 import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
 import { FeatureNavigationLinks } from "@/components/navigation/FeatureNavigationLinks";
+import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 
 const SmartTV = () => {
   return (
@@ -18,6 +19,8 @@ const SmartTV = () => {
       >
         <div className="w-full px-4 pt-24 pb-12">
           <div className="max-w-7xl mx-auto">
+          <Breadcrumbs items={[{ label: 'Features', href: '/features' }, { label: 'Smart TV' }]} />
+
             <div className="flex items-center gap-4 mb-8">
               <Tv className="h-8 w-8 text-purple-500" />
               <h1 className="text-4xl font-bold text-white">Smart TV System</h1>

@@ -11,6 +11,7 @@ import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
 import { useEffect } from "react";
 import { VideoSection } from "@/components/ui/VideoSection";
 import { FeatureNavigationLinks } from "@/components/navigation/FeatureNavigationLinks";
+import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 
 const SmartKitchen = () => {
   // Force scroll to top when component mounts
@@ -35,6 +36,8 @@ const SmartKitchen = () => {
         className="flex-grow pb-16 px-4 bg-gradient-to-b from-gray-900 to-gray-800"
       >
         <div className="max-w-7xl mx-auto">
+          <Breadcrumbs items={[{ label: 'Features', href: '/features' }, { label: 'Smart Kitchen' }]} />
+
           {/* Grid with kitchen features */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
             <div className="bg-gray-800/50 p-8 rounded-lg border border-gray-700 flex flex-col">

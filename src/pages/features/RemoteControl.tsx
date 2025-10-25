@@ -15,6 +15,7 @@ import InterfaceDemoSection from "@/components/features/remote-control/Interface
 import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
 import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
 import { FeatureNavigationLinks } from "@/components/navigation/FeatureNavigationLinks";
+import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 
 const RemoteControl = () => {
   useEffect(() => {
@@ -56,6 +57,8 @@ const RemoteControl = () => {
         className="flex-grow py-16 px-4 bg-gradient-to-b from-gray-900 to-gray-800"
       >
         <div className="max-w-7xl mx-auto">
+          <Breadcrumbs items={[{ label: 'Features', href: '/features' }, { label: 'Remote Control' }]} />
+
           {/* Main Features Section */}
           <MainFeaturesSection />
 

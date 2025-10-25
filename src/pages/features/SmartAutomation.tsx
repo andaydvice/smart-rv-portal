@@ -7,6 +7,7 @@ import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
 import { VideoSection } from "@/components/ui/VideoSection";
 import { PreloadedHeaderImage } from "@/components/ui/PreloadedHeaderImage";
 import { FeatureNavigationLinks } from "@/components/navigation/FeatureNavigationLinks";
+import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { Link } from "react-router-dom";
 
 const SmartAutomation = () => {
@@ -48,6 +49,8 @@ const SmartAutomation = () => {
         </div>
 
         <div className="max-w-7xl mx-auto">
+          <Breadcrumbs items={[{ label: 'Features', href: '/features' }, { label: 'Smart Automation' }]} />
+
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
             <div className="bg-gray-800/50 p-8 rounded-lg border border-gray-700 flex flex-col">

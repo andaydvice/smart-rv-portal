@@ -30,7 +30,7 @@ Insurance claims, increased premiums, and the emotional stress of violation can 
 ### Integrated Surveillance and Monitoring
 Integrated surveillance systems with high definition cameras and night vision capabilities provide 24/7 monitoring around your RV perimeter.
 
-These systems offer smartphone alerts, cloud storage, and two way audio communication.
+These systems offer smartphone alerts, cloud storage, and two way audio communication. To [learn more about available security solutions](/products), explore our comprehensive product lineup.
 
 Advanced motion detection filters out false alarms from wind or small animals while immediately alerting you to genuine threats.
 
@@ -82,7 +82,7 @@ Choose energy efficient components and consider solar charging for extended oper
 
 Budget considerations range from basic alarm systems under $500 to comprehensive smart security packages exceeding $3,000.
 
-Determine your specific needs and prioritize features accordingly.
+Determine your specific needs and prioritize features accordingly. For detailed pricing on professionally installed security systems, [view our security system pricing options](/pricing).
 
 RV size and layout influence camera placement and sensor coverage.
 

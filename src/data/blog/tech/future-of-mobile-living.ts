@@ -15,6 +15,8 @@ export const futureOfMobileLiving = {
 
 The driving experience itself is at the forefront of this revolution. Smart RVs are being equipped with advanced driver assist systems (ADAS) that make navigating these large vehicles safer and less stressful. AI powered navigation provides RV specific routing that considers vehicle size and weight to avoid hazards like low bridges, while realtime data integration suggests the safest, most efficient paths. A complete 360 degree view from a network of cameras eliminates blind spots, making parking and lane changes effortless. Furthermore, automated safety features such as collision avoidance and adaptive cruise control are becoming standard, significantly reducing driver fatigue and the risk of accidents.
 
+If you're considering upgrading your RV with these advanced navigation and safety features, [browse our navigation products](/products) to find the perfect solution for your vehicle.
+
 ## The Automated Habitat: A New Level of Comfort
 
 Once parked, the smart RV truly comes to life. A central control hub, often accessible via a touchscreen panel or a smartphone app, allows for seamless management of the entire living space. Imagine adjusting your environment with one-touch climate control, where smart thermostats learn your preferences and can be set remotely before you arrive. Intelligent lighting systems allow you to create the perfect ambiance for any activity, from bright task lighting for cooking to soft, relaxing hues for the evening. Even expanding your physical space is effortless, with automated slides and awnings that deploy at the press of a button and can even retract on their own in high winds.
@@ -26,6 +28,8 @@ For digital nomads and connected families, reliable internet is nonnegotiable. S
 ## Powering Freedom: Smart Energy Management
 
 Offgrid capability is the ultimate expression of RV freedom, and smart technology is making it more accessible and reliable than ever. Advanced systems pair high efficiency solar panels with powerful lithium battery banks, capable of running your entire RV—including air conditioning—for extended periods without external power. Smart power monitoring provides detailed analytics directly to your phone, showing exactly how much energy you're generating and consuming. This allows for effective resource management, while automated generator controls provide a seamless backup, ensuring you never run out of power by recharging your batteries when levels run low.
+
+To learn more about implementing these advanced power systems in your RV, explore our [smart RV upgrade packages](/pricing) designed for various budgets and needs.
 
 The future of mobile living is intelligent, connected, and incredibly comfortable. As technology continues to advance, the line between a traditional home and an RV will only become more blurred, empowering a new generation of travelers to live, work, and explore without compromise.`
 };
