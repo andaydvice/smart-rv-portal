@@ -48,6 +48,12 @@ const SecuritySystem = () => {
         transition={{ duration: 0.6 }}
         className="min-h-screen"
       >
+        <div className="absolute top-24 left-0 right-0 z-30 px-4">
+          <div className="max-w-7xl mx-auto">
+            <Breadcrumbs items={[{ label: 'Features', href: '/features' }, { label: 'Security System' }]} />
+          </div>
+        </div>
+
         {/* Full-width Hero Header */}
         <div className="relative w-full h-screen">
           <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-gray-900 z-10" />

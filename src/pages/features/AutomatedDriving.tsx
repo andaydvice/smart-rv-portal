@@ -40,7 +40,9 @@ const AutomatedDriving = () => {
         className="flex-grow bg-gradient-to-b from-gray-900 to-gray-800"
       >
         <div className="max-w-7xl mx-auto px-4 pt-24 pb-12">
-          <div className="flex items-center gap-4 mb-8">
+          <Breadcrumbs items={[{ label: 'Features', href: '/features' }, { label: 'Automated Driving' }]} />
+
+          <div className="flex items-center gap-4 mb-8 mt-8">
             <Car className="h-8 w-8 text-blue-400" />
             <h1 className="text-4xl font-bold text-white">Automated Driving Assistance</h1>
           </div>

@@ -36,8 +36,10 @@ const NavigationSystem = () => {
         className="flex-grow bg-gradient-to-b from-gray-900 to-gray-800"
       >
         <div className="max-w-7xl mx-auto px-4 pt-24 pb-12">
+          <Breadcrumbs items={[{ label: 'Features', href: '/features' }, { label: 'Navigation System' }]} />
+
           {/* Hero Section */}
-          <div className="relative h-96 mb-16 rounded-lg overflow-hidden">
+          <div className="relative h-96 mb-16 mt-8 rounded-lg overflow-hidden">
             <img 
               src="/lovable-uploads/navigation-hero.jpg"
               alt="RV Navigation System Dashboard Interface" 

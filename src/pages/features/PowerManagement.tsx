@@ -45,6 +45,11 @@ const PowerManagement = () => {
           }
         }))}</script>
       </Helmet>
+
+      <div className="pt-24 px-4 max-w-7xl mx-auto">
+        <Breadcrumbs items={[{ label: 'Features', href: '/features' }, { label: 'Power Management' }]} />
+      </div>
+
       {/* Hero Image Section */}
       <div className="relative w-full h-[600px] md:h-[80vh] max-h-[800px] overflow-hidden">
         <img
