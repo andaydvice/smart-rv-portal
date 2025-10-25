@@ -7,7 +7,7 @@ export const sustainableTravelRedefined = {
   },
   title: 'Sustainable Travel Redefined',
   description: 'Where eco friendly design meets intelligent mobile home solutions.',
-  image: '/lovable-uploads/72144d64-5f93-4ee2-8187-e495f556f206.png',
+  image: '/lovable-uploads/72144d64-5f93-4ee2-8187-e495f556f206.webp',
   slug: 'sustainable-travel-redefined',
   content: `The intersection of eco friendly design and intelligent mobile home solutions is creating a new paradigm in sustainable travel.
 

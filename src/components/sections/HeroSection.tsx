@@ -13,7 +13,7 @@ export const HeroSection = () => {
       {/* Full width image container */}
       <div className="absolute inset-0 left-0 right-0">
         <img
-          src="/lovable-uploads/f3ebf58c-7bbf-427f-9510-9c3b0aec6f6d.png"
+          src="/lovable-uploads/f3ebf58c-7bbf-427f-9510-9c3b0aec6f6d.webp"
           alt="Luxury Smart RV interior with panoramic windows and modern intelligent design"
           className="h-full w-full object-cover"
           loading="eager"

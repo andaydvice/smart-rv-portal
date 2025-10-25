@@ -41,7 +41,7 @@ const Entertainment = () => {
       <section className="relative min-h-[80vh] flex items-center justify-center overflow-hidden">
         <div 
           className="absolute inset-0 w-full h-full bg-cover bg-center"
-          style={{ backgroundImage: `url('/entertainment-hero.jpeg')` }}
+          style={{ backgroundImage: `url('/entertainment-hero.webp')` }}
         />
         
         {/* Dark overlay for better text readability */}
@@ -173,7 +173,7 @@ const Entertainment = () => {
             className="mb-12"
           >
             <img 
-              src="/entertainment-lifestyle.jpg"
+              src="/entertainment-lifestyle.webp"
               alt="Luxury RV interior with premium entertainment system featuring multiple screens, comfortable seating, and panoramic views"
               className="w-full h-auto rounded-xl shadow-2xl border border-gray-700/50"
               loading="lazy"

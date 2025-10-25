@@ -49,7 +49,7 @@ const Troubleshooting = () => {
         {/* Hero Section */}
         <section className="relative w-full h-[30vh] md:h-[40vh] min-h-[300px] flex items-center justify-center overflow-hidden">
           <img 
-            src="/lovable-uploads/a6746652-04f0-4f89-a55d-b241e7bd972a.png" 
+            src="/lovable-uploads/a6746652-04f0-4f89-a55d-b241e7bd972a.webp" 
             alt="Smart RV Interior"
             className="absolute inset-0 w-full h-full object-cover"
             loading="lazy"

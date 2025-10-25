@@ -7,7 +7,7 @@ export const rvSmartTech = {
   },
   title: 'RV Smart Tech',
   description: 'Experience the future of RV living with cutting edge smart technology.',
-  image: '/lovable-uploads/11a2f8d8-22f5-4ed7-83f9-28b08a64aeb5.png',
+  image: '/lovable-uploads/11a2f8d8-22f5-4ed7-83f9-28b08a64aeb5.webp',
   slug: 'rv-smart-tech',
   content: `Experience the future of RV living with cutting edge smart technology that transforms your mobile lifestyle.
 

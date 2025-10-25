@@ -7,14 +7,14 @@ const featuredPosts = [
     category: "Technology",
     title: "RV Smart Tech",
     description: ["Experience the future of smart RV living with cutting edge smart technology that transforms your mobile smart RV lifestyle.", "Our innovative systems seamlessly integrate automation, monitoring, and control features to enhance every aspect of your smart RV experience."],
-    image: "/lovable-uploads/11a2f8d8-22f5-4ed7-83f9-28b08a64aeb5.png",
+    image: "/lovable-uploads/11a2f8d8-22f5-4ed7-83f9-28b08a64aeb5.webp",
     slug: "rv-smart-tech"
   },
   {
     category: "Technology",
     title: "Indoor RV Storage",
     description: ["Discover premium climate controlled indoor RV storage solutions that protect your investment year round.", "Our state of the art facilities offer advanced security systems and easy access, ensuring your RV stays in pristine condition between adventures."],
-    image: "/lovable-uploads/c25a3800-323e-4e21-9402-72b27002e767.png",
+    image: "/lovable-uploads/c25a3800-323e-4e21-9402-72b27002e767.webp",
     slug: "indoor-rv-storage"
   }
 ];

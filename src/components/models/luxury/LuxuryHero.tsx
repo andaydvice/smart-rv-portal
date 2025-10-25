@@ -10,7 +10,7 @@ export const LuxuryHero = ({ handleNavigation }: LuxuryHeroProps) => {
   return (
     <section className="hero-section">
       <img
-        src="/lovable-uploads/Luxury-Class-RVs-min.jpg"
+        src="/lovable-uploads/Luxury-Class-RVs-min.webp"
         alt="Luxury Smart RV exterior"
         className="hero-image"
       />

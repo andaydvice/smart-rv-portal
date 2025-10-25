@@ -49,7 +49,7 @@ const WaterSystems = () => {
           <div className="mb-12 relative">
             <div className="relative w-full h-[400px] md:h-[500px] rounded-lg overflow-hidden">
               <img
-                src="/smart-water-systems-hero.jpeg"
+                src="/smart-water-systems-hero.webp"
                 alt="Smart water system control interface with couple in RV examining water filtration monitoring displays and water quality metrics"
                 className="w-full h-full object-cover object-center"
                 style={{ objectPosition: '50% 30%' }}
@@ -112,7 +112,7 @@ const WaterSystems = () => {
           {/* Smart Water Systems Image */}
           <div className="mt-12 mb-8">
             <PreloadedHeaderImage
-              src="/lovable-uploads/smart-water-systems.jpg"
+              src="/lovable-uploads/smart-water-systems.webp"
               alt="Modern RV bathroom with smart water system featuring digital shower controls and water monitoring displays"
               className="w-full h-64 md:h-80 object-cover rounded-lg"
               width={800}

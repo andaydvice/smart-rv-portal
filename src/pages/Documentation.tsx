@@ -16,8 +16,8 @@ import { Link } from "react-router-dom";
 
 // Preload these images as early as possible
 const CRITICAL_IMAGES = [
-  '/lovable-uploads/f72886c3-3677-4dfe-8d56-5a784197eda2.png',
-  '/lovable-uploads/846b5be5-043e-4645-a3d9-39614d63342c.png'
+  '/lovable-uploads/f72886c3-3677-4dfe-8d56-5a784197eda2.webp',
+  '/lovable-uploads/846b5be5-043e-4645-a3d9-39614d63342c.webp'
 ];
 
 // Preload function that uses all available techniques

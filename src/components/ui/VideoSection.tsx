@@ -14,36 +14,36 @@ interface VideoSectionProps {
 // Demo video sources mapping
 const VIDEO_SOURCES: Record<string, any> = {
   'power-management-demo': [
-    { type: 'youtube', src: 'dQw4w9WgXcQ', poster: '/lovable-uploads/power-management-thumb.jpg' },
-    { type: 'direct', src: '/videos/power-demo.mp4', poster: '/lovable-uploads/power-management-thumb.jpg' }
+    { type: 'youtube', src: 'dQw4w9WgXcQ', poster: '/lovable-uploads/power-management-thumb.webp' },
+    { type: 'direct', src: '/videos/power-demo.mp4', poster: '/lovable-uploads/power-management-thumb.webp' }
   ],
   'solar-power-demo': [
-    { type: 'youtube', src: 'dQw4w9WgXcQ', poster: '/lovable-uploads/solar-power-thumb.jpg' },
-    { type: 'direct', src: '/videos/solar-demo.mp4', poster: '/lovable-uploads/solar-power-thumb.jpg' }
+    { type: 'youtube', src: 'dQw4w9WgXcQ', poster: '/lovable-uploads/solar-power-thumb.webp' },
+    { type: 'direct', src: '/videos/solar-demo.mp4', poster: '/lovable-uploads/solar-power-thumb.webp' }
   ],
   'battery-comparison-demo': [
-    { type: 'youtube', src: 'dQw4w9WgXcQ', poster: '/lovable-uploads/battery-comparison-thumb.jpg' },
-    { type: 'direct', src: '/videos/battery-demo.mp4', poster: '/lovable-uploads/battery-comparison-thumb.jpg' }
+    { type: 'youtube', src: 'dQw4w9WgXcQ', poster: '/lovable-uploads/battery-comparison-thumb.webp' },
+    { type: 'direct', src: '/videos/battery-demo.mp4', poster: '/lovable-uploads/battery-comparison-thumb.webp' }
   ],
   'towing-safety-demo': [
-    { type: 'youtube', src: 'dQw4w9WgXcQ', poster: '/lovable-uploads/towing-safety-thumb.jpg' },
-    { type: 'direct', src: '/videos/towing-demo.mp4', poster: '/lovable-uploads/towing-safety-thumb.jpg' }
+    { type: 'youtube', src: 'dQw4w9WgXcQ', poster: '/lovable-uploads/towing-safety-thumb.webp' },
+    { type: 'direct', src: '/videos/towing-demo.mp4', poster: '/lovable-uploads/towing-safety-thumb.webp' }
   ],
   'rv-trip-planning': [
-    { type: 'youtube', src: 'dQw4w9WgXcQ', poster: '/lovable-uploads/trip-planning-thumb.jpg' },
-    { type: 'direct', src: '/videos/trip-planning-demo.mp4', poster: '/lovable-uploads/trip-planning-thumb.jpg' }
+    { type: 'youtube', src: 'dQw4w9WgXcQ', poster: '/lovable-uploads/trip-planning-thumb.webp' },
+    { type: 'direct', src: '/videos/trip-planning-demo.mp4', poster: '/lovable-uploads/trip-planning-thumb.webp' }
   ],
   'smart-systems-demo': [
-    { type: 'youtube', src: 'dQw4w9WgXcQ', poster: '/lovable-uploads/smart-systems-thumb.jpg' },
-    { type: 'direct', src: '/videos/smart-systems-demo.mp4', poster: '/lovable-uploads/smart-systems-thumb.jpg' }
+    { type: 'youtube', src: 'dQw4w9WgXcQ', poster: '/lovable-uploads/smart-systems-thumb.webp' },
+    { type: 'direct', src: '/videos/smart-systems-demo.mp4', poster: '/lovable-uploads/smart-systems-thumb.webp' }
   ],
   'connectivity-demo': [
-    { type: 'youtube', src: 'dQw4w9WgXcQ', poster: '/lovable-uploads/connectivity-thumb.jpg' },
-    { type: 'direct', src: '/videos/connectivity-demo.mp4', poster: '/lovable-uploads/connectivity-thumb.jpg' }
+    { type: 'youtube', src: 'dQw4w9WgXcQ', poster: '/lovable-uploads/connectivity-thumb.webp' },
+    { type: 'direct', src: '/videos/connectivity-demo.mp4', poster: '/lovable-uploads/connectivity-thumb.webp' }
   ],
   'tire-monitoring-demo': [
-    { type: 'youtube', src: 'dQw4w9WgXcQ', poster: '/lovable-uploads/tire-monitoring-thumb.jpg' },
-    { type: 'direct', src: '/videos/tire-monitoring-demo.mp4', poster: '/lovable-uploads/tire-monitoring-thumb.jpg' }
+    { type: 'youtube', src: 'dQw4w9WgXcQ', poster: '/lovable-uploads/tire-monitoring-thumb.webp' },
+    { type: 'direct', src: '/videos/tire-monitoring-demo.mp4', poster: '/lovable-uploads/tire-monitoring-thumb.webp' }
   ]
 };
 

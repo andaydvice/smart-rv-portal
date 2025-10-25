@@ -7,7 +7,7 @@ export const remoteWorkRvSetup = {
   },
   title: 'Remote Work from Your RV: Essential Setup Guide',
   description: 'Create the perfect mobile office setup in your RV with these tips.',
-  image: '/lovable-uploads/ae930cf7-205f-41d3-9c9b-a4969e5c35e6.png',
+  image: '/lovable-uploads/ae930cf7-205f-41d3-9c9b-a4969e5c35e6.webp',
   slug: 'remote-work-rv-setup',
   content: `Create the perfect mobile office setup in your RV with these essential tips that transform your recreational vehicle into a productive workspace.
 

@@ -11,7 +11,7 @@ export const LuxuryHero = ({ handleNavigation }: LuxuryHeroProps) => {
   return (
     <div className="relative w-full h-[60vh] overflow-hidden">
       <img
-        src="/lovable-uploads/Luxury-Class-RVs-min.jpg"
+        src="/lovable-uploads/Luxury-Class-RVs-min.webp"
         alt="Luxury Class RV with slide-out in mountain setting"
         className="w-full h-full object-cover"
       />

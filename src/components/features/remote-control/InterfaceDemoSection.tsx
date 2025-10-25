@@ -8,7 +8,7 @@ const InterfaceDemoSection = () => {
       <div className="mx-auto max-w-4xl">
         <div className="bg-gray-800/30 p-6 rounded-lg border border-gray-700">
           <LazyImage 
-            src="/lovable-uploads/7b0c607c-52e6-47d2-b5fa-f5cbb912f20a.png"
+            src="/lovable-uploads/7b0c607c-52e6-47d2-b5fa-f5cbb912f20a.webp"
             alt="Smart RV Control Interface" 
             className="w-full rounded-lg"
             width={1080}

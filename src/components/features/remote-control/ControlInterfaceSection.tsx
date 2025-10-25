@@ -32,7 +32,7 @@ const ControlInterfaceSection = () => {
           </div>
           <div className="col-span-2">
             <LazyImage 
-              src="/lovable-uploads/927988b5-f130-4e93-847b-20474831470d.png"
+              src="/lovable-uploads/927988b5-f130-4e93-847b-20474831470d.webp"
               alt="App Interface Dashboard" 
               className="w-full rounded-lg border border-gray-600"
               width={800}

@@ -13,7 +13,7 @@ import { Helmet } from "react-helmet-async";
 const models = [
   {
     name: "Luxury Class",
-    image: "/lovable-uploads/Luxury_RV_Living-minx800.jpg",
+    image: "/lovable-uploads/Luxury_RV_Living-minx800.webp",
     price: "Starting From 1.3M",
     description: "Experience unparalleled luxury with our flagship model, featuring advanced automation and premium finishes.",
     features: [
@@ -26,7 +26,7 @@ const models = [
   },
   {
     name: "Adventure Class",
-    image: "/lovable-uploads/2935caf5-f345-40a6-8676-0f20817c6d6e.png",
+    image: "/lovable-uploads/2935caf5-f345-40a6-8676-0f20817c6d6e.webp",
     price: "Starting From $50,000",
     description: "Built for the modern explorer, combining durability with smart technology for off-grid adventures.",
     features: [
@@ -39,7 +39,7 @@ const models = [
   },
   {
     name: "Compact Smart",
-    image: "/lovable-uploads/e6619d24-bebf-439f-96b0-6aca2fb69380.png",
+    image: "/lovable-uploads/e6619d24-bebf-439f-96b0-6aca2fb69380.webp",
     price: "Starting From $20,000",
     description: "Perfect for weekend getaways, packed with smart features in an efficient, easy-to-maneuver package.",
     features: [

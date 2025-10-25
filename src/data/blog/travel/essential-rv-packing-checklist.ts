@@ -7,7 +7,7 @@ export const essentialRvPackingChecklist = {
   },
   title: 'Essential RV Packing Checklist',
   description: 'Master the art of RV packing with our comprehensive checklist for stress free adventures.',
-  image: '/lovable-uploads/76ea6a1c-0b6a-45d9-a3c5-9d9fb19de79b.png',
+  image: '/lovable-uploads/76ea6a1c-0b6a-45d9-a3c5-9d9fb19de79b.webp',
   slug: 'essential-rv-packing-checklist',
   content: `Master the art of RV packing with our comprehensive checklist that ensures you have everything needed for stress free adventures.
 

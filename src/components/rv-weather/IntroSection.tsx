@@ -59,7 +59,7 @@ const IntroSection = () => {
 
       <div className="mt-8">
         <img 
-          src="/lovable-uploads/c1732ddf-458c-4eeb-b6ad-7a817ae9ba17.png" 
+          src="/lovable-uploads/c1732ddf-458c-4eeb-b6ad-7a817ae9ba17.webp" 
           alt="Person planning a Smart RV trip while checking weather conditions" 
           className="rounded-lg shadow-lg w-full object-cover max-h-[400px]"
         />

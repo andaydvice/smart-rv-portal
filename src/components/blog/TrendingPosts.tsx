@@ -44,7 +44,7 @@ const TrendingPosts = ({ activeCategory, onCategoryChange }: TrendingPostsProps)
             category: 'tech',
             title: 'Smart RV Security Systems',
             description: 'Protect your RV with the latest security technology',
-            image: '/lovable-uploads/e9503bf4-354a-4790-8a83-fefea32abc5b.png'
+            image: '/lovable-uploads/e9503bf4-354a-4790-8a83-fefea32abc5b.webp'
           }}
         />
         <TrendingPostCard 
@@ -52,7 +52,7 @@ const TrendingPosts = ({ activeCategory, onCategoryChange }: TrendingPostsProps)
             category: 'travel',
             title: 'Top 10 RV Parks in the USA',
             description: 'Discover the most beautiful RV parks across the country',
-            image: '/lovable-uploads/e6619d24-bebf-439f-96b0-6aca2fb69380.png'
+            image: '/lovable-uploads/e6619d24-bebf-439f-96b0-6aca2fb69380.webp'
           }}
         />
         <TrendingPostCard 
@@ -60,7 +60,7 @@ const TrendingPosts = ({ activeCategory, onCategoryChange }: TrendingPostsProps)
             category: 'tech',
             title: 'Solar Power for RVs',
             description: 'Harness the power of the sun for your RV adventures',
-            image: '/lovable-uploads/80ea47f5-5b04-409f-8eb7-1da434a9e0de.png'
+            image: '/lovable-uploads/80ea47f5-5b04-409f-8eb7-1da434a9e0de.webp'
           }}
         />
       </motion.div>

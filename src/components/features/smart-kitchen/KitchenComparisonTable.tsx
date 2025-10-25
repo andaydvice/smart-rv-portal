@@ -15,7 +15,7 @@ const KitchenComparisonTable = () => {
         className="w-full max-w-5xl mx-auto mb-8"
       >
         <OptimizedImage
-          src="/lovable-uploads/8fbad7d4-f6a2-4af0-b5e4-1a3c5417cfcb.png"
+          src="/lovable-uploads/8fbad7d4-f6a2-4af0-b5e4-1a3c5417cfcb.webp"
           alt="Smart RV Kitchen with Digital Controls and Mobile App Integration"
           className="w-full rounded-xl shadow-lg"
           width={1200}

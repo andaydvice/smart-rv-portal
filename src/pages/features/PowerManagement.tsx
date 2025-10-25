@@ -20,7 +20,7 @@ const PowerManagement = () => {
         <title>{title}</title>
         <meta name="description" content={description} />
         <link rel="canonical" href={canonicalUrl} />
-        <link rel="preload" as="image" href="/lovable-uploads/power-management-header.jpg" fetchPriority="high" />
+        <link rel="preload" as="image" href="/lovable-uploads/power-management-header.webp" fetchPriority="high" />
         <meta property="og:title" content={title} />
         <meta property="og:description" content={description} />
         <meta property="og:type" content="website" />
@@ -104,7 +104,7 @@ const PowerManagement = () => {
                 </p>
               </div>
               <img 
-                src="/lovable-uploads/078abbd1-5852-4d5a-a457-154a7421c673.png"
+                src="/lovable-uploads/078abbd1-5852-4d5a-a457-154a7421c673.webp"
                 alt="Smart RV power management system interface with solar and battery monitoring"
                 className="w-full h-64 object-cover rounded-lg mb-6"
                 loading="lazy"

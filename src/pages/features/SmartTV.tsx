@@ -58,7 +58,7 @@ const SmartTV = () => {
                   </p>
                 </div>
                 <img 
-                  src="/lovable-uploads/831c3ac9-7ade-4fe3-a460-affbfc4123f7.png" 
+                  src="/lovable-uploads/831c3ac9-7ade-4fe3-a460-affbfc4123f7.webp" 
                   alt="Luxury RV Smart TV Setup" 
                   className="w-full h-64 object-cover rounded-lg mb-6"
                 />

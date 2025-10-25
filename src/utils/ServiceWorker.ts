@@ -290,7 +290,7 @@ class SEOServiceWorker {
   }
 
   private isStaticAsset(url: URL): boolean {
-    const staticExtensions = ['.css', '.js', '.png', '.jpg', '.jpeg', '.svg', '.ico', '.woff', '.woff2'];
+    const staticExtensions = ['.css', '.js', '.webp', '.svg', '.ico', '.woff', '.woff2'];
     return staticExtensions.some(ext => url.pathname.endsWith(ext));
   }
 

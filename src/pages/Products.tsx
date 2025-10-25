@@ -88,7 +88,7 @@ const Products = () => {
         description="Discover premium RV products and services for your smart RV lifestyle. From rentals to technology upgrades, find everything you need."
         keywords="RV rentals, RV marketplace, mobile internet, solar kits, RV accessories, digital nomad gear, RV services"
         canonical={canonical}
-        ogImage="/lovable-uploads/e2566d0d-bbd0-4401-9293-2d105eea8105.png"
+        ogImage="/lovable-uploads/e2566d0d-bbd0-4401-9293-2d105eea8105.webp"
         ogImageAlt="Smart RV dealership with premium technology solutions"
         structuredData={[
           organizationSchema,
@@ -99,7 +99,7 @@ const Products = () => {
       {/* Hero Image Section */}
       <div className="w-full h-[60vh] relative overflow-hidden">
         <img 
-          src="/lovable-uploads/e2566d0d-bbd0-4401-9293-2d105eea8105.png"
+          src="/lovable-uploads/e2566d0d-bbd0-4401-9293-2d105eea8105.webp"
           alt="Smart RV dealership aerial view"
           className="w-full h-full object-cover"
         />

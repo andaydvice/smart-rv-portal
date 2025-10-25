@@ -26,7 +26,7 @@ const PlanningSection = () => {
         once: true
       }} className="mb-8 mt-8">
           <AspectRatio ratio={16 / 9} className="mb-8 overflow-hidden rounded-lg shadow-xl">
-            <img src="/lovable-uploads/2f6b7370-f9de-4fed-91d7-a4d0822299c7.png" alt="Person planning Smart RV trip with maps and weather data on computer" className="w-full h-full object-cover" />
+            <img src="/lovable-uploads/2f6b7370-f9de-4fed-91d7-a4d0822299c7.webp" alt="Person planning Smart RV trip with maps and weather data on computer" className="w-full h-full object-cover" />
           </AspectRatio>
           
           <h2 className="text-3xl md:text-4xl font-bold text-white font-playfair text-center mb-4">

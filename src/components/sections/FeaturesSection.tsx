@@ -39,7 +39,7 @@ const features = [
 
 export const FeaturesSection = () => (
   <section className="py-32 px-4 bg-[#1A1A2F] bg-opacity-98 relative overflow-hidden">
-    <div className="absolute inset-0 bg-[url('/lovable-uploads/03ccf137-16cb-41a0-bfb5-2179fe20eb79.png')] opacity-10 bg-cover bg-center" />
+    <div className="absolute inset-0 bg-[url('/lovable-uploads/03ccf137-16cb-41a0-bfb5-2179fe20eb79.webp')] opacity-10 bg-cover bg-center" />
     <div className="max-w-6xl mx-auto relative z-10">
       <div className="text-center mb-20">
         <motion.div

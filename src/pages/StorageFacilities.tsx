@@ -169,7 +169,7 @@ export default function StorageFacilities() {
       {/* Hero Header with Image */}
       <div className="relative w-full h-[300px]">
         <img 
-          src="/lovable-uploads/e9503bf4-354a-4790-8a83-fefea32abc5b.png" 
+          src="/lovable-uploads/e9503bf4-354a-4790-8a83-fefea32abc5b.webp" 
           alt="Indoor RV Storage Facility" 
           className="w-full h-full object-cover"
         />

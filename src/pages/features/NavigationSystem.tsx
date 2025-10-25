@@ -41,7 +41,7 @@ const NavigationSystem = () => {
           {/* Hero Section */}
           <div className="relative h-96 mb-16 mt-8 rounded-lg overflow-hidden">
             <img 
-              src="/lovable-uploads/navigation-hero.jpg"
+              src="/lovable-uploads/navigation-hero.webp"
               alt="RV Navigation System Dashboard Interface" 
               className="w-full h-full object-cover"
               onLoad={() => console.log('Navigation hero image loaded successfully')}
@@ -72,7 +72,7 @@ const NavigationSystem = () => {
                 <p>We ensure the safest and most efficient route to your destination.</p>
               </div>
               <img 
-                src="/lovable-uploads/9b875f9e-6d50-4ecf-b12a-caafbb8ea530.png"
+                src="/lovable-uploads/9b875f9e-6d50-4ecf-b12a-caafbb8ea530.webp"
                 alt="RV Navigation System Interface" 
                 className="w-full h-64 object-cover rounded-lg mb-6"
               />
@@ -115,7 +115,7 @@ const NavigationSystem = () => {
           {/* Trip Planning Image Section */}
           <div className="w-full mb-16">
             <img 
-              src="/lovable-uploads/navigation-trip-planning.jpg"
+              src="/lovable-uploads/navigation-trip-planning.webp"
               alt="RV Navigation and Trip Planning Setup" 
               className="w-full h-96 object-cover rounded-lg"
               onLoad={() => console.log('Trip planning image loaded successfully')}

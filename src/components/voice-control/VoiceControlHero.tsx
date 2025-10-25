@@ -5,7 +5,7 @@ export const VoiceControlHero = () => {
   return (
     <section className="hero-section">
       <img 
-        src="/lovable-uploads/ff43ed8a-b7cd-42f7-a45e-a3a706d39d07.png"
+        src="/lovable-uploads/ff43ed8a-b7cd-42f7-a45e-a3a706d39d07.webp"
         alt="Futuristic RV interior with smart display and mountain view"
         className="hero-image"
       />

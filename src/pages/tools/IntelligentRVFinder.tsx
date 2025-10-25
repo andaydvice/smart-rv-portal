@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 import { RelatedTools } from '@/components/rv-technology/RelatedTools';
 import { availableTools } from '@/lib/toolsData';
-import intelligentRvFinderHero from '@/assets/intelligent-rv-finder-hero.jpg';
+import intelligentRvFinderHero from '@/assets/intelligent-rv-finder-hero.webp';
 import IntelligentRVFinderComponent from '@/components/rv-technology/interactive/IntelligentRVFinder';
 import AffiliateDisclosure from '@/components/affiliate/AffiliateDisclosure';
 

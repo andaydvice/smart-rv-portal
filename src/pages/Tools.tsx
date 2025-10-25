@@ -5,7 +5,7 @@ import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/com
 import { Button } from '@/components/ui/button';
 import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 import { availableTools } from '@/lib/toolsData';
-import rvTechToolsHero from '@/assets/rv-technology-tools-hero.png';
+import rvTechToolsHero from '@/assets/rv-technology-tools-hero.webp';
 import Layout from '@/components/layout/Layout';
 
 const Tools: React.FC = () => {

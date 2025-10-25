@@ -1,6 +1,6 @@
 import React from 'react';
 import { PreloadedHeaderImage } from '@/components/ui/PreloadedHeaderImage';
-import rvTechHeaderImage from '@/assets/rv-technology-tradeoffs-header.jpg';
+import rvTechHeaderImage from '@/assets/rv-technology-tradeoffs-header.webp';
 
 const RVTechnologyHeader = () => {
   return (
