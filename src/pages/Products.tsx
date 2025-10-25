@@ -19,63 +19,63 @@ const Products = () => {
   const productsFAQs = [
     {
       question: "What types of RV products and services do you offer?",
-      answer: "We offer comprehensive RV technology solutions including smart monitoring systems, internet connectivity packages (WiFi boosters, cellular modems, satellite prep), security solutions (cameras, alarms, GPS tracking), power management systems (solar panels, lithium batteries, inverters), and professional installation and maintenance services. All products are specifically designed for mobile living."
+      answer: "We offer comprehensive RV technology solutions including smart monitoring systems, internet connectivity packages (WiFi boosters, cellular modems, satellite prep), security solutions (cameras, alarms, GPS tracking), and power management systems (solar panels, lithium batteries, inverters). All products are specifically designed for mobile living with professional installation and ongoing maintenance services available."
     },
     {
       question: "Do you offer professional installation for all products?",
-      answer: "Yes, professional installation is available for all our products and is highly recommended for complex systems. Our certified technicians have extensive experience with RV electrical systems, connectivity solutions, and smart technology integration. Installation typically takes 1-5 days depending on the product complexity."
+      answer: "Yes! Professional installation is available for all our products and highly recommended for complex systems. Our certified technicians have extensive experience with RV electrical systems, connectivity solutions, and smart technology integration. Installation typically takes 1 to 5 days depending on the product complexity and your vehicle configuration."
     },
     {
       question: "Are your products compatible with all RV types?",
-      answer: "Our products are compatible with most RV types including Class A, Class B, and Class C motorhomes, travel trailers, fifth wheels, and toy haulers. We assess compatibility during consultation to ensure proper fit and function for your specific RV model and year."
+      answer: "Our products work with most RV categories including Class A, Class B, and Class C motorhomes, travel trailers, fifth wheels, and toy haulers. We assess compatibility during your consultation to ensure proper fit and optimal function for your specific RV model and year. Every vehicle is unique, and we customize accordingly."
     },
     {
       question: "What warranty coverage comes with RV products?",
-      answer: "Most products include manufacturer warranties ranging from 1-5 years, plus our installation warranty. Extended warranty options are available. We stand behind all products and services with comprehensive support and troubleshooting assistance."
+      answer: "Most products include manufacturer warranties ranging from 1 to 5 years, plus our comprehensive installation warranty. Extended warranty options are available for additional protection. We stand behind all products and services with comprehensive support and troubleshooting assistance whenever you need help."
     },
     {
       question: "Can I purchase products without installation?",
-      answer: "Yes, you can purchase products for DIY installation. We provide detailed installation guides, technical support, and video tutorials for self-installers. However, professional installation ensures optimal performance and warranty coverage."
+      answer: "Yes! You can purchase products for DIY installation if you prefer. We provide detailed installation guides, technical support, and video tutorials for self installers. However, professional installation ensures optimal performance and full warranty coverage, which we recommend for complex systems."
     },
     {
       question: "Do you offer financing for RV product purchases?",
-      answer: "Yes, we offer flexible financing options including 0% APR for 12 months on purchases over $1,000, extended payment plans up to 60 months, and special financing for complete system upgrades. Contact our team to explore financing options that fit your budget."
+      answer: "Yes! We provide flexible financing options including 0% APR for 12 months on purchases over $1,000, extended payment plans up to 60 months, and special financing for complete system upgrades. Contact our team to explore financing options that fit your budget and timeline perfectly."
     },
     {
       question: "How do I choose the right internet solution for my RV?",
-      answer: "The best internet solution depends on your travel style. Full-time boondockers benefit from Starlink or multi-carrier cellular. Weekend warriors often prefer WiFi extenders and single-carrier hotspots. We offer free consultations to assess your needs and recommend the optimal connectivity solution."
+      answer: "The best internet solution depends on your travel style and needs. Full time boondockers benefit from Starlink or multi carrier cellular systems. Weekend warriors often prefer WiFi extenders and single carrier hotspots. We offer free consultations to assess your specific requirements and recommend the optimal connectivity solution for your lifestyle."
     },
     {
       question: "What's included in maintenance service plans?",
-      answer: "Our maintenance plans include annual system inspections, software updates, component testing, troubleshooting assistance, priority scheduling, and discounted repair rates. Plans are customized based on your installed systems and can be bundled for savings."
+      answer: "Our maintenance plans include annual system inspections, software updates, component testing, troubleshooting assistance, priority scheduling, and discounted repair rates. Plans are customized based on your installed systems and can be bundled together for maximum savings and convenience."
     },
     {
       question: "Can I upgrade my current RV systems?",
-      answer: "Absolutely! We specialize in upgrading existing RV systems. Common upgrades include replacing AGM batteries with lithium, adding solar panels, installing WiFi boosters, and integrating smart automation. We'll assess your current setup and recommend cost-effective upgrade paths."
+      answer: "Absolutely! We specialize in upgrading existing RV systems to modern technology. Common upgrades include replacing AGM batteries with lithium, adding solar panels, installing WiFi boosters, and integrating smart automation controls. We assess your current setup and recommend cost effective upgrade paths that maximize your investment."
     },
     {
       question: "Do you sell refurbished or used RV equipment?",
-      answer: "We occasionally offer certified refurbished equipment at discounted prices. All refurbished items undergo rigorous testing, include warranty coverage, and are clearly marked. Contact us to inquire about current refurbished inventory."
+      answer: "We occasionally offer certified refurbished equipment at discounted prices. All refurbished items undergo rigorous testing, include warranty coverage, and are clearly marked as such. Contact us directly to inquire about current refurbished inventory and special pricing opportunities."
     },
     {
       question: "What payment methods do you accept?",
-      answer: "We accept all major credit cards (Visa, MasterCard, Amex, Discover), PayPal, bank transfers, checks, and financing through our approved lenders. For large purchases, we can arrange split payments or deposits."
+      answer: "We accept all major credit cards (Visa, MasterCard, Amex, Discover), PayPal, bank transfers, checks, and financing through our approved lending partners. For large purchases, we can arrange split payments or deposit arrangements that work best for your financial situation."
     },
     {
       question: "How long does product delivery take?",
-      answer: "In-stock items typically ship within 1-3 business days with delivery in 3-7 days. Custom orders or special-order items may take 2-6 weeks. Installation appointments are typically scheduled within 1-2 weeks of product delivery."
+      answer: "In stock items typically ship within 1 to 3 business days with delivery in 3 to 7 days via standard shipping. Custom orders or special order items may take 2 to 6 weeks for delivery. Installation appointments are typically scheduled within 1 to 2 weeks of product arrival at your location."
     },
     {
       question: "Do you offer returns or exchanges?",
-      answer: "Yes, we offer a 30-day return policy on most products (some restrictions apply for custom or installed items). Unopened items in original packaging receive full refunds. Exchanges are available for defective or incompatible products."
+      answer: "Yes! We offer a 30 day return policy on most products, though some restrictions apply for custom or installed items. Unopened items in original packaging receive full refunds. Exchanges are always available for defective or incompatible products to ensure you get exactly what you need."
     },
     {
       question: "Can I get a product recommendation consultation?",
-      answer: "Yes! We offer free product consultation calls where our experts assess your RV, discuss your lifestyle and needs, and recommend the best products and solutions. No obligation to purchase. Schedule your consultation today."
+      answer: "Yes! We offer completely free product consultation calls where our experts assess your RV, discuss your lifestyle and specific needs, and recommend the best products and solutions. There is no obligation to purchase. Schedule your complimentary consultation today to get personalized expert advice."
     },
     {
       question: "Do you offer package deals or bundle discounts?",
-      answer: "Yes, we offer significant discounts on bundled products. For example, pairing solar panels with lithium batteries, or combining WiFi, security, and power management in a complete smart RV package. Bundles save 15-30% compared to individual purchases."
+      answer: "Yes! We offer significant discounts on bundled products. For example, pairing solar panels with lithium batteries, or combining WiFi, security, and power management in a complete smart RV package. Bundles typically save 15% to 30% compared to purchasing items individually, making them excellent value."
     }
   ];
 

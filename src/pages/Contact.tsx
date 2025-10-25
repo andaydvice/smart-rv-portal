@@ -24,63 +24,63 @@ const Contact = () => {
   const contactFAQs = [
     {
       question: "What's the best way to contact Smart RV Technology?",
-      answer: "For quickest response, use our online contact form above or call our main office during business hours (Monday-Friday 9 AM - 6 PM EST). For technical support, email support@smartrvtech.com. For sales inquiries, call our sales team directly at 1-800-SMART-RV. We respond to all inquiries within 24 hours on business days."
+      answer: "For the quickest response, use our online contact form above or call our main office during business hours (Monday through Friday, 9 AM to 6 PM EST). For technical support, email support@smartrvtech.com directly. For sales inquiries, call our sales team at 1 800 SMART RV. We respond to all inquiries within 24 hours on business days, guaranteed."
     },
     {
       question: "What are your customer service hours?",
-      answer: "Our customer service team is available Monday through Friday, 9:00 AM to 6:00 PM Eastern Time. Technical support is available Monday-Saturday 8:00 AM to 8:00 PM EST. For after-hours emergencies with installed systems, our emergency hotline (available to existing customers) operates 24/7."
+      answer: "Our customer service team is available Monday through Friday, 9:00 AM to 6:00 PM Eastern Time. Technical support operates Monday through Saturday, 8:00 AM to 8:00 PM EST for your convenience. For after hours emergencies with installed systems, our emergency hotline (available to existing customers) operates around the clock, 24 hours a day, 7 days a week."
     },
     {
       question: "How quickly will I receive a response to my inquiry?",
-      answer: "We aim to respond to all inquiries within 24 hours during business days. Sales inquiries typically receive responses within 4-6 hours. Technical support requests are prioritized by urgency - emergency issues receive immediate attention, while general questions are answered within 24 hours. Weekend submissions are answered on the next business day."
+      answer: "We aim to respond to all inquiries within 24 hours during business days. Sales inquiries typically receive responses within 4 to 6 hours. Technical support requests are prioritized by urgency. Emergency issues receive immediate attention, while general questions are answered within 24 hours. Weekend submissions are addressed on the next business day."
     },
     {
       question: "Can I schedule a consultation to discuss my RV needs?",
-      answer: "Yes! We offer free 30-minute consultation calls to discuss your RV, lifestyle, and technology needs. Use our contact form and select 'Schedule Consultation' as your inquiry type, or call our sales team directly. We can schedule in-person consultations for local customers or virtual consultations via video call for remote customers."
+      answer: "Yes! We offer free 30 minute consultation calls to discuss your RV, lifestyle, and technology needs in detail. Use our contact form and select Schedule Consultation as your inquiry type, or call our sales team directly. We can schedule in person consultations for local customers or convenient virtual consultations via video call for remote customers."
     },
     {
-      question: "Do you offer on-site visits or assessments?",
-      answer: "Yes, we provide on-site RV assessments for customers within our service areas (major metro areas across the US). For a small fee (credited toward installation if you proceed), our technicians will visit your location, assess your RV, and provide detailed recommendations. Virtual assessments via video call are free."
+      question: "Do you offer on site visits or assessments?",
+      answer: "Yes! We provide on site RV assessments for customers within our service areas (major metro areas across the US). For a small fee (credited toward installation if you proceed), our experienced technicians visit your location, assess your RV thoroughly, and provide detailed recommendations. Virtual assessments via video call are completely free."
     },
     {
       question: "What information should I include in my inquiry?",
-      answer: "To help us assist you better, please include: your RV type and model year, specific technology interests or concerns, your typical travel style (weekend, full-time, seasonal), budget range if applicable, and preferred contact method. The more details you provide, the more accurate and helpful our response will be."
+      answer: "To help us assist you better, please include your RV type and model year, specific technology interests or concerns, your typical travel style (weekend trips, full time living, or seasonal use), budget range if applicable, and preferred contact method. The more details you provide, the more accurate and helpful our personalized response will be."
     },
     {
       question: "Can I request a quote through the contact form?",
-      answer: "Yes! Select 'Request Quote' as your inquiry type and provide details about your RV and desired features. We'll respond with a preliminary estimate within 1 business day. For accurate quotes, we recommend scheduling a consultation or on-site assessment."
+      answer: "Yes! Select Request Quote as your inquiry type and provide details about your RV and desired features. We respond with a preliminary estimate within 1 business day. For the most accurate quotes tailored to your needs, we recommend scheduling a consultation or on site assessment with our team."
     },
     {
       question: "Do you provide technical support for existing customers?",
-      answer: "Yes, all customers receive comprehensive technical support. Basic support is included with all installations. Premium support plans offer priority response, extended hours, and remote troubleshooting. Contact our support team at support@smartrvtech.com or call our technical support line."
+      answer: "Yes! All customers receive comprehensive technical support as part of their package. Basic support is included with all installations at no extra charge. Premium support plans offer priority response times, extended hours, and advanced remote troubleshooting capabilities. Contact our support team at support@smartrvtech.com or call our dedicated technical support line anytime."
     },
     {
       question: "How do I report an issue with my installed system?",
-      answer: "For technical issues, contact our support team immediately via phone or email. Provide your customer ID, system details, and description of the issue. Emergency issues (system failures, safety concerns) should be reported to our 24/7 emergency hotline. We'll schedule service or provide remote troubleshooting as appropriate."
+      answer: "For technical issues, contact our support team immediately via phone or email with your details. Provide your customer ID, system information, and a clear description of the issue. Emergency issues (system failures or safety concerns) should be reported to our 24 hour emergency hotline right away. We schedule service or provide remote troubleshooting as appropriate for your situation."
     },
     {
       question: "Can I speak with a salesperson about financing options?",
-      answer: "Absolutely! Our sales team is well-versed in all financing options, including 0% APR plans, extended payment options, and special offers. Call our sales line or request a callback through the contact form. We'll explain all options and help you find the best financing solution."
+      answer: "Absolutely! Our sales team has expertise in all financing options, including 0% APR plans, extended payment options, and special promotional offers. Call our sales line directly or request a callback through the contact form. We explain all available options clearly and help you find the best financing solution for your budget."
     },
     {
       question: "Do you have a physical location I can visit?",
-      answer: "We have showrooms and service centers in major cities across the United States. Our main headquarters is in [Location]. Contact us to find the nearest location and schedule a visit. We recommend calling ahead to ensure a specialist is available for your specific needs."
+      answer: "We have showrooms and service centers in major cities across the United States. Our main headquarters is in [Location]. Contact us to find the nearest location and schedule a visit that works for you. We recommend calling ahead to ensure a specialist is available for your specific needs and questions."
     },
     {
       question: "How do I provide feedback about my service experience?",
-      answer: "We value customer feedback! You can submit feedback through our contact form, email feedback@smartrvtech.com, or call our customer service line. Positive experiences can be shared via online reviews (Google, Yelp, RV forums). All feedback is reviewed by management and used to improve our services."
+      answer: "We value customer feedback immensely! You can submit feedback through our contact form, email feedback@smartrvtech.com, or call our customer service line during business hours. Positive experiences can be shared via online reviews on Google, Yelp, and RV forums. All feedback is carefully reviewed by management and used to continuously improve our services."
     },
     {
       question: "Can I email my questions instead of using the contact form?",
-      answer: "Yes! Email us at: General inquiries - info@smartrvtech.com, Sales - sales@smartrvtech.com, Technical support - support@smartrvtech.com, Billing - billing@smartrvtech.com, or Partnerships - partners@smartrvtech.com. While we accept email, the contact form helps route inquiries faster to the appropriate team."
+      answer: "Yes! Email us directly at the appropriate department: General inquiries to info@smartrvtech.com, Sales to sales@smartrvtech.com, Technical support to support@smartrvtech.com, Billing to billing@smartrvtech.com, or Partnerships to partners@smartrvtech.com. While we gladly accept email, the contact form helps route inquiries faster to the appropriate specialist team."
     },
     {
       question: "What if I need emergency assistance while traveling?",
-      answer: "Existing customers with installed systems can call our 24/7 emergency support hotline (number provided at installation). For urgent technical issues, we provide remote troubleshooting and can arrange emergency service through our nationwide partner network. Emergency support is included with all Professional and Premium packages."
+      answer: "Existing customers with installed systems can call our 24 hour emergency support hotline (number provided at installation). For urgent technical issues, we provide immediate remote troubleshooting and can arrange emergency service through our extensive nationwide partner network. Emergency support is included with all Professional and Premium packages at no additional cost."
     },
     {
       question: "How do I cancel or reschedule an appointment?",
-      answer: "To cancel or reschedule, contact us at least 24 hours in advance via phone or email. Include your appointment confirmation number and preferred new date/time. We understand plans change - we'll work with you to find a convenient alternative. Last-minute cancellations may incur rescheduling fees."
+      answer: "To cancel or reschedule, contact us at least 24 hours in advance via phone or email. Include your appointment confirmation number and preferred new date and time. We understand plans change, and our team will work with you to find a convenient alternative appointment. Cancellations made with less than 24 hours notice may incur rescheduling fees."
     }
   ];
 

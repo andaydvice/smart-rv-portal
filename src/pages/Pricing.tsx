@@ -18,63 +18,63 @@ const Pricing = () => {
   const pricingFAQs = [
     {
       question: "What's included in Smart RV pricing packages?",
-      answer: "All Smart RV packages include professional installation by certified technicians, comprehensive training and onboarding, a 2-year warranty on all hardware, and a 30-day satisfaction guarantee. Each package also includes the specific features listed, mobile app access, and ongoing customer support."
+      answer: "Every Smart RV package includes professional installation by certified technicians, comprehensive training and onboarding, a 2 year warranty on all hardware, and a 30 day satisfaction guarantee. You also receive the specific features listed in your chosen package, mobile app access, and ongoing customer support from our expert team."
     },
     {
       question: "Do you offer financing options for RV technology upgrades?",
-      answer: "Yes, we offer flexible financing including 0% APR for 12 months, extended payment plans up to 60 months, trade-in credit for existing systems, and corporate and fleet discounts. Contact our team to discuss the best financing option for your situation."
+      answer: "Yes! We provide flexible financing solutions including 0% APR for 12 months, extended payment plans up to 60 months, trade in credit for existing systems, and special corporate and fleet discounts. Contact our team to explore the financing option that works best for your budget and timeline."
     },
     {
       question: "How long does installation take?",
-      answer: "Installation time varies by package. Smart Essentials typically takes 2-3 days, Smart Professional takes 3-5 days, and Smart Premium can take 5-7 days. Our certified technicians work efficiently while ensuring quality installation. We'll provide a detailed timeline during consultation."
+      answer: "Installation time depends on your chosen package. Smart Essentials typically takes 2 to 3 days. Smart Professional requires 3 to 5 days. Smart Premium installations span 5 to 7 days. Our certified technicians work efficiently while ensuring quality results. We provide a detailed timeline during your consultation."
     },
     {
       question: "Can I upgrade my package later?",
-      answer: "Absolutely! All our packages are designed to be upgradeable. You can start with Smart Essentials and upgrade to Professional or Premium as your needs grow. We offer trade-in credit for your existing equipment when upgrading."
+      answer: "Absolutely! All packages are designed to be upgradeable. Start with Smart Essentials and move up to Professional or Premium as your needs evolve. We offer trade in credit for your existing equipment when you upgrade, making the transition seamless and affordable."
     },
     {
       question: "What warranty coverage is included?",
-      answer: "All packages include a comprehensive 2-year warranty on hardware and installation. Smart Premium includes lifetime software updates. We also offer extended warranty options and service plans for additional coverage and peace of mind."
+      answer: "All packages come with a comprehensive 2 year warranty covering hardware and installation. Smart Premium customers receive lifetime software updates at no additional cost. Extended warranty options and service plans are available for extra coverage and complete peace of mind."
     },
     {
       question: "Do prices include installation costs?",
-      answer: "The listed prices are for equipment and technology packages only. Professional installation is quoted separately based on your RV model, existing systems, and location. Most installations range from $1,500-$3,500 depending on package complexity."
+      answer: "Listed prices cover equipment and technology packages. Professional installation is quoted separately based on your specific RV model, existing systems, and location. Most installations range from $1,500 to $3,500 depending on the complexity of your chosen package and vehicle setup."
     },
     {
       question: "Are there monthly fees for smart RV features?",
-      answer: "Some features like cellular connectivity and certain cloud services may have optional monthly subscriptions. However, core smart RV functionality has no monthly fees. We'll clearly explain any ongoing costs during consultation."
+      answer: "Core smart RV functionality has no monthly fees. Some premium features like cellular connectivity and certain cloud services may have optional monthly subscriptions. We clearly explain any ongoing costs during your consultation so there are no surprises."
     },
     {
       question: "What's the difference between the three packages?",
-      answer: "Smart Essentials provides basic automation and monitoring, ideal for entry-level upgrades. Smart Professional adds advanced features like GPS tracking, voice control, and priority support - perfect for serious RV enthusiasts. Smart Premium includes everything plus AI-powered optimization, luxury amenity controls, and concierge support for the ultimate experience."
+      answer: "Smart Essentials provides basic automation and monitoring, perfect for entry level upgrades. Smart Professional adds advanced features including GPS tracking, voice control, and priority support for serious RV enthusiasts. Smart Premium delivers everything plus AI powered optimization, luxury amenity controls, and dedicated concierge support for the ultimate experience."
     },
     {
       question: "Can I customize a package?",
-      answer: "Yes! While our packages are designed to cover common needs, we offer full customization. During your consultation, we can build a tailored solution that includes exactly the features you want within your budget."
+      answer: "Yes! While our packages cover common needs, we offer full customization. During your consultation, we build a tailored solution that includes exactly the features you want within your budget. Every RV is unique, and your technology package should be too."
     },
     {
       question: "Do you service all RV types and brands?",
-      answer: "We work with all major RV types including Class A, Class B, Class C motorhomes, travel trailers, and fifth wheels. Our systems are compatible with most RV brands. We'll assess your specific RV during the consultation to ensure perfect compatibility."
+      answer: "We work with all major RV categories including Class A, Class B, and Class C motorhomes, travel trailers, and fifth wheels. Our systems integrate with most RV brands seamlessly. We assess your specific vehicle during consultation to ensure perfect compatibility and optimal performance."
     },
     {
-      question: "What's included in the 30-day satisfaction guarantee?",
-      answer: "If you're not completely satisfied within 30 days of installation, we'll work with you to make it right. This may include system adjustments, additional training, or in rare cases, a full refund minus installation costs. Your satisfaction is our priority."
+      question: "What's included in the 30 day satisfaction guarantee?",
+      answer: "If you're not completely satisfied within 30 days of installation, we make it right. This includes system adjustments, additional training sessions, or in rare cases, a full refund minus installation costs. Your complete satisfaction is our top priority and commitment."
     },
     {
       question: "How do smart RV upgrades affect resale value?",
-      answer: "Smart RV technology typically increases resale value by 15-25% according to industry data. Modern buyers actively seek RVs with integrated technology, connectivity, and automation features. Premium packages show the highest ROI at resale."
+      answer: "Smart RV technology typically increases resale value by 15% to 25% according to industry data. Modern buyers actively seek RVs with integrated technology, connectivity, and automation features. Premium packages show the highest return on investment at resale time."
     },
     {
       question: "Do you offer fleet or bulk discounts?",
-      answer: "Yes, we offer special pricing for fleet owners, RV rental companies, and multiple-unit purchases. Contact our commercial team for custom fleet quotes and volume discounts."
+      answer: "Yes! We provide special pricing for fleet owners, RV rental companies, and multiple unit purchases. Contact our commercial sales team for custom fleet quotes and attractive volume discounts tailored to your business needs."
     },
     {
       question: "What payment methods do you accept?",
-      answer: "We accept all major credit cards, bank transfers, financing through our partners, and can work with RV loans that include upgrade costs. We'll help you find the most convenient payment method."
+      answer: "We accept all major credit cards, bank transfers, and financing through our lending partners. We can also coordinate with RV loans that include upgrade costs. Our team helps you find the most convenient payment method for your situation."
     },
     {
       question: "Is there a consultation fee?",
-      answer: "No, all consultations are completely free. Our experts will assess your RV, discuss your needs, and provide a detailed quote with no obligation. Schedule your free consultation today."
+      answer: "No! All consultations are completely free with zero obligation. Our experts assess your RV, discuss your specific needs and goals, and provide a detailed customized quote. Schedule your complimentary consultation today to get started."
     }
   ];
 
