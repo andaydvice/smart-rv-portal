@@ -1,0 +1,35 @@
+name: Post-Deploy Verification
+
+on:
+  # Run after push to main (which triggers Netlify deploy)
+  push:
+    branches:
+      - main
+  # Allow manual trigger
+  workflow_dispatch:
+
+jobs:
+  verify-deployment:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Wait for Netlify deployment
+        run: |
+          echo "Waiting 2 minutes for Netlify to deploy..."
+          sleep 120
+
+      - name: Run post-deployment verification
+        run: |
+          chmod +x ./post-deploy-verify.sh
+          ./post-deploy-verify.sh
+        continue-on-error: false
+
+      - name: Notify on failure
+        if: failure()
+        run: |
+          echo "::error::Post-deployment verification failed! Site may be broken."
+          echo "Check the logs above for details."
+          echo "Manual rollback may be required via Netlify dashboard."
