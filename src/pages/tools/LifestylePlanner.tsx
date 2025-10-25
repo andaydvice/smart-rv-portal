@@ -5,7 +5,7 @@ import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 import { RelatedTools } from '@/components/rv-technology/RelatedTools';
 import { AILifestylePlanner } from '@/components/rv-technology/interactive/AILifestylePlanner';
 import { availableTools } from '@/lib/toolsData';
-import aiLifestyleTechnologyPlannerHero from '@/assets/ai-lifestyle-technology-planner-hero.webp';
+import aiLifestyleTechnologyPlannerHero from '@/assets/ai-lifestyle-technology-planner-hero.png';
 import AffiliateDisclosure from '@/components/affiliate/AffiliateDisclosure';
 
 const LifestylePlanner: React.FC = () => {

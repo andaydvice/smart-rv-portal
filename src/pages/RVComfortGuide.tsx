@@ -5,8 +5,8 @@ import { Helmet } from 'react-helmet-async';
 import { Link } from "react-router-dom";
 import { Bed, Thermometer, Wind, Lightbulb, Coffee, Bath, ArrowLeft } from 'lucide-react';
 import { Button } from "@/components/ui/button";
-import heroImage from '@/assets/rv-comfort-hero.webp';
-import advancedComfortImage from '@/assets/rv-advanced-comfort.webp';
+import heroImage from '@/assets/rv-comfort-hero.jpg';
+import advancedComfortImage from '@/assets/rv-advanced-comfort.jpg';
 
 const RVComfortGuide = () => {
   const comfortAreas = [

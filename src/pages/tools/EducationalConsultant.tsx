@@ -5,7 +5,7 @@ import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 import { RelatedTools } from '@/components/rv-technology/RelatedTools';
 import { AIEducationalConsultant } from '@/components/rv-technology/interactive/AIEducationalConsultant';
 import { availableTools } from '@/lib/toolsData';
-import aiEducationalConsultantHero from '@/assets/ai-educational-consultant-hero.webp';
+import aiEducationalConsultantHero from '@/assets/ai-educational-consultant-hero.png';
 import AffiliateDisclosure from '@/components/affiliate/AffiliateDisclosure';
 
 const EducationalConsultant: React.FC = () => {
