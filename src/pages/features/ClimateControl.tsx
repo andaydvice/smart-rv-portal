@@ -49,7 +49,7 @@ const ClimateControl = () => {
           <div className="mb-12 relative">
             <div className="relative w-full h-[400px] md:h-[500px] rounded-lg overflow-hidden">
               <img
-                src="/smart-climate-control-hero.jpeg?v=2"
+                src="/smart-climate-control-hero.webp?v=2"
                 alt="Smart climate control system interface with family in luxury RV interior showing temperature monitoring and HVAC controls"
                 className="w-full h-full object-cover object-center"
                 style={{ objectPosition: '50% 30%' }}
