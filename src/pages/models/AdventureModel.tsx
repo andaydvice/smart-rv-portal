@@ -37,7 +37,9 @@ const AdventureModel = () => {
           style={{ backgroundColor: "#1B2028" }}
         >
           <Container className="pt-16">
-            <h2 className="text-2xl mb-8 text-gray-300">
+            <Breadcrumbs items={[{ label: 'Models', href: '/models' }, { label: 'Adventure Model' }]} />
+
+            <h2 className="text-2xl mb-8 mt-8 text-gray-300">
               Explore Our Off Road RV Collection
             </h2>
 

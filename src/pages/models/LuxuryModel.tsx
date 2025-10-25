@@ -120,6 +120,8 @@ const LuxuryModel = () => {
 
         <div className="w-full px-4 pt-12 pb-24 relative z-10">
           <div className="max-w-7xl mx-auto">
+            <Breadcrumbs items={[{ label: 'Models', href: '/models' }, { label: 'Luxury Model' }]} />
+
             <KeyFeatures />
 
             <motion.div 

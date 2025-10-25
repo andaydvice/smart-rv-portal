@@ -54,6 +54,7 @@ const CompactModel = () => {
           <CompactModelHero />
           <div className="w-full px-4 py-12 pb-24">
             <div className="max-w-7xl mx-auto">
+              <Breadcrumbs items={[{ label: 'Models', href: '/models' }, { label: 'Compact Model' }]} />
               <div className="grid gap-12">
                 {rvTypes.map((type, index) => (
                   <Suspense key={type.title} fallback={<LoadingPlaceholder />}>
