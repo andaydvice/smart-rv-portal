@@ -27,6 +27,17 @@ jobs:
           ./post-deploy-verify.sh
         continue-on-error: false
 
+      - name: Setup Node.js for Lighthouse
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Run Lighthouse performance audit
+        run: |
+          chmod +x ./lighthouse-check.sh
+          ./lighthouse-check.sh https://smartrvhub.com
+        continue-on-error: true
+
       - name: Notify on failure
         if: failure()
         run: |
