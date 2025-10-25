@@ -5,7 +5,7 @@ import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 import { RelatedTools } from '@/components/rv-technology/RelatedTools';
 import { AITechnologyChecklist } from '@/components/rv-technology/interactive/AITechnologyChecklist';
 import { availableTools } from '@/lib/toolsData';
-import aiTechnologyResearchChecklistHero from '@/assets/ai-technology-research-checklist-hero.webp';
+import aiTechnologyResearchChecklistHero from '@/assets/ai-technology-research-checklist-hero.jpg';
 import AffiliateDisclosure from '@/components/affiliate/AffiliateDisclosure';
 
 const TechnologyChecklist: React.FC = () => {

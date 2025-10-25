@@ -1,6 +1,6 @@
 import React from 'react';
 import { PreloadedHeaderImage } from '@/components/ui/PreloadedHeaderImage';
-import rvControlImage from '@/assets/rv-control-monitoring-hero.webp';
+import rvControlImage from '@/assets/rv-control-monitoring-hero.jpg';
 
 const RVControlMonitoringHero = () => {
   return (

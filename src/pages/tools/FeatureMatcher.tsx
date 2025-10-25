@@ -5,7 +5,7 @@ import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 import { RelatedTools } from '@/components/rv-technology/RelatedTools';
 import { EnhancedFeatureMatcher } from '@/components/rv-technology/interactive/EnhancedFeatureMatcher';
 import { availableTools } from '@/lib/toolsData';
-import aiEnhancedFeatureMatcherHero from '@/assets/ai-enhanced-feature-matcher-hero.webp';
+import aiEnhancedFeatureMatcherHero from '@/assets/ai-enhanced-feature-matcher-hero.jpg';
 import AffiliateDisclosure from '@/components/affiliate/AffiliateDisclosure';
 
 const FeatureMatcher: React.FC = () => {
