@@ -374,15 +374,33 @@ echo "3. git push"
 
 ---
 
+## The Ultimate Irony
+
+**I wrote "30 minutes of planning saves hours" but I didn't even create a todo list.**
+
+What I SHOULD have done BEFORE touching any code:
+- Use TodoWrite to create comprehensive checklist
+- Break down task into phases (Audit → Convert → Update → Verify → Cleanup)
+- Mark each item complete only after verification
+- One item in_progress at a time
+- Stop and re-audit if any unexpected errors
+
+**If I had used TodoWrite properly, NONE of this would have happened.**
+
+See `EXAMPLE_TODO_PLAN.md` for what the plan should have been.
+
+---
+
 ## Never Again
 
-1. ✅ Always audit before bulk operations
-2. ✅ Always test build locally before pushing
-3. ✅ Use comprehensive search patterns
-4. ✅ Make atomic commits
-5. ✅ Add quality control gates
-6. ✅ Use preview deployments
-7. ✅ Document lessons learned
+1. ✅ **CREATE TODO LIST FIRST** - Practice what you preach
+2. ✅ Always audit before bulk operations
+3. ✅ Always test build locally before pushing
+4. ✅ Use comprehensive search patterns
+5. ✅ Make atomic commits
+6. ✅ Add quality control gates
+7. ✅ Use preview deployments
+8. ✅ Document lessons learned
 
 **Cost of this disaster:** 3+ hours, broken production site, user frustration
-**Cost of doing it right:** 30-40 minutes, zero downtime, happy user
+**Cost of doing it right:** 40 minutes with a todo list, zero downtime, happy user
