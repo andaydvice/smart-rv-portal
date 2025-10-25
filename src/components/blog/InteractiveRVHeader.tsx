@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import smartRvHero from "@/assets/smart-rv-hero.webp";
+import smartRvHero from "@/assets/smart-rv-hero.jpg";
 
 const InteractiveRVHeader = () => {
   return (

@@ -1,10 +1,10 @@
 import { Brain, Search, Lightbulb, CheckSquare, Compass, Target } from 'lucide-react';
-import rvTechnologyPlanningImage from '@/assets/rv-technology-planning.webp';
-import aiEducationalConsultantHero from '@/assets/ai-educational-consultant-hero.webp';
-import aiEnhancedFeatureMatcherHero from '@/assets/ai-enhanced-feature-matcher-hero.webp';
-import aiLifestyleTechnologyPlannerHero from '@/assets/ai-lifestyle-technology-planner-hero.webp';
-import aiTechnologyResearchChecklistHero from '@/assets/ai-technology-research-checklist-hero.webp';
-import intelligentRvFinderHero from '@/assets/intelligent-rv-finder-hero.webp';
+import rvTechnologyPlanningImage from '@/assets/rv-technology-planning.png';
+import aiEducationalConsultantHero from '@/assets/ai-educational-consultant-hero.png';
+import aiEnhancedFeatureMatcherHero from '@/assets/ai-enhanced-feature-matcher-hero.jpg';
+import aiLifestyleTechnologyPlannerHero from '@/assets/ai-lifestyle-technology-planner-hero.png';
+import aiTechnologyResearchChecklistHero from '@/assets/ai-technology-research-checklist-hero.jpg';
+import intelligentRvFinderHero from '@/assets/intelligent-rv-finder-hero.jpg';
 
 export const availableTools = [
   {

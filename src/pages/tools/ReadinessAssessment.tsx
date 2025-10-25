@@ -6,7 +6,7 @@ import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 import { RelatedTools } from '@/components/rv-technology/RelatedTools';
 import { AITechnologyReadinessAssessment } from '@/components/rv-technology/interactive/AITechnologyReadinessAssessment';
 import { availableTools } from '@/lib/toolsData';
-import rvTechnologyPlanningImage from '@/assets/rv-technology-planning.webp';
+import rvTechnologyPlanningImage from '@/assets/rv-technology-planning.png';
 import { useToolAccess } from '@/hooks/useToolAccess';
 import { QueryCounter } from '@/components/tools/QueryCounter';
 import { ToolAccessGate } from '@/components/tools/ToolAccessGate';

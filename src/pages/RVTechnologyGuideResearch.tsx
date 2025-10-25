@@ -10,8 +10,8 @@ import {
   TestTube, Monitor, Wifi, Battery, Smartphone, Target, CheckCircle, Globe, Heart,
   Brain, TrendingUp, Cpu, Shield, GraduationCap, Database, ShoppingCart, ChevronLeft, Home, Building
 } from 'lucide-react';
-import rvTechnologyPlanningImage from '@/assets/rv-technology-planning.webp';
-import rvTechnologyDecisionsImage from '@/assets/rv-technology-decisions.webp';
+import rvTechnologyPlanningImage from '@/assets/rv-technology-planning.png';
+import rvTechnologyDecisionsImage from '@/assets/rv-technology-decisions.png';
 import { BlogPostImage } from '@/components/blog/post/BlogPostImage';
 import { ScrollToTopButton } from '@/components/rv-technology/ScrollToTopButton';
 import RVTechnologyHeader from '@/components/rv-technology/RVTechnologyHeader';
