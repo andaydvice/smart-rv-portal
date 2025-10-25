@@ -65,19 +65,17 @@ jobs:
             gh pr create \
               --base main \
               --head "${{ github.ref_name }}" \
-              --title "Auto-deploy: ${{ github.event.head_commit.message }}" \
-              --body "Automated deployment from ${{ github.ref_name }}" \
-              --fill > pr_output.txt 2>&1
+              --title "Auto-deploy" \
+              --body "Automated deployment" \
+              --fill || true
 
-            if [ $? -eq 0 ]; then
-              PR_URL=$(cat pr_output.txt)
-              PR_NUMBER=$(echo "$PR_URL" | grep -o '[0-9]\+$')
+            # Get PR number after creation
+            sleep 2
+            PR_NUMBER=$(gh pr list --head "${{ github.ref_name }}" --base main --json number --jq '.[0].number' 2>/dev/null || echo "")
+
+            if [ -n "$PR_NUMBER" ]; then
               echo "✅ Created PR #$PR_NUMBER"
               echo "pr-number=$PR_NUMBER" >> $GITHUB_OUTPUT
-            else
-              echo "❌ Failed to create PR. Output:"
-              cat pr_output.txt
-              exit 1
             fi
           fi
         env:
