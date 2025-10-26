@@ -152,9 +152,9 @@ const NavigationSystem = () => {
           <FeatureNavigationLinks
             className="mt-12 mb-8"
             relatedFeatures={[
-              { href: '/features/automated-driving', title: 'Automated Driving', description: 'Advanced self-driving features with smart navigation integration' },
-              { href: '/features/security-system', title: 'Security System', description: 'Enhanced security with GPS tracking and monitoring' },
-              { href: '/features/internet-connectivity', title: 'Internet Connectivity', description: 'Real-time map updates and connected navigation' }
+              { path: '/features/automated-driving', title: 'Automated Driving', description: 'Advanced self-driving features with smart navigation integration' },
+              { path: '/features/security-system', title: 'Security System', description: 'Enhanced security with GPS tracking and monitoring' },
+              { path: '/features/internet-connectivity', title: 'Internet Connectivity', description: 'Real-time map updates and connected navigation' }
             ]}
           />
         </div>

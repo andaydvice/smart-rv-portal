@@ -22,6 +22,7 @@ import RVCostCalculator from "@/components/calculators/rv/RVCostCalculator";
 import Navbar from "@/components/Navbar";
 import Layout from "@/components/layout/Layout";
 import AffiliateDisclosure from "@/components/affiliate/AffiliateDisclosure";
+import { OptimizedAffiliateGrid } from "@/components/affiliate/OptimizedAffiliateGrid";
 import { Helmet } from "react-helmet-async";
 
 const Calculators = () => {
@@ -99,7 +100,38 @@ const Calculators = () => {
                 <BatteryCapacityCalculator />
                 <PowerConsumptionCalculator />
                 <SolarPanelCalculator />
-                {/* Affiliate recommendations removed */}
+                
+                <OptimizedAffiliateGrid
+                  title="☀️ Recommended Solar Equipment Based on Your Calculations"
+                  subtitle="Professional solar systems, batteries, and power stations designed for RV installations with industry-leading support."
+                  partners={[
+                    {
+                      name: 'A1 Solar Store',
+                      url: 'https://a1solarstore.com',
+                      title: 'Complete Solar Systems & Kits',
+                      description: 'Premium solar panels, battery banks, and complete off-grid electrical systems perfectly sized for your calculated power needs.',
+                      features: ['Complete Solar Kits', 'Off-Grid Systems', 'Power Stations', '180-Day Cookie', '90% Confirmation Rate'],
+                      buttonText: 'Shop A1 Solar Systems'
+                    },
+                    {
+                      name: 'Solar Direct',
+                      url: 'https://solardirect.com',
+                      title: 'Solar Panels & Lithium Batteries',
+                      description: 'High-quality solar panels, lithium batteries, and charge controllers with comprehensive warranties and expert support.',
+                      features: ['Solar Panels', 'Lithium Batteries', 'Charge Controllers', '365-Day Cookie', 'Industry Leading Warranties'],
+                      buttonText: 'Get Solar Direct'
+                    },
+                    {
+                      name: 'A1 Solar Store',
+                      url: 'https://a1solarstore.com',
+                      title: 'Battery Banks & Energy Storage',
+                      description: 'High-capacity lithium battery banks and portable power stations for reliable off-grid power based on your battery calculations.',
+                      features: ['Lithium Battery Banks', 'Portable Power Stations', 'High Capacity Storage', 'Professional Support', '180-Day Cookie'],
+                      buttonText: 'Shop Battery Systems'
+                    }
+                  ]}
+                  gridCols="3"
+                />
               </div>
             </TabsContent>
 

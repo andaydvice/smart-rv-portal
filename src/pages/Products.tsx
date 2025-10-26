@@ -178,16 +178,19 @@ const Products = () => {
               transition={{ delay: 0.8 }}
               className="bg-gradient-to-br from-[#151A22] to-[#1a202c] p-8 rounded-2xl border border-gray-700 hover:border-blue-500/50 transition-all duration-300"
             >
-              <h3 className="text-2xl font-bold text-white mb-4">Essential Gear</h3>
+              <h3 className="text-2xl font-bold text-white mb-4">Solar & Power Equipment</h3>
               <p className="text-gray-300 mb-6">
-                High quality accessories and equipment for comfort, safety, and convenience.
+                Complete off-grid power solutions from trusted partners like A1 SolarStore and Solar Direct.
               </p>
               <ul className="text-gray-400 space-y-2">
-                <li>• Solar power systems</li>
-                <li>• Water filtration</li>
-                <li>• Storage solutions</li>
-                <li>• Safety equipment</li>
+                <li>• Complete solar kits & systems</li>
+                <li>• Lithium battery banks</li>
+                <li>• Portable power stations</li>
+                <li>• Wind turbines & hybrid power</li>
               </ul>
+              <Link to="/solar-power-guide" className="inline-block mt-4 text-blue-400 hover:text-blue-300">
+                View Solar Power Guide →
+              </Link>
             </motion.div>
 
             <motion.div

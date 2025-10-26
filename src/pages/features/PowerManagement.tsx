@@ -213,30 +213,38 @@ const PowerManagement = () => {
             />
           </div>
 
-          {/* Affiliate Recommendations */}
+          {/* Solar & Power Equipment Recommendations */}
           <div className="mt-8">
             <OptimizedAffiliateGrid
-              title="Professional Power System Installation"
-              subtitle="Get expert installation and monitoring for your RV power management system"
+              title="☀️ Complete Solar & Power Systems for RV Energy Independence"
+              subtitle="Professional-grade solar panels, batteries, and power stations designed for serious off-grid RV living."
               partners={[
                 {
-                  name: 'RV Life',
-                  url: 'https://rvlife.com',
-                  title: 'RV Life Pro GPS Navigation',
-                  description: 'Essential RV trip planning and GPS navigation app with power management route optimization',
-                  features: ['RV-Safe Routes', 'Campground Info', 'Trip Planning', 'Power Management Tips'],
-                  buttonText: 'Get RV Life Pro'
+                  name: 'A1 Solar Store',
+                  url: 'https://a1solarstore.com',
+                  title: 'A1 SolarStore - Complete Off-Grid Systems',
+                  description: 'Premium solar panels, lithium battery banks, power stations, and complete off-grid electrical systems with 180-day cookie tracking.',
+                  features: ['Complete Solar Kits', 'Off-Grid Systems', 'Power Stations', '180-Day Cookie', '90% Confirmation Rate'],
+                  buttonText: 'Shop A1 Solar Systems'
                 },
                 {
-                  name: 'Good Sam',
-                  url: 'https://goodsam.com',
-                  title: 'Good Sam Electrical Support',
-                  description: 'Expert electrical system support and maintenance for RV power management',
-                  features: ['Electrical Diagnostics', 'System Maintenance', 'Emergency Repairs', 'Technical Support'],
-                  buttonText: 'Get Electrical Support'
+                  name: 'Solar Direct',
+                  url: 'https://solardirect.com',
+                  title: 'Solar Direct - Premium Solar Solutions',
+                  description: 'Complete solar panel systems, lithium batteries, charge controllers, and inverters with industry-leading 365-day cookie and warranties.',
+                  features: ['Complete Systems', 'Lithium Batteries', 'Charge Controllers', '365-Day Cookie', 'Premium Warranties'],
+                  buttonText: 'Get Solar Direct'
+                },
+                {
+                  name: 'A1 Solar Store',
+                  url: 'https://a1solarstore.com',
+                  title: 'A1 SolarStore - Alternative Power & Wind',
+                  description: 'Solar generators, wind turbines, and hybrid power solutions for complete off-grid RV electrical independence.',
+                  features: ['Wind Turbines', 'Solar Generators', 'Hybrid Systems', 'Off-Grid Solutions', 'Professional Support'],
+                  buttonText: 'Explore Alternative Power'
                 }
               ]}
-              gridCols="2"
+              gridCols="3"
             />
 
             <AffiliateDisclosure className="mt-8" />

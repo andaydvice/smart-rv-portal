@@ -340,9 +340,9 @@ const SecuritySystem = () => {
           <FeatureNavigationLinks
             className="mt-12 mb-8"
             relatedFeatures={[
-              { href: '/features/navigation-system', title: 'Navigation System', description: 'GPS tracking integrated with your security setup' },
-              { href: '/features/remote-control', title: 'Remote Control', description: 'Monitor and control security from anywhere' },
-              { href: '/features/internet-connectivity', title: 'Internet Connectivity', description: 'Connected cameras and real-time security alerts' }
+              { path: '/features/navigation-system', title: 'Navigation System', description: 'GPS tracking integrated with your security setup' },
+              { path: '/features/remote-control', title: 'Remote Control', description: 'Monitor and control security from anywhere' },
+              { path: '/features/internet-connectivity', title: 'Internet Connectivity', description: 'Connected cameras and real-time security alerts' }
             ]}
           />
 

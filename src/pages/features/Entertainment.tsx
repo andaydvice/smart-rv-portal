@@ -216,9 +216,9 @@ const Entertainment = () => {
           <FeatureNavigationLinks
             className="mt-12 mb-8"
             relatedFeatures={[
-              { href: '/features/smart-tv', title: 'Smart TV', description: 'Premium TV integration for your entertainment hub' },
-              { href: '/features/audio-system', title: 'Audio System', description: 'Immersive sound for movies, music, and gaming' },
-              { href: '/features/internet-connectivity', title: 'Internet Connectivity', description: 'Fast streaming for all your entertainment needs' }
+              { path: '/features/smart-tv', title: 'Smart TV', description: 'Premium TV integration for your entertainment hub' },
+              { path: '/features/audio-system', title: 'Audio System', description: 'Immersive sound for movies, music, and gaming' },
+              { path: '/features/internet-connectivity', title: 'Internet Connectivity', description: 'Fast streaming for all your entertainment needs' }
             ]}
           />
 

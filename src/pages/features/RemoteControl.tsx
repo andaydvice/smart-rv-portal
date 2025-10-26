@@ -145,9 +145,9 @@ const RemoteControl = () => {
           <FeatureNavigationLinks
             className="mt-12 mb-8"
             relatedFeatures={[
-              { href: '/features/smart-automation', title: 'Smart Automation', description: 'Full home automation with remote management' },
-              { href: '/features/climate-control', title: 'Climate Control', description: 'Adjust temperature and climate remotely' },
-              { href: '/features/security-system', title: 'Security System', description: 'Remote security monitoring and control' }
+              { path: '/features/smart-automation', title: 'Smart Automation', description: 'Full home automation with remote management' },
+              { path: '/features/climate-control', title: 'Climate Control', description: 'Adjust temperature and climate remotely' },
+              { path: '/features/security-system', title: 'Security System', description: 'Remote security monitoring and control' }
             ]}
           />
 

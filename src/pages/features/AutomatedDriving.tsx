@@ -124,9 +124,9 @@ const AutomatedDriving = () => {
           <FeatureNavigationLinks
             className="mt-12 mb-8"
             relatedFeatures={[
-              { href: '/features/navigation-system', title: 'Navigation System', description: 'Advanced navigation for autonomous travel' },
-              { href: '/features/security-system', title: 'Security System', description: 'Safety monitoring and collision avoidance systems' },
-              { href: '/features/power-management', title: 'Power Management', description: 'Efficient power for autonomous driving systems' }
+              { path: '/features/navigation-system', title: 'Navigation System', description: 'Advanced navigation for autonomous travel' },
+              { path: '/features/security-system', title: 'Security System', description: 'Safety monitoring and collision avoidance systems' },
+              { path: '/features/power-management', title: 'Power Management', description: 'Efficient power for autonomous driving systems' }
             ]}
           />
 
