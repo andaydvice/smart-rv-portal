@@ -2,6 +2,8 @@
 
 ## Project info
 
+https://github.com/andaydvice/smart-rv-portal/pull/new
+
 **URL**: https://lovable.dev/projects/95549a04-cacd-4e64-a52b-ecc6aed8e361
 
 ## How can I edit this code?
