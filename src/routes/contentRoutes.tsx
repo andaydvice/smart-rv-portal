@@ -253,9 +253,9 @@ const contentRoutes: RouteObject[] = [
     ),
     errorElement: <ErrorPage />,
   },
-  // RV Life Pro Affiliate Landing Pages
+  // RV Life Pro Landing Pages - SEO Optimized URLs
   {
-    path: "/affiliate/rv-life-pro",
+    path: "/rv-gps-navigation",
     element: (
       <Suspense fallback={<MinimalLoader />}>
         <RouteTransition>
@@ -266,7 +266,7 @@ const contentRoutes: RouteObject[] = [
     errorElement: <ErrorPage />,
   },
   {
-    path: "/affiliate/rv-life-pro/story",
+    path: "/rv-trip-planning-guide",
     element: (
       <Suspense fallback={<MinimalLoader />}>
         <RouteTransition>
@@ -277,7 +277,7 @@ const contentRoutes: RouteObject[] = [
     errorElement: <ErrorPage />,
   },
   {
-    path: "/affiliate/rv-life-pro/comparison",
+    path: "/best-rv-gps-comparison",
     element: (
       <Suspense fallback={<MinimalLoader />}>
         <RouteTransition>
@@ -288,7 +288,7 @@ const contentRoutes: RouteObject[] = [
     errorElement: <ErrorPage />,
   },
   {
-    path: "/affiliate/rv-life-pro/faq",
+    path: "/rv-navigation-app-guide",
     element: (
       <Suspense fallback={<MinimalLoader />}>
         <RouteTransition>
@@ -299,7 +299,7 @@ const contentRoutes: RouteObject[] = [
     errorElement: <ErrorPage />,
   },
   {
-    path: "/affiliate/rv-life-pro/campgrounds",
+    path: "/rv-campground-finder",
     element: (
       <Suspense fallback={<MinimalLoader />}>
         <RouteTransition>
@@ -310,7 +310,7 @@ const contentRoutes: RouteObject[] = [
     errorElement: <ErrorPage />,
   },
   {
-    path: "/affiliate/rv-life-pro/scenarios/weekend-warriors",
+    path: "/family-rv-travel-guide",
     element: (
       <Suspense fallback={<MinimalLoader />}>
         <RouteTransition>
@@ -321,7 +321,7 @@ const contentRoutes: RouteObject[] = [
     errorElement: <ErrorPage />,
   },
   {
-    path: "/affiliate/rv-life-pro/scenarios/grey-nomads",
+    path: "/full-time-rv-living-guide",
     element: (
       <Suspense fallback={<MinimalLoader />}>
         <RouteTransition>
@@ -332,7 +332,7 @@ const contentRoutes: RouteObject[] = [
     errorElement: <ErrorPage />,
   },
   {
-    path: "/affiliate/rv-life-pro/scenarios/digital-nomads",
+    path: "/remote-work-rv-guide",
     element: (
       <Suspense fallback={<MinimalLoader />}>
         <RouteTransition>
