@@ -125,6 +125,13 @@ export const RVLifeTrustBadge: React.FC<RVLifeTrustBadgeProps> = ({
   };
 
   const config = badgeConfig[type];
+
+  // Guard against invalid type
+  if (!config) {
+    console.warn(`Invalid RVLifeTrustBadge type: "${type}". Defaulting to "verified".`);
+    return null;
+  }
+
   const Icon = config.icon;
   const displayText = text || config.defaultText;
   const displaySubtext = subtext || config.defaultSubtext;
