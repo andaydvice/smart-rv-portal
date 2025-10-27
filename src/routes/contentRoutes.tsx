@@ -32,13 +32,14 @@ const IntelligentRVFinder = lazy(() => import("../pages/tools/IntelligentRVFinde
 
 // RV Life Pro Affiliate Pages - lazy loaded
 const RVLifeProHero = lazy(() => import("../pages/affiliate/rv-life-pro/RVLifeProHero"));
-const RVLifeProStory = lazy(() => import("../pages/affiliate/rv-life-pro/RVLifeProStory"));
-const RVLifeProComparison = lazy(() => import("../pages/affiliate/rv-life-pro/RVLifeProComparison"));
-const RVLifeProFAQ = lazy(() => import("../pages/affiliate/rv-life-pro/RVLifeProFAQ"));
-const RVLifeProCampgrounds = lazy(() => import("../pages/affiliate/rv-life-pro/RVLifeProCampgrounds"));
-const WeekendWarriors = lazy(() => import("../pages/affiliate/rv-life-pro/scenarios/WeekendWarriors"));
-const GreyNomads = lazy(() => import("../pages/affiliate/rv-life-pro/scenarios/GreyNomads"));
-const DigitalNomads = lazy(() => import("../pages/affiliate/rv-life-pro/scenarios/DigitalNomads"));
+// TEMPORARILY DISABLED - Other 7 pages need redesign to match site:
+// const RVLifeProStory = lazy(() => import("../pages/affiliate/rv-life-pro/RVLifeProStory"));
+// const RVLifeProComparison = lazy(() => import("../pages/affiliate/rv-life-pro/RVLifeProComparison"));
+// const RVLifeProFAQ = lazy(() => import("../pages/affiliate/rv-life-pro/RVLifeProFAQ"));
+// const RVLifeProCampgrounds = lazy(() => import("../pages/affiliate/rv-life-pro/RVLifeProCampgrounds"));
+// const WeekendWarriors = lazy(() => import("../pages/affiliate/rv-life-pro/scenarios/WeekendWarriors"));
+// const GreyNomads = lazy(() => import("../pages/affiliate/rv-life-pro/scenarios/GreyNomads"));
+// const DigitalNomads = lazy(() => import("../pages/affiliate/rv-life-pro/scenarios/DigitalNomads"));
 
 // Brentwood Home Affiliate Pages - lazy loaded
 const UltimateRVMattressBuyingGuide = lazy(() => import("../pages/affiliate/brentwood-home/UltimateRVMattressBuyingGuide"));
@@ -263,6 +264,7 @@ const contentRoutes: RouteObject[] = [
     errorElement: <ErrorPage />,
   },
   // RV Life Pro Landing Pages - SEO Optimized URLs
+  // ONLY HERO PAGE ACTIVE - Other 7 pages need redesign
   {
     path: "/rv-gps-navigation",
     element: (
@@ -274,83 +276,14 @@ const contentRoutes: RouteObject[] = [
     ),
     errorElement: <ErrorPage />,
   },
-  {
-    path: "/rv-trip-planning-guide",
-    element: (
-      <Suspense fallback={<MinimalLoader />}>
-        <RouteTransition>
-          <RVLifeProStory />
-        </RouteTransition>
-      </Suspense>
-    ),
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: "/best-rv-gps-comparison",
-    element: (
-      <Suspense fallback={<MinimalLoader />}>
-        <RouteTransition>
-          <RVLifeProComparison />
-        </RouteTransition>
-      </Suspense>
-    ),
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: "/rv-navigation-app-guide",
-    element: (
-      <Suspense fallback={<MinimalLoader />}>
-        <RouteTransition>
-          <RVLifeProFAQ />
-        </RouteTransition>
-      </Suspense>
-    ),
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: "/rv-campground-finder",
-    element: (
-      <Suspense fallback={<MinimalLoader />}>
-        <RouteTransition>
-          <RVLifeProCampgrounds />
-        </RouteTransition>
-      </Suspense>
-    ),
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: "/family-rv-travel-guide",
-    element: (
-      <Suspense fallback={<MinimalLoader />}>
-        <RouteTransition>
-          <WeekendWarriors />
-        </RouteTransition>
-      </Suspense>
-    ),
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: "/full-time-rv-living-guide",
-    element: (
-      <Suspense fallback={<MinimalLoader />}>
-        <RouteTransition>
-          <GreyNomads />
-        </RouteTransition>
-      </Suspense>
-    ),
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: "/remote-work-rv-guide",
-    element: (
-      <Suspense fallback={<MinimalLoader />}>
-        <RouteTransition>
-          <DigitalNomads />
-        </RouteTransition>
-      </Suspense>
-    ),
-    errorElement: <ErrorPage />,
-  },
+  // TEMPORARILY DISABLED - Need to rebuild with site design:
+  // - /rv-trip-planning-guide (RVLifeProStory)
+  // - /best-rv-gps-comparison (RVLifeProComparison)
+  // - /rv-navigation-app-guide (RVLifeProFAQ)
+  // - /rv-campground-finder (RVLifeProCampgrounds)
+  // - /family-rv-travel-guide (WeekendWarriors)
+  // - /full-time-rv-living-guide (GreyNomads)
+  // - /remote-work-rv-guide (DigitalNomads)
   // Brentwood Home Mattress Landing Pages - SEO Optimized URLs
   {
     path: "/rv-mattress-guide",
