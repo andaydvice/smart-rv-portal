@@ -17,6 +17,7 @@
  */
 
 import React, { useState, useEffect } from 'react';
+import Layout from '@/components/layout/Layout';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import {
@@ -213,6 +214,7 @@ export const RVLifeProFAQ: React.FC = () => {
   };
 
   return (
+    <Layout>
     <div className="min-h-screen bg-[var(--rv-life-off-white)]">
       {/* Schema Markup for FAQ Rich Snippets */}
       <script
@@ -576,6 +578,8 @@ export const RVLifeProFAQ: React.FC = () => {
       {/* Related Resources */}
       <RelatedResourcesSection />
     </div>
+
+    </Layout>
   );
 };
 
@@ -608,6 +612,7 @@ const FAQSection: React.FC<FAQSectionProps> = ({
   if (faqs.length === 0) return null;
 
   return (
+    <Layout>
     <motion.div
       id={id}
       className="mb-12"
@@ -750,6 +755,8 @@ const FAQSection: React.FC<FAQSectionProps> = ({
         })}
       </div>
     </motion.div>
+
+    </Layout>
   );
 };
 
@@ -857,6 +864,7 @@ const ObjectionHandlerSection: React.FC = () => {
   ];
 
   return (
+    <Layout>
     <section id="objection-handler" className="py-16 md:py-20 bg-white">
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
@@ -977,6 +985,8 @@ const ObjectionHandlerSection: React.FC = () => {
         </div>
       </div>
     </section>
+
+    </Layout>
   );
 };
 
@@ -985,6 +995,7 @@ const ObjectionHandlerSection: React.FC = () => {
  */
 const StillHaveQuestionsSection: React.FC = () => {
   return (
+    <Layout>
     <section id="still-have-questions" className="py-16 md:py-20 bg-[var(--rv-life-light-bg)]">
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto">
@@ -1090,6 +1101,8 @@ const StillHaveQuestionsSection: React.FC = () => {
         </div>
       </div>
     </section>
+
+    </Layout>
   );
 };
 
@@ -1122,6 +1135,7 @@ const RelatedResourcesSection: React.FC = () => {
   ];
 
   return (
+    <Layout>
     <section className="py-16 md:py-20 bg-white">
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
@@ -1169,6 +1183,8 @@ const RelatedResourcesSection: React.FC = () => {
         </div>
       </div>
     </section>
+
+    </Layout>
   );
 };
 

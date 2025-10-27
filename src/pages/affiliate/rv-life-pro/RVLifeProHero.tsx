@@ -16,6 +16,7 @@
  */
 
 import React, { useEffect } from 'react';
+import Layout from '@/components/layout/Layout';
 import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
 import {
@@ -90,6 +91,7 @@ const RVLifeProHero: React.FC = () => {
   const featureBenefits = copyData.featureBenefits;
 
   return (
+    <Layout>
     <>
       {/* SEO Meta Tags */}
       <Helmet>
@@ -788,6 +790,8 @@ const RVLifeProHero: React.FC = () => {
         initialDelay={5000}
       />
     </>
+
+    </Layout>
   );
 };
 

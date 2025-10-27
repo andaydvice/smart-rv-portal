@@ -7,6 +7,7 @@
  */
 
 import React, { useEffect } from 'react';
+import Layout from '@/components/layout/Layout';
 import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
 import {
@@ -66,6 +67,7 @@ interface TimelineEvent {
 
 const Timeline: React.FC<{ events: TimelineEvent[] }> = ({ events }) => {
   return (
+    <Layout>
     <div className="relative">
       <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-[var(--rv-life-primary-blue)] to-[var(--rv-life-secondary-green)]" />
 
@@ -101,6 +103,8 @@ const Timeline: React.FC<{ events: TimelineEvent[] }> = ({ events }) => {
         ))}
       </div>
     </div>
+
+    </Layout>
   );
 };
 
@@ -160,6 +164,7 @@ const DigitalNomads: React.FC = () => {
   ];
 
   return (
+    <Layout>
     <>
       {/* SEO Meta Tags */}
       <Helmet>
@@ -564,6 +569,8 @@ const DigitalNomads: React.FC = () => {
         </div>
       </section>
     </>
+
+    </Layout>
   );
 };
 
