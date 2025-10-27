@@ -249,8 +249,45 @@ const RVComfortGuide = () => {
             </div>
           </motion.section>
 
+          {/* Sleep Quality Spotlight */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.2 }}
+            className="bg-gradient-to-r from-purple-600/20 to-blue-600/20 border-2 border-purple-500/30 rounded-2xl p-8 mt-12 mb-8"
+          >
+            <div className="flex items-center mb-6">
+              <Bed className="w-12 h-12 text-purple-400 mr-4" />
+              <div>
+                <h3 className="text-2xl font-bold text-white">Transform Your RV Sleep Quality</h3>
+                <p className="text-gray-300">Comprehensive guides to choosing the perfect RV mattress</p>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              <Link to="/rv-mattress-guide">
+                <Button variant="outline" className="w-full bg-transparent border-purple-500 text-purple-300 hover:bg-purple-500/20 h-auto py-4 flex-col items-start">
+                  <span className="font-bold mb-1">Ultimate Mattress Guide</span>
+                  <span className="text-xs text-gray-400">Everything you need to know</span>
+                </Button>
+              </Link>
+              <Link to="/rv-mattress-sizes">
+                <Button variant="outline" className="w-full bg-transparent border-purple-500 text-purple-300 hover:bg-purple-500/20 h-auto py-4 flex-col items-start">
+                  <span className="font-bold mb-1">Size & Fit Guide</span>
+                  <span className="text-xs text-gray-400">Find your perfect fit</span>
+                </Button>
+              </Link>
+              <Link to="/brentwood-home-rv-mattresses">
+                <Button variant="outline" className="w-full bg-transparent border-purple-500 text-purple-300 hover:bg-purple-500/20 h-auto py-4 flex-col items-start">
+                  <span className="font-bold mb-1">Premium Mattresses</span>
+                  <span className="text-xs text-gray-400">Explore top-rated options</span>
+                </Button>
+              </Link>
+            </div>
+          </motion.div>
+
           {/* Related Navigation */}
-          <div className="bg-gray-800/50 border border-gray-700 rounded-lg p-8 mt-12 mb-8">
+          <div className="bg-gray-800/50 border border-gray-700 rounded-lg p-8 mt-8 mb-8">
             <h3 className="text-xl font-semibold text-white mb-4">Explore More</h3>
             <div className="flex flex-col sm:flex-row gap-4">
               <Link to="/features">

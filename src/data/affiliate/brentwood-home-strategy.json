@@ -1,0 +1,1781 @@
+{
+  "productInfo": {
+    "brand": "Brentwood Home",
+    "category": "RV Mattresses",
+    "commission": {
+      "range": "$75-299",
+      "percentage": "15%",
+      "minProduct": "$500",
+      "maxProduct": "$1,995",
+      "avgCommission": "$187"
+    },
+    "cookieDuration": "120 days",
+    "cookieDurationMonths": 4,
+    "targetAudience": "Qualified RV owners ready to invest in sleep quality",
+    "priceRange": "$500-$1,995",
+    "usp": "Premium eco-friendly mattresses sized specifically for RVs with CertiPUR-US certified foams"
+  },
+
+  "conversionStrategy": {
+    "overview": "Multi-touch, long-consideration strategy optimizing for 120-day cookie duration",
+    "philosophy": "RV mattresses are high-consideration purchases ($500-$1,995). Strategy focuses on building trust, addressing objections, and creating multiple touchpoints over weeks/months of consideration.",
+
+    "funnelStages": {
+      "awareness": {
+        "goal": "Introduce sleep quality problem in RVs",
+        "tactics": [
+          "Pain-point driven blog content (back pain, poor sleep in RV)",
+          "Comparison content (standard vs RV-specific mattresses)",
+          "Educational content on mattress materials and certifications"
+        ],
+        "conversionGoal": "Email capture, bookmark behavior, social share"
+      },
+      "consideration": {
+        "goal": "Position Brentwood Home as premium solution",
+        "tactics": [
+          "Detailed product reviews by mattress type",
+          "Size comparison guides (short queen, RV king, etc.)",
+          "Materials education (gel memory foam, latex, hybrid)",
+          "Warranty and certification transparency"
+        ],
+        "conversionGoal": "Product page visits, comparison downloads, return visits"
+      },
+      "evaluation": {
+        "goal": "Address objections and build confidence",
+        "tactics": [
+          "Trial period and return policy emphasis (120-night trial)",
+          "Certification displays (CertiPUR-US, GREENGUARD Gold)",
+          "Warranty clarity (25-year limited)",
+          "Size fit calculators and measurement guides"
+        ],
+        "conversionGoal": "Affiliate link clicks, add-to-cart behavior"
+      },
+      "purchase": {
+        "goal": "Facilitate final purchase decision",
+        "tactics": [
+          "Clear discount/promotion messaging",
+          "Bundle opportunities (mattress + pillows + sheets)",
+          "Free shipping emphasis",
+          "120-night trial risk reversal"
+        ],
+        "conversionGoal": "Completed purchase, high cart value"
+      }
+    },
+
+    "cookieOptimizationStrategy": {
+      "advantage": "120-day cookie duration allows multi-visit consideration period",
+      "implementation": [
+        {
+          "tactic": "Bookmark Encouragement",
+          "description": "Explicitly tell users they have 120 days to decide",
+          "copyExample": "Bookmark this page - your mattress search just got easier. Take up to 4 months to decide, and we'll still get credit for helping you find the perfect sleep solution.",
+          "placement": "Above fold, exit intent, footer"
+        },
+        {
+          "tactic": "Email Nurture Sequence",
+          "description": "Capture emails for follow-up over 4-month consideration",
+          "sequence": [
+            "Day 1: Welcome + mattress comparison guide",
+            "Day 3: Common objections addressed",
+            "Day 7: Customer story - improved RV sleep",
+            "Day 14: Sizing guide and measurement tips",
+            "Day 30: Bundle savings opportunity",
+            "Day 60: Seasonal promotion alert",
+            "Day 90: Final reminder - cookie expiring soon"
+          ],
+          "goal": "Keep brand top-of-mind during consideration"
+        },
+        {
+          "tactic": "Content Series for Return Visits",
+          "description": "Create content specifically designed to bring users back",
+          "contentTypes": [
+            "RV mattress size guide (return to measure)",
+            "Sleep improvement tracking worksheet (return to update)",
+            "Seasonal buyer's guide (return for timing)",
+            "Comparison calculator (return to compare models)"
+          ]
+        },
+        {
+          "tactic": "Transparent Cookie Communication",
+          "description": "Build trust by explaining cookie benefit",
+          "messaging": "Our partnership with Brentwood Home means you have 120 days (4 months!) to research, measure, and decide - click any link now, purchase when you're ready, and we still earn a small commission at no cost to you. This lets us keep providing free RV mattress guides."
+        }
+      ]
+    }
+  },
+
+  "affiliateLinkStrategy": {
+    "baseUrl": "https://www.brentwoodhome.com",
+    "affiliateParameter": "?affid=PLACEHOLDER",
+
+    "linkPlacementMap": {
+      "heroSection": {
+        "linkTypes": ["primary CTA button", "secondary text link"],
+        "ctaCopy": [
+          "Explore Brentwood Home RV Mattresses",
+          "Find Your Perfect RV Mattress",
+          "Shop Premium RV Sleep Solutions"
+        ],
+        "campaign": "hero-cta",
+        "priority": "high",
+        "expectedCTR": "3-5%"
+      },
+
+      "productCards": {
+        "linkTypes": ["image link", "title link", "CTA button"],
+        "ctaCopy": [
+          "View Details",
+          "See Full Specs",
+          "Check Current Price"
+        ],
+        "campaign": "product-card",
+        "priority": "high",
+        "expectedCTR": "8-12%"
+      },
+
+      "comparisonTables": {
+        "linkTypes": ["product name link", "view details button"],
+        "ctaCopy": [
+          "View on Brentwood Home",
+          "See Full Specifications",
+          "Compare Models"
+        ],
+        "campaign": "comparison-table",
+        "priority": "very-high",
+        "expectedCTR": "12-18%",
+        "note": "Users viewing comparisons are in late consideration stage"
+      },
+
+      "inlineContentLinks": {
+        "linkTypes": ["contextual text links"],
+        "examples": [
+          "Brentwood Home's Cypress mattress",
+          "their CertiPUR-US certified foams",
+          "view the Oceano mattress"
+        ],
+        "campaign": "inline-content",
+        "priority": "medium",
+        "expectedCTR": "2-4%",
+        "bestPractices": [
+          "Link product names when first mentioned",
+          "Link key features to product pages",
+          "Use natural anchor text (not 'click here')"
+        ]
+      },
+
+      "imageGallery": {
+        "linkTypes": ["entire image clickable"],
+        "campaign": "image-gallery",
+        "priority": "medium",
+        "expectedCTR": "6-9%",
+        "accessibility": "Ensure alt text includes product name and 'view on Brentwood Home'"
+      },
+
+      "stickyHeader": {
+        "linkTypes": ["compact CTA button"],
+        "ctaCopy": [
+          "Shop Now",
+          "View Mattresses"
+        ],
+        "campaign": "sticky-header",
+        "priority": "high",
+        "displayRules": "Show after user scrolls past hero section",
+        "expectedCTR": "4-7%"
+      },
+
+      "exitIntentModal": {
+        "linkTypes": ["prominent CTA button"],
+        "ctaCopy": [
+          "Continue to Brentwood Home",
+          "Explore RV Mattresses",
+          "Start Your Better Sleep Journey"
+        ],
+        "campaign": "exit-intent",
+        "priority": "very-high",
+        "expectedCTR": "15-25%",
+        "trigger": "Mouse movement towards browser chrome or tab switch"
+      },
+
+      "footerCTA": {
+        "linkTypes": ["button CTA", "text link"],
+        "ctaCopy": [
+          "Ready to Upgrade Your RV Sleep?",
+          "Explore Brentwood Home Collection"
+        ],
+        "campaign": "footer-cta",
+        "priority": "medium",
+        "expectedCTR": "3-5%"
+      },
+
+      "floatingActionButton": {
+        "linkTypes": ["circular floating button"],
+        "ctaCopy": [
+          "Shop",
+          "Browse"
+        ],
+        "campaign": "floating-action",
+        "priority": "medium",
+        "displayRules": "Mobile only, appears after 15 seconds on page",
+        "expectedCTR": "5-8%"
+      }
+    },
+
+    "utmStructure": {
+      "utm_source": "smart-rv-portal",
+      "utm_medium": "affiliate",
+      "utm_campaign": "[dynamic-campaign-name]",
+      "utm_content": "[page-context]",
+      "utm_term": "[optional-keyword]",
+      "examples": [
+        {
+          "context": "Hero CTA on short queen guide page",
+          "fullUrl": "https://www.brentwoodhome.com/products/cypress-mattress?affid=PLACEHOLDER&utm_source=smart-rv-portal&utm_medium=affiliate&utm_campaign=hero-cta&utm_content=short-queen-guide&utm_term=cypress"
+        },
+        {
+          "context": "Exit intent from comparison page",
+          "fullUrl": "https://www.brentwoodhome.com?affid=PLACEHOLDER&utm_source=smart-rv-portal&utm_medium=affiliate&utm_campaign=exit-intent&utm_content=comparison-page"
+        }
+      ]
+    },
+
+    "campaignNamingConventions": {
+      "format": "{placement}-{action}",
+      "placements": [
+        "hero",
+        "product-card",
+        "comparison-table",
+        "inline-content",
+        "image-gallery",
+        "sticky-header",
+        "exit-intent",
+        "footer",
+        "floating-action"
+      ],
+      "actions": [
+        "cta",
+        "view-details",
+        "compare",
+        "shop-now"
+      ],
+      "examples": [
+        "hero-cta",
+        "product-card-view-details",
+        "comparison-table-compare",
+        "exit-intent-shop-now"
+      ]
+    }
+  },
+
+  "conversionElements": {
+    "primaryCTA": {
+      "design": {
+        "backgroundColor": "#2C5F2D",
+        "hoverColor": "#234D24",
+        "textColor": "#FFFFFF",
+        "fontWeight": "600",
+        "fontSize": {
+          "desktop": "18px",
+          "mobile": "16px"
+        },
+        "padding": {
+          "desktop": "16px 32px",
+          "mobile": "14px 24px"
+        },
+        "borderRadius": "8px",
+        "minHeight": "48px",
+        "shadow": "0 4px 12px rgba(44, 95, 45, 0.25)",
+        "hoverShadow": "0 6px 16px rgba(44, 95, 45, 0.35)",
+        "transition": "all 0.3s ease"
+      },
+      "copyVariations": [
+        {
+          "copy": "Explore Brentwood Home RV Mattresses",
+          "context": "General awareness stage",
+          "useCase": "Homepage hero, general guides"
+        },
+        {
+          "copy": "Find Your Perfect RV Mattress Size",
+          "context": "Size-specific content",
+          "useCase": "Short queen guide, RV king guide"
+        },
+        {
+          "copy": "Shop Premium Eco-Friendly Mattresses",
+          "context": "Sustainability-focused content",
+          "useCase": "Materials guide, eco-conscious buyer content"
+        },
+        {
+          "copy": "See Models & Pricing",
+          "context": "Late consideration stage",
+          "useCase": "Comparison pages, detailed reviews"
+        },
+        {
+          "copy": "Start Your 120-Night Trial",
+          "context": "Purchase stage, risk reversal",
+          "useCase": "Product detail equivalents, conversion-focused pages"
+        }
+      ],
+      "placement": [
+        "Above fold in hero section",
+        "End of each major content section",
+        "After problem/solution narratives",
+        "In sticky header (compact version)",
+        "Exit intent modal"
+      ]
+    },
+
+    "secondaryCTA": {
+      "design": {
+        "backgroundColor": "transparent",
+        "borderColor": "#2C5F2D",
+        "borderWidth": "2px",
+        "textColor": "#2C5F2D",
+        "hoverBackgroundColor": "#2C5F2D",
+        "hoverTextColor": "#FFFFFF",
+        "fontWeight": "600",
+        "fontSize": {
+          "desktop": "16px",
+          "mobile": "14px"
+        },
+        "padding": {
+          "desktop": "14px 28px",
+          "mobile": "12px 20px"
+        },
+        "borderRadius": "8px"
+      },
+      "copyVariations": [
+        {
+          "copy": "Compare All Models",
+          "context": "Help users evaluate options",
+          "useCase": "Hero section secondary option"
+        },
+        {
+          "copy": "Download Size Guide (PDF)",
+          "context": "Lead magnet for email capture",
+          "useCase": "Hero section, sizing content"
+        },
+        {
+          "copy": "View Certifications",
+          "context": "Trust building",
+          "useCase": "Materials sections, quality-focused content"
+        },
+        {
+          "copy": "See Customer Reviews",
+          "context": "Social proof",
+          "useCase": "Throughout content for validation"
+        }
+      ],
+      "placement": [
+        "Next to primary CTA (hero section)",
+        "After trust-building sections",
+        "In sidebars as alternative actions"
+      ]
+    },
+
+    "inlineTextLinks": {
+      "design": {
+        "color": "#2C5F2D",
+        "fontWeight": "500",
+        "textDecoration": "underline",
+        "textDecorationStyle": "solid",
+        "textUnderlineOffset": "3px",
+        "hoverColor": "#234D24",
+        "hoverTextDecoration": "underline",
+        "hoverTextDecorationThickness": "2px"
+      },
+      "bestPractices": [
+        "Link product names on first mention",
+        "Use descriptive anchor text (not 'click here')",
+        "Include 3-5 inline links per 1000 words",
+        "Link to specific product pages, not just homepage",
+        "Ensure links open in new tab (target='_blank')"
+      ],
+      "examples": [
+        "The Cypress mattress features gel memory foam...",
+        "Brentwood Home's CertiPUR-US certified materials...",
+        "Their 25-year warranty provides long-term confidence...",
+        "The Oceano hybrid combines latex and coils..."
+      ]
+    },
+
+    "exitIntentModal": {
+      "trigger": {
+        "desktop": "Mouse movement towards browser chrome (Y-axis < 10px)",
+        "mobile": "Back button press intent",
+        "frequency": "Once per session",
+        "delay": "Minimum 30 seconds on page before triggering"
+      },
+      "design": {
+        "overlay": "rgba(0, 0, 0, 0.75)",
+        "modalBackground": "#FFFFFF",
+        "maxWidth": "600px",
+        "padding": "40px",
+        "borderRadius": "12px",
+        "closeButton": "Top right, clear X icon"
+      },
+      "content": {
+        "headline": "Wait! Before You Go...",
+        "subheadline": "Still researching RV mattresses? We've got you covered.",
+        "body": "Bookmark this page - you have 120 days to make your decision. Our comprehensive guides, sizing tools, and honest reviews will be here whenever you're ready.",
+        "valueProposition": [
+          "✓ 120-day risk-free trial on all Brentwood Home mattresses",
+          "✓ 25-year limited warranty",
+          "✓ Free shipping & returns",
+          "✓ Eco-friendly CertiPUR-US certified materials"
+        ],
+        "ctaPrimary": {
+          "text": "Continue to Brentwood Home",
+          "action": "Main affiliate link with exit-intent campaign tag"
+        },
+        "ctaSecondary": {
+          "text": "Get Free RV Mattress Size Guide",
+          "action": "Email capture for lead nurturing"
+        },
+        "ctaTertiary": {
+          "text": "Bookmark & Return Later",
+          "action": "Browser bookmark prompt + analytics event"
+        }
+      },
+      "abTestVariations": [
+        {
+          "version": "A",
+          "headline": "Wait! Your Perfect RV Mattress Awaits",
+          "angle": "Aspiration-focused"
+        },
+        {
+          "version": "B",
+          "headline": "Still Sleeping on That Uncomfortable RV Mattress?",
+          "angle": "Pain-point focused"
+        },
+        {
+          "version": "C",
+          "headline": "120 Days to Decide. Lifetime of Better Sleep.",
+          "angle": "Risk-reversal focused"
+        }
+      ]
+    },
+
+    "stickyHeader": {
+      "trigger": "User scrolls past hero section (approximately 600-800px)",
+      "design": {
+        "backgroundColor": "rgba(255, 255, 255, 0.95)",
+        "backdropFilter": "blur(10px)",
+        "height": "60px",
+        "shadow": "0 2px 10px rgba(0, 0, 0, 0.1)",
+        "zIndex": "100"
+      },
+      "content": {
+        "logo": "Site logo (compact version)",
+        "productName": "Brentwood Home RV Mattresses",
+        "ctaButton": {
+          "text": "Shop Now",
+          "style": "Primary CTA (compact)",
+          "size": "14px padding, 40px height"
+        },
+        "mobileOptimization": "Logo + CTA only on mobile (hide product name)"
+      }
+    },
+
+    "floatingActionButton": {
+      "displayRules": {
+        "device": "Mobile only",
+        "trigger": "15 seconds on page OR scroll to 30% of content",
+        "position": "Bottom right, 20px from edges",
+        "zIndex": "99"
+      },
+      "design": {
+        "shape": "Circle, 60px diameter",
+        "backgroundColor": "#2C5F2D",
+        "icon": "Shopping bag icon in white",
+        "shadow": "0 4px 12px rgba(44, 95, 45, 0.4)",
+        "animation": "Subtle pulse animation on appearance"
+      },
+      "behavior": {
+        "click": "Opens quick action menu OR direct affiliate link",
+        "dismiss": "X appears on hover/hold, dismissed for session"
+      }
+    },
+
+    "footerConversion": {
+      "structure": {
+        "position": "After main content, before site footer",
+        "backgroundColor": "#F8F9FA",
+        "padding": "60px 20px"
+      },
+      "content": {
+        "headline": "Ready to Transform Your RV Sleep?",
+        "subheadline": "Brentwood Home's RV mattresses combine premium materials, eco-friendly construction, and sizes made specifically for RVs.",
+        "features": [
+          {
+            "icon": "✓",
+            "text": "CertiPUR-US certified foams",
+            "subtext": "No harmful chemicals"
+          },
+          {
+            "icon": "✓",
+            "text": "120-night trial period",
+            "subtext": "Risk-free returns"
+          },
+          {
+            "icon": "✓",
+            "text": "25-year limited warranty",
+            "subtext": "Long-term quality"
+          },
+          {
+            "icon": "✓",
+            "text": "Made in California",
+            "subtext": "USA quality standards"
+          }
+        ],
+        "ctaPrimary": {
+          "text": "Explore Brentwood Home Collection",
+          "campaign": "footer-cta"
+        },
+        "ctaSecondary": {
+          "text": "Compare All RV Sizes",
+          "campaign": "footer-comparison"
+        }
+      }
+    }
+  },
+
+  "trustSignalStrategy": {
+    "philosophy": "Build credibility through verifiable facts, transparent information, and authentic social proof - never fabricate testimonials or reviews",
+
+    "certificationDisplays": {
+      "certiPURUS": {
+        "name": "CertiPUR-US Certified",
+        "description": "Foams certified free from harmful chemicals including formaldehyde, phthalates, and heavy metals",
+        "logo": "Official CertiPUR-US certification badge",
+        "linkTo": "https://certipur.us/",
+        "placement": "Product cards, materials sections, trust badge bar",
+        "copy": "Independently tested and certified for safety and environmental responsibility"
+      },
+      "greenguardGold": {
+        "name": "GREENGUARD Gold Certified",
+        "description": "Meets stringent chemical emissions standards for indoor air quality",
+        "logo": "GREENGUARD Gold certification badge",
+        "linkTo": "https://www.ul.com/resources/greenguard-certification-program",
+        "placement": "Eco-friendly content, materials sections",
+        "copy": "Low VOC emissions verified by independent third-party testing"
+      },
+      "madeInUSA": {
+        "name": "Made in California, USA",
+        "description": "Manufactured in Brentwood Home's California facilities",
+        "badge": "Made in USA flag icon",
+        "placement": "Product headers, quality-focused sections",
+        "copy": "Handcrafted in California with rigorous quality standards"
+      }
+    },
+
+    "warrantyMessaging": {
+      "warranty": "25-year limited warranty",
+      "display": {
+        "badge": "25-Year Warranty shield icon",
+        "shortCopy": "25-Year Limited Warranty",
+        "longCopy": "Brentwood Home stands behind their craftsmanship with an industry-leading 25-year limited warranty on mattress structure and materials. This isn't a short-term commitment - they're confident these mattresses will deliver quality sleep for decades.",
+        "placement": [
+          "Product cards (badge)",
+          "Trust badge bars",
+          "Comparison tables",
+          "Quality-focused content sections"
+        ]
+      },
+      "trustFraming": "A 25-year warranty isn't just a promise - it's proof of quality construction and materials that last"
+    },
+
+    "trialPeriodMessaging": {
+      "duration": "120 nights (4 months)",
+      "policy": "Full refund if not satisfied",
+      "display": {
+        "headline": "Sleep On It for 120 Nights - Risk Free",
+        "bodyCopy": "Try your new RV mattress for a full 120 nights (4 months!). If you're not completely satisfied, return it for a full refund. Brentwood Home even arranges the pickup - you don't lift a finger.",
+        "riskReversalCopy": "The only risk is continuing to sleep poorly in your RV. Brentwood Home takes on all the risk with their generous trial period.",
+        "placement": [
+          "Hero section feature badges",
+          "Above primary CTAs",
+          "Exit intent modals",
+          "Objection-handling sections"
+        ]
+      },
+      "psychologicalFraming": "120 nights is long enough to truly experience all seasons of RV travel and camping conditions"
+    },
+
+    "returnPolicyTransparency": {
+      "headline": "Clear, Simple Returns",
+      "details": [
+        "120-night trial period begins on delivery",
+        "Free return pickup arranged by Brentwood Home",
+        "Full refund processed within 7-10 business days",
+        "Mattress donated to local charities when possible",
+        "No restocking fees or hidden charges"
+      ],
+      "display": {
+        "format": "Expandable accordion OR dedicated FAQ section",
+        "tone": "Transparent and straightforward",
+        "linkTo": "Brentwood Home's official return policy page"
+      }
+    },
+
+    "socialProofMethods": {
+      "verifiedRatings": {
+        "source": "Brentwood Home's official website verified reviews",
+        "display": {
+          "format": "Star rating + review count",
+          "example": "★★★★★ 4.8/5 from 2,847 verified reviews",
+          "linkTo": "Brentwood Home reviews page",
+          "placement": "Product cards, comparison tables"
+        },
+        "ethicalNote": "Only display ratings directly from Brentwood Home's verified review system - never fabricate"
+      },
+
+      "thirdPartyReviews": {
+        "sources": [
+          "Consumer Reports",
+          "Good Housekeeping",
+          "Sleep Foundation",
+          "Wirecutter (NYT)"
+        ],
+        "display": {
+          "format": "Quote + source attribution + link",
+          "example": "\"Among the best eco-friendly mattresses we've tested\" - Sleep Foundation",
+          "ethicalNote": "Only use if review actually exists - link to original source"
+        }
+      },
+
+      "aggregateData": {
+        "sources": "Brentwood Home published metrics",
+        "examples": [
+          "Over 500,000 happy sleepers nationwide",
+          "Founded in 1987 - 35+ years of mattress expertise",
+          "4.8/5 average rating across all products"
+        ],
+        "ethicalNote": "Only use publicly verifiable statistics from official sources"
+      },
+
+      "userGeneratedContent": {
+        "method": "Solicit real user photos and testimonials",
+        "collection": {
+          "call": "Share your RV mattress upgrade story",
+          "incentive": "Featured customers receive $25 Amazon gift card",
+          "approval": "All submissions reviewed before publication",
+          "consent": "Explicit permission required with signed release"
+        },
+        "display": {
+          "format": "Photo + name + location + RV type + quote",
+          "verification": "Display 'Verified Customer' badge only if confirmed purchase",
+          "ethicalNote": "NEVER display fabricated testimonials - wait for real submissions"
+        }
+      },
+
+      "expertEndorsement": {
+        "method": "Reach out to RV lifestyle influencers and sleep experts",
+        "process": [
+          "Provide complimentary mattress for testing",
+          "Request honest review (positive or negative)",
+          "If positive, request permission to feature quote",
+          "Disclose compensation/free product received"
+        ],
+        "display": {
+          "format": "Quote + expert name + credentials + disclosure",
+          "example": "\"The Cypress improved my RV sleep quality dramatically\" - Dr. Jane Smith, Sleep Specialist (Received complimentary product for review)"
+        }
+      }
+    },
+
+    "trustBadgeBar": {
+      "placement": "Below hero CTA, above product cards",
+      "design": {
+        "layout": "Horizontal icon row (vertical stack on mobile)",
+        "backgroundColor": "#F8F9FA",
+        "padding": "30px 20px"
+      },
+      "badges": [
+        {
+          "icon": "Shield checkmark",
+          "text": "120-Night Trial",
+          "subtext": "Risk-free returns"
+        },
+        {
+          "icon": "Certificate",
+          "text": "CertiPUR-US Certified",
+          "subtext": "Safe materials"
+        },
+        {
+          "icon": "Warranty shield",
+          "text": "25-Year Warranty",
+          "subtext": "Long-term quality"
+        },
+        {
+          "icon": "Truck",
+          "text": "Free Shipping",
+          "subtext": "To your door"
+        },
+        {
+          "icon": "USA flag",
+          "text": "Made in USA",
+          "subtext": "California crafted"
+        }
+      ]
+    }
+  },
+
+  "urgencyScarcityTactics": {
+    "philosophy": "Use ONLY authentic urgency - never fabricate scarcity or fake countdown timers",
+
+    "seasonalPromotions": {
+      "framework": {
+        "timing": "Align with actual Brentwood Home sales events",
+        "display": "Banner notification at top of page",
+        "messaging": "Transparent about promotion details and timing",
+        "examples": [
+          {
+            "event": "Presidents Day Sale",
+            "timing": "Mid-February",
+            "discount": "20% site-wide (verify with Brentwood Home)",
+            "messaging": "Presidents Day Sale: Save 20% on all mattresses through Feb 20th",
+            "ethicalNote": "Only display if promotion is actually active"
+          },
+          {
+            "event": "Memorial Day Sale",
+            "timing": "Late May",
+            "discount": "25% + free pillows (verify)",
+            "messaging": "Memorial Day Weekend: 25% off + 2 free pillows with mattress purchase"
+          },
+          {
+            "event": "Labor Day Sale",
+            "timing": "Early September",
+            "discount": "20% + free sheets (verify)",
+            "messaging": "Labor Day Savings: 20% off + free luxury sheets"
+          },
+          {
+            "event": "Black Friday",
+            "timing": "Late November",
+            "discount": "30% site-wide (verify)",
+            "messaging": "Black Friday Sale: Save 30% on all mattresses - biggest sale of the year"
+          }
+        ]
+      },
+      "implementation": {
+        "verification": "Check Brentwood Home site weekly for active promotions",
+        "updateFrequency": "Update promotion banner weekly",
+        "removal": "Remove banner immediately when promotion ends",
+        "fallback": "If no active promotion, don't show urgency messaging"
+      }
+    },
+
+    "bundleDeals": {
+      "approach": "Highlight genuine bundle savings opportunities",
+      "bundles": [
+        {
+          "name": "Complete Sleep Upgrade",
+          "includes": "Mattress + 2 Pillows + Sheet Set",
+          "savings": "Save $150 vs separate purchase",
+          "messaging": "Bundle & Save: Complete your RV sleep upgrade and save $150",
+          "ethicalNote": "Only display if bundle actually saves money"
+        },
+        {
+          "name": "RV Master Suite",
+          "includes": "Mattress + Mattress Protector + Pillows + Sheets",
+          "savings": "Save $200 vs separate purchase",
+          "messaging": "Master Suite Bundle: Everything for 5-star RV sleep, save $200"
+        }
+      ],
+      "display": {
+        "placement": "Product pages, comparison tables",
+        "format": "Callout box with savings calculation",
+        "transparency": "Show individual item prices and total savings clearly"
+      }
+    },
+
+    "limitedTimeDiscounts": {
+      "approach": "Share legitimate time-limited promotions only",
+      "examples": [
+        {
+          "occasion": "Email subscriber exclusive",
+          "discount": "Extra 10% for email list",
+          "duration": "48 hours from signup",
+          "messaging": "Welcome Offer: Take an extra 10% off your first order - valid for 48 hours",
+          "trigger": "Email capture"
+        },
+        {
+          "occasion": "Seasonal changeover",
+          "discount": "20% off previous season models",
+          "duration": "Until inventory depleted",
+          "messaging": "Last Chance: 20% off while 2024 models last",
+          "ethicalNote": "Only use if Brentwood Home is actually clearing old inventory"
+        }
+      ]
+    },
+
+    "stockAvailability": {
+      "approach": "Display REAL inventory status only if data is available",
+      "implementation": {
+        "dataSource": "Brentwood Home API or manual verification",
+        "display": {
+          "lowStock": "Only 3 Short Queen sizes left in stock",
+          "highStock": "In Stock - Ships within 2 business days",
+          "outOfStock": "Currently unavailable - notify me when back in stock"
+        },
+        "ethicalCritical": "NEVER display fake 'only 2 left' messages - only show if you have real inventory data"
+      },
+      "alternative": "If inventory data unavailable, don't mention stock levels at all"
+    },
+
+    "shippingDeadlines": {
+      "approach": "Highlight real shipping cutoffs for holidays/events",
+      "examples": [
+        {
+          "context": "Summer camping season",
+          "messaging": "Order by May 15th for Memorial Day delivery",
+          "ethicalNote": "Calculate based on actual shipping times"
+        },
+        {
+          "context": "Holiday gift giving",
+          "messaging": "Order by Dec 15th for Christmas delivery",
+          "calculation": "Brentwood Home typical shipping time + buffer"
+        }
+      ]
+    },
+
+    "prohibitedTactics": {
+      "neverUse": [
+        "Fake countdown timers (Deal expires in 00:04:33)",
+        "Fabricated scarcity (Only 2 left - when untrue)",
+        "Fake urgency (Limited time offer - when perpetual)",
+        "False claims (100 people viewing this right now)",
+        "Pressure tactics (This deal will never return)",
+        "Fabricated recent purchases (John from TX just bought this)"
+      ],
+      "reasoning": "These tactics damage trust, violate FTC guidelines, and harm long-term conversion rates"
+    }
+  },
+
+  "emailCaptureStrategy": {
+    "philosophy": "Email capture essential for 120-day cookie optimization - nurture leads over long consideration period",
+
+    "leadMagnets": [
+      {
+        "name": "Ultimate RV Mattress Size Guide",
+        "format": "PDF download",
+        "pages": "8-page comprehensive guide",
+        "content": [
+          "All RV mattress sizes with dimensions",
+          "Measuring template for your RV",
+          "Thickness considerations for slide-outs",
+          "Comparison of standard vs RV sizes",
+          "Brentwood Home sizing chart"
+        ],
+        "placement": "Exit intent, hero secondary CTA, sidebar widget",
+        "value": "High-value resource users actually need"
+      },
+      {
+        "name": "RV Sleep Quality Checklist",
+        "format": "Interactive PDF",
+        "content": [
+          "Evaluate your current RV sleep setup",
+          "Identify improvement opportunities",
+          "Materials comparison worksheet",
+          "Budget planning calculator",
+          "Shopping checklist"
+        ],
+        "placement": "Mid-content CTAs, sidebar",
+        "followUp": "Automated recommendations based on checklist answers"
+      },
+      {
+        "name": "Seasonal RV Mattress Buyer's Guide",
+        "format": "Quarterly updated PDF",
+        "content": [
+          "Best time to buy (seasonal sales)",
+          "Current promotions calendar",
+          "Price tracking data",
+          "New model releases",
+          "Discontinued model deals"
+        ],
+        "placement": "Comparison pages, pricing content",
+        "updateFrequency": "Quarterly - provides reason for return visits"
+      }
+    ],
+
+    "emailNurtureSequence": {
+      "duration": "90 days (within 120-day cookie window)",
+      "frequency": "7 emails over 90 days",
+      "goals": [
+        "Keep brand top-of-mind during consideration",
+        "Address objections progressively",
+        "Drive return visits to affiliate content",
+        "Facilitate purchase decision without being pushy"
+      ],
+
+      "sequence": [
+        {
+          "day": 1,
+          "subject": "Your RV Mattress Size Guide + Next Steps",
+          "content": {
+            "primary": "Deliver promised lead magnet",
+            "secondary": "Link to mattress comparison guide on site",
+            "cta": "Explore Brentwood Home RV Mattresses",
+            "tone": "Helpful, educational"
+          },
+          "goal": "Deliver value immediately, establish trust"
+        },
+        {
+          "day": 3,
+          "subject": "3 Most Common RV Mattress Mistakes (And How to Avoid Them)",
+          "content": {
+            "primary": "Educational content on mattress selection",
+            "mistakes": [
+              "Not measuring properly (link to measuring guide)",
+              "Ignoring mattress thickness for slide-outs (link to thickness guide)",
+              "Choosing standard size instead of RV-specific (link to size comparison)"
+            ],
+            "cta": "See RV-Specific Mattresses",
+            "tone": "Helpful expert advice"
+          },
+          "goal": "Address common objections, drive site traffic"
+        },
+        {
+          "day": 7,
+          "subject": "Real RV Owner Story: Sleeping Better After 25 Years of Camping",
+          "content": {
+            "primary": "Customer success story (if available)",
+            "alternative": "Link to detailed product review article",
+            "focus": "Emotional benefits + practical results",
+            "cta": "Read Full Story & See The Mattress",
+            "tone": "Inspirational, relatable"
+          },
+          "goal": "Emotional connection, social proof"
+        },
+        {
+          "day": 14,
+          "subject": "How to Measure Your RV Mattress Space (5-Minute Video)",
+          "content": {
+            "primary": "Link to measuring tutorial on site",
+            "secondary": "Downloadable measuring template",
+            "tip": "Pro tip for dealing with slide-outs and corner cuts",
+            "cta": "Watch Tutorial & Compare Sizes",
+            "tone": "Practical, actionable"
+          },
+          "goal": "Drive engagement, move toward purchase readiness"
+        },
+        {
+          "day": 30,
+          "subject": "Bundle & Save: Complete Your RV Sleep Upgrade",
+          "content": {
+            "primary": "Highlight bundle savings opportunities",
+            "bundles": "Mattress + pillows + sheets packages",
+            "savings": "Show clear $ amount saved",
+            "cta": "Explore Bundle Deals",
+            "tone": "Value-focused"
+          },
+          "goal": "Increase average order value, present purchasing options"
+        },
+        {
+          "day": 60,
+          "subject": "[ACTIVE PROMOTION] Presidents Day Sale: 20% Off Brentwood Home",
+          "content": {
+            "primary": "Alert to current promotion (if active)",
+            "alternative": "If no promotion, send comparison between top 3 models",
+            "urgency": "Authentic urgency only if promotion has real end date",
+            "cta": "Shop the Sale",
+            "tone": "Exciting opportunity"
+          },
+          "goal": "Leverage legitimate urgency to drive conversion"
+        },
+        {
+          "day": 90,
+          "subject": "Still Researching? Here's What You Need to Know",
+          "content": {
+            "primary": "Roundup of all key resources",
+            "links": [
+              "Complete mattress comparison",
+              "Sizing guide",
+              "Materials & certifications guide",
+              "Customer reviews",
+              "Warranty & trial info"
+            ],
+            "reminder": "You still have 30 days within our partnership window to make your decision",
+            "cta": "Make Your Final Comparison",
+            "tone": "Helpful, non-pushy, gentle nudge"
+          },
+          "goal": "Final reminder without pressure, provide comprehensive resources"
+        }
+      ]
+    },
+
+    "emailCaptureForm": {
+      "design": {
+        "fields": [
+          "Email (required)",
+          "First Name (optional but requested)",
+          "RV Type (optional dropdown: Class A/B/C, Fifth Wheel, Travel Trailer, Truck Camper)"
+        ],
+        "ctaButton": "Get My Free Guide",
+        "privacyNote": "We respect your privacy. Unsubscribe anytime.",
+        "frequency": "We send helpful RV sleep tips weekly"
+      },
+      "placement": [
+        "Exit intent modal (secondary CTA)",
+        "Sidebar widget",
+        "After blog post content",
+        "Floating bar (appears after 30 seconds)",
+        "Inline within content at natural breakpoints"
+      ]
+    }
+  },
+
+  "abTestingRecommendations": {
+    "philosophy": "Test one variable at a time, run until statistical significance, implement winners",
+
+    "priorityTests": [
+      {
+        "priority": 1,
+        "element": "Hero Headline",
+        "variants": [
+          {
+            "version": "A",
+            "copy": "Sleep Better in Your RV with Premium Eco-Friendly Mattresses",
+            "angle": "Benefit-driven"
+          },
+          {
+            "version": "B",
+            "copy": "Stop Settling for Poor Sleep in Your RV",
+            "angle": "Pain-point driven"
+          },
+          {
+            "version": "C",
+            "copy": "120-Night Trial: Find Your Perfect RV Mattress Risk-Free",
+            "angle": "Risk-reversal driven"
+          }
+        ],
+        "hypothesis": "Pain-point driven headlines convert better than benefit-driven",
+        "successMetric": "Click-through rate on hero CTA",
+        "minimumSampleSize": "1,000 visitors per variant"
+      },
+      {
+        "priority": 2,
+        "element": "Primary CTA Button Color",
+        "variants": [
+          {
+            "version": "A",
+            "color": "#2C5F2D",
+            "name": "Forest Green"
+          },
+          {
+            "version": "B",
+            "color": "#D97706",
+            "name": "Warm Orange"
+          },
+          {
+            "version": "C",
+            "color": "#1E40AF",
+            "name": "Deep Blue"
+          }
+        ],
+        "hypothesis": "Green (eco-friendly association) converts better than other colors",
+        "successMetric": "Click-through rate on primary CTA",
+        "minimumSampleSize": "2,000 visitors per variant"
+      },
+      {
+        "priority": 3,
+        "element": "Primary CTA Copy",
+        "variants": [
+          {
+            "version": "A",
+            "copy": "Explore Brentwood Home RV Mattresses"
+          },
+          {
+            "version": "B",
+            "copy": "Find Your Perfect RV Mattress"
+          },
+          {
+            "version": "C",
+            "copy": "Shop Eco-Friendly RV Mattresses"
+          },
+          {
+            "version": "D",
+            "copy": "Start Your 120-Night Trial"
+          }
+        ],
+        "hypothesis": "Action-oriented copy ('Start Your Trial') converts better than exploratory copy",
+        "successMetric": "Click-through rate + affiliate link clicks",
+        "minimumSampleSize": "1,500 visitors per variant"
+      },
+      {
+        "priority": 4,
+        "element": "Pricing Display Strategy",
+        "variants": [
+          {
+            "version": "A",
+            "display": "Show price ranges ($500-$1,995)",
+            "reasoning": "Sets expectations"
+          },
+          {
+            "version": "B",
+            "display": "Hide prices, show 'See Pricing' button",
+            "reasoning": "Reduces sticker shock, gets click to Brentwood Home"
+          },
+          {
+            "version": "C",
+            "display": "Show 'Starting at $500'",
+            "reasoning": "Anchors on lowest price"
+          }
+        ],
+        "hypothesis": "Hiding prices increases click-through but may reduce conversion quality",
+        "successMetric": "Click-through rate + actual affiliate sales",
+        "minimumSampleSize": "2,000 visitors per variant"
+      },
+      {
+        "priority": 5,
+        "element": "Trust Badge Placement",
+        "variants": [
+          {
+            "version": "A",
+            "placement": "Below hero CTA",
+            "format": "Horizontal row"
+          },
+          {
+            "version": "B",
+            "placement": "Above hero CTA",
+            "format": "Horizontal row"
+          },
+          {
+            "version": "C",
+            "placement": "Within hero section as features list",
+            "format": "Vertical list with checkmarks"
+          }
+        ],
+        "hypothesis": "Trust badges above CTA increase confidence before click",
+        "successMetric": "Click-through rate on primary CTA",
+        "minimumSampleSize": "1,500 visitors per variant"
+      },
+      {
+        "priority": 6,
+        "element": "Product Image Strategy",
+        "variants": [
+          {
+            "version": "A",
+            "images": "Lifestyle images (mattress in RV setting)"
+          },
+          {
+            "version": "B",
+            "images": "Product-only images (white background)"
+          },
+          {
+            "version": "C",
+            "images": "Hybrid (product + lifestyle)"
+          }
+        ],
+        "hypothesis": "Lifestyle images help users envision product in their RV",
+        "successMetric": "Time on page + affiliate link clicks",
+        "minimumSampleSize": "1,000 visitors per variant"
+      }
+    ],
+
+    "testingSequence": {
+      "phase1": "Test hero headline variations (biggest potential impact)",
+      "phase2": "Test CTA button color (quick win)",
+      "phase3": "Test CTA copy variations",
+      "phase4": "Test pricing display strategy",
+      "phase5": "Test trust badge placement",
+      "phase6": "Test image strategy",
+      "timeline": "Run each test for minimum 2 weeks or until significance",
+      "tools": [
+        "Google Optimize (free)",
+        "Optimizely",
+        "VWO (Visual Website Optimizer)",
+        "Custom implementation with analytics"
+      ]
+    }
+  },
+
+  "trackingAnalytics": {
+    "philosophy": "Measure everything, optimize based on data, understand full conversion funnel",
+
+    "customEvents": {
+      "pageLoad": {
+        "event": "affiliate_page_view",
+        "properties": {
+          "page_type": "product_guide | comparison | review | size_guide",
+          "product_focus": "short_queen | rv_king | general",
+          "traffic_source": "organic | social | direct | referral | paid"
+        }
+      },
+
+      "scrollDepth": {
+        "event": "scroll_depth",
+        "triggers": [
+          "25% scrolled",
+          "50% scrolled",
+          "75% scrolled",
+          "100% scrolled (reached footer)"
+        ],
+        "properties": {
+          "page_type": "product_guide | comparison | review",
+          "time_on_page": "seconds"
+        }
+      },
+
+      "affiliateLinkClick": {
+        "event": "affiliate_link_click",
+        "properties": {
+          "link_placement": "hero_cta | product_card | comparison_table | inline_content | exit_intent | sticky_header | footer",
+          "product_clicked": "cypress | oceano | crystal_cove | etc",
+          "campaign_name": "hero-cta | product-card-view-details | etc",
+          "time_before_click": "seconds since page load"
+        }
+      },
+
+      "emailCapture": {
+        "event": "email_captured",
+        "properties": {
+          "lead_magnet": "size_guide | checklist | buyers_guide",
+          "capture_location": "exit_intent | sidebar | inline | floating_bar",
+          "page_type": "product_guide | comparison | review"
+        }
+      },
+
+      "ctaInteraction": {
+        "event": "cta_interaction",
+        "triggers": [
+          "CTA button hover",
+          "CTA button click"
+        ],
+        "properties": {
+          "cta_text": "button copy",
+          "cta_placement": "location on page",
+          "cta_type": "primary | secondary | tertiary"
+        }
+      },
+
+      "exitIntentDisplay": {
+        "event": "exit_intent_displayed",
+        "properties": {
+          "trigger_type": "mouse_leave | back_button",
+          "time_on_page": "seconds before trigger",
+          "scroll_depth": "percentage scrolled before exit"
+        }
+      },
+
+      "exitIntentAction": {
+        "event": "exit_intent_action",
+        "properties": {
+          "action": "clicked_cta | captured_email | dismissed | bookmarked",
+          "cta_clicked": "primary | secondary | tertiary"
+        }
+      },
+
+      "comparisonEngagement": {
+        "event": "comparison_engagement",
+        "properties": {
+          "products_compared": "array of product names",
+          "time_on_comparison": "seconds",
+          "filters_used": "array of filter selections"
+        }
+      },
+
+      "leadMagnetDownload": {
+        "event": "lead_magnet_download",
+        "properties": {
+          "asset_name": "size_guide | checklist | buyers_guide",
+          "download_location": "page where downloaded"
+        }
+      }
+    },
+
+    "conversionFunnelStages": {
+      "stage1_awareness": {
+        "metric": "Page views on affiliate content",
+        "goal": "Drive qualified traffic to affiliate pages"
+      },
+      "stage2_engagement": {
+        "metric": "Time on page > 60 seconds + scroll depth > 50%",
+        "goal": "Users consuming content and learning"
+      },
+      "stage3_consideration": {
+        "metric": "Viewed comparison table OR downloaded lead magnet",
+        "goal": "Users actively evaluating options"
+      },
+      "stage4_intent": {
+        "metric": "Clicked affiliate link",
+        "goal": "Users moved to Brentwood Home site"
+      },
+      "stage5_conversion": {
+        "metric": "Completed purchase (tracked via Brentwood Home affiliate dashboard)",
+        "goal": "Actual sale completed"
+      }
+    },
+
+    "dropOffPointIdentification": {
+      "heroToEngagement": {
+        "metric": "Bounce rate within 10 seconds",
+        "healthy": "< 40%",
+        "warning": "40-60%",
+        "critical": "> 60%",
+        "optimization": "Test hero headline, improve value proposition"
+      },
+      "engagementToConsideration": {
+        "metric": "Users scrolling past 50% but not clicking any links",
+        "healthy": "< 30% drop-off",
+        "warning": "30-50% drop-off",
+        "critical": "> 50% drop-off",
+        "optimization": "Add more CTAs throughout content, improve CTA copy"
+      },
+      "considerationToIntent": {
+        "metric": "Viewed comparison but didn't click affiliate link",
+        "healthy": "< 40% drop-off",
+        "warning": "40-60% drop-off",
+        "critical": "> 60% drop-off",
+        "optimization": "Improve product differentiation, add trust signals, test CTA placement"
+      },
+      "intentToConversion": {
+        "metric": "Clicked affiliate link but didn't purchase",
+        "healthy": "< 80% drop-off (typical for high-ticket items)",
+        "warning": "80-90% drop-off",
+        "critical": "> 90% drop-off",
+        "optimization": "Issue is likely on Brentwood Home site, but can improve pre-qualifcation on our end"
+      }
+    },
+
+    "engagementMetrics": {
+      "timeOnPage": {
+        "segments": [
+          "< 10 seconds (bounce)",
+          "10-60 seconds (scanners)",
+          "60-180 seconds (engaged readers)",
+          "180+ seconds (highly engaged)"
+        ],
+        "targets": {
+          "productGuides": "Average 120+ seconds",
+          "comparisonPages": "Average 180+ seconds",
+          "reviews": "Average 90+ seconds"
+        }
+      },
+
+      "scrollDepth": {
+        "segments": [
+          "< 25% (not engaged)",
+          "25-50% (partially engaged)",
+          "50-75% (engaged)",
+          "75-100% (highly engaged)"
+        ],
+        "targets": {
+          "productGuides": "60%+ users reach 75%",
+          "comparisonPages": "70%+ users reach 75%"
+        }
+      },
+
+      "returnVisitors": {
+        "metric": "Users returning within 120-day cookie window",
+        "target": "30%+ return rate",
+        "importance": "Critical for long-consideration purchases",
+        "optimization": "Email nurture, bookmark reminders, updating content"
+      },
+
+      "deviceEngagement": {
+        "segments": ["desktop", "mobile", "tablet"],
+        "metrics": {
+          "affiliateLinkCTR": "Typically higher on desktop",
+          "emailCaptureCTR": "Typically higher on mobile",
+          "timeOnPage": "Typically higher on desktop"
+        },
+        "optimization": "Optimize mobile experience for email capture, desktop for affiliate conversions"
+      }
+    },
+
+    "dashboardConfiguration": {
+      "keyMetrics": [
+        {
+          "metric": "Affiliate Link Click-Through Rate",
+          "calculation": "(Affiliate link clicks / Page views) * 100",
+          "target": "8-12%",
+          "dashboard": "Top of affiliate performance section"
+        },
+        {
+          "metric": "Affiliate Sales Conversion Rate",
+          "calculation": "(Completed sales / Affiliate link clicks) * 100",
+          "target": "3-8% (high-ticket items have lower conversion)",
+          "dashboard": "Top of affiliate performance section"
+        },
+        {
+          "metric": "Average Order Value",
+          "calculation": "Total affiliate revenue / Number of sales",
+          "target": "$800-1,200 (aim for bundle sales)",
+          "dashboard": "Affiliate performance section"
+        },
+        {
+          "metric": "Email Capture Rate",
+          "calculation": "(Email captures / Page views) * 100",
+          "target": "5-8%",
+          "dashboard": "Lead generation section"
+        },
+        {
+          "metric": "Return Visitor Rate (30-day)",
+          "calculation": "(Return visitors / Total unique visitors) * 100",
+          "target": "20-30%",
+          "dashboard": "Engagement section"
+        },
+        {
+          "metric": "Average Session Duration",
+          "calculation": "Built-in analytics metric",
+          "target": "120+ seconds",
+          "dashboard": "Engagement section"
+        },
+        {
+          "metric": "Scroll Depth (average)",
+          "calculation": "Average scroll percentage across all visitors",
+          "target": "60%+",
+          "dashboard": "Engagement section"
+        }
+      ],
+
+      "segmentation": [
+        "Traffic source (organic, social, direct, referral, paid)",
+        "Device type (desktop, mobile, tablet)",
+        "Page type (product guide, comparison, review)",
+        "New vs returning visitors",
+        "Email subscribers vs non-subscribers"
+      ]
+    }
+  },
+
+  "upsellCrossSellStrategy": {
+    "philosophy": "Increase average order value by presenting complementary products naturally, not aggressively",
+
+    "mattressPlusPillows": {
+      "rationale": "Complete the sleep upgrade - pillows often overlooked but critical to sleep quality",
+      "positioning": {
+        "headline": "Complete Your Sleep Upgrade",
+        "subheadline": "RV-friendly pillows designed to complement your new mattress",
+        "valueProp": "Save $50 when bundled with mattress purchase"
+      },
+      "products": [
+        {
+          "name": "Brentwood Home Crystal Cove Pillow",
+          "features": ["Adjustable loft", "Gel memory foam", "Cooling cover"],
+          "price": "$99 (2-pack)",
+          "bundlePrice": "$79 with mattress"
+        },
+        {
+          "name": "Brentwood Home Oceano Pillow",
+          "features": ["Natural latex", "Supportive", "Breathable"],
+          "price": "$129 (2-pack)",
+          "bundlePrice": "$109 with mattress"
+        }
+      ],
+      "placement": [
+        "Below mattress product cards ('Frequently Bought Together')",
+        "Comparison table (column for bundles)",
+        "Exit intent modal (bundle option)",
+        "Email nurture (Day 30 - bundle savings email)"
+      ],
+      "affiliateImplementation": "Link to Brentwood Home with bundle-specific UTM parameters"
+    },
+
+    "mattressPlusSheets": {
+      "rationale": "RV mattresses are odd sizes - standard sheets don't fit, need RV-specific",
+      "positioning": {
+        "headline": "Don't Forget: RV Mattresses Need RV Sheets",
+        "subheadline": "Standard sheets won't fit short queens and RV kings - get the right size",
+        "valueProp": "Bundle & save $40 on luxury bamboo sheets"
+      },
+      "products": [
+        {
+          "name": "Brentwood Home Bamboo Sheet Set",
+          "features": ["Silky soft", "Moisture-wicking", "Deep pockets"],
+          "sizes": ["Short Queen", "RV King", "RV Queen"],
+          "price": "$129",
+          "bundlePrice": "$89 with mattress"
+        }
+      ],
+      "placement": [
+        "Immediately after size selection (if have size selector)",
+        "In comparison tables ('Complete the Set')",
+        "Product guide sidebars",
+        "Email nurture (Day 30 bundle email)"
+      ],
+      "affiliateImplementation": "Link to sheets collection with bundle UTM"
+    },
+
+    "mattressProtector": {
+      "rationale": "Protects investment, often required to maintain warranty",
+      "positioning": {
+        "headline": "Protect Your Investment",
+        "subheadline": "Warranty protection + defense against spills, stains, and RV moisture",
+        "valueProp": "Waterproof, breathable, and often required for warranty coverage"
+      },
+      "products": [
+        {
+          "name": "Brentwood Home Mattress Protector",
+          "features": ["Waterproof", "Breathable", "Hypoallergenic"],
+          "price": "$89-119 depending on size",
+          "bundlePrice": "$69-99 with mattress"
+        }
+      ],
+      "placement": [
+        "Product cards ('Protect Your Mattress')",
+        "Warranty information sections",
+        "Email nurture (Day 3 - protection recommendation)"
+      ],
+      "copyFraming": "Most RV owners opt for mattress protection - moisture from slide-outs, temperature changes, and condensation make protectors especially important in RVs"
+    },
+
+    "premiumModelUpgrade": {
+      "rationale": "Present premium options after establishing baseline - some users willing to pay more",
+      "approach": "Good-Better-Best positioning in comparison tables",
+      "example": {
+        "good": {
+          "model": "Cypress Mattress",
+          "price": "$599",
+          "positioning": "Budget-Friendly Quality"
+        },
+        "better": {
+          "model": "Oceano Hybrid",
+          "price": "$899",
+          "positioning": "Premium Comfort",
+          "upgrade": "Latex + coils for enhanced support - $300 more"
+        },
+        "best": {
+          "model": "Crystal Cove",
+          "price": "$1,199",
+          "positioning": "Luxury Sleep Experience",
+          "upgrade": "Advanced cooling + superior materials - $600 more"
+        }
+      },
+      "copyFraming": {
+        "upgrade1": "Upgrade to the Oceano for $300 more and get latex comfort + coil support - most popular choice",
+        "upgrade2": "For ultimate luxury, the Crystal Cove adds advanced cooling technology - investment in quality sleep"
+      },
+      "placement": [
+        "Comparison tables with clear differentiation",
+        "Individual product pages ('Consider upgrading to...')",
+        "Email nurture (Day 14 - model comparison)"
+      ]
+    },
+
+    "completeSleepBundle": {
+      "rationale": "Highest AOV - present complete solution for users ready to invest",
+      "bundle": {
+        "name": "Complete RV Master Suite",
+        "includes": [
+          "Premium mattress (choice of model)",
+          "2 Premium pillows",
+          "Luxury sheet set",
+          "Waterproof mattress protector"
+        ],
+        "pricing": {
+          "individualTotal": "$1,200-1,800 depending on model",
+          "bundlePrice": "$999-1,499",
+          "savings": "$200-300"
+        }
+      },
+      "positioning": {
+        "headline": "Transform Your RV Into a 5-Star Hotel",
+        "subheadline": "Everything you need for luxury RV sleep - bundled and save $200-300",
+        "benefits": [
+          "Complete sleep system designed for RVs",
+          "Perfectly matched components",
+          "Maximum savings (15-20% off individual pricing)",
+          "One-time investment in quality sleep"
+        ]
+      },
+      "placement": [
+        "Dedicated 'Bundles' section on comparison page",
+        "Exit intent modal (premium option)",
+        "Email nurture (Day 60 - bundle opportunity)"
+      ],
+      "targetAudience": "Premium RV owners (Class A, luxury fifth wheels) who value quality and convenience"
+    },
+
+    "implementationBestPractices": [
+      "Present bundles naturally, not aggressively",
+      "Always show clear savings calculations",
+      "Use 'Frequently Bought Together' framing",
+      "Highlight convenience ('Get everything in one order')",
+      "Emphasize RV-specific reasons (odd sizes, moisture protection)",
+      "Make single-item purchase equally easy (don't force bundles)",
+      "Track bundle vs individual purchase rates to optimize",
+      "Test bundle placement and presentation"
+    ]
+  },
+
+  "affiliateDisclosure": {
+    "requirement": "FTC requires clear disclosure of affiliate relationships",
+    "placement": [
+      "Top of every affiliate page (before primary content)",
+      "Near affiliate links where not disruptive",
+      "Footer of site"
+    ],
+    "language": {
+      "recommended": "We earn a commission if you make a purchase through our links, at no additional cost to you. This helps us provide free RV mattress guides and reviews. We only recommend products we genuinely believe will improve your RV experience.",
+      "shorter": "Affiliate Disclosure: We may earn a commission from links on this page at no cost to you. This supports our free content.",
+      "tone": "Transparent, straightforward, benefit-focused"
+    },
+    "design": {
+      "format": "Light background box with border",
+      "icon": "Info icon or disclosure icon",
+      "fontSize": "Readable (14px minimum)",
+      "color": "Distinct but not jarring"
+    }
+  },
+
+  "contentDesignConsiderations": {
+    "multipleVisitDesign": {
+      "principle": "Content designed to bring users back during 120-day consideration",
+      "tactics": [
+        "Create serialized content (Part 1: Sizing, Part 2: Materials, Part 3: Shopping)",
+        "Update with 'Last Updated: [DATE]' to signal freshness",
+        "Add 'New: [FEATURE]' sections to reward return visits",
+        "Include seasonal buyer guides (updated quarterly)",
+        "Provide downloadable resources users return to reference",
+        "Build comparison tools that users return to as they research"
+      ]
+    },
+
+    "pageLoadSpeed": {
+      "importance": "Critical for conversion - every 1 second delay reduces conversions 7%",
+      "targets": {
+        "firstContentfulPaint": "< 1.5 seconds",
+        "largestContentfulPaint": "< 2.5 seconds",
+        "timeToInteractive": "< 3.5 seconds"
+      },
+      "optimizations": [
+        "Compress images (WebP format, lazy loading)",
+        "Minimize JavaScript (defer non-critical JS)",
+        "Use CDN for static assets",
+        "Implement caching headers",
+        "Minify CSS and HTML"
+      ]
+    },
+
+    "mobileOptimization": {
+      "importance": "50%+ of traffic likely mobile",
+      "criticalElements": [
+        "Tap targets minimum 44x44px",
+        "Readable font sizes (16px minimum for body)",
+        "Simplified navigation (hamburger menu)",
+        "Sticky CTA visible without scrolling",
+        "Simplified comparison tables (stacked on mobile)",
+        "Easy email capture (minimal fields)",
+        "Fast loading (compress images aggressively)"
+      ]
+    },
+
+    "accessibility": {
+      "importance": "Legal requirement + improves UX for all users",
+      "wcagLevel": "WCAG 2.1 AA compliance minimum",
+      "requirements": [
+        "Color contrast ratio 4.5:1 minimum",
+        "All images have descriptive alt text",
+        "Keyboard navigation works throughout",
+        "Screen reader compatible",
+        "Form labels properly associated",
+        "Focus indicators visible",
+        "Heading hierarchy logical (H1 > H2 > H3)"
+      ]
+    }
+  },
+
+  "seasonalStrategyCalendar": {
+    "january": {
+      "themes": ["New Year's resolutions", "Winter camping prep", "MLK Day sales"],
+      "content": "New Year, Better Sleep: Upgrade Your RV Mattress for 2025",
+      "promotions": "Watch for Martin Luther King Jr. Day sales"
+    },
+    "february": {
+      "themes": ["Presidents Day sales", "Valentine's Day gift", "Spring trip planning"],
+      "content": "Presidents Day Mattress Sale Guide",
+      "promotions": "Presidents Day typically biggest February promotion"
+    },
+    "march": {
+      "themes": ["Spring camping season prep", "RV de-winterizing"],
+      "content": "Spring RV Prep: Is Your Mattress Ready for Camping Season?",
+      "promotions": "Watch for spring sales"
+    },
+    "april": {
+      "themes": ["Easter weekend camping", "Spring Break trips", "Tax refund purchases"],
+      "content": "Invest Your Tax Refund in Better Sleep: RV Mattress Guide",
+      "promotions": "Spring sales may continue"
+    },
+    "may": {
+      "themes": ["Memorial Day camping", "Summer trip planning", "Memorial Day sales"],
+      "content": "Memorial Day Mattress Sale: Best Deals for RV Owners",
+      "promotions": "Memorial Day typically major promotion"
+    },
+    "june": {
+      "themes": ["Summer camping season", "Father's Day gifts", "Vacation planning"],
+      "content": "Father's Day Gift Guide: Upgrade Dad's RV Sleep",
+      "promotions": "Mid-year sales possible"
+    },
+    "july": {
+      "themes": ["4th of July camping", "Peak summer travel", "Mid-summer sales"],
+      "content": "Summer RV Living: Beat the Heat with Cooling Mattresses",
+      "promotions": "July 4th sales"
+    },
+    "august": {
+      "themes": ["Back to school", "End of summer trips", "Fall planning"],
+      "content": "Last Chance for Summer RV Adventures - Sleep Well on Every Trip",
+      "promotions": "End of summer clearance possible"
+    },
+    "september": {
+      "themes": ["Labor Day camping", "Fall color trips", "Labor Day sales"],
+      "content": "Labor Day Mattress Sale: Best Deals for Fall RV Adventures",
+      "promotions": "Labor Day typically major promotion"
+    },
+    "october": {
+      "themes": ["Fall camping", "Halloween RV trips", "Snowbird prep"],
+      "content": "Snowbird Prep: Upgrade Your Mattress Before Heading South",
+      "promotions": "Columbus Day sales possible"
+    },
+    "november": {
+      "themes": ["Thanksgiving travel", "Black Friday", "Holiday shopping"],
+      "content": "Black Friday Mattress Deals: Biggest Savings of the Year",
+      "promotions": "Black Friday/Cyber Monday - biggest promotions"
+    },
+    "december": {
+      "themes": ["Holiday RV travel", "Year-end purchases", "Winter camping"],
+      "content": "Holiday Gift Guide: Give the Gift of Better RV Sleep",
+      "promotions": "Post-Christmas sales, end of year clearance"
+    }
+  },
+
+  "competitiveAdvantages": {
+    "why120DayCookie": "Most mattress affiliates have 30-day cookies - 120 days allows capturing long consideration purchases",
+    "whyHighCommission": "$75-299 per sale (15%) beats most affiliate programs - worth significant effort",
+    "whyBrentwoodHome": [
+      "Premium brand with strong reputation",
+      "Eco-friendly positioning aligns with conscious RV consumers",
+      "Actual RV-specific sizes (short queen, RV king)",
+      "Strong warranty (25-year) and trial period (120-night)",
+      "CertiPUR-US and GREENGUARD Gold certifications",
+      "Made in USA (California) quality",
+      "Reasonable pricing ($500-1,995) vs luxury brands ($2,000-4,000)"
+    ],
+    "whyRVNiche": [
+      "Underserved market - most mattress content targets home buyers",
+      "RV owners are highly engaged niche audience",
+      "RV mattresses require specific sizes and considerations",
+      "RVers actively research purchases (perfect for affiliate content)",
+      "High purchase intent - if someone is measuring their RV mattress, they're close to buying"
+    ]
+  },
+
+  "successMetrics": {
+    "shortTerm": {
+      "affiliateLinkCTR": "Target: 8-12%",
+      "emailCaptureRate": "Target: 5-8%",
+      "avgTimeOnPage": "Target: 120+ seconds",
+      "bounceRate": "Target: < 40%"
+    },
+    "mediumTerm": {
+      "returnVisitorRate": "Target: 25-30% within 30 days",
+      "emailOpenRate": "Target: 30-40%",
+      "emailClickRate": "Target: 8-12%"
+    },
+    "longTerm": {
+      "affiliateSalesConversionRate": "Target: 3-8% (clicks to sales)",
+      "averageOrderValue": "Target: $800-1,200",
+      "monthlyAffiliateRevenue": "Target: $1,500-3,000+ depending on traffic",
+      "emailListGrowth": "Target: 100-200 subscribers/month"
+    }
+  }
+}

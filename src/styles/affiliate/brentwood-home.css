@@ -1,0 +1,538 @@
+/**
+ * Brentwood Home - Affiliate Landing Page Design System
+ * Premium RV mattress affiliate pages with warm, sleep-focused aesthetics
+ * Version: 1.0.0
+ */
+
+/* ===================================
+   COLOR SYSTEM
+   =================================== */
+
+:root {
+  /* Primary Brand Colors - Trust & Calm */
+  --brentwood-primary-blue: #4A90E2;
+  --brentwood-primary-blue-dark: #3a7ac2;
+  --brentwood-primary-blue-light: #5aa0f2;
+
+  /* Secondary Colors - Luxury & Comfort */
+  --brentwood-secondary-purple: #7B68EE;
+  --brentwood-secondary-purple-dark: #6a57de;
+  --brentwood-secondary-purple-light: #8c79fe;
+
+  /* Accent Colors - Premium & Investment */
+  --brentwood-accent-gold: #D4AF37;
+  --brentwood-accent-gold-dark: #b89527;
+  --brentwood-accent-gold-light: #e4bf47;
+
+  /* Neutral Colors */
+  --brentwood-neutral-grey: #34495E;
+  --brentwood-neutral-grey-dark: #2c3e50;
+  --brentwood-neutral-grey-light: #7f8c8d;
+
+  /* Background Colors - Clean & Airy */
+  --brentwood-soft-bg: #F7F9FC;
+  --brentwood-white: #FFFFFF;
+  --brentwood-off-white: #FAFBFC;
+
+  /* Status Colors */
+  --brentwood-success-green: #27AE60;
+  --brentwood-success-green-dark: #1e8c4d;
+  --brentwood-success-green-light: #31c76d;
+
+  --brentwood-warning-red: #E74C3C;
+  --brentwood-warning-red-dark: #c0392b;
+  --brentwood-warning-red-light: #f56253;
+
+  /* Text Colors */
+  --brentwood-text-primary: #2c3e50;
+  --brentwood-text-secondary: #34495E;
+  --brentwood-text-muted: #7f8c8d;
+  --brentwood-text-white: #FFFFFF;
+
+  /* Overlay Colors */
+  --brentwood-dark-overlay: rgba(52, 73, 94, 0.9);
+  --brentwood-dark-overlay-light: rgba(52, 73, 94, 0.7);
+  --brentwood-dark-overlay-medium: rgba(52, 73, 94, 0.8);
+
+  /* ===================================
+     SPACING SYSTEM (8px base unit)
+     =================================== */
+  --brentwood-spacing-xs: 0.25rem;    /* 4px */
+  --brentwood-spacing-sm: 0.5rem;     /* 8px */
+  --brentwood-spacing-md: 1rem;       /* 16px */
+  --brentwood-spacing-lg: 1.5rem;     /* 24px */
+  --brentwood-spacing-xl: 2rem;       /* 32px */
+  --brentwood-spacing-2xl: 3rem;      /* 48px */
+  --brentwood-spacing-3xl: 4rem;      /* 64px */
+  --brentwood-spacing-4xl: 6rem;      /* 96px */
+
+  /* ===================================
+     TYPOGRAPHY SYSTEM
+     =================================== */
+  /* Font Families */
+  --brentwood-font-headline: 'Playfair Display', Georgia, serif;
+  --brentwood-font-subheadline: 'Lato', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --brentwood-font-body: 'Lato', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --brentwood-font-accent: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  /* Font Sizes - Desktop */
+  --brentwood-text-xs: 0.75rem;       /* 12px */
+  --brentwood-text-sm: 0.875rem;      /* 14px */
+  --brentwood-text-base: 1rem;        /* 16px */
+  --brentwood-text-lg: 1.125rem;      /* 18px */
+  --brentwood-text-xl: 1.25rem;       /* 20px */
+  --brentwood-text-2xl: 1.5rem;       /* 24px */
+  --brentwood-text-3xl: 1.875rem;     /* 30px */
+  --brentwood-text-4xl: 2.25rem;      /* 36px */
+  --brentwood-text-5xl: 3rem;         /* 48px */
+  --brentwood-text-6xl: 4rem;         /* 64px */
+
+  /* Font Weights */
+  --brentwood-font-normal: 400;
+  --brentwood-font-medium: 500;
+  --brentwood-font-semibold: 600;
+  --brentwood-font-bold: 700;
+  --brentwood-font-extrabold: 800;
+
+  /* Line Heights */
+  --brentwood-leading-tight: 1.2;
+  --brentwood-leading-snug: 1.375;
+  --brentwood-leading-normal: 1.5;
+  --brentwood-leading-relaxed: 1.625;
+  --brentwood-leading-loose: 2;
+
+  /* ===================================
+     BORDER & RADIUS
+     =================================== */
+  --brentwood-radius-sm: 0.25rem;     /* 4px */
+  --brentwood-radius-md: 0.5rem;      /* 8px */
+  --brentwood-radius-lg: 0.75rem;     /* 12px */
+  --brentwood-radius-xl: 1rem;        /* 16px */
+  --brentwood-radius-2xl: 1.5rem;     /* 24px */
+  --brentwood-radius-full: 9999px;
+
+  /* ===================================
+     SHADOWS - Warm & Soft
+     =================================== */
+  --brentwood-shadow-sm: 0 1px 2px 0 rgba(52, 73, 94, 0.05);
+  --brentwood-shadow-md: 0 4px 6px -1px rgba(52, 73, 94, 0.1), 0 2px 4px -1px rgba(52, 73, 94, 0.06);
+  --brentwood-shadow-lg: 0 10px 15px -3px rgba(52, 73, 94, 0.1), 0 4px 6px -2px rgba(52, 73, 94, 0.05);
+  --brentwood-shadow-xl: 0 20px 25px -5px rgba(52, 73, 94, 0.1), 0 10px 10px -5px rgba(52, 73, 94, 0.04);
+  --brentwood-shadow-2xl: 0 25px 50px -12px rgba(52, 73, 94, 0.25);
+  --brentwood-shadow-inner: inset 0 2px 4px 0 rgba(52, 73, 94, 0.06);
+
+  /* ===================================
+     TRANSITIONS
+     =================================== */
+  --brentwood-transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --brentwood-transition-base: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  --brentwood-transition-slow: 500ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* ===================================
+     Z-INDEX SCALE
+     =================================== */
+  --brentwood-z-base: 0;
+  --brentwood-z-dropdown: 1000;
+  --brentwood-z-sticky: 1100;
+  --brentwood-z-fixed: 1200;
+  --brentwood-z-modal: 1300;
+  --brentwood-z-popover: 1400;
+  --brentwood-z-tooltip: 1500;
+
+  /* ===================================
+     TOUCH TARGETS
+     =================================== */
+  --brentwood-touch-target-min: 44px;
+  --brentwood-touch-target-comfortable: 48px;
+}
+
+/* ===================================
+   GOOGLE FONTS IMPORT
+   =================================== */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Lato:wght@300;400;700&family=Montserrat:wght@400;500;600;700&display=swap');
+
+/* ===================================
+   TYPOGRAPHY CLASSES
+   =================================== */
+
+/* Headlines - Playfair Display */
+.brentwood-headline-hero {
+  font-family: var(--brentwood-font-headline);
+  font-weight: var(--brentwood-font-bold);
+  font-size: var(--brentwood-text-5xl);
+  line-height: var(--brentwood-leading-tight);
+  color: var(--brentwood-text-primary);
+  letter-spacing: -0.02em;
+}
+
+.brentwood-headline-primary {
+  font-family: var(--brentwood-font-headline);
+  font-weight: var(--brentwood-font-bold);
+  font-size: var(--brentwood-text-4xl);
+  line-height: var(--brentwood-leading-tight);
+  color: var(--brentwood-text-primary);
+  letter-spacing: -0.01em;
+}
+
+.brentwood-headline-secondary {
+  font-family: var(--brentwood-font-subheadline);
+  font-weight: var(--brentwood-font-bold);
+  font-size: var(--brentwood-text-3xl);
+  line-height: var(--brentwood-leading-snug);
+  color: var(--brentwood-text-primary);
+}
+
+.brentwood-headline-tertiary {
+  font-family: var(--brentwood-font-headline);
+  font-weight: var(--brentwood-font-semibold);
+  font-size: var(--brentwood-text-2xl);
+  line-height: var(--brentwood-leading-snug);
+  color: var(--brentwood-text-primary);
+}
+
+/* Body Text - Lato */
+.brentwood-body-large {
+  font-family: var(--brentwood-font-body);
+  font-size: var(--brentwood-text-lg);
+  line-height: var(--brentwood-leading-relaxed);
+  color: var(--brentwood-text-secondary);
+}
+
+.brentwood-body-base {
+  font-family: var(--brentwood-font-body);
+  font-size: var(--brentwood-text-base);
+  line-height: var(--brentwood-leading-normal);
+  color: var(--brentwood-text-secondary);
+}
+
+.brentwood-body-small {
+  font-family: var(--brentwood-font-body);
+  font-size: var(--brentwood-text-sm);
+  line-height: var(--brentwood-leading-normal);
+  color: var(--brentwood-text-muted);
+}
+
+/* Accent Text - Montserrat (for stats) */
+.brentwood-accent-stat {
+  font-family: var(--brentwood-font-accent);
+  font-weight: var(--brentwood-font-bold);
+  font-size: var(--brentwood-text-5xl);
+  line-height: var(--brentwood-leading-tight);
+  color: var(--brentwood-primary-blue);
+}
+
+.brentwood-accent-label {
+  font-family: var(--brentwood-font-accent);
+  font-weight: var(--brentwood-font-medium);
+  font-size: var(--brentwood-text-base);
+  line-height: var(--brentwood-leading-normal);
+  color: var(--brentwood-text-secondary);
+}
+
+/* ===================================
+   RESPONSIVE TYPOGRAPHY
+   =================================== */
+
+@media (max-width: 768px) {
+  .brentwood-headline-hero {
+    font-size: var(--brentwood-text-4xl);
+  }
+
+  .brentwood-headline-primary {
+    font-size: var(--brentwood-text-3xl);
+  }
+
+  .brentwood-headline-secondary {
+    font-size: var(--brentwood-text-2xl);
+  }
+
+  .brentwood-headline-tertiary {
+    font-size: var(--brentwood-text-xl);
+  }
+
+  .brentwood-accent-stat {
+    font-size: var(--brentwood-text-4xl);
+  }
+}
+
+@media (max-width: 480px) {
+  .brentwood-headline-hero {
+    font-size: var(--brentwood-text-3xl);
+  }
+
+  .brentwood-headline-primary {
+    font-size: var(--brentwood-text-2xl);
+  }
+}
+
+/* ===================================
+   UTILITY CLASSES
+   =================================== */
+
+/* Smooth Scrolling */
+.brentwood-smooth-scroll {
+  scroll-behavior: smooth;
+}
+
+/* Text Gradients */
+.brentwood-gradient-text-primary {
+  background: linear-gradient(135deg, var(--brentwood-primary-blue) 0%, var(--brentwood-secondary-purple) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.brentwood-gradient-text-luxury {
+  background: linear-gradient(135deg, var(--brentwood-accent-gold) 0%, var(--brentwood-accent-gold-light) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Background Gradients */
+.brentwood-gradient-bg-primary {
+  background: linear-gradient(135deg, var(--brentwood-primary-blue) 0%, var(--brentwood-primary-blue-light) 100%);
+}
+
+.brentwood-gradient-bg-luxury {
+  background: linear-gradient(135deg, var(--brentwood-secondary-purple) 0%, var(--brentwood-accent-gold) 100%);
+}
+
+.brentwood-gradient-bg-hero {
+  background: linear-gradient(135deg, var(--brentwood-primary-blue) 0%, var(--brentwood-secondary-purple) 50%, var(--brentwood-accent-gold-light) 100%);
+}
+
+/* Container Utilities */
+.brentwood-container {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--brentwood-spacing-md);
+  padding-right: var(--brentwood-spacing-md);
+}
+
+@media (min-width: 640px) {
+  .brentwood-container {
+    max-width: 640px;
+  }
+}
+
+@media (min-width: 768px) {
+  .brentwood-container {
+    max-width: 768px;
+    padding-left: var(--brentwood-spacing-lg);
+    padding-right: var(--brentwood-spacing-lg);
+  }
+}
+
+@media (min-width: 1024px) {
+  .brentwood-container {
+    max-width: 1024px;
+    padding-left: var(--brentwood-spacing-xl);
+    padding-right: var(--brentwood-spacing-xl);
+  }
+}
+
+@media (min-width: 1280px) {
+  .brentwood-container {
+    max-width: 1280px;
+  }
+}
+
+/* Section Spacing */
+.brentwood-section {
+  padding-top: var(--brentwood-spacing-3xl);
+  padding-bottom: var(--brentwood-spacing-3xl);
+}
+
+@media (max-width: 768px) {
+  .brentwood-section {
+    padding-top: var(--brentwood-spacing-2xl);
+    padding-bottom: var(--brentwood-spacing-2xl);
+  }
+}
+
+/* ===================================
+   ANIMATION UTILITIES
+   =================================== */
+
+/* Fade In */
+@keyframes brentwood-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.brentwood-fade-in {
+  animation: brentwood-fade-in var(--brentwood-transition-base) ease-out;
+}
+
+/* Fade Up */
+@keyframes brentwood-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.brentwood-fade-up {
+  animation: brentwood-fade-up var(--brentwood-transition-slow) ease-out;
+}
+
+/* Scale Up */
+@keyframes brentwood-scale-up {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.brentwood-scale-up {
+  animation: brentwood-scale-up var(--brentwood-transition-base) ease-out;
+}
+
+/* Lift on Hover */
+.brentwood-lift-hover {
+  transition: transform var(--brentwood-transition-base), box-shadow var(--brentwood-transition-base);
+}
+
+.brentwood-lift-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--brentwood-shadow-xl);
+}
+
+/* Pulse (gentle for sleep theme) */
+@keyframes brentwood-pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+.brentwood-pulse {
+  animation: brentwood-pulse 2s ease-in-out infinite;
+}
+
+/* ===================================
+   COMPONENT BASE STYLES
+   =================================== */
+
+/* Button Base */
+.brentwood-button-base {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--brentwood-font-body);
+  font-weight: var(--brentwood-font-semibold);
+  text-align: center;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: all var(--brentwood-transition-base);
+  min-height: var(--brentwood-touch-target-min);
+  min-width: var(--brentwood-touch-target-min);
+  border-radius: var(--brentwood-radius-md);
+  user-select: none;
+}
+
+.brentwood-button-base:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Card Base */
+.brentwood-card-base {
+  background: var(--brentwood-white);
+  border-radius: var(--brentwood-radius-md);
+  box-shadow: var(--brentwood-shadow-md);
+  transition: all var(--brentwood-transition-base);
+}
+
+/* ===================================
+   ACCESSIBILITY
+   =================================== */
+
+/* Skip to main content */
+.brentwood-skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: var(--brentwood-primary-blue);
+  color: var(--brentwood-text-white);
+  padding: var(--brentwood-spacing-sm) var(--brentwood-spacing-md);
+  text-decoration: none;
+  border-radius: var(--brentwood-radius-md);
+  z-index: var(--brentwood-z-tooltip);
+}
+
+.brentwood-skip-link:focus {
+  top: var(--brentwood-spacing-md);
+}
+
+/* Focus Visible */
+.brentwood-focus-visible:focus-visible {
+  outline: 2px solid var(--brentwood-primary-blue);
+  outline-offset: 2px;
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ===================================
+   PRINT STYLES
+   =================================== */
+
+@media print {
+  .brentwood-no-print {
+    display: none !important;
+  }
+
+  .brentwood-button {
+    border: 1px solid #000;
+  }
+
+  .brentwood-card {
+    break-inside: avoid;
+  }
+}
+
+/* ===================================
+   PERFORMANCE OPTIMIZATIONS
+   =================================== */
+
+/* GPU Acceleration */
+.brentwood-gpu-accelerated {
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+/* Contain Paint */
+.brentwood-contain-paint {
+  contain: paint;
+}
+
+/* Content Visibility */
+.brentwood-content-visibility {
+  content-visibility: auto;
+}

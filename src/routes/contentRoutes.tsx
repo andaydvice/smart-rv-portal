@@ -40,6 +40,15 @@ const WeekendWarriors = lazy(() => import("../pages/affiliate/rv-life-pro/scenar
 const GreyNomads = lazy(() => import("../pages/affiliate/rv-life-pro/scenarios/GreyNomads"));
 const DigitalNomads = lazy(() => import("../pages/affiliate/rv-life-pro/scenarios/DigitalNomads"));
 
+// Brentwood Home Affiliate Pages - lazy loaded
+const UltimateRVMattressBuyingGuide = lazy(() => import("../pages/affiliate/brentwood-home/UltimateRVMattressBuyingGuide"));
+const RVMattressSizeGuide = lazy(() => import("../pages/affiliate/brentwood-home/RVMattressSizeGuide"));
+const RVSleepCrisis = lazy(() => import("../pages/affiliate/brentwood-home/RVSleepCrisis"));
+const BrentwoodHomeShowcase = lazy(() => import("../pages/affiliate/brentwood-home/BrentwoodHomeShowcase"));
+const HealthWellnessBenefits = lazy(() => import("../pages/affiliate/brentwood-home/HealthWellnessBenefits"));
+const MattressROICalculator = lazy(() => import("../pages/affiliate/brentwood-home/MattressROICalculator"));
+const InstallationCareGuide = lazy(() => import("../pages/affiliate/brentwood-home/InstallationCareGuide"));
+
 const contentRoutes: RouteObject[] = [
   {
     path: "/technology",
@@ -337,6 +346,84 @@ const contentRoutes: RouteObject[] = [
       <Suspense fallback={<MinimalLoader />}>
         <RouteTransition>
           <DigitalNomads />
+        </RouteTransition>
+      </Suspense>
+    ),
+    errorElement: <ErrorPage />,
+  },
+  // Brentwood Home Mattress Landing Pages - SEO Optimized URLs
+  {
+    path: "/rv-mattress-guide",
+    element: (
+      <Suspense fallback={<MinimalLoader />}>
+        <RouteTransition>
+          <UltimateRVMattressBuyingGuide />
+        </RouteTransition>
+      </Suspense>
+    ),
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/rv-mattress-sizes",
+    element: (
+      <Suspense fallback={<MinimalLoader />}>
+        <RouteTransition>
+          <RVMattressSizeGuide />
+        </RouteTransition>
+      </Suspense>
+    ),
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/rv-sleep-crisis",
+    element: (
+      <Suspense fallback={<MinimalLoader />}>
+        <RouteTransition>
+          <RVSleepCrisis />
+        </RouteTransition>
+      </Suspense>
+    ),
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/brentwood-home-rv-mattresses",
+    element: (
+      <Suspense fallback={<MinimalLoader />}>
+        <RouteTransition>
+          <BrentwoodHomeShowcase />
+        </RouteTransition>
+      </Suspense>
+    ),
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/rv-mattress-health-benefits",
+    element: (
+      <Suspense fallback={<MinimalLoader />}>
+        <RouteTransition>
+          <HealthWellnessBenefits />
+        </RouteTransition>
+      </Suspense>
+    ),
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/rv-mattress-roi-calculator",
+    element: (
+      <Suspense fallback={<MinimalLoader />}>
+        <RouteTransition>
+          <MattressROICalculator />
+        </RouteTransition>
+      </Suspense>
+    ),
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/rv-mattress-installation",
+    element: (
+      <Suspense fallback={<MinimalLoader />}>
+        <RouteTransition>
+          <InstallationCareGuide />
         </RouteTransition>
       </Suspense>
     ),

@@ -1,0 +1,1224 @@
+{
+  "heroHeadlines": [
+    {
+      "id": "hero_1",
+      "headline": "Wake Up Refreshed on the Road: Your RV Deserves a Real Mattress",
+      "usage": "Homepage/Main Landing Page",
+      "emotionalTrigger": "aspiration"
+    },
+    {
+      "id": "hero_2",
+      "headline": "Stop Sacrificing Sleep for Adventure: Premium Mattresses Built for RV Life",
+      "usage": "Product Showcase Page",
+      "emotionalTrigger": "pain_relief"
+    },
+    {
+      "id": "hero_3",
+      "headline": "Your Back Shouldn't Pay the Price for Your RV Lifestyle",
+      "usage": "Health & Wellness Page",
+      "emotionalTrigger": "health_concern"
+    },
+    {
+      "id": "hero_4",
+      "headline": "From Sleepless Nights to Perfect Mornings: The RV Mattress Transformation",
+      "usage": "Story/Transformation Page",
+      "emotionalTrigger": "transformation"
+    },
+    {
+      "id": "hero_5",
+      "headline": "Why Full-Time RVers Are Ditching Their Stock Mattresses for Brentwood Home",
+      "usage": "Buying Guide Page",
+      "emotionalTrigger": "social_proof"
+    }
+  ],
+  "subheadlines": [
+    {
+      "id": "sub_1",
+      "headline": "hero_1",
+      "copy": "Discover how premium organic mattresses designed for luxury homes are transforming RV sleep—and why thousands of full-timers won't travel without them."
+    },
+    {
+      "id": "sub_2",
+      "headline": "hero_2",
+      "copy": "The same certified organic, non-toxic mattresses trusted in million-dollar homes now fit perfectly in your RV. Because your health doesn't take a vacation."
+    },
+    {
+      "id": "sub_3",
+      "headline": "hero_3",
+      "copy": "Stock RV mattresses are designed for cost, not comfort. After 6 months of chronic pain, one couple discovered what a real mattress could do for their retirement dream."
+    },
+    {
+      "id": "sub_4",
+      "headline": "hero_4",
+      "copy": "From waking up with back pain 5 days a week to sleeping through the night in every campground—here's how a mattress upgrade changed everything."
+    },
+    {
+      "id": "sub_5",
+      "headline": "hero_5",
+      "copy": "After testing every RV mattress solution on the market, we found the only brand that combines luxury, durability, and the exact sizes RVers need."
+    }
+  ],
+  "problemNarratives": [
+    {
+      "id": "problem_1",
+      "title": "The 3 AM Wake-Up Call",
+      "persona": "Full-Time RVers",
+      "narrative": "It's 3:17 AM in a beautiful campground in Montana. You should be dreaming about tomorrow's hike, but instead, you're wide awake with lower back pain radiating down your left leg. Again.\n\nYou shift positions for the hundredth time tonight. The stock foam mattress in your $85,000 RV—the one that came 'standard' with your dream home on wheels—has compressed into a landscape of valleys and pressure points. You can feel the wooden slats through the thin foam.\n\nYour partner is tossing and turning too. Neither of you mentions it anymore, but you both know: this isn't what you signed up for when you sold the house to travel full-time.\n\nThe irony isn't lost on you. You're parked in paradise, living your dream retirement, but you haven't had a good night's sleep in months. The chronic fatigue is affecting everything—your mood, your energy for hiking, even your relationship. Last week, you actually considered cutting the trip short and going back to stick-and-brick living.\n\nAll because of a mattress.\n\nStock RV mattresses are built to a price point, not a quality standard. Manufacturers know you're buying the RV for the chassis, the floor plan, the solar setup. The mattress? That's an afterthought—a thin slab of the cheapest foam that fits the odd dimensions. They expect you to replace it. They just don't tell you that upfront.",
+      "painPoints": [
+        "Chronic lower back pain disrupting sleep",
+        "Partner disturbance from tossing and turning",
+        "Feeling wooden slats through thin foam",
+        "Emotional toll on retirement dreams",
+        "Relationship strain from poor sleep",
+        "Questioning entire RV lifestyle decision"
+      ]
+    },
+    {
+      "id": "problem_2",
+      "title": "The Weekend Warrior's Dilemma",
+      "persona": "Weekend Warriors",
+      "narrative": "Friday evening. You've been looking forward to this camping trip all week. Work has been brutal, and you need this reset.\n\nBut here's the catch: you know what's waiting for you in that RV. The same mattress that left you stiff and sore last time. The same mattress that made you need a weekend to recover from your weekend getaway.\n\nYour spouse already made the joke: 'We'll need a vacation from our vacation.' But it's not really funny anymore.\n\nYou're paying for a campsite, burning vacation days, and spending money on an RV payment—all so you can sleep worse than you do at home. The mental math doesn't work. Your friends who stay in hotels are getting better rest than you are in your $50,000 travel trailer.\n\nLast month, you seriously considered just selling the RV. Not because you don't love the lifestyle. Not because the destinations aren't incredible. But because your body can't handle waking up in pain every Sunday morning.\n\nA mattress shouldn't be the thing that kills your outdoor dreams. But for too many weekend warriors, it is.",
+      "painPoints": [
+        "Needing recovery time from weekend trips",
+        "Sleeping better at home than in RV",
+        "Questioning ROI of RV ownership",
+        "Physical toll limiting adventure frequency",
+        "Comparing unfavorably to hotel comfort",
+        "Considering selling RV due to sleep issues"
+      ]
+    },
+    {
+      "id": "problem_3",
+      "title": "The Health Crisis You're Sleeping On",
+      "persona": "Health-Conscious RVers",
+      "narrative": "You eat organic. You filter your water. You chose your RV carefully, researching off-gassing and air quality. You're doing everything right for your health on the road.\n\nExcept for one thing: you're sleeping on a toxic foam mattress that's slowly degrading your health.\n\nStock RV mattresses are often made with the cheapest polyurethane foam available, treated with flame retardants and chemicals that off-gas in your small, enclosed space. Every night, you're breathing in those fumes. Every morning, you wake up with a headache you can't quite explain.\n\nThe thin, unsupportive foam is also destroying your spine alignment. Your chiropractor back home told you that your posture has deteriorated significantly since you started full-timing. The exercises aren't working because you're undoing all the progress every single night.\n\nYou're experiencing inflammation you've never had before. Your joints ache. Your sleep quality—measured on your fitness tracker—has plummeted. Your REM sleep is a fraction of what it used to be.\n\nYou didn't sell your house and buy an RV to sacrifice your health. You did it to enhance your life. But without addressing the foundation of health—literally, what you sleep on—everything else is compromised.",
+      "painPoints": [
+        "Chemical off-gassing in enclosed RV space",
+        "Spine alignment deterioration",
+        "Chronic inflammation and joint pain",
+        "Poor REM sleep metrics on fitness trackers",
+        "Headaches and unexplained symptoms",
+        "Undermining other health investments"
+      ]
+    },
+    {
+      "id": "problem_4",
+      "title": "The Cost of Cheap Solutions",
+      "persona": "Renovators & Upgraders",
+      "narrative": "You've been down this road before. Literally.\n\nFirst, you tried the cheap Amazon mattress. Decent reviews, low price, fast shipping. It was better than the stock mattress for about six weeks. Then it started sagging in the middle. Three months later, it was worse than what you started with. $400 wasted.\n\nNext, you went to the RV supply store. 'Specially designed for RVs!' they said. It was better. For a while. But 'designed for RVs' apparently means 'designed to fit RV dimensions,' not 'designed for people who actually live in RVs.' Another $600, another disappointment.\n\nYou tried a foam topper. That helped marginally, but now you're sleeping on a bad mattress with a band-aid solution on top. And you're still waking up with back pain.\n\nYou've spent over $1,000 trying to solve a problem that shouldn't exist. You've wasted dozens of hours researching, measuring, ordering, returning, and starting over.\n\nMeanwhile, your friend who invested in a quality mattress from day one? They're sleeping great, and over the two years you've been cycling through cheap options, they've actually spent less money and had zero hassle.\n\nYou're ready to do it right this time. You just need to know what 'right' actually looks like.",
+      "painPoints": [
+        "Wasted money on multiple failed solutions",
+        "Time lost to research and returns",
+        "Cheap mattresses degrading quickly",
+        "Band-aid solutions not addressing root cause",
+        "Comparison to friends who invested wisely",
+        "Decision fatigue from too many options"
+      ]
+    }
+  ],
+  "solutionNarratives": [
+    {
+      "id": "solution_1",
+      "title": "The First Night Transformation",
+      "relatedProblem": "problem_1",
+      "narrative": "The first night after installing their Brentwood Home Oceano mattress, Mark and Susan slept through until sunrise. No 3 AM wake-up. No tossing and turning. No pain.\n\nMark woke up naturally at 6:30 AM—not because something hurt, but because he was actually rested. For the first time in eight months.\n\n'I thought it might be a fluke,' Susan said. 'But it's been three weeks now, and we're both sleeping like we did in our old house. Actually, better. This mattress is nicer than the one we had before.'\n\nThe Oceano isn't a compromise. It's not an 'RV version' of a real mattress. It's the exact same certified organic, non-toxic memory foam that Brentwood Home sells for luxury homes. It just happens to come in short queen and RV king sizes.\n\nThe difference is in the engineering. Instead of the 2-3 inches of cheap foam in stock RV mattresses, the Oceano has 13 inches of premium memory foam with proper support layers. Your spine actually stays aligned. Pressure points are eliminated. And because it's CertiPUR-US certified, there are no toxic chemicals off-gassing into your RV.\n\n'We've parked in the same campground in Colorado three times this year,' Mark explained. 'The first two times, before the new mattress, I complained about the hard ground and noise. This time? Same spot, same RV, different mattress. I slept perfectly. It wasn't the campground. It was never the campground.'",
+      "transformationPoints": [
+        "Sleeping through the night immediately",
+        "Waking up pain-free for first time in months",
+        "Better sleep than previous stick-and-brick home",
+        "Realizing external factors weren't the problem",
+        "13 inches of premium foam vs 2-3 inches stock",
+        "Same luxury product, just in RV sizes"
+      ]
+    },
+    {
+      "id": "solution_2",
+      "title": "The Investment That Pays Daily Dividends",
+      "relatedProblem": "problem_4",
+      "narrative": "When Jennifer finally decided to invest $1,195 in a Brentwood Home Crystal Cove Hybrid, she did the math first.\n\nShe'd already spent $1,100 on three failed mattresses in 18 months. If the Brentwood Home lasted even two years (it comes with a 25-year warranty), she'd break even. But the real ROI wasn't financial—it was everything else.\n\n'I calculated that I'd spent about 540 nights in my RV over those 18 months,' Jennifer said. 'If I'd had a proper mattress from day one, I would have had 540 good nights of sleep instead of 540 mediocre-to-terrible nights. You can't get that time back.'\n\nThree years later, her Crystal Cove Hybrid still looks and feels like new. No sagging. No compression. No diminished support. The organic cotton cover has held up through countless sheet changes and the vibrations of thousands of miles on the road.\n\nThe math is clear: $1,195 ÷ 1,095 nights (so far) = $1.09 per night. Less than a cup of coffee. And unlike those cheap mattresses that degrade in months, this one will likely last 10+ years.\n\n'I used to tell people I couldn't afford a Brentwood Home mattress,' Jennifer reflected. 'The truth is, I couldn't afford not to get one. Every cheap mattress I bought was just delaying the inevitable while costing me sleep, money, and peace of mind.'",
+      "transformationPoints": [
+        "Breaking even in 2 years vs multiple cheap purchases",
+        "25-year warranty vs 90-day cheap mattress lifespan",
+        "Cost per night under $1.09 (and decreasing)",
+        "Quality maintaining after 3+ years",
+        "Immediate sleep quality improvement",
+        "Elimination of mattress shopping stress"
+      ]
+    },
+    {
+      "id": "solution_3",
+      "title": "The Organic Difference You Can Feel",
+      "relatedProblem": "problem_3",
+      "narrative": "David's morning headaches disappeared within a week of switching to the Cedar Natural Luxe Organic mattress.\n\nHe hadn't made the connection until they were gone. For six months, he'd been waking up with a dull headache and brain fog that would take until mid-morning to clear. He'd blamed the campground water, his coffee, even altitude changes.\n\nThe real culprit? The off-gassing from his stock RV mattress in the enclosed space of his Class B van.\n\n'The Cedar Natural Luxe is GREENGUARD Gold Certified and made with organic materials,' David explained. 'No flame retardants. No formaldehyde. No chemical cocktail off-gassing into my living space every night. The air quality in my van actually improved.'\n\nBut the organic certification wasn't just about what the mattress didn't have—it was about what it did have. Natural latex. Organic cotton. Real wool as a fire barrier instead of chemical treatments. Materials that breathe, regulate temperature, and support proper spinal alignment.\n\nDavid's chiropractor noticed the difference at his next adjustment. 'My spine alignment had improved significantly. The chronic inflammation in my lower back was reducing. All from changing one thing: my mattress.'\n\nHis fitness tracker told the story too. His deep sleep increased by 23%. His resting heart rate dropped. His HRV improved. 'I'm not just sleeping more,' he said. 'I'm recovering better. And that affects everything—my energy, my mood, my ability to hike and climb and actually enjoy the places I'm visiting.'",
+      "transformationPoints": [
+        "Headaches eliminated within one week",
+        "Improved air quality in enclosed RV space",
+        "GREENGUARD Gold & organic certifications",
+        "Chiropractor-verified spine improvement",
+        "23% increase in deep sleep metrics",
+        "Overall health markers improving"
+      ]
+    },
+    {
+      "id": "solution_4",
+      "title": "Saving the RV Dream",
+      "relatedProblem": "problem_2",
+      "narrative": "Tom and Lisa had given themselves a deadline: if the RV lifestyle wasn't working by summer, they'd sell the rig and go back to hotels for their getaways.\n\nThe problem wasn't the RV. They loved their travel trailer. The problem was that every weekend trip was becoming a physical ordeal. They'd come home more exhausted than when they left.\n\n'We were literally googling 'should we sell our RV' when we found an article about mattress upgrades,' Lisa said. 'We'd spent $35,000 on the trailer but balked at spending $1,400 on a mattress. It sounds crazy in hindsight.'\n\nThey ordered a Brentwood Home Cypress Bamboo Gel mattress in short queen. Free shipping. 120-night sleep trial. They figured they'd at least try before selling the RV.\n\nThe first weekend trip after installation was a revelation.\n\n'We did our favorite loop in the Cascades—the same trip that had left us wrecked the month before,' Tom recalled. 'Same campgrounds, same hiking trails, same everything. Except this time, we woke up refreshed. We had energy for the hikes. We weren't short with each other. It was like experiencing the trip for the first time.'\n\nThat was two years ago. Tom and Lisa have since extended their camping season, added longer trips, and actively plan their weekends around RV adventures.\n\n'That mattress didn't just improve our sleep,' Lisa said. 'It saved our entire RV lifestyle. We were about to give up on something we loved because of a $200 stock mattress. Best $1,400 we ever spent.'",
+      "transformationPoints": [
+        "Preventing RV sale and lifestyle abandonment",
+        "Same trips becoming enjoyable instead of exhausting",
+        "Relationship improvement from better rest",
+        "Energy for activities the next day",
+        "Extending and expanding RV adventures",
+        "Small investment saving large RV investment"
+      ]
+    }
+  ],
+  "productDescriptions": [
+    {
+      "id": "cypress_bamboo",
+      "name": "Cypress Bamboo Gel Memory Foam",
+      "shortName": "Cypress Bamboo Gel",
+      "priceRange": "$799-$1,499",
+      "commission": "$120-$225",
+      "rvSizes": ["RV Short Queen", "RV Queen", "RV King", "Custom Sizes Available"],
+      "tagline": "Cool, Responsive Support for Temperature-Sensitive RVers",
+      "heroDescription": "The Cypress Bamboo Gel brings hotel-quality memory foam to your RV with advanced cooling technology that keeps you comfortable in any climate. Featuring bamboo-infused gel memory foam and a breathable bamboo cover, this mattress is perfect for RVers who run hot or camp in warm weather destinations.",
+      "detailedDescription": "When you're parking your RV in Arizona in July or Florida in August, temperature regulation isn't a luxury—it's essential. The Cypress Bamboo Gel Memory Foam mattress solves the heat problem that plagues most memory foam with innovative cooling technology designed for hot sleepers and warm climates.\n\nThe bamboo-infused gel memory foam actively draws heat away from your body, while the breathable bamboo cover promotes airflow. Unlike cheap memory foam that traps heat, this mattress keeps you in the comfortable zone all night long.\n\nBut cooling is just the beginning. With 11 inches of premium memory foam layers, you get the pressure relief and support that eliminates back pain and tossing and turning. The responsive foam contours to your body without the 'stuck' feeling of traditional memory foam.\n\nFor RVers, the practical benefits are huge: the mattress compresses for easier installation through narrow RV doors, it's lightweight enough for one person to handle, and it expands to full size within hours of unboxing. Available in short queen, RV king, and custom sizes, it's designed specifically for the unique dimensions of RV sleeping spaces.",
+      "rvSpecificBenefits": [
+        "Bamboo gel technology prevents overheating in enclosed RV spaces",
+        "Lightweight construction for easier installation through RV doors",
+        "Compresses for shipping, expands quickly on site",
+        "Short queen and RV king sizes fit standard RV bed frames perfectly",
+        "Performs well in temperature extremes from Canadian winters to desert summers",
+        "Bamboo cover is naturally antimicrobial—important in humid RV environments"
+      ],
+      "idealFor": [
+        "Hot sleepers and warm weather destinations",
+        "RVers camping in southern climates",
+        "Couples where one person runs hot",
+        "Those who want memory foam without heat retention",
+        "RVers without powerful AC systems",
+        "Anyone who's woken up sweating in their RV"
+      ],
+      "keyFeatures": [
+        "11 inches of bamboo-infused gel memory foam",
+        "Cooling bamboo charcoal cover with moisture-wicking properties",
+        "CertiPUR-US certified foam—no harmful chemicals",
+        "Medium-firm feel (6/10) ideal for most sleep positions",
+        "Pressure relief for shoulders, hips, and lower back",
+        "Motion isolation for couples",
+        "Made in California with premium materials",
+        "25-year warranty",
+        "120-night sleep trial"
+      ],
+      "whyItWorks": "The combination of cooling technology and memory foam support solves two major RV sleep problems: temperature regulation in small spaces and proper spinal support on the road. The bamboo materials are also naturally resistant to odors and moisture—critical in the close quarters of RV living."
+    },
+    {
+      "id": "oceano_luxury",
+      "name": "Oceano Luxury Memory Foam",
+      "shortName": "Oceano Luxury",
+      "priceRange": "$899-$1,699",
+      "commission": "$135-$255",
+      "rvSizes": ["RV Short Queen", "RV Queen", "RV King", "Custom Sizes"],
+      "tagline": "Hotel Luxury Meets RV Living",
+      "heroDescription": "Experience the plush, contouring comfort of a five-star hotel mattress in your RV. The Oceano Luxury Memory Foam delivers 13 inches of premium comfort with a soft, cloud-like feel that cradles pressure points while maintaining proper spinal support.",
+      "detailedDescription": "The Oceano Luxury is Brentwood Home's flagship memory foam mattress, and it's the choice of RVers who refuse to compromise on sleep quality just because they're on the road.\n\nWith 13 inches of multi-layer memory foam construction, this is the mattress that makes guests say, 'I slept better in your RV than I do at home.' The plush top layer provides that immediate 'ahhhh' feeling when you lie down, while the support layers beneath ensure your spine stays properly aligned all night.\n\nThe secret is in the layering. Unlike single-density foam mattresses that either feel too soft (and lack support) or too firm (and create pressure points), the Oceano balances multiple foam densities. You get the contouring comfort where you need it and the firm support where your body requires it.\n\nFor RVers, this means waking up without the back pain that plagues so many full-timers. It means your partner's movements don't wake you up when they shift positions. It means sleeping through the night even when you're parked somewhere new.\n\nThe Oceano is also designed for durability. The high-density base layer prevents sagging and maintains support year after year, while the breathable cover withstands the unique stresses of RV life—constant vibration from driving, temperature fluctuations, and the challenges of a mobile home.",
+      "rvSpecificBenefits": [
+        "13-inch profile matches most RV bed frame depths perfectly",
+        "Motion isolation crucial for RV couples in close quarters",
+        "High-density base prevents sagging from road vibrations",
+        "Soft knit cover holds up to frequent sheet changes in small spaces",
+        "Available in exact RV sizes—no need for modifications",
+        "Premium feel justifies the cost of your RV investment"
+      ],
+      "idealFor": [
+        "Full-time RVers who prioritize sleep quality",
+        "Couples who need motion isolation",
+        "Side sleepers needing pressure relief",
+        "Those upgrading from firm stock RV mattresses",
+        "RVers with chronic back or joint pain",
+        "Anyone who loved their memory foam at home"
+      ],
+      "keyFeatures": [
+        "13 inches of premium multi-layer memory foam",
+        "Plush comfort layer with firm support base",
+        "CertiPUR-US certified—no toxic chemicals",
+        "Medium-plush feel (5/10) perfect for side sleepers",
+        "Excellent motion isolation for couples",
+        "Breathable knit cover promotes airflow",
+        "Handcrafted in California",
+        "25-year warranty",
+        "120-night sleep trial with free returns"
+      ],
+      "whyItWorks": "The Oceano solves the fundamental problem of stock RV mattresses: they're too thin and too cheap. With premium materials and proper engineering, this mattress delivers the sleep quality you'd expect in a luxury home—which is exactly what your RV should be."
+    },
+    {
+      "id": "crystal_cove",
+      "name": "Crystal Cove Hybrid",
+      "shortName": "Crystal Cove",
+      "priceRange": "$1,195-$1,995",
+      "commission": "$179-$299",
+      "rvSizes": ["RV Short Queen", "RV Queen", "RV King"],
+      "tagline": "The Best of Both Worlds: Innerspring Support Meets Memory Foam Comfort",
+      "heroDescription": "For RVers who want the responsive support of a traditional innerspring with the pressure relief of memory foam, the Crystal Cove Hybrid delivers both. This is the mattress that converts 'I hate memory foam' skeptics into believers.",
+      "detailedDescription": "Many RVers grew up sleeping on innerspring mattresses and can't imagine switching to memory foam. They want that familiar bounce, that responsive feel, that sense of sleeping 'on' the mattress rather than 'in' it.\n\nThe Crystal Cove Hybrid gives you that—plus everything good about modern memory foam.\n\nAt its core is a premium individually-wrapped coil system. Each coil moves independently, providing targeted support exactly where your body needs it. This is the same technology used in $5,000+ luxury mattresses, just sized for your RV.\n\nAbove the coils: layers of premium memory foam and gel-infused comfort foam that relieve pressure points and eliminate the stiffness that comes from sleeping on coils alone. Below the coils: a high-density support base that provides the foundation for years of durability.\n\nThe result is a mattress that feels responsive and supportive (like an innerspring) but also comfortable and pressure-relieving (like memory foam). You get the best of both technologies without the compromises of either.\n\nFor RVers, the hybrid construction brings specific advantages. The coil system promotes airflow better than solid foam, keeping you cooler in warm weather. The edge support is superior, making it easier to sit on the side of the bed in tight RV bedrooms. And the responsive feel makes it easier to change positions—helpful when you're adjusting to different parking angles and leveling situations.",
+      "rvSpecificBenefits": [
+        "Individually wrapped coils handle road vibrations better than solid foam",
+        "Superior edge support for sitting on bed in small RV bedrooms",
+        "Enhanced airflow through coil system keeps you cooler",
+        "Responsive feel makes position changes easier",
+        "Heavier construction stays in place on RV bed platforms",
+        "Hybrid durability handles the stresses of mobile living"
+      ],
+      "idealFor": [
+        "RVers who prefer traditional innerspring feel",
+        "Combination sleepers who change positions frequently",
+        "Couples with different firmness preferences",
+        "Hot sleepers who need maximum airflow",
+        "Those who want edge support for sitting",
+        "Back sleepers needing responsive support"
+      ],
+      "keyFeatures": [
+        "13 inches total: coils + foam + support base",
+        "Individually wrapped coil system for targeted support",
+        "Gel-infused memory foam comfort layers",
+        "Enhanced edge support for full usable sleep surface",
+        "Medium-firm feel (6.5/10) suitable for all sleep positions",
+        "Superior temperature regulation vs solid foam",
+        "Organic cotton cover",
+        "CertiPUR-US certified foams",
+        "25-year warranty",
+        "120-night sleep trial"
+      ],
+      "whyItWorks": "The Crystal Cove eliminates the 'either/or' decision between innerspring and memory foam. RVers get the proven support of coils with the modern comfort of foam—ideal for couples who can't agree on mattress type or anyone who's unsure about going full memory foam."
+    },
+    {
+      "id": "cedar_natural_luxe",
+      "name": "Cedar Natural Luxe Organic",
+      "shortName": "Cedar Natural Luxe",
+      "priceRange": "$1,499-$1,995",
+      "commission": "$225-$299",
+      "rvSizes": ["RV Short Queen", "RV Queen", "RV King"],
+      "tagline": "Certified Organic Luxury for Health-Conscious RVers",
+      "heroDescription": "The ultimate choice for RVers who demand organic, non-toxic materials. GREENGUARD Gold Certified and made with organic latex, organic cotton, and natural wool, the Cedar Natural Luxe is the healthiest sleep investment you can make.",
+      "detailedDescription": "You've made the choice to live in an RV because you value experiences over possessions, nature over concrete, freedom over routine. You're probably conscious about what you put in your body—organic food, filtered water, clean air.\n\nSo why would you spend 8 hours a night on a mattress filled with synthetic chemicals, off-gassing into your enclosed living space?\n\nThe Cedar Natural Luxe is Brentwood Home's answer to health-conscious RVers who refuse to compromise. Every material is certified organic or natural. Every component is tested for air quality and chemical emissions. This mattress meets the strictest standards in the industry—standards even higher than what's required for hospital nurseries.\n\nGREENGUARD Gold Certification means this mattress has been scientifically tested and proven to contribute to healthier indoor air. In the close quarters of an RV, that matters enormously.\n\nThe organic latex core provides responsive, buoyant support that keeps your spine aligned whether you're a side, back, or stomach sleeper. Unlike memory foam, latex has natural bounce and won't make you feel 'stuck.' It's also naturally resistant to dust mites, mold, and bacteria—critical in the sometimes-humid environment of RV living.\n\nThe organic cotton cover is breathable and free from chemical treatments. The wool layer serves as a natural fire barrier (no chemical flame retardants needed) and helps regulate temperature.\n\nThis is a mattress you can feel good about sleeping on, knowing you're not exposing yourself to unnecessary chemicals in an already small, enclosed space.",
+      "rvSpecificBenefits": [
+        "GREENGUARD Gold Certified for air quality in enclosed RV spaces",
+        "Organic latex naturally resists mold and moisture—crucial in RVs",
+        "Chemical-free construction prevents off-gassing headaches",
+        "Natural materials regulate temperature without synthetic cooling gels",
+        "Durable organic latex lasts 15+ years—ideal for long-term RVers",
+        "Natural wool is moisture-wicking—helps with humidity control"
+      ],
+      "idealFor": [
+        "Health-conscious RVers prioritizing organic living",
+        "Those with chemical sensitivities or allergies",
+        "Full-timers investing in long-term health",
+        "Eco-conscious travelers reducing toxic footprint",
+        "RVers in humid climates needing mold resistance",
+        "Anyone who's experienced off-gassing symptoms"
+      ],
+      "keyFeatures": [
+        "GREENGUARD Gold Certified for air quality",
+        "GOLS certified organic latex",
+        "GOTS certified organic cotton cover",
+        "Natural wool fire barrier (no chemical flame retardants)",
+        "13 inches of organic and natural materials",
+        "Medium-firm feel (6/10) with responsive latex support",
+        "Naturally antimicrobial and hypoallergenic",
+        "Temperature neutral—no hot or cold sleeping",
+        "Handcrafted in Los Angeles",
+        "25-year warranty",
+        "120-night sleep trial"
+      ],
+      "whyItWorks": "In the enclosed environment of an RV, air quality and chemical exposure matter more than in a traditional home. The Cedar Natural Luxe is the only mattress that combines luxury comfort with the highest organic and air quality certifications—it's an investment in both sleep quality and long-term health."
+    },
+    {
+      "id": "ojai_organic",
+      "name": "Ojai Organic Mattress",
+      "shortName": "Ojai Organic",
+      "priceRange": "$1,299-$1,795",
+      "commission": "$195-$269",
+      "rvSizes": ["RV Short Queen", "RV Queen", "RV King"],
+      "tagline": "Premium Organic Comfort at an Accessible Price Point",
+      "heroDescription": "Get GOTS certified organic cotton and eco-friendly materials in a luxury mattress designed for conscious consumers. The Ojai Organic delivers premium quality and health-safe materials without the luxury price tag.",
+      "detailedDescription": "The Ojai Organic sits in the sweet spot: you get certified organic materials and eco-friendly construction at a price point that makes it accessible to more RVers.\n\nWhile it doesn't have all the certifications of the Cedar Natural Luxe, it still delivers organic cotton, natural wool, and eco-friendly foams that are free from harmful chemicals. For RVers who want to prioritize health and sustainability without the top-tier price, the Ojai Organic is the answer.\n\nThe GOTS certified organic cotton cover ensures you're sleeping on materials that are free from pesticides and chemical treatments. The eco-friendly foam layers are CertiPUR-US certified, meaning no formaldehyde, no PBDEs, and no toxic flame retardants.\n\nThe natural wool layer serves double duty: it's a chemical-free fire barrier and a natural temperature regulator. Wool wicks moisture away from your body and helps maintain a comfortable sleep temperature whether you're camping in cold mountain air or warm desert nights.\n\nThe comfort layers provide medium-firm support that works for most sleep positions, with enough contouring to relieve pressure points but enough firmness to keep your spine aligned.\n\nFor RVers on a budget who still want organic and eco-friendly materials, the Ojai Organic is the perfect entry point into healthier sleep without compromise.",
+      "rvSpecificBenefits": [
+        "GOTS organic cotton reduces chemical exposure in small RV spaces",
+        "Natural wool regulates temperature in varying climates",
+        "CertiPUR-US foams ensure safe air quality",
+        "Price point makes organic accessible to more RVers",
+        "Natural materials handle humidity better than synthetics",
+        "Durable construction for long-term RV use"
+      ],
+      "idealFor": [
+        "Budget-conscious RVers wanting organic materials",
+        "First-time organic mattress buyers",
+        "RVers with moderate chemical sensitivity",
+        "Those upgrading from stock RV mattress to organic",
+        "Couples splitting the cost of RV upgrades",
+        "Weekend warriors making smart long-term investments"
+      ],
+      "keyFeatures": [
+        "GOTS certified organic cotton cover",
+        "Natural wool fire barrier and temperature regulation",
+        "CertiPUR-US certified eco-friendly foams",
+        "11 inches of comfort and support layers",
+        "Medium-firm feel (6/10) for versatile support",
+        "No harmful chemicals or off-gassing",
+        "Pressure relief with proper spinal alignment",
+        "Made in the USA",
+        "25-year warranty",
+        "120-night sleep trial"
+      ],
+      "whyItWorks": "The Ojai Organic proves you don't need to spend top dollar to get organic materials and healthy sleep. For RVers who are making the shift to more conscious, eco-friendly living, this mattress delivers the core benefits of organic sleep at a price that's easier to justify."
+    }
+  ],
+  "featureBenefitMappings": [
+    {
+      "feature": "CertiPUR-US Certification",
+      "genericBenefit": "No harmful chemicals or off-gassing",
+      "rvSpecificBenefit": "Critical in enclosed RV spaces where air circulation is limited. Prevents morning headaches and respiratory issues common with cheap foam mattresses in small spaces.",
+      "emotionalPayoff": "Breathe easy knowing you're not sleeping in a cloud of chemicals every night."
+    },
+    {
+      "feature": "Short Queen & RV King Sizes",
+      "genericBenefit": "Proper fit for RV bed frames",
+      "rvSpecificBenefit": "No measuring, cutting, or modifying required. Designed specifically for standard RV dimensions (60x75\" short queen, 72x80\" RV king). Fits perfectly within RV bed frame constraints and through RV doors.",
+      "emotionalPayoff": "Skip the hassle and anxiety of trying to make a standard mattress work in your RV."
+    },
+    {
+      "feature": "25-Year Warranty",
+      "genericBenefit": "Long-term durability guarantee",
+      "rvSpecificBenefit": "Handles the unique stresses of RV life: constant vibration, temperature fluctuations, humidity changes, and movement. Outlasts your RV itself in most cases.",
+      "emotionalPayoff": "Make this purchase once and never think about it again. This mattress will last longer than most RV ownership periods."
+    },
+    {
+      "feature": "120-Night Sleep Trial",
+      "genericBenefit": "Risk-free testing period",
+      "rvSpecificBenefit": "Test the mattress in your actual RV across different campgrounds, weather conditions, and parking situations. Enough time to experience it through different seasons and use cases.",
+      "emotionalPayoff": "No pressure, no risk. If it doesn't transform your RV sleep, return it for free."
+    },
+    {
+      "feature": "Motion Isolation",
+      "genericBenefit": "Partner movements don't disturb you",
+      "rvSpecificBenefit": "Essential in RVs where couples are sleeping in close proximity and one partner may need to get up during the night. Also reduces sleep disruption from vehicle movement, settling, or ground vibrations.",
+      "emotionalPayoff": "Sleep through your partner's midnight bathroom trip and wake up refreshed, not resentful."
+    },
+    {
+      "feature": "Bamboo/Organic Cotton Cover",
+      "genericBenefit": "Breathable, natural materials",
+      "rvSpecificBenefit": "Naturally antimicrobial and moisture-wicking—crucial in humid RV environments where mold and odors can develop. Easier to maintain and keep fresh in small living spaces.",
+      "emotionalPayoff": "Your bed stays fresh and clean-smelling even after weeks on the road without access to laundry."
+    },
+    {
+      "feature": "Gel-Infused/Cooling Technology",
+      "genericBenefit": "Temperature regulation",
+      "rvSpecificBenefit": "Compensates for limited AC capacity in RVs. Keeps you cool in desert camping or when boondocking without hookups. Prevents the heat build-up common in enclosed RV bedrooms.",
+      "emotionalPayoff": "Stop waking up in a pool of sweat when you're dry camping in Arizona."
+    },
+    {
+      "feature": "Multiple Foam Density Layers",
+      "genericBenefit": "Balanced comfort and support",
+      "rvSpecificBenefit": "Soft enough to cushion against the bumps and imperfections of RV bed platforms, firm enough to provide proper support when parked at different angles and leveling situations.",
+      "emotionalPayoff": "Sleep comfortably whether you're perfectly level or dealing with that stubborn campsite that's slightly off-kilter."
+    },
+    {
+      "feature": "Compressed Shipping",
+      "genericBenefit": "Convenient delivery",
+      "rvSpecificBenefit": "Ships to your location (home, campground, or mail forwarding service) in a compact box. Easily fits through RV doors and hallways. One person can handle installation.",
+      "emotionalPayoff": "No wrestling a full-size mattress through your RV door or coordinating delivery to a fixed address when you're mobile."
+    },
+    {
+      "feature": "Made in USA (California)",
+      "genericBenefit": "Quality manufacturing standards",
+      "rvSpecificBenefit": "Easier warranty service and customer support when you're traveling across North America. No international shipping delays or communication barriers if issues arise.",
+      "emotionalPayoff": "Call customer service from any campground and actually talk to someone who can help."
+    },
+    {
+      "feature": "Organic Latex Core",
+      "genericBenefit": "Natural, responsive support",
+      "rvSpecificBenefit": "Naturally resistant to mold, mildew, and dust mites—common RV problems in humid environments. More durable than foam in temperature extremes. Maintains support in both hot and cold weather.",
+      "emotionalPayoff": "A mattress that performs as well in Canadian winters as it does in Florida summers."
+    },
+    {
+      "feature": "Natural Wool Layer",
+      "genericBenefit": "Chemical-free fire barrier",
+      "rvSpecificBenefit": "Naturally moisture-wicking helps control humidity in small RV spaces. Temperature-regulating properties work without electricity. No toxic flame retardants off-gassing into your RV.",
+      "emotionalPayoff": "Sleep healthier and more comfortably without relying on your AC to regulate your mattress temperature."
+    },
+    {
+      "feature": "Individually Wrapped Coils (Hybrid)",
+      "genericBenefit": "Targeted support and motion isolation",
+      "rvSpecificBenefit": "Better handles road vibrations and movement than solid foam. Superior edge support for sitting on bed in small RV bedrooms. Enhanced airflow for temperature regulation when AC is limited.",
+      "emotionalPayoff": "Feel secure and supported whether you're sleeping, sitting, or dealing with your RV rocking in the wind."
+    },
+    {
+      "feature": "GREENGUARD Gold Certification",
+      "genericBenefit": "Meets strictest air quality standards",
+      "rvSpecificBenefit": "Tested for over 10,000 chemicals and VOCs. Essential certification for enclosed RV spaces with limited air exchange. Meets standards for hospitals and schools—far exceeding what's needed for most homes.",
+      "emotionalPayoff": "The peace of mind that comes from knowing your mattress actually improves your RV's air quality instead of degrading it."
+    },
+    {
+      "feature": "Free Shipping & Returns",
+      "genericBenefit": "No additional costs to try",
+      "rvSpecificBenefit": "Ships to mail forwarding services, campgrounds, or wherever you're located. Free return pickup if needed—they'll coordinate with your location even if you're mobile.",
+      "emotionalPayoff": "Order with confidence from anywhere in the country. Your nomadic lifestyle doesn't prevent you from getting premium products."
+    }
+  ],
+  "testimonialGuidelines": {
+    "principle": "NEVER fabricate testimonials, customer names, or specific results. These guidelines are for collecting and presenting REAL testimonials only.",
+    "collectionMethods": [
+      {
+        "method": "Post-Purchase Survey",
+        "timing": "30, 60, and 90 days after purchase",
+        "questions": [
+          "How has your sleep quality changed since installing your new mattress?",
+          "What specific problems were you experiencing with your old RV mattress?",
+          "What made you decide to invest in a premium mattress for your RV?",
+          "How has better sleep impacted your RV lifestyle overall?",
+          "Would you recommend this mattress to other RVers? Why?",
+          "May we share your feedback (with or without your name) on our website?"
+        ]
+      },
+      {
+        "method": "Social Media Monitoring",
+        "platforms": ["Instagram", "Facebook RV Groups", "YouTube Comments", "Reddit r/GoRVing"],
+        "process": "Monitor for organic mentions of Brentwood Home mattresses in RVs. Request permission to share testimonials. Never use without explicit consent."
+      },
+      {
+        "method": "Affiliate Partner Feedback",
+        "process": "Track commission conversions and follow up with buyers (with permission) to collect genuine experiences. Offer small incentive (not contingent on positive review) for detailed feedback."
+      },
+      {
+        "method": "Video Testimonials",
+        "incentive": "$50 Amazon gift card for 2-minute video testimonial",
+        "requirements": "Must be filmed in actual RV, show actual mattress, discuss specific before/after experiences. Full disclosure of incentive required."
+      }
+    ],
+    "presentationGuidelines": {
+      "authenticity": "Only use real names with permission. If customer requests anonymity, use 'RVer from [State]' or 'Full-Time RVer' without specifics.",
+      "verification": "Include verification method when possible (Verified Purchase, Instagram @handle, YouTube comment link)",
+      "balance": "Share both glowing reviews and constructive feedback. Authenticity includes acknowledging limitations.",
+      "context": "Provide context: RV type, mattress model, how long they've had it, what they replaced.",
+      "noFabrication": "Never create composite testimonials or invent details. Real experiences only."
+    },
+    "testimonialStructure": {
+      "opening": "The specific problem they were experiencing",
+      "middle": "Why they chose Brentwood Home, installation experience, first impressions",
+      "result": "Specific improvements in sleep, health, RV lifestyle",
+      "context": "RV type, travel style, mattress model, duration of ownership",
+      "permission": "Explicit consent to use their words and any photos/videos"
+    },
+    "placeholderText": "Until real testimonials are collected, use this framework: '[TESTIMONIAL PLACEHOLDER: Will feature real RVer experiences after launch. Collection methods in place.]'",
+    "ethicsNote": "Affiliate marketing works best when built on trust. One fake testimonial can destroy credibility that takes years to build. Only use real experiences from real customers."
+  },
+  "seoMetadata": {
+    "pages": [
+      {
+        "pageId": "buying_guide",
+        "pageName": "Ultimate RV Mattress Buying Guide",
+        "url": "/rv-mattress-buying-guide",
+        "titleTag": "RV Mattress Buying Guide 2025: Best Beds for Full-Time & Weekend RVers",
+        "metaDescription": "Stop waking up with back pain. Our comprehensive RV mattress buying guide helps you choose the perfect mattress for your short queen, RV king, or custom space. Compare top brands, sizing, and real RVer experiences.",
+        "keywords": {
+          "primary": ["RV mattress buying guide", "best RV mattress 2025", "short queen mattress"],
+          "secondary": ["RV king mattress", "RV bed upgrade", "motorhome mattress", "travel trailer mattress"],
+          "longTail": ["how to choose RV mattress", "what size mattress fits RV", "replace stock RV mattress", "best mattress for full time RVing"]
+        },
+        "h1": "The Ultimate RV Mattress Buying Guide: Sleep Better on the Road",
+        "focusKeyphrase": "RV mattress buying guide",
+        "internalLinks": [
+          "RV mattress size guide",
+          "Brentwood Home product showcase",
+          "Installation and care guide"
+        ],
+        "externalLinks": [
+          "Sleep Foundation research on mattress quality",
+          "RV Industry Association sizing standards"
+        ],
+        "schemaMarkup": "HowTo, FAQPage, Product Review",
+        "targetWordCount": "3500-4500 words"
+      },
+      {
+        "pageId": "size_guide",
+        "pageName": "RV Mattress Size & Fit Guide",
+        "url": "/rv-mattress-sizes",
+        "titleTag": "RV Mattress Sizes Explained: Short Queen, RV King & Custom Dimensions",
+        "metaDescription": "Confused about RV mattress sizes? Learn the exact dimensions of short queen, RV king, and custom RV beds. Plus how to measure your space for a perfect fit.",
+        "keywords": {
+          "primary": ["RV mattress sizes", "short queen mattress dimensions", "RV king size"],
+          "secondary": ["RV bed sizes", "short queen vs regular queen", "custom RV mattress"],
+          "longTail": ["what size is a short queen mattress", "RV mattress measurement guide", "will a regular mattress fit in my RV"]
+        },
+        "h1": "RV Mattress Sizes: The Complete Measurement Guide",
+        "focusKeyphrase": "RV mattress sizes",
+        "internalLinks": [
+          "How to measure your RV bed",
+          "Product showcase filtered by size",
+          "Installation guide"
+        ],
+        "schemaMarkup": "FAQPage, HowTo",
+        "targetWordCount": "2000-2500 words"
+      },
+      {
+        "pageId": "sleep_crisis",
+        "pageName": "The RV Sleep Crisis",
+        "url": "/rv-sleep-crisis",
+        "titleTag": "The RV Sleep Crisis: Why Stock Mattresses Are Destroying Your Health",
+        "metaDescription": "Waking up with back pain in your RV? You're not alone. Discover why stock RV mattresses are causing chronic pain and fatigue—and what full-timers are doing about it.",
+        "keywords": {
+          "primary": ["RV sleep problems", "stock RV mattress problems", "RV back pain"],
+          "secondary": ["bad RV mattress", "RV mattress causing pain", "why RV mattresses are uncomfortable"],
+          "longTail": ["why do I wake up with back pain in my RV", "stock RV mattress quality", "RV lifestyle health problems"]
+        },
+        "h1": "The RV Sleep Crisis: Why You're Waking Up in Pain",
+        "focusKeyphrase": "stock RV mattress problems",
+        "internalLinks": [
+          "Solution narratives",
+          "Health and wellness benefits",
+          "Product showcase"
+        ],
+        "schemaMarkup": "Article, MedicalWebPage",
+        "targetWordCount": "2500-3500 words"
+      },
+      {
+        "pageId": "product_showcase",
+        "pageName": "Brentwood Home Product Showcase",
+        "url": "/brentwood-home-rv-mattresses",
+        "titleTag": "Brentwood Home RV Mattresses: Premium Memory Foam, Hybrid & Organic Options",
+        "metaDescription": "Compare all Brentwood Home mattresses available in RV sizes. Memory foam, hybrid, and organic options from $799-$1,995. Free shipping, 120-night trial, 25-year warranty.",
+        "keywords": {
+          "primary": ["Brentwood Home RV mattress", "Brentwood Home short queen", "premium RV mattress"],
+          "secondary": ["organic RV mattress", "memory foam RV mattress", "hybrid RV mattress"],
+          "longTail": ["Brentwood Home Cypress review", "best organic mattress for RV", "Brentwood Home vs stock RV mattress"]
+        },
+        "h1": "Brentwood Home Mattresses for RVs: Find Your Perfect Sleep Solution",
+        "focusKeyphrase": "Brentwood Home RV mattress",
+        "internalLinks": [
+          "Individual product detail pages",
+          "Size guide",
+          "ROI calculator"
+        ],
+        "schemaMarkup": "Product, AggregateRating, Offer",
+        "targetWordCount": "3000-4000 words"
+      },
+      {
+        "pageId": "health_wellness",
+        "pageName": "Health & Wellness Benefits",
+        "url": "/rv-mattress-health-benefits",
+        "titleTag": "How Your RV Mattress Affects Your Health: Sleep Science for RVers",
+        "metaDescription": "The health impacts of poor RV sleep: back pain, chronic fatigue, relationship stress, and inflammation. Plus the science-backed benefits of quality mattresses.",
+        "keywords": {
+          "primary": ["RV mattress health benefits", "sleep quality in RV", "RV back pain solutions"],
+          "secondary": ["mattress and back pain", "sleep science for RVers", "organic mattress health benefits"],
+          "longTail": ["can my RV mattress cause back pain", "health benefits of organic mattress", "improve sleep quality in RV"]
+        },
+        "h1": "The Health Case for Upgrading Your RV Mattress",
+        "focusKeyphrase": "RV mattress health benefits",
+        "internalLinks": [
+          "Organic mattress products",
+          "Problem narratives",
+          "Solution stories"
+        ],
+        "externalLinks": [
+          "NIH research on sleep quality",
+          "Sleep Foundation mattress studies",
+          "Chiropractic association mattress recommendations"
+        ],
+        "schemaMarkup": "MedicalWebPage, Article",
+        "targetWordCount": "2500-3000 words"
+      },
+      {
+        "pageId": "roi_calculator",
+        "pageName": "ROI Calculator",
+        "url": "/rv-mattress-roi-calculator",
+        "titleTag": "RV Mattress ROI Calculator: Is a Premium Mattress Worth the Investment?",
+        "metaDescription": "Calculate the real cost of cheap RV mattresses vs. premium options. Factor in replacement cycles, sleep quality, and health costs. See your ROI breakdown.",
+        "keywords": {
+          "primary": ["RV mattress cost", "RV mattress ROI", "RV mattress investment"],
+          "secondary": ["cheap vs expensive RV mattress", "RV mattress value", "cost per night mattress"],
+          "longTail": ["is an expensive RV mattress worth it", "how long do RV mattresses last", "RV mattress cost comparison"]
+        },
+        "h1": "RV Mattress ROI Calculator: The True Cost of Sleep",
+        "focusKeyphrase": "RV mattress ROI",
+        "internalLinks": [
+          "Product showcase with pricing",
+          "Buying guide",
+          "Solution narratives"
+        ],
+        "schemaMarkup": "WebApplication, Calculator",
+        "targetWordCount": "1500-2000 words + interactive calculator"
+      },
+      {
+        "pageId": "installation_care",
+        "pageName": "Installation & Care Guide",
+        "url": "/rv-mattress-installation-care",
+        "titleTag": "RV Mattress Installation & Care: Setup, Maintenance & Longevity Tips",
+        "metaDescription": "Step-by-step guide to installing your new RV mattress, plus maintenance tips to maximize lifespan on the road. Handling, care, and troubleshooting.",
+        "keywords": {
+          "primary": ["RV mattress installation", "RV mattress care", "mattress maintenance RV"],
+          "secondary": ["how to install RV mattress", "RV mattress tips", "protect RV mattress"],
+          "longTail": ["how to get mattress through RV door", "caring for memory foam in RV", "RV mattress storage tips"]
+        },
+        "h1": "RV Mattress Installation & Care: A Complete Guide",
+        "focusKeyphrase": "RV mattress installation",
+        "internalLinks": [
+          "Size guide",
+          "Product showcase",
+          "Buying guide"
+        ],
+        "schemaMarkup": "HowTo, FAQPage",
+        "targetWordCount": "2000-2500 words"
+      }
+    ],
+    "seoStrategy": {
+      "contentClusters": [
+        {
+          "pillarPage": "Ultimate RV Mattress Buying Guide",
+          "clusterPages": [
+            "Size & Fit Guide",
+            "Installation & Care",
+            "Health & Wellness Benefits",
+            "ROI Calculator"
+          ]
+        }
+      ],
+      "linkBuilding": "Target RV blogs, full-time RVer influencers, RV renovation YouTube channels, and RV lifestyle publications for backlinks and partnerships.",
+      "localSEO": "Create location-specific content for popular RV destinations and regions (Southwest RVing, Canadian RVing, etc.)",
+      "videoSEO": "YouTube content: 'RV Mattress Installation', 'RV Mattress Comparison', 'Full-Time RVer Reviews'",
+      "imageOptimization": "Alt text format: '[Product Name] [Size] mattress in [RV Type] showing [specific feature]'",
+      "mobileOptimization": "Critical—RVers often research on mobile devices from campgrounds with limited connectivity."
+    }
+  },
+  "faqContent": [
+    {
+      "id": "faq_1",
+      "question": "What size mattress do I need for my RV?",
+      "answer": "Most RVs use non-standard mattress sizes. The most common is 'short queen' (60\" x 75\"), which is 5 inches shorter than a standard queen. RV kings are typically 72\" x 80\" (narrower than standard king). Always measure your existing bed frame before ordering—RV manufacturers aren't always consistent with sizing.",
+      "category": "Sizing",
+      "keywords": ["RV mattress size", "short queen", "RV king"]
+    },
+    {
+      "id": "faq_2",
+      "question": "Will a regular mattress fit in my RV?",
+      "answer": "Most RVs require specific RV-sized mattresses because the bed frames are built to non-standard dimensions to maximize space. A regular queen (60\" x 80\") is too long for a short queen frame (60\" x 75\"). Additionally, you need to consider the entry doors—getting a full-size mattress through an RV door is often impossible. Look for mattresses that ship compressed or are specifically sized for RVs.",
+      "category": "Sizing",
+      "keywords": ["regular mattress in RV", "standard mattress RV"]
+    },
+    {
+      "id": "faq_3",
+      "question": "How do I measure my RV bed for a new mattress?",
+      "answer": "Remove all bedding and measure the actual bed platform (not the existing mattress, which may have compressed). Measure length, width, and note any corners that are cut off or rounded. Also measure the depth of your bed frame to ensure your new mattress will fit. Finally, measure your RV's entry doors and hallways to confirm you can get the mattress inside—or choose a compressed-shipping option.",
+      "category": "Sizing",
+      "keywords": ["measure RV bed", "RV mattress dimensions"]
+    },
+    {
+      "id": "faq_4",
+      "question": "Are RV mattresses different from regular mattresses?",
+      "answer": "Quality RV mattresses (like Brentwood Home) aren't 'RV versions' with compromised quality—they're the same premium materials as home mattresses, just manufactured in RV-specific sizes. The main differences are dimensions and shipping method (compressed to fit through RV doors). Avoid 'RV mattresses' that are just cheap foam cut to size—these are what give RV sleep a bad reputation.",
+      "category": "General",
+      "keywords": ["RV mattress vs regular", "RV mattress quality"]
+    },
+    {
+      "id": "faq_5",
+      "question": "Why do stock RV mattresses feel so uncomfortable?",
+      "answer": "Stock RV mattresses are built to a price point, not a quality standard. Most use 2-4 inches of the cheapest foam available, which compresses quickly and provides minimal support. RV manufacturers know most buyers will replace the mattress, so they install the absolute minimum to keep costs down. It's one of the first upgrades most RVers make—or wish they had made sooner.",
+      "category": "Problems",
+      "keywords": ["stock RV mattress", "uncomfortable RV bed"]
+    },
+    {
+      "id": "faq_6",
+      "question": "Can I use a mattress topper instead of replacing my RV mattress?",
+      "answer": "A topper is a band-aid solution. If your base mattress has poor support or is already compressed, adding a topper just puts a slightly softer layer on top of a broken foundation. You might feel some improvement initially, but the underlying support issues remain. For chronic back pain or serious sleep problems, a full mattress replacement is the only real solution. Save the $150-300 you'd spend on a topper and put it toward a quality mattress instead.",
+      "category": "Solutions",
+      "keywords": ["RV mattress topper", "topper vs new mattress"]
+    },
+    {
+      "id": "faq_7",
+      "question": "How long do RV mattresses last?",
+      "answer": "Stock RV mattresses: 1-2 years before significant deterioration. Cheap replacement mattresses: 2-4 years. Quality premium mattresses (like Brentwood Home): 10-15+ years with proper care. The vibration and movement of RV travel can accelerate wear in low-quality foam, but premium materials actually hold up well. A 25-year warranty is a good indicator of true durability.",
+      "category": "Durability",
+      "keywords": ["RV mattress lifespan", "how long RV mattress last"]
+    },
+    {
+      "id": "faq_8",
+      "question": "What's the best mattress type for an RV: memory foam, hybrid, or innerspring?",
+      "answer": "It depends on your preferences. Memory foam (like Oceano or Cypress) provides excellent motion isolation and pressure relief—great for couples and side sleepers. Hybrids (Crystal Cove) offer traditional responsiveness with modern comfort and better edge support. Organic latex (Cedar Natural Luxe) is most durable and temperature-neutral. Avoid traditional innersprings—they don't handle road vibration well and are harder to ship. Most full-time RVers choose memory foam or hybrid for the best combination of comfort and practicality.",
+      "category": "Buying Guide",
+      "keywords": ["best RV mattress type", "memory foam vs hybrid RV"]
+    },
+    {
+      "id": "faq_9",
+      "question": "Will a thick mattress fit in my RV bed?",
+      "answer": "Most RV bed frames can accommodate 10-13 inch mattresses. Measure the depth of your bed frame and check if you have a fixed headboard that might interfere. Thicker mattresses (11-13 inches) actually provide better support and durability. Just ensure your sheets will fit—you may need deep pocket sheets for thicker mattresses.",
+      "category": "Sizing",
+      "keywords": ["thick mattress RV", "RV mattress depth"]
+    },
+    {
+      "id": "faq_10",
+      "question": "How do I get a mattress through my RV door?",
+      "answer": "Choose a mattress that ships compressed in a box (like all Brentwood Home mattresses). These compress to about 20\" x 20\" x 40\" and easily fit through RV doors and hallways. Once in place, you cut the packaging and the mattress expands to full size within 24-48 hours. Never try to force a fully-expanded mattress through an RV door—you'll likely damage both the mattress and your RV.",
+      "category": "Installation",
+      "keywords": ["mattress through RV door", "compressed mattress shipping"]
+    },
+    {
+      "id": "faq_11",
+      "question": "Are organic mattresses worth it for RV use?",
+      "answer": "In an RV, organic matters even more than in a house. You're sleeping in an enclosed space with limited air circulation. Off-gassing from synthetic foams and chemical flame retardants accumulates in this small environment. GREENGUARD Gold certified and organic mattresses (like Cedar Natural Luxe or Ojai Organic) ensure you're not breathing harmful chemicals while you sleep. For full-timers, it's an investment in long-term health.",
+      "category": "Health",
+      "keywords": ["organic RV mattress", "GREENGUARD RV"]
+    },
+    {
+      "id": "faq_12",
+      "question": "Do I need a special mattress for boondocking or off-grid camping?",
+      "answer": "Not a special type, but temperature regulation becomes more important when you don't have AC running all night. Look for mattresses with cooling technology (gel-infused foam, breathable covers) or naturally temperature-neutral materials like latex. Avoid cheap memory foam that retains heat—you'll wake up sweating in warm weather without climate control.",
+      "category": "Buying Guide",
+      "keywords": ["boondocking mattress", "off-grid RV mattress"]
+    },
+    {
+      "id": "faq_13",
+      "question": "Can a better mattress really fix my RV back pain?",
+      "answer": "If your back pain is related to poor spinal support and pressure points (the most common causes), then yes—a quality mattress can eliminate it entirely. Many RVers report back pain disappearing within the first week of upgrading. However, if you have existing medical conditions, consult your doctor. That said, proper spinal alignment during sleep is fundamental to back health, and stock RV mattresses provide virtually no support.",
+      "category": "Health",
+      "keywords": ["RV back pain solution", "mattress fix back pain"]
+    },
+    {
+      "id": "faq_14",
+      "question": "What's the warranty on Brentwood Home mattresses in RVs?",
+      "answer": "25 years, same as their residential mattresses. The warranty covers defects, sagging beyond normal compression, and material failures. Importantly, the warranty is still valid even with RV use—the mattresses are designed to handle the movement and vibration. Keep your proof of purchase and follow the care guidelines (use a mattress protector, proper foundation, etc.).",
+      "category": "Warranty",
+      "keywords": ["Brentwood Home warranty", "RV mattress warranty"]
+    },
+    {
+      "id": "faq_15",
+      "question": "What's the 120-night sleep trial, and does it work for RVers?",
+      "answer": "You get 120 nights to sleep on the mattress. If you don't love it, Brentwood Home arranges free pickup and gives you a full refund. For RVers, this is perfect because you can test the mattress across different campgrounds, weather conditions, and seasons. Just coordinate pickup at whatever location you'll be at—they work with your mobile lifestyle. It's truly risk-free.",
+      "category": "Trial & Returns",
+      "keywords": ["120 night trial", "RV mattress return"]
+    },
+    {
+      "id": "faq_16",
+      "question": "How much should I expect to spend on a quality RV mattress?",
+      "answer": "Quality mattresses for RVs range from $799-$1,995 depending on size and materials. Yes, that's more than a cheap Amazon mattress, but consider: cheap mattresses last 1-2 years and provide poor sleep. A $1,200 mattress that lasts 10 years costs $120/year or $0.33/night. Factor in the health benefits, better sleep, and avoiding the hassle of replacing cheap mattresses every year—the ROI is clear.",
+      "category": "Pricing",
+      "keywords": ["RV mattress cost", "RV mattress price"]
+    },
+    {
+      "id": "faq_17",
+      "question": "Do Brentwood Home mattresses work in extreme temperatures?",
+      "answer": "Yes. The materials are designed to perform in a wide range of temperatures. Gel-infused foams and breathable covers keep you cool in hot weather. Memory foam and latex maintain their support even in cold temperatures (unlike cheap foam that can get stiff). Many full-time RVers use these mattresses year-round from Canadian winters to Arizona summers without issues.",
+      "category": "Performance",
+      "keywords": ["RV mattress temperature", "extreme weather mattress"]
+    },
+    {
+      "id": "faq_18",
+      "question": "Can I use my existing RV sheets with a new mattress?",
+      "answer": "It depends on the mattress thickness. If you're going from a thin 6-inch stock mattress to a 13-inch premium mattress, you'll likely need deeper pocket sheets. Standard RV sheets fit mattresses up to 10-12 inches deep. Deep pocket sheets accommodate up to 18 inches. Check your new mattress thickness and buy appropriate sheets—it's a small additional cost for a much better sleep experience.",
+      "category": "Accessories",
+      "keywords": ["RV sheets mattress", "deep pocket RV sheets"]
+    },
+    {
+      "id": "faq_19",
+      "question": "Should I get a mattress protector for my RV bed?",
+      "answer": "Absolutely. A waterproof, breathable mattress protector is even more important in an RV than at home. RVs can develop humidity and condensation issues, you're tracking in more dirt and dust, and spills happen in small spaces. A quality protector ($50-100) preserves your mattress investment and is required to maintain your warranty. It's cheap insurance for a $1,000+ mattress.",
+      "category": "Care",
+      "keywords": ["RV mattress protector", "waterproof mattress cover RV"]
+    },
+    {
+      "id": "faq_20",
+      "question": "How do I clean and maintain an RV mattress?",
+      "answer": "Use a mattress protector and wash it regularly. Vacuum the mattress surface monthly to remove dust and allergens. Spot clean spills immediately with mild detergent and water (don't soak the foam). Air out the mattress when possible—open windows and let it breathe. Rotate the mattress 180° every 3 months (if not a pillow-top). Avoid excessive moisture and ensure good ventilation in your RV to prevent mold. With proper care, a premium mattress will last 10-15+ years even with full-time RV use.",
+      "category": "Care",
+      "keywords": ["clean RV mattress", "maintain RV mattress"]
+    },
+    {
+      "id": "faq_21",
+      "question": "What if I'm traveling internationally (like Australia)? Can I still get Brentwood Home mattresses?",
+      "answer": "Brentwood Home primarily ships within the United States. For international RVers, check if Brentwood Home ships to your region or look for similar premium mattress brands available in your country that offer RV sizes. The principles remain the same: look for CertiPUR-US or equivalent certifications, proper sizing, quality materials, and good warranties. Many countries have domestic brands with comparable quality to Brentwood Home.",
+      "category": "International",
+      "keywords": ["Brentwood Home Australia", "international RV mattress"]
+    },
+    {
+      "id": "faq_22",
+      "question": "Is it better to buy a mattress before or after I buy my RV?",
+      "answer": "After—once you know your exact dimensions. RV bed sizes can vary even within the same model year and manufacturer. Measure your actual bed frame before ordering. That said, if you're buying a new RV, factor mattress replacement into your budget from day one. Don't wait until the stock mattress causes chronic pain. Many RVers wish they'd upgraded the mattress immediately instead of suffering through months of poor sleep first.",
+      "category": "Buying Guide",
+      "keywords": ["when to buy RV mattress", "new RV mattress upgrade"]
+    },
+    {
+      "id": "faq_23",
+      "question": "Can I negotiate a mattress into my RV purchase deal?",
+      "answer": "You can try, but RV dealers rarely stock premium mattresses—they'd just install another cheap stock mattress. Better strategy: negotiate the best price on the RV itself, then budget separately for a quality mattress upgrade. Some dealers might give you a credit toward accessories—you could potentially use that for a mattress, but you'll have more control buying directly from Brentwood Home.",
+      "category": "Buying Guide",
+      "keywords": ["RV dealer mattress", "negotiate RV mattress"]
+    },
+    {
+      "id": "faq_24",
+      "question": "Do couples with different firmness preferences need two mattresses in an RV?",
+      "answer": "Not necessarily. Most couples find that medium-firm (6/10) mattresses like the Crystal Cove Hybrid work well for different preferences. The hybrid design offers some customization—firmer support from coils, softer comfort from foam layers. If you have drastically different needs, consider a split king if your RV has the space, but most RVers find that upgrading from a terrible stock mattress to any quality mattress solves the problem for both partners.",
+      "category": "Buying Guide",
+      "keywords": ["couples RV mattress", "different firmness RV"]
+    },
+    {
+      "id": "faq_25",
+      "question": "What's the environmental impact of replacing my RV mattress?",
+      "answer": "Cheap mattresses that need replacing every 1-2 years create more waste than one quality mattress lasting 10-15 years. Brentwood Home's organic options (Cedar Natural Luxe, Ojai Organic) use sustainable materials and responsible manufacturing. When you do eventually replace the mattress, many communities have mattress recycling programs, or you can donate it if it's still in good condition. The long lifespan of premium mattresses is actually the more environmentally responsible choice.",
+      "category": "Sustainability",
+      "keywords": ["eco-friendly RV mattress", "sustainable mattress"]
+    }
+  ],
+  "ctaCopy": [
+    {
+      "id": "cta_1",
+      "text": "Find Your Perfect RV Mattress",
+      "usage": "Homepage, general pages",
+      "urgency": "low",
+      "tone": "aspirational"
+    },
+    {
+      "id": "cta_2",
+      "text": "Sleep Better Tonight—Shop RV Mattresses",
+      "usage": "Product showcase, buying guide",
+      "urgency": "medium",
+      "tone": "action-oriented"
+    },
+    {
+      "id": "cta_3",
+      "text": "End Your RV Back Pain Now",
+      "usage": "Problem/pain point pages",
+      "urgency": "high",
+      "tone": "problem-solution"
+    },
+    {
+      "id": "cta_4",
+      "text": "Try Risk-Free for 120 Nights",
+      "usage": "Product pages, hesitation points",
+      "urgency": "low",
+      "tone": "trust-building"
+    },
+    {
+      "id": "cta_5",
+      "text": "Upgrade Your RV Sleep Experience",
+      "usage": "Mid-content, educational pages",
+      "urgency": "low",
+      "tone": "aspirational"
+    },
+    {
+      "id": "cta_6",
+      "text": "Shop Brentwood Home for Your RV",
+      "usage": "Brand-focused pages",
+      "urgency": "low",
+      "tone": "direct"
+    },
+    {
+      "id": "cta_7",
+      "text": "Calculate Your Mattress ROI",
+      "usage": "Pricing/value pages",
+      "urgency": "low",
+      "tone": "analytical"
+    },
+    {
+      "id": "cta_8",
+      "text": "See All RV Mattress Options",
+      "usage": "Comparison, buying guide",
+      "urgency": "low",
+      "tone": "informational"
+    },
+    {
+      "id": "cta_9",
+      "text": "Get Free Shipping on Your RV Mattress",
+      "usage": "Product pages, offer highlights",
+      "urgency": "medium",
+      "tone": "value-focused"
+    },
+    {
+      "id": "cta_10",
+      "text": "Join Thousands of RVers Sleeping Better",
+      "usage": "Social proof pages, testimonials",
+      "urgency": "medium",
+      "tone": "community"
+    },
+    {
+      "id": "cta_11",
+      "text": "Transform Your RV Lifestyle",
+      "usage": "Transformation stories, solution pages",
+      "urgency": "medium",
+      "tone": "aspirational"
+    },
+    {
+      "id": "cta_12",
+      "text": "Stop Wasting Money on Cheap Mattresses",
+      "usage": "ROI calculator, cost comparison",
+      "urgency": "high",
+      "tone": "problem-agitation"
+    },
+    {
+      "id": "cta_13",
+      "text": "Find Your Size: Short Queen, RV King & More",
+      "usage": "Size guide, navigation",
+      "urgency": "low",
+      "tone": "practical"
+    },
+    {
+      "id": "cta_14",
+      "text": "Wake Up Pain-Free Tomorrow",
+      "usage": "Health/wellness pages",
+      "urgency": "high",
+      "tone": "emotional"
+    },
+    {
+      "id": "cta_15",
+      "text": "Invest in Your RV Sleep Health",
+      "usage": "Organic/health-focused products",
+      "urgency": "medium",
+      "tone": "health-conscious"
+    },
+    {
+      "id": "cta_16",
+      "text": "Compare Brentwood Home Models",
+      "usage": "Product comparison pages",
+      "urgency": "low",
+      "tone": "analytical"
+    },
+    {
+      "id": "cta_17",
+      "text": "Start Your 120-Night Trial Today",
+      "usage": "Product pages, purchase points",
+      "urgency": "medium",
+      "tone": "action + trust"
+    },
+    {
+      "id": "cta_18",
+      "text": "See Real RVer Reviews",
+      "usage": "Testimonial pages, trust building",
+      "urgency": "low",
+      "tone": "social proof"
+    }
+  ],
+  "personas": {
+    "fullTimeRVers": {
+      "name": "Full-Time RVers",
+      "demographics": "Ages 55-75, retired couples or early retirees, sold home to travel",
+      "painPoints": [
+        "Chronic back pain from months of poor sleep",
+        "Health deterioration affecting RV lifestyle",
+        "Questioning entire RV decision due to sleep issues",
+        "Missing the comfort of their former home",
+        "Relationship strain from poor sleep"
+      ],
+      "motivations": [
+        "Want to enjoy retirement and travel",
+        "Health and longevity",
+        "Making their RV truly feel like home",
+        "Long-term cost savings",
+        "Quality of life improvement"
+      ],
+      "objections": [
+        "Already spent so much on the RV",
+        "Uncertainty about choosing the right mattress",
+        "Concern about delivery to changing locations",
+        "Worried about wasting money again"
+      ],
+      "messagingFocus": "Long-term health, making the RV feel like a real home, eliminating the #1 regret of full-timing",
+      "emotionalTriggers": "Fear of health decline, desire for comfort in retirement years, avoiding regret"
+    },
+    "weekendWarriors": {
+      "name": "Weekend Warriors",
+      "demographics": "Ages 35-60, working professionals, families with school-age kids",
+      "painPoints": [
+        "Needing vacation to recover from vacation",
+        "Limited time—want to maximize quality",
+        "Kids complaining about sleep in RV",
+        "Comparing unfavorably to hotel comfort",
+        "Questioning ROI of RV ownership"
+      ],
+      "motivations": [
+        "Creating family memories",
+        "Escaping routine and reconnecting",
+        "Value and convenience of RV ownership",
+        "Outdoor adventures and experiences",
+        "Work-life balance"
+      ],
+      "objections": [
+        "Only use RV 20-30 nights per year",
+        "Budget constraints with family expenses",
+        "Wondering if they should just sell the RV",
+        "Uncertainty about installation with limited time"
+      ],
+      "messagingFocus": "Maximizing the value of limited vacation time, family comfort, making RV ownership worthwhile",
+      "emotionalTriggers": "FOMO on family time, frustration with wasted weekends, desire to justify RV expense"
+    },
+    "soloTravelers": {
+      "name": "Solo Travelers",
+      "demographics": "Ages 45-70, divorced or widowed, digital nomads, adventurers",
+      "painPoints": [
+        "No one to complain to or share burden with",
+        "Limited physical ability to install mattress alone",
+        "Sleep issues affecting safety and alertness on road",
+        "Isolation compounded by fatigue",
+        "Budget constraints on single income"
+      ],
+      "motivations": [
+        "Independence and freedom",
+        "Self-care and health",
+        "Adventure and exploration",
+        "Simplifying life",
+        "Personal growth"
+      ],
+      "objections": [
+        "Can I install this myself?",
+        "Is this the best use of limited budget?",
+        "What if I need to return it?",
+        "Overwhelmed by options and decisions"
+      ],
+      "messagingFocus": "Easy solo installation, self-care investment, compact shipping, simple decision-making",
+      "emotionalTriggers": "Empowerment, self-worth, safety, independence"
+    },
+    "renovators": {
+      "name": "Renovators & Upgraders",
+      "demographics": "Ages 30-65, DIYers, buying used RVs to customize",
+      "painPoints": [
+        "Decision fatigue from multiple upgrade decisions",
+        "Budget allocation across many projects",
+        "Learning from past cheap-option mistakes",
+        "Timeline pressure to finish renovation",
+        "Information overload"
+      ],
+      "motivations": [
+        "Creating their perfect custom RV",
+        "Pride in craftsmanship and quality",
+        "Long-term value creation",
+        "Doing it right the first time",
+        "Sharing renovation journey online"
+      ],
+      "objections": [
+        "So many other projects competing for budget",
+        "Temptation to save money and DIY a solution",
+        "Analysis paralysis from too many options",
+        "Waiting to finish other projects first"
+      ],
+      "messagingFocus": "Doing it right the first time, avoiding renovation regrets, investment in quality over quick fixes",
+      "emotionalTriggers": "Pride in quality work, avoiding regret, completion satisfaction"
+    }
+  },
+  "contentPrinciples": {
+    "authenticity": "Every claim must be truthful and verifiable. Never exaggerate benefits or fabricate testimonials. Trust is the foundation of affiliate success.",
+    "empathy": "Lead with understanding of real RVer pain points. Show you've experienced or deeply understand their struggles before offering solutions.",
+    "education": "Provide genuine value even if the reader doesn't buy. Teach them about mattress quality, sizing, materials, and health impacts. Informed buyers are better buyers.",
+    "transparency": "Disclose affiliate relationships clearly. Explain why you recommend Brentwood Home specifically. Be honest about pricing and alternatives.",
+    "problemSolution": "Always structure content as: Problem (relatable pain) → Solution (specific product) → Transformation (life after solving problem).",
+    "specificity": "Use specific details, numbers, and examples. '3 AM wake-up with lower back pain' is more powerful than 'sleep issues.'",
+    "urgency": "Create urgency through problem awareness, not artificial scarcity. Help readers realize the cost of delay (more nights of bad sleep, accumulating health impacts).",
+    "socialProof": "Use real testimonials, real RVer experiences, and verifiable data. Community validation is powerful—but only when authentic.",
+    "valueJustification": "Address price objections head-on with ROI calculations, cost-per-night breakdowns, and comparison to failed cheap solutions.",
+    "actionability": "Every piece of content should have a clear next step. Make it easy to take action, whether that's reading more, calculating ROI, or purchasing."
+  },
+  "affiliateDisclosure": {
+    "shortForm": "This page contains affiliate links. If you purchase through our links, we may earn a commission at no additional cost to you. We only recommend products we trust and believe will benefit RVers.",
+    "longForm": "Full Disclosure: This website contains affiliate links to Brentwood Home mattresses. This means if you click a link and make a purchase, we may receive a commission (typically 15% of the sale). This commission comes from Brentwood Home, not from you—your price is the same whether you use our link or go directly to their website.\n\nWhy we use affiliate links: We've spent hundreds of hours researching RV mattresses, testing options, and interviewing full-time RVers about their experiences. These commissions help us maintain this free resource and continue providing valuable content to the RV community.\n\nOur promise: We only recommend products we genuinely believe will improve your RV sleep. We've chosen Brentwood Home because of their quality, RV-specific sizing, certifications, and warranty—not because of commission rates. If we find a better option in the future, we'll recommend it, even if it means lower commissions.\n\nYour trust matters: If you don't feel comfortable using affiliate links, you can go directly to BrentwoodHome.com. We'd rather you get a great mattress directly than not upgrade at all because of affiliate concerns.\n\nQuestions about our affiliate relationship? Contact us anytime.",
+    "placement": "Include short form in page footer and long form on About/Disclosure page. Place short disclosure near all product links and CTAs."
+  },
+  "conversionOptimization": {
+    "trustSignals": [
+      "120-night sleep trial (risk reversal)",
+      "25-year warranty (quality signal)",
+      "Free shipping and returns (remove friction)",
+      "Made in USA/California (quality association)",
+      "CertiPUR-US, GREENGUARD certifications (credibility)",
+      "Real RVer testimonials with verification (social proof)",
+      "Clear affiliate disclosure (transparency builds trust)"
+    ],
+    "objectionHandling": {
+      "tooExpensive": "ROI calculator, cost-per-night breakdown, comparison to replacing cheap mattresses every year, health cost avoidance",
+      "uncertaintyAboutChoice": "Detailed comparison charts, quiz/selector tool, 120-night trial eliminates risk",
+      "deliveryConcerns": "Emphasize compressed shipping, delivery to mail forwarding or current location, flexible coordination",
+      "installationWorries": "Step-by-step installation guide with photos, emphasize compressed box fits through RV door, one-person installation possible",
+      "notSureItWillFit": "Detailed size guide, measurement instructions, note that mattresses are specifically designed for RV dimensions",
+      "wantToResearchMore": "Comprehensive buying guide, comparison tools, save for later functionality, email course option"
+    },
+    "cookieWindow": "Emphasize 120-day cookie window prominently—readers can take time to research, measure, budget, and decide. They don't need to buy immediately to benefit from clicking your link. This reduces pressure and increases trust.",
+    "exitIntent": "Offer downloadable RV Mattress Sizing Guide or ROI Calculator spreadsheet in exchange for email. Nurture sequence over 120 days with educational content and gentle product reminders.",
+    "retargeting": "Content upgrades: Mattress measurement template, comparison spreadsheet, installation checklist, care guide PDF",
+    "urgencyTactics": {
+      "ethical": [
+        "Highlight nights of poor sleep accumulating (time-based urgency)",
+        "Note health impacts of delaying decision (consequence awareness)",
+        "Seasonal considerations (order before heavy travel season)",
+        "Shipping timelines to specific locations (practical urgency)"
+      ],
+      "avoid": [
+        "Fake countdown timers",
+        "False scarcity ('only 3 left')",
+        "Fake discounts or inflated prices",
+        "Pressure tactics that damage trust"
+      ]
+    }
+  },
+  "emailNurtureSequence": {
+    "description": "Optional email sequence for those who download lead magnets but don't immediately purchase. Respects 120-day cookie window.",
+    "sequence": [
+      {
+        "day": 0,
+        "subject": "Your RV Mattress Sizing Guide (plus what we learned the hard way)",
+        "content": "Deliver promised resource + personal story about mattress research journey",
+        "cta": "Soft—link to buying guide, no direct sales pitch"
+      },
+      {
+        "day": 3,
+        "subject": "The one RV upgrade most people wish they'd done first",
+        "content": "Story about regret of delaying mattress upgrade + health impacts",
+        "cta": "Link to problem narrative page"
+      },
+      {
+        "day": 7,
+        "subject": "How to know if your RV mattress is destroying your back",
+        "content": "Educational content on spinal alignment + signs of poor mattress",
+        "cta": "Link to health & wellness page"
+      },
+      {
+        "day": 14,
+        "subject": "We did the math: cheap vs. premium RV mattress over 5 years",
+        "content": "ROI breakdown + real RVer cost comparison",
+        "cta": "Link to ROI calculator"
+      },
+      {
+        "day": 21,
+        "subject": "Short queen vs. RV king: which size is right for you?",
+        "content": "Detailed sizing guide + measurement tips",
+        "cta": "Link to size guide page"
+      },
+      {
+        "day": 35,
+        "subject": "Real RVers share their mattress transformation stories",
+        "content": "Testimonial compilation (real only)",
+        "cta": "Link to product showcase"
+      },
+      {
+        "day": 50,
+        "subject": "Organic, hybrid, or memory foam? Here's how to choose.",
+        "content": "Product comparison + decision framework",
+        "cta": "Product quiz or comparison chart"
+      },
+      {
+        "day": 75,
+        "subject": "The installation question everyone asks (it's easier than you think)",
+        "content": "Installation guide + common concerns addressed",
+        "cta": "Link to installation guide + shop now"
+      },
+      {
+        "day": 100,
+        "subject": "Quick reminder: your research link expires in 20 days",
+        "content": "Cookie window reminder + summary of key decision factors",
+        "cta": "Direct product links with affiliate tracking"
+      },
+      {
+        "day": 115,
+        "subject": "Final reminder: 5 days left on your affiliate link",
+        "content": "Last chance reminder + make decision easier with clear recommendation",
+        "cta": "Direct shop now with urgency note"
+      }
+    ]
+  }
+}
