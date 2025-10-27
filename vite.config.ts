@@ -5,8 +5,9 @@ import path from "path";
 import { componentTagger } from "lovable-tagger";
 import { staticGeneratorPlugin } from "./vite-plugins/static-generator";
 
-// Stable build configuration
-const buildHash = process.env.NODE_ENV === 'production' ? '[hash:8]' : 'dev';
+// Build configuration with timestamp to force fresh deploys
+// Using timestamp ensures Netlify uploads files even if content hasn't changed
+const buildHash = process.env.NODE_ENV === 'production' ? `${Date.now().toString(36)}-[hash:8]` : 'dev';
 export default defineConfig(({ mode }) => ({
   server: {
     host: '0.0.0.0',
