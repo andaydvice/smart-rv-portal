@@ -1,5 +1,6 @@
 /**
  * RV Life Pro Hero Landing Page
+ * Last deployed: 2025-10-27 05:15 UTC
  *
  * High-converting affiliate landing page with:
  * - Crisis-avoidance messaging (bridge strike story)
