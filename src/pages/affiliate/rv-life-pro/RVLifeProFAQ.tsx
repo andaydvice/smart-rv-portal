@@ -18,6 +18,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Layout from '@/components/layout/Layout';
+import { Helmet } from 'react-helmet-async';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import {
@@ -213,8 +214,29 @@ export const RVLifeProFAQ: React.FC = () => {
     window.print();
   };
 
+  const canonicalUrl = typeof window !== 'undefined' ? `${window.location.origin}/rv-life-pro/faq` : '';
+
   return (
     <Layout>
+      <Helmet>
+        <title>RV Life Pro FAQ 2025 | Common Questions & Answers</title>
+        <meta name="description" content="Complete FAQ for RV Life Pro. Get answers about features, pricing, technical requirements, trial period, cancellation, and comparison with other RV GPS systems." />
+        <link rel="canonical" href={canonicalUrl} />
+
+        {/* Open Graph tags */}
+        <meta property="og:type" content="article" />
+        <meta property="og:title" content="RV Life Pro FAQ 2025 | Common Questions & Answers" />
+        <meta property="og:description" content="Complete FAQ for RV Life Pro. Get answers about features, pricing, technical requirements, trial period, and cancellation." />
+        <meta property="og:url" content={canonicalUrl} />
+        <meta property="og:image" content={typeof window !== 'undefined' ? `${window.location.origin}/og-image.svg` : ''} />
+
+        {/* Twitter Card tags */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="RV Life Pro FAQ 2025 | Common Questions & Answers" />
+        <meta name="twitter:description" content="Complete FAQ for RV Life Pro. Get answers about features, pricing, technical requirements, trial period, and cancellation." />
+        <meta name="twitter:image" content={typeof window !== 'undefined' ? `${window.location.origin}/og-image.svg` : ''} />
+      </Helmet>
+
     <div className="min-h-screen bg-[var(--rv-life-off-white)]">
       {/* Schema Markup for FAQ Rich Snippets */}
       <script

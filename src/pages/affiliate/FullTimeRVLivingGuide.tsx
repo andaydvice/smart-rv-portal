@@ -13,9 +13,22 @@ const FullTimeRVLivingGuide = () => {
   return (
     <Layout>
       <Helmet>
-        <title>Full-Time RV Living Guide 2024 | Complete Lifestyle Guide</title>
+        <title>Full Time RV Living Guide 2025 | Complete Lifestyle Guide</title>
         <meta name="description" content="Complete guide to full time RV living including budgeting, domicile, mail forwarding, internet, healthcare, and campground selection for nomadic lifestyle." />
         <link rel="canonical" href={canonicalUrl} />
+
+        {/* Open Graph tags */}
+        <meta property="og:type" content="article" />
+        <meta property="og:title" content="Full Time RV Living Guide 2025 | Complete Lifestyle Guide" />
+        <meta property="og:description" content="Complete guide to full time RV living including budgeting, domicile, mail forwarding, internet, healthcare, and campground selection for nomadic lifestyle." />
+        <meta property="og:url" content={canonicalUrl} />
+        <meta property="og:image" content={typeof window !== 'undefined' ? `${window.location.origin}/og-image.svg` : ''} />
+
+        {/* Twitter Card tags */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Full Time RV Living Guide 2025 | Complete Lifestyle Guide" />
+        <meta name="twitter:description" content="Complete guide to full time RV living including budgeting, domicile, mail forwarding, internet, healthcare, and campground selection for nomadic lifestyle." />
+        <meta name="twitter:image" content={typeof window !== 'undefined' ? `${window.location.origin}/og-image.svg` : ''} />
         <script type="application/ld+json">{JSON.stringify(productSchema({
           name: 'Full-Time RV Living Guide',
           description: 'Comprehensive guide for transitioning to and maintaining full time RV living lifestyle with practical tips and resources.',
