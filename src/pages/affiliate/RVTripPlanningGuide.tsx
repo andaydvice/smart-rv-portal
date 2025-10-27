@@ -52,6 +52,22 @@ const RVTripPlanningGuide = () => {
             </div>
           </div>
 
+          {/* Early CTA - Above the Fold */}
+          <div className="bg-blue-900/20 border-2 border-blue-500 rounded-lg p-6 mb-12">
+            <h3 className="text-xl font-bold text-blue-400 mb-3">
+              Try RV Life Pro Free for 7 Days
+            </h3>
+            <p className="text-gray-300 mb-4">
+              Stop risking bridge strikes. Plan safe RV routes with professional height clearance verification and real time road restrictions in the largest campground database available.
+            </p>
+            <a
+              href="https://rvlife.com?ref=smartrvhub"
+              className="inline-block bg-orange-500 hover:bg-orange-600 text-white font-semibold px-8 py-3 rounded-lg transition-colors"
+            >
+              Start Free Trial →
+            </a>
+          </div>
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
             <div className="bg-connectivity-darkBg p-8 rounded-lg border border-gray-700 text-left">
               <h2 className="text-2xl font-semibold text-blue-400 mb-4">Why Proper Trip Planning Saves Lives</h2>
@@ -60,7 +76,7 @@ const RVTripPlanningGuide = () => {
 
                 <p>In 2023 alone, insurance companies processed over 1,200 bridge strike claims averaging $75,000 in damages.</p>
 
-                <p>Professional trip planning with RV specific routing prevents these disasters before they happen.</p>
+                <p>Professional <a href="https://rvlife.com?ref=smartrvhub" className="text-blue-400 hover:text-blue-300 underline">trip planning with RV Life Pro</a> prevents these disasters before they happen.</p>
               </div>
               <div className="bg-red-900/20 border border-red-500 p-4 rounded-lg mb-6">
                 <AlertTriangle className="h-6 w-6 text-red-400 mb-2" />
@@ -83,7 +99,7 @@ const RVTripPlanningGuide = () => {
                 <Route className="h-6 w-6 text-green-400 mb-4" />
                 <h3 className="text-xl font-semibold text-white mb-2">Safe Route Planning</h3>
                 <p className="text-gray-300">
-                  Plan routes that account for your RV's exact dimensions, avoiding low clearances and restricted roads.
+                  Plan routes that account for your RV's exact dimensions, avoiding low clearances and restricted roads with <a href="https://rvlife.com?ref=smartrvhub" className="text-blue-400 hover:text-blue-300 underline">RV specific GPS navigation</a>.
                 </p>
               </div>
 
@@ -103,6 +119,22 @@ const RVTripPlanningGuide = () => {
                 </p>
               </div>
             </div>
+          </div>
+
+          {/* Mid-Content CTA */}
+          <div className="bg-blue-900/20 border-2 border-blue-500 rounded-lg p-6 my-12">
+            <h3 className="text-xl font-bold text-blue-400 mb-3">
+              Protect Your RV with Professional Route Planning
+            </h3>
+            <p className="text-gray-300 mb-4">
+              Join thousands of RVers who use <a href="https://rvlife.com?ref=smartrvhub" className="text-blue-400 hover:text-blue-300 underline font-semibold">RV Life Pro</a> to avoid bridge strikes and plan perfect trips with confidence. Get instant access to height clearance verification and 25,000+ campgrounds.
+            </p>
+            <a
+              href="https://rvlife.com?ref=smartrvhub"
+              className="inline-block bg-orange-500 hover:bg-orange-600 text-white font-semibold px-8 py-3 rounded-lg transition-colors"
+            >
+              Start Your Free Trial →
+            </a>
           </div>
 
           {/* Statistics Section */}
@@ -140,22 +172,9 @@ const RVTripPlanningGuide = () => {
                   'Weather and road condition integration',
                   'Trip planning and booking tools'
                 ]
-              },
-              {
-                name: 'Good Sam',
-                url: 'https://goodsam.com',
-                title: 'Good Sam Emergency Roadside Assistance',
-                description: 'Emergency backup protection when planning goes wrong or unexpected situations arise on the road.',
-                features: [
-                  '24/7 emergency roadside assistance',
-                  'Unlimited towing to nearest repair facility',
-                  'Tire changes and jump starts',
-                  'Emergency fuel delivery',
-                  'Lockout service'
-                ]
               }
             ]}
-            gridCols="2"
+            gridCols="1"
             className="mt-16"
           />
 

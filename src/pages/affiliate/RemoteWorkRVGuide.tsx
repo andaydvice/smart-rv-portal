@@ -52,6 +52,22 @@ const RemoteWorkRVGuide = () => {
             </div>
           </div>
 
+          {/* Early CTA - Above the Fold */}
+          <div className="bg-blue-900/20 border-2 border-blue-500 rounded-lg p-6 mb-12">
+            <h3 className="text-xl font-bold text-blue-400 mb-3">
+              Try RV Life Pro Free for 7 Days
+            </h3>
+            <p className="text-gray-300 mb-4">
+              Work from anywhere with confidence. Find campgrounds with strong WiFi and cell signal, plan routes around your work schedule, and maintain productivity while traveling.
+            </p>
+            <a
+              href="https://rvlife.com?ref=smartrvhub"
+              className="inline-block bg-orange-500 hover:bg-orange-600 text-white font-semibold px-8 py-3 rounded-lg transition-colors"
+            >
+              Start Free Trial →
+            </a>
+          </div>
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
             <div className="bg-connectivity-darkBg p-8 rounded-lg border border-gray-700 text-left">
               <h2 className="text-2xl font-semibold text-blue-400 mb-4">The Remote Work RV Revolution</h2>
@@ -60,7 +76,7 @@ const RemoteWorkRVGuide = () => {
 
                 <p>Remote RV workers report 35% higher job satisfaction and 28% increased productivity compared to traditional office environments.</p>
 
-                <p>Success requires reliable internet connectivity, proper workspace setup, and campground selection based on work requirements.</p>
+                <p>Success requires reliable internet connectivity, proper workspace setup, and <a href="https://rvlife.com?ref=smartrvhub" className="text-blue-400 hover:text-blue-300 underline">campground selection</a> based on work requirements.</p>
               </div>
               <div className="bg-cyan-900/20 border border-cyan-500 p-4 rounded-lg mb-6">
                 <Wifi className="h-6 w-6 text-cyan-400 mb-2" />
@@ -100,6 +116,22 @@ const RemoteWorkRVGuide = () => {
                 </p>
               </div>
             </div>
+          </div>
+
+          {/* Mid-Content CTA */}
+          <div className="bg-blue-900/20 border-2 border-blue-500 rounded-lg p-6 my-12">
+            <h3 className="text-xl font-bold text-blue-400 mb-3">
+              Find Work Friendly Campgrounds
+            </h3>
+            <p className="text-gray-300 mb-4">
+              Never miss a deadline due to poor connectivity. <a href="https://rvlife.com?ref=smartrvhub" className="text-blue-400 hover:text-blue-300 underline font-semibold">RV Life Pro</a> shows cell signal strength and WiFi quality ratings so you can work productively from anywhere.
+            </p>
+            <a
+              href="https://rvlife.com?ref=smartrvhub"
+              className="inline-block bg-orange-500 hover:bg-orange-600 text-white font-semibold px-8 py-3 rounded-lg transition-colors"
+            >
+              Find Your Work Spot →
+            </a>
           </div>
 
           {/* Internet Setup Guide */}
@@ -218,21 +250,9 @@ const RemoteWorkRVGuide = () => {
                   'Plan routes around time zones and meetings',
                   'Remote worker community and tips'
                 ]
-              },
-              {
-                name: 'Good Sam',
-                url: 'https://goodsam.com',
-                title: 'Good Sam Emergency Protection',
-                description: 'Roadside assistance ensures you can get help without missing work deadlines when mechanical issues occur.',
-                features: [
-                  '24/7 emergency roadside assistance',
-                  'Priority service for working travelers',
-                  'Unlimited towing to repair facilities',
-                  'Emergency internet backup assistance'
-                ]
               }
             ]}
-            gridCols="2"
+            gridCols="1"
             className="mt-16"
           />
 

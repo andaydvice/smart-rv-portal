@@ -52,6 +52,22 @@ const RVCampgroundFinder = () => {
             </div>
           </div>
 
+          {/* Early CTA - Above the Fold */}
+          <div className="bg-blue-900/20 border-2 border-blue-500 rounded-lg p-6 mb-12">
+            <h3 className="text-xl font-bold text-blue-400 mb-3">
+              Try RV Life Pro Free for 7 Days
+            </h3>
+            <p className="text-gray-300 mb-4">
+              Never arrive at a full campground again. Search 25,000+ RV parks with real time availability, verified reviews, and instant booking all in one place.
+            </p>
+            <a
+              href="https://rvlife.com?ref=smartrvhub"
+              className="inline-block bg-orange-500 hover:bg-orange-600 text-white font-semibold px-8 py-3 rounded-lg transition-colors"
+            >
+              Start Free Trial →
+            </a>
+          </div>
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
             <div className="bg-connectivity-darkBg p-8 rounded-lg border border-gray-700 text-left">
               <h2 className="text-2xl font-semibold text-blue-400 mb-4">Why a Dedicated Campground Finder Matters</h2>
@@ -60,7 +76,7 @@ const RVCampgroundFinder = () => {
 
                 <p>Without proper planning tools, families waste hours driving between full campgrounds or settling for unsuitable locations.</p>
 
-                <p>Comprehensive campground finders show real-time availability, detailed amenities, and verified reviews before you leave home.</p>
+                <p><a href="https://rvlife.com?ref=smartrvhub" className="text-blue-400 hover:text-blue-300 underline">Comprehensive campground finders</a> show real time availability, detailed amenities, and verified reviews before you leave home.</p>
               </div>
               <div className="bg-green-900/20 border border-green-500 p-4 rounded-lg mb-6">
                 <Star className="h-6 w-6 text-green-400 mb-2" />
@@ -100,6 +116,22 @@ const RVCampgroundFinder = () => {
                 </p>
               </div>
             </div>
+          </div>
+
+          {/* Mid-Content CTA */}
+          <div className="bg-blue-900/20 border-2 border-blue-500 rounded-lg p-6 my-12">
+            <h3 className="text-xl font-bold text-blue-400 mb-3">
+              Book Your Perfect Campground Today
+            </h3>
+            <p className="text-gray-300 mb-4">
+              Stop wasting time with phone calls and uncertainty. <a href="https://rvlife.com?ref=smartrvhub" className="text-blue-400 hover:text-blue-300 underline font-semibold">RV Life Pro</a> shows you real time availability at 25,000+ campgrounds with verified reviews and instant booking.
+            </p>
+            <a
+              href="https://rvlife.com?ref=smartrvhub"
+              className="inline-block bg-orange-500 hover:bg-orange-600 text-white font-semibold px-8 py-3 rounded-lg transition-colors"
+            >
+              Find Your Perfect Spot →
+            </a>
           </div>
 
           {/* Statistics Section */}
@@ -165,21 +197,9 @@ const RVCampgroundFinder = () => {
                   'Filter by hookups, WiFi, pet-friendly, more',
                   'Integrated with RV-safe GPS navigation'
                 ]
-              },
-              {
-                name: 'Good Sam',
-                url: 'https://goodsam.com',
-                title: 'Good Sam Camping Membership',
-                description: 'Save 10% on camping fees at 2,000+ Good Sam affiliated campgrounds plus emergency roadside assistance.',
-                features: [
-                  '10% camping discounts at 2,000+ parks',
-                  'Exclusive member pricing',
-                  'Good Sam campground directory',
-                  'Emergency roadside assistance included'
-                ]
               }
             ]}
-            gridCols="2"
+            gridCols="1"
             className="mt-16"
           />
 

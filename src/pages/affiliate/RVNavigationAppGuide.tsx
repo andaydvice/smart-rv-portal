@@ -52,6 +52,22 @@ const RVNavigationAppGuide = () => {
             </div>
           </div>
 
+          {/* Early CTA - Above the Fold */}
+          <div className="bg-blue-900/20 border-2 border-blue-500 rounded-lg p-6 mb-12">
+            <h3 className="text-xl font-bold text-blue-400 mb-3">
+              Try RV Life Pro Free for 7 Days
+            </h3>
+            <p className="text-gray-300 mb-4">
+              Download the best RV navigation app today. Get instant access to RV safe routes, 25,000+ campgrounds, and offline maps on your iPhone or Android device.
+            </p>
+            <a
+              href="https://rvlife.com?ref=smartrvhub"
+              className="inline-block bg-orange-500 hover:bg-orange-600 text-white font-semibold px-8 py-3 rounded-lg transition-colors"
+            >
+              Start Free Trial →
+            </a>
+          </div>
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
             <div className="bg-connectivity-darkBg p-8 rounded-lg border border-gray-700 text-left">
               <h2 className="text-2xl font-semibold text-blue-400 mb-4">Why RV Navigation Apps Beat Standard GPS</h2>
@@ -60,7 +76,7 @@ const RVNavigationAppGuide = () => {
 
                 <p>Standard navigation apps do not account for RV height, weight, or width restrictions.</p>
 
-                <p>RV specific apps prevent disasters by routing around restrictions and providing campground integration.</p>
+                <p><a href="https://rvlife.com?ref=smartrvhub" className="text-blue-400 hover:text-blue-300 underline">RV specific apps</a> prevent disasters by routing around restrictions and providing campground integration.</p>
               </div>
               <div className="bg-green-900/20 border border-green-500 p-4 rounded-lg mb-6">
                 <Zap className="h-6 w-6 text-green-400 mb-2" />
@@ -100,6 +116,22 @@ const RVNavigationAppGuide = () => {
                 </p>
               </div>
             </div>
+          </div>
+
+          {/* Mid-Content CTA */}
+          <div className="bg-blue-900/20 border-2 border-blue-500 rounded-lg p-6 my-12">
+            <h3 className="text-xl font-bold text-blue-400 mb-3">
+              Get the Most Complete RV Navigation App
+            </h3>
+            <p className="text-gray-300 mb-4">
+              Join over 2 million RVers using <a href="https://rvlife.com?ref=smartrvhub" className="text-blue-400 hover:text-blue-300 underline font-semibold">RV Life Pro</a> for safe navigation. Works on your existing phone with offline maps, 25,000+ campgrounds, and automatic updates.
+            </p>
+            <a
+              href="https://rvlife.com?ref=smartrvhub"
+              className="inline-block bg-orange-500 hover:bg-orange-600 text-white font-semibold px-8 py-3 rounded-lg transition-colors"
+            >
+              Download Now - Free Trial →
+            </a>
           </div>
 
           {/* App Comparison */}
@@ -200,21 +232,9 @@ const RVNavigationAppGuide = () => {
                   'Real-time weather and traffic integration',
                   'Works on iOS and Android devices'
                 ]
-              },
-              {
-                name: 'Good Sam',
-                url: 'https://goodsam.com',
-                title: 'Good Sam Emergency Roadside',
-                description: 'Essential backup when technology fails or unexpected roadside emergencies occur.',
-                features: [
-                  '24/7 emergency roadside assistance',
-                  'Unlimited towing to repair facilities',
-                  'Emergency navigation assistance',
-                  'Tire, battery, and lockout service'
-                ]
               }
             ]}
-            gridCols="2"
+            gridCols="1"
             className="mt-16"
           />
 

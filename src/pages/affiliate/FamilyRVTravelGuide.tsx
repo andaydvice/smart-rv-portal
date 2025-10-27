@@ -52,15 +52,31 @@ const FamilyRVTravelGuide = () => {
             </div>
           </div>
 
+          {/* Early CTA - Above the Fold */}
+          <div className="bg-blue-900/20 border-2 border-blue-500 rounded-lg p-6 mb-12">
+            <h3 className="text-xl font-bold text-blue-400 mb-3">
+              Try RV Life Pro Free for 7 Days
+            </h3>
+            <p className="text-gray-300 mb-4">
+              Plan stress free family adventures with RV Life Pro. Find family friendly campgrounds with playgrounds and pools, plus safe routing that keeps your loved ones protected.
+            </p>
+            <a
+              href="https://rvlife.com?ref=smartrvhub"
+              className="inline-block bg-orange-500 hover:bg-orange-600 text-white font-semibold px-8 py-3 rounded-lg transition-colors"
+            >
+              Start Free Trial →
+            </a>
+          </div>
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
             <div className="bg-connectivity-darkBg p-8 rounded-lg border border-gray-700 text-left">
               <h2 className="text-2xl font-semibold text-blue-400 mb-4">Why Families Love RV Travel</h2>
               <div className="text-gray-300 mb-6 space-y-4">
                 <p>Over 11 million families in North America now choose RV travel for vacations, with 73% reporting closer family bonds.</p>
 
-                <p>RV travel provides flexibility for nap times, meal preferences, and spontaneous stops that traditional hotels cannot offer.</p>
+                <p><a href="https://rvlife.com?ref=smartrvhub" className="text-blue-400 hover:text-blue-300 underline">RV travel</a> provides flexibility for nap times, meal preferences, and spontaneous stops that traditional hotels cannot offer.</p>
 
-                <p>Families save an average of 50% on vacation costs compared to hotels and restaurants while creating richer experiences.</p>
+                <p>Families save an average of 50% on vacation costs compared to hotels and restaurants while creating richer experiences with <a href="https://rvlife.com?ref=smartrvhub" className="text-blue-400 hover:text-blue-300 underline">proper trip planning</a>.</p>
               </div>
               <div className="bg-orange-900/20 border border-orange-500 p-4 rounded-lg mb-6">
                 <Heart className="h-6 w-6 text-orange-400 mb-2" />
@@ -100,6 +116,22 @@ const FamilyRVTravelGuide = () => {
                 </p>
               </div>
             </div>
+          </div>
+
+          {/* Mid-Content CTA */}
+          <div className="bg-blue-900/20 border-2 border-blue-500 rounded-lg p-6 my-12">
+            <h3 className="text-xl font-bold text-blue-400 mb-3">
+              Create Amazing Family Memories
+            </h3>
+            <p className="text-gray-300 mb-4">
+              Find family friendly campgrounds with playgrounds, pools, and activities your kids will love. <a href="https://rvlife.com?ref=smartrvhub" className="text-blue-400 hover:text-blue-300 underline font-semibold">RV Life Pro</a> makes family trip planning easy with filters for kid friendly amenities.
+            </p>
+            <a
+              href="https://rvlife.com?ref=smartrvhub"
+              className="inline-block bg-orange-500 hover:bg-orange-600 text-white font-semibold px-8 py-3 rounded-lg transition-colors"
+            >
+              Plan Your Family Adventure →
+            </a>
           </div>
 
           {/* Family RV Statistics */}
@@ -165,21 +197,9 @@ const FamilyRVTravelGuide = () => {
                   'Real-time availability booking',
                   'Trip planning with kids in mind'
                 ]
-              },
-              {
-                name: 'Good Sam',
-                url: 'https://goodsam.com',
-                title: 'Good Sam Family Protection',
-                description: 'Emergency roadside assistance provides peace of mind when traveling with children, ensuring help is always available.',
-                features: [
-                  '24/7 family emergency assistance',
-                  'Unlimited towing with kids onboard',
-                  'Priority service for families',
-                  'Emergency routing to safe locations'
-                ]
               }
             ]}
-            gridCols="2"
+            gridCols="1"
             className="mt-16"
           />
 

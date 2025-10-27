@@ -52,15 +52,31 @@ const FullTimeRVLivingGuide = () => {
             </div>
           </div>
 
+          {/* Early CTA - Above the Fold */}
+          <div className="bg-blue-900/20 border-2 border-blue-500 rounded-lg p-6 mb-12">
+            <h3 className="text-xl font-bold text-blue-400 mb-3">
+              Try RV Life Pro Free for 7 Days
+            </h3>
+            <p className="text-gray-300 mb-4">
+              Live the full time RV lifestyle with confidence. Find long term campground stays, manage your travel budget, and discover work camping opportunities all in one platform.
+            </p>
+            <a
+              href="https://rvlife.com?ref=smartrvhub"
+              className="inline-block bg-orange-500 hover:bg-orange-600 text-white font-semibold px-8 py-3 rounded-lg transition-colors"
+            >
+              Start Free Trial →
+            </a>
+          </div>
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
             <div className="bg-connectivity-darkBg p-8 rounded-lg border border-gray-700 text-left">
               <h2 className="text-2xl font-semibold text-blue-400 mb-4">The Full-Time RV Lifestyle Reality</h2>
               <div className="text-gray-300 mb-6 space-y-4">
                 <p>Over 1 million Americans now live full time in RVs, with the number growing 64% in the past five years.</p>
 
-                <p>Full-timers report an average 50-70% reduction in living expenses compared to traditional housing while gaining location freedom.</p>
+                <p>Full timers report an average 50 to 70% reduction in living expenses compared to traditional housing while gaining location freedom.</p>
 
-                <p>Successful full time RV living requires proper planning for domicile, mail, healthcare, connectivity, and campground management.</p>
+                <p>Successful <a href="https://rvlife.com?ref=smartrvhub" className="text-blue-400 hover:text-blue-300 underline">full time RV living</a> requires proper planning for domicile, mail, healthcare, connectivity, and campground management.</p>
               </div>
               <div className="bg-indigo-900/20 border border-indigo-500 p-4 rounded-lg mb-6">
                 <TrendingUp className="h-6 w-6 text-indigo-400 mb-2" />
@@ -100,6 +116,22 @@ const FullTimeRVLivingGuide = () => {
                 </p>
               </div>
             </div>
+          </div>
+
+          {/* Mid-Content CTA */}
+          <div className="bg-blue-900/20 border-2 border-blue-500 rounded-lg p-6 my-12">
+            <h3 className="text-xl font-bold text-blue-400 mb-3">
+              Start Your Full Time RV Journey
+            </h3>
+            <p className="text-gray-300 mb-4">
+              Plan your nomadic lifestyle with <a href="https://rvlife.com?ref=smartrvhub" className="text-blue-400 hover:text-blue-300 underline font-semibold">RV Life Pro</a>. Find extended stay campgrounds, track your expenses, and connect with the full time RV community.
+            </p>
+            <a
+              href="https://rvlife.com?ref=smartrvhub"
+              className="inline-block bg-orange-500 hover:bg-orange-600 text-white font-semibold px-8 py-3 rounded-lg transition-colors"
+            >
+              Begin Your Adventure →
+            </a>
           </div>
 
           {/* Cost Breakdown */}
@@ -185,21 +217,9 @@ const FullTimeRVLivingGuide = () => {
                   'Budget tracking and expense management',
                   'Full-timer community and tips'
                 ]
-              },
-              {
-                name: 'Good Sam',
-                url: 'https://goodsam.com',
-                title: 'Good Sam Full-Timer Protection',
-                description: 'Essential roadside assistance and camping discounts for full time RVers living on the road year-round.',
-                features: [
-                  '24/7 emergency roadside assistance',
-                  '10% camping discounts at 2,000+ parks',
-                  'Unlimited towing for full-timers',
-                  'Priority service for RV residents'
-                ]
               }
             ]}
-            gridCols="2"
+            gridCols="1"
             className="mt-16"
           />
 

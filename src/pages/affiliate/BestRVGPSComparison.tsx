@@ -52,15 +52,31 @@ const BestRVGPSComparison = () => {
             </div>
           </div>
 
+          {/* Early CTA - Above the Fold */}
+          <div className="bg-blue-900/20 border-2 border-blue-500 rounded-lg p-6 mb-12">
+            <h3 className="text-xl font-bold text-blue-400 mb-3">
+              Try RV Life Pro Free for 7 Days
+            </h3>
+            <p className="text-gray-300 mb-4">
+              Skip expensive hardware GPS units. Get professional RV navigation on the device you already own with the largest campground database and real time traffic updates.
+            </p>
+            <a
+              href="https://rvlife.com?ref=smartrvhub"
+              className="inline-block bg-orange-500 hover:bg-orange-600 text-white font-semibold px-8 py-3 rounded-lg transition-colors"
+            >
+              Start Free Trial →
+            </a>
+          </div>
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
             <div className="bg-connectivity-darkBg p-8 rounded-lg border border-gray-700 text-left">
               <h2 className="text-2xl font-semibold text-blue-400 mb-4">Why RV-Specific GPS Matters</h2>
               <div className="text-gray-300 mb-6 space-y-4">
                 <p>Standard car GPS systems have caused over 1,200 bridge strikes in the past year alone.</p>
 
-                <p>RV GPS systems prevent costly accidents by routing around low bridges, weight restrictions, and narrow roads.</p>
+                <p><a href="https://rvlife.com?ref=smartrvhub" className="text-blue-400 hover:text-blue-300 underline">RV GPS systems</a> prevent costly accidents by routing around low bridges, weight restrictions, and narrow roads.</p>
 
-                <p>The right GPS system pays for itself by avoiding even a single bridge strike costing $75,000+ in repairs.</p>
+                <p>The right <a href="https://rvlife.com?ref=smartrvhub" className="text-blue-400 hover:text-blue-300 underline">GPS system</a> pays for itself by avoiding even a single bridge strike costing $75,000+ in repairs.</p>
               </div>
               <div className="bg-blue-900/20 border border-blue-500 p-4 rounded-lg mb-6">
                 <CheckCircle className="h-6 w-6 text-blue-400 mb-2" />
@@ -100,6 +116,22 @@ const BestRVGPSComparison = () => {
                 </p>
               </div>
             </div>
+          </div>
+
+          {/* Mid-Content CTA */}
+          <div className="bg-blue-900/20 border-2 border-blue-500 rounded-lg p-6 my-12">
+            <h3 className="text-xl font-bold text-blue-400 mb-3">
+              Save Hundreds on GPS Hardware
+            </h3>
+            <p className="text-gray-300 mb-4">
+              Why spend $300 to $600 on a dedicated GPS device? <a href="https://rvlife.com?ref=smartrvhub" className="text-blue-400 hover:text-blue-300 underline font-semibold">RV Life Pro</a> gives you professional RV navigation on your phone for just $49.99 per year with more features than hardware units.
+            </p>
+            <a
+              href="https://rvlife.com?ref=smartrvhub"
+              className="inline-block bg-orange-500 hover:bg-orange-600 text-white font-semibold px-8 py-3 rounded-lg transition-colors"
+            >
+              Start Your Free Trial →
+            </a>
           </div>
 
           {/* Comparison Table */}
@@ -174,21 +206,9 @@ const BestRVGPSComparison = () => {
                   'Works on phone/tablet you already own',
                   'Only $49.99/year (vs $300-600 hardware)'
                 ]
-              },
-              {
-                name: 'Good Sam',
-                url: 'https://goodsam.com',
-                title: 'Good Sam Emergency Roadside',
-                description: 'Essential backup protection when GPS fails or unexpected situations occur on the road.',
-                features: [
-                  '24/7 emergency roadside assistance',
-                  'Unlimited towing protection',
-                  'Emergency routing assistance',
-                  'Tire and battery service'
-                ]
               }
             ]}
-            gridCols="2"
+            gridCols="1"
             className="mt-16"
           />
 
