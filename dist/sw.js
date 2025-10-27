@@ -3,7 +3,7 @@
  * Only clears caches when version changes, not on every load
  */
 
-const DEPLOYMENT_VERSION = 'map-fixes-20250831';
+const DEPLOYMENT_VERSION = 'webp-images-20251025';
 const CACHE_NAME = `smartrvhub-${DEPLOYMENT_VERSION}`;
 
 // Install event - only clear outdated caches
