@@ -13,9 +13,22 @@ const BestRVGPSComparison = () => {
   return (
     <Layout>
       <Helmet>
-        <title>Best RV GPS Systems 2024 | Complete Comparison Guide</title>
+        <title>Best RV GPS Systems 2025 | Complete Comparison Guide</title>
         <meta name="description" content="Compare the best RV GPS systems including Garmin, Rand McNally, and RV Life Pro. Find the right RV navigation system with height alerts and safe routing." />
         <link rel="canonical" href={canonicalUrl} />
+
+        {/* Open Graph tags */}
+        <meta property="og:type" content="article" />
+        <meta property="og:title" content="Best RV GPS Systems 2025 | Complete Comparison Guide" />
+        <meta property="og:description" content="Compare the best RV GPS systems including Garmin, Rand McNally, and RV Life Pro. Find the right RV navigation system with height alerts and safe routing." />
+        <meta property="og:url" content={canonicalUrl} />
+        <meta property="og:image" content={typeof window !== 'undefined' ? `${window.location.origin}/og-image.svg` : ''} />
+
+        {/* Twitter Card tags */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Best RV GPS Systems 2025 | Complete Comparison Guide" />
+        <meta name="twitter:description" content="Compare the best RV GPS systems including Garmin, Rand McNally, and RV Life Pro. Find the right RV navigation system with height alerts and safe routing." />
+        <meta name="twitter:image" content={typeof window !== 'undefined' ? `${window.location.origin}/og-image.svg` : ''} />
         <script type="application/ld+json">{JSON.stringify(productSchema({
           name: 'Best RV GPS Comparison Guide',
           description: 'Comprehensive comparison of top RV GPS systems with features, pricing, and recommendations for safe RV navigation.',

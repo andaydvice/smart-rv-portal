@@ -13,9 +13,22 @@ const RVCampgroundFinder = () => {
   return (
     <Layout>
       <Helmet>
-        <title>RV Campground Finder 2024 | Find & Book RV Parks</title>
+        <title>RV Campground Finder 2025 | Find & Book RV Parks</title>
         <meta name="description" content="Find and book RV campgrounds with amenities, reviews, and availability. Search 25,000+ RV parks and campgrounds across North America." />
         <link rel="canonical" href={canonicalUrl} />
+
+        {/* Open Graph tags */}
+        <meta property="og:type" content="article" />
+        <meta property="og:title" content="RV Campground Finder 2025 | Find & Book RV Parks" />
+        <meta property="og:description" content="Find and book RV campgrounds with amenities, reviews, and availability. Search 25,000+ RV parks and campgrounds across North America." />
+        <meta property="og:url" content={canonicalUrl} />
+        <meta property="og:image" content={typeof window !== 'undefined' ? `${window.location.origin}/og-image.svg` : ''} />
+
+        {/* Twitter Card tags */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="RV Campground Finder 2025 | Find & Book RV Parks" />
+        <meta name="twitter:description" content="Find and book RV campgrounds with amenities, reviews, and availability. Search 25,000+ RV parks and campgrounds across North America." />
+        <meta name="twitter:image" content={typeof window !== 'undefined' ? `${window.location.origin}/og-image.svg` : ''} />
         <script type="application/ld+json">{JSON.stringify(productSchema({
           name: 'RV Campground Finder Guide',
           description: 'Comprehensive guide to finding and booking RV campgrounds with reviews, amenities, and real-time availability.',

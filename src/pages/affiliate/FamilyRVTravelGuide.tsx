@@ -13,9 +13,22 @@ const FamilyRVTravelGuide = () => {
   return (
     <Layout>
       <Helmet>
-        <title>Family RV Travel Guide 2024 | Tips for RVing with Kids</title>
+        <title>Family RV Travel Guide 2025 | Tips for RVing with Kids</title>
         <meta name="description" content="Complete guide to RV travel with children including safety tips, entertainment ideas, campground selection, and trip planning for family adventures." />
         <link rel="canonical" href={canonicalUrl} />
+
+        {/* Open Graph tags */}
+        <meta property="og:type" content="article" />
+        <meta property="og:title" content="Family RV Travel Guide 2025 | Tips for RVing with Kids" />
+        <meta property="og:description" content="Complete guide to RV travel with children including safety tips, entertainment ideas, campground selection, and trip planning for family adventures." />
+        <meta property="og:url" content={canonicalUrl} />
+        <meta property="og:image" content={typeof window !== 'undefined' ? `${window.location.origin}/og-image.svg` : ''} />
+
+        {/* Twitter Card tags */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Family RV Travel Guide 2025 | Tips for RVing with Kids" />
+        <meta name="twitter:description" content="Complete guide to RV travel with children including safety tips, entertainment ideas, campground selection, and trip planning for family adventures." />
+        <meta name="twitter:image" content={typeof window !== 'undefined' ? `${window.location.origin}/og-image.svg` : ''} />
         <script type="application/ld+json">{JSON.stringify(productSchema({
           name: 'Family RV Travel Guide',
           description: 'Comprehensive guide for families traveling by RV with children, including safety, entertainment, and planning tips.',
