@@ -4,6 +4,7 @@ import { Toaster } from '@/components/ui/toaster';
 import { AuthProvider } from './components/auth/AuthContext';
 import RouterProvider from './components/router/RouterProvider';
 
+// Deploy: 2025-10-27T17:00:00Z - Force new build hashes
 
 // Create a simple client
 const queryClient = new QueryClient({
