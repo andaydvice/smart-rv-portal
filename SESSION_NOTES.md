@@ -1,6 +1,167 @@
 # Session Notes
 
-## Session: October 27, 2025 (Evening)
+## Session: October 27, 2025 (Evening - Part 2)
+
+### Session Overview
+Established project-specific content writing rules and removed hyphens from all affiliate pages to improve readability for senior audience.
+
+### Tasks Completed
+
+#### 1. Created CLAUDE.md Project Guidelines
+
+**File Created:** `/Users/user/smart-rv-portal/CLAUDE.md`
+
+**Content Writing Rules Established:**
+
+**Hyphen Usage (Critical Rule):**
+- Remove all hyphens in content text UNLESS part of official brand name
+- Examples of correct usage:
+  - ✅ Brand names: "RV Life Pro", "Good Sam" (keep hyphens)
+  - ✅ Content text: "real time updates" (not "real-time updates")
+  - ✅ Content text: "full time RV living" (not "full-time RV living")
+  - ✅ Content text: "RV specific routing" (not "RV-specific routing")
+
+**Rationale:**
+- Improves readability for senior audience (65+ demographics)
+- Reduces visual clutter
+- Maintains clean, accessible design
+- Exception only for official brand names and trademarks
+
+**Other Guidelines Added:**
+- Paragraph structure standards
+- Color usage restrictions (no text same colors as CTAs)
+- Design consistency requirements
+- Agent invocation workflow (MUST use Content Strategist + Landing Page Specialist)
+- SEO requirements
+- Performance targets
+- Accessibility standards (WCAG 2.1 AA)
+- Deployment workflow
+
+**Git Operation:**
+- Commit SHA: `e5a38624`
+- Message: "Add project-specific content writing rules and agent workflow guidelines"
+- Status: ✅ Pushed to main
+
+#### 2. Hyphen Removal from All Affiliate Pages
+
+**Approach:** Batch sed replacement across all affiliate page files
+
+**Changes Applied:**
+- "real-time" → "real time"
+- "full-time" → "full time"
+- "RV-specific" → "RV specific"
+- "cross-country" → "cross country"
+- "weather-aware" → "weather aware"
+- "bridge-strike" → "bridge strike"
+- "cost-effective" → "cost effective"
+- "user-friendly" → "user friendly"
+- "self-driving" → "self driving"
+
+**Files Modified (13 total):**
+
+**Newly Created Pages (5 files):**
+1. `src/pages/affiliate/BestRVGPSComparison.tsx`
+2. `src/pages/affiliate/FullTimeRVLivingGuide.tsx`
+3. `src/pages/affiliate/RVNavigationAppGuide.tsx`
+4. `src/pages/affiliate/RVTripPlanningGuide.tsx`
+5. `src/pages/affiliate/RemoteWorkRVGuide.tsx`
+
+**Existing Affiliate Pages (8 files):**
+6. `src/pages/affiliate/brentwood-home/UltimateRVMattressBuyingGuide.tsx`
+7. `src/pages/affiliate/rv-life-pro/RVLifeProCampgrounds.tsx`
+8. `src/pages/affiliate/rv-life-pro/RVLifeProComparison.tsx`
+9. `src/pages/affiliate/rv-life-pro/RVLifeProFAQ.tsx`
+10. `src/pages/affiliate/rv-life-pro/RVLifeProStory.tsx`
+11. `src/pages/affiliate/rv-life-pro/scenarios/DigitalNomads.tsx`
+12. `src/pages/affiliate/rv-life-pro/scenarios/GreyNomads.tsx`
+13. `src/pages/affiliate/rv-life-pro/scenarios/WeekendWarriors.tsx`
+
+**Example Changes:**
+```tsx
+// Before
+"RV-specific dimensions, weight restrictions, and access challenges"
+// After
+"RV specific dimensions, weight restrictions, and access challenges"
+
+// Before
+"real-time updates and weather-aware routing"
+// After
+"real time updates and weather aware routing"
+
+// Before
+"full-time RV living with cost-effective solutions"
+// After
+"full time RV living with cost effective solutions"
+```
+
+**Git Operation:**
+- Commit SHA: `ffa9cfd7`
+- Message: "Remove hyphens from affiliate page content per CLAUDE.md rules"
+- Files changed: 13 files, 34 insertions(+), 34 deletions(-)
+- Status: ✅ Pushed to main
+
+#### 3. Quality Control Verification
+
+**Pre-commit Hooks Passed:**
+- ✅ SEO verification passed (13/13 feature pages with breadcrumbs and Product schema)
+- ✅ Model pages verified (3/3 with breadcrumbs)
+- ✅ Blog posts verified (8 with money page links)
+- ✅ Build test passed successfully
+
+**Deployment Status:**
+- GitHub Actions auto-deploy triggered
+- Netlify deployment in progress
+- Expected live: 2-3 minutes after push
+- Site ID: `a2415357-cb1c-47b6-a26d-90388b5ca6b0`
+
+### Lessons Learned
+
+**Content Writing Standards:**
+- Project-specific rules in CLAUDE.md provide consistency
+- Hyphen removal significantly improves readability
+- Senior audience (65+) benefits from reduced visual complexity
+- Brand name exceptions important to maintain
+
+**Batch Operations:**
+- sed commands efficient for systematic text replacements
+- Applied changes across 13 files in one operation
+- Git staging captured all related changes together
+- Single commit keeps changes atomic and revertible
+
+### Success Criteria Met
+
+✅ CLAUDE.md created with comprehensive content guidelines
+✅ Hyphen removal rule documented and explained
+✅ All 13 affiliate pages processed successfully
+✅ Brand name hyphens preserved correctly
+✅ Pre-commit hooks passed (SEO + build)
+✅ Changes committed and pushed to production
+✅ Auto-deploy triggered on Netlify
+
+### Files Modified Summary
+
+**Created:**
+- `CLAUDE.md` - Project-specific content writing rules
+
+**Modified:**
+- 13 affiliate pages with hyphen removal
+- SESSION_NOTES.md - updated with task documentation
+
+### Git Timeline
+1. First commit: `e5a38624` - "Add project-specific content writing rules"
+2. Hyphen changes committed: `ffa9cfd7` - "Remove hyphens from affiliate page content"
+3. Both pushed successfully to `origin/main`
+4. Netlify auto-deploy triggered
+
+### Next Steps
+1. Monitor Netlify deployment completion (~2-3 min)
+2. Verify improved readability on live site
+3. Consider applying hyphen rule to other content sections
+4. Update existing content to match new standards
+
+---
+
+## Session: October 27, 2025 (Evening - Part 1)
 
 ### Session Overview
 Created 7 complete RV Life Pro affiliate content pages to fix 404 errors and establish high-converting affiliate marketing funnel.
