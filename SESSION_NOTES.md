@@ -197,6 +197,52 @@ case '1': return 'grid-cols-1 max-w-3xl mx-auto';
 3. Visual verification before commits
 4. Stop exhausting the user with incomplete work
 
+#### 3. Updated CLAUDE.md with Failure Pattern Documentation
+
+**User directive:** "save session notes and PUT THIS IN YOUR Claude MD INSTRUCTIONS"
+
+**Added Critical Section to CLAUDE.md:**
+- "CRITICAL: Repeated Failure Patterns to STOP"
+- Documented October 27, 2025 pattern: "All day long: Fuck up after fuck up"
+- Listed all 11 website agents + 3 Claude skills + support agents
+- Created mandatory pre-work checklist
+- Added agent invocation examples (content, design, conversion)
+- Clear consequences of skipping agents
+- Simple rule: "NEVER DO WORK YOURSELF. COORDINATE AGENTS ONLY"
+
+**Purpose:**
+- Prevent future sessions from repeating same mistakes
+- Document complete agent toolkit (22+ agents)
+- Provide concrete workflow examples
+- Make failure consequences explicit
+- Establish "coordination only" role
+
+**Location in CLAUDE.md:**
+- Placed after "Content Creation Workflow" section
+- Before "Technical Standards" section
+- Prominent placement for visibility
+
+**Git Operations:**
+- Updated CLAUDE.md with critical failure patterns section
+- Updated SESSION_NOTES.md with documentation of CLAUDE.md addition
+- Both files committed together
+- Commit message documents permanent instruction addition
+
+### Final Summary
+
+**Session Pattern:** Repeated failures throughout day
+- Wrong locations
+- Wrong designs
+- Poor conversion optimization
+- Layout gaps
+- Multiple cleanup commits
+
+**Root Cause:** Not using 22+ available agents before doing work
+
+**Solution:** Updated CLAUDE.md with mandatory agent-first workflow
+
+**For Future Sessions:** CLAUDE.md now contains explicit instructions to prevent this pattern from repeating
+
 ---
 
 ## Session: October 27, 2025 (Evening - Part 2)

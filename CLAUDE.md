@@ -75,6 +75,148 @@ If you write content directly = TASK FAILED
 If you skip agent invocation = TASK FAILED
 ```
 
+## CRITICAL: Repeated Failure Patterns to STOP
+
+### The October 27, 2025 Pattern
+
+**All day long: Fuck up after fuck up**
+
+**Failure Pattern Observed:**
+1. User asks for work
+2. Claude does it himself quickly without agents
+3. Creates problems (wrong location, wrong design, layout gaps, poor conversion)
+4. Has to invoke agents to fix the mess
+5. Multiple commits for single task
+6. Exhausted frustrated user
+
+**Example Failures:**
+- Created pages in wrong location (guides/ instead of affiliate/)
+- Wrong design that didn't match site
+- Left hyphens everywhere despite rules
+- Only 1 CTA on affiliate pages (terrible conversion)
+- Removed Good Sam and left huge layout gaps
+- Didn't coordinate with design agents before layout changes
+
+**Root Cause:**
+- **22+ agents available** (11 website specialists + skills + support agents)
+- **Claude doesn't use them FIRST**
+- Treats agents as "cleanup crew" instead of "primary workforce"
+- Rushes to implement directly
+- Creates cascade of problems
+
+### Available Agent Toolkit
+
+**11 Custom Website Agents:**
+1. design-agent-website
+2. frontend-dev-website
+3. accessibility-specialist-website
+4. quality-control-website
+5. cro-specialist-website
+6. pm-orchestrator-website
+7. content-strategist-website
+8. landing-page-specialist-website
+9. performance-analyst-website
+10. seo-specialist-website
+11. template-manager-website
+
+**3 Claude Skills:**
+1. webapp-testing (for visual verification)
+2. canvas-design (for design work)
+3. theme-factory (for styling)
+
+**Support Agents:**
+- stuck (human escalation)
+- tester (visual verification)
+
+### CORRECT WORKFLOW (Use This EVERY TIME)
+
+**User Request:** "Fix conversion on affiliate pages"
+
+**WRONG (What keeps happening):**
+1. Claude makes changes directly
+2. Creates problems (layout gaps, missing features)
+3. Invokes agents to fix problems Claude created
+4. Multiple commits
+5. User exhausted
+
+**RIGHT (What MUST happen):**
+1. **IMMEDIATELY invoke appropriate agents:**
+   - CRO Specialist (analyze conversion issues)
+   - Design Agent (design layout changes)
+   - Frontend Dev (implement coordinated changes)
+   - Tester Agent (visual verification)
+2. **Implement what agents return** (coordination only)
+3. **Use webapp-testing skill** to verify before commit
+4. **ONE commit** with everything done right
+5. User satisfied
+
+### Mandatory Pre-Work Checklist
+
+**Before touching ANY code or content, ask yourself:**
+
+- [ ] Have I identified which agents are needed?
+- [ ] Have I invoked ALL relevant agents FIRST?
+- [ ] Am I about to write code/content myself? (STOP if yes)
+- [ ] Will this require visual verification? (Use webapp-testing skill)
+- [ ] Is this multi-step? (Use TodoWrite to track)
+
+**If you answered NO to invoking agents: STOP. You're about to create another fuck up.**
+
+### Agent Invocation Examples
+
+**Content Creation:**
+```
+1. Invoke content-strategist-website
+2. Invoke landing-page-specialist-website
+3. Wait for both to return
+4. Invoke frontend-dev-website with their outputs
+5. Invoke quality-control-website to validate
+6. Commit once
+```
+
+**Design Changes:**
+```
+1. Invoke design-agent-website
+2. Wait for design specifications
+3. Invoke frontend-dev-website with design specs
+4. Invoke tester agent for visual verification
+5. Use webapp-testing skill if needed
+6. Commit once
+```
+
+**Conversion Optimization:**
+```
+1. Invoke cro-specialist-website
+2. Invoke design-agent-website for layout
+3. Invoke frontend-dev-website for implementation
+4. Invoke tester agent for verification
+5. Commit once
+```
+
+### Consequences of Skipping Agents
+
+**What happens when you skip agents:**
+- Wrong implementation requiring rework
+- Layout gaps and design issues
+- Poor conversion optimization
+- Multiple commits for single task
+- User frustration and exhaustion
+- Pattern of "fuck up after fuck up"
+
+**What happens when you use agents first:**
+- Right implementation first time
+- Coordinated design and functionality
+- Professional quality output
+- Single clean commit
+- User satisfaction
+
+### The Simple Rule
+
+**NEVER DO WORK YOURSELF. COORDINATE AGENTS ONLY.**
+
+If you find yourself writing code, writing content, or making design decisions:
+**STOP. You're violating this rule. Invoke agents instead.**
+
 ## Technical Standards
 
 ### SEO Requirements
