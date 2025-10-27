@@ -28,6 +28,7 @@ export const OptimizedAffiliateGrid: React.FC<OptimizedAffiliateGridProps> = ({
 }) => {
   const getGridClass = () => {
     switch (gridCols) {
+      case '1': return 'grid-cols-1 max-w-3xl mx-auto';
       case '2': return 'grid-cols-1 lg:grid-cols-2';
       case '3': return 'grid-cols-1 lg:grid-cols-2 xl:grid-cols-3';
       case '4': return 'grid-cols-1 lg:grid-cols-2 xl:grid-cols-4';
