@@ -30,24 +30,14 @@ const TechnologyChecklist = lazy(() => import("../pages/tools/TechnologyChecklis
 const LifestylePlanner = lazy(() => import("../pages/tools/LifestylePlanner"));
 const IntelligentRVFinder = lazy(() => import("../pages/tools/IntelligentRVFinder"));
 
-// RV Life Pro Affiliate Pages - lazy loaded
-const RVLifeProHero = lazy(() => import("../pages/affiliate/rv-life-pro/RVLifeProHero"));
-const RVLifeProStory = lazy(() => import("../pages/affiliate/rv-life-pro/RVLifeProStory"));
-const RVLifeProComparison = lazy(() => import("../pages/affiliate/rv-life-pro/RVLifeProComparison"));
-const RVLifeProFAQ = lazy(() => import("../pages/affiliate/rv-life-pro/RVLifeProFAQ"));
-const RVLifeProCampgrounds = lazy(() => import("../pages/affiliate/rv-life-pro/RVLifeProCampgrounds"));
-const WeekendWarriors = lazy(() => import("../pages/affiliate/rv-life-pro/scenarios/WeekendWarriors"));
-const GreyNomads = lazy(() => import("../pages/affiliate/rv-life-pro/scenarios/GreyNomads"));
-const DigitalNomads = lazy(() => import("../pages/affiliate/rv-life-pro/scenarios/DigitalNomads"));
-
-// Brentwood Home Affiliate Pages - lazy loaded
-const UltimateRVMattressBuyingGuide = lazy(() => import("../pages/affiliate/brentwood-home/UltimateRVMattressBuyingGuide"));
-const RVMattressSizeGuide = lazy(() => import("../pages/affiliate/brentwood-home/RVMattressSizeGuide"));
-const RVSleepCrisis = lazy(() => import("../pages/affiliate/brentwood-home/RVSleepCrisis"));
-const BrentwoodHomeShowcase = lazy(() => import("../pages/affiliate/brentwood-home/BrentwoodHomeShowcase"));
-const HealthWellnessBenefits = lazy(() => import("../pages/affiliate/brentwood-home/HealthWellnessBenefits"));
-const MattressROICalculator = lazy(() => import("../pages/affiliate/brentwood-home/MattressROICalculator"));
-const InstallationCareGuide = lazy(() => import("../pages/affiliate/brentwood-home/InstallationCareGuide"));
+// RV Life Pro Affiliate Pages
+const RVTripPlanningGuide = lazy(() => import("../pages/affiliate/RVTripPlanningGuide"));
+const BestRVGPSComparison = lazy(() => import("../pages/affiliate/BestRVGPSComparison"));
+const RVNavigationAppGuide = lazy(() => import("../pages/affiliate/RVNavigationAppGuide"));
+const RVCampgroundFinder = lazy(() => import("../pages/affiliate/RVCampgroundFinder"));
+const FamilyRVTravelGuide = lazy(() => import("../pages/affiliate/FamilyRVTravelGuide"));
+const FullTimeRVLivingGuide = lazy(() => import("../pages/affiliate/FullTimeRVLivingGuide"));
+const RemoteWorkRVGuide = lazy(() => import("../pages/affiliate/RemoteWorkRVGuide"));
 
 const contentRoutes: RouteObject[] = [
   {
@@ -262,24 +252,12 @@ const contentRoutes: RouteObject[] = [
     ),
     errorElement: <ErrorPage />,
   },
-  // RV Life Pro Landing Pages - SEO Optimized URLs
-  {
-    path: "/rv-gps-navigation",
-    element: (
-      <Suspense fallback={<MinimalLoader />}>
-        <RouteTransition>
-          <RVLifeProHero />
-        </RouteTransition>
-      </Suspense>
-    ),
-    errorElement: <ErrorPage />,
-  },
   {
     path: "/rv-trip-planning-guide",
     element: (
       <Suspense fallback={<MinimalLoader />}>
         <RouteTransition>
-          <RVLifeProStory />
+          <RVTripPlanningGuide />
         </RouteTransition>
       </Suspense>
     ),
@@ -290,7 +268,7 @@ const contentRoutes: RouteObject[] = [
     element: (
       <Suspense fallback={<MinimalLoader />}>
         <RouteTransition>
-          <RVLifeProComparison />
+          <BestRVGPSComparison />
         </RouteTransition>
       </Suspense>
     ),
@@ -301,7 +279,7 @@ const contentRoutes: RouteObject[] = [
     element: (
       <Suspense fallback={<MinimalLoader />}>
         <RouteTransition>
-          <RVLifeProFAQ />
+          <RVNavigationAppGuide />
         </RouteTransition>
       </Suspense>
     ),
@@ -312,7 +290,7 @@ const contentRoutes: RouteObject[] = [
     element: (
       <Suspense fallback={<MinimalLoader />}>
         <RouteTransition>
-          <RVLifeProCampgrounds />
+          <RVCampgroundFinder />
         </RouteTransition>
       </Suspense>
     ),
@@ -323,7 +301,7 @@ const contentRoutes: RouteObject[] = [
     element: (
       <Suspense fallback={<MinimalLoader />}>
         <RouteTransition>
-          <WeekendWarriors />
+          <FamilyRVTravelGuide />
         </RouteTransition>
       </Suspense>
     ),
@@ -334,7 +312,7 @@ const contentRoutes: RouteObject[] = [
     element: (
       <Suspense fallback={<MinimalLoader />}>
         <RouteTransition>
-          <GreyNomads />
+          <FullTimeRVLivingGuide />
         </RouteTransition>
       </Suspense>
     ),
@@ -345,85 +323,7 @@ const contentRoutes: RouteObject[] = [
     element: (
       <Suspense fallback={<MinimalLoader />}>
         <RouteTransition>
-          <DigitalNomads />
-        </RouteTransition>
-      </Suspense>
-    ),
-    errorElement: <ErrorPage />,
-  },
-  // Brentwood Home Mattress Landing Pages - SEO Optimized URLs
-  {
-    path: "/rv-mattress-guide",
-    element: (
-      <Suspense fallback={<MinimalLoader />}>
-        <RouteTransition>
-          <UltimateRVMattressBuyingGuide />
-        </RouteTransition>
-      </Suspense>
-    ),
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: "/rv-mattress-sizes",
-    element: (
-      <Suspense fallback={<MinimalLoader />}>
-        <RouteTransition>
-          <RVMattressSizeGuide />
-        </RouteTransition>
-      </Suspense>
-    ),
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: "/rv-sleep-crisis",
-    element: (
-      <Suspense fallback={<MinimalLoader />}>
-        <RouteTransition>
-          <RVSleepCrisis />
-        </RouteTransition>
-      </Suspense>
-    ),
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: "/brentwood-home-rv-mattresses",
-    element: (
-      <Suspense fallback={<MinimalLoader />}>
-        <RouteTransition>
-          <BrentwoodHomeShowcase />
-        </RouteTransition>
-      </Suspense>
-    ),
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: "/rv-mattress-health-benefits",
-    element: (
-      <Suspense fallback={<MinimalLoader />}>
-        <RouteTransition>
-          <HealthWellnessBenefits />
-        </RouteTransition>
-      </Suspense>
-    ),
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: "/rv-mattress-roi-calculator",
-    element: (
-      <Suspense fallback={<MinimalLoader />}>
-        <RouteTransition>
-          <MattressROICalculator />
-        </RouteTransition>
-      </Suspense>
-    ),
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: "/rv-mattress-installation",
-    element: (
-      <Suspense fallback={<MinimalLoader />}>
-        <RouteTransition>
-          <InstallationCareGuide />
+          <RemoteWorkRVGuide />
         </RouteTransition>
       </Suspense>
     ),
