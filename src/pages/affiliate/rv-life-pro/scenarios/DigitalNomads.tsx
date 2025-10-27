@@ -558,7 +558,7 @@ const DigitalNomads: React.FC = () => {
             <RVLifeCard
               icon={<Calendar className="w-6 h-6" />}
               headline="Full-Time Freedom: Grey Nomads"
-              body="Discover how Robert & Jennifer transitioned to full-time RV living and have travelled 47,000km across Australia without a single navigation issue."
+              body="Discover how Robert & Jennifer transitioned to full time RV living and have travelled 47,000km across Australia without a single navigation issue."
               cta={{
                 text: 'Read Their Story',
                 href: '/affiliate/rv-life-pro/scenarios/grey-nomads',

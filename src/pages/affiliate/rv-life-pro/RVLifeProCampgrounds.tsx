@@ -1320,7 +1320,7 @@ export const RVLifeProCampgrounds: React.FC = () => {
                   </li>
                   <li className="flex items-start gap-2 text-sm">
                     <X className="w-4 h-4 text-red-500 flex-shrink-0 mt-0.5" />
-                    <span>No RV-specific details (size, hookups)</span>
+                    <span>No RV specific details (size, hookups)</span>
                   </li>
                   <li className="flex items-start gap-2 text-sm">
                     <X className="w-4 h-4 text-red-500 flex-shrink-0 mt-0.5" />
@@ -1358,7 +1358,7 @@ export const RVLifeProCampgrounds: React.FC = () => {
                   </li>
                   <li className="flex items-start gap-2 text-sm">
                     <CheckCircle className="w-4 h-4 text-[var(--rv-life-secondary-green)] flex-shrink-0 mt-0.5" />
-                    <span>RV-specific information (size, power, access)</span>
+                    <span>RV specific information (size, power, access)</span>
                   </li>
                   <li className="flex items-start gap-2 text-sm">
                     <CheckCircle className="w-4 h-4 text-[var(--rv-life-secondary-green)] flex-shrink-0 mt-0.5" />
@@ -1519,7 +1519,7 @@ export const RVLifeProCampgrounds: React.FC = () => {
                 Perfect for Every Type of RV Adventure
               </h2>
               <p className="rv-body-large text-[var(--rv-text-muted)] max-w-3xl mx-auto">
-                Whether you're planning a weekend escape or a cross-country odyssey, our database has you covered.
+                Whether you're planning a weekend escape or a cross country odyssey, our database has you covered.
               </p>
             </div>
 

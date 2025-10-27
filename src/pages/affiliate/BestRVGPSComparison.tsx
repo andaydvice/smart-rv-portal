@@ -165,7 +165,7 @@ const BestRVGPSComparison = () => {
                 name: 'RV Life',
                 url: 'https://rvlife.com',
                 title: 'RV Life Pro - App Based GPS',
-                description: 'Professional RV GPS navigation with the largest campground database, advanced trip planning, and real-time updates at a fraction of hardware GPS cost.',
+                description: 'Professional RV GPS navigation with the largest campground database, advanced trip planning, and real time updates at a fraction of hardware GPS cost.',
                 features: [
                   'RV-safe routing with height/weight restrictions',
                   '25,000+ campground locations with booking',

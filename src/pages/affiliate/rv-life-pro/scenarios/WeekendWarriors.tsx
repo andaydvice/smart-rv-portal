@@ -182,7 +182,7 @@ const WeekendWarriors: React.FC = () => {
 
         {/* Open Graph */}
         <meta property="og:title" content="First Cross-Country Adventure: The Patterson Family Story" />
-        <meta property="og:description" content="How a first-time RV family completed 3,200km with three kids - stress-free, on budget, and creating memories that last a lifetime." />
+        <meta property="og:description" content="How a first time RV family completed 3,200km with three kids - stress-free, on budget, and creating memories that last a lifetime." />
         <meta property="og:type" content="article" />
         <meta property="og:url" content="https://smartrvportal.com.au/affiliate/rv-life-pro/scenarios/weekend-warriors" />
       </Helmet>
@@ -554,7 +554,7 @@ const WeekendWarriors: React.FC = () => {
             <RVLifeCard
               icon={<Home className="w-6 h-6" />}
               headline="Full-Time Freedom: Grey Nomads"
-              body="Discover how Robert & Jennifer transitioned to full-time RV living and have travelled 47,000km across Australia without a single navigation issue."
+              body="Discover how Robert & Jennifer transitioned to full time RV living and have travelled 47,000km across Australia without a single navigation issue."
               cta={{
                 text: 'Read Their Story',
                 href: '/affiliate/rv-life-pro/scenarios/grey-nomads',

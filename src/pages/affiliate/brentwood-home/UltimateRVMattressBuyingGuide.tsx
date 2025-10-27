@@ -271,7 +271,7 @@ const UltimateRVMattressBuyingGuide: React.FC = () => {
                 {
                   question: 'Can I use a regular home mattress in my RV?',
                   answer:
-                    "While technically possible, it's not recommended. RV mattresses are designed for RV-specific dimensions, weight restrictions, and access challenges. Standard home mattresses are typically too large, too heavy, and difficult to maneuver into RV bedrooms.",
+                    "While technically possible, it's not recommended. RV mattresses are designed for RV specific dimensions, weight restrictions, and access challenges. Standard home mattresses are typically too large, too heavy, and difficult to maneuver into RV bedrooms.",
                   category: 'general',
                 },
                 {
@@ -289,7 +289,7 @@ const UltimateRVMattressBuyingGuide: React.FC = () => {
                 {
                   question: 'Do I need special sheets for an RV mattress?',
                   answer:
-                    "Yes, typically. Since RV mattresses are often shorter and may have custom shapes, standard residential sheets may not fit properly. Look for RV-specific sheets or deep-pocket sheets that can accommodate your mattress's exact dimensions.",
+                    "Yes, typically. Since RV mattresses are often shorter and may have custom shapes, standard residential sheets may not fit properly. Look for RV specific sheets or deep-pocket sheets that can accommodate your mattress's exact dimensions.",
                   category: 'care',
                 },
               ]}

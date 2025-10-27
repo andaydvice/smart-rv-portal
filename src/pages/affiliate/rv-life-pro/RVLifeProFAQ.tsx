@@ -818,7 +818,7 @@ const ObjectionHandlerSection: React.FC = () => {
       counterArgument: "Free doesn't mean safe for RVs",
       proof: (
         <>
-          Google Maps has <strong>zero RV-specific features</strong>. It doesn't know your height, weight, or propane
+          Google Maps has <strong>zero RV specific features</strong>. It doesn't know your height, weight, or propane
           restrictions. One mistake costs more than <strong>100 years</strong> of RV Life Pro.
         </>
       ),

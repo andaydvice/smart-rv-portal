@@ -56,7 +56,7 @@ const RemoteWorkRVGuide = () => {
             <div className="bg-connectivity-darkBg p-8 rounded-lg border border-gray-700 text-left">
               <h2 className="text-2xl font-semibold text-blue-400 mb-4">The Remote Work RV Revolution</h2>
               <div className="text-gray-300 mb-6 space-y-4">
-                <p>Over 4.7 million remote workers now travel full-time or part-time in RVs, combining work flexibility with location freedom.</p>
+                <p>Over 4.7 million remote workers now travel full time or part time in RVs, combining work flexibility with location freedom.</p>
 
                 <p>Remote RV workers report 35% higher job satisfaction and 28% increased productivity compared to traditional office environments.</p>
 
@@ -123,7 +123,7 @@ const RemoteWorkRVGuide = () => {
                     <ul className="list-disc list-inside space-y-1 text-sm">
                       <li>Works in remote areas without cell coverage</li>
                       <li>High-speed connection ($120-150/month)</li>
-                      <li>RV-specific mobile plan available</li>
+                      <li>RV specific mobile plan available</li>
                       <li>Requires clear view of northern sky</li>
                     </ul>
                   </div>

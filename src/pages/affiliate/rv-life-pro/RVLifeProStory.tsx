@@ -99,7 +99,7 @@ export const RVLifeProStory: React.FC = () => {
         <title>The $15,000 Bridge Strike: One Family's Journey to Safe RV Travel | RV Life Pro</title>
         <meta
           name="description"
-          content="How one preventable disaster changed everything. Discover how Australian RV families are avoiding costly mistakes with RV-specific GPS navigation. Real stories, verified results."
+          content="How one preventable disaster changed everything. Discover how Australian RV families are avoiding costly mistakes with RV specific GPS navigation. Real stories, verified results."
         />
         <meta name="keywords" content="RV GPS Australia, caravan navigation, bridge strike prevention, RV Life Pro, safe RV routes, Australian caravan travel" />
         <link rel="canonical" href="https://smartrvportal.com/rv-life-pro/story" />
@@ -791,7 +791,7 @@ export const RVLifeProStory: React.FC = () => {
                   description={features[4].detailedBenefit}
                   benefits={[
                     'Download regional maps before departure',
-                    'Full RV-specific routing without reception',
+                    'Full RV specific routing without reception',
                     'All campgrounds and facilities available offline',
                     'Syncs updates when you reconnect',
                   ]}

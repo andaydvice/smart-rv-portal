@@ -171,11 +171,11 @@ const GreyNomads: React.FC = () => {
           name="description"
           content="How Robert & Jennifer sold their house, bought a motorhome, and travelled 47,000km across Australia full-time using RV Life Pro. Remote area navigation, seasonal planning, and community connection."
         />
-        <meta name="keywords" content="full-time RV living, grey nomads, retirement travel, motorhome Australia, remote area navigation, RV Life Pro" />
+        <meta name="keywords" content="full time RV living, grey nomads, retirement travel, motorhome Australia, remote area navigation, RV Life Pro" />
         <link rel="canonical" href="https://smartrvportal.com.au/affiliate/rv-life-pro/scenarios/grey-nomads" />
 
         <meta property="og:title" content="Full-Time Freedom: Robert & Jennifer's Transition" />
-        <meta property="og:description" content="From house sale to 47,000km of Australian exploration - how retirees achieved their full-time RV dream safely and successfully." />
+        <meta property="og:description" content="From house sale to 47,000km of Australian exploration - how retirees achieved their full time RV dream safely and successfully." />
         <meta property="og:type" content="article" />
       </Helmet>
 
@@ -416,7 +416,7 @@ const GreyNomads: React.FC = () => {
           >
             <h2 className="rv-headline-primary mb-4">Perfect for Full-Time Travellers</h2>
             <p className="rv-body-large text-[var(--rv-text-secondary)] max-w-3xl mx-auto">
-              Features specifically designed for extended journeys and full-time RV living
+              Features specifically designed for extended journeys and full time RV living
             </p>
           </motion.div>
 
@@ -424,7 +424,7 @@ const GreyNomads: React.FC = () => {
             <RVLifeCard
               icon={<Route className="w-6 h-6" />}
               headline="Long-Term Route Planning"
-              body="Plan multi-month journeys with seasonal considerations. Track your route history and revisit favourite locations. Perfect for full-time travellers exploring Australia."
+              body="Plan multi-month journeys with seasonal considerations. Track your route history and revisit favourite locations. Perfect for full time travellers exploring Australia."
               delay={0}
             />
             <RVLifeCard

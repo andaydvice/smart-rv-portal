@@ -1258,7 +1258,7 @@ const SupportReliabilitySection: React.FC = () => {
         <RVLifeCard
           icon={<Users className="w-8 h-8" />}
           headline="Active Community"
-          body="47,000+ active users sharing real-time updates, tips, and campground reviews. Community-driven data verification."
+          body="47,000+ active users sharing real time updates, tips, and campground reviews. Community-driven data verification."
           variant="default"
         />
         <RVLifeCard
@@ -1353,7 +1353,7 @@ const PricingComparison: React.FC = () => {
           }}
           features={[
             '14,000+ campground database',
-            'RV-specific routing',
+            'RV specific routing',
             'Offline maps included',
             'Maintenance tracking',
             'Weather-aware navigation',
@@ -1458,7 +1458,7 @@ const PricingComparison: React.FC = () => {
           ))}
         </div>
         <div className="mt-6 text-center text-sm text-[var(--rv-text-muted)]">
-          * Regular GPS apps are free but lack RV-specific features, potentially costing thousands in damages
+          * Regular GPS apps are free but lack RV specific features, potentially costing thousands in damages
         </div>
       </div>
     </motion.div>

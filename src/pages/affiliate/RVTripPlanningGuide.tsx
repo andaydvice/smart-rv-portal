@@ -60,7 +60,7 @@ const RVTripPlanningGuide = () => {
 
                 <p>In 2023 alone, insurance companies processed over 1,200 bridge strike claims averaging $75,000 in damages.</p>
 
-                <p>Professional trip planning with RV-specific routing prevents these disasters before they happen.</p>
+                <p>Professional trip planning with RV specific routing prevents these disasters before they happen.</p>
               </div>
               <div className="bg-red-900/20 border border-red-500 p-4 rounded-lg mb-6">
                 <AlertTriangle className="h-6 w-6 text-red-400 mb-2" />
@@ -70,7 +70,7 @@ const RVTripPlanningGuide = () => {
                 </p>
               </div>
               <ul className="list-disc list-inside space-y-3 text-gray-300">
-                <li>RV-specific route planning with clearance verification</li>
+                <li>RV specific route planning with clearance verification</li>
                 <li>Bridge and tunnel height restriction database</li>
                 <li>Weight-restricted road identification</li>
                 <li>Campground booking integration</li>
@@ -126,7 +126,7 @@ const RVTripPlanningGuide = () => {
 
           <OptimizedAffiliateGrid
             title="Professional RV Trip Planning Tools"
-            subtitle="Avoid bridge strikes and plan safe routes with RV-specific navigation"
+            subtitle="Avoid bridge strikes and plan safe routes with RV specific navigation"
             partners={[
               {
                 name: 'RV Life',

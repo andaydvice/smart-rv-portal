@@ -46,7 +46,7 @@ const RVNavigationAppGuide = () => {
                   <h1 className="text-5xl font-bold text-white">RV Navigation App Guide</h1>
                 </div>
                 <p className="text-xl text-white/90 max-w-2xl">
-                  Navigate safely with RV-specific mobile apps that prevent bridge strikes and find campgrounds
+                  Navigate safely with RV specific mobile apps that prevent bridge strikes and find campgrounds
                 </p>
               </div>
             </div>
@@ -60,7 +60,7 @@ const RVNavigationAppGuide = () => {
 
                 <p>Standard navigation apps do not account for RV height, weight, or width restrictions.</p>
 
-                <p>RV-specific apps prevent disasters by routing around restrictions and providing campground integration.</p>
+                <p>RV specific apps prevent disasters by routing around restrictions and providing campground integration.</p>
               </div>
               <div className="bg-green-900/20 border border-green-500 p-4 rounded-lg mb-6">
                 <Zap className="h-6 w-6 text-green-400 mb-2" />

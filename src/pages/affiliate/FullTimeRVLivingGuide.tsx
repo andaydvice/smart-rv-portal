@@ -14,11 +14,11 @@ const FullTimeRVLivingGuide = () => {
     <Layout>
       <Helmet>
         <title>Full-Time RV Living Guide 2024 | Complete Lifestyle Guide</title>
-        <meta name="description" content="Complete guide to full-time RV living including budgeting, domicile, mail forwarding, internet, healthcare, and campground selection for nomadic lifestyle." />
+        <meta name="description" content="Complete guide to full time RV living including budgeting, domicile, mail forwarding, internet, healthcare, and campground selection for nomadic lifestyle." />
         <link rel="canonical" href={canonicalUrl} />
         <script type="application/ld+json">{JSON.stringify(productSchema({
           name: 'Full-Time RV Living Guide',
-          description: 'Comprehensive guide for transitioning to and maintaining full-time RV living lifestyle with practical tips and resources.',
+          description: 'Comprehensive guide for transitioning to and maintaining full time RV living lifestyle with practical tips and resources.',
           url: canonicalUrl,
           brand: 'Smart RV Hub',
           category: 'Full-Time RV Living',
@@ -46,7 +46,7 @@ const FullTimeRVLivingGuide = () => {
                   <h1 className="text-5xl font-bold text-white">Full-Time RV Living Guide</h1>
                 </div>
                 <p className="text-xl text-white/90 max-w-2xl">
-                  Everything you need to know about living the full-time RV lifestyle
+                  Everything you need to know about living the full time RV lifestyle
                 </p>
               </div>
             </div>
@@ -56,11 +56,11 @@ const FullTimeRVLivingGuide = () => {
             <div className="bg-connectivity-darkBg p-8 rounded-lg border border-gray-700 text-left">
               <h2 className="text-2xl font-semibold text-blue-400 mb-4">The Full-Time RV Lifestyle Reality</h2>
               <div className="text-gray-300 mb-6 space-y-4">
-                <p>Over 1 million Americans now live full-time in RVs, with the number growing 64% in the past five years.</p>
+                <p>Over 1 million Americans now live full time in RVs, with the number growing 64% in the past five years.</p>
 
                 <p>Full-timers report an average 50-70% reduction in living expenses compared to traditional housing while gaining location freedom.</p>
 
-                <p>Successful full-time RV living requires proper planning for domicile, mail, healthcare, connectivity, and campground management.</p>
+                <p>Successful full time RV living requires proper planning for domicile, mail, healthcare, connectivity, and campground management.</p>
               </div>
               <div className="bg-indigo-900/20 border border-indigo-500 p-4 rounded-lg mb-6">
                 <TrendingUp className="h-6 w-6 text-indigo-400 mb-2" />
@@ -88,7 +88,7 @@ const FullTimeRVLivingGuide = () => {
                 <Briefcase className="h-6 w-6 text-yellow-400 mb-4" />
                 <h3 className="text-xl font-semibold text-white mb-2">Work & Income</h3>
                 <p className="text-gray-300">
-                  Remote work, freelancing, and location-independent income sources enable sustainable full-time travel.
+                  Remote work, freelancing, and location-independent income sources enable sustainable full time travel.
                 </p>
               </div>
 
@@ -176,7 +176,7 @@ const FullTimeRVLivingGuide = () => {
                 name: 'RV Life',
                 url: 'https://rvlife.com',
                 title: 'RV Life Pro - Full-Timer Edition',
-                description: 'Complete trip planning and campground management system designed for full-time RVers with extended stay options and membership tracking.',
+                description: 'Complete trip planning and campground management system designed for full time RVers with extended stay options and membership tracking.',
                 features: [
                   '25,000+ campground database with long-term options',
                   'Trip planning for continuous travel',
@@ -190,7 +190,7 @@ const FullTimeRVLivingGuide = () => {
                 name: 'Good Sam',
                 url: 'https://goodsam.com',
                 title: 'Good Sam Full-Timer Protection',
-                description: 'Essential roadside assistance and camping discounts for full-time RVers living on the road year-round.',
+                description: 'Essential roadside assistance and camping discounts for full time RVers living on the road year-round.',
                 features: [
                   '24/7 emergency roadside assistance',
                   '10% camping discounts at 2,000+ parks',
