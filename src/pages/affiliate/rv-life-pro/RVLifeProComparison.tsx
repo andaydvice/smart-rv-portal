@@ -8,6 +8,7 @@
  */
 
 import React, { useState } from 'react';
+import Layout from '@/components/layout/Layout';
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import {
@@ -81,6 +82,7 @@ export const RVLifeProComparison: React.FC = () => {
   }, [selectedCalculatorValues]);
 
   return (
+    <Layout>
     <div className="min-h-screen bg-[var(--rv-life-off-white)]">
       {/* Exit Intent Modal */}
       <ExitIntentModal />
@@ -326,6 +328,8 @@ export const RVLifeProComparison: React.FC = () => {
         </div>
       </section>
     </div>
+
+    </Layout>
   );
 };
 
@@ -467,6 +471,7 @@ const ComparisonTable: React.FC = () => {
   ];
 
   return (
+    <Layout>
     <div className="rv-card-base p-0 overflow-hidden">
       {/* Desktop Table View */}
       <div className="hidden lg:block overflow-x-auto">
@@ -588,6 +593,8 @@ const ComparisonTable: React.FC = () => {
         ))}
       </div>
     </div>
+
+    </Layout>
   );
 };
 
@@ -644,6 +651,7 @@ const FeatureDeepDive: React.FC<FeatureDeepDiveProps> = ({ feature, index }) => 
   const isEven = index % 2 === 0;
 
   return (
+    <Layout>
     <motion.div
       className={cn(
         'flex flex-col gap-8',
@@ -717,6 +725,8 @@ const FeatureDeepDive: React.FC<FeatureDeepDiveProps> = ({ feature, index }) => 
         </div>
       </div>
     </motion.div>
+
+    </Layout>
   );
 };
 
@@ -739,6 +749,7 @@ interface ROICalculatorProps {
 
 const ROICalculator: React.FC<ROICalculatorProps> = ({ values, onChange, result }) => {
   return (
+    <Layout>
     <div className="rv-card-base p-8">
       <div className="grid md:grid-cols-2 gap-8">
         {/* Input Section */}
@@ -880,6 +891,8 @@ const ROICalculator: React.FC<ROICalculatorProps> = ({ values, onChange, result 
         </div>
       </div>
     </div>
+
+    </Layout>
   );
 };
 
@@ -925,6 +938,7 @@ const DatabaseComparison: React.FC = () => {
   const maxCampgrounds = Math.max(...databaseStats.map(s => s.campgrounds));
 
   return (
+    <Layout>
     <motion.div
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
@@ -1033,6 +1047,8 @@ const DatabaseComparison: React.FC = () => {
         </div>
       </div>
     </motion.div>
+
+    </Layout>
   );
 };
 
@@ -1068,6 +1084,7 @@ const UserExperienceComparison: React.FC = () => {
   ];
 
   return (
+    <Layout>
     <motion.div
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
@@ -1205,6 +1222,8 @@ const UserExperienceComparison: React.FC = () => {
         </div>
       </div>
     </motion.div>
+
+    </Layout>
   );
 };
 
@@ -1213,6 +1232,7 @@ const UserExperienceComparison: React.FC = () => {
  */
 const SupportReliabilitySection: React.FC = () => {
   return (
+    <Layout>
     <motion.div
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
@@ -1290,6 +1310,8 @@ const SupportReliabilitySection: React.FC = () => {
         </table>
       </div>
     </motion.div>
+
+    </Layout>
   );
 };
 
@@ -1298,6 +1320,7 @@ const SupportReliabilitySection: React.FC = () => {
  */
 const PricingComparison: React.FC = () => {
   return (
+    <Layout>
     <motion.div
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
@@ -1439,6 +1462,8 @@ const PricingComparison: React.FC = () => {
         </div>
       </div>
     </motion.div>
+
+    </Layout>
   );
 };
 
@@ -1478,6 +1503,7 @@ const DecisionMatrix: React.FC = () => {
   ];
 
   return (
+    <Layout>
     <motion.div
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
@@ -1547,6 +1573,8 @@ const DecisionMatrix: React.FC = () => {
         </RVLifeButton>
       </motion.div>
     </motion.div>
+
+    </Layout>
   );
 };
 

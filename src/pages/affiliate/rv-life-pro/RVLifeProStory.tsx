@@ -10,6 +10,7 @@
  */
 
 import React, { useState } from 'react';
+import Layout from '@/components/layout/Layout';
 import { motion } from 'framer-motion';
 import { Helmet } from 'react-helmet-async';
 import {
@@ -91,6 +92,7 @@ export const RVLifeProStory: React.FC = () => {
   };
 
   return (
+    <Layout>
     <>
       {/* SEO and Schema Markup */}
       <Helmet>
@@ -1552,6 +1554,8 @@ export const RVLifeProStory: React.FC = () => {
         />
       </div>
     </>
+
+    </Layout>
   );
 };
 
