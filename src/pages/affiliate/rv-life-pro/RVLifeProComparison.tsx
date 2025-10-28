@@ -9,6 +9,7 @@
 
 import React, { useState } from 'react';
 import Layout from '@/components/layout/Layout';
+import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import {
@@ -81,8 +82,29 @@ export const RVLifeProComparison: React.FC = () => {
     setRoiResult({ totalRisk, yearsOfService, breakEvenTrips });
   }, [selectedCalculatorValues]);
 
+  const canonicalUrl = typeof window !== 'undefined' ? `${window.location.origin}/rv-life-pro/comparison` : '';
+
   return (
     <Layout>
+      <Helmet>
+        <title>RV Life Pro vs Competitors 2025 | Complete Feature Comparison</title>
+        <meta name="description" content="Compare RV Life Pro with Garmin, Google Maps, and other RV GPS solutions. Detailed feature analysis, pricing comparison, and ROI calculator for RV navigation." />
+        <link rel="canonical" href={canonicalUrl} />
+
+        {/* Open Graph tags */}
+        <meta property="og:type" content="article" />
+        <meta property="og:title" content="RV Life Pro vs Competitors 2025 | Complete Feature Comparison" />
+        <meta property="og:description" content="Compare RV Life Pro with Garmin, Google Maps, and other RV GPS solutions. Detailed feature analysis, pricing comparison, and ROI calculator." />
+        <meta property="og:url" content={canonicalUrl} />
+        <meta property="og:image" content={typeof window !== 'undefined' ? `${window.location.origin}/og-image.svg` : ''} />
+
+        {/* Twitter Card tags */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="RV Life Pro vs Competitors 2025 | Complete Feature Comparison" />
+        <meta name="twitter:description" content="Compare RV Life Pro with Garmin, Google Maps, and other RV GPS solutions. Detailed feature analysis, pricing comparison, and ROI calculator." />
+        <meta name="twitter:image" content={typeof window !== 'undefined' ? `${window.location.origin}/og-image.svg` : ''} />
+      </Helmet>
+
     <div className="min-h-screen bg-[var(--rv-life-off-white)]">
       {/* Exit Intent Modal */}
       <ExitIntentModal />

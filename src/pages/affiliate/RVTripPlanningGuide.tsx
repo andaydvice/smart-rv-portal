@@ -13,9 +13,22 @@ const RVTripPlanningGuide = () => {
   return (
     <Layout>
       <Helmet>
-        <title>RV Trip Planning Guide 2024 | Route Planning & Safety Tips</title>
+        <title>RV Trip Planning Guide 2025 | Route Planning & Safety Tips</title>
         <meta name="description" content="Complete RV trip planning guide with route planning tips, height clearance warnings, bridge strike prevention, and campground booking strategies for safe RV travel." />
         <link rel="canonical" href={canonicalUrl} />
+
+        {/* Open Graph tags */}
+        <meta property="og:type" content="article" />
+        <meta property="og:title" content="RV Trip Planning Guide 2025 | Route Planning & Safety Tips" />
+        <meta property="og:description" content="Complete RV trip planning guide with route planning tips, height clearance warnings, bridge strike prevention, and campground booking strategies for safe RV travel." />
+        <meta property="og:url" content={canonicalUrl} />
+        <meta property="og:image" content={typeof window !== 'undefined' ? `${window.location.origin}/og-image.svg` : ''} />
+
+        {/* Twitter Card tags */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="RV Trip Planning Guide 2025 | Route Planning & Safety Tips" />
+        <meta name="twitter:description" content="Complete RV trip planning guide with route planning tips, height clearance warnings, bridge strike prevention, and campground booking strategies for safe RV travel." />
+        <meta name="twitter:image" content={typeof window !== 'undefined' ? `${window.location.origin}/og-image.svg` : ''} />
         <script type="application/ld+json">{JSON.stringify(productSchema({
           name: 'RV Trip Planning Guide',
           description: 'Comprehensive guide for planning safe RV trips with route optimization, clearance checking, and campground reservations.',

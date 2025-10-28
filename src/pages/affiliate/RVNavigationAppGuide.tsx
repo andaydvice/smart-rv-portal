@@ -13,9 +13,22 @@ const RVNavigationAppGuide = () => {
   return (
     <Layout>
       <Helmet>
-        <title>Best RV Navigation Apps 2024 | Complete App Comparison</title>
+        <title>Best RV Navigation Apps 2025 | Complete App Comparison</title>
         <meta name="description" content="Compare top RV navigation apps including RV Life Pro, Garmin, and Google Maps alternatives. Find the best RV navigation app for iPhone and Android." />
         <link rel="canonical" href={canonicalUrl} />
+
+        {/* Open Graph tags */}
+        <meta property="og:type" content="article" />
+        <meta property="og:title" content="Best RV Navigation Apps 2025 | Complete App Comparison" />
+        <meta property="og:description" content="Compare top RV navigation apps including RV Life Pro, Garmin, and Google Maps alternatives. Find the best RV navigation app for iPhone and Android." />
+        <meta property="og:url" content={canonicalUrl} />
+        <meta property="og:image" content={typeof window !== 'undefined' ? `${window.location.origin}/og-image.svg` : ''} />
+
+        {/* Twitter Card tags */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Best RV Navigation Apps 2025 | Complete App Comparison" />
+        <meta name="twitter:description" content="Compare top RV navigation apps including RV Life Pro, Garmin, and Google Maps alternatives. Find the best RV navigation app for iPhone and Android." />
+        <meta name="twitter:image" content={typeof window !== 'undefined' ? `${window.location.origin}/og-image.svg` : ''} />
         <script type="application/ld+json">{JSON.stringify(productSchema({
           name: 'RV Navigation App Guide',
           description: 'Comprehensive guide to RV navigation apps with features, pricing, and recommendations for mobile RV navigation.',

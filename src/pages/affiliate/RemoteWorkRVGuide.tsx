@@ -13,9 +13,22 @@ const RemoteWorkRVGuide = () => {
   return (
     <Layout>
       <Helmet>
-        <title>Remote Work from RV Guide 2024 | Digital Nomad RV Living</title>
+        <title>Remote Work from RV Guide 2025 | Digital Nomad RV Living</title>
         <meta name="description" content="Complete guide to working remotely from an RV including internet solutions, campground selection, workspace setup, and productivity tips for digital nomads." />
         <link rel="canonical" href={canonicalUrl} />
+
+        {/* Open Graph tags */}
+        <meta property="og:type" content="article" />
+        <meta property="og:title" content="Remote Work from RV Guide 2025 | Digital Nomad RV Living" />
+        <meta property="og:description" content="Complete guide to working remotely from an RV including internet solutions, campground selection, workspace setup, and productivity tips for digital nomads." />
+        <meta property="og:url" content={canonicalUrl} />
+        <meta property="og:image" content={typeof window !== 'undefined' ? `${window.location.origin}/og-image.svg` : ''} />
+
+        {/* Twitter Card tags */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Remote Work from RV Guide 2025 | Digital Nomad RV Living" />
+        <meta name="twitter:description" content="Complete guide to working remotely from an RV including internet solutions, campground selection, workspace setup, and productivity tips for digital nomads." />
+        <meta name="twitter:image" content={typeof window !== 'undefined' ? `${window.location.origin}/og-image.svg` : ''} />
         <script type="application/ld+json">{JSON.stringify(productSchema({
           name: 'Remote Work RV Guide',
           description: 'Comprehensive guide for remote workers and digital nomads living and working from RVs with connectivity and productivity tips.',
