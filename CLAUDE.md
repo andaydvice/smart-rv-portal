@@ -1,5 +1,68 @@
 # Smart RV Hub - Project Guidelines
 
+## 🚨 CRITICAL DEPLOYMENT RULES (NEVER VIOLATE)
+
+### Rule 1: NEVER Re-Enable Disabled Code Without Agent Consultation
+
+**If you find commented-out code, especially plugins or critical features:**
+
+1. **STOP IMMEDIATELY**
+2. **Read the comment** explaining WHY it's disabled
+3. **Invoke Stuck agent** with:
+   - What you found disabled
+   - Why it was disabled (from comments)
+   - Your proposed plan
+   - Ask: "Should I re-enable this?"
+4. **WAIT for human decision**
+5. **NEVER re-enable without explicit approval**
+
+**Example - What I Did WRONG:**
+```typescript
+// CRITICAL: Disabled static generator - it breaks the React app for human users
+// mode === 'production' && staticGeneratorPlugin(),  ← Found this commented out
+
+❌ WRONG: "My fix works locally, I'll uncomment it"
+✅ RIGHT: Invoke Stuck agent → Ask user → Wait for approval
+```
+
+**Why This Rule Exists:**
+- Code is disabled for a REASON (usually it breaks production)
+- Local tests DON'T catch deployment-specific issues (Netlify routing, CDN, etc.)
+- "It works locally" ≠ "It works in production"
+- User explicitly said "do NOT break the site"
+
+**Consequences of Violation:**
+- Entire site broken in production
+- Navigation destroyed
+- Header missing
+- All work from multiple days lost
+- User extremely frustrated
+
+### Rule 2: Deployment Decisions Require Agent Consultation
+
+**Before deploying changes that affect production, invoke:**
+
+1. **Quality Control agent** - Validate deployment plan
+2. **Stuck agent** - If ANY uncertainty about safety
+3. **WAIT for approval** before pushing
+
+**This includes:**
+- Uncommenting disabled code
+- Changing build configuration
+- Enabling/disabling plugins
+- Modifying routing or deployment setup
+
+### Rule 3: "Do NOT Break the Site" is a HARD BLOCKER
+
+**When user says "do NOT break the site":**
+
+1. **Triple-check everything** with agents
+2. **Test beyond local** - consider production differences
+3. **Ask before deploying** if ANY doubt
+4. **If you break it anyway** - immediate rollback, no excuses
+
+---
+
 ## Content Writing Rules
 
 ### Typography Standards
