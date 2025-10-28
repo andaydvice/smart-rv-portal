@@ -39,18 +39,6 @@ const FamilyRVTravelGuide = lazy(() => import("../pages/affiliate/FamilyRVTravel
 const FullTimeRVLivingGuide = lazy(() => import("../pages/affiliate/FullTimeRVLivingGuide"));
 const RemoteWorkRVGuide = lazy(() => import("../pages/affiliate/RemoteWorkRVGuide"));
 
-// RV Life Pro Deep Dive Pages
-const RVLifeProHero = lazy(() => import("../pages/affiliate/rv-life-pro/RVLifeProHero"));
-const RVLifeProCampgrounds = lazy(() => import("../pages/affiliate/rv-life-pro/RVLifeProCampgrounds"));
-const RVLifeProComparison = lazy(() => import("../pages/affiliate/rv-life-pro/RVLifeProComparison"));
-const RVLifeProFAQ = lazy(() => import("../pages/affiliate/rv-life-pro/RVLifeProFAQ"));
-const RVLifeProStory = lazy(() => import("../pages/affiliate/rv-life-pro/RVLifeProStory"));
-
-// RV Life Pro Scenario Pages
-const GreyNomads = lazy(() => import("../pages/affiliate/rv-life-pro/scenarios/GreyNomads"));
-const WeekendWarriors = lazy(() => import("../pages/affiliate/rv-life-pro/scenarios/WeekendWarriors"));
-const DigitalNomads = lazy(() => import("../pages/affiliate/rv-life-pro/scenarios/DigitalNomads"));
-
 const contentRoutes: RouteObject[] = [
   {
     path: "/technology",
@@ -336,94 +324,6 @@ const contentRoutes: RouteObject[] = [
       <Suspense fallback={<MinimalLoader />}>
         <RouteTransition>
           <RemoteWorkRVGuide />
-        </RouteTransition>
-      </Suspense>
-    ),
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: "/rv-life-pro",
-    element: (
-      <Suspense fallback={<MinimalLoader />}>
-        <RouteTransition>
-          <RVLifeProHero />
-        </RouteTransition>
-      </Suspense>
-    ),
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: "/rv-life-pro/campground-guide",
-    element: (
-      <Suspense fallback={<MinimalLoader />}>
-        <RouteTransition>
-          <RVLifeProCampgrounds />
-        </RouteTransition>
-      </Suspense>
-    ),
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: "/rv-life-pro/comparison",
-    element: (
-      <Suspense fallback={<MinimalLoader />}>
-        <RouteTransition>
-          <RVLifeProComparison />
-        </RouteTransition>
-      </Suspense>
-    ),
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: "/rv-life-pro/faq",
-    element: (
-      <Suspense fallback={<MinimalLoader />}>
-        <RouteTransition>
-          <RVLifeProFAQ />
-        </RouteTransition>
-      </Suspense>
-    ),
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: "/rv-life-pro/our-story",
-    element: (
-      <Suspense fallback={<MinimalLoader />}>
-        <RouteTransition>
-          <RVLifeProStory />
-        </RouteTransition>
-      </Suspense>
-    ),
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: "/rv-life-pro/grey-nomads",
-    element: (
-      <Suspense fallback={<MinimalLoader />}>
-        <RouteTransition>
-          <GreyNomads />
-        </RouteTransition>
-      </Suspense>
-    ),
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: "/rv-life-pro/weekend-warriors",
-    element: (
-      <Suspense fallback={<MinimalLoader />}>
-        <RouteTransition>
-          <WeekendWarriors />
-        </RouteTransition>
-      </Suspense>
-    ),
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: "/rv-life-pro/digital-nomads",
-    element: (
-      <Suspense fallback={<MinimalLoader />}>
-        <RouteTransition>
-          <DigitalNomads />
         </RouteTransition>
       </Suspense>
     ),
