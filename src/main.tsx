@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
 import { HelmetProvider } from 'react-helmet-async'
 import './index.css'
-import 'mapbox-gl/dist/mapbox-gl.css'
+// Removed global mapbox-gl CSS import - now lazy loaded only when MapView is used
 import './styles/animations.css'
 import './styles/forms.css'
 import './styles/layout.css'

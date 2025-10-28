@@ -15,7 +15,7 @@ import models from '@/components/models/compare/ModelComparisonData';
 import RVControlMonitoringHero from '@/components/rv-technology/RVControlMonitoringHero';
 import RVTechnologyTiersHero from '@/components/rv-technology/RVTechnologyTiersHero';
 import rvTechComparisonImage from '@/assets/rv-technology-comparison-dashboard.jpg';
-import rvCategoryComparisonImage from '@/assets/rv-category-comparison.png';
+import rvCategoryComparisonImage from '@/assets/rv-category-comparison.webp';
 import rvDealershipBackground from '@/assets/rv-dealership-background.jpg';
 import { ScrollToTopButton } from '@/components/rv-technology/ScrollToTopButton';
 

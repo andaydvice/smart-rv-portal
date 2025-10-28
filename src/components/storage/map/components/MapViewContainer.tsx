@@ -3,7 +3,7 @@ import React from 'react';
 import { Card } from '@/components/ui/card';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { AlertCircle } from 'lucide-react';
-import MapView from '../../MapView';
+import { LazyMapView } from '../../LazyMapView';
 import GoogleMapFacilitiesView from '../../GoogleMapFacilitiesView';
 import { StorageFacility } from '../../types';
 import FacilityCountBadge from './FacilityCountBadge';
@@ -72,7 +72,7 @@ const MapViewContainer: React.FC<MapViewContainerProps> = ({
               </AlertDescription>
             </Alert>
           ) : (
-            <MapView
+            <LazyMapView
               mapToken={mapToken}
               facilities={facilities || []}
               highlightedFacility={highlightedFacility}

@@ -15,12 +15,6 @@ import { scrollToTop } from "@/utils/scrollToTop";
 const Troubleshooting = () => {
   useEffect(() => {
     scrollToTop();
-    // Performance hint: pre-load sections
-    const sections = [
-      import('@/components/troubleshooting/SmartSystemGuide'),
-      import('@/components/connectivity/ConnectivityGuide'),
-      import('@/components/troubleshooting/TroubleshootingFlowchart')
-    ];
     // Optional: Performance tracking
     console.log('Troubleshooting page loaded');
   }, []);

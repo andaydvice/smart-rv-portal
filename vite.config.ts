@@ -42,12 +42,12 @@ export default defineConfig(({ mode }) => ({
   },
   optimizeDeps: {
     include: [
-      'react', 
-      'react-dom', 
-      'mapbox-gl', 
-      '@tanstack/react-query', 
+      'react',
+      'react-dom',
+      '@tanstack/react-query',
       'lucide-react'
     ],
+    // Removed mapbox-gl to enable lazy loading - it's 1.5MB and only used on /storage-facilities
     force: true,
     esbuildOptions: {
       target: 'es2020',
