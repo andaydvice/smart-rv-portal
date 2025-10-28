@@ -202,9 +202,9 @@ const GreyNomads: React.FC = () => {
           },
         }}
         trustIndicators={[
-          { icon: <Compass className="w-5 h-5" />, text: 'Full-time travellers', variant: 'light' as const },
-          { icon: <CloudOff className="w-5 h-5" />, text: 'Works offline', variant: 'light' as const },
-          { icon: <Star className="w-5 h-5" />, text: '47,000+ users', variant: 'light' as const },
+          { text: 'Full-time travellers', type: 'users' },
+          { text: 'Works offline', type: 'secure' },
+          { text: '47,000+ users', type: 'users' }
         ]}
       />
 

@@ -648,22 +648,6 @@ export const RVLifeProStory: React.FC = () => {
                     withoutProduct: false,
                   },
                 ]}
-                plans={[
-                  {
-                    name: 'RV Life Pro',
-                    price: { current: 65, period: 'year' },
-                    cta: {
-                      text: 'Get Protected',
-                      onClick: () => handleCTAClick('comparison-table')
-                    },
-                    featured: true,
-                  },
-                  {
-                    name: 'Standard GPS',
-                    price: { current: 0, period: 'year' },
-                    cta: { text: 'Keep Risking It' },
-                  },
-                ]}
               />
             </div>
 
@@ -1406,16 +1390,17 @@ export const RVLifeProStory: React.FC = () => {
                 trustBadges={[
                   {
                     text: '47,000+ Users',
-                    icon: 'users',
+                    type: 'users'
                   },
                   {
                     text: '4.8/5 Stars',
-                    icon: 'star',
+                    type: 'rating',
+                    rating: 4.8
                   },
                   {
                     text: '30-Day Guarantee',
-                    icon: 'shield',
-                  },
+                    type: 'guarantee'
+                  }
                 ]}
                 featured={true}
                 popularBadge={true}

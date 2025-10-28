@@ -211,9 +211,9 @@ const WeekendWarriors: React.FC = () => {
           },
         }}
         trustIndicators={[
-          { icon: <Users className="w-5 h-5" />, text: 'Perfect for families', variant: 'light' as const },
-          { icon: <CheckCircle className="w-5 h-5" />, text: '14-day free trial', variant: 'light' as const },
-          { icon: <Star className="w-5 h-5" />, text: '4.8/5 rating', variant: 'light' as const },
+          { text: 'Perfect for families', type: 'users' },
+          { text: '14-day free trial', type: 'guarantee' },
+          { text: '4.8/5 rating', type: 'rating', rating: 4.8 }
         ]}
       />
 

@@ -158,7 +158,7 @@ export const BrentwoodButton: React.FC<BrentwoodButtonProps> = ({
       disabled={disabled || loading}
       whileHover={{ scale: variant !== 'tertiary' ? 1.02 : 1 }}
       whileTap={{ scale: variant !== 'tertiary' ? 0.98 : 1 }}
-      {...props}
+      {...(props as any)}
     >
       {content}
     </motion.button>

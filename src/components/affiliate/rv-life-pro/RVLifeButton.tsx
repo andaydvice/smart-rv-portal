@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import '@/styles/affiliate/rv-life-pro.css';
 
-export type RVLifeButtonVariant = 'primary' | 'secondary' | 'tertiary';
+export type RVLifeButtonVariant = 'primary' | 'secondary' | 'tertiary' | 'outline';
 export type RVLifeButtonSize = 'small' | 'medium' | 'large';
 
 export interface RVLifeButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -148,7 +148,7 @@ export const RVLifeButton: React.FC<RVLifeButtonProps> = ({
       disabled={disabled || loading}
       whileHover={{ scale: variant !== 'tertiary' ? 1.02 : 1 }}
       whileTap={{ scale: variant !== 'tertiary' ? 0.98 : 1 }}
-      {...props}
+      {...(props as any)}
     >
       {content}
     </motion.button>

@@ -279,7 +279,7 @@ export const TestimonialManager: React.FC<TestimonialManagerProps> = ({
                           {testimonial.name}
                         </h3>
                         {testimonial.verifiedPurchase && (
-                          <ShieldCheck className="w-5 h-5 text-[var(--rv-life-secondary-green)]" title="Verified Purchase" />
+                          <ShieldCheck className="w-5 h-5 text-[var(--rv-life-secondary-green)]" />
                         )}
                       </div>
 

@@ -204,9 +204,9 @@ const DigitalNomads: React.FC = () => {
           },
         }}
         trustIndicators={[
-          { icon: <Wifi className="w-5 h-5" />, text: 'WiFi speed ratings', variant: 'light' as const },
-          { icon: <Signal className="w-5 h-5" />, text: 'Coverage mapping', variant: 'light' as const },
-          { icon: <Laptop className="w-5 h-5" />, text: 'Co-working spaces', variant: 'light' as const },
+          { text: 'WiFi speed ratings', type: 'verified' },
+          { text: 'Coverage mapping', type: 'verified' },
+          { text: 'Co-working spaces', type: 'verified' }
         ]}
       />
 

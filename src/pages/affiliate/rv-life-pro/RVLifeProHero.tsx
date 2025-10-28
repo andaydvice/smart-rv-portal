@@ -168,19 +168,17 @@ const RVLifeProHero: React.FC = () => {
           }}
           trustIndicators={[
             {
-              icon: <Star className="w-5 h-5" />,
               text: '4.8/5 Rating',
-              variant: 'rating'
+              type: 'rating',
+              rating: 4.8
             },
             {
-              icon: <Users className="w-5 h-5" />,
               text: '47,000+ Users',
-              variant: 'social-proof'
+              type: 'users'
             },
             {
-              icon: <Shield className="w-5 h-5" />,
               text: '14-Day Free Trial',
-              variant: 'guarantee'
+              type: 'guarantee'
             }
           ]}
         />
@@ -569,19 +567,17 @@ const RVLifeProHero: React.FC = () => {
                 }}
                 trustBadges={[
                   {
-                    icon: <Shield className="w-5 h-5" />,
                     text: '30-Day Guarantee',
-                    variant: 'guarantee'
+                    type: 'guarantee'
                   },
                   {
-                    icon: <Star className="w-5 h-5" />,
                     text: '4.8/5 Rating',
-                    variant: 'rating'
+                    type: 'rating',
+                    rating: 4.8
                   },
                   {
-                    icon: <Users className="w-5 h-5" />,
                     text: '47,000+ Users',
-                    variant: 'social-proof'
+                    type: 'users'
                   }
                 ]}
                 popularBadge={true}
@@ -729,17 +725,11 @@ const RVLifeProHero: React.FC = () => {
               <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
                 <RVLifeAffiliateLink
                   campaign="hero-final-cta"
-                  className="inline-block"
-                >
-                  <RVLifeButton
-                    variant="primary"
-                    size="large"
-                    onClick={() => handleCTAClick('Start Free Trial', 'final-cta')}
-                    className="bg-white text-[var(--rv-life-primary-blue)] hover:bg-gray-100"
-                  >
-                    Start Free Trial Now
-                  </RVLifeButton>
-                </RVLifeAffiliateLink>
+                  buttonText="Start Free Trial Now"
+                  variant="default"
+                  size="lg"
+                  className="bg-white text-[var(--rv-life-primary-blue)] hover:bg-gray-100"
+                />
 
                 <RVLifeButton
                   variant="secondary"

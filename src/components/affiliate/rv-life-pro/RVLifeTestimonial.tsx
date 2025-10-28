@@ -120,7 +120,7 @@ export const RVLifeTestimonial: React.FC<RVLifeTestimonialProps> = ({
                 {author.name}
               </p>
               {verified && (
-                <ShieldCheck className="w-4 h-4 text-[var(--rv-life-secondary-green)]" title="Verified reviewer" />
+                <ShieldCheck className="w-4 h-4 text-[var(--rv-life-secondary-green)]" />
               )}
             </div>
             <p className="text-sm text-[var(--rv-text-muted)]">
@@ -177,7 +177,7 @@ export const RVLifeTestimonial: React.FC<RVLifeTestimonialProps> = ({
               {author.name}
             </p>
             {verified && (
-              <ShieldCheck className="w-4 h-4 text-[var(--rv-life-secondary-green)]" title="Verified reviewer" />
+              <ShieldCheck className="w-4 h-4 text-[var(--rv-life-secondary-green)]" />
             )}
           </div>
           <p className="text-sm text-[var(--rv-text-muted)]">
@@ -242,7 +242,7 @@ export const RVLifeTestimonial: React.FC<RVLifeTestimonialProps> = ({
             {author.name}
           </p>
           {verified && (
-            <ShieldCheck className="w-5 h-5 text-[var(--rv-life-secondary-green)]" title="Verified reviewer" />
+            <ShieldCheck className="w-5 h-5 text-[var(--rv-life-secondary-green)]" />
           )}
         </div>
         <p className="text-[var(--rv-text-muted)]">
