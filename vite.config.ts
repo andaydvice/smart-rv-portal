@@ -32,8 +32,8 @@ export default defineConfig(({ mode }) => ({
   plugins: [
     react(),
     mode === 'development' && componentTagger(),
-    // CRITICAL: Disabled static generator - it breaks the React app for human users
-    // mode === 'production' && staticGeneratorPlugin(),
+    // TESTING: Temporarily enabled to verify the fix works
+    mode === 'production' && staticGeneratorPlugin(),
   ].filter(Boolean),
   resolve: {
     alias: {

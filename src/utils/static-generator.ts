@@ -518,12 +518,14 @@ export const pageMetadata: Record<string, PageMetadata> = {
 
 /**
  * Generate static HTML for a specific page
+ * @param path - The page path
+ * @param bundlePath - The production bundle path (e.g., '/assets/index-hash.js')
  */
-export const generateStaticHTML = (path: string): string => {
+export const generateStaticHTML = (path: string, bundlePath: string): string => {
   const metadata = pageMetadata[path];
   if (!metadata) {
     console.warn(`No metadata found for path: ${path}`);
-    return generateFallbackHTML(path);
+    return generateFallbackHTML(path, bundlePath);
   }
 
   return `<!DOCTYPE html>
@@ -655,9 +657,9 @@ export const generateStaticHTML = (path: string): string => {
       if (!(/bot|crawler|spider|crawling|googlebot|bingbot|slurp|duckduckbot|baiduspider|yandexbot|sogou|facebook|twitter|whatsapp|telegram/i.test(navigator.userAgent))) {
         const script = document.createElement('script');
         script.type = 'module';
-        script.src = '/src/main.tsx';
+        script.src = '${bundlePath}';
         document.head.appendChild(script);
-        
+
         const lovableScript = document.createElement('script');
         lovableScript.src = 'https://cdn.gpteng.co/gptengineer.js';
         lovableScript.type = 'module';
@@ -732,8 +734,8 @@ const generatePageContent = (path: string, metadata: PageMetadata): string => {
 /**
  * Generate fallback HTML for unknown paths
  */
-const generateFallbackHTML = (path: string): string => {
-  return generateStaticHTML('/').replace(
+const generateFallbackHTML = (path: string, bundlePath: string): string => {
+  return generateStaticHTML('/', bundlePath).replace(
     /Smart RV Hub - The Future of Smart RV Travel/g,
     `Smart RV Hub - ${path.replace('/', '').replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}`
   );
