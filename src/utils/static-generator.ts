@@ -402,6 +402,15 @@ export const pageMetadata: Record<string, PageMetadata> = {
     changeFreq: 'weekly',
     lastModified: new Date().toISOString().split('T')[0]
   },
+  '/rv-technology-guide': {
+    title: 'RV Technology Buyer\'s Education Guide | Smart RV Technology Hub',
+    description: 'Complete guide to understanding modern RV technology options. Learn about connectivity, power management, and control systems to make informed buying decisions.',
+    keywords: ['RV technology guide', 'RV connectivity', 'RV power systems', 'RV automation', 'RV buyer education', 'smart RV features'],
+    path: '/rv-technology-guide',
+    priority: 0.9,
+    changeFreq: 'weekly',
+    lastModified: new Date().toISOString().split('T')[0]
+  },
   '/documentation': {
     title: 'RV Documentation - Guides & Resources',
     description: 'Comprehensive documentation and guides for RV technology, maintenance, and best practices for mobile living.',
