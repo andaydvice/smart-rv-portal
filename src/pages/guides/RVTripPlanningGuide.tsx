@@ -42,7 +42,7 @@ const RVTripPlanningGuide = () => {
           {/* Hero Section with Crisis Hook */}
           <div className="relative h-96 mb-16 mt-8 rounded-lg overflow-hidden">
             <img
-              src="/lovable-uploads/navigation-hero.jpg"
+              src="/images/rv-trip-planning-hero.jpg"
               alt="RV Trip Planning - Safe Route Navigation"
               className="w-full h-full object-cover"
             />
