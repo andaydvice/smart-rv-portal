@@ -436,6 +436,83 @@ export const pageMetadata: Record<string, PageMetadata> = {
       "name": "RV Technology Blog",
       "description": "Latest news and insights about RV technology"
     }
+  },
+
+  // Affiliate Pages - RV Life Pro
+  '/rv-trip-planning-guide': {
+    title: 'RV Trip Planning Guide 2025 | Route Planning & Safety Tips',
+    description: 'Complete RV trip planning guide with route planning tips, height clearance warnings, bridge strike prevention, and campground booking strategies for safe RV travel.',
+    keywords: ['rv trip planning', 'rv route planning', 'rv travel safety', 'bridge clearance', 'rv campground booking'],
+    path: '/rv-trip-planning-guide',
+    priority: 0.9,
+    changeFreq: 'weekly',
+    lastModified: new Date().toISOString().split('T')[0],
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "HowTo",
+      "name": "RV Trip Planning Guide 2025",
+      "description": "Complete guide to planning safe RV trips with route planning and safety tips"
+    }
+  },
+  '/best-rv-gps-comparison': {
+    title: 'Best RV GPS Systems 2025 | Complete Comparison Guide',
+    description: 'Compare the best RV GPS systems including Garmin, Rand McNally, and RV Life Pro. Find the right RV navigation system with height alerts and safe routing.',
+    keywords: ['rv gps', 'best rv navigation', 'garmin rv', 'rv life pro', 'rv route planner'],
+    path: '/best-rv-gps-comparison',
+    priority: 0.9,
+    changeFreq: 'weekly',
+    lastModified: new Date().toISOString().split('T')[0],
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Best RV GPS Systems 2025",
+      "description": "Comprehensive comparison of top RV GPS navigation systems"
+    }
+  },
+  '/rv-navigation-app-guide': {
+    title: 'Best RV Navigation Apps 2025 | Complete App Comparison',
+    description: 'Compare top RV navigation apps including RV Life Pro, Garmin, and Google Maps alternatives. Find the best RV navigation app for iPhone and Android.',
+    keywords: ['rv navigation apps', 'rv life pro app', 'rv gps app', 'iphone rv navigation', 'android rv app'],
+    path: '/rv-navigation-app-guide',
+    priority: 0.9,
+    changeFreq: 'weekly',
+    lastModified: new Date().toISOString().split('T')[0]
+  },
+  '/rv-campground-finder': {
+    title: 'RV Campground Finder 2025 | Find & Book RV Parks',
+    description: 'Find and book RV campgrounds with amenities, reviews, and availability. Search 25,000+ RV parks and campgrounds across North America.',
+    keywords: ['rv campground finder', 'rv parks', 'campground booking', 'rv park reviews', 'rv camping'],
+    path: '/rv-campground-finder',
+    priority: 0.9,
+    changeFreq: 'weekly',
+    lastModified: new Date().toISOString().split('T')[0]
+  },
+  '/family-rv-travel-guide': {
+    title: 'Family RV Travel Guide 2025 | Tips for RVing with Kids',
+    description: 'Complete guide to RV travel with children including safety tips, entertainment ideas, campground selection, and trip planning for family adventures.',
+    keywords: ['family rv travel', 'rving with kids', 'family campgrounds', 'rv family activities', 'kids rv safety'],
+    path: '/family-rv-travel-guide',
+    priority: 0.8,
+    changeFreq: 'weekly',
+    lastModified: new Date().toISOString().split('T')[0]
+  },
+  '/full-time-rv-living-guide': {
+    title: 'Full Time RV Living Guide 2025 | Complete Lifestyle Guide',
+    description: 'Complete guide to full time RV living including budgeting, domicile, mail forwarding, internet, healthcare, and campground selection for nomadic lifestyle.',
+    keywords: ['full time rv living', 'rv nomad', 'rv lifestyle', 'rv living budget', 'rv domicile'],
+    path: '/full-time-rv-living-guide',
+    priority: 0.8,
+    changeFreq: 'weekly',
+    lastModified: new Date().toISOString().split('T')[0]
+  },
+  '/remote-work-rv-guide': {
+    title: 'Remote Work from RV Guide 2025 | Digital Nomad RV Living',
+    description: 'Complete guide to working remotely from an RV including internet solutions, campground selection, workspace setup, and productivity tips for digital nomads.',
+    keywords: ['remote work rv', 'digital nomad rv', 'rv internet', 'work from rv', 'rv mobile office'],
+    path: '/remote-work-rv-guide',
+    priority: 0.8,
+    changeFreq: 'weekly',
+    lastModified: new Date().toISOString().split('T')[0]
   }
 };
 
