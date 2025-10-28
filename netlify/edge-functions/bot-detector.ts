@@ -10,7 +10,10 @@ const VALID_ROUTES = [
   '/features/smart-tv', '/features/climate-control', '/features/security-system', '/features/energy-management',
   '/features/water-management', '/features/connectivity', '/features/navigation', '/features/monitoring',
   '/features/automation', '/features/maintenance', '/features/entertainment', '/features/lighting',
-  '/features/storage', '/features/safety', '/admin/perf'
+  '/features/storage', '/features/safety', '/admin/perf',
+  '/rv-trip-planning-guide', '/best-rv-gps-comparison', '/rv-navigation-app-guide',
+  '/rv-campground-finder', '/family-rv-travel-guide', '/full-time-rv-living-guide',
+  '/remote-work-rv-guide'
 ];
 
 const VALID_PATTERNS = [
