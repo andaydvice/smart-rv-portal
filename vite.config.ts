@@ -32,8 +32,8 @@ export default defineConfig(({ mode }) => ({
   plugins: [
     react(),
     mode === 'development' && componentTagger(),
-    // Static generator for SEO - generates bot-friendly HTML with proper metadata
-    mode === 'production' && staticGeneratorPlugin(),
+    // CRITICAL: Disabled static generator - it breaks the React app for human users
+    // mode === 'production' && staticGeneratorPlugin(),
   ].filter(Boolean),
   resolve: {
     alias: {

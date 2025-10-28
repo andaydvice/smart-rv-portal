@@ -12,4 +12,4 @@ Sitemap: https://smartrvhub.com/sitemap.xml
 # Crawl delay for polite crawling
 Crawl-delay: 1
 
-# Last updated: 2025-10-28
+# Last updated: 2024-08-24
