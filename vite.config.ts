@@ -32,8 +32,9 @@ export default defineConfig(({ mode }) => ({
   plugins: [
     react(),
     mode === 'development' && componentTagger(),
-    // TESTING: Temporarily enabled to verify the fix works
-    mode === 'production' && staticGeneratorPlugin(),
+    // CRITICAL: Disabled static generator - it breaks the site routing
+    // Static HTML files override the SPA routing, breaking navigation
+    // mode === 'production' && staticGeneratorPlugin(),
   ].filter(Boolean),
   resolve: {
     alias: {
