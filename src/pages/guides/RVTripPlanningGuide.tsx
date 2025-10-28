@@ -254,9 +254,9 @@ const RVTripPlanningGuide = () => {
           <FeatureNavigationLinks
             className="mt-12 mb-8"
             relatedFeatures={[
-              { href: '/best-rv-gps-comparison', title: 'RV GPS Comparison', description: 'Compare the best RV GPS apps and devices for safe navigation' },
-              { href: '/rv-campground-finder', title: 'Campground Finder', description: 'Find and review the best RV campgrounds nationwide' },
-              { href: '/family-rv-travel-guide', title: 'Family RV Travel', description: 'Plan safe, fun family RV adventures with kids' }
+              { path: '/best-rv-gps-comparison', title: 'RV GPS Comparison', description: 'Compare the best RV GPS apps and devices for safe navigation' },
+              { path: '/rv-campground-finder', title: 'Campground Finder', description: 'Find and review the best RV campgrounds nationwide' },
+              { path: '/family-rv-travel-guide', title: 'Family RV Travel', description: 'Plan safe, fun family RV adventures with kids' }
             ]}
           />
         </div>

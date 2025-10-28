@@ -340,9 +340,9 @@ const BestRVGPSComparison = () => {
           <FeatureNavigationLinks
             className="mt-12 mb-8"
             relatedFeatures={[
-              { href: '/rv-trip-planning-guide', title: 'RV Trip Planning', description: 'Complete guide to planning safe RV trips' },
-              { href: '/rv-navigation-app-guide', title: 'RV Navigation Apps', description: 'Detailed guide to RV navigation software' },
-              { href: '/rv-campground-finder', title: 'Campground Finder', description: 'Find the best campgrounds with real reviews' }
+              { path: '/rv-trip-planning-guide', title: 'RV Trip Planning', description: 'Complete guide to planning safe RV trips' },
+              { path: '/rv-navigation-app-guide', title: 'RV Navigation Apps', description: 'Detailed guide to RV navigation software' },
+              { path: '/rv-campground-finder', title: 'Campground Finder', description: 'Find the best campgrounds with real reviews' }
             ]}
           />
         </div>

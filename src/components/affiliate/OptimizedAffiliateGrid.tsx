@@ -16,7 +16,7 @@ interface OptimizedAffiliateGridProps {
     buttonText?: string;
   }>;
   className?: string;
-  gridCols?: 'auto' | '2' | '3' | '4';
+  gridCols?: 'auto' | '1' | '2' | '3' | '4';
 }
 
 export const OptimizedAffiliateGrid: React.FC<OptimizedAffiliateGridProps> = ({
