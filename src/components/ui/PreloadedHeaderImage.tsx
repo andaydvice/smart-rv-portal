@@ -55,8 +55,6 @@ export const PreloadedHeaderImage = ({
         {...({ fetchpriority: priority } as any)}
         decoding="async"
         style={{ 
-          position: 'relative', 
-          zIndex: 1, // Keep z-index low so text can appear above
           opacity: imageLoaded ? 1 : 0 // Show only when loaded
         }}
         onLoad={(e) => {
