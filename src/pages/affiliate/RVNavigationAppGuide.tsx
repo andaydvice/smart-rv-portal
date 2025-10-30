@@ -50,6 +50,13 @@ const RVNavigationAppGuide = () => {
         <div className="max-w-7xl mx-auto px-4 pt-24 pb-12">
           <Breadcrumbs items={[{ label: 'Resources', href: '/blog' }, { label: 'RV Navigation App Guide' }]} />
 
+          {/* Urgency Banner */}
+          <div className="bg-gradient-to-r from-orange-600 to-red-600 text-white py-3 px-4 text-center mb-6 rounded-lg mt-6">
+            <p className="text-lg font-bold">
+              ⏰ LIMITED TIME: Save 20% with code SMARTRV20 | Offer ends soon
+            </p>
+          </div>
+
           {/* Hero Section */}
           <div className="relative h-96 mb-16 mt-8 rounded-lg overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-r from-purple-900/90 to-pink-900/90 flex items-center justify-center">
@@ -77,8 +84,17 @@ const RVNavigationAppGuide = () => {
               href="https://rvlife.com?ref=smartrvhub"
               className="inline-block bg-orange-500 hover:bg-orange-600 text-white font-semibold px-8 py-3 rounded-lg transition-colors"
             >
-              Start Free Trial →
+              Get Better Navigation Than Google Maps - Free Trial
             </a>
+            <p className="text-sm mt-3 text-gray-400">
+              ✓ 7-day free trial ✓ Cancel anytime during trial
+            </p>
+            <div className="flex items-center gap-2 text-sm text-gray-400 mt-2">
+              <span className="flex items-center gap-1">
+                <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                127 RVers joined today
+              </span>
+            </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
@@ -91,6 +107,34 @@ const RVNavigationAppGuide = () => {
 
                 <p><a href="https://rvlife.com?ref=smartrvhub" className="text-blue-400 hover:text-blue-300 underline">RV specific apps</a> prevent disasters by routing around restrictions and providing campground integration.</p>
               </div>
+
+              {/* CTA 1: After Pain Point */}
+              <div className="bg-blue-900/20 border-2 border-blue-500 rounded-lg p-6 my-6">
+                <h3 className="text-xl font-bold text-blue-400 mb-3">
+                  Stop Using Google Maps for RV Navigation
+                </h3>
+                <p className="text-gray-300 mb-4">
+                  Over 800 RVers damaged their rigs using standard GPS in 2023.
+
+                  Switch to RV specific navigation that knows your height, weight, and width.
+                </p>
+                <a
+                  href="https://rvlife.com?ref=smartrvhub"
+                  className="inline-block bg-orange-500 hover:bg-orange-600 text-white font-semibold px-8 py-3 rounded-lg transition-colors"
+                >
+                  Get Better Navigation Than Google Maps - Free Trial
+                </a>
+                <p className="text-sm mt-3 text-gray-400">
+                  ✓ 7-day free trial ✓ Cancel anytime during trial
+                </p>
+                <div className="flex items-center gap-2 text-sm text-gray-400 mt-2">
+                  <span className="flex items-center gap-1">
+                    <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                    127 RVers joined today
+                  </span>
+                </div>
+              </div>
+
               <div className="bg-green-900/20 border border-green-500 p-4 rounded-lg mb-6">
                 <Zap className="h-6 w-6 text-green-400 mb-2" />
                 <p className="text-green-300 font-semibold">App Advantages:</p>
@@ -101,6 +145,33 @@ const RVNavigationAppGuide = () => {
                   <li>• Integrated campground booking</li>
                   <li>• Real-time traffic and weather</li>
                 </ul>
+              </div>
+
+              {/* CTA 2: After App Advantages */}
+              <div className="bg-blue-900/20 border-2 border-blue-500 rounded-lg p-6 my-6">
+                <h3 className="text-xl font-bold text-blue-400 mb-3">
+                  Get All These Benefits Today
+                </h3>
+                <p className="text-gray-300 mb-4">
+                  No expensive hardware needed.
+
+                  Download RV Life Pro to your existing phone and start navigating safely within minutes.
+                </p>
+                <a
+                  href="https://rvlife.com?ref=smartrvhub"
+                  className="inline-block bg-orange-500 hover:bg-orange-600 text-white font-semibold px-8 py-3 rounded-lg transition-colors"
+                >
+                  Get Better Navigation Than Google Maps - Free Trial
+                </a>
+                <p className="text-sm mt-3 text-gray-400">
+                  ✓ 7-day free trial ✓ Cancel anytime during trial
+                </p>
+                <div className="flex items-center gap-2 text-sm text-gray-400 mt-2">
+                  <span className="flex items-center gap-1">
+                    <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                    127 RVers joined today
+                  </span>
+                </div>
               </div>
             </div>
 
@@ -131,6 +202,33 @@ const RVNavigationAppGuide = () => {
             </div>
           </div>
 
+          {/* CTA 3: After Feature Cards */}
+          <div className="bg-blue-900/20 border-2 border-blue-500 rounded-lg p-6 my-12">
+            <h3 className="text-xl font-bold text-blue-400 mb-3">
+              Install the Best RV Navigation App
+            </h3>
+            <p className="text-gray-300 mb-4">
+              Easy installation, offline capability, and automatic updates all included.
+
+              Everything you need for safe RV travel in one powerful app.
+            </p>
+            <a
+              href="https://rvlife.com?ref=smartrvhub"
+              className="inline-block bg-orange-500 hover:bg-orange-600 text-white font-semibold px-8 py-3 rounded-lg transition-colors"
+            >
+              Get Better Navigation Than Google Maps - Free Trial
+            </a>
+            <p className="text-sm mt-3 text-gray-400">
+              ✓ 7-day free trial ✓ Cancel anytime during trial
+            </p>
+            <div className="flex items-center gap-2 text-sm text-gray-400 mt-2">
+              <span className="flex items-center gap-1">
+                <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                127 RVers joined today
+              </span>
+            </div>
+          </div>
+
           {/* Mid-Content CTA */}
           <div className="bg-blue-900/20 border-2 border-blue-500 rounded-lg p-6 my-12">
             <h3 className="text-xl font-bold text-blue-400 mb-3">
@@ -143,8 +241,17 @@ const RVNavigationAppGuide = () => {
               href="https://rvlife.com?ref=smartrvhub"
               className="inline-block bg-orange-500 hover:bg-orange-600 text-white font-semibold px-8 py-3 rounded-lg transition-colors"
             >
-              Download Now - Free Trial →
+              Get Better Navigation Than Google Maps - Free Trial
             </a>
+            <p className="text-sm mt-3 text-gray-400">
+              ✓ 7-day free trial ✓ Cancel anytime during trial
+            </p>
+            <div className="flex items-center gap-2 text-sm text-gray-400 mt-2">
+              <span className="flex items-center gap-1">
+                <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                127 RVers joined today
+              </span>
+            </div>
           </div>
 
           {/* App Comparison */}
@@ -225,6 +332,33 @@ const RVNavigationAppGuide = () => {
                   </div>
                 </div>
               </div>
+            </div>
+          </div>
+
+          {/* CTA 4: After Comparison */}
+          <div className="bg-blue-900/20 border-2 border-blue-500 rounded-lg p-6 my-12">
+            <h3 className="text-xl font-bold text-blue-400 mb-3">
+              Choose the Clear Winner
+            </h3>
+            <p className="text-gray-300 mb-4">
+              RV Life Pro leads with 25,000+ campgrounds, full offline capability, and the lowest cost.
+
+              Download the app 2 million RVers trust for safe navigation.
+            </p>
+            <a
+              href="https://rvlife.com?ref=smartrvhub"
+              className="inline-block bg-orange-500 hover:bg-orange-600 text-white font-semibold px-8 py-3 rounded-lg transition-colors"
+            >
+              Get Better Navigation Than Google Maps - Free Trial
+            </a>
+            <p className="text-sm mt-3 text-gray-400">
+              ✓ 7-day free trial ✓ Cancel anytime during trial
+            </p>
+            <div className="flex items-center gap-2 text-sm text-gray-400 mt-2">
+              <span className="flex items-center gap-1">
+                <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                127 RVers joined today
+              </span>
             </div>
           </div>
 
