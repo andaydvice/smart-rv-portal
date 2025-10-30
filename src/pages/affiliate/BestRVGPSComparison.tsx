@@ -50,6 +50,13 @@ const BestRVGPSComparison = () => {
         <div className="max-w-7xl mx-auto px-4 pt-24 pb-12">
           <Breadcrumbs items={[{ label: 'Resources', href: '/blog' }, { label: 'Best RV GPS Comparison' }]} />
 
+          {/* Urgency Banner */}
+          <div className="bg-gradient-to-r from-orange-600 to-red-600 text-white py-3 px-4 text-center mb-6 rounded-lg mt-6">
+            <p className="text-lg font-bold">
+              ⏰ LIMITED TIME: Save 20% with code SMARTRV20 | Offer ends soon
+            </p>
+          </div>
+
           {/* Hero Section */}
           <div className="relative h-96 mb-16 mt-8 rounded-lg overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-r from-blue-900/90 to-indigo-900/90 flex items-center justify-center">
@@ -77,8 +84,17 @@ const BestRVGPSComparison = () => {
               href="https://rvlife.com?ref=smartrvhub"
               className="inline-block bg-orange-500 hover:bg-orange-600 text-white font-semibold px-8 py-3 rounded-lg transition-colors"
             >
-              Start Free Trial →
+              Save $500 on Hardware - Try Free 7 Days
             </a>
+            <p className="text-sm mt-3 text-gray-400">
+              ✓ 7-day free trial ✓ Cancel anytime during trial
+            </p>
+            <div className="flex items-center gap-2 text-sm text-gray-400 mt-2">
+              <span className="flex items-center gap-1">
+                <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                127 RVers joined today
+              </span>
+            </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
@@ -91,6 +107,34 @@ const BestRVGPSComparison = () => {
 
                 <p>The right <a href="https://rvlife.com?ref=smartrvhub" className="text-blue-400 hover:text-blue-300 underline">GPS system</a> pays for itself by avoiding even a single bridge strike costing $75,000+ in repairs.</p>
               </div>
+
+              {/* CTA 1: After Pain Point Discussion */}
+              <div className="bg-blue-900/20 border-2 border-blue-500 rounded-lg p-6 my-6">
+                <h3 className="text-xl font-bold text-blue-400 mb-3">
+                  Avoid Costly Bridge Strikes Today
+                </h3>
+                <p className="text-gray-300 mb-4">
+                  Join over 2 million RVers who trust RV Life Pro to keep them safe from low bridges and restricted roads.
+
+                  One bridge strike costs more than 150 years of RV Life Pro.
+                </p>
+                <a
+                  href="https://rvlife.com?ref=smartrvhub"
+                  className="inline-block bg-orange-500 hover:bg-orange-600 text-white font-semibold px-8 py-3 rounded-lg transition-colors"
+                >
+                  Save $500 on Hardware - Try Free 7 Days
+                </a>
+                <p className="text-sm mt-3 text-gray-400">
+                  ✓ 7-day free trial ✓ Cancel anytime during trial
+                </p>
+                <div className="flex items-center gap-2 text-sm text-gray-400 mt-2">
+                  <span className="flex items-center gap-1">
+                    <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                    127 RVers joined today
+                  </span>
+                </div>
+              </div>
+
               <div className="bg-blue-900/20 border border-blue-500 p-4 rounded-lg mb-6">
                 <CheckCircle className="h-6 w-6 text-blue-400 mb-2" />
                 <p className="text-blue-300 font-semibold">Key Features to Compare:</p>
@@ -101,6 +145,33 @@ const BestRVGPSComparison = () => {
                   <li>• Offline map capabilities</li>
                   <li>• Price and subscription costs</li>
                 </ul>
+              </div>
+
+              {/* CTA 2: After Key Features List */}
+              <div className="bg-blue-900/20 border-2 border-blue-500 rounded-lg p-6 my-6">
+                <h3 className="text-xl font-bold text-blue-400 mb-3">
+                  Get All These Features in One App
+                </h3>
+                <p className="text-gray-300 mb-4">
+                  Stop comparing and start traveling safely.
+
+                  RV Life Pro includes every essential feature at a fraction of hardware GPS cost.
+                </p>
+                <a
+                  href="https://rvlife.com?ref=smartrvhub"
+                  className="inline-block bg-orange-500 hover:bg-orange-600 text-white font-semibold px-8 py-3 rounded-lg transition-colors"
+                >
+                  Save $500 on Hardware - Try Free 7 Days
+                </a>
+                <p className="text-sm mt-3 text-gray-400">
+                  ✓ 7-day free trial ✓ Cancel anytime during trial
+                </p>
+                <div className="flex items-center gap-2 text-sm text-gray-400 mt-2">
+                  <span className="flex items-center gap-1">
+                    <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                    127 RVers joined today
+                  </span>
+                </div>
               </div>
             </div>
 
@@ -131,6 +202,33 @@ const BestRVGPSComparison = () => {
             </div>
           </div>
 
+          {/* CTA 3: Before Comparison Section */}
+          <div className="bg-blue-900/20 border-2 border-blue-500 rounded-lg p-6 my-12">
+            <h3 className="text-xl font-bold text-blue-400 mb-3">
+              Ready to Make the Switch?
+            </h3>
+            <p className="text-gray-300 mb-4">
+              Before you compare features below, see why over 2 million RVers chose RV Life Pro.
+
+              Try it risk free and experience the difference.
+            </p>
+            <a
+              href="https://rvlife.com?ref=smartrvhub"
+              className="inline-block bg-orange-500 hover:bg-orange-600 text-white font-semibold px-8 py-3 rounded-lg transition-colors"
+            >
+              Save $500 on Hardware - Try Free 7 Days
+            </a>
+            <p className="text-sm mt-3 text-gray-400">
+              ✓ 7-day free trial ✓ Cancel anytime during trial
+            </p>
+            <div className="flex items-center gap-2 text-sm text-gray-400 mt-2">
+              <span className="flex items-center gap-1">
+                <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                127 RVers joined today
+              </span>
+            </div>
+          </div>
+
           {/* Mid-Content CTA */}
           <div className="bg-blue-900/20 border-2 border-blue-500 rounded-lg p-6 my-12">
             <h3 className="text-xl font-bold text-blue-400 mb-3">
@@ -143,8 +241,17 @@ const BestRVGPSComparison = () => {
               href="https://rvlife.com?ref=smartrvhub"
               className="inline-block bg-orange-500 hover:bg-orange-600 text-white font-semibold px-8 py-3 rounded-lg transition-colors"
             >
-              Start Your Free Trial →
+              Save $500 on Hardware - Try Free 7 Days
             </a>
+            <p className="text-sm mt-3 text-gray-400">
+              ✓ 7-day free trial ✓ Cancel anytime during trial
+            </p>
+            <div className="flex items-center gap-2 text-sm text-gray-400 mt-2">
+              <span className="flex items-center gap-1">
+                <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                127 RVers joined today
+              </span>
+            </div>
           </div>
 
           {/* Comparison Table */}
@@ -199,6 +306,33 @@ const BestRVGPSComparison = () => {
                   </tr>
                 </tbody>
               </table>
+            </div>
+          </div>
+
+          {/* CTA 4: After Comparison Table */}
+          <div className="bg-blue-900/20 border-2 border-blue-500 rounded-lg p-6 my-12">
+            <h3 className="text-xl font-bold text-blue-400 mb-3">
+              See the Winner? Start Using It Today
+            </h3>
+            <p className="text-gray-300 mb-4">
+              The comparison is clear: RV Life Pro delivers more campgrounds, better features, and massive savings over hardware GPS.
+
+              Join thousands who made the smart choice.
+            </p>
+            <a
+              href="https://rvlife.com?ref=smartrvhub"
+              className="inline-block bg-orange-500 hover:bg-orange-600 text-white font-semibold px-8 py-3 rounded-lg transition-colors"
+            >
+              Save $500 on Hardware - Try Free 7 Days
+            </a>
+            <p className="text-sm mt-3 text-gray-400">
+              ✓ 7-day free trial ✓ Cancel anytime during trial
+            </p>
+            <div className="flex items-center gap-2 text-sm text-gray-400 mt-2">
+              <span className="flex items-center gap-1">
+                <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                127 RVers joined today
+              </span>
             </div>
           </div>
 

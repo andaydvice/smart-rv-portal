@@ -50,6 +50,13 @@ const RVTripPlanningGuide = () => {
         <div className="max-w-7xl mx-auto px-4 pt-24 pb-12">
           <Breadcrumbs items={[{ label: 'Resources', href: '/blog' }, { label: 'RV Trip Planning Guide' }]} />
 
+          {/* Urgency Banner */}
+          <div className="bg-gradient-to-r from-orange-600 to-red-600 text-white py-3 px-4 text-center mb-6 rounded-lg mt-6">
+            <p className="text-lg font-bold">
+              ⏰ LIMITED TIME: Save 20% with code SMARTRV20 | Offer ends soon
+            </p>
+          </div>
+
           {/* Hero Section */}
           <div className="relative h-96 mb-16 mt-8 rounded-lg overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-r from-blue-900/90 to-purple-900/90 flex items-center justify-center">
@@ -77,8 +84,17 @@ const RVTripPlanningGuide = () => {
               href="https://rvlife.com?ref=smartrvhub"
               className="inline-block bg-orange-500 hover:bg-orange-600 text-white font-semibold px-8 py-3 rounded-lg transition-colors"
             >
-              Start Free Trial →
+              Plan Safe Routes - Avoid Bridge Strikes - Try Free
             </a>
+            <p className="text-sm mt-3 text-gray-400">
+              ✓ 7-day free trial ✓ Cancel anytime during trial
+            </p>
+            <div className="flex items-center gap-2 text-sm text-gray-400 mt-2">
+              <span className="flex items-center gap-1">
+                <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                127 RVers joined today
+              </span>
+            </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
@@ -98,6 +114,34 @@ const RVTripPlanningGuide = () => {
                   Standard GPS routing does not account for RV height, width, or weight restrictions. Using car GPS for RV navigation is the leading cause of preventable accidents.
                 </p>
               </div>
+
+              {/* CTA 1: After Crisis Alert */}
+              <div className="bg-blue-900/20 border-2 border-blue-500 rounded-lg p-6 my-6">
+                <h3 className="text-xl font-bold text-blue-400 mb-3">
+                  Stop Risking $75,000 Bridge Strikes
+                </h3>
+                <p className="text-gray-300 mb-4">
+                  Professional trip planning prevents disasters before they happen.
+
+                  Get RV safe routes with verified clearances on every trip.
+                </p>
+                <a
+                  href="https://rvlife.com?ref=smartrvhub"
+                  className="inline-block bg-orange-500 hover:bg-orange-600 text-white font-semibold px-8 py-3 rounded-lg transition-colors"
+                >
+                  Plan Safe Routes - Avoid Bridge Strikes - Try Free
+                </a>
+                <p className="text-sm mt-3 text-gray-400">
+                  ✓ 7-day free trial ✓ Cancel anytime during trial
+                </p>
+                <div className="flex items-center gap-2 text-sm text-gray-400 mt-2">
+                  <span className="flex items-center gap-1">
+                    <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                    127 RVers joined today
+                  </span>
+                </div>
+              </div>
+
               <ul className="list-disc list-inside space-y-3 text-gray-300">
                 <li>RV specific route planning with clearance verification</li>
                 <li>Bridge and tunnel height restriction database</li>
@@ -105,6 +149,33 @@ const RVTripPlanningGuide = () => {
                 <li>Campground booking integration</li>
                 <li>Real-time weather and road condition alerts</li>
               </ul>
+
+              {/* CTA 2: After Features List */}
+              <div className="bg-blue-900/20 border-2 border-blue-500 rounded-lg p-6 my-6">
+                <h3 className="text-xl font-bold text-blue-400 mb-3">
+                  Get Every Safety Feature in One App
+                </h3>
+                <p className="text-gray-300 mb-4">
+                  Stop piecing together multiple tools.
+
+                  RV Life Pro combines route planning, clearance checking, and campground booking in one powerful app.
+                </p>
+                <a
+                  href="https://rvlife.com?ref=smartrvhub"
+                  className="inline-block bg-orange-500 hover:bg-orange-600 text-white font-semibold px-8 py-3 rounded-lg transition-colors"
+                >
+                  Plan Safe Routes - Avoid Bridge Strikes - Try Free
+                </a>
+                <p className="text-sm mt-3 text-gray-400">
+                  ✓ 7-day free trial ✓ Cancel anytime during trial
+                </p>
+                <div className="flex items-center gap-2 text-sm text-gray-400 mt-2">
+                  <span className="flex items-center gap-1">
+                    <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                    127 RVers joined today
+                  </span>
+                </div>
+              </div>
             </div>
 
             <div className="space-y-6">
@@ -134,6 +205,33 @@ const RVTripPlanningGuide = () => {
             </div>
           </div>
 
+          {/* CTA 3: After Feature Cards */}
+          <div className="bg-blue-900/20 border-2 border-blue-500 rounded-lg p-6 my-12">
+            <h3 className="text-xl font-bold text-blue-400 mb-3">
+              Travel with Complete Peace of Mind
+            </h3>
+            <p className="text-gray-300 mb-4">
+              Never worry about bridge strikes, wrong campgrounds, or getting stuck again.
+
+              Plan every trip with professional tools trusted by millions.
+            </p>
+            <a
+              href="https://rvlife.com?ref=smartrvhub"
+              className="inline-block bg-orange-500 hover:bg-orange-600 text-white font-semibold px-8 py-3 rounded-lg transition-colors"
+            >
+              Plan Safe Routes - Avoid Bridge Strikes - Try Free
+            </a>
+            <p className="text-sm mt-3 text-gray-400">
+              ✓ 7-day free trial ✓ Cancel anytime during trial
+            </p>
+            <div className="flex items-center gap-2 text-sm text-gray-400 mt-2">
+              <span className="flex items-center gap-1">
+                <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                127 RVers joined today
+              </span>
+            </div>
+          </div>
+
           {/* Mid-Content CTA */}
           <div className="bg-blue-900/20 border-2 border-blue-500 rounded-lg p-6 my-12">
             <h3 className="text-xl font-bold text-blue-400 mb-3">
@@ -146,8 +244,17 @@ const RVTripPlanningGuide = () => {
               href="https://rvlife.com?ref=smartrvhub"
               className="inline-block bg-orange-500 hover:bg-orange-600 text-white font-semibold px-8 py-3 rounded-lg transition-colors"
             >
-              Start Your Free Trial →
+              Plan Safe Routes - Avoid Bridge Strikes - Try Free
             </a>
+            <p className="text-sm mt-3 text-gray-400">
+              ✓ 7-day free trial ✓ Cancel anytime during trial
+            </p>
+            <div className="flex items-center gap-2 text-sm text-gray-400 mt-2">
+              <span className="flex items-center gap-1">
+                <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                127 RVers joined today
+              </span>
+            </div>
           </div>
 
           {/* Statistics Section */}
@@ -166,6 +273,33 @@ const RVTripPlanningGuide = () => {
                 <div className="text-4xl font-bold text-green-400 mb-2">100%</div>
                 <div className="text-gray-300">Preventable with proper routing</div>
               </div>
+            </div>
+          </div>
+
+          {/* CTA 4: After Statistics */}
+          <div className="bg-blue-900/20 border-2 border-blue-500 rounded-lg p-6 my-12">
+            <h3 className="text-xl font-bold text-blue-400 mb-3">
+              Avoid Becoming Another Statistic
+            </h3>
+            <p className="text-gray-300 mb-4">
+              1,200+ bridge strikes happen every year, costing $75,000 each on average.
+
+              Every single one is preventable with proper route planning.
+            </p>
+            <a
+              href="https://rvlife.com?ref=smartrvhub"
+              className="inline-block bg-orange-500 hover:bg-orange-600 text-white font-semibold px-8 py-3 rounded-lg transition-colors"
+            >
+              Plan Safe Routes - Avoid Bridge Strikes - Try Free
+            </a>
+            <p className="text-sm mt-3 text-gray-400">
+              ✓ 7-day free trial ✓ Cancel anytime during trial
+            </p>
+            <div className="flex items-center gap-2 text-sm text-gray-400 mt-2">
+              <span className="flex items-center gap-1">
+                <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                127 RVers joined today
+              </span>
             </div>
           </div>
 
