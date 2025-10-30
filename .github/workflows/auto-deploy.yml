@@ -54,28 +54,47 @@ jobs:
       - name: Create Pull Request
         id: create-pr
         run: |
-          # Check if PR already exists
-          EXISTING_PR=$(gh pr list --head "${{ github.ref_name }}" --base main --json number --jq '.[0].number' 2>/dev/null || echo "")
+          set -e  # Exit on any error
 
-          if [ -n "$EXISTING_PR" ]; then
+          # Check if PR already exists
+          echo "Checking for existing PR..."
+          EXISTING_PR=$(gh pr list --head "${{ github.ref_name }}" --base main --json number --jq '.[0].number' 2>&1 || echo "")
+
+          if [ -n "$EXISTING_PR" ] && [ "$EXISTING_PR" != "null" ]; then
             echo "✅ PR already exists: #$EXISTING_PR"
             echo "pr-number=$EXISTING_PR" >> $GITHUB_OUTPUT
           else
             echo "Creating new PR..."
-            gh pr create \
+            echo "Branch: ${{ github.ref_name }}"
+            echo "Base: main"
+
+            # Capture both stdout and stderr
+            if PR_OUTPUT=$(gh pr create \
               --base main \
               --head "${{ github.ref_name }}" \
-              --title "Auto-deploy" \
-              --body "Automated deployment" \
-              --fill || true
+              --title "Auto-deploy: $(git log -1 --pretty=%s)" \
+              --body "Automated deployment from branch ${{ github.ref_name }}" 2>&1); then
+              echo "✅ PR created successfully"
+              echo "$PR_OUTPUT"
+            else
+              echo "❌ PR creation failed with output:"
+              echo "$PR_OUTPUT"
+              echo "::error::Failed to create PR. Output: $PR_OUTPUT"
+              exit 1
+            fi
 
             # Get PR number after creation
+            echo "Fetching PR number..."
             sleep 2
-            PR_NUMBER=$(gh pr list --head "${{ github.ref_name }}" --base main --json number --jq '.[0].number' 2>/dev/null || echo "")
+            PR_NUMBER=$(gh pr list --head "${{ github.ref_name }}" --base main --json number --jq '.[0].number' 2>&1)
 
-            if [ -n "$PR_NUMBER" ]; then
-              echo "✅ Created PR #$PR_NUMBER"
+            if [ -n "$PR_NUMBER" ] && [ "$PR_NUMBER" != "null" ]; then
+              echo "✅ PR number: #$PR_NUMBER"
               echo "pr-number=$PR_NUMBER" >> $GITHUB_OUTPUT
+            else
+              echo "❌ Failed to get PR number"
+              echo "::error::Could not retrieve PR number after creation"
+              exit 1
             fi
           fi
         env:
@@ -84,11 +103,23 @@ jobs:
       - name: Enable auto-merge
         if: steps.create-pr.outputs.pr-number
         run: |
+          set -e  # Exit on any error
+
           echo "Enabling auto-merge for PR #${{ steps.create-pr.outputs.pr-number }}..."
-          gh pr merge ${{ steps.create-pr.outputs.pr-number }} \
+
+          # Capture both stdout and stderr
+          if MERGE_OUTPUT=$(gh pr merge ${{ steps.create-pr.outputs.pr-number }} \
             --auto \
             --squash \
-            --delete-branch
+            --delete-branch 2>&1); then
+            echo "✅ Auto-merge enabled successfully"
+            echo "$MERGE_OUTPUT"
+          else
+            echo "❌ Auto-merge failed with output:"
+            echo "$MERGE_OUTPUT"
+            echo "::error::Failed to enable auto-merge. Output: $MERGE_OUTPUT"
+            exit 1
+          fi
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -98,3 +129,16 @@ jobs:
           echo "✅ Auto-deployment initiated!"
           echo "PR #${{ steps.create-pr.outputs.pr-number }} will auto-merge when checks pass"
           echo "Netlify will deploy automatically after merge"
+
+      - name: Notify failure
+        if: failure()
+        run: |
+          echo "❌ Auto-deployment workflow failed!"
+          echo "::error::Workflow failed. Check the logs above for details."
+          echo ""
+          echo "Failed step: ${{ toJSON(steps) }}"
+          echo ""
+          echo "Debug information:"
+          echo "Branch: ${{ github.ref_name }}"
+          echo "Commit: ${{ github.sha }}"
+          echo "Repository: ${{ github.repository }}"
